@@ -1,0 +1,21 @@
+// 将设置放入此文件中以覆盖默认值和用户设置。
+{
+  "eslint.enable": true,
+  "eslint.options": {
+    "extensions": [".js", ".vue"],
+    "configFile": ".eslintrc"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    { "language": "vue", "autoFix": true }
+  ],
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "eslint.autoFixOnSave": true,
+  "vetur.validation.template": true,
+  "vetur.format.html.wrap_line_length": 60,
+  "vetur.format.js.InsertSpaceBeforeFunctionParenthesis": true
+}

@@ -1,0 +1,56 @@
+{
+  "name": "vue-ant-design",
+  "version": "1.0.0",
+  "description": "vue component",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack-dev-server --open --hot",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint -c ./.eslintrc --fix --ext .js ./src/",
+    "lint:style": "stylelint \"./src/**/*.less\" --syntax less"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vueComponent/ant-design.git"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vueComponent/ant-design/issues"
+  },
+  "homepage": "https://github.com/vueComponent/ant-design#readme",
+  "pre-commit": [
+    "lint",
+    "lint:style"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-helper-vue-jsx-merge-props": "^2.0.2",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.5.0",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.7.2",
+    "eslint-plugin-html": "^3.2.2",
+    "eslint-plugin-vue-libs": "^1.2.1",
+    "html-webpack-plugin": "^2.30.1",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "pre-commit": "^1.2.2",
+    "style-loader": "^0.18.2",
+    "stylelint": "^8.1.1",
+    "stylelint-config-standard": "^17.0.0",
+    "vue": "^2.4.4",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  },
+  "dependencies": {
+    "eslint-plugin-vue": "^3.13.0"
+  }
+}

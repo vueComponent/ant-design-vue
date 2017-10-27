@@ -1,7 +1,7 @@
 <template>
   <label :class="classes">
     <span :class="checkboxClass">
-      <input :name="name" type="checkbox" :disabled="disabled"
+      <input :name="name" type="radio" :disabled="disabled"
         :class="`${prefixCls}-input`" :checked="!!checked"
         @change="handleChange"
         />
@@ -14,10 +14,10 @@
 </template>
 <script>
 export default {
-  name: 'Checkbox',
+  name: 'Radio',
   props: {
     prefixCls: {
-      default: 'ant-checkbox',
+      default: 'ant-radio',
       type: String,
     },
     checked: Boolean,
@@ -28,10 +28,6 @@ export default {
     indeterminate: Boolean,
     onGroupChange: Function,
   },
-  data () {
-    return {
-    }
-  },
   model: {
     prop: 'checked',
   },
@@ -40,32 +36,30 @@ export default {
       return !!this.$slots.default
     },
     classes () {
-      const { prefixCls } = this
+      const { prefixCls, disabled, checked } = this
       return {
         [`${prefixCls}-wrapper`]: true,
+        [`${prefixCls}-wrapper-checked`]: checked,
+        [`${prefixCls}-wrapper-disabled`]: disabled,
       }
     },
     checkboxClass () {
-      const { prefixCls, indeterminate, checked, disabled } = this
+      const { prefixCls, disabled, checked } = this
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-checked`]: checked,
         [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-indeterminate`]: indeterminate,
       }
     },
   },
-  mounted () {
-  },
   methods: {
     handleChange (event) {
-      const checked = event.target.checked
-      this.$emit('input', checked)
       const { name, value } = this
+      this.$emit('input', true)
       const target = {
         name,
         value,
-        checked,
+        checked: true,
       }
       this.$emit('change', {
         target,

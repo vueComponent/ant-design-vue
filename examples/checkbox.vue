@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Checkbox :indeterminate="true" @change="change" name="test" value="123" />
+    <Checkbox :checked="true" @change="change" name="test" value="123" />
     <Checkbox @change="change" v-model="checked" name="test" value="123">Checkbox</Checkbox>
     <Checkbox :disabled="true" @change="change" v-model="checked" name="test2" value="222">Checkbox</Checkbox>
 

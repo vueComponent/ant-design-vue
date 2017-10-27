@@ -54,8 +54,8 @@ export default {
       const { options, $slots, value } = this
       if (options.length === 0 && $slots.default) {
         children.forEach(({ componentOptions = {}, children: newChildren }) => {
-          const { tag, propsData } = componentOptions
-          if (tag === 'Radio') {
+          const { Ctor, propsData } = componentOptions
+          if (Ctor && Ctor.options.name === 'Radio') {
             propsData.isGroup = true
             propsData.onGroupChange = this.handleChange
             propsData.checked = propsData.value === value

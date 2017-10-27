@@ -25,7 +25,6 @@ export default {
     isGroup: Boolean,
     value: [String, Number, Boolean],
     name: String,
-    indeterminate: Boolean,
     onGroupChange: Function,
   },
   model: {

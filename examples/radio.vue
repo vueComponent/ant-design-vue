@@ -13,6 +13,14 @@
       <Radio v-if="showMore" name="test4" value="4">Radio4</Radio>
     </RadioGroup>
     <RadioGroup :options="options" v-model="value1"  @change="change"></RadioGroup>
+    <div>
+    <RadioGroup v-model="value2" size="large">
+      <RadioButton value="a">Hangzhou</RadioButton>
+      <RadioButton value="b">Shanghai</RadioButton>
+      <RadioButton value="c">Beijing</RadioButton>
+      <RadioButton value="d">Chengdu</RadioButton>
+    </RadioGroup>
+  </div>
   </div>
 </template>
 <script>
@@ -29,6 +37,7 @@ export default {
       ],
       value: '1',
       value1: '',
+      value2: 'a',
       showMore: false,
     }
   },
@@ -46,6 +55,7 @@ export default {
   components: {
     Radio,
     RadioGroup: Radio.Group,
+    RadioButton: Radio.Button,
     AntButton: Button,
   },
 }

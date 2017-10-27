@@ -56,8 +56,8 @@ export default {
       const { options, $slots, checkedStatus } = this
       if (options.length === 0 && $slots.default) {
         children.forEach(({ componentOptions = {}, children: newChildren }) => {
-          const { tag, propsData } = componentOptions
-          if (tag === 'Checkbox') {
+          const { Ctor, propsData } = componentOptions
+          if (Ctor && Ctor.options.name === 'Checkbox') {
             propsData.isGroup = true
             propsData.onGroupChange = this.handleChange
             propsData.checked = checkedStatus.has(propsData.value)

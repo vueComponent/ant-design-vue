@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import Checkbox from './checkbox.vue'
+import Checkbox from './Checkbox.vue'
 export default {
   name: 'CheckboxGroup',
   props: {
@@ -22,10 +22,6 @@ export default {
       default: () => [],
       type: Array,
     },
-  },
-  data () {
-    return {
-    }
   },
   model: {
     prop: 'value',

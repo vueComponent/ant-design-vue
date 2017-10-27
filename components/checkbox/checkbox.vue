@@ -28,10 +28,6 @@ export default {
     indeterminate: Boolean,
     onGroupChange: Function,
   },
-  data () {
-    return {
-    }
-  },
   model: {
     prop: 'checked',
   },

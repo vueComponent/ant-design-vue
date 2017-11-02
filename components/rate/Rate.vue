@@ -1,6 +1,6 @@
 <template>
   <ul
-    :class="[prefixCls, disabled ? `${prefixCls}-disabled` : '', className]"
+    :class="classes"
     @mouseleave="onMouseLeave">
     <template v-for="i in count">
       <Star
@@ -9,13 +9,13 @@
         :disabled="disabled"
         :prefix-cls="`${prefixCls}-star`"
         :allowHalf="allowHalf"
-        :value="currentValue"
+        :value="hoverValue"
         @onClick="onClick"
         @onHover="onHover"
         :key="i">
         <template slot-scope="props">
           <slot>
-            <span v-html="character"></span>
+            <span>{{character}}</span>
           </slot>
         </template>
       </Star>
@@ -24,22 +24,22 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import Star from './Star.vue';
-import Icon from '../icon/index';
-import { getOffsetLeft } from '../util/util';
+import Star from './Star.vue'
+import Icon from '../icon/index'
+import { getOffsetLeft } from '../util/util'
 
 export default {
   name: 'Rate',
   props: {
+    prefixCls: {
+      type: String,
+      default: 'ant-rate',
+    },
     count: {
       type: Number,
       default: 5,
     },
-    value: {
-      type: Number,
-      default: 0,
-    },
+    value: Number,
     defaultValue: {
       type: Number,
       default: 0,
@@ -62,67 +62,74 @@ export default {
     },
     character: {
       type: String,
-      default: '★'
+      default: '★',
     },
-    className: String,
   },
-  data() {
-    const reValue = this.value || this.defaultValue;
+  data () {
+    const { value, defaultValue } = this
+    const reValue = value === undefined ? defaultValue : value
     return {
-      prefixCls: 'ant-rate',
-      hoverValue: undefined,
-      currentValue: reValue,
-      markValue: reValue,
+      hoverValue: reValue,
+      stateValue: reValue,
     }
   },
-  watch: {
-    hoverValue(val) {
-      if(val === undefined) {
-        this.currentValue = this.markValue;
-        return;
+  computed: {
+    classes () {
+      const { prefixCls, disabled } = this
+      return {
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-disabled`]: disabled,
       }
-      this.currentValue = val;
     },
-    value() {
-      this.currentValue = this.markValue = this.value || this.defaultValue;
-    },
-    markValue(val) {
-      this.$emit('input', val);
-    }
   },
   methods: {
-    onClick(event, index) {
-      let clValue = this.getStarValue(index, event.pageX);
-      this.markValue = clValue;
-      this.onMouseLeave();
-      this.onChange(clValue);
+    onClick (event, index) {
+      const clValue = this.getStarValue(index, event.pageX)
+      this.stateValue = clValue
+      this.onMouseLeave()
+      this.$emit('input', clValue)
+      this.onChange(clValue)
     },
-    onHover(event, index) {
-      this.hoverValue = this.getStarValue(index, event.pageX);
-      this.onHoverChange(this.hoverValue);
+    onHover (event, index) {
+      this.hoverValue = this.getStarValue(index, event.pageX)
+      this.changeValue(this.hoverValue)
+      this.onHoverChange(this.hoverValue)
     },
     getStarDOM (index) {
       return this.$refs.stars[index].$el
     },
     getStarValue (index, x) {
-      let value = index;
+      let value = index
       if (this.allowHalf) {
         const leftEdge = getOffsetLeft(this.getStarDOM(0))
         const width = getOffsetLeft(this.getStarDOM(1)) - leftEdge
-        if ((x - leftEdge - width * (index-1)) < width / 2) {
+        if ((x - leftEdge - width * (index - 1)) < width / 2) {
           value -= 0.5
         }
       }
       return value
     },
-    onMouseLeave() {
+    onMouseLeave () {
       this.hoverValue = undefined
-      this.onHoverChange(undefined);
+      this.changeValue()
+      this.onHoverChange()
+    },
+    changeValue (val) {
+      if (val === undefined) {
+        this.hoverValue = this.stateValue
+        return
+      }
+    },
+  },
+  watch: {
+    value (val = 0) {
+      this.hoverValue = this.stateValue = val
+      this.$emit('input', val)
     },
   },
   components: {
     Star,
     Icon,
-  }
+  },
 }
 </script>

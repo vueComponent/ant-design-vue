@@ -1,6 +1,6 @@
 <template>
   <div :class="`${prefixCls}`">
-    <Radio v-for="item in options" :key="item.value" :checked="item.value === value"
+    <Radio v-for="item in options" :key="item.value" :checked="item.value === stateValue"
       :value="item.value" :disabled="item.disabled" @change="handleChange">{{item.label}}</Radio>
     <slot v-if="options.length === 0"></slot>
   </div>
@@ -14,7 +14,14 @@ export default {
       default: 'ant-radio-group',
       type: String,
     },
-    value: [String, Number],
+    defaultValue: {
+      default: undefined,
+      type: [String, Number],
+    },
+    value: {
+      default: undefined,
+      type: [String, Number],
+    },
     size: {
       default: 'default',
       validator (value) {
@@ -27,8 +34,9 @@ export default {
     },
   },
   data () {
+    const { value, defaultValue } = this
     return {
-      curValue: this.value,
+      stateValue: value || defaultValue,
     }
   },
   model: {
@@ -46,19 +54,22 @@ export default {
         return false
       }
       const target = event.target
-      const { value } = target
-      this.$emit('input', value)
-      this.$emit('change', value)
+      const { value: targetValue } = target
+      if (this.value === undefined) {
+        this.stateValue = targetValue
+      }
+      this.$emit('input', targetValue)
+      this.$emit('change', targetValue)
     },
     setChildRadio (children = []) {
-      const { options, $slots, value } = this
+      const { options, $slots, stateValue } = this
       if (options.length === 0 && $slots.default) {
         children.forEach(({ componentOptions = {}, children: newChildren }) => {
           const { Ctor, propsData } = componentOptions
           if (Ctor && Ctor.options.name === 'Radio') {
             propsData.isGroup = true
             propsData.onGroupChange = this.handleChange
-            propsData.checked = propsData.value === value
+            propsData.checked = propsData.value === stateValue
           } else {
             this.setChildRadio(newChildren)
           }
@@ -71,6 +82,7 @@ export default {
   },
   watch: {
     value (val) {
+      this.stateValue = val
       this.setChildRadio(this.$slots.default)
     },
   },

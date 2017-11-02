@@ -2,7 +2,7 @@
   <label :class="classes">
     <span :class="checkboxClass">
       <input :name="name" type="radio" :disabled="disabled"
-        :class="`${prefixCls}-input`" :checked="!!checked"
+        :class="`${prefixCls}-input`" :checked="stateChecked"
         @change="handleChange"
         />
       <span :class="`${prefixCls}-inner`" />
@@ -20,7 +20,8 @@ export default {
       default: 'ant-radio',
       type: String,
     },
-    checked: Boolean,
+    defaultChecked: Boolean,
+    checked: { type: Boolean, default: undefined },
     disabled: Boolean,
     isGroup: Boolean,
     value: [String, Number, Boolean],
@@ -30,35 +31,45 @@ export default {
   model: {
     prop: 'checked',
   },
+  data () {
+    const { checked, defaultChecked } = this
+    return {
+      stateChecked: checked === undefined ? defaultChecked : checked,
+    }
+  },
   computed: {
     hasDefaultSlot () {
       return !!this.$slots.default
     },
     classes () {
-      const { prefixCls, disabled, checked } = this
+      const { prefixCls, disabled, stateChecked } = this
       return {
         [`${prefixCls}-wrapper`]: true,
-        [`${prefixCls}-wrapper-checked`]: checked,
+        [`${prefixCls}-wrapper-checked`]: stateChecked,
         [`${prefixCls}-wrapper-disabled`]: disabled,
       }
     },
     checkboxClass () {
-      const { prefixCls, disabled, checked } = this
+      const { prefixCls, disabled, stateChecked } = this
       return {
         [`${prefixCls}`]: true,
-        [`${prefixCls}-checked`]: checked,
+        [`${prefixCls}-checked`]: stateChecked,
         [`${prefixCls}-disabled`]: disabled,
       }
     },
   },
   methods: {
     handleChange (event) {
-      const { name, value } = this
-      this.$emit('input', true)
+      const targetChecked = event.target.checked
+      const { name, value, checked } = this
+      if (checked === undefined) {
+        this.stateChecked = targetChecked
+      }
+      this.$emit('input', targetChecked)
       const target = {
         name,
         value,
-        checked: true,
+        checked: targetChecked,
       }
       this.$emit('change', {
         target,
@@ -72,6 +83,11 @@ export default {
       if (this.isGroup) {
         this.onGroupChange({ target })
       }
+    },
+  },
+  watch: {
+    checked (val) {
+      this.stateChecked = val
     },
   },
 }

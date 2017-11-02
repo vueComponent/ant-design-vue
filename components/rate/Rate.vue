@@ -9,7 +9,7 @@
         :disabled="disabled"
         :prefix-cls="`${prefixCls}-star`"
         :allowHalf="allowHalf"
-        :value="hoverValue"
+        :value="currentValue"
         @onClick="onClick"
         @onHover="onHover"
         :key="i">
@@ -69,7 +69,7 @@ export default {
     const { value, defaultValue } = this
     const reValue = value === undefined ? defaultValue : value
     return {
-      hoverValue: reValue,
+      currentValue: reValue,
       stateValue: reValue,
     }
   },
@@ -91,9 +91,9 @@ export default {
       this.onChange(clValue)
     },
     onHover (event, index) {
-      this.hoverValue = this.getStarValue(index, event.pageX)
-      this.changeValue(this.hoverValue)
-      this.onHoverChange(this.hoverValue)
+      this.currentValue = this.getStarValue(index, event.pageX)
+      this.changeValue(this.currentValue)
+      this.onHoverChange(this.currentValue)
     },
     getStarDOM (index) {
       return this.$refs.stars[index].$el
@@ -110,20 +110,19 @@ export default {
       return value
     },
     onMouseLeave () {
-      this.hoverValue = undefined
+      this.currentValue = undefined
       this.changeValue()
       this.onHoverChange()
     },
     changeValue (val) {
       if (val === undefined) {
-        this.hoverValue = this.stateValue
-        return
+        this.currentValue = this.stateValue
       }
     },
   },
   watch: {
     value (val = 0) {
-      this.hoverValue = this.stateValue = val
+      this.currentValue = this.stateValue = val
       this.$emit('input', val)
     },
   },

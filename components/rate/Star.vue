@@ -46,7 +46,7 @@ export default {
   },
   watch: {
   },
-  commponents: {
+  components: {
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Radio v-model="checked" @change="change" name="test" value="123">Radio</Radio>
+    <Radio @change="change" :defaultChecked="true" name="test" value="123">Radio</Radio>
     <Radio :checked="false" @change="change" name="test2" value="222">Radio</Radio>
 
     <RadioGroup v-model="value" @change="change">
@@ -14,7 +14,7 @@
     </RadioGroup>
     <RadioGroup :options="options" v-model="value1"  @change="change"></RadioGroup>
     <div>
-    <RadioGroup v-model="value2" size="large">
+    <RadioGroup :defaultValue="'a'" size="large">
       <RadioButton value="a">Hangzhou</RadioButton>
       <RadioButton value="b">Shanghai</RadioButton>
       <RadioButton value="c">Beijing</RadioButton>

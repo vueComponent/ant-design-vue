@@ -14,8 +14,12 @@ export default {
       default: 'ant-checkbox-group',
       type: String,
     },
-    value: {
+    defaultValue: {
       default: () => [],
+      type: Array,
+    },
+    value: {
+      default: undefined,
       type: Array,
     },
     options: {
@@ -26,9 +30,15 @@ export default {
   model: {
     prop: 'value',
   },
+  data () {
+    const { value, defaultValue } = this
+    return {
+      stateValue: value || defaultValue,
+    }
+  },
   computed: {
     checkedStatus () {
-      return new Set(this.value)
+      return new Set(this.stateValue)
     },
   },
   created () {
@@ -40,17 +50,22 @@ export default {
         return false
       }
       const target = event.target
-      const { value, checked } = target
+      const { value: targetValue, checked } = target
+      const { stateValue, value } = this
       let newVal = []
       if (checked) {
-        newVal = [...this.value, value]
+        newVal = [...stateValue, targetValue]
       } else {
-        newVal = [...this.value]
-        const index = newVal.indexOf(value)
+        newVal = [...stateValue]
+        const index = newVal.indexOf(targetValue)
         index >= 0 && newVal.splice(index, 1)
       }
-      this.$emit('input', [...new Set(newVal)])
-      this.$emit('change', [...new Set(newVal)])
+      newVal = [...new Set(newVal)]
+      if (value === undefined) {
+        this.stateValue = newVal
+      }
+      this.$emit('input', newVal)
+      this.$emit('change', newVal)
     },
     setChildCheckbox (children = []) {
       const { options, $slots, checkedStatus } = this
@@ -75,6 +90,7 @@ export default {
   },
   watch: {
     value (val) {
+      this.stateValue = val
       this.setChildCheckbox(this.$slots.default)
     },
   },

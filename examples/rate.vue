@@ -1,13 +1,15 @@
 <template>
   <div>
     基本
-    <Rate className="custom"></Rate>
+    <Rate className="custom" :allowHalf="allowHalf"></Rate>
     </br>
     半星
     <Rate :allowHalf="allowHalf"></Rate>
     </br>
     默认3颗星
-    <Rate :value="initValue"></Rate>
+    <Rate v-model="initValue"></Rate>
+    <AntButton type="primary" @click="changeValue">改变</AntButton>
+    <AntButton type="primary" @click="getValue">当前值</AntButton>
     </br>
     只读
     <Rate :value="initValue" :disabled="disabled"></Rate>
@@ -25,15 +27,11 @@
     <span v-if="hoverValueAH">{{hoverValueAH}}stars</span>
     </br>
     自定义
-    <Rate :value="initValue">
-      <template slot-scope="props">
-        <span>A</span>
-      </template>
-    </Rate>
+    <Rate :value="initValue" :character="character"></Rate>
   </div>
 </template>
 <script>
-import { Rate } from '../components/index'
+import { Rate, Icon, Button } from '../components/index'
 export default {
   data () {
     return {
@@ -43,6 +41,7 @@ export default {
       hoverValue: undefined,
       rValue: undefined,
       hoverValueAH: undefined,
+      character: '好'
     }
   },
   methods: {
@@ -54,10 +53,18 @@ export default {
     },
     onHoverChangeAH(val) {
       this.hoverValueAH = val;
+    },
+    changeValue() {
+      this.initValue = 4;
+    },
+    getValue() {
+      alert(this.initValue)
     }
   },
   components: {
-    Rate
+    Rate,
+    Icon,
+    AntButton: Button,
   },
 }
 </script>

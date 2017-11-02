@@ -15,7 +15,7 @@
         :key="i">
         <template slot-scope="props">
           <slot>
-            <Icon type="star"/>
+            <span v-html="character"></span>
           </slot>
         </template>
       </Star>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Star from './Star.vue';
 import Icon from '../icon/index';
 import { getOffsetLeft } from '../util/util';
@@ -59,18 +60,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    character: {
+      type: String,
+      default: '★'
+    },
     className: String,
   },
   data() {
+    const reValue = this.value || this.defaultValue;
     return {
       prefixCls: 'ant-rate',
       hoverValue: undefined,
-      currentValue: undefined,
-      markValue: undefined,
+      currentValue: reValue,
+      markValue: reValue,
     }
-  },
-  created () {
-    this.currentValue = this.markValue = this.value || this.defaultValue
   },
   watch: {
     hoverValue(val) {
@@ -79,6 +82,12 @@ export default {
         return;
       }
       this.currentValue = val;
+    },
+    value() {
+      this.currentValue = this.markValue = this.value || this.defaultValue;
+    },
+    markValue(val) {
+      this.$emit('input', val);
     }
   },
   methods: {

@@ -4,6 +4,7 @@ import './icon/style'
 import './radio/style'
 import './grid/style'
 import './tooltip/style'
+import './rate/style'
 
 export { default as Button } from './button'
 
@@ -14,5 +15,7 @@ export { default as Icon } from './icon'
 export { default as Radio } from './radio'
 
 export { default as Grid } from './grid'
+
+export { default as Rate } from './rate'
 
 export { default as ToolTip } from './tooltip'

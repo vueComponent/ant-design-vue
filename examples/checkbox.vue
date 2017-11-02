@@ -1,8 +1,9 @@
 <template>
   <div>
-    <Checkbox :checked="true" @change="change" name="test" value="123" />
+    <Checkbox :defaultChecked="true" @change="change" value="1">1</Checkbox>
+    <Checkbox v-model="checked" @change="change" value="2">2</Checkbox>
     <Checkbox @change="change" v-model="checked" name="test" value="123">Checkbox</Checkbox>
-    <Checkbox :disabled="true" @change="change" v-model="checked" name="test2" value="222">Checkbox</Checkbox>
+    <Checkbox @change="change" v-model="checked" name="test2" value="222">Checkbox</Checkbox>
 
     <CheckboxGroup v-model="value" @change="change">
       <AntButton @click="handleClick">
@@ -18,7 +19,7 @@
       <Checkbox name="test3" value="3" @change="change">Checkbox3</Checkbox>
       <Checkbox v-if="showMore" name="test4" value="4">Checkbox4</Checkbox>
     </CheckboxGroup>
-    <CheckboxGroup :options="options" v-model="value1" @change="change"></CheckboxGroup>
+    <CheckboxGroup :options="options" :defaultValue="['Apple']" @change="change"></CheckboxGroup>
   </div>
 </template>
 <script>

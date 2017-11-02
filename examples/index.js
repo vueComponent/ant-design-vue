@@ -5,8 +5,9 @@ import Radio from './radio.vue'
 import Grid from './grid.vue'
 import ToolTip from './tooltip.vue'
 // import Dialog from './dialog.vue'
+import Rate from './rate.vue'
 import './index.less'
-window.root = new Vue({
+new Vue({
   el: '#app',
   template: `
     <div>
@@ -15,6 +16,7 @@ window.root = new Vue({
       <Checkbox />
       <AntButton />
       <Radio />
+      <Rate />
     </div>
     `,
   components: {
@@ -24,5 +26,6 @@ window.root = new Vue({
     Grid,
     Radio,
     ToolTip,
+    Rate,
   },
 })

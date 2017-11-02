@@ -17,36 +17,27 @@ export default {
     allowHalf: Boolean,
     value: Number,
   },
-  data() {
+  data () {
     return {
     }
   },
-  mounted() {
-  },
-  computed: {
-
-  },
   methods: {
-    getClassName() {
-      const { prefixCls, index, value, allowHalf } = this;
-      const starValue = index;
+    getClassName () {
+      const { prefixCls, index, value, allowHalf } = this
+      const starValue = index
       if (allowHalf && value + 0.5 === starValue) {
-        return `${prefixCls} ${prefixCls}-half ${prefixCls}-active`;
+        return `${prefixCls} ${prefixCls}-half ${prefixCls}-active`
       }
-      return starValue <= value ? `${prefixCls} ${prefixCls}-full` : `${prefixCls} ${prefixCls}-zero`;
+      return starValue <= value ? `${prefixCls} ${prefixCls}-full` : `${prefixCls} ${prefixCls}-zero`
     },
-    onClick(e) {
-      if(this.disabled) return;
-      this.$emit("onClick", e, this.index);
+    onClick (e) {
+      if (this.disabled) return
+      this.$emit('onClick', e, this.index)
     },
-    onHover(e) {
-      if(this.disabled) return;
-      this.$emit("onHover", e, this.index);
+    onHover (e) {
+      if (this.disabled) return
+      this.$emit('onHover', e, this.index)
     },
   },
-  watch: {
-  },
-  components: {
-  }
 }
 </script>

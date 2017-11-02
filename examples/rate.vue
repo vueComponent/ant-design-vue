@@ -1,7 +1,7 @@
 <template>
   <div>
     基本
-    <Rate className="custom" :allowHalf="allowHalf"></Rate>
+    <Rate class="custom"></Rate>
     </br>
     半星
     <Rate :allowHalf="allowHalf"></Rate>
@@ -41,25 +41,25 @@ export default {
       hoverValue: undefined,
       rValue: undefined,
       hoverValueAH: undefined,
-      character: '好'
+      character: '好',
     }
   },
   methods: {
-    onHoverChange(val) {
-      this.hoverValue = val;
+    onHoverChange (val) {
+      this.hoverValue = val
     },
-    onChange(val) {
-      this.rValue = val;
+    onChange (val) {
+      this.rValue = val
     },
-    onHoverChangeAH(val) {
-      this.hoverValueAH = val;
+    onHoverChangeAH (val) {
+      this.hoverValueAH = val
     },
-    changeValue() {
-      this.initValue = 4;
+    changeValue () {
+      this.initValue = undefined
     },
-    getValue() {
-      alert(this.initValue)
-    }
+    getValue () {
+      console.log(this.initValue)
+    },
   },
   components: {
     Rate,

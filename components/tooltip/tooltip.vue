@@ -33,7 +33,6 @@ export default {
       visible: false,
       left: 0,
       top: 0,
-      domNode: null,
     }
   },
   computed: {
@@ -44,42 +43,46 @@ export default {
       }
     },
   },
-  created() {
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    const that = this
-    const vnode = new Vue({
-      data() {
-        return {
-          left: 0,
-          top: 0,
-        }
-      },
-      render(h) {
-        return (
-          <transition name="zoom-big">
-            <div
-              v-show={that.visible}
-              class={`ant-tooltip ant-tooltip-placement-${that.placement}`}
-              style={{ left: this.left + 'px', top: this.top + 'px' }}
-            >
-              <div class="ant-tooltip-content">
-                <div class="ant-tooltip-arrow"/>
-                <div class="ant-tooltip-inner">
-                  <span>{that.title}</span>
+  methods: {
+    mountNode(callback) {
+      if (this.vnode) {
+        callback()
+        return
+      }
+      const div = document.createElement('div')
+      document.body.appendChild(div)
+      const that = this
+      const vnode = new Vue({
+        data() {
+          return {
+            left: 0,
+            top: 0,
+          }
+        },
+        render(h) {
+          return (
+            <transition name="zoom-big">
+              <div
+                v-show={that.visible}
+                class={`ant-tooltip ant-tooltip-placement-${that.placement}`}
+                style={{ left: this.left + 'px', top: this.top + 'px' }}
+              >
+                <div class="ant-tooltip-content">
+                  <div class="ant-tooltip-arrow"/>
+                  <div class="ant-tooltip-inner">
+                    <span>{that.title}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </transition>
-        )
-      }
-    }).$mount(div)
-    this.$nextTick(() => {
-      this.vnode = vnode
-      this.domNode = div
-    })
-  },
-  methods: {
+            </transition>
+          )
+        }
+      }).$mount(div)
+      this.$nextTick(() => {
+        this.vnode = vnode
+        callback()
+      })
+    },
     onPopupAlign: (placement, domNode, target, align) => {
       if (!placement) {
         return;
@@ -118,10 +121,10 @@ export default {
       left += window.scrollX
       const ret = { left, top }
 
-      if (/top/.test(placement)) ret.top -= popup.height
-      if (/bottom/.test(placement)) ret.top += height
-      if (/left/.test(placement)) ret.left -= popup.width
-      if (/right/.test(placement)) ret.left += width
+      if (/top/.test(placement)) ret.top -= popup.height + 5
+      if (/bottom/.test(placement)) ret.top += height + 5
+      if (/left/.test(placement)) ret.left -= popup.width + 10
+      if (/right/.test(placement)) ret.left += width + 5
 
       if (/Left/.test(placement)) {
       } else if(/Right/.test(placement)) {
@@ -138,41 +141,43 @@ export default {
       return ret
     },
     showNode() {
-      this.visible = true
-      this.$nextTick(() => {
-        const popup = this.vnode.$el.getBoundingClientRect()
-        const content = this.$el.getBoundingClientRect()
-        const { left, top } = this.computeOffset(popup, content, this.placement)
-        this.vnode.left = left
-        this.vnode.top = top
+      this.mountNode(() => {
+        this.visible = true
+        this.$nextTick(() => {
+          const popup = this.vnode.$el.getBoundingClientRect()
+          const content = this.$el.getBoundingClientRect()
+          const { left, top } = this.computeOffset(popup, content, this.placement)
+          this.vnode.left = left
+          this.vnode.top = top
+        })
+        this.onPopupAlign(this.placement, this.$el, this.vnode.$el, { offset: [0,0] })
       })
-      this.onPopupAlign(this.placement, this.$el, this.vnode.$el, { offset: [0,0] })
     },
     hideNode() {
       this.visible = false
     }
   },
   render(h) {
-    let node = this.vnode
     const inner = this.$slots.default[0]
     inner.data = inner.data || {}
     inner.data.on = inner.data.on || {}
     inner.data.on.mouseenter = this.addEventHandle(inner.data.on.mouseenter, this.showNode)
     inner.data.on.mouseleave = this.addEventHandle(inner.data.on.mouseleave, this.hideNode)
-//    console.info(inner)
+
     return this.$slots.default[0]
   },
   updated() {
+    if (!this.vnode) return
     const popup = this.vnode.$el.getBoundingClientRect()
     const content = this.$el.getBoundingClientRect()
     const { left, top } = this.computeOffset(popup, content, this.placement)
     this.vnode.left = left
     this.vnode.top = top
   },
-  beforeDestory() {
-    console.info('没有成功清除实例 ，看vue panel')
+  beforeDestroy() {
+    if (!this.vnode) return
+    this.vnode.$el.remove()
     this.vnode.$destroy();
-    this.domNode && this.domNode.remove()
   }
 }
 </script>

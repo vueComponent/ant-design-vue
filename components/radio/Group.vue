@@ -59,7 +59,7 @@ export default {
         this.stateValue = targetValue
       }
       this.$emit('input', targetValue)
-      this.$emit('change', targetValue)
+      this.$emit('change', event)
     },
     setChildRadio (children = []) {
       const { options, $slots, stateValue } = this

@@ -1,6 +1,6 @@
 <template>
   <div :class="`${prefixCls}`">
-    <Checkbox v-for="item in options" :key="item.value" :checked="checkedStatus.has(item.value)"
+    <Checkbox v-for="item in checkOptions" :key="item.value" :checked="checkedStatus.has(item.value)"
       :value="item.value" :disabled="item.disabled" @change="handleChange">{{item.label}}</Checkbox>
     <slot v-if="options.length === 0"></slot>
   </div>
@@ -26,6 +26,7 @@ export default {
       default: () => [],
       type: Array,
     },
+    disabled: Boolean,
   },
   model: {
     prop: 'value',
@@ -40,15 +41,20 @@ export default {
     checkedStatus () {
       return new Set(this.stateValue)
     },
+    checkOptions () {
+      const { disabled } = this
+      return this.options.map(option => {
+        return typeof option === 'string'
+          ? { label: option, value: option }
+          : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled }
+      })
+    },
   },
   created () {
     this.setChildCheckbox(this.$slots.default)
   },
   methods: {
     handleChange (event) {
-      if (this.disabled) {
-        return false
-      }
       const target = event.target
       const { value: targetValue, checked } = target
       const { stateValue, value } = this

@@ -27,7 +27,7 @@
     <span v-if="hoverValueAH">{{hoverValueAH}}stars</span>
     </br>
     自定义
-    <Rate :value="initValue" :character="character"></Rate>
+    <Rate :value="initValue" :allowHalf="allowHalf" :character="character"></Rate>
   </div>
 </template>
 <script>

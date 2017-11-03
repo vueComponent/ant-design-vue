@@ -1,13 +1,9 @@
 <script>
 import Vue from 'vue'
-import AntTransition from '../../utils/ant-transition.vue'
-
-Vue.component('ant-transition', AntTransition)
-
 export default {
   name: 'ToolTip',
   props: {
-    title: [String, Vue.Component],
+    title: String,
     prefixCls: {
       default: 'ant-tooltip',
     },
@@ -37,6 +33,7 @@ export default {
       visible: false,
       left: 0,
       top: 0,
+      domNode: null,
     }
   },
   computed: {
@@ -60,10 +57,10 @@ export default {
       },
       render(h) {
         return (
-          <ant-transition name="fade">
+          <transition name="zoom-big">
             <div
               v-show={that.visible}
-              class={`ant-tooltip ant-tooltip-placement-${that.placement} ${that.visible ? '' : 'ant-tooltip-hidden'}`}
+              class={`ant-tooltip ant-tooltip-placement-${that.placement}`}
               style={{ left: this.left + 'px', top: this.top + 'px' }}
             >
               <div class="ant-tooltip-content">
@@ -73,12 +70,13 @@ export default {
                 </div>
               </div>
             </div>
-          </ant-transition>
+          </transition>
         )
       }
     }).$mount(div)
     this.$nextTick(() => {
       this.vnode = vnode
+      this.domNode = div
     })
   },
   methods: {
@@ -164,16 +162,17 @@ export default {
 //    console.info(inner)
     return this.$slots.default[0]
   },
-  mounted() {
-    this.$nextTick(() => {
-    })
+  updated() {
+    const popup = this.vnode.$el.getBoundingClientRect()
+    const content = this.$el.getBoundingClientRect()
+    const { left, top } = this.computeOffset(popup, content, this.placement)
+    this.vnode.left = left
+    this.vnode.top = top
   },
   beforeDestory() {
-    console.info('没有成功清除实例，看vue panel')
+    console.info('没有成功清除实例 ，看vue panel')
     this.vnode.$destroy();
-  },
-  components: {
-    'ant-transition': AntTransition
+    this.domNode && this.domNode.remove()
   }
 }
 </script>

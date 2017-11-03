@@ -1,11 +1,11 @@
 <template>
   <div>
     <tool-tip
-      placement="bottom"
+      placement="top"
       :title="showText">
       <h1 @click="boom" style="display: inline-block">This is just a test, put your cursor here</h1>
     </tool-tip>
-    <ant-button>2223</ant-button>
+    <ant-button>{{showText}}</ant-button>
     <div class="box">
       <table>
         <tr v-for="(tr, index) in table" :key="index">
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-  import { ToolTip, Button } from '../../../components'
-  import '../../../components/button/style'
+  import { ToolTip, Button } from 'antd'
+  import 'antd/button/style'
 	export default {
 		name: 'tooltip-basic',
 		data() {
@@ -38,15 +38,16 @@
 		},
     methods: {
 		  boom() {
-		    this.showText += '3'
+		    if (this.showText.length % 20) {
+          this.showText += '3'
+        } else {
+		      this.showText += ' '
+        }
       }
     },
     components: {
 		  ToolTip,
       AntButton: Button,
-    },
-    beforeUpdate() {
-		  console.info(90909090)
     }
 	}
 </script>

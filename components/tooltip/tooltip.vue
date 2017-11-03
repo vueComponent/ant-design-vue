@@ -33,6 +33,7 @@ export default {
       visible: false,
       left: 0,
       top: 0,
+      realPlacement: this.placement,
     }
   },
   computed: {
@@ -44,6 +45,19 @@ export default {
     },
   },
   methods: {
+    checkPosition(popup, text, placement) {
+      let { top, left, bottom, right } = text
+      const reg = /(top|bottom|left|right)(.*)/
+      const [, abstractPos, suffix] = placement.match(reg)
+      console.info(right - left, popup.width)
+      let ret = placement
+      // we can change the position many times
+      if (abstractPos === 'left' && left < popup.width) ret = 'right' + suffix
+      if (abstractPos === 'right' && document.documentElement.clientWidth - right < popup.width) ret = 'left' + suffix
+      if (abstractPos === 'top' && top < popup.height) ret = 'bottom' + suffix
+      if (abstractPos === 'bottom' && document.documentElement.clientHeight - bottom < popup.height) ret = 'left' + suffix
+      return ret
+    },
     mountNode(callback) {
       if (this.vnode) {
         callback()
@@ -64,7 +78,7 @@ export default {
             <transition name="zoom-big">
               <div
                 v-show={that.visible}
-                class={`ant-tooltip ant-tooltip-placement-${that.placement}`}
+                class={`ant-tooltip ant-tooltip-placement-${that.realPlacement}`}
                 style={{ left: this.left + 'px', top: this.top + 'px' }}
               >
                 <div class="ant-tooltip-content">
@@ -146,11 +160,13 @@ export default {
         this.$nextTick(() => {
           const popup = this.vnode.$el.getBoundingClientRect()
           const content = this.$el.getBoundingClientRect()
-          const { left, top } = this.computeOffset(popup, content, this.placement)
+          const place = this.checkPosition(popup, content, this.placement)
+          this.realPlacement = place
+          const { left, top } = this.computeOffset(popup, content, place)
           this.vnode.left = left
           this.vnode.top = top
         })
-        this.onPopupAlign(this.placement, this.$el, this.vnode.$el, { offset: [0,0] })
+        this.onPopupAlign(this.realPlacement, this.$el, this.vnode.$el, { offset: [0,0] })
       })
     },
     hideNode() {
@@ -170,7 +186,7 @@ export default {
     if (!this.vnode) return
     const popup = this.vnode.$el.getBoundingClientRect()
     const content = this.$el.getBoundingClientRect()
-    const { left, top } = this.computeOffset(popup, content, this.placement)
+    const { left, top } = this.computeOffset(popup, content, this.realPlacement)
     this.vnode.left = left
     this.vnode.top = top
   },

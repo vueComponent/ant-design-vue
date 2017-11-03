@@ -73,7 +73,8 @@
   </div>
 </template>
 <script>
-import { Button } from 'antd/index'
+import '../style'
+import { Button } from 'antd'
 const ButtonGroup = Button.Group
 export default {
   data () {

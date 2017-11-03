@@ -1,3 +1,4 @@
+import 'antd/style.js'
 import './index.less'
 import Vue from 'vue'
 import VueRouter from 'vue-router'

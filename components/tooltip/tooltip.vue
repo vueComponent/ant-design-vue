@@ -49,7 +49,6 @@ export default {
       let { top, left, bottom, right } = text
       const reg = /(top|bottom|left|right)(.*)/
       const [, abstractPos, suffix] = placement.match(reg)
-      console.info(right - left, popup.width)
       let ret = placement
       // we can change the position many times
       if (abstractPos === 'left' && left < popup.width) ret = 'right' + suffix

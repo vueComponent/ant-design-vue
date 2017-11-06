@@ -31,6 +31,11 @@ export default {
   model: {
     prop: 'value',
   },
+  provide () {
+    return {
+      context: this,
+    }
+  },
   data () {
     const { value, defaultValue } = this
     return {
@@ -49,9 +54,6 @@ export default {
           : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled }
       })
     },
-  },
-  created () {
-    this.setChildCheckbox(this.$slots.default)
   },
   methods: {
     handleChange (event) {
@@ -73,31 +75,12 @@ export default {
       this.$emit('input', newVal)
       this.$emit('change', newVal)
     },
-    setChildCheckbox (children = []) {
-      const { options, $slots, checkedStatus } = this
-      if (options.length === 0 && $slots.default) {
-        children.forEach(({ componentOptions = {}, children: newChildren }) => {
-          const { Ctor, propsData } = componentOptions
-          if (Ctor && Ctor.options.name === 'Checkbox') {
-            propsData.isGroup = true
-            propsData.onGroupChange = this.handleChange
-            propsData.checked = checkedStatus.has(propsData.value)
-          } else {
-            this.setChildCheckbox(newChildren)
-          }
-        }, this)
-      }
-    },
   },
   mounted () {
-  },
-  beforeUpdate () {
-    this.setChildCheckbox(this.$slots.default)
   },
   watch: {
     value (val) {
       this.stateValue = val
-      this.setChildCheckbox(this.$slots.default)
     },
   },
   components: {

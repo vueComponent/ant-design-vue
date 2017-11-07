@@ -1,6 +1,5 @@
 @import "../../style/themes/default";
 @import "../../style/mixins/index";
-@import "../../input/style/mixin";
 
 @pagination-prefix-cls: ~"@{ant-prefix}-pagination";
 
@@ -222,11 +221,8 @@
 
     &-quick-jumper {
       display: inline-block;
-      height: @input-height-base;
-      line-height: @input-height-base;
 
       input {
-        .input;
         margin: 0 8px;
         width: 50px;
       }
@@ -316,7 +312,6 @@
       line-height: 20px;
 
       input {
-        .input-sm;
         width: 44px;
       }
     }

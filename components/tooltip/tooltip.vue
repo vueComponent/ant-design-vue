@@ -9,7 +9,7 @@ export default {
     },
     placement: {
       default: 'top',
-      validator: val => ['top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'].includes(val)
+      validator: val => ['top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'].includes(val),
     },
     transitionName: {
       default: 'zoom-big-fast',
@@ -45,8 +45,8 @@ export default {
     },
   },
   methods: {
-    checkPosition(popup, text, placement) {
-      let { top, left, bottom, right } = text
+    checkPosition (popup, text, placement) {
+      const { top, left, bottom, right } = text
       const reg = /(top|bottom|left|right)(.*)/
       const [, abstractPos, suffix] = placement.match(reg)
       let ret = placement
@@ -57,7 +57,7 @@ export default {
       if (abstractPos === 'bottom' && document.documentElement.clientHeight - bottom < popup.height) ret = 'left' + suffix
       return ret
     },
-    mountNode(callback) {
+    mountNode (callback) {
       if (this.vnode) {
         callback()
         return
@@ -66,30 +66,30 @@ export default {
       document.body.appendChild(div)
       const that = this
       const vnode = new Vue({
-        data() {
+        data () {
           return {
             left: 0,
             top: 0,
           }
         },
-        render(h) {
+        render (h) {
           return (
-            <transition name="zoom-big">
+            <transition name='zoom-big'>
               <div
                 v-show={that.visible}
                 class={`ant-tooltip ant-tooltip-placement-${that.realPlacement}`}
                 style={{ left: this.left + 'px', top: this.top + 'px' }}
               >
-                <div class="ant-tooltip-content">
-                  <div class="ant-tooltip-arrow"/>
-                  <div class="ant-tooltip-inner">
+                <div class='ant-tooltip-content'>
+                  <div class='ant-tooltip-arrow'/>
+                  <div class='ant-tooltip-inner'>
                     <span>{that.title}</span>
                   </div>
                 </div>
               </div>
             </transition>
           )
-        }
+        },
       }).$mount(div)
       this.$nextTick(() => {
         this.vnode = vnode
@@ -98,27 +98,27 @@ export default {
     },
     onPopupAlign: (placement, domNode, target, align) => {
       if (!placement) {
-        return;
+        return
       }
       // 根据当前坐标设置动画点
       const rect = domNode.getBoundingClientRect()
       const transformOrigin = {
         top: '50%',
         left: '50%',
-      };
+      }
       if (placement.indexOf('top') >= 0 || placement.indexOf('Bottom') >= 0) {
-        transformOrigin.top = `${rect.height - align.offset[1]}px`;
+        transformOrigin.top = `${rect.height - align.offset[1]}px`
       } else if (placement.indexOf('Top') >= 0 || placement.indexOf('bottom') >= 0) {
-        transformOrigin.top = `${-align.offset[1]}px`;
+        transformOrigin.top = `${-align.offset[1]}px`
       }
       if (placement.indexOf('left') >= 0 || placement.indexOf('Right') >= 0) {
-        transformOrigin.left = `${rect.width - align.offset[0]}px`;
+        transformOrigin.left = `${rect.width - align.offset[0]}px`
       } else if (placement.indexOf('right') >= 0 || placement.indexOf('Left') >= 0) {
-        transformOrigin.left = `${-align.offset[0]}px`;
+        transformOrigin.left = `${-align.offset[0]}px`
       }
-      target.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`;
+      target.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`
     },
-    addEventHandle(old, fn) {
+    addEventHandle (old, fn) {
       if (!old) {
         return fn
       } else if (Array.isArray(old)) {
@@ -127,7 +127,7 @@ export default {
         return old === fn ? old : [old, fn]
       }
     },
-    computeOffset(popup, text, placement) {
+    computeOffset (popup, text, placement) {
       let { width, height, top, left } = text
       //  you cant change the properties of DOMRect
       top += window.scrollY
@@ -140,20 +140,20 @@ export default {
       if (/right/.test(placement)) ret.left += width + 5
 
       if (/Left/.test(placement)) {
-      } else if(/Right/.test(placement)) {
+      } else if (/Right/.test(placement)) {
         ret.left += (width - popup.width)
-      } else if(/(top)|(bottom)/.test(placement)) {
+      } else if (/(top)|(bottom)/.test(placement)) {
         ret.left += (width - popup.width) / 2
       }
       if (/Top/.test(placement)) {
-      } else if(/Bottom/.test(placement)) {
+      } else if (/Bottom/.test(placement)) {
         ret.top += (height - popup.height)
-      } else if(/(left)|(right)/.test(placement)) {
+      } else if (/(left)|(right)/.test(placement)) {
         ret.top += (height - popup.height) / 2
       }
       return ret
     },
-    showNode() {
+    showNode () {
       this.mountNode(() => {
         this.visible = true
         this.$nextTick(() => {
@@ -165,14 +165,14 @@ export default {
           this.vnode.left = left
           this.vnode.top = top
         })
-        this.onPopupAlign(this.realPlacement, this.$el, this.vnode.$el, { offset: [0,0] })
+        this.onPopupAlign(this.realPlacement, this.$el, this.vnode.$el, { offset: [0, 0] })
       })
     },
-    hideNode() {
+    hideNode () {
       this.visible = false
-    }
+    },
   },
-  render(h) {
+  render (h) {
     const inner = this.$slots.default[0]
     inner.data = inner.data || {}
     inner.data.on = inner.data.on || {}
@@ -181,7 +181,7 @@ export default {
 
     return this.$slots.default[0]
   },
-  updated() {
+  updated () {
     if (!this.vnode) return
     const popup = this.vnode.$el.getBoundingClientRect()
     const content = this.$el.getBoundingClientRect()
@@ -189,10 +189,10 @@ export default {
     this.vnode.left = left
     this.vnode.top = top
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (!this.vnode) return
     this.vnode.$el.remove()
-    this.vnode.$destroy();
-  }
+    this.vnode.$destroy()
+  },
 }
 </script>

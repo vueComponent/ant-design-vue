@@ -11,3 +11,5 @@ export { default as Grid } from './grid'
 export { default as Rate } from './rate'
 
 export { default as ToolTip } from './tooltip'
+
+export { default as Pagination } from './pagination'

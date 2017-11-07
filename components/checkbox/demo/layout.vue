@@ -1,18 +1,27 @@
 <template>
-  <div>
-    <Checkbox @change="onChange">Checkbox</Checkbox>
-  </div>
+  <CheckboxGroup @change="onChange">
+    <Row>
+      <Col :span="8"><Checkbox value="A">A</Checkbox></Col>
+      <Col :span="8"><Checkbox value="B">B</Checkbox></Col>
+      <Col :span="8"><Checkbox value="C">C</Checkbox></Col>
+      <Col :span="8"><Checkbox value="D">D</Checkbox></Col>
+      <Col :span="8"><Checkbox value="E">E</Checkbox></Col>
+    </Row>
+  </CheckboxGroup>
 </template>
 <script>
-import { Checkbox } from 'antd'
+import { Checkbox, Row, Col } from 'antd'
 export default {
   methods: {
-    onChange (e) {
-      console.log(`checked = ${e.target.checked}`)
+    onChange (checkedValues) {
+      console.log('checked = ', checkedValues)
     },
   },
   components: {
     Checkbox,
+    Row,
+    Col,
+    CheckboxGroup: Checkbox.Group,
   },
 }
 </script>

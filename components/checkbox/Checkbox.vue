@@ -27,15 +27,23 @@ export default {
     value: [String, Number, Boolean],
     name: String,
     indeterminate: Boolean,
-    onGroupChange: Function,
   },
   model: {
     prop: 'checked',
   },
+  inject: {
+    context: { default: undefined },
+  },
   data () {
-    const { checked, defaultChecked } = this
+    const { context, checked, defaultChecked, value } = this
+    let stateChecked
+    if (context && context.checkedStatus) {
+      stateChecked = context.checkedStatus.has(value)
+    }
     return {
-      stateChecked: checked === undefined ? defaultChecked : checked,
+      stateChecked: stateChecked === undefined
+        ? checked === undefined ? defaultChecked : checked
+        : stateChecked,
     }
   },
   computed: {
@@ -64,32 +72,36 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked } = this
-      if (checked === undefined) {
+      const { name, value, checked, context, stateChecked } = this
+      if ((checked === undefined && !context) || (context && context.value === undefined)) {
         this.stateChecked = targetChecked
       }
       const target = {
         name,
         value,
-        checked: targetChecked,
+        checked: !stateChecked,
       }
-      this.$emit('change', {
-        target,
-        stopPropagation () {
-          event.stopPropagation()
-        },
-        preventDefault () {
-          event.preventDefault()
-        },
-      })
-      if (this.isGroup) {
-        this.onGroupChange({ target })
+      if (this.context) {
+        this.context.handleChange({ target })
+      } else {
+        this.$emit('change', {
+          target,
+          stopPropagation () {
+            event.stopPropagation()
+          },
+          preventDefault () {
+            event.preventDefault()
+          },
+        })
       }
     },
   },
   watch: {
     checked (val) {
       this.stateChecked = val
+    },
+    'context.checkedStatus': function (checkedStatus) {
+      this.stateChecked = checkedStatus.has(this.value)
     },
   },
 }

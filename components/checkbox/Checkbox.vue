@@ -32,13 +32,13 @@ export default {
     prop: 'checked',
   },
   inject: {
-    context: { default: undefined },
+    checkboxGroupContext: { default: undefined },
   },
   data () {
-    const { context, checked, defaultChecked, value } = this
+    const { checkboxGroupContext, checked, defaultChecked, value } = this
     let stateChecked
-    if (context && context.checkedStatus) {
-      stateChecked = context.checkedStatus.has(value)
+    if (checkboxGroupContext && checkboxGroupContext.checkedStatus) {
+      stateChecked = checkboxGroupContext.checkedStatus.has(value)
     }
     return {
       stateChecked: stateChecked === undefined
@@ -72,8 +72,8 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked, context, stateChecked } = this
-      if ((checked === undefined && !context) || (context && context.value === undefined)) {
+      const { name, value, checked, checkboxGroupContext, stateChecked } = this
+      if ((checked === undefined && !checkboxGroupContext) || (checkboxGroupContext && checkboxGroupContext.value === undefined)) {
         this.stateChecked = targetChecked
       }
       const target = {
@@ -81,8 +81,8 @@ export default {
         value,
         checked: !stateChecked,
       }
-      if (this.context) {
-        this.context.handleChange({ target })
+      if (this.checkboxGroupContext) {
+        this.checkboxGroupContext.handleChange({ target })
       } else {
         this.$emit('change', {
           target,
@@ -100,7 +100,7 @@ export default {
     checked (val) {
       this.stateChecked = val
     },
-    'context.checkedStatus': function (checkedStatus) {
+    'checkboxGroupContext.checkedStatus': function (checkedStatus) {
       this.stateChecked = checkedStatus.has(this.value)
     },
   },

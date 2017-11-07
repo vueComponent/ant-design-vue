@@ -52,6 +52,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    showTotal: Function,
   },
   model: {
     prop: 'current',

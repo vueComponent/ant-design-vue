@@ -12,6 +12,6 @@ export { default as Rate } from './rate'
 
 export { default as ToolTip } from './tooltip'
 
-export { default as Row } from './grid/row'
+export { default as Row } from './grid/Row'
 
-export { default as Col } from './grid/col'
+export { default as Col } from './grid/Col'

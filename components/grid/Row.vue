@@ -5,7 +5,7 @@
 </template>
 <script>
   export default {
-    name: 'Row',
+    name: 'Ant-Row',
     props: {
       prefixCls: {
         'default': 'ant-row',
@@ -45,6 +45,11 @@
           'margin-left': -half + 'px',
           'margin-right': -half + 'px',
         },
+      }
+    },
+    provide() {
+      return {
+        parentRow: this,
       }
     },
     computed: {

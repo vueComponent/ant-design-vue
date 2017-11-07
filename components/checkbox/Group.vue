@@ -1,8 +1,9 @@
 <template>
   <div :class="`${prefixCls}`">
-    <Checkbox v-for="item in checkOptions" :key="item.value" :checked="checkedStatus.has(item.value)"
-      :value="item.value" :disabled="item.disabled" @change="handleChange">{{item.label}}</Checkbox>
-    <slot v-if="options.length === 0"></slot>
+    <Checkbox v-for="item in checkOptions" :key="item.value" :value="item.value" :disabled="item.disabled">
+      {{item.label}}
+    </Checkbox>
+    <slot v-if="checkOptions.length === 0"></slot>
   </div>
 </template>
 <script>
@@ -33,7 +34,7 @@ export default {
   },
   provide () {
     return {
-      context: this,
+      checkboxGroupContext: this,
     }
   },
   data () {

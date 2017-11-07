@@ -9,7 +9,7 @@ export default {
     },
     placement: {
       default: 'top',
-      validator: val => ['top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'].includes(val)
+      validator: val => ['top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'].includes(val),
     },
     transitionName: {
       default: 'zoom-big-fast',
@@ -47,8 +47,8 @@ export default {
     },
   },
   methods: {
-    checkPosition(popup, text, placement) {
-      let { top, left, bottom, right } = text
+    checkPosition (popup, text, placement) {
+      const { top, left, bottom, right } = text
       const reg = /(top|bottom|left|right)(.*)/
       const [, abstractPos, suffix] = placement.match(reg)
       let ret = placement
@@ -59,7 +59,7 @@ export default {
       if (abstractPos === 'bottom' && document.documentElement.clientHeight - bottom < popup.height) ret = 'left' + suffix
       return ret
     },
-    mountNode(callback) {
+    mountNode (callback) {
       if (this.vnode) {
         callback()
         return
@@ -68,14 +68,14 @@ export default {
       document.body.appendChild(div)
       const that = this
       const vnode = new Vue({
-        data() {
+        data () {
           return {
             left: 0,
             top: 0,
           }
         },
         methods: {
-          hideSelf(e) {
+          hideSelf (e) {
             if (that.t1) {
               clearTimeout(that.t1)
               that.t1 = null
@@ -88,9 +88,9 @@ export default {
                 that.visible = false
               }, +that.mouseLeaveDelay * 1e3)
             }
-          }
+          },
         },
-        render(h) {
+        render (h) {
           return (
             <transition name={that.transitionName}>
               <div
@@ -99,16 +99,16 @@ export default {
                 style={{ left: this.left + 'px', top: this.top + 'px' }}
                 onMouseleave={this.hideSelf}
               >
-                <div class="ant-tooltip-content">
-                  <div class="ant-tooltip-arrow"/>
-                  <div class="ant-tooltip-inner">
+                <div class='ant-tooltip-content'>
+                  <div class='ant-tooltip-arrow'/>
+                  <div class='ant-tooltip-inner'>
                     <span>{that.title}</span>
                   </div>
                 </div>
               </div>
             </transition>
           )
-        }
+        },
       }).$mount(div)
       this.$nextTick(() => {
         this.vnode = vnode
@@ -137,7 +137,7 @@ export default {
       }
       target.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`
     },
-    addEventHandle(old, fn) {
+    addEventHandle (old, fn) {
       if (!old) {
         return fn
       } else if (Array.isArray(old)) {
@@ -146,7 +146,7 @@ export default {
         return old === fn ? old : [old, fn]
       }
     },
-    computeOffset(popup, text, placement, scale) {
+    computeOffset (popup, text, placement, scale) {
       let { width, height, top, left } = text
       //  you cant change the properties of DOMRect
       top += window.scrollY
@@ -163,23 +163,23 @@ export default {
       // FIXME: magic number 20 & 14 comes from the offset of triangle
       if (/Left/.test(placement)) {
         if (this.arrowPointAtCenter) ret.left += width / 2 - 20
-      } else if(/Right/.test(placement)) {
+      } else if (/Right/.test(placement)) {
         ret.left += (width - p.width)
         if (this.arrowPointAtCenter) ret.left -= width / 2 - 20
-      } else if(/(top)|(bottom)/.test(placement)) {
+      } else if (/(top)|(bottom)/.test(placement)) {
         ret.left += (width - p.width) / 2
       }
       if (/Top/.test(placement)) {
         if (this.arrowPointAtCenter) ret.top += height / 2 - 14
-      } else if(/Bottom/.test(placement)) {
+      } else if (/Bottom/.test(placement)) {
         ret.top += (height - p.height)
         if (this.arrowPointAtCenter) ret.top -= height / 2 - 14
-      } else if(/(left)|(right)/.test(placement)) {
+      } else if (/(left)|(right)/.test(placement)) {
         ret.top += (height - p.height) / 2
       }
       return ret
     },
-    showNode() {
+    showNode () {
       this.mountNode(() => {
         this.visible = true
         this.$nextTick(() => {
@@ -192,17 +192,17 @@ export default {
           this.vnode.left = left
           this.vnode.top = top
         })
-        this.onPopupAlign(this.realPlacement, this.$el, this.vnode.$el, { offset: [0,0] })
+        this.onPopupAlign(this.realPlacement, this.$el, this.vnode.$el, { offset: [0, 0] })
       })
     },
-    hideNode(e) {
+    hideNode (e) {
       if (!this.vnode) return
       if (e.relatedTarget === this.vnode.$el) {
         return
       }
       this.visible = false
     },
-    checkShow(e) {
+    checkShow (e) {
       if (this.t2) {
         clearTimeout(this.t2)
         this.t2 = null
@@ -213,7 +213,7 @@ export default {
         }, +this.mouseEnterDelay * 1e3)
       }
     },
-    checkHide(e) {
+    checkHide (e) {
       if (this.t1) {
         clearTimeout(this.t1)
         this.t1 = null
@@ -223,9 +223,9 @@ export default {
           this.hideNode(e)
         }, +this.mouseLeaveDelay * 1e3)
       }
-    }
+    },
   },
-  render(h) {
+  render (h) {
     const inner = this.$slots.default[0]
     inner.data = inner.data || {}
     inner.data.on = inner.data.on || {}
@@ -234,7 +234,7 @@ export default {
 
     return this.$slots.default[0]
   },
-  updated() {
+  updated () {
     if (!this.vnode) return
     const popup = this.vnode.$el.getBoundingClientRect()
     const [, scale = 1] = window.getComputedStyle(this.vnode.$el).transform.match(/matrix\((.*?),/) || []
@@ -243,10 +243,10 @@ export default {
     this.vnode.left = left
     this.vnode.top = top
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (!this.vnode) return
     this.vnode.$el.remove()
     this.vnode.$destroy()
-  }
+  },
 }
 </script>

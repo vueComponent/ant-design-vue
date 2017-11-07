@@ -26,15 +26,23 @@ export default {
     isGroup: Boolean,
     value: [String, Number, Boolean],
     name: String,
-    onGroupChange: Function,
   },
   model: {
     prop: 'checked',
   },
+  inject: {
+    radioGroupContext: { default: undefined },
+  },
   data () {
-    const { checked, defaultChecked } = this
+    const { radioGroupContext, checked, defaultChecked, value } = this
+    let stateChecked
+    if (radioGroupContext && radioGroupContext.stateValue) {
+      stateChecked = radioGroupContext.stateValue === value
+    }
     return {
-      stateChecked: checked === undefined ? defaultChecked : checked,
+      stateChecked: stateChecked === undefined
+        ? checked === undefined ? defaultChecked : checked
+        : stateChecked,
     }
   },
   computed: {
@@ -61,33 +69,37 @@ export default {
   methods: {
     handleChange (event) {
       const targetChecked = event.target.checked
-      const { name, value, checked } = this
-      if (checked === undefined) {
+      this.$emit('input', targetChecked)
+      const { name, value, checked, radioGroupContext, stateChecked } = this
+      if ((checked === undefined && !radioGroupContext) || (radioGroupContext && radioGroupContext.value === undefined)) {
         this.stateChecked = targetChecked
       }
-      this.$emit('input', targetChecked)
       const target = {
         name,
         value,
-        checked: targetChecked,
+        checked: !stateChecked,
       }
-      this.$emit('change', {
-        target,
-        stopPropagation () {
-          event.stopPropagation()
-        },
-        preventDefault () {
-          event.preventDefault()
-        },
-      })
-      if (this.isGroup) {
-        this.onGroupChange({ target })
+      if (this.radioGroupContext) {
+        this.radioGroupContext.handleChange({ target })
+      } else {
+        this.$emit('change', {
+          target,
+          stopPropagation () {
+            event.stopPropagation()
+          },
+          preventDefault () {
+            event.preventDefault()
+          },
+        })
       }
     },
   },
   watch: {
     checked (val) {
       this.stateChecked = val
+    },
+    'radioGroupContext.stateValue': function (stateValue) {
+      this.stateChecked = stateValue === this.value
     },
   },
 }

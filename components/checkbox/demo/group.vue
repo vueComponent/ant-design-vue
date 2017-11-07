@@ -4,7 +4,7 @@
     <br />
     <CheckboxGroup :options="plainOptions" :defaultValue="['Apple']" @change="onChange" />
     <br />
-    <CheckboxGroup :options="options" :defaultValue="['Pear']" @change="onChange" />
+    <CheckboxGroup :options="options" :value="['Pear']" @change="onChange" />
     <br />
     <CheckboxGroup :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange" />
   </div>

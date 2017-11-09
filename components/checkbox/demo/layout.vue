@@ -1,12 +1,12 @@
 <template>
   <CheckboxGroup @change="onChange">
-    <Row>
-      <Col :span="8"><Checkbox value="A">A</Checkbox></Col>
-      <Col :span="8"><Checkbox value="B">B</Checkbox></Col>
-      <Col :span="8"><Checkbox value="C">C</Checkbox></Col>
-      <Col :span="8"><Checkbox value="D">D</Checkbox></Col>
-      <Col :span="8"><Checkbox value="E">E</Checkbox></Col>
-    </Row>
+    <AntRow>
+      <AntCol :span="8"><Checkbox value="A">A</Checkbox></AntCol>
+      <AntCol :span="8"><Checkbox value="B">B</Checkbox></AntCol>
+      <AntCol :span="8"><Checkbox value="C">C</Checkbox></AntCol>
+      <AntCol :span="8"><Checkbox value="D">D</Checkbox></AntCol>
+      <AntCol :span="8"><Checkbox value="E">E</Checkbox></AntCol>
+    </AntRow>
   </CheckboxGroup>
 </template>
 <script>
@@ -19,8 +19,8 @@ export default {
   },
   components: {
     Checkbox,
-    Row,
-    Col,
+    AntRow: Row,
+    AntCol: Col,
     CheckboxGroup: Checkbox.Group,
   },
 }

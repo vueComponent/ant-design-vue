@@ -10,7 +10,7 @@
   }
 
   export default {
-    name: 'Col',
+    name: 'Ant-Col',
     props: {
       prefixCls: {
         'default': 'ant-col',
@@ -26,6 +26,9 @@
       md: [Number, Object],
       lg: [Number, Object],
       xl: [Number, Object],
+    },
+    inject: {
+      parentRow: { 'default': undefined },
     },
     computed: {
       classes () {
@@ -59,12 +62,8 @@
         }
       },
       gutter () {
-        let parent = this.$parent
-        while (parent && parent.$options.name !== 'Row') {
-          console.info(parent.$options.name)
-          parent = parent.$parent
-        }
-        return parent ? parent.gutter : 0
+        const parent = this.parentRow
+        return parent ? +parent.gutter : 0
       },
     },
     render (h) {
@@ -73,7 +72,6 @@
         style.paddingLeft = this.gutter / 2 + 'px'
         style.paddingRight = style.paddingLeft
       }
-      console.info(style)
       // why only unnamed slots
       return h('div', {
         'class': this.classes,

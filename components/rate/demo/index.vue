@@ -56,7 +56,7 @@ export default {
       this.hoverValueAH = val
     },
     changeValue () {
-      this.initValue = undefined
+      this.initValue = 4
     },
     getValue () {
       console.log(this.initValue)

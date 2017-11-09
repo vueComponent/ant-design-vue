@@ -61,7 +61,7 @@ export default {
     const { value, defaultValue } = this
     const reValue = value === undefined ? defaultValue : value
     return {
-      hoverValue: reValue,
+      hoverValue: undefined,
       stateValue: reValue,
     }
   },

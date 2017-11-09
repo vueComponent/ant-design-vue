@@ -30,7 +30,7 @@ function getClientPosition (elem) {
   }
 }
 
-export const getOffsetLeft = (el) => {
+export function getOffsetLeft (el) {
   const pos = getClientPosition(el)
   const doc = el.ownerDocument
   const w = doc.defaultView || doc.parentWindow

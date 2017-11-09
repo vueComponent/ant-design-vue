@@ -5,14 +5,14 @@
     <template v-for="i in count">
       <Star
         ref="stars"
-        :index="i"
+        :index="i - 1"
         :disabled="disabled"
         :prefix-cls="`${prefixCls}-star`"
         :allowHalf="allowHalf"
-        :value="currentValue"
-        @onClick="onClick"
-        @onHover="onHover"
-        :key="i">
+        :value="hoverValue === undefined ? stateValue : hoverValue"
+        @click="onClick"
+        @hover="onHover"
+        :key="i - 1">
         <template slot-scope="props">
           <slot>
             <span>{{character}}</span>
@@ -25,8 +25,8 @@
 
 <script>
 import Star from './Star.vue'
-import Icon from '../icon/index'
-import { getOffsetLeft } from '../util/util'
+import Icon from '../icon'
+import { getOffsetLeft } from './util'
 
 export default {
   name: 'Rate',
@@ -43,14 +43,6 @@ export default {
     defaultValue: {
       type: Number,
       default: 0,
-    },
-    onChange: {
-      type: Function,
-      default: () => {},
-    },
-    onHoverChange: {
-      type: Function,
-      default: () => {},
     },
     allowHalf: {
       type: Boolean,
@@ -69,7 +61,7 @@ export default {
     const { value, defaultValue } = this
     const reValue = value === undefined ? defaultValue : value
     return {
-      currentValue: reValue,
+      hoverValue: reValue,
       stateValue: reValue,
     }
   },
@@ -84,46 +76,43 @@ export default {
   },
   methods: {
     onClick (event, index) {
-      const clValue = this.getStarValue(index, event.pageX)
-      this.stateValue = clValue
+      const value = this.getStarValue(index, event.pageX)
+      if (this.value === undefined) {
+        this.stateValue = value
+      }
       this.onMouseLeave()
-      this.$emit('input', clValue)
-      this.onChange(clValue)
+      this.$emit('input', value)
+      this.$emit('change', value)
     },
     onHover (event, index) {
-      this.currentValue = this.getStarValue(index, event.pageX)
-      this.changeValue(this.currentValue)
-      this.onHoverChange(this.currentValue)
+      const value = this.getStarValue(index, event.pageX)
+      this.hoverValue = value
+      this.$emit('hover-change', value)
     },
     getStarDOM (index) {
       return this.$refs.stars[index].$el
     },
     getStarValue (index, x) {
-      let value = index
-      if (this.allowHalf) {
-        const leftEdge = getOffsetLeft(this.getStarDOM(0))
-        const width = getOffsetLeft(this.getStarDOM(1)) - leftEdge
-        if ((x - leftEdge - width * (index - 1)) < width / 2) {
+      const { allowHalf, getStarDOM } = this
+      let value = index + 1
+      if (allowHalf) {
+        const leftEdge = getOffsetLeft(getStarDOM(0))
+        const width = getOffsetLeft(getStarDOM(1)) - leftEdge
+        if ((x - leftEdge - width * index) < width / 2) {
           value -= 0.5
         }
       }
       return value
     },
     onMouseLeave () {
-      this.currentValue = undefined
-      this.changeValue()
-      this.onHoverChange()
-    },
-    changeValue (val) {
-      if (val === undefined) {
-        this.currentValue = this.stateValue
-      }
+      if (this.disabled) return
+      this.hoverValue = undefined
+      this.$emit('hover-change')
     },
   },
   watch: {
-    value (val = 0) {
-      this.currentValue = this.stateValue = val
-      this.$emit('input', val)
+    value (val) {
+      this.stateValue = val
     },
   },
   components: {

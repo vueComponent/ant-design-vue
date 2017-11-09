@@ -16,14 +16,14 @@
     </br>
     回调函数
     <Rate
-      :onChange="onChange"
-      :onHoverChange="onHoverChange"></Rate>
+      @change="onChange"
+      @hover-change="onHoverChange"></Rate>
     <span v-if="hoverValue">{{hoverValue}}stars</span>
     <span v-if="rValue">{{rValue}}stars</span>
     <br/>
     <Rate
       :allowHalf="allowHalf"
-      :onHoverChange="onHoverChangeAH"></Rate>
+      @hover-change="onHoverChangeAH"></Rate>
     <span v-if="hoverValueAH">{{hoverValueAH}}stars</span>
     </br>
     自定义

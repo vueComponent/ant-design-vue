@@ -15,8 +15,8 @@
       <avatar>U</avatar>
       <avatar>USER</avatar>
       <avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <avatar :style="{ color: '#f56a00', backgroundColor: '#fde3cf' }">U</avatar>
-      <avatar :style="{ backgroundColor: '#87d068' }" icon="user" />
+      <avatar :styles="{ color: '#f56a00', backgroundColor: '#fde3cf' }">U</avatar>
+      <avatar :styles="{ backgroundColor: '#87d068' }" icon="user" />
     </div>
     <div>
       <avatar shape="square" size="large">{{avatarValue}}</avatar>

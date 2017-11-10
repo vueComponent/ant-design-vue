@@ -1,5 +1,5 @@
 <template>
-  <span :class="classes" :style="style">
+  <span :class="classes" :style="styles">
     <img v-if="src" :src="src"/>
     <icon v-else-if="icon" :type="icon" />
     <span
@@ -12,7 +12,7 @@
   </span>
 </template>
 <script>
-import Icon from '../icon/index'
+import Icon from '../icon'
 
 export default {
   name: 'Avatar',
@@ -22,27 +22,23 @@ export default {
       default: 'ant-avatar',
     },
     shape: {
-      validator (val) {
-        return ['circle', 'square'].includes(val)
-      },
+      validator: (val) => (['circle', 'square'].includes(val)),
       default: 'circle',
     },
     size: {
-      validator (val) {
-        return ['small', 'large', 'default'].includes(val)
-      },
+      validator: (val) => (['small', 'large', 'default'].includes(val)),
       default: 'default',
+    },
+    styles: {
+      type: Object,
+      default: () => ({}),
     },
     src: String,
     icon: String,
-    style: {
-      type: Object,
-      default: {},
-    },
   },
   data () {
     return {
-      isExitSlot: false,
+      isExistSlot: false,
       scale: 1,
     }
   },
@@ -51,23 +47,23 @@ export default {
       const { prefixCls, shape, size, src, icon } = this
       return {
         [`${prefixCls}`]: true,
+        [`${prefixCls}-image`]: !!src,
+        [`${prefixCls}-icon`]: !!icon,
         [`${prefixCls}-${shape}`]: true,
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-sm`]: size === 'small',
-        [`${prefixCls}-image`]: !!src,
-        [`${prefixCls}-icon`]: !!icon,
       }
     },
     childrenStyle () {
       const children = this.$refs.avatorChildren
       let style = {}
-      if (this.isExitSlot) {
+      if (this.isExistSlot) {
         style = {
           msTransform: `scale(${this.scale})`,
           WebkitTransform: `scale(${this.scale})`,
           transform: `scale(${this.scale})`,
           position: 'absolute',
-          display: 'inline-block',
+          // display: 'inline-block',
           left: `calc(50% - ${Math.round(children.offsetWidth / 2)}px)`,
         }
       }
@@ -76,11 +72,12 @@ export default {
   },
   methods: {
     setScale () {
-      this.isExitSlot = !this.src && !this.icon
-      const children = this.$refs.avatorChildren
+      const { src, icon, $refs, $el } = this
+      const children = $refs.avatorChildren
+      this.isExistSlot = !src && !icon
       if (children) {
         const childrenWidth = children.offsetWidth
-        const avatarWidth = this.$el.getBoundingClientRect().width
+        const avatarWidth = $el.getBoundingClientRect().width
         if (avatarWidth - 8 < childrenWidth) {
           this.scale = (avatarWidth - 8) / childrenWidth
         } else {

@@ -4,7 +4,7 @@
       <pagination :simple="simple" :current="current" :total="total"></pagination>
     </div>
     <div style="margin-bottom:10px">
-      <pagination :current="current" :total="total"></pagination>
+      <pagination :current="current" :total="total" @change="onchange"></pagination>
       <vc-button @click="changeValue">改值</vc-button>
     </div>
     <div>
@@ -34,6 +34,9 @@ export default {
     },
     showTotal (total) {
       return `共 ${total} 条`
+    },
+    onchange (page) {
+      alert(page)
     },
   },
   components: {

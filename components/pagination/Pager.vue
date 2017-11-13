@@ -16,9 +16,6 @@ export default {
     active: Boolean,
     showTitle: Boolean,
   },
-  data () {
-    return {}
-  },
   computed: {
     classes () {
       const prefixCls = `${this.rootPrefixCls}-item`

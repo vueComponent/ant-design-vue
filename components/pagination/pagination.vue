@@ -23,10 +23,6 @@ export default {
       type: Number,
       default: 10,
     },
-    onChange: {
-      type: Function,
-      default: () => {},
-    },
     showSizeChanger: {
       type: Boolean,
       default: false,
@@ -34,10 +30,6 @@ export default {
     pageSizeOptions: {
       type: Array,
       default: () => ['10', '20', '30', '40'],
-    },
-    onShowSizeChange: {
-      type: Function,
-      default: () => {},
     },
     showQuickJumper: {
       type: Boolean,
@@ -136,7 +128,7 @@ export default {
         }
         this.stateCurrent = page
         this.$emit('input', page)
-        this.$emit('onChange', page, this.pageSize)
+        this.$emit('change', page, this.pageSize)
         return page
       }
       return this.stateCurrent

@@ -21,3 +21,5 @@ export { default as Col } from './grid/Col'
 export { default as Tag } from './tag'
 
 export { default as Avatar } from './avatar'
+
+export { default as Badge } from './badge'

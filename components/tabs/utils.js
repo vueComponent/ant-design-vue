@@ -1,3 +1,29 @@
+export function toArray (children) {
+  // allow [c,[a,b]]
+  const c = []
+  children.forEach(child => {
+    if (child.data) {
+      c.push(child)
+    }
+  })
+  return c
+}
+
+export function getActiveIndex (children, activeKey) {
+  const c = toArray(children)
+  for (let i = 0; i < c.length; i++) {
+    const pKey = c[i].pKey || c[i].componentOptions.propsData.pKey
+    if (pKey === activeKey) {
+      return i
+    }
+  }
+  return -1
+}
+
+export function getActiveKey (children, index) {
+  const c = toArray(children)
+  return c[index].pKey
+}
 
 export function setTransform (style, v) {
   style.transform = v

@@ -1,10 +1,9 @@
 <script>
-import RefMixin from './RefMixin'
 import TabBarMixin from './TabBarMixin'
 function noop () {
 }
 export default {
-  mixins: [RefMixin, TabBarMixin],
+  mixins: [TabBarMixin],
   name: 'TabBar',
   props: {
     prefixCls: {

@@ -17,10 +17,10 @@ export default {
         const onClick = () => {
           !child.disabled && this.onTabClick(key)
         }
-        const ref = {}
-        if (activeKey === key) {
-          ref.ref = this.saveRef('activeTab')
-        }
+        // const ref = {}
+        // if (activeKey === key) {
+        //   ref.ref = this.saveRef('activeTab')
+        // }
         rst.push(
           <div
             role='tab'
@@ -29,6 +29,7 @@ export default {
             class={cls}
             key={key}
             onClick={onClick}
+            ref={activeKey === key ? 'activeTab' : undefined}
           >
             {child.tab}
           </div>
@@ -61,7 +62,7 @@ export default {
           role='tablist'
           class={cls}
           tabIndex='0'
-          ref={this.saveRef('root')}
+          ref='root'
           onKeydown={onKeyDown}
         >
           {children}

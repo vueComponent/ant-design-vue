@@ -19,6 +19,10 @@ function activeKeyIsValid (t, key) {
 export default {
   name: 'Tabs',
   components: { Icon },
+  model: {
+    prop: 'activeKey',
+    event: 'change',
+  },
   props: {
     prefixCls: {
       default: 'ant-tabs',
@@ -27,7 +31,7 @@ export default {
     tabBarPosition: {
       default: 'top',
       validator (value) {
-        return ['top', 'bottom'].includes(value)
+        return ['top', 'bottom', 'left', 'right'].includes(value)
       },
     },
     destroyInactiveTabPane: Boolean,
@@ -68,9 +72,10 @@ export default {
       return activeKey
     },
     onTabClick (activeKey) {
-      if (this.tabBar.props.onTabClick) {
-        this.tabBar.props.onTabClick(activeKey)
-      }
+      console.log('onTabClick', activeKey)
+      // if (this.tabBar.props.onTabClick) {
+      //   this.tabBar.props.onTabClick(activeKey)
+      // }
       this.setActiveKey(activeKey)
     },
 
@@ -92,6 +97,7 @@ export default {
         if (!('activeKey' in this)) {
           this.stateActiveKey = activeKey
         }
+        // this.stateActiveKey = activeKey
         this.$emit('change', activeKey)
       }
     },
@@ -99,7 +105,8 @@ export default {
     getNextActiveKey (next) {
       const activeKey = this.stateActiveKey
       const children = []
-      this.$slot.default.forEach((c) => {
+      this.$slots.default.forEach(({ componentOptions = {}}) => {
+        const c = componentOptions.propsData
         if (c && !c.disabled) {
           if (next) {
             children.push(c)
@@ -113,9 +120,9 @@ export default {
       children.forEach((child, i) => {
         if (child.pKey === activeKey) {
           if (i === length - 1) {
-            ret = children[0].key
+            ret = children[0].pKey
           } else {
-            ret = children[i + 1].key
+            ret = children[i + 1].pKey
           }
         }
       })
@@ -137,17 +144,10 @@ export default {
       $slots,
     } = this
     const hasSlot = !!$slots.default
-    const tabBarProps = []
+    const panels = []
     if (hasSlot) {
       $slots.default.forEach(tab => {
-        tab.data && tabBarProps.push(
-          <TabBar
-            {...tab.data}
-            prefixCls={prefixCls}
-            onKeyDown={onNavKeyDown}
-            tabBarPosition={tabBarPosition}
-            onTabClick={onTabClick}
-            activeKey={stateActiveKey} />)
+        tab.componentOptions && panels.push(tab.componentOptions.propsData)
       })
     }
     const tabContentProps = {
@@ -158,15 +158,35 @@ export default {
         destroyInactiveTabPane,
         onChange: setActiveKey,
         key: 'tabContent',
-      }}
+      },
+    }
+    const tabBarProps = {
+      props: {
+        panels: panels,
+        prefixCls: prefixCls,
+        onKeyDown: onNavKeyDown,
+        tabBarPosition: tabBarPosition,
+        onTabClick: onTabClick,
+        activeKey: stateActiveKey,
+        key: 'tabBar',
+      },
+    }
+    const contents = [
+      <TabBar {...tabBarProps}>
+        {this.$slots.tabBarExtraContent}
+      </TabBar>,
+      <TabContent {...tabContentProps}>
+        {$slots.default}
+      </TabContent>,
+    ]
+    if (tabBarPosition === 'bottom') {
+      contents.reverse()
+    }
     return (
       <div
         class={classes}
       >
-        {tabBarProps}
-        <TabContent {...tabContentProps}>
-          {$slots.default}
-        </TabContent>
+        {contents}
       </div>
     )
   },

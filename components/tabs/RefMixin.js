@@ -1,7 +1,9 @@
 export default {
-  saveRef (name) {
-    return node => {
-      this[name] = node
-    }
+  methods: {
+    saveRef (name) {
+      return node => {
+        this[name] = node
+      }
+    },
   },
 }

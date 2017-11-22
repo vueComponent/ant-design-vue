@@ -13,31 +13,34 @@ export default {
   name: 'TabPane',
   props: {
     pKey: [String, Number],
+    tab: [String, Number],
     forceRender: Boolean,
     // placeholder: [Function, String, Number],
   },
   data () {
-    const { prefixCls, destroyInactiveTabPane, activeKey } = this.$parent
     return {
-      rootPrefixCls: prefixCls,
-      destroyInactiveTabPane,
-      active: this.pKey === activeKey,
     }
   },
   computed: {
     classes () {
-      const { rootPrefixCls, active } = this
-      const prefixCls = `${rootPrefixCls}-tabpane`
+      const { $parent, active } = this
+      const prefixCls = `${$parent.prefixCls}-tabpane`
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-inactive`]: !active,
         [`${prefixCls}-active`]: active,
       }
     },
+    active () {
+      const { activeKey } = this.$parent
+      return activeKey === this.pKey
+    },
     isRender () {
       const {
-        destroyInactiveTabPane, active,
+        active,
+        $parent,
       } = this
+      const destroyInactiveTabPane = $parent.destroyInactiveTabPane
       this._isActived = this._isActived || active
       return destroyInactiveTabPane ? active : this._isActived
     },

@@ -1,4 +1,25 @@
 export default {
+  props: {
+    prefixCls: {
+      default: 'ant-tabs',
+      type: String,
+    },
+    tabBarPosition: {
+      default: 'top',
+      type: String,
+    },
+    disabled: Boolean,
+    onKeyDown: {
+      default: () => {},
+      type: Function,
+    },
+    onTabClick: {
+      default: () => {},
+      type: Function,
+    },
+    activeKey: String,
+    panels: Array,
+  },
   methods: {
     getTabs () {
       const { panels: children, activeKey, prefixCls } = this

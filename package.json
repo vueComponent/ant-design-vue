@@ -74,6 +74,8 @@
     "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
-    "eslint-plugin-vue": "^3.13.0"
+    "add-dom-event-listener": "^1.0.2",
+    "eslint-plugin-vue": "^3.13.0",
+    "lodash.debounce": "^4.0.8"
   }
 }

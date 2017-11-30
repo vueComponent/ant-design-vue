@@ -3,6 +3,7 @@ import Icon from '../icon'
 import KeyCode from './KeyCode'
 import TabBar from './TabBar'
 import TabContent from './TabContent'
+import ScrollableInkTabBar from './ScrollableInkTabBar'
 function getDefaultActiveKey (t) {
   let activeKey
   t.$slot.default.forEach((child) => {
@@ -34,6 +35,11 @@ export default {
         return ['top', 'bottom', 'left', 'right'].includes(value)
       },
     },
+    renderTabBar: {
+      type: Function,
+      default: () => {},
+    },
+    tabBarProps: Object,
     destroyInactiveTabPane: Boolean,
     activeKey: String,
     defaultActiveKey: String,
@@ -162,6 +168,7 @@ export default {
     }
     const tabBarProps = {
       props: {
+        ...tabBarProps,
         panels: panels,
         prefixCls: prefixCls,
         onKeyDown: onNavKeyDown,
@@ -172,9 +179,9 @@ export default {
       },
     }
     const contents = [
-      <TabBar {...tabBarProps}>
+      <ScrollableInkTabBar {...tabBarProps}>
         {this.$slots.tabBarExtraContent}
-      </TabBar>,
+      </ScrollableInkTabBar>,
       <TabContent {...tabContentProps}>
         {$slots.default}
       </TabContent>,

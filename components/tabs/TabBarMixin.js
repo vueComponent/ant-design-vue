@@ -21,14 +21,16 @@ export default {
     panels: Array,
   },
   methods: {
-    getTabs () {
+    getTabs (h) {
       const { panels: children, activeKey, prefixCls } = this
       const rst = []
       children.forEach((child) => {
         if (!child) {
           return
         }
-        const key = child.pKey
+        // componentOptions.propsData中获取的值disabled没有根据类型初始化, 会出现空字符串
+        child.disabled = child.disabled === '' || child.disabled
+        const key = child.tabKey
         let cls = activeKey === key ? `${prefixCls}-tab-active` : ''
         cls += ` ${prefixCls}-tab`
         if (child.disabled) {
@@ -52,7 +54,7 @@ export default {
             onClick={onClick}
             ref={activeKey === key ? 'activeTab' : undefined}
           >
-            {child.tab}
+            {typeof child.tab === 'function' ? child.tab(h, key) : child.tab}
           </div>
         )
       })
@@ -71,7 +73,7 @@ export default {
       let children = contents
       if ($slots.default) {
         children = [
-          <div key='extra' class='`${prefixCls}-extra-content`' style={tabBarExtraContentStyle}>
+          <div key='extra' class={`${prefixCls}-extra-content`} style={tabBarExtraContentStyle}>
             {$slots.default}
           </div>,
           contents,

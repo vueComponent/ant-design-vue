@@ -12,12 +12,14 @@
 export default {
   name: 'TabPane',
   props: {
-    pKey: [String, Number],
-    tab: [String, Number],
+    tabKey: [String, Number],
+    tab: [String, Number, Function],
     forceRender: Boolean,
+    disabled: Boolean,
     // placeholder: [Function, String, Number],
   },
   data () {
+    console.log(this.disabled)
     return {
     }
   },
@@ -33,7 +35,7 @@ export default {
     },
     active () {
       const { activeKey } = this.$parent
-      return activeKey === this.pKey
+      return activeKey === this.tabKey
     },
     isRender () {
       const {

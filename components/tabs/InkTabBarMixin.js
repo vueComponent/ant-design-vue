@@ -35,7 +35,7 @@ function offset (elem) {
 }
 
 function componentDidUpdate (component, init) {
-  const { styles } = component.$props
+  const { styles = {}} = component.$props
   const wrapNode = component.$refs.nav || component.$refs.root
   const containerOffset = offset(wrapNode)
   const inkBarNode = component.$refs.inkBar
@@ -111,9 +111,8 @@ export default {
   },
   updated () {
     this.$nextTick(function () {
-      componentDidUpdate(this, true)
+      componentDidUpdate(this)
     })
-    componentDidUpdate(this)
   },
 
   mounted () {

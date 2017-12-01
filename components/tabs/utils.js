@@ -12,8 +12,8 @@ export function toArray (children) {
 export function getActiveIndex (children, activeKey) {
   const c = toArray(children)
   for (let i = 0; i < c.length; i++) {
-    const pKey = c[i].pKey || c[i].componentOptions.propsData.pKey
-    if (pKey === activeKey) {
+    const tabKey = c[i].tabKey || c[i].componentOptions.propsData.tabKey
+    if (tabKey === activeKey) {
       return i
     }
   }
@@ -22,7 +22,7 @@ export function getActiveIndex (children, activeKey) {
 
 export function getActiveKey (children, index) {
   const c = toArray(children)
-  return c[index].pKey
+  return c[index].tabKey
 }
 
 export function setTransform (style, v) {

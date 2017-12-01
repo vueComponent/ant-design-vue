@@ -27,20 +27,8 @@ export default {
     this.resizeEvent = addDOMEventListener(window, 'resize', debouncedResize)
   },
 
-  updated (prevProps) {
-    const props = this.$props
-    if (prevProps && prevProps.tabBarPosition !== props.tabBarPosition) {
-      this.setOffset(0)
-      return
-    }
-    const nextPrev = this.setNextPrev()
-    // wait next, prev show hide
-    if (this.isNextPrevShown(this) !== this.isNextPrevShown(nextPrev)) {
-      Object.assign(this, this.scrollToActiveTab)
-    } else if (!prevProps || props.activeKey !== prevProps.activeKey) {
-      // can not use props.activeKey
-      this.scrollToActiveTab()
-    }
+  updated () {
+    this.updatedCal()
   },
 
   beforeDestroy () {
@@ -48,9 +36,17 @@ export default {
       this.resizeEvent.remove()
     }
   },
+  watch: {
+    tabBarPosition (val) {
+      this.setOffset(0)
+    },
+  },
   methods: {
     updatedCal () {
-
+      this.setNextPrev()
+      this.$nextTick(() => {
+        this.scrollToActiveTab()
+      })
     },
     setNextPrev () {
       const navNode = this.$refs.nav

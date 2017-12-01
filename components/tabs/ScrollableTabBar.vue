@@ -9,7 +9,7 @@ export default {
     const inkBarNode = this.getInkBarNode()
     const tabs = this.getTabs(h)
     const scrollbarNode = this.getScrollBarNode([inkBarNode, tabs])
-    return this.getRootNode(scrollbarNode)
+    return this.getRootNode(scrollbarNode, h)
   },
 }
 </script>

@@ -4,7 +4,7 @@
     :aria-hidden="active ? 'false' : 'true'"
     :class="classes"
   >
-    <slot v-if="isRender || forceRender">
+    <slot v-if="isRender">
     </slot>
   </div>
 </template>
@@ -14,12 +14,10 @@ export default {
   props: {
     tabKey: [String, Number],
     tab: [String, Number, Function],
-    forceRender: Boolean,
     disabled: Boolean,
-    // placeholder: [Function, String, Number],
+    closable: Boolean,
   },
   data () {
-    console.log(this.disabled)
     return {
     }
   },

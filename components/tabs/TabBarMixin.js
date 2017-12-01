@@ -1,3 +1,4 @@
+import Icon from '../icon'
 export default {
   props: {
     prefixCls: {
@@ -19,6 +20,16 @@ export default {
     },
     activeKey: String,
     panels: Array,
+    extraContent: [String, Number, Function],
+    hideAdd: Boolean,
+    removeTab: {
+      default: () => {},
+      type: Function,
+    },
+    createNewTab: {
+      default: () => {},
+      type: Function,
+    },
   },
   methods: {
     getTabs (h) {
@@ -28,33 +39,46 @@ export default {
         if (!child) {
           return
         }
+        let { disabled, closable } = child
+        const { tabKey, tab } = child
         // componentOptions.propsData中获取的值disabled没有根据类型初始化, 会出现空字符串
-        child.disabled = child.disabled === '' || child.disabled
-        const key = child.tabKey
-        let cls = activeKey === key ? `${prefixCls}-tab-active` : ''
+        disabled = disabled === '' || disabled
+        let cls = activeKey === tabKey ? `${prefixCls}-tab-active` : ''
         cls += ` ${prefixCls}-tab`
-        if (child.disabled) {
+        if (disabled) {
           cls += ` ${prefixCls}-tab-disabled`
         } else {
         }
         const onClick = () => {
-          !child.disabled && this.onTabClick(key)
+          !disabled && this.onTabClick(tabKey)
         }
-        // const ref = {}
-        // if (activeKey === key) {
-        //   ref.ref = this.saveRef('activeTab')
-        // }
+
+        let tabC = typeof tab === 'function' ? child.tab(h, tabKey) : tab
+        if (this.$parent.type === 'editable-card') {
+          closable = closable === undefined ? true : closable === '' || closable
+          const closeIcon = closable ? (
+            <Icon
+              type='close'
+              onClick={e => this.removeTab(tabKey, e)}
+            />
+          ) : null
+          tabC = <div class={closable ? undefined : `${prefixCls}-tab-unclosable`}>
+            {tabC}
+            {closeIcon}
+          </div>
+        }
+
         rst.push(
           <div
             role='tab'
-            aria-disabled={child.disabled ? 'true' : 'false'}
-            aria-selected={activeKey === key ? 'true' : 'false'}
+            aria-disabled={disabled ? 'true' : 'false'}
+            aria-selected={activeKey === tabKey ? 'true' : 'false'}
             class={cls}
-            key={key}
+            key={tabKey}
             onClick={onClick}
-            ref={activeKey === key ? 'activeTab' : undefined}
+            ref={activeKey === tabKey ? 'activeTab' : undefined}
           >
-            {typeof child.tab === 'function' ? child.tab(h, key) : child.tab}
+            {tabC}
           </div>
         )
       })
@@ -63,23 +87,35 @@ export default {
     },
     getRootNode (contents, createElement) {
       const {
-        prefixCls, onKeyDown, tabBarPosition, $slots,
+        prefixCls, onKeyDown, tabBarPosition, hideAdd,
       } = this
+      let extraContent = this.extraContent
+      const tabsType = this.$parent.type
       const cls = {
         [`${prefixCls}-bar`]: true,
       }
       const topOrBottom = (tabBarPosition === 'top' || tabBarPosition === 'bottom')
       const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {}
       let children = contents
-      if ($slots.default) {
-        children = [
-          <div key='extra' class={`${prefixCls}-extra-content`} style={tabBarExtraContentStyle}>
-            {$slots.default}
-          </div>,
-          contents,
-        ]
-        children = topOrBottom ? children : children.reverse()
+      extraContent = typeof extraContent === 'function' ? extraContent(createElement) : extraContent
+
+      if (tabsType === 'editable-card' && !hideAdd) {
+        extraContent = (
+          <span>
+            <Icon type='plus' class={`${prefixCls}-new-tab`} onClick={this.createNewTab} />
+            {extraContent}
+          </span>
+        )
       }
+
+      children = [
+        <div key='extra' class={`${prefixCls}-extra-content`} style={tabBarExtraContentStyle}>
+          {extraContent}
+        </div>,
+        contents,
+      ]
+      children = topOrBottom ? children : children.reverse()
+
       return (
         <div
           role='tablist'

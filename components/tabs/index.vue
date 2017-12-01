@@ -56,10 +56,11 @@ export default {
     },
 
     handleChange (activeKey) {
-      const onChange = this.$props.onChange
-      if (onChange) {
-        onChange(activeKey)
-      }
+      // const onChange = this.$props.onChange
+      // if (onChange) {
+      //   onChange(activeKey)
+      // }
+      this.$emit('change', activeKey)
     },
   },
 
@@ -77,7 +78,6 @@ export default {
       size,
       type = 'line',
       tabPosition,
-      children,
       tabBarStyle,
       // hideAdd,
       onTabClick,
@@ -143,16 +143,16 @@ export default {
       </div>
     ) : null
 
-    const renderTabBar = () => (
-      <ScrollableInkTabBar
-        inkBarAnimated={inkBarAnimated}
-        extraContent={tabBarExtraContent}
-        onTabClick={onTabClick}
-        onPrevClick={onPrevClick}
-        onNextClick={onNextClick}
-        style={tabBarStyle}
-      />
-    )
+    // const renderTabBar = () => (
+    //   <ScrollableInkTabBar
+    //     inkBarAnimated={inkBarAnimated}
+    //     extraContent={tabBarExtraContent}
+    //     onTabClick={onTabClick}
+    //     onPrevClick={onPrevClick}
+    //     onNextClick={onNextClick}
+    //     style={tabBarStyle}
+    //   />
+    // )
     const tabBarProps = {
       inkBarAnimated,
       extraContent: tabBarExtraContent,
@@ -161,15 +161,18 @@ export default {
       onNextClick,
       style: tabBarStyle,
     }
+    const tabContentProps = {
+      animated: tabPaneAnimated,
+      animatedWithMargin: true,
+    }
     return (
       <Tabs
         {...this.$props}
         class={cls}
         tabBarPosition={tabPosition}
-        renderTabBar={renderTabBar}
-        // renderTabContent={() => <TabContent animated={tabPaneAnimated} animatedWithMargin />}
         onChange={this.handleChange}
         tabBarProps={tabBarProps}
+        tabContentProps={tabContentProps}
       >
         {childrenWithClose || this.$slots.default}
       </Tabs>

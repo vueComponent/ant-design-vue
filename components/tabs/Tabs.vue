@@ -1,21 +1,26 @@
 <script>
 import Icon from '../icon'
 import KeyCode from './KeyCode'
-import TabBar from './TabBar'
 import TabContent from './TabContent'
 import ScrollableInkTabBar from './ScrollableInkTabBar'
 function getDefaultActiveKey (t) {
   let activeKey
-  t.$slot.default.forEach((child) => {
+  t.$slots.default.forEach(({ componentOptions = {}}) => {
+    const child = componentOptions.propsData
     if (child && !activeKey && !child.disabled) {
-      activeKey = child.pKey
+      activeKey = child.tabKey
     }
   })
   return activeKey
 }
 function activeKeyIsValid (t, key) {
-  const keys = t.$slot.default.map(child => child && child.pKey)
-  return keys.indexOf(key) >= 0
+  const keys = t.$slots.default.map(({ componentOptions = {}}) => {
+    const child = componentOptions.propsData
+    if (child) {
+      return child.tabKey
+    }
+  })
+  return key !== undefined && keys.indexOf(key) >= 0
 }
 export default {
   name: 'Tabs',
@@ -35,11 +40,8 @@ export default {
         return ['top', 'bottom', 'left', 'right'].includes(value)
       },
     },
-    renderTabBar: {
-      type: Function,
-      default: () => {},
-    },
     tabBarProps: Object,
+    tabContentProps: Object,
     destroyInactiveTabPane: Boolean,
     activeKey: String,
     defaultActiveKey: String,
@@ -59,7 +61,7 @@ export default {
     },
   },
   beforeUpdate () {
-    if ('activeKey' in this) {
+    if (this.activeKey) {
       this.stateActiveKey = this.activeKey
     } else if (!activeKeyIsValid(this, this.stateActiveKey)) {
       this.stateActiveKey = getDefaultActiveKey(this)
@@ -68,9 +70,9 @@ export default {
   methods: {
     getStateActiveKey () {
       let activeKey
-      if ('activeKey' in this) {
+      if (this.activeKey) {
         activeKey = this.activeKey
-      } else if ('defaultActiveKey' in this) {
+      } else if (this.defaultActiveKey) {
         activeKey = this.defaultActiveKey
       } else {
         activeKey = getDefaultActiveKey(this)
@@ -100,7 +102,7 @@ export default {
 
     setActiveKey (activeKey) {
       if (this.stateActiveKey !== activeKey) {
-        if (!('activeKey' in this)) {
+        if (!this.activeKey) {
           this.stateActiveKey = activeKey
         }
         // this.stateActiveKey = activeKey
@@ -124,11 +126,11 @@ export default {
       const length = children.length
       let ret = length && children[0].key
       children.forEach((child, i) => {
-        if (child.pKey === activeKey) {
+        if (child.tabKey === activeKey) {
           if (i === length - 1) {
-            ret = children[0].pKey
+            ret = children[0].tabKey
           } else {
-            ret = children[i + 1].pKey
+            ret = children[i + 1].tabKey
           }
         }
       })
@@ -158,6 +160,7 @@ export default {
     }
     const tabContentProps = {
       props: {
+        ...this.tabContentProps,
         prefixCls,
         tabBarPosition,
         activeKey: stateActiveKey,
@@ -168,7 +171,7 @@ export default {
     }
     const tabBarProps = {
       props: {
-        ...tabBarProps,
+        ...this.tabBarProps,
         panels: panels,
         prefixCls: prefixCls,
         onKeyDown: onNavKeyDown,
@@ -177,6 +180,7 @@ export default {
         activeKey: stateActiveKey,
         key: 'tabBar',
       },
+      style: this.tabBarProps.style || {},
     }
     const contents = [
       <ScrollableInkTabBar {...tabBarProps}>

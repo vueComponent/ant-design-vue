@@ -1,23 +1,20 @@
 <template>
-  <div>
-    <Tabs v-model="activeKey">
-      <span slot="tabBarExtraContent">kkk</span>
-      <TabPane pKey="test1" tab="tab1">hello</TabPane>
-      <TabPane pKey="test2" tab="tab2">world</TabPane>
-    </Tabs>
-  </div>
+  <Tabs defaultActiveKey="1" @change="callback">
+    <TabPane tab="Tab 1" tabKey="1">Content of Tab Pane 1</TabPane>
+    <TabPane tab="Tab 2" tabKey="2">Content of Tab Pane 2</TabPane>
+    <TabPane tab="Tab 3" tabKey="3">Content of Tab Pane 3</TabPane>
+  </Tabs>
 </template>
 <script>
 import { Tabs } from 'antd'
 export default {
   data () {
     return {
-      activeKey: 'test1',
     }
   },
   methods: {
-    tabBarExtraContent (h) {
-      return h('span', 'hhhh')
+    callback (key) {
+      console.log(key)
     },
   },
   components: {

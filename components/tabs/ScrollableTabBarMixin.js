@@ -53,9 +53,9 @@ export default {
 
     },
     setNextPrev () {
-      const navNode = this.nav
+      const navNode = this.$refs.nav
       const navNodeWH = this.getOffsetWH(navNode)
-      const navWrapNode = this.navWrap
+      const navWrapNode = this.$refs.navWrap
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       let { offset } = this
       const minOffset = navWrapNodeWH - navNodeWH
@@ -110,7 +110,7 @@ export default {
         this.offset = target
         let navOffset = {}
         const tabBarPosition = this.$props.tabBarPosition
-        const navStyle = this.nav.style
+        const navStyle = this.$refs.nav.style
         const transformSupported = isTransformSupported(navStyle)
         if (tabBarPosition === 'left' || tabBarPosition === 'right') {
           if (transformSupported) {
@@ -177,7 +177,8 @@ export default {
     },
 
     scrollToActiveTab (e) {
-      const { activeTab, navWrap } = this
+      const { activeTab } = this
+      const navWrap = this.$refs.navWrap
       if (e && e.target !== e.currentTarget || !activeTab) {
         return
       }
@@ -205,7 +206,7 @@ export default {
 
     prevClick (e) {
       this.$props.onPrevClick(e)
-      const navWrapNode = this.navWrap
+      const navWrapNode = this.$refs.navWrap
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       const { offset } = this
       this.setOffset(offset + navWrapNodeWH)
@@ -213,7 +214,7 @@ export default {
 
     nextClick (e) {
       this.$props.onNextClick(e)
-      const navWrapNode = this.navWrap
+      const navWrapNode = this.$refs.navWrap
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       const { offset } = this
       this.setOffset(offset - navWrapNodeWH)

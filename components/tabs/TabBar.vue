@@ -26,9 +26,9 @@ export default {
     activeKey: String,
     panels: Array,
   },
-  render (createElement) {
-    const tabs = this.getTabs()
-    return this.getRootNode(tabs, createElement)
+  render (h) {
+    const tabs = this.getTabs(h)
+    return this.getRootNode(tabs, h)
   },
 }
 </script>

@@ -8,7 +8,7 @@ export default {
   render (h) {
     const inkBarNode = this.getInkBarNode()
     const tabs = this.getTabs(h)
-    return this.getRootNode([inkBarNode, tabs])
+    return this.getRootNode([inkBarNode, tabs], h)
   },
 }
 </script>

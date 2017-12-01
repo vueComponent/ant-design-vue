@@ -1,10 +1,10 @@
 <template>
   <div style="width: 500px">
-    <RadioGroup v-model="mode" :style="{ marginBottom: 8 }">
+    <RadioGroup v-model="mode" :style="{ marginBottom: '8px' }">
       <RadioButton value="top">Horizontal</RadioButton>
       <RadioButton value="left">Vertical</RadioButton>
     </RadioGroup>
-    <Tabs defaultActiveKey="1" :tabPosition="mode" :style="{ height: '200px'}">
+    <Tabs defaultActiveKey="1" :tabPosition="mode" :style="{ height: '200px'}" @prevClick="callback" @nextClick="callback">
       <TabPane tab="Tab 1" tabKey="1">Content of tab 1</TabPane>
       <TabPane tab="Tab 2" tabKey="2">Content of tab 2</TabPane>
       <TabPane tab="Tab 3" tabKey="3">Content of tab 3</TabPane>
@@ -29,6 +29,9 @@ export default {
     }
   },
   methods: {
+    callback (val) {
+      console.log(val)
+    },
   },
   components: {
     Tabs,

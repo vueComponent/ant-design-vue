@@ -45,6 +45,13 @@ export default {
     destroyInactiveTabPane: Boolean,
     activeKey: String,
     defaultActiveKey: String,
+    type: {
+      validator (value) {
+        return ['line', 'card', 'editable-card'].includes(value)
+      },
+    },
+    onChange: { type: Function, default: () => {} },
+    onTabClick: { type: Function, default: () => {} },
   },
   data () {
     return {
@@ -79,11 +86,8 @@ export default {
       }
       return activeKey
     },
-    onTabClick (activeKey) {
-      console.log('onTabClick', activeKey)
-      // if (this.tabBar.props.onTabClick) {
-      //   this.tabBar.props.onTabClick(activeKey)
-      // }
+    handleTabClick (activeKey) {
+      this.onTabClick(activeKey)
       this.setActiveKey(activeKey)
     },
 
@@ -92,11 +96,11 @@ export default {
       if (eventKeyCode === KeyCode.RIGHT || eventKeyCode === KeyCode.DOWN) {
         e.preventDefault()
         const nextKey = this.getNextActiveKey(true)
-        this.onTabClick(nextKey)
+        this.handleTabClick(nextKey)
       } else if (eventKeyCode === KeyCode.LEFT || eventKeyCode === KeyCode.UP) {
         e.preventDefault()
         const previousKey = this.getNextActiveKey(false)
-        this.onTabClick(previousKey)
+        this.handleTabClick(previousKey)
       }
     },
 
@@ -105,8 +109,7 @@ export default {
         if (!this.activeKey) {
           this.stateActiveKey = activeKey
         }
-        // this.stateActiveKey = activeKey
-        this.$emit('change', activeKey)
+        this.onChange(activeKey)
       }
     },
 
@@ -115,7 +118,7 @@ export default {
       const children = []
       this.$slots.default.forEach(({ componentOptions = {}}) => {
         const c = componentOptions.propsData
-        if (c && !c.disabled) {
+        if (c && !c.disabled && c.disabled !== '') {
           if (next) {
             children.push(c)
           } else {
@@ -145,7 +148,7 @@ export default {
       tabBarPosition,
       destroyInactiveTabPane,
       onNavKeyDown,
-      onTabClick,
+      handleTabClick,
       stateActiveKey,
       classes,
       setActiveKey,
@@ -176,16 +179,14 @@ export default {
         prefixCls: prefixCls,
         onKeyDown: onNavKeyDown,
         tabBarPosition: tabBarPosition,
-        onTabClick: onTabClick,
+        onTabClick: handleTabClick,
         activeKey: stateActiveKey,
         key: 'tabBar',
       },
       style: this.tabBarProps.style || {},
     }
     const contents = [
-      <ScrollableInkTabBar {...tabBarProps}>
-        {this.$slots.tabBarExtraContent}
-      </ScrollableInkTabBar>,
+      <ScrollableInkTabBar {...tabBarProps} />,
       <TabContent {...tabContentProps}>
         {$slots.default}
       </TabContent>,

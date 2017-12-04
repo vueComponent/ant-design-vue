@@ -16,4 +16,3 @@ export default {
    */
   DOWN: 40, // also NUM_SOUTH
 }
-

@@ -76,6 +76,7 @@
   "dependencies": {
     "add-dom-event-listener": "^1.0.2",
     "eslint-plugin-vue": "^3.13.0",
-    "lodash.debounce": "^4.0.8"
+    "lodash.debounce": "^4.0.8",
+    "omit.js": "^1.0.0"
   }
 }

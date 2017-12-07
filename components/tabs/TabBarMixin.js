@@ -98,7 +98,7 @@ export default {
       const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {}
       let children = contents
       extraContent = typeof extraContent === 'function' ? extraContent(createElement) : extraContent
-
+      extraContent = extraContent || this.$slots.extraContent
       if (tabsType === 'editable-card' && !hideAdd) {
         extraContent = (
           <span>

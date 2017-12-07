@@ -81,8 +81,9 @@ export default {
       destroyInactiveTabPane = false,
       activeKey,
       defaultActiveKey,
+      $slots,
     } = this
-    const { tabBarExtraContent } = this.$props
+    let { tabBarExtraContent } = this.$props
     let { inkBarAnimated, tabPaneAnimated } = typeof animated === 'object' ? { // eslint-disable-line
       inkBarAnimated: !!animated.inkBar, tabPaneAnimated: !!animated.tabPane,
     } : {
@@ -100,7 +101,9 @@ export default {
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
     }
-
+    tabBarExtraContent = tabBarExtraContent || ((h) => {
+      return h('span', [$slots.tabBarExtraContent])
+    })
     const tabBarProps = {
       inkBarAnimated,
       extraContent: tabBarExtraContent,

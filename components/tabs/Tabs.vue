@@ -5,7 +5,7 @@ import TabContent from './TabContent'
 import ScrollableInkTabBar from './ScrollableInkTabBar'
 function getDefaultActiveKey (t) {
   let activeKey
-  t.$slots.default.forEach(({ componentOptions = {}}) => {
+  t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}}) => {
     const child = componentOptions.propsData
     if (child && !activeKey && !child.disabled) {
       activeKey = child.tabKey
@@ -14,7 +14,7 @@ function getDefaultActiveKey (t) {
   return activeKey
 }
 function activeKeyIsValid (t, key) {
-  const keys = t.$slots.default.map(({ componentOptions = {}}) => {
+  const keys = t.$slots.default && t.$slots.default.map(({ componentOptions = {}}) => {
     const child = componentOptions.propsData
     if (child) {
       return child.tabKey
@@ -116,7 +116,7 @@ export default {
     getNextActiveKey (next) {
       const activeKey = this.stateActiveKey
       const children = []
-      this.$slots.default.forEach(({ componentOptions = {}}) => {
+      this.$slots.default && this.$slots.default.forEach(({ componentOptions = {}}) => {
         const c = componentOptions.propsData
         if (c && !c.disabled && c.disabled !== '') {
           if (next) {
@@ -154,13 +154,11 @@ export default {
       setActiveKey,
       $slots,
     } = this
-    const hasSlot = !!$slots.default
     const panels = []
-    if (hasSlot) {
-      $slots.default.forEach(tab => {
-        tab.componentOptions && panels.push(tab.componentOptions.propsData)
-      })
-    }
+
+    $slots.default && $slots.default.forEach(tab => {
+      tab.componentOptions && panels.push(tab.componentOptions.propsData)
+    })
     const tabContentProps = {
       props: {
         ...this.tabContentProps,
@@ -186,7 +184,11 @@ export default {
       style: this.tabBarProps.style || {},
     }
     const contents = [
-      <ScrollableInkTabBar {...tabBarProps} />,
+      <ScrollableInkTabBar {...tabBarProps}>
+        {$slots.tabBarExtraContent ? <span slot='extraContent'>
+          {$slots.tabBarExtraContent}
+        </span> : null}
+      </ScrollableInkTabBar>,
       <TabContent {...tabContentProps}>
         {$slots.default}
       </TabContent>,

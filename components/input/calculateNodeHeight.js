@@ -153,5 +153,5 @@ export default function calculateNodeHeight (
   if (!maxRows) {
     overflowY = 'hidden'
   }
-  return { height, minHeight, maxHeight, overflowY }
+  return { height: `${height}px`, minHeight: `${minHeight}px`, maxHeight: `${maxHeight}px`, overflowY }
 }

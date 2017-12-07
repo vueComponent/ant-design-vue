@@ -17,7 +17,6 @@ export default {
       return ['small', 'large', 'default'].includes(value)
     },
   },
-  maxLength: String,
   disabled: {
     default: false,
     type: Boolean,

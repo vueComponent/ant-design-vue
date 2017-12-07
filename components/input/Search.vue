@@ -19,33 +19,24 @@ export default {
   },
   methods: {
     onSearch (e) {
-      const eventKeyCode = e.keyCode
-      if (eventKeyCode === 13) {
-        // const { onSearch } = this.$props
-        // if (onSearch) {
-        //   onSearch(this.$refs.input.value)
-        // }
-        this.$emit('search', this.$refs.input.value)
-        this.$refs.input.focus()
-      }
+      this.$emit('search', this.$refs.input.stateValue)
+      this.$refs.input.focus()
     },
   },
   render () {
     const { inputPrefixCls, prefixCls, ...others } = this.$props
-    delete others.onSearch
-    // const searchSuffix = (
-    //   <Icon
-    //     class={`${prefixCls}-icon`}
-    //     onClick={this.onSearch}
-    //     type='search'
-    //   />
-    // )
+    const inputProps = {
+      props: {
+        ...others,
+        prefixCls: inputPrefixCls,
+      },
+      attrs: this.$attrs,
+    }
     return (
       <Input
-        onKeyup={this.onSearch}
-        {...others}
+        {...inputProps}
+        onPressEnter={this.onSearch}
         class={prefixCls}
-        prefixCls={inputPrefixCls}
         ref='input'
       >
         <Icon

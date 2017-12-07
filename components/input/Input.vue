@@ -1,6 +1,6 @@
 <script>
-// import TextArea from './TextArea';
-
+import TextArea from './TextArea'
+import omit from 'omit.js'
 import inputProps from './inputProps'
 
 function fixControlledValue (value) {
@@ -35,7 +35,7 @@ export default {
   methods: {
     handleKeyDown (e) {
       if (e.keyCode === 13) {
-        this.$emit('press-enter', e)
+        this.$emit('pressEnter', e)
       }
       this.$emit('keydown', e)
     },
@@ -146,17 +146,16 @@ export default {
     },
 
     renderInput () {
-      const { placeholder, type, readOnly = false, name, id, disabled = false } = this.$props
+      const otherProps = omit(this.$props, [
+        'prefixCls',
+      ])
       const { stateValue, getInputClassName, handleKeyDown, handleChange } = this
+      const attrs = {
+        attrs: { ...otherProps, ...this.$attrs, value: stateValue },
+      }
       return this.renderLabeledIcon(
         <input
-          value={stateValue}
-          type={type}
-          readOnly={readOnly}
-          placeholder={placeholder}
-          name={name}
-          id={id}
-          disabled={disabled}
+          {...attrs}
           class={getInputClassName()}
           onKeydown={handleKeyDown}
           onInput={handleChange}
@@ -166,6 +165,22 @@ export default {
     },
   },
   render () {
+    if (this.$props.type === 'textarea') {
+      const self = this
+      const textareaProps = {
+        props: this.$props,
+        attrs: this.$attrs,
+        on: {
+          change (e) {
+            self.handleChange(e)
+          },
+          keydown (e) {
+            self.handleKeyDown(e)
+          },
+        },
+      }
+      return <TextArea {...textareaProps} ref='input' />
+    }
     return this.renderLabeledInput(this.renderInput())
   },
 }

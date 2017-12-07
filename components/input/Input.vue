@@ -1,5 +1,4 @@
 <script>
-import omit from 'omit.js'
 // import TextArea from './TextArea';
 
 import inputProps from './inputProps'
@@ -11,12 +10,14 @@ function fixControlledValue (value) {
   return value
 }
 
-let inputKey = 1
-
 export default {
   name: 'Input',
   props: {
     ...inputProps,
+  },
+  model: {
+    prop: 'value',
+    event: 'change.value',
   },
   data () {
     const { value, defaultValue } = this.$props
@@ -44,8 +45,8 @@ export default {
         this.stateValue = e.target.value
       } else {
         this.$forceUpdate()
-        this.$emit('input', e)
-        this.$emit('change', e.target.value)
+        this.$emit('change.value', e.target.value)
+        this.$emit('change', e)
       }
     },
 
@@ -143,19 +144,10 @@ export default {
         </span>
       )
     },
-    getInputKey () {
-      const { value } = this
-      // 模拟受控组件
-      if (value !== undefined) {
-        return inputKey++
-      } else {
-        return inputKey
-      }
-    },
 
     renderInput () {
       const { placeholder, type, readOnly = false, name, id, disabled = false } = this.$props
-      const { getInputKey, stateValue, getInputClassName, handleKeyDown, handleChange } = this
+      const { stateValue, getInputClassName, handleKeyDown, handleChange } = this
       return this.renderLabeledIcon(
         <input
           value={stateValue}
@@ -169,7 +161,6 @@ export default {
           onKeydown={handleKeyDown}
           onInput={handleChange}
           ref='input'
-          key={getInputKey()}
         />,
       )
     },

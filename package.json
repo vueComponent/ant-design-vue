@@ -75,8 +75,10 @@
   },
   "dependencies": {
     "add-dom-event-listener": "^1.0.2",
+    "css-animation": "^1.4.1",
     "eslint-plugin-vue": "^3.13.0",
     "lodash.debounce": "^4.0.8",
-    "omit.js": "^1.0.0"
+    "omit.js": "^1.0.0",
+    "warning": "^3.0.0"
   }
 }

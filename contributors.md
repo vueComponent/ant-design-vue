@@ -1,6 +1,6 @@
 ##唐
-组件    |进度
---------|----
+组件    |进度| 备注
+--------|----|----
 Button  |  done
 Icon  |  done
 Checkbox  |  done
@@ -9,7 +9,7 @@ Tabs | done
 Tag | done
 Carousel
 Mention
-Input
+Input | done |select完成后补全demo
 InputNumber
 AutoComplete
 Select

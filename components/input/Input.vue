@@ -151,11 +151,12 @@ export default {
       ])
       const { stateValue, getInputClassName, handleKeyDown, handleChange } = this
       const attrs = {
-        attrs: { ...otherProps, ...this.$attrs, value: stateValue },
+        attrs: { ...otherProps, ...this.$attrs },
       }
       return this.renderLabeledIcon(
         <input
           {...attrs}
+          value={stateValue}
           class={getInputClassName()}
           onKeydown={handleKeyDown}
           onInput={handleChange}

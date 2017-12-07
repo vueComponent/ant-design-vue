@@ -13,7 +13,7 @@
       {{pane.content}}
     </TabPane>
   </Tabs>
-      </div>
+</div>
 
 </template>
 <script>

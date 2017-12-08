@@ -22,6 +22,8 @@ function activeKeyIsValid (t, key) {
   })
   return key !== undefined && keys.indexOf(key) >= 0
 }
+function noop () {
+}
 export default {
   name: 'Tabs',
   components: { Icon },
@@ -50,8 +52,8 @@ export default {
         return ['line', 'card', 'editable-card'].includes(value)
       },
     },
-    onChange: { type: Function, default: () => {} },
-    onTabClick: { type: Function, default: () => {} },
+    onChange: { type: Function, default: noop },
+    onTabClick: { type: Function, default: noop },
   },
   data () {
     return {

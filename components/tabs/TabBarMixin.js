@@ -1,4 +1,6 @@
 import Icon from '../icon'
+function noop () {
+}
 export default {
   props: {
     prefixCls: {
@@ -11,11 +13,11 @@ export default {
     },
     disabled: Boolean,
     onKeyDown: {
-      default: () => {},
+      default: noop,
       type: Function,
     },
     onTabClick: {
-      default: () => {},
+      default: noop,
       type: Function,
     },
     activeKey: String,
@@ -23,11 +25,11 @@ export default {
     extraContent: [String, Number, Function],
     hideAdd: Boolean,
     removeTab: {
-      default: () => {},
+      default: noop,
       type: Function,
     },
     createNewTab: {
-      default: () => {},
+      default: noop,
       type: Function,
     },
   },

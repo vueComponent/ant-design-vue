@@ -5,19 +5,19 @@ import TabContent from './TabContent'
 import ScrollableInkTabBar from './ScrollableInkTabBar'
 function getDefaultActiveKey (t) {
   let activeKey
-  t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}}) => {
+  t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {
     const child = componentOptions.propsData
     if (child && !activeKey && !child.disabled) {
-      activeKey = child.tabKey
+      activeKey = tabKey
     }
   })
   return activeKey
 }
 function activeKeyIsValid (t, key) {
-  const keys = t.$slots.default && t.$slots.default.map(({ componentOptions = {}}) => {
+  const keys = t.$slots.default && t.$slots.default.map(({ componentOptions = {}, key: tabKey }) => {
     const child = componentOptions.propsData
     if (child) {
-      return child.tabKey
+      return tabKey
     }
   })
   return key !== undefined && keys.indexOf(key) >= 0
@@ -118,18 +118,19 @@ export default {
     getNextActiveKey (next) {
       const activeKey = this.stateActiveKey
       const children = []
-      this.$slots.default && this.$slots.default.forEach(({ componentOptions = {}}) => {
+      this.$slots.default && this.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {
         const c = componentOptions.propsData
+
         if (c && !c.disabled && c.disabled !== '') {
           if (next) {
-            children.push(c)
+            children.push({ ...c, tabKey })
           } else {
-            children.unshift(c)
+            children.unshift({ ...c, tabKey })
           }
         }
       })
       const length = children.length
-      let ret = length && children[0].key
+      let ret = length && children[0].tabKey
       children.forEach((child, i) => {
         if (child.tabKey === activeKey) {
           if (i === length - 1) {
@@ -158,8 +159,15 @@ export default {
     } = this
     const panels = []
 
-    $slots.default && $slots.default.forEach(tab => {
-      tab.componentOptions && panels.push(tab.componentOptions.propsData)
+    $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
+      if (componentOptions) {
+        if (componentOptions.propsData.tab === undefined) {
+          componentOptions.propsData.tab = $slots[`tab_${tabKey}`]
+            ? h => h('span', [$slots[`tab_${tabKey}`]])
+            : null
+        }
+        panels.push({ ...componentOptions.propsData, tabKey })
+      }
     })
     const tabContentProps = {
       props: {

@@ -1,5 +1,4 @@
 export function toArray (children) {
-  // allow [c,[a,b]]
   const c = []
   children.forEach(child => {
     if (child.data) {
@@ -12,8 +11,7 @@ export function toArray (children) {
 export function getActiveIndex (children, activeKey) {
   const c = toArray(children)
   for (let i = 0; i < c.length; i++) {
-    const tabKey = c[i].tabKey || c[i].componentOptions.propsData.tabKey
-    if (tabKey === activeKey) {
+    if (c[i].key === activeKey) {
       return i
     }
   }
@@ -22,7 +20,7 @@ export function getActiveIndex (children, activeKey) {
 
 export function getActiveKey (children, index) {
   const c = toArray(children)
-  return c[index].tabKey
+  return c[index].key
 }
 
 export function setTransform (style, v) {

@@ -4,7 +4,7 @@
     type="editable-card"
     @edit="onEdit"
   >
-    <TabPane v-for="pane in panes" :tab="pane.title" :key="pane.key" :tabKey="pane.key" :closable="pane.closable">
+    <TabPane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">
       {{pane.content}}
     </TabPane>
   </Tabs>

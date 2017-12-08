@@ -101,8 +101,15 @@ export default {
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
     }
-    tabBarExtraContent = tabBarExtraContent || ((h) => {
-      return h('span', [$slots.tabBarExtraContent])
+    tabBarExtraContent = tabBarExtraContent === undefined && $slots.tabBarExtraContent
+      ? h => h('span', [$slots.tabBarExtraContent])
+      : tabBarExtraContent
+    $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
+      if (componentOptions && componentOptions.propsData.tab === undefined) {
+        componentOptions.propsData.tab = $slots[`tab_${tabKey}`]
+          ? h => h('span', [$slots[`tab_${tabKey}`]])
+          : null
+      }
     })
     const tabBarProps = {
       inkBarAnimated,

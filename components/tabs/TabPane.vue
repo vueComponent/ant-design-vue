@@ -12,7 +12,6 @@
 export default {
   name: 'TabPane',
   props: {
-    tabKey: [String, Number],
     tab: [String, Number, Function],
     disabled: Boolean,
     closable: Boolean,
@@ -34,7 +33,7 @@ export default {
     },
     active () {
       const { activeKey } = this.$parent
-      return activeKey === this.tabKey
+      return activeKey === this.$vnode.key
     },
     isRender () {
       const {

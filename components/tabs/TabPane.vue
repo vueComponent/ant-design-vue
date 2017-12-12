@@ -12,7 +12,7 @@
 export default {
   name: 'TabPane',
   props: {
-    tab: [String, Number, Function],
+    tab: [String, Number, Function, Array],
     disabled: Boolean,
     closable: Boolean,
     forceRender: Boolean,

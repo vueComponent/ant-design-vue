@@ -91,7 +91,7 @@ export default {
       const {
         prefixCls, onKeyDown, tabBarPosition, hideAdd,
       } = this
-      let extraContent = this.extraContent
+      let extraContent = this.$slots.extraContent
       const tabsType = this.$parent.type
       const cls = {
         [`${prefixCls}-bar`]: true,
@@ -99,8 +99,6 @@ export default {
       const topOrBottom = (tabBarPosition === 'top' || tabBarPosition === 'bottom')
       const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {}
       let children = contents
-      extraContent = typeof extraContent === 'function' ? extraContent(createElement) : extraContent
-      extraContent = extraContent || this.$slots.extraContent
       if (tabsType === 'editable-card' && !hideAdd) {
         extraContent = (
           <span>

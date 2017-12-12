@@ -102,18 +102,18 @@ export default {
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
     }
     tabBarExtraContent = tabBarExtraContent === undefined && $slots.tabBarExtraContent
-      ? h => h('span', [$slots.tabBarExtraContent])
-      : tabBarExtraContent
+      ? $slots.tabBarExtraContent : tabBarExtraContent
+    tabBarExtraContent = typeof tabBarExtraContent === 'function'
+      ? tabBarExtraContent(createElement) : tabBarExtraContent
     $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
       if (componentOptions && componentOptions.propsData.tab === undefined) {
         componentOptions.propsData.tab = $slots[`tab_${tabKey}`]
-          ? h => h('span', [$slots[`tab_${tabKey}`]])
+          ? $slots[`tab_${tabKey}`]
           : null
       }
     })
     const tabBarProps = {
       inkBarAnimated,
-      extraContent: tabBarExtraContent,
       onTabClick,
       onPrevClick,
       onNextClick,
@@ -152,6 +152,9 @@ export default {
         {...tabsProps}
       >
         {this.$slots.default}
+        {tabBarExtraContent ? <template slot='tabBarExtraContent'>
+          {tabBarExtraContent}
+        </template> : null}
       </Tabs>
     )
   },

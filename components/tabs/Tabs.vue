@@ -163,7 +163,7 @@ export default {
       if (componentOptions) {
         if (componentOptions.propsData.tab === undefined) {
           componentOptions.propsData.tab = $slots[`tab_${tabKey}`]
-            ? h => h('span', [$slots[`tab_${tabKey}`]])
+            ? $slots[`tab_${tabKey}`]
             : null
         }
         panels.push({ ...componentOptions.propsData, tabKey })
@@ -195,9 +195,9 @@ export default {
     }
     const contents = [
       <ScrollableInkTabBar {...tabBarProps}>
-        {$slots.tabBarExtraContent ? <span slot='extraContent'>
+        {$slots.tabBarExtraContent ? <template slot='extraContent'>
           {$slots.tabBarExtraContent}
-        </span> : null}
+        </template> : null}
       </ScrollableInkTabBar>,
       <TabContent {...tabContentProps}>
         {$slots.default}

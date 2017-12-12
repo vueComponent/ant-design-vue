@@ -22,7 +22,6 @@ export default {
     },
     activeKey: String,
     panels: Array,
-    extraContent: [String, Number, Function],
     hideAdd: Boolean,
     removeTab: {
       default: noop,

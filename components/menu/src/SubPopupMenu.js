@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from 'vue-types'
 import createReactClass from 'create-react-class'
 import Animate from 'rc-animate'
 import MenuMixin from './MenuMixin'

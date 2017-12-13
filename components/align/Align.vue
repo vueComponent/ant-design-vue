@@ -3,6 +3,7 @@ import PropTypes from 'vue-types'
 import align from 'dom-align'
 import addEventListener from '../_util/Dom/addEventListener'
 import cloneElement from '../_util/cloneElement'
+import isWindow from './isWindow'
 function noop () {
 }
 
@@ -35,7 +36,39 @@ export default {
     monitorWindowResize: PropTypes.bool.def(false),
     disabled: PropTypes.bool.def(false),
   },
+  watch: {
+    '$props': {
+      handler: function (props, prevProps) {
+        this.$nextTick(() => {
+          let reAlign = false
+          if (!props.disabled) {
+            if (prevProps.disabled || prevProps.align !== props.align) {
+              reAlign = true
+            } else {
+              const lastTarget = prevProps.target()
+              const currentTarget = props.target()
+              if (isWindow(lastTarget) && isWindow(currentTarget)) {
+                reAlign = false
+              } else if (lastTarget !== currentTarget) {
+                reAlign = true
+              }
+            }
+          }
 
+          if (reAlign) {
+            this.forceAlign()
+          }
+
+          if (props.monitorWindowResize && !props.disabled) {
+            this.startMonitorWindowResize()
+          } else {
+            this.stopMonitorWindowResize()
+          }
+        })
+      },
+      deep: true,
+    },
+  },
   mounted () {
     const props = this.$props
     // if parent ref not attached .... use document.getElementById
@@ -44,20 +77,7 @@ export default {
       this.startMonitorWindowResize()
     }
   },
-
-  updated () {
-    const props = this.$props
-
-    this.forceAlign()
-
-    if (props.monitorWindowResize && !props.disabled) {
-      this.startMonitorWindowResize()
-    } else {
-      this.stopMonitorWindowResize()
-    }
-  },
-
-  beforeDestory () {
+  beforeDestroy () {
     this.stopMonitorWindowResize()
   },
   methods: {
@@ -86,6 +106,7 @@ export default {
   },
 
   render () {
+    console.log(4)
     const { childrenProps } = this.$props
     const child = this.$slots.default[0]
     if (childrenProps) {

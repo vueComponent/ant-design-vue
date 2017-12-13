@@ -27,7 +27,14 @@
     <span v-if="hoverValueAH">{{hoverValueAH}}stars</span>
     </br>
     自定义
-    <Rate :value="initValue" :allowHalf="allowHalf" :character="character"></Rate>
+    </br>
+    <Rate v-model="initValue" :allowHalf="allowHalf">
+      <Icon type="heart" />
+    </Rate>
+    </br>
+    <Rate :value="initValue" :allowHalf="allowHalf" character="A"></Rate>
+    </br>
+    <Rate :value="initValue"  character="好"></Rate>
   </div>
 </template>
 <script>

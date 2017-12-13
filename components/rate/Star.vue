@@ -1,13 +1,6 @@
-<template>
-  <li
-    :class="getClassName"
-    @click="onClick"
-    @mousemove="onHover">
-    <div :class="`${prefixCls}-first`"><slot></slot></div>
-    <div :class="`${prefixCls}-second`"><slot></slot></div>
-  </li>
-</template>
 <script>
+import { deepClone } from './util'
+
 export default {
   name: 'Star',
   props: {
@@ -36,6 +29,32 @@ export default {
       if (this.disabled) return
       this.$emit('hover', e, this.index)
     },
+  },
+  render (createElement) {
+    return createElement('li', {
+      attrs: {
+        class: this.getClassName,
+      },
+      on: {
+        'click': this.onClick,
+        'mousemove': this.onHover,
+      },
+    }, [
+      createElement('div', {
+        attrs: {
+          class: `${this.prefixCls}-first`,
+        },
+      }, [
+        ...this.$slots.default,
+      ]),
+      createElement('div', {
+        attrs: {
+          class: `${this.prefixCls}-second`,
+        },
+      }, [
+        ...deepClone(this.$slots.default, createElement),
+      ]),
+    ])
   },
 }
 </script>

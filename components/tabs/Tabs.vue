@@ -177,7 +177,6 @@ export default {
         activeKey: stateActiveKey,
         destroyInactiveTabPane,
         onChange: setActiveKey,
-        key: 'tabContent',
       },
     }
     const tabBarProps = {
@@ -189,17 +188,22 @@ export default {
         tabBarPosition: tabBarPosition,
         onTabClick: handleTabClick,
         activeKey: stateActiveKey,
-        key: 'tabBar',
       },
       style: this.tabBarProps.style || {},
     }
     const contents = [
-      <ScrollableInkTabBar {...tabBarProps}>
+      <ScrollableInkTabBar
+        {...tabBarProps}
+        key='tabBar'
+      >
         {$slots.tabBarExtraContent ? <template slot='extraContent'>
           {$slots.tabBarExtraContent}
         </template> : null}
       </ScrollableInkTabBar>,
-      <TabContent {...tabContentProps}>
+      <TabContent
+        {...tabContentProps}
+        key='tabContent'
+      >
         {$slots.default}
       </TabContent>,
     ]

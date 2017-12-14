@@ -1,5 +1,5 @@
 <script>
-import { deepClone } from './util'
+import { cloneVNodes } from '../_util/vnode'
 
 export default {
   name: 'Star',
@@ -41,7 +41,7 @@ export default {
           {this.$slots.default}
         </div>
         <div class={`${this.prefixCls}-second`}>
-          {deepClone(this.$slots.default, createElement)}
+          {cloneVNodes(this.$slots.default, true)}
         </div>
       </li>
     )

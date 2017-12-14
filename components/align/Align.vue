@@ -2,7 +2,7 @@
 import PropTypes from 'vue-types'
 import align from 'dom-align'
 import addEventListener from '../_util/Dom/addEventListener'
-import cloneElement from '../_util/cloneElement'
+import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
 function noop () {
 }
@@ -106,7 +106,6 @@ export default {
   },
 
   render () {
-    console.log(4)
     const { childrenProps } = this.$props
     const child = this.$slots.default[0]
     if (childrenProps) {
@@ -116,7 +115,7 @@ export default {
           newProps[prop] = this.props[childrenProps[prop]]
         }
       }
-      return cloneElement(child, newProps)
+      return cloneElement(child, { props: newProps })
     }
     return child
   },

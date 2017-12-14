@@ -2,6 +2,7 @@
 import Star from './Star.vue'
 import Icon from '../icon'
 import { getOffsetLeft, deepClone } from './util'
+import { cloneVNodes } from '../_util/vnode'
 
 export default {
   name: 'Rate',
@@ -116,7 +117,7 @@ export default {
                 onClick={this.onClick}
                 onHover={this.onHover}
                 key={i}>
-                {(this.hasDefaultSlot) ? (deepClone(this.$slots.default, createElement)) : this.character}
+                {(this.hasDefaultSlot) ? (cloneVNodes(this.$slots.default, true)) : this.character}
               </Star>
             )
           })

@@ -31,30 +31,20 @@ export default {
     },
   },
   render (createElement) {
-    return createElement('li', {
-      attrs: {
-        class: this.getClassName,
-      },
-      on: {
-        'click': this.onClick,
-        'mousemove': this.onHover,
-      },
-    }, [
-      createElement('div', {
-        attrs: {
-          class: `${this.prefixCls}-first`,
-        },
-      }, [
-        ...this.$slots.default,
-      ]),
-      createElement('div', {
-        attrs: {
-          class: `${this.prefixCls}-second`,
-        },
-      }, [
-        ...deepClone(this.$slots.default, createElement),
-      ]),
-    ])
+    return (
+      <li
+        class={this.getClassName}
+        onClick={this.onClick}
+        onMousemove={this.onHover}
+      >
+        <div class={`${this.prefixCls}-first`}>
+          {this.$slots.default}
+        </div>
+        <div class={`${this.prefixCls}-second`}>
+          {deepClone(this.$slots.default, createElement)}
+        </div>
+      </li>
+    )
   },
 }
 </script>

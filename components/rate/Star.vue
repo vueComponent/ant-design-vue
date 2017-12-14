@@ -31,16 +31,17 @@ export default {
     },
   },
   render (createElement) {
+    const { getClassName, onClick, onHover, prefixCls } = this
     return (
       <li
-        class={this.getClassName}
-        onClick={this.onClick}
-        onMousemove={this.onHover}
+        class={getClassName}
+        onClick={onClick}
+        onMousemove={onHover}
       >
-        <div class={`${this.prefixCls}-first`}>
+        <div class={`${prefixCls}-first`}>
           {this.$slots.default}
         </div>
-        <div class={`${this.prefixCls}-second`}>
+        <div class={`${prefixCls}-second`}>
           {deepClone(this.$slots.default, createElement)}
         </div>
       </li>

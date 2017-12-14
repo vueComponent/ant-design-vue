@@ -99,24 +99,29 @@ export default {
     Icon,
   },
   render (createElement) {
+    const {
+      classes, onMouseLeave, onClick, countList, onHover,
+      disabled, prefixCls, allowHalf, hoverValue,
+      stateValue, character, hasDefaultSlot,
+    } = this
     return (
       <ul
-        class={this.classes}
-        onMouseleave={this.onMouseLeave}>
+        class={classes}
+        onMouseleave={onMouseLeave}>
         {
-          this.countList.map((item, i) => {
+          countList.map((item, i) => {
             return (
               <Star
                 ref={'stars' + i}
                 index={i}
-                disabled={this.disabled}
-                prefixCls={`${this.prefixCls}-star`}
-                allowHalf={this.allowHalf}
-                value={this.hoverValue === undefined ? this.stateValue : this.hoverValue}
-                onClick={this.onClick}
-                onHover={this.onHover}
+                disabled={disabled}
+                prefixCls={`${prefixCls}-star`}
+                allowHalf={allowHalf}
+                value={hoverValue === undefined ? stateValue : hoverValue}
+                onClick={onClick}
+                onHover={onHover}
                 key={i}>
-                {(this.hasDefaultSlot) ? (deepClone(this.$slots.default, createElement)) : this.character}
+                {(hasDefaultSlot) ? (deepClone(this.$slots.default, createElement)) : character}
               </Star>
             )
           })

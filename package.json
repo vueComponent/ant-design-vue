@@ -57,6 +57,7 @@
     "karma-webpack": "^2.0.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
+    "marked": "^0.3.7",
     "mocha": "^3.2.0",
     "pre-commit": "^1.2.2",
     "selenium-server": "^3.0.1",

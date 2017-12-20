@@ -1,12 +1,3 @@
-<template>
-  <li
-    :class="classes"
-    @click="handleClick"
-    @keyPress="handleKeyPress"
-    :title="showTitle ? 'page' : null">
-    <a>{{page}}</a>
-  </li>
-</template>
 <script>
 export default {
   name: 'Page',
@@ -15,6 +6,10 @@ export default {
     page: Number,
     active: Boolean,
     showTitle: Boolean,
+    itemRender: {
+      type: Function,
+      default: () => {},
+    },
   },
   computed: {
     classes () {
@@ -36,6 +31,17 @@ export default {
     handleKeyPress (event) {
       this.$emit('keyPress', event, this.handleClick, this.page)
     },
+  },
+  render () {
+    return (
+      <li
+        class={this.classes}
+        onClick={this.handleClick}
+        onKeypress={this.handleKeyPress}
+        title={this.showTitle ? this.page : null}>
+        {this.itemRender(this.page, 'page', <a>{this.page}</a>)}
+      </li>
+    )
   },
 }
 </script>

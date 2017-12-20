@@ -1,7 +1,7 @@
 <script>
 import Star from './Star.vue'
 import Icon from '../icon'
-import { getOffsetLeft, deepClone } from './util'
+import { getOffsetLeft } from './util'
 import { cloneVNodes } from '../_util/vnode'
 
 export default {

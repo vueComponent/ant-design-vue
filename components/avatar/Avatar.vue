@@ -40,6 +40,7 @@ export default {
     return {
       isExistSlot: false,
       scale: 1,
+      childrenWidth: 0,
     }
   },
   computed: {
@@ -55,16 +56,16 @@ export default {
       }
     },
     childrenStyle () {
-      const children = this.$refs.avatorChildren
       let style = {}
-      if (this.isExistSlot) {
+      const { scale, isExistSlot, childrenWidth } = this
+      if (isExistSlot) {
         style = {
-          msTransform: `scale(${this.scale})`,
-          WebkitTransform: `scale(${this.scale})`,
-          transform: `scale(${this.scale})`,
+          msTransform: `scale(${scale})`,
+          WebkitTransform: `scale(${scale})`,
+          transform: `scale(${scale})`,
           position: 'absolute',
-          // display: 'inline-block',
-          left: `calc(50% - ${Math.round(children.offsetWidth / 2)}px)`,
+          display: 'inline-block',
+          left: `calc(50% - ${Math.round(childrenWidth / 2)}px)`,
         }
       }
       return style
@@ -76,10 +77,10 @@ export default {
       const children = $refs.avatorChildren
       this.isExistSlot = !src && !icon
       if (children) {
-        const childrenWidth = children.offsetWidth
+        this.childrenWidth = children.offsetWidth
         const avatarWidth = $el.getBoundingClientRect().width
-        if (avatarWidth - 8 < childrenWidth) {
-          this.scale = (avatarWidth - 8) / childrenWidth
+        if (avatarWidth - 8 < this.childrenWidth) {
+          this.scale = (avatarWidth - 8) / this.childrenWidth
         } else {
           this.scale = 1
         }

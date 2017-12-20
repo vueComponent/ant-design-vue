@@ -22,7 +22,7 @@
     </div>
     <br/>
     <div>
-      <avatar shape="square" size="large">{{avatarValue}}</avatar>
+      <avatar shape="square" size="large" :styles="{'backgroundColor': color}">{{avatarValue}}</avatar>
       <AntButton @click="changeValue">改变</AntButton>
     </div>
     <br/>
@@ -36,15 +36,21 @@
 <script>
 import '../style'
 import { Avatar, Button, Badge } from 'antd/index'
+
+const UserList = ['U', 'Lucy', 'Tom', 'Edward']
+const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae']
 export default {
   data () {
     return {
-      avatarValue: 'current',
+      avatarValue: UserList[0],
+      color: colorList[0],
     }
   },
   methods: {
     changeValue () {
-      this.avatarValue = 'changed'
+      const index = UserList.indexOf(this.avatarValue)
+      this.avatarValue = index < UserList.length - 1 ? UserList[index + 1] : UserList[0]
+      this.color = index < colorList.length - 1 ? colorList[index + 1] : colorList[0]
     },
   },
   components: {

@@ -1,8 +1,20 @@
 <script>
 import Button from '../button/index'
 import Pager from './Pager'
+import Options from './Options'
 import locale from './locale/zh_CN'
 import KEYCODE from './KeyCode'
+
+// 是否是正整数
+function isInteger (value) {
+  return typeof value === 'number' &&
+    isFinite(value) &&
+    Math.floor(value) === value
+}
+
+function defaultItemRender (page, type, element) {
+  return element
+}
 
 export default {
   name: 'Pagination',
@@ -12,15 +24,15 @@ export default {
       default: 'ant-pagination',
     },
     current: {
-      type: Number,
+      type: [Number, String],
       default: 1,
     },
     total: {
-      type: Number,
+      type: [Number, String],
       default: 0,
     },
     pageSize: {
-      type: Number,
+      type: [Number, String],
       default: 10,
     },
     showSizeChanger: {
@@ -45,6 +57,10 @@ export default {
       default: true,
     },
     showTotal: Function,
+    itemRender: {
+      type: Function,
+      default: defaultItemRender,
+    },
   },
   model: {
     prop: 'current',
@@ -52,17 +68,12 @@ export default {
   data () {
     const { current } = this
     return {
-      stateCurrent: current,
+      stateCurrent: +current,
     }
   },
   methods: {
-    isInteger (value) {
-      return typeof value === 'number' &&
-        isFinite(value) &&
-        Math.floor(value) === value
-    },
     isValid (page) {
-      return this.isInteger(page) && page >= 1 && page !== this.stateCurrent
+      return isInteger(page) && page >= 1 && page !== this.stateCurrent
     },
     calculatePage (p) {
       let pageSize = p
@@ -165,7 +176,7 @@ export default {
   },
   watch: {
     current (val) {
-      this.stateCurrent = val
+      this.stateCurrent = +val
     },
   },
   components: {
@@ -185,6 +196,9 @@ export default {
     const goButton = this.showQuickJumper
     const pageBufferSize = this.showLessItems ? 1 : 2
     const { stateCurrent, pageSize } = this
+    const smallClass = this.size === 'small' ? 'mini' : ''
+    const prevPage = stateCurrent - 1 > 0 ? stateCurrent - 1 : 0
+    const nextPage = stateCurrent + 1 < allPages ? stateCurrent + 1 : allPages
 
     if (this.simple) {
       if (goButton) {
@@ -207,7 +221,7 @@ export default {
         }
       }
       return (
-        <ul class={`${prefixCls} ${prefixCls}-simple`}>
+        <ul class={`${prefixCls} ${prefixCls}-simple ${smallClass}`}>
           <li
             title={this.showTitle ? locale.prev_page : null}
             onClick={this.prev}
@@ -216,7 +230,7 @@ export default {
             class={`${this.hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
-            <a class={`${prefixCls}-item-link`} />
+            {this.itemRender(prevPage, 'prev', <a class={`${prefixCls}-item-link`} />)}
           </li>
           <li
             title={this.showTitle ? `${stateCurrent}/${allPages}` : null}
@@ -241,7 +255,7 @@ export default {
             class={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            <a class={`${prefixCls}-item-link`} />
+            {this.itemRender(nextPage, 'next', <a class={`${prefixCls}-item-link`} />)}
           </li>
           {gotoButton}
         </ul>
@@ -260,6 +274,7 @@ export default {
             page={i}
             active={active}
             showTitle={this.showTitle}
+            itemRender={this.itemRender}
           />
         )
       }
@@ -275,7 +290,9 @@ export default {
           onKeypress={this.runIfEnterJumpPrev}
           class={`${prefixCls}-jump-prev`}
         >
-          <a class={`${prefixCls}-item-link`} />
+          {this.itemRender(
+            this.getJumpPrevPage(), 'jump-prev', <a class={`${prefixCls}-item-link`} />
+          )}
         </li>
       )
       jumpNext = (
@@ -287,7 +304,9 @@ export default {
           onKeypress={this.runIfEnterJumpNext}
           class={`${prefixCls}-jump-next`}
         >
-          <a class={`${prefixCls}-item-link`} />
+          {this.itemRender(
+            this.getJumpNextPage(), 'jump-next', <a class={`${prefixCls}-item-link`} />
+          )}
         </li>
       )
       lastPager = (
@@ -299,6 +318,7 @@ export default {
           page={allPages}
           active={false}
           showTitle={this.showTitle}
+          itemRender={this.itemRender}
         />
       )
       firstPager = (
@@ -310,6 +330,7 @@ export default {
           page={1}
           active={false}
           showTitle={this.showTitle}
+          itemRender={this.itemRender}
         />
       )
 
@@ -335,6 +356,7 @@ export default {
             page={i}
             active={active}
             showTitle={this.showTitle}
+            itemRender={this.itemRender}
           />
         )
       }
@@ -350,6 +372,7 @@ export default {
             className={`${prefixCls}-item-after-jump-prev`}
             active={false}
             showTitle={this.showTitle}
+            itemRender={this.itemRender}
           />
         )
         pagerList.unshift(jumpPrev)
@@ -365,6 +388,7 @@ export default {
             className={`${prefixCls}-item-before-jump-next`}
             active={false}
             showTitle={this.showTitle}
+            itemRender={this.itemRender}
           />
         )
         pagerList.push(jumpNext)
@@ -397,7 +421,7 @@ export default {
     const nextDisabled = !this.hasNext()
     return (
       <ul
-        class={`${prefixCls} ${this.className}`}
+        class={`${prefixCls} ${smallClass}`}
         unselectable='unselectable'
       >
         {totalText}
@@ -409,7 +433,7 @@ export default {
           class={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          <a class={`${prefixCls}-item-link`} />
+          {this.itemRender(prevPage, 'prev', <a class={`${prefixCls}-item-link`} />)}
         </li>
         {pagerList}
         <li
@@ -420,8 +444,20 @@ export default {
           class={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          <a class={`${prefixCls}-item-link`} />
+          {this.itemRender(nextPage, 'next', <a class={`${prefixCls}-item-link`} />)}
         </li>
+        <Options
+          locale={locale}
+          rootPrefixCls={prefixCls}
+          selectComponentClass={this.selectComponentClass}
+          selectPrefixCls={this.selectPrefixCls}
+          changeSize={this.showSizeChanger ? this.changePageSize : null}
+          current={stateCurrent}
+          pageSize={pageSize}
+          pageSizeOptions={this.pageSizeOptions}
+          quickGo={this.showQuickJumper ? this.handleChange : null}
+          goButton={goButton}
+        />
       </ul>
     )
   },

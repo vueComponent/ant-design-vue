@@ -1,5 +1,5 @@
 <script>
-import PropTypes from 'vue-types'
+import PropTypes from '../_util/vue-types'
 import Align from '../align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
@@ -12,10 +12,16 @@ export default {
     align: PropTypes.any,
     destroyPopupOnHide: PropTypes.bool,
     prefixCls: PropTypes.string,
+    getContainer: PropTypes.func,
   },
-
   mounted () {
     this.rootNode = this.getPopupDomNode()
+    this._container = this.getContainer()
+    this._container.appendChild(this.$el)
+  },
+  beforeDestroy () {
+    this._container && this._container.parentNode.removeChild(this._container)
+    this._container = null
   },
   methods: {
     onAlign (popupDomNode, align) {
@@ -75,7 +81,7 @@ export default {
       if (!visible) {
         this.currentAlignClassName = null
       }
-
+      // visible = true
       const popupInnerProps = {
         props: {
           prefixCls,
@@ -89,12 +95,10 @@ export default {
         ref: 'popupInstance',
         style: { ...this.getZIndexStyle() },
       }
+
       if (destroyPopupOnHide) {
-        return (<Animate
-          component=''
-          exclusive
-          transitionAppear
-          transitionName={this.getTransitionName()}
+        return (<transition
+          name={this.getTransitionName()}
         >
           {visible ? (<Align
             target={this.getTarget}
@@ -110,23 +114,18 @@ export default {
               {$slots.default}
             </PopupInner>
           </Align>) : null}
-        </Animate>)
+        </transition>)
       }
       popupInnerProps.props.hiddenClassName = hiddenClassName
-      return (<Animate
-        component=''
-        exclusive
-        transitionAppear
-        transitionName={this.getTransitionName()}
-        showProp='xVisible'
+      return (<transition
+        name={this.getTransitionName()}
       >
         <Align
           target={this.getTarget}
           key='popup'
           ref='alignInstance'
           monitorWindowResize
-          xVisible={visible}
-          childrenProps={{ visible: 'xVisible' }}
+          childrenProps={{ visible }}
           disabled={!visible}
           align={align}
           onAlign={this.onAlign}
@@ -137,7 +136,7 @@ export default {
             {$slots.default}
           </PopupInner>
         </Align>
-      </Animate>)
+      </transition>)
     },
 
     getZIndexStyle () {
@@ -165,15 +164,11 @@ export default {
         )
         if (maskTransition) {
           maskElement = (
-            <Animate
-              key='mask'
-              showProp='visible'
-              transitionAppear
-              component=''
-              transitionName={maskTransition}
+            <transition
+              name={maskTransition}
             >
               {maskElement}
-            </Animate>
+            </transition>
           )
         }
       }

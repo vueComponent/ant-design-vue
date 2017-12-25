@@ -7,7 +7,7 @@ export default {
     hiddenClassName: PropTypes.string,
   },
   render () {
-    const { hiddenClassName, visible } = this.props
+    const { hiddenClassName, visible } = this.$props
 
     if (hiddenClassName || this.$slots.default.length > 1) {
       let cls = ''

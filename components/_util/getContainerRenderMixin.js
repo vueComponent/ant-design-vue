@@ -1,3 +1,4 @@
+import Vue from 'vue'
 function defaultGetContainer () {
   const container = document.createElement('div')
   document.body.appendChild(container)
@@ -19,7 +20,7 @@ export default function getContainerRenderMixin (config) {
     mixin = {
       ...mixin,
       mounted () {
-        this.renderComponent()
+        // this.renderComponent()
       },
     }
   }
@@ -28,7 +29,7 @@ export default function getContainerRenderMixin (config) {
     mixin = {
       ...mixin,
       beforeDestroy () {
-        this.removeContainer()
+        // this.removeContainer()
       },
     }
   }
@@ -44,21 +45,29 @@ export default function getContainerRenderMixin (config) {
       },
       renderComponent (componentArg) {
         if (
-          !isVisible || isVisible(this) ||
+          !isVisible || this._component || isVisible(this) ||
             (isForceRender && isForceRender(this))
         ) {
           if (!this._container) {
             this._container = getContainer(this)
           }
-          this._container.appendChild(this.$el)
+          let component
+          if (this.getComponent) {
+            component = this.getComponent(componentArg)
+          } else {
+            component = getComponent(this, componentArg)
+          }
+          this._component = component
+          const vmC = document.createElement('div')
+          this._container.appendChild(vmC)
+
+          new Vue({
+            el: vmC,
+            render () {
+              return component
+            },
+          })
         }
-        let component
-        if (this.getComponent) {
-          component = this.getComponent(componentArg)
-        } else {
-          component = getComponent(this, componentArg)
-        }
-        this._component = component
       },
     },
   }

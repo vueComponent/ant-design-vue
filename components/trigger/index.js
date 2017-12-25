@@ -1,3 +1,3 @@
 // export this package's api
-import Trigger from './src/'
+import Trigger from './index.vue'
 export default Trigger

@@ -6,6 +6,7 @@ export default {
   props: {
     hiddenClassName: PropTypes.string.def(''),
     prefixCls: PropTypes.string,
+    visible: PropTypes.bool,
   },
   methods: {
     onMouseEnter (e) {

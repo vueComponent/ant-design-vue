@@ -1,6 +1,7 @@
 <script>
 import PropTypes from 'vue-types'
 import align from 'dom-align'
+import clonedeep from 'lodash.clonedeep'
 import addEventListener from '../_util/Dom/addEventListener'
 import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
@@ -38,7 +39,8 @@ export default {
   },
   watch: {
     '$props': {
-      handler: function (props, prevProps) {
+      handler: function (props) {
+        const prevProps = this.prevProps
         this.$nextTick(() => {
           let reAlign = false
           if (!props.disabled) {
@@ -106,16 +108,11 @@ export default {
   },
 
   render () {
+    this.prevProps = clonedeep(this.$props)
     const { childrenProps } = this.$props
     const child = this.$slots.default[0]
     if (childrenProps) {
-      const newProps = {}
-      for (const prop in childrenProps) {
-        if (childrenProps.hasOwnProperty(prop)) {
-          newProps[prop] = this.props[childrenProps[prop]]
-        }
-      }
-      return cloneElement(child, { props: newProps })
+      return cloneElement(child, { props: childrenProps })
     }
     return child
   },

@@ -30,15 +30,17 @@ export function cloneVNodes (vnodes, deep) {
 }
 
 export function cloneElement (node, nodeProps) {
-  const { props, key } = nodeProps
+  const { props, key, ref } = nodeProps
   if (node.componentOptions) {
     Object.assign(node.componentOptions.propsData, props)
   }
-  if (node.data) {
-    const data = node.data
-    const { style = data.style, class: cls = data.class, attrs = data.attrs } = nodeProps
-    Object.assign(node.data, { style, attrs, class: cls })
-  }
+  const data = node.data || {}
+  const { style = data.style,
+    class: cls = data.class,
+    attrs = data.attrs,
+    on = data.on,
+  } = nodeProps
+  Object.assign(node.data, { style, attrs, class: cls, on })
   if (key !== undefined) {
     node.key = key
   }

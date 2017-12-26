@@ -1,5 +1,5 @@
 <script>
-import PropTypes from 'vue-types'
+import PropTypes from '../_util/vue-types'
 import align from 'dom-align'
 import clonedeep from 'lodash.clonedeep'
 import addEventListener from '../_util/Dom/addEventListener'

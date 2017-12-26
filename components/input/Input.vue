@@ -43,6 +43,8 @@ export default {
       const { value } = this.$props
       if (value === undefined) {
         this.stateValue = e.target.value
+        this.$emit('change.value', e.target.value)
+        this.$emit('change', e)
       } else {
         this.$forceUpdate()
         this.$emit('change.value', e.target.value)

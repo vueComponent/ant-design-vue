@@ -13,11 +13,18 @@ export default {
     destroyPopupOnHide: PropTypes.bool,
     prefixCls: PropTypes.string,
     getContainer: PropTypes.func,
+    transitionName: PropTypes.string,
+    animation: PropTypes.any,
+    maskAnimation: PropTypes.string,
+    maskTransitionName: PropTypes.string,
+    mask: PropTypes.bool,
+    zIndex: PropTypes.number,
   },
   mounted () {
     this.rootNode = this.getPopupDomNode()
     this._container = this.getContainer()
-    this._container.appendChild(this.$el)
+    // this._container.appendChild(this.$el)
+    // this.$refs.alignInstance.forceAlign()
   },
   beforeDestroy () {
     this._container && this._container.parentNode.removeChild(this._container)
@@ -37,7 +44,7 @@ export default {
     },
 
     getPopupDomNode () {
-      return this.$refs.popupInstance
+      return this.$refs.popupInstance ? this.$refs.popupInstance.$el : null
     },
 
     getTarget () {
@@ -60,7 +67,7 @@ export default {
       if (!transitionName && props.animation) {
         transitionName = `${props.prefixCls}-${props.animation}`
       }
-      return transitionName
+      return 'fade'
     },
 
     getClassName (currentAlignClassName) {
@@ -116,16 +123,16 @@ export default {
           </Align>) : null}
         </transition>)
       }
-      popupInnerProps.props.hiddenClassName = hiddenClassName
+      popupInnerProps.props.hiddenClassName = 'hiddenClassName'
       return (<transition
         name={this.getTransitionName()}
       >
         <Align
+          v-show={visible}
           target={this.getTarget}
           key='popup'
           ref='alignInstance'
           monitorWindowResize
-          childrenProps={{ visible }}
           disabled={!visible}
           align={align}
           onAlign={this.onAlign}
@@ -181,9 +188,20 @@ export default {
       <div>
         {this.getMaskElement()}
         {this.getPopupElement()}
+        <transition name='fade'>
+          <div v-show={this.visible}>hello</div>
+        </transition>
       </div>
     )
   },
+  // render () {
+  //   return (
+  //     <transition name='fade'>
+  //       <div v-show={this.visible}>hello</div>
+  //     </transition>
+  //   )
+  // },
 }
 
 </script>
+

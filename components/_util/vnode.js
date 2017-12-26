@@ -1,12 +1,13 @@
+import clonedeep from 'lodash.clonedeep'
 export function cloneVNode (vnode, deep) {
   const cloned = new vnode.constructor(
     vnode.tag,
-    vnode.data,
+    clonedeep(vnode.data),
     vnode.children,
     vnode.text,
     vnode.elm,
     vnode.context,
-    vnode.componentOptions,
+    clonedeep(vnode.componentOptions),
     vnode.asyncFactory
   )
   cloned.ns = vnode.ns
@@ -30,7 +31,7 @@ export function cloneVNodes (vnodes, deep) {
 }
 
 export function cloneElement (node, nodeProps) {
-  const { props, key, ref } = nodeProps
+  const { props, key } = nodeProps
   if (node.componentOptions) {
     Object.assign(node.componentOptions.propsData, props)
   }
@@ -40,7 +41,7 @@ export function cloneElement (node, nodeProps) {
     attrs = data.attrs,
     on = data.on,
   } = nodeProps
-  Object.assign(node.data, { style, attrs, class: cls, on })
+  node.data = Object.assign(data, { style, attrs, class: cls, on })
   if (key !== undefined) {
     node.key = key
   }

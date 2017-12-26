@@ -39,7 +39,7 @@ export default {
     return (
       <div
         style={{
-          margin: 50,
+          margin: '50px',
         }}
       >
         <p>

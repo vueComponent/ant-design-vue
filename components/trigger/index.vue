@@ -2,11 +2,11 @@
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
 import addEventListener from '../_util/Dom/addEventListener'
+import warning from '../_util/warning'
 import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign } from './utils'
-import getContainerRenderMixin from '../_util/getContainerRenderMixin'
 import StateMixin from '../_util/StateMixin'
-import { cloneElement } from '../_util/vnode'
+import { cloneElement, cloneVNode } from '../_util/vnode'
 
 function returnEmptyString () {
   return ''
@@ -18,26 +18,6 @@ function returnDocument () {
 
 const ALL_HANDLERS = ['click', 'mousedown', 'touchStart', 'mouseenter',
   'mouseleave', 'focus', 'blur', 'contextMenu']
-
-const mixins = []
-
-mixins.push(
-  getContainerRenderMixin({
-    autoMount: false,
-
-    isVisible (instance) {
-      return instance.$data.sPopupVisible
-    },
-
-    isForceRender (instance) {
-      return instance.$props.forceRender
-    },
-
-    getContainer (instance) {
-      return instance.getContainer()
-    },
-  })
-)
 
 export default {
   name: 'Trigger',
@@ -65,7 +45,7 @@ export default {
     zIndex: PropTypes.number,
     focusDelay: PropTypes.number.def(0),
     blurDelay: PropTypes.number.def(0.15),
-    getPopupContainer: Function,
+    getPopupContainer: PropTypes.func,
     getDocument: PropTypes.func.def(returnDocument),
     forceRender: PropTypes.bool,
     destroyPopupOnHide: PropTypes.bool.def(false),
@@ -74,15 +54,15 @@ export default {
     // onPopupAlign: PropTypes.func,
     popupAlign: PropTypes.object.def({}),
     popupVisible: PropTypes.bool,
-    // defaultPopupVisible: PropTypes.bool.def(false),
-    // maskTransitionName: PropTypes.oneOfType([
-    //   PropTypes.string,
-    //   PropTypes.object,
-    // ]),
-    // maskAnimation: PropTypes.string,
+    defaultPopupVisible: PropTypes.bool.def(false),
+    maskTransitionName: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    maskAnimation: PropTypes.string,
   },
 
-  mixins: [StateMixin, ...mixins],
+  mixins: [StateMixin],
   data () {
     const props = this.$props
     let popupVisible
@@ -184,9 +164,9 @@ export default {
 
     onPopupMouseleave (e) {
       if (e.relatedTarget && !e.relatedTarget.setTimeout &&
-      this._component &&
-      this._component.getPopupDomNode &&
-      contains(this._component.getPopupDomNode(), e.relatedTarget)) {
+      this.$refs.popup &&
+      this.$refs.popup.getPopupDomNode &&
+      contains(this.$refs.popup.getPopupDomNode(), e.relatedTarget)) {
         return
       }
       this.delaySetPopupVisible(false, this.$props.mouseLeaveDelay)
@@ -271,8 +251,8 @@ export default {
     },
     getPopupDomNode () {
     // for test
-      if (this._component && this._component.getPopupDomNode) {
-        return this._component.getPopupDomNode()
+      if (this.$refs.popup && this.$refs.popup.getPopupDomNode) {
+        return this.$refs.popup.getPopupDomNode()
       }
       return null
     },
@@ -426,15 +406,17 @@ export default {
 
     createTwoChains (event) {
       const child = this.$slots.default[0]
-      let fn = () => {}
-      if (child && child.data && child.data.on) {
-        const childEvents = child.data.on
-        const events = (this.data ? this.data.on : {}) || {}
-        if (childEvents[event] && events[event]) {
-          return this[`fire${event}`]
-        }
-        fn = childEvents[event] || events[event] || fn
+      let fn = () => {
+        console.log('event', event)
       }
+      child.data = child.data || {}
+      child.data.on = child.data.on || {}
+      const childEvents = child.data.on
+      const events = (this.data ? this.data.on : {}) || {}
+      if (childEvents[event] && events[event]) {
+        return this[`fire${event}`]
+      }
+      fn = childEvents[event] || events[event] || fn
       return fn
     },
 
@@ -473,14 +455,15 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1
     },
     forcePopupAlign () {
-      if (this.$data.sPopupVisible && this._component && this._component.$refs.alignInstance) {
-        this._component.$refs.alignInstance.forceAlign()
+      if (this.$data.sPopupVisible && this.$refs.popup && this.$refs.popup.$refs.alignInstance) {
+        this.$refs.popup.$refs.alignInstance.forceAlign()
       }
     },
     fireEvents (type, e) {
       const child = this.$slots.default[0]
-      if (child && child.data && child.on && child.on[type]) {
-        child.on[type](e)
+      if (child && child.data && child.data.on && child.data.on[type]) {
+        console.log(type, child.data.on[type])
+        // child.data.on[type](e)
       }
       if (this.data && this.data.on && this.data.on[type]) {
         this.data.on[type](e)
@@ -493,6 +476,9 @@ export default {
   },
   render () {
     const children = this.$slots.default
+    if (children.length > 1) {
+      warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
+    }
     const child = children[0]
     const newChildProps = {
       props: {},
@@ -533,12 +519,17 @@ export default {
       newChildProps.on.blur = this.createTwoChains('blur')
     }
 
-    const trigger = cloneElement(child, newChildProps)
-
+    const trigger = cloneElement(cloneVNode(child), newChildProps)
+    const { sPopupVisible, forceRender } = this
+    if (sPopupVisible || forceRender || this._component) {
+      this._component = this.getComponent()
+    } else {
+      this._component = null
+    }
     return (
       <span>
         {trigger}
-        {this.getComponent()}
+        {this._component}
       </span>
     )
   },

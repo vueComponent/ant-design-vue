@@ -1,5 +1,5 @@
 <script>
-import PropTypes from 'vue-types'
+import PropTypes from '../_util/vue-types'
 
 export default {
   props: {

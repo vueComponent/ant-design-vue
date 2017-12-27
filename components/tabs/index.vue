@@ -1,6 +1,7 @@
 <script>
 import Tabs from './Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
+import hasProp from '../_util/hasProp'
 export default {
   props: {
     prefixCls: { type: String, default: 'ant-tabs' },
@@ -135,7 +136,6 @@ export default {
         tabBarProps: tabBarProps,
         tabContentProps: tabContentProps,
         destroyInactiveTabPane,
-        activeKey,
         defaultActiveKey,
         type,
         onTabClick: this.onTabClick,
@@ -145,6 +145,9 @@ export default {
           self.handleChange(val)
         },
       },
+    }
+    if (hasProp(this, 'activeKey')) {
+      tabsProps.props.activeKey = activeKey
     }
     return (
       <Tabs

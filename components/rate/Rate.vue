@@ -3,6 +3,7 @@ import Star from './Star.vue'
 import Icon from '../icon'
 import { getOffsetLeft } from './util'
 import { cloneVNodes } from '../_util/vnode'
+import hasProp from '../_util/hasProp'
 
 export default {
   name: 'Rate',
@@ -35,7 +36,7 @@ export default {
   },
   data () {
     const { value, defaultValue } = this
-    const reValue = value === undefined ? defaultValue : value
+    const reValue = !hasProp(this, 'value') ? defaultValue : value
     return {
       hoverValue: undefined,
       stateValue: reValue,
@@ -59,7 +60,10 @@ export default {
   methods: {
     onClick (event, index) {
       const value = this.getStarValue(index, event.pageX)
-      this.stateValue = value
+      if (!hasProp(this, 'value')) {
+        this.stateValue = value
+      }
+
       this.onMouseLeave()
       this.$emit('input', value)
       this.$emit('change', value)

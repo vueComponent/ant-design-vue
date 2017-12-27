@@ -2,6 +2,7 @@
 import TextArea from './TextArea'
 import omit from 'omit.js'
 import inputProps from './inputProps'
+import hasProp from '../_util/hasProp'
 
 function fixControlledValue (value) {
   if (typeof value === 'undefined' || value === null) {
@@ -22,7 +23,7 @@ export default {
   data () {
     const { value, defaultValue } = this.$props
     return {
-      stateValue: fixControlledValue(value === undefined ? defaultValue : value),
+      stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
     }
   },
   computed: {
@@ -40,8 +41,7 @@ export default {
       this.$emit('keydown', e)
     },
     handleChange (e) {
-      const { value } = this.$props
-      if (value === undefined) {
+      if (!hasProp(this, 'value')) {
         this.stateValue = e.target.value
       } else {
         this.$forceUpdate()

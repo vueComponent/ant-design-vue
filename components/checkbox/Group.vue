@@ -8,6 +8,7 @@
 </template>
 <script>
 import Checkbox from './Checkbox.vue'
+import hasProp from '../_util/hasProp'
 export default {
   name: 'CheckboxGroup',
   props: {
@@ -60,7 +61,7 @@ export default {
     handleChange (event) {
       const target = event.target
       const { value: targetValue, checked } = target
-      const { stateValue, value } = this
+      const { stateValue } = this
       let newVal = []
       if (checked) {
         newVal = [...stateValue, targetValue]
@@ -70,7 +71,7 @@ export default {
         index >= 0 && newVal.splice(index, 1)
       }
       newVal = [...new Set(newVal)]
-      if (value === undefined) {
+      if (!hasProp(this, 'value')) {
         this.stateValue = newVal
       }
       this.$emit('input', newVal)

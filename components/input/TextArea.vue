@@ -1,9 +1,8 @@
 <script>
 import omit from 'omit.js'
-
 import inputProps from './inputProps'
-
 import calculateNodeHeight from './calculateNodeHeight'
+import hasProp from '../_util/hasProp'
 
 function onNextFrame (cb) {
   if (window.requestAnimationFrame) {
@@ -39,7 +38,7 @@ export default {
   data () {
     const { value, defaultValue } = this.$props
     return {
-      stateValue: fixControlledValue(value === undefined ? defaultValue : value),
+      stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
       nextFrameActionId: undefined,
       textareaStyles: {},
     }
@@ -85,8 +84,7 @@ export default {
     },
 
     handleTextareaChange (e) {
-      const { value } = this.$props
-      if (value === undefined) {
+      if (!hasProp(this, 'value')) {
         this.stateValue = e.target.value
         this.$nextTick(() => {
           this.resizeTextarea()

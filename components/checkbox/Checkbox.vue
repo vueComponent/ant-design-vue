@@ -13,6 +13,7 @@
   </label>
 </template>
 <script>
+import hasProp from '../_util/hasProp'
 export default {
   name: 'Checkbox',
   props: {
@@ -42,7 +43,7 @@ export default {
     }
     return {
       stateChecked: stateChecked === undefined
-        ? checked === undefined ? defaultChecked : checked
+        ? !hasProp(this, 'checked') ? defaultChecked : checked
         : stateChecked,
     }
   },

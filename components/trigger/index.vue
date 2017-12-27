@@ -1,6 +1,7 @@
 <script>
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
+import hasProp from '../_util/hasProp'
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
@@ -22,7 +23,6 @@ const ALL_HANDLERS = ['click', 'mousedown', 'touchStart', 'mouseenter',
 export default {
   name: 'Trigger',
   props: {
-    children: PropTypes.any,
     action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
     showAction: PropTypes.any.def([]),
     hideAction: PropTypes.any.def([]),
@@ -66,7 +66,7 @@ export default {
   data () {
     const props = this.$props
     let popupVisible
-    if (props.popupVisible === undefined) {
+    if (hasProp(this, 'popupVisible')) {
       popupVisible = !!props.popupVisible
     } else {
       popupVisible = !!props.defaultPopupVisible
@@ -352,7 +352,7 @@ export default {
     setPopupVisible (sPopupVisible) {
       this.clearDelayTimer()
       if (this.$data.sPopupVisible !== sPopupVisible) {
-        if (this.$props.popupVisible === undefined) {
+        if (!hasProp(this, 'popupVisible')) {
           this.setState({
             sPopupVisible,
           })

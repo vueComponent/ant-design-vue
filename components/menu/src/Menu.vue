@@ -1,11 +1,10 @@
 <script>
-import PropTypes from 'vue-types'
+import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
 import StateMixin from '../../_util/StateMixin'
 
 const Menu = {
   name: 'Menu',
-
   props: {
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string).def([]),
     selectedKeys: PropTypes.arrayOf(PropTypes.string),
@@ -38,16 +37,20 @@ const Menu = {
       isRootMenu: true,
     }
   },
-
-  componentWillReceiveProps (nextProps) {
-    const props = {}
-    if ('selectedKeys' in nextProps) {
-      props.selectedKeys = nextProps.selectedKeys || []
-    }
-    if ('openKeys' in nextProps) {
-      props.openKeys = nextProps.openKeys || []
-    }
-    this.setState(props)
+  watch: {
+    '$props': {
+      handler: function (nextProps) {
+        const props = {}
+        if (nextProps.selectedKeys === undefined) {
+          props.selectedKeys = nextProps.selectedKeys || []
+        }
+        if (nextProps.openKeys === undefined) {
+          props.openKeys = nextProps.openKeys || []
+        }
+        this.setState(props)
+      },
+      deep: true,
+    },
   },
   methods: {
     onDestroy (key) {

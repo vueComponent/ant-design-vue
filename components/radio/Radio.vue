@@ -13,6 +13,7 @@
   </label>
 </template>
 <script>
+import hasProp from '../_util/hasProp'
 export default {
   name: 'Radio',
   props: {
@@ -41,7 +42,7 @@ export default {
     }
     return {
       stateChecked: stateChecked === undefined
-        ? checked === undefined ? defaultChecked : checked
+        ? !hasProp(this, 'checked') ? defaultChecked : checked
         : stateChecked,
     }
   },
@@ -70,8 +71,8 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked, radioGroupContext, stateChecked } = this
-      if ((checked === undefined && !radioGroupContext) || (radioGroupContext && radioGroupContext.value === undefined)) {
+      const { name, value, radioGroupContext, stateChecked } = this
+      if ((!hasProp(this, 'checked') && !radioGroupContext) || (radioGroupContext && radioGroupContext.value === undefined)) {
         this.stateChecked = targetChecked
       }
       const target = {

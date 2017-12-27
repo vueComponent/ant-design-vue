@@ -20,15 +20,18 @@ export default {
     mask: PropTypes.bool,
     zIndex: PropTypes.number,
   },
+  data () {
+    return {
+      destroyPopup: false,
+    }
+  },
   mounted () {
     this.rootNode = this.getPopupDomNode()
     this._container = this.getContainer()
-    // this._container.appendChild(this.$el)
-    // this.$refs.alignInstance.forceAlign()
-  },
-  beforeDestroy () {
-    this._container && this._container.parentNode.removeChild(this._container)
-    this._container = null
+    this._container.appendChild(this.$el)
+    this.$nextTick(() => {
+      this.$refs.alignInstance.forceAlign()
+    })
   },
   methods: {
     onAlign (popupDomNode, align) {
@@ -67,7 +70,7 @@ export default {
       if (!transitionName && props.animation) {
         transitionName = `${props.prefixCls}-${props.animation}`
       }
-      return 'fade'
+      return 'rc-trigger-popup-zoom'
     },
 
     getClassName (currentAlignClassName) {
@@ -79,12 +82,20 @@ export default {
     onMouseLeave (e) {
       this.$emit('mouseleave', e)
     },
+    beforeEnter (el) {
+      this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
+    },
+    afterLeave (el) {
+      if (this.destroyPopupOnHide) {
+        this.destroyPopup = true
+      }
+    },
     getPopupElement () {
       const { $props: props, onMouseEnter, onMouseLeave, $slots } = this
-      const { align, visible, prefixCls, destroyPopupOnHide } = props
+      const { align, visible, prefixCls } = props
       const className = this.getClassName(this.currentAlignClassName ||
       props.getClassNameFromAlign(align))
-      const hiddenClassName = `${prefixCls}-hidden`
+      // const hiddenClassName = `${prefixCls}-hidden`
       if (!visible) {
         this.currentAlignClassName = null
       }
@@ -102,30 +113,11 @@ export default {
         ref: 'popupInstance',
         style: { ...this.getZIndexStyle() },
       }
-
-      if (destroyPopupOnHide) {
-        return (<transition
-          name={this.getTransitionName()}
-        >
-          {visible ? (<Align
-            target={this.getTarget}
-            key='popup'
-            ref='alignInstance'
-            monitorWindowResize
-            align={align}
-            onAlign={this.onAlign}
-          >
-            <PopupInner
-              {...popupInnerProps}
-            >
-              {$slots.default}
-            </PopupInner>
-          </Align>) : null}
-        </transition>)
-      }
-      popupInnerProps.props.hiddenClassName = 'hiddenClassName'
       return (<transition
+        appear
         name={this.getTransitionName()}
+        onBeforeEnter={this.beforeEnter}
+        onAfterLeave={this.afterLeave}
       >
         <Align
           v-show={visible}
@@ -143,6 +135,7 @@ export default {
             {$slots.default}
           </PopupInner>
         </Align>
+
       </transition>)
     },
 
@@ -159,19 +152,20 @@ export default {
       const props = this.$props
       let maskElement
       if (props.mask) {
-        const maskTransition = this.getMaskTransitionName()
+        const maskTransition = this.getMaskTransitionName() || 'fade'
         maskElement = (
           <LazyRenderBox
+            v-show={props.visible}
             style={this.getZIndexStyle()}
             key='mask'
             class={`${props.prefixCls}-mask`}
-            hiddenClassName={`${props.prefixCls}-mask-hidden`}
             visible={props.visible}
           />
         )
         if (maskTransition) {
           maskElement = (
             <transition
+              appear
               name={maskTransition}
             >
               {maskElement}
@@ -184,23 +178,14 @@ export default {
   },
 
   render () {
+    const { destroyPopup, getMaskElement, getPopupElement } = this
     return (
-      <div>
-        {this.getMaskElement()}
-        {this.getPopupElement()}
-        <transition name='fade'>
-          <div v-show={this.visible}>hello</div>
-        </transition>
+      <div style='position: absolute; top: 0px; left: 0px; width: 100%;'>
+        {getMaskElement()}
+        {destroyPopup ? null : getPopupElement()}
       </div>
     )
   },
-  // render () {
-  //   return (
-  //     <transition name='fade'>
-  //       <div v-show={this.visible}>hello</div>
-  //     </transition>
-  //   )
-  // },
 }
 
 </script>

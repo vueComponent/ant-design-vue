@@ -1,10 +1,4 @@
 @triggerPrefixCls: rc-trigger-popup;
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
-  opacity: 0;
-}
 .@{triggerPrefixCls} {
   position: absolute;
   left: -9999px;
@@ -28,23 +22,27 @@
   }
 
   &-zoom-leave {
-    .effect();
     animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);
     animation-play-state: paused;
   }
 
-  &-zoom-enter&-zoom-enter-active, &-zoom-appear&-zoom-appear-active {
+  &-zoom-enter-active, &-zoom-appear-active {
+    .effect();
     animation-name: rcTriggerZoomIn;
     animation-play-state: running;
   }
 
-  &-zoom-leave&-zoom-leave-active {
+  &-zoom-leave-active {
+    .effect();
     animation-name: rcTriggerZoomOut;
     animation-play-state: running;
   }
 
   @keyframes rcTriggerZoomIn {
     0% {
+      opacity: 0;
+    }
+    1% {
       opacity: 0;
       transform-origin: 50% 50%;
       transform: scale(0, 0);
@@ -55,6 +53,7 @@
       transform: scale(1, 1);
     }
   }
+
   @keyframes rcTriggerZoomOut {
     0% {
       opacity: 1;
@@ -68,5 +67,4 @@
     }
   }
 }
-
 @import "./mask";

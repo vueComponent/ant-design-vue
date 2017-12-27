@@ -17,15 +17,10 @@ export default {
     },
   },
   render () {
-    const { prefixCls, visible, hiddenClassName } = this.$props
+    const { prefixCls, visible } = this.$props
     const { onMouseEnter, onMouseLeave } = this
-    let className = ''
-    if (!visible) {
-      className += ` ${hiddenClassName}`
-    }
     return (
       <div
-        class={className}
         onMouseenter={onMouseEnter}
         onMouseleave={onMouseLeave}
       >

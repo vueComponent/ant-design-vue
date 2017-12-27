@@ -9,7 +9,7 @@ export default {
   render () {
     const { hiddenClassName, visible } = this.$props
 
-    if (hiddenClassName || this.$slots.default.length > 1) {
+    if (hiddenClassName || !this.$slots.default || this.$slots.default.length > 1) {
       let cls = ''
       if (!visible && hiddenClassName) {
         cls += ` ${hiddenClassName}`

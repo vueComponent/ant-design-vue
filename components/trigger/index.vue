@@ -407,7 +407,6 @@ export default {
     createTwoChains (event) {
       const child = this.$slots.default[0]
       let fn = () => {
-        console.log('event', event)
       }
       child.data = child.data || {}
       child.data.on = child.data.on || {}
@@ -462,8 +461,7 @@ export default {
     fireEvents (type, e) {
       const child = this.$slots.default[0]
       if (child && child.data && child.data.on && child.data.on[type]) {
-        console.log(type, child.data.on[type])
-        // child.data.on[type](e)
+        child.data.on[type](e)
       }
       if (this.data && this.data.on && this.data.on[type]) {
         this.data.on[type](e)

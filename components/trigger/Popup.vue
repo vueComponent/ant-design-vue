@@ -33,6 +33,13 @@ export default {
       this.$refs.alignInstance.forceAlign()
     })
   },
+  watch: {
+    visible (val) {
+      if (val) {
+        this.destroyPopup = false
+      }
+    },
+  },
   methods: {
     onAlign (popupDomNode, align) {
       const props = this.$props

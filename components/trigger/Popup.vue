@@ -70,7 +70,7 @@ export default {
       if (!transitionName && props.animation) {
         transitionName = `${props.prefixCls}-${props.animation}`
       }
-      return 'rc-trigger-popup-zoom'
+      return transitionName
     },
 
     getClassName (currentAlignClassName) {
@@ -152,7 +152,7 @@ export default {
       const props = this.$props
       let maskElement
       if (props.mask) {
-        const maskTransition = this.getMaskTransitionName() || 'fade'
+        const maskTransition = this.getMaskTransitionName()
         maskElement = (
           <LazyRenderBox
             v-show={props.visible}

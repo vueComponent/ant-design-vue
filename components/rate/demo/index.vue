@@ -32,7 +32,7 @@
       <Icon type="heart" />
     </Rate>
     </br>
-    <Rate :value="initValue" :allowHalf="allowHalf" character="A"></Rate>
+    <Rate :defaultValue="initValue" :allowHalf="allowHalf" character="A"></Rate>
     </br>
     <Rate :value="initValue"  character="好"></Rate>
   </div>

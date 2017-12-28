@@ -6,15 +6,17 @@
     </template>
     <template v-else>
       <slot></slot>
-      <scroll-number
-        v-if="!badgeStatus.isHidden"
-        :prefixCls="scrollNumberPrefixCls"
-        :className="badgeComputedCls.scrollNumberCls"
-        :count="badgeStatus.stateCount"
-        :titleNumber="count"
-        :styleNumber="styles"
-        >
-      </scroll-number>
+      <transition appear :name="transitionName">
+        <scroll-number
+          v-if="!badgeStatus.isHidden"
+          :prefixCls="scrollNumberPrefixCls"
+          :className="badgeComputedCls.scrollNumberCls"
+          :count="badgeStatus.stateCount"
+          :titleNumber="count"
+          :styleNumber="styles"
+          >
+        </scroll-number>
+      </transition>
       <span
         v-if="!badgeStatus.isHidden && text"
         :class="[prefixCls+'-status-text']">
@@ -70,8 +72,11 @@ export default {
     },
   },
   data () {
+    const { prefixCls, $slots } = this
+    const isHasDefaultSlot = $slots && !!$slots.default
     return {
-      isHasDefaultSlot: this.$slots && !!this.$slots.default,
+      isHasDefaultSlot,
+      transitionName: isHasDefaultSlot ? `${prefixCls}-zoom` : '',
     }
   },
   computed: {
@@ -99,7 +104,7 @@ export default {
       }
     },
     badgeStatus () {
-      const { count, overflowCount, showZero, dot, text, status } = this
+      const { count, overflowCount, showZero, dot, text } = this
       let stateCount = +count > +overflowCount ? `${overflowCount}+` : count
       const isDot = dot || text
       if (isDot) {
@@ -113,9 +118,6 @@ export default {
         isHidden,
       }
     },
-  },
-  methods: {
-
   },
   components: {
     Icon,

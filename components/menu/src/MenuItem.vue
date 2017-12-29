@@ -1,5 +1,5 @@
 <script>
-import PropTypes from 'vue-types'
+import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
 
 const MenuItem = {
@@ -136,7 +136,7 @@ const MenuItem = {
     const liProps = {
       attrs,
       on: {
-        mouseEvent,
+        ...mouseEvent,
       },
     }
     return (

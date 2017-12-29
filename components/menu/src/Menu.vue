@@ -31,10 +31,10 @@ const Menu = {
     let openKeys = props.defaultOpenKeys
     selectedKeys = props.selectedKeys || []
     openKeys = props.openKeys || []
+    this.isRootMenu = true
     return {
       selectedKeys,
       openKeys,
-      isRootMenu: true,
     }
   },
   watch: {

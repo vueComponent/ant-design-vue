@@ -1,10 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import createReactClass from 'create-react-class'
-import Trigger from 'rc-trigger'
-import KeyCode from 'rc-util/lib/KeyCode'
-import classNames from 'classnames'
+<script>
+import PropTypes from '../../_util/vue-types'
+import Trigger from '../../trigger'
+import KeyCode from '../../_util/KeyCode'
 import SubPopupMenu from './SubPopupMenu'
 import placements from './placements'
 import { noop, loopMenuItemRecusively } from './util'
@@ -18,10 +15,10 @@ const popupPlacementMap = {
   'vertical-right': 'leftTop',
 }
 
-const SubMenu = createReactClass({
-  displayName: 'SubMenu',
+const SubMenu = {
+  name: 'SubMenu',
 
-  propTypes: {
+  props: {
     parentMenu: PropTypes.object,
     title: PropTypes.node,
     children: PropTypes.any,
@@ -78,7 +75,7 @@ const SubMenu = createReactClass({
       if (!this.subMenuTitle || !this.menuInstance) {
         return
       }
-      const popupMenu = ReactDOM.findDOMNode(this.menuInstance)
+      const popupMenu = this.$refs.menuInstance.$el
       if (popupMenu.offsetWidth >= this.subMenuTitle.offsetWidth) {
         return
       }
@@ -311,7 +308,7 @@ const SubMenu = createReactClass({
   },
 
   renderChildren (children) {
-    const props = this.props
+    const props = this.$props
     const baseProps = {
       mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
       visible: this.isOpen(),
@@ -346,17 +343,18 @@ const SubMenu = createReactClass({
   },
 
   render () {
-    const props = this.props
+    const props = this.$props
     const isOpen = this.isOpen()
     const prefixCls = this.getPrefixCls()
     const isInlineMode = props.mode === 'inline'
-    const className = classNames(prefixCls, `${prefixCls}-${props.mode}`, {
-      [props.className]: !!props.className,
+    const className = {
+      prefixCls: true,
+      [`${prefixCls}-${props.mode}`]: true,
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
       [this.getSelectedClassName()]: this.isChildrenSelected(),
-    })
+    }
 
     if (!this._menuId) {
       if (props.eventKey) {
@@ -391,9 +389,9 @@ const SubMenu = createReactClass({
     }
     const title = (
       <div
-        ref={this.saveSubMenuTitle}
+        ref='subMenuTitle'
         style={style}
-        className={`${prefixCls}-title`}
+        class={`${prefixCls}-title`}
         {...titleMouseEvents}
         {...titleClickEvents}
         aria-expanded={isOpen}
@@ -402,7 +400,7 @@ const SubMenu = createReactClass({
         title={typeof props.title === 'string' ? props.title : undefined}
       >
         {props.title}
-        <i className={`${prefixCls}-arrow`} />
+        <i class={`${prefixCls}-arrow`} />
       </div>
     )
     const children = this.renderChildren(props.children)
@@ -412,7 +410,7 @@ const SubMenu = createReactClass({
     const popupPlacement = popupPlacementMap[props.mode]
     const popupClassName = props.mode === 'inline' ? '' : props.popupClassName
     return (
-      <li {...mouseEvents} className={className} style={props.style}>
+      <li {...mouseEvents} class={className}>
         {isInlineMode && title}
         {isInlineMode && children}
         {!isInlineMode && (
@@ -436,8 +434,9 @@ const SubMenu = createReactClass({
       </li>
     )
   },
-})
+}
 
 SubMenu.isSubMenu = 1
 
 export default SubMenu
+</script>

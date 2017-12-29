@@ -1,12 +1,10 @@
-import PropTypes from 'vue-types'
-import createReactClass from 'create-react-class'
-import Animate from 'rc-animate'
+<script>
+import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
 
-const SubPopupMenu = createReactClass({
-  displayName: 'SubPopupMenu',
-
-  propTypes: {
+export default {
+  name: 'SubPopupMenu',
+  props: {
     onSelect: PropTypes.func,
     onClick: PropTypes.func,
     onDeselect: PropTypes.func,
@@ -22,34 +20,34 @@ const SubPopupMenu = createReactClass({
   mixins: [MenuMixin],
 
   onDeselect (selectInfo) {
-    this.props.onDeselect(selectInfo)
+    this.$emit('deselect', selectInfo)
   },
 
   onSelect (selectInfo) {
-    this.props.onSelect(selectInfo)
+    this.$emit('select', selectInfo)
   },
 
   onClick (e) {
-    this.props.onClick(e)
+    this.$emit('click', e)
   },
 
   onOpenChange (e) {
-    this.props.onOpenChange(e)
+    this.$emit('openChange', e)
   },
 
   onDestroy (key) {
-    this.props.onDestroy(key)
+    this.$$emit('destroy', key)
   },
 
   getOpenTransitionName () {
-    return this.props.openTransitionName
+    return this.$props.openTransitionName
   },
 
   renderMenuItem (c, i, subIndex) {
     if (!c) {
       return null
     }
-    const props = this.props
+    const props = this.$props
     const extraProps = {
       openKeys: props.openKeys,
       selectedKeys: props.selectedKeys,
@@ -59,7 +57,7 @@ const SubPopupMenu = createReactClass({
   },
 
   render () {
-    const props = { ...this.props }
+    const props = { ...this.$props }
 
     const haveRendered = this.haveRendered
     this.haveRendered = true
@@ -93,6 +91,5 @@ const SubPopupMenu = createReactClass({
       </Animate>
     )
   },
-})
-
-export default SubPopupMenu
+}
+</script>

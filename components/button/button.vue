@@ -86,10 +86,6 @@ export default {
       this.$emit('click', event)
     },
     insertSpace (child, needInserted) {
-      // Check the child if is undefined or null.
-      if (child == null) {
-        return child
-      }
       const SPACE = needInserted ? ' ' : ''
       if (typeof child.text === 'string') {
         let text = child.text.trim()

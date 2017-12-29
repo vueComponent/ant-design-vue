@@ -7,11 +7,11 @@
       Loading
     </AntButton>
     <br />
-    <AntButton type="primary" :loading="loading" @click="enterLoading">
-      Click me!
+    <AntButton type="primary" :loading="loading" @mouseenter="enterLoading">
+      mouseenter me!
     </AntButton>
     <AntButton type="primary" icon="poweroff" :loading="iconLoading" @click="enterIconLoading">
-      Click me!
+      延迟1s
     </AntButton>
     <br />
     <AntButton shape="circle" loading />
@@ -32,7 +32,7 @@ export default {
       this.loading = true
     },
     enterIconLoading () {
-      this.iconLoading = true
+      this.iconLoading = { delay: 1000 }
     },
   },
   components: {

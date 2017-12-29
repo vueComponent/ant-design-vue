@@ -1,15 +1,7 @@
-<template>
-  <button :type="htmlType" :class="classes" :disabled="disabled"
-    @click="handleClick" @mouseout="mouseout" @mouseover="mouseover">
-    <Icon v-if="iconType" :type="iconType"></Icon>
-    <span v-if="this.$slots.default">
-      <slot></slot>
-    </span>
-  </button>
-</template>
 <script>
 import Icon from '../icon'
-
+const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/
+const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
 export default {
   name: 'Button',
   components: { Icon },
@@ -40,7 +32,7 @@ export default {
         return ['small', 'large', 'default'].includes(value)
       },
     },
-    loading: Boolean,
+    loading: [Boolean, Object],
     disabled: Boolean,
     ghost: Boolean,
   },
@@ -51,47 +43,99 @@ export default {
         small: 'sm',
       },
       clicked: false,
+      sLoading: !!this.loading,
     }
+  },
+  watch: {
+    loading: {
+      handler: function (val) {
+        clearTimeout(this.delayTimeout)
+        if (typeof val !== 'boolean' && val && val.delay) {
+          this.delayTimeout = setTimeout(() => { this.sLoading = !!val }, val.delay)
+        } else {
+          this.sLoading = !!val
+        }
+      },
+      deep: true,
+    },
   },
   computed: {
     classes () {
-      const { prefixCls, type, shape, size, loading, ghost, clicked, sizeMap } = this
+      const { prefixCls, type, shape, size, sLoading, ghost, clicked, sizeMap } = this
       const sizeCls = sizeMap[size] || ''
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
         [`${prefixCls}-${sizeCls}`]: sizeCls,
-        [`${prefixCls}-loading`]: loading,
+        [`${prefixCls}-loading`]: sLoading,
         [`${prefixCls}-clicked`]: clicked,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
       }
     },
     iconType () {
-      const { loading, icon } = this
-      return loading ? 'loading' : icon
+      const { sLoading, icon } = this
+      return sLoading ? 'loading' : icon
     },
   },
   methods: {
     handleClick (event) {
-      if (this.clicked) {
-        return
-      }
       this.clicked = true
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => (this.clicked = false), 500)
       this.$emit('click', event)
     },
-    mouseover (event) {
-      this.$emit('mouseover', event)
+    insertSpace (child, needInserted) {
+      // Check the child if is undefined or null.
+      if (child == null) {
+        return child
+      }
+      const SPACE = needInserted ? ' ' : ''
+      if (typeof child.text === 'string') {
+        let text = child.text.trim()
+        if (isTwoCNChar(text)) {
+          text = text.split('').join(SPACE)
+        }
+        return <span>{text}</span>
+      }
+      return child
     },
-    mouseout (event) {
-      this.$emit('mouseout', event)
-    },
+  },
+  render () {
+    const { htmlType, classes, disabled, handleClick, iconType, $slots, $attrs, _events } = this
+    const buttonProps = {
+      props: {
+      },
+      attrs: {
+        ...$attrs,
+        type: htmlType,
+        disabled,
+      },
+      class: classes,
+      on: {
+        click: handleClick,
+      },
+    }
+    for (const [k, event] of Object.entries(_events)) {
+      if (!buttonProps.on[k]) {
+        buttonProps.on[k] = event
+      }
+    }
+    const needInserted = $slots.default && $slots.default.length === 1 && (!iconType || iconType === 'loading')
+    const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], needInserted) : $slots.default
+    return (
+      <button {...buttonProps}>
+        {iconType ? <Icon type={iconType}></Icon> : null}
+        {kids}
+      </button>
+    )
   },
   beforeDestroy () {
     if (this.timeout) {
       clearTimeout(this.timeout)
+    }
+    if (this.delayTimeout) {
+      clearTimeout(this.delayTimeout)
     }
   },
 }

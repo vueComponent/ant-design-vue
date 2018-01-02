@@ -10,6 +10,7 @@ const MenuItemGroup = {
     className: PropTypes.string,
     rootPrefixCls: PropTypes.string,
     disabled: PropTypes.bool.def(true),
+    title: PropTypes.any.def(''),
   },
 
   methods: {

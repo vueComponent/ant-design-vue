@@ -4,7 +4,8 @@ import Trigger from '../../trigger'
 import KeyCode from '../../_util/KeyCode'
 import SubPopupMenu from './SubPopupMenu'
 import placements from './placements'
-import { noop, loopMenuItemRecusively } from './util'
+import { loopMenuItemRecusively } from './util'
+import StateMixin from '../../_util/StateMixin'
 
 let guid = 0
 
@@ -20,335 +21,326 @@ const SubMenu = {
 
   props: {
     parentMenu: PropTypes.object,
-    title: PropTypes.node,
+    mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
+    title: PropTypes.any.def(''),
     children: PropTypes.any,
     selectedKeys: PropTypes.array,
     openKeys: PropTypes.array,
-    onClick: PropTypes.func,
-    onOpenChange: PropTypes.func,
+    // onClick: PropTypes.func,
+    openChange: PropTypes.func,
     rootPrefixCls: PropTypes.string,
     eventKey: PropTypes.string,
     multiple: PropTypes.bool,
     active: PropTypes.bool, // TODO: remove
-    onItemHover: PropTypes.func,
-    onSelect: PropTypes.func,
+    // onItemHover: PropTypes.func,
+    // onSelect: PropTypes.func,
     triggerSubMenuAction: PropTypes.string,
-    onDeselect: PropTypes.func,
-    onDestroy: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
-    onTitleMouseEnter: PropTypes.func,
-    onTitleMouseLeave: PropTypes.func,
-    onTitleClick: PropTypes.func,
+    popupClassName: PropTypes.string,
+    // onDeselect: PropTypes.func,
+    // onDestroy: PropTypes.func,
+    // onMouseEnter: PropTypes.func,
+    // onMouseLeave: PropTypes.func,
+    // onTitleMouseEnter: PropTypes.func,
+    // onTitleMouseLeave: PropTypes.func,
+    // onTitleClick: PropTypes.func,
   },
-
-  isRootMenu: false,
-
-  getDefaultProps () {
-    return {
-      onMouseEnter: noop,
-      onMouseLeave: noop,
-      onTitleMouseEnter: noop,
-      onTitleMouseLeave: noop,
-      onTitleClick: noop,
-      title: '',
-    }
-  },
-
-  getInitialState () {
+  mixins: [StateMixin],
+  data () {
     this.isSubMenu = 1
+    this.isRootMenu = false
     return {
       defaultActiveFirst: false,
     }
   },
 
-  componentDidMount () {
-    this.componentDidUpdate()
+  mounted () {
+    this.handleUpdated()
   },
 
-  componentDidUpdate () {
-    const { mode, parentMenu } = this.props
-    if (mode !== 'horizontal' || !parentMenu.isRootMenu || !this.isOpen()) {
-      return
-    }
-    setTimeout(() => {
-      if (!this.subMenuTitle || !this.menuInstance) {
-        return
-      }
-      const popupMenu = this.$refs.menuInstance.$el
-      if (popupMenu.offsetWidth >= this.subMenuTitle.offsetWidth) {
-        return
-      }
-      popupMenu.style.minWidth = `${this.subMenuTitle.offsetWidth}px`
-    }, 0)
+  updated () {
+    this.handleUpdated()
   },
 
-  componentWillUnmount () {
-    const { onDestroy, eventKey, parentMenu } = this.props
-    if (onDestroy) {
-      onDestroy(eventKey)
-    }
+  beforeDestroy () {
+    const { eventKey, parentMenu } = this.$props
+    this.$emit('destroy', eventKey)
     if (parentMenu.subMenuInstance === this) {
       this.clearSubMenuTimers()
     }
   },
+  methods: {
+    handleUpdated () {
+      const { mode, parentMenu } = this.$props
+      if (mode !== 'horizontal' || !parentMenu.isRootMenu || !this.isOpen()) {
+        return
+      }
+      setTimeout(() => {
+        if (!this.subMenuTitle || !this.menuInstance) {
+          return
+        }
+        const popupMenu = this.$refs.menuInstance.$el
+        if (popupMenu.offsetWidth >= this.subMenuTitle.offsetWidth) {
+          return
+        }
+        popupMenu.style.minWidth = `${this.subMenuTitle.offsetWidth}px`
+      }, 0)
+    },
+    onDestroy (key) {
+      this.$emit('destroy', key)
+    },
 
-  onDestroy (key) {
-    this.props.onDestroy(key)
-  },
+    onKeyDown (e) {
+      const keyCode = e.keyCode
+      const menu = this.menuInstance
+      const isOpen = this.isOpen()
 
-  onKeyDown (e) {
-    const keyCode = e.keyCode
-    const menu = this.menuInstance
-    const isOpen = this.isOpen()
-
-    if (keyCode === KeyCode.ENTER) {
-      this.onTitleClick(e)
-      this.setState({
-        defaultActiveFirst: true,
-      })
-      return true
-    }
-
-    if (keyCode === KeyCode.RIGHT) {
-      if (isOpen) {
-        menu.onKeyDown(e)
-      } else {
-        this.triggerOpenChange(true)
+      if (keyCode === KeyCode.ENTER) {
+        this.onTitleClick(e)
         this.setState({
           defaultActiveFirst: true,
         })
+        return true
       }
-      return true
-    }
-    if (keyCode === KeyCode.LEFT) {
-      let handled
-      if (isOpen) {
-        handled = menu.onKeyDown(e)
-      } else {
-        return undefined
+
+      if (keyCode === KeyCode.RIGHT) {
+        if (isOpen) {
+          menu.onKeyDown(e)
+        } else {
+          this.triggerOpenChange(true)
+          this.setState({
+            defaultActiveFirst: true,
+          })
+        }
+        return true
       }
-      if (!handled) {
-        this.triggerOpenChange(false)
-        handled = true
+      if (keyCode === KeyCode.LEFT) {
+        let handled
+        if (isOpen) {
+          handled = menu.onKeyDown(e)
+        } else {
+          return undefined
+        }
+        if (!handled) {
+          this.triggerOpenChange(false)
+          handled = true
+        }
+        return handled
       }
-      return handled
-    }
 
-    if (isOpen && (keyCode === KeyCode.UP || keyCode === KeyCode.DOWN)) {
-      return menu.onKeyDown(e)
-    }
-  },
+      if (isOpen && (keyCode === KeyCode.UP || keyCode === KeyCode.DOWN)) {
+        return menu.onKeyDown(e)
+      }
+    },
 
-  onOpenChange (e) {
-    this.props.onOpenChange(e)
-  },
+    onOpenChange (e) {
+      this.$emit('openChange', e)
+      this.$props.openChange(e)
+    },
 
-  onPopupVisibleChange (visible) {
-    this.triggerOpenChange(visible, visible ? 'mouseenter' : 'mouseleave')
-  },
+    onPopupVisibleChange (visible) {
+      this.triggerOpenChange(visible, visible ? 'mouseenter' : 'mouseleave')
+    },
 
-  onMouseEnter (e) {
-    const { eventKey: key, onMouseEnter } = this.props
-    this.clearSubMenuLeaveTimer()
-    this.setState({
-      defaultActiveFirst: false,
-    })
-    onMouseEnter({
-      key,
-      domEvent: e,
-    })
-  },
+    onMouseEnter (e) {
+      const { eventKey: key } = this.$props
+      this.clearSubMenuLeaveTimer()
+      this.setState({
+        defaultActiveFirst: false,
+      })
+      this.$emit('mouseenter', {
+        key,
+        domEvent: e,
+      })
+    },
 
-  onMouseLeave (e) {
-    const {
-      parentMenu,
-      eventKey,
-      onMouseLeave,
-    } = this.props
-    parentMenu.subMenuInstance = this
-    parentMenu.subMenuLeaveFn = () => {
+    onMouseLeave (e) {
+      const {
+        parentMenu,
+        eventKey,
+      } = this.$props
+      parentMenu.subMenuInstance = this
+      parentMenu.subMenuLeaveFn = () => {
       // trigger mouseleave
-      onMouseLeave({
+        this.$emit('mouseleave', {
+          key: eventKey,
+          domEvent: e,
+        })
+      }
+
+      // prevent popup menu and submenu gap
+      parentMenu.subMenuLeaveTimer = setTimeout(parentMenu.subMenuLeaveFn, 100)
+    },
+
+    onTitleMouseEnter (domEvent) {
+      const { eventKey: key } = this.$props
+      this.clearSubMenuTitleLeaveTimer()
+      this.$emit('itemHover', {
+        key,
+        hover: true,
+      })
+      this.$emit('titleMouseenter', {
+        key,
+        domEvent,
+      })
+    },
+
+    onTitleMouseLeave (e) {
+      const { parentMenu, eventKey } = this.$props
+      parentMenu.subMenuInstance = this
+      parentMenu.subMenuTitleLeaveFn = () => {
+        this.$emit('itemHover', {
+          key: eventKey,
+          hover: false,
+        })
+        this.$emit('titleMouseleave', {
+          key: eventKey,
+          domEvent: e,
+        })
+      }
+      parentMenu.subMenuTitleLeaveTimer = setTimeout(parentMenu.subMenuTitleLeaveFn, 100)
+    },
+
+    onTitleClick (e) {
+      const { triggerSubMenuAction, eventKey } = this.$props
+
+      this.$emit('itemClick', {
         key: eventKey,
         domEvent: e,
+        test: 111,
       })
-    }
-    // prevent popup menu and submenu gap
-    parentMenu.subMenuLeaveTimer = setTimeout(parentMenu.subMenuLeaveFn, 100)
-  },
-
-  onTitleMouseEnter (domEvent) {
-    const { eventKey: key, onItemHover, onTitleMouseEnter } = this.props
-    this.clearSubMenuTitleLeaveTimer()
-    onItemHover({
-      key,
-      hover: true,
-    })
-    onTitleMouseEnter({
-      key,
-      domEvent,
-    })
-  },
-
-  onTitleMouseLeave (e) {
-    const { parentMenu, eventKey, onItemHover, onTitleMouseLeave } = this.props
-    parentMenu.subMenuInstance = this
-    parentMenu.subMenuTitleLeaveFn = () => {
-      onItemHover({
-        key: eventKey,
-        hover: false,
+      if (triggerSubMenuAction === 'hover') {
+        return
+      }
+      this.triggerOpenChange(!this.isOpen(), 'click')
+      this.setState({
+        defaultActiveFirst: false,
       })
-      onTitleMouseLeave({
-        key: eventKey,
-        domEvent: e,
+    },
+
+    onSubMenuClick (info) {
+      this.$emit('click', this.addKeyPath(info))
+    },
+
+    onSelect (info) {
+      this.$emit('select', info)
+    },
+
+    onDeselect (info) {
+      this.$emit('deselect', info)
+    },
+
+    getPrefixCls () {
+      return `${this.$props.rootPrefixCls}-submenu`
+    },
+
+    getActiveClassName () {
+      return `${this.getPrefixCls()}-active`
+    },
+
+    getDisabledClassName () {
+      return `${this.getPrefixCls()}-disabled`
+    },
+
+    getSelectedClassName () {
+      return `${this.getPrefixCls()}-selected`
+    },
+
+    getOpenClassName () {
+      return `${this.$props.rootPrefixCls}-submenu-open`
+    },
+
+    addKeyPath (info) {
+      return {
+        ...info,
+        keyPath: (info.keyPath || []).concat(this.$props.eventKey),
+      }
+    },
+
+    triggerOpenChange (open, type) {
+      const key = this.$props.eventKey
+      this.onOpenChange({
+        key,
+        item: this,
+        trigger: type,
+        open,
       })
-    }
-    parentMenu.subMenuTitleLeaveTimer = setTimeout(parentMenu.subMenuTitleLeaveFn, 100)
+    },
+
+    clearSubMenuTimers () {
+      this.clearSubMenuLeaveTimer()
+      this.clearSubMenuTitleLeaveTimer()
+    },
+
+    clearSubMenuTitleLeaveTimer () {
+      const parentMenu = this.$props.parentMenu
+      if (parentMenu.subMenuTitleLeaveTimer) {
+        clearTimeout(parentMenu.subMenuTitleLeaveTimer)
+        parentMenu.subMenuTitleLeaveTimer = null
+        parentMenu.subMenuTitleLeaveFn = null
+      }
+    },
+
+    clearSubMenuLeaveTimer () {
+      const parentMenu = this.$props.parentMenu
+      if (parentMenu.subMenuLeaveTimer) {
+        clearTimeout(parentMenu.subMenuLeaveTimer)
+        parentMenu.subMenuLeaveTimer = null
+        parentMenu.subMenuLeaveFn = null
+      }
+    },
+
+    isChildrenSelected () {
+      const ret = { find: false }
+      loopMenuItemRecusively(this.$slots.default, this.$props.selectedKeys, ret)
+      return ret.find
+    },
+    isOpen () {
+      return this.$props.openKeys.indexOf(this.$props.eventKey) !== -1
+    },
+
+    renderChildren (children) {
+      const props = this.$props
+      const subPopupMenuProps = {
+        props: {
+          mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
+          visible: this.isOpen(),
+          level: props.level + 1,
+          inlineIndent: props.inlineIndent,
+          focusable: false,
+          selectedKeys: props.selectedKeys,
+          eventKey: `${props.eventKey}-menu-`,
+          openKeys: props.openKeys,
+          openTransitionName: props.openTransitionName,
+          openAnimation: props.openAnimation,
+          subMenuOpenDelay: props.subMenuOpenDelay,
+          subMenuCloseDelay: props.subMenuCloseDelay,
+          forceSubMenuRender: props.forceSubMenuRender,
+          triggerSubMenuAction: props.triggerSubMenuAction,
+          defaultActiveFirst: this.$data.defaultActiveFirst,
+          multiple: props.multiple,
+          prefixCls: props.rootPrefixCls,
+        },
+        on: {
+          click: this.onSubMenuClick,
+          select: this.onSelect,
+          deselect: this.onDeselect,
+          destroy: this.onDestroy,
+          openChange: this.onOpenChange,
+        },
+        id: this._menuId,
+        ref: 'menuInstance',
+      }
+      return <SubPopupMenu {...subPopupMenuProps}>{children}</SubPopupMenu>
+    },
   },
 
-  onTitleClick (e) {
-    const { props } = this
-    props.onTitleClick({
-      key: props.eventKey,
-      domEvent: e,
-    })
-    if (props.triggerSubMenuAction === 'hover') {
-      return
-    }
-    this.triggerOpenChange(!this.isOpen(), 'click')
-    this.setState({
-      defaultActiveFirst: false,
-    })
-  },
-
-  onSubMenuClick (info) {
-    this.props.onClick(this.addKeyPath(info))
-  },
-
-  onSelect (info) {
-    this.props.onSelect(info)
-  },
-
-  onDeselect (info) {
-    this.props.onDeselect(info)
-  },
-
-  getPrefixCls () {
-    return `${this.props.rootPrefixCls}-submenu`
-  },
-
-  getActiveClassName () {
-    return `${this.getPrefixCls()}-active`
-  },
-
-  getDisabledClassName () {
-    return `${this.getPrefixCls()}-disabled`
-  },
-
-  getSelectedClassName () {
-    return `${this.getPrefixCls()}-selected`
-  },
-
-  getOpenClassName () {
-    return `${this.props.rootPrefixCls}-submenu-open`
-  },
-
-  saveMenuInstance (c) {
-    this.menuInstance = c
-  },
-
-  addKeyPath (info) {
-    return {
-      ...info,
-      keyPath: (info.keyPath || []).concat(this.props.eventKey),
-    }
-  },
-
-  triggerOpenChange (open, type) {
-    const key = this.props.eventKey
-    this.onOpenChange({
-      key,
-      item: this,
-      trigger: type,
-      open,
-    })
-  },
-
-  clearSubMenuTimers () {
-    this.clearSubMenuLeaveTimer()
-    this.clearSubMenuTitleLeaveTimer()
-  },
-
-  clearSubMenuTitleLeaveTimer () {
-    const parentMenu = this.props.parentMenu
-    if (parentMenu.subMenuTitleLeaveTimer) {
-      clearTimeout(parentMenu.subMenuTitleLeaveTimer)
-      parentMenu.subMenuTitleLeaveTimer = null
-      parentMenu.subMenuTitleLeaveFn = null
-    }
-  },
-
-  clearSubMenuLeaveTimer () {
-    const parentMenu = this.props.parentMenu
-    if (parentMenu.subMenuLeaveTimer) {
-      clearTimeout(parentMenu.subMenuLeaveTimer)
-      parentMenu.subMenuLeaveTimer = null
-      parentMenu.subMenuLeaveFn = null
-    }
-  },
-
-  isChildrenSelected () {
-    const ret = { find: false }
-    loopMenuItemRecusively(this.props.children, this.props.selectedKeys, ret)
-    return ret.find
-  },
-  isOpen () {
-    return this.props.openKeys.indexOf(this.props.eventKey) !== -1
-  },
-
-  renderChildren (children) {
-    const props = this.$props
-    const baseProps = {
-      mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
-      visible: this.isOpen(),
-      level: props.level + 1,
-      inlineIndent: props.inlineIndent,
-      focusable: false,
-      onClick: this.onSubMenuClick,
-      onSelect: this.onSelect,
-      onDeselect: this.onDeselect,
-      onDestroy: this.onDestroy,
-      selectedKeys: props.selectedKeys,
-      eventKey: `${props.eventKey}-menu-`,
-      openKeys: props.openKeys,
-      openTransitionName: props.openTransitionName,
-      openAnimation: props.openAnimation,
-      onOpenChange: this.onOpenChange,
-      subMenuOpenDelay: props.subMenuOpenDelay,
-      subMenuCloseDelay: props.subMenuCloseDelay,
-      forceSubMenuRender: props.forceSubMenuRender,
-      triggerSubMenuAction: props.triggerSubMenuAction,
-      defaultActiveFirst: this.state.defaultActiveFirst,
-      multiple: props.multiple,
-      prefixCls: props.rootPrefixCls,
-      id: this._menuId,
-      ref: this.saveMenuInstance,
-    }
-    return <SubPopupMenu {...baseProps}>{children}</SubPopupMenu>
-  },
-
-  saveSubMenuTitle (subMenuTitle) {
-    this.subMenuTitle = subMenuTitle
-  },
-
-  render () {
+  render (h) {
     const props = this.$props
     const isOpen = this.isOpen()
     const prefixCls = this.getPrefixCls()
     const isInlineMode = props.mode === 'inline'
     const className = {
-      prefixCls: true,
+      [prefixCls]: true,
       [`${prefixCls}-${props.mode}`]: true,
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
@@ -369,65 +361,79 @@ const SubMenu = {
     let titleMouseEvents = {}
     if (!props.disabled) {
       mouseEvents = {
-        onMouseLeave: this.onMouseLeave,
-        onMouseEnter: this.onMouseEnter,
+        mouseleave: this.onMouseLeave,
+        mouseenter: this.onMouseEnter,
       }
 
       // only works in title, not outer li
       titleClickEvents = {
-        onClick: this.onTitleClick,
+        click: this.onTitleClick,
       }
       titleMouseEvents = {
-        onMouseEnter: this.onTitleMouseEnter,
-        onMouseLeave: this.onTitleMouseLeave,
+        mouseenter: this.onTitleMouseEnter,
+        mouseleave: this.onTitleMouseLeave,
       }
     }
 
     const style = {}
     if (isInlineMode) {
-      style.paddingLeft = props.inlineIndent * props.level
+      style.paddingLeft = `${props.inlineIndent * props.level}px`
+    }
+    const titleProps = {
+      attrs: {
+        'aria-expanded': isOpen,
+        'aria-owns': this._menuId,
+        'aria-haspopup': 'true',
+        title: typeof props.title === 'string' ? props.title : undefined,
+      },
+      on: {
+        ...titleMouseEvents,
+        ...titleClickEvents,
+      },
+      style,
+      class: `${prefixCls}-title`,
+      ref: 'subMenuTitle',
     }
     const title = (
       <div
-        ref='subMenuTitle'
-        style={style}
-        class={`${prefixCls}-title`}
-        {...titleMouseEvents}
-        {...titleClickEvents}
-        aria-expanded={isOpen}
-        aria-owns={this._menuId}
-        aria-haspopup='true'
-        title={typeof props.title === 'string' ? props.title : undefined}
+        {...titleProps}
       >
-        {props.title}
+        {this.$slots.title}
         <i class={`${prefixCls}-arrow`} />
       </div>
     )
-    const children = this.renderChildren(props.children)
+    const children = this.renderChildren(this.$slots.default)
 
     const getPopupContainer = props.parentMenu.isRootMenu
-      ? props.parentMenu.props.getPopupContainer : triggerNode => triggerNode.parentNode
+      ? props.parentMenu.getPopupContainer : triggerNode => triggerNode.parentNode
     const popupPlacement = popupPlacementMap[props.mode]
     const popupClassName = props.mode === 'inline' ? '' : props.popupClassName
+    const liProps = {
+      on: { ...mouseEvents },
+      class: className,
+    }
+    console.log(isOpen)
     return (
-      <li {...mouseEvents} class={className}>
+      <li {...liProps}>
         {isInlineMode && title}
         {isInlineMode && children}
         {!isInlineMode && (
           <Trigger
             prefixCls={prefixCls}
             popupClassName={`${prefixCls}-popup ${popupClassName}`}
-            getPopupContainer={getPopupContainer}
+            // getPopupContainer={getPopupContainer}
             builtinPlacements={placements}
             popupPlacement={popupPlacement}
             popupVisible={isOpen}
-            popup={children}
             action={props.disabled ? [] : [props.triggerSubMenuAction]}
             mouseEnterDelay={props.subMenuOpenDelay}
             mouseLeaveDelay={props.subMenuCloseDelay}
             onPopupVisibleChange={this.onPopupVisibleChange}
             forceRender={props.forceSubMenuRender}
           >
+            <template slot='popup'>
+              {children}
+            </template>
             {title}
           </Trigger>
         )}

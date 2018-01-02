@@ -1,14 +1,21 @@
-import PropTypes from 'vue-types'
+import PropTypes from '../../_util/vue-types'
+import hasProp from '../../_util/hasProp'
 import KeyCode from '../../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'
+import StateMixin from '../../_util/StateMixin'
+import { cloneElement, cloneVNode } from '../../_util/vnode'
 import DOMWrap from './DOMWrap'
 
 function allDisabled (arr) {
   if (!arr.length) {
     return true
   }
-  return arr.every(c => !!c.props.disabled)
+
+  return arr.every(c => {
+    const propsData = c.componentOptions.propsData || {}
+    return !!propsData.disabled
+  })
 }
 
 function getActiveKey (props, originalActiveKey) {
@@ -17,7 +24,8 @@ function getActiveKey (props, originalActiveKey) {
   if (activeKey) {
     let found
     loopMenuItem(children, (c, i) => {
-      if (c && !c.props.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
+      const propsData = c.componentOptions.propsData || {}
+      if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
         found = true
       }
     })
@@ -28,7 +36,8 @@ function getActiveKey (props, originalActiveKey) {
   activeKey = null
   if (props.defaultActiveFirst) {
     loopMenuItem(children, (c, i) => {
-      if (!activeKey && c && !c.props.disabled) {
+      const propsData = c.componentOptions.propsData || {}
+      if (!activeKey && c && !propsData.disabled) {
         activeKey = getKeyFromChildrenIndex(c, eventKey, i)
       }
     })
@@ -37,24 +46,12 @@ function getActiveKey (props, originalActiveKey) {
   return activeKey
 }
 
-function saveRef (index, subIndex, c) {
-  if (c) {
-    if (subIndex !== undefined) {
-      this.instanceArray[index] = this.instanceArray[index] || []
-      this.instanceArray[index][subIndex] = c
-    } else {
-      this.instanceArray[index] = c
-    }
-  }
-}
-
 const MenuMixin = {
   props: {
-    prefixCls: PropTypes.string.def('ant-menu'),
+    prefixCls: PropTypes.string.def('rc-menu'),
     inlineIndent: PropTypes.number.def(24),
     focusable: PropTypes.bool.def(true),
     multiple: PropTypes.bool,
-    style: PropTypes.object,
     defaultActiveFirst: PropTypes.bool,
     visible: PropTypes.bool.def(true),
     activeKey: PropTypes.string,
@@ -63,45 +60,60 @@ const MenuMixin = {
     defaultOpenKeys: PropTypes.arrayOf(PropTypes.string),
     openKeys: PropTypes.arrayOf(PropTypes.string),
   },
+  mixin: [StateMixin],
   data () {
     const props = this.$props
     return {
-      activeKey: getActiveKey(props, props.activeKey),
+      sActiveKey: getActiveKey(props, props.activeKey),
     }
   },
-
-  componentWillReceiveProps (nextProps) {
-    let props
-    if ('activeKey' in nextProps) {
-      props = {
-        activeKey: getActiveKey(nextProps, nextProps.activeKey),
-      }
-    } else {
-      const originalActiveKey = this.state.activeKey
-      const activeKey = getActiveKey(nextProps, originalActiveKey)
-      // fix: this.setState(), parent.render(),
-      if (activeKey !== originalActiveKey) {
-        props = {
-          activeKey,
+  watch: {
+    '$props': {
+      handler: function (nextProps) {
+        let props
+        if (hasProp(this, 'activeKey')) {
+          props = {
+            sActiveKey: getActiveKey(nextProps, nextProps.activeKey),
+          }
+        } else {
+          const originalActiveKey = this.$data.sActiveKey
+          const sActiveKey = getActiveKey(nextProps, originalActiveKey)
+          // fix: this.setState(), parent.render(),
+          if (sActiveKey !== originalActiveKey) {
+            props = {
+              sActiveKey,
+            }
+          }
         }
-      }
-    }
-    if (props) {
-      this.setState(props)
-    }
+        if (props) {
+          this.setState(props)
+        }
+      },
+      deep: true,
+    },
   },
 
   created () {
     this.instanceArray = []
   },
   methods: {
+    saveRef (index, subIndex, c) {
+      if (c) {
+        if (subIndex !== undefined) {
+          this.instanceArray[index] = this.instanceArray[index] || []
+          this.instanceArray[index][subIndex] = c
+        } else {
+          this.instanceArray[index] = c
+        }
+      }
+    },
     // all keyboard events callbacks run from here at first
     onKeyDown (e, callback) {
       const keyCode = e.keyCode
       let handled
       this.getFlatInstanceArray().forEach((obj) => {
-        if (obj && obj.props.active && obj.onKeyDown) {
-          handled = obj.onKeyDown(e)
+        if (obj && obj.$props.active) {
+          handled = this.$emit('keydown', e)
         }
       })
       if (handled) {
@@ -114,7 +126,7 @@ const MenuMixin = {
       if (activeItem) {
         e.preventDefault()
         this.setState({
-          activeKey: activeItem.$props.eventKey,
+          sActiveKey: activeItem.$props.eventKey,
         }, () => {
           scrollIntoView(activeItem.$el, this.$el, {
             onlyScrollIfNeeded: true,
@@ -128,7 +140,7 @@ const MenuMixin = {
       } else if (activeItem === undefined) {
         e.preventDefault()
         this.setState({
-          activeKey: null,
+          sActiveKey: null,
         })
         return 1
       }
@@ -137,7 +149,7 @@ const MenuMixin = {
     onItemHover (e) {
       const { key, hover } = e
       this.setState({
-        activeKey: hover ? key : null,
+        sActiveKey: hover ? key : null,
       })
     },
 
@@ -161,72 +173,83 @@ const MenuMixin = {
     },
 
     renderCommonMenuItem (child, i, subIndex, extraProps) {
-      const state = this.state
-      const props = this.props
+      const state = this.$data
+      const props = this.$props
       const key = getKeyFromChildrenIndex(child, props.eventKey, i)
-      const childProps = child.props
-      const isActive = key === state.activeKey
+      const childProps = child.componentOptions.propsData || {}
+      const isActive = key === state.sActiveKey
       const newChildProps = {
-        mode: props.mode,
-        level: props.level,
-        inlineIndent: props.inlineIndent,
-        renderMenuItem: this.renderMenuItem,
-        rootPrefixCls: props.prefixCls,
-        index: i,
-        parentMenu: this,
-        ref: child.ref,
+        props: {
+          mode: props.mode,
+          level: props.level,
+          inlineIndent: props.inlineIndent,
+          renderMenuItem: this.renderMenuItem,
+          rootPrefixCls: props.prefixCls,
+          index: i,
+          parentMenu: this,
+          eventKey: key,
+          active: !childProps.disabled && isActive,
+          multiple: props.multiple,
+          openTransitionName: this.getOpenTransitionName(),
+          openAnimation: props.openAnimation,
+          subMenuOpenDelay: props.subMenuOpenDelay,
+          subMenuCloseDelay: props.subMenuCloseDelay,
+          forceSubMenuRender: props.forceSubMenuRender,
+          ...extraProps,
+          openChange: this.onOpenChange,
+        },
+        on: {
+          click: this.onClick,
+          itemHover: this.onItemHover,
+          // openChange: () => { console.log('openChange') },
+          deselect: this.onDeselect,
+          destroy: this.onDestroy,
+          select: this.onSelect,
+        },
+
+        ref: childProps.disabled ? undefined : child.ref,
         // ref: childProps.disabled ? undefined
         //  : createChainedFunction(child.ref, saveRef.bind(this, i, subIndex)),
-        eventKey: key,
-        active: !childProps.disabled && isActive,
-        multiple: props.multiple,
-        onClick: this.onClick,
-        onItemHover: this.onItemHover,
-        openTransitionName: this.getOpenTransitionName(),
-        openAnimation: props.openAnimation,
-        subMenuOpenDelay: props.subMenuOpenDelay,
-        subMenuCloseDelay: props.subMenuCloseDelay,
-        forceSubMenuRender: props.forceSubMenuRender,
-        onOpenChange: this.onOpenChange,
-        onDeselect: this.onDeselect,
-        onDestroy: this.onDestroy,
-        onSelect: this.onSelect,
-        ...extraProps,
       }
+      !childProps.disabled && this.saveRef(i, subIndex, child.ref)
       if (props.mode === 'inline') {
-        newChildProps.triggerSubMenuAction = 'click'
+        newChildProps.props.triggerSubMenuAction = 'click'
       }
-      return child
-      // return React.cloneElement(child, newChildProps)
+      return cloneElement(child, newChildProps)
     },
 
     renderRoot (props) {
       this.instanceArray = []
       const className = {
         [props.prefixCls]: true,
-        [props.className]: true,
+        [props.class]: true,
         [`${props.prefixCls}-${props.mode}`]: true,
       }
       const domProps = {
-        className,
-        role: 'menu',
-        'aria-activedescendant': '',
+        attrs: {
+          role: 'menu',
+          'aria-activedescendant': '',
+        },
+        props: {
+          tag: 'ul',
+          hiddenClassName: `${props.prefixCls}-hidden`,
+          visible: props.visible,
+        },
+        class: className,
+        on: {},
+        // style:props.style,
       }
       if (props.id) {
         domProps.id = props.id
       }
       if (props.focusable) {
-        domProps.tabIndex = '0'
-        domProps.onKeyDown = this.onKeyDown
+        domProps.attrs.tabIndex = '0'
+        domProps.on.keydown = this.onKeyDown
       }
       return (
       // ESLint is not smart enough to know that the type of `children` was checked.
       /* eslint-disable */
         <DOMWrap
-          style={props.style}
-          tag="ul"
-          hiddenClassName={`${props.prefixCls}-hidden`}
-          visible={props.visible}
           {...domProps}
         >
           {this.$slots.default.map(this.renderMenuItem)}
@@ -237,7 +260,7 @@ const MenuMixin = {
 
     step (direction) {
       let children = this.getFlatInstanceArray()
-      const activeKey = this.state.activeKey
+      const sActiveKey = this.$data.sActiveKey
       const len = children.length
       if (!len) {
         return null
@@ -248,13 +271,14 @@ const MenuMixin = {
       // find current activeIndex
       let activeIndex = -1
       children.every((c, ci) => {
-        if (c && c.props.eventKey === activeKey) {
+        const propsData = c.componentOptions.propsData || {}
+        if (c && propsData.eventKey === sActiveKey) {
           activeIndex = ci
           return false
         }
         return true
       })
-      if (!this.props.defaultActiveFirst && activeIndex !== -1) {
+      if (!this.$props.defaultActiveFirst && activeIndex !== -1) {
         if (allDisabled(children.slice(activeIndex, len - 1))) {
           return undefined
         }
@@ -263,7 +287,8 @@ const MenuMixin = {
       let i = start
       for (; ;) {
         const child = children[i]
-        if (!child || child.props.disabled) {
+        const propsData = child.componentOptions.propsData || {}
+        if (!child || propsData.disabled) {
           i = (i + 1 + len) % len
           // complete a loop
           if (i === start) {

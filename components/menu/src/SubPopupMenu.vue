@@ -79,16 +79,13 @@ export default {
         delete animProps.animation.appear
       }
     }
-
     return (
-      <Animate
-        {...animProps}
-        showProp='visible'
-        component=''
-        transitionAppear={transitionAppear}
+      <transition
+        appear
+        name={animProps.transitionName}
       >
         {this.renderRoot(props)}
-      </Animate>
+      </transition>
     )
   },
 }

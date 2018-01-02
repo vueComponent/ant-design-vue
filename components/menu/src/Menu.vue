@@ -2,6 +2,7 @@
 import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
 import StateMixin from '../../_util/StateMixin'
+import hasProp from '../../_util/hasProp'
 
 const Menu = {
   name: 'Menu',
@@ -27,14 +28,14 @@ const Menu = {
 
   data () {
     const props = this.$props
-    let selectedKeys = props.defaultSelectedKeys
-    let openKeys = props.defaultOpenKeys
-    selectedKeys = props.selectedKeys || []
-    openKeys = props.openKeys || []
+    let sSelectedKeys = props.defaultSelectedKeys
+    let sOpenKeys = props.defaultOpenKeys
+    sSelectedKeys = props.selectedKeys || []
+    sOpenKeys = props.openKeys || []
     this.isRootMenu = true
     return {
-      selectedKeys,
-      openKeys,
+      sSelectedKeys,
+      sOpenKeys,
     }
   },
   watch: {
@@ -42,10 +43,10 @@ const Menu = {
       handler: function (nextProps) {
         const props = {}
         if (nextProps.selectedKeys === undefined) {
-          props.selectedKeys = nextProps.selectedKeys || []
+          props.sSelectedKeys = nextProps.selectedKeys || []
         }
         if (nextProps.openKeys === undefined) {
-          props.openKeys = nextProps.openKeys || []
+          props.sOpenKeys = nextProps.openKeys || []
         }
         this.setState(props)
       },
@@ -55,16 +56,15 @@ const Menu = {
   methods: {
     onDestroy (key) {
       const state = this.$data
-      const props = this.$props
-      const selectedKeys = state.selectedKeys
-      const openKeys = state.openKeys
-      let index = selectedKeys.indexOf(key)
-      if (!('selectedKeys' in props) && index !== -1) {
-        selectedKeys.splice(index, 1)
+      const sSelectedKeys = state.sSelectedKeys
+      const sOpenKeys = state.sOpenKeys
+      let index = sSelectedKeys.indexOf(key)
+      if (!hasProp(this, 'selectedKeys') && index !== -1) {
+        sSelectedKeys.splice(index, 1)
       }
-      index = openKeys.indexOf(key)
-      if (!('openKeys' in props) && index !== -1) {
-        openKeys.splice(index, 1)
+      index = sOpenKeys.indexOf(key)
+      if (!hasProp(this, 'openKeys') && index !== -1) {
+        sOpenKeys.splice(index, 1)
       }
     },
 
@@ -72,21 +72,21 @@ const Menu = {
       const props = this.$props
       if (props.selectable) {
       // root menu
-        let selectedKeys = this.$data.selectedKeys
+        let sSelectedKeys = this.$data.sSelectedKeys
         const selectedKey = selectInfo.key
         if (props.multiple) {
-          selectedKeys = selectedKeys.concat([selectedKey])
+          sSelectedKeys = sSelectedKeys.concat([selectedKey])
         } else {
-          selectedKeys = [selectedKey]
+          sSelectedKeys = [selectedKey]
         }
-        if (!('selectedKeys' in props)) {
+        if (!hasProp(this, 'selectedKeys')) {
           this.setState({
-            selectedKeys,
+            sSelectedKeys,
           })
         }
         this.$emit('select', {
           ...selectInfo,
-          selectedKeys,
+          sSelectedKeys,
         })
       }
     },
@@ -96,20 +96,20 @@ const Menu = {
     },
 
     onOpenChange (e_) {
-      const openKeys = this.$data.openKeys.concat()
+      const sOpenKeys = this.$data.sOpenKeys.concat()
       let changed = false
       const processSingle = (e) => {
         let oneChanged = false
         if (e.open) {
-          oneChanged = openKeys.indexOf(e.key) === -1
+          oneChanged = sOpenKeys.indexOf(e.key) === -1
           if (oneChanged) {
-            openKeys.push(e.key)
+            sOpenKeys.push(e.key)
           }
         } else {
-          const index = openKeys.indexOf(e.key)
+          const index = sOpenKeys.indexOf(e.key)
           oneChanged = index !== -1
           if (oneChanged) {
-            openKeys.splice(index, 1)
+            sOpenKeys.splice(index, 1)
           }
         }
         changed = changed || oneChanged
@@ -121,30 +121,30 @@ const Menu = {
         processSingle(e_)
       }
       if (changed) {
-        if (this.$props.openKeys === undefined) {
-          this.setState({ openKeys })
+        if (!hasProp(this, 'openKeys')) {
+          this.setState({ sOpenKeys })
         }
-        this.$emit('openChange', openKeys)
+        this.$emit('openChange', sOpenKeys)
       }
     },
 
     onDeselect (selectInfo) {
       const props = this.$props
       if (props.selectable) {
-        const selectedKeys = this.$data.selectedKeys.concat()
+        const sSelectedKeys = this.$data.sSelectedKeys.concat()
         const selectedKey = selectInfo.key
-        const index = selectedKeys.indexOf(selectedKey)
+        const index = sSelectedKeys.indexOf(selectedKey)
         if (index !== -1) {
-          selectedKeys.splice(index, 1)
+          sSelectedKeys.splice(index, 1)
         }
-        if (!('selectedKeys' in props)) {
+        if (!hasProp(this, 'selectedKeys')) {
           this.setState({
-            selectedKeys,
+            sSelectedKeys,
           })
         }
         this.$emit('deselect', {
           ...selectInfo,
-          selectedKeys,
+          sSelectedKeys,
         })
       }
     },
@@ -165,10 +165,10 @@ const Menu = {
 
     lastOpenSubMenu () {
       let lastOpen = []
-      const { openKeys } = this.$data
-      if (openKeys.length) {
+      const { sOpenKeys } = this.$data
+      if (sOpenKeys.length) {
         lastOpen = this.getFlatInstanceArray().filter((c) => {
-          return c && openKeys.indexOf(c.props.eventKey) !== -1
+          return c && sOpenKeys.indexOf(c.props.eventKey) !== -1
         })
       }
       return lastOpen[0]
@@ -180,8 +180,8 @@ const Menu = {
       }
       const state = this.$data
       const extraProps = {
-        openKeys: state.openKeys,
-        selectedKeys: state.selectedKeys,
+        openKeys: state.sOpenKeys,
+        selectedKeys: state.sSelectedKeys,
         triggerSubMenuAction: this.$props.triggerSubMenuAction,
       }
       return this.renderCommonMenuItem(c, i, subIndex, extraProps)
@@ -190,7 +190,7 @@ const Menu = {
 
   render () {
     const props = { ...this.$props }
-    props.className += ` ${props.prefixCls}-root`
+    props.class = ` ${props.prefixCls}-root`
     return this.renderRoot(props)
   },
 }

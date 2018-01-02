@@ -11,7 +11,10 @@ export default {
       type: String,
       default: 'div',
     },
-    hiddenClassName: String,
+    hiddenClassName: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     class () {
@@ -31,7 +34,7 @@ export default {
     const tagProps = {
       attr: { ...otherProps, ...this.$attrs },
     }
-    return <Tag {...tagProps} class={this.class} />
+    return <Tag {...tagProps} class={this.class}>{this.$slots.default}</Tag>
   },
 }
 </script>

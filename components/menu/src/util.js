@@ -30,6 +30,7 @@ export function loopMenuItemRecusively (children, keys, ret) {
       return
     }
     if (c) {
+      console.log(c)
       const construt = c.type
       if (!construt || !(construt.isSubMenu || construt.isMenuItem || construt.isMenuItemGroup)) {
         return

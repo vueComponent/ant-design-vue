@@ -33,6 +33,7 @@ export function cloneVNodes (vnodes, deep) {
 export function cloneElement (node, nodeProps) {
   const { props, key } = nodeProps
   if (node.componentOptions) {
+    node.componentOptions.propsData = node.componentOptions.propsData || {}
     Object.assign(node.componentOptions.propsData, props)
   }
   const data = node.data || {}
@@ -44,6 +45,7 @@ export function cloneElement (node, nodeProps) {
   node.data = Object.assign(data, { style, attrs, class: cls, on })
   if (key !== undefined) {
     node.key = key
+    node.data.key = key
   }
   return node
 }

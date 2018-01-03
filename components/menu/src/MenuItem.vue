@@ -1,6 +1,7 @@
 <script>
 import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
+import { noop } from './util'
 
 const MenuItem = {
   name: 'MenuItem',
@@ -9,10 +10,12 @@ const MenuItem = {
     rootPrefixCls: PropTypes.string,
     eventKey: PropTypes.string,
     active: PropTypes.bool,
-    children: PropTypes.any,
     selectedKeys: PropTypes.array,
     disabled: PropTypes.bool,
     title: PropTypes.string,
+    inlineIndent: PropTypes.number.def(24),
+    level: PropTypes.number.def(1),
+    mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
     // onItemHover: PropTypes.func,
     // onSelect: PropTypes.func,
     // onClick: PropTypes.func,
@@ -21,11 +24,17 @@ const MenuItem = {
     // onDestroy: PropTypes.func,
     // onMouseEnter: PropTypes.func,
     // onMouseLeave: PropTypes.func,
+    clearSubMenuTimers: PropTypes.func.def(noop),
   },
 
   beforeDestroy () {
     const props = this.$props
     this.$emit('destroy', props.eventKey)
+  },
+  data () {
+    return {
+      isMenuItem: 1,
+    }
   },
   methods: {
     onKeyDown (e) {
@@ -49,10 +58,8 @@ const MenuItem = {
     },
 
     onMouseEnter (e) {
-      const { eventKey, parentMenu } = this.$props
-      if (parentMenu.subMenuInstance) {
-        parentMenu.subMenuInstance.clearSubMenuTimers()
-      }
+      const { eventKey } = this.$props
+      this.clearSubMenuTimers()
       this.$emit('itemHover', {
         key: eventKey,
         hover: true,
@@ -150,8 +157,6 @@ const MenuItem = {
     )
   },
 }
-
-MenuItem.isMenuItem = 1
 
 export default MenuItem
 </script>

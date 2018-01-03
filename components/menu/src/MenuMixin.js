@@ -46,8 +46,9 @@ function getActiveKey (props, originalActiveKey) {
   return activeKey
 }
 
-const MenuMixin = {
+export default {
   props: {
+    test: PropTypes.any,
     prefixCls: PropTypes.string.def('rc-menu'),
     inlineIndent: PropTypes.number.def(24),
     focusable: PropTypes.bool.def(true),
@@ -59,6 +60,7 @@ const MenuMixin = {
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
     defaultOpenKeys: PropTypes.arrayOf(PropTypes.string),
     openKeys: PropTypes.arrayOf(PropTypes.string),
+    mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
   },
   mixin: [StateMixin],
   data () {
@@ -186,7 +188,7 @@ const MenuMixin = {
           renderMenuItem: this.renderMenuItem,
           rootPrefixCls: props.prefixCls,
           index: i,
-          parentMenu: this,
+          // parentMenu: this,
           eventKey: key,
           active: !childProps.disabled && isActive,
           multiple: props.multiple,
@@ -201,24 +203,27 @@ const MenuMixin = {
         on: {
           click: this.onClick,
           itemHover: this.onItemHover,
-          // openChange: () => { console.log('openChange') },
+          openChange: () => { console.log('openChange') },
           deselect: this.onDeselect,
           destroy: this.onDestroy,
           select: this.onSelect,
         },
-
-        ref: childProps.disabled ? undefined : child.ref,
+        // ref: childProps.disabled ? undefined : child.ref,
         // ref: childProps.disabled ? undefined
         //  : createChainedFunction(child.ref, saveRef.bind(this, i, subIndex)),
       }
-      !childProps.disabled && this.saveRef(i, subIndex, child.ref)
+      // !childProps.disabled && this.saveRef(i, subIndex, child.ref)
       if (props.mode === 'inline') {
         newChildProps.props.triggerSubMenuAction = 'click'
       }
+      if (!extraProps.isRootMenu) {
+        newChildProps.props.clearSubMenuTimers = this.clearSubMenuTimers
+      }
+      // return this.$scopedSlots.default(newChildProps)
       return cloneElement(child, newChildProps)
     },
 
-    renderRoot (props) {
+    renderRoot (props, children = []) {
       this.instanceArray = []
       const className = {
         [props.prefixCls]: true,
@@ -237,7 +242,6 @@ const MenuMixin = {
         },
         class: className,
         on: {},
-        // style:props.style,
       }
       if (props.id) {
         domProps.id = props.id
@@ -246,15 +250,13 @@ const MenuMixin = {
         domProps.attrs.tabIndex = '0'
         domProps.on.keydown = this.onKeyDown
       }
+      const newChildren = children.map(this.renderMenuItem)
       return (
-      // ESLint is not smart enough to know that the type of `children` was checked.
-      /* eslint-disable */
         <DOMWrap
           {...domProps}
         >
-          {this.$slots.default.map(this.renderMenuItem)}
+          {newChildren}
         </DOMWrap>
-        /*eslint -enable */
       )
     },
 
@@ -301,5 +303,3 @@ const MenuMixin = {
     },
   },
 }
-
-export default MenuMixin

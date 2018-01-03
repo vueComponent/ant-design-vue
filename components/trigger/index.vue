@@ -314,6 +314,7 @@ export default {
           maskAnimation,
           maskTransitionName,
           getContainer,
+          popupClassName,
         },
         on: {
           align: onPopupAlign,
@@ -321,7 +322,6 @@ export default {
         },
         ref: 'popup',
         style: popupStyle,
-        class: popupClassName,
       }
       return (
         <Popup

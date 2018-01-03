@@ -19,6 +19,7 @@ export default {
     maskTransitionName: PropTypes.string,
     mask: PropTypes.bool,
     zIndex: PropTypes.number,
+    popupClassName: PropTypes.any,
   },
   data () {
     return {
@@ -81,7 +82,7 @@ export default {
     },
 
     getClassName (currentAlignClassName) {
-      return `${this.$props.prefixCls} ${currentAlignClassName}`
+      return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`
     },
     onMouseEnter (e) {
       this.$emit('mouseenter', e)
@@ -112,7 +113,7 @@ export default {
           prefixCls,
           visible,
         },
-        class: className,
+        class: `${className}`,
         on: {
           mouseenter: onMouseEnter,
           mouseleave: onMouseLeave,
@@ -142,7 +143,6 @@ export default {
             {$slots.default}
           </PopupInner>
         </Align>
-
       </transition>)
     },
 
@@ -189,7 +189,8 @@ export default {
     return (
       <div style='position: absolute; top: 0px; left: 0px; width: 100%;'>
         {getMaskElement()}
-        {destroyPopup ? null : getPopupElement()}
+        { destroyPopup
+          ? null : getPopupElement()}
       </div>
     )
   },

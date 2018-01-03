@@ -18,7 +18,7 @@ const Menu = {
     subMenuOpenDelay: PropTypes.number.def(0),
     subMenuCloseDelay: PropTypes.number.def(0.1),
     forceSubMenuRender: PropTypes.bool,
-    triggerSubMenuAction: PropTypes.string.def('hover'),
+    triggerSubMenuAction: PropTypes.string.def('click'),
     level: PropTypes.number.def(1),
     selectable: PropTypes.bool.def(true),
     multiple: PropTypes.bool,
@@ -183,6 +183,7 @@ const Menu = {
         openKeys: state.sOpenKeys,
         selectedKeys: state.sSelectedKeys,
         triggerSubMenuAction: this.$props.triggerSubMenuAction,
+        isRootMenu: true,
       }
       return this.renderCommonMenuItem(c, i, subIndex, extraProps)
     },
@@ -191,7 +192,7 @@ const Menu = {
   render () {
     const props = { ...this.$props }
     props.class = ` ${props.prefixCls}-root`
-    return this.renderRoot(props)
+    return this.renderRoot(props, this.$slots.default)
   },
 }
 export default Menu

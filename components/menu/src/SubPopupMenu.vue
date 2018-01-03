@@ -5,57 +5,57 @@ import MenuMixin from './MenuMixin'
 export default {
   name: 'SubPopupMenu',
   props: {
-    onSelect: PropTypes.func,
-    onClick: PropTypes.func,
-    onDeselect: PropTypes.func,
-    onOpenChange: PropTypes.func,
-    onDestroy: PropTypes.func,
+    // onSelect: PropTypes.func,
+    // onClick: PropTypes.func,
+    // onDeselect: PropTypes.func,
+    // onOpenChange: PropTypes.func,
+    // onDestroy: PropTypes.func,
     openTransitionName: PropTypes.string,
     openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     openKeys: PropTypes.arrayOf(PropTypes.string),
     visible: PropTypes.bool,
-    children: PropTypes.any,
   },
 
   mixins: [MenuMixin],
+  methods: {
+    onDeselect (selectInfo) {
+      this.$emit('deselect', selectInfo)
+    },
 
-  onDeselect (selectInfo) {
-    this.$emit('deselect', selectInfo)
+    onSelect (selectInfo) {
+      this.$emit('select', selectInfo)
+    },
+
+    onClick (e) {
+      this.$emit('click', e)
+    },
+
+    onOpenChange (e) {
+      this.$emit('openChange', e)
+    },
+
+    onDestroy (key) {
+      this.$$emit('destroy', key)
+    },
+
+    getOpenTransitionName () {
+      return this.$props.openTransitionName
+    },
+
+    renderMenuItem (c, i, subIndex) {
+      if (!c) {
+        return null
+      }
+      const props = this.$props
+      const extraProps = {
+        openKeys: props.openKeys,
+        selectedKeys: props.selectedKeys,
+        triggerSubMenuAction: props.triggerSubMenuAction,
+        isRootMenu: false,
+      }
+      return this.renderCommonMenuItem(c, i, subIndex, extraProps)
+    },
   },
-
-  onSelect (selectInfo) {
-    this.$emit('select', selectInfo)
-  },
-
-  onClick (e) {
-    this.$emit('click', e)
-  },
-
-  onOpenChange (e) {
-    this.$emit('openChange', e)
-  },
-
-  onDestroy (key) {
-    this.$$emit('destroy', key)
-  },
-
-  getOpenTransitionName () {
-    return this.$props.openTransitionName
-  },
-
-  renderMenuItem (c, i, subIndex) {
-    if (!c) {
-      return null
-    }
-    const props = this.$props
-    const extraProps = {
-      openKeys: props.openKeys,
-      selectedKeys: props.selectedKeys,
-      triggerSubMenuAction: props.triggerSubMenuAction,
-    }
-    return this.renderCommonMenuItem(c, i, subIndex, extraProps)
-  },
-
   render () {
     const props = { ...this.$props }
 
@@ -69,7 +69,7 @@ export default {
 
     const transitionAppear = !(!haveRendered && props.visible && props.mode === 'inline')
 
-    props.className += ` ${props.prefixCls}-sub`
+    props.class = `${props.prefixCls}-sub`
     const animProps = {}
     if (props.openTransitionName) {
       animProps.transitionName = props.openTransitionName
@@ -84,7 +84,7 @@ export default {
         appear
         name={animProps.transitionName}
       >
-        {this.renderRoot(props)}
+        {this.renderRoot(props, this.$slots.default)}
       </transition>
     )
   },

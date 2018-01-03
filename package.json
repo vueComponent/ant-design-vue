@@ -83,6 +83,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isplainobject": "^4.0.6",
     "omit.js": "^1.0.0",
+    "vue": "^2.5.13",
     "vue-types": "^1.0.2",
     "warning": "^3.0.0"
   }

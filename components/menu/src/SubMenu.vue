@@ -37,6 +37,10 @@ export default {
     popupClassName: PropTypes.string,
     getPopupContainer: PropTypes.func,
     test: PropTypes.any,
+    forceSubMenuRender: PropTypes.bool,
+    openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    disabled: PropTypes.bool,
+    subMenuCloseDelay: PropTypes.number,
     // onDeselect: PropTypes.func,
     // onDestroy: PropTypes.func,
     // onMouseEnter: PropTypes.func,
@@ -46,10 +50,10 @@ export default {
     // onTitleClick: PropTypes.func,
   },
   mixins: [StateMixin],
+  isSubMenu: true,
   data () {
     return {
       defaultActiveFirst: false,
-      isSubMenu: 1,
     }
   },
   mounted () {
@@ -160,7 +164,6 @@ export default {
           domEvent: e,
         })
       }
-
       // prevent popup menu and submenu gap
       this.subMenuLeaveTimer = setTimeout(this.subMenuLeaveFn, 100)
     },
@@ -390,6 +393,7 @@ export default {
       <div
         {...titleProps}
       >
+        {typeof props.title === 'function' ? props.title(h) : props.title}
         {this.$slots.title}
         <i class={`${prefixCls}-arrow`} />
       </div>
@@ -404,12 +408,38 @@ export default {
       on: { ...mouseEvents },
       class: className,
     }
+
+    const { forceSubMenuRender, mode, openTransitionName, openAnimation } = this.$props
+    const haveRendered = this.haveRendered
+    this.haveRendered = true
+
+    this.haveOpened = this.haveOpened || isOpen || forceSubMenuRender
+
+    const transitionAppear = !(!haveRendered && isOpen && mode === 'inline')
+
+    let animProps = { appear: true }
+    if (openTransitionName) {
+      animProps.name = openTransitionName
+    } else if (typeof openAnimation === 'object') {
+      animProps = { ...animProps, ...openAnimation }
+      if (!transitionAppear) {
+        animProps.appear = false
+      }
+    } else if (typeof openAnimation === 'string') {
+      animProps.name = openAnimation
+    }
+    const transitionProps = {
+      props: animProps,
+    }
     return (
       <li {...liProps}>
         {isInlineMode && title}
-        {isInlineMode && children}
+        {isInlineMode && (
+          <transition {...transitionProps}>
+            {children}
+          </transition>
+        )}
         {!isInlineMode && (
-
           <Trigger
             prefixCls={prefixCls}
             popupClassName={`${prefixCls}-popup ${popupClassName || ''}`}
@@ -422,9 +452,11 @@ export default {
             mouseLeaveDelay={props.subMenuCloseDelay}
             onPopupVisibleChange={this.onPopupVisibleChange}
             forceRender={props.forceSubMenuRender}
+            // popupTransitionName='rc-menu-open-slide-up'
+            popupAnimation={animProps}
           >
             <template slot='popup'>
-              {children}
+              {this.haveOpened ? children : null}
             </template>
             {title}
           </Trigger>

@@ -265,7 +265,7 @@ export default {
           // mouseLeaveDelay={0.1}
           action={Object.keys(state.trigger)}
           builtinPlacements={builtinPlacements}
-          popupTransitionName={state.transitionName}
+          popupAnimation={state.transitionName}
         >
           <div slot='popup' style={{ border: '1px solid red', padding: '10px', background: 'white' }}>
               i am a popup

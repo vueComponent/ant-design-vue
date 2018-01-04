@@ -28,14 +28,10 @@ const MenuItem = {
     clearSubMenuTimers: PropTypes.func.def(noop),
   },
   mixins: [StateMixin],
+  isMenuItem: true,
   beforeDestroy () {
     const props = this.$props
     this.$emit('destroy', props.eventKey)
-  },
-  data () {
-    return {
-      isMenuItem: 1,
-    }
   },
   methods: {
     onKeyDown (e) {

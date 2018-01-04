@@ -44,7 +44,7 @@ export function cloneElement (node, nodeProps) {
     class: cls = data.class,
     attrs = data.attrs,
   } = nodeProps
-  node.data = Object.assign(data, { style, attrs, class: cls })
+  node.data = Object.assign(data, { style, attrs, class: cls, on: { ...(data.on || {}), ...on }})
   if (key !== undefined) {
     node.key = key
     node.data.key = key

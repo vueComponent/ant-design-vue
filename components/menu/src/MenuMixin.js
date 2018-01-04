@@ -1,9 +1,8 @@
-import PropTypes from '../../_util/vue-types'
 import hasProp from '../../_util/hasProp'
 import KeyCode from '../../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'
-import { cloneElement, cloneVNode } from '../../_util/vnode'
+import { cloneElement } from '../../_util/vnode'
 import DOMWrap from './DOMWrap'
 
 function allDisabled (arr) {
@@ -17,54 +16,11 @@ function allDisabled (arr) {
   })
 }
 
-function getActiveKey (props, originalActiveKey) {
-  let activeKey = originalActiveKey
-  const { children, eventKey } = props
-  if (activeKey) {
-    let found
-    loopMenuItem(children, (c, i) => {
-      const propsData = c.componentOptions.propsData || {}
-      if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
-        found = true
-      }
-    })
-    if (found) {
-      return activeKey
-    }
-  }
-  activeKey = null
-  if (props.defaultActiveFirst) {
-    loopMenuItem(children, (c, i) => {
-      const propsData = c.componentOptions.propsData || {}
-      if (!activeKey && c && !propsData.disabled) {
-        activeKey = getKeyFromChildrenIndex(c, eventKey, i)
-      }
-    })
-    return activeKey
-  }
-  return activeKey
-}
-
 export default {
-  props: {
-    test: PropTypes.any,
-    prefixCls: PropTypes.string.def('rc-menu'),
-    inlineIndent: PropTypes.number.def(24),
-    focusable: PropTypes.bool.def(true),
-    multiple: PropTypes.bool,
-    defaultActiveFirst: PropTypes.bool,
-    visible: PropTypes.bool.def(true),
-    activeKey: PropTypes.string,
-    selectedKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultOpenKeys: PropTypes.arrayOf(PropTypes.string),
-    openKeys: PropTypes.arrayOf(PropTypes.string),
-    mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
-  },
   data () {
     const props = this.$props
     return {
-      sActiveKey: getActiveKey(props, props.activeKey),
+      sActiveKey: this.getActiveKey(props.activeKey),
     }
   },
   watch: {
@@ -73,11 +29,11 @@ export default {
         let props
         if (hasProp(this, 'activeKey')) {
           props = {
-            sActiveKey: getActiveKey(nextProps, nextProps.activeKey),
+            sActiveKey: this.getActiveKey(nextProps.activeKey),
           }
         } else {
           const originalActiveKey = this.$data.sActiveKey
-          const sActiveKey = getActiveKey(nextProps, originalActiveKey)
+          const sActiveKey = this.getActiveKey(originalActiveKey)
           // fix: this.setState(), parent.render(),
           if (sActiveKey !== originalActiveKey) {
             props = {
@@ -97,6 +53,34 @@ export default {
     this.instanceArray = []
   },
   methods: {
+    getActiveKey (originalActiveKey) {
+      let activeKey = originalActiveKey
+      const { eventKey, defaultActiveFirst } = this.$props
+      const children = this.$slots.default
+      if (activeKey) {
+        let found
+        loopMenuItem(children, (c, i) => {
+          const propsData = c.componentOptions.propsData || {}
+          if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
+            found = true
+          }
+        })
+        if (found) {
+          return activeKey
+        }
+      }
+      activeKey = null
+      if (defaultActiveFirst) {
+        loopMenuItem(children, (c, i) => {
+          const propsData = c.componentOptions.propsData || {}
+          if (!activeKey && c && !propsData.disabled) {
+            activeKey = getKeyFromChildrenIndex(c, eventKey, i)
+          }
+        })
+        return activeKey
+      }
+      return activeKey
+    },
     saveRef (index, subIndex, c) {
       if (c) {
         if (subIndex !== undefined) {
@@ -234,8 +218,8 @@ export default {
         },
         props: {
           tag: 'ul',
-          hiddenClassName: `${props.prefixCls}-hidden`,
-          visible: props.visible,
+          // hiddenClassName: `${props.prefixCls}-hidden`,
+          // visible: props.visible,
         },
         class: className,
         on: {},
@@ -249,11 +233,11 @@ export default {
       }
       const newChildren = children.map(this.renderMenuItem)
       return (
-        <ul
+        <DOMWrap
           {...domProps}
         >
           {newChildren}
-        </ul>
+        </DOMWrap>
       )
     },
 

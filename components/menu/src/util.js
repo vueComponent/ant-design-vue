@@ -29,16 +29,18 @@ export function loopMenuItemRecusively (children, keys, ret) {
     if (ret.find) {
       return
     }
-    if (c) {
-      console.log(c)
-      const construt = c.type
-      if (!construt || !(construt.isSubMenu || construt.isMenuItem || construt.isMenuItemGroup)) {
+    if (c.data && c.data.slot && c.data.slot !== 'default') {
+      return
+    }
+    if (c && c.componentOptions) {
+      const options = c.componentOptions.Ctor.options
+      if (!options || !(options.isSubMenu || options.isMenuItem || options.isMenuItemGroup)) {
         return
       }
       if (keys.indexOf(c.key) !== -1) {
         ret.find = true
-      } else if (c.$slots.default) {
-        loopMenuItemRecusively(c.$slots.default, keys, ret)
+      } else if (c.componentOptions.children) {
+        loopMenuItemRecusively(c.componentOptions.children, keys, ret)
       }
     }
   })

@@ -42,7 +42,7 @@
   }
 
   &-item-active,
-  &-submenu-active > &-submenu-title {
+  &-submenu-active > span > &-submenu-title {
     background-color: #eaf8fe;
   }
 
@@ -193,7 +193,7 @@
   }
 
   .effect() {
-    animation-duration: .3s;
+    animation-duration: .5s;
     animation-fill-mode: both;
     transform-origin: 0 0;
   }
@@ -214,12 +214,14 @@
       animation-play-state: paused;
     }
 
-    &-slide-up-enter&-slide-up-enter-active, &-slide-up-appear&-slide-up-appear-active {
+    &-slide-up-enter-active, &-slide-up-appear-active {
+      .effect();
       animation-name: rcMenuOpenSlideUpIn;
       animation-play-state: running;
     }
 
-    &-slide-up-leave&-slide-up-leave-active {
+    &-slide-up-leave-active {
+      .effect();
       animation-name: rcMenuOpenSlideUpOut;
       animation-play-state: running;
     }
@@ -236,6 +238,7 @@
         transform: scaleY(1);
       }
     }
+
     @keyframes rcMenuOpenSlideUpOut {
       0% {
         opacity: 1;
@@ -284,7 +287,6 @@
     }
     @keyframes rcMenuOpenZoomOut {
       0% {
-
         transform: scale(1, 1);
       }
       100% {

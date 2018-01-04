@@ -12,11 +12,7 @@ const MenuItemGroup = {
     disabled: PropTypes.bool.def(true),
     title: PropTypes.any.def(''),
   },
-  data () {
-    return {
-      isMenuItemGroup: true,
-    }
-  },
+  isMenuItemGroup: true,
   methods: {
     renderInnerMenuItem (item, subIndex) {
       const { renderMenuItem, index } = this.$props

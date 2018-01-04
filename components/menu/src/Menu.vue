@@ -3,26 +3,19 @@ import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
 import StateMixin from '../../_util/StateMixin'
 import hasProp from '../../_util/hasProp'
+import commonPropsType from './commonPropsType'
 
 const Menu = {
   name: 'Menu',
   props: {
-    defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string).def([]),
-    selectedKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultOpenKeys: PropTypes.arrayOf(PropTypes.string).def([]),
-    openKeys: PropTypes.arrayOf(PropTypes.string),
-    mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
     getPopupContainer: PropTypes.func,
     openTransitionName: PropTypes.string,
-    openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     subMenuOpenDelay: PropTypes.number.def(0),
     subMenuCloseDelay: PropTypes.number.def(0.1),
     forceSubMenuRender: PropTypes.bool,
-    triggerSubMenuAction: PropTypes.string.def('click'),
     level: PropTypes.number.def(1),
     selectable: PropTypes.bool.def(true),
-    multiple: PropTypes.bool,
-    children: PropTypes.any,
+    ...commonPropsType,
   },
   mixins: [StateMixin, MenuMixin],
 

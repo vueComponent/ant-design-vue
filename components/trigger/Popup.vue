@@ -75,8 +75,8 @@ export default {
     getTransitionName () {
       const props = this.$props
       let transitionName = props.transitionName
-      if (!transitionName && props.animation) {
-        transitionName = `${props.prefixCls}-${props.animation}`
+      if (!transitionName && typeof props.animation === 'string') {
+        transitionName = `${props.animation}`
       }
       return transitionName
     },
@@ -100,7 +100,7 @@ export default {
     },
     getPopupElement () {
       const { $props: props, onMouseEnter, onMouseLeave, $slots } = this
-      const { align, visible, prefixCls } = props
+      const { align, visible, prefixCls, animation } = props
       const className = this.getClassName(this.currentAlignClassName ||
       props.getClassNameFromAlign(align))
       // const hiddenClassName = `${prefixCls}-hidden`
@@ -121,9 +121,13 @@ export default {
         ref: 'popupInstance',
         style: { ...this.getZIndexStyle() },
       }
+      const transitionProps = {
+        props: Object.assign({
+          appear: true,
+        }, typeof animation === 'object' ? animation : { name: this.getTransitionName() }),
+      }
       return (<transition
-        appear
-        name={this.getTransitionName()}
+        {...transitionProps}
         onBeforeEnter={this.beforeEnter}
         onAfterLeave={this.afterLeave}
       >

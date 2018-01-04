@@ -2,19 +2,12 @@
 import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
 import StateMixin from '../../_util/StateMixin'
-
+import commonPropsType from './commonPropsType'
+import { noop } from './util'
 export default {
   name: 'SubPopupMenu',
-  props: {
-    // onSelect: PropTypes.func,
-    // onClick: PropTypes.func,
-    // onDeselect: PropTypes.func,
-    // onOpenChange: PropTypes.func,
-    // onDestroy: PropTypes.func,
-    openTransitionName: PropTypes.string,
-    openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    openKeys: PropTypes.arrayOf(PropTypes.string),
-    visible: PropTypes.bool,
+  props: { ...commonPropsType,
+    clearSubMenuTimers: PropTypes.func.def(noop),
   },
 
   mixins: [MenuMixin, StateMixin],
@@ -36,7 +29,7 @@ export default {
     },
 
     onDestroy (key) {
-      this.$$emit('destroy', key)
+      this.$emit('destroy', key)
     },
 
     getOpenTransitionName () {
@@ -58,36 +51,8 @@ export default {
     },
   },
   render () {
-    const props = { ...this.$props }
-
-    const haveRendered = this.haveRendered
-    this.haveRendered = true
-
-    this.haveOpened = this.haveOpened || props.visible || props.forceSubMenuRender
-    if (!this.haveOpened) {
-      return null
-    }
-
-    const transitionAppear = !(!haveRendered && props.visible && props.mode === 'inline')
-
-    props.class = `${props.prefixCls}-sub`
-    const animProps = {}
-    if (props.openTransitionName) {
-      animProps.transitionName = props.openTransitionName
-    } else if (typeof props.openAnimation === 'object') {
-      animProps.animation = { ...props.openAnimation }
-      if (!transitionAppear) {
-        delete animProps.animation.appear
-      }
-    }
-    return (
-      <transition
-        appear
-        name={animProps.transitionName}
-      >
-        {this.renderRoot(props, this.$slots.default)}
-      </transition>
-    )
+    const { prefixCls } = this.$props
+    return this.renderRoot({ ...this.$props, class: `${prefixCls}-sub` }, this.$slots.default)
   },
 }
 </script>

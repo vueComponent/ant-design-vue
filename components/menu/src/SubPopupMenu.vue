@@ -1,6 +1,7 @@
 <script>
 import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
+import StateMixin from '../../_util/StateMixin'
 
 export default {
   name: 'SubPopupMenu',
@@ -16,7 +17,7 @@ export default {
     visible: PropTypes.bool,
   },
 
-  mixins: [MenuMixin],
+  mixins: [MenuMixin, StateMixin],
   methods: {
     onDeselect (selectInfo) {
       this.$emit('deselect', selectInfo)

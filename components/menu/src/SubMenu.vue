@@ -52,14 +52,6 @@ export default {
       isSubMenu: 1,
     }
   },
-  watch: {
-    '$props': {
-      handler: function (nextProps) {
-        console.log(nextProps)
-      },
-      deep: true,
-    },
-  },
   mounted () {
     this.handleUpdated()
   },
@@ -139,7 +131,6 @@ export default {
 
     onOpenChange (e) {
       this.$emit('openChange', e)
-      this.$props.openChange(e)
     },
 
     onPopupVisibleChange (visible) {

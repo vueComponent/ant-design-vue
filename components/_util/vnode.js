@@ -31,18 +31,20 @@ export function cloneVNodes (vnodes, deep) {
 }
 
 export function cloneElement (node, nodeProps) {
-  const { props, key } = nodeProps
+  const { props = {}, key, on = {}} = nodeProps
   if (node.componentOptions) {
     node.componentOptions.propsData = node.componentOptions.propsData || {}
+    node.componentOptions.listeners = node.componentOptions.listeners || {}
     Object.assign(node.componentOptions.propsData, props)
+    Object.assign(node.componentOptions.listeners, on)
   }
+
   const data = node.data || {}
   const { style = data.style,
     class: cls = data.class,
     attrs = data.attrs,
-    on = data.on,
   } = nodeProps
-  node.data = Object.assign(data, { style, attrs, class: cls, on })
+  node.data = Object.assign(data, { style, attrs, class: cls })
   if (key !== undefined) {
     node.key = key
     node.data.key = key

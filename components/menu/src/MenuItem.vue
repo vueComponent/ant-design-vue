@@ -2,6 +2,7 @@
 import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
 import { noop } from './util'
+import StateMixin from '../../_util/StateMixin'
 
 const MenuItem = {
   name: 'MenuItem',
@@ -26,7 +27,7 @@ const MenuItem = {
     // onMouseLeave: PropTypes.func,
     clearSubMenuTimers: PropTypes.func.def(noop),
   },
-
+  mixins: [StateMixin],
   beforeDestroy () {
     const props = this.$props
     this.$emit('destroy', props.eventKey)

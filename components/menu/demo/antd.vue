@@ -1,6 +1,7 @@
 <script>
 import { cloneElement } from '../../_util/vnode'
 import Menu, { SubMenu, Item as MenuItem, Divider } from '../src/index'
+import { Icon } from 'antd'
 import '../assets/index.less'
 import animate from 'css-animation'
 
@@ -80,7 +81,10 @@ export default {
     const commonMenu = (<Menu class='test' onSelect={handleSelect} onOpenChange={onOpenChange}>
       <SubMenu key='1'>
         <template slot='title'><span>sub menu</span></template>
-        <MenuItem key='1-1'>0-1</MenuItem>
+        <MenuItem key='1-1'>
+          0-1
+          <Icon type='search'/>
+        </MenuItem>
         <MenuItem key='1-2'>0-2</MenuItem>
       </SubMenu>
     </Menu>)

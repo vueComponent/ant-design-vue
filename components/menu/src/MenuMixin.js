@@ -3,7 +3,6 @@ import hasProp from '../../_util/hasProp'
 import KeyCode from '../../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'
-import StateMixin from '../../_util/StateMixin'
 import { cloneElement, cloneVNode } from '../../_util/vnode'
 import DOMWrap from './DOMWrap'
 
@@ -62,7 +61,6 @@ export default {
     openKeys: PropTypes.arrayOf(PropTypes.string),
     mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
   },
-  mixin: [StateMixin],
   data () {
     const props = this.$props
     return {
@@ -203,7 +201,7 @@ export default {
         on: {
           click: this.onClick,
           itemHover: this.onItemHover,
-          openChange: () => { console.log('openChange') },
+          openChange: this.onOpenChange,
           deselect: this.onDeselect,
           destroy: this.onDestroy,
           select: this.onSelect,
@@ -219,7 +217,6 @@ export default {
       if (!extraProps.isRootMenu) {
         newChildProps.props.clearSubMenuTimers = this.clearSubMenuTimers
       }
-      // return this.$scopedSlots.default(newChildProps)
       return cloneElement(child, newChildProps)
     },
 
@@ -252,11 +249,11 @@ export default {
       }
       const newChildren = children.map(this.renderMenuItem)
       return (
-        <DOMWrap
+        <ul
           {...domProps}
         >
           {newChildren}
-        </DOMWrap>
+        </ul>
       )
     },
 

@@ -102,10 +102,12 @@ export default {
       this.$emit('mouseleave', e)
     },
     beforeEnter (el) {
+      try {
+        // this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
+      } catch (error) {
+
+      }
       this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
-      // this.$nextTick(() => {
-      //   this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
-      // })
     },
     afterLeave (el) {
       if (this.destroyPopupOnHide) {

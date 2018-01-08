@@ -98,7 +98,7 @@ export default {
         <h2>antd menu</h2>
         <div>
           <h3>horizontal</h3>
-          <div style={{ margin: '20px', width: '800px' }}>
+          <div style={{ margin: '20px', width: '800px', position: 'relative' }}>
             <Clone childProps={{
               mode: 'horizontal',
               openAnimation: 'rc-menu-open-slide-up',

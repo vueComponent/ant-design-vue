@@ -27,6 +27,9 @@ const MenuItem = {
     // onMouseLeave: PropTypes.func,
     clearSubMenuTimers: PropTypes.func.def(noop),
   },
+  inject: {
+    parentMenuContext: { default: undefined },
+  },
   mixins: [StateMixin],
   isMenuItem: true,
   beforeDestroy () {
@@ -55,8 +58,10 @@ const MenuItem = {
     },
 
     onMouseEnter (e) {
-      const { eventKey } = this.$props
-      this.clearSubMenuTimers()
+      const { eventKey, parentMenuContext } = this
+      if (parentMenuContext && parentMenuContext.subMenuInstance) {
+        parentMenuContext.subMenuInstance.clearSubMenuTimers()
+      }
       this.$emit('itemHover', {
         key: eventKey,
         hover: true,
@@ -133,6 +138,7 @@ const MenuItem = {
         mouseenter: this.onMouseEnter,
       }
     }
+
     const style = {}
     if (props.mode === 'inline') {
       style.paddingLeft = `${props.inlineIndent * props.level}px`

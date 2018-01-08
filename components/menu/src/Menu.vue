@@ -10,10 +10,7 @@ const Menu = {
   props: {
     getPopupContainer: PropTypes.func,
     openTransitionName: PropTypes.string,
-    subMenuOpenDelay: PropTypes.number.def(0),
-    subMenuCloseDelay: PropTypes.number.def(0.1),
     forceSubMenuRender: PropTypes.bool,
-    level: PropTypes.number.def(1),
     selectable: PropTypes.bool.def(true),
     ...commonPropsType,
   },
@@ -23,8 +20,13 @@ const Menu = {
     const props = this.$props
     let sSelectedKeys = props.defaultSelectedKeys
     let sOpenKeys = props.defaultOpenKeys
-    sSelectedKeys = props.selectedKeys || []
-    sOpenKeys = props.openKeys || []
+    if (hasProp(this, 'selectedKeys')) {
+      sSelectedKeys = props.selectedKeys || []
+    }
+    if (hasProp(this, 'openKeys')) {
+      sOpenKeys = props.openKeys || []
+    }
+
     this.isRootMenu = true
     return {
       sSelectedKeys,
@@ -35,10 +37,10 @@ const Menu = {
     '$props': {
       handler: function (nextProps) {
         const props = {}
-        if (nextProps.selectedKeys === undefined) {
+        if (hasProp(this, 'selectedKeys')) {
           props.sSelectedKeys = nextProps.selectedKeys || []
         }
-        if (nextProps.openKeys === undefined) {
+        if (hasProp(this, 'selectedKeys')) {
           props.sOpenKeys = nextProps.openKeys || []
         }
         this.setState(props)

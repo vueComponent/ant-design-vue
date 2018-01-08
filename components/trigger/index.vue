@@ -258,7 +258,8 @@ export default {
     },
 
     getRootDomNode () {
-      return this.$el.children[0] || this.$el
+      console.log('this.$el.children', this.$el.children)
+      return this.$el.children ? this.$el.children[0] : this.$el
     },
 
     getPopupClassFromAlign (align) {
@@ -509,6 +510,7 @@ export default {
     } else {
       newChildProps.on.mouseleave = this.createTwoChains('mouseleave')
     }
+
     if (this.isFocusToShow() || this.isBlurToHide()) {
       newChildProps.on.focus = this.onFocus
       newChildProps.on.blur = this.onBlur

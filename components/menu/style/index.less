@@ -25,6 +25,7 @@
   &-collapse {
     overflow: hidden;
     &-active {
+      overflow: hidden;
       transition: height .3s ease-out;
     }
   }
@@ -136,7 +137,9 @@
       clear: both;
     }
   }
-
+  &-inline {
+    overflow: hidden;
+  }
   &-vertical,
   &-vertical-left,
   &-vertical-right,
@@ -166,7 +169,7 @@
       transform: rotate(90deg);
       transition: transform .3s;
     }
-    & .@{menuPrefixCls}-submenu-open .@{menuPrefixCls}-submenu-title {
+    & .@{menuPrefixCls}-submenu-open > .@{menuPrefixCls}-submenu-title {
       .@{menuPrefixCls}-submenu-arrow {
         transform: rotate(-90deg);
       }
@@ -193,7 +196,7 @@
   }
 
   .effect() {
-    animation-duration: .5s;
+    animation-duration: 3s;
     animation-fill-mode: both;
     transform-origin: 0 0;
   }
@@ -265,12 +268,14 @@
       animation-play-state: paused;
     }
 
-    &-zoom-enter&-zoom-enter-active, &-zoom-appear&-zoom-appear-active {
+    &-zoom-enter-active, &-zoom-appear-active {
+      .effect();
       animation-name: rcMenuOpenZoomIn;
       animation-play-state: running;
     }
 
-    &-zoom-leave&-zoom-leave-active {
+    &-zoom-leave-active {
+      .effect();
       animation-name: rcMenuOpenZoomOut;
       animation-play-state: running;
     }
@@ -285,6 +290,7 @@
         transform: scale(1, 1);
       }
     }
+
     @keyframes rcMenuOpenZoomOut {
       0% {
         transform: scale(1, 1);
@@ -295,6 +301,5 @@
       }
     }
   }
-
 }
 

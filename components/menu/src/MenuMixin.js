@@ -23,6 +23,11 @@ export default {
       sActiveKey: this.getActiveKey(props.activeKey),
     }
   },
+  provide () {
+    return {
+      parentMenuContext: this,
+    }
+  },
   watch: {
     '$props': {
       handler: function (nextProps) {

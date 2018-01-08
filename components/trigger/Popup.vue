@@ -24,6 +24,7 @@ export default {
   data () {
     return {
       destroyPopup: false,
+      initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化
     }
   },
   mounted () {
@@ -31,13 +32,23 @@ export default {
     this._container = this.getContainer()
     this._container.appendChild(this.$el)
     this.$nextTick(() => {
-      this.$refs.alignInstance.forceAlign()
+      this.initAlign = true
     })
+  },
+  beforeDestroy () {
+    this.$el.remove()
   },
   watch: {
     visible (val) {
       if (val) {
         this.destroyPopup = false
+      }
+    },
+    initAlign (val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.$refs.alignInstance.forceAlign()
+        })
       }
     },
   },
@@ -92,6 +103,9 @@ export default {
     },
     beforeEnter (el) {
       this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
+      // this.$nextTick(() => {
+      //   this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
+      // })
     },
     afterLeave (el) {
       if (this.destroyPopupOnHide) {
@@ -189,12 +203,15 @@ export default {
   },
 
   render () {
-    const { destroyPopup, getMaskElement, getPopupElement } = this
+    const { destroyPopup, getMaskElement, getPopupElement, initAlign } = this
     return (
       <div style='position: absolute; top: 0px; left: 0px; width: 100%;'>
-        {getMaskElement()}
-        { destroyPopup
-          ? null : getPopupElement()}
+        {initAlign ? (
+          getMaskElement(),
+          destroyPopup
+            ? null : getPopupElement()
+        ) : null }
+
       </div>
     )
   },

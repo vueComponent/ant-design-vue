@@ -258,7 +258,6 @@ export default {
     },
 
     getRootDomNode () {
-      console.log('this.$el.children', this.$el.children)
       return this.$el.children ? this.$el.children[0] : this.$el
     },
 

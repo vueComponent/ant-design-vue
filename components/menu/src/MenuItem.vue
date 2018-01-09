@@ -14,6 +14,7 @@ const MenuItem = {
     selectedKeys: PropTypes.array,
     disabled: PropTypes.bool,
     title: PropTypes.string,
+    index: PropTypes.number,
     inlineIndent: PropTypes.number.def(24),
     level: PropTypes.number.def(1),
     mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),

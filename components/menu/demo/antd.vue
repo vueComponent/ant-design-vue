@@ -1,8 +1,6 @@
 <script>
-import { cloneElement } from '../../_util/vnode'
 import Clone from '../../_util/Clone'
 import Menu, { SubMenu, Item as MenuItem, Divider } from '../src/index'
-import { Icon } from 'antd'
 import animate from 'css-animation'
 
 function handleSelect (info) {
@@ -74,17 +72,16 @@ export default {
         </SubMenu>
       </SubMenu>
     </SubMenu>)
-
-    function onOpenChange (value) {
-      console.log('onOpenChange', value)
+    const onOpenChange = (value) => {
+      console.log('onOpenChange', value, this.$refs)
     }
     const commonMenu = () => (
       <Menu onSelect={handleSelect} onOpenChange={onOpenChange}>
-        <SubMenu key='1' title={<span>sub menu</span>}>
+        <SubMenu ref='test' key='1' title={<span>sub menu</span>}>
           <MenuItem key='1-1'>
           0-1
           </MenuItem>
-          <MenuItem key='1-2'>0-2</MenuItem>
+          <MenuItem key='1-2' disabled>0-2</MenuItem>
         </SubMenu>
         {nestSubMenu()}
         <MenuItem key='2'>1</MenuItem>
@@ -130,6 +127,7 @@ export default {
           <div style={{ margin: '20px', width: '400px' }}><Clone childProps={{
             mode: 'inline',
             defaultOpenKeys: ['1'],
+            defaultSelectedKeys: ['1-2', '4-1'],
             openAnimation: animation,
           }} >
             {commonMenu()}

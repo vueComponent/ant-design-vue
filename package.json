@@ -67,16 +67,16 @@
     "style-loader": "^0.18.2",
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0",
-    "vue": "^2.4.4",
     "vue-loader": "^13.0.5",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.4.4",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
     "add-dom-event-listener": "^1.0.2",
     "css-animation": "^1.4.1",
+    "dom-align": "^1.6.6",
     "dom-scroll-into-view": "^1.2.1",
     "eslint-plugin-vue": "^3.13.0",
     "lodash.clonedeep": "^4.5.0",

@@ -163,7 +163,7 @@ const Menu = {
       const { sOpenKeys } = this.$data
       if (sOpenKeys.length) {
         lastOpen = this.getFlatInstanceArray().filter((c) => {
-          return c && sOpenKeys.indexOf(c.props.eventKey) !== -1
+          return c && sOpenKeys.indexOf(c.eventKey) !== -1
         })
       }
       return lastOpen[0]

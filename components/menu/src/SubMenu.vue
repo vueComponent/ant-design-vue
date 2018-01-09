@@ -31,6 +31,7 @@ export default {
     multiple: PropTypes.bool,
     active: PropTypes.bool, // TODO: remove
     isRootMenu: PropTypes.bool,
+    index: PropTypes.number,
     // onItemHover: PropTypes.func,
     // onSelect: PropTypes.func,
     triggerSubMenuAction: PropTypes.string,
@@ -100,7 +101,7 @@ export default {
 
     onKeyDown (e) {
       const keyCode = e.keyCode
-      const menu = this.menuInstance
+      const menu = this.$refs.menuInstance
       const isOpen = this.isOpen()
 
       if (keyCode === KeyCode.ENTER) {

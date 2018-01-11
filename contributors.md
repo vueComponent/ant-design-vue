@@ -7,6 +7,9 @@ Checkbox  |  done
 Radio  |  done
 Tabs | done
 Tag | done
+ToolTip | done
+Popconfirm
+Popover
 Carousel
 Mention
 Input | done |select完成后补全demo
@@ -22,7 +25,6 @@ TimePicker
 ##万
 Grid
 Col
-ToolTip
 Affix
 Alert
 BackTop
@@ -32,8 +34,6 @@ message
 Menu
 Modal
 notification
-Popconfirm
-Popover
 Anchor
 Tree
 TreeSelect

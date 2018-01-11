@@ -10,5 +10,6 @@ import './avatar/style'
 import './badge/style'
 import './tabs/style'
 import './input/style'
+import './tooltip/style'
 
 import './menu/style'

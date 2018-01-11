@@ -56,11 +56,9 @@ export default {
     onAlign (popupDomNode, align) {
       const props = this.$props
       const currentAlignClassName = props.getClassNameFromAlign(align)
-      // FIX: https://github.com/react-component/trigger/issues/56
-      // FIX: https://github.com/react-component/tooltip/issues/79
       if (this.currentAlignClassName !== currentAlignClassName) {
+        popupDomNode.className = popupDomNode.className.replace(this.currentAlignClassName, currentAlignClassName)
         this.currentAlignClassName = currentAlignClassName
-        popupDomNode.className = this.getClassName(currentAlignClassName)
       }
       this.$emit('align', popupDomNode, align)
     },
@@ -101,14 +99,6 @@ export default {
     onMouseLeave (e) {
       this.$emit('mouseleave', e)
     },
-    beforeEnter (el) {
-      try {
-        // this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
-      } catch (error) {
-
-      }
-      this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
-    },
     afterLeave (el) {
       if (this.destroyPopupOnHide) {
         this.destroyPopup = true
@@ -117,8 +107,8 @@ export default {
     getPopupElement () {
       const { $props: props, onMouseEnter, onMouseLeave, $slots } = this
       const { align, visible, prefixCls, animation } = props
-      const className = this.getClassName(this.currentAlignClassName ||
-      props.getClassNameFromAlign(align))
+      this.currentAlignClassName = this.currentAlignClassName || props.getClassNameFromAlign(align)
+      const className = this.getClassName(this.currentAlignClassName)
       // const hiddenClassName = `${prefixCls}-hidden`
       if (!visible) {
         this.currentAlignClassName = null
@@ -144,7 +134,6 @@ export default {
       }
       return (<transition
         {...transitionProps}
-        onBeforeEnter={this.beforeEnter}
         onAfterLeave={this.afterLeave}
       >
         <Align

@@ -93,3 +93,15 @@ export function cloneElement (n, nodeProps, clone) {
 export function getComponentName (opts) {
   return opts && (opts.Ctor.options.name || opts.tag)
 }
+
+export function isValidElement (ele) {
+  return !!ele.tag
+}
+
+export function getClass (ele) {
+  return ele.data && (ele.data.class || ele.data.staticClass)
+}
+
+export function getStyle (ele) {
+  return ele.data && (ele.data.style || ele.data.staticStyle)
+}

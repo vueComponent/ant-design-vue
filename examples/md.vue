@@ -1,5 +1,5 @@
 <template>
-  <div v-html="marked($slots.default[0].text.trim() || '')" />
+  <div style="padding: 10px 0;" v-html="marked($slots.default[0].text.trim() || '')" />
 </template>
 <script>
 import marked from 'marked'
@@ -16,7 +16,6 @@ marked.setOptions({
 export default {
   name: 'md',
   data () {
-    console.log(this.$slots.default)
     return {
       marked,
     }

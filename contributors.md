@@ -9,7 +9,7 @@ Tabs | done
 Tag | done
 ToolTip | done
 Popconfirm
-Popover
+Popover | done
 Menu
 Carousel
 Mention

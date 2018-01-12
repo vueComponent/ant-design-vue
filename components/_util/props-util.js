@@ -18,5 +18,13 @@ const getOptionProps = (instance) => {
   return filterProps($props, $options.propsData)
 }
 
-export { hasProp, filterProps, getOptionProps }
+const getComponentFromProp = (instance, h, prop) => {
+  const temp = instance[prop]
+  if (temp !== undefined) {
+    return typeof temp === 'function' ? temp(h) : temp
+  }
+  return instance.$slots[prop]
+}
+
+export { hasProp, filterProps, getOptionProps, getComponentFromProp }
 export default hasProp

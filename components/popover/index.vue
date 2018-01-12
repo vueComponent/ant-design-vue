@@ -2,7 +2,7 @@
 import Tooltip from '../tooltip'
 import abstractTooltipProps from '../tooltip/abstractTooltipProps'
 import PropTypes from '../_util/vue-types'
-import { getOptionProps } from '../_util/props-util'
+import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 
 export default {
   name: 'popover',
@@ -21,26 +21,10 @@ export default {
     getPopupDomNode () {
       return this.$refs.tooltip.getPopupDomNode()
     },
-    getOverlay (h) {
-      const { title, prefixCls, content, $slots } = this
-      return (
-        <div>
-          {(title || $slots.title) &&
-            <div class={`${prefixCls}-title`}>
-              {typeof title === 'function' ? title(h) : title}
-              {$slots.title}
-            </div>
-          }
-          <div class={`${prefixCls}-inner-content`}>
-            {typeof content === 'function' ? content(h) : content}
-            {$slots.content}
-          </div>
-        </div>
-      )
-    },
   },
 
   render (h) {
+    const { title, prefixCls, content, $slots } = this
     const props = getOptionProps(this)
     delete props.title
     delete props.content
@@ -56,7 +40,16 @@ export default {
         {...tooltipProps}
       >
         <template slot='title'>
-          {this.getOverlay(h)}
+          <div>
+            {(title || $slots.title) &&
+            <div class={`${prefixCls}-title`}>
+              {getComponentFromProp(this, h, 'title')}
+            </div>
+            }
+            <div class={`${prefixCls}-inner-content`}>
+              {getComponentFromProp(this, h, 'content')}
+            </div>
+          </div>
         </template>
         {this.$slots.default}
       </Tooltip>

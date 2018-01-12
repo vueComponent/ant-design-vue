@@ -10,6 +10,7 @@ Tag | done
 ToolTip | done
 Popconfirm
 Popover
+Menu
 Carousel
 Mention
 Input | done |select完成后补全demo
@@ -31,7 +32,6 @@ BackTop
 Dropdown
 Layout
 message
-Menu
 Modal
 notification
 Anchor

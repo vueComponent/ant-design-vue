@@ -1,9 +1,9 @@
 <script>
 import Align from '../index'
-import StateMixin from '../../_util/StateMixin'
+import BaseMixin from '../../_util/BaseMixin'
 
 export default {
-  mixins: [StateMixin],
+  mixins: [BaseMixin],
   data () {
     return {
       monitor: true,

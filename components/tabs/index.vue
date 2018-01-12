@@ -1,7 +1,7 @@
 <script>
 import Tabs from './Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 export default {
   props: {
     prefixCls: { type: String, default: 'ant-tabs' },

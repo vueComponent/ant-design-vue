@@ -102,7 +102,8 @@ export default {
       const props = this.$props
       if (!props.disabled) {
         const source = this.$el
-        this.$emit('align', source, align(source, props.target(), props.align))
+        // this.$emit('align', source, align(source, props.target(), props.align))
+        this.$listeners.align && this.$listeners.align(source, align(source, props.target(), props.align))
       }
     },
   },

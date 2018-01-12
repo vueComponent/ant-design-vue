@@ -2,7 +2,7 @@
 import TextArea from './TextArea'
 import omit from 'omit.js'
 import inputProps from './inputProps'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 
 function fixControlledValue (value) {
   if (typeof value === 'undefined' || value === null) {

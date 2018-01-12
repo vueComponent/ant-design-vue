@@ -3,7 +3,7 @@ import Icon from '../icon'
 import KeyCode from './KeyCode'
 import TabContent from './TabContent'
 import ScrollableInkTabBar from './ScrollableInkTabBar'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 function getDefaultActiveKey (t) {
   let activeKey
   t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {

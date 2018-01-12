@@ -2,7 +2,7 @@
 import omit from 'omit.js'
 import inputProps from './inputProps'
 import calculateNodeHeight from './calculateNodeHeight'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 
 function onNextFrame (cb) {
   if (window.requestAnimationFrame) {

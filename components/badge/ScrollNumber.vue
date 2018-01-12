@@ -1,5 +1,5 @@
 <script>
-import StateMixin from '../_util/StateMixin'
+import BaseMixin from '../_util/BaseMixin'
 
 function getNumberArray (num) {
   return num
@@ -20,7 +20,7 @@ export default {
       default: () => ({}),
     },
   },
-  mixins: [StateMixin],
+  mixins: [BaseMixin],
   data () {
     const { count } = this
     return {

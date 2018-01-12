@@ -3,7 +3,8 @@ import { cloneElement, isValidElement, getClass, getStyle } from '../_util/vnode
 import RcTooltip from './src/tooltip'
 import getPlacements from './placements'
 import PropTypes from '../_util/vue-types'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
+import abstractTooltipProps from './abstractTooltipProps'
 
 const splitObject = (obj, keys) => {
   const picked = {}
@@ -20,23 +21,12 @@ const splitObject = (obj, keys) => {
 export default {
   name: 'Tooltip',
   props: {
-    trigger: PropTypes.oneOf(['hover', 'focus', 'click']).def(['hover']),
-    visible: PropTypes.bool,
+    ...abstractTooltipProps,
     title: PropTypes.any,
-    placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom',
-      'topLeft', 'topRight', 'bottomLeft', 'bottomRight',
-      'leftTop', 'leftBottom', 'rightTop', 'rightBottom']).def('top'),
-    transitionName: PropTypes.string.def('zoom-big-fast'),
-    // onVisibleChange: PropTypes.func,
-    overlayStyle: PropTypes.object,
-    overlayClassName: PropTypes.string,
-    prefixCls: PropTypes.string.def('ant-tooltip'),
-    mouseEnterDelay: PropTypes.number.def(0.1),
-    mouseLeaveDelay: PropTypes.number.def(0.1),
-    getTooltipContainer: PropTypes.func,
-    getPopupContainer: PropTypes.func,
-    arrowPointAtCenter: PropTypes.bool.def(false),
-    autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),
+  },
+  model: {
+    prop: 'visible',
+    event: 'change',
   },
   data () {
     return {
@@ -54,7 +44,7 @@ export default {
         this.sVisible = this.isNoTitle() ? false : visible
       }
       if (!this.isNoTitle()) {
-        this.$emit('visibleChange', visible)
+        this.$emit('change', visible)
       }
     },
 
@@ -164,7 +154,9 @@ export default {
     if (!hasProp(this, 'visible') && this.isNoTitle()) {
       sVisible = false
     }
-
+    if (!children) {
+      return null
+    }
     const child = this.getDisabledCompatibleChildren(isValidElement(children) ? children : <span>{children}</span>)
     const childCls = {
       [openClassName || `${prefixCls}-open`]: true,

@@ -1,4 +1,4 @@
-import hasProp from '../../_util/hasProp'
+import hasProp from '../../_util/props-util'
 import KeyCode from '../../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'

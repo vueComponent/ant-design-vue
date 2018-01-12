@@ -2,10 +2,11 @@
 import PropTypes from '../../_util/vue-types'
 import Trigger from '../../trigger'
 import { placements } from './placements'
-import hasProp from '../../_util/hasProp'
+import hasProp from '../../_util/props-util'
+function noop () {}
 export default {
   props: {
-    trigger: PropTypes.any.def(['hover']),
+    trigger: PropTypes.any.def('hover'),
     defaultVisible: PropTypes.bool,
     visible: PropTypes.bool,
     placement: PropTypes.string.def('right'),
@@ -14,7 +15,6 @@ export default {
       PropTypes.object,
     ]),
     animation: PropTypes.any,
-    // onVisibleChange: PropTypes.func,
     afterVisibleChange: PropTypes.func.def(() => {}),
     overlay: PropTypes.any,
     overlayStyle: PropTypes.object,
@@ -47,12 +47,6 @@ export default {
     getPopupDomNode () {
       return this.$refs.trigger.getPopupDomNode()
     },
-    onVisibleChange (val) {
-      this.$emit('visibleChange', val)
-    },
-    onPopupAlign () {
-      this.$emit('popupAlign', ...arguments)
-    },
   },
   render (h) {
     const {
@@ -79,7 +73,6 @@ export default {
         popupPlacement: placement,
         popupAlign: align,
         getPopupContainer: getTooltipContainer,
-        // onPopupVisibleChange: onVisibleChange,
         afterPopupVisibleChange: afterVisibleChange,
         popupTransitionName: transitionName,
         popupAnimation: animation,
@@ -91,8 +84,8 @@ export default {
         ...extraProps,
       },
       on: {
-        popupVisibleChange: this.onVisibleChange,
-        popupAlign: this.onPopupAlign,
+        popupVisibleChange: this.$listeners.visibleChange || noop,
+        popupAlign: this.$listeners.popupAlign || noop,
       },
       ref: 'trigger',
     }

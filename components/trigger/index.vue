@@ -1,12 +1,12 @@
 <script>
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
-import StateMixin from '../_util/StateMixin'
+import BaseMixin from '../_util/BaseMixin'
 import { cloneElement, cloneVNode } from '../_util/vnode'
 
 function returnEmptyString () {
@@ -62,7 +62,7 @@ export default {
     maskAnimation: PropTypes.string,
   },
 
-  mixins: [StateMixin],
+  mixins: [BaseMixin],
   data () {
     const props = this.$props
     let popupVisible
@@ -282,9 +282,6 @@ export default {
       }
       return popupAlign
     },
-    onPopupAlign () {
-      this.$emit('popupAlign', ...arguments)
-    },
     getComponent (h) {
       const mouseProps = {}
       if (this.isMouseEnterToShow()) {
@@ -294,7 +291,7 @@ export default {
         mouseProps.mouseleave = this.onPopupMouseleave
       }
       const { prefixCls, destroyPopupOnHide, sPopupVisible,
-        popupStyle, popupClassName, action, onPopupAlign,
+        popupStyle, popupClassName, action,
         popupAnimation, handleGetPopupClassFromAlign, getRootDomNode,
         mask, zIndex, popupTransitionName, getPopupAlign,
         maskAnimation, maskTransitionName, popup, $slots, getContainer } = this
@@ -317,7 +314,7 @@ export default {
           popupClassName,
         },
         on: {
-          align: onPopupAlign,
+          align: this.$listeners.popupAlign || noop,
           ...mouseProps,
         },
         ref: 'popup',
@@ -358,7 +355,7 @@ export default {
           })
           this.$forceUpdate()
         }
-        this.$emit('popupVisibleChange', sPopupVisible)
+        this.$listeners.popupVisibleChange && this.$listeners.popupVisibleChange(sPopupVisible)
       }
     },
 

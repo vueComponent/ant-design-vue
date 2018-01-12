@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types'
 import Align from '../align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
+import { noop } from './utils'
 
 export default {
   props: {
@@ -60,7 +61,7 @@ export default {
         popupDomNode.className = popupDomNode.className.replace(this.currentAlignClassName, currentAlignClassName)
         this.currentAlignClassName = currentAlignClassName
       }
-      this.$emit('align', popupDomNode, align)
+      this.$listeners.align && this.$listeners.align(popupDomNode, align)
     },
 
     getPopupDomNode () {
@@ -93,20 +94,15 @@ export default {
     getClassName (currentAlignClassName) {
       return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`
     },
-    onMouseEnter (e) {
-      this.$emit('mouseenter', e)
-    },
-    onMouseLeave (e) {
-      this.$emit('mouseleave', e)
-    },
     afterLeave (el) {
       if (this.destroyPopupOnHide) {
         this.destroyPopup = true
       }
     },
     getPopupElement () {
-      const { $props: props, onMouseEnter, onMouseLeave, $slots } = this
+      const { $props: props, $slots, $listeners } = this
       const { align, visible, prefixCls, animation } = props
+      const { mouseenter, mouseleave } = $listeners
       this.currentAlignClassName = this.currentAlignClassName || props.getClassNameFromAlign(align)
       const className = this.getClassName(this.currentAlignClassName)
       // const hiddenClassName = `${prefixCls}-hidden`
@@ -121,8 +117,8 @@ export default {
         },
         class: `${className}`,
         on: {
-          mouseenter: onMouseEnter,
-          mouseleave: onMouseLeave,
+          mouseenter: mouseenter || noop,
+          mouseleave: mouseleave || noop,
         },
         ref: 'popupInstance',
         style: { ...this.getZIndexStyle() },

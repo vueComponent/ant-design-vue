@@ -11,5 +11,6 @@ import './badge/style'
 import './tabs/style'
 import './input/style'
 import './tooltip/style'
+import './popover/style'
 
 import './menu/style'

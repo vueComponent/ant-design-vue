@@ -1,5 +1,5 @@
 <script>
-import Tabs from './Tabs'
+import Tabs from './src/Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
 import hasProp from '../_util/props-util'
 export default {
@@ -75,7 +75,6 @@ export default {
       tabPosition,
       tabBarStyle,
       hideAdd,
-      onTabClick,
       onPrevClick,
       onNextClick,
       animated,
@@ -114,36 +113,38 @@ export default {
       }
     })
     const tabBarProps = {
-      inkBarAnimated,
-      onTabClick,
-      onPrevClick,
-      onNextClick,
+      props: {
+        hideAdd,
+        removeTab: this.removeTab,
+        createNewTab: this.createNewTab,
+        inkBarAnimated,
+      },
+      on: {
+        // tabClick: onTabClick,
+        prevClick: onPrevClick,
+        nextClick: onNextClick,
+      },
       style: tabBarStyle,
-      hideAdd,
-      removeTab: this.removeTab,
-      createNewTab: this.createNewTab,
     }
     const tabContentProps = {
-      animated: tabPaneAnimated,
-      animatedWithMargin: true,
+      props: {
+        animated: tabPaneAnimated,
+        animatedWithMargin: true,
+      },
     }
-    const self = this
     const tabsProps = {
       props: {
         prefixCls,
         tabBarPosition: tabPosition,
-        onChange: this.handleChange,
         tabBarProps: tabBarProps,
         tabContentProps: tabContentProps,
         destroyInactiveTabPane,
         defaultActiveKey,
         type,
-        onTabClick: this.onTabClick,
       },
       on: {
-        change (val) {
-          self.handleChange(val)
-        },
+        change: this.handleChange,
+        tabClick: this.onTabClick,
       },
     }
     if (hasProp(this, 'activeKey')) {

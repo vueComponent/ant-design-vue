@@ -1,9 +1,10 @@
 <script>
-import Icon from '../icon'
+import Icon from '../../icon'
 import KeyCode from './KeyCode'
 import TabContent from './TabContent'
 import ScrollableInkTabBar from './ScrollableInkTabBar'
-import hasProp from '../_util/props-util'
+import hasProp from '../../_util/props-util'
+import BaseMixin from '../../_util/BaseMixin'
 function getDefaultActiveKey (t) {
   let activeKey
   t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {
@@ -23,8 +24,7 @@ function activeKeyIsValid (t, key) {
   })
   return key !== undefined && keys.indexOf(key) >= 0
 }
-function noop () {
-}
+
 export default {
   name: 'Tabs',
   components: { Icon },
@@ -32,6 +32,7 @@ export default {
     prop: 'activeKey',
     event: 'change',
   },
+  mixins: [BaseMixin],
   props: {
     prefixCls: {
       default: 'ant-tabs',
@@ -53,8 +54,6 @@ export default {
         return ['line', 'card', 'editable-card'].includes(value)
       },
     },
-    onChange: { type: Function, default: noop },
-    onTabClick: { type: Function, default: noop },
   },
   data () {
     return {
@@ -90,7 +89,7 @@ export default {
       return activeKey
     },
     handleTabClick (activeKey) {
-      this.onTabClick(activeKey)
+      this.__emit('tabClick', activeKey)
       this.setActiveKey(activeKey)
     },
 
@@ -112,7 +111,7 @@ export default {
         if (!hasProp(this, 'activeKey')) {
           this.stateActiveKey = activeKey
         }
-        this.onChange(activeKey)
+        this.__emit('change', activeKey)
       }
     },
 
@@ -172,25 +171,31 @@ export default {
     })
     const tabContentProps = {
       props: {
-        ...this.tabContentProps,
+        ...this.tabContentProps.props,
         prefixCls,
         tabBarPosition,
         activeKey: stateActiveKey,
         destroyInactiveTabPane,
-        onChange: setActiveKey,
+        // onChange: setActiveKey,
+      },
+      on: {
+        change: setActiveKey,
       },
     }
     const tabBarProps = {
       props: {
-        ...this.tabBarProps,
+        ...this.tabBarProps.props,
         panels: panels,
         prefixCls: prefixCls,
-        onKeyDown: onNavKeyDown,
         tabBarPosition: tabBarPosition,
-        onTabClick: handleTabClick,
         activeKey: stateActiveKey,
       },
       style: this.tabBarProps.style || {},
+      on: {
+        ...this.tabBarProps.on,
+        keydown: onNavKeyDown,
+        tabClick: handleTabClick,
+      },
     }
     const contents = [
       <ScrollableInkTabBar

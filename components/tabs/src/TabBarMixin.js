@@ -1,4 +1,4 @@
-import Icon from '../icon'
+import Icon from '../../icon'
 function noop () {
 }
 export default {
@@ -12,14 +12,6 @@ export default {
       type: String,
     },
     disabled: Boolean,
-    onKeyDown: {
-      default: noop,
-      type: Function,
-    },
-    onTabClick: {
-      default: noop,
-      type: Function,
-    },
     activeKey: String,
     panels: Array,
     hideAdd: Boolean,
@@ -51,7 +43,7 @@ export default {
         } else {
         }
         const onClick = () => {
-          !disabled && this.onTabClick(tabKey)
+          !disabled && this.__emit('tabClick', tabKey)
         }
 
         let tabC = typeof tab === 'function' ? child.tab(h, tabKey) : tab
@@ -85,6 +77,9 @@ export default {
       })
 
       return rst
+    },
+    onKeyDown (e) {
+      this.__emit('keydown', e)
     },
     getRootNode (contents, createElement) {
       const {

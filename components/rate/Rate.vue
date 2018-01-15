@@ -3,7 +3,7 @@ import Star from './Star.vue'
 import Icon from '../icon'
 import { getOffsetLeft } from './util'
 import { cloneVNodes } from '../_util/vnode'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 
 export default {
   name: 'Rate',

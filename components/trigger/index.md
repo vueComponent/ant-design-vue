@@ -140,13 +140,13 @@
         </tr>
         <tr>
           <td>popupVisibleChange</td>
-          <td>$emit(visible)</td>
+          <td>$emit</td>
           <td></td>
           <td>call when popup visible is changed</td>
         </tr>
         <tr>
           <td>popupAlign</td>
-          <td>$emit(popupDomNode, align)</td>
+          <td>$emit</td>
           <td></td>
           <td>callback when popup node is aligned</td>
         </tr>

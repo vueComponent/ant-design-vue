@@ -33,6 +33,7 @@ export default {
     const Tag = this.$props.tag
     const tagProps = {
       attr: { ...otherProps, ...this.$attrs },
+      on: this.$listeners,
     }
     return <Tag {...tagProps} class={this.class}>{this.$slots.default}</Tag>
   },

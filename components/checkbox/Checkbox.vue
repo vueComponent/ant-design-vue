@@ -13,7 +13,7 @@
   </label>
 </template>
 <script>
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 export default {
   name: 'Checkbox',
   props: {

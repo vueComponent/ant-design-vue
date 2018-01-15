@@ -1,9 +1,8 @@
 <script>
 import TabBarMixin from './TabBarMixin'
-function noop () {
-}
+import BaseMixin from '../../_util/BaseMixin'
 export default {
-  mixins: [TabBarMixin],
+  mixins: [TabBarMixin, BaseMixin],
   name: 'TabBar',
   props: {
     prefixCls: {
@@ -15,14 +14,6 @@ export default {
       type: String,
     },
     disabled: Boolean,
-    onKeyDown: {
-      default: noop,
-      type: Function,
-    },
-    onTabClick: {
-      default: noop,
-      type: Function,
-    },
     activeKey: String,
     panels: Array,
   },

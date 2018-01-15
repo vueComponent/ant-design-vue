@@ -1,4 +1,4 @@
-import hasProp from '../../_util/hasProp'
+import hasProp from '../../_util/props-util'
 import KeyCode from '../../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'
@@ -9,10 +9,8 @@ function allDisabled (arr) {
   if (!arr.length) {
     return true
   }
-
   return arr.every(c => {
-    const propsData = c.componentOptions.propsData || {}
-    return !!propsData.disabled
+    return !!c.disabled
   })
 }
 
@@ -53,10 +51,6 @@ export default {
       deep: true,
     },
   },
-
-  created () {
-    this.instanceArray = []
-  },
   methods: {
     getActiveKey (originalActiveKey) {
       let activeKey = originalActiveKey
@@ -86,23 +80,13 @@ export default {
       }
       return activeKey
     },
-    saveRef (index, subIndex, c) {
-      if (c) {
-        if (subIndex !== undefined) {
-          this.instanceArray[index] = this.instanceArray[index] || []
-          this.instanceArray[index][subIndex] = c
-        } else {
-          this.instanceArray[index] = c
-        }
-      }
-    },
     // all keyboard events callbacks run from here at first
-    onKeyDown (e, callback) {
+    onKeyDown (e) {
       const keyCode = e.keyCode
       let handled
       this.getFlatInstanceArray().forEach((obj) => {
-        if (obj && obj.$props.active) {
-          handled = this.$emit('keydown', e)
+        if (obj && obj.active) {
+          handled = obj.onKeyDown(e)
         }
       })
       if (handled) {
@@ -115,15 +99,11 @@ export default {
       if (activeItem) {
         e.preventDefault()
         this.setState({
-          sActiveKey: activeItem.$props.eventKey,
+          sActiveKey: activeItem.eventKey,
         }, () => {
           scrollIntoView(activeItem.$el, this.$el, {
             onlyScrollIfNeeded: true,
           })
-          // https://github.com/react-component/menu/commit/9899a9672f6f028ec3cdf773f1ecea5badd2d33e
-          if (typeof callback === 'function') {
-            callback(activeItem)
-          }
         })
         return 1
       } else if (activeItem === undefined) {
@@ -143,22 +123,13 @@ export default {
     },
 
     getFlatInstanceArray () {
-      let instanceArray = this.instanceArray
-      const hasInnerArray = instanceArray.some((a) => {
-        return Array.isArray(a)
-      })
-      if (hasInnerArray) {
-        instanceArray = []
-        this.instanceArray.forEach((a) => {
-          if (Array.isArray(a)) {
-            instanceArray.push.apply(instanceArray, a)
-          } else {
-            instanceArray.push(a)
-          }
-        })
-        this.instanceArray = instanceArray
+      let instance = []
+      try {
+        instance = this.$children[0].$children || []
+      } catch (error) {
+
       }
-      return instanceArray
+      return instance
     },
 
     renderCommonMenuItem (child, i, subIndex, extraProps) {
@@ -175,7 +146,6 @@ export default {
           renderMenuItem: this.renderMenuItem,
           rootPrefixCls: props.prefixCls,
           index: i,
-          // parentMenu: this,
           eventKey: key,
           active: !childProps.disabled && isActive,
           multiple: props.multiple,
@@ -195,11 +165,7 @@ export default {
           destroy: this.onDestroy,
           select: this.onSelect,
         },
-        // ref: childProps.disabled ? undefined : child.ref,
-        // ref: childProps.disabled ? undefined
-        //  : createChainedFunction(child.ref, saveRef.bind(this, i, subIndex)),
       }
-      // !childProps.disabled && this.saveRef(i, subIndex, child.ref)
       if (props.mode === 'inline') {
         newChildProps.props.triggerSubMenuAction = 'click'
       }
@@ -210,7 +176,6 @@ export default {
     },
 
     renderRoot (props, children = []) {
-      this.instanceArray = []
       const className = {
         [props.prefixCls]: true,
         [props.class]: true,
@@ -236,7 +201,7 @@ export default {
         domProps.attrs.tabIndex = '0'
         domProps.on.keydown = this.onKeyDown
       }
-      const newChildren = children.map(this.renderMenuItem)
+      const newChildren = children.map((c, i) => this.renderMenuItem(c, i))
       return (
         <DOMWrap
           {...domProps}
@@ -259,8 +224,7 @@ export default {
       // find current activeIndex
       let activeIndex = -1
       children.every((c, ci) => {
-        const propsData = c.componentOptions.propsData || {}
-        if (c && propsData.eventKey === sActiveKey) {
+        if (c && c.eventKey === sActiveKey) {
           activeIndex = ci
           return false
         }
@@ -275,8 +239,7 @@ export default {
       let i = start
       for (; ;) {
         const child = children[i]
-        const propsData = child.componentOptions.propsData || {}
-        if (!child || propsData.disabled) {
+        if (!child || child.disabled) {
           i = (i + 1 + len) % len
           // complete a loop
           if (i === start) {

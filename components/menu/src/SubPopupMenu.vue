@@ -1,7 +1,7 @@
 <script>
 import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
-import StateMixin from '../../_util/StateMixin'
+import BaseMixin from '../../_util/BaseMixin'
 import commonPropsType from './commonPropsType'
 import { noop } from './util'
 export default {
@@ -10,26 +10,26 @@ export default {
     clearSubMenuTimers: PropTypes.func.def(noop),
   },
 
-  mixins: [MenuMixin, StateMixin],
+  mixins: [MenuMixin, BaseMixin],
   methods: {
     onDeselect (selectInfo) {
-      this.$emit('deselect', selectInfo)
+      this.__emit('deselect', selectInfo)
     },
 
     onSelect (selectInfo) {
-      this.$emit('select', selectInfo)
+      this.__emit('select', selectInfo)
     },
 
     onClick (e) {
-      this.$emit('click', e)
+      this.__emit('click', e)
     },
 
     onOpenChange (e) {
-      this.$emit('openChange', e)
+      this.__emit('openChange', e)
     },
 
     onDestroy (key) {
-      this.$emit('destroy', key)
+      this.__emit('destroy', key)
     },
 
     getOpenTransitionName () {

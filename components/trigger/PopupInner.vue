@@ -8,22 +8,14 @@ export default {
     prefixCls: PropTypes.string,
     visible: PropTypes.bool,
   },
-  methods: {
-    onMouseEnter (e) {
-      this.$emit('mouseenter', e)
-    },
-    onMouseLeave (e) {
-      this.$emit('mouseleave', e)
-    },
-  },
   render () {
     const { prefixCls, visible } = this.$props
-    const { onMouseEnter, onMouseLeave } = this
+    const { $listeners } = this
+    const divProps = {
+      on: $listeners,
+    }
     return (
-      <div
-        onMouseenter={onMouseEnter}
-        onMouseleave={onMouseLeave}
-      >
+      <div {...divProps}>
         <LazyRenderBox class={`${prefixCls}-content`} visible={visible}>
           {this.$slots.default}
         </LazyRenderBox>

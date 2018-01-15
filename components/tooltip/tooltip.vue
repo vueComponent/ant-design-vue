@@ -1,121 +1,127 @@
 <script>
-import Vue from 'vue'
+import { cloneElement, isValidElement, getClass, getStyle } from '../_util/vnode'
+import RcTooltip from './src/tooltip'
+import getPlacements from './placements'
+import PropTypes from '../_util/vue-types'
+import hasProp from '../_util/props-util'
+import abstractTooltipProps from './abstractTooltipProps'
+
+const splitObject = (obj, keys) => {
+  const picked = {}
+  const omited = { ...obj }
+  keys.forEach(key => {
+    if (obj && key in obj) {
+      picked[key] = obj[key]
+      delete omited[key]
+    }
+  })
+  return { picked, omited }
+}
+
 export default {
-  name: 'ToolTip',
+  name: 'Tooltip',
   props: {
-    title: String,
-    prefixCls: {
-      default: 'ant-tooltip',
-    },
-    placement: {
-      default: 'top',
-      validator: val => ['top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'].includes(val),
-    },
-    transitionName: {
-      default: 'zoom-big-fast',
-    },
-    mouseEnterDelay: {
-      default: 0.1,
-    },
-    mouseLeaveDelay: {
-      default: 0.1,
-    },
-    arrowPointAtCenter: {
-      default: false,
-    },
-    autoAdjustOverflow: {
-      default: true,
-    },
+    ...abstractTooltipProps,
+    title: PropTypes.any,
+  },
+  model: {
+    prop: 'visible',
+    event: 'change',
   },
   data () {
     return {
-      vnode: null,
-      visible: false,
-      left: 0,
-      top: 0,
-      realPlacement: this.placement,
-      t1: null,
-      t2: null,
+      sVisible: !!this.$props.visible,
     }
   },
-  computed: {
-    classes () {
-      const { prefixCls } = this
-      return {
-        [`${prefixCls}`]: true,
-      }
+  watch: {
+    visible (val) {
+      this.sVisible = val
     },
   },
   methods: {
-    checkPosition (popup, text, placement) {
-      const { top, left, bottom, right } = text
-      const reg = /(top|bottom|left|right)(.*)/
-      const [, abstractPos, suffix] = placement.match(reg)
-      let ret = placement
-      // we can change the position many times
-      if (abstractPos === 'left' && left < popup.width) ret = 'right' + suffix
-      if (abstractPos === 'right' && document.documentElement.clientWidth - right < popup.width) ret = 'left' + suffix
-      if (abstractPos === 'top' && top < popup.height) ret = 'bottom' + suffix
-      if (abstractPos === 'bottom' && document.documentElement.clientHeight - bottom < popup.height) ret = 'left' + suffix
-      return ret
-    },
-    mountNode (callback) {
-      if (this.vnode) {
-        callback()
-        return
+    onVisibleChange (visible) {
+      if (!hasProp(this, 'visible')) {
+        this.sVisible = this.isNoTitle() ? false : visible
       }
-      const div = document.createElement('div')
-      document.body.appendChild(div)
-      const that = this
-      const vnode = new Vue({
-        data () {
-          return {
-            left: 0,
-            top: 0,
-          }
-        },
-        methods: {
-          hideSelf (e) {
-            if (that.t1) {
-              clearTimeout(that.t1)
-              that.t1 = null
-            }
-            if (that.mouseLeaveDelay) {
-              that.t2 = window.setTimeout(() => {
-                if (e.relatedTarget === that.$el) {
-                  return
-                }
-                that.visible = false
-              }, +that.mouseLeaveDelay * 1e3)
-            }
-          },
-        },
-        render (h) {
-          return (
-            <transition name={that.transitionName}>
-              <div
-                v-show={that.visible}
-                class={`ant-tooltip ant-tooltip-placement-${that.realPlacement}`}
-                style={{ left: this.left + 'px', top: this.top + 'px' }}
-                onMouseleave={this.hideSelf}
-              >
-                <div class='ant-tooltip-content'>
-                  <div class='ant-tooltip-arrow'/>
-                  <div class='ant-tooltip-inner'>
-                    <span>{that.title}</span>
-                  </div>
-                </div>
-              </div>
-            </transition>
-          )
-        },
-      }).$mount(div)
-      this.$nextTick(() => {
-        this.vnode = vnode
-        callback()
+      if (!this.isNoTitle()) {
+        this.$emit('change', visible)
+      }
+    },
+
+    getPopupDomNode () {
+      return this.$refs.tooltip.getPopupDomNode()
+    },
+
+    getPlacements () {
+      const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = this.$props
+      return builtinPlacements || getPlacements({
+        arrowPointAtCenter,
+        verticalArrowShift: 8,
+        autoAdjustOverflow,
       })
     },
-    onPopupAlign: (placement, domNode, target, align) => {
+
+    isHoverTrigger () {
+      const { trigger } = this.$props
+      if (!trigger || trigger === 'hover') {
+        return true
+      }
+      if (Array.isArray(trigger)) {
+        return trigger.indexOf('hover') >= 0
+      }
+      return false
+    },
+
+    // Fix Tooltip won't hide at disabled button
+    // mouse events don't trigger at disabled button in Chrome
+    // https://github.com/react-component/tooltip/issues/18
+    getDisabledCompatibleChildren (ele) {
+      const isAntBtn = ele.componentOptions && ele.componentOptions.Ctor.options.__ANT_BUTTON
+      if (((isAntBtn && ele.componentOptions.propsData.disabled) || (ele.tag === 'button' && ele.data && ele.data.attrs.disabled !== false)) && this.isHoverTrigger()) {
+      // Pick some layout related style properties up to span
+      // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
+        const { picked, omited } = splitObject(
+          getStyle(ele),
+          ['position', 'left', 'right', 'top', 'bottom', 'float', 'display', 'zIndex'],
+        )
+        const spanStyle = {
+          display: 'inline-block', // default inline-block is important
+          ...picked,
+          cursor: 'not-allowed',
+        }
+        const buttonStyle = {
+          ...omited,
+          pointerEvents: 'none',
+        }
+        const spanCls = getClass(ele)
+        const child = cloneElement(ele, {
+          style: buttonStyle,
+          class: null,
+        })
+        return (
+          <span style={spanStyle} class={spanCls}>
+            {child}
+          </span>
+        )
+      }
+      return ele
+    },
+
+    isNoTitle () {
+      const { $slots, title } = this
+      return !$slots.title && !title
+    },
+
+    // 动态设置动画点
+    onPopupAlign (domNode, align) {
+      const placements = this.getPlacements()
+      // 当前返回的位置
+      const placement = Object.keys(placements).filter(
+        key => (
+          placements[key].points[0] === align.points[0] &&
+        placements[key].points[1] === align.points[1]
+        ),
+      )[0]
       if (!placement) {
         return
       }
@@ -135,118 +141,48 @@ export default {
       } else if (placement.indexOf('right') >= 0 || placement.indexOf('Left') >= 0) {
         transformOrigin.left = `${-align.offset[0]}px`
       }
-      target.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`
-    },
-    addEventHandle (old, fn) {
-      if (!old) {
-        return fn
-      } else if (Array.isArray(old)) {
-        return old.indexOf(fn) > -1 ? old : old.concat(fn)
-      } else {
-        return old === fn ? old : [old, fn]
-      }
-    },
-    computeOffset (popup, text, placement, scale) {
-      let { width, height, top, left } = text
-      //  you cant change the properties of DOMRect
-      top += window.scrollY
-      left += window.scrollX
-      // FIXME: we can get the numbers from scale, but that's not what we really want
-      const p = { width: popup.width / scale, height: popup.height / scale }
-      const ret = { left, top }
-
-      if (/top/.test(placement)) ret.top -= p.height
-      if (/bottom/.test(placement)) ret.top += height
-      if (/left/.test(placement)) ret.left -= p.width
-      if (/right/.test(placement)) ret.left += width
-
-      // FIXME: magic number 20 & 14 comes from the offset of triangle
-      if (/Left/.test(placement)) {
-        if (this.arrowPointAtCenter) ret.left += width / 2 - 20
-      } else if (/Right/.test(placement)) {
-        ret.left += (width - p.width)
-        if (this.arrowPointAtCenter) ret.left -= width / 2 - 20
-      } else if (/(top)|(bottom)/.test(placement)) {
-        ret.left += (width - p.width) / 2
-      }
-      if (/Top/.test(placement)) {
-        if (this.arrowPointAtCenter) ret.top += height / 2 - 14
-      } else if (/Bottom/.test(placement)) {
-        ret.top += (height - p.height)
-        if (this.arrowPointAtCenter) ret.top -= height / 2 - 14
-      } else if (/(left)|(right)/.test(placement)) {
-        ret.top += (height - p.height) / 2
-      }
-      return ret
-    },
-    showNode () {
-      this.mountNode(() => {
-        this.visible = true
-        this.$nextTick(() => {
-          const popup = this.vnode.$el.getBoundingClientRect()
-          const [, scale = 1] = window.getComputedStyle(this.vnode.$el).transform.match(/matrix\((.*?),/) || []
-          const content = this.$el.getBoundingClientRect()
-          const place = this.autoAdjustOverflow ? this.checkPosition(popup, content, this.placement, scale) : this.placement
-          this.realPlacement = place
-          const { left, top } = this.computeOffset(popup, content, place, scale)
-          this.vnode.left = left
-          this.vnode.top = top
-        })
-        this.onPopupAlign(this.realPlacement, this.$el, this.vnode.$el, { offset: [0, 0] })
-      })
-    },
-    hideNode (e) {
-      if (!this.vnode) return
-      if (e.relatedTarget === this.vnode.$el) {
-        return
-      }
-      this.visible = false
-    },
-    checkShow (e) {
-      if (this.t2) {
-        clearTimeout(this.t2)
-        this.t2 = null
-      }
-      if (this.mouseEnterDelay) {
-        this.t1 = window.setTimeout(() => {
-          this.showNode(e)
-        }, +this.mouseEnterDelay * 1e3)
-      }
-    },
-    checkHide (e) {
-      if (this.t1) {
-        clearTimeout(this.t1)
-        this.t1 = null
-      }
-      if (this.mouseLeaveDelay) {
-        this.t2 = window.setTimeout(() => {
-          this.hideNode(e)
-        }, +this.mouseLeaveDelay * 1e3)
-      }
+      domNode.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`
     },
   },
+
   render (h) {
-    const inner = this.$slots.default[0]
-    inner.data = inner.data || {}
-    inner.data.on = inner.data.on || {}
-    inner.data.on.mouseenter = this.addEventHandle(inner.data.on.mouseenter, this.checkShow)
-    inner.data.on.mouseleave = this.addEventHandle(inner.data.on.mouseleave, this.checkHide)
-
-    return this.$slots.default[0]
-  },
-  updated () {
-    if (!this.vnode) return
-    const popup = this.vnode.$el.getBoundingClientRect()
-    const [, scale = 1] = window.getComputedStyle(this.vnode.$el).transform.match(/matrix\((.*?),/) || []
-    const content = this.$el.getBoundingClientRect()
-    const { left, top } = this.computeOffset(popup, content, this.realPlacement, scale)
-    this.vnode.left = left
-    this.vnode.top = top
-  },
-  beforeDestroy () {
-    if (!this.vnode) return
-    this.vnode.$el.remove()
-    this.vnode.$destroy()
+    const { $props, $data, $slots } = this
+    const { title, prefixCls, openClassName, getPopupContainer, getTooltipContainer } = $props
+    const children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')[0]
+    let sVisible = $data.sVisible
+    // Hide tooltip when there is no title
+    if (!hasProp(this, 'visible') && this.isNoTitle()) {
+      sVisible = false
+    }
+    if (!children) {
+      return null
+    }
+    const child = this.getDisabledCompatibleChildren(isValidElement(children) ? children : <span>{children}</span>)
+    const childCls = {
+      [openClassName || `${prefixCls}-open`]: true,
+    }
+    const tooltipProps = {
+      props: {
+        ...$props,
+        getTooltipContainer: getPopupContainer || getTooltipContainer,
+        builtinPlacements: this.getPlacements(),
+        visible: sVisible,
+      },
+      ref: 'tooltip',
+      on: {
+        visibleChange: this.onVisibleChange,
+        popupAlign: this.onPopupAlign,
+      },
+    }
+    return (
+      <RcTooltip {...tooltipProps}>
+        <template slot='overlay'>
+          {typeof title === 'function' ? title(h) : title}
+          {$slots.title}
+        </template>
+        {sVisible ? cloneElement(child, { class: childCls }) : child}
+      </RcTooltip>
+    )
   },
 }
 </script>

@@ -67,10 +67,9 @@
     "style-loader": "^0.18.2",
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0",
-    "vue": "^2.4.4",
     "vue-loader": "^13.0.5",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.4.4",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2"
   },

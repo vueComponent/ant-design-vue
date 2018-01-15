@@ -5,7 +5,7 @@ import KeyCode from '../../_util/KeyCode'
 import SubPopupMenu from './SubPopupMenu'
 import placements from './placements'
 import { loopMenuItemRecusively, noop } from './util'
-import StateMixin from '../../_util/StateMixin'
+import BaseMixin from '../../_util/BaseMixin'
 
 let guid = 0
 
@@ -31,6 +31,7 @@ export default {
     multiple: PropTypes.bool,
     active: PropTypes.bool, // TODO: remove
     isRootMenu: PropTypes.bool,
+    index: PropTypes.number,
     // onItemHover: PropTypes.func,
     // onSelect: PropTypes.func,
     triggerSubMenuAction: PropTypes.string,
@@ -44,18 +45,11 @@ export default {
     subMenuCloseDelay: PropTypes.number.def(0.1),
     level: PropTypes.number.def(1),
     inlineIndent: PropTypes.number.def(24),
-    // onDeselect: PropTypes.func,
-    // onDestroy: PropTypes.func,
-    // onMouseEnter: PropTypes.func,
-    // onMouseLeave: PropTypes.func,
-    // onTitleMouseEnter: PropTypes.func,
-    // onTitleMouseLeave: PropTypes.func,
-    // onTitleClick: PropTypes.func,
   },
   inject: {
     parentMenuContext: { default: undefined },
   },
-  mixins: [StateMixin],
+  mixins: [BaseMixin],
   isSubMenu: true,
   data () {
     return {
@@ -72,7 +66,7 @@ export default {
 
   beforeDestroy () {
     const { eventKey, parentMenuContext } = this
-    this.$emit('destroy', eventKey)
+    this.__emit('destroy', eventKey)
     if (parentMenuContext.subMenuInstance === this) {
       this.clearSubMenuTimers()
     }
@@ -94,13 +88,10 @@ export default {
         popupMenu.style.minWidth = `${this.subMenuTitle.offsetWidth}px`
       }, 0)
     },
-    onDestroy (key) {
-      this.$emit('destroy', key)
-    },
 
     onKeyDown (e) {
       const keyCode = e.keyCode
-      const menu = this.menuInstance
+      const menu = this.$refs.menuInstance
       const isOpen = this.isOpen()
 
       if (keyCode === KeyCode.ENTER) {
@@ -141,10 +132,6 @@ export default {
       }
     },
 
-    onOpenChange (e) {
-      this.$emit('openChange', e)
-    },
-
     onPopupVisibleChange (visible) {
       this.triggerOpenChange(visible, visible ? 'mouseenter' : 'mouseleave')
     },
@@ -155,7 +142,7 @@ export default {
       this.setState({
         defaultActiveFirst: false,
       })
-      this.$emit('mouseenter', {
+      this.__emit('mouseenter', {
         key,
         domEvent: e,
       })
@@ -169,7 +156,7 @@ export default {
       parentMenuContext.subMenuInstance = this
       parentMenuContext.subMenuLeaveFn = () => {
       // trigger mouseleave
-        this.$emit('mouseleave', {
+        this.__emit('mouseleave', {
           key: eventKey,
           domEvent: e,
         })
@@ -181,11 +168,11 @@ export default {
     onTitleMouseEnter (domEvent) {
       const { eventKey: key } = this.$props
       this.clearSubMenuTitleLeaveTimer()
-      this.$emit('itemHover', {
+      this.__emit('itemHover', {
         key,
         hover: true,
       })
-      this.$emit('titleMouseenter', {
+      this.__emit('titleMouseenter', {
         key,
         domEvent,
       })
@@ -195,11 +182,11 @@ export default {
       const { eventKey, parentMenuContext } = this
       parentMenuContext.subMenuInstance = this
       parentMenuContext.subMenuTitleLeaveFn = () => {
-        this.$emit('itemHover', {
+        this.__emit('itemHover', {
           key: eventKey,
           hover: false,
         })
-        this.$emit('titleMouseleave', {
+        this.__emit('titleMouseleave', {
           key: eventKey,
           domEvent: e,
         })
@@ -210,7 +197,7 @@ export default {
     onTitleClick (e) {
       const { triggerSubMenuAction, eventKey } = this.$props
 
-      this.$emit('itemClick', {
+      this.__emit('itemClick', {
         key: eventKey,
         domEvent: e,
         test: 111,
@@ -225,15 +212,7 @@ export default {
     },
 
     onSubMenuClick (info) {
-      this.$emit('click', this.addKeyPath(info))
-    },
-
-    onSelect (info) {
-      this.$emit('select', info)
-    },
-
-    onDeselect (info) {
-      this.$emit('deselect', info)
+      this.__emit('click', this.addKeyPath(info))
     },
 
     getPrefixCls () {
@@ -265,7 +244,7 @@ export default {
 
     triggerOpenChange (open, type) {
       const key = this.$props.eventKey
-      this.onOpenChange({
+      this.__emit('openChange', {
         key,
         item: this,
         trigger: type,
@@ -308,6 +287,7 @@ export default {
     renderChildren (children, vShow) {
       const props = this.$props
       const isOpen = this.isOpen()
+      const { select, deselect, destroy, openChange } = this.$listeners
       const subPopupMenuProps = {
         props: {
           mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
@@ -331,10 +311,7 @@ export default {
         },
         on: {
           click: this.onSubMenuClick,
-          select: this.onSelect,
-          deselect: this.onDeselect,
-          destroy: this.onDestroy,
-          openChange: this.onOpenChange,
+          select, deselect, destroy, openChange,
         },
         id: this._menuId,
         ref: 'menuInstance',

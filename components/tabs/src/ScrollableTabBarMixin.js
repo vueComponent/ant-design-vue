@@ -6,8 +6,6 @@ function noop () {
 export default {
   props: {
     scrollAnimated: { type: Boolean, default: true },
-    onPrevClick: { type: Function, default: noop },
-    onNextClick: { type: Function, default: noop },
   },
 
   data () {
@@ -201,7 +199,7 @@ export default {
     },
 
     prevClick (e) {
-      this.$props.onPrevClick(e)
+      this.__emit('prevClick', e)
       const navWrapNode = this.$refs.navWrap
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       const { offset } = this
@@ -209,7 +207,7 @@ export default {
     },
 
     nextClick (e) {
-      this.$props.onNextClick(e)
+      this.__emit('nextClick', e)
       const navWrapNode = this.$refs.navWrap
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       const { offset } = this

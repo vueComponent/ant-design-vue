@@ -21,7 +21,5 @@ export function getPopupClassNameFromAlign (builtinPlacements, prefixCls, align)
   }
   return ''
 }
-
-export function saveRef (name, component) {
-  this[name] = component
+export function noop () {
 }

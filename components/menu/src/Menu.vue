@@ -1,8 +1,8 @@
 <script>
 import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
-import StateMixin from '../../_util/StateMixin'
-import hasProp from '../../_util/hasProp'
+import BaseMixin from '../../_util/BaseMixin'
+import hasProp from '../../_util/props-util'
 import commonPropsType from './commonPropsType'
 
 const Menu = {
@@ -14,7 +14,7 @@ const Menu = {
     selectable: PropTypes.bool.def(true),
     ...commonPropsType,
   },
-  mixins: [StateMixin, MenuMixin],
+  mixins: [BaseMixin, MenuMixin],
 
   data () {
     const props = this.$props
@@ -79,7 +79,7 @@ const Menu = {
             sSelectedKeys,
           })
         }
-        this.$emit('select', {
+        this.__emit('select', {
           ...selectInfo,
           sSelectedKeys,
         })
@@ -87,7 +87,7 @@ const Menu = {
     },
 
     onClick (e) {
-      this.$emit('click', e)
+      this.__emit('click', e)
     },
 
     onOpenChange (e_) {
@@ -119,7 +119,7 @@ const Menu = {
         if (!hasProp(this, 'openKeys')) {
           this.setState({ sOpenKeys })
         }
-        this.$emit('openChange', sOpenKeys)
+        this.__emit('openChange', sOpenKeys)
       }
     },
 
@@ -137,7 +137,7 @@ const Menu = {
             sSelectedKeys,
           })
         }
-        this.$emit('deselect', {
+        this.__emit('deselect', {
           ...selectInfo,
           sSelectedKeys,
         })
@@ -163,7 +163,7 @@ const Menu = {
       const { sOpenKeys } = this.$data
       if (sOpenKeys.length) {
         lastOpen = this.getFlatInstanceArray().filter((c) => {
-          return c && sOpenKeys.indexOf(c.props.eventKey) !== -1
+          return c && sOpenKeys.indexOf(c.eventKey) !== -1
         })
       }
       return lastOpen[0]

@@ -2,7 +2,7 @@
 import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
 import { noop } from './util'
-import StateMixin from '../../_util/StateMixin'
+import BaseMixin from '../../_util/BaseMixin'
 
 const MenuItem = {
   name: 'MenuItem',
@@ -14,44 +14,44 @@ const MenuItem = {
     selectedKeys: PropTypes.array,
     disabled: PropTypes.bool,
     title: PropTypes.string,
+    index: PropTypes.number,
     inlineIndent: PropTypes.number.def(24),
     level: PropTypes.number.def(1),
     mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
-    // onItemHover: PropTypes.func,
-    // onSelect: PropTypes.func,
-    // onClick: PropTypes.func,
-    // onDeselect: PropTypes.func,
     parentMenu: PropTypes.object,
-    // onDestroy: PropTypes.func,
-    // onMouseEnter: PropTypes.func,
-    // onMouseLeave: PropTypes.func,
     clearSubMenuTimers: PropTypes.func.def(noop),
   },
   inject: {
     parentMenuContext: { default: undefined },
   },
-  mixins: [StateMixin],
+  mixins: [BaseMixin],
   isMenuItem: true,
   beforeDestroy () {
     const props = this.$props
-    this.$emit('destroy', props.eventKey)
+    this.__emit('destroy', props.eventKey)
   },
   methods: {
+    __emit () { // 直接调用listeners，底层组件不需要vueTool记录events
+      const args = [].slice.call(arguments, 0)
+      if (args.length && this.$listeners[args[0]]) {
+        this.$listeners[args[0]](...args.slice(1))
+      }
+    },
     onKeyDown (e) {
       const keyCode = e.keyCode
       if (keyCode === KeyCode.ENTER) {
-        this.$emit('click', e)
+        this.__emit('click', e)
         return true
       }
     },
 
     onMouseLeave (e) {
       const { eventKey } = this.$props
-      this.$emit('itemHover', {
+      this.__emit('itemHover', {
         key: eventKey,
         hover: false,
       })
-      this.$emit('mouseLeave', {
+      this.__emit('mouseleave', {
         key: eventKey,
         domEvent: e,
       })
@@ -62,11 +62,11 @@ const MenuItem = {
       if (parentMenuContext && parentMenuContext.subMenuInstance) {
         parentMenuContext.subMenuInstance.clearSubMenuTimers()
       }
-      this.$emit('itemHover', {
+      this.__emit('itemHover', {
         key: eventKey,
         hover: true,
       })
-      this.$emit('mouseEnter', {
+      this.__emit('mouseenter', {
         key: eventKey,
         domEvent: e,
       })
@@ -81,15 +81,15 @@ const MenuItem = {
         item: this,
         domEvent: e,
       }
-      this.$emit('click', info)
+      this.__emit('click', info)
       if (multiple) {
         if (selected) {
-          this.$emit('deselect', info)
+          this.__emit('deselect', info)
         } else {
-          this.$emit('select', info)
+          this.__emit('select', info)
         }
       } else if (!selected) {
-        this.$emit('select', info)
+        this.__emit('select', info)
       }
     },
 

@@ -1,12 +1,12 @@
 <script>
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
-import { getAlignFromPlacement, getPopupClassNameFromAlign } from './utils'
-import StateMixin from '../_util/StateMixin'
+import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
+import BaseMixin from '../_util/BaseMixin'
 import { cloneElement, cloneVNode } from '../_util/vnode'
 
 function returnEmptyString () {
@@ -27,8 +27,8 @@ export default {
     showAction: PropTypes.any.def([]),
     hideAction: PropTypes.any.def([]),
     getPopupClassNameFromAlign: PropTypes.any.def(returnEmptyString),
-    // onPopupVisibleChange: PropTypes.func,
-    // afterPopupVisibleChange: PropTypes.func,
+    // onPopupVisibleChange: PropTypes.func.def(noop),
+    afterPopupVisibleChange: PropTypes.func.def(noop),
     popup: PropTypes.any,
     popupStyle: PropTypes.object.def({}),
     prefixCls: PropTypes.string.def('rc-trigger-popup'),
@@ -51,7 +51,7 @@ export default {
     destroyPopupOnHide: PropTypes.bool.def(false),
     mask: PropTypes.bool.def(false),
     maskClosable: PropTypes.bool.def(true),
-    // onPopupAlign: PropTypes.func,
+    // onPopupAlign: PropTypes.func.def(noop),
     popupAlign: PropTypes.object.def({}),
     popupVisible: PropTypes.bool,
     defaultPopupVisible: PropTypes.bool.def(false),
@@ -62,7 +62,7 @@ export default {
     maskAnimation: PropTypes.string,
   },
 
-  mixins: [StateMixin],
+  mixins: [BaseMixin],
   data () {
     const props = this.$props
     let popupVisible
@@ -96,7 +96,7 @@ export default {
     },
     sPopupVisible (val) {
       this.$nextTick(() => {
-        this.$emit('afterPopupVisibleChange', val)
+        this.afterPopupVisibleChange(val)
       })
     },
   },
@@ -258,11 +258,10 @@ export default {
     },
 
     getRootDomNode () {
-      console.log('this.$el.children', this.$el.children)
       return this.$el.children ? this.$el.children[0] : this.$el
     },
 
-    getPopupClassFromAlign (align) {
+    handleGetPopupClassFromAlign (align) {
       const className = []
       const props = this.$props
       const { popupPlacement, builtinPlacements, prefixCls } = props
@@ -283,10 +282,7 @@ export default {
       }
       return popupAlign
     },
-    onPopupAlign () {
-      this.$emit('popupAlign', ...arguments)
-    },
-    getComponent () {
+    getComponent (h) {
       const mouseProps = {}
       if (this.isMouseEnterToShow()) {
         mouseProps.mouseenter = this.onPopupMouseenter
@@ -295,8 +291,8 @@ export default {
         mouseProps.mouseleave = this.onPopupMouseleave
       }
       const { prefixCls, destroyPopupOnHide, sPopupVisible,
-        popupStyle, popupClassName, action, onPopupAlign,
-        popupAnimation, getPopupClassFromAlign, getRootDomNode,
+        popupStyle, popupClassName, action,
+        popupAnimation, handleGetPopupClassFromAlign, getRootDomNode,
         mask, zIndex, popupTransitionName, getPopupAlign,
         maskAnimation, maskTransitionName, popup, $slots, getContainer } = this
       const popupProps = {
@@ -307,7 +303,7 @@ export default {
           action,
           align: getPopupAlign(),
           animation: popupAnimation,
-          getClassNameFromAlign: getPopupClassFromAlign,
+          getClassNameFromAlign: handleGetPopupClassFromAlign,
           getRootDomNode,
           mask,
           zIndex,
@@ -318,7 +314,7 @@ export default {
           popupClassName,
         },
         on: {
-          align: onPopupAlign,
+          align: this.$listeners.popupAlign || noop,
           ...mouseProps,
         },
         ref: 'popup',
@@ -329,7 +325,7 @@ export default {
           {...popupProps}
           ref='popup'
         >
-          {typeof popup === 'function' ? popup() : popup}
+          {typeof popup === 'function' ? popup(h) : popup}
           {popup === undefined ? $slots.popup : null}
         </Popup>
       )
@@ -359,7 +355,7 @@ export default {
           })
           this.$forceUpdate()
         }
-        this.$emit('popupVisibleChange', sPopupVisible)
+        this.$listeners.popupVisibleChange && this.$listeners.popupVisibleChange(sPopupVisible)
       }
     },
 
@@ -473,7 +469,7 @@ export default {
       this.setPopupVisible(false)
     },
   },
-  render () {
+  render (h) {
     const children = this.$slots.default
     if (children.length > 1) {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
@@ -522,7 +518,7 @@ export default {
     const trigger = cloneElement(cloneVNode(child), newChildProps)
     const { sPopupVisible, forceRender } = this
     if (sPopupVisible || forceRender || this._component) {
-      this._component = this.getComponent()
+      this._component = this.getComponent(h)
     } else {
       this._component = null
     }

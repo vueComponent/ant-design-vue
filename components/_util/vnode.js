@@ -78,11 +78,30 @@ export function cloneElement (n, nodeProps, clone) {
   const { style = data.style,
     class: cls = data.class,
     attrs = data.attrs,
+    ref,
   } = nodeProps
   node.data = Object.assign(data, { style, attrs, class: cls, on: { ...(data.on || {}), ...on }})
   if (key !== undefined) {
     node.key = key
     node.data.key = key
   }
+  if (typeof ref === 'string') {
+    node.data.ref = ref
+  }
   return node
+}
+export function getComponentName (opts) {
+  return opts && (opts.Ctor.options.name || opts.tag)
+}
+
+export function isValidElement (ele) {
+  return !!ele.tag
+}
+
+export function getClass (ele) {
+  return ele.data && (ele.data.class || ele.data.staticClass)
+}
+
+export function getStyle (ele) {
+  return ele.data && (ele.data.style || ele.data.staticStyle)
 }

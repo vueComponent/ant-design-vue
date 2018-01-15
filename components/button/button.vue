@@ -2,39 +2,13 @@
 import Icon from '../icon'
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
+import buttonTypes from './buttonTypes'
 export default {
   name: 'Button',
+  __ANT_BUTTON: true,
   components: { Icon },
   props: {
-    prefixCls: {
-      default: 'ant-btn',
-      type: String,
-    },
-    type: {
-      validator (value) {
-        return ['primary', 'danger', 'dashed', 'ghost', 'default'].includes(value)
-      },
-    },
-    htmlType: {
-      default: 'button',
-      validator (value) {
-        return ['button', 'submit', 'reset'].includes(value)
-      },
-    },
-    icon: String,
-    shape: {
-      validator (value) {
-        return ['circle', 'circle-outline'].includes(value)
-      },
-    },
-    size: {
-      validator (value) {
-        return ['small', 'large', 'default'].includes(value)
-      },
-    },
-    loading: [Boolean, Object],
-    disabled: Boolean,
-    ghost: Boolean,
+    ...buttonTypes,
   },
   data () {
     return {

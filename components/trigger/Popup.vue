@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types'
 import Align from '../align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
+import { noop } from './utils'
 
 export default {
   props: {
@@ -56,13 +57,11 @@ export default {
     onAlign (popupDomNode, align) {
       const props = this.$props
       const currentAlignClassName = props.getClassNameFromAlign(align)
-      // FIX: https://github.com/react-component/trigger/issues/56
-      // FIX: https://github.com/react-component/tooltip/issues/79
       if (this.currentAlignClassName !== currentAlignClassName) {
+        popupDomNode.className = popupDomNode.className.replace(this.currentAlignClassName, currentAlignClassName)
         this.currentAlignClassName = currentAlignClassName
-        popupDomNode.className = this.getClassName(currentAlignClassName)
       }
-      this.$emit('align', popupDomNode, align)
+      this.$listeners.align && this.$listeners.align(popupDomNode, align)
     },
 
     getPopupDomNode () {
@@ -95,30 +94,17 @@ export default {
     getClassName (currentAlignClassName) {
       return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`
     },
-    onMouseEnter (e) {
-      this.$emit('mouseenter', e)
-    },
-    onMouseLeave (e) {
-      this.$emit('mouseleave', e)
-    },
-    beforeEnter (el) {
-      try {
-        // this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
-      } catch (error) {
-
-      }
-      this.$refs.alignInstance && this.$refs.alignInstance.forceAlign()
-    },
     afterLeave (el) {
       if (this.destroyPopupOnHide) {
         this.destroyPopup = true
       }
     },
     getPopupElement () {
-      const { $props: props, onMouseEnter, onMouseLeave, $slots } = this
+      const { $props: props, $slots, $listeners } = this
       const { align, visible, prefixCls, animation } = props
-      const className = this.getClassName(this.currentAlignClassName ||
-      props.getClassNameFromAlign(align))
+      const { mouseenter, mouseleave } = $listeners
+      this.currentAlignClassName = this.currentAlignClassName || props.getClassNameFromAlign(align)
+      const className = this.getClassName(this.currentAlignClassName)
       // const hiddenClassName = `${prefixCls}-hidden`
       if (!visible) {
         this.currentAlignClassName = null
@@ -131,8 +117,8 @@ export default {
         },
         class: `${className}`,
         on: {
-          mouseenter: onMouseEnter,
-          mouseleave: onMouseLeave,
+          mouseenter: mouseenter || noop,
+          mouseleave: mouseleave || noop,
         },
         ref: 'popupInstance',
         style: { ...this.getZIndexStyle() },
@@ -144,7 +130,6 @@ export default {
       }
       return (<transition
         {...transitionProps}
-        onBeforeEnter={this.beforeEnter}
         onAfterLeave={this.afterLeave}
       >
         <Align

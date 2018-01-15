@@ -10,7 +10,7 @@ export { default as Grid } from './grid'
 
 export { default as Rate } from './rate'
 
-export { default as ToolTip } from './tooltip'
+export { default as Tooltip } from './tooltip'
 
 export { default as Pagination } from './pagination'
 
@@ -29,3 +29,7 @@ export { default as Tabs } from './tabs'
 export { default as Input } from './input'
 
 export { default as Breadcrumb } from './breadcrumb'
+
+export { default as Popover } from './popover'
+
+export { default as Popconfirm } from './popconfirm'

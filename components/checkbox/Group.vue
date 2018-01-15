@@ -8,7 +8,7 @@
 </template>
 <script>
 import Checkbox from './Checkbox.vue'
-import hasProp from '../_util/hasProp'
+import hasProp from '../_util/props-util'
 export default {
   name: 'CheckboxGroup',
   props: {

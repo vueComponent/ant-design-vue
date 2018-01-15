@@ -3,12 +3,13 @@ import Icon from '../icon'
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
 import buttonTypes from './buttonTypes'
+const props = buttonTypes()
 export default {
   name: 'Button',
   __ANT_BUTTON: true,
   components: { Icon },
   props: {
-    ...buttonTypes,
+    ...props,
   },
   data () {
     return {

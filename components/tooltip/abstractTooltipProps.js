@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types'
-export default {
+export default () => ({
   trigger: PropTypes.oneOf(['hover', 'focus', 'click']).def('hover'),
   visible: PropTypes.bool,
   placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom',
@@ -16,4 +16,4 @@ export default {
   getPopupContainer: PropTypes.func,
   arrowPointAtCenter: PropTypes.bool.def(false),
   autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),
-}
+})

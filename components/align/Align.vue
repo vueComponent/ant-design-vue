@@ -2,6 +2,7 @@
 import PropTypes from '../_util/vue-types'
 import align from 'dom-align'
 import clonedeep from 'lodash.clonedeep'
+import isEqual from 'lodash.isequal'
 import addEventListener from '../_util/Dom/addEventListener'
 import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
@@ -37,46 +38,45 @@ export default {
     monitorWindowResize: PropTypes.bool.def(false),
     disabled: PropTypes.bool.def(false),
   },
-  watch: {
-    '$props': {
-      handler: function (props) {
-        const prevProps = this.prevProps
-        this.$nextTick(() => {
-          let reAlign = false
-          if (!props.disabled) {
-            if (prevProps.disabled || prevProps.align !== props.align) {
-              reAlign = true
-            } else {
-              const lastTarget = prevProps.target()
-              const currentTarget = props.target()
-              if (isWindow(lastTarget) && isWindow(currentTarget)) {
-                reAlign = false
-              } else if (lastTarget !== currentTarget) {
-                reAlign = true
-              }
-            }
-          }
-
-          if (reAlign) {
-            this.forceAlign()
-          }
-
-          if (props.monitorWindowResize && !props.disabled) {
-            this.startMonitorWindowResize()
-          } else {
-            this.stopMonitorWindowResize()
-          }
-        })
-      },
-      deep: true,
-    },
+  data () {
+    return {
+      aligned: false,
+    }
   },
   mounted () {
     const props = this.$props
     // if parent ref not attached .... use document.getElementById
-    this.forceAlign()
+    !this.aligned && this.forceAlign()
     if (!props.disabled && props.monitorWindowResize) {
       this.startMonitorWindowResize()
+    }
+  },
+  updated () {
+    const prevProps = this.prevProps
+    const props = this.$props
+    let reAlign = false
+    if (!props.disabled) {
+      if (prevProps.disabled || !isEqual(prevProps.align, props.align)) {
+        reAlign = true
+      } else {
+        const lastTarget = prevProps.target()
+        const currentTarget = props.target()
+        if (isWindow(lastTarget) && isWindow(currentTarget)) {
+          reAlign = false
+        } else if (lastTarget !== currentTarget) {
+          reAlign = true
+        }
+      }
+    }
+
+    if (reAlign) {
+      this.forceAlign()
+    }
+
+    if (props.monitorWindowResize && !props.disabled) {
+      this.startMonitorWindowResize()
+    } else {
+      this.stopMonitorWindowResize()
     }
   },
   beforeDestroy () {
@@ -102,6 +102,7 @@ export default {
       const props = this.$props
       if (!props.disabled) {
         const source = this.$el
+        this.aligned = true
         // this.$emit('align', source, align(source, props.target(), props.align))
         this.$listeners.align && this.$listeners.align(source, align(source, props.target(), props.align))
       }

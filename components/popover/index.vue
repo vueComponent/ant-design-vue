@@ -24,7 +24,7 @@ export default {
   },
 
   render (h) {
-    const { title, prefixCls, content, $slots } = this
+    const { title, prefixCls, $slots } = this
     const props = getOptionProps(this)
     delete props.title
     delete props.content

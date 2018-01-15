@@ -17,11 +17,11 @@ const splitObject = (obj, keys) => {
   })
   return { picked, omited }
 }
-
+const props = abstractTooltipProps()
 export default {
   name: 'Tooltip',
   props: {
-    ...abstractTooltipProps,
+    ...props,
     title: PropTypes.any,
   },
   model: {

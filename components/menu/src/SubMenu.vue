@@ -415,6 +415,7 @@ export default {
       animProps.name = openTransitionName
     } else if (typeof openAnimation === 'object') {
       animProps = { ...animProps, ...openAnimation.props || {}}
+      animProps.on = openAnimation.on
       if (!transitionAppear) {
         animProps.appear = false
       }

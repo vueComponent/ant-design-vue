@@ -4,6 +4,7 @@ import Align from '../align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
 import { noop } from './utils'
+import animate from 'css-animation'
 
 export default {
   props: {
@@ -24,6 +25,7 @@ export default {
   },
   data () {
     return {
+      aligned: false,
       destroyPopup: false,
       initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化
     }
@@ -48,7 +50,8 @@ export default {
     initAlign (val) {
       if (val) {
         this.$nextTick(() => {
-          this.$refs.alignInstance.forceAlign()
+          // console.log(this.$refs.alignInstance.$el)
+          // this.$refs.alignInstance.forceAlign()
         })
       }
     },
@@ -94,11 +97,6 @@ export default {
     getClassName (currentAlignClassName) {
       return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`
     },
-    afterLeave (el) {
-      if (this.destroyPopupOnHide) {
-        this.destroyPopup = true
-      }
-    },
     getPopupElement () {
       const { $props: props, $slots, $listeners } = this
       const { align, visible, prefixCls, animation } = props
@@ -114,6 +112,7 @@ export default {
         props: {
           prefixCls,
           visible,
+          // hiddenClassName,
         },
         class: `${className}`,
         on: {
@@ -126,11 +125,43 @@ export default {
       const transitionProps = {
         props: Object.assign({
           appear: true,
-        }, typeof animation === 'object' ? animation : { name: this.getTransitionName() }),
+          css: false,
+        }),
+      }
+      let opacity = '1'
+      const transitionEvent = {
+        beforeEnter: (el) => {
+          opacity = el.style.opacity
+          el.style.opacity = '0'
+          !this.aligned && this.$refs.alignInstance.forceAlign()
+          this.aligned = true
+        },
+        enter: (el, done) => {
+          el.style.opacity = opacity
+          animate(el, 'zoom-big-enter', done)
+        },
+        leave: (el, done) => {
+          animate(el, 'zoom-big-leave', done)
+        },
+        afterLeave: (el) => {
+          if (this.destroyPopupOnHide) {
+            this.destroyPopup = true
+          }
+        },
+      }
+
+      if (typeof animation === 'object') {
+        const { on = {}, ...otherProps } = animation
+        transitionProps.props = { ...transitionProps.props, ...otherProps }
+        transitionProps.on = { ...on, afterLeave: (el) => {
+          transitionEvent.afterLeave(el)
+          on.afterLeave && on.afterLeave(el)
+        } }
+      } else {
+        transitionProps.on = transitionEvent
       }
       return (<transition
         {...transitionProps}
-        onAfterLeave={this.afterLeave}
       >
         <Align
           v-show={visible}

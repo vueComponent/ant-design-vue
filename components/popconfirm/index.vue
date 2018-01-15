@@ -9,23 +9,30 @@ import buttonTypes from '../button/buttonTypes'
 import Icon from '../icon'
 import Button from '../button'
 
+const tooltipProps = abstractTooltipProps()
+const btnProps = buttonTypes()
 export default {
   name: 'popconfirm',
   props: {
-    ...abstractTooltipProps,
+    ...tooltipProps,
     prefixCls: PropTypes.string.def('ant-popover'),
     transitionName: PropTypes.string.def('zoom-big'),
     content: PropTypes.any,
     title: PropTypes.any,
-    trigger: abstractTooltipProps.trigger.def('click'),
-    okType: buttonTypes.type.def('primary'),
+    trigger: tooltipProps.trigger.def('click'),
+    okType: btnProps.type.def('primary'),
     okText: PropTypes.any,
     cancelText: PropTypes.any,
   },
   mixins: [BaseMixin],
   model: {
     prop: 'visible',
-    event: 'change',
+    event: 'visibleChange',
+  },
+  watch: {
+    visible (val) {
+      this.sVisible = val
+    },
   },
   data () {
     return {
@@ -48,16 +55,10 @@ export default {
     },
 
     setVisible (sVisible) {
-      const props = this.$props
       if (!hasProp(this, 'visible')) {
         this.setState({ sVisible })
       }
-
-      const { onVisibleChange } = props
-      if (onVisibleChange) {
-        onVisibleChange(sVisible)
-      }
-      this.$emit('change', sVisible)
+      this.$emit('visibleChange', sVisible)
     },
     getPopupDomNode () {
       return this.$refs.tooltip.getPopupDomNode()

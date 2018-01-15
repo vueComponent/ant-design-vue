@@ -9,13 +9,14 @@ export default {
     visible: PropTypes.bool,
   },
   render () {
-    const { prefixCls, visible } = this.$props
+    const { prefixCls, visible, hiddenClassName } = this.$props
     const { $listeners } = this
     const divProps = {
       on: $listeners,
     }
+
     return (
-      <div {...divProps}>
+      <div {...divProps} class={!visible ? hiddenClassName : ''}>
         <LazyRenderBox class={`${prefixCls}-content`} visible={visible}>
           {this.$slots.default}
         </LazyRenderBox>

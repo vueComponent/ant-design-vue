@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types'
-export default {
+export default () => ({
   prefixCls: PropTypes.string.def('ant-btn'),
   type: PropTypes.oneOf(['primary', 'danger', 'dashed', 'ghost', 'default']).def('default'),
   htmlType: PropTypes.oneOf(['button', 'submit', 'reset']).def('button'),
@@ -9,4 +9,4 @@ export default {
   loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   disabled: PropTypes.bool,
   ghost: PropTypes.bool,
-}
+})

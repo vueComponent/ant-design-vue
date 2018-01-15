@@ -39,11 +39,11 @@ Tree
 TreeSelect
 
 ##王
-Rate
-Pagination
-Avatar
-Badge
-Breadcrumb
+Rate  |  done
+Pagination  |  done|select完成后补全
+Avatar  |  done
+Badge  |  done
+Breadcrumb |  done
 Card
 Collapse
 LocaleProvider

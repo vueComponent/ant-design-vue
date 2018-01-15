@@ -28,6 +28,8 @@ export { default as Tabs } from './tabs'
 
 export { default as Input } from './input'
 
+export { default as Breadcrumb } from './breadcrumb'
+
 export { default as Popover } from './popover'
 
 export { default as Popconfirm } from './popconfirm'

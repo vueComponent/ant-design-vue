@@ -109,12 +109,12 @@ export default {
       this.count = count
     },
     changePlusValue () {
-      setInterval(() => {
-        const count = this.count + 1
-        this.count = count
-      }, 300)
-      // const count = this.count + 1
-      // this.count = count
+      // setInterval(() => {
+      //   const count = this.count + 1
+      //   this.count = count
+      // }, 300)
+      const count = this.count + 1
+      this.count = count
     },
     changeShow () {
       this.isShow = !this.isShow

@@ -1,0 +1,40 @@
+@import "../../style/themes/default";
+@import "../../style/mixins/index";
+
+@breadcrumb-prefix-cls: ~"@{ant-prefix}-breadcrumb";
+
+.@{breadcrumb-prefix-cls} {
+  .reset-component;
+  color: @text-color-secondary;
+
+  .@{iconfont-css-prefix} {
+    font-size: @font-size-sm;
+  }
+
+  a {
+    color: @text-color-secondary;
+    transition: color .3s;
+    &:hover {
+      color: @primary-5;
+    }
+  }
+
+  & > span:last-child {
+    color: @text-color;
+  }
+
+  & > span:last-child &-separator {
+    display: none;
+  }
+
+  &-separator {
+    margin: 0 @padding-xs;
+    color: @text-color-secondary;
+  }
+
+  &-link {
+    > .@{iconfont-css-prefix} + span {
+      margin-left: 4px;
+    }
+  }
+}

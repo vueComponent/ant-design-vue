@@ -1,10 +1,3 @@
-<template>
-  <div :class="classes">
-    <Radio v-for="item in radioOptions" :key="item.value"
-      :value="item.value" :disabled="item.disabled" :name="name">{{item.label}}</Radio>
-    <slot v-if="radioOptions.length === 0"></slot>
-  </div>
-</template>
 <script>
 import Radio from './Radio.vue'
 export default {
@@ -82,8 +75,15 @@ export default {
       this.stateValue = val
     },
   },
-  components: {
-    Radio,
+  render () {
+    const { radioOptions, classes, $slots, name } = this
+    return (
+      <div class={classes}>
+        {radioOptions.map(({ value, disabled, label }) =>
+          <Radio key={value} value={value} disabled={disabled} name={name}>{label}</Radio>)}
+        { radioOptions.length === 0 && ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')}
+      </div>
+    )
   },
 }
 </script>

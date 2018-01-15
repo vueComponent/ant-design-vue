@@ -8,7 +8,7 @@
         <RadioButton value="d">Chengdu</RadioButton>
       </RadioGroup>
     </div>
-    <div :style="{ marginTop: 16 }">
+    <div :style="{ marginTop: '16px' }">
       <RadioGroup defaultValue="a">
         <RadioButton value="a">Hangzhou</RadioButton>
         <RadioButton value="b">Shanghai</RadioButton>
@@ -16,7 +16,7 @@
         <RadioButton value="d">Chengdu</RadioButton>
       </RadioGroup>
     </div>
-    <div :style="{ marginTop: 16 }">
+    <div :style="{ marginTop: '16px' }">
       <RadioGroup defaultValue="a" size="small">
         <RadioButton value="a">Hangzhou</RadioButton>
         <RadioButton value="b">Shanghai</RadioButton>

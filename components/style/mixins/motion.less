@@ -20,21 +20,10 @@
     .motion-common-leave(@duration);
     animation-play-state: paused;
   }
-  .@{className}-enter-active,
-  .@{className}-appear-active {
-    animation-name: ~"@{keyframeName}In";
-    animation-play-state: running;
-    .motion-common(@duration);
-  }
   .@{className}-enter.@{className}-enter-active,
   .@{className}-appear.@{className}-appear-active {
     animation-name: ~"@{keyframeName}In";
     animation-play-state: running;
-  }
-  .@{className}-leave-active {
-    animation-name: ~"@{keyframeName}Out";
-    animation-play-state: running;
-    .motion-common(@duration);
   }
   .@{className}-leave.@{className}-leave-active {
     animation-name: ~"@{keyframeName}Out";

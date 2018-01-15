@@ -4,10 +4,11 @@ import abstractTooltipProps from '../tooltip/abstractTooltipProps'
 import PropTypes from '../_util/vue-types'
 import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 
+const props = abstractTooltipProps()
 export default {
   name: 'popover',
   props: {
-    ...abstractTooltipProps,
+    ...props,
     prefixCls: PropTypes.string.def('ant-popover'),
     transitionName: PropTypes.string.def('zoom-big'),
     content: PropTypes.any,

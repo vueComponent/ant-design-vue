@@ -98,7 +98,7 @@ export default {
       return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`
     },
     getPopupElement () {
-      const { $props: props, $slots, $listeners } = this
+      const { $props: props, $slots, $listeners, getTransitionName } = this
       const { align, visible, prefixCls, animation } = props
       const { mouseenter, mouseleave } = $listeners
       this.currentAlignClassName = this.currentAlignClassName || props.getClassNameFromAlign(align)
@@ -129,6 +129,7 @@ export default {
         }),
       }
       let opacity = '1'
+      const transitionName = getTransitionName()
       const transitionEvent = {
         beforeEnter: (el) => {
           opacity = el.style.opacity
@@ -138,10 +139,10 @@ export default {
         },
         enter: (el, done) => {
           el.style.opacity = opacity
-          animate(el, 'zoom-big-enter', done)
+          animate(el, `${transitionName}-enter`, done)
         },
         leave: (el, done) => {
-          animate(el, 'zoom-big-leave', done)
+          animate(el, `${transitionName}-leave`, done)
         },
         afterLeave: (el) => {
           if (this.destroyPopupOnHide) {

@@ -5,8 +5,7 @@
       <span :class="[prefixCls+'-status-text']">{{text}}</span>
     </template>
     <template v-else>
-      <slot></slot>
-      <transition appear :name="transitionName">
+      <slot></slot><transition appear :name="transitionName">
         <scroll-number
           v-if="!badgeStatus.isHidden"
           :prefixCls="scrollNumberPrefixCls"
@@ -85,7 +84,7 @@ export default {
       return !isHasDefaultSlot && status
     },
     badgeComputedCls () {
-      const { prefixCls, isHasDefaultSlot, status, dot } = this
+      const { prefixCls, isHasDefaultSlot, status, dot, count } = this
       const isDot = dot || status
       return {
         badgeCls: {
@@ -100,6 +99,8 @@ export default {
         scrollNumberCls: {
           [`${prefixCls}-dot`]: isDot,
           [`${prefixCls}-count`]: !isDot,
+          [`${prefixCls}-multiple-words`]: count && count.toString && count.toString().length > 1,
+          [`${prefixCls}-status-${status}`]: !isHasDefaultSlot,
         },
       }
     },

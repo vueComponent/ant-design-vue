@@ -1,9 +1,11 @@
 @import "../../style/themes/default";
+@import "../../style/mixins/index";
 
 @badge-prefix-cls: ~"@{ant-prefix}-badge";
 @number-prefix-cls: ~"@{ant-prefix}-scroll-number";
 
 .@{badge-prefix-cls} {
+  .reset-component;
   position: relative;
   display: inline-block;
   line-height: 1;
@@ -11,9 +13,8 @@
 
   &-count {
     position: absolute;
-    transform: translateX(50%);
+    transform: translateX(-50%);
     top: -@badge-height / 2;
-    right: 0;
     height: @badge-height;
     border-radius: @badge-height / 2;
     min-width: @badge-height;
@@ -25,19 +26,22 @@
     font-size: @badge-font-size;
     white-space: nowrap;
     transform-origin: -10% center;
-    font-family: tahoma;
+    box-shadow: 0 0 0 1px #fff;
     a,
     a:hover {
       color: #fff;
     }
   }
 
+  &-multiple-words {
+    padding: 0 8px;
+  }
+
   &-dot {
     position: absolute;
-    transform: translateX(50%);
+    transform: translateX(-50%);
     transform-origin: 0 center;
     top: -@badge-dot-size / 2;
-    right: 0;
     height: @badge-dot-size;
     width: @badge-dot-size;
     border-radius: 100%;
@@ -51,16 +55,19 @@
     vertical-align: baseline;
 
     &-dot {
-      width: 8px;
-      height: 8px;
+      width: @badge-status-size;
+      height: @badge-status-size;
       display: inline-block;
       border-radius: 50%;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
     }
     &-success {
       background-color: @success-color;
     }
     &-processing {
-      background-color: @primary-color;
+      background-color: @processing-color;
       position: relative;
       &:after {
         position: absolute;
@@ -69,7 +76,7 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        border: 1px solid @primary-color;
+        border: 1px solid @processing-color;
         content: '';
         animation: antStatusProcessing 1.2s infinite ease-in-out;
       }
@@ -91,17 +98,17 @@
   }
 
   &-zoom-appear,
-  &-zoom-enter-active {
+  &-zoom-enter {
     animation: antZoomBadgeIn .3s @ease-out-back;
     animation-fill-mode: both;
   }
 
-  &-zoom-leave-active {
+  &-zoom-leave {
     animation: antZoomBadgeOut .3s @ease-in-back;
     animation-fill-mode: both;
   }
 
-  &-not-a-wrapper &-count {
+  &-not-a-wrapper .@{ant-prefix}-scroll-number {
     top: auto;
     display: block;
     position: relative;
@@ -128,6 +135,7 @@
     height: @badge-height;
     > p {
       height: @badge-height;
+      margin: 0;
     }
   }
 }
@@ -135,23 +143,19 @@
 @keyframes antZoomBadgeIn {
   0% {
     opacity: 0;
-    transform-origin: 100% 50%;
-    transform: scale(0) translateX(50%);
+    transform: scale(0) translateX(-50%);
   }
   100% {
-    transform-origin: 100% 50%;
-    transform: scale(1) translateX(50%);
+    transform: scale(1) translateX(-50%);
   }
 }
 
 @keyframes antZoomBadgeOut {
   0% {
-    transform-origin: 100% 50%;
-    transform: scale(1) translateX(50%);
+    transform: scale(1) translateX(-50%);
   }
   100% {
     opacity: 0;
-    transform-origin: 100% 50%;
-    transform: scale(0) translateX(50%);
+    transform: scale(0) translateX(-50%);
   }
 }

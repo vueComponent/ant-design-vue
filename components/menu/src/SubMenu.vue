@@ -6,6 +6,7 @@ import SubPopupMenu from './SubPopupMenu'
 import placements from './placements'
 import { loopMenuItemRecusively, noop } from './util'
 import BaseMixin from '../../_util/BaseMixin'
+import { getComponentFromProp } from '../../_util/props-util'
 
 let guid = 0
 
@@ -197,7 +198,6 @@ export default {
       this.__emit('itemClick', {
         key: eventKey,
         domEvent: e,
-        test: 111,
       })
       if (triggerSubMenuAction === 'hover') {
         return
@@ -384,8 +384,7 @@ export default {
       <div
         {...titleProps}
       >
-        {typeof props.title === 'function' ? props.title(h) : props.title}
-        {this.$slots.title}
+        {getComponentFromProp(this, h, 'title')}
         <i class={`${prefixCls}-arrow`} />
       </div>
     )

@@ -13,10 +13,10 @@ export function loopMenuItem (children, cb) {
     if (c && c.type && c.type.isMenuItemGroup) {
       c.$slots.default.forEach((c2) => {
         index++
-        cb(c2, index)
+        c.componentOptions && cb(c2, index)
       })
     } else {
-      cb(c, index)
+      c.componentOptions && cb(c, index)
     }
   })
 }

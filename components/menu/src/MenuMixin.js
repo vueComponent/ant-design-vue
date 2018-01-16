@@ -2,8 +2,9 @@ import hasProp from '../../_util/props-util'
 import KeyCode from '../../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'
-import { cloneElement } from '../../_util/vnode'
+import { cloneElement, getComponentName } from '../../_util/vnode'
 import DOMWrap from './DOMWrap'
+import warning from '../../_util/warning'
 
 function allDisabled (arr) {
   if (!arr.length) {
@@ -133,6 +134,10 @@ export default {
     },
 
     renderCommonMenuItem (child, i, subIndex, extraProps) {
+      if (child.tag === undefined) { return child }
+      warning((getComponentName(child.componentOptions) || '').indexOf(['MenuItem', 'MenuItemGroup']) === -1,
+        '`Menu child just support MenuItem and MenuItemGroup',
+      )
       const state = this.$data
       const props = this.$props
       const key = getKeyFromChildrenIndex(child, props.eventKey, i)

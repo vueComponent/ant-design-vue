@@ -33,3 +33,5 @@ export { default as Breadcrumb } from './breadcrumb'
 export { default as Popover } from './popover'
 
 export { default as Popconfirm } from './popconfirm'
+
+export { default as Menu } from './menu'

@@ -14,7 +14,7 @@ export default {
   mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
   triggerSubMenuAction: PropTypes.string.def('hover'),
   openTransitionName: PropTypes.string,
-  subMenuOpenDelay: PropTypes.number.def(0),
+  subMenuOpenDelay: PropTypes.number.def(0.1),
   subMenuCloseDelay: PropTypes.number.def(0.1),
   level: PropTypes.number.def(1),
   inlineIndent: PropTypes.number.def(24),

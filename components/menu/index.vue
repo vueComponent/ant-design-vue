@@ -1,6 +1,8 @@
 <script>
-import RcMenu, { Divider, ItemGroup, SubMenu } from '../src'
-import PropTypes from '../util/vue-types'
+import omit from 'omit.js'
+import cloneDeep from 'lodash.clonedeep'
+import RcMenu, { Divider, ItemGroup, SubMenu } from './src'
+import PropTypes from '../_util/vue-types'
 import animation from '../_util/openAnimation'
 import warning from '../_util/warning'
 import Item from './MenuItem'
@@ -13,7 +15,7 @@ export const menuProps = {
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   mode: MenuMode,
   selectable: PropTypes.bool,
-  selectedKeys: PropTypes.array,
+  selectedKeys: PropTypes.arrayOf(PropTypes.string),
   defaultSelectedKeys: PropTypes.array,
   openKeys: PropTypes.array,
   defaultOpenKeys: PropTypes.array,
@@ -43,8 +45,39 @@ export default {
   },
   mixins: [BaseMixin],
   inject: {
-    siderCollapsed: { default: undefined },
-    collapsedWidth: { default: undefined },
+    layoutContext: { default: {}},
+  },
+  watch: {
+    '$props': {
+      handler: function (nextProps) {
+
+      },
+      deep: true,
+    },
+  },
+  beforeUpdate () {
+    const { preProps, $props: nextProps, layoutContext, preLayoutContext = {}} = this
+    const { prefixCls } = preProps
+    if (preProps.mode === 'inline' &&
+        nextProps.mode !== 'inline') {
+      this.switchModeFromInline = true
+    }
+    if (hasProp(this, 'openKeys')) {
+      this.setState({ sOpenKeys: nextProps.openKeys })
+      return
+    }
+    if ((nextProps.inlineCollapsed && !preProps.inlineCollapsed) ||
+        (layoutContext.siderCollapsed && !preLayoutContext.siderCollapsed)) {
+      this.switchModeFromInline =
+        !!this.state.openKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
+      this.inlineOpenKeys = this.state.openKeys
+      this.setState({ sOpenKeys: [] })
+    }
+    if ((!nextProps.inlineCollapsed && preProps.inlineCollapsed) ||
+        (!layoutContext.siderCollapsed && preLayoutContext.siderCollapsed)) {
+      this.setState({ sOpenKeys: this.inlineOpenKeys })
+      this.inlineOpenKeys = []
+    }
   },
   data () {
     const props = this.$props
@@ -68,22 +101,15 @@ export default {
   methods: {
     handleClick (e) {
       this.handleOpenChange([])
-      const { onClick } = this.props
-      if (onClick) {
-        onClick(e)
-      }
+      this.$emit('click', e)
     },
     handleOpenChange (openKeys) {
       this.setOpenKeys(openKeys)
-
-      const { onOpenChange } = this.props
-      if (onOpenChange) {
-        onOpenChange(openKeys)
-      }
+      this.$emit('openChange', openKeys)
     },
     setOpenKeys (openKeys) {
-      if (!('openKeys' in this.props)) {
-        this.setState({ openKeys })
+      if (!hasProp(this, 'openKeys')) {
+        this.setState({ sOpenKeys: openKeys })
       }
     },
     getRealMenuMode () {
@@ -91,18 +117,18 @@ export default {
       if (this.switchModeFromInline && inlineCollapsed) {
         return 'inline'
       }
-      const { mode } = this.props
+      const { mode } = this.$props
       return inlineCollapsed ? 'vertical' : mode
     },
     getInlineCollapsed () {
-      const { inlineCollapsed } = this.props
-      if (this.context.siderCollapsed !== undefined) {
-        return this.context.siderCollapsed
+      const { inlineCollapsed } = this.$props
+      if (this.layoutContext.siderCollapsed !== undefined) {
+        return this.layoutContext.siderCollapsed
       }
       return inlineCollapsed
     },
     getMenuOpenAnimation (menuMode) {
-      const { openAnimation, openTransitionName } = this.props
+      const { openAnimation, openTransitionName } = this.$props
       let menuOpenAnimation = openAnimation || openTransitionName
       if (openAnimation === undefined && openTransitionName === undefined) {
         switch (menuMode) {
@@ -124,10 +150,11 @@ export default {
           case 'inline':
             menuOpenAnimation = {
               ...animation,
-              leave: (node, done: () => void) => animation.leave(node, () => {
+              leave: (node, done) => animation.leave(node, () => {
               // Make sure inline menu leave animation finished before mode is switched
                 this.switchModeFromInline = false
-                this.setState({})
+                // this.setState({})
+                this.$forceUpdate()
                 // when inlineCollapsed change false to true, all submenu will be unmounted,
                 // so that we don't need handle animation leaving.
                 if (this.getRealMenuMode() === 'vertical') {
@@ -143,32 +170,15 @@ export default {
       return menuOpenAnimation
     },
   },
-
-  componentWillReceiveProps (nextProps, nextContext) {
-    const { prefixCls } = this.props
-    if (this.props.mode === 'inline' &&
-        nextProps.mode !== 'inline') {
-      this.switchModeFromInline = true
-    }
-    if ('openKeys' in nextProps) {
-      this.setState({ openKeys: nextProps.openKeys })
-      return
-    }
-    if ((nextProps.inlineCollapsed && !this.props.inlineCollapsed) ||
-        (nextContext.siderCollapsed && !this.context.siderCollapsed)) {
-      this.switchModeFromInline =
-        !!this.state.openKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
-      this.inlineOpenKeys = this.state.openKeys
-      this.setState({ openKeys: [] })
-    }
-    if ((!nextProps.inlineCollapsed && this.props.inlineCollapsed) ||
-        (!nextContext.siderCollapsed && this.context.siderCollapsed)) {
-      this.setState({ openKeys: this.inlineOpenKeys })
-      this.inlineOpenKeys = []
-    }
-  },
   render () {
-    const { prefixCls, className, theme } = this.props
+    const { $props, layoutContext, $slots } = this
+    const { collapsedWidth, siderCollapsed } = layoutContext
+    this.preProps = cloneDeep($props)
+    this.preLayoutContext = {
+      siderCollapsed,
+      collapsedWidth,
+    }
+    const { prefixCls, theme } = this.$props
     const menuMode = this.getRealMenuMode()
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode)
 
@@ -178,22 +188,26 @@ export default {
     }
 
     const menuProps = {
-      openKeys: this.state.openKeys,
-      onOpenChange: this.handleOpenChange,
-      className: menuClassName,
-      mode: menuMode,
+      props: {
+        ...omit(this.$props, ['inlineCollapsed']),
+        openKeys: this.sOpenKeys,
+        mode: menuMode,
+      },
+      on: {
+        openChange: this.handleOpenChange,
+      },
+
     }
 
     if (menuMode !== 'inline') {
       // closing vertical popup submenu after click it
-      menuProps.onClick = this.handleClick
-      menuProps.openTransitionName = menuOpenAnimation
+      menuProps.on.click = this.handleClick
+      menuProps.props.openTransitionName = menuOpenAnimation
     } else {
-      menuProps.openAnimation = menuOpenAnimation
+      menuProps.props.openAnimation = menuOpenAnimation
     }
 
     // https://github.com/ant-design/ant-design/issues/8587
-    const { collapsedWidth } = this.context
     if (
       this.getInlineCollapsed() &&
       (collapsedWidth === 0 || collapsedWidth === '0' || collapsedWidth === '0px')
@@ -201,7 +215,7 @@ export default {
       return null
     }
 
-    return <RcMenu {...this.props} {...menuProps} />
+    return <RcMenu {...menuProps} class={menuClassName}>{$slots.default}</RcMenu>
   },
 }
 

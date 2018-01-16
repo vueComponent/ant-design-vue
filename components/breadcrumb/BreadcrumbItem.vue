@@ -1,5 +1,6 @@
 <script>
   import PropTypes from '../_util/vue-types'
+  import hasProp from '../_util/props-util'
 
   export default {
     name: 'BreadcrumbItem',
@@ -9,12 +10,12 @@
       href: PropTypes.string,
     },
     render () {
-      const { prefixCls, href, ...restProps } = this
+      const { prefixCls, ...restProps } = this.$props
       const { breadCrumbParent = {}} = this
       const { separator = '/' } = breadCrumbParent
       const solt = this.$slots.default
       let link
-      if (href !== undefined) {
+      if (hasProp(this, 'href')) {
         link = <a class={`${prefixCls}-link`} {...restProps}>{solt}</a>
       } else {
         link = <span class={`${prefixCls}-link`} {...restProps}>{solt}</span>

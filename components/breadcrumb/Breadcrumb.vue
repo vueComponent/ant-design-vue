@@ -6,7 +6,6 @@
     props: {
       prefixCls: PropTypes.string.def('ant-breadcrumb'),
       separator: PropTypes.string.def('/'),
-      styles: PropTypes.Object,
     },
     provide () {
       return {
@@ -14,9 +13,9 @@
       }
     },
     render () {
-      const { prefixCls, styles } = this
+      const { prefixCls } = this
       return (
-        <div class={prefixCls} style={styles}>
+        <div class={prefixCls}>
           {this.$slots.default}
         </div>
       )

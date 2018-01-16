@@ -131,7 +131,7 @@ export default {
   .head-example {
     width: 42px;
     height: 42px;
-    border-radius: 6px;
+    border-radius: 4px;
     background: #eee;
     display: inline-block;
   }

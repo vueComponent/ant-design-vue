@@ -3,24 +3,23 @@ import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
 import { noop } from './util'
 import BaseMixin from '../../_util/BaseMixin'
-
+const props = {
+  rootPrefixCls: PropTypes.string,
+  eventKey: PropTypes.string,
+  active: PropTypes.bool,
+  selectedKeys: PropTypes.array,
+  disabled: PropTypes.bool,
+  title: PropTypes.string,
+  index: PropTypes.number,
+  inlineIndent: PropTypes.number.def(24),
+  level: PropTypes.number.def(1),
+  mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
+  parentMenu: PropTypes.object,
+  clearSubMenuTimers: PropTypes.func.def(noop),
+}
 const MenuItem = {
   name: 'MenuItem',
-
-  props: {
-    rootPrefixCls: PropTypes.string,
-    eventKey: PropTypes.string,
-    active: PropTypes.bool,
-    selectedKeys: PropTypes.array,
-    disabled: PropTypes.bool,
-    title: PropTypes.string,
-    index: PropTypes.number,
-    inlineIndent: PropTypes.number.def(24),
-    level: PropTypes.number.def(1),
-    mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
-    parentMenu: PropTypes.object,
-    clearSubMenuTimers: PropTypes.func.def(noop),
-  },
+  props,
   inject: {
     parentMenuContext: { default: undefined },
   },
@@ -162,4 +161,5 @@ const MenuItem = {
 }
 
 export default MenuItem
+export { props as menuItemProps }
 </script>

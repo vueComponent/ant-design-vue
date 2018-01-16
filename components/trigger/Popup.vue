@@ -24,8 +24,8 @@ export default {
     popupClassName: PropTypes.any,
   },
   data () {
+    this.aligned = false
     return {
-      aligned: false,
       destroyPopup: false,
       initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化
     }

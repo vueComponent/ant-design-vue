@@ -1,17 +1,3 @@
-<template>
-  <label :class="classes">
-    <span :class="checkboxClass">
-      <input :name="name" type="checkbox" :disabled="disabled"
-        :class="`${prefixCls}-input`" :checked="stateChecked"
-        @change="handleChange"
-        />
-      <span :class="`${prefixCls}-inner`" />
-    </span>
-    <span v-if="hasDefaultSlot">
-      <slot></slot>
-    </span>
-  </label>
-</template>
 <script>
 import hasProp from '../_util/props-util'
 export default {
@@ -33,77 +19,106 @@ export default {
     prop: 'checked',
   },
   inject: {
-    checkboxGroupContext: { default: undefined },
+    checkboxGroupContext: { default: null },
   },
   data () {
     const { checkboxGroupContext, checked, defaultChecked, value } = this
-    let stateChecked
-    if (checkboxGroupContext && checkboxGroupContext.checkedStatus) {
-      stateChecked = checkboxGroupContext.checkedStatus.has(value)
+    let sChecked
+    if (checkboxGroupContext) {
+      sChecked = checkboxGroupContext.sValue.indexOf(value) !== -1
+    } else {
+      sChecked = !hasProp(this, 'checked') ? defaultChecked : checked
     }
     return {
-      stateChecked: stateChecked === undefined
-        ? !hasProp(this, 'checked') ? defaultChecked : checked
-        : stateChecked,
+      sChecked,
     }
   },
   computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    },
-    classes () {
-      const { prefixCls } = this
-      return {
-        [`${prefixCls}-wrapper`]: true,
-      }
-    },
     checkboxClass () {
-      const { prefixCls, indeterminate, stateChecked, disabled } = this
+      const { prefixCls, indeterminate, sChecked, $props, checkboxGroupContext } = this
+      let disabled = $props.disabled
+      if (checkboxGroupContext) {
+        disabled = disabled || checkboxGroupContext.disabled
+      }
       return {
         [`${prefixCls}`]: true,
-        [`${prefixCls}-checked`]: stateChecked,
+        [`${prefixCls}-checked`]: sChecked,
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-indeterminate`]: indeterminate,
       }
     },
   },
-  mounted () {
-  },
   methods: {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked, checkboxGroupContext, stateChecked } = this
-      if ((checked === undefined && !checkboxGroupContext) || (checkboxGroupContext && checkboxGroupContext.value === undefined)) {
-        this.stateChecked = targetChecked
+      const { name, value, checked, checkboxGroupContext, sChecked } = this
+      if ((checked === undefined && !checkboxGroupContext) || (checkboxGroupContext && checkboxGroupContext.sValue === undefined)) {
+        this.sChecked = targetChecked
       }
       const target = {
         name,
         value,
-        checked: !stateChecked,
+        checked: !sChecked,
       }
-      if (this.checkboxGroupContext) {
-        this.checkboxGroupContext.handleChange({ target })
-      } else {
-        this.$emit('change', {
-          target,
-          stopPropagation () {
-            event.stopPropagation()
-          },
-          preventDefault () {
-            event.preventDefault()
-          },
-        })
-      }
+      this.$emit('change', {
+        target,
+        stopPropagation () {
+          event.stopPropagation()
+        },
+        preventDefault () {
+          event.preventDefault()
+        },
+      })
+    },
+    onMouseEnter (e) {
+      this.$emit('mouseenter', e)
+    },
+    onMouseLeave (e) {
+      this.$emit('mouseleave', e)
+    },
+    focus () {
+      this.$refs.input.focus()
+    },
+    blur () {
+      this.$refs.input.blur()
     },
   },
   watch: {
     checked (val) {
-      this.stateChecked = val
+      this.sChecked = val
     },
-    'checkboxGroupContext.checkedStatus': function (checkedStatus) {
-      this.stateChecked = checkedStatus.has(this.value)
+    'checkboxGroupContext.sValue': function (val) {
+      this.sChecked = val.indexOf(this.value) !== -1
     },
+  },
+  render () {
+    const { $props: props, checkboxGroupContext, checkboxClass, name, $slots, sChecked } = this
+    const {
+      prefixCls,
+    } = props
+    let disabled = props.disabled
+    let onChange = this.handleChange
+    if (checkboxGroupContext) {
+      onChange = () => checkboxGroupContext.toggleOption({ value: props.value })
+      disabled = props.disabled || checkboxGroupContext.disabled
+    }
+    return (
+      <label
+        class={`${prefixCls}-wrapper`}
+        onMouseenter={this.onMouseEnter}
+        onMouseleave={this.onMouseLeave}
+      >
+        <span class={checkboxClass}>
+          <input name={name} type='checkbox' disabled={disabled}
+            class={`${prefixCls}-input`} checked={sChecked}
+            onChange={onChange} ref='input'
+          />
+          <span class={`${prefixCls}-inner`} />
+        </span>
+        {$slots.default ? <span>{$slots.default}</span> : null}
+      </label>
+    )
   },
 }
 </script>

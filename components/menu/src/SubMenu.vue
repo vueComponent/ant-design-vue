@@ -18,13 +18,11 @@ const popupPlacementMap = {
 
 export default {
   name: 'SubMenu',
-
   props: {
     mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
     title: PropTypes.any.def(''),
     selectedKeys: PropTypes.array.def([]),
     openKeys: PropTypes.array.def([]),
-    // onClick: PropTypes.func,
     openChange: PropTypes.func.def(noop),
     rootPrefixCls: PropTypes.string,
     eventKey: PropTypes.string,
@@ -32,8 +30,6 @@ export default {
     active: PropTypes.bool, // TODO: remove
     isRootMenu: PropTypes.bool,
     index: PropTypes.number,
-    // onItemHover: PropTypes.func,
-    // onSelect: PropTypes.func,
     triggerSubMenuAction: PropTypes.string,
     popupClassName: PropTypes.string,
     getPopupContainer: PropTypes.func,
@@ -48,6 +44,7 @@ export default {
   },
   inject: {
     parentMenuContext: { default: undefined },
+    antdMenuTheme: { default: 'light' },
   },
   mixins: [BaseMixin],
   isSubMenu: true,
@@ -324,6 +321,7 @@ export default {
 
   render (h) {
     const props = this.$props
+    const { rootPrefixCls, antdMenuTheme } = this
     const isOpen = this.isOpen()
     const prefixCls = this.getPrefixCls()
     const isInlineMode = props.mode === 'inline'
@@ -440,7 +438,7 @@ export default {
         {!isInlineMode && (
           <Trigger
             prefixCls={prefixCls}
-            popupClassName={`${prefixCls}-popup ${popupClassName || ''}`}
+            popupClassName={`${prefixCls}-popup ${rootPrefixCls}-${antdMenuTheme} ${popupClassName || ''}`}
             getPopupContainer={getPopupContainer}
             builtinPlacements={placements}
             popupPlacement={popupPlacement}

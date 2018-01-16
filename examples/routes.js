@@ -3,7 +3,7 @@ const AsyncComp = () => {
   const com = pathnameArr[1] || 'button'
   const demo = pathnameArr[2] || 'index'
   return {
-    component: import(`../components/tooltip/demo/${demo}.vue`),
+    component: import(`../components/checkbox/demo/${demo}.vue`),
   }
 }
 export default [

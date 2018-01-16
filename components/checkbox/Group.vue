@@ -1,11 +1,3 @@
-<template>
-  <div :class="`${prefixCls}`">
-    <Checkbox v-for="item in checkOptions" :key="item.value" :value="item.value" :disabled="item.disabled">
-      {{item.label}}
-    </Checkbox>
-    <slot v-if="checkOptions.length === 0"></slot>
-  </div>
-</template>
 <script>
 import Checkbox from './Checkbox.vue'
 import hasProp from '../_util/props-util'
@@ -41,52 +33,84 @@ export default {
   data () {
     const { value, defaultValue } = this
     return {
-      stateValue: value || defaultValue,
+      sValue: value || defaultValue,
     }
-  },
-  computed: {
-    checkedStatus () {
-      return new Set(this.stateValue)
-    },
-    checkOptions () {
-      const { disabled } = this
-      return this.options.map(option => {
-        return typeof option === 'string'
-          ? { label: option, value: option }
-          : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled }
-      })
-    },
   },
   methods: {
     handleChange (event) {
       const target = event.target
       const { value: targetValue, checked } = target
-      const { stateValue } = this
+      const { sValue } = this
       let newVal = []
       if (checked) {
-        newVal = [...stateValue, targetValue]
+        newVal = [...sValue, targetValue]
       } else {
-        newVal = [...stateValue]
+        newVal = [...sValue]
         const index = newVal.indexOf(targetValue)
         index >= 0 && newVal.splice(index, 1)
       }
       newVal = [...new Set(newVal)]
       if (!hasProp(this, 'value')) {
-        this.stateValue = newVal
+        this.sValue = newVal
       }
       this.$emit('input', newVal)
       this.$emit('change', newVal)
     },
+    getOptions () {
+      const { options } = this.$props
+      return options.map(option => {
+        if (typeof option === 'string') {
+          return {
+            label: option,
+            value: option,
+          }
+        }
+        return option
+      })
+    },
+    toggleOption (option) {
+      const optionIndex = this.sValue.indexOf(option.value)
+      const value = [...this.sValue]
+      if (optionIndex === -1) {
+        value.push(option.value)
+      } else {
+        value.splice(optionIndex, 1)
+      }
+      if (!hasProp(this, 'value')) {
+        this.sValue = value
+      }
+      this.$emit('input', value)
+      this.$emit('change', value)
+    },
   },
-  mounted () {
+  render () {
+    const { $props: props, $data: state, $slots } = this
+    const { prefixCls, options } = props
+    let children = $slots.default
+    if (options && options.length > 0) {
+      children = this.getOptions().map(option => (
+        <Checkbox
+          key={option.value}
+          disabled={'disabled' in option ? option.disabled : props.disabled}
+          value={option.value}
+          checked={state.sValue.indexOf(option.value) !== -1}
+          onChange={() => this.toggleOption(option)}
+          class={`${prefixCls}-item`}
+        >
+          {option.label}
+        </Checkbox>
+      ))
+    }
+    return (
+      <div class={prefixCls}>
+        {children}
+      </div>
+    )
   },
   watch: {
     value (val) {
-      this.stateValue = val
+      this.sValue = val
     },
-  },
-  components: {
-    Checkbox,
   },
 }
 </script>

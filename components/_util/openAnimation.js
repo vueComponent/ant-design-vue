@@ -44,9 +44,9 @@ const animation = {
   leave (node, done) {
     return animate(node, false, done)
   },
-  appear (node, done) {
-    return animate(node, true, done)
-  },
+  // appear (node, done) {
+  //   return animate(node, true, done)
+  // },
 }
 
 export default animation

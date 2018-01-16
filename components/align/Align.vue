@@ -39,8 +39,8 @@ export default {
     disabled: PropTypes.bool.def(false),
   },
   data () {
+    this.aligned = false
     return {
-      aligned: false,
     }
   },
   mounted () {
@@ -103,7 +103,6 @@ export default {
       if (!props.disabled) {
         const source = this.$el
         this.aligned = true
-        // this.$emit('align', source, align(source, props.target(), props.align))
         this.$listeners.align && this.$listeners.align(source, align(source, props.target(), props.align))
       }
     },

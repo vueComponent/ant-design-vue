@@ -1,8 +1,11 @@
 <template>
 <div>
+  <md>
+  ## 顶部导航
+  水平的顶部导航菜单。
+  </md>
   <Menu
-    @click="handleClick"
-    :selectedKeys="[current]"
+    v-model="current"
     mode="horizontal"
   >
     <MenuItem key="mail">
@@ -38,14 +41,8 @@ const MenuItem = Menu.Item
 export default {
   data () {
     return {
-      current: 'mail',
+      current: ['mail'],
     }
-  },
-  methods: {
-    handleClick (e) {
-      console.log(e)
-      this.current = e.key
-    },
   },
   components: {
     Menu,

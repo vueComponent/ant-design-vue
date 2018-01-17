@@ -48,7 +48,7 @@ export function cloneElement (n, nodeProps, clone) {
     attrs = data.attrs,
     ref,
   } = nodeProps
-  node.data = Object.assign(data, { style, attrs, class: cls })
+  node.data = Object.assign({}, data, { style, attrs, class: cls })
   if (node.componentOptions) {
     node.componentOptions.propsData = node.componentOptions.propsData || {}
     node.componentOptions.listeners = node.componentOptions.listeners || {}
@@ -96,5 +96,5 @@ export function getEvents (child) {
   } else if (child.data && child.data.on) {
     events = child.data.on
   }
-  return events
+  return { ...events }
 }

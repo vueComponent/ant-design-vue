@@ -13,16 +13,12 @@ export const MenuMode = PropTypes.oneOf(['vertical', 'vertical-left', 'vertical-
 
 export const menuProps = {
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
-  mode: MenuMode,
+  mode: MenuMode.def('vertical'),
   selectable: PropTypes.bool,
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   defaultSelectedKeys: PropTypes.array,
   openKeys: PropTypes.array,
   defaultOpenKeys: PropTypes.array,
-  // onOpenChange: (openKeys: string[]) => void;
-  // onSelect: (param: SelectParam) => void;
-  // onDeselect: (param: SelectParam) => void;
-  // onClick: (param: ClickParam) => void;
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   openTransitionName: PropTypes.string,
   prefixCls: PropTypes.string.def('ant-menu'),
@@ -40,6 +36,7 @@ export default {
   provide () {
     return {
       inlineCollapsed: this.getInlineCollapsed(),
+      getInlineCollapsed: this.getInlineCollapsed,
       antdMenuTheme: this.$props.theme,
     }
   },
@@ -47,37 +44,53 @@ export default {
   inject: {
     layoutContext: { default: {}},
   },
+  model: {
+    prop: 'selectedKeys',
+    event: 'selectChange',
+  },
   watch: {
     '$props': {
       handler: function (nextProps) {
+        const { preProps, sOpenKeys } = this
+        const { prefixCls } = preProps
+        if (preProps.mode === 'inline' && nextProps.mode !== 'inline') {
+          this.switchModeFromInline = true
+        }
+        if (hasProp(this, 'openKeys')) {
+          this.setState({ sOpenKeys: nextProps.openKeys })
+          return
+        }
+        if (nextProps.inlineCollapsed && !preProps.inlineCollapsed) {
+          this.switchModeFromInline =
+        !!sOpenKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
+          this.inlineOpenKeys = sOpenKeys
+          this.setState({ sOpenKeys: [] })
+        }
 
+        if (!nextProps.inlineCollapsed && preProps.inlineCollapsed) {
+          this.setState({ sOpenKeys: this.inlineOpenKeys })
+          this.inlineOpenKeys = []
+        }
       },
       deep: true,
     },
-  },
-  beforeUpdate () {
-    const { preProps, $props: nextProps, layoutContext, preLayoutContext = {}} = this
-    const { prefixCls } = preProps
-    if (preProps.mode === 'inline' &&
-        nextProps.mode !== 'inline') {
-      this.switchModeFromInline = true
-    }
-    if (hasProp(this, 'openKeys')) {
-      this.setState({ sOpenKeys: nextProps.openKeys })
-      return
-    }
-    if ((nextProps.inlineCollapsed && !preProps.inlineCollapsed) ||
-        (layoutContext.siderCollapsed && !preLayoutContext.siderCollapsed)) {
-      this.switchModeFromInline =
-        !!this.state.openKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
-      this.inlineOpenKeys = this.state.openKeys
-      this.setState({ sOpenKeys: [] })
-    }
-    if ((!nextProps.inlineCollapsed && preProps.inlineCollapsed) ||
-        (!layoutContext.siderCollapsed && preLayoutContext.siderCollapsed)) {
-      this.setState({ sOpenKeys: this.inlineOpenKeys })
-      this.inlineOpenKeys = []
-    }
+    'layoutContext.siderCollapsed': function (val) {
+      const { openKeys, sOpenKeys, prefixCls } = this
+      if (hasProp(this, 'openKeys')) {
+        this.setState({ sOpenKeys: openKeys })
+        return
+      }
+      if (val) {
+        this.switchModeFromInline =
+        !!sOpenKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
+        this.inlineOpenKeys = sOpenKeys
+        this.setState({ sOpenKeys: [] })
+      } else {
+        this.setState({ sOpenKeys: this.inlineOpenKeys })
+        this.inlineOpenKeys = []
+      }
+    },
+
   },
   data () {
     const props = this.$props
@@ -103,9 +116,18 @@ export default {
       this.handleOpenChange([])
       this.$emit('click', e)
     },
+    handleSelect (info) {
+      this.$emit('select', info)
+      this.$emit('selectChange', info.selectedKeys)
+    },
+    handleDeselect (info) {
+      this.$emit('deselect', info)
+      this.$emit('selectChange', info.selectedKeys)
+    },
     handleOpenChange (openKeys) {
       this.setOpenKeys(openKeys)
       this.$emit('openChange', openKeys)
+      this.$emit('update:openKeys', openKeys)
     },
     setOpenKeys (openKeys) {
       if (!hasProp(this, 'openKeys')) {
@@ -148,7 +170,7 @@ export default {
             }
             break
           case 'inline':
-            menuOpenAnimation = {
+            menuOpenAnimation = { on: {
               ...animation,
               leave: (node, done) => animation.leave(node, () => {
               // Make sure inline menu leave animation finished before mode is switched
@@ -162,7 +184,7 @@ export default {
                 }
                 done()
               }),
-            }
+            }}
             break
           default:
         }
@@ -171,7 +193,7 @@ export default {
     },
   },
   render () {
-    const { $props, layoutContext, $slots } = this
+    const { $props, layoutContext, $slots, $listeners } = this
     const { collapsedWidth, siderCollapsed } = layoutContext
     this.preProps = cloneDeep($props)
     this.preLayoutContext = {
@@ -194,9 +216,14 @@ export default {
         mode: menuMode,
       },
       on: {
+        ...$listeners,
+        select: this.handleSelect,
+        deselect: this.handleDeselect,
         openChange: this.handleOpenChange,
       },
-
+    }
+    if (!hasProp(this, 'selectedKeys')) {
+      delete menuProps.props.selectedKeys
     }
 
     if (menuMode !== 'inline') {

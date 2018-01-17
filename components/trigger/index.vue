@@ -333,16 +333,8 @@ export default {
 
     getContainer () {
       const { $props: props } = this
-      // const popupContainer = document.createElement('div')
-      // // Make sure default popup container will never cause scrollbar appearing
-      // // https://github.com/react-component/trigger/issues/41
-      // popupContainer.style.position = 'absolute'
-      // popupContainer.style.top = '0'
-      // popupContainer.style.left = '0'
-      // popupContainer.style.width = '100%'
       const mountNode = props.getPopupContainer
         ? props.getPopupContainer(this.$el) : props.getDocument().body
-      // mountNode.appendChild(popupContainer)
       return mountNode
     },
 
@@ -515,13 +507,6 @@ export default {
       this._component = null
     }
     newChildProps.addChildren = this._component
-    // // 复制一份事件，防止cloneElement
-    // if (child.componentOptions && child.componentOptions.listeners) {
-    //   console.log(child.componentOptions.listeners)
-    //   child.componentOptions.listeners = { ...child.componentOptions.listeners }
-    // } else if (child.data && child.data.on) {
-    //   child.data.on = { ...child.data.on }
-    // }
     const trigger = cloneElement(child, newChildProps)
     return trigger
   },

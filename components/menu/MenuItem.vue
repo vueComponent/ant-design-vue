@@ -7,7 +7,7 @@ import { getComponentFromProp } from '../_util/props-util'
 export default {
   props: itemProps,
   inject: {
-    inlineCollapsed: { default: false },
+    getInlineCollapsed: { default: () => { false } },
   },
   isMenuItem: 1,
   methods: {
@@ -16,20 +16,27 @@ export default {
     },
   },
   render (h) {
-    const { inlineCollapsed, $props: props, $slots, $attrs: attrs, $listeners } = this
+    const { getInlineCollapsed, $props: props, $slots, $attrs: attrs, $listeners } = this
+    const inlineCollapsed = getInlineCollapsed()
     const itemProps = {
       props,
       attrs,
-      on: $listeners,
+      on: { ...$listeners },
       class: getClass(this),
       style: getStyle(this),
     }
+    const toolTipProps = {
+      props: {
+        placement: 'right',
+        overlayClassName: `${props.rootPrefixCls}-inline-collapsed-tooltip`,
+      },
+      on: {},
+    }
     return <Tooltip
-      placement='right'
-      overlayClassName={`${props.rootPrefixCls}-inline-collapsed-tooltip`}
+      {...toolTipProps}
     >
       <template slot='title'>
-        {inlineCollapsed && props.level === 1 ? $slots.default : ''}
+        {inlineCollapsed && props.level === 1 ? <span>$slots</span> : ''}
       </template>
       <Item {...itemProps} ref='menuItem'>
         {$slots.default}

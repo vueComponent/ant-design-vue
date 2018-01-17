@@ -40,7 +40,7 @@ const Menu = {
         if (hasProp(this, 'selectedKeys')) {
           props.sSelectedKeys = nextProps.selectedKeys || []
         }
-        if (hasProp(this, 'selectedKeys')) {
+        if (hasProp(this, 'openKeys')) {
           props.sOpenKeys = nextProps.openKeys || []
         }
         this.setState(props)
@@ -81,7 +81,7 @@ const Menu = {
         }
         this.__emit('select', {
           ...selectInfo,
-          sSelectedKeys,
+          selectedKeys: sSelectedKeys,
         })
       }
     },
@@ -139,7 +139,7 @@ const Menu = {
         }
         this.__emit('deselect', {
           ...selectInfo,
-          sSelectedKeys,
+          selectedKeys: sSelectedKeys,
         })
       }
     },

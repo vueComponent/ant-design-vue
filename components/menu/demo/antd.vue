@@ -76,7 +76,7 @@ export default {
       console.log('onOpenChange', value, this.$refs)
     }
     const commonMenu = () => (
-      <Menu onSelect={handleSelect} onOpenChange={onOpenChange}>
+      <Menu onSelect={handleSelect} onOpenChange={onOpenChange} onClick={(e) => console.log('click', e)}>
         <SubMenu ref='test' key='1' title={<span>sub menu</span>}>
           <MenuItem key='1-1'>
           0-1
@@ -103,7 +103,7 @@ export default {
               {commonMenu()}
             </Clone>
           </div>
-          <h3>horizontal and click</h3>
+          {/* <h3>horizontal and click</h3>
           <div style={{ margin: '20px', width: '800px' }}>
             <Clone childProps={{
               mode: 'horizontal',
@@ -131,7 +131,7 @@ export default {
             openAnimation: animation,
           }} >
             {commonMenu()}
-          </Clone></div>
+          </Clone></div>*/}
         </div>
       </div>
     )

@@ -167,16 +167,16 @@ export default {
           itemHover: this.onItemHover,
           openChange: this.onOpenChange,
           deselect: this.onDeselect,
-          destroy: this.onDestroy,
+          // destroy: this.onDestroy,
           select: this.onSelect,
         },
       }
       if (props.mode === 'inline') {
         newChildProps.props.triggerSubMenuAction = 'click'
       }
-      if (!extraProps.isRootMenu) {
-        newChildProps.props.clearSubMenuTimers = this.clearSubMenuTimers
-      }
+      // if (!extraProps.isRootMenu) {
+      //   newChildProps.props.clearSubMenuTimers = this.clearSubMenuTimers
+      // }
       return cloneElement(child, newChildProps)
     },
 

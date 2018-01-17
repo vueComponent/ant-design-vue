@@ -15,7 +15,7 @@ const props = {
   level: PropTypes.number.def(1),
   mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
   parentMenu: PropTypes.object,
-  clearSubMenuTimers: PropTypes.func.def(noop),
+  // clearSubMenuTimers: PropTypes.func.def(noop),
 }
 const MenuItem = {
   name: 'MenuItem',
@@ -30,12 +30,6 @@ const MenuItem = {
     this.__emit('destroy', props.eventKey)
   },
   methods: {
-    __emit () { // 直接调用listeners，底层组件不需要vueTool记录events
-      const args = [].slice.call(arguments, 0)
-      if (args.length && this.$listeners[args[0]]) {
-        this.$listeners[args[0]](...args.slice(1))
-      }
-    },
     onKeyDown (e) {
       const keyCode = e.keyCode
       if (keyCode === KeyCode.ENTER) {
@@ -57,10 +51,10 @@ const MenuItem = {
     },
 
     onMouseEnter (e) {
-      const { eventKey, parentMenuContext } = this
-      if (parentMenuContext && parentMenuContext.subMenuInstance) {
-        parentMenuContext.subMenuInstance.clearSubMenuTimers()
-      }
+      const { eventKey } = this
+      // if (parentMenuContext && parentMenuContext.subMenuInstance) {
+      //   parentMenuContext.subMenuInstance.clearSubMenuTimers()
+      // }
       this.__emit('itemHover', {
         key: eventKey,
         hover: true,
@@ -80,6 +74,7 @@ const MenuItem = {
         item: this,
         domEvent: e,
       }
+
       this.__emit('click', info)
       if (multiple) {
         if (selected) {
@@ -130,6 +125,7 @@ const MenuItem = {
       'aria-disabled': props.disabled,
     }
     let mouseEvent = {}
+
     if (!props.disabled) {
       mouseEvent = {
         click: this.onClick,

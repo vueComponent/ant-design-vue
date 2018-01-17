@@ -88,8 +88,13 @@ export default {
     getTransitionName () {
       const props = this.$props
       let transitionName = props.transitionName
-      if (!transitionName && typeof props.animation === 'string') {
-        transitionName = `${props.animation}`
+      const animation = props.animation
+      if (!transitionName) {
+        if (typeof animation === 'string') {
+          transitionName = `${animation}`
+        } else if (animation.props && animation.props.name) {
+          transitionName = animation.props.name
+        }
       }
       return transitionName
     },
@@ -152,9 +157,9 @@ export default {
       }
 
       if (typeof animation === 'object') {
-        const { on = {}, ...otherProps } = animation
-        transitionProps.props = { ...transitionProps.props, ...otherProps }
-        transitionProps.on = { ...on, afterLeave: (el) => {
+        const { on = {}, props = {}} = animation
+        transitionProps.props = { ...transitionProps.props, ...props }
+        transitionProps.on = { ...transitionEvent, ...on, afterLeave: (el) => {
           transitionEvent.afterLeave(el)
           on.afterLeave && on.afterLeave(el)
         } }

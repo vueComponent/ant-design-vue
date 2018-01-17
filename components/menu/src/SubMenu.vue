@@ -21,7 +21,7 @@ export default {
   name: 'SubMenu',
   props: {
     mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
-    title: PropTypes.any.def(''),
+    title: PropTypes.any,
     selectedKeys: PropTypes.array.def([]),
     openKeys: PropTypes.array.def([]),
     openChange: PropTypes.func.def(noop),
@@ -42,6 +42,7 @@ export default {
     subMenuCloseDelay: PropTypes.number.def(0.1),
     level: PropTypes.number.def(1),
     inlineIndent: PropTypes.number.def(24),
+    openTransitionName: PropTypes.string,
   },
   inject: {
     parentMenuContext: { default: undefined },
@@ -63,10 +64,16 @@ export default {
   },
 
   beforeDestroy () {
-    const { eventKey, parentMenuContext } = this
+    const { eventKey } = this
     this.__emit('destroy', eventKey)
-    if (parentMenuContext.subMenuInstance === this) {
-      this.clearSubMenuTimers()
+    // if (parentMenuContext.subMenuInstance === this) {
+    //   this.clearSubMenuTimers()
+    // }
+    if (this.minWidthTimeout) {
+      clearTimeout(this.minWidthTimeout)
+    }
+    if (this.mouseenterTimeout) {
+      clearTimeout(this.mouseenterTimeout)
     }
   },
   methods: {
@@ -75,15 +82,16 @@ export default {
       if (mode !== 'horizontal' || !isRootMenu || !this.isOpen()) {
         return
       }
-      setTimeout(() => {
-        if (!this.subMenuTitle || !this.menuInstance) {
+      const self = this
+      this.minWidthTimeout = setTimeout(() => {
+        if (!self.$refs.subMenuTitle || !self.$refs.menuInstance) {
           return
         }
-        const popupMenu = this.$refs.menuInstance.$el
-        if (popupMenu.offsetWidth >= this.subMenuTitle.offsetWidth) {
+        const popupMenu = self.$refs.menuInstance.$el
+        if (popupMenu.offsetWidth >= self.$refs.subMenuTitle.offsetWidth) {
           return
         }
-        popupMenu.style.minWidth = `${this.subMenuTitle.offsetWidth}px`
+        popupMenu.style.minWidth = `${self.$refs.subMenuTitle.offsetWidth}px`
       }, 0)
     },
 
@@ -136,7 +144,7 @@ export default {
 
     onMouseEnter (e) {
       const { eventKey: key } = this.$props
-      this.clearSubMenuLeaveTimer()
+      // this.clearSubMenuLeaveTimer()
       this.setState({
         defaultActiveFirst: false,
       })
@@ -152,20 +160,24 @@ export default {
         parentMenuContext,
       } = this
       parentMenuContext.subMenuInstance = this
-      parentMenuContext.subMenuLeaveFn = () => {
-      // trigger mouseleave
-        this.__emit('mouseleave', {
-          key: eventKey,
-          domEvent: e,
-        })
-      }
+      // parentMenuContext.subMenuLeaveFn = () => {
+      // // trigger mouseleave
+      //   this.__emit('mouseleave', {
+      //     key: eventKey,
+      //     domEvent: e,
+      //   })
+      // }
+      this.__emit('mouseleave', {
+        key: eventKey,
+        domEvent: e,
+      })
       // prevent popup menu and submenu gap
-      parentMenuContext.subMenuLeaveTimer = setTimeout(parentMenuContext.subMenuLeaveFn, 100)
+      // parentMenuContext.subMenuLeaveTimer = setTimeout(parentMenuContext.subMenuLeaveFn, 100)
     },
 
     onTitleMouseEnter (domEvent) {
       const { eventKey: key } = this.$props
-      this.clearSubMenuTitleLeaveTimer()
+      // this.clearSubMenuTitleLeaveTimer()
       this.__emit('itemHover', {
         key,
         hover: true,
@@ -179,17 +191,25 @@ export default {
     onTitleMouseLeave (e) {
       const { eventKey, parentMenuContext } = this
       parentMenuContext.subMenuInstance = this
-      parentMenuContext.subMenuTitleLeaveFn = () => {
-        this.__emit('itemHover', {
-          key: eventKey,
-          hover: false,
-        })
-        this.__emit('titleMouseleave', {
-          key: eventKey,
-          domEvent: e,
-        })
-      }
-      parentMenuContext.subMenuTitleLeaveTimer = setTimeout(parentMenuContext.subMenuTitleLeaveFn, 100)
+      this.__emit('itemHover', {
+        key: eventKey,
+        hover: false,
+      })
+      this.__emit('titleMouseleave', {
+        key: eventKey,
+        domEvent: e,
+      })
+      // parentMenuContext.subMenuTitleLeaveFn = () => {
+      //   this.__emit('itemHover', {
+      //     key: eventKey,
+      //     hover: false,
+      //   })
+      //   this.__emit('titleMouseleave', {
+      //     key: eventKey,
+      //     domEvent: e,
+      //   })
+      // }
+      // parentMenuContext.subMenuTitleLeaveTimer = setTimeout(parentMenuContext.subMenuTitleLeaveFn, 100)
     },
 
     onTitleClick (e) {
@@ -239,38 +259,57 @@ export default {
       }
     },
 
+    // triggerOpenChange (open, type) {
+    //   const key = this.$props.eventKey
+    //   this.__emit('openChange', {
+    //     key,
+    //     item: this,
+    //     trigger: type,
+    //     open,
+    //   })
+    // },
     triggerOpenChange (open, type) {
       const key = this.$props.eventKey
-      this.__emit('openChange', {
-        key,
-        item: this,
-        trigger: type,
-        open,
-      })
-    },
-
-    clearSubMenuTimers () {
-      this.clearSubMenuLeaveTimer()
-      this.clearSubMenuTitleLeaveTimer()
-    },
-
-    clearSubMenuTitleLeaveTimer () {
-      const parentMenuContext = this.parentMenuContext
-      if (parentMenuContext.subMenuTitleLeaveTimer) {
-        clearTimeout(parentMenuContext.subMenuTitleLeaveTimer)
-        parentMenuContext.subMenuTitleLeaveTimer = null
-        parentMenuContext.subMenuTitleLeaveFn = null
+      const openChange = () => {
+        this.__emit('openChange', {
+          key,
+          item: this,
+          trigger: type,
+          open,
+        })
+      }
+      if (type === 'mouseenter') {
+      // make sure mouseenter happen after other menu item's mouseleave
+        this.mouseenterTimeout = setTimeout(() => {
+          openChange()
+        }, 0)
+      } else {
+        openChange()
       }
     },
 
-    clearSubMenuLeaveTimer () {
-      const parentMenuContext = this.parentMenuContext
-      if (parentMenuContext.subMenuLeaveTimer) {
-        clearTimeout(parentMenuContext.subMenuLeaveTimer)
-        parentMenuContext.subMenuLeaveTimer = null
-        parentMenuContext.subMenuLeaveFn = null
-      }
-    },
+    // clearSubMenuTimers () {
+    //   this.clearSubMenuLeaveTimer()
+    //   this.clearSubMenuTitleLeaveTimer()
+    // },
+
+    // clearSubMenuTitleLeaveTimer () {
+    //   const parentMenuContext = this.parentMenuContext
+    //   if (parentMenuContext.subMenuTitleLeaveTimer) {
+    //     clearTimeout(parentMenuContext.subMenuTitleLeaveTimer)
+    //     parentMenuContext.subMenuTitleLeaveTimer = null
+    //     parentMenuContext.subMenuTitleLeaveFn = null
+    //   }
+    // },
+
+    // clearSubMenuLeaveTimer () {
+    //   const parentMenuContext = this.parentMenuContext
+    //   if (parentMenuContext.subMenuLeaveTimer) {
+    //     clearTimeout(parentMenuContext.subMenuLeaveTimer)
+    //     parentMenuContext.subMenuLeaveTimer = null
+    //     parentMenuContext.subMenuLeaveFn = null
+    //   }
+    // },
 
     isChildrenSelected () {
       const ret = { find: false }
@@ -284,7 +323,7 @@ export default {
     renderChildren (children, vShow) {
       const props = this.$props
       const isOpen = this.isOpen()
-      const { select, deselect, destroy, openChange } = this.$listeners
+      const { select, deselect, openChange } = this.$listeners
       const subPopupMenuProps = {
         props: {
           mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
@@ -304,11 +343,11 @@ export default {
           defaultActiveFirst: this.$data.defaultActiveFirst,
           multiple: props.multiple,
           prefixCls: props.rootPrefixCls,
-          clearSubMenuTimers: this.clearSubMenuTimers,
+          // clearSubMenuTimers: this.clearSubMenuTimers,
         },
         on: {
           click: this.onSubMenuClick,
-          select, deselect, destroy, openChange,
+          select, deselect, openChange,
         },
         id: this._menuId,
         ref: 'menuInstance',
@@ -448,7 +487,7 @@ export default {
             onPopupVisibleChange={this.onPopupVisibleChange}
             forceRender={props.forceSubMenuRender}
             // popupTransitionName='rc-menu-open-slide-up'
-            popupAnimation={animProps}
+            popupAnimation={transitionProps}
           >
             <template slot='popup'>
               {this.haveOpened ? children : null}

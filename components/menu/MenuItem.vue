@@ -2,6 +2,7 @@
 import { Item, itemProps } from './src/index'
 import { getClass, getStyle } from '../_util/vnode'
 import Tooltip from '../tooltip'
+import { getComponentFromProp } from '../_util/props-util'
 
 export default {
   props: itemProps,
@@ -14,7 +15,7 @@ export default {
       this.$refs.menuItem.onKeyDown(e)
     },
   },
-  render () {
+  render (h) {
     const { inlineCollapsed, $props: props, $slots, $attrs: attrs, $listeners } = this
     const itemProps = {
       props,

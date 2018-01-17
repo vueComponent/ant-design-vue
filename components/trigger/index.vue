@@ -7,7 +7,7 @@ import warning from '../_util/warning'
 import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement, cloneVNode } from '../_util/vnode'
+import { cloneElement, filterEmpty, getEvents } from '../_util/vnode'
 
 function returnEmptyString () {
   return ''
@@ -79,8 +79,8 @@ export default {
   beforeCreate () {
     ALL_HANDLERS.forEach((h) => {
       this[`fire${h}`] = (e) => {
-        const ev = `on${h[0].toUpperCase() + h.slice(1)}`
-        this.fireEvents(ev, e)
+        // const ev = `on${h[0].toUpperCase() + h.slice(1)}`
+        this.fireEvents(h, e)
       }
     })
   },
@@ -258,7 +258,7 @@ export default {
     },
 
     getRootDomNode () {
-      return this.$el.children ? this.$el.children[0] : this.$el
+      return this.$el
     },
 
     handleGetPopupClassFromAlign (align) {
@@ -401,18 +401,14 @@ export default {
       }
     },
 
-    createTwoChains (event) {
-      const child = this.$slots.default[0]
+    createTwoChains (event, child) {
       let fn = () => {
       }
-      child.data = child.data || {}
-      child.data.on = child.data.on || {}
-      const childEvents = child.data.on
-      const events = (this.data ? this.data.on : {}) || {}
-      if (childEvents[event] && events[event]) {
+      const events = this.$listeners
+      if (this.childOriginEvents[event] && events[event]) {
         return this[`fire${event}`]
       }
-      fn = childEvents[event] || events[event] || fn
+      fn = this.childOriginEvents[event] || events[event] || fn
       return fn
     },
 
@@ -456,13 +452,10 @@ export default {
       }
     },
     fireEvents (type, e) {
-      const child = this.$slots.default[0]
-      if (child && child.data && child.data.on && child.data.on[type]) {
-        child.data.on[type](e)
+      if (this.childOriginEvents[type]) {
+        this.childOriginEvents[type](e)
       }
-      if (this.data && this.data.on && this.data.on[type]) {
-        this.data.on[type](e)
-      }
+      this.__emit(type, e)
     },
 
     close () {
@@ -470,11 +463,12 @@ export default {
     },
   },
   render (h) {
-    const children = this.$slots.default
+    const children = filterEmpty(this.$slots.default)
     if (children.length > 1) {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
     }
     const child = children[0]
+    this.childOriginEvents = getEvents(child)
     const newChildProps = {
       props: {},
       on: {},
@@ -484,7 +478,7 @@ export default {
     if (this.isContextMenuToShow()) {
       newChildProps.on.contextMenu = this.onContextMenu
     } else {
-      newChildProps.on.contextMenu = this.createTwoChains('contextMenu')
+      newChildProps.on.contextMenu = this.createTwoChains('contextMenu', child)
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {
@@ -492,42 +486,44 @@ export default {
       newChildProps.on.mousedown = this.onMousedown
       // newChildProps.on.touchStart = this.onTouchStart
     } else {
-      newChildProps.on.click = this.createTwoChains('click')
-      newChildProps.on.mousedown = this.createTwoChains('mousedown')
-      // newChildProps.on.TouchStart = this.createTwoChains('onTouchStart')
+      newChildProps.on.click = this.createTwoChains('click', child)
+      newChildProps.on.mousedown = this.createTwoChains('mousedown', child)
+      // newChildProps.on.TouchStart = this.createTwoChains('onTouchStart', child)
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.on.mouseenter = this.onMouseenter
     } else {
-      newChildProps.on.mouseenter = this.createTwoChains('mouseenter')
+      newChildProps.on.mouseenter = this.createTwoChains('mouseenter', child)
     }
     if (this.isMouseLeaveToHide()) {
       newChildProps.on.mouseleave = this.onMouseleave
     } else {
-      newChildProps.on.mouseleave = this.createTwoChains('mouseleave')
+      newChildProps.on.mouseleave = this.createTwoChains('mouseleave', child)
     }
 
     if (this.isFocusToShow() || this.isBlurToHide()) {
       newChildProps.on.focus = this.onFocus
       newChildProps.on.blur = this.onBlur
     } else {
-      newChildProps.on.focus = this.createTwoChains('focus')
-      newChildProps.on.blur = this.createTwoChains('blur')
+      newChildProps.on.focus = this.createTwoChains('focus', child)
+      newChildProps.on.blur = this.createTwoChains('blur', child)
     }
-
-    const trigger = cloneElement(cloneVNode(child), newChildProps)
     const { sPopupVisible, forceRender } = this
     if (sPopupVisible || forceRender || this._component) {
       this._component = this.getComponent(h)
     } else {
       this._component = null
     }
-    return (
-      <span>
-        {trigger}
-        {this._component}
-      </span>
-    )
+    newChildProps.addChildren = this._component
+    // // 复制一份事件，防止cloneElement
+    // if (child.componentOptions && child.componentOptions.listeners) {
+    //   console.log(child.componentOptions.listeners)
+    //   child.componentOptions.listeners = { ...child.componentOptions.listeners }
+    // } else if (child.data && child.data.on) {
+    //   child.data.on = { ...child.data.on }
+    // }
+    const trigger = cloneElement(child, newChildProps)
+    return trigger
   },
 }
 

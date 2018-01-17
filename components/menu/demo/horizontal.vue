@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     handleClick (e) {
+      console.log(e)
       this.current = e.key
     },
   },

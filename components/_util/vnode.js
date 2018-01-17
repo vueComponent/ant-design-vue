@@ -1,34 +1,9 @@
-import clonedeep from 'lodash.clonedeep'
-// export function cloneVNode (vnode, deep) {
-//   const cloned = new vnode.constructor(
-//     vnode.tag,
-//     clonedeep(vnode.data),
-//     vnode.children,
-//     vnode.text,
-//     vnode.elm,
-//     vnode.context,
-//     clonedeep(vnode.componentOptions),
-//     vnode.asyncFactory
-//   )
-//   cloned.ns = vnode.ns
-//   cloned.isStatic = vnode.isStatic
-//   cloned.key = vnode.key
-//   cloned.isComment = vnode.isComment
-//   cloned.isCloned = true
-//   if (deep && vnode.children) {
-//     cloned.children = cloneVNodes(vnode.children, deep)
-//   }
-//   return cloned
-// }
+import cloneDeep from 'lodash.clonedeep'
 export function cloneVNode (vnode, deep) {
   const componentOptions = vnode.componentOptions
-  // if (componentOptions) {
-  //   componentOptions.propsData = componentOptions.propsData ? clonedeep(componentOptions.propsData) : componentOptions.propsData
-  // }
-
   const cloned = new vnode.constructor(
     vnode.tag,
-    clonedeep(vnode.data),
+    vnode.data,
     vnode.children,
     vnode.text,
     vnode.elm,
@@ -66,21 +41,25 @@ export function cloneVNodes (vnodes, deep) {
 
 export function cloneElement (n, nodeProps, clone) {
   const node = clone ? cloneVNode(n, true) : n
-  const { props = {}, key, on = {}} = nodeProps
-  if (node.componentOptions) {
-    node.componentOptions.propsData = node.componentOptions.propsData || {}
-    node.componentOptions.listeners = node.componentOptions.listeners || {}
-    Object.assign(node.componentOptions.propsData, props)
-    Object.assign(node.componentOptions.listeners, on)
-  }
-
+  const { props = {}, key, on = {}, addChildren } = nodeProps
   const data = node.data || {}
   const { style = data.style,
     class: cls = data.class,
     attrs = data.attrs,
     ref,
   } = nodeProps
-  node.data = Object.assign(data, { style, attrs, class: cls, on: { ...(data.on || {}), ...on }})
+  node.data = Object.assign(data, { style, attrs, class: cls })
+  if (node.componentOptions) {
+    node.componentOptions.propsData = node.componentOptions.propsData || {}
+    node.componentOptions.listeners = node.componentOptions.listeners || {}
+    node.componentOptions.propsData = { ...node.componentOptions.propsData, ...props }
+    node.componentOptions.listeners = { ...node.componentOptions.listeners, ...on }
+    addChildren && node.componentOptions.children.push(addChildren)
+  } else {
+    addChildren && (node.children = [...(node.children || []), addChildren])
+    node.data.on = { ...(node.data.on || {}), ...on }
+  }
+
   if (key !== undefined) {
     node.key = key
     node.data.key = key
@@ -104,4 +83,18 @@ export function getClass (ele) {
 
 export function getStyle (ele) {
   return ele.data && (ele.data.style || ele.data.staticStyle)
+}
+
+export function filterEmpty (children = []) {
+  return children.filter(c => c.tag || c.text.trim() !== '')
+}
+
+export function getEvents (child) {
+  let events = {}
+  if (child.componentOptions && child.componentOptions.listeners) {
+    events = child.componentOptions.listeners
+  } else if (child.data && child.data.on) {
+    events = child.data.on
+  }
+  return events
 }

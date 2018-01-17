@@ -49,19 +49,19 @@ const Menu = {
     },
   },
   methods: {
-    onDestroy (key) {
-      const state = this.$data
-      const sSelectedKeys = state.sSelectedKeys
-      const sOpenKeys = state.sOpenKeys
-      let index = sSelectedKeys.indexOf(key)
-      if (!hasProp(this, 'selectedKeys') && index !== -1) {
-        sSelectedKeys.splice(index, 1)
-      }
-      index = sOpenKeys.indexOf(key)
-      if (!hasProp(this, 'openKeys') && index !== -1) {
-        sOpenKeys.splice(index, 1)
-      }
-    },
+    // onDestroy (key) {
+    //   const state = this.$data
+    //   const sSelectedKeys = state.sSelectedKeys
+    //   const sOpenKeys = state.sOpenKeys
+    //   let index = sSelectedKeys.indexOf(key)
+    //   if (!hasProp(this, 'selectedKeys') && index !== -1) {
+    //     sSelectedKeys.splice(index, 1)
+    //   }
+    //   index = sOpenKeys.indexOf(key)
+    //   if (!hasProp(this, 'openKeys') && index !== -1) {
+    //     sOpenKeys.splice(index, 1)
+    //   }
+    // },
 
     onSelect (selectInfo) {
       const props = this.$props
@@ -90,7 +90,7 @@ const Menu = {
       this.__emit('click', e)
     },
 
-    onOpenChange (e_) {
+    onOpenChange (event) {
       const sOpenKeys = this.$data.sOpenKeys.concat()
       let changed = false
       const processSingle = (e) => {
@@ -109,11 +109,11 @@ const Menu = {
         }
         changed = changed || oneChanged
       }
-      if (Array.isArray(e_)) {
+      if (Array.isArray(event)) {
       // batch change call
-        e_.forEach(processSingle)
+        event.forEach(processSingle)
       } else {
-        processSingle(e_)
+        processSingle(event)
       }
       if (changed) {
         if (!hasProp(this, 'openKeys')) {

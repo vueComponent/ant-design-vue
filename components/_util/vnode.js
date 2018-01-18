@@ -1,6 +1,11 @@
 import cloneDeep from 'lodash.clonedeep'
 export function cloneVNode (vnode, deep) {
   const componentOptions = vnode.componentOptions
+  // if (componentOptions && componentOptions.listeners) {
+  //   componentOptions.listeners = cloneDeep(componentOptions.listeners)
+  // }
+
+  // const data = vnode.data ? cloneDeep(vnode.data) : vnode.data
   const cloned = new vnode.constructor(
     vnode.tag,
     vnode.data,
@@ -54,9 +59,10 @@ export function cloneElement (n, nodeProps, clone) {
     node.componentOptions.listeners = node.componentOptions.listeners || {}
     node.componentOptions.propsData = { ...node.componentOptions.propsData, ...props }
     node.componentOptions.listeners = { ...node.componentOptions.listeners, ...on }
-    addChildren && node.componentOptions.children.push(addChildren)
+    node.componentOptions.children = node.componentOptions.children.filter(c => c.key !== '_ANT_PORTAL')
+    addChildren && node.componentOptions.children.push(...addChildren)
   } else {
-    addChildren && (node.children = [...(node.children || []), addChildren])
+    addChildren && (node.children = [...(node.children || []), ...addChildren])
     node.data.on = { ...(node.data.on || {}), ...on }
   }
 
@@ -96,5 +102,5 @@ export function getEvents (child) {
   } else if (child.data && child.data.on) {
     events = child.data.on
   }
-  return { ...events }
+  return events
 }

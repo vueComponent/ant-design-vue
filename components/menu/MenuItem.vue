@@ -21,14 +21,13 @@ export default {
     const itemProps = {
       props,
       attrs,
-      on: { ...$listeners },
+      on: $listeners,
       class: getClass(this),
       style: getStyle(this),
     }
     const toolTipProps = {
       props: {
         placement: 'right',
-        trigger: 'click',
         overlayClassName: `${props.rootPrefixCls}-inline-collapsed-tooltip`,
       },
       on: {},
@@ -37,8 +36,7 @@ export default {
       {...toolTipProps}
     >
       <template slot='title'>
-      jdjjdj
-        {inlineCollapsed && props.level === 1 ? <span>$slots</span> : ''}
+        {inlineCollapsed && props.level === 1 ? $slots.default : ''}
       </template>
       <Item {...itemProps} ref='menuItem'>
         {$slots.default}

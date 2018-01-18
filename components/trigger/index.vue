@@ -16,7 +16,6 @@ function returnEmptyString () {
 function returnDocument () {
   return window.document
 }
-
 const ALL_HANDLERS = ['click', 'mousedown', 'touchStart', 'mouseenter',
   'mouseleave', 'focus', 'blur', 'contextMenu']
 
@@ -262,6 +261,7 @@ export default {
 
     getRootDomNode () {
       return this.$el
+      // return this.$el.children[0] || this.$el
     },
 
     handleGetPopupClassFromAlign (align) {
@@ -322,11 +322,11 @@ export default {
         },
         ref: 'popup',
         style: popupStyle,
+        key: '_ANT_PORTAL',
       }
       return (
         <Popup
           {...popupProps}
-          ref='popup'
         >
           {typeof popup === 'function' ? popup(h) : popup}
           {popup === undefined ? $slots.popup : null}
@@ -396,7 +396,7 @@ export default {
       }
     },
 
-    createTwoChains (event, child) {
+    createTwoChains (event) {
       let fn = () => {
       }
       const events = this.$listeners
@@ -463,17 +463,21 @@ export default {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
     }
     const child = children[0]
-    this.childOriginEvents = getEvents(child)
+    const events = getEvents(child)
+    // 黑科技，vue暂未发现保留原事件的方法，使用_ANT_EVENT_HACK来判断事件是否更新
+    if (!events._ANT_EVENT_HACK) {
+      this.childOriginEvents = events
+    }
     const newChildProps = {
       props: {},
-      on: {},
+      on: { _ANT_EVENT_HACK: () => {} },
       key: 'trigger',
     }
 
     if (this.isContextMenuToShow()) {
       newChildProps.on.contextMenu = this.onContextMenu
     } else {
-      newChildProps.on.contextMenu = this.createTwoChains('contextMenu', child)
+      newChildProps.on.contextMenu = this.createTwoChains('contextMenu')
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {
@@ -481,27 +485,27 @@ export default {
       newChildProps.on.mousedown = this.onMousedown
       // newChildProps.on.touchStart = this.onTouchStart
     } else {
-      newChildProps.on.click = this.createTwoChains('click', child)
-      newChildProps.on.mousedown = this.createTwoChains('mousedown', child)
-      // newChildProps.on.TouchStart = this.createTwoChains('onTouchStart', child)
+      newChildProps.on.click = this.createTwoChains('click')
+      newChildProps.on.mousedown = this.createTwoChains('mousedown')
+      // newChildProps.on.TouchStart = this.createTwoChains('onTouchStart')
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.on.mouseenter = this.onMouseenter
     } else {
-      newChildProps.on.mouseenter = this.createTwoChains('mouseenter', child)
+      newChildProps.on.mouseenter = this.createTwoChains('mouseenter')
     }
     if (this.isMouseLeaveToHide()) {
       newChildProps.on.mouseleave = this.onMouseleave
     } else {
-      newChildProps.on.mouseleave = this.createTwoChains('mouseleave', child)
+      newChildProps.on.mouseleave = this.createTwoChains('mouseleave')
     }
 
     if (this.isFocusToShow() || this.isBlurToHide()) {
       newChildProps.on.focus = this.onFocus
       newChildProps.on.blur = this.onBlur
     } else {
-      newChildProps.on.focus = this.createTwoChains('focus', child)
-      newChildProps.on.blur = this.createTwoChains('blur', child)
+      newChildProps.on.focus = this.createTwoChains('focus')
+      newChildProps.on.blur = this.createTwoChains('blur')
     }
     const { sPopupVisible, forceRender } = this
     if (sPopupVisible || forceRender || this._component) {
@@ -509,8 +513,8 @@ export default {
     } else {
       this._component = null
     }
-    newChildProps.addChildren = this._component
-    const trigger = cloneElement(child, newChildProps, true)
+    this._component && (newChildProps.addChildren = [this._component])
+    const trigger = cloneElement(child, newChildProps)
     return trigger
   },
 }

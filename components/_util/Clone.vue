@@ -6,12 +6,13 @@ export default {
     childProps: PropTypes.object.def({}),
   },
   render () {
-    const { $attrs, $listeners, childProps } = this
-    let children = this.$slots.default[0]
+    const { $attrs, $listeners, childProps, $slots } = this
+    let children = $slots.default[0]
     children = cloneElement(children, {
       attr: $attrs,
       on: $listeners,
       props: childProps,
+      addChildren: $slots.addChildren,
     })
     return children
   },

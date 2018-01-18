@@ -9,10 +9,6 @@
     <AntButton type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
       <Icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
     </AntButton>
-    <MenuItem key="1">
-        <Icon type="pie-chart" />
-        <span>Option 1</span>
-      </MenuItem>
     <Menu
       :defaultSelectedKeys="['1']"
       :defaultOpenKeys="['sub1']"
@@ -20,11 +16,11 @@
       theme="dark"
       :inlineCollapsed="collapsed"
     >
-      <!-- <MenuItem key="1">
+      <MenuItem key="1">
         <Icon type="pie-chart" />
         <span>Option 1</span>
-      </MenuItem> -->
-      <!-- <MenuItem key="2">
+      </MenuItem>
+      <MenuItem key="2">
         <Icon type="desktop" />
         <span>Option 2</span>
       </MenuItem>
@@ -51,7 +47,7 @@
           <MenuItem key="11">Option 11</MenuItem>
           <MenuItem key="12">Option 12</MenuItem>
         </SubMenu>
-      </SubMenu> -->
+      </SubMenu>
     </Menu>
   </div>
 </div>
@@ -70,6 +66,15 @@ export default {
   methods: {
     toggleCollapsed () {
       this.collapsed = !this.collapsed
+    },
+    con1 () {
+      console.log(111)
+    },
+    con2 () {
+      console.log(222)
+    },
+    con3 () {
+      console.log(333)
     },
   },
   components: {

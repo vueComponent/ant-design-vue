@@ -2,7 +2,7 @@
 import PropTypes from '../../_util/vue-types'
 import Trigger from '../../trigger'
 import { placements } from './placements'
-import hasProp from '../../_util/props-util'
+import { hasProp, getComponentFromProp } from '../../_util/props-util'
 function noop () {}
 export default {
   props: {
@@ -31,15 +31,13 @@ export default {
   },
   methods: {
     getPopupElement (h) {
-      const { arrowContent, overlay, prefixCls, tipId } = this.$props
+      const { prefixCls, tipId } = this.$props
       return ([
         <div class={`${prefixCls}-arrow`} key='arrow'>
-          {this.$slots.arrowContent}
-          {typeof arrowContent === 'function' ? arrowContent(h) : arrowContent}
+          {getComponentFromProp(this, 'arrowContent')}
         </div>,
         <div class={`${prefixCls}-inner`} key='content' id={tipId}>
-          {typeof overlay === 'function' ? overlay(h) : overlay}
-          {this.$slots.overlay}
+          {getComponentFromProp(this, 'overlay')}
         </div>,
       ])
     },

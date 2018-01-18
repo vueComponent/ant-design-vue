@@ -44,11 +44,11 @@ export default {
           <div>
             {(title || $slots.title) &&
             <div class={`${prefixCls}-title`}>
-              {getComponentFromProp(this, h, 'title')}
+              {getComponentFromProp(this, 'title')}
             </div>
             }
             <div class={`${prefixCls}-inner-content`}>
-              {getComponentFromProp(this, h, 'content')}
+              {getComponentFromProp(this, 'content')}
             </div>
           </div>
         </template>

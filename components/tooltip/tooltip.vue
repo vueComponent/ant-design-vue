@@ -3,7 +3,7 @@ import { cloneElement, isValidElement, getClass, getStyle } from '../_util/vnode
 import RcTooltip from './src/tooltip'
 import getPlacements from './placements'
 import PropTypes from '../_util/vue-types'
-import hasProp from '../_util/props-util'
+import { hasProp, getComponentFromProp } from '../_util/props-util'
 import abstractTooltipProps from './abstractTooltipProps'
 
 const splitObject = (obj, keys) => {
@@ -147,7 +147,7 @@ export default {
 
   render (h) {
     const { $props, $data, $slots } = this
-    const { title, prefixCls, openClassName, getPopupContainer, getTooltipContainer } = $props
+    const { prefixCls, openClassName, getPopupContainer, getTooltipContainer } = $props
     const children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')[0]
     let sVisible = $data.sVisible
     // Hide tooltip when there is no title
@@ -177,8 +177,7 @@ export default {
     return (
       <RcTooltip {...tooltipProps}>
         <template slot='overlay'>
-          {typeof title === 'function' ? title(h) : title}
-          {$slots.title}
+          {getComponentFromProp(this, 'title')}
         </template>
         {sVisible ? cloneElement(child, { class: childCls }) : child}
       </RcTooltip>

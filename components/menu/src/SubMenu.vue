@@ -423,7 +423,7 @@ export default {
       <div
         {...titleProps}
       >
-        {getComponentFromProp(this, h, 'title')}
+        {getComponentFromProp(this, 'title')}
         <i class={`${prefixCls}-arrow`} />
       </div>
     )

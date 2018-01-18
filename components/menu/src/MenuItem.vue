@@ -104,7 +104,7 @@ const MenuItem = {
     },
 
     isSelected () {
-      return this.$props.selectedKeys.indexOf(this.$props.eventKey) !== -1
+      return this.$props.selectedKeys && this.$props.selectedKeys.indexOf(this.$props.eventKey) !== -1
     },
   },
 

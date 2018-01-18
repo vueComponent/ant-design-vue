@@ -89,15 +89,15 @@ export default {
           <div class={`${prefixCls}-message`}>
             <Icon type='exclamation-circle' />
             <div class={`${prefixCls}-message-title`}>
-              {getComponentFromProp(this, h, 'title')}
+              {getComponentFromProp(this, 'title')}
             </div>
           </div>
           <div class={`${prefixCls}-buttons`}>
             <Button onClick={this.onCancel} size='small'>
-              {getComponentFromProp(this, h, 'cancelText')}
+              {getComponentFromProp(this, 'cancelText')}
             </Button>
             <Button onClick={this.onConfirm} type={okType} size='small'>
-              {getComponentFromProp(this, h, 'okText')}
+              {getComponentFromProp(this, 'okText')}
             </Button>
           </div>
         </div>

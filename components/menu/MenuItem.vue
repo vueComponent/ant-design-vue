@@ -3,11 +3,11 @@ import { Item, itemProps } from './src/index'
 import { getClass, getStyle } from '../_util/vnode'
 import Tooltip from '../tooltip'
 import { getComponentFromProp } from '../_util/props-util'
-
+function noop () {}
 export default {
   props: itemProps,
   inject: {
-    getInlineCollapsed: { default: () => { false } },
+    getInlineCollapsed: { default: () => noop },
   },
   isMenuItem: 1,
   methods: {
@@ -28,6 +28,7 @@ export default {
     const toolTipProps = {
       props: {
         placement: 'right',
+        trigger: 'click',
         overlayClassName: `${props.rootPrefixCls}-inline-collapsed-tooltip`,
       },
       on: {},
@@ -36,6 +37,7 @@ export default {
       {...toolTipProps}
     >
       <template slot='title'>
+      jdjjdj
         {inlineCollapsed && props.level === 1 ? <span>$slots</span> : ''}
       </template>
       <Item {...itemProps} ref='menuItem'>

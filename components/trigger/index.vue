@@ -231,7 +231,10 @@ export default {
       }
       this.preClickTime = 0
       this.preTouchTime = 0
-      event.preventDefault()
+      event.preventDefault && event.preventDefault()
+      if (event.domEvent) {
+        event.domEvent.preventDefault()
+      }
       const nextVisible = !this.$data.sPopupVisible
       if (this.isClickToHide() && !nextVisible || nextVisible && this.isClickToShow()) {
         this.setPopupVisible(!this.$data.sPopupVisible)
@@ -507,7 +510,7 @@ export default {
       this._component = null
     }
     newChildProps.addChildren = this._component
-    const trigger = cloneElement(child, newChildProps)
+    const trigger = cloneElement(child, newChildProps, true)
     return trigger
   },
 }

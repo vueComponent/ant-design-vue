@@ -18,7 +18,8 @@ const getOptionProps = (instance) => {
   return filterProps($props, $options.propsData)
 }
 
-const getComponentFromProp = (instance, h, prop) => {
+const getComponentFromProp = (instance, prop) => {
+  const h = instance.$createElement
   const temp = instance[prop]
   if (temp !== undefined) {
     return typeof temp === 'function' ? temp(h) : temp

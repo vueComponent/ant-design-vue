@@ -24,7 +24,6 @@ export default {
     popupClassName: PropTypes.any,
   },
   data () {
-    this.aligned = false
     return {
       destroyPopup: false,
       initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化
@@ -139,8 +138,8 @@ export default {
         beforeEnter: (el) => {
           opacity = el.style.opacity
           el.style.opacity = '0'
-          !this.aligned && this.$refs.alignInstance.forceAlign()
-          this.aligned = true
+          el.style.display = el.__vOriginalDisplay
+          this.$refs.alignInstance.forceAlign()
         },
         enter: (el, done) => {
           el.style.opacity = opacity

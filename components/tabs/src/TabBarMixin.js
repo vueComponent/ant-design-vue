@@ -46,7 +46,7 @@ export default {
           !disabled && this.__emit('tabClick', tabKey)
         }
 
-        let tabC = typeof tab === 'function' ? child.tab(h, tabKey) : tab
+        let tabC = typeof tab === 'function' ? child.tab(h) : tab
         if (this.$parent.type === 'editable-card') {
           closable = closable === undefined ? true : closable === '' || closable
           const closeIcon = closable ? (

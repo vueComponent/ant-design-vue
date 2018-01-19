@@ -1,18 +1,8 @@
-<template>
-  <div
-    role="tabpanel"
-    :aria-hidden="active ? 'false' : 'true'"
-    :class="classes"
-  >
-    <slot v-if="isRender || forceRender">
-    </slot>
-  </div>
-</template>
 <script>
 export default {
   name: 'TabPane',
   props: {
-    tab: [String, Number, Function, Array],
+    tab: [String, Number, Function, Array, Object],
     disabled: Boolean,
     closable: Boolean,
     forceRender: Boolean,
@@ -46,6 +36,18 @@ export default {
     },
   },
   methods: {
+  },
+  render () {
+    const { active, classes, $slots, isRender, forceRender } = this
+    return (
+      <div
+        role='tabpanel'
+        aria-hidden={active ? 'false' : 'true'}
+        class={classes}
+      >
+        {isRender || forceRender ? $slots.default : null}
+      </div>
+    )
   },
 }
 </script>

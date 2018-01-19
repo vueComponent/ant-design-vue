@@ -162,9 +162,8 @@ export default {
     $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
       if (componentOptions) {
         if (componentOptions.propsData.tab === undefined) {
-          componentOptions.propsData.tab = $slots[`tab_${tabKey}`]
-            ? $slots[`tab_${tabKey}`]
-            : null
+          const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
+          componentOptions.propsData.tab = tab
         }
         panels.push({ ...componentOptions.propsData, tabKey })
       }

@@ -29,18 +29,14 @@
         <span>Option 3</span>
       </MenuItem>
       <SubMenu key="sub1">
-        <template slot="title">
-          <span><Icon type="mail" /><span>Navigation One</span></span>
-        </template>
+        <span slot="title"><Icon type="mail" /><span>Navigation One</span></span>
         <MenuItem key="5">Option 5</MenuItem>
         <MenuItem key="6">Option 6</MenuItem>
         <MenuItem key="7">Option 7</MenuItem>
         <MenuItem key="8">Option 8</MenuItem>
       </SubMenu>
       <SubMenu key="sub2">
-        <template slot="title">
-          <span><Icon type="appstore" /><span>Navigation Two</span></span>
-        </template>
+        <span slot="title"><Icon type="appstore" /><span>Navigation Two</span></span>
         <MenuItem key="9">Option 9</MenuItem>
         <MenuItem key="10">Option 10</MenuItem>
         <SubMenu key="sub3" title="Submenu">

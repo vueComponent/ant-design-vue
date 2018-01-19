@@ -15,9 +15,7 @@
       <Icon type="appstore" />Navigation Two
     </MenuItem>
     <SubMenu>
-      <template slot="title">
-        <span><Icon type="setting" />Navigation Three - Submenu</span>
-      </template>
+      <span slot="title"><Icon type="setting" />Navigation Three - Submenu</span>
       <MenuItemGroup title="Item 1">
         <MenuItem key="setting:1">Option 1</MenuItem>
         <MenuItem key="setting:2">Option 2</MenuItem>

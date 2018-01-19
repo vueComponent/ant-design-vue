@@ -1,26 +1,26 @@
 <template>
 <div>
   <Tabs defaultActiveKey="2">
-    <TabPane :tab="(h, tabKey) => renderTab(h, tabKey, 'apple')" key="1">
+    <TabPane :tab="(h) => renderTab(h, '1', 'apple')" key="1">
       Tab 1
     </TabPane>
-    <TabPane :tab="(h, tabKey) => renderTab(h, tabKey, 'android')" key="2">
+    <TabPane :tab="(h) => renderTab(h, '2', 'android')" key="2">
       Tab 2
     </TabPane>
   </Tabs>
   <Tabs defaultActiveKey="2">
-    <span slot="tab_1">
-      <Icon type="apple" />
-      Tab 1
-    </span>
     <TabPane key="1">
+      <span slot="tab">
+        <Icon type="apple" />
+        Tab 1
+      </span>
       Tab 1
     </TabPane>
-    <span slot="tab_2">
-      <Icon type="android" />
-      Tab 2
-    </span>
     <TabPane key="2">
+      <span slot="tab">
+        <Icon type="android" />
+        Tab 2
+      </span>
       Tab 2
     </TabPane>
   </Tabs>

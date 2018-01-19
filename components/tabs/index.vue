@@ -1,7 +1,7 @@
 <script>
 import Tabs from './src/Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
-import hasProp from '../_util/props-util'
+import { hasProp, getComponentFromProp } from '../_util/props-util'
 export default {
   props: {
     prefixCls: { type: String, default: 'ant-tabs' },
@@ -83,7 +83,6 @@ export default {
       defaultActiveKey,
       $slots,
     } = this
-    let { tabBarExtraContent } = this.$props
     let { inkBarAnimated, tabPaneAnimated } = typeof animated === 'object' ? { // eslint-disable-line
       inkBarAnimated: !!animated.inkBar, tabPaneAnimated: !!animated.tabPane,
     } : {
@@ -101,15 +100,11 @@ export default {
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
     }
-    tabBarExtraContent = tabBarExtraContent === undefined && $slots.tabBarExtraContent
-      ? $slots.tabBarExtraContent : tabBarExtraContent
-    tabBarExtraContent = typeof tabBarExtraContent === 'function'
-      ? tabBarExtraContent(createElement) : tabBarExtraContent
+    const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
     $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
       if (componentOptions && componentOptions.propsData.tab === undefined) {
-        componentOptions.propsData.tab = $slots[`tab_${tabKey}`]
-          ? $slots[`tab_${tabKey}`]
-          : null
+        const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
+        componentOptions.propsData.tab = tab
       }
     })
     const tabBarProps = {

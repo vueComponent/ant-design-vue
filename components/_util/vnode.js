@@ -46,7 +46,7 @@ export function cloneVNodes (vnodes, deep) {
 
 export function cloneElement (n, nodeProps, clone) {
   const node = clone ? cloneVNode(n, true) : n
-  const { props = {}, key, on = {}, addChildren } = nodeProps
+  const { props = {}, key, on = {}} = nodeProps
   const data = node.data || {}
   const { style = data.style,
     class: cls = data.class,
@@ -59,10 +59,7 @@ export function cloneElement (n, nodeProps, clone) {
     node.componentOptions.listeners = node.componentOptions.listeners || {}
     node.componentOptions.propsData = { ...node.componentOptions.propsData, ...props }
     node.componentOptions.listeners = { ...node.componentOptions.listeners, ...on }
-    node.componentOptions.children = node.componentOptions.children.filter(c => c.key !== '_ANT_PORTAL')
-    addChildren && node.componentOptions.children.push(...addChildren)
   } else {
-    addChildren && (node.children = [...(node.children || []), ...addChildren])
     node.data.on = { ...(node.data.on || {}), ...on }
   }
 

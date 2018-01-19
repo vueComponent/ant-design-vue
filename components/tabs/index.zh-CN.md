@@ -29,13 +29,13 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 | defaultActiveKey | 初始化选中面板的 key，如果没有设置 activeKey | string | 第一个面板 |
 | hideAdd | 是否隐藏加号图标，在 `type="editable-card"` 时有效 | boolean | false |
 | size | 大小，提供 `default` 和 `small` 两种大小，仅当 `type="line"` 时生效。 | string | 'default' |
-| tabBarExtraContent | tab bar 上额外的元素 | string\|number\|Function | 无 |
+| tabBarExtraContent | tab bar 上额外的元素 | string\|Function\|slot | 无 |
 | tabBarStyle | tab bar 的样式对象 | object | - |
 | tabPosition | 页签位置，可选值有 `top` `right` `bottom` `left` | string | 'top' |
 | type | 页签的基本样式，可选 `line`、`card` `editable-card` 类型 | string | 'line' |
 
 
-### 事件
+### 事件 emit
 | 参数 | 说明 | 类型 | 默认值 |
 | change | 切换面板的回调 | Function | 无 |
 | edit | 新增和删除页签的回调，在 `type="editable-card"` 时有效 | (targetKey, action): void | 无 |
@@ -49,4 +49,4 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 | --- | --- | --- | --- |
 | forceRender | 被隐藏时是否渲染 DOM 结构 | boolean | false |
 | key | 对应 activeKey | string | 无 |
-| tab | 选项卡头显示文字 | string\|Function | 无 |
+| tab | 选项卡头显示文字 | string\|Function\|slot | 无 |

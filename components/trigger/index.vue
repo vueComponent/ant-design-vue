@@ -1,7 +1,7 @@
 <script>
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
-import hasProp from '../_util/props-util'
+import { hasProp, getComponentFromProp } from '../_util/props-util'
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
@@ -297,7 +297,7 @@ export default {
         popupStyle, popupClassName, action,
         popupAnimation, handleGetPopupClassFromAlign, getRootDomNode,
         mask, zIndex, popupTransitionName, getPopupAlign,
-        maskAnimation, maskTransitionName, popup, $slots, getContainer } = this
+        maskAnimation, maskTransitionName, getContainer } = this
       const popupProps = {
         props: {
           prefixCls,
@@ -328,8 +328,7 @@ export default {
         <Popup
           {...popupProps}
         >
-          {typeof popup === 'function' ? popup(h) : popup}
-          {popup === undefined ? $slots.popup : null}
+          {getComponentFromProp(this, 'popup')}
         </Popup>
       )
     },
@@ -513,7 +512,15 @@ export default {
     } else {
       this._component = null
     }
-    this._component && (newChildProps.addChildren = [this._component])
+    if (child.componentOptions) {
+      child.componentOptions.children = child.componentOptions.children || []
+      child.componentOptions.children = child.componentOptions.children.filter(c => c.key !== '_ANT_PORTAL')
+      this._component && child.componentOptions.children.push(this._component)
+    } else {
+      child.children = child.children || []
+      child.children = child.children.filter(c => c.key !== '_ANT_PORTAL')
+      this._component && child.children.push(this._component)
+    }
     const trigger = cloneElement(child, newChildProps)
     return trigger
   },

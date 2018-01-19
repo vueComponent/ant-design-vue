@@ -12,7 +12,6 @@ export default {
       attr: $attrs,
       on: $listeners,
       props: childProps,
-      addChildren: $slots.addChildren,
     })
     return children
   },

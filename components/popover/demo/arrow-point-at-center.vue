@@ -6,26 +6,18 @@
 </md>
   <Popover placement="topLeft">
     <template slot="content">
-      <div>
-        <p>Content</p>
-        <p>Content</p>
-      </div>
+      <p>Content</p>
+      <p>Content</p>
     </template>
-    <template slot="title">
-      <span>Title</span>
-    </template>
+    <span slot="title">Title</span>
     <AntButton>Align edge / 边缘对齐</AntButton>
   </Popover>
   <Popover placement="topLeft" arrowPointAtCenter>
     <template slot="content">
-      <div>
-        <p>Content</p>
-        <p>Content</p>
-      </div>
+      <p>Content</p>
+      <p>Content</p>
     </template>
-    <template slot="title">
-      <span>Title</span>
-    </template>
+    <span slot="title">Title</span>
     <AntButton>Arrow points to center / 箭头指向中心</AntButton>
   </Popover>
 </div>

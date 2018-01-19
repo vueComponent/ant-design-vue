@@ -59,10 +59,7 @@ export default {
     onAlign (popupDomNode, align) {
       const props = this.$props
       const currentAlignClassName = props.getClassNameFromAlign(align)
-      if (this.currentAlignClassName !== currentAlignClassName) {
-        popupDomNode.className = popupDomNode.className.replace(this.currentAlignClassName, currentAlignClassName)
-        this.currentAlignClassName = currentAlignClassName
-      }
+      popupDomNode.className = this.getClassName(currentAlignClassName)
       this.$listeners.align && this.$listeners.align(popupDomNode, align)
     },
 
@@ -105,20 +102,15 @@ export default {
       const { $props: props, $slots, $listeners, getTransitionName } = this
       const { align, visible, prefixCls, animation } = props
       const { mouseenter, mouseleave } = $listeners
-      this.currentAlignClassName = this.currentAlignClassName || props.getClassNameFromAlign(align)
-      const className = this.getClassName(this.currentAlignClassName)
+      const className = this.getClassName(props.getClassNameFromAlign(align))
       // const hiddenClassName = `${prefixCls}-hidden`
-      if (!visible) {
-        this.currentAlignClassName = null
-      }
-      // visible = true
       const popupInnerProps = {
         props: {
           prefixCls,
           visible,
           // hiddenClassName,
         },
-        class: `${className}`,
+        class: className,
         on: {
           mouseenter: mouseenter || noop,
           mouseleave: mouseleave || noop,
@@ -132,17 +124,13 @@ export default {
           css: false,
         }),
       }
-      let opacity = '1'
       const transitionName = getTransitionName()
       const transitionEvent = {
         beforeEnter: (el) => {
-          opacity = el.style.opacity
-          el.style.opacity = '0'
           el.style.display = el.__vOriginalDisplay
           this.$refs.alignInstance.forceAlign()
         },
         enter: (el, done) => {
-          el.style.opacity = opacity
           animate(el, `${transitionName}-enter`, done)
         },
         leave: (el, done) => {

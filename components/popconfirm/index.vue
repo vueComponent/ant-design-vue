@@ -84,22 +84,20 @@ export default {
       },
     }
     const overlay = (
-      <div>
-        <div class={`${prefixCls}-inner-content`}>
-          <div class={`${prefixCls}-message`}>
-            <Icon type='exclamation-circle' />
-            <div class={`${prefixCls}-message-title`}>
-              {getComponentFromProp(this, 'title')}
-            </div>
+      <div class={`${prefixCls}-inner-content`}>
+        <div class={`${prefixCls}-message`}>
+          <Icon type='exclamation-circle' />
+          <div class={`${prefixCls}-message-title`}>
+            {getComponentFromProp(this, 'title')}
           </div>
-          <div class={`${prefixCls}-buttons`}>
-            <Button onClick={this.onCancel} size='small'>
-              {getComponentFromProp(this, 'cancelText')}
-            </Button>
-            <Button onClick={this.onConfirm} type={okType} size='small'>
-              {getComponentFromProp(this, 'okText')}
-            </Button>
-          </div>
+        </div>
+        <div class={`${prefixCls}-buttons`}>
+          <Button onClick={this.onCancel} size='small'>
+            {getComponentFromProp(this, 'cancelText')}
+          </Button>
+          <Button onClick={this.onConfirm} type={okType} size='small'>
+            {getComponentFromProp(this, 'okText')}
+          </Button>
         </div>
       </div>
     )

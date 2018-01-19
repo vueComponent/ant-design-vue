@@ -1,6 +1,6 @@
 <script>
 import { cloneElement, isValidElement, getClass, getStyle } from '../_util/vnode'
-import RcTooltip from './src/tooltip'
+import RcTooltip from './src/Tooltip'
 import getPlacements from './placements'
 import PropTypes from '../_util/vue-types'
 import { hasProp, getComponentFromProp } from '../_util/props-util'

@@ -1,7 +1,7 @@
 <script>
 import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
-import { noop } from './util'
+// import { noop } from './util'
 import BaseMixin from '../../_util/BaseMixin'
 const props = {
   rootPrefixCls: PropTypes.string,

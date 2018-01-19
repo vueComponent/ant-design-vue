@@ -37,7 +37,6 @@ export default {
     return {
       inlineCollapsed: this.getInlineCollapsed(),
       getInlineCollapsed: this.getInlineCollapsed,
-      antdMenuTheme: this.$props.theme,
     }
   },
   mixins: [BaseMixin],

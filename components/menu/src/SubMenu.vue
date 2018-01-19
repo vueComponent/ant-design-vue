@@ -46,7 +46,6 @@ export default {
   },
   inject: {
     parentMenuContext: { default: undefined },
-    antdMenuTheme: { default: 'light' },
   },
   mixins: [BaseMixin],
   isSubMenu: true,
@@ -214,8 +213,7 @@ export default {
 
     onTitleClick (e) {
       const { triggerSubMenuAction, eventKey } = this.$props
-
-      this.__emit('itemClick', {
+      this.$emit('titleClick', {
         key: eventKey,
         domEvent: e,
       })
@@ -360,7 +358,7 @@ export default {
 
   render (h) {
     const props = this.$props
-    const { rootPrefixCls, antdMenuTheme } = this
+    const { rootPrefixCls, parentMenuContext } = this
     const isOpen = this.isOpen()
     const prefixCls = this.getPrefixCls()
     const isInlineMode = props.mode === 'inline'
@@ -475,7 +473,7 @@ export default {
         {!isInlineMode && (
           <Trigger
             prefixCls={prefixCls}
-            popupClassName={`${prefixCls}-popup ${rootPrefixCls}-${antdMenuTheme} ${popupClassName || ''}`}
+            popupClassName={`${prefixCls}-popup ${rootPrefixCls}-${parentMenuContext.theme} ${popupClassName || ''}`}
             getPopupContainer={getPopupContainer}
             builtinPlacements={placements}
             popupPlacement={popupPlacement}

@@ -9,9 +9,7 @@
     trigger="click"
     v-model="visible"
   >
-    <template slot="content">
-      <a @click="hide">Close</a>
-    </template>
+    <a @click="hide" slot="content">Close</a>
     <AntButton type="primary">Click me</AntButton>
   </Popover>
 </div>

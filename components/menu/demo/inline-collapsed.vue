@@ -56,21 +56,12 @@ const MenuItem = Menu.Item
 export default {
   data () {
     return {
-      collapsed: true,
+      collapsed: false,
     }
   },
   methods: {
     toggleCollapsed () {
       this.collapsed = !this.collapsed
-    },
-    con1 () {
-      console.log(111)
-    },
-    con2 () {
-      console.log(222)
-    },
-    con3 () {
-      console.log(333)
     },
   },
   components: {

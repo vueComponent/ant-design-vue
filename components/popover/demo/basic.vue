@@ -6,10 +6,8 @@
 </md>
 <Popover title="Title">
     <template slot="content">
-      <div>
-        <p>Content</p>
-        <p>Content</p>
-      </div>
+      <p>Content</p>
+      <p>Content</p>
     </template>
     <AntButton type="primary">Hover me</AntButton>
   </Popover>

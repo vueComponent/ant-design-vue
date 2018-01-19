@@ -1,8 +1,7 @@
 <script>
 import { Item, itemProps } from './src/index'
-import { getClass, getStyle } from '../_util/vnode'
+import { getClass, getStyle, cloneVNodes } from '../_util/vnode'
 import Tooltip from '../tooltip'
-import { getComponentFromProp } from '../_util/props-util'
 function noop () {}
 export default {
   props: itemProps,
@@ -36,7 +35,7 @@ export default {
       {...toolTipProps}
     >
       <template slot='title'>
-        {inlineCollapsed && props.level === 1 ? $slots.default : ''}
+        {inlineCollapsed && props.level === 1 ? cloneVNodes($slots.default, true) : ''}
       </template>
       <Item {...itemProps} ref='menuItem'>
         {$slots.default}

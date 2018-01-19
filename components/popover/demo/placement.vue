@@ -7,10 +7,8 @@
   <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">
     <Popover placement="topLeft">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -19,10 +17,8 @@
     </Popover>
     <Popover placement="top">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -31,10 +27,8 @@
     </Popover>
     <Popover placement="topRight">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -45,10 +39,8 @@
   <div :style="{ width: `${buttonWidth}px`, float: 'left' }">
     <Popover placement="leftTop">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -57,10 +49,8 @@
     </Popover>
     <Popover placement="left">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -69,10 +59,8 @@
     </Popover>
     <Popover placement="leftBottom">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -83,10 +71,8 @@
   <div :style="{ width: `${buttonWidth}px`, marginLeft: `${buttonWidth * 4 + 24 }px`}">
     <Popover placement="rightTop">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -95,10 +81,8 @@
     </Popover>
     <Popover placement="right">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -107,10 +91,8 @@
     </Popover>
     <Popover placement="rightBottom">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -121,10 +103,8 @@
   <div :style="{ marginLeft: `${buttonWidth}px`, clear: 'both', whiteSpace: 'nowrap' }">
     <Popover placement="bottomLeft">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -133,10 +113,8 @@
     </Popover>
     <Popover placement="bottom">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>
@@ -145,10 +123,8 @@
     </Popover>
     <Popover placement="bottomRight">
       <template slot="content">
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
+        <p>Content</p>
+        <p>Content</p>
       </template>
       <template slot="title">
         <span>Title</span>

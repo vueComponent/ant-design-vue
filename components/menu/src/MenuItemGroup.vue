@@ -1,5 +1,6 @@
 <script>
 import PropTypes from '../../_util/vue-types'
+import { getComponentFromProp } from '../../_util/props-util'
 
 const MenuItemGroup = {
   name: 'MenuItemGroup',
@@ -10,7 +11,7 @@ const MenuItemGroup = {
     className: PropTypes.string,
     rootPrefixCls: PropTypes.string,
     disabled: PropTypes.bool.def(true),
-    title: PropTypes.any.def(''),
+    title: PropTypes.any,
   },
   isMenuItemGroup: true,
   methods: {
@@ -30,7 +31,7 @@ const MenuItemGroup = {
           class={titleClassName}
           title={typeof props.title === 'string' ? props.title : undefined}
         >
-          {props.title}
+          {getComponentFromProp(this, 'title')}
         </div>
         <ul class={listClassName}>
           {this.$slots.default.map(this.renderInnerMenuItem)}

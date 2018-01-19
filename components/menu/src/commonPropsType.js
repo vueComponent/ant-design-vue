@@ -18,4 +18,5 @@ export default {
   subMenuCloseDelay: PropTypes.number.def(0.1),
   level: PropTypes.number.def(1),
   inlineIndent: PropTypes.number.def(24),
+  theme: PropTypes.oneOf(['light', 'dark']).def('light'),
 }

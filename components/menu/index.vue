@@ -8,10 +8,12 @@ import warning from '../_util/warning'
 import Item from './MenuItem'
 import { hasProp } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
+import commonPropsType from './src/commonPropsType'
 
 export const MenuMode = PropTypes.oneOf(['vertical', 'vertical-left', 'vertical-right', 'horizontal', 'inline'])
 
 export const menuProps = {
+  ...commonPropsType,
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   mode: MenuMode.def('vertical'),
   selectable: PropTypes.bool,

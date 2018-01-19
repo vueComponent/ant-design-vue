@@ -1,9 +1,9 @@
 <script>
-import PropTypes from '../../_util/vue-types'
+// import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
 import BaseMixin from '../../_util/BaseMixin'
 import commonPropsType from './commonPropsType'
-import { noop } from './util'
+// import { noop } from './util'
 export default {
   name: 'SubPopupMenu',
   props: { ...commonPropsType,
@@ -51,6 +51,12 @@ export default {
     },
   },
   render () {
+    const props = this.$props
+
+    this.haveOpened = this.haveOpened || props.visible || props.forceSubMenuRender
+    if (!this.haveOpened) {
+      return null
+    }
     const { prefixCls } = this.$props
     return this.renderRoot({ ...this.$props, class: `${prefixCls}-sub` }, this.$slots.default)
   },

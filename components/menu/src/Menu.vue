@@ -8,11 +8,8 @@ import commonPropsType from './commonPropsType'
 const Menu = {
   name: 'Menu',
   props: {
-    getPopupContainer: PropTypes.func,
-    openTransitionName: PropTypes.string,
-    forceSubMenuRender: PropTypes.bool,
-    selectable: PropTypes.bool.def(true),
     ...commonPropsType,
+    selectable: PropTypes.bool.def(true),
   },
   mixins: [BaseMixin, MenuMixin],
 

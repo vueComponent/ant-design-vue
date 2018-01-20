@@ -23,7 +23,7 @@ export default {
     },
     size: {
       validator (value) {
-        return ['default', 'small'].includes(value)
+        return ['default', 'small', 'large'].includes(value)
       },
     },
     animated: { type: [Boolean, Object], default: undefined },
@@ -94,7 +94,9 @@ export default {
       tabPaneAnimated = animated === undefined ? false : tabPaneAnimated
     }
     const cls = {
-      [`${prefixCls}-mini`]: size === 'small' || size,
+      [`${prefixCls}-small`]: size === 'small',
+      [`${prefixCls}-large`]: size === 'large',
+      [`${prefixCls}-default`]: size === 'default',
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,
       [`${prefixCls}-${type}`]: true,

@@ -35,3 +35,5 @@ export { default as Popover } from './popover'
 export { default as Popconfirm } from './popconfirm'
 
 export { default as Menu } from './menu'
+
+export { default as Card } from './card'

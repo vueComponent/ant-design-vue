@@ -3,6 +3,7 @@
   "plugins": [
     "transform-vue-jsx",
     "transform-object-rest-spread",
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    "transform-decorators-legacy"
   ]
 }

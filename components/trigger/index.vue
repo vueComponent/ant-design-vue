@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue'
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
 import { hasProp, getComponentFromProp } from '../_util/props-util'
@@ -78,7 +79,6 @@ export default {
   beforeCreate () {
     ALL_HANDLERS.forEach((h) => {
       this[`fire${h}`] = (e) => {
-        // const ev = `on${h[0].toUpperCase() + h.slice(1)}`
         this.fireEvents(h, e)
       }
     })
@@ -107,6 +107,10 @@ export default {
   beforeDestroy () {
     this.clearDelayTimer()
     this.clearOutsideHandler()
+    if (this._component) {
+      this._component.$destroy()
+      this._component = null
+    }
   },
   methods: {
     updatedCal () {
@@ -163,9 +167,9 @@ export default {
 
     onPopupMouseleave (e) {
       if (e.relatedTarget && !e.relatedTarget.setTimeout &&
-      this.$refs.popup &&
-      this.$refs.popup.getPopupDomNode &&
-      contains(this.$refs.popup.getPopupDomNode(), e.relatedTarget)) {
+      this._component.$refs.popup &&
+      this._component.$refs.popup.getPopupDomNode &&
+      contains(this._component.$refs.popup.getPopupDomNode(), e.relatedTarget)) {
         return
       }
       this.delaySetPopupVisible(false, this.$props.mouseLeaveDelay)
@@ -252,9 +256,8 @@ export default {
       }
     },
     getPopupDomNode () {
-    // for test
-      if (this.$refs.popup && this.$refs.popup.getPopupDomNode) {
-        return this.$refs.popup.getPopupDomNode()
+      if (this._component.$refs.popup && this._component.$refs.popup.getPopupDomNode) {
+        return this._component.$refs.popup.getPopupDomNode()
       }
       return null
     },
@@ -285,52 +288,71 @@ export default {
       }
       return popupAlign
     },
-    getComponent (h) {
+    renderComponent () {
+      const self = this
       const mouseProps = {}
       if (this.isMouseEnterToShow()) {
-        mouseProps.mouseenter = this.onPopupMouseenter
+        mouseProps.mouseenter = self.onPopupMouseenter
       }
       if (this.isMouseLeaveToHide()) {
-        mouseProps.mouseleave = this.onPopupMouseleave
+        mouseProps.mouseleave = self.onPopupMouseleave
       }
       const { prefixCls, destroyPopupOnHide, sPopupVisible,
         popupStyle, popupClassName, action,
         popupAnimation, handleGetPopupClassFromAlign, getRootDomNode,
         mask, zIndex, popupTransitionName, getPopupAlign,
-        maskAnimation, maskTransitionName, getContainer } = this
+        maskAnimation, maskTransitionName, getContainer } = self
       const popupProps = {
-        props: {
-          prefixCls,
-          destroyPopupOnHide,
-          visible: sPopupVisible,
-          action,
-          align: getPopupAlign(),
-          animation: popupAnimation,
-          getClassNameFromAlign: handleGetPopupClassFromAlign,
-          getRootDomNode,
-          mask,
-          zIndex,
-          transitionName: popupTransitionName,
-          maskAnimation,
-          maskTransitionName,
-          getContainer,
-          popupClassName,
-        },
-        on: {
-          align: this.$listeners.popupAlign || noop,
+        prefixCls,
+        destroyPopupOnHide,
+        visible: sPopupVisible,
+        action,
+        align: getPopupAlign(),
+        animation: popupAnimation,
+        getClassNameFromAlign: handleGetPopupClassFromAlign,
+        getRootDomNode,
+        mask,
+        zIndex,
+        transitionName: popupTransitionName,
+        maskAnimation,
+        maskTransitionName,
+        getContainer,
+        popupClassName,
+        popupStyle,
+        popupEvents: {
+          align: self.$listeners.popupAlign || noop,
           ...mouseProps,
         },
-        ref: 'popup',
-        style: popupStyle,
-        key: '_ANT_PORTAL',
       }
-      return (
-        <Popup
-          {...popupProps}
-        >
-          {getComponentFromProp(this, 'popup')}
-        </Popup>
-      )
+
+      if (!this._component) {
+        const div = document.createElement('div')
+        this._component = new Vue({
+          props: {
+          },
+          data () {
+            return {}
+          },
+          el: div,
+          render () {
+            const { $props } = this
+            const { popupStyle, popupEvents, ...otherProps } = $props
+            const p = {
+              props: otherProps,
+              on: popupEvents,
+              ref: 'popup',
+              style: popupStyle,
+            }
+            return ($props.getContainer ? <Popup
+              {...p}
+            >
+              {getComponentFromProp(self, 'popup')}
+            </Popup> : null)
+          },
+        })
+      }
+      Object.assign(this._component.$props, popupProps)
+      this._component.$forceUpdate()
     },
 
     getContainer () {
@@ -441,8 +463,8 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1
     },
     forcePopupAlign () {
-      if (this.$data.sPopupVisible && this.$refs.popup && this.$refs.popup.$refs.alignInstance) {
-        this.$refs.popup.$refs.alignInstance.forceAlign()
+      if (this.$data.sPopupVisible && this._component.$refs.popup && this._component.$refs.popup.$refs.alignInstance) {
+        this._component.$refs.popup.$refs.alignInstance.forceAlign()
       }
     },
     fireEvents (type, e) {
@@ -508,18 +530,7 @@ export default {
     }
     const { sPopupVisible, forceRender } = this
     if (sPopupVisible || forceRender || this._component) {
-      this._component = this.getComponent(h)
-    } else {
-      this._component = null
-    }
-    if (child.componentOptions) {
-      child.componentOptions.children = child.componentOptions.children || []
-      child.componentOptions.children = child.componentOptions.children.filter(c => c.key !== '_ANT_PORTAL')
-      this._component && child.componentOptions.children.push(this._component)
-    } else {
-      child.children = child.children || []
-      child.children = child.children.filter(c => c.key !== '_ANT_PORTAL')
-      this._component && child.children.push(this._component)
+      this.renderComponent(h)
     }
     const trigger = cloneElement(child, newChildProps)
     return trigger

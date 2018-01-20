@@ -26,13 +26,14 @@ export default {
   data () {
     return {
       destroyPopup: false,
-      initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化
+      initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化,避免位置计算不正确
     }
   },
   mounted () {
     this.rootNode = this.getPopupDomNode()
     this._container = this.getContainer()
     this._container.appendChild(this.$el)
+
     this.$nextTick(() => {
       this.initAlign = true
     })
@@ -46,14 +47,14 @@ export default {
         this.destroyPopup = false
       }
     },
-    initAlign (val) {
-      if (val) {
-        this.$nextTick(() => {
-          // console.log(this.$refs.alignInstance.$el)
-          // this.$refs.alignInstance.forceAlign()
-        })
-      }
-    },
+    // initAlign (val) {
+    //   if (val) {
+    //     this.$nextTick(() => {
+    //       // console.log(this.$refs.alignInstance.$el)
+    //       // this.$refs.alignInstance.forceAlign()
+    //     })
+    //   }
+    // },
   },
   methods: {
     onAlign (popupDomNode, align) {

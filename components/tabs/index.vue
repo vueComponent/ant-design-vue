@@ -2,6 +2,8 @@
 import Tabs from './src/Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
 import { hasProp, getComponentFromProp } from '../_util/props-util'
+import { getComponentName, isEmptyElement } from '../_util/vnode'
+import warning from '../_util/warning'
 export default {
   props: {
     prefixCls: { type: String, default: 'ant-tabs' },
@@ -103,10 +105,19 @@ export default {
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
     }
     const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
-    $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
-      if (componentOptions && componentOptions.propsData.tab === undefined) {
-        const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
-        componentOptions.propsData.tab = tab
+    const children = []
+    $slots.default && $slots.default.forEach((child) => {
+      if (isEmptyElement(child)) { return }
+      const { componentOptions } = child
+      const componentName = getComponentName(componentOptions)
+      warning(componentName === 'TabPane', '`Tabs children just support TabPane')
+      if (componentOptions && componentName === 'TabPane') {
+        componentOptions.propsData = componentOptions.propsData || {}
+        if (componentOptions.propsData.tab === undefined) {
+          const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
+          componentOptions.propsData.tab = tab
+        }
+        children.push(child)
       }
     })
     const tabBarProps = {
@@ -152,7 +163,7 @@ export default {
         class={cls}
         {...tabsProps}
       >
-        {this.$slots.default}
+        {children}
         {tabBarExtraContent ? <template slot='tabBarExtraContent'>
           {tabBarExtraContent}
         </template> : null}

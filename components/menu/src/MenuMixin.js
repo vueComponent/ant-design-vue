@@ -136,7 +136,7 @@ export default {
     renderCommonMenuItem (child, i, subIndex, extraProps) {
       if (child.tag === undefined) { return child }
       warning((getComponentName(child.componentOptions) || '').indexOf(['MenuItem', 'MenuItemGroup']) === -1,
-        '`Menu child just support MenuItem and MenuItemGroup',
+        '`Menu children just support MenuItem and MenuItemGroup',
       )
       const state = this.$data
       const props = this.$props

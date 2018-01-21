@@ -79,6 +79,9 @@ export function getComponentName (opts) {
 export function isValidElement (ele) {
   return !!ele.tag
 }
+export function isEmptyElement (ele) {
+  return !(ele.tag || ele.text.trim() !== '')
+}
 
 export function getClass (ele) {
   return ele.data && (ele.data.class || ele.data.staticClass)

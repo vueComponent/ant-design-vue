@@ -1,5 +1,6 @@
 const path = require('path')
-const webpack = require('webpack')
+// const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -9,7 +10,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'build.js',
   },
   module: {
@@ -53,9 +54,10 @@ module.exports = {
   },
   devServer: {
     port: 3000,
-    inline: true,
     historyApiFallback: {
-      index: 'examples/index.html',
+      rewrites: [
+        { from: /.*/, to: '/index.html' },
+      ],
     },
     disableHostCheck: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -66,23 +68,10 @@ module.exports = {
   devtool: '#source-map',
 }
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"',
-      },
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
-  ])
-}
+module.exports.plugins = (module.exports.plugins || []).concat([
+  new HtmlWebpackPlugin({
+    template: 'examples/index.html',
+    filename: 'index.html',
+    inject: true,
+  }),
+])

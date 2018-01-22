@@ -1,16 +1,7 @@
 language: node_js
 sudo: required
 node_js:
-- 8.2.1
-cache:
-  directories:
-  - node_modules
-deploy:
-  provider: pages
-  skip-cleanup: true
-  keep-history: true
-  on:
-    branch: master
+  - 8.2.1
 script:
   - bash ./scripts/deploy-to-gh-pages.sh
 env:

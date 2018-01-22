@@ -324,35 +324,35 @@ export default {
           ...mouseProps,
         },
       }
-
       if (!this._component) {
         const div = document.createElement('div')
         this._component = new Vue({
-          props: {
-          },
           data () {
-            return {}
+            return {
+              popupProps: { ...popupProps },
+            }
           },
           el: div,
           render () {
-            const { $props } = this
-            const { popupStyle, popupEvents, ...otherProps } = $props
+            const { popupStyle, popupEvents, ...otherProps } = this.popupProps
             const p = {
               props: otherProps,
               on: popupEvents,
               ref: 'popup',
               style: popupStyle,
             }
-            return ($props.getContainer ? <Popup
-              {...p}
-            >
-              {getComponentFromProp(self, 'popup')}
-            </Popup> : null)
+            return (
+              <Popup
+                {...p}
+              >
+                {getComponentFromProp(self, 'popup')}
+              </Popup>
+            )
           },
         })
+      } else {
+        this._component.popupProps = popupProps
       }
-      Object.assign(this._component.$props, popupProps)
-      this._component.$forceUpdate()
     },
 
     getContainer () {

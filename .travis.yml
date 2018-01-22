@@ -5,6 +5,8 @@ node_js:
 cache:
   directories:
     - node_modules
+before_script:
+  - git checkout gh-pages
 script:
   - npm run build
 after_success:

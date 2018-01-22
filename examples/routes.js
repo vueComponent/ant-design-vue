@@ -1,13 +1,11 @@
-import Demo from './demo'
+import Demo from './demo.vue'
 const AsyncComp = () => {
-  const pathnameArr = window.location.pathname.split('/')
-    const com = pathnameArr[1] || 'button' // eslint-disable-line
-  const demo = pathnameArr[2] || 'index'
   return {
-    component: import(`../components/card/demo/${demo}.vue`),
+    component: import(`../components/card/demo/basic.vue`),
   }
 }
 export default [
   { path: '/components/:name/:demo?', component: Demo },
-  // { path: '/*', component: AsyncComp },
+  { path: 'test/:name/:demo', component: AsyncComp },
+  { path: '/*', redirect: '/components/menu' },
 ]

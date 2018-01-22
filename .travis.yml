@@ -1,15 +1,25 @@
 language: node_js
 sudo: required
 node_js:
-  - 8.2.1
+- 8.2.1
 cache:
   directories:
-    - node_modules
+  - node_modules
+deploy:
+  provider: pages
+  skip-cleanup: true
+  keep-history: true
+  on:
+    branch: master
 before_script:
-  - git checkout gh-pages
+- git checkout gh-pages
+- git rebase master
 script:
-  - npm run build
+- npm run build
 after_success:
-  - git add --all .
-  - git commit -m "travis ci auto build"
-  - git push https://github.com/vueComponent/ant-design.git gh-pages
+- git add --all .
+- git commit -m "travis ci auto build"
+- git push origin gh-pages
+env:
+  matrix:
+    secure: PBbJaS48HA/mkj9PuGuRxs00DEJR77XfuPdSlTvCq0QxLIR6wIO+t3LLJdOQctZIX6KWBR/Zq3zSn5bRxgPIaRcoyuEU25ga4cexJMEh1ymE23uTiDcnWwWN0X1jZKGuHPvqVKjyToAv6XW24mTXNvEAqD2uL101JxBseoWJ/2VtyOjJFJwcGbw+MTLymWCZiAF10w+k0SyigawaxZLlYL9LZXv4w3oCjCwuiTD/T6rvyT3wGQzXx7/P7XQGL4el4lE7leuK5m2PhWvX2S3t2FRpoZPw0DINJu5XzuBr3DSMErQjCrP4Ep8iqW8pGGLkoXbcxK3/K+uSy0k+DdBN7jRgnnOeLpqeVUSMaM6LRnl2XyDWL3dKpVbEzZaFkRTmAwdbgYjI+7Enn3/GtseMASo/gK47m2k+kE/msoqwpTGLC5DBOBKxdNShdFnEbOxLUUiVNgoZRXbj6VhdueqK89LsMDsnxzmFtrU8Ytgv8wJsFd5IkIhCStmQ9bdTqER659hd1Qqdh6Qe36AfpZcetOLr86Z++CSwA/pZbLPeEVrfCHDh6V3DPQXG+Zlf/m60OAmhosJ+4dxZwRnR8LnaDFZ+uLYMz+vJGeOtFHvczz7TW4mznjguLE51crG+mkBGT2dx1UUg7zs41lz3GtH9WY8cSG4y5ryjDl6YkXwoiZI=

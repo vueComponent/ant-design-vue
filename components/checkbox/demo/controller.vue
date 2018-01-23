@@ -1,30 +1,30 @@
 <template>
   <div>
     <p :style="{ marginBottom: '20px' }">
-      <Checkbox
+      a-checkbox
         :checked="checked"
         :disabled="disabled"
         @change="onChange"
       >
         {{label}}
-      </Checkbox>
+      </a-checkbox>
     </p>
     <p>
-      <AntButton
+      <a-button
         type="primary"
         size="small"
         @click="toggleChecked"
       >
         {{!checked ? 'Check' : 'Uncheck'}}
-      </AntButton>
-      <AntButton
+      </a-button>
+      <a-button
         :style="{ marginLeft: '10px' }"
         type="primary"
         size="small"
         @click="toggleDisable"
       >
         {{!disabled ? 'Disable' : 'Enable'}}
-      </AntButton>
+      </a-button>
     </p>
   </div>
 </template>
@@ -56,7 +56,7 @@ export default {
   },
   components: {
     Checkbox,
-    AntButton: Button,
+
   },
 }
 </script>

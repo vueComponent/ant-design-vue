@@ -1,12 +1,12 @@
 <template>
   <div>
-    <CheckboxGroup :options="plainOptions" v-model="value" @change="onChange" />
+    a-checkboxGroup :options="plainOptions" v-model="value" @change="onChange" />
     <br />
-    <CheckboxGroup :options="plainOptions" :defaultValue="['Apple']" @change="onChange" />
+    a-checkboxGroup :options="plainOptions" :defaultValue="['Apple']" @change="onChange" />
     <br />
-    <CheckboxGroup :options="options" :value="['Pear']" @change="onChange" />
+    a-checkboxGroup :options="options" :value="['Pear']" @change="onChange" />
     <br />
-    <CheckboxGroup :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange" />
+    a-checkboxGroup :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange" />
   </div>
 </template>
 <script>

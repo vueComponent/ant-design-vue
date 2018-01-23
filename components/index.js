@@ -1,10 +1,15 @@
-export { default as Button } from './button'
+import Button from './button'
+const ButtonGroup = Button.Group
+export { Button, ButtonGroup }
 
 export { default as Checkbox } from './checkbox'
 
 export { default as Icon } from './icon'
 
-export { default as Radio } from './radio'
+import Radio from './radio'
+const RadioGroup = Radio.Group
+const RadioButton = Radio.Button
+export { Radio, RadioGroup, RadioButton }
 
 export { default as Grid } from './grid'
 

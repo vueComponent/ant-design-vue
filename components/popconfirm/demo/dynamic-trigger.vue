@@ -17,7 +17,7 @@
   </Popconfirm>
   <br />
   <br />
-  Whether directly execute：<Checkbox defaultChecked @change="changeCondition" />
+  Whether directly execute：<a-checkbox defaultChecked @change="changeCondition" />
 </div>
 </template>
 

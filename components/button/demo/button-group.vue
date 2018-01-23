@@ -1,47 +1,37 @@
 <template>
   <div id="components-button-demo-button-group">
     <h4>Basic</h4>
-    <ButtonGroup>
-      <AntButton>Cancel</AntButton>
-      <AntButton type="primary">OK</AntButton>
-    </ButtonGroup>
-    <ButtonGroup>
-      <AntButton disabled>L</AntButton>
-      <AntButton disabled>M</AntButton>
-      <AntButton disabled>R</AntButton>
-    </ButtonGroup>
-    <ButtonGroup>
-      <AntButton type="primary">L</AntButton>
-      <AntButton>M</AntButton>
-      <AntButton>M</AntButton>
-      <AntButton type="dashed">R</AntButton>
-    </ButtonGroup>
+    <a-button-group>
+      <a-button>Cancel</a-button>
+      <a-button type="primary">OK</a-button>
+    </a-button-group>
+    <a-button-group>
+      <a-button disabled>L</a-button>
+      <a-button disabled>M</a-button>
+      <a-button disabled>R</a-button>
+    </a-button-group>
+    <a-button-group>
+      <a-button type="primary">L</a-button>
+      <a-button>M</a-button>
+      <a-button>M</a-button>
+      <a-button type="dashed">R</a-button>
+    </a-button-group>
 
     <h4>With Icon</h4>
-    <ButtonGroup>
-      <AntButton type="primary">
-        <Icon type="left" />Go back
-      </AntButton>
-      <AntButton type="primary">
-        Go forward<Icon type="right" />
-      </AntButton>
-    </ButtonGroup>
-    <ButtonGroup>
-      <AntButton type="primary" icon="cloud" />
-      <AntButton type="primary" icon="cloud-download" />
-    </ButtonGroup>
+    <a-button-group>
+      <a-button type="primary">
+        <a-icon type="left" />Go back
+      </a-button>
+      <a-button type="primary">
+        Go forward<a-icon type="right" />
+      </a-button>
+    </a-button-group>
+    <a-button-group>
+      <a-button type="primary" icon="cloud" />
+      <a-button type="primary" icon="cloud-download" />
+    </a-button-group>
   </div>
 </template>
-<script>
-import { Button, Icon } from 'antd'
-export default {
-  components: {
-    AntButton: Button,
-    ButtonGroup: Button.Group,
-    Icon,
-  },
-}
-</script>
 <style>
 #components-button-demo-button-group h4 {
   margin: 16px 0;

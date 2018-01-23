@@ -6,11 +6,11 @@
   </md>
   <div :style="wrapStyles">
     <Tooltip placement="left" title="Prompt Text" :getPopupContainer="getPopupContainer">
-      <AntButton>Adjust automatically / 自动调整</AntButton>
+      <a-button>Adjust automatically / 自动调整</a-button>
     </Tooltip>
     <br />
     <Tooltip placement="left" title="Prompt Text" :getPopupContainer="getPopupContainer" :autoAdjustOverflow="false">
-      <AntButton>Ingore / 不处理</AntButton>
+      <a-button>Ingore / 不处理</a-button>
     </Tooltip>
   </div>
 </div>
@@ -37,7 +37,7 @@ export default {
   },
   components: {
     Tooltip,
-    AntButton: Button,
+
   },
 }
 </script>

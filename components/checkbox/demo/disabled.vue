@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Checkbox :defaultChecked="false" disabled />
+    <a-checkbox :defaultChecked="false" disabled />
     <br />
-    <Checkbox defaultChecked disabled />
+    <a-checkbox defaultChecked disabled />
   </div>
 </template>
 <script>

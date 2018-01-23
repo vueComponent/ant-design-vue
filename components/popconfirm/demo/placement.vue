@@ -10,21 +10,21 @@
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>TL</AntButton>
+      <a-button>TL</a-button>
     </Popconfirm>
     <Popconfirm placement="top" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>Top</AntButton>
+      <a-button>Top</a-button>
     </Popconfirm>
     <Popconfirm placement="topRight" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>TR</AntButton>
+      <a-button>TR</a-button>
     </Popconfirm>
   </div>
   <div :style="{ width: `${buttonWidth}px`, float: 'left' }">
@@ -33,21 +33,21 @@
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>LT</AntButton>
+      <a-button>LT</a-button>
     </Popconfirm>
     <Popconfirm placement="left" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>Left</AntButton>
+      <a-button>Left</a-button>
     </Popconfirm>
     <Popconfirm placement="leftBottom" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>LB</AntButton>
+      <a-button>LB</a-button>
     </Popconfirm>
   </div>
   <div :style="{ width: `${buttonWidth}px`, marginLeft: `${buttonWidth * 4 + 24 }px`}">
@@ -56,21 +56,21 @@
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>RT</AntButton>
+      <a-button>RT</a-button>
     </Popconfirm>
     <Popconfirm placement="right" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>Right</AntButton>
+      <a-button>Right</a-button>
     </Popconfirm>
     <Popconfirm placement="rightBottom" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>RB</AntButton>
+      <a-button>RB</a-button>
     </Popconfirm>
   </div>
   <div :style="{ marginLeft: `${buttonWidth}px`, clear: 'both', whiteSpace: 'nowrap' }">
@@ -79,21 +79,21 @@
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>BL</AntButton>
+      <a-button>BL</a-button>
     </Popconfirm>
     <Popconfirm placement="bottom" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
           <p>Are you sure delete this task?</p>
           <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>Bottom</AntButton>
+      <a-button>Bottom</a-button>
     </Popconfirm>
     <Popconfirm placement="bottomRight" okText="Yes" cancelText="No" @confirm="confirm">
       <template slot="title">
         <p>Are you sure delete this task?</p>
         <p>Are you sure delete this task?</p>
       </template>
-      <AntButton>BR</AntButton>
+      <a-button>BR</a-button>
     </Popconfirm>
   </div>
 </div>
@@ -114,7 +114,7 @@ export default {
   },
   components: {
     Popconfirm,
-    AntButton: Button,
+
   },
 }
 </script>

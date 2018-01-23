@@ -1,31 +1,30 @@
 <template>
   <div>
-    <RadioGroup :value="size" @change="handleSizeChange">
-      <RadioButton value="large">Large</RadioButton>
-      <RadioButton value="default">Default</RadioButton>
-      <RadioButton value="small">Small</RadioButton>
-    </RadioGroup>
+    <a-radio-group :value="size" @change="handleSizeChange">
+      <a-radio-button value="large">Large</a-radio-button>
+      <a-radio-button value="default">Default</a-radio-button>
+      <a-radio-button value="small">Small</a-radio-button>
+    </a-radio-group>
     <br /><br />
-    <AntButton type="primary" :size="size">Primary</AntButton>
-    <AntButton :size="size">Normal</AntButton>
-    <AntButton type="dashed" :size="size">Dashed</AntButton>
-    <AntButton type="danger" :size="size">Danger</AntButton>
+    <a-button type="primary" :size="size">Primary</a-button>
+    <a-button :size="size">Normal</a-button>
+    <a-button type="dashed" :size="size">Dashed</a-button>
+    <a-button type="danger" :size="size">Danger</a-button>
     <br />
-    <AntButton type="primary" shape="circle" icon="download" :size="size" />
-    <AntButton type="primary" icon="download" :size="size">Download</AntButton>
+    <a-button type="primary" shape="circle" icon="download" :size="size" />
+    <a-button type="primary" icon="download" :size="size">Download</a-button>
     <br />
-    <ButtonGroup :size="size">
-      <AntButton type="primary">
-        <Icon type="left" />Backward
-      </AntButton>
-      <AntButton type="primary">
-        Forward<Icon type="right" />
-      </AntButton>
-    </ButtonGroup>
+    <a-button-group :size="size">
+      <a-button type="primary">
+        <a-icon type="left" />Backward
+      </a-button>
+      <a-button type="primary">
+        Forward<a-icon type="right" />
+      </a-button>
+    </a-button-group>
   </div>
 </template>
 <script>
-import { Button, Radio, Icon } from 'antd'
 export default {
   data () {
     return {
@@ -36,13 +35,6 @@ export default {
     handleSizeChange (e) {
       this.size = e.target.value
     },
-  },
-  components: {
-    AntButton: Button,
-    ButtonGroup: Button.Group,
-    RadioButton: Radio.Button,
-    RadioGroup: Radio.Group,
-    Icon,
   },
 }
 </script>

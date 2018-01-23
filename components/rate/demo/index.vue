@@ -8,8 +8,8 @@
     </br>
     默认3颗星
     <Rate v-model="initValue"></Rate>
-    <AntButton type="primary" @click="changeValue">改变</AntButton>
-    <AntButton type="primary" @click="getValue">当前值</AntButton>
+    <a-button type="primary" @click="changeValue">改变</a-button>
+    <a-button type="primary" @click="getValue">当前值</a-button>
     </br>
     只读
     <Rate :value="initValue" :disabled="disabled"></Rate>
@@ -72,7 +72,7 @@ export default {
   components: {
     Rate,
     Icon,
-    AntButton: Button,
+
   },
 }
 </script>

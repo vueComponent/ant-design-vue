@@ -4,9 +4,9 @@
     <br />
     <Radio defaultChecked :disabled="disabled">Disabled</Radio>
     <div :style="{ marginTop: 20 }">
-      <AntButton type="primary" @click="toggleDisabled">
+      <a-button type="primary" @click="toggleDisabled">
         Toggle disabled
-      </AntButton>
+      </a-button>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   components: {
     Radio,
-    AntButton: Button,
+
   },
 }
 </script>

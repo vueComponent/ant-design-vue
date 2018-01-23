@@ -1,12 +1,12 @@
 <template>
   <div>
-    a-checkboxGroup :options="plainOptions" v-model="value" @change="onChange" />
+    <a-checkbox-group :options="plainOptions" v-model="value" @change="onChange" />
     <br />
-    a-checkboxGroup :options="plainOptions" :defaultValue="['Apple']" @change="onChange" />
+    <a-checkbox-group :options="plainOptions" :defaultValue="['Apple']" @change="onChange" />
     <br />
-    a-checkboxGroup :options="options" :value="['Pear']" @change="onChange" />
+    <a-checkbox-group :options="options" :value="['Pear']" @change="onChange" />
     <br />
-    a-checkboxGroup :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange" />
+    <a-checkbox-group :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange" />
   </div>
 </template>
 <script>
@@ -39,7 +39,6 @@ export default {
   },
   components: {
     Checkbox,
-    CheckboxGroup: Checkbox.Group,
   },
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p :style="{ marginBottom: '20px' }">
-      a-checkbox
+      <a-checkbox
         :checked="checked"
         :disabled="disabled"
         @change="onChange"

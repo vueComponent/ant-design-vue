@@ -2,7 +2,9 @@ import Button from './button'
 const ButtonGroup = Button.Group
 export { Button, ButtonGroup }
 
-export { default as Checkbox } from './checkbox'
+import Checkbox from './checkbox'
+const CheckboxGroup = Checkbox.Group
+export { Checkbox, CheckboxGroup }
 
 export { default as Icon } from './icon'
 

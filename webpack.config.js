@@ -1,13 +1,10 @@
 const path = require('path')
 // const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.config')
 
-module.exports = {
-  entry: {
-    index: [
-      './examples/index.js',
-    ],
-  },
+module.exports = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
@@ -15,21 +12,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader', exclude: /node_modules/,
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]',
-        },
-      },
       {
         test: /\.less$/,
         use: [
@@ -43,14 +25,14 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },
     ],
-  },
-  resolve: {
-    extensions: ['.js', '.vue'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      'antd': path.join(__dirname, 'components'),
-    },
   },
   devServer: {
     port: 3000,
@@ -66,12 +48,11 @@ module.exports = {
     hints: false,
   },
   devtool: '#source-map',
-}
-
-module.exports.plugins = (module.exports.plugins || []).concat([
-  new HtmlWebpackPlugin({
-    template: 'examples/index.html',
-    filename: 'index.html',
-    inject: true,
-  }),
-])
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'examples/index.html',
+      filename: 'index.html',
+      inject: true,
+    }),
+  ],
+})

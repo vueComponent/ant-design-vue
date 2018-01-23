@@ -1,25 +1,27 @@
 <template>
   <div>
-    <h1>Basic</h1>
+    <md>
+    # Button 按钮
+    按钮用于开始一个即时操作。
+    ## 何时使用
+    标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。
+
+    ## 代码演示
+    </md>
     <Basic />
-    <h1>ButtonGroup</h1>
     <ButtonGroup />
-    <h1>Disabled</h1>
     <Disabled />
-    <h1>Ghost</h1>
     <Ghost />
-    <h1>Icon</h1>
     <Icon />
-    <h1>Loading</h1>
     <Loading />
     <h1>TODO ： Multiple</h1>
     <Multiple />
-    <h1>Size</h1>
     <Size />
+    <Doc class="markdown"/>
   </div>
 </template>
 <script>
-import Basic from './basic'
+import Basic from './basic.md'
 import ButtonGroup from './button-group'
 import Disabled from './disabled'
 import Ghost from './ghost'
@@ -27,6 +29,7 @@ import Icon from './icon'
 import Loading from './loading'
 import Multiple from './multiple'
 import Size from './size'
+import Doc from '../index.zh-CN.md'
 export default {
   components: {
     Basic,
@@ -37,6 +40,16 @@ export default {
     Loading,
     Multiple,
     Size,
+    Doc,
   },
 }
 </script>
+<style>
+[id^="components-button-demo-"] .ant-btn {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+[id^="components-button-demo-"] .ant-btn-group > .ant-btn {
+  margin-right: 0;
+}
+</style>

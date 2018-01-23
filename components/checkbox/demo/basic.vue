@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Checkbox @change="onChange">Checkbox</Checkbox>
+    <a-checkbox @change="onChange">Checkbox</a-checkbox>
   </div>
 </template>
 <script>

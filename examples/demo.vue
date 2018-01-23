@@ -3,15 +3,11 @@ import { Menu } from 'antd'
 import * as AllDemo from './demo'
 const MenuItem = Menu.Item
 export default {
-  data () {
-    console.log('routes', this.$route.params)
-    return {}
-  },
   render () {
     const { name, demo } = this.$route.params // eslint-disable-line
     const Demo = AllDemo[name]
     return (
-      <div class='site'>
+      <div class='site page-container'>
         <Menu class='nav' selectedKeys={[name]}>
           {Object.keys(AllDemo).map(d => <MenuItem key={d}>
             <router-link to={{ path: `/components/${d}` }}>{d}</router-link>

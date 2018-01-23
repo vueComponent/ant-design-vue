@@ -4,9 +4,9 @@
   ## 切换菜单类型
   展示动态切换模式。
   </md>
-  <Checkbox @change="changeMode" /> Change Mode
+  <a-checkbox @change="changeMode" /> Change Mode
   <span className="ant-divider" style="margin: 0 1em"/>
-  <Checkbox @change="changeTheme" /> Change Theme
+  <a-checkbox @change="changeTheme" /> Change Theme
   <br />
   <br />
   <Menu

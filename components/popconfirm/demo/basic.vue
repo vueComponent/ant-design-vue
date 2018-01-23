@@ -23,7 +23,7 @@ export default {
   },
   components: {
     Popconfirm,
-    AntButton: Button,
+
   },
 }
 </script>

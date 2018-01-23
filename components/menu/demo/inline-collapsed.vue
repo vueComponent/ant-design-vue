@@ -6,9 +6,9 @@
   你可以在 [Layout](/components/layout/#components-layout-demo-side) 里查看侧边布局结合的完整示例。
   </md>
   <div style="width: 256px">
-    <AntButton type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
+    <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
       <Icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-    </AntButton>
+    </a-button>
     <Menu
       :defaultSelectedKeys="['1']"
       :defaultOpenKeys="['sub1']"
@@ -70,7 +70,7 @@ export default {
     SubMenu,
     MenuItemGroup,
     MenuItem,
-    AntButton: Button,
+
   },
 }
 

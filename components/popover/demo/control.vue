@@ -10,7 +10,7 @@
     v-model="visible"
   >
     <a @click="hide" slot="content">Close</a>
-    <AntButton type="primary">Click me</AntButton>
+    <a-button type="primary">Click me</a-button>
   </Popover>
 </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   },
   components: {
     Popover,
-    AntButton: Button,
+
   },
 }
 </script>

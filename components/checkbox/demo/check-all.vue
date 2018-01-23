@@ -1,16 +1,16 @@
 <template>
   <div>
     <div :style="{ borderBottom: '1px solid #E9E9E9' }">
-      <Checkbox
+      a-checkbox
         :indeterminate="indeterminate"
         @change="onCheckAllChange"
         :checked="checkAll"
       >
         Check all
-      </Checkbox>
+      </a-checkbox>
     </div>
     <br />
-    <CheckboxGroup :options="plainOptions" v-model="checkedList" @change="onChange" />
+    a-checkboxGroup :options="plainOptions" v-model="checkedList" @change="onChange" />
   </div>
 </template>
 <script>

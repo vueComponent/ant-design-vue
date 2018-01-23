@@ -9,21 +9,21 @@
       <p>Content</p>
       <p>Content</p>
     </template>
-    <AntButton type="primary">Hover me</AntButton>
+    <a-button type="primary">Hover me</a-button>
   </Popover>
   <Popover title="Title" trigger="focus">
     <template slot="content">
       <p>Content</p>
       <p>Content</p>
     </template>
-    <AntButton type="primary">Focus me</AntButton>
+    <a-button type="primary">Focus me</a-button>
   </Popover>
   <Popover title="Title" trigger="click">
     <template slot="content">
       <p>Content</p>
       <p>Content</p>
     </template>
-    <AntButton type="primary">Click me</AntButton>
+    <a-button type="primary">Click me</a-button>
   </Popover>
 </div>
 </template>
@@ -33,7 +33,7 @@ import { Popover, Button } from 'antd'
 export default {
   components: {
     Popover,
-    AntButton: Button,
+
   },
 }
 </script>

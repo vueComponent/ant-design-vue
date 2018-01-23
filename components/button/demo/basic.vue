@@ -1,16 +1,8 @@
 <template>
   <div>
-    <AntButton type="primary">Primary</AntButton>
-    <AntButton>Default</AntButton>
-    <AntButton type="dashed">Dashed</AntButton>
-    <AntButton type="danger">Danger</AntButton>
+    <a-button type="primary">Primary</a-button>
+    <a-button>Default</a-button>
+    <a-button type="dashed">Dashed</a-button>
+    <a-button type="danger">Danger</a-button>
   </div>
 </template>
-<script>
-import { Button } from 'antd'
-export default {
-  components: {
-    AntButton: Button,
-  },
-}
-</script>

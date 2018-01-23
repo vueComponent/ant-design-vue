@@ -9,7 +9,7 @@
       <p>Content</p>
       <p>Content</p>
     </template>
-    <AntButton type="primary">Hover me</AntButton>
+    <a-button type="primary">Hover me</a-button>
   </Popover>
 </div>
 </template>
@@ -19,7 +19,7 @@ import { Popover, Button } from 'antd'
 export default {
   components: {
     Popover,
-    AntButton: Button,
+
   },
 }
 </script>

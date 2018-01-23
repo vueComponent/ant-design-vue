@@ -1,23 +1,15 @@
 <template>
   <div>
-    <AntButton type="primary">Primary</AntButton>
-    <AntButton type="primary" disabled>Primary(disabled)</AntButton>
+    <a-button type="primary">Primary</a-button>
+    <a-button type="primary" disabled>Primary(disabled)</a-button>
     <br />
-    <AntButton>Default</AntButton>
-    <AntButton disabled>Default(disabled)</AntButton>
+    <a-button>Default</a-button>
+    <a-button disabled>Default(disabled)</a-button>
     <br />
-    <AntButton>Ghost</AntButton>
-    <AntButton disabled>Ghost(disabled)</AntButton>
+    <a-button>Ghost</a-button>
+    <a-button disabled>Ghost(disabled)</a-button>
     <br />
-    <AntButton type="dashed">Dashed</AntButton>
-    <AntButton type="dashed" disabled>Dashed(disabled)</AntButton>
+    <a-button type="dashed">Dashed</a-button>
+    <a-button type="dashed" disabled>Dashed(disabled)</a-button>
   </div>
 </template>
-<script>
-import { Button } from 'antd'
-export default {
-  components: {
-    AntButton: Button,
-  },
-}
-</script>

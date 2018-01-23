@@ -1,13 +1,13 @@
 <template>
-  <CheckboxGroup @change="onChange">
+  <a-checkbox-group @change="onChange">
     <AntRow>
-      <AntCol :span="8"><Checkbox value="A">A</Checkbox></AntCol>
-      <AntCol :span="8"><Checkbox value="B">B</Checkbox></AntCol>
-      <AntCol :span="8"><Checkbox value="C">C</Checkbox></AntCol>
-      <AntCol :span="8"><Checkbox value="D">D</Checkbox></AntCol>
-      <AntCol :span="8"><Checkbox value="E">E</Checkbox></AntCol>
+      <AntCol :span="8"><a-checkbox value="A">A</a-checkbox></AntCol>
+      <AntCol :span="8"><a-checkbox value="B">B</a-checkbox></AntCol>
+      <AntCol :span="8"><a-checkbox value="C">C</a-checkbox></AntCol>
+      <AntCol :span="8"><a-checkbox value="D">D</a-checkbox></AntCol>
+      <AntCol :span="8"><a-checkbox value="E">E</a-checkbox></AntCol>
     </AntRow>
-  </CheckboxGroup>
+  </a-checkbox-group>
 </template>
 <script>
 import { Checkbox, Row, Col } from 'antd'

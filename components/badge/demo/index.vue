@@ -2,91 +2,89 @@
   <div>
     基本：
     <div>
-      <Badge count=5>
+      <a-badge count=5>
         <a href="#" class="head-example" />
-      </Badge>
-      <Badge count=0 showZero>
+      </a-badge>
+      <a-badge count=0 showZero>
         <a href="#" class="head-example" />
-      </Badge>
+      </a-badge>
     </div>
     <br>
     独立使用：
     <div>
-      <Badge count=25 />
-      <Badge count=4 :styles="{backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
-      <Badge count=109 :styles= "{backgroundColor: '#52c41a'} " />
+      <a-badge count=25 />
+      <a-badge count=4 :styles="{backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
+      <a-badge count=109 :styles= "{backgroundColor: '#52c41a'} " />
     </div>
     <br>
     封顶数字：
     <div style="margin-top: 10px">
-      <Badge count=99>
+      <a-badge count=99>
         <a href="#" class="head-example" />
-      </Badge>
-      <Badge count=100>
+      </a-badge>
+      <a-badge count=100>
         <a href="#" class="head-example" />
-      </Badge>
-      <Badge count=99 overflowCount=10>
+      </a-badge>
+      <a-badge count=99 overflowCount=10>
         <a href="#" class="head-example" />
-      </Badge>
-      <Badge count=1000 overflowCount=999>
+      </a-badge>
+      <a-badge count=1000 overflowCount=999>
         <a href="#" class="head-example" />
-      </Badge>
+      </a-badge>
     </div>
     <br>
      讨嫌的小红点：
     <div style="margin-top: 10px">
-      <Badge dot>
-        <Icon type="notification" />
-      </Badge>
-      <Badge dot>
+      <a-badge dot>
+        <a-icon type="notification" />
+      </a-badge>
+      <a-badge dot>
         <a href="#">Link something</a>
-      </Badge>
+      </a-badge>
     </div>
     <br>
     状态点：
     <div>
-      <Badge status="success" />
-      <Badge status="error" />
-      <Badge status="default" />
-      <Badge status="processing" />
-      <Badge :status="currentStatus" />
-      <ant-button @click="changeStatus">改processing</ant-button>
+      <a-badge status="success" />
+      <a-badge status="error" />
+      <a-badge status="default" />
+      <a-badge status="processing" />
+      <a-badge :status="currentStatus" />
+      <a-button @click="changeStatus">改processing</a-button>
       <br />
-      <Badge status="success" text="Success" />
+      <a-badge status="success" text="Success" />
       <br />
-      <Badge status="error" text="Error" />
+      <a-badge status="error" text="Error" />
       <br />
-      <Badge status="default" text="Default" />
+      <a-badge status="default" text="Default" />
       <br />
-      <Badge status="processing" text="Processing" />
+      <a-badge status="processing" text="Processing" />
       <br />
-      <Badge status="warning" text="Warning" />
+      <a-badge status="warning" text="Warning" />
     </div>
     <br />
     动态：
     <div>
-      <Badge :count="count">
+      <a-badge :count="count">
         <a href="#" class="head-example" />
-      </Badge>
-      <ant-button @click="changeMinsValue()">
-        <Icon type="minus" />
-      </ant-button>
-      <ant-button @click="changePlusValue(1)">
-        <Icon type="plus" />
-      </ant-button>
+      </a-badge>
+      <a-button @click="changeMinsValue()">
+        <a-icon type="minus" />
+      </a-button>
+      <a-button @click="changePlusValue(1)">
+        <a-icon type="plus" />
+      </a-button>
       <br/>
-      <Badge :dot="isShow">
+      <a-badge :dot="isShow">
         <a href="#" class="head-example" />
-      </Badge>
-      <ant-button @click="changeShow()">toggle</ant-button>
+      </a-badge>
+      <a-button @click="changeShow()">toggle</a-button>
     </div>
     <br />
   </div>
 </template>
 <script>
-import '../style'
 let i = 0
-import { Badge, Button, Icon } from 'antd/index'
 export default {
   data () {
     return {
@@ -119,11 +117,6 @@ export default {
     changeShow () {
       this.isShow = !this.isShow
     },
-  },
-  components: {
-    Badge,
-    AntButton: Button,
-    Icon,
   },
 }
 </script>

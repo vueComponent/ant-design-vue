@@ -1,21 +1,13 @@
 <template>
   <div>
-    <AntButton type="primary" shape="circle" icon="search" />
-    <AntButton type="primary" icon="search">Search</AntButton>
-    <AntButton shape="circle" icon="search" />
-    <AntButton icon="search">Search</AntButton>
+    <a-button type="primary" shape="circle" icon="search" />
+    <a-button type="primary" icon="search">Search</a-button>
+    <a-button shape="circle" icon="search" />
+    <a-button icon="search">Search</a-button>
     <br />
-    <AntButton shape="circle" icon="search" />
-    <AntButton icon="search">Search</AntButton>
-    <AntButton type="dashed" shape="circle" icon="search" />
-    <AntButton type="dashed" icon="search">Search</AntButton>
+    <a-button shape="circle" icon="search" />
+    <a-button icon="search">Search</a-button>
+    <a-button type="dashed" shape="circle" icon="search" />
+    <a-button type="dashed" icon="search">Search</a-button>
   </div>
 </template>
-<script>
-import { Button } from 'antd'
-export default {
-  components: {
-    AntButton: Button,
-  },
-}
-</script>

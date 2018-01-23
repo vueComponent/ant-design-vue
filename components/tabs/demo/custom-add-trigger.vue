@@ -1,7 +1,7 @@
 <template>
 <div>
     <div :style="{ marginBottom: '16px' }">
-      <AntButton @click="add">ADD</AntButton>
+      <a-button @click="add">ADD</a-button>
     </div>
     <Tabs
       hideAdd
@@ -63,7 +63,7 @@ export default {
   components: {
     Tabs,
     TabPane: Tabs.TabPane,
-    AntButton: Button,
+
   },
 }
 </script>

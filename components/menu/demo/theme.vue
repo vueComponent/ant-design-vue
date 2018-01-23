@@ -4,7 +4,7 @@
   ## 主题
   内建了两套主题 `light|dark`，默认 `light`。
   </md>
-  <Checkbox @change="changeTheme" /> Change Theme
+  <a-checkbox @change="changeTheme" /> Change Theme
   <br />
   <br />
   <Menu

@@ -159,7 +159,7 @@ export default {
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <Checkbox
+          a-checkbox
             value='rc-trigger-popup-zoom'
             onChange={this.onTransitionChange}
             checked={state.transitionName === 'rc-trigger-popup-zoom'}
@@ -172,7 +172,7 @@ export default {
         trigger:
 
         <label>
-          <Checkbox
+          a-checkbox
             value='hover'
             checked={!!trigger.hover}
             onChange={this.onTriggerChange}
@@ -180,7 +180,7 @@ export default {
           hover
         </label>
         <label>
-          <Checkbox
+          a-checkbox
             value='focus'
             checked={!!trigger.focus}
             onChange={this.onTriggerChange}
@@ -188,7 +188,7 @@ export default {
           focus
         </label>
         <label>
-          <Checkbox
+          a-checkbox
             value='click'
             checked={!!trigger.click}
             onChange={this.onTriggerChange}
@@ -196,7 +196,7 @@ export default {
           click
         </label>
         <label>
-          <Checkbox
+          a-checkbox
             value='contextMenu'
             checked={!!trigger.contextMenu}
             onChange={this.onTriggerChange}
@@ -205,7 +205,7 @@ export default {
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <Checkbox
+          a-checkbox
             checked={!!state.destroyPopupOnHide}
             onChange={this.handleDestroyPopupOnHide}
           />
@@ -214,7 +214,7 @@ export default {
 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <Checkbox
+          a-checkbox
             checked={!!state.mask}
             onChange={this.onMask}
           />
@@ -223,7 +223,7 @@ export default {
 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <Checkbox
+          a-checkbox
             checked={!!state.maskClosable}
             onChange={this.onMaskClosable}
           />

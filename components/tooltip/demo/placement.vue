@@ -9,19 +9,19 @@
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>TL</AntButton>
+      <a-button>TL</a-button>
     </Tooltip>
     <Tooltip placement="top">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>Top</AntButton>
+      <a-button>Top</a-button>
     </Tooltip>
     <Tooltip placement="topRight">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>TR</AntButton>
+      <a-button>TR</a-button>
     </Tooltip>
   </div>
   <div :style="{ width: `${buttonWidth}px`, float: 'left' }">
@@ -29,19 +29,19 @@
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>LT</AntButton>
+      <a-button>LT</a-button>
     </Tooltip>
     <Tooltip placement="left">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>Left</AntButton>
+      <a-button>Left</a-button>
     </Tooltip>
     <Tooltip placement="leftBottom">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>LB</AntButton>
+      <a-button>LB</a-button>
     </Tooltip>
   </div>
   <div :style="{ width: `${buttonWidth}px`, marginLeft: `${buttonWidth * 4 + 24 }px`}">
@@ -49,19 +49,19 @@
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>RT</AntButton>
+      <a-button>RT</a-button>
     </Tooltip>
     <Tooltip placement="right">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>Right</AntButton>
+      <a-button>Right</a-button>
     </Tooltip>
     <Tooltip placement="rightBottom">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>RB</AntButton>
+      <a-button>RB</a-button>
     </Tooltip>
   </div>
   <div :style="{ marginLeft: `${buttonWidth}px`, clear: 'both', whiteSpace: 'nowrap' }">
@@ -69,19 +69,19 @@
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>BL</AntButton>
+      <a-button>BL</a-button>
     </Tooltip>
     <Tooltip placement="bottom">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>Bottom</AntButton>
+      <a-button>Bottom</a-button>
     </Tooltip>
     <Tooltip placement="bottomRight">
       <template slot="title">
         <span>prompt text</span>
       </template>
-      <AntButton>BR</AntButton>
+      <a-button>BR</a-button>
     </Tooltip>
   </div>
 </div>
@@ -97,7 +97,7 @@ export default {
   },
   components: {
     Tooltip,
-    AntButton: Button,
+
   },
 }
 </script>

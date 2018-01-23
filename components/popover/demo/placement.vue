@@ -13,7 +13,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>TL</AntButton>
+      <a-button>TL</a-button>
     </Popover>
     <Popover placement="top">
       <template slot="content">
@@ -23,7 +23,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>Top</AntButton>
+      <a-button>Top</a-button>
     </Popover>
     <Popover placement="topRight">
       <template slot="content">
@@ -33,7 +33,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>TR</AntButton>
+      <a-button>TR</a-button>
     </Popover>
   </div>
   <div :style="{ width: `${buttonWidth}px`, float: 'left' }">
@@ -45,7 +45,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>LT</AntButton>
+      <a-button>LT</a-button>
     </Popover>
     <Popover placement="left">
       <template slot="content">
@@ -55,7 +55,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>Left</AntButton>
+      <a-button>Left</a-button>
     </Popover>
     <Popover placement="leftBottom">
       <template slot="content">
@@ -65,7 +65,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>LB</AntButton>
+      <a-button>LB</a-button>
     </Popover>
   </div>
   <div :style="{ width: `${buttonWidth}px`, marginLeft: `${buttonWidth * 4 + 24 }px`}">
@@ -77,7 +77,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>RT</AntButton>
+      <a-button>RT</a-button>
     </Popover>
     <Popover placement="right">
       <template slot="content">
@@ -87,7 +87,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>Right</AntButton>
+      <a-button>Right</a-button>
     </Popover>
     <Popover placement="rightBottom">
       <template slot="content">
@@ -97,7 +97,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>RB</AntButton>
+      <a-button>RB</a-button>
     </Popover>
   </div>
   <div :style="{ marginLeft: `${buttonWidth}px`, clear: 'both', whiteSpace: 'nowrap' }">
@@ -109,7 +109,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>BL</AntButton>
+      <a-button>BL</a-button>
     </Popover>
     <Popover placement="bottom">
       <template slot="content">
@@ -119,7 +119,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>Bottom</AntButton>
+      <a-button>Bottom</a-button>
     </Popover>
     <Popover placement="bottomRight">
       <template slot="content">
@@ -129,7 +129,7 @@
       <template slot="title">
         <span>Title</span>
       </template>
-      <AntButton>BR</AntButton>
+      <a-button>BR</a-button>
     </Popover>
   </div>
 </div>
@@ -145,7 +145,7 @@ export default {
   },
   components: {
     Popover,
-    AntButton: Button,
+
   },
 }
 </script>

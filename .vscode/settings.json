@@ -2,13 +2,19 @@
 {
   "eslint.enable": true,
   "eslint.options": {
-    "extensions": [".js", ".vue"],
+    "extensions": [
+      ".js",
+      ".vue"
+    ],
     "configFile": ".eslintrc"
   },
   "eslint.validate": [
     "javascript",
     "javascriptreact",
-    { "language": "vue", "autoFix": true }
+    {
+      "language": "vue",
+      "autoFix": true
+    }
   ],
   "emmet.syntaxProfiles": {
     "vue-html": "html",
@@ -17,5 +23,8 @@
   "eslint.autoFixOnSave": true,
   "vetur.validation.template": true,
   "vetur.format.html.wrap_line_length": 60,
-  "vetur.format.js.InsertSpaceBeforeFunctionParenthesis": true
+  "vetur.format.js.InsertSpaceBeforeFunctionParenthesis": true,
+  "stylefmt.config": {
+    "fix": true
+  }
 }

@@ -1,5 +1,3 @@
-#app {
-}
 .site {
   display: flex;
   .nav {
@@ -34,20 +32,19 @@
 }
 
 .page-container {
-  /*color: #666;*/
   font-size: 14px;
   line-height: 1.5;
 
   .table {
       font-size: 13px;
       border-collapse: collapse;
-      border-spacing: 0px;
+      border-spacing: 0;
       empty-cells: show;
       border: 1px solid #e9e9e9;
       width: 100%;
       margin: 16px 0;
+      th {
 
-      th{
           background: #F7F7F7;
           white-space: nowrap;
           color: #5C6B77;
@@ -59,7 +56,7 @@
           width: 20%;
           font-family: "Lucida Console", Consolas, Menlo, Courier, monospace;
       }
-      th,td{
+      th,td {
           border: 1px solid #e9e9e9;
           padding: 8px 16px;
           text-align: left;
@@ -88,7 +85,7 @@
 }
 
 .markdown {
-  & > ul{
+  & > ul {
       margin-top: 1rem;
       margin-bottom: 1rem;
       & > li {
@@ -96,8 +93,8 @@
           margin-left: 1rem;
       }
   }
-  h1, h2, h3{
-      a{
+  h1, h2, h3 {
+      a {
           font-size: .8em;
           opacity: 0;
           font-weight: normal;

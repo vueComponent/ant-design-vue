@@ -1,15 +1,3 @@
----
-category: Components
-type: General
-title: Button
----
-
-To trigger an operation.
-
-## When To Use
-
-A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
-
 ## API
 
 To get a customized button, just set `type`/`shape`/`size`/`loading`/`disabled`.
@@ -25,14 +13,10 @@ To get a customized button, just set `type`/`shape`/`size`/`loading`/`disabled`.
 | type | can be set to `primary` `ghost` `dashed` `danger`(added in 2.7) or omitted (meaning `default`) | string | `default` |
 | onClick | set the handler to handle `click` event | function | - |
 
+### events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| click | handle `click` event  | function(e) |
+
 `<Button>Hello world!</Button>` will be rendered into `<button><span>Hello world!</span></button>`, and all the properties which are not listed above will be transferred to the `<button>` tag.
 
-<style>
-[id^=components-button-demo-] .ant-btn {
-  margin-right: 8px;
-  margin-bottom: 12px;
-}
-[id^=components-button-demo-] .ant-btn-group > .ant-btn {
-  margin-right: 0;
-}
-</style>

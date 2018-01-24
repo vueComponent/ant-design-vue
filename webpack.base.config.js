@@ -60,9 +60,9 @@ md.renderer.rules.table_open = function () {
   return '<table class="table">'
 }
 md.renderer.rules.fence = wrap(md.renderer.rules.fence)
+const cnReg = new RegExp('<(cn)(?:[^<]|<)+</\\1>', 'g')
+const usReg = new RegExp('<(us)(?:[^<]|<)+</\\1>', 'g')
 md.core.ruler.push('update_template', function replace ({ tokens }) {
-  const cnReg = new RegExp('<(cn)(?:[^<]|<)+</\\1>', 'g')
-  const usReg = new RegExp('<(us)(?:[^<]|<)+</\\1>', 'g')
   let cn = ''
   let us = ''
   let template = ''
@@ -154,7 +154,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue', '.md'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'antd': path.join(__dirname, 'components'),

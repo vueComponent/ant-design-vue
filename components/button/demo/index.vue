@@ -1,5 +1,5 @@
 <script>
-import Basic from './basic.md'
+import Basic from './basic'
 import ButtonGroup from './button-group'
 import Disabled from './disabled'
 import Ghost from './ghost'
@@ -30,7 +30,7 @@ export default {
         <ButtonGroup />
         <Disabled />
         <Ghost />
-        <Icon />
+        <Icon/>
         <Loading />
         <h1>TODO ： Multiple</h1>
         <Multiple />

@@ -8,7 +8,7 @@
     "test": "karma start test/karma.conf.js --single-run",
     "build": "sh build.sh",
     "lint": "eslint -c ./.eslintrc --fix --ext .js ./src/",
-    "lint:style": "stylelint \"./example/**/*.less\" --syntax --fix less"
+    "lint:style": "stylelint \"./examples/**/*.less\" --syntax --fix less"
   },
   "repository": {
     "type": "git",

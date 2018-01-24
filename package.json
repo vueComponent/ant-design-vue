@@ -65,7 +65,6 @@
     "less-loader": "^4.0.5",
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
-    "markdown-it-container": "^2.0.0",
     "marked": "^0.3.7",
     "mocha": "^3.2.0",
     "pre-commit": "^1.2.2",

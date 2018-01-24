@@ -1,7 +1,5 @@
 <template>
-  <i :title="title" :class="classes"
-    @click="handleClick">
-  </i>
+  <i :title="title" :class="classes" @click="handleClick"></i>
 </template>
 <script>
 export default {

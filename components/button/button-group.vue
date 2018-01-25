@@ -1,10 +1,5 @@
-<template>
-  <div :class="classes">
-    <slot></slot>
-  </div>
-</template>
 <script>
-
+import { filterEmpty } from '../_util/vnode'
 export default {
   name: 'ButtonGroup',
   props: {
@@ -37,6 +32,14 @@ export default {
         },
       ]
     },
+  },
+  render () {
+    const { classes, $slots } = this
+    return (
+      <div class={classes}>
+        {filterEmpty($slots.default)}
+      </div>
+    )
   },
 }
 </script>

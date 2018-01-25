@@ -6,7 +6,7 @@
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| ghost | 幽灵属性，使按钮背景透明，版本 2.7 中增加 | boolean | false |
+| ghost | 幽灵属性，使按钮背景透明 | boolean | false |
 | htmlType | 设置 `button` 原生的 `type` 值，可选值请参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) | string | `button` |
 | icon | 设置按钮的图标类型 | string | - |
 | loading | 设置按钮载入状态 | boolean \| { delay: number } | `false` |

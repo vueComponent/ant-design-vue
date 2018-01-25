@@ -2,7 +2,8 @@
   <div class="box box-demo">
     <slot name="component"></slot>
     <div class="box-demo-description">
-      <slot name="description"></slot>
+      <slot v-if="lang === 'cn'" name="description"></slot>
+      <slot v-else name="us-description"></slot>
       <span class="btn-toggle" :class="{open: isOpen}" @click="toggle"><i class="anticon anticon-down-circle-o"></i></span>
     </div>
     <transition appear :css="false" @enter="enter" @leave="leave">
@@ -20,8 +21,10 @@ export default {
     jsfiddle: Object,
   },
   data () {
+    const { lang } = this.$route.params
     return {
       isOpen: false,
+      lang,
     }
   },
   methods: {

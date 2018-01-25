@@ -8,7 +8,7 @@
     "test": "karma start test/karma.conf.js --single-run",
     "build": "sh build.sh",
     "lint": "eslint -c ./.eslintrc --fix --ext .js ./src/",
-    "lint:style": "stylelint \"./src/**/*.less\" --syntax less"
+    "lint:style": "stylelint \"./examples/**/*.less\" --fix --syntax less"
   },
   "repository": {
     "type": "git",
@@ -65,7 +65,6 @@
     "less-loader": "^4.0.5",
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
-    "markdown-it-container": "^2.0.0",
     "marked": "^0.3.7",
     "mocha": "^3.2.0",
     "pre-commit": "^1.2.2",
@@ -77,8 +76,8 @@
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0",
     "transliteration": "^1.6.2",
+    "vue-antd-md-loader": "^1.0.1",
     "vue-loader": "^13.0.5",
-    "vue-markdown-loader": "^2.3.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.6.0",

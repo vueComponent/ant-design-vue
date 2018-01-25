@@ -36,9 +36,7 @@ export default {
         <Multiple />
         <Size />
         <api>
-          <template slot='cn'>
-            <CN/>
-          </template>
+          <CN slot='cn' />
           <US/>
         </api>
       </div>

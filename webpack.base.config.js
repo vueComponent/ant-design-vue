@@ -5,7 +5,7 @@ const Token = require('markdown-it/lib/token')
 const cheerio = require('cheerio')
 
 const fetch = (str, tag) => {
-  const $ = cheerio.load(str, { decodeEntities: false })
+  const $ = cheerio.load(str, { decodeEntities: false, xmlMode: true })
   if (!tag) return str
 
   return $(tag).html()
@@ -131,8 +131,8 @@ module.exports = {
         test: /\.md/,
         use: [
           {
-            loader: 'vue-markdown-loader',
-            options: Object.assign(md, { wrapper: 'section', preventExtract: true }),
+            loader: 'vue-antd-md-loader',
+            options: md,
           },
         ],
       },

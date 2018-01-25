@@ -1,7 +1,7 @@
 import Demo from './components/demo.vue'
 const AsyncComp = () => {
   return {
-    component: import(`../components/card/demo/basic.vue`),
+    component: import(`../components/button/demo/index.vue`),
   }
 }
 export default [

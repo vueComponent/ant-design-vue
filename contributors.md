@@ -44,7 +44,7 @@ Pagination  |  done|select完成后补全
 Avatar  |  done
 Badge  |  done
 Breadcrumb |  done
-Card
+Card  | done
 Collapse
 LocaleProvider
 Progress

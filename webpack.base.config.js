@@ -50,16 +50,7 @@ const md = require('markdown-it')('default', {
   breaks: true,
   highlight: renderHighlight,
 })
-md.use(require('markdown-it-anchor'), {
-  level: 2,
-  slugify: slugify,
-  permalink: true,
-  permalinkBefore: true,
-})
-md.renderer.rules.table_open = function () {
-  return '<table class="table">'
-}
-md.renderer.rules.fence = wrap(md.renderer.rules.fence)
+// md.renderer.rules.fence = wrap(md.renderer.rules.fence)
 const cnReg = new RegExp('<(cn)(?:[^<]|<)+</\\1>', 'g')
 const usReg = new RegExp('<(us)(?:[^<]|<)+</\\1>', 'g')
 md.core.ruler.push('update_template', function replace ({ tokens }) {
@@ -101,10 +92,10 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
     const newContent = `
       <template>
         <demo-box :jsfiddle="${jsfiddle}">
-          <div class="box-demo-show" slot="component">${template}</div>
+          <template slot="component">${template}</template>
           <template slot="description">${cnHtml}</template>
           <template slot="us-description">${us ? md.render(us) : ''}</template>
-          <div class="highlight" slot="code">${codeHtml}</div>
+          <template slot="code">${codeHtml}</template>
         </demo-box>
       </template>
       <script>
@@ -132,7 +123,7 @@ module.exports = {
         use: [
           {
             loader: 'vue-antd-md-loader',
-            options: md,
+            options: Object.assign(md, { wrapper: 'div' }),
           },
         ],
       },
@@ -158,6 +149,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'antd': path.join(__dirname, 'components'),
+      '@': path.join(__dirname, ''),
     },
   },
 }

@@ -493,12 +493,13 @@ export default {
       props: {},
       on: { _ANT_EVENT_HACK: () => {} },
       key: 'trigger',
+      listeners: {},
     }
 
     if (this.isContextMenuToShow()) {
-      newChildProps.on.contextMenu = this.onContextMenu
+      newChildProps.listeners.contextMenu = this.onContextMenu
     } else {
-      newChildProps.on.contextMenu = this.createTwoChains('contextMenu')
+      newChildProps.listeners.contextMenu = this.createTwoChains('contextMenu')
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {

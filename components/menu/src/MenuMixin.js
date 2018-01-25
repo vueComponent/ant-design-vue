@@ -162,7 +162,7 @@ export default {
           ...extraProps,
           openChange: this.onOpenChange,
         },
-        on: {
+        listeners: {
           click: this.onClick,
           itemHover: this.onItemHover,
           openChange: this.onOpenChange,

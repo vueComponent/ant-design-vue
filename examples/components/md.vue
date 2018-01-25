@@ -1,5 +1,5 @@
 <template>
-  <div v-html="marked(text)" />
+  <div v-html="marked(text)" class="markdown" />
 </template>
 <script>
 import marked from 'marked'
@@ -16,16 +16,17 @@ marked.setOptions({
 export default {
   name: 'md',
   props: {
-    md: [Object, String],
+    cn: String,
+    us: String,
   },
   data () {
     const { lang } = this.$route.params
     let text = ''
-    const md = this.md
+    const { cn, us } = this
     if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].text) {
       text = this.$slots.default[0].text
     } else {
-      text = typeof md === 'string' ? md : (md[lang] || md.us)
+      text = lang === 'cn' ? cn : us
     }
     text = text || ''
     text = text.split('\n').map(t => t.trim()).join('\n')

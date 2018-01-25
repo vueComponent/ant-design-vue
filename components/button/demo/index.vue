@@ -25,7 +25,7 @@ export default {
     }
     return (
       <div>
-        <md md={md}/>
+        <md {...md}/>
         <Basic />
         <ButtonGroup />
         <Disabled />
@@ -39,9 +39,7 @@ export default {
           <template slot='cn'>
             <CN/>
           </template>
-          <template slot='us'>
-            <US/>
-          </template>
+          <US/>
         </api>
       </div>
     )

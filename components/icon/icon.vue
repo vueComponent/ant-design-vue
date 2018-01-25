@@ -1,6 +1,3 @@
-<template>
-  <i :title="title" :class="classes" @click="handleClick"></i>
-</template>
 <script>
 export default {
   name: 'Icon',
@@ -37,6 +34,12 @@ export default {
       this.timeout = setTimeout(() => (this.clicked = false), 500)
       this.$emit('click', event)
     },
+  },
+  render () {
+    const { title, classes, handleClick } = this
+    return (
+      <i title={title} class={classes} onClick={handleClick} />
+    )
   },
   beforeDestroy () {
     if (this.timeout) {

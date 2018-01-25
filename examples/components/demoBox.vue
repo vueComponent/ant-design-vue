@@ -1,38 +1,80 @@
 <template>
-  <div class="box box-demo">
-    <slot name="component"></slot>
-    <div class="box-demo-description">
+  <section :class="['code-box', isOpen ? 'expand': '']">
+    <section class="code-box-demo">
+      <slot name="component"></slot>
+    </section>
+    <section class="code-box-meta markdown">
       <slot v-if="lang === 'cn'" name="description"></slot>
       <slot v-else name="us-description"></slot>
       <span class="btn-toggle" :class="{open: isOpen}" @click="toggle"><i class="anticon anticon-down-circle-o"></i></span>
-    </div>
+    </section>
     <transition appear :css="false" @enter="enter" @leave="leave">
-      <div class="box-demo-code" v-show="isOpen">
+      <section class="highlight-wrapper" style="position: relative;" v-show="isOpen">
+        <a-tooltip
+          :title="copied ? '复制成功' : '复制代码'"
+          :visible="copyTooltipVisible"
+          @change="onCopyTooltipVisibleChange"
+        >
+          <a-icon
+            :type="copied && copyTooltipVisible ? 'check' : 'copy'"
+            class="code-box-code-copy"
+            v-clipboard:copy="sourceCode"
+            v-clipboard:success="handleCodeCopied"
+          />
+        </a-tooltip>
         <slot name="code"></slot>
-      </div>
+      </section>
     </transition>
-  </div>
+  </section>
 </template>
 <script>
 import animate from 'antd/_util/openAnimation'
+import BaseMixin from 'antd/_util/BaseMixin'
 export default {
+  mixins: [BaseMixin],
   name: 'demoBox',
   props: {
     jsfiddle: Object,
   },
   data () {
     const { lang } = this.$route.params
+    const { html, script, style } = this.jsfiddle
+    let sourceCode = `<template>${html}</template>\n`
+    sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode
+    sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
     return {
       isOpen: false,
       lang,
+      copied: false,
+      copyTooltipVisible: false,
+      sourceCode,
     }
   },
   methods: {
+    test () {
+      console.log(122)
+    },
     toggle () {
       this.isOpen = !this.isOpen
     },
     enter: animate.enter,
     leave: animate.leave,
+    handleCodeCopied () {
+      this.setState({ copied: true })
+    },
+
+    onCopyTooltipVisibleChange (visible) {
+      if (visible) {
+        this.setState({
+          copyTooltipVisible: visible,
+          copied: false,
+        })
+        return
+      }
+      this.setState({
+        copyTooltipVisible: visible,
+      })
+    },
   },
 }
 </script>

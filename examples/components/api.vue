@@ -1,7 +1,7 @@
 <template>
-  <div class='markdown'>
-    <slot v-if="lang === 'cn'" name="cn"></slot>
-    <slot v-else name="us"></slot>
+  <div class='markdown api-container'>
+    <slot v-if="lang === 'cn'" name="cn" class='markdown api-container'></slot>
+    <slot v-else></slot>
   </div>
 </template>
 <script>

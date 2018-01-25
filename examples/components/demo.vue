@@ -17,7 +17,7 @@ export default {
             <router-link to={{ path: `/components/${lang}/${d}` }}>{d}</router-link>
           </MenuItem>)}
         </Menu>
-        <div class='content'>
+        <div class='content main-container'>
           {Demo ? <Demo /> : '正在紧急开发中...'}
         </div>
 

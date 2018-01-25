@@ -139,8 +139,7 @@
 
       let head
       const tabs = tabList && tabList.length ? (
-        // size='large' Tabs组件暂时未支持
-        <Tabs class={`${prefixCls}-head-tabs`} onChange={this.onHandleTabChange}>
+        <Tabs class={`${prefixCls}-head-tabs`} size='large' onChange={this.onHandleTabChange}>
           {tabList.map(item => <TabPane tab={item.tab} key={item.key} />)}
         </Tabs>
       ) : null
@@ -169,7 +168,7 @@
       const actions = getComponentFromProp(this, 'actions')
       const actionDom = actions || null
       const divProps = omit(others, [
-        'onTabChange',
+        'tabChange',
       ])
       return (
         <div {...divProps} class={classString} ref='cardContainerRef'>

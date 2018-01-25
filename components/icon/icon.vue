@@ -29,6 +29,7 @@ export default {
       if (this.clicked) {
         return
       }
+
       this.clicked = true
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => (this.clicked = false), 500)
@@ -36,9 +37,19 @@ export default {
     },
   },
   render () {
-    const { title, classes, handleClick } = this
+    const { title, classes, handleClick, $listeners } = this
+    const iconProps = {
+      attrs: {
+        title,
+      },
+      class: classes,
+      on: {
+        ...$listeners,
+        click: handleClick,
+      },
+    }
     return (
-      <i title={title} class={classes} onClick={handleClick} />
+      <i {...iconProps}/>
     )
   },
   beforeDestroy () {

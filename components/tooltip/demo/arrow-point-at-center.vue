@@ -4,21 +4,11 @@
 ## 箭头指向
 设置了 `arrowPointAtCenter` 后，箭头将指向目标元素的中心。
 </md>
-  <Tooltip placement="topLeft" title="Prompt Text">
+  <a-tooltip placement="topLeft" title="Prompt Text">
     <a-button>Align edge / 边缘对齐</a-button>
-  </Tooltip>
-  <Tooltip placement="topLeft" title="Prompt Text" arrowPointAtCenter>
+  </a-tooltip>
+  <a-tooltip placement="topLeft" title="Prompt Text" arrowPointAtCenter>
     <a-button>Arrow points to center / 箭头指向中心</a-button>
-  </Tooltip>
+  </a-tooltip>
 </div>
 </template>
-
-<script>
-import { Tooltip, Button } from 'antd'
-export default {
-  components: {
-    Tooltip,
-
-  },
-}
-</script>

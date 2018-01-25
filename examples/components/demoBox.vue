@@ -21,7 +21,6 @@ export default {
     jsfiddle: Object,
   },
   data () {
-    console.log(this.jsfiddle.html)
     const { lang } = this.$route.params
     return {
       isOpen: false,

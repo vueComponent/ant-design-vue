@@ -1,5 +1,4 @@
 const path = require('path')
-const slugify = require('transliteration').slugify
 const hljs = require('highlight.js')
 const Token = require('markdown-it/lib/token')
 const cheerio = require('cheerio')
@@ -35,15 +34,6 @@ const renderHighlight = function (str, lang) {
     return replaceDelimiters(hljs.highlight(lang, str, true).value)
   } catch (err) {}
 }
-
-function wrap (render) {
-  return function (tokens) {
-    return render.apply(this, arguments)
-      .replace('<code class="', '<code class="hljs ')
-      .replace('<code>', '<code class="hljs">')
-      .replace('<pre>', '<pre class="code-section">')
-  }
-};
 
 const md = require('markdown-it')('default', {
   html: true,

@@ -51,9 +51,6 @@ export default {
     }
   },
   methods: {
-    test () {
-      console.log(122)
-    },
     toggle () {
       this.isOpen = !this.isOpen
     },

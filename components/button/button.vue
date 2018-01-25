@@ -73,7 +73,7 @@ export default {
     },
   },
   render () {
-    const { htmlType, classes, disabled, handleClick, iconType, $slots, $attrs, _events } = this
+    const { htmlType, classes, disabled, handleClick, iconType, $slots, $attrs, $listeners } = this
     const buttonProps = {
       props: {
       },
@@ -84,13 +84,9 @@ export default {
       },
       class: classes,
       on: {
+        ...$listeners,
         click: handleClick,
       },
-    }
-    for (const [k, event] of Object.entries(_events)) {
-      if (!buttonProps.on[k]) {
-        buttonProps.on[k] = event
-      }
     }
     const needInserted = $slots.default && $slots.default.length === 1 && (!iconType || iconType === 'loading')
     const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], needInserted) : $slots.default

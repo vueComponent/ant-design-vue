@@ -1,11 +1,11 @@
 const path = require('path')
 const slugify = require('transliteration').slugify
 const hljs = require('highlight.js')
-
+const Token = require('markdown-it/lib/token')
 const cheerio = require('cheerio')
 
 const fetch = (str, tag) => {
-  const $ = cheerio.load(str, { decodeEntities: false })
+  const $ = cheerio.load(str, { decodeEntities: false, xmlMode: true })
   if (!tag) return str
 
   return $(tag).html()
@@ -37,7 +37,7 @@ const renderHighlight = function (str, lang) {
 }
 
 function wrap (render) {
-  return function () {
+  return function (tokens) {
     return render.apply(this, arguments)
       .replace('<code class="', '<code class="hljs ')
       .replace('<code>', '<code class="hljs">')
@@ -55,50 +55,69 @@ md.use(require('markdown-it-anchor'), {
   slugify: slugify,
   permalink: true,
   permalinkBefore: true,
-}).use(require('markdown-it-container'), 'demo', {
-
-  validate: function (params) {
-    return params.trim().match(/^demo\s*(.*)$/)
-  },
-  render: function (tokens, idx) {
-    if (tokens[idx].nesting === 1) {
-      const summaryContent = tokens[idx + 1].content
-      const summary = fetch(summaryContent, 'summary')
-      const summaryHTML = summary ? md.render(summary) : ''
-
-      const content = tokens[idx + 2].content
-      const html = fetch(content, 'template')
-      const script = fetch(content, 'script') || ''
-      const style = fetch(content, 'style') || ''
-      const code = tokens[idx + 2].markup + tokens[idx + 2].info + '\n' + content + tokens[idx + 2].markup
-      const codeHtml = code ? md.render(code) : ''
-
-      let jsfiddle = { html: html, script: script, style: style }
-      jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle))
-      // opening tag
-      return `<template>
-                <demo-box :jsfiddle="${jsfiddle}">
-                  <div class="box-demo-show" slot="component">${html}</div>
-                  <template slot="description">${summaryHTML}</template>
-                  <div class="highlight" slot="code">${codeHtml}</div>
-                </demo-box>
-              </template>
-              <script>
-              ${script}
-              </script>
-              <style>
-              ${style}
-              </style>
-              `
-    } else {
-      return '\n'
-    }
-  },
 })
 md.renderer.rules.table_open = function () {
   return '<table class="table">'
 }
 md.renderer.rules.fence = wrap(md.renderer.rules.fence)
+const cnReg = new RegExp('<(cn)(?:[^<]|<)+</\\1>', 'g')
+const usReg = new RegExp('<(us)(?:[^<]|<)+</\\1>', 'g')
+md.core.ruler.push('update_template', function replace ({ tokens }) {
+  let cn = ''
+  let us = ''
+  let template = ''
+  let script = ''
+  let style = ''
+  let code = ''
+  tokens.forEach(token => {
+    if (token.type === 'html_block') {
+      if (token.content.match(cnReg)) {
+        cn = fetch(token.content, 'cn')
+        token.content = ''
+      }
+      if (token.content.match(usReg)) {
+        us = fetch(token.content, 'us')
+        token.content = ''
+      }
+    }
+    if (token.type === 'fence' && token.info === 'html' && token.markup === '```') {
+      code = '````html\n' + token.content + '````'
+      template = fetch(token.content, 'template')
+      script = fetch(token.content, 'script')
+      style = fetch(token.content, 'style')
+      token.content = ''
+      token.type = 'html_block'
+    }
+  })
+  if (template) {
+    let jsfiddle = {
+      html: template,
+      script,
+      style,
+    }
+    jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle))
+    const codeHtml = code ? md.render(code) : ''
+    const cnHtml = cn ? md.render(cn) : ''
+    const newContent = `
+      <template>
+        <demo-box :jsfiddle="${jsfiddle}">
+          <div class="box-demo-show" slot="component">${template}</div>
+          <template slot="description">${cnHtml}</template>
+          <template slot="us-description">${us ? md.render(us) : ''}</template>
+          <div class="highlight" slot="code">${codeHtml}</div>
+        </demo-box>
+      </template>
+      <script>
+      ${script || ''}
+      </script>
+      <style>
+      ${style || ''}
+      </style>`
+    const t = new Token('html_block', '', 0)
+    t.content = newContent
+    tokens.push(t)
+  }
+})
 
 module.exports = {
   entry: {
@@ -112,8 +131,8 @@ module.exports = {
         test: /\.md/,
         use: [
           {
-            loader: 'vue-markdown-loader',
-            options: Object.assign(md, { wrapper: 'section', preventExtract: true }),
+            loader: 'vue-antd-md-loader',
+            options: md,
           },
         ],
       },
@@ -135,7 +154,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue', '.md'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'antd': path.join(__dirname, 'components'),

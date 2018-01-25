@@ -1,6 +1,6 @@
 <template>
   <div class='markdown api-container'>
-    <slot v-if="lang === 'cn'" name="cn" class='markdown api-container'></slot>
+    <slot v-if="lang === 'cn'" name="cn"></slot>
     <slot v-else></slot>
   </div>
 </template>

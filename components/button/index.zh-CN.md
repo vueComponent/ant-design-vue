@@ -19,5 +19,5 @@
 | --- | --- | --- |
 | click | `click` 事件的 handler  | function(e) |
 
-`<Button>Hello world!</Button>` 最终会被渲染为 `<button><span>Hello world!</span></button>`，并且除了上表中的属性，其它属性都会直接传到 `<button></button>`。
+`<a-button>Hello world!</a-button>` 最终会被渲染为 `<button><span>Hello world!</span></button>`，并且除了上表中的属性，其它属性都会直接传到 `<button></button>`。
 

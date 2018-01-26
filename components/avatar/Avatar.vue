@@ -1,5 +1,5 @@
 <template>
-  <span :class="classes" :style="styles">
+  <span :class="classes">
     <img v-if="src" :src="src"/>
     <icon v-else-if="icon" :type="icon" />
     <span
@@ -28,10 +28,6 @@ export default {
     size: {
       validator: (val) => (['small', 'large', 'default'].includes(val)),
       default: 'default',
-    },
-    styles: {
-      type: Object,
-      default: () => ({}),
     },
     src: String,
     icon: String,

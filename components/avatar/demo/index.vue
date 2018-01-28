@@ -41,6 +41,8 @@ export default {
         <br/>
         <Type/>
         <br/>
+        <Dynamic/>
+        <br/>
         <api>
           <template slot='cn'>
             <CN/>

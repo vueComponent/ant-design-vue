@@ -41,6 +41,15 @@ export { default as Popover } from './popover'
 
 export { default as Popconfirm } from './popconfirm'
 
-export { default as Menu } from './menu'
+import Menu from './menu'
+const MenuItem = Menu.Item
+const SubMenu = Menu.SubMenu
+const MenuDivider = Menu.Divider
+const MenuItemGroup = Menu.ItemGroup
+export { Menu, MenuItem, SubMenu, MenuDivider, MenuItemGroup }
 
 export { default as Card } from './card'
+
+import Dropdown from './dropdown'
+const DropdownButton = Dropdown.Button
+export { Dropdown, DropdownButton }

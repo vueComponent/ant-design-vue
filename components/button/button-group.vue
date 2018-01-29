@@ -1,18 +1,20 @@
 <script>
 import { filterEmpty } from '../_util/vnode'
-export default {
-  name: 'ButtonGroup',
-  props: {
-    prefixCls: {
-      default: 'ant-btn-group',
-      type: String,
-    },
-    size: {
-      validator (value) {
-        return ['small', 'large', 'default'].includes(value)
-      },
+const ButtonGroupProps = {
+  prefixCls: {
+    default: 'ant-btn-group',
+    type: String,
+  },
+  size: {
+    validator (value) {
+      return ['small', 'large', 'default'].includes(value)
     },
   },
+}
+export { ButtonGroupProps }
+export default {
+  name: 'ButtonGroup',
+  props: ButtonGroupProps,
   data () {
     return {
       sizeMap: {

@@ -1,7 +1,7 @@
 import Demo from './components/demo.vue'
 const AsyncComp = () => {
   return {
-    component: import(`../components/avatar/demo/index.vue`),
+    component: import(`../components/dropdown/demo/sub-menu.md`),
   }
 }
 export default [

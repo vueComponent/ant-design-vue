@@ -9,6 +9,12 @@ For letter type Avatar, when the letters are too long to display, the font size 
 </us>
 
 ```html
+<template>
+  <div>
+    <a-avatar shape="square" size="large" :style="{'backgroundColor': color}">{{avatarValue}}</a-avatar>
+    <a-button @click="changeValue">改变</a-button>
+  </div>
+</template>
 <script>
   const UserList = ['U', 'Lucy', 'Tom', 'Edward']
   const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae']
@@ -28,10 +34,4 @@ For letter type Avatar, when the letters are too long to display, the font size 
     },
   }
 </script>
-<template>
-  <div>
-    <a-avatar shape="square" size="large" :style="{'backgroundColor': color}">{{avatarValue}}</a-avatar>
-    <a-button @click="changeValue">改变</a-button>
-  </div>
-</template>
 ```

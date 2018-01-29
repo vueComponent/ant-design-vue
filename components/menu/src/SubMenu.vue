@@ -38,7 +38,7 @@ export default {
     forceSubMenuRender: PropTypes.bool,
     openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     disabled: PropTypes.bool,
-    subMenuOpenDelay: PropTypes.number.def(0),
+    subMenuOpenDelay: PropTypes.number.def(0.1),
     subMenuCloseDelay: PropTypes.number.def(0.1),
     level: PropTypes.number.def(1),
     inlineIndent: PropTypes.number.def(24),

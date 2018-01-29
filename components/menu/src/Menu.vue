@@ -33,14 +33,16 @@ const Menu = {
   watch: {
     '$props': {
       handler: function (nextProps) {
-        const props = {}
         if (hasProp(this, 'selectedKeys')) {
-          props.sSelectedKeys = nextProps.selectedKeys || []
+          this.setState({
+            sSelectedKeys: nextProps.selectedKeys || [],
+          })
         }
         if (hasProp(this, 'openKeys')) {
-          props.sOpenKeys = nextProps.openKeys || []
+          this.setState({
+            sOpenKeys: nextProps.openKeys || [],
+          })
         }
-        this.setState(props)
       },
       deep: true,
     },

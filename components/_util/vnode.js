@@ -45,7 +45,14 @@ export function cloneVNodes (vnodes, deep) {
 }
 
 export function cloneElement (n, nodeProps, clone) {
-  const node = clone ? cloneVNode(n, true) : n
+  let ele = n
+  if (Array.isArray(n)) {
+    ele = filterEmpty(n)[0]
+  }
+  if (!ele) {
+    return null
+  }
+  const node = clone ? cloneVNode(ele, true) : ele
   const { props = {}, key, on = {}} = nodeProps
   const data = node.data || {}
   const { style = data.style,
@@ -95,6 +102,10 @@ export function filterEmpty (children = []) {
   return children.filter(c => c.tag || c.text.trim() !== '')
 }
 
+export function getPropsData (ele) {
+  return ele.componentOptions && ele.componentOptions.propsData
+}
+
 export function getEvents (child) {
   let events = {}
   if (child.componentOptions && child.componentOptions.listeners) {
@@ -102,5 +113,5 @@ export function getEvents (child) {
   } else if (child.data && child.data.on) {
     events = child.data.on
   }
-  return events
+  return { ...events }
 }

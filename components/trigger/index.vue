@@ -18,7 +18,7 @@ function returnDocument () {
   return window.document
 }
 const ALL_HANDLERS = ['click', 'mousedown', 'touchStart', 'mouseenter',
-  'mouseleave', 'focus', 'blur', 'contextMenu']
+  'mouseleave', 'focus', 'blur', 'contextmenu']
 
 export default {
   name: 'Trigger',
@@ -124,7 +124,7 @@ export default {
       // https://github.com/react-component/trigger/issues/50
       if (state.sPopupVisible) {
         let currentDocument
-        if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextMenuToShow())) {
+        if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextmenuToShow())) {
           currentDocument = props.getDocument()
           this.clickOutsideHandler = addEventListener(currentDocument,
             'mousedown', this.onDocumentClick)
@@ -135,16 +135,16 @@ export default {
           this.touchOutsideHandler = addEventListener(currentDocument,
             'touchstart', this.onDocumentClick)
         }
-        // close popup when trigger type contains 'onContextMenu' and document is scrolling.
-        if (!this.contextMenuOutsideHandler1 && this.isContextMenuToShow()) {
+        // close popup when trigger type contains 'onContextmenu' and document is scrolling.
+        if (!this.contextmenuOutsideHandler1 && this.isContextmenuToShow()) {
           currentDocument = currentDocument || props.getDocument()
-          this.contextMenuOutsideHandler1 = addEventListener(currentDocument,
-            'scroll', this.onContextMenuClose)
+          this.contextmenuOutsideHandler1 = addEventListener(currentDocument,
+            'scroll', this.onContextmenuClose)
         }
-        // close popup when trigger type contains 'onContextMenu' and window is blur.
-        if (!this.contextMenuOutsideHandler2 && this.isContextMenuToShow()) {
-          this.contextMenuOutsideHandler2 = addEventListener(window,
-            'blur', this.onContextMenuClose)
+        // close popup when trigger type contains 'onContextmenu' and window is blur.
+        if (!this.contextmenuOutsideHandler2 && this.isContextmenuToShow()) {
+          this.contextmenuOutsideHandler2 = addEventListener(window,
+            'blur', this.onContextmenuClose)
         }
         return
       }
@@ -203,14 +203,14 @@ export default {
       }
     },
 
-    onContextMenu (e) {
+    onContextmenu (e) {
       e.preventDefault()
-      this.fireEvents('contextMenu', e)
+      this.fireEvents('contextmenu', e)
       this.setPopupVisible(true)
     },
 
-    onContextMenuClose () {
-      if (this.isContextMenuToShow()) {
+    onContextmenuClose () {
+      if (this.isContextmenuToShow()) {
         this.close()
       }
     },
@@ -401,14 +401,14 @@ export default {
         this.clickOutsideHandler = null
       }
 
-      if (this.contextMenuOutsideHandler1) {
-        this.contextMenuOutsideHandler1.remove()
-        this.contextMenuOutsideHandler1 = null
+      if (this.contextmenuOutsideHandler1) {
+        this.contextmenuOutsideHandler1.remove()
+        this.contextmenuOutsideHandler1 = null
       }
 
-      if (this.contextMenuOutsideHandler2) {
-        this.contextMenuOutsideHandler2.remove()
-        this.contextMenuOutsideHandler2 = null
+      if (this.contextmenuOutsideHandler2) {
+        this.contextmenuOutsideHandler2.remove()
+        this.contextmenuOutsideHandler2 = null
       }
 
       if (this.touchOutsideHandler) {
@@ -433,9 +433,9 @@ export default {
       return action.indexOf('click') !== -1 || showAction.indexOf('click') !== -1
     },
 
-    isContextMenuToShow () {
+    isContextmenuToShow () {
       const { action, showAction } = this.$props
-      return action.indexOf('contextMenu') !== -1 || showAction.indexOf('contextMenu') !== -1
+      return action.indexOf('contextmenu') !== -1 || showAction.indexOf('contextmenu') !== -1
     },
 
     isClickToHide () {
@@ -485,20 +485,20 @@ export default {
     }
     const child = children[0]
     const events = getEvents(child)
-    // 黑科技，vue暂未发现保留原事件的方法，使用_ANT_EVENT_HACK来判断事件是否更新
-    if (!events._ANT_EVENT_HACK) {
+    // 黑科技，vue暂未发现保留原事件的方法，使用_ANT_TRIGGER_EVENT_HACK来判断事件是否更新
+    if (!events._ANT_TRIGGER_EVENT_HACK) {
       this.childOriginEvents = events
     }
     const newChildProps = {
       props: {},
-      on: { _ANT_EVENT_HACK: () => {} },
+      on: { _ANT_TRIGGER_EVENT_HACK: () => {} },
       key: 'trigger',
     }
 
-    if (this.isContextMenuToShow()) {
-      newChildProps.on.contextMenu = this.onContextMenu
+    if (this.isContextmenuToShow()) {
+      newChildProps.on.contextmenu = this.onContextmenu
     } else {
-      newChildProps.on.contextMenu = this.createTwoChains('contextMenu')
+      newChildProps.on.contextmenu = this.createTwoChains('contextmenu')
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {

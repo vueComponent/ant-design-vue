@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Divider',
+  name: 'MenuDivider',
   props: {
     disabled: {
       type: Boolean,

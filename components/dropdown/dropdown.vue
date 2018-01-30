@@ -47,6 +47,7 @@ const Dropdown = {
       props: {
         mode: 'vertical',
         selectable,
+        isRootMenu: false,
       },
     })
     const dropdownProps = {

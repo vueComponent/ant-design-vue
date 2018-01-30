@@ -24,7 +24,7 @@ const Menu = {
       sOpenKeys = props.openKeys || []
     }
 
-    this.isRootMenu = true
+    // this.isRootMenu = true
     return {
       sSelectedKeys,
       sOpenKeys,
@@ -177,7 +177,7 @@ const Menu = {
         openKeys: state.sOpenKeys,
         selectedKeys: state.sSelectedKeys,
         triggerSubMenuAction: this.$props.triggerSubMenuAction,
-        isRootMenu: true,
+        isRootMenu: this.isRootMenu,
       }
       return this.renderCommonMenuItem(c, i, subIndex, extraProps)
     },

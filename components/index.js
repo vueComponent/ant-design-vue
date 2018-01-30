@@ -53,3 +53,5 @@ export { default as Card } from './card'
 import Dropdown from './dropdown'
 const DropdownButton = Dropdown.Button
 export { Dropdown, DropdownButton }
+
+export { default as Divider } from './divider'

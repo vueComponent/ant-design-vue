@@ -15,6 +15,8 @@ The menu has multiple levels.
       Cascading menu <a-icon type="down" />
     </a>
     <a-menu slot="overlay">
+      <a-menu-item>1st menu item</a-menu-item>
+      <a-menu-item>2nd menu item</a-menu-item>
       <a-sub-menu title="sub menu" key="test">
         <a-menu-item>3rd menu item</a-menu-item>
         <a-menu-item>4th menu item</a-menu-item>

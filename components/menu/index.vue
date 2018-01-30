@@ -27,9 +27,11 @@ export const menuProps = {
   multiple: PropTypes.bool,
   inlineIndent: PropTypes.number.def(24),
   inlineCollapsed: PropTypes.bool,
+  isRootMenu: PropTypes.bool.def(true),
 }
 
 export default {
+  name: 'Menu',
   props: menuProps,
   Divider,
   Item,

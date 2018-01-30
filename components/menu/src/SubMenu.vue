@@ -461,7 +461,7 @@ export default {
     if (typeof openAnimation === 'object' && openAnimation.on) {
       transitionProps.on = { ...openAnimation.on }
     }
-    const children = isInlineMode ? this.renderChildren(this.$slots.default, true) : this.renderChildren(this.$slots.default)
+    const children = this.renderChildren(this.$slots.default, isInlineMode)
     return (
       <li {...liProps}>
         {isInlineMode && title}

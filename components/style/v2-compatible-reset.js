@@ -1,1 +1,1 @@
-import './v2-compatible-reset.less';
+import './v2-compatible-reset.less'

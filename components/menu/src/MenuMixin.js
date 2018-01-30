@@ -135,7 +135,7 @@ export default {
 
     renderCommonMenuItem (child, i, subIndex, extraProps) {
       if (child.tag === undefined) { return child }
-      warning(['MenuItem', 'MenuItemGroup', 'SubMenu'].includes(getComponentName(child.componentOptions)),
+      warning(['MenuItem', 'MenuItemGroup', 'SubMenu', 'MenuDivider'].includes(getComponentName(child.componentOptions)),
         `Menu children not support ${getComponentName(child.componentOptions)}`,
       )
       const state = this.$data

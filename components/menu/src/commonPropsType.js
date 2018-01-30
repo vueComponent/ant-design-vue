@@ -22,5 +22,5 @@ export default {
   openTransitionName: PropTypes.string,
   forceSubMenuRender: PropTypes.bool,
   selectable: PropTypes.bool,
-  isRootMenu: PropTypes.bool,
+  isRootMenu: PropTypes.bool.def(true),
 }

@@ -5,6 +5,7 @@ import Tooltip from '../tooltip'
 function noop () {}
 export default {
   props: itemProps,
+  name: 'MenuItem',
   inject: {
     getInlineCollapsed: { default: () => noop },
   },

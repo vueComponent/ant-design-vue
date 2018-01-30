@@ -30,7 +30,6 @@ export default {
     }
   },
   mounted () {
-    this.rootNode = this.getPopupDomNode()
     this._container = this.getContainer()
     this._container.appendChild(this.$el)
 
@@ -41,20 +40,20 @@ export default {
   beforeDestroy () {
     this.$el.remove()
   },
+  beforeUpdate () {
+    const newContainer = this.getContainer()
+    if (newContainer !== this._container) {
+      this._container = newContainer
+      this._container.appendChild(this.$el)
+      this.$refs.alignInstance.forceAlign()
+    }
+  },
   watch: {
     visible (val) {
       if (val) {
         this.destroyPopup = false
       }
     },
-    // initAlign (val) {
-    //   if (val) {
-    //     this.$nextTick(() => {
-    //       // console.log(this.$refs.alignInstance.$el)
-    //       // this.$refs.alignInstance.forceAlign()
-    //     })
-    //   }
-    // },
   },
   methods: {
     onAlign (popupDomNode, align) {

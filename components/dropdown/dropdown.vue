@@ -1,5 +1,5 @@
 <script>
-import RcDropdown from './src/dropdown'
+import RcDropdown from './src/index'
 import DropdownButton from './dropdown-button'
 // import warning from '../_util/warning'
 import PropTypes from '../_util/vue-types'
@@ -73,5 +73,6 @@ const Dropdown = {
 
 Dropdown.Button = DropdownButton
 export default Dropdown
+export { DropdownProps }
 
 </script>

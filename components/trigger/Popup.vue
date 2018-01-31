@@ -32,10 +32,7 @@ export default {
   mounted () {
     this._container = this.getContainer()
     this._container.appendChild(this.$el)
-
-    this.$nextTick(() => {
-      this.initAlign = true
-    })
+    this.initAlign = true
   },
   beforeDestroy () {
     this.$el.remove()

@@ -8,15 +8,17 @@ import { hasProp, getComponentFromProp } from '../_util/props-util'
 import getDropdownProps from './getDropdownProps'
 const DropdownProps = getDropdownProps()
 const ButtonGroup = Button.Group
+const DropdownButtonProps = {
+  ...ButtonGroupProps,
+  ...DropdownProps,
+  type: PropTypes.oneOf(['primary', 'ghost', 'dashed', 'default']).def('default'),
+  disabled: PropTypes.bool,
+  prefixCls: PropTypes.string.def('ant-dropdown-button'),
+  placement: DropdownProps.placement.def('bottomRight'),
+}
+export { DropdownButtonProps }
 export default {
-  props: {
-    ...ButtonGroupProps,
-    ...DropdownProps,
-    type: PropTypes.oneOf(['primary', 'ghost', 'dashed', 'default']).def('default'),
-    disabled: PropTypes.bool,
-    prefixCls: PropTypes.string.def('ant-dropdown-button'),
-    placement: DropdownProps.placement.def('bottomRight'),
-  },
+  props: DropdownButtonProps,
   methods: {
     onClick (e) {
       this.$emit('click', e)

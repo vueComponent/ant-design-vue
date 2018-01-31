@@ -369,7 +369,6 @@ export default {
           this.setState({
             sPopupVisible,
           })
-          this.$forceUpdate()
         }
         this.$listeners.popupVisibleChange && this.$listeners.popupVisibleChange(sPopupVisible)
       }

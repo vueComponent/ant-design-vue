@@ -55,3 +55,7 @@ const DropdownButton = Dropdown.Button
 export { Dropdown, DropdownButton }
 
 export { default as Divider } from './divider'
+
+import Collapse from './collapse'
+const CollapsePanel = Collapse.Panel
+export { Collapse, CollapsePanel }

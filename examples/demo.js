@@ -18,4 +18,5 @@ export { default as tag } from 'antd/tag/demo/index.vue'
 export { default as tooltip } from 'antd/tooltip/demo/index.vue'
 export { default as dropdown } from 'antd/dropdown/demo/index.vue'
 export { default as divider } from 'antd/divider/demo/index.vue'
+export { default as collapse } from 'antd/collapse/demo/index.vue'
 

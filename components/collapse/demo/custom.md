@@ -26,12 +26,12 @@ Customize the background, border and margin styles for each panel.
 </template>
 <script>
   export default {
-  data () {
-    return {
-      text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-      customStyle: 'background: #f7f7f7;border-radius: 4px;margin-bottom: 24px;border: 0;overflow: hidden'
-    }
-  },
-}
+    data () {
+      return {
+        text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
+        customStyle: 'background: #f7f7f7;border-radius: 4px;margin-bottom: 24px;border: 0;overflow: hidden'
+      }
+    },
+  }
 </script>
 ```

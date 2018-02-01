@@ -26,11 +26,11 @@ Accordion mode, only one panel can be expanded at a time. The first panel will b
 </template>
 <script>
   export default {
-  data () {
-    return {
-      text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-    }
-  },
-}
+    data () {
+      return {
+        text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
+      }
+    },
+  }
 </script>
 ```

@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 
 const collapseProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: PropTypes.string.def('ant-collapse'),
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
@@ -16,7 +16,7 @@ const collapseProps = {
 
 const panelProps = {
   openAnimation: PropTypes.object,
-  prefixCls: PropTypes.string,
+  prefixCls: PropTypes.string.def('ant-collapse'),
   header: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

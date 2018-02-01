@@ -26,17 +26,17 @@ More than one panel can be expanded at a time, the first panel is initialized to
 </template>
 <script>
   export default {
-  data () {
-    return {
-      text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-      value: ['1']
-    }
-  },
-  methods: {
-    changeActivekey (key) {
-      console.log(key)
+    data () {
+      return {
+        text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
+        value: ['1']
+      }
     },
-  },
-}
+    methods: {
+      changeActivekey (key) {
+        console.log(key)
+      },
+    },
+  }
 </script>
 ```

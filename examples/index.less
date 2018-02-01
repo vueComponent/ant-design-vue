@@ -1,10 +1,24 @@
 @import './theme/static/index.less';
+#app {
+  height: 100%;
+}
 .site {
   display: flex;
+  flex-direction: column;
+  height: 100%;
   .nav {
     width: 200px;
+    overflow-y: scroll;
   }
   .content {
+    flex: 1;
+    overflow-y: scroll;
+  }
+  #header {
+    padding: 0 50px;
+  }
+  .main-wrapper {
+    display: flex;
     flex: 1;
   }
 }

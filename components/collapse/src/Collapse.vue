@@ -17,15 +17,19 @@ function _toArray (activeKey) {
 export default {
   name: 'Collapse',
   mixins: [BaseMixin],
+  model: {
+    prop: 'activeKey',
+    event: 'change',
+  },
   props: {
     ...collapseProps,
     openAnimation: PropTypes.object,
   },
   data () {
-    const { value, defaultValue, openAnimation, prefixCls } = this.$props
-    let currentActiveKey = defaultValue
-    if (hasProp(this, 'value')) {
-      currentActiveKey = value
+    const { activeKey, defaultActiveKey, openAnimation, prefixCls } = this.$props
+    let currentActiveKey = defaultActiveKey
+    if (hasProp(this, 'activeKey')) {
+      currentActiveKey = activeKey
     }
     const currentOpenAnimations = openAnimation || openAnimationFactory(prefixCls)
     return {
@@ -57,18 +61,19 @@ export default {
       const newChildren = []
       this.$slots.default.forEach((child, index) => {
         if (isEmptyElement(child)) return
-        const { header, headerClass, disabled, name = String(index) } = getPropsData(child)
+        const { header, headerClass, disabled } = getPropsData(child)
         let isActive = false
+        const key = child.key || String(index)
         if (accordion) {
-          isActive = activeKey[0] === name
+          isActive = activeKey[0] === key
         } else {
-          isActive = activeKey.indexOf(name) > -1
+          isActive = activeKey.indexOf(key) > -1
         }
 
         let panelEvents = {}
         if (!disabled && disabled !== '') {
           panelEvents = {
-            itemClick: () => { this.onClickItem(name) },
+            itemClick: () => { this.onClickItem(key) },
           }
         }
 
@@ -93,11 +98,10 @@ export default {
     setActiveKey (activeKey) {
       this.setState({ stateActiveKey: activeKey })
       this.$emit('change', this.accordion ? activeKey[0] : activeKey)
-      this.$emit('input', this.accordion ? activeKey[0] : activeKey)
     },
   },
   watch: {
-    value (val) {
+    activeKey (val) {
       this.setState({
         stateActiveKey: _toArray(val),
       })

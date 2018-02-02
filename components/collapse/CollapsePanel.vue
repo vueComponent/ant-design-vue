@@ -21,7 +21,18 @@ export default {
       class: collapsePanelClassName,
       on: $listeners,
     }
-    return <RcCollapse.Panel {...rcCollapePanelProps} >{this.$slots.default}</RcCollapse.Panel>
+    const { default: defaultSlots, header } = this.$slots
+    return (
+      <RcCollapse.Panel {...rcCollapePanelProps} >
+        {defaultSlots}
+        {header ? (
+          <template slot='header'>
+            {header}
+          </template>
+        ) : null}
+
+      </RcCollapse.Panel>
+    )
   },
 }
 </script>

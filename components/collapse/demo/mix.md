@@ -12,17 +12,17 @@
 <template>
   <div>
     <a-collapse @change="changeActivekey">
-      <a-collapse-panel header="This is panel header 1" name="1">
-        <a-collapse :defaultValue="'1'">
-          <a-collapse-panel header="This is panel nest panel" name="1">
+      <a-collapse-panel header="This is panel header 1" key="1">
+        <a-collapse defaultActiveKey="4">
+          <a-collapse-panel header="This is panel nest panel" key="4">
             <p>{{text}}</p>
           </a-collapse-panel>
         </a-collapse>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 2" name="2" :disabled='false'>
+      <a-collapse-panel header="This is panel header 2" key="2" :disabled='false'>
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 3" name="3">
+      <a-collapse-panel header="This is panel header 3" key="3">
         <p>{{text}}</p>
       </a-collapse-panel>
     </a-collapse>

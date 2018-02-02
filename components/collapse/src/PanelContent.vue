@@ -8,8 +8,14 @@ export default {
     isActive: PropTypes.bool,
     destroyInactivePanel: PropTypes.bool,
   },
+  data () {
+    return {
+      _isActive: undefined,
+    }
+  },
   render () {
-    if (!this.isActive) {
+    this._isActive = this._isActive || this.isActive
+    if (!this._isActive) {
       return null
     }
     const { prefixCls, isActive, destroyInactivePanel } = this.$props

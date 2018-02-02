@@ -2,11 +2,11 @@ import PropTypes from '../../_util/vue-types'
 
 const collapseProps = {
   prefixCls: PropTypes.string.def('ant-collapse'),
-  value: PropTypes.oneOfType([
+  activeKey: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
-  defaultValue: PropTypes.oneOfType([
+  defaultActiveKey: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),

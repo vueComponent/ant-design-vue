@@ -11,14 +11,14 @@ Customize the background, border and margin styles for each panel.
 ```html
 <template>
   <div>
-    <a-collapse :defaultValue="'1'" :bordered="false">
-      <a-collapse-panel header="This is panel header 1" name="1" :style="customStyle">
+    <a-collapse defaultActiveKey="1" :bordered="false">
+      <a-collapse-panel header="This is panel header 1" key="1" :style="customStyle">
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 2" name="2" :style="customStyle">
+      <a-collapse-panel header="This is panel header 2" key="2" :style="customStyle">
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 3" name="3" :style="customStyle">
+      <a-collapse-panel header="This is panel header 3" key="3" :style="customStyle">
         <p>{{text}}</p>
       </a-collapse-panel>
     </a-collapse>

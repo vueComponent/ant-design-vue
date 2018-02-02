@@ -11,14 +11,14 @@ More than one panel can be expanded at a time, the first panel is initialized to
 ```html
 <template>
   <div>
-    <a-collapse v-model="value" @change="changeActivekey">
-      <a-collapse-panel header="This is panel header 1" name="1">
+    <a-collapse v-model="activeKey" @change="changeActivekey">
+      <a-collapse-panel header="This is panel header 1" key="1">
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 2" name="2" :disabled='false'>
+      <a-collapse-panel header="This is panel header 2" key="2" :disabled='false'>
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 3" name="3" disabled>
+      <a-collapse-panel header="This is panel header 3" key="3" disabled>
         <p>{{text}}</p>
       </a-collapse-panel>
     </a-collapse>
@@ -29,7 +29,7 @@ More than one panel can be expanded at a time, the first panel is initialized to
     data () {
       return {
         text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-        value: ['1']
+        activeKey: ['1']
       }
     },
     methods: {

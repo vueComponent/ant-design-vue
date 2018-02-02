@@ -6,6 +6,10 @@ import RcCollapse from './src'
 import { collapseProps } from './src/commonProps'
 
 export default {
+  model: {
+    prop: 'activeKey',
+    event: 'change',
+  },
   props: {
     ...collapseProps,
     bordered: PropTypes.bool.def(true),

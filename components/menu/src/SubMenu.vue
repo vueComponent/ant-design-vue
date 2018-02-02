@@ -55,11 +55,15 @@ export default {
     }
   },
   mounted () {
-    this.handleUpdated()
+    this.$nextTick(() => {
+      this.handleUpdated()
+    })
   },
 
   updated () {
-    this.handleUpdated()
+    this.$nextTick(() => {
+      this.handleUpdated()
+    })
   },
 
   beforeDestroy () {

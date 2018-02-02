@@ -11,11 +11,11 @@ You can disable showing arrow icon by passing `:showArrow="false"` to `a-collaps
 ```html
 <template>
   <div>
-    <a-collapse :defaultValue="'1'" @change="changeActivekey">
-      <a-collapse-panel header="This is panel header with arrow icon" name="1">
+    <a-collapse defaultActiveKey="1" @change="changeActivekey">
+      <a-collapse-panel header="This is panel header with arrow icon" key="1">
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header with no arrow icon" name="2" :showArrow="false">
+      <a-collapse-panel header="This is panel header with no arrow icon" key="2" :showArrow="false">
         <p>{{text}}</p>
       </a-collapse-panel>
     </a-collapse>

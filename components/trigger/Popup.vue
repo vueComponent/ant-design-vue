@@ -30,20 +30,24 @@ export default {
     }
   },
   mounted () {
-    this._container = this.getContainer()
-    this._container.appendChild(this.$el)
-    this.initAlign = true
+    this.$nextTick(() => {
+      this._container = this.getContainer()
+      this._container.appendChild(this.$el)
+      this.initAlign = true
+    })
   },
   beforeDestroy () {
     this.$el.remove()
   },
   beforeUpdate () {
-    const newContainer = this.getContainer()
-    if (newContainer !== this._container) {
-      this._container = newContainer
-      this._container.appendChild(this.$el)
-      this.$refs.alignInstance.forceAlign()
-    }
+    this.$nextTick(() => {
+      const newContainer = this.getContainer()
+      if (newContainer !== this._container) {
+        this._container = newContainer
+        this._container.appendChild(this.$el)
+        this.$refs.alignInstance.forceAlign()
+      }
+    })
   },
   watch: {
     visible (val) {

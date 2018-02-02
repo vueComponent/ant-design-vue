@@ -36,6 +36,7 @@ export default {
       [`${prefixCls}-header`]: true,
       [headerClass]: headerClass,
     }
+    const headerCon = header || $slots.header
     const itemCls = {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-active`]: isActive,
@@ -50,7 +51,7 @@ export default {
           aria-expanded={isActive}
         >
           {showArrow && <i class='arrow' />}
-          {header}
+          {headerCon}
         </div><transition
           {...transitionProps}
         >

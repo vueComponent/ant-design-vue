@@ -84,10 +84,14 @@ export default {
     },
   },
   mounted () {
-    this.setScale()
+    this.$nextTick(() => {
+      this.setScale()
+    })
   },
   updated () {
-    this.setScale()
+    this.$nextTick(() => {
+      this.setScale()
+    })
   },
   components: {
     Icon,

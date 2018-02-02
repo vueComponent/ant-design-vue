@@ -7,7 +7,6 @@ const props = buttonTypes()
 export default {
   name: 'Button',
   __ANT_BUTTON: true,
-  components: { Icon },
   props: {
     ...props,
   },
@@ -22,16 +21,13 @@ export default {
     }
   },
   watch: {
-    loading: {
-      handler: function (val) {
-        clearTimeout(this.delayTimeout)
-        if (typeof val !== 'boolean' && val && val.delay) {
-          this.delayTimeout = setTimeout(() => { this.sLoading = !!val }, val.delay)
-        } else {
-          this.sLoading = !!val
-        }
-      },
-      deep: true,
+    loading (val) {
+      clearTimeout(this.delayTimeout)
+      if (typeof val !== 'boolean' && val && val.delay) {
+        this.delayTimeout = setTimeout(() => { this.sLoading = !!val }, val.delay)
+      } else {
+        this.sLoading = !!val
+      }
     },
   },
   computed: {

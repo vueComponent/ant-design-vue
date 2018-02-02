@@ -85,7 +85,9 @@ export default {
   },
 
   mounted () {
-    this.updatedCal()
+    this.$nextTick(() => {
+      this.updatedCal()
+    })
   },
   watch: {
     popupVisible (val) {
@@ -101,7 +103,9 @@ export default {
   },
 
   updated () {
-    this.updatedCal()
+    this.$nextTick(() => {
+      this.updatedCal()
+    })
   },
 
   beforeDestroy () {
@@ -116,7 +120,6 @@ export default {
     updatedCal () {
       const props = this.$props
       const state = this.$data
-      // this.renderComponent()
 
       // We must listen to `mousedown` or `touchstart`, edge case:
       // https://github.com/ant-design/ant-design/issues/5804
@@ -146,10 +149,9 @@ export default {
           this.contextmenuOutsideHandler2 = addEventListener(window,
             'blur', this.onContextmenuClose)
         }
-        return
+      } else {
+        this.clearOutsideHandler()
       }
-
-      this.clearOutsideHandler()
     },
     onMouseenter (e) {
       this.fireEvents('mouseenter', e)
@@ -167,6 +169,7 @@ export default {
 
     onPopupMouseleave (e) {
       if (e.relatedTarget && !e.relatedTarget.setTimeout &&
+      this._component &&
       this._component.$refs.popup &&
       this._component.$refs.popup.getPopupDomNode &&
       contains(this._component.$refs.popup.getPopupDomNode(), e.relatedTarget)) {
@@ -256,7 +259,7 @@ export default {
       }
     },
     getPopupDomNode () {
-      if (this._component.$refs.popup && this._component.$refs.popup.getPopupDomNode) {
+      if (this._component && this._component.$refs.popup && this._component.$refs.popup.getPopupDomNode) {
         return this._component.$refs.popup.getPopupDomNode()
       }
       return null
@@ -462,7 +465,7 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1
     },
     forcePopupAlign () {
-      if (this.$data.sPopupVisible && this._component.$refs.popup && this._component.$refs.popup.$refs.alignInstance) {
+      if (this.$data.sPopupVisible && this._component && this._component.$refs.popup && this._component.$refs.popup.$refs.alignInstance) {
         this._component.$refs.popup.$refs.alignInstance.forceAlign()
       }
     },

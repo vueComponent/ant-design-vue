@@ -9,24 +9,28 @@ export default {
   },
 
   data () {
+    this.offset = 0
     return {
       next: false,
       prev: false,
-      offset: 0,
     }
   },
 
   mounted () {
-    this.updatedCal()
-    const debouncedResize = debounce(() => {
-      this.setNextPrev()
-      this.scrollToActiveTab()
-    }, 200)
-    this.resizeEvent = addDOMEventListener(window, 'resize', debouncedResize)
+    this.$nextTick(() => {
+      this.updatedCal()
+      const debouncedResize = debounce(() => {
+        this.setNextPrev()
+        this.scrollToActiveTab()
+      }, 200)
+      this.resizeEvent = addDOMEventListener(window, 'resize', debouncedResize)
+    })
   },
 
   updated () {
-    this.updatedCal()
+    this.$nextTick(() => {
+      this.updatedCal()
+    })
   },
 
   beforeDestroy () {
@@ -36,11 +40,18 @@ export default {
   },
   watch: {
     tabBarPosition (val) {
-      this.setOffset(0)
+      this.tabBarPositionChange = true
+      this.$nextTick(() => {
+        this.setOffset(0)
+      })
     },
   },
   methods: {
     updatedCal () {
+      if (this.tabBarPositionChange) {
+        this.tabBarPositionChange = false
+        return
+      }
       this.setNextPrev()
       this.$nextTick(() => {
         this.scrollToActiveTab()

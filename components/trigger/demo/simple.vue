@@ -58,7 +58,7 @@ export default {
       },
       offsetX: undefined,
       offsetY: undefined,
-      transitionName: '',
+      transitionName: 'rc-trigger-popup-zoom',
       destroyPopupOnHide: false,
     }
   },
@@ -159,7 +159,7 @@ export default {
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          a-checkbox
+          <a-checkbox
             value='rc-trigger-popup-zoom'
             onChange={this.onTransitionChange}
             checked={state.transitionName === 'rc-trigger-popup-zoom'}
@@ -172,7 +172,7 @@ export default {
         trigger:
 
         <label>
-          a-checkbox
+          <a-checkbox
             value='hover'
             checked={!!trigger.hover}
             onChange={this.onTriggerChange}
@@ -180,7 +180,7 @@ export default {
           hover
         </label>
         <label>
-          a-checkbox
+          <a-checkbox
             value='focus'
             checked={!!trigger.focus}
             onChange={this.onTriggerChange}
@@ -188,7 +188,7 @@ export default {
           focus
         </label>
         <label>
-          a-checkbox
+          <a-checkbox
             value='click'
             checked={!!trigger.click}
             onChange={this.onTriggerChange}
@@ -196,7 +196,7 @@ export default {
           click
         </label>
         <label>
-          a-checkbox
+          <a-checkbox
             value='contextMenu'
             checked={!!trigger.contextMenu}
             onChange={this.onTriggerChange}
@@ -205,7 +205,7 @@ export default {
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          a-checkbox
+          <a-checkbox
             checked={!!state.destroyPopupOnHide}
             onChange={this.handleDestroyPopupOnHide}
           />
@@ -214,7 +214,7 @@ export default {
 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          a-checkbox
+          <a-checkbox
             checked={!!state.mask}
             onChange={this.onMask}
           />
@@ -223,7 +223,7 @@ export default {
 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          a-checkbox
+          <a-checkbox
             checked={!!state.maskClosable}
             onChange={this.onMaskClosable}
           />
@@ -270,7 +270,7 @@ export default {
           <div slot='popup' style={{ border: '1px solid red', padding: '10px', background: 'white' }}>
               i am a popup
           </div>
-          <a href='#' style={{ margin: '20px' }} onClick={preventDefault}>trigger</a>
+          <a-button onClick={preventDefault}>trigger</a-button>
         </Trigger>
       </div>
     </div>)

@@ -52,7 +52,7 @@ export default {
       },
     }
     if (hasProp(this, 'visible')) {
-      dropdownProps.visible = visible
+      dropdownProps.props.visible = visible
     }
 
     return (

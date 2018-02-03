@@ -114,6 +114,7 @@ export default {
     if (this._component) {
       this._component.$destroy()
       this._component = null
+      this.popupContainer.remove()
     }
   },
   methods: {
@@ -329,6 +330,7 @@ export default {
       }
       if (!this._component) {
         const div = document.createElement('div')
+        this.getContainer().appendChild(div)
         this._component = new Vue({
           data () {
             return {
@@ -360,9 +362,18 @@ export default {
 
     getContainer () {
       const { $props: props } = this
+      const popupContainer = document.createElement('div')
+      // Make sure default popup container will never cause scrollbar appearing
+      // https://github.com/react-component/trigger/issues/41
+      popupContainer.style.position = 'absolute'
+      popupContainer.style.top = '0'
+      popupContainer.style.left = '0'
+      popupContainer.style.width = '100%'
       const mountNode = props.getPopupContainer
         ? props.getPopupContainer(this.$el) : props.getDocument().body
-      return mountNode
+      mountNode.appendChild(popupContainer)
+      this.popupContainer = popupContainer
+      return popupContainer
     },
 
     setPopupVisible (sPopupVisible) {

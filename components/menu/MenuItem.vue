@@ -32,16 +32,20 @@ export default {
       },
       on: {},
     }
-    return <Tooltip
-      {...toolTipProps}
-    >
-      <template slot='title'>
-        {inlineCollapsed && props.level === 1 ? cloneVNodes($slots.default, true) : ''}
-      </template>
-      <Item {...itemProps} ref='menuItem'>
-        {$slots.default}
-      </Item>
-    </Tooltip>
+    return (
+      inlineCollapsed && props.level === 1
+        ? <Tooltip {...toolTipProps}>
+          <template slot='title'>
+            { cloneVNodes($slots.default, true) }
+          </template>
+          <Item {...itemProps} ref='menuItem'>
+            {$slots.default}
+          </Item>
+        </Tooltip>
+        : <Item {...itemProps} ref='menuItem'>
+          {$slots.default}
+        </Item>
+    )
   },
 }
 

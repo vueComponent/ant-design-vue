@@ -31,24 +31,22 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this._container = this.getContainer()
-      this._container.appendChild(this.$el)
       this.initAlign = true
     })
   },
   beforeDestroy () {
     this.$el.remove()
   },
-  beforeUpdate () {
-    this.$nextTick(() => {
-      const newContainer = this.getContainer()
-      if (newContainer !== this._container) {
-        this._container = newContainer
-        this._container.appendChild(this.$el)
-        this.$refs.alignInstance.forceAlign()
-      }
-    })
-  },
+  // beforeUpdate () {
+  //   this.$nextTick(() => {
+  //     const newContainer = this.getContainer()
+  //     if (newContainer !== this._container) {
+  //       this._container = newContainer
+  //       this._container.appendChild(this.$el)
+  //       this.$refs.alignInstance.forceAlign()
+  //     }
+  //   })
+  // },
   watch: {
     visible (val) {
       if (val) {
@@ -217,7 +215,7 @@ export default {
   render () {
     const { destroyPopup, getMaskElement, getPopupElement, initAlign } = this
     return (
-      <div style='position: absolute; top: 0px; left: 0px; width: 100%;'>
+      <div>
         {initAlign ? (
           getMaskElement(),
           destroyPopup

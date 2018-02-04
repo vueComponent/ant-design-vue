@@ -85,6 +85,7 @@
   },
   "dependencies": {
     "add-dom-event-listener": "^1.0.2",
+    "component-classes": "^1.2.6",
     "css-animation": "^1.4.1",
     "dom-align": "^1.6.7",
     "dom-scroll-into-view": "^1.2.1",

@@ -4,7 +4,7 @@ import Align from '../align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
 import { noop } from './utils'
-import animate from 'css-animation'
+import animate from '../_util/css-animation'
 
 export default {
   props: {

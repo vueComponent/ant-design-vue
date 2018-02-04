@@ -3,6 +3,7 @@ import Vue from 'vue'
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
 import { hasProp, getComponentFromProp } from '../_util/props-util'
+import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout'
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
@@ -392,7 +393,7 @@ export default {
       const delay = delayS * 1000
       this.clearDelayTimer()
       if (delay) {
-        this.delayTimer = setTimeout(() => {
+        this.delayTimer = requestAnimationTimeout(() => {
           this.setPopupVisible(visible)
           this.clearDelayTimer()
         }, delay)
@@ -403,7 +404,7 @@ export default {
 
     clearDelayTimer () {
       if (this.delayTimer) {
-        clearTimeout(this.delayTimer)
+        cancelAnimationTimeout(this.delayTimer)
         this.delayTimer = null
       }
     },

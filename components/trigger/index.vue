@@ -518,11 +518,11 @@ export default {
     if (this.isClickToHide() || this.isClickToShow()) {
       newChildProps.on.click = this.onClick
       newChildProps.on.mousedown = this.onMousedown
-      // newChildProps.on.touchstart = this.onTouchstart
+      newChildProps.on.touchstart = this.onTouchstart
     } else {
       newChildProps.on.click = this.createTwoChains('click')
       newChildProps.on.mousedown = this.createTwoChains('mousedown')
-      // newChildProps.on.touchstart = this.createTwoChains('onTouchstart')
+      newChildProps.on.touchstart = this.createTwoChains('onTouchstart')
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.on.mouseenter = this.onMouseenter

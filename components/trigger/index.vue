@@ -18,7 +18,7 @@ function returnEmptyString () {
 function returnDocument () {
   return window.document
 }
-const ALL_HANDLERS = ['click', 'mousedown', 'touchStart', 'mouseenter',
+const ALL_HANDLERS = ['click', 'mousedown', 'touchstart', 'mouseenter',
   'mouseleave', 'focus', 'blur', 'contextmenu']
 
 export default {
@@ -195,8 +195,8 @@ export default {
       this.preClickTime = Date.now()
     },
 
-    onTouchStart (e) {
-      this.fireEvents('touchStart', e)
+    onTouchstart (e) {
+      this.fireEvents('touchstart', e)
       this.preTouchTime = Date.now()
     },
 
@@ -518,11 +518,11 @@ export default {
     if (this.isClickToHide() || this.isClickToShow()) {
       newChildProps.on.click = this.onClick
       newChildProps.on.mousedown = this.onMousedown
-      // newChildProps.on.touchStart = this.onTouchStart
+      // newChildProps.on.touchstart = this.onTouchstart
     } else {
       newChildProps.on.click = this.createTwoChains('click')
       newChildProps.on.mousedown = this.createTwoChains('mousedown')
-      // newChildProps.on.TouchStart = this.createTwoChains('onTouchStart')
+      // newChildProps.on.touchstart = this.createTwoChains('onTouchstart')
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.on.mouseenter = this.onMouseenter

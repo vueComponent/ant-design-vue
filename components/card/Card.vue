@@ -162,7 +162,7 @@
       const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null
       const body = (
         <div class={`${prefixCls}-body`} style={bodyStyle}>
-          {loading ? loadingBlock : <div>{children}</div>}
+          {loading ? loadingBlock : children}
         </div>
       )
       const actions = getComponentFromProp(this, 'actions')

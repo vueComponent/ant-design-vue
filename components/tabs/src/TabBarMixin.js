@@ -23,12 +23,13 @@ export default {
       default: noop,
       type: Function,
     },
+    tabBarGutter: Number,
   },
   methods: {
     getTabs (h) {
-      const { panels: children, activeKey, prefixCls } = this
+      const { panels: children, activeKey, prefixCls, tabBarGutter } = this
       const rst = []
-      children.forEach((child) => {
+      children.forEach((child, index) => {
         if (!child) {
           return
         }
@@ -69,6 +70,7 @@ export default {
             class={cls}
             key={tabKey}
             onClick={onClick}
+            style={{ marginRight: tabBarGutter && index === children.length - 1 ? `0px` : `${tabBarGutter}px` }}
             ref={activeKey === tabKey ? 'activeTab' : undefined}
           >
             {tabC}

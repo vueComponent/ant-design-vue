@@ -2,11 +2,11 @@
   <div>
     <template v-for="(tag, index) in tags">
       <Tooltip v-if="tag.length > 20" :key="tag" :title="tag">
-        <Tag :key="tag" :closable="index !== 0" @after-close="() => handleClose(tag)">
+        <Tag :key="tag" :closable="index !== 0" @afterClose="() => handleClose(tag)">
           {{`${tag.slice(0, 20)}...`}}
         </Tag>
       </Tooltip>
-      <Tag v-else :key="tag" :closable="index !== 0" @after-close="() => handleClose(tag)">
+      <Tag v-else :key="tag" :closable="index !== 0" @afterClose="() => handleClose(tag)">
         {{tag}}
       </Tag>
     </template>

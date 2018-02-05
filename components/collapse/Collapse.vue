@@ -13,7 +13,7 @@ export default {
   props: {
     ...collapseProps,
     bordered: PropTypes.bool.def(true),
-    openAnimation: PropTypes.any.def({ ...animation, appear () { } }),
+    openAnimation: PropTypes.any.def(animation),
     change: PropTypes.func.def(() => {}),
     accordion: PropTypes.bool,
   },

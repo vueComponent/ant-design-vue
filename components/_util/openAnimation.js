@@ -1,4 +1,4 @@
-import cssAnimation from 'css-animation'
+import cssAnimation from './css-animation'
 import getRequestAnimationFrame, { cancelRequestAnimationFrame } from './getRequestAnimationFrame'
 
 const reqAnimFrame = getRequestAnimationFrame()
@@ -44,9 +44,6 @@ const animation = {
   leave (node, done) {
     return animate(node, false, done)
   },
-  // appear (node, done) {
-  //   return animate(node, true, done)
-  // },
 }
 
 export default animation

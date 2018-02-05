@@ -9,7 +9,7 @@ import warning from '../_util/warning'
 import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement, filterEmpty, getEvents } from '../_util/vnode'
+import { cloneElement, filterEmpty, getEvents, cloneVNode } from '../_util/vnode'
 
 function returnEmptyString () {
   return ''
@@ -497,15 +497,11 @@ export default {
     if (children.length > 1) {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
     }
-    const child = children[0]
-    const events = getEvents(child)
-    // 黑科技，vue暂未发现保留原事件的方法，使用_ANT_TRIGGER_EVENT_HACK来判断事件是否更新
-    if (!events._ANT_TRIGGER_EVENT_HACK) {
-      this.childOriginEvents = events
-    }
+    const child = cloneVNode(children[0])
+    this.childOriginEvents = getEvents(children[0])
     const newChildProps = {
       props: {},
-      on: { _ANT_TRIGGER_EVENT_HACK: () => {} },
+      on: {},
       key: 'trigger',
     }
 

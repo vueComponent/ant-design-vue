@@ -1,19 +1,26 @@
 import cloneDeep from 'lodash.clonedeep'
 export function cloneVNode (vnode, deep) {
   const componentOptions = vnode.componentOptions
-  // if (componentOptions && componentOptions.listeners) {
-  //   componentOptions.listeners = cloneDeep(componentOptions.listeners)
-  // }
+  const data = vnode.data
 
-  // const data = vnode.data ? cloneDeep(vnode.data) : vnode.data
+  let listeners = {}
+  if (componentOptions && componentOptions.listeners) {
+    listeners = cloneDeep(componentOptions.listeners)
+  }
+
+  let on = {}
+  if (data && data.on) {
+    on = cloneDeep(data.on)
+  }
+
   const cloned = new vnode.constructor(
     vnode.tag,
-    vnode.data,
+    data ? { ...data, on } : data,
     vnode.children,
     vnode.text,
     vnode.elm,
     vnode.context,
-    componentOptions,
+    componentOptions ? { ...componentOptions, listeners } : componentOptions,
     vnode.asyncFactory
   )
   cloned.ns = vnode.ns

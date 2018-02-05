@@ -23,7 +23,6 @@ export default {
     const contentCls = {
       [`${prefixCls}-content`]: true,
       [`${prefixCls}-content-active`]: isActive,
-      [`${prefixCls}-content-inactive`]: !isActive,
     }
     const child = !isActive && destroyInactivePanel ? null
       : <div class={`${prefixCls}-content-box`}>{$slots.default}</div>

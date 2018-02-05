@@ -27,7 +27,7 @@ export default {
 
     const transitionProps = {
       props: Object.assign({
-        appear: false,
+        appear: true,
         css: false,
       }),
       on: { ...openAnimation },
@@ -56,6 +56,7 @@ export default {
           {...transitionProps}
         >
           <PanelContent
+            v-show={isActive}
             prefixCls={prefixCls}
             isActive={isActive}
             destroyInactivePanel={destroyInactivePanel}

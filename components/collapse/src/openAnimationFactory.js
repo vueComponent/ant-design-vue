@@ -1,4 +1,4 @@
-import cssAnimation from 'css-animation'
+import cssAnimation from '../../_util/css-animation'
 
 function animate (node, show, transitionName, done) {
   let height

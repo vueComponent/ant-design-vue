@@ -4,7 +4,7 @@ import Trigger from '../../trigger'
 import placements from './placements'
 import { hasProp } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
-import { cloneElement, getEvents } from '../../_util/vnode'
+import { cloneElement, getEvents, cloneVNode } from '../../_util/vnode'
 
 export default {
   mixins: [BaseMixin],
@@ -68,21 +68,14 @@ export default {
     },
 
     getMenuElement () {
-      const child = this.$slots.overlay[0]
-      const events = getEvents(child)
-      if (!events._ANT_DROPDOWN_EVENT_HACK) {
-        this.childOriginEvents = events
-      }
-      const { prefixCls } = this.$props
-      const extraOverlayProps = {
-        prefixCls: `${prefixCls}-menu`,
-      }
-      const overlay = this.$slots.overlay[0]
-      return cloneElement(overlay, {
-        props: extraOverlayProps,
+      const { onClick, prefixCls, $slots } = this
+      this.childOriginEvents = getEvents($slots.overlay[0])
+      return cloneElement(cloneVNode($slots.overlay[0]), {
+        props: {
+          prefixCls: `${prefixCls}-menu`,
+        },
         on: {
-          click: this.onClick,
-          _ANT_DROPDOWN_EVENT_HACK: () => {},
+          click: onClick,
         },
       })
     },

@@ -1,25 +1,10 @@
-<template>
-  <transition
-    :name="`${prefixCls}-zoom`"
-    appear
-    @after-leave="animationEnd"
-  >
-    <div
-      v-if="!closed"
-      :class="classes"
-      :style="tagStyle"
-    >
-      <slot></slot>
-      <Icon v-if="closable" type="cross" @click="close" />
-    </div>
-  </transition>
-</template>
 <script>
 import Icon from '../icon'
+import getTransitionProps from '../_util/getTransitionProps'
+import omit from 'omit.js'
 
 export default {
   name: 'Tag',
-  components: { Icon },
   props: {
     prefixCls: {
       default: 'ant-tag',
@@ -27,22 +12,20 @@ export default {
     },
     color: String,
     closable: Boolean,
-    styles: {
-      default: () => ({}),
-      type: Object,
-    },
   },
   data () {
-    const isPresetColor = (color) => {
-      if (!color) { return false }
-      return /^(pink|red|yellow|orange|cyan|green|blue|purple)(-inverse)?$/.test(color)
-    }
     return {
       closed: false,
-      isPresetColor: isPresetColor(this.color),
     }
   },
   computed: {
+    isPresetColor () {
+      const isPresetColor = (color) => {
+        if (!color) { return false }
+        return /^(pink|red|yellow|orange|cyan|green|blue|purple)(-inverse)?$/.test(color)
+      }
+      return isPresetColor(this.color)
+    },
     classes () {
       const { prefixCls, color, isPresetColor } = this
       return {
@@ -52,16 +35,16 @@ export default {
       }
     },
     tagStyle () {
-      const { color, styles, isPresetColor } = this
+      const { color, isPresetColor } = this
+      console.log(color, isPresetColor)
       return {
         backgroundColor: (color && !isPresetColor) ? color : null,
-        ...styles,
       }
     },
   },
   methods: {
     animationEnd () {
-      this.$emit('after-close')
+      this.$emit('afterClose')
     },
     close (e) {
       this.$emit('close', e)
@@ -70,6 +53,32 @@ export default {
       }
       this.closed = true
     },
+  },
+  render () {
+    const { prefixCls, animationEnd, classes, tagStyle, closable, close, closed, $slots, $listeners } = this
+    const transitionProps = getTransitionProps(`${prefixCls}-zoom`, {
+      afterLeave: animationEnd,
+    })
+    // const tagProps = {
+    //   on
+    // }
+    return (
+      <transition
+        {...transitionProps}
+      >
+        {!closed
+          ? <div
+
+            class={classes}
+            style={tagStyle}
+            {...{ on: omit($listeners, ['close', 'afterClose']) }}
+          >
+            {$slots.default}
+            {closable ? <Icon type='cross' onClick={close} /> : null}
+          </div> : null
+        }
+      </transition>
+    )
   },
 }
 </script>

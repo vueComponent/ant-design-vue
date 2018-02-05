@@ -1,7 +1,7 @@
 export default {
   methods: {
     setState (state, callback) {
-      Object.assign(this.$data, state)
+      Object.assign(this.$data, typeof state === 'function' ? state(this.$data) : state)
       this.$nextTick(() => {
         callback && callback()
       })

@@ -41,8 +41,7 @@ const Dropdown = {
     const overlay = $slots.overlay && $slots.overlay[0]
     // menu cannot be selectable in dropdown defaultly
     const overlayProps = overlay && getPropsData(overlay)
-    const selectable = (overlayProps && 'selectable' in overlayProps)
-      ? overlayProps.selectable : false
+    const selectable = overlayProps.selectable || false
     const fixedModeOverlay = cloneElement(overlay, {
       props: {
         mode: 'vertical',

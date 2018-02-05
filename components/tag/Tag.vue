@@ -9,9 +9,7 @@
       :class="classes"
       :style="tagStyle"
     >
-      <span :class="`${prefixCls}-text`">
-        <slot></slot>
-      </span>
+      <slot></slot>
       <Icon v-if="closable" type="cross" @click="close" />
     </div>
   </transition>

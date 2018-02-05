@@ -29,6 +29,7 @@ export default {
       },
     },
     animated: { type: [Boolean, Object], default: undefined },
+    tabBarGutter: Number,
   },
   model: {
     prop: 'activeKey',
@@ -77,6 +78,7 @@ export default {
       tabPosition,
       tabBarStyle,
       hideAdd,
+      onTabClick,
       onPrevClick,
       onNextClick,
       animated,
@@ -84,6 +86,7 @@ export default {
       activeKey,
       defaultActiveKey,
       $slots,
+      tabBarGutter,
     } = this
     let { inkBarAnimated, tabPaneAnimated } = typeof animated === 'object' ? { // eslint-disable-line
       inkBarAnimated: !!animated.inkBar, tabPaneAnimated: !!animated.tabPane,
@@ -126,9 +129,10 @@ export default {
         removeTab: this.removeTab,
         createNewTab: this.createNewTab,
         inkBarAnimated,
+        tabBarGutter,
       },
       on: {
-        // tabClick: onTabClick,
+        tabClick: onTabClick,
         prevClick: onPrevClick,
         nextClick: onNextClick,
       },

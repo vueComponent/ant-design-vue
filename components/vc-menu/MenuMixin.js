@@ -1,10 +1,10 @@
-import hasProp from '../../_util/props-util'
-import KeyCode from '../../_util/KeyCode'
+import hasProp from '../_util/props-util'
+import KeyCode from '../_util/KeyCode'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getKeyFromChildrenIndex, loopMenuItem } from './util'
-import { cloneElement, getComponentName } from '../../_util/vnode'
+import { cloneElement, getComponentName } from '../_util/vnode'
 import DOMWrap from './DOMWrap'
-import warning from '../../_util/warning'
+import warning from '../_util/warning'
 
 function allDisabled (arr) {
   if (!arr.length) {

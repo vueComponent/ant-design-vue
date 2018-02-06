@@ -4,9 +4,13 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| activeKey | 当前激活 tab 面板的 key | string\[]\|string | 默认无，accordion模式下默认第一个元素 |
+| activeKey(v-model) | 当前激活 tab 面板的 key | string\[]\|string | 默认无，accordion模式下默认第一个元素 |
 | defaultActiveKey | 初始化选中面板的 key | string | 无 |
-| change | 切换面板的回调 | Function | 无 |
+
+### 事件
+| 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| change | 切换面板的回调 | function(key) |
 
 ### Collapse.Panel
 

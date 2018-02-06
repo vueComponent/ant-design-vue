@@ -1,12 +1,12 @@
 <script>
-import PropTypes from '../../_util/vue-types'
-import Trigger from '../../trigger'
-import KeyCode from '../../_util/KeyCode'
+import PropTypes from '../_util/vue-types'
+import Trigger from '../trigger'
+import KeyCode from '../_util/KeyCode'
 import SubPopupMenu from './SubPopupMenu'
 import placements from './placements'
 import { loopMenuItemRecusively, noop } from './util'
-import BaseMixin from '../../_util/BaseMixin'
-import { getComponentFromProp } from '../../_util/props-util'
+import BaseMixin from '../_util/BaseMixin'
+import { getComponentFromProp } from '../_util/props-util'
 
 let guid = 0
 

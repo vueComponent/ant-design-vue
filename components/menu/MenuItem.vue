@@ -1,5 +1,5 @@
 <script>
-import { Item, itemProps } from './src/index'
+import { Item, itemProps } from '../vc-menu'
 import { getClass, getStyle, cloneVNodes } from '../_util/vnode'
 import Tooltip from '../tooltip'
 function noop () {}

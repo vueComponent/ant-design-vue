@@ -8,7 +8,7 @@ import warning from '../_util/warning'
 import Item from './MenuItem'
 import { hasProp } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
-import commonPropsType from './src/commonPropsType'
+import commonPropsType from '../vc-menu/commonPropsType'
 
 export const MenuMode = PropTypes.oneOf(['vertical', 'vertical-left', 'vertical-right', 'horizontal', 'inline'])
 

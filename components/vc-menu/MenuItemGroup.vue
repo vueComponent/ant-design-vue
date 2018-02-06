@@ -1,6 +1,6 @@
 <script>
-import PropTypes from '../../_util/vue-types'
-import { getComponentFromProp } from '../../_util/props-util'
+import PropTypes from '../_util/vue-types'
+import { getComponentFromProp } from '../_util/props-util'
 
 const MenuItemGroup = {
   name: 'MenuItemGroup',

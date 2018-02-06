@@ -1,8 +1,8 @@
 <script>
-import PropTypes from '../../_util/vue-types'
+import PropTypes from '../_util/vue-types'
 import MenuMixin from './MenuMixin'
-import BaseMixin from '../../_util/BaseMixin'
-import hasProp from '../../_util/props-util'
+import BaseMixin from '../_util/BaseMixin'
+import hasProp from '../_util/props-util'
 import commonPropsType from './commonPropsType'
 
 const Menu = {

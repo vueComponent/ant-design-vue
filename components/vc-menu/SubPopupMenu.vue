@@ -1,13 +1,10 @@
 <script>
-// import PropTypes from '../../_util/vue-types'
 import MenuMixin from './MenuMixin'
-import BaseMixin from '../../_util/BaseMixin'
+import BaseMixin from '../_util/BaseMixin'
 import commonPropsType from './commonPropsType'
-// import { noop } from './util'
 export default {
   name: 'SubPopupMenu',
   props: { ...commonPropsType,
-    // clearSubMenuTimers: PropTypes.func.def(noop),
   },
 
   mixins: [MenuMixin, BaseMixin],

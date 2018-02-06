@@ -14,7 +14,7 @@ Menu | done
 Dropdown | done
 Divider | done
 notification | done
-message
+message | done
 Carousel
 Mention
 Input | done |select完成后补全demo

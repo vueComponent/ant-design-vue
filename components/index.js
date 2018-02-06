@@ -61,8 +61,10 @@ const CollapsePanel = Collapse.Panel
 export { Collapse, CollapsePanel }
 
 import notification from './notification'
+import message from './message'
 
 const api = {
   notification,
+  message,
 }
 export { api }

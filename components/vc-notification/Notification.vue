@@ -1,10 +1,10 @@
 <script>
 import Vue from 'vue'
-import PropTypes from '../../_util/vue-types'
-import { getStyle } from '../../_util/vnode'
-import BaseMixin from '../../_util/BaseMixin'
-import createChainedFunction from '../../_util/createChainedFunction'
-import getTransitionProps from '../../_util/getTransitionProps'
+import PropTypes from '../_util/vue-types'
+import { getStyle } from '../_util/vnode'
+import BaseMixin from '../_util/BaseMixin'
+import createChainedFunction from '../_util/createChainedFunction'
+import getTransitionProps from '../_util/getTransitionProps'
 import Notice from './Notice'
 
 let seed = 0

@@ -1,4 +1,4 @@
-import Notification from './src/notification'
+import Notification from '../vc-notification'
 import Icon from '../icon'
 
 // export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';

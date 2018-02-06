@@ -16,8 +16,14 @@ Vue.component(Md.name, Md)
 Vue.component(Api.name, Api)
 Vue.component('demo-box', demoBox)
 Object.keys(Components).forEach(k => {
-  const name = `a${k.replace(/([A-Z])/g, '-$1').toLowerCase()}`
-  Vue.component(name, Components[k])
+  if (k === 'api') {
+    Object.keys(Components[k]).forEach(api => {
+      Vue.prototype[`$${api}`] = Components[k][api]
+    })
+  } else {
+    const name = `a${k.replace(/([A-Z])/g, '-$1').toLowerCase()}`
+    Vue.component(name, Components[k])
+  }
 })
 
 const router = new VueRouter({

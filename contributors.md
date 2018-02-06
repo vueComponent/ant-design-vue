@@ -13,6 +13,8 @@ Popover | done
 Menu | done
 Dropdown | done
 Divider | done
+notification | done
+message
 Carousel
 Mention
 Input | done |select完成后补全demo
@@ -32,9 +34,7 @@ Affix
 Alert
 BackTop
 Layout
-message
 Modal
-notification
 Anchor
 Tree
 TreeSelect
@@ -46,7 +46,7 @@ Avatar  |  done
 Badge  |  done
 Breadcrumb |  done
 Card  | done
-Collapse
+Collapse | done
 LocaleProvider
 Progress
 Slider

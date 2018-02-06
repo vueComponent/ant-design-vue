@@ -1,16 +1,15 @@
-import cloneDeep from 'lodash.clonedeep'
 export function cloneVNode (vnode, deep) {
   const componentOptions = vnode.componentOptions
   const data = vnode.data
 
   let listeners = {}
   if (componentOptions && componentOptions.listeners) {
-    listeners = cloneDeep(componentOptions.listeners)
+    listeners = { ...componentOptions.listeners }
   }
 
   let on = {}
   if (data && data.on) {
-    on = cloneDeep(data.on)
+    on = { ...data.on }
   }
 
   const cloned = new vnode.constructor(
@@ -98,11 +97,23 @@ export function isEmptyElement (ele) {
 }
 
 export function getClass (ele) {
-  return ele.data && (ele.data.class || ele.data.staticClass)
+  let data = {}
+  if (ele.data) {
+    data = ele.data
+  } else if (ele.$vnode && ele.$vnode.data) {
+    data = ele.$vnode.data
+  }
+  return data.class || data.staticClass
 }
 
 export function getStyle (ele) {
-  return ele.data && (ele.data.style || ele.data.staticStyle)
+  let data = {}
+  if (ele.data) {
+    data = ele.data
+  } else if (ele.$vnode && ele.$vnode.data) {
+    data = ele.$vnode.data
+  }
+  return data.style || data.staticStyle
 }
 
 export function filterEmpty (children = []) {

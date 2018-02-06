@@ -1,11 +1,13 @@
 import Demo from './components/demo.vue'
 const AsyncComp = () => {
+  const hashs = window.location.hash.split('/')
+  const d = hashs[hashs.length - 1]
   return {
-    component: import(`../components/collapse/demo/index.vue`),
+    component: import(`../components/notification/demo/${d}.md`),
   }
 }
 export default [
-  { path: '/components/:lang/:name/:demo?', component: Demo },
+  { path: '/:lang/components/:name/:demo?', component: Demo },
   { path: '/:lang?/test/:name/:demo?', component: AsyncComp },
-  { path: '/*', redirect: '/components/cn/menu' },
+  { path: '/*', redirect: '/cn/components/menu' },
 ]

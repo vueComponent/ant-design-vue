@@ -19,4 +19,5 @@ export { default as tooltip } from 'antd/tooltip/demo/index.vue'
 export { default as dropdown } from 'antd/dropdown/demo/index.vue'
 export { default as divider } from 'antd/divider/demo/index.vue'
 export { default as collapse } from 'antd/collapse/demo/index.vue'
+export { default as notification } from 'antd/notification/demo/index.vue'
 

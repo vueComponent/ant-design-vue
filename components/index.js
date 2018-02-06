@@ -59,3 +59,10 @@ export { default as Divider } from './divider'
 import Collapse from './collapse'
 const CollapsePanel = Collapse.Panel
 export { Collapse, CollapsePanel }
+
+import notification from './notification'
+
+const api = {
+  notification,
+}
+export { api }

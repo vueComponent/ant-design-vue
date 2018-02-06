@@ -3,18 +3,22 @@ import PropTypes from '../_util/vue-types'
 import toArray from 'rc-util/lib/Children/toArray'
 import Menu from '../vc-menu'
 import scrollIntoView from 'dom-scroll-into-view'
-import { getSelectKeys, preventDefaultEvent, saveRef } from './util'
+import { getSelectKeys, preventDefaultEvent } from './util'
+import { cloneElement } from '../_util/vnode'
+import BaseMixin from '../_util/BaseMixin'
 
 export default {
+  name: 'DropdownMenu',
+  mixins: [BaseMixin],
   props: {
     defaultActiveFirstOption: PropTypes.bool,
     value: PropTypes.any,
     dropdownMenuStyle: PropTypes.object,
     multiple: PropTypes.bool,
-    onPopupFocus: PropTypes.func,
-    onPopupScroll: PropTypes.func,
-    onMenuDeSelect: PropTypes.func,
-    onMenuSelect: PropTypes.func,
+    // onPopupFocus: PropTypes.func,
+    // onPopupScroll: PropTypes.func,
+    // onMenuDeSelect: PropTypes.func,
+    // onMenuSelect: PropTypes.func,
     prefixCls: PropTypes.string,
     menuItems: PropTypes.any,
     inputValue: PropTypes.string,
@@ -84,27 +88,37 @@ export default {
     },
 
     renderMenu () {
-      const props = this.props
+      const props = this.$props
       const {
         menuItems,
         defaultActiveFirstOption,
         value,
         prefixCls,
         multiple,
-        onMenuSelect,
         inputValue,
         firstActiveValue,
+        dropdownMenuStyle,
       } = props
       if (menuItems && menuItems.length) {
-        const menuProps = {}
-        if (multiple) {
-          menuProps.onDeselect = props.onMenuDeselect
-          menuProps.onSelect = onMenuSelect
-        } else {
-          menuProps.onClick = onMenuSelect
-        }
-
         const selectedKeys = getSelectKeys(menuItems, value)
+        const menuProps = {
+          props: {
+            multiple,
+            defaultActiveFirst: defaultActiveFirstOption,
+            focusable: false,
+            selectedKeys,
+            prefixCls: `${prefixCls}-menu`,
+          },
+          on: {},
+          style: dropdownMenuStyle,
+          ref: 'menuRef',
+        }
+        if (multiple) {
+          menuProps.on.deselect = this.onMenuDeselect
+          menuProps.on.select = this.onMenuSelect
+        } else {
+          menuProps.on.click = this.onMenuSelect
+        }
         const activeKeyProps = {}
 
         let clonedMenuItems = menuItems
@@ -124,9 +138,7 @@ export default {
             ) {
               foundFirst = true
               return cloneElement(item, {
-                ref: ref => {
-                  this.firstActiveItem = ref
-                },
+                ref: 'firstActiveItem',
               })
             }
             return item
@@ -146,24 +158,26 @@ export default {
         if (inputValue !== this.lastInputValue && (!lastValue || !lastValue.backfill)) {
           activeKeyProps.activeKey = ''
         }
-
+        menuProps.props = { ...menuProps.props, ...activeKeyProps }
         return (
-          <Menu
-            ref={saveRef(this, 'menuRef')}
-            style={this.props.dropdownMenuStyle}
-            defaultActiveFirst={defaultActiveFirstOption}
-            {...activeKeyProps}
-            multiple={multiple}
-            focusable={false}
-            {...menuProps}
-            selectedKeys={selectedKeys}
-            prefixCls={`${prefixCls}-menu`}
-          >
+          <Menu {...menuProps}>
             {clonedMenuItems}
           </Menu>
         )
       }
       return null
+    },
+    onPopupFocus (e) {
+      this.__emit('popupFocus', e)
+    },
+    onPopupScroll (e) {
+      this.__emit('popupScroll', e)
+    },
+    onMenuDeselect () {
+      this.__emit('menuDeselect', ...arguments)
+    },
+    onMenuSelect () {
+      this.__emit('menuSelect', ...arguments)
     },
   },
   render () {
@@ -171,16 +185,14 @@ export default {
     return renderMenu ? (
       <div
         style={{ overflow: 'auto' }}
-        onFocus={this.props.onPopupFocus}
-        onMouseDown={preventDefaultEvent}
-        onScroll={this.props.onPopupScroll}
+        onFocus={this.onPopupFocus}
+        onMousedown={preventDefaultEvent}
+        onScroll={this.onPopupScroll}
       >
         {renderMenu}
       </div>
     ) : null
   },
 }
-
-DropdownMenu.displayName = 'DropdownMenu'
 
 </script>

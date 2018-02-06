@@ -157,9 +157,3 @@ export function validateOptionValue (value, props) {
     )
   }
 }
-
-export function saveRef (instance, name) {
-  return (node) => {
-    instance[name] = node
-  }
-}

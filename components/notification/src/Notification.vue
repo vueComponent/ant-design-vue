@@ -57,26 +57,32 @@ const Notification = {
     },
   },
 
-  render () {
+  render (h) {
     const { prefixCls, notices, remove, getTransitionName } = this
+    const transitionProps = getTransitionProps(getTransitionName())
     const noticeNodes = notices.map((notice) => {
-      const onClose = createChainedFunction(remove.bind(this, notice.key), notice.on.close)
+      const { content, duration, closable, onClose, key, style, class: className } = notice
+      const close = createChainedFunction(remove.bind(this, key), onClose)
       const noticeProps = {
-        ...notice,
         props: {
           prefixCls,
-          ...notice.props,
+          duration,
+          closable,
         },
         on: {
-          ...notice.on,
-          close: onClose,
+          close,
         },
+        style,
+        class: className,
+        key,
       }
-      return (<Notice
-        {...noticeProps}
-      >
-        {notice.content}
-      </Notice>)
+      return (
+        <Notice
+          {...noticeProps}
+        >
+          {content(h)}
+        </Notice>
+      )
     })
     const className = {
       [prefixCls]: 1,
@@ -87,14 +93,14 @@ const Notification = {
         top: '65px',
         left: '50%',
       }}>
-        <transition-group {...getTransitionProps(getTransitionName(), { tag: 'div' })}>{noticeNodes}</transition-group>
+        <transition-group {...transitionProps}>{noticeNodes}</transition-group>
       </div>
     )
   },
 }
 
 Notification.newInstance = function newNotificationInstance (properties, callback) {
-  const { getContainer, style, class: className, on = {}, ...props } = properties || {}
+  const { getContainer, style, class: className, ...props } = properties || {}
   const div = document.createElement('div')
   if (getContainer) {
     const root = getContainer()
@@ -102,7 +108,7 @@ Notification.newInstance = function newNotificationInstance (properties, callbac
   } else {
     document.body.appendChild(div)
   }
-  const notificationInstance = new Vue({
+  new Vue({
     el: div,
     mounted () {
       const self = this
@@ -116,9 +122,8 @@ Notification.newInstance = function newNotificationInstance (properties, callbac
           },
           component: self,
           destroy () {
-            // self.$destroy()
-            notificationInstance.$destroy()
-            div.parentNode.removeChild(div)
+            self.$destroy()
+            self.$el.parentNode.removeChild(self.$el)
           },
         })
       })
@@ -126,7 +131,6 @@ Notification.newInstance = function newNotificationInstance (properties, callbac
     render () {
       const p = {
         props,
-        on,
         ref: 'notification',
         style,
         class: className,

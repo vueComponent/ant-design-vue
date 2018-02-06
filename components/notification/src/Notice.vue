@@ -7,23 +7,27 @@ export default {
   mixins: [BaseMixin],
   props: {
     duration: PropTypes.number.def(1.5),
+    closable: PropTypes.bool,
+    prefixCls: PropTypes.string,
   },
 
   mounted () {
     this.startCloseTimer()
   },
 
-  beforeDestory () {
+  beforeDestroy () {
     this.clearCloseTimer()
+    this.willDestroy = true // beforeDestroy调用后依然会触发onMouseleave事件
   },
   methods: {
     close () {
       this.clearCloseTimer()
-      this._emit('close')
+      this.__emit('close')
     },
 
     startCloseTimer () {
-      if (this.duration) {
+      this.clearCloseTimer()
+      if (!this.willDestroy && this.duration) {
         this.closeTimer = setTimeout(() => {
           this.close()
         }, this.duration * 1000)

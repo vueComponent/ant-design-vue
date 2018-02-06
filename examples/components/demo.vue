@@ -15,7 +15,7 @@ export default {
         <div class='main-wrapper'>
           <a-menu class='nav' selectedKeys={[name]}>
             {Object.keys(AllDemo).map(d => <a-menu-item key={d}>
-              <router-link to={{ path: `/components/${lang}/${d}` }}>{d}</router-link>
+              <router-link to={{ path: `/${lang}/components/${d}` }}>{d}</router-link>
             </a-menu-item>)}
           </a-menu>
           <div class='content main-container'>

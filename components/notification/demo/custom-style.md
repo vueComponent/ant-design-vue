@@ -1,12 +1,12 @@
 
 <cn>
-#### 基本
-最简单的用法，4.5 秒后自动关闭。
+#### 自定义样式
+使用 style 和 className 来定义样式。
 </cn>
 
 <us>
-#### Basic
-The simplest usage that close the notification box after 4.5s.
+#### Customized style
+The style and className are available to customize Notification.
 </us>
 
 ```html
@@ -20,6 +20,10 @@ The simplest usage that close the notification box after 4.5s.
         this.$notification.open({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          style: {
+            width: '600px',
+            marginLeft: `${335 - 600}px`,
+          },
         });
       },
     }

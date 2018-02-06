@@ -1,12 +1,12 @@
 
 <cn>
-#### 基本
-最简单的用法，4.5 秒后自动关闭。
+#### 自定义图标
+图标可以被自定义。
 </cn>
 
 <us>
-#### Basic
-The simplest usage that close the notification box after 4.5s.
+#### Customized Icon
+The icon can be customized to any vue node or (h) => vue node.
 </us>
 
 ```html
@@ -20,6 +20,7 @@ The simplest usage that close the notification box after 4.5s.
         this.$notification.open({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          icon: <a-icon type="smile-circle" style="color: #108ee9" />,
         });
       },
     }

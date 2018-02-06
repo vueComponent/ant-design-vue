@@ -79,7 +79,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
     jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle))
     const codeHtml = code ? md.render(code) : ''
     const cnHtml = cn ? md.render(cn) : ''
-    const newContent = `
+    let newContent = `
       <template>
         <demo-box :jsfiddle="${jsfiddle}">
           <template slot="component">${template}</template>
@@ -87,13 +87,17 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
           <template slot="us-description">${us ? md.render(us) : ''}</template>
           <template slot="code">${codeHtml}</template>
         </demo-box>
-      </template>
+      </template>`
+    newContent += script ? `
       <script>
       ${script || ''}
       </script>
+      ` : ''
+    newContent += style ? `
       <style>
       ${style || ''}
-      </style>`
+      </style>
+      ` : ''
     const t = new Token('html_block', '', 0)
     t.content = newContent
     tokens.push(t)

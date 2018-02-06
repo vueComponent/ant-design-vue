@@ -11,7 +11,7 @@ More than one panel can be expanded at a time, the first panel is initialized to
 ```html
 <template>
   <div>
-    <a-collapse v-model="activeKey" @change="changeActivekey">
+    <a-collapse v-model="activeKey">
       <a-collapse-panel header="This is panel header 1" key="1">
         <p>{{text}}</p>
       </a-collapse-panel>
@@ -32,10 +32,10 @@ More than one panel can be expanded at a time, the first panel is initialized to
         activeKey: ['1']
       }
     },
-    methods: {
-      changeActivekey (key) {
+    watch: {
+      activeKey(key){
         console.log(key)
-      },
+      }
     },
   }
 </script>

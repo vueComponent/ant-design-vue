@@ -1,6 +1,5 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import toArray from 'rc-util/lib/Children/toArray'
 import Menu from '../vc-menu'
 import scrollIntoView from 'dom-scroll-into-view'
 import { getSelectKeys, preventDefaultEvent } from './util'
@@ -99,6 +98,7 @@ export default {
         firstActiveValue,
         dropdownMenuStyle,
       } = props
+      const { menuDeselect, menuSelect } = this.$listeners
       if (menuItems && menuItems.length) {
         const selectedKeys = getSelectKeys(menuItems, value)
         const menuProps = {
@@ -114,10 +114,10 @@ export default {
           ref: 'menuRef',
         }
         if (multiple) {
-          menuProps.on.deselect = this.onMenuDeselect
-          menuProps.on.select = this.onMenuSelect
+          menuProps.on.deselect = menuDeselect
+          menuProps.on.select = menuSelect
         } else {
-          menuProps.on.click = this.onMenuSelect
+          menuProps.on.click = menuSelect
         }
         const activeKeyProps = {}
 
@@ -146,7 +146,7 @@ export default {
 
           clonedMenuItems = menuItems.map(item => {
             if (item.type.isMenuItemGroup) {
-              const children = toArray(item.props.children).map(clone)
+              const children = item.$slots.default.map(clone)
               return cloneElement(item, {}, children)
             }
             return clone(item)
@@ -167,27 +167,16 @@ export default {
       }
       return null
     },
-    onPopupFocus (e) {
-      this.__emit('popupFocus', e)
-    },
-    onPopupScroll (e) {
-      this.__emit('popupScroll', e)
-    },
-    onMenuDeselect () {
-      this.__emit('menuDeselect', ...arguments)
-    },
-    onMenuSelect () {
-      this.__emit('menuSelect', ...arguments)
-    },
   },
   render () {
     const renderMenu = this.renderMenu()
+    const { popupFocus, popupScroll } = this.$listeners
     return renderMenu ? (
       <div
         style={{ overflow: 'auto' }}
-        onFocus={this.onPopupFocus}
+        onFocus={popupFocus}
         onMousedown={preventDefaultEvent}
-        onScroll={this.onPopupScroll}
+        onScroll={popupScroll}
       >
         {renderMenu}
       </div>

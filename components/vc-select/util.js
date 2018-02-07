@@ -1,12 +1,13 @@
+import { getPropsData, getSlotOptions } from '../_util/props-util'
 export function getValuePropValue (child) {
-  const props = child.props
+  const props = getPropsData(child)
   if ('value' in props) {
     return props.value
   }
   if (child.key) {
     return child.key
   }
-  if (child.type && child.type.isSelectOptGroup && props.label) {
+  if (getSlotOptions(child).isSelectOptGroup && props.label) {
     return props.label
   }
   throw new Error(

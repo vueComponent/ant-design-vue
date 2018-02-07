@@ -51,9 +51,8 @@ export default {
   // }
 
   updated () {
-    const prevProps = this.prevProps
     const props = this.$props
-    if (!prevProps.visible && props.visible) {
+    if (!this.prevVisible && props.visible) {
       this.$nextTick(() => {
         this.scrollActiveItemToView()
       })
@@ -64,7 +63,7 @@ export default {
   methods: {
     scrollActiveItemToView () {
     // scroll into view
-      const itemComponent = this.$refs.firstActiveItem.$el
+      const itemComponent = this.$refs.firstActiveItem && this.$refs.firstActiveItem.$el
       const props = this.$props
 
       if (itemComponent) {
@@ -170,6 +169,7 @@ export default {
   },
   render () {
     const renderMenu = this.renderMenu()
+    this.prevVisible = this.visible
     const { popupFocus, popupScroll } = this.$listeners
     return renderMenu ? (
       <div

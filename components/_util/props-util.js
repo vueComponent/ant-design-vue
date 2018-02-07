@@ -3,6 +3,11 @@ const hasProp = (instance, prop) => {
   const propsData = $options.propsData || {}
   return prop in propsData
 }
+const slotHasProp = (slot, prop) => {
+  const $options = slot.componentOptions || {}
+  const propsData = $options.propsData || {}
+  return prop in propsData
+}
 const filterProps = (props, propsData = {}) => {
   const res = {}
   Object.keys(props).forEach((k) => {
@@ -12,7 +17,9 @@ const filterProps = (props, propsData = {}) => {
   })
   return res
 }
-
+const getSlotOptions = (slot) => {
+  return slot.componentOptions.Ctor.options
+}
 const getOptionProps = (instance) => {
   const { $options = {}, $props = {}} = instance
   return filterProps($props, $options.propsData)
@@ -27,5 +34,9 @@ const getComponentFromProp = (instance, prop) => {
   return instance.$slots[prop]
 }
 
-export { hasProp, filterProps, getOptionProps, getComponentFromProp }
+const getPropsData = (ele) => {
+  return ele.componentOptions && ele.componentOptions.propsData
+}
+
+export { hasProp, filterProps, getOptionProps, getComponentFromProp, getSlotOptions, slotHasProp, getPropsData }
 export default hasProp

@@ -1,0 +1,502 @@
+@selectPrefixCls: rc-select;
+
+.effect() {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
+}
+
+.@{selectPrefixCls} {
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  color: #666;
+  line-height: 28px;
+
+  &-allow-clear {
+    .@{selectPrefixCls}-selection--single .@{selectPrefixCls}-selection__rendered {
+      padding-right: 40px;
+    }
+  }
+
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  > ul > li > a {
+    padding: 0;
+    background-color: #fff;
+  }
+
+  // arrow
+  &-arrow {
+    height: 26px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px;
+    outline: none;
+    b {
+      border-color: #999999 transparent transparent transparent;
+      border-style: solid;
+      border-width: 5px 4px 0 4px;
+      height: 0;
+      width: 0;
+      margin-left: -4px;
+      margin-top: -2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+  &-selection {
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+
+    box-sizing: border-box;
+    display: block;
+
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+
+    &__placeholder {
+      position: absolute;
+      top: 0;
+      color: #aaa;
+    }
+
+    &__clear {
+      font-weight: bold;
+      position: absolute;
+      line-height: 28px;
+
+      &:after {
+        content: '×'
+      }
+    }
+  }
+
+  &-focused &-selection {
+    border-color: #23c0fa;
+    box-shadow: 0 0 2px fadeout(#2db7f5, 20%);
+  }
+
+  &-enabled &-selection {
+    &:hover {
+      border-color: #23c0fa;
+      box-shadow: 0 0 2px fadeout(#2db7f5, 20%);
+    }
+    &:active {
+      border-color: #2db7f5;
+    }
+  }
+
+  &-selection--single {
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    position: relative;
+
+    .@{selectPrefixCls}-selection-selected-value {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .@{selectPrefixCls}-selection__rendered {
+      height: 28px;
+      position: relative;
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-left: 10px;
+      padding-right: 20px;
+      line-height: 28px;
+    }
+
+    .@{selectPrefixCls}-selection__clear {
+      top: 0;
+      right: 20px;
+    }
+  }
+
+  &-disabled {
+    color: #ccc;
+    cursor: not-allowed;
+
+    .@{selectPrefixCls}-selection--single,
+    .@{selectPrefixCls}-selection__choice__remove {
+      cursor: not-allowed;
+      color: #ccc;
+
+      &:hover {
+        cursor: not-allowed;
+        color: #ccc;
+      }
+    }
+  }
+
+  &-search__field__wrap {
+    display: inline-block;
+  }
+
+  &-search__field__placeholder {
+    position: absolute;
+    top: 0;
+    left: 3px;
+    color: #aaa;
+  }
+
+  &-search--inline {
+    width: 100%;
+    .@{selectPrefixCls}-search__field__wrap {
+      width: 100%;
+    }
+    .@{selectPrefixCls}-search__field {
+      border: none;
+      font-size: 100%;
+      //margin-top: 5px;
+      background: transparent;
+      outline: 0;
+      width: 100%;
+      &::-ms-clear {
+        display: none;
+      }
+    }
+    .@{selectPrefixCls}-search__field__mirror {
+      position: absolute;
+      top: -999px;
+      left: 0;
+      white-space: pre;
+    }
+    > i {
+      float: right;
+    }
+  }
+
+  &-enabled&-selection--multiple {
+    cursor: text;
+  }
+
+  &-selection--multiple {
+    min-height: 28px;
+
+    .@{selectPrefixCls}-search--inline {
+      float: left;
+      width: auto;
+      .@{selectPrefixCls}-search__field {
+        &__wrap {
+          width: auto;
+        }
+        width: 0.75em;
+      }
+    }
+
+    .@{selectPrefixCls}-search__field__placeholder {
+      top: 5px;
+      left: 8px;
+    }
+
+    .@{selectPrefixCls}-selection__rendered {
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-left: 8px;
+      padding-bottom: 2px;
+
+      .@{selectPrefixCls}-selection__choice {
+        margin-top: 4px;
+        line-height: 20px;
+      }
+    }
+
+    .@{selectPrefixCls}-selection__clear {
+      top: 1px;
+      right: 8px;
+    }
+  }
+
+  &-enabled {
+    .@{selectPrefixCls}-selection__choice {
+      cursor: default;
+      &:hover {
+        .@{selectPrefixCls}-selection__choice__remove {
+          opacity: 1;
+          transform: scale(1);
+        }
+        .@{selectPrefixCls}-selection__choice__content {
+          margin-left: -8px;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    .@{selectPrefixCls}-selection__choice__disabled {
+      cursor: not-allowed;
+      &:hover {
+        .@{selectPrefixCls}-selection__choice__content {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  & &-selection__choice {
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    float: left;
+    padding: 0 15px;
+    margin-right: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: padding .3s cubic-bezier(0.6, -0.28, 0.735, 0.045), width .3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+    &__content {
+      margin-left: 0;
+      margin-right: 0;
+      transition: margin .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    &-zoom-enter, &-zoom-appear, &-zoom-leave {
+      .effect();
+      opacity: 0;
+      animation-play-state: paused;
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &-zoom-leave {
+      opacity: 1;
+      animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    }
+
+    &-zoom-enter.@{selectPrefixCls}-selection__choice-zoom-enter-active,
+    &-zoom-appear.@{selectPrefixCls}-selection__choice-zoom-appear-active {
+      animation-play-state: running;
+      animation-name: rcSelectChoiceZoomIn;
+    }
+
+    &-zoom-leave.@{selectPrefixCls}-selection__choice-zoom-leave-active {
+      animation-play-state: running;
+      animation-name: rcSelectChoiceZoomOut;
+    }
+
+    @keyframes rcSelectChoiceZoomIn {
+      0% {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes rcSelectChoiceZoomOut {
+      to {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    &__remove {
+      color: #919191;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0 0 0 8px;
+      position: absolute;
+      opacity: 0;
+      transform: scale(0);
+      top: 0;
+      right: 2px;
+      transition: opacity .3s, transform .3s;
+      &:before {
+        content: '×'
+      }
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  &-dropdown {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0px 4px #d9d9d9;
+    border-radius: 4px;
+    box-sizing: border-box;
+    z-index: 100;
+    left: -9999px;
+    top: -9999px;
+    position: absolute;
+    outline: none;
+
+    &:empty,
+    &-hidden {
+      display: none;
+    }
+
+    &-menu {
+      outline: none;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      z-index: 9999;
+
+      > li {
+        margin: 0;
+        padding: 0;
+      }
+
+      &-item-group-list {
+        margin: 0;
+        padding: 0;
+
+        > li.@{selectPrefixCls}-menu-item {
+          padding-left: 20px;
+        }
+      }
+
+      &-item-group-title {
+        color: #999;
+        line-height: 1.5;
+        padding: 8px 10px;
+        border-bottom: 1px solid #dedede;
+      }
+
+      li&-item {
+        margin: 0;
+        position: relative;
+        display: block;
+        padding: 7px 10px;
+        font-weight: normal;
+        color: #666;
+        white-space: nowrap;
+
+        &-disabled {
+          color: #ccc;
+          cursor: not-allowed;
+        }
+
+        &-selected {
+          color: #666;
+          background-color: #ddd;
+        }
+
+        &-active {
+          background-color: #5897fb;
+          color: white;
+          cursor: pointer;
+        }
+
+        &-divider {
+          height: 1px;
+          margin: 1px 0;
+          overflow: hidden;
+          background-color: #e5e5e5;
+          line-height: 0;
+        }
+      }
+    }
+
+    &-slide-up-enter, &-slide-up-appear {
+      .effect();
+      opacity: 0;
+      animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+      animation-play-state: paused;
+    }
+
+    &-slide-up-leave {
+      .effect();
+      opacity: 1;
+      animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+      animation-play-state: paused;
+    }
+
+    &-slide-up-enter&-slide-up-enter-active&-placement-bottomLeft, &-slide-up-appear&-slide-up-appear-active&-placement-bottomLeft {
+      animation-name: rcSelectDropdownSlideUpIn;
+      animation-play-state: running;
+    }
+
+    &-slide-up-leave&-slide-up-leave-active&-placement-bottomLeft {
+      animation-name: rcSelectDropdownSlideUpOut;
+      animation-play-state: running;
+    }
+
+    &-slide-up-enter&-slide-up-enter-active&-placement-topLeft, &-slide-up-appear&-slide-up-appear-active&-placement-topLeft {
+      animation-name: rcSelectDropdownSlideDownIn;
+      animation-play-state: running;
+    }
+
+    &-slide-up-leave&-slide-up-leave-active&-placement-topLeft {
+      animation-name: rcSelectDropdownSlideDownOut;
+      animation-play-state: running;
+    }
+
+    @keyframes rcSelectDropdownSlideUpIn {
+      0% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(0);
+      }
+      100% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+      }
+    }
+    @keyframes rcSelectDropdownSlideUpOut {
+      0% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+      }
+      100% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(0);
+      }
+    }
+
+    @keyframes rcSelectDropdownSlideDownIn {
+      0% {
+        opacity: 0;
+        transform-origin: 0% 100%;
+        transform: scaleY(0);
+      }
+      100% {
+        opacity: 1;
+        transform-origin: 0% 100%;
+        transform: scaleY(1);
+      }
+    }
+    @keyframes rcSelectDropdownSlideDownOut {
+      0% {
+        opacity: 1;
+        transform-origin: 0% 100%;
+        transform: scaleY(1);
+      }
+      100% {
+        opacity: 0;
+        transform-origin: 0% 100%;
+        transform: scaleY(0);
+      }
+    }
+  }
+
+  &-open {
+    .@{selectPrefixCls}-arrow b {
+      border-color: transparent transparent #888 transparent;
+      border-width: 0 4px 5px 4px;
+    }
+  }
+
+}

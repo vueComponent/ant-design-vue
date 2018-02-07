@@ -123,6 +123,9 @@ export function filterEmpty (children = []) {
 export function getPropsData (ele) {
   return ele.componentOptions && ele.componentOptions.propsData
 }
+export function getValueByProp (ele, prop) {
+  return ele.componentOptions && ele.componentOptions.propsData[prop]
+}
 
 export function getEvents (child) {
   let events = {}

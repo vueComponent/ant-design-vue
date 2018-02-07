@@ -65,6 +65,7 @@ export default {
     notFoundContent: PropTypes.string.def('Not Found'),
     backfill: PropTypes.bool.def(false),
     showAction: SelectPropTypes.showAction.def(['click']),
+    combobox: PropTypes.bool.def(false),
     // onChange: noop,
     // onFocus: noop,
     // onBlur: noop,
@@ -105,26 +106,30 @@ export default {
       this.autoFocus && this.focus()
     })
   },
-  beforeUpdate () {
-    if (hasProp(this, 'value')) {
-      const { combobox, $slots } = this
-      let value = toArray(this.value)
-      value = this.addLabelToValue(value)
-      value = this.addTitleToValue($slots, value)
-      this.setState({
-        sValue: value,
-      })
-      if (combobox) {
-        this.setState({
-          inputValue: value.length
-            ? this.getLabelFromProps(value[0].key)
-            : '',
-        })
-      }
-    }
-    this.adjustOpenState()
+  watch: {
+    '$props': {
+      handler: function (nextProps) {
+        if (hasProp(this, 'value')) {
+          const { combobox, $slots } = this
+          let value = toArray(this.value)
+          value = this.addLabelToValue(value)
+          value = this.addTitleToValue($slots, value)
+          this.setState({
+            sValue: value,
+          })
+          if (combobox) {
+            this.setState({
+              inputValue: value.length
+                ? this.getLabelFromProps(value[0].key)
+                : '',
+            })
+          }
+        }
+        this.adjustOpenState()
+      },
+      deep: true,
+    },
   },
-
   updated () {
     this.$nextTick(() => {
       if (isMultipleOrTags(this.$props)) {
@@ -259,7 +264,7 @@ export default {
         }
       }
       this.__emit('select', event, item)
-      const selectedTitle = item.props.title
+      const selectedTitle = item.title
       if (isMultipleOrTags(props)) {
         if (findIndexInValueByKey(sValue, selectedValue) !== -1) {
           return
@@ -416,7 +421,6 @@ export default {
         if (!child) {
           return
         }
-        console.log('child', child)
         if (getSlotOptions(child).isSelectOptGroup) {
           const maybe = this.getLabelBySingleValue(child.componentOptions.children, value)
           if (maybe !== null) {
@@ -501,17 +505,23 @@ export default {
         hidden = false
       }
       if (placeholder) {
+        const p = {
+          props: {
+
+          },
+          on: {
+            mousedown: preventDefaultEvent,
+            click: this.onPlaceholderClick,
+          },
+          attrs: UNSELECTABLE_ATTRIBUTE,
+          style: {
+            display: hidden ? 'none' : 'block',
+            ...UNSELECTABLE_STYLE,
+          },
+          class: `${prefixCls}-selection__placeholder`,
+        }
         return (
-          <div
-            onMousedown={preventDefaultEvent}
-            style={{
-              display: hidden ? 'none' : 'block',
-              ...UNSELECTABLE_STYLE,
-            }}
-            {...UNSELECTABLE_ATTRIBUTE}
-            onClick={this.onPlaceholderClick}
-            class={`${prefixCls}-selection__placeholder`}
-          >
+          <div {...p}>
             {placeholder}
           </div>
         )
@@ -540,8 +550,8 @@ export default {
             class: inputCls,
             ref: 'inputRef',
             on: {
-              change: this.onInputChange,
-              keyDown: chaining(
+              input: this.onInputChange,
+              keydown: chaining(
                 this.onInputKeydown,
                 getEvents(inputElement).keydown || noop,
                 this.$listeners.inputKeydown
@@ -611,7 +621,7 @@ export default {
     },
 
     focus () {
-      if (isSingleMode(this.props)) {
+      if (isSingleMode(this.$props)) {
         this.$refs.selectionRef.focus()
       } else {
         this.getInputDOMNode().focus()
@@ -619,7 +629,7 @@ export default {
     },
 
     blur () {
-      if (isSingleMode(this.props)) {
+      if (isSingleMode(this.$props)) {
         this.$refs.selectionRef.blur()
       } else {
         this.getInputDOMNode().blur()
@@ -717,7 +727,7 @@ export default {
       if (needFocus || open) {
         const input = this.getInputDOMNode()
         const { activeElement } = document
-        if (input && (open || isMultipleOrTagsOrCombobox(this.props))) {
+        if (input && (open || isMultipleOrTagsOrCombobox(this.$props))) {
           if (activeElement !== input) {
             input.focus()
             this._focused = true
@@ -890,7 +900,7 @@ export default {
           const menuItem = (
             <MenuItem
               style={UNSELECTABLE_STYLE}
-              attribute={UNSELECTABLE_ATTRIBUTE}
+              {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
               value={key}
               key={key}
             >
@@ -917,13 +927,16 @@ export default {
             return !filterFn()
           })
           if (notFindInputItem) {
+            const p = {
+              attrs: UNSELECTABLE_ATTRIBUTE,
+              key: inputValue,
+              props: {
+                value: inputValue,
+              },
+              style: UNSELECTABLE_STYLE,
+            }
             options.unshift(
-              <MenuItem
-                style={UNSELECTABLE_STYLE}
-                attribute={UNSELECTABLE_ATTRIBUTE}
-                value={inputValue}
-                key={inputValue}
-              >
+              <MenuItem {...p}>
                 {inputValue}
               </MenuItem>
             )
@@ -932,14 +945,17 @@ export default {
       }
 
       if (!options.length && notFoundContent) {
+        const p = {
+          attrs: UNSELECTABLE_ATTRIBUTE,
+          key: 'NOT_FOUND',
+          props: {
+            value: 'NOT_FOUND',
+            disabled: true,
+          },
+          style: UNSELECTABLE_STYLE,
+        }
         options = [
-          <MenuItem
-            style={UNSELECTABLE_STYLE}
-            attribute={UNSELECTABLE_ATTRIBUTE}
-            disabled
-            value='NOT_FOUND'
-            key='NOT_FOUND'
-          >
+          <MenuItem {...p}>
             {notFoundContent}
           </MenuItem>,
         ]
@@ -978,11 +994,10 @@ export default {
           }
           return
         }
-
         warning(
-          getSlotOptions(child).isSelectOptGroup,
+          getSlotOptions(child).isSelectOption,
           'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' +
-          `instead of \`${getSlotOptions(child).isSelectOptGroup ||
+          `instead of \`${getSlotOptions(child).name ||
             getSlotOptions(child)}\`.`
         )
 
@@ -991,14 +1006,18 @@ export default {
         validateOptionValue(childValue, this.$props)
 
         if (this._filterOption(inputValue, child)) {
+          const p = {
+            attrs: UNSELECTABLE_ATTRIBUTE,
+            key: childValue,
+            props: {
+              value: childValue,
+              ...getPropsData(child),
+            },
+            style: UNSELECTABLE_STYLE,
+            on: getEvents(child),
+          }
           const menuItem = (
-            <MenuItem
-              style={UNSELECTABLE_STYLE}
-              attribute={UNSELECTABLE_ATTRIBUTE}
-              value={childValue}
-              key={childValue}
-              {...getPropsData(child)}
-            />
+            <MenuItem {...p}>{child.componentOptions.children}</MenuItem>
           )
           sel.push(menuItem)
           menuItems.push(menuItem)
@@ -1086,8 +1105,8 @@ export default {
           }
           maxTagPlaceholderEl = (<li
             style={UNSELECTABLE_STYLE}
-            {...UNSELECTABLE_ATTRIBUTE}
-            onMouseDown={preventDefaultEvent}
+            unselectable='unselectable'
+            onMousedown={preventDefaultEvent}
             class={`${prefixCls}-selection__choice ${prefixCls}-selection__choice__disabled`}
             key={'maxTagPlaceholder'}
             title={content}
@@ -1113,7 +1132,7 @@ export default {
             return (
               <li
                 style={UNSELECTABLE_STYLE}
-                {...UNSELECTABLE_ATTRIBUTE}
+                unselectable='unselectable'
                 onMousedown={preventDefaultEvent}
                 class={choiceClassName}
                 key={singleValue.key}
@@ -1146,6 +1165,7 @@ export default {
         if (isMultipleOrTags(props) && choiceTransitionName) {
           const transitionProps = getTransitionProps(choiceTransitionName, {
             tag: 'ul',
+            afterLeave: this.onChoiceAnimationLeave,
           })
           innerNode = (
             <transition-group
@@ -1180,7 +1200,7 @@ export default {
           key='clear'
           onMousedown={preventDefaultEvent}
           style={UNSELECTABLE_STYLE}
-          {...UNSELECTABLE_ATTRIBUTE}
+          unselectable='unselectable'
           class={`${prefixCls}-selection__clear`}
           onClick={this.onClearSelection}
         />
@@ -1279,7 +1299,7 @@ export default {
                 key='arrow'
                 class={`${prefixCls}-arrow`}
                 style={UNSELECTABLE_STYLE}
-                {...UNSELECTABLE_ATTRIBUTE}
+                unselectable='unselectable'
                 onClick={this.onArrowClick}
               >
                 <b />

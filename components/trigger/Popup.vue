@@ -87,7 +87,7 @@ export default {
       if (!transitionName) {
         if (typeof animation === 'string') {
           transitionName = `${animation}`
-        } else if (animation.props && animation.props.name) {
+        } else if (animation && animation.props && animation.props.name) {
           transitionName = animation.props.name
         }
       }

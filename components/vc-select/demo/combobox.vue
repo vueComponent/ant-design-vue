@@ -35,10 +35,10 @@ export default {
       <p>
         <button onClick={this.toggleDisabled}>toggle disabled</button>
       </p>
-      <div style={{ width: 300 }}>
+      <div style={{ width: '300px' }}>
         <Select
           disabled={this.disabled}
-          style={{ width: 500 }}
+          style={{ width: '500px' }}
           onChange={this.onChange}
           onSelect={this.onSelect}
           onInputKeydown={this.onKeyDown}

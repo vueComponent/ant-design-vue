@@ -1,11 +1,11 @@
-import { getPropsData, getSlotOptions } from '../_util/props-util'
+import { getPropsData, getSlotOptions, getKey } from '../_util/props-util'
 export function getValuePropValue (child) {
   const props = getPropsData(child)
   if ('value' in props) {
     return props.value
   }
-  if (child.key) {
-    return child.key
+  if (getKey(child)) {
+    return getKey(child)
   }
   if (getSlotOptions(child).isSelectOptGroup && props.label) {
     return props.label
@@ -84,9 +84,9 @@ export function getSelectKeys (menuItems, value) {
   }
   let selectedKeys = []
   menuItems.forEach(item => {
-    if (item.type.isMenuItemGroup) {
+    if (getSlotOptions(item).isMenuItemGroup) {
       selectedKeys = selectedKeys.concat(
-        getSelectKeys(item.props.children, value)
+        getSelectKeys(item.componentOptions.children, value)
       )
     } else {
       const itemValue = getValuePropValue(item)
@@ -111,12 +111,13 @@ export const UNSELECTABLE_ATTRIBUTE = {
 export function findFirstMenuItem (children) {
   for (let i = 0; i < children.length; i++) {
     const child = children[i]
-    if (child.type.isMenuItemGroup) {
-      const found = findFirstMenuItem(child.props.children)
+    const props = getSlotOptions(child)
+    if (props.isMenuItemGroup) {
+      const found = findFirstMenuItem(child.componentOptions.children)
       if (found) {
         return found
       }
-    } else if (!child.props.disabled) {
+    } else if (!props.disabled) {
       return child
     }
   }
@@ -138,10 +139,11 @@ export function splitBySeparators (string, separators) {
 }
 
 export function defaultFilterFn (input, child) {
-  if (child.props.disabled) {
+  const props = getSlotOptions(child)
+  if (props.disabled) {
     return false
   }
-  const value = String(getPropValue(child, this.props.optionFilterProp))
+  const value = String(getPropValue(child, this.optionFilterProp))
   return (
     value.toLowerCase().indexOf(input.toLowerCase()) > -1
   )

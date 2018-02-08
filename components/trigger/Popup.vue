@@ -22,6 +22,7 @@ export default {
     mask: PropTypes.bool,
     zIndex: PropTypes.number,
     popupClassName: PropTypes.any,
+    popupStyle: PropTypes.object.def({}),
   },
   data () {
     return {
@@ -99,7 +100,7 @@ export default {
     },
     getPopupElement () {
       const { $props: props, $slots, $listeners, getTransitionName } = this
-      const { align, visible, prefixCls, animation } = props
+      const { align, visible, prefixCls, animation, popupStyle } = props
       const { mouseenter, mouseleave } = $listeners
       const className = this.getClassName(props.getClassNameFromAlign(align))
       // const hiddenClassName = `${prefixCls}-hidden`
@@ -115,7 +116,7 @@ export default {
           mouseleave: mouseleave || noop,
         },
         ref: 'popupInstance',
-        style: { ...this.getZIndexStyle() },
+        style: { ...this.getZIndexStyle(), ...popupStyle },
       }
       const transitionProps = {
         props: Object.assign({

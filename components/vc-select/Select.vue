@@ -31,6 +31,7 @@ import {
 } from './util'
 import SelectTrigger from './SelectTrigger'
 import { SelectPropTypes } from './PropTypes'
+import { setTimeout } from 'timers'
 
 function noop () {}
 
@@ -101,7 +102,7 @@ export default {
     }
   },
   beforeMount () {
-    this.adjustOpenState()
+    // this.adjustOpenState()
   },
   mounted () {
     this.$nextTick(() => {
@@ -147,8 +148,8 @@ export default {
     })
   },
   beforeUpdate () {
-    console.log('beforeUpdate')
-    this.adjustOpenState()
+    // console.log('beforeUpdate')
+    // this.adjustOpenState()
   },
   beforeDestroy () {
     this.clearFocusTime()
@@ -200,12 +201,12 @@ export default {
 
     // combobox ignore
     onKeyDown (event) {
-      const { disabled, sOpen } = this
+      const { disabled, openStatus } = this
       if (disabled) {
         return
       }
       const keyCode = event.keyCode
-      if (sOpen && !this.getInputDOMNode()) {
+      if (openStatus && !this.getInputDOMNode()) {
         this.onInputKeydown(event)
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
         this.setOpenState(true)
@@ -214,7 +215,7 @@ export default {
     },
 
     onInputKeydown (event) {
-      const { disabled, sOpen, sValue, $props } = this
+      const { disabled, openStatus, sValue, $props } = this
       if (disabled) {
         return
       }
@@ -231,14 +232,14 @@ export default {
         return
       }
       if (keyCode === KeyCode.DOWN) {
-        if (!sOpen) {
+        if (!openStatus) {
           this.openIfHasChildren()
           event.preventDefault()
           event.stopPropagation()
           return
         }
       } else if (keyCode === KeyCode.ESC) {
-        if (sOpen) {
+        if (openStatus) {
           this.setOpenState(false)
           event.preventDefault()
           event.stopPropagation()
@@ -246,7 +247,7 @@ export default {
         return
       }
 
-      if (sOpen) {
+      if (openStatus) {
         const menu = this.$refs.selectTriggerRef.getInnerMenu()
         if (menu && menu.onKeyDown(event, this.handleBackfill)) {
           event.preventDefault()
@@ -322,7 +323,7 @@ export default {
     onArrowClick (e) {
       // e.stopPropagation()
       // if (!this.disabled) {
-      //   this.setOpenState(!this.sOpen, !this.sOpen)
+      //   this.setOpenState(!this.openStatus, !this.openStatus)
       // }
     },
 
@@ -544,10 +545,13 @@ export default {
     },
     inputBlur (e) {
       // console.log(e.target)
-      this.onOuterBlur()
-      if (!this.disabled) {
-        this.setOpenState(!this.sOpen, !this.sOpen)
-      }
+      this.clearBlurTime()
+      this.blurTimer = setTimeout(() => {
+        this.onOuterBlur()
+        if (!this.disabled) {
+          this.setOpenState(!this.openStatus, !this.openStatus)
+        }
+      }, 10)
     },
     _getInputElement () {
       const props = this.$props
@@ -619,8 +623,8 @@ export default {
     },
 
     setOpenState (open, needFocus) {
-      const { $props: props, $data: state } = this
-      if (state.sOpen === open) {
+      const { $props: props, openStatus } = this
+      if (openStatus === open) {
         this.maybeFocus(open, needFocus)
         return
       }
@@ -919,7 +923,7 @@ export default {
       const { $props, showSearch } = this
       let options = []
       // If hidden menu due to no options, then it should be calculated again
-      if (sOpen || this.hiddenForNoOptions) {
+      if (true || sOpen || this.hiddenForNoOptions) {
         options = this.renderFilterOptions()
       }
       this._options = options
@@ -935,8 +939,9 @@ export default {
           this.hiddenForNoOptions = false
         }
       }
+      this.openStatus = sOpen
       return {
-        option: this._options,
+        options,
         open: sOpen,
       }
     },
@@ -1095,8 +1100,8 @@ export default {
       return sel
     },
 
-    renderTopControlNode () {
-      const { sValue, sOpen, inputValue, $props: props } = this
+    renderTopControlNode (openStatus) {
+      const { sValue, inputValue, $props: props } = this
       const {
         choiceTransitionName,
         prefixCls,
@@ -1116,7 +1121,7 @@ export default {
           if (!showSearch) {
             showSelectedValue = true
           } else {
-            if (sOpen) {
+            if (openStatus) {
               showSelectedValue = !inputValue
               if (showSelectedValue) {
                 opacity = 0.4
@@ -1149,7 +1154,7 @@ export default {
               class={`${prefixCls}-search ${prefixCls}-search--inline`}
               key='input'
               style={{
-                display: sOpen ? 'block' : 'none',
+                display: openStatus ? 'block' : 'none',
               }}
             >
               {this._getInputElement()}
@@ -1230,7 +1235,7 @@ export default {
         if (isMultipleOrTags(props) && choiceTransitionName) {
           const transitionProps = getTransitionProps(choiceTransitionName, {
             tag: 'ul',
-            afterLeave: this.onChoiceAnimationLeave,
+            // beforeEnter: this.onChoiceAnimationLeave,
           })
           innerNode = (
             <transition-group
@@ -1299,11 +1304,11 @@ export default {
   render () {
     const props = this.$props
     const multiple = isMultipleOrTags(props)
-    const { disabled, prefixCls, sOpen, inputValue, sValue, $listeners } = this
+    const { options, open: openStatus } = this.getOptionsAndOpenStatus()
+    const { disabled, prefixCls, inputValue, sValue, $listeners } = this
     const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = $listeners
-    const ctrlNode = this.renderTopControlNode()
+    const ctrlNode = this.renderTopControlNode(openStatus)
     let extraSelectionProps = {}
-    const options = this._options
     if (!isMultipleOrTagsOrCombobox(props)) {
       extraSelectionProps = {
         onKeyDown: this.onKeyDown,
@@ -1312,8 +1317,8 @@ export default {
     }
     const rootCls = {
       [prefixCls]: 1,
-      [`${prefixCls}-open`]: sOpen,
-      [`${prefixCls}-focused`]: sOpen || !!this._focused,
+      [`${prefixCls}-open`]: openStatus,
+      [`${prefixCls}-focused`]: openStatus || !!this._focused,
       [`${prefixCls}-combobox`]: isCombobox(props),
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-enabled`]: !disabled,
@@ -1336,7 +1341,7 @@ export default {
         options={options}
         multiple={multiple}
         disabled={disabled}
-        visible={sOpen}
+        visible={openStatus}
         inputValue={inputValue}
         value={sValue}
         firstActiveValue={props.firstActiveValue}
@@ -1366,7 +1371,7 @@ export default {
             role='combobox'
             aria-autocomplete='list'
             aria-haspopup='true'
-            aria-expanded={sOpen}
+            aria-expanded={openStatus}
             {...extraSelectionProps}
             // onClick={this.stopPropagation}
           >

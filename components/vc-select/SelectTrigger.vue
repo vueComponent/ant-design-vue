@@ -49,6 +49,7 @@ export default {
     value: PropTypes.array,
     // children: PropTypes.any,
     showAction: PropTypes.arrayOf(PropTypes.string),
+    combobox: PropTypes.bool,
   },
   data () {
     return {
@@ -176,7 +177,6 @@ export default {
         builtinPlacements: BUILT_IN_PLACEMENTS,
         prefixCls: dropdownPrefixCls,
         popupTransitionName: this.getDropdownTransitionName(),
-        popup: popupElement,
         popupAlign: dropdownAlign,
         popupVisible: visible,
         getPopupContainer,
@@ -191,6 +191,9 @@ export default {
     return (
       <Trigger {...triggerProps}>
         {$slots.default}
+        <template slot='popup'>
+          {popupElement}
+        </template>
       </Trigger>
     )
   },

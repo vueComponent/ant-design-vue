@@ -94,12 +94,14 @@ export default {
     if (sOpen === undefined) {
       sOpen = defaultOpen
     }
-    this.adjustOpenState()
     return {
       sValue,
       inputValue,
       sOpen,
     }
+  },
+  beforeMount () {
+    this.adjustOpenState()
   },
   mounted () {
     this.$nextTick(() => {
@@ -144,7 +146,10 @@ export default {
       }
     })
   },
-
+  beforeUpdate () {
+    console.log('beforeUpdate')
+    this.adjustOpenState()
+  },
   beforeDestroy () {
     this.clearFocusTime()
     this.clearBlurTime()
@@ -315,19 +320,23 @@ export default {
     },
 
     onArrowClick (e) {
-      e.stopPropagation()
-      if (!this.disabled) {
-        this.setOpenState(!this.sOpen, !this.sOpen)
-      }
+      // e.stopPropagation()
+      // if (!this.disabled) {
+      //   this.setOpenState(!this.sOpen, !this.sOpen)
+      // }
     },
 
-    onPlaceholderClick () {
+    onPlaceholderClick (e) {
+      if (this._focused) {
+        e.stopPropagation()
+      }
       if (this.getInputDOMNode()) {
         this.getInputDOMNode().focus()
       }
     },
 
     onOuterFocus (e) {
+      console.log('onOuterFocus')
       if (this.disabled) {
         e.preventDefault()
         return
@@ -386,7 +395,7 @@ export default {
         // why not use setState?
           this.inputValue = this.getInputDOMNode().value = ''
         }
-        this._emit('blur', this.getVLForOnChange(sValue))
+        this.__emit('blur', this.getVLForOnChange(sValue))
         this.setOpenState(false)
       }, 10)
     },
@@ -528,7 +537,18 @@ export default {
       }
       return null
     },
-
+    inputClick (e) {
+      if (this._focused) {
+        e.stopPropagation()
+      }
+    },
+    inputBlur (e) {
+      // console.log(e.target)
+      this.onOuterBlur()
+      if (!this.disabled) {
+        this.setOpenState(!this.sOpen, !this.sOpen)
+      }
+    },
     _getInputElement () {
       const props = this.$props
       const inputElement = props.getInputElement
@@ -537,15 +557,15 @@ export default {
       const inputCls = classnames(getClass(inputElement), {
         [`${props.prefixCls}-search__field`]: true,
       })
+      const inputEvents = getEvents(inputElement)
       // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
       // Add space to the end of the inputValue as the width measurement tolerance
       return (
         <div class={`${props.prefixCls}-search__field__wrap`}>
           {cloneElement(inputElement, {
-            props: {
+            attrs: {
               value: this.inputValue,
               disabled: props.disabled,
-
             },
             class: inputCls,
             ref: 'inputRef',
@@ -553,8 +573,20 @@ export default {
               input: this.onInputChange,
               keydown: chaining(
                 this.onInputKeydown,
-                getEvents(inputElement).keydown || noop,
+                inputEvents.keydown || noop,
                 this.$listeners.inputKeydown
+              ),
+              // focus: chaining(
+              //   this.onOuterFocus,
+              //   inputEvents.focus || noop,
+              // ),
+              blur: chaining(
+                this.inputBlur,
+                inputEvents.blur || noop,
+              ),
+              click: chaining(
+                this.inputClick,
+                inputEvents.click || noop,
               ),
             },
           })}
@@ -858,7 +890,9 @@ export default {
       // If hidden menu due to no options, then it should be calculated again
       if (sOpen || this.hiddenForNoOptions) {
         options = this.renderFilterOptions()
+        console.log('options', options)
       }
+      console.log('options1', options)
       this._options = options
 
       if (isMultipleOrTagsOrCombobox($props) || !showSearch) {
@@ -874,7 +908,38 @@ export default {
       }
       this.sOpen = sOpen
     },
+    getOptionsAndOpenStatus () {
+      let sOpen = this.sOpen
+      if (this.skipAdjustOpen) {
+        return {
+          option: this._options,
+          open: sOpen,
+        }
+      }
+      const { $props, showSearch } = this
+      let options = []
+      // If hidden menu due to no options, then it should be calculated again
+      if (sOpen || this.hiddenForNoOptions) {
+        options = this.renderFilterOptions()
+      }
+      this._options = options
 
+      if (isMultipleOrTagsOrCombobox($props) || !showSearch) {
+        if (sOpen && !options.length) {
+          sOpen = false
+          this.hiddenForNoOptions = true
+        }
+        // Keep menu open if there are options and hidden for no options before
+        if (this.hiddenForNoOptions && options.length) {
+          sOpen = true
+          this.hiddenForNoOptions = false
+        }
+      }
+      return {
+        option: this._options,
+        open: sOpen,
+      }
+    },
     renderFilterOptions () {
       const { inputValue } = this
       const { $slots, tags, filterOption, notFoundContent } = this
@@ -1219,6 +1284,16 @@ export default {
       }
       return null
     },
+    rootRefClick (e) {
+      // e.stopPropagation()
+      if (this._focused) {
+        // this.getInputDOMNode().blur()
+        this.onOuterBlur()
+      } else {
+        this.onOuterFocus()
+        // this.getInputDOMNode().focus()
+      }
+    },
   },
 
   render () {
@@ -1244,6 +1319,7 @@ export default {
       [`${prefixCls}-enabled`]: !disabled,
       [`${prefixCls}-allow-clear`]: !!props.allowClear,
     }
+    console.log(options)
     return (
       <SelectTrigger
         dropdownAlign={props.dropdownAlign}
@@ -1277,8 +1353,9 @@ export default {
       >
         <div
           ref='rootRef'
-          onBlur={this.onOuterBlur}
-          onFocus={this.onOuterFocus}
+          // onBlur={this.onOuterBlur}
+          // onFocus={this.onOuterFocus}
+          onClick={this.rootRefClick}
           class={classnames(rootCls)}
         >
           <div
@@ -1291,6 +1368,7 @@ export default {
             aria-haspopup='true'
             aria-expanded={sOpen}
             {...extraSelectionProps}
+            // onClick={this.stopPropagation}
           >
             {ctrlNode}
             {this.renderClear()}

@@ -59,19 +59,23 @@ export function cloneElement (n, nodeProps, clone) {
     return null
   }
   const node = clone ? cloneVNode(ele, true) : ele
-  const { props = {}, key, on = {}} = nodeProps
+  const { props = {}, key, on = {}, children } = nodeProps
   const data = node.data || {}
   const { style = data.style,
     class: cls = data.class,
     attrs = data.attrs,
     ref,
+    domProps = data.domProps,
   } = nodeProps
-  node.data = Object.assign({}, data, { style, attrs, class: cls })
+  node.data = Object.assign({}, data, { style, attrs, class: cls, domProps })
   if (node.componentOptions) {
     node.componentOptions.propsData = node.componentOptions.propsData || {}
     node.componentOptions.listeners = node.componentOptions.listeners || {}
     node.componentOptions.propsData = { ...node.componentOptions.propsData, ...props }
     node.componentOptions.listeners = { ...node.componentOptions.listeners, ...on }
+    if (children) {
+      node.componentOptions.children = children
+    }
   } else {
     node.data.on = { ...(node.data.on || {}), ...on }
   }

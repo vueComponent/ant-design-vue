@@ -31,7 +31,6 @@ import {
 } from './util'
 import SelectTrigger from './SelectTrigger'
 import { SelectPropTypes } from './PropTypes'
-import { setTimeout } from 'timers'
 
 function noop () {}
 
@@ -128,7 +127,7 @@ export default {
             })
           }
         }
-        this.adjustOpenState()
+        // this.adjustOpenState()
       },
       deep: true,
     },
@@ -190,6 +189,7 @@ export default {
     },
 
     onDropdownVisibleChange (open) {
+      console.log('onDropdownVisibleChange', open)
       if (open && !this._focused) {
         this.clearBlurTime()
         this.timeoutFocus()
@@ -321,10 +321,10 @@ export default {
     },
 
     onArrowClick (e) {
-      // e.stopPropagation()
-      // if (!this.disabled) {
-      //   this.setOpenState(!this.openStatus, !this.openStatus)
-      // }
+      e.stopPropagation()
+      if (!this.disabled) {
+        this.setOpenState(!this.openStatus, !this.openStatus)
+      }
     },
 
     onPlaceholderClick (e) {
@@ -363,11 +363,13 @@ export default {
     },
 
     onOuterBlur (e) {
+      console.log('onOuterBlur')
       if (this.disabled) {
         e.preventDefault()
         return
       }
       this.blurTimer = setTimeout(() => {
+        console.log('onOuterBlur setTimeout')
         this._focused = false
         this.updateFocusClassName()
         const props = this.$props
@@ -399,6 +401,7 @@ export default {
         this.__emit('blur', this.getVLForOnChange(sValue))
         this.setOpenState(false)
       }, 10)
+      console.log('this.blurTimer', this.blurTimer)
     },
 
     onClearSelection (event) {
@@ -406,15 +409,21 @@ export default {
       if (disabled) {
         return
       }
-      event.stopPropagation()
       if (inputValue || sValue.length) {
         if (sValue.length) {
           this.fireChange([])
         }
-        this.setOpenState(false, true)
+        // this.setOpenState(false, true)
         if (inputValue) {
           this.setInputValue('')
         }
+        if (this._focused) {
+          this._focused = false
+        } else {
+          event.stopPropagation()
+        }
+      } else {
+        event.stopPropagation()
       }
     },
 
@@ -516,9 +525,6 @@ export default {
       }
       if (placeholder) {
         const p = {
-          props: {
-
-          },
           on: {
             mousedown: preventDefaultEvent,
             click: this.onPlaceholderClick,
@@ -540,36 +546,46 @@ export default {
     },
     inputClick (e) {
       if (this._focused) {
-        e.stopPropagation()
+        if (this.openStatus) {
+          e.stopPropagation()
+        } else {
+          this._focused = false
+        }
       }
     },
     inputBlur (e) {
-      // console.log(e.target)
       this.clearBlurTime()
       this.blurTimer = setTimeout(() => {
-        this.onOuterBlur()
         if (!this.disabled) {
-          this.setOpenState(!this.openStatus, !this.openStatus)
+          this._focused = false
+          this.setOpenState(false, false)
         }
       }, 10)
+    },
+    inputFocus (e) {
+      this.clearBlurTime()
     },
     _getInputElement () {
       const props = this.$props
       const inputElement = props.getInputElement
         ? props.getInputElement()
-        : <input id={props.id} autoComplete='off' />
+        : <input id={props.id} autoComplete='off' value='1111'/>
       const inputCls = classnames(getClass(inputElement), {
         [`${props.prefixCls}-search__field`]: true,
       })
       const inputEvents = getEvents(inputElement)
       // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
       // Add space to the end of the inputValue as the width measurement tolerance
+      inputElement.data = inputElement.data || {}
       return (
         <div class={`${props.prefixCls}-search__field__wrap`}>
           {cloneElement(inputElement, {
             attrs: {
-              value: this.inputValue,
+              ...(inputElement.data.attrs || {}),
               disabled: props.disabled,
+            },
+            domProps: {
+              value: this.inputValue,
             },
             class: inputCls,
             ref: 'inputRef',
@@ -580,10 +596,10 @@ export default {
                 inputEvents.keydown || noop,
                 this.$listeners.inputKeydown
               ),
-              // focus: chaining(
-              //   this.onOuterFocus,
-              //   inputEvents.focus || noop,
-              // ),
+              focus: chaining(
+                this.inputFocus,
+                inputEvents.focus || noop,
+              ),
               blur: chaining(
                 this.inputBlur,
                 inputEvents.blur || noop,
@@ -622,9 +638,9 @@ export default {
       return this.$refs.selectTriggerRef.getInnerMenu()
     },
 
-    setOpenState (open, needFocus) {
+    setOpenState (open, needFocus, forceSet) {
       const { $props: props, openStatus } = this
-      if (openStatus === open) {
+      if (!forceSet && openStatus === open) {
         this.maybeFocus(open, needFocus)
         return
       }
@@ -894,9 +910,7 @@ export default {
       // If hidden menu due to no options, then it should be calculated again
       if (sOpen || this.hiddenForNoOptions) {
         options = this.renderFilterOptions()
-        console.log('options', options)
       }
-      console.log('options1', options)
       this._options = options
 
       if (isMultipleOrTagsOrCombobox($props) || !showSearch) {
@@ -915,15 +929,16 @@ export default {
     getOptionsAndOpenStatus () {
       let sOpen = this.sOpen
       if (this.skipAdjustOpen) {
+        this.openStatus = sOpen
         return {
-          option: this._options,
+          options: this._options,
           open: sOpen,
         }
       }
       const { $props, showSearch } = this
       let options = []
       // If hidden menu due to no options, then it should be calculated again
-      if (true || sOpen || this.hiddenForNoOptions) {
+      if (sOpen || this.hiddenForNoOptions) {
         options = this.renderFilterOptions()
       }
       this._options = options
@@ -1299,6 +1314,21 @@ export default {
         // this.getInputDOMNode().focus()
       }
     },
+    selectionRefClick (e) {
+      e.stopPropagation()
+      this.clearBlurTime()
+      if (!this.disabled) {
+        if (this._focused && this.openStatus) {
+          this._focused = false
+          this.setOpenState(false, false, true)
+          this.getInputDOMNode().blur()
+        } else {
+          this._focused = true
+          this.setOpenState(true, true, true)
+          this.getInputDOMNode().focus()
+        }
+      }
+    },
   },
 
   render () {
@@ -1324,7 +1354,6 @@ export default {
       [`${prefixCls}-enabled`]: !disabled,
       [`${prefixCls}-allow-clear`]: !!props.allowClear,
     }
-    console.log(options)
     return (
       <SelectTrigger
         dropdownAlign={props.dropdownAlign}
@@ -1360,8 +1389,9 @@ export default {
           ref='rootRef'
           // onBlur={this.onOuterBlur}
           // onFocus={this.onOuterFocus}
-          onClick={this.rootRefClick}
+          // onClick={this.rootRefClick}
           class={classnames(rootCls)}
+          // tabindex='-1'
         >
           <div
             ref='selectionRef'
@@ -1373,7 +1403,7 @@ export default {
             aria-haspopup='true'
             aria-expanded={openStatus}
             {...extraSelectionProps}
-            // onClick={this.stopPropagation}
+            onClick={this.selectionRefClick}
           >
             {ctrlNode}
             {this.renderClear()}
@@ -1383,7 +1413,7 @@ export default {
                 class={`${prefixCls}-arrow`}
                 style={UNSELECTABLE_STYLE}
                 unselectable='unselectable'
-                onClick={this.onArrowClick}
+                // onClick={this.onArrowClick}
               >
                 <b />
               </span>)}

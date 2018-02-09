@@ -33,7 +33,7 @@ const MenuItem = {
     onKeyDown (e) {
       const keyCode = e.keyCode
       if (keyCode === KeyCode.ENTER) {
-        this.__emit('click', e)
+        this.onClick(e)
         return true
       }
     },

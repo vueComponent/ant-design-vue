@@ -118,13 +118,14 @@ export default {
         ref: 'popupInstance',
         style: { ...this.getZIndexStyle(), ...popupStyle },
       }
-      const transitionProps = {
+      let transitionProps = {
         props: Object.assign({
           appear: true,
           css: false,
         }),
       }
       const transitionName = getTransitionName()
+      let useTransition = !!transitionName
       const transitionEvent = {
         beforeEnter: (el) => {
           el.style.display = el.__vOriginalDisplay
@@ -144,6 +145,7 @@ export default {
       }
 
       if (typeof animation === 'object') {
+        useTransition = true
         const { on = {}, props = {}} = animation
         transitionProps.props = { ...transitionProps.props, ...props }
         transitionProps.on = { ...transitionEvent, ...on, afterLeave: (el) => {
@@ -152,6 +154,9 @@ export default {
         } }
       } else {
         transitionProps.on = transitionEvent
+      }
+      if (!useTransition) {
+        transitionProps = {}
       }
       return (<transition
         {...transitionProps}

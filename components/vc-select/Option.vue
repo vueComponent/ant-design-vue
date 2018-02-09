@@ -7,6 +7,7 @@ export default {
       PropTypes.string,
       PropTypes.number,
     ]),
+    disabled: PropTypes.bool,
   },
   isSelectOption: true,
 }

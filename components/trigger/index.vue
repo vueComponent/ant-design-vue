@@ -340,12 +340,12 @@ export default {
           },
           el: div,
           render () {
-            const { popupStyle, popupEvents, ...otherProps } = this.popupProps
+            const { popupEvents, ...otherProps } = this.popupProps
             const p = {
               props: otherProps,
               on: popupEvents,
               ref: 'popup',
-              style: popupStyle,
+              // style: popupStyle,
             }
             return (
               <Popup

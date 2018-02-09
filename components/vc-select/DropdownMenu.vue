@@ -5,7 +5,7 @@ import scrollIntoView from 'dom-scroll-into-view'
 import { getSelectKeys, preventDefaultEvent } from './util'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
-import { hasProp, getSlotOptions } from '../_util/props-util'
+import { getSlotOptions } from '../_util/props-util'
 
 export default {
   name: 'DropdownMenu',

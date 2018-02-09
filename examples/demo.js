@@ -21,4 +21,5 @@ export { default as divider } from 'antd/divider/demo/index.vue'
 export { default as collapse } from 'antd/collapse/demo/index.vue'
 export { default as notification } from 'antd/notification/demo/index.vue'
 export { default as message } from 'antd/message/demo/index.vue'
+export { default as spin } from 'antd/spin/demo/index.vue'
 

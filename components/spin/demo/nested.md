@@ -10,7 +10,7 @@ Embedding content into `Spin` will alter it into loading state.
 
 ```html
 <style>
-  .content{
+  .spin-content{
     border: 1px solid #91d5ff;
     background-color: #e6f7ff;
     padding: 30px;
@@ -19,7 +19,7 @@ Embedding content into `Spin` will alter it into loading state.
 <template>
   <div>
     <a-spin :spinning="spinning">
-      <div class="content">
+      <div class="spin-content">
         可以点击‘切换’按钮，控制本区域的spin展示。
       </div>
     </a-spin>

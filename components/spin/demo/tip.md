@@ -10,7 +10,7 @@ Customized description content.
 
 ```html
 <style>
-  .content{
+  .spin-content{
     border: 1px solid #91d5ff;
     background-color: #e6f7ff;
     padding: 30px;
@@ -19,7 +19,7 @@ Customized description content.
 <template>
   <div>
     <a-spin tip="Loading...">
-      <div class="content">
+      <div class="spin-content">
         我的描述文案是自定义的。。。
       </div>
     </a-spin>

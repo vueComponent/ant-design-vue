@@ -63,6 +63,8 @@ export { Collapse, CollapsePanel }
 import notification from './notification'
 import message from './message'
 
+export { default as Spin } from './spin'
+
 const api = {
   notification,
   message,

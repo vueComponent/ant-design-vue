@@ -1360,6 +1360,13 @@ export default {
         }
       }
     },
+    selectionRefFocus (e) {
+      if (this._focused) {
+        return
+      }
+      this._focused = true
+      this.updateFocusClassName()
+    },
   },
 
   render () {
@@ -1387,6 +1394,7 @@ export default {
     }
     if (!isMultipleOrTagsOrCombobox(props)) {
       selectionProps.on.keydown = this.onKeyDown
+      selectionProps.on.focus = this.selectionRefFocus
       selectionProps.attrs.tabIndex = props.disabled ? -1 : 0
     }
     const rootCls = {

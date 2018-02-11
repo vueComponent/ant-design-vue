@@ -2,7 +2,8 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import isCssAnimationSupported from '../_util/isCssAnimationSupported'
-import animate from '../_util/css-animation'
+import { filterEmpty } from '../_util/vnode'
+import getTransitionProps from '../_util/getTransitionProps'
 
 export default {
   name: 'Spin',
@@ -25,8 +26,11 @@ export default {
     }
   },
   methods: {
-    getHasDefaultSlots () {
-      return this.$slots && this.$slots.default
+    getChildren () {
+      if (this.$slots && this.$slots.default) {
+        return filterEmpty(this.$slots.default)
+      }
+      return null
     },
   },
   mounted () {
@@ -96,8 +100,8 @@ export default {
         {tip ? <div class={`${prefixCls}-text`}>{tip}</div> : null}
       </div>
     )
-
-    if (this.getHasDefaultSlots()) {
+    const children = this.getChildren()
+    if (children) {
       let animateClassName = prefixCls + '-nested-loading'
       if (wrapperClassName) {
         animateClassName += ' ' + wrapperClassName
@@ -107,33 +111,17 @@ export default {
         [`${prefixCls}-blur`]: stateSpinning,
       }
 
-      const transitionProps = {
-        props: Object.assign({
-          appear: true,
-          css: false,
-        }),
-      }
-      const transitionEvent = {
-        enter: (el, done) => {
-          animate(el, 'fade-enter', done)
-        },
-        leave: (el, done) => {
-          animate(el, 'fade-leave', done)
-        },
-      }
-
-      transitionProps.on = transitionEvent
-
-      return (<transition
-        {...transitionProps}
-      >
-        <div class={animateClassName}>
+      return (
+        <transition-group
+          {...getTransitionProps('fade')}
+          tag='div'
+          class={animateClassName}
+        >
           {stateSpinning && <div key='loading'>{spinElement}</div>}
           <div class={containerClassName} key='container'>
-            {this.$slots.default}
+            {children}
           </div>
-        </div>
-      </transition>
+        </transition-group>
       )
     }
     return spinElement

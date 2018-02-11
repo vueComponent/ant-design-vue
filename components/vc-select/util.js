@@ -19,7 +19,14 @@ export function getPropValue (child, prop) {
   if (prop === 'value') {
     return getValuePropValue(child)
   }
-  return child.props[prop]
+  if (prop === 'children') {
+    if (child.$slots) {
+      return child.$slots.default
+    } else {
+      return child.componentOptions.children
+    }
+  }
+  return getPropsData(child)[prop]
 }
 
 export function isMultiple (props) {

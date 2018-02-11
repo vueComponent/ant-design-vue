@@ -9,7 +9,6 @@ import { hasProp, getSlotOptions } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement, getClass, getPropsData, getValueByProp as getValue, getEvents } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
-
 import {
   getPropValue,
   getValuePropValue,
@@ -62,7 +61,7 @@ export default {
     dropdownMenuStyle: PropTypes.object.def({}),
     optionFilterProp: SelectPropTypes.optionFilterProp.def('value'),
     optionLabelProp: SelectPropTypes.optionLabelProp.def('value'),
-    notFoundContent: PropTypes.string.def('Not Found'),
+    notFoundContent: PropTypes.any.def('Not Found'),
     backfill: PropTypes.bool.def(false),
     showAction: SelectPropTypes.showAction.def(['click']),
     combobox: PropTypes.bool.def(false),
@@ -83,7 +82,7 @@ export default {
       sValue = toArray(defaultValue)
     }
     sValue = this.addLabelToValue(sValue)
-    sValue = this.addTitleToValue($slots, sValue)
+    sValue = this.addTitleToValue($slots.default, sValue)
     let inputValue = ''
     if (combobox) {
       inputValue = sValue.length
@@ -115,7 +114,7 @@ export default {
           const { combobox, $slots } = this
           let value = toArray(this.value)
           value = this.addLabelToValue(value)
-          value = this.addTitleToValue($slots, value)
+          value = this.addTitleToValue($slots.default, value)
           this.setState({
             sValue: value,
           })
@@ -127,9 +126,7 @@ export default {
             })
           }
         }
-        // this.adjustOpenState()
       },
-      deep: true,
     },
   },
   updated () {
@@ -413,7 +410,7 @@ export default {
         if (sValue.length) {
           this.fireChange([])
         }
-        // this.setOpenState(false, true)
+        this.setOpenState(false, true)
         if (inputValue) {
           this.setInputValue('')
         }
@@ -555,21 +552,51 @@ export default {
     },
     inputBlur (e) {
       this.clearBlurTime()
+      if (this.disabled) {
+        return
+      }
       this.blurTimer = setTimeout(() => {
-        if (!this.disabled) {
-          this._focused = false
-          this.setOpenState(false, false)
+        this._focused = false
+        this.updateFocusClassName()
+        const props = this.$props
+        let { sValue } = this
+        const { inputValue } = this
+        if (
+          isSingleMode(props) &&
+        props.showSearch &&
+        inputValue &&
+        props.defaultActiveFirstOption
+        ) {
+          const options = this._options || []
+          if (options.length) {
+            const firstOption = findFirstMenuItem(options)
+            if (firstOption) {
+              sValue = [
+                {
+                  key: firstOption.key,
+                  label: this.getLabelFromOption(firstOption),
+                },
+              ]
+              this.fireChange(sValue)
+            }
+          }
+        } else if (isMultipleOrTags(props) && inputValue) {
+          this.inputValue = this.getInputDOMNode().value = ''
         }
+        this.__emit('blur', this.getVLForOnChange(sValue))
+        this.setOpenState(false)
       }, 10)
     },
     inputFocus (e) {
       this.clearBlurTime()
+      this.clearFocusTime()
+      this.timeoutFocus()
     },
     _getInputElement () {
       const props = this.$props
       const inputElement = props.getInputElement
         ? props.getInputElement()
-        : <input id={props.id} autoComplete='off' value='1111'/>
+        : <input id={props.id} autoComplete='off'/>
       const inputCls = classnames(getClass(inputElement), {
         [`${props.prefixCls}-search__field`]: true,
       })
@@ -638,9 +665,9 @@ export default {
       return this.$refs.selectTriggerRef.getInnerMenu()
     },
 
-    setOpenState (open, needFocus, forceSet) {
+    setOpenState (open, needFocus) {
       const { $props: props, openStatus } = this
-      if (!forceSet && openStatus === open) {
+      if (openStatus === open) {
         this.maybeFocus(open, needFocus)
         return
       }
@@ -785,6 +812,7 @@ export default {
             this._focused = true
           }
         } else {
+          console.log(activeElement)
           if (activeElement !== this.$refs.selectionRef) {
             this.$refs.selectionRef.focus()
             this._focused = true
@@ -810,15 +838,15 @@ export default {
       return value
     },
 
-    addTitleToValue ($slots, values) {
+    addTitleToValue (children = [], values) {
       let nextValues = values
       const keys = values.map(v => v.key)
-      $slots.default.forEach(child => {
+      children.forEach(child => {
         if (!child) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
-          nextValues = this.addTitleToValue(child.$slots, nextValues)
+          nextValues = this.addTitleToValue(child.$slots.default, nextValues)
         } else {
           const value = getValuePropValue(child)
           const valueIndex = keys.indexOf(value)
@@ -1048,7 +1076,7 @@ export default {
       return options
     },
 
-    renderFilterOptionsFromChildren (children, childrenKeys, menuItems) {
+    renderFilterOptionsFromChildren (children = [], childrenKeys, menuItems) {
       const sel = []
       const props = this.$props
       const { inputValue } = this
@@ -1320,11 +1348,14 @@ export default {
       if (!this.disabled) {
         if (this._focused && this.openStatus) {
           this._focused = false
-          this.setOpenState(false, false, true)
+          this.setOpenState(false, false)
           this.getInputDOMNode().blur()
         } else {
+          // this._focused = true
+          // this.updateFocusClassName()
+          // this.timeoutFocus()
           this._focused = true
-          this.setOpenState(true, true, true)
+          this.setOpenState(true, true)
           this.getInputDOMNode().focus()
         }
       }
@@ -1338,12 +1369,25 @@ export default {
     const { disabled, prefixCls, inputValue, sValue, $listeners } = this
     const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = $listeners
     const ctrlNode = this.renderTopControlNode(openStatus)
-    let extraSelectionProps = {}
+    const selectionProps = {
+      props: {},
+      attrs: {
+        role: 'combobox',
+        'aria-autocomplete': 'list',
+        'aria-haspopup': 'true',
+        'aria-expanded': openStatus.toString(),
+      },
+      on: {
+        click: this.selectionRefClick,
+      },
+      class: `${prefixCls}-selection ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`,
+      ref: 'selectionRef',
+      key: 'selection',
+
+    }
     if (!isMultipleOrTagsOrCombobox(props)) {
-      extraSelectionProps = {
-        onKeyDown: this.onKeyDown,
-        tabIndex: props.disabled ? -1 : 0,
-      }
+      selectionProps.on.keydown = this.onKeyDown
+      selectionProps.attrs.tabIndex = props.disabled ? -1 : 0
     }
     const rootCls = {
       [prefixCls]: 1,
@@ -1389,22 +1433,9 @@ export default {
           ref='rootRef'
           // onBlur={this.onOuterBlur}
           // onFocus={this.onOuterFocus}
-          // onClick={this.rootRefClick}
           class={classnames(rootCls)}
-          // tabindex='-1'
         >
-          <div
-            ref='selectionRef'
-            key='selection'
-            class={`${prefixCls}-selection
-            ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`}
-            role='combobox'
-            aria-autocomplete='list'
-            aria-haspopup='true'
-            aria-expanded={openStatus}
-            {...extraSelectionProps}
-            onClick={this.selectionRefClick}
-          >
+          <div {...selectionProps}>
             {ctrlNode}
             {this.renderClear()}
             {multiple || !props.showArrow ? null : (

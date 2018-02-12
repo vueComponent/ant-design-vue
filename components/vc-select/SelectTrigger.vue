@@ -50,6 +50,8 @@ export default {
     // children: PropTypes.any,
     showAction: PropTypes.arrayOf(PropTypes.string),
     combobox: PropTypes.bool,
+    animation: PropTypes.string,
+    transitionName: PropTypes.string,
   },
   data () {
     return {

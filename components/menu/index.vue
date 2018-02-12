@@ -51,6 +51,9 @@ export default {
     prop: 'selectedKeys',
     event: 'selectChange',
   },
+  mounted () {
+    this.preProps = { ...this.props }
+  },
   watch: {
     '$props': {
       handler: function (nextProps) {
@@ -74,8 +77,9 @@ export default {
           this.setState({ sOpenKeys: this.inlineOpenKeys })
           this.inlineOpenKeys = []
         }
+        this.preProps = { ...nextProps }
       },
-      deep: true,
+      // deep: true,
     },
     'layoutContext.siderCollapsed': function (val) {
       const { openKeys, sOpenKeys, prefixCls } = this
@@ -196,9 +200,8 @@ export default {
     },
   },
   render () {
-    const { $props, layoutContext, $slots, $listeners } = this
+    const { layoutContext, $slots, $listeners } = this
     const { collapsedWidth, siderCollapsed } = layoutContext
-    this.preProps = cloneDeep($props)
     this.preLayoutContext = {
       siderCollapsed,
       collapsedWidth,

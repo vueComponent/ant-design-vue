@@ -5,6 +5,7 @@ import classnames from 'classnames'
 import classes from 'component-classes'
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu'
 import warning from 'warning'
+import Option from './Option'
 import { hasProp, getSlotOptions } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement, getClass, getPropsData, getValueByProp as getValue, getEvents } from '../_util/vnode'
@@ -92,6 +93,10 @@ export default {
     let sOpen = open
     if (sOpen === undefined) {
       sOpen = defaultOpen
+    }
+    this._valueOptions = []
+    if (sValue.length > 0) {
+      this._valueOptions = this.getOptionsByValue(sValue)
     }
     return {
       sValue,
@@ -259,14 +264,10 @@ export default {
       const selectedValue = getValuePropValue(item)
       const selectedLabel = this.getLabelFromOption(item)
       const lastValue = sValue[sValue.length - 1]
-      let event = selectedValue
-      if (props.labelInValue) {
-        event = {
-          key: event,
-          label: selectedLabel,
-        }
-      }
-      this.__emit('select', event, item)
+      this.fireSelect({
+        key: selectedValue,
+        label: selectedLabel,
+      })
       const selectedTitle = item.title
       if (isMultipleOrTags(props)) {
         if (findIndexInValueByKey(sValue, selectedValue) !== -1) {
@@ -366,7 +367,6 @@ export default {
         return
       }
       this.blurTimer = setTimeout(() => {
-        console.log('onOuterBlur setTimeout')
         this._focused = false
         this.updateFocusClassName()
         const props = this.$props
@@ -392,13 +392,11 @@ export default {
             }
           }
         } else if (isMultipleOrTags(props) && inputValue) {
-        // why not use setState?
           this.inputValue = this.getInputDOMNode().value = ''
         }
         this.__emit('blur', this.getVLForOnChange(sValue))
         this.setOpenState(false)
       }, 10)
-      console.log('this.blurTimer', this.blurTimer)
     },
 
     onClearSelection (event) {
@@ -422,12 +420,78 @@ export default {
       } else {
         event.stopPropagation()
       }
+      // const { inputValue, sValue, disabled } = this
+      // if (disabled) {
+      //   return
+      // }
+      // event.stopPropagation()
+      // if (inputValue || sValue.length) {
+      //   if (sValue.length) {
+      //     this.fireChange([])
+      //   }
+      //   this.setOpenState(false, true)
+      //   if (inputValue) {
+      //     this.setInputValue('')
+      //   }
+      // }
     },
 
     onChoiceAnimationLeave () {
       this.$refs.selectTriggerRef.triggerRef.forcePopupAlign()
     },
+    getOptionsFromChildren (value, children = [], options = []) {
+      let values = value
+      if (!Array.isArray(value)) {
+        values = [value]
+      }
+      children.forEach(child => {
+        if (!child) {
+          return
+        }
+        if (getSlotOptions(child).isSelectOptGroup) {
+          this.getOptionsFromChildren(child.componentOptions.children, options)
+        } else {
+          const index = findIndexInValueByKey(values, getValuePropValue(child))
+          if (index !== -1) {
+            options[index] = child
+          }
+        }
+      })
+      values.forEach((v, i) => {
+        if (!options[i]) {
+          for (let j = 0; j < this._valueOptions.length; j++) {
+            const item = this._valueOptions[j]
+            if (getValuePropValue(item) === v.key) {
+              options[i] = item
+              break
+            }
+          }
+          if (!options[i]) {
+            options[i] = <Option value={v.key} key={v.key}>{v.label}</Option>
+          }
+        }
+      })
+      if (!Array.isArray(value)) {
+        return options[0]
+      }
+      return options
+    },
+    getSingleOptionByValueKey (key) {
+      return this.getOptionsFromChildren({
+        key,
+        label: key,
+      }, this.$slots.default)
+    },
 
+    getOptionsByValue (value) {
+      if (value === undefined) {
+        return undefined
+      }
+      if (value.length === 0) {
+        return []
+      }
+      return this.getOptionsFromChildren(value, this.$slots.default)
+    },
     getLabelBySingleValue (children, value) {
       if (value === undefined) {
         return null
@@ -571,12 +635,14 @@ export default {
           if (options.length) {
             const firstOption = findFirstMenuItem(options)
             if (firstOption) {
+              console.log('pre', this.sValue)
               sValue = [
                 {
                   key: firstOption.key,
                   label: this.getLabelFromOption(firstOption),
                 },
               ]
+              console.log('new', this.sValue, sValue)
               this.fireChange(sValue)
             }
           }
@@ -812,7 +878,6 @@ export default {
             this._focused = true
           }
         } else {
-          console.log(activeElement)
           if (activeElement !== this.$refs.selectionRef) {
             this.$refs.selectionRef.focus()
             this._focused = true
@@ -880,7 +945,7 @@ export default {
             label,
           }
         }
-        this.__emit('deselect', event)
+        this.__emit('deselect', event, this.getSingleOptionByValueKey(selectedKey))
       }
       this.fireChange(value)
     },
@@ -891,14 +956,20 @@ export default {
         this.setOpenState(true)
       }
     },
-
+    fireSelect (value) {
+      const { labelInValue } = this
+      this.__emit('select', labelInValue ? value : value.key, this.getSingleOptionByValueKey(value.key))
+    },
     fireChange (value) {
       if (hasProp(this, 'value')) {
         this.setState({
           sValue: value,
         })
       }
-      this.__emit('change', this.getVLForOnChange(value))
+      const vls = this.getVLForOnChange(value)
+      const options = this.getOptionsByValue(value)
+      this._valueOptions = options
+      this.__emit('change', vls, isMultipleOrTags(this.$props) ? options : options[0])
     },
 
     isChildDisabled (key) {
@@ -924,6 +995,10 @@ export default {
             nextValue = nextValue.concat(selectedValue)
           }
         }
+        this.fireSelect({
+          key: label,
+          label,
+        })
       })
       return nextValue
     },
@@ -1439,9 +1514,10 @@ export default {
       >
         <div
           ref='rootRef'
+          class={classnames(rootCls)}
+          // tabindex='-1'
           // onBlur={this.onOuterBlur}
           // onFocus={this.onOuterFocus}
-          class={classnames(rootCls)}
         >
           <div {...selectionProps}>
             {ctrlNode}

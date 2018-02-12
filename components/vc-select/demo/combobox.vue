@@ -10,7 +10,8 @@ export default {
     }
   },
   methods: {
-    onChange (value) {
+    onChange (value, option) {
+      console.log('onChange', value, option)
       this.value = value
     },
 
@@ -20,8 +21,8 @@ export default {
       }
     },
 
-    onSelect (v) {
-      console.log('onSelect', v)
+    onSelect (v, option) {
+      console.log('onSelect', v, option)
     },
 
     toggleDisabled () {

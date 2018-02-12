@@ -105,7 +105,6 @@ export default {
           props: {
             multiple,
             defaultActiveFirst: defaultActiveFirstOption,
-            focusable: false,
             selectedKeys,
             prefixCls: `${prefixCls}-menu`,
           },

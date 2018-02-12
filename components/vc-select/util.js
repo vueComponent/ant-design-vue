@@ -118,8 +118,8 @@ export const UNSELECTABLE_ATTRIBUTE = {
 export function findFirstMenuItem (children) {
   for (let i = 0; i < children.length; i++) {
     const child = children[i]
-    const props = getSlotOptions(child)
-    if (props.isMenuItemGroup) {
+    const props = getPropsData(child)
+    if (getSlotOptions(child).isMenuItemGroup) {
       const found = findFirstMenuItem(child.componentOptions.children)
       if (found) {
         return found
@@ -146,7 +146,7 @@ export function splitBySeparators (string, separators) {
 }
 
 export function defaultFilterFn (input, child) {
-  const props = getSlotOptions(child)
+  const props = getPropsData(child)
   if (props.disabled) {
     return false
   }

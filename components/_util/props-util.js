@@ -22,7 +22,7 @@ const getSlotOptions = (ele) => {
   if (ele.$vnode) {
     componentOptions = ele.$vnode.componentOptions
   }
-  return componentOptions.Ctor.options
+  return componentOptions ? componentOptions.Ctor.options || {} : {}
 }
 const getOptionProps = (instance) => {
   const { $options = {}, $props = {}} = instance
@@ -43,8 +43,17 @@ const getPropsData = (ele) => {
   if (ele.$vnode) {
     componentOptions = ele.$vnode.componentOptions
   }
-  return componentOptions && componentOptions.propsData
+  return componentOptions ? componentOptions.propsData || {} : {}
 }
+
+const getAttrs = (ele) => {
+  let data = ele.data
+  if (ele.$vnode) {
+    data = ele.$vnode.data
+  }
+  return data ? data.attrs || {} : {}
+}
+
 const getKey = (ele) => {
   let key = ele.key
   if (ele.$vnode) {
@@ -52,5 +61,15 @@ const getKey = (ele) => {
   }
   return key
 }
-export { hasProp, filterProps, getOptionProps, getComponentFromProp, getSlotOptions, slotHasProp, getPropsData, getKey }
+export {
+  hasProp,
+  filterProps,
+  getOptionProps,
+  getComponentFromProp,
+  getSlotOptions,
+  slotHasProp,
+  getPropsData,
+  getKey,
+  getAttrs,
+}
 export default hasProp

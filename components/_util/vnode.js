@@ -128,7 +128,7 @@ export function getPropsData (ele) {
   return ele.componentOptions && ele.componentOptions.propsData
 }
 export function getValueByProp (ele, prop) {
-  return ele.componentOptions && ele.componentOptions.propsData[prop]
+  return ele.componentOptions && ele.componentOptions.propsData && ele.componentOptions.propsData[prop]
 }
 
 export function getEvents (child) {

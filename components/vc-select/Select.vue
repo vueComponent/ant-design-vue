@@ -554,7 +554,6 @@ export default {
     },
 
     getLabelFromOption (child) {
-      console.log(child, this.optionLabelProp)
       return getPropValue(child, this.optionLabelProp)
     },
 
@@ -1324,7 +1323,6 @@ export default {
         }
         if (isMultipleOrTags(props)) {
           selectedValueNodes = limitedCountValue.map(singleValue => {
-            console.log('singleValue', singleValue)
             let content = singleValue.label
             const title = singleValue.title || content
             if (

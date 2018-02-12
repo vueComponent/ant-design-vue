@@ -1,8 +1,6 @@
 <script>
 import PropTypes from '../_util/vue-types'
 import align from 'dom-align'
-import clonedeep from 'lodash.clonedeep'
-import isEqual from 'lodash.isequal'
 import addEventListener from '../_util/Dom/addEventListener'
 import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
@@ -44,6 +42,7 @@ export default {
     }
   },
   mounted () {
+    this.prevProps = { ...this.$props }
     const props = this.$props
     // if parent ref not attached .... use document.getElementById
     !this.aligned && this.forceAlign()
@@ -56,7 +55,7 @@ export default {
     const props = this.$props
     let reAlign = false
     if (!props.disabled) {
-      if (prevProps.disabled || !isEqual(prevProps.align, props.align)) {
+      if (prevProps.disabled || prevProps.align !== props.align) {
         reAlign = true
       } else {
         const lastTarget = prevProps.target()
@@ -78,6 +77,7 @@ export default {
     } else {
       this.stopMonitorWindowResize()
     }
+    this.prevProps = { ...this.$props }
   },
   beforeDestroy () {
     this.stopMonitorWindowResize()
@@ -109,7 +109,6 @@ export default {
   },
 
   render () {
-    this.prevProps = clonedeep(this.$props)
     const { childrenProps } = this.$props
     const child = this.$slots.default[0]
     if (childrenProps) {

@@ -1361,13 +1361,14 @@ export default {
               // component='ul'
               // transitionName={choiceTransitionName}
               {...transitionProps}
+              onClick={this.muitipleContainerClick}
             >
               {selectedValueNodes}
             </transition-group>
           )
         } else {
           innerNode = (
-            <ul>
+            <ul onClick={this.muitipleContainerClick}>
               {selectedValueNodes}
             </ul>
           )
@@ -1380,7 +1381,11 @@ export default {
         </div>
       )
     },
-
+    muitipleContainerClick (e) {
+      if (this.openStatus) {
+        e.stopPropagation()
+      }
+    },
     renderClear () {
       const { prefixCls, allowClear, sValue, inputValue } = this
       const clear = (
@@ -1447,6 +1452,7 @@ export default {
   render () {
     const props = this.$props
     const multiple = isMultipleOrTags(props)
+    const preOptions = this._options || []
     const { options, open: openStatus } = this.getOptionsAndOpenStatus()
     const { disabled, prefixCls, inputValue, sValue, $listeners } = this
     const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = $listeners
@@ -1494,7 +1500,7 @@ export default {
         dropdownStyle={props.dropdownStyle}
         combobox={props.combobox}
         showSearch={props.showSearch}
-        options={options}
+        options={options.length || openStatus ? options : preOptions}
         multiple={multiple}
         disabled={disabled}
         visible={openStatus}

@@ -1,4 +1,4 @@
-import { getPropsData, getSlotOptions, getKey } from '../_util/props-util'
+import { getPropsData, getSlotOptions, getKey, getAttrs } from '../_util/props-util'
 export function getValuePropValue (child) {
   const props = getPropsData(child)
   if ('value' in props) {
@@ -26,7 +26,12 @@ export function getPropValue (child, prop) {
       return child.componentOptions.children
     }
   }
-  return getPropsData(child)[prop]
+  const data = getPropsData(child)
+  if (prop in data) {
+    return data[prop]
+  } else {
+    return getAttrs(child)[prop]
+  }
 }
 
 export function isMultiple (props) {
@@ -150,7 +155,12 @@ export function defaultFilterFn (input, child) {
   if (props.disabled) {
     return false
   }
-  const value = String(getPropValue(child, this.optionFilterProp))
+  let value = getPropValue(child, this.optionFilterProp)
+  if (value.length && value[0].text) {
+    value = value[0].text
+  } else {
+    value = String(value)
+  }
   return (
     value.toLowerCase().indexOf(input.toLowerCase()) > -1
   )

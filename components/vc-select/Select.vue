@@ -113,25 +113,32 @@ export default {
     })
   },
   watch: {
-    '$props': {
-      handler: function (nextProps) {
-        if (hasProp(this, 'value')) {
-          const { combobox, $slots } = this
-          let value = toArray(this.value)
-          value = this.addLabelToValue(value)
-          value = this.addTitleToValue($slots.default, value)
-          this.setState({
-            sValue: value,
-          })
-          if (combobox) {
-            this.setState({
-              inputValue: value.length
-                ? this.getLabelFromProps(value[0].key)
-                : '',
-            })
-          }
-        }
-      },
+    // '$props': {
+    //   handler: function (nextProps) {
+    //     if (hasProp(this, 'value')) {
+    //       console.log('nextProps', nextProps)
+    //       const { combobox, $slots } = this
+    //       let value = toArray(this.value)
+    //       value = this.addLabelToValue(value)
+    //       value = this.addTitleToValue($slots.default, value)
+    //       this.setState({
+    //         sValue: value,
+    //       })
+    //       if (combobox) {
+    //         this.setState({
+    //           inputValue: value.length
+    //             ? this.getLabelFromProps(value[0].key)
+    //             : '',
+    //         })
+    //       }
+    //     }
+    //   },
+    // },
+    value (val) {
+      this.updateState()
+    },
+    combobox () {
+      this.updateState()
     },
   },
   updated () {
@@ -148,10 +155,6 @@ export default {
       }
     })
   },
-  beforeUpdate () {
-    // console.log('beforeUpdate')
-    // this.adjustOpenState()
-  },
   beforeDestroy () {
     this.clearFocusTime()
     this.clearBlurTime()
@@ -163,6 +166,22 @@ export default {
     }
   },
   methods: {
+    updateState () {
+      const { combobox, $slots } = this
+      let value = toArray(this.value)
+      value = this.addLabelToValue(value)
+      value = this.addTitleToValue($slots.default, value)
+      this.setState({
+        sValue: value,
+      })
+      if (combobox) {
+        this.setState({
+          inputValue: value.length
+            ? this.getLabelFromProps(value[0].key)
+            : '',
+        })
+      }
+    },
     onInputChange (event) {
       const { tokenSeparators } = this
       const val = event.target.value
@@ -437,7 +456,7 @@ export default {
     },
 
     onChoiceAnimationLeave () {
-      this.$refs.selectTriggerRef.triggerRef.forcePopupAlign()
+      this.$refs.selectTriggerRef.$refs.triggerRef.forcePopupAlign()
     },
     getOptionsFromChildren (value, children = [], options = []) {
       let values = value
@@ -535,6 +554,7 @@ export default {
     },
 
     getLabelFromOption (child) {
+      console.log(child, this.optionLabelProp)
       return getPropValue(child, this.optionLabelProp)
     },
 
@@ -635,14 +655,12 @@ export default {
           if (options.length) {
             const firstOption = findFirstMenuItem(options)
             if (firstOption) {
-              console.log('pre', this.sValue)
               sValue = [
                 {
                   key: firstOption.key,
                   label: this.getLabelFromOption(firstOption),
                 },
               ]
-              console.log('new', this.sValue, sValue)
               this.fireChange(sValue)
             }
           }
@@ -833,6 +851,8 @@ export default {
         this.clearFocusTime()
       }
       this.focusTimer = setTimeout(() => {
+        this._focused = true
+        this.updateFocusClassName()
         this.__emit('focus')
       }, 10)
     },
@@ -911,7 +931,7 @@ export default {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
-          nextValues = this.addTitleToValue(child.$slots.default, nextValues)
+          nextValues = this.addTitleToValue(child.componentOptions.children, nextValues)
         } else {
           const value = getValuePropValue(child)
           const valueIndex = keys.indexOf(value)
@@ -961,7 +981,7 @@ export default {
       this.__emit('select', labelInValue ? value : value.key, this.getSingleOptionByValueKey(value.key))
     },
     fireChange (value) {
-      if (hasProp(this, 'value')) {
+      if (!hasProp(this, 'value')) {
         this.setState({
           sValue: value,
         })
@@ -975,7 +995,7 @@ export default {
     isChildDisabled (key) {
       return this.$slots.default.some(child => {
         const childValue = getValuePropValue(child)
-        return childValue === key && getValue(child, 'title')
+        return childValue === key && getValue(child, 'disabled')
       })
     },
 
@@ -1304,6 +1324,7 @@ export default {
         }
         if (isMultipleOrTags(props)) {
           selectedValueNodes = limitedCountValue.map(singleValue => {
+            console.log('singleValue', singleValue)
             let content = singleValue.label
             const title = singleValue.title || content
             if (
@@ -1353,29 +1374,25 @@ export default {
         if (isMultipleOrTags(props) && choiceTransitionName) {
           const transitionProps = getTransitionProps(choiceTransitionName, {
             tag: 'ul',
-            // beforeEnter: this.onChoiceAnimationLeave,
+            afterLeave: this.onChoiceAnimationLeave,
           })
           innerNode = (
             <transition-group
-              // onLeave={this.onChoiceAnimationLeave}
-              // component='ul'
-              // transitionName={choiceTransitionName}
               {...transitionProps}
-              onClick={this.muitipleContainerClick}
             >
               {selectedValueNodes}
             </transition-group>
           )
         } else {
           innerNode = (
-            <ul onClick={this.muitipleContainerClick}>
+            <ul>
               {selectedValueNodes}
             </ul>
           )
         }
       }
       return (
-        <div class={className} ref='topCtrlRef'>
+        <div class={className} ref='topCtrlRef' onClick={this.muitipleContainerClick}>
           {this.getPlaceholderElement()}
           {innerNode}
         </div>
@@ -1426,17 +1443,18 @@ export default {
       e.stopPropagation()
       this.clearBlurTime()
       if (!this.disabled) {
+        const input = this.getInputDOMNode()
         if (this._focused && this.openStatus) {
           this._focused = false
           this.setOpenState(false, false)
-          this.getInputDOMNode().blur()
+          input && input.blur()
         } else {
           // this._focused = true
           // this.updateFocusClassName()
           // this.timeoutFocus()
           this._focused = true
           this.setOpenState(true, true)
-          this.getInputDOMNode().focus()
+          input && input.focus()
         }
       }
     },

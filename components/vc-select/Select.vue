@@ -6,7 +6,7 @@ import classes from 'component-classes'
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu'
 import warning from 'warning'
 import Option from './Option'
-import { hasProp, getSlotOptions, getKey } from '../_util/props-util'
+import { hasProp, getSlotOptions } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement, getClass, getPropsData, getValueByProp as getValue, getEvents } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
@@ -82,8 +82,20 @@ export default {
     } else {
       sValue = toArray(defaultValue)
     }
-    sValue = this.addLabelToValue(sValue)
-    sValue = this.addTitleToValue($slots.default, sValue)
+    if (this.labelInValue) {
+      sValue.forEach(v => {
+        v.key = v.key !== undefined ? v.key : v.value
+      })
+    } else {
+      sValue = sValue.map(v => {
+        return {
+          key: v,
+        }
+      })
+    }
+    this.labelMap = new Map()
+    this.titleMap = new Map()
+    this.updateLabelAndTitleMap($slots.default)
     let inputValue = ''
     if (combobox) {
       inputValue = sValue.length
@@ -98,7 +110,6 @@ export default {
     if (sValue.length > 0) {
       this._valueOptions = this.getOptionsByValue(sValue)
     }
-    console.log(sValue)
     return {
       sValue,
       inputValue,
@@ -114,29 +125,27 @@ export default {
     })
   },
   watch: {
-    // '$props': {
-    //   handler: function (nextProps) {
-    //     if (hasProp(this, 'value')) {
-    //       console.log('nextProps', nextProps)
-    //       const { combobox, $slots } = this
-    //       let value = toArray(this.value)
-    //       value = this.addLabelToValue(value)
-    //       value = this.addTitleToValue($slots.default, value)
-    //       this.setState({
-    //         sValue: value,
-    //       })
-    //       if (combobox) {
-    //         this.setState({
-    //           inputValue: value.length
-    //             ? this.getLabelFromProps(value[0].key)
-    //             : '',
-    //         })
-    //       }
-    //     }
-    //   },
-    // },
     value (val) {
-      this.updateState()
+      let sValue = toArray(val)
+      if (this.labelInValue) {
+        sValue.forEach(v => {
+          v.key = v.key !== undefined ? v.key : v.value
+        })
+      } else {
+        sValue = sValue.map(v => {
+          return {
+            key: v,
+          }
+        })
+      }
+      this.sValue = sValue
+      if (this.combobox) {
+        this.setState({
+          inputValue: sValue.length
+            ? this.getLabelFromProps(sValue[0].key)
+            : '',
+        })
+      }
     },
     combobox () {
       this.updateState()
@@ -161,27 +170,22 @@ export default {
     this.clearBlurTime()
     this.clearAdjustTimer()
     if (this.dropdownContainer) {
-      // ReactDOM.unmountComponentAtNode(this.dropdownContainer)
       document.body.removeChild(this.dropdownContainer)
       this.dropdownContainer = null
     }
   },
   methods: {
     updateLabelAndTitleMap (children = []) {
-      this.titleMap = {}
-      this.updateTitleMap(this.$slots.default)
-    },
-    updateTitleMap (children = []) {
       children.forEach(child => {
         if (!child) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
-          this.updateTitleMap(child.componentOptions.children)
+          this.updateLabelAndTitleMap(child.componentOptions.children)
         } else {
           const key = getValuePropValue(child)
-          this.titleMap[key] = getValue(child, 'title')
-          this.labelMap[key] = this.getLabelFromOption(child)
+          this.titleMap.set(key, getValue(child, 'title'))
+          this.labelMap.set(key, this.getLabelFromOption(child))
         }
       })
     },
@@ -299,13 +303,13 @@ export default {
       let sValue = this.sValue
       const props = this.$props
       const selectedValue = getValuePropValue(item)
-      const selectedLabel = this.getLabelFromOption(item)
+      const selectedLabel = this.labelMap.get(selectedValue)
       const lastValue = sValue[sValue.length - 1]
       this.fireSelect({
         key: selectedValue,
         label: selectedLabel,
       })
-      const selectedTitle = item.title
+      const selectedTitle = this.titleMap.get(selectedValue)
       if (isMultipleOrTags(props)) {
         if (findIndexInValueByKey(sValue, selectedValue) !== -1) {
           return
@@ -372,7 +376,6 @@ export default {
     },
 
     onOuterFocus (e) {
-      console.log('onOuterFocus')
       if (this.disabled) {
         e.preventDefault()
         return
@@ -398,7 +401,6 @@ export default {
     },
 
     onOuterBlur (e) {
-      console.log('onOuterBlur')
       if (this.disabled) {
         e.preventDefault()
         return
@@ -504,7 +506,7 @@ export default {
             }
           }
           if (!options[i]) {
-            options[i] = <Option value={v.key} key={v.key}>{v.label}</Option>
+            options[i] = <Option value={v.key} key={v.key}>{this.labelMap.get('label')}</Option>
           }
         }
       })
@@ -530,6 +532,7 @@ export default {
       return this.getOptionsFromChildren(value, this.$slots.default)
     },
     getLabelBySingleValue (children, value) {
+      console.log('getLabelBySingleValue')
       if (value === undefined) {
         return null
       }
@@ -585,7 +588,7 @@ export default {
         if (!this.labelInValue) {
           vls = vls.map(v => v.key)
         } else {
-          vls = vls.map(vl => ({ key: vl.key, label: vl.label }))
+          vls = vls.map(vl => ({ key: vl.key, label: this.labelMap.get('label') }))
         }
         return isMultipleOrTags(this.$props) ? vls : vls[0]
       }
@@ -675,7 +678,7 @@ export default {
               sValue = [
                 {
                   key: firstOption.key,
-                  label: this.getLabelFromOption(firstOption),
+                  label: this.labelMap.get(firstOption.key),
                 },
               ]
               this.fireChange(sValue)
@@ -822,7 +825,7 @@ export default {
       }
 
       const key = getValuePropValue(item)
-      const label = this.getLabelFromOption(item)
+      const label = this.labelMap.get(key)
       const backfillValue = {
         key,
         label,
@@ -968,7 +971,7 @@ export default {
       let label
       const value = this.sValue.filter(singleValue => {
         if (singleValue.key === selectedKey) {
-          label = singleValue.label
+          label = this.labelMap.get(selectedKey)
         }
         return singleValue.key !== selectedKey
       })
@@ -1296,7 +1299,7 @@ export default {
                 opacity,
               }}
             >
-              {sValue[0].label}
+              {this.labelMap.get(sValue[0].key)}
             </div>
           )
         }
@@ -1341,8 +1344,8 @@ export default {
         }
         if (isMultipleOrTags(props)) {
           selectedValueNodes = limitedCountValue.map(singleValue => {
-            let content = singleValue.label
-            const title = singleValue.title || content
+            let content = this.labelMap.get(singleValue.key)
+            const title = this.titleMap.get(singleValue.title) || content
             if (
               maxTagTextLength &&
             typeof content === 'string' &&
@@ -1484,6 +1487,9 @@ export default {
   },
 
   render () {
+    this.labelMap = new Map()
+    this.titleMap = new Map()
+    this.updateLabelAndTitleMap(this.$slots.default)
     const props = this.$props
     const multiple = isMultipleOrTags(props)
     const preOptions = this._options || []

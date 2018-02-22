@@ -1,6 +1,5 @@
 <script>
 import omit from 'omit.js'
-import cloneDeep from 'lodash.clonedeep'
 import RcMenu, { Divider, ItemGroup, SubMenu } from '../vc-menu'
 import PropTypes from '../_util/vue-types'
 import animation from '../_util/openAnimation'

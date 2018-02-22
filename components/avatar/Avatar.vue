@@ -44,7 +44,7 @@ export default {
       const { prefixCls, shape, size, src, icon } = this
       return {
         [`${prefixCls}`]: true,
-        [`${prefixCls}-image`]: !!src && this.state.isImgExist,
+        [`${prefixCls}-image`]: !!src,
         [`${prefixCls}-icon`]: !!icon,
         [`${prefixCls}-${shape}`]: true,
         [`${prefixCls}-lg`]: size === 'large',

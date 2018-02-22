@@ -6,7 +6,7 @@ export default {
   data () {
     return {
       destroy: false,
-      value: 'hello',
+      value: String(9),
     }
   },
   methods: {
@@ -17,7 +17,7 @@ export default {
       } else {
         value = e
       }
-      console.log('onChange', value)
+      console.log('onChange', value, ...arguments)
       this.value = value
     },
 
@@ -58,7 +58,7 @@ export default {
           firstActiveValue='2'
           backfill
         >
-          <Option key='hello' text='jack' title='jack'>
+          <Option value='01' text='jack' title='jack'>
             <b
               style={{
                 color: 'red',
@@ -71,7 +71,7 @@ export default {
           <Option value='21' disabled text='disabled'>disabled</Option>
           <Option value='31' text='yiminghe'>yiminghe</Option>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
-            return <Option key={i} text={String(i)}>{i}</Option>
+            return <Option key={String(i)} text={String(i)}>{i}</Option>
           })}
         </Select>
       </div>

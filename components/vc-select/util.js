@@ -1,4 +1,5 @@
 import { getPropsData, getSlotOptions, getKey, getAttrs } from '../_util/props-util'
+import { cloneVNodes } from '../_util/vnode'
 export function getValuePropValue (child) {
   const props = getPropsData(child)
   if ('value' in props) {
@@ -21,9 +22,9 @@ export function getPropValue (child, prop) {
   }
   if (prop === 'children') {
     if (child.$slots) {
-      return child.$slots.default
+      return cloneVNodes(child.$slots.default, true)
     } else {
-      return child.componentOptions.children
+      return cloneVNodes(child.componentOptions.children, true)
     }
   }
   const data = getPropsData(child)

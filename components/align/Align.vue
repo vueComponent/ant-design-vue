@@ -36,6 +36,7 @@ export default {
     monitorBufferTime: PropTypes.number.def(50),
     monitorWindowResize: PropTypes.bool.def(false),
     disabled: PropTypes.bool.def(false),
+    visible: PropTypes.bool.def(false),
   },
   data () {
     this.aligned = false
@@ -55,8 +56,8 @@ export default {
     const prevProps = this.prevProps
     const props = this.$props
     let reAlign = false
-    if (!props.disabled) {
-      if (prevProps.disabled || !isEqual(prevProps.align, props.align)) {
+    if (!props.disabled && this.visible) {
+      if (prevProps.disabled || prevProps.align !== props.align) {
         reAlign = true
       } else {
         const lastTarget = prevProps.target()

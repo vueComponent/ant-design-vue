@@ -6,7 +6,7 @@ import classes from 'component-classes'
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu'
 import warning from 'warning'
 import Option from './Option'
-import { hasProp, getSlotOptions } from '../_util/props-util'
+import { hasProp, getSlotOptions, getKey } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement, getClass, getPropsData, getValueByProp as getValue, getEvents } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
@@ -98,6 +98,7 @@ export default {
     if (sValue.length > 0) {
       this._valueOptions = this.getOptionsByValue(sValue)
     }
+    console.log(sValue)
     return {
       sValue,
       inputValue,
@@ -166,11 +167,23 @@ export default {
     }
   },
   methods: {
-    updateLabelAndTitleMap () {
-      const labelMap = {}
-      const titleMap = {}
-      this.labelMap = labelMap
-      this.titleMap = titleMap
+    updateLabelAndTitleMap (children = []) {
+      this.titleMap = {}
+      this.updateTitleMap(this.$slots.default)
+    },
+    updateTitleMap (children = []) {
+      children.forEach(child => {
+        if (!child) {
+          return
+        }
+        if (getSlotOptions(child).isSelectOptGroup) {
+          this.updateTitleMap(child.componentOptions.children)
+        } else {
+          const key = getValuePropValue(child)
+          this.titleMap[key] = getValue(child, 'title')
+          this.labelMap[key] = this.getLabelFromOption(child)
+        }
+      })
     },
     updateState () {
       const { combobox, $slots } = this

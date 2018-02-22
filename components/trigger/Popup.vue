@@ -129,10 +129,13 @@ export default {
       const transitionEvent = {
         beforeEnter: (el) => {
           el.style.display = el.__vOriginalDisplay
-          this.$refs.alignInstance.forceAlign()
+          // this.$refs.alignInstance.forceAlign()
         },
         enter: (el, done) => {
-          animate(el, `${transitionName}-enter`, done)
+          // align updated后执行动画
+          this.$nextTick(() => {
+            animate(el, `${transitionName}-enter`, done)
+          })
         },
         leave: (el, done) => {
           animate(el, `${transitionName}-leave`, done)
@@ -169,6 +172,7 @@ export default {
           monitorWindowResize
           align={align}
           onAlign={this.onAlign}
+          visible={visible}
         >
           <PopupInner
             {...popupInnerProps}

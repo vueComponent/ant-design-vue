@@ -6,7 +6,7 @@ export default {
   data () {
     return {
       destroy: false,
-      value: '01',
+      value: 'hello',
     }
   },
   methods: {
@@ -58,7 +58,7 @@ export default {
           firstActiveValue='2'
           backfill
         >
-          <Option value='01' text='jack' title='jack'>
+          <Option key='hello' text='jack' title='jack'>
             <b
               style={{
                 color: 'red',

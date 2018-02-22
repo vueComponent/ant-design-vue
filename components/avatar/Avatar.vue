@@ -33,10 +33,10 @@ export default {
     icon: String,
   },
   data () {
+    this.isExistSlot = false
+    this.childrenWidth = 0
     return {
-      isExistSlot: false,
       scale: 1,
-      childrenWidth: 0,
     }
   },
   computed: {
@@ -44,7 +44,7 @@ export default {
       const { prefixCls, shape, size, src, icon } = this
       return {
         [`${prefixCls}`]: true,
-        [`${prefixCls}-image`]: !!src,
+        [`${prefixCls}-image`]: !!src && this.state.isImgExist,
         [`${prefixCls}-icon`]: !!icon,
         [`${prefixCls}-${shape}`]: true,
         [`${prefixCls}-lg`]: size === 'large',

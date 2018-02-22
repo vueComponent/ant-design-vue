@@ -166,6 +166,12 @@ export default {
     }
   },
   methods: {
+    updateLabelAndTitleMap () {
+      const labelMap = {}
+      const titleMap = {}
+      this.labelMap = labelMap
+      this.titleMap = titleMap
+    },
     updateState () {
       const { combobox, $slots } = this
       let value = toArray(this.value)

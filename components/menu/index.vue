@@ -79,7 +79,7 @@ export default {
         }
         this.preProps = { ...nextProps }
       },
-      // deep: true,
+      deep: true,
     },
     'layoutContext.siderCollapsed': function (val) {
       const { openKeys, sOpenKeys, prefixCls } = this

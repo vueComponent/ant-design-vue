@@ -99,7 +99,7 @@ export default {
     let inputValue = ''
     if (combobox) {
       inputValue = sValue.length
-        ? this.getLabelFromProps(sValue[0].key)
+        ? this.labelMap.get((sValue[0].key))
         : ''
     }
     let sOpen = open
@@ -116,9 +116,7 @@ export default {
       sOpen,
     }
   },
-  beforeMount () {
-    // this.adjustOpenState()
-  },
+
   mounted () {
     this.$nextTick(() => {
       this.autoFocus && this.focus()
@@ -141,14 +139,16 @@ export default {
       this.sValue = sValue
       if (this.combobox) {
         this.setState({
-          inputValue: sValue.length
-            ? this.getLabelFromProps(sValue[0].key)
-            : '',
+          inputValue: sValue.length ? this.labelMap.get((sValue[0].key)) : '',
         })
       }
     },
-    combobox () {
-      this.updateState()
+    combobox (val) {
+      if (val) {
+        this.setState({
+          inputValue: this.sValue.length ? this.labelMap.get((this.sValue[0].key)) : '',
+        })
+      }
     },
   },
   updated () {
@@ -188,22 +188,6 @@ export default {
           this.labelMap.set(key, this.getLabelFromOption(child))
         }
       })
-    },
-    updateState () {
-      const { combobox, $slots } = this
-      let value = toArray(this.value)
-      value = this.addLabelToValue(value)
-      value = this.addTitleToValue($slots.default, value)
-      this.setState({
-        sValue: value,
-      })
-      if (combobox) {
-        this.setState({
-          inputValue: value.length
-            ? this.getLabelFromProps(value[0].key)
-            : '',
-        })
-      }
     },
     onInputChange (event) {
       const { tokenSeparators } = this
@@ -459,20 +443,6 @@ export default {
       } else {
         event.stopPropagation()
       }
-      // const { inputValue, sValue, disabled } = this
-      // if (disabled) {
-      //   return
-      // }
-      // event.stopPropagation()
-      // if (inputValue || sValue.length) {
-      //   if (sValue.length) {
-      //     this.fireChange([])
-      //   }
-      //   this.setOpenState(false, true)
-      //   if (inputValue) {
-      //     this.setInputValue('')
-      //   }
-      // }
     },
 
     onChoiceAnimationLeave () {
@@ -588,7 +558,7 @@ export default {
         if (!this.labelInValue) {
           vls = vls.map(v => v.key)
         } else {
-          vls = vls.map(vl => ({ key: vl.key, label: this.labelMap.get('label') }))
+          vls = vls.map(vl => ({ key: vl.key, label: this.labelMap.get(vl.key) }))
         }
         return isMultipleOrTags(this.$props) ? vls : vls[0]
       }
@@ -926,42 +896,42 @@ export default {
       }
     },
 
-    addLabelToValue (value_) {
-      let value = value_
-      if (this.labelInValue) {
-        value.forEach(v => {
-          v.label = v.label || this.getLabelFromProps(v.key)
-        })
-      } else {
-        value = value.map(v => {
-          return {
-            key: v,
-            label: this.getLabelFromProps(v),
-          }
-        })
-      }
-      return value
-    },
+    // addLabelToValue (value_) {
+    //   let value = value_
+    //   if (this.labelInValue) {
+    //     value.forEach(v => {
+    //       v.label = v.label || this.getLabelFromProps(v.key)
+    //     })
+    //   } else {
+    //     value = value.map(v => {
+    //       return {
+    //         key: v,
+    //         label: this.getLabelFromProps(v),
+    //       }
+    //     })
+    //   }
+    //   return value
+    // },
 
-    addTitleToValue (children = [], values) {
-      let nextValues = values
-      const keys = values.map(v => v.key)
-      children.forEach(child => {
-        if (!child) {
-          return
-        }
-        if (getSlotOptions(child).isSelectOptGroup) {
-          nextValues = this.addTitleToValue(child.componentOptions.children, nextValues)
-        } else {
-          const value = getValuePropValue(child)
-          const valueIndex = keys.indexOf(value)
-          if (valueIndex > -1) {
-            nextValues[valueIndex].title = getValue(child, 'title')
-          }
-        }
-      })
-      return nextValues
-    },
+    // addTitleToValue (children = [], values) {
+    //   let nextValues = values
+    //   const keys = values.map(v => v.key)
+    //   children.forEach(child => {
+    //     if (!child) {
+    //       return
+    //     }
+    //     if (getSlotOptions(child).isSelectOptGroup) {
+    //       nextValues = this.addTitleToValue(child.componentOptions.children, nextValues)
+    //     } else {
+    //       const value = getValuePropValue(child)
+    //       const valueIndex = keys.indexOf(value)
+    //       if (valueIndex > -1) {
+    //         nextValues[valueIndex].title = getValue(child, 'title')
+    //       }
+    //     }
+    //   })
+    //   return nextValues
+    // },
 
     removeSelected (selectedKey) {
       const props = this.$props
@@ -1043,32 +1013,6 @@ export default {
       return nextValue
     },
 
-    adjustOpenState () {
-      if (this.skipAdjustOpen) {
-        return
-      }
-      const { $props, showSearch } = this
-      let sOpen = this.sOpen
-      let options = []
-      // If hidden menu due to no options, then it should be calculated again
-      if (sOpen || this.hiddenForNoOptions) {
-        options = this.renderFilterOptions()
-      }
-      this._options = options
-
-      if (isMultipleOrTagsOrCombobox($props) || !showSearch) {
-        if (sOpen && !options.length) {
-          sOpen = false
-          this.hiddenForNoOptions = true
-        }
-        // Keep menu open if there are options and hidden for no options before
-        if (this.hiddenForNoOptions && options.length) {
-          sOpen = true
-          this.hiddenForNoOptions = false
-        }
-      }
-      this.sOpen = sOpen
-    },
     getOptionsAndOpenStatus () {
       let sOpen = this.sOpen
       if (this.skipAdjustOpen) {
@@ -1345,7 +1289,7 @@ export default {
         if (isMultipleOrTags(props)) {
           selectedValueNodes = limitedCountValue.map(singleValue => {
             let content = this.labelMap.get(singleValue.key)
-            const title = this.titleMap.get(singleValue.title) || content
+            const title = this.titleMap.get(singleValue.key) || content
             if (
               maxTagTextLength &&
             typeof content === 'string' &&
@@ -1487,8 +1431,16 @@ export default {
   },
 
   render () {
-    this.labelMap = new Map()
-    this.titleMap = new Map()
+    // 保留已选中的label and title
+    const labelArr = []
+    const titleArr = []
+    this.sValue.forEach(({ key }) => {
+      labelArr.push([key, this.labelMap.get(key)])
+      titleArr.push([key, this.titleMap.get(key)])
+    })
+    this.labelMap = new Map(labelArr)
+    this.titleMap = new Map(titleArr)
+
     this.updateLabelAndTitleMap(this.$slots.default)
     const props = this.$props
     const multiple = isMultipleOrTags(props)

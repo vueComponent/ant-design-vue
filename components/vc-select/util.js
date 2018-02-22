@@ -4,7 +4,7 @@ export function getValuePropValue (child) {
   if ('value' in props) {
     return props.value
   }
-  if (getKey(child)) {
+  if (getKey(child) !== undefined) {
     return getKey(child)
   }
   if (getSlotOptions(child).isSelectOptGroup && props.label) {

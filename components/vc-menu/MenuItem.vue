@@ -5,7 +5,7 @@ import KeyCode from '../_util/KeyCode'
 import BaseMixin from '../_util/BaseMixin'
 const props = {
   rootPrefixCls: PropTypes.string,
-  eventKey: PropTypes.string,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   active: PropTypes.bool,
   selectedKeys: PropTypes.array,
   disabled: PropTypes.bool,

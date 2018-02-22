@@ -4,6 +4,7 @@ import align from 'dom-align'
 import addEventListener from '../_util/Dom/addEventListener'
 import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
+import isEqual from 'lodash.isequal'
 function noop () {
 }
 
@@ -55,7 +56,7 @@ export default {
     const props = this.$props
     let reAlign = false
     if (!props.disabled) {
-      if (prevProps.disabled || prevProps.align !== props.align) {
+      if (prevProps.disabled || !isEqual(prevProps.align, props.align)) {
         reAlign = true
       } else {
         const lastTarget = prevProps.target()

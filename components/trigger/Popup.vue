@@ -167,7 +167,6 @@ export default {
           key='popup'
           ref='alignInstance'
           monitorWindowResize
-          disabled={!visible}
           align={align}
           onAlign={this.onAlign}
         >

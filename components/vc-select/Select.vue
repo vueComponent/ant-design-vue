@@ -210,7 +210,6 @@ export default {
     },
 
     onDropdownVisibleChange (open) {
-      console.log('onDropdownVisibleChange', open)
       if (open && !this._focused) {
         this.clearBlurTime()
         this.timeoutFocus()
@@ -558,7 +557,7 @@ export default {
     },
 
     getLabelFromProps (value) {
-      return this.getLabelByValue(this.$slots.default, value)
+      return this.getLabelByValue(this.$slots.default || [], value)
     },
 
     getVLForOnChange (vls_) {

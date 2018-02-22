@@ -476,7 +476,7 @@ export default {
             }
           }
           if (!options[i]) {
-            options[i] = <Option value={v.key} key={v.key}>{this.labelMap.get('label')}</Option>
+            options[i] = <Option value={v.key} key={v.key}>{this.labelMap.get(v.key)}</Option>
           }
         }
       })

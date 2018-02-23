@@ -1,0 +1,147 @@
+<script>
+import PropTypes from '../_util/vue-types'
+import VcSelect, { Option, OptGroup } from '../vc-select'
+import LocaleReceiver from '../locale-provider/LocaleReceiver'
+import defaultLocale from '../locale-provider/default'
+
+const AbstractSelectProps = {
+  prefixCls: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'large', 'default']),
+  notFoundContent: PropTypes.any,
+  transitionName: PropTypes.string,
+  choiceTransitionName: PropTypes.string,
+  showSearch: PropTypes.bool,
+  allowClear: PropTypes.bool,
+  disabled: PropTypes.bool,
+  tabIndex: PropTypes.number,
+  placeholder: PropTypes.string,
+  defaultActiveFirstOption: PropTypes.bool,
+  dropdownClassName: PropTypes.string,
+  dropdownStyle: PropTypes.any,
+  dropdownMenuStyle: PropTypes.any,
+  // onSearch: (value: string) => any,
+  filterOption: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.func,
+  ]),
+}
+
+const SelectValue = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.array,
+])
+
+const SelectProps = {
+  ...AbstractSelectProps,
+  value: SelectValue,
+  defaultValue: SelectValue,
+  mode: PropTypes.oneOf(['default', 'multiple', 'tags', 'combobox']),
+  optionLabelProp: PropTypes.string,
+  // onChange?: (value: SelectValue, option: React.ReactElement<any> | React.ReactElement<any>[]) => void;
+  // onSelect?: (value: SelectValue, option: React.ReactElement<any>) => any;
+  // onDeselect?: (value: SelectValue) => any;
+  // onBlur?: () => any;
+  // onFocus?: () => any;
+  // onInputKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  maxTagCount: PropTypes.number,
+  maxTagPlaceholder: PropTypes.any,
+  dropdownMatchSelectWidth: PropTypes.bool,
+  optionFilterProp: PropTypes.string,
+  labelInValue: PropTypes.boolean,
+  getPopupContainer: PropTypes.func,
+  tokenSeparators: PropTypes.arrayOf(PropTypes.string),
+  getInputElement: PropTypes.func,
+  autoFocus: PropTypes.bool,
+}
+
+const SelectPropTypes = {
+  prefixCls: PropTypes.string,
+  size: PropTypes.oneOf(['default', 'large', 'small']),
+  combobox: PropTypes.bool,
+  notFoundContent: PropTypes.any,
+  showSearch: PropTypes.bool,
+  optionLabelProp: PropTypes.string,
+  transitionName: PropTypes.string,
+  choiceTransitionName: PropTypes.string,
+}
+
+export default {
+  Option,
+  OptGroup,
+  name: 'Select',
+  props: {
+    ...SelectProps,
+    prefixCls: PropTypes.string.def('ant-select'),
+    showSearch: PropTypes.bool.def(false),
+    transitionName: PropTypes.string.def('slide-up'),
+    choiceTransitionName: PropTypes.string.def('zoom'),
+  },
+  propTypes: SelectPropTypes,
+  methods: {
+    focus () {
+      this.$refs.vcSelect.focus()
+    },
+    blur () {
+      this.$refs.vcSelect.blur()
+    },
+    getNotFoundContent (locale) {
+      const { notFoundContent, mode } = this.$props
+      const isCombobox = mode === 'combobox'
+      if (isCombobox) {
+      // AutoComplete don't have notFoundContent defaultly
+        return notFoundContent === undefined ? null : notFoundContent
+      }
+      return notFoundContent === undefined ? locale.notFoundContent : notFoundContent
+    },
+    renderSelect (locale) {
+      const {
+        prefixCls,
+        size,
+        mode,
+        ...restProps
+      } = this.$props
+      const cls = {
+        [`${prefixCls}-lg`]: size === 'large',
+        [`${prefixCls}-sm`]: size === 'small',
+      }
+
+      let { optionLabelProp } = this.$props
+      const isCombobox = mode === 'combobox'
+      if (isCombobox) {
+      // children 带 dom 结构时，无法填入输入框
+        optionLabelProp = optionLabelProp || 'value'
+      }
+
+      const modeConfig = {
+        multiple: mode === 'multiple',
+        tags: mode === 'tags',
+        combobox: isCombobox,
+      }
+
+      return (
+        <VcSelect
+          {...restProps}
+          {...modeConfig}
+          prefixCls={prefixCls}
+          class={cls}
+          optionLabelProp={optionLabelProp || 'children'}
+          notFoundContent={this.getNotFoundContent(locale)}
+          ref='vcSelect'
+        >
+          {this.$slots.default}
+        </VcSelect>
+      )
+    },
+  },
+  render () {
+    return (
+      <LocaleReceiver
+        componentName='Select'
+        defaultLocale={defaultLocale.Select}
+        children={this.renderSelect}
+      />
+    )
+  },
+}
+
+</script>

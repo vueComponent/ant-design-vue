@@ -75,8 +75,10 @@ export default {
     // onInputKeydown: noop,
   },
   data () {
+    this.labelMap = new Map()
+    this.titleMap = new Map()
     let sValue = []
-    const { value, defaultValue, combobox, open, defaultOpen, $slots } = this
+    const { value, defaultValue, combobox, open, defaultOpen } = this
     if (hasProp(this, 'value')) {
       sValue = toArray(value)
     } else {
@@ -93,9 +95,7 @@ export default {
         }
       })
     }
-    this.labelMap = new Map()
-    this.titleMap = new Map()
-    this.updateLabelAndTitleMap($slots.default)
+    this.initLabelAndTitleMap(sValue)
     let inputValue = ''
     if (combobox) {
       inputValue = sValue.length
@@ -175,6 +175,24 @@ export default {
     }
   },
   methods: {
+    initLabelAndTitleMap (sValue) {
+      // 保留已选中的label and title
+      const labelArr = []
+      const titleArr = []
+      const values = sValue || this.sValue
+      values.forEach((val) => {
+        const key = val.key
+        let { label, title } = val
+        label = label === undefined ? this.labelMap.get(key) : label
+        title = title === undefined ? this.titleMap.get(key) : title
+        labelArr.push([key, label === undefined ? key : label])
+        titleArr.push([key, title])
+      })
+      this.labelMap = new Map(labelArr)
+      this.titleMap = new Map(titleArr)
+
+      this.updateLabelAndTitleMap(this.$slots.default)
+    },
     updateLabelAndTitleMap (children = []) {
       children.forEach(child => {
         if (!child) {
@@ -1431,17 +1449,7 @@ export default {
   },
 
   render () {
-    // 保留已选中的label and title
-    const labelArr = []
-    const titleArr = []
-    this.sValue.forEach(({ key }) => {
-      labelArr.push([key, this.labelMap.get(key)])
-      titleArr.push([key, this.titleMap.get(key)])
-    })
-    this.labelMap = new Map(labelArr)
-    this.titleMap = new Map(titleArr)
-
-    this.updateLabelAndTitleMap(this.$slots.default)
+    this.initLabelAndTitleMap()
     const props = this.$props
     const multiple = isMultipleOrTags(props)
     const preOptions = this._options || []

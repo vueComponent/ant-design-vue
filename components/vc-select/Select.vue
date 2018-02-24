@@ -195,7 +195,7 @@ export default {
     },
     updateLabelAndTitleMap (children = []) {
       children.forEach(child => {
-        if (!child || (child.data && child.data.slot !== undefined)) {
+        if (!child.data || child.data.slot !== undefined) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -472,7 +472,7 @@ export default {
         values = [value]
       }
       children.forEach(child => {
-        if (!child || (child.data && child.data.slot !== undefined)) {
+        if (!child.data || child.data.slot !== undefined) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -526,7 +526,7 @@ export default {
       }
       let label = null
       children.forEach(child => {
-        if (!child || (child.data && child.data.slot !== undefined)) {
+        if (!child.data || child.data.slot !== undefined) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -547,7 +547,7 @@ export default {
       }
       let value = null
       children.forEach(child => {
-        if (!child || (child.data && child.data.slot !== undefined)) {
+        if (!child.data || child.data.slot !== undefined) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -1159,7 +1159,7 @@ export default {
       const { inputValue } = this
       const tags = props.tags
       children.forEach(child => {
-        if (!child || (child.data && child.data.slot !== undefined)) {
+        if (!child.data || child.data.slot !== undefined) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {

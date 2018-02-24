@@ -563,7 +563,11 @@ export default {
     },
 
     getLabelFromOption (child) {
-      return getPropValue(child, this.optionLabelProp)
+      let label = getPropValue(child, this.optionLabelProp)
+      if (Array.isArray(label) && label.length === 1 && !label[0].tag) {
+        label = label[0].text
+      }
+      return label
     },
 
     getLabelFromProps (value) {
@@ -1251,11 +1255,12 @@ export default {
             }
           }
           const singleValue = sValue[0]
+          const key = singleValue.key
           selectedValue = (
             <div
               key='value'
               class={`${prefixCls}-selection-selected-value`}
-              title={singleValue.title || singleValue.label}
+              title={this.titleMap.get(key) || this.labelMap.get(key)}
               style={{
                 display: showSelectedValue ? 'block' : 'none',
                 opacity,
@@ -1373,14 +1378,14 @@ export default {
         }
       }
       return (
-        <div class={className} ref='topCtrlRef' onClick={this.muitipleContainerClick}>
+        <div class={className} ref='topCtrlRef' onClick={this.topCtrlContainerClick}>
           {this.getPlaceholderElement()}
           {innerNode}
         </div>
       )
     },
-    muitipleContainerClick (e) {
-      if (this.openStatus) {
+    topCtrlContainerClick (e) {
+      if (this.openStatus && !isSingleMode(this.$props)) {
         e.stopPropagation()
       }
     },

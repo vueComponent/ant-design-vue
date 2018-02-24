@@ -3,8 +3,7 @@
   import omit from 'omit.js'
   import PropTypes from '../_util/vue-types'
   import addEventListener from '../_util/Dom/addEventListener'
-  import { hasProp, getComponentFromProp } from '../_util/props-util'
-  import { getComponentName } from '../_util/vnode'
+  import { hasProp, getComponentFromProp, getComponentName } from '../_util/props-util'
   import throttleByAnimationFrame from '../_util/throttleByAnimationFrame'
   import BaseMixin from '../_util/BaseMixin'
 

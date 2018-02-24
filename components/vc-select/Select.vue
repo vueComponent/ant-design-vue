@@ -6,9 +6,9 @@ import classes from 'component-classes'
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu'
 import warning from 'warning'
 import Option from './Option'
-import { hasProp, getSlotOptions } from '../_util/props-util'
+import { hasProp, getSlotOptions, getPropsData, getValueByProp as getValue, getComponentFromProp, getEvents, getClass } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
-import { cloneElement, getClass, getPropsData, getValueByProp as getValue, getEvents } from '../_util/vnode'
+import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import {
   getPropValue,
@@ -195,7 +195,7 @@ export default {
     },
     updateLabelAndTitleMap (children = []) {
       children.forEach(child => {
-        if (!child) {
+        if (!child || (child.data && child.data.slot !== undefined)) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -435,7 +435,7 @@ export default {
         } else if (isMultipleOrTags(props) && inputValue) {
           this.inputValue = this.getInputDOMNode().value = ''
         }
-        this.__emit('blur', this.getVLForOnChange(sValue))
+        this.$emit('blur', this.getVLForOnChange(sValue))
         this.setOpenState(false)
       }, 10)
     },
@@ -472,7 +472,7 @@ export default {
         values = [value]
       }
       children.forEach(child => {
-        if (!child) {
+        if (!child || (child.data && child.data.slot !== undefined)) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -526,7 +526,7 @@ export default {
       }
       let label = null
       children.forEach(child => {
-        if (!child) {
+        if (!child || (child.data && child.data.slot !== undefined)) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -547,7 +547,7 @@ export default {
       }
       let value = null
       children.forEach(child => {
-        if (!child) {
+        if (!child || (child.data && child.data.slot !== undefined)) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -675,7 +675,7 @@ export default {
         } else if (isMultipleOrTags(props) && inputValue) {
           this.inputValue = this.getInputDOMNode().value = ''
         }
-        this.__emit('blur', this.getVLForOnChange(sValue))
+        this.$emit('blur', this.getVLForOnChange(sValue))
         this.setOpenState(false)
       }, 10)
     },
@@ -786,7 +786,7 @@ export default {
           inputValue,
         })
         if (fireSearch) {
-          this.__emit('search', inputValue)
+          this.$emit('search', inputValue)
         }
       }
     },
@@ -861,7 +861,7 @@ export default {
       this.focusTimer = setTimeout(() => {
         this._focused = true
         this.updateFocusClassName()
-        this.__emit('focus')
+        this.$emit('focus')
       }, 10)
     },
 
@@ -973,7 +973,7 @@ export default {
             label,
           }
         }
-        this.__emit('deselect', event, this.getSingleOptionByValueKey(selectedKey))
+        this.$emit('deselect', event, this.getSingleOptionByValueKey(selectedKey))
       }
       this.fireChange(value)
     },
@@ -986,7 +986,7 @@ export default {
     },
     fireSelect (value) {
       const { labelInValue } = this
-      this.__emit('select', labelInValue ? value : value.key, this.getSingleOptionByValueKey(value.key))
+      this.$emit('select', labelInValue ? value : value.key, this.getSingleOptionByValueKey(value.key))
     },
     fireChange (value) {
       if (!hasProp(this, 'value')) {
@@ -997,7 +997,7 @@ export default {
       const vls = this.getVLForOnChange(value)
       const options = this.getOptionsByValue(value)
       this._valueOptions = options
-      this.__emit('change', vls, isMultipleOrTags(this.$props) ? options : options[0])
+      this.$emit('change', vls, isMultipleOrTags(this.$props) ? options : options[0])
     },
 
     isChildDisabled (key) {
@@ -1159,7 +1159,7 @@ export default {
       const { inputValue } = this
       const tags = props.tags
       children.forEach(child => {
-        if (!child) {
+        if (!child || (child.data && child.data.slot !== undefined)) {
           return
         }
         if (getSlotOptions(child).isSelectOptGroup) {
@@ -1169,7 +1169,7 @@ export default {
             menuItems,
           )
           if (innerItems.length) {
-            let label = getValue(child, 'label')
+            let label = getComponentFromProp(child, 'label')
             let key = child.key
             if (!key && typeof label === 'string') {
               key = label

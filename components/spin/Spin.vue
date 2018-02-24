@@ -2,7 +2,7 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import isCssAnimationSupported from '../_util/isCssAnimationSupported'
-import { filterEmpty } from '../_util/vnode'
+import { filterEmpty } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 
 export default {

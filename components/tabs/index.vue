@@ -1,8 +1,7 @@
 <script>
 import Tabs from './src/Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
-import { hasProp, getComponentFromProp } from '../_util/props-util'
-import { getComponentName, isEmptyElement } from '../_util/vnode'
+import { hasProp, getComponentFromProp, getComponentName, isEmptyElement } from '../_util/props-util'
 import warning from '../_util/warning'
 export default {
   props: {

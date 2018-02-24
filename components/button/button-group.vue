@@ -1,5 +1,5 @@
 <script>
-import { filterEmpty } from '../_util/vnode'
+import { filterEmpty } from '../_util/props-util'
 const ButtonGroupProps = {
   prefixCls: {
     default: 'ant-btn-group',

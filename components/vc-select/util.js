@@ -1,4 +1,4 @@
-import { getPropsData, getSlotOptions, getKey, getAttrs } from '../_util/props-util'
+import { getPropsData, getSlotOptions, getKey, getAttrs, getComponentFromProp } from '../_util/props-util'
 import { cloneVNodes } from '../_util/vnode'
 export function getValuePropValue (child) {
   const props = getPropsData(child)
@@ -8,11 +8,14 @@ export function getValuePropValue (child) {
   if (getKey(child) !== undefined) {
     return getKey(child)
   }
-  if (getSlotOptions(child).isSelectOptGroup && props.label) {
-    return props.label
+  if (getSlotOptions(child).isSelectOptGroup) {
+    const label = getComponentFromProp(child, 'label')
+    if (label) {
+      return label
+    }
   }
   throw new Error(
-    `Need at least a key or a value or a label (only for OptGroup) for ${child}`
+    `Need at least a key or a value or a label(slot) (only for OptGroup) for ${child}`
   )
 }
 

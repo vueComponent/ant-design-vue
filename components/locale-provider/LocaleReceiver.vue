@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     getLocale () {
-      const { componentName, defaultLocale } = this.props
+      const { componentName, defaultLocale } = this
       const { antLocale } = this
       const localeFromContext = antLocale && antLocale[componentName]
       return {

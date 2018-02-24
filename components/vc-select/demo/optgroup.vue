@@ -20,7 +20,8 @@ export default {
           style={{ width: '500px' }}
           onChange={this.onChange}
         >
-          <OptGroup label='manager'>
+          <OptGroup>
+            <span slot='label'>manager</span>
             <Option value='jack'>
               <b
                 style={{

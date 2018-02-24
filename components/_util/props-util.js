@@ -30,12 +30,28 @@ const getOptionProps = (instance) => {
 }
 
 const getComponentFromProp = (instance, prop) => {
-  const h = instance.$createElement
-  const temp = instance[prop]
-  if (temp !== undefined) {
-    return typeof temp === 'function' ? temp(h) : temp
+  if (instance.$createElement) {
+    const h = instance.$createElement
+    const temp = instance[prop]
+    if (temp !== undefined) {
+      return typeof temp === 'function' ? temp(h) : temp
+    }
+    return instance.$slots[prop]
+  } else {
+    const h = instance.context.$createElement
+    const temp = getPropsData(instance)[prop]
+    if (temp !== undefined) {
+      return typeof temp === 'function' ? temp(h) : temp
+    }
+    const slotsProp = []
+    const componentOptions = instance.componentOptions || {};
+    (componentOptions.children || []).forEach((child) => {
+      if (child.data && child.data.slot === prop) {
+        slotsProp.push(child)
+      }
+    })
+    return slotsProp.length ? slotsProp : undefined
   }
-  return instance.$slots[prop]
 }
 
 const getPropsData = (ele) => {
@@ -44,6 +60,9 @@ const getPropsData = (ele) => {
     componentOptions = ele.$vnode.componentOptions
   }
   return componentOptions ? componentOptions.propsData || {} : {}
+}
+const getValueByProp = (ele, prop) => {
+  return getPropsData(ele)[prop]
 }
 
 const getAttrs = (ele) => {
@@ -61,6 +80,50 @@ const getKey = (ele) => {
   }
   return key
 }
+
+export function getEvents (child) {
+  let events = {}
+  if (child.componentOptions && child.componentOptions.listeners) {
+    events = child.componentOptions.listeners
+  } else if (child.data && child.data.on) {
+    events = child.data.on
+  }
+  return { ...events }
+}
+export function getClass (ele) {
+  let data = {}
+  if (ele.data) {
+    data = ele.data
+  } else if (ele.$vnode && ele.$vnode.data) {
+    data = ele.$vnode.data
+  }
+  return data.class || data.staticClass
+}
+export function getStyle (ele) {
+  let data = {}
+  if (ele.data) {
+    data = ele.data
+  } else if (ele.$vnode && ele.$vnode.data) {
+    data = ele.$vnode.data
+  }
+  return data.style || data.staticStyle
+}
+
+export function getComponentName (opts) {
+  return opts && (opts.Ctor.options.name || opts.tag)
+}
+
+export function isValidElement (ele) {
+  return !!ele.tag
+}
+
+export function isEmptyElement (ele) {
+  return !(ele.tag || ele.text.trim() !== '')
+}
+
+export function filterEmpty (children = []) {
+  return children.filter(c => c.tag || c.text.trim() !== '')
+}
 export {
   hasProp,
   filterProps,
@@ -71,5 +134,6 @@ export {
   getPropsData,
   getKey,
   getAttrs,
+  getValueByProp,
 }
 export default hasProp

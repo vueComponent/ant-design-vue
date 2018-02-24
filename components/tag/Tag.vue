@@ -36,7 +36,6 @@ export default {
     },
     tagStyle () {
       const { color, isPresetColor } = this
-      console.log(color, isPresetColor)
       return {
         backgroundColor: (color && !isPresetColor) ? color : null,
       }

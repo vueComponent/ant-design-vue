@@ -1,6 +1,6 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import { getStyle } from '../_util/vnode'
+import { getStyle } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 
 export default {

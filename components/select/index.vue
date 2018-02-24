@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types'
 import VcSelect, { Option, OptGroup } from '../vc-select'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
-import { getComponentFromProp } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps } from '../_util/props-util'
 
 const AbstractSelectProps = {
   prefixCls: PropTypes.string,
@@ -101,7 +101,7 @@ export default {
         size,
         mode,
         ...restProps
-      } = this.$props
+      } = getOptionProps(this)
       const cls = {
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-sm`]: size === 'small',

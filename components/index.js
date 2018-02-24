@@ -70,3 +70,9 @@ const api = {
   message,
 }
 export { api }
+
+import Select from './select'
+const SelectOption = Select.Option
+const SelectOptGroup = Select.OptGroup
+export { Select, SelectOption, SelectOptGroup }
+

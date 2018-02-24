@@ -2,9 +2,9 @@
 import PropTypes from '../../_util/vue-types'
 import Trigger from '../../trigger'
 import placements from './placements'
-import { hasProp } from '../../_util/props-util'
+import { hasProp, getEvents } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
-import { cloneElement, getEvents, cloneVNode } from '../../_util/vnode'
+import { cloneElement, cloneVNode } from '../../_util/vnode'
 
 export default {
   mixins: [BaseMixin],

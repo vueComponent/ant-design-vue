@@ -1,8 +1,8 @@
 <script>
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
-import { hasProp } from '../../_util/props-util'
-import { cloneElement, getPropsData, isEmptyElement } from '../../_util/vnode'
+import { hasProp, getPropsData, isEmptyElement } from '../../_util/props-util'
+import { cloneElement } from '../../_util/vnode'
 import openAnimationFactory from './openAnimationFactory'
 import { collapseProps } from './commonProps'
 

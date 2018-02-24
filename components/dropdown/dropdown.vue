@@ -3,8 +3,8 @@ import RcDropdown from './src/index'
 import DropdownButton from './dropdown-button'
 // import warning from '../_util/warning'
 import PropTypes from '../_util/vue-types'
-import { cloneElement, getPropsData } from '../_util/vnode'
-import { getOptionProps } from '../_util/props-util'
+import { cloneElement } from '../_util/vnode'
+import { getOptionProps, getPropsData } from '../_util/props-util'
 import getDropdownProps from './getDropdownProps'
 const DropdownProps = getDropdownProps()
 const Dropdown = {

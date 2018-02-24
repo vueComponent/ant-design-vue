@@ -1,3 +1,4 @@
+import { filterEmpty } from './props-util'
 export function cloneVNode (vnode, deep) {
   const componentOptions = vnode.componentOptions
   const data = vnode.data
@@ -89,54 +90,4 @@ export function cloneElement (n, nodeProps, clone) {
   }
   return node
 }
-export function getComponentName (opts) {
-  return opts && (opts.Ctor.options.name || opts.tag)
-}
 
-export function isValidElement (ele) {
-  return !!ele.tag
-}
-export function isEmptyElement (ele) {
-  return !(ele.tag || ele.text.trim() !== '')
-}
-
-export function getClass (ele) {
-  let data = {}
-  if (ele.data) {
-    data = ele.data
-  } else if (ele.$vnode && ele.$vnode.data) {
-    data = ele.$vnode.data
-  }
-  return data.class || data.staticClass
-}
-
-export function getStyle (ele) {
-  let data = {}
-  if (ele.data) {
-    data = ele.data
-  } else if (ele.$vnode && ele.$vnode.data) {
-    data = ele.$vnode.data
-  }
-  return data.style || data.staticStyle
-}
-
-export function filterEmpty (children = []) {
-  return children.filter(c => c.tag || c.text.trim() !== '')
-}
-
-export function getPropsData (ele) {
-  return ele.componentOptions && ele.componentOptions.propsData
-}
-export function getValueByProp (ele, prop) {
-  return ele.componentOptions && ele.componentOptions.propsData && ele.componentOptions.propsData[prop]
-}
-
-export function getEvents (child) {
-  let events = {}
-  if (child.componentOptions && child.componentOptions.listeners) {
-    events = child.componentOptions.listeners
-  } else if (child.data && child.data.on) {
-    events = child.data.on
-  }
-  return { ...events }
-}

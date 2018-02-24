@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types'
 import VcSelect, { Option, OptGroup } from '../vc-select'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
+import { getComponentFromProp } from '../_util/props-util'
 
 const AbstractSelectProps = {
   prefixCls: PropTypes.string,
@@ -85,7 +86,8 @@ export default {
       this.$refs.vcSelect.blur()
     },
     getNotFoundContent (locale) {
-      const { notFoundContent, mode } = this.$props
+      const { mode } = this.$props
+      const notFoundContent = getComponentFromProp(this, 'notFoundContent')
       const isCombobox = mode === 'combobox'
       if (isCombobox) {
       // AutoComplete don't have notFoundContent defaultly
@@ -117,17 +119,22 @@ export default {
         tags: mode === 'tags',
         combobox: isCombobox,
       }
+      const selectProps = {
+        props: {
+          ...restProps,
+          ...modeConfig,
+          prefixCls,
+          optionLabelProp: optionLabelProp || 'children',
+          notFoundContent: this.getNotFoundContent(locale),
+          maxTagPlaceholder: getComponentFromProp(this, 'maxTagPlaceholder'),
+        },
+        on: this.$listeners,
+        class: cls,
+        ref: 'vcSelect',
+      }
 
       return (
-        <VcSelect
-          {...restProps}
-          {...modeConfig}
-          prefixCls={prefixCls}
-          class={cls}
-          optionLabelProp={optionLabelProp || 'children'}
-          notFoundContent={this.getNotFoundContent(locale)}
-          ref='vcSelect'
-        >
+        <VcSelect {...selectProps}>
           {this.$slots.default}
         </VcSelect>
       )

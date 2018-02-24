@@ -2,14 +2,14 @@
 import Vue from 'vue'
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
-import { hasProp, getComponentFromProp } from '../_util/props-util'
+import { hasProp, getComponentFromProp, getEvents, filterEmpty } from '../_util/props-util'
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout'
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement, filterEmpty, getEvents, cloneVNode } from '../_util/vnode'
+import { cloneElement, cloneVNode } from '../_util/vnode'
 
 function returnEmptyString () {
   return ''

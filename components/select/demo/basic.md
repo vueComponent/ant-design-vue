@@ -12,7 +12,7 @@ Basic Usage
 ```html
 <template>
   <div>
-    <a-select defaultValue="lucy" style='width: 120px' @change='handleChange'>
+    <a-select defaultValue="lucy" style="width: 120px" @change="handleChange">
       <a-select-option value="jack">Jack</a-select-option>
       <a-select-option value="lucy">Lucy</a-select-option>
       <a-select-option value="disabled" disabled>Disabled</a-select-option>
@@ -25,11 +25,11 @@ Basic Usage
 </template>
 <script>
 export default {
-    methods: {
-      handleChange(value) {
-        console.log(`selected ${value}`);
-      }
+  methods: {
+    handleChange(value) {
+      console.log(`selected ${value}`);
     }
+  }
 }
 </script>
 ```

@@ -48,6 +48,7 @@
     "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-vue-libs": "^1.2.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "fetch-jsonp": "^1.1.3",
     "highlight.js": "^9.12.0",
     "html-webpack-plugin": "^2.30.1",
     "istanbul-instrumenter-loader": "^3.0.0",

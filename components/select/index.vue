@@ -30,6 +30,7 @@ const AbstractSelectProps = {
 const SelectValue = PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.array,
+  PropTypes.object,
 ])
 
 const SelectProps = {
@@ -78,6 +79,10 @@ export default {
     choiceTransitionName: PropTypes.string.def('zoom'),
   },
   propTypes: SelectPropTypes,
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   methods: {
     focus () {
       this.$refs.vcSelect.focus()

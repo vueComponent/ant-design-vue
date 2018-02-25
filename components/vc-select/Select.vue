@@ -74,6 +74,10 @@ export default {
     // onDeselect: noop,
     // onInputKeydown: noop,
   },
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   data () {
     this.labelMap = new Map()
     this.titleMap = new Map()
@@ -137,6 +141,7 @@ export default {
         })
       }
       this.sValue = sValue
+      this.initLabelAndTitleMap()
       if (this.combobox) {
         this.setState({
           inputValue: sValue.length ? this.labelMap.get((sValue[0].key)) : '',

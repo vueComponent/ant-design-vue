@@ -6,6 +6,7 @@ import { getSelectKeys, preventDefaultEvent } from './util'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import { getSlotOptions } from '../_util/props-util'
+import addEventListener from '../_util/Dom/addEventListener'
 
 export default {
   name: 'DropdownMenu',
@@ -32,6 +33,12 @@ export default {
   mounted () {
     this.$nextTick(() => {
       this.scrollActiveItemToView()
+      const { $refs, $listeners } = this
+      if ($listeners.popupScroll) {
+        console.log($refs.menuContainer)
+        this.menuContainerHandler = addEventListener($refs.menuContainer,
+          'scroll', ()=>{console.log(111)})
+      }
     })
     this.lastVisible = this.$props.visible
   },
@@ -42,15 +49,12 @@ export default {
       }
     },
   },
-
-  // shouldComponentUpdate (nextProps) {
-  //   if (!nextProps.visible) {
-  //     this.lastVisible = false
-  //   }
-  //   // freeze when hide
-  //   return nextProps.visible
-  // }
-
+  beforeDestroy () {
+    if (this.menuContainerHandler) {
+      this.menuContainerHandler.remove()
+      this.menuContainerHandler = null
+    }
+  },
   updated () {
     const props = this.$props
     if (!this.prevVisible && props.visible) {
@@ -170,13 +174,13 @@ export default {
   render () {
     const renderMenu = this.renderMenu()
     this.prevVisible = this.visible
-    const { popupFocus, popupScroll } = this.$listeners
+    const { popupFocus } = this.$listeners
     return renderMenu ? (
       <div
         style={{ overflow: 'auto' }}
         onFocus={popupFocus}
         onMousedown={preventDefaultEvent}
-        onScroll={popupScroll}
+        ref='menuContainer'
       >
         {renderMenu}
       </div>

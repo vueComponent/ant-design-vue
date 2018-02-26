@@ -141,6 +141,7 @@ export default {
       getPopupContainer,
       showAction,
     } = $props
+    const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = $listeners
     const dropdownPrefixCls = this.getDropdownPrefixCls()
     const popupClassName = {
       [dropdownClassName]: !!dropdownClassName,
@@ -153,7 +154,7 @@ export default {
         inputValue,
         visible,
       }, on: {
-        popupFocus: $listeners.popupFocus,
+        popupFocus,
       },
     })
     let hideAction
@@ -186,9 +187,15 @@ export default {
         popupStyle,
       },
       on: {
-        popupVisibleChange: $listeners.dropdownVisibleChange,
+        popupVisibleChange: dropdownVisibleChange,
       },
       ref: 'triggerRef',
+    }
+    if (mouseenter) {
+      triggerProps.on.mouseenter = mouseenter
+    }
+    if (mouseleave) {
+      triggerProps.on.mouseleave = mouseleave
     }
     return (
       <Trigger {...triggerProps}>

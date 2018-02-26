@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types'
 import VcSelect, { Option, OptGroup } from '../vc-select'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
-import { getComponentFromProp, getOptionProps } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util'
 
 const AbstractSelectProps = {
   prefixCls: PropTypes.string,
@@ -15,7 +15,7 @@ const AbstractSelectProps = {
   allowClear: PropTypes.bool,
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.any,
   defaultActiveFirstOption: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.any,
@@ -132,6 +132,7 @@ export default {
           optionLabelProp: optionLabelProp || 'children',
           notFoundContent: this.getNotFoundContent(locale),
           maxTagPlaceholder: getComponentFromProp(this, 'maxTagPlaceholder'),
+          placeholder: getComponentFromProp(this, 'placeholder'),
         },
         on: this.$listeners,
         class: cls,
@@ -140,7 +141,7 @@ export default {
 
       return (
         <VcSelect {...selectProps}>
-          {this.$slots.default}
+          {filterEmpty(this.$slots.default)}
         </VcSelect>
       )
     },

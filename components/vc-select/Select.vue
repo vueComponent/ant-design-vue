@@ -141,7 +141,16 @@ export default {
         })
       }
       this.sValue = sValue
-      this.initLabelAndTitleMap()
+
+      sValue.forEach((val) => {
+        const key = val.key
+        let { label, title } = val
+        label = label === undefined ? this.labelMap.get(key) : label
+        title = title === undefined ? this.titleMap.get(key) : title
+        this.labelMap.set(key, label === undefined ? key : label)
+        this.titleMap.set(key, title)
+      })
+
       if (this.combobox) {
         this.setState({
           inputValue: sValue.length ? this.labelMap.get((sValue[0].key)) : '',
@@ -382,68 +391,68 @@ export default {
       }
     },
 
-    onOuterFocus (e) {
-      if (this.disabled) {
-        e.preventDefault()
-        return
-      }
-      this.clearBlurTime()
-      if (
-        !isMultipleOrTagsOrCombobox(this.$props) &&
-      e.target === this.getInputDOMNode()
-      ) {
-        return
-      }
-      if (this._focused) {
-        return
-      }
-      this._focused = true
-      this.updateFocusClassName()
-      this.timeoutFocus()
-    },
+    // onOuterFocus (e) {
+    //   if (this.disabled) {
+    //     e.preventDefault()
+    //     return
+    //   }
+    //   this.clearBlurTime()
+    //   if (
+    //     !isMultipleOrTagsOrCombobox(this.$props) &&
+    //   e.target === this.getInputDOMNode()
+    //   ) {
+    //     return
+    //   }
+    //   if (this._focused) {
+    //     return
+    //   }
+    //   this._focused = true
+    //   this.updateFocusClassName()
+    //   this.timeoutFocus()
+    // },
 
     onPopupFocus () {
     // fix ie scrollbar, focus element again
       this.maybeFocus(true, true)
     },
 
-    onOuterBlur (e) {
-      if (this.disabled) {
-        e.preventDefault()
-        return
-      }
-      this.blurTimer = setTimeout(() => {
-        this._focused = false
-        this.updateFocusClassName()
-        const props = this.$props
-        let { sValue } = this
-        const { inputValue } = this
-        if (
-          isSingleMode(props) &&
-        props.showSearch &&
-        inputValue &&
-        props.defaultActiveFirstOption
-        ) {
-          const options = this._options || []
-          if (options.length) {
-            const firstOption = findFirstMenuItem(options)
-            if (firstOption) {
-              sValue = [
-                {
-                  key: firstOption.key,
-                  label: this.getLabelFromOption(firstOption),
-                },
-              ]
-              this.fireChange(sValue)
-            }
-          }
-        } else if (isMultipleOrTags(props) && inputValue) {
-          this.inputValue = this.getInputDOMNode().value = ''
-        }
-        this.$emit('blur', this.getVLForOnChange(sValue))
-        this.setOpenState(false)
-      }, 10)
-    },
+    // onOuterBlur (e) {
+    //   if (this.disabled) {
+    //     e.preventDefault()
+    //     return
+    //   }
+    //   this.blurTimer = setTimeout(() => {
+    //     this._focused = false
+    //     this.updateFocusClassName()
+    //     const props = this.$props
+    //     let { sValue } = this
+    //     const { inputValue } = this
+    //     if (
+    //       isSingleMode(props) &&
+    //     props.showSearch &&
+    //     inputValue &&
+    //     props.defaultActiveFirstOption
+    //     ) {
+    //       const options = this._options || []
+    //       if (options.length) {
+    //         const firstOption = findFirstMenuItem(options)
+    //         if (firstOption) {
+    //           sValue = [
+    //             {
+    //               key: firstOption.key,
+    //               label: this.getLabelFromOption(firstOption),
+    //             },
+    //           ]
+    //           this.fireChange(sValue)
+    //         }
+    //       }
+    //     } else if (isMultipleOrTags(props) && inputValue) {
+    //       this.inputValue = this.getInputDOMNode().value = ''
+    //     }
+    //     this.$emit('blur', this.getVLForOnChange(sValue))
+    //     this.setOpenState(false)
+    //   }, 10)
+    // },
 
     onClearSelection (event) {
       const { inputValue, sValue, disabled } = this
@@ -524,8 +533,7 @@ export default {
       }
       return this.getOptionsFromChildren(value, this.$slots.default)
     },
-    getLabelBySingleValue (children, value) {
-      console.log('getLabelBySingleValue')
+    getLabelBySingleValue (children = [], value) {
       if (value === undefined) {
         return null
       }
@@ -546,7 +554,7 @@ export default {
       return label
     },
 
-    getValueByLabel (children, label) {
+    getValueByLabel (children = [], label) {
       if (label === undefined) {
         return null
       }
@@ -852,7 +860,6 @@ export default {
       } else {
         filterFn = defaultFilter
       }
-
       if (!filterFn) {
         return true
       } else if (typeof filterFn === 'function') {
@@ -1010,7 +1017,7 @@ export default {
     },
 
     isChildDisabled (key) {
-      return this.$slots.default.some(child => {
+      return (this.$slots.default || []).some(child => {
         const childValue = getValuePropValue(child)
         return childValue === key && getValue(child, 'disabled')
       })
@@ -1420,19 +1427,19 @@ export default {
       }
       return null
     },
-    rootRefClick (e) {
-      // e.stopPropagation()
-      if (this._focused) {
-        // this.getInputDOMNode().blur()
-        this.onOuterBlur()
-      } else {
-        this.onOuterFocus()
-        // this.getInputDOMNode().focus()
-      }
-    },
+    // rootRefClick (e) {
+    //   // e.stopPropagation()
+    //   if (this._focused) {
+    //     // this.getInputDOMNode().blur()
+    //     this.onOuterBlur()
+    //   } else {
+    //     this.onOuterFocus()
+    //     // this.getInputDOMNode().focus()
+    //   }
+    // },
     selectionRefClick (e) {
+      console.log('selectionRefClick')
       e.stopPropagation()
-      this.clearBlurTime()
       if (!this.disabled) {
         const input = this.getInputDOMNode()
         if (this._focused && this.openStatus) {
@@ -1440,9 +1447,7 @@ export default {
           this.setOpenState(false, false)
           input && input.blur()
         } else {
-          // this._focused = true
-          // this.updateFocusClassName()
-          // this.timeoutFocus()
+          this.clearBlurTime()
           this._focused = true
           this.setOpenState(true, true)
           input && input.focus()
@@ -1450,10 +1455,14 @@ export default {
       }
     },
     selectionRefFocus (e) {
-      if (this._focused) {
+      if (this._focused || this.disabled) {
         return
       }
       this._focused = true
+      this.updateFocusClassName()
+    },
+    selectionRefBlur (e) {
+      this._focused = false
       this.updateFocusClassName()
     },
   },
@@ -1486,10 +1495,11 @@ export default {
     if (!isMultipleOrTagsOrCombobox(props)) {
       selectionProps.on.keydown = this.onKeyDown
       selectionProps.on.focus = this.selectionRefFocus
+      selectionProps.on.blur = this.selectionRefBlur
       selectionProps.attrs.tabIndex = props.disabled ? -1 : 0
     }
     const rootCls = {
-      [prefixCls]: 1,
+      [prefixCls]: true,
       [`${prefixCls}-open`]: openStatus,
       [`${prefixCls}-focused`]: openStatus || !!this._focused,
       [`${prefixCls}-combobox`]: isCombobox(props),

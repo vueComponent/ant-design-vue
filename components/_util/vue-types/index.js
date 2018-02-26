@@ -134,7 +134,7 @@ const VuePropTypes = {
       // delegate to Vue native prop check
       return toType('oneOfType', {
         type: nativeChecks,
-      })
+      }).def(undefined)
     }
 
     const typesStr = arr.map((type) => {
@@ -153,7 +153,7 @@ const VuePropTypes = {
       })
       if (!valid) warn(`oneOfType - value type should be one of "${typesStr}"`)
       return valid
-    })
+    }).def(undefined)
   },
 
   arrayOf (type) {

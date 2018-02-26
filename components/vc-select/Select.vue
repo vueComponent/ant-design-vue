@@ -1437,7 +1437,6 @@ export default {
     //   }
     // },
     selectionRefClick (e) {
-      console.log('selectionRefClick')
       e.stopPropagation()
       if (!this.disabled) {
         const input = this.getInputDOMNode()

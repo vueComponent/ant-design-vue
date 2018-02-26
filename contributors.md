@@ -15,12 +15,12 @@ Dropdown | done
 Divider | done
 notification | done
 message | done
+Select | done
 Carousel
 Mention
 Input | done |select完成后补全demo
 InputNumber
 AutoComplete
-Select
 Upload
 Form
 Calendar

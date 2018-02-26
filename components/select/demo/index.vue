@@ -19,13 +19,13 @@ const md = {
           下拉选择器。
           ## 何时使用
           - 弹出一个下拉菜单给用户选择操作，用于代替原生的选择器，或者需要一个更优雅的多选器时。
-          - 当选项少时（少于 5 项），建议直接将选项平铺，使用 [Radio](/components/radio/) 是更好的选择。
+          - 当选项少时（少于 5 项），建议直接将选项平铺，使用 [Radio](#/cn/components/radio/) 是更好的选择。
           ## 代码演示`,
   us: `# Select
         Select component to select value from options.
         ## When To Use
         - A dropdown menu for displaying choices - an elegant alternative to the native \`<select>\` element.
-        - Utilizing [Radio](/components/radio/) is recommended when there are fewer total options (less than 5).
+        - Utilizing [Radio](#/us/components/radio/) is recommended when there are fewer total options (less than 5).
         `,
 }
 export default {

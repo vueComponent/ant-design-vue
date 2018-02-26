@@ -172,7 +172,7 @@ export default {
         const mirrorNode = this.getInputMirrorDOMNode()
         if (inputNode.value) {
           inputNode.style.width = ''
-          inputNode.style.width = `${mirrorNode.clientWidth}px`
+          inputNode.style.width = `${mirrorNode.clientWidth + 10}px`
         } else {
           inputNode.style.width = ''
         }
@@ -383,7 +383,7 @@ export default {
     },
 
     onPlaceholderClick (e) {
-      if (this._focused) {
+      if (this.openStatus) {
         e.stopPropagation()
       }
       if (this.getInputDOMNode()) {
@@ -651,12 +651,10 @@ export default {
       return null
     },
     inputClick (e) {
-      if (this._focused) {
-        if (this.openStatus) {
-          e.stopPropagation()
-        } else {
-          this._focused = false
-        }
+      if (this.openStatus) {
+        e.stopPropagation()
+      } else {
+        this._focused = false
       }
     },
     inputBlur (e) {
@@ -719,6 +717,7 @@ export default {
             attrs: {
               ...(inputElement.data.attrs || {}),
               disabled: props.disabled,
+              value: this.inputValue,
             },
             domProps: {
               value: this.inputValue,

@@ -9,13 +9,29 @@ If you need several buttons, we recommend that you use 1 primary button + n seco
 </us>
 
 ```html
-// TODO: 依赖组件开发中
 <template>
   <div>
     <a-button type="primary">Primary</a-button>
-    <a-button>Default</a-button>
-    <a-button type="dashed">Dashed</a-button>
-    <a-button type="danger">Danger</a-button>
+    <a-button>secondary</a-button>
+    <a-dropdown overlay={menu}>
+      <a-menu slot="overlay" @click="handleMenuClick">
+        <a-menu-item key="1">1st item</a-menu-item>
+        <a-menu-item key="2">2nd item</a-menu-item>
+        <a-menu-item key="3">3rd item</a-menu-item>
+      </a-menu>
+      <a-button>
+        Actions <a-icon type="down" />
+      </a-button>
+    </a-dropdown>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    handleMenuClick(e) {
+      console.log('click', e);
+    }
+  }
+}
+</script>
 ```

@@ -338,6 +338,7 @@ export default {
               popupProps: { ...popupProps },
             }
           },
+          parent: self,
           el: div,
           render () {
             const { popupEvents, ...otherProps } = this.popupProps

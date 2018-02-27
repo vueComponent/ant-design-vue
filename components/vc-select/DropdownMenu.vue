@@ -38,7 +38,7 @@ export default {
   watch: {
     visible (val) {
       if (!val) {
-        this.lastVisible = false
+        this.lastVisible = val
       }
     },
   },
@@ -51,6 +51,7 @@ export default {
     }
     this.lastVisible = props.visible
     this.lastInputValue = props.inputValue
+    this.prevVisible = this.visible
   },
   methods: {
     scrollActiveItemToView () {
@@ -89,7 +90,7 @@ export default {
         firstActiveValue,
         dropdownMenuStyle,
       } = props
-      const { menuDeselect, menuSelect } = this.$listeners
+      const { menuDeselect, menuSelect, popupScroll } = this.$listeners
       if (menuItems && menuItems.length) {
         const selectedKeys = getSelectKeys(menuItems, value)
         const menuProps = {
@@ -102,6 +103,9 @@ export default {
           on: {},
           style: dropdownMenuStyle,
           ref: 'menuRef',
+        }
+        if (popupScroll) {
+          menuProps.on.scroll = popupScroll
         }
         if (multiple) {
           menuProps.on.deselect = menuDeselect
@@ -160,7 +164,6 @@ export default {
   },
   render () {
     const renderMenu = this.renderMenu()
-    this.prevVisible = this.visible
     const { popupFocus, popupScroll } = this.$listeners
     return renderMenu ? (
       <div

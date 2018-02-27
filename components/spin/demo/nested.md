@@ -23,7 +23,7 @@ Embedding content into `Spin` will alter it into loading state.
         可以点击‘切换’按钮，控制本区域的spin展示。
       </div>
     </a-spin>
-    <a-button @click="changeSpinning" style="margin-top: 5px">切换</a-button>
+    Loading state：<a-switch v-model="spinning"></a-switch>
   </div>
 </template>
 <script>

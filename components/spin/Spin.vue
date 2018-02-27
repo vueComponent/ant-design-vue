@@ -50,13 +50,13 @@ export default {
     }
   },
   watch: {
-    spinning (val) {
-      const { delay, stateSpinning, spinning } = this
+    spinning () {
+      const { delay, spinning } = this
 
       if (this.debounceTimeout) {
         clearTimeout(this.debounceTimeout)
       }
-      if (stateSpinning && !spinning) {
+      if (!spinning) {
         this.debounceTimeout = window.setTimeout(() => this.setState({ stateSpinning: spinning }), 200)
         if (this.delayTimeout) {
           clearTimeout(this.delayTimeout)

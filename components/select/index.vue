@@ -26,12 +26,23 @@ const AbstractSelectProps = {
     PropTypes.func,
   ]),
 }
+const Value = PropTypes.shape({
+  key: String,
+}).loose
 
 const SelectValue = PropTypes.oneOfType([
   PropTypes.string,
-  PropTypes.array,
-  PropTypes.object,
+
+  PropTypes.arrayOf(PropTypes.oneOfType([
+    Value,
+    String,
+  ])),
+  Value,
 ])
+export {
+  AbstractSelectProps,
+  SelectValue,
+}
 
 const SelectProps = {
   ...AbstractSelectProps,

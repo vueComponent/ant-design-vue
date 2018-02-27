@@ -1,7 +1,7 @@
 <script>
 import { switchPropTypes } from './PropTypes'
 import BaseMixin from '../_util/BaseMixin'
-import { hasProp, filterEmpty, getOptionProps } from '../_util/props-util'
+import { hasProp, getOptionProps, getComponentFromProp } from '../_util/props-util'
 
 // function noop () {
 // }
@@ -32,13 +32,12 @@ export default {
       stateChecked: checked,
     }
   },
-  monted () {
+  mounted () {
     this.$nextTick(() => {
       const { autoFocus, disabled } = this
       if (autoFocus && !disabled) {
         this.focus()
       }
-      this.refSwitchNode = this.$refs.refSwitchNode
     })
   },
   watch: {
@@ -71,25 +70,16 @@ export default {
       }
     },
     handleMouseUp (e) {
-      if (this.refSwitchNode) {
-        this.refSwitchNode.blur()
+      if (this.$refs.refSwitchNode) {
+        this.$refs.refSwitchNode.blur()
       }
-      this.$emit('mouseUp', e)
+      this.$emit('mouseup', e)
     },
     focus () {
-      this.refSwitchNode.focus()
+      this.$refs.refSwitchNode.focus()
     },
     blur () {
-      this.refSwitchNode.blur()
-    },
-    getChildren (slotName) {
-      if (hasProp(this, slotName)) {
-        return this[slotName]
-      }
-      if (this.$slots && this.$slots[slotName]) {
-        return filterEmpty(this.$slots[slotName])
-      }
-      return null
+      this.$refs.refSwitchNode.blur()
     },
   },
   render () {
@@ -101,19 +91,24 @@ export default {
       [`${prefixCls}-checked`]: checked,
       [`${prefixCls}-disabled`]: disabled,
     }
-    const childrenType = checked ? 'checkedChildren' : 'unCheckedChildren'
+    const spanProps = {
+      props: { ...restProps },
+      on: {
+        ...this.$listeners,
+        keydown: this.handleKeyDown,
+        click: this.toggle,
+        mouseup: this.handleMouseUp,
+      },
+      attrs: {
+        tabIndex: switchTabIndex,
+      },
+      class: switchClassName,
+      ref: 'refSwitchNode',
+    }
     return (
-      <span
-        {...restProps}
-        class={switchClassName}
-        tabIndex={switchTabIndex}
-        ref='refSwitchNode'
-        onKeydown={this.handleKeyDown}
-        onClick={this.toggle}
-        onMouseup={this.handleMouseUp}
-      >
+      <span {...spanProps}>
         <span class={`${prefixCls}-inner`}>
-          {this.getChildren(childrenType)}
+          {checked ? getComponentFromProp(this, 'checkedChildren') : getComponentFromProp(this, 'unCheckedChildren')}
         </span>
       </span>
     )

@@ -1,6 +1,6 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import { getOptionProps } from '../_util/props-util'
+import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 import VcSwitch from '../vc-switch'
 
 export default {
@@ -22,23 +22,12 @@ export default {
     autoFocus: PropTypes.bool,
     loading: PropTypes.bool,
   },
-  monted () {
-    this.$nextTick(() => {
-      this.refSwitchNode = this.$refs.refSwitchNode
-    })
-  },
   methods: {
     focus () {
-      this.refSwitchNode.focus()
+      this.$refs.refSwitchNode.focus()
     },
     blur () {
-      this.refSwitchNode.blur()
-    },
-    getChildren () {
-      return {
-        checkedChildren: this.$slots.checkedChildren || null,
-        unCheckedChildren: this.$slots.unCheckedChildren || null,
-      }
+      this.$refs.refSwitchNode.blur()
     },
   },
 
@@ -57,17 +46,12 @@ export default {
       class: classes,
       ref: 'refSwitchNode',
     }
-    const children = this.getChildren()
     return (
       <VcSwitch
         {...switchProps}
       >
-        {children.checkedChildren ? (
-          <template slot='checkedChildren'>{children.checkedChildren}</template>
-        ) : null}
-        {children.unCheckedChildren ? (
-          <template slot='unCheckedChildren'>{children.unCheckedChildren}</template>
-        ) : null}
+        <template slot='checkedChildren'>{getComponentFromProp(this, 'checkedChildren')}</template>
+        <template slot='unCheckedChildren'>{getComponentFromProp(this, 'unCheckedChildren')}</template>
       </VcSwitch>
     )
   },

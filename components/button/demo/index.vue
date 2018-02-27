@@ -32,7 +32,6 @@ export default {
         <Ghost />
         <Icon/>
         <Loading />
-        <h1>TODO ： Multiple</h1>
         <Multiple />
         <Size />
         <api>

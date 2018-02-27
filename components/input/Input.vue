@@ -2,7 +2,7 @@
 import TextArea from './TextArea'
 import omit from 'omit.js'
 import inputProps from './inputProps'
-import hasProp from '../_util/props-util'
+import { hasProp, getComponentFromProp } from '../_util/props-util'
 
 function fixControlledValue (value) {
   if (typeof value === 'undefined' || value === null) {
@@ -68,8 +68,9 @@ export default {
       }
     },
     renderLabeledInput (children) {
-      const props = this.props
-      let { addonBefore, addonAfter } = this.$slots
+      const props = this.$props
+      let addonAfter = getComponentFromProp(this, 'addonAfter')
+      let addonBefore = getComponentFromProp(this, 'addonBefore')
       // Not wrap when there is not addons
       if ((!addonBefore && !addonAfter)) {
         return children
@@ -117,7 +118,8 @@ export default {
     },
     renderLabeledIcon (children) {
       const { prefixCls } = this.$props
-      let { prefix, suffix } = this.$slots
+      let prefix = getComponentFromProp(this, 'prefix')
+      let suffix = getComponentFromProp(this, 'suffix')
       if (!prefix && !suffix) {
         return children
       }

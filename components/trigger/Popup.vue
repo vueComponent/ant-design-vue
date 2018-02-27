@@ -27,13 +27,7 @@ export default {
   data () {
     return {
       destroyPopup: false,
-      initAlign: false, // mounted之后再实例化align,即改变this.$el位置后实例化,避免位置计算不正确
     }
-  },
-  mounted () {
-    this.$nextTick(() => {
-      this.initAlign = true
-    })
   },
   beforeDestroy () {
     this.$el.remove()
@@ -128,13 +122,15 @@ export default {
       let useTransition = !!transitionName
       const transitionEvent = {
         beforeEnter: (el) => {
-          el.style.display = el.__vOriginalDisplay
+          // el.style.display = el.__vOriginalDisplay
           // this.$refs.alignInstance.forceAlign()
         },
         enter: (el, done) => {
           // align updated后执行动画
           this.$nextTick(() => {
-            animate(el, `${transitionName}-enter`, done)
+            this.$refs.alignInstance.$nextTick(() => {
+              animate(el, `${transitionName}-enter`, done)
+            })
           })
         },
         leave: (el, done) => {
@@ -194,7 +190,7 @@ export default {
 
     getMaskElement () {
       const props = this.$props
-      let maskElement
+      let maskElement = null
       if (props.mask) {
         const maskTransition = this.getMaskTransitionName()
         maskElement = (
@@ -222,15 +218,11 @@ export default {
   },
 
   render () {
-    const { destroyPopup, getMaskElement, getPopupElement, initAlign } = this
+    const { destroyPopup, getMaskElement, getPopupElement } = this
     return (
       <div>
-        {initAlign ? (
-          getMaskElement(),
-          destroyPopup
-            ? null : getPopupElement()
-        ) : null }
-
+        {getMaskElement()}
+        { destroyPopup ? null : getPopupElement()}
       </div>
     )
   },

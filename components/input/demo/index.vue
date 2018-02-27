@@ -14,6 +14,8 @@
     <TextArea />
     <h1>Addon</h1>
     <Addon />
+    <h1>Tooltip</h1>
+    <Tooltip />
   </div>
 </template>
 <script>
@@ -24,6 +26,7 @@ import SearchInput from './search-input'
 import Size from './size'
 import TextArea from './textarea'
 import Addon from './addon'
+import Tooltip from './tooltip'
 export default {
   components: {
     Basic,
@@ -33,6 +36,7 @@ export default {
     Size,
     TextArea,
     Addon,
+    Tooltip,
   },
 }
 </script>

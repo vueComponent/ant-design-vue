@@ -1,12 +1,3 @@
 <template>
-  <AntInput placeholder="Basic usage"/>
+  <a-input placeholder="Basic usage"/>
 </template>
-<script>
-
-import { Input } from 'antd'
-export default {
-  components: {
-    AntInput: Input,
-  },
-}
-</script>

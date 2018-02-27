@@ -151,35 +151,37 @@ export default {
       const otherProps = omit(this.$props, [
         'prefixCls',
       ])
-      const { stateValue, getInputClassName, handleKeyDown, handleChange } = this
-      const attrs = {
+      const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this
+      const inputProps = {
+        domProps: {
+          value: stateValue,
+        },
         attrs: { ...otherProps, ...this.$attrs },
+        on: {
+          ...$listeners,
+          keydown: handleKeyDown,
+          input: handleChange,
+        },
+        class: getInputClassName(),
+        ref: 'input',
       }
       return this.renderLabeledIcon(
         <input
-          {...attrs}
-          value={stateValue}
-          class={getInputClassName()}
-          onKeydown={handleKeyDown}
-          onInput={handleChange}
-          ref='input'
+          {...inputProps}
         />,
       )
     },
   },
   render () {
     if (this.$props.type === 'textarea') {
-      const self = this
+      const { $listeners } = this
       const textareaProps = {
         props: this.$props,
         attrs: this.$attrs,
         on: {
-          change (e) {
-            self.handleChange(e)
-          },
-          keydown (e) {
-            self.handleKeyDown(e)
-          },
+          ...$listeners,
+          change: this.handleChange,
+          keydown: this.handleKeyDown,
         },
       }
       return <TextArea {...textareaProps} ref='input' />

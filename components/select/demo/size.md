@@ -48,6 +48,7 @@ The height of the input field for the select defaults to 32px. If size is set to
       :defaultValue="['a1', 'b2']"
       style="width: 200px"
       @change="handleChange"
+      @popupScroll="popupScroll"
     >
       <a-select-option v-for="i in 25" :key="(i + 9).toString(36) + i">
         {{(i + 9).toString(36) + i}}
@@ -78,6 +79,9 @@ export default {
   methods: {
     handleChange(value) {
       console.log(`Selected: ${value}`);
+    },
+    popupScroll(){
+      console.log('popupScroll')
     }
   }
 }

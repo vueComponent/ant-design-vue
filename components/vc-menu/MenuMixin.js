@@ -197,7 +197,9 @@ export default {
           // visible: props.visible,
         },
         class: className,
-        on: {},
+        on: {
+          ...this.$listeners,
+        },
       }
       if (props.id) {
         domProps.id = props.id

@@ -3,7 +3,7 @@ const AsyncComp = () => {
   const hashs = window.location.hash.split('/')
   const d = hashs[hashs.length - 1]
   return {
-    component: import(`../components/input/demo/${d}`),
+    component: import(`../components/switch/demo/${d}`),
   }
 }
 export default [

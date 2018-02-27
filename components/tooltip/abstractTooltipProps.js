@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types'
 export default () => ({
-  trigger: PropTypes.oneOf(['hover', 'focus', 'click']).def('hover'),
+  // trigger: PropTypes.oneOf(['hover', 'focus', 'click']).def('hover'),
+  trigger: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def('hover'),
   visible: PropTypes.bool,
   placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom',
     'topLeft', 'topRight', 'bottomLeft', 'bottomRight',

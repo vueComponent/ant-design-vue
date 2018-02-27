@@ -76,5 +76,7 @@ const SelectOption = Select.Option
 const SelectOptGroup = Select.OptGroup
 export { Select, SelectOption, SelectOptGroup }
 
+export { default as Switch } from './switch'
+
 export { default as LocaleProvider } from './locale-provider'
 

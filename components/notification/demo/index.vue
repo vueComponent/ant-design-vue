@@ -16,6 +16,7 @@ const md = {
 - 较为复杂的通知内容。
 - 带有交互的通知，给出用户下一步的行动点。
 - 系统主动推送。
+
 ## 代码演示`,
   us: `# Notification
 Display a notification message globally.

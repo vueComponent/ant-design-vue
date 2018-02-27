@@ -47,12 +47,11 @@ Badge  |  done
 Breadcrumb |  done
 Card  | done
 Collapse | done
-LocaleProvider
 Progress
 Slider
-Spin
+Spin | done
 Steps
-Switch
+Switch | done
 Table
 Timeline
 Transfer

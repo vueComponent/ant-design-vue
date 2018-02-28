@@ -56,13 +56,8 @@ export default {
       const { $slots } = this
       const children = filterEmpty($slots.default)
       const element = children.length ? children[0] : <Input />
-      const { componentOptions = {}} = element
-      const { listeners = {}} = componentOptions
-      const elementProps = {
-        on: listeners,
-      }
       return (
-        <InputElement {...elementProps}>{element}</InputElement>
+        <InputElement>{element}</InputElement>
       )
     },
 

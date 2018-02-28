@@ -8,7 +8,7 @@ import warning from 'warning'
 import Option from './Option'
 import { hasProp, getSlotOptions, getPropsData, getValueByProp as getValue, getComponentFromProp, getEvents, getClass } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
-import { cloneElement, cloneVNode } from '../_util/vnode'
+import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import {
   getPropValue,
@@ -707,9 +707,7 @@ export default {
       const inputCls = classnames(getClass(inputElement), {
         [`${props.prefixCls}-search__field`]: true,
       })
-      // const inputElement = cloneVNode(inputElement, true)
       const inputEvents = getEvents(inputElement)
-      console.log(inputElement, this.inputValue)
       // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
       // Add space to the end of the inputValue as the width measurement tolerance
       inputElement.data = inputElement.data || {}
@@ -734,20 +732,20 @@ export default {
               input: this.onInputChange,
               keydown: chaining(
                 this.onInputKeydown,
-                inputEvents.keydown || noop,
+                inputEvents.keydown,
                 this.$listeners.inputKeydown
               ),
               focus: chaining(
                 this.inputFocus,
-                inputEvents.focus || noop,
+                inputEvents.focus,
               ),
               blur: chaining(
                 this.inputBlur,
-                inputEvents.blur || noop,
+                inputEvents.blur,
               ),
               click: chaining(
                 this.inputClick,
-                inputEvents.click || noop,
+                inputEvents.click,
               ),
             },
           })}

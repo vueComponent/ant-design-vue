@@ -21,7 +21,7 @@ Customize Input Component
       placeholder="input here"
       class="custom"
       style="height: 50px"
-      @keydown="handleKeyPress"
+      @keypress="handleKeyPress"
     />
   </a-auto-complete>
 </template>

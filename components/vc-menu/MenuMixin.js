@@ -197,9 +197,10 @@ export default {
           // visible: props.visible,
         },
         class: className,
-        on: {
-          ...this.$listeners,
-        },
+        on: {},
+      }
+      if (this.$listeners.popupScroll) {
+        domProps.on.scroll = this.$listeners.popupScroll
       }
       if (props.id) {
         domProps.id = props.id

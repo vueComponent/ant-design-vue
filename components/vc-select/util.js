@@ -24,11 +24,11 @@ export function getPropValue (child, prop) {
     return getValuePropValue(child)
   }
   if (prop === 'children') {
-    if (child.$slots) {
-      return cloneVNodes(child.$slots.default, true)
-    } else {
-      return cloneVNodes(child.componentOptions.children, true)
+    const newChild = child.$slots ? cloneVNodes(child.$slots.default, true) : cloneVNodes(child.componentOptions.children, true)
+    if (newChild.length === 1 && !newChild[0].tag) {
+      return newChild[0].text
     }
+    return newChild
   }
   const data = getPropsData(child)
   if (prop in data) {

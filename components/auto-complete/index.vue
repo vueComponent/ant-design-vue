@@ -1,6 +1,5 @@
 <script>
-import { Option, OptGroup } from './vc-select'
-import clonedeep from 'lodash.clonedeep'
+import { Option, OptGroup } from '../vc-select'
 import Select, { AbstractSelectProps, SelectValue } from '../select'
 import Input from '../input'
 import InputElement from './InputElement'
@@ -25,8 +24,9 @@ const AutoCompleteProps = {
   ...AbstractSelectProps,
   value: SelectValue,
   defaultValue: SelectValue,
-  dataSource: DataSourceItemType,
+  dataSource: PropTypes.arrayOf(DataSourceItemType),
   optionLabelProp: String,
+  dropdownMatchSelectWidth: PropTypes.bool,
   // onChange?: (value: SelectValue) => void;
   // onSelect?: (value: SelectValue, option: Object) => any;
 }
@@ -39,19 +39,30 @@ export default {
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
     optionLabelProp: PropTypes.string.def('children'),
-    filterOption: clonedeep(AbstractSelectProps.filterOption).def(false),
+    filterOption: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.func,
+    ]).def(false),
+    defaultActiveFirstOption: PropTypes.bool.def(true),
   },
   Option,
   OptGroup,
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   methods: {
     getInputElement () {
       const { $slots } = this
       const children = filterEmpty($slots.default)
-      const element = children.length ? children : <Input />
-      console.log(element)
-      // const elementProps = { ...element.props }
+      const element = children.length ? children[0] : <Input />
+      const { componentOptions = {}} = element
+      const { listeners = {}} = componentOptions
+      const elementProps = {
+        on: listeners,
+      }
       return (
-        <InputElement>{element}</InputElement>
+        <InputElement {...elementProps}>{element}</InputElement>
       )
     },
 
@@ -104,16 +115,23 @@ export default {
         }
       }) : []
     }
+    const selectProps = {
+      props: {
+        ...getOptionProps(this),
+        mode: 'combobox',
+        optionLabelProp,
+        getInputElement: this.getInputElement,
+        notFoundContent: getComponentFromProp(this, 'notFoundContent'),
+      },
+      class: cls,
+      ref: 'select',
+      on: {
+        ...$listeners,
+      },
+    }
     return (
       <Select
-        {...getOptionProps(this)}
-        class={cls}
-        mode='combobox'
-        optionLabelProp={optionLabelProp}
-        getInputElement={this.getInputElement}
-        notFoundContent={getComponentFromProp(this, 'notFoundContent')}
-        ref='select'
-        on={$listeners}
+        {...selectProps}
       >
         {options}
       </Select>

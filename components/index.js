@@ -33,7 +33,14 @@ export { default as Badge } from './badge'
 
 export { default as Tabs } from './tabs'
 
-export { default as Input } from './input'
+import Input from './input'
+
+const InputGroup = Input.Group
+const InputSearch = Input.Search
+const InputTextArea = Input.TextArea
+const Textarea = InputTextArea
+
+export { Input, InputGroup, InputSearch, InputTextArea, Textarea }
 
 export { default as Breadcrumb } from './breadcrumb'
 
@@ -79,4 +86,6 @@ export { Select, SelectOption, SelectOptGroup }
 export { default as Switch } from './switch'
 
 export { default as LocaleProvider } from './locale-provider'
+
+export { default as AutoComplete } from './auto-complete'
 

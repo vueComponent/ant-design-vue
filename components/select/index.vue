@@ -25,6 +25,8 @@ const AbstractSelectProps = {
     PropTypes.bool,
     PropTypes.func,
   ]),
+  autoFocus: PropTypes.bool,
+  backfill: PropTypes.bool,
 }
 const Value = PropTypes.shape({
   key: String,
@@ -64,7 +66,6 @@ const SelectProps = {
   getPopupContainer: PropTypes.func,
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
-  autoFocus: PropTypes.bool,
 }
 
 const SelectPropTypes = {

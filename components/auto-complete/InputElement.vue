@@ -1,7 +1,11 @@
 <script>
-import omit from 'omit.js'
+import PropTypes from '../_util/vue-types'
 import { cloneElement } from '../_util/vnode'
 export default {
+  props: {
+    value: PropTypes.any,
+    disabled: PropTypes.bool,
+  },
   methods: {
     focus  () {
       const ele = this.$refs.ele
@@ -15,14 +19,15 @@ export default {
   },
 
   render () {
-    const { $slots, $listeners, $props, $attrs } = this
-    return cloneElement($slots.default, {
+    const { $slots = {}, $listeners = {}, $props = {}, $attrs = {}} = this
+    const value = $props.value === undefined ? '' : $props.value
+    return cloneElement($slots.default[0], {
       domProps: {
-        value: $props.value,
+        value,
       },
-      props: omit($props, ['value']),
+      props: $props,
       on: $listeners,
-      attrs: { ...$attrs, value: $props.value },
+      attrs: { ...$attrs, value },
       ref: 'ele',
     })
   },

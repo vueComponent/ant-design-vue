@@ -32,10 +32,12 @@ export const SelectPropTypes = {
   value: PropTypes.any,
   defaultValue: PropTypes.any,
   dropdownStyle: PropTypes.object,
+  dropdownClassName: PropTypes.string,
   maxTagTextLength: PropTypes.number,
   maxTagCount: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
   showAction: PropTypes.arrayOf(PropTypes.string),
+  autoFocus: PropTypes.bool,
 }

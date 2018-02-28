@@ -48,6 +48,7 @@ export default {
       }
       this.$emit('change.value', e.target.value)
       this.$emit('change', e)
+      this.$emit('input', e)
     },
 
     focus () {

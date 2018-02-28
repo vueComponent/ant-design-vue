@@ -8,7 +8,7 @@ import warning from 'warning'
 import Option from './Option'
 import { hasProp, getSlotOptions, getPropsData, getValueByProp as getValue, getComponentFromProp, getEvents, getClass } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
-import { cloneElement } from '../_util/vnode'
+import { cloneElement, cloneVNode } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import {
   getPropValue,
@@ -361,7 +361,7 @@ export default {
       this.fireChange(sValue)
       let inputValue
       if (isCombobox(props)) {
-        inputValue = getPropValue(item, props.optionLabelProp)
+        inputValue = selectedValue
       } else {
         inputValue = ''
       }
@@ -707,13 +707,19 @@ export default {
       const inputCls = classnames(getClass(inputElement), {
         [`${props.prefixCls}-search__field`]: true,
       })
+      // const inputElement = cloneVNode(inputElement, true)
       const inputEvents = getEvents(inputElement)
+      console.log(inputElement, this.inputValue)
       // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
       // Add space to the end of the inputValue as the width measurement tolerance
       inputElement.data = inputElement.data || {}
       return (
         <div class={`${props.prefixCls}-search__field__wrap`}>
           {cloneElement(inputElement, {
+            props: {
+              disabled: props.disabled,
+              value: this.inputValue,
+            },
             attrs: {
               ...(inputElement.data.attrs || {}),
               disabled: props.disabled,
@@ -1192,7 +1198,7 @@ export default {
               label = key
             }
             sel.push(
-              <MenuItemGroup key={key} title={label}>
+              <MenuItemGroup key={key} title={label} class ={getClass(child)}>
                 {innerItems}
               </MenuItemGroup>
             )
@@ -1209,7 +1215,6 @@ export default {
         const childValue = getValuePropValue(child)
 
         validateOptionValue(childValue, this.$props)
-
         if (this._filterOption(inputValue, child)) {
           const p = {
             attrs: UNSELECTABLE_ATTRIBUTE,
@@ -1220,6 +1225,7 @@ export default {
             },
             style: UNSELECTABLE_STYLE,
             on: getEvents(child),
+            class: getClass(child),
           }
           const menuItem = (
             <MenuItem {...p}>{child.componentOptions.children}</MenuItem>
@@ -1508,7 +1514,7 @@ export default {
     return (
       <SelectTrigger
         dropdownAlign={props.dropdownAlign}
-        dropdownClass={props.dropdownClassName}
+        dropdownClassName={props.dropdownClassName}
         dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
         defaultActiveFirstOption={props.defaultActiveFirstOption}
         dropdownMenuStyle={props.dropdownMenuStyle}

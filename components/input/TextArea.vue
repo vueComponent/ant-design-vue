@@ -94,6 +94,7 @@ export default {
         this.$emit('change.value', e.target.value)
         this.$emit('change', e)
       }
+      this.$emit('input', e)
     },
 
     focus () {
@@ -106,23 +107,33 @@ export default {
 
   },
   render () {
-    const { stateValue, getTextAreaClassName, handleKeyDown, handleTextareaChange, textareaStyles } = this
+    const { stateValue,
+      getTextAreaClassName,
+      handleKeyDown,
+      handleTextareaChange,
+      textareaStyles,
+      $attrs,
+      $listeners,
+    } = this
     const otherProps = omit(this.$props, [
       'prefixCls',
       'autosize',
       'type',
     ])
-    const attrs = {
-      attrs: { ...otherProps, ...this.$attrs },
+    const textareaProps = {
+      attrs: { ...otherProps, ...$attrs },
+      on: {
+        ...$listeners,
+        keydown: handleKeyDown,
+        input: handleTextareaChange,
+      },
     }
     return (
       <textarea
-        {...attrs}
+        {...textareaProps}
         value={stateValue}
         class={getTextAreaClassName()}
         style={textareaStyles}
-        onKeydown={handleKeyDown}
-        onInput={handleTextareaChange}
         ref='textArea'
       />
     )

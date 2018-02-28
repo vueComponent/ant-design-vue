@@ -16,6 +16,7 @@ const props = {
   mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
   parentMenu: PropTypes.object,
   multiple: PropTypes.bool,
+  value: PropTypes.any,
   // clearSubMenuTimers: PropTypes.func.def(noop),
 }
 const MenuItem = {

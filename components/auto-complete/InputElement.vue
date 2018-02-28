@@ -1,6 +1,16 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import { cloneElement } from '../_util/vnode'
+import { cloneElement, cloneVNode } from '../_util/vnode'
+function chaining (...fns) {
+  return function (...args) { // eslint-disable-line
+    // eslint-disable-line
+    for (let i = 0; i < fns.length; i++) {
+      if (fns[i] && typeof fns[i] === 'function') {
+        fns[i].apply(this, args)
+      }
+    }
+  }
+}
 export default {
   props: {
     value: PropTypes.any,
@@ -21,12 +31,21 @@ export default {
   render () {
     const { $slots = {}, $listeners = {}, $props = {}, $attrs = {}} = this
     const value = $props.value === undefined ? '' : $props.value
-    return cloneElement($slots.default[0], {
+    const children = cloneVNode($slots.default[0])
+    const { componentOptions = {}} = $slots.default[0]
+    const { listeners = {}} = componentOptions
+    const newEvent = { ...listeners }
+
+    for (const [eventName, event] of Object.entries($listeners)) {
+      newEvent[eventName] = chaining(event, listeners[eventName])
+    }
+
+    return cloneElement(children, {
       domProps: {
         value,
       },
       props: $props,
-      on: $listeners,
+      on: newEvent,
       attrs: { ...$attrs, value },
       ref: 'ele',
     })

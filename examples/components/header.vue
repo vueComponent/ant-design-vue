@@ -10,6 +10,9 @@
       <a-menu-item key='components'>
         组件
       </a-menu-item>
+      <a-menu-item key='github'>
+        <a href="https://github.com/vueComponent/ant-design">GitHub</a>
+      </a-menu-item>
     </a-menu>
   </header>
 </template>

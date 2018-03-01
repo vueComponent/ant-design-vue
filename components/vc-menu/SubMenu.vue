@@ -75,9 +75,11 @@ export default {
     // }
     if (this.minWidthTimeout) {
       cancelAnimationTimeout(this.minWidthTimeout)
+      this.minWidthTimeout = null
     }
     if (this.mouseenterTimeout) {
       cancelAnimationTimeout(this.mouseenterTimeout)
+      this.mouseenterTimeout = null
     }
   },
   methods: {

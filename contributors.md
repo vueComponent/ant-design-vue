@@ -18,7 +18,7 @@ message | done
 Select | done
 Input | done
 InputNumber
-AutoComplete
+AutoComplete | done
 Modal
 Alert
 Calendar

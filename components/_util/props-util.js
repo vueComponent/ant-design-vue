@@ -1,3 +1,17 @@
+
+const parseStyleText = (cssText = '') => {
+  const res = {}
+  const listDelimiter = /;(?![^(]*\))/g
+  const propertyDelimiter = /:(.+)/
+  cssText.split(listDelimiter).forEach(function (item) {
+    if (item) {
+      const tmp = item.split(propertyDelimiter)
+      tmp.length > 1 && (res[tmp[0].trim()] = tmp[1].trim())
+    }
+  })
+  return res
+}
+
 const hasProp = (instance, prop) => {
   const $options = instance.$options || {}
   const propsData = $options.propsData || {}
@@ -106,7 +120,7 @@ export function getStyle (ele) {
   } else if (ele.$vnode && ele.$vnode.data) {
     data = ele.$vnode.data
   }
-  return data.style || data.staticStyle
+  return data.style || parseStyleText(data.staticStyle || '')
 }
 
 export function getComponentName (opts) {

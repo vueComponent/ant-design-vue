@@ -4,7 +4,7 @@ import Trigger from '../../trigger'
 import placements from './placements'
 import { hasProp, getEvents } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
-import { cloneElement, cloneVNode } from '../../_util/vnode'
+import { cloneElement } from '../../_util/vnode'
 
 export default {
   mixins: [BaseMixin],
@@ -70,7 +70,7 @@ export default {
     getMenuElement () {
       const { onClick, prefixCls, $slots } = this
       this.childOriginEvents = getEvents($slots.overlay[0])
-      return cloneElement(cloneVNode($slots.overlay[0]), {
+      return cloneElement($slots.overlay[0], {
         props: {
           prefixCls: `${prefixCls}-menu`,
         },

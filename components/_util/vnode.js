@@ -51,7 +51,7 @@ export function cloneVNodes (vnodes, deep) {
   return res
 }
 
-export function cloneElement (n, nodeProps, clone) {
+export function cloneElement (n, nodeProps, deep) {
   let ele = n
   if (Array.isArray(n)) {
     ele = filterEmpty(n)[0]
@@ -59,7 +59,7 @@ export function cloneElement (n, nodeProps, clone) {
   if (!ele) {
     return null
   }
-  const node = clone ? cloneVNode(ele, true) : ele
+  const node = cloneVNode(ele, deep)
   const { props = {}, key, on = {}, children } = nodeProps
   const data = node.data || {}
   const { style = data.style,

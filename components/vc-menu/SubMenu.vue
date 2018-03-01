@@ -7,6 +7,7 @@ import placements from './placements'
 import { loopMenuItemRecusively, noop } from './util'
 import BaseMixin from '../_util/BaseMixin'
 import { getComponentFromProp } from '../_util/props-util'
+import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout'
 
 let guid = 0
 
@@ -73,10 +74,10 @@ export default {
     //   this.clearSubMenuTimers()
     // }
     if (this.minWidthTimeout) {
-      clearTimeout(this.minWidthTimeout)
+      cancelAnimationTimeout(this.minWidthTimeout)
     }
     if (this.mouseenterTimeout) {
-      clearTimeout(this.mouseenterTimeout)
+      cancelAnimationTimeout(this.mouseenterTimeout)
     }
   },
   methods: {
@@ -86,7 +87,7 @@ export default {
         return
       }
       const self = this
-      this.minWidthTimeout = setTimeout(() => {
+      this.minWidthTimeout = requestAnimationTimeout(() => {
         if (!self.$refs.subMenuTitle || !self.$refs.menuInstance) {
           return
         }
@@ -282,7 +283,7 @@ export default {
       }
       if (type === 'mouseenter') {
       // make sure mouseenter happen after other menu item's mouseleave
-        this.mouseenterTimeout = setTimeout(() => {
+        this.mouseenterTimeout = requestAnimationTimeout(() => {
           openChange()
         }, 0)
       } else {

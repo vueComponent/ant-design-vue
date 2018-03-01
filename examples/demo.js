@@ -24,4 +24,5 @@ export { default as notification } from 'antd/notification/demo/index.vue'
 export { default as message } from 'antd/message/demo/index.vue'
 export { default as spin } from 'antd/spin/demo/index.vue'
 export { default as switch } from 'antd/switch/demo/index.vue'
+export { default as autoComplete } from 'antd/auto-complete/demo/index.vue'
 

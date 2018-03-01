@@ -652,6 +652,7 @@ export default {
     },
     inputClick (e) {
       if (this.openStatus) {
+        this.clearBlurTime()
         e.stopPropagation()
       } else {
         this._focused = false
@@ -712,7 +713,7 @@ export default {
       // Add space to the end of the inputValue as the width measurement tolerance
       inputElement.data = inputElement.data || {}
       return (
-        <div class={`${props.prefixCls}-search__field__wrap`}>
+        <div class={`${props.prefixCls}-search__field__wrap`} onClick={this.inputClick}>
           {cloneElement(inputElement, {
             props: {
               disabled: props.disabled,
@@ -742,10 +743,6 @@ export default {
               blur: chaining(
                 this.inputBlur,
                 inputEvents.blur,
-              ),
-              click: chaining(
-                this.inputClick,
-                inputEvents.click,
               ),
             },
           })}

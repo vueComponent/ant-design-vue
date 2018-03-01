@@ -9,7 +9,7 @@ import warning from '../_util/warning'
 import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement, cloneVNode } from '../_util/vnode'
+import { cloneElement } from '../_util/vnode'
 
 function returnEmptyString () {
   return ''
@@ -498,8 +498,8 @@ export default {
     if (children.length > 1) {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
     }
-    const child = cloneVNode(children[0])
-    this.childOriginEvents = getEvents(children[0])
+    const child = children[0]
+    this.childOriginEvents = getEvents(child)
     const newChildProps = {
       props: {},
       on: {},

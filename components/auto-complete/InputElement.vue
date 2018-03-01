@@ -1,6 +1,6 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import { cloneElement, cloneVNode } from '../_util/vnode'
+import { cloneElement } from '../_util/vnode'
 function chaining (...fns) {
   return function (...args) { // eslint-disable-line
     // eslint-disable-line
@@ -31,7 +31,7 @@ export default {
   render () {
     const { $slots = {}, $listeners = {}, $props = {}, $attrs = {}} = this
     const value = $props.value === undefined ? '' : $props.value
-    const children = cloneVNode($slots.default[0])
+    const children = $slots.default[0]
     const { componentOptions = {}} = $slots.default[0]
     const { listeners = {}} = componentOptions
     const newEvent = { ...listeners }

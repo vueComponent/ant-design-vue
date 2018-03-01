@@ -19,11 +19,11 @@ export default {
   mounted () {
     this.$nextTick(() => {
       this.updatedCal()
-      const debouncedResize = debounce(() => {
+      this.debouncedResize = debounce(() => {
         this.setNextPrev()
         this.scrollToActiveTab()
       }, 200)
-      this.resizeEvent = addDOMEventListener(window, 'resize', debouncedResize)
+      this.resizeEvent = addDOMEventListener(window, 'resize', this.debouncedResize)
     })
   },
 
@@ -36,6 +36,9 @@ export default {
   beforeDestroy () {
     if (this.resizeEvent) {
       this.resizeEvent.remove()
+    }
+    if (this.debouncedResize && this.debouncedResize.cancel) {
+      this.debouncedResize.cancel()
     }
   },
   watch: {
@@ -59,28 +62,32 @@ export default {
     },
     setNextPrev () {
       const navNode = this.$refs.nav
-      const navNodeWH = this.getOffsetWH(navNode)
-      const navWrapNode = this.$refs.navWrap
-      const navWrapNodeWH = this.getOffsetWH(navWrapNode)
+      const navNodeWH = this.getScrollWH(navNode)
+      const containerWH = this.getOffsetWH(this.$refs.container)
+      const navWrapNodeWH = this.getOffsetWH(this.$refs.navWrap)
       let { offset } = this
-      const minOffset = navWrapNodeWH - navNodeWH
+      const minOffset = containerWH - navNodeWH
       let { next, prev } = this
       if (minOffset >= 0) {
         next = false
         this.setOffset(0, false)
         offset = 0
       } else if (minOffset < offset) {
-        next = (true)
+        next = true
       } else {
-        next = (false)
-        this.setOffset(minOffset, false)
-        offset = minOffset
+        next = false
+        // Fix https://github.com/ant-design/ant-design/issues/8861
+        // Test with container offset which is stable
+        // and set the offset of the nav wrap node
+        const realOffset = navWrapNodeWH - navNodeWH
+        this.setOffset(realOffset, false)
+        offset = realOffset
       }
 
       if (offset < 0) {
-        prev = (true)
+        prev = true
       } else {
-        prev = (false)
+        prev = false
       }
 
       this.setNext(next)
@@ -96,6 +103,15 @@ export default {
       let prop = 'offsetWidth'
       if (tabBarPosition === 'left' || tabBarPosition === 'right') {
         prop = 'offsetHeight'
+      }
+      return node[prop]
+    },
+
+    getScrollWH (node) {
+      const tabBarPosition = this.tabBarPosition
+      let prop = 'scrollWidth'
+      if (tabBarPosition === 'left' || tabBarPosition === 'right') {
+        prop = 'scrollHeight'
       }
       return node[prop]
     },
@@ -195,7 +211,7 @@ export default {
         return
       }
 
-      const activeTabWH = this.getOffsetWH(activeTab)
+      const activeTabWH = this.getScrollWH(activeTab)
       const navWrapNodeWH = this.getOffsetWH(navWrap)
       let { offset } = this
       const wrapOffset = this.getOffsetLT(navWrap)

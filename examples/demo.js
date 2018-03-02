@@ -25,4 +25,5 @@ export { default as message } from 'antd/message/demo/index.vue'
 export { default as spin } from 'antd/spin/demo/index.vue'
 export { default as switch } from 'antd/switch/demo/index.vue'
 export { default as autoComplete } from 'antd/auto-complete/demo/index.vue'
+export { default as affix } from 'antd/Affix/demo/index.vue'
 

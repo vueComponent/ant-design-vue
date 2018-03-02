@@ -11,7 +11,7 @@ There are `primary` button, `default` button, `dashed` button and `danger` butto
 
 ```html
 <template>
-  <div class='test'>
+  <div>
     <a-button type="primary">Primary</a-button>
     <a-button>Default</a-button>
     <a-button type="dashed">Dashed</a-button>

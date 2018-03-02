@@ -5,7 +5,8 @@ import classNames from 'classnames'
 import shallowequal from 'shallowequal'
 import omit from 'omit.js'
 import getScroll from '../_util/getScroll'
-import { throttleByAnimationFrameDecorator } from '../_util/throttleByAnimationFrame'
+import BaseMixin from '../_util/BaseMixin'
+import throttleByAnimationFrame from '../_util/throttleByAnimationFrame'
 
 function getTargetRect (target) {
   return target !== window
@@ -55,14 +56,10 @@ const AffixProps = {
   prefixCls: PropTypes.string,
 }
 
-// export interface AffixState {
-//   affixStyle: React.CSSProperties | undefined;
-//   placeholderStyle: React.CSSProperties | undefined;
-// }
-
 export default {
   name: 'Affix',
   props: AffixProps,
+  mixins: [BaseMixin],
   data () {
     this.events = [
       'resize',
@@ -78,6 +75,9 @@ export default {
       affixStyle: undefined,
       placeholderStyle: undefined,
     }
+  },
+  beforeMount () {
+    this.updatePosition = throttleByAnimationFrame(this.updatePosition)
   },
   mounted () {
     const target = this.target || getDefaultTarget
@@ -96,7 +96,6 @@ export default {
       })
     },
   },
-
   beforeDestroy () {
     this.clearEventListeners()
     clearTimeout(this.timeout)
@@ -130,7 +129,6 @@ export default {
       this.setState({ placeholderStyle: placeholderStyle })
     },
 
-    // @throttleByAnimationFrameDecorator()
     updatePosition (e) {
       let { offsetTop } = this
       const { offsetBottom, offset, target = getDefaultTarget } = this

@@ -62,13 +62,18 @@ export function cloneElement (n, nodeProps, deep) {
   const node = cloneVNode(ele, deep)
   const { props = {}, key, on = {}, children } = nodeProps
   const data = node.data || {}
-  const { style = data.style,
-    class: cls = data.class,
-    attrs = data.attrs,
+  const { style = {},
+    class: cls = {},
+    attrs = {},
     ref,
-    domProps = data.domProps,
+    domProps = {},
   } = nodeProps
-  node.data = Object.assign({}, data, { style, attrs, class: cls, domProps })
+  node.data = Object.assign({}, data, {
+    style: { ...data.style, ...style },
+    attrs: { ...data.attrs, ...attrs },
+    class: { ...data.class, ...cls },
+    domProps: { ...data.domProps, ...domProps },
+  })
   if (node.componentOptions) {
     node.componentOptions.propsData = node.componentOptions.propsData || {}
     node.componentOptions.listeners = node.componentOptions.listeners || {}

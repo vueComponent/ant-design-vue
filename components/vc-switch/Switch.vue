@@ -15,9 +15,6 @@ export default {
   props: {
     ...switchPropTypes,
     prefixCls: switchPropTypes.prefixCls.def('rc-switch'),
-    checkedChildren: switchPropTypes.checkedChildren,
-    unCheckedChildren: switchPropTypes.unCheckedChildren,
-    defaultChecked: switchPropTypes.defaultChecked.def(''),
     // onChange: switchPropTypes.onChange.def(noop),
     // onClick: switchPropTypes.onClick.def(noop),
   },

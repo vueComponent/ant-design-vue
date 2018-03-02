@@ -3,7 +3,7 @@ const AsyncComp = () => {
   const hashs = window.location.hash.split('/')
   const d = hashs[hashs.length - 1]
   return {
-    component: import(`../components/auto-complete/demo/${d}`),
+    component: import(`../components/affix/demo/${d}`),
   }
 }
 export default [

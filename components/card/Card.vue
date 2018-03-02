@@ -1,9 +1,8 @@
 <script>
   import { Tabs } from 'antd'
-  import omit from 'omit.js'
   import PropTypes from '../_util/vue-types'
   import addEventListener from '../_util/Dom/addEventListener'
-  import { hasProp, getComponentFromProp, getComponentName } from '../_util/props-util'
+  import { getComponentFromProp, getComponentName } from '../_util/props-util'
   import throttleByAnimationFrame from '../_util/throttleByAnimationFrame'
   import BaseMixin from '../_util/BaseMixin'
 
@@ -18,32 +17,25 @@
       bordered: PropTypes.bool.def(true),
       bodyStyle: PropTypes.object,
       loading: PropTypes.bool.def(false),
-      noHovering: PropTypes.bool.def(false),
       hoverable: PropTypes.bool.def(false),
       type: PropTypes.string,
       actions: PropTypes.any,
       tabList: PropTypes.array,
     },
     data () {
+      this.updateWiderPaddingCalled = false
       return {
         widerPadding: false,
-        updateWiderPaddingCalled: false,
       }
     },
-    mounted () {
+    beforeMount () {
       this.updateWiderPadding = throttleByAnimationFrame(this.updateWiderPadding)
+    },
+    mounted () {
       this.updateWiderPadding()
       this.resizeEvent = addEventListener(window, 'resize', this.updateWiderPadding)
-
-      // if (hasProp(this, 'noHovering')) {
-      //   warning(
-      //     !this.noHovering,
-      //     '`noHovering` of Card is deperated, you can remove it safely or use `hoverable` instead.',
-      //   )
-      //   warning(!!this.noHovering, '`noHovering={false}` of Card is deperated, use `hoverable` instead.')
-      // }
     },
-    beforeMount () {
+    beforeDestroy () {
       if (this.resizeEvent) {
         this.resizeEvent.remove()
       }
@@ -84,19 +76,11 @@
         })
         return containGrid
       },
-      // For 2.x compatible
-      getCompatibleHoverable () {
-        const { noHovering, hoverable } = this.$props
-        if (hasProp(this, 'noHovering')) {
-          return !noHovering || hoverable
-        }
-        return !!hoverable
-      },
     },
     render () {
       const {
         prefixCls = 'ant-card', extra, bodyStyle, title, loading,
-        bordered = true, type, tabList, ...others
+        bordered = true, type, tabList, hoverable,
       } = this.$props
 
       const { $slots } = this
@@ -105,7 +89,7 @@
         [`${prefixCls}`]: true,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-bordered`]: bordered,
-        [`${prefixCls}-hoverable`]: this.getCompatibleHoverable(),
+        [`${prefixCls}-hoverable`]: !!hoverable,
         [`${prefixCls}-wider-padding`]: this.widerPadding,
         [`${prefixCls}-padding-transition`]: this.updateWiderPaddingCalled,
         [`${prefixCls}-contain-grid`]: this.isContainGrid($slots.default),
@@ -166,11 +150,9 @@
       )
       const actions = getComponentFromProp(this, 'actions')
       const actionDom = actions || null
-      const divProps = omit(others, [
-        'tabChange',
-      ])
+
       return (
-        <div {...divProps} class={classString} ref='cardContainerRef'>
+        <div class={classString} ref='cardContainerRef'>
           {head}
           {coverDom}
           {children ? body : null}

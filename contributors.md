@@ -19,6 +19,8 @@ Select | done
 Input | done
 InputNumber
 AutoComplete | done
+Affix | done
+Cascader
 Modal
 Alert
 Calendar
@@ -32,7 +34,6 @@ Mention
 ##万
 Grid
 Col
-Affix
 BackTop
 Layout
 Anchor

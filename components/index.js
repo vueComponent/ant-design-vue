@@ -89,3 +89,5 @@ export { default as LocaleProvider } from './locale-provider'
 
 export { default as AutoComplete } from './auto-complete'
 
+export { default as Affix } from './affix'
+

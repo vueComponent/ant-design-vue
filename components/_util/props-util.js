@@ -149,5 +149,6 @@ export {
   getKey,
   getAttrs,
   getValueByProp,
+  parseStyleText,
 }
 export default hasProp

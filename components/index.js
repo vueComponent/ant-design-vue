@@ -91,3 +91,5 @@ export { default as AutoComplete } from './auto-complete'
 
 export { default as Affix } from './affix'
 
+export { default as Cascader } from './cascader'
+

@@ -1,4 +1,4 @@
-import { filterEmpty } from './props-util'
+import { filterEmpty, parseStyleText } from './props-util'
 export function cloneVNode (vnode, deep) {
   const componentOptions = vnode.componentOptions
   const data = vnode.data
@@ -62,18 +62,45 @@ export function cloneElement (n, nodeProps, deep) {
   const node = cloneVNode(ele, deep)
   const { props = {}, key, on = {}, children } = nodeProps
   const data = node.data || {}
-  const { style = {},
-    class: cls = {},
+  let cls = {}
+  let style = {}
+  const {
     attrs = {},
     ref,
     domProps = {},
+    style: tempStyle = {},
+    class: tempCls = {},
   } = nodeProps
+
+  if (typeof data.style === 'string') {
+    style = parseStyleText(data.style)
+  } else {
+    style = { ...data.style, ...style }
+  }
+  if (typeof tempStyle === 'string') {
+    style = { ...style, ...parseStyleText(style) }
+  } else {
+    style = { ...style, ...tempStyle }
+  }
+
+  if (typeof data.class === 'string') {
+    cls[data.class] = true
+    data.class.split(' ').forEach(c => { cls[c.trim()] = true })
+  } else {
+    cls = { ...data.class, ...cls }
+  }
+  if (typeof tempCls === 'string') {
+    tempCls.split(' ').forEach(c => { cls[c.trim()] = true })
+  } else {
+    cls = { ...cls, ...tempCls }
+  }
   node.data = Object.assign({}, data, {
-    style: { ...data.style, ...style },
+    style,
     attrs: { ...data.attrs, ...attrs },
-    class: { ...data.class, ...cls },
+    class: cls,
     domProps: { ...data.domProps, ...domProps },
   })
+
   if (node.componentOptions) {
     node.componentOptions.propsData = node.componentOptions.propsData || {}
     node.componentOptions.listeners = node.componentOptions.listeners || {}

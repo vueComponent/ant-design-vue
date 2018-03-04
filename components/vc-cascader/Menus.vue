@@ -45,7 +45,7 @@ export default {
         on: {
           click: onSelect,
         },
-        key: option.value,
+        key: option.value.toString(),
       }
       let menuItemCls = `${prefixCls}-menu-item`
       const hasChildren = option.children && option.children.length > 0

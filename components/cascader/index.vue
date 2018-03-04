@@ -122,7 +122,7 @@ export default {
         ])
     },
 
-    defaultRenderFilteredOption (inputValue, path, prefixCls) {
+    defaultRenderFilteredOption ({ inputValue, path, prefixCls }) {
       return path.map(({ label }, index) => {
         const node = label.indexOf(inputValue) > -1
           ? this.highlightKeyword(label, inputValue, prefixCls) : label
@@ -222,12 +222,13 @@ export default {
     },
 
     generateFilteredOptions (prefixCls) {
-      const { showSearch, notFoundContent, flattenOptions, inputValue } = this
+      const { showSearch, notFoundContent, flattenOptions, inputValue, $scopedSlots } = this
       const {
         filter = defaultFilterOption,
-        render = this.defaultRenderFilteredOption,
+        // render = this.defaultRenderFilteredOption,
         sort = defaultSortFilteredOption,
       } = showSearch
+      const render = showSearch.render || $scopedSlots.showSearchRender || this.defaultRenderFilteredOption
       const filtered = flattenOptions.filter((path) => filter(inputValue, path))
         .sort((a, b) => sort(a, b, inputValue))
 
@@ -236,7 +237,7 @@ export default {
           return {
             __IS_FILTERED_OPTION: true,
             path,
-            label: render(inputValue, path, prefixCls),
+            label: render({ inputValue, path, prefixCls }),
             value: path.map((o) => o.value),
             disabled: path.some((o) => o.disabled),
           }

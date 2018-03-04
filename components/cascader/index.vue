@@ -80,11 +80,15 @@ function defaultSortFilteredOption (a, b, inputValue) {
   return a.findIndex(callback) - b.findIndex(callback)
 }
 
-const defaultDisplayRender = (label) => label.join(' / ')
+const defaultDisplayRender = ({ labels }) => labels.join(' / ')
 
 export default {
   mixins: [BaseMixin],
   props: CascaderProps,
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   data () {
     this.cachedOptions = []
     const { value, defaultValue, popupVisible, showSearch, options, changeOnSelect, flattenTree } = this
@@ -181,14 +185,15 @@ export default {
     },
 
     getLabel () {
-      const { options, displayRender = defaultDisplayRender } = this
+      const { options, $scopedSlots } = this
+      const displayRender = this.displayRender || $scopedSlots.displayRender || defaultDisplayRender
       const value = this.sValue
       const unwrappedValue = Array.isArray(value[0]) ? value[0] : value
       const selectedOptions = arrayTreeFilter(options,
         (o, level) => o.value === unwrappedValue[level],
       )
-      const label = selectedOptions.map(o => o.label)
-      return displayRender(label, selectedOptions)
+      const labels = selectedOptions.map(o => o.label)
+      return displayRender({ labels, selectedOptions })
     },
 
     clearSelection (e) {
@@ -295,6 +300,7 @@ export default {
       'renderFilteredOption',
       'sortFilteredOption',
       'notFoundContent',
+      'defaultValue',
     ])
 
     let options = this.options
@@ -342,10 +348,13 @@ export default {
       <span
         class={pickerCls}
       >
-        <span class={`${prefixCls}-picker-label`}>
+        { showSearch ? <span class={`${prefixCls}-picker-label`}>
           {this.getLabel()}
-        </span>
+        </span> : null}
         <Input {...inputProps}/>
+        { !showSearch ? <span class={`${prefixCls}-picker-label`}>
+          {this.getLabel()}
+        </span> : null}
         {clearIcon}
         <Icon type='down' class={arrowCls} />
       </span>

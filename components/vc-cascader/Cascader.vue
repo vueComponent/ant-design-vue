@@ -66,6 +66,10 @@ export default {
     expandTrigger: PropTypes.string.def('click'),
   },
   mixins: [BaseMixin],
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   data () {
     let initialValue = []
     const { value, defaultValue, popupVisible } = this

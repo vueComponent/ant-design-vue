@@ -26,5 +26,6 @@
   "vetur.format.js.InsertSpaceBeforeFunctionParenthesis": true,
   "stylefmt.config": {
     "fix": true
-  }
+  },
+  "editor.tabSize": 2
 }

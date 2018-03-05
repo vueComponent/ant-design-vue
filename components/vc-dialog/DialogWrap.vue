@@ -1,6 +1,6 @@
 <script>
 import Dialog from './Dialog'
-import ContainerRender from 'rc-util/lib/ContainerRender'
+import ContainerRender from '../_util/ContainerRender'
 import getDialogPropTypes from './IDialogPropTypes'
 const IDialogPropTypes = getDialogPropTypes()
 const DialogWrap = {
@@ -27,47 +27,46 @@ const DialogWrap = {
       this.removeContainer()
     }
   },
+  methods: {
+    getComponent (extra = {}) {
+      const dialogProps = {
+        props: {
+          ...this.$props,
+          ...extra,
+        },
+        ref: '_component',
+        key: 'dialog',
+      }
+      return (
+        <Dialog {...dialogProps}>{this.$slots.default}</Dialog>
+      )
+    },
 
-  getComponent (extra = {}) {
-    const dialogProps = {
-      props: {
-        ...this.$props,
-        ...extra,
-      },
-      ref: '_component',
-      key: 'dialog',
-    }
-    return (
-      <Dialog {...dialogProps}>{this.$slots.default}</Dialog>
-    )
-  },
-
-  getContainer () {
-    if (this.getContainer) {
-      return this.getContainer()
-    }
-    const container = document.createElement('div')
-    document.body.appendChild(container)
-    return container
+    getContainer2 () {
+      if (this.getContainer) {
+        return this.getContainer()
+      }
+      const container = document.createElement('div')
+      document.body.appendChild(container)
+      return container
+    },
   },
 
   render () {
     const { visible } = this
-
     return (
       <ContainerRender
         parent={this}
         visible={visible}
         autoDestroy={false}
         getComponent={this.getComponent}
-        getContainer={this.getContainer}
-      >
-        {({ renderComponent, removeContainer }) => {
+        getContainer={this.getContainer2}
+        children={({ renderComponent, removeContainer }) => {
           this.renderComponent = renderComponent
           this.removeContainer = removeContainer
           return null
         }}
-      </ContainerRender>
+      />
     )
   },
 }

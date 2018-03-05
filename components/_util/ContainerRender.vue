@@ -53,13 +53,14 @@ export default {
             parent: self.parent,
             el: self.container,
             mounted () {
-              this.$next(() => {
+              this.$nextTick(() => {
                 if (ready) {
                   ready.call(self)
                 }
               })
             },
             render () {
+              console.log(props)
               return getComponent(props)
             },
           })

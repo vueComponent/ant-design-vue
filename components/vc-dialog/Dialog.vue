@@ -3,7 +3,7 @@ import KeyCode from '../_util/KeyCode'
 import LazyRenderBox from './LazyRenderBox'
 import BaseMixin from '../_util/BaseMixin'
 import getTransitionProps from '../_util/getTransitionProps'
-import getScrollBarSize from '../__util/getScrollBarSize'
+import getScrollBarSize from '../_util/getScrollBarSize'
 import getDialogPropTypes from './IDialogPropTypes'
 const IDialogPropTypes = getDialogPropTypes()
 
@@ -105,7 +105,7 @@ export default {
           this.lastOutSideFocusNode = document.activeElement
           this.addScrollingEffect()
           this.$refs.wrap.focus()
-          const dialogNode = this.$refs.dialog
+          const dialogNode = this.$refs.dialog.$el
           if (mousePosition) {
             const elOffset = offset(dialogNode)
             setTransformOrigin(dialogNode,
@@ -386,7 +386,7 @@ export default {
           tabIndex={-1}
           onKeydown={this.onKeydown}
           class={`${prefixCls}-wrap ${wrapClassName || ''}`}
-          ref={this.saveRef('wrap')}
+          ref='wrap'
           onClick={maskClosable ? this.onMaskClick : undefined}
           role='dialog'
           aria-labelledby={title ? this.titleId : null}

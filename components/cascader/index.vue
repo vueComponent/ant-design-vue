@@ -271,6 +271,7 @@ export default {
         type='cross-circle'
         class={`${prefixCls}-picker-clear`}
         onClick={this.clearSelection}
+        key='clear-icon'
       />
     ) : null
     const arrowCls = classNames({
@@ -357,7 +358,7 @@ export default {
           {this.getLabel()}
         </span> : null}
         {clearIcon}
-        <Icon type='down' class={arrowCls} />
+        <Icon type='down' key='down-icon' class={arrowCls} />
       </span>
     )
     const cascaderProps = {

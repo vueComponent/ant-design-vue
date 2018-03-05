@@ -27,4 +27,4 @@ export { default as switch } from 'antd/switch/demo/index.vue'
 export { default as autoComplete } from 'antd/auto-complete/demo/index.vue'
 export { default as affix } from 'antd/affix/demo/index.vue'
 export { default as cascader } from 'antd/cascader/demo/index.vue'
-
+export { default as backTop } from 'antd/back-top/demo/index.vue'

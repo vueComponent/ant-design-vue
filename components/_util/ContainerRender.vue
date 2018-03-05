@@ -1,0 +1,81 @@
+<script>
+import Vue from 'vue'
+import PropTypes from './vue-types'
+
+export default {
+  props: {
+    autoMount: PropTypes.bool.def(true),
+    autoDestroy: PropTypes.bool.def(true),
+    visible: PropTypes.bool,
+    forceRender: PropTypes.bool.def(false),
+    parent: PropTypes.any,
+    getComponent: PropTypes.func.isRequired,
+    getContainer: PropTypes.func.isRequired,
+    children: PropTypes.func.isRequired,
+  },
+
+  mounted () {
+    if (this.autoMount) {
+      this.renderComponent()
+    }
+  },
+
+  updated () {
+    if (this.autoMount) {
+      this.renderComponent()
+    }
+  },
+
+  beforeDestroy () {
+    if (this.autoDestroy) {
+      this.removeContainer()
+    }
+  },
+  methods: {
+    removeContainer () {
+      if (this.container) {
+        this._component && this._component.$destroy()
+        this.container.parentNode.removeChild(this.container)
+        this.container = null
+      }
+    },
+
+    renderComponent (props, ready) {
+      const { visible, getComponent, forceRender, getContainer, parent } = this
+      const self = this
+      if (visible || parent.$refs._component || forceRender) {
+        if (!this.container) {
+          this.container = getContainer()
+        }
+
+        if (!this._component) {
+          this._component = new Vue({
+            parent: self.parent,
+            el: self.container,
+            mounted () {
+              this.$next(() => {
+                if (ready) {
+                  ready.call(self)
+                }
+              })
+            },
+            render () {
+              return getComponent(props)
+            },
+          })
+        } else {
+          this._component.$forceUpdate()
+        }
+      }
+    },
+  },
+
+  render () {
+    return this.children({
+      renderComponent: this.renderComponent,
+      removeContainer: this.removeContainer,
+    })
+  },
+}
+
+</script>

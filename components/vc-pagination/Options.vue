@@ -1,19 +1,21 @@
 <script>
-import PropTypes from 'vue-types'
+import PropTypes from '../_util/vue-types'
 import KEYCODE from './KeyCode'
+import BaseMixin from '../_util/BaseMixin'
 
-function noop () {
-}
 export default {
+  mixins: [BaseMixin],
   props: {
     rootPrefixCls: PropTypes.String,
-    changeSize: PropTypes.func.def(noop),
-    quickGo: PropTypes.func.def(noop),
-    selectComponentClass: PropTypes.func.def(noop),
+    changeSize: PropTypes.func,
+    quickGo: PropTypes.func,
+    selectComponentClass: PropTypes.any,
     current: PropTypes.number,
     pageSizeOptions: PropTypes.array.def(['10', '20', '30', '40']),
     pageSize: PropTypes.number,
+    buildOptionText: PropTypes.func,
     locale: PropTypes.object,
+    goButton: PropTypes.any,
   },
   data () {
     return {
@@ -22,11 +24,13 @@ export default {
     }
   },
   methods: {
-    buildOptionText (value) {
+    defaultBuildOptionText (value) {
       return `${value} ${this.locale.items_per_page}`
     },
-    changeValue (e) {
-      this.goInputText = e.target.value
+    handleChange (e) {
+      this.setState({
+        goInputText: e.target.value,
+      })
     },
     go (e) {
       let val = this.goInputText
@@ -38,19 +42,16 @@ export default {
         val = this.stateCurrent
       }
       if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
-        this.goInputText = ''
-        this.stateCurrent = this.quickGo(val)
+        this.setState({
+          goInputText: '',
+          stateCurrent: this.quickGo(val),
+        })
       }
     },
   },
   render () {
-    const locale = this.locale
-    const prefixCls = `${this.rootPrefixCls}-options`
-    const changeSize = this.changeSize
-    const quickGo = this.quickGo
-    const goButton = this.goButton
-    const buildOptionText = this.buildOptionText
-    const Select = this.selectComponentClass
+    const { rootPrefixCls, locale, changeSize, quickGo, goButton, buildOptionText, selectComponentClass: Select, defaultBuildOptionText } = this
+    const prefixCls = `${rootPrefixCls}-options`
     let changeSelect = null
     let goInput = null
     let gotoButton = null
@@ -63,7 +64,7 @@ export default {
       const Option = Select.Option
       const pageSize = this.pageSize || this.pageSizeOptions[0]
       const options = this.pageSizeOptions.map((opt, i) => (
-        <Option key={i} value={opt}>{buildOptionText(opt)}</Option>
+        <Option key={i} value={opt}>{buildOptionText ? buildOptionText(opt) : defaultBuildOptionText(opt)}</Option>
       ))
 
       changeSelect = (
@@ -74,7 +75,7 @@ export default {
           optionLabelProp='children'
           dropdownMatchSelectWidth={false}
           value={pageSize.toString()}
-          onChange={this.changeSize}
+          onChange={value => this.changeSize(Number(value))}
           getPopupContainer={triggerNode => triggerNode.parentNode}
         >
           {options}
@@ -95,7 +96,12 @@ export default {
             </button>
           )
         } else {
-          gotoButton = goButton
+          gotoButton = (
+            <span
+              onClick={this.go}
+              onKeyUp={this.go}
+            >{goButton}</span>
+          )
         }
       }
       goInput = (
@@ -104,7 +110,7 @@ export default {
           <input
             type='text'
             value={this.goInputText}
-            onInput={this.changeValue}
+            onChange={this.handleChange}
             onKeyup={this.go}
           />
           {locale.page}

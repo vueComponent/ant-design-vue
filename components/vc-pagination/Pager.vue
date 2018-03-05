@@ -1,11 +1,15 @@
 <script>
+import PropTypes from '../_util/vue-types'
+
 export default {
   name: 'Page',
   props: {
-    rootPrefixCls: String,
-    page: Number,
-    active: Boolean,
-    showTitle: Boolean,
+    rootPrefixCls: PropTypes.string,
+    page: PropTypes.number,
+    active: PropTypes.bool,
+    last: PropTypes.bool,
+    locale: PropTypes.object,
+    showTitle: PropTypes.bool,
     itemRender: {
       type: Function,
       default: () => {},
@@ -33,12 +37,22 @@ export default {
     },
   },
   render () {
+    const { rootPrefixCls, page, active } = this
+    const prefixCls = `${rootPrefixCls}-item`
+    let cls = `${prefixCls} ${prefixCls}-${page}`
+
+    if (active) {
+      cls = `${cls} ${prefixCls}-active`
+    }
+
     return (
       <li
-        class={this.classes}
+        class={cls}
         onClick={this.handleClick}
         onKeypress={this.handleKeyPress}
-        title={this.showTitle ? this.page : null}>
+        title={this.showTitle ? this.page : null}
+        tabIndex='0'
+      >
         {this.itemRender(this.page, 'page', <a>{this.page}</a>)}
       </li>
     )

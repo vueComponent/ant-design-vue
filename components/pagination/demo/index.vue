@@ -1,42 +1,42 @@
 <template>
   <div>
     基本
-    <Pagination current=1 total=50 />
-    </br>
+    <Pagination :current="1" :total="50" />
+    <br>
     更多
-    <Pagination :current="6" total=500 />
-    </br>
+    <Pagination :current="6" :total="500" />
+    <br>
     简洁
     <div style="margin-bottom:10px">
       <pagination :simple="simple" :current="5" :total="total"></pagination>
     </div>
-    </br>
+    <br>
     改值操作
     <div style="margin-bottom:10px">
       <pagination :current="current" :total="total" @change="onchange"></pagination>
       <vc-button @click="changeValue">改值</vc-button>
     </div>
-    </br>
+    <br>
     双向绑定
     <div>
       <pagination v-model="current" :total="total" :showTotal="showTotal"></pagination>
       <vc-button @click="getValue">当前值</vc-button>
     </div>
-    </br>
+    <br>
     迷你
-    <Pagination :current="1" total=50 size="small"/>
-    <Pagination :current="1" total=50 :showTotal="showTotal" size="small"/>
-    </br>
+    <Pagination :current="1" :total="50" size="small"/>
+    <Pagination :current="1" :total="50" :showTotal="showTotal" size="small"/>
+    <br>
     总数
-    <Pagination :current="1" total=50 :showTotal="showTotal"/>
-    <Pagination :current="1" total=50 :showTotal="showTotal1"/>
-    </br>
+    <Pagination :current="1" :total="50" :showTotal="showTotal"/>
+    <Pagination :current="1" :total="50" :showTotal="showTotal1"/>
+    <br>
     跳转
-    <Pagination v-model="current" total=50 :showQuickJumper="showQuickJumper"/>
+    <Pagination v-model="current" :total="50" :showQuickJumper="showQuickJumper"/>
     <vc-button @click="getValue">当前值</vc-button>
-    </br>
+    <br>
     上一步下一步
-    <Pagination total=500 :itemRender="itemRender" />
+    <Pagination :total="500" :itemRender="itemRender" />
   </div>
 </template>
 <script>

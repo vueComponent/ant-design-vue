@@ -3,7 +3,7 @@
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | autoFocus | get focus when component mounted | boolean | false |
-| checked | determine whether the `Switch` is checked | boolean | false |
+| checked(v-model) | determine whether the `Switch` is checked | boolean | false |
 | checkedChildren | content to be shown when the state is checked | string\|slot |  |
 | defaultChecked | to set the initial state | boolean | false |
 | disabled | Disable switch | boolean | false |

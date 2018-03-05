@@ -3,7 +3,7 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | autoFocus | 组件自动获取焦点 | boolean | false |
-| checked | 指定当前是否选中 | boolean | false |
+| checked(v-model) | 指定当前是否选中 | boolean | false |
 | checkedChildren | 选中时的内容 | string\|slot |  |
 | defaultChecked | 初始是否选中 | boolean | false |
 | disabled | 是否禁用 | boolean | false |

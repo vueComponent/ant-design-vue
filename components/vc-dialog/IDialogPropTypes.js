@@ -25,13 +25,15 @@ function IDialogPropTypes () {
     maskStyle: PropTypes.object,
     prefixCls: PropTypes.string,
     wrapClassName: PropTypes.string,
-    width: PropTypes.number,
-    height: PropTypes.number,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     zIndex: PropTypes.number,
     bodyProps: PropTypes.any,
     maskProps: PropTypes.any,
     wrapProps: PropTypes.any,
     getContainer: PropTypes.func,
+    dialogStyle: PropTypes.object.def({}),
+    dialogClass: PropTypes.object.def({}),
   }
 }
 

@@ -7,6 +7,7 @@ export default {
   mixins: [BaseMixin],
   props: {
     rootPrefixCls: PropTypes.String,
+    selectPrefixCls: PropTypes.String,
     changeSize: PropTypes.func,
     quickGo: PropTypes.func,
     selectComponentClass: PropTypes.any,
@@ -24,8 +25,8 @@ export default {
     }
   },
   methods: {
-    defaultBuildOptionText (value) {
-      return `${value} ${this.locale.items_per_page}`
+    defaultBuildOptionText (opt) {
+      return `${opt.value} ${this.locale.items_per_page}`
     },
     handleChange (e) {
       this.setState({
@@ -50,7 +51,7 @@ export default {
     },
   },
   render () {
-    const { rootPrefixCls, locale, changeSize, quickGo, goButton, buildOptionText, selectComponentClass: Select, defaultBuildOptionText } = this
+    const { rootPrefixCls, locale, changeSize, quickGo, goButton, selectComponentClass: Select, defaultBuildOptionText } = this
     const prefixCls = `${rootPrefixCls}-options`
     let changeSelect = null
     let goInput = null
@@ -63,8 +64,9 @@ export default {
     if (changeSize && Select) {
       const Option = Select.Option
       const pageSize = this.pageSize || this.pageSizeOptions[0]
+      const buildOptionText = this.buildOptionText || defaultBuildOptionText
       const options = this.pageSizeOptions.map((opt, i) => (
-        <Option key={i} value={opt}>{buildOptionText ? buildOptionText(opt) : defaultBuildOptionText(opt)}</Option>
+        <Option key={i} value={opt}>{buildOptionText({ value: opt })}</Option>
       ))
 
       changeSelect = (

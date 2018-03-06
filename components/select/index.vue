@@ -41,10 +41,6 @@ const SelectValue = PropTypes.oneOfType([
   ])),
   Value,
 ])
-export {
-  AbstractSelectProps,
-  SelectValue,
-}
 
 const SelectProps = {
   ...AbstractSelectProps,
@@ -77,6 +73,12 @@ const SelectPropTypes = {
   optionLabelProp: PropTypes.string,
   transitionName: PropTypes.string,
   choiceTransitionName: PropTypes.string,
+}
+
+export {
+  AbstractSelectProps,
+  SelectValue,
+  SelectProps,
 }
 
 export default {

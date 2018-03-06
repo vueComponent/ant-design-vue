@@ -3,7 +3,7 @@
 
 import '../assets/index.less'
 // use import Dialog from 'rc-dialog'
-import Dialog from '../DialogWrap'
+import Dialog from '../index'
 
 export default {
   data () {
@@ -34,7 +34,6 @@ export default {
     },
 
     changeWidth (e) {
-      console.log(e)
       this.width = this.width === 600 ? 800 : 600
     },
 

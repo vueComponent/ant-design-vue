@@ -218,11 +218,11 @@ export default {
   },
 
   render () {
-    const { destroyPopup, getMaskElement, getPopupElement } = this
+    const { destroyPopup, getMaskElement, getPopupElement, visible } = this
     return (
       <div>
         {getMaskElement()}
-        { destroyPopup ? null : getPopupElement()}
+        {(visible || !destroyPopup) ? getPopupElement() : null}
       </div>
     )
   },

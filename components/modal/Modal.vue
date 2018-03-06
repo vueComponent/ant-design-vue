@@ -7,7 +7,7 @@ import buttonTypes from '../button/buttonTypes'
 const ButtonType = buttonTypes().type
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { getConfirmLocale } from './locale'
-import { initDefaultProps, getComponentFromProp } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, getClass, getStyle } from '../_util/props-util'
 
 let mousePosition = null
 let mousePositionEventBinded = false
@@ -125,11 +125,13 @@ export default {
         children={this.renderFooter}
       />
     )
+    const footer = getComponentFromProp(this, 'footer')
+    const title = getComponentFromProp(this, 'title')
     const dialogProps = {
       props: {
         ...this.$props,
-        title: getComponentFromProp(this, 'title'),
-        footer: getComponentFromProp(this, 'footer') || defaultFooter,
+        title,
+        footer: typeof footer === undefined ? defaultFooter : footer,
         visible: visible,
         mousePosition,
       },
@@ -137,6 +139,8 @@ export default {
         ...$listeners,
         close: this.handleCancel,
       },
+      class: getClass(this),
+      style: getStyle(this),
     }
     return (
       <Dialog {...dialogProps}>

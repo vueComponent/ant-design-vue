@@ -111,9 +111,12 @@ export function getClass (ele) {
   } else if (ele.$vnode && ele.$vnode.data) {
     data = ele.$vnode.data
   }
-  let cls = data.class || data.staticClass || {}
-  if (typeof cls === 'string') {
-    cls = cls.split(' ').forEach(c => { cls[c.trim()] = true })
+  const tempCls = data.class || data.staticClass
+  let cls = {}
+  if (typeof tempCls === 'string') {
+    tempCls.split(' ').forEach(c => { cls[c.trim()] = true })
+  } else {
+    cls = tempCls
   }
   return cls
 }

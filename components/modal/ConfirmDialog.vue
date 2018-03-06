@@ -7,9 +7,9 @@ import { getConfirmLocale } from './locale'
 
 export default {
   functional: true,
-  render () {
-    const { onCancel, onOk, close, zIndex, afterClose, visible } = this.$props
-    const props = this.$props
+  render (h, context) {
+    const { data: props } = context
+    const { onCancel, onOk, close, zIndex, afterClose, visible } = props
     const iconType = props.iconType || 'question-circle'
     const okType = props.okType || 'primary'
     const prefixCls = props.prefixCls || 'ant-confirm'

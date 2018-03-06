@@ -1,56 +1,66 @@
 import Modal from './Modal'
-import confirm from './confirm'
+import modalConfirm from './confirm'
 
 // export { ActionButtonProps } from './ActionButton'
 // export { ModalProps, ModalFuncProps } from './Modal'
 
-Modal.info = function (props) {
+const info = function (props) {
   const config = {
     type: 'info',
     iconType: 'info-circle',
     okCancel: false,
     ...props,
   }
-  return confirm(config)
+  return modalConfirm(config)
 }
 
-Modal.success = function (props) {
+const success = function (props) {
   const config = {
     type: 'success',
     iconType: 'check-circle',
     okCancel: false,
     ...props,
   }
-  return confirm(config)
+  return modalConfirm(config)
 }
 
-Modal.error = function (props) {
+const error = function (props) {
   const config = {
     type: 'error',
     iconType: 'cross-circle',
     okCancel: false,
     ...props,
   }
-  return confirm(config)
+  return modalConfirm(config)
 }
 
-Modal.warning = Modal.warn = function (props) {
+const warning = function (props) {
   const config = {
     type: 'warning',
     iconType: 'exclamation-circle',
     okCancel: false,
     ...props,
   }
-  return confirm(config)
+  return modalConfirm(config)
 }
+const warn = warning
 
-Modal.confirm = function (props) {
+const confirm = function (props) {
   const config = {
     type: 'confirm',
     okCancel: true,
     ...props,
   }
-  return confirm(config)
+  return modalConfirm(config)
+}
+
+export {
+  info,
+  success,
+  error,
+  warning,
+  warn,
+  confirm,
 }
 
 export default Modal

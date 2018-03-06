@@ -11,7 +11,7 @@ let uuid = 0
 let openCount = 0
 
 /* eslint react/no-is-mounted:0 */
-
+function noop () {}
 function getScroll (w, top) {
   let ret = w[`page${top ? 'Y' : 'X'}Offset`]
   const method = `scroll${top ? 'Top' : 'Left'}`
@@ -90,12 +90,12 @@ export default {
 
   watch: {
     visible (val) {
-      this.$nextTick(() => {
-        this.updatedCallback(val)
-      })
       if (val) {
         this.destroyPopup = false
       }
+      this.$nextTick(() => {
+        this.updatedCallback(!val)
+      })
     },
   },
   beforeDestroy () {
@@ -160,7 +160,6 @@ export default {
       }
     },
     onKeydown (e) {
-      console.log('keydown')
       const props = this.$props
       if (props.keyboard && e.keyCode === KeyCode.ESC) {
         this.close(e)
@@ -216,7 +215,7 @@ export default {
         closer = (
           <button
             key='close'
-            onClick={this.close}
+            onClick={this.close || noop}
             aria-label='Close'
             class={`${prefixCls}-close`}
           >
@@ -402,7 +401,7 @@ export default {
           onKeydown={this.onKeydown}
           class={`${prefixCls}-wrap ${wrapClassName || ''}`}
           ref='wrap'
-          onClick={maskClosable ? this.onMaskClick : undefined}
+          onClick={maskClosable ? this.onMaskClick : noop}
           role='dialog'
           aria-labelledby={title ? this.titleId : null}
           style={style}

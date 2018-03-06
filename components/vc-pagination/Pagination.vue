@@ -41,6 +41,7 @@ export default {
     showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(false),
     showTitle: PropTypes.bool.def(true),
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+    buildOptionText: PropTypes.func,
     showTotal: PropTypes.func,
     simple: PropTypes.bool,
     locale: PropTypes.object.def(LOCALE),
@@ -481,6 +482,7 @@ export default {
     }
     const prevDisabled = !this.hasPrev()
     const nextDisabled = !this.hasNext()
+    const buildOptionText = this.buildOptionText || this.$scopedSlots.buildOptionText
     return (
       <ul
         class={`${prefixCls}`}
@@ -517,6 +519,7 @@ export default {
           current={stateCurrent}
           pageSize={statePageSize}
           pageSizeOptions={this.pageSizeOptions}
+          buildOptionText={buildOptionText || null}
           quickGo={this.showQuickJumper ? this.handleChange : null}
           goButton={goButton}
         />

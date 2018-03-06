@@ -1,6 +1,7 @@
 <script>
 import PropTypes from '../_util/vue-types'
 import VcSelect from '../select'
+import MiniSelect from './MiniSelect'
 import enUS from '../vc-pagination/locale/en_US'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { getOptionProps } from '../_util/props-util'
@@ -18,6 +19,7 @@ export const PaginationProps = {
     PropTypes.number,
     PropTypes.string,
   ])),
+  buildOptionText: PropTypes.func,
   showSizeChange: PropTypes.func,
   showQuickJumper: PropTypes.bool,
   showTotal: PropTypes.any,
@@ -46,13 +48,14 @@ export default {
   },
   methods: {
     renderPagination (locale) {
-      const { size, ...restProps } = getOptionProps(this)
+      const { buildOptionText, size, ...restProps } = getOptionProps(this)
       const isSmall = size === 'small'
       const paginationProps = {
         props: {
           ...restProps,
-          selectComponentClass: VcSelect,
+          selectComponentClass: (isSmall ? MiniSelect : VcSelect),
           locale,
+          buildOptionText: buildOptionText || this.$scopedSlots.buildOptionText,
         },
         class: {
           'mini': isSmall,

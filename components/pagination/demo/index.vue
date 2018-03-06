@@ -25,14 +25,18 @@
     <br>
     迷你
     <Pagination :current="1" :total="50" size="small"/>
-    <Pagination :current="1" :total="50" :showTotal="showTotal" size="small"/>
+    <Pagination :current="1" :total="50" :showTotal="showTotal" size="small" showSizeChanger showQuickJumper/>
     <br>
     总数
     <Pagination :current="1" :total="50" :showTotal="showTotal"/>
     <Pagination :current="1" :total="50" :showTotal="showTotal1"/>
     <br>
     跳转
-    <Pagination v-model="current" :total="50" :showQuickJumper="showQuickJumper"/>
+    <Pagination v-model="current" :total="50" :showQuickJumper="showQuickJumper" showSizeChanger>
+      <template slot='buildOptionText' slot-scope='props'>
+        <span>{{props.value}}条/页</span>
+      </template>
+    </Pagination>
     <vc-button @click="getValue">当前值</vc-button>
     <br>
     上一步下一步

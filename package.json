@@ -99,7 +99,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "lodash.isplainobject": "^4.0.6",
-    "moment": "^2.20.1",
+    "moment": "^2.21.0",
     "omit.js": "^1.0.0",
     "shallow-equal": "^1.0.0",
     "shallowequal": "^1.0.2",

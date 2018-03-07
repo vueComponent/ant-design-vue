@@ -23,7 +23,7 @@ Affix | done
 Cascader | done
 BackTop | done
 Modal | done
-Alert
+Alert | done
 Calendar
 DatePicker
 TimePicker

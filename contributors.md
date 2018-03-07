@@ -48,11 +48,11 @@ Badge  |  done
 Breadcrumb |  done
 Card  | done
 Collapse | done
+Spin | done
+Switch | done
+Steps
 Progress
 Slider
-Spin | done
-Steps
-Switch | done
 Table
 Timeline
 Transfer

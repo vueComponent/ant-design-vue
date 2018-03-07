@@ -127,7 +127,11 @@ export function getStyle (ele) {
   } else if (ele.$vnode && ele.$vnode.data) {
     data = ele.$vnode.data
   }
-  return data.style || parseStyleText(data.staticStyle || '')
+  let style = data.style || data.staticStyle
+  if (typeof style === 'string') {
+    style = parseStyleText(style)
+  }
+  return style
 }
 
 export function getComponentName (opts) {

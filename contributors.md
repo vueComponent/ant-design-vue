@@ -22,7 +22,7 @@ AutoComplete | done
 Affix | done
 Cascader | done
 BackTop | done
-Modal
+Modal | done
 Alert
 Calendar
 DatePicker

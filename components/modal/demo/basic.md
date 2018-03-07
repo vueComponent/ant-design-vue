@@ -15,9 +15,8 @@ Basic modal.
     <a-button type="primary" @click="showModal">Open</a-button>
     <a-modal
       title="Basic Modal"
-      :visible="visible"
+      v-model="visible"
       @ok="handleOk"
-      @cancel="handleCancel"
     >
       <p>Some contents...</p>
       <p>Some contents...</p>
@@ -37,10 +36,6 @@ export default {
       this.visible = true
     },
     handleOk(e) {
-      console.log(e);
-      this.visible = false
-    },
-    handleCancel(e) {
       console.log(e);
       this.visible = false
     },

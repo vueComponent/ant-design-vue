@@ -53,14 +53,11 @@ const confirm = function (props) {
   }
   return modalConfirm(config)
 }
-
-export {
-  info,
-  success,
-  error,
-  warning,
-  warn,
-  confirm,
-}
+Modal.info = info
+Modal.success = success
+Modal.error = error
+Modal.warning = warning
+Modal.warn = warn
+Modal.confirm = confirm
 
 export default Modal

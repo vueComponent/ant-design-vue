@@ -40,18 +40,25 @@ export default {
       }
     },
 
-    renderComponent (props, ready) {
+    renderComponent (props = {}, ready) {
       const { visible, getComponent, forceRender, getContainer, parent } = this
       const self = this
       if (visible || parent.$refs._component || forceRender) {
+        let el = this.componentEl
         if (!this.container) {
           this.container = getContainer()
+          el = document.createElement('div')
+          this.componentEl = el
+          this.container.appendChild(el)
         }
 
         if (!this._component) {
           this._component = new Vue({
+            data: {
+              comProps: props,
+            },
             parent: self.parent,
-            el: self.container,
+            el: el,
             mounted () {
               this.$nextTick(() => {
                 if (ready) {
@@ -60,9 +67,11 @@ export default {
               })
             },
             render () {
-              return getComponent(props)
+              return getComponent(this.comProps)
             },
           })
+        } else {
+          this._component.comProps = props
         }
       }
     },

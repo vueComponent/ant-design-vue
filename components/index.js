@@ -88,23 +88,10 @@ export { default as Affix } from './affix'
 export { default as Cascader } from './cascader'
 export { default as BackTop } from './back-top'
 export { default as Modal } from './modal'
-import {
-  info,
-  success,
-  error,
-  warning,
-  warn,
-  confirm,
-} from './modal'
+export { default as Alert } from './alert'
 
 const api = {
   notification,
   message,
-  modalInfo: info,
-  modalSuccess: success,
-  modalError: error,
-  modalWarning: warning,
-  modalWarn: warn,
-  modalConfirm: confirm,
 }
 export { api }

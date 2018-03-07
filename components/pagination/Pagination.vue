@@ -40,12 +40,6 @@ export default {
   model: {
     prop: 'current',
   },
-  data () {
-    const { current } = this
-    return {
-      stateCurrent: +current,
-    }
-  },
   methods: {
     renderPagination (locale) {
       const { buildOptionText, size, ...restProps } = getOptionProps(this)

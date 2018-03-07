@@ -101,7 +101,7 @@ export default {
           gotoButton = (
             <span
               onClick={this.go}
-              onKeyUp={this.go}
+              onKeyup={this.go}
             >{goButton}</span>
           )
         }

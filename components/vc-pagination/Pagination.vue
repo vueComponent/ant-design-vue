@@ -84,7 +84,7 @@ export default {
       let current = this.current
       const newCurrent = this.calculatePage(val)
       current = current > newCurrent ? newCurrent : current
-      if (hasProp(this, 'current')) {
+      if (!hasProp(this, 'current')) {
         newState.stateCurrent = current
         newState.stateCurrentInputValue = current
       }
@@ -188,7 +188,7 @@ export default {
             stateCurrentInputValue: page,
           })
         }
-        this.$emit('input', page)
+        // this.$emit('input', page)
         this.$emit('change', page, this.statePageSize)
         return page
       }
@@ -254,7 +254,7 @@ export default {
             <button
               type='button'
               onClick={this.handleGoTO}
-              onKeyUp={this.handleGoTO}
+              onKeyup={this.handleGoTO}
             >
               {locale.jump_to_confirm}
             </button>
@@ -263,7 +263,7 @@ export default {
           gotoButton = (
             <span
               onClick={this.handleGoTO}
-              onKeyUp={this.handleGoTO}
+              onKeyup={this.handleGoTO}
             >{goButton}</span>
           )
         }

@@ -11,7 +11,7 @@ let uuid = 0
 let openCount = 0
 
 /* eslint react/no-is-mounted:0 */
-
+function noop () {}
 function getScroll (w, top) {
   let ret = w[`page${top ? 'Y' : 'X'}Offset`]
   const method = `scroll${top ? 'Top' : 'Left'}`
@@ -62,6 +62,11 @@ export default {
       prefixCls: 'rc-dialog',
     }),
   },
+  data () {
+    return {
+      destroyPopup: false,
+    }
+  },
 
   // private inTransition: boolean;
   // private titleId: string;
@@ -85,13 +90,16 @@ export default {
 
   watch: {
     visible (val) {
+      if (val) {
+        this.destroyPopup = false
+      }
       this.$nextTick(() => {
-        this.updatedCallback(val)
+        this.updatedCallback(!val)
       })
     },
   },
   beforeDestroy () {
-    if (this.props.visible || this.inTransition) {
+    if (this.visible || this.inTransition) {
       this.removeScrollingEffect()
     }
   },
@@ -127,11 +135,14 @@ export default {
       }
     },
     onAnimateLeave () {
-      const { afterClose } = this
+      const { afterClose, destroyOnClose } = this
       // need demo?
       // https://github.com/react-component/dialog/pull/28
       if (this.$refs.wrap) {
         this.$refs.wrap.style.display = 'none'
+      }
+      if (destroyOnClose) {
+        this.destroyPopup = true
       }
       this.inTransition = false
       this.removeScrollingEffect()
@@ -169,32 +180,31 @@ export default {
       }
     },
     getDialogElement () {
-      const props = this.$props
-      const closable = props.closable
-      const prefixCls = props.prefixCls
+      const { closable, prefixCls, width, height,
+        title, footer: tempFooter, bodyStyle, visible, bodyProps } = this
       const dest = {}
-      if (props.width !== undefined) {
-        dest.width = props.width
+      if (width !== undefined) {
+        dest.width = typeof width === 'number' ? `${width}px` : width
       }
-      if (props.height !== undefined) {
-        dest.height = props.height
+      if (height !== undefined) {
+        dest.height = typeof height === 'number' ? `${height}px` : height
       }
 
       let footer
-      if (props.footer) {
+      if (tempFooter) {
         footer = (
           <div class={`${prefixCls}-footer`} ref='footer'>
-            {props.footer}
+            {tempFooter}
           </div>
         )
       }
 
       let header
-      if (props.title) {
+      if (title) {
         header = (
           <div class={`${prefixCls}-header`} ref='header'>
             <div class={`${prefixCls}-title`} id={this.titleId}>
-              {props.title}
+              {title}
             </div>
           </div>
         )
@@ -205,7 +215,7 @@ export default {
         closer = (
           <button
             key='close'
-            onClick={this.close}
+            onClick={this.close || noop}
             aria-label='Close'
             class={`${prefixCls}-close`}
           >
@@ -213,25 +223,29 @@ export default {
           </button>)
       }
 
-      const style = { ...dest }
+      const style = { ...this.dialogStyle, ...dest }
+      const cls = {
+        [prefixCls]: true,
+        ...this.dialogClass,
+      }
       const transitionName = this.getTransitionName()
       const dialogElement = (
         <LazyRenderBox
-          v-show={props.visible}
+          v-show={visible}
           key='dialog-element'
           role='document'
           ref='dialog'
           style={style}
-          class={prefixCls}
+          class={cls}
         >
           <div class={`${prefixCls}-content`}>
             {closer}
             {header}
             <div
               class={`${prefixCls}-body`}
-              style={props.bodyStyle}
+              style={bodyStyle}
               ref='body'
-              {...props.bodyProps}
+              {...bodyProps}
             >
               {this.$slots.default}
             </div>
@@ -250,7 +264,7 @@ export default {
           key='dialog'
           {...dialogTransitionProps}
         >
-          {(props.visible || !props.destroyOnClose) ? dialogElement : null}
+          {(visible || !this.destroyPopup) ? dialogElement : null}
         </transition>
       )
     },
@@ -387,7 +401,7 @@ export default {
           onKeydown={this.onKeydown}
           class={`${prefixCls}-wrap ${wrapClassName || ''}`}
           ref='wrap'
-          onClick={maskClosable ? this.onMaskClick : undefined}
+          onClick={maskClosable ? this.onMaskClick : noop}
           role='dialog'
           aria-labelledby={title ? this.titleId : null}
           style={style}

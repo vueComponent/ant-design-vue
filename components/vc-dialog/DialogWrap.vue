@@ -2,6 +2,7 @@
 import Dialog from './Dialog'
 import ContainerRender from '../_util/ContainerRender'
 import getDialogPropTypes from './IDialogPropTypes'
+import { getStyle, getClass } from '../_util/props-util'
 const IDialogPropTypes = getDialogPropTypes()
 const DialogWrap = {
   props: {
@@ -29,16 +30,22 @@ const DialogWrap = {
   },
   methods: {
     getComponent (extra = {}) {
+      const { $attrs, $listeners, $props, $slots } = this
+
       const dialogProps = {
         props: {
-          ...this.$props,
+          ...$props,
+          dialogClass: getClass(this),
+          dialogStyle: getStyle(this),
           ...extra,
         },
+        attrs: $attrs,
         ref: '_component',
         key: 'dialog',
+        on: $listeners,
       }
       return (
-        <Dialog {...dialogProps}>{this.$slots.default}</Dialog>
+        <Dialog {...dialogProps}>{$slots.default}</Dialog>
       )
     },
 

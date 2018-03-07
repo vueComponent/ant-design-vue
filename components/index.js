@@ -72,12 +72,6 @@ import message from './message'
 
 export { default as Spin } from './spin'
 
-const api = {
-  notification,
-  message,
-}
-export { api }
-
 import Select from './select'
 const SelectOption = Select.Option
 const SelectOptGroup = Select.OptGroup
@@ -93,4 +87,24 @@ export { default as Affix } from './affix'
 
 export { default as Cascader } from './cascader'
 export { default as BackTop } from './back-top'
+export { default as Modal } from './modal'
+import {
+  info,
+  success,
+  error,
+  warning,
+  warn,
+  confirm,
+} from './modal'
 
+const api = {
+  notification,
+  message,
+  modalInfo: info,
+  modalSuccess: success,
+  modalError: error,
+  modalWarning: warning,
+  modalWarn: warn,
+  modalConfirm: confirm,
+}
+export { api }

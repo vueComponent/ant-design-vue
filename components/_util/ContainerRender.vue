@@ -60,12 +60,9 @@ export default {
               })
             },
             render () {
-              console.log(props)
               return getComponent(props)
             },
           })
-        } else {
-          this._component.$forceUpdate()
         }
       }
     },

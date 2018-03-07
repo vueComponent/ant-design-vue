@@ -111,7 +111,14 @@ export function getClass (ele) {
   } else if (ele.$vnode && ele.$vnode.data) {
     data = ele.$vnode.data
   }
-  return data.class || data.staticClass
+  const tempCls = data.class || data.staticClass
+  let cls = {}
+  if (typeof tempCls === 'string') {
+    tempCls.split(' ').forEach(c => { cls[c.trim()] = true })
+  } else {
+    cls = tempCls
+  }
+  return cls
 }
 export function getStyle (ele) {
   let data = {}
@@ -138,6 +145,10 @@ export function isEmptyElement (ele) {
 export function filterEmpty (children = []) {
   return children.filter(c => c.tag || c.text.trim() !== '')
 }
+const initDefaultProps = (propTypes, defaultProps) => {
+  Object.keys(defaultProps).forEach(k => { propTypes[k] = propTypes[k].def(defaultProps[k]) })
+  return propTypes
+}
 export {
   hasProp,
   filterProps,
@@ -150,5 +161,6 @@ export {
   getAttrs,
   getValueByProp,
   parseStyleText,
+  initDefaultProps,
 }
 export default hasProp

@@ -22,9 +22,6 @@ export default {
       if (this.active) {
         cls = `${cls} ${prefixCls}-active`
       }
-      if (this.className) {
-        cls = `${cls} ${this.className}`
-      }
       return cls
     },
   },
@@ -33,7 +30,7 @@ export default {
       this.$emit('click', this.page)
     },
     handleKeyPress (event) {
-      this.$emit('keyPress', event, this.handleClick, this.page)
+      this.$emit('keypress', event, this.handleClick, this.page)
     },
   },
   render () {

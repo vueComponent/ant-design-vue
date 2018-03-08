@@ -4,29 +4,17 @@
 ## 栅格卡片
 </md>
 <div style="background: #ECECEC; padding: 30px">
-  <Row :gutter="16">
-    <Col :span="8">
-      <Card title="Card title" :bordered="false">Card content</Card>
-    </Col>
-    <Col :span="8">
-      <Card title="Card title" :bordered="false">Card content</Card>
-    </Col>
-    <Col :span="8">
-      <Card title="Card title" :bordered="false">Card content</Card>
-    </Col>
-  </Row>
+  <a-row :gutter="16">
+    <a-col :span="8">
+      <a-card title="Card title" :bordered="false">Card content</a-card>
+    </a-col>
+    <a-col :span="8">
+      <a-card title="Card title" :bordered="false">Card content</a-card>
+    </a-col>
+    <a-col :span="8">
+      <a-card title="Card title" :bordered="false">Card content</a-card>
+    </a-col>
+  </a-row>
 </div>
 </div>
 </template>
-
-<script>
-import '../style'
-import { Card, Col, Row } from 'antd'
-export default {
-  components: {
-    Card,
-    Col,
-    Row,
-  },
-}
-</script>

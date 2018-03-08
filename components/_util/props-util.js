@@ -1,12 +1,18 @@
-
-const parseStyleText = (cssText = '') => {
+const camelizeRE = /-(\w)/g
+const camelize = (str) => {
+  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
+}
+const parseStyleText = (cssText = '', camel) => {
   const res = {}
   const listDelimiter = /;(?![^(]*\))/g
   const propertyDelimiter = /:(.+)/
   cssText.split(listDelimiter).forEach(function (item) {
     if (item) {
       const tmp = item.split(propertyDelimiter)
-      tmp.length > 1 && (res[tmp[0].trim()] = tmp[1].trim())
+      if (tmp.length > 1) {
+        const k = camel ? camelize(tmp[0].trim()) : tmp[0].trim()
+        res[k] = tmp[1].trim()
+      }
     }
   })
   return res
@@ -39,6 +45,18 @@ const getSlotOptions = (ele) => {
   return componentOptions ? componentOptions.Ctor.options || {} : {}
 }
 const getOptionProps = (instance) => {
+  if (instance.componentOptions) {
+    const componentOptions = instance.componentOptions
+    const { propsData = {}, Ctor = {}} = componentOptions
+    const props = (Ctor.options || {}).props || {}
+    const res = {}
+    for (const [k, v] of Object.entries(props)) {
+      if (v.default !== undefined) {
+        res[k] = v
+      }
+    }
+    return { ...res, ...propsData }
+  }
   const { $options = {}, $props = {}} = instance
   return filterProps($props, $options.propsData)
 }
@@ -120,7 +138,7 @@ export function getClass (ele) {
   }
   return cls
 }
-export function getStyle (ele) {
+export function getStyle (ele, camel) {
   let data = {}
   if (ele.data) {
     data = ele.data
@@ -129,7 +147,11 @@ export function getStyle (ele) {
   }
   let style = data.style || data.staticStyle
   if (typeof style === 'string') {
-    style = parseStyleText(style)
+    style = parseStyleText(style, camel)
+  } else if (camel && style) { // 驼峰化
+    const res = {}
+    Object.keys(style).forEach(k => (res[camelize(k)] = style[k]))
+    return res
   }
   return style
 }

@@ -13,17 +13,17 @@ const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 export { Radio, RadioGroup, RadioButton }
 
-export { default as Grid } from './grid'
+import { Row, Col } from './grid'
+export {
+  Row,
+  Col,
+}
 
 export { default as Rate } from './rate'
 
 export { default as Tooltip } from './tooltip'
 
 export { default as Pagination } from './pagination'
-
-export { default as Row } from './grid/Row'
-
-export { default as Col } from './grid/Col'
 
 export { default as Tag } from './tag'
 

@@ -94,6 +94,7 @@
     "css-animation": "^1.4.1",
     "dom-align": "^1.6.7",
     "dom-scroll-into-view": "^1.2.1",
+    "enquire.js": "^2.1.6",
     "eslint-plugin-vue": "^3.13.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",

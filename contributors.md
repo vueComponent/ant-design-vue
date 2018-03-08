@@ -33,8 +33,7 @@ Carousel
 Mention
 
 ##万
-Grid
-Col
+Grid | done slider完成后补全playground demo
 Layout
 Anchor
 Tree

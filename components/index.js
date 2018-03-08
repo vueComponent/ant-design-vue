@@ -89,6 +89,7 @@ export { default as Cascader } from './cascader'
 export { default as BackTop } from './back-top'
 export { default as Modal } from './modal'
 export { default as Alert } from './alert'
+export { default as TimePicker } from './time-picker'
 
 const api = {
   notification,

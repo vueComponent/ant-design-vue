@@ -1,9 +1,9 @@
 <script>
-import PropTypes from 'prop-types'
+import PropTypes from '../_util/vue-types'
+import BaseMixin from '../_util/BaseMixin'
 import Header from './Header'
 import Combobox from './Combobox'
 import moment from 'moment'
-import classNames from 'classnames'
 
 function noop () {
 }
@@ -17,114 +17,110 @@ function generateOptions (length, disabledOptions, hideDisabledOptions, step = 1
   }
   return arr
 }
-
-class Panel extends Component {
-  static propTypes = {
+const Panel = {
+  mixins: [BaseMixin],
+  props: {
     clearText: PropTypes.string,
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,
-    defaultOpenValue: PropTypes.object,
+    prefixCls: PropTypes.string.def('rc-time-picker-panel'),
+    defaultOpenValue: {
+      type: Object,
+      default: () => {
+        return moment()
+      },
+    },
     value: PropTypes.object,
     placeholder: PropTypes.string,
     format: PropTypes.string,
-    inputReadOnly: PropTypes.bool,
-    disabledHours: PropTypes.func,
-    disabledMinutes: PropTypes.func,
-    disabledSeconds: PropTypes.func,
+    inputReadOnly: PropTypes.bool.def(false),
+    disabledHours: PropTypes.func.def(noop),
+    disabledMinutes: PropTypes.func.def(noop),
+    disabledSeconds: PropTypes.func.def(noop),
     hideDisabledOptions: PropTypes.bool,
-    onChange: PropTypes.func,
-    onEsc: PropTypes.func,
+    // onChange: PropTypes.func,
+    // onEsc: PropTypes.func,
     allowEmpty: PropTypes.bool,
     showHour: PropTypes.bool,
     showMinute: PropTypes.bool,
     showSecond: PropTypes.bool,
-    onClear: PropTypes.func,
-    use12Hours: PropTypes.bool,
+    // onClear: PropTypes.func,
+    use12Hours: PropTypes.bool.def(false),
     hourStep: PropTypes.number,
     minuteStep: PropTypes.number,
     secondStep: PropTypes.number,
-    addon: PropTypes.func,
     focusOnOpen: PropTypes.bool,
-    onKeyDown: PropTypes.func,
-  };
-
-  static defaultProps = {
-    prefixCls: 'rc-time-picker-panel',
-    onChange: noop,
-    onClear: noop,
-    disabledHours: noop,
-    disabledMinutes: noop,
-    disabledSeconds: noop,
-    defaultOpenValue: moment(),
-    use12Hours: false,
-    addon: noop,
-    onKeyDown: noop,
-    inputReadOnly: false,
-  };
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      value: props.value,
+    // onKeydown: PropTypes.func,
+  },
+  data () {
+    return {
+      sValue: this.value,
       selectionRange: [],
+      currentSelectPanel: '',
+      showStr: true,
     }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const value = nextProps.value
-    if (value) {
-      this.setState({
-        value,
-      })
-    }
-  }
-
-  onChange = (newValue) => {
-    this.setState({ value: newValue })
-    this.props.onChange(newValue)
-  }
-
-  onCurrentSelectPanelChange = (currentSelectPanel) => {
-    this.setState({ currentSelectPanel })
-  }
-
-  // https://github.com/ant-design/ant-design/issues/5829
-  close () {
-    this.props.onEsc()
-  }
-
-  disabledHours = () => {
-    const { use12Hours, disabledHours } = this.props
-    let disabledOptions = disabledHours()
-    if (use12Hours && Array.isArray(disabledOptions)) {
-      if (this.isAM()) {
-        disabledOptions = disabledOptions.filter(h => h < 12).map(h => (h === 0 ? 12 : h))
+  },
+  watch: {
+    value (val) {
+      if (val) {
+        this.setState({
+          sValue: val,
+          showStr: true,
+        })
       } else {
-        disabledOptions = disabledOptions.map(h => (h === 12 ? 12 : h - 12))
+        this.setState({
+          showStr: false,
+        })
       }
-    }
-    return disabledOptions
-  }
+    },
+  },
 
-  isAM () {
-    const value = (this.state.value || this.props.defaultOpenValue)
-    return value.hour() >= 0 && value.hour() < 12
-  }
+  methods: {
+    onChange (newValue) {
+      this.setState({ sValue: newValue })
+      this.__emit('change', newValue)
+    },
+
+    onCurrentSelectPanelChange (currentSelectPanel) {
+      this.setState({ currentSelectPanel })
+    },
+
+    // https://github.com/ant-design/ant-design/issues/5829
+    close () {
+      this.__emit('esc')
+    },
+
+    disabledHours2 () {
+      const { use12Hours, disabledHours } = this
+      let disabledOptions = disabledHours()
+      if (use12Hours && Array.isArray(disabledOptions)) {
+        if (this.isAM()) {
+          disabledOptions = disabledOptions.filter(h => h < 12).map(h => (h === 0 ? 12 : h))
+        } else {
+          disabledOptions = disabledOptions.map(h => (h === 12 ? 12 : h - 12))
+        }
+      }
+      return disabledOptions
+    },
+
+    isAM () {
+      const value = this.sValue || this.defaultOpenValue
+      return value.hour() >= 0 && value.hour() < 12
+    },
+  },
 
   render () {
     const {
-      prefixCls, className, placeholder, disabledMinutes,
+      prefixCls, placeholder, disabledMinutes,
       disabledSeconds, hideDisabledOptions, allowEmpty, showHour, showMinute, showSecond,
-      format, defaultOpenValue, clearText, onEsc, addon, use12Hours, onClear,
-      focusOnOpen, onKeyDown, hourStep, minuteStep, secondStep, inputReadOnly,
-    } = this.props
-    const {
-      value, currentSelectPanel,
-    } = this.state
-    const disabledHourOptions = this.disabledHours()
-    const disabledMinuteOptions = disabledMinutes(value ? value.hour() : null)
-    const disabledSecondOptions = disabledSeconds(value ? value.hour() : null,
-      value ? value.minute() : null)
+      format, defaultOpenValue, clearText, use12Hours,
+      focusOnOpen, hourStep, minuteStep, secondStep, inputReadOnly,
+      sValue, currentSelectPanel, showStr, $listeners = {},
+    } = this
+    const { esc = noop, clear = noop, keydown = noop } = $listeners
+
+    const disabledHourOptions = this.disabledHours2()
+    const disabledMinuteOptions = disabledMinutes(sValue ? sValue.hour() : null)
+    const disabledSecondOptions = disabledSeconds(sValue ? sValue.hour() : null,
+      sValue ? sValue.minute() : null)
     const hourOptions = generateOptions(
       24, disabledHourOptions, hideDisabledOptions, hourStep
     )
@@ -136,32 +132,33 @@ class Panel extends Component {
     )
 
     return (
-      <div className={classNames({ [`${prefixCls}-inner`]: true, [className]: !!className })}>
+      <div class={`${prefixCls}-inner`}>
         <Header
           clearText={clearText}
           prefixCls={prefixCls}
           defaultOpenValue={defaultOpenValue}
-          value={value}
+          value={sValue}
           currentSelectPanel={currentSelectPanel}
-          onEsc={onEsc}
+          onEsc={esc}
           format={format}
           placeholder={placeholder}
           hourOptions={hourOptions}
           minuteOptions={minuteOptions}
           secondOptions={secondOptions}
-          disabledHours={this.disabledHours}
+          disabledHours={this.disabledHours2}
           disabledMinutes={disabledMinutes}
           disabledSeconds={disabledSeconds}
           onChange={this.onChange}
-          onClear={onClear}
+          onClear={clear}
           allowEmpty={allowEmpty}
           focusOnOpen={focusOnOpen}
-          onKeyDown={onKeyDown}
+          onKeydown={keydown}
           inputReadOnly={inputReadOnly}
+          showStr={showStr}
         />
         <Combobox
           prefixCls={prefixCls}
-          value={value}
+          value={sValue}
           defaultOpenValue={defaultOpenValue}
           format={format}
           onChange={this.onChange}
@@ -171,17 +168,17 @@ class Panel extends Component {
           hourOptions={hourOptions}
           minuteOptions={minuteOptions}
           secondOptions={secondOptions}
-          disabledHours={this.disabledHours}
+          disabledHours={this.disabledHours2}
           disabledMinutes={disabledMinutes}
           disabledSeconds={disabledSeconds}
           onCurrentSelectPanelChange={this.onCurrentSelectPanelChange}
           use12Hours={use12Hours}
           isAM={this.isAM()}
         />
-        {addon(this)}
+        {this.$slots.default}
       </div>
     )
-  }
+  },
 }
 
 export default Panel

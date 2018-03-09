@@ -35,7 +35,7 @@ export default {
   title: 'Modal',
   render () {
     return (
-      <div>
+      <div id='components-modal-demo'>
         <md cn={md.cn} us={md.us}/>
         <Async/>
         <Basic/>
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style>
-.code-box-demo .ant-btn {
+#components-modal-demo .ant-btn {
   margin-right: 8px;
 }
 </style>

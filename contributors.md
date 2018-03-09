@@ -26,7 +26,7 @@ Modal | done
 Alert | done
 Calendar
 DatePicker
-TimePicker
+TimePicker | done
 Upload
 Form
 Carousel

@@ -1,13 +1,12 @@
 <script>
-  import Basic from './basic.md'
-  import CheckAll from './check-all.md'
-  import Controller from './controller.md'
-  import Disabled from './disabled.md'
-  import Group from './group.md'
-  import Layout from './layout.md'
-
-  import CN from './../index.zh-CN.md'
-  import US from './../index.en-US.md'
+  import Basic from './basic'
+  import CheckAll from './check-all'
+  import Controller from './controller'
+  import Disabled from './disabled'
+  import Group from './group'
+  import Layout from './layout'
+  import CN from './../index.zh-CN'
+  import US from './../index.en-US'
 
   const md = {
     cn: `# Checkbox多选框
@@ -23,11 +22,11 @@
          - Used for selecting multiple values from several options.
          - If you use only one checkbox, it is the same as using Switch to toggle between two states. The difference is that Switch will trigger the state change directly, but Checkbox just marks the state as changed and this needs to be submitted.
          ## Examples
-        `
+        `,
   }
 
   export default {
-    render() {
+    render () {
       return (
         <div>
           <md cn={md.cn} us={md.us} />
@@ -43,6 +42,6 @@
           </api>
         </div>
       )
-    }
+    },
   }
 </script>

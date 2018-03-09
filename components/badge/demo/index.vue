@@ -18,16 +18,16 @@
         `,
     us: `# Badge
          Small numerical value or status descriptor for UI elements.
-         ##When To Use
+         ## When To Use
          Badge normally appears in proximity to notifications or user avatars with eye-catching appeal, typically displaying unread messages count.
-         ##Examples
-        `
+         ## Examples
+        `,
   }
 
   export default {
     render () {
       return (
-        <div>
+        <div id='components-badge-demo'>
           <md cn={md.cn} us={md.us} />
           <Basic />
           <NoWapper />
@@ -46,14 +46,14 @@
 </script>
 
 <style>
-  .head-example {
-    width: 42px;
-    height: 42px;
-    border-radius: 4px;
-    background: #eee;
-    display: inline-block;
-  }
-  .ant-badge{
-    margin-right: 20px;
-  }
+#components-badge-demo .ant-badge:not(.ant-badge-status) {
+  margin-right: 20px;
+}
+#components-badge-demo .head-example {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+}
 </style>

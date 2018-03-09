@@ -1,5 +1,8 @@
 <script>
+import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
+import { getStyle } from '../_util/props-util'
+import omit from 'omit.js'
 
 function getNumberArray (num) {
   return num
@@ -8,55 +11,54 @@ function getNumberArray (num) {
       .reverse()
       .map(i => Number(i)) : []
 }
+
+const ScrollNumberProps = {
+  prefixCls: PropTypes.string.def('ant-scroll-number'),
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def(null),
+  component: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+}
+
 export default {
-  name: 'ScrollNumber',
-  props: {
-    className: Object,
-    prefixCls: String,
-    count: [Number, String],
-    titleNumber: [Number, String],
-    styleNumber: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
   mixins: [BaseMixin],
+  props: ScrollNumberProps,
   data () {
-    const { count } = this
     return {
       animateStarted: true,
-      lastCount: 0,
-      stateCount: count,
+      sCount: this.count,
     }
   },
   watch: {
-    count (newValue, oldValue) {
-      // 复原数字初始位置
-      this.setState({
-        animateStarted: true,
-        lastCount: oldValue,
-      }, () => {
+    count (val) {
+      if (this.sCount !== val) {
+        this.lastCount = this.sCount
+        // 复原数字初始位置
+        this.setState({
+          animateStarted: true,
+        }, () => {
         // 等待数字位置复原完毕
         // 开始设置完整的数字
-        setTimeout(() => {
-          this.setState({
-            animateStarted: false,
-            stateCount: newValue,
-          })
-        }, 30)
-      })
+          setTimeout(() => {
+            this.setState({
+              animateStarted: false,
+              sCount: val,
+            }, () => {
+              this.$emit('animated')
+            })
+          }, 5)
+        })
+      }
     },
   },
   methods: {
     getPositionByNum (num, i) {
-      const { animateStarted, lastCount, stateCount } = this
-      if (animateStarted) {
+      if (this.animateStarted) {
         return 10 + num
       }
-      const currentDigit = getNumberArray(stateCount)[i]
-      const lastDigit = getNumberArray(lastCount)[i]
+      const currentDigit = getNumberArray(this.sCount)[i]
+      const lastDigit = getNumberArray(this.lastCount)[i]
       // 同方向则在同一侧切换数字
-      if (stateCount > lastCount) {
+      if (this.sCount > this.lastCount) {
         if (currentDigit >= lastDigit) {
           return 10 + num
         }
@@ -68,60 +70,69 @@ export default {
       return num
     },
     renderNumberList (position) {
-      const childrenArr = new Array(30).fill(1)
-      const childrenHtml = childrenArr.map((item, i) => {
+      const childrenToReturn = []
+      for (let i = 0; i < 30; i++) {
         const currentClassName = (position === i) ? 'current' : ''
-        return <p key={i.toString()} class={currentClassName}>{i % 10}</p>
-      })
-      return childrenHtml
-    },
-    renderCurrentNumber (num, i) {
-      const { animateStarted, prefixCls } = this
-      const position = this.getPositionByNum(num, i)
-      let removeTransition = animateStarted ||
-        (getNumberArray(this.lastCount)[i] === undefined)
-      if (!removeTransition) {
-        removeTransition = ''
+        childrenToReturn.push(<p key={i.toString()} class={currentClassName}>{i % 10}</p>)
       }
-      const styleSpan = {
-        transition: `${removeTransition}` && 'none',
+      return childrenToReturn
+    },
+
+    renderCurrentNumber (num, i) {
+      const position = this.getPositionByNum(num, i)
+      const removeTransition = this.animateStarted || getNumberArray(this.lastCount)[i] === undefined
+      const style = {
+        transition: removeTransition ? 'none' : undefined,
         msTransform: `translateY(${-position * 100}%)`,
         WebkitTransform: `translateY(${-position * 100}%)`,
         transform: `translateY(${-position * 100}%)`,
       }
       return (
-        <span
-          key={i}
-          class={`${prefixCls}-only`}
-          style = {styleSpan}
-        >
-          {
-            this.renderNumberList(position)
-          }
+        <span class={`${this.prefixCls}-only`} style={style} key={i}>
+          {this.renderNumberList(position)}
         </span>
       )
     },
+
     renderNumberElement () {
-      const { stateCount } = this
-      if (!stateCount || isNaN(Number(stateCount))) {
-        return stateCount
+      const { sCount } = this
+      if (!sCount || isNaN(sCount)) {
+        return sCount
       }
-      return getNumberArray(stateCount)
+      return getNumberArray(sCount)
         .map((num, i) => this.renderCurrentNumber(num, i)).reverse()
     },
   },
+
   render () {
-    const { prefixCls, className, titleNumber, styleNumber } = this
+    const { prefixCls, title, component: Tag = 'sup' } = this
+    const style = getStyle(this, true)
+    // fix https://fb.me/react-unknown-prop
+    const restProps = omit(this.$props, [
+      'count',
+      'component',
+      'prefixCls',
+    ])
+    const newProps = {
+      props: {
+        ...restProps,
+        title,
+      },
+      class: prefixCls,
+      style,
+    }
+    // allow specify the border
+    // mock border-color by box-shadow for compatible with old usage:
+    // <Badge count={4} style={{ backgroundColor: '#fff', color: '#999', borderColor: '#d9d9d9' }} />
+    if (style && style.borderColor) {
+      newProps.style.boxShadow = `0 0 0 1px ${style.borderColor} inset`
+    }
     return (
-      <sup
-        class={[prefixCls, className]}
-        title={titleNumber}
-        style={styleNumber}>
-        {
-          this.renderNumberElement()
-        }
-      </sup>
+      <Tag {...newProps}>
+        { this.renderNumberElement()}
+      </Tag>
     )
   },
 }
+
 </script>

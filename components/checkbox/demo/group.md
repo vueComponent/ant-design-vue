@@ -21,7 +21,6 @@ Generate a group of checkboxes from an array
   </div>
 </template>
 <script>
-import { Checkbox } from 'antd'
 const plainOptions = ['Apple', 'Pear', 'Orange']
 const options = [
   { label: 'Apple', value: 'Apple' },
@@ -47,9 +46,6 @@ export default {
       console.log('checked = ', checkedValues)
       console.log('value = ', this.value)
     },
-  },
-  components: {
-    Checkbox,
   },
 }
 </script>

@@ -40,7 +40,6 @@ Communicated with other components
   </div>
 </template>
 <script>
-import { Checkbox, Button } from 'antd'
 export default {
   data () {
     return {
@@ -64,10 +63,6 @@ export default {
     onChange (e) {
       this.checked = e.target.checked
     },
-  },
-  components: {
-    Checkbox,
-
   },
 }
 </script>

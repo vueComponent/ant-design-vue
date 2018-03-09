@@ -10,29 +10,34 @@
 
 ```html
 <template>
-  <a-badge :count="count">
-    <a href="#" class="head-example"></a>
-  </a-badge>
-  <a-button-group>
-    <a-button @click="decline">
-      <a-icon type="minus"></a-icon>
-    </a-button>
-    <a-button @click="increase">
-      <a-icon type="plus"></a-icon>
-    </a-button>
-  </a-button-group>
-  <br />
-  <a-badge :dot="isShow">
-    <a href="#" class="head-example()"></a>
-  </a-badge>
-  <a-button @click="changeShow()">toggle</a-button>
+  <div>
+    <div>
+      <a-badge :count="count">
+        <a href="#" class="head-example" />
+      </a-badge>
+      <a-button-group>
+        <a-button @click="decline">
+          <a-icon type="minus" />
+        </a-button>
+        <a-button @click="increase">
+          <a-icon type="plus" />
+        </a-button>
+      </a-button-group>
+    </div>
+    <div style="margin-top: 10px">
+      <a-badge :dot="show">
+        <a href="#" class="head-example" />
+      </a-badge>
+      <a-switch v-model="show" />
+    </div>
+  </div>
 </template>
 <script>
 export default {
   data(){
     return {
-      count: 3,
-      isShow: true,
+      count: 5,
+      show: true,
     }
   },
   methods: {
@@ -44,13 +49,9 @@ export default {
       this.count = count
     },
     increase () {
-      const count = this.count+1
-      this.count = count // 为什么不用this.count++?省事还简单？
+      this.count++
     },
-    changeShow () {
-      this.isShow = !this.isShow
-    }
   }
 }
-</script>     
+</script>
 ```

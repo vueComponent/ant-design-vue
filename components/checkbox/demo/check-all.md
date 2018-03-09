@@ -4,7 +4,7 @@
 </cn>
 
 <us>
-#### Check all 
+#### Check all
 The `indeterminate` property can help you to achieve a 'check all' effect.
 </us>
 
@@ -25,7 +25,6 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   </div>
 </template>
 <script>
-import { Checkbox } from 'antd'
 const plainOptions = ['Apple', 'Pear', 'Orange']
 const defaultCheckedList = ['Apple', 'Orange']
 export default {
@@ -49,10 +48,6 @@ export default {
         checkAll: e.target.checked,
       })
     },
-  },
-  components: {
-    Checkbox,
-    CheckboxGroup: Checkbox.Group,
   },
 }
 </script>

@@ -49,6 +49,7 @@ export default {
   },
   model: {
     prop: 'current',
+    event: 'change',
   },
   data () {
     const hasOnChange = this.onChange !== noop

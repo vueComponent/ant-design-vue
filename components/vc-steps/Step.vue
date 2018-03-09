@@ -34,9 +34,10 @@ export default {
   methods: {
     renderIconNode () {
       const {
-        prefixCls, progressDot, stepNumber, status, title, description, icon,
+        prefixCls, progressDot, stepNumber, status, title, description,
         iconPrefix,
       } = getOptionProps(this)
+      const icon = this.icon || this.$slots.default
       let iconNode
       const iconClassName = {
         [`${prefixCls}-icon`]: true,

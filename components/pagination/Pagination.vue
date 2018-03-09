@@ -39,6 +39,7 @@ export default {
   },
   model: {
     prop: 'current',
+    event: 'change',
   },
   methods: {
     renderPagination (locale) {

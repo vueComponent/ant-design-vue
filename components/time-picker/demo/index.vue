@@ -28,7 +28,7 @@ export default {
   title: 'TimePicker',
   render () {
     return (
-      <div>
+      <div id='components-timepicker-demo'>
         <md cn={md.cn} us={md.us}/>
         <Hours/>
         <Addon/>
@@ -48,5 +48,5 @@ export default {
 }
 </script>
 <style>
-.code-box-demo .ant-time-picker { margin: 0 8px 12px 0; }
+#components-timepicker-demo .ant-time-picker { margin: 0 8px 12px 0; }
 </style>

@@ -12,9 +12,9 @@ Used in standalone when children is empty.
 ```html
 <template>
   <div>
-    <a-badge count=25 />
-    <a-badge count=4 :styles="{backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
-    <a-badge count=109 :styles= "{backgroundColor: '#52c41a'} " />
+    <a-badge count="25" />
+    <a-badge count="4" :numberStyle="{backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
+    <a-badge count="109" :numberStyle= "{backgroundColor: '#52c41a'} " />
   </div>
 </template>
 ```

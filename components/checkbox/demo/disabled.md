@@ -16,12 +16,4 @@ Disabled checkbox
     <a-checkbox defaultChecked disabled />
   </div>
 </template>
-<script>
-import { Checkbox } from 'antd'
-export default {
-  components: {
-    Checkbox,
-  },
-}
-</script>
 ```

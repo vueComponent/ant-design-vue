@@ -10,17 +10,19 @@
 
 ```html
 <template>
-  <a-badge count=99>
-    <a href="#" class="head-example"></a>
-  </a-badge>
-  <a-badge count=100>
-    <a href="#" class="head-example"></a>
-  </a-badge>
-  <a-badge count=99 overflowCount=10>
-    <a href="#" class="head-example"></a>
-  </a-badge>
-  <a-badge count=1000 overflowCount=999>
-    <a href="#" class="head-example"></a>
-  </a-badge>
+  <div>
+    <a-badge :count="99">
+      <a href="#" class="head-example"></a>
+    </a-badge>
+    <a-badge :count="100">
+      <a href="#" class="head-example"></a>
+    </a-badge>
+    <a-badge :count="99" :overflowCount="10">
+      <a href="#" class="head-example"></a>
+    </a-badge>
+    <a-badge :count="1000" :overflowCount="999">
+      <a href="#" class="head-example"></a>
+    </a-badge>
+  </div>
 </template>
 ```

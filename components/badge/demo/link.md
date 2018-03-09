@@ -10,11 +10,10 @@
 
 ```html
 <template>
-  <a-badge dot>
-    <Icon type="notification"></Icon>
-  </a-badge>
-  <a-badge dot>
-    <a href="#" class="head-example">Link something</a>
-  </a-badge>
+  <a href="#">
+    <a-badge count="5">
+      <span class="head-example" />
+    </a-badge>
+  </a>
 </template>
 ```

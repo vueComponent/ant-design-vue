@@ -1,128 +1,114 @@
-<template>
-  <span :class="badgeComputedCls.badgeCls">
-    <template v-if="isStatusBadge">
-      <span :class="badgeComputedCls.statusCls"></span>
-      <span :class="[prefixCls+'-status-text']">{{text}}</span>
-    </template>
-    <template v-else>
-      <slot></slot><transition appear :name="transitionName">
-        <scroll-number
-          v-if="!badgeStatus.isHidden"
-          :prefixCls="scrollNumberPrefixCls"
-          :className="badgeComputedCls.scrollNumberCls"
-          :count="badgeStatus.stateCount"
-          :titleNumber="count"
-          :styleNumber="styles"
-          >
-        </scroll-number>
-      </transition>
-      <span
-        v-if="!badgeStatus.isHidden && text"
-        :class="[prefixCls+'-status-text']">
-        {{text}}
-      </span>
-    </template>
-  </span>
-</template>
 <script>
-import Icon from '../icon'
+import PropTypes from '../_util/vue-types'
 import ScrollNumber from './ScrollNumber'
+import classNames from 'classnames'
+import { initDefaultProps, filterEmpty } from '../_util/props-util'
+import getTransitionProps from '../_util/getTransitionProps'
+
+export const BadgeProps = {
+  /** Number to show in badge */
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  showZero: PropTypes.bool,
+  /** Max count to show */
+  overflowCount: PropTypes.number,
+  /** whether to show red dot without number */
+  dot: PropTypes.bool,
+  prefixCls: PropTypes.string,
+  scrollNumberPrefixCls: PropTypes.string,
+  status: PropTypes.oneOf(['success', 'processing', 'default', 'error', 'warning']),
+  text: PropTypes.string,
+  offset: PropTypes.array,
+  numberStyle: PropTypes.object.def({}),
+}
 
 export default {
-  name: 'Badge',
-  props: {
-    prefixCls: {
-      type: String,
-      default: 'ant-badge',
-    },
-    scrollNumberPrefixCls: {
-      type: String,
-      default: 'ant-scroll-number',
-    },
-    count: {
-      type: [Number, String],
-    },
-    overflowCount: {
-      type: [Number, String],
-      default: 99,
-    },
-    showZero: {
-      type: Boolean,
-      default: false,
-    },
-    dot: {
-      type: Boolean,
-      default: false,
-    },
-    status: {
-      validator: (val) => {
-        if (!val) return true
-        return ['success', 'processing', 'default', 'error', 'warning'].includes(val)
-      },
-      default: '',
-    },
-    text: {
-      type: String,
-      default: '',
-    },
-    styles: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-  data () {
-    const { prefixCls, $slots } = this
-    const isHasDefaultSlot = $slots && !!$slots.default
-    return {
-      isHasDefaultSlot,
-      transitionName: isHasDefaultSlot ? `${prefixCls}-zoom` : '',
+  props: initDefaultProps(BadgeProps, {
+    prefixCls: 'ant-badge',
+    scrollNumberPrefixCls: 'ant-scroll-number',
+    count: null,
+    showZero: false,
+    dot: false,
+    overflowCount: 99,
+  }),
+
+  render () {
+    const {
+      count,
+      showZero,
+      prefixCls,
+      scrollNumberPrefixCls,
+      overflowCount,
+      dot,
+      status,
+      text,
+      offset,
+      $slots,
+      numberStyle,
+    } = this
+    const isDot = dot || status
+    let displayCount = count > overflowCount ? `${overflowCount}+` : count
+    // dot mode don't need count
+    if (isDot) {
+      displayCount = ''
     }
-  },
-  computed: {
-    isStatusBadge () {
-      const { isHasDefaultSlot, status } = this
-      return !isHasDefaultSlot && status
-    },
-    badgeComputedCls () {
-      const { prefixCls, isHasDefaultSlot, status, dot, count } = this
-      const isDot = dot || status
-      return {
-        badgeCls: {
-          [`${prefixCls}`]: true,
-          [`${prefixCls}-status`]: !!status,
-          [`${prefixCls}-not-a-wrapper`]: !isHasDefaultSlot,
-        },
-        statusCls: {
-          [`${prefixCls}-status-dot`]: !!status,
-          [`${prefixCls}-status-${status}`]: !isHasDefaultSlot,
-        },
-        scrollNumberCls: {
-          [`${prefixCls}-dot`]: isDot,
-          [`${prefixCls}-count`]: !isDot,
-          [`${prefixCls}-multiple-words`]: count && count.toString && count.toString().length > 1,
-          [`${prefixCls}-status-${status}`]: !isHasDefaultSlot,
-        },
-      }
-    },
-    badgeStatus () {
-      const { count, overflowCount, showZero, dot, text } = this
-      let stateCount = +count > +overflowCount ? `${overflowCount}+` : count
-      const isDot = dot || text
-      if (isDot) {
-        stateCount = ''
-      }
-      const isZero = stateCount === '0' || stateCount === 0
-      const isEmpty = stateCount === null || stateCount === undefined || stateCount === ''
-      const isHidden = (isEmpty || (isZero && !showZero)) && !isDot
-      return {
-        stateCount,
-        isHidden,
-      }
-    },
-  },
-  components: {
-    Icon,
-    ScrollNumber,
+    const children = filterEmpty($slots.default)
+    const isZero = displayCount === '0' || displayCount === 0
+    const isEmpty = displayCount === null || displayCount === undefined || displayCount === ''
+    const hidden = (isEmpty || (isZero && !showZero)) && !isDot
+    const statusCls = classNames({
+      [`${prefixCls}-status-dot`]: !!status,
+      [`${prefixCls}-status-${status}`]: !!status,
+    })
+    const scrollNumberCls = classNames({
+      [`${prefixCls}-dot`]: isDot,
+      [`${prefixCls}-count`]: !isDot,
+      [`${prefixCls}-multiple-words`]: count && count.toString && count.toString().length > 1,
+      [`${prefixCls}-status-${status}`]: !!status,
+    })
+    const badgeCls = classNames(prefixCls, {
+      [`${prefixCls}-status`]: !!status,
+      [`${prefixCls}-not-a-wrapper`]: !children.length,
+    })
+    const styleWithOffset = offset ? {
+      marginTop: offset[0],
+      marginLeft: offset[1],
+      ...numberStyle,
+    } : numberStyle
+    // <Badge status="success" />
+
+    if (!children.length && status) {
+      return (
+        <span class={badgeCls} style={styleWithOffset}>
+          <span class={statusCls} />
+          <span class={`${prefixCls}-status-text`}>{text}</span>
+        </span>
+      )
+    }
+
+    const scrollNumber = hidden ? null : (
+      <ScrollNumber
+        prefixCls={scrollNumberPrefixCls}
+        v-show={!hidden}
+        class={scrollNumberCls}
+        count={displayCount}
+        title={count}
+        style={styleWithOffset}
+      />
+    )
+
+    const statusText = (hidden || !text) ? null : (
+      <span class={`${prefixCls}-status-text`}>{text}</span>
+    )
+    const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '')
+
+    return (<span class={badgeCls}>
+      {children}
+      <transition {...transitionProps}>
+        {scrollNumber}
+      </transition>
+      {statusText}
+    </span>)
   },
 }
+
 </script>

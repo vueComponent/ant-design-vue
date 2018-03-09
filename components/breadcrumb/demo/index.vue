@@ -27,7 +27,7 @@
   }
 
   export default {
-    render() {
+    render () {
       return (
         <div>
           <md cn={md.cn} us={md.us} />
@@ -40,6 +40,6 @@
           </api>
         </div>
       )
-    }
+    },
   }
 </script>

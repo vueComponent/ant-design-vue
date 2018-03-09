@@ -277,14 +277,16 @@ export default {
           </li>
         )
       }
+      const hasPrev = this.hasPrev()
+      const hasNext = this.hasNext()
       return (
         <ul class={`${prefixCls} ${prefixCls}-simple`}>
           <li
             title={this.showTitle ? locale.prev_page : null}
             onClick={this.prev}
-            tabIndex='0'
+            tabIndex={hasPrev ? 0 : null}
             onKeypress={this.runIfEnterPrev}
-            class={`${this.hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
+            class={`${hasPrev ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
             {this.itemRender(prevPage, 'prev', <a class={`${prefixCls}-item-link`} />)}
@@ -309,7 +311,7 @@ export default {
             onClick={this.next}
             tabIndex='0'
             onKeypress={this.runIfEnterNext}
-            class={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
+            class={`${hasNext ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
             {this.itemRender(nextPage, 'next', <a class={`${prefixCls}-item-link`} />)}
@@ -493,7 +495,7 @@ export default {
         <li
           title={this.showTitle ? locale.prev_page : null}
           onClick={this.prev}
-          tabIndex='0'
+          tabIndex={prevDisabled ? null : 0}
           onKeypress={this.runIfEnterPrev}
           class={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
@@ -504,7 +506,7 @@ export default {
         <li
           title={this.showTitle ? locale.next_page : null}
           onClick={this.next}
-          tabIndex='0'
+          tabIndex={nextDisabled ? null : 0}
           onKeypress={this.runIfEnterNext}
           class={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}

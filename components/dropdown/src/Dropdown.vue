@@ -89,7 +89,7 @@ export default {
         const overlayNode = this.getPopupDomNode()
         const rootNode = this.$el
         if (rootNode && overlayNode && rootNode.offsetWidth > overlayNode.offsetWidth) {
-          overlayNode.style.width = `${rootNode.offsetWidth}px`
+          overlayNode.style.minWidth = `${rootNode.offsetWidth}px`
           if (this.$refs.trigger &&
             this.$refs.trigger._component &&
             this.$refs.trigger._component.alignInstance) {

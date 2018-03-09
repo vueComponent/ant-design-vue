@@ -20,9 +20,10 @@ const DialogWrap = {
     if (this.visible) {
       this.renderComponent({
         afterClose: this.removeContainer,
-        onClose () {
-        },
         visible: false,
+        on: {
+          close () {},
+        },
       })
     } else {
       this.removeContainer()
@@ -31,18 +32,21 @@ const DialogWrap = {
   methods: {
     getComponent (extra = {}) {
       const { $attrs, $listeners, $props, $slots } = this
-
+      const { on, ...otherProps } = extra
       const dialogProps = {
         props: {
           ...$props,
           dialogClass: getClass(this),
           dialogStyle: getStyle(this),
-          ...extra,
+          ...otherProps,
         },
         attrs: $attrs,
         ref: '_component',
         key: 'dialog',
-        on: $listeners,
+        on: {
+          ...$listeners,
+          ...on,
+        },
       }
       return (
         <Dialog {...dialogProps}>{$slots.default}</Dialog>

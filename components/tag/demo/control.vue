@@ -10,12 +10,12 @@
         {{tag}}
       </Tag>
     </template>
-    <Input
+    <a-input
       v-if="inputVisible"
       ref="input"
       type="text"
       size="small"
-      :style="{ width: 78 }"
+      :style="{ width: '78px' }"
       :value="inputValue"
       @change="handleInputChange"
       @blur="handleInputConfirm"

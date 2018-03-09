@@ -108,3 +108,7 @@ const api = {
   modalConfirm: confirm,
 }
 export { api }
+
+import Steps from './steps'
+const { Step } = Steps
+export { Steps, Step }

@@ -3,8 +3,17 @@ import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import debounce from 'lodash/debounce'
 import isFlexSupported from '../_util/isFlexSupported'
-import { getOptionProps, filterEmpty, getEvents, getClass, getStyle, getValueByProp } from '../_util/props-util'
-import { cloneElement } from '../_util/vnode'
+import {
+  getOptionProps,
+  filterEmpty,
+  getEvents,
+  getClass,
+  getStyle,
+  getValueByProp,
+  getPropsData,
+  getComponentFromProp,
+} from '../_util/props-util'
+import Step from './Step'
 
 export default {
   name: 'Steps',
@@ -64,8 +73,8 @@ export default {
         // +1 for fit edge bug of digit width, like 35.4px
           const lastStepOffsetWidth = (domNode.lastChild.offsetWidth || 0) + 1
           // Reduce shake bug
-          if (this.state.lastStepOffsetWidth === lastStepOffsetWidth ||
-            Math.abs(this.state.lastStepOffsetWidth - lastStepOffsetWidth) <= 3) {
+          if (this.lastStepOffsetWidth === lastStepOffsetWidth ||
+            Math.abs(this.lastStepOffsetWidth - lastStepOffsetWidth) <= 3) {
             return
           }
           this.setState({ lastStepOffsetWidth })
@@ -102,6 +111,7 @@ export default {
       <div {...stepsProps}>
         {
           filteredChildren.map((child, index) => {
+            const childProps = getPropsData(child)
             let className = getClass(child)
             // fix tail color
             if (status === 'error' && index === current - 1) {
@@ -124,6 +134,7 @@ export default {
             }
             const stepProps = {
               props: {
+                ...childProps,
                 stepNumber: `${index + 1}`,
                 prefixCls,
                 iconPrefix,
@@ -134,7 +145,7 @@ export default {
               class: className,
               style: stepStyle,
             }
-            return cloneElement(child, stepProps)
+            return <Step {...stepProps}>{getComponentFromProp(child, 'icon')}</Step>
           })
         }
       </div>

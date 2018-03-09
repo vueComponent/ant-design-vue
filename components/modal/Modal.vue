@@ -63,6 +63,10 @@ export default {
     visible: false,
     okType: 'primary',
   }),
+  model: {
+    prop: 'visible',
+    event: 'change',
+  },
   // static info: ModalFunc;
   // static success: ModalFunc;
   // static error: ModalFunc;
@@ -72,6 +76,7 @@ export default {
   methods: {
     handleCancel (e) {
       this.$emit('cancel', e)
+      this.$emit('change', false)
     },
 
     handleOk (e) {
@@ -131,7 +136,7 @@ export default {
       props: {
         ...this.$props,
         title,
-        footer: typeof footer === undefined ? defaultFooter : footer,
+        footer: footer === undefined ? defaultFooter : footer,
         visible: visible,
         mousePosition,
       },

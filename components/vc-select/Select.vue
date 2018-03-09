@@ -377,6 +377,7 @@ export default {
 
     onArrowClick (e) {
       e.stopPropagation()
+      e.preventDefault()
       if (!this.disabled) {
         this.setOpenState(!this.openStatus, !this.openStatus)
       }

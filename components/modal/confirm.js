@@ -2,7 +2,10 @@ import Vue from 'vue'
 import ConfirmDialog from './ConfirmDialog'
 export default function confirm (config) {
   const div = document.createElement('div')
+  const el = document.createElement('div')
+  div.appendChild(el)
   document.body.appendChild(div)
+
   let confirmDialogInstance = null
   function close (...args) {
     destroy(...args)
@@ -23,7 +26,7 @@ export default function confirm (config) {
 
   function render (props) {
     return new Vue({
-      el: div,
+      el: el,
       render () {
         return <ConfirmDialog {...props} />
       },

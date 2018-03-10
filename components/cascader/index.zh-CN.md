@@ -12,7 +12,7 @@
 | changeOnSelect | 当此项为 true 时，点选每级菜单选项值都会发生变化，具体见上面的演示 | boolean | false |
 | defaultValue | 默认的选中项 | string\[] | \[] |
 | disabled | 禁用 | boolean | false |
-| displayRender | 选择后展示的渲染函数,可使用slot="displayRender" 和 slot-scope="props" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
+| displayRender | 选择后展示的渲染函数,可使用slot="displayRender" 和 slot-scope="{labels, selectedOptions}" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
 | expandTrigger | 次级菜单的展开方式，可选 'click' 和 'hover' | string | 'click' |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |
 | loadData | 用于动态加载选项，无法与 `showSearch` 一起使用 | `(selectedOptions) => void` | - |
@@ -33,7 +33,7 @@
 | --- | --- | --- | --- |
 | filter | 接收 `inputValue` `path` 两个参数，当 `path` 符合筛选条件时，应返回 true，反之则返回 false。 | `function(inputValue, path): boolean` |  |
 | matchInputWidth | 搜索结果列表是否与输入框同宽 | boolean |  |
-| render | 用于渲染 filter 后的选项,可使用slot="showSearchRender" 和 slot-scope="props" | `function({inputValue, path}): vNode` |  |
+| render | 用于渲染 filter 后的选项,可使用slot="showSearchRender" 和 slot-scope="{inputValue, path}" | `function({inputValue, path}): vNode` |  |
 | sort | 用于排序 filter 后的选项 | `function(a, b, inputValue)` |  |
 
 ### 事件

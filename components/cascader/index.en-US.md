@@ -12,7 +12,7 @@
 | changeOnSelect | change value on each selection if set to true, see above demo for details | boolean | false |
 | defaultValue | initial selected value | string\[] | \[] |
 | disabled | whether disabled select | boolean | false |
-| displayRender | render function of displaying selected options, you can use slot="displayRender" and slot-scope="props" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
+| displayRender | render function of displaying selected options, you can use slot="displayRender" and slot-scope="{labels, selectedOptions}" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
 | expandTrigger | expand current item when click or hover, one of 'click' 'hover' | string | 'click' |
 | getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | Function(triggerNode) | () => document.body |
 | loadData | To load option lazily, and it cannot work with `showSearch` | `(selectedOptions) => void` | - |
@@ -33,7 +33,7 @@ Fields in `showSearch`:
 | -------- | ----------- | ---- | ------- |
 | filter | The function will receive two arguments, inputValue and option, if the function returns true, the option will be included in the filtered set; Otherwise, it will be excluded. | `function(inputValue, path): boolean` |  |
 | matchInputWidth | Whether the width of result list equals to input's | boolean |  |
-| render | Used to render filtered options, you can use slot="showSearchRender" and slot-scope="props" | `function({inputValue, path}): vNode` |  |
+| render | Used to render filtered options, you can use slot="showSearchRender" and slot-scope="{inputValue, path}" | `function({inputValue, path}): vNode` |  |
 | sort | Used to sort filtered options. | `function(a, b, inputValue)` |  |
 
 ### events

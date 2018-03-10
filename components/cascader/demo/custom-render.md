@@ -12,10 +12,10 @@ For instance, add an external link after the selected value.
 ```html
 <template>
   <a-cascader :options="options" :defaultValue="['zhejiang', 'hangzhou', 'xihu']" style="width: 100%">
-    <template slot="displayRender" slot-scope="props">
-      <span v-for="(label, index) in props.labels" :key="props.selectedOptions[index].value">
-        <span v-if="index === props.labels.length - 1">
-        {{label}} (<a @click="e => handleAreaClick(e, label, props.selectedOptions[index])">{{props.selectedOptions[index].code}}</a>)
+    <template slot="displayRender" slot-scope="{labels, selectedOptions}">
+      <span v-for="(label, index) in labels" :key="selectedOptions[index].value">
+        <span v-if="index === labels.length - 1">
+        {{label}} (<a @click="e => handleAreaClick(e, label, selectedOptions[index])">{{selectedOptions[index].code}}</a>)
         </span>
         <span v-else @click="onChange">
           {{label}} / 

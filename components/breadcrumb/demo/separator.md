@@ -1,33 +1,30 @@
 <cn>
   #### 分隔符
-  使用` separator=">" `可以自定义分隔符
+  使用` separator=">" `可以自定义分隔符，或者使用slot="separator"自定义更复杂的分隔符
 </cn>
 
 <us>
   #### Configuring the Separator
-  The separator can be customized by setting the separator preperty: separator=">"
+  The separator can be customized by setting the separator preperty: separator=">" or use 
+  slot="separator"
 </us>
 
 ```html
 <template>
-<Breadcrumb separator=">">
-  <BreadcrumbItem>Home</BreadcrumbItem>
-  <BreadcrumbItem href="">Application Center</BreadcrumbItem>
-  <BreadcrumbItem href="">Application List</BreadcrumbItem>
-  <BreadcrumbItem>An Application</BreadcrumbItem>
-</Breadcrumb>
+<div>
+  <a-breadcrumb separator=">">
+    <a-breadcrumb-item>Home</a-breadcrumb-item>
+    <a-breadcrumb-item href="">Application Center</a-breadcrumb-item>
+    <a-breadcrumb-item href="">Application List</a-breadcrumb-item>
+    <a-breadcrumb-item>An Application</a-breadcrumb-item>
+  </a-breadcrumb>
+  <a-breadcrumb>
+    <span slot="separator" style="color: red">></span>
+    <a-breadcrumb-item>Home</a-breadcrumb-item>
+    <a-breadcrumb-item href="">Application Center</a-breadcrumb-item>
+    <a-breadcrumb-item href="">Application List</a-breadcrumb-item>
+    <a-breadcrumb-item>An Application</a-breadcrumb-item>
+  </a-breadcrumb>
+</div>
 </template>
-
-<script>
-import '../style'
-import { Icon, Breadcrumb } from 'antd/index'
-export default {
-  components: {
-    Icon,
-    Breadcrumb,
-    BreadcrumbItem: Breadcrumb.Item,
-  },
-}
-</script>
-
 ```

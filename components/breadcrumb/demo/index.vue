@@ -2,6 +2,7 @@
   import Basic from './basic.md'
   import WithIcon from './withIcon.md'
   import Separator from './separator.md'
+  import Router from './router'
 
   import US from './../index.en-US.md'
   import CN from './../index.zh-CN.md'
@@ -27,6 +28,10 @@
   }
 
   export default {
+    category: 'Components',
+    subtitle: '面包屑',
+    type: 'Navigation',
+    title: 'Breadcrumb',
     render () {
       return (
         <div>
@@ -34,6 +39,7 @@
           <Basic />
           <WithIcon />
           <Separator />
+          <Router/>
           <api>
             <CN slot='cn' />
             <US />

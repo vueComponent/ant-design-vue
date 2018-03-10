@@ -16,7 +16,9 @@ export default {
         } else {
           this.$listeners[eventName](...args.slice(1))
         }
+        return true
       }
+      return false
     },
   },
 }

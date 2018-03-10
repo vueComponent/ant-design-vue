@@ -1,88 +1,71 @@
-<template>
-  <div>
-    基本
-    <Pagination :current="1" :total="50" />
-    <br>
-    更多
-    <Pagination :current="6" :total="500" />
-    <br>
-    简洁
-    <div style="margin-bottom:10px">
-      <pagination :simple="simple" :current="5" :total="total"></pagination>
-    </div>
-    <br>
-    改值操作
-    <div style="margin-bottom:10px">
-      <pagination :current="current" :total="total" @change="onchange"></pagination>
-      <vc-button @click="changeValue">改值</vc-button>
-    </div>
-    <br>
-    双向绑定
-    <div>
-      <pagination v-model="current" :total="total" :showTotal="showTotal"></pagination>
-      <vc-button @click="getValue">当前值</vc-button>
-    </div>
-    <br>
-    迷你
-    <Pagination :current="1" :total="50" size="small"/>
-    <Pagination :current="1" :total="50" :showTotal="showTotal" size="small" showSizeChanger showQuickJumper/>
-    <br>
-    总数
-    <Pagination :current="1" :total="50" :showTotal="showTotal"/>
-    <Pagination :current="1" :total="50" :showTotal="showTotal1"/>
-    <br>
-    跳转
-    <Pagination v-model="current" :total="50" :showQuickJumper="showQuickJumper" showSizeChanger>
-      <template slot='buildOptionText' slot-scope='props'>
-        <span>{{props.value}}条/页</span>
-      </template>
-    </Pagination>
-    <vc-button @click="getValue">当前值</vc-button>
-    <br>
-    上一步下一步
-    <Pagination :total="500" :itemRender="itemRender" />
-  </div>
-</template>
 <script>
-import '../style'
-import { Pagination, Button } from 'antd/index'
+import Basic from './basic'
+import Changer from './changer'
+import Controlled from './controlled'
+import CustomChanger from './custom-changer'
+import ItemRender from './itemRender'
+import Jump from './jump'
+import Mini from './mini'
+import More from './more'
+import Simple from './simple'
+import Total from './total'
+import CN from '../index.zh-CN.md'
+import US from '../index.en-US.md'
+
+const md = {
+  cn: `# Pagination
+
+    采用分页的形式分隔长列表，每次只加载一个页面。
+
+    ## 何时使用
+
+    - 当加载/渲染所有数据将花费很多时间时；
+    - 可切换页码浏览数据。
+
+    ## 代码演示`,
+
+  us: `# Pagination
+
+    A long list can be divided into several pages by 'Pagination', and only one page will be loaded at a time.
+
+    ## When To Use
+
+    - When it will take a long time to load/render all items.
+    - If you want to browse the data by navigating through pages.`,
+}
 export default {
-  data () {
-    return {
-      simple: true,
-      current: 1,
-      total: 483,
-      showQuickJumper: true,
-    }
-  },
-  methods: {
-    changeValue () {
-      this.current = 4
-    },
-    getValue () {
-      console.log(this.current)
-    },
-    showTotal (total) {
-      return `Total ${total} items`
-    },
-    showTotal1 (total, range) {
-      return `${range[0]}-${range[1]} of ${total} items`
-    },
-    onchange (page) {
-      console.log(page)
-    },
-    itemRender (current, type, originalElement) {
-      if (type === 'prev') {
-        return <a>Previous</a>
-      } else if (type === 'next') {
-        return <a>Next</a>
-      }
-      return originalElement
-    },
-  },
-  components: {
-    Pagination,
-    vcButton: Button,
+  render () {
+    return (
+      <div>
+        <md cn={md.cn} us={md.us}/>
+        <Basic />
+        <br/>
+        <More />
+        <br/>
+        <Changer />
+        <br/>
+        <CustomChanger />
+        <br/>
+        <Jump />
+        <br/>
+        <Mini />
+        <br/>
+        <Simple />
+        <br/>
+        <Controlled />
+        <br/>
+        <Total />
+        <br/>
+        <ItemRender />
+        <br/>
+        <api>
+          <template slot='cn'>
+            <CN/>
+          </template>
+          <US/>
+        </api>
+      </div>
+    )
   },
 }
 </script>

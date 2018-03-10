@@ -10,30 +10,17 @@
 
 ```html
 <template>
-<Breadcrumb>
-  <BreadcrumbItem href="">
-    <Icon type="home" />
-  </BreadcrumbItem>
-  <BreadcrumbItem href="">
-    <Icon type="user" />
+<a-breadcrumb>
+  <a-breadcrumb-item href="">
+    <a-icon type="home" />
+  </a-breadcrumb-item>
+  <a-breadcrumb-item href="">
+    <a-icon type="user" />
     <span>Application List</span>
-  </BreadcrumbItem>
-  <BreadcrumbItem>
+  </a-breadcrumb-item>
+  <a-breadcrumb-item>
     Application
-  </BreadcrumbItem>
-</Breadcrumb>
+  </a-breadcrumb-item>
+</a-breadcrumb>
 </template>
-
-<script>
-import '../style'
-import { Icon, Breadcrumb } from 'antd/index'
-export default {
-  components: {
-    Icon,
-    Breadcrumb,
-    BreadcrumbItem: Breadcrumb.Item,
-  },
-}
-</script>
-
 ```

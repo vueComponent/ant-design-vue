@@ -145,7 +145,13 @@ export default {
               class: className,
               style: stepStyle,
             }
-            return <Step {...stepProps}>{getComponentFromProp(child, 'icon')}</Step>
+            return (
+              <Step {...stepProps}>
+                <template slot='icon'>{getComponentFromProp(child, 'icon')}</template>
+                <template slot='description'>{getComponentFromProp(child, 'description')}</template>
+                <template slot='title'>{getComponentFromProp(child, 'title')}</template>
+              </Step>
+            )
           })
         }
       </div>

@@ -34,10 +34,12 @@ export default {
   methods: {
     renderIconNode () {
       const {
-        prefixCls, progressDot, stepNumber, status, title, description,
+        prefixCls, progressDot, stepNumber, status,
         iconPrefix,
       } = getOptionProps(this)
-      const icon = this.icon || this.$slots.default
+      const icon = this.icon || this.$slots.icon
+      const title = this.title || this.$slots.title
+      const description = this.description || this.$slots.description
       let iconNode
       const iconClassName = {
         [`${prefixCls}-icon`]: true,
@@ -71,10 +73,12 @@ export default {
   render () {
     const {
       prefixCls,
-      status = 'wait', icon,
-      description, title, tailContent,
+      status = 'wait', icon, tailContent,
       ...restProps
     } = getOptionProps(this)
+
+    const title = this.title || this.$slots.title
+    const description = this.description || this.$slots.description
 
     const classString = {
       [`${prefixCls}-item`]: true,

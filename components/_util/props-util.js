@@ -79,7 +79,11 @@ const getComponentFromProp = (instance, prop) => {
     const componentOptions = instance.componentOptions || {};
     (componentOptions.children || []).forEach((child) => {
       if (child.data && child.data.slot === prop) {
-        slotsProp.push(child)
+        if (child.tag === 'template') {
+          slotsProp.push(child.children)
+        } else {
+          slotsProp.push(child)
+        }
       }
     })
     return slotsProp.length ? slotsProp : undefined

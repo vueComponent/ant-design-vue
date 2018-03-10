@@ -1,0 +1,106 @@
+.@{prefixClass} {
+  &-input-wrap {
+    position: relative;
+    padding: 6px;
+    border-bottom: 1px solid #e9e9e9;
+    &:after {
+      content: '';
+      clear: both;
+    }
+  }
+
+  &-date-input-wrap {
+    overflow: hidden;
+  }
+  &-time-picker {
+    position: absolute;
+    width: 100%;
+    top: 34px;
+    background-color: white;
+    height: 217px;
+    &-panel {
+      width: 100%;
+      position: relative;
+      .@{timePickerClass}-panel {
+        &-input-wrap {
+          display: none;
+        }
+        &-inner {
+          border: none;
+          box-shadow: none;
+        }
+        &-select {
+          width: 84px;
+          ul {
+            max-height: 217px;
+          }
+          li {
+            text-align: center;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+  &-time-picker-wrap {
+    float: left;
+    width: 100%;
+
+    .@{timePickerClass} {
+      width: 100%;
+
+      &-input {
+        padding: 0;
+        border: 1px solid transparent;
+        outline: 0;;
+        height:22px;
+      }
+
+      &-icon {
+        display: none;
+      }
+    }
+  }
+
+  &-input {
+    border: 1px solid transparent;
+    width: 100%;
+    color: #666;
+    cursor: text;
+    line-height: 1.5;
+    outline: 0;
+    height:22px;
+
+    &-invalid {
+      border-color: red;
+    }
+  }
+
+  &-clear-btn {
+    z-index: 9999;
+    position: absolute;
+    right: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    top: 6px;
+    margin: 0;
+  }
+
+  &-clear-btn:after {
+    content: "x";
+    font-size: 12px;
+    color: #aaa;
+    display: inline-block;
+    line-height: 1;
+    width: 20px;
+    transition: color 0.3s ease;
+  }
+
+  &-clear-btn:hover:after {
+    color: #666;
+  }
+}

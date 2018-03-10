@@ -7,7 +7,7 @@ import getTransitionProps from '../_util/getTransitionProps'
 
 export const BadgeProps = {
   /** Number to show in badge */
-  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
   showZero: PropTypes.bool,
   /** Max count to show */
   overflowCount: PropTypes.number,

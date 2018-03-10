@@ -1,30 +1,29 @@
 <script>
   import PropTypes from '../_util/vue-types'
-  import hasProp from '../_util/props-util'
+  import { hasProp, getComponentFromProp } from '../_util/props-util'
 
   export default {
     name: 'BreadcrumbItem',
-    inject: ['breadCrumbParent'],
+    __ANT_BREADCRUMB_ITEM: true,
     props: {
       prefixCls: PropTypes.string.def('ant-breadcrumb'),
       href: PropTypes.string,
+      separator: PropTypes.any,
     },
     render () {
-      const { prefixCls, ...restProps } = this.$props
-      const { breadCrumbParent = {}} = this
-      const { separator = '/' } = breadCrumbParent
-      const solt = this.$slots.default
+      const { prefixCls, $slots } = this
+      const children = $slots.default
       let link
       if (hasProp(this, 'href')) {
-        link = <a class={`${prefixCls}-link`} {...restProps}>{solt}</a>
+        link = <a class={`${prefixCls}-link`}>{children}</a>
       } else {
-        link = <span class={`${prefixCls}-link`} {...restProps}>{solt}</span>
+        link = <span class={`${prefixCls}-link`}>{children}</span>
       }
-      if (solt) {
+      if (children) {
         return (
           <span>
             {link}
-            <span class={`${prefixCls}-separator`}>{separator}</span>
+            <span class={`${prefixCls}-separator`}>{getComponentFromProp(this, 'separator') || '/'}</span>
           </span>
         )
       }

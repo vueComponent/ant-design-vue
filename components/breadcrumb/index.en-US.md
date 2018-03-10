@@ -2,34 +2,44 @@
 
 | Property | Description | Type | Optional | Default |
 | -------- | ----------- | ---- | -------- | ------- |
-| itemRender | Custom item renderer | (route, params, routes, paths) => ReactNode |  | - |
+| itemRender | Custom item renderer, slot="itemRender" and slot-scope="{route, params, routes, paths}"  | ({route, params, routes, paths}) => vNode |  | - |
 | params | Routing parameters | object |  | - |
 | routes | The routing stack information of router | object\[] |  | - |
-| separator | Custom separator | string\|ReactNode |  | `/` |
-
-> `linkRender` and `nameRender` were removed after `antd@2.0`, please use `itemRender` instead.
+| separator | Custom separator | string\|slot |  | `/` |
 
 ### Use with browserHistory
 
 The link of Breadcrumb item targets `#` by default, you can use `itemRender` to make a `browserHistory` Link.
 
-```vue
-import { Link } from 'react-router';
-
-const routes = [{
-  path: 'index',
-  breadcrumbName: 'home'
-}, {
-  path: 'first',
-  breadcrumbName: 'first'
-}, {
-  path: 'second',
-  breadcrumbName: 'second'
-}];
-function itemRender(route, params, routes, paths) {
-  const last = routes.indexOf(route) === routes.length - 1;
-  return last ? <span>{route.breadcrumbName}</span> : <Link to={paths.join('/')}>{route.breadcrumbName}</Link>;
-}
-
-return <Breadcrumb itemRender={itemRender} routes={routes} />;
-```
+````html
+<template>
+<a-breadcrumb :routes="routes">
+  <template slot="itemRender" slot-scope="{route, params, routes, paths}">
+    <span v-if="routes.indexOf(route) === routes.length - 1">
+      {{route.breadcrumbName}}
+    </span>
+    <router-link v-else :to="paths.join('/')">
+      {{route.breadcrumbName}}
+    </router-link>
+  </template>
+</a-breadcrumb>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        routes: [{
+          path: 'index',
+          breadcrumbName: '首页'
+        }, {
+          path: 'first',
+          breadcrumbName: '一级面包屑'
+        }, {
+          path: 'second',
+          breadcrumbName: '当前页面'
+        }],
+      }
+    },
+  }
+</script>
+````

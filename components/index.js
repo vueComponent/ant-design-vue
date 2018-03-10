@@ -42,7 +42,9 @@ const Textarea = InputTextArea
 
 export { Input, InputGroup, InputSearch, InputTextArea, Textarea }
 
-export { default as Breadcrumb } from './breadcrumb'
+import Breadcrumb from './breadcrumb'
+const BreadcrumbItem = Breadcrumb.Item
+export { Breadcrumb, BreadcrumbItem }
 
 export { default as Popover } from './popover'
 

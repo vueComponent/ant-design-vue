@@ -1,7 +1,7 @@
 ## API
 
 ```html
-<Pagination @change={onChange} :total="50" />
+<Pagination @change="onChange" :total="50" />
 ```
 
 | 参数 | 说明 | 类型 | 默认值 |
@@ -10,7 +10,7 @@
 | defaultCurrent | 默认的当前页数 | number | 1 |
 | defaultPageSize | 默认的每页条数 | number | 10 |
 | hideOnSinglePage | 只有一页时是否隐藏分页器 | boolean | false |
-| itemRender | 用于自定义页码的结构，可用于优化 SEO | (page, type: 'page' \| 'prev' \| 'next', originalElement) => React.ReactNode | - |
+| itemRender | 用于自定义页码的结构，可用于优化 SEO | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode | - |
 | pageSize | 每页条数 | number | - |
 | pageSizeOptions | 指定每页可以显示多少条 | string\[] | ['10', '20', '30', '40'] |
 | showQuickJumper | 是否可以快速跳转至某页 | boolean | false |

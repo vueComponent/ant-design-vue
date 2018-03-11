@@ -1,16 +1,16 @@
 ## API
 
 ```html
-<Pagination @change={onChange} :total="50" />
+<Pagination @change="onChange" :total="50" />
 ```
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| current | current page number | number | - |
+| current(v-model) | current page number | number | - |
 | defaultCurrent | default initial page number | number | 1 |
 | defaultPageSize | default number of data items per page | number | 10 |
 | hideOnSinglePage | Whether to hide pager on single page | boolean | false |
-| itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => React.ReactNode | - |
+| itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode | - |
 | pageSize | number of data items per page | number | - |
 | pageSizeOptions | specify the sizeChanger options | string\[] | ['10', '20', '30', '40'] |
 | showQuickJumper | determine whether you can jump to pages directly | boolean | false |

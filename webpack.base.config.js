@@ -94,7 +94,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
       </script>
       ` : ''
     newContent += style ? `
-      <style>
+      <style scoped>
       ${style || ''}
       </style>
       ` : ''

@@ -23,11 +23,11 @@ You can customize the display for Steps with progress dot style.
       return {}
     },
     methods: {
-      customDot(dot, params) {
+      customDot(dot, {index, status}) {
         return (
           <a-popover>
             <template slot="content">
-              <span>step {params.index} status: {params.status}</span>
+              <span>step {index} status: {status}</span>
             </template>
             {dot}
           </a-popover>

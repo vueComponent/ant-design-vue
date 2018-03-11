@@ -29,6 +29,11 @@ const md = {
   When the task is complicated or has a certain sequence in the series of subtasks, we can decompose it into several steps to make things easier.`,
 }
 export default {
+  category: 'Components',
+  subtitle: '步骤条',
+  type: 'Navigation',
+  cols: 1,
+  title: 'Steps',
   render () {
     return (
       <div>

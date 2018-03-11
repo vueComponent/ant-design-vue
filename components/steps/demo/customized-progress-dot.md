@@ -10,7 +10,7 @@ You can customize the display for Steps with progress dot style.
 
 ```html
 <template>
-  <a-steps :current="1" :progressDot="customDot" style="margin-top:150px">
+  <a-steps :current="1" :progressDot="customDot">
     <a-step title="Finished" description="You can hover on the dot." />
     <a-step title="In Progress" description="You can hover on the dot." />
     <a-step title="Waiting" description="You can hover on the dot." />

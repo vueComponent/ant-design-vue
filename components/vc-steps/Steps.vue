@@ -7,13 +7,9 @@ import {
   getOptionProps,
   filterEmpty,
   getEvents,
-  getClass,
-  getStyle,
-  getValueByProp,
   getPropsData,
-  getComponentFromProp,
 } from '../_util/props-util'
-import Step from './Step'
+import { cloneElement } from '../_util/vnode'
 
 export default {
   name: 'Steps',
@@ -23,7 +19,6 @@ export default {
     iconPrefix: PropTypes.string.def('rc'),
     direction: PropTypes.string.def('horizontal'),
     labelPlacement: PropTypes.string.def('horizontal'),
-    children: PropTypes.any,
     status: PropTypes.string.def('process'),
     size: PropTypes.string.def(''),
     progressDot: PropTypes.oneOfType([
@@ -40,15 +35,19 @@ export default {
     }
   },
   mounted () {
-    this.calcStepOffsetWidth()
-    if (!isFlexSupported()) {
-      this.setState({
-        flexSupported: false,
-      })
-    }
+    this.$nextTick(() => {
+      this.calcStepOffsetWidth()
+      if (!isFlexSupported()) {
+        this.setState({
+          flexSupported: false,
+        })
+      }
+    })
   },
   updated () {
-    this.calcStepOffsetWidth()
+    this.$nextTick(() => {
+      this.calcStepOffsetWidth()
+    })
   },
   beforeDestroy () {
     if (this.calcTimeout) {
@@ -86,7 +85,6 @@ export default {
     const {
       prefixCls, direction,
       labelPlacement, iconPrefix, status, size, current, progressDot,
-      ...restProps
     } = getOptionProps(this)
     const { lastStepOffsetWidth, flexSupported } = this
     const filteredChildren = filterEmpty(this.$slots.default)
@@ -100,9 +98,6 @@ export default {
       [`${prefixCls}-dot`]: !!progressDot,
     }
     const stepsProps = {
-      attrs: {
-        ...restProps,
-      },
       class: classString,
       ref: 'vcStepsRef',
       on: this.$listeners,
@@ -112,46 +107,34 @@ export default {
         {
           filteredChildren.map((child, index) => {
             const childProps = getPropsData(child)
-            let className = getClass(child)
-            // fix tail color
-            if (status === 'error' && index === current - 1) {
-              className += ` ${prefixCls}-next-error`
-            }
-            let stepStatus = getValueByProp(child, 'status')
-            if (!stepStatus) {
-              if (index === current) {
-                stepStatus = status
-              } else if (index < current) {
-                stepStatus = 'finish'
-              } else {
-                stepStatus = 'wait'
-              }
-            }
-            const stepStyle = getStyle(child)
-            if (!flexSupported && direction !== 'vertical' && index !== lastIndex) {
-              stepStyle.width = `${100 / lastIndex}%`
-              stepStyle.marginRight = -Math.round(lastStepOffsetWidth / lastIndex + 1)
-            }
             const stepProps = {
               props: {
-                ...childProps,
                 stepNumber: `${index + 1}`,
                 prefixCls,
                 iconPrefix,
                 progressDot,
-                status: stepStatus,
+                ...childProps,
               },
               on: getEvents(child),
-              class: className,
-              style: stepStyle,
             }
-            return (
-              <Step {...stepProps}>
-                <template slot='icon'>{getComponentFromProp(child, 'icon')}</template>
-                <template slot='description'>{getComponentFromProp(child, 'description')}</template>
-                <template slot='title'>{getComponentFromProp(child, 'title')}</template>
-              </Step>
-            )
+            if (!flexSupported && direction !== 'vertical' && index !== lastIndex) {
+              stepProps.props.itemWidth = `${100 / lastIndex}%`
+              stepProps.props.adjustMarginRight = -Math.round(lastStepOffsetWidth / lastIndex + 1)
+            }
+            // fix tail color
+            if (status === 'error' && index === current - 1) {
+              stepProps.class = `${prefixCls}-next-error`
+            }
+            if (!childProps.status) {
+              if (index === current) {
+                stepProps.props.status = status
+              } else if (index < current) {
+                stepProps.props.status = 'finish'
+              } else {
+                stepProps.props.status = 'wait'
+              }
+            }
+            return cloneElement(child, stepProps)
           })
         }
       </div>

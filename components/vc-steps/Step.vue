@@ -1,6 +1,6 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import { getOptionProps } from '../_util/props-util'
+import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 
 function isString (str) {
   return typeof str === 'string'
@@ -11,17 +11,11 @@ export default {
   props: {
     prefixCls: PropTypes.string,
     wrapperStyle: PropTypes.object,
-    // itemWidth: PropTypes.oneOfType([
-    //   PropTypes.number,
-    //   PropTypes.string,
-    // ]),
+    itemWidth: PropTypes.string,
     status: PropTypes.string,
     iconPrefix: PropTypes.string,
     icon: PropTypes.node,
-    // adjustMarginRight: PropTypes.oneOfType([
-    //   PropTypes.number,
-    //   PropTypes.string,
-    // ]),
+    adjustMarginRight: PropTypes.string,
     stepNumber: PropTypes.string,
     description: PropTypes.any,
     title: PropTypes.any,
@@ -37,9 +31,9 @@ export default {
         prefixCls, progressDot, stepNumber, status,
         iconPrefix,
       } = getOptionProps(this)
-      const icon = this.icon || this.$slots.icon
-      const title = this.title || this.$slots.title
-      const description = this.description || this.$slots.description
+      const icon = getComponentFromProp(this, 'icon')
+      const title = getComponentFromProp(this, 'title')
+      const description = getComponentFromProp(this, 'description')
       let iconNode
       const iconClassName = {
         [`${prefixCls}-icon`]: true,
@@ -72,9 +66,9 @@ export default {
   },
   render () {
     const {
-      prefixCls,
+      prefixCls, itemWidth,
       status = 'wait', icon, tailContent,
-      ...restProps
+      adjustMarginRight,
     } = getOptionProps(this)
 
     const title = this.title || this.$slots.title
@@ -86,16 +80,20 @@ export default {
       [`${prefixCls}-item-custom`]: icon,
     }
     const stepProps = {
-      props: {
-        ...restProps,
-      },
       class: classString,
       on: this.$listeners,
     }
-
+    const stepItemStyle = {}
+    if (itemWidth) {
+      stepItemStyle.width = itemWidth
+    }
+    if (adjustMarginRight) {
+      stepItemStyle.marginRight = adjustMarginRight
+    }
     return (
       <div
         {...stepProps}
+        style={stepItemStyle}
       >
         <div class={`${prefixCls}-item-tail`}>
           {tailContent}

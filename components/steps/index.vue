@@ -1,6 +1,6 @@
 <script>
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util'
+import { initDefaultProps, getOptionProps } from '../_util/props-util'
 import VcSteps from '../vc-steps'
 
 const getStepsProps = (defaultProps = {}) => {
@@ -37,7 +37,7 @@ export default {
       <VcSteps
         {...stepsProps}
       >
-        {getComponentFromProp(this, 'default')}
+        {this.$slots.default}
       </VcSteps>
     )
   },

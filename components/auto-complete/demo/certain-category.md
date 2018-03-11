@@ -92,12 +92,7 @@ export default {
   },
 }
 </script>
-
 <style>
-.certain-category-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input-suffix {
-  right: 12px;
-}
-
 .certain-category-search-dropdown .ant-select-dropdown-menu-item-group-title {
   color: #666;
   font-weight: bold;
@@ -119,22 +114,24 @@ export default {
 .certain-category-search-dropdown .ant-select-dropdown-menu {
   max-height: 300px;
 }
-
-.certain-search-item-count {
- position: absolute;
- color: #999;
- right: 16px;
-}
-
-.certain-category-search.ant-select-focused .certain-category-icon {
-  color: #108ee9;
-}
-
-.certain-category-icon {
-  color: #6E6E6E;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  font-size: 16px;
-}
+</style>
+<style scoped>
+  .certain-category-search-wrapper >>> .certain-category-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input-suffix {
+    right: 12px;
+  }
+  .certain-category-search-wrapper >>> .certain-search-item-count {
+    position: absolute;
+    color: #999;
+    right: 16px;
+  }
+  .certain-category-search-wrapper >>> .certain-category-search.ant-select-focused .certain-category-icon {
+    color: #108ee9;
+  }
+  .certain-category-search-wrapper >>> .certain-category-icon {
+    color: #6E6E6E;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-size: 16px;
+  }
 </style>
 ```
 

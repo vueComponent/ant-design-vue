@@ -9,7 +9,7 @@ Customized description content.
 </us>
 
 ```html
-<style>
+<style scoped>
   .spin-content{
     border: 1px solid #91d5ff;
     background-color: #e6f7ff;

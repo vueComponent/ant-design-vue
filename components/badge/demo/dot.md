@@ -19,7 +19,7 @@ This will simply display a red badge, without a specific count.
   </a-badge>
 </div>
 </template>
-<style>
+<style scoped>
 #components-badge-demo-dot .anticon-notification {
   width: 16px;
   height: 16px;

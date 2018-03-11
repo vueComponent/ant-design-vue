@@ -9,7 +9,7 @@ Spin in a container.
 </us>
 
 ```html
-<style>
+<style scoped>
   .example {
     text-align: center;
     background: rgba(0,0,0,0.05);

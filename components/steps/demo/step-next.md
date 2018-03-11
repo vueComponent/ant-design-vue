@@ -66,7 +66,7 @@ Cooperate with the content and buttons, to represent the progress of a process.
     },
   }
 </script>
-<style>
+<style scoped>
   .steps-content {
     margin-top: 16px;
     border: 1px dashed #e9e9e9;

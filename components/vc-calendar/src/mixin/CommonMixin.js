@@ -6,7 +6,7 @@ export default {
     locale: PropTypes.object.def(enUs),
     visible: PropTypes.bool.def(true),
     // onSelect: PropTypes.func,
-    prefixCls: PropTypes.string.def('rc-calendat'),
+    prefixCls: PropTypes.string.def('rc-calendar'),
     // onChange: PropTypes.func,
     // onOk: PropTypes.func,
   },

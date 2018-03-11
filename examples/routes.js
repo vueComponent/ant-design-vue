@@ -3,7 +3,7 @@ const AsyncComp = () => {
   const hashs = window.location.hash.split('/')
   const d = hashs[hashs.length - 1]
   return {
-    component: import(`../components/pagination/demo/${d}`),
+    component: import(`../components/vc-calendar/demo/${d}`),
   }
 }
 export default [

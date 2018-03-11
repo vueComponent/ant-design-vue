@@ -52,7 +52,7 @@ const getOptionProps = (instance) => {
     const res = {}
     for (const [k, v] of Object.entries(props)) {
       if (v.default !== undefined) {
-        res[k] = v
+        res[k] = typeof v.default === 'function' ? v.default() : v.default
       }
     }
     return { ...res, ...propsData }

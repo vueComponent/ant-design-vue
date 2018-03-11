@@ -78,7 +78,7 @@ const Picker = {
     onCalendarKeyDown (event) {
       if (event.keyCode === KeyCode.ESC) {
         event.stopPropagation()
-        this.close(this.focus)
+        this.closeCalendar(this.focus)
       }
     },
 
@@ -94,7 +94,7 @@ const Picker = {
         cause.source === 'keyboard' ||
       (!calendarProps.timePicker && cause.source !== 'dateInput') ||
       cause.source === 'todayButton') {
-        this.close(this.focus)
+        this.closeCalendar(this.focus)
       }
       this.__emit('change', value)
     },
@@ -107,11 +107,11 @@ const Picker = {
     },
 
     onCalendarOk () {
-      this.close(this.focus)
+      this.closeCalendar(this.focus)
     },
 
     onCalendarClear () {
-      this.close(this.focus)
+      this.closeCalendar(this.focus)
     },
 
     onVisibleChange (open) {
@@ -153,11 +153,11 @@ const Picker = {
       }
     },
 
-    open (callback) {
+    openCalendar (callback) {
       this.setOpen(true, callback)
     },
 
-    close (callback) {
+    closeCalendar (callback) {
       this.setOpen(false, callback)
     },
 
@@ -183,9 +183,10 @@ const Picker = {
       align, animation,
       disabled,
       dropdownClassName,
-      transitionName, children,
+      transitionName,
     } = props
     const state = this.$data
+    const children = this.$scopedSlots.default
     return (<Trigger
       popupAlign={align}
       builtinPlacements={placements}

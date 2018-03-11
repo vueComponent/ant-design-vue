@@ -2,11 +2,12 @@
 function noop () {}
 export default {
   functional: true,
-  render: function (createElement, context) {
-    const { data, listeners = {}} = context
+  render: function (h, context) {
+    const { props, listeners = {}} = context
+    console.log(context)
     const {
       prefixCls, locale, showTimePicker,
-      timePickerDisabled } = data
+      timePickerDisabled } = props
     const { closeTimePicker = noop, openTimePicker = noop } = listeners
     const className = {
       [`${prefixCls}-time-picker-btn`]: true,
@@ -16,13 +17,11 @@ export default {
     if (!timePickerDisabled) {
       onClick = showTimePicker ? closeTimePicker : openTimePicker
     }
-    return (<a
-      class={className}
-      role='button'
-      onClick={onClick}
-    >
-      {showTimePicker ? locale.dateSelect : locale.timeSelect}
-    </a>)
+    return (
+      <a class={className} role='button' onClick={onClick}>
+        {showTimePicker ? locale.dateSelect : locale.timeSelect}
+      </a>
+    )
   },
 
 }

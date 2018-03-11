@@ -11,7 +11,7 @@ import CalendarMixin from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin'
 import DateInput from './date/DateInput'
 import { getTimeConfig, getTodayTime, syncTime } from './util'
-
+function noop () {}
 function goStartMonth () {
   const next = this.sValue.clone()
   next.startOf('month')
@@ -48,12 +48,12 @@ function goDay (direction) {
 
 const Calendar = {
   props: {
-    prefixCls: PropTypes.string,
+    // prefixCls: PropTypes.string,
     defaultValue: PropTypes.object,
     value: PropTypes.object,
     selectedValue: PropTypes.object,
     mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
-    locale: PropTypes.object,
+    // locale: PropTypes.object,
     showDateInput: PropTypes.bool.def(true),
     showWeekNumber: PropTypes.bool,
     showToday: PropTypes.bool.def(true),
@@ -68,8 +68,8 @@ const Calendar = {
     // onPanelChange: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
-    renderFooter: PropTypes.func,
-    renderSidebar: PropTypes.func,
+    renderFooter: PropTypes.func.def(noop),
+    renderSidebar: PropTypes.func.def(noop),
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
@@ -215,6 +215,7 @@ const Calendar = {
     let timePickerEle = null
 
     if (timePicker && showTimePicker) {
+      console.log(timePicker)
       const timePickerOriginProps = getOptionProps(timePicker)
       const timePickerProps = {
         props: {
@@ -234,7 +235,7 @@ const Calendar = {
       if (timePickerOriginProps.defaultValue !== undefined) {
         timePickerProps.props.defaultOpenValue = timePickerOriginProps.defaultValue
       }
-
+      console.log(timePickerProps)
       timePickerEle = cloneElement(timePicker, timePickerProps)
     }
 

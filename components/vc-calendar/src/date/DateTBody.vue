@@ -4,7 +4,7 @@ import { getOptionProps } from '@/components/_util/props-util'
 import cx from 'classnames'
 import DateConstants from './DateConstants'
 import { getTitleString, getTodayTime } from '../util/'
-
+function noop () {}
 function isSameDay (one, two) {
   return one && two && one.isSame(two, 'day')
 }
@@ -35,7 +35,7 @@ const DateTBody = {
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
     prefixCls: PropTypes.string,
-    selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    selectedValue: PropTypes.oneOfType([PropTypes.any, PropTypes.arrayOf(PropTypes.any)]),
     value: PropTypes.object,
     hoverValue: PropTypes.any.def([]),
     showWeekNumber: PropTypes.bool,
@@ -48,6 +48,9 @@ const DateTBody = {
       showWeekNumber, dateRender, disabledDate,
       hoverValue,
     } = props
+    console.log('selectedValue', selectedValue)
+    const { $listeners = {}} = this
+    const { select = noop, dayHover = noop } = $listeners
     let iIndex
     let jIndex
     let current
@@ -208,9 +211,9 @@ const DateTBody = {
         dateCells.push(
           <td
             key={passed}
-            onClick={disabled ? undefined : props.onSelect.bind(null, current)}
+            onClick={disabled ? noop : select.bind(null, current)}
             onMouseenter={disabled
-              ? undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
+              ? noop : dayHover.bind(null, current)}
             role='gridcell'
             title={getTitleString(current)} class={cls}
           >

@@ -19,6 +19,11 @@ const CalendarFooter = {
     value: PropTypes.object,
     renderFooter: PropTypes.func,
     defaultValue: PropTypes.object,
+    locale: PropTypes.object,
+    showToday: PropTypes.bool.def(true),
+    disabledDate: PropTypes.func,
+    showTimePicker: PropTypes.bool,
+    okDisabled: PropTypes.bool,
   },
   methods: {
     onSelect (value) {
@@ -44,16 +49,17 @@ const CalendarFooter = {
         },
         on: $listeners,
       }
-      let nowEl
+      console.log(props)
+      let nowEl = null
       if (showToday) {
         nowEl = <TodayButton {...btnProps} />
       }
       delete btnProps.props.value
-      let okBtn
+      let okBtn = null
       if (showOk === true || showOk !== false && !!timePicker) {
         okBtn = <OkButton {...btnProps} />
       }
-      let timePickerBtn
+      let timePickerBtn = null
       if (timePicker) {
         timePickerBtn = <TimePickerButton {...btnProps} />
       }
@@ -61,7 +67,7 @@ const CalendarFooter = {
       let footerBtn
       if (nowEl || timePickerBtn || okBtn) {
         footerBtn = (<span class={`${prefixCls}-footer-btn`}>
-          {[nowEl, timePickerBtn, okBtn]}
+          {nowEl}{timePickerBtn}{okBtn}
         </span>)
       }
       const cls = {

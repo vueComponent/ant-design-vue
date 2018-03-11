@@ -56,7 +56,7 @@ const CalendarMixin = {
     },
 
     renderRoot (newProps) {
-      const props = this.props
+      const props = this.$props
       const prefixCls = props.prefixCls
 
       const className = {

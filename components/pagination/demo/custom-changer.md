@@ -42,10 +42,5 @@ Customize dropdown options such as adding all options
     }
   }
 </script>
-<style scoped>
-  .ant-select {
-    margin-bottom: 0 !important;
-  }
-</style>
 ```
 

@@ -29,8 +29,8 @@ You can set it to a object like `{ xs: 8, sm: 16, md: 24, lg: 32 }` for responsi
     </a-row>
   </div>
 </template>
-<style>
-.gutter-example .ant-row > div {
+<style scoped>
+.gutter-example >>> .ant-row > div {
   background: transparent;
   border: 0;
 }

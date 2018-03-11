@@ -30,7 +30,7 @@ export default {
   title: 'Alert',
   render () {
     return (
-      <div>
+      <div id='components-alert-demo'>
         <md cn={md.cn} us={md.us}/>
         < Banner/>
         <Basic/>
@@ -49,7 +49,7 @@ export default {
 }
 </script>
 <style>
-.ant-alert {
+#components-alert-demo .ant-alert {
   margin-bottom: 16px;
 }
 </style>

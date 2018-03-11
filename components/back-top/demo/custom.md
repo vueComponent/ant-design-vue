@@ -19,7 +19,7 @@ You can customize the style of the button, just note the size limit: no more tha
     button.
   </div>
 </template>
-<style>
+<style scoped>
   #components-back-top-demo-custom .ant-back-top {
     bottom: 100px;
   }

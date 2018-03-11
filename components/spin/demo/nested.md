@@ -9,7 +9,7 @@ Embedding content into `Spin` will alter it into loading state.
 </us>
 
 ```html
-<style>
+<style scoped>
   .spin-content{
     border: 1px solid #91d5ff;
     background-color: #e6f7ff;

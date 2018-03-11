@@ -31,7 +31,7 @@ const md = {
 export default {
   render () {
     return (
-      <div>
+      <div id='components-cascader-demo'>
         <md cn={md.cn} us={md.us}/>
         <Basic />
         <ChangeOnSelect/>
@@ -53,7 +53,7 @@ export default {
 }
 </script>
 <style>
-.ant-cascader-picker {
+#components-cascader-demo .ant-cascader-picker {
   width: 300px;
 }
 </style>

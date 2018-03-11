@@ -32,7 +32,7 @@ const md = {
 export default {
   render () {
     return (
-      <div>
+      <div id='components-select-demo'>
         <md cn={md.cn} us={md.us}/>
         <Basic/>
         <Size/>
@@ -55,3 +55,9 @@ export default {
   },
 }
 </script>
+<style>
+#components-select-demo .ant-select {
+  margin: 0 8px 10px 0;
+}
+</style>
+>

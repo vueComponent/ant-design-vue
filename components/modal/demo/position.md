@@ -11,7 +11,7 @@ You can use `style.top` or other styles to set position of modal dialog.
 
 ```html
 <template>
-  <div>
+  <div id="components-modal-demo-position">
     <a-button type="primary" @click="() => setModal1Visible(true)">Display a modal dialog at 20px to Top</a-button>
     <a-modal
       title="20px to Top"

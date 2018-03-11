@@ -82,7 +82,7 @@ export default {
     },
     pageSize (val) {
       const newState = {}
-      let current = this.current
+      let current = this.stateCurrent
       const newCurrent = this.calculatePage(val)
       current = current > newCurrent ? newCurrent : current
       if (!hasProp(this, 'current')) {
@@ -174,7 +174,9 @@ export default {
           })
         }
       }
+      this.$emit('update:pageSize', size)
       this.$emit('showSizeChange', current, size)
+      this.$emit('change', current, size)
     },
     handleChange (p) {
       let page = p
@@ -241,7 +243,6 @@ export default {
     let firstPager = null
     let lastPager = null
     let gotoButton = null
-
     const goButton = (this.showQuickJumper && this.showQuickJumper.goButton)
     const pageBufferSize = this.showLessItems ? 1 : 2
     const { stateCurrent, statePageSize } = this
@@ -320,7 +321,6 @@ export default {
         </ul>
       )
     }
-
     if (allPages <= 5 + pageBufferSize * 2) {
       for (let i = 1; i <= allPages; i++) {
         const active = stateCurrent === i

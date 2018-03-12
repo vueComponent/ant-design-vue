@@ -10,8 +10,8 @@ import CalendarFooter from './calendar/CalendarFooter'
 import CalendarMixin from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin'
 import DateInput from './date/DateInput'
+import enUs from './locale/en_US'
 import { getTimeConfig, getTodayTime, syncTime } from './util'
-function noop () {}
 function goStartMonth () {
   const next = this.sValue.clone()
   next.startOf('month')
@@ -48,6 +48,9 @@ function goDay (direction) {
 
 const Calendar = {
   props: {
+    locale: PropTypes.object.def(enUs),
+    visible: PropTypes.bool.def(true),
+    prefixCls: PropTypes.string.def('rc-calendar'),
     // prefixCls: PropTypes.string,
     defaultValue: PropTypes.object,
     value: PropTypes.object,
@@ -68,8 +71,8 @@ const Calendar = {
     // onPanelChange: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
-    renderFooter: PropTypes.func.def(noop),
-    renderSidebar: PropTypes.func.def(noop),
+    renderFooter: PropTypes.func.def(() => null),
+    renderSidebar: PropTypes.func.def(() => null),
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
@@ -168,7 +171,8 @@ const Calendar = {
     onDateTableSelect (value) {
       const { timePicker, sSelectedValue } = this
       if (!sSelectedValue && timePicker) {
-        const timePickerDefaultValue = timePicker.props.defaultValue
+        const timePickerProps = getOptionProps(timePicker)
+        const timePickerDefaultValue = timePickerProps.defaultValue
         if (timePickerDefaultValue) {
           syncTime(timePickerDefaultValue, value)
         }

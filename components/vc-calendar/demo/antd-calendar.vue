@@ -98,7 +98,7 @@ const Demo = {
 
     toggleDisabled  () {
       this.setState({
-        disabled: !this.state.disabled,
+        disabled: !this.disabled,
       })
     },
   },
@@ -162,7 +162,7 @@ const Demo = {
           scopedSlots={{
             default: ({ value }) => {
               return (
-                <span tabIndex='0' scope={{ value }}>
+                <span tabIndex='0'>
                   <input
                     placeholder='please select'
                     style={{ width: '250px' }}

@@ -185,19 +185,23 @@ const Picker = {
       dropdownClassName,
       transitionName,
     } = props
-    const state = this.$data
+    const { sValue, sOpen } = this
     const children = this.$scopedSlots.default
+    const childrenState = {
+      value: sValue,
+      open: sOpen,
+    }
     return (<Trigger
       popupAlign={align}
       builtinPlacements={placements}
       popupPlacement={placement}
-      action={(disabled && !state.sOpen) ? [] : ['click']}
+      action={(disabled && !sOpen) ? [] : ['click']}
       destroyPopupOnHide
       getPopupContainer={getCalendarContainer}
       popupStyle={style}
       popupAnimation={animation}
       popupTransitionName={transitionName}
-      popupVisible={state.sOpen}
+      popupVisible={sOpen}
       onPopupVisibleChange={this.onVisibleChange}
       prefixCls={prefixCls}
       popupClassName={dropdownClassName}
@@ -205,7 +209,7 @@ const Picker = {
       <template slot='popup'>
         {this.getCalendarElement()}
       </template>
-      {cloneElement(children(state, props), { on: { keydown: this.onKeyDown }})}
+      {cloneElement(children(childrenState, props), { on: { keydown: this.onKeyDown }})}
     </Trigger>)
   },
 }

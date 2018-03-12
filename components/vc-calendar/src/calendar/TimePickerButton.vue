@@ -2,9 +2,8 @@
 function noop () {}
 export default {
   functional: true,
-  render: function (h, context) {
+  render (h, context) {
     const { props, listeners = {}} = context
-    console.log(context)
     const {
       prefixCls, locale, showTimePicker,
       timePickerDisabled } = props

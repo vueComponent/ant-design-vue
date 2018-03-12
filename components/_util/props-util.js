@@ -179,6 +179,18 @@ const initDefaultProps = (propTypes, defaultProps) => {
   Object.keys(defaultProps).forEach(k => { propTypes[k] = propTypes[k].def(defaultProps[k]) })
   return propTypes
 }
+
+export function mergeProps () {
+  const args = [].slice.call(arguments, 0)
+  const props = {}
+  args.forEach((p, i) => {
+    for (const [k, v] of Object.entries(p)) {
+      props[k] = props[k] || {}
+      Object.assign(props[k], v)
+    }
+  })
+  return props
+}
 export {
   hasProp,
   filterProps,

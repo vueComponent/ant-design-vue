@@ -25,6 +25,7 @@ export default {
     rootPrefixCls: PropTypes.string,
     value: PropTypes.object,
     defaultValue: PropTypes.object,
+    locale: PropTypes.object,
   },
   data () {
     this.nextDecade = goYear.bind(this, 10)
@@ -59,9 +60,8 @@ export default {
   },
 
   render () {
-    const props = this.$props
-    const value = this.sValue
-    const locale = props.locale
+    const { sValue: value, locale, $listeners = {}} = this
+    const decadePanelShow = $listeners.decadePanelShow || noop
     const years = this.years()
     const currentYear = value.year()
     const startYear = parseInt(currentYear / 10, 10) * 10
@@ -103,7 +103,7 @@ export default {
     })
 
     return (
-      <div class={this.prefixCls}>
+      <div class={prefixCls}>
         <div>
           <div class={`${prefixCls}-header`}>
             <a
@@ -115,7 +115,7 @@ export default {
             <a
               class={`${prefixCls}-decade-select`}
               role='button'
-              onClick={props.onDecadePanelShow}
+              onClick={decadePanelShow}
               title={locale.decadeSelect}
             >
               <span class={`${prefixCls}-decade-select-content`}>

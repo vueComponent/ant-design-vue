@@ -3,7 +3,7 @@ import BaseMixin from '@/components/_util/BaseMixin'
 import { hasProp } from '@/components/_util/props-util'
 import moment from 'moment'
 import { isAllowedDate, getTodayTime } from '../util/index'
-
+function noop () {}
 function getNow () {
   return moment()
 }
@@ -71,7 +71,7 @@ const CalendarMixin = {
           ref='rootInstance'
           class={className}
           tabIndex='0'
-          onKeydown={this.onKeyDown}
+          onKeydown={this.onKeyDown || noop}
         >
           {newProps.children}
         </div>

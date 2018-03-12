@@ -19,6 +19,7 @@ const CalendarPart = {
     locale: PropTypes.any,
     showDateInput: PropTypes.bool,
     showTimePicker: PropTypes.bool,
+    showWeekNumber: PropTypes.bool,
     format: PropTypes.any,
     placeholder: PropTypes.any,
     disabledDate: PropTypes.any,
@@ -62,7 +63,6 @@ const CalendarPart = {
     }
     const index = direction === 'left' ? 0 : 1
     const timePickerProps = getOptionProps(timePicker)
-    console.log('timePickerProps', timePickerProps)
     const timePickerEle = shouldShowTimePicker &&
       cloneElement(timePicker, {
         props: {

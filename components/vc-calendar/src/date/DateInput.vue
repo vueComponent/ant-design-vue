@@ -23,7 +23,7 @@ const DateInput = {
   data () {
     const selectedValue = this.selectedValue
     return {
-      str: selectedValue && selectedValue.format(this.props.format) || '',
+      str: selectedValue && selectedValue.format(this.format) || '',
       invalid: false,
     }
   },
@@ -45,7 +45,6 @@ const DateInput = {
   },
   methods: {
     updateState () {
-      console.log('关注下')
       this.cachedSelectionStart = this.$refs.dateInputInstance.selectionStart
       this.cachedSelectionEnd = this.$refs.dateInputInstance.selectionEnd
       // when popup show, click body will call this, bug!
@@ -131,7 +130,7 @@ const DateInput = {
           value={str}
           disabled={disabled}
           placeholder={placeholder}
-          onChange={this.onInputChange}
+          onInput={this.onInputChange}
         />
       </div>
       {showClear ? <a

@@ -12,7 +12,7 @@ const CalendarHeader = {
     yearSelectTotal: PropTypes.number.def(20),
     // onValueChange: PropTypes.func,
     // onTypeChange: PropTypes.func,
-    Select: PropTypes.func,
+    Select: PropTypes.object,
     prefixCls: PropTypes.string,
     type: PropTypes.string,
     showTypeSwitch: PropTypes.bool,

@@ -34,6 +34,7 @@ const CalendarHeader = {
     enablePrev: PropTypes.any.def(1),
     enableNext: PropTypes.any.def(1),
     disabledMonth: PropTypes.func,
+    mode: PropTypes.any,
   },
   data () {
     this.nextMonth = goMonth.bind(this, 1)
@@ -47,7 +48,9 @@ const CalendarHeader = {
   methods: {
     onMonthSelect (value) {
       this.__emit('panelChange', value, 'date')
-      if (this.__emit('monthSelect', value)) {
+      if (this.$listeners.monthSelect) {
+        this.__emit('monthSelect', value)
+      } else {
         this.__emit('valueChange', value)
       }
     },

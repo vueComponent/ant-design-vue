@@ -1,13 +1,14 @@
 <script>
 import PropTypes from '@/components/_util/vue-types'
 import BaseMixin from '@/components/_util/BaseMixin'
-import { getOptionProps, hasProp } from '@/components/_util/props-util'
+import { getOptionProps, hasProp, mergeProps } from '@/components/_util/props-util'
 import moment from 'moment'
 import CalendarPart from './range-calendar/CalendarPart'
 import TodayButton from './calendar/TodayButton'
 import OkButton from './calendar/OkButton'
 import TimePickerButton from './calendar/TimePickerButton'
 import CommonMixin from './mixin/CommonMixin'
+import enUs from './locale/en_US'
 import { syncTime, getTodayTime, isAllowedDate } from './util/'
 
 function noop () {}
@@ -72,7 +73,9 @@ function onInputSelect (direction, value) {
 
 const RangeCalendar = {
   props: {
-    prefixCls: PropTypes.string,
+    locale: PropTypes.object.def(enUs),
+    visible: PropTypes.bool.def(true),
+    prefixCls: PropTypes.string.def('rc-calendar'),
     dateInputPlaceholder: PropTypes.any,
     defaultValue: PropTypes.any,
     value: PropTypes.any,
@@ -84,9 +87,9 @@ const RangeCalendar = {
     showToday: PropTypes.bool.def(true),
     defaultSelectedValue: PropTypes.array.def([]),
     selectedValue: PropTypes.array,
-    onOk: PropTypes.func,
     showClear: PropTypes.bool,
-    locale: PropTypes.object,
+    showWeekNumber: PropTypes.bool,
+    // locale: PropTypes.object,
     // onChange: PropTypes.func,
     // onSelect: PropTypes.func,
     // onValueChange: PropTypes.func,
@@ -97,6 +100,8 @@ const RangeCalendar = {
     type: PropTypes.any.def('both'),
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func.def(noop),
+    renderFooter: PropTypes.func.def(() => null),
+    renderSidebar: PropTypes.func.def(() => null),
   },
 
   mixins: [BaseMixin, CommonMixin],
@@ -115,26 +120,30 @@ const RangeCalendar = {
       sMode: props.mode || ['date', 'date'],
     }
   },
-
-  componentWillReceiveProps (nextProps) {
-    const { state } = this
-    const newState = {}
-    if ('value' in nextProps) {
-      newState.value = normalizeAnchor(nextProps, 0)
+  watch: {
+    value (val) {
+      const newState = {}
+      newState.sValue = normalizeAnchor(val, 0)
       this.setState(newState)
-    }
-    if ('hoverValue' in nextProps && !isArraysEqual(state.hoverValue, nextProps.hoverValue)) {
-      this.setState({ hoverValue: nextProps.hoverValue })
-    }
-    if ('selectedValue' in nextProps) {
-      newState.selectedValue = nextProps.selectedValue
-      newState.prevSelectedValue = nextProps.selectedValue
+    },
+    hoverValue (val) {
+      if (!isArraysEqual(this.sHoverValue, val)) {
+        this.setState({ sHoverValue: val })
+      }
+    },
+    selectedValue (val) {
+      const newState = {}
+      newState.sSelectedValue = val
+      newState.prevSelectedValue = val
       this.setState(newState)
-    }
-    if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
-      this.setState({ mode: nextProps.mode })
-    }
+    },
+    mode (val) {
+      if (!isArraysEqual(this.sMode, val)) {
+        this.setState({ sMode: val })
+      }
+    },
   },
+
   methods: {
     onDatePanelEnter () {
       if (this.hasSelectedValue()) {
@@ -166,8 +175,7 @@ const RangeCalendar = {
       } else if (type === 'start') {
         syncTime(prevSelectedValue[0], value)
         const endValue = sSelectedValue[1]
-        nextSelectedValue = endValue && this.compare(endValue, value) > 0
-          ? [value, endValue] : [value]
+        nextSelectedValue = endValue && this.compare(endValue, value) > 0 ? [value, endValue] : [value]
       } else { // type === 'end'
         const startValue = sSelectedValue[0]
         if (startValue && this.compare(startValue, value) <= 0) {
@@ -275,11 +283,11 @@ const RangeCalendar = {
       let value = this.sValue[0]
       const selectedValue = this.sSelectedValue
       // keep selectedTime when select date
-      if (selectedValue[0] && this.props.timePicker) {
+      if (selectedValue[0] && this.timePicker) {
         value = value.clone()
         syncTime(selectedValue[0], value)
       }
-      if (this.state.showTimePicker && selectedValue[0]) {
+      if (this.showTimePicker && selectedValue[0]) {
         return selectedValue[0]
       }
       return value
@@ -358,14 +366,16 @@ const RangeCalendar = {
 
     fireSelectValueChange (selectedValue, direct) {
       const { timePicker, prevSelectedValue } = this
-      console.log('timePicker', timePicker)
-      if (timePicker && timePicker.props.defaultValue) {
-        const timePickerDefaultValue = timePicker.props.defaultValue
-        if (!prevSelectedValue[0] && selectedValue[0]) {
-          syncTime(timePickerDefaultValue[0], selectedValue[0])
-        }
-        if (!prevSelectedValue[1] && selectedValue[1]) {
-          syncTime(timePickerDefaultValue[1], selectedValue[1])
+      if (timePicker) {
+        const timePickerProps = getOptionProps(timePicker)
+        if (timePickerProps.defaultValue) {
+          const timePickerDefaultValue = timePickerProps.defaultValue
+          if (!prevSelectedValue[0] && selectedValue[0]) {
+            syncTime(timePickerDefaultValue[0], selectedValue[0])
+          }
+          if (!prevSelectedValue[1] && selectedValue[1]) {
+            syncTime(timePickerDefaultValue[1], selectedValue[1])
+          }
         }
       }
 
@@ -474,7 +484,7 @@ const RangeCalendar = {
         select: this.onSelect,
         dayHover: type === 'start' && sSelectedValue[1] ||
           type === 'end' && sSelectedValue[0] || !!sHoverValue.length
-          ? this.onDayHover : undefined,
+          ? this.onDayHover : noop,
       },
     }
 
@@ -506,6 +516,94 @@ const RangeCalendar = {
     const nextMonthOfStart = startValue.clone().add(1, 'months')
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
             nextMonthOfStart.month() === endValue.month()
+    const leftPartProps = mergeProps(baseProps, newProps, {
+      props: {
+        hoverValue: sHoverValue,
+        direction: 'left',
+        disabledTime: this.disabledStartTime,
+        disabledMonth: this.disabledStartMonth,
+        format: this.getFormat(),
+        value: startValue,
+        mode: sMode[0],
+        placeholder: placeholder1,
+        showDateInput: this.showDateInput,
+        timePicker: timePicker,
+        showTimePicker: showTimePicker,
+        enablePrev: true,
+        enableNext: !isClosestMonths || this.isMonthYearPanelShow(sMode[1]),
+      },
+      on: {
+        inputSelect: this.onStartInputSelect,
+        valueChange: this.onStartValueChange,
+        panelChange: this.onStartPanelChange,
+      },
+    })
+    const rightPartProps = mergeProps(baseProps, newProps, {
+      props: {
+        hoverValue: sHoverValue,
+        direction: 'right',
+        format: this.getFormat(),
+        timePickerDisabledTime: this.getEndDisableTime(),
+        placeholder: placeholder2,
+        value: endValue,
+        mode: sMode[1],
+        showDateInput: this.showDateInput,
+        timePicker: timePicker,
+        showTimePicker: showTimePicker,
+        disabledTime: this.disabledEndTime,
+        disabledMonth: this.disabledEndMonth,
+        enablePrev: !isClosestMonths || this.isMonthYearPanelShow(sMode[0]),
+        enableNext: true,
+      },
+      on: {
+        inputSelect: this.onEndInputSelect,
+        valueChange: this.onEndValueChange,
+        panelChange: this.onEndPanelChange,
+      },
+    })
+    let TodayButtonNode = null
+    if (showToday) {
+      const todayButtonProps = mergeProps(baseProps, {
+        props: {
+          disabled: isTodayInView,
+          value: sValue[0],
+          text: locale.backToToday,
+        },
+        on: {
+          today: this.onToday,
+        },
+      })
+      TodayButtonNode = <TodayButton {...todayButtonProps}/>
+    }
+
+    let TimePickerButtonNode = null
+    if (props.timePicker) {
+      const timePickerButtonProps = mergeProps(baseProps, {
+        props: {
+          showTimePicker: showTimePicker,
+          timePickerDisabled: !this.hasSelectedValue() || sHoverValue.length,
+        },
+        on: {
+          openTimePicker: this.onOpenTimePicker,
+          closeTimePicker: this.onCloseTimePicker,
+        },
+      })
+      TimePickerButtonNode = <TimePickerButton {...timePickerButtonProps} />
+    }
+
+    let OkButtonNode = null
+    if (showOkButton) {
+      const okButtonProps = mergeProps(baseProps, {
+        props: {
+          okDisabled: !this.isAllowedDateAndTime(sSelectedValue) || !this.hasSelectedValue() || sHoverValue.length,
+        },
+        on: {
+          ok: this.onOk,
+        },
+      })
+      OkButtonNode = <OkButton {...okButtonProps}/>
+    }
+
     return (
       <div
         ref={this.saveRoot}
@@ -526,78 +624,17 @@ const RangeCalendar = {
             onMouseleave={type !== 'both' ? this.onDatePanelLeave : noop}
             onMouseenter={type !== 'both' ? this.onDatePanelEnter : noop}
           >
-            <CalendarPart
-              {...baseProps}
-              {...newProps}
-              hoverValue={sHoverValue}
-              direction='left'
-              disabledTime={this.disabledStartTime}
-              disabledMonth={this.disabledStartMonth}
-              format={this.getFormat()}
-              value={startValue}
-              mode={sMode[0]}
-              placeholder={placeholder1}
-              onInputSelect={this.onStartInputSelect}
-              onValueChange={this.onStartValueChange}
-              onPanelChange={this.onStartPanelChange}
-              showDateInput={this.props.showDateInput}
-              timePicker={timePicker}
-              showTimePicker={showTimePicker}
-              enablePrev
-              enableNext={!isClosestMonths || this.isMonthYearPanelShow(sMode[1])}
-            />
+            <CalendarPart {...leftPartProps}/>
             <span class={`${prefixCls}-range-middle`}>~</span>
-            <CalendarPart
-              {...baseProps}
-              {...newProps}
-              hoverValue={sHoverValue}
-              direction='right'
-              format={this.getFormat()}
-              timePickerDisabledTime={this.getEndDisableTime()}
-              placeholder={placeholder2}
-              value={endValue}
-              mode={sMode[1]}
-              onInputSelect={this.onEndInputSelect}
-              onValueChange={this.onEndValueChange}
-              onPanelChange={this.onEndPanelChange}
-              showDateInput={this.props.showDateInput}
-              timePicker={timePicker}
-              showTimePicker={showTimePicker}
-              disabledTime={this.disabledEndTime}
-              disabledMonth={this.disabledEndMonth}
-              enablePrev={!isClosestMonths || this.isMonthYearPanelShow(sMode[0])}
-              enableNext
-            />
+            <CalendarPart {...rightPartProps}/>
           </div>
           <div class={cls}>
             {props.renderFooter()}
             {showToday || props.timePicker || showOkButton ? (
               <div class={`${prefixCls}-footer-btn`}>
-                {showToday ? (
-                  <TodayButton
-                    {...baseProps}
-                    disabled={isTodayInView}
-                    value={sValue[0]}
-                    onToday={this.onToday}
-                    text={locale.backToToday}
-                  />
-                ) : null}
-                {props.timePicker
-                  ? <TimePickerButton
-                    {...baseProps}
-                    showTimePicker={showTimePicker}
-                    onOpenTimePicker={this.onOpenTimePicker}
-                    onCloseTimePicker={this.onCloseTimePicker}
-                    timePickerDisabled={!this.hasSelectedValue() || sHoverValue.length}
-                  /> : null}
-                {showOkButton
-                  ? <OkButton
-                    {...baseProps}
-                    onOk={this.onOk}
-                    okDisabled={!this.isAllowedDateAndTime(sSelectedValue) ||
-                      !this.hasSelectedValue() || sHoverValue.length
-                    }
-                  /> : null}
+                {TodayButtonNode}
+                {TimePickerButtonNode}
+                {OkButtonNode}
               </div>
             ) : null}
           </div>

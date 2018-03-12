@@ -11,8 +11,8 @@ export default {
       props,
       on: listeners,
     }
-    return (<table class = {`${prefixCls}-table`} cellSpacing='0' role='grid'>
-      <DateTHead {...props}/>
+    return (<table class={`${prefixCls}-table`} cellSpacing='0' role='grid'>
+      <DateTHead {...bodyProps}/>
       <DateTBody {...bodyProps}/>
     </table>)
   },

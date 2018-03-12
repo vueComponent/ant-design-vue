@@ -22,6 +22,9 @@ const MonthTable = {
     cellRender: PropTypes.func,
     prefixCls: PropTypes.string,
     value: PropTypes.object,
+    locale: PropTypes.any,
+    contentRender: PropTypes.any,
+    disabledDate: PropTypes.func,
   },
   data () {
     return {
@@ -71,14 +74,14 @@ const MonthTable = {
     const today = getTodayTime(value)
     const months = this.months()
     const currentMonth = value.month()
-    const { prefixCls, locale, contentRender, cellRender } = props
+    const { prefixCls, locale, contentRender, cellRender, disabledDate } = props
     const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
         let disabled = false
-        if (props.disabledDate) {
+        if (disabledDate) {
           const testValue = value.clone()
           testValue.month(monthData.value)
-          disabled = props.disabledDate(testValue)
+          disabled = disabledDate(testValue)
         }
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,

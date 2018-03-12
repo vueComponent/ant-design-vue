@@ -17,6 +17,12 @@ function noop () {
 const MonthPanel = {
   mixins: [BaseMixin],
   props: {
+    value: PropTypes.any,
+    defaultValue: PropTypes.any,
+    cellRender: PropTypes.any,
+    contentRender: PropTypes.any,
+    locale: PropTypes.any,
+    rootPrefixCls: PropTypes.string,
     // onChange: PropTypes.func,
     disabledDate: PropTypes.func,
     // onSelect: PropTypes.func,

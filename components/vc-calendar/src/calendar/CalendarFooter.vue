@@ -2,9 +2,9 @@
 import PropTypes from '@/components/_util/vue-types'
 import BaseMixin from '@/components/_util/BaseMixin'
 import { getOptionProps } from '@/components/_util/props-util'
-import TodayButton from '../calendar/TodayButton'
-import OkButton from '../calendar/OkButton'
-import TimePickerButton from '../calendar/TimePickerButton'
+import TodayButton from './TodayButton'
+import OkButton from './OkButton'
+import TimePickerButton from './TimePickerButton'
 
 const CalendarFooter = {
   mixins: [BaseMixin],
@@ -20,7 +20,7 @@ const CalendarFooter = {
     renderFooter: PropTypes.func,
     defaultValue: PropTypes.object,
     locale: PropTypes.object,
-    showToday: PropTypes.bool.def(true),
+    showToday: PropTypes.bool,
     disabledDate: PropTypes.func,
     showTimePicker: PropTypes.bool,
     okDisabled: PropTypes.bool,
@@ -49,7 +49,6 @@ const CalendarFooter = {
         },
         on: $listeners,
       }
-      console.log(props)
       let nowEl = null
       if (showToday) {
         nowEl = <TodayButton {...btnProps} />
@@ -72,7 +71,7 @@ const CalendarFooter = {
       }
       const cls = {
         [`${prefixCls}-footer`]: true,
-        [`${prefixCls}-footer-show-ok`]: okBtn,
+        [`${prefixCls}-footer-show-ok`]: !!okBtn,
       }
       footerEl = (
         <div class={cls}>

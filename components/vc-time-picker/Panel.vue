@@ -29,6 +29,7 @@ const Panel = {
       },
     },
     value: PropTypes.object,
+    defaultValue: PropTypes.object,
     placeholder: PropTypes.string,
     format: PropTypes.string,
     inputReadOnly: PropTypes.bool.def(false),

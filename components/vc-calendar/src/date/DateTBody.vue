@@ -48,7 +48,6 @@ const DateTBody = {
       showWeekNumber, dateRender, disabledDate,
       hoverValue,
     } = props
-    console.log('selectedValue', selectedValue)
     const { $listeners = {}} = this
     const { select = noop, dayHover = noop } = $listeners
     let iIndex
@@ -100,7 +99,7 @@ const DateTBody = {
       if (showWeekNumber) {
         weekNumberCell = (
           <td
-            key={dateTable[passed].week()}
+            key={`week-${dateTable[passed].week()}`}
             role='gridcell'
             class={weekNumberCellClass}
           >
@@ -212,8 +211,7 @@ const DateTBody = {
           <td
             key={passed}
             onClick={disabled ? noop : select.bind(null, current)}
-            onMouseenter={disabled
-              ? noop : dayHover.bind(null, current)}
+            onMouseenter={disabled ? noop : dayHover.bind(null, current)}
             role='gridcell'
             title={getTitleString(current)} class={cls}
           >

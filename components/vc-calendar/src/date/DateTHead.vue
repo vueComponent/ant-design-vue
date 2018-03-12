@@ -5,7 +5,7 @@ import moment from 'moment'
 export default {
   functional: true,
   render (createElement, context) {
-    const { data: props } = context
+    const { props } = context
     const value = props.value
     const localeData = value.localeData()
     const prefixCls = props.prefixCls

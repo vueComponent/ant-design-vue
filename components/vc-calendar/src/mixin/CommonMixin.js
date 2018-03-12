@@ -1,16 +1,4 @@
-import PropTypes from '@/components/_util/vue-types'
-import enUs from '../locale/en_US'
-
 export default {
-  props: {
-    locale: PropTypes.object.def(enUs),
-    visible: PropTypes.bool.def(true),
-    // onSelect: PropTypes.func,
-    prefixCls: PropTypes.string.def('rc-calendar'),
-    // onChange: PropTypes.func,
-    // onOk: PropTypes.func,
-  },
-
   // getDefaultProps () {
   //   return {
   //     locale: enUs,

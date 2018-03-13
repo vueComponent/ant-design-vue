@@ -28,9 +28,13 @@ export default {
   methods: {
     renderIconNode () {
       const {
-        prefixCls, progressDot, stepNumber, status,
+        prefixCls, stepNumber, status,
         iconPrefix,
       } = getOptionProps(this)
+      let progressDot = this.progressDot
+      if (progressDot === undefined) {
+        progressDot = this.$scopedSlots.progressDot
+      }
       const icon = getComponentFromProp(this, 'icon')
       const title = getComponentFromProp(this, 'title')
       const description = getComponentFromProp(this, 'description')
@@ -48,7 +52,7 @@ export default {
         if (typeof progressDot === 'function') {
           iconNode = (
             <span class={`${prefixCls}-icon`}>
-              {progressDot(iconDot, { index: stepNumber - 1, status, title, description })}
+              {progressDot({ index: stepNumber - 1, status, title, description, prefixCls })}
             </span>
           )
         } else {

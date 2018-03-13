@@ -24,7 +24,7 @@ export default {
     progressDot: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.func,
-    ]).def(false),
+    ]),
     current: PropTypes.number.def(0),
   },
   data () {
@@ -84,8 +84,12 @@ export default {
   render () {
     const {
       prefixCls, direction,
-      labelPlacement, iconPrefix, status, size, current, progressDot,
-    } = getOptionProps(this)
+      labelPlacement, iconPrefix, status, size, current, $scopedSlots,
+    } = this
+    let progressDot = this.progressDot
+    if (progressDot === undefined) {
+      progressDot = $scopedSlots.progressDot
+    }
     const { lastStepOffsetWidth, flexSupported } = this
     const filteredChildren = filterEmpty(this.$slots.default)
     const lastIndex = filteredChildren.length - 1
@@ -112,10 +116,11 @@ export default {
                 stepNumber: `${index + 1}`,
                 prefixCls,
                 iconPrefix,
-                progressDot,
+                progressDot: this.progressDot,
                 ...childProps,
               },
               on: getEvents(child),
+              scopedSlots: $scopedSlots,
             }
             if (!flexSupported && direction !== 'vertical' && index !== lastIndex) {
               stepProps.props.itemWidth = `${100 / lastIndex}%`

@@ -71,8 +71,8 @@ export default {
       adjustMarginRight,
     } = getOptionProps(this)
 
-    const title = this.title || this.$slots.title
-    const description = this.description || this.$slots.description
+    const title = getComponentFromProp(this, 'title')
+    const description = getComponentFromProp(this, 'description')
 
     const classString = {
       [`${prefixCls}-item`]: true,

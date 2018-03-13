@@ -7,24 +7,28 @@ import MonthTable from './month/MonthTable'
 import CalendarMixin from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin'
 import CalendarHeader from './full-calendar/CalendarHeader'
-
+import enUs from './locale/en_US'
 const FullCalendar = {
   props: {
+    locale: PropTypes.object.def(enUs),
+    visible: PropTypes.bool.def(true),
+    prefixCls: PropTypes.string.def('rc-calendar'),
     defaultType: PropTypes.string.def('date'),
     type: PropTypes.string,
-    prefixCls: PropTypes.string,
-    locale: PropTypes.object,
+    // locale: PropTypes.object,
     // onTypeChange: PropTypes.func,
     fullscreen: PropTypes.bool.def(false),
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
     showTypeSwitch: PropTypes.bool.def(true),
-    Select: PropTypes.func.isRequired,
+    Select: PropTypes.object.isRequired,
     headerComponents: PropTypes.array,
     headerComponent: PropTypes.object, // The whole header component
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool.def(true),
     disabledDate: PropTypes.func,
+    renderFooter: PropTypes.func.def(() => null),
+    renderSidebar: PropTypes.func.def(() => null),
   },
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
   data () {
@@ -72,7 +76,7 @@ const FullCalendar = {
       headerRender,
       disabledDate,
     } = props
-    const { sValue: value, sType: type } = this
+    const { sValue: value, sType: type, $listeners } = this
 
     let header = null
     if (showHeader) {
@@ -88,6 +92,7 @@ const FullCalendar = {
             value,
           },
           on: {
+            ...$listeners,
             typeChange: this.setType,
             valueChange: this.setValue,
           },

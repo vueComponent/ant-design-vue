@@ -29,10 +29,9 @@ export default {
     rootPrefixCls: PropTypes.string,
   },
   data () {
-    this.prefixCls = `${this.rootPrefixCls}-decade-panel`
     this.nextCentury = goYear.bind(this, 100)
     this.previousCentury = goYear.bind(this, -100)
-    this.state = {
+    return {
       sValue: this.value || this.defaultValue,
     }
   },
@@ -46,7 +45,7 @@ export default {
     const endYear = startYear + 99
     const decades = []
     let index = 0
-    const prefixCls = this.prefixCls
+    const prefixCls = `${this.rootPrefixCls}-decade-panel`
 
     for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
       decades[rowIndex] = []
@@ -99,7 +98,7 @@ export default {
     })
 
     return (
-      <div class={this.prefixCls}>
+      <div class={prefixCls}>
         <div class={`${prefixCls}-header`}>
           <a
             class={`${prefixCls}-prev-century-btn`}

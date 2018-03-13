@@ -70,6 +70,7 @@ export function cloneElement (n, nodeProps, deep) {
     domProps = {},
     style: tempStyle = {},
     class: tempCls = {},
+    scopedSlots = {},
   } = nodeProps
 
   if (typeof data.style === 'string') {
@@ -99,6 +100,7 @@ export function cloneElement (n, nodeProps, deep) {
     attrs: { ...data.attrs, ...attrs },
     class: cls,
     domProps: { ...data.domProps, ...domProps },
+    scopedSlots: { ...data.scopedSlots, ...scopedSlots },
   })
 
   if (node.componentOptions) {

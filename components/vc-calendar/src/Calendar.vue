@@ -10,8 +10,8 @@ import CalendarFooter from './calendar/CalendarFooter'
 import CalendarMixin from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin'
 import DateInput from './date/DateInput'
+import enUs from './locale/en_US'
 import { getTimeConfig, getTodayTime, syncTime } from './util'
-
 function goStartMonth () {
   const next = this.sValue.clone()
   next.startOf('month')
@@ -48,12 +48,15 @@ function goDay (direction) {
 
 const Calendar = {
   props: {
-    prefixCls: PropTypes.string,
+    locale: PropTypes.object.def(enUs),
+    visible: PropTypes.bool.def(true),
+    prefixCls: PropTypes.string.def('rc-calendar'),
+    // prefixCls: PropTypes.string,
     defaultValue: PropTypes.object,
     value: PropTypes.object,
     selectedValue: PropTypes.object,
     mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
-    locale: PropTypes.object,
+    // locale: PropTypes.object,
     showDateInput: PropTypes.bool.def(true),
     showWeekNumber: PropTypes.bool,
     showToday: PropTypes.bool.def(true),
@@ -68,8 +71,8 @@ const Calendar = {
     // onPanelChange: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
-    renderFooter: PropTypes.func,
-    renderSidebar: PropTypes.func,
+    renderFooter: PropTypes.func.def(() => null),
+    renderSidebar: PropTypes.func.def(() => null),
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
@@ -168,7 +171,8 @@ const Calendar = {
     onDateTableSelect (value) {
       const { timePicker, sSelectedValue } = this
       if (!sSelectedValue && timePicker) {
-        const timePickerDefaultValue = timePicker.props.defaultValue
+        const timePickerProps = getOptionProps(timePicker)
+        const timePickerDefaultValue = timePickerProps.defaultValue
         if (timePickerDefaultValue) {
           syncTime(timePickerDefaultValue, value)
         }
@@ -215,6 +219,7 @@ const Calendar = {
     let timePickerEle = null
 
     if (timePicker && showTimePicker) {
+      console.log(timePicker)
       const timePickerOriginProps = getOptionProps(timePicker)
       const timePickerProps = {
         props: {
@@ -234,7 +239,7 @@ const Calendar = {
       if (timePickerOriginProps.defaultValue !== undefined) {
         timePickerProps.props.defaultOpenValue = timePickerOriginProps.defaultValue
       }
-
+      console.log(timePickerProps)
       timePickerEle = cloneElement(timePicker, timePickerProps)
     }
 

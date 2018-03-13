@@ -78,7 +78,7 @@ const Picker = {
     onCalendarKeyDown (event) {
       if (event.keyCode === KeyCode.ESC) {
         event.stopPropagation()
-        this.close(this.focus)
+        this.closeCalendar(this.focus)
       }
     },
 
@@ -94,7 +94,7 @@ const Picker = {
         cause.source === 'keyboard' ||
       (!calendarProps.timePicker && cause.source !== 'dateInput') ||
       cause.source === 'todayButton') {
-        this.close(this.focus)
+        this.closeCalendar(this.focus)
       }
       this.__emit('change', value)
     },
@@ -107,11 +107,11 @@ const Picker = {
     },
 
     onCalendarOk () {
-      this.close(this.focus)
+      this.closeCalendar(this.focus)
     },
 
     onCalendarClear () {
-      this.close(this.focus)
+      this.closeCalendar(this.focus)
     },
 
     onVisibleChange (open) {
@@ -153,11 +153,11 @@ const Picker = {
       }
     },
 
-    open (callback) {
+    openCalendar (callback) {
       this.setOpen(true, callback)
     },
 
-    close (callback) {
+    closeCalendar (callback) {
       this.setOpen(false, callback)
     },
 
@@ -183,20 +183,25 @@ const Picker = {
       align, animation,
       disabled,
       dropdownClassName,
-      transitionName, children,
+      transitionName,
     } = props
-    const state = this.$data
+    const { sValue, sOpen } = this
+    const children = this.$scopedSlots.default
+    const childrenState = {
+      value: sValue,
+      open: sOpen,
+    }
     return (<Trigger
       popupAlign={align}
       builtinPlacements={placements}
       popupPlacement={placement}
-      action={(disabled && !state.sOpen) ? [] : ['click']}
+      action={(disabled && !sOpen) ? [] : ['click']}
       destroyPopupOnHide
       getPopupContainer={getCalendarContainer}
       popupStyle={style}
       popupAnimation={animation}
       popupTransitionName={transitionName}
-      popupVisible={state.sOpen}
+      popupVisible={sOpen}
       onPopupVisibleChange={this.onVisibleChange}
       prefixCls={prefixCls}
       popupClassName={dropdownClassName}
@@ -204,7 +209,7 @@ const Picker = {
       <template slot='popup'>
         {this.getCalendarElement()}
       </template>
-      {cloneElement(children(state, props), { on: { keydown: this.onKeyDown }})}
+      {cloneElement(children(childrenState, props), { on: { keydown: this.onKeyDown }})}
     </Trigger>)
   },
 }

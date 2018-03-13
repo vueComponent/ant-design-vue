@@ -56,6 +56,7 @@ export default {
     focusOnOpen: PropTypes.bool,
     // onKeyDown: PropTypes.func,
     autoFocus: PropTypes.bool,
+    id: PropTypes.string,
   }, {
     clearText: 'clear',
     prefixCls: 'rc-time-picker',
@@ -63,6 +64,7 @@ export default {
     inputReadOnly: false,
     popupClassName: '',
     align: {},
+    id: '',
     allowEmpty: true,
     showHour: true,
     showMinute: true,
@@ -252,7 +254,7 @@ export default {
 
   render () {
     const {
-      prefixCls, placeholder, placement, align,
+      prefixCls, placeholder, placement, align, id,
       disabled, transitionName, getPopupContainer, name, autoComplete,
       autoFocus, inputReadOnly, sOpen, sValue, onFocus, onBlur,
     } = this
@@ -288,8 +290,8 @@ export default {
             onFocus={onFocus}
             onBlur={onBlur}
             autoFocus={autoFocus}
-            onChange={noop}
             readOnly={!!inputReadOnly}
+            id={id}
           />
           <span class={`${prefixCls}-icon`}/>
         </span>

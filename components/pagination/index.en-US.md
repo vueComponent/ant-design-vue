@@ -1,7 +1,7 @@
 ## API
 
 ```html
-<Pagination @change="onChange" :total="50" />
+<a-pagination @change="onChange" :total="50" />
 ```
 
 | Property | Description | Type | Default |
@@ -11,7 +11,7 @@
 | defaultPageSize | default number of data items per page | number | 10 |
 | hideOnSinglePage | Whether to hide pager on single page | boolean | false |
 | itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode | - |
-| pageSize | number of data items per page | number | - |
+| pageSize(.sync) | number of data items per page | number | - |
 | pageSizeOptions | specify the sizeChanger options | string\[] | ['10', '20', '30', '40'] |
 | showQuickJumper | determine whether you can jump to pages directly | boolean | false |
 | showSizeChanger | determine whether `pageSize` can be changed | boolean | false |

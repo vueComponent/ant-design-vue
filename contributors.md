@@ -41,7 +41,7 @@ TreeSelect
 
 ##王
 Rate  |  done
-Pagination  |  done|select完成后补全
+Pagination  |  done
 Avatar  |  done
 Badge  |  done
 Breadcrumb |  done
@@ -49,7 +49,7 @@ Card  | done
 Collapse | done
 Spin | done
 Switch | done
-Steps
+Steps | done
 Progress
 Slider
 Table

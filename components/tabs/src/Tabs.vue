@@ -1,4 +1,5 @@
 <script>
+// based on rc-tabs 9.2.4
 import Icon from '../../icon'
 import KeyCode from './KeyCode'
 import TabContent from './TabContent'

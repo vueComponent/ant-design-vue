@@ -4,7 +4,7 @@ function noop () {}
 export default {
   functional: true,
   render (createElement, context) {
-    const { data, listeners = {}} = context
+    const { props, listeners = {}} = context
     const {
       prefixCls,
       locale,
@@ -14,7 +14,7 @@ export default {
       disabledDate,
       // onToday,
       text,
-    } = data
+    } = props
     const { today = noop } = listeners
     const localeNow = (!text && timePicker ? locale.now : text) || locale.today
     const disabledToday =

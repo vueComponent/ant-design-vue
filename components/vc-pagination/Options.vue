@@ -112,7 +112,7 @@ export default {
           <input
             type='text'
             value={this.goInputText}
-            onChange={this.handleChange}
+            onInput={this.handleChange}
             onKeyup={this.go}
           />
           {locale.page}

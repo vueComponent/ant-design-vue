@@ -6,11 +6,18 @@ import CalendarHeader from './calendar/CalendarHeader'
 import CalendarFooter from './calendar/CalendarFooter'
 import CalendarMixin from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin'
-
+import enUs from './locale/en_US'
 const MonthCalendar = {
   props: {
+    locale: PropTypes.object.def(enUs),
+    visible: PropTypes.bool.def(true),
+    prefixCls: PropTypes.string.def('rc-calendar'),
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
+    disabledDate: PropTypes.func,
+    monthCellContentRender: PropTypes.func,
+    renderFooter: PropTypes.func.def(() => null),
+    renderSidebar: PropTypes.func.def(() => null),
   },
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
 
@@ -74,25 +81,26 @@ const MonthCalendar = {
 
   render () {
     const { mode, sValue: value, $props: props } = this
+    const { prefixCls, locale, disabledDate, monthCellRender, monthCellContentRender, renderFooter } = props
     const children = (
-      <div class={`${props.prefixCls}-month-calendar-content`}>
-        <div class={`${props.prefixCls}-month-header-wrap`}>
+      <div class={`${prefixCls}-month-calendar-content`}>
+        <div class={`${prefixCls}-month-header-wrap`}>
           <CalendarHeader
-            prefixCls={props.prefixCls}
+            prefixCls={prefixCls}
             mode={mode}
             value={value}
-            locale={props.locale}
-            disabledMonth={props.disabledDate}
-            monthCellRender={props.monthCellRender}
-            monthCellContentRender={props.monthCellContentRender}
+            locale={locale}
+            disabledMonth={disabledDate}
+            monthCellRender={monthCellRender}
+            monthCellContentRender={monthCellContentRender}
             onMonthSelect={this.onSelect}
             onValueChange={this.setValue}
             onPanelChange={this.handlePanelChange}
           />
         </div>
         <CalendarFooter
-          prefixCls={props.prefixCls}
-          renderFooter={props.renderFooter}
+          prefixCls={prefixCls}
+          renderFooter={renderFooter}
         />
       </div>
     )

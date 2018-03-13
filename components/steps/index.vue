@@ -32,6 +32,7 @@ export default {
     const stepsProps = {
       props,
       on: this.$listeners,
+      scopedSlots: this.$scopedSlots,
     }
     return (
       <VcSteps

@@ -5,7 +5,7 @@ import { getOptionProps } from '@/components/_util/props-util'
 import MonthPanel from '../month/MonthPanel'
 import YearPanel from '../year/YearPanel'
 import DecadePanel from '../decade/DecadePanel'
-
+function noop () {}
 function goMonth (direction) {
   const next = this.value.clone()
   next.add(direction, 'months')
@@ -34,6 +34,7 @@ const CalendarHeader = {
     enablePrev: PropTypes.any.def(1),
     enableNext: PropTypes.any.def(1),
     disabledMonth: PropTypes.func,
+    mode: PropTypes.any,
   },
   data () {
     this.nextMonth = goMonth.bind(this, 1)
@@ -47,7 +48,9 @@ const CalendarHeader = {
   methods: {
     onMonthSelect (value) {
       this.__emit('panelChange', value, 'date')
-      if (this.__emit('monthSelect', value)) {
+      if (this.$listeners.monthSelect) {
+        this.__emit('monthSelect', value)
+      } else {
         this.__emit('valueChange', value)
       }
     },
@@ -75,7 +78,7 @@ const CalendarHeader = {
       const year = (<a
         class={`${prefixCls}-year-select`}
         role='button'
-        onClick={showTimePicker ? null : () => this.showYearPanel('date')}
+        onClick={showTimePicker ? noop : () => this.showYearPanel('date')}
         title={locale.yearSelect}
       >
         {value.format(locale.yearFormat)}
@@ -83,7 +86,7 @@ const CalendarHeader = {
       const month = (<a
         class={`${prefixCls}-month-select`}
         role='button'
-        onClick={showTimePicker ? null : this.showMonthPanel}
+        onClick={showTimePicker ? noop : this.showMonthPanel}
         title={locale.monthSelect}
       >
         {locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)}

@@ -301,7 +301,7 @@ export default {
               value={this.stateCurrentInputValue}
               onKeydown={this.handleKeyDown}
               onKeyup={this.handleKeyUp}
-              onChange={this.handleKeyUp}
+              onInput={this.handleKeyUp}
               size='3'
             />
             <span class={`${prefixCls}-slash`}>／</span>

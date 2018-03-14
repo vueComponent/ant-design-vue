@@ -4,6 +4,8 @@ import align from 'dom-align'
 import addEventListener from '../_util/Dom/addEventListener'
 import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
+import clonedeep from 'lodash.clonedeep'
+import shallowequal from 'shallowequal'
 function noop () {
 }
 
@@ -59,7 +61,7 @@ export default {
       const props = this.$props
       let reAlign = false
       if (!props.disabled && this.visible) {
-        if (prevProps.disabled || prevProps.align !== props.align) {
+        if (prevProps.disabled || !shallowequal(prevProps.align, props.align)) {
           reAlign = true
         } else {
           const lastTarget = prevProps.target()
@@ -81,7 +83,7 @@ export default {
       } else {
         this.stopMonitorWindowResize()
       }
-      this.prevProps = { ...this.$props }
+      this.prevProps = { ...this.$props, align: clonedeep(this.$props.align) }
     })
   },
   beforeDestroy () {

@@ -66,6 +66,7 @@ export default {
     backfill: PropTypes.bool.def(false),
     showAction: SelectPropTypes.showAction.def(['click']),
     combobox: PropTypes.bool.def(false),
+    tokenSeparators: PropTypes.arrayOf(PropTypes.string).def([]),
     // onChange: noop,
     // onFocus: noop,
     // onBlur: noop,
@@ -226,10 +227,10 @@ export default {
       const val = event.target.value
       if (
         isMultipleOrTags(this.$props) &&
-      tokenSeparators &&
+      tokenSeparators.length &&
       includesSeparators(val, tokenSeparators)
       ) {
-        const nextValue = this.tokenize(val)
+        const nextValue = this.getValueByInput(val)
         this.fireChange(nextValue)
         this.setOpenState(false, true)
         this.setInputValue('', false)
@@ -691,6 +692,8 @@ export default {
           }
         } else if (isMultipleOrTags(props) && inputValue) {
           this.inputValue = this.getInputDOMNode().value = ''
+          sValue = this.getValueByInput(inputValue)
+          this.fireChange(sValue)
         }
         this.$emit('blur', this.getVLForOnChange(sValue))
         this.setOpenState(false)
@@ -807,6 +810,29 @@ export default {
           this.$emit('search', inputValue)
         }
       }
+    },
+    getValueByInput (string) {
+      const { multiple, tokenSeparators, $slots } = this
+      let nextValue = this.sValue
+      splitBySeparators(string, tokenSeparators).forEach(label => {
+        const selectedValue = { key: label, label }
+        if (findIndexInValueByLabel(nextValue, label) === -1) {
+          if (multiple) {
+            const value = this.getValueByLabel($slots.default, label)
+            if (value) {
+              selectedValue.key = value
+              nextValue = nextValue.concat(selectedValue)
+            }
+          } else {
+            nextValue = nextValue.concat(selectedValue)
+          }
+        }
+        this.fireSelect({
+          key: label,
+          label,
+        })
+      })
+      return nextValue
     },
 
     focus () {
@@ -1022,30 +1048,6 @@ export default {
         const childValue = getValuePropValue(child)
         return childValue === key && getValue(child, 'disabled')
       })
-    },
-
-    tokenize (string) {
-      const { multiple, tokenSeparators, $slots } = this
-      let nextValue = this.sValue
-      splitBySeparators(string, tokenSeparators).forEach(label => {
-        const selectedValue = { key: label, label }
-        if (findIndexInValueByLabel(nextValue, label) === -1) {
-          if (multiple) {
-            const value = this.getValueByLabel($slots.default, label)
-            if (value) {
-              selectedValue.key = value
-              nextValue = nextValue.concat(selectedValue)
-            }
-          } else {
-            nextValue = nextValue.concat(selectedValue)
-          }
-        }
-        this.fireSelect({
-          key: label,
-          label,
-        })
-      })
-      return nextValue
     },
 
     getOptionsAndOpenStatus () {

@@ -1,6 +1,6 @@
 <script>
 import { cloneElement } from '../_util/vnode'
-import RcTooltip from './src/Tooltip'
+import VcTooltip from '../vc-tooltip'
 import getPlacements from './placements'
 import PropTypes from '../_util/vue-types'
 import { hasProp, getComponentFromProp, getClass, getStyle, isValidElement } from '../_util/props-util'
@@ -175,12 +175,12 @@ export default {
       },
     }
     return (
-      <RcTooltip {...tooltipProps}>
+      <VcTooltip {...tooltipProps}>
         <template slot='overlay'>
           {getComponentFromProp(this, 'title')}
         </template>
         {sVisible ? cloneElement(child, { class: childCls }) : child}
-      </RcTooltip>
+      </VcTooltip>
     )
   },
 }

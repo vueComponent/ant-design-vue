@@ -1,8 +1,8 @@
 <script>
-import PropTypes from '../../_util/vue-types'
-import Trigger from '../../trigger'
+import PropTypes from '../_util/vue-types'
+import Trigger from '../trigger'
 import { placements } from './placements'
-import { hasProp, getComponentFromProp } from '../../_util/props-util'
+import { hasProp, getComponentFromProp } from '../_util/props-util'
 function noop () {}
 export default {
   props: {

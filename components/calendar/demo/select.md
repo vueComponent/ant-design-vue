@@ -16,7 +16,7 @@ A basic calendar component with Year/Month switch.
       <a-calendar :value="value" @select="onSelect" @panelChange="onPanelChange" />
     </div>
     <div :style="{ display: 'inline-block', width: '500px',marginLeft: '20px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
-      <a-calendar v-model="value" />
+      <a-calendar v-model="value1" />
     </div>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     return {
       value: moment('2017-01-25'),
       selectedValue: moment('2017-01-25'),
+      value1: moment('2017-01-25'),
     }
   },
   methods: {

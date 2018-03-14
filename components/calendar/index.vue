@@ -34,10 +34,10 @@ export const CalendarProps = () => ({
   defaultValue: MomentType,
   mode: CalendarMode,
   fullscreen: PropTypes.bool,
-  dateCellRender: PropTypes.func,
-  monthCellRender: PropTypes.func,
-  dateFullCellRender: PropTypes.func,
-  monthFullCellRender: PropTypes.func,
+  // dateCellRender: PropTypes.func,
+  // monthCellRender: PropTypes.func,
+  // dateFullCellRender: PropTypes.func,
+  // monthFullCellRender: PropTypes.func,
   locale: PropTypes.any,
   // onPanelChange?: (date?: moment.Moment, mode?: CalendarMode) => void;
   // onSelect?: (date?: moment.Moment) => void;
@@ -52,7 +52,10 @@ export default {
     prefixCls: PREFIX_CLS,
     mode: 'month',
   }),
-
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   data () {
     const value = this.value || this.defaultValue || callMoment(moment)
     if (!moment.isMoment(value)) {
@@ -78,8 +81,9 @@ export default {
     },
   },
   methods: {
-    monthCellRender (value) {
-      const { prefixCls, monthCellRender = noop } = this
+    monthCellRender2 (value) {
+      const { prefixCls, $scopedSlots } = this
+      const monthCellRender = this.monthCellRender || $scopedSlots.monthCellRender || noop
       return (
         <div class={`${prefixCls}-month`}>
           <div class={`${prefixCls}-value`}>
@@ -92,8 +96,9 @@ export default {
       )
     },
 
-    dateCellRender (value) {
-      const { prefixCls, dateCellRender = noop } = this
+    dateCellRender2 (value) {
+      const { prefixCls, $scopedSlots } = this
+      const dateCellRender = this.dateCellRender || $scopedSlots.dateCellRender || noop
       return (
         <div class={`${prefixCls}-date`}>
           <div class={`${prefixCls}-value`}>
@@ -112,8 +117,9 @@ export default {
       }
       if (way === 'select') {
         this.$emit('select', value)
+        this.$emit('change', value)
       } else if (way === 'changePanel') {
-        this.$emit('panelChange', value, this.sMode)
+        this.onPanelChange(value, this.sMode)
       }
     },
 
@@ -121,7 +127,7 @@ export default {
       const mode = (type === 'date') ? 'month' : 'year'
       if (this.sMode !== mode) {
         this.setState({ sMode: mode })
-        this.$emit('panelChange', this.sValue, this.sMode)
+        this.onPanelChange(this.sValue, mode)
       }
     },
 
@@ -135,6 +141,9 @@ export default {
 
     onPanelChange (value, mode) {
       this.$emit('panelChange', value, mode)
+      if (value !== this.sValue) {
+        this.$emit('change', value)
+      }
     },
 
     onSelect  (value) {
@@ -143,7 +152,7 @@ export default {
 
     renderCalendar  (locale, localeCode) {
       const props = getOptionProps(this)
-      const { sValue: value, sMode: mode, $listeners } = this
+      const { sValue: value, sMode: mode, $listeners, $scopedSlots } = this
       if (value && localeCode) {
         value.locale(localeCode)
       }
@@ -155,12 +164,12 @@ export default {
         cls += (` ${prefixCls}-fullscreen`)
       }
 
-      const monthCellRender = monthFullCellRender || this.monthCellRender
-      const dateCellRender = dateFullCellRender || this.dateCellRender
+      const monthCellRender = monthFullCellRender || $scopedSlots.monthFullCellRender || this.monthCellRender2
+      const dateCellRender = dateFullCellRender || $scopedSlots.dateFullCellRender || this.dateCellRender2
       const fullCalendarProps = {
         props: {
           ...props,
-          Select: noop,
+          Select: {},
           locale: locale.lang,
           type: type,
           prefixCls: prefixCls,

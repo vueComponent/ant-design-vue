@@ -1,45 +1,41 @@
----
-category: Components
-type: Data Display
-cols: 1
-title: Calendar
----
-
-Container for displaying data in calendar form.
-
-## When To Use
-
-When data is in the form of dates, such as schedules, timetables, prices calendar, lunar calendar. This component also supports Year/Month switch.
 
 ## API
 
 **Note:** Part of the Calendar's locale is read from `value`. So, please set the locale of `moment` correctly.
 
-```jsx
+````html
 // The default locale is en-US, if you want to use other locale, just set locale in entry file globaly.
 // import moment from 'moment';
 // import 'moment/locale/zh-cn';
 // moment.locale('zh-cn');
 
-<Calendar
-  dateCellRender={dateCellRender}
-  monthCellRender={monthCellRender}
-  onPanelChange={onPanelChange}
-  onSelect={onSelect}
-/>
-```
+<a-calendar
+  @panelChange="onPanelChange"
+  @select="onSelect"
+>
+  <template slot="dateCellRender" slot-scope="value"></template>
+  <template slot="monthCellRender" slot-scope="value"></template
+</a-calendar>
+````
+customize the progress dot by setting a scoped slot
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| dateCellRender | Customize the display of the date cell, the returned content will be appended to the cell | function(date: moment): ReactNode | - |
-| dateFullCellRender | Customize the display of the date cell, the returned content will override the cell | function(date: moment): ReactNode | - |
+| dateCellRender | Customize the display of the date cell by setting a scoped slot, the returned content will be appended to the cell | function(date: moment) | - |
+| dateFullCellRender | Customize the display of the date cell by setting a scoped slot, the returned content will override the cell | function(date: moment) | - |
 | defaultValue | The date selected by default | [moment](http://momentjs.com/) | default date |
 | disabledDate | Function that specifies the dates that cannot be selected | (currentDate: moment) => boolean | - |
 | fullscreen | Whether to display in full-screen | boolean | `true` |
-| locale | The calendar's locale | object | [default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json) |
+| locale | The calendar's locale | object | [default]
+(https://github.com/vueComponent/ant-design/blob/master/components/date-picker/locale/example.json) |
 | mode | The display mode of the calendar | `month` \| `year` | `month` |
-| monthCellRender | Customize the display of the month cell, the returned content will be appended to the cell | function(date: moment): ReactNode | - |
-| monthFullCellRender | Customize the display of the month cell, the returned content will override the cell | function(date: moment): ReactNode | - |
-| value | The current selected date | [moment](http://momentjs.com/) | current date |
-| onPanelChange | Callback for when panel changes | function(date: moment, mode: string) | - |
-| onSelect | Callback for when a date is selected | function(date: moment） | - |
+| monthCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will be appended to the cell | function(date: moment) | - |
+| monthFullCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will override the cell | function(date: moment) | - |
+| value(v-model) | The current selected date | [moment](http://momentjs.com/) | current date |
+
+### events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| panelChange | Callback for when panel changes | function(date: moment, mode: string) | - |
+| select | Callback for when a date is selected | function(date: moment） | - |
+| change | Callback for when value change | function(date: moment） | - |

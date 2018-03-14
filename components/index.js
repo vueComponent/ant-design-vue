@@ -102,3 +102,5 @@ export { api }
 import Steps from './steps'
 const { Step } = Steps
 export { Steps, Step }
+
+export { default as Calendar } from './calendar'

@@ -1,8 +1,7 @@
-import Radio from './Radio.vue'
-import RadioGroup from './Group.vue'
+import Radio from './Radio'
+import Group from './Group'
 
-Radio.Group = RadioGroup
-Radio.Button = {
+const Button = {
   extends: Radio,
   props: {
     ...Radio.props,
@@ -12,5 +11,8 @@ Radio.Button = {
     },
   },
 }
+Radio.Group = Group
+Radio.Button = Button
+export { Button, Group }
 export default Radio
 

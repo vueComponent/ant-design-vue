@@ -1,26 +1,24 @@
----
-order: 0
-title:
-  zh-CN: 基本
-  en-US: Basic
----
-
-## zh-CN
-
+<cn>
+#### 基本
 一个通用的日历面板，支持年/月切换。
+</cn>
 
-## en-US
-
+<us>
+#### basic
 A basic calendar component with Year/Month switch.
+</us>
 
-````jsx
-import { Calendar } from 'antd';
-
-function onPanelChange(value, mode) {
-  console.log(value, mode);
+```html
+<template>
+  <a-calendar @panelChange="onPanelChange" />
+</template>
+<script>
+export default {
+  methods: {
+    onPanelChange(value, mode) {
+      console.log(value, mode);
+    }
+  }
 }
-
-ReactDOM.render(
-  <Calendar onPanelChange={onPanelChange} />
-, mountNode);
-````
+</script>
+```

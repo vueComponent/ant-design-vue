@@ -11,12 +11,12 @@ export default {
     children: PropTypes.func,
   },
   inject: {
-    antLocale: { default: {}},
+    localeData: { default: {}},
   },
   methods: {
     getLocale () {
       const { componentName, defaultLocale } = this
-      const { antLocale } = this
+      const { antLocale } = this.localeData
       const localeFromContext = antLocale && antLocale[componentName]
       return {
         ...(typeof defaultLocale === 'function' ? defaultLocale() : defaultLocale),
@@ -25,7 +25,7 @@ export default {
     },
 
     getLocaleCode () {
-      const { antLocale } = this
+      const { antLocale } = this.localeData
       const localeCode = antLocale && antLocale.locale
       // Had use LocaleProvide but didn't set locale
       if (antLocale && antLocale.exist && !localeCode) {

@@ -30,7 +30,7 @@ export default {
   props: {
     locale: PropTypes.object.def({}),
   },
-  provide () {
+  data () {
     return {
       antLocale: {
         ...this.locale,
@@ -38,8 +38,17 @@ export default {
       },
     }
   },
+  provide () {
+    return {
+      localeData: this.$data,
+    }
+  },
   watch: {
     locale (val) {
+      this.antLocale = {
+        ...this.locale,
+        exist: true,
+      }
       setMomentLocale(val)
     },
   },

@@ -205,7 +205,9 @@ export default {
       <LocaleReceiver
         componentName='Calendar'
         defaultLocale={enUS}
-        children={this.renderCalendar}
+        scopedSlots={
+          { default: this.renderCalendar }
+        }
       />
     )
   },

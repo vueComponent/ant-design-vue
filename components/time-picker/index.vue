@@ -20,7 +20,7 @@ export function generateShowHourMinuteSecond (format) {
   }
 }
 
-export const TimePickerProps = {
+export const TimePickerProps = () => ({
   size: PropTypes.oneOf(['large', 'default', 'small']),
   value: PropTypes.object,
   defaultValue: PropTypes.object,
@@ -46,11 +46,11 @@ export const TimePickerProps = {
   align: PropTypes.object,
   placement: PropTypes.any,
   transitionName: PropTypes.string,
-}
+})
 
 export default {
   mixins: [BaseMixin],
-  props: initDefaultProps(TimePickerProps, {
+  props: initDefaultProps(TimePickerProps(), {
     prefixCls: 'ant-time-picker',
     align: {
       offset: [0, -2],

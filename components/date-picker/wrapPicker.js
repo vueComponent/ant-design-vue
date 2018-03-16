@@ -1,4 +1,4 @@
-<script>
+
 import TimePickerPanel from '../vc-time-picker/src/Panel'
 import classNames from 'classnames'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
@@ -23,7 +23,7 @@ function getColumns ({ showHour, showMinute, showSecond, use12Hours }) {
   return column
 }
 
-export default function wrapPicker (Picker, defaultFormat) {
+export default function wrapPicker (Picker, props, defaultFormat) {
   return {
     props: {
 
@@ -158,4 +158,3 @@ export default function wrapPicker (Picker, defaultFormat) {
     },
   }
 }
-</script>

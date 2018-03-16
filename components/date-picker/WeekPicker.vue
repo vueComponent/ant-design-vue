@@ -18,6 +18,7 @@ export default {
   // };
 
   // private input: any;
+  name: 'WeekPicker',
   mixins: [BaseMixin],
   data () {
     const value = this.value || this.defaultValue

@@ -1,10 +1,10 @@
 
-import TimePickerPanel from '../vc-time-picker/src/Panel'
+import TimePickerPanel from '../vc-time-picker/Panel'
 import classNames from 'classnames'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { generateShowHourMinuteSecond } from '../time-picker'
 import enUS from './locale/en_US'
-import { getOptionProps } from '../_util/props-util'
+import { getOptionProps, initDefaultProps } from '../_util/props-util'
 
 function getColumns ({ showHour, showMinute, showSecond, use12Hours }) {
   let column = 0
@@ -25,23 +25,14 @@ function getColumns ({ showHour, showMinute, showSecond, use12Hours }) {
 
 export default function wrapPicker (Picker, props, defaultFormat) {
   return {
-    props: {
-
-    },
-    // static defaultProps = {
-    //   format: defaultFormat || 'YYYY-MM-DD',
-    //   transitionName: 'slide-up',
-    //   popupStyle: {},
-    //   onChange() {
-    //   },
-    //   onOk() {
-    //   },
-    //   onOpenChange() {
-    //   },
-    //   locale: {},
-    //   prefixCls: 'ant-calendar',
-    //   inputPrefixCls: 'ant-input',
-    // };
+    props: initDefaultProps(props, {
+      format: defaultFormat || 'YYYY-MM-DD',
+      transitionName: 'slide-up',
+      popupStyle: {},
+      locale: {},
+      prefixCls: 'ant-calendar',
+      inputPrefixCls: 'ant-input',
+    }),
 
     mounted () {
       const { autoFocus, disabled } = this
@@ -135,7 +126,7 @@ export default function wrapPicker (Picker, props, defaultFormat) {
             blur: this.handleBlur,
           },
           ref: 'picker',
-
+          scopedSlots: this.$scopedSlots || {},
         }
         return (
           <Picker

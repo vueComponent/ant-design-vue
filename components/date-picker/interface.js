@@ -5,25 +5,31 @@ import PropTypes from '../_util/vue-types'
 export const MomentType = {
   type: Object,
   validator: function (value) {
-    return moment.isMoment(value)
+    return value === undefined || moment.isMoment(value)
   },
 }
 
 export const PickerProps = () => ({
+  transitionName: PropTypes.string,
   prefixCls: PropTypes.string,
   inputPrefixCls: PropTypes.string,
   format: PropTypes.string,
-  disabled: PropTypes.boolean,
-  allowClear: PropTypes.boolean,
+  disabled: PropTypes.bool,
+  allowClear: PropTypes.bool,
   popupStyle: PropTypes.object,
   locale: PropTypes.any,
+  localeCode: PropTypes.string,
   size: PropTypes.oneOf(['large', 'small', 'default']),
   getCalendarContainer: PropTypes.func,
-  open: PropTypes.boolean,
-  // onOpenChange: PropTypes.(status: boolean) => void,
+  open: PropTypes.bool,
+  // onOpenChange: PropTypes.(status: bool) => void,
   disabledDate: PropTypes.func,
   renderExtraFooter: PropTypes.any,
+  showToday: PropTypes.bool,
   dateRender: PropTypes.any, // (current: moment.Moment, today: moment.Moment) => React.ReactNode,
+  pickerClass: PropTypes.string,
+  pickerInputClass: PropTypes.string,
+  timePicker: PropTypes.any,
 })
 
 export const SinglePickerProps = () => ({
@@ -36,10 +42,9 @@ export const SinglePickerProps = () => ({
 export const DatePickerProps = () => ({
   ...PickerProps(), ...SinglePickerProps(),
   showTime: PropTypes.oneOfType([PropTypes.shape(TimePickerProps()).loose, PropTypes.bool]),
-  showToday: PropTypes.bool,
   open: PropTypes.bool,
   disabledTime: PropTypes.func,
-  // onOpenChange?: (status: boolean) => void;
+  // onOpenChange?: (status: bool) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
   placeholder: PropTypes.string,
 })
@@ -47,9 +52,10 @@ export const DatePickerProps = () => ({
 export const MonthPickerProps = () => ({
   ...PickerProps(), ...SinglePickerProps(),
   placeholder: PropTypes.string,
+  monthCellContentRender: PropTypes.func,
 })
 
-export const RangePickerValue = PropTypes.arrayOf(PropTypes.oneOfType([undefined, MomentType]))
+export const RangePickerValue = PropTypes.arrayOf(MomentType)
 export const RangePickerPresetRange = PropTypes.oneOfType([RangePickerValue, PropTypes.func])
 
 export const RangePickerProps = () => ({
@@ -62,9 +68,10 @@ export const RangePickerProps = () => ({
   // onOk?: (selectedTime: moment.Moment) => void;
   showTime: PropTypes.oneOfType([PropTypes.shape(TimePickerProps()).loose, PropTypes.bool]),
   ranges: PropTypes.objectOf(String),
-  placeholder: PropTypes.oneOfType(String),
-  mode: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOfType(String)]),
+  placeholder: PropTypes.arrayOf(String),
+  mode: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
   disabledTime: PropTypes.func,
+  showToday: PropTypes.bool,
   // onPanelChange?: (value?: RangePickerValue, mode?: string | string[]) => void;
 })
 

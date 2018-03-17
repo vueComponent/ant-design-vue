@@ -1,3 +1,5 @@
+import isPlainObject from 'lodash.isplainobject'
+
 const camelizeRE = /-(\w)/g
 const camelize = (str) => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
@@ -176,7 +178,15 @@ export function filterEmpty (children = []) {
   return children.filter(c => c.tag || c.text.trim() !== '')
 }
 const initDefaultProps = (propTypes, defaultProps) => {
-  Object.keys(defaultProps).forEach(k => { propTypes[k] = propTypes[k].def(defaultProps[k]) })
+  Object.keys(defaultProps).forEach(k => {
+    if (propTypes[k]) {
+      propTypes[k].def && (propTypes[k] = propTypes[k].def(defaultProps[k]))
+    } else {
+      throw new Error(
+        `not have ${k} prop`,
+      )
+    }
+  })
   return propTypes
 }
 
@@ -186,11 +196,16 @@ export function mergeProps () {
   args.forEach((p, i) => {
     for (const [k, v] of Object.entries(p)) {
       props[k] = props[k] || {}
-      Object.assign(props[k], v)
+      if (isPlainObject(v)) {
+        Object.assign(props[k], v)
+      } else {
+        props[k] = v
+      }
     }
   })
   return props
 }
+
 export {
   hasProp,
   filterProps,

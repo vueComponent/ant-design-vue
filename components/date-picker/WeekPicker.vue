@@ -3,8 +3,9 @@ import * as moment from 'moment'
 import Calendar from '../vc-calendar'
 import VcDatePicker from '../vc-calendar/src/Picker'
 import Icon from '../icon'
-import { hasProp, getOptionProps } from '../_util/props-util'
+import { hasProp, getOptionProps, initDefaultProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
+import { WeexPickerProps } from './interface'
 
 function formatValue (value, format) {
   return (value && value.format(format)) || ''
@@ -18,6 +19,10 @@ export default {
   // };
 
   // private input: any;
+  props: initDefaultProps(WeexPickerProps(), {
+    format: 'YYYY-wo',
+    allowClear: true,
+  }),
   name: 'WeekPicker',
   mixins: [BaseMixin],
   data () {
@@ -85,7 +90,7 @@ export default {
     const {
       prefixCls, disabled, pickerClass, popupStyle,
       pickerInputClass, format, allowClear, locale, localeCode, disabledDate,
-      sValue: pickerValue, $listeners,
+      sValue: pickerValue, $listeners, $scopedSlots,
     } = this
     const { focus = noop, blur = noop } = $listeners
 
@@ -94,11 +99,11 @@ export default {
     }
 
     const placeholder = hasProp(this, 'placeholder') ? this.placeholder : locale.lang.placeholder
-
+    const weekDateRender = this.dateRender || $scopedSlots.dateRender || this.weekDateRender
     const calendar = (
       <Calendar
         showWeekNumber
-        dateRender={this.weekDateRender}
+        dateRender={weekDateRender}
         prefixCls={prefixCls}
         format={format}
         locale={locale.lang}

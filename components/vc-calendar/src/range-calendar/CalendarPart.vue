@@ -25,10 +25,12 @@ const CalendarPart = {
     disabledDate: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
+    mode: PropTypes.any,
     // onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
+    dateRender: PropTypes.func,
   },
   render () {
     const { $props: props, $listeners = {}} = this
@@ -62,9 +64,10 @@ const CalendarPart = {
       showTimePicker,
     }
     const index = direction === 'left' ? 0 : 1
-    const timePickerProps = getOptionProps(timePicker)
-    const timePickerEle = shouldShowTimePicker &&
-      cloneElement(timePicker, {
+    let timePickerEle = null
+    if (shouldShowTimePicker) {
+      const timePickerProps = getOptionProps(timePicker)
+      timePickerEle = cloneElement(timePicker, {
         props: {
           showHour: true,
           showMinute: true,
@@ -80,6 +83,7 @@ const CalendarPart = {
         },
 
       })
+    }
 
     const dateInputElement = showDateInput &&
       <DateInput

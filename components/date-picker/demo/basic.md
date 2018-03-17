@@ -1,35 +1,35 @@
----
-order: 0
-title:
-  zh-CN: 基本
-  en-US: Basic
----
 
-## zh-CN
-
+<cn>
+#### 基本
 最简单的用法，在浮层中可以选择或者输入日期。
+</cn>
 
-## en-US
-
+<us>
+#### Basic
 Basic use case. Users can select or input a date in panel.
+</us>
 
-````jsx
-import { DatePicker } from 'antd';
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-
-function onChange(date, dateString) {
-  console.log(date, dateString);
-}
-
-ReactDOM.render(
+```html
+<template>
   <div>
-    <DatePicker onChange={onChange} />
+    <a-date-picker @change="onChange" />
     <br />
-    <MonthPicker onChange={onChange} placeholder="Select month" />
+    <a-month-picker @change="onChange" placeholder="Select month" />
     <br />
-    <RangePicker onChange={onChange} />
+    <a-range-picker @change="onChange" />
     <br />
-    <WeekPicker onChange={onChange} placeholder="Select week" />
+    <a-week-picker @change="onChange" placeholder="Select week" />
   </div>
-, mountNode);
-````
+</template>
+<script>
+export default {
+  methods: {
+    onChange(date, dateString) {
+      console.log(date, dateString);
+    }
+  }
+}
+</script>
+```
+
+

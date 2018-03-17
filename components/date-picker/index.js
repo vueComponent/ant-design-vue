@@ -6,9 +6,9 @@ import RangePicker from './RangePicker'
 import WeekPicker from './WeekPicker'
 import { DatePickerProps, MonthPickerProps, WeexPickerProps, RangePickerProps } from './interface'
 
-const DatePicker = wrapPicker(createPicker(VcCalendar), DatePickerProps())
+const DatePicker = wrapPicker(createPicker(VcCalendar, DatePickerProps()), DatePickerProps())
 
-const MonthPicker = wrapPicker(createPicker(MonthCalendar), MonthPickerProps(), 'YYYY-MM')
+const MonthPicker = wrapPicker(createPicker(MonthCalendar, MonthPickerProps()), MonthPickerProps(), 'YYYY-MM')
 
 Object.assign(DatePicker, {
   RangePicker: wrapPicker(RangePicker, RangePickerProps()),

@@ -104,3 +104,7 @@ const { Step } = Steps
 export { Steps, Step }
 
 export { default as Calendar } from './calendar'
+
+import DatePicker from './date-picker'
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker
+export { DatePicker, MonthPicker, RangePicker, WeekPicker }

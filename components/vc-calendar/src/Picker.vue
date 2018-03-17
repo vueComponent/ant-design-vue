@@ -7,12 +7,22 @@ import createChainedFunction from '@/components/_util/createChainedFunction'
 import KeyCode from '@/components/_util/KeyCode'
 import placements from './picker/placements'
 import Trigger from '@/components/trigger'
-
+import moment from 'moment'
+import { setTimeout } from 'timers'
+function isMoment (value) {
+  if (Array.isArray(value)) {
+    return value.length === 0 || !!value.find((val) => val === undefined || moment.isMoment(val))
+  } else {
+    return value === undefined || moment.isMoment(value)
+  }
+}
+const MomentType = PropTypes.custom(isMoment)
 const Picker = {
   props: {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
+    format: PropTypes.string,
     // onChange: PropTypes.func,
     // onOpenChange: PropTypes.func,
     children: PropTypes.func,
@@ -23,12 +33,12 @@ const Picker = {
     prefixCls: PropTypes.string.def('rc-calendar-picker'),
     placement: PropTypes.any.def('bottomLeft'),
     value: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
+      MomentType,
+      PropTypes.arrayOf(MomentType),
     ]),
     defaultValue: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
+      MomentType,
+      PropTypes.arrayOf(MomentType),
     ]),
     align: PropTypes.object.def({}),
   },
@@ -136,7 +146,6 @@ const Picker = {
           select: createChainedFunction(calendarEvents.select, this.onCalendarSelect),
           clear: createChainedFunction(calendarEvents.clear, this.onCalendarClear),
         },
-
       }
 
       return cloneElement(props.calendar, extraProps)
@@ -168,8 +177,8 @@ const Picker = {
     },
 
     focusCalendar () {
-      if (this.sOpen && !!this.$refs.calendarInstance) {
-        this.$refs.calendarInstance.focus()
+      if (this.sOpen && this.calendarInstance && this.calendarInstance.context) {
+        this.calendarInstance.context.focus()
       }
     },
   },
@@ -191,6 +200,10 @@ const Picker = {
       value: sValue,
       open: sOpen,
     }
+    if (this.sOpen || !this.calendarInstance) {
+      this.calendarInstance = this.getCalendarElement()
+    }
+
     return (<Trigger
       popupAlign={align}
       builtinPlacements={placements}
@@ -207,7 +220,7 @@ const Picker = {
       popupClassName={dropdownClassName}
     >
       <template slot='popup'>
-        {this.getCalendarElement()}
+        {this.calendarInstance}
       </template>
       {cloneElement(children(childrenState, props), { on: { keydown: this.onKeyDown }})}
     </Trigger>)

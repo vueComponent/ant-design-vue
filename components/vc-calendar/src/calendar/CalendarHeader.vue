@@ -35,6 +35,8 @@ const CalendarHeader = {
     enableNext: PropTypes.any.def(1),
     disabledMonth: PropTypes.func,
     mode: PropTypes.any,
+    monthCellRender: PropTypes.func,
+    monthCellContentRender: PropTypes.func,
   },
   data () {
     this.nextMonth = goMonth.bind(this, 1)

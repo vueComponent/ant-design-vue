@@ -28,8 +28,8 @@ const Panel = {
         return moment()
       },
     },
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
+    value: PropTypes.any,
+    defaultValue: PropTypes.any,
     placeholder: PropTypes.string,
     format: PropTypes.string,
     inputReadOnly: PropTypes.bool.def(false),

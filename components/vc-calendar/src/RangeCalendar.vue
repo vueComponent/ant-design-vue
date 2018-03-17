@@ -102,6 +102,7 @@ const RangeCalendar = {
     disabledTime: PropTypes.func.def(noop),
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
+    dateRender: PropTypes.func,
   },
 
   mixins: [BaseMixin, CommonMixin],
@@ -123,7 +124,7 @@ const RangeCalendar = {
   watch: {
     value (val) {
       const newState = {}
-      newState.sValue = normalizeAnchor(val, 0)
+      newState.sValue = normalizeAnchor(this.$props, 0)
       this.setState(newState)
     },
     hoverValue (val) {
@@ -258,25 +259,25 @@ const RangeCalendar = {
     onStartPanelChange (value, mode) {
       const { sMode, sValue } = this
       const newMode = [mode, sMode[1]]
+      const newValue = [value || sValue[0], sValue[1]]
+      this.__emit('panelChange', newValue, newMode)
       if (!hasProp(this, 'mode')) {
         this.setState({
           sMode: newMode,
         })
       }
-      const newValue = [value || sValue[0], sValue[1]]
-      this.__emit('panelChange', newValue, newMode)
     },
 
     onEndPanelChange (value, mode) {
       const { sMode, sValue } = this
       const newMode = [sMode[0], mode]
+      const newValue = [sValue[0], value || sValue[1]]
+      this.__emit('panelChange', newValue, newMode)
       if (!hasProp(this, 'mode')) {
         this.setState({
           sMode: newMode,
         })
       }
-      const newValue = [sValue[0], value || sValue[1]]
-      this.__emit('panelChange', newValue, newMode)
     },
 
     getStartValue () {
@@ -378,20 +379,13 @@ const RangeCalendar = {
           }
         }
       }
-
-      if (!hasProp(this, 'selectedValue')) {
-        this.setState({
-          sSelectedValue: selectedValue,
-        })
-      }
-
       // 尚未选择过时间，直接输入的话
       if (!this.sSelectedValue[0] || !this.sSelectedValue[1]) {
         const startValue = selectedValue[0] || moment()
         const endValue = selectedValue[1] || startValue.clone().add(1, 'months')
         this.setState({
           sSelectedValue: selectedValue,
-          sValue: getValueFromSelectedValue([startValue, endValue]),
+          sValue: selectedValue && selectedValue.length === 2 ? getValueFromSelectedValue([startValue, endValue]) : this.sValue,
         })
       }
 
@@ -407,6 +401,11 @@ const RangeCalendar = {
         })
         this.fireHoverValueChange([])
         this.__emit('select', selectedValue)
+      }
+      if (!hasProp(this, 'selectedValue')) {
+        this.setState({
+          sSelectedValue: selectedValue,
+        })
       }
     },
 
@@ -606,7 +605,7 @@ const RangeCalendar = {
 
     return (
       <div
-        ref={this.saveRoot}
+        ref='rootInstance'
         class={className}
         tabIndex='0'
       >

@@ -10,6 +10,7 @@ import enUs from './locale/en_US'
 const MonthCalendar = {
   props: {
     locale: PropTypes.object.def(enUs),
+    format: PropTypes.string,
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     monthCellRender: PropTypes.func,
@@ -80,8 +81,11 @@ const MonthCalendar = {
   },
 
   render () {
-    const { mode, sValue: value, $props: props } = this
-    const { prefixCls, locale, disabledDate, monthCellRender, monthCellContentRender, renderFooter } = props
+    const { mode, sValue: value, $props: props, $scopedSlots } = this
+    const { prefixCls, locale, disabledDate } = props
+    const monthCellRender = this.monthCellRender || $scopedSlots.monthCellRender
+    const monthCellContentRender = this.monthCellContentRender || $scopedSlots.monthCellContentRender
+    const renderFooter = this.renderFooter || $scopedSlots.renderFooter
     const children = (
       <div class={`${prefixCls}-month-calendar-content`}>
         <div class={`${prefixCls}-month-header-wrap`}>

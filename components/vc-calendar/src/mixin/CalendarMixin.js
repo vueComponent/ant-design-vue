@@ -17,13 +17,19 @@ function getNowByCurrentStateValue (value) {
   }
   return ret
 }
-
+function isMoment (value) {
+  if (Array.isArray(value)) {
+    return value.length === 0 || !!value.find((val) => val === undefined || moment.isMoment(val))
+  } else {
+    return value === undefined || moment.isMoment(value)
+  }
+}
+const MomentType = PropTypes.custom(isMoment)
 const CalendarMixin = {
   mixins: [BaseMixin],
   props: {
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
-    // onKeyDown: PropTypes.func,
+    value: MomentType,
+    defaultValue: MomentType,
   },
 
   data () {
@@ -65,7 +71,6 @@ const CalendarMixin = {
         // [props.className]: !!props.className,
         [newProps.class]: !!newProps.class,
       }
-
       return (
         <div
           ref='rootInstance'

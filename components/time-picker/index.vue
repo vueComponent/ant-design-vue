@@ -19,11 +19,18 @@ export function generateShowHourMinuteSecond (format) {
     showSecond: format.indexOf('s') > -1,
   }
 }
-
+function isMoment (value) {
+  if (Array.isArray(value)) {
+    return value.length === 0 || !!value.find((val) => val === undefined || moment.isMoment(val))
+  } else {
+    return value === undefined || moment.isMoment(value)
+  }
+}
+const MomentType = PropTypes.custom(isMoment)
 export const TimePickerProps = () => ({
   size: PropTypes.oneOf(['large', 'default', 'small']),
-  value: PropTypes.object,
-  defaultValue: PropTypes.object,
+  value: MomentType,
+  defaultValue: MomentType,
   open: PropTypes.bool,
   format: PropTypes.string,
   disabled: PropTypes.bool,

@@ -6,14 +6,14 @@ import classNames from 'classnames'
 import Icon from '../icon'
 import callMoment from '../_util/callMoment'
 import BaseMixin from '../_util/BaseMixin'
-import { hasProp, getOptionProps } from '../_util/props-util'
+import { hasProp, getOptionProps, initDefaultProps, mergeProps } from '../_util/props-util'
 
 // export const PickerProps = {
 //   value?: moment.Moment;
 //   prefixCls: string;
 // }
 function noop () {}
-export default function createPicker (TheCalendar) {
+export default function createPicker (TheCalendar, props) {
   return {
     // static defaultProps = {
     //   prefixCls: 'ant-calendar',
@@ -22,6 +22,11 @@ export default function createPicker (TheCalendar) {
     // };
 
     // private input: any;
+    props: initDefaultProps(props, {
+      prefixCls: 'ant-calendar',
+      allowClear: true,
+      showToday: true,
+    }),
     mixins: [BaseMixin],
     data () {
       const value = this.value || this.defaultValue
@@ -84,11 +89,11 @@ export default function createPicker (TheCalendar) {
     },
 
     render () {
-      const { sValue: value, showDate, $listeners } = this
+      const { sValue: value, showDate, $listeners, $scopedSlots } = this
       const { panelChange = noop, focus = noop, blur = noop, ok = noop } = $listeners
       const props = getOptionProps(this)
       const { prefixCls, locale, localeCode } = props
-
+      const dateRender = props.dateRender || $scopedSlots.dateRender
       const placeholder = ('placeholder' in props)
         ? props.placeholder : locale.lang.placeholder
 
@@ -114,27 +119,33 @@ export default function createPicker (TheCalendar) {
       if ('mode' in props) {
         calendarProps.props.mode = props.mode
       }
-
+      const theCalendarProps = mergeProps(calendarProps, {
+        props: {
+          disabledDate: props.disabledDate,
+          disabledTime,
+          locale: locale.lang,
+          timePicker: props.timePicker,
+          defaultValue: props.defaultPickerValue || callMoment(moment),
+          dateInputPlaceholder: placeholder,
+          prefixCls,
+          dateRender,
+          format: props.format,
+          showToday: props.showToday,
+          monthCellContentRender: props.monthCellContentRender,
+          renderFooter: this.renderFooter,
+          value: showDate,
+        },
+        on: {
+          ok: ok,
+          panelChange: panelChange,
+          change: this.handleCalendarChange,
+        },
+        class: calendarClassName,
+        scopedSlots: $scopedSlots,
+      })
       const calendar = (
         <TheCalendar
-          {...calendarProps}
-          disabledDate={props.disabledDate}
-          disabledTime={disabledTime}
-          locale={locale.lang}
-          timePicker={props.timePicker}
-          defaultValue={props.defaultPickerValue || callMoment(moment)}
-          dateInputPlaceholder={placeholder}
-          prefixCls={prefixCls}
-          class={calendarClassName}
-          onOk={ok}
-          dateRender={props.dateRender}
-          format={props.format}
-          showToday={props.showToday}
-          monthCellContentRender={props.monthCellContentRender}
-          renderFooter={this.renderFooter}
-          onPanelChange={panelChange}
-          onChange={this.handleCalendarChange}
-          value={showDate}
+          {...theCalendarProps}
         />
       )
 
@@ -155,8 +166,6 @@ export default function createPicker (TheCalendar) {
             value={(inputValue && inputValue.format(props.format)) || ''}
             placeholder={placeholder}
             class={props.pickerInputClass}
-            onFocus={focus}
-            onBlur={blur}
           />
           {clearIcon}
           <span class={`${prefixCls}-picker-icon`} />
@@ -179,8 +188,8 @@ export default function createPicker (TheCalendar) {
       return (
         <span
           class={props.pickerClass}
-          // onFocus={focus}
-          // onBlur={blur}
+          onFocus={focus}
+          onBlur={blur}
         >
           <VcDatePicker
             {...vcDatePickerProps}

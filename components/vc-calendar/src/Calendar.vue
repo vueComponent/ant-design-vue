@@ -4,6 +4,7 @@ import BaseMixin from '@/components/_util/BaseMixin'
 import { getOptionProps, hasProp } from '@/components/_util/props-util'
 import { cloneElement } from '@/components/_util/vnode'
 import KeyCode from '@/components/_util/KeyCode'
+import * as moment from 'moment'
 import DateTable from './date/DateTable'
 import CalendarHeader from './calendar/CalendarHeader'
 import CalendarFooter from './calendar/CalendarFooter'
@@ -46,15 +47,24 @@ function goDay (direction) {
   return goTime.call(this, direction, 'days')
 }
 
+function isMoment (value) {
+  if (Array.isArray(value)) {
+    return value.length === 0 || !!value.find((val) => val === undefined || moment.isMoment(val))
+  } else {
+    return value === undefined || moment.isMoment(value)
+  }
+}
+const MomentType = PropTypes.custom(isMoment)
 const Calendar = {
   props: {
     locale: PropTypes.object.def(enUs),
+    format: PropTypes.string,
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     // prefixCls: PropTypes.string,
-    defaultValue: PropTypes.object,
-    value: PropTypes.object,
-    selectedValue: PropTypes.object,
+    defaultValue: MomentType,
+    value: MomentType,
+    selectedValue: MomentType,
     mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     // locale: PropTypes.object,
     showDateInput: PropTypes.bool.def(true),
@@ -73,6 +83,7 @@ const Calendar = {
     disabledTime: PropTypes.any,
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
+    dateRender: PropTypes.func,
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
@@ -219,7 +230,6 @@ const Calendar = {
     let timePickerEle = null
 
     if (timePicker && showTimePicker) {
-      console.log(timePicker)
       const timePickerOriginProps = getOptionProps(timePicker)
       const timePickerProps = {
         props: {
@@ -239,7 +249,6 @@ const Calendar = {
       if (timePickerOriginProps.defaultValue !== undefined) {
         timePickerProps.props.defaultOpenValue = timePickerOriginProps.defaultValue
       }
-      console.log(timePickerProps)
       timePickerEle = cloneElement(timePicker, timePickerProps)
     }
 

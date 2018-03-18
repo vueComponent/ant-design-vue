@@ -1,34 +1,37 @@
----
-order: 4
-title:
-  zh-CN: 禁用
-  en-US: Disabled
----
 
-## zh-CN
-
+<cn>
+#### 禁用
 选择框的不可用状态。
+</cn>
 
-## en-US
-
+<us>
+#### Disabled
 A disabled state of the `DatePicker`.
+</us>
 
-````jsx
-import { DatePicker } from 'antd';
-import moment from 'moment';
-const { MonthPicker, RangePicker } = DatePicker;
-
-const dateFormat = 'YYYY-MM-DD';
-ReactDOM.render(
+```html
+<template>
   <div>
-    <DatePicker defaultValue={moment('2015-06-06', dateFormat)} disabled />
+    <a-date-picker :defaultValue="moment('2015-06-06', dateFormat)" disabled />
     <br />
-    <MonthPicker defaultValue={moment('2015-06', 'YYYY-MM')} disabled />
+    <a-month-picker :defaultValue="moment('2015-06', 'YYYY-MM')" disabled />
     <br />
-    <RangePicker
-      defaultValue={[moment('2015-06-06', dateFormat), moment('2015-06-06', dateFormat)]}
+    <a-range-picker
+      :defaultValue="[moment('2015-06-06', dateFormat), moment('2015-06-06', dateFormat)]"
       disabled
     />
   </div>
-, mountNode);
-````
+</template>
+<script>
+import moment from 'moment';
+export default {
+  data(){
+    this.dateFormat = 'YYYY-MM-DD'
+    return {}
+  },
+  methods: {
+    moment,
+  }
+}
+</script>
+```

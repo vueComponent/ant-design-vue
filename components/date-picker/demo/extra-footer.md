@@ -1,29 +1,42 @@
----
-order: 10
-title:
-  zh-CN: 额外的页脚
-  en-US: Extra Footer
----
 
-## zh-CN
-
+<cn>
+#### 额外的页脚
 在浮层中加入额外的页脚，以满足某些定制信息的需求。
+</cn>
 
-## en-US
-
+<us>
+#### Extra Footer
 Render extra footer in panel for customized requirements.
+</us>
 
-````jsx
-import { DatePicker } from 'antd';
-const { RangePicker, MonthPicker } = DatePicker;
-
-ReactDOM.render(
+```html
+<template>
   <div>
-    <DatePicker renderExtraFooter={() => 'extra footer'} />
-    <DatePicker renderExtraFooter={() => 'extra footer'} showTime />
-    <RangePicker renderExtraFooter={() => 'extra footer'} />
-    <RangePicker renderExtraFooter={() => 'extra footer'} showTime />
-    <MonthPicker renderExtraFooter={() => 'extra footer'} placeholder="Select month" />
+    <a-date-picker>
+      <template slot="renderExtraFooter">
+        extra footer
+      </template>
+    </a-date-picker>
+    <a-date-picker showTime >
+      <template slot="renderExtraFooter">
+        extra footer
+      </template>
+    </a-date-picker>
+    <a-range-picker >
+      <template slot="renderExtraFooter">
+        extra footer
+      </template>
+    </a-range-picker>
+    <a-range-picker showTime >
+      <template slot="renderExtraFooter">
+        extra footer
+      </template>
+    </a-range-picker>
+    <a-month-picker placeholder="Select month" >
+      <template slot="renderExtraFooter">
+        extra footer
+      </template>
+    </a-month-picker>
   </div>
-, mountNode);
-````
+</template>
+```

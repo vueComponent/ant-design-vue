@@ -41,7 +41,7 @@ export const SinglePickerProps = () => ({
 
 export const DatePickerProps = () => ({
   ...PickerProps(), ...SinglePickerProps(),
-  showTime: PropTypes.oneOfType([PropTypes.shape(TimePickerProps()).loose, PropTypes.bool]),
+  showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   open: PropTypes.bool,
   disabledTime: PropTypes.func,
   // onOpenChange?: (status: bool) => void;
@@ -54,9 +54,15 @@ export const MonthPickerProps = () => ({
   placeholder: PropTypes.string,
   monthCellContentRender: PropTypes.func,
 })
+function isMomentArray (value) {
+  if (Array.isArray(value)) {
+    return value.length === 0 || !!value.find((val) => val === undefined || moment.isMoment(val))
+  }
+  return false
+}
 
-export const RangePickerValue = PropTypes.arrayOf(MomentType)
-export const RangePickerPresetRange = PropTypes.oneOfType([RangePickerValue, PropTypes.func])
+export const RangePickerValue = PropTypes.custom(isMomentArray)
+// export const RangePickerPresetRange = PropTypes.oneOfType([RangePickerValue, PropTypes.func])
 
 export const RangePickerProps = () => ({
   ...PickerProps(),
@@ -66,7 +72,7 @@ export const RangePickerProps = () => ({
   // onChange?: (dates: RangePickerValue, dateStrings: [string, string]) => void;
   // onCalendarChange?: (dates: RangePickerValue, dateStrings: [string, string]) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
-  showTime: PropTypes.oneOfType([PropTypes.shape(TimePickerProps()).loose, PropTypes.bool]),
+  showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   ranges: PropTypes.objectOf(String),
   placeholder: PropTypes.arrayOf(String),
   mode: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),

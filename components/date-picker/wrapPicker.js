@@ -131,7 +131,11 @@ export default function wrapPicker (Picker, props, defaultFormat) {
         return (
           <Picker
             {...pickerProps}
-          />
+          >
+            <template slot='renderExtraFooter'>
+              {this.$slots.renderExtraFooter}
+            </template>
+          </Picker>
         )
       },
     },

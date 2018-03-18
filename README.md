@@ -14,7 +14,7 @@
 
 An enterprise-class UI components based on Ant Design 3.X and Vue.
 
-[README in English](README.md)
+[中文 README](README-zh_CN.md)
 
 ## 特性
 

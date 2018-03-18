@@ -12,7 +12,7 @@
 [![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://www.npmjs.com/package/vue-antd3)
 
 
-Ant Design 的 Angular 实现，开发和服务于企业级后台产品。
+Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。
 
 
 [README in English](README.md)
@@ -20,7 +20,7 @@ Ant Design 的 Angular 实现，开发和服务于企业级后台产品。
 ## 特性
 
 - 提炼自企业级中后台产品的交互语言和视觉风格。
-- 开箱即用的高质量 React 组件。
+- 开箱即用的高质量 Vue 组件。
 - 全链路开发和设计工具体系。 
 
 ## 安装

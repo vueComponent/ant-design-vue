@@ -28,6 +28,9 @@ module.exports = merge(baseWebpackConfig, {
             {
               loader: 'css-loader',
             },
+            {
+              loader: 'postcss-loader',
+            },
             { loader: 'less-loader',
             },
           ],
@@ -40,6 +43,9 @@ module.exports = merge(baseWebpackConfig, {
           use: [
             {
               loader: 'css-loader',
+            },
+            {
+              loader: 'postcss-loader',
             },
           ],
         }),

@@ -1,82 +1,61 @@
----
-order: 11
-title:
-  zh-CN: 受控面板
-  en-US: Controlled Panels
----
 
-## zh-CN
-
+<cn>
+#### 受控面板
 通过组合 `mode` 与 `onPanelChange` 控制要展示的面板。
+</cn>
 
-## en-US
-
+<us>
+#### Controlled Panels
 Determing which panel to show with `mode` and `onPanelChange`.
+</us>
 
-````jsx
-import { DatePicker } from 'antd';
-const { RangePicker } = DatePicker;
-
-class ControlledDatePicker extends React.Component {
-  state = { mode: 'time' };
-
-  handleOpenChange = (open) => {
-    if (open) {
-      this.setState({ mode: 'time' });
+```html
+<template>
+  <div>
+    <a-date-picker
+      :mode="mode1"
+      showTime
+      @openChange="handleOpenChange1"
+      @panelChange="handlePanelChange1"
+    />
+    <br />
+    <a-range-picker
+      :placeholder="['Start month', 'End month']"
+      format="YYYY-MM"
+      :value="value"
+      :mode="mode2"
+      @panelChange="handlePanelChange2"
+    />
+  </div>
+</template>
+<script>
+export default {
+  data(){
+    return {
+      mode1: 'time',
+      mode2: ['month', 'month'],
+      value: [],
     }
-  }
+  },
+  methods: {
+    handleOpenChange1(open) {
+      if (open) {
+        this.mode1 = 'time'
+      }
+    },
 
-  handlePanelChange = (value, mode) => {
-    this.setState({ mode });
-  }
-
-  render() {
-    return (
-      <DatePicker
-        mode={this.state.mode}
-        showTime
-        onOpenChange={this.handleOpenChange}
-        onPanelChange={this.handlePanelChange}
-      />
-    );
-  }
-}
-
-class ControlledRangePicker extends React.Component {
-  state = {
-    mode: ['month', 'month'],
-    value: [],
-  };
-
-  handlePanelChange = (value, mode) => {
-    this.setState({
-      value,
-      mode: [
+    handlePanelChange1(value, mode) {
+      this.mode1 = mode
+    },
+    handlePanelChange2 (value, mode) {
+      this.value = value
+      this.mode2 = [
         mode[0] === 'date' ? 'month' : mode[0],
         mode[1] === 'date' ? 'month' : mode[1],
-      ],
-    });
-  }
-
-  render() {
-    const { value, mode } = this.state;
-    return (
-      <RangePicker
-        placeholder={['Start month', 'End month']}
-        format="YYYY-MM"
-        value={value}
-        mode={mode}
-        onPanelChange={this.handlePanelChange}
-      />
-    );
+      ]
+    },
   }
 }
+</script>
+```
 
-ReactDOM.render(
-  <div>
-    <ControlledDatePicker />
-    <br />
-    <ControlledRangePicker />
-  </div>
-, mountNode);
-````

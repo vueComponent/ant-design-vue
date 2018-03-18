@@ -182,13 +182,14 @@ export default {
     },
 
     renderFooter (...args) {
-      const { prefixCls, ranges, renderExtraFooter } = this
+      const { prefixCls, ranges, $scopedSlots, $slots } = this
+      const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter
       if (!ranges && !renderExtraFooter) {
         return null
       }
       const customFooter = renderExtraFooter ? (
         <div class={`${prefixCls}-footer-extra`} key='extra'>
-          {renderExtraFooter(...args)}
+          {typeof renderExtraFooter === 'function' ? renderExtraFooter(...args) : renderExtraFooter}
         </div>
       ) : null
       const operations = Object.keys(ranges || {}).map((range) => {

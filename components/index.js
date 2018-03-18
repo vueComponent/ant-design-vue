@@ -1,3 +1,4 @@
+import './style.js'
 import Button from './button'
 const ButtonGroup = Button.Group
 export { Button, ButtonGroup }

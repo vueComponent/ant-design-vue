@@ -1,5 +1,5 @@
 <script>
-  import { Tabs } from 'antd'
+  import Tabs from '../tabs'
   import PropTypes from '../_util/vue-types'
   import addEventListener from '../_util/Dom/addEventListener'
   import { getComponentFromProp, getComponentName } from '../_util/props-util'

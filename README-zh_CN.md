@@ -12,16 +12,16 @@
 [![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://www.npmjs.com/package/vue-ant-design)
 
 
-An enterprise-class UI components based on Ant Design and Vue.
+Ant Design 的 Angular 实现，开发和服务于企业级后台产品。
+
 
 [README in English](README.md)
 
 ## 特性
 
-- An enterprise-class UI design system for desktop applications.
-- A set of high-quality React components out of the box.
-- The whole package of development and design resources and tools.
-
+- 提炼自企业级中后台产品的交互语言和视觉风格。
+- 开箱即用的高质量 React 组件。
+- 全链路开发和设计工具体系。 
 
 ## 安装
 
@@ -42,5 +42,5 @@ $ yarn add vue-ant-design
 
 - [首页](https://vuecomponent.github.io/ant-design/)
 - [Vue官方文档](https://cn.vuejs.org/)
-- [Ant Design React](http://ant.design/)
+- [Antd React](http://ant.design/)
 

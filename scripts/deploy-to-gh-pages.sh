@@ -12,7 +12,7 @@ mkdir dist
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis"
 
-./node_modules/.bin/webpack --config webpack.prod.config.js
+./node_modules/.bin/webpack --config webpack.site.config.js
 
 cd dist
 git init

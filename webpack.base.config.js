@@ -126,7 +126,7 @@ module.exports = {
         loader: 'vue-loader',
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader', exclude: /node_modules/,
       },
       {
@@ -139,7 +139,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.vue', '.md'],
+    extensions: ['.js', '.jsx', '.vue', '.md'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'antd': path.join(__dirname, 'components'),

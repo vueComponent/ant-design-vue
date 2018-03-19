@@ -121,7 +121,22 @@ module.exports = {
         use: [
           {
             loader: 'vue-antd-md-loader',
-            options: Object.assign(md, { wrapper: 'div' }),
+            options: Object.assign(md, { wrapper: 'div',
+              vueLoaderOptions: {
+                loaders: {
+                  js: [
+                    { loader: 'babel-loader',
+                      options: {
+                        presets: ['env'],
+                        plugins: [
+                          'transform-vue-jsx',
+                          'transform-object-rest-spread',
+                        ],
+                      }},
+                  ],
+                },
+              },
+            }),
           },
         ],
       },

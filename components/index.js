@@ -98,7 +98,7 @@ const api = {
   notification,
   message,
 }
-export { api }
+export { api, notification, message }
 
 import Steps from './steps'
 const { Step } = Steps

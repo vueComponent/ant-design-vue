@@ -1,8 +1,3 @@
-<template>
-  <div :class="classes" @click="handleClick">
-    <slot />
-  </div>
-</template>
 <script>
 
 export default {
@@ -33,6 +28,14 @@ export default {
       this.$emit('input', !checked)
       this.$emit('change', !checked)
     },
+  },
+  render () {
+    const { classes, handleClick, $slots } = this
+    return (
+      <div class={classes} onClick={handleClick}>
+        {$slots.default}
+      </div>
+    )
   },
 }
 </script>

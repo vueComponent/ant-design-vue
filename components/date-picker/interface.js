@@ -1,5 +1,5 @@
 import * as moment from 'moment'
-import { TimePickerProps } from '../time-picker'
+// import { TimePickerProps } from '../time-picker'
 import PropTypes from '../_util/vue-types'
 
 export const MomentType = {
@@ -73,7 +73,7 @@ export const RangePickerProps = () => ({
   // onCalendarChange?: (dates: RangePickerValue, dateStrings: [string, string]) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
   showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  ranges: PropTypes.objectOf(String),
+  ranges: PropTypes.object,
   placeholder: PropTypes.arrayOf(String),
   mode: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
   disabledTime: PropTypes.func,

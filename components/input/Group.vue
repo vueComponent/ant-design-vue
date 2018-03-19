@@ -1,8 +1,3 @@
-<template>
-  <span :class="classes" >
-    <slot />
-  </span>
-</template>
 <script>
 
 export default {
@@ -31,6 +26,13 @@ export default {
     },
   },
   methods: {
+  },
+  render () {
+    return (
+      <span class={this.classes} >
+        {this.$slots.default}
+      </span>
+    )
   },
 }
 </script>

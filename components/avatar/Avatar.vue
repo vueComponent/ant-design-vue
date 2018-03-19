@@ -1,16 +1,3 @@
-<template>
-  <span :class="classes">
-    <img v-if="src" :src="src"/>
-    <icon v-else-if="icon" :type="icon" />
-    <span
-      v-else
-      ref="avatorChildren"
-      :class="[prefixCls+'-string']"
-      :style="childrenStyle">
-      <slot></slot>
-    </span>
-  </span>
-</template>
 <script>
 import Icon from '../icon'
 
@@ -93,8 +80,20 @@ export default {
       this.setScale()
     })
   },
-  components: {
-    Icon,
+  render () {
+    const { classes, prefixCls, src, icon, childrenStyle, $slots } = this
+    return (
+      <span class={classes}>
+        {src ? <img src={src}/>
+          : (icon ? <icon type={icon} />
+            : <span
+              ref='avatorChildren'
+              class={prefixCls + '-string'}
+              style={childrenStyle}>
+              {$slots.default}
+            </span>) }
+      </span>
+    )
   },
 }
 </script>

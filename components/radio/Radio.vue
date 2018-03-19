@@ -1,17 +1,3 @@
-<template>
-  <label :class="classes">
-    <span :class="checkboxClass">
-      <input :name="name" type="radio" :disabled="disabled"
-        :class="`${prefixCls}-input`" :checked="stateChecked"
-        @change="handleChange"
-        />
-      <span :class="`${prefixCls}-inner`" />
-    </span>
-    <span v-if="hasDefaultSlot">
-      <slot></slot>
-    </span>
-  </label>
-</template>
 <script>
 import hasProp from '../_util/props-util'
 export default {
@@ -47,9 +33,6 @@ export default {
     }
   },
   computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    },
     classes () {
       const { prefixCls, disabled, stateChecked } = this
       return {
@@ -102,6 +85,23 @@ export default {
     'radioGroupContext.stateValue': function (stateValue) {
       this.stateChecked = stateValue === this.value
     },
+  },
+  render () {
+    const { classes, checkboxClass, disabled, prefixCls, stateChecked, handleChange, name, $slots } = this
+    return (
+      <label class={classes}>
+        <span class={checkboxClass}>
+          <input name={name} type='radio' disabled={disabled}
+            class={`${prefixCls}-input`} checked={stateChecked}
+            onChange={handleChange}
+          />
+          <span class={`${prefixCls}-inner`} />
+        </span>
+        {$slots.default ? <span>
+          {$slots.default}
+        </span> : null}
+      </label>
+    )
   },
 }
 </script>

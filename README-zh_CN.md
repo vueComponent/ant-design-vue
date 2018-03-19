@@ -5,11 +5,10 @@
 </p>
 
 # [Ant Design Vue](https://vuecomponent.github.io/ant-design/)
-[![Travis branch](https://img.shields.io/travis/vueComponent/ant-design/master.svg?style=flat-square)](https://travis-ci.org/vueComponent/ant-design)
+[![Travis branch](https://api.travis-ci.org/vueComponent/ant-design.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design)
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/vueComponent/ant-design.svg)](https://beta.gemnasium.com/projects/github.com/vueComponent/ant-design)
-[![npm package](https://img.shields.io/npm/v/vue-antd-ui/next.svg?style=flat-square)](https://www.npmjs.org/package/vue-antd-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat-square)](https://npmjs.org/package/vue-antd-ui)
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://www.npmjs.com/package/vue-antd-ui)
+[![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat)](https://www.npmjs.org/package/vue-antd-ui)
+[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat)](https://npmjs.org/package/vue-antd-ui)
 
 
 Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。

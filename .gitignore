@@ -60,6 +60,7 @@ typings/
 .DS_Store
 dist
 lib
+es
 
 # 备份文件
 /components/test/*

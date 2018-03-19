@@ -1,8 +1,8 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import { getOptionProps } from '@/components/_util/props-util'
-import { cloneElement } from '@/components/_util/vnode'
+import PropTypes from '../../../_util/vue-types'
+import BaseMixin from '../../../_util/BaseMixin'
+import { getOptionProps } from '../../../_util/props-util'
+import { cloneElement } from '../../../_util/vnode'
 import CalendarHeader from '../calendar/CalendarHeader'
 import DateTable from '../date/DateTable'
 import DateInput from '../date/DateInput'

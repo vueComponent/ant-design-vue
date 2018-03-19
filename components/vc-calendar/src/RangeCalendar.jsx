@@ -1,7 +1,7 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import { getOptionProps, hasProp, mergeProps } from '@/components/_util/props-util'
+import PropTypes from '../../_util/vue-types'
+import BaseMixin from '../../_util/BaseMixin'
+import { getOptionProps, hasProp, mergeProps } from '../../_util/props-util'
 import moment from 'moment'
 import CalendarPart from './range-calendar/CalendarPart'
 import TodayButton from './calendar/TodayButton'

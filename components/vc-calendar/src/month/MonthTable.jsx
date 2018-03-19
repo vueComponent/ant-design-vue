@@ -1,6 +1,6 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
+import PropTypes from '../../../_util/vue-types'
+import BaseMixin from '../../../_util/BaseMixin'
 import { getTodayTime, getMonthName } from '../util/index'
 
 const ROW = 4

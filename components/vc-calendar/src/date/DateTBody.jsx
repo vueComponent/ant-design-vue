@@ -1,6 +1,6 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import { getOptionProps } from '@/components/_util/props-util'
+import PropTypes from '../../../_util/vue-types'
+import { getOptionProps } from '../../../_util/props-util'
 import cx from 'classnames'
 import DateConstants from './DateConstants'
 import { getTitleString, getTodayTime } from '../util/'

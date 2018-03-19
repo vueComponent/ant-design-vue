@@ -1,7 +1,7 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import { hasProp } from '@/components/_util/props-util'
+import PropTypes from '../../../_util/vue-types'
+import BaseMixin from '../../../_util/BaseMixin'
+import { hasProp } from '../../../_util/props-util'
 import MonthTable from './MonthTable'
 
 function goYear (direction) {

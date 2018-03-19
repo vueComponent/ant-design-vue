@@ -1,7 +1,7 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import { getOptionProps, hasProp } from '@/components/_util/props-util'
+import PropTypes from '../../_util/vue-types'
+import BaseMixin from '../../_util/BaseMixin'
+import { getOptionProps, hasProp } from '../../_util/props-util'
 import DateTable from './date/DateTable'
 import MonthTable from './month/MonthTable'
 import CalendarMixin from './mixin/CalendarMixin'

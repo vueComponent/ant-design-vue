@@ -1,7 +1,7 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import { getOptionProps, hasProp, initDefaultProps } from '@/components/_util/props-util'
+import PropTypes from '../_util/vue-types'
+import BaseMixin from '../_util/BaseMixin'
+import { getOptionProps, hasProp, initDefaultProps } from '../_util/props-util'
 import * as moment from 'moment'
 import FullCalendar from '../vc-calendar/src/FullCalendar'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'

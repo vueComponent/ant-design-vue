@@ -1,7 +1,7 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import { getOptionProps } from '@/components/_util/props-util'
+import PropTypes from '../../../_util/vue-types'
+import BaseMixin from '../../../_util/BaseMixin'
+import { getOptionProps } from '../../../_util/props-util'
 import TodayButton from './TodayButton'
 import OkButton from './OkButton'
 import TimePickerButton from './TimePickerButton'

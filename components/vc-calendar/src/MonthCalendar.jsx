@@ -1,7 +1,7 @@
 
-import PropTypes from '@/components/_util/vue-types'
-import BaseMixin from '@/components/_util/BaseMixin'
-import KeyCode from '@/components/_util/KeyCode'
+import PropTypes from '../../_util/vue-types'
+import BaseMixin from '../../_util/BaseMixin'
+import KeyCode from '../../_util/KeyCode'
 import CalendarHeader from './calendar/CalendarHeader'
 import CalendarFooter from './calendar/CalendarFooter'
 import CalendarMixin from './mixin/CalendarMixin'

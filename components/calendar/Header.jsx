@@ -2,8 +2,8 @@
 import { PREFIX_CLS } from './Constants'
 import Select from '../select'
 import { Group, Button } from '../radio'
-import PropTypes from '@/components/_util/vue-types'
-import { initDefaultProps } from '@/components/_util/props-util'
+import PropTypes from '../_util/vue-types'
+import { initDefaultProps } from '../_util/props-util'
 const Option = Select.Option
 
 export const HeaderProps = {

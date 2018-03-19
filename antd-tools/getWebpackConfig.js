@@ -41,7 +41,7 @@ module.exports = function (modules) {
 
     resolve: {
       modules: ['node_modules', path.join(__dirname, '../node_modules')],
-      extensions: ['.js', '.vue', '.md', '.json'],
+      extensions: ['.js', '.jsx', '.vue', '.md', '.json'],
       alias: {
         'vue$': 'vue/dist/vue.esm.js',
         '@': process.cwd(),
@@ -69,17 +69,28 @@ module.exports = function (modules) {
           exclude: /node_modules/,
           use: [
             {
-              loader: 'babel-loader',
-              options: babelConfig,
-            },
-            {
               loader: 'vue-loader',
+              options: {
+                loaders: {
+                  js: [
+                    { loader: 'babel-loader',
+                      options: {
+                        presets: ['env'],
+                        plugins: [
+                          'transform-vue-jsx',
+                          'transform-object-rest-spread',
+                        ],
+                      }},
+                  ],
+                },
+              },
             },
           ],
         },
         {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
           loader: 'babel-loader', exclude: /node_modules/,
+          options: babelConfig,
         },
         {
           test: /\.css$/,

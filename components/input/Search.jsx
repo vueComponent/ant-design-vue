@@ -1,11 +1,12 @@
 
-import Input, { InputProps } from './Input'
+import Input from './Input'
 import Icon from '../icon'
+import inputProps from './inputProps'
 
 export default {
   name: 'InputSearch',
   props: {
-    ...InputProps,
+    ...inputProps,
     prefixCls: {
       default: 'ant-input-search',
       type: String,

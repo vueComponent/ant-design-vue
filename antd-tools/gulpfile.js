@@ -123,9 +123,10 @@ function compile (modules) {
   const source = [
     'components/**/*.js',
     'components/**/*.jsx',
+    '!components/vc-slider/**/*', // exclude vc-slider
   ]
-  const tsFilesStream = babelify(gulp.src(source), modules)
-  return merge2([less, tsFilesStream, assets])
+  const jsFilesStream = babelify(gulp.src(source), modules)
+  return merge2([less, jsFilesStream, assets])
 }
 
 gulp.task('dist', (done) => {

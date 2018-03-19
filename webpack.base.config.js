@@ -2,6 +2,10 @@ const path = require('path')
 const hljs = require('highlight.js')
 const Token = require('markdown-it/lib/token')
 const cheerio = require('cheerio')
+const getBabelCommonConfig = require('./antd-tools/getBabelCommonConfig')
+const babelConfig = getBabelCommonConfig(false)
+
+babelConfig.plugins.push(require.resolve('babel-plugin-syntax-dynamic-import'))
 
 const fetch = (str, tag) => {
   const $ = cheerio.load(str, { decodeEntities: false, xmlMode: true })
@@ -124,10 +128,26 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: [
+              { loader: 'babel-loader',
+                options: {
+                  presets: ['env'],
+                  plugins: [
+                    'transform-vue-jsx',
+                    'transform-object-rest-spread',
+                    'syntax-dynamic-import',
+                  ],
+                }},
+            ],
+          },
+        },
       },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader', exclude: /node_modules/,
+        options: babelConfig,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

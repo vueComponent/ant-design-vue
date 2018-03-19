@@ -8,7 +8,7 @@
 [![Travis branch](https://img.shields.io/travis/vueComponent/ant-design/master.svg?style=flat-square)](https://travis-ci.org/vueComponent/ant-design)
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/vueComponent/ant-design.svg)](https://beta.gemnasium.com/projects/github.com/vueComponent/ant-design)
 [![npm package](https://img.shields.io/npm/v/vue-antd3/next.svg?style=flat-square)](https://www.npmjs.org/package/vue-antd3)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-antd3.svg?style=flat-square)](https://npmjs.org/package/ant-design)
+[![NPM downloads](http://img.shields.io/npm/dm/vue-antd3.svg?style=flat-square)](https://npmjs.org/package/vue-antd3)
 [![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://www.npmjs.com/package/vue-antd3)
 
 

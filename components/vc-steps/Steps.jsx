@@ -4,7 +4,6 @@ import BaseMixin from '../_util/BaseMixin'
 import debounce from 'lodash/debounce'
 import isFlexSupported from '../_util/isFlexSupported'
 import {
-  getOptionProps,
   filterEmpty,
   getEvents,
   getPropsData,

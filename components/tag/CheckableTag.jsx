@@ -1,5 +1,4 @@
 
-
 export default {
   name: 'CheckableTag',
   model: {

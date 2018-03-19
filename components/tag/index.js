@@ -1,5 +1,5 @@
-import Tag from './Tag.vue'
-import CheckableTag from './CheckableTag.vue'
+import Tag from './Tag'
+import CheckableTag from './CheckableTag'
 
 Tag.CheckableTag = CheckableTag
 export default Tag

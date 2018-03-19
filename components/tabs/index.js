@@ -1,4 +1,4 @@
-import Tabs from './index.vue'
+import Tabs from './tabs'
 import TabPane from './src/TabPane'
 import TabContent from './src/TabContent'
 Tabs.TabPane = TabPane

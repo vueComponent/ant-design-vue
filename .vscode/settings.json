@@ -4,15 +4,26 @@
   "eslint.options": {
     "extensions": [
       ".js",
+      ".jsx",
       ".vue"
     ],
     "configFile": ".eslintrc"
   },
   "eslint.validate": [
-    "javascript",
-    "javascriptreact",
+    {
+      "language": "html",
+      "autoFix": true
+    },
     {
       "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
       "autoFix": true
     }
   ],

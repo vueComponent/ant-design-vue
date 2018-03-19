@@ -146,4 +146,3 @@ Notification.newInstance = function newNotificationInstance (properties, callbac
 
 export default Notification
 
-

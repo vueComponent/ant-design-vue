@@ -25,7 +25,7 @@
         "test": "karma start test/karma.conf.js --single-run",
         "build": "sh build.sh",
         "dist": "node antd-tools/cli/run.js dist",
-        "lint": "eslint -c ./.eslintrc --fix --ext .js ./components/time-picker/locale",
+        "lint": "eslint -c ./.eslintrc --fix --ext .jsx ./components",
         "lint:style": "stylelint \"./examples/**/*.less\" --fix --syntax less"
     },
     "repository": {
@@ -38,7 +38,6 @@
     },
     "homepage": "https://github.com/vueComponent/ant-design",
     "pre-commit": [
-        "lint",
         "lint:style"
     ],
     "devDependencies": {

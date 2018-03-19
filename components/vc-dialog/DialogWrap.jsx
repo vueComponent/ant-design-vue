@@ -84,4 +84,3 @@ const DialogWrap = {
 
 export default DialogWrap
 
-

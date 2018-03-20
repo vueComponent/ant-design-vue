@@ -2,15 +2,15 @@
 <cn>
 #### 自定义日期范围选择
 当 `RangePicker` 无法满足业务需求时，可以使用两个 `DatePicker` 实现类似的功能。
- 通过设置 `disabledDate` 方法，来约束开始和结束日期。
-  通过 `open` `onOpenChange` 来优化交互。
+> * 通过设置 `disabledDate` 方法，来约束开始和结束日期。
+> * 通过 `open` `onOpenChange` 来优化交互。
 </cn>
 
 <us>
 #### Customized Range Picker
 When `RangePicker` does not satisfied your requirements, try to implement similar functionality with two `DatePicker`.
- Use the `disabledDate` property to limit the start and end dates.
- Improve user experience with `open` and `onOpenChange`.
+> * Use the `disabledDate` property to limit the start and end dates.
+> * Improve user experience with `open` and `onOpenChange`.
 </us>
 
 ```html
@@ -48,32 +48,32 @@ export default {
   },
   methods: {
     disabledStartDate (startValue) {
-      const endValue = this.endValue
+      const endValue = this.endValue;
       if (!startValue || !endValue) {
-        return false
+        return false;
       }
-      return startValue.valueOf() > endValue.valueOf()
+      return startValue.valueOf() > endValue.valueOf();
     },
     disabledEndDate (endValue) {
-      const startValue = this.startValue
+      const startValue = this.startValue;
       if (!endValue || !startValue) {
-        return false
+        return false;
       }
-      return endValue.valueOf() <= startValue.valueOf()
+      return startValue.valueOf() >= endValue.valueOf();
     },
     onStartChange (value) {
-      this.startValue = value
+      this.startValue = value;
     },
     onEndChange (value) {
       this.endValue = value
     },
     handleStartOpenChange (open) {
       if (!open) {
-        this.endOpen = true
+        this.endOpen = true;
       }
     },
     handleEndOpenChange (open) {
-      this.endOpen = open
+      this.endOpen = open;
     },
   },
 }

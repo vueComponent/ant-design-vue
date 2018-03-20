@@ -1,4 +1,4 @@
-
+import PropTypes from '../_util/vue-types'
 import hasProp from '../_util/props-util'
 export default {
   name: 'Radio',
@@ -11,7 +11,7 @@ export default {
     checked: { type: Boolean, default: undefined },
     disabled: Boolean,
     isGroup: Boolean,
-    value: [String, Number, Boolean],
+    value: PropTypes.any,
     name: String,
   },
   model: {
@@ -23,7 +23,7 @@ export default {
   data () {
     const { radioGroupContext, checked, defaultChecked, value } = this
     let stateChecked
-    if (radioGroupContext && radioGroupContext.stateValue) {
+    if (radioGroupContext && radioGroupContext.stateValue !== undefined) {
       stateChecked = radioGroupContext.stateValue === value
     }
     return {

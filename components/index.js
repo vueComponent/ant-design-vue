@@ -40,8 +40,9 @@ const InputGroup = Input.Group
 const InputSearch = Input.Search
 const InputTextArea = Input.TextArea
 const Textarea = InputTextArea
+const TextArea = InputTextArea
 
-export { Input, InputGroup, InputSearch, InputTextArea, Textarea }
+export { Input, InputGroup, InputSearch, InputTextArea, Textarea, TextArea }
 
 import Breadcrumb from './breadcrumb'
 const BreadcrumbItem = Breadcrumb.Item

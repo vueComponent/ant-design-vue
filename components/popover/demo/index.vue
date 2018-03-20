@@ -19,6 +19,10 @@ import Control from './control'
 import Placement from './placement'
 import TriggerType from './triggerType'
 export default {
+  category: 'Components',
+  subtitle: '气泡卡片',
+  type: 'Data Display',
+  title: 'Popover',
   components: {
     Basic,
     ArrowCenter,

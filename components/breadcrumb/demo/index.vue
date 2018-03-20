@@ -23,7 +23,7 @@
          - When you need to inform the user of where they are.
          - When the user may need to navigate back to a higher level.
          - When the application has multi-layer architecture.
-         ## examples
+         ## Examples
         `,
   }
 

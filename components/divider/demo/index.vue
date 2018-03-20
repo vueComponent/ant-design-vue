@@ -15,9 +15,15 @@ const md = {
       A divider line separates different content.
       ## When To Use
       - Divide sections of article.
-      - Divide inline text and links such as the operation column of table.`,
+      - Divide inline text and links such as the operation column of table.
+      ## Examples 
+      `,
 }
 export default {
+  category: 'Components',
+  type: 'Other',
+  title: 'Divider',
+  subtitle: '分割线',
   render () {
     return (
       <div>

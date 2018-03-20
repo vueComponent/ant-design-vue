@@ -95,11 +95,7 @@ export { default as Modal } from './modal'
 export { default as Alert } from './alert'
 export { default as TimePicker } from './time-picker'
 
-const api = {
-  notification,
-  message,
-}
-export { api, notification, message }
+export { notification, message }
 
 import Steps from './steps'
 const { Step } = Steps

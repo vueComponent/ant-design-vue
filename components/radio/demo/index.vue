@@ -28,6 +28,10 @@ import RadioGroupWithName from './radioGroup-with-name'
 import RadioGroup from './radioGroup'
 import Size from './size'
 export default {
+  category: 'Components',
+  subtitle: '单选框',
+  type: 'Data Entry',
+  title: 'Radio',
   components: {
     Basic,
     Disabled,

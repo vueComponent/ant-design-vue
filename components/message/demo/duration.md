@@ -14,13 +14,14 @@ Customize message display duration from default `3s` to `10s`.
   <a-button @click="success">Customized display duration</a-button>
 </template>
 <script>
-  export default {
-    methods: {
-      success () {
-        this.$message.success('This is a prompt message for success, and it will disappear in 10 seconds', 10);
-      },
-    }
+import { message } from 'antd'
+export default {
+  methods: {
+    success () {
+      message.success('This is a prompt message for success, and it will disappear in 10 seconds', 10);
+    },
   }
+}
 </script>
 ```
 

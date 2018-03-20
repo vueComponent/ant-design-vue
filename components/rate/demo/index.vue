@@ -39,8 +39,12 @@
 </template>
 <script>
 import '../style'
-import { Rate, Icon, Button } from 'antd/index'
+import { Rate, Icon } from 'antd/index'
 export default {
+  category: 'Components',
+  subtitle: '评分',
+  type: 'Data Entry',
+  title: 'Rate',
   data () {
     return {
       allowHalf: true,

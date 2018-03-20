@@ -26,6 +26,7 @@ the user's workflow, you can use \`Modal\` to create a new floating layer over t
 feedback or display information.
 Additionally, if you need show a simple confirmation dialog, you can use \`antd.Modal.confirm()\`,
 and so on.
+## Examples 
 `,
 }
 export default {

@@ -31,33 +31,29 @@ const md = {
     ## When To Use
 
     - When it will take a long time to load/render all items.
-    - If you want to browse the data by navigating through pages.`,
+    - If you want to browse the data by navigating through pages.
+    ## Examples `,
 }
 export default {
+  category: 'Components',
+  subtitle: '分页',
+  type: 'Navigation',
+  title: 'Pagination',
+  cols: 1,
   render () {
     return (
       <div>
         <md cn={md.cn} us={md.us}/>
         <Basic />
-        <br/>
         <More />
-        <br/>
         <Changer />
-        <br/>
         <CustomChanger />
-        <br/>
         <Jump />
-        <br/>
         <Mini />
-        <br/>
         <Simple />
-        <br/>
         <Controlled />
-        <br/>
         <Total />
-        <br/>
         <ItemRender />
-        <br/>
         <api>
           <template slot='cn'>
             <CN/>

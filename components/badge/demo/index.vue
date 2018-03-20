@@ -25,6 +25,10 @@
   }
 
   export default {
+    category: 'Components',
+    subtitle: '徽标数',
+    type: 'Data Display',
+    title: 'Badge',
     render () {
       return (
         <div id='components-badge-demo'>

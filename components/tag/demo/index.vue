@@ -19,6 +19,10 @@ import Colorful from './colorful'
 import Control from './control'
 import HotTags from './hot-tags'
 export default {
+  category: 'Components',
+  subtitle: '标签',
+  type: 'Data Display',
+  title: 'Tag',
   components: {
     Basic,
     Checkable,

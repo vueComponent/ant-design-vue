@@ -37,6 +37,11 @@ import Position from './position'
 import Size from './size'
 import Slide from './slide'
 export default {
+  category: 'Components',
+  subtitle: '标签页',
+  type: 'Data Display',
+  title: 'Tabs',
+  cols: 1,
   components: {
     Basic,
     CardTop,

@@ -26,6 +26,10 @@
   }
 
   export default {
+    category: 'Components',
+    subtitle: '多选框',
+    type: 'Data Entry',
+    title: 'Checkbox',
     render () {
       return (
         <div>

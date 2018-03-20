@@ -12,13 +12,14 @@ A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` o
 ```html
 <template>
   <div>
-    <select v-model="selected">
-      <option v-for="val in options">{{val}}</option>
-    </select>
+    <a-select v-model="selected" :style="{ width: '120px', marginRight: '10px' }">
+      <a-select-option v-for="val in options" :key="val" :value="val">{{val}}</option>
+    </a-select>
     <a-button type="primary" @click="openNotification">Open the notification box</a-button>
   </div>
 </template>
 <script>
+  import { notification } from 'antd'
   const options = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
   export default {
     data () {
@@ -29,14 +30,14 @@ A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` o
     },
     watch: {
       selected(val) {
-        this.$notification.config({
+        notification.config({
           placement: val,
         });
       }
     },
     methods: {
-      openNotification () {
-        this.$notification.open({
+      openNotification (val) {
+        notification.open({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });

@@ -1,13 +1,13 @@
 <script>
-import Basic from './basic.md'
-import NoBorder from './noBorder.md'
-import Concise from './concise.md'
-import ColRowCard from './colRowCard.md'
-import Loading from './loading.md'
-import Grid from './grid.md'
-import Inline from './inline.md'
-import TabsCard from './tabsCard.md'
-import MoreConfigs from './moreConfigs.md'
+import Basic from './basic'
+import NoBorder from './noBorder'
+import Concise from './concise'
+import ColRowCard from './colRowCard'
+import Loading from './loading'
+import Grid from './grid'
+import Inline from './inline'
+import TabsCard from './tabsCard'
+import MoreConfigs from './moreConfigs'
 
 import CN from './../index.zh-CN.md'
 import US from './../index.en-US.md'
@@ -25,11 +25,16 @@ const md = {
          Simple rectangular container.
        ##When To Use
          A card can be used to display content related to a single subject. The content can consist of multiple elements of varying types and sizes.
-       ##Examples
-        `
+       ## Examples
+        `,
 }
 export default {
-  render() {
+  category: 'Components',
+  type: 'Data Display',
+  title: 'Card',
+  subtitle: '卡片',
+  cols: 1,
+  render () {
     return (
       <div>
         <md cn={md.cn} us={md.us} />

@@ -15,9 +15,14 @@ const md = {
 ## When To Use
 - When the page content is very long.
 - When you need to go back to the top very frequently in order to view the contents.
+## Examples 
 `,
 }
 export default {
+  category: 'Components',
+  type: 'Other',
+  subtitle: '回到顶部',
+  title: 'BackTop',
   render () {
     return (
       <div>

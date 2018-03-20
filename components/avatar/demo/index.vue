@@ -12,9 +12,14 @@ const md = {
           ## 代码演示`,
   us: `# Avatar
           Avatars can be used to represent people or objects. It supports images, 'Icon's, or letters.
+          ## Examples 
           `,
 }
 export default {
+  category: 'Components',
+  subtitle: '头像',
+  type: 'Data Display',
+  title: 'Avatar',
   render () {
     return (
       <div>

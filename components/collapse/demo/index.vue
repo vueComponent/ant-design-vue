@@ -22,9 +22,16 @@ const md = {
   us: `# When To Use
 
 - Can be used to group or hide complex regions to keep the page clean.
-- 'Accordion' is a special kind of 'Collapse', which allows only one panel to be expanded at a time.`,
+- 'Accordion' is a special kind of 'Collapse', which allows only one panel to be expanded at a time.
+## Examples 
+`,
 }
 export default {
+  category: 'Components',
+  type: 'Data Display',
+  title: 'Collapse',
+  subtitle: '折叠面板',
+  cols: 1,
   render () {
     return (
       <div>

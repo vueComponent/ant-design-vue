@@ -24,27 +24,25 @@ const md = {
 
   # When To Use
 
-  When part of the page is waiting for asynchronous data or during a rendering process, an appropriate loading animation can effectively alleviate users' inquietude.`,
+  When part of the page is waiting for asynchronous data or during a rendering process, an appropriate loading animation can effectively alleviate users' inquietude.
+  ## Examples `,
 }
 export default {
+  category: 'Components',
+  type: 'Feedback',
+  title: 'Spin',
+  subtitle: '加载中',
   render () {
     return (
       <div>
         <md cn={md.cn} us={md.us}/>
         <Basic />
-        <br/>
         <Size />
-        <br/>
         <Inside />
-        <br/>
         <Nested />
-        <br/>
         <Tip />
-        <br/>
         <DelayAndDebounce />
-        <br/>
         <CustomIndicator />
-        <br/>
         <api>
           <template slot='cn'>
             <CN/>

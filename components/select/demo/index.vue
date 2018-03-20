@@ -27,9 +27,13 @@ const md = {
         ## When To Use
         - A dropdown menu for displaying choices - an elegant alternative to the native \`<select>\` element.
         - Utilizing [Radio](#/us/components/radio/) is recommended when there are fewer total options (less than 5).
-        `,
+        ## Examples `,
 }
 export default {
+  category: 'Components',
+  subtitle: '选择器',
+  type: 'Data Entry',
+  title: 'Select',
   render () {
     return (
       <div id='components-select-demo'>

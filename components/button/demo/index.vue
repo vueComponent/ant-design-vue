@@ -19,9 +19,14 @@ const md = {
           To trigger an operation.
           ## When To Use
           A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
+          ## Examples 
           `,
 }
 export default {
+  category: 'Components',
+  type: 'General',
+  title: 'Button',
+  subtitle: '按钮',
   render () {
     return (
       <div>

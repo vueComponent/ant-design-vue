@@ -14,6 +14,7 @@ The simplest usage that close the notification box after 4.5s.
   <a-button type="primary" @click="openNotification">Open the notification box</a-button>
 </template>
 <script>
+  import { notification } from 'antd'
   const close = () => {
     console.log('Notification was closed. Either the close button was clicked or duration time elapsed.');
   };
@@ -21,7 +22,7 @@ The simplest usage that close the notification box after 4.5s.
     methods: {
       openNotification () {
         const key = `open${Date.now()}`;
-        this.$notification.open({
+        notification.open({
           message: 'Notification Title',
           description: 'A function will be be called after the notification is closed (automatically after the "duration" time of manually).',
           btn: (h)=>{
@@ -31,7 +32,7 @@ The simplest usage that close the notification box after 4.5s.
                 size: 'small',
               },
               on: {
-                click: () => this.$notification.close(key)
+                click: () => notification.close(key)
               }
             }, 'Confirm')
           },

@@ -26,9 +26,15 @@ used in the following cases:
 - A notification with complex content.
 - A notification providing a feedback based on the user interaction. Or it may show some details
   about upcoming steps the user may have to follow.
-- A notification that is pushed by the application.`,
+- A notification that is pushed by the application.
+## Examples `,
 }
 export default {
+  category: 'Components',
+  type: 'Feedback',
+  noinstant: true,
+  title: 'Notification',
+  subtitle: '通知提醒框',
   render () {
     return (
       <div>

@@ -25,9 +25,14 @@ const md = {
     ## When To Use
 
     - If you need to represent the switching between two states or on-off state.
-    - The difference between 'Switch' and 'Checkbox' is that 'Switch' will trigger a state change directly when you toggle it, while 'Checkbox' is generally used for state marking, which should work in conjunction with submit operation.`,
+    - The difference between 'Switch' and 'Checkbox' is that 'Switch' will trigger a state change directly when you toggle it, while 'Checkbox' is generally used for state marking, which should work in conjunction with submit operation.
+    ## Examples `,
 }
 export default {
+  category: 'Components',
+  subtitle: '开关',
+  type: 'Data Entry',
+  title: 'Switch',
   render () {
     return (
       <div>

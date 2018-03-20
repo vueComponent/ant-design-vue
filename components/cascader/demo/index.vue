@@ -26,9 +26,14 @@ const md = {
 - When you need to select from a set of associated data set. Such as province/city/district, company level, things classification.
 - When selecting from a large data set, with multi-stage classification separated for easy selection.
 - Chooses cascade items in one float layer for better user experience.
+## Examples 
           `,
 }
 export default {
+  category: 'Components',
+  type: 'Data Entry',
+  title: 'Cascader',
+  subtitle: '级联选择',
   render () {
     return (
       <div id='components-cascader-demo'>

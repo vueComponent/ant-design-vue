@@ -19,7 +19,8 @@ const md = {
   us: `# TimePicker
           To select/input a time.
 ## When To Use
-By clicking the input box, you can select a time from a popup panel.`,
+By clicking the input box, you can select a time from a popup panel.
+## Examples `,
 }
 export default {
   category: 'Components',

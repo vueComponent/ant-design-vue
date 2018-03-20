@@ -17,9 +17,15 @@ const md = {
 Display global messages as feedback in response to user operations.
 ## When To Use
 - To provide feedback such as success, warning, error etc.
-- A message is displayed at top and center and will be dismissed automatically, as a non-interrupting light-weighted prompt.`,
+- A message is displayed at top and center and will be dismissed automatically, as a non-interrupting light-weighted prompt.
+## Examples `,
 }
 export default {
+  category: 'Components',
+  subtitle: '全局提示',
+  type: 'Feedback',
+  noinstant: true,
+  title: 'Message',
   render () {
     return (
       <div>

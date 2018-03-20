@@ -16,9 +16,13 @@ const md = {
 ## When To Use
 When user browses a long web page, some content need to stick to the viewport. This is common for menus and actions.
 Please note that Affix should not cover other content on the page, especially when the size of the viewport is small.
-`,
+## Examples `,
 }
 export default {
+  category: 'Components',
+  subtitle: '固钉',
+  type: 'Navigation',
+  title: 'Affix',
   render () {
     return (
       <div>

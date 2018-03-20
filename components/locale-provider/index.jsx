@@ -1,7 +1,7 @@
 
 import PropTypes from '../_util/vue-types'
 import * as moment from 'moment'
-// import { ModalLocale, changeConfirmLocale } from '../modal/locale'
+import { changeConfirmLocale } from '../modal/locale'
 
 // export interface Locale {
 //   locale: string;
@@ -55,14 +55,14 @@ export default {
   beforeMount () {
     const { locale } = this
     setMomentLocale(locale)
-    // changeConfirmLocale(locale && locale.Modal)
+    changeConfirmLocale(locale && locale.Modal)
   },
   updated () {
-    // const { locale } = this
-    // changeConfirmLocale(locale && locale.Modal)
+    const { locale } = this
+    changeConfirmLocale(locale && locale.Modal)
   },
   beforeDestroy () {
-    // changeConfirmLocale()
+    changeConfirmLocale()
   },
   render () {
     return this.$slots.default[0]

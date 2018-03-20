@@ -8,6 +8,8 @@ import BaseMixin from '../_util/BaseMixin'
 import buttonTypes from '../button/buttonTypes'
 import Icon from '../icon'
 import Button from '../button'
+import LocaleReceiver from '../locale-provider/LocaleReceiver'
+import defaultLocale from '../locale-provider/default'
 
 const tooltipProps = abstractTooltipProps()
 const btnProps = buttonTypes()
@@ -63,9 +65,29 @@ export default {
     getPopupDomNode () {
       return this.$refs.tooltip.getPopupDomNode()
     },
+    renderOverlay (popconfirmLocale) {
+      const { prefixCls, okType } = this
+      return (
+        <div class={`${prefixCls}-inner-content`}>
+          <div class={`${prefixCls}-message`}>
+            <Icon type='exclamation-circle' />
+            <div class={`${prefixCls}-message-title`}>
+              {getComponentFromProp(this, 'title')}
+            </div>
+          </div>
+          <div class={`${prefixCls}-buttons`}>
+            <Button onClick={this.onCancel} size='small'>
+              {getComponentFromProp(this, 'cancelText') || popconfirmLocale.cancelText}
+            </Button>
+            <Button onClick={this.onConfirm} type={okType} size='small'>
+              {getComponentFromProp(this, 'okText') || popconfirmLocale.okText}
+            </Button>
+          </div>
+        </div>
+      )
+    },
   },
   render (h) {
-    const { prefixCls, okType } = this.$props
     const props = getOptionProps(this)
     const otherProps = omit(props, [
       'title',
@@ -84,23 +106,13 @@ export default {
       },
     }
     const overlay = (
-      <div class={`${prefixCls}-inner-content`}>
-        <div class={`${prefixCls}-message`}>
-          <Icon type='exclamation-circle' />
-          <div class={`${prefixCls}-message-title`}>
-            {getComponentFromProp(this, 'title')}
-          </div>
-        </div>
-        <div class={`${prefixCls}-buttons`}>
-          <Button onClick={this.onCancel} size='small'>
-            {getComponentFromProp(this, 'cancelText')}
-          </Button>
-          <Button onClick={this.onConfirm} type={okType} size='small'>
-            {getComponentFromProp(this, 'okText')}
-          </Button>
-        </div>
-      </div>
-    )
+      <LocaleReceiver
+        componentName='Popconfirm'
+        defaultLocale={defaultLocale.Popconfirm}
+        scopedSlots={
+          { default: this.renderOverlay }
+        }
+      />)
     return (
       <Tooltip
         {...tooltipProps}

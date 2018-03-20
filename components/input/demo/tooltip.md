@@ -1,3 +1,15 @@
+
+<cn>
+#### 输入时格式化展示
+结合 [Tooltip](#/cn/components/tooltip) 组件，实现一个数值输入框，方便内容超长时的全量展现。
+</cn>
+
+<us>
+#### Format Tooltip Input
+You can use the Input in conjunction with [Tooltip](#/cn/components/tooltip) component to create a Numeric Input, which can provide a good experience for extra-long content display.
+</us>
+
+```html
 <template>
   <a-tooltip
     :trigger="['focus']"
@@ -39,12 +51,12 @@ function formatNumber (value) {
 
 export default {
   data () {
-    this.formatNumber = formatNumber
     return {
       value: '',
     }
   },
   methods: {
+    formatNumber,
     onChange (e) {
       const { value } = e.target
       const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/
@@ -74,3 +86,4 @@ or the height is not enough when content is empty */
   font-size: 14px;
 }
 </style>
+```

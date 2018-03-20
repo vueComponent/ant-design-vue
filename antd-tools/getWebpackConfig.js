@@ -153,7 +153,7 @@ module.exports = function (modules) {
       new webpack.BannerPlugin(`
 ${distFileBaseName} v${pkg.version}
 
-Copyright 2017-present, tangjinzhou, Inc.
+Copyright 2017-present, vue-antd-ui, Inc.
 All rights reserved.
       `),
       new webpack.ProgressPlugin((percentage, msg, addInfo) => {

@@ -1,5 +1,6 @@
 {
   "extends": "stylelint-config-standard",
+  "ignoreFiles": "./components/**",
   "rules": {
     "comment-empty-line-before": null,
     "declaration-empty-line-before": null,

@@ -1,4 +1,4 @@
-
+import PropTypes from '../_util/vue-types'
 import Radio from './Radio'
 export default {
   name: 'RadioGroup',
@@ -7,14 +7,8 @@ export default {
       default: 'ant-radio-group',
       type: String,
     },
-    defaultValue: {
-      default: undefined,
-      type: [String, Number],
-    },
-    value: {
-      default: undefined,
-      type: [String, Number],
-    },
+    defaultValue: PropTypes.any,
+    value: PropTypes.any,
     size: {
       default: 'default',
       validator (value) {

@@ -1,4 +1,4 @@
-
+import { filterEmpty } from '../_util/props-util'
 export default {
   name: 'InputGruop',
   props: {
@@ -29,7 +29,7 @@ export default {
   render () {
     return (
       <span class={this.classes} >
-        {this.$slots.default}
+        {filterEmpty(this.$slots.default)}
       </span>
     )
   },

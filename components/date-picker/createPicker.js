@@ -95,6 +95,7 @@ export default function createPicker (TheCalendar, props) {
       const props = getOptionProps(this)
       const { prefixCls, locale, localeCode } = props
       const dateRender = props.dateRender || $scopedSlots.dateRender
+      const monthCellContentRender = props.monthCellContentRender || $scopedSlots.monthCellContentRender
       const placeholder = ('placeholder' in props)
         ? props.placeholder : locale.lang.placeholder
 
@@ -132,7 +133,7 @@ export default function createPicker (TheCalendar, props) {
           dateRender,
           format: props.format,
           showToday: props.showToday,
-          monthCellContentRender: props.monthCellContentRender,
+          monthCellContentRender,
           renderFooter: this.renderFooter,
           value: showDate,
         },

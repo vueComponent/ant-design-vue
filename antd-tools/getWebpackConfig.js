@@ -153,7 +153,7 @@ module.exports = function (modules) {
       new webpack.BannerPlugin(`
 ${distFileBaseName} v${pkg.version}
 
-Copyright 2017-present, vue-antd-ui, Inc.
+Copyright 2017-present, vue-antd-ui.
 All rights reserved.
       `),
       new webpack.ProgressPlugin((percentage, msg, addInfo) => {
@@ -170,7 +170,7 @@ All rights reserved.
   }
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
-    const entry = ['./components/index']
+    const entry = ['./index']
     config.entry = {
       [`${distFileBaseName}.min`]: entry,
     }

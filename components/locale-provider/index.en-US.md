@@ -49,10 +49,4 @@ If you can't find your language, you are welcome to create a locale package base
 
 This component aims for localization of the built-in text, if you want to support other documents, we recommend using [vue-i18n](https://github.com/kazupon/vue-i18n).
 
-## API
-
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| locale | language package setting, you can find the packages in this path: `antd/lib/locale-provider/` | object | - |
-
 ## Examples

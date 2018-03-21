@@ -48,10 +48,4 @@ const { LocaleProvider, locales } = window.antd;
 
 本模块仅用于组件的内建文案，若有业务文案的国际化需求，建议使用 [vue-i18n](https://github.com/kazupon/vue-i18n)
 
-## API
-
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| locale | 语言包配置，语言包可到 `antd/lib/locale-provider/` 目录下寻找 | object | - |
-
 ## 代码演示

@@ -1,27 +1,43 @@
-<template>
-  <header id='header'>
-    <a-menu v-model="current" mode="horizontal" id="nav">
-      <a-menu-item key='home'>
-        首页
-      </a-menu-item>
-      <a-menu-item key='design'>
-        设计语言
-      </a-menu-item>
-      <a-menu-item key='components'>
-        组件
-      </a-menu-item>
-      <a-menu-item key='github'>
-        <a href="https://github.com/vueComponent/ant-design">GitHub</a>
-      </a-menu-item>
-    </a-menu>
-  </header>
-</template>
 <script>
 export default {
   data () {
     return {
-      current: ['components'],
     }
+  },
+  methods: {
+    handleClick () {
+      const { lang, name } = this.$route.params
+      this.$router.push({
+        path: `/${lang === 'cn' ? 'us' : 'cn'}/components/${name}`,
+      })
+    },
+  },
+  render () {
+    const { lang } = this.$route.params
+    return (
+      <header id='header'>
+        <a-row>
+          <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
+            Logo
+          </a-col>
+          <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
+            <div id='search-box'>
+            </div>
+            <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
+              {lang === 'cn' ? 'English' : '中文'}
+            </a-button>
+            <a-menu selectedKeys={['components']} mode='horizontal' class='menu-site' id='nav'>
+              <a-menu-item key='components'>
+                {lang === 'cn' ? '组件' : 'Components'}
+              </a-menu-item>
+              <a-menu-item key='github'>
+                <a href='https://github.com/vueComponent/ant-design'>GitHub</a>
+              </a-menu-item>
+            </a-menu>
+          </a-col>
+        </a-row>
+      </header>
+    )
   },
 }
 </script>

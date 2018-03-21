@@ -19,6 +19,8 @@ const rateProps = {
   autoFocus: PropTypes.bool,
 }
 
+function noop () {}
+
 export default {
   name: 'Rate',
   mixins: [BaseMixin],
@@ -31,7 +33,7 @@ export default {
     tabIndex: 0,
     character: '★',
   }),
-  modal: {
+  model: {
     prop: 'value',
     event: 'change',
   },
@@ -173,7 +175,7 @@ export default {
     const { sValue, hoverValue, focused } = this
     const stars = []
     const disabledClass = disabled ? `${prefixCls}-disabled` : ''
-    const slotCharacter = this.$scopedSlots.character
+    const slotCharacter = this.$slots.character
     for (let index = 0; index < count; index++) {
       const starProps = {
         props: {
@@ -191,22 +193,25 @@ export default {
         },
         key: index,
         ref: `stars${index}`,
-        scopedSlots: this.$scopedSlots,
       }
       stars.push(
         <Star
           {...starProps}
-        />
+        >
+          {
+            slotCharacter !== undefined ? (<template slot='character'>{slotCharacter}</template>) : null
+          }
+        </Star>
       )
     }
     return (
       <ul
         class={classNames(prefixCls, disabledClass)}
-        onMouseleave={disabled ? null : this.onMouseLeave}
+        onMouseleave={disabled ? noop : this.onMouseLeave}
         tabIndex={disabled ? -1 : tabIndex}
-        onFocus={disabled ? null : this.onFocus}
-        onBlur={disabled ? null : this.onBlur}
-        onKeydown={disabled ? null : this.onKeyDown}
+        onFocus={disabled ? noop : this.onFocus}
+        onBlur={disabled ? noop : this.onBlur}
+        onKeydown={disabled ? noop : this.onKeyDown}
         ref='rateRef'
       >
         {stars}

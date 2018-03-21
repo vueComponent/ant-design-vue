@@ -1,82 +1,65 @@
-<template>
-  <div>
-    基本
-    <Rate class="custom"></Rate>
-    </br>
-    半星
-    <Rate :allowHalf="allowHalf"></Rate>
-    </br>
-    默认3颗星
-    <Rate v-model="initValue"></Rate>
-    <a-button type="primary" @click="changeValue">改变</a-button>
-    <a-button type="primary" @click="getValue">当前值</a-button>
-    </br>
-    只读
-    <Rate :value="initValue" :disabled="disabled"></Rate>
-    </br>
-    回调函数
-    <Rate
-      @change="onChange"
-      @hover-change="onHoverChange"></Rate>
-    <span v-if="hoverValue">{{hoverValue}}stars</span>
-    <span v-if="rValue">{{rValue}}stars</span>
-    <br/>
-    <Rate
-      :allowHalf="allowHalf"
-      @hover-change="onHoverChangeAH"></Rate>
-    <span v-if="hoverValueAH">{{hoverValueAH}}stars</span>
-    </br>
-    自定义
-    </br>
-    <Rate v-model="initValue" :allowHalf="allowHalf">
-      <Icon type="heart" />
-    </Rate>
-    </br>
-    <Rate :defaultValue="initValue" :allowHalf="allowHalf" character="A"></Rate>
-    </br>
-    <Rate :value="initValue"  character="好"></Rate>
-  </div>
-</template>
 <script>
-import '../style'
-import { Rate, Icon } from 'antd/index'
+import Basic from './basic.md'
+import Half from './half.md'
+import Text from './text.md'
+import Disabled from './disabled.md'
+import Clear from './clear.md'
+import Character from './character.md'
+import CN from '../index.zh-CN.md'
+import US from '../index.en-US.md'
+
+const md = {
+  cn: `# Rate
+
+  评分组件。
+
+  ## 何时使用
+
+  - 对评价进行展示。
+  - 对事物进行快速的评级操作。
+            ## 代码演示`,
+  us: `# Rate
+
+  Rate component.
+
+  # When To Use
+
+  - Show evaluation.
+  - A quick rating operation on something.
+  ## Examples
+  `,
+}
 export default {
   category: 'Components',
   subtitle: '评分',
   type: 'Data Entry',
+  cols: 1,
   title: 'Rate',
-  data () {
-    return {
-      allowHalf: true,
-      initValue: 3,
-      disabled: true,
-      hoverValue: undefined,
-      rValue: undefined,
-      hoverValueAH: undefined,
-      character: '好',
-    }
-  },
-  methods: {
-    onHoverChange (val) {
-      this.hoverValue = val
-    },
-    onChange (val) {
-      this.rValue = val
-    },
-    onHoverChangeAH (val) {
-      this.hoverValueAH = val
-    },
-    changeValue () {
-      this.initValue = 4
-    },
-    getValue () {
-      console.log(this.initValue)
-    },
-  },
-  components: {
-    Rate,
-    Icon,
-
+  render () {
+    return (
+      <div>
+        <md cn={md.cn} us={md.us}/>
+        <br/>
+        <Basic/>
+        <br/>
+        <Half/>
+        <br/>
+        <Text/>
+        <br/>
+        <Disabled/>
+        <br/>
+        <Clear/>
+        <br/>
+        <Character/>
+        <br/>
+        <api>
+          <template slot='cn'>
+            <CN/>
+          </template>
+          <US/>
+        </api>
+      </div>
+    )
   },
 }
 </script>

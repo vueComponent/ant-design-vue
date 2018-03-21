@@ -16,9 +16,6 @@ export default {
   },
   render () {
     const { onChange, onFocus } = this
-    const scopedSlots = (
-      <i class='anticon anticon-star' />
-    )
     const rateProps = {
       props: {
         defaultValue: 2.5,
@@ -30,9 +27,6 @@ export default {
       style: {
         fontSize: '50px', marginTop: '24px',
       },
-      scopedSlots: {
-        character: scopedSlots,
-      },
     }
     const rateProps1 = {
       props: {
@@ -43,9 +37,6 @@ export default {
       },
       style: {
         fontSize: '50px', marginTop: '24px',
-      },
-      scopedSlots: {
-        character: scopedSlots,
       },
     }
     return (
@@ -72,11 +63,13 @@ export default {
         <Rate
           {...rateProps}
         >
+          <i slot='character' class='anticon anticon-star' />
         </Rate>
         <br />
         <Rate
           {...rateProps1}
         >
+          <i slot='character' class='anticon anticon-star' />
         </Rate>
       </div>
     )

@@ -1,5 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 
+function noop () {}
+
 export default {
   name: 'Star',
   props: {
@@ -44,13 +46,13 @@ export default {
     const { onHover, onClick, disabled, prefixCls } = this
     let character = this.character
     if (character === undefined) {
-      character = this.$scopedSlots.character
+      character = this.$slots.character
     }
     return (
       <li
         class={this.getClassName()}
-        onClick={disabled ? null : onClick}
-        onMousemove={disabled ? null : onHover}
+        onClick={disabled ? noop : onClick}
+        onMousemove={disabled ? noop : onHover}
       >
         <div class={`${prefixCls}-first`}>{character}</div>
         <div class={`${prefixCls}-second`}>{character}</div>

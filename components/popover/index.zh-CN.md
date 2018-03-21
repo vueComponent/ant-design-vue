@@ -20,7 +20,7 @@ title: Popover
 | content | 卡片内容 | string\|function\|slot | 无 |
 | title | 卡片标题 | string\|function\|slot | 无 |
 
-更多属性请参考 [Tooltip](/components/tooltip/#API)。
+更多属性请参考 [Tooltip](#/cn/components/tooltip/API)。
 
 ## 注意
 

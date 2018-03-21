@@ -41,7 +41,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 ### Common Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| openChange | a callback function, can be executed whether the popup calendar is popped up or closed | function(status) | 
+| openChange | a callback function, can be executed whether the popup calendar is popped up or closed | function(status) |
 
 ### Common Methods
 
@@ -58,7 +58,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | disabledTime | to specify the time that cannot be selected | function(date) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM-DD" |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
-| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/components/time-picker/#API) |
+| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](#/us/components/time-picker/API) |
 | showTime.defaultValue | to set default time of selected date | [moment](http://momentjs.com/) | moment() |
 | showToday | whether to show "Today" button | boolean | true |
 | value | to set date | [moment](http://momentjs.com/) | - |
@@ -66,9 +66,9 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 ### DatePicker Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| calendarChange | a callback function, can be executed when the start time or the end time of the range is changing | function(dates: [moment, moment], dateStrings: [string, string]) | 
-| change | a callback function, can be executed when the selected time is changing | function(date: moment, dateString: string) | 
-| ok | callback when click ok button | function() | 
+| calendarChange | a callback function, can be executed when the start time or the end time of the range is changing | function(dates: [moment, moment], dateStrings: [string, string]) |
+| change | a callback function, can be executed when the selected time is changing | function(date: moment, dateString: string) |
+| ok | callback when click ok button | function() |
 
 ### MonthPicker
 
@@ -83,7 +83,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 ### MonthPicker Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | a callback function, can be executed when the selected time is changing | function(date: moment, dateString: string) | 
+| change | a callback function, can be executed when the selected time is changing | function(date: moment, dateString: string) |
 
 ### WeekPicker
 
@@ -107,13 +107,13 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges | preseted ranges for quick selection | { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } \| () => { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" | - |
-| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/components/time-picker/#API) |
+| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](#/us/components/time-picker/API) |
 | showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
 | value | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 
 ### RangePicker Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | a callback function, can be executed when the selected time is changing | function(dates: [moment, moment], dateStrings: [string, string]) | 
+| change | a callback function, can be executed when the selected time is changing | function(dates: [moment, moment], dateStrings: [string, string]) |
 | ok | callback when click ok button | function() |
 

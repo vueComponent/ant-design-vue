@@ -40,6 +40,10 @@ const md = {
       `,
 }
 export default {
+  category: 'Components',
+  type: 'General',
+  title: 'Icon',
+  subtitle: '图标',
   render () {
     return (
       <div>

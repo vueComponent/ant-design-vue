@@ -27,7 +27,7 @@ title: Popconfirm
 | cancel | 点击取消时触发 | (e) |
 | confirm | 点击确认时触发 | (e) |
 
-更多属性请参考 [Tooltip](/components/tooltip/#API)。
+更多属性请参考 [Tooltip](#/cn/components/tooltip/API)。
 
 ## 注意
 

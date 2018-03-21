@@ -33,7 +33,7 @@ export default {
           ? [<span>{title}</span>, <span class='chinese'>{subtitle}</span>]
           : [<span>{title}</span>]
         const key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
-        MenuItems.push(<a-menu-item key={key} style='padding-left: 80px'>
+        MenuItems.push(<a-menu-item key={key}>
           <router-link to={{ path: `/${lang}/components/${key}` }}>{linkValue}</router-link>
         </a-menu-item>)
       })
@@ -55,6 +55,7 @@ export default {
                   class='aside-container menu-site'
                   selectedKeys={[name]}
                   defaultOpenKeys={['Components']}
+                  inlineIndent={40}
                   mode='inline'>
                   <a-sub-menu title='Components' key='Components'>
                     {MenuGroup}

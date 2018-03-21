@@ -1,3 +1,4 @@
+import '../components/style.js'
 import './index.less'
 import 'highlight.js/styles/solarized-light.css'
 import Vue from 'vue'

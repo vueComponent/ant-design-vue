@@ -61,7 +61,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| title | 分组标题 | string\|\|function|\slot |  |
+| title | 分组标题 | string\|\|function\|slot |  |
 
 ### Menu.Divider
 

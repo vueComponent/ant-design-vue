@@ -36,7 +36,7 @@
 | --- | --- | --- |
 | click | callback executed when a menu item is clicked | function({ item, key, keyPath }) |
 | deselect | callback executed when a menu item is deselected, only supported for multiple mode | function({ item, key, selectedKeys }) |
-| openChange | called when open/close sub menu | function(openKeys: string\[]) | 
+| openChange | called when open/close sub menu | function(openKeys: string\[]) |
 | select | callback executed when a menu item is selected | function({ item, key, selectedKeys }) |
 
 
@@ -54,7 +54,7 @@
 | children | sub menus or sub menu items | Array&lt;MenuItem\|SubMenu> |  |
 | disabled | whether sub menu is disabled or not | boolean | false |
 | key | unique id of the sub menu | string |  |
-| title | title of the sub menu | string\|ReactNode |  |
+| title | title of the sub menu | string\|slot |  |
 
 ### Menu.SubMenu Events
 | Events Name | Description | Arguments |
@@ -66,7 +66,7 @@
 | Param | Description | Type | Default value |
 | ----- | ----------- | ---- | ------------- |
 | children | sub menu items | MenuItem\[] |  |
-| title | title of the group | string\|ReactNode |  |
+| title | title of the group | string\|slot |  |
 
 ### Menu.Divider
 

@@ -34,7 +34,7 @@ const MenuItemGroup = {
           {getComponentFromProp(this, 'title')}
         </div>
         <ul class={listClassName}>
-          {this.$slots.default.map(this.renderInnerMenuItem)}
+          {this.$slots.default && this.$slots.default.map(this.renderInnerMenuItem)}
         </ul>
       </li>
     )

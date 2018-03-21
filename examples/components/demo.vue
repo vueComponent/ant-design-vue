@@ -45,29 +45,31 @@ export default {
       locale = enUS
     }
     return (
-      <a-locale-provider locale={locale}>
-        <div class='site'>
-          <Header />
-          <a-row>
-            <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
-              <a-menu
-                class='aside-container menu-site'
-                selectedKeys={[name]}
-                defaultOpenKeys={['Components']}
-                mode='inline'>
-                <a-sub-menu title='Components' key='Components'>
-                  {MenuGroup}
-                </a-sub-menu>
-              </a-menu>
-            </a-col>
-            <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
-              <div class='content main-container'>
-                {Demo ? <Demo key={lang}/> : '正在紧急开发中...'}
-              </div>
-            </a-col>
-          </a-row>
-        </div>
-      </a-locale-provider>
+      <div class='page-wrapper'>
+        <Header num={Object.keys(AllDemo).length}/>
+        <a-locale-provider locale={locale}>
+          <div class='main-wrapper'>
+            <a-row>
+              <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
+                <a-menu
+                  class='aside-container menu-site'
+                  selectedKeys={[name]}
+                  defaultOpenKeys={['Components']}
+                  mode='inline'>
+                  <a-sub-menu title='Components' key='Components'>
+                    {MenuGroup}
+                  </a-sub-menu>
+                </a-menu>
+              </a-col>
+              <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
+                <div class='content main-container'>
+                  {Demo ? <Demo key={lang}/> : '正在紧急开发中...'}
+                </div>
+              </a-col>
+            </a-row>
+          </div>
+        </a-locale-provider>
+      </div>
     )
   },
 }

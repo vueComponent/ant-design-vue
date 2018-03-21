@@ -9,5 +9,5 @@ const AsyncComp = () => {
 export default [
   { path: '/:lang?/components/:name/:demo?/:other?', component: Demo },
   { path: '/:lang?/test/:name/:demo?', component: AsyncComp },
-  { path: '/*', redirect: '/cn/components/select' },
+  { path: '/*', redirect: '/us/components/button' },
 ]

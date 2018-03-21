@@ -1,5 +1,8 @@
 <script>
 export default {
+  props: {
+    num: Number,
+  },
   data () {
     return {
     }
@@ -18,10 +21,14 @@ export default {
       <header id='header'>
         <a-row>
           <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
-            Logo
+            <router-link to={{ path: `/${lang}` }} id='logo'>
+              LOGO
+              <span>   VUE-ANTD</span>
+            </router-link>
           </a-col>
           <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
             <div id='search-box'>
+              进度：{this.num} / 52
             </div>
             <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
               {lang === 'cn' ? 'English' : '中文'}

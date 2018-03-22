@@ -73,14 +73,14 @@ export default {
           cleanedValue: null,
         })
       }
-      this.$emit('hover-change', hoverValue)
+      this.$emit('hoverChange', hoverValue)
     },
     onMouseLeave () {
       this.setState({
         hoverValue: undefined,
         cleanedValue: null,
       })
-      this.$emit('hover-change', undefined)
+      this.$emit('hoverChange', undefined)
     },
     onClick (event, index) {
       const value = this.getStarValue(index, event.pageX)

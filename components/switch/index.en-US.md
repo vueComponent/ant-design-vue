@@ -11,10 +11,10 @@
 | size | the size of the `Switch`, options: `default` `small` | string | default |
 | unCheckedChildren | content to be shown when the state is unchecked | string\|slot |  |
 
-### events
+### Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | a callback function, can be executed when the checked state is changing | Function(checked:Boolean) |  |
+| change | a callback function, can be executed when the checked state is changing | Function(checked:Boolean) |
 
 ## Methods
 

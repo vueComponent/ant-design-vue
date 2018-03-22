@@ -1,27 +1,32 @@
-<template>
-<div>
-    <div :style="{ marginBottom: '16px' }">
-      <a-button @click="add">ADD</a-button>
-    </div>
-    <Tabs
-      hideAdd
-      v-model="activeKey"
-      type="editable-card"
-      @edit="onEdit"
-    >
-    <TabPane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">
-      {{pane.content}}
-    </TabPane>
-  </Tabs>
-</div>
+<cn>
+#### 新增和关闭页签
+只有卡片样式的页签支持新增和关闭选项。
+使用 `closable={false}` 禁止关闭。
+</cn>
 
+<us>
+#### Add & close tab
+Only card type Tabs support adding & closable.
++Use `closable={false}` to disable close.
+</us>
+
+```html
+<template>
+  <a-tabs
+    v-model="activeKey"
+    type="editable-card"
+    @edit="onEdit"
+  >
+    <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">
+      {{pane.content}}
+    </a-tab-pane>
+  </a-tabs>
 </template>
 <script>
-import { Tabs, Button } from 'antd'
 export default {
   data () {
     const panes = [
-      { title: 'Tab 1', content: 'Content of Tab 1', key: '1' },
+      { title: 'Tab 1', content: 'Content of Tab 1', key: '1', closable: false },
       { title: 'Tab 2', content: 'Content of Tab 2', key: '2' },
     ]
     return {
@@ -60,10 +65,6 @@ export default {
       this.activeKey = activeKey
     },
   },
-  components: {
-    Tabs,
-    TabPane: Tabs.TabPane,
-
-  },
 }
 </script>
+```

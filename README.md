@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vuecomponent.github.io/ant-design/">
-    <img width="230" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg">
+    <img width="230" src="https://raw.githubusercontent.com/vueComponent/ant-design/master/logo.png">
   </a>
 </p>
 

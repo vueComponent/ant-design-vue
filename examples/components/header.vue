@@ -22,7 +22,7 @@ export default {
         <a-row>
           <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: `/${lang}` }} id='logo'>
-              LOGO
+              <img alt='logo' src='https://raw.githubusercontent.com/vueComponent/ant-design/master/logo.png' />
               <span>   VUE-ANTD</span>
             </router-link>
           </a-col>

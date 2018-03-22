@@ -69,6 +69,7 @@ const DateTBody = {
     const disabledClass = `${prefixCls}-disabled-cell`
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`
+    const lastDayOfMonthClass = `${prefixCls}-last-day-of-month`
     const month1 = value.clone()
     month1.date(1)
     const day = month1.day()
@@ -167,6 +168,10 @@ const DateTBody = {
         }
         if (isAfterCurrentMonthYear) {
           cls += ` ${nextMonthDayClass}`
+        }
+
+        if (current.clone().endOf('month').date() === current.date()) {
+          cls += ` ${lastDayOfMonthClass}`
         }
 
         if (disabledDate) {

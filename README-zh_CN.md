@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vuecomponent.github.io/ant-design/">
-    <img width="230" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg">
+    <img width="230" src="https://raw.githubusercontent.com/vueComponent/ant-design/master/logo.png">
   </a>
 </p>
 
@@ -20,7 +20,7 @@ Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。
 
 - 提炼自企业级中后台产品的交互语言和视觉风格。
 - 开箱即用的高质量 Vue 组件。
-- 全链路开发和设计工具体系。 
+- 全链路开发和设计工具体系。
 
 ## 安装
 

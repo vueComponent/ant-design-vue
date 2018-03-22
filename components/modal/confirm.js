@@ -25,10 +25,13 @@ export default function confirm (config) {
   }
 
   function render (props) {
+    const confirmDialogProps = {
+      props,
+    }
     return new Vue({
       el: el,
       render () {
-        return <ConfirmDialog {...props} />
+        return <ConfirmDialog {...confirmDialogProps} />
       },
     })
   }

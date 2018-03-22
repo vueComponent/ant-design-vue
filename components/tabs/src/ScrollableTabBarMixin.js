@@ -1,6 +1,6 @@
 import { setTransform, isTransformSupported } from './utils'
 import addDOMEventListener from 'add-dom-event-listener'
-import debounce from 'lodash.debounce'
+import debounce from 'lodash/debounce'
 function noop () {
 }
 export default {

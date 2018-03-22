@@ -38,6 +38,7 @@ export default {
     showLessItems: PropTypes.bool.def(false),
     // showSizeChange: PropTypes.func.def(noop),
     selectComponentClass: PropTypes.any,
+    showPrevNextJumpers: PropTypes.bool.def(true),
     showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(false),
     showTitle: PropTypes.bool.def(true),
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
@@ -310,7 +311,7 @@ export default {
           <li
             title={this.showTitle ? locale.next_page : null}
             onClick={this.next}
-            tabIndex='0'
+            tabIndex={this.hasNext ? 0 : null}
             onKeypress={this.runIfEnterNext}
             class={`${hasNext ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
@@ -341,34 +342,37 @@ export default {
     } else {
       const prevItemTitle = this.showLessItems ? locale.prev_3 : locale.prev_5
       const nextItemTitle = this.showLessItems ? locale.next_3 : locale.next_5
-      jumpPrev = (
-        <li
-          title={this.showTitle ? prevItemTitle : null}
-          key='prev'
-          onClick={this.jumpPrev}
-          tabIndex='0'
-          onKeypress={this.runIfEnterJumpPrev}
-          class={`${prefixCls}-jump-prev`}
-        >
-          {this.itemRender(
-            this.getJumpPrevPage(), 'jump-prev', <a class={`${prefixCls}-item-link`} />
-          )}
-        </li>
-      )
-      jumpNext = (
-        <li
-          title={this.showTitle ? nextItemTitle : null}
-          key='next'
-          tabIndex='0'
-          onClick={this.jumpNext}
-          onKeypress={this.runIfEnterJumpNext}
-          class={`${prefixCls}-jump-next`}
-        >
-          {this.itemRender(
-            this.getJumpNextPage(), 'jump-next', <a class={`${prefixCls}-item-link`} />
-          )}
-        </li>
-      )
+      if (this.showPrevNextJumpers) {
+        jumpPrev = (
+          <li
+            title={this.showTitle ? prevItemTitle : null}
+            key='prev'
+            onClick={this.jumpPrev}
+            tabIndex='0'
+            onKeypress={this.runIfEnterJumpPrev}
+            class={`${prefixCls}-jump-prev`}
+          >
+            {this.itemRender(
+              this.getJumpPrevPage(), 'jump-prev', <a class={`${prefixCls}-item-link`} />
+            )}
+          </li>
+        )
+        jumpNext = (
+          <li
+            title={this.showTitle ? nextItemTitle : null}
+            key='next'
+            tabIndex='0'
+            onClick={this.jumpNext}
+            onKeypress={this.runIfEnterJumpNext}
+            class={`${prefixCls}-jump-next`}
+          >
+            {this.itemRender(
+              this.getJumpNextPage(), 'jump-next', <a class={`${prefixCls}-item-link`} />
+            )}
+          </li>
+        )
+      }
+
       lastPager = (
         <Pager
           locale={locale}

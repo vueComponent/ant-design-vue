@@ -4,7 +4,7 @@ import align from 'dom-align'
 import addEventListener from '../_util/Dom/addEventListener'
 import { cloneElement } from '../_util/vnode.js'
 import isWindow from './isWindow'
-import clonedeep from 'lodash.clonedeep'
+import clonedeep from 'lodash/cloneDeep'
 import shallowequal from 'shallowequal'
 function noop () {
 }

@@ -29,7 +29,7 @@ A complete multiple select sample with remote search, debounce fetch, ajax callb
 <script>
 import jsonp from 'fetch-jsonp';
 import querystring from 'querystring';
-import debounce from 'lodash.debounce';
+import debounce from 'lodash/debounce';
 
 export default {
   data() {

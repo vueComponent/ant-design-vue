@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# [Ant Design Vue](https://vuecomponent.github.io/ant-design/)
+# [Vue Ant Design](https://vuecomponent.github.io/ant-design/)
 [![Travis branch](https://api.travis-ci.org/vueComponent/ant-design.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design)
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/vueComponent/ant-design.svg)](https://beta.gemnasium.com/projects/github.com/vueComponent/ant-design)
 [![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat)](https://www.npmjs.org/package/vue-antd-ui)

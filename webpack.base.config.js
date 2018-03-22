@@ -7,10 +7,12 @@ const babelConfig = getBabelCommonConfig(false)
 
 babelConfig.plugins.push(require.resolve('babel-plugin-syntax-dynamic-import'))
 
-const fetch = (str, tag) => {
+const fetch = (str, tag, scoped) => {
   const $ = cheerio.load(str, { decodeEntities: false, xmlMode: true })
   if (!tag) return str
-
+  if (tag === 'style') {
+    return scoped ? $(`${tag}[scoped]`).html() : $(`${tag}`).not(`${tag}[scoped]`).html()
+  }
   return $(tag).html()
 }
 
@@ -53,6 +55,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
   let template = ''
   let script = ''
   let style = ''
+  let scopedStyle = ''
   let code = ''
   tokens.forEach(token => {
     if (token.type === 'html_block') {
@@ -70,6 +73,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
       template = fetch(token.content, 'template')
       script = fetch(token.content, 'script')
       style = fetch(token.content, 'style')
+      scopedStyle = fetch(token.content, 'style', true)
       token.content = ''
       token.type = 'html_block'
     }
@@ -98,8 +102,13 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
       </script>
       ` : ''
     newContent += style ? `
-      <style scoped>
+      <style>
       ${style || ''}
+      </style>
+      ` : ''
+    newContent += scopedStyle ? `
+      <style scoped>
+      ${scopedStyle || ''}
       </style>
       ` : ''
     const t = new Token('html_block', '', 0)

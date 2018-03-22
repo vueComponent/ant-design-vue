@@ -1,34 +1,56 @@
-<template>
-  <div>
-    <h1>Basic</h1>
-    <Basic />
-    <h1>Checkable</h1>
-    <Checkable />
-    <h1>Colorful</h1>
-    <Colorful />
-    <h1>Control</h1>
-    <Control />
-    <h1>HotTags</h1>
-    <HotTags />
-  </div>
-</template>
 <script>
 import Basic from './basic'
 import Checkable from './checkable'
 import Colorful from './colorful'
 import Control from './control'
 import HotTags from './hot-tags'
+import CN from '../index.zh-CN.md'
+import US from '../index.en-US.md'
+
+const md = {
+  cn: `# 标签 Tag
+
+    进行标记和分类的小标签。
+
+## 何时使用
+
+- 用于标记事物的属性和维度。
+- 进行分类。
+
+    ## 代码演示`,
+  us: `# Tag
+
+    Tag for categorizing or markup.
+
+## When To Use
+
+- It can be used to tag by dimension or property.
+
+- When categorizing.
+    ## Examples `,
+}
 export default {
   category: 'Components',
   subtitle: '标签',
   type: 'Data Display',
   title: 'Tag',
-  components: {
-    Basic,
-    Checkable,
-    Colorful,
-    Control,
-    HotTags,
+  render () {
+    return (
+      <div>
+        <md cn={md.cn} us={md.us}/>
+        <Basic />
+        <Checkable />
+        <Colorful />
+        <Control />
+        <HotTags />
+        <api>
+          <template slot='cn'>
+            <CN/>
+          </template>
+          <US/>
+        </api>
+      </div>
+    )
   },
 }
 </script>

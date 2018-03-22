@@ -1,19 +1,29 @@
+<cn>
+#### 热门标签
+选择你感兴趣的话题。
+</cn>
+
+<us>
+#### Hot Tags
+Select your favourite topics.
+</us>
+
+```html
 <template>
   <div>
     <strong :style="{ marginRight: 8 }">Categories:</strong>
     <template v-for=" tag in tags">
-      <CheckableTag
+      <a-checkable-tag
         :key="tag"
         :checked="selectedTags.indexOf(tag) > -1"
         @change="(checked) => handleChange(tag, checked)"
       >
         {{tag}}
-      </CheckableTag>
+      </a-checkable-tag>
     </template>
   </div>
 </template>
 <script>
-import { Tag } from 'antd'
 export default {
   data () {
     return {
@@ -34,9 +44,6 @@ export default {
       this.selectedTags = nextSelectedTags
     },
   },
-  components: {
-    Tag,
-    CheckableTag: Tag.CheckableTag,
-  },
 }
 </script>
+```

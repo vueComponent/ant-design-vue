@@ -14,7 +14,7 @@
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| change | 变化时回调函数 | Function(checked:Boolean) |  |
+| change | 变化时回调函数 | Function(checked:Boolean) |
 
 ## 方法
 

@@ -40,13 +40,24 @@ export { default as Tooltip } from './tooltip'
 
 export { default as Pagination } from './pagination'
 
-export { default as Tag } from './tag'
+import Tag from './tag'
+const CheckableTag = Tag.CheckableTag
+
+export {
+  Tag,
+  CheckableTag,
+}
 
 export { default as Avatar } from './avatar'
 
 export { default as Badge } from './badge'
 
-export { default as Tabs } from './tabs'
+import Tabs from './tabs'
+const TabPane = Tabs.TabPane
+export {
+  Tabs,
+  TabPane,
+}
 
 import Input from './input'
 

@@ -12,7 +12,6 @@ export const RateProps = {
   allowHalf: PropTypes.bool,
   allowClear: PropTypes.bool,
   disabled: PropTypes.bool,
-  hoverChange: PropTypes.func,
   character: PropTypes.any,
 }
 

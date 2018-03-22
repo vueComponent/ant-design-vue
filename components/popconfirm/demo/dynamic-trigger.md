@@ -1,28 +1,35 @@
-<template>
-<div>
-<md>
-## 条件触发
+<cn>
+#### 条件触发
 可以判断是否需要弹出。
-</md>
-  <Popconfirm
-    title="Are you sure delete this task?"
-    :visible="visible"
-    @visibleChange="handleVisibleChange"
-    @confirm="confirm"
-    @cancel="cancel"
-    okText="Yes"
-    cancelText="No"
-  >
-    <a href="#">Delete a task</a>
-  </Popconfirm>
-  <br />
-  <br />
-  Whether directly execute：<a-checkbox defaultChecked @change="changeCondition" />
-</div>
-</template>
+</cn>
 
+<us>
+#### Conditional trigger
+Make it pop up under some conditions.
+</us>
+
+```html
+<template>
+  <div>
+    <a-popconfirm
+      title="Are you sure delete this task?"
+      :visible="visible"
+      @visibleChange="handleVisibleChange"
+      @confirm="confirm"
+      @cancel="cancel"
+      okText="Yes"
+      cancelText="No"
+    >
+      <a href="#">Delete a task</a>
+    </a-popconfirm>
+    <br />
+    <br />
+    Whether directly execute：<a-checkbox defaultChecked @change="changeCondition" />
+  </div>
+</template>
 <script>
-import { Popconfirm, Checkbox } from 'antd'
+import { message } from 'antd'
+
 export default {
   data () {
     return {
@@ -36,9 +43,11 @@ export default {
     },
     confirm () {
       this.visible = false
+      message.success('Next step.')
     },
     cancel () {
       this.visible = false
+      message.error('Click on cancel.')
     },
     handleVisibleChange (visible) {
       if (!visible) {
@@ -54,9 +63,6 @@ export default {
       }
     },
   },
-  components: {
-    Popconfirm,
-    Checkbox,
-  },
 }
 </script>
+```

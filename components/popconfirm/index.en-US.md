@@ -2,8 +2,8 @@
 
 | Param | Description | Type | Default value |
 | ----- | ----------- | ---- | ------------- |
-| cancelText | text of the Cancel button | string | `Cancel` |
-| okText | text of the Confirm button | string | `Confirm` |
+| cancelText | text of the Cancel button | string\|slot | `Cancel` |
+| okText | text of the Confirm button | string\|slot | `Confirm` |
 | okType | Button `type` of the Confirm button | string | `primary` |
 | title | title of the confirmation box | string\|slot | - |
 

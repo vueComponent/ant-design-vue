@@ -1,30 +1,60 @@
-<template>
-  <div>
-    <h1>Basic</h1>
-    <Basic />
-    <h1>Dynamic Trigger</h1>
-    <Trigger />
-    <h1>Local</h1>
-    <Local />
-    <h1>Placement</h1>
-    <Placement />
-  </div>
-</template>
 <script>
-import Basic from './basic'
-import Trigger from './dynamic-trigger'
-import Local from './local'
-import Placement from './placement'
+import Basic from './basic.md'
+import Local from './local.md'
+import Placement from './placement.md'
+import DynamicTrigger from './dynamic-trigger.md'
+import CN from '../index.zh-CN.md'
+import US from '../index.en-US.md'
+
+const md = {
+  cn: `# Popconfirm
+
+  点击元素，弹出气泡式的确认框。
+
+  ## 何时使用
+
+  目标元素的操作需要用户进一步的确认时，在目标元素附近弹出浮层提示，询问用户。
+
+和 'confirm' 弹出的全屏居中模态对话框相比，交互形式更轻量。。
+            ## 代码演示`,
+  us: `# Popconfirm
+
+  A simple and compact confirmation dialog of an action.
+
+  # When To Use
+
+  A simple and compact dialog used for asking for user confirmation.
+
+  The difference with the 'confirm' modal dialog is that it's more lightweight than the static popped full-screen confirm modal.
+  ## Examples
+  `,
+}
 export default {
   category: 'Components',
   subtitle: '气泡确认框',
   type: 'Feedback',
   title: 'Popconfirm',
-  components: {
-    Basic,
-    Trigger,
-    Local,
-    Placement,
+  render () {
+    return (
+      <div>
+        <md cn={md.cn} us={md.us}/>
+        <br/>
+        <Basic />
+        <br/>
+        <Local />
+        <br/>
+        <Placement />
+        <br/>
+        <DynamicTrigger />
+        <br/>
+        <api>
+          <template slot='cn'>
+            <CN/>
+          </template>
+          <US/>
+        </api>
+      </div>
+    )
   },
 }
 </script>

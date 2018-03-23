@@ -40,7 +40,7 @@
           <td>action</td>
           <td>string[]</td>
           <td>['hover']</td>
-          <td>which actions cause popup shown. enum of 'hover','click','focus','contextMenu'</td>
+          <td>which actions cause popup shown. enum of 'hover','click','focus','contextmenu'</td>
         </tr>
         <tr>
           <td>mouseEnterDelay</td>

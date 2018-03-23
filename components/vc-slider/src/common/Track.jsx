@@ -1,22 +1,23 @@
-/* eslint-disable react/prop-types */
-import React from 'react'
+/* eslint-disable */
+const Track = {
+  functional: true,
+  render (createElement, context) {
+    const { included, vertical, offset, length, style } = context.data
 
-const Track = (props) => {
-  const { className, included, vertical, offset, length, style } = props
+    const positonStyle = vertical ? {
+      bottom: `${offset}%`,
+      height: `${length}%`,
+    } : {
+      left: `${offset}%`,
+      width: `${length}%`,
+    }
 
-  const positonStyle = vertical ? {
-    bottom: `${offset}%`,
-    height: `${length}%`,
-  } : {
-    left: `${offset}%`,
-    width: `${length}%`,
-  }
-
-  const elStyle = {
-    ...style,
-    ...positonStyle,
-  }
-  return included ? <div className={className} style={elStyle} /> : null
+    context.data.style = {
+      ...style,
+      ...positonStyle,
+    }
+    return included ? createElement('div', context.data, context.children) : null
+  },
 }
 
 export default Track

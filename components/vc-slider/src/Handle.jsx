@@ -1,74 +1,80 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import addEventListener from 'rc-util/lib/Dom/addEventListener';
 
-export default class Handle extends React.Component {
-  state = {
-    clickFocused: false,
-  }
+import classNames from 'classnames'
+import PropTypes from '../../../_util/vue-types'
+import addEventListener from '../../../_util/Dom/addEventListener'
+import BaseMixin from '../../../_util/BaseMixin'
 
-  componentDidMount() {
-    // mouseup won't trigger if mouse moved out of handle,
-    // so we listen on document here.
-    this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp);
-  }
-
-  componentWillUnmount() {
-    if (this.onMouseUpListener) {
-      this.onMouseUpListener.remove();
+export default {
+  mixins: [BaseMixin],
+  props: {
+    prefixCls: PropTypes.string,
+    vertical: PropTypes.bool,
+    offset: PropTypes.number,
+    disabled: PropTypes.bool,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    value: PropTypes.number,
+    tabIndex: PropTypes.number,
+  },
+  data () {
+    return {
+      clickFocused: false,
     }
-  }
-
-  setClickFocus(focused) {
-    this.setState({ clickFocused: focused });
-  }
-
-  handleMouseUp = () => {
-    if (document.activeElement === this.handle) {
-      this.setClickFocus(true);
-    }
-  }
-
-  handleBlur = () => {
-    this.setClickFocus(false);
-  }
-
-  handleKeyDown = () => {
-    this.setClickFocus(false);
-  }
-
-  clickFocus() {
-    this.setClickFocus(true);
-    this.focus();
-  }
-
-  focus() {
-    this.handle.focus();
-  }
-
-  blur() {
-    this.handle.blur();
-  }
-
-  render() {
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
+    })
+  },
+  beforeDestroy () {
+    this.$nextTick(() => {
+      if (this.onMouseUpListener) {
+        this.onMouseUpListener.remove()
+      }
+    })
+  },
+  methods: {
+    setClickFocus (focused) {
+      this.setState({ clickFocused: focused })
+    },
+    handleMouseUp () {
+      if (document.activeElement === this.$refs.handle) {
+        this.setClickFocus(true)
+      }
+    },
+    handleBlur () {
+      this.setClickFocus(false)
+    },
+    handleKeyDown () {
+      this.setClickFocus(false)
+    },
+    clickFocus () {
+      this.setClickFocus(true)
+      this.focus()
+    },
+    focus () {
+      this.$refs.handle.focus()
+    },
+    blur () {
+      this.$refs.handle.blur()
+    },
+  },
+  render () {
     const {
-      prefixCls, vertical, offset, style, disabled, min, max, value, tabIndex, ...restProps,
-    } = this.props;
+      prefixCls, vertical, offset, disabled, min, max, value, tabIndex, ...restProps
+    } = this.$props
 
     const className = classNames(
-      this.props.className,
       {
-        [`${prefixCls}-handle-click-focused`]: this.state.clickFocused,
+        [`${prefixCls}-handle-click-focused`]: this.clickFocused,
       }
-    );
+    )
 
-    const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` };
+    const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` }
     const elStyle = {
-      ...style,
       ...postionStyle,
-    };
-    let ariaProps = {};
+    }
+    let ariaProps = {}
     if (value !== undefined) {
       ariaProps = {
         ...ariaProps,
@@ -76,34 +82,21 @@ export default class Handle extends React.Component {
         'aria-valuemax': max,
         'aria-valuenow': value,
         'aria-disabled': !!disabled,
-      };
+      }
     }
 
     return (
       <div
-        ref={node => (this.handle = node)}
-        role="slider"
+        ref='handle'
+        role='slider'
         tabIndex= {disabled ? null : (tabIndex || 0)}
         {...ariaProps}
         {...restProps}
-        className={className}
+        class={className}
         style={elStyle}
         onBlur={this.handleBlur}
-        onKeyDown={this.handleKeyDown}
+        onKeydown={this.handleKeyDown}
       />
-    );
-  }
+    )
+  },
 }
-
-Handle.propTypes = {
-  prefixCls: PropTypes.string,
-  className: PropTypes.string,
-  vertical: PropTypes.bool,
-  offset: PropTypes.number,
-  style: PropTypes.object,
-  disabled: PropTypes.bool,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  value: PropTypes.number,
-  tabIndex: PropTypes.number,
-};

@@ -1,6 +1,5 @@
-import React from 'react'
 import classNames from 'classnames'
-import warning from 'warning'
+import warning from '../../../_util/warning'
 
 const calcPoints = (vertical, marks, dots, step, min, max) => {
   warning(
@@ -17,28 +16,32 @@ const calcPoints = (vertical, marks, dots, step, min, max) => {
   return points
 }
 
-const Steps = ({ prefixCls, vertical, marks, dots, step, included,
-  lowerBound, upperBound, max, min, dotStyle, activeDotStyle }) => {
-  const range = max - min
-  const elements = calcPoints(vertical, marks, dots, step, min, max).map((point) => {
-    const offset = `${Math.abs(point - min) / range * 100}%`
+const Steps = {
+  functional: true,
+  render (createElement, context) {
+    const { prefixCls, vertical, marks, dots, step, included,
+      lowerBound, upperBound, max, min, dotStyle, activeDotStyle } = context.data
+    const range = max - min
+    const elements = calcPoints(vertical, marks, dots, step, min, max).map((point) => {
+      const offset = `${Math.abs(point - min) / range * 100}%`
 
-    const isActived = (!included && point === upperBound) ||
-            (included && point <= upperBound && point >= lowerBound)
-    let style = vertical ? { bottom: offset, ...dotStyle } : { left: offset, ...dotStyle }
-    if (isActived) {
-      style = { ...style, ...activeDotStyle }
-    }
+      const isActived = (!included && point === upperBound) ||
+              (included && point <= upperBound && point >= lowerBound)
+      let style = vertical ? { bottom: offset, ...dotStyle } : { left: offset, ...dotStyle }
+      if (isActived) {
+        style = { ...style, ...activeDotStyle }
+      }
 
-    const pointClassName = classNames({
-      [`${prefixCls}-dot`]: true,
-      [`${prefixCls}-dot-active`]: isActived,
+      const pointClassName = classNames({
+        [`${prefixCls}-dot`]: true,
+        [`${prefixCls}-dot-active`]: isActived,
+      })
+
+      return <span className={pointClassName} style={style} key={point} />
     })
 
-    return <span className={pointClassName} style={style} key={point} />
-  })
-
-  return <div className={`${prefixCls}-step`}>{elements}</div>
+    return <div className={`${prefixCls}-step`}>{elements}</div>
+  },
 }
 
 export default Steps

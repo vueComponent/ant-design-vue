@@ -1,142 +1,142 @@
-/* eslint-disable react/prop-types */
-import React from 'react'
-import PropTypes from 'prop-types'
-import warning from 'warning'
+import PropTypes from '../../../_util/vue-types'
+import warning from '../../../_util/warning'
+import BaseMixin from '../../../_util/BaseMixin'
+import { hasProp } from '../../../_util/props-util'
 import Track from './common/Track'
 import createSlider from './common/createSlider'
 import * as utils from './utils'
 
-class Slider extends React.Component {
-  static propTypes = {
+const Slider = {
+  mixins: [BaseMixin],
+  props: {
     defaultValue: PropTypes.number,
     value: PropTypes.number,
     disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
     tabIndex: PropTypes.number,
-  };
+  },
+  data () {
+    const defaultValue = this.defaultValue !== undefined
+      ? this.defaultValue : this.min
+    const value = this.value !== undefined
+      ? this.value : defaultValue
 
-  constructor (props) {
-    super(props)
-
-    const defaultValue = props.defaultValue !== undefined
-      ? props.defaultValue : props.min
-    const value = props.value !== undefined
-      ? props.value : defaultValue
-
-    this.state = {
-      value: this.trimAlignValue(value),
-      dragging: false,
-    }
     if (process.env.NODE_ENV !== 'production') {
       warning(
-        !('minimumTrackStyle' in props),
+        !hasProp(this, 'minimumTrackStyle'),
         'minimumTrackStyle will be deprecate, please use trackStyle instead.'
       )
       warning(
-        !('maximumTrackStyle' in props),
+        !hasProp(this, 'maximumTrackStyle'),
         'maximumTrackStyle will be deprecate, please use railStyle instead.'
       )
     }
-  }
-
-  componentDidMount () {
-    const { autoFocus, disabled } = this.props
-    if (autoFocus && !disabled) {
-      this.focus()
+    return {
+      sValue: this.trimAlignValue(value),
+      dragging: false,
     }
-  }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      const { autoFocus, disabled } = this
+      if (autoFocus && !disabled) {
+        this.focus()
+      }
+    })
+  },
+  watch: {
+    value: {
+      handler (val) {
+        const { min, max } = this
+        this.setChangeValue(val, min, max)
+      },
+      deep: true,
+    },
+    min (val) {
+      const { sValue, max } = this
+      this.setChangeValue(sValue, val, max)
+    },
+    max (val) {
+      const { sValue, min } = this
+      this.setChangeValue(sValue, min, val)
+    },
+  },
+  methods: {
+    setChangeValue (value, min, max) {
+      const minAmaxProps = {
+        min,
+        max,
+      }
+      const newValue = value !== undefined
+        ? value : this.sValue
+      const nextValue = this.trimAlignValue(newValue, minAmaxProps)
+      if (nextValue === this.sValue) return
 
-  componentWillReceiveProps (nextProps) {
-    if (!('value' in nextProps || 'min' in nextProps || 'max' in nextProps)) return
+      this.setState({ sValue: nextValue })
+      if (utils.isValueOutOfRange(newValue, minAmaxProps)) {
+        this.$emit('change', nextValue)
+      }
+    },
+    onChange (state) {
+      const isNotControlled = !hasProp(this, 'value')
+      if (isNotControlled) {
+        this.setState(state)
+      }
 
-    const prevValue = this.state.value
-    const value = nextProps.value !== undefined
-      ? nextProps.value : prevValue
-    const nextValue = this.trimAlignValue(value, nextProps)
-    if (nextValue === prevValue) return
+      const changedValue = state.sValue
+      this.$emit('change', changedValue)
+    },
+    onStart (position) {
+      this.setState({ dragging: true })
+      const { sValue } = this
+      this.$emit('beforeChange', sValue)
 
-    this.setState({ value: nextValue })
-    if (utils.isValueOutOfRange(value, nextProps)) {
-      this.props.onChange(nextValue)
-    }
-  }
+      const value = this.calcValueByPos(position)
 
-  onChange (state) {
-    const props = this.props
-    const isNotControlled = !('value' in props)
-    if (isNotControlled) {
-      this.setState(state)
-    }
+      if (value === sValue) return
 
-    const changedValue = state.value
-    props.onChange(changedValue)
-  }
+      this.prevMovedHandleIndex = 0
 
-  onStart (position) {
-    this.setState({ dragging: true })
-    const props = this.props
-    const prevValue = this.getValue()
-    props.onBeforeChange(prevValue)
-
-    const value = this.calcValueByPos(position)
-    this.startValue = value
-    this.startPosition = position
-
-    if (value === prevValue) return
-
-    this.prevMovedHandleIndex = 0
-
-    this.onChange({ value })
-  }
-
-  onEnd = () => {
-    this.setState({ dragging: false })
-    this.removeDocumentEvents()
-    this.props.onAfterChange(this.getValue())
-  }
-
-  onMove (e, position) {
-    utils.pauseEvent(e)
-    const { value: oldValue } = this.state
-    const value = this.calcValueByPos(position)
-    if (value === oldValue) return
-
-    this.onChange({ value })
-  }
-
-  onKeyboard (e) {
-    const valueMutator = utils.getKeyboardValueMutator(e)
-
-    if (valueMutator) {
+      this.onChange({ sValue: value })
+    },
+    onEnd () {
+      this.setState({ dragging: false })
+      this.removeDocumentEvents()
+      this.$emit('afterChange', this.sValue)
+    },
+    onMove (e, position) {
       utils.pauseEvent(e)
-      const state = this.state
-      const oldValue = state.value
-      const mutatedValue = valueMutator(oldValue, this.props)
-      const value = this.trimAlignValue(mutatedValue)
-      if (value === oldValue) return
+      const { sValue } = this
+      const value = this.calcValueByPos(position)
+      if (value === sValue) return
 
-      this.onChange({ value })
-    }
-  }
+      this.onChange({ sValue: value })
+    },
+    onKeyboard (e) {
+      const valueMutator = utils.getKeyboardValueMutator(e)
 
-  getValue () {
-    return this.state.value
-  }
+      if (valueMutator) {
+        utils.pauseEvent(e)
+        const { sValue } = this
+        const mutatedValue = valueMutator(sValue, this.$props)
+        const value = this.trimAlignValue(mutatedValue)
+        if (value === sValue) return
 
-  getLowerBound () {
-    return this.props.min
-  }
-
-  getUpperBound () {
-    return this.state.value
-  }
-
-  trimAlignValue (v, nextProps = {}) {
-    const mergedProps = { ...this.props, ...nextProps }
-    const val = utils.ensureValueInRange(v, mergedProps)
-    return utils.ensureValuePrecision(val, mergedProps)
-  }
-
+        this.onChange({ sValue: value })
+      }
+    },
+    getLowerBound () {
+      return this.min
+    },
+    getUpperBound () {
+      return this.sValue
+    },
+    trimAlignValue (v, nextProps = {}) {
+      const mergedProps = { ...this.$props, ...nextProps }
+      const val = utils.ensureValueInRange(v, mergedProps)
+      return utils.ensureValuePrecision(val, mergedProps)
+    },
+  },
   render () {
     const {
       prefixCls,
@@ -150,7 +150,7 @@ class Slider extends React.Component {
       min,
       max,
       handle: handleGenerator,
-    } = this.props
+    } = this
     const { value, dragging } = this.state
     const offset = this.calcOffset(value)
     const handle = handleGenerator({
@@ -183,9 +183,8 @@ class Slider extends React.Component {
         }}
       />
     )
-
     return { tracks: track, handles: handle }
-  }
+  },
 }
 
 export default createSlider(Slider)

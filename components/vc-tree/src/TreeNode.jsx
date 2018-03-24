@@ -4,6 +4,8 @@ import warning from 'warning'
 import { contextTypes } from './Tree'
 import { getPosition, getNodeChildren, isCheckDisabled, traverseTreeNodes } from './util'
 import { initDefaultProps, getOptionProps, filterEmpty } from '../../_util/props-util'
+import BaseMixin from '../../_util/BaseMixin'
+import getTransitionProps from '../../_util/getTransitionProps'
 
 const ICON_OPEN = 'open'
 const ICON_CLOSE = 'close'
@@ -19,12 +21,14 @@ let onlyTreeNodeWarned = false // Only accept TreeNode
 
 export const nodeContextTypes = {
   ...contextTypes,
-  rcTreeNode: PropTypes.shape({
+  vcTreeNode: PropTypes.shape({
     onUpCheckConduct: PropTypes.func,
   }),
 }
 
 const TreeNode = {
+  name: 'TreeNode',
+  mixins: [BaseMixin],
   props: initDefaultProps({
     eventKey: PropTypes.string, // Pass by parent `cloneElement`
     prefixCls: PropTypes.string,
@@ -37,7 +41,7 @@ const TreeNode = {
     selected: PropTypes.bool,
     checked: PropTypes.bool,
     halfChecked: PropTypes.bool,
-    title: PropTypes.node,
+    title: PropTypes.any,
     pos: PropTypes.string,
     dragOver: PropTypes.bool,
     dragOverGapTop: PropTypes.bool,
@@ -60,500 +64,500 @@ const TreeNode = {
     }
   },
   inject: {
-    context: { default: {}},
+    vcTree: { default: {}},
   },
-  provide: {
-    ...this.context,
-    rcTreeNode: this,
+  provide () {
+    return {
+      vcTree: this.vcTree,
+      vcTreeNode: this,
+    }
   },
 
   // Isomorphic needn't load data in server side
   mounted () {
-    this.$nextTick(() => {
-      this.syncLoadData(this.$props)
-    })
+    this.syncLoadData(this.$props)
+  },
+  watch: {
+    expanded (val) {
+      this.syncLoadData({ expanded: val })
+    },
   },
 
-  componentWillReceiveProps (nextProps) {
-    this.syncLoadData(nextProps)
-  },
+  methods: {
+    onUpCheckConduct (treeNode, nodeChecked, nodeHalfChecked) {
+      const { pos: nodePos } = getOptionProps(treeNode)
+      const { eventKey, pos, checked, halfChecked } = this
+      const {
+        vcTree: { checkStrictly, isKeyChecked, onBatchNodeCheck, onCheckConductFinished },
+        vcTreeNode: { onUpCheckConduct } = {},
+      } = this
 
-  onUpCheckConduct (treeNode, nodeChecked, nodeHalfChecked) {
-    const { pos: nodePos } = getOptionProps(treeNode)
-    const { eventKey, pos, checked, halfChecked } = this
-    const {
-      rcTree: { checkStrictly, isKeyChecked, onBatchNodeCheck, onCheckConductFinished },
-      rcTreeNode: { onUpCheckConduct } = {},
-    } = this.context
-
-    // Stop conduct when current node is disabled
-    if (isCheckDisabled(this)) {
-      onCheckConductFinished()
-      return
-    }
-
-    const children = this.getNodeChildren()
-
-    let checkedCount = nodeChecked ? 1 : 0
-
-    // Statistic checked count
-    children.forEach((node, index) => {
-      const childPos = getPosition(pos, index)
-
-      if (nodePos === childPos || isCheckDisabled(node)) {
+      // Stop conduct when current node is disabled
+      if (isCheckDisabled(this)) {
+        onCheckConductFinished()
         return
       }
 
-      if (isKeyChecked(node.key || childPos)) {
-        checkedCount += 1
-      }
-    })
+      const children = this.getNodeChildren()
 
-    // Static enabled children count
-    const enabledChildrenCount = children
-      .filter(node => !isCheckDisabled(node))
-      .length
+      let checkedCount = nodeChecked ? 1 : 0
 
-    // checkStrictly will not conduct check status
-    const nextChecked = checkStrictly ? checked : enabledChildrenCount === checkedCount
-    const nextHalfChecked = checkStrictly // propagated or child checked
-      ? halfChecked : (nodeHalfChecked || (checkedCount > 0 && !nextChecked))
+      // Statistic checked count
+      children.forEach((node, index) => {
+        const childPos = getPosition(pos, index)
 
-    // Add into batch update
-    if (checked !== nextChecked || halfChecked !== nextHalfChecked) {
-      onBatchNodeCheck(eventKey, nextChecked, nextHalfChecked)
+        if (nodePos === childPos || isCheckDisabled(node)) {
+          return
+        }
+        if (isKeyChecked(node.key || childPos)) {
+          checkedCount += 1
+        }
+      })
 
-      if (onUpCheckConduct) {
-        onUpCheckConduct(this, nextChecked, nextHalfChecked)
+      // Static enabled children count
+      const enabledChildrenCount = children
+        .filter(node => !isCheckDisabled(node))
+        .length
+
+      // checkStrictly will not conduct check status
+      const nextChecked = checkStrictly ? checked : enabledChildrenCount === checkedCount
+      const nextHalfChecked = checkStrictly // propagated or child checked
+        ? halfChecked : (nodeHalfChecked || (checkedCount > 0 && !nextChecked))
+
+      // Add into batch update
+      if (checked !== nextChecked || halfChecked !== nextHalfChecked) {
+        onBatchNodeCheck(eventKey, nextChecked, nextHalfChecked)
+
+        if (onUpCheckConduct) {
+          onUpCheckConduct(this, nextChecked, nextHalfChecked)
+        } else {
+          // Flush all the update
+          onCheckConductFinished()
+        }
       } else {
         // Flush all the update
         onCheckConductFinished()
       }
-    } else {
-      // Flush all the update
-      onCheckConductFinished()
-    }
-  },
+    },
 
-  onDownCheckConduct (nodeChecked) {
-    const { $slots } = this
-    const children = $slots.default || []
-    const { rcTree: { checkStrictly, isKeyChecked, onBatchNodeCheck }} = this.context
-    if (checkStrictly) return
+    onDownCheckConduct (nodeChecked) {
+      const { $slots } = this
+      const children = $slots.default || []
+      const { vcTree: { checkStrictly, isKeyChecked, onBatchNodeCheck }} = this
+      if (checkStrictly) return
 
-    traverseTreeNodes(children, ({ node, key }) => {
-      if (isCheckDisabled(node)) return false
+      traverseTreeNodes(children, ({ node, key }) => {
+        if (isCheckDisabled(node)) return false
 
-      if (nodeChecked !== isKeyChecked(key)) {
-        onBatchNodeCheck(key, nodeChecked, false)
+        if (nodeChecked !== isKeyChecked(key)) {
+          onBatchNodeCheck(key, nodeChecked, false)
+        }
+      })
+    },
+
+    onSelectorClick (e) {
+      if (this.isSelectable()) {
+        this.onSelect(e)
+      } else {
+        this.onCheck(e)
       }
-    })
-  },
+    },
 
-  onSelectorClick (e) {
-    if (this.isSelectable()) {
-      this.onSelect(e)
-    } else {
-      this.onCheck(e)
-    }
-  },
+    onSelect (e) {
+      if (this.isDisabled()) return
 
-  onSelect (e) {
-    if (this.isDisabled()) return
+      const { vcTree: { onNodeSelect }} = this
+      e.preventDefault()
+      onNodeSelect(e, this)
+    },
 
-    const { rcTree: { onNodeSelect }} = this.context
-    e.preventDefault()
-    onNodeSelect(e, this)
-  },
+    onCheck (e) {
+      if (this.isDisabled()) return
 
-  onCheck (e) {
-    if (this.isDisabled()) return
+      const { disableCheckbox, checked, eventKey } = this
+      const {
+        vcTree: { checkable, onBatchNodeCheck, onCheckConductFinished },
+        vcTreeNode: { onUpCheckConduct } = {},
+      } = this
 
-    const { disableCheckbox, checked, eventKey } = this
-    const {
-      rcTree: { checkable, onBatchNodeCheck, onCheckConductFinished },
-      rcTreeNode: { onUpCheckConduct } = {},
-    } = this.context
+      if (!checkable || disableCheckbox) return
 
-    if (!checkable || disableCheckbox) return
+      e.preventDefault()
+      const targetChecked = !checked
+      onBatchNodeCheck(eventKey, targetChecked, false, this)
 
-    e.preventDefault()
-    const targetChecked = !checked
-    onBatchNodeCheck(eventKey, targetChecked, false, this)
+      // Children conduct
+      this.onDownCheckConduct(targetChecked)
 
-    // Children conduct
-    this.onDownCheckConduct(targetChecked)
+      // Parent conduct
+      if (onUpCheckConduct) {
+        onUpCheckConduct(this, targetChecked, false)
+      } else {
+        onCheckConductFinished()
+      }
+    },
 
-    // Parent conduct
-    if (onUpCheckConduct) {
-      onUpCheckConduct(this, targetChecked, false)
-    } else {
-      onCheckConductFinished()
-    }
-  },
+    onMouseEnter (e) {
+      const { vcTree: { onNodeMouseEnter }} = this
+      onNodeMouseEnter(e, this)
+    },
 
-  onMouseEnter (e) {
-    const { rcTree: { onNodeMouseEnter }} = this.context
-    onNodeMouseEnter(e, this)
-  },
+    onMouseLeave (e) {
+      const { vcTree: { onNodeMouseLeave }} = this
+      onNodeMouseLeave(e, this)
+    },
 
-  onMouseLeave (e) {
-    const { rcTree: { onNodeMouseLeave }} = this.context
-    onNodeMouseLeave(e, this)
-  },
+    onContextMenu  (e) {
+      const { vcTree: { onNodeContextMenu }} = this
+      onNodeContextMenu(e, this)
+    },
 
-  onContextMenu  (e) {
-    const { rcTree: { onNodeContextMenu }} = this.context
-    onNodeContextMenu(e, this)
-  },
+    onDragStart  (e) {
+      const { vcTree: { onNodeDragStart }} = this
 
-  onDragStart  (e) {
-    const { rcTree: { onNodeDragStart }} = this.context
-
-    e.stopPropagation()
-    this.setState({
-      dragNodeHighlight: true,
-    })
-    onNodeDragStart(e, this)
-
-    try {
-      // ie throw error
-      // firefox-need-it
-      e.dataTransfer.setData('text/plain', '')
-    } catch (error) {
-      // empty
-    }
-  },
-
-  onDragEnter  (e) {
-    const { rcTree: { onNodeDragEnter }} = this.context
-
-    e.preventDefault()
-    e.stopPropagation()
-    onNodeDragEnter(e, this)
-  },
-
-  onDragOver (e) {
-    const { rcTree: { onNodeDragOver }} = this.context
-
-    e.preventDefault()
-    e.stopPropagation()
-    onNodeDragOver(e, this)
-  },
-
-  onDragLeave (e) {
-    const { rcTree: { onNodeDragLeave }} = this.context
-
-    e.stopPropagation()
-    onNodeDragLeave(e, this)
-  },
-
-  onDragEnd (e) {
-    const { rcTree: { onNodeDragEnd }} = this.context
-
-    e.stopPropagation()
-    this.setState({
-      dragNodeHighlight: false,
-    })
-    onNodeDragEnd(e, this)
-  },
-
-  onDrop (e) {
-    const { rcTree: { onNodeDrop }} = this.context
-
-    e.preventDefault()
-    e.stopPropagation()
-    this.setState({
-      dragNodeHighlight: false,
-    })
-    onNodeDrop(e, this)
-  },
-
-  // Disabled item still can be switch
-  onExpand (e) {
-    const { rcTree: { onNodeExpand }} = this.context
-    const callbackPromise = onNodeExpand(e, this)
-
-    // Promise like
-    if (callbackPromise && callbackPromise.then) {
-      this.setState({ loadStatus: LOAD_STATUS_LOADING })
-
-      callbackPromise.then(() => {
-        this.setState({ loadStatus: LOAD_STATUS_LOADED })
-      }).catch(() => {
-        this.setState({ loadStatus: LOAD_STATUS_FAILED })
+      e.stopPropagation()
+      this.setState({
+        dragNodeHighlight: true,
       })
-    }
-  },
+      onNodeDragStart(e, this)
 
-  // Drag usage
-  setSelectHandle (node) {
-    this.selectHandle = node
-  },
+      try {
+        // ie throw error
+        // firefox-need-it
+        e.dataTransfer.setData('text/plain', '')
+      } catch (error) {
+        // empty
+      }
+    },
 
-  getNodeChildren () {
-    const { $slots: { default: children }} = this
-    const originList = filterEmpty(children)
-    const targetList = getNodeChildren(originList)
+    onDragEnter  (e) {
+      const { vcTree: { onNodeDragEnter }} = this
 
-    if (originList.length !== targetList.length && !onlyTreeNodeWarned) {
-      onlyTreeNodeWarned = true
-      warning(false, 'Tree only accept TreeNode as children.')
-    }
+      e.preventDefault()
+      e.stopPropagation()
+      onNodeDragEnter(e, this)
+    },
 
-    return targetList
-  },
+    onDragOver (e) {
+      const { vcTree: { onNodeDragOver }} = this
 
-  getNodeState () {
-    const { expanded } = this
+      e.preventDefault()
+      e.stopPropagation()
+      onNodeDragOver(e, this)
+    },
 
-    if (this.isLeaf()) {
-      return null
-    }
+    onDragLeave (e) {
+      const { vcTree: { onNodeDragLeave }} = this
 
-    return expanded ? ICON_OPEN : ICON_CLOSE
-  },
+      e.stopPropagation()
+      onNodeDragLeave(e, this)
+    },
 
-  isLeaf () {
-    const { isLeaf, loadStatus } = this
-    const { rcTree: { loadData }} = this.context
+    onDragEnd (e) {
+      const { vcTree: { onNodeDragEnd }} = this
 
-    const hasChildren = this.getNodeChildren().length !== 0
-
-    return (
-      isLeaf ||
-      (!loadData && !hasChildren) ||
-      (loadData && loadStatus === LOAD_STATUS_LOADED && !hasChildren)
-    )
-  },
-
-  isDisabled  () {
-    const { disabled } = this
-    const { rcTree: { disabled: treeDisabled }} = this.context
-
-    // Follow the logic of Selectable
-    if (disabled === false) {
-      return false
-    }
-
-    return !!(treeDisabled || disabled)
-  },
-
-  isSelectable () {
-    const { selectable } = this
-    const { rcTree: { selectable: treeSelectable }} = this.context
-
-    // Ignore when selectable is undefined or null
-    if (typeof selectable === 'boolean') {
-      return selectable
-    }
-
-    return treeSelectable
-  },
-
-  // Load data to avoid default expanded tree without data
-  syncLoadData (props) {
-    const { loadStatus } = this
-    const { expanded } = props
-    const { rcTree: { loadData }} = this.context
-
-    if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf()) {
-      this.setState({ loadStatus: LOAD_STATUS_LOADING })
-
-      loadData(this).then(() => {
-        this.setState({ loadStatus: LOAD_STATUS_LOADED })
-      }).catch(() => {
-        this.setState({ loadStatus: LOAD_STATUS_FAILED })
+      e.stopPropagation()
+      this.setState({
+        dragNodeHighlight: false,
       })
-    }
-  },
+      onNodeDragEnd(e, this)
+    },
 
-  // Switcher
-  renderSwitcher () {
-    const { expanded } = this
-    const { rcTree: { prefixCls }} = this.context
+    onDrop (e) {
+      const { vcTree: { onNodeDrop }} = this
 
-    if (this.isLeaf()) {
-      return <span class={`${prefixCls}-switcher ${prefixCls}-switcher-noop`} />
-    }
+      e.preventDefault()
+      e.stopPropagation()
+      this.setState({
+        dragNodeHighlight: false,
+      })
+      onNodeDrop(e, this)
+    },
 
-    return (
-      <span
-        class={classNames(
-          `${prefixCls}-switcher`,
-          `${prefixCls}-switcher_${expanded ? ICON_OPEN : ICON_CLOSE}`,
-        )}
-        onClick={this.onExpand}
-      />
-    )
-  },
+    // Disabled item still can be switch
+    onExpand (e) {
+      const { vcTree: { onNodeExpand }} = this
+      const callbackPromise = onNodeExpand(e, this)
 
-  // Checkbox
-  renderCheckbox () {
-    const { checked, halfChecked, disableCheckbox } = this
-    const { rcTree: { prefixCls, checkable }} = this.context
-    const disabled = this.isDisabled()
+      // Promise like
+      if (callbackPromise && callbackPromise.then) {
+        this.setState({ loadStatus: LOAD_STATUS_LOADING })
 
-    if (!checkable) return null
+        callbackPromise.then(() => {
+          this.setState({ loadStatus: LOAD_STATUS_LOADED })
+        }).catch(() => {
+          this.setState({ loadStatus: LOAD_STATUS_FAILED })
+        })
+      }
+    },
 
-    // [Legacy] Custom element should be separate with `checkable` in future
-    const $custom = typeof checkable !== 'boolean' ? checkable : null
+    // Drag usage
+    setSelectHandle (node) {
+      this.selectHandle = node
+    },
 
-    return (
-      <span
-        class={classNames(
-          `${prefixCls}-checkbox`,
-          checked && `${prefixCls}-checkbox-checked`,
-          !checked && halfChecked && `${prefixCls}-checkbox-indeterminate`,
-          (disabled || disableCheckbox) && `${prefixCls}-checkbox-disabled`,
-        )}
-        onClick={this.onCheck}
-      >
-        {$custom}
-      </span>
-    )
-  },
+    getNodeChildren () {
+      const { $slots: { default: children }} = this
+      const originList = filterEmpty(children)
+      const targetList = getNodeChildren(originList)
 
-  renderIcon () {
-    const { loadStatus } = this
-    const { rcTree: { prefixCls }} = this.context
+      if (originList.length !== targetList.length && !onlyTreeNodeWarned) {
+        onlyTreeNodeWarned = true
+        warning(false, 'Tree only accept TreeNode as children.')
+      }
 
-    return (
-      <span
-        class={classNames(
-          `${prefixCls}-iconEle`,
-          `${prefixCls}-icon__${this.getNodeState() || 'docu'}`,
-          (loadStatus === LOAD_STATUS_LOADING) && `${prefixCls}-icon_loading`,
-        )}
-      />
-    )
-  },
+      return targetList
+    },
 
-  // Icon + Title
-  renderSelector () {
-    const { title, selected, icon, loadStatus, dragNodeHighlight } = this
-    const { rcTree: { prefixCls, showIcon, draggable, loadData }} = this.context
-    const disabled = this.isDisabled()
+    getNodeState () {
+      const { expanded } = this
 
-    const wrapClass = `${prefixCls}-node-content-wrapper`
+      if (this.isLeaf2()) {
+        return null
+      }
 
-    // Icon - Still show loading icon when loading without showIcon
-    let $icon
+      return expanded ? ICON_OPEN : ICON_CLOSE
+    },
 
-    if (showIcon) {
-      $icon = icon ? (
+    isLeaf2 () {
+      const { isLeaf, loadStatus } = this
+      const { vcTree: { loadData }} = this
+
+      const hasChildren = this.getNodeChildren().length !== 0
+
+      return (
+        isLeaf ||
+        (!loadData && !hasChildren) ||
+        (loadData && loadStatus === LOAD_STATUS_LOADED && !hasChildren)
+      )
+    },
+
+    isDisabled  () {
+      const { disabled } = this
+      const { vcTree: { disabled: treeDisabled }} = this
+
+      // Follow the logic of Selectable
+      if (disabled === false) {
+        return false
+      }
+
+      return !!(treeDisabled || disabled)
+    },
+
+    isSelectable () {
+      const { selectable } = this
+      const { vcTree: { selectable: treeSelectable }} = this
+
+      // Ignore when selectable is undefined or null
+      if (typeof selectable === 'boolean') {
+        return selectable
+      }
+
+      return treeSelectable
+    },
+
+    // Load data to avoid default expanded tree without data
+    syncLoadData (props) {
+      const { loadStatus } = this
+      const { expanded } = props
+      const { vcTree: { loadData }} = this
+
+      if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf2()) {
+        this.setState({ loadStatus: LOAD_STATUS_LOADING })
+
+        loadData(this).then(() => {
+          this.setState({ loadStatus: LOAD_STATUS_LOADED })
+        }).catch(() => {
+          this.setState({ loadStatus: LOAD_STATUS_FAILED })
+        })
+      }
+    },
+
+    // Switcher
+    renderSwitcher () {
+      const { expanded } = this
+      const { vcTree: { prefixCls }} = this
+
+      if (this.isLeaf2()) {
+        return <span class={`${prefixCls}-switcher ${prefixCls}-switcher-noop`} />
+      }
+
+      return (
+        <span
+          class={classNames(
+            `${prefixCls}-switcher`,
+            `${prefixCls}-switcher_${expanded ? ICON_OPEN : ICON_CLOSE}`,
+          )}
+          onClick={this.onExpand}
+        />
+      )
+    },
+
+    // Checkbox
+    renderCheckbox () {
+      const { checked, halfChecked, disableCheckbox } = this
+      const { vcTree: { prefixCls, checkable }} = this
+      const disabled = this.isDisabled()
+
+      if (!checkable) return null
+
+      // [Legacy] Custom element should be separate with `checkable` in future
+      const $custom = typeof checkable !== 'boolean' ? checkable : null
+
+      return (
+        <span
+          class={classNames(
+            `${prefixCls}-checkbox`,
+            checked && `${prefixCls}-checkbox-checked`,
+            !checked && halfChecked && `${prefixCls}-checkbox-indeterminate`,
+            (disabled || disableCheckbox) && `${prefixCls}-checkbox-disabled`,
+          )}
+          onClick={this.onCheck}
+        >
+          {$custom}
+        </span>
+      )
+    },
+
+    renderIcon () {
+      const { loadStatus } = this
+      const { vcTree: { prefixCls }} = this
+
+      return (
         <span
           class={classNames(
             `${prefixCls}-iconEle`,
-            `${prefixCls}-icon__customize`,
+            `${prefixCls}-icon__${this.getNodeState() || 'docu'}`,
+            (loadStatus === LOAD_STATUS_LOADING) && `${prefixCls}-icon_loading`,
           )}
-        >
-          {typeof icon === 'function'
-            ? icon(this.$props) : icon}
-        </span>
-      ) : this.renderIcon()
-    } else if (loadData && loadStatus === LOAD_STATUS_LOADING) {
-      $icon = this.renderIcon()
-    }
-
-    // Title
-    const $title = <span class={`${prefixCls}-title`}>{title}</span>
-
-    return (
-      <span
-        ref='selectHandle'
-        title={typeof title === 'string' ? title : ''}
-        class={classNames(
-          `${wrapClass}`,
-          `${wrapClass}-${this.getNodeState() || 'normal'}`,
-          (!disabled && (selected || dragNodeHighlight)) && `${prefixCls}-node-selected`,
-          (!disabled && draggable) && 'draggable'
-        )}
-        draggable={(!disabled && draggable) || undefined}
-        aria-grabbed={(!disabled && draggable) || undefined}
-
-        onMouseenter={this.onMouseEnter}
-        onMouseleave={this.onMouseLeave}
-        onContexmenu={this.onContextMenu}
-        onClick={this.onSelectorClick}
-        onDragstart={this.onDragStart}
-      >
-        {$icon}{$title}
-      </span>
-    )
-  },
-
-  // Children list wrapped with `Animation`
-  renderChildren () {
-    const { expanded, pos } = this
-    const { rcTree: {
-      prefixCls,
-      openTransitionName, openAnimation,
-      renderTreeNode,
-    }} = this.context
-
-    // [Legacy] Animation control
-    const renderFirst = this.renderFirst
-    this.renderFirst = 1
-    let transitionAppear = true
-    if (!renderFirst && expanded) {
-      transitionAppear = false
-    }
-
-    const animProps = {}
-    if (openTransitionName) {
-      animProps.transitionName = openTransitionName
-    } else if (typeof openAnimation === 'object') {
-      animProps.animation = { ...openAnimation }
-      if (!transitionAppear) {
-        delete animProps.animation.appear
-      }
-    }
-
-    // Children TreeNode
-    const nodeList = this.getNodeChildren()
-
-    if (nodeList.length === 0) {
-      return null
-    }
-
-    let $children
-    if (expanded) {
-      $children = (
-        <ul
-          class={classNames(
-            `${prefixCls}-child-tree`,
-            expanded && `${prefixCls}-child-tree-open`,
-          )}
-          data-expanded={expanded}
-        >
-          {nodeList.map((node, index) => (
-            renderTreeNode(node, index, pos)
-          ))}
-        </ul>
+        />
       )
-    }
+    },
 
-    return (
-      <Animate
-        {...animProps}
-        showProp='data-expanded'
-        transitionAppear={transitionAppear}
-        component=''
-      >
-        {$children}
-      </Animate>
-    )
+    // Icon + Title
+    renderSelector () {
+      const { title, selected, icon, loadStatus, dragNodeHighlight } = this
+      const { vcTree: { prefixCls, showIcon, draggable, loadData }} = this
+      const disabled = this.isDisabled()
+
+      const wrapClass = `${prefixCls}-node-content-wrapper`
+
+      // Icon - Still show loading icon when loading without showIcon
+      let $icon
+
+      if (showIcon) {
+        $icon = icon ? (
+          <span
+            class={classNames(
+              `${prefixCls}-iconEle`,
+              `${prefixCls}-icon__customize`,
+            )}
+          >
+            {typeof icon === 'function'
+              ? icon(this.$props) : icon}
+          </span>
+        ) : this.renderIcon()
+      } else if (loadData && loadStatus === LOAD_STATUS_LOADING) {
+        $icon = this.renderIcon()
+      }
+
+      // Title
+      const $title = <span class={`${prefixCls}-title`}>{title}</span>
+
+      return (
+        <span
+          ref='selectHandle'
+          title={typeof title === 'string' ? title : ''}
+          class={classNames(
+            `${wrapClass}`,
+            `${wrapClass}-${this.getNodeState() || 'normal'}`,
+            (!disabled && (selected || dragNodeHighlight)) && `${prefixCls}-node-selected`,
+            (!disabled && draggable) && 'draggable'
+          )}
+          draggable={(!disabled && draggable) || undefined}
+          aria-grabbed={(!disabled && draggable) || undefined}
+
+          onMouseenter={this.onMouseEnter}
+          onMouseleave={this.onMouseLeave}
+          onContexmenu={this.onContextMenu}
+          onClick={this.onSelectorClick}
+          onDragstart={this.onDragStart}
+        >
+          {$icon}{$title}
+        </span>
+      )
+    },
+
+    // Children list wrapped with `Animation`
+    renderChildren () {
+      const { expanded, pos } = this
+      const { vcTree: {
+        prefixCls,
+        openTransitionName, openAnimation,
+        renderTreeNode,
+      }} = this
+
+      // [Legacy] Animation control
+      const renderFirst = this.renderFirst
+      this.renderFirst = 1
+      let transitionAppear = true
+      if (!renderFirst && expanded) {
+        transitionAppear = false
+      }
+
+      let animProps = {}
+      if (openTransitionName) {
+        animProps = getTransitionProps(openTransitionName, { appear: transitionAppear })
+      } else if (typeof openAnimation === 'object') {
+        animProps = { ...openAnimation }
+        if (!transitionAppear) {
+          delete animProps.props.appear
+        }
+      }
+
+      // Children TreeNode
+      const nodeList = this.getNodeChildren()
+
+      if (nodeList.length === 0) {
+        return null
+      }
+
+      let $children
+      if (expanded) {
+        $children = (
+          <ul
+            v-show={expanded}
+            class={classNames(
+              `${prefixCls}-child-tree`,
+              expanded && `${prefixCls}-child-tree-open`,
+            )}
+            data-expanded={expanded}
+          >
+            {nodeList.map((node, index) => (
+              renderTreeNode(node, index, pos)
+            ))}
+          </ul>
+        )
+      }
+
+      return (
+        <transition
+          {...animProps}
+        >
+          {$children}
+        </transition>
+      )
+    },
   },
 
   render () {
     const {
       dragOver, dragOverGapTop, dragOverGapBottom,
     } = this
-    const { rcTree: {
+    const { vcTree: {
       prefixCls,
       filterTreeNode,
-    }} = this.context
+    }} = this
     const disabled = this.isDisabled()
 
     return (

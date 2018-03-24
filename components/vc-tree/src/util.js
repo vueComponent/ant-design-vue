@@ -1,6 +1,6 @@
 /* eslint no-loop-func: 0*/
-import { Children } from 'react'
 import warning from 'warning'
+import { getSlotOptions, getOptionProps } from '../../_util/props-util'
 
 export function arrDel (list, value) {
   const clone = list.slice()
@@ -48,14 +48,13 @@ export function getPosition (level, index) {
   return `${level}-${index}`
 }
 
-export function getNodeChildren (children) {
-  const childList = Array.isArray(children) ? children : [children]
-  return childList
-    .filter(child => child && child.type && child.type.isTreeNode)
+export function getNodeChildren (children = []) {
+  return children
+    .filter(child => getSlotOptions(child).isTreeNode)
 }
 
 export function isCheckDisabled (node) {
-  const { disabled, disableCheckbox } = node.props || {}
+  const { disabled, disableCheckbox } = getOptionProps(node) || {}
   return !!(disabled || disableCheckbox)
 }
 
@@ -66,7 +65,7 @@ export function traverseTreeNodes (treeNodes, subTreeData, callback) {
   }
 
   function processNode (node, index, parent) {
-    const children = node ? node.props.children : treeNodes
+    const children = node ? node.componentOptions.children : treeNodes
     const pos = node ? getPosition(parent.pos, index) : 0
 
     // Filter children
@@ -86,7 +85,7 @@ export function traverseTreeNodes (treeNodes, subTreeData, callback) {
       if (subTreeData) {
         // Statistic children
         const subNodes = []
-        Children.forEach(childList, (subNode, subIndex) => {
+        childList.forEach((subNode, subIndex) => {
           // Provide limit snapshot
           const subPos = getPosition(pos, index)
           subNodes.push({
@@ -106,7 +105,7 @@ export function traverseTreeNodes (treeNodes, subTreeData, callback) {
     }
 
     // Process children node
-    Children.forEach(childList, (subNode, subIndex) => {
+    childList.forEach((subNode, subIndex) => {
       processNode(subNode, subIndex, { node, pos })
     })
   }
@@ -182,7 +181,7 @@ export function getNodesStatistic (treeNodes) {
 }
 
 export function getDragNodesKeys (treeNodes, node) {
-  const { eventKey, pos } = node.props
+  const { eventKey, pos } = getOptionProps(node)
   const dragNodesKeys = []
 
   traverseTreeNodes(treeNodes, ({ pos: nodePos, key }) => {
@@ -214,12 +213,12 @@ export function calcDropPosition (event, treeNode) {
  * @param props
  * @returns [string]
  */
-export function calcExpandedKeys (keyList, props) {
+export function calcExpandedKeys (keyList, props, children = []) {
   if (!keyList) {
     return []
   }
 
-  const { autoExpandParent, children } = props
+  const { autoExpandParent } = props
 
   // Do nothing if not auto expand parent
   if (!autoExpandParent) {
@@ -363,8 +362,8 @@ export function calcCheckStateConduct (treeNodes, checkedKeys) {
  * Calculate the value of checked and halfChecked keys.
  * This should be only run in init or props changed.
  */
-export function calcCheckedKeys (keys, props) {
-  const { checkable, children, checkStrictly } = props
+export function calcCheckedKeys (keys, props, children = []) {
+  const { checkable, checkStrictly } = props
 
   if (!checkable || !keys) {
     return null

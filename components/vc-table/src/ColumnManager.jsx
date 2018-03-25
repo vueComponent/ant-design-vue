@@ -1,8 +1,7 @@
 export default class ColumnManager {
-  _cached = {}
-
   constructor (columns, elements) {
     this.columns = columns || this.normalize(elements)
+    this._cached = {}
   }
 
   isAnyColumnsFixed () {

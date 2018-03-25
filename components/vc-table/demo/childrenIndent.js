@@ -1,8 +1,6 @@
 /* eslint-disable no-console,func-names,react/no-multi-comp */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Table from 'rc-table';
-import 'rc-table/assets/index.less';
+import Table from '../index'
+import '../assets/index.less'
 
 const columns = [{
   title: 'Name',
@@ -24,7 +22,7 @@ const columns = [{
   dataIndex: 'operation',
   key: 'x',
   width: 150,
-}];
+}]
 
 const data = [{
   key: 1,
@@ -75,13 +73,21 @@ const data = [{
   name: 'b',
   age: 32,
   address: 'I am b',
-}];
+}]
 
-function onExpand(expanded, record) {
-  console.log('onExpand', expanded, record);
+function onExpand (expanded, record) {
+  console.log('onExpand', expanded, record)
+}
+export default {
+  render () {
+    return (
+      <Table
+        defaultExpandAllRows
+        columns={columns}
+        data={data}
+        indentSize={30}
+        onExpand={onExpand} />
+    )
+  },
 }
 
-ReactDOM.render(
-  <Table defaultExpandAllRows columns={columns} data={data} indentSize={30} onExpand={onExpand} />,
-  document.getElementById('__react-content')
-);

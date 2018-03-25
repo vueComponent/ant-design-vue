@@ -4,13 +4,14 @@ export default {
   name: 'ColGroup',
   props: {
     fixed: PropTypes.string,
+    columns: PropTypes.array,
   },
   inject: {
     table: { default: {}},
   },
   render () {
     const { fixed, table } = this
-    const { prefixCls, expandIconAsCell } = table
+    const { prefixCls, expandIconAsCell, columnManager } = table
 
     let cols = []
 
@@ -26,18 +27,19 @@ export default {
     let leafColumns
 
     if (fixed === 'left') {
-      leafColumns = table.columnManager.leftLeafColumns()
+      leafColumns = columnManager.leftLeafColumns()
     } else if (fixed === 'right') {
-      leafColumns = table.columnManager.rightLeafColumns()
+      leafColumns = columnManager.rightLeafColumns()
     } else {
-      leafColumns = table.columnManager.leafColumns()
+      leafColumns = columnManager.leafColumns()
     }
     cols = cols.concat(
       leafColumns.map(c => {
+        const width = typeof c.width === 'number' ? `${c.width}px` : c.width
         return (
           <col
             key={c.key || c.dataIndex}
-            style={{ width: c.width, minWidth: c.width }}
+            style={{ width, minWidth: width }}
           />
         )
       })

@@ -14,6 +14,9 @@ export default {
     handleBodyScrollLeft: PropTypes.func.isRequired,
     expander: PropTypes.object.isRequired,
   },
+  inject: {
+    table: { default: {}},
+  },
   render () {
     const { columns, fixed, tableClassName, handleBodyScrollLeft, expander, table } = this
     const { prefixCls, scroll, showHeader } = table

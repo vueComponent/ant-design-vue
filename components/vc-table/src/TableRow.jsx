@@ -1,21 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import { connect } from 'mini-store'
+import PropTypes from '../../_util/vue-types'
+import { connect } from '../../_util/store'
 import TableCell from './TableCell'
 import { warningOnce } from './utils'
+import { initDefaultProps } from '../../_util/props-util'
+import BaseMixin from '../../_util/BaseMixin'
 
-class TableRow extends React.Component {
-  static propTypes = {
-    onRow: PropTypes.func,
-    onRowClick: PropTypes.func,
-    onRowDoubleClick: PropTypes.func,
-    onRowContextMenu: PropTypes.func,
-    onRowMouseEnter: PropTypes.func,
-    onRowMouseLeave: PropTypes.func,
+const TableRow = {
+  name: 'TableRow',
+  mixins: [BaseMixin],
+  props: initDefaultProps({
+    // onRow: PropTypes.func,
+    // onRowClick: PropTypes.func,
+    // onRowDoubleClick: PropTypes.func,
+    // onRowContextMenu: PropTypes.func,
+    // onRowMouseEnter: PropTypes.func,
+    // onRowMouseLeave: PropTypes.func,
     record: PropTypes.object,
     prefixCls: PropTypes.string,
-    onHover: PropTypes.func,
+    // onHover: PropTypes.func,
     columns: PropTypes.array,
     height: PropTypes.oneOfType([
       PropTypes.string,
@@ -43,133 +45,131 @@ class TableRow extends React.Component {
     expandedRow: PropTypes.bool,
     isAnyColumnsFixed: PropTypes.bool,
     ancestorKeys: PropTypes.array.isRequired,
-  }
-
-  static defaultProps = {
-    onRow () {},
+    expandIconColumnIndex: PropTypes.number,
+    expandRowByClick: PropTypes.bool,
+    // visible: PropTypes.bool,
+    // hovered: PropTypes.bool,
+    // height: PropTypes.any,
+  }, {
     expandIconColumnIndex: 0,
     expandRowByClick: false,
-    onHover () {},
     hasExpandIcon () {},
     renderExpandIcon () {},
     renderExpandIconCell () {},
-  }
+  }),
 
-  constructor (props) {
-    super(props)
+  data () {
+    this.shouldRender = this.visible
+    return {}
+  },
 
-    this.shouldRender = props.visible
-  }
-
-  componentDidMount () {
+  mounted () {
     if (this.shouldRender) {
-      this.saveRowRef()
+      this.$nextTick(() => {
+        this.saveRowRef()
+      })
     }
-  }
+  },
+  watch: {
+
+  },
 
   componentWillReceiveProps (nextProps) {
     if (this.props.visible || (!this.props.visible && nextProps.visible)) {
       this.shouldRender = true
     }
-  }
+  },
 
   shouldComponentUpdate (nextProps) {
     return !!(this.props.visible || nextProps.visible)
-  }
+  },
 
-  componentDidUpdate () {
+  updated () {
     if (this.shouldRender && !this.rowRef) {
-      this.saveRowRef()
+      this.$nextTick(() => {
+        this.saveRowRef()
+      })
     }
-  }
+  },
+  methods: {
+    onRowClick  (event) {
+      const { record, index } = this
+      this.__emit('rowClick', record, index, event)
+    },
 
-  onRowClick = (event) => {
-    const { record, index, onRowClick } = this.props
-    if (onRowClick) {
-      onRowClick(record, index, event)
-    }
-  }
+    onRowDoubleClick (event) {
+      const { record, index } = this
+      this.__emit('rowDoubleClick', record, index, event)
+    },
 
-  onRowDoubleClick = (event) => {
-    const { record, index, onRowDoubleClick } = this.props
-    if (onRowDoubleClick) {
-      onRowDoubleClick(record, index, event)
-    }
-  }
+    onContextMenu (event) {
+      const { record, index } = this
+      this.__emit('rowContextmenu', record, index, event)
+    },
 
-  onContextMenu = (event) => {
-    const { record, index, onRowContextMenu } = this.props
-    if (onRowContextMenu) {
-      onRowContextMenu(record, index, event)
-    }
-  }
+    onMouseEnter  (event) {
+      const { record, index, rowKey } = this
+      this.__emit('hover', true, rowKey)
+      this.__emit('rowMouseenter', record, index, event)
+    },
 
-  onMouseEnter = (event) => {
-    const { record, index, onRowMouseEnter, onHover, rowKey } = this.props
-    onHover(true, rowKey)
-    if (onRowMouseEnter) {
-      onRowMouseEnter(record, index, event)
-    }
-  }
+    onMouseLeave  (event) {
+      const { record, index, rowKey } = this
+      this.__emit('hover', false, rowKey)
+      this.__emit('rowMouseleave', record, index, event)
+    },
 
-  onMouseLeave = (event) => {
-    const { record, index, onRowMouseLeave, onHover, rowKey } = this.props
-    onHover(false, rowKey)
-    if (onRowMouseLeave) {
-      onRowMouseLeave(record, index, event)
-    }
-  }
+    setExpanedRowHeight () {
+      const { store, rowKey } = this
+      let { expandedRowsHeight } = store.getState()
+      const height = this.rowRef.getBoundingClientRect().height
+      expandedRowsHeight = {
+        ...expandedRowsHeight,
+        [rowKey]: height,
+      }
+      store.setState({ expandedRowsHeight })
+    },
 
-  setExpanedRowHeight () {
-    const { store, rowKey } = this.props
-    let { expandedRowsHeight } = store.getState()
-    const height = this.rowRef.getBoundingClientRect().height
-    expandedRowsHeight = {
-      ...expandedRowsHeight,
-      [rowKey]: height,
-    }
-    store.setState({ expandedRowsHeight })
-  }
+    setRowHeight () {
+      const { store, index } = this
+      const fixedColumnsBodyRowsHeight = store.getState().fixedColumnsBodyRowsHeight.slice()
+      const height = this.rowRef.getBoundingClientRect().height
+      fixedColumnsBodyRowsHeight[index] = height
+      store.setState({ fixedColumnsBodyRowsHeight })
+    },
 
-  setRowHeight () {
-    const { store, index } = this.props
-    const fixedColumnsBodyRowsHeight = store.getState().fixedColumnsBodyRowsHeight.slice()
-    const height = this.rowRef.getBoundingClientRect().height
-    fixedColumnsBodyRowsHeight[index] = height
-    store.setState({ fixedColumnsBodyRowsHeight })
-  }
+    getStyle () {
+      const { height, visible } = this
 
-  getStyle () {
-    const { height, visible } = this.props
+      if (height && height !== this.style.height) {
+        this.style = { ...this.style, height }
+      }
 
-    if (height && height !== this.style.height) {
-      this.style = { ...this.style, height }
-    }
+      if (!visible && !this.style.display) {
+        this.style = { ...this.style, display: 'none' }
+      }
 
-    if (!visible && !this.style.display) {
-      this.style = { ...this.style, display: 'none' }
-    }
+      return this.style
+    },
 
-    return this.style
-  }
+    saveRowRef () {
+      this.rowRef = this.$el
 
-  saveRowRef () {
-    this.rowRef = ReactDOM.findDOMNode(this)
+      const { isAnyColumnsFixed, fixed, expandedRow, ancestorKeys } = this
 
-    const { isAnyColumnsFixed, fixed, expandedRow, ancestorKeys } = this.props
+      if (!isAnyColumnsFixed) {
+        return
+      }
 
-    if (!isAnyColumnsFixed) {
-      return
-    }
+      if (!fixed && expandedRow) {
+        this.setExpanedRowHeight()
+      }
 
-    if (!fixed && expandedRow) {
-      this.setExpanedRowHeight()
-    }
-
-    if (!fixed && ancestorKeys.length >= 0) {
-      this.setRowHeight()
-    }
-  }
+      if (!fixed && ancestorKeys.length >= 0) {
+        this.setRowHeight()
+      }
+    },
+  },
 
   render () {
     if (!this.shouldRender) {
@@ -181,7 +181,7 @@ class TableRow extends React.Component {
       columns,
       record,
       index,
-      onRow,
+      // onRow,
       indent,
       indentSize,
       hovered,
@@ -191,12 +191,13 @@ class TableRow extends React.Component {
       hasExpandIcon,
       renderExpandIcon,
       renderExpandIconCell,
-    } = this.props
-
+      $listeners,
+    } = this
+    const { row: onRow } = $listeners
     const BodyRow = components.body.row
     const BodyCell = components.body.cell
 
-    let { className } = this.props
+    let className = ''
 
     if (hovered) {
       className += ` ${prefixCls}-hover`
@@ -241,22 +242,22 @@ class TableRow extends React.Component {
     }
 
     style = { ...style, ...customStyle }
-
+    console.log('rowProps', rowProps)
     return (
       <BodyRow
         onClick={this.onRowClick}
-        onDoubleClick={this.onRowDoubleClick}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        onContextMenu={this.onContextMenu}
-        className={rowClassName}
+        onDoubleclick={this.onRowDoubleClick}
+        onMouseenter={this.onMouseEnter}
+        onMouseleave={this.onMouseLeave}
+        onContextmenu={this.onContextMenu}
+        class={rowClassName}
         {...rowProps}
         style={style}
       >
         {cells}
       </BodyRow>
     )
-  }
+  },
 }
 
 function getRowHeight (state, props) {

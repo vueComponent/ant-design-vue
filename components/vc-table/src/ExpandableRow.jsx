@@ -1,6 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 import ExpandIcon from './ExpandIcon'
 import BaseMixin from '../../_util/BaseMixin'
+import { connect } from '../../_util/store'
 
 const ExpandableRow = {
   mixins: [BaseMixin],
@@ -32,61 +33,62 @@ const ExpandableRow = {
   beforeDestroy () {
     this.handleDestroy()
   },
+  methods: {
+    hasExpandIcon (columnIndex) {
+      const { expandRowByClick } = this
+      return !this.expandIconAsCell &&
+        !expandRowByClick &&
+        columnIndex === this.expandIconColumnIndex
+    },
 
-  hasExpandIcon (columnIndex) {
-    const { expandRowByClick } = this
-    return !this.expandIconAsCell &&
-      !expandRowByClick &&
-      columnIndex === this.expandIconColumnIndex
-  },
+    handleExpandChange (record, event) {
+      const { expanded, rowKey } = this
+      this.__emit('expandedChange', !expanded, record, event, rowKey)
+    },
 
-  handleExpandChange (record, event) {
-    const { expanded, rowKey } = this
-    this.__emit('expandedChange', !expanded, record, event, rowKey)
-  },
+    handleDestroy () {
+      const { rowKey, record } = this
+      this.__emit('expandedChange', false, record, null, rowKey, true)
+    },
 
-  handleDestroy () {
-    const { rowKey, record } = this
-    this.__emit('expandedChange', false, record, null, rowKey, true)
-  },
+    handleRowClick (record, index, event) {
+      const { expandRowByClick } = this
+      if (expandRowByClick) {
+        this.handleExpandChange(record, event)
+      }
+      this.__emit('rowClick', record, index, event)
+    },
 
-  handleRowClick (record, index, event) {
-    const { expandRowByClick } = this
-    if (expandRowByClick) {
-      this.handleExpandChange(record, event)
-    }
-    this.__emit('rowClick', record, index, event)
-  },
+    renderExpandIcon () {
+      const { prefixCls, expanded, record, needIndentSpaced } = this
 
-  renderExpandIcon () {
-    const { prefixCls, expanded, record, needIndentSpaced } = this
+      return (
+        <ExpandIcon
+          expandable={this.expandable}
+          prefixCls={prefixCls}
+          onExpand={this.handleExpandChange}
+          needIndentSpaced={needIndentSpaced}
+          expanded={expanded}
+          record={record}
+        />
+      )
+    },
 
-    return (
-      <ExpandIcon
-        expandable={this.expandable}
-        prefixCls={prefixCls}
-        onExpand={this.handleExpandChange}
-        needIndentSpaced={needIndentSpaced}
-        expanded={expanded}
-        record={record}
-      />
-    )
-  },
+    renderExpandIconCell  (cells) {
+      if (!this.expandIconAsCell) {
+        return
+      }
+      const { prefixCls } = this
 
-  renderExpandIconCell  (cells) {
-    if (!this.expandIconAsCell) {
-      return
-    }
-    const { prefixCls } = this
-
-    cells.push(
-      <td
-        class={`${prefixCls}-expand-icon-cell`}
-        key='rc-table-expand-icon-cell'
-      >
-        {this.renderExpandIcon()}
-      </td>
-    )
+      cells.push(
+        <td
+          class={`${prefixCls}-expand-icon-cell`}
+          key='rc-table-expand-icon-cell'
+        >
+          {this.renderExpandIcon()}
+        </td>
+      )
+    },
   },
 
   render () {
@@ -103,7 +105,6 @@ const ExpandableRow = {
     this.expandIconColumnIndex = fixed !== 'right' ? this.expandIconColumnIndex : -1
     const childrenData = record[childrenColumnName]
     this.expandable = !!(childrenData || expandedRowRender)
-
     const expandableRowProps = {
       props: {
         indentSize,

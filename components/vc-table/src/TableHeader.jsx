@@ -41,6 +41,9 @@ export default {
     expander: PropTypes.object.isRequired,
 
   },
+  inject: {
+    table: { default: {}},
+  },
   methods: {
     onHeaderRow () {
       this.table.__emit('headerRow', ...arguments)
@@ -48,7 +51,7 @@ export default {
   },
 
   render () {
-    const { components, prefixCls, showHeader } = this.table
+    const { sComponents: components, prefixCls, showHeader } = this.table
     const { expander, columns, fixed, onHeaderRow } = this
 
     if (!showHeader) {

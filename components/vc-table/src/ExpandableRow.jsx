@@ -112,6 +112,7 @@ const ExpandableRow = {
         renderExpandIcon: this.renderExpandIcon,
         renderExpandIconCell: this.renderExpandIconCell,
       },
+
       on: {
         rowClick: this.handleRowClick,
       },

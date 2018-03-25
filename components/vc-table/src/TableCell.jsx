@@ -1,5 +1,6 @@
 import PropTypes from '../../_util/vue-types'
 import get from 'lodash/get'
+import { isValidElement } from '../../_util/props-util'
 
 export default {
   name: 'TableCell',
@@ -16,7 +17,7 @@ export default {
   methods: {
     isInvalidRenderCellText (text) {
       // debugger
-      return text &&
+      return text && !isValidElement(text) &&
         Object.prototype.toString.call(text) === '[object Object]'
     },
 
@@ -28,7 +29,7 @@ export default {
     },
   },
 
-  render () {
+  render (h) {
     const {
       record,
       indentSize,
@@ -39,8 +40,8 @@ export default {
       column,
       component: BodyCell,
     } = this
-    const { dataIndex, render } = column
-
+    const { dataIndex, render, className = '' } = column
+    const cls = column.class || className
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
     let text
@@ -51,22 +52,29 @@ export default {
     } else {
       text = get(record, dataIndex)
     }
-    let tdProps = {}
+    const tdProps = {
+      props: {},
+      attrs: {},
+      class: cls,
+      on: {
+        click: this.handleClick,
+      },
+    }
     let colSpan
     let rowSpan
 
     if (render) {
-      text = render(text, record, index)
+      text = render(h, text, record, index)
       if (this.isInvalidRenderCellText(text)) {
-        tdProps = text.props || tdProps
-        colSpan = tdProps.colSpan
-        rowSpan = tdProps.rowSpan
+        tdProps.attrs = text.attrs || text.props || {}
+        colSpan = tdProps.attrs.colSpan
+        rowSpan = tdProps.attrs.rowSpan
         text = text.children
       }
     }
 
     if (column.onCell) {
-      tdProps = { ...tdProps, ...column.onCell(record) }
+      tdProps.attrs = { ...tdProps.attrs, ...column.onCell(record) }
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202
@@ -88,11 +96,9 @@ export default {
     if (column.align) {
       tdProps.style = { textAlign: column.align }
     }
-    console.log('tdProps', tdProps)
 
     return (
       <BodyCell
-        onClick={this.handleClick}
         {...tdProps}
       >
         {indentText}

@@ -2,9 +2,9 @@ import PropTypes from '../../_util/vue-types'
 import { connect } from '../../_util/store'
 import TableCell from './TableCell'
 import { warningOnce } from './utils'
-import { initDefaultProps } from '../../_util/props-util'
+import { initDefaultProps, mergeProps } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
-
+function noop () {}
 const TableRow = {
   name: 'TableRow',
   mixins: [BaseMixin],
@@ -71,7 +71,11 @@ const TableRow = {
     }
   },
   watch: {
-
+    visible (val) {
+      if (val) {
+        this.shouldRender = true
+      }
+    },
   },
 
   componentWillReceiveProps (nextProps) {
@@ -193,7 +197,7 @@ const TableRow = {
       renderExpandIconCell,
       $listeners,
     } = this
-    const { row: onRow } = $listeners
+    const { row: onRow = noop } = $listeners
     const BodyRow = components.body.row
     const BodyCell = components.body.cell
 
@@ -242,17 +246,19 @@ const TableRow = {
     }
 
     style = { ...style, ...customStyle }
-    console.log('rowProps', rowProps)
+    const bodyRowProps = mergeProps({
+      on: {
+        click: this.onRowClick,
+        dblclick: this.onRowDoubleClick,
+        mouseenter: this.onMouseEnter,
+        mouseleave: this.onMouseLeave,
+        contextmenu: this.onContextMenu,
+      },
+      class: rowClassName,
+    }, { ...rowProps, style })
     return (
       <BodyRow
-        onClick={this.onRowClick}
-        onDoubleclick={this.onRowDoubleClick}
-        onMouseenter={this.onMouseEnter}
-        onMouseleave={this.onMouseLeave}
-        onContextmenu={this.onContextMenu}
-        class={rowClassName}
-        {...rowProps}
-        style={style}
+        {...bodyRowProps}
       >
         {cells}
       </BodyRow>

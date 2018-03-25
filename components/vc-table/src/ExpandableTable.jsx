@@ -154,12 +154,11 @@ const ExpandableTable = {
           cell: 'td',
         },
       }
-
       return (
         <TableRow
           key={rowKey}
           columns={columns}
-          className={className}
+          class={className}
           rowKey={rowKey}
           ancestorKeys={ancestorKeys}
           prefixCls={`${prefixCls}-expanded-row`}
@@ -168,6 +167,7 @@ const ExpandableTable = {
           fixed={fixed}
           components={components}
           expandedRow
+          hasExpandIcon={() => {}}
         />
       )
     },

@@ -1,5 +1,6 @@
 import PropTypes from '../../_util/vue-types'
 import { connect } from '../../_util/store'
+import { mergeProps } from '../../_util/props-util'
 
 const TableHeaderRow = {
   props: {
@@ -25,17 +26,23 @@ const TableHeaderRow = {
       <HeaderRow {...rowProps} style={style}>
         {row.map((cell, i) => {
           const { column, children, className, ...cellProps } = cell
+          const cls = cell.class || className
           const customProps = column.onHeaderCell ? column.onHeaderCell(column) : {}
           if (column.align) {
             cellProps.style = { textAlign: column.align }
           }
-
+          const headerCellProps = mergeProps({
+            attrs: {
+              ...cellProps,
+            },
+            class: cls,
+          }, {
+            ...customProps,
+            key: column.key || column.dataIndex || i,
+          })
           return (
             <HeaderCell
-              {...cellProps}
-              class={className}
-              {...customProps}
-              key={column.key || column.dataIndex || i}
+              {...headerCellProps}
             >
               {children}
             </HeaderCell>

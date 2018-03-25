@@ -5,7 +5,8 @@ import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import ExpandableRow from './ExpandableRow'
 import { mergeProps } from '../../_util/props-util'
-
+import { connect } from '../../_util/store'
+function noop () {}
 const BaseTable = {
   name: 'BaseTable',
   props: {
@@ -34,18 +35,18 @@ const BaseTable = {
 
     renderRows  (renderData, indent, ancestorKeys = []) {
       const {
-        columnManager, components,
+        columnManager, sComponents: components,
         prefixCls,
         childrenColumnName,
         rowClassName,
         // rowRef,
         $listeners: {
-          rowClick: onRowClick,
-          rowDoubleclick: onRowDoubleClick,
-          rowContextmenu: onRowContextMenu,
-          rowMouseenter: onRowMouseEnter,
-          rowMouseleave: onRowMouseLeave,
-          row: onRow,
+          rowClick: onRowClick = noop,
+          rowDoubleclick: onRowDoubleClick = noop,
+          rowContextmenu: onRowContextMenu = noop,
+          rowMouseenter: onRowMouseEnter = noop,
+          rowMouseleave: onRowMouseLeave = noop,
+          row: onRow = noop,
         },
       } = this.table
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this
@@ -86,6 +87,7 @@ const BaseTable = {
           },
           key,
           on: {
+            // ...expander.on,
             rowClick: onRowClick,
             expandedChange: expander.handleExpandChange,
           },
@@ -148,7 +150,7 @@ const BaseTable = {
   },
 
   render () {
-    const { components, prefixCls, scroll, data, getBodyWrapper } = this.table
+    const { sComponents: components, prefixCls, scroll, data, getBodyWrapper } = this.table
     const { expander, tableClassName, hasHead, hasBody, fixed, columns } = this
     const tableStyle = {}
 
@@ -186,4 +188,4 @@ const BaseTable = {
   },
 }
 
-export default BaseTable
+export default connect()(BaseTable)

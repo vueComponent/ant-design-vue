@@ -10,12 +10,12 @@ export default {
     indent: PropTypes.number,
     indentSize: PropTypes.number,
     column: PropTypes.object,
-    expandIcon: PropTypes.node,
+    expandIcon: PropTypes.any,
     component: PropTypes.any,
   },
   methods: {
     isInvalidRenderCellText (text) {
-      debugger
+      // debugger
       return text &&
         Object.prototype.toString.call(text) === '[object Object]'
     },

@@ -166,10 +166,6 @@ export function getComponentName (opts) {
   return opts && (opts.Ctor.options.name || opts.tag)
 }
 
-export function isValidElement (ele) {
-  return !!ele.tag
-}
-
 export function isEmptyElement (ele) {
   return !(ele.tag || ele.text.trim() !== '')
 }
@@ -206,6 +202,11 @@ export function mergeProps () {
   return props
 }
 
+function isValidElement (element) {
+  const name = element.constructor.name
+  return element.tag && (name === 'VNode' || name === 'VueComponent')
+}
+
 export {
   hasProp,
   filterProps,
@@ -219,5 +220,6 @@ export {
   getValueByProp,
   parseStyleText,
   initDefaultProps,
+  isValidElement,
 }
 export default hasProp

@@ -1,4 +1,5 @@
 
+/* eslint-disable camelcase */
 import PropTypes from '../../_util/vue-types'
 import { debounce, warningOnce } from './utils'
 import shallowequal from 'shallowequal'

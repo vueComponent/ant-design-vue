@@ -53,10 +53,10 @@ export default {
       this.focus()
     },
     focus () {
-      this.$refs[this.refStr].focus()
+      this.$refs.handle.focus()
     },
     blur () {
-      this.$refs[this.refStr].blur()
+      this.$refs.handle.blur()
     },
   },
   render () {
@@ -87,6 +87,7 @@ export default {
       attrs: {
         role: 'slider',
         tabIndex: disabled ? null : (tabIndex || 0),
+        refStr,
         ...ariaProps,
         ...restProps,
       },
@@ -96,7 +97,7 @@ export default {
         blur: this.handleBlur,
         keydown: this.handleKeyDown,
       },
-      ref: refStr,
+      ref: 'handle',
     }
     return (
       <div

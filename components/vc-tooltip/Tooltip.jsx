@@ -2,7 +2,7 @@
 import PropTypes from '../_util/vue-types'
 import Trigger from '../trigger'
 import { placements } from './placements'
-import { hasProp, getComponentFromProp } from '../_util/props-util'
+import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util'
 function noop () {}
 export default {
   props: {
@@ -57,14 +57,13 @@ export default {
       destroyTooltipOnHide,
       defaultVisible, getTooltipContainer,
       ...restProps
-    } = this.$props
+    } = getOptionProps(this)
     const extraProps = { ...restProps }
     if (hasProp(this, 'visible')) {
       extraProps.popupVisible = this.$props.visible
     }
     const triggerProps = {
       props: {
-        ...extraProps,
         popupClassName: overlayClassName,
         prefixCls: prefixCls,
         action: trigger,
@@ -80,6 +79,7 @@ export default {
         mouseLeaveDelay: mouseLeaveDelay,
         popupStyle: overlayStyle,
         mouseEnterDelay: mouseEnterDelay,
+        ...extraProps,
       },
       on: {
         popupVisibleChange: this.$listeners.visibleChange || noop,

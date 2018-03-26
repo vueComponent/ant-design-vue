@@ -169,7 +169,6 @@ const Slider = {
     const { sValue, dragging } = this
     const offset = this.calcOffset(sValue)
     const handle = handleGenerator({
-      className: `${prefixCls}-handle`,
       prefixCls,
       vertical,
       offset,

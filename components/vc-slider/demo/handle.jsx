@@ -13,11 +13,14 @@ export default {
   },
   render () {
     const handle = (props) => {
-      const { value, dragging, index, ...restProps } = props
+      const { value, dragging, index, refStr, ...restProps } = props
       const handleProps = {
         props: {
           ...restProps,
           value,
+        },
+        attrs: {
+          refStr,
         },
         key: index,
       }

@@ -42,11 +42,14 @@ export default function createSlider (Component) {
       max: 100,
       step: 1,
       marks: {},
-      handle ({ index, ...restProps }) {
+      handle ({ index, refStr, ...restProps }) {
         delete restProps.dragging
         const handleProps = {
           props: {
             ...restProps,
+          },
+          attrs: {
+            refStr,
           },
           key: index,
         }
@@ -90,10 +93,12 @@ export default function createSlider (Component) {
     },
     methods: {
       setHandleRefs () {
-        const refs = this.$refs
-        Object.keys(refs).map((item) => {
-          if (item.indexOf('handlesRefs') > -1) {
-            const handleArr = item.split('handlesRefs')
+        const refs = this.$refs.handleRef
+        const children = Array.prototype.slice.call(refs.children)
+        children.map((item) => {
+          const refStr = item.getAttribute('refStr')
+          if (refStr.indexOf('handleRef') > -1) {
+            const handleArr = refStr.split('handleRef')
             this.handlesRefs[handleArr[1]] = item
           }
         })
@@ -305,7 +310,9 @@ export default function createSlider (Component) {
             dotStyle={dotStyle}
             activeDotStyle={activeDotStyle}
           />
-          {handles}
+          <div ref='handleRef'>
+            {handles}
+          </div>
           <Marks
             {...markProps}
           />

@@ -64,6 +64,7 @@ export default {
     }
     const triggerProps = {
       props: {
+        ...extraProps,
         popupClassName: overlayClassName,
         prefixCls: prefixCls,
         action: trigger,
@@ -79,7 +80,6 @@ export default {
         mouseLeaveDelay: mouseLeaveDelay,
         popupStyle: overlayStyle,
         mouseEnterDelay: mouseEnterDelay,
-        ...extraProps,
       },
       on: {
         popupVisibleChange: this.$listeners.visibleChange || noop,

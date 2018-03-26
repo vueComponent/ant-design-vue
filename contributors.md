@@ -55,12 +55,3 @@ Slider
 Table
 Timeline
 Transfer
-
-
-
-
-
-
-
-
-

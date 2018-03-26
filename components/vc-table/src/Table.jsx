@@ -61,6 +61,7 @@ export default {
     expandedRowRender: PropTypes.func,
     childrenColumnName: PropTypes.string,
     indentSize: PropTypes.number,
+    expandRowByClick: PropTypes.bool,
   }, {
     data: [],
     useFixedHeader: false,
@@ -217,15 +218,15 @@ export default {
 
     setScrollPosition (position) {
       this.scrollPosition = position
-      if (this.tableNode) {
+      if (this.$refs.tableNode) {
         const { prefixCls } = this
         if (position === 'both') {
-          classes(this.tableNode)
+          classes(this.$refs.tableNode)
             .remove(new RegExp(`^${prefixCls}-scroll-position-.+$`))
             .add(`${prefixCls}-scroll-position-left`)
             .add(`${prefixCls}-scroll-position-right`)
         } else {
-          classes(this.tableNode)
+          classes(this.$refs.tableNode)
             .remove(new RegExp(`^${prefixCls}-scroll-position-.+$`))
             .add(`${prefixCls}-scroll-position-${position}`)
         }
@@ -233,7 +234,7 @@ export default {
     },
 
     setScrollPositionClassName () {
-      const node = this.bodyTable
+      const node = this.ref_bodyTable
       const scrollToLeft = node.scrollLeft === 0
       const scrollToRight = node.scrollLeft + 1 >=
         node.children[0].getBoundingClientRect().width -
@@ -255,17 +256,17 @@ export default {
     },
 
     syncFixedTableRowHeight () {
-      const tableRect = this.tableNode.getBoundingClientRect()
+      const tableRect = this.$refs.tableNode.getBoundingClientRect()
       // If tableNode's height less than 0, suppose it is hidden and don't recalculate rowHeight.
       // see: https://github.com/ant-design/ant-design/issues/4836
       if (tableRect.height !== undefined && tableRect.height <= 0) {
         return
       }
-      const { prefixCls } = this.props
-      const headRows = this.headTable
-        ? this.headTable.querySelectorAll('thead')
-        : this.bodyTable.querySelectorAll('thead')
-      const bodyRows = this.bodyTable.querySelectorAll(`.${prefixCls}-row`) || []
+      const { prefixCls } = this
+      const headRows = this.ref_headTable
+        ? this.ref_headTable.querySelectorAll('thead')
+        : this.ref_bodyTable.querySelectorAll('thead')
+      const bodyRows = this.ref_bodyTable.querySelectorAll(`.${prefixCls}-row`) || []
       const fixedColumnsHeadRowsHeight = [].map.call(
         headRows, row => row.getBoundingClientRect().height || 'auto'
       )
@@ -277,7 +278,7 @@ export default {
           shallowequal(state.fixedColumnsBodyRowsHeight, fixedColumnsBodyRowsHeight)) {
         return
       }
-
+      console.log(fixedColumnsHeadRowsHeight, fixedColumnsBodyRowsHeight)
       this.store.setState({
         fixedColumnsHeadRowsHeight,
         fixedColumnsBodyRowsHeight,
@@ -285,11 +286,11 @@ export default {
     },
 
     resetScrollX () {
-      if (this.headTable) {
-        this.headTable.scrollLeft = 0
+      if (this.ref_headTable) {
+        this.ref_headTable.scrollLeft = 0
       }
-      if (this.bodyTable) {
-        this.bodyTable.scrollLeft = 0
+      if (this.ref_bodyTable) {
+        this.ref_bodyTable.scrollLeft = 0
       }
     },
 
@@ -305,12 +306,12 @@ export default {
       }
       const target = e.target
       const { scroll = {}} = this
-      const { headTable, bodyTable } = this
+      const { ref_headTable, ref_bodyTable } = this
       if (target.scrollLeft !== this.lastScrollLeft && scroll.x) {
-        if (target === bodyTable && headTable) {
-          headTable.scrollLeft = target.scrollLeft
-        } else if (target === headTable && bodyTable) {
-          bodyTable.scrollLeft = target.scrollLeft
+        if (target === ref_bodyTable && ref_headTable) {
+          ref_headTable.scrollLeft = target.scrollLeft
+        } else if (target === ref_headTable && ref_bodyTable) {
+          ref_bodyTable.scrollLeft = target.scrollLeft
         }
         this.setScrollPositionClassName()
       }
@@ -321,8 +322,8 @@ export default {
     handleBodyScrollTop  (e) {
       const target = e.target
       const { scroll = {}} = this
-      const { headTable, bodyTable, fixedColumnsBodyLeft, fixedColumnsBodyRight } = this
-      if (target.scrollTop !== this.lastScrollTop && scroll.y && target !== headTable) {
+      const { ref_headTable, ref_bodyTable, fixedColumnsBodyLeft, fixedColumnsBodyRight } = this
+      if (target.scrollTop !== this.lastScrollTop && scroll.y && target !== ref_headTable) {
         const scrollTop = target.scrollTop
         if (fixedColumnsBodyLeft && target !== fixedColumnsBodyLeft) {
           fixedColumnsBodyLeft.scrollTop = scrollTop
@@ -330,8 +331,8 @@ export default {
         if (fixedColumnsBodyRight && target !== fixedColumnsBodyRight) {
           fixedColumnsBodyRight.scrollTop = scrollTop
         }
-        if (bodyTable && target !== bodyTable) {
-          bodyTable.scrollTop = scrollTop
+        if (ref_bodyTable && target !== ref_bodyTable) {
+          ref_bodyTable.scrollTop = scrollTop
         }
       }
       // Remember last scrollTop for scroll direction detecting.
@@ -342,7 +343,9 @@ export default {
       this.handleBodyScrollLeft(e)
       this.handleBodyScrollTop(e)
     },
-
+    saveChildrenRef (name, node) {
+      this[`ref_${name}`] = node
+    },
     renderMainTable () {
       const { scroll, prefixCls } = this
       const isAnyColumnsFixed = this.columnManager.isAnyColumnsFixed()
@@ -420,19 +423,19 @@ export default {
     },
 
     renderTitle () {
-      const { title, prefixCls } = this
+      const { title, prefixCls, data } = this
       return title ? (
         <div class={`${prefixCls}-title`} key='title'>
-          {title(this.props.data)}
+          {title(data)}
         </div>
       ) : null
     },
 
     renderFooter () {
-      const { footer, prefixCls } = this
+      const { footer, prefixCls, data } = this
       return footer ? (
         <div class={`${prefixCls}-footer`} key='footer'>
-          {footer(this.props.data)}
+          {footer(data)}
         </div>
       ) : null
     },

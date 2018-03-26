@@ -17,6 +17,19 @@ export default {
   inject: {
     table: { default: {}},
   },
+  mounted () {
+    this.updateTableRef()
+  },
+  updated () {
+    this.updateTableRef()
+  },
+  methods: {
+    updateTableRef () {
+      this.$nextTick(() => {
+        this.$refs.headTable && this.table.saveChildrenRef('headTable', this.$refs.headTable)
+      })
+    },
+  },
   render () {
     const { columns, fixed, tableClassName, handleBodyScrollLeft, expander, table } = this
     const { prefixCls, scroll, showHeader } = table

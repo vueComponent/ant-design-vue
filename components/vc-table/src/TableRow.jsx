@@ -2,7 +2,7 @@ import PropTypes from '../../_util/vue-types'
 import { connect } from '../../_util/store'
 import TableCell from './TableCell'
 import { warningOnce } from './utils'
-import { initDefaultProps, mergeProps } from '../../_util/props-util'
+import { initDefaultProps, mergeProps, getStyle } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
 function noop () {}
 const TableRow = {
@@ -78,15 +78,15 @@ const TableRow = {
     },
   },
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.visible || (!this.props.visible && nextProps.visible)) {
-      this.shouldRender = true
-    }
-  },
+  // componentWillReceiveProps (nextProps) {
+  //   if (this.props.visible || (!this.props.visible && nextProps.visible)) {
+  //     this.shouldRender = true
+  //   }
+  // },
 
-  shouldComponentUpdate (nextProps) {
-    return !!(this.props.visible || nextProps.visible)
-  },
+  // shouldComponentUpdate (nextProps) {
+  //   return !!(this.props.visible || nextProps.visible)
+  // },
 
   updated () {
     if (this.shouldRender && !this.rowRef) {
@@ -144,16 +144,16 @@ const TableRow = {
 
     getStyle () {
       const { height, visible } = this
-
-      if (height && height !== this.style.height) {
-        this.style = { ...this.style, height }
+      let style = getStyle(this)
+      if (height) {
+        style = { ...style, height }
       }
 
-      if (!visible && !this.style.display) {
-        this.style = { ...this.style, display: 'none' }
+      if (!visible && !style.display) {
+        style = { ...style, display: 'none' }
       }
 
-      return this.style
+      return style
     },
 
     saveRowRef () {
@@ -239,7 +239,7 @@ const TableRow = {
 
     const rowProps = onRow(record, index)
     const customStyle = rowProps ? rowProps.style : {}
-    let style = { height }
+    let style = { height: typeof height === 'number' ? `${height}px` : height }
 
     if (!visible) {
       style.display = 'none'

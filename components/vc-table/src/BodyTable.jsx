@@ -19,6 +19,21 @@ export default {
   inject: {
     table: { default: {}},
   },
+  mounted () {
+    this.updateTableRef()
+  },
+  updated () {
+    this.updateTableRef()
+  },
+  methods: {
+    updateTableRef () {
+      this.$nextTick(() => {
+        this.$refs.fixedColumnsBodyLeft && this.table.saveChildrenRef('fixedColumnsBodyLeft', this.$refs.fixedColumnsBodyLeft)
+        this.$refs.fixedColumnsBodyRight && this.table.saveChildrenRef('fixedColumnsBodyRight', this.$refs.fixedColumnsBodyLeft)
+        this.$refs.bodyTable && this.table.saveChildrenRef('bodyTable', this.$refs.bodyTable)
+      })
+    },
+  },
   render () {
     const { prefixCls, scroll } = this.table
     const {

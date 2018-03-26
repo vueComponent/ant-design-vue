@@ -36,9 +36,9 @@ const ExpandableRow = {
   methods: {
     hasExpandIcon (columnIndex) {
       const { expandRowByClick } = this
-      return !this.expandIconAsCell &&
+      return !this.tempExpandIconAsCell &&
         !expandRowByClick &&
-        columnIndex === this.expandIconColumnIndex
+        columnIndex === this.tempExpandIconColumnIndex
     },
 
     handleExpandChange (record, event) {
@@ -75,7 +75,7 @@ const ExpandableRow = {
     },
 
     renderExpandIconCell  (cells) {
-      if (!this.expandIconAsCell) {
+      if (!this.tempExpandIconAsCell) {
         return
       }
       const { prefixCls } = this
@@ -101,8 +101,8 @@ const ExpandableRow = {
       $scopedSlots,
     } = this
 
-    this.expandIconAsCell = fixed !== 'right' ? this.expandIconAsCell : false
-    this.expandIconColumnIndex = fixed !== 'right' ? this.expandIconColumnIndex : -1
+    this.tempExpandIconAsCell = fixed !== 'right' ? this.expandIconAsCell : false
+    this.tempExpandIconColumnIndex = fixed !== 'right' ? this.expandIconColumnIndex : -1
     const childrenData = record[childrenColumnName]
     this.expandable = !!(childrenData || expandedRowRender)
     const expandableRowProps = {

@@ -28,7 +28,7 @@ const BaseTable = {
   },
   methods: {
     handleRowHover  (isHover, key) {
-      this.props.store.setState({
+      this.store.setState({
         currentHoverKey: isHover ? key : null,
       })
     },
@@ -159,7 +159,7 @@ const BaseTable = {
       if (scroll.x === true) {
         tableStyle.tableLayout = 'fixed'
       } else {
-        tableStyle.width = scroll.x
+        tableStyle.width = `${scroll.x}px`
       }
     }
 

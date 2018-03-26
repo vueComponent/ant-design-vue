@@ -34,6 +34,7 @@ export default function createSlider (Component) {
     autoFocus: PropTypes.bool,
   }
   return {
+    mixins: [Component],
     props: initDefaultProps(propTypes, {
       ...Component.defaultProps,
       prefixCls: 'rc-slider',
@@ -43,7 +44,13 @@ export default function createSlider (Component) {
       marks: {},
       handle ({ index, ...restProps }) {
         delete restProps.dragging
-        return <Handle {...restProps} key={index} />
+        const handleProps = {
+          props: {
+            ...restProps,
+          },
+          key: index,
+        }
+        return <Handle {...handleProps} />
       },
       included: true,
       disabled: false,
@@ -65,7 +72,7 @@ export default function createSlider (Component) {
           step
         )
       }
-      this.handlesRefs = {}
+      this.handlesRefs = []
       return {}
     },
     beforeDestroy () {
@@ -78,9 +85,19 @@ export default function createSlider (Component) {
       this.$nextTick(() => {
         // Snapshot testing cannot handle refs, so be sure to null-check this.
         this.document = this.$refs.sliderRef && this.$refs.sliderRef.ownerDocument
+        this.setHandleRefs()
       })
     },
     methods: {
+      setHandleRefs () {
+        const refs = this.$refs
+        Object.keys(refs).map((item) => {
+          if (item.indexOf('handlesRefs') > -1) {
+            const handleArr = item.split('handlesRefs')
+            this.handlesRefs[handleArr[1]] = item
+          }
+        })
+      },
       onMouseDown (e) {
         if (e.button !== 0) { return }
         const isVertical = this.vertical
@@ -208,12 +225,9 @@ export default function createSlider (Component) {
         return nextValue
       },
       calcOffset (value) {
-        const { min, max } = this.props
+        const { min, max } = this
         const ratio = (value - min) / (max - min)
         return ratio * 100
-      },
-      saveHandle (index, handle) {
-        this.handlesRefs[index] = handle
       },
       onClickMarkLabel (e, value) {
         e.stopPropagation()
@@ -236,7 +250,7 @@ export default function createSlider (Component) {
         dotStyle,
         activeDotStyle,
       } = this
-      const { tracks, handles } = super.render()
+      const { tracks, handles } = Component.render.call(this)
 
       const sliderClassName = classNames(prefixCls, {
         [`${prefixCls}-with-marks`]: Object.keys(marks).length,
@@ -262,10 +276,10 @@ export default function createSlider (Component) {
         <div
           ref='sliderRef'
           class={sliderClassName}
-          onTouchStart={disabled ? noop : this.onTouchStart}
-          onMouseDown={disabled ? noop : this.onMouseDown}
-          onMouseUp={disabled ? noop : this.onMouseUp}
-          onKeyDown={disabled ? noop : this.onKeyDown}
+          onTouchstart={disabled ? noop : this.onTouchStart}
+          onMousedown={disabled ? noop : this.onMouseDown}
+          onMouseup={disabled ? noop : this.onMouseUp}
+          onKeydown={disabled ? noop : this.onKeyDown}
           onFocus={disabled ? noop : this.onFocus}
           onBlur={disabled ? noop : this.onBlur}
         >

@@ -1,5 +1,5 @@
-import PropTypes from '../../../_util/vue-types'
-import BaseMixin from '../../../_util/BaseMixin'
+import PropTypes from '../../_util/vue-types'
+import BaseMixin from '../../_util/BaseMixin'
 import Tooltip from '../../vc-tooltip'
 import Handle from './Handle'
 

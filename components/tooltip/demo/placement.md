@@ -12,84 +12,84 @@ The ToolTip has 12 placements choice.
 <template>
   <div id="components-a-tooltip-demo-placement">
     <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">
-      <a-popconfirm placement="topLeft" >
+      <a-tooltip placement="topLeft" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>TL</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="top" >
+      </a-tooltip>
+      <a-tooltip placement="top" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>Top</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="topRight" >
+      </a-tooltip>
+      <a-tooltip placement="topRight" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>TR</a-button>
-      </a-popconfirm>
+      </a-tooltip>
     </div>
     <div :style="{ width: `${buttonWidth}px`, float: 'left' }">
-      <a-popconfirm placement="leftTop" >
+      <a-tooltip placement="leftTop" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>LT</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="left" >
+      </a-tooltip>
+      <a-tooltip placement="left" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>Left</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="leftBottom" >
+      </a-tooltip>
+      <a-tooltip placement="leftBottom" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>LB</a-button>
-      </a-popconfirm>
+      </a-tooltip>
     </div>
     <div :style="{ width: `${buttonWidth}px`, marginLeft: `${buttonWidth * 4 + 24 }px`}">
-      <a-popconfirm placement="rightTop" >
+      <a-tooltip placement="rightTop" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>RT</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="right" >
+      </a-tooltip>
+      <a-tooltip placement="right" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>Right</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="rightBottom" >
+      </a-tooltip>
+      <a-tooltip placement="rightBottom" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>RB</a-button>
-      </a-popconfirm>
+      </a-tooltip>
     </div>
     <div :style="{ marginLeft: `${buttonWidth}px`, clear: 'both', whiteSpace: 'nowrap' }">
-      <a-popconfirm placement="bottomLeft" >
+      <a-tooltip placement="bottomLeft" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>BL</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="bottom" >
+      </a-tooltip>
+      <a-tooltip placement="bottom" >
         <template slot="title">
             <span>prompt text</span>
         </template>
         <a-button>Bottom</a-button>
-      </a-popconfirm>
-      <a-popconfirm placement="bottomRight" >
+      </a-tooltip>
+      <a-tooltip placement="bottomRight" >
         <template slot="title">
           <span>prompt text</span>
         </template>
         <a-button>BR</a-button>
-      </a-popconfirm>
+      </a-tooltip>
     </div>
   </div>
 </template>

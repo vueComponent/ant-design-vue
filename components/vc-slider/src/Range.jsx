@@ -1,7 +1,7 @@
 import classNames from 'classnames'
-import PropTypes from '../../../_util/vue-types'
-import BaseMixin from '../../../_util/BaseMixin'
-import { initDefaultProps, hasProp } from '../../../_util/props-util'
+import PropTypes from '../../_util/vue-types'
+import BaseMixin from '../../_util/BaseMixin'
+import { initDefaultProps, hasProp } from '../../_util/props-util'
 import Track from './common/Track'
 import createSlider from './common/createSlider'
 import * as utils from './utils'
@@ -334,7 +334,7 @@ const Range = {
       max,
       disabled,
       style: handleStyle[i],
-      ref: h => this.saveHandle(i, h),
+      refStr: 'handleRef' + i,
     }))
 
     const tracks = bounds.slice(0, -1).map((_, index) => {

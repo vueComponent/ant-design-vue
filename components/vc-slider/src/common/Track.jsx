@@ -2,7 +2,8 @@
 const Track = {
   functional: true,
   render (createElement, context) {
-    const { included, vertical, offset, length, style } = context.data
+    const { included, vertical, offset, length } = context.props
+    const { style, class: className } = context.data
 
     const positonStyle = vertical ? {
       bottom: `${offset}%`,
@@ -12,11 +13,11 @@ const Track = {
       width: `${length}%`,
     }
 
-    context.data.style = {
+    const elStyle = {
       ...style,
       ...positonStyle,
     }
-    return included ? createElement('div', context.data, context.children) : null
+    return included ? <div class={className} style={elStyle} /> : null
   },
 }
 

@@ -20,7 +20,7 @@ const Steps = {
   functional: true,
   render (createElement, context) {
     const { prefixCls, vertical, marks, dots, step, included,
-      lowerBound, upperBound, max, min, dotStyle, activeDotStyle } = context.data
+      lowerBound, upperBound, max, min, dotStyle, activeDotStyle } = context.props
     const range = max - min
     const elements = calcPoints(vertical, marks, dots, step, min, max).map((point) => {
       const offset = `${Math.abs(point - min) / range * 100}%`
@@ -37,10 +37,10 @@ const Steps = {
         [`${prefixCls}-dot-active`]: isActived,
       })
 
-      return <span className={pointClassName} style={style} key={point} />
+      return <span class={pointClassName} style={style} key={point} />
     })
 
-    return <div className={`${prefixCls}-step`}>{elements}</div>
+    return <div class={`${prefixCls}-step`}>{elements}</div>
   },
 }
 

@@ -13,7 +13,7 @@ const TableHeaderRow = {
     height: PropTypes.any,
   },
   name: 'TableHeaderRow',
-  render () {
+  render (h) {
     const { row, index, height, components, $listeners = {}} = this
     const onHeaderRow = $listeners.headerRow
     const HeaderRow = components.header.row
@@ -40,6 +40,9 @@ const TableHeaderRow = {
             ...customProps,
             key: column.key || column.dataIndex || i,
           })
+          if (typeof HeaderCell === 'function') {
+            return HeaderCell(h, headerCellProps, children)
+          }
           return (
             <HeaderCell
               {...headerCellProps}

@@ -38,11 +38,14 @@ const Dropdown = {
       class: `${prefixCls}-trigger`,
       disabled,
     })
-    const overlay = $slots.overlay && $slots.overlay[0]
-    // menu cannot be selectable in dropdown defaultly
+    const overlay = this.overlay || $slots.overlay && $slots.overlay[0]
+    // menu cannot be selectable in dropdown defaultly, but multiple type can be selectable
     const overlayProps = overlay && getPropsData(overlay)
-    const selectable = (overlayProps.selectable !== undefined && overlayProps.selectable !== false) || false
-    const fixedModeOverlay = cloneElement(overlay, {
+    let selectable = false
+    if (overlayProps) {
+      selectable = !!overlayProps.selectable || overlayProps.multiple
+    }
+    const fixedModeOverlay = overlay && cloneElement(overlay, {
       props: {
         mode: 'vertical',
         selectable,

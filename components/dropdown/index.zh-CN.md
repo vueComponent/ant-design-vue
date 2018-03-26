@@ -8,7 +8,7 @@
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | `() => document.body` |
 | overlay(slot) | 菜单 | [Menu](#/cn/components/menu) | - |
 | placement | 菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
-| trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextMenu`> | `['hover']` |
+| trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
 | visible(v-model) | 菜单是否显示 | boolean | - |
 
 `overlay` 菜单使用 [Menu](#/cn/components/menu/)，还包括菜单项 `Menu.Item`，分割线 `Menu.Divider`。
@@ -31,7 +31,7 @@
 | overlay(slot) | 菜单 | [Menu](#/cn/components/menu/) | - |
 | placement | 菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
 | size | 按钮大小，和 [Button](#/cn/components/button/) 一致 | string | 'default' |
-| trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextMenu`> | `['hover']` |
+| trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
 | type | 按钮类型，和 [Button](#/cn/components/button/) 一致 | string | 'default' |
 | visible(v-model) | 菜单是否显示 | boolean | - |
 

@@ -20,7 +20,6 @@ export default {
   },
   inject: {
     checkboxGroupContext: { default: null },
-    test: { default: null },
   },
   data () {
     const { checkboxGroupContext, checked, defaultChecked, value } = this

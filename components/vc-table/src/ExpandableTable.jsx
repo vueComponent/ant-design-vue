@@ -7,6 +7,7 @@ import { initDefaultProps, getOptionProps } from '../../_util/props-util'
 
 export const ExpandableTableProps = () => ({
   expandIconAsCell: PropTypes.bool,
+  expandRowByClick: PropTypes.bool,
   expandedRowKeys: PropTypes.array,
   expandedRowClassName: PropTypes.func,
   defaultExpandAllRows: PropTypes.bool,

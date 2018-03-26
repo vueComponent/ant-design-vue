@@ -29,21 +29,15 @@ export default {
     },
 
     onExpandedRowsChange (rows) {
-      this.setState({
-        expandedRowKeys: rows,
-      })
+      this.expandedRowKeys = rows
     },
 
     onExpandIconAsCellChange  (e) {
-      this.setState({
-        expandIconAsCell: e.target.checked,
-      })
+      this.expandIconAsCell = e.target.checked
     },
 
     onExpandRowByClickChange  (e) {
-      this.setState({
-        expandRowByClick: e.target.checked,
-      })
+      this.expandRowByClick = e.target.checked
     },
 
     toggleButton () {
@@ -58,7 +52,7 @@ export default {
     remove (index) {
       const data = this.data
       data.splice(index, 1)
-      this.setState({ data })
+      this.data = data
     },
 
     expandedRowRender (record) {

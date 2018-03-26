@@ -1,7 +1,7 @@
-import PropTypes from '../../../_util/vue-types'
-import warning from '../../../_util/warning'
-import BaseMixin from '../../../_util/BaseMixin'
-import { hasProp } from '../../../_util/props-util'
+import PropTypes from '../../_util/vue-types'
+import warning from '../../_util/warning'
+import BaseMixin from '../../_util/BaseMixin'
+import { hasProp } from '../../_util/props-util'
 import Track from './common/Track'
 import createSlider from './common/createSlider'
 import * as utils from './utils'
@@ -136,6 +136,21 @@ const Slider = {
       const val = utils.ensureValueInRange(v, mergedProps)
       return utils.ensureValuePrecision(val, mergedProps)
     },
+    getTrack ({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }) {
+      return (
+        <Track
+          class={`${prefixCls}-track`}
+          vertical={vertical}
+          included={included}
+          offset={0}
+          length={offset}
+          style={{
+            ...minimumTrackStyle,
+            ..._trackStyle,
+          }}
+        />
+      )
+    },
   },
   render () {
     const {
@@ -151,14 +166,13 @@ const Slider = {
       max,
       handle: handleGenerator,
     } = this
-    const { value, dragging } = this.state
-    const offset = this.calcOffset(value)
+    const { sValue, dragging } = this
+    const offset = this.calcOffset(sValue)
     const handle = handleGenerator({
-      className: `${prefixCls}-handle`,
       prefixCls,
       vertical,
       offset,
-      value,
+      value: sValue,
       dragging,
       disabled,
       min,
@@ -166,24 +180,14 @@ const Slider = {
       index: 0,
       tabIndex,
       style: handleStyle[0] || handleStyle,
-      ref: h => this.saveHandle(0, h),
+      refStr: 'handleRef0',
     })
 
     const _trackStyle = trackStyle[0] || trackStyle
-    const track = (
-      <Track
-        class={`${prefixCls}-track`}
-        vertical={vertical}
-        included={included}
-        offset={0}
-        length={offset}
-        style={{
-          ...minimumTrackStyle,
-          ..._trackStyle,
-        }}
-      />
-    )
-    return { tracks: track, handles: handle }
+    return {
+      tracks: this.getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }),
+      handles: handle,
+    }
   },
 }
 

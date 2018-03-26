@@ -1,8 +1,6 @@
-
-import classNames from 'classnames'
-import PropTypes from '../../../_util/vue-types'
-import addEventListener from '../../../_util/Dom/addEventListener'
-import BaseMixin from '../../../_util/BaseMixin'
+import PropTypes from '../../_util/vue-types'
+import addEventListener from '../../_util/Dom/addEventListener'
+import BaseMixin from '../../_util/BaseMixin'
 
 export default {
   mixins: [BaseMixin],
@@ -15,6 +13,7 @@ export default {
     max: PropTypes.number,
     value: PropTypes.number,
     tabIndex: PropTypes.number,
+    refStr: PropTypes.any,
   },
   data () {
     return {
@@ -24,6 +23,7 @@ export default {
   mounted () {
     this.$nextTick(() => {
       this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
+      this.refStr = this.$props.refStr
     })
   },
   beforeDestroy () {
@@ -61,14 +61,13 @@ export default {
   },
   render () {
     const {
-      prefixCls, vertical, offset, disabled, min, max, value, tabIndex, ...restProps
+      prefixCls, vertical, offset, disabled, min, max, value, tabIndex, refStr, ...restProps
     } = this.$props
 
-    const className = classNames(
-      {
-        [`${prefixCls}-handle-click-focused`]: this.clickFocused,
-      }
-    )
+    const className = {
+      [`${prefixCls}-handle`]: true,
+      [`${prefixCls}-handle-click-focused`]: this.clickFocused,
+    }
 
     const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` }
     const elStyle = {
@@ -84,18 +83,25 @@ export default {
         'aria-disabled': !!disabled,
       }
     }
-
+    const handleProps = {
+      attrs: {
+        role: 'slider',
+        tabIndex: disabled ? null : (tabIndex || 0),
+        refStr,
+        ...ariaProps,
+        ...restProps,
+      },
+      style: elStyle,
+      class: className,
+      on: {
+        blur: this.handleBlur,
+        keydown: this.handleKeyDown,
+      },
+      ref: 'handle',
+    }
     return (
       <div
-        ref='handle'
-        role='slider'
-        tabIndex= {disabled ? null : (tabIndex || 0)}
-        {...ariaProps}
-        {...restProps}
-        class={className}
-        style={elStyle}
-        onBlur={this.handleBlur}
-        onKeydown={this.handleKeyDown}
+        {...handleProps}
       />
     )
   },

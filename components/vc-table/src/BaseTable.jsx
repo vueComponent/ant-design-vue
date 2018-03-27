@@ -159,7 +159,7 @@ const BaseTable = {
       if (scroll.x === true) {
         tableStyle.tableLayout = 'fixed'
       } else {
-        tableStyle.width = `${scroll.x}px`
+        tableStyle.width = typeof scroll.x === 'number' ? `${scroll.x}px` : scroll.x
       }
     }
 

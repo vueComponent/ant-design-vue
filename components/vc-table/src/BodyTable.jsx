@@ -29,7 +29,7 @@ export default {
     updateTableRef () {
       this.$nextTick(() => {
         this.$refs.fixedColumnsBodyLeft && this.table.saveChildrenRef('fixedColumnsBodyLeft', this.$refs.fixedColumnsBodyLeft)
-        this.$refs.fixedColumnsBodyRight && this.table.saveChildrenRef('fixedColumnsBodyRight', this.$refs.fixedColumnsBodyLeft)
+        this.$refs.fixedColumnsBodyRight && this.table.saveChildrenRef('fixedColumnsBodyRight', this.$refs.fixedColumnsBodyRight)
         this.$refs.bodyTable && this.table.saveChildrenRef('bodyTable', this.$refs.bodyTable)
       })
     },
@@ -59,11 +59,13 @@ export default {
     if (scroll.y) {
     // maxHeight will make fixed-Table scrolling not working
     // so we only set maxHeight to body-Table here
+      let maxHeight = bodyStyle.maxHeight || scroll.y
+      maxHeight = typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight
       if (fixed) {
-        innerBodyStyle.maxHeight = bodyStyle.maxHeight || scroll.y
+        innerBodyStyle.maxHeight = maxHeight
         innerBodyStyle.overflowY = bodyStyle.overflowY || 'scroll'
       } else {
-        bodyStyle.maxHeight = bodyStyle.maxHeight || scroll.y
+        bodyStyle.maxHeight = maxHeight
       }
       bodyStyle.overflowY = bodyStyle.overflowY || 'scroll'
       useFixedHeader = true

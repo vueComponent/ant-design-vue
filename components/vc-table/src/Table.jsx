@@ -279,7 +279,6 @@ export default {
           shallowequal(state.fixedColumnsBodyRowsHeight, fixedColumnsBodyRowsHeight)) {
         return
       }
-      console.log(fixedColumnsHeadRowsHeight, fixedColumnsBodyRowsHeight)
       this.store.setState({
         fixedColumnsHeadRowsHeight,
         fixedColumnsBodyRowsHeight,
@@ -323,14 +322,14 @@ export default {
     handleBodyScrollTop  (e) {
       const target = e.target
       const { scroll = {}} = this
-      const { ref_headTable, ref_bodyTable, fixedColumnsBodyLeft, fixedColumnsBodyRight } = this
+      const { ref_headTable, ref_bodyTable, ref_fixedColumnsBodyLeft, ref_fixedColumnsBodyRight } = this
       if (target.scrollTop !== this.lastScrollTop && scroll.y && target !== ref_headTable) {
         const scrollTop = target.scrollTop
-        if (fixedColumnsBodyLeft && target !== fixedColumnsBodyLeft) {
-          fixedColumnsBodyLeft.scrollTop = scrollTop
+        if (ref_fixedColumnsBodyLeft && target !== ref_fixedColumnsBodyLeft) {
+          ref_fixedColumnsBodyLeft.scrollTop = scrollTop
         }
-        if (fixedColumnsBodyRight && target !== fixedColumnsBodyRight) {
-          fixedColumnsBodyRight.scrollTop = scrollTop
+        if (ref_fixedColumnsBodyRight && target !== ref_fixedColumnsBodyRight) {
+          ref_fixedColumnsBodyRight.scrollTop = scrollTop
         }
         if (ref_bodyTable && target !== ref_bodyTable) {
           ref_bodyTable.scrollTop = scrollTop

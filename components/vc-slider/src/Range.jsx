@@ -19,6 +19,7 @@ const rangeProps = {
   tabIndex: PropTypes.arrayOf(PropTypes.number),
 }
 const Range = {
+  name: 'Range',
   displayName: 'Range',
   mixins: [BaseMixin],
   props: initDefaultProps(rangeProps, {
@@ -39,7 +40,7 @@ const Range = {
     const bounds = value.map((v, i) => this.trimAlignValue(v, i))
     const recent = bounds[0] === max ? 0 : bounds.length - 1
     return {
-      handle: null,
+      sHandle: null,
       recent,
       bounds,
     }
@@ -86,7 +87,7 @@ const Range = {
       if (isNotControlled) {
         this.setState(state)
       } else if (state.handle !== undefined) {
-        this.setState({ handle: state.handle })
+        this.setState({ sHandle: state.handle })
       }
 
       const data = { ...this.$data, ...state }
@@ -103,7 +104,7 @@ const Range = {
       this.prevMovedHandleIndex = this.getBoundNeedMoving(value, closestBound)
 
       this.setState({
-        handle: this.prevMovedHandleIndex,
+        sHandle: this.prevMovedHandleIndex,
         recent: this.prevMovedHandleIndex,
       })
 
@@ -115,14 +116,15 @@ const Range = {
       this.$emit('change', { bounds: nextBounds })
     },
     onEnd () {
+      this.setState({ sHandle: null })
       this.removeDocumentEvents()
       this.$emit('afterChange', this.bounds)
     },
     onMove (e, position) {
       utils.pauseEvent(e)
-      const { bounds, handle } = this
+      const { bounds, sHandle } = this
       const value = this.calcValueByPos(position)
-      const oldValue = bounds[handle]
+      const oldValue = bounds[sHandle]
       if (value === oldValue) return
 
       this.moveTo(value)
@@ -132,8 +134,8 @@ const Range = {
 
       if (valueMutator) {
         utils.pauseEvent(e)
-        const { bounds, handle } = this
-        const oldValue = bounds[handle]
+        const { bounds, sHandle } = this
+        const oldValue = bounds[sHandle]
         const mutatedValue = valueMutator(oldValue, this.$props)
         const value = this.trimAlignValue(mutatedValue)
         if (value === oldValue) return
@@ -194,18 +196,18 @@ const Range = {
       return this._getPointsCache.points
     },
     moveTo (value, isFromKeyboardEvent) {
-      const { bounds, handle } = this
+      const { bounds, sHandle } = this
       const nextBounds = [...bounds]
-      nextBounds[handle] = value
-      let nextHandle = handle
+      nextBounds[sHandle] = value
+      let nextHandle = sHandle
       if (this.pushable !== false) {
         this.pushSurroundingHandles(nextBounds, nextHandle)
       } else if (this.allowCross) {
         nextBounds.sort((a, b) => a - b)
         nextHandle = nextBounds.indexOf(value)
       }
-      this.$emit('change', {
-        handle: nextHandle,
+      this.onChange({
+        sHandle: nextHandle,
         bounds: nextBounds,
       })
       if (isFromKeyboardEvent) {
@@ -276,7 +278,7 @@ const Range = {
       return true
     },
     trimAlignValue (v, handle, nextProps = {}) {
-      const mergedProps = { ...this, ...nextProps }
+      const mergedProps = { ...this.$props, ...nextProps }
       const valInRange = utils.ensureValueInRange(v, mergedProps)
       const valNotConflict = this.ensureValueNotConflict(handle, valInRange, mergedProps)
       return utils.ensureValuePrecision(valNotConflict, mergedProps)
@@ -284,7 +286,7 @@ const Range = {
     ensureValueNotConflict (handle, val, { allowCross, pushable: thershold }) {
       const state = this.$data || {}
       const { bounds } = state
-      handle = handle === undefined ? state.handle : handle
+      handle = handle === undefined ? state.sHandle : handle
       thershold = Number(thershold)
       /* eslint-disable eqeqeq */
       if (!allowCross && handle != null && bounds !== undefined) {
@@ -298,65 +300,71 @@ const Range = {
       /* eslint-enable eqeqeq */
       return val
     },
-  },
-  render () {
-    const {
-      handle,
-      bounds,
-      prefixCls,
-      vertical,
-      included,
-      disabled,
-      min,
-      max,
-      handle: handleGenerator,
-      trackStyle,
-      handleStyle,
-      tabIndex,
-    } = this
-
-    const offsets = bounds.map(v => this.calcOffset(v))
-
-    const handleClassName = `${prefixCls}-handle`
-    const handles = bounds.map((v, i) => handleGenerator({
-      className: classNames({
-        [handleClassName]: true,
-        [`${handleClassName}-${i + 1}`]: true,
-      }),
-      prefixCls,
-      vertical,
-      offset: offsets[i],
-      value: v,
-      dragging: handle === i,
-      index: i,
-      tabIndex: tabIndex[i] || 0,
-      min,
-      max,
-      disabled,
-      style: handleStyle[i],
-      refStr: 'handleRef' + i,
-    }))
-
-    const tracks = bounds.slice(0, -1).map((_, index) => {
-      const i = index + 1
-      const trackClassName = classNames({
-        [`${prefixCls}-track`]: true,
-        [`${prefixCls}-track-${i}`]: true,
+    getTrack ({ bounds, prefixCls, vertical, included, offsets, trackStyle }) {
+      return bounds.slice(0, -1).map((_, index) => {
+        const i = index + 1
+        const trackClassName = classNames({
+          [`${prefixCls}-track`]: true,
+          [`${prefixCls}-track-${i}`]: true,
+        })
+        return (
+          <Track
+            class={trackClassName}
+            vertical={vertical}
+            included={included}
+            offset={offsets[i - 1]}
+            length={offsets[i] - offsets[i - 1]}
+            style={trackStyle[index]}
+            key={i}
+          />
+        )
       })
-      return (
-        <Track
-          className={trackClassName}
-          vertical={vertical}
-          included={included}
-          offset={offsets[i - 1]}
-          length={offsets[i] - offsets[i - 1]}
-          style={trackStyle[index]}
-          key={i}
-        />
-      )
-    })
+    },
+    renderSlider (h) {
+      const {
+        sHandle,
+        bounds,
+        prefixCls,
+        vertical,
+        included,
+        disabled,
+        min,
+        max,
+        handle: handleGenerator,
+        trackStyle,
+        handleStyle,
+        tabIndex,
+      } = this
 
-    return { tracks, handles }
+      const offsets = bounds.map(v => this.calcOffset(v))
+
+      const handleClassName = `${prefixCls}-handle`
+      const handles = bounds.map((v, i) => handleGenerator(h, {
+        className: classNames({
+          [handleClassName]: true,
+          [`${handleClassName}-${i + 1}`]: true,
+        }),
+        prefixCls,
+        vertical,
+        offset: offsets[i],
+        value: v,
+        dragging: sHandle === i,
+        index: i,
+        tabIndex: tabIndex[i] || 0,
+        min,
+        max,
+        disabled,
+        style: handleStyle[i],
+        refStr: 'handleRef' + i,
+        handleFocus: this.onFocus,
+        handleBlur: this.onBlur,
+      }))
+
+      return {
+        tracks: this.getTrack({ bounds, prefixCls, vertical, included, offsets, trackStyle }),
+        handles,
+      }
+    },
   },
 }
 

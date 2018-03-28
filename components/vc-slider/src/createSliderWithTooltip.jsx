@@ -1,11 +1,12 @@
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import Tooltip from '../../vc-tooltip'
+import { getOptionProps } from '../../_util/props-util'
 import Handle from './Handle'
 
 export default function createSliderWithTooltip (Component) {
   return {
-    mixins: [BaseMixin],
+    mixins: [BaseMixin, Component],
     props: {
       tipFormatter: PropTypes.func.def((value) => { return value }),
       handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]).def([{}]),
@@ -85,7 +86,13 @@ export default function createSliderWithTooltip (Component) {
       },
     },
     render () {
-      return <Component {...this.$props} handle={this.handleWithTooltip} />
+      const componentProps = {
+        props: {
+          ...getOptionProps(this),
+          handle: this.handleWithTooltip,
+        },
+      }
+      return <Component {...componentProps}/>
     },
   }
 }

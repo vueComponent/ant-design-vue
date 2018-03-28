@@ -1,8 +1,12 @@
 import PropTypes from '../../_util/vue-types'
 import addEventListener from '../../_util/Dom/addEventListener'
 import BaseMixin from '../../_util/BaseMixin'
+import { getOptionProps } from '../../_util/props-util'
+
+function noop () {}
 
 export default {
+  name: 'Handle',
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
@@ -14,6 +18,8 @@ export default {
     value: PropTypes.number,
     tabIndex: PropTypes.number,
     refStr: PropTypes.any,
+    handleFocus: PropTypes.func.def(noop),
+    handleBlur: PropTypes.func.def(noop),
   },
   data () {
     return {
@@ -22,6 +28,8 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      // mouseup won't trigger if mouse moved out of handle,
+      // so we listen on document here.
       this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
       this.refStr = this.$props.refStr
     })
@@ -42,8 +50,12 @@ export default {
         this.setClickFocus(true)
       }
     },
-    handleBlur () {
+    onBlur (e) {
       this.setClickFocus(false)
+      this.handleBlur(e)
+    },
+    onFocus (e) {
+      this.handleFocus(e)
     },
     handleKeyDown () {
       this.setClickFocus(false)
@@ -61,8 +73,8 @@ export default {
   },
   render () {
     const {
-      prefixCls, vertical, offset, disabled, min, max, value, tabIndex, refStr, ...restProps
-    } = this.$props
+      prefixCls, vertical, offset, disabled, min, max, value, tabIndex, refStr,
+    } = getOptionProps(this)
 
     const className = {
       [`${prefixCls}-handle`]: true,
@@ -89,13 +101,14 @@ export default {
         tabIndex: disabled ? null : (tabIndex || 0),
         refStr,
         ...ariaProps,
-        ...restProps,
       },
       style: elStyle,
       class: className,
       on: {
-        blur: this.handleBlur,
+        blur: this.onBlur,
+        focus: this.onFocus,
         keydown: this.handleKeyDown,
+        ...this.$listeners,
       },
       ref: 'handle',
     }

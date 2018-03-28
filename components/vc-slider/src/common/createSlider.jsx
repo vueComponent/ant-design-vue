@@ -34,6 +34,7 @@ export default function createSlider (Component) {
     autoFocus: PropTypes.bool,
   }
   return {
+    name: 'createSlider',
     mixins: [Component],
     props: initDefaultProps(propTypes, {
       ...Component.defaultProps,
@@ -42,7 +43,7 @@ export default function createSlider (Component) {
       max: 100,
       step: 1,
       marks: {},
-      handle ({ index, refStr, ...restProps }) {
+      handle (h, { index, refStr, className, ...restProps }) {
         delete restProps.dragging
         const handleProps = {
           props: {
@@ -51,6 +52,7 @@ export default function createSlider (Component) {
           attrs: {
             refStr,
           },
+          class: className,
           key: index,
         }
         return <Handle {...handleProps} />
@@ -167,8 +169,11 @@ export default function createSlider (Component) {
         /* eslint-enable no-unused-expressions */
       },
       onMouseUp () {
-        if (this.handlesRefs[this.prevMovedHandleIndex]) {
-          this.handlesRefs[this.prevMovedHandleIndex].clickFocus()
+        if (this.$children && this.$children[this.prevMovedHandleIndex]) {
+          const handleCom = utils.getComponentProps(this.$children[this.prevMovedHandleIndex], 'clickFocus')
+          if (handleCom) {
+            handleCom.clickFocus()
+          }
         }
       },
       onMouseMove (e) {
@@ -239,7 +244,7 @@ export default function createSlider (Component) {
         this.$emit('change', { value })
       },
     },
-    render () {
+    render (h) {
       const {
         prefixCls,
         marks,
@@ -255,7 +260,7 @@ export default function createSlider (Component) {
         dotStyle,
         activeDotStyle,
       } = this
-      const { tracks, handles } = Component.render.call(this)
+      const { tracks, handles } = this.renderSlider(h)
 
       const sliderClassName = classNames(prefixCls, {
         [`${prefixCls}-with-marks`]: Object.keys(marks).length,

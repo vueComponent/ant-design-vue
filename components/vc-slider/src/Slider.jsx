@@ -7,6 +7,7 @@ import createSlider from './common/createSlider'
 import * as utils from './utils'
 
 const Slider = {
+  name: 'Slider',
   mixins: [BaseMixin],
   props: {
     defaultValue: PropTypes.number,
@@ -151,43 +152,45 @@ const Slider = {
         />
       )
     },
-  },
-  render () {
-    const {
-      prefixCls,
-      vertical,
-      included,
-      disabled,
-      minimumTrackStyle,
-      trackStyle,
-      handleStyle,
-      tabIndex,
-      min,
-      max,
-      handle: handleGenerator,
-    } = this
-    const { sValue, dragging } = this
-    const offset = this.calcOffset(sValue)
-    const handle = handleGenerator({
-      prefixCls,
-      vertical,
-      offset,
-      value: sValue,
-      dragging,
-      disabled,
-      min,
-      max,
-      index: 0,
-      tabIndex,
-      style: handleStyle[0] || handleStyle,
-      refStr: 'handleRef0',
-    })
+    renderSlider (h) {
+      const {
+        prefixCls,
+        vertical,
+        included,
+        disabled,
+        minimumTrackStyle,
+        trackStyle,
+        handleStyle,
+        tabIndex,
+        min,
+        max,
+        handle: handleGenerator,
+      } = this
+      const { sValue, dragging } = this
+      const offset = this.calcOffset(sValue)
+      const handle = handleGenerator(h, {
+        prefixCls,
+        vertical,
+        offset,
+        value: sValue,
+        dragging,
+        disabled,
+        min,
+        max,
+        index: 0,
+        tabIndex,
+        style: handleStyle[0] || handleStyle,
+        refStr: 'handleRef0',
+        handleFocus: this.onFocus,
+        handleBlur: this.onBlur,
+      })
 
-    const _trackStyle = trackStyle[0] || trackStyle
-    return {
-      tracks: this.getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }),
-      handles: handle,
-    }
+      const _trackStyle = trackStyle[0] || trackStyle
+      return {
+        tracks: this.getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }),
+        handles: handle,
+      }
+    },
   },
 }
 

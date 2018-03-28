@@ -89,3 +89,18 @@ export function getKeyboardValueMutator (e) {
     default: return undefined
   }
 }
+
+export function getComponentProps (obj, prop) {
+  if (obj[prop]) {
+    return obj
+  } else if (obj.$children.length) {
+    const len = obj.$children.length
+    for (let i = 0; i < len; i++) {
+      if (obj.$children[i][prop]) {
+        return obj.$children[i]
+      } else if (obj.$children[i].$children.length) {
+        return getComponentProps(obj.$children[i], prop)
+      }
+    }
+  }
+}

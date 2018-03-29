@@ -1,6 +1,6 @@
 export default class ColumnManager {
-  constructor (columns, elements) {
-    this.columns = columns || this.normalize(elements)
+  constructor (columns) {
+    this.columns = columns
     this._cached = {}
   }
 
@@ -103,27 +103,8 @@ export default class ColumnManager {
     })
   }
 
-  normalize (elements) {
-    const columns = []
-    elements.forEach(element => {
-      if (!element.tag) {
-        return
-      }
-      debugger
-      const column = { ...element.props }
-      if (element.key) {
-        column.key = element.key
-      }
-      if (element.type.isTableColumnGroup) {
-        column.children = this.normalize(column.children)
-      }
-      columns.push(column)
-    })
-    return columns
-  }
-
-  reset (columns, elements) {
-    this.columns = columns || this.normalize(elements)
+  reset (columns) {
+    this.columns = columns
     this._cached = {}
   }
 

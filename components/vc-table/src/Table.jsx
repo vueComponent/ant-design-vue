@@ -115,7 +115,7 @@ export default {
   data () {
     this.preData = [...this.data]
     return {
-      columnManager: new ColumnManager(this.columns, this.$slots.default),
+      columnManager: new ColumnManager(this.columns),
       sComponents: merge({
         table: 'table',
         header: {
@@ -175,14 +175,6 @@ export default {
         )
       }
     })
-  },
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.columns && nextProps.columns !== this.props.columns) {
-      this.columnManager.reset(nextProps.columns)
-    } else if (nextProps.children !== this.props.children) {
-      this.columnManager.reset(null, nextProps.children)
-    }
   },
 
   updated (prevProps) {

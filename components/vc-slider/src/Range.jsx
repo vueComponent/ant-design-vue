@@ -86,8 +86,8 @@ const Range = {
       const isNotControlled = !hasProp(this, 'value')
       if (isNotControlled) {
         this.setState(state)
-      } else if (state.handle !== undefined) {
-        this.setState({ sHandle: state.handle })
+      } else if (state.sHandle !== undefined) {
+        this.setState({ sHandle: state.sHandle })
       }
 
       const data = { ...this.$data, ...state }
@@ -110,10 +110,9 @@ const Range = {
 
       const prevValue = bounds[this.prevMovedHandleIndex]
       if (value === prevValue) return
-
       const nextBounds = [...bounds]
       nextBounds[this.prevMovedHandleIndex] = value
-      this.$emit('change', { bounds: nextBounds })
+      this.onChange({ bounds: nextBounds })
     },
     onEnd () {
       this.setState({ sHandle: null })

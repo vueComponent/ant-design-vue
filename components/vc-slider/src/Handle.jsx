@@ -102,7 +102,6 @@ export default {
         refStr,
         ...ariaProps,
       },
-      style: elStyle,
       class: className,
       on: {
         blur: this.onBlur,
@@ -115,6 +114,7 @@ export default {
     return (
       <div
         {...handleProps}
+        style={elStyle}
       />
     )
   },

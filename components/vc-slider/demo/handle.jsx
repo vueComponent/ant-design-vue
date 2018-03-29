@@ -19,7 +19,7 @@ export default {
   },
   render () {
     const handle = (h, props) => {
-      const { value, dragging, index, refStr, ...restProps } = props
+      const { value, dragging, index, refStr, style, ...restProps } = props
       const handleProps = {
         props: {
           ...restProps,
@@ -29,6 +29,7 @@ export default {
           refStr,
         },
         key: index,
+        style,
       }
       return (
         <Tooltip
@@ -44,9 +45,8 @@ export default {
       )
     }
 
-    const handleRange = (h, { value, dragging, index, disabled, ...restProps }) => {
+    const handleRange = (h, { value, dragging, index, disabled, style, ...restProps }) => {
       const tipFormatter = value => `${value}%`
-      const handleStyle = [{}]
       const tipProps = {}
 
       const {
@@ -57,10 +57,10 @@ export default {
         ...restTooltipProps } = tipProps
 
       let handleStyleWithIndex
-      if (Array.isArray(handleStyle)) {
-        handleStyleWithIndex = handleStyle[index] || handleStyle[0]
+      if (Array.isArray(style)) {
+        handleStyleWithIndex = style[index] || style[0]
       } else {
-        handleStyleWithIndex = handleStyle
+        handleStyleWithIndex = style
       }
 
       const tooltipProps = {

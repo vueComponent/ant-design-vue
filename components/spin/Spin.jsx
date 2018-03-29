@@ -2,20 +2,27 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import isCssAnimationSupported from '../_util/isCssAnimationSupported'
-import { filterEmpty } from '../_util/props-util'
+import { filterEmpty, initDefaultProps } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
+
+export const SpinProps = () => ({
+  prefixCls: PropTypes.string,
+  spinning: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'default', 'large']),
+  wrapperClassName: PropTypes.string,
+  tip: PropTypes.string,
+  delay: PropTypes.number,
+})
 
 export default {
   name: 'Spin',
   mixins: [BaseMixin],
-  props: {
-    prefixCls: PropTypes.string.def('ant-spin'),
-    spinning: PropTypes.bool.def(true),
-    size: PropTypes.oneOf(['small', 'default', 'large']).def('default'),
-    wrapperClassName: PropTypes.string.def(''),
-    tip: PropTypes.string,
-    delay: PropTypes.number,
-  },
+  props: initDefaultProps(SpinProps(), {
+    prefixCls: 'ant-spin',
+    size: 'default',
+    spinning: true,
+    wrapperClassName: '',
+  }),
   data () {
     const { spinning } = this
     return {

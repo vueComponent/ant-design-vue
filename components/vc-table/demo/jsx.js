@@ -16,7 +16,8 @@ export default {
       <div>
         <h2>JSX table</h2>
         <Table data={data}>
-          <ColumnGroup title='Bazinga'>
+          <ColumnGroup>
+            <span slot='title'>Bazingakkkk</span>
             <Column
               title='title1'
               dataIndex='a'
@@ -41,8 +42,12 @@ export default {
             title='Operations'
             dataIndex=''
             key='d'
-            render={() => <a href='#'>Operations</a>}
-          />
+            // render={() => <a href='#'>Operations</a>}
+            scopedSlots= {
+              { render: () => <a href='#'>Operations</a> }
+            }
+          >
+          </Column>
         </Table>
       </div>
     )

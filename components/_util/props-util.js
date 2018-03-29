@@ -39,6 +39,20 @@ const filterProps = (props, propsData = {}) => {
   })
   return res
 }
+const getSlots = (ele) => {
+  let componentOptions = ele.componentOptions
+  if (ele.$vnode) {
+    componentOptions = ele.$vnode.componentOptions
+  }
+  const children = componentOptions.children || []
+  const slots = {}
+  children.forEach(child => {
+    const name = (child.data && child.data.slot) || 'default'
+    slots[name] = slots[name] || []
+    slots[name].push(child)
+  })
+  return slots
+}
 const getSlotOptions = (ele) => {
   let componentOptions = ele.componentOptions
   if (ele.$vnode) {
@@ -221,5 +235,7 @@ export {
   parseStyleText,
   initDefaultProps,
   isValidElement,
+  camelize,
+  getSlots,
 }
 export default hasProp

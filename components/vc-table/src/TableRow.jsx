@@ -78,16 +78,6 @@ const TableRow = {
     },
   },
 
-  // componentWillReceiveProps (nextProps) {
-  //   if (this.props.visible || (!this.props.visible && nextProps.visible)) {
-  //     this.shouldRender = true
-  //   }
-  // },
-
-  // shouldComponentUpdate (nextProps) {
-  //   return !!(this.props.visible || nextProps.visible)
-  // },
-
   updated () {
     if (this.shouldRender && !this.rowRef) {
       this.$nextTick(() => {

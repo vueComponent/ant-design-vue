@@ -28,8 +28,10 @@ const columns = [{
     <span>{text} (Trigger Cell Click)</span>
   ),
   onCell: (record) => ({
-    onClick (e) {
-      console.log('Click cell', record, e.target)
+    on: {
+      click (e) {
+        console.log('Click cell', record, e.target)
+      },
     },
   }),
 }, {

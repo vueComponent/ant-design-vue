@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types'
 import get from 'lodash/get'
-import { isValidElement } from '../../_util/props-util'
+import { isValidElement, mergeProps } from '../../_util/props-util'
 
 export default {
   name: 'TableCell',
@@ -52,7 +52,7 @@ export default {
     } else {
       text = get(record, dataIndex)
     }
-    const tdProps = {
+    let tdProps = {
       props: {},
       attrs: {},
       class: cls,
@@ -74,7 +74,8 @@ export default {
     }
 
     if (column.onCell) {
-      tdProps.attrs = { ...tdProps.attrs, ...column.onCell(record) }
+      tdProps = mergeProps(tdProps, column.onCell(record))
+      //      tdProps.attrs = { ...tdProps.attrs, ...column.onCell(record) }
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202

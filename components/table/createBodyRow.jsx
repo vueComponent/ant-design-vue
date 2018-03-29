@@ -1,0 +1,59 @@
+import PropTypes from '../_util/vue-types'
+
+import { Store } from './createStore'
+
+const BodyRowProps = {
+  store: Store,
+  rowKey: PropTypes.string,
+  prefixCls: PropTypes.string,
+}
+
+export default function createTableRow (Component = 'tr') {
+  const BodyRow = {
+    name: 'BodyRow',
+    props: BodyRowProps,
+    data () {
+      const { selectedRowKeys } = this.store.getState()
+
+      return {
+        selected: selectedRowKeys.indexOf(this.rowKey) >= 0,
+      }
+    },
+
+    mounted () {
+      this.subscribe()
+    },
+
+    beforeDestroy () {
+      if (this.unsubscribe) {
+        this.unsubscribe()
+      }
+    },
+    methods: {
+      subscribe () {
+        const { store, rowKey } = this
+        this.unsubscribe = store.subscribe(() => {
+          const { selectedRowKeys } = this.store.getState()
+          const selected = selectedRowKeys.indexOf(rowKey) >= 0
+          if (selected !== this.selected) {
+            this.selected = selected
+          }
+        })
+      },
+    },
+
+    render () {
+      const className = {
+        [`${this.props.prefixCls}-row-selected`]: this.selected,
+      }
+
+      return (
+        <Component class={className}>
+          {this.$slots.default}
+        </Component>
+      )
+    },
+  }
+
+  return BodyRow
+}

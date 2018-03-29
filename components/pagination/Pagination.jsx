@@ -7,7 +7,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { getOptionProps } from '../_util/props-util'
 import VcPagination from '../vc-pagination'
 
-export const PaginationProps = {
+export const PaginationProps = () => ({
   total: PropTypes.number,
   defaultCurrent: PropTypes.number,
   current: PropTypes.number,
@@ -29,11 +29,11 @@ export const PaginationProps = {
   prefixCls: PropTypes.string,
   selectPrefixCls: PropTypes.string,
   itemRender: PropTypes.any,
-}
+})
 
 export default {
   props: {
-    ...PaginationProps,
+    ...PaginationProps(),
     prefixCls: PropTypes.string.def('ant-pagination'),
     selectPrefixCls: PropTypes.string.def('ant-select'),
   },

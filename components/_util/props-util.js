@@ -217,8 +217,7 @@ export function mergeProps () {
 }
 
 function isValidElement (element) {
-  const name = element.constructor.name
-  return element.tag && (name === 'VNode' || name === 'VueComponent')
+  return element && element.context && element.context._isVue
 }
 
 export {

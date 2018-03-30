@@ -12,7 +12,6 @@ const modulePlugin = new ExtractTextPlugin({
 })
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#source-map',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: './',

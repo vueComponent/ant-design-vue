@@ -131,6 +131,7 @@
     "component-classes": "^1.2.6",
     "css-animation": "^1.4.1",
     "dom-align": "^1.6.7",
+    "dom-closest": "^0.2.0",
     "dom-scroll-into-view": "^1.2.1",
     "enquire.js": "^2.1.6",
     "eslint-plugin-vue": "^3.13.0",

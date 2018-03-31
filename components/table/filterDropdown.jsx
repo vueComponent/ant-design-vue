@@ -8,7 +8,8 @@ import Checkbox from '../checkbox'
 import Radio from '../radio'
 import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper'
 import { FilterMenuProps } from './interface'
-import { initDefaultProps, cloneElement } from '../_util/props-util'
+import { initDefaultProps } from '../_util/props-util'
+import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 
 export default {

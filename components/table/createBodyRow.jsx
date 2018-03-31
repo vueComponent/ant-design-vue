@@ -44,7 +44,7 @@ export default function createTableRow (Component = 'tr') {
 
     render () {
       const className = {
-        [`${this.props.prefixCls}-row-selected`]: this.selected,
+        [`${this.prefixCls}-row-selected`]: this.selected,
       }
 
       return (

@@ -81,9 +81,9 @@ export const TableRowSelection = {
 export const TableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
-  rowSelection: PropTypes.shape(TableRowSelection).loose,
+  rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, null]),
   pagination: PropTypes.oneOfType([PropTypes.shape(PaginationProps).loose, PropTypes.bool]),
-  size: PropTypes.oneOf(['default', 'middle', 'small']),
+  size: PropTypes.oneOf(['default', 'middle', 'small', 'large']),
   dataSource: PropTypes.array,
   components: PropTypes.object,
   columns: PropTypes.array,
@@ -178,6 +178,7 @@ export const FilterMenuProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   getPopupContainer: PropTypes.func,
+  handleFilter: PropTypes.func,
 }
 
 // export interface FilterMenuState {

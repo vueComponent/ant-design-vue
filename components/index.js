@@ -132,4 +132,9 @@ import DatePicker from './date-picker'
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker
 export { DatePicker, MonthPicker, RangePicker, WeekPicker }
 
+import Table from './table'
+const { Column: TableColumn, ColumnGroup: TableColumnGroup } = Table
+
+export { Table, TableColumn, TableColumnGroup }
+
 export { default as version } from './version'

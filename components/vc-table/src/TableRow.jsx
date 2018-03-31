@@ -9,7 +9,7 @@ const TableRow = {
   name: 'TableRow',
   mixins: [BaseMixin],
   props: initDefaultProps({
-    // onRow: PropTypes.func,
+    customRow: PropTypes.func,
     // onRowClick: PropTypes.func,
     // onRowDoubleClick: PropTypes.func,
     // onRowContextMenu: PropTypes.func,
@@ -175,7 +175,7 @@ const TableRow = {
       columns,
       record,
       index,
-      // onRow,
+      customRow = noop,
       indent,
       indentSize,
       hovered,
@@ -185,9 +185,7 @@ const TableRow = {
       hasExpandIcon,
       renderExpandIcon,
       renderExpandIconCell,
-      $listeners,
     } = this
-    const { row: onRow = noop } = $listeners
     const BodyRow = components.body.row
     const BodyCell = components.body.cell
 
@@ -227,7 +225,7 @@ const TableRow = {
     const rowClassName =
       `${prefixCls} ${className} ${prefixCls}-level-${indent}`.trim()
 
-    const rowProps = onRow(record, index)
+    const rowProps = customRow(record, index)
     const customStyle = rowProps ? rowProps.style : {}
     let style = { height: typeof height === 'number' ? `${height}px` : height }
 

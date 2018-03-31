@@ -28,7 +28,7 @@ export const ColumnProps = {
   defaultSortOrder: PropTypes.oneOf(['ascend', 'descend']),
   colSpan: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  // className: string,
+  className: PropTypes.string,
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['left', 'right'])]),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
@@ -103,7 +103,8 @@ export const TableProps = {
   locale: PropTypes.object,
   indentSize: PropTypes.number,
   // onRowClick?: (record: T, index: number, event: Event) => any;
-  // onRow?: (record: T, index: number) => any;
+  customRow: PropTypes.func,
+  customHeaderRow: PropTypes.func,
   useFixedHeader: PropTypes.bool,
   bordered: PropTypes.bool,
   showHeader: PropTypes.bool,

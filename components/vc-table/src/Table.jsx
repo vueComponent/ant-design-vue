@@ -25,8 +25,8 @@ export default {
     bodyStyle: PropTypes.object,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     rowClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    // onRow: PropTypes.func,
-    // onHeaderRow: PropTypes.func,
+    customRow: PropTypes.func,
+    customHeaderRow: PropTypes.func,
     // onRowClick: PropTypes.func,
     // onRowDoubleClick: PropTypes.func,
     // onRowContextMenu: PropTypes.func,
@@ -74,6 +74,7 @@ export default {
     scroll: {},
     rowRef: () => null,
     emptyText: () => 'No Data',
+    customHeaderRow: () => {},
   }),
 
   // static childContextTypes = {
@@ -91,7 +92,7 @@ export default {
     ].forEach(name => {
       warningOnce(
         this.$listeners[name] === undefined,
-        `${name} is deprecated, please use onRow instead.`,
+        `${name} is deprecated, please use customRow instead.`,
       )
     })
 

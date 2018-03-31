@@ -13,7 +13,7 @@ function getHeaderRows (columns, currentRow = 0, rows) {
     }
     const cell = {
       key: column.key,
-      className: column.className || '',
+      className: column.className || column.class || '',
       children: column.title,
       column,
     }
@@ -44,15 +44,10 @@ export default {
   inject: {
     table: { default: {}},
   },
-  methods: {
-    onHeaderRow () {
-      this.table.__emit('headerRow', ...arguments)
-    },
-  },
 
   render () {
-    const { sComponents: components, prefixCls, showHeader } = this.table
-    const { expander, columns, fixed, onHeaderRow } = this
+    const { sComponents: components, prefixCls, showHeader, customHeaderRow } = this.table
+    const { expander, columns, fixed } = this
 
     if (!showHeader) {
       return null
@@ -76,7 +71,7 @@ export default {
               rows={rows}
               row={row}
               components={components}
-              onHeaderRow={onHeaderRow}
+              customHeaderRow={customHeaderRow}
             />
           ))
         }

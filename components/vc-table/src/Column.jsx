@@ -16,8 +16,9 @@ export default {
       'right',
     ]),
     render: PropTypes.func,
+    className: PropTypes.string,
     // onCellClick: PropTypes.func,
     // onCell: PropTypes.func,
-    // onHeaderCell: PropTypes.func,
+    customHeaderCell: PropTypes.func,
   },
 }

@@ -162,8 +162,10 @@ export default {
       const dropdownSelectedClass = this.selectedKeys.length > 0 ? `${prefixCls}-selected` : ''
 
       return filterIcon ? cloneElement(filterIcon, {
-        title: locale.filterTitle,
-        className: classNames(filterIcon.className, {
+        attrs: {
+          title: locale.filterTitle,
+        },
+        class: classNames(filterIcon.className, {
           [`${prefixCls}-icon`]: true,
         }),
       }) : <Icon title={locale.filterTitle} type='filter' class={dropdownSelectedClass} />

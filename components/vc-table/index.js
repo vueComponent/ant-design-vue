@@ -23,7 +23,7 @@ const Table = {
         const events = getEvents(element)
         const listeners = {}
         Object.keys(events).forEach(e => {
-          const k = `on_${e}`
+          const k = `on-${e}`
           listeners[camelize(k)] = events[e]
         })
         const { default: children, title } = getSlots(element)

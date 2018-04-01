@@ -50,6 +50,14 @@ export default {
   mounted() {
     this.fetch();
   },
+  data() {
+    return {
+      data: [],
+      pagination: {},
+      loading: false,
+      columns,
+    }
+  },
   methods: {
     handleTableChange (pagination, filters, sorter) {
       console.log(pagination);
@@ -86,14 +94,6 @@ export default {
       });
     }
   },
-  data() {
-    return {
-      data: [],
-      pagination: {},
-      loading: false,
-      columns,
-    }
-  }
 }
 </script>
 ```

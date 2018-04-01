@@ -133,3 +133,5 @@ const { MonthPicker, RangePicker, WeekPicker } = DatePicker
 export { DatePicker, MonthPicker, RangePicker, WeekPicker }
 
 export { default as version } from './version'
+
+export { default as Slider } from './slider'

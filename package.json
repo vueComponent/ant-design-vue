@@ -105,6 +105,7 @@
     "postcss-loader": "^2.1.2",
     "pre-commit": "^1.2.2",
     "querystring": "^0.2.0",
+    "reqwest": "^2.0.5",
     "rimraf": "^2.6.2",
     "rucksack-css": "^1.0.2",
     "selenium-server": "^3.0.1",

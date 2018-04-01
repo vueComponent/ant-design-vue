@@ -1,5 +1,4 @@
 
-import cloneDeep from 'lodash/cloneDeep'
 import VcTable from '../vc-table'
 import classNames from 'classnames'
 import Pagination from '../pagination'
@@ -33,10 +32,8 @@ function stopPropagation (e) {
 }
 
 const defaultPagination = {
-  on: {
-    change: noop,
-    showSizeChange: noop,
-  },
+  onChange: noop,
+  onShowSizeChange: noop,
 }
 
 /**
@@ -91,14 +88,13 @@ export default {
   watch: {
     pagination (val) {
       this.setState(previousState => {
-        const newPagination = mergeProps(
-          defaultPagination,
-          previousState.sPagination,
-          val,
-        )
-        newPagination.props = newPagination.props || {}
-        newPagination.props.current = newPagination.props.current || 1
-        newPagination.props.pageSize = newPagination.props.pageSize || 10
+        const newPagination = {
+          ...defaultPagination,
+          ...previousState.sPagination,
+          ...val,
+        }
+        newPagination.current = newPagination.current || 1
+        newPagination.pageSize = newPagination.pageSize || 10
         return { sPagination: val !== false ? newPagination : emptyObject }
       })
     },
@@ -176,17 +172,13 @@ export default {
 
     getDefaultPagination (props) {
       const pagination = props.pagination || {}
-      pagination.props = pagination.props || {}
       return this.hasPagination(props)
-        ? mergeProps(
-          defaultPagination,
-          pagination,
-          {
-            props: {
-              current: pagination.props.defaultCurrent || pagination.props.current || 1,
-              pageSize: pagination.props.defaultPageSize || pagination.props.pageSize || 10,
-            },
-          }) : {}
+        ? {
+          ...defaultPagination,
+          ...pagination,
+          current: pagination.defaultCurrent || pagination.current || 1,
+          pageSize: pagination.defaultPageSize || pagination.pageSize || 10,
+        } : {}
     },
 
     onRow  (record, index) {
@@ -345,7 +337,7 @@ export default {
       if (this.getSortOrderColumns().length === 0) {
         this.setState(newState)
       }
-      this.$emit('change', this.prepareParamsArguments({
+      this.$emit('change', ...this.prepareParamsArguments({
         ...this.$data,
         ...newState,
       }))
@@ -373,9 +365,8 @@ export default {
 
       if (props.pagination) {
         // Reset current prop
-        pagination.props = pagination.props || {}
-        pagination.props.current = 1
-        pagination.on.change(pagination.current)
+        pagination.current = 1
+        pagination.onChange(pagination.current)
       }
 
       const newState = {
@@ -395,23 +386,22 @@ export default {
       }
 
       // Controlled current prop will not respond user interaction
-      if (typeof props.pagination === 'object' && props.pagination.props && 'current' in (props.pagination.props)) {
-        newState.sPagination = mergeProps(pagination, {
-          props: {
-            current: this.sPagination.props.current,
-          },
-        })
+      if (typeof props.pagination === 'object' && 'current' in (props.pagination)) {
+        newState.sPagination = {
+          ...pagination,
+          current: this.sPagination.current,
+        }
       }
 
       this.setState(newState, () => {
         this.store.setState({
           selectionDirty: false,
         })
-        this.$emit('change', this.prepareParamsArguments({
+        this.$emit('change', ...this.prepareParamsArguments({
           ...this.$data,
-          selectionDirty: false,
-          filters,
-          pagination,
+          sSelectionDirty: false,
+          sFilters: filters,
+          sPagination: pagination,
         }))
       })
     },
@@ -523,11 +513,11 @@ export default {
       const props = this.$props
       const pagination = { ...this.sPagination }
       if (current) {
-        pagination.props.current = current
+        pagination.current = current
       } else {
-        pagination.props.current = pagination.props.current || 1
+        pagination.current = pagination.current || 1
       }
-      pagination.on.change(pagination.props.current, ...otherArguments)
+      pagination.onChange(pagination.current, ...otherArguments)
 
       const newState = {
         sPagination: pagination,
@@ -535,23 +525,21 @@ export default {
       // Controlled current prop will not respond user interaction
       if (props.pagination &&
           typeof props.pagination === 'object' &&
-          props.pagination.props &&
-          'current' in (props.pagination.props)) {
-        newState.sPagination = mergeProps(pagination, {
-          props: {
-            current: this.sPagination.props.current,
-          },
-        })
+          'current' in (props.pagination)) {
+        newState.sPagination = {
+          ...pagination,
+          current: this.sPagination.current,
+        }
       }
       this.setState(newState)
 
       this.store.setState({
         selectionDirty: false,
       })
-      this.$emit('change', this.prepareParamsArguments({
+      this.$emit('change', ...this.prepareParamsArguments({
         ...this.$data,
-        selectionDirty: false,
-        pagination,
+        sSelectionDirty: false,
+        sPagination: pagination,
       }))
     },
 
@@ -655,7 +643,7 @@ export default {
     },
 
     getMaxCurrent (total) {
-      const { current, pageSize } = this.sPagination.props
+      const { current, pageSize } = this.sPagination
       if ((current - 1) * pageSize >= total) {
         return Math.floor((total - 1) / pageSize) + 1
       }
@@ -738,17 +726,16 @@ export default {
 
     handleShowSizeChange  (current, pageSize) {
       const pagination = this.sPagination
-      pagination.on.showSizeChange(current, pageSize)
-      const nextPagination = mergeProps(pagination, {
-        props: {
-          pageSize,
-          current,
-        },
-      })
+      pagination.onShowSizeChange(current, pageSize)
+      const nextPagination = {
+        ...pagination,
+        pageSize,
+        current,
+      }
       this.setState({ sPagination: nextPagination })
-      this.$emit('change', this.prepareParamsArguments({
+      this.$emit('change', ...this.prepareParamsArguments({
         ...this.$data,
-        pagination: nextPagination,
+        sPagination: nextPagination,
       }))
     },
 
@@ -759,25 +746,24 @@ export default {
       }
       let size = 'default'
       const { sPagination: pagination } = this
-      if (pagination.props && pagination.props.size) {
-        size = pagination.props.size
+      if (pagination.size) {
+        size = pagination.size
       } else if (this.size === 'middle' || this.size === 'small') {
         size = 'small'
       }
-      const total = (pagination.props && pagination.props.total) || this.getLocalData().length
-      const { class: cls, style, on, props } = pagination
+      const total = pagination.total || this.getLocalData().length
+      const { class: cls, style, onChange, onShowSizeChange, ...restProps } = pagination // eslint-disable-line
       const paginationProps = mergeProps({
         key: 'pagination',
         class: classNames(cls, `${this.prefixCls}-pagination`),
         props: {
-          ...props,
+          ...restProps,
           total,
           size,
           current: this.getMaxCurrent(total),
         },
         style,
         on: {
-          ...on,
           change: this.handlePageChange,
           showSizeChange: this.handleShowSizeChange,
         },
@@ -791,12 +777,10 @@ export default {
 
     // Get pagination, filters, sorter
     prepareParamsArguments (state) {
-      const pagination = cloneDeep(state.sPagination)
+      const pagination = { ...state.sPagination }
       // remove useless handle function in Table.onChange
-      if (pagination.on) {
-        delete pagination.on.change
-        delete pagination.on.showSizeChange
-      }
+      delete pagination.onChange
+      delete pagination.onShowSizeChange
       const filters = state.sFilters
       const sorter = {}
       if (state.sSortColumn && state.sSortOrder) {
@@ -822,14 +806,14 @@ export default {
       let data = this.getLocalData()
       let current
       let pageSize
-      const pagProps = this.sPagination.props || {}
+      const sPagination = this.sPagination
       // 如果没有分页的话，默认全部展示
       if (!this.hasPagination()) {
         pageSize = Number.MAX_VALUE
         current = 1
       } else {
-        pageSize = pagProps.pageSize
-        current = this.getMaxCurrent(pagProps.total || data.length)
+        pageSize = sPagination.pageSize
+        current = this.getMaxCurrent(sPagination.total || data.length)
       }
 
       // 分页

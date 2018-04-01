@@ -138,3 +138,5 @@ const { Column: TableColumn, ColumnGroup: TableColumnGroup } = Table
 export { Table, TableColumn, TableColumnGroup }
 
 export { default as version } from './version'
+
+export { default as Slider } from './slider'

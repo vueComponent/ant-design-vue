@@ -36,6 +36,10 @@ export default function createSlider (Component) {
   return {
     name: 'createSlider',
     mixins: [Component],
+    model: {
+      prop: 'value',
+      event: 'change',
+    },
     props: initDefaultProps(propTypes, {
       ...Component.defaultProps,
       prefixCls: 'rc-slider',
@@ -68,10 +72,6 @@ export default function createSlider (Component) {
       dotStyle: {},
       activeDotStyle: {},
     }),
-    model: {
-      prop: 'value',
-      event: 'change',
-    },
     data () {
       if (process.env.NODE_ENV !== 'production') {
         const { step, max, min } = this
@@ -152,7 +152,6 @@ export default function createSlider (Component) {
         }
       },
       onBlur (e) {
-        console.dir(e)
         this.onEnd(e)
         this.$emit('blur', e)
       },

@@ -66,7 +66,8 @@ export default {
     if (customRender) {
       text = customRender(text, record, index)
       if (this.isInvalidRenderCellText(text)) {
-        tdProps.attrs = text.attrs || text.props || {}
+        tdProps.attrs = text.attrs || {}
+        tdProps.props = text.props || {}
         colSpan = tdProps.attrs.colSpan
         rowSpan = tdProps.attrs.rowSpan
         text = text.children
@@ -93,7 +94,6 @@ export default {
     if (rowSpan === 0 || colSpan === 0) {
       return null
     }
-
     if (column.align) {
       tdProps.style = { textAlign: column.align }
     }

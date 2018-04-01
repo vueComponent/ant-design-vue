@@ -23,11 +23,11 @@ const Table = {
         const events = getEvents(element)
         const listeners = {}
         Object.keys(events).forEach(e => {
-          const k = `on_${e}`
+          const k = `on-${e}`
           listeners[camelize(k)] = events[e]
         })
-        const { default: children, title } = getSlots(element)
-        const column = { title, ...props, style, class: cls, ...listeners }
+        const { default: children, ...restSlots } = getSlots(element)
+        const column = { ...restSlots, ...props, style, class: cls, ...listeners }
         if (key) {
           column.key = key
         }

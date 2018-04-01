@@ -35,10 +35,10 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
 const renderContent = (value, row, index) => {
   const obj = {
     children: value,
-    props: {},
+    attrs: {},
   };
   if (index === 4) {
-    obj.props.colSpan = 0;
+    obj.attrs.colSpan = 0;
   }
   return obj;
 };
@@ -93,7 +93,7 @@ export default {
         }
         return {
           children: <a href="#">{text}</a>,
-          props: {
+          attrs: {
             colSpan: 5,
           },
         };
@@ -101,7 +101,7 @@ export default {
     }, {
       title: 'Age',
       dataIndex: 'age',
-      render: renderContent,
+      customRender: renderContent,
     }, {
       title: 'Home phone',
       colSpan: 2,
@@ -109,17 +109,17 @@ export default {
       customRender: (value, row, index) => {
         const obj = {
           children: value,
-          props: {},
+          attrs: {},
         };
         if (index === 2) {
-          obj.props.rowSpan = 2;
+          obj.attrs.rowSpan = 2;
         }
         // These two are merged into above cell
         if (index === 3) {
-          obj.props.rowSpan = 0;
+          obj.attrs.rowSpan = 0;
         }
         if (index === 4) {
-          obj.props.colSpan = 0;
+          obj.attrs.colSpan = 0;
         }
         return obj;
       },
@@ -127,11 +127,11 @@ export default {
       title: 'Phone',
       colSpan: 0,
       dataIndex: 'phone',
-      render: renderContent,
+      customRender: renderContent,
     }, {
       title: 'Address',
       dataIndex: 'address',
-      render: renderContent,
+      customRender: renderContent,
     }];
     return {
       data,

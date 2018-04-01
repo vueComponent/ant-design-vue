@@ -4,7 +4,10 @@ import { Store } from './createStore'
 
 const BodyRowProps = {
   store: Store,
-  rowKey: PropTypes.string,
+  rowKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   prefixCls: PropTypes.string,
 }
 

@@ -173,7 +173,7 @@ export const SelectionBoxProps = {
 export const FilterMenuProps = {
   locale: TableLocale,
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
-  column: PropTypes.shape(ColumnProps),
+  column: PropTypes.object,
   confirmFilter: PropTypes.func,
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,

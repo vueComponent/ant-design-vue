@@ -122,7 +122,7 @@ const ExpandableTable = {
       rows[0].unshift({ ...iconColumn, column: iconColumn })
     },
 
-    renderExpandedRow (record, index, render, className, ancestorKeys, indent, fixed) {
+    renderExpandedRow (record, index, expandedRowRender, className, ancestorKeys, indent, fixed) {
       const { prefixCls, expandIconAsCell, indentSize } = this
       let colCount
       if (fixed === 'left') {
@@ -138,7 +138,7 @@ const ExpandableTable = {
           props: {
             colSpan: colCount,
           },
-          children: fixed !== 'right' ? render(record, index, indent) : '&nbsp;',
+          children: fixed !== 'right' ? expandedRowRender(record, index, indent) : '&nbsp;',
         }),
       }]
       if (expandIconAsCell && fixed !== 'right') {

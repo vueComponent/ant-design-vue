@@ -34,8 +34,8 @@ const Table = {
         if (getSlotOptions(element).isTableColumnGroup) {
           column.children = this.normalize(children)
         } else {
-          const render = element.data && element.data.scopedSlots && element.data.scopedSlots.render
-          column.render = column.render || render
+          const customRender = element.data && element.data.scopedSlots && element.data.scopedSlots.default
+          column.customRender = column.customRender || customRender
         }
         columns.push(column)
       })

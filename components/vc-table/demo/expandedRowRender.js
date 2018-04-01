@@ -19,7 +19,7 @@ export default {
         { title: 'title 1', dataIndex: 'a', key: 'a', width: 100 },
         { title: 'title 2', dataIndex: 'b', key: 'b', width: 100 },
         { title: 'title 3', dataIndex: 'c', key: 'c', width: 200 },
-        { title: 'Operation', dataIndex: '', key: 'x', render: this.renderAction },
+        { title: 'Operation', dataIndex: '', key: 'x', customRender: this.renderAction },
       ],
     }
   },

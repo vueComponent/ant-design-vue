@@ -33,7 +33,7 @@ export default {
         title: <a onClick={this.toggleBody} href='javascript:;'>{this.showBody ? '隐藏' : '显示'}体</a>,
         key: 'x',
         width: 200,
-        render () {
+        customRender () {
           return <a href='#'>Operations</a>
         },
       },

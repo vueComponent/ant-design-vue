@@ -11,7 +11,7 @@ export default {
       { id: '123', title: 'title2', dataIndex: 'b', key: 'b', width: 100 },
       { title: 'title3', dataIndex: 'c', key: 'c', width: 200 },
       {
-        title: 'Operations', dataIndex: '', key: 'd', render () {
+        title: 'Operations', dataIndex: '', key: 'd', customRender () {
           return <a href='#'>Operations</a>
         },
       },

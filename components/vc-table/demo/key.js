@@ -20,24 +20,24 @@ export default {
       this.remove(index)
     },
 
-    checkbox (h, a) {
+    checkbox (a) {
       return <label>
         <input type='checkbox' />
         {a}
       </label>
     },
 
-    renderAction (h, o, row, index) {
+    renderAction (o, row, index) {
       return <a href='javascript:;' onClick={() => this.handleClick(index)}>Delete</a>
     },
   },
 
   render () {
     const columns = [
-      { title: 'title1', dataIndex: 'a', key: 'a', width: 100, render: this.checkbox },
+      { title: 'title1', dataIndex: 'a', key: 'a', width: 100, customRender: this.checkbox },
       { title: 'title2', dataIndex: 'b', key: 'b', width: 100 },
       { title: 'title3', dataIndex: 'c', key: 'c', width: 200 },
-      { title: 'Operations', dataIndex: '', key: 'x', render: this.renderAction },
+      { title: 'Operations', dataIndex: '', key: 'x', customRender: this.renderAction },
     ]
     return (
       <Table columns={columns} data={this.data} class='table' rowKey={record => record.a} />

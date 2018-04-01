@@ -10,13 +10,29 @@ Simple table with actions.
 
 ```html
 <template>
-  <a-table :columns="columns" :dataSource="data" />
+  <a-table :columns="columns" :dataSource="data">
+    <template slot="name" slot-scope="text">
+      <a href="#">{{text}}</a>
+    </template>
+    <template slot="action" slot-scope="text, record">
+      <span>
+        <a href="#">Action 一 {{record.name}}</a>
+        <a-divider type="vertical" />
+        <a href="#">Delete</a>
+        <a-divider type="vertical" />
+        <a href="#" class="ant-dropdown-link">
+          More actions <a-icon type="down" />
+        </a>
+      </span>
+    </template>
+  </a-table>
 </template>
 <script>
 const columns = [{
   title: 'Name',
   dataIndex: 'name',
   key: 'name',
+  slotScopeName: 'name',
 }, {
   title: 'Age',
   dataIndex: 'age',
@@ -28,6 +44,7 @@ const columns = [{
 }, {
   title: 'Action',
   key: 'action',
+  slotScopeName: 'action',
 }];
 
 const data = [{

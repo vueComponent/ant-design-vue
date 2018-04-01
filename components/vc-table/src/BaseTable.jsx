@@ -46,8 +46,8 @@ const BaseTable = {
           rowContextmenu: onRowContextMenu = noop,
           rowMouseenter: onRowMouseEnter = noop,
           rowMouseleave: onRowMouseLeave = noop,
-          row: onRow = noop,
         },
+        customRow = noop,
       } = this.table
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this
 
@@ -106,9 +106,9 @@ const BaseTable = {
                   ancestorKeys,
                   components,
                   isAnyColumnsFixed,
+                  customRow,
                 },
                 on: {
-                  row: onRow,
                   rowDoubleclick: onRowDoubleClick,
                   rowContextmenu: onRowContextMenu,
                   rowMouseenter: onRowMouseEnter,

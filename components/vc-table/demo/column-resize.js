@@ -59,7 +59,7 @@ export default {
   render () {
     const columns = this.columns.map((col, index) => ({
       ...col,
-      onHeaderCell: (column) => ({
+      customHeaderCell: (column) => ({
         width: column.width,
         onResize: this.handleResize(index),
       }),

@@ -41,7 +41,7 @@ export default {
       component: BodyCell,
     } = this
     const { dataIndex, render, className = '' } = column
-    const cls = column.class || className
+    const cls = className || column.class
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
     let text

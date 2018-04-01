@@ -11,14 +11,14 @@ const TableHeaderRow = {
     row: PropTypes.array,
     components: PropTypes.object,
     height: PropTypes.any,
+    customHeaderRow: PropTypes.func,
   },
   name: 'TableHeaderRow',
   render (h) {
-    const { row, index, height, components, $listeners = {}} = this
-    const onHeaderRow = $listeners.headerRow
+    const { row, index, height, components, customHeaderRow } = this
     const HeaderRow = components.header.row
     const HeaderCell = components.header.cell
-    const rowProps = onHeaderRow(row.map(cell => cell.column), index)
+    const rowProps = customHeaderRow(row.map(cell => cell.column), index)
     const customStyle = rowProps ? rowProps.style : {}
     const style = { height, ...customStyle }
 
@@ -27,7 +27,7 @@ const TableHeaderRow = {
         {row.map((cell, i) => {
           const { column, children, className, ...cellProps } = cell
           const cls = cell.class || className
-          const customProps = column.onHeaderCell ? column.onHeaderCell(column) : {}
+          const customProps = column.customHeaderCell ? column.customHeaderCell(column) : {}
           if (column.align) {
             cellProps.style = { textAlign: column.align }
           }

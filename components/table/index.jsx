@@ -3,6 +3,7 @@ import T from './Table'
 import { getOptionProps, getKey, getClass,
   getStyle, getEvents, getSlotOptions, camelize, getSlots,
 } from '../_util/props-util'
+
 const Table = {
   name: 'Table',
   Column: T.Column,
@@ -61,13 +62,19 @@ const Table = {
     },
   },
   render () {
-    const { $listeners, $slots, normalize } = this
+    const { $listeners, $slots, normalize, $scopedSlots } = this
     const props = getOptionProps(this)
     const columns = props.columns ? this.updateColumns(props.columns) : normalize($slots.default)
+    let { title, footer } = props
+    const { title: slotTitle, footer: slotFooter } = $scopedSlots
+    title = title || slotTitle
+    footer = footer || slotFooter
     const tProps = {
       props: {
         ...props,
         columns,
+        title,
+        footer,
       },
       on: $listeners,
     }

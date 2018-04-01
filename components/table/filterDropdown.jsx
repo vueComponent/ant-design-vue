@@ -37,142 +37,139 @@ export default {
       this.setNeverShown(column)
     })
   },
-
-  componentWillReceiveProps (nextProps) {
-    const { column } = nextProps
-    this.setNeverShown(column)
-    const newState = {}
-    if ('selectedKeys' in nextProps) {
-      newState.selectedKeys = nextProps.selectedKeys
-    }
-    if ('filterDropdownVisible' in column) {
-      newState.visible = column.filterDropdownVisible
-    }
-    if (Object.keys(newState).length > 0) {
-      this.setState(newState)
-    }
+  watch: {
+    'column.fixed': function (val) {
+      this.setNeverShown(this.column)
+    },
+    column (val) {
+      if ('filterDropdownVisible' in val) {
+        this.sVisible = val.filterDropdownVisible
+      }
+    },
+    selectedKeys (val) {
+      this.sSelectedKeys = val
+    },
   },
   methods: {
-
-  },
-
-  setNeverShown  (column) {
-    const rootNode = this.$el
-    const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`)
-    if (filterBelongToScrollBody) {
-      // When fixed column have filters, there will be two dropdown menus
-      // Filter dropdown menu inside scroll body should never be shown
-      // To fix https://github.com/ant-design/ant-design/issues/5010 and
-      // https://github.com/ant-design/ant-design/issues/7909
-      this.neverShown = !!column.fixed
-    }
-  },
-
-  setSelectedKeys ({ selectedKeys }) {
-    this.setState({ sSelectedKeys: selectedKeys })
-  },
-
-  setVisible (visible) {
-    const { column } = this
-    if (!('filterDropdownVisible' in column)) {
-      this.setState({ sVisible: visible })
-    }
-    if (column.onFilterDropdownVisibleChange) {
-      column.onFilterDropdownVisibleChange(visible)
-    }
-  },
-
-  handleClearFilters () {
-    this.setState({
-      sSelectedKeys: [],
-    }, this.handleConfirm)
-  },
-
-  handleConfirm  () {
-    this.setVisible(false)
-    this.confirmFilter()
-  },
-
-  onVisibleChange  (visible) {
-    this.setVisible(visible)
-    if (!visible) {
-      this.confirmFilter()
-    }
-  },
-
-  confirmFilter () {
-    if (this.sSelectedKeys !== this.selectedKeys) {
-      this.confirmFilter(this.column, this.sSelectedKeys)
-    }
-  },
-
-  renderMenuItem (item) {
-    const { column } = this
-    const multiple = ('filterMultiple' in column) ? column.filterMultiple : true
-    const input = multiple ? (
-      <Checkbox checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
-    ) : (
-      <Radio checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
-    )
-
-    return (
-      <MenuItem key={item.value}>
-        {input}
-        <span>{item.text}</span>
-      </MenuItem>
-    )
-  },
-
-  hasSubMenu () {
-    const { column: { filters = [] }} = this
-    return filters.some(item => !!(item.children && item.children.length > 0))
-  },
-
-  renderMenus (items) {
-    return items.map(item => {
-      if (item.children && item.children.length > 0) {
-        const { sKeyPathOfSelectedItem } = this
-        const containSelected = Object.keys(sKeyPathOfSelectedItem).some(
-          key => sKeyPathOfSelectedItem[key].indexOf(item.value) >= 0,
-        )
-        const subMenuCls = containSelected ? `${this.dropdownPrefixCls}-submenu-contain-selected` : ''
-        return (
-          <SubMenu title={item.text} class={subMenuCls} key={item.value.toString()}>
-            {this.renderMenus(item.children)}
-          </SubMenu>
-        )
+    setNeverShown  (column) {
+      const rootNode = this.$el
+      const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`)
+      if (filterBelongToScrollBody) {
+        // When fixed column have filters, there will be two dropdown menus
+        // Filter dropdown menu inside scroll body should never be shown
+        // To fix https://github.com/ant-design/ant-design/issues/5010 and
+        // https://github.com/ant-design/ant-design/issues/7909
+        this.neverShown = !!column.fixed
       }
-      return this.renderMenuItem(item)
-    })
+    },
+
+    setSelectedKeys ({ selectedKeys }) {
+      this.setState({ sSelectedKeys: selectedKeys })
+    },
+
+    setVisible (visible) {
+      const { column } = this
+      if (!('filterDropdownVisible' in column)) {
+        this.setState({ sVisible: visible })
+      }
+      if (column.onFilterDropdownVisibleChange) {
+        column.onFilterDropdownVisibleChange(visible)
+      }
+    },
+
+    handleClearFilters () {
+      this.setState({
+        sSelectedKeys: [],
+      }, this.handleConfirm)
+    },
+
+    handleConfirm  () {
+      this.setVisible(false)
+      this.confirmFilter2()
+    },
+
+    onVisibleChange  (visible) {
+      this.setVisible(visible)
+      if (!visible) {
+        this.confirmFilter2()
+      }
+    },
+
+    confirmFilter2 () {
+      if (this.sSelectedKeys !== this.selectedKeys) {
+        this.confirmFilter(this.column, this.sSelectedKeys)
+      }
+    },
+
+    renderMenuItem (item) {
+      const { column } = this
+      const multiple = ('filterMultiple' in column) ? column.filterMultiple : true
+      const input = multiple ? (
+        <Checkbox checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
+      ) : (
+        <Radio checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
+      )
+
+      return (
+        <MenuItem key={item.value}>
+          {input}
+          <span>{item.text}</span>
+        </MenuItem>
+      )
+    },
+
+    hasSubMenu () {
+      const { column: { filters = [] }} = this
+      return filters.some(item => !!(item.children && item.children.length > 0))
+    },
+
+    renderMenus (items) {
+      return items.map(item => {
+        if (item.children && item.children.length > 0) {
+          const { sKeyPathOfSelectedItem } = this
+          const containSelected = Object.keys(sKeyPathOfSelectedItem).some(
+            key => sKeyPathOfSelectedItem[key].indexOf(item.value) >= 0,
+          )
+          const subMenuCls = containSelected ? `${this.dropdownPrefixCls}-submenu-contain-selected` : ''
+          return (
+            <SubMenu title={item.text} class={subMenuCls} key={item.value.toString()}>
+              {this.renderMenus(item.children)}
+            </SubMenu>
+          )
+        }
+        return this.renderMenuItem(item)
+      })
+    },
+
+    handleMenuItemClick (info) {
+      if (info.keyPath.length <= 1) {
+        return
+      }
+      const keyPathOfSelectedItem = this.sKeyPathOfSelectedItem
+      if (this.sSelectedKeys.indexOf(info.key) >= 0) {
+        // deselect SubMenu child
+        delete keyPathOfSelectedItem[info.key]
+      } else {
+        // select SubMenu child
+        keyPathOfSelectedItem[info.key] = info.keyPath
+      }
+      this.setState({ keyPathOfSelectedItem })
+    },
+
+    renderFilterIcon () {
+      const { column, locale, prefixCls } = this
+      const filterIcon = column.filterIcon
+      const dropdownSelectedClass = this.selectedKeys.length > 0 ? `${prefixCls}-selected` : ''
+
+      return filterIcon ? cloneElement(filterIcon, {
+        title: locale.filterTitle,
+        className: classNames(filterIcon.className, {
+          [`${prefixCls}-icon`]: true,
+        }),
+      }) : <Icon title={locale.filterTitle} type='filter' class={dropdownSelectedClass} />
+    },
   },
 
-  handleMenuItemClick (info) {
-    if (info.keyPath.length <= 1) {
-      return
-    }
-    const keyPathOfSelectedItem = this.sKeyPathOfSelectedItem
-    if (this.sSelectedKeys.indexOf(info.key) >= 0) {
-      // deselect SubMenu child
-      delete keyPathOfSelectedItem[info.key]
-    } else {
-      // select SubMenu child
-      keyPathOfSelectedItem[info.key] = info.keyPath
-    }
-    this.setState({ keyPathOfSelectedItem })
-  },
-
-  renderFilterIcon () {
-    const { column, locale, prefixCls } = this
-    const filterIcon = column.filterIcon
-    const dropdownSelectedClass = this.selectedKeys.length > 0 ? `${prefixCls}-selected` : ''
-
-    return filterIcon ? cloneElement(filterIcon, {
-      title: locale.filterTitle,
-      className: classNames(filterIcon.className, {
-        [`${prefixCls}-icon`]: true,
-      }),
-    }) : <Icon title={locale.filterTitle} type='filter' class={dropdownSelectedClass} />
-  },
   render () {
     const { column, locale, prefixCls, dropdownPrefixCls, getPopupContainer } = this
     // default multiple selection in filter dropdown

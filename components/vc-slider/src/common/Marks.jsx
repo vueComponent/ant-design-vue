@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { isValidElement } from '../../../_util/props-util'
 
 const Marks = {
   functional: true,
@@ -21,10 +22,8 @@ const Marks = {
     const range = max - min
     const elements = marksKeys.map(parseFloat).sort((a, b) => a - b).map(point => {
       const markPoint = marks[point]
-      // todo
-      // const markPointIsObject = typeof markPoint === 'object' &&
-      //         !React.isValidElement(markPoint)
-      const markPointIsObject = typeof markPoint === 'object'
+      const markPointIsObject = typeof markPoint === 'object' &&
+              !isValidElement(markPoint)
       const markLabel = markPointIsObject ? markPoint.label : markPoint
       if (!markLabel && markLabel !== 0) {
         return null

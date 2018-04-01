@@ -34,8 +34,5 @@ import './steps/style'
 import './breadcrumb/style'
 import './calendar/style'
 import './date-picker/style'
-<<<<<<< HEAD
 import './slider/style'
-=======
 import './table/style'
->>>>>>> f1e62240e0d804ac03d8ca28616621f3c312f31f

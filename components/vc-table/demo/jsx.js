@@ -44,7 +44,7 @@ export default {
             key='d'
             // render={() => <a href='#'>Operations</a>}
             scopedSlots= {
-              { render: () => <a href='#'>Operations</a> }
+              { default: () => <a href='#'>Operations</a> }
             }
           >
           </Column>

@@ -2,17 +2,6 @@
 import Table from '../index'
 import '../assets/index.less'
 
-const columns = [
-  { title: 'title1', dataIndex: 'a', key: 'a', width: 100 },
-  { id: '123', title: 'title2', dataIndex: 'b', key: 'b', width: 100 },
-  { title: 'title3', dataIndex: 'c', key: 'c', width: 200 },
-  {
-    title: 'Operations', dataIndex: '', key: 'd', render (h) {
-      return <a href='#'>Operations</a>
-    },
-  },
-]
-
 const data = [
   { a: '123', key: '1' },
   { a: 'cdd', b: 'edd', key: '2' },
@@ -21,6 +10,16 @@ const data = [
 
 export default {
   render () {
+    const columns = [
+      { title: 'title1', dataIndex: 'a', key: 'a', width: 100 },
+      { id: '123', title: 'title2', dataIndex: 'b', key: 'b', width: 100 },
+      { title: 'title3', dataIndex: 'c', key: 'c', width: 200 },
+      {
+        title: 'Operations', dataIndex: '', key: 'd', customRender () {
+          return <a href='#'>Operations</a>
+        },
+      },
+    ]
     return (
       <div>
         <h2>title and footer</h2>

@@ -17,7 +17,7 @@ export const ColumnProps = {
   title: PropTypes.any,
   // key?: React.Key;
   dataIndex: PropTypes.string,
-  render: PropTypes.func,
+  customRender: PropTypes.func,
   filters: PropTypes.arrayOf(ColumnFilterItem),
   // onFilter: (value: any, record: T) => PropTypes.bool,
   filterMultiple: PropTypes.bool,

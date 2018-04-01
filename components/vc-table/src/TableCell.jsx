@@ -40,7 +40,7 @@ export default {
       column,
       component: BodyCell,
     } = this
-    const { dataIndex, render, className = '' } = column
+    const { dataIndex, customRender, className = '' } = column
     const cls = className || column.class
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
@@ -63,8 +63,8 @@ export default {
     let colSpan
     let rowSpan
 
-    if (render) {
-      text = render(h, text, record, index)
+    if (customRender) {
+      text = customRender(text, record, index)
       if (this.isInvalidRenderCellText(text)) {
         tdProps.attrs = text.attrs || text.props || {}
         colSpan = tdProps.attrs.colSpan

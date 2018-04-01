@@ -3,7 +3,7 @@ import Table from '../index'
 import '../assets/index.less'
 
 const columns = [
-  { title: '手机号', dataIndex: 'a', colSpan: 2, width: 100, key: 'a', render (h, o, row, index) {
+  { title: '手机号', dataIndex: 'a', colSpan: 2, width: 100, key: 'a', customRender (o, row, index) {
     const obj = {
       children: o,
       props: {},
@@ -22,7 +22,7 @@ const columns = [
     }
     return obj
   } },
-  { title: '电话', dataIndex: 'b', colSpan: 0, width: 100, key: 'b', render (h, o, row, index) {
+  { title: '电话', dataIndex: 'b', colSpan: 0, width: 100, key: 'b', customRender (o, row, index) {
     const obj = {
       children: o,
       props: {},
@@ -33,7 +33,7 @@ const columns = [
     }
     return obj
   } },
-  { title: 'Name', dataIndex: 'c', width: 100, key: 'c', render (h, o, row, index) {
+  { title: 'Name', dataIndex: 'c', width: 100, key: 'c', customRender (o, row, index) {
     const obj = {
       children: o,
       props: {},
@@ -44,7 +44,7 @@ const columns = [
     }
     return obj
   } },
-  { title: 'Address', dataIndex: 'd', width: 200, key: 'd', render (h, o, row, index) {
+  { title: 'Address', dataIndex: 'd', width: 200, key: 'd', customRender (o, row, index) {
     const obj = {
       children: o,
       props: {},
@@ -58,7 +58,7 @@ const columns = [
 
     return obj
   } },
-  { title: 'Gender', dataIndex: 'e', width: 200, key: 'e', render (h, o, row, index) {
+  { title: 'Gender', dataIndex: 'e', width: 200, key: 'e', customRender (o, row, index) {
     const obj = {
       children: o,
       props: {},
@@ -70,7 +70,7 @@ const columns = [
   } },
   {
     title: 'Operations', dataIndex: '', key: 'f',
-    render (h, o, row, index) {
+    customRender (o, row, index) {
       if (index === 5) {
         return {
           props: {

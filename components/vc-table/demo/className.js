@@ -22,7 +22,7 @@ export default {
       {
         title: 'Operations', dataIndex: '',
         className: 'd',
-        key: 'd', render () {
+        key: 'd', customRender () {
           return <a href='#'>Operations</a>
         },
       },

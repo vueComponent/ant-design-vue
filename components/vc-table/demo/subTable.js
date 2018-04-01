@@ -41,7 +41,7 @@ export default {
       { title: 'title2', dataIndex: 'b', key: 'b', width: 100 },
       { title: 'title3', dataIndex: 'c', key: 'c', width: 200 },
       {
-        title: 'Operations', dataIndex: '', key: 'x', render: (h, text, record) => {
+        title: 'Operations', dataIndex: '', key: 'x', customRender: (text, record) => {
           return <a href='javascript:;' onClick={e => this.handleClick(record, e)}>click {record.a}</a>
         },
       },

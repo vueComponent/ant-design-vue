@@ -15,7 +15,7 @@ export default {
       'left',
       'right',
     ]),
-    render: PropTypes.func,
+    customRender: PropTypes.func,
     className: PropTypes.string,
     // onCellClick: PropTypes.func,
     // onCell: PropTypes.func,

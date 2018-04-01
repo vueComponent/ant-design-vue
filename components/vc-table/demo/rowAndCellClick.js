@@ -10,8 +10,8 @@ const onRowClick = (record, index, event) => {
   }
 }
 
-const onRowDoubleClick = (record, index) => {
-  console.log(`Double click nth(${index}) row of parent, record.name: ${record.name}`)
+const onRowDoubleClick = (record, index, e) => {
+  console.log(`Double click nth(${index}) row of parent, record.name: ${record.name}`, e)
 }
 
 const columns = [{
@@ -98,7 +98,7 @@ export default {
       <Table
         columns={columns}
         data={data}
-        onRow={(record, index) => ({
+        customRow={(record, index) => ({
           on: {
             click: onRowClick.bind(null, record, index),
             dblclick: onRowDoubleClick.bind(null, record, index),

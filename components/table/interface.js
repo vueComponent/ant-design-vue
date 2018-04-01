@@ -28,7 +28,7 @@ export const ColumnProps = {
   defaultSortOrder: PropTypes.oneOf(['ascend', 'descend']),
   colSpan: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  // className: string,
+  className: PropTypes.string,
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['left', 'right'])]),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
@@ -81,9 +81,9 @@ export const TableRowSelection = {
 export const TableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
-  rowSelection: PropTypes.shape(TableRowSelection).loose,
+  rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, null]),
   pagination: PropTypes.oneOfType([PropTypes.shape(PaginationProps).loose, PropTypes.bool]),
-  size: PropTypes.oneOf(['default', 'middle', 'small']),
+  size: PropTypes.oneOf(['default', 'middle', 'small', 'large']),
   dataSource: PropTypes.array,
   components: PropTypes.object,
   columns: PropTypes.array,
@@ -103,7 +103,8 @@ export const TableProps = {
   locale: PropTypes.object,
   indentSize: PropTypes.number,
   // onRowClick?: (record: T, index: number, event: Event) => any;
-  // onRow?: (record: T, index: number) => any;
+  customRow: PropTypes.func,
+  customHeaderRow: PropTypes.func,
   useFixedHeader: PropTypes.bool,
   bordered: PropTypes.bool,
   showHeader: PropTypes.bool,
@@ -177,6 +178,7 @@ export const FilterMenuProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   getPopupContainer: PropTypes.func,
+  handleFilter: PropTypes.func,
 }
 
 // export interface FilterMenuState {

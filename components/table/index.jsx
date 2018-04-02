@@ -77,7 +77,11 @@ const Table = {
     const props = getOptionProps(this)
     const columns = props.columns ? this.updateColumns(props.columns) : normalize($slots.default)
     let { title, footer } = props
-    const { title: slotTitle, footer: slotFooter } = $scopedSlots
+    const {
+      title: slotTitle,
+      footer: slotFooter,
+      expandedRowRender = props.expandedRowRender,
+    } = $scopedSlots
     title = title || slotTitle
     footer = footer || slotFooter
     const tProps = {
@@ -86,6 +90,7 @@ const Table = {
         columns,
         title,
         footer,
+        expandedRowRender,
       },
       on: $listeners,
     }

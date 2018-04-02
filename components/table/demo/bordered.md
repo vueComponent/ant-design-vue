@@ -26,7 +26,7 @@ Add border, title and footer for table.
 const columns = [{
   title: 'Name',
   dataIndex: 'name',
-  slotScopeName: 'name',
+  scopedSlots: { customRender: 'name' },
 }, {
   title: 'Cash Assets',
   className: 'column-money',

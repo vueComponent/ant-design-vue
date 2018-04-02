@@ -14,6 +14,9 @@ Simple table with actions.
     <template slot="name" slot-scope="text">
       <a href="#">{{text}}</a>
     </template>
+    <template slot="customTitle">
+      <span><a-icon type="smile-o" /> Name</span>
+    </template>
     <template slot="action" slot-scope="text, record">
       <span>
         <a href="#">Action 一 {{record.name}}</a>
@@ -29,10 +32,10 @@ Simple table with actions.
 </template>
 <script>
 const columns = [{
-  title: 'Name',
   dataIndex: 'name',
   key: 'name',
-  slotScopeName: 'name',
+  slots: { title: 'customTitle' },
+  scopedSlots: { customRender: 'name' },
 }, {
   title: 'Age',
   dataIndex: 'age',
@@ -44,7 +47,7 @@ const columns = [{
 }, {
   title: 'Action',
   key: 'action',
-  slotScopeName: 'action',
+  scopedSlots: { customRender: 'action' },
 }];
 
 const data = [{

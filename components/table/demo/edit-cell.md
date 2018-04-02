@@ -54,7 +54,7 @@ export default {
         title: 'name',
         dataIndex: 'name',
         width: '30%',
-        slotScopeName: 'name',
+        scopedSlots: { customRender: 'name' },
       }, {
         title: 'age',
         dataIndex: 'age',
@@ -64,7 +64,7 @@ export default {
       }, {
         title: 'operation',
         dataIndex: 'operation',
-        slotScopeName: 'operation',
+        scopedSlots: { customRender: 'operation' },
       }],
     }
   },

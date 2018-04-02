@@ -45,14 +45,25 @@ const Table = {
       const columns = []
       const { $slots, $scopedSlots } = this
       cols.forEach(col => {
-        const { slotTitle, slotScopeName, ...restProps } = col
+        const { slots = {}, scopedSlots = {}, ...restProps } = col
         const column = {
           ...restProps,
-          title: col.title || $slots[slotTitle],
         }
-        if (slotScopeName && $scopedSlots[slotScopeName]) {
-          column.customRender = column.customRender || $scopedSlots[slotScopeName]
-        }
+        Object.keys(slots).forEach(key => {
+          const name = slots[key]
+          if (column[key] === undefined && $slots[name]) {
+            column[key] = $slots[name]
+          }
+        })
+        Object.keys(scopedSlots).forEach(key => {
+          const name = scopedSlots[key]
+          if (column[key] === undefined && $scopedSlots[name]) {
+            column[key] = $scopedSlots[name]
+          }
+        })
+        // if (slotScopeName && $scopedSlots[slotScopeName]) {
+        //   column.customRender = column.customRender || $scopedSlots[slotScopeName]
+        // }
         if (col.children) {
           column.children = this.updateColumns(column.children)
         }

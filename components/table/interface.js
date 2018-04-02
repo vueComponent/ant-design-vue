@@ -160,7 +160,7 @@ export const SelectionBoxProps = {
   store: Store,
   type: RowSelectionType,
   defaultSelection: PropTypes.arrayOf(PropTypes.string),
-  rowIndex: PropTypes.string,
+  rowIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string,
   disabled: PropTypes.bool,
   // onChange: React.ChangeEventHandler<HTMLInputElement>;

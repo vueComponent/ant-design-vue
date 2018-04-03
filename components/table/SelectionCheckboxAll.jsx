@@ -22,7 +22,7 @@ export default {
       onSelect: () => {},
     }]
 
-    this.state = {
+    return {
       checked: this.getCheckState(props),
       indeterminate: this.getIndeterminateState(props),
     }
@@ -32,8 +32,13 @@ export default {
     this.subscribe()
   },
 
-  componentWillReceiveProps (nextProps) {
-    this.setCheckState()
+  watch: {
+    '$props': {
+      handler: function () {
+        this.setCheckState()
+      },
+      deep: true,
+    },
   },
 
   beforeDestroy () {

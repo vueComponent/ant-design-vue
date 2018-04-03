@@ -134,8 +134,8 @@ const ExpandableTable = {
       }
       const columns = [{
         key: 'extra-row',
-        render: () => ({
-          props: {
+        customRender: () => ({
+          attrs: {
             colSpan: colCount,
           },
           children: fixed !== 'right' ? expandedRowRender(record, index, indent) : '&nbsp;',
@@ -144,7 +144,7 @@ const ExpandableTable = {
       if (expandIconAsCell && fixed !== 'right') {
         columns.unshift({
           key: 'expand-icon-placeholder',
-          render: () => null,
+          customRender: () => null,
         })
       }
       const parentKey = ancestorKeys[ancestorKeys.length - 1]

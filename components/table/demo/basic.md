@@ -11,23 +11,17 @@ Simple table with actions.
 ```html
 <template>
   <a-table :columns="columns" :dataSource="data">
-    <template slot="name" slot-scope="text">
-      <a href="#">{{text}}</a>
-    </template>
-    <template slot="customTitle">
-      <span><a-icon type="smile-o" /> Name</span>
-    </template>
-    <template slot="action" slot-scope="text, record">
-      <span>
-        <a href="#">Action 一 {{record.name}}</a>
-        <a-divider type="vertical" />
-        <a href="#">Delete</a>
-        <a-divider type="vertical" />
-        <a href="#" class="ant-dropdown-link">
-          More actions <a-icon type="down" />
-        </a>
-      </span>
-    </template>
+    <a slot="name" slot-scope="text" href="#">{{text}}</a>
+    <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
+    <span slot="action" slot-scope="text, record">
+      <a href="#">Action 一 {{record.name}}</a>
+      <a-divider type="vertical" />
+      <a href="#">Delete</a>
+      <a-divider type="vertical" />
+      <a href="#" class="ant-dropdown-link">
+        More actions <a-icon type="down" />
+      </a>
+    </span>
   </a-table>
 </template>
 <script>

@@ -8,6 +8,7 @@ import Offset from './offset'
 import ResponsiveMore from './responsive-more'
 import Responsive from './responsive'
 import Sort from './sort'
+import Playfround from './playfround'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -53,7 +54,7 @@ Following is a brief look at how it works:
 ## Flex layout
 Our grid systems support Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using \`order\`.
 Flex layout uses a 24 grid layout to define the width of each "box", but does not rigidly adhere to the grid layout.
-## Examples 
+## Examples
   `,
 }
 export default {
@@ -125,6 +126,7 @@ export default {
           <ResponsiveMore/>
           <Responsive/>
           <Sort/>
+          <Playfround />
         </div>
         <api>
           <CN slot='cn' />

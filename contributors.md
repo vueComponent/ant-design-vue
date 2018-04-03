@@ -33,7 +33,7 @@ Carousel
 Mention
 
 ##万
-Grid | done slider完成后补全playground demo
+Grid | done
 Layout
 Anchor
 Tree
@@ -50,8 +50,7 @@ Collapse | done
 Spin | done
 Switch | done
 Steps | done
-Progress
-Slider
-Table
-Timeline
+Progress | done
+Slider | done InputNumber做完补全demo
+Timeline | done
 Transfer

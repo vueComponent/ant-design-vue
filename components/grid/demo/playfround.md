@@ -62,7 +62,6 @@ A simple playground for column count and gutter.
       rowColHtml() {
         const colCount = this.colCounts[this.colCountKey]
         const getter = this.gutters[this.gutterKey]
-        // ${colCode}</Row>
         let colCode = '<Row :gutter="' + getter + '">\n'
         for (let i = 0; i < colCount; i++) {
           const spanNum = 24 / colCount

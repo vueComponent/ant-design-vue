@@ -11,15 +11,17 @@ Table with editable rows.
 ```html
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
-    <div v-for="col in ['name', 'age', 'address']" :key="col" :slot="col" slot-scope="text, record, index">
-      <a-input
-        v-if="record.editable"
-        style="margin: -5px 0"
-        :value="text"
-        @change="e => handleChange(e.target.value, record.key, col)"
-      />
-      <template v-else>{{text}}</template>
-    </div>
+    <template v-for="col in ['name', 'age', 'address']" :slot="col" slot-scope="text, record, index">
+      <div>
+        <a-input
+          v-if="record.editable"
+          style="margin: -5px 0"
+          :value="text"
+          @change="e => handleChange(e.target.value, record.key, col)"
+        />
+        <template v-else>{{text}}</template>
+      </div>
+    </template>
     <template slot="operation" slot-scope="text, record, index">
       <div class='editable-row-operations'>
         <span v-if="record.editable">

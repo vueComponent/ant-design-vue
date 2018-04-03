@@ -435,7 +435,7 @@ export default {
     // const children = this.renderChildren(this.$slots.default)
 
     const getPopupContainer = this.isRootMenu
-      ? this.getPopupContainer : triggerNode => triggerNode.parentNode
+      ? this.parentMenuContext.getPopupContainer : triggerNode => triggerNode.parentNode
     const popupPlacement = popupPlacementMap[props.mode]
     const popupClassName = props.mode === 'inline' ? '' : props.popupClassName
     const liProps = {

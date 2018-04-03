@@ -1,20 +1,3 @@
----
-category: Components
-cols: 1
-type: Data Display
-title: Table
----
-
-A table displays rows of data.
-
-## When To Use
-
-- To display a collection of structured data.
-- To sort, search, paginate, filter data.
-
-## How To Use
-
-Specify `dataSource` of Table as an array of data.
 
 ```jsx
 const dataSource = [{
@@ -160,47 +143,12 @@ Properties for row selection.
 | text | Display text of this selection | string\|React.ReactNode | - |
 | onSelect | Callback executed when this selection is clicked | Function(changeableRowKeys) | - |
 
-## Using in TypeScript
-
-```jsx
-import { Table } from 'antd';
-import { ColumnProps } from 'antd/lib/table';
-
-interface IUser {
-  key: number,
-  name: string;
-}
-
-const columns: ColumnProps<IUser>[] = [{
-  key: 'name',
-  title: 'Name',
-  dataIndex: 'name',
-}];
-
-const data: IUser[] = [{
-  key: 0,
-  name: 'Jack',
-}];
-
-class UserTable extends Table<IUser> {}
-
-<UserTable columns={columns} dataSource={data} />
-
-// Use JSX style API
-class NameColumn extends Table.Column<IUser> {}
-
-<UserTable dataSource={data}>
-  <NameColumn key="name" title="Name" dataIndex="name" />
-</UserTable>
-```
 
 ## Note
 
-According to [React documentation](https://facebook.github.io/react/docs/lists-and-keys.html#keys), every child in array should be assigned a unique key. The values inside `dataSource` and `columns` should follow this in Table, and `dataSource[i].key` would be treated as key value default for `dataSource`.
+The values inside `dataSource` and `columns` should follow this in Table, and `dataSource[i].key` would be treated as key value default for `dataSource`.
 
-If `dataSource[i].key` is not provided, then you should specify the primary key of dataSource value via `rowKey`. If not, warnings like above will show in browser console.
-
-![](https://os.alipayobjects.com/rmsportal/luLdLvhPOiRpyss.png)
+If `dataSource[i].key` is not provided, then you should specify the primary key of dataSource value via `rowKey`. If not, warnings will show in browser console.
 
 ```jsx
 // primary key is uid

@@ -99,13 +99,13 @@ export default {
       })
     },
     rowSelection: {
-      handler: (val) => {
+      handler (val) {
         if (val &&
           'selectedRowKeys' in val) {
           this.store.setState({
             selectedRowKeys: val.selectedRowKeys || [],
           })
-          const { rowSelection } = this.props
+          const { rowSelection } = this
           if (rowSelection && (
             val.getCheckboxProps !== rowSelection.getCheckboxProps
           )) {

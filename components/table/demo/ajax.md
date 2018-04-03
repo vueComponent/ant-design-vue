@@ -32,7 +32,7 @@ const columns = [{
   dataIndex: 'name',
   sorter: true,
   width: '20%',
-  slotScopeName: 'name',
+  scopedSlots: { customRender: 'name' },
 }, {
   title: 'Gender',
   dataIndex: 'gender',

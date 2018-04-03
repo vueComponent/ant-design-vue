@@ -26,7 +26,7 @@ function noop () {
 
 function stopPropagation (e) {
   e.stopPropagation()
-  if (e.nativeEvent.stopImmediatePropagation) {
+  if (e.nativeEvent && e.nativeEvent.stopImmediatePropagation) {
     e.nativeEvent.stopImmediatePropagation()
   }
 }
@@ -194,33 +194,29 @@ export default {
     },
 
     setSelectedRowKeys (selectedRowKeys, { selectWay, record, checked, changeRowKeys }) {
-      const { rowSelection = {}, $listeners: {
-        rowSelectionChange,
-        rowSelectionSelect,
-        rowSelectionSelectAll,
-        rowSelectionSelectInvert,
-      }} = this
+      const { rowSelection = {}} = this
       if (rowSelection && !('selectedRowKeys' in rowSelection)) {
         this.store.setState({ selectedRowKeys })
       }
       const data = this.getFlatData()
-      if (!rowSelectionChange && !rowSelection[selectWay]) {
+      if (!rowSelection.onChange && !rowSelection[selectWay]) {
         return
       }
       const selectedRows = data.filter(
         (row, i) => selectedRowKeys.indexOf(this.getRecordKey(row, i)) >= 0,
       )
-      this.$emit('rowSelectionChange', selectedRowKeys, selectedRows)
-
-      if (selectWay === 'onSelect' && rowSelectionSelect) {
-        this.$emit('rowSelectionSelect', record, checked, selectedRows)
-      } else if (selectWay === 'onSelectAll' && rowSelectionSelectAll) {
+      if (rowSelection.onChange) {
+        rowSelection.onChange(selectedRowKeys, selectedRows)
+      }
+      if (selectWay === 'onSelect' && rowSelection.onSelect) {
+        rowSelection.onSelect(record, checked, selectedRows)
+      } else if (selectWay === 'onSelectAll' && rowSelection.onSelectAll) {
         const changeRows = data.filter(
           (row, i) => changeRowKeys.indexOf(this.getRecordKey(row, i)) >= 0,
         )
-        this.$emit('rowSelectionSelectAll', checked, selectedRows, changeRows)
-      } else if (selectWay === 'onSelectInvert' && rowSelectionSelectInvert) {
-        this.$emit('rowSelectionSelectInvert', selectedRowKeys)
+        rowSelection.onSelectAll(checked, selectedRows, changeRows)
+      } else if (selectWay === 'onSelectInvert' && rowSelection.onSelectInvert) {
+        rowSelection.onSelectInvert(selectedRowKeys)
       }
     },
 
@@ -602,7 +598,7 @@ export default {
         })
         const selectionColumn = {
           key: 'selection-column',
-          render: this.renderSelectionBox(rowSelection.type),
+          customRender: this.renderSelectionBox(rowSelection.type),
           className: selectionColumnClass,
           fixed: rowSelection.fixed,
         }

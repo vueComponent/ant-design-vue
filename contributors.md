@@ -50,8 +50,7 @@ Collapse | done
 Spin | done
 Switch | done
 Steps | done
-Progress
-Slider
-Table
-Timeline
+Progress | done
+Slider | done InputNumber做完补全demo
+Timeline | done
 Transfer

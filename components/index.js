@@ -142,3 +142,7 @@ export { default as version } from './version'
 export { default as Slider } from './slider'
 
 export { default as Progress } from './progress'
+
+import Timeline from './timeline'
+const TimelineItem = Timeline.Item
+export { Timeline, TimelineItem }

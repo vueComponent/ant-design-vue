@@ -13,7 +13,6 @@ function noop () {}
 export default function createSlider (Component) {
   // const displayName = `ComponentEnhancer(${Component.displayName})`
   const propTypes = {
-    ...Component.propTypes,
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
@@ -41,7 +40,6 @@ export default function createSlider (Component) {
       event: 'change',
     },
     props: initDefaultProps(propTypes, {
-      ...Component.defaultProps,
       prefixCls: 'rc-slider',
       min: 0,
       max: 100,

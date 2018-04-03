@@ -100,9 +100,13 @@ const Circle = {
         <path
           {...pathFirst}
         />
-        <path
-          {...pathSecond}
-        />
+        {
+          percent > 0 ? (
+            <path
+              {...pathSecond}
+            />
+          ) : null
+        }
       </svg>
     )
   },

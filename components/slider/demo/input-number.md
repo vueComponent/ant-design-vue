@@ -15,28 +15,28 @@ Synchronize with [InptNumber](#/us/components/input-number/) component.
         <a-col :span="12">
           <a-slider :min="1" :max="20" v-model="inputValue1" />
         </a-col>
-        <!-- <a-col :span="4">
-          <a-inputNumber
+        <a-col :span="4">
+          <a-input-number
             :min="1"
             :max="20"
             style="marginLeft: 16px"
             v-model="inputValue1"
           />
-        </a-ol> -->
+        </a-col>
       </a-row>
       <a-row>
         <a-col :span="12">
           <a-slider :min="0" :max="1" v-model="inputValue" :step="0.01" />
         </a-col>
-        <!-- <a-col :span="4">
-          <a-inputNumber
+        <a-col :span="4">
+          <a-input-number
             :min="0"
             :max="1"
             :step="0.01"
             style="marginLeft: 16px"
             v-model="inputValue"
           />
-        </a-col> -->
+        </a-col>
       </a-row>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script>
 import Basic from './basic.md'
-// import InputNumber from './input-number.md'
+import InputNumber from './input-number.md'
 import IconSlider from './icon-slider.md'
 import TipFormatter from './tip-formatter.md'
 import Event from './event.md'
@@ -33,6 +33,8 @@ export default {
         <md cn={md.cn} us={md.us}/>
         <br/>
         <Basic />
+        <br />
+        <InputNumber />
         <br />
         <IconSlider />
         <br />

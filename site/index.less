@@ -1,0 +1,64 @@
+@import './theme/static/index.less';
+.site {
+  display: flex;
+  flex-direction: column;
+  .nav {
+    width: 200px;
+  }
+  .content {
+    flex: 1;
+  }
+  .main-wrapper {
+    display: flex;
+    flex: 1;
+  }
+}
+
+.api-container table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid @site-border-color-split;
+  width: 100%;
+  margin: 8px 0 16px;
+}
+
+.api-container table th {
+  white-space: nowrap;
+  color: #5c6b77;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.02);
+}
+.api-container pre code {
+  padding: 12px 20px;
+  margin: 16px 0;
+  overflow: auto;
+}
+
+.api-container table th,
+.api-container table td {
+  border: 1px solid @site-border-color-split;
+  padding: 16px 24px;
+  text-align: left;
+}
+.code-box .highlight-wrapper {
+  display: block;
+}
+.code-box-meta > h4 {
+  position: absolute;
+  top: -14px;
+  padding: 1px 8px;
+  margin-left: -8px;
+  color: #777;
+  border-radius: 2px 2px 0 0;
+  background: #fff;
+  font-size: 14px;
+  width: auto;
+}
+.code-box-code-copy {
+  opacity: 1;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+

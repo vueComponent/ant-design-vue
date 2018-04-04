@@ -13,8 +13,8 @@ const modulePlugin = new ExtractTextPlugin({
 
 module.exports = merge(baseWebpackConfig, {
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: './',
+    path: path.resolve(__dirname, './site-dist'),
+    publicPath: '/ant-design/',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[chunkhash].async.js',
   },
@@ -74,7 +74,7 @@ module.exports = merge(baseWebpackConfig, {
       },
     }),
     new HtmlWebpackPlugin({
-      template: './examples/index.html',
+      template: './site/index.html',
       inject: true,
       minify: { collapseWhitespace: true },
       production: true,

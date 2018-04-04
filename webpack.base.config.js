@@ -120,7 +120,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
 module.exports = {
   entry: {
     index: [
-      './examples/index.js',
+      './site/index.js',
     ],
   },
   module: {

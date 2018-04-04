@@ -1,5 +1,5 @@
 <template>
-  <section :class="['code-box', isOpen ? 'expand': '']">
+  <section :class="['code-box', isOpen ? 'expand': '']" :id="id">
     <section class="code-box-demo">
       <slot name="component"></slot>
     </section>
@@ -37,18 +37,29 @@ export default {
   props: {
     jsfiddle: Object,
   },
+  inject: {
+    _store: { default: {}},
+  },
   data () {
-    const { name } = this.$route.params
-    const { html, script, style } = this.jsfiddle
+    const { name = '' } = this.$route.params
+    const { html, script, style, us, cn } = this.jsfiddle
     let sourceCode = `<template>${html}</template>\n`
     sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode
     sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
+    const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || ''
+    const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || ''
+    const id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
+    if (this._store.store) {
+      const { currentSubMenu } = this._store.store.getState()
+      this._store.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
+    }
     return {
       isOpen: false,
       isZhCN: isZhCN(name),
       copied: false,
       copyTooltipVisible: false,
       sourceCode,
+      id,
     }
   },
   methods: {

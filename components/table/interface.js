@@ -18,6 +18,8 @@ export const ColumnProps = {
   // key?: React.Key;
   dataIndex: PropTypes.string,
   customRender: PropTypes.func,
+  customCell: PropTypes.func,
+  customHeaderCell: PropTypes.func,
   filters: PropTypes.arrayOf(ColumnFilterItem),
   // onFilter: (value: any, record: T) => PropTypes.bool,
   filterMultiple: PropTypes.bool,

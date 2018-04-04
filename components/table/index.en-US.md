@@ -36,48 +36,60 @@ const columns = [{
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | bordered | Whether to show all table borders | boolean | `false` |
-| columns | Columns of table | [ColumnProps](https://git.io/vMMXC)\[] | - |
+| columns | Columns of table | array | - |
 | components | Override default table elements | object | - |
 | dataSource | Data record array to be displayed | any\[] | - |
 | defaultExpandAllRows | Expand all rows initially | boolean | `false` |
 | defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |
 | expandedRowKeys | Current expanded row keys | string\[] | - |
-| expandedRowRender | Expanded container render for each row | Function(record):ReactNode | - |
+| expandedRowRender | Expanded container render for each row | Function(record):VNode\|slot-scope | - |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
-| footer | Table footer renderer | Function(currentPageData) |  |
+| footer | Table footer renderer | Function(currentPageData)\|slot-scope |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |
-| loading | Loading status of table | boolean\|[object](https://ant.design/components/spin-cn/#API) ([more](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | `false` |
-| locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' <br> [Default](https://github.com/ant-design/ant-design/issues/575#issuecomment-159169511) |
-| pagination | Pagination [config](/components/pagination/), hide it by setting it to `false` | object |  |
+| loading | Loading status of table | boolean\|[object](https://vuecomponent.github.io/ant-design/#/us/components/spin) | `false` |
+| locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' |
+| pagination | Pagination [config](https://vuecomponent.github.io/ant-design/#/us/components/pagination), hide it by setting it to `false` | object |  |
 | rowClassName | Row's className | Function(record, index):string | - |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
 | rowSelection | Row selection [config](#rowSelection) | object | null |
 | scroll | Whether table can be scrolled in x/y direction, `x` or `y` can be a number that indicates the width and height of table body | object | - |
 | showHeader | Whether to show table header | boolean | `true` |
 | size | Size of table | `default` \| `middle` \| `small` | `default` |
-| title | Table title renderer | Function(currentPageData) |  |
-| onChange | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter) |  |
-| onExpand | Callback executed when the row expand icon is clicked | Function(expanded, record) |  |
-| onExpandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
-| onHeaderRow | Set props on per header row | Function(column, index) | - |
-| onRow | Set props on per row | Function(record, index) | - |
+| title | Table title renderer | Function(currentPageData)\|slot-scope |  |
+| customHeaderRow | Set props on per header row | Function(column, index) | - |
+| customRow | Set props on per row | Function(record, index) | - |
 
-#### onRow usage
+### Events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter) |  |
+| expand | Callback executed when the row expand icon is clicked | Function(expanded, record) |  |
+| expandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
 
-Same as `onRow` `onHeaderRow` `onCell` `onHeaderCell`
+#### customRow usage
+
+Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`.
+Follow [Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx) syntax。
 
 ```jsx
 <Table
-  onRow={(record) => {
+  customRow={(record) => {
     return {
-      onClick: () => {},       // click row
-      onMouseEnter: () => {},  // mouse enter row
-      onXxxx...
+      props: {
+        xxx...
+      },
+      on: {
+        click: () => {},       // click row
+        mouseenter: () => {},  // mouse enter row
+        xxxx...
+      },
     };
   )}
-  onHeaderRow={(column) => {
+  customHeaderRow={(column) => {
     return {
-      onClick: () => {},        // click header row
+      on: {
+        click: () => {},        // click header row
+      },
     };
   )}
 />
@@ -93,30 +105,34 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | colSpan | Span of this column's title | number |  |
 | dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |
-| filterDropdown | Customized filter overlay | ReactNode | - |
+| filterDropdown | Customized filter overlay | slot | - |
 | filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |
-| filterIcon | Customized filter icon | ReactNode | `false` |
+| filterIcon | Customized filter icon | slot | `false` |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |
 | filters | Filter menu config | object\[] | - |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |
-| render | Renderer of the table cell. The return value should be a ReactNode, or an object for [colSpan/rowSpan config](#components-table-demo-colspan-rowspan) | Function(text, record, index) {} | - |
+| customRender | Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config | Function(text, record, index) {}\|slot-scope | - |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |
-| title | Title of this column | string\|ReactNode | - |
+| title | Title of this column | string\|slot | - |
 | width | Width of this column | string\|number | - |
-| onCell | Set props on per cell | Function(record) | - |
-| onFilter | Callback executed when the confirm filter button is clicked | Function | - |
-| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed | function(visible) {} | - |
-| onHeaderCell | Set props on per header cell | Function(column) | - |
+| customCell | Set props on per cell | Function(record) | - |
+| customHeaderCell | Set props on per header cell | Function(column) | - |
+| onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |
+| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |
+| slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { filterIcon: 'XXX'}` | object | - |
+| scopedSlots | When using columns, you can use this property to configure the properties that support the slot-scope, such as `scopedSlots: { customRender: 'XXX'}` | object | - |
+
 
 ### ColumnGroup
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| title | Title of the column group | string\|ReactNode | - |
+| title | Title of the column group | string\|slot | - |
+| slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { title: 'XXX'}` | object | - |
 
 ### rowSelection
 
@@ -140,7 +156,7 @@ Properties for row selection.
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | key | Unique key of this selection | string | - |
-| text | Display text of this selection | string\|React.ReactNode | - |
+| text | Display text of this selection | string\|VNode | - |
 | onSelect | Callback executed when this selection is clicked | Function(changeableRowKeys) | - |
 
 

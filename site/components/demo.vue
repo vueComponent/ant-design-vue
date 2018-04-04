@@ -8,9 +8,9 @@ import { isZhCN } from '../util'
 
 export default {
   render () {
-    let { name } = this.$route.params
+    const { name } = this.$route.params
     const lang = isZhCN(name) ? 'cn' : 'us'
-    name = name.replace('-cn', '')
+    // name = name.replace('-cn', '')
     const titleMap = {}
     const menuConfig = {
       General: [],
@@ -28,7 +28,7 @@ export default {
       menuConfig[type] = menuConfig[type] || []
       menuConfig[type].push(d)
     }
-    const Demo = AllDemo[titleMap[name]]
+    const Demo = AllDemo[titleMap[name.replace('-cn', '')]]
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []

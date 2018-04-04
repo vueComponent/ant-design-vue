@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Touchable from 'rmc-feedback';
+import PropTypes from '../../_util/vue-types'
+import Touchable from '../../vc-m-feedback'
 
-class InputHandler extends Component {
-  render() {
-    const {
-      prefixCls, disabled, onTouchStart, onTouchEnd,
-      onMouseDown, onMouseUp, onMouseLeave, ...otherProps,
-    } = this.props;
+const InputHandler = {
+  props: {
+    prefixCls: PropTypes.string,
+    disabled: PropTypes.bool,
+  },
+  render () {
+    const { prefixCls, disabled } = this.$props
+    const touchableProps = {
+      props: {
+        disabled,
+        activeClassName: `${prefixCls}-handler-active`,
+      },
+      on: this.$listeners,
+    }
+    const spanProps = {
+      attrs: this.$attrs,
+    }
     return (
       <Touchable
-        disabled={disabled}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseLeave}
-        activeClassName={`${prefixCls}-handler-active`}
+        {...touchableProps}
       >
-        <span {...otherProps} />
+        <span {...spanProps}>
+          {this.$slots.default}
+        </span>
       </Touchable>
-    );
-  }
+    )
+  },
 }
 
-InputHandler.propTypes = {
-  prefixCls: PropTypes.string,
-  disabled: PropTypes.bool,
-  onTouchStart: PropTypes.func,
-  onTouchEnd: PropTypes.func,
-  onMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-};
-
-export default InputHandler;
+export default InputHandler

@@ -6,15 +6,15 @@ if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
 
 echo "Starting to update gh-pages\n"
 
-rm -rf dist
-mkdir dist
+rm -rf site-dist
+mkdir site-dist
 
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis"
 
-./node_modules/.bin/webpack --config webpack.site.config.js
+npm run site
 
-cd dist
+cd site-dist
 git init
 git add -f .
 git commit -m "Travis build"

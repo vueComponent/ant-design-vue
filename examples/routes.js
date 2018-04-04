@@ -3,11 +3,7 @@ const AsyncComp = () => {
   const hashs = window.location.hash.split('/')
   const d = hashs[hashs.length - 1]
   return {
-<<<<<<< HEAD
-    component: import(`../components/vc-m-feedback/demo/${d}`),
-=======
-    component: import(`../components/table/demo/${d}`),
->>>>>>> 5d2271a131c74d672cc0cfada07e256752160b41
+    component: import(`../components/vc-input-number/demo/${d}`),
   }
 }
 export default [

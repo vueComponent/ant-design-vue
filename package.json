@@ -136,6 +136,7 @@
     "dom-scroll-into-view": "^1.2.1",
     "enquire.js": "^2.1.6",
     "eslint-plugin-vue": "^3.13.0",
+    "is-negative-zero": "^2.0.0",
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
     "omit.js": "^1.0.0",

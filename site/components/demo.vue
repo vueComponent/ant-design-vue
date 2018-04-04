@@ -46,6 +46,14 @@ export default {
         <a-affix>
           <ul id='demo-toc' class='toc'>
             {lis}
+            <li title='API' key='API'>
+              <a
+                href='#component-api'
+                class={{
+                  current: window.location.hash === '#component-api',
+                }}
+              >API</a>
+            </li>
           </ul>
         </a-affix>
       )

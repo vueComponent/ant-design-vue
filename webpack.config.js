@@ -5,14 +5,8 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 
 module.exports = merge(baseWebpackConfig, {
-  entry: {
-    index: [
-      './examples/index.js',
-    ],
-  },
   output: {
     path: path.resolve(__dirname, './dist'),
-    // publicPath: '/',
     publicPath: '/ant-design/',
     filename: 'build.js',
   },
@@ -43,11 +37,6 @@ module.exports = merge(baseWebpackConfig, {
   devServer: {
     port: 3000,
     host: '0.0.0.0',
-    // historyApiFallback: {
-    //   rewrites: [
-    //     { from: /.*/, to: '/index.html' },
-    //   ],
-    // },
     historyApiFallback: {
       rewrites: [
         { from: /./, to: '/ant-design/index.html' },

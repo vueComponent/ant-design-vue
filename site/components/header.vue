@@ -13,7 +13,7 @@ export default {
       const { name } = this.$route.params
       const newName = isZhCN(name) ? name.replace('-cn', '') : `${name}-cn`
       this.$router.push({
-        path: `/ant-design/components/${newName}`,
+        path: `/ant-design/components/${newName}/`,
       })
     },
   },

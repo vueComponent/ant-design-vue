@@ -4,7 +4,6 @@ import { getOptionProps, initDefaultProps, getComponentFromProp } from '../_util
 
 export const TimeLineItemProps = {
   prefixCls: PropTypes.string,
-  className: PropTypes.string,
   color: PropTypes.string,
   dot: PropTypes.any,
   pending: PropTypes.bool,
@@ -20,7 +19,7 @@ export default {
     pending: false,
   }),
   render () {
-    const { prefixCls, color = '', last, pending, ...restProps } = getOptionProps(this)
+    const { prefixCls, color = '', last, pending } = getOptionProps(this)
     const dot = getComponentFromProp(this, 'dot')
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,
@@ -33,9 +32,12 @@ export default {
       [`${prefixCls}-item-head-custom`]: dot,
       [`${prefixCls}-item-head-${color}`]: true,
     })
-
+    const liProps = {
+      class: itemClassName,
+      on: this.$listeners,
+    }
     return (
-      <li {...restProps} class={itemClassName}>
+      <li {...liProps}>
         <div class={`${prefixCls}-item-tail`} />
         <div
           class={dotClassName}

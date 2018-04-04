@@ -99,13 +99,13 @@ export default {
       })
     },
     rowSelection: {
-      handler: (val) => {
+      handler (val) {
         if (val &&
           'selectedRowKeys' in val) {
           this.store.setState({
             selectedRowKeys: val.selectedRowKeys || [],
           })
-          const { rowSelection } = this.props
+          const { rowSelection } = this
           if (rowSelection && (
             val.getCheckboxProps !== rowSelection.getCheckboxProps
           )) {
@@ -133,12 +133,12 @@ export default {
       const filteredValueColumns = this.getFilteredValueColumns(val)
       if (filteredValueColumns.length > 0) {
         const filtersFromColumns = this.getFiltersFromColumns(val)
-        const newFilters = { ...this.state.filters }
+        const newFilters = { ...this.sFilters }
         Object.keys(filtersFromColumns).forEach(key => {
           newFilters[key] = filtersFromColumns[key]
         })
         if (this.isFiltersChanged(newFilters)) {
-          this.setState({ filters: newFilters })
+          this.setState({ sFilters: newFilters })
         }
       }
     },

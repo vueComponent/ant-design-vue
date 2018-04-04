@@ -1,21 +1,3 @@
----
-category: Components
-cols: 1
-type: Data Display
-title: Table
-subtitle: 表格
----
-
-展示行列数据。
-
-## 何时使用
-
-- 当有大量结构化的数据需要展现时；
-- 当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。
-
-## 如何使用
-
-指定表格的数据源 `dataSource` 为一个数组。
 
 ```jsx
 const dataSource = [{
@@ -84,6 +66,7 @@ const columns = [{
 #### onRow 用法
 
 适用于 `onRow` `onHeaderRow` `onCell` `onHeaderCell`。
+遵循Vue [jsx语法](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
 
 ```jsx
 <Table
@@ -108,33 +91,33 @@ const columns = [{
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| className | 列的 className | string | - |
 | colSpan | 表头列合并,设置为 0 时，不渲染 | number |  |
 | dataIndex | 列数据在数据项中对应的 key，支持 `a.b.c` 的嵌套写法 | string | - |
-| filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | ReactNode | - |
+| filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode\|slot | - |
 | filterDropdownVisible | 用于控制自定义筛选菜单是否可见 | boolean | - |
 | filtered | 标识数据是否经过过滤，筛选图标会高亮 | boolean | false |
 | filteredValue | 筛选的受控属性，外界可用此控制列的筛选状态，值为已筛选的 value 数组 | string\[] | - |
-| filterIcon | 自定义 fiter 图标。 | ReactNode | false |
+| filterIcon | 自定义 fiter 图标。 | VNode\|slot | false |
 | filterMultiple | 是否多选 | boolean | true |
 | filters | 表头的筛选菜单项 | object\[] | - |
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |
 | key | React 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |
-| render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格[行/列合并](#components-table-demo-colspan-rowspan) | Function(text, record, index) {} | - |
+| customRender | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并,可参考demo 表格行/列合并 | Function(text, record, index) {} | - |
 | sorter | 排序函数，本地排序使用一个函数(参考 [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 的 compareFunction)，需要服务端排序可设为 true | Function\|boolean | - |
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `'ascend'` `'descend'` `false` | boolean\|string | - |
-| title | 列头显示文字 | string\|ReactNode | - |
+| title | 列头显示文字 | string\|slot | - |
 | width | 列宽度 | string\|number | - |
 | onCell | 设置单元格属性 | Function(record) | - |
-| onFilter | 本地模式下，确定筛选的运行函数 | Function | - |
-| onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用 | function(visible) {} | - |
-| onHeaderCell | 设置头部单元格属性 | Function(column) | - |
+| customHeaderCell | 设置头部单元格属性 | Function(column) | - |
+| onFilter | 本地模式下，确定筛选的运行函数, 使用template或jsx时作为`filter`事件使用 | Function | - |
+| onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用template或jsx时作为`filter`事件使用 | function(visible) {} | - |
+
 
 ### ColumnGroup
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| title | 列头显示文字 | string\|ReactNode | - |
+| title | 列头显示文字 | string\|slot | - |
 
 ### rowSelection
 
@@ -146,7 +129,7 @@ const columns = [{
 | getCheckboxProps | 选择框的默认属性配置 | Function(record) | - |
 | hideDefaultSelections | 去掉『全选』『反选』两个默认选项 | boolean | false |
 | selectedRowKeys | 指定选中项的 key 数组，需要和 onChange 进行配合 | string\[] | \[] |
-| selections | 自定义选择项 [配置项](#selection), 设为 `true` 时使用默认选择项 | object\[]\|boolean | true |
+| selections | 自定义选择项, 设为 `true` 时使用默认选择项 | object\[]\|boolean | true |
 | type | 多选/单选，`checkbox` or `radio` | string | `checkbox` |
 | onChange | 选中项发生变化的时的回调 | Function(selectedRowKeys, selectedRows) | - |
 | onSelect | 用户手动选择/取消选择某列的回调 | Function(record, selected, selectedRows) | - |
@@ -157,50 +140,16 @@ const columns = [{
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| key | React 需要的 key，建议设置 | string | - |
-| text | 选择项显示的文字 | string\|React.ReactNode | - |
+| key | Vue 需要的 key，建议设置 | string | - |
+| text | 选择项显示的文字 | string\|VNode | - |
 | onSelect | 选择项点击回调 | Function(changeableRowKeys) | - |
 
-## 在 TypeScript 中使用
-
-```jsx
-import { Table } from 'antd';
-import { ColumnProps } from 'antd/lib/table';
-
-interface IUser {
-  key: number;
-  name: string;
-}
-
-const columns: ColumnProps<IUser>[] = [{
-  key: 'name',
-  title: 'Name',
-  dataIndex: 'name',
-}];
-
-const data: IUser[] = [{
-  key: 0,
-  name: 'Jack',
-}];
-
-class UserTable extends Table<IUser> {}
-<UserTable columns={columns} dataSource={data} />
-
-// 使用 JSX 风格的 API
-class NameColumn extends Table.Column<IUser> {}
-
-<UserTable dataSource={data}>
-  <NameColumn key="name" title="Name" dataIndex="name" />
-</UserTable>
-```
 
 ## 注意
 
-按照 [React 的规范](https://facebook.github.io/react/docs/lists-and-keys.html#keys)，所有的组件数组必须绑定 key。在 Table 中，`dataSource` 和 `columns` 里的数据值都需要指定 `key` 值。对于 `dataSource` 默认将每列数据的 `key` 属性作为唯一的标识。
+在 Table 中，`dataSource` 和 `columns` 里的数据值都需要指定 `key` 值。对于 `dataSource` 默认将每列数据的 `key` 属性作为唯一的标识。
 
-如果你的数据没有这个属性，务必使用 `rowKey` 来指定数据列的主键。若没有指定，控制台会出现以下的提示，表格组件也会出现各类奇怪的错误。
-
-![](https://os.alipayobjects.com/rmsportal/luLdLvhPOiRpyss.png)
+如果你的数据没有这个属性，务必使用 `rowKey` 来指定数据列的主键。若没有指定，控制台会出现缺少key的提示，表格组件也会出现各类奇怪的错误。
 
 ```jsx
 // 比如你的数据主键是 uid

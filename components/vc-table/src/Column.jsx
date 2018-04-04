@@ -18,7 +18,7 @@ export default {
     customRender: PropTypes.func,
     className: PropTypes.string,
     // onCellClick: PropTypes.func,
-    // onCell: PropTypes.func,
+    customCell: PropTypes.func,
     customHeaderCell: PropTypes.func,
   },
 }

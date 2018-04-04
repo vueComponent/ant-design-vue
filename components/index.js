@@ -146,3 +146,5 @@ export { default as Progress } from './progress'
 import Timeline from './timeline'
 const TimelineItem = Timeline.Item
 export { Timeline, TimelineItem }
+
+export { default as InputNumber } from './input-number'

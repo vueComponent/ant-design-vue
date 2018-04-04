@@ -14,33 +14,6 @@ const onRowDoubleClick = (record, index, e) => {
   console.log(`Double click nth(${index}) row of parent, record.name: ${record.name}`, e)
 }
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-  width: 400,
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-  key: 'age',
-  width: 100,
-  render: (h, text) => (
-    <span>{text} (Trigger Cell Click)</span>
-  ),
-  onCell: (record) => ({
-    on: {
-      click (e) {
-        console.log('Click cell', record, e.target)
-      },
-    },
-  }),
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-  width: 200,
-}]
-
 const data = [{
   key: 1,
   name: 'a',
@@ -94,6 +67,32 @@ const data = [{
 
 export default {
   render () {
+    const columns = [{
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: 400,
+    }, {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      width: 100,
+      customRender: (text) => (
+        <span>{text} (Trigger Cell Click)</span>
+      ),
+      customCell: (record) => ({
+        on: {
+          click (e) {
+            console.log('Click cell', record, e.target)
+          },
+        },
+      }),
+    }, {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+      width: 200,
+    }]
     return (
       <Table
         columns={columns}

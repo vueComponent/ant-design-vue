@@ -74,9 +74,9 @@ export default {
       }
     }
 
-    if (column.onCell) {
-      tdProps = mergeProps(tdProps, column.onCell(record))
-      //      tdProps.attrs = { ...tdProps.attrs, ...column.onCell(record) }
+    if (column.customCell) {
+      tdProps = mergeProps(tdProps, column.customCell(record))
+      //      tdProps.attrs = { ...tdProps.attrs, ...column.customCell(record) }
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202

@@ -193,6 +193,7 @@ export default {
           onSelect={this.setSelectedKeys}
           onDeselect={this.setSelectedKeys}
           selectedKeys={this.sSelectedKeys}
+          getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {this.renderMenus(column.filters)}
         </Menu>

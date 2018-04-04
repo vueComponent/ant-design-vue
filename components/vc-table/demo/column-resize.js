@@ -60,8 +60,12 @@ export default {
     const columns = this.columns.map((col, index) => ({
       ...col,
       customHeaderCell: (column) => ({
-        width: column.width,
-        onResize: this.handleResize(index),
+        props: {
+          width: column.width,
+        },
+        on: {
+          resize: this.handleResize(index),
+        },
       }),
     }))
 

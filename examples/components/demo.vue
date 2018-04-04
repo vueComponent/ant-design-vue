@@ -3,6 +3,7 @@ import * as AllDemo from '../demo'
 import Header from './header'
 import zhCN from 'antd/locale-provider/zh_CN'
 import enUS from 'antd/locale-provider/default'
+import _ from 'lodash'
 export default {
   render () {
     const { name } = this.$route.params
@@ -28,7 +29,7 @@ export default {
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
-      menus.forEach(({ title, subtitle }) => {
+      _.sortBy(menus, ['title']).forEach(({ title, subtitle }) => {
         const linkValue = lang === 'cn'
           ? [<span>{title}</span>, <span class='chinese'>{subtitle}</span>]
           : [<span>{title}</span>]

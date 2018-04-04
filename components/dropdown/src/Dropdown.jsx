@@ -70,14 +70,16 @@ export default {
     getMenuElement () {
       const { onClick, prefixCls, $slots } = this
       this.childOriginEvents = getEvents($slots.overlay[0])
-      return cloneElement($slots.overlay[0], {
+      const extraOverlayProps = {
         props: {
           prefixCls: `${prefixCls}-menu`,
+          getPopupContainer: () => this.getPopupDomNode(),
         },
         on: {
           click: onClick,
         },
-      })
+      }
+      return cloneElement($slots.overlay[0], extraOverlayProps)
     },
 
     getPopupDomNode () {

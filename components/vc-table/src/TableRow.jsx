@@ -204,7 +204,7 @@ const TableRow = {
 
       warningOnce(
         column.onCellClick === undefined,
-        'column[onCellClick] is deprecated, please use column[onCell] instead.',
+        'column[onCellClick] is deprecated, please use column[customCell] instead.',
       )
 
       cells.push(

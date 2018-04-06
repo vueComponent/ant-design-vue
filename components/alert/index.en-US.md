@@ -3,6 +3,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| afterClose | Called when close animation is finished | () => void | - |
 | banner | Whether to show as banner | boolean | false |
 | closable | Whether Alert can be closed | boolean | - |
 | closeText | Close text to show | string\|slot | - |
@@ -15,4 +16,5 @@
 ### events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| close | Callback when Alert is closed | Function |
+| close | Callback when Alert is closed | (e: MouseEvent) => void |
+

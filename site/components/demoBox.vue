@@ -48,6 +48,11 @@ export default {
     sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
     const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || ''
     const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || ''
+    if (process.env.NODE_ENV !== 'production' && usTitle === '') {
+      throw new Error(
+        `not have usTitle`,
+      )
+    }
     const id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
     if (this._store.store) {
       const { currentSubMenu } = this._store.store.getState()

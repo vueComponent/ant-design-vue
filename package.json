@@ -24,7 +24,8 @@
   "scripts": {
     "start": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --open --hot",
     "test": "karma start test/karma.conf.js --single-run",
-    "build": "sh build.sh",
+    "site": "node scripts/run.js site-dist",
+    "copy": "node scripts/run.js copy-html",
     "compile": "node antd-tools/cli/run.js compile",
     "dist": "node antd-tools/cli/run.js dist",
     "lint": "eslint -c ./.eslintrc --fix --ext .jsx ./components",
@@ -100,6 +101,7 @@
     "markdown-it": "^8.4.0",
     "marked": "^0.3.7",
     "merge2": "^1.2.1",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "postcss": "^6.0.20",
     "postcss-loader": "^2.1.2",

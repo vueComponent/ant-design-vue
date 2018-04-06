@@ -27,7 +27,7 @@ Object.keys(Components).forEach(k => {
 })
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   routes,
 })
 new Vue({

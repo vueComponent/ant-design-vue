@@ -1,10 +1,10 @@
 <template>
-  <section :class="['code-box', isOpen ? 'expand': '']">
+  <section :class="['code-box', isOpen ? 'expand': '']" :id="id">
     <section class="code-box-demo">
       <slot name="component"></slot>
     </section>
     <section class="code-box-meta markdown">
-      <slot v-if="lang === 'cn'" name="description"></slot>
+      <slot v-if="isZhCN" name="description"></slot>
       <slot v-else name="us-description"></slot>
       <span class="btn-toggle" :class="{open: isOpen}" @click="toggle"><i class="anticon anticon-down-circle-o"></i></span>
     </section>
@@ -30,24 +30,36 @@
 <script>
 import animate from 'antd/_util/openAnimation'
 import BaseMixin from 'antd/_util/BaseMixin'
+import { isZhCN } from '../util'
 export default {
   mixins: [BaseMixin],
   name: 'demoBox',
   props: {
     jsfiddle: Object,
   },
+  inject: {
+    _store: { default: {}},
+  },
   data () {
-    const { lang } = this.$route.params
-    const { html, script, style } = this.jsfiddle
+    const { name = '' } = this.$route.params
+    const { html, script, style, us, cn } = this.jsfiddle
     let sourceCode = `<template>${html}</template>\n`
     sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode
     sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
+    const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || ''
+    const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || ''
+    const id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
+    if (this._store.store) {
+      const { currentSubMenu } = this._store.store.getState()
+      this._store.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
+    }
     return {
       isOpen: false,
-      lang,
+      isZhCN: isZhCN(name),
       copied: false,
       copyTooltipVisible: false,
       sourceCode,
+      id,
     }
   },
   methods: {
@@ -76,7 +88,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.box-demo{
+.box-demo {
   padding: 0;
   border: 1px solid #e9e9e9;
   border-radius: 4px;
@@ -84,11 +96,11 @@ export default {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.box-demo-show{
+.box-demo-show {
   padding: 20px 25px 30px;
   border-bottom: 1px solid #e9e9e9;
 }
-.box-demo-description{
+.box-demo-description {
   position: relative;
   padding: 17px 16px 15px 20px;
   border-radius: 0 0 6px 6px;
@@ -96,10 +108,10 @@ export default {
   transition: background-color 0.4s ease;
   width: 100%;
   font-size: 12px;
-  &.bordered{
+  &.bordered {
     border-bottom: 1px dashed #e9e9e9;
   }
-  h3, h4{
+  h3, h4 {
     position: absolute;
     top: -14px;
     padding: 1px 8px;
@@ -112,15 +124,15 @@ export default {
     background: #fff;
     -webkit-transition: background-color 0.4s ease;
     transition: background-color 0.4s ease;
-    .header-anchor{
+    .header-anchor {
       display: none;
     }
   }
-  li{
+  li {
     line-height: 21px;
   }
 }
-.box-demo-code{
+.box-demo-code {
   -webkit-transition: height .2s ease-in-out;
   transition: height .2s ease-in-out;
   overflow: auto;
@@ -128,7 +140,7 @@ export default {
   pre {
     margin: 0;
   }
-  code{
+  code {
     margin: 0;
     background: #f7f7f7;
     padding: .2em .4em;
@@ -137,7 +149,7 @@ export default {
     border: 1px solid #eee;
   }
 }
-.btn-toggle{
+.btn-toggle {
   position: absolute;
   right: 16px;
   bottom: 17px;
@@ -147,12 +159,12 @@ export default {
   font-size: 18px;
   line-height: 18px;
   color: #999;
-  i{
+  i {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
   }
-  &.open{
-    i{
+  &.open {
+    i {
       -webkit-transform: rotate(-180deg);
       -ms-transform: rotate(-180deg);
       transform: rotate(-180deg);

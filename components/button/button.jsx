@@ -18,7 +18,14 @@ export default {
       },
       clicked: false,
       sLoading: !!this.loading,
+      hasTwoCNChar: false,
     }
+  },
+  mounted () {
+    this.fixTwoCNChar()
+  },
+  updated () {
+    this.fixTwoCNChar()
   },
   watch: {
     loading (val) {
@@ -32,7 +39,8 @@ export default {
   },
   computed: {
     classes () {
-      const { prefixCls, type, shape, size, sLoading, ghost, clicked, sizeMap } = this
+      const { prefixCls, type, shape, size, hasTwoCNChar,
+        sLoading, ghost, clicked, sizeMap } = this
       const sizeCls = sizeMap[size] || ''
       return {
         [`${prefixCls}`]: true,
@@ -42,6 +50,7 @@ export default {
         [`${prefixCls}-loading`]: sLoading,
         [`${prefixCls}-clicked`]: clicked,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
+        [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar,
       }
     },
     iconType () {
@@ -50,6 +59,18 @@ export default {
     },
   },
   methods: {
+    fixTwoCNChar () {
+      // Fix for HOC usage like <FormatMessage />
+      const node = this.$el
+      const buttonText = node.textContent || node.innerText
+      if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
+        if (!this.hasTwoCNChar) {
+          this.hasTwoCNChar = true
+        }
+      } else if (this.hasTwoCNChar) {
+        this.hasTwoCNChar = false
+      }
+    },
     handleClick (event) {
       this.clicked = true
       clearTimeout(this.timeout)
@@ -67,9 +88,16 @@ export default {
       }
       return child
     },
+    isNeedInserted () {
+      const { loading, icon, $slots } = this
+      const iconType = loading ? 'loading' : icon
+      return $slots.default && $slots.default.length === 1 && (!iconType || iconType === 'loading')
+    },
   },
   render () {
-    const { htmlType, classes, disabled, handleClick, iconType, $slots, $attrs, $listeners } = this
+    const { htmlType, classes,
+      disabled, handleClick, iconType,
+      $slots, $attrs, $listeners } = this
     const buttonProps = {
       props: {
       },
@@ -84,8 +112,7 @@ export default {
         click: handleClick,
       },
     }
-    const needInserted = $slots.default && $slots.default.length === 1 && (!iconType || iconType === 'loading')
-    const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], needInserted) : $slots.default
+    const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], this.isNeedInserted()) : $slots.default
     return (
       <button {...buttonProps}>
         {iconType ? <Icon type={iconType}></Icon> : null}

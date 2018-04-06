@@ -12,7 +12,7 @@
 <template>
 <div>
   <div>
-    <Card
+    <a-card
       style="width:100%"
       title="Card title"
       :tabList="tabList"
@@ -20,21 +20,22 @@
     >
       <a href="#" slot="extra">More</a>
       {{contentList[key]}}
-    </Card>
+    </a-card>
     <br /><br />
-    <Card
+    <a-card
       style="width:100%"
       :tabList="tabListNoTitle"
+      :activeTabKey="noTitleKey"
       @tabChange="key => onTabChange(key, 'noTitleKey')"
     >
-      <div v-html="contentListNoTitle[noTitleKey]"></div>
-    </Card>
+      <p v-if="noTitleKey === 'article'">article content</p>
+      <p v-else="noTitleKey === 'app'">app content</p>
+      <p v-else="noTitleKey === 'project'">project content</p>
+    </a-card>
   </div>
 </template>
 
 <script>
-import '../style'
-import { Card } from 'antd'
 export default {
   data () {
     return {
@@ -59,13 +60,8 @@ export default {
         key: 'project',
         tab: 'project',
       }],
-      contentListNoTitle: {
-        article: '<p>article content</p>',
-        app: '<p>app content</p>',
-        project: '<p>project content</p>',
-      },
       key: 'tab1',
-      noTitleKey: 'article',
+      noTitleKey: 'app',
     }
   },
   methods: {
@@ -73,9 +69,6 @@ export default {
       console.log(key, type)
       this[type] = key
     },
-  },
-  components: {
-    Card,
   },
 }
 </script>

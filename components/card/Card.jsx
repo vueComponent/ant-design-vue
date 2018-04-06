@@ -21,6 +21,8 @@ export default {
     type: PropTypes.string,
     actions: PropTypes.any,
     tabList: PropTypes.array,
+    activeTabKey: PropTypes.string,
+    defaultActiveTabKey: PropTypes.string,
   },
   data () {
     this.updateWiderPaddingCalled = false
@@ -80,7 +82,7 @@ export default {
   render () {
     const {
       prefixCls = 'ant-card', extra, bodyStyle, title, loading,
-      bordered = true, type, tabList, hoverable,
+      bordered = true, type, tabList, hoverable, activeTabKey, defaultActiveTabKey,
     } = this.$props
 
     const { $slots } = this
@@ -120,9 +122,23 @@ export default {
       </div>
     )
 
+    const hasActiveTabKey = activeTabKey !== undefined
+    const tabsProps = {
+      props: {
+        size: 'large',
+        [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
+          ? activeTabKey
+          : defaultActiveTabKey,
+      },
+      on: {
+        change: this.onHandleTabChange,
+      },
+      class: `${prefixCls}-head-tabs`,
+    }
+
     let head
     const tabs = tabList && tabList.length ? (
-      <Tabs class={`${prefixCls}-head-tabs`} size='large' onChange={this.onHandleTabChange}>
+      <Tabs {...tabsProps}>
         {tabList.map(item => <TabPane tab={item.tab} key={item.key} />)}
       </Tabs>
     ) : null

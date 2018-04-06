@@ -29,6 +29,7 @@
 | mode | 初始模式，`month/year` | string | month |
 | monthCellRender | 作用域插槽，自定义渲染月单元格，返回内容会被追加到单元格 | function(date: moment) | 无 |
 | monthFullCellRender | 作用域插槽，自定义渲染月单元格，返回内容覆盖单元格 | function(date: moment) | 无 |
+| validRange | 设置可以显示的日期 | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | 无 |
 | value(v-model) | 展示日期 | [moment](http://momentjs.com/) | 当前日期 |
 
 ### 事件

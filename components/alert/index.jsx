@@ -5,7 +5,7 @@ import BaseMixin from '../_util/BaseMixin'
 import PropTypes from '../_util/vue-types'
 import getTransitionProps from '../_util/getTransitionProps'
 import { getComponentFromProp } from '../_util/props-util'
-
+function noop () { }
 export const AlertProps = {
   /**
    * Type of Alert styles, options:`success`, `info`, `warning`, `error`
@@ -21,6 +21,8 @@ export const AlertProps = {
   description: PropTypes.any,
   /** Callback when close Alert */
   // onClose?: React.MouseEventHandler<HTMLAnchorElement>;
+  /** Trigger when animation ending of Alert */
+  afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
   showIcon: PropTypes.bool,
   iconType: PropTypes.string,
@@ -57,6 +59,7 @@ export default {
         closed: true,
         closing: true,
       })
+      this.afterClose()
     },
   },
 

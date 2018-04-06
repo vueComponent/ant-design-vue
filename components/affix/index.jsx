@@ -128,6 +128,20 @@ export default {
       }
       this.setState({ placeholderStyle: placeholderStyle })
     },
+    syncPlaceholderStyle (e) {
+      const { affixStyle } = this
+      if (!affixStyle) {
+        return
+      }
+      this.$refs.placeholderNode.style.cssText = ''
+      this.setAffixStyle(e, {
+        ...affixStyle,
+        width: this.$refs.placeholderNode.offsetWidth + 'px',
+      })
+      this.setPlaceholderStyle({
+        width: this.$refs.placeholderNode.offsetWidth + 'px',
+      })
+    },
 
     updatePosition (e) {
       let { offsetTop } = this
@@ -200,6 +214,9 @@ export default {
         }
         this.setPlaceholderStyle(null)
       }
+      if (e.type === 'resize') {
+        this.syncPlaceholderStyle(e)
+      }
     },
     setTargetEventListeners (getTarget) {
       const target = getTarget()
@@ -233,7 +250,7 @@ export default {
       attrs: omit($props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']),
     }
     return (
-      <div {...props} style={placeholderStyle}>
+      <div {...props} style={placeholderStyle} ref='placeholderNode'>
         <div class={className} ref='fixedNode' style={affixStyle}>
           {$slots.default}
         </div>

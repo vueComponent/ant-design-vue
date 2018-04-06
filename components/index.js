@@ -84,7 +84,10 @@ const MenuDivider = Menu.Divider
 const MenuItemGroup = Menu.ItemGroup
 export { Menu, MenuItem, SubMenu, MenuDivider, MenuItemGroup }
 
-export { default as Card } from './card'
+import Card from './card'
+const CardMeta = Card.Meta
+const CardGrid = Card.Grid
+export { Card, CardMeta, CardGrid }
 
 import Dropdown from './dropdown'
 const DropdownButton = Dropdown.Button

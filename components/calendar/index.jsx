@@ -7,7 +7,7 @@ import FullCalendar from '../vc-calendar/src/FullCalendar'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { PREFIX_CLS } from './Constants'
 import Header from './Header'
-import callMoment from '../_util/callMoment'
+import interopDefault from '../_util/interopDefault'
 import enUS from './locale/en_US'
 
 export { HeaderProps } from './Header'
@@ -26,6 +26,9 @@ export const MomentType = {
     return moment.isMoment(value)
   },
 }
+function isMomentArray (value) {
+  return Array.isArray(value) && !!value.find((val) => moment.isMoment(val))
+}
 export const CalendarMode = PropTypes.oneOf(['month', 'year'])
 
 export const CalendarProps = () => ({
@@ -42,6 +45,7 @@ export const CalendarProps = () => ({
   // onPanelChange?: (date?: moment.Moment, mode?: CalendarMode) => void;
   // onSelect?: (date?: moment.Moment) => void;
   disabledDate: PropTypes.func,
+  validRange: PropTypes.custom(isMomentArray),
 })
 
 export default {
@@ -57,8 +61,8 @@ export default {
     event: 'change',
   },
   data () {
-    const value = this.value || this.defaultValue || callMoment(moment)
-    if (!moment.isMoment(value)) {
+    const value = this.value || this.defaultValue || interopDefault(moment)()
+    if (!interopDefault(moment).isMoment(value)) {
       throw new Error(
         'The value/defaultValue of Calendar must be a moment object, ',
       )
@@ -149,6 +153,22 @@ export default {
     onSelect  (value) {
       this.setValue(value, 'select')
     },
+    getDateRange (
+      validRange,
+      disabledDate,
+    ) {
+      return (current) => {
+        if (!current) {
+          return false
+        }
+        const [startDate, endDate] = validRange
+        const inRange = !current.isBetween(startDate, endDate, 'days', '[]')
+        if (disabledDate) {
+          return (disabledDate(current) || inRange)
+        }
+        return inRange
+      }
+    },
 
     renderCalendar  (locale, localeCode) {
       const props = getOptionProps(this)
@@ -166,6 +186,12 @@ export default {
 
       const monthCellRender = monthFullCellRender || $scopedSlots.monthFullCellRender || this.monthCellRender2
       const dateCellRender = dateFullCellRender || $scopedSlots.dateFullCellRender || this.dateCellRender2
+
+      let disabledDate = props.disabledDate
+
+      if (props.validRange) {
+        disabledDate = this.getDateRange(props.validRange, disabledDate)
+      }
       const fullCalendarProps = {
         props: {
           ...props,
@@ -177,6 +203,7 @@ export default {
           value: value,
           monthCellRender: monthCellRender,
           dateCellRender: dateCellRender,
+          disabledDate,
         },
         on: {
           ...$listeners,
@@ -193,6 +220,7 @@ export default {
             prefixCls={prefixCls}
             onTypeChange={this.onHeaderTypeChange}
             onValueChange={this.onHeaderValueChange}
+            validRange={props.validRange}
           />
           <FullCalendar {...fullCalendarProps}/>
         </div>

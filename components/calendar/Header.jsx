@@ -16,6 +16,7 @@ export const HeaderProps = {
   // onValueChange: PropTypes.(value: moment.Moment) => void,
   // onTypeChange: PropTypes.(type: string) => void,
   value: PropTypes.any,
+  validRange: PropTypes.array,
 }
 
 export default {
@@ -28,9 +29,20 @@ export default {
   // private calenderHeaderNode: HTMLDivElement;
   methods: {
     getYearSelectElement (year) {
-      const { yearSelectOffset, yearSelectTotal, locale, prefixCls, fullscreen } = this
-      const start = year - yearSelectOffset
-      const end = start + yearSelectTotal
+      const {
+        yearSelectOffset,
+        yearSelectTotal,
+        locale,
+        prefixCls,
+        fullscreen,
+        validRange,
+      } = this
+      let start = year - yearSelectOffset
+      let end = start + yearSelectTotal
+      if (validRange) {
+        start = validRange[0].get('year')
+        end = validRange[1].get('year') + 1
+      }
       const suffix = locale.year === '年' ? '年' : ''
 
       const options = []
@@ -63,10 +75,20 @@ export default {
     },
 
     getMonthSelectElement (month, months) {
-      const { prefixCls, fullscreen } = this
+      const { prefixCls, fullscreen, validRange, value } = this
       const options = []
-
-      for (let index = 0; index < 12; index++) {
+      let start = 0
+      let end = 12
+      if (validRange) {
+        const [rangeStart, rangeEnd] = validRange
+        const currentYear = value.get('year')
+        if (rangeEnd.get('year') === currentYear) {
+          end = rangeEnd.get('month') + 1
+        } else {
+          start = rangeStart.get('month')
+        }
+      }
+      for (let index = start; index < end; index++) {
         options.push(<Option key={`${index}`}>{months[index]}</Option>)
       }
 
@@ -85,8 +107,21 @@ export default {
     },
 
     onYearChange  (year) {
-      const newValue = this.value.clone()
+      const { value, validRange } = this
+      const newValue = value.clone()
       newValue.year(parseInt(year, 10))
+      // switch the month so that it remains within range when year changes
+      if (validRange) {
+        const [start, end] = validRange
+        const newYear = newValue.get('year')
+        const newMonth = newValue.get('month')
+        if (newYear === end.get('year') && newMonth > end.get('month')) {
+          newValue.month(end.get('month'))
+        }
+        if (newYear === start.get('year') && newMonth < start.get('month')) {
+          newValue.month(start.get('month'))
+        }
+      }
       this.$emit('valueChange', newValue)
     },
 

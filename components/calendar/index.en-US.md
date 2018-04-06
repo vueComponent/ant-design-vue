@@ -31,6 +31,7 @@ customize the progress dot by setting a scoped slot
 | mode | The display mode of the calendar | `month` \| `year` | `month` |
 | monthCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will be appended to the cell | function(date: moment) | - |
 | monthFullCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will override the cell | function(date: moment) | - |
+| validRange | to set valid range | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 | value(v-model) | The current selected date | [moment](http://momentjs.com/) | current date |
 
 ### events

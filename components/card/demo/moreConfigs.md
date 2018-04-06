@@ -10,7 +10,7 @@
 
 ```html
 <template>
-<Card
+<a-card
   hoverable
   style="width: 300px"
 >
@@ -20,28 +20,15 @@
     slot="cover"
   />
   <ul class="ant-card-actions" slot="actions">
-    <li style="width: 33.3333%;"><Icon type="setting" /></li>
-    <li style="width: 33.3333%;"><Icon type="edit" /></li>
-    <li style="width: 33.3333%;"> <Icon type="ellipsis" /></li>
+    <li style="width: 33.3333%;"><a-icon type="setting" /></li>
+    <li style="width: 33.3333%;"><a-icon type="edit" /></li>
+    <li style="width: 33.3333%;"> <a-icon type="ellipsis" /></li>
   </ul>
-  <Meta
+  <a-card-meta
     title="Card title"
     description="This is the description">
-    <Avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-  </Meta>
-</Card>
+    <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+  </a-card-meta>
+</a-card>
 </template>
-
-<script>
-import '../style'
-import { Card, Icon, Avatar } from 'antd'
-export default {
-  components: {
-    Card,
-    Icon,
-    Avatar,
-    Meta: Card.Meta,
-  },
-}
-</script>
 ```

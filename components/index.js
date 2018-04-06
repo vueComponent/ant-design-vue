@@ -148,3 +148,5 @@ const TimelineItem = Timeline.Item
 export { Timeline, TimelineItem }
 
 export { default as InputNumber } from './input-number'
+
+export { default as Transfer } from './transfer'

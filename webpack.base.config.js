@@ -83,6 +83,8 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
       html: template,
       script,
       style,
+      us,
+      cn,
     }
     jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle))
     const codeHtml = code ? md.render(code) : ''
@@ -120,7 +122,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
 module.exports = {
   entry: {
     index: [
-      './examples/index.js',
+      './site/index.js',
     ],
   },
   module: {

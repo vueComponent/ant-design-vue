@@ -4,10 +4,66 @@ import Header from './header'
 import zhCN from 'antd/locale-provider/zh_CN'
 import enUS from 'antd/locale-provider/default'
 import _ from 'lodash'
+import { isZhCN } from '../util'
+import { Provider, create } from '../../components/_util/store'
+
 export default {
+  data () {
+    this.store = create({
+      currentSubMenu: [],
+    })
+    this.subscribe()
+    return {
+      currentSubMenu: [],
+    }
+  },
+  beforeDestroy () {
+    if (this.unsubscribe) {
+      this.unsubscribe()
+    }
+  },
+  watch: {
+    '$route.params.name': function () {
+      this.store.setState({ currentSubMenu: [] })
+    },
+  },
+  methods: {
+    subscribe () {
+      const { store } = this
+      this.unsubscribe = store.subscribe(() => {
+        this.currentSubMenu = this.store.getState().currentSubMenu
+      })
+    },
+    getSubMenu (isCN) {
+      const currentSubMenu = this.currentSubMenu
+      const lis = []
+      currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
+        const title = isCN ? cnTitle : usTitle
+        const className = window.location.hash === `#${id}` ? 'current' : ''
+        lis.push(<li title={title} key={id}><a href={`#${id}`} class={className}>{title}</a></li>)
+      })
+      return (
+        <a-affix>
+          <ul id='demo-toc' class='toc'>
+            {lis}
+            <li title='API' key='API'>
+              <a
+                href='#component-api'
+                class={{
+                  current: window.location.hash === '#component-api',
+                }}
+              >API</a>
+            </li>
+          </ul>
+        </a-affix>
+      )
+    },
+  },
   render () {
     const { name } = this.$route.params
-    let { lang } = this.$route.params
+    const isCN = isZhCN(name)
+    const lang = isCN ? 'cn' : 'us'
+    // name = name.replace('-cn', '')
     const titleMap = {}
     const menuConfig = {
       General: [],
@@ -25,7 +81,7 @@ export default {
       menuConfig[type] = menuConfig[type] || []
       menuConfig[type].push(d)
     }
-    const Demo = AllDemo[titleMap[name]]
+    const Demo = AllDemo[titleMap[name.replace('-cn', '')]]
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
@@ -33,21 +89,24 @@ export default {
         const linkValue = lang === 'cn'
           ? [<span>{title}</span>, <span class='chinese'>{subtitle}</span>]
           : [<span>{title}</span>]
-        const key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
+        let key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
+        if (lang === 'cn') {
+          key = `${key}-cn`
+        }
         MenuItems.push(<a-menu-item key={key}>
-          <router-link to={{ path: `/${lang}/components/${key}` }}>{linkValue}</router-link>
+          <router-link to={{ path: `/ant-design/components/${key}/` }}>{linkValue}</router-link>
         </a-menu-item>)
       })
       MenuGroup.push(<a-menu-item-group title={type}>{MenuItems}</a-menu-item-group>)
     }
     let locale = zhCN
     if (lang !== 'cn') {
-      lang = 'us'
       locale = enUS
     }
     return (
       <div class='page-wrapper'>
         <Header num={Object.keys(AllDemo).length}/>
+
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
@@ -65,7 +124,10 @@ export default {
               </a-col>
               <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
                 <div class='content main-container'>
-                  {Demo ? <Demo key={lang}/> : '正在紧急开发中...'}
+                  <div class='toc-affix' style='width: 110px;'>
+                    {this.getSubMenu(isCN)}
+                  </div>
+                  {Demo ? <Provider store={this.store}><Demo key={lang}/></Provider> : '正在紧急开发中...'}
                 </div>
               </a-col>
             </a-row>

@@ -7,7 +7,7 @@ const baseWebpackConfig = require('./webpack.base.config')
 module.exports = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/',
+    publicPath: '/ant-design/',
     filename: 'build.js',
   },
   module: {
@@ -39,7 +39,7 @@ module.exports = merge(baseWebpackConfig, {
     host: '0.0.0.0',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: '/index.html' },
+        { from: /./, to: '/ant-design/index.html' },
       ],
     },
     disableHostCheck: true,
@@ -51,7 +51,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'examples/index.html',
+      template: 'site/index.html',
       filename: 'index.html',
       inject: true,
     }),

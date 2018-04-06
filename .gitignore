@@ -61,6 +61,7 @@ typings/
 dist
 lib
 es
+site-dist
 
 # 备份文件
 /components/test/*

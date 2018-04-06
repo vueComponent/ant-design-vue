@@ -1,5 +1,5 @@
 <script>
-import IconSet from '@/examples/components/IconSet/index'
+import IconSet from '@/site/components/IconSet/index'
 const md = {
   cn: `# 图标 Icon
         语义化的矢量图形。

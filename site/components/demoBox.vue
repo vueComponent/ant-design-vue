@@ -53,11 +53,12 @@ export default {
         `not have usTitle`,
       )
     }
-    let id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
-
+    const component = this.$slots.component[0]
+    const fileName = (component.context.$vnode.componentOptions.Ctor.extendOptions.__file.split('/demo/')[1] || '').replace('.md', '')
+    const id = ['components', name.replace('-cn', ''), 'demo', fileName].join('-').toLowerCase()
+    console.log(fileName)
     if (this._store.store) {
       const { currentSubMenu } = this._store.store.getState()
-      id = `${id}-${currentSubMenu.length + 1}`
       this._store.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
     }
     return {

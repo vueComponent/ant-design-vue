@@ -1,5 +1,5 @@
 
-// based on rc-tabs 9.2.4
+// based on rc-tabs 9.2.4 e16ee09531476757b18b7bc0ec1daddcc0d40d65
 import Icon from '../../icon'
 import KeyCode from './KeyCode'
 import TabContent from './TabContent'

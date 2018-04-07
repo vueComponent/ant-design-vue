@@ -14,7 +14,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
 <template>
 <div>
   <a-input-group size="large">
-    <a-col :span="4">
+    <a-col :span="5">
       <a-input defaultValue="0571" />
     </a-col>
     <a-col :span="8">

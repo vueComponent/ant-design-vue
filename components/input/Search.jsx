@@ -1,7 +1,12 @@
 
+import classNames from 'classnames'
 import Input from './Input'
 import Icon from '../icon'
 import inputProps from './inputProps'
+import Button from '../button'
+import { cloneElement } from '../_util/vnode'
+import { getOptionProps, getComponentFromProp } from '../_util/props-util'
+import PropsType from '../_util/vue-types'
 
 export default {
   name: 'InputSearch',
@@ -15,6 +20,7 @@ export default {
       default: 'ant-input',
       type: String,
     },
+    enterButton: PropsType.oneOfType([PropsType.bool, PropsType.string, PropsType.object]),
   },
   computed: {
   },
@@ -23,29 +29,76 @@ export default {
       this.$emit('search', this.$refs.input.stateValue)
       this.$refs.input.focus()
     },
+    getButtonOrIcon () {
+      const { prefixCls, size } = this
+      const enterButton = getComponentFromProp(this, 'enterButton')
+      if (!enterButton) {
+        return <Icon class={`${prefixCls}-icon`} type='search' key='searchIcon' />
+      }
+      const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton
+      if (enterButtonAsElement.componentOptions && enterButtonAsElement.componentOptions.Ctor.extendOptions.__ANT_BUTTON) {
+        return cloneElement(enterButtonAsElement, {
+          class: `${prefixCls}-button`,
+          props: { size },
+          on: {
+            click: this.onSearch,
+          },
+        })
+      } else if (enterButtonAsElement.tag === 'button') {
+        return cloneElement(enterButtonAsElement[0], {
+          on: {
+            click: this.onSearch,
+          },
+        })
+      }
+      return (
+        <Button
+          class={`${prefixCls}-button`}
+          type='primary'
+          size={size}
+          onClick={this.onSearch}
+          key='enterButton'
+        >
+          {enterButton === true ? <Icon type='search' /> : enterButton}
+        </Button>
+      )
+    },
   },
   render () {
-    const { inputPrefixCls, prefixCls, ...others } = this.$props
+    const { prefixCls, inputPrefixCls, size,
+      suffix, ...others
+    } = getOptionProps(this)
+    const enterButton = getComponentFromProp(this, 'enterButton')
+    const buttonOrIcon = this.getButtonOrIcon()
+    const searchSuffix = suffix ? [suffix, buttonOrIcon] : buttonOrIcon
+    const inputClassName = classNames(prefixCls, {
+      [`${prefixCls}-enter-button`]: !!enterButton,
+      [`${prefixCls}-${size}`]: !!size,
+    })
     const inputProps = {
       props: {
         ...others,
         prefixCls: inputPrefixCls,
+        size,
+        suffix: searchSuffix,
       },
       attrs: this.$attrs,
+      on: {
+        pressEnter: this.onSearch,
+      },
     }
     return (
       <Input
         {...inputProps}
-        onPressEnter={this.onSearch}
-        class={prefixCls}
+        class={inputClassName}
         ref='input'
       >
-        <Icon
+        {/* <Icon
           slot='suffix'
           class={`${prefixCls}-icon`}
           onClick={this.onSearch}
           type='search'
-        />
+        /> */}
       </Input>
     )
   },

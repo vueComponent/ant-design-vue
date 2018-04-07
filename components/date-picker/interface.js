@@ -17,6 +17,7 @@ export const PickerProps = () => ({
   disabled: PropTypes.bool,
   allowClear: PropTypes.bool,
   popupStyle: PropTypes.object,
+  dropdownClassName: PropTypes.string,
   locale: PropTypes.any,
   localeCode: PropTypes.string,
   size: PropTypes.oneOf(['large', 'small', 'default']),
@@ -81,7 +82,7 @@ export const RangePickerProps = () => ({
   // onPanelChange?: (value?: RangePickerValue, mode?: string | string[]) => void;
 })
 
-export const WeexPickerProps = () => ({
+export const WeekPickerProps = () => ({
   ...PickerProps(), ...SinglePickerProps(),
   placeholder: PropTypes.string,
 })

@@ -42,12 +42,13 @@ export default {
   }),
 
   render () {
+    const props = getOptionProps(this)
     const {
       prefixCls, percent = 0, status, format, trailColor, size, successPercent,
       type, strokeWidth, width, showInfo, gapDegree = 0, gapPosition,
-    } = getOptionProps(this)
-    const progressStatus = parseInt(percent.toString(), 10) >= 100 && !(status)
-      ? 'success' : (status || 'normal')
+    } = props
+    const progressStatus = parseInt((successPercent ? successPercent.toString() : percent.toString()), 10) >= 100 &&
+    !('status' in props) ? 'success' : (status || 'normal')
     let progressInfo
     let progress
     const textFormatter = format || (percentNumber => `${percentNumber}%`)

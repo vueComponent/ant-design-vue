@@ -49,6 +49,7 @@ const modalProps = (defaultProps = {}) => {
     bodyStyle: PropTypes.object,
     maskStyle: PropTypes.object,
     mask: PropTypes.bool,
+    keyboard: PropTypes.bool,
   }
   return initDefaultProps(props, defaultProps)
 }

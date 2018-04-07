@@ -13,7 +13,7 @@ Search and select options directly.
 
 ```html
 <template>
-  <a-cascader :options="options" :showSearch="true" @change="onChange" placeholder="Please select" />
+  <a-cascader :options="options" :showSearch="{filter}" @change="onChange" placeholder="Please select" />
 </template>
 <script>
 export default {
@@ -51,7 +51,10 @@ export default {
   methods: {
     onChange(value, selectedOptions) {
       console.log(value, selectedOptions);
-    }
+    },
+    filter(inputValue, path) {
+      return (path.some(option => (option.label).toLowerCase().indexOf(inputValue.toLowerCase()) > -1));
+    },
   }
 }
 </script>

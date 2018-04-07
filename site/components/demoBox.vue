@@ -53,9 +53,11 @@ export default {
         `not have usTitle`,
       )
     }
-    const id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
+    let id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
+
     if (this._store.store) {
       const { currentSubMenu } = this._store.store.getState()
+      id = `${id}-${currentSubMenu.length + 1}`
       this._store.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
     }
     return {

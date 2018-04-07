@@ -4,7 +4,7 @@ import MonthCalendar from '../vc-calendar/src/MonthCalendar'
 import VcDatePicker from '../vc-calendar/src/Picker'
 import classNames from 'classnames'
 import Icon from '../icon'
-import callMoment from '../_util/callMoment'
+import interopDefault from '../_util/interopDefault'
 import BaseMixin from '../_util/BaseMixin'
 import { hasProp, getOptionProps, initDefaultProps, mergeProps } from '../_util/props-util'
 
@@ -30,7 +30,7 @@ export default function createPicker (TheCalendar, props) {
     mixins: [BaseMixin],
     data () {
       const value = this.value || this.defaultValue
-      if (value && !moment.isMoment(value)) {
+      if (value && !interopDefault(moment).isMoment(value)) {
         throw new Error(
           'The value/defaultValue of DatePicker or MonthPicker must be ' +
           'a moment object',
@@ -127,7 +127,7 @@ export default function createPicker (TheCalendar, props) {
           disabledTime,
           locale: locale.lang,
           timePicker: props.timePicker,
-          defaultValue: props.defaultPickerValue || callMoment(moment),
+          defaultValue: props.defaultPickerValue || interopDefault(moment)(),
           dateInputPlaceholder: placeholder,
           prefixCls,
           dateRender,

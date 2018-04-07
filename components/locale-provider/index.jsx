@@ -1,6 +1,7 @@
 
 import PropTypes from '../_util/vue-types'
 import * as moment from 'moment'
+import interopDefault from '../_util/interopDefault'
 import { changeConfirmLocale } from '../modal/locale'
 
 // export interface Locale {
@@ -19,9 +20,9 @@ import { changeConfirmLocale } from '../modal/locale'
 
 function setMomentLocale (locale) {
   if (locale && locale.locale) {
-    moment.locale(locale.locale)
+    interopDefault(moment).locale(locale.locale)
   } else {
-    moment.locale('en')
+    interopDefault(moment).locale('en')
   }
 }
 

@@ -35,7 +35,8 @@
 | locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design/blob/master/components/date-picker/locale/example.json) |
 | open | 控制弹层是否展开 | boolean | - |
 | placeholder | 输入框提示文字 | string\|RangePicker\[] | - |
-| popupStyle | 格外的弹出日历样式 | object | {} |
+| popupStyle | 额外的弹出日历样式 | object | {} |
+| dropdownClassName | 额外的弹出日历 className | string | - |
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | string | 无 |
 
 ### 共有的事件

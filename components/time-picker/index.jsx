@@ -5,6 +5,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from './locale/en_US'
 import BaseMixin from '../_util/BaseMixin'
 import PropTypes from '../_util/vue-types'
+import interopDefault from '../_util/interopDefault'
 import { initDefaultProps, hasProp, getOptionProps, getComponentFromProp } from '../_util/props-util'
 
 export function generateShowHourMinuteSecond (format) {
@@ -47,6 +48,7 @@ export const TimePickerProps = () => ({
   minuteStep: PropTypes.number,
   secondStep: PropTypes.number,
   allowEmpty: PropTypes.bool,
+  inputReadOnly: PropTypes.bool,
   clearText: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   popupClassName: PropTypes.string,
@@ -77,7 +79,7 @@ export default {
   },
   data () {
     const value = this.value || this.defaultValue
-    if (value && !moment.isMoment(value)) {
+    if (value && !interopDefault(moment).isMoment(value)) {
       throw new Error(
         'The value/defaultValue of TimePicker must be a moment object, ',
       )

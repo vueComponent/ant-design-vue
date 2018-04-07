@@ -1,6 +1,7 @@
 <script>
 import Horizontal from './horizontal'
 import Vertical from './vertical'
+import Orientation from './orientation'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -30,6 +31,7 @@ export default {
         <md cn={md.cn} us={md.us}/>
         <Vertical />
         <Horizontal />
+        <Orientation />
         <api>
           <CN slot='cn' />
           <US/>

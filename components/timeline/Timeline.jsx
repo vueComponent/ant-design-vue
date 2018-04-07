@@ -7,9 +7,9 @@ import Icon from '../icon'
 
 export const TimelineProps = {
   prefixCls: PropTypes.string,
-  className: PropTypes.string,
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
+  pendingDot: PropTypes.string,
 }
 
 export default {
@@ -19,6 +19,7 @@ export default {
   }),
   render () {
     const { prefixCls, ...restProps } = getOptionProps(this)
+    const pendingDot = getComponentFromProp(this, 'pendingDot')
     const pending = getComponentFromProp(this, 'pending')
     const pendingNode = typeof pending === 'boolean' ? null : pending
     const classString = classNames(prefixCls, {
@@ -37,6 +38,9 @@ export default {
       <TimelineItem
         pending={!!pending}
       >
+        <template slot='dot'>
+          {pendingDot || <Icon type='loading' />}
+        </template>
         <Icon slot='dot' type='loading' />
         {pendingNode}
       </TimelineItem>

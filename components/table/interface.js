@@ -20,6 +20,7 @@ export const ColumnProps = {
   customRender: PropTypes.func,
   customCell: PropTypes.func,
   customHeaderCell: PropTypes.func,
+  align: PropTypes.oneOf(['left', 'right', 'center']),
   filters: PropTypes.arrayOf(ColumnFilterItem),
   // onFilter: (value: any, record: T) => PropTypes.bool,
   filterMultiple: PropTypes.bool,
@@ -78,13 +79,20 @@ export const TableRowSelection = {
   selections: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   hideDefaultSelections: PropTypes.bool,
   fixed: PropTypes.bool,
+  columnWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 export const TableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, null]),
-  pagination: PropTypes.oneOfType([PropTypes.shape(PaginationProps).loose, PropTypes.bool]),
+  pagination: PropTypes.oneOfType([
+    PropTypes.shape({
+      ...PaginationProps,
+      position: PropTypes.oneOf(['top', 'bottom', 'both']),
+    }).loose,
+    PropTypes.bool,
+  ]),
   size: PropTypes.oneOf(['default', 'middle', 'small', 'large']),
   dataSource: PropTypes.array,
   components: PropTypes.object,

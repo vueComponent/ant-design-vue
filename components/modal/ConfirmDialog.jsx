@@ -9,7 +9,7 @@ export default {
   functional: true,
   render (h, context) {
     const { props } = context
-    const { onCancel, onOk, close, zIndex, afterClose, visible } = props
+    const { onCancel, onOk, close, zIndex, afterClose, visible, keyboard } = props
     const iconType = props.iconType || 'question-circle'
     const okType = props.okType || 'primary'
     const prefixCls = props.prefixCls || 'ant-confirm'
@@ -50,6 +50,7 @@ export default {
         width={width}
         zIndex={zIndex}
         afterClose={afterClose}
+        keyboard={keyboard}
       >
         <div class={`${prefixCls}-body-wrapper`}>
           <div class={`${prefixCls}-body`}>

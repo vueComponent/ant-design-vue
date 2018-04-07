@@ -25,10 +25,10 @@
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: vNodes}` | boolean | false |
 | maxTagCount | Max tag count to show | number | - |
 | maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - |
-| mode | Set mode of Select | 'multiple' \| 'tags' \| 'combobox' | - |
+| mode | Set mode of Select | 'default' \| 'multiple' \| 'tags' \| 'combobox' | 'default' |
 | notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |
-| optionLabelProp | Which prop value of option will render as content of select. | string | `children` |
+| optionLabelProp | Which prop value of option will render as content of select. | string | `value` for `combobox`, `children` for other modes |
 | placeholder | Placeholder of select | string\|slot | - |
 | showSearch | Whether show search input in single mode. | boolean | false |
 | showArrow | Whether to show the drop-down arrow | boolean |  true |

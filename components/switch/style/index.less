@@ -56,7 +56,7 @@
     font-family: anticon;
     animation: loadingCircle 1s infinite linear;
     text-align: center;
-    background: transprent;
+    background: transparent;
     z-index: 1;
     display: none;
     font-size: 12px;
@@ -107,7 +107,7 @@
     &:before,
     &:after {
       left: 100%;
-      margin-left: -12.5px;
+      margin-left: @switch-sm-checked-margin-left;
     }
 
     .@{switch-prefix-cls}-inner {

@@ -9,14 +9,14 @@ import Search from './search'
 import Item from './item'
 import triggerEvent from '../_util/triggerEvent'
 
-const TransferItem = PropTypes.shape({
-  key: PropTypes.string,
-  title: PropTypes.string,
+function noop () {
+}
+
+const TransferItem = {
+  key: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   description: PropTypes.string,
   disabled: PropTypes.bool,
-}).loose
-
-function noop () {
 }
 
 function isRenderResultPlainObject (result) {
@@ -27,8 +27,7 @@ function isRenderResultPlainObject (result) {
 export const TransferListProps = {
   prefixCls: PropTypes.string,
   titleText: PropTypes.string,
-  dataSource: PropTypes.arrayOf(TransferItem),
-  // dataSource: PropTypes.any,
+  dataSource: PropTypes.arrayOf(PropTypes.shape(TransferItem).loose),
   filter: PropTypes.string,
   filterOption: PropTypes.func,
   checkedKeys: PropTypes.arrayOf(PropTypes.string),

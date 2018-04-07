@@ -1,5 +1,5 @@
 
-import Tabs from './src/Tabs'
+import Tabs from '../vc-tabs/src/Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
 import { hasProp, getComponentFromProp, getComponentName, isEmptyElement } from '../_util/props-util'
 import warning from '../_util/warning'

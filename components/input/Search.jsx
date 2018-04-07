@@ -6,7 +6,7 @@ import inputProps from './inputProps'
 import Button from '../button'
 import { cloneElement } from '../_util/vnode'
 import { getOptionProps, getComponentFromProp } from '../_util/props-util'
-import PropsType from '../_util/vue-types'
+import PropTypes from '../_util/vue-types'
 
 export default {
   name: 'InputSearch',
@@ -20,7 +20,7 @@ export default {
       default: 'ant-input',
       type: String,
     },
-    enterButton: PropsType.oneOfType([PropsType.bool, PropsType.string, PropsType.object]),
+    enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   },
   computed: {
   },

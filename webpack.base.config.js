@@ -45,6 +45,14 @@ const md = require('markdown-it')('default', {
   html: true,
   breaks: true,
   highlight: renderHighlight,
+}).use(require('markdown-it-anchor'), {
+  level: 2,
+  // slugify: string => string,
+  permalink: true,
+  // renderPermalink: (slug, opts, state, permalink) => {},
+  permalinkClass: 'anchor',
+  permalinkSymbol: '#',
+  permalinkBefore: false,
 })
 // md.renderer.rules.fence = wrap(md.renderer.rules.fence)
 const cnReg = new RegExp('<(cn)(?:[^<]|<)+</\\1>', 'g')

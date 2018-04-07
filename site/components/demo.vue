@@ -48,9 +48,9 @@ export default {
             {lis}
             <li title='API' key='API'>
               <a
-                href='#component-api'
+                href='#api'
                 class={{
-                  current: window.location.hash === '#component-api',
+                  current: window.location.hash === '#api',
                 }}
               >API</a>
             </li>

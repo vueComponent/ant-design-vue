@@ -22,7 +22,7 @@ export const TransferItem = {
 
 export const TransferProps = {
   prefixCls: PropTypes.string,
-  dataSource: PropTypes.arrayOf(TransferItem),
+  dataSource: PropTypes.arrayOf(PropTypes.shape(TransferItem).loose),
   targetKeys: PropTypes.arrayOf(PropTypes.string),
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   render: PropTypes.func,
@@ -33,7 +33,7 @@ export const TransferProps = {
   filterOption: PropTypes.func,
   searchPlaceholder: PropTypes.string,
   notFoundContent: PropTypes.any,
-  rowKey: PropTypes.string,
+  rowKey: PropTypes.func,
   lazy: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.bool,
@@ -48,27 +48,10 @@ export const TransferLocale = {
   itemsUnit: PropTypes.string,
 }
 
-const tranferProps = {
-  prefixCls: PropTypes.string,
-  dataSource: PropTypes.arrayOf(PropTypes.shape(TransferItem).loose),
-  targetKeys: PropTypes.arrayOf(PropTypes.string),
-  selectedKeys: PropTypes.arrayOf(PropTypes.string),
-  listStyle: PropTypes.object,
-  render: PropTypes.func,
-  titles: PropTypes.arrayOf(PropTypes.string),
-  operations: PropTypes.arrayOf(PropTypes.string),
-  showSearch: PropTypes.bool,
-  filterOption: PropTypes.func,
-  searchPlaceholder: PropTypes.string,
-  notFoundContent: PropTypes.string,
-  rowKey: PropTypes.func,
-  lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-}
-
 export default {
   name: 'Transfer',
   mixins: [BaseMixin],
-  props: initDefaultProps(tranferProps, {
+  props: initDefaultProps(TransferProps, {
     dataSource: [],
     showSearch: false,
   }),

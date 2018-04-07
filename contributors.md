@@ -53,4 +53,4 @@ Steps | done
 Progress | done
 Slider | done
 Timeline | done
-Transfer
+Transfer | done

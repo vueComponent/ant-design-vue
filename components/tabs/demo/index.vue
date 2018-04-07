@@ -26,7 +26,7 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 
 - 卡片式的页签，提供可关闭的样式，常用于容器顶部。
 - 标准线条式页签，用于容器内部的主功能切换，这是最常用的 Tabs。
-- [RadioButton](#/cn/components/radio/components-radio-demo-radiobutton) 可作为更次级的页签来使用。
+- [RadioButton](/ant-design/components/radio-cn/) 可作为更次级的页签来使用。
 
     ## 代码演示`,
   us: `# Tabs
@@ -39,7 +39,7 @@ Ant Design has 3 types of Tabs for different situations.
 
 - Card Tabs: for managing too many closeable views.
 - Normal Tabs: for functional aspects of a page.
-- [RadioButton](#/us/components/radio/components-radio-demo-radiobutton): for secondary tabs.
+- [RadioButton](/ant-design/components/radio/): for secondary tabs.
     ## Examples `,
 }
 export default {

@@ -123,7 +123,7 @@ function compile (modules) {
   const source = [
     'components/**/*.js',
     'components/**/*.jsx',
-    '!components/vc-slider/**/*', // exclude vc-slider
+    // '!components/vc-slider/**/*', // exclude vc-slider
   ]
   const jsFilesStream = babelify(gulp.src(source), modules)
   return merge2([less, jsFilesStream, assets])

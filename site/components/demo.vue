@@ -40,7 +40,7 @@ export default {
       currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
         const title = isCN ? cnTitle : usTitle
         const className = window.location.hash === `#${id}` ? 'current' : ''
-        lis.push(<li title={title} key={id}><a href={`#${id}`} class={className}>{title}</a></li>)
+        lis.push(<li title={title}><a href={`#${id}`} class={className}>{title}</a></li>)
       })
       return (
         <a-affix>

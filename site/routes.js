@@ -2,7 +2,7 @@ import Demo from './components/demo.vue'
 const AsyncComp = () => {
   const d = window.location.hash.replace('#', '')
   return {
-    component: import(`../components/input-number/demo/${d}`),
+    component: import(`../components/transfer/demo/${d}`),
   }
 }
 export default [

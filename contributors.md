@@ -51,6 +51,6 @@ Spin | done
 Switch | done
 Steps | done
 Progress | done
-Slider | done InputNumber做完补全demo
+Slider | done
 Timeline | done
-Transfer
+Transfer | done

@@ -1,11 +1,11 @@
 <cn>
 #### 带输入框的滑块
-和 [数字输入框](#/cn/components/input-number/) 组件保持同步。
+和 [数字输入框](/ant-design/components/input-number-cn/) 组件保持同步。
 </cn>
 
 <us>
 #### Slider with InputNumber
-Synchronize with [InptNumber](#/us/components/input-number/) component.
+Synchronize with [InptNumber](/ant-design/components/input-number/) component.
 </us>
 
 ```html

@@ -4,7 +4,7 @@ import RangeCalendar from '../vc-calendar/src/RangeCalendar'
 import VcDatePicker from '../vc-calendar/src/Picker'
 import classNames from 'classnames'
 import Icon from '../icon'
-import callMoment from '../_util/callMoment'
+import interopDefault from '../_util/interopDefault'
 import { RangePickerProps } from './interface'
 import { hasProp, getOptionProps, initDefaultProps, mergeProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
@@ -67,8 +67,8 @@ export default {
   data () {
     const value = this.value || this.defaultValue || []
     if (
-      value[0] && !moment.isMoment(value[0]) ||
-      value[1] && !moment.isMoment(value[1])
+      value[0] && !interopDefault(moment).isMoment(value[0]) ||
+      value[1] && !interopDefault(moment).isMoment(value[1])
     ) {
       throw new Error(
         'The value/defaultValue of RangePicker must be a moment object array after `antd@2.0`, ' +
@@ -78,7 +78,7 @@ export default {
     const pickerValue = !value || isEmptyArray(value) ? this.defaultPickerValue : value
     return {
       sValue: value,
-      sShowDate: pickerValueAdapter(pickerValue || callMoment(moment)),
+      sShowDate: pickerValueAdapter(pickerValue || interopDefault(moment)()),
       sOpen: this.open,
       sHoverValue: [],
     }

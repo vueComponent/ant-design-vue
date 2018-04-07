@@ -5,13 +5,16 @@ export default {
     prefixCls: PropTypes.string.def('ant'),
     type: PropTypes.oneOf(['horizontal', 'vertical']).def('horizontal'),
     dashed: PropTypes.bool,
+    orientation: PropTypes.oneOf(['left', 'right']),
   },
   computed: {
     classString () {
-      const { prefixCls, type, $slots, dashed } = this
+      const { prefixCls, type, $slots, dashed, orientation = '' } = this
+      const orientationPrefix = (orientation.length > 0) ? '-' + orientation : orientation
+
       return {
         [`${prefixCls}-divider`]: true, [`${prefixCls}-divider-${type}`]: true,
-        [`${prefixCls}-divider-with-text`]: $slots.default,
+        [`${prefixCls}-divider-with-text${orientationPrefix}`]: $slots.default,
         [`${prefixCls}-divider-dashed`]: !!dashed,
       }
     },
@@ -20,7 +23,7 @@ export default {
     const { classString, prefixCls, $slots } = this
     return (
       <div class={classString}>
-        {$slots.default && <span className={`${prefixCls}-divider-inner-text`}>{$slots.default}</span>}
+        {$slots.default && <span class={`${prefixCls}-divider-inner-text`}>{$slots.default}</span>}
       </div>
     )
   },

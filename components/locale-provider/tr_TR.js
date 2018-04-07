@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/en_US';
-import DatePicker from '../date-picker/locale/tr_TR';
-import TimePicker from '../time-picker/locale/tr_TR';
-import Calendar from '../calendar/locale/tr_TR';
+import Pagination from '../vc-pagination/locale/tr_TR'
+import DatePicker from '../date-picker/locale/tr_TR'
+import TimePicker from '../time-picker/locale/tr_TR'
+import Calendar from '../calendar/locale/tr_TR'
 
 export default {
-  locale : 'tr',
+  locale: 'tr',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Menü Filtrele',
     filterConfirm: 'Tamam',
     filterReset: 'Sıfırla',
     emptyText: 'Veri Yok',
     selectAll: 'Hepsini Seç',
-    selectInvert: 'Tersini Seç'
+    selectInvert: 'Tersini Seç',
   },
-  Modal : {
+  Modal: {
     okText: 'Tamam',
     cancelText: 'İptal',
-    justOkText: 'Tamam'
+    justOkText: 'Tamam',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'Tamam',
-    cancelText: 'İptal'
+    cancelText: 'İptal',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Bulunamadı',
     searchPlaceholder: 'Arama',
     itemUnit: 'Öğe',
-    itemsUnit: 'Öğeler'
+    itemsUnit: 'Öğeler',
   },
-  Select : {
-    notFoundContent: 'Bulunamadı'
+  Select: {
+    notFoundContent: 'Bulunamadı',
   },
-  Upload : {
+  Upload: {
     uploading: 'Yükleniyor...',
     removeFile: `Dosyayı kaldır`,
     uploadError: 'Yükleme Hatası',
-    previewFile: `Dosyayı Önizle`
-  }
-};
+    previewFile: `Dosyayı Önizle`,
+  },
+}

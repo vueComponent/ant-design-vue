@@ -7,7 +7,7 @@
 
 <us>
 #### Fixed Columns
-To fix some columns and scroll inside other columns, and you must set `scoll.x` meanwhile.
+To fix some columns and scroll inside other columns, and you must set `scroll.x` meanwhile.
 > Specify the width of columns if header and cell do not align properly.
 > A fixed value which is greater than table width for `scroll.x` is recommended. The sum of unfixed columns should not greater than `scroll.x`.
 </us>

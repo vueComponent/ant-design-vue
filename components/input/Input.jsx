@@ -151,6 +151,10 @@ export default {
     renderInput () {
       const otherProps = omit(this.$props, [
         'prefixCls',
+        'addonBefore',
+        'addonAfter',
+        'prefix',
+        'suffix',
       ])
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this
       const inputProps = {

@@ -193,7 +193,7 @@ export default {
       })
     },
 
-    setSelectedRowKeys (selectedRowKeys, { selectWay, record, checked, changeRowKeys }) {
+    setSelectedRowKeys (selectedRowKeys, { selectWay, record, checked, changeRowKeys, nativeEvent }) {
       const { rowSelection = {}} = this
       if (rowSelection && !('selectedRowKeys' in rowSelection)) {
         this.store.setState({ selectedRowKeys })
@@ -209,7 +209,7 @@ export default {
         rowSelection.onChange(selectedRowKeys, selectedRows)
       }
       if (selectWay === 'onSelect' && rowSelection.onSelect) {
-        rowSelection.onSelect(record, checked, selectedRows)
+        rowSelection.onSelect(record, checked, selectedRows, nativeEvent)
       } else if (selectWay === 'onSelectAll' && rowSelection.onSelectAll) {
         const changeRows = data.filter(
           (row, i) => changeRowKeys.indexOf(this.getRecordKey(row, i)) >= 0,
@@ -404,6 +404,7 @@ export default {
 
     handleSelect  (record, rowIndex, e) {
       const checked = e.target.checked
+      const nativeEvent = e.nativeEvent
       const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
       let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const key = this.getRecordKey(record, rowIndex)
@@ -419,11 +420,14 @@ export default {
         selectWay: 'onSelect',
         record,
         checked,
+        changeRowKeys: void (0),
+        nativeEvent,
       })
     },
 
     handleRadioSelect  (record, rowIndex, e) {
       const checked = e.target.checked
+      const nativeEvent = e.nativeEvent
       const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
       let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const key = this.getRecordKey(record, rowIndex)
@@ -435,6 +439,8 @@ export default {
         selectWay: 'onSelect',
         record,
         checked,
+        changeRowKeys: void (0),
+        nativeEvent,
       })
     },
 
@@ -601,6 +607,7 @@ export default {
           customRender: this.renderSelectionBox(rowSelection.type),
           className: selectionColumnClass,
           fixed: rowSelection.fixed,
+          width: rowSelection.columnWidth,
         }
         if (rowSelection.type !== 'radio') {
           const checkboxAllDisabled = data.every((item, index) => this.getCheckboxPropsByItem(item, index).disabled)
@@ -705,7 +712,7 @@ export default {
           )
         }
         column.title = (
-          <span>
+          <span key={key}>
             {column.title}
             {sortButton}
             {filterDropdown}
@@ -735,7 +742,7 @@ export default {
       }))
     },
 
-    renderPagination () {
+    renderPagination (paginationPosition) {
       // 强制不需要分页
       if (!this.hasPagination()) {
         return null
@@ -747,10 +754,11 @@ export default {
       } else if (this.size === 'middle' || this.size === 'small') {
         size = 'small'
       }
+      const position = pagination.position || 'bottom'
       const total = pagination.total || this.getLocalData().length
       const { class: cls, style, onChange, onShowSizeChange, ...restProps } = pagination // eslint-disable-line
       const paginationProps = mergeProps({
-        key: 'pagination',
+        key: `pagination-${paginationPosition}`,
         class: classNames(cls, `${this.prefixCls}-pagination`),
         props: {
           ...restProps,
@@ -764,7 +772,7 @@ export default {
           showSizeChange: this.handleShowSizeChange,
         },
       })
-      return (total > 0) ? (
+      return (total > 0 && (position === paginationPosition || position === 'both')) ? (
         <Pagination
           {...paginationProps}
         />
@@ -966,8 +974,9 @@ export default {
         <Spin
           {...spinProps}
         >
+          {this.renderPagination('top')}
           {table}
-          {this.renderPagination()}
+          {this.renderPagination('bottom')}
         </Spin>
       </div>
     )

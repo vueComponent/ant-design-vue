@@ -5,7 +5,8 @@ import VcDatePicker from '../vc-calendar/src/Picker'
 import Icon from '../icon'
 import { hasProp, getOptionProps, initDefaultProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
-import { WeexPickerProps } from './interface'
+import { WeekPickerProps } from './interface'
+import interopDefault from '../_util/interopDefault'
 
 function formatValue (value, format) {
   return (value && value.format(format)) || ''
@@ -19,15 +20,15 @@ export default {
   // };
 
   // private input: any;
-  props: initDefaultProps(WeexPickerProps(), {
-    format: 'YYYY-wo',
+  props: initDefaultProps(WeekPickerProps(), {
+    format: 'gggg-wo',
     allowClear: true,
   }),
   name: 'WeekPicker',
   mixins: [BaseMixin],
   data () {
     const value = this.value || this.defaultValue
-    if (value && !moment.isMoment(value)) {
+    if (value && !interopDefault(moment).isMoment(value)) {
       throw new Error(
         'The value/defaultValue of DatePicker or MonthPicker must be ' +
         'a moment object',

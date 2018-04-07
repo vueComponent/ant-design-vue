@@ -36,6 +36,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | open | open state of picker | boolean | - |
 | placeholder | placeholder of date input | string\|RangePicker\[] | - |
 | popupStyle | to customize the style of the popup calendar | object | {} |
+| dropdownClassName | to customize the className of the popup calendar  | string | - |
 | size | determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | string | - |
 
 ### Common Events

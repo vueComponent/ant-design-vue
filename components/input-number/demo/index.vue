@@ -13,7 +13,7 @@ const md = {
   ## 何时使用
   当需要获取标准数值时。
         ## 代码演示`,
-  us: `# Data Entry
+  us: `# InputNumber
   Enter a number within certain range with the mouse or keyboard.
   ## When To Use
   When a numeric value needs to be provided.

@@ -1,5 +1,5 @@
 <template>
-  <div class='markdown api-container' id="component-api">
+  <div class='markdown api-container'>
     <slot v-if="isZhCN" name="cn"></slot>
     <slot v-else></slot>
   </div>

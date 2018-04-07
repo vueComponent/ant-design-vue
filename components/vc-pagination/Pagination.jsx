@@ -93,6 +93,20 @@ export default {
       newState.statePageSize = val
       this.setState(newState)
     },
+    stateCurrent(val, oldValue) {
+      // When current page change, fix focused style of prev item
+      // A hacky solution of https://github.com/ant-design/ant-design/issues/8948
+      this.$nextTick(()=>{
+        if(this.$refs.paginationNode) {
+          const lastCurrentNode = this.$refs.paginationNode.querySelector(
+            `.${this.prefixCls}-item-${oldValue}`
+          );
+          if (lastCurrentNode && document.activeElement === lastCurrentNode) {
+            lastCurrentNode.blur();
+          }
+        }
+      })
+    },
   },
   methods: {
     isValid (page) {
@@ -494,6 +508,7 @@ export default {
       <ul
         class={`${prefixCls}`}
         unselectable='unselectable'
+        ref='paginationNode'
       >
         {totalText}
         <li

@@ -43,8 +43,8 @@ export default {
           cls += ` ${prefixCls}-tab-disabled`
         } else {
         }
-        const onClick = () => {
-          !disabled && this.__emit('tabClick', tabKey)
+        const onClick = (e) => {
+          !disabled && this.__emit('tabClick', tabKey, e)
         }
 
         let tabC = typeof tab === 'function' ? child.tab(h) : tab

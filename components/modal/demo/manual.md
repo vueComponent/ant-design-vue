@@ -14,11 +14,10 @@ Manually destroying a modal.
   <a-button @click="success">Success</a-button>
 </template>
 <script>
-import { Modal } from 'antd'
 export default {
   methods: {
     success() {
-      const modal = Modal.success({
+      const modal = this.$success({
         title: 'This is a notification message',
         content: 'This modal will be destroyed after 1 second',
       });

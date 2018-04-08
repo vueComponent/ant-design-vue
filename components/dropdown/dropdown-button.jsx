@@ -18,6 +18,7 @@ const DropdownButtonProps = {
 }
 export { DropdownButtonProps }
 export default {
+  name: 'ADropdownButton',
   props: DropdownButtonProps,
   methods: {
     onClick (e) {

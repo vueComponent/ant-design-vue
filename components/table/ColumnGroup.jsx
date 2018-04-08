@@ -2,7 +2,7 @@
 import PropTypes from '../_util/vue-types'
 
 export default {
-  name: 'ColumnGroup',
+  name: 'ATableColumnGroup',
   props: {
     title: PropTypes.any,
   },

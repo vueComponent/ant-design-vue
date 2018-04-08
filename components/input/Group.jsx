@@ -1,6 +1,6 @@
 import { filterEmpty } from '../_util/props-util'
 export default {
-  name: 'InputGruop',
+  name: 'AInputGroup',
   props: {
     prefixCls: {
       default: 'ant-input-group',

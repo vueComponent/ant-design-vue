@@ -94,7 +94,6 @@ The ToolTip has 12 placements choice.
   </div>
 </template>
 <script>
-import { message } from 'antd'
 
 export default {
   data () {

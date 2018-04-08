@@ -4,7 +4,7 @@ import getTransitionProps from '../_util/getTransitionProps'
 import omit from 'omit.js'
 
 export default {
-  name: 'Tag',
+  name: 'ATag',
   props: {
     prefixCls: {
       default: 'ant-tag',

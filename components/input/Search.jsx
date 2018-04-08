@@ -9,7 +9,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 import PropTypes from '../_util/vue-types'
 
 export default {
-  name: 'InputSearch',
+  name: 'AInputSearch',
   props: {
     ...inputProps,
     prefixCls: {

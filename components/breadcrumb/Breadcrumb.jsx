@@ -31,6 +31,7 @@ function getBreadcrumbName (route, params) {
 }
 
 export default {
+  name: 'ABreadcrumb',
   props: BreadcrumbProps,
   methods: {
     defaultItemRender ({ route, params, routes, paths }) {

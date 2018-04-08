@@ -14,11 +14,10 @@ Normal messages as feedbacks.
   <a-button type="primary" @click="info">Display normal message</a-button>
 </template>
 <script>
-  import { message } from 'antd'
   export default {
     methods: {
       info () {
-        message.info('This is a normal message');
+        this.$message.info('This is a normal message');
       },
     }
   }

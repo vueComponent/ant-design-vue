@@ -26,7 +26,7 @@ function fixControlledValue (value) {
 }
 
 export default {
-  name: 'TextArea',
+  name: 'ATextarea',
   props: {
     ...inputProps,
     autosize: [Object, Boolean],

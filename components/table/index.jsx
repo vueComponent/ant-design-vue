@@ -5,7 +5,7 @@ import { getOptionProps, getKey, getClass,
 } from '../_util/props-util'
 
 const Table = {
-  name: 'Table',
+  name: 'ATable',
   Column: T.Column,
   ColumnGroup: T.ColumnGroup,
   props: T.props,

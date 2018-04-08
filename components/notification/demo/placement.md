@@ -19,7 +19,6 @@ A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` o
   </div>
 </template>
 <script>
-  import { notification } from 'antd'
   const options = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
   export default {
     data () {
@@ -30,14 +29,14 @@ A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` o
     },
     watch: {
       selected(val) {
-        notification.config({
+        this.$notification.config({
           placement: val,
         });
       }
     },
     methods: {
       openNotification (val) {
-        notification.open({
+        this.$notification.open({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });

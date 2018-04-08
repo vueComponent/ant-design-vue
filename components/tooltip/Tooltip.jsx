@@ -19,7 +19,7 @@ const splitObject = (obj, keys) => {
 }
 const props = abstractTooltipProps()
 export default {
-  name: 'Tooltip',
+  name: 'ATooltip',
   props: {
     ...props,
     title: PropTypes.any,

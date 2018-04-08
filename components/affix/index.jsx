@@ -57,7 +57,7 @@ const AffixProps = {
 }
 
 export default {
-  name: 'Affix',
+  name: 'AAffix',
   props: AffixProps,
   mixins: [BaseMixin],
   data () {

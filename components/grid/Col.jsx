@@ -30,7 +30,7 @@ export const ColProps = {
 
 export default {
   props: ColProps,
-  name: 'Col',
+  name: 'ACol',
   render () {
     const { span, order, offset, push, pull, prefixCls = 'ant-col', $slots, $attrs, $listeners } = this
     let sizeClassObj = {};

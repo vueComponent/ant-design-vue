@@ -16,7 +16,7 @@ export const RateProps = {
 }
 
 export default {
-  name: 'Rate',
+  name: 'ARate',
   model: {
     prop: 'value',
     event: 'change',

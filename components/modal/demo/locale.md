@@ -30,8 +30,6 @@ To customize the text of the buttons, you need to set `okText` and `cancelText` 
   </div>
 </template>
 <script>
-import { Modal } from 'antd'
-const confirm = Modal.confirm
 export default {
   data() {
     return {
@@ -46,7 +44,7 @@ export default {
       this.visible = false
     },
     confirm() {
-      confirm({
+      this.$confirm({
         title: 'Confirm',
         content: 'Bla bla ...',
         okText: '确认',

@@ -14,7 +14,7 @@ import defaultLocale from '../locale-provider/default'
 const tooltipProps = abstractTooltipProps()
 const btnProps = buttonTypes()
 export default {
-  name: 'popconfirm',
+  name: 'APopconfirm',
   props: {
     ...tooltipProps,
     prefixCls: PropTypes.string.def('ant-popover'),

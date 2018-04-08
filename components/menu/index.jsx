@@ -30,12 +30,12 @@ export const menuProps = {
 }
 
 export default {
-  name: 'Menu',
+  name: 'AMenu',
   props: menuProps,
-  Divider,
-  Item,
-  SubMenu,
-  ItemGroup,
+  Divider: { ...Divider, name: 'AMenuDivider' },
+  Item: { ...Item, name: 'AMenuItem' },
+  SubMenu: { ...SubMenu, name: 'ASubMenu' },
+  ItemGroup: { ...ItemGroup, name: 'AMenuItemGroup' },
   provide () {
     return {
       inlineCollapsed: this.getInlineCollapsed(),

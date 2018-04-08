@@ -19,11 +19,10 @@ A notification box with a icon at the left side.
   </div>
 </template>
 <script>
-  import { notification } from 'antd'
   export default {
     methods: {
       openNotificationWithIcon (type) {
-        notification[type]({
+        this.$notification[type]({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });

@@ -4,7 +4,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 import VcSwitch from '../vc-switch'
 
 export default {
-  name: 'vSwitch',
+  name: 'ASwitch',
   model: {
     prop: 'checked',
     event: 'change',

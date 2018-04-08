@@ -58,6 +58,7 @@ export const TimePickerProps = () => ({
 })
 
 export default {
+  name: 'ATimePicker',
   mixins: [BaseMixin],
   props: initDefaultProps(TimePickerProps(), {
     prefixCls: 'ant-time-picker',

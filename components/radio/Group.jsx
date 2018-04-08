@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types'
 import Radio from './Radio'
 export default {
-  name: 'RadioGroup',
+  name: 'ARadioGroup',
   props: {
     prefixCls: {
       default: 'ant-radio-group',

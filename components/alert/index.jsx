@@ -33,7 +33,7 @@ export const AlertProps = {
 export default {
   props: AlertProps,
   mixins: [BaseMixin],
-  name: 'Alert',
+  name: 'AAlert',
   data () {
     return {
       closing: true,

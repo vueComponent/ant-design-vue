@@ -30,7 +30,7 @@ const BackTopProps = {
 }
 
 export default {
-  name: 'BackTop',
+  name: 'ABackTop',
   mixins: [BaseMixin],
   props: {
     ...BackTopProps,

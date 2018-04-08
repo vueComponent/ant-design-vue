@@ -13,7 +13,7 @@ export const TimelineProps = {
 }
 
 export default {
-  name: 'Timeline',
+  name: 'ATimeline',
   props: initDefaultProps(TimelineProps, {
     prefixCls: 'ant-timeline',
   }),

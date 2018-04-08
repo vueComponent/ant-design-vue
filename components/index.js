@@ -2,7 +2,6 @@
 // this file is not used if use https://github.com/ant-design/babel-plugin-import
 const ENV = process.env.NODE_ENV
 if (ENV !== 'production' &&
-    ENV !== 'test' &&
     typeof console !== 'undefined' &&
     console.warn &&
     typeof window !== 'undefined') {
@@ -13,143 +12,110 @@ if (ENV !== 'production' &&
 }
 /* @remove-on-es-build-end */
 
-import Button from './button'
-const ButtonGroup = Button.Group
-export { Button, ButtonGroup }
+export { default as Affix } from './affix'
 
-import Checkbox from './checkbox'
-const CheckboxGroup = Checkbox.Group
-export { Checkbox, CheckboxGroup }
-
-export { default as Icon } from './icon'
-
-import Radio from './radio'
-const RadioGroup = Radio.Group
-const RadioButton = Radio.Button
-export { Radio, RadioGroup, RadioButton }
-
-import { Row, Col } from './grid'
-export {
-  Row,
-  Col,
-}
-
-export { default as Rate } from './rate'
-
-export { default as Tooltip } from './tooltip'
-
-export { default as Pagination } from './pagination'
-
-import Tag from './tag'
-const CheckableTag = Tag.CheckableTag
-
-export {
-  Tag,
-  CheckableTag,
-}
-
-export { default as Avatar } from './avatar'
-
-export { default as Badge } from './badge'
-
-import Tabs from './tabs'
-const TabPane = Tabs.TabPane
-export {
-  Tabs,
-  TabPane,
-}
-
-import Input from './input'
-
-const InputGroup = Input.Group
-const InputSearch = Input.Search
-const InputTextArea = Input.TextArea
-const Textarea = InputTextArea
-const TextArea = InputTextArea
-
-export { Input, InputGroup, InputSearch, InputTextArea, Textarea, TextArea }
-
-import Breadcrumb from './breadcrumb'
-const BreadcrumbItem = Breadcrumb.Item
-export { Breadcrumb, BreadcrumbItem }
-
-export { default as Popover } from './popover'
-
-export { default as Popconfirm } from './popconfirm'
-
-import Menu from './menu'
-const MenuItem = Menu.Item
-const SubMenu = Menu.SubMenu
-const MenuDivider = Menu.Divider
-const MenuItemGroup = Menu.ItemGroup
-export { Menu, MenuItem, SubMenu, MenuDivider, MenuItemGroup }
-
-import Card from './card'
-const CardMeta = Card.Meta
-const CardGrid = Card.Grid
-export { Card, CardMeta, CardGrid }
-
-import Dropdown from './dropdown'
-const DropdownButton = Dropdown.Button
-export { Dropdown, DropdownButton }
-
-export { default as Divider } from './divider'
-
-import Collapse from './collapse'
-const CollapsePanel = Collapse.Panel
-export { Collapse, CollapsePanel }
-
-import notification from './notification'
-import message from './message'
-
-export { default as Spin } from './spin'
-
-import Select from './select'
-const SelectOption = Select.Option
-const SelectOptGroup = Select.OptGroup
-export { Select, SelectOption, SelectOptGroup }
-
-export { default as Switch } from './switch'
-
-export { default as LocaleProvider } from './locale-provider'
+// export { default as Anchor } from './anchor'
 
 export { default as AutoComplete } from './auto-complete'
 
-export { default as Affix } from './affix'
-
-export { default as Cascader } from './cascader'
-export { default as BackTop } from './back-top'
-export { default as Modal } from './modal'
 export { default as Alert } from './alert'
-export { default as TimePicker } from './time-picker'
 
-export { notification, message }
+export { default as Avatar } from './avatar'
 
-import Steps from './steps'
-const { Step } = Steps
-export { Steps, Step }
+export { default as BackTop } from './back-top'
+
+export { default as Badge } from './badge'
+
+export { default as Breadcrumb } from './breadcrumb'
+
+export { default as Button } from './button'
 
 export { default as Calendar } from './calendar'
 
-import DatePicker from './date-picker'
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker
-export { DatePicker, MonthPicker, RangePicker, WeekPicker }
+export { default as Card } from './card'
 
-import Table from './table'
-const { Column: TableColumn, ColumnGroup: TableColumnGroup } = Table
+export { default as Collapse } from './collapse'
 
-export { Table, TableColumn, TableColumnGroup }
+// export { default as Carousel } from './carousel'
 
-export { default as version } from './version'
+export { default as Cascader } from './cascader'
 
-export { default as Slider } from './slider'
+export { default as Checkbox } from './checkbox'
 
-export { default as Progress } from './progress'
+export { default as Col } from './col'
 
-import Timeline from './timeline'
-const TimelineItem = Timeline.Item
-export { Timeline, TimelineItem }
+export { default as DatePicker } from './date-picker'
+
+export { default as Divider } from './divider'
+
+export { default as Dropdown } from './dropdown'
+
+// export { default as Form } from './form'
+
+export { default as Icon } from './icon'
+
+export { default as Input } from './input'
 
 export { default as InputNumber } from './input-number'
 
+// export { default as Layout } from './layout'
+
+// export { default as List } from './list'
+
+export { default as LocaleProvider } from './locale-provider'
+
+export { default as message } from './message'
+
+export { default as Menu } from './menu'
+
+export { default as Modal } from './modal'
+
+export { default as notification } from './notification'
+
+export { default as Pagination } from './pagination'
+
+export { default as Popconfirm } from './popconfirm'
+
+export { default as Popover } from './popover'
+
+export { default as Progress } from './progress'
+
+export { default as Radio } from './radio'
+
+export { default as Rate } from './rate'
+
+export { default as Row } from './row'
+
+export { default as Select } from './select'
+
+export { default as Slider } from './slider'
+
+export { default as Spin } from './spin'
+
+export { default as Steps } from './steps'
+
+export { default as Switch } from './switch'
+
+export { default as Table } from './table'
+
 export { default as Transfer } from './transfer'
+
+// export { default as Tree } from './tree'
+
+// export { default as TreeSelect } from './tree-select'
+
+export { default as Tabs } from './tabs'
+
+export { default as Tag } from './tag'
+
+export { default as TimePicker } from './time-picker'
+
+export { default as Timeline } from './timeline'
+
+export { default as Tooltip } from './tooltip'
+
+// export { default as Mention } from './mention'
+
+// export { default as Upload } from './upload'
+
+export { default as version } from './version'

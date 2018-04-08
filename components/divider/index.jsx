@@ -1,6 +1,7 @@
 
 import PropTypes from '../_util/vue-types'
 export default {
+  name: 'ADivider',
   props: {
     prefixCls: PropTypes.string.def('ant'),
     type: PropTypes.oneOf(['horizontal', 'vertical']).def('horizontal'),

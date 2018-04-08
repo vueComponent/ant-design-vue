@@ -55,6 +55,7 @@ const modalProps = (defaultProps = {}) => {
 }
 
 export default {
+  name: 'AModal',
   props: modalProps({
     prefixCls: 'ant-modal',
     width: 520,

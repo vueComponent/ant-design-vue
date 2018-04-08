@@ -32,6 +32,7 @@ export const PaginationProps = () => ({
 })
 
 export default {
+  name: 'APagination',
   props: {
     ...PaginationProps(),
     prefixCls: PropTypes.string.def('ant-pagination'),

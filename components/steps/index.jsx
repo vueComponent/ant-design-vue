@@ -20,13 +20,13 @@ const getStepsProps = (defaultProps = {}) => {
 }
 
 export default {
-  name: 'Steps',
+  name: 'ASteps',
   props: getStepsProps({
     prefixCls: 'ant-steps',
     iconPrefix: 'ant',
     current: 0,
   }),
-  Step: VcSteps.Step,
+  Step: { ...VcSteps.Step, name: 'AStep' },
   render () {
     const props = getOptionProps(this)
     const stepsProps = {

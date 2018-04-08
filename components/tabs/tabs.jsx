@@ -4,6 +4,7 @@ import isFlexSupported from '../_util/isFlexSupported'
 import { hasProp, getComponentFromProp, getComponentName, isEmptyElement } from '../_util/props-util'
 import warning from '../_util/warning'
 export default {
+  name: 'ATabs',
   props: {
     prefixCls: { type: String, default: 'ant-tabs' },
     activeKey: String,
@@ -112,7 +113,7 @@ export default {
       if (isEmptyElement(child)) { return }
       const { componentOptions } = child
       const componentName = getComponentName(componentOptions)
-      warning(componentName === 'TabPane', '`Tabs children just support TabPane')
+      warning(componentName === 'ATabPane', '`Tabs children just support TabPane')
       if (componentOptions && componentName === 'TabPane') {
         componentOptions.propsData = componentOptions.propsData || {}
         if (componentOptions.propsData.tab === undefined) {

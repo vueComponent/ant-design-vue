@@ -1,6 +1,6 @@
 
 export default {
-  name: 'Icon',
+  name: 'AIcon',
   props: {
     prefixCls: {
       default: 'anticon',

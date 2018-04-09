@@ -6,7 +6,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 
 const props = abstractTooltipProps()
 export default {
-  name: 'popover',
+  name: 'APopover',
   props: {
     ...props,
     prefixCls: PropTypes.string.def('ant-popover'),

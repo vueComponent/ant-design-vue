@@ -24,7 +24,7 @@ export default {
     format: 'gggg-wo',
     allowClear: true,
   }),
-  name: 'WeekPicker',
+  name: 'AWeekPicker',
   mixins: [BaseMixin],
   data () {
     const value = this.value || this.defaultValue

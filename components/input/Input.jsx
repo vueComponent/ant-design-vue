@@ -12,7 +12,7 @@ function fixControlledValue (value) {
 }
 
 export default {
-  name: 'Input',
+  name: 'AInput',
   props: {
     ...inputProps,
   },

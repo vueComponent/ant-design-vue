@@ -11,7 +11,7 @@ export const TimeLineItemProps = {
 }
 
 export default {
-  name: 'TimelineItem',
+  name: 'ATimelineItem',
   props: initDefaultProps(TimeLineItemProps, {
     prefixCls: 'ant-timeline',
     color: 'blue',

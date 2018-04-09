@@ -18,17 +18,16 @@ Messages of success, error and warning types.
   </div>
 </template>
 <script>
-  import { message } from 'antd'
   export default {
     methods: {
       success () {
-        message.success('This is a message of success');
+        this.$message.success('This is a message of success');
       },
       error () {
-        message.error('This is a message of error');
+        this.$message.error('This is a message of error');
       },
       warning () {
-        message.warning('This is message of warning');
+        this.$message.warning('This is message of warning');
       },
     }
   }

@@ -2,7 +2,7 @@
 import Icon from '../icon'
 
 export default {
-  name: 'Avatar',
+  name: 'AAvatar',
   props: {
     prefixCls: {
       type: String,

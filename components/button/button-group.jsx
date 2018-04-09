@@ -13,7 +13,7 @@ const ButtonGroupProps = {
 }
 export { ButtonGroupProps }
 export default {
-  name: 'ButtonGroup',
+  name: 'AButtonGroup',
   props: ButtonGroupProps,
   data () {
     return {

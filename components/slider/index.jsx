@@ -45,7 +45,7 @@ export const SliderProps = () => ({
 })
 
 export default {
-  name: 'Slider',
+  name: 'ASlider',
   model: {
     prop: 'value',
     event: 'change',

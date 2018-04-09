@@ -3,6 +3,7 @@ import Group from './Group'
 
 const Button = {
   extends: Radio,
+  name: 'ARadioButton',
   props: {
     ...Radio.props,
     prefixCls: {

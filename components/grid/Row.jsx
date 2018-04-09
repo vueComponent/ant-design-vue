@@ -50,7 +50,7 @@ const responsiveMap = {
 }
 
 export default {
-  name: 'Row',
+  name: 'ARow',
   mixins: [BaseMixin],
   props: {
     ...RowProps,

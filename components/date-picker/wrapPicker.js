@@ -25,6 +25,7 @@ function getColumns ({ showHour, showMinute, showSecond, use12Hours }) {
 
 export default function wrapPicker (Picker, props, defaultFormat) {
   return {
+    name: Picker.name,
     props: initDefaultProps(props, {
       format: defaultFormat || 'YYYY-MM-DD',
       transitionName: 'slide-up',

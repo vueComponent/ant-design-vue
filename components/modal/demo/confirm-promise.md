@@ -17,12 +17,10 @@ delay closing the dialog.
   </a-button>
 </template>
 <script>
-import { Modal } from 'antd'
-const confirm = Modal.confirm
 export default {
   methods: {
     showConfirm() {
-      confirm({
+      this.$confirm({
         title: 'Do you want to delete these items?',
         content: 'When clicked the OK button, this dialog will be closed after 1 second',
         onOk() {

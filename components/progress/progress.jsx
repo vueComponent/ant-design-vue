@@ -31,7 +31,7 @@ export const ProgressProps = {
 }
 
 export default {
-  name: 'Progress',
+  name: 'AProgress',
   props: initDefaultProps(ProgressProps, {
     type: 'line',
     percent: 0,

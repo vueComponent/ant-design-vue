@@ -3,6 +3,7 @@ import { isZhCN } from '../util'
 export default {
   props: {
     num: Number,
+    name: String,
   },
   data () {
     return {
@@ -10,22 +11,24 @@ export default {
   },
   methods: {
     handleClick () {
-      const { name } = this.$route.params
-      const newName = isZhCN(name) ? name.replace('-cn', '') : `${name}-cn`
+      const name = this.name
+      const path = this.$route.path
+      const newName = isZhCN(name) ? name.replace(/-cn\/?$/, '') : `${name}-cn`
       this.$router.push({
-        path: `/ant-design/components/${newName}/`,
+        path: path.replace(name, newName),
       })
     },
   },
   render () {
-    const { name } = this.$route.params
+    const name = this.name
+
     const isCN = isZhCN(name)
     return (
       <header id='header'>
         <a-row>
           <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: '/ant-design' }} id='logo'>
-              <img alt='logo' style="height: 32px" src='https://raw.githubusercontent.com/vueComponent/ant-design/master/logo.png' />
+              <img alt='logo' height='32' src='https://raw.githubusercontent.com/vueComponent/ant-design/master/logo.png' />
               <span>  VUE-ANTD</span>
             </router-link>
           </a-col>

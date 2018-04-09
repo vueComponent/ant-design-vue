@@ -24,7 +24,7 @@ export default {
   methods: {
     info() {
       const h = this.$createElement
-      Modal.info({
+      this.$info({
         title: 'This is a notification message',
         content: h('div',{}, [
           h('p', 'some messages...some messages...'),
@@ -35,7 +35,7 @@ export default {
     },
 
     success() {
-      Modal.success({
+      this.$success({
         title: 'This is a success message',
         content: (  // JSX support
           <div>
@@ -47,14 +47,14 @@ export default {
     },
 
     error() {
-      Modal.error({
+      this.$error({
         title: 'This is an error message',
         content: 'some messages...some messages...',
       });
     },
 
     warning() {
-      Modal.warning({
+      this.$warning({
         title: 'This is a warning message',
         content: 'some messages...some messages...',
       });

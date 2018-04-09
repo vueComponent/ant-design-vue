@@ -49,7 +49,7 @@ export const TransferLocale = {
 }
 
 export default {
-  name: 'Transfer',
+  name: 'ATransfer',
   mixins: [BaseMixin],
   props: initDefaultProps(TransferProps, {
     dataSource: [],

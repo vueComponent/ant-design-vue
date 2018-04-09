@@ -27,7 +27,7 @@ function setMomentLocale (locale) {
 }
 
 export default {
-  name: 'LocaleProvider',
+  name: 'ALocaleProvider',
   props: {
     locale: PropTypes.object.def({}),
   },

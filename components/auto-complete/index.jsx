@@ -32,6 +32,7 @@ const AutoCompleteProps = {
 }
 
 export default {
+  name: 'AAutoComplete',
   props: {
     ...AutoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
@@ -45,8 +46,8 @@ export default {
     ]).def(false),
     defaultActiveFirstOption: PropTypes.bool.def(true),
   },
-  Option,
-  OptGroup,
+  Option: { ...Option, name: 'AAutoCompleteOption' },
+  OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
   model: {
     prop: 'value',
     event: 'change',

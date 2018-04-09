@@ -25,7 +25,7 @@ export const InputNumberProps = {
 }
 
 export default {
-  name: 'InputNumber',
+  name: 'AInputNumber',
   model: {
     prop: 'value',
     event: 'change',

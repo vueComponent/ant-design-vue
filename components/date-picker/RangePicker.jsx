@@ -57,7 +57,7 @@ function fixLocale (value, localeCode) {
 
 export default {
   mixins: [BaseMixin],
-  name: 'RangePicker',
+  name: 'ARangePicker',
   props: initDefaultProps(RangePickerProps(), {
     prefixCls: 'ant-calendar',
     allowClear: true,

@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types'
 import { hasProp, getComponentFromProp } from '../_util/props-util'
 
 export default {
-  name: 'BreadcrumbItem',
+  name: 'ABreadcrumbItem',
   __ANT_BREADCRUMB_ITEM: true,
   props: {
     prefixCls: PropTypes.string.def('ant-breadcrumb'),

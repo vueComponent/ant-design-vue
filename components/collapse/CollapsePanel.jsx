@@ -5,6 +5,7 @@ import RcCollapse from './src'
 import { panelProps } from './src/commonProps'
 
 export default {
+  name: 'ACollapsePanel',
   props: {
     name: PropTypes.string,
     ...panelProps,

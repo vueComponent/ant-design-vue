@@ -1,7 +1,7 @@
 
 import hasProp from '../_util/props-util'
 export default {
-  name: 'Checkbox',
+  name: 'ACheckbox',
   props: {
     prefixCls: {
       default: 'ant-checkbox',

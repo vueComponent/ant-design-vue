@@ -14,11 +14,10 @@ Display a global loading indicator, which is dismissed by itself asynchronously.
   <a-button @click="success">Display a loading indicator</a-button>
 </template>
 <script>
-  import { message } from 'antd'
   export default {
     methods: {
       success () {
-        const hide = message.loading('Action in progress..', 0);
+        const hide = this.$message.loading('Action in progress..', 0);
         setTimeout(hide, 2500);
       },
     }

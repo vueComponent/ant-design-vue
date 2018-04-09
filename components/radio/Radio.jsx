@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types'
 import hasProp from '../_util/props-util'
 export default {
-  name: 'Radio',
+  name: 'ARadio',
   props: {
     prefixCls: {
       default: 'ant-radio',

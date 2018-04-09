@@ -14,11 +14,10 @@ The style and className are available to customize Notification.
   <a-button type="primary" @click="openNotification">Open the notification box</a-button>
 </template>
 <script>
-  import { notification } from 'antd'
   export default {
     methods: {
       openNotification () {
-        notification.open({
+        this.$notification.open({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
           style: {

@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types'
 import { getComponentFromProp } from '../_util/props-util'
 
 export default {
-  name: 'Meta',
+  name: 'ACardMeta',
   props: {
     prefixCls: PropTypes.string.def('ant-card'),
     title: PropTypes.string,

@@ -15,7 +15,7 @@ export const SpinProps = () => ({
 })
 
 export default {
-  name: 'Spin',
+  name: 'ASpin',
   mixins: [BaseMixin],
   props: initDefaultProps(SpinProps(), {
     prefixCls: 'ant-spin',

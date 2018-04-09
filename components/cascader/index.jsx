@@ -83,6 +83,7 @@ function defaultSortFilteredOption (a, b, inputValue) {
 const defaultDisplayRender = ({ labels }) => labels.join(' / ')
 
 export default {
+  name: 'ACascader',
   mixins: [BaseMixin],
   props: CascaderProps,
   model: {

@@ -2,7 +2,7 @@
 import Checkbox from './Checkbox'
 import hasProp from '../_util/props-util'
 export default {
-  name: 'CheckboxGroup',
+  name: 'ACheckboxGroup',
   props: {
     prefixCls: {
       default: 'ant-checkbox-group',

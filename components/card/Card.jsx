@@ -8,7 +8,7 @@ import BaseMixin from '../_util/BaseMixin'
 
 const { TabPane } = Tabs
 export default {
-  name: 'Card',
+  name: 'ACard',
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string.def('ant-card'),

@@ -8,6 +8,7 @@ import { getOptionProps, getPropsData } from '../_util/props-util'
 import getDropdownProps from './getDropdownProps'
 const DropdownProps = getDropdownProps()
 const Dropdown = {
+  name: 'ADropdown',
   props: {
     ...DropdownProps,
     prefixCls: PropTypes.string.def('ant-dropdown'),

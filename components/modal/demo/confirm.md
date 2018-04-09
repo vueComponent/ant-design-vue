@@ -21,12 +21,10 @@ To use `confirm()` to popup a confirmation modal dialog.
   </div>
 </template>
 <script>
-import { Modal } from 'antd'
-const confirm = Modal.confirm
 export default {
   methods: {
     showConfirm() {
-      confirm({
+      this.$confirm({
         title: 'Do you Want to delete these items?',
         content: 'Some descriptions',
         onOk() {
@@ -40,7 +38,7 @@ export default {
     },
 
     showDeleteConfirm() {
-      confirm({
+      this.$confirm({
         title: 'Are you sure delete this task?',
         content: 'Some descriptions',
         okText: 'Yes',

@@ -82,9 +82,9 @@ export {
 }
 
 export default {
-  Option,
-  OptGroup,
-  name: 'Select',
+  Option: { ...Option, name: 'ASelectOption' },
+  OptGroup: { ...OptGroup, name: 'ASelectOptGroup' },
+  name: 'ASelect',
   props: {
     ...SelectProps,
     prefixCls: PropTypes.string.def('ant-select'),

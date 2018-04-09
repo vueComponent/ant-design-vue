@@ -5,7 +5,7 @@ const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
 import buttonTypes from './buttonTypes'
 const props = buttonTypes()
 export default {
-  name: 'Button',
+  name: 'AButton',
   __ANT_BUTTON: true,
   props: {
     ...props,

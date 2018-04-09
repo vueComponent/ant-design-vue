@@ -1,6 +1,6 @@
 
 export default {
-  name: 'CheckableTag',
+  name: 'ACheckableTag',
   model: {
     prop: 'checked',
   },

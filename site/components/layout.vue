@@ -8,6 +8,9 @@ import { isZhCN } from '../util'
 import { Provider, create } from '../../components/_util/store'
 
 export default {
+  props: {
+    name: String,
+  },
   data () {
     this.store = create({
       currentSubMenu: [],
@@ -23,7 +26,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.name': function () {
+    '$route': function () {
       this.store.setState({ currentSubMenu: [] })
     },
   },
@@ -58,11 +61,27 @@ export default {
         </a-affix>
       )
     },
+    getDocsMenu (isCN) {
+      const docs = [
+        { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
+        { key: 'getting-started', enTitle: 'Getting Started', title: '快速上手' },
+        { key: 'use-with-vue-cli', enTitle: 'Use in vue-cli', title: '在 vue-cli 中使用' },
+        { key: 'customize-theme', enTitle: 'Customize Theme', title: '定制主题' },
+        { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
+      ]
+      const docsMenu = []
+      docs.forEach(({ key, enTitle, title }) => {
+        const k = isCN ? `${key}-cn` : key
+        docsMenu.push(<a-menu-item key={k}>
+          <router-link to={`/ant-design/docs/${k}/`}>{isCN ? enTitle : title}</router-link>
+        </a-menu-item>)
+      })
+      return docsMenu
+    },
   },
   render () {
-    const { name } = this.$route.params
+    const name = this.name
     const isCN = isZhCN(name)
-    const lang = isCN ? 'cn' : 'us'
     // name = name.replace(/-cn\/?$/, '')
     const titleMap = {}
     const menuConfig = {
@@ -86,27 +105,26 @@ export default {
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
       _.sortBy(menus, ['title']).forEach(({ title, subtitle }) => {
-        const linkValue = lang === 'cn'
+        const linkValue = isCN
           ? [<span>{title}</span>, <span class='chinese'>{subtitle}</span>]
           : [<span>{title}</span>]
         let key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
-        if (lang === 'cn') {
+        if (isCN) {
           key = `${key}-cn`
         }
         MenuItems.push(<a-menu-item key={key}>
-          <router-link to={{ path: `/ant-design/components/${key}/` }}>{linkValue}</router-link>
+          <router-link to={`/ant-design/components/${key}/`}>{linkValue}</router-link>
         </a-menu-item>)
       })
       MenuGroup.push(<a-menu-item-group title={type}>{MenuItems}</a-menu-item-group>)
     }
     let locale = zhCN
-    if (lang !== 'cn') {
+    if (!isCN) {
       locale = enUS
     }
     return (
       <div class='page-wrapper'>
-        <Header num={Object.keys(AllDemo).length}/>
-
+        <Header num={Object.keys(AllDemo).length} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
@@ -117,6 +135,7 @@ export default {
                   defaultOpenKeys={['Components']}
                   inlineIndent={40}
                   mode='inline'>
+                  {this.getDocsMenu(isCN)}
                   <a-sub-menu title='Components' key='Components'>
                     {MenuGroup}
                   </a-sub-menu>
@@ -125,9 +144,14 @@ export default {
               <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
                 <div class='content main-container'>
                   <div class='toc-affix' style='width: 110px;'>
-                    {this.getSubMenu(isCN)}
+                    {Demo ? this.getSubMenu(isCN) : ''}
                   </div>
-                  {Demo ? <Provider store={this.store}><Demo key={lang}/></Provider> : '正在紧急开发中...'}
+                  {Demo ? <Provider store={this.store}>
+                    <Demo key={isCN ? 'cn' : 'en'}/>
+                  </Provider> : ''}
+                  <div class='markdown api-container'>
+                    <router-view></router-view>
+                  </div>
                 </div>
               </a-col>
             </a-row>

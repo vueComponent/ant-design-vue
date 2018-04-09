@@ -53,7 +53,7 @@ export default {
         `not have usTitle`,
       )
     }
-    const id = ['components', name.replace('-cn', ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
+    const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
 
     if (this._store.store) {
       const { currentSubMenu } = this._store.store.getState()

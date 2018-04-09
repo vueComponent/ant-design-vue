@@ -45,14 +45,14 @@ export default {
       $slots,
       numberStyle,
     } = this
-    const isDot = dot || status
     let displayCount = count > overflowCount ? `${overflowCount}+` : count
+    const isZero = displayCount === '0' || displayCount === 0
+    const isDot = (dot && !isZero) || status
     // dot mode don't need count
     if (isDot) {
       displayCount = ''
     }
     const children = filterEmpty($slots.default)
-    const isZero = displayCount === '0' || displayCount === 0
     const isEmpty = displayCount === null || displayCount === undefined || displayCount === ''
     const hidden = (isEmpty || (isZero && !showZero)) && !isDot
     const statusCls = classNames({
@@ -62,7 +62,7 @@ export default {
     const scrollNumberCls = classNames({
       [`${prefixCls}-dot`]: isDot,
       [`${prefixCls}-count`]: !isDot,
-      [`${prefixCls}-multiple-words`]: count && count.toString && count.toString().length > 1,
+      [`${prefixCls}-multiple-words`]: !isDot && count && count.toString && count.toString().length > 1,
       [`${prefixCls}-status-${status}`]: !!status,
     })
     const badgeCls = classNames(prefixCls, {

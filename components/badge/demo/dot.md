@@ -6,12 +6,16 @@
 <us>
 #### Red badge
 This will simply display a red badge, without a specific count.
+If count equals 0, it won't display the dot.
 </us>
 
 ```html
 <template>
 <div id="components-badge-demo-dot">
   <a-badge dot>
+    <a-icon type="notification" />
+  </a-badge>
+  <a-badge :count="0" dot>
     <a-icon type="notification" />
   </a-badge>
   <a-badge dot>

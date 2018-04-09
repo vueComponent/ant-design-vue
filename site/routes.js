@@ -57,6 +57,7 @@ export default [
         path: 'docs/use-with-vue-cli-cn',
         component: () => import('../docs/vue/use-with-vue-cli.zh-CN.md'),
       },
+      { path: '', redirect: '/ant-design/docs/introduce/' },
     ],
   },
 

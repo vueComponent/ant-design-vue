@@ -96,7 +96,7 @@ new Vue({
 
 ### 使用 babel-plugin-import
 
-[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一个用于按需加载组件代码和样式的 babel 插件（[原理](/ant-design/docs/vue/getting-started#按需加载)）。
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一个用于按需加载组件代码和样式的 babel 插件（[原理](/ant-design/docs/vue/getting-started-cn/#按需加载)）。
 
 ```bash
 $ yarn add babel-plugin-import --dev
@@ -147,7 +147,7 @@ $ yarn add babel-plugin-import --dev
   })
 ```
 
-最后重启 `npm run dev` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/ant-design/docs/vue/getting-started-cn#按需加载)。
+最后重启 `npm run dev` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/ant-design/docs/vue/getting-started-cn/#按需加载)。
 
 ### 自定义主题
 

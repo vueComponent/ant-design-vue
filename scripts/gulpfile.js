@@ -1,6 +1,6 @@
 'use strict'
 const webpack = require('webpack')
-
+const through2 = require('through2')
 const path = require('path')
 const gulp = require('gulp')
 const readline = require('readline')
@@ -67,6 +67,26 @@ function copyHtml () {
       fs.writeFileSync(path.join(cwd, `${toPath2}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
     })
   })
+  const source = [
+    'docs/vue/*.md',
+    // '!components/vc-slider/**/*', // exclude vc-slider
+  ]
+  gulp.src(source).pipe(through2.obj(function z (file, encoding, next) {
+    const paths = file.path.split('/')
+    const name = paths[paths.length - 1].split('.')[0]
+    const toPaths = [
+      'site-dist/docs',
+      'site-dist/docs/vue',
+      `site-dist/docs/vue/${name}`,
+      `site-dist/docs/vue/${name}-cn`,
+    ]
+    toPaths.forEach(toPath => {
+      mkdirp(path.join(cwd, toPath), function () {
+        fs.writeFileSync(path.join(cwd, `${toPath}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
+      })
+    })
+    next()
+  }))
 }
 
 gulp.task('site-dist', (done) => {

@@ -73,7 +73,7 @@ export default {
       docs.forEach(({ key, enTitle, title }) => {
         const k = isCN ? `${key}-cn` : key
         docsMenu.push(<a-menu-item key={k}>
-          <router-link to={`/ant-design/docs/${k}/`}>{isCN ? enTitle : title}</router-link>
+          <router-link to={`/ant-design/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
         </a-menu-item>)
       })
       return docsMenu

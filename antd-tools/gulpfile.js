@@ -129,7 +129,7 @@ function compile (modules) {
   return merge2([less, jsFilesStream, assets])
 }
 
-gulp.task('dist', (done) => {
+gulp.task('dist', ['compile'], (done) => {
   dist(done)
 })
 gulp.task('compile', ['compile-with-es'], () => {

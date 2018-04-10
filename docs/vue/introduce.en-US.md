@@ -56,6 +56,8 @@ $ yarn add vue-antd-ui
 
 If you are in a bad network environment，you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
 
+> **Using the new features of vue, like `slot-scope`(2.5.0+), `provide / inject`(2.2.0+)**
+
 ### Import in Browser
 
 Add `script` and `link` tags in your browser and use the global variable `antd`.
@@ -129,3 +131,6 @@ If you'd like to help us improve antd, just create a [Pull Request](https://gith
 
 > If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
 
+## THANK YOU
+
+[Ant Design Team](https://github.com/ant-design/ant-design/blob/master/AUTHORS.txt)

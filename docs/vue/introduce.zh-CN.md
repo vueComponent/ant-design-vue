@@ -55,6 +55,8 @@ $ yarn add vue-antd-ui
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
+> **组件库使用了 vue 的新特性`slot-scope`(2.5.0新增), `provide / inject`(2.2.0新增)**
+
 ### 浏览器引入
 
 在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antd`。
@@ -127,4 +129,16 @@ import 'vue-antd-ui/dist/antd.css';  // or 'vue-antd-ui/dist/antd.less'
 如果你希望参与贡献，欢迎 [Pull Request](https://github.com/vueComponent/ant-design/pulls)，或给我们 [报告 Bug](https://github.com/vueComponent/ant-design/issues)。
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
+
+## 关于vue-antd-ui
+
+众所周知，Ant Design作为一门设计语言面世，经历过多年的迭代和积累，它对UI的设计思想已经成为一套事实标准，受到众多前端开发者及企业的追捧和喜爱，也是React开发者手中的神兵利器。希望vue-antd-ui能够让Vue开发者也享受到Ant Design的优秀设计。
+
+vue-antd-ui是Ant Design 3.X的Vue实现，该组件库目前以实现Ant Design React版80%以上的组件，组件的风格与Ant Design 3.4.0版本保持同步，组件的html结构和css样式也保持一致，真正做到了样式0修改，组件API也尽量保持了一致。
+
+Ant Design Vue 致力于提供给程序员**愉悦**的开发体验。
+
+## 特别感谢
+
+[Ant Design Team](https://github.com/ant-design/ant-design/blob/master/AUTHORS.txt)
 

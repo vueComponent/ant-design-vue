@@ -3,7 +3,6 @@
 
 [vue-cli](https://github.com/vuejs/vue-cli) is one of the best Vue application development tools. We are going to use `antd` within it and modify the webpack config for some customized needs.
 
----
 
 ## Install and Initialization
 
@@ -100,7 +99,7 @@ Now we need to customize the default webpack config.
 
 ### Use babel-plugin-import
 
-[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) is a babel plugin for importing components on demand ([How does it work?](/ant-design/docs/vue/getting-started#Import-on-Demand)).
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) is a babel plugin for importing components on demand ([How does it work?](/ant-design/docs/vue/getting-started/#Import-on-Demand)).
 
 ```bash
 $ yarn add babel-plugin-import --dev
@@ -150,7 +149,7 @@ Remove the `import 'vue-antd-ui/dist/antd.css';` statement added before because 
   })
 ```
 
-Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/ant-design/docs/vue/getting-started#Import-on-Demand).
+Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/ant-design/docs/vue/getting-started/#Import-on-Demand).
 
 ### Customize Theme
 

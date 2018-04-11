@@ -1,7 +1,7 @@
 
 import Tabs from '../vc-tabs/src/Tabs'
 import isFlexSupported from '../_util/isFlexSupported'
-import { hasProp, getComponentFromProp, getComponentName, isEmptyElement } from '../_util/props-util'
+import { hasProp, getComponentFromProp, getComponentName, isEmptyElement, getSlotOptions } from '../_util/props-util'
 import warning from '../_util/warning'
 export default {
   name: 'ATabs',
@@ -112,9 +112,9 @@ export default {
     $slots.default && $slots.default.forEach((child) => {
       if (isEmptyElement(child)) { return }
       const { componentOptions } = child
-      const componentName = getComponentName(componentOptions)
-      warning(componentName === 'ATabPane', '`Tabs children just support TabPane')
-      if (componentOptions && componentName === 'TabPane') {
+      const __ANT_TAB_PANE = getSlotOptions(child).__ANT_TAB_PANE
+      warning(__ANT_TAB_PANE, '`Tabs children just support TabPane')
+      if (componentOptions && __ANT_TAB_PANE) {
         componentOptions.propsData = componentOptions.propsData || {}
         if (componentOptions.propsData.tab === undefined) {
           const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')

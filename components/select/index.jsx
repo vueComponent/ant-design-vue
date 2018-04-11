@@ -27,6 +27,7 @@ const AbstractSelectProps = {
   ]),
   autoFocus: PropTypes.bool,
   backfill: PropTypes.bool,
+  showArrow: PropTypes.bool,
 }
 const Value = PropTypes.shape({
   key: String,

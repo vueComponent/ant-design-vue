@@ -47,7 +47,7 @@ const md = require('markdown-it')('default', {
   highlight: renderHighlight,
 }).use(require('markdown-it-anchor'), {
   level: 2,
-  // slugify: string => string,
+  slugify: string => string.trim().split(' ').join('-'),
   permalink: true,
   // renderPermalink: (slug, opts, state, permalink) => {},
   permalinkClass: 'anchor',

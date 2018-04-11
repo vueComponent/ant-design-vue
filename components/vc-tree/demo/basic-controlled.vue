@@ -153,7 +153,7 @@ export default {
         onExpand={this.onExpand} expandedKeys={this.expandedKeys}
         onCheck={this.onCheckStrictly}
         checkedKeys={this.checkStrictlyKeys}
-
+        checkStrictly
       >
         {loop(gData)}
       </Tree>

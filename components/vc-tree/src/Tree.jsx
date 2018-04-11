@@ -114,7 +114,7 @@ const Tree = {
     checkStrictly: false,
     draggable: false,
     defaultExpandParent: true,
-    autoExpandParent: true,
+    autoExpandParent: false,
     defaultExpandAll: false,
     defaultExpandedKeys: [],
     defaultCheckedKeys: [],

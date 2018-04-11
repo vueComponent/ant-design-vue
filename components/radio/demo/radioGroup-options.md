@@ -1,14 +1,24 @@
+<cn>
+#### RadioGroup 组合 - 配置方式
+通过配置 `options` 参数来渲染单选框。
+</cn>
+
+<us>
+#### RadioGroup group - optional
+Render radios by configuring `options`.
+</us>
+
+```html
 <template>
 <div>
-  <RadioGroup :options="plainOptions" @change="onChange1" :defaultValue="value1" />
+  <a-radio-group :options="plainOptions" @change="onChange1" :defaultValue="value1" />
   <br />
-  <RadioGroup :options="options" @change="onChange2" v-model="value2" />
+  <a-radio-group :options="options" @change="onChange2" v-model="value2" />
   <br />
-  <RadioGroup :options="optionsWithDisabled" disabled @change="onChange3" v-model="value3" />
+  <a-radio-group :options="optionsWithDisabled" disabled @change="onChange3" v-model="value3" />
 </div>
 </template>
 <script>
-import { Radio } from 'antd'
 const plainOptions = ['Apple', 'Pear', 'Orange']
 const options = [
   { label: 'Apple', value: 'Apple' },
@@ -42,9 +52,6 @@ export default {
       console.log('radio3 checked', e.target.value)
     },
   },
-  components: {
-    Radio,
-    RadioGroup: Radio.Group,
-  },
 }
 </script>
+```

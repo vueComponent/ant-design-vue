@@ -1,8 +1,19 @@
+<cn>
+#### 不可用
+Radio 不可用。
+</cn>
+
+<us>
+#### disabled
+Radio unavailable.
+</us>
+
+```html
 <template>
   <div>
-    <Radio :defaultChecked="false" :disabled="disabled">Disabled</Radio>
+    <a-radio :defaultChecked="false" :disabled="disabled">Disabled</a-radio>
     <br />
-    <Radio defaultChecked :disabled="disabled">Disabled</Radio>
+    <a-radio defaultChecked :disabled="disabled">Disabled</a-radio>
     <div :style="{ marginTop: 20 }">
       <a-button type="primary" @click="toggleDisabled">
         Toggle disabled
@@ -11,7 +22,6 @@
   </div>
 </template>
 <script>
-import { Radio, Button } from 'antd'
 export default {
   data () {
     return {
@@ -23,9 +33,6 @@ export default {
       this.disabled = !this.disabled
     },
   },
-  components: {
-    Radio,
-
-  },
 }
 </script>
+```

@@ -1,6 +1,8 @@
 /* eslint no-loop-func: 0*/
 import warning from 'warning'
 import { getSlotOptions, getOptionProps } from '../../_util/props-util'
+const DRAG_SIDE_RANGE = 0.25
+const DRAG_MIN_GAP = 2
 
 export function arrDel (list, value) {
   const clone = list.slice()
@@ -21,27 +23,6 @@ export function arrAdd (list, value) {
 
 export function posToArr (pos) {
   return pos.split('-')
-}
-
-// Only used when drag, not affect SSR.
-export function getOffset (ele) {
-  if (!ele.getClientRects().length) {
-    return { top: 0, left: 0 }
-  }
-
-  const rect = ele.getBoundingClientRect()
-  if (rect.width || rect.height) {
-    const doc = ele.ownerDocument
-    const win = doc.defaultView
-    const docElem = doc.documentElement
-
-    return {
-      top: rect.top + win.pageYOffset - docElem.clientTop,
-      left: rect.left + win.pageXOffset - docElem.clientLeft,
-    }
-  }
-
-  return rect
 }
 
 export function getPosition (level, index) {
@@ -194,15 +175,14 @@ export function getDragNodesKeys (treeNodes, node) {
 }
 
 export function calcDropPosition (event, treeNode) {
-  const offsetTop = getOffset(treeNode.selectHandle).top
-  const offsetHeight = treeNode.selectHandle.offsetHeight
-  const pageY = event.pageY
-  const gapHeight = 2 // [Legacy] TODO: remove hard code
-  if (pageY > offsetTop + offsetHeight - gapHeight) {
-    return 1
-  }
-  if (pageY < offsetTop + gapHeight) {
+  const { clientY } = event
+  const { top, bottom, height } = treeNode.selectHandle.getBoundingClientRect()
+  const des = Math.max(height * DRAG_SIDE_RANGE, DRAG_MIN_GAP)
+
+  if (clientY <= top + des) {
     return -1
+  } else if (clientY >= bottom - des) {
+    return 1
   }
   return 0
 }
@@ -216,13 +196,6 @@ export function calcDropPosition (event, treeNode) {
 export function calcExpandedKeys (keyList, props, children = []) {
   if (!keyList) {
     return []
-  }
-
-  const { autoExpandParent } = props
-
-  // Do nothing if not auto expand parent
-  if (!autoExpandParent) {
-    return keyList
   }
 
   // Fill parent expanded keys
@@ -330,9 +303,10 @@ export function calcCheckStateConduct (treeNodes, checkedKeys) {
     }
 
     const { subNodes = [], parentPos, node } = keyNodes[key]
-    if (isCheckDisabled(node)) return
 
     tgtCheckedKeys[key] = true
+
+    if (isCheckDisabled(node)) return
 
     // Conduct down
     subNodes

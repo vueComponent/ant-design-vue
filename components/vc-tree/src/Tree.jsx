@@ -23,6 +23,7 @@ export const contextTypes = {
     prefixCls: PropTypes.string,
     selectable: PropTypes.bool,
     showIcon: PropTypes.bool,
+    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     draggable: PropTypes.bool,
     checkable: PropTypes.oneOfType([
       PropTypes.bool,
@@ -62,6 +63,7 @@ const Tree = {
     prefixCls: PropTypes.string,
     showLine: PropTypes.bool,
     showIcon: PropTypes.bool,
+    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     focusable: PropTypes.bool,
     selectable: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -72,6 +74,7 @@ const Tree = {
     ]),
     checkStrictly: PropTypes.bool,
     draggable: PropTypes.bool,
+    defaultExpandParent: PropTypes.bool,
     autoExpandParent: PropTypes.bool,
     defaultExpandAll: PropTypes.bool,
     defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
@@ -110,6 +113,7 @@ const Tree = {
     disabled: false,
     checkStrictly: false,
     draggable: false,
+    defaultExpandParent: true,
     autoExpandParent: true,
     defaultExpandAll: false,
     defaultExpandedKeys: [],
@@ -123,14 +127,30 @@ const Tree = {
     const props = getOptionProps(this)
     const {
       defaultExpandAll,
+      defaultExpandParent,
       defaultExpandedKeys,
       defaultCheckedKeys,
       defaultSelectedKeys,
+      expandedKeys,
     } = props
     const children = this.$slots.default
     // Sync state with props
     const { checkedKeys = [], halfCheckedKeys = [] } =
       calcCheckedKeys(defaultCheckedKeys, props, children) || {}
+
+    const state = {
+      sSelectedKeys: calcSelectedKeys(defaultSelectedKeys, props),
+      sCheckedKeys: checkedKeys,
+      sHalfCheckedKeys: halfCheckedKeys,
+    }
+
+    if (defaultExpandAll) {
+      state.sExpandedKeys = getFullKeyList(children)
+    } else if (defaultExpandParent) {
+      state.sExpandedKeys = calcExpandedKeys(expandedKeys || defaultExpandedKeys, props, children)
+    } else {
+      state.sExpandedKeys = defaultExpandedKeys
+    }
 
     // Cache for check status to optimize
     this.checkedBatch = null
@@ -141,13 +161,7 @@ const Tree = {
       halfCheckedKeys: 'sHalfCheckedKeys',
     }
     return {
-      sExpandedKeys: defaultExpandAll
-        ? getFullKeyList(children)
-        : calcExpandedKeys(defaultExpandedKeys, props, children),
-      sSelectedKeys: calcSelectedKeys(defaultSelectedKeys, props, children),
-      sCheckedKeys: checkedKeys,
-      sHalfCheckedKeys: halfCheckedKeys,
-
+      ...state,
       ...(this.getSyncProps(props) || {}),
       dragOverNodeKey: '',
       dropPosition: null,
@@ -161,18 +175,21 @@ const Tree = {
 
   watch: {
     children (val) {
-      const { checkedKeys = [], halfCheckedKeys = [] } = calcCheckedKeys(this.checkedKeys || this.sCheckedKeys, this.$props, this.$slots.default) || {}
+      const { checkedKeys = [], halfCheckedKeys = [] } = calcCheckedKeys(this.checkedKeys || this.sCheckedKeys, this.$props, val) || {}
       this.sCheckedKeys = checkedKeys
       this.sHalfCheckedKeys = halfCheckedKeys
     },
+    autoExpandParent (val) {
+      this.sExpandedKeys = val ? calcExpandedKeys(this.expandedKeys, this.$props, this.$slots.default) : this.expandedKeys
+    },
     expandedKeys (val) {
-      this.sExpandedKeys = calcExpandedKeys(this.expandedKeys, this.$props, this.$slots.default)
+      this.sExpandedKeys = this.autoExpandParent ? calcExpandedKeys(val, this.$props, this.$slots.default) : val
     },
     selectedKeys (val) {
-      this.sSelectedKeys = calcSelectedKeys(this.selectedKeys, this.$props, this.$slots.default)
+      this.sSelectedKeys = calcSelectedKeys(val, this.$props, this.$slots.default)
     },
     checkedKeys (val) {
-      const { checkedKeys = [], halfCheckedKeys = [] } = calcCheckedKeys(this.checkedKeys, this.$props, this.$slots.default) || {}
+      const { checkedKeys = [], halfCheckedKeys = [] } = calcCheckedKeys(val, this.$props, this.$slots.default) || {}
       this.sCheckedKeys = checkedKeys
       this.sHalfCheckedKeys = halfCheckedKeys
     },
@@ -251,6 +268,18 @@ const Tree = {
       }, 0)
     },
     onNodeDragOver (event, node) {
+      const { eventKey } = node.props
+
+      // Update drag position
+      if (this.dragNode && eventKey === this.dragOverNodeKey) {
+        const dropPosition = calcDropPosition(event, node)
+
+        if (dropPosition === this.dropPosition) return
+
+        this.setState({
+          dropPosition,
+        })
+      }
       this.__emit('dragover', { event, node })
     },
     onNodeDragLeave (event, node) {
@@ -502,8 +531,10 @@ const Tree = {
         newState.sHalfCheckedKeys = halfCheckedKeys
       }
 
-      if (checkSync('expandedKeys')) {
-        newState.sExpandedKeys = calcExpandedKeys(props.expandedKeys, props, children)
+      // Re-calculate when autoExpandParent or expandedKeys changed
+      if (prevProps && (checkSync('autoExpandParent') || checkSync('expandedKeys'))) {
+        newState.sExpandedKeys = props.autoExpandParent
+          ? calcExpandedKeys(props.expandedKeys, props, children) : props.expandedKeys
       }
 
       if (checkSync('selectedKeys')) {

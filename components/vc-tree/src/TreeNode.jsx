@@ -65,10 +65,10 @@ const TreeNode = {
   },
   inject: {
     vcTree: { default: {}},
+    vcTreeNode: { default: {}},
   },
   provide () {
     return {
-      vcTree: this.vcTree,
       vcTreeNode: this,
     }
   },
@@ -358,19 +358,37 @@ const TreeNode = {
 
     // Load data to avoid default expanded tree without data
     syncLoadData (props) {
-      const { loadStatus } = this
-      const { expanded } = props
+      const { expanded } = this
       const { vcTree: { loadData }} = this
 
-      if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf2()) {
-        this.setState({ loadStatus: LOAD_STATUS_LOADING })
+      // read from state to avoid loadData at same time
+      this.setState(({ loadStatus }) => {
+        if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf()) {
+          loadData(this).then(() => {
+            this.setState({ loadStatus: LOAD_STATUS_LOADED })
+          }).catch(() => {
+            this.setState({ loadStatus: LOAD_STATUS_FAILED })
+          })
 
-        loadData(this).then(() => {
-          this.setState({ loadStatus: LOAD_STATUS_LOADED })
-        }).catch(() => {
-          this.setState({ loadStatus: LOAD_STATUS_FAILED })
-        })
-      }
+          return { loadStatus: LOAD_STATUS_LOADING }
+        }
+
+        return null
+      })
+
+      // const { loadStatus } = this
+      // const { expanded } = props
+      // const { vcTree: { loadData }} = this
+
+      // if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf2()) {
+      //   this.setState({ loadStatus: LOAD_STATUS_LOADING })
+
+      //   loadData(this).then(() => {
+      //     this.setState({ loadStatus: LOAD_STATUS_LOADED })
+      //   }).catch(() => {
+      //     this.setState({ loadStatus: LOAD_STATUS_FAILED })
+      //   })
+      // }
     },
 
     // Switcher
@@ -437,7 +455,7 @@ const TreeNode = {
     // Icon + Title
     renderSelector () {
       const { title, selected, icon, loadStatus, dragNodeHighlight } = this
-      const { vcTree: { prefixCls, showIcon, draggable, loadData }} = this
+      const { vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData }} = this
       const disabled = this.isDisabled()
 
       const wrapClass = `${prefixCls}-node-content-wrapper`
@@ -446,15 +464,18 @@ const TreeNode = {
       let $icon
 
       if (showIcon) {
-        $icon = icon ? (
+        const currentIcon = icon || treeIcon
+        $icon = currentIcon ? (
           <span
             class={classNames(
               `${prefixCls}-iconEle`,
               `${prefixCls}-icon__customize`,
             )}
           >
-            {typeof icon === 'function'
-              ? icon(this.$props) : icon}
+            {typeof currentIcon === 'function'
+              ? currentIcon(
+                { props: this.$props, on: this.$listeners }
+              ) : currentIcon}
           </span>
         ) : this.renderIcon()
       } else if (loadData && loadStatus === LOAD_STATUS_LOADING) {
@@ -510,6 +531,7 @@ const TreeNode = {
         animProps = getTransitionProps(openTransitionName, { appear: transitionAppear })
       } else if (typeof openAnimation === 'object') {
         animProps = { ...openAnimation }
+        animProps.props = { css: false, ...animProps.props }
         if (!transitionAppear) {
           delete animProps.props.appear
         }
@@ -526,7 +548,6 @@ const TreeNode = {
       if (expanded) {
         $children = (
           <ul
-            v-show={expanded}
             class={classNames(
               `${prefixCls}-child-tree`,
               expanded && `${prefixCls}-child-tree-open`,

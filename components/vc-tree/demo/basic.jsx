@@ -16,7 +16,6 @@ export default {
       defaultSelectedKeys: keys,
       defaultCheckedKeys: keys,
       switchIt: true,
-      showMore: false,
     }
   },
   methods: {
@@ -55,7 +54,7 @@ export default {
     </span>)
     return (<div style={{ margin: '0 20px' }}>
       <h2>simple</h2>
-      {/* <Tree
+      <Tree
         class='myCls' showLine checkable defaultExpandAll
         defaultExpandedKeys={this.defaultExpandedKeys}
         onExpand={this.onExpand}
@@ -77,10 +76,9 @@ export default {
             <TreeNode title='parent 1-2-1' key='0-0-2-1' />
           </TreeNode>
         </TreeNode>
-      </Tree> */}
+      </Tree>
 
       <h2>Check on Click TreeNode</h2>
-      <button onClick={this.toggleChildren}>toggle children</button>
       <Tree
         class='myCls'
         showLine
@@ -98,10 +96,6 @@ export default {
             <TreeNode title='parent 1-1-0' key='0-0-1-0' disableCheckbox />
             <TreeNode title='parent 1-1-1' key='0-0-1-1' />
           </TreeNode>
-          {this.showMore ? <TreeNode title='parent 2-1' key='0-0-2'>
-            <TreeNode title='parent 2-1-0' key='0-0-2-0' disableCheckbox />
-            <TreeNode title='parent 2-1-1' key='0-0-2-1' />
-          </TreeNode> : null}
         </TreeNode>
       </Tree>
     </div>)

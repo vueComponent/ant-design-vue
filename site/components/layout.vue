@@ -25,12 +25,31 @@ export default {
       this.unsubscribe()
     }
   },
+  mounted () {
+    this.addSubMenu()
+  },
   watch: {
-    '$route': function () {
+    '$route.path': function () {
       this.store.setState({ currentSubMenu: [] })
+      this.addSubMenu()
     },
   },
   methods: {
+    addSubMenu () {
+      if (this.$route.path.indexOf('/docs/vue/') !== -1) {
+        this.$nextTick(() => {
+          const menus = []
+          this.$refs.doc.querySelectorAll(['h2', 'h3']).forEach(dom => {
+            const id = dom.id
+            if (id) {
+              const title = dom.textContent.split('#')[0].trim()
+              menus.push({ cnTitle: title, usTitle: title, id })
+            }
+          })
+          this.currentSubMenu = menus
+        })
+      }
+    },
     subscribe () {
       const { store } = this
       this.unsubscribe = store.subscribe(() => {
@@ -42,21 +61,22 @@ export default {
       const lis = []
       currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
         const title = isCN ? cnTitle : usTitle
-        const className = window.location.hash === `#${id}` ? 'current' : ''
+        const className = decodeURIComponent(window.location.hash) === `#${id}` ? 'current' : ''
         lis.push(<li title={title}><a href={`#${id}`} class={className}>{title}</a></li>)
       })
+      const showApi = this.$route.path.indexOf('/components/') !== -1
       return (
         <a-affix>
           <ul id='demo-toc' class='toc'>
             {lis}
-            <li title='API' key='API'>
+            {showApi ? <li title='API' key='API'>
               <a
-                href='#api'
+                href='#API'
                 class={{
-                  current: window.location.hash === '#api',
+                  current: window.location.hash === '#API',
                 }}
               >API</a>
-            </li>
+            </li> : ''}
           </ul>
         </a-affix>
       )
@@ -93,6 +113,7 @@ export default {
       Feedback: [],
       Other: [],
     }
+    const searchData = []
     for (const [title, d] of Object.entries(AllDemo)) {
       const type = d.type || 'Other'
       const key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
@@ -112,6 +133,11 @@ export default {
         if (isCN) {
           key = `${key}-cn`
         }
+        searchData.push({
+          title,
+          subtitle,
+          url: `/ant-design/components/${key}/`,
+        })
         MenuItems.push(<a-menu-item key={key}>
           <router-link to={`/ant-design/components/${key}/`}>{linkValue}</router-link>
         </a-menu-item>)
@@ -124,7 +150,7 @@ export default {
     }
     return (
       <div class='page-wrapper'>
-        <Header num={Object.keys(AllDemo).length} name={name}/>
+        <Header num={Object.keys(AllDemo).length} searchData={searchData} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
@@ -144,12 +170,12 @@ export default {
               <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
                 <div class='content main-container'>
                   <div class='toc-affix' style='width: 110px;'>
-                    {Demo ? this.getSubMenu(isCN) : ''}
+                    {this.getSubMenu(isCN)}
                   </div>
                   {Demo ? <Provider store={this.store}>
                     <Demo key={isCN ? 'cn' : 'en'}/>
                   </Provider> : ''}
-                  <div class='markdown api-container'>
+                  <div class='markdown api-container' ref='doc'>
                     <router-view></router-view>
                   </div>
                 </div>

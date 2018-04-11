@@ -1,23 +1,3 @@
-<template>
-  <div>
-    <h1>Basic</h1>
-    <Basic />
-    <h1>Disabled</h1>
-    <Disabled />
-    <h1>RadioButton</h1>
-    <RadioButton />
-    <h1>RadioGroupMore</h1>
-    <RadioGroupMore />
-    <h1>RadioGroupOptions</h1>
-    <RadioGroupOptions />
-    <h1>RadioGroupWithName</h1>
-    <RadioGroupWithName />
-    <h1>RadioGroup</h1>
-    <RadioGroup />
-    <h1>Size</h1>
-    <Size />
-  </div>
-</template>
 <script>
 import Basic from './basic'
 import Disabled from './disabled'
@@ -27,20 +7,53 @@ import RadioGroupOptions from './radioGroup-options'
 import RadioGroupWithName from './radioGroup-with-name'
 import RadioGroup from './radioGroup'
 import Size from './size'
+import CN from '../index.zh-CN.md'
+import US from '../index.en-US.md'
+
+const md = {
+  cn: `# 单选框
+  单选框。
+
+## 何时使用
+
+- 用于在多个备选项中选中单个状态。
+- 和 Select 的区别是，Radio 所有选项默认可见，方便用户在比较中选择，因此选项不宜过多。
+        ## 代码演示`,
+  us: `# Radio
+  Radio.
+
+## When To Use
+
+- Used to select a single state in multiple options.
+- The difference between Select is that Radio is visible to user and can facilitate the comparison of choice. So, when you want to use Radio, option should not be too much.
+  ## Examples
+  `,
+}
 export default {
   category: 'Components',
   subtitle: '单选框',
   type: 'Data Entry',
   title: 'Radio',
-  components: {
-    Basic,
-    Disabled,
-    RadioButton,
-    RadioGroupMore,
-    RadioGroupOptions,
-    RadioGroupWithName,
-    RadioGroup,
-    Size,
+  render () {
+    return (
+      <div>
+        <md cn={md.cn} us={md.us}/>
+        <Basic />
+        <Disabled />
+        <RadioButton />
+        <RadioGroupMore />
+        <RadioGroupOptions />
+        <RadioGroupWithName />
+        <RadioGroup />
+        <Size />
+        <api>
+          <template slot='cn'>
+            <CN/>
+          </template>
+          <US/>
+        </api>
+      </div>
+    )
   },
 }
 </script>

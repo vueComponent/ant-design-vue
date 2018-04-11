@@ -13,7 +13,7 @@ If you need several buttons, we recommend that you use 1 primary button + n seco
   <div>
     <a-button type="primary">Primary</a-button>
     <a-button>secondary</a-button>
-    <a-dropdown overlay={menu}>
+    <a-dropdown>
       <a-menu slot="overlay" @click="handleMenuClick">
         <a-menu-item key="1">1st item</a-menu-item>
         <a-menu-item key="2">2nd item</a-menu-item>

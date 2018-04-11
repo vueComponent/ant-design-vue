@@ -26,12 +26,12 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 ## Features
 
 - An enterprise-class UI design language for web applications.
-- A set of high-quality React components out of the box.
+- A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
 
 ## Environment Support
 
-* Modern browsers and Internet Explorer 9+ (with [polyfills](https://vuecomponent.github.io/ant-design/docs/react/getting-started-cn#兼容性))
+* Modern browsers and Internet Explorer 9+ (with [polyfills](https://vuecomponent.github.io/ant-design/docs/vue/getting-started-cn/#兼容性))
 * Server-side Rendering
 
 ## Version

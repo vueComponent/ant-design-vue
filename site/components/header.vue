@@ -1,12 +1,15 @@
 <script>
 import { isZhCN } from '../util'
+import _ from 'lodash'
 export default {
   props: {
     num: Number,
     name: String,
+    searchData: Array,
   },
   data () {
     return {
+      value: null,
     }
   },
   methods: {
@@ -18,10 +21,14 @@ export default {
         path: path.replace(name, newName),
       })
     },
+    onSelect (val) {
+      this.$router.push(val)
+      this.value = val
+    },
   },
   render () {
     const name = this.name
-
+    const searchData = _.sortBy(this.searchData, ['title'])
     const isCN = isZhCN(name)
     return (
       <header id='header'>
@@ -33,8 +40,26 @@ export default {
             </router-link>
           </a-col>
           <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
-            <div id='search-box'>
-              进度：{this.num} / 52
+            <div id='search-box' style='display: block'>
+              <a-icon type='search' />
+              <a-select
+                ref='selectBox'
+                placeholder={isCN ? '搜索组件...' : 'input search text'}
+                style='width: 200px'
+                defaultActiveFirstOption={false}
+                showArrow={false}
+                showSearch
+                onSelect={this.onSelect}
+                optionFilterProp='children'
+                key={this.value}
+              >
+                {
+                  searchData.map(({ title, subtitle, url }) =>
+                    <a-select-option key={url}>
+                      {title} {isCN && subtitle}
+                    </a-select-option>)
+                }
+              </a-select>
             </div>
             <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
               {isCN ? 'English' : '中文'}

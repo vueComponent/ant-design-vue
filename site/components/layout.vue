@@ -113,6 +113,7 @@ export default {
       Feedback: [],
       Other: [],
     }
+    const searchData = []
     for (const [title, d] of Object.entries(AllDemo)) {
       const type = d.type || 'Other'
       const key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
@@ -132,6 +133,11 @@ export default {
         if (isCN) {
           key = `${key}-cn`
         }
+        searchData.push({
+          title,
+          subtitle,
+          url: `/ant-design/components/${key}/`,
+        })
         MenuItems.push(<a-menu-item key={key}>
           <router-link to={`/ant-design/components/${key}/`}>{linkValue}</router-link>
         </a-menu-item>)
@@ -144,7 +150,7 @@ export default {
     }
     return (
       <div class='page-wrapper'>
-        <Header num={Object.keys(AllDemo).length} name={name}/>
+        <Header num={Object.keys(AllDemo).length} searchData={searchData} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>

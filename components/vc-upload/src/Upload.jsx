@@ -8,7 +8,7 @@ import IframeUpload from './IframeUploader'
 // }
 
 const uploadProps = {
-  component: PropTypes.string,
+  componentTag: PropTypes.string,
   prefixCls: PropTypes.string,
   action: PropTypes.string,
   name: PropTypes.string,
@@ -35,7 +35,7 @@ export default {
   name: 'Upload',
   mixins: [BaseMixin],
   props: initDefaultProps(uploadProps, {
-    component: 'span',
+    componentTag: 'span',
     prefixCls: 'rc-upload',
     data: {},
     headers: {},
@@ -78,14 +78,21 @@ export default {
   },
 
   render () {
+    const componentProps = {
+      props: {
+        ...this.$props,
+      },
+      on: this.$listeners,
+      ref: 'uploaderRef',
+    }
     if (this.supportServerRender) {
       const ComponentUploader = this.Component
       if (ComponentUploader) {
-        return <ComponentUploader {...this.$props} ref='uploaderRef' />
+        return <ComponentUploader {...componentProps} >{this.$slots.default}</ComponentUploader>
       }
       return null
     }
     const ComponentUploader = this.getComponent()
-    return <ComponentUploader {...this.$props} ref='uploaderRef' />
+    return <ComponentUploader {...componentProps} >{this.$slots.default}</ComponentUploader>
   },
 }

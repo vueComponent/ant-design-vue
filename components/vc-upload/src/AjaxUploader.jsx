@@ -6,9 +6,10 @@ import getUid from './uid'
 import attrAccept from './attr-accept'
 
 const upLoadPropTypes = {
-  component: PropTypes.string,
+  componentTag: PropTypes.string,
   // style: PropTypes.object,
   prefixCls: PropTypes.string,
+  action: PropTypes.string,
   // className: PropTypes.string,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -163,24 +164,32 @@ const AjaxUploader = {
   },
   render () {
     const {
-      component: Tag, prefixCls, disabled, multiple, accept,
+      componentTag: Tag, prefixCls, disabled, multiple, accept,
     } = this.$props
     const cls = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
     })
     const events = disabled ? {} : {
-      onClick: this.onClick,
-      onKeydown: this.onKeyDown,
-      onDrop: this.onFileDrop,
-      onDragover: this.onFileDrop,
-      tabIndex: '0',
+      click: this.onClick,
+      keydown: this.onKeyDown,
+      drop: this.onFileDrop,
+      dragover: this.onFileDrop,
+    }
+    const tagProps = {
+      on: {
+        ...events,
+        ...this.$listeners,
+      },
+      attrs: {
+        role: 'button',
+        tabIndex: disabled ? null : '0',
+      },
+      class: cls,
     }
     return (
       <Tag
-        {...events}
-        class={cls}
-        role='button'
+        {...tagProps}
       >
         <input
           type='file'

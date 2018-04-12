@@ -17,7 +17,7 @@ const IFRAME_STYLE = {
 const IframeUploader = {
   mixins: [BaseMixin],
   props: {
-    component: PropTypes.string,
+    componentTag: PropTypes.string,
     // style: PropTypes.object,
     disabled: PropTypes.bool,
     prefixCls: PropTypes.string,
@@ -242,7 +242,7 @@ const IframeUploader = {
 
   render () {
     const {
-      component: Tag, disabled,
+      componentTag: Tag, disabled,
       prefixCls,
     } = this.$props
     const iframeStyle = {
@@ -253,6 +253,7 @@ const IframeUploader = {
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
     })
+
     return (
       <Tag
         className={cls}

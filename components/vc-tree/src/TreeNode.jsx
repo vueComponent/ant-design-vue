@@ -291,11 +291,6 @@ const TreeNode = {
       }
     },
 
-    // Drag usage
-    setSelectHandle (node) {
-      this.selectHandle = node
-    },
-
     getNodeChildren () {
       const { $slots: { default: children }} = this
       const originList = filterEmpty(children)
@@ -497,10 +492,9 @@ const TreeNode = {
           )}
           draggable={(!disabled && draggable) || undefined}
           aria-grabbed={(!disabled && draggable) || undefined}
-
           onMouseenter={this.onMouseEnter}
           onMouseleave={this.onMouseLeave}
-          onContexmenu={this.onContextMenu}
+          onContextmenu={this.onContextMenu}
           onClick={this.onSelectorClick}
           onDragstart={this.onDragStart}
         >

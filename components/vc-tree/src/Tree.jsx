@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 import classNames from 'classnames'
 import warning from 'warning'
-import { initDefaultProps, getOptionProps } from '../../_util/props-util'
+import { initDefaultProps, getOptionProps, getSlots } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import BaseMixin from '../../_util/BaseMixin'
 import {
@@ -162,9 +162,10 @@ const Tree = {
     }
     return {
       ...state,
-      ...(this.getSyncProps(props) || {}),
+      ...this.getSyncProps(props),
       dragOverNodeKey: '',
       dropPosition: null,
+      dragNodesKeys: [],
     }
   },
   provide () {
@@ -203,8 +204,8 @@ const Tree = {
   methods: {
     onNodeDragStart (event, node) {
       const { sExpandedKeys } = this
-      const { eventKey, children } = node.props
-
+      const { eventKey } = node
+      const children = getSlots(node).default
       this.dragNode = node
 
       this.setState({
@@ -223,13 +224,13 @@ const Tree = {
      */
     onNodeDragEnter (event, node) {
       const { sExpandedKeys } = this
-      const { pos, eventKey } = node.props
+      const { pos, eventKey } = node
 
       const dropPosition = calcDropPosition(event, node)
 
       // Skip if drag node is self
       if (
-        this.dragNode.props.eventKey === eventKey &&
+        this.dragNode.eventKey === eventKey &&
         dropPosition === 0
       ) {
         this.setState({
@@ -268,7 +269,7 @@ const Tree = {
       }, 0)
     },
     onNodeDragOver (event, node) {
-      const { eventKey } = node.props
+      const { eventKey } = node
 
       // Update drag position
       if (this.dragNode && eventKey === this.dragOverNodeKey) {
@@ -297,7 +298,7 @@ const Tree = {
     onNodeDrop (event, node) {
       const { dragNodesKeys, dropPosition } = this
 
-      const { eventKey, pos } = node.props
+      const { eventKey, pos } = node
 
       this.setState({
         dragOverNodeKey: '',
@@ -509,46 +510,21 @@ const Tree = {
     /**
      * Sync state with props if needed
      */
-    getSyncProps (props = {}, prevProps) {
-      let needSync = false
+    getSyncProps (props = {}) {
       const newState = {}
-      const myPrevProps = prevProps || {}
       const children = this.$slots.default
-      function checkSync (name) {
-        if (props[name] !== myPrevProps[name]) {
-          needSync = true
-          return true
-        }
-        return false
-      }
-
-      // Children change will affect check box status.
-      // And no need to check when prev props not provided
-      if (prevProps && checkSync('children')) {
-        const { checkedKeys = [], halfCheckedKeys = [] } =
-          calcCheckedKeys(props.checkedKeys || this.sCheckedKeys, props, children) || {}
-        newState.sCheckedKeys = checkedKeys
-        newState.sHalfCheckedKeys = halfCheckedKeys
-      }
-
-      // Re-calculate when autoExpandParent or expandedKeys changed
-      if (prevProps && (checkSync('autoExpandParent') || checkSync('expandedKeys'))) {
-        newState.sExpandedKeys = props.autoExpandParent
-          ? calcExpandedKeys(props.expandedKeys, props, children) : props.expandedKeys
-      }
-
-      if (checkSync('selectedKeys')) {
+      if (props.selectedKeys !== undefined) {
         newState.sSelectedKeys = calcSelectedKeys(props.selectedKeys, props, children)
       }
 
-      if (checkSync('checkedKeys')) {
+      if (props.checkedKeys !== undefined) {
         const { checkedKeys = [], halfCheckedKeys = [] } =
         calcCheckedKeys(props.checkedKeys, props, children) || {}
         newState.sCheckedKeys = checkedKeys
         newState.sHalfCheckedKeys = halfCheckedKeys
       }
 
-      return needSync ? newState : null
+      return newState
     },
 
     /**

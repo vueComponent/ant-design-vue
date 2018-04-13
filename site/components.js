@@ -52,7 +52,7 @@ import {
   Timeline,
   Tooltip,
   // Mention,
-  // Upload,
+  Upload,
   // version,
 } from 'antd'
 
@@ -134,7 +134,8 @@ Vue.component(Timeline.name, Timeline)
 Vue.component(Timeline.Item.name, Timeline.Item)
 Vue.component(Tooltip.name, Tooltip)
 // Vue.component(Mention.name, Mention)
-// Vue.component(Upload.name, Upload)
+Vue.component(Upload.name, Upload)
+Vue.component(Upload.Dragger.name, Upload.Dragger)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification

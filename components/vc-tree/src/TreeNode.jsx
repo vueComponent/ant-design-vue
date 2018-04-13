@@ -1,9 +1,8 @@
 import PropTypes from '../../_util/vue-types'
 import classNames from 'classnames'
 import warning from 'warning'
-import { contextTypes } from './Tree'
 import { getPosition, getNodeChildren, isCheckDisabled, traverseTreeNodes } from './util'
-import { initDefaultProps, getOptionProps, filterEmpty } from '../../_util/props-util'
+import { initDefaultProps, getOptionProps, filterEmpty, getComponentFromProp } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
 import getTransitionProps from '../../_util/getTransitionProps'
 
@@ -18,13 +17,6 @@ const LOAD_STATUS_FAILED = 0 // Action align, let's make failed same as init.
 const defaultTitle = '---'
 
 let onlyTreeNodeWarned = false // Only accept TreeNode
-
-export const nodeContextTypes = {
-  ...contextTypes,
-  vcTreeNode: PropTypes.shape({
-    onUpCheckConduct: PropTypes.func,
-  }),
-}
 
 const TreeNode = {
   name: 'TreeNode',
@@ -53,9 +45,8 @@ const TreeNode = {
     disabled: PropTypes.bool,
     disableCheckbox: PropTypes.bool,
     icon: PropTypes.any,
-  }, {
-    title: defaultTitle,
-  }),
+    dataRef: PropTypes.object,
+  }, {}),
 
   data () {
     return {
@@ -358,7 +349,7 @@ const TreeNode = {
 
       // read from state to avoid loadData at same time
       this.setState(({ loadStatus }) => {
-        if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf()) {
+        if (loadData && loadStatus === LOAD_STATUS_NONE && expanded && !this.isLeaf2()) {
           loadData(this).then(() => {
             this.setState({ loadStatus: LOAD_STATUS_LOADED })
           }).catch(() => {
@@ -449,10 +440,11 @@ const TreeNode = {
 
     // Icon + Title
     renderSelector () {
-      const { title, selected, icon, loadStatus, dragNodeHighlight } = this
-      const { vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData }} = this
+      const { selected, icon, loadStatus, dragNodeHighlight, $scopedSlots } = this
+      const { vcTree: { prefixCls, showIcon, draggable, loadData }} = this
       const disabled = this.isDisabled()
-
+      const title = getComponentFromProp(this, 'title') || defaultTitle
+      const treeIcon = getComponentFromProp(this, 'icon') || $scopedSlots.icon
       const wrapClass = `${prefixCls}-node-content-wrapper`
 
       // Icon - Still show loading icon when loading without showIcon
@@ -468,9 +460,7 @@ const TreeNode = {
             )}
           >
             {typeof currentIcon === 'function'
-              ? currentIcon(
-                { props: this.$props, on: this.$listeners }
-              ) : currentIcon}
+              ? currentIcon(this.$props) : currentIcon}
           </span>
         ) : this.renderIcon()
       } else if (loadData && loadStatus === LOAD_STATUS_LOADING) {

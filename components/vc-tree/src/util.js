@@ -176,7 +176,7 @@ export function getDragNodesKeys (treeNodes, node) {
 
 export function calcDropPosition (event, treeNode) {
   const { clientY } = event
-  const { top, bottom, height } = treeNode.selectHandle.getBoundingClientRect()
+  const { top, bottom, height } = treeNode.$refs.selectHandle.getBoundingClientRect()
   const des = Math.max(height * DRAG_SIDE_RANGE, DRAG_MIN_GAP)
 
   if (clientY <= top + des) {

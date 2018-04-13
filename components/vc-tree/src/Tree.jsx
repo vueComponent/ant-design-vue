@@ -16,45 +16,6 @@ import {
  * Thought we still use `cloneElement` to pass `key`,
  * other props can pass with context for future refactor.
  */
-export const contextTypes = {
-  rcTree: PropTypes.shape({
-    root: PropTypes.object,
-
-    prefixCls: PropTypes.string,
-    selectable: PropTypes.bool,
-    showIcon: PropTypes.bool,
-    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    draggable: PropTypes.bool,
-    checkable: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.object,
-    ]),
-    checkStrictly: PropTypes.bool,
-    disabled: PropTypes.bool,
-    openTransitionName: PropTypes.string,
-    openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-
-    loadData: PropTypes.func,
-    filterTreeNode: PropTypes.func,
-    renderTreeNode: PropTypes.func,
-
-    isKeyChecked: PropTypes.func,
-
-    // onNodeExpand: PropTypes.func,
-    // onNodeSelect: PropTypes.func,
-    // onNodeMouseEnter: PropTypes.func,
-    // onNodeMouseLeave: PropTypes.func,
-    // onNodeContextMenu: PropTypes.func,
-    // onNodeDragStart: PropTypes.func,
-    // onNodeDragEnter: PropTypes.func,
-    // onNodeDragOver: PropTypes.func,
-    // onNodeDragLeave: PropTypes.func,
-    // onNodeDragEnd: PropTypes.func,
-    // onNodeDrop: PropTypes.func,
-    // onBatchNodeCheck: PropTypes.func,
-    // onCheckConductFinished: PropTypes.func,
-  }),
-}
 
 const Tree = {
   name: 'Tree',
@@ -68,10 +29,7 @@ const Tree = {
     selectable: PropTypes.bool,
     disabled: PropTypes.bool,
     multiple: PropTypes.bool,
-    checkable: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.node,
-    ]),
+    checkable: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     checkStrictly: PropTypes.bool,
     draggable: PropTypes.bool,
     defaultExpandParent: PropTypes.bool,

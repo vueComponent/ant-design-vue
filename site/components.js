@@ -44,7 +44,7 @@ import {
   Switch,
   Table,
   Transfer,
-  // Tree,
+  Tree,
   // TreeSelect,
   Tabs,
   Tag,
@@ -122,7 +122,8 @@ Vue.component(Table.name, Table)
 Vue.component(Table.Column.name, Table.Column)
 Vue.component(Table.ColumnGroup.name, Table.ColumnGroup)
 Vue.component(Transfer.name, Transfer)
-// Vue.component(Tree.name, Tree)
+Vue.component(Tree.name, Tree)
+Vue.component(Tree.TreeNode.name, Tree.TreeNode)
 // Vue.component(TreeSelect.name, TreeSelect)
 Vue.component(Tabs.name, Tabs)
 Vue.component(Tabs.TabPane.name, Tabs.TabPane)

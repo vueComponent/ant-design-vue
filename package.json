@@ -143,6 +143,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
     "omit.js": "^1.0.0",
+    "reqwest": "^2.0.5",
     "shallow-equal": "^1.0.0",
     "shallowequal": "^1.0.2",
     "vue": "^2.5.15",

@@ -148,7 +148,7 @@ export default {
   render (h) {
     const { $props, $data, $slots } = this
     const { prefixCls, openClassName, getPopupContainer } = $props
-    const children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')[0]
+    const children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')
     let sVisible = $data.sVisible
     // Hide tooltip when there is no title
     if (!hasProp(this, 'visible') && this.isNoTitle()) {

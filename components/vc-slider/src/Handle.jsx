@@ -3,8 +3,6 @@ import addEventListener from '../../_util/Dom/addEventListener'
 import BaseMixin from '../../_util/BaseMixin'
 import { getOptionProps } from '../../_util/props-util'
 
-function noop () {}
-
 export default {
   name: 'Handle',
   mixins: [BaseMixin],

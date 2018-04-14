@@ -63,7 +63,10 @@ export default {
     allowClear: true,
     showToday: false,
   }),
-
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   data () {
     const value = this.value || this.defaultValue || []
     if (

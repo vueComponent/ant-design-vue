@@ -27,7 +27,6 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | -------- | ----------- | ---- | ------- |
 | allowClear | Whether to show clear button | boolean | true |
 | autoFocus | get focus when component mounted | boolean | false |
-| className | picker className | string | '' |
 | dateRender | custom rendering function for date cells by setting a scoped slot | slot="dateRender" slot-scope="current, today" | - |
 | disabled | determine whether the DatePicker is disabled | boolean | false |
 | disabledDate | specify the date that cannot be selected | (currentDate: moment) => boolean | - |
@@ -62,7 +61,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](#/us/components/time-picker/API) |
 | showTime.defaultValue | to set default time of selected date | [moment](http://momentjs.com/) | moment() |
 | showToday | whether to show "Today" button | boolean | true |
-| value | to set date | [moment](http://momentjs.com/) | - |
+| value(v-model) | to set date | [moment](http://momentjs.com/) | - |
 
 ### DatePicker Events
 | Events Name | Description | Arguments |
@@ -79,7 +78,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM" |
 | monthCellContentRender | Custom month cell content render method by setting a scoped slot | slot="monthCellContentRender" slot-scope="date, locale" | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
-| value | to set date | [moment](http://momentjs.com/) | - |
+| value(v-model) | to set date | [moment](http://momentjs.com/) | - |
 
 ### MonthPicker Events
 | Events Name | Description | Arguments |
@@ -92,7 +91,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | [moment](http://momentjs.com/) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-wo" |
-| value | to set date | [moment](http://momentjs.com/) | - |
+| value(v-model) | to set date | [moment](http://momentjs.com/) | - |
 
 ### WeekPicker Events
 | Events Name | Description | Arguments |
@@ -110,7 +109,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" | - |
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](#/us/components/time-picker/API) |
 | showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
-| value | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
+| value(v-model) | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 
 ### RangePicker Events
 | Events Name | Description | Arguments |

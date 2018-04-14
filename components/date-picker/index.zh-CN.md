@@ -27,7 +27,6 @@
 | --- | --- | --- | --- |
 | allowClear | 是否显示清除按钮 | boolean | true |
 | autoFocus | 自动获取焦点 | boolean | false |
-| className | 选择器 className | string | '' |
 | dateRender | 作用域插槽，自定义日期单元格的内容 | slot="dateRender" slot-scope="current, today" | - |
 | disabled | 禁用 | boolean | false |
 | disabledDate | 不可选择的日期 | (currentDate: moment) => boolean | 无 |
@@ -63,7 +62,7 @@
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](#/cn/components/time-picker/API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/) | moment() |
 | showToday | 是否展示“今天”按钮 | boolean | true |
-| value | 日期 | [moment](http://momentjs.com/) | 无 |
+| value(v-model) | 日期 | [moment](http://momentjs.com/) | 无 |
 
 ### DatePicker事件
 
@@ -80,7 +79,7 @@
 | format | 展示的日期格式，配置参考 [moment.js](http://momentjs.com/) | string | "YYYY-MM" |
 | monthCellContentRender | 自定义的月份内容渲染方法 | slot="monthCellContentRender" slot-scope="date, locale" | - |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
-| value | 日期 | [moment](http://momentjs.com/) | 无 |
+| value(v-model) | 日期 | [moment](http://momentjs.com/) | 无 |
 
 ### MonthPicker事件
 
@@ -94,7 +93,7 @@
 | --- | --- | --- | --- |
 | defaultValue | 默认日期 | [moment](http://momentjs.com/) | - |
 | format | 展示的日期格式，配置参考 [moment.js](http://momentjs.com/) | string | "YYYY-wo" |
-| value | 日期 | [moment](http://momentjs.com/) | - |
+| value(v-model) | 日期 | [moment](http://momentjs.com/) | - |
 
 ### WeekPicker事件
 
@@ -113,7 +112,7 @@
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](#/cn/components/time-picker/API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
-| value | 日期 | [moment](http://momentjs.com/)\[] | 无 |
+| value(v-model) | 日期 | [moment](http://momentjs.com/)\[] | 无 |
 
 ### RangePicker事件
 

@@ -54,7 +54,7 @@ export default {
     },
     renderItem(item) {
       const customLabel = (
-        <span className="custom-item">
+        <span class="custom-item">
           {item.title} - {item.description}
         </span>
       );

@@ -94,6 +94,8 @@ const Slider = {
 
       const value = this.calcValueByPos(position)
 
+      this.startValue = value
+      this.startPosition = position
       if (value === sValue) return
 
       this.prevMovedHandleIndex = 0
@@ -152,7 +154,7 @@ const Slider = {
         />
       )
     },
-    renderSlider (h) {
+    renderSlider () {
       const {
         prefixCls,
         vertical,
@@ -168,7 +170,7 @@ const Slider = {
       } = this
       const { sValue, dragging } = this
       const offset = this.calcOffset(sValue)
-      const handle = handleGenerator(h, {
+      const handle = handleGenerator(this.$createElement, {
         prefixCls,
         vertical,
         offset,
@@ -180,7 +182,7 @@ const Slider = {
         index: 0,
         tabIndex,
         style: handleStyle[0] || handleStyle,
-        refStr: 'handleRef0',
+        ref: 'handleRefs_0',
         handleFocus: this.onFocus,
         handleBlur: this.onBlur,
       })

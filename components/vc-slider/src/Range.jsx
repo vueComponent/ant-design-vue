@@ -99,6 +99,8 @@ const Range = {
       this.$emit('beforeChange', bounds)
 
       const value = this.calcValueByPos(position)
+      this.startValue = value
+      this.startPosition = position
 
       const closestBound = this.getClosestBound(value)
       this.prevMovedHandleIndex = this.getBoundNeedMoving(value, closestBound)
@@ -319,7 +321,7 @@ const Range = {
         )
       })
     },
-    renderSlider (h) {
+    renderSlider () {
       const {
         sHandle,
         bounds,
@@ -333,12 +335,13 @@ const Range = {
         trackStyle,
         handleStyle,
         tabIndex,
+        $createElement,
       } = this
 
       const offsets = bounds.map(v => this.calcOffset(v))
 
       const handleClassName = `${prefixCls}-handle`
-      const handles = bounds.map((v, i) => handleGenerator(h, {
+      const handles = bounds.map((v, i) => handleGenerator($createElement, {
         className: classNames({
           [handleClassName]: true,
           [`${handleClassName}-${i + 1}`]: true,
@@ -354,7 +357,7 @@ const Range = {
         max,
         disabled,
         style: handleStyle[i],
-        refStr: 'handleRef' + i,
+        ref: 'handleRefs_' + i,
         handleFocus: this.onFocus,
         handleBlur: this.onBlur,
       }))

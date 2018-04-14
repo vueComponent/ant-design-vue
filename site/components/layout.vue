@@ -150,7 +150,7 @@ export default {
     }
     return (
       <div class='page-wrapper'>
-        <Header num={Object.keys(AllDemo).length} searchData={searchData} name={name}/>
+        <Header searchData={searchData} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
@@ -162,7 +162,7 @@ export default {
                   inlineIndent={40}
                   mode='inline'>
                   {this.getDocsMenu(isCN)}
-                  <a-sub-menu title='Components' key='Components'>
+                  <a-sub-menu title={`Components(${searchData.length})`} key='Components'>
                     {MenuGroup}
                   </a-sub-menu>
                 </a-menu>

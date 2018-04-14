@@ -34,6 +34,10 @@ export default function wrapPicker (Picker, props, defaultFormat) {
       prefixCls: 'ant-calendar',
       inputPrefixCls: 'ant-input',
     }),
+    model: {
+      prop: 'value',
+      event: 'change',
+    },
 
     mounted () {
       const { autoFocus, disabled } = this

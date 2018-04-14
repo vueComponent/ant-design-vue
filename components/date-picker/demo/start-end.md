@@ -20,18 +20,16 @@ When `RangePicker` does not satisfied your requirements, try to implement simila
       :disabledDate="disabledStartDate"
       showTime
       format="YYYY-MM-DD HH:mm:ss"
-      :value="startValue"
+      v-model="startValue"
       placeholder="Start"
-      @change="onStartChange"
       @openChange="handleStartOpenChange"
     />
     <a-date-picker
       :disabledDate="disabledEndDate"
       showTime
       format="YYYY-MM-DD HH:mm:ss"
-      :value="endValue"
       placeholder="End"
-      @change="onEndChange"
+      v-model="endValue"
       :open="endOpen"
       @openChange="handleEndOpenChange"
     />
@@ -44,6 +42,14 @@ export default {
       startValue: null,
       endValue: null,
       endOpen: false,
+    }
+  },
+  watch: {
+    startValue(val) {
+      console.log('startValue', val)
+    },
+    endValue(val) {
+      console.log('endValue', val)
     }
   },
   methods: {
@@ -60,12 +66,6 @@ export default {
         return false;
       }
       return startValue.valueOf() >= endValue.valueOf();
-    },
-    onStartChange (value) {
-      this.startValue = value;
-    },
-    onEndChange (value) {
-      this.endValue = value
     },
     handleStartOpenChange (open) {
       if (!open) {

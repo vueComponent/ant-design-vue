@@ -26,6 +26,10 @@ export default {
   }),
   name: 'AWeekPicker',
   mixins: [BaseMixin],
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   data () {
     const value = this.value || this.defaultValue
     if (value && !interopDefault(moment).isMoment(value)) {

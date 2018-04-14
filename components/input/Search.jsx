@@ -84,6 +84,7 @@ export default {
       },
       attrs: this.$attrs,
       on: {
+        ...this.$listeners,
         pressEnter: this.onSearch,
       },
     }

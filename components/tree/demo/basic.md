@@ -12,7 +12,7 @@ The most basic usage, tell you how to use checkable, selectable, disabled, defau
 <template>
   <a-tree
     checkable
-    :data="treeData"
+    :treeNodes="treeData"
     :defaultExpandedKeys="['0-0-0', '0-0-1']"
     :defaultSelectedKeys="['0-0-0', '0-0-1']"
     :defaultCheckedKeys="['0-0-0', '0-0-1']"

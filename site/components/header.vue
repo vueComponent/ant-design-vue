@@ -3,7 +3,6 @@ import { isZhCN } from '../util'
 import _ from 'lodash'
 export default {
   props: {
-    num: Number,
     name: String,
     searchData: Array,
   },

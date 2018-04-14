@@ -13,7 +13,8 @@ const Marks = {
       lowerBound,
       max, min,
     } = context.props
-    const { clickLabel } = context.listeners
+    // antd未开发完成
+    // const { clickLabel } = context.listeners
     const marksKeys = Object.keys(marks)
     const marksCount = marksKeys.length
     const unit = marksCount > 1 ? 100 / (marksCount - 1) : 100
@@ -55,8 +56,8 @@ const Marks = {
           class={markClassName}
           style={markStyle}
           key={point}
-          onMouseDown={(e) => clickLabel(e, point)}
-          onTouchStart={(e) => clickLabel(e, point)}
+          // onMousedown={(e) => clickLabel(e, point)}
+          // onTouchstart={(e) => clickLabel(e, point)}
         >
           {markLabel}
         </span>

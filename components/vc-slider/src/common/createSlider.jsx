@@ -45,18 +45,16 @@ export default function createSlider (Component) {
       max: 100,
       step: 1,
       marks: {},
-      handle (h, { index, refStr, className, style, ...restProps }) {
+      handle (h, { index, ref, className, style, ...restProps }) {
         delete restProps.dragging
         const handleProps = {
           props: {
             ...restProps,
           },
-          attrs: {
-            refStr,
-          },
           class: className,
           style,
           key: index,
+          ref,
         }
         return <Handle {...handleProps} />
       },
@@ -80,7 +78,6 @@ export default function createSlider (Component) {
           step
         )
       }
-      this.handlesRefs = []
       return {}
     },
     beforeDestroy () {
@@ -93,21 +90,22 @@ export default function createSlider (Component) {
       this.$nextTick(() => {
         // Snapshot testing cannot handle refs, so be sure to null-check this.
         this.document = this.$refs.sliderRef && this.$refs.sliderRef.ownerDocument
-        this.setHandleRefs()
+        // this.setHandleRefs()
       })
     },
-    methods: {
-      setHandleRefs () {
-        const refs = this.$refs.handleRef
-        const children = Array.prototype.slice.call(refs.children)
-        children.map((item) => {
-          const refStr = item.getAttribute('refStr')
-          if (refStr.indexOf('handleRef') > -1) {
-            const handleArr = refStr.split('handleRef')
-            this.handlesRefs[handleArr[1]] = item
+    computed: {
+      handlesRefs () {
+        const handlesRefs = []
+        for (const [k, v] of Object.entries(this.$refs)) {
+          const matchs = k.match(/handleRefs_(\d+$)/)
+          if (matchs) {
+            handlesRefs[+matchs[1]] = v
           }
-        })
+        }
+        return handlesRefs
       },
+    },
+    methods: {
       onMouseDown (e) {
         if (e.button !== 0) { return }
         const isVertical = this.vertical
@@ -172,11 +170,16 @@ export default function createSlider (Component) {
         /* eslint-enable no-unused-expressions */
       },
       onMouseUp () {
-        if (this.$children && this.$children[this.prevMovedHandleIndex]) {
-          const handleCom = utils.getComponentProps(this.$children[this.prevMovedHandleIndex], 'clickFocus')
-          if (handleCom) {
-            handleCom.clickFocus()
-          }
+        // if (this.$children && this.$children[this.prevMovedHandleIndex]) {
+        //   const handleCom = utils.getComponentProps(this.$children[this.prevMovedHandleIndex], 'clickFocus')
+        //   console.log('handleCom', handleCom)
+        //   if (handleCom) {
+        //     // handleCom.clickFocus()
+        //   }
+
+        // }
+        if (this.handlesRefs[this.prevMovedHandleIndex]) {
+          this.handlesRefs[this.prevMovedHandleIndex].clickFocus()
         }
       },
       onMouseMove (e) {
@@ -244,7 +247,8 @@ export default function createSlider (Component) {
       },
       onClickMarkLabel (e, value) {
         e.stopPropagation()
-        this.$emit('change', { value })
+        this.onChange({ value })
+        // this.$emit('change', value)
       },
     },
     render (h) {
@@ -318,9 +322,7 @@ export default function createSlider (Component) {
             dotStyle={dotStyle}
             activeDotStyle={activeDotStyle}
           />
-          <div ref='handleRef'>
-            {handles}
-          </div>
+          {handles}
           <Marks
             {...markProps}
           />

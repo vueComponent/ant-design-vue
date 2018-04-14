@@ -17,9 +17,8 @@ export default {
     max: PropTypes.number,
     value: PropTypes.number,
     tabIndex: PropTypes.number,
-    refStr: PropTypes.any,
-    handleFocus: PropTypes.func.def(noop),
-    handleBlur: PropTypes.func.def(noop),
+    // handleFocus: PropTypes.func.def(noop),
+    // handleBlur: PropTypes.func.def(noop),
   },
   data () {
     return {
@@ -31,15 +30,12 @@ export default {
       // mouseup won't trigger if mouse moved out of handle,
       // so we listen on document here.
       this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
-      this.refStr = this.$props.refStr
     })
   },
   beforeDestroy () {
-    this.$nextTick(() => {
-      if (this.onMouseUpListener) {
-        this.onMouseUpListener.remove()
-      }
-    })
+    if (this.onMouseUpListener) {
+      this.onMouseUpListener.remove()
+    }
   },
   methods: {
     setClickFocus (focused) {
@@ -50,12 +46,8 @@ export default {
         this.setClickFocus(true)
       }
     },
-    onBlur (e) {
+    handleBlur (e) {
       this.setClickFocus(false)
-      this.handleBlur(e)
-    },
-    onFocus (e) {
-      this.handleFocus(e)
     },
     handleKeyDown () {
       this.setClickFocus(false)
@@ -73,7 +65,7 @@ export default {
   },
   render () {
     const {
-      prefixCls, vertical, offset, disabled, min, max, value, tabIndex, refStr,
+      prefixCls, vertical, offset, disabled, min, max, value, tabIndex,
     } = getOptionProps(this)
 
     const className = {
@@ -99,22 +91,20 @@ export default {
       attrs: {
         role: 'slider',
         tabIndex: disabled ? null : (tabIndex || 0),
-        refStr,
         ...ariaProps,
       },
       class: className,
       on: {
-        blur: this.onBlur,
-        focus: this.onFocus,
-        keydown: this.handleKeyDown,
         ...this.$listeners,
+        blur: this.handleBlur,
+        keydown: this.handleKeyDown,
       },
       ref: 'handle',
+      style: elStyle,
     }
     return (
       <div
         {...handleProps}
-        style={elStyle}
       />
     )
   },

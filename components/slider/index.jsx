@@ -74,7 +74,7 @@ export default {
         },
       }))
     },
-    handleWithTooltip (h, { value, dragging, index, refStr, ...restProps }) {
+    handleWithTooltip (h, { value, dragging, index, ref, ...restProps }) {
       const { tooltipPrefixCls, tipFormatter } = this.$props
       const { visibles } = this
       const visible = tipFormatter ? (visibles[index] || dragging) : false
@@ -94,9 +94,7 @@ export default {
           value,
           ...restProps,
         },
-        attrs: {
-          refStr,
-        },
+        ref,
         on: {
           mouseenter: () => this.toggleTooltipVisible(index, true),
           mouseleave: () => this.toggleTooltipVisible(index, false),
@@ -124,8 +122,8 @@ export default {
     if (range) {
       const vcRangeProps = {
         props: {
-          handle: this.handleWithTooltip,
           ...restProps,
+          handle: this.handleWithTooltip,
         },
         ref: 'sliderRef',
         on: this.$listeners,
@@ -134,8 +132,8 @@ export default {
     }
     const vcSliderProps = {
       props: {
-        handle: this.handleWithTooltip,
         ...restProps,
+        handle: this.handleWithTooltip,
       },
       ref: 'sliderRef',
       on: this.$listeners,

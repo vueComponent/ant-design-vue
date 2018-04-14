@@ -40,6 +40,14 @@ Components which need localization support are listed here, you can toggle the l
             <a href="#">Click to confirm</a>
           </a-popconfirm>
         </div>
+        <div className="example">
+          <a-transfer
+            :dataSource="[]"
+            showSearch
+            :targetKeys="[]"
+            :render="item => item.title"
+          />
+        </div>
         <div :style="{ width: '319px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
           <a-calendar :fullscreen="false" :value="moment()" />
         </div>

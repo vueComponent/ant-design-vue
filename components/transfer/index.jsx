@@ -292,6 +292,7 @@ export default {
     },
 
     renderTransfer (locale) {
+      const props = getOptionProps(this)
       const {
         prefixCls = 'ant-transfer',
         operations = [],
@@ -300,11 +301,11 @@ export default {
         listStyle,
         filterOption,
         lazy,
-        render: renderItem,
-      } = getOptionProps(this)
+      } = props
       const notFoundContent = getComponentFromProp(this, 'notFoundContent')
       const { leftFilter, rightFilter, sourceSelectedKeys, targetSelectedKeys, $scopedSlots } = this
       const { body, footer } = $scopedSlots
+      const renderItem = props.render
       const { leftDataSource, rightDataSource } = this.splitDataSource(this.$props)
       const leftActive = targetSelectedKeys.length > 0
       const rightActive = sourceSelectedKeys.length > 0

@@ -85,7 +85,7 @@ export default {
           title: tipFormatter ? tipFormatter(value) : '',
           visible,
           placement: 'top',
-          transitionName: 'zoom-down',
+          transitionName: 'fade',
         },
         key: index,
       }

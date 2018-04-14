@@ -51,11 +51,11 @@ export default function createSliderWithTooltip (Component) {
 
         const tooltipProps = {
           props: {
+            ...restTooltipProps,
             prefixCls,
             overlay,
             placement,
             visible: (!disabled && (this.visibles[index] || dragging)) || visible,
-            ...restTooltipProps,
           },
           key: index,
         }

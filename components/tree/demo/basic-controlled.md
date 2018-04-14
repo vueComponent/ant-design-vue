@@ -15,11 +15,10 @@ basic controlled example
     @expand="onExpand"
     :expandedKeys="expandedKeys"
     :autoExpandParent="autoExpandParent"
-    @check="onCheck"
-    :checkedKeys="checkedKeys"
+    v-model="checkedKeys"
     @select="onSelect"
     :selectedKeys="selectedKeys"
-    :data="treeData"
+    :treeNodes="treeData"
   />
 </template>
 <script>
@@ -67,6 +66,11 @@ export default {
       checkedKeys: ['0-0-0'],
       selectedKeys: [],
       treeData,
+    }
+  },
+  watch: {
+    checkedKeys(val) {
+      console.log('onCheck', val)
     }
   },
   methods: {

@@ -35,7 +35,6 @@ const columns = [{
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| className | 列的 className | string | - |
 | bordered | 是否展示外边框和列边框 | boolean | false |
 | columns | 表格列的配置描述，具体项见下表 | array | - |
 | components | 覆盖默认的 table 元素 | object | - |

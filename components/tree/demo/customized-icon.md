@@ -11,7 +11,7 @@ You can customize icons for different nodes.
 ```html
 <template>
   <a-tree
-    :data="treeData"
+    :treeNodes="treeData"
     showIcon
     defaultExpandAll
     :defaultSelectedKeys="['0-0-0']"

@@ -30,7 +30,7 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util'
 // }
 
 export const TreeProps = () => ({
-  data: PropTypes.array,
+  treeNodes: PropTypes.array,
   showLine: PropTypes.bool,
   /** 是否支持多选 */
   multiple: PropTypes.boolean,
@@ -127,7 +127,9 @@ export default {
             icon: restProps.icon ||
               $slots[slots.icon] ||
               ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]),
-            title: restProps.title || $slots[slots.title],
+            title: restProps.title ||
+             $slots[slots.title] ||
+             ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title])(item),
             dataRef: item,
           },
           on,
@@ -149,7 +151,7 @@ export default {
 
   render () {
     const props = getOptionProps(this)
-    const { prefixCls, checkable, data, ...restProps } = props
+    const { prefixCls, checkable, treeNodes, ...restProps } = props
     const { handelSelect, handleCheck, handleExpand, renderTreeNodes } = this
     const vcTreeProps = {
       props: {
@@ -166,7 +168,7 @@ export default {
     }
     return (
       <VcTree {...vcTreeProps}>
-        {data ? renderTreeNodes(data) : this.$slots.default}
+        {treeNodes ? renderTreeNodes(treeNodes) : this.$slots.default}
       </VcTree>
     )
   },

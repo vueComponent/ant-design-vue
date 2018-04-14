@@ -3,7 +3,7 @@ import Layout from './components/layout.vue'
 const AsyncTestComp = () => {
   const d = window.location.hash.replace('#', '')
   return {
-    component: import(`../components/slider/demo/${d}`),
+    component: import(`../components/tree/demo/${d}`),
   }
 }
 

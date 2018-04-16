@@ -30,15 +30,16 @@ const AbstractSelectProps = {
   showArrow: PropTypes.bool,
 }
 const Value = PropTypes.shape({
-  key: String,
+  key: PropTypes.string,
 }).loose
 
 const SelectValue = PropTypes.oneOfType([
   PropTypes.string,
-
+  PropTypes.number,
   PropTypes.arrayOf(PropTypes.oneOfType([
     Value,
-    String,
+    PropTypes.string,
+    PropTypes.number,
   ])),
   Value,
 ])

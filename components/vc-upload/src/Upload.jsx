@@ -4,8 +4,8 @@ import BaseMixin from '../../_util/BaseMixin'
 import AjaxUpload from './AjaxUploader'
 import IframeUpload from './IframeUploader'
 
-// function empty () {
-// }
+function empty () {
+}
 
 const uploadProps = {
   componentTag: PropTypes.string,
@@ -47,8 +47,8 @@ export default {
     // onSuccess: empty,
     supportServerRender: false,
     multiple: false,
-    beforeUpload: null,
-    customRequest: null,
+    beforeUpload: empty,
+    customRequest: empty,
     withCredentials: false,
   }),
   data () {

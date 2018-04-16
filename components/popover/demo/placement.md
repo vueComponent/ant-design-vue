@@ -1,11 +1,18 @@
+<cn>
+#### 位置
+位置有十二个方向。
+</cn>
+
+<us>
+#### Placement
+There are 12 `placement` options available.
+</us>
+
+```html
 <template>
 <div id="components-popover-demo-placement">
-<md>
-## 位置
-位置有 12 个方向。
-</md>
   <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">
-    <Popover placement="topLeft">
+    <a-popover placement="topLeft">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -14,8 +21,8 @@
         <span>Title</span>
       </template>
       <a-button>TL</a-button>
-    </Popover>
-    <Popover placement="top">
+    </a-popover>
+    <a-popover placement="top">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -24,8 +31,8 @@
         <span>Title</span>
       </template>
       <a-button>Top</a-button>
-    </Popover>
-    <Popover placement="topRight">
+    </a-popover>
+    <a-popover placement="topRight">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -34,10 +41,10 @@
         <span>Title</span>
       </template>
       <a-button>TR</a-button>
-    </Popover>
+    </a-popover>
   </div>
   <div :style="{ width: `${buttonWidth}px`, float: 'left' }">
-    <Popover placement="leftTop">
+    <a-popover placement="leftTop">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -46,8 +53,8 @@
         <span>Title</span>
       </template>
       <a-button>LT</a-button>
-    </Popover>
-    <Popover placement="left">
+    </a-popover>
+    <a-popover placement="left">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -56,8 +63,8 @@
         <span>Title</span>
       </template>
       <a-button>Left</a-button>
-    </Popover>
-    <Popover placement="leftBottom">
+    </a-popover>
+    <a-popover placement="leftBottom">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -66,10 +73,10 @@
         <span>Title</span>
       </template>
       <a-button>LB</a-button>
-    </Popover>
+    </a-popover>
   </div>
   <div :style="{ width: `${buttonWidth}px`, marginLeft: `${buttonWidth * 4 + 24 }px`}">
-    <Popover placement="rightTop">
+    <a-popover placement="rightTop">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -78,8 +85,8 @@
         <span>Title</span>
       </template>
       <a-button>RT</a-button>
-    </Popover>
-    <Popover placement="right">
+    </a-popover>
+    <a-popover placement="right">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -88,8 +95,8 @@
         <span>Title</span>
       </template>
       <a-button>Right</a-button>
-    </Popover>
-    <Popover placement="rightBottom">
+    </a-popover>
+    <a-popover placement="rightBottom">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -98,10 +105,10 @@
         <span>Title</span>
       </template>
       <a-button>RB</a-button>
-    </Popover>
+    </a-popover>
   </div>
   <div :style="{ marginLeft: `${buttonWidth}px`, clear: 'both', whiteSpace: 'nowrap' }">
-    <Popover placement="bottomLeft">
+    <a-popover placement="bottomLeft">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -110,8 +117,8 @@
         <span>Title</span>
       </template>
       <a-button>BL</a-button>
-    </Popover>
-    <Popover placement="bottom">
+    </a-popover>
+    <a-popover placement="bottom">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -120,8 +127,8 @@
         <span>Title</span>
       </template>
       <a-button>Bottom</a-button>
-    </Popover>
-    <Popover placement="bottomRight">
+    </a-popover>
+    <a-popover placement="bottomRight">
       <template slot="content">
         <p>Content</p>
         <p>Content</p>
@@ -130,22 +137,17 @@
         <span>Title</span>
       </template>
       <a-button>BR</a-button>
-    </Popover>
+    </a-popover>
   </div>
 </div>
 </template>
 
 <script>
-import { Popover, Button } from 'antd'
 export default {
   data () {
     return {
       buttonWidth: 70,
     }
-  },
-  components: {
-    Popover,
-
   },
 }
 </script>
@@ -158,3 +160,4 @@ export default {
   margin-bottom: 8px;
 }
 </style>
+```

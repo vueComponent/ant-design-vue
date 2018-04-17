@@ -154,7 +154,7 @@ export default {
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
-              <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
+              <a-col span={6} style={{ maxWidth: '260px' }}>
                 <a-menu
                   class='aside-container menu-site'
                   selectedKeys={[name]}
@@ -167,7 +167,7 @@ export default {
                   </a-sub-menu>
                 </a-menu>
               </a-col>
-              <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
+              <a-col span={18}>
                 <div class='content main-container'>
                   <div class='toc-affix' style='width: 110px;'>
                     {this.getSubMenu(isCN)}

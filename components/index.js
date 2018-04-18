@@ -12,110 +12,208 @@ if (ENV !== 'production' &&
 }
 /* @remove-on-es-build-end */
 
-export { default as Affix } from './affix'
+import { default as Affix } from './affix';
 
-// export { default as Anchor } from './anchor'
+// import { default as Anchor } from './anchor'
 
-export { default as AutoComplete } from './auto-complete'
+import { default as AutoComplete } from './auto-complete';
 
-export { default as Alert } from './alert'
+import { default as Alert } from './alert';
 
-export { default as Avatar } from './avatar'
+import { default as Avatar } from './avatar';
 
-export { default as BackTop } from './back-top'
+import { default as BackTop } from './back-top';
 
-export { default as Badge } from './badge'
+import { default as Badge } from './badge';
 
-export { default as Breadcrumb } from './breadcrumb'
+import { default as Breadcrumb } from './breadcrumb';
 
-export { default as Button } from './button'
+import { default as Button } from './button';
 
-export { default as Calendar } from './calendar'
+import { default as Calendar } from './calendar';
 
-export { default as Card } from './card'
+import { default as Card } from './card';
 
-export { default as Collapse } from './collapse'
+import { default as Collapse } from './collapse';
 
-// export { default as Carousel } from './carousel'
+// import { default as Carousel } from './carousel'
 
-export { default as Cascader } from './cascader'
+import { default as Cascader } from './cascader';
 
-export { default as Checkbox } from './checkbox'
+import { default as Checkbox } from './checkbox';
 
-export { default as Col } from './col'
+import { default as Col } from './col';
 
-export { default as DatePicker } from './date-picker'
+import { default as DatePicker } from './date-picker';
 
-export { default as Divider } from './divider'
+import { default as Divider } from './divider';
 
-export { default as Dropdown } from './dropdown'
+import { default as Dropdown } from './dropdown';
 
-// export { default as Form } from './form'
+// import { default as Form } from './form'
 
-export { default as Icon } from './icon'
+import { default as Icon } from './icon';
 
-export { default as Input } from './input'
+import { default as Input } from './input';
 
-export { default as InputNumber } from './input-number'
+import { default as InputNumber } from './input-number';
 
-// export { default as Layout } from './layout'
+// import { default as Layout } from './layout'
 
-// export { default as List } from './list'
+// import { default as List } from './list'
 
-export { default as LocaleProvider } from './locale-provider'
+import { default as LocaleProvider } from './locale-provider';
 
-export { default as message } from './message'
+import { default as message } from './message';
 
-export { default as Menu } from './menu'
+import { default as Menu } from './menu';
 
-export { default as Modal } from './modal'
+import { default as Modal } from './modal';
 
-export { default as notification } from './notification'
+import { default as notification } from './notification';
 
-export { default as Pagination } from './pagination'
+import { default as Pagination } from './pagination';
 
-export { default as Popconfirm } from './popconfirm'
+import { default as Popconfirm } from './popconfirm';
 
-export { default as Popover } from './popover'
+import { default as Popover } from './popover';
 
-export { default as Progress } from './progress'
+import { default as Progress } from './progress';
 
-export { default as Radio } from './radio'
+import { default as Radio } from './radio';
 
-export { default as Rate } from './rate'
+import { default as Rate } from './rate';
 
-export { default as Row } from './row'
+import { default as Row } from './row';
 
-export { default as Select } from './select'
+import { default as Select } from './select';
 
-export { default as Slider } from './slider'
+import { default as Slider } from './slider';
 
-export { default as Spin } from './spin'
+import { default as Spin } from './spin';
 
-export { default as Steps } from './steps'
+import { default as Steps } from './steps';
 
-export { default as Switch } from './switch'
+import { default as Switch } from './switch';
 
-export { default as Table } from './table'
+import { default as Table } from './table';
 
-export { default as Transfer } from './transfer'
+import { default as Transfer } from './transfer';
 
-export { default as Tree } from './tree'
+import { default as Tree } from './tree';
 
-// export { default as TreeSelect } from './tree-select'
+// import { default as TreeSelect } from './tree-select'
 
-export { default as Tabs } from './tabs'
+import tabs, { default as Tabs } from './tabs';
 
-export { default as Tag } from './tag'
+import { default as Tag } from './tag';
 
-export { default as TimePicker } from './time-picker'
+import { default as TimePicker } from './time-picker';
 
-export { default as Timeline } from './timeline'
+import { default as Timeline } from './timeline';
 
-export { default as Tooltip } from './tooltip'
+import { default as Tooltip } from './tooltip';
 
-// export { default as Mention } from './mention'
+// import { default as Mention } from './mention'
 
-export { default as Upload } from './upload'
+import { default as Upload } from './upload';
 
-export { default as version } from './version'
+import { default as version } from './version';
+
+const components = [
+ Affix,
+ AutoComplete,
+ Alert,
+ Avatar,
+ BackTop,
+ Badge,
+ Breadcrumb,
+ Breadcrumb.Item,
+ Button,
+ Button.Group,
+ Calendar,
+ Card,
+ Card.Meta,
+ Card.Grid,
+ Collapse,
+ Collapse.Panel,
+ Cascader,
+ Checkbox,
+ Checkbox.Group,
+ Col,
+ DatePicker,
+ DatePicker.MonthPicker,
+ DatePicker.RangePicker,
+ DatePicker.WeekPicker,
+ Divider,
+ Dropdown,
+ Dropdown.Button,
+ Icon,
+ Input,
+ Input.Group,
+ Input.Search,
+ Input.TextArea,
+ InputNumber,
+ LocaleProvider,
+ Menu,
+ Menu.Item,
+ Menu.SubMenu,
+ Menu.Divider,
+ Menu.ItemGroup,
+ Modal,
+ Pagination,
+ Popconfirm,
+ Popover,
+ Progress,
+ Radio,
+ Radio.Group,
+ Radio.Button,
+ Rate,
+ Row,
+ Select,
+ Select.Option,
+ Select.OptGroup,
+ Slider,
+ Spin,
+ Steps,
+ Steps.Step,
+ Switch,
+ Table,
+ Table.Column,
+ Table.ColumnGroup,
+ Transfer,
+ Tree,
+ Tree.TreeNode,
+ Tabs,
+ Tabs.TabPane,
+ Tag,
+ Tag.CheckableTag,
+ TimePicker,
+ Timeline,
+ Timeline.Item,
+ Tooltip,
+ Upload,
+ Upload.Dragger,
+];
+
+const install = function(Vue) {
+  components.map(component => {
+    Vue.component(component.name, component);
+  });
+
+  Vue.prototype.$message = message;
+  Vue.prototype.$notification = notification;
+  Vue.prototype.$info = Modal.info;
+  Vue.prototype.$success = Modal.success;
+  Vue.prototype.$error = Modal.error;
+  Vue.prototype.$warning = Modal.warning;
+  Vue.prototype.$confirm = Modal.confirm;
+}
+
+const antd = {
+  version,
+  install,
+  ...components
+}
+
+module.exports.default = module.exports = antd;

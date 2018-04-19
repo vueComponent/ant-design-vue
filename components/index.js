@@ -104,7 +104,7 @@ import { default as Tree } from './tree'
 
 // import { default as TreeSelect } from './tree-select'
 
-import tabs, { default as Tabs } from './tabs'
+import { default as Tabs } from './tabs'
 
 import { default as Tag } from './tag'
 

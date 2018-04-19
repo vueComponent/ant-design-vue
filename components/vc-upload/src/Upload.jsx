@@ -48,7 +48,6 @@ export default {
     supportServerRender: false,
     multiple: false,
     beforeUpload: empty,
-    customRequest: empty,
     withCredentials: false,
   }),
   data () {

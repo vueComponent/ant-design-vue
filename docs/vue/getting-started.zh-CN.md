@@ -38,6 +38,22 @@ $ vue init webpack antd-demo
 $ npm i --save vue-antd-ui
 ```
 
+**完整导入**
+```jsx
+import Vue from 'vue'
+import antd from 'vue-antd-ui'
+import App from './App'
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  components: { App },
+  template: '<App/>'
+})
+```
+
+**局部导入组件**
 ```jsx
 import Vue from 'vue'
 import { Button, message } from 'vue-antd-ui'

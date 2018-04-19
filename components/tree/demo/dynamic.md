@@ -41,7 +41,7 @@ export default {
           ]
           this.treeData = [...this.treeData]
           resolve()
-        }, 100)
+        }, 1000)
       })
     },
   },

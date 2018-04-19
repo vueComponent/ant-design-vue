@@ -10,7 +10,7 @@ Classic mode. File selection dialog pops up when upload button is clicked.
 
 ```html
 <template>
-  <a-upload name="file" action="//jsonplaceholder.typicode.com/posts/" :headers="headers" @change="handleChange">
+  <a-upload name="file" :multiple="true" action="//jsonplaceholder.typicode.com/posts/" :headers="headers" @change="handleChange">
     <a-button>
       <a-icon type="upload" /> Click to Upload
     </a-button>

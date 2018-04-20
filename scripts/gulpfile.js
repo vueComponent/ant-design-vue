@@ -56,15 +56,17 @@ function copyHtml () {
   rl.on('line', (line) => {
     const name = line.split('antd/')[1].split('/')[0]
     console.log('create path:', name)
-    const toPath1 = `site-dist/components/${name}`
-    const toPath2 = `site-dist/components/${name}-cn`
-    rimraf.sync(path.join(cwd, toPath1))
-    rimraf.sync(path.join(cwd, toPath2))
-    mkdirp(path.join(cwd, toPath1), function () {
-      fs.writeFileSync(path.join(cwd, `${toPath1}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
-    })
-    mkdirp(path.join(cwd, toPath2), function () {
-      fs.writeFileSync(path.join(cwd, `${toPath2}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
+    const toPaths = [
+      `site-dist/components/${name}`,
+      `site-dist/components/${name}-cn`,
+      `site-dist/iframe/${name}`,
+      `site-dist/iframe/${name}-cn`,
+    ]
+    toPaths.forEach(toPath => {
+      rimraf.sync(path.join(cwd, toPath))
+      mkdirp(path.join(cwd, toPath), function () {
+        fs.writeFileSync(path.join(cwd, `${toPath}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
+      })
     })
   })
   const source = [

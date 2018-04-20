@@ -206,7 +206,7 @@ export default {
     const triggerDom = (
       trigger !== null
         ? zeroWidthTrigger || (
-          <div className={`${prefixCls}-trigger`} onClick={this.toggle} style={{ width: `${siderWidth}px` }}>
+          <div class={`${prefixCls}-trigger`} onClick={this.toggle} style={{ width: `${siderWidth}px` }}>
             {trigger || defaultTrigger}
           </div>
         ) : null

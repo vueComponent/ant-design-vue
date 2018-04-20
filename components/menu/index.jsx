@@ -80,7 +80,7 @@ export default {
       deep: true,
     },
     'layoutSiderContext.sCollapsed': function (val) {
-      const { openKeys, sOpenKeys, prefixCls } = this
+      const { openKeys, sOpenKeys = [], prefixCls } = this
       if (hasProp(this, 'openKeys')) {
         this.setState({ sOpenKeys: openKeys })
         return

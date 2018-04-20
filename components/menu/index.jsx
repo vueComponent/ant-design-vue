@@ -38,20 +38,19 @@ export default {
   ItemGroup: { ...ItemGroup, name: 'AMenuItemGroup' },
   provide () {
     return {
-      inlineCollapsed: this.getInlineCollapsed(),
       getInlineCollapsed: this.getInlineCollapsed,
     }
   },
   mixins: [BaseMixin],
   inject: {
-    layoutContext: { default: {}},
+    layoutSiderContext: { default: {}},
   },
   model: {
     prop: 'selectedKeys',
     event: 'selectChange',
   },
   mounted () {
-    this.preProps = { ...this.props }
+    this.preProps = { ...this.$props }
   },
   watch: {
     '$props': {
@@ -80,7 +79,7 @@ export default {
       },
       deep: true,
     },
-    'layoutContext.siderCollapsed': function (val) {
+    'layoutSiderContext.sCollapsed': function (val) {
       const { openKeys, sOpenKeys, prefixCls } = this
       if (hasProp(this, 'openKeys')) {
         this.setState({ sOpenKeys: openKeys })
@@ -150,8 +149,8 @@ export default {
     },
     getInlineCollapsed () {
       const { inlineCollapsed } = this.$props
-      if (this.layoutContext.siderCollapsed !== undefined) {
-        return this.layoutContext.siderCollapsed
+      if (this.layoutSiderContext.sCollapsed !== undefined) {
+        return this.layoutSiderContext.sCollapsed
       }
       return inlineCollapsed
     },
@@ -199,12 +198,8 @@ export default {
     },
   },
   render () {
-    const { layoutContext, $slots, $listeners } = this
-    const { collapsedWidth, siderCollapsed } = layoutContext
-    this.preLayoutContext = {
-      siderCollapsed,
-      collapsedWidth,
-    }
+    const { layoutSiderContext, $slots, $listeners } = this
+    const { collapsedWidth } = layoutSiderContext
     const { prefixCls, theme } = this.$props
     const menuMode = this.getRealMenuMode()
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode)

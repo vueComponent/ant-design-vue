@@ -38,8 +38,27 @@ $ vue init webpack antd-demo
 $ npm i --save vue-antd-ui
 ```
 
+**完整引入**
+
+```jsx
+import Vue from 'vue'
+import Antd from 'vue-antd-ui'
+import App from './App'
+Vue.config.productionTip = false
+
+Vue.use(Antd)
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  components: { App },
+  template: '<App/>'
+})
+```
+以上代码便完成了 Antd 的引入。需要注意的是，样式文件需要单独引入。
 
 **局部导入组件**
+
 ```jsx
 import Vue from 'vue'
 import { Button, message } from 'vue-antd-ui'

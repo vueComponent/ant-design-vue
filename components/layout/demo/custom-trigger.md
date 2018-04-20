@@ -17,7 +17,7 @@ If you want to use a customized trigger, you can hide the default one by setting
       v-model="collapsed"
     >
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
         <a-menu-item key="1">
           <a-icon type="user" />
           <span>nav 1</span>
@@ -33,13 +33,13 @@ If you want to use a customized trigger, you can hide the default one by setting
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-header style="background: #fff; padding: 0">
+      <a-layout-header style="background: #fff; padding: 0">
         <a-icon
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="()=> collapsed = !collapsed"
         />
-      </a-header>
+      </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
         Content
       </a-layout-content>

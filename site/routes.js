@@ -1,4 +1,5 @@
 import Layout from './components/layout.vue'
+import Iframe from './components/iframe.vue'
 
 const AsyncTestComp = () => {
   const d = window.location.hash.replace('#', '')
@@ -9,6 +10,7 @@ const AsyncTestComp = () => {
 
 export default [
   { path: '/ant-design/components/:name/', component: Layout, props: true },
+  { path: '/ant-design/iframe/:name/', component: Iframe, props: true },
   {
     path: '/ant-design',
     component: Layout,

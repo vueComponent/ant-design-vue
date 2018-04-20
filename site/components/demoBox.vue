@@ -1,7 +1,14 @@
 <template>
   <section :class="['code-box', isOpen ? 'expand': '']" :id="id">
     <section class="code-box-demo">
-      <slot name="component"></slot>
+      <template v-if="iframeDemo[iframeDemoKey]">
+        <div class="browser-mockup with-url">
+          <iframe :src="iframeDemo[iframeDemoKey]" height="360"/>
+        </div>
+      </template>
+      <template v-else>
+        <slot name="component"></slot>
+      </template>
     </section>
     <section class="code-box-meta markdown">
       <slot v-if="isZhCN" name="description"></slot>
@@ -36,9 +43,11 @@ export default {
   name: 'demoBox',
   props: {
     jsfiddle: Object,
+    isIframe: Boolean,
   },
   inject: {
     _store: { default: {}},
+    iframeDemo: { default: {}},
   },
   data () {
     const { name = '' } = this.$route.params
@@ -53,6 +62,7 @@ export default {
         `not have usTitle`,
       )
     }
+    const iframeDemoKey = usTitle.split(' ').join('-').toLowerCase()
     const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
 
     if (this._store.store) {
@@ -67,6 +77,7 @@ export default {
       copyTooltipVisible: false,
       sourceCode,
       id,
+      iframeDemoKey,
     }
   },
   methods: {

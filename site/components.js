@@ -23,7 +23,7 @@ import {
   Icon,
   Input,
   InputNumber,
-  // Layout,
+  Layout,
   // List,
   LocaleProvider,
   message,
@@ -92,7 +92,11 @@ Vue.component(Input.Group.name, Input.Group)
 Vue.component(Input.Search.name, Input.Search)
 Vue.component(Input.TextArea.name, Input.TextArea)
 Vue.component(InputNumber.name, InputNumber)
-// Vue.component(Layout.name, Layout)
+Vue.component(Layout.name, Layout)
+Vue.component(Layout.Header.name, Layout.Header)
+Vue.component(Layout.Footer.name, Layout.Footer)
+Vue.component(Layout.Sider.name, Layout.Sider)
+Vue.component(Layout.Content.name, Layout.Content)
 // Vue.component(List.name, List)
 Vue.component(LocaleProvider.name, LocaleProvider)
 Vue.component(Menu.name, Menu)

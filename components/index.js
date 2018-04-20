@@ -58,7 +58,7 @@ import { default as Input } from './input'
 
 import { default as InputNumber } from './input-number'
 
-// import { default as Layout } from './layout'
+import { default as Layout } from './layout'
 
 // import { default as List } from './list'
 
@@ -154,6 +154,11 @@ const components = [
   Input.Search,
   Input.TextArea,
   InputNumber,
+  Layout,
+  Layout.Header,
+  Layout.Footer,
+  Layout.Sider,
+  Layout.Content,
   LocaleProvider,
   Menu,
   Menu.Item,
@@ -235,6 +240,7 @@ export {
   Icon,
   Input,
   InputNumber,
+  Layout,
   LocaleProvider,
   Menu,
   Modal,

@@ -36,7 +36,23 @@ $ vue init webpack antd-demo
 ```bash
 $ npm i --save vue-antd-ui
 ```
+**Fully import**
+```jsx
+import Vue from 'vue'
+import Antd from 'vue-antd-ui'
+import App from './App'
+Vue.config.productionTip = false
 
+Vue.use(Antd)
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  components: { App },
+  template: '<App/>'
+})
+```
+The above imports Antd entirely. Note that CSS file needs to be imported separately.
 
 **Only import the components you need**
 ```jsx

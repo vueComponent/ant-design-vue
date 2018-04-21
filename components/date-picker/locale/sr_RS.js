@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Izaberite datum',
     rangePlaceholder: [
-      'Početni datum', 'Krajnji datum'
+      'Početni datum', 'Krajnji datum',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

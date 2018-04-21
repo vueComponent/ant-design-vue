@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/pl_PL';
-import DatePicker from '../date-picker/locale/pl_PL';
-import TimePicker from '../time-picker/locale/pl_PL';
-import Calendar from '../calendar/locale/pl_PL';
+import Pagination from '../vc-pagination/locale/pl_PL'
+import DatePicker from '../date-picker/locale/pl_PL'
+import TimePicker from '../time-picker/locale/pl_PL'
+import Calendar from '../calendar/locale/pl_PL'
 
 export default {
-  locale : 'pl',
+  locale: 'pl',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Menu filtra',
     filterConfirm: 'OK',
     filterReset: 'Wyczyść',
     emptyText: 'Brak danych',
     selectAll: 'Zaznacz bieżącą stronę',
-    selectInvert: 'Odwróć zaznaczenie'
+    selectInvert: 'Odwróć zaznaczenie',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Anuluj',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Anuluj'
+    cancelText: 'Anuluj',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Nie znaleziono',
     searchPlaceholder: 'Szukaj',
     itemUnit: 'obiekt',
-    itemsUnit: 'obiekty'
+    itemsUnit: 'obiekty',
   },
-  Select : {
-    notFoundContent: 'Nie znaleziono'
+  Select: {
+    notFoundContent: 'Nie znaleziono',
   },
-  Upload : {
+  Upload: {
     uploading: 'Wysyłanie...',
     removeFile: 'Usuń plik',
     uploadError: 'Błąd wysyłania',
-    previewFile: 'Podejrzyj plik'
-  }
-};
+    previewFile: 'Podejrzyj plik',
+  },
+}

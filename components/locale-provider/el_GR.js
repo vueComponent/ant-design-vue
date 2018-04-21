@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/el_GR';
-import DatePicker from '../date-picker/locale/el_GR';
-import TimePicker from '../time-picker/locale/el_GR';
-import Calendar from '../calendar/locale/el_GR';
+import Pagination from '../vc-pagination/locale/el_GR'
+import DatePicker from '../date-picker/locale/el_GR'
+import TimePicker from '../time-picker/locale/el_GR'
+import Calendar from '../calendar/locale/el_GR'
 
 export default {
-  locale : 'el',
+  locale: 'el',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Μενού φίλτρων',
     filterConfirm: 'ΟΚ',
     filterReset: 'Επαναφορά',
     emptyText: 'Δεν υπάρχουν δεδομένα',
     selectAll: 'Επιλογή τρέχουσας σελίδας',
-    selectInvert: 'Αντιστροφή τρέχουσας σελίδας'
+    selectInvert: 'Αντιστροφή τρέχουσας σελίδας',
   },
-  Modal : {
+  Modal: {
     okText: 'ΟΚ',
     cancelText: 'Άκυρο',
-    justOkText: 'ΟΚ'
+    justOkText: 'ΟΚ',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'ΟΚ',
-    cancelText: 'Άκυρο'
+    cancelText: 'Άκυρο',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Δεν βρέθηκε',
     searchPlaceholder: 'Αναζήτηση',
     itemUnit: 'αντικείμενο',
-    itemsUnit: 'αντικείμενα'
+    itemsUnit: 'αντικείμενα',
   },
-  Select : {
-    notFoundContent: 'Δεν βρέθηκε'
+  Select: {
+    notFoundContent: 'Δεν βρέθηκε',
   },
-  Upload : {
+  Upload: {
     uploading: 'Μεταφόρτωση...',
     removeFile: 'Αφαίρεση αρχείου',
     uploadError: 'Σφάλμα μεταφόρτωσης',
-    previewFile: 'Προεπισκόπηση αρχείου'
-  }
-};
+    previewFile: 'Προεπισκόπηση αρχείου',
+  },
+}

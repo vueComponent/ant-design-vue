@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/ku_IQ';
-import DatePicker from '../date-picker/locale/ku_IQ';
-import TimePicker from '../time-picker/locale/ku_IQ';
-import Calendar from '../calendar/locale/ku_IQ';
+import Pagination from '../vc-pagination/locale/ku_IQ'
+import DatePicker from '../date-picker/locale/ku_IQ'
+import TimePicker from '../time-picker/locale/ku_IQ'
+import Calendar from '../calendar/locale/ku_IQ'
 
 export default {
-  locale : 'ku-iq',
+  locale: 'ku-iq',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Menuê peldanka',
     filterConfirm: 'Temam',
     filterReset: 'Jê bibe',
     emptyText: 'Agahî tune',
     selectAll: 'Hemî hilbijêre',
-    selectInvert: 'Hilbijartinan veguhere'
+    selectInvert: 'Hilbijartinan veguhere',
   },
-  Modal : {
+  Modal: {
     okText: 'Temam',
     cancelText: 'Betal ke',
-    justOkText: 'Temam'
+    justOkText: 'Temam',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'Temam',
-    cancelText: 'Betal ke'
+    cancelText: 'Betal ke',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Peyda Nebû',
     searchPlaceholder: 'Lêgerîn',
     itemUnit: 'tişt',
-    itemsUnit: 'tişt'
+    itemsUnit: 'tişt',
   },
-  Select : {
-    notFoundContent: 'Peyda Nebû'
+  Select: {
+    notFoundContent: 'Peyda Nebû',
   },
-  Upload : {
+  Upload: {
     uploading: 'Bardike...',
     removeFile: 'Pelê rabike',
     uploadError: 'Xeta barkirine',
-    previewFile: 'Pelê pêşbibîne'
-  }
-};
+    previewFile: 'Pelê pêşbibîne',
+  },
+}

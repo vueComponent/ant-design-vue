@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Sélectionner une date',
     rangePlaceholder: [
-      'Date de début', 'Date de fin'
+      'Date de début', 'Date de fin',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at: https://github.com/ant-design/ant-design/issues/424

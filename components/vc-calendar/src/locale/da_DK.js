@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Næste årti',
   previousCentury: 'Forrige århundrede',
   nextCentury: 'Næste århundrede',
-};
+}

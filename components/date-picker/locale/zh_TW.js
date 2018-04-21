@@ -5,13 +5,13 @@ const locale = {
   lang: {
     placeholder: '請選擇日期',
     rangePlaceholder: [
-      '開始日期', '結束日期'
+      '開始日期', '結束日期',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 locale.lang.ok = '確 定'

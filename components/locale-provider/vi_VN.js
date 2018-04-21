@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/vi_VN';
-import DatePicker from '../date-picker/locale/vi_VN';
-import TimePicker from '../time-picker/locale/vi_VN';
-import Calendar from '../calendar/locale/vi_VN';
+import Pagination from '../vc-pagination/locale/vi_VN'
+import DatePicker from '../date-picker/locale/vi_VN'
+import TimePicker from '../time-picker/locale/vi_VN'
+import Calendar from '../calendar/locale/vi_VN'
 
 export default {
-  locale : 'vi',
+  locale: 'vi',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Bộ ',
     filterConfirm: 'OK',
     filterReset: 'Tạo Lại',
     emptyText: 'Trống',
     selectAll: 'Chọn Tất Cả',
-    selectInvert: 'Chọn Ngược Lại'
+    selectInvert: 'Chọn Ngược Lại',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Huỷ',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Huỷ'
+    cancelText: 'Huỷ',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Không Tìm Thấy',
     searchPlaceholder: 'Tìm ở đây',
     itemUnit: 'mục',
-    itemsUnit: 'mục'
+    itemsUnit: 'mục',
   },
-  Select : {
-    notFoundContent: 'Không Tìm Thấy'
+  Select: {
+    notFoundContent: 'Không Tìm Thấy',
   },
-  Upload : {
+  Upload: {
     uploading: 'Đang tải lên...',
     removeFile: 'Gỡ bỏ tập tin',
     uploadError: 'Lỗi tải lên',
-    previewFile: 'Xem thử tập tin'
-  }
-};
+    previewFile: 'Xem thử tập tin',
+  },
+}

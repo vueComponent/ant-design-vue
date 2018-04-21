@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Veldu dag',
     rangePlaceholder: [
-      'Upphafsdagur', 'Lokadagur'
+      'Upphafsdagur', 'Lokadagur',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

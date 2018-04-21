@@ -1,36 +1,36 @@
-import Pagination from '../vc-pagination/locale/ca_ES';
-import DatePicker from '../date-picker/locale/ca_ES';
-import TimePicker from '../time-picker/locale/ca_ES';
-import Calendar from '../calendar/locale/ca_ES';
+import Pagination from '../vc-pagination/locale/ca_ES'
+import DatePicker from '../date-picker/locale/ca_ES'
+import TimePicker from '../time-picker/locale/ca_ES'
+import Calendar from '../calendar/locale/ca_ES'
 
 export default {
-  locale : 'ca',
+  locale: 'ca',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Filtrar Menu',
     filterConfirm: 'OK',
     filterReset: 'Restablir',
-    emptyText: 'Sense dades'
+    emptyText: 'Sense dades',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Cancel·lar',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Cancel·lar'
+    cancelText: 'Cancel·lar',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'No trobat',
     searchPlaceholder: 'Cercar aquí',
     itemUnit: 'item',
-    itemsUnit: 'items'
+    itemsUnit: 'items',
   },
-  Select : {
-    notFoundContent: 'No trobat'
-  }
-};
+  Select: {
+    notFoundContent: 'No trobat',
+  },
+}

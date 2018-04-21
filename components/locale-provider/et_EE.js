@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/et_EE';
-import DatePicker from '../date-picker/locale/et_EE';
-import TimePicker from '../time-picker/locale/et_EE';
-import Calendar from '../calendar/locale/et_EE';
+import Pagination from '../vc-pagination/locale/et_EE'
+import DatePicker from '../date-picker/locale/et_EE'
+import TimePicker from '../time-picker/locale/et_EE'
+import Calendar from '../calendar/locale/et_EE'
 
 export default {
-  locale : 'et',
+  locale: 'et',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Filtri menüü',
     filterConfirm: 'OK',
     filterReset: 'Nulli',
     emptyText: 'Andmed puuduvad',
     selectAll: 'Vali kõik',
-    selectInvert: 'Inverteeri valik'
+    selectInvert: 'Inverteeri valik',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Tühista',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Tühista'
+    cancelText: 'Tühista',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Ei leitud',
     searchPlaceholder: 'Otsi siit',
     itemUnit: 'kogus',
-    itemsUnit: 'kogus'
+    itemsUnit: 'kogus',
   },
-  Select : {
-    notFoundContent: 'Ei leitud'
+  Select: {
+    notFoundContent: 'Ei leitud',
   },
-  Upload : {
+  Upload: {
     uploading: 'Üleslaadimine...',
     removeFile: 'Eemalda fail',
     uploadError: 'Üleslaadimise tõrge',
-    previewFile: 'Faili eelvaade'
-  }
-};
+    previewFile: 'Faili eelvaade',
+  },
+}

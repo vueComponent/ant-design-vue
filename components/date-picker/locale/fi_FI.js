@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Valitse päivä',
     rangePlaceholder: [
-      'Alku päivä', 'Loppu päivä'
+      'Alku päivä', 'Loppu päivä',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

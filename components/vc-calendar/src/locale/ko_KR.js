@@ -24,4 +24,4 @@ export default {
   nextDecade: '다음 연대',
   previousCentury: '이전 세기',
   nextCentury: '다음 세기',
-};
+}

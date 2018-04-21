@@ -6,9 +6,9 @@ import assign from 'object-assign'
 const locale = {
   lang: assign({
     placeholder: 'เลือกวันที่',
-    rangePlaceholder: ['วันเริ่มต้น', 'วันสิ้นสุด']
+    rangePlaceholder: ['วันเริ่มต้น', 'วันสิ้นสุด'],
   }, CalendarLocale),
-  timePickerLocale: assign({}, TimePickerLocale)
+  timePickerLocale: assign({}, TimePickerLocale),
 }
 
 // All settings at:

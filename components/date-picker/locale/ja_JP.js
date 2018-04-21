@@ -5,13 +5,13 @@ const locale = {
   lang: {
     placeholder: '日付を選択',
     rangePlaceholder: [
-      '開始日付', '終了日付'
+      '開始日付', '終了日付',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

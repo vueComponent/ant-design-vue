@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Επιλέξτε ημερομηνία',
     rangePlaceholder: [
-      'Αρχική ημερομηνία', 'Τελική ημερομηνία'
+      'Αρχική ημερομηνία', 'Τελική ημερομηνία',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at: https://github.com/ant-design/ant-design/issues/424

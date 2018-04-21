@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/ar_EG';
-import DatePicker from '../date-picker/locale/ar_EG';
-import TimePicker from '../time-picker/locale/ar_EG';
-import Calendar from '../calendar/locale/ar_EG';
+import Pagination from '../vc-pagination/locale/ar_EG'
+import DatePicker from '../date-picker/locale/ar_EG'
+import TimePicker from '../time-picker/locale/ar_EG'
+import Calendar from '../calendar/locale/ar_EG'
 
 export default {
-  locale : 'ar',
+  locale: 'ar',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'الفلاتر',
     filterConfirm: 'تأكيد',
     filterReset: 'إعادة ضبط',
     emptyText: 'لا توجد بيانات',
     selectAll: 'اختيار الكل',
-    selectInvert: 'إلغاء الاختيار'
+    selectInvert: 'إلغاء الاختيار',
   },
-  Modal : {
+  Modal: {
     okText: 'تأكيد',
     cancelText: 'إلغاء',
-    justOkText: 'تأكيد'
+    justOkText: 'تأكيد',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'تأكيد',
-    cancelText: 'إلغاء'
+    cancelText: 'إلغاء',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'لا يوجد محتوى',
     searchPlaceholder: 'ابحث هنا',
     itemUnit: 'عنصر',
-    itemsUnit: 'عناصر'
+    itemsUnit: 'عناصر',
   },
-  Select : {
-    notFoundContent: 'لايوجد محتوى'
+  Select: {
+    notFoundContent: 'لايوجد محتوى',
   },
-  Upload : {
+  Upload: {
     uploading: 'جاري الرفع...',
     removeFile: 'احذف الملف',
     uploadError: 'مشكلة فى الرفع',
-    previewFile: 'استعرض الملف'
-  }
-};
+    previewFile: 'استعرض الملف',
+  },
+}

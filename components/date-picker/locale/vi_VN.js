@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Chọn thời điểm',
     rangePlaceholder: [
-      'Ngày bắt đầu', 'Ngày kết thúc'
+      'Ngày bắt đầu', 'Ngày kết thúc',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

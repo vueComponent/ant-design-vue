@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/pt_BR';
-import DatePicker from '../date-picker/locale/pt_BR';
-import TimePicker from '../time-picker/locale/pt_BR';
-import Calendar from '../calendar/locale/pt_BR';
+import Pagination from '../vc-pagination/locale/pt_BR'
+import DatePicker from '../date-picker/locale/pt_BR'
+import TimePicker from '../time-picker/locale/pt_BR'
+import Calendar from '../calendar/locale/pt_BR'
 
 export default {
-  locale : 'pt-br',
+  locale: 'pt-br',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Filtro',
     filterConfirm: 'OK',
     filterReset: 'Resetar',
     emptyText: 'Não há dados',
     selectAll: 'Selecionar página atual',
-    selectInvert: 'Inverter seleção'
+    selectInvert: 'Inverter seleção',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Cancelar',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Cancelar'
+    cancelText: 'Cancelar',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Não encontrado',
     searchPlaceholder: 'Procurar',
     itemUnit: 'item',
-    itemsUnit: 'items'
+    itemsUnit: 'items',
   },
-  Select : {
-    notFoundContent: 'Não encontrado'
+  Select: {
+    notFoundContent: 'Não encontrado',
   },
-  Upload : {
+  Upload: {
     uploading: 'Enviando...',
     removeFile: 'Remover arquivo',
     uploadError: 'Erro no envio',
-    previewFile: 'Visualizar arquivo'
-  }
-};
+    previewFile: 'Visualizar arquivo',
+  },
+}

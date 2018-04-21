@@ -89,7 +89,7 @@ export default {
       }
       return activeKey
     },
-    handleTabClick (activeKey,e) {
+    handleTabClick (activeKey, e) {
       this.__emit('tabClick', activeKey, e)
       this.setActiveKey(activeKey)
     },

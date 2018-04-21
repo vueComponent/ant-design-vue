@@ -12,4 +12,4 @@ export default {
   next_5: '다음 5 페이지',
   prev_3: '이전 3 페이지',
   next_3: '다음 3 페이지',
-};
+}

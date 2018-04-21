@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/is_IS';
-import DatePicker from '../date-picker/locale/is_IS';
-import TimePicker from '../time-picker/locale/is_IS';
-import Calendar from '../calendar/locale/is_IS';
+import Pagination from '../vc-pagination/locale/is_IS'
+import DatePicker from '../date-picker/locale/is_IS'
+import TimePicker from '../time-picker/locale/is_IS'
+import Calendar from '../calendar/locale/is_IS'
 
 export default {
-  locale : 'is',
+  locale: 'is',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Afmarkanir',
     filterConfirm: 'Staðfesta',
     filterReset: 'Núllstilla',
     emptyText: 'Engin gögn',
     selectAll: 'Velja allt',
-    selectInvert: 'Viðsnúa vali'
+    selectInvert: 'Viðsnúa vali',
   },
-  Modal : {
+  Modal: {
     okText: 'Áfram',
     cancelText: 'Hætta við',
-    justOkText: 'Í lagi'
+    justOkText: 'Í lagi',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'Áfram',
-    cancelText: 'Hætta við'
+    cancelText: 'Hætta við',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Engar færslur',
     searchPlaceholder: 'Leita hér',
     itemUnit: 'færsla',
-    itemsUnit: 'færslur'
+    itemsUnit: 'færslur',
   },
-  Select : {
-    notFoundContent: 'Ekkert finnst'
+  Select: {
+    notFoundContent: 'Ekkert finnst',
   },
-  Upload : {
+  Upload: {
     uploading: 'Hleð upp...',
     removeFile: 'Fjarlægja skrá',
     uploadError: 'Villa við að hlaða upp',
-    previewFile: 'Forskoða skrá'
-  }
-};
+    previewFile: 'Forskoða skrá',
+  },
+}

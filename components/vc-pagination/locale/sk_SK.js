@@ -12,4 +12,4 @@ export default {
   next_5: 'Nasledujúcich 5 strán',
   prev_3: 'Predchádzajúce 3 strany',
   next_3: 'Nasledujúce 3 strany',
-};
+}

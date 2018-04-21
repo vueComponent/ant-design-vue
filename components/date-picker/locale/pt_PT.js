@@ -7,7 +7,7 @@ const locale = {
     ...CalendarLocale,
     placeholder: 'Data',
     rangePlaceholder: [
-      'Data inicial', 'Data final'
+      'Data inicial', 'Data final',
     ],
     today: 'Hoje',
     now: 'Agora',
@@ -34,12 +34,12 @@ const locale = {
     previousDecade: 'Última década',
     nextDecade: 'Próxima década',
     previousCentury: 'Último século',
-    nextCentury: 'Próximo século'
+    nextCentury: 'Próximo século',
   },
   timePickerLocale: {
     ...TimePickerLocale,
-    placeholder: 'Hora'
-  }
+    placeholder: 'Hora',
+  },
 }
 
 // All settings at:

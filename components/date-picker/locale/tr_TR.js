@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Tarih Seç',
     rangePlaceholder: [
-      'Başlangıç Tarihi', 'Bitiş Tarihi'
+      'Başlangıç Tarihi', 'Bitiş Tarihi',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

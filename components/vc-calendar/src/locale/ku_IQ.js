@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Dehsalen paş',
   previousCentury: 'Sedsalen peş',
   nextCentury: 'Sedsalen paş',
-};
+}

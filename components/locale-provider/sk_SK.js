@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/sk_SK';
-import DatePicker from '../date-picker/locale/sk_SK';
-import TimePicker from '../time-picker/locale/sk_SK';
-import Calendar from '../calendar/locale/sk_SK';
+import Pagination from '../vc-pagination/locale/sk_SK'
+import DatePicker from '../date-picker/locale/sk_SK'
+import TimePicker from '../time-picker/locale/sk_SK'
+import Calendar from '../calendar/locale/sk_SK'
 
 export default {
-  locale : 'sk',
+  locale: 'sk',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Filter',
     filterConfirm: 'OK',
     filterReset: 'Obnoviť',
     emptyText: 'Žiadne dáta',
     selectAll: 'Vybrať všetko',
-    selectInvert: 'Vybrať opačné'
+    selectInvert: 'Vybrať opačné',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Zrušiť',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Zrušiť'
+    cancelText: 'Zrušiť',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Nenájdené',
     searchPlaceholder: 'Vyhľadávanie',
     itemUnit: 'položka',
-    itemsUnit: 'položiek'
+    itemsUnit: 'položiek',
   },
-  Select : {
-    notFoundContent: 'Nenájdené'
+  Select: {
+    notFoundContent: 'Nenájdené',
   },
-  Upload : {
+  Upload: {
     uploading: 'Nahrávanie...',
     removeFile: 'Odstrániť súbor',
     uploadError: 'Chyba pri nahrávaní',
-    previewFile: 'Zobraziť súbor'
-  }
-};
+    previewFile: 'Zobraziť súbor',
+  },
+}

@@ -12,4 +12,4 @@ export default {
   next_5: 'Sonraki 5 Sayfa',
   prev_3: 'Önceki 3 Sayfa',
   next_3: 'Sonraki 3 Sayfa',
-};
+}

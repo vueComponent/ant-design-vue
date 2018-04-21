@@ -12,4 +12,4 @@ export default {
   next_5: 'Järgmised 5 lehekülge',
   prev_3: 'Eelmised 3 lehekülge',
   next_3: 'Järgmised 3 lehekülge',
-};
+}

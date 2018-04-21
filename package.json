@@ -28,7 +28,7 @@
         "copy": "node scripts/run.js copy-html",
         "compile": "node antd-tools/cli/run.js compile",
         "dist": "node antd-tools/cli/run.js dist",
-        "lint": "eslint -c ./.eslintrc --fix --ext .jsx ./components",
+        "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./components",
         "lint:style": "stylelint \"./examples/**/*.less\" --fix --syntax less",
         "commitmsg": "validate-commit-msg",
         "cm": "git-cz"
@@ -43,7 +43,8 @@
     },
     "homepage": "https://github.com/vueComponent/ant-design",
     "pre-commit": [
-        "lint:style"
+        "lint:style",
+        "lint"
     ],
     "devDependencies": {
         "autoprefixer": "^8.1.0",

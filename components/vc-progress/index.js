@@ -1,8 +1,8 @@
-import Progress, {  Line, Circle } from './src/';
+import Progress, { Line, Circle } from './src/'
 
 export {
   Line,
   Circle,
-};
+}
 
-export default Progress;
+export default Progress

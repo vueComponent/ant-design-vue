@@ -1,36 +1,36 @@
-import Pagination from '../vc-pagination/locale/fr_BE';
-import DatePicker from '../date-picker/locale/fr_BE';
-import TimePicker from '../time-picker/locale/fr_BE';
-import Calendar from '../calendar/locale/fr_BE';
+import Pagination from '../vc-pagination/locale/fr_BE'
+import DatePicker from '../date-picker/locale/fr_BE'
+import TimePicker from '../time-picker/locale/fr_BE'
+import Calendar from '../calendar/locale/fr_BE'
 
 export default {
-  locale : 'fr',
+  locale: 'fr',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Filtrer',
     filterConfirm: 'OK',
     filterReset: 'Réinitialiser',
-    emptyText: 'Aucune donnée'
+    emptyText: 'Aucune donnée',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Annuler',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Annuler'
+    cancelText: 'Annuler',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Pas de résultat',
     searchPlaceholder: 'Recherche',
     itemUnit: 'élément',
-    itemsUnit: 'éléments'
+    itemsUnit: 'éléments',
   },
-  Select : {
-    notFoundContent: 'Pas de résultat'
-  }
-};
+  Select: {
+    notFoundContent: 'Pas de résultat',
+  },
+}

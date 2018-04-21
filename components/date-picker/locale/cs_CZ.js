@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Vybrat datum',
     rangePlaceholder: [
-      'Od', 'Do'
+      'Od', 'Do',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

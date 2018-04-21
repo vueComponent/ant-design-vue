@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/ru_RU';
-import DatePicker from '../date-picker/locale/ru_RU';
-import TimePicker from '../time-picker/locale/ru_RU';
-import Calendar from '../calendar/locale/ru_RU';
+import Pagination from '../vc-pagination/locale/ru_RU'
+import DatePicker from '../date-picker/locale/ru_RU'
+import TimePicker from '../time-picker/locale/ru_RU'
+import Calendar from '../calendar/locale/ru_RU'
 
 export default {
-  locale : 'ru',
+  locale: 'ru',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Фильтр',
     filterConfirm: 'OK',
     filterReset: 'Сбросить',
     emptyText: 'Нет данных',
     selectAll: 'Выбрать всё',
-    selectInvert: 'Инвертировать выбор'
+    selectInvert: 'Инвертировать выбор',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Отмена',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Отмена'
+    cancelText: 'Отмена',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Ничего не найдено',
     searchPlaceholder: 'Введите название для поиска',
     itemUnit: 'item',
-    itemsUnit: 'items'
+    itemsUnit: 'items',
   },
-  Select : {
-    notFoundContent: 'Ничего не найдено'
+  Select: {
+    notFoundContent: 'Ничего не найдено',
   },
-  Upload : {
+  Upload: {
     uploading: 'Закачиваю...',
     removeFile: 'Удалить файл',
     uploadError: 'Ошибка при закачке',
-    previewFile: 'Предпросмотр файла'
-  }
-};
+    previewFile: 'Предпросмотр файла',
+  },
+}

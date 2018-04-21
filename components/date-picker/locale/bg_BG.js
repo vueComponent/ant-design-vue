@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Избор на дата',
     rangePlaceholder: [
-      'Начална', 'Крайна'
+      'Начална', 'Крайна',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

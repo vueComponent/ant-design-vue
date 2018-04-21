@@ -5,13 +5,13 @@ const locale = {
   lang: {
     placeholder: 'Välj datum',
     rangePlaceholder: [
-      'Startdatum', 'Slutdatum'
+      'Startdatum', 'Slutdatum',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

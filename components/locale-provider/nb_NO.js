@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/nb_NO';
-import DatePicker from '../date-picker/locale/nb_NO';
-import TimePicker from '../time-picker/locale/nb_NO';
-import Calendar from '../calendar/locale/nb_NO';
+import Pagination from '../vc-pagination/locale/nb_NO'
+import DatePicker from '../date-picker/locale/nb_NO'
+import TimePicker from '../time-picker/locale/nb_NO'
+import Calendar from '../calendar/locale/nb_NO'
 
 export default {
-  locale : 'nb',
+  locale: 'nb',
   DatePicker,
   TimePicker,
   Calendar,
   Pagination,
-  Table : {
+  Table: {
     filterTitle: 'Filtermeny',
     filterConfirm: 'OK',
     filterReset: 'Nullstill',
     emptyText: 'Ingen data',
     selectAll: 'Velg alle',
-    selectInvert: 'Inverter valg'
+    selectInvert: 'Inverter valg',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Avbryt',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Avbryt'
+    cancelText: 'Avbryt',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Ingen treff',
     searchPlaceholder: 'Søk her',
     itemUnit: 'element',
-    itemsUnit: 'elementer'
+    itemsUnit: 'elementer',
   },
-  Select : {
-    notFoundContent: 'Ingen treff'
+  Select: {
+    notFoundContent: 'Ingen treff',
   },
-  Upload : {
+  Upload: {
     uploading: 'Laster opp...',
     removeFile: 'Fjern fil',
     uploadError: 'Feil ved opplastning',
-    previewFile: 'Forhåndsvisning'
-  }
-};
+    previewFile: 'Forhåndsvisning',
+  },
+}

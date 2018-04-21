@@ -5,13 +5,13 @@ const locale = {
   lang: {
     placeholder: '请选择日期',
     rangePlaceholder: [
-      '开始日期', '结束日期'
+      '开始日期', '结束日期',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // should add whitespace between char in Button

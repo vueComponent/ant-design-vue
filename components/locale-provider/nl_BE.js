@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/nl_BE';
-import DatePicker from '../date-picker/locale/nl_BE';
-import TimePicker from '../time-picker/locale/nl_BE';
-import Calendar from '../calendar/locale/nl_BE';
+import Pagination from '../vc-pagination/locale/nl_BE'
+import DatePicker from '../date-picker/locale/nl_BE'
+import TimePicker from '../time-picker/locale/nl_BE'
+import Calendar from '../calendar/locale/nl_BE'
 
 export default {
-  locale : 'nl-be',
+  locale: 'nl-be',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'FilterMenu',
     filterConfirm: 'OK',
     filterReset: 'Reset',
     emptyText: 'Geen gegevens',
     selectAll: 'Selecteer huidige pagina',
-    selectInvert: 'Selecteer huidige pagina'
+    selectInvert: 'Selecteer huidige pagina',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Annuleer',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Annuleer'
+    cancelText: 'Annuleer',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Niet gevonden',
     searchPlaceholder: 'Zoek hier',
     itemUnit: 'item',
-    itemsUnit: 'items'
+    itemsUnit: 'items',
   },
-  Select : {
-    notFoundContent: 'Niet gevonden'
+  Select: {
+    notFoundContent: 'Niet gevonden',
   },
-  Upload : {
+  Upload: {
     uploading: 'Uploaden...',
     removeFile: 'Bestand verwijderen',
     uploadError: 'Upload fout',
-    previewFile: 'Preview bestand'
-  }
-};
+    previewFile: 'Preview bestand',
+  },
+}

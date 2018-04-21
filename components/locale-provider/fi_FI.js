@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/fi_FI';
-import DatePicker from '../date-picker/locale/fi_FI';
-import TimePicker from '../time-picker/locale/fi_FI';
-import Calendar from '../calendar/locale/fi_FI';
+import Pagination from '../vc-pagination/locale/fi_FI'
+import DatePicker from '../date-picker/locale/fi_FI'
+import TimePicker from '../time-picker/locale/fi_FI'
+import Calendar from '../calendar/locale/fi_FI'
 
 export default {
-  locale : 'fi',
+  locale: 'fi',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'Suodatus valikko',
     filterConfirm: 'OK',
     filterReset: 'Tyhjennä',
     emptyText: 'Ei kohteita',
     selectAll: 'Valitse kaikki',
-    selectInvert: 'Valitse päinvastoin'
+    selectInvert: 'Valitse päinvastoin',
   },
-  Modal : {
+  Modal: {
     okText: 'OK',
     cancelText: 'Peruuta',
-    justOkText: 'OK'
+    justOkText: 'OK',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'OK',
-    cancelText: 'Peruuta'
+    cancelText: 'Peruuta',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'Ei löytynyt',
     searchPlaceholder: 'Etsi täältä',
     itemUnit: 'kohde',
-    itemsUnit: 'kohdetta'
+    itemsUnit: 'kohdetta',
   },
-  Select : {
-    notFoundContent: 'Ei löytynyt'
+  Select: {
+    notFoundContent: 'Ei löytynyt',
   },
-  Upload : {
+  Upload: {
     uploading: 'Lähetetään...',
     removeFile: 'Poista tiedosto',
     uploadError: 'Virhe lähetyksessä',
-    previewFile: 'Esikatsele tiedostoa'
-  }
-};
+    previewFile: 'Esikatsele tiedostoa',
+  },
+}

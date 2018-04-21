@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'Dîrok hilbijêre',
     rangePlaceholder: [
-      'Dîroka destpêkê', 'Dîroka dawîn'
+      'Dîroka destpêkê', 'Dîroka dawîn',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

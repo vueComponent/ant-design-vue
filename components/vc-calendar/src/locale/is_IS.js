@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Næsti áratugur',
   previousCentury: 'Fyrri öld',
   nextCentury: 'Næsta öld',
-};
+}

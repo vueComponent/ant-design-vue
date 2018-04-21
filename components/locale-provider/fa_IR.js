@@ -1,44 +1,44 @@
-import Pagination from '../vc-pagination/locale/fa_IR';
-import DatePicker from '../date-picker/locale/fa_IR';
-import TimePicker from '../time-picker/locale/fa_IR';
-import Calendar from '../calendar/locale/fa_IR';
+import Pagination from '../vc-pagination/locale/fa_IR'
+import DatePicker from '../date-picker/locale/fa_IR'
+import TimePicker from '../time-picker/locale/fa_IR'
+import Calendar from '../calendar/locale/fa_IR'
 
 export default {
-  locale : 'fa',
+  locale: 'fa',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
-  Table : {
+  Table: {
     filterTitle: 'منوی فیلتر',
     filterConfirm: 'تایید',
     filterReset: 'پاک کردن',
     emptyText: 'داده‌ای موجود نیست',
     selectAll: 'انتخاب صفحه‌ی کنونی',
-    selectInvert: 'معکوس کردن انتخاب‌ها در صفحه ی کنونی'
+    selectInvert: 'معکوس کردن انتخاب‌ها در صفحه ی کنونی',
   },
-  Modal : {
+  Modal: {
     okText: 'تایید',
     cancelText: 'لغو',
-    justOkText: 'تایید'
+    justOkText: 'تایید',
   },
-  Popconfirm : {
+  Popconfirm: {
     okText: 'تایید',
-    cancelText: 'لغو'
+    cancelText: 'لغو',
   },
-  Transfer : {
+  Transfer: {
     notFoundContent: 'داده‌ای موجود نیست',
     searchPlaceholder: 'جستجو',
     itemUnit: '',
-    itemsUnit: ''
+    itemsUnit: '',
   },
-  Select : {
-    notFoundContent: 'داده‌ای موجود نیست'
+  Select: {
+    notFoundContent: 'داده‌ای موجود نیست',
   },
-  Upload : {
+  Upload: {
     uploading: 'در حال آپلود...',
     removeFile: 'حذف فایل',
     uploadError: 'خطا در آپلود',
-    previewFile: 'مشاهده‌ی فایل'
-  }
-};
+    previewFile: 'مشاهده‌ی فایل',
+  },
+}

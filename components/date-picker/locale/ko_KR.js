@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: '날짜 선택',
     rangePlaceholder: [
-      '시작일', '종료일'
+      '시작일', '종료일',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

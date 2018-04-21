@@ -6,13 +6,13 @@ const locale = {
   lang: {
     placeholder: 'انتخاب تاریخ',
     rangePlaceholder: [
-      'تاریخ شروع', 'تاریخ پایان'
+      'تاریخ شروع', 'تاریخ پایان',
     ],
-    ...CalendarLocale
+    ...CalendarLocale,
   },
   timePickerLocale: {
-    ...TimePickerLocale
-  }
+    ...TimePickerLocale,
+  },
 }
 
 // All settings at:

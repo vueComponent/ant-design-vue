@@ -76,7 +76,7 @@ function copyHtml () {
   ]
   gulp.src(source).pipe(through2.obj(function z (file, encoding, next) {
     const paths = file.path.split('/')
-    const name = paths[paths.length - 1].split('.')[0]
+    const name = paths[paths.length - 1].split('.')[0].toLowerCase()
     const toPaths = [
       'site-dist/docs',
       'site-dist/docs/vue',

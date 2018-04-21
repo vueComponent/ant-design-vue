@@ -1,0 +1,16 @@
+{
+  "helpMessage": "\nPlease fix your commit message (and consider using https://www.npmjs.com/package/commitizen)\n",
+  "types": [
+    "feat",
+    "fix",
+    "docs",
+    "style",
+    "refactor",
+    "perf",
+    "test",
+    "chore",
+    "revert"
+  ],
+  "warnOnFail": false,
+  "autoFix": false
+}

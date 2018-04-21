@@ -71,6 +71,7 @@ function copyHtml () {
   })
   const source = [
     'docs/vue/*.md',
+    '*.md',
     // '!components/vc-slider/**/*', // exclude vc-slider
   ]
   gulp.src(source).pipe(through2.obj(function z (file, encoding, next) {

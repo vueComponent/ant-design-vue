@@ -5,7 +5,10 @@
 
 const webpack = require('webpack')
 const webpackConfig = require('../webpack.config')
-
+const merge = require('webpack-merge')
+delete webpackConfig.entry
+const scope = process.argv[5] || ''
+console.log('scope', process.argv)
 module.exports = function (config) {
   config.set({
     // to run in additional browsers:
@@ -14,61 +17,34 @@ module.exports = function (config) {
     // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai'],
-    reporters: ['spec', 'coverage-istanbul'],
+    reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap', 'coverage'],
     },
-    webpack: {
-      module: {
-        rules: [
-          {
-            test: /\.vue$/,
-            loader: 'vue-loader',
-            options: {
-              loaders: {
-                js: 'babel-loader',
-              },
-              postLoaders: {
-                js: 'istanbul-instrumenter-loader?esModules=true',
-              },
+    webpack: merge(
+      {
+        plugins: [
+          new webpack.DefinePlugin({
+            'process.env': {
+              NODE_ENV: '"testing"',
+              SCOPE: `"${scope}"`,
             },
-          },
-          {
-            test: /\.js$/,
-            loader: 'babel-loader', exclude: /node_modules/,
-          },
-          {
-            test: /\.(png|jpg|gif|svg)$/,
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]?[hash]',
-            },
-          },
-          {
-            test: /\.less$/,
-            use: [
-              { loader: 'style-loader' },
-              {
-                loader: 'css-loader',
-                options: { sourceMap: true },
-              },
-              { loader: 'less-loader',
-                options: { sourceMap: true },
-              },
-            ],
-          },
+          }),
         ],
       },
-    },
+      webpackConfig
+    ),
     webpackMiddleware: {
       noInfo: true,
     },
     coverageReporter: {
       dir: './coverage',
       reporters: [
+        { type: 'lcov', subdir: '.' },
         { type: 'text-summary' },
       ],
+      includeAllSources: false,
     },
   })
 }

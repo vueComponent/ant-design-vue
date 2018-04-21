@@ -87,6 +87,7 @@ export default {
         { key: 'getting-started', enTitle: 'Getting Started', title: '快速上手' },
         { key: 'use-with-vue-cli', enTitle: 'Use in vue-cli', title: '在 vue-cli 中使用' },
         { key: 'customize-theme', enTitle: 'Customize Theme', title: '定制主题' },
+        { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
         { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
       ]
       const docsMenu = []

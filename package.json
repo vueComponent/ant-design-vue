@@ -27,6 +27,8 @@
         "site": "node scripts/run.js site-dist",
         "copy": "node scripts/run.js copy-html",
         "compile": "node antd-tools/cli/run.js compile",
+        "pub": "node antd-tools/cli/run.js pub",
+        "prepublish": "node antd-tools/cli/run.js guard",
         "dist": "node antd-tools/cli/run.js dist",
         "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./components",
         "lint:style": "stylelint \"./examples/**/*.less\" --fix --syntax less",
@@ -47,6 +49,7 @@
         "lint"
     ],
     "devDependencies": {
+        "@octokit/rest": "^15.2.6",
         "autoprefixer": "^8.1.0",
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.0",
@@ -106,6 +109,7 @@
         "markdown-it-anchor": "^4.0.0",
         "marked": "^0.3.7",
         "merge2": "^1.2.1",
+        "minimist": "^1.2.0",
         "mkdirp": "^0.5.1",
         "mocha": "^3.2.0",
         "postcss": "^6.0.20",

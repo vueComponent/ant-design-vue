@@ -1,27 +1,27 @@
 'use strict'
 
 // const install = require('./install')
-// const runCmd = require('./runCmd')
+const runCmd = require('./runCmd')
 const getBabelCommonConfig = require('./getBabelCommonConfig')
 const merge2 = require('merge2')
-// const { execSync } = require('child_process')
+const { execSync } = require('child_process')
 const through2 = require('through2')
 const transformLess = require('./transformLess')
 const webpack = require('webpack')
 const babel = require('gulp-babel')
-// const argv = require('minimist')(process.argv.slice(2))
-// const GitHub = require('github')
+const argv = require('minimist')(process.argv.slice(2))
+const GitHub = require('@octokit/rest')
 
-// const packageJson = require(`${process.cwd()}/package.json`)
+const packageJson = require(`${process.cwd()}/package.json`)
 // const getNpm = require('./getNpm')
 // const selfPackage = require('../package.json')
-// const chalk = require('chalk')
-// const getNpmArgs = require('./utils/get-npm-args')
-
+const chalk = require('chalk')
+const getNpmArgs = require('./utils/get-npm-args')
+const getChangelog = require('./utils/getChangelog')
 const path = require('path')
 // const watch = require('gulp-watch')
 const gulp = require('gulp')
-// const fs = require('fs')
+const fs = require('fs')
 const rimraf = require('rimraf')
 const replaceLib = require('./replaceLib')
 const stripCode = require('gulp-strip-code')
@@ -123,10 +123,116 @@ function compile (modules) {
   const source = [
     'components/**/*.js',
     'components/**/*.jsx',
-    // '!components/vc-slider/**/*', // exclude vc-slider
   ]
   const jsFilesStream = babelify(gulp.src(source), modules)
   return merge2([less, jsFilesStream, assets])
+}
+
+function tag () {
+  console.log('tagging')
+  const { version } = packageJson
+  execSync(`git tag ${version}`)
+  execSync(`git push origin ${version}:${version}`)
+  execSync('git push origin master:master')
+  console.log('tagged')
+}
+
+function githubRelease () {
+  const changlogFiles = [
+    path.join(cwd, 'CHANGELOG.en-US.md'),
+    path.join(cwd, 'CHANGELOG.zh-CN.md'),
+  ]
+  console.log('creating release on GitHub')
+  if (!process.env.GITHUB_TOKEN) {
+    console.log('no GitHub token found, skip')
+    return
+  }
+  if (!changlogFiles.every(file => fs.existsSync(file))) {
+    console.log('no changelog found, skip')
+    return
+  }
+  const github = new GitHub()
+  github.authenticate({
+    type: 'oauth',
+    token: process.env.GITHUB_TOKEN,
+  })
+  const date = new Date()
+  const { version } = packageJson
+  const enChangelog = getChangelog(changlogFiles[0], version)
+  const cnChangelog = getChangelog(changlogFiles[1], version)
+  const changelog = [
+    `\`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}\``,
+    enChangelog,
+    '\n',
+    '---',
+    '\n',
+    cnChangelog,
+  ].join('\n')
+  const [_, owner, repo] = execSync('git remote get-url origin') // eslint-disable-line
+    .toString()
+    .match(/github.com[:/](.+)\/(.+)\.git/)
+
+  github.repos.createRelease({
+    owner,
+    repo,
+    tag_name: version,
+    name: version,
+    body: changelog,
+  })
+}
+gulp.task('check-git', (done) => {
+  runCmd('git', ['status', '--porcelain'], (code, result) => {
+    if (/^\?\?/m.test(result)) {
+      return done(`There are untracked files in the working tree.\n${result}
+      `)
+    }
+    if (/^([ADRM]| [ADRM])/m.test(result)) {
+      return done(`There are uncommitted changes in the working tree.\n${result}
+      `)
+    }
+    return done()
+  })
+})
+
+function publish (tagString, done) {
+  let args = ['publish', '--with-antd-tools']
+  if (tagString) {
+    args = args.concat(['--tag', tagString])
+  }
+  const publishNpm = process.env.PUBLISH_NPM_CLI || 'npm'
+  runCmd(publishNpm, args, (code) => {
+    tag()
+    githubRelease()
+    done(code)
+  })
+}
+
+function pub (done) {
+  dist((code) => {
+    if (code) {
+      done(code)
+      return
+    }
+    const notOk = !packageJson.version.match(/^\d+\.\d+\.\d+$/)
+    let tagString
+    if (argv['npm-tag']) {
+      tagString = argv['npm-tag']
+    }
+    if (!tagString && notOk) {
+      tagString = 'next'
+    }
+    if (packageJson.scripts['pre-publish']) {
+      runCmd('npm', ['run', 'pre-publish'], (code2) => {
+        if (code2) {
+          done(code2)
+          return
+        }
+        publish(tagString, done)
+      })
+    } else {
+      publish(tagString, done)
+    }
+  })
 }
 
 gulp.task('dist', ['compile'], (done) => {
@@ -138,3 +244,29 @@ gulp.task('compile', ['compile-with-es'], () => {
 gulp.task('compile-with-es', () => {
   compile(false)
 })
+
+gulp.task('pub', ['check-git', 'compile'], (done) => {
+  pub(done)
+})
+
+function reportError () {
+  console.log(chalk.bgRed('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'))
+  console.log(chalk.bgRed('!! `npm publish` is forbidden for this package. !!'))
+  console.log(chalk.bgRed('!! Use `npm run pub` instead.        !!'))
+  console.log(chalk.bgRed('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'))
+}
+
+gulp.task('guard', (done) => {
+  const npmArgs = getNpmArgs()
+  if (npmArgs) {
+    for (let arg = npmArgs.shift(); arg; arg = npmArgs.shift()) {
+      if (/^pu(b(l(i(sh?)?)?)?)?$/.test(arg) && npmArgs.indexOf('--with-antd-tools') < 0) {
+        reportError()
+        done(1)
+        return
+      }
+    }
+  }
+  done()
+})
+

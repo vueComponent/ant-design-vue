@@ -44,6 +44,7 @@ $ npm i --save vue-antd-ui
 import Vue from 'vue'
 import Antd from 'vue-antd-ui'
 import App from './App'
+import 'vue-antd-ui/dist/antd.css'
 Vue.config.productionTip = false
 
 Vue.use(Antd)

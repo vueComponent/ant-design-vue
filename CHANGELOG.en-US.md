@@ -1,6 +1,13 @@
 # Change Log
 
 ---
+
+## 0.4.1
+
+#### bug
+
+- Transfer Vue's dependencies to devDependencies to avoid unstable bugs caused by inconsistency with business versions
+
 ## 0.4.0
 
 #### Layout

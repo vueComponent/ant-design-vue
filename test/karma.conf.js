@@ -8,7 +8,6 @@ const webpackConfig = require('../webpack.config')
 const merge = require('webpack-merge')
 delete webpackConfig.entry
 const scope = process.argv[5] || ''
-console.log('scope', process.argv)
 module.exports = function (config) {
   config.set({
     // to run in additional browsers:

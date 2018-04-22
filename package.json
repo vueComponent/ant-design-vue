@@ -51,6 +51,7 @@
     "devDependencies": {
         "@octokit/rest": "^15.2.6",
         "autoprefixer": "^8.1.0",
+        "avoriaz": "^6.3.0",
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.0.1",

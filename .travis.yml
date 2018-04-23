@@ -3,6 +3,8 @@ sudo: required
 node_js:
   - 8.2.1
 script:
+  - npm test
+  - npm run codecov
   - bash ./scripts/deploy-to-gh-pages.sh
 env:
   matrix:

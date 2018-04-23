@@ -75,12 +75,16 @@ export default {
   // static warn: ModalFunc;
   // static warning: ModalFunc;
   // static confirm: ModalFunc;
+  watch: {
+    visible (curVal, oldVal) {
+      this.$emit('on-visible-change', curVal)
+    },
+  },
   methods: {
     handleCancel (e) {
       this.$emit('cancel', e)
       this.$emit('change', false)
     },
-
     handleOk (e) {
       this.$emit('ok', e)
     },

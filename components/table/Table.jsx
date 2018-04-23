@@ -195,7 +195,7 @@ export default {
 
     setSelectedRowKeys (selectedRowKeys, { selectWay, record, checked, changeRowKeys, nativeEvent }) {
       const { rowSelection = {}} = this
-      if (rowSelection && !('selectedRowKeys' in rowSelection)) {
+      if (rowSelection && ('selectedRowKeys' in rowSelection)) {
         this.store.setState({ selectedRowKeys })
       }
       const data = this.getFlatData()

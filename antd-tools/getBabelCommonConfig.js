@@ -28,5 +28,10 @@ module.exports = function (modules) {
       }],
     ],
     plugins,
+    env: {
+      test: {
+        plugins: [require.resolve('babel-plugin-istanbul')],
+      },
+    },
   }
 }

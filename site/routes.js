@@ -4,7 +4,7 @@ import Iframe from './components/iframe.vue'
 const AsyncTestComp = () => {
   const d = window.location.hash.replace('#', '')
   return {
-    component: import(`../components/layout/demo/${d}`),
+    component: import(`../components/menu/demo/${d}`),
   }
 }
 

@@ -2,6 +2,9 @@ import Button from '../index'
 import Icon from '../../icon'
 import { mount } from 'avoriaz'
 import Vue from 'vue'
+import { matchSnapshot } from "chai-karma-snapshot";
+import { use, expect, assert } from "chai";
+use(matchSnapshot);
 
 describe('Button', () => {
   it('create primary button', () => {
@@ -10,6 +13,7 @@ describe('Button', () => {
         return <Button type='primary'>按钮</Button>
       },
     })
+    expect(wrapper.html()).to.matchSnapshot();
     expect(wrapper.hasClass('ant-btn-primary')).to.equal(true)
   })
   it('renders Chinese characters correctly', (done) => {

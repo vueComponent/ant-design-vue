@@ -231,6 +231,9 @@ export default {
       menuProps.on.click = this.handleClick
       menuProps.props.openTransitionName = menuOpenAnimation
     } else {
+      menuProps.on.click = (e) => {
+        this.$emit('click', e)
+      }
       menuProps.props.openAnimation = menuOpenAnimation
     }
 

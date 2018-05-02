@@ -238,11 +238,17 @@ function pub (done) {
 gulp.task('dist', ['compile'], (done) => {
   dist(done)
 })
-gulp.task('compile', ['compile-with-es'], () => {
+gulp.task('compile', ['compile-with-es'], (done) => {
   compile()
+    .on('finish', function () {
+      done()
+    })
 })
-gulp.task('compile-with-es', () => {
+gulp.task('compile-with-es', (done) => {
   compile(false)
+    .on('finish', function () {
+      done()
+    })
 })
 
 gulp.task('pub', ['check-git', 'compile'], (done) => {

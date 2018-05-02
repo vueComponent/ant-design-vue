@@ -2,6 +2,13 @@
 
 ---
 
+## 0.4.3
+
+`2018-05-02`
+
+- 🐞 Fix component style loss problem
+- 🌟 site add babel-polyfill
+
 ## 0.4.2
 
 `2018-04-24`

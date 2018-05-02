@@ -13,6 +13,7 @@
 
 Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。
 
+[官网国内镜像](http://tangjinzhou.gitee.io/ant-design/docs/vue/introduce-cn/)
 
 [README in English](README.md)
 

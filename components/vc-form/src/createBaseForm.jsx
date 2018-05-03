@@ -18,7 +18,7 @@ import {
   flattenArray,
 } from './utils'
 
-const DEFAULT_TRIGGER = 'onChange'
+const DEFAULT_TRIGGER = 'change'
 
 function createBaseForm (option = {}, mixins = []) {
   const {
@@ -94,7 +94,7 @@ function createBaseForm (option = {}, mixins = []) {
             const valuesAllSet = {}
             valuesAll[name] = value
             Object.keys(valuesAll).forEach(key => set(valuesAllSet, key, valuesAll[key]))
-            onValuesChange(this.props, set({}, name, value), valuesAllSet)
+            onValuesChange(this.$props, set({}, name, value), valuesAllSet)
           }
           const field = this.fieldsStore.getField(name)
           return ({ name, field: { ...field, value, touched: true }, fieldMeta })
@@ -148,7 +148,7 @@ function createBaseForm (option = {}, mixins = []) {
         },
 
         getFieldDecorator (name, fieldOption) {
-          const { ref, ...restProps } = this.getFieldProps(name, fieldOption)
+          const { directives, props } = this.getFieldProps(name, fieldOption)
           return (fieldElem) => {
             const fieldMeta = this.fieldsStore.getFieldMeta(name)
             const originalProps = fieldElem.props
@@ -173,10 +173,10 @@ function createBaseForm (option = {}, mixins = []) {
             fieldMeta.ref = fieldElem.ref
             return cloneElement(fieldElem, {
               props: {
-                ...restProps,
+                ...props,
                 ...this.fieldsStore.getFieldValuePropValue(fieldMeta),
               },
-              ref,
+              directives,
             })
           }
         },
@@ -220,25 +220,10 @@ function createBaseForm (option = {}, mixins = []) {
 
           const inputProps = {
             ...this.fieldsStore.getFieldValuePropValue(fieldOption),
-            ref: name,
+            // ref: name,
+            on: {},
           }
           const saveRef = this.getCacheBind(name, `${name}__ref`, this.saveRef)
-          this.$nextTick(() => {
-            if (this.instances[name] !== this.$refs[name]) {
-              this.$refs[name].destroyed = () => {
-                this.$refs[name].destroyed()
-                // after destroy, delete data
-                this.clearedFieldMetaCache[name] = {
-                  field: this.fieldsStore.getField(name),
-                  meta: this.fieldsStore.getFieldMeta(name),
-                }
-                this.fieldsStore.clearField(name)
-                delete this.instances[name]
-                delete this.cachedBind[name]
-              }
-            }
-            saveRef(name, `${name}__ref`, this.$refs[name])
-          })
           if (fieldNameProp) {
             inputProps[fieldNameProp] = name
           }
@@ -252,7 +237,7 @@ function createBaseForm (option = {}, mixins = []) {
 
           // make sure that the value will be collect
           if (trigger && validateTriggers.indexOf(trigger) === -1) {
-            inputProps[trigger] = this.getCacheBind(name, trigger, this.onCollect)
+            inputProps.on[trigger] = this.getCacheBind(name, trigger, this.onCollect)
           }
 
           const meta = {
@@ -269,7 +254,14 @@ function createBaseForm (option = {}, mixins = []) {
             inputProps[fieldDataProp] = this.fieldsStore.getField(name)
           }
 
-          return inputProps
+          return {
+            props: inputProps,
+            directives: [
+              { name: 'ant-form-item-ref-cal', value: (component) => {
+                saveRef(component)
+              } },
+            ],
+          }
         },
 
         getFieldInstance (name) {
@@ -289,9 +281,12 @@ function createBaseForm (option = {}, mixins = []) {
           if (onFieldsChange) {
             const changedFields = Object.keys(fields)
               .reduce((acc, name) => set(acc, name, this.fieldsStore.getField(name)), {})
-            onFieldsChange(this.props, changedFields, this.fieldsStore.getNestedAllFields())
+            onFieldsChange(this.$props, changedFields, this.fieldsStore.getNestedAllFields())
           }
-          this.forceUpdate(callback)
+          this.$forceUpdate()
+          this.$nextTick(() => {
+            callback && callback()
+          })
         },
 
         resetFields (ns) {
@@ -330,11 +325,22 @@ function createBaseForm (option = {}, mixins = []) {
           this.setFields(newFields, callback)
           if (onValuesChange) {
             const allValues = this.fieldsStore.getAllValues()
-            onValuesChange(this.props, changedValues, allValues)
+            onValuesChange(this.$props, changedValues, allValues)
           }
         },
 
         saveRef (name, _, component) {
+          if (!component) {
+            // after destroy, delete data
+            this.clearedFieldMetaCache[name] = {
+              field: this.fieldsStore.getField(name),
+              meta: this.fieldsStore.getFieldMeta(name),
+            }
+            this.fieldsStore.clearField(name)
+            delete this.instances[name]
+            delete this.cachedBind[name]
+            return
+          }
           this.recoverClearedField(name)
           const fieldMeta = this.fieldsStore.getFieldMeta(name)
           if (fieldMeta) {

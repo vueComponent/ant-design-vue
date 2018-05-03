@@ -49,50 +49,53 @@ function getScrollableContainer (n) {
 }
 
 const mixin = {
-  getForm () {
-    return {
-      ...formMixin.getForm.call(this),
-      validateFieldsAndScroll: this.validateFieldsAndScroll,
-    }
-  },
+  methods: {
+    getForm () {
+      return {
+        ...formMixin.getForm.call(this),
+        validateFieldsAndScroll: this.validateFieldsAndScroll,
+      }
+    },
 
-  validateFieldsAndScroll (ns, opt, cb) {
-    const { names, callback, options } = getParams(ns, opt, cb)
+    validateFieldsAndScroll (ns, opt, cb) {
+      const { names, callback, options } = getParams(ns, opt, cb)
 
-    const newCb = (error, values) => {
-      if (error) {
-        const validNames = this.fieldsStore.getValidFieldsName()
-        let firstNode
-        let firstTop
-        for (const name of validNames) {
-          if (has(error, name)) {
-            const instance = this.getFieldInstance(name)
-            if (instance) {
-              const node = instance.$el
-              const top = node.getBoundingClientRect().top
-              if (firstTop === undefined || firstTop > top) {
-                firstTop = top
-                firstNode = node
+      const newCb = (error, values) => {
+        if (error) {
+          const validNames = this.fieldsStore.getValidFieldsName()
+          let firstNode
+          let firstTop
+          for (const name of validNames) {
+            if (has(error, name)) {
+              const instance = this.getFieldInstance(name)
+              if (instance) {
+                const node = instance.$el
+                const top = node.getBoundingClientRect().top
+                if (firstTop === undefined || firstTop > top) {
+                  firstTop = top
+                  firstNode = node
+                }
               }
             }
           }
+          if (firstNode) {
+            const c = options.container || getScrollableContainer(firstNode)
+            scrollIntoView(firstNode, c, {
+              onlyScrollIfNeeded: true,
+              ...options.scroll,
+            })
+          }
         }
-        if (firstNode) {
-          const c = options.container || getScrollableContainer(firstNode)
-          scrollIntoView(firstNode, c, {
-            onlyScrollIfNeeded: true,
-            ...options.scroll,
-          })
+
+        if (typeof callback === 'function') {
+          callback(error, values)
         }
       }
 
-      if (typeof callback === 'function') {
-        callback(error, values)
-      }
-    }
-
-    return this.validateFields(names, options, newCb)
+      return this.validateFields(names, options, newCb)
+    },
   },
+
 }
 
 function createDOMForm (option) {

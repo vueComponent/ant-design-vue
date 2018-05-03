@@ -1,14 +1,13 @@
-import hoistStatics from 'hoist-non-react-statics'
-
 function getDisplayName (WrappedComponent) {
-  return WrappedComponent.displayName || WrappedComponent.name || 'WrappedComponent'
+  return WrappedComponent.name || 'WrappedComponent'
 }
 
 export function argumentContainer (Container, WrappedComponent) {
   /* eslint no-param-reassign:0 */
-  Container.displayName = `Form(${getDisplayName(WrappedComponent)})`
+  Container.name = `Form_${getDisplayName(WrappedComponent)}`
   Container.WrappedComponent = WrappedComponent
-  return hoistStatics(Container, WrappedComponent)
+  Container.methods = { ...Container.methods, ...WrappedComponent.methods }
+  return Container
 }
 
 export function identity (obj) {

@@ -96,7 +96,7 @@ function createBaseForm (option = {}, mixins = []) {
             const valuesAllSet = {}
             valuesAll[name] = value
             Object.keys(valuesAll).forEach(key => set(valuesAllSet, key, valuesAll[key]))
-            onValuesChange(this.$props, set({}, name, value), valuesAllSet)
+            onValuesChange(this, set({}, name, value), valuesAllSet)
           }
           const field = this.fieldsStore.getField(name)
           return ({ name, field: { ...field, value, touched: true }, fieldMeta })
@@ -300,7 +300,7 @@ function createBaseForm (option = {}, mixins = []) {
           if (onFieldsChange) {
             const changedFields = Object.keys(fields)
               .reduce((acc, name) => set(acc, name, this.fieldsStore.getField(name)), {})
-            onFieldsChange(this.$props, changedFields, this.fieldsStore.getNestedAllFields())
+            onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields())
           }
           this.$forceUpdate()
           this.$nextTick(() => {
@@ -344,7 +344,7 @@ function createBaseForm (option = {}, mixins = []) {
           this.setFields(newFields, callback)
           if (onValuesChange) {
             const allValues = this.fieldsStore.getAllValues()
-            onValuesChange(this.$props, changedValues, allValues)
+            onValuesChange(this, changedValues, allValues)
           }
         },
 

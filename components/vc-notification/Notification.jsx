@@ -7,6 +7,9 @@ import createChainedFunction from '../_util/createChainedFunction'
 import getTransitionProps from '../_util/getTransitionProps'
 import Notice from './Notice'
 
+import antRefDirective from '../_util/antRefDirective'
+Vue.use(antRefDirective)
+
 let seed = 0
 const now = Date.now()
 

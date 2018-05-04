@@ -60,7 +60,7 @@ export function cloneElement (n, nodeProps, deep) {
     return null
   }
   const node = cloneVNode(ele, deep)
-  const { props = {}, key, on = {}, children } = nodeProps
+  const { props = {}, key, on = {}, children, directives = [] } = nodeProps
   const data = node.data || {}
   let cls = {}
   let style = {}
@@ -101,6 +101,7 @@ export function cloneElement (n, nodeProps, deep) {
     class: cls,
     domProps: { ...data.domProps, ...domProps },
     scopedSlots: { ...data.scopedSlots, ...scopedSlots },
+    directives: [...(data.directives || []), ...directives],
   })
 
   if (node.componentOptions) {

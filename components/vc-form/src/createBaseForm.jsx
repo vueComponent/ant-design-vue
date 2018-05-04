@@ -5,7 +5,9 @@ import set from 'lodash/set'
 import createFieldsStore from './createFieldsStore'
 import { cloneElement } from '../../_util/vnode'
 import BaseMixin from '../../_util/BaseMixin'
-import PropTypes from '../../_util/vue-types'
+import { getOptionProps, getEvents } from '../../_util/props-util'
+// import PropTypes from '../../_util/vue-types'
+
 import {
   argumentContainer,
   identity,
@@ -18,7 +20,7 @@ import {
   flattenArray,
 } from './utils'
 
-const DEFAULT_TRIGGER = 'change'
+const DEFAULT_TRIGGER = 'input'
 
 function createBaseForm (option = {}, mixins = []) {
   const {
@@ -38,10 +40,10 @@ function createBaseForm (option = {}, mixins = []) {
   return function decorate (WrappedComponent) {
     const Form = {
       mixins: [BaseMixin, ...mixins],
-      props: {
-        hideRequiredMark: PropTypes.bool,
-        layout: PropTypes.string,
-      },
+      // props: {
+      //   hideRequiredMark: PropTypes.bool,
+      //   layout: PropTypes.string,
+      // },
       data () {
         const fields = mapPropsToFields && mapPropsToFields(this.$props)
         this.fieldsStore = createFieldsStore(fields || {})
@@ -148,10 +150,11 @@ function createBaseForm (option = {}, mixins = []) {
         },
 
         getFieldDecorator (name, fieldOption) {
-          const { directives, props } = this.getFieldProps(name, fieldOption)
+          const { props, ...restProps } = this.getFieldProps(name, fieldOption)
           return (fieldElem) => {
             const fieldMeta = this.fieldsStore.getFieldMeta(name)
-            const originalProps = fieldElem.props
+            const originalProps = getOptionProps(fieldElem)
+            const originalEvents = getEvents(fieldElem)
             if (process.env.NODE_ENV !== 'production') {
               const valuePropName = fieldMeta.valuePropName
               warning(
@@ -170,14 +173,26 @@ function createBaseForm (option = {}, mixins = []) {
               )
             }
             fieldMeta.originalProps = originalProps
-            fieldMeta.ref = fieldElem.ref
-            return cloneElement(fieldElem, {
+            // fieldMeta.ref = fieldElem.data && fieldElem.data.ref
+            const newProps = {
               props: {
                 ...props,
                 ...this.fieldsStore.getFieldValuePropValue(fieldMeta),
               },
-              directives,
+              ...restProps,
+            }
+            newProps.domProps.value = newProps.props.value
+            const newEvents = {}
+            Object.keys(newProps.on).forEach((key) => {
+              if (originalEvents[key]) {
+                const triggerEvents = newProps.on[key]
+                newEvents[key] = (...args) => {
+                  originalEvents[key](...args)
+                  triggerEvents(...args)
+                }
+              }
             })
+            return cloneElement(fieldElem, { ...newProps, on: newEvents })
           }
         },
 
@@ -221,9 +236,8 @@ function createBaseForm (option = {}, mixins = []) {
           const inputProps = {
             ...this.fieldsStore.getFieldValuePropValue(fieldOption),
             // ref: name,
-            on: {},
           }
-          const saveRef = this.getCacheBind(name, `${name}__ref`, this.saveRef)
+          const inputListeners = {}
           if (fieldNameProp) {
             inputProps[fieldNameProp] = name
           }
@@ -231,13 +245,13 @@ function createBaseForm (option = {}, mixins = []) {
           const validateRules = normalizeValidateRules(validate, rules, validateTrigger)
           const validateTriggers = getValidateTriggers(validateRules)
           validateTriggers.forEach((action) => {
-            if (inputProps[action]) return
-            inputProps[action] = this.getCacheBind(name, action, this.onCollectValidate)
+            if (inputListeners[action]) return
+            inputListeners[action] = this.getCacheBind(name, action, this.onCollectValidate)
           })
 
           // make sure that the value will be collect
           if (trigger && validateTriggers.indexOf(trigger) === -1) {
-            inputProps.on[trigger] = this.getCacheBind(name, trigger, this.onCollect)
+            inputListeners[trigger] = this.getCacheBind(name, trigger, this.onCollect)
           }
 
           const meta = {
@@ -256,11 +270,16 @@ function createBaseForm (option = {}, mixins = []) {
 
           return {
             props: inputProps,
+            domProps: {
+              value: inputProps.value,
+            },
             directives: [
-              { name: 'ant-form-item-ref-cal', value: (component) => {
-                saveRef(component)
-              } },
+              {
+                name: 'ant-ref',
+                value: this.getCacheBind(name, `${name}__ref`, this.saveRef),
+              },
             ],
+            on: inputListeners,
           }
         },
 
@@ -342,16 +361,16 @@ function createBaseForm (option = {}, mixins = []) {
             return
           }
           this.recoverClearedField(name)
-          const fieldMeta = this.fieldsStore.getFieldMeta(name)
-          if (fieldMeta) {
-            const ref = fieldMeta.ref
-            if (ref) {
-              if (typeof ref === 'string') {
-                throw new Error(`can not set ref string for ${name}`)
-              }
-              ref(component)
-            }
-          }
+          // const fieldMeta = this.fieldsStore.getFieldMeta(name)
+          // if (fieldMeta) {
+          //   const ref = fieldMeta.ref
+          //   if (ref) {
+          //     if (typeof ref === 'string') {
+          //       throw new Error(`can not set ref string for ${name}`)
+          //     }
+          //     ref(component)
+          //   }
+          // }
           this.instances[name] = component
         },
 

@@ -52,7 +52,7 @@ const mixin = {
   methods: {
     getForm () {
       return {
-        ...formMixin.getForm.call(this),
+        ...formMixin.methods.getForm.call(this),
         validateFieldsAndScroll: this.validateFieldsAndScroll,
       }
     },
@@ -69,7 +69,7 @@ const mixin = {
             if (has(error, name)) {
               const instance = this.getFieldInstance(name)
               if (instance) {
-                const node = instance.$el
+                const node = instance.$el || instance.elm
                 const top = node.getBoundingClientRect().top
                 if (firstTop === undefined || firstTop > top) {
                   firstTop = top

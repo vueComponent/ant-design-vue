@@ -6,7 +6,7 @@ export function argumentContainer (Container, WrappedComponent) {
   /* eslint no-param-reassign:0 */
   Container.name = `Form_${getDisplayName(WrappedComponent)}`
   Container.WrappedComponent = WrappedComponent
-  Container.methods = { ...Container.methods, ...WrappedComponent.methods }
+  Container.props = { ...Container.props, ...WrappedComponent.props }
   return Container
 }
 

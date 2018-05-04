@@ -20,7 +20,7 @@ import {
   flattenArray,
 } from './utils'
 
-const DEFAULT_TRIGGER = 'input'
+const DEFAULT_TRIGGER = 'change'
 
 function createBaseForm (option = {}, mixins = []) {
   const {
@@ -534,15 +534,15 @@ function createBaseForm (option = {}, mixins = []) {
       },
 
       render () {
-        const { $props, $listeners } = this
+        const { $listeners } = this
         const formProps = {
           [formPropName]: this.getForm(),
         }
-
+        const props = getOptionProps(this)
         const wrappedComponentProps = {
           props: mapProps.call(this, {
             ...formProps,
-            ...$props,
+            ...props,
           }),
           on: $listeners,
         }
@@ -552,7 +552,12 @@ function createBaseForm (option = {}, mixins = []) {
         return <WrappedComponent {...wrappedComponentProps}/>
       },
     }
-
+    if (!(WrappedComponent.props && formPropName in WrappedComponent.props)) {
+      WrappedComponent.props = {
+        ...WrappedComponent.props,
+        [formPropName]: Object,
+      }
+    }
     return argumentContainer(Form, WrappedComponent)
   }
 }

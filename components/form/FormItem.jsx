@@ -117,8 +117,8 @@ export default {
       return this.getChildAttr(FIELD_DATA_PROP)
     },
 
-    onHelpAnimEnd  (_key, helpShow) {
-      this.setState({ helpShow })
+    onHelpAnimEnd  () {
+      this.setState({ helpShow: false })
     },
 
     renderHelp () {
@@ -132,6 +132,9 @@ export default {
       const transitionProps = getTransitionProps('show-help', {
         afterLeave: this.onHelpAnimEnd,
       })
+      if (children) {
+        this.setState({ helpShow: true })
+      }
       return (
         <transition
           {...transitionProps}
@@ -286,7 +289,7 @@ export default {
       return label ? (
         <Col {...colProps} >
           <label
-            htmlFor={id || this.getId()}
+            for={id || this.getId()}
             class={labelClassName}
             title={typeof label === 'string' ? label : ''}
             onClick={this.onLabelClick}

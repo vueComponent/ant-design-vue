@@ -1,7 +1,8 @@
-
-import hasProp from '../_util/props-util'
+import classNames from 'classnames'
+import hasProp, { getClass, getStyle } from '../_util/props-util'
 import PropTypes from '../_util/vue-types'
 export default {
+  inheritAttrs: false,
   name: 'ACheckbox',
   props: {
     prefixCls: {
@@ -104,9 +105,13 @@ export default {
       onChange = () => checkboxGroupContext.toggleOption({ value: props.value })
       disabled = props.disabled || checkboxGroupContext.disabled
     }
+    const classString = classNames(getClass(this), {
+      [`${prefixCls}-wrapper`]: true,
+    })
     return (
       <label
-        class={`${prefixCls}-wrapper`}
+        class={classString}
+        style={getStyle(this)}
         onMouseenter={this.onMouseEnter}
         onMouseleave={this.onMouseLeave}
       >

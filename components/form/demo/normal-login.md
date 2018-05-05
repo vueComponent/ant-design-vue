@@ -1,3 +1,14 @@
+<cn>
+#### 登录框
+普通的登录框，可以容纳更多的元素。
+</cn>
+
+<us>
+#### Login Form
+Normal login form which can contain more elements.
+</us>
+
+```html
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -62,3 +73,7 @@ export default Form.create()(NormalLoginForm)
   width: 100%;
 }
 </style>
+```
+
+
+

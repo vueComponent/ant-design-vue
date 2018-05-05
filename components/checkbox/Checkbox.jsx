@@ -54,13 +54,12 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked, checkboxGroupContext } = this
+      const { checked, checkboxGroupContext } = this
       if ((checked === undefined && !checkboxGroupContext) || (checkboxGroupContext && checkboxGroupContext.sValue === undefined)) {
         this.sChecked = targetChecked
       }
       const target = {
-        name,
-        value,
+        ...this.$props,
         checked: targetChecked,
       }
       this.$emit('change', {

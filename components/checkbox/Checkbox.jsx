@@ -1,5 +1,6 @@
 
 import hasProp from '../_util/props-util'
+import PropTypes from '../_util/vue-types'
 export default {
   name: 'ACheckbox',
   props: {
@@ -14,6 +15,7 @@ export default {
     value: [String, Number, Boolean],
     name: String,
     indeterminate: Boolean,
+    type: PropTypes.string.def('checkbox'),
   },
   model: {
     prop: 'checked',
@@ -52,14 +54,14 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked, checkboxGroupContext, sChecked } = this
+      const { name, value, checked, checkboxGroupContext } = this
       if ((checked === undefined && !checkboxGroupContext) || (checkboxGroupContext && checkboxGroupContext.sValue === undefined)) {
         this.sChecked = targetChecked
       }
       const target = {
         name,
         value,
-        checked: !sChecked,
+        checked: targetChecked,
       }
       this.$emit('change', {
         target,

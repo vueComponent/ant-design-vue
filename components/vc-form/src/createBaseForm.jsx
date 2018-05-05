@@ -2,6 +2,7 @@ import AsyncValidator from 'async-validator'
 import warning from 'warning'
 import get from 'lodash/get'
 import set from 'lodash/set'
+import omit from 'lodash/omit'
 import createFieldsStore from './createFieldsStore'
 import { cloneElement } from '../../_util/vnode'
 import BaseMixin from '../../_util/BaseMixin'
@@ -190,6 +191,8 @@ function createBaseForm (option = {}, mixins = []) {
                   originalEvents[key](...args)
                   triggerEvents(...args)
                 }
+              } else {
+                newEvents[key] = newProps.on[key]
               }
             })
             return cloneElement(fieldElem, { ...newProps, on: newEvents })
@@ -238,6 +241,7 @@ function createBaseForm (option = {}, mixins = []) {
             // ref: name,
           }
           const inputListeners = {}
+          const inputAttrs = {}
           if (fieldNameProp) {
             inputProps[fieldNameProp] = name
           }
@@ -261,17 +265,22 @@ function createBaseForm (option = {}, mixins = []) {
           }
           this.fieldsStore.setFieldMeta(name, meta)
           if (fieldMetaProp) {
-            inputProps[fieldMetaProp] = meta
+            inputAttrs[fieldMetaProp] = meta
           }
 
           if (fieldDataProp) {
-            inputProps[fieldDataProp] = this.fieldsStore.getField(name)
+            inputAttrs[fieldDataProp] = this.fieldsStore.getField(name)
           }
 
           return {
-            props: inputProps,
+            props: omit(inputProps, ['id']),
+            // id: inputProps.id,
             domProps: {
               value: inputProps.value,
+            },
+            attrs: {
+              ...inputAttrs,
+              id: inputProps.id,
             },
             directives: [
               {

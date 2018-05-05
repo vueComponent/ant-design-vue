@@ -11,7 +11,6 @@ export default {
     default: 'text',
     type: String,
   },
-  id: [String, Number],
   name: String,
   size: {
     validator (value) {

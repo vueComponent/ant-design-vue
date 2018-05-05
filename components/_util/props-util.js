@@ -40,9 +40,9 @@ const filterProps = (props, propsData = {}) => {
   return res
 }
 const getSlots = (ele) => {
-  let componentOptions = ele.componentOptions
+  let componentOptions = ele.componentOptions || {}
   if (ele.$vnode) {
-    componentOptions = ele.$vnode.componentOptions
+    componentOptions = ele.$vnode.componentOptions || {}
   }
   const children = componentOptions.children || []
   const slots = {}

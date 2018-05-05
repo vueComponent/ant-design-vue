@@ -19,7 +19,7 @@ import {
   DatePicker,
   Divider,
   Dropdown,
-  // Form,
+  Form,
   Icon,
   Input,
   InputNumber,
@@ -85,7 +85,8 @@ Vue.component(DatePicker.WeekPicker.name, DatePicker.WeekPicker)
 Vue.component(Divider.name, Divider)
 Vue.component(Dropdown.name, Dropdown)
 Vue.component(Dropdown.Button.name, Dropdown.Button)
-// Vue.component(Form.name, Form)
+Vue.component(Form.name, Form)
+Vue.component(Form.Item.name, Form.Item)
 Vue.component(Icon.name, Icon)
 Vue.component(Input.name, Input)
 Vue.component(Input.Group.name, Input.Group)

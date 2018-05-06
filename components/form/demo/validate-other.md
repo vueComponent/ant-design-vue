@@ -1,3 +1,14 @@
+<cn>
+#### 校验其他组件
+以上演示没有出现的表单控件对应的校验演示。
+</cn>
+
+<us>
+#### Other Form Controls
+Demostration for validataion configuration for form controls which are not show in the above demos.
+</us>
+
+```html
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -27,7 +38,7 @@ const Demo = {
       wrapperCol: { span: 14 },
     }
     return (
-      <a-form onSubmit={this.handleSubmit}>
+      <a-form id="components-form-demo-validate-other" onSubmit={this.handleSubmit}>
         <a-form-item
           {...{ props: formItemLayout }}
           label='Plain Text'
@@ -182,4 +193,13 @@ const Demo = {
 
 export default Form.create()(Demo)
 </script>
+<style>
+#components-form-demo-validate-other .dropbox {
+  height: 180px;
+  line-height: 1.5;
+}
+</style>
+```
+
+
 

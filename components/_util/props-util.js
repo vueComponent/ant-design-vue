@@ -1,5 +1,10 @@
 import isPlainObject from 'lodash/isPlainObject'
 
+function getType (fn) {
+  const match = fn && fn.toString().match(/^\s*function (\w+)/)
+  return match ? match[1] : ''
+}
+
 const camelizeRE = /-(\w)/g
 const camelize = (str) => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
@@ -67,8 +72,11 @@ const getOptionProps = (instance) => {
     const props = (Ctor.options || {}).props || {}
     const res = {}
     for (const [k, v] of Object.entries(props)) {
-      if (v.default !== undefined) {
-        res[k] = typeof v.default === 'function' ? v.default() : v.default
+      const def = v.default
+      if (def !== undefined) {
+        res[k] = typeof def === 'function' && getType(v.type) !== 'Function'
+          ? def.call(instance)
+          : def
       }
     }
     return { ...res, ...propsData }

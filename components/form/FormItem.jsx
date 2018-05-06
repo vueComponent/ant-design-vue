@@ -97,6 +97,9 @@ export default {
     getChildAttr (prop) {
       const child = this.getOnlyControl()
       let data = {}
+      if (!child) {
+        return undefined
+      }
       if (child.data) {
         data = child.data
       } else if (child.$vnode && child.$vnode.data) {

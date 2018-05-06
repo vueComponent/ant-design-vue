@@ -7,7 +7,7 @@ import createFieldsStore from './createFieldsStore'
 import { cloneElement } from '../../_util/vnode'
 import BaseMixin from '../../_util/BaseMixin'
 import { getOptionProps, getEvents } from '../../_util/props-util'
-// import PropTypes from '../../_util/vue-types'
+import PropTypes from '../../_util/vue-types'
 
 import {
   argumentContainer,
@@ -34,17 +34,24 @@ function createBaseForm (option = {}, mixins = []) {
     fieldMetaProp,
     fieldDataProp,
     formPropName = 'form',
-    // @deprecated
-    withRef,
+    props = {},
   } = option
 
   return function decorate (WrappedComponent) {
+    let formProps = {}
+    if (Array.isArray(props)) {
+      props.forEach((prop) => {
+        formProps[prop] = PropTypes.any
+      })
+    } else {
+      formProps = props
+    }
     const Form = {
       mixins: [BaseMixin, ...mixins],
-      // props: {
-      //   hideRequiredMark: PropTypes.bool,
-      //   layout: PropTypes.string,
-      // },
+      props: {
+        ...formProps,
+        wrappedComponentRef: PropTypes.func.def(() => {}),
+      },
       data () {
         const fields = mapPropsToFields && mapPropsToFields(this.$props)
         this.fieldsStore = createFieldsStore(fields || {})
@@ -80,6 +87,9 @@ function createBaseForm (option = {}, mixins = []) {
           },
           deep: true,
         },
+      },
+      mounted () {
+        this.wrappedComponentRef(this.$refs.WrappedComponent)
       },
       methods: {
         onCollectCommon (name, action, args) {
@@ -554,17 +564,22 @@ function createBaseForm (option = {}, mixins = []) {
             ...props,
           }),
           on: $listeners,
-        }
-        if (withRef) {
-          wrappedComponentProps.ref = 'wrappedComponent'
+          ref: 'WrappedComponent',
         }
         return <WrappedComponent {...wrappedComponentProps}/>
       },
     }
-    if (!(WrappedComponent.props && formPropName in WrappedComponent.props)) {
-      WrappedComponent.props = {
-        ...WrappedComponent.props,
-        [formPropName]: Object,
+    if (Array.isArray(WrappedComponent.props)) {
+      const newProps = {}
+      WrappedComponent.props.forEach((prop) => {
+        newProps[prop] = PropTypes.any
+      })
+      newProps[formPropName] = Object
+      WrappedComponent.props = newProps
+    } else {
+      WrappedComponent.props = WrappedComponent.props || {}
+      if (!(formPropName in WrappedComponent.props)) {
+        WrappedComponent.props[formPropName] = Object
       }
     }
     return argumentContainer(Form, WrappedComponent)

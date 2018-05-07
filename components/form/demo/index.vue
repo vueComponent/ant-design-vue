@@ -1,6 +1,6 @@
 <script>
 
-import AdvancedSearch from './advanced-search'
+// import AdvancedSearch from './advanced-search'
 // import Coordinated from './coordinated'
 // import CustomizedFormControls from './customized-form-controls'
 // import DynamicFormItem from './dynamic-form-item'
@@ -15,6 +15,8 @@ import AdvancedSearch from './advanced-search'
 // import ValidateOther from './validate-other'
 // import ValidateStatic from './validate-static'
 // import WithoutFormCreate from './without-form-create'
+import Test from './test'
+import TestString from '!raw-loader!./test'
 
 import CN from './../index.zh-CN'
 import US from './../index.en-US'
@@ -68,11 +70,13 @@ export default {
   cols: 1,
   title: 'Form',
   render () {
+    console.log(TestString)
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <AdvancedSearch />
-        {/* <Coordinated />
+        <Test />
+        {/* <AdvancedSearch />
+        <Coordinated />
         <CustomizedFormControls />
         <DynamicFormItem />
         <DynamicRule />

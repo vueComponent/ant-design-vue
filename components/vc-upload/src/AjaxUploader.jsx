@@ -10,6 +10,7 @@ const upLoadPropTypes = {
   // style: PropTypes.object,
   prefixCls: PropTypes.string,
   action: PropTypes.string,
+  name: PropTypes.string,
   // className: PropTypes.string,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,

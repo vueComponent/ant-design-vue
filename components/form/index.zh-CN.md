@@ -1,26 +1,3 @@
----
-category: Components
-subtitle: 表单
-type: Data Entry
-cols: 1
-title: Form
----
-
-具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。
-
-## 表单
-
-我们为 `form` 提供了以下三种排列方式：
-
-- 水平排列：标签和表单控件水平排列；（默认）
-- 垂直排列：标签和表单控件上下垂直排列；
-- 行内排列：表单项水平行内排列。
-
-## 表单域
-
-表单一定会包含表单域，表单域可以是输入控件，标准表单域，标签，下拉菜单，文本域等。
-
-这里我们封装了表单域 `<Form.Item />` 。
 
 ```jsx
 <Form.Item {...props}>
@@ -36,7 +13,7 @@ title: Form
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| form | 经 `Form.create()` 包装过的组件会自带 `this.props.form` 属性，直接传给 Form 即可。1.7.0 之后无需设置 | object | 无 |
+| form | 经 `Form.create()` 包装过的组件会自带 `this.form` 属性，直接传给 Form 即可。无需手动设置 | object | 无 |
 | hideRequiredMark | 隐藏所有表单项的必选标记 | Boolean | false |
 | layout | 表单布局(2.8 之后支持) | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
 | onSubmit | 数据验证成功后回调事件 | Function(e:Event) |  |

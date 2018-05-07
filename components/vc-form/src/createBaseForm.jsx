@@ -553,7 +553,7 @@ function createBaseForm (option = {}, mixins = []) {
       },
 
       render () {
-        const { $listeners } = this
+        const { $listeners, $slots } = this
         const formProps = {
           [formPropName]: this.getForm(),
         }
@@ -566,7 +566,7 @@ function createBaseForm (option = {}, mixins = []) {
           on: $listeners,
           ref: 'WrappedComponent',
         }
-        return <WrappedComponent {...wrappedComponentProps}/>
+        return <WrappedComponent {...wrappedComponentProps}>{$slots.default}</WrappedComponent>
       },
     }
     if (Array.isArray(WrappedComponent.props)) {

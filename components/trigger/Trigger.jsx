@@ -10,6 +10,8 @@ import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
 import { cloneElement } from '../_util/vnode'
+import antRefDirective from '../_util/antRefDirective'
+Vue.use(antRefDirective)
 
 function returnEmptyString () {
   return ''

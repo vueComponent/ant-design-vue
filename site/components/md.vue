@@ -4,18 +4,18 @@
 <script>
 import marked from 'marked'
 import { isZhCN } from '../util'
-var renderer = new marked.Renderer();
-renderer.heading = function(text, level) {
-  return '<h'
-    + level
-    + ' id="'
-    + text.replace(/[^\w]+/g, '-')
-    + '">'
-    + text
-    + '</h'
-    + level
-    + '>\n';
-};
+const renderer = new marked.Renderer()
+renderer.heading = function (text, level) {
+  return '<h' +
+    level +
+    ' id="' +
+    text.replace(/[^\w]+/g, '-') +
+    '">' +
+    text +
+    '</h' +
+    level +
+    '>\n'
+}
 marked.setOptions({
   renderer,
   gfm: true,

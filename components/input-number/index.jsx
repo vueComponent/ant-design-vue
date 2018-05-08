@@ -7,7 +7,10 @@ export const InputNumberProps = {
   prefixCls: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   step: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,

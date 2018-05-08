@@ -54,14 +54,14 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, radioGroupContext, stateChecked } = this
+      const { name, value, radioGroupContext } = this
       if ((!hasProp(this, 'checked') && !radioGroupContext) || (radioGroupContext && radioGroupContext.value === undefined)) {
         this.stateChecked = targetChecked
       }
       const target = {
         name,
         value,
-        checked: !stateChecked,
+        checked: targetChecked,
       }
       if (this.radioGroupContext) {
         this.radioGroupContext.handleChange({ target })

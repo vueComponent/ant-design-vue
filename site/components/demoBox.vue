@@ -51,10 +51,10 @@ export default {
   },
   data () {
     const { name = '' } = this.$route.params
-    const { html, script, style, us, cn } = this.jsfiddle
-    let sourceCode = `<template>${html}</template>\n`
-    sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode
-    sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
+    const { html, script, style, us, cn, sourceCode } = this.jsfiddle
+    // let sourceCode = `<template>${html}</template>\n`
+    // sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode
+    // sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
     const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || ''
     const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || ''
     if (process.env.NODE_ENV !== 'production' && usTitle === '') {

@@ -2,6 +2,14 @@
 
 ---
 
+## 0.5.0
+
+`2018-05-08`
+
+- 🌟 `Form`: add Form component
+- 💄 `Upload.Dragger`: Modify `name` name to `a-upload-dragger`
+- 🐞 `Upload`: Fix `name` prop not working
+
 ## 0.4.3
 
 `2018-05-02`

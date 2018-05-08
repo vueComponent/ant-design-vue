@@ -252,7 +252,11 @@ gulp.task('compile-with-es', (done) => {
 })
 
 gulp.task('pub', ['check-git', 'compile'], (done) => {
-  pub(done)
+  if (!process.env.GITHUB_TOKEN) {
+    console.log('no GitHub token found, skip')
+  } else {
+    pub(done)
+  }
 })
 
 function reportError () {

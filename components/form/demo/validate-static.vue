@@ -14,7 +14,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
 3. `help`: display validate message.
 </us>
 
-```html
+
 <template>
   <a-form>
     <a-form-item
@@ -172,7 +172,7 @@ export default {
   },
 }
 </script>
-```
+
 
 
 

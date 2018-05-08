@@ -8,7 +8,7 @@
 There are three layout for form: `horizontal`, `vertical`, `inline`.
 </us>
 
-```html
+
 <template>
 <div>
   <a-form :layout="formLayout">
@@ -43,7 +43,7 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
       <a-button type='primary'>Submit</a-button>
     </a-form-item>
   </a-form>
-</div>  
+</div>
 </template>
 
 <script>
@@ -75,7 +75,7 @@ export default {
   },
 }
 </script>
-```
+
 
 
 

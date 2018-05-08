@@ -8,7 +8,7 @@
 Demostration for validataion configuration for form controls which are not show in the above demos.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -38,7 +38,7 @@ const Demo = {
       wrapperCol: { span: 14 },
     }
     return (
-      <a-form id="components-form-demo-validate-other" onSubmit={this.handleSubmit}>
+      <a-form id='components-form-demo-validate-other' onSubmit={this.handleSubmit}>
         <a-form-item
           {...{ props: formItemLayout }}
           label='Plain Text'
@@ -199,7 +199,7 @@ export default Form.create()(Demo)
   line-height: 1.5;
 }
 </style>
-```
+
 
 
 

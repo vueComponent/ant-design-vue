@@ -14,7 +14,7 @@ Customized or third-party form controls can be used in Form, too. Controls must 
 > * It must be a class component.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -123,7 +123,7 @@ const Demo = {
 
 export default Form.create()(Demo)
 </script>
-```
+
 
 
 

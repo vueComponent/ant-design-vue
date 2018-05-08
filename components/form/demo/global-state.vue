@@ -9,12 +9,12 @@
 <us>
 #### Store Form Data into Upper Component
 We can store form data into upper component.
-**Note:** 
+**Note:**
 You must wrap field data with `Form.createFormField` in `mapPropsToFields`.
 The properties passed by the upper component must be declared in the props of `Form.create({ props: ...})`.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -86,7 +86,7 @@ export default {
   margin-top: 24px;
 }
 </style>
-```
+
 
 
 

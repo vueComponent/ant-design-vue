@@ -8,7 +8,7 @@
 Perform different check rules according to different situations.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -88,7 +88,7 @@ const DynamicRule = {
 
 export default Form.create()(DynamicRule)
 </script>
-```
+
 
 
 

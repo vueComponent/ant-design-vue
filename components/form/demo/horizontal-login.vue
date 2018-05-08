@@ -8,7 +8,7 @@
 Horizontal login form is often used in navigation bar.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -76,7 +76,7 @@ const HorizontalLoginForm = {
 
 export default Form.create()(HorizontalLoginForm)
 </script>
-```
+
 
 
 

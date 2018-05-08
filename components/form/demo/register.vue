@@ -8,7 +8,7 @@
 Fill in this form to create a new account for you.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -254,7 +254,7 @@ const RegistrationForm = {
 
 export default Form.create()(RegistrationForm)
 </script>
-```
+
 
 
 

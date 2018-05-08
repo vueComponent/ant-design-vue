@@ -8,7 +8,7 @@
 `Form.create` will collect and validate form data automatically. But if you don't need this feature or the default behaviour cannot satisfy your business, you can drop `Form.create` and handle form data manually.
 </us>
 
-```html
+
 <template>
   <a-form>
     <a-form-item
@@ -61,7 +61,7 @@ export default {
   },
 }
 </script>
-```
+
 
 
 

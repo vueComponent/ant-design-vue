@@ -1,25 +1,37 @@
 <script>
+import AdvancedSearch from './advanced-search'
+import AdvancedSearchString from '!raw-loader!./advanced-search'
+import Coordinated from './coordinated'
+import CoordinatedString from '!raw-loader!./coordinated'
+import CustomizedFormControls from './customized-form-controls'
+import CustomizedFormControlsString from '!raw-loader!./customized-form-controls'
+import DynamicFormItem from './dynamic-form-item'
+import DynamicFormItemString from '!raw-loader!./dynamic-form-item'
+import DynamicRule from './dynamic-rule'
+import DynamicRuleString from '!raw-loader!./dynamic-rule'
+import FormInModal from './form-in-modal'
+import FormInModalString from '!raw-loader!./form-in-modal'
+import GlobalState from './global-state'
+import GlobalStateString from '!raw-loader!./global-state'
+import HorizontalLogin from './horizontal-login'
+import HorizontalLoginString from '!raw-loader!./horizontal-login'
+import Layout from './layout'
+import LayoutString from '!raw-loader!./layout'
+import NormalLogin from './normal-login'
+import NormalLoginString from '!raw-loader!./normal-login'
+import Register from './register'
+import RegisterString from '!raw-loader!./register'
+import TimeRelatedControls from './time-related-controls'
+import TimeRelatedControlsString from '!raw-loader!./time-related-controls'
+import ValidateOther from './validate-other'
+import ValidateOtherString from '!raw-loader!./validate-other'
+import ValidateStatic from './validate-static'
+import ValidateStaticString from '!raw-loader!./validate-static'
+import WithoutFormCreate from './without-form-create'
+import WithoutFormCreateString from '!raw-loader!./without-form-create'
 
-// import AdvancedSearch from './advanced-search'
-// import Coordinated from './coordinated'
-// import CustomizedFormControls from './customized-form-controls'
-// import DynamicFormItem from './dynamic-form-item'
-// import DynamicRule from './dynamic-rule'
-// import FormInModal from './form-in-modal'
-// import GlobalState from './global-state'
-// import HorizontalLogin from './horizontal-login'
-// import Layout from './layout'
-// import NormalLogin from './normal-login'
-// import Register from './register'
-// import TimeRelatedControls from './time-related-controls'
-// import ValidateOther from './validate-other'
-// import ValidateStatic from './validate-static'
-// import WithoutFormCreate from './without-form-create'
-import Test from './test'
-import TestString from '!raw-loader!./test'
-
-import CN from './../index.zh-CN'
-import US from './../index.en-US'
+import CN from '../index.zh-CN'
+import US from '../index.en-US'
 
 const md = {
   cn: `# Form 表单
@@ -70,27 +82,54 @@ export default {
   cols: 1,
   title: 'Form',
   render () {
-    console.log(TestString)
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Test />
-        {/* <AdvancedSearch />
-        <Coordinated />
-        <CustomizedFormControls />
-        <DynamicFormItem />
-        <DynamicRule />
-        <FormInModal />
-        <GlobalState />
-        <HorizontalLogin />
-        <Layout />
-        <NormalLogin />
-        <Register />
-        <TimeRelatedControls />
-        <ValidateStatic />
-        <WithoutFormCreate />
-        <ValidateOther />
-        */}
+        <demo-container code={AdvancedSearchString}>
+          <AdvancedSearch />
+        </demo-container>
+        <demo-container code={CoordinatedString}>
+          <Coordinated />
+        </demo-container>
+        <demo-container code={CustomizedFormControlsString}>
+          <CustomizedFormControls />
+        </demo-container>
+        <demo-container code={DynamicFormItemString}>
+          <DynamicFormItem />
+        </demo-container>
+        <demo-container code={DynamicRuleString}>
+          <DynamicRule />
+        </demo-container>
+        <demo-container code={FormInModalString}>
+          <FormInModal />
+        </demo-container>
+        <demo-container code={GlobalStateString}>
+          <GlobalState />
+        </demo-container>
+        <demo-container code={HorizontalLoginString}>
+          <HorizontalLogin />
+        </demo-container>
+        <demo-container code={LayoutString}>
+          <Layout />
+        </demo-container>
+        <demo-container code={NormalLoginString}>
+          <NormalLogin />
+        </demo-container>
+        <demo-container code={RegisterString}>
+          <Register />
+        </demo-container>
+        <demo-container code={TimeRelatedControlsString}>
+          <TimeRelatedControls />
+        </demo-container>
+        <demo-container code={ValidateStaticString}>
+          <ValidateStatic />
+        </demo-container>
+        <demo-container code={WithoutFormCreateString}>
+          <WithoutFormCreate />
+        </demo-container>
+        <demo-container code={ValidateOtherString}>
+          <ValidateOther />
+        </demo-container>
         <api>
           <CN slot='cn' />
           <US />
@@ -100,3 +139,8 @@ export default {
   },
 }
 </script>
+<style>
+.code-box-demo .ant-form:not(.ant-form-inline):not(.ant-form-vertical) {
+  max-width: 600px;
+}
+</style>

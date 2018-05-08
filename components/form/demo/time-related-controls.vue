@@ -8,7 +8,7 @@
 the `value` of time-related components is `moment`. So, we need to pre-process those values.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -125,7 +125,7 @@ const TimeRelatedForm = {
 
 export default Form.create()(TimeRelatedForm)
 </script>
-```
+
 
 
 

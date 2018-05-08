@@ -8,7 +8,7 @@
 Add or remove form items dynamically.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -138,7 +138,7 @@ export default Form.create()(DynamicFieldSet)
 }
 </style>
 
-```
+
 
 
 

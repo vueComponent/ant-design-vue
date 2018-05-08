@@ -8,7 +8,7 @@
 Use `setFieldsValue` to set other control's value programmaticly.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -76,7 +76,7 @@ const CoordinatedForm = {
 
 export default Form.create()(CoordinatedForm)
 </script>
-```
+
 
 
 

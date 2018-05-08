@@ -8,7 +8,7 @@
 Normal login form which can contain more elements.
 </us>
 
-```html
+
 <script>
 import { Form } from 'vue-antd-ui'
 
@@ -73,7 +73,7 @@ export default Form.create()(NormalLoginForm)
   width: 100%;
 }
 </style>
-```
+
 
 
 

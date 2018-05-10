@@ -2,6 +2,12 @@
 
 ---
 
+## 0.5.1
+
+`2018-05-10`
+
+- 🐞 `Table`: 修复 `customRow` 自定义事件不生效问题[#16](https://github.com/vueComponent/ant-design/issues/16)
+
 ## 0.5.0
 
 `2018-05-08`

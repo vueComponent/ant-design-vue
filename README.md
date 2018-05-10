@@ -21,7 +21,7 @@ An enterprise-class UI components based on Ant Design 3.X and Vue.
 ## Features
 
 - An enterprise-class UI design system for desktop applications.
-- A set of high-quality React components out of the box.
+- A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
 
 

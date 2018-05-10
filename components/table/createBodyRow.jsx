@@ -51,7 +51,7 @@ export default function createTableRow (Component = 'tr') {
       }
 
       return (
-        <Component class={className}>
+        <Component class={className} {...{ on: this.$listeners }}>
           {this.$slots.default}
         </Component>
       )

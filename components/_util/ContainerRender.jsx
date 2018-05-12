@@ -1,6 +1,8 @@
 
 import Vue from 'vue'
 import PropTypes from './vue-types'
+import antRefDirective from './antRefDirective'
+Vue.use(antRefDirective)
 
 export default {
   props: {

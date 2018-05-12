@@ -2,6 +2,33 @@
 
 ---
 
+## 0.5.1
+
+`2018-05-10`
+
+- 🐞 `Table`: Fix `customRow` events not working[#16](https://github.com/vueComponent/ant-design/issues/16)
+
+## 0.5.0
+
+`2018-05-08`
+
+- 🌟 `Form`: add Form component
+- 💄 `Upload.Dragger`: Modify `name` name to `a-upload-dragger`
+- 🐞 `Upload`: Fix `name` prop not working
+
+## 0.4.3
+
+`2018-05-02`
+
+- 🐞 Fix component style loss problem
+- 🌟 site add babel-polyfill
+
+## 0.4.2
+
+`2018-04-24`
+
+- 🐞  fix menu click bug
+
 ## 0.4.1
 
 #### bug

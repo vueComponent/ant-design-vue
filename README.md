@@ -14,12 +14,14 @@
 
 An enterprise-class UI components based on Ant Design 3.X and Vue.
 
+[官网国内镜像](http://tangjinzhou.gitee.io/ant-design/docs/vue/introduce-cn/)
+
 [中文 README](README-zh_CN.md)
 
 ## Features
 
 - An enterprise-class UI design system for desktop applications.
-- A set of high-quality React components out of the box.
+- A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
 
 

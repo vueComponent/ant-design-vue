@@ -7,6 +7,7 @@ module.exports = function (modules) {
     require.resolve('babel-plugin-transform-es3-property-literals'),
     require.resolve('babel-plugin-transform-object-assign'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
+    require.resolve('babel-plugin-transform-class-properties'),
   ]
   plugins.push([require.resolve('babel-plugin-transform-runtime'), {
     polyfill: false,

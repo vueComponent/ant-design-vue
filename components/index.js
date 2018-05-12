@@ -50,7 +50,7 @@ import { default as Divider } from './divider'
 
 import { default as Dropdown } from './dropdown'
 
-// import { default as Form } from './form'
+import { default as Form } from './form'
 
 import { default as Icon } from './icon'
 
@@ -148,6 +148,8 @@ const components = [
   Divider,
   Dropdown,
   Dropdown.Button,
+  Form,
+  Form.Item,
   Icon,
   Input,
   Input.Group,
@@ -237,6 +239,7 @@ export {
   DatePicker,
   Divider,
   Dropdown,
+  Form,
   Icon,
   Input,
   InputNumber,

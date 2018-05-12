@@ -78,12 +78,12 @@ function babelify (js, modules) {
   let stream = js.pipe(babel(babelConfig))
     .pipe(through2.obj(function z (file, encoding, next) {
       this.push(file.clone())
-      if (file.path.match(/\/style\/index\.js/)) {
+      if (file.path.match(/\/style\/index\.(js|jsx)$/)) {
         const content = file.contents.toString(encoding)
         file.contents = Buffer.from(content
           .replace(/\/style\/?'/g, '/style/css\'')
           .replace(/\.less/g, '.css'))
-        file.path = file.path.replace(/index\.js/, 'css.js')
+        file.path = file.path.replace(/index\.(js|jsx)$/, 'css.js')
         this.push(file)
         next()
       } else {
@@ -238,15 +238,25 @@ function pub (done) {
 gulp.task('dist', ['compile'], (done) => {
   dist(done)
 })
-gulp.task('compile', ['compile-with-es'], () => {
+gulp.task('compile', ['compile-with-es'], (done) => {
   compile()
+    .on('finish', function () {
+      done()
+    })
 })
-gulp.task('compile-with-es', () => {
+gulp.task('compile-with-es', (done) => {
   compile(false)
+    .on('finish', function () {
+      done()
+    })
 })
 
 gulp.task('pub', ['check-git', 'compile'], (done) => {
-  pub(done)
+  if (!process.env.GITHUB_TOKEN) {
+    console.log('no GitHub token found, skip')
+  } else {
+    pub(done)
+  }
 })
 
 function reportError () {

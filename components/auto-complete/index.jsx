@@ -4,7 +4,7 @@ import Select, { AbstractSelectProps, SelectValue } from '../select'
 import Input from '../input'
 import InputElement from './InputElement'
 import PropTypes from '../_util/vue-types'
-import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps, filterEmpty, isValidElement, getEvents, getStyle, getClass } from '../_util/props-util'
 
 const DataSourceItemObject = PropTypes.shape({
   value: String,
@@ -24,7 +24,7 @@ const AutoCompleteProps = {
   ...AbstractSelectProps,
   value: SelectValue,
   defaultValue: SelectValue,
-  dataSource: PropTypes.arrayOf(DataSourceItemType),
+  dataSource: PropTypes.array,
   optionLabelProp: String,
   dropdownMatchSelectWidth: PropTypes.bool,
   // onChange?: (value: SelectValue) => void;
@@ -57,6 +57,13 @@ export default {
       const { $slots } = this
       const children = filterEmpty($slots.default)
       const element = children.length ? children[0] : <Input />
+      console.log(element)
+      const eleProps = {
+        props: getOptionProps(element),
+        on: getEvents(element),
+        style: getStyle(element),
+        class: getClass(element),
+      }
       return (
         <InputElement>{element}</InputElement>
       )
@@ -97,6 +104,9 @@ export default {
       options = childArray
     } else {
       options = dataSource ? dataSource.map((item) => {
+        if (isValidElement(item)) {
+          return item
+        }
         switch (typeof item) {
           case 'string':
             return <Option key={item}>{item}</Option>

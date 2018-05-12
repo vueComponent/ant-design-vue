@@ -1,6 +1,8 @@
-
-import hasProp from '../_util/props-util'
+import classNames from 'classnames'
+import hasProp, { getClass, getStyle } from '../_util/props-util'
+import PropTypes from '../_util/vue-types'
 export default {
+  inheritAttrs: false,
   name: 'ACheckbox',
   props: {
     prefixCls: {
@@ -14,6 +16,7 @@ export default {
     value: [String, Number, Boolean],
     name: String,
     indeterminate: Boolean,
+    type: PropTypes.string.def('checkbox'),
   },
   model: {
     prop: 'checked',
@@ -52,14 +55,13 @@ export default {
     handleChange (event) {
       const targetChecked = event.target.checked
       this.$emit('input', targetChecked)
-      const { name, value, checked, checkboxGroupContext, sChecked } = this
+      const { checked, checkboxGroupContext } = this
       if ((checked === undefined && !checkboxGroupContext) || (checkboxGroupContext && checkboxGroupContext.sValue === undefined)) {
         this.sChecked = targetChecked
       }
       const target = {
-        name,
-        value,
-        checked: !sChecked,
+        ...this.$props,
+        checked: targetChecked,
       }
       this.$emit('change', {
         target,
@@ -103,9 +105,13 @@ export default {
       onChange = () => checkboxGroupContext.toggleOption({ value: props.value })
       disabled = props.disabled || checkboxGroupContext.disabled
     }
+    const classString = classNames(getClass(this), {
+      [`${prefixCls}-wrapper`]: true,
+    })
     return (
       <label
-        class={`${prefixCls}-wrapper`}
+        class={classString}
+        style={getStyle(this)}
         onMouseenter={this.onMouseEnter}
         onMouseleave={this.onMouseLeave}
       >

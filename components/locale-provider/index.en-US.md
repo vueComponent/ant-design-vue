@@ -11,7 +11,7 @@
 <template>
   <a-locale-provider :locale="fr_FR">
     <App />
-  <a-locale-provider>
+  </a-locale-provider>
 </template>
 <script>
 import fr_FR from 'antd/lib/locale-provider/fr_FR';
@@ -34,7 +34,7 @@ Note: if you need to use antd's UMD dist file, please use `antd/dist/antd-with-l
 <template>
   <a-locale-provider :locale="locales.fr_FR">
     <App />
-  <a-locale-provider>
+  </a-locale-provider>
 </template>
 <script>
 const { LocaleProvider, locales } = window.antd;

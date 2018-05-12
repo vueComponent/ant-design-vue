@@ -3,7 +3,7 @@ import Upload from './Upload'
 import { UploadProps } from './interface'
 
 export default {
-  name: 'ADragger',
+  name: 'AUploadDragger',
   props: UploadProps,
   render () {
     const props = getOptionProps(this)

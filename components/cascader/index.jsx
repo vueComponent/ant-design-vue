@@ -7,7 +7,7 @@ import omit from 'omit.js'
 import KeyCode from '../_util/KeyCode'
 import Input from '../input'
 import Icon from '../icon'
-import { hasProp, filterEmpty, getOptionProps } from '../_util/props-util'
+import { hasProp, filterEmpty, getOptionProps, getStyle, getClass, getAttrs } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 
 const CascaderOptionType = PropTypes.shape({
@@ -83,6 +83,7 @@ function defaultSortFilteredOption (a, b, inputValue) {
 const defaultDisplayRender = ({ labels }) => labels.join(' / ')
 
 export default {
+  inheritAttrs: false,
   name: 'ACascader',
   mixins: [BaseMixin],
   props: CascaderProps,
@@ -280,6 +281,7 @@ export default {
       [`${prefixCls}-picker-arrow-expand`]: sPopupVisible,
     })
     const pickerCls = classNames(
+      getClass(this),
       `${prefixCls}-picker`, {
         [`${prefixCls}-picker-with-value`]: inputValue,
         [`${prefixCls}-picker-disabled`]: disabled,
@@ -345,11 +347,13 @@ export default {
         keydown: this.handleKeyDown,
         change: showSearch ? this.handleInputChange : noop,
       },
+      attrs: getAttrs(this),
     }
     const children = filterEmpty($slots.default)
     const input = children.length ? children : (
       <span
         class={pickerCls}
+        style={getStyle(this)}
       >
         { showSearch ? <span class={`${prefixCls}-picker-label`}>
           {this.getLabel()}

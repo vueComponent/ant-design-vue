@@ -491,8 +491,9 @@ export default {
     const inputDisplayValueFormat = this.formatWrapper(inputDisplayValue)
     const isUpDisabled = !!upDisabledClass || disabled || readOnly
     const isDownDisabled = !!downDisabledClass || disabled || readOnly
+    const { mouseenter = noop, mouseleave = noop, mouseover = noop, mouseout = noop } = this.$listeners
     const contentProps = {
-      on: this.$listeners,
+      on: { mouseenter, mouseleave, mouseover, mouseout },
       class: classes,
     }
     const upHandlerProps = {
@@ -578,7 +579,7 @@ export default {
             step={this.step}
             name={this.name}
             id={this.id}
-            onChange={this.onChange}
+            onInput={this.onChange}
             ref='inputRef'
             value={inputDisplayValueFormat}
             pattern={this.pattern}

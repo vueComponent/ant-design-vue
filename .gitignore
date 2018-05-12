@@ -65,6 +65,7 @@ es
 site-dist
 yarn.lock
 package-lock.json
+/test/coverage
 
 # 备份文件
 /components/test/*

@@ -68,7 +68,8 @@ function dist (done) {
 }
 
 function babelify (js, modules) {
-  const babelConfig = { ...getBabelCommonConfig(modules), babelrc: false }
+  const babelConfig = getBabelCommonConfig(modules)
+  babelConfig.babelrc = false
   delete babelConfig.cacheDirectory
   if (modules === false) {
     babelConfig.plugins.push(replaceLib)

@@ -56,5 +56,85 @@ describe('Button', () => {
       done()
     })
   })
+  it('should change loading state instantly by default', () => {
+    const DefaultButton = {
+      data(){
+        return {
+          loading: false,
+        }
+      },
+      methods: {
+        enterLoading () {
+          this.loading = true
+        }
+      },
+      
+      render() {
+        return <Button loading={this.loading} onClick={this.enterLoading}>Button</Button>;
+      }
+    }
+    const wrapper = mount(DefaultButton)
+    wrapper.trigger('click');
+    Vue.nextTick(() => {
+      expect(wrapper.find('.ant-btn-loading').length).to.equal(1);
+    })
+  });
+
+  it('should change loading state with delay', () => {
+    const DefaultButton = {
+      data(){
+        return {
+          loading: false,
+        }
+      },
+      methods: {
+        enterLoading () {
+          this.loading = { delay: 1000 }
+        }
+      },
+      
+      render() {
+        return <Button loading={this.loading} onClick={this.enterLoading}>Button</Button>;
+      }
+    }
+    const wrapper = mount(DefaultButton)
+    wrapper.trigger('click');
+    Vue.nextTick(() => {
+      expect(wrapper.hasClass('ant-btn-loading').length).to.equal(false);
+    })
+  });
+
+  it('should support link button', () => {
+    const wrapper = mount({
+      render (h) {
+        return <Button target="_blank" href="http://ant.design">link button</Button>
+      },
+    })
+    expect(wrapper.html()).to.matchSnapshot();
+  })
+
+  it('fixbug renders {0} , 0 and {false}', () => {
+    const wrapper = mount({
+      render (h) {
+        return <Button>{0}</Button>
+      },
+    })
+    expect(wrapper.html()).to.matchSnapshot();
+
+    const wrapper1 = mount({
+      render (h) {
+        return <Button>0</Button>
+      },
+    })
+    expect(wrapper1.html()).to.matchSnapshot();
+
+    const wrapper2 = mount({
+      render (h) {
+        return <Button>{false}</Button>
+      },
+    })
+    expect(wrapper2.html()).to.matchSnapshot();
+
+  })
 
 })

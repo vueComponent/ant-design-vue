@@ -5,7 +5,7 @@ node_js:
 before_script:
   - npm install vue vue-template-compiler
 script:
-  - npm test
+  - COVERAGE=true npm run test
   - npm run codecov
   - bash ./scripts/deploy-to-gh-pages.sh
 env:

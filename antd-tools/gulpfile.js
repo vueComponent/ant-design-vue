@@ -68,7 +68,7 @@ function dist (done) {
 }
 
 function babelify (js, modules) {
-  const babelConfig = getBabelCommonConfig(modules)
+  const babelConfig = { ...getBabelCommonConfig(modules), babelrc: false }
   delete babelConfig.cacheDirectory
   if (modules === false) {
     babelConfig.plugins.push(replaceLib)
@@ -123,6 +123,7 @@ function compile (modules) {
   const source = [
     'components/**/*.js',
     'components/**/*.jsx',
+    '!components/*/__tests__/*',
   ]
   const jsFilesStream = babelify(gulp.src(source), modules)
   return merge2([less, jsFilesStream, assets])

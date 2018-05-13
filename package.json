@@ -54,6 +54,7 @@
         "vue-template-compiler": ">=2.5.0"
     },
     "devDependencies": {
+        "@octokit/rest": "^15.4.1",
         "@vue/server-test-utils": "^1.0.0-beta.16",
         "@vue/test-utils": "^1.0.0-beta.16",
         "autoprefixer": "^8.1.0",

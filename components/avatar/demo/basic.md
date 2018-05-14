@@ -11,15 +11,17 @@ Three sizes and two shapes are available.
 ```html
 <template>
   <div>
-    <a-avatar size="large" icon="user"/>
-    <a-avatar icon="user"/>
-    <a-avatar size="small" icon="user"/>
-  </div>
-  <br/>
-  <div>
-    <a-avatar shape="square" size="large" icon="user" />
-    <a-avatar shape="square" icon="user" />
-    <a-avatar shape="square" size="small" icon="user" />
+    <div>
+      <a-avatar size="large" icon="user"/>
+      <a-avatar icon="user"/>
+      <a-avatar size="small" icon="user"/>
+    </div>
+    <br/>
+    <div>
+      <a-avatar shape="square" size="large" icon="user" />
+      <a-avatar shape="square" icon="user" />
+      <a-avatar shape="square" size="small" icon="user" />
+    </div>
   </div>
 </template>
 ```

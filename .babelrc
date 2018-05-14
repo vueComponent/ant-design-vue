@@ -8,7 +8,8 @@
                 "transform-vue-jsx",
                 "transform-object-assign",
                 "transform-object-rest-spread",
-                "transform-class-properties"
+                "transform-class-properties",
+                "transform-runtime"
             ]
         }
     }

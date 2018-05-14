@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/avatar/demo/badge.md correctly 1`] = `
+<div><span style="margin-right:24px;"><span class="ant-badge"><span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span>
+  <sup class="ant-scroll-number ant-badge-count"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1100%);webkit-transform:translateY(-1100%);transform:translateY(-1100%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p class="current">1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span></sup>
+  </span>
+  </span> <span class="ant-badge"><span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span>
+  <sup class="ant-scroll-number ant-badge-dot"></sup>
+  </span>
+</div>
+`;
+
+exports[`renders ./components/avatar/demo/basic.md correctly 1`] = `
+<div>
+  <div><span class="ant-avatar ant-avatar-icon ant-avatar-circle ant-avatar-lg"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-circle"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-circle ant-avatar-sm"><i class="anticon anticon-user"></i></span></div>
+  <br>
+  <div><span class="ant-avatar ant-avatar-icon ant-avatar-square ant-avatar-lg"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-square ant-avatar-sm"><i class="anticon anticon-user"></i></span></div>
+</div>
+`;
+
+exports[`renders ./components/avatar/demo/dynamic.md correctly 1`] = `
+<div><span class="ant-avatar ant-avatar-square ant-avatar-lg" style="background-color:#f56a00;"><span class="ant-avatar-string">U</span></span>
+  <button type="button" class="ant-btn ant-btn-default"><span>改 变</span></button>
+</div>
+`;
+
+exports[`renders ./components/avatar/demo/type.md correctly 1`] = `
+<div><span class="ant-avatar ant-avatar-icon ant-avatar-circle"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string">U</span></span> <span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string">USER</span></span>
+  <span class="ant-avatar ant-avatar-image ant-avatar-circle"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span> <span class="ant-avatar ant-avatar-circle" style="color:#f56a00;background-color:#fde3cf;"><span class="ant-avatar-string">U</span></span>
+  <span class="ant-avatar ant-avatar-icon ant-avatar-circle" style="background-color:#87d068;"><i class="anticon anticon-user"></i></span></div>
+`;

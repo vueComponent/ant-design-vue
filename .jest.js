@@ -39,9 +39,15 @@ module.exports = {
   collectCoverageFrom: [
     "components/**/*.{js,jsx,vue}",
     '!components/*/style/index.{js,jsx}',
-    '!components/style/index.{js,jsx}',
-    '!components/*/locale/index.{js,jsx}',
+    '!components/style/*.{js,jsx}',
+    '!components/*/locale/*.{js,jsx}',
     '!components/*/__tests__/**/type.{js,jsx}',
+    '!components/vc-*/**/*',
+    '!components/*/demo/**/*',
+    '!components/_util/**/*',
+    '!components/align/**/*',
+    '!components/trigger/**/*',
+    '!components/style.js',
     "!**/node_modules/**"
   ],
   transformIgnorePatterns,

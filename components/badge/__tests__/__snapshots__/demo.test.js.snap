@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/badge/demo/basic.md correctly 1`] = `
+<div><span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1500%);webkit-transform:translateY(-1500%);transform:translateY(-1500%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p class="current">5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span></sup>
+  </span>
+  <span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1000%);webkit-transform:translateY(-1000%);transform:translateY(-1000%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p class="current">0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span></sup>
+  </span>
+</div>
+`;
+
+exports[`renders ./components/badge/demo/change.md correctly 1`] = `
+<div>
+  <div><span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1500%);webkit-transform:translateY(-1500%);transform:translateY(-1500%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p class="current">5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span></sup>
+    </span>
+    <div class="ant-btn-group">
+      <button type="button" class="ant-btn ant-btn-default">
+        <i class="anticon anticon-minus"></i>
+      </button>
+      <button type="button" class="ant-btn ant-btn-default">
+        <i class="anticon anticon-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div style="margin-top:10px;"><span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-dot"></sup></span> <span tabIndex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></span>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/badge/demo/dot.md correctly 1`] = `<div id="components-badge-demo-dot"><span class="ant-badge"><i class="anticon anticon-notification"></i><sup class="ant-scroll-number ant-badge-dot"></sup></span> <span class="ant-badge"><i class="anticon anticon-notification"></i><!----></span> <span class="ant-badge"><a href="#">Link something</a><sup class="ant-scroll-number ant-badge-dot"></sup></span></div>`;
+
+exports[`renders ./components/badge/demo/link.md correctly 1`] = `
+<a href="#"><span class="ant-badge"><span class="head-example"></span>
+  <sup class="ant-scroll-number ant-badge-count"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1500%);webkit-transform:translateY(-1500%);transform:translateY(-1500%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p class="current">5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span></sup>
+  </span>
+</a>
+`;
+
+exports[`renders ./components/badge/demo/no-wrapper.md correctly 1`] = `
+<div><span class="ant-badge ant-badge-not-a-wrapper"><sup class="ant-scroll-number ant-badge-count ant-badge-multiple-words"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1200%);webkit-transform:translateY(-1200%);transform:translateY(-1200%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p class="current">2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span>
+  <span
+    class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1500%);webkit-transform:translateY(-1500%);transform:translateY(-1500%);">
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p class="current">5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    </span>
+    </sup>
+    </span> <span class="ant-badge ant-badge-not-a-wrapper"><sup class="ant-scroll-number ant-badge-count" style="background-color:#fff;color:#999;box-shadow:0 0 0 1px #d9d9d9 inset;"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1400%);webkit-transform:translateY(-1400%);transform:translateY(-1400%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p class="current">4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span></sup>
+    </span>
+    <span class="ant-badge ant-badge-not-a-wrapper"><sup class="ant-scroll-number ant-badge-count ant-badge-multiple-words" style="background-color:#52c41a;">99+</sup></span></div>
+`;
+
+exports[`renders ./components/badge/demo/overflow.md correctly 1`] = `
+<div><span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count ant-badge-multiple-words"><span class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1900%);webkit-transform:translateY(-1900%);transform:translateY(-1900%);"><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p class="current">9</p><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p></span>
+  <span
+    class="ant-scroll-number-only" style="transition:none;ms-transform:translateY(-1900%);webkit-transform:translateY(-1900%);transform:translateY(-1900%);">
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p class="current">9</p>
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    </span>
+    </sup>
+    </span> <span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count ant-badge-multiple-words">99+</sup></span> <span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count ant-badge-multiple-words">10+</sup></span>    <span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-count ant-badge-multiple-words">999+</sup></span></div>
+`;
+
+exports[`renders ./components/badge/demo/status.md correctly 1`] = `
+<div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text"></span></span> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span>
+  <span
+    class="ant-badge-status-text"></span>
+    </span> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-default"></span><span class="ant-badge-status-text"></span></span> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span>
+    <span
+      class="ant-badge-status-text"></span>
+      </span> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text"></span></span>
+      <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">Success</span></span>
+      <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">Error</span></span>
+      <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-default"></span><span class="ant-badge-status-text">Default</span></span>
+      <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Processing</span></span>
+      <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">warning</span></span>
+</div>
+`;

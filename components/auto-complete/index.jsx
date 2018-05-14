@@ -4,16 +4,16 @@ import Select, { AbstractSelectProps, SelectValue } from '../select'
 import Input from '../input'
 import InputElement from './InputElement'
 import PropTypes from '../_util/vue-types'
-import { getComponentFromProp, getOptionProps, filterEmpty, isValidElement, getEvents, getStyle, getClass } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps, filterEmpty, isValidElement } from '../_util/props-util'
 
-const DataSourceItemObject = PropTypes.shape({
-  value: String,
-  text: String,
-}).loose
-const DataSourceItemType = PropTypes.oneOfType([
-  PropTypes.string,
-  DataSourceItemObject,
-]).isRequired
+// const DataSourceItemObject = PropTypes.shape({
+//   value: String,
+//   text: String,
+// }).loose
+// const DataSourceItemType = PropTypes.oneOfType([
+//   PropTypes.string,
+//   DataSourceItemObject,
+// ]).isRequired
 
 // export interface AutoCompleteInputProps {
 //   onChange?: React.FormEventHandler<any>;
@@ -57,13 +57,6 @@ export default {
       const { $slots } = this
       const children = filterEmpty($slots.default)
       const element = children.length ? children[0] : <Input />
-      console.log(element)
-      const eleProps = {
-        props: getOptionProps(element),
-        on: getEvents(element),
-        style: getStyle(element),
-        class: getClass(element),
-      }
       return (
         <InputElement>{element}</InputElement>
       )

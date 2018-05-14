@@ -38,7 +38,7 @@ exports[`renders ./components/auto-complete/demo/custom.md correctly 1`] = `
       <ul>
         <li class="ant-select-search ant-select-search--inline">
           <div class="ant-select-search__field__wrap">
-            <textarea value="" placeholder="input here" class="custom ant-input custom ant-select-search__field" style="height:50px;"></textarea><span class="ant-select-search__field__mirror"> </span></div>
+            <textarea value="" placeholder="input here" class="custom ant-input ant-select-search__field" style="height:50px;"></textarea><span class="ant-select-search__field__mirror"> </span></div>
         </li>
       </ul>
     </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>

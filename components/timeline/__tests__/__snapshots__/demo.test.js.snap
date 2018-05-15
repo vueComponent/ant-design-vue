@@ -108,7 +108,6 @@ exports[`renders ./components/timeline/demo/pending.md correctly 1`] = `
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue" style="border-color:null;">
       <i class="anticon anticon-loading anticon-spin"></i>
-      <i class="anticon anticon-loading anticon-spin"></i>
     </div>
     <div class="ant-timeline-item-content">Recording...</div>
   </li>

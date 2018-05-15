@@ -22,7 +22,7 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
         <a-menu-item key="1">nav 1</a-menu-item>
         <a-menu-item key="2">nav 2</a-menu-item>
         <a-menu-item key="3">nav 3</a-menu-item>
-      </Menu>
+      </a-menu>
     </a-layout-header>
     <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">
       <a-breadcrumb :style="{ margin: '16px 0' }">
@@ -36,7 +36,7 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
       Ant Design ©2016 Created by Ant UED
     </a-layout-footer>
   </a-layout>
-<template>
+</template>
 <style>
 #components-layout-demo-fixed .logo {
   width: 120px;
@@ -46,4 +46,5 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
   float: left;
 }
 </style>
+
 ```

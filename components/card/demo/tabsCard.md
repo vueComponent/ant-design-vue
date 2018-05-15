@@ -10,7 +10,6 @@
 
 ```html
 <template>
-<div>
   <div>
     <a-card
       style="width:100%"

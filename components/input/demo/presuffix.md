@@ -11,10 +11,11 @@ Add prefix or suffix icons inside input.
 ```html
 <template>
   <div class="components-input-demo-presuffix">
-  <a-input placeholder="Basic usage" v-model="userName" ref="userNameInput">
-    <a-icon slot="prefix" type="user" />
-    <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty" />
-  </a-input>
+    <a-input placeholder="Basic usage" v-model="userName" ref="userNameInput">
+      <a-icon slot="prefix" type="user" />
+      <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty" />
+    </a-input>
+  </div>
 </template>
 
 <script>

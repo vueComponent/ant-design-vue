@@ -14,7 +14,7 @@
   </a-locale-provider>
 </template>
 <script>
-import fr_FR from 'antd/lib/locale-provider/fr_FR';
+import fr_FR from 'vue-antd-ui/lib/locale-provider/fr_FR';
 import 'moment/locale/zh-cn';
 export default {
   data() {

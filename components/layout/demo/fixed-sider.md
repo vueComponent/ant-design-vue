@@ -12,7 +12,7 @@ When dealing with long content, a fixed sider can provide a better user experien
 <template>
   <a-layout id="components-layout-demo-fixed-sider">
     <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }">
-      <div class="logo" />
+      <div class="logo"></div>
       <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['4']">
         <a-menu-item key="1">
           <a-icon type="user" />
@@ -72,7 +72,7 @@ When dealing with long content, a fixed sider can provide a better user experien
       </a-layout-footer>
     </a-layout>
   </a-layout>
-<template>
+</template>
 <style>
 #components-layout-demo-fixed-sider .logo {
   height: 32px;

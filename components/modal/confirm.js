@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import ConfirmDialog from './ConfirmDialog'
 
-import antRefDirective from '../_util/antRefDirective'
-Vue.use(antRefDirective)
-
 export default function confirm (config) {
   const div = document.createElement('div')
   const el = document.createElement('div')

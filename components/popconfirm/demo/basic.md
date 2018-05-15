@@ -15,17 +15,16 @@ The basic example.
   </a-popconfirm>
 </template>
 <script>
-import { message } from 'antd'
 
 export default {
   methods: {
     confirm (e) {
       console.log(e)
-      message.success('Click on Yes')
+      this.$message.success('Click on Yes')
     },
     cancel (e) {
       console.log(e)
-      message.error('Click on No')
+      this.$message.error('Click on No')
     },
   },
 }

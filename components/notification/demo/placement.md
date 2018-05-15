@@ -13,7 +13,7 @@ A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` o
 <template>
   <div>
     <a-select v-model="selected" :style="{ width: '120px', marginRight: '10px' }">
-      <a-select-option v-for="val in options" :key="val" :value="val">{{val}}</option>
+      <a-select-option v-for="val in options" :key="val" :value="val">{{val}}</a-select-option>
     </a-select>
     <a-button type="primary" @click="openNotification">Open the notification box</a-button>
   </div>

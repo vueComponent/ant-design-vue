@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/time-picker/demo/12hours.md correctly 1`] = `
+<div><span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+  <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+</div>
+`;
+
+exports[`renders ./components/time-picker/demo/addon.md correctly 1`] = `
+<div><span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+</div>
+`;
+
+exports[`renders ./components/time-picker/demo/basic.md correctly 1`] = `<span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>`;
+
+exports[`renders ./components/time-picker/demo/disabled.md correctly 1`] = `<span class="ant-time-picker"><input type="text" placeholder="Select time" disabled="disabled" id="" value="12:08:23" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>`;
+
+exports[`renders ./components/time-picker/demo/hide-column.md correctly 1`] = `<span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="12:08" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>`;
+
+exports[`renders ./components/time-picker/demo/interval-options.md correctly 1`] = `<span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>`;
+
+exports[`renders ./components/time-picker/demo/size.md correctly 1`] = `
+<div><span class="ant-time-picker ant-time-picker-large"><input type="text" placeholder="Select time" id="" value="12:08:23" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="12:08:23" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+  <span class="ant-time-picker ant-time-picker-small"><input type="text" placeholder="Select time" id="" value="12:08:23" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+</div>
+`;
+
+exports[`renders ./components/time-picker/demo/value.md correctly 1`] = `
+<div>
+  <p>use value and @change</p> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+  <br>
+  <br>
+  <p>v-model</p> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+  <br>
+  <br>
+  <p>Do not change</p> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" value="00:00:00" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
+</div>
+`;

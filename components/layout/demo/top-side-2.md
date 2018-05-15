@@ -53,7 +53,7 @@ Both the top navigation and the sidebar, commonly used in application site.
             <a-menu-item key="11">option11</a-menu-item>
             <a-menu-item key="12">option12</a-menu-item>
           </a-sub-menu>
-        </a-layout-menu>
+        </a-menu>
       </a-layout-sider>
       <a-layout style="padding: 0 24px 24px">
         <a-breadcrumb style="margin: 16px 0">
@@ -70,7 +70,7 @@ Both the top navigation and the sidebar, commonly used in application site.
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       collapsed: false,
     }

@@ -13,7 +13,7 @@ Disabled state of `Switch`.
   <div>
     <a-switch defaultChecked :disabled="disabled" style="margin-bottom:5px"/>
     <br/>
-    <a-button type="primary" @click='onToggle'>Toggle disabled</Button>
+    <a-button type="primary" @click='onToggle'>Toggle disabled</a-button>
   </div>
 </template>
 <script>

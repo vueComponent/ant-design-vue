@@ -55,13 +55,13 @@ Components which need localization support are listed here, you can toggle the l
           <p>Locale Modal</p>
         </a-modal>
       </div>
-  </LocaleProvider>
+  </a-locale-provider>
 </div>
 </template>
 <script>
-// you should use import zhCN from 'antd/lib/locale-provider/zh_CN'
-import zhCN from 'antd/locale-provider/zh_CN';
-import { Modal } from 'antd';
+// you should use import zhCN from 'vue-antd-ui/lib/locale-provider/zh_CN'
+import zhCN from 'vue-antd-ui/locale-provider/zh_CN';
+import { Modal } from 'vue-antd-ui';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('en');

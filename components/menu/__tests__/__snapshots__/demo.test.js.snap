@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/menu/demo/horizontal.md correctly 1`] = `
+<div>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-light">
+    <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected">
+      <i class="anticon anticon-mail"></i>Navigation One
+    </li>
+    <li role="menuitem" aria-disabled="true" class="ant-menu-item ant-menu-item-disabled">
+      <i class="anticon anticon-appstore"></i>Navigation Two
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-horizontal">
+      <div aria-owns="item_4$Menu" aria-haspopup="true" class="ant-menu-submenu-title"><span><i class="anticon anticon-setting"></i>Navigation Three - Submenu</span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+    </li>
+    <li role="menuitem" class="ant-menu-item">
+      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/menu/demo/inline.md correctly 1`] = `
+<div>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" style="width:256px;">
+    <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">
+      <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-mail"></i><span>Navigation One</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
+        <li class="ant-menu-item-group">
+          <div class="ant-menu-item-group-title">
+            <i class="anticon anticon-qq"></i><span>Item 1</span></div>
+          <ul class="ant-menu-item-group-list">
+            <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:48px;">Option 1</li>
+            <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 2</li>
+          </ul>
+        </li>
+        <li class="ant-menu-item-group">
+          <div title="Item 2" class="ant-menu-item-group-title">Item 2</div>
+          <ul class="ant-menu-item-group-list">
+            <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 3</li>
+            <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 4</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-appstore"></i><span>Navigation Two</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub4$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-setting"></i><span>Navigation Three</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/menu/demo/inline-collapsed.md correctly 1`] = `
+<div style="width:256px;">
+  <button type="button" class="ant-btn ant-btn-primary" style="margin-bottom:16px;">
+    <i class="anticon anticon-menu-fold"></i>
+  </button>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark">
+    <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+      <i class="anticon anticon-pie-chart"></i> <span>Option 1</span></li>
+    <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+      <i class="anticon anticon-desktop"></i> <span>Option 2</span></li>
+    <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+      <i class="anticon anticon-inbox"></i> <span>Option 3</span></li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open">
+      <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-mail"></i><span>Navigation One</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 5</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 6</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 7</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 8</li>
+      </ul>
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-appstore"></i><span>Navigation Two</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/menu/demo/sider-current.md correctly 1`] = `
+<div>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" style="width:256px;">
+    <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open">
+      <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-mail"></i><span>Navigation One</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 1</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 2</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 3</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 4</li>
+      </ul>
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-appstore"></i><span>Navigation Two</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub4$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-setting"></i><span>Navigation Three</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
+<div>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  </label> Change Mode
+  <span className="ant-divider" style="margin:0 1em;"></span>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  </label> Change Theme
+  <br>
+  <br>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" style="width:256px;">
+    <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+      <i class="anticon anticon-mail"></i>
+      Navigation One
+    </li>
+    <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+      <i class="anticon anticon-calendar"></i>
+      Navigation Two
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open">
+      <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-appstore"></i><span>Navigation Three</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 3</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 4</li>
+        <li class="ant-menu-submenu ant-menu-submenu-inline">
+          <div aria-owns="sub1-2$Menu" aria-haspopup="true" title="Submenu" class="ant-menu-submenu-title" style="padding-left:48px;">Submenu
+            <i class="ant-menu-submenu-arrow"></i>
+          </div>
+          <!---->
+        </li>
+      </ul>
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-setting"></i><span>Navigation Four</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
+<div>
+  <md>
+    ## 主题 内建了两套主题 \`light|dark\`，默认 \`light\`。
+  </md>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  </label> Change Theme
+  <br>
+  <br>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark" style="width:256px;">
+    <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+      <i class="anticon anticon-mail"></i>
+      Navigation One
+    </li>
+    <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+      <i class="anticon anticon-calendar"></i>
+      Navigation Two
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open">
+      <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-appstore"></i><span>Navigation Three</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 3</li>
+        <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">Option 4</li>
+        <li class="ant-menu-submenu ant-menu-submenu-inline">
+          <div aria-owns="sub1-2$Menu" aria-haspopup="true" title="Submenu" class="ant-menu-submenu-title" style="padding-left:48px;">Submenu
+            <i class="ant-menu-submenu-arrow"></i>
+          </div>
+          <!---->
+        </li>
+      </ul>
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-inline">
+      <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-setting"></i><span>Navigation Four</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/menu/demo/vertical.md correctly 1`] = `
+<div>
+  <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-vertical ant-menu-light" style="width:256px;">
+    <li role="menuitem" class="ant-menu-item">
+      <i class="anticon anticon-mail"></i>
+      Navigation One
+    </li>
+    <li role="menuitem" class="ant-menu-item">
+      <i class="anticon anticon-calendar"></i>
+      Navigation Two
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-vertical">
+      <div aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title"><span><i class="anticon anticon-appstore"></i><span>Navigation Three</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+    </li>
+    <li class="ant-menu-submenu ant-menu-submenu-vertical">
+      <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title"><span><i class="anticon anticon-setting"></i><span>Navigation Four</span></span>
+        <i class="ant-menu-submenu-arrow"></i>
+      </div>
+    </li>
+  </ul>
+</div>
+`;

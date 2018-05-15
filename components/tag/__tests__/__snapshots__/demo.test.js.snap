@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/tag/demo/basic.md correctly 1`] = `
+<div>
+  <div class="ant-tag" style="background-color:null;">Tag 1</div>
+  <div class="ant-tag" style="background-color:null;">
+    <a href="https://github.com/vueComponent/ant-design">Link</a>
+  </div>
+  <div class="ant-tag" style="background-color:null;">Tag 2
+    <i class="anticon anticon-cross"></i>
+  </div>
+  <div class="ant-tag" style="background-color:null;">Prevent Default
+    <i class="anticon anticon-cross"></i>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/tag/demo/checkable.md correctly 1`] = `
+<div>
+  <div class="ant-tag ant-tag-checkable">Tag1</div>
+  <div class="ant-tag ant-tag-checkable">Tag2</div>
+  <div class="ant-tag ant-tag-checkable">Tag3</div>
+</div>
+`;
+
+exports[`renders ./components/tag/demo/colorful.md correctly 1`] = `
+<div>
+  <h4 style="margin-bottom:16px;">Presets:</h4>
+  <div>
+    <div class="ant-tag ant-tag-pink" style="background-color:null;">pink</div>
+    <div class="ant-tag ant-tag-red" style="background-color:null;">red</div>
+    <div class="ant-tag ant-tag-orange" style="background-color:null;">orange</div>
+    <div class="ant-tag ant-tag-green" style="background-color:null;">green</div>
+    <div class="ant-tag ant-tag-cyan" style="background-color:null;">cyan</div>
+    <div class="ant-tag ant-tag-blue" style="background-color:null;">blue</div>
+    <div class="ant-tag ant-tag-purple" style="background-color:null;">purple</div>
+  </div>
+  <h4 style="margin:'16px 0';">Custom:</h4>
+  <div>
+    <div class="ant-tag ant-tag-has-color" style="background-color:#f50;">#f50</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color:#2db7f5;">#2db7f5</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color:#87d068;">#87d068</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color:#108ee9;">#108ee9</div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/tag/demo/control.md correctly 1`] = `
+<div>
+  <div class="ant-tag" style="background-color:null;">
+    Unremovable
+  </div>
+  <div class="ant-tag" style="background-color:null;">
+    Tag 2
+    <i class="anticon anticon-cross"></i>
+  </div>
+  <div class="ant-tag" style="background-color:null;">
+    Tag 3Tag 3Tag 3Tag 3...
+    <i class="anticon anticon-cross"></i>
+  </div>
+  <div class="ant-tag" style="background-color:null;background:#fff;border-style:dashed;">
+    <i class="anticon anticon-plus"></i> New Tag
+  </div>
+</div>
+`;
+
+exports[`renders ./components/tag/demo/hot-tags.md correctly 1`] = `
+<div><strong style="margin-right:8;">Categories:</strong>
+  <div class="ant-tag ant-tag-checkable">
+    Movies
+  </div>
+  <div class="ant-tag ant-tag-checkable">
+    Books
+  </div>
+  <div class="ant-tag ant-tag-checkable">
+    Music
+  </div>
+  <div class="ant-tag ant-tag-checkable">
+    Sports
+  </div>
+</div>
+`;

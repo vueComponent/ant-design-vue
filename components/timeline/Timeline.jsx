@@ -41,7 +41,6 @@ export default {
         <template slot='dot'>
           {pendingDot || <Icon type='loading' />}
         </template>
-        <Icon slot='dot' type='loading' />
         {pendingNode}
       </TimelineItem>
     ) : null

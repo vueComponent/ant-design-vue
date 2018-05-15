@@ -6,6 +6,7 @@
 
 # [Ant Design Vue](https://vuecomponent.github.io/ant-design/)
 [![Travis branch](https://api.travis-ci.org/vueComponent/ant-design.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design)
+[![codecov](https://codecov.io/gh/vueComponent/ant-design/branch/master/graph/badge.svg)](https://codecov.io/gh/vueComponent/ant-design)
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/vueComponent/ant-design.svg)](https://beta.gemnasium.com/projects/github.com/vueComponent/ant-design)
 [![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat)](https://www.npmjs.org/package/vue-antd-ui)
 [![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat)](http://www.npmtrends.com/vue-antd-ui)

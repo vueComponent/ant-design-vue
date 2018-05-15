@@ -1,7 +1,7 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
 import { createForm } from '../index'
-import { Select } from 'antd'
+import { Select } from 'vue-antd-ui'
 import { regionStyle, errorStyle } from './styles'
 import { mergeProps } from '../../_util/props-util'
 const emailTpl = ['@gmail.com', '@outlook.com', '@qq.com']

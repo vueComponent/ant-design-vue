@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/card/demo/basic.md correctly 1`] = `
+<div class="ant-card ant-card-bordered">
+  <div class="ant-card-head">
+    <div class="ant-card-head-wrapper">
+      <div class="ant-card-head-title">Card Title</div>
+      <div class="ant-card-extra">
+        <a href="#">more</a>
+      </div>
+    </div>
+  </div>
+  <div class="ant-card-body">
+    <p>card content</p>
+    <p>card content</p>
+    <p>card content</p>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/colRowCard.md correctly 1`] = `
+<div style="background-color:#ececec;padding:20px;">
+  <div class="ant-row" style="margin-left:-8px;margin-right:-8px;">
+    <div class="ant-col-8" style="padding-left:8px;padding-right:8px;">
+      <div class="ant-card">
+        <div class="ant-card-head">
+          <div class="ant-card-head-wrapper">
+            <div class="ant-card-head-title">Card title</div>
+          </div>
+        </div>
+        <div class="ant-card-body">
+          <p>card content</p>
+        </div>
+      </div>
+    </div>
+    <div class="ant-col-8" style="padding-left:8px;padding-right:8px;">
+      <div class="ant-card">
+        <div class="ant-card-head">
+          <div class="ant-card-head-wrapper">
+            <div class="ant-card-head-title">Card title</div>
+          </div>
+        </div>
+        <div class="ant-card-body">
+          <p>card content</p>
+        </div>
+      </div>
+    </div>
+    <div class="ant-col-8" style="padding-left:8px;padding-right:8px;">
+      <div class="ant-card">
+        <div class="ant-card-head">
+          <div class="ant-card-head-wrapper">
+            <div class="ant-card-head-title">Card title</div>
+          </div>
+        </div>
+        <div class="ant-card-body">
+          <p>card content</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/concise.md correctly 1`] = `
+<div class="ant-card ant-card-bordered" style="width:300px;">
+  <div class="ant-card-body">
+    <p>Card content</p>
+    <p>Card content</p>
+    <p>Card content</p>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/grid.md correctly 1`] = `
+<div class="ant-card ant-card-bordered">
+  <div class="ant-card-head">
+    <div class="ant-card-head-wrapper">
+      <div class="ant-card-head-title">Card Title</div>
+    </div>
+  </div>
+  <div class="ant-card-body">
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+    <div class="ant-card-grid" style="width:25%;text-align:'center';">Content</div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/inline.md correctly 1`] = `
+<div class="ant-card ant-card-bordered">
+  <div class="ant-card-head">
+    <div class="ant-card-head-wrapper">
+      <div class="ant-card-head-title">Card title</div>
+    </div>
+  </div>
+  <div class="ant-card-body">
+    <p style="font-size:14px;color:rgba(0, 0, 0, 0.85);margin-bottom:16px;font-weight:500;">Group title</p>
+    <div class="ant-card ant-card-bordered">
+      <div class="ant-card-head">
+        <div class="ant-card-head-wrapper">
+          <div class="ant-card-head-title">Inner card title</div>
+          <div class="ant-card-extra">
+            <a href="#">More</a>
+          </div>
+        </div>
+      </div>
+      <div class="ant-card-body">
+        Inner Card content
+      </div>
+    </div>
+    <div class="ant-card ant-card-bordered">
+      <div class="ant-card-head">
+        <div class="ant-card-head-wrapper">
+          <div class="ant-card-head-title">Inner card title</div>
+          <div class="ant-card-extra">
+            <a href="#">More</a>
+          </div>
+        </div>
+      </div>
+      <div class="ant-card-body">
+        Inner Card content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/loading.md correctly 1`] = `
+<div class="ant-card ant-card-loading ant-card-bordered" style="width:34%;">
+  <div class="ant-card-head">
+    <div class="ant-card-head-wrapper">
+      <div class="ant-card-head-title">Card title</div>
+    </div>
+  </div>
+  <div class="ant-card-body">
+    <div class="ant-card-loading-content">
+      <p class="ant-card-loading-block" style="width:94%;"></p>
+      <p><span class="ant-card-loading-block" style="width:28%;"></span><span class="ant-card-loading-block" style="width:62%;"></span></p>
+      <p><span class="ant-card-loading-block" style="width:22%;"></span><span class="ant-card-loading-block" style="width:66%;"></span></p>
+      <p><span class="ant-card-loading-block" style="width:56%;"></span><span class="ant-card-loading-block" style="width:39%;"></span></p>
+      <p><span class="ant-card-loading-block" style="width:21%;"></span><span class="ant-card-loading-block" style="width:15%;"></span><span class="ant-card-loading-block" style="width:40%;"></span></p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/moreConfigs.md correctly 1`] = `
+<div class="ant-card ant-card-bordered ant-card-hoverable" style="width:300px;">
+  <div class="ant-card-cover">
+    <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png">
+  </div>
+  <div class="ant-card-body">
+    <div class="ant-card-meta">
+      <div class="ant-card-meta-avatar"><span class="ant-avatar ant-avatar-image ant-avatar-circle"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
+      <div class="ant-card-meta-detail">
+        <div class="ant-card-meta-title">Card title</div>
+        <div class="ant-card-meta-description">This is the description</div>
+      </div>
+    </div>
+  </div>
+  <ul class="ant-card-actions">
+    <li style="width:33.3333%;">
+      <i class="anticon anticon-setting"></i>
+    </li>
+    <li style="width:33.3333%;">
+      <i class="anticon anticon-edit"></i>
+    </li>
+    <li style="width:33.3333%;">
+      <i class="anticon anticon-ellipsis"></i>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`renders ./components/card/demo/noBorder.md correctly 1`] = `
+<div style="background:#ECECEC;padding:30px;">
+  <div class="ant-card" style="width:300px;">
+    <div class="ant-card-head">
+      <div class="ant-card-head-wrapper">
+        <div class="ant-card-head-title">Card title</div>
+      </div>
+    </div>
+    <div class="ant-card-body">
+      <p>Card content</p>
+      <p>Card content</p>
+      <p>Card content</p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/card/demo/tabsCard.md correctly 1`] = `
+<div>
+  <div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width:100%;">
+    <div class="ant-card-head">
+      <div class="ant-card-head-wrapper">
+        <div class="ant-card-head-title">Card title</div>
+        <div class="ant-card-extra">
+          <a href="#">More</a>
+        </div>
+      </div>
+      <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs">
+        <div role="tablist" tabIndex="0" class="ant-tabs-bar">
+          <div class="ant-tabs-extra-content" style="float:right;"></div>
+          <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
+            <div
+              class="ant-tabs-nav-wrap">
+              <div class="ant-tabs-nav-scroll">
+                <div class="ant-tabs-nav ant-tabs-nav-animated">
+                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"></div>
+                  <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab" style="margin-right:undefinedpx;">tab1</div>
+                  <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab" style="margin-right:undefinedpx;">tab2</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left:0%;">
+        <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active"></div>
+        <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ant-card-body">
+    content1
+  </div>
+</div>
+<br>
+<br>
+<div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width:100%;">
+  <div class="ant-card-head">
+    <div class="ant-card-head-wrapper"></div>
+    <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs">
+      <div role="tablist" tabIndex="0" class="ant-tabs-bar">
+        <div class="ant-tabs-extra-content" style="float:right;"></div>
+        <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
+          <div
+            class="ant-tabs-nav-wrap">
+            <div class="ant-tabs-nav-scroll">
+              <div class="ant-tabs-nav ant-tabs-nav-animated">
+                <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"></div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab" style="margin-right:undefinedpx;">article</div>
+                <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab" style="margin-right:undefinedpx;">app</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab" style="margin-right:undefinedpx;">project</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left:-100%;">
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    </div>
+  </div>
+</div>
+<div class="ant-card-body">
+  <p>app content</p>
+</div>
+</div>
+</div>
+`;

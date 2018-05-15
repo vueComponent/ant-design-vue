@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/message/demo/duration.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Customized display duration</span></button>`;
+
+exports[`renders ./components/message/demo/info.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Display normal message</span></button>`;
+
+exports[`renders ./components/message/demo/loading.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Display a loading indicator</span></button>`;
+
+exports[`renders ./components/message/demo/other.md correctly 1`] = `
+<div>
+  <button type="button" class="ant-btn ant-btn-default"><span>Success</span></button>
+  <button type="button" class="ant-btn ant-btn-default"><span>Error</span></button>
+  <button type="button" class="ant-btn ant-btn-default"><span>Warning</span></button>
+</div>
+`;

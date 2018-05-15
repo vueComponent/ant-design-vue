@@ -2,7 +2,7 @@
 
 import { createForm } from '../index'
 import { regionStyle } from './styles'
-import { Switch } from 'antd'
+import { Switch } from 'vue-antd-ui'
 
 const TopForm = {
   props: {

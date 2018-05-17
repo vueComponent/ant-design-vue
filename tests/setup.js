@@ -1,6 +1,4 @@
-import Vue from 'vue'
-import antd from 'vue-antd-ui'
-Vue.use(antd)
+
 /* eslint-disable global-require */
 if (typeof window !== 'undefined') {
   global.window.resizeTo = (width, height) => {

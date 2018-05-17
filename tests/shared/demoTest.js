@@ -2,6 +2,9 @@ import glob from 'glob'
 import { renderToString } from '@vue/server-test-utils'
 import MockDate from 'mockdate'
 import moment from 'moment'
+import Vue from 'vue'
+import antd from 'vue-antd-ui'
+Vue.use(antd)
 
 export default function demoTest (component, options = {}) {
   const files = glob.sync(`./components/${component}/demo/*.md`)

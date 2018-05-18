@@ -12,10 +12,6 @@ Default activate first tab.
 
 <template>
 <div>
-  <md>
-    ## 基本
-    默认选中第一项。
-  </md>
   <a-tabs defaultActiveKey="1" @change="callback">
     <a-tab-pane tab="Tab 1" key="1">Content of Tab Pane 1</a-tab-pane>
     <a-tab-pane tab="Tab 2" key="2" forceRender>Content of Tab Pane 2</a-tab-pane>

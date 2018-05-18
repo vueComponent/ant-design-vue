@@ -170,9 +170,6 @@ exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
 
 exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
 <div>
-  <md>
-    ## 主题 内建了两套主题 \`light|dark\`，默认 \`light\`。
-  </md>
   <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
   </label> Change Theme
   <br>

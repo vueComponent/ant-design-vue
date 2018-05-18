@@ -8,6 +8,9 @@ const ModalTester = {
       return this.$refs.container
     },
   },
+  updated () {
+    console.log('updated')
+  },
 
   render () {
     const modalProps = {
@@ -32,6 +35,7 @@ const ModalTester = {
 describe('Modal', () => {
   it('render correctly', () => {
     const wrapper = mount(ModalTester)
+    wrapper.setProps({ visible: true })
     expect(wrapper.html()).toMatchSnapshot()
     const wrapper1 = mount(
       {

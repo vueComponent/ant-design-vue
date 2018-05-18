@@ -63,19 +63,15 @@ export default {
     },
 
     focus () {
-      this.$nextTick(() => {
-        if (this.$refs.select) {
-          this.$refs.select.focus()
-        }
-      })
+      if (this.$refs.select) {
+        this.$refs.select.focus()
+      }
     },
 
     blur () {
-      this.$nextTick(() => {
-        if (this.$refs.select) {
-          this.$refs.select.blur()
-        }
-      })
+      if (this.$refs.select) {
+        this.$refs.select.blur()
+      }
     },
   },
 

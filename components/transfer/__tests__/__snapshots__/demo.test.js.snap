@@ -5,7 +5,7 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
   <div class="ant-transfer-list ant-transfer-list-with-footer" style="width: 250px; height: 300px;">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>11 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>20 items</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
@@ -30,7 +30,7 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
   <div class="ant-transfer-list ant-transfer-list-with-footer" style="width: 250px; height: 300px;">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>9 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
@@ -87,7 +87,7 @@ exports[`renders ./components/transfer/demo/custom-item.md correctly 1`] = `
   <div class="ant-transfer-list" style="width: 300px; height: 300px;">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>11 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>20 items</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body">
       <!---->
@@ -105,7 +105,7 @@ exports[`renders ./components/transfer/demo/custom-item.md correctly 1`] = `
   <div class="ant-transfer-list" style="width: 300px; height: 300px;">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>9 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body">
       <!---->
@@ -120,7 +120,7 @@ exports[`renders ./components/transfer/demo/large-data.md correctly 1`] = `
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>1003 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>2000 items</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body">
       <!---->
@@ -138,7 +138,7 @@ exports[`renders ./components/transfer/demo/large-data.md correctly 1`] = `
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>997 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body">
       <!---->
@@ -153,7 +153,7 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>12 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>20 items</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
@@ -175,7 +175,7 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header">
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-      </label><span class="ant-transfer-list-header-selected"><span>8 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">

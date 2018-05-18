@@ -123,7 +123,7 @@ export default {
             }
             if (!flexSupported && direction !== 'vertical' && index !== lastIndex) {
               stepProps.props.itemWidth = `${100 / lastIndex}%`
-              stepProps.props.adjustMarginRight = -Math.round(lastStepOffsetWidth / lastIndex + 1)
+              stepProps.props.adjustMarginRight = `${-Math.round(lastStepOffsetWidth / lastIndex + 1)}px`
             }
             // fix tail color
             if (status === 'error' && index === current - 1) {

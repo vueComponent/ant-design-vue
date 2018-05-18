@@ -1,32 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/switch/demo/basic.md correctly 1`] = `
-<div><span tabIndex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></span>
+<div><span tabindex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></span>
 </div>
 `;
 
 exports[`renders ./components/switch/demo/disabled.md correctly 1`] = `
-<div><span tabIndex="-1" class="ant-switch ant-switch-checked ant-switch-disabled" style="margin-bottom:5px;"><span class="ant-switch-inner"></span></span>
+<div><span tabindex="-1" class="ant-switch ant-switch-checked ant-switch-disabled" style="margin-bottom: 5px;"><span class="ant-switch-inner"></span></span>
   <br>
   <button type="button" class="ant-btn ant-btn-primary"><span>Toggle disabled</span></button>
 </div>
 `;
 
 exports[`renders ./components/switch/demo/loading.md correctly 1`] = `
-<div><span tabIndex="0" class="ant-switch ant-switch-checked ant-switch-loading"><span class="ant-switch-inner"></span></span>
-  <br> <span tabIndex="0" class="ant-switch ant-switch-small ant-switch-loading"><span class="ant-switch-inner"></span></span>
+<div><span tabindex="0" class="ant-switch ant-switch-checked ant-switch-loading"><span class="ant-switch-inner"></span></span>
+  <br> <span tabindex="0" class="ant-switch ant-switch-small ant-switch-loading"><span class="ant-switch-inner"></span></span>
 </div>
 `;
 
 exports[`renders ./components/switch/demo/size.md correctly 1`] = `
-<div><span tabIndex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></span>
-  <br> <span tabIndex="0" class="ant-switch ant-switch-checked ant-switch-small"><span class="ant-switch-inner"></span></span>
+<div><span tabindex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></span>
+  <br> <span tabindex="0" class="ant-switch ant-switch-checked ant-switch-small"><span class="ant-switch-inner"></span></span>
 </div>
 `;
 
 exports[`renders ./components/switch/demo/text.md correctly 1`] = `
-<div><span tabIndex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner">开</span></span>
-  <br> <span tabIndex="0" class="ant-switch"><span class="ant-switch-inner">0</span></span>
-  <br> <span tabIndex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"><i class="anticon anticon-check"></i></span></span>
+<div><span tabindex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner">开</span></span>
+  <br> <span tabindex="0" class="ant-switch"><span class="ant-switch-inner">0</span></span>
+  <br> <span tabindex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"><i class="anticon anticon-check"></i></span></span>
 </div>
 `;

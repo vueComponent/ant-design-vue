@@ -7,7 +7,7 @@ exports[`renders ./components/input-number/demo/basic.md correctly 1`] = `
         role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3" class="ant-input-number-input-wrap">
-      <input autoComplete="off" max="10" min="1" step="1" value="3" class="ant-input-number-input">
+      <input autocomplete="off" max="10" min="1" step="1" class="ant-input-number-input">
     </div>
   </div>
   当前值：3
@@ -20,7 +20,7 @@ exports[`renders ./components/input-number/demo/digit.md correctly 1`] = `
       role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
   </div>
   <div role="spinbutton" aria-valuemin="0" aria-valuemax="10" class="ant-input-number-input-wrap">
-    <input autoComplete="off" max="10" min="0" step="0.1" value="" class="ant-input-number-input">
+    <input autocomplete="off" max="10" min="0" step="0.1" class="ant-input-number-input">
   </div>
 </div>
 `;
@@ -33,10 +33,10 @@ exports[`renders ./components/input-number/demo/disabled.md correctly 1`] = `
         unselectable="unselectable" role="button" aria-label="Decrease Value" aria-disabled="true" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3" class="ant-input-number-input-wrap">
-      <input autoComplete="off" disabled="disabled" max="10" min="1" step="1" value="3" class="ant-input-number-input">
+      <input autocomplete="off" disabled="disabled" max="10" min="1" step="1" class="ant-input-number-input">
     </div>
   </div>
-  <div style="margin-top:20px;">
+  <div style="margin-top: 20px;">
     <button type="button" class="ant-btn ant-btn-primary"><span>Toggle disabled</span></button>
   </div>
 </div>
@@ -49,7 +49,7 @@ exports[`renders ./components/input-number/demo/formatter.md correctly 1`] = `
         role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="-9007199254740991" aria-valuenow="1000" class="ant-input-number-input-wrap">
-      <input autoComplete="off" min="-9007199254740991" step="1" value="$ 1,000" class="ant-input-number-input">
+      <input autocomplete="off" min="-9007199254740991" step="1" class="ant-input-number-input">
     </div>
   </div>
   <div class="ant-input-number">
@@ -58,7 +58,7 @@ exports[`renders ./components/input-number/demo/formatter.md correctly 1`] = `
         unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" class="ant-input-number-input-wrap">
-      <input autoComplete="off" max="100" min="0" step="1" value="100%" class="ant-input-number-input">
+      <input autocomplete="off" max="100" min="0" step="1" class="ant-input-number-input">
     </div>
   </div>
 </div>
@@ -71,7 +71,7 @@ exports[`renders ./components/input-number/demo/size.md correctly 1`] = `
         role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="1" aria-valuemax="100000" aria-valuenow="3" class="ant-input-number-input-wrap">
-      <input autoComplete="off" max="100000" min="1" step="1" value="3" class="ant-input-number-input">
+      <input autocomplete="off" max="100000" min="1" step="1" class="ant-input-number-input">
     </div>
   </div>
   <div class="ant-input-number">
@@ -79,7 +79,7 @@ exports[`renders ./components/input-number/demo/size.md correctly 1`] = `
         role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="1" aria-valuemax="100000" aria-valuenow="3" class="ant-input-number-input-wrap">
-      <input autoComplete="off" max="100000" min="1" step="1" value="3" class="ant-input-number-input">
+      <input autocomplete="off" max="100000" min="1" step="1" class="ant-input-number-input">
     </div>
   </div>
   <div class="ant-input-number ant-input-number-sm">
@@ -87,7 +87,7 @@ exports[`renders ./components/input-number/demo/size.md correctly 1`] = `
         role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
     </div>
     <div role="spinbutton" aria-valuemin="1" aria-valuemax="100000" aria-valuenow="3" class="ant-input-number-input-wrap">
-      <input autoComplete="off" max="100000" min="1" step="1" value="3" class="ant-input-number-input">
+      <input autocomplete="off" max="100000" min="1" step="1" class="ant-input-number-input">
     </div>
   </div>
 </div>

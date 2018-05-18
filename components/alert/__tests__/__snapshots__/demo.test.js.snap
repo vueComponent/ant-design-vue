@@ -45,7 +45,7 @@ exports[`renders ./components/alert/demo/close-text.md correctly 1`] = `
 exports[`renders ./components/alert/demo/description.md correctly 1`] = `
 <div>
   <div class="ant-alert ant-alert-success ant-alert-with-description ant-alert-no-icon"><span class="ant-alert-message">Success Text</span><span class="ant-alert-description"><p>
-      Success Description <span style="color:red;">Success</span> Description Success Description
+      Success Description <span style="color: red;">Success</span> Description Success Description
     </p>
     </span>
   </div>

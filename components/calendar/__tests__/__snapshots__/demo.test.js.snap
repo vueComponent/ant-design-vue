@@ -4,25 +4,25 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
 <div class=" ant-fullcalendar-fullscreen">
   <div class="ant-fullcalendar-header">
     <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
-      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="2016" class="ant-select-selection-selected-value" style="display:block;opacity:1;">2016</div>
-        </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+          <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
+        </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
-      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="Nov" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Nov</div>
-        </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+          <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
+        </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     <div class="ant-radio-group ant-radio-group-default">
-      <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" checked="checked" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+      <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
       <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
     </div>
   </div>
-  <div tabIndex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
+  <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
     <div class="ant-fullcalendar-calendar-body">
-      <table cellSpacing="0" role="grid" class="ant-fullcalendar-table">
+      <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
         <thead>
           <tr role="row">
             <th role="columnheader" title="Sun" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Su</span></th>
@@ -35,7 +35,7 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
           </tr>
         </thead>
         <tbody class="ant-fullcalendar-tbody">
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="October 30, 2016" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
@@ -79,7 +79,7 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="November 6, 2016" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
@@ -123,7 +123,7 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="November 13, 2016" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">13</div>
@@ -211,7 +211,7 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="November 27, 2016" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
@@ -255,7 +255,7 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="December 4, 2016" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
@@ -307,29 +307,29 @@ exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
 `;
 
 exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
-<div style="width:300px;border:1px solid #d9d9d9;border-radius:4px;">
-  <div>
+<div style="width: 300px; border: 1px solid #d9d9d9; border-radius: 4px;">
+  <div class="">
     <div class="ant-fullcalendar-header">
       <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
-            <div title="2016" class="ant-select-selection-selected-value" style="display:block;opacity:1;">2016</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+            <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
       <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
-            <div title="Nov" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Nov</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+            <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
       <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" checked="checked" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
         <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
       </div>
     </div>
-    <div tabIndex="0" class="ant-fullcalendar ant-fullcalendar-full">
+    <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
       <div class="ant-fullcalendar-calendar-body">
-        <table cellSpacing="0" role="grid" class="ant-fullcalendar-table">
+        <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
           <thead>
             <tr role="row">
               <th role="columnheader" title="Sun" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Su</span></th>
@@ -342,7 +342,7 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
             </tr>
           </thead>
           <tbody class="ant-fullcalendar-tbody">
-            <tr role="row">
+            <tr role="row" class="">
               <td role="gridcell" title="October 30, 2016" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">30</div>
@@ -386,7 +386,7 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
                 </div>
               </td>
             </tr>
-            <tr role="row">
+            <tr role="row" class="">
               <td role="gridcell" title="November 6, 2016" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">06</div>
@@ -430,7 +430,7 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
                 </div>
               </td>
             </tr>
-            <tr role="row">
+            <tr role="row" class="">
               <td role="gridcell" title="November 13, 2016" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">13</div>
@@ -518,7 +518,7 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
                 </div>
               </td>
             </tr>
-            <tr role="row">
+            <tr role="row" class="">
               <td role="gridcell" title="November 27, 2016" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">27</div>
@@ -562,7 +562,7 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
                 </div>
               </td>
             </tr>
-            <tr role="row">
+            <tr role="row" class="">
               <td role="gridcell" title="December 4, 2016" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">04</div>
@@ -618,25 +618,25 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
 <div class=" ant-fullcalendar-fullscreen">
   <div class="ant-fullcalendar-header">
     <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
-      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="2016" class="ant-select-selection-selected-value" style="display:block;opacity:1;">2016</div>
-        </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+          <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
+        </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
-      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="Nov" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Nov</div>
-        </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+          <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
+        </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     <div class="ant-radio-group ant-radio-group-default">
-      <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" checked="checked" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+      <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
       <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
     </div>
   </div>
-  <div tabIndex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
+  <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
     <div class="ant-fullcalendar-calendar-body">
-      <table cellSpacing="0" role="grid" class="ant-fullcalendar-table">
+      <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
         <thead>
           <tr role="row">
             <th role="columnheader" title="Sun" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Su</span></th>
@@ -649,7 +649,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
           </tr>
         </thead>
         <tbody class="ant-fullcalendar-tbody">
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="October 30, 2016" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
@@ -707,7 +707,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="November 6, 2016" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
@@ -777,7 +777,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="November 13, 2016" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">13</div>
@@ -906,7 +906,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="November 27, 2016" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
@@ -964,7 +964,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
               </div>
             </td>
           </tr>
-          <tr role="row">
+          <tr role="row" class="">
             <td role="gridcell" title="December 4, 2016" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
@@ -1044,29 +1044,29 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
 exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
 <div>
   <div class="ant-alert ant-alert-info ant-alert-no-icon"><span class="ant-alert-message">You selected date: 2017-01-25</span><span class="ant-alert-description"></span></div>
-  <div style="display:inline-block;width:500px;border:1px solid #d9d9d9;border-radius:4px;">
+  <div style="display: inline-block; width: 500px; border: 1px solid #d9d9d9; border-radius: 4px;">
     <div class=" ant-fullcalendar-fullscreen">
       <div class="ant-fullcalendar-header">
         <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
-          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
-              <div title="2017" class="ant-select-selection-selected-value" style="display:block;opacity:1;">2017</div>
-            </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+              <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
+            </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
         <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
-          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
-              <div title="Jan" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Jan</div>
-            </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+              <div title="Jan" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Jan</div>
+            </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
         <div class="ant-radio-group ant-radio-group-default">
-          <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" checked="checked" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+          <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
           <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
         </div>
       </div>
-      <div tabIndex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
+      <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
         <div class="ant-fullcalendar-calendar-body">
-          <table cellSpacing="0" role="grid" class="ant-fullcalendar-table">
+          <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
             <thead>
               <tr role="row">
                 <th role="columnheader" title="Sun" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Su</span></th>
@@ -1079,7 +1079,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
               </tr>
             </thead>
             <tbody class="ant-fullcalendar-tbody">
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 1, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">01</div>
@@ -1123,7 +1123,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 8, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">08</div>
@@ -1167,7 +1167,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 15, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">15</div>
@@ -1255,7 +1255,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 29, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">29</div>
@@ -1299,7 +1299,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="February 5, 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">05</div>
@@ -1349,29 +1349,29 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
       </div>
     </div>
   </div>
-  <div style="display:inline-block;width:500px;margin-left:20px;border:1px solid #d9d9d9;border-radius:4px;">
+  <div style="display: inline-block; width: 500px; margin-left: 20px; border: 1px solid #d9d9d9; border-radius: 4px;">
     <div class=" ant-fullcalendar-fullscreen">
       <div class="ant-fullcalendar-header">
         <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
-          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
-              <div title="2017" class="ant-select-selection-selected-value" style="display:block;opacity:1;">2017</div>
-            </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+              <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
+            </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
         <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
-          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+          <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
-              <div title="Jan" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Jan</div>
-            </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+              <div title="Jan" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Jan</div>
+            </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
         <div class="ant-radio-group ant-radio-group-default">
-          <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" checked="checked" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+          <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
           <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
         </div>
       </div>
-      <div tabIndex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
+      <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full ant-fullcalendar-fullscreen">
         <div class="ant-fullcalendar-calendar-body">
-          <table cellSpacing="0" role="grid" class="ant-fullcalendar-table">
+          <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
             <thead>
               <tr role="row">
                 <th role="columnheader" title="Sun" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Su</span></th>
@@ -1384,7 +1384,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
               </tr>
             </thead>
             <tbody class="ant-fullcalendar-tbody">
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 1, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">01</div>
@@ -1428,7 +1428,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 8, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">08</div>
@@ -1472,7 +1472,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 15, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">15</div>
@@ -1560,7 +1560,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="January 29, 2017" class="ant-fullcalendar-cell">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">29</div>
@@ -1604,7 +1604,7 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
                   </div>
                 </td>
               </tr>
-              <tr role="row">
+              <tr role="row" class="">
                 <td role="gridcell" title="February 5, 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
                   <div class="ant-fullcalendar-date">
                     <div class="ant-fullcalendar-value">05</div>

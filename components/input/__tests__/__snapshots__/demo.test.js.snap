@@ -2,20 +2,20 @@
 
 exports[`renders ./components/input/demo/addon.md correctly 1`] = `
 <div>
-  <div style="margin-bottom:16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon">Http://</span>
-    <input defaultValue="mysite" type="text" value="mysite" class="ant-input"><span class="ant-input-group-addon">.com</span></span>
+  <div style="margin-bottom: 16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon">Http://</span>
+    <input defaultvalue="mysite" type="text" class="ant-input"><span class="ant-input-group-addon">.com</span></span>
     </span>
   </div>
-  <div style="margin-bottom:16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width:90px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Http://" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Http://</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+  <div style="margin-bottom: 16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 90px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Http://" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Http://</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
-<input defaultValue="mysite" type="text" value="mysite" class="ant-input"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width:80px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title=".com" class="ant-select-selection-selected-value" style="display:block;opacity:1;">.com</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+<input defaultvalue="mysite" type="text" class="ant-input"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 80px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title=".com" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">.com</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
 </span>
 </span>
 </div>
-<div style="margin-bottom:16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><input defaultValue="mysite" type="text" value="mysite" class="ant-input"><span class="ant-input-group-addon"><i class="anticon anticon-setting"></i></span></span>
+<div style="margin-bottom: 16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><input defaultvalue="mysite" type="text" class="ant-input"><span class="ant-input-group-addon"><i class="anticon anticon-setting"></i></span></span>
   </span>
 </div>
 </div>
@@ -23,60 +23,60 @@ exports[`renders ./components/input/demo/addon.md correctly 1`] = `
 
 exports[`renders ./components/input/demo/autosize-textarea.md correctly 1`] = `
 <div>
-  <textarea placeholder="Autosize height based on content lines" class="ant-input"></textarea>
-  <div style="margin:24px 0;"></div>
-  <textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input"></textarea>
+  <textarea placeholder="Autosize height based on content lines" class="ant-input" style="height: 0px; min-height: -Infinitypx; max-height: Infinitypx; overflow-y: hidden;"></textarea>
+  <div style="margin: 24px 0px;"></div>
+  <textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input" style="height: -24px; min-height: -8px; max-height: -24px;"></textarea>
 </div>
 `;
 
-exports[`renders ./components/input/demo/basic.md correctly 1`] = `<input placeholder="Basic usage" type="text" value="" class="ant-input">`;
+exports[`renders ./components/input/demo/basic.md correctly 1`] = `<input placeholder="Basic usage" type="text" class="ant-input">`;
 
 exports[`renders ./components/input/demo/group.md correctly 1`] = `
-<div><span class="ant-input-group ant-input-group-lg"><div class="ant-col-5"><input defaultValue="0571" type="text" value="0571" class="ant-input"></div><div class="ant-col-8"><input defaultValue="26888888" type="text" value="26888888" class="ant-input"></div></span>
-  <br> <span class="ant-input-group ant-input-group-compact"><input defaultValue="0571" type="text" value="0571" class="ant-input" style="width:20%;"><input defaultValue="26888888" type="text" value="26888888" class="ant-input" style="width:30%;"></span>
-  <br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Zhejiang" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Zhejiang</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+<div><span class="ant-input-group ant-input-group-lg"><div class="ant-col-5"><input defaultvalue="0571" type="text" class="ant-input"></div><div class="ant-col-8"><input defaultvalue="26888888" type="text" class="ant-input"></div></span>
+  <br> <span class="ant-input-group ant-input-group-compact"><input defaultvalue="0571" type="text" class="ant-input" style="width: 20%;"><input defaultvalue="26888888" type="text" class="ant-input" style="width: 30%;"></span>
+  <br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Zhejiang" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Zhejiang</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
-<input defaultValue="Xihu District, Hangzhou" type="text" value="Xihu District, Hangzhou" class="ant-input" style="width:50%;">
+<input defaultvalue="Xihu District, Hangzhou" type="text" class="ant-input" style="width: 50%;">
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Option1</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
-<input defaultValue="input content" type="text" value="input content" class="ant-input" style="width:50%;">
+<input defaultvalue="input content" type="text" class="ant-input" style="width: 50%;">
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><input defaultValue="input content" type="text" value="input content" class="ant-input" style="width:50%;"><span class="ant-calendar-picker"><div><input readOnly="true" placeholder="Select date" value="" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><input defaultvalue="input content" type="text" class="ant-input" style="width: 50%;"><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
 </span>
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1-1" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Option1-1</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1-1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option1-1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 <div class="ant-select ant-select-enabled ant-select ant-select-enabled">
-  <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+  <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
-      <div title="Option2-2" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Option2-2</div>
-    </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+      <div title="Option2-2" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option2-2</div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Between" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Between</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Between" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Between</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
-<input placeholder="Minimum" type="text" value="" class="ant-input" style="width:100px;text-align:center;">
-<input placeholder="~" type="text" disabled="disabled" value="" class="ant-input ant-input-disabled" style="width:30px;border-left:0;pointer-events:none;background-color:#fff;">
-<input placeholder="Maximum" type="text" value="" class="ant-input" style="width:100px;text-align:center;border-left:0;">
+<input placeholder="Minimum" type="text" class="ant-input" style="width: 100px; text-align: center;">
+<input placeholder="~" type="text" disabled="disabled" class="ant-input ant-input-disabled" style="width: 30px; border-left: 0; pointer-events: none; background-color: rgb(255, 255, 255);">
+<input placeholder="Maximum" type="text" class="ant-input" style="width: 100px; text-align: center; border-left: 0;">
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Sign Up" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Sign Up</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Sign Up" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sign Up</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
-<div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width:200px;">
+<div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
-      <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display:block;user-select:none;webkit-user-select:none;">Email</div>
+      <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Email</div>
       <ul>
         <li class="ant-select-search ant-select-search--inline">
           <div class="ant-select-search__field__wrap">
-            <input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror"> </span></div>
+            <input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
         </li>
       </ul>
-    </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width:30%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Home" class="ant-select-selection-selected-value" style="display:block;opacity:1;">Home</div></div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
-</div><span tabIndex="0" class="ant-cascader-picker" style="width:70%;"><input value="" placeholder="Select Address" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 30%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Home" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Home</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+</div><span tabindex="0" class="ant-cascader-picker" style="width: 70%;"><input value="" placeholder="Select Address" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 </span>
@@ -91,15 +91,15 @@ exports[`renders ./components/input/demo/presuffix.md correctly 1`] = `
 `;
 
 exports[`renders ./components/input/demo/search-input.md correctly 1`] = `
-<div><span class="ant-input-search ant-input-affix-wrapper ant-input-search" style="width:200px;"><input placeholder="input search text" type="text" value="" class="ant-input ant-input-search"><span class="ant-input-suffix"><i class="anticon anticon-search ant-input-search-icon"></i></span></span>
+<div><span class="ant-input-search ant-input-affix-wrapper ant-input-search" style="width: 200px;"><input placeholder="input search text" type="text" class="ant-input ant-input-search"><span class="ant-input-suffix"><i class="anticon anticon-search ant-input-search-icon"></i></span></span>
   <br>
-  <br> <span class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper ant-input-search ant-input-search-enter-button"><input placeholder="input search text" type="text" value="" class="ant-input ant-input-search ant-input-search-enter-button"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-primary ant-input-search-button"><i class="anticon anticon-search"></i></button></span></span>
+  <br> <span class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper ant-input-search ant-input-search-enter-button"><input placeholder="input search text" type="text" class="ant-input ant-input-search ant-input-search-enter-button"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-primary ant-input-search-button"><i class="anticon anticon-search"></i></button></span></span>
   <br>
-  <br> <span class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><input placeholder="input search text" type="text" size="large" value="" class="ant-input ant-input-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"><span>Search</span></button>
+  <br> <span class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><input placeholder="input search text" type="text" size="large" class="ant-input ant-input-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"><span>Search</span></button>
   </span>
   </span>
   <br>
-  <br> <span class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><input placeholder="input search text" type="text" size="large" value="" class="ant-input ant-input-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-default ant-btn-lg ant-input-search-button"><span>Custom</span></button>
+  <br> <span class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><input placeholder="input search text" type="text" size="large" class="ant-input ant-input-lg ant-input-search ant-input-search-enter-button ant-input-search-large"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-default ant-btn-lg ant-input-search-button"><span>Custom</span></button>
   </span>
   </span>
 </div>
@@ -107,12 +107,12 @@ exports[`renders ./components/input/demo/search-input.md correctly 1`] = `
 
 exports[`renders ./components/input/demo/size.md correctly 1`] = `
 <div class="components-input-demo-size">
-  <input placeholder="large size" type="text" size="large" value="" class="ant-input ant-input-lg">
-  <input placeholder="default size" type="text" value="" class="ant-input">
-  <input placeholder="small size" type="text" size="small" value="" class="ant-input ant-input-sm">
+  <input placeholder="large size" type="text" size="large" class="ant-input ant-input-lg">
+  <input placeholder="default size" type="text" class="ant-input">
+  <input placeholder="small size" type="text" size="small" class="ant-input ant-input-sm">
 </div>
 `;
 
 exports[`renders ./components/input/demo/textarea.md correctly 1`] = `<textarea placeholder="Basic usage" rows="4" class="ant-input"></textarea>`;
 
-exports[`renders ./components/input/demo/tooltip.md correctly 1`] = `<input value="" placeholder="Input a number" type="text" maxLength="25" class="ant-input" style="width:120px;">`;
+exports[`renders ./components/input/demo/tooltip.md correctly 1`] = `<input value="" placeholder="Input a number" type="text" maxlength="25" class="ant-input" style="width: 120px;">`;

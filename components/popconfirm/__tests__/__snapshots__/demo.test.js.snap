@@ -1,37 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/popconfirm/demo/basic.md correctly 1`] = `<a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/basic.md correctly 1`] = `<a href="#" class="">Delete</a>`;
 
 exports[`renders ./components/popconfirm/demo/dynamic-trigger.md correctly 1`] = `
 <div>
-  <a href="#">Delete a task</a>
+  <a href="#" class="">Delete a task</a>
   <br>
   <br> Whether directly execute：
-  <label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" checked="checked" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
   </label>
 </div>
 `;
 
-exports[`renders ./components/popconfirm/demo/local.md correctly 1`] = `<a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/local.md correctly 1`] = `<a href="#" class="">Delete</a>`;
 
 exports[`renders ./components/popconfirm/demo/placement.md correctly 1`] = `
 <div id="components-a-popconfirm-demo-placement">
-  <div style="margin-left:70px;white-space:nowrap;">
+  <div style="margin-left: 70px; white-space: nowrap;">
     <button type="button" class="ant-btn ant-btn-default"><span>TL</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>Top</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>TR</span></button>
   </div>
-  <div style="width:70px;float:left;">
+  <div style="width: 70px; float: left;">
     <button type="button" class="ant-btn ant-btn-default"><span>LT</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>Left</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>LB</span></button>
   </div>
-  <div style="width:70px;margin-left:304px;">
+  <div style="width: 70px; margin-left: 304px;">
     <button type="button" class="ant-btn ant-btn-default"><span>RT</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>Right</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>RB</span></button>
   </div>
-  <div style="margin-left:70px;clear:both;white-space:nowrap;">
+  <div style="margin-left: 70px; clear: both; white-space: nowrap;">
     <button type="button" class="ant-btn ant-btn-default"><span>BL</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>Bottom</span></button>
     <button type="button" class="ant-btn ant-btn-default"><span>BR</span></button>

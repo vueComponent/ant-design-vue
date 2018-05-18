@@ -28,7 +28,7 @@ exports[`renders ./components/collapse/demo/basic.md correctly 1`] = `
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
       <div role="tab" aria-expanded="true" class="ant-collapse-header">
         <i class="arrow"></i>This is panel header 1</div>
-      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active">
+      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active ant-motion-collapse" style="height: 0px; opacity: 0;">
         <div class="ant-collapse-content-box">
           <p>A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.</p>
         </div>
@@ -54,7 +54,7 @@ exports[`renders ./components/collapse/demo/borderless.md correctly 1`] = `
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
       <div role="tab" aria-expanded="true" class="ant-collapse-header">
         <i class="arrow"></i>This is panel header 1</div>
-      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active">
+      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active ant-motion-collapse" style="height: 0px; opacity: 0;">
         <div class="ant-collapse-content-box">
           <p>A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.</p>
         </div>
@@ -77,24 +77,24 @@ exports[`renders ./components/collapse/demo/borderless.md correctly 1`] = `
 exports[`renders ./components/collapse/demo/custom.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-borderless">
-    <div role="tablist" class="ant-collapse-item ant-collapse-item-active" style="background:#f7f7f7;border-radius:4px;margin-bottom:24px;border:0;overflow:hidden;">
+    <div role="tablist" class="ant-collapse-item ant-collapse-item-active" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
       <div role="tab" aria-expanded="true" class="ant-collapse-header">
         <i class="arrow"></i>
         This is panel header 1
         <i class="anticon anticon-question-circle-o"></i>
       </div>
-      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active">
+      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active ant-motion-collapse" style="height: 0px; opacity: 0;">
         <div class="ant-collapse-content-box">
           <p>A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.</p>
         </div>
       </div>
     </div>
-    <div role="tablist" class="ant-collapse-item" style="background:#f7f7f7;border-radius:4px;margin-bottom:24px;border:0;overflow:hidden;">
+    <div role="tablist" class="ant-collapse-item" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
       <div role="tab" class="ant-collapse-header">
         <i class="arrow"></i>This is panel header 2</div>
       <!---->
     </div>
-    <div role="tablist" class="ant-collapse-item" style="background:#f7f7f7;border-radius:4px;margin-bottom:24px;border:0;overflow:hidden;">
+    <div role="tablist" class="ant-collapse-item" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
       <div role="tab" class="ant-collapse-header">
         <i class="arrow"></i>This is panel header 3</div>
       <!---->
@@ -131,7 +131,7 @@ exports[`renders ./components/collapse/demo/noarrow.md correctly 1`] = `
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
       <div role="tab" aria-expanded="true" class="ant-collapse-header">
         <i class="arrow"></i>This is panel header with arrow icon</div>
-      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active">
+      <div role="tabpanel" class="ant-collapse-content ant-collapse-content-active ant-motion-collapse" style="height: 0px; opacity: 0;">
         <div class="ant-collapse-content-box">
           <p>A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.</p>
         </div>

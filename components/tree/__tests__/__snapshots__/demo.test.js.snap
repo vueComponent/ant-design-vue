@@ -2,22 +2,22 @@
 
 exports[`renders ./components/tree/demo/basic.md correctly 1`] = `
 <ul role="tree-node" unselectable="on" class="ant-tree">
-  <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="parent 1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="parent 1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1</span></span>
     <ul
       data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-      <li class="ant-tree-treenode-disabled"><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked ant-tree-checkbox-disabled"><span class="ant-tree-checkbox-inner"></span></span><span title="parent 1-0" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1-0</span></span>
+      <li class="ant-tree-treenode-disabled"><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked ant-tree-checkbox-disabled"><span class="ant-tree-checkbox-inner"></span></span><span title="parent 1-0" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1-0</span></span>
         <ul
           data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-disabled"><span class="ant-tree-checkbox-inner"></span></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-disabled"><span class="ant-tree-checkbox-inner"></span></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
           </li>
 </ul>
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="parent 1-1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1-1</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="parent 1-1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1-1</span></span>
   <ul
     data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-    <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title"><span style="color:#1890ff;">sss</span></span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title"><span style="color: rgb(24, 144, 255);">sss</span></span>
       </span>
     </li>
     </ul>
@@ -29,56 +29,56 @@ exports[`renders ./components/tree/demo/basic.md correctly 1`] = `
 
 exports[`renders ./components/tree/demo/basic-controlled.md correctly 1`] = `
 <ul role="tree-node" unselectable="on" class="ant-tree">
-  <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-indeterminate"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">0-0</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-indeterminate"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">0-0</span></span>
     <ul
       data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-      <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">0-0-0</span></span>
+      <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">0-0-0</span></span>
         <ul
           data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0-0" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-0-0</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0-0" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-0-0</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0-1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-0-1</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0-1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-0-1</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0-2" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-0-2</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox ant-tree-checkbox-checked"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-0-2" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-0-2</span></span>
           </li>
 </ul>
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">0-0-1</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">0-0-1</span></span>
   <ul
     data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-    <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1-0" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-1-0</span></span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1-0" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-1-0</span></span>
     </li>
-    <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1-1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-1-1</span></span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1-1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-1-1</span></span>
     </li>
-    <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1-2" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-1-2</span></span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-1-2" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-1-2</span></span>
     </li>
     </ul>
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-2" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-2</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-0-2" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-0-2</span></span>
 </li>
 </ul>
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">0-1</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">0-1</span></span>
   <!---->
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-2" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-2</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span class="ant-tree-checkbox"><span class="ant-tree-checkbox-inner"></span></span><span title="0-2" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">0-2</span></span>
 </li>
 </ul>
 `;
 
 exports[`renders ./components/tree/demo/customized-icon.md correctly 1`] = `
 <ul role="tree-node" unselectable="on" class="ant-tree">
-  <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="parent 1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-iconEle ant-tree-icon__customize"><i class="anticon anticon-smile-o"></i></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="parent 1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-iconEle ant-tree-icon__customize"><i class="anticon anticon-smile-o"></i></span>
     <span
       class="ant-tree-title">parent 1</span>
       </span>
       <ul data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-        <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal ant-tree-node-selected"><span class="ant-tree-iconEle ant-tree-icon__customize"><i class="anticon anticon-smile-o"></i></span>
+        <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal ant-tree-node-selected"><span class="ant-tree-iconEle ant-tree-icon__customize"><i class="anticon anticon-smile-o"></i></span>
           <span
             class="ant-tree-title">leaf</span>
             </span>
         </li>
-        <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-iconEle ant-tree-icon__customize"><i class="anticon anticon-frown-o"></i></span>
+        <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-iconEle ant-tree-icon__customize"><i class="anticon anticon-frown-o"></i></span>
           <span
             class="ant-tree-title">leaf</span>
             </span>
@@ -90,66 +90,65 @@ exports[`renders ./components/tree/demo/customized-icon.md correctly 1`] = `
 
 exports[`renders ./components/tree/demo/draggable.md correctly 1`] = `
 <ul role="tree-node" unselectable="on" class="draggable-tree ant-tree">
-  <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="0-0" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open draggable"><span class="ant-tree-title">0-0</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="0-0" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open draggable"><span class="ant-tree-title">0-0</span></span>
     <ul
       data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-      <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="0-0-0" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open draggable"><span class="ant-tree-title">0-0-0</span></span>
+      <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="0-0-0" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open draggable"><span class="ant-tree-title">0-0-0</span></span>
         <ul
           data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-0-0" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-0-0</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-0-0" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-0-0</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-0-1" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-0-1</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-0-1" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-0-1</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-0-2" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-0-2</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-0-2" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-0-2</span></span>
           </li>
 </ul>
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="0-0-1" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close draggable"><span class="ant-tree-title">0-0-1</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="0-0-1" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close draggable"><span class="ant-tree-title">0-0-1</span></span>
   <!---->
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-2" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-2</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-0-2" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-0-2</span></span>
 </li>
 </ul>
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="0-1" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close draggable"><span class="ant-tree-title">0-1</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="0-1" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close draggable"><span class="ant-tree-title">0-1</span></span>
   <!---->
 </li>
-<li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-2" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-2</span></span>
+<li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="0-2" draggable="true" aria-grabbed="true" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"><span class="ant-tree-title">0-2</span></span>
 </li>
 </ul>
 `;
 
 exports[`renders ./components/tree/demo/dynamic.md correctly 1`] = `
 <ul role="tree-node" unselectable="on" class="ant-tree">
-  <li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="Expand to load" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">Expand to load</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="Expand to load" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">Expand to load</span></span>
   </li>
-  <li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="Expand to load" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">Expand to load</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="Expand to load" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">Expand to load</span></span>
   </li>
-  <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="Tree Node" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">Tree Node</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="Tree Node" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">Tree Node</span></span>
   </li>
 </ul>
 `;
 
 exports[`renders ./components/tree/demo/line.md correctly 1`] = `
 <ul role="tree-node" unselectable="on" class="ant-tree ant-tree-show-line">
-  <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title"><span style="color:#1890ff;">parent 1</span></span>
+  <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title"><span style="color: rgb(24, 144, 255);">parent 1</span></span>
     </span>
     <ul data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
-      <li><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="parent 1-0" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1-0</span></span>
-        <ul data-expanded="true"
-          class="ant-tree-child-tree ant-tree-child-tree-open">
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
+      <li class=""><span class="ant-tree-switcher ant-tree-switcher_open"></span><span title="parent 1-0" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><span class="ant-tree-title">parent 1-0</span></span>
+        <ul data-expanded="true" class="ant-tree-child-tree ant-tree-child-tree-open">
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
           </li>
-          <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
+          <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="leaf" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title">leaf</span></span>
           </li>
         </ul>
       </li>
-      <li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="parent 1-1" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">parent 1-1</span></span>
+      <li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="parent 1-1" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">parent 1-1</span></span>
         <!---->
       </li>
-      <li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="parent 1-2" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">parent 1-2</span></span>
+      <li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="parent 1-2" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title">parent 1-2</span></span>
         <!---->
       </li>
     </ul>
@@ -158,27 +157,27 @@ exports[`renders ./components/tree/demo/line.md correctly 1`] = `
 `;
 
 exports[`renders ./components/tree/demo/search.md correctly 1`] = `
-<div><span class="ant-input-search ant-input-affix-wrapper ant-input-search" style="margin-bottom:8px;"><input placeholder="Search" type="text" value="" class="ant-input ant-input-search"><span class="ant-input-suffix"><i class="anticon anticon-search ant-input-search-icon"></i></span></span>
+<div><span class="ant-input-search ant-input-affix-wrapper ant-input-search" style="margin-bottom: 8px;"><input placeholder="Search" type="text" class="ant-input ant-input-search"><span class="ant-input-suffix"><i class="anticon anticon-search ant-input-search-icon"></i></span></span>
   <ul role="tree-node" unselectable="on" class="ant-tree">
-    <li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title"><span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title"><span>
         
-        <span style="color:#f50;"></span> 0-0
+        <span style="color: rgb(255, 85, 0);"></span> 0-0
       </span>
       </span>
       </span>
       <!---->
     </li>
-    <li><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title"><span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher_close"></span><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"><span class="ant-tree-title"><span>
         
-        <span style="color:#f50;"></span> 0-1
+        <span style="color: rgb(255, 85, 0);"></span> 0-1
       </span>
       </span>
       </span>
       <!---->
     </li>
-    <li><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="" draggable="false" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title"><span>
+    <li class=""><span class="ant-tree-switcher ant-tree-switcher-noop"></span><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><span class="ant-tree-title"><span>
         
-        <span style="color:#f50;"></span> 0-2
+        <span style="color: rgb(255, 85, 0);"></span> 0-2
       </span>
       </span>
       </span>

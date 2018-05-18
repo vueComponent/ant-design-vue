@@ -11,10 +11,6 @@ There are two built-in themes: 'light' and 'dark'. The default value is 'light'.
 ```html
 <template>
 <div>
-  <md>
-  ## 主题
-  内建了两套主题 `light|dark`，默认 `light`。
-  </md>
   <a-checkbox @change="changeTheme" /> Change Theme
   <br />
   <br />

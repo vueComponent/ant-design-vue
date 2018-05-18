@@ -2,9 +2,6 @@
 
 exports[`renders ./components/tabs/demo/basic.md correctly 1`] = `
 <div>
-  <md>
-    ## 基本 默认选中第一项。
-  </md>
   <div class="ant-tabs ant-tabs-top ant-tabs-line">
     <div role="tablist" tabIndex="0" class="ant-tabs-bar">
       <div class="ant-tabs-extra-content" style="float:right;"></div>

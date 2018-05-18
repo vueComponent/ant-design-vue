@@ -20,6 +20,10 @@ global.cancelAnimationFrame = function (cb) {
   return clearTimeout(cb, 0)
 }
 
+const mockMath = Object.create(global.Math)
+mockMath.random = () => 0.5
+global.Math = mockMath
+
 Vue.component('transition-group', {
   props: ['tag'],
   render (createElement) {

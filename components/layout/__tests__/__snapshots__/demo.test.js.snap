@@ -10,7 +10,7 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
   <div class="ant-layout">
     <div class="ant-layout-header">Header</div>
     <div class="ant-layout">
-      <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;">
+      <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </div>
       <div class="ant-layout-content">Content</div>
@@ -21,14 +21,14 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
     <div class="ant-layout-header">Header</div>
     <div class="ant-layout">
       <div class="ant-layout-content">Content</div>
-      <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;">
+      <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </div>
     </div>
     <div class="ant-layout-footer">Footer</div>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;">
+    <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
       <div class="ant-layout-sider-children">Sider</div>
     </div>
     <div class="ant-layout">
@@ -41,25 +41,25 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
 `;
 
 exports[`renders ./components/layout/demo/custom-trigger.md correctly 1`] = `
-<div id="components-layout-demo-custom-trigger" class="ant-layout">
-  <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;">
+<div class="ant-layout" id="components-layout-demo-custom-trigger">
+  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
-      <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark">
-        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+      <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0">
+        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
           <i class="anticon anticon-user"></i> <span>nav 1</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-video-camera"></i> <span>nav 2</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-upload"></i> <span>nav 3</span></li>
       </ul>
     </div>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-header" style="background:#fff;padding:0;">
+    <div class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;">
       <i class="trigger anticon anticon-menu-fold"></i>
     </div>
-    <div class="ant-layout-content" style="margin:24px 16px;padding:24px;background:#fff;min-height:280px;">
+    <div class="ant-layout-content" style="margin: 24px 16px; padding: 24px; background: rgb(255, 255, 255); min-height: 280px;">
       Content
     </div>
   </div>
@@ -67,58 +67,58 @@ exports[`renders ./components/layout/demo/custom-trigger.md correctly 1`] = `
 `;
 
 exports[`renders ./components/layout/demo/fixed.md correctly 1`] = `
-<div id="components-layout-demo-fixed" class="ant-layout">
-  <div class="ant-layout-header" style="position:fixed;width:100%;">
+<div class="ant-layout" id="components-layout-demo-fixed">
+  <div class="ant-layout-header" style="position: fixed; width: 100%;">
     <div class="logo"></div>
-    <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height:64px;">
+    <ul class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0" style="line-height: 64px;">
       <li role="menuitem" class="ant-menu-item">nav 1</li>
       <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected">nav 2</li>
       <li role="menuitem" class="ant-menu-item">nav 3</li>
     </ul>
   </div>
-  <div class="ant-layout-content" style="padding:0 50px;margin-top:64px;">
-    <div class="ant-breadcrumb" style="margin:16px 0;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span>
+  <div class="ant-layout-content" style="padding: 0px 50px; margin-top: 64px;">
+    <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">App</span>
       <span
         class="ant-breadcrumb-separator">/</span>
         </span>
     </div>
-    <div style="background:#fff;padding:24px;min-height:380px;">Content</div>
+    <div style="background: rgb(255, 255, 255); padding: 24px; min-height: 380px;">Content</div>
   </div>
-  <div class="ant-layout-footer" style="text-align:center;">
+  <div class="ant-layout-footer" style="text-align: center;">
     Ant Design ©2016 Created by Ant UED
   </div>
 </div>
 `;
 
 exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
-<div id="components-layout-demo-fixed-sider" class="ant-layout">
-  <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;overflow:auto;height:100vh;position:fixed;left:0;">
+<div class="ant-layout" id="components-layout-demo-fixed-sider">
+  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; position: fixed; left: 0px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
-      <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark">
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+      <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-user"></i> <span class="nav-text">nav 1</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-video-camera"></i> <span class="nav-text">nav 2</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-upload"></i> <span class="nav-text">nav 3</span></li>
-        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
           <i class="anticon anticon-bar-chart"></i> <span class="nav-text">nav 4</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-cloud-o"></i> <span class="nav-text">nav 5</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-appstore-o"></i> <span class="nav-text">nav 6</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-team"></i> <span class="nav-text">nav 7</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-shop"></i> <span class="nav-text">nav 8</span></li>
       </ul>
     </div>
   </div>
-  <div class="ant-layout" style="margin-left:200px;">
-    <div class="ant-layout-header" style="background:#fff;padding:0;"></div>
-    <div class="ant-layout-content" style="margin:24px 16px 0;overflow:initial;">
-      <div style="padding:24px;background:#fff;text-align:center;">
+  <div class="ant-layout" style="margin-left: 200px;">
+    <div class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></div>
+    <div class="ant-layout-content" style="margin: 24px 16px 0px; overflow: initial;">
+      <div style="padding: 24px; background: rgb(255, 255, 255); text-align: center;">
         ...
         <br> Really
         <br>...
@@ -169,7 +169,7 @@ exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
         <br> content
       </div>
     </div>
-    <div class="ant-layout-footer" style="text-align:center;">
+    <div class="ant-layout-footer" style="text-align: center;">
       Ant Design ©2016 Created by Ant UED
     </div>
   </div>
@@ -177,30 +177,30 @@ exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
 `;
 
 exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
-<div id="components-layout-demo-responsive" class="ant-layout">
-  <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;">
+<div class="ant-layout" id="components-layout-demo-responsive">
+  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
-      <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark">
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+      <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-user"></i> <span class="nav-text">nav 1</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-video-camera"></i> <span class="nav-text">nav 2</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-upload"></i> <span class="nav-text">nav 3</span></li>
-        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
           <i class="anticon anticon-user"></i> <span class="nav-text">nav 4</span></li>
       </ul>
     </div>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-header" style="background:#fff;padding:0;"></div>
-    <div class="ant-layout-content" style="margin:24px 16px 0;">
-      <div style="padding:24px;background:#fff;min-height:360px;">
+    <div class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></div>
+    <div class="ant-layout-content" style="margin: 24px 16px 0px;">
+      <div style="padding: 24px; background: rgb(255, 255, 255); min-height: 360px;">
         content
       </div>
     </div>
-    <div class="ant-layout-footer" style="text-align:center;">
+    <div class="ant-layout-footer" style="text-align: center;">
       Ant Design ©2016 Created by Ant UED
     </div>
   </div>
@@ -208,45 +208,45 @@ exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
 `;
 
 exports[`renders ./components/layout/demo/side.md correctly 1`] = `
-<div id="components-layout-demo-side" class="ant-layout" style="min-height:100vh;">
-  <div class="ant-layout-sider ant-layout-sider-has-trigger" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;">
+<div class="ant-layout" id="components-layout-demo-side" style="min-height: 100vh;">
+  <div class="ant-layout-sider ant-layout-sider-has-trigger" style="max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
-      <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark">
-        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:24px;">
+      <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0">
+        <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
           <i class="anticon anticon-pie-chart"></i> <span>Option 1</span></li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-desktop"></i> <span>Option 2</span></li>
         <li class="ant-menu-submenu ant-menu-submenu-inline">
-          <div aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-user"></i><span>User</span></span>
+          <div aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-user"></i><span>User</span></span>
             <i class="ant-menu-submenu-arrow"></i>
           </div>
           <!---->
         </li>
         <li class="ant-menu-submenu ant-menu-submenu-inline">
-          <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-team"></i><span>Team</span></span>
+          <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-team"></i><span>Team</span></span>
             <i class="ant-menu-submenu-arrow"></i>
           </div>
           <!---->
         </li>
-        <li role="menuitem" class="ant-menu-item" style="padding-left:24px;">
+        <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
           <i class="anticon anticon-file"></i> <span>File</span></li>
       </ul>
     </div>
-    <div class="ant-layout-sider-trigger" style="width:200px;">
+    <div class="ant-layout-sider-trigger" style="width: 200px;">
       <i class="anticon anticon-left"></i>
     </div>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-header" style="background:#fff;padding:0;"></div>
-    <div class="ant-layout-content" style="margin:0 16px;">
-      <div class="ant-breadcrumb" style="margin:16px 0;"><span><span class="ant-breadcrumb-link">User</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">Bill</span><span class="ant-breadcrumb-separator">/</span></span>
+    <div class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></div>
+    <div class="ant-layout-content" style="margin: 0px 16px;">
+      <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">User</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">Bill</span><span class="ant-breadcrumb-separator">/</span></span>
       </div>
-      <div style="padding:24px;background:#fff;min-height:360px;">
+      <div style="padding: 24px; background: rgb(255, 255, 255); min-height: 360px;">
         Bill is a cat.
       </div>
     </div>
-    <div class="ant-layout-footer" style="text-align:center;">
+    <div class="ant-layout-footer" style="text-align: center;">
       Ant Design ©2016 Created by Ant UED
     </div>
   </div>
@@ -254,68 +254,68 @@ exports[`renders ./components/layout/demo/side.md correctly 1`] = `
 `;
 
 exports[`renders ./components/layout/demo/top.md correctly 1`] = `
-<div id="components-layout-demo-top" class="layout ant-layout">
+<div class="layout ant-layout" id="components-layout-demo-top">
   <div class="ant-layout-header">
     <div class="logo"></div>
-    <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height:64px;">
+    <ul class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0" style="line-height: 64px;">
       <li role="menuitem" class="ant-menu-item">nav 1</li>
       <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected">nav 2</li>
       <li role="menuitem" class="ant-menu-item">nav 3</li>
     </ul>
   </div>
-  <div class="ant-layout-content" style="padding:0 50px;">
-    <div class="ant-breadcrumb" style="margin:16px 0;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span>
+  <div class="ant-layout-content" style="padding: 0px 50px;">
+    <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">App</span>
       <span
         class="ant-breadcrumb-separator">/</span>
         </span>
     </div>
-    <div style="background:#fff;padding:24px;min-height:280px;">Content</div>
+    <div style="background: rgb(255, 255, 255); padding: 24px; min-height: 280px;">Content</div>
   </div>
-  <div class="ant-layout-footer" style="text-align:center;">
+  <div class="ant-layout-footer" style="text-align: center;">
     Ant Design ©2016 Created by Ant UED
   </div>
 </div>
 `;
 
 exports[`renders ./components/layout/demo/top-side.md correctly 1`] = `
-<div id="components-layout-demo-top-side" class="ant-layout">
+<div class="ant-layout" id="components-layout-demo-top-side">
   <div class="header ant-layout-header">
     <div class="logo"></div>
-    <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height:64px;">
+    <ul class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0" style="line-height: 64px;">
       <li role="menuitem" class="ant-menu-item">nav 1</li>
       <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected">nav 2</li>
       <li role="menuitem" class="ant-menu-item">nav 3</li>
     </ul>
   </div>
-  <div class="ant-layout-content" style="padding:0 50px;">
-    <div class="ant-breadcrumb" style="margin:16px 0;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span>
+  <div class="ant-layout-content" style="padding: 0px 50px;">
+    <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">App</span>
       <span
         class="ant-breadcrumb-separator">/</span>
         </span>
     </div>
-    <div class="ant-layout" style="padding:24px 0;background:#fff;">
-      <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;background:#fff;">
+    <div class="ant-layout" style="padding: 24px 0px; background: rgb(255, 255, 255);">
+      <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
         <div class="ant-layout-sider-children">
-          <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" style="height:100%;">
+          <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" role="menu" aria-activedescendant="" tabindex="0" style="height: 100%;">
             <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">
-              <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-user"></i>subnav 1</span>
+              <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-user"></i>subnav 1</span>
                 <i class="ant-menu-submenu-arrow"></i>
               </div>
-              <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
-                <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:48px;">option1</li>
-                <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">option2</li>
-                <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">option3</li>
-                <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">option4</li>
+              <ul class="ant-menu ant-menu-sub ant-menu-inline" role="menu" aria-activedescendant="">
+                <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left: 48px;">option1</li>
+                <li role="menuitem" class="ant-menu-item" style="padding-left: 48px;">option2</li>
+                <li role="menuitem" class="ant-menu-item" style="padding-left: 48px;">option3</li>
+                <li role="menuitem" class="ant-menu-item" style="padding-left: 48px;">option4</li>
               </ul>
             </li>
             <li class="ant-menu-submenu ant-menu-submenu-inline">
-              <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-laptop"></i>subnav 2</span>
+              <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-laptop"></i>subnav 2</span>
                 <i class="ant-menu-submenu-arrow"></i>
               </div>
               <!---->
             </li>
             <li class="ant-menu-submenu ant-menu-submenu-inline">
-              <div aria-owns="sub3$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-notification"></i>subnav 3</span>
+              <div aria-owns="sub3$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-notification"></i>subnav 3</span>
                 <i class="ant-menu-submenu-arrow"></i>
               </div>
               <!---->
@@ -323,50 +323,50 @@ exports[`renders ./components/layout/demo/top-side.md correctly 1`] = `
           </ul>
         </div>
       </div>
-      <div class="ant-layout-content" style="padding:0 24px;min-height:280px;">
+      <div class="ant-layout-content" style="padding: 0px 24px; min-height: 280px;">
         Content
       </div>
     </div>
   </div>
-  <div class="ant-layout-footer" style="text-align:center;">
+  <div class="ant-layout-footer" style="text-align: center;">
     Ant Design ©2016 Created by Ant UED
   </div>
 </div>
 `;
 
 exports[`renders ./components/layout/demo/top-side-2.md correctly 1`] = `
-<div id="components-layout-demo-top-side-2" class="ant-layout">
+<div class="ant-layout" id="components-layout-demo-top-side-2">
   <div class="header ant-layout-header">
     <div class="logo"></div>
-    <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height:64px;">
+    <ul class="ant-menu  ant-menu-root ant-menu-horizontal ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0" style="line-height: 64px;">
       <li role="menuitem" class="ant-menu-item">nav 1</li>
       <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected">nav 2</li>
       <li role="menuitem" class="ant-menu-item">nav 3</li>
     </ul>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-sider" style="flex:0 0 200px;max-width:200px;min-width:200px;width:200px;background:#fff;">
+    <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
       <div class="ant-layout-sider-children">
-        <ul role="menu" aria-activedescendant="" tabIndex="0" class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" style="height:100%;border-right:0;">
+        <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-light" role="menu" aria-activedescendant="" tabindex="0" style="height: 100%; border-right: 0;">
           <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">
-            <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-user"></i>subnav 1</span>
+            <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-user"></i>subnav 1</span>
               <i class="ant-menu-submenu-arrow"></i>
             </div>
-            <ul role="menu" aria-activedescendant="" class="ant-menu ant-menu-sub ant-menu-inline">
-              <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left:48px;">option1</li>
-              <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">option2</li>
-              <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">option3</li>
-              <li role="menuitem" class="ant-menu-item" style="padding-left:48px;">option4</li>
+            <ul class="ant-menu ant-menu-sub ant-menu-inline" role="menu" aria-activedescendant="">
+              <li role="menuitem" aria-selected="true" class="ant-menu-item ant-menu-item-selected" style="padding-left: 48px;">option1</li>
+              <li role="menuitem" class="ant-menu-item" style="padding-left: 48px;">option2</li>
+              <li role="menuitem" class="ant-menu-item" style="padding-left: 48px;">option3</li>
+              <li role="menuitem" class="ant-menu-item" style="padding-left: 48px;">option4</li>
             </ul>
           </li>
           <li class="ant-menu-submenu ant-menu-submenu-inline">
-            <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-laptop"></i>subnav 2</span>
+            <div aria-owns="sub2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-laptop"></i>subnav 2</span>
               <i class="ant-menu-submenu-arrow"></i>
             </div>
             <!---->
           </li>
           <li class="ant-menu-submenu ant-menu-submenu-inline">
-            <div aria-owns="sub3$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left:24px;"><span><i class="anticon anticon-notification"></i>subnav 3</span>
+            <div aria-owns="sub3$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-notification"></i>subnav 3</span>
               <i class="ant-menu-submenu-arrow"></i>
             </div>
             <!---->
@@ -374,13 +374,13 @@ exports[`renders ./components/layout/demo/top-side-2.md correctly 1`] = `
         </ul>
       </div>
     </div>
-    <div class="ant-layout" style="padding:0 24px 24px;">
-      <div class="ant-breadcrumb" style="margin:16px 0;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span>
+    <div class="ant-layout" style="padding: 0px 24px 24px;">
+      <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">App</span>
         <span
           class="ant-breadcrumb-separator">/</span>
           </span>
       </div>
-      <div class="ant-layout-content" style="background:#fff;padding:24px;margin:0;min-height:280px;">
+      <div class="ant-layout-content" style="background: rgb(255, 255, 255); padding: 24px; margin: 0px; min-height: 280px;">
         Content
       </div>
     </div>

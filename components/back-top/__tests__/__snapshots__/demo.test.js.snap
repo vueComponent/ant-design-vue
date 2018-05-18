@@ -4,7 +4,7 @@ exports[`renders ./components/back-top/demo/basic.md correctly 1`] = `
 <div>
   <!---->
   Scroll down to see the bottom-right
-  <strong style="color:rgba(64, 64, 64, 0.6);"> gray </strong> button.
+  <strong style="color: rgba(64, 64, 64, 0.6);"> gray </strong> button.
 </div>
 `;
 
@@ -12,6 +12,6 @@ exports[`renders ./components/back-top/demo/custom.md correctly 1`] = `
 <div id="components-back-top-demo-custom">
   <!---->
   Scroll down to see the bottom-right
-  <strong style="color:#1088e9;"> blue </strong> button.
+  <strong style="color: rgb(16, 136, 233);"> blue </strong> button.
 </div>
 `;

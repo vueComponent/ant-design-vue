@@ -2,25 +2,25 @@
 
 exports[`renders ./components/pagination/demo/basic.md correctly 1`] = `
 <ul unselectable="unselectable" class="ant-pagination">
-  <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+  <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1">
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1">
     <a>1</a>
   </li>
-  <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2 ant-pagination-item-active">
+  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2 ant-pagination-item-active">
     <a>2</a>
   </li>
-  <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+  <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
     <a>3</a>
   </li>
-  <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+  <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
     <a>4</a>
   </li>
-  <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+  <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
     <a>5</a>
   </li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a class="ant-pagination-item-link"></a>
   </li>
   <!---->
@@ -30,80 +30,80 @@ exports[`renders ./components/pagination/demo/basic.md correctly 1`] = `
 exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+    <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3 ant-pagination-item-active">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3 ant-pagination-item-active">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
       <a>5</a>
     </li>
-    <li title="Next 5 Pages" tabIndex="0" class="ant-pagination-jump-next">
+    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="50" tabIndex="0" class="ant-pagination-item ant-pagination-item-50">
+    <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50">
       <a>50</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
-            <div title="10 / page" class="ant-select-selection-selected-value" style="display:block;opacity:1;">10 / page</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+            <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
     </li>
   </ul>
   <br>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+    <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4 ant-pagination-item-active">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4 ant-pagination-item-active">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
       <a>5</a>
     </li>
-    <li title="6" tabIndex="0" class="ant-pagination-item ant-pagination-item-6 ant-pagination-item-before-jump-next">
+    <li title="6" tabindex="0" class="ant-pagination-item ant-pagination-item-6 ant-pagination-item-before-jump-next">
       <a>6</a>
     </li>
-    <li title="Next 5 Pages" tabIndex="0" class="ant-pagination-jump-next">
+    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="25" tabIndex="0" class="ant-pagination-item ant-pagination-item-25">
+    <li title="25" tabindex="0" class="ant-pagination-item ant-pagination-item-25">
       <a>25</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
-            <div title="20 / page" class="ant-select-selection-selected-value" style="display:block;opacity:1;">20 / page</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+            <div title="20 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">20 / page</div>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
     </li>
   </ul>
@@ -112,25 +112,25 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
 
 exports[`renders ./components/pagination/demo/controlled.md correctly 1`] = `
 <ul unselectable="unselectable" class="ant-pagination">
-  <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+  <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1">
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1">
     <a>1</a>
   </li>
-  <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
     <a>2</a>
   </li>
-  <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3 ant-pagination-item-active">
+  <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3 ant-pagination-item-active">
     <a>3</a>
   </li>
-  <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+  <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
     <a>4</a>
   </li>
-  <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+  <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
     <a>5</a>
   </li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a class="ant-pagination-item-link"></a>
   </li>
   <!---->
@@ -142,32 +142,32 @@ exports[`renders ./components/pagination/demo/custom-changer.md correctly 1`] = 
   <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
     <a>1</a>
   </li>
-  <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
     <a>2</a>
   </li>
-  <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+  <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
     <a>3</a>
   </li>
-  <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+  <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
     <a>4</a>
   </li>
-  <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+  <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
     <a>5</a>
   </li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a class="ant-pagination-item-link"></a>
   </li>
   <li class="ant-pagination-options">
     <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
-      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="[object Object],[object Object],[object Object]" class="ant-select-selection-selected-value" style="display:block;opacity:1;"><span>10条/页</span>
+          <div title="[object Object],[object Object],[object Object]" class="ant-select-selection-selected-value" style="display: block; opacity: 1;"><span>10条/页</span>
             <!---->
           </div>
-        </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+        </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
   </li>
 </ul>
@@ -178,28 +178,28 @@ exports[`renders ./components/pagination/demo/itemRender.md correctly 1`] = `
   <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
     <a>Previous</a>
   </li>
-  <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
     <a>1</a>
   </li>
-  <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
     <a>2</a>
   </li>
-  <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+  <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
     <a>3</a>
   </li>
-  <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+  <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
     <a>4</a>
   </li>
-  <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
+  <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
     <a>5</a>
   </li>
-  <li title="Next 5 Pages" tabIndex="0" class="ant-pagination-jump-next">
+  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="50" tabIndex="0" class="ant-pagination-item ant-pagination-item-50">
+  <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50">
     <a>50</a>
   </li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a>Next</a>
   </li>
   <!---->
@@ -208,36 +208,36 @@ exports[`renders ./components/pagination/demo/itemRender.md correctly 1`] = `
 
 exports[`renders ./components/pagination/demo/jump.md correctly 1`] = `
 <ul unselectable="unselectable" class="ant-pagination">
-  <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+  <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1">
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1">
     <a>1</a>
   </li>
-  <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2 ant-pagination-item-active">
+  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2 ant-pagination-item-active">
     <a>2</a>
   </li>
-  <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+  <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
     <a>3</a>
   </li>
-  <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+  <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
     <a>4</a>
   </li>
-  <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
+  <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
     <a>5</a>
   </li>
-  <li title="Next 5 Pages" tabIndex="0" class="ant-pagination-jump-next">
+  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="50" tabIndex="0" class="ant-pagination-item ant-pagination-item-50">
+  <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50">
     <a>50</a>
   </li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a class="ant-pagination-item-link"></a>
   </li>
   <li class="ant-pagination-options">
     <div class="ant-pagination-options-quick-jumper">Goto
-      <input type="text" value="">
+      <input type="text">
     </div>
   </li>
 </ul>
@@ -249,22 +249,22 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
     <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
       <a>5</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <!---->
@@ -273,33 +273,33 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
     <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
       <a>5</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
       <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-pagination-options-size-changer">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabIndex="0" class="ant-select-selection ant-select-selection--single">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
-            <div title="10 / page" class="ant-select-selection-selected-value" style="display:block;opacity:1;">10 / page</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow" style="user-select:none;webkit-user-select:none;"><b></b></span></div>
+            <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
       <div class="ant-pagination-options-quick-jumper">Goto
-        <input type="text" value="">
+        <input type="text">
       </div>
     </li>
   </ul>
@@ -308,22 +308,22 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
     <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
       <a>5</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <!---->
@@ -333,37 +333,37 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
 
 exports[`renders ./components/pagination/demo/more.md correctly 1`] = `
 <ul unselectable="unselectable" class="ant-pagination">
-  <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+  <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1">
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1">
     <a>1</a>
   </li>
-  <li title="Previous 5 Pages" tabIndex="0" class="ant-pagination-jump-prev">
+  <li title="Previous 5 Pages" tabindex="0" class="ant-pagination-jump-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4 ant-pagination-item-after-jump-prev">
+  <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4 ant-pagination-item-after-jump-prev">
     <a>4</a>
   </li>
-  <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+  <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
     <a>5</a>
   </li>
-  <li title="6" tabIndex="0" class="ant-pagination-item ant-pagination-item-6 ant-pagination-item-active">
+  <li title="6" tabindex="0" class="ant-pagination-item ant-pagination-item-6 ant-pagination-item-active">
     <a>6</a>
   </li>
-  <li title="7" tabIndex="0" class="ant-pagination-item ant-pagination-item-7">
+  <li title="7" tabindex="0" class="ant-pagination-item ant-pagination-item-7">
     <a>7</a>
   </li>
-  <li title="8" tabIndex="0" class="ant-pagination-item ant-pagination-item-8 ant-pagination-item-before-jump-next">
+  <li title="8" tabindex="0" class="ant-pagination-item ant-pagination-item-8 ant-pagination-item-before-jump-next">
     <a>8</a>
   </li>
-  <li title="Next 5 Pages" tabIndex="0" class="ant-pagination-jump-next">
+  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
     <a class="ant-pagination-item-link"></a>
   </li>
-  <li title="50" tabIndex="0" class="ant-pagination-item ant-pagination-item-50">
+  <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50">
     <a>50</a>
   </li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a class="ant-pagination-item-link"></a>
   </li>
   <!---->
@@ -372,12 +372,12 @@ exports[`renders ./components/pagination/demo/more.md correctly 1`] = `
 
 exports[`renders ./components/pagination/demo/simple.md correctly 1`] = `
 <ul class="ant-pagination ant-pagination-simple">
-  <li title="Previous Page" tabIndex="0" class=" ant-pagination-prev">
+  <li title="Previous Page" tabindex="0" class=" ant-pagination-prev">
     <a class="ant-pagination-item-link"></a>
   </li>
   <li title="2/5" class="ant-pagination-simple-pager">
-    <input type="text" size="3" value="2"><span class="ant-pagination-slash">／</span>5</li>
-  <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <input type="text" size="3"><span class="ant-pagination-slash">／</span>5</li>
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
     <a class="ant-pagination-item-link"></a>
   </li>
 </ul>
@@ -390,22 +390,22 @@ exports[`renders ./components/pagination/demo/total.md correctly 1`] = `
     <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
       <a>5</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <!---->
@@ -416,22 +416,22 @@ exports[`renders ./components/pagination/demo/total.md correctly 1`] = `
     <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
       <a class="ant-pagination-item-link"></a>
     </li>
-    <li title="1" tabIndex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
       <a>1</a>
     </li>
-    <li title="2" tabIndex="0" class="ant-pagination-item ant-pagination-item-2">
+    <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
       <a>2</a>
     </li>
-    <li title="3" tabIndex="0" class="ant-pagination-item ant-pagination-item-3">
+    <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
       <a>3</a>
     </li>
-    <li title="4" tabIndex="0" class="ant-pagination-item ant-pagination-item-4">
+    <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
       <a>4</a>
     </li>
-    <li title="5" tabIndex="0" class="ant-pagination-item ant-pagination-item-5">
+    <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
       <a>5</a>
     </li>
-    <li title="Next Page" tabIndex="0" class=" ant-pagination-next">
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next">
       <a class="ant-pagination-item-link"></a>
     </li>
     <!---->

@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 // Vue.config.silent = true
 
 /* eslint-disable global-require */
@@ -19,4 +19,11 @@ global.requestAnimationFrame = function (cb) {
 global.cancelAnimationFrame = function (cb) {
   return clearTimeout(cb, 0)
 }
+
+Vue.component('transition-group', {
+  props: ['tag'],
+  render (createElement) {
+    return null
+  },
+})
 

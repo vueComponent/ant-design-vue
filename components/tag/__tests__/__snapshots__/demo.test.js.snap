@@ -2,14 +2,14 @@
 
 exports[`renders ./components/tag/demo/basic.md correctly 1`] = `
 <div>
-  <div class="ant-tag" style="background-color:null;">Tag 1</div>
-  <div class="ant-tag" style="background-color:null;">
+  <div class="ant-tag ant-tag-zoom-enter">Tag 1</div>
+  <div class="ant-tag ant-tag-zoom-enter">
     <a href="https://github.com/vueComponent/ant-design">Link</a>
   </div>
-  <div class="ant-tag" style="background-color:null;">Tag 2
+  <div class="ant-tag ant-tag-zoom-enter">Tag 2
     <i class="anticon anticon-cross"></i>
   </div>
-  <div class="ant-tag" style="background-color:null;">Prevent Default
+  <div class="ant-tag ant-tag-zoom-enter">Prevent Default
     <i class="anticon anticon-cross"></i>
   </div>
 </div>
@@ -25,47 +25,47 @@ exports[`renders ./components/tag/demo/checkable.md correctly 1`] = `
 
 exports[`renders ./components/tag/demo/colorful.md correctly 1`] = `
 <div>
-  <h4 style="margin-bottom:16px;">Presets:</h4>
+  <h4 style="margin-bottom: 16px;">Presets:</h4>
   <div>
-    <div class="ant-tag ant-tag-pink" style="background-color:null;">pink</div>
-    <div class="ant-tag ant-tag-red" style="background-color:null;">red</div>
-    <div class="ant-tag ant-tag-orange" style="background-color:null;">orange</div>
-    <div class="ant-tag ant-tag-green" style="background-color:null;">green</div>
-    <div class="ant-tag ant-tag-cyan" style="background-color:null;">cyan</div>
-    <div class="ant-tag ant-tag-blue" style="background-color:null;">blue</div>
-    <div class="ant-tag ant-tag-purple" style="background-color:null;">purple</div>
+    <div class="ant-tag ant-tag-pink ant-tag-zoom-enter">pink</div>
+    <div class="ant-tag ant-tag-red ant-tag-zoom-enter">red</div>
+    <div class="ant-tag ant-tag-orange ant-tag-zoom-enter">orange</div>
+    <div class="ant-tag ant-tag-green ant-tag-zoom-enter">green</div>
+    <div class="ant-tag ant-tag-cyan ant-tag-zoom-enter">cyan</div>
+    <div class="ant-tag ant-tag-blue ant-tag-zoom-enter">blue</div>
+    <div class="ant-tag ant-tag-purple ant-tag-zoom-enter">purple</div>
   </div>
-  <h4 style="margin:'16px 0';">Custom:</h4>
+  <h4>Custom:</h4>
   <div>
-    <div class="ant-tag ant-tag-has-color" style="background-color:#f50;">#f50</div>
-    <div class="ant-tag ant-tag-has-color" style="background-color:#2db7f5;">#2db7f5</div>
-    <div class="ant-tag ant-tag-has-color" style="background-color:#87d068;">#87d068</div>
-    <div class="ant-tag ant-tag-has-color" style="background-color:#108ee9;">#108ee9</div>
+    <div class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(255, 85, 0);">#f50</div>
+    <div class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(45, 183, 245);">#2db7f5</div>
+    <div class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(135, 208, 104);">#87d068</div>
+    <div class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(16, 142, 233);">#108ee9</div>
   </div>
 </div>
 `;
 
 exports[`renders ./components/tag/demo/control.md correctly 1`] = `
 <div>
-  <div class="ant-tag" style="background-color:null;">
+  <div class="ant-tag ant-tag-zoom-enter">
     Unremovable
   </div>
-  <div class="ant-tag" style="background-color:null;">
+  <div class="ant-tag ant-tag-zoom-enter">
     Tag 2
     <i class="anticon anticon-cross"></i>
   </div>
-  <div class="ant-tag" style="background-color:null;">
+  <div class="ant-tag ant-tag-zoom-enter">
     Tag 3Tag 3Tag 3Tag 3...
     <i class="anticon anticon-cross"></i>
   </div>
-  <div class="ant-tag" style="background-color:null;background:#fff;border-style:dashed;">
+  <div class="ant-tag ant-tag-zoom-enter" style="border-style: dashed; background: rgb(255, 255, 255);">
     <i class="anticon anticon-plus"></i> New Tag
   </div>
 </div>
 `;
 
 exports[`renders ./components/tag/demo/hot-tags.md correctly 1`] = `
-<div><strong style="margin-right:8;">Categories:</strong>
+<div><strong>Categories:</strong>
   <div class="ant-tag ant-tag-checkable">
     Movies
   </div>

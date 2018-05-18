@@ -1,107 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/upload/demo/avatar.md correctly 1`] = `<span class="avatar-uploader"><div class="ant-upload ant-upload-select ant-upload-select-picture-card" style="display:;"><!----></div></span>`;
+exports[`renders ./components/upload/demo/avatar.md correctly 1`] = `<span class="avatar-uploader"><div class="ant-upload ant-upload-select ant-upload-select-picture-card"><!----></div></span>`;
 
-exports[`renders ./components/upload/demo/basic.md correctly 1`] = `<span><div class="ant-upload ant-upload-select ant-upload-select-text" style="display:;"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span>`;
+exports[`renders ./components/upload/demo/basic.md correctly 1`] = `<span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><!----></span>`;
 
-exports[`renders ./components/upload/demo/defaultFileList.md correctly 1`] = `
-<span><div class="ant-upload ant-upload-select ant-upload-select-text" style="display:;"><!----></div><div class="ant-upload-list ant-upload-list-text"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><i class="anticon anticon-paper-clip"></i><a href="http://www.baidu.com/xxx.png" target="_blank" rel="noopener noreferrer" title="xxx.png" class="ant-upload-list-item-name">xxx.png</a></span></div>
-<i
-  class="anticon anticon-cross"></i>
-  <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><i class="anticon anticon-paper-clip"></i><a href="http://www.baidu.com/yyy.png" target="_blank" rel="noopener noreferrer" title="yyy.png" class="ant-upload-list-item-name">yyy.png</a></span></div>
-    <i class="anticon anticon-cross"></i>
-    <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-error">
-    <div class="ant-upload-list-item-info"><span><i class="anticon anticon-paper-clip"></i><a href="http://www.baidu.com/zzz.png" target="_blank" rel="noopener noreferrer" title="zzz.png" class="ant-upload-list-item-name">zzz.png</a></span></div>
-    <i class="anticon anticon-cross"></i>
-    <!---->
-  </div>
-  </div>
-  </span>
-`;
+exports[`renders ./components/upload/demo/defaultFileList.md correctly 1`] = `<span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><!----></span>`;
 
-exports[`renders ./components/upload/demo/drag.md correctly 1`] = `<span style="height:undefined;"><div class="ant-upload ant-upload-drag"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span>`;
+exports[`renders ./components/upload/demo/drag.md correctly 1`] = `<span><div class="ant-upload ant-upload-drag"><!----></div><!----></span>`;
 
-exports[`renders ./components/upload/demo/fileList.md correctly 1`] = `
-<span><div class="ant-upload ant-upload-select ant-upload-select-text" style="display:;"><!----></div><div class="ant-upload-list ant-upload-list-text"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><i class="anticon anticon-paper-clip"></i><a href="http://www.baidu.com/xxx.png" target="_blank" rel="noopener noreferrer" title="xxx.png" class="ant-upload-list-item-name">xxx.png</a></span></div>
-<i
-  class="anticon anticon-cross"></i>
-  <!---->
-  </div>
-  </div>
-  </span>
-`;
+exports[`renders ./components/upload/demo/fileList.md correctly 1`] = `<span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><!----></span>`;
 
 exports[`renders ./components/upload/demo/picture-card.md correctly 1`] = `
-<div class="clearfix"><span><div class="ant-upload-list ant-upload-list-picture-card"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="xxx.png"></a><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="xxx.png" class="ant-upload-list-item-name">xxx.png</a></span></div>
-<span
-  class="ant-upload-list-item-actions">
-  <a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="Preview file">
-    <i class="anticon anticon-eye-o"></i>
-  </a>
-  <i title="Remove file" class="anticon anticon-delete"></i>
-  </span>
+<div class="clearfix"><span><!----><div class="ant-upload ant-upload-select ant-upload-select-picture-card"><!----></div></span>
   <!---->
-  </div>
-  </div>
-  <div class="ant-upload ant-upload-select ant-upload-select-picture-card" style="display:;">
-    <!---->
-  </div>
-  </span>
-  <!---->
-  </div>
+</div>
 `;
 
 exports[`renders ./components/upload/demo/picture-style.md correctly 1`] = `
-<div><span><div class="ant-upload-list ant-upload-list-picture-card"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="xxx.png"></a><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="xxx.png" class="ant-upload-list-item-name">xxx.png</a></span></div>
-<span
-  class="ant-upload-list-item-actions">
-  <a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="Preview file">
-    <i class="anticon anticon-eye-o"></i>
-  </a>
-  <i title="Remove file" class="anticon anticon-delete"></i>
-  </span>
-  <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="yyy.png"></a><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="yyy.png" class="ant-upload-list-item-name">yyy.png</a></span></div>
-    <span
-      class="ant-upload-list-item-actions">
-      <a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="Preview file">
-        <i class="anticon anticon-eye-o"></i>
-      </a>
-      <i title="Remove file" class="anticon anticon-delete"></i>
-      </span>
-      <!---->
-  </div>
-  </div>
-  <div class="ant-upload ant-upload-select ant-upload-select-picture-card" style="display:;">
-    <!---->
-  </div>
-  </span>
+<div><span><!----><div class="ant-upload ant-upload-select ant-upload-select-picture-card"><!----></div></span>
   <br>
-  <br> <span class="upload-list-inline"><div class="ant-upload ant-upload-select ant-upload-select-picture" style="display:;"><!----></div><div class="ant-upload-list ant-upload-list-picture"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="xxx.png"></a><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="xxx.png" class="ant-upload-list-item-name">xxx.png</a></span></div>
-  <i
-    class="anticon anticon-cross"></i>
-    <!---->
-    </div>
-    <div class="ant-upload-list-item ant-upload-list-item-done">
-      <div class="ant-upload-list-item-info"><span><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="yyy.png"></a><a href="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" target="_blank" rel="noopener noreferrer" title="yyy.png" class="ant-upload-list-item-name">yyy.png</a></span></div>
-      <i
-        class="anticon anticon-cross"></i>
-        <!---->
-    </div>
-    </div>
-    </span>
-    </div>
+  <br> <span class="upload-list-inline"><div class="ant-upload ant-upload-select ant-upload-select-picture"><!----></div><!----></span></div>
 `;
 
 exports[`renders ./components/upload/demo/upload-manually.md correctly 1`] = `
-<div class="clearfix"><span><div class="ant-upload ant-upload-select ant-upload-select-text" style="display:;"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span>
+<div class="clearfix"><span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><!----></span>
   <button type="button" disabled="disabled" class="upload-demo-start ant-btn ant-btn-primary"><span>Start Upload</span></button>
 </div>
 `;

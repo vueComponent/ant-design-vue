@@ -4,22 +4,22 @@ exports[`renders ./components/timeline/demo/basic.md correctly 1`] = `
 <ul class="ant-timeline">
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Technical testing 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Network problems being solved 2015-09-01</div>
   </li>
 </ul>
@@ -29,17 +29,17 @@ exports[`renders ./components/timeline/demo/color.md correctly 1`] = `
 <ul class="ant-timeline">
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-green" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-green"></div>
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-green" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-green"></div>
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-red" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-red"></div>
     <div class="ant-timeline-item-content">
       <p>Solve initial network problems 1</p>
       <p>Solve initial network problems 2</p>
@@ -48,7 +48,7 @@ exports[`renders ./components/timeline/demo/color.md correctly 1`] = `
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">
       <p>Technical testing 1</p>
       <p>Technical testing 2</p>
@@ -62,18 +62,18 @@ exports[`renders ./components/timeline/demo/custom.md correctly 1`] = `
 <ul class="ant-timeline">
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-red" style="border-color:null;">
-      <i class="anticon anticon-clock-circle-o" style="font-size:'16px';"></i>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-red">
+      <i class="anticon anticon-clock-circle-o" style="font-size: '16px';"></i>
     </div>
     <div class="ant-timeline-item-content">
       Technical testing 2015-09-01
@@ -81,7 +81,7 @@ exports[`renders ./components/timeline/demo/custom.md correctly 1`] = `
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Network problems being solved 2015-09-01</div>
   </li>
 </ul>
@@ -91,22 +91,22 @@ exports[`renders ./components/timeline/demo/pending.md correctly 1`] = `
 <ul class="ant-timeline ant-timeline-pending">
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-blue" style="border-color:null;"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Technical testing 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-pending">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue" style="border-color:null;">
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue">
       <i class="anticon anticon-loading anticon-spin"></i>
     </div>
     <div class="ant-timeline-item-content">Recording...</div>

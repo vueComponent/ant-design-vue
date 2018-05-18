@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/cascader/demo/basic.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/change-on-select.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/custom-render.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker" style="width:100%;"><input value="" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"><span><span>
+<span tabindex="0" class="ant-cascader-picker" style="width: 100%;"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"><span><span>
         Zhejiang / 
       </span></span><span><span>
         Hangzhou / 
@@ -29,53 +29,53 @@ exports[`renders ./components/cascader/demo/custom-render.md correctly 1`] = `
 exports[`renders ./components/cascader/demo/custom-trigger.md correctly 1`] = `
 <span>
   Unselect
-   
-  <a href="#" tabIndex="0">Change city</a></span>
+  &nbsp;
+  <a href="#" tabindex="0" class="">Change city</a></span>
 `;
 
 exports[`renders ./components/cascader/demo/default-value.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><input value="" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span>
+<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span>
 <i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/disabled-option.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/hover.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/lazy.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/search.md correctly 1`] = `
-<span tabIndex="0" class="ant-cascader-picker"><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker"><span class="ant-cascader-picker-label"></span>
 <input value="" placeholder="Please select" type="text" class="ant-input ant-cascader-input  ant-cascader-input ">
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>
 `;
 
 exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
-<div><span tabIndex="0" class="ant-cascader-picker ant-cascader-picker-large ant-cascader-picker ant-cascader-picker-large"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input ant-input-lg ant-cascader-input ant-input-lg"><span class="ant-cascader-picker-label"></span>
+<div><span tabindex="0" class="ant-cascader-picker ant-cascader-picker-large ant-cascader-picker ant-cascader-picker-large"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-lg ant-cascader-input ant-input-lg"><span class="ant-cascader-picker-label"></span>
   <i
     class="anticon anticon-down ant-cascader-picker-arrow"></i>
     </span>
     <br>
-    <br> <span tabIndex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+    <br> <span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
     <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
     </span>
     <br>
-    <br> <span tabIndex="0" class="ant-cascader-picker ant-cascader-picker-small ant-cascader-picker ant-cascader-picker-small"><input value="" placeholder="Please select" type="text" readOnly="true" class="ant-input ant-cascader-input ant-input-sm ant-cascader-input ant-input-sm"><span class="ant-cascader-picker-label"></span>
+    <br> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-small ant-cascader-picker ant-cascader-picker-small"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-sm ant-cascader-input ant-input-sm"><span class="ant-cascader-picker-label"></span>
     <i
       class="anticon anticon-down ant-cascader-picker-arrow"></i>
       </span>

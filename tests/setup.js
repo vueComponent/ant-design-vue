@@ -1,5 +1,5 @@
-import Vue from 'vue'
-Vue.config.silent = true
+// import Vue from 'vue'
+// Vue.config.silent = true
 
 /* eslint-disable global-require */
 if (typeof window !== 'undefined') {

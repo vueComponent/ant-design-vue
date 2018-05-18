@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import Vue from 'vue'
 import Modal from '..'
 
 const ModalTester = {
@@ -8,10 +9,6 @@ const ModalTester = {
       return this.$refs.container
     },
   },
-  updated () {
-    console.log('updated')
-  },
-
   render () {
     const modalProps = {
       props: {
@@ -33,18 +30,24 @@ const ModalTester = {
 }
 
 describe('Modal', () => {
-  it('render correctly', () => {
-    const wrapper = mount(ModalTester)
-    wrapper.setProps({ visible: true })
-    expect(wrapper.html()).toMatchSnapshot()
-    const wrapper1 = mount(
+  it('render correctly', (done) => {
+    const wrapper = mount(
       {
         render () {
           return <ModalTester visible />
         },
       }
     )
-    expect(wrapper1.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
+    // https://github.com/vuejs/vue-test-utils/issues/624
+    const wrapper1 = mount(ModalTester, {
+      sync: false,
+    })
+    wrapper1.setProps({ visible: true })
+    Vue.nextTick(() => {
+      expect(wrapper1.html()).toMatchSnapshot()
+      done()
+    })
   })
 
   it('render without footer', () => {

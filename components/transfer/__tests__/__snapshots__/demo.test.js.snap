@@ -9,7 +9,7 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
-        <div handleClear="function () { [native code] }">
+        <div>
           <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
       </div>
       <div class="ant-transfer-list-content-warp"></div>
@@ -34,7 +34,7 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
-        <div handleClear="function () { [native code] }">
+        <div>
           <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
       </div>
       <div class="ant-transfer-list-content-warp"></div>
@@ -183,7 +183,7 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
-        <div handleClear="function () { [native code] }">
+        <div>
           <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
       </div>
       <div class="ant-transfer-list-content-warp"></div>
@@ -205,7 +205,7 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
     </div>
     <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
       <div class="ant-transfer-list-body-search-wrapper">
-        <div handleClear="function () { [native code] }">
+        <div>
           <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
       </div>
       <div class="ant-transfer-list-content-warp"></div>

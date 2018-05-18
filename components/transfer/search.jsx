@@ -7,6 +7,7 @@ export const TransferSearchProps = {
   prefixCls: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.any,
+  handleClear: PropTypes.func,
 }
 
 export default {
@@ -18,15 +19,17 @@ export default {
     handleChange (e) {
       this.$emit('change', e)
     },
-    handleClear (e) {
+    handleClear2 (e) {
       e.preventDefault()
-      this.$emit('handleClear', e)
+      if (this.handleClear) {
+        this.handleClear(e)
+      }
     },
   },
   render () {
     const { placeholder, value, prefixCls } = getOptionProps(this)
     const icon = (value && value.length > 0) ? (
-      <a href='#' class={`${prefixCls}-action`} onClick={this.handleClear}>
+      <a href='#' class={`${prefixCls}-action`} onClick={this.handleClear2}>
         <Icon type='cross-circle' />
       </a>
     ) : (

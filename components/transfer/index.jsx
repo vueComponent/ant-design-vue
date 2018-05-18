@@ -69,53 +69,97 @@ export default {
     }
   },
   mounted () {
-    this.currentProps = { ...this.$props }
+    // this.currentProps = { ...this.$props }
   },
   watch: {
-    '$props': {
-      handler: function (nextProps) {
-        const { sourceSelectedKeys, targetSelectedKeys, currentProps } = this
-
-        if (nextProps.targetKeys !== currentProps.targetKeys ||
-          nextProps.dataSource !== currentProps.dataSource) {
-          // clear cached splited dataSource
-          this.splitedDataSource = null
-
-          if (!nextProps.selectedKeys) {
-            // clear key nolonger existed
-            // clear checkedKeys according to targetKeys
-            const { dataSource, targetKeys = [] } = nextProps
-
-            const newSourceSelectedKeys = []
-            const newTargetSelectedKeys = []
-            dataSource.forEach(({ key }) => {
-              if (sourceSelectedKeys.includes(key) && !targetKeys.includes(key)) {
-                newSourceSelectedKeys.push(key)
-              }
-              if (targetSelectedKeys.includes(key) && targetKeys.includes(key)) {
-                newTargetSelectedKeys.push(key)
-              }
-            })
-            this.setState({
-              sourceSelectedKeys: newSourceSelectedKeys,
-              targetSelectedKeys: newTargetSelectedKeys,
-            })
-          }
-        }
-
-        if (nextProps.selectedKeys) {
-          const targetKeys = nextProps.targetKeys || []
-          this.setState({
-            sourceSelectedKeys: nextProps.selectedKeys.filter(key => !targetKeys.includes(key)),
-            targetSelectedKeys: nextProps.selectedKeys.filter(key => targetKeys.includes(key)),
-          })
-        }
-        this.currentProps = { ...this.$props }
-      },
-      deep: true,
+    targetKeys () {
+      this.updateState()
+      if (this.selectedKeys) {
+        const targetKeys = this.targetKeys || []
+        this.setState({
+          sourceSelectedKeys: this.selectedKeys.filter(key => !targetKeys.includes(key)),
+          targetSelectedKeys: this.selectedKeys.filter(key => targetKeys.includes(key)),
+        })
+      }
     },
+    dataSource () {
+      this.updateState()
+    },
+    selectedKeys () {
+      if (this.selectedKeys) {
+        const targetKeys = this.targetKeys || []
+        this.setState({
+          sourceSelectedKeys: this.selectedKeys.filter(key => !targetKeys.includes(key)),
+          targetSelectedKeys: this.selectedKeys.filter(key => targetKeys.includes(key)),
+        })
+      }
+    },
+    // '$props': {
+    //   handler: function (nextProps) {
+    //     // if (nextProps.targetKeys !== currentProps.targetKeys ||
+    //     //   nextProps.dataSource !== currentProps.dataSource) {
+    //     //   // clear cached splited dataSource
+    //     //   this.splitedDataSource = null
+
+    //     //   if (!nextProps.selectedKeys) {
+    //     //     // clear key nolonger existed
+    //     //     // clear checkedKeys according to targetKeys
+    //     //     const { dataSource, targetKeys = [] } = nextProps
+
+    //     //     const newSourceSelectedKeys = []
+    //     //     const newTargetSelectedKeys = []
+    //     //     dataSource.forEach(({ key }) => {
+    //     //       if (sourceSelectedKeys.includes(key) && !targetKeys.includes(key)) {
+    //     //         newSourceSelectedKeys.push(key)
+    //     //       }
+    //     //       if (targetSelectedKeys.includes(key) && targetKeys.includes(key)) {
+    //     //         newTargetSelectedKeys.push(key)
+    //     //       }
+    //     //     })
+    //     //     this.setState({
+    //     //       sourceSelectedKeys: newSourceSelectedKeys,
+    //     //       targetSelectedKeys: newTargetSelectedKeys,
+    //     //     })
+    //     //   }
+    //     // }
+
+    //     // if (nextProps.selectedKeys) {
+    //     //   const targetKeys = nextProps.targetKeys || []
+    //     //   this.setState({
+    //     //     sourceSelectedKeys: nextProps.selectedKeys.filter(key => !targetKeys.includes(key)),
+    //     //     targetSelectedKeys: nextProps.selectedKeys.filter(key => targetKeys.includes(key)),
+    //     //   })
+    //     // }
+    //     // this.currentProps = { ...this.$props }
+    //   },
+    //   deep: true,
+    // },
   },
   methods: {
+    updateState () {
+      const { sourceSelectedKeys, targetSelectedKeys } = this
+      this.splitedDataSource = null
+      if (!this.selectedKeys) {
+        // clear key nolonger existed
+        // clear checkedKeys according to targetKeys
+        const { dataSource, targetKeys = [] } = this
+
+        const newSourceSelectedKeys = []
+        const newTargetSelectedKeys = []
+        dataSource.forEach(({ key }) => {
+          if (sourceSelectedKeys.includes(key) && !targetKeys.includes(key)) {
+            newSourceSelectedKeys.push(key)
+          }
+          if (targetSelectedKeys.includes(key) && targetKeys.includes(key)) {
+            newTargetSelectedKeys.push(key)
+          }
+        })
+        this.setState({
+          sourceSelectedKeys: newSourceSelectedKeys,
+          targetSelectedKeys: newTargetSelectedKeys,
+        })
+      }
+    },
     splitDataSource (props) {
       if (this.splitedDataSource) {
         return this.splitedDataSource

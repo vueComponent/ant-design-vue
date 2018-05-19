@@ -201,6 +201,7 @@ export default {
         let { label, title } = val
         label = label === undefined ? this.labelMap.get(key) : label
         title = title === undefined ? this.titleMap.get(key) : title
+        title = typeof title === 'string' ? title.trim() : title
         labelArr.push([key, label === undefined ? key : label])
         titleArr.push([key, title])
       })
@@ -1273,17 +1274,21 @@ export default {
           }
           const singleValue = sValue[0]
           const key = singleValue.key
+          let title = this.titleMap.get(key) || this.labelMap.get(key)
+          if (Array.isArray(title)) {
+            title = ''
+          }
           selectedValue = (
             <div
               key='value'
               class={`${prefixCls}-selection-selected-value`}
-              title={this.titleMap.get(key) || this.labelMap.get(key)}
+              title={title}
               style={{
                 display: showSelectedValue ? 'block' : 'none',
                 opacity,
               }}
             >
-              {this.labelMap.get(sValue[0].key)}
+              {this.labelMap.get(key)}
             </div>
           )
         }

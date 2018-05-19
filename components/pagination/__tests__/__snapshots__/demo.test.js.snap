@@ -164,7 +164,7 @@ exports[`renders ./components/pagination/demo/custom-changer.md correctly 1`] = 
     <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="[object Object],[object Object],[object Object]" class="ant-select-selection-selected-value" style="display: block; opacity: 1;"><span>10条/页</span>
+          <div title="" class="ant-select-selection-selected-value" style="display: block; opacity: 1;"><span>10条/页</span>
             <!---->
           </div>
         </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>

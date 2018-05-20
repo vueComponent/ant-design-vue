@@ -5,7 +5,7 @@ import BaseMixin from '../../_util/BaseMixin'
 
 const ResizeableTitle = (h, props, children) => {
   console.log(props)
-  const { onResize, width, ...restProps } = props
+  const { width, ...restProps } = props
 
   if (!width) {
     return <th {...restProps} >{children}</th>

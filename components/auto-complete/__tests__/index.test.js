@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { render } from '@vue/server-test-utils'
 import Vue from 'vue'
 import AutoComplete from '..'
 import focusTest from '../../../tests/shared/focusTest'

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import Vue from 'vue'
+
 export default function focusTest (Component) {
   describe('focus and blur', () => {
     beforeAll(() => {

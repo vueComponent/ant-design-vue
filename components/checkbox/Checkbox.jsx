@@ -17,12 +17,20 @@ export default {
     name: String,
     indeterminate: Boolean,
     type: PropTypes.string.def('checkbox'),
+    autoFocus: Boolean,
   },
   model: {
     prop: 'checked',
   },
   inject: {
     checkboxGroupContext: { default: null },
+  },
+  mounted () {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.$refs.input.focus()
+      }
+    })
   },
   data () {
     const { checkboxGroupContext, checked, defaultChecked, value } = this
@@ -85,6 +93,12 @@ export default {
     blur () {
       this.$refs.input.blur()
     },
+    onFocus (e) {
+      this.$emit('focus', e)
+    },
+    onBlur (e) {
+      this.$emit('blur', e)
+    },
   },
   watch: {
     checked (val) {
@@ -95,7 +109,11 @@ export default {
     },
   },
   render () {
-    const { $props: props, checkboxGroupContext, checkboxClass, name, $slots, sChecked } = this
+    const { $props: props, checkboxGroupContext,
+      checkboxClass, name, $slots, sChecked,
+      onFocus,
+      onBlur,
+    } = this
     const {
       prefixCls,
     } = props
@@ -119,6 +137,8 @@ export default {
           <input name={name} type='checkbox' disabled={disabled}
             class={`${prefixCls}-input`} checked={sChecked}
             onChange={onChange} ref='input'
+            onFocus={onFocus}
+            onBlur={onBlur}
           />
           <span class={`${prefixCls}-inner`} />
         </span>

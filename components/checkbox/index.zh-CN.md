@@ -8,7 +8,13 @@
 | checked | 指定当前是否选中 | boolean | false |
 | defaultChecked | 初始是否选中 | boolean | false |
 | indeterminate | 设置 indeterminate 状态，只负责样式控制 | boolean | false |
-| onChange | 变化时回调函数 | Function(e:Event) | - |
+
+
+### 事件
+| 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| change | 变化时回调函数 | Function(e:Event) | - |
+
 
 ### Checkbox Group
 
@@ -18,6 +24,11 @@
 | options | 指定可选项 | string\[] | \[] |
 | value | 指定选中的选项 | string\[] | \[] |
 | onChange | 变化时回调函数 | Function(checkedValue) | - |
+
+### 事件
+| 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| change | 变化时回调函数 | Function(checkedValue) | - |
 
 ## 方法
 

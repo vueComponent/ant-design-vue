@@ -8,7 +8,11 @@
 | checked | Specifies whether the checkbox is selected. | boolean | false |
 | defaultChecked | Specifies the initial state: whether or not the checkbox is selected. | boolean | false |
 | disabled | Disable checkbox | boolean | false |
-| onChange | The callback function that is triggered when the state changes. | Function(e:Event) | - |
+
+### events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| change | The callback function that is triggered when the state changes. | Function(e:Event) |
 
 ### Checkbox Group
 
@@ -18,7 +22,11 @@
 | disabled | Disable all checkboxes | boolean | false |
 | options | Specifies options | string\[] | \[] |
 | value | Used for setting the currently selected value. | string\[] | \[] |
-| onChange | The callback function that is triggered when the state changes. | Function(checkedValue) | - |
+
+### events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| change | The callback function that is triggered when the state changes. | Function(checkedValue) |
 
 ## Methods
 

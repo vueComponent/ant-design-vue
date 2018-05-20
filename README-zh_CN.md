@@ -5,11 +5,13 @@
 </p>
 
 # [Ant Design Vue](https://vuecomponent.github.io/ant-design/)
-[![Travis branch](https://api.travis-ci.org/vueComponent/ant-design.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design)
-[![codecov](https://codecov.io/gh/vueComponent/ant-design/branch/master/graph/badge.svg)](https://codecov.io/gh/vueComponent/ant-design)
-[![Dependency Status](https://beta.gemnasium.com/badges/github.com/vueComponent/ant-design.svg)](https://beta.gemnasium.com/projects/github.com/vueComponent/ant-design)
-[![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat)](https://www.npmjs.org/package/vue-antd-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat)](http://www.npmtrends.com/vue-antd-ui)
+
+[![Travis branch](https://img.shields.io/travis/vueComponent/ant-design.svg?style=flat-square)](https://travis-ci.org/vueComponent/ant-design)
+[![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design)
+[![bitHound Dependencies](https://www.bithound.io/github/vueComponent/ant-design/badges/dependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/vueComponent/ant-design/badges/devDependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design/master/dependencies/npm)
+[![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat-square)](https://www.npmjs.org/package/vue-antd-ui)
+[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat-square)](http://www.npmtrends.com/vue-antd-ui)
 
 
 Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。

@@ -31,3 +31,17 @@ Vue.component('transition-group', {
   },
 })
 
+Vue.prototype.$emit = function () {
+  const vm = this
+  const args = [].slice.call(arguments, 0)
+  const filterEvent = []
+  const eventName = args[0]
+  if (args.length && vm.$listeners[eventName]) {
+    if (filterEvent.includes(eventName)) {
+      vm.$emit(eventName, ...args.slice(1))
+    } else {
+      vm.$listeners[eventName](...args.slice(1))
+    }
+  }
+}
+

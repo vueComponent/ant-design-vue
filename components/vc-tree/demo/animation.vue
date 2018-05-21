@@ -2,7 +2,7 @@
 /* eslint no-console:0 */
 import Tree, { TreeNode } from '../index'
 import '../assets/index.less'
-import cssAnimation from 'css-animation'
+import cssAnimation from '../../_util/css-animation'
 
 function animate (node, show, done) {
   let height = node.offsetHeight

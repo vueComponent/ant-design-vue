@@ -32,8 +32,7 @@
     "dist": "node antd-tools/cli/run.js dist",
     "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./components",
     "lint:style": "stylelint \"./examples/**/*.less\" --fix --syntax less",
-    "commitmsg": "validate-commit-msg",
-    "cm": "git-cz",
+    "commitmsg": "commitlint -x @commitlint/config-conventional -e $GIT_PARAMS",
     "codecov": "codecov"
   },
   "repository": {
@@ -54,6 +53,8 @@
     "vue-template-compiler": ">=2.5.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^6.2.0",
+    "@commitlint/config-conventional": "^6.1.3",
     "@octokit/rest": "^15.4.1",
     "@vue/server-test-utils": "^1.0.0-beta.16",
     "@vue/test-utils": "^1.0.0-beta.16",
@@ -86,7 +87,6 @@
     "codecov": "^3.0.0",
     "colorful": "^2.1.0",
     "commander": "^2.15.0",
-    "commitizen": "^2.9.6",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.7",
     "deep-assign": "^2.0.0",
@@ -132,7 +132,6 @@
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0",
     "through2": "^2.0.3",
-    "validate-commit-msg": "^2.14.0",
     "vue": "^2.5.16",
     "vue-antd-md-loader": "^1.0.3",
     "vue-clipboard2": "0.0.8",
@@ -154,7 +153,6 @@
     "babel-runtime": "6.x",
     "classnames": "^2.2.5",
     "component-classes": "^1.2.6",
-    "css-animation": "^1.4.1",
     "dom-align": "^1.6.7",
     "dom-closest": "^0.2.0",
     "dom-scroll-into-view": "^1.2.1",

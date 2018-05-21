@@ -20,9 +20,9 @@ export default {
     icon: String,
   },
   data () {
-    this.isExistSlot = false
-    this.childrenWidth = 0
     return {
+      isExistSlot: false,
+      childrenWidth: 0,
       scale: 1,
     }
   },

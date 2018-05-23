@@ -3,12 +3,17 @@ import Search from '../search'
 
 describe('Search', () => {
   it('should show cross icon when input value exists', () => {
-    const wrapper = mount(Search)
+    const props = {
+      propsData: {
+        value: '',
+      },
+    }
+    const wrapper = mount(Search, props)
 
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ value: 'a' })
 
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

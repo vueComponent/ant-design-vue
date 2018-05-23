@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { renderToString } from '@vue/server-test-utils'
 import Search from '../search'
 
 describe('Search', () => {

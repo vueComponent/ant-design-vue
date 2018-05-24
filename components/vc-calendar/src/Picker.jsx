@@ -111,7 +111,7 @@ const Picker = {
 
     onKeyDown (event) {
       if (event.keyCode === KeyCode.DOWN && !this.sOpen) {
-        this.open()
+        this.openCalendar()
         event.preventDefault()
       }
     },
@@ -177,8 +177,8 @@ const Picker = {
     },
 
     focusCalendar () {
-      if (this.sOpen && this.calendarInstance && this.calendarInstance.context) {
-        this.calendarInstance.context.focus()
+      if (this.sOpen && this.calendarInstance && this.calendarInstance.componentInstance) {
+        this.calendarInstance.componentInstance.focus()
       }
     },
   },

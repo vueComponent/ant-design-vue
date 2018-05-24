@@ -194,8 +194,9 @@ export default function createPicker (TheCalendar, props) {
       return (
         <span
           class={props.pickerClass}
-          onFocus={focus}
-          onBlur={blur}
+          // tabIndex={props.disabled ? -1 : 0}
+          // onFocus={focus}
+          // onBlur={blur}
         >
           <VcDatePicker
             {...vcDatePickerProps}

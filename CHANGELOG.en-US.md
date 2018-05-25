@@ -2,6 +2,11 @@
 
 ---
 
+## 0.5.3
+
+`2018-05-25`
+- 🐞 Fixed issue with building `antd-with-locales.js` containing test files[90583a3](https://github.com/vueComponent/ant-design/commit/90583a3c42e8b520747d6f6ac10cfd718d447030)
+
 ## 0.5.2
 
 `2018-05-25`

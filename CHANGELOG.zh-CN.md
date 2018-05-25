@@ -2,6 +2,11 @@
 
 ---
 
+## 0.5.3
+
+`2018-05-25`
+- 🐞 修复构建`antd-with-locales.js`包含测试文件的问题[90583a3](https://github.com/vueComponent/ant-design/commit/90583a3c42e8b520747d6f6ac10cfd718d447030)
+
 ## 0.5.2
 
 `2018-05-25`

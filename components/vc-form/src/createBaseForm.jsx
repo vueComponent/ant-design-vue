@@ -91,6 +91,12 @@ function createBaseForm (option = {}, mixins = []) {
       mounted () {
         this.wrappedComponentRef(this.$refs.WrappedComponent)
       },
+      updated () {
+        this.wrappedComponentRef(this.$refs.WrappedComponent)
+      },
+      destroyed () {
+        this.wrappedComponentRef(null)
+      },
       methods: {
         onCollectCommon (name, action, args) {
           const fieldMeta = this.fieldsStore.getFieldMeta(name)

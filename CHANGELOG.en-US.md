@@ -2,6 +2,23 @@
 
 ---
 
+## 0.5.2
+
+`2018-05-25`
+
+- 🐞 `Timeline`: Fix duplicated loading component bug [fa5141b](https://github.com/vueComponent/ant-design/commit/fa5141bd0061385f251b9026a07066677426b319)
+- `Transfer`
+  - 🐞 Fix search box clear button does not work Problem [4582da3](https://github.com/vueComponent/ant-design/commit/4582da3725e65c47a542f164532ab75a5618c265)
+  - 💄 Override property change listener logic to avoid unnecessary [0920d23](https://github.com/vueComponent/ant-design/commit/0920d23f12f6c133f667cd65316f1f0e6af27a33)
+- 💄 `Select`: Optimizing `title` display logic [9314957](https://github.com/vueComponent/ant-design/commit/931495768f8b573d12ce4e058e853c875f22bcd3)
+- `Form`
+  - 🐞 Fixed Form component `directive` error [#20](https://github.com/vueComponent/ant-design/issues/20)
+  - 🌟 Maintain an ref for wrapped component instance, use `wrappedComponentRef` [c5e421c](https://github.com/vueComponent/ant-design/commit/c5e421cdb2768e93288ce7b4654bee2114f8e5ba)
+- 🐞 `DatePicker`: Fix calendar keyboard event does not work [e9b6914](https://github.com/vueComponent/ant-design/commit/e9b6914282b1ac8d84b4262b8a6b33aa4e515831)
+- `Avatar`: Fixing font size adaptation issues [#22](https://github.com/vueComponent/ant-design/pull/22)
+- 🌟 Added single test for some components
+- 🌟 sorted component library `dependencies` and `devDependencies`, deleted unused packages, and added `peerDependencies`
+
 ## 0.5.1
 
 `2018-05-10`

@@ -4,8 +4,11 @@ export default {
       bind: function (el, binding, vnode) {
         binding.value(vnode)
       },
+      update: function (el, binding, vnode) {
+        binding.value(vnode)
+      },
       unbind: function (el, binding, vnode) {
-        binding.value()
+        binding.value(null)
       },
     })
   },

@@ -88,10 +88,16 @@ const AdvancedSearchForm = {
 const WrappedAdvancedSearchForm = Form.create()(AdvancedSearchForm)
 
 export default {
+  methods: {
+    saveFormRef (inst) {
+      this.formRef = inst
+      console.log('formRef', this.formRef)
+    },
+  },
   render () {
     return (
       <div id='components-form-demo-advanced-search'>
-        <WrappedAdvancedSearchForm />
+        <WrappedAdvancedSearchForm wrappedComponentRef={(inst) => this.saveFormRef(inst)}/>
         <div class='search-result-list'>Search Result List</div>
       </div>
     )

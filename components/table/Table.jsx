@@ -925,7 +925,7 @@ export default {
           showHeader,
           expandIconColumnIndex,
           expandIconAsCell,
-          emptyText: !(loading.props && loading.spinning) && locale.emptyText,
+          emptyText: !(loading.props && loading.props.spinning) && locale.emptyText,
         },
         on: this.$listeners,
         class: classString,
@@ -948,6 +948,10 @@ export default {
         props: {
           spinning: loading,
         },
+      }
+    } else {
+      loading = {
+        props: { ...loading },
       }
     }
 

@@ -29,6 +29,7 @@
         "compile": "node antd-tools/cli/run.js compile",
         "pub": "node antd-tools/cli/run.js pub",
         "prepublish": "node antd-tools/cli/run.js guard",
+        "pre-publish": "npm run test && node ./scripts/prepub",
         "dist": "node antd-tools/cli/run.js dist",
         "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./components",
         "lint:style": "stylelint \"./examples/**/*.less\" --fix --syntax less",

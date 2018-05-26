@@ -2,6 +2,11 @@
 
 ---
 
+## 0.5.4
+
+`2018-05-26`
+- 🐞 Fix missing `less` file problem in dist directory[ca084b9](https://github.com/vueComponent/ant-design/commit/ca084b9e6f0958c25a8278454c864ac8127cce95)
+
 ## 0.5.3
 
 `2018-05-25`

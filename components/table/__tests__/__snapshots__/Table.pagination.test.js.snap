@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table.pagination renders pagination correctly 1`] = `
+<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class=""><span>Name</span></th>
+  </tr>
+  </thead>
+  <tbody class="ant-table-tbody">
+    <tr class="ant-table-row  ant-table-row-level-0">
+      <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+        <!---->Jack</td>
+    </tr>
+    <tr class="ant-table-row  ant-table-row-level-0">
+      <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+        <!---->Lucy</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+</div>
+</div>
+<ul unselectable="unselectable" class="ant-pagination my-page ant-table-pagination">
+  <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
+    <a class="ant-pagination-item-link"></a>
+  </li>
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <a>1</a>
+  </li>
+  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
+    <a>2</a>
+  </li>
+  <li title="Next Page" tabindex="0" class=" ant-pagination-next">
+    <a class="ant-pagination-item-link"></a>
+  </li>
+  <!---->
+</ul>
+</div>
+</span>
+</div>
+`;

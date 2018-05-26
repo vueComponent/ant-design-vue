@@ -2,7 +2,7 @@
 import PropTypes from '../_util/vue-types'
 
 export default {
-  name: 'Page',
+  name: 'Pager',
   props: {
     rootPrefixCls: PropTypes.string,
     page: PropTypes.number,

@@ -360,6 +360,7 @@ export default {
       } else {
         this._component.popupProps = popupProps
       }
+      return this._component
     },
 
     getContainer () {

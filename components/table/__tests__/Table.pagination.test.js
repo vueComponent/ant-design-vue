@@ -31,15 +31,6 @@ describe('Table.pagination', () => {
       },
       sync: false,
     }
-    // return {
-    //   render () {
-    //     return (
-    //       <Table
-    //         {...tableProps}
-    //       />
-    //     )
-    //   },
-    // }
   }
 
   function renderedNames (wrapper) {

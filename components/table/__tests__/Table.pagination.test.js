@@ -188,21 +188,21 @@ describe('Table.pagination', () => {
 
   it('specify the position of pagination', (done) => {
     const wrapper = mount(Table, getTableOptions({ pagination: { position: 'top' }}))
-    Vue.nextTick(() => {
+    setTimeout(() => {
       expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2)
       expect(wrapper.findAll('.ant-spin-container > *').at(0).findAll('.ant-pagination')).toHaveLength(1)
       wrapper.setProps({ pagination: { position: 'bottom' }})
-      Vue.nextTick(() => {
+      setTimeout(() => {
         expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2)
         expect(wrapper.findAll('.ant-spin-container > *').at(1).findAll('.ant-pagination')).toHaveLength(1)
         wrapper.setProps({ pagination: { position: 'both' }})
-        Vue.nextTick(() => {
+        setTimeout(() => {
           expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(3)
           expect(wrapper.findAll('.ant-spin-container > *').at(0).findAll('.ant-pagination')).toHaveLength(1)
           expect(wrapper.findAll('.ant-spin-container > *').at(2).findAll('.ant-pagination')).toHaveLength(1)
           done()
         })
       })
-    })
+    }, 0)
   })
 })

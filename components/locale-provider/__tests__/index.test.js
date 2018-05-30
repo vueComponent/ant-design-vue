@@ -175,13 +175,13 @@ describe('Locale Provider', () => {
       },
     }
     const wrapper = mount(Test, { sync: false, attachToDocument: true })
-    Vue.nextTick(() => {
+    setTimeout(() => {
       expect(document.body.innerHTML).toMatchSnapshot()
       wrapper.setData({ locale: frFR })
-      Vue.nextTick(() => {
+      setTimeout(() => {
         expect(document.body.innerHTML).toMatchSnapshot()
         wrapper.setData({ locale: null })
-        Vue.nextTick(() => {
+        setTimeout(() => {
           expect(document.body.innerHTML).toMatchSnapshot()
           done()
         })

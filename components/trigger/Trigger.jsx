@@ -1,5 +1,6 @@
 
 import Vue from 'vue'
+import antRefDirective from '../_util/antRefDirective'
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
 import { hasProp, getComponentFromProp, getEvents, filterEmpty } from '../_util/props-util'
@@ -10,6 +11,8 @@ import Popup from './Popup'
 import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
 import { cloneElement } from '../_util/vnode'
+import ContainerRender from '../_util/ContainerRender'
+Vue.use(antRefDirective)
 
 function returnEmptyString () {
   return ''
@@ -87,6 +90,7 @@ export default {
 
   mounted () {
     this.$nextTick(() => {
+      this.renderComponent(null)
       this.updatedCal()
     })
   },
@@ -98,7 +102,9 @@ export default {
     },
     sPopupVisible (val) {
       this.$nextTick(() => {
-        this.afterPopupVisibleChange(val)
+        this.renderComponent(null, () => {
+          this.afterPopupVisibleChange(val)
+        })
       })
     },
   },
@@ -112,11 +118,6 @@ export default {
   beforeDestroy () {
     this.clearDelayTimer()
     this.clearOutsideHandler()
-    if (this._component) {
-      this._component.$destroy()
-      this._component = null
-      this.popupContainer.remove()
-    }
   },
   methods: {
     updatedCal () {
@@ -172,9 +173,8 @@ export default {
     onPopupMouseleave (e) {
       if (e.relatedTarget && !e.relatedTarget.setTimeout &&
       this._component &&
-      this._component.$refs.popup &&
-      this._component.$refs.popup.getPopupDomNode &&
-      contains(this._component.$refs.popup.getPopupDomNode(), e.relatedTarget)) {
+      this._component.getPopupDomNode &&
+      contains(this._component.getPopupDomNode(), e.relatedTarget)) {
         return
       }
       this.delaySetPopupVisible(false, this.$props.mouseLeaveDelay)
@@ -261,8 +261,8 @@ export default {
       }
     },
     getPopupDomNode () {
-      if (this._component && this._component.$refs.popup && this._component.$refs.popup.getPopupDomNode) {
-        return this._component.$refs.popup.getPopupDomNode()
+      if (this._component && this._component.getPopupDomNode) {
+        return this._component.getPopupDomNode()
       }
       return null
     },
@@ -293,7 +293,10 @@ export default {
       }
       return popupAlign
     },
-    renderComponent () {
+    savePopup (node) {
+      this._component = node
+    },
+    getComponent () {
       const self = this
       const mouseProps = {}
       if (this.isMouseEnterToShow()) {
@@ -308,59 +311,42 @@ export default {
         mask, zIndex, popupTransitionName, getPopupAlign,
         maskAnimation, maskTransitionName, getContainer } = self
       const popupProps = {
-        prefixCls,
-        destroyPopupOnHide,
-        visible: sPopupVisible,
-        action,
-        align: getPopupAlign(),
-        animation: popupAnimation,
-        getClassNameFromAlign: handleGetPopupClassFromAlign,
-        getRootDomNode,
-        mask,
-        zIndex,
-        transitionName: popupTransitionName,
-        maskAnimation,
-        maskTransitionName,
-        getContainer,
-        popupClassName,
-        popupStyle,
-        popupEvents: {
+        props: {
+          prefixCls,
+          destroyPopupOnHide,
+          visible: sPopupVisible,
+          action,
+          align: getPopupAlign(),
+          animation: popupAnimation,
+          getClassNameFromAlign: handleGetPopupClassFromAlign,
+          getRootDomNode,
+          mask,
+          zIndex,
+          transitionName: popupTransitionName,
+          maskAnimation,
+          maskTransitionName,
+          getContainer,
+          popupClassName,
+          popupStyle,
+        },
+        on: {
           align: self.$listeners.popupAlign || noop,
           ...mouseProps,
         },
-      }
-      if (!this._component) {
-        const div = document.createElement('div')
-        this.getContainer().appendChild(div)
-        this._component = new Vue({
-          data () {
-            return {
-              popupProps: { ...popupProps },
-            }
+        directives: [
+          {
+            name: 'ant-ref',
+            value: this.savePopup,
           },
-          parent: self,
-          el: div,
-          render () {
-            const { popupEvents, ...otherProps } = this.popupProps
-            const p = {
-              props: otherProps,
-              on: popupEvents,
-              ref: 'popup',
-              // style: popupStyle,
-            }
-            return (
-              <Popup
-                {...p}
-              >
-                {getComponentFromProp(self, 'popup')}
-              </Popup>
-            )
-          },
-        })
-      } else {
-        this._component.popupProps = popupProps
+        ],
       }
-      return this._component
+      return (
+        <Popup
+          {...popupProps}
+        >
+          {getComponentFromProp(self, 'popup')}
+        </Popup>
+      )
     },
 
     getContainer () {
@@ -479,8 +465,8 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1
     },
     forcePopupAlign () {
-      if (this.$data.sPopupVisible && this._component && this._component.$refs.popup && this._component.$refs.popup.$refs.alignInstance) {
-        this._component.$refs.popup.$refs.alignInstance.forceAlign()
+      if (this.$data.sPopupVisible && this._component && this._component.alignInstance) {
+        this._component.alignInstance.forceAlign()
       }
     },
     fireEvents (type, e) {
@@ -541,11 +527,22 @@ export default {
       newChildProps.on.blur = this.createTwoChains('blur')
     }
     const { sPopupVisible, forceRender } = this
-    if (sPopupVisible || forceRender || this._component) {
-      this.renderComponent(h)
-    }
     const trigger = cloneElement(child, newChildProps)
-    return trigger
+
+    return (
+      <ContainerRender
+        parent={this}
+        visible={sPopupVisible}
+        autoMount={false}
+        forceRender={forceRender}
+        getComponent={this.getComponent}
+        getContainer={this.getContainer}
+        children={({ renderComponent }) => {
+          this.renderComponent = renderComponent
+          return trigger
+        }}
+      />
+    )
   },
 }
 

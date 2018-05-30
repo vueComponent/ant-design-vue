@@ -66,6 +66,13 @@ export default {
                 }
               })
             },
+            updated () {
+              this.$nextTick(() => {
+                if (ready) {
+                  ready.call(self)
+                }
+              })
+            },
             render () {
               return getComponent(this.comProps)
             },

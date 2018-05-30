@@ -60,6 +60,7 @@ export default {
       offsetY: undefined,
       transitionName: 'rc-trigger-popup-zoom',
       destroyPopupOnHide: false,
+      destroyed: false,
     }
   },
   methods: {

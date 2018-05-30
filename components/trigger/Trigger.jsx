@@ -294,7 +294,7 @@ export default {
       return popupAlign
     },
     savePopup (node) {
-      this._component = node
+      this._component = node.componentInstance
     },
     getComponent () {
       const self = this

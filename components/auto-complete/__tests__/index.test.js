@@ -21,11 +21,15 @@ describe('AutoComplete with Custom Input Element Render', () => {
     input.element.value = '123'
     input.trigger('input')
     Vue.nextTick(() => {
-      const popupComponent = wrapper.find({ name: 'Trigger' }).vm._component
-      expect($$('.ant-select-dropdown-menu-item').length).toBe(3)
-      expect(popupComponent).not.toBe(null)
-      expect(popupComponent).not.toBe(undefined)
-      done()
+      mount({
+        render () {
+          return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+        },
+      }, { sync: false })
+      Vue.nextTick(() => {
+        expect($$('.ant-select-dropdown-menu-item').length).toBe(3)
+        done()
+      })
     })
   })
 })

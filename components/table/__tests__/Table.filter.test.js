@@ -61,8 +61,12 @@ describe('Table.filter', () => {
   it('renders menu correctly', (done) => {
     const wrapper = mount(Table, getTableOptions())
     Vue.nextTick(() => {
-      const dropdownWrapper = wrapper.find({ name: 'Trigger' }).vm.renderComponent()
-      expect(dropdownWrapper.$el.outerHTML).toMatchSnapshot()
+      const dropdownWrapper = mount({
+        render () {
+          return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+        },
+      })
+      expect(dropdownWrapper.html()).toMatchSnapshot()
       done()
     })
   })
@@ -75,8 +79,12 @@ describe('Table.filter', () => {
       }],
     }))
     Vue.nextTick(() => {
-      const dropdownWrapper = wrapper.find({ name: 'Trigger' }).vm.renderComponent()
-      expect(dropdownWrapper.$el.outerHTML).toMatchSnapshot()
+      const dropdownWrapper = mount({
+        render () {
+          return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+        },
+      })
+      expect(dropdownWrapper.html()).toMatchSnapshot()
       done()
     })
   })
@@ -97,8 +105,12 @@ describe('Table.filter', () => {
     })
 
     Vue.nextTick(() => {
-      const dropdownWrapper = wrapper.find({ name: 'Trigger' }).vm.renderComponent()
-      expect(dropdownWrapper.$el.outerHTML).toMatchSnapshot()
+      const dropdownWrapper = mount({
+        render () {
+          return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+        },
+      })
+      expect(dropdownWrapper.html()).toMatchSnapshot()
       done()
     })
   })

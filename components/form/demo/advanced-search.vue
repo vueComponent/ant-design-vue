@@ -91,7 +91,6 @@ export default {
   methods: {
     saveFormRef (inst) {
       this.formRef = inst
-      console.log('formRef', this.formRef)
     },
   },
   render () {

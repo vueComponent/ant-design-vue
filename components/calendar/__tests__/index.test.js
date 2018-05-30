@@ -47,7 +47,8 @@ describe('Calendar', () => {
         render () {
           return <Calendar onSelect={onSelect} validRange={validRange} defaultValue={Moment('2018-02-02')} />
         },
-      }
+      },
+      { sync: false }
     )
     wrapper.findAll('[title="February 20, 2018"]').at(0).trigger('click')
     expect(wrapper.find('[title="February 20, 2018"]').classes()).toContain('ant-fullcalendar-disabled-cell')
@@ -85,14 +86,14 @@ describe('Calendar', () => {
       { sync: false }
     )
     wrapper.find('.ant-fullcalendar-year-select').trigger('click')
-    Vue.nextTick(() => {
+    setTimeout(() => {
       $$('.ant-select-dropdown-menu-item')[0].click()
       wrapper.find('.ant-fullcalendar-month-select').trigger('click')
-      Vue.nextTick(() => {
+      setTimeout(() => {
         expect($$('.ant-select-dropdown-menu-item').length).toBe(13)
         done()
-      })
-    })
+      }, 1000)
+    }, 1000)
   })
 
   it('getDateRange should returns a disabledDate function', () => {
@@ -103,6 +104,7 @@ describe('Calendar', () => {
           validRange,
           defaultValue: Moment('2018-02-02'),
         },
+        sync: false,
       }
     )
     const instance = wrapper.vm
@@ -123,7 +125,7 @@ describe('Calendar', () => {
     })
   })
 
-  it('Calendar should switch mode', () => {
+  it('Calendar should switch mode', (done) => {
     const monthMode = 'month'
     const yearMode = 'year'
     const onPanelChangeStub = jest.fn()
@@ -140,7 +142,10 @@ describe('Calendar', () => {
     )
     expect(wrapper.vm.sMode).toEqual(yearMode)
     wrapper.vm.setType('date')
-    expect(wrapper.vm.sMode).toEqual(monthMode)
-    expect(onPanelChangeStub).toHaveBeenCalledTimes(1)
+    Vue.nextTick(() => {
+      expect(wrapper.vm.sMode).toEqual(monthMode)
+      expect(onPanelChangeStub).toHaveBeenCalledTimes(1)
+      done()
+    })
   })
 })

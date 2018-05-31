@@ -29,6 +29,7 @@ const upLoadPropTypes = {
 }
 
 const AjaxUploader = {
+  name: 'ajaxUploader',
   mixins: [BaseMixin],
   props: upLoadPropTypes,
   data () {

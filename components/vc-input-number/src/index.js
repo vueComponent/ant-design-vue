@@ -47,6 +47,7 @@ const inputNumberProps = {
   // onKeyUp: PropTypes.func,
   prefixCls: PropTypes.string,
   tabIndex: PropTypes.string,
+  placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   // onFocus: PropTypes.func,
   // onBlur: PropTypes.func,

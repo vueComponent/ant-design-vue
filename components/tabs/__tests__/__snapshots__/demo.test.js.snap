@@ -10,7 +10,7 @@ exports[`renders ./components/tabs/demo/basic.md correctly 1`] = `
           class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 2</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
@@ -37,7 +37,7 @@ exports[`renders ./components/tabs/demo/card.md correctly 1`] = `
         class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
-            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
             <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 2</div>
             <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
@@ -64,7 +64,7 @@ exports[`renders ./components/tabs/demo/card-top.md correctly 1`] = `
           class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab Title 1</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab Title 2</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab Title 3</div>
@@ -99,7 +99,7 @@ exports[`renders ./components/tabs/demo/custom-add-trigger.md correctly 1`] = `
           class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">
                 <div>Tab 1
                   <i class="anticon anticon-close"></i>
@@ -134,7 +134,7 @@ exports[`renders ./components/tabs/demo/disabled.md correctly 1`] = `
         class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
-            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
             <div role="tab" aria-disabled="true" aria-selected="false" class=" ant-tabs-tab ant-tabs-tab-disabled">Tab 2</div>
             <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
@@ -160,7 +160,7 @@ exports[`renders ./components/tabs/demo/editable-card.md correctly 1`] = `
         class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
-            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">
               <div class="ant-tabs-tab-unclosable">Tab 1</div>
             </div>
@@ -194,7 +194,7 @@ exports[`renders ./components/tabs/demo/extra.md correctly 1`] = `
         class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
-            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
             <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 2</div>
             <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
@@ -220,7 +220,7 @@ exports[`renders ./components/tabs/demo/icon.md correctly 1`] = `
         class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
-            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab"><span slot="tab"><i class="anticon anticon-apple"></i>
       Tab 1
     </span></div>
@@ -257,7 +257,7 @@ exports[`renders ./components/tabs/demo/position.md correctly 1`] = `
           class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 2</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
@@ -290,7 +290,7 @@ exports[`renders ./components/tabs/demo/size.md correctly 1`] = `
           class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 1</div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 2</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
@@ -322,7 +322,7 @@ exports[`renders ./components/tabs/demo/slide.md correctly 1`] = `
           class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 2</div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>

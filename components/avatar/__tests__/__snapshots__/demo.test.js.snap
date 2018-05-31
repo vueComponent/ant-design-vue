@@ -2,7 +2,7 @@
 
 exports[`renders ./components/avatar/demo/badge.md correctly 1`] = `
 <div><span style="margin-right: 24px;"><span class="ant-badge"><span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span>
-  <sup class="ant-scroll-number ant-badge-count ant-badge-zoom-enter"><span class="ant-scroll-number-only" style="transform: translateY(-1100%);"><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="current">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p></span></sup>
+  <sup class="ant-scroll-number ant-badge-count ant-badge-zoom-enter"><span class="ant-scroll-number-only"><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="current">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p></span></sup>
   </span>
   </span> <span class="ant-badge"><span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span>
   <sup class="ant-scroll-number ant-badge-dot ant-badge-zoom-enter"></sup>

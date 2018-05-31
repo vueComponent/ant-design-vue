@@ -2,6 +2,10 @@ import Vue from 'vue'
 import { mount, render } from '@vue/test-utils'
 import Table from '..'
 
+function $$ (className) {
+  return document.body.querySelectorAll(className)
+}
+
 describe('Table.filter', () => {
   const filterFn = (value, record) => record.name.indexOf(value) !== -1
   const column = {
@@ -115,131 +119,152 @@ describe('Table.filter', () => {
     })
   })
   // TODO
-  // it('can be controlled by filterDropdownVisible', () => {
-  //   const wrapper = mount(Table, getTableOptions({
-  //     columns: [{
-  //       ...column,
-  //       filterDropdownVisible: true,
-  //     }],
-  //   }))
+  it('can be controlled by filterDropdownVisible', (done) => {
+    const wrapper = mount(Table, getTableOptions({
+      columns: [{
+        ...column,
+        filterDropdownVisible: true,
+      }],
+    }))
 
-  //   let dropdown = wrapper.find('Dropdown').at(0)
-  //   expect(dropdown.props().visible).toBe(true)
+    let dropdown = wrapper.find({ name: 'ADropdown' })
+    expect(dropdown.props().visible).toBe(true)
 
-  //   wrapper.setProps({
-  //     columns: [{
-  //       ...column,
-  //       filterDropdownVisible: false,
-  //     }],
-  //   })
+    wrapper.setProps({
+      columns: [{
+        ...column,
+        filterDropdownVisible: false,
+      }],
+    })
+    Vue.nextTick(() => {
+      dropdown = wrapper.find({ name: 'ADropdown' })
+      expect(dropdown.props().visible).toBe(false)
+      done()
+    })
+  })
 
-  //   dropdown = wrapper.find('Dropdown').at(0)
-  //   expect(dropdown.props().visible).toBe(false)
-  // })
+  it('fires change event when visible change', () => {
+    const handleChange = jest.fn()
+    const wrapper = mount(Table, getTableOptions({
+      columns: [{
+        ...column,
+        onFilterDropdownVisibleChange: handleChange,
+      }],
+    }))
 
-  // it('fires change event when visible change', () => {
-  //   const handleChange = jest.fn()
-  //   const wrapper = mount(Table, getTableOptions({
-  //     columns: [{
-  //       ...column,
-  //       onFilterDropdownVisibleChange: handleChange,
-  //     }],
-  //   }))
+    wrapper.findAll('.ant-dropdown-trigger').at(0).trigger('click')
 
-  //   wrapper.find('.ant-dropdown-trigger').at(0).trigger('click')
+    expect(handleChange).toBeCalledWith(true)
+  })
 
-  //   expect(handleChange).toBeCalledWith(true)
-  // })
+  it('can be controlled by filteredValue', (done) => {
+    const wrapper = mount(Table, getTableOptions({
+      columns: [{
+        ...column,
+        filteredValue: ['Lucy'],
+      }],
+    }))
 
-  // it('can be controlled by filteredValue', () => {
-  //   const wrapper = mount(Table, getTableOptions({
-  //     columns: [{
-  //       ...column,
-  //       filteredValue: ['Lucy'],
-  //     }],
-  //   }))
+    expect(wrapper.findAll('tbody tr').length).toBe(1)
+    wrapper.setProps({
+      columns: [{
+        ...column,
+        filteredValue: [],
+      }],
+    })
+    Vue.nextTick(() => {
+      expect(wrapper.findAll('tbody tr').length).toBe(4)
+      done()
+    })
+  })
 
-  //   expect(wrapper.find('tbody tr').length).toBe(1)
-  //   wrapper.setProps({
-  //     columns: [{
-  //       ...column,
-  //       filteredValue: [],
-  //     }],
-  //   })
-  //   expect(wrapper.find('tbody tr').length).toBe(4)
-  // })
+  it('can be controlled by filteredValue null', (done) => {
+    const wrapper = mount(Table, getTableOptions({
+      columns: [{
+        ...column,
+        filteredValue: ['Lucy'],
+      }],
+    }))
 
-  // it('can be controlled by filteredValue null', () => {
-  //   const wrapper = mount(Table, getTableOptions({
-  //     columns: [{
-  //       ...column,
-  //       filteredValue: ['Lucy'],
-  //     }],
-  //   }))
+    expect(wrapper.findAll('tbody tr').length).toBe(1)
+    wrapper.setProps({
+      columns: [{
+        ...column,
+        filteredValue: null,
+      }],
+    })
+    Vue.nextTick(() => {
+      expect(wrapper.findAll('tbody tr').length).toBe(4)
+      done()
+    })
+  })
 
-  //   expect(wrapper.find('tbody tr').length).toBe(1)
-  //   wrapper.setProps({
-  //     columns: [{
-  //       ...column,
-  //       filteredValue: null,
-  //     }],
-  //   })
-  //   expect(wrapper.find('tbody tr').length).toBe(4)
-  // })
+  it('fires change event', (done) => {
+    const handleChange = jest.fn()
+    const wrapper = mount(Table, getTableOptions({}, { change: handleChange }))
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false })
+    new Promise((reslove) => {
+      Vue.nextTick(() => {
+        dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
+        dropdownWrapper.find('.confirm').trigger('click')
+        reslove()
+      })
+    }).then(() => {
+      Vue.nextTick(() => {
+        expect(handleChange).toBeCalledWith({}, { name: ['boy'] }, {})
+        Promise.resolve()
+      })
+    }).finally(() => {
+      done()
+    })
+  })
 
-  // it('fires change event', () => {
-  //   const handleChange = jest.fn()
-  //   const wrapper = mount(Table, getTableOptions({ onChange: handleChange }))
-  //   const dropdownWrapper = mount(wrapper.find('Trigger').instance().getComponent())
-
-  //   dropdownWrapper.find('MenuItem').at(0).trigger('click')
-  //   dropdownWrapper.find('.confirm').trigger('click')
-
-  //   expect(handleChange).toBeCalledWith({}, { name: ['boy'] }, {})
-  // })
-
-  // it('three levels menu', () => {
-  //   const filters = [
-  //     { text: 'Upper', value: 'Upper' },
-  //     { text: 'Lower', value: 'Lower' },
-  //     {
-  //       text: 'Level2',
-  //       value: 'Level2',
-  //       children: [
-  //         { text: 'Large', value: 'Large' },
-  //         { text: 'Small', value: 'Small' },
-  //         {
-  //           text: 'Level3',
-  //           value: 'Level3',
-  //           children: [
-  //             { text: 'Black', value: 'Black' },
-  //             { text: 'White', value: 'White' },
-  //             { text: 'Jack', value: 'Jack' },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   ]
-  //   const wrapper = mount(Table, getTableOptions({
-  //     columns: [{
-  //       ...column,
-  //       filters,
-  //     }],
-  //   }))
-  //   jest.useFakeTimers()
-  //   const dropdownWrapper = mount(wrapper.find('Trigger').instance().getComponent())
-  //   dropdownWrapper.find('.ant-dropdown-menu-submenu-title').at(0).trigger('mouseEnter')
-  //   jest.runAllTimers()
-  //   dropdownWrapper.update()
-  //   dropdownWrapper.find('.ant-dropdown-menu-submenu-title').at(1).trigger('mouseEnter')
-  //   jest.runAllTimers()
-  //   dropdownWrapper.update()
-  //   dropdownWrapper.find('MenuItem').last().trigger('click')
-  //   dropdownWrapper.find('.confirm').trigger('click')
-  //   wrapper.update()
-  //   expect(renderedNames(wrapper)).toEqual(['Jack'])
-  //   jest.useRealTimers()
-  // })
+  it('three levels menu', (done) => {
+    const filters = [
+      { text: 'Upper', value: 'Upper' },
+      { text: 'Lower', value: 'Lower' },
+      {
+        text: 'Level2',
+        value: 'Level2',
+        children: [
+          { text: 'Large', value: 'Large' },
+          { text: 'Small', value: 'Small' },
+          {
+            text: 'Level3',
+            value: 'Level3',
+            children: [
+              { text: 'Black', value: 'Black' },
+              { text: 'White', value: 'White' },
+              { text: 'Jack', value: 'Jack' },
+            ],
+          },
+        ],
+      },
+    ]
+    const wrapper = mount(Table, getTableOptions({
+      columns: [{
+        ...column,
+        filters,
+      }],
+    }))
+    // jest.useFakeTimers()
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false, attachToDocument: true })
+    dropdownWrapper.findAll('.ant-dropdown-menu-submenu-title').at(0).trigger('mouseenter')
+    // jest.runAllTimers()
+    // dropdownWrapper.update()
+    setTimeout(() => {
+      expect($$('.ant-dropdown-menu-submenu-title')).toHaveLength(2)
+      done()
+    }, 1000)
+  })
 
   // it('works with JSX in controlled mode', () => {
   //   const { Column } = Table
@@ -326,23 +351,22 @@ describe('Table.filter', () => {
   //   expect(renderedNames(wrapper)).toEqual(['Jack'])
   // })
 
-  // it('confirm filter when dropdown hidden', () => {
-  //   const handleChange = jest.fn()
-  //   const wrapper = mount(Table, getTableOptions({
-  //     columns: [{
-  //       ...column,
-  //       filters: [
-  //         { text: 'Jack', value: 'Jack' },
-  //         { text: 'Lucy', value: 'Lucy' },
-  //       ],
-  //     }],
+//   it('confirm filter when dropdown hidden', (done) => {
+//     const handleChange = jest.fn()
+//     const wrapper = mount(Table, { ...getTableOptions({
+//       columns: [{
+//         ...column,
+//         filters: [
+//           { text: 'Jack', value: 'Jack' },
+//           { text: 'Lucy', value: 'Lucy' },
+//         ],
+//       }],
+//     }, { change: handleChange }), attachToDocument: true })
 
-  //   }, { change: handleChange }))
+//     wrapper.find('.ant-dropdown-trigger').first().simulate('click')
+//     wrapper.find('.ant-dropdown-menu-item').first().simulate('click')
+//     wrapper.find('.ant-dropdown-trigger').first().simulate('click')
 
-  //   wrapper.findAll('.ant-dropdown-trigger').at(0).trigger('click')
-  //   wrapper.findAll('.ant-dropdown-menu-item').at(0).trigger('click')
-  //   wrapper.findAll('.ant-dropdown-trigger').at(0).trigger('click')
-
-  //   expect(handleChange).toBeCalled()
-  // })
+//     expect(handleChange).toBeCalled()
+//   })
 })

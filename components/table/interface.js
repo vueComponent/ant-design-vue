@@ -173,6 +173,7 @@ export const SelectionBoxProps = {
   rowIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string,
   disabled: PropTypes.bool,
+  id: PropTypes.string,
   // onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 

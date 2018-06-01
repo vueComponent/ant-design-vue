@@ -13,6 +13,7 @@ export default {
     isGroup: Boolean,
     value: PropTypes.any,
     name: String,
+    id: String,
   },
   model: {
     prop: 'checked',
@@ -87,13 +88,13 @@ export default {
     },
   },
   render () {
-    const { classes, checkboxClass, disabled, prefixCls, stateChecked, handleChange, name, $slots } = this
+    const { id, classes, checkboxClass, disabled, prefixCls, stateChecked, handleChange, name, $slots } = this
     return (
       <label class={classes}>
         <span class={checkboxClass}>
           <input name={name} type='radio' disabled={disabled}
             class={`${prefixCls}-input`} checked={stateChecked}
-            onChange={handleChange}
+            onChange={handleChange} id={id}
           />
           <span class={`${prefixCls}-inner`} />
         </span>

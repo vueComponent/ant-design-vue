@@ -15,6 +15,7 @@ export default {
     isGroup: Boolean,
     value: [String, Number, Boolean],
     name: String,
+    id: String,
     indeterminate: Boolean,
     type: PropTypes.string.def('checkbox'),
     autoFocus: Boolean,
@@ -113,6 +114,7 @@ export default {
       checkboxClass, name, $slots, sChecked,
       onFocus,
       onBlur,
+      id,
     } = this
     const {
       prefixCls,
@@ -136,7 +138,7 @@ export default {
         <span class={checkboxClass}>
           <input name={name} type='checkbox' disabled={disabled}
             class={`${prefixCls}-input`} checked={sChecked}
-            onChange={onChange} ref='input'
+            onChange={onChange} ref='input' id={id}
             onFocus={onFocus}
             onBlur={onBlur}
           />

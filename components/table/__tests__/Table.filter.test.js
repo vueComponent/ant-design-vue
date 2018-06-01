@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { mount, render } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Table from '..'
 
 function $$ (className) {
@@ -266,90 +266,107 @@ describe('Table.filter', () => {
     }, 1000)
   })
 
-  // it('works with JSX in controlled mode', () => {
-  //   const { Column } = Table
+  it('works with JSX in controlled mode', (done) => {
+    const { Column } = Table
 
-  //   const App = {
-  //     data () {
-  //       return {
-  //         filters: {},
-  //       }
-  //     },
-  //     methods: {
-  //       handleChange (pagination, filters) {
-  //         this.setState({ filters })
-  //       },
-  //     },
-  //     render () {
-  //       return (
-  //         <Table dataSource={data} onChange={this.handleChange}>
-  //           <Column
-  //             title='name'
-  //             dataIndex='name'
-  //             key='name'
-  //             filters={[
-  //               { text: 'Jack', value: 'Jack' },
-  //               { text: 'Lucy', value: 'Lucy' },
-  //             ]}
-  //             filteredValue={this.state.filters.name}
-  //             onFilter={filterFn}
-  //           />
-  //         </Table>
-  //       )
-  //     },
-  //   }
+    const App = {
+      data () {
+        return {
+          filters: {},
+        }
+      },
+      methods: {
+        handleChange (pagination, filters) {
+          this.filters = filters
+        },
+      },
+      render () {
+        return (
+          <Table dataSource={data} onChange={this.handleChange}>
+            <Column
+              title='name'
+              dataIndex='name'
+              key='name'
+              filters={[
+                { text: 'Jack', value: 'Jack' },
+                { text: 'Lucy', value: 'Lucy' },
+              ]}
+              filteredValue={this.filters.name}
+              onFilter={filterFn}
+            />
+          </Table>
+        )
+      },
+    }
 
-  //   const wrapper = mount(App)
-  //   const dropdownWrapper = mount(wrapper.find('Trigger').instance().getComponent())
+    const wrapper = mount(App, { sync: false })
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false, attachToDocument: true })
 
-  //   dropdownWrapper.find('MenuItem').at(0).trigger('click')
-  //   dropdownWrapper.find('.confirm').trigger('click')
-  //   wrapper.update()
-  //   expect(renderedNames(wrapper)).toEqual(['Jack'])
+    new Promise((reslove) => {
+      Vue.nextTick(() => {
+        dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
+        dropdownWrapper.find('.confirm').trigger('click')
+        reslove()
+      })
+    }).then(() => {
+      expect(renderedNames(wrapper)).toEqual(['Jack'])
+      dropdownWrapper.find('.clear').trigger('click')
+      setTimeout(() => {
+        expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy', 'Tom', 'Jerry'])
+        Promise.resolve()
+      }, 0)
+    }).finally(() => {
+      done()
+    })
+  })
 
-  //   dropdownWrapper.find('.clear').trigger('click')
-  //   wrapper.update()
-  //   expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy', 'Tom', 'Jerry'])
-  // })
-
-  // it('works with grouping columns in controlled mode', () => {
-  //   const columns = [
-  //     {
-  //       title: 'group',
-  //       key: 'group',
-  //       children: [
-  //         {
-  //           title: 'Name',
-  //           dataIndex: 'name',
-  //           key: 'name',
-  //           filters: [
-  //             { text: 'Jack', value: 'Jack' },
-  //             { text: 'Lucy', value: 'Lucy' },
-  //           ],
-  //           onFilter: filterFn,
-  //           filteredValue: ['Jack'],
-  //         },
-  //         {
-  //           title: 'Age',
-  //           dataIndex: 'age',
-  //           key: 'age',
-  //         },
-  //       ],
-  //     },
-  //   ]
-  //   const testData = [
-  //     { key: 0, name: 'Jack', age: 11 },
-  //     { key: 1, name: 'Lucy', age: 20 },
-  //     { key: 2, name: 'Tom', age: 21 },
-  //     { key: 3, name: 'Jerry', age: 22 },
-  //   ]
-  //   const wrapper = mount(Table, {
-  //     columns,
-  //     dataSource: testData,
-  //   })
-
-  //   expect(renderedNames(wrapper)).toEqual(['Jack'])
-  // })
+  it('works with grouping columns in controlled mode', (done) => {
+    const columns = [
+      {
+        title: 'group',
+        key: 'group',
+        children: [
+          {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+            filters: [
+              { text: 'Jack', value: 'Jack' },
+              { text: 'Lucy', value: 'Lucy' },
+            ],
+            onFilter: filterFn,
+            filteredValue: ['Jack'],
+          },
+          {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+          },
+        ],
+      },
+    ]
+    const testData = [
+      { key: 0, name: 'Jack', age: 11 },
+      { key: 1, name: 'Lucy', age: 20 },
+      { key: 2, name: 'Tom', age: 21 },
+      { key: 3, name: 'Jerry', age: 22 },
+    ]
+    const wrapper = mount(Table, {
+      propsData: {
+        columns,
+        dataSource: testData,
+      },
+      sync: false,
+    })
+    Vue.nextTick(() => {
+      expect(renderedNames(wrapper)).toEqual(['Jack'])
+      done()
+    })
+  })
 
 //   it('confirm filter when dropdown hidden', (done) => {
 //     const handleChange = jest.fn()

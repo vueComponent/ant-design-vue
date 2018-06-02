@@ -1,10 +1,14 @@
 import { mount } from '@vue/test-utils'
 import Upload from '..'
 import { fileToObject } from '../utils'
+import PropsTypes from '../../_util/vue-types'
+import { UploadListProps } from '../interface'
+
+UploadListProps.items = PropsTypes.any
 
 describe('Upload', () => {
   it('should get refs inside Upload in componentDidMount', () => {
-    let ref
+    let ref = null
     const APP = {
       mounted () {
         ref = this.$refs.input
@@ -25,7 +29,7 @@ describe('Upload', () => {
     const data = jest.fn()
     const props = {
       propsData: {
-        action: 'http://upload.com',
+        action: 'http://jsonplaceholder.typicode.com/posts/',
         beforeUpload: () => new Promise(resolve =>
           setTimeout(() => resolve('success'), 100)
         ),
@@ -44,6 +48,7 @@ describe('Upload', () => {
       },
       sync: false,
     }
+    Upload.props
     const wrapper = mount(Upload, props)
     setTimeout(() => {
       const mockFile = new File(['foo'], 'foo.png', {
@@ -61,7 +66,7 @@ describe('Upload', () => {
     const data = jest.fn()
     const props = {
       propsData: {
-        action: 'http://upload.com',
+        action: 'http://jsonplaceholder.typicode.com/posts/',
         beforeUpload: () => false,
         data,
       },
@@ -134,7 +139,7 @@ describe('Upload', () => {
     const data = jest.fn()
     const props = {
       propsData: {
-        action: 'http://upload.com',
+        action: 'http://jsonplaceholder.typicode.com/posts/',
         beforeUpload () {},
         data,
       },

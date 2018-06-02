@@ -11,7 +11,9 @@
 [![bitHound Dependencies](https://www.bithound.io/github/vueComponent/ant-design/badges/dependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/vueComponent/ant-design/badges/devDependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design/master/dependencies/npm)
 [![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat-square)](https://www.npmjs.org/package/vue-antd-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat-square)](http://www.npmtrends.com/vue-antd-ui) [![Join the chat at https://gitter.im/vueComponent/ant-design-english](https://badges.gitter.im/vueComponent/ant-design-english.svg)](https://gitter.im/vueComponent/ant-design-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat-square)](http://www.npmtrends.com/vue-antd-ui)
+[![Join the chat at https://gitter.im/vueComponent/ant-design-english](https://badges.gitter.im/vueComponent/ant-design-english.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) (English)
+[![Join the chat at https://gitter.im/vueComponent/ant-design](https://img.shields.io/gitter/room/vueComponent/ant-design.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文）
 
 An enterprise-class UI components based on Ant Design 3.X and Vue.
 

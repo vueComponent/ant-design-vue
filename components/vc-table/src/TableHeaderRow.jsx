@@ -28,9 +28,7 @@ const TableHeaderRow = {
           const { column, children, className, ...cellProps } = cell
           const cls = cell.class || className
           const customProps = column.customHeaderCell ? column.customHeaderCell(column) : {}
-          if (column.align) {
-            cellProps.style = { textAlign: column.align }
-          }
+          
           const headerCellProps = mergeProps({
             attrs: {
               ...cellProps,
@@ -40,6 +38,11 @@ const TableHeaderRow = {
             ...customProps,
             key: column.key || column.dataIndex || i,
           })
+
+          if (column.align) {
+            headerCellProps.style = { textAlign: column.align }
+          }
+
           if (typeof HeaderCell === 'function') {
             return HeaderCell(h, headerCellProps, children)
           }

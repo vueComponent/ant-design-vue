@@ -121,7 +121,7 @@ export default {
     }
   },
 
-  mount () {
+  mounted () {
     this.$nextTick(() => {
       const { getContainer } = this
       this.scrollEvent = addEventListener(getContainer(), 'scroll', this.handleScroll)

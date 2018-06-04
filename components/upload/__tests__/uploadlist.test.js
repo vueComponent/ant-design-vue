@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
 import Upload from '..'
-import Form from '../../form'
 import { errorRequest, successRequest } from './requests'
 import PropsTypes from '../../_util/vue-types'
 import { UploadListProps } from '../interface'

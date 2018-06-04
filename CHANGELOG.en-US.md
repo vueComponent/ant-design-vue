@@ -2,6 +2,16 @@
 
 ---
 
+## 0.6.0
+
+`2018-06-04`
+- 🌟 Add `Anchor` Component
+- `Table`
+  - 🐞 Fix show `emptyText` problem when `loading.spinning` [17b9dc](https://github.com/vueComponent/ant-design/commit/17b9dc14f5225eb75542facdb5053f4916b9d77f)
+  - 🐞 Fixed `header style` not working [#30](https://github.com/vueComponent/ant-design/pull/30)
+- 🐞  `DatePicker`: Fix the issue of `change` event repeatedly call when `showTime` is `true` [81ab82](https://github.com/vueComponent/ant-design/commit/81ab829b1d0f67ee926b106de788fc5b41ec4f9c)
+- 🐞  `InputNumber`: Fix `placeholder` not working [ce39dc](https://github.com/vueComponent/ant-design/commit/ce39dc3506474a4b31632e03c38b518cf4060cef#diff-c9d10303f22c684e66d71ab1f9dac5f9R50)
+
 ## 0.5.4
 
 `2018-05-26`

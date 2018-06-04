@@ -30,6 +30,15 @@ antd 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并定�
   "primary-color": "#1DA57A",
 },
 ```
+定义 `theme` 属性时，需要配合使用`less-loader` 的 `modifyVars` 配置来覆盖原来的样式变量。
+可以参考 [atool-build 中 less-loader 的 webpack 相关配置](https://github.com/ant-tool/atool-build/blob/a4b3e3eec4ffc09b0e2352d7f9d279c4c28fdb99/src/getWebpackCommonConfig.js#L131-L138)
+
+注意：
+
+- 样式必须加载 less 格式。
+  - 如果你在使用 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 的 `style` 配置来引入样式，需要将配置值从 `'css'` 改为 `true`，这样会引入 less 文件。
+  - 如果你是通过 `'vue-antd-ui/dist/antd.css'` 引入样式的，改为 `vue-antd-ui/dist/antd.less`。
+- 如果要覆盖 `@icon-url` 变量，内容需要包括引号 `"@icon-url": "'your-icon-font-path'"`。
 
 ### 2) less
 
@@ -37,7 +46,7 @@ antd 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并定�
 
 建立一个单独的 `less` 文件如下，再引入这个文件。
 
-   ```css
+   ```less
    @import "~vue-antd-ui/dist/antd.less";   // 引入官方提供的 less 样式入口文件
    @import "your-theme-file.less";   // 用于覆盖上面定义的变量
    ```

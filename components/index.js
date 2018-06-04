@@ -14,7 +14,7 @@ if (ENV !== 'production' && ENV !== 'test' &&
 
 import { default as Affix } from './affix'
 
-// import { default as Anchor } from './anchor'
+import { default as Anchor } from './anchor'
 
 import { default as AutoComplete } from './auto-complete'
 
@@ -122,6 +122,8 @@ import { default as version } from './version'
 
 const components = [
   Affix,
+  Anchor,
+  Anchor.Link,
   AutoComplete,
   Alert,
   Avatar,
@@ -223,6 +225,7 @@ export {
   message,
   notification,
   Affix,
+  Anchor,
   AutoComplete,
   Alert,
   Avatar,

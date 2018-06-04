@@ -9,8 +9,8 @@
 - `Table`
   - 🐞 修复`loading.spinning`时显示`emptyText`问题[17b9dc](https://github.com/vueComponent/ant-design/commit/17b9dc14f5225eb75542facdb5053f4916b9d77f)
   - 🐞 修复`header style`不生效问题[#30](https://github.com/vueComponent/ant-design/pull/30)
-- `DatePicker` 🐞 修复属性`showTime`为`true`时，重复调用`change`事件问题[81ab82](https://github.com/vueComponent/ant-design/commit/81ab829b1d0f67ee926b106de788fc5b41ec4f9c)
-- `InputNumber` 🐞 修复`placeholder`不生效问题[ce39dc](https://github.com/vueComponent/ant-design/commit/ce39dc3506474a4b31632e03c38b518cf4060cef#diff-c9d10303f22c684e66d71ab1f9dac5f9R50)
+- `DatePicker`: 🐞 修复属性`showTime`为`true`时，重复调用`change`事件问题[81ab82](https://github.com/vueComponent/ant-design/commit/81ab829b1d0f67ee926b106de788fc5b41ec4f9c)
+- `InputNumber`: 🐞 修复`placeholder`不生效问题[ce39dc](https://github.com/vueComponent/ant-design/commit/ce39dc3506474a4b31632e03c38b518cf4060cef#diff-c9d10303f22c684e66d71ab1f9dac5f9R50)
 
 
 ## 0.5.4

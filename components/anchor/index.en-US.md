@@ -1,15 +1,3 @@
----
-category: Components
-type: Other
-cols: 2
-title: Anchor
----
-
-Hyperlinks to scroll on one page.
-
-## When To Use
-
-For displaying anchor hyperlinks on page and jumping between them.
 
 ## API
 

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import {
   Affix,
-  // Anchor,
+  Anchor,
   AutoComplete,
   Alert,
   Avatar,
@@ -57,6 +57,8 @@ import {
 } from 'antd'
 
 Vue.component(Affix.name, Affix) // a-affix
+Vue.component(Anchor.name, Anchor)
+Vue.component(Anchor.Link.name, Anchor.Link)
 Vue.component(AutoComplete.name, AutoComplete)
 Vue.component(Alert.name, Alert)
 Vue.component(Avatar.name, Avatar)

@@ -79,8 +79,8 @@ export const AnchorProps = {
   prefixCls: PropTypes.string,
   offsetTop: PropTypes.number,
   bounds: PropTypes.number,
-  affix: PropTypes.boolean,
-  showInkInFixed: PropTypes.boolean,
+  affix: PropTypes.bool,
+  showInkInFixed: PropTypes.bool,
   getContainer: PropTypes.func,
 }
 

@@ -7,6 +7,15 @@ import _ from 'lodash'
 import { isZhCN } from '../util'
 import { Provider, create } from '../../components/_util/store'
 
+const docsList = [
+  { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
+  { key: 'getting-started', enTitle: 'Getting Started', title: '快速上手' },
+  { key: 'use-with-vue-cli', enTitle: 'Use in vue-cli', title: '在 vue-cli 中使用' },
+  { key: 'customize-theme', enTitle: 'Customize Theme', title: '定制主题' },
+  { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
+  { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
+]
+
 export default {
   props: {
     name: String,
@@ -82,22 +91,30 @@ export default {
       )
     },
     getDocsMenu (isCN) {
-      const docs = [
-        { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
-        { key: 'getting-started', enTitle: 'Getting Started', title: '快速上手' },
-        { key: 'use-with-vue-cli', enTitle: 'Use in vue-cli', title: '在 vue-cli 中使用' },
-        { key: 'customize-theme', enTitle: 'Customize Theme', title: '定制主题' },
-        { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
-        { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
-      ]
       const docsMenu = []
-      docs.forEach(({ key, enTitle, title }) => {
+      docsList.forEach(({ key, enTitle, title }) => {
         const k = isCN ? `${key}-cn` : key
         docsMenu.push(<a-menu-item key={k}>
           <router-link to={`/ant-design/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
         </a-menu-item>)
       })
       return docsMenu
+    },
+    resetDocumentTitle (component, name, isCN) {
+      let titleStr = 'Vue Antd'
+      if (component) {
+        const { subtitle, title } = component
+        const componentName = isCN ? subtitle + ' ' + title : title
+        titleStr = componentName + ' - ' + titleStr
+      } else {
+        const currentKey = docsList.filter((item) => {
+          return item.key === name
+        })
+        if (currentKey.length) {
+          titleStr = (isCN ? currentKey[0]['title'] : currentKey[0]['enTitle']) + ' - ' + titleStr
+        }
+      }
+      document.title = titleStr
     },
   },
   render () {
@@ -122,7 +139,8 @@ export default {
       menuConfig[type] = menuConfig[type] || []
       menuConfig[type].push(d)
     }
-    const Demo = AllDemo[titleMap[name.replace(/-cn\/?$/, '')]]
+    const reName = name.replace(/-cn\/?$/, '')
+    const Demo = AllDemo[titleMap[reName]]
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
@@ -149,6 +167,7 @@ export default {
     if (!isCN) {
       locale = enUS
     }
+    this.resetDocumentTitle(Demo, reName, isCN)
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>

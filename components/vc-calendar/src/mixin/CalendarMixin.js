@@ -19,7 +19,7 @@ function getNowByCurrentStateValue (value) {
 }
 function isMoment (value) {
   if (Array.isArray(value)) {
-    return value.length === 0 || !!value.find((val) => val === undefined || moment.isMoment(val))
+    return value.length === 0 || value.findIndex((val) => val === undefined || moment.isMoment(val)) !== -1
   } else {
     return value === undefined || moment.isMoment(value)
   }

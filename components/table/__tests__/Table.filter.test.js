@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { mount } from '@vue/test-utils'
+import { asyncExpect } from '@/tests/utils'
 import Table from '..'
 
 function $$ (className) {
@@ -199,7 +200,7 @@ describe('Table.filter', () => {
     })
   })
 
-  it('fires change event', (done) => {
+  it('fires change event', async () => {
     const handleChange = jest.fn()
     const wrapper = mount(Table, getTableOptions({}, { change: handleChange }))
     const dropdownWrapper = mount({
@@ -207,19 +208,12 @@ describe('Table.filter', () => {
         return wrapper.find({ name: 'Trigger' }).vm.getComponent()
       },
     }, { sync: false })
-    new Promise((reslove) => {
-      Vue.nextTick(() => {
-        dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
-        dropdownWrapper.find('.confirm').trigger('click')
-        reslove()
-      })
-    }).then(() => {
-      Vue.nextTick(() => {
-        expect(handleChange).toBeCalledWith({}, { name: ['boy'] }, {})
-        Promise.resolve()
-      })
-    }).finally(() => {
-      done()
+    await asyncExpect(() => {
+      dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
+      dropdownWrapper.find('.confirm').trigger('click')
+    })
+    await asyncExpect(() => {
+      expect(handleChange).toBeCalledWith({}, { name: ['boy'] }, {})
     })
   })
 
@@ -266,7 +260,7 @@ describe('Table.filter', () => {
     }, 1000)
   })
 
-  it('works with JSX in controlled mode', (done) => {
+  it('works with JSX in controlled mode', async () => {
     const { Column } = Table
 
     const App = {
@@ -305,23 +299,17 @@ describe('Table.filter', () => {
         return wrapper.find({ name: 'Trigger' }).vm.getComponent()
       },
     }, { sync: false, attachToDocument: true })
-
-    new Promise((reslove) => {
-      Vue.nextTick(() => {
-        dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
-        dropdownWrapper.find('.confirm').trigger('click')
-        reslove()
-      })
-    }).then(() => {
+    await asyncExpect(() => {
+      dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
+      dropdownWrapper.find('.confirm').trigger('click')
+    })
+    await asyncExpect(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack'])
       dropdownWrapper.find('.clear').trigger('click')
-      setTimeout(() => {
-        expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy', 'Tom', 'Jerry'])
-        Promise.resolve()
-      }, 0)
-    }).finally(() => {
-      done()
     })
+    await asyncExpect(() => {
+      expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy', 'Tom', 'Jerry'])
+    }, 0)
   })
 
   it('works with grouping columns in controlled mode', (done) => {

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { mount } from '@vue/test-utils'
+import { asyncExpect } from '@/tests/utils'
 import Table from '..'
 
 describe('Table.sorter', () => {
@@ -71,19 +72,17 @@ describe('Table.sorter', () => {
     })
   })
 
-  it('sort records', (done) => {
+  it('sort records', async () => {
     const wrapper = mount(Table, getTableOptions())
-    Vue.nextTick(() => {
+    await asyncExpect(() => {
       wrapper.find('.ant-table-column-sorter-up').trigger('click')
-      Vue.nextTick(() => {
-        // expect(renderedNames(wrapper)).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'])
-        expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'].join(''))
-        wrapper.find('.ant-table-column-sorter-down').trigger('click')
-        Vue.nextTick(() => {
-          expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry'].join(''))
-          done()
-        })
-      })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'].join(''))
+      wrapper.find('.ant-table-column-sorter-down').trigger('click')
+    })
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry'].join(''))
     })
   })
 

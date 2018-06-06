@@ -91,7 +91,6 @@ export default {
       [`${prefixCls}-spinning`]: stateSpinning,
       [`${prefixCls}-show-text`]: !!tip || notCssAnimationSupported,
     }
-
     const spinIndicator = $slots.indicator ? $slots.indicator : (
       <span class={`${prefixCls}-dot`}>
         <i />

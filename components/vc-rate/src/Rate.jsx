@@ -149,11 +149,11 @@ export default {
         this.$refs.rateRef.focus()
       }
     },
-    // blur () {
-    //   if (!this.disabled) {
-    //     this.$refs.rateRef.blur()
-    //   }
-    // },
+    blur () {
+      if (!this.disabled) {
+        this.$refs.rateRef.blur()
+      }
+    },
     changeValue (value) {
       if (!hasProp(this, 'value')) {
         this.setState({

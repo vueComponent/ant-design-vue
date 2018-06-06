@@ -13,6 +13,7 @@ export const RateProps = {
   allowClear: PropTypes.bool,
   disabled: PropTypes.bool,
   character: PropTypes.any,
+  autoFocus: PropTypes.bool,
 }
 
 export default {

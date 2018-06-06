@@ -22,6 +22,7 @@ export default function demoTest (component, options = {}) {
       Vue.nextTick(() => {
         expect(wrapper.html()).toMatchSnapshot()
         MockDate.reset()
+        wrapper.destroy()
         done()
       })
     })

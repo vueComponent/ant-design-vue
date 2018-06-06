@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table.rowSelection render with default selection correctly 1`] = `
+<div>
+  <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none; left: -999px; top: -995px;">
+    <ul class="ant-dropdown-menu  ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light ant-table-selection-menu ant-dropdown-content" role="menu" aria-activedescendant="" tabindex="0">
+      <li role="menuitem" class="ant-dropdown-menu-item">
+        <div>Select current page</div>
+      </li>
+      <li role="menuitem" class="ant-dropdown-menu-item">
+        <div>Invert current page</div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

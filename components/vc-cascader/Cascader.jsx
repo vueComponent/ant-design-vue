@@ -257,7 +257,7 @@ export default {
   render () {
     const {
       $props, $slots, sValue, sActiveValue, handleMenuSelect,
-      sPopupVisible, handlePopupVisibleChange, handleKeyDown,
+      sPopupVisible, handlePopupVisibleChange, handleKeyDown, $listeners,
     } = this
     const {
       prefixCls, transitionName, popupClassName, options, disabled,
@@ -274,6 +274,7 @@ export default {
           visible: sPopupVisible,
         },
         on: {
+          ...$listeners,
           select: handleMenuSelect,
         },
       }
@@ -298,6 +299,7 @@ export default {
         popupClassName: popupClassName + emptyMenuClassName,
       },
       on: {
+        ...$listeners,
         popupVisibleChange: handlePopupVisibleChange,
       },
       ref: 'trigger',

@@ -27,7 +27,12 @@ export default {
       stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
     }
   },
-  computed: {
+  mounted () {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.focus()
+      }
+    })
   },
   watch: {
     value (val) {

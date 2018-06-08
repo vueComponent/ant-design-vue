@@ -174,8 +174,6 @@ export const SelectionBoxProps = {
   name: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string,
-  defaultChecked: PropTypes.bool,
-  checked: PropTypes.bool,
   // onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 

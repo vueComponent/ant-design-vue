@@ -1,5 +1,117 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Table.rowSelection fix selection column on the left 1`] = `
+<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-large ant-table-scroll-position-left ant-table-scroll-position-right"><div class="ant-table-content"><div class="ant-table-scroll"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  </label>
+</div>
+</span>
+</th>
+<th key="name" class=""><span>Name</span></th>
+</tr>
+</thead>
+<tbody class="ant-table-tbody">
+  <tr class="ant-table-row  ant-table-row-level-0">
+    <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+      </label>
+      </span>
+    </td>
+    <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+      <!---->Jack</td>
+  </tr>
+  <tr class="ant-table-row  ant-table-row-level-0">
+    <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+      </label>
+      </span>
+    </td>
+    <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+      <!---->Lucy</td>
+  </tr>
+  <tr class="ant-table-row  ant-table-row-level-0">
+    <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+      </label>
+      </span>
+    </td>
+    <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+      <!---->Tom</td>
+  </tr>
+  <tr class="ant-table-row  ant-table-row-level-0">
+    <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+      </label>
+      </span>
+    </td>
+    <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+      <!---->Jerry</td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="ant-table-fixed-left">
+  <!---->
+  <div class="ant-table-body-outer">
+    <div class="ant-table-body-inner">
+      <table class="ant-table-fixed">
+        <colgroup>
+          <col>
+        </colgroup>
+        <thead class="ant-table-thead">
+          <tr>
+            <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              </label>
+    </div>
+    </span>
+    </th>
+    </tr>
+    </thead>
+    <tbody class="ant-table-tbody">
+      <tr class="ant-table-row  ant-table-row-level-0">
+        <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          </label>
+          </span>
+        </td>
+      </tr>
+      <tr class="ant-table-row  ant-table-row-level-0">
+        <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          </label>
+          </span>
+        </td>
+      </tr>
+      <tr class="ant-table-row  ant-table-row-level-0">
+        <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          </label>
+          </span>
+        </td>
+      </tr>
+      <tr class="ant-table-row  ant-table-row-level-0">
+        <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          </label>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
+  <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
+    <a class="ant-pagination-item-link"></a>
+  </li>
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
+    <a>1</a>
+  </li>
+  <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
+    <a class="ant-pagination-item-link"></a>
+  </li>
+  <!---->
+</ul>
+</div>
+</span>
+</div>
+`;
+
 exports[`Table.rowSelection render with default selection correctly 1`] = `
 <div>
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none; left: -999px; top: -995px;">

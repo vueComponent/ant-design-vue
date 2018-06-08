@@ -150,13 +150,14 @@ export default {
     getCheckboxPropsByItem (item, index) {
       const { rowSelection = {}} = this
       if (!rowSelection.getCheckboxProps) {
-        return {}
+        return { props: {}}
       }
       const key = this.getRecordKey(item, index)
       // Cache checkboxProps
       if (!this.CheckboxPropsCache[key]) {
         this.CheckboxPropsCache[key] = rowSelection.getCheckboxProps(item)
       }
+      this.CheckboxPropsCache[key].props = this.CheckboxPropsCache[key].props || {}
       return this.CheckboxPropsCache[key]
     },
 
@@ -166,7 +167,7 @@ export default {
         return []
       }
       return this.getFlatData()
-        .filter((item, rowIndex) => this.getCheckboxPropsByItem(item, rowIndex).defaultChecked)
+        .filter((item, rowIndex) => this.getCheckboxPropsByItem(item, rowIndex).props.defaultChecked)
         .map((record, rowIndex) => this.getRecordKey(record, rowIndex))
     },
 
@@ -449,7 +450,7 @@ export default {
       const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
       const selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const changeableRowKeys = data
-        .filter((item, i) => !this.getCheckboxPropsByItem(item, i).disabled)
+        .filter((item, i) => !this.getCheckboxPropsByItem(item, i).props.disabled)
         .map((item, i) => this.getRecordKey(item, i))
 
       const changeRowKeys = []
@@ -595,7 +596,7 @@ export default {
       if (rowSelection) {
         const data = this.getFlatCurrentPageData().filter((item, index) => {
           if (rowSelection.getCheckboxProps) {
-            return !this.getCheckboxPropsByItem(item, index).disabled
+            return !this.getCheckboxPropsByItem(item, index).props.disabled
           }
           return true
         })
@@ -610,7 +611,7 @@ export default {
           width: rowSelection.columnWidth,
         }
         if (rowSelection.type !== 'radio') {
-          const checkboxAllDisabled = data.every((item, index) => this.getCheckboxPropsByItem(item, index).disabled)
+          const checkboxAllDisabled = data.every((item, index) => this.getCheckboxPropsByItem(item, index).props.disabled)
           selectionColumn.title = (
             <SelectionCheckboxAll
               store={this.store}

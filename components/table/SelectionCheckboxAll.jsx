@@ -60,7 +60,7 @@ export default {
       if (type === 'every' || type === 'some') {
         return (
           byDefaultChecked
-            ? data[type]((item, i) => getCheckboxPropsByItem(item, i).defaultChecked)
+            ? data[type]((item, i) => getCheckboxPropsByItem(item, i).props.defaultChecked)
             : data[type]((item, i) =>
               store.getState().selectedRowKeys.indexOf(getRecordKey(item, i)) >= 0)
         )

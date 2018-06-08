@@ -11,7 +11,7 @@ export default {
   props: SelectionBoxProps,
   data () {
     return {
-      checked: this.getCheckState(this.$props),
+      sChecked: this.getCheckState(this.$props),
     }
   },
 
@@ -28,8 +28,8 @@ export default {
     subscribe () {
       const { store } = this
       this.unsubscribe = store.subscribe(() => {
-        const checked = this.getCheckState(this.$props)
-        this.setState({ checked })
+        const sChecked = this.getCheckState(this.$props)
+        this.setState({ sChecked })
       })
     },
 
@@ -48,7 +48,7 @@ export default {
 
   render () {
     const { type, rowIndex, ...rest } = getOptionProps(this)
-    const { checked, $attrs, $listeners } = this
+    const { sChecked: checked, $attrs, $listeners } = this
     const checkboxProps = {
       props: {
         checked,

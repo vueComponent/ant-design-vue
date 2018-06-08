@@ -132,9 +132,12 @@ describe('Table.rowSelection', () => {
   // https://github.com/ant-design/ant-design/issues/4020
   it('handles defaultChecked', async () => {
     const rowSelection = {
-      getCheckboxProps: record => ({
-        defaultChecked: record.key === 0,
-      }),
+      getCheckboxProps: record => {
+        return {
+          props: {
+            defaultChecked: record.key === 0,
+          }}
+      },
     }
 
     const wrapper = mount(Table, getTableOptions({ rowSelection }))
@@ -145,13 +148,13 @@ describe('Table.rowSelection', () => {
       expect(checkboxs.at(2).vnode.data.domProps.checked).toBe(false)
       checkboxs.at(2).element.checked = true
       checkboxs.at(2).trigger('change')
-    })
+    }, 0)
 
     await asyncExpect(() => {
       const checkboxs = wrapper.findAll('input')
       expect(checkboxs.at(1).vnode.data.domProps.checked).toBe(true)
       expect(checkboxs.at(2).vnode.data.domProps.checked).toBe(true)
-    })
+    }, 1000)
   })
 
   it('can be controlled', async () => {
@@ -268,133 +271,146 @@ describe('Table.rowSelection', () => {
     expect(handleSelectInvert).toBeCalledWith([1, 2, 3])
   })
 
-  // it('fires selection event', () => {
-  //   const handleSelectOdd = jest.fn()
-  //   const handleSelectEven = jest.fn()
-  //   const rowSelection = {
-  //     selections: [{
-  //       key: 'odd',
-  //       text: '奇数项',
-  //       onSelect: handleSelectOdd,
-  //     }, {
-  //       key: 'even',
-  //       text: '偶数项',
-  //       onSelect: handleSelectEven,
-  //     }],
-  //   }
-  //   const wrapper = mount(Table, getTableOptions({ rowSelection }))
+  it('fires selection event', () => {
+    const handleSelectOdd = jest.fn()
+    const handleSelectEven = jest.fn()
+    const rowSelection = {
+      selections: [{
+        key: 'odd',
+        text: '奇数项',
+        onSelect: handleSelectOdd,
+      }, {
+        key: 'even',
+        text: '偶数项',
+        onSelect: handleSelectEven,
+      }],
+    }
+    const wrapper = mount(Table, getTableOptions({ rowSelection }))
 
-  //   const dropdownWrapper = mount({
-  //     render () {
-  //       return wrapper.find({ name: 'Trigger' }).vm.getComponent()
-  //     },
-  //   })
-  //   expect(dropdownWrapper.find('.ant-dropdown-menu-item').length).toBe(4)
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false })
+    expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(4)
 
-  //   dropdownWrapper.find('.ant-dropdown-menu-item > div').at(2).trigger('click')
-  //   expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3])
+    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(2).trigger('click')
+    expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3])
 
-  //   dropdownWrapper.find('.ant-dropdown-menu-item > div').at(3).trigger('click')
-  //   expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3])
-  // })
+    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(3).trigger('click')
+    expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3])
+  })
 
-  // it('could hide default selection options', () => {
-  //   const rowSelection = {
-  //     hideDefaultSelections: true,
-  //     selections: [{
-  //       key: 'odd',
-  //       text: '奇数项',
-  //     }, {
-  //       key: 'even',
-  //       text: '偶数项',
-  //     }],
-  //   }
-  //   const wrapper = mount(Table, getTableOptions({ rowSelection }))
-  //   const dropdownWrapper = mount({
-  //     render () {
-  //       return wrapper.find({ name: 'Trigger' }).vm.getComponent()
-  //     },
-  //   })
-  //   expect(dropdownWrapper.find('.ant-dropdown-menu-item').length).toBe(2)
-  // })
+  it('could hide default selection options', () => {
+    const rowSelection = {
+      hideDefaultSelections: true,
+      selections: [{
+        key: 'odd',
+        text: '奇数项',
+      }, {
+        key: 'even',
+        text: '偶数项',
+      }],
+    }
+    const wrapper = mount(Table, getTableOptions({ rowSelection }))
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false })
+    expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(2)
+  })
 
-  // it('handle custom selection onSelect correctly when hide default selection options', () => {
-  //   const handleSelectOdd = jest.fn()
-  //   const handleSelectEven = jest.fn()
-  //   const rowSelection = {
-  //     hideDefaultSelections: true,
-  //     selections: [{
-  //       key: 'odd',
-  //       text: '奇数项',
-  //       onSelect: handleSelectOdd,
-  //     }, {
-  //       key: 'even',
-  //       text: '偶数项',
-  //       onSelect: handleSelectEven,
-  //     }],
-  //   }
-  //   const wrapper = mount(Table, getTableOptions({ rowSelection }))
+  it('handle custom selection onSelect correctly when hide default selection options', () => {
+    const handleSelectOdd = jest.fn()
+    const handleSelectEven = jest.fn()
+    const rowSelection = {
+      hideDefaultSelections: true,
+      selections: [{
+        key: 'odd',
+        text: '奇数项',
+        onSelect: handleSelectOdd,
+      }, {
+        key: 'even',
+        text: '偶数项',
+        onSelect: handleSelectEven,
+      }],
+    }
+    const wrapper = mount(Table, getTableOptions({ rowSelection }))
 
-  //   const dropdownWrapper = mount({
-  //     render () {
-  //       return wrapper.find({ name: 'Trigger' }).vm.getComponent()
-  //     },
-  //   })
-  //   expect(dropdownWrapper.find('.ant-dropdown-menu-item').length).toBe(2)
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false })
+    expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(2)
 
-  //   dropdownWrapper.find('.ant-dropdown-menu-item > div').at(0).trigger('click')
-  //   expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3])
+    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(0).trigger('click')
+    expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3])
 
-  //   dropdownWrapper.find('.ant-dropdown-menu-item > div').at(1).trigger('click')
-  //   expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3])
-  // })
+    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(1).trigger('click')
+    expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3])
+  })
 
-  // // https://github.com/ant-design/ant-design/issues/4245
-  // it('handles disabled checkbox correctly when dataSource changes', () => {
-  //   const rowSelection = {
-  //     getCheckboxProps: record => ({ disabled: record.disabled }),
-  //   }
-  //   const wrapper = mount(Table, getTableOptions({ rowSelection }))
-  //   const newData = [
-  //     { key: 0, name: 'Jack', disabled: true },
-  //     { key: 1, name: 'Lucy', disabled: true },
-  //   ]
-  //   wrapper.setProps({ dataSource: newData })
-  //   wrapper.find('input').forEach((checkbox) => {
-  //     expect(checkbox.props().disabled).toBe(true)
-  //   })
-  // })
+  // https:// github.com/ant-design/ant-design/issues/4245
+  it('handles disabled checkbox correctly when dataSource changes', async () => {
+    const rowSelection = {
+      getCheckboxProps: record => {
+        return { props: { disabled: record.disabled }}
+      },
+    }
+    const wrapper = mount(Table, getTableOptions({ rowSelection }))
+    const newData = [
+      { key: 7, name: 'Jack', disabled: true },
+      { key: 8, name: 'Lucy', disabled: true },
+    ]
+    await asyncExpect(() => {
+      wrapper.setProps({ dataSource: newData })
+    })
+    await asyncExpect(() => {
+      wrapper.findAll('input').wrappers.forEach((checkbox) => {
+        expect(checkbox.vnode.data.attrs.disabled).toBe(true)
+      })
+    })
+  })
 
-  // // https://github.com/ant-design/ant-design/issues/4779
-  // it('should not switch pagination when select record', () => {
-  //   const newData = []
-  //   for (let i = 0; i < 20; i += 1) {
-  //     newData.push({
-  //       key: i.toString(),
-  //       name: i.toString(),
-  //     })
-  //   }
-  //   const wrapper = mount(Table, getTableOptions({
-  //     rowSelection: {},
-  //     dataSource: newData,
-  //   }))
-  //   wrapper.find('Pager').last().trigger('click') // switch to second page
-  //   wrapper.find('input').first().trigger('change', { target: { checked: true }})
-  //   wrapper.update()
-  //   expect(renderedNames(wrapper)).toEqual(['10', '11', '12', '13', '14', '15', '16', '17', '18', '19'])
-  // })
+  // https://github.com/ant-design/ant-design/issues/4779
+  it('should not switch pagination when select record', async () => {
+    const newData = []
+    for (let i = 0; i < 20; i += 1) {
+      newData.push({
+        key: i.toString(),
+        name: i.toString(),
+      })
+    }
+    const wrapper = mount(Table, getTableOptions({
+      rowSelection: {},
+      dataSource: newData,
+    }))
+    const pager = wrapper.findAll({ name: 'Pager' })
+    pager.at(pager.length - 1).trigger('click') // switch to second page
+    wrapper.findAll('input').at(0).element.checked = true
+    wrapper.findAll('input').at(0).trigger('change')
+    await asyncExpect(() => {
+      expect(renderedNames(wrapper)).toEqual(['10', '11', '12', '13', '14', '15', '16', '17', '18', '19'])
+    })
+  })
 
-  // it('highlight selected row', () => {
-  //   const wrapper = mount(Table, getTableOptions())
-  //   wrapper.find('input').at(1).trigger('change', { target: { checked: true }})
-  //   expect(wrapper.find('tbody tr').at(0).hasClass('ant-table-row-selected')).toBe(true)
-  // })
+  it('highlight selected row', async () => {
+    const wrapper = mount(Table, getTableOptions())
+    wrapper.findAll('input').at(1).element.checked = true
+    wrapper.findAll('input').at(1).trigger('change')
+    await asyncExpect(() => {
+      expect(wrapper.findAll('tbody tr').at(0).classes()).toContain('ant-table-row-selected')
+    })
+  })
 
-  // it('fix selection column on the left', () => {
-  //   const wrapper = mount(Table, getTableOptions({
-  //     rowSelection: { fixed: true },
-  //   }))
-
-  //   expect(wrapper).toMatchSnapshot()
-  // })
+  it('fix selection column on the left', async () => {
+    const wrapper = mount(Table, getTableOptions({
+      rowSelection: { fixed: true },
+    }))
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
 })

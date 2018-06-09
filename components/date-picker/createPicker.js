@@ -169,6 +169,8 @@ export default function createPicker (TheCalendar, props) {
           <input
             ref='input'
             disabled={props.disabled}
+            onFocus={focus}
+            onBlur={blur}
             readOnly
             value={(inputValue && inputValue.format(props.format)) || ''}
             placeholder={placeholder}

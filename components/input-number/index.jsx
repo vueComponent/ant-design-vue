@@ -25,6 +25,7 @@ export const InputNumberProps = {
   name: PropTypes.string,
   id: PropTypes.string,
   precision: PropTypes.number,
+  autoFocus: PropTypes.bool,
 }
 
 export default {

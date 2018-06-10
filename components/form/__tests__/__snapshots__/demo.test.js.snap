@@ -650,10 +650,16 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label for="select-multiple" title="Select[multiple]" class="ant-form-item-required">Select[multiple]</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select-multiple"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Please select favourite colors</div><!----></div></div></div></span>
-        <!---->
-      </div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select-multiple"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Please select favourite colors</div><div><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+      </li>
     </div>
+  </div>
+  </div>
+  </div>
+  </span>
+  <!---->
+  </div>
+  </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-6 ant-form-item-label">
@@ -749,7 +755,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label for="upload" title="Upload" class="">Upload</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span data-__meta="[object Object]" data-__field="[object Object]" id="upload" class=""><div class="ant-upload ant-upload-select ant-upload-select-picture"><!----></div><!----></span></span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span data-__meta="[object Object]" data-__field="[object Object]" id="upload" class=""><div class="ant-upload ant-upload-select ant-upload-select-picture"><!----></div><div class="ant-upload-list ant-upload-list-picture"></div></span></span>
         <!---->
         <div class="ant-form-extra">longgggggggggggggggggggggggggggggggggg</div>
       </div>
@@ -760,7 +766,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label title="Dragger" class="">Dragger</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="dropbox"><span data-__meta="[object Object]" data-__field="[object Object]" id="dragger" class=""><div class="ant-upload ant-upload-drag"><!----></div><!----></span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="dropbox"><span data-__meta="[object Object]" data-__field="[object Object]" id="dragger" class=""><div class="ant-upload ant-upload-drag"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span></div>
       </span>
       <!---->
     </div>

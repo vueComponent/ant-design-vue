@@ -16,7 +16,13 @@ exports[`renders ./components/spin/demo/custom-indicator.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/delayAndDebounce.md correctly 1`] = `
 <div>
-  <!---->
+  <div class="ant-spin-nested-loading">
+    <div class="ant-spin-container">
+      <div class="spin-content">
+        可以点击‘切换’按钮，延迟显示 loading 效果。当 spinning 状态在 \`delay\` 时间内结束，则不显示 loading 状态。
+      </div>
+    </div>
+  </div>
   Loading state：<span tabindex="0" class="ant-switch"><span class="ant-switch-inner"></span></span>
 </div>
 `;
@@ -29,7 +35,13 @@ exports[`renders ./components/spin/demo/inside.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/nested.md correctly 1`] = `
 <div>
-  <!---->
+  <div class="ant-spin-nested-loading">
+    <div class="ant-spin-container">
+      <div class="spin-content">
+        可以点击‘切换’按钮，控制本区域的spin展示。
+      </div>
+    </div>
+  </div>
   Loading state：<span tabindex="0" class="ant-switch"><span class="ant-switch-inner"></span></span>
 </div>
 `;
@@ -44,6 +56,17 @@ exports[`renders ./components/spin/demo/size.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/tip.md correctly 1`] = `
 <div>
-  <!---->
+  <div class="ant-spin-nested-loading">
+    <div>
+      <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot"><i></i><i></i><i></i><i></i></span>
+        <div class="ant-spin-text">Loading...</div>
+      </div>
+    </div>
+    <div class="ant-spin-container ant-spin-blur">
+      <div class="spin-content">
+        我的描述文案是自定义的。。。
+      </div>
+    </div>
+  </div>
 </div>
 `;

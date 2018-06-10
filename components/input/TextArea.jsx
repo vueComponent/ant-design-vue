@@ -55,7 +55,12 @@ export default {
     },
   },
   mounted () {
-    this.resizeTextarea()
+    this.$nextTick(() => {
+      this.resizeTextarea()
+      if (this.autoFocus) {
+        this.focus()
+      }
+    })
   },
   methods: {
     handleKeyDown (e) {

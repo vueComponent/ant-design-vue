@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cascader can be selected 1`] = `
+<div>
+  <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
+    <div class="ant-cascader-menus-content">
+      <ul class="ant-cascader-menu">
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Hangzhou</li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cascader can be selected 2`] = `
+<div>
+  <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
+    <div class="ant-cascader-menus-content">
+      <ul class="ant-cascader-menu">
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="West Lake" class="ant-cascader-menu-item">West Lake</li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cascader can be selected 3`] = `
+<div>
+  <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="display: none; left: -999px; top: -995px;">
+    <div class="ant-cascader-menus-content">
+      <ul class="ant-cascader-menu">
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="West Lake" class="ant-cascader-menu-item ant-cascader-menu-item-active">West Lake</li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cascader popup correctly when panel is hidden 1`] = `
+<div>
+  <div class="ant-cascader-menus  ant-cascader-menus-empty ant-cascader-menus-placement-bottomLeft" style="display: none; left: -999px; top: -995px;">
+    <div class="ant-cascader-menus-content"></div>
+  </div>
+</div>
+`;
+
+exports[`Cascader popup correctly when panel is open 1`] = `
+<div>
+  <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
+    <div class="ant-cascader-menus-content">
+      <ul class="ant-cascader-menu">
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Zhejiang</li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cascader popup correctly with defaultValue 1`] = `
+<div>
+  <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
+    <div class="ant-cascader-menus-content">
+      <ul class="ant-cascader-menu">
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou</li>
+      </ul>
+      <ul class="ant-cascader-menu">
+        <li title="West Lake" class="ant-cascader-menu-item">West Lake</li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cascader support controlled mode 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span>
+<i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i>
+<i class="anticon anticon-down ant-cascader-picker-arrow"></i>
+</span>
+`;

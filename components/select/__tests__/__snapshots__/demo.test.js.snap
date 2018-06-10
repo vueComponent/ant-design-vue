@@ -4,7 +4,12 @@ exports[`renders ./components/select/demo/automatic-tokenization.md correctly 1`
 <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
-      <!---->
+      <div>
+        <li class="ant-select-search ant-select-search--inline">
+          <div class="ant-select-search__field__wrap">
+            <input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+        </li>
+      </div>
     </div>
   </div>
 </div>
@@ -73,7 +78,16 @@ exports[`renders ./components/select/demo/multiple.md correctly 1`] = `
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: none;">Please select</div>
-      <!---->
+      <div>
+        <li unselectable="unselectable" title="a1" class="ant-select-selection__choice">
+          <div class="ant-select-selection__choice__content">a1</div><span class="ant-select-selection__choice__remove"></span></li>
+        <li unselectable="unselectable" title="b2" class="ant-select-selection__choice">
+          <div class="ant-select-selection__choice__content">b2</div><span class="ant-select-selection__choice__remove"></span></li>
+        <li class="ant-select-search ant-select-search--inline">
+          <div class="ant-select-search__field__wrap">
+            <input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+        </li>
+      </div>
     </div>
   </div>
 </div>
@@ -122,7 +136,12 @@ exports[`renders ./components/select/demo/select-users.md correctly 1`] = `
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Select users</div>
-      <!---->
+      <div>
+        <li class="ant-select-search ant-select-search--inline">
+          <div class="ant-select-search__field__wrap">
+            <input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+        </li>
+      </div>
     </div>
   </div>
 </div>
@@ -164,7 +183,24 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
       <div class="ant-select-selection__rendered">
         <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: none;">Please select</div>
-        <!---->
+        <div>
+          <li unselectable="unselectable" title="
+      a1
+    " class="ant-select-selection__choice">
+            <div class="ant-select-selection__choice__content">
+              a1
+            </div><span class="ant-select-selection__choice__remove"></span></li>
+          <li unselectable="unselectable" title="
+      b2
+    " class="ant-select-selection__choice">
+            <div class="ant-select-selection__choice__content">
+              b2
+            </div><span class="ant-select-selection__choice__remove"></span></li>
+          <li class="ant-select-search ant-select-search--inline">
+            <div class="ant-select-search__field__wrap">
+              <input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+          </li>
+        </div>
       </div>
     </div>
   </div>
@@ -173,7 +209,24 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
       <div class="ant-select-selection__rendered">
         <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: none;">Please select</div>
-        <!---->
+        <div>
+          <li unselectable="unselectable" title="
+      a1
+    " class="ant-select-selection__choice">
+            <div class="ant-select-selection__choice__content">
+              a1
+            </div><span class="ant-select-selection__choice__remove"></span></li>
+          <li unselectable="unselectable" title="
+      b2
+    " class="ant-select-selection__choice">
+            <div class="ant-select-selection__choice__content">
+              b2
+            </div><span class="ant-select-selection__choice__remove"></span></li>
+          <li class="ant-select-search ant-select-search--inline">
+            <div class="ant-select-search__field__wrap">
+              <input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+          </li>
+        </div>
       </div>
     </div>
   </div>
@@ -185,7 +238,12 @@ exports[`renders ./components/select/demo/tags.md correctly 1`] = `
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Tags Mode</div>
-      <!---->
+      <div>
+        <li class="ant-select-search ant-select-search--inline">
+          <div class="ant-select-search__field__wrap">
+            <input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+        </li>
+      </div>
     </div>
   </div>
 </div>

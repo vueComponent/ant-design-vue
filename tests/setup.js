@@ -27,7 +27,10 @@ global.Math = mockMath
 Vue.component('transition-group', {
   props: ['tag'],
   render (createElement) {
-    return null
+    return createElement(
+      this.tag || 'div',
+      this.$slots.default,
+    )
   },
 })
 

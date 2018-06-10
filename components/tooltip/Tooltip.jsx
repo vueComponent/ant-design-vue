@@ -26,7 +26,7 @@ export default {
   },
   model: {
     prop: 'visible',
-    event: 'change',
+    event: 'visibleChange',
   },
   data () {
     return {
@@ -44,7 +44,7 @@ export default {
         this.sVisible = this.isNoTitle() ? false : visible
       }
       if (!this.isNoTitle()) {
-        this.$emit('change', visible)
+        this.$emit('visibleChange', visible)
       }
     },
 

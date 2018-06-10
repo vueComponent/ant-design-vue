@@ -28,10 +28,10 @@ function setNotificationConfig (options) {
     defaultPlacement = placement
   }
   if (bottom !== undefined) {
-    defaultBottom = bottom
+    defaultBottom = typeof bottom === 'number' ? `${bottom}px` : bottom
   }
   if (top !== undefined) {
-    defaultTop = top
+    defaultTop = typeof top === 'number' ? `${top}px` : top
   }
   if (getContainer !== undefined) {
     defaultGetContainer = getContainer

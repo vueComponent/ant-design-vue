@@ -82,9 +82,9 @@ describe('As Form Control', () => {
     const wrapper = mount(DemoForm, { sync: false })
     await asyncExpect(() => {
       wrapper.find('input').element.value = '111'
-      wrapper.find('input').trigger('change')
+      wrapper.find('input').trigger('input')
       wrapper.find('textarea').element.value = '222'
-      wrapper.find('textarea').trigger('change')
+      wrapper.find('textarea').trigger('input')
     })
     await asyncExpect(() => {
       expect(wrapper.find('input').element.value).toBe('111')

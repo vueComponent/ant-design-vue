@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input should support maxLength 1`] = `<input type="text" maxlength="3" class="ant-input">`;
+
+exports[`Input.Search should support suffix 1`] = `<span class="ant-input-search ant-input-affix-wrapper ant-input-search"><input type="text" class="ant-input ant-input-search"><span class="ant-input-suffix">suffix<i class="anticon anticon-search ant-input-search-icon"></i></span></span>`;
+
+exports[`TextArea should support disabled 1`] = `<textarea disabled="disabled" class="ant-input ant-input-disabled"></textarea>`;
+
+exports[`TextArea should support maxLength 1`] = `<textarea maxlength="10" class="ant-input"></textarea>`;

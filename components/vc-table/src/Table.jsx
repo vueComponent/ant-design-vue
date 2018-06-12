@@ -179,14 +179,16 @@ export default {
   },
 
   updated (prevProps) {
-    if (this.columnManager.isAnyColumnsFixed()) {
-      this.handleWindowResize()
-      if (!this.resizeEvent) {
-        this.resizeEvent = addEventListener(
-          window, 'resize', this.debouncedWindowResize
-        )
+    this.$nextTick(() => {
+      if (this.columnManager.isAnyColumnsFixed()) {
+        this.handleWindowResize()
+        if (!this.resizeEvent) {
+          this.resizeEvent = addEventListener(
+            window, 'resize', this.debouncedWindowResize
+          )
+        }
       }
-    }
+    })
   },
 
   beforeDestroy () {

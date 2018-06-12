@@ -117,7 +117,7 @@ const SliderWithTooltip = {
         on: {
           mouseenter: () => this.handleTooltipVisibleChange(index, true),
           mouseleave: () => this.handleTooltipVisibleChange(index, false),
-          change: log,
+          visibleChange: log,
         },
         style: {
           ...handleStyleWithIndex,

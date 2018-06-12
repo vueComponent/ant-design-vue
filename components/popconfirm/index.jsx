@@ -102,7 +102,7 @@ export default {
       },
       ref: 'tooltip',
       on: {
-        change: this.onVisibleChange,
+        visibleChange: this.onVisibleChange,
       },
     }
     const overlay = (

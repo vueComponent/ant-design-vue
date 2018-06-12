@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { asyncExpect } from '../utils'
 
 export default function focusTest (Component) {
   describe('focus and blur', () => {
@@ -22,7 +23,7 @@ export default function focusTest (Component) {
       expect(handleFocus).toBeCalled()
     })
 
-    it('blur() and onBlur', () => {
+    it('blur() and onBlur', async () => {
       const handleBlur = jest.fn()
       const wrapper = mount({
         render (h) {
@@ -32,7 +33,9 @@ export default function focusTest (Component) {
       wrapper.vm.$refs.component.focus()
       wrapper.vm.$refs.component.blur()
       jest.runAllTimers()
-      expect(handleBlur).toBeCalled()
+      await asyncExpect(() => {
+        expect(handleBlur).toBeCalled()
+      })
     })
 
     it('autoFocus', (done) => {

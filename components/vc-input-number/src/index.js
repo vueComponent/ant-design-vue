@@ -105,6 +105,9 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      if (this.autoFocus && !this.disabled) {
+        this.focus()
+      }
       this.updatedFunc()
     })
   },
@@ -571,7 +574,6 @@ export default {
             onBlur={this.onBlur}
             onKeydown={editable ? this.onKeyDown : noop}
             onKeyup={editable ? this.onKeyUp : noop}
-            autoFocus={this.autoFocus}
             maxLength={this.maxLength}
             readOnly={this.readOnly}
             disabled={this.disabled}

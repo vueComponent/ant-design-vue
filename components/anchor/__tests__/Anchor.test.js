@@ -18,8 +18,10 @@ describe('Anchor Render', () => {
     Vue.nextTick(() => {
       wrapper.find('a[href="#API"]').trigger('click')
       wrapper.vm.$refs.anchor.handleScroll()
-      expect(wrapper.vm.$refs.anchor.$data.activeLink).not.toBe(null)
-      done()
+      setTimeout(() => {
+        expect(wrapper.vm.$refs.anchor.$data.activeLink).not.toBe(null)
+        done()
+      }, 1000)
     })
   })
 

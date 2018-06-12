@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeekPicker should support style prop 1`] = `
+<span class="ant-calendar-picker" style="width: 400px;"><span class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></span>
+</span>
+`;

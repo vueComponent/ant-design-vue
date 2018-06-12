@@ -2,6 +2,7 @@
 import { mount } from '@vue/test-utils'
 import Table from '..'
 import Vue from 'vue'
+import { asyncExpect } from '@/tests/utils'
 
 describe('Table.pagination', () => {
   const columns = [{
@@ -47,31 +48,30 @@ describe('Table.pagination', () => {
     })
   })
 
-  it('should not show pager if pagination.hideOnSinglePage is true and only 1 page', (done) => {
+  it('should not show pager if pagination.hideOnSinglePage is true and only 1 page', async () => {
     const wrapper = mount(Table, getTableOptions({ pagination: { pageSize: 3, hideOnSinglePage: true }}))
-    Vue.nextTick(() => {
+    await asyncExpect(() => {
       expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
       wrapper.setProps({ pagination: { pageSize: 3, hideOnSinglePage: false }})
-      Vue.nextTick(() => {
-        expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
-        wrapper.setProps({ pagination: { pageSize: 4, hideOnSinglePage: true }})
-        Vue.nextTick(() => {
-          expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
-          wrapper.setProps({ pagination: { pageSize: 4, hideOnSinglePage: false }})
-          Vue.nextTick(() => {
-            expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
-            wrapper.setProps({ pagination: { pageSize: 5, hideOnSinglePage: true }})
-            Vue.nextTick(() => {
-              expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
-              wrapper.setProps({ pagination: { pageSize: 5, hideOnSinglePage: false }})
-              Vue.nextTick(() => {
-                expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
-                done()
-              })
-            })
-          })
-        })
-      })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
+      wrapper.setProps({ pagination: { pageSize: 4, hideOnSinglePage: true }})
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
+      wrapper.setProps({ pagination: { pageSize: 4, hideOnSinglePage: false }})
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
+      wrapper.setProps({ pagination: { pageSize: 5, hideOnSinglePage: true }})
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
+      wrapper.setProps({ pagination: { pageSize: 5, hideOnSinglePage: false }})
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
     })
   })
 
@@ -140,36 +140,34 @@ describe('Table.pagination', () => {
 
   // https://github.com/ant-design/ant-design/issues/4532
   // https://codepen.io/afc163/pen/pWVRJV?editors=001
-  it('should display pagination as prop pagination change between true and false', (done) => {
+  it('should display pagination as prop pagination change between true and false', async () => {
     const wrapper = mount(Table, getTableOptions())
-    Vue.nextTick(() => {
+    await asyncExpect(() => {
       expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
       expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(2)
       wrapper.setProps({ pagination: false })
-      Vue.nextTick(() => {
-        expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
-        wrapper.setProps({ pagination })
-        // wrapper.update()
-        Vue.nextTick(() => {
-          expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
-          expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(2)
-          wrapper.find('.ant-pagination-item-2').trigger('click')
-          Vue.nextTick(() => {
-            expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry'])
-            wrapper.setProps({ pagination: false })
-            Vue.nextTick(() => {
-              expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
-              wrapper.setProps({ pagination: true })
-              Vue.nextTick(() => {
-                expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
-                expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(1) // pageSize will be 10
-                expect(renderedNames(wrapper)).toHaveLength(4)
-                done()
-              })
-            })
-          })
-        })
-      })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
+      wrapper.setProps({ pagination })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
+      expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(2)
+      wrapper.find('.ant-pagination-item-2').trigger('click')
+    })
+    await asyncExpect(() => {
+      expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry'])
+      wrapper.setProps({ pagination: false })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(0)
+      wrapper.setProps({ pagination: true })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1)
+      expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(1) // pageSize will be 10
+      expect(renderedNames(wrapper)).toHaveLength(4)
     })
   })
 
@@ -186,23 +184,22 @@ describe('Table.pagination', () => {
     })
   })
 
-  it('specify the position of pagination', (done) => {
+  it('specify the position of pagination', async () => {
     const wrapper = mount(Table, getTableOptions({ pagination: { position: 'top' }}))
-    setTimeout(() => {
+    await asyncExpect(() => {
       expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2)
       expect(wrapper.findAll('.ant-spin-container > *').at(0).findAll('.ant-pagination')).toHaveLength(1)
       wrapper.setProps({ pagination: { position: 'bottom' }})
-      setTimeout(() => {
-        expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2)
-        expect(wrapper.findAll('.ant-spin-container > *').at(1).findAll('.ant-pagination')).toHaveLength(1)
-        wrapper.setProps({ pagination: { position: 'both' }})
-        setTimeout(() => {
-          expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(3)
-          expect(wrapper.findAll('.ant-spin-container > *').at(0).findAll('.ant-pagination')).toHaveLength(1)
-          expect(wrapper.findAll('.ant-spin-container > *').at(2).findAll('.ant-pagination')).toHaveLength(1)
-          done()
-        })
-      })
+    }, 0)
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2)
+      expect(wrapper.findAll('.ant-spin-container > *').at(1).findAll('.ant-pagination')).toHaveLength(1)
+      wrapper.setProps({ pagination: { position: 'both' }})
+    }, 0)
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(3)
+      expect(wrapper.findAll('.ant-spin-container > *').at(0).findAll('.ant-pagination')).toHaveLength(1)
+      expect(wrapper.findAll('.ant-spin-container > *').at(2).findAll('.ant-pagination')).toHaveLength(1)
     }, 0)
   })
 })

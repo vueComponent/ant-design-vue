@@ -28,7 +28,7 @@ const TableHeaderRow = {
           const { column, children, className, ...cellProps } = cell
           const cls = cell.class || className
           const customProps = column.customHeaderCell ? column.customHeaderCell(column) : {}
-          
+
           const headerCellProps = mergeProps({
             attrs: {
               ...cellProps,

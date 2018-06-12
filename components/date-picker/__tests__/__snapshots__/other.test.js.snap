@@ -1,0 +1,272 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthPicker and WeekPicker render MonthPicker 1`] = `
+<div>
+  <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
+    <div tabindex="0" class="ant-calendar ant-calendar-month-calendar ant-calendar-month ant-calendar-picker-container-content">
+      <div class="ant-calendar-month-calendar-content">
+        <div class="ant-calendar-month-header-wrap">
+          <div class="ant-calendar-header">
+            <div style="position: relative;">
+              <a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a>
+              <a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">1月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span>
+              <a title="Next month (PageDown)"
+                class="ant-calendar-next-month-btn"></a>
+              <a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a>
+            </div>
+            <div class="ant-calendar-month-panel">
+              <div>
+                <div class="ant-calendar-month-panel-header">
+                  <a role="button" title="Last year (Control + left)" class="ant-calendar-month-panel-prev-year-btn"></a>
+                  <a role="button" title="Choose a year" class="ant-calendar-month-panel-year-select"><span class="ant-calendar-month-panel-year-select-content">2000</span><span class="ant-calendar-month-panel-year-select-arrow">x</span></a>
+                  <a role="button" title="Next year (Control + right)" class="ant-calendar-month-panel-next-year-btn"></a>
+                </div>
+                <div class="ant-calendar-month-panel-body">
+                  <table cellspacing="0" role="grid" class="ant-calendar-month-panel-table">
+                    <tbody class="ant-calendar-month-panel-tbody">
+                      <tr role="row">
+                        <td role="gridcell" title="一月" class="ant-calendar-month-panel-cell ant-calendar-month-panel-selected-cell">
+                          <a class="ant-calendar-month-panel-month">一月</a>
+                        </td>
+                        <td role="gridcell" title="二月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">二月</a>
+                        </td>
+                        <td role="gridcell" title="三月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">三月</a>
+                        </td>
+                      </tr>
+                      <tr role="row">
+                        <td role="gridcell" title="四月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">四月</a>
+                        </td>
+                        <td role="gridcell" title="五月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">五月</a>
+                        </td>
+                        <td role="gridcell" title="六月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">六月</a>
+                        </td>
+                      </tr>
+                      <tr role="row">
+                        <td role="gridcell" title="七月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">七月</a>
+                        </td>
+                        <td role="gridcell" title="八月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">八月</a>
+                        </td>
+                        <td role="gridcell" title="九月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">九月</a>
+                        </td>
+                      </tr>
+                      <tr role="row">
+                        <td role="gridcell" title="十月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">十月</a>
+                        </td>
+                        <td role="gridcell" title="十一月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">十一月</a>
+                        </td>
+                        <td role="gridcell" title="十二月" class="ant-calendar-month-panel-cell">
+                          <a class="ant-calendar-month-panel-month">十二月</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MonthPicker and WeekPicker render WeekPicker 1`] = `
+<div>
+  <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
+    <div tabindex="0" class="ant-calendar ant-calendar-week-number ant-calendar-picker-container-content">
+      <div class="ant-calendar-panel">
+        <div class="ant-calendar-date-panel">
+          <div class="ant-calendar-header">
+            <div style="position: relative;">
+              <a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a>
+              <a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">1月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span>
+              <a title="Next month (PageDown)"
+                class="ant-calendar-next-month-btn"></a>
+              <a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a>
+            </div>
+          </div>
+          <div class="ant-calendar-body">
+            <table cellspacing="0" role="grid" class="ant-calendar-table">
+              <thead>
+                <tr role="row">
+                  <th role="columnheader" class="ant-calendar-column-header ant-calendar-week-number-header"><span class="ant-calendar-column-header-inner">x</span></th>
+                  <th role="columnheader" title="周一" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">一</span></th>
+                  <th role="columnheader" title="周二" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">二</span></th>
+                  <th role="columnheader" title="周三" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">三</span></th>
+                  <th role="columnheader" title="周四" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">四</span></th>
+                  <th role="columnheader" title="周五" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">五</span></th>
+                  <th role="columnheader" title="周六" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">六</span></th>
+                  <th role="columnheader" title="周日" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">日</span></th>
+                </tr>
+              </thead>
+              <tbody class="ant-calendar-tbody">
+                <tr role="row" class="ant-calendar-active-week">
+                  <td role="gridcell" class="ant-calendar-week-number-cell">52</td>
+                  <td role="gridcell" title="1999年12月27日" class="ant-calendar-cell ant-calendar-last-month-cell">
+                    <div class="ant-calendar-calendar-date">27</div>
+                  </td>
+                  <td role="gridcell" title="1999年12月28日" class="ant-calendar-cell ant-calendar-last-month-cell">
+                    <div class="ant-calendar-calendar-date">28</div>
+                  </td>
+                  <td role="gridcell" title="1999年12月29日" class="ant-calendar-cell ant-calendar-last-month-cell">
+                    <div class="ant-calendar-calendar-date">29</div>
+                  </td>
+                  <td role="gridcell" title="1999年12月30日" class="ant-calendar-cell ant-calendar-last-month-cell">
+                    <div class="ant-calendar-calendar-date">30</div>
+                  </td>
+                  <td role="gridcell" title="1999年12月31日" class="ant-calendar-cell ant-calendar-last-month-cell ant-calendar-last-day-of-month">
+                    <div class="ant-calendar-calendar-date">31</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月1日" class="ant-calendar-cell ant-calendar-selected-date ant-calendar-selected-day">
+                    <div class="ant-calendar-selected-day">
+                      <div class="ant-calendar-date">1</div>
+                    </div>
+                  </td>
+                  <td role="gridcell" title="2000年1月2日" class="ant-calendar-cell">
+                    <div class="ant-calendar-selected-day">
+                      <div class="ant-calendar-date">2</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr role="row" class="">
+                  <td role="gridcell" class="ant-calendar-week-number-cell">1</td>
+                  <td role="gridcell" title="2000年1月3日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">3</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月4日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">4</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月5日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">5</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月6日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">6</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月7日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">7</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月8日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">8</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月9日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">9</div>
+                  </td>
+                </tr>
+                <tr role="row" class="">
+                  <td role="gridcell" class="ant-calendar-week-number-cell">2</td>
+                  <td role="gridcell" title="2000年1月10日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">10</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月11日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">11</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月12日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">12</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月13日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">13</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月14日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">14</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月15日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">15</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月16日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">16</div>
+                  </td>
+                </tr>
+                <tr role="row" class="">
+                  <td role="gridcell" class="ant-calendar-week-number-cell">3</td>
+                  <td role="gridcell" title="2000年1月17日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">17</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月18日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">18</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月19日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">19</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月20日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">20</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月21日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">21</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月22日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">22</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月23日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">23</div>
+                  </td>
+                </tr>
+                <tr role="row" class="">
+                  <td role="gridcell" class="ant-calendar-week-number-cell">4</td>
+                  <td role="gridcell" title="2000年1月24日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">24</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月25日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">25</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月26日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">26</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月27日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">27</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月28日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">28</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月29日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">29</div>
+                  </td>
+                  <td role="gridcell" title="2000年1月30日" class="ant-calendar-cell">
+                    <div class="ant-calendar-calendar-date">30</div>
+                  </td>
+                </tr>
+                <tr role="row" class="">
+                  <td role="gridcell" class="ant-calendar-week-number-cell">5</td>
+                  <td role="gridcell" title="2000年1月31日" class="ant-calendar-cell ant-calendar-last-day-of-month">
+                    <div class="ant-calendar-calendar-date">31</div>
+                  </td>
+                  <td role="gridcell" title="2000年2月1日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                    <div class="ant-calendar-calendar-date">1</div>
+                  </td>
+                  <td role="gridcell" title="2000年2月2日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                    <div class="ant-calendar-calendar-date">2</div>
+                  </td>
+                  <td role="gridcell" title="2000年2月3日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                    <div class="ant-calendar-calendar-date">3</div>
+                  </td>
+                  <td role="gridcell" title="2000年2月4日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                    <div class="ant-calendar-calendar-date">4</div>
+                  </td>
+                  <td role="gridcell" title="2000年2月5日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                    <div class="ant-calendar-calendar-date">5</div>
+                  </td>
+                  <td role="gridcell" title="2000年2月6日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                    <div class="ant-calendar-calendar-date">6</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

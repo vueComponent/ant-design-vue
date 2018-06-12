@@ -524,7 +524,11 @@ export default {
       newChildProps.on.blur = this.onBlur
     } else {
       newChildProps.on.focus = this.createTwoChains('focus')
-      newChildProps.on.blur = this.createTwoChains('blur')
+      newChildProps.on.blur = (e) => {
+        if (!e.relatedTarget || !contains(e.target, e.relatedTarget)) {
+          this.createTwoChains('blur')(e)
+        }
+      }
     }
     const { sPopupVisible, forceRender } = this
     const trigger = cloneElement(child, newChildProps)

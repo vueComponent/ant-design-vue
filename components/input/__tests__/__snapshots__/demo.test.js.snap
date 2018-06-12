@@ -23,9 +23,9 @@ exports[`renders ./components/input/demo/addon.md correctly 1`] = `
 
 exports[`renders ./components/input/demo/autosize-textarea.md correctly 1`] = `
 <div>
-  <textarea placeholder="Autosize height based on content lines" class="ant-input" style="height: 0px; min-height: -Infinitypx; max-height: Infinitypx; overflow-y: hidden;"></textarea>
+  <textarea placeholder="Autosize height based on content lines" class="ant-input"></textarea>
   <div style="margin: 24px 0px;"></div>
-  <textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input" style="height: -24px; min-height: -8px; max-height: -24px;"></textarea>
+  <textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input"></textarea>
 </div>
 `;
 

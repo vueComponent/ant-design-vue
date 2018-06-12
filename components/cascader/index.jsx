@@ -53,7 +53,7 @@ const CascaderProps = {
   disabled: PropTypes.bool.def(false),
   /** 是否支持清除*/
   allowClear: PropTypes.bool.def(true),
-  showSearch: PropTypes.oneOfType([PropTypes.bool, ShowSearchType]),
+  showSearch: PropTypes.oneOfType([Boolean, ShowSearchType]),
   notFoundContent: PropTypes.any.def('Not Found'),
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */
@@ -66,6 +66,7 @@ const CascaderProps = {
   inputPrefixCls: PropTypes.string.def('ant-input'),
   getPopupContainer: PropTypes.func,
   popupVisible: PropTypes.bool,
+  autoFocus: PropTypes.bool,
 }
 
 function defaultFilterOption (inputValue, path) {
@@ -102,6 +103,13 @@ export default {
       flattenOptions: showSearch && flattenTree(options, changeOnSelect),
     }
   },
+  mounted () {
+    this.$nextTick(() => {
+      if (this.autoFocus && !this.showSearch && !this.disabled) {
+        this.$refs.picker.focus()
+      }
+    })
+  },
   watch: {
     value (val) {
       this.setState({ sValue: val || [] })
@@ -119,7 +127,7 @@ export default {
     highlightKeyword (str, keyword, prefixCls) {
       return str.split(keyword)
         .map((node, index) => index === 0 ? node : [
-          <span class={`${prefixCls}-menu-item-keyword`} key='seperator'>{keyword}</span>,
+          <span class={`${prefixCls}-menu-item-keyword`}>{keyword}</span>,
           node,
         ])
     },
@@ -152,11 +160,15 @@ export default {
       }
       this.$emit('popupVisibleChange', popupVisible)
     },
+    handleInputFocus (e) {
+      this.$emit('focus', e)
+    },
 
-    handleInputBlur () {
+    handleInputBlur (e) {
       this.setState({
         inputFocused: false,
       })
+      this.$emit('blur', e)
     },
 
     handleInputClick (e) {
@@ -164,7 +176,7 @@ export default {
       // Prevent `Trigger` behaviour.
       if (inputFocused || sPopupVisible) {
         e.stopPropagation()
-        e.nativeEvent.stopImmediatePropagation()
+        e.nativeEvent && e.nativeEvent.stopImmediatePropagation()
       }
     },
 
@@ -249,16 +261,24 @@ export default {
     },
 
     focus () {
-      this.$refs.input.focus()
+      if (this.showSearch) {
+        this.$refs.input.focus()
+      } else {
+        this.$refs.picker.focus()
+      }
     },
 
     blur () {
-      this.$refs.input.blur()
+      if (this.showSearch) {
+        this.$refs.input.blur()
+      } else {
+        this.$refs.picker.blur()
+      }
     },
   },
 
   render () {
-    const { $slots, sValue: value, sPopupVisible, inputValue } = this
+    const { $slots, sValue: value, sPopupVisible, inputValue, $listeners } = this
     const props = getOptionProps(this)
     const {
       prefixCls, inputPrefixCls, placeholder, size, disabled,
@@ -329,6 +349,7 @@ export default {
     if (resultListMatchInputWidth && inputValue && this.input) {
       dropdownMenuColumnStyle.width = this.input.input.offsetWidth
     }
+    // showSearch时，focus、blur在input上触发，反之在ref='picker'上触发
     const inputProps = {
       props: {
         ...tempInputProps,
@@ -342,6 +363,7 @@ export default {
       class: `${prefixCls}-input ${sizeCls}`,
       ref: 'input',
       on: {
+        focus: showSearch ? this.handleInputFocus : noop,
         click: showSearch ? this.handleInputClick : noop,
         blur: showSearch ? this.handleInputBlur : noop,
         keydown: this.handleKeyDown,
@@ -354,6 +376,7 @@ export default {
       <span
         class={pickerCls}
         style={getStyle(this)}
+        ref='picker'
       >
         { showSearch ? <span class={`${prefixCls}-picker-label`}>
           {this.getLabel()}
@@ -375,6 +398,7 @@ export default {
         dropdownMenuColumnStyle: dropdownMenuColumnStyle,
       },
       on: {
+        ...$listeners,
         popupVisibleChange: this.handlePopupVisibleChange,
         change: this.handleChange,
       },

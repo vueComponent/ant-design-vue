@@ -169,7 +169,7 @@ export const SelectionCheckboxAllProps = {
 export const SelectionBoxProps = {
   store: Store,
   type: RowSelectionType,
-  defaultSelection: PropTypes.arrayOf(PropTypes.string),
+  defaultSelection: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
   rowIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string,
   disabled: PropTypes.bool,
@@ -183,7 +183,7 @@ export const SelectionBoxProps = {
 
 export const FilterMenuProps = {
   locale: TableLocale,
-  selectedKeys: PropTypes.arrayOf(PropTypes.string),
+  selectedKeys: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
   column: PropTypes.object,
   confirmFilter: PropTypes.func,
   prefixCls: PropTypes.string,

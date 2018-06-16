@@ -10,7 +10,7 @@ import Pagination from '../pagination'
 import { Row } from '../grid'
 
 import Item from './Item'
-import { initDefaultProps, getComponentFromProp } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util'
 import { cloneElement } from '../_util/vnode'
 
 export { ListItemProps, ListItemMetaProps } from './Item'
@@ -38,7 +38,7 @@ export const ListProps = () => ({
   extra: PropTypes.any,
   grid: PropTypes.shape(ListGridType).loose,
   itemLayout: PropTypes.string,
-  loading: PropTypes.oneOfType([PropTypes.bool, SpinProps()]),
+  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   loadMore: PropTypes.any,
   pagination: PropTypes.any,
   prefixCls: PropTypes.string,
@@ -139,7 +139,7 @@ export default {
     const loadMore = getComponentFromProp(this, 'loadMore')
     const footer = getComponentFromProp(this, 'footer')
     const header = getComponentFromProp(this, 'header')
-    const children = $slots.default || []
+    const children = filterEmpty($slots.default || [])
     let loadingProp = loading
     if (typeof loadingProp === 'boolean') {
       loadingProp = {
@@ -220,7 +220,7 @@ export default {
       childrenContent = grid ? (
         <Row gutter={grid.gutter}>{childrenList}</Row>
       ) : childrenList
-    } else if (!children && !isLoading) {
+    } else if (!children.length && !isLoading) {
       childrenContent = (
         <LocaleReceiver
           componentName='Table'

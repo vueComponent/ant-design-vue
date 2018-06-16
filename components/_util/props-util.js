@@ -196,7 +196,7 @@ export function isEmptyElement (ele) {
 }
 
 export function filterEmpty (children = []) {
-  return children.filter(c => c.tag || c.text.trim() !== '')
+  return children.filter(c => c.tag || (c.text && c.text.trim() !== ''))
 }
 const initDefaultProps = (propTypes, defaultProps) => {
   Object.keys(defaultProps).forEach(k => {

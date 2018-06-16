@@ -1,13 +1,6 @@
 import Layout from './components/layout.vue'
 import Iframe from './components/iframe.vue'
 
-const AsyncTestComp = () => {
-  const d = window.location.hash.replace('#', '')
-  return {
-    component: import(`../components/input-number/demo/${d}`),
-  }
-}
-
 export default [
   { path: '/ant-design/components/:name/', component: Layout, props: true },
   { path: '/ant-design/iframe/:name/', component: Iframe, props: true },
@@ -70,7 +63,5 @@ export default [
       { path: '', redirect: '/ant-design/vue/docs/introduce/' },
     ],
   },
-
-  { path: '/:prefix?/test/:demo?/', component: AsyncTestComp },
   { path: '/*', redirect: '/ant-design/docs/vue/introduce/' },
 ]

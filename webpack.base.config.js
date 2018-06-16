@@ -133,7 +133,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
 module.exports = {
   entry: {
     index: [
-      './site/index.js',
+      `./site/${process.env.ENTRY_INDEX || 'index'}.js`,
     ],
   },
   module: {

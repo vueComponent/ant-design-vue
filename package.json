@@ -22,6 +22,7 @@
         "es"
     ],
     "scripts": {
+        "dev": "NODE_ENV=development ENTRY_INDEX=dev ./node_modules/.bin/webpack-dev-server --open --hot --port 3001",
         "start": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --open --hot",
         "test": "jest --config .jest.js",
         "site": "node scripts/run.js site-dist",
@@ -136,11 +137,13 @@
         "vue": "^2.5.16",
         "vue-antd-md-loader": "^1.0.3",
         "vue-clipboard2": "0.0.8",
+        "vue-infinite-scroll": "^2.0.2",
         "vue-jest": "^2.5.0",
         "vue-loader": "^13.0.5",
         "vue-router": "^3.0.1",
         "vue-server-renderer": "^2.5.16",
         "vue-template-compiler": "^2.5.16",
+        "vue-virtual-scroller": "^0.12.0",
         "webpack": "^3.11.0",
         "webpack-chunk-hash": "^0.5.0",
         "webpack-dev-server": "^2.8.2",

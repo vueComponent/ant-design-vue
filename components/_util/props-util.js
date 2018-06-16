@@ -59,6 +59,9 @@ const getSlots = (ele) => {
   return slots
 }
 const getSlotOptions = (ele) => {
+  if (ele.fnOptions) { // 函数式组件
+    return ele.fnOptions
+  }
   let componentOptions = ele.componentOptions
   if (ele.$vnode) {
     componentOptions = ele.$vnode.componentOptions

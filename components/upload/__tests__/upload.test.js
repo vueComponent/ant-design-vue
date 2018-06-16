@@ -29,7 +29,7 @@ describe('Upload', () => {
     const data = jest.fn()
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'http://upload.com',
         beforeUpload: () => new Promise(resolve =>
           setTimeout(() => resolve('success'), 100)
         ),
@@ -48,7 +48,6 @@ describe('Upload', () => {
       },
       sync: false,
     }
-    Upload.props
     const wrapper = mount(Upload, props)
     setTimeout(() => {
       const mockFile = new File(['foo'], 'foo.png', {
@@ -66,7 +65,7 @@ describe('Upload', () => {
     const data = jest.fn()
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'http://upload.com',
         beforeUpload: () => false,
         data,
       },
@@ -100,7 +99,7 @@ describe('Upload', () => {
     let lastPercent = -1
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'http://upload.com',
       },
       listeners: {
         change: ({ file }) => {
@@ -139,7 +138,7 @@ describe('Upload', () => {
     const data = jest.fn()
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'http://upload.com',
         beforeUpload () {},
         data,
       },

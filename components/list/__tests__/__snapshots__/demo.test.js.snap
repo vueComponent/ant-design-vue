@@ -123,7 +123,11 @@ exports[`renders ./components/list/demo/grid.md correctly 1`] = `
 exports[`renders ./components/list/demo/infinite-load.md correctly 1`] = `
 <div infinite-scroll-distance="10" class="demo-infinite-container">
   <div class="ant-list ant-list-split">
-    <div class="ant-spin ant-spin-show-text"><span class="ant-spin-dot"><i></i><i></i><i></i><i></i></span></div>
+    <div class="ant-spin-nested-loading">
+      <div class="ant-spin-container">
+        <div class="ant-list-empty-text">No data</div>
+      </div>
+    </div>
   </div>
 </div>
 `;

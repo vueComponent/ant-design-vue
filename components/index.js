@@ -60,7 +60,7 @@ import { default as InputNumber } from './input-number'
 
 import { default as Layout } from './layout'
 
-// import { default as List } from './list'
+import { default as List } from './list'
 
 import { default as LocaleProvider } from './locale-provider'
 
@@ -163,6 +163,9 @@ const components = [
   Layout.Footer,
   Layout.Sider,
   Layout.Content,
+  List,
+  List.Item,
+  List.Item.Meta,
   LocaleProvider,
   Menu,
   Menu.Item,
@@ -247,6 +250,7 @@ export {
   Input,
   InputNumber,
   Layout,
+  List,
   LocaleProvider,
   Menu,
   Modal,

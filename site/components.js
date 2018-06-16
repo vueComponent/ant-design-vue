@@ -24,7 +24,7 @@ import {
   Input,
   InputNumber,
   Layout,
-  // List,
+  List,
   LocaleProvider,
   message,
   Menu,
@@ -100,7 +100,9 @@ Vue.component(Layout.Header.name, Layout.Header)
 Vue.component(Layout.Footer.name, Layout.Footer)
 Vue.component(Layout.Sider.name, Layout.Sider)
 Vue.component(Layout.Content.name, Layout.Content)
-// Vue.component(List.name, List)
+Vue.component(List.name, List)
+Vue.component(List.Item.name, List.Item)
+Vue.component(List.Item.Meta.name, List.Item.Meta)
 Vue.component(LocaleProvider.name, LocaleProvider)
 Vue.component(Menu.name, Menu)
 Vue.component(Menu.Item.name, Menu.Item)

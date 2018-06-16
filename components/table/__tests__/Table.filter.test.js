@@ -302,11 +302,11 @@ describe('Table.filter', () => {
     await asyncExpect(() => {
       dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
       dropdownWrapper.find('.confirm').trigger('click')
-    })
+    }, 0)
     await asyncExpect(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack'])
       dropdownWrapper.find('.clear').trigger('click')
-    })
+    }, 0)
     await asyncExpect(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy', 'Tom', 'Jerry'])
     }, 0)

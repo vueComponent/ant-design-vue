@@ -11,6 +11,6 @@ exports[`Spin should only affect the spin element when set style to a nested <Sp
 
 exports[`Spin should render custom indicator when it's set 1`] = `
 <div class="ant-spin ant-spin-spinning">
-  <div class="custom-indicator"></div>
+  <div class="custom-indicator ant-spin-dot"></div>
 </div>
 `;

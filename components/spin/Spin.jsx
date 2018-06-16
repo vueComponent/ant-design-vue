@@ -2,8 +2,9 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import isCssAnimationSupported from '../_util/isCssAnimationSupported'
-import { filterEmpty, initDefaultProps } from '../_util/props-util'
+import { filterEmpty, initDefaultProps, isValidElement, getComponentFromProp } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
+import { cloneElement } from '../_util/vnode'
 
 export const SpinProps = () => ({
   prefixCls: PropTypes.string,
@@ -12,6 +13,7 @@ export const SpinProps = () => ({
   wrapperClassName: PropTypes.string,
   tip: PropTypes.string,
   delay: PropTypes.number,
+  indicator: PropTypes.any,
 })
 
 export default {
@@ -91,7 +93,16 @@ export default {
       [`${prefixCls}-spinning`]: stateSpinning,
       [`${prefixCls}-show-text`]: !!tip || notCssAnimationSupported,
     }
-    const spinIndicator = $slots.indicator ? $slots.indicator : (
+    let indicator = getComponentFromProp(this, 'indicator')
+    if (Array.isArray(indicator)) {
+      indicator = filterEmpty(indicator)
+      indicator = indicator.length === 1 ? indicator[0] : indicator
+    }
+    let spinIndicator = null
+    if (isValidElement(indicator)) {
+      spinIndicator = cloneElement(indicator, { class: `${prefixCls}-dot` })
+    }
+    spinIndicator = spinIndicator || (
       <span class={`${prefixCls}-dot`}>
         <i />
         <i />

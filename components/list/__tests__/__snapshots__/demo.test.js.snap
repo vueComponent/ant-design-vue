@@ -371,7 +371,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
               <li><span><i class="anticon anticon-like-o" style="margin-right: 8px;"></i>
         156
       </span><em class="ant-list-item-action-split"></em></li>
-              <li><span><i class="anticon anticon-message-o" style="margin-right: 8px;"></i>
+              <li><span><i class="anticon anticon-message" style="margin-right: 8px;"></i>
         2
       </span></li>
             </ul>
@@ -403,7 +403,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
               <li><span><i class="anticon anticon-like-o" style="margin-right: 8px;"></i>
         156
       </span><em class="ant-list-item-action-split"></em></li>
-              <li><span><i class="anticon anticon-message-o" style="margin-right: 8px;"></i>
+              <li><span><i class="anticon anticon-message" style="margin-right: 8px;"></i>
         2
       </span></li>
             </ul>
@@ -435,7 +435,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
               <li><span><i class="anticon anticon-like-o" style="margin-right: 8px;"></i>
         156
       </span><em class="ant-list-item-action-split"></em></li>
-              <li><span><i class="anticon anticon-message-o" style="margin-right: 8px;"></i>
+              <li><span><i class="anticon anticon-message" style="margin-right: 8px;"></i>
         2
       </span></li>
             </ul>

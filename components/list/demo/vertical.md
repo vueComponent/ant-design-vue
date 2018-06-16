@@ -61,7 +61,7 @@ export default {
       actions: [
         { type: 'star-o', text: '156' },
         { type: 'like-o', text: '156' },
-        { type: 'message-o', text: '2' },
+        { type: 'message', text: '2' },
       ],
     }
   },

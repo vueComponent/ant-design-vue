@@ -41,24 +41,6 @@ export default {
       }
     })
   },
-  computed: {
-    classes () {
-      const { prefixCls, disabled, stateChecked } = this
-      return {
-        [`${prefixCls}-wrapper`]: true,
-        [`${prefixCls}-wrapper-checked`]: stateChecked,
-        [`${prefixCls}-wrapper-disabled`]: disabled,
-      }
-    },
-    checkboxClass () {
-      const { prefixCls, disabled, stateChecked } = this
-      return {
-        [`${prefixCls}`]: true,
-        [`${prefixCls}-checked`]: stateChecked,
-        [`${prefixCls}-disabled`]: disabled,
-      }
-    },
-  },
   methods: {
     handleChange (event) {
       const targetChecked = event.target.checked
@@ -114,7 +96,7 @@ export default {
     },
   },
   render () {
-    const { id, classes, checkboxClass, prefixCls,
+    const { id, prefixCls,
       stateChecked, handleChange, $slots,
       onFocus,
       onBlur,
@@ -127,9 +109,20 @@ export default {
       name = radioGroupContext.name
       disabled = disabled || radioGroupContext.disabled
     }
+    const wrapperClassString = {
+      [`${prefixCls}-wrapper`]: true,
+      [`${prefixCls}-wrapper-checked`]: stateChecked,
+      [`${prefixCls}-wrapper-disabled`]: disabled,
+    }
+    const checkboxClass = {
+      [`${prefixCls}`]: true,
+      [`${prefixCls}-checked`]: stateChecked,
+      [`${prefixCls}-disabled`]: disabled,
+    }
+
     return (
       <label
-        class={classes}
+        class={wrapperClassString}
         onMouseenter={onMouseEnter}
         onMouseleave={onMouseLeave}
       >

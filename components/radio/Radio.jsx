@@ -14,6 +14,7 @@ export default {
     value: PropTypes.any,
     name: String,
     id: String,
+    autoFocus: Boolean,
   },
   model: {
     prop: 'checked',
@@ -32,6 +33,13 @@ export default {
         ? !hasProp(this, 'checked') ? defaultChecked : checked
         : stateChecked,
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.$refs.input.focus()
+      }
+    })
   },
   computed: {
     classes () {
@@ -78,6 +86,24 @@ export default {
         })
       }
     },
+    focus () {
+      this.$refs.input.focus()
+    },
+    blur () {
+      this.$refs.input.blur()
+    },
+    onFocus (e) {
+      this.$emit('focus', e)
+    },
+    onBlur (e) {
+      this.$emit('blur', e)
+    },
+    onMouseEnter (e) {
+      this.$emit('mouseenter', e)
+    },
+    onMouseLeave (e) {
+      this.$emit('mouseleave', e)
+    },
   },
   watch: {
     checked (val) {
@@ -88,13 +114,25 @@ export default {
     },
   },
   render () {
-    const { id, classes, checkboxClass, disabled, prefixCls, stateChecked, handleChange, name, $slots } = this
+    const { id, classes, checkboxClass, disabled, prefixCls,
+      stateChecked, handleChange, name, $slots,
+      onFocus,
+      onBlur,
+      onMouseEnter,
+      onMouseLeave,
+    } = this
     return (
-      <label class={classes}>
+      <label
+        class={classes}
+        onMouseenter={onMouseEnter}
+        onMouseleave={onMouseLeave}
+      >
         <span class={checkboxClass}>
           <input name={name} type='radio' disabled={disabled}
             class={`${prefixCls}-input`} checked={stateChecked}
-            onChange={handleChange} id={id}
+            onChange={handleChange} id={id} ref='input'
+            onFocus={onFocus}
+            onBlur={onBlur}
           />
           <span class={`${prefixCls}-inner`} />
         </span>

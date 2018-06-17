@@ -2,6 +2,8 @@
 
 ---
 
+## 0.6.1
+
 `2018-06-17`
 - 🌟 Add `List` Component
 - `Table`

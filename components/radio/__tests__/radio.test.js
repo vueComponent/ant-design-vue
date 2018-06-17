@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
-import Radio from '../radio'
+import Radio from '../Radio'
 import focusTest from '../../../tests/shared/focusTest'
 
 describe('Radio', () => {

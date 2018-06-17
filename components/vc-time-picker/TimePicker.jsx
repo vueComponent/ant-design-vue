@@ -12,6 +12,7 @@ function noop () {
 
 export default {
   mixins: [BaseMixin],
+  name: 'VcTimePicker',
   props: initDefaultProps({
     prefixCls: PropTypes.string,
     clearText: PropTypes.string,
@@ -83,6 +84,13 @@ export default {
       sOpen: open,
       sValue: value,
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.focus()
+      }
+    })
   },
 
   watch: {

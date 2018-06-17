@@ -63,6 +63,12 @@ export default {
       this.$emit('input', targetValue)
       this.$emit('change', event)
     },
+    onMouseEnter (e) {
+      this.$emit('mouseenter', e)
+    },
+    onMouseLeave (e) {
+      this.$emit('mouseleave', e)
+    },
   },
   watch: {
     value (val) {
@@ -70,9 +76,16 @@ export default {
     },
   },
   render () {
-    const { radioOptions, classes, $slots, name } = this
+    const { radioOptions, classes, $slots, name,
+      onMouseEnter,
+      onMouseLeave,
+    } = this
     return (
-      <div class={classes}>
+      <div
+        class={classes}
+        onMouseenter={onMouseEnter}
+        onMouseleave={onMouseLeave}
+      >
         {radioOptions.map(({ value, disabled, label }) =>
           <Radio key={value} value={value} disabled={disabled} name={name}>{label}</Radio>)}
         { radioOptions.length === 0 && ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')}

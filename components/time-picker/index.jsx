@@ -55,6 +55,8 @@ export const TimePickerProps = () => ({
   align: PropTypes.object,
   placement: PropTypes.any,
   transitionName: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  addon: PropTypes.any,
 })
 
 export default {
@@ -146,6 +148,7 @@ export default {
         class: className,
         ref: 'timePicker',
         on: {
+          ...this.$listeners,
           change: this.handleChange,
           open: this.handleOpenClose,
           close: this.handleOpenClose,

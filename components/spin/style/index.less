@@ -23,6 +23,7 @@
   &-nested-loading {
     position: relative;
     > div > .@{spin-prefix-cls} {
+      display: block;
       position: absolute;
       height: 100%;
       max-height: 320px;
@@ -77,6 +78,8 @@
   }
 
   &-blur {
+    pointer-events: none;
+    user-select: none;
     overflow: hidden;
     opacity: 0.7;
     -webkit-filter: blur(0.5px);
@@ -84,10 +87,7 @@
 
     /* autoprefixer: off */
     filter: ~"progid\:DXImageTransform\.Microsoft\.Blur(PixelRadius\=1, MakeShadow\=false)";
-    // workround for a strange style bug in safari:
-    // https://github.com/ant-design/ant-design/issues/4622
-    // have no clue why this works
-    -webkit-transform: translateZ(0);
+
     &:after {
       content: '';
       position: absolute;
@@ -114,9 +114,10 @@
   &-dot {
     position: relative;
     display: inline-block;
+    font-size: @spin-dot-size;
+
     .square(@spin-dot-size);
-    transform: rotate(45deg);
-    animation: antRotate 1.2s infinite linear;
+
     i {
       width: 9px;
       height: 9px;
@@ -148,12 +149,20 @@
         animation-delay: 1.2s;
       }
     }
+
+    &-spin {
+      transform: rotate(45deg);
+      animation: antRotate 1.2s infinite linear;
+    }
   }
 
   // Sizes
   // ------------------------------
+
   // small
   &-sm &-dot {
+    font-size: @spin-dot-size-sm;
+
     .square(@spin-dot-size-sm);
     i {
       width: 6px;
@@ -163,6 +172,8 @@
 
   // large
   &-lg &-dot {
+    font-size: @spin-dot-size-lg;
+
     .square(@spin-dot-size-lg);
     i {
       width: 14px;

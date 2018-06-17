@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Spin should only affect the spin element when set style to a nested <Spin>xx</Spin> 1`] = `
-<span tag="div" class="ant-spin-nested-loading" style="background: red;"><div><div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot"><i></i><i></i><i></i><i></i></span></div>
+<span tag="div" class="ant-spin-nested-loading" style="background: red;"><div><div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
 </div>
 <div class="ant-spin-container ant-spin-blur">
   <div>content</div>

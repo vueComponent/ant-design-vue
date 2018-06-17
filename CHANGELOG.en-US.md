@@ -2,6 +2,21 @@
 
 ---
 
+`2018-06-17`
+- 🌟 Add `List` Component
+- `Table`
+  - 🐞 Fix `'querySelectorAll` error when updating height[#33](https://github.com/vueComponent/ant-design/issues/33)
+  - 🐞 fix `defaultChecked` not working[ec1999](https://github.com/vueComponent/ant-design/commit/ec1999dea4cea126b78e3fd84bef620b876e9841)
+  - `columns key` support `number` type[9b7f5c](https://github.com/vueComponent/ant-design/commit/9b7f5c2f81b6f83190e5b022b2b1e28de3f68a2b)
+- `Tooltip`: 🛠 update events API `change` to `visibleChange`
+- `Textarea`: 🐞 Fix `autoFoucs` not working[787927](https://github.com/vueComponent/ant-design/commit/787927912307db7edb9821a440feacd216e3a6a2)
+- `InputSearch`: 🐞 Add `focus` `blur` methods[3cff62](https://github.com/vueComponent/ant-design/commit/3cff62997d16811ae17618f9b41617973d805d7d)
+- `InputNumber`: 🐞 Fix `autoFoucs` not working[88f165](https://github.com/vueComponent/ant-design/commit/88f165edb5c3993f4dba90c3267a1ea037e0869b)
+- `DatePicker`: 🐞 Fix `autoFoucs` not working[264abf](https://github.com/vueComponent/ant-design/commit/264abff59791181b9190ca0914b780a8df6aa81a)
+- `Cascader`: 🐞 Fix `autoFoucs` not working[be69bd](https://github.com/vueComponent/ant-design/commit/be69bd9af1bae184a4ebe8c4ef9560479ab11027)
+- `Rate`: 🐞 Fix `autoFoucs` not working，and `blur` error[c2c984](https://github.com/vueComponent/ant-design/commit/c2c9841eb9b8e5ce4decff57a925e60d4bd7d809)
+- `RangePicker`: 🐞 Fix value type check error problem[228f44](https://github.com/vueComponent/ant-design/commit/228f4478a5d169d22960c97d1d8a8320c58da9cc)
+
 ## 0.6.0
 
 `2018-06-04`

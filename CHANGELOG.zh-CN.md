@@ -2,6 +2,25 @@
 
 ---
 
+## 0.6.1
+
+`2018-06-17`
+- 🌟 新增`List`列表组件
+- `Table`
+  - 🐞 修复更新高度时报错问题[#33](https://github.com/vueComponent/ant-design/issues/33)
+  - 🐞 修复`defaultChecked`不生效问题[ec1999](https://github.com/vueComponent/ant-design/commit/ec1999dea4cea126b78e3fd84bef620b876e9841)
+  - `columns key`支持数字类型[9b7f5c](https://github.com/vueComponent/ant-design/commit/9b7f5c2f81b6f83190e5b022b2b1e28de3f68a2b)
+- `Tooltip`
+  - 🛠 更新事件API`change`为`visibleChange`
+- `Textarea`: 🐞 修复`autoFoucs`不生效问题[787927](https://github.com/vueComponent/ant-design/commit/787927912307db7edb9821a440feacd216e3a6a2)
+- `InputSearch`: 🐞 添加`focus` `blur`方法[3cff62](https://github.com/vueComponent/ant-design/commit/3cff62997d16811ae17618f9b41617973d805d7d)
+- `InputNumber`: 🐞 修复`autoFoucs`不生效问题[88f165](https://github.com/vueComponent/ant-design/commit/88f165edb5c3993f4dba90c3267a1ea037e0869b)
+- `DatePicker`: 🐞 修复`autoFoucs`不生效问题[264abf](https://github.com/vueComponent/ant-design/commit/264abff59791181b9190ca0914b780a8df6aa81a)
+- `Cascader`: 🐞 修复`autoFoucs`不生效问题[be69bd](https://github.com/vueComponent/ant-design/commit/be69bd9af1bae184a4ebe8c4ef9560479ab11027)
+- `Rate`: 🐞 修复`autoFoucs`不生效问题，及`blur`报错问题[c2c984](https://github.com/vueComponent/ant-design/commit/c2c9841eb9b8e5ce4decff57a925e60d4bd7d809)
+- `RangePicker`: 🐞 修复值类型校验出错问题[228f44](https://github.com/vueComponent/ant-design/commit/228f4478a5d169d22960c97d1d8a8320c58da9cc)
+
+
 ## 0.6.0
 
 `2018-06-04`

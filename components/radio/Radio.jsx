@@ -114,13 +114,19 @@ export default {
     },
   },
   render () {
-    const { id, classes, checkboxClass, disabled, prefixCls,
-      stateChecked, handleChange, name, $slots,
+    const { id, classes, checkboxClass, prefixCls,
+      stateChecked, handleChange, $slots,
       onFocus,
       onBlur,
       onMouseEnter,
       onMouseLeave,
+      radioGroupContext,
     } = this
+    let { name, disabled } = this
+    if (radioGroupContext) {
+      name = radioGroupContext.name
+      disabled = disabled || radioGroupContext.disabled
+    }
     return (
       <label
         class={classes}

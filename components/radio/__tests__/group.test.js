@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
-import Radio from '../radio'
-import RadioGroup from '../group'
+import Radio from '../Radio'
+import RadioGroup from '../Group'
 
 describe('Radio', () => {
   function createRadioGroup (props, listeners = {}) {

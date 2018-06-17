@@ -84,8 +84,8 @@ export default {
   },
   render () {
     const { size, prefixCls, tip, wrapperClassName, ...restProps } = this.$props
-    const { notCssAnimationSupported, $slots, stateSpinning } = this
-
+    const { notCssAnimationSupported, stateSpinning } = this
+    const dotClassName = `${prefixCls}-dot`
     const spinClassName = {
       [prefixCls]: true,
       [`${prefixCls}-sm`]: size === 'small',
@@ -100,10 +100,10 @@ export default {
     }
     let spinIndicator = null
     if (isValidElement(indicator)) {
-      spinIndicator = cloneElement(indicator, { class: `${prefixCls}-dot` })
+      spinIndicator = cloneElement(indicator, { class: dotClassName })
     }
     spinIndicator = spinIndicator || (
-      <span class={`${prefixCls}-dot`}>
+      <span class={`${dotClassName} ${prefixCls}-dot-spin`}>
         <i />
         <i />
         <i />

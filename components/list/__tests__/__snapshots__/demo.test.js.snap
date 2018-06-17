@@ -153,7 +153,7 @@ exports[`renders ./components/list/demo/loadmore.md correctly 1`] = `
 <div class="demo-loadmore-list ant-list ant-list-split ant-list-loading ant-list-something-after-last-item">
   <div class="ant-spin-nested-loading">
     <div>
-      <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot"><i></i><i></i><i></i><i></i></span></div>
+      <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
     </div>
     <div class="ant-spin-container ant-spin-blur">
       <div style="min-height: 53;"></div>

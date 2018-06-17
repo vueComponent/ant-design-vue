@@ -112,7 +112,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
 `;
 
 exports[`Table renders empty table without emptyText when loading 1`] = `
-<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading ant-table-without-pagination ant-table-spin-holder"><div><div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot"><i></i><i></i><i></i><i></i></span></div>
+<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading ant-table-without-pagination ant-table-spin-holder"><div><div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
 </div>
 <div class="ant-spin-container ant-spin-blur">
   <div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty">

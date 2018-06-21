@@ -1469,10 +1469,12 @@ export default {
       }
       this._focused = true
       this.updateFocusClassName()
+      this.$emit('focus')
     },
     selectionRefBlur (e) {
       this._focused = false
       this.updateFocusClassName()
+      this.$emit('blur')
     },
   },
 

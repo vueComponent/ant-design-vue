@@ -57,6 +57,7 @@ export const FormProps = {
   // onSubmit: React.FormEventHandler<any>;
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.bool,
+  formRef: PropTypes.func,
 }
 
 export const ValidationRule = {
@@ -178,7 +179,7 @@ export default {
 
   render () {
     const {
-      prefixCls, hideRequiredMark, layout, onSubmit, $slots,
+      prefixCls, hideRequiredMark, layout, onSubmit, $slots, formRef,
     } = this
 
     const formClassName = classNames(prefixCls, {
@@ -187,6 +188,26 @@ export default {
       [`${prefixCls}-inline`]: layout === 'inline',
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     })
+    if (formRef) {
+      const NewForm = createDOMForm({
+        fieldNameProp: 'id',
+        fieldMetaProp: FIELD_META_PROP,
+        fieldDataProp: FIELD_DATA_PROP,
+      })({
+        provide () {
+          return {
+            NewFormProps: this.$props,
+          }
+        },
+        mounted () {
+          formRef(this.form)
+        },
+        render () {
+          return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>
+        },
+      })
+      return <NewForm />
+    }
 
     return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>
   },

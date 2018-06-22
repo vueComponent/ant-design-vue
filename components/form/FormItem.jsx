@@ -20,6 +20,8 @@ export const FormItemProps = {
   hasFeedback: PropTypes.bool,
   required: PropTypes.bool,
   colon: PropTypes.bool,
+  fieldDecoratorId: PropTypes.string,
+  fieldDecoratorOptions: PropTypes.object,
 }
 
 export default {
@@ -33,6 +35,7 @@ export default {
   }),
   inject: {
     FormProps: { default: {}},
+    NewFormProps: { default: {}},
   },
   data () {
     return { helpShow: false }
@@ -90,7 +93,7 @@ export default {
     },
 
     getOnlyControl () {
-      const child = this.getControls(this.$slots.default, false)[0]
+      const child = this.getControls(this.slotDefault, false)[0]
       return child !== undefined ? child : null
     },
 
@@ -303,12 +306,20 @@ export default {
       ) : null
     },
     renderChildren () {
-      const { $slots } = this
+      // const { $slots, FormProps, NewFormProps, prop } = this
+      // const child = filterEmpty($slots.default || [])
+      // if (NewFormProps.form && prop && child.length) {
+      //   const getFieldDecorator = NewFormProps.form.getFieldDecorator
+      //   const rules = FormProps.rules[prop] || []
+      //   child[0] = getFieldDecorator(prop, {
+      //     rules,
+      //   })(child[0])
+      // }
       return [
         this.renderLabel(),
         this.renderWrapper(
           this.renderValidateWrapper(
-            filterEmpty($slots.default || []),
+            this.slotDefault,
             this.renderHelp(),
             this.renderExtra(),
           ),
@@ -333,6 +344,13 @@ export default {
   },
 
   render () {
+    const { $slots, NewFormProps, fieldDecoratorId, fieldDecoratorOptions = {}} = this
+    const child = filterEmpty($slots.default || [])
+    if (NewFormProps.form && fieldDecoratorId && child.length) {
+      const getFieldDecorator = NewFormProps.form.getFieldDecorator
+      child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions)(child[0])
+    }
+    this.slotDefault = child
     const children = this.renderChildren()
     return this.renderFormItem(children)
   },

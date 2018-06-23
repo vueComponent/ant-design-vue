@@ -57,7 +57,8 @@ export const FormProps = {
   // onSubmit: React.FormEventHandler<any>;
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.bool,
-  formRef: PropTypes.func,
+  autoFormCreate: PropTypes.func,
+  options: PropTypes.object,
 }
 
 export const ValidationRule = {
@@ -144,23 +145,6 @@ export default {
       fieldDataProp: FIELD_DATA_PROP,
     })
   },
-
-  // constructor (props) {
-  //   super(props)
-
-  //   warning(!props.form, 'It is unnecessary to pass `form` to `Form` after antd@1.7.0.')
-  // }
-
-  // shouldComponentUpdate(...args) {
-  //   return PureRenderMixin.shouldComponentUpdate.apply(this, args);
-  // }
-
-  // getChildContext () {
-  //   const { layout } = this.props
-  //   return {
-  //     vertical: layout === 'vertical',
-  //   }
-  // },
   provide () {
     return {
       FormProps: this.$props,
@@ -179,7 +163,7 @@ export default {
 
   render () {
     const {
-      prefixCls, hideRequiredMark, layout, onSubmit, $slots, formRef,
+      prefixCls, hideRequiredMark, layout, onSubmit, $slots, autoFormCreate, options = {},
     } = this
 
     const formClassName = classNames(prefixCls, {
@@ -188,25 +172,45 @@ export default {
       [`${prefixCls}-inline`]: layout === 'inline',
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     })
-    if (formRef) {
-      const NewForm = createDOMForm({
+    if (autoFormCreate) {
+      const saveFormRef = (ref) => {
+        this.domForm = ref
+      }
+      const DomForm = this.DomForm || createDOMForm({
         fieldNameProp: 'id',
+        ...options,
         fieldMetaProp: FIELD_META_PROP,
         fieldDataProp: FIELD_DATA_PROP,
+        templateContext: this.$parent,
       })({
         provide () {
           return {
-            NewFormProps: this.$props,
+            decoratorFormProps: this.$props,
+          }
+        },
+        data () {
+          return {
+            children: $slots.default,
+            formClassName: formClassName,
+            submit: onSubmit,
           }
         },
         mounted () {
-          formRef(this.form)
+          autoFormCreate(this.form)
         },
         render () {
-          return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>
+          const { children, formClassName, submit } = this
+          return <form onSubmit={submit} class={formClassName}>{children}</form>
         },
       })
-      return <NewForm />
+      if (this.domForm) {
+        this.domForm.children = $slots.default
+        this.domForm.submit = onSubmit
+        this.domForm.formClassName = formClassName
+      }
+      this.DomForm = DomForm
+
+      return <DomForm wrappedComponentRef={(inst) => saveFormRef(inst)}/>
     }
 
     return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>

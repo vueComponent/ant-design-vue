@@ -1,68 +1,78 @@
 <template>
-<div>
-  <a-form @submit="handleSubmit" :formRef="(form)=>{this.form = form}">
+<a-form layout='inline' @submit="handleSubmit" :autoFormCreate="(form)=>{this.form = form}">
+  <template v-if="form">
     <a-form-item
-      label='Note'
-      :labelCol="{ span: 5 }"
-      :wrapperCol="{ span: 12 }"
-      fieldDecoratorId="note"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your note!' }]}"
+      :validateStatus="userNameError() ? 'error' : ''"
+      :help="userNameError() || ''"
+      fieldDecoratorId="userName"
+      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your username!' }]}"
     >
-      <a-input />
+      <a-input placeholder='Username'>
+        <a-icon slot="prefix" type='user' style="color:rgba(0,0,0,.25)"/>
+      </a-input>
     </a-form-item>
     <a-form-item
-      label='Gender'
-      :labelCol="{ span: 5 }"
-      :wrapperCol="{ span: 12 }"
-      fieldDecoratorId="gender"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please select your gender!' }]}"
+      :validateStatus="passwordError() ? 'error' : ''"
+      :help="passwordError() || ''"
+      fieldDecoratorId="password"
+      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your Password!' }]}"
     >
-      <a-select
-        placeholder='Select a option and change input text above'
-        @change="this.handleSelectChange"
+        <a-input type='password' placeholder='Password'>
+          <a-icon slot="prefix" type='lock' style="color:rgba(0,0,0,.25)"/>
+        </a-input>
+    </a-form-item>
+    <a-form-item>
+      <a-button
+        type='primary'
+        htmlType='submit'
+        :disabled="hasErrors(form.getFieldsError())"
       >
-        <a-select-option value='male'>male</a-select-option>
-        <a-select-option value='female'>female</a-select-option>
-      </a-select>
-    </a-form-item>
-    <a-form-item
-      :wrapperCol="{ span: 12, offset: 5 }"
-    >
-      <a-button type='primary' htmlType='submit'>
-        Submit
+        Log in
       </a-button>
     </a-form-item>
-  </a-form>
-</div>
+  </template>
+</a-form>
 </template>
 
 <script>
+function hasErrors (fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field])
+}
 export default {
   data () {
     return {
-      formLayout: 'horizontal',
-      rules: {
-        test: [{
-          type: 'email', message: 'The input is not valid E-mail!',
-        }, {
-          required: true, message: 'Please input your E-mail!',
-        }],
-      },
+      hasErrors,
+      form: null,
     }
   },
+  mounted () {
+
+  },
+  watch: {
+    form (val) {
+      this.$nextTick(() => {
+        // To disabled submit button at the beginning.
+        this.form.validateFields()
+      })
+    },
+  },
   methods: {
-    handleSubmit (e) {
+    // Only show error after a field is touched.
+    userNameError () {
+      const { getFieldError, isFieldTouched } = this.form
+      return isFieldTouched('userName') && getFieldError('userName')
+    },
+    // Only show error after a field is touched.
+    passwordError () {
+      const { getFieldError, isFieldTouched } = this.form
+      return isFieldTouched('password') && getFieldError('password')
+    },
+    handleSubmit  (e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values)
         }
-      })
-    },
-    handleSelectChange (value) {
-      console.log(value)
-      this.form.setFieldsValue({
-        note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
       })
     },
   },

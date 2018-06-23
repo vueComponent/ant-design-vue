@@ -5,7 +5,7 @@ import Row from '../grid/Row'
 import Col, { ColProps } from '../grid/Col'
 import warning from '../_util/warning'
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants'
-import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, getSlots } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, getSlots, isEmptyElement } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import BaseMixin from '../_util/BaseMixin'
 export const FormItemProps = {
@@ -35,14 +35,14 @@ export default {
   }),
   inject: {
     FormProps: { default: {}},
-    NewFormProps: { default: {}},
+    decoratorFormProps: { default: {}},
   },
   data () {
     return { helpShow: false }
   },
   mounted () {
     warning(
-      this.getControls(this.$slots.default, true).length <= 1,
+      this.getControls(this.slotDefault, true).length <= 1,
       '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
       'while there are more than one `getFieldDecorator` in it.',
     )
@@ -306,10 +306,10 @@ export default {
       ) : null
     },
     renderChildren () {
-      // const { $slots, FormProps, NewFormProps, prop } = this
+      // const { $slots, FormProps, decoratorFormProps, prop } = this
       // const child = filterEmpty($slots.default || [])
-      // if (NewFormProps.form && prop && child.length) {
-      //   const getFieldDecorator = NewFormProps.form.getFieldDecorator
+      // if (decoratorFormProps.form && prop && child.length) {
+      //   const getFieldDecorator = decoratorFormProps.form.getFieldDecorator
       //   const rules = FormProps.rules[prop] || []
       //   child[0] = getFieldDecorator(prop, {
       //     rules,
@@ -344,10 +344,10 @@ export default {
   },
 
   render () {
-    const { $slots, NewFormProps, fieldDecoratorId, fieldDecoratorOptions = {}} = this
+    const { $slots, decoratorFormProps, fieldDecoratorId, fieldDecoratorOptions = {}} = this
     const child = filterEmpty($slots.default || [])
-    if (NewFormProps.form && fieldDecoratorId && child.length) {
-      const getFieldDecorator = NewFormProps.form.getFieldDecorator
+    if (decoratorFormProps.form && fieldDecoratorId && child.length) {
+      const getFieldDecorator = decoratorFormProps.form.getFieldDecorator
       child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions)(child[0])
     }
     this.slotDefault = child

@@ -85,11 +85,27 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <demo-container code={AdvancedSearchString}>
-          <AdvancedSearch />
-        </demo-container>
         <demo-container code={CoordinatedString}>
           <Coordinated />
+        </demo-container>
+        <demo-container code={DynamicRuleString}>
+          <DynamicRule />
+        </demo-container>
+        <demo-container code={HorizontalLoginString}>
+          <HorizontalLogin />
+        </demo-container>
+        <demo-container code={LayoutString}>
+          <Layout />
+        </demo-container>
+        <demo-container code={ValidateStaticString}>
+          <ValidateStatic />
+        </demo-container>
+        <demo-container code={WithoutFormCreateString}>
+          <WithoutFormCreate />
+        </demo-container>
+
+        <demo-container code={AdvancedSearchString}>
+          <AdvancedSearch />
         </demo-container>
         <demo-container code={CustomizedFormControlsString}>
           <CustomizedFormControls />
@@ -97,20 +113,11 @@ export default {
         <demo-container code={DynamicFormItemString}>
           <DynamicFormItem />
         </demo-container>
-        <demo-container code={DynamicRuleString}>
-          <DynamicRule />
-        </demo-container>
         <demo-container code={FormInModalString}>
           <FormInModal />
         </demo-container>
         <demo-container code={GlobalStateString}>
           <GlobalState />
-        </demo-container>
-        <demo-container code={HorizontalLoginString}>
-          <HorizontalLogin />
-        </demo-container>
-        <demo-container code={LayoutString}>
-          <Layout />
         </demo-container>
         <demo-container code={NormalLoginString}>
           <NormalLogin />
@@ -120,12 +127,6 @@ export default {
         </demo-container>
         <demo-container code={TimeRelatedControlsString}>
           <TimeRelatedControls />
-        </demo-container>
-        <demo-container code={ValidateStaticString}>
-          <ValidateStatic />
-        </demo-container>
-        <demo-container code={WithoutFormCreateString}>
-          <WithoutFormCreate />
         </demo-container>
         <demo-container code={ValidateOtherString}>
           <ValidateOther />

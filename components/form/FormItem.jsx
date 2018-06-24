@@ -20,6 +20,8 @@ export const FormItemProps = {
   hasFeedback: PropTypes.bool,
   required: PropTypes.bool,
   colon: PropTypes.bool,
+  fieldDecoratorId: PropTypes.string,
+  fieldDecoratorOptions: PropTypes.object,
 }
 
 export default {
@@ -33,21 +35,18 @@ export default {
   }),
   inject: {
     FormProps: { default: {}},
+    decoratorFormProps: { default: {}},
   },
   data () {
     return { helpShow: false }
   },
   mounted () {
     warning(
-      this.getControls(this.$slots.default, true).length <= 1,
+      this.getControls(this.slotDefault, true).length <= 1,
       '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
       'while there are more than one `getFieldDecorator` in it.',
     )
   },
-
-  // shouldComponentUpdate(...args: any[]) {
-  //   return PureRenderMixin.shouldComponentUpdate.apply(this, args);
-  // }
   methods: {
     getHelpMsg () {
       const help = getComponentFromProp(this, 'help')
@@ -90,7 +89,7 @@ export default {
     },
 
     getOnlyControl () {
-      const child = this.getControls(this.$slots.default, false)[0]
+      const child = this.getControls(this.slotDefault, false)[0]
       return child !== undefined ? child : null
     },
 
@@ -303,12 +302,11 @@ export default {
       ) : null
     },
     renderChildren () {
-      const { $slots } = this
       return [
         this.renderLabel(),
         this.renderWrapper(
           this.renderValidateWrapper(
-            filterEmpty($slots.default || []),
+            this.slotDefault,
             this.renderHelp(),
             this.renderExtra(),
           ),
@@ -333,6 +331,18 @@ export default {
   },
 
   render () {
+    const { $slots, decoratorFormProps, fieldDecoratorId, fieldDecoratorOptions = {}} = this
+    const child = filterEmpty($slots.default || [])
+    if (decoratorFormProps.form && fieldDecoratorId && child.length) {
+      const getFieldDecorator = decoratorFormProps.form.getFieldDecorator
+      child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions)(child[0])
+      warning(
+        !(child.length > 1),
+        '`autoFormCreate` just `decorator` then first children. but you can use JSX to support multiple children',
+      )
+    }
+
+    this.slotDefault = child
     const children = this.renderChildren()
     return this.renderFormItem(children)
   },

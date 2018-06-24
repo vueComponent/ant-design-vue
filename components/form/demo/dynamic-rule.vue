@@ -9,9 +9,47 @@ Perform different check rules according to different situations.
 </us>
 
 
-<script>
-import { Form } from 'vue-antd-ui'
+<template>
+  <a-form :autoFormCreate="(form)=>{this.form = form}">
+    <a-form-item
+      :labelCol="formItemLayout.labelCol"
+      :wrapperCol="formItemLayout.wrapperCol"
+      label='Name'
+      fieldDecoratorId="username"
+      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your name' }]}"
+    >
+      <a-input placeholder='Please input your name' />
+    </a-form-item>
+    <a-form-item
+      :labelCol="formItemLayout.labelCol"
+      :wrapperCol="formItemLayout.wrapperCol"
+      label='Nickname'
+      fieldDecoratorId="nickname"
+      :fieldDecoratorOptions="{rules: [{ required: checkNick, message: 'Please input your nickname' }]}"
+    >
+      <a-input placeholder='Please input your nickname' />
+    </a-form-item>
+    <a-form-item
+      :labelCol="formTailLayout.labelCol"
+      :wrapperCol="formTailLayout.wrapperCol"
+    >
+      <a-checkbox
+        :checked="checkNick"
+        @change="handleChange"
+      >
+        Nickname is required
+      </a-checkbox>
+    </a-form-item>
+    <a-form-item
+      :labelCol="formTailLayout.labelCol"
+      :wrapperCol="formTailLayout.wrapperCol"
+    >
+      <a-button type='primary' @click="check">Check</a-button>
+    </a-form-item>
+  </a-form>
+</template>
 
+<script>
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 8 },
@@ -20,10 +58,12 @@ const formTailLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 8, offset: 4 },
 }
-const DynamicRule = {
+export default {
   data () {
     return {
       checkNick: false,
+      formItemLayout,
+      formTailLayout,
     }
   },
   methods: {
@@ -43,51 +83,9 @@ const DynamicRule = {
       })
     },
   },
-
-  render () {
-    const { getFieldDecorator } = this.form
-    return (
-      <div>
-        <a-form-item {...{ props: formItemLayout }} label='Name'>
-          {getFieldDecorator('username', {
-            rules: [{
-              required: true,
-              message: 'Please input your name',
-            }],
-          })(
-            <a-input placeholder='Please input your name' />
-          )}
-        </a-form-item>
-        <a-form-item {...{ props: formItemLayout }} label='Nickname'>
-          {getFieldDecorator('nickname', {
-            rules: [{
-              required: this.checkNick,
-              message: 'Please input your nickname',
-            }],
-          })(
-            <a-input placeholder='Please input your nickname' />
-          )}
-        </a-form-item>
-        <a-form-item {...{ props: formTailLayout }}>
-          <a-checkbox
-            value={this.checkNick}
-            onChange={this.handleChange}
-          >
-            Nickname is required
-          </a-checkbox>
-        </a-form-item>
-        <a-form-item {...{ props: formTailLayout }}>
-          <a-button type='primary' onClick={this.check}>
-            Check
-          </a-button>
-        </a-form-item>
-      </div>
-    )
-  },
 }
-
-export default Form.create()(DynamicRule)
 </script>
+
 
 
 

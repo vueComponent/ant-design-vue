@@ -178,7 +178,7 @@ function createBaseForm (option = {}, mixins = []) {
               warning(
                 !(valuePropName in originalProps),
                 `\`getFieldDecorator\` will override \`${valuePropName}\`, ` +
-                `so please don't set \`${valuePropName}\` directly ` +
+                `so please don't set \`${valuePropName} and v-model\` directly ` +
                 `and use \`setFieldsValue\` to set it.`
               )
               const defaultValuePropName =

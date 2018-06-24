@@ -12,7 +12,8 @@ Perform different check rules according to different situations.
 <template>
   <a-form :autoFormCreate="(form)=>{this.form = form}">
     <a-form-item
-      :formItemLayout="formItemLayout"
+      :labelCol="formItemLayout.labelCol"
+      :wrapperCol="formItemLayout.wrapperCol"
       label='Name'
       fieldDecoratorId="username"
       :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your name' }]}"
@@ -20,14 +21,18 @@ Perform different check rules according to different situations.
       <a-input placeholder='Please input your name' />
     </a-form-item>
     <a-form-item
-      :formItemLayout="formItemLayout"
+      :labelCol="formItemLayout.labelCol"
+      :wrapperCol="formItemLayout.wrapperCol"
       label='Nickname'
       fieldDecoratorId="nickname"
       :fieldDecoratorOptions="{rules: [{ required: checkNick, message: 'Please input your nickname' }]}"
     >
       <a-input placeholder='Please input your nickname' />
     </a-form-item>
-    <a-form-item :formTailLayout="formTailLayout">
+    <a-form-item
+      :labelCol="formTailLayout.labelCol"
+      :wrapperCol="formTailLayout.wrapperCol"
+    >
       <a-checkbox
         :checked="checkNick"
         @change="handleChange"
@@ -35,7 +40,10 @@ Perform different check rules according to different situations.
         Nickname is required
       </a-checkbox>
     </a-form-item>
-    <a-form-item :formTailLayout="formTailLayout">
+    <a-form-item
+      :labelCol="formTailLayout.labelCol"
+      :wrapperCol="formTailLayout.wrapperCol"
+    >
       <a-button type='primary' @click="check">Check</a-button>
     </a-form-item>
   </a-form>

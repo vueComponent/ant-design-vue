@@ -221,7 +221,7 @@ exports[`renders ./components/form/demo/dynamic-form-item.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
-<div>
+<form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col-4 ant-form-item-label">
       <label for="username" title="Name" class="ant-form-item-required">Name</label>
@@ -244,7 +244,9 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-8 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span>Nickname is required</span></label>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span>
+      Nickname is required
+    </span></label>
         </span>
         <!---->
       </div>
@@ -258,7 +260,7 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
       </div>
     </div>
   </div>
-</div>
+</form>
 `;
 
 exports[`renders ./components/form/demo/form-in-modal.vue correctly 1`] = `
@@ -314,7 +316,7 @@ exports[`renders ./components/form/demo/horizontal-login.vue correctly 1`] = `
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary" disabled="disabled"><span>Log in</span></button>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Log in</span></button>
         </span>
         <!---->
       </div>

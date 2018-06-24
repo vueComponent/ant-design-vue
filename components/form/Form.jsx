@@ -173,9 +173,6 @@ export default {
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     })
     if (autoFormCreate) {
-      const saveFormRef = (ref) => {
-        this.domForm = ref
-      }
       const DomForm = this.DomForm || createDOMForm({
         fieldNameProp: 'id',
         ...options,
@@ -195,7 +192,7 @@ export default {
             submit: onSubmit,
           }
         },
-        mounted () {
+        created () {
           autoFormCreate(this.form)
         },
         render () {
@@ -210,7 +207,7 @@ export default {
       }
       this.DomForm = DomForm
 
-      return <DomForm wrappedComponentRef={(inst) => saveFormRef(inst)}/>
+      return <DomForm wrappedComponentRef={(inst) => { this.domForm = inst }}/>
     }
 
     return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>

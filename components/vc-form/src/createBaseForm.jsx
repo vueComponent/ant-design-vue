@@ -35,6 +35,7 @@ function createBaseForm (option = {}, mixins = []) {
     fieldDataProp,
     formPropName = 'form',
     props = {},
+    templateContext,
   } = option
 
   return function decorate (WrappedComponent) {
@@ -177,7 +178,7 @@ function createBaseForm (option = {}, mixins = []) {
               warning(
                 !(valuePropName in originalProps),
                 `\`getFieldDecorator\` will override \`${valuePropName}\`, ` +
-                `so please don't set \`${valuePropName}\` directly ` +
+                `so please don't set \`${valuePropName} and v-model\` directly ` +
                 `and use \`setFieldsValue\` to set it.`
               )
               const defaultValuePropName =
@@ -327,7 +328,11 @@ function createBaseForm (option = {}, mixins = []) {
               .reduce((acc, name) => set(acc, name, this.fieldsStore.getField(name)), {})
             onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields())
           }
-          this.$forceUpdate()
+          if (templateContext) {
+            templateContext.$forceUpdate()
+          } else {
+            this.$forceUpdate()
+          }
           this.$nextTick(() => {
             callback && callback()
           })

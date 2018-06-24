@@ -2,6 +2,16 @@
 
 ---
 
+## 0.6.2
+
+`2018-06-24`
+- 🌟 `Form` component data auto-checking support for `template` syntax[7c9232](https://github.com/vueComponent/ant-design/commit/7c923278b3678a822ff90da0cb8db7653d79e15c)
+- `Select`: 🐞 add `focus` `blur` methods[52f6f5](https://github.com/vueComponent/ant-design/commit/52f6f50dbe38631c0e698a6ea23b3686f6c2a375)
+- `Radio`
+  - 🐞 Fix Radiogroup `disabled` className[9df74b](https://github.com/vueComponent/ant-design/commit/9df74bedd7640b6066010c498f942ce544c658b7)
+  - 🐞 Fix `autoFoucs` `focus` `blur` `mouseenter` `mouseleave` not working[f7886c](https://github.com/vueComponent/ant-design/commit/f7886c7203730bedf519bc45f5f78726735d3aac)
+- `TimePicker`: 🐞 Fix `autoFoucs` `focus` `blur` not working[28d009](https://github.com/vueComponent/ant-design/commit/28d009d3ced807051a86a2c09cd2764303de98f7)
+
 ## 0.6.1
 
 `2018-06-17`

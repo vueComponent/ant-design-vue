@@ -65,7 +65,7 @@ export default {
     const cnHtml = marked(cn[1].trim())
     const usHtml = marked(us[1].trim())
     const sourceCode = this.code.replace(cn[0], '').replace(us[0], '').trim()
-    const codeHtml = marked('````jsx\n' + sourceCode + '````')
+    const codeHtml = marked('````html\n' + sourceCode + '````')
     return {
       codeHtml,
       cnHtml,

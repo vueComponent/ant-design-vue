@@ -32,7 +32,7 @@ describe('Menu', () => {
       },
     }, { attachToDocument: true, sync: false })
     await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].className).not.toContain('ant-menu-hidden')
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
     })
   })
 
@@ -51,7 +51,7 @@ describe('Menu', () => {
       },
     }, { attachToDocument: true, sync: false })
     await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].className).not.toContain('ant-menu-hidden')
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
     })
   })
 
@@ -70,116 +70,168 @@ describe('Menu', () => {
       },
     }, { attachToDocument: true, sync: false })
     await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].className).not.toContain('ant-menu-hidden')
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
     })
   })
 
-  // it('horizontal', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu openKeys={['1']} mode='horizontal' openTransitionName=''>
-  //           <SubMenu key='1' title='submenu1'>
-  //             <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //             <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //           </SubMenu>
-  //           <Menu.Item key='2'>menu2</Menu.Item>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  //   wrapper.setProps({ openKeys: [] })
-  //   wrapper.update()
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).toBe(true)
-  //   wrapper.setProps({ openKeys: ['1'] })
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  // })
+  it('horizontal', async () => {
+    const wrapper = mount({
+      props: {
+        openKeys: {
+          type: Array,
+          default: function () {
+            return ['1']
+          },
+        },
+      },
+      render () {
+        return (
+          <Menu openKeys={this.openKeys} mode='horizontal' openTransitionName=''>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='submenu1'>Option 1</Menu.Item>
+              <Menu.Item key='submenu2'>Option 2</Menu.Item>
+            </SubMenu>
+            <Menu.Item key='2'>menu2</Menu.Item>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+    })
+    wrapper.setProps({ openKeys: [] })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
+    })
 
-  // it('inline', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu openKeys={['1']} mode='inline' openAnimation=''>
-  //           <SubMenu key='1' title='submenu1'>
-  //             <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //             <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //           </SubMenu>
-  //           <Menu.Item key='2'>menu2</Menu.Item>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  //   wrapper.setProps({ openKeys: [] })
-  //   wrapper.update()
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).toBe(true)
-  //   wrapper.setProps({ openKeys: ['1'] })
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  // })
+    wrapper.setProps({ openKeys: ['1'] })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+    })
+  })
 
-  // it('vertical', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu openKeys={['1']} mode='vertical' openTransitionName=''>
-  //           <SubMenu key='1' title='submenu1'>
-  //             <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //             <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //           </SubMenu>
-  //           <Menu.Item key='2'>menu2</Menu.Item>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  //   wrapper.setProps({ openKeys: [] })
-  //   wrapper.update()
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).toBe(true)
-  //   wrapper.setProps({ openKeys: ['1'] })
-  //   expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  // })
+  it('inline', async () => {
+    const wrapper = mount({
+      props: {
+        openKeys: {
+          type: Array,
+          default: function () {
+            return ['1']
+          },
+        },
+      },
+      render () {
+        return (
+          <Menu openKeys={this.openKeys} mode='inline' openAnimation=''>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='submenu1'>Option 1</Menu.Item>
+              <Menu.Item key='submenu2'>Option 2</Menu.Item>
+            </SubMenu>
+            <Menu.Item key='2'>menu2</Menu.Item>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    })
+    wrapper.setProps({ openKeys: [] })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).toBe('none')
+    })
+    wrapper.setProps({ openKeys: ['1'] })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    })
+  })
 
-  // // https://github.com/ant-design/ant-design/pulls/4677
-  // // https://github.com/ant-design/ant-design/issues/4692
-  // // TypeError: Cannot read property 'indexOf' of undefined
-  // it('pr #4677 and issue #4692', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu mode='horizontal'>
-  //           <SubMenu title='submenu'>
-  //             <Menu.Item key='1'>menu1</Menu.Item>
-  //             <Menu.Item key='2'>menu2</Menu.Item>
-  //           </SubMenu>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
-  //   wrapper.update()
-  //   // just expect no error emit
-  // })
+  it('vertical', async () => {
+    const wrapper = mount({
+      props: {
+        openKeys: {
+          type: Array,
+          default: function () {
+            return ['1']
+          },
+        },
+      },
+      render () {
+        return (
+          <Menu openKeys={this.openKeys} mode='vertical' openTransitionName=''>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='submenu1'>Option 1</Menu.Item>
+              <Menu.Item key='submenu2'>Option 2</Menu.Item>
+            </SubMenu>
+            <Menu.Item key='2'>menu2</Menu.Item>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+    })
+    wrapper.setProps({ openKeys: [] })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
+    })
+    wrapper.setProps({ openKeys: ['1'] })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+    })
+  })
 
-  // it('should always follow openKeys when mode is switched', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu openKeys={['1']} mode='inline'>
-  //           <SubMenu key='1' title='submenu1'>
-  //             <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //             <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //           </SubMenu>
-  //           <Menu.Item key='2'>menu2</Menu.Item>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  //   wrapper.setProps({ mode: 'vertical' })
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  //   wrapper.setProps({ mode: 'inline' })
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-hidden')).not.toBe(true)
-  // })
+  // https://github.com/ant-design/ant-design/pulls/4677
+  // https://github.com/ant-design/ant-design/issues/4692
+  // TypeError: Cannot read property 'indexOf' of undefined
+  it('pr #4677 and issue #4692', () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <Menu mode='horizontal'>
+            <SubMenu title='submenu'>
+              <Menu.Item key='1'>menu1</Menu.Item>
+              <Menu.Item key='2'>menu2</Menu.Item>
+            </SubMenu>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    wrapper.vm.$forceUpdate()
+    // just expect no error emit
+  })
+
+  it('should always follow openKeys when mode is switched', async () => {
+    const wrapper = mount({
+      props: {
+        mode: {
+          type: String,
+          default: 'inline',
+        },
+      },
+      render () {
+        return (
+          <Menu openKeys={['1']} mode={this.mode}>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='submenu1'>Option 1</Menu.Item>
+              <Menu.Item key='submenu2'>Option 2</Menu.Item>
+            </SubMenu>
+            <Menu.Item key='2'>menu2</Menu.Item>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    })
+    wrapper.setProps({ mode: 'vertical' })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+    }, 0)
+    wrapper.setProps({ mode: 'inline' })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    }, 0)
+  })
 
   // it('should always follow openKeys when mode is switched', () => {
   //   const wrapper = mount({
@@ -288,9 +340,9 @@ describe('Menu', () => {
   //     expect(wrapper.find('.ant-menu-sub').length).toBe(0)
   //     toggleMenu(wrapper, 0, 'click')
   //     expect(wrapper.find('.ant-menu-sub').hostNodes().length).toBe(1)
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
+  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
   //     toggleMenu(wrapper, 0, 'click')
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).toBe(true)
+  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
   //   })
 
   //   it('vertical', () => {
@@ -310,9 +362,9 @@ describe('Menu', () => {
   //     expect(wrapper.find('.ant-menu-sub').length).toBe(0)
   //     toggleMenu(wrapper, 0, 'mouseenter')
   //     expect(wrapper.find('.ant-menu-sub').hostNodes().length).toBe(1)
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
+  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
   //     toggleMenu(wrapper, 0, 'mouseleave')
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).toBe(true)
+  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
   //   })
 
   //   it('horizontal', () => {
@@ -333,9 +385,9 @@ describe('Menu', () => {
   //     expect(wrapper.find('.ant-menu-sub').length).toBe(0)
   //     toggleMenu(wrapper, 0, 'mouseenter')
   //     expect(wrapper.find('.ant-menu-sub').hostNodes().length).toBe(1)
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).not.toBe(true)
+  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
   //     toggleMenu(wrapper, 0, 'mouseleave')
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().at(0).hasClass('ant-menu-hidden')).toBe(true)
+  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
   //   })
   // })
 })

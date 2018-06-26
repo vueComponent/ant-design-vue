@@ -16,7 +16,7 @@ export default {
   },
   model: {
     prop: 'visible',
-    event: 'change',
+    event: 'visibleChange',
   },
   methods: {
     getPopupDomNode () {

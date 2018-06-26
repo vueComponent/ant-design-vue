@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.3
+
+`2018-06-26`
+- 🐞 Fix `Popover` `v-model` not working[#49](https://github.com/vueComponent/ant-design/issues/49)
+
 ## 0.6.2
 
 `2018-06-24`

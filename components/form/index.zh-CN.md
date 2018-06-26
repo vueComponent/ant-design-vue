@@ -102,7 +102,7 @@ CustomizedForm = Form.create({})(CustomizedForm);
 
 1. 你**不再需要也不应该**用 `onChange` 来做同步，但还是可以继续监听 `onChange` 等事件。
 2. 你不能用控件的 `value` `defaultValue` 等属性来设置表单域的值，默认值可以用 `getFieldDecorator` 里的 `initialValue`。
-3. 你不应该用 `v-modle`，可以使用 `this.form.setFieldsValue` 来动态改变表单值。
+3. 你不应该用 `v-model`，可以使用 `this.form.setFieldsValue` 来动态改变表单值。
 
 #### 特别注意
 

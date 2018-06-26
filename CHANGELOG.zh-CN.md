@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.3
+
+`2018-06-26`
+- 🐞 修复`Popover`的`v-model`不生效问题[#49](https://github.com/vueComponent/ant-design/issues/49)
+
 ## 0.6.2
 
 `2018-06-24`

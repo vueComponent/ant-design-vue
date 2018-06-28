@@ -233,161 +233,192 @@ describe('Menu', () => {
     }, 0)
   })
 
-  // it('should always follow openKeys when mode is switched', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu defaultOpenKeys={['1']} mode='inline'>
-  //           <Menu.Item key='menu1'>
-  //             <Icon type='inbox' />
-  //             <span>Option</span>
-  //           </Menu.Item>
-  //           <SubMenu key='1' title='submenu1'>
-  //             <Menu.Item key='submenu1'>
-  //           Option
-  //             </Menu.Item>
-  //             <Menu.Item key='submenu2'>
-  //           Option
-  //             </Menu.Item>
-  //           </SubMenu>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
+  it('should always follow openKeys when mode is switched', async () => {
+    const wrapper = mount({
+      props: {
+        inlineCollapsed: {
+          type: Boolean,
+          default: false,
+        },
+      },
+      render () {
+        return (
+          <Menu ref='menu' defaultOpenKeys={['1']} mode='inline' inlineCollapsed={this.inlineCollapsed}>
+            <Menu.Item key='menu1'>
+              <Icon type='inbox' />
+              <span>Option</span>
+            </Menu.Item>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='submenu1'>
+            Option
+              </Menu.Item>
+              <Menu.Item key='submenu2'>
+            Option
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-menu-sub').at(0).classes()).toContain('ant-menu-inline')
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    }, 0)
+    wrapper.setProps({ inlineCollapsed: true })
+    await asyncExpect(() => {
+      // 动画完成后的回调
+      wrapper.vm.$refs.menu.switchModeFromInline = false
+      wrapper.vm.$forceUpdate()
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-menu').at(0).classes()).toContain('ant-menu-vertical')
+      expect(wrapper.findAll('.ant-menu-sub').length).toBe(0)
+    }, 0)
+    wrapper.setProps({ inlineCollapsed: false })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-menu-sub').at(0).classes()).toContain('ant-menu-inline')
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    }, 0)
+  })
 
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-inline')).toBe(true)
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-hidden')).toBe(false)
+  it('inlineCollapsed should works well when specify a not existed default openKeys', async () => {
+    const wrapper = mount({
+      props: {
+        inlineCollapsed: {
+          type: Boolean,
+          default: false,
+        },
+      },
+      render () {
+        return (
+          <Menu ref='menu' defaultOpenKeys={['not-existed']} mode='inline' inlineCollapsed={this.inlineCollapsed}>
+            <Menu.Item key='menu1'>
+              <Icon type='inbox' />
+              <span>Option</span>
+            </Menu.Item>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='submenu1'>
+            Option
+              </Menu.Item>
+              <Menu.Item key='submenu2'>
+            Option
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-menu-sub').length).toBe(0)
+    })
+    wrapper.setProps({ inlineCollapsed: true })
+    await asyncExpect(() => {
+      // 动画完成后的回调
+      wrapper.vm.$refs.menu.switchModeFromInline = false
+      wrapper.vm.$forceUpdate()
+    })
+    await asyncExpect(() => {
+      wrapper.findAll('.ant-menu-submenu-title').at(0).trigger('mouseenter')
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-menu-submenu').at(0).classes()).toContain('ant-menu-submenu-vertical')
+      expect(wrapper.findAll('.ant-menu-submenu').at(0).classes()).toContain('ant-menu-submenu-open')
+      expect($$('.ant-menu-sub')[0].className).toContain('ant-menu-vertical')
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+    }, 300)
+  })
 
-  //   wrapper.setProps({ inlineCollapsed: true })
-  //   // 动画结束后套样式;
-  //   jest.runAllTimers()
-  //   wrapper.update()
+  describe('open submenu when click submenu title', () => {
+    beforeEach(() => {
+      document.body.innerHTML = ''
+    })
 
-  //   expect(wrapper.find('.ant-menu').at(0).hasClass('ant-menu-vertical')).toBe(true)
-  //   expect(wrapper.find('.ant-menu-sub').length).toBe(0)
+    const toggleMenu = (wrapper, index, event) => {
+      wrapper.findAll('.ant-menu-submenu-title').at(index).trigger(event)
+    }
 
-  //   wrapper.setProps({ inlineCollapsed: false })
-  //   jest.runAllTimers()
-  //   wrapper.update()
+    it('inline', async () => {
+      const wrapper = mount({
+        render () {
+          return (
+            <Menu mode='inline'>
+              <SubMenu key='1' title='submenu1'>
+                <Menu.Item key='submenu1'>Option 1</Menu.Item>
+                <Menu.Item key='submenu2'>Option 2</Menu.Item>
+              </SubMenu>
+              <Menu.Item key='2'>menu2</Menu.Item>
+            </Menu>
+          )
+        },
+      }, { attachToDocument: true, sync: false })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub').length).toBe(0)
+        toggleMenu(wrapper, 0, 'click')
+      })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub').length).toBe(1)
+        expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+        toggleMenu(wrapper, 0, 'click')
+      })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub')[0].style.display).toBe('none')
+      })
+    })
 
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-inline')).toBe(true)
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-hidden')).toBe(false)
-  // })
+    it('vertical', async () => {
+      const wrapper = mount({
+        render () {
+          return (
+            <Menu mode='vertical'>
+              <SubMenu key='1' title='submenu1'>
+                <Menu.Item key='submenu1'>Option 1</Menu.Item>
+                <Menu.Item key='submenu2'>Option 2</Menu.Item>
+              </SubMenu>
+              <Menu.Item key='2'>menu2</Menu.Item>
+            </Menu>
+          )
+        },
+      }, { attachToDocument: true, sync: false })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub').length).toBe(0)
+        toggleMenu(wrapper, 0, 'mouseenter')
+      })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub').length).toBe(1)
+        expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+        toggleMenu(wrapper, 0, 'mouseleave')
+      }, 500)
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
+      }, 500)
+    })
 
-  // it('inlineCollapsed should works well when specify a not existed default openKeys', () => {
-  //   const wrapper = mount({
-  //     render () {
-  //       return (
-  //         <Menu defaultOpenKeys={['not-existed']} mode='inline'>
-  //           <Menu.Item key='menu1'>
-  //             <Icon type='inbox' />
-  //             <span>Option</span>
-  //           </Menu.Item>
-  //           <SubMenu key='1' title='submenu1'>
-  //             <Menu.Item key='submenu1'>
-  //           Option
-  //             </Menu.Item>
-  //             <Menu.Item key='submenu2'>
-  //           Option
-  //             </Menu.Item>
-  //           </SubMenu>
-  //         </Menu>
-  //       )
-  //     },
-  //   })
-  //   expect(wrapper.find('.ant-menu-sub').length).toBe(0)
-  //   wrapper.setProps({ inlineCollapsed: true })
-  //   jest.runAllTimers()
-  //   wrapper.update()
-  //   wrapper.find('.ant-menu-submenu-title').at(0).simulate('mouseEnter')
-  //   jest.runAllTimers()
-  //   wrapper.update()
-  //   expect(wrapper.find('.ant-menu-submenu').at(0).hasClass('ant-menu-submenu-vertical')).toBe(true)
-  //   expect(wrapper.find('.ant-menu-submenu').at(0).hasClass('ant-menu-submenu-open')).toBe(true)
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-vertical')).toBe(true)
-  //   expect(wrapper.find('.ant-menu-sub').at(0).hasClass('ant-menu-hidden')).toBe(false)
-  // })
-
-  // describe('open submenu when click submenu title', () => {
-  //   beforeEach(() => {
-  //     jest.useFakeTimers()
-  //   })
-
-  //   afterEach(() => {
-  //     jest.useRealTimers()
-  //   })
-
-  //   const toggleMenu = (wrapper, index, event) => {
-  //     wrapper.find('.ant-menu-submenu-title').at(index).simulate(event)
-  //     jest.runAllTimers()
-  //     wrapper.update()
-  //   }
-
-  //   it('inline', () => {
-  //     const wrapper = mount({
-  //       render () {
-  //         return (
-  //           <Menu mode='inline'>
-  //             <SubMenu key='1' title='submenu1'>
-  //               <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //               <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //             </SubMenu>
-  //             <Menu.Item key='2'>menu2</Menu.Item>
-  //           </Menu>
-  //         )
-  //       },
-  //     })
-  //     expect(wrapper.find('.ant-menu-sub').length).toBe(0)
-  //     toggleMenu(wrapper, 0, 'click')
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().length).toBe(1)
-  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-  //     toggleMenu(wrapper, 0, 'click')
-  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-  //   })
-
-  //   it('vertical', () => {
-  //     const wrapper = mount({
-  //       render () {
-  //         return (
-  //           <Menu mode='vertical'>
-  //             <SubMenu key='1' title='submenu1'>
-  //               <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //               <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //             </SubMenu>
-  //             <Menu.Item key='2'>menu2</Menu.Item>
-  //           </Menu>
-  //         )
-  //       },
-  //     })
-  //     expect(wrapper.find('.ant-menu-sub').length).toBe(0)
-  //     toggleMenu(wrapper, 0, 'mouseenter')
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().length).toBe(1)
-  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-  //     toggleMenu(wrapper, 0, 'mouseleave')
-  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-  //   })
-
-  //   it('horizontal', () => {
-  //     jest.useFakeTimers()
-  //     const wrapper = mount({
-  //       render () {
-  //         return (
-  //           <Menu mode='horizontal'>
-  //             <SubMenu key='1' title='submenu1'>
-  //               <Menu.Item key='submenu1'>Option 1</Menu.Item>
-  //               <Menu.Item key='submenu2'>Option 2</Menu.Item>
-  //             </SubMenu>
-  //             <Menu.Item key='2'>menu2</Menu.Item>
-  //           </Menu>
-  //         )
-  //       },
-  //     })
-  //     expect(wrapper.find('.ant-menu-sub').length).toBe(0)
-  //     toggleMenu(wrapper, 0, 'mouseenter')
-  //     expect(wrapper.find('.ant-menu-sub').hostNodes().length).toBe(1)
-  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-  //     toggleMenu(wrapper, 0, 'mouseleave')
-  //     expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-  //   })
-  // })
+    it('horizontal', async () => {
+      const wrapper = mount({
+        render () {
+          return (
+            <Menu mode='horizontal'>
+              <SubMenu key='1' title='submenu1'>
+                <Menu.Item key='submenu1'>Option 1</Menu.Item>
+                <Menu.Item key='submenu2'>Option 2</Menu.Item>
+              </SubMenu>
+              <Menu.Item key='2'>menu2</Menu.Item>
+            </Menu>
+          )
+        },
+      }, { attachToDocument: true, sync: false })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub').length).toBe(0)
+        toggleMenu(wrapper, 0, 'mouseenter')
+      })
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub').length).toBe(1)
+        expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+        toggleMenu(wrapper, 0, 'mouseleave')
+      }, 500)
+      await asyncExpect(() => {
+        expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
+      }, 500)
+    })
+  })
 })

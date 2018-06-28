@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.4
+
+`2018-06-28`
+- 🐞 修复`InputSearch`的`v-model`返回值错误问题[#53](https://github.com/vueComponent/ant-design/issues/53)
+
 ## 0.6.3
 
 `2018-06-26`

@@ -8,6 +8,9 @@ function $$ (className) {
 }
 
 describe('Table.filter', () => {
+  beforeEach(() => {
+    document.body.innerHTML = ''
+  })
   const filterFn = (value, record) => record.name.indexOf(value) !== -1
   const column = {
     title: 'Name',
@@ -217,7 +220,7 @@ describe('Table.filter', () => {
     })
   })
 
-  it('three levels menu', (done) => {
+  it('three levels menu', async () => {
     const filters = [
       { text: 'Upper', value: 'Upper' },
       { text: 'Lower', value: 'Lower' },
@@ -251,13 +254,23 @@ describe('Table.filter', () => {
         return wrapper.find({ name: 'Trigger' }).vm.getComponent()
       },
     }, { sync: false, attachToDocument: true })
-    dropdownWrapper.findAll('.ant-dropdown-menu-submenu-title').at(0).trigger('mouseenter')
-    // jest.runAllTimers()
-    // dropdownWrapper.update()
-    setTimeout(() => {
-      expect($$('.ant-dropdown-menu-submenu-title')).toHaveLength(2)
-      done()
-    }, 1000)
+    await asyncExpect(() => {
+      dropdownWrapper.findAll('.ant-dropdown-menu-submenu-title').at(0).trigger('mouseenter')
+    })
+    await asyncExpect(() => {
+      $$('.ant-dropdown-menu-submenu-title')[1].dispatchEvent(new MouseEvent('mouseenter'))
+    }, 500)
+    await asyncExpect(() => {
+      const menuItem = $$('.ant-dropdown-menu-item')
+      menuItem[menuItem.length - 1].click()
+    }, 500)
+
+    await asyncExpect(() => {
+      $$('.confirm')[0].click()
+    })
+    await asyncExpect(() => {
+      expect(renderedNames(wrapper)).toEqual(['Jack'])
+    }, 500)
   })
 
   it('works with JSX in controlled mode', async () => {
@@ -302,14 +315,14 @@ describe('Table.filter', () => {
     await asyncExpect(() => {
       dropdownWrapper.find({ name: 'MenuItem' }).trigger('click')
       dropdownWrapper.find('.confirm').trigger('click')
-    }, 0)
+    }, 500)
     await asyncExpect(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack'])
       dropdownWrapper.find('.clear').trigger('click')
-    }, 0)
+    }, 500)
     await asyncExpect(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy', 'Tom', 'Jerry'])
-    }, 0)
+    }, 500)
   })
 
   it('works with grouping columns in controlled mode', (done) => {

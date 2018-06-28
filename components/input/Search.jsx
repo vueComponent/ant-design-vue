@@ -22,7 +22,9 @@ export default {
     },
     enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   },
-  computed: {
+  model: {
+    prop: 'value',
+    event: 'change.value',
   },
   methods: {
     onSearch (e) {

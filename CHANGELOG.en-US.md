@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.4
+
+`2018-06-28`
+- 🐞 Fix `InputSearch` `v-model` return wrong value[#53](https://github.com/vueComponent/ant-design/issues/53
+
 ## 0.6.3
 
 `2018-06-26`

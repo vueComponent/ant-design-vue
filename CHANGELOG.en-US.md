@@ -2,10 +2,16 @@
 
 ---
 
+## 0.6.5
+
+`2018-07-01`
+- 🐞 Fix `Select` `getPopupContainer` not working [#56](https://github.com/vueComponent/ant-design/issues/56)
+- 🐞 Fix `Select` popup position is not updated[8254f7](https://github.com/vueComponent/ant-design/commit/8254f783a32189b63ffcf2c53702b50afef1f3db)
+
 ## 0.6.4
 
 `2018-06-28`
-- 🐞 Fix `InputSearch` `v-model` return wrong value[#53](https://github.com/vueComponent/ant-design/issues/53
+- 🐞 Fix `InputSearch` `v-model` return wrong value[#53](https://github.com/vueComponent/ant-design/issues/53)
 
 ## 0.6.3
 

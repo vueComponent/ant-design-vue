@@ -56,7 +56,7 @@ export default {
           class={`${prefixCls}-year-select`}
           onChange={this.onYearChange}
           value={String(year)}
-          getPopupContainer={() => this.calenderHeaderNode}
+          getPopupContainer={() => this.getCalenderHeaderNode()}
         >
           {options}
         </Select>
@@ -99,7 +99,7 @@ export default {
           class={`${prefixCls}-month-select`}
           value={String(month)}
           onChange={this.onMonthChange}
-          getPopupContainer={() => this.getCalenderHeaderNode}
+          getPopupContainer={() => this.getCalenderHeaderNode()}
         >
           {options}
         </Select>

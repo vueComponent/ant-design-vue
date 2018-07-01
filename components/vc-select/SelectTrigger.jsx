@@ -52,6 +52,7 @@ export default {
     combobox: PropTypes.bool,
     animation: PropTypes.string,
     transitionName: PropTypes.string,
+    getPopupContainer: PropTypes.func,
   },
   data () {
     return {

@@ -40,4 +40,5 @@ export const SelectPropTypes = {
   getInputElement: PropTypes.func,
   showAction: PropTypes.arrayOf(PropTypes.string),
   autoFocus: PropTypes.bool,
+  getPopupContainer: PropTypes.func,
 }

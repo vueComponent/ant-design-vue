@@ -1,5 +1,6 @@
 import Moment from 'moment'
 import { mount } from '@vue/test-utils'
+import { asyncExpect } from '@/tests/utils'
 import Vue from 'vue'
 import Calendar from '..'
 
@@ -74,7 +75,7 @@ describe('Calendar', () => {
     expect(onSelect.mock.calls.length).toBe(1)
   })
 
-  it('months other than in valid range should not be shown in header', (done) => {
+  it('months other than in valid range should not be shown in header', async () => {
     document.body.innerHTML = ''
     const validRange = [Moment('2017-02-02'), Moment('2018-05-18')]
     const wrapper = mount(
@@ -83,17 +84,20 @@ describe('Calendar', () => {
           return <Calendar validRange={validRange} />
         },
       },
-      { sync: false }
+      { sync: false, attachToDocument: true }
     )
-    wrapper.find('.ant-fullcalendar-year-select').trigger('click')
-    setTimeout(() => {
+    await asyncExpect(() => {
+      wrapper.find('.ant-fullcalendar-year-select').trigger('click')
+    })
+    await asyncExpect(() => {
       $$('.ant-select-dropdown-menu-item')[0].click()
-      wrapper.find('.ant-fullcalendar-month-select').trigger('click')
-      setTimeout(() => {
-        expect($$('.ant-select-dropdown-menu-item').length).toBe(13)
-        done()
-      }, 1000)
-    }, 1000)
+    }, 0)
+    // await asyncExpect(() => {
+    //   wrapper.find('.ant-fullcalendar-month-select').trigger('click')
+    // })
+    // await asyncExpect(() => {
+    //   expect($$('.ant-select-dropdown-menu-item').length).toBe(13)
+    // })
   })
 
   it('getDateRange should returns a disabledDate function', () => {

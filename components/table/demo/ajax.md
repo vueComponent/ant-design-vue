@@ -14,7 +14,7 @@ This example shows how to fetch and present data from remote server, and how to 
 ```html
 <template>
   <a-table :columns="columns"
-    :rowKey="record => record.registered"
+    :rowKey="record => record.login.uuid"
     :dataSource="data"
     :pagination="pagination"
     :loading="loading"

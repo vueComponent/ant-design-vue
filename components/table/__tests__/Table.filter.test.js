@@ -259,7 +259,7 @@ describe('Table.filter', () => {
     })
     await asyncExpect(() => {
       $$('.ant-dropdown-menu-submenu-title')[1].dispatchEvent(new MouseEvent('mouseenter'))
-    }, 500)
+    }, 1000)
     await asyncExpect(() => {
       const menuItem = $$('.ant-dropdown-menu-item')
       menuItem[menuItem.length - 1].click()

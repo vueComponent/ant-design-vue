@@ -6,30 +6,37 @@ export const UploadFileStatus = PropsTypes.oneOf(['error', 'success', 'done', 'u
 //   [key: string]: string;
 // }
 
-export const UploadFile = PropsTypes.shape({
-  uid: PropsTypes.oneOfType([
-    PropsTypes.string,
-    PropsTypes.number,
-  ]),
-  size: PropsTypes.number,
-  name: PropsTypes.string,
-  filename: PropsTypes.string,
-  lastModified: PropsTypes.number,
-  lastModifiedDate: PropsTypes.any,
-  url: PropsTypes.string,
-  status: UploadFileStatus,
-  percent: PropsTypes.number,
-  thumbUrl: PropsTypes.string,
-  originFileObj: PropsTypes.any,
-  response: PropsTypes.any,
-  error: PropsTypes.any,
-  linkProps: PropsTypes.any,
-  type: PropsTypes.string,
-}).loose
+// export const UploadFile = PropsTypes.shape({
+//   uid: PropsTypes.oneOfType([
+//     PropsTypes.string,
+//     PropsTypes.number,
+//   ]),
+//   size: PropsTypes.number,
+//   name: PropsTypes.string,
+//   filename: PropsTypes.string,
+//   lastModified: PropsTypes.number,
+//   lastModifiedDate: PropsTypes.any,
+//   url: PropsTypes.string,
+//   status: UploadFileStatus,
+//   percent: PropsTypes.number,
+//   thumbUrl: PropsTypes.string,
+//   originFileObj: PropsTypes.any,
+//   response: PropsTypes.any,
+//   error: PropsTypes.any,
+//   linkProps: PropsTypes.any,
+//   type: PropsTypes.string,
+// }).loose
+
+function UploadFile ({ uid, name }) {
+  if (!uid && uid !== 0) return false
+  if (!['string', 'number'].includes(typeof uid)) return false
+  if (!name && typeof name !== 'string') return false
+  return true
+}
 
 export const UploadChangeParam = {
-  file: UploadFile,
-  fileList: PropsTypes.arrayOf(UploadFile),
+  file: PropsTypes.custom(UploadFile),
+  fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   event: PropsTypes.object,
 }
 
@@ -47,8 +54,8 @@ export const UploadLocale = PropsTypes.shape({
 export const UploadProps = {
   type: PropsTypes.oneOf(['drag', 'select']),
   name: PropsTypes.string,
-  defaultFileList: PropsTypes.arrayOf(UploadFile),
-  fileList: PropsTypes.arrayOf(UploadFile),
+  defaultFileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
+  fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   action: PropsTypes.string.isRequired,
   data: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
   headers: PropsTypes.object,
@@ -72,7 +79,7 @@ export const UploadProps = {
 }
 
 export const UploadState = {
-  fileList: PropsTypes.arrayOf(UploadFile),
+  fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   dragState: PropsTypes.string,
 }
 
@@ -80,7 +87,8 @@ export const UploadListProps = {
   listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
   // onPreview: PropsTypes.func,
   // onRemove: PropsTypes.func,
-  items: PropsTypes.arrayOf(UploadFile),
+  // items: PropsTypes.arrayOf(UploadFile),
+  items: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   // items: PropsTypes.any,
   progressAttr: PropsTypes.object,
   prefixCls: PropsTypes.string,

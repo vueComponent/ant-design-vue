@@ -13,8 +13,6 @@ import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './u
 
 export { UploadProps }
 
-function noop () {}
-
 export default {
   name: 'AUpload',
   Dragger: Dragger,
@@ -189,8 +187,10 @@ export default {
         },
         on: {
           remove: this.handleManualRemove,
-          preview: this.$listeners.preview || noop,
         },
+      }
+      if (this.$listeners.preview) {
+        uploadListProps.on.preview = this.$listeners.preview
       }
       return (
         <UploadList

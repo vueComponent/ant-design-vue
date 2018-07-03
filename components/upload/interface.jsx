@@ -30,7 +30,7 @@ export const UploadFileStatus = PropsTypes.oneOf(['error', 'success', 'done', 'u
 function UploadFile ({ uid, name }) {
   if (!uid && uid !== 0) return false
   if (!['string', 'number'].includes(typeof uid)) return false
-  if (!name && typeof name !== 'string') return false
+  if (name === '' || typeof name !== 'string') return false
   return true
 }
 

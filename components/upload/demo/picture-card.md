@@ -24,7 +24,7 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
       </div>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-      <img alt="example" style="width: '100%'" :src="previewImage" />
+      <img alt="example" style="width: 100%" :src="previewImage" />
     </a-modal>
   </div>
 </template>
@@ -43,20 +43,20 @@ export default {
     }
   },
   methods: {
-    handleCancel() {
+    handleCancel () {
       this.previewVisible = false
     },
-    handlePreview(file) {
+    handlePreview (file) {
       this.previewImage = file.url || file.thumbUrl
       this.previewVisible = true
     },
-    handleChange({ fileList }) {
+    handleChange ({ fileList }) {
       this.fileList = fileList
     },
   },
 }
 </script>
-<style scoped>
+<style>
   /* you can make up upload button and sample style by using stylesheets */
   .ant-upload-select-picture-card i {
     font-size: 32px;

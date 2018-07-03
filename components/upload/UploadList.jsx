@@ -61,6 +61,10 @@ export default {
       this.$emit('remove', file)
     },
     handlePreview (file, e) {
+      const { preview } = this.$listeners
+      if(!preview) {
+        return
+      }
       e.preventDefault()
       return this.$emit('preview', file)
     },

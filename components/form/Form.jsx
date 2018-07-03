@@ -178,7 +178,7 @@ export default {
         ...options,
         fieldMetaProp: FIELD_META_PROP,
         fieldDataProp: FIELD_DATA_PROP,
-        templateContext: this.$parent,
+        templateContext: this.$vnode.context,
       })({
         provide () {
           return {

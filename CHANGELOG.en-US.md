@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.7
+
+`2018-07-03`
+- 🐞 Fix `Form` component cannot be updated when using template syntax[#62](https://github.com/vueComponent/ant-design/issues/62)
+
 ## 0.6.6
 
 `2018-07-03`

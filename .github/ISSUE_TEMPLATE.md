@@ -1,24 +1,16 @@
-### 请严格按照如下模板反馈bug，尤其是复现bug的demo链接，不合规范的issue会被立刻关闭！！！
+<!--
+IMPORTANT: Please use the following link to create a new issue:
 
-- [ ] I have searched the [issues](https://github.com/vueComponent/ant-design/issues) of this repository and believe that this is not a duplicate.
+  https://vuecomponent.github.io/vue-antd-issue-helper/
 
-### Version
-...
+If your issue was not created using the app above, it will be closed immediately.
+-->
 
-### Environment
-...
+<!--
+注意：请使用下面的链接来新建 issue：
 
-### Reproduction link
-[example](https://codesandbox.io/s/2wpk21kzvr)
+  https://vuecomponent.github.io/vue-antd-issue-helper/
+  国内镜像：http://tangjinzhou.gitee.io/vue-antd-issue-helper/
 
-### Steps to reproduce
-..
-
-### What is expected?
-...
-
-### What is actually happening?
-...
-
----
-...
+不是用上面的链接创建的 issue 会被立即关闭。
+-->

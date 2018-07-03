@@ -180,10 +180,10 @@ describe('DatePicker', () => {
     }, 0)
     await asyncExpect(() => {
       clearInput(wrapper)
-    })
+    }, 0)
     await asyncExpect(() => {
       openPanel(wrapper)
-    })
+    }, 0)
     await asyncExpect(() => {
       expect(hasSelected(wrapper, moment('2016-11-22'))).toBe(true)
     }, 0)

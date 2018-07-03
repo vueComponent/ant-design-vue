@@ -127,7 +127,7 @@ import 'vue-antd-ui/dist/antd.css';  // or 'vue-antd-ui/dist/antd.less'
 ## Contributing
 
 
-If you'd like to help us improve antd, just create a [Pull Request](https://github.com/vueComponent/ant-design/pulls). Feel free to report bugs and issues [here](https://github.com/vueComponent/ant-design/issues).
+If you'd like to help us improve antd, just create a [Pull Request](https://github.com/vueComponent/ant-design/pulls). Feel free to report bugs and issues [here](https://vuecomponent.github.io/vue-antd-issue-helper/).
 
 > If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
 

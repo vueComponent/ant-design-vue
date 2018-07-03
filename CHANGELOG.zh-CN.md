@@ -2,6 +2,13 @@
 
 ---
 
+## 0.6.6
+
+`2018-07-03`
+- 🐞 修复`Upload`的类型校验错误问题并更新相关demo[#61](https://github.com/vueComponent/ant-design/issues/61)
+- 🐞 修复`Upload`图片预览不能正确跳转问题[1584b3](https://github.com/vueComponent/ant-design/commit/1584b3839e500d2d6b07abf704f5cd084ca00e87)
+
+
 ## 0.6.5
 
 `2018-07-01`

@@ -328,7 +328,7 @@ export default {
       if (this.titles) {
         return this.titles
       }
-      return transferLocale.titles
+      return transferLocale.titles || ['', '']
     },
 
     getSelectedKeysName (direction) {

@@ -2,6 +2,14 @@
 
 ---
 
+
+## 0.6.8
+
+`2018-07-05`
+- 🐞 修复`notification` h is not defined[#63](https://github.com/vueComponent/ant-design/issues/63)
+- 🐞 修复`Transfer`国际化缺少titles问题[#64](https://github.com/vueComponent/ant-design/issues/64)
+
+
 ## 0.6.7
 
 `2018-07-03`

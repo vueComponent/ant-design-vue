@@ -2,6 +2,12 @@
 
 ---
 
+## 0.6.8
+
+`2018-07-05`
+- 🐞 Fix `notification` h is not defined[#63](https://github.com/vueComponent/ant-design/issues/63)
+- 🐞 Fix `Transfer` local-provider miss `titles`[#64](https://github.com/vueComponent/ant-design/issues/64)
+
 ## 0.6.7
 
 `2018-07-03`

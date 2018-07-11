@@ -171,7 +171,7 @@ export default {
     },
 
     onPopupMouseleave (e) {
-      if (e.relatedTarget && !e.relatedTarget.setTimeout &&
+      if (e && e.relatedTarget && !e.relatedTarget.setTimeout &&
       this._component &&
       this._component.getPopupDomNode &&
       contains(this._component.getPopupDomNode(), e.relatedTarget)) {
@@ -525,7 +525,7 @@ export default {
     } else {
       newChildProps.on.focus = this.createTwoChains('focus')
       newChildProps.on.blur = (e) => {
-        if (!e.relatedTarget || !contains(e.target, e.relatedTarget)) {
+        if (e && (!e.relatedTarget || !contains(e.target, e.relatedTarget))) {
           this.createTwoChains('blur')(e)
         }
       }

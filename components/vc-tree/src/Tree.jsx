@@ -558,7 +558,7 @@ const Tree = {
         tabIndex={focusable ? '0' : null}
         onKeydown={focusable ? this.onKeydown : () => {}}
       >
-        {children.map(this.renderTreeNode)}
+        {children.map((child, index) => this.renderTreeNode(child, index))}
       </ul>
     )
   },

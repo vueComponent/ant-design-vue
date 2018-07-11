@@ -117,6 +117,16 @@ const getComponentFromProp = (instance, prop) => {
   }
 }
 
+const getAllProps = (ele) => {
+  let data = ele.data || {}
+  let componentOptions = ele.componentOptions || {}
+  if (ele.$vnode) {
+    data = ele.$vnode.data || {}
+    componentOptions = ele.$vnode.componentOptions || {}
+  }
+  return { ...data.props, ...data.attrs, ...componentOptions.propsData }
+}
+
 const getPropsData = (ele) => {
   let componentOptions = ele.componentOptions
   if (ele.$vnode) {
@@ -247,5 +257,6 @@ export {
   isValidElement,
   camelize,
   getSlots,
+  getAllProps,
 }
 export default hasProp

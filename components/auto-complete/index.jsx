@@ -21,7 +21,7 @@ import { getComponentFromProp, getOptionProps, filterEmpty, isValidElement } fro
 // }
 
 const AutoCompleteProps = {
-  ...AbstractSelectProps,
+  ...AbstractSelectProps(),
   value: SelectValue,
   defaultValue: SelectValue,
   dataSource: PropTypes.array,

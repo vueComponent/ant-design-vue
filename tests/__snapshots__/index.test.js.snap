@@ -48,6 +48,7 @@ Array [
   "Table",
   "Transfer",
   "Tree",
+  "TreeSelect",
   "Tabs",
   "Tag",
   "TimePicker",

@@ -332,6 +332,11 @@ export function calcCheckStateConduct (treeNodes, checkedKeys) {
   }
 }
 
+// function keyListToString (keyList) {
+//   if (!keyList) return keyList
+//   return keyList.map(key => String(key))
+// }
+
 /**
  * Calculate the value of checked and halfChecked keys.
  * This should be only run in init or props changed.
@@ -360,6 +365,9 @@ export function calcCheckedKeys (keys, props, children = []) {
     warning(false, '`CheckedKeys` is not an array or an object')
     return null
   }
+
+  // keyProps.checkedKeys = keyListToString(keyProps.checkedKeys)
+  // keyProps.halfCheckedKeys = keyListToString(keyProps.halfCheckedKeys)
 
   // Do nothing if is checkStrictly mode
   if (checkStrictly) {

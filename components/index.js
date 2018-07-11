@@ -102,7 +102,7 @@ import { default as Transfer } from './transfer'
 
 import { default as Tree } from './tree'
 
-// import { default as TreeSelect } from './tree-select'
+import { default as TreeSelect } from './tree-select'
 
 import { default as Tabs } from './tabs'
 
@@ -196,6 +196,8 @@ const components = [
   Transfer,
   Tree,
   Tree.TreeNode,
+  TreeSelect,
+  TreeSelect.TreeNode,
   Tabs,
   Tabs.TabPane,
   Tag,
@@ -269,6 +271,7 @@ export {
   Table,
   Transfer,
   Tree,
+  TreeSelect,
   Tabs,
   Tag,
   TimePicker,

@@ -21,6 +21,7 @@ let onlyTreeNodeWarned = false // Only accept TreeNode
 const TreeNode = {
   name: 'TreeNode',
   mixins: [BaseMixin],
+  __ANT_TREE_NODE: true,
   props: initDefaultProps({
     eventKey: PropTypes.string, // Pass by parent `cloneElement`
     prefixCls: PropTypes.string,

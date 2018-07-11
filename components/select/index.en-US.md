@@ -35,7 +35,7 @@
 | size | Size of Select input. `default` `large` `small` | string | default |
 | tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |
 | value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |
-
+| options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] |
 
 ### events
 | Events Name | Description | Arguments |

@@ -64,6 +64,7 @@ const SelectProps = {
   getPopupContainer: PropTypes.func,
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
+  options: PropTypes.array,
 }
 
 const SelectPropTypes = {
@@ -121,6 +122,7 @@ export default {
         prefixCls,
         size,
         mode,
+        options,
         ...restProps
       } = getOptionProps(this)
       const cls = {
@@ -157,7 +159,14 @@ export default {
 
       return (
         <VcSelect {...selectProps}>
-          {filterEmpty(this.$slots.default)}
+          {
+            options
+              ? options.map((option) => {
+                const { key, label = option.title, ...restOption } = option
+                return <Option key={key} {...{ props: restOption }}>{label}</Option>
+              })
+              : filterEmpty(this.$slots.default)
+          }
         </VcSelect>
       )
     },

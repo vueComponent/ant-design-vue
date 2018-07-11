@@ -2,6 +2,14 @@
 
 ---
 
+## 0.7.0
+
+`2018-07-11`
+- 🌟 新增`TreeSelect`组件
+- 🌟 `Select`组件新增`options`，方便直接生成选择列表[#37](https://github.com/vueComponent/ant-design/issues/37)
+- 🐞 修复`Tooltip`中使用`Select`组件时，`blur`事件报错问题[#67](https://github.com/vueComponent/ant-design/issues/67)
+- 🐞 修改`Upload`组件`action`属性为可选[#66](https://github.com/vueComponent/ant-design/issues/66)
+
 
 ## 0.6.8
 

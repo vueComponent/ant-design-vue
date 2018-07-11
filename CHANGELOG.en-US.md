@@ -2,6 +2,15 @@
 
 ---
 
+## 0.7.0
+
+`2018-07-11`
+- 🌟 Add `TreeSelect` component
+- 🌟 `Select` add `options`, Easy to generate a selection list directly[#37](https://github.com/vueComponent/ant-design/issues/37)
+- 🐞 Fix `blur` event error when using `Select` component in `Tooltip`[#67](https://github.com/vueComponent/ant-design/issues/67)
+- 🐞 Modify the `Upload` component `action` attribute to optional[#66](https://github.com/vueComponent/ant-design/issues/66)
+
+
 ## 0.6.8
 
 `2018-07-05`

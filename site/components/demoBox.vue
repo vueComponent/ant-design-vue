@@ -48,9 +48,10 @@ export default {
   inject: {
     _store: { default: {}},
     iframeDemo: { default: {}},
+    demoContext: { default: {}},
   },
   data () {
-    const { name = '' } = this.$route.params
+    const { name = '' } = this.demoContext
     const { html, script, style, us, cn, sourceCode } = this.jsfiddle
     // let sourceCode = `<template>${html}</template>\n`
     // sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode

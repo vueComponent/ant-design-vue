@@ -1,15 +1,32 @@
 import Layout from './components/layout.vue'
 import Iframe from './components/iframe.vue'
+import demoRoutes from './demoRoutes'
 
 export default [
-  { path: '/ant-design/components/:name/', component: Layout, props: true },
-  { path: '/ant-design/iframe/:name/', component: Iframe, props: true },
+  { path: '/ant-design/components',
+    component: Layout,
+    props: (route) => {
+      const name = route.path.split('/ant-design/components/')[1].split('/')[0]
+      return { name, showDemo: true }
+    },
+    children: demoRoutes,
+  },
+  { path: '/ant-design/iframe',
+    component: Iframe,
+    children: demoRoutes.map((item) => ({
+      ...item,
+      props: (route) => {
+        const hash = route.hash.replace('#', '')
+        return { iframeName: hash }
+      },
+    })),
+  },
   {
     path: '/ant-design',
     component: Layout,
     props: (route) => {
       const name = route.path.split('/docs/vue/')[1].split('/')[0]
-      return { name }
+      return { name, showApi: true }
     },
     children: [
       {

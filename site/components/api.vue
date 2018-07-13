@@ -8,10 +8,12 @@
 import { isZhCN } from '../util'
 export default {
   name: 'api',
+  inject: {
+    demoContext: { default: {}},
+  },
   data () {
-    const { name } = this.$route.params
     return {
-      isZhCN: isZhCN(name),
+      isZhCN: isZhCN(this.demoContext.name),
     }
   },
 }

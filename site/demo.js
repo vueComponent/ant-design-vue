@@ -1,50 +1,319 @@
-export { default as avatar } from 'antd/avatar/demo/index.vue'
-export { default as badge } from 'antd/badge/demo/index.vue'
-export { default as breadcrumb } from 'antd/breadcrumb/demo/index.vue'
-export { default as button } from 'antd/button/demo/index.vue'
-export { default as card } from 'antd/card/demo/index.vue'
-export { default as checkbox } from 'antd/checkbox/demo/index.vue'
-export { default as grid } from 'antd/grid/demo/index.vue'
-export { default as icon } from 'antd/icon/demo/index.vue'
-export { default as input } from 'antd/input/demo/index.vue'
-export { default as select } from 'antd/select/demo/index.vue'
-export { default as menu } from 'antd/menu/demo/index.vue'
-export { default as pagination } from 'antd/pagination/demo/index.vue'
-export { default as popconfirm } from 'antd/popconfirm/demo/index.vue'
-export { default as popover } from 'antd/popover/demo/index.vue'
-export { default as radio } from 'antd/radio/demo/index.vue'
-export { default as rate } from 'antd/rate/demo/index.vue'
-export { default as tabs } from 'antd/tabs/demo/index.vue'
-export { default as tag } from 'antd/tag/demo/index.vue'
-export { default as tooltip } from 'antd/tooltip/demo/index.vue'
-export { default as dropdown } from 'antd/dropdown/demo/index.vue'
-export { default as divider } from 'antd/divider/demo/index.vue'
-export { default as collapse } from 'antd/collapse/demo/index.vue'
-export { default as notification } from 'antd/notification/demo/index.vue'
-export { default as message } from 'antd/message/demo/index.vue'
-export { default as spin } from 'antd/spin/demo/index.vue'
-export { default as switch } from 'antd/switch/demo/index.vue'
-export { default as autoComplete } from 'antd/auto-complete/demo/index.vue'
-export { default as affix } from 'antd/affix/demo/index.vue'
-export { default as cascader } from 'antd/cascader/demo/index.vue'
-export { default as backTop } from 'antd/back-top/demo/index.vue'
-export { default as modal } from 'antd/modal/demo/index.vue'
-export { default as alert } from 'antd/alert/demo/index.vue'
-export { default as timePicker } from 'antd/time-picker/demo/index.vue'
-export { default as steps } from 'antd/steps/demo/index.vue'
-export { default as calendar } from 'antd/calendar/demo/index.vue'
-export { default as datePicker } from 'antd/date-picker/demo/index.vue'
-export { default as localeProvider } from 'antd/locale-provider/demo/index.vue'
-export { default as slider } from 'antd/slider/demo/index.vue'
-export { default as progress } from 'antd/progress/demo/index.vue'
-export { default as timeline } from 'antd/timeline/demo/index.vue'
-export { default as table } from 'antd/table/demo/index.vue'
-export { default as inputNumber } from 'antd/input-number/demo/index.vue'
-export { default as transfer } from 'antd/transfer/demo/index.vue'
-export { default as upload } from 'antd/upload/demo/index.vue'
-export { default as tree } from 'antd/tree/demo/index.vue'
-export { default as treeSelect } from 'antd/tree-select/demo/index.vue'
-export { default as layout } from 'antd/layout/demo/index.vue'
-export { default as form } from 'antd/form/demo/index.vue'
-export { default as anchor } from 'antd/anchor/demo/index.vue'
-export { default as list } from 'antd/list/demo/index.vue'
+export default {
+  avatar: {
+    category: 'Components',
+    subtitle: '头像',
+    type: 'Data Display',
+    title: 'Avatar',
+  },
+  badge: {
+    category: 'Components',
+    subtitle: '徽标数',
+    type: 'Data Display',
+    title: 'Badge',
+  },
+  breadcrumb: {
+    category: 'Components',
+    subtitle: '面包屑',
+    type: 'Navigation',
+    title: 'Breadcrumb',
+  },
+  button: {
+    category: 'Components',
+    subtitle: '按钮',
+    type: 'General',
+    title: 'Button',
+  },
+  card: {
+    category: 'Components',
+    subtitle: '卡片',
+    type: 'Data Display',
+    title: 'Card',
+    cols: 1,
+  },
+  checkbox: {
+    category: 'Components',
+    subtitle: '多选框',
+    type: 'Data Entry',
+    title: 'Checkbox',
+  },
+  grid: {
+    category: 'Components',
+    subtitle: '栅格',
+    type: 'Layout',
+    title: 'Grid',
+    cols: 1,
+  },
+  icon: {
+    category: 'Components',
+    subtitle: '图标',
+    type: 'General',
+    title: 'Icon',
+  },
+  input: {
+    category: 'Components',
+    subtitle: '输入框',
+    type: 'Data Entry',
+    title: 'Input',
+  },
+  select: {
+    category: 'Components',
+    subtitle: '选择器',
+    type: 'Data Entry',
+    title: 'Select',
+  },
+  menu: {
+    category: 'Components',
+    subtitle: '导航菜单',
+    type: 'Navigation',
+    title: 'Menu',
+    cols: 1,
+  },
+  pagination: {
+    category: 'Components',
+    subtitle: '分页',
+    type: 'Navigation',
+    title: 'Pagination',
+    cols: 1,
+  },
+  popconfirm: {
+    category: 'Components',
+    subtitle: '气泡确认框',
+    type: 'Feedback',
+    title: 'Popconfirm',
+  },
+  popover: {
+    category: 'Components',
+    subtitle: '气泡卡片',
+    type: 'Data Display',
+    title: 'Popover',
+  },
+  radio: {
+    category: 'Components',
+    subtitle: '单选框',
+    type: 'Data Entry',
+    title: 'Radio',
+  },
+  rate: {
+    category: 'Components',
+    subtitle: '评分',
+    type: 'Data Entry',
+    title: 'Rate',
+    cols: 1,
+  },
+  tabs: {
+    category: 'Components',
+    subtitle: '标签页',
+    type: 'Data Display',
+    title: 'Tabs',
+    cols: 1,
+  },
+  tag: {
+    category: 'Components',
+    subtitle: '标签',
+    type: 'Data Display',
+    title: 'Tag',
+  },
+  tooltip: {
+    category: 'Components',
+    subtitle: '文字提示',
+    type: 'Data Display',
+    title: 'Tooltip',
+  },
+  dropdown: {
+    category: 'Components',
+    subtitle: '下拉菜单',
+    type: 'Navigation',
+    title: 'Dropdown',
+  },
+  divider: {
+    category: 'Components',
+    subtitle: '分割线',
+    type: 'Other',
+    title: 'Divider',
+  },
+  collapse: {
+    category: 'Components',
+    subtitle: '折叠面板',
+    type: 'Data Display',
+    title: 'Collapse',
+    cols: 1,
+  },
+  notification: {
+    category: 'Components',
+    subtitle: '通知提醒框',
+    type: 'Feedback',
+    title: 'Notification',
+  },
+  message: {
+    category: 'Components',
+    subtitle: '全局提示',
+    type: 'Feedback',
+    title: 'Message',
+  },
+  spin: {
+    category: 'Components',
+    subtitle: '加载中',
+    type: 'Feedback',
+    title: 'Spin',
+  },
+  switch: {
+    category: 'Components',
+    subtitle: '开关',
+    type: 'Data Entry',
+    title: 'Switch',
+  },
+  autoComplete: {
+    category: 'Components',
+    subtitle: '自动完成',
+    type: 'Data Entry',
+    title: 'AutoComplete',
+    cols: 2,
+  },
+  affix: {
+    category: 'Components',
+    subtitle: '固钉',
+    type: 'Navigation',
+    title: 'Affix',
+  },
+  cascader: {
+    category: 'Components',
+    subtitle: '级联选择',
+    type: 'Data Entry',
+    title: 'Cascader',
+  },
+  backTop: {
+    category: 'Components',
+    subtitle: '回到顶部',
+    type: 'Other',
+    title: 'BackTop',
+  },
+  modal: {
+    category: 'Components',
+    subtitle: '对话框',
+    type: 'Feedback',
+    title: 'Modal',
+  },
+  alert: {
+    category: 'Components',
+    subtitle: '警告提示',
+    type: 'Feedback',
+    title: 'Alert',
+  },
+  timePicker: {
+    category: 'Components',
+    subtitle: '时间选择框',
+    type: 'Data Entry',
+    title: 'TimePicker',
+  },
+  steps: {
+    category: 'Components',
+    subtitle: '步骤条',
+    type: 'Navigation',
+    title: 'Steps',
+    cols: 1,
+  },
+  calendar: {
+    category: 'Components',
+    subtitle: '日历',
+    type: 'Data Display',
+    title: 'Calendar',
+    cols: 1,
+  },
+  datePicker: {
+    category: 'Components',
+    subtitle: '日期选择框',
+    type: 'Data Entry',
+    title: 'DatePicker',
+  },
+  localeProvider: {
+    category: 'Components',
+    subtitle: '国际化',
+    type: 'Other',
+    title: 'LocaleProvider',
+    cols: 1,
+  },
+  slider: {
+    category: 'Components',
+    subtitle: '滑动输入条',
+    type: 'Data Entry',
+    title: 'Slider',
+  },
+  progress: {
+    category: 'Components',
+    subtitle: '进度条',
+    type: 'Feedback',
+    title: 'Progress',
+  },
+  timeline: {
+    category: 'Components',
+    subtitle: '时间轴',
+    type: 'Data Display',
+    title: 'Timeline',
+  },
+  table: {
+    category: 'Components',
+    subtitle: '表格',
+    type: 'Data Display',
+    title: 'Table',
+    cols: 1,
+  },
+  inputNumber: {
+    category: 'Components',
+    subtitle: '数字输入框',
+    type: 'Data Entry',
+    title: 'InputNumber',
+  },
+  transfer: {
+    category: 'Components',
+    subtitle: '穿梭框',
+    type: 'Data Entry',
+    title: 'Transfer',
+    cols: '1',
+  },
+  upload: {
+    category: 'Components',
+    subtitle: '上传',
+    type: 'Data Entry',
+    title: 'Upload',
+  },
+  tree: {
+    category: 'Components',
+    subtitle: '树形控件',
+    type: 'Data Display',
+    title: 'Tree',
+  },
+  treeSelect: {
+    category: 'Components',
+    subtitle: '树选择',
+    type: 'Data Entry',
+    title: 'TreeSelect',
+  },
+  layout: {
+    category: 'Components',
+    subtitle: '布局',
+    type: 'Layout',
+    title: 'Layout',
+    cols: 1,
+  },
+  form: {
+    category: 'Components',
+    subtitle: '表单',
+    type: 'Data Entry',
+    title: 'Form',
+    cols: 1,
+  },
+  anchor: {
+    category: 'Components',
+    subtitle: '锚点',
+    type: 'Other',
+    title: 'Anchor',
+    cols: 2,
+  },
+  list: {
+    category: 'Components',
+    subtitle: '列表',
+    type: 'Data Display',
+    title: 'List',
+    cols: 1,
+  },
+}

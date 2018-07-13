@@ -50,24 +50,26 @@ function dist (done) {
 
 function copyHtml () {
   const rl = readline.createInterface({
-    input: fs.createReadStream(path.join(cwd, 'site/demo.js')),
+    input: fs.createReadStream(path.join(cwd, 'site/demoRoutes.js')),
   })
 
   rl.on('line', (line) => {
-    const name = line.split('antd/')[1].split('/')[0]
-    console.log('create path:', name)
-    const toPaths = [
-      `site-dist/components/${name}`,
-      `site-dist/components/${name}-cn`,
-      `site-dist/iframe/${name}`,
-      `site-dist/iframe/${name}-cn`,
-    ]
-    toPaths.forEach(toPath => {
-      rimraf.sync(path.join(cwd, toPath))
-      mkdirp(path.join(cwd, toPath), function () {
-        fs.writeFileSync(path.join(cwd, `${toPath}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
+    if (line.indexOf('path:') > -1) {
+      const name = line.split("'")[1].split("'")[0]
+      console.log('create path:', name)
+      const toPaths = [
+        `site-dist/components/${name}`,
+        // `site-dist/components/${name}-cn`,
+        `site-dist/iframe/${name}`,
+        // `site-dist/iframe/${name}-cn`,
+      ]
+      toPaths.forEach(toPath => {
+        rimraf.sync(path.join(cwd, toPath))
+        mkdirp(path.join(cwd, toPath), function () {
+          fs.writeFileSync(path.join(cwd, `${toPath}/index.html`), fs.readFileSync(path.join(cwd, 'site-dist/index.html')))
+        })
       })
-    })
+    }
   })
   const source = [
     'docs/vue/*.md',

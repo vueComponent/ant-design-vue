@@ -1,5 +1,6 @@
 <script>
-import * as AllDemo from '../demo'
+import Vue from 'vue'
+import AllDemo from '../demo'
 import Header from './header'
 import zhCN from 'antd/locale-provider/zh_CN'
 import enUS from 'antd/locale-provider/default'
@@ -19,6 +20,8 @@ const docsList = [
 export default {
   props: {
     name: String,
+    showDemo: Boolean,
+    showApi: Boolean,
   },
   data () {
     this.store = create({
@@ -27,6 +30,11 @@ export default {
     this.subscribe()
     return {
       currentSubMenu: [],
+    }
+  },
+  provide () {
+    return {
+      demoContext: this,
     }
   },
   beforeDestroy () {
@@ -117,6 +125,7 @@ export default {
       document.title = titleStr
     },
   },
+
   render () {
     const name = this.name
     const isCN = isZhCN(name)
@@ -136,11 +145,18 @@ export default {
       const type = d.type || 'Other'
       const key = `${title.replace(/(\B[A-Z])/g, '-$1').toLowerCase()}`
       titleMap[key] = title
+      AllDemo[title].key = key
       menuConfig[type] = menuConfig[type] || []
       menuConfig[type].push(d)
     }
     const reName = name.replace(/-cn\/?$/, '')
-    const Demo = AllDemo[titleMap[reName]]
+    // const Demo = new Vue({
+    //   template: '<demo-component/>',
+    //   components: {
+    //     'demo-component': () => import(`../../components/${AllDemo[titleMap[reName]].key}/demo/index.vue`),
+    //   },
+    // })
+    // AllDemo[titleMap[reName]]
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
@@ -167,7 +183,7 @@ export default {
     if (!isCN) {
       locale = enUS
     }
-    this.resetDocumentTitle(Demo, reName, isCN)
+    this.resetDocumentTitle(AllDemo[titleMap[reName]], reName, isCN)
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>
@@ -192,17 +208,18 @@ export default {
                   <div class='toc-affix' style='width: 110px;'>
                     {this.getSubMenu(isCN)}
                   </div>
-                  {Demo ? <Provider store={this.store}>
-                    <Demo key={isCN ? 'cn' : 'en'}/>
-                  </Provider> : ''}
-                  <div class='markdown api-container' ref='doc'>
+                  {this.showDemo ? <Provider store={this.store} key={isCN ? 'cn' : 'en'}>
                     <router-view></router-view>
-                  </div>
+                  </Provider> : ''}
+                  {this.showApi ? <div class='markdown api-container' ref='doc'>
+                    <router-view></router-view>
+                  </div> : ''}
                 </div>
               </a-col>
             </a-row>
           </div>
         </a-locale-provider>
+        { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
       </div>
     )
   },

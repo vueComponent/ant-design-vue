@@ -64,9 +64,6 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vender',
-      minChunks: function (module) {
-        return module.context && ~module.context.indexOf('node_modules')
-      },
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

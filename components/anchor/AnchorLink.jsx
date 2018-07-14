@@ -25,6 +25,12 @@ export default {
   beforeDestroy () {
     this.antAnchor.unregisterLink(this.href)
   },
+  watch: {
+    href (val) {
+      this.antAnchor.unregisterLink(val)
+      this.antAnchor.registerLink(val)
+    },
+  },
   methods: {
     handleClick () {
       this.antAnchor.scrollTo(this.href)

@@ -1,6 +1,6 @@
 <script>
 import { isZhCN } from '../util'
-import _ from 'lodash'
+import sortBy from 'lodash/sortBy'
 export default {
   props: {
     name: String,
@@ -27,7 +27,7 @@ export default {
   },
   render () {
     const name = this.name
-    const searchData = _.sortBy(this.searchData, ['title'])
+    const searchData = sortBy(this.searchData, ['title'])
     const isCN = isZhCN(name)
     return (
       <header id='header'>

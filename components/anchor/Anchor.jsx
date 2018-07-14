@@ -225,7 +225,7 @@ export default {
 
     const wrapperStyle = {
       maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh',
-      ...getStyle(this, true),
+      // ...getStyle(this, true),
     }
 
     const anchorContent = (

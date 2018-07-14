@@ -120,6 +120,7 @@
         "mkdirp": "^0.5.1",
         "mockdate": "^2.0.2",
         "moment-timezone": "^0.5.17",
+        "nprogress": "^0.2.0",
         "postcss": "^6.0.20",
         "postcss-loader": "^2.1.2",
         "pre-commit": "^1.2.2",

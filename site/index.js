@@ -12,6 +12,17 @@ import './components'
 import demoBox from './components/demoBox'
 import demoContainer from './components/demoContainer'
 
+const mountedCallback = {
+  install: (Vue, options) => {
+    Vue.directive('mountedCallback', {
+      inserted: function (el, binding, vnode) {
+        binding.value(vnode)
+      },
+    })
+  },
+}
+
+Vue.use(mountedCallback)
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.component(Md.name, Md)

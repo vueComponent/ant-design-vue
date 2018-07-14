@@ -6,6 +6,7 @@ import enUS from 'antd/locale-provider/default'
 import sortBy from 'lodash/sortBy'
 import { isZhCN } from '../util'
 import { Provider, create } from '../../components/_util/store'
+import NProgress from 'nprogress'
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -40,9 +41,16 @@ export default {
     if (this.unsubscribe) {
       this.unsubscribe()
     }
+    clearTimeout(this.timer)
   },
   mounted () {
     this.addSubMenu()
+    const nprogressHiddenStyle = document.getElementById('nprogress-style')
+    if (nprogressHiddenStyle) {
+      this.timer = setTimeout(() => {
+        nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle)
+      }, 0)
+    }
   },
   watch: {
     '$route.path': function () {
@@ -112,6 +120,9 @@ export default {
         }
       }
       document.title = titleStr
+    },
+    mountedCallback () {
+      NProgress.done()
     },
   },
 
@@ -199,10 +210,25 @@ export default {
                     {this.getSubMenu(isCN)}
                   </div>
                   {this.showDemo ? <Provider store={this.store} key={isCN ? 'cn' : 'en'}>
-                    <router-view class={`demo-cols-${config.cols || 2}`}></router-view>
+                    <router-view
+                      class={`demo-cols-${config.cols || 2}`}
+                      {...{ directives: [
+                        {
+                          name: 'mountedCallback',
+                          value: this.mountedCallback,
+                        },
+                      ] }}
+                    ></router-view>
                   </Provider> : ''}
                   {this.showApi ? <div class='markdown api-container' ref='doc'>
-                    <router-view></router-view>
+                    <router-view
+                      {...{ directives: [
+                        {
+                          name: 'mountedCallback',
+                          value: this.mountedCallback,
+                        },
+                      ] }}
+                    ></router-view>
                   </div> : ''}
                 </div>
               </a-col>

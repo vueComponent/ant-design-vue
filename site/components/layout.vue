@@ -1,10 +1,9 @@
 <script>
-import Vue from 'vue'
 import AllDemo from '../demo'
 import Header from './header'
 import zhCN from 'antd/locale-provider/zh_CN'
 import enUS from 'antd/locale-provider/default'
-import _ from 'lodash'
+import sortBy from 'lodash/sortBy'
 import { isZhCN } from '../util'
 import { Provider, create } from '../../components/_util/store'
 
@@ -78,24 +77,14 @@ export default {
       const lis = []
       currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
         const title = isCN ? cnTitle : usTitle
-        const className = decodeURIComponent(window.location.hash) === `#${id}` ? 'current' : ''
-        lis.push(<li title={title}><a href={`#${id}`} class={className}>{title}</a></li>)
+        lis.push(<a-anchor-link href={`#${id}`} title={title} />)
       })
       const showApi = this.$route.path.indexOf('/components/') !== -1
       return (
-        <a-affix>
-          <ul id='demo-toc' class='toc'>
-            {lis}
-            {showApi ? <li title='API' key='API'>
-              <a
-                href='#API'
-                class={{
-                  current: window.location.hash === '#API',
-                }}
-              >API</a>
-            </li> : ''}
-          </ul>
-        </a-affix>
+        <a-anchor>
+          {lis}
+          {showApi ? <a-anchor-link title='API' href='#API' /> : ''}
+        </a-anchor>
       )
     },
     getDocsMenu (isCN) {
@@ -160,7 +149,7 @@ export default {
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
-      _.sortBy(menus, ['title']).forEach(({ title, subtitle }) => {
+      sortBy(menus, ['title']).forEach(({ title, subtitle }) => {
         const linkValue = isCN
           ? [<span>{title}</span>, <span class='chinese'>{subtitle}</span>]
           : [<span>{title}</span>]
@@ -183,7 +172,8 @@ export default {
     if (!isCN) {
       locale = enUS
     }
-    this.resetDocumentTitle(AllDemo[titleMap[reName]], reName, isCN)
+    const config = AllDemo[titleMap[reName]]
+    this.resetDocumentTitle(config, reName, isCN)
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>
@@ -205,11 +195,11 @@ export default {
               </a-col>
               <a-col span={18}>
                 <div class='content main-container'>
-                  <div class='toc-affix' style='width: 110px;'>
+                  <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
                   </div>
                   {this.showDemo ? <Provider store={this.store} key={isCN ? 'cn' : 'en'}>
-                    <router-view></router-view>
+                    <router-view class={`demo-cols-${config.cols || 2}`}></router-view>
                   </Provider> : ''}
                   {this.showApi ? <div class='markdown api-container' ref='doc'>
                     <router-view></router-view>

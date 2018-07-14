@@ -59,11 +59,14 @@ module.exports = merge(baseWebpackConfig, {
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: Infinity,
+      name: 'vender',
+      minChunks: function (module) {
+        return /node_modules/.test(module.context)
+      },
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vender',
+      name: 'manifest',
+      minChunks: Infinity,
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

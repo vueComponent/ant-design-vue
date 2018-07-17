@@ -86,17 +86,20 @@ export default {
     }
   },
   watch: {
-    pagination (val) {
-      this.setState(previousState => {
-        const newPagination = {
-          ...defaultPagination,
-          ...previousState.sPagination,
-          ...val,
-        }
-        newPagination.current = newPagination.current || 1
-        newPagination.pageSize = newPagination.pageSize || 10
-        return { sPagination: val !== false ? newPagination : emptyObject }
-      })
+    pagination: {
+      handler (val) {
+        this.setState(previousState => {
+          const newPagination = {
+            ...defaultPagination,
+            ...previousState.sPagination,
+            ...val,
+          }
+          newPagination.current = newPagination.current || 1
+          newPagination.pageSize = newPagination.pageSize || 10
+          return { sPagination: val !== false ? newPagination : emptyObject }
+        })
+      },
+      deep: true,
     },
     rowSelection: {
       handler (val) {

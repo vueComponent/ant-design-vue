@@ -20,7 +20,7 @@ export default {
       default: 'ant-input',
       type: String,
     },
-    enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
+    enterButton: PropTypes.any,
   },
   model: {
     prop: 'value',

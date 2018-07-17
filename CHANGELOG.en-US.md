@@ -2,6 +2,13 @@
 
 ---
 
+## 0.7.1
+
+`2018-07-17`
+- 🐞 fix `Tooltip` containing disabled button does not show and style[#73](https://github.com/vueComponent/ant-design/issues/73)
+- 🐞 add `Table` panagation deep watch[#b464c6](https://github.com/vueComponent/ant-design/commit/b464c6f6ee4df6df1b6c55f29ac85b2f462763bc)
+
+
 ## 0.7.0
 
 `2018-07-11`

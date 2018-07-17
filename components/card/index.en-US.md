@@ -11,7 +11,7 @@
 | extra | Content to render in the top-right corner of the card | string\|slot | - |
 | hoverable | Lift up when hovering card | boolean | false |
 | loading | Shows a loading indicator while the contents of the card are being fetched | boolean | false |
-| tabList | List of TabPane's head. | Array<{key: string, tab: ReactNode}> | - |
+| tabList | List of TabPane's head, Custom tabs can be created with the scopedSlots property | Array<{key: string, tab: any, scopedSlots: {tab: 'XXX'}}> | - |
 | activeTabKey | Current TabPane's key | string | - |
 | defaultActiveTabKey | Initial active TabPane's key, if `activeTabKey` is not set. | string | - |
 | title | Card title | string\|slot | - |

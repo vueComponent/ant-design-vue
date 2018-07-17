@@ -77,7 +77,9 @@ export default {
     // https://github.com/react-component/tooltip/issues/18
     getDisabledCompatibleChildren (ele) {
       const isAntBtn = ele.componentOptions && ele.componentOptions.Ctor.options.__ANT_BUTTON
-      if (((isAntBtn && ele.componentOptions.propsData.disabled) || (ele.tag === 'button' && ele.data && ele.data.attrs.disabled !== false)) && this.isHoverTrigger()) {
+      if (((isAntBtn && (ele.componentOptions.propsData.disabled || ele.componentOptions.propsData.disabled === '')) ||
+      (ele.tag === 'button' && ele.data && ele.data.attrs.disabled !== false)) &&
+      this.isHoverTrigger()) {
       // Pick some layout related style properties up to span
       // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
         const { picked, omited } = splitObject(

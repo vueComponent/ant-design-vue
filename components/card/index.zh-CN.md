@@ -12,7 +12,7 @@
 | extra     | 卡片右上角的操作区域 | string\|slot | - |
 | hoverable | 鼠标移过时可浮起 | boolean | false |
 | loading   | 当卡片内容还在加载中时，可以用 loading 展示一个占位 | boolean | false |
-| tabList   | 页签标题列表 | Array<{key: string, tab: ReactNode}> | - |
+| tabList   | 页签标题列表, 可以通过scopedSlots属性自定义tab | Array<{key: string, tab: any, scopedSlots: {tab: 'XXX'}}> | - |
 | activeTabKey | 当前激活页签的 key | string | - |
 | defaultActiveTabKey | 初始化选中页签的 key，如果没有设置 activeTabKey | string | 第一个页签 |
 | title     | 卡片标题 | string\|slot | - |

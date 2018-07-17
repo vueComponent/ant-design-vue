@@ -212,7 +212,8 @@ exports[`renders ./components/card/demo/tabsCard.md correctly 1`] = `
               <div class="ant-tabs-nav-scroll">
                 <div class="ant-tabs-nav ant-tabs-nav-animated">
                   <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
-                  <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">tab1</div>
+                  <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab"><span><i class="anticon anticon-home"></i>tab1
+    </span></div>
                   <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">tab2</div>
                 </div>
               </div>

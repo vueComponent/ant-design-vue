@@ -81,11 +81,11 @@ export default {
   },
   render () {
     const {
-      prefixCls = 'ant-card', extra, bodyStyle, title, loading,
+      prefixCls = 'ant-card', bodyStyle, loading,
       bordered = true, type, tabList, hoverable, activeTabKey, defaultActiveTabKey,
     } = this.$props
 
-    const { $slots } = this
+    const { $slots, $scopedSlots } = this
 
     const classString = {
       [`${prefixCls}`]: true,
@@ -139,11 +139,16 @@ export default {
     let head
     const tabs = tabList && tabList.length ? (
       <Tabs {...tabsProps}>
-        {tabList.map(item => <TabPane tab={item.tab} key={item.key} />)}
+        {tabList.map(item => {
+          const { tab: temp, scopedSlots = {}} = item
+          const name = scopedSlots.tab
+          const tab = temp !== undefined ? temp : ($scopedSlots[name] ? $scopedSlots[name](item) : null)
+          return <TabPane tab={tab} key={item.key} />
+        })}
       </Tabs>
     ) : null
-    const titleDom = title || getComponentFromProp(this, 'title')
-    const extraDom = extra || getComponentFromProp(this, 'extra')
+    const titleDom = getComponentFromProp(this, 'title')
+    const extraDom = getComponentFromProp(this, 'extra')
     if (titleDom || extraDom || tabs) {
       head = (
         <div class={`${prefixCls}-head`}>

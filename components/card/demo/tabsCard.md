@@ -17,6 +17,9 @@
       :tabList="tabList"
       @tabChange="key => onTabChange(key, 'key')"
     >
+      <span slot="customRender" slot-scope="item">
+        <a-icon type="home"/>{{item.key}}
+      </span>
       <a href="#" slot="extra">More</a>
       {{contentList[key]}}
     </a-card>
@@ -40,7 +43,8 @@ export default {
     return {
       tabList: [{
         key: 'tab1',
-        tab: 'tab1',
+        // tab: 'tab1',
+        scopedSlots: { tab: 'customRender'}
       }, {
         key: 'tab2',
         tab: 'tab2',

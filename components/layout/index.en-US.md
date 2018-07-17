@@ -39,7 +39,7 @@ The sidebar.
 | defaultCollapsed | to set the initial status | boolean | false |
 | reverseArrow | reverse direction of arrow, for a sider that expands from the right | boolean | false |
 | style | to customize the styles | object\|string | - |
-| trigger | specify the customized trigger, set to null to hide the trigger | string\|ReactNode | - |
+| trigger | specify the customized trigger, set to null to hide the trigger | string\|slot | - |
 | width | width of the sidebar | number\|string | 200 |
 
 ### Events

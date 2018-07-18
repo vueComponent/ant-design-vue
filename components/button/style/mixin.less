@@ -271,6 +271,12 @@
   > span:first-child > .@{btnClassName} {
     margin-left: 0;
   }
+  > .@{btnClassName}:first-child:last-child {
+    border-radius: @btn-border-radius-base;
+  }
+  > span:first-child:last-child > .@{btnClassName} {
+    border-radius: @btn-border-radius-base;
+  }
 
   > .@{btnClassName}:first-child:not(:last-child),
   > span:first-child:not(:last-child) > .@{btnClassName} {
@@ -285,6 +291,12 @@
   }
 
   &-sm {
+    > .@{btnClassName}:first-child:last-child {
+      border-radius: @btn-border-radius-sm;
+    }
+    > span:first-child:last-child > .@{btnClassName} {
+      border-radius: @btn-border-radius-sm;
+    }
     > .@{btnClassName}:first-child:not(:last-child),
     > span:first-child:not(:last-child) > .@{btnClassName} {
       border-bottom-left-radius: @btn-border-radius-sm;

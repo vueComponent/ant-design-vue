@@ -36,7 +36,7 @@ import { default as Card } from './card'
 
 import { default as Collapse } from './collapse'
 
-// import { default as Carousel } from './carousel'
+import { default as Carousel } from './carousel'
 
 import { default as Cascader } from './cascader'
 
@@ -139,6 +139,7 @@ const components = [
   Card.Grid,
   Collapse,
   Collapse.Panel,
+  Carousel,
   Cascader,
   Checkbox,
   Checkbox.Group,
@@ -241,6 +242,7 @@ export {
   Calendar,
   Card,
   Collapse,
+  Carousel,
   Cascader,
   Checkbox,
   Col,

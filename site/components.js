@@ -12,7 +12,7 @@ import {
   Calendar,
   Card,
   Collapse,
-  // Carousel,
+  Carousel,
   Cascader,
   Checkbox,
   Col,
@@ -75,7 +75,7 @@ Vue.component(Card.Meta.name, Card.Meta)
 Vue.component(Card.Grid.name, Card.Grid)
 Vue.component(Collapse.name, Collapse)
 Vue.component(Collapse.Panel.name, Collapse.Panel)
-// Vue.component(Carousel.name, Carousel)
+Vue.component(Carousel.name, Carousel)
 Vue.component(Cascader.name, Cascader)
 Vue.component(Checkbox.name, Checkbox)
 Vue.component(Checkbox.Group.name, Checkbox.Group)

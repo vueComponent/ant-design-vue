@@ -276,6 +276,12 @@ export default {
     type: 'Data Entry',
     title: 'Upload',
   },
+  carousel: {
+    category: 'Components',
+    type: 'Data Display',
+    title: 'Carousel',
+    subtitle: '走马灯',
+  },
   tree: {
     category: 'Components',
     subtitle: '树形控件',

@@ -14,7 +14,8 @@ module.exports = {
     "jsx",
     "json",
     "vue",
-    "md"
+    "md",
+    "jpg"
   ],
   modulePathIgnorePatterns: [
     '/_site/',

@@ -399,4 +399,12 @@ export default [
     path: 'list-cn',
     component: () => import('../components/list/demo/index.vue'),
   },
+  {
+    path: 'carousel',
+    component: () => import('../components/carousel/demo/index.vue'),
+  },
+  {
+    path: 'carousel-cn',
+    component: () => import('../components/carousel/demo/index.vue'),
+  },
 ]

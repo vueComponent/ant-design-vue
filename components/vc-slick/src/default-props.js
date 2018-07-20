@@ -5,20 +5,13 @@ const defaultProps = {
   // 自定义高度
   adaptiveHeight: PropTypes.bool.def(false),
   afterChange: PropTypes.any.def(null),
-  // appendDots: PropTypes.func.def((h, { dots }) => {
-  //   return <ul style={{ display: 'block' }}>{dots}</ul>
-  // }),
   arrows: PropTypes.bool.def(true),
   autoplay: PropTypes.bool.def(false),
   autoplaySpeed: PropTypes.number.def(3000),
   beforeChange: PropTypes.any.def(null),
   centerMode: PropTypes.bool.def(false),
   centerPadding: PropTypes.string.def('50px'),
-  // className: '',
   cssEase: PropTypes.string.def('ease'),
-  // customPaging: PropTypes.func.def((h, { i }) => {
-  //   return <button>{i + 1}</button>
-  // }),
   dots: PropTypes.bool.def(false),
   dotsClass: PropTypes.string.def('slick-dots'),
   draggable: PropTypes.bool.def(true),
@@ -30,20 +23,14 @@ const defaultProps = {
   infinite: PropTypes.bool.def(true),
   initialSlide: PropTypes.number.def(0),
   lazyLoad: PropTypes.any.def(null),
-  // nextArrow: PropTypes.any.def(null),
   verticalSwiping: PropTypes.bool.def(false),
   asNavFor: PropTypes.any.def(null),
-  // onEdge: null,
-  // onInit: null,
-  // onLazyLoadError: null,
-  // onReInit: null,
   // 圆点hover是否暂停
   pauseOnDotsHover: PropTypes.bool.def(false),
   // focus是否暂停
   pauseOnFocus: PropTypes.bool.def(false),
   // hover是否暂停
   pauseOnHover: PropTypes.bool.def(true),
-  // prevArrow: PropTypes.any.def(null),
   responsive: PropTypes.any.def(null),
   rows: PropTypes.number.def(1),
   rtl: PropTypes.bool.def(false),

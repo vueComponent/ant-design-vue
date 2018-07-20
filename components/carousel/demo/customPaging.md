@@ -14,31 +14,22 @@ Custom paging display
     <a slot="customPaging" slot-scope="props">
       <img :src="getImgUrl(props.i)" />
     </a>
-    <div>
-      <img :src="imgList['abstract01']" />
-    </div>
-    <div>
-      <img :src="imgList['abstract02']" />
-    </div>
-    <div>
-      <img :src="imgList['abstract03']" />
-    </div>
-    <div>
-      <img :src="imgList['abstract04']" />
+    <div v-for="item in 4">
+      <img :src="baseUrl+'abstract0'+item+'.jpg'" />
     </div>
   </a-carousel>
 </template>
 <script>
-import imgList from '../../vc-slick/demo/imglist'
+const baseUrl = 'https://raw.githubusercontent.com/vueComponent/ant-design/master/components/vc-slick/assets/img/react-slick/'
 export default {
   data() {
     return {
-      imgList,
+      baseUrl,
     }
   },
   methods: {
     getImgUrl(i) {
-      return this.imgList[`abstract0${i + 1}`]
+      return `${baseUrl}abstract0${i + 1}.jpg`
     }
   }
 }

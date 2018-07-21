@@ -21,4 +21,6 @@
 ### 使用支付宝/微信的赞助的用户，如需要添加名单，赞助后可发github账号到邮箱(415800467@qq.com)
 
 - [fastgoo](https://github.com/fastgoo)
+- [sendya](https://github.com/sendya)
+- [limichange](https://github.com/limichange)
 

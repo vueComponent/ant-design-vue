@@ -5,8 +5,10 @@ node_js:
 before_script:
   - npm install vue vue-template-compiler
 script:
+  - cp ./scripts/.npmrc.template $HOME/.npmrc
   - COVERAGE=true npm run test
   - npm run codecov
+  - npm run pub-with-ci
   - bash ./scripts/deploy-to-gh-pages.sh
 env:
   matrix:

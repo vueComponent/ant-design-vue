@@ -134,13 +134,15 @@ function compile (modules) {
 function tag () {
   console.log('tagging')
   const { version } = packageJson
+  execSync(`git config --global user.email ${process.env.GITHUB_USER_EMAIL}`)
+  execSync(`git config --global user.name ${process.env.GITHUB_USER_NAME}`)
   execSync(`git tag ${version}`)
   execSync(`git push origin ${version}:${version}`)
   execSync('git push origin master:master')
   console.log('tagged')
 }
 
-function githubRelease () {
+function githubRelease (done) {
   const changlogFiles = [
     path.join(cwd, 'CHANGELOG.en-US.md'),
     path.join(cwd, 'CHANGELOG.zh-CN.md'),
@@ -180,6 +182,8 @@ function githubRelease () {
     tag_name: version,
     name: version,
     body: changelog,
+  }).then(() => {
+    done()
   })
 }
 gulp.task('check-git', (done) => {
@@ -204,8 +208,9 @@ function publish (tagString, done) {
   const publishNpm = process.env.PUBLISH_NPM_CLI || 'npm'
   runCmd(publishNpm, args, (code) => {
     tag()
-    githubRelease()
-    done(code)
+    githubRelease(() => {
+      done(code)
+    })
   })
 }
 

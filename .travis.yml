@@ -8,7 +8,7 @@ script:
   - cp ./scripts/.npmrc.template $HOME/.npmrc
   - COVERAGE=true npm run test
   - npm run codecov
-  - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then npm run pub-with-ci
+  - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then npm run pub-with-ci; fi
   - bash ./scripts/deploy-to-gh-pages.sh
 env:
   matrix:

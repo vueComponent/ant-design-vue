@@ -2,6 +2,12 @@
 
 ---
 
+## 1.0.0
+
+`2018-07-21`
+- 🌟 新增`Carousel 走马灯`组件[edddbd](https://github.com/vueComponent/ant-design/commit/edddbd982a279b62229ce825855c14c556866ece)
+- 更正了若干文档错误
+
 ## 0.7.1
 
 `2018-07-17`

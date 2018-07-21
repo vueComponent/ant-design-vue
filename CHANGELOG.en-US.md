@@ -2,6 +2,12 @@
 
 ---
 
+## 1.0.0
+
+`2018-07-21`
+- 🌟 Add `Carousel` component [edddbd](https://github.com/vueComponent/ant-design/commit/edddbd982a279b62229ce825855c14c556866ece)
+- modify some error document
+
 ## 0.7.1
 
 `2018-07-17`

@@ -236,9 +236,6 @@ function pub (done) {
     }
   })
 }
-// gulp.task('test', () => {
-//   githubRelease()
-// })
 
 gulp.task('dist', ['compile'], (done) => {
   dist(done)
@@ -265,8 +262,8 @@ gulp.task('pub', ['check-git', 'compile'], (done) => {
 })
 
 gulp.task('pub-with-ci', (done) => {
-  if (process.env.NPM_TOKEN) {
-    console.log('NPM token found, skip')
+  if (!process.env.NPM_TOKEN) {
+    console.log('no NPM token found, skip')
   } else {
     const github = new GitHub()
     github.authenticate({

@@ -119,12 +119,10 @@ After wrapped by `getFieldDecorator`, `value`(or other property defined by `valu
 | options.initialValue | You can specify initial value, type, optional value of children node. (Note: Because `Form` will test equality with `===` internaly, we recommend to use vairable as `initialValue`, instead of literal) |  | n/a |
 | options.normalize | Normalize value to form component, [a select-all example](https://codesandbox.io/s/kw4l2vqqmv) | function(value, prevValue, allValues): any | - |
 | options.rules | Includes validation rules. Please refer to "Validation Rules" part for details. | object\[] | n/a |
-| options.trigger | When to collect the value of children node | string | 'onChange' |
+| options.trigger | When to collect the value of children node | string | 'change' |
 | options.validateFirst | Whether stop validate on first rule of error for this field. | boolean | false |
-| options.validateTrigger | When to validate the value of children node. | string\|string\[] | 'onChange' |
+| options.validateTrigger | When to validate the value of children node. | string\|string\[] | 'change' |
 | options.valuePropName | Props of children node, for example, the prop of Switch is 'checked'. | string | 'value' |
-
-More option can be referenced at [rc-form option](https://github.com/react-component/form#option-object)。
 
 ### Form.Item
 

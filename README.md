@@ -27,6 +27,17 @@ An enterprise-class UI components based on Ant Design 3.X and Vue.
 - A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
 
+## Donation
+
+vue-antd-ui is an open source independent project. In order to achieve better and sustainable development of the project, we hope to get your support. You can support us in any of the following ways:
+
+- [Patreon](https://www.patreon.com/tangjinzhou)
+- [opencollective](https://opencollective.com/ant-design-278)
+- [paypal](https://www.paypal.me/tangjinzhou)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/6937879/43032487-932a5536-8cea-11e8-9175-9c006e938a82.png">
+</p>
 
 ## Using npm or yarn
 

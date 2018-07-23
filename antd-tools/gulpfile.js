@@ -25,6 +25,7 @@ const fs = require('fs')
 const rimraf = require('rimraf')
 const replaceLib = require('./replaceLib')
 const stripCode = require('gulp-strip-code')
+const compareVersions = require('compare-versions')
 
 const cwd = process.cwd()
 const libDir = path.join(cwd, 'lib')
@@ -133,13 +134,15 @@ function compile (modules) {
 function tag () {
   console.log('tagging')
   const { version } = packageJson
+  execSync(`git config --global user.email ${process.env.GITHUB_USER_EMAIL}`)
+  execSync(`git config --global user.name ${process.env.GITHUB_USER_NAME}`)
   execSync(`git tag ${version}`)
   execSync(`git push origin ${version}:${version}`)
   execSync('git push origin master:master')
   console.log('tagged')
 }
 
-function githubRelease () {
+function githubRelease (done) {
   const changlogFiles = [
     path.join(cwd, 'CHANGELOG.en-US.md'),
     path.join(cwd, 'CHANGELOG.zh-CN.md'),
@@ -173,13 +176,14 @@ function githubRelease () {
   const [_, owner, repo] = execSync('git remote get-url origin') // eslint-disable-line
     .toString()
     .match(/github.com[:/](.+)\/(.+)\.git/)
-
   github.repos.createRelease({
     owner,
     repo,
     tag_name: version,
     name: version,
     body: changelog,
+  }).then(() => {
+    done()
   })
 }
 gulp.task('check-git', (done) => {
@@ -204,8 +208,9 @@ function publish (tagString, done) {
   const publishNpm = process.env.PUBLISH_NPM_CLI || 'npm'
   runCmd(publishNpm, args, (code) => {
     tag()
-    githubRelease()
-    done(code)
+    githubRelease(() => {
+      done(code)
+    })
   })
 }
 
@@ -258,6 +263,43 @@ gulp.task('pub', ['check-git', 'compile'], (done) => {
     console.log('no GitHub token found, skip')
   } else {
     pub(done)
+  }
+})
+
+gulp.task('pub-with-ci', (done) => {
+  if (!process.env.NPM_TOKEN) {
+    console.log('no NPM token found, skip')
+  } else {
+    const github = new GitHub()
+    github.authenticate({
+      type: 'oauth',
+      token: process.env.GITHUB_TOKEN,
+    })
+    const [_, owner, repo] = execSync('git remote get-url origin') // eslint-disable-line
+      .toString()
+      .match(/github.com[:/](.+)\/(.+)\.git/)
+    const getLatestRelease = github.repos.getLatestRelease({
+      owner,
+      repo,
+    })
+    const getCommits = github.repos.getCommits({
+      owner,
+      repo,
+      per_page: 1,
+    })
+    Promise.all([getLatestRelease, getCommits]).then(([latestRelease, commits]) => {
+      const preVersion = latestRelease.data.tag_name
+      const { version } = packageJson
+      const [_, newVersion] = commits.data[0].commit.message.trim().match(/bump (.+)/) || []
+      if (compareVersions(version, preVersion) === 1 && newVersion && newVersion.trim() === version) {
+        gulp.run('pub', (err) => {
+          err && console.log('err', err)
+          done()
+        })
+      } else {
+        console.log('donot need publish' + version)
+      }
+    })
   }
 })
 

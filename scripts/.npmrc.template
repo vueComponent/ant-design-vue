@@ -1,0 +1,3 @@
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+loglevel=info
+registry=https://registry.npmjs.org/

@@ -179,8 +179,8 @@ exports[`renders ./components/carousel/demo/basic.md correctly 1`] = `
 exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
-    <div class="custom-slick-arrow slick-arrow slick-prev" style="display: block;">
-      <i class="anticon anticon-left-square"></i>
+    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; z-index: 1; display: block;">
+      <i class="anticon anticon-left-circle"></i>
     </div>
     <div class="slick-list">
       <div class="slick-track" style="width: 900%; left: -100%;">
@@ -249,8 +249,8 @@ exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
         </div>
       </div>
     </div>
-    <div class="custom-slick-arrow slick-arrow slick-next" style="right: -20px; display: block;">
-      <i class="anticon anticon-right-square"></i>
+    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;">
+      <i class="anticon anticon-right-circle"></i>
     </div>
     <ul class="slick-dots" style="display: block;">
       <li class="slick-active">

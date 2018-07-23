@@ -4,6 +4,7 @@ import Fade from './fade'
 import Autoplay from './autoplay'
 import Vertical from './vertical'
 import CustomPaging from './customPaging'
+import CustomArrows from './customArrows'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -42,6 +43,7 @@ export default {
         <Fade />
         <Autoplay />
         <CustomPaging />
+        <CustomArrows />
         <api>
           <CN slot='cn' />
           <US />

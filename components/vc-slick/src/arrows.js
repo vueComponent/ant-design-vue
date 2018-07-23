@@ -35,7 +35,7 @@ export const PrevArrow = {
       domProps: {
         'data-role': 'none',
       },
-      class: classnames(prevClasses),
+      class: prevClasses,
       style: { display: 'block' },
       on: {
         click: prevHandler,
@@ -53,7 +53,14 @@ export const PrevArrow = {
         ...{
           props: customProps,
         },
-      }), {})
+      }), {
+        key: '0',
+        class: prevClasses,
+        style: { display: 'block' },
+        on: {
+          click: prevHandler,
+        },
+      })
     } else {
       prevArrow = (
         <button key='0' type='button' {...prevArrowProps}>
@@ -96,7 +103,7 @@ export const NextArrow = {
       domProps: {
         'data-role': 'none',
       },
-      class: classnames(nextClasses),
+      class: nextClasses,
       style: { display: 'block' },
       on: {
         click: nextHandler,
@@ -114,7 +121,14 @@ export const NextArrow = {
         ...{
           props: customProps,
         },
-      }), {})
+      }), {
+        key: '1',
+        class: nextClasses,
+        style: { display: 'block' },
+        on: {
+          click: nextHandler,
+        },
+      })
     } else {
       nextArrow = (
         <button key='1' type='button' {...nextArrowProps}>

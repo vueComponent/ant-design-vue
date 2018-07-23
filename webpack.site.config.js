@@ -76,7 +76,6 @@ module.exports = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       template: './site/index.html',
       inject: true,
-      minify: { collapseWhitespace: true },
       production: true,
     }),
     new webpack.LoaderOptionsPlugin({

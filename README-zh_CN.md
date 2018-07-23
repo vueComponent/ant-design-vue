@@ -22,6 +22,18 @@ Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。
 
 [README in English](README.md)
 
+## 赞助
+
+vue-antd-ui是一个开源的独立项目，为了项目能够更好的持续的发展，我们期望获得你的支持，你可以通过如下任何一种方式支持我们：
+
+- [Patreon](https://www.patreon.com/tangjinzhou)
+- [opencollective](https://opencollective.com/ant-design-278)
+- [paypal](https://www.paypal.me/tangjinzhou)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/6937879/43032487-932a5536-8cea-11e8-9175-9c006e938a82.png">
+</p>
+
 ## 特性
 
 - 提炼自企业级中后台产品的交互语言和视觉风格。

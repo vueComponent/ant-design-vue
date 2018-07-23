@@ -118,12 +118,10 @@ CustomizedForm = Form.create({})(CustomizedForm);
 | options.initialValue | 子节点的初始值，类型、可选值均由子节点决定(注意：由于内部校验时使用 `===` 判断是否变化，建议使用变量缓存所需设置的值而非直接使用字面量)) |  |  |
 | options.normalize | 转换默认的 value 给控件，[一个选择全部的例子](https://codesandbox.io/s/kw4l2vqqmv) | function(value, prevValue, allValues): any | - |
 | options.rules | 校验规则，参考下方文档 | object\[] |  |
-| options.trigger | 收集子节点的值的时机 | string | 'onChange' |
+| options.trigger | 收集子节点的值的时机 | string | 'change' |
 | options.validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验 | boolean | false |
-| options.validateTrigger | 校验子节点值的时机 | string\|string\[] | 'onChange' |
+| options.validateTrigger | 校验子节点值的时机 | string\|string\[] | 'change' |
 | options.valuePropName | 子节点的值的属性，如 Switch 的是 'checked' | string | 'value' |
-
-更多参数可参考 [rc-form option](https://github.com/react-component/form#option-object)。
 
 ### Form.Item
 

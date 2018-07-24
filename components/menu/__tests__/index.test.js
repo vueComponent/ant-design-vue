@@ -18,7 +18,7 @@ describe('Menu', () => {
   // })
 
   it('should accept defaultOpenKeys in mode horizontal', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='horizontal'>
@@ -37,7 +37,7 @@ describe('Menu', () => {
   })
 
   it('should accept defaultOpenKeys in mode inline', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='inline'>
@@ -56,7 +56,7 @@ describe('Menu', () => {
   })
 
   it('should accept defaultOpenKeys in mode vertical', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='vertical'>

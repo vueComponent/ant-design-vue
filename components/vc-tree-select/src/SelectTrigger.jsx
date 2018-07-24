@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types'
 import classnames from 'classnames'
-import omit from 'omit.js'
+// import omit from 'omit.js'
 import Trigger from '../../trigger'
 import Tree, { TreeNode } from '../../vc-tree'
 import { SelectPropTypes } from './PropTypes'
@@ -10,12 +10,12 @@ import {
   flatToHierarchy,
   getValuePropValue,
   labelCompatible,
-  saveRef,
+  // saveRef,
 } from './util'
 
 import { cloneElement } from '../../_util/vnode'
-import { isEmptyElement, getSlotOptions, getKey, getAllProps, getComponentFromProp } from '../../_util/props-util'
-import { noop } from '../../_util/vue-types/utils'
+import { getSlotOptions, getKey, getAllProps, getComponentFromProp } from '../../_util/props-util'
+// import { noop } from '../../_util/vue-types/utils'
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {

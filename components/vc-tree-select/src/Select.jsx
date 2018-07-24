@@ -20,8 +20,8 @@ import { initDefaultProps, getOptionProps, hasProp, getAllProps, getComponentFro
 import BaseMixin from '../../_util/BaseMixin'
 import getTransitionProps from '../../_util/getTransitionProps'
 
-function noop () {
-}
+// function noop () {
+// }
 
 function filterFn (input, child) {
   return String(getPropValue(child, labelCompatible(this.$props.treeNodeFilterProp)))

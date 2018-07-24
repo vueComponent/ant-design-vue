@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types'
 import classNames from 'classnames'
 import omit from 'omit.js'
-import { SpinProps } from '../spin'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
 

@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
 import Tabs from '..'
 
 const { TabPane } = Tabs

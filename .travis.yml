@@ -5,7 +5,7 @@ node_js:
 before_script:
   - npm install vue vue-template-compiler
 script:
-  - cp ./scripts/.npmrc.template $HOME/.npmrc
+  - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then cp ./scripts/.npmrc.template $HOME/.npmrc; fi
   - COVERAGE=true npm run test
   - npm run codecov
   - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then npm run pub-with-ci; fi

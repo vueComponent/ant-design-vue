@@ -1,7 +1,7 @@
 import { asyncExpect } from '@/tests/utils'
 import { mount } from '@vue/test-utils'
 import Tooltip from '..'
-import Button from '../../button'
+// import Button from '../../button'
 
 describe('Tooltip', () => {
   it('check `onVisibleChange` arguments', async () => {

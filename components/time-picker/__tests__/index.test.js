@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
 import VcTimePicker from '../../vc-time-picker/TimePicker'
 import TimePicker from '..'
 import focusTest from '../../../tests/shared/focusTest'

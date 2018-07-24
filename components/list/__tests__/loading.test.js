@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
 import List from '..'
 import Icon from '../../icon'
 

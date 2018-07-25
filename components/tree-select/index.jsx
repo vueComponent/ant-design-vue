@@ -58,7 +58,7 @@ export default {
           // label: newLabel,
           title: newTitle || newLabel,
         }
-        this.updateTreeData(children)
+        this.updateTreeData(children || [])
         Object.assign(list[i], item)
       }
     },
@@ -72,7 +72,7 @@ export default {
         dropdownClassName,
         ...restProps
       } = props
-      this.updateTreeData(props.treeData)
+      this.updateTreeData(props.treeData || [])
       const cls = {
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-sm`]: size === 'small',

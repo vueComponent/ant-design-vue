@@ -1,0 +1,64 @@
+/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+.ant-avatar {
+  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+  text-align: center;
+  background: #ccc;
+  color: #fff;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 16px;
+}
+.ant-avatar > * {
+  line-height: 32px;
+}
+.ant-avatar.ant-avatar-icon {
+  font-size: 18px;
+}
+.ant-avatar-lg {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20px;
+}
+.ant-avatar-lg > * {
+  line-height: 40px;
+}
+.ant-avatar-lg.ant-avatar-icon {
+  font-size: 24px;
+}
+.ant-avatar-sm {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 12px;
+}
+.ant-avatar-sm > * {
+  line-height: 24px;
+}
+.ant-avatar-sm.ant-avatar-icon {
+  font-size: 14px;
+}
+.ant-avatar-square {
+  border-radius: 4px;
+}
+.ant-avatar > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

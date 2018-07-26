@@ -1,0 +1,18 @@
+@contextmenuPrefixCls: rc-tree-contextmenu;
+.@{contextmenuPrefixCls} {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  z-index: 1070;
+  display: block;
+  background-color: #fff;
+
+  &-hidden {
+    display: none;
+  }
+
+  &-inner {
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+  }
+}

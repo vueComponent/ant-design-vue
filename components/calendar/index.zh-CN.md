@@ -37,4 +37,4 @@
 | --- | --- | --- |
 | panelChange | 日期面板变化回调 | function(date: moment, mode: string) | 无 |
 | select | 点击选择日期回调 | function(date: moment） | 无 |
-| change | 日期变化时的回调, 面板变化有可能导致日期变化| function(date: moment） | 无 |
+| onChange | 日期变化时的回调, 面板变化有可能导致日期变化| function(date: moment） | 无 |

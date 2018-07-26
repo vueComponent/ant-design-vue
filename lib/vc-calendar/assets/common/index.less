@@ -1,0 +1,16 @@
+@prefixClass: rc-calendar;
+@timePickerClass: rc-time-picker;
+
+.@{prefixClass} {
+  box-sizing: border-box;
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefixClass}-hidden {
+  display: none;
+}
+
+@import "Calendar.less";
+@import "Picker.less";

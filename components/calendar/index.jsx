@@ -122,7 +122,7 @@ export default {
       }
       if (way === 'select') {
         this.$emit('select', value)
-        this.$emit('change', value)
+        this.$emit('onChange', value)
       } else if (way === 'changePanel') {
         this.onPanelChange(value, this.sMode)
       }
@@ -147,7 +147,7 @@ export default {
     onPanelChange (value, mode) {
       this.$emit('panelChange', value, mode)
       if (value !== this.sValue) {
-        this.$emit('change', value)
+        this.$emit('onChange', value)
       }
     },
 

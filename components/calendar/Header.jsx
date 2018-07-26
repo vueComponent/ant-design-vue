@@ -46,7 +46,7 @@ export default {
       const suffix = locale.year === '年' ? '年' : ''
 
       const options = []
-      for (let index = start; index < end; index++) {
+      for (let index = start; index <= end; index++) {
         options.push(<Option key={`${index}`}>{index + suffix}</Option>)
       }
       return (

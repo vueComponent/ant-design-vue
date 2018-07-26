@@ -52,7 +52,9 @@ export default {
       } else {
         this.$forceUpdate()
       }
-      this.$emit('change.value', e.target.value)
+      if (!e.target.composing) {
+        this.$emit('change.value', e.target.value)
+      }
       this.$emit('change', e)
       this.$emit('input', e)
     },
@@ -185,6 +187,9 @@ export default {
         class: classNames(getInputClassName(), getClass(this)),
         ref: 'input',
       }
+      if ($listeners['change.value']) {
+        inputProps.directives = [{ name: 'ant-input' }]
+      }
       return this.renderLabeledIcon(
         <input
           {...inputProps}
@@ -203,6 +208,11 @@ export default {
           change: this.handleChange,
           keydown: this.handleKeyDown,
         },
+        directives: [
+          {
+            name: 'ant-input',
+          },
+        ],
       }
       return <TextArea {...textareaProps} ref='input' />
     }

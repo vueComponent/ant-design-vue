@@ -1,0 +1,173 @@
+/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+.ant-switch {
+  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 22px;
+  min-width: 44px;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background-color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  -webkit-transition: all 0.36s;
+  transition: all 0.36s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.ant-switch-inner {
+  color: #fff;
+  font-size: 12px;
+  margin-left: 24px;
+  margin-right: 6px;
+  display: block;
+}
+.ant-switch:before,
+.ant-switch:after {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 1px;
+  top: 1px;
+  border-radius: 18px;
+  background-color: #fff;
+  content: " ";
+  cursor: pointer;
+  -webkit-transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+.ant-switch:after {
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+}
+.ant-switch:active:before,
+.ant-switch:active:after {
+  width: 24px;
+}
+.ant-switch:before {
+  content: "\e64d";
+  font-family: anticon;
+  -webkit-animation: loadingCircle 1s infinite linear;
+          animation: loadingCircle 1s infinite linear;
+  text-align: center;
+  background: transparent;
+  z-index: 1;
+  display: none;
+  font-size: 12px;
+}
+.ant-switch-loading:before {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.65);
+}
+.ant-switch-checked.ant-switch-loading:before {
+  color: #1890ff;
+}
+.ant-switch:focus {
+  -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+          box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  outline: 0;
+}
+.ant-switch:focus:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.ant-switch-small {
+  height: 16px;
+  min-width: 28px;
+  line-height: 14px;
+}
+.ant-switch-small .ant-switch-inner {
+  margin-left: 18px;
+  margin-right: 3px;
+  font-size: 12px;
+}
+.ant-switch-small:before,
+.ant-switch-small:after {
+  width: 12px;
+  height: 12px;
+}
+.ant-switch-small:active:before,
+.ant-switch-small:active:after {
+  width: 16px;
+}
+.ant-switch-small.ant-switch-checked:before,
+.ant-switch-small.ant-switch-checked:after {
+  left: 100%;
+  margin-left: -13px;
+}
+.ant-switch-small.ant-switch-checked .ant-switch-inner {
+  margin-left: 3px;
+  margin-right: 18px;
+}
+.ant-switch-small:active.ant-switch-checked:before,
+.ant-switch-small:active.ant-switch-checked:after {
+  margin-left: -16.5px;
+}
+.ant-switch-small.ant-switch-loading:before {
+  -webkit-animation: AntSwitchSmallLoadingCircle 1s infinite linear;
+          animation: AntSwitchSmallLoadingCircle 1s infinite linear;
+  font-weight: bold;
+}
+.ant-switch-checked {
+  background-color: #1890ff;
+}
+.ant-switch-checked .ant-switch-inner {
+  margin-left: 6px;
+  margin-right: 24px;
+}
+.ant-switch-checked:before,
+.ant-switch-checked:after {
+  left: 100%;
+  margin-left: -19px;
+}
+.ant-switch-checked:active:before,
+.ant-switch-checked:active:after {
+  margin-left: -25px;
+}
+.ant-switch-loading,
+.ant-switch-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+@-webkit-keyframes AntSwitchSmallLoadingCircle {
+  0% {
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: rotate(0deg) scale(0.66667);
+            transform: rotate(0deg) scale(0.66667);
+  }
+  100% {
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: rotate(360deg) scale(0.66667);
+            transform: rotate(360deg) scale(0.66667);
+  }
+}
+@keyframes AntSwitchSmallLoadingCircle {
+  0% {
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: rotate(0deg) scale(0.66667);
+            transform: rotate(0deg) scale(0.66667);
+  }
+  100% {
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: rotate(360deg) scale(0.66667);
+            transform: rotate(360deg) scale(0.66667);
+  }
+}

@@ -1,0 +1,291 @@
+.@{prefixClass} {
+  position: relative;
+  outline: none;
+  font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif;
+  width: 253px;
+  border: 1px solid #ccc;
+  list-style: none;
+  font-size: 12px;
+  text-align: left;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px #ccc;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  line-height: 1.5;
+
+  &-date-panel, &-panel {
+    position: relative;
+    outline: none;
+  }
+
+  &-week-number {
+    width: 286px;
+
+    &-cell {
+      text-align: center;
+    }
+  }
+
+  &-header {
+    padding: 0 10px;
+    height: 34px;
+    line-height: 30px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    border-bottom: 1px solid #ccc;
+
+    > a {
+      font-weight: bold;
+      display: inline-block;
+      padding: 0px 5px;
+      line-height: 34px;
+      text-align: center;
+      width: 30px;
+
+      &:hover {
+        cursor: pointer;
+        color: #23c0fa;
+      }
+    }
+
+    .@{prefixClass}-prev-month-btn {
+      position: absolute;
+      left: 25px;
+
+      &:after {
+        content: '‹'
+      }
+    }
+
+    .@{prefixClass}-next-month-btn {
+      position: absolute;
+      right: 25px;
+
+      &:after {
+        content: '›'
+      }
+    }
+  }
+
+  &-year-select, &-month-select, &-day-select {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    padding: 0 8px;
+    line-height: 34px;
+
+    &:hover {
+      cursor: pointer;
+      color: #23c0fa;
+    }
+  }
+
+  &-prev-month-btn,
+  &-next-month-btn,
+  &-prev-year-btn,
+  &-next-year-btn {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    color: #999;
+    font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
+    padding: 0 5px;
+    font-size: 16px;
+    display: inline-block;
+    line-height: 34px;
+
+    &:hover {
+      color: #23c0fa;
+    }
+  }
+
+  &-next-year-btn {
+    right: 0;
+
+    &:after {
+      content: '»'
+    }
+  }
+
+  &-prev-year-btn {
+    left: 0;
+
+    &:after {
+      content: '«'
+    }
+  }
+
+  &-body {
+    padding: 9px 10px 10px;
+    height: 217px;
+  }
+
+  table {
+    border-collapse: collapse;
+    max-width: 100%;
+    background-color: transparent;
+    width: 100%;
+  }
+
+  table, td, th, td {
+    border: none;
+  }
+
+  &-table {
+    border-spacing: 0;
+    margin-bottom: 0;
+  }
+
+  &-column-header {
+    line-height: 18px;
+    padding: 6px 0;
+    width: 33px;
+    text-align: center;
+    .@{prefixClass}-column-header-inner {
+      display: block;
+      font-weight: normal;
+    }
+  }
+
+  &-week-number-header {
+    .@{prefixClass}-column-header-inner {
+      display: none;
+    }
+  }
+
+  &-cell {
+    padding: 1px 0;
+  }
+
+  &-date {
+    display: block;
+    margin: 0 auto;
+    color: #666;
+    border-radius: 4px 4px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    background: transparent;
+    line-height: 26px;
+    text-align: center;
+
+    &:hover {
+      background: #ebfaff;
+      cursor: pointer;
+    }
+  }
+
+  &-selected-day &-date {
+    background: tint(#3fc7fa, 80%);
+  }
+
+  &-selected-date &-date {
+    background: #3fc7fa;
+    color: #fff;
+    &:hover {
+      background: #3fc7fa;
+    }
+  }
+
+  &-today &-date {
+    border: 1px solid #3fc7fa;
+  }
+
+  &-disabled-cell &-date {
+    cursor: not-allowed;
+    color: #bcbcbc;
+    background: #f3f3f3;
+    border-radius: 0;
+    width: auto;
+
+    &:hover {
+      background: #f3f3f3;
+    }
+  }
+
+  &-disabled-cell-first-of-row &-date {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  &-disabled-cell-last-of-row &-date {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  &-last-month-cell &-date, &-next-month-btn-day &-date {
+    color: #bbb;
+  }
+
+  &-footer {
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+
+    .@{timePickerClass} {
+      width: 90px;
+      &-input {
+        height: 24px;
+      }
+    }
+    &-show-ok {
+      text-align: right;
+      .@{prefixClass} {
+        &-footer-btn {
+          padding-right: 12px;
+        }
+
+        &-time-picker-btn {
+          margin-left: 0;
+          padding: 0 12px;
+        }
+        &-today-btn {
+          float: left;
+          padding-left: 12px;
+        }
+      }
+    }
+  }
+
+  &-footer-btn {
+    margin-top: 2px;
+
+    &:after {
+      content: 'x';
+      height: 0;
+      font-size: 0;
+      overflow: hidden;
+      clear: both;
+    }
+  }
+
+  &-time-picker-btn {
+    margin-left: 10px;
+  }
+
+  &-today-btn, &-ok-btn, &-time-picker-btn {
+    display: inline-block;
+    text-align: center;
+    color: #f46830;
+
+    &:hover {
+      cursor: pointer;
+      color: #23c0fa;
+    }
+
+    &-disabled {
+      color: #bbb;
+      &:hover {
+        color: #bbb;
+      }
+    }
+  }
+
+  &-today-btn {
+    padding-left: 10px;
+  }
+}

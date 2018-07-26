@@ -39,4 +39,4 @@ customize the progress dot by setting a scoped slot
 | --- | --- | --- |
 | panelChange | Callback for when panel changes | function(date: moment, mode: string) | - |
 | select | Callback for when a date is selected | function(date: moment） | - |
-| change | Callback for when value change | function(date: moment） | - |
+| onChange | Callback for when value change | function(date: moment） | - |

@@ -2,6 +2,15 @@
 
 ---
 
+## 1.0.1
+
+`2018-07-27`
+- 🌟 针对`Input`组件优化中文输入(仅在v-model绑定时生效) [4a5154](https://github.com/vueComponent/ant-design/commit/4a51544bd6470ab628dda80e9d7593e4603dd0b6)
+- 🐞 修复`TreeSelect` `treeeData[i].children`为`null`时报错问题[#81](https://github.com/vueComponent/ant-design/issues/81)
+- 🐞 修复`Calendar`组件的 change 事件触发两次的问题[#82](https://github.com/vueComponent/ant-design/issues/82)
+- 🐞 修复`Card`组件的`description`和`title`属性slot不生效问题[#83](https://github.com/vueComponent/ant-design/issues/83)
+- 🐞 修复`DataPicker`组件的`dropdownClassName`属性不生效问题[02ab242](https://github.com/vueComponent/ant-design/commit/02ab242197b923f2157f41d98a7930512475a799)
+
 ## 1.0.0
 
 `2018-07-21`

@@ -117,14 +117,13 @@ export default {
     },
 
     setValue (value, way) {
-      if (!hasProp(this, 'value')) {
-        this.setState({ sValue: value })
-      }
       if (way === 'select') {
         this.$emit('select', value)
-        this.$emit('change', value)
       } else if (way === 'changePanel') {
         this.onPanelChange(value, this.sMode)
+      }
+      if (!hasProp(this, 'value')) {
+        this.setState({ sValue: value })
       }
     },
 

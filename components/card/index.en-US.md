@@ -18,19 +18,17 @@
 | type | Card style type, can be set to `inner` or not set | string | - |
 | onTabChange | Callback when tab is switched | (key) => void | - |
 
-### Card.Grid
+### events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| tabChange | Callback when tab is switched | (key) => void | - |
 
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| className | className of container | string | - |
-| style | style object of container | object | - |
+### Card.Grid
 
 ### Card.Meta
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | avatar | avatar or icon | slot | - |
-| className | className of container | string | - |
-| description | description content | slot | - |
-| style | style object of container | object | - |
-| title | title content | slot | - |
+| description | description content | string\|slot | - |
+| title | title content | string\|slot | - |

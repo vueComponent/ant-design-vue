@@ -7,12 +7,12 @@ export default {
     prefixCls: PropTypes.string.def('ant-card'),
   },
   render () {
-    const { prefixCls = 'ant-card', ...others } = this.$props
+    const { prefixCls = 'ant-card' } = this.$props
     const classString = {
       [`${prefixCls}-grid`]: true,
     }
     return (
-      <div {...others} class={classString}>{this.$slots.default}</div>
+      <div {...{ on: this.$listeners }} class={classString}>{this.$slots.default}</div>
     )
   },
 }

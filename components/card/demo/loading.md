@@ -10,10 +10,27 @@
 
 ```html
 <template>
-  <a-card loading title="Card title" style="width: 34%;">
-    whatever content
-  </a-card>
+  <div>
+    <a-card :loading="loading" title="Card title">
+      whatever content
+    </a-card>
+    <a-button @click="handleClick" style="marginTop: 16px">Toggle loading</a-button>
+  </div>
 </template>
+<script>
+  export default {
+    data() {
+      return {
+        loading: true,
+      }
+    },
+    methods: {
+      handleClick() {
+        this.loading = !this.loading
+      }
+    },
+  }
+</script>
 ```
 
 

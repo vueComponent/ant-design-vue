@@ -19,19 +19,17 @@
 | type      | 卡片类型，可设置为 `inner` 或 不设置 | string | - |
 | onTabChange | 页签切换的回调 | (key) => void | - |
 
-### Card.Grid
+### 事件
+| 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| tabChange | 页签切换的回调 | (key) => void | - |
 
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| className | 网格容器类名 | string | - |
-| style | 定义网格容器类名的样式 | object | - |
+### Card.Grid
 
 ### Card.Meta
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | avatar   | 头像/图标 | slot | - |
-| className | 容器类名 | string | - |
-| description | 描述内容 | slot | - |
-| style | 定义容器类名的样式 | object | - |
-| title | 标题内容 | slot | - |
+| description | 描述内容 | string\|slot | - |
+| title | 标题内容 | string\|slot | - |

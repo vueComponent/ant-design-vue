@@ -71,6 +71,22 @@ exports[`renders ./components/card/demo/concise.md correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/card/demo/flexible-content.md correctly 1`] = `
+<div class="ant-card ant-card-bordered ant-card-hoverable" style="width: 240px;">
+  <div class="ant-card-cover">
+    <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png">
+  </div>
+  <div class="ant-card-body">
+    <div class="ant-card-meta">
+      <div class="ant-card-meta-detail">
+        <div class="ant-card-meta-title">Europe Street beat</div>
+        <div class="ant-card-meta-description">www.instagram.com</div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renders ./components/card/demo/grid.md correctly 1`] = `
 <div class="ant-card ant-card-bordered">
   <div class="ant-card-head">
@@ -130,21 +146,24 @@ exports[`renders ./components/card/demo/inline.md correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/loading.md correctly 1`] = `
-<div class="ant-card ant-card-loading ant-card-bordered" style="width: 34%;">
-  <div class="ant-card-head">
-    <div class="ant-card-head-wrapper">
-      <div class="ant-card-head-title">Card title</div>
+<div>
+  <div class="ant-card ant-card-loading ant-card-bordered">
+    <div class="ant-card-head">
+      <div class="ant-card-head-wrapper">
+        <div class="ant-card-head-title">Card title</div>
+      </div>
+    </div>
+    <div class="ant-card-body">
+      <div class="ant-card-loading-content">
+        <p class="ant-card-loading-block" style="width: 94%;"></p>
+        <p><span class="ant-card-loading-block" style="width: 28%;"></span><span class="ant-card-loading-block" style="width: 62%;"></span></p>
+        <p><span class="ant-card-loading-block" style="width: 22%;"></span><span class="ant-card-loading-block" style="width: 66%;"></span></p>
+        <p><span class="ant-card-loading-block" style="width: 56%;"></span><span class="ant-card-loading-block" style="width: 39%;"></span></p>
+        <p><span class="ant-card-loading-block" style="width: 21%;"></span><span class="ant-card-loading-block" style="width: 15%;"></span><span class="ant-card-loading-block" style="width: 40%;"></span></p>
+      </div>
     </div>
   </div>
-  <div class="ant-card-body">
-    <div class="ant-card-loading-content">
-      <p class="ant-card-loading-block" style="width: 94%;"></p>
-      <p><span class="ant-card-loading-block" style="width: 28%;"></span><span class="ant-card-loading-block" style="width: 62%;"></span></p>
-      <p><span class="ant-card-loading-block" style="width: 22%;"></span><span class="ant-card-loading-block" style="width: 66%;"></span></p>
-      <p><span class="ant-card-loading-block" style="width: 56%;"></span><span class="ant-card-loading-block" style="width: 39%;"></span></p>
-      <p><span class="ant-card-loading-block" style="width: 21%;"></span><span class="ant-card-loading-block" style="width: 15%;"></span><span class="ant-card-loading-block" style="width: 40%;"></span></p>
-    </div>
-  </div>
+  <button type="button" class="ant-btn ant-btn-default" style="margin-top: 16px;"><span>Toggle loading</span></button>
 </div>
 `;
 

@@ -12,7 +12,7 @@ export default {
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string.def('ant-card'),
-    title: PropTypes.string,
+    title: PropTypes.any,
     extra: PropTypes.any,
     bordered: PropTypes.bool.def(true),
     bodyStyle: PropTypes.object,

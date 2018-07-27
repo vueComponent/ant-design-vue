@@ -1,11 +1,11 @@
 <cn>
-  #### 更灵活的内容展示
-  可以利用 `Card.Meta` 支持更灵活的内容
+  #### 支持更多内容配置
+  一种支持封面、头像、标题和描述信息的卡片。
 </cn>
 
 <us>
-  #### Customized content
-  You can use `Card.Meta` to support more flexible content.
+  #### Support more content configuration
+  A Card that supports `cover`, `avatar`, `title` and `description`.
 </us>
 
 ```html

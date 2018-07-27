@@ -32,6 +32,7 @@
 
 ### Menu事件
 | 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
 | click | 点击 MenuItem 调用此函数 | function({ item, key, keyPath }) |
 | deselect | 取消选中时调用，仅在 multiple 生效 | function({ item, key, selectedKeys }) |
 | openChange | SubMenu 展开/关闭的回调 | function(openKeys: string\[]) |

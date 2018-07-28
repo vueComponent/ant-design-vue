@@ -63,7 +63,8 @@ export default {
       if (this.$route.path.indexOf('/docs/vue/') !== -1) {
         this.$nextTick(() => {
           const menus = []
-          this.$refs.doc.querySelectorAll(['h2', 'h3']).forEach(dom => {
+          const doms = [...this.$refs.doc.querySelectorAll(['h2', 'h3'])]
+          doms.forEach(dom => {
             const id = dom.id
             if (id) {
               const title = dom.textContent.split('#')[0].trim()

@@ -32,6 +32,7 @@ Vue.component('demo-container', demoContainer)
 
 const router = new VueRouter({
   mode: 'history',
+  fallback: false,
   routes,
 })
 new Vue({

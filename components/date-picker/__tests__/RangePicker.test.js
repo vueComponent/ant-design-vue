@@ -202,8 +202,9 @@ describe('RangePicker', () => {
       $$('.ant-calendar-cell')[27].dispatchEvent(new MouseEvent('mouseenter'))
       document.dispatchEvent(new MouseEvent('mousedown'))
     }, 500)
-
-    wrapper.find('.ant-calendar-picker-input').trigger('click')
+    await asyncExpect(() => {
+      wrapper.find('.ant-calendar-picker-input').trigger('click')
+    })
     await asyncExpect(() => {
       expect($$('.ant-calendar-cell')[23].getAttribute('class').split(' ')).toContain('ant-calendar-in-range-cell')
     })

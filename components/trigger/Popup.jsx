@@ -23,11 +23,31 @@ export default {
     zIndex: PropTypes.number,
     popupClassName: PropTypes.any,
     popupStyle: PropTypes.object.def({}),
+    stretch: PropTypes.string,
+    point: PropTypes.shape({
+      pageX: PropTypes.number,
+      pageY: PropTypes.number,
+    }),
   },
   data () {
     return {
       destroyPopup: false,
+      // Used for stretch
+      stretchChecked: false,
+      targetWidth: undefined,
+      targetHeight: undefined,
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.rootNode = this.getPopupDomNode()
+      this.setStretchSize()
+    })
+  },
+  updated () {
+    this.$nextTick(() => {
+      this.setStretchSize()
+    })
   },
   beforeDestroy () {
     this.$el.remove()
@@ -53,16 +73,58 @@ export default {
     onAlign (popupDomNode, align) {
       const props = this.$props
       const currentAlignClassName = props.getClassNameFromAlign(align)
-      popupDomNode.className = this.getClassName(currentAlignClassName)
+      // FIX: https://github.com/react-component/trigger/issues/56
+      // FIX: https://github.com/react-component/tooltip/issues/79
+      if (this.currentAlignClassName !== currentAlignClassName) {
+        this.currentAlignClassName = currentAlignClassName
+        popupDomNode.className = this.getClassName(currentAlignClassName)
+      }
       this.$listeners.align && this.$listeners.align(popupDomNode, align)
+    },
+
+    // Record size if stretch needed
+    setStretchSize  () {
+      const { stretch, getRootDomNode, visible } = this.$props
+      const { stretchChecked, targetHeight, targetWidth } = this.$data
+
+      if (!stretch || !visible) {
+        if (stretchChecked) {
+          this.setState({ stretchChecked: false })
+        }
+        return
+      }
+
+      const $ele = getRootDomNode()
+      if (!$ele) return
+
+      const height = $ele.offsetHeight
+      const width = $ele.offsetWidth
+
+      if (targetHeight !== height || targetWidth !== width || !stretchChecked) {
+        this.setState({
+          stretchChecked: true,
+          targetHeight: height,
+          targetWidth: width,
+        })
+      }
     },
 
     getPopupDomNode () {
       return this.$refs.popupInstance ? this.$refs.popupInstance.$el : null
     },
 
-    getTarget () {
+    getTargetElement () {
       return this.$props.getRootDomNode()
+    },
+
+    // `target` on `rc-align` can accept as a function to get the bind element or a point.
+    // ref: https://www.npmjs.com/package/rc-align
+    getAlignTarget  () {
+      const { point } = this.$props
+      if (point) {
+        return point
+      }
+      return this.getTargetElement
     },
 
     getMaskTransitionName () {
@@ -94,10 +156,42 @@ export default {
     },
     getPopupElement () {
       const { $props: props, $slots, $listeners, getTransitionName } = this
-      const { align, visible, prefixCls, animation, popupStyle } = props
+      const { stretchChecked, targetHeight, targetWidth } = this.$data
+
+      const { align, visible, prefixCls, animation, popupStyle, getClassNameFromAlign,
+        destroyPopupOnHide, stretch,
+      } = props
       const { mouseenter, mouseleave } = $listeners
-      const className = this.getClassName(props.getClassNameFromAlign(align))
+      const className = this.getClassName(this.currentAlignClassName ||
+        getClassNameFromAlign(align))
       // const hiddenClassName = `${prefixCls}-hidden`
+      if (!visible) {
+        this.currentAlignClassName = null
+      }
+      const sizeStyle = {}
+      if (stretch) {
+      // Stretch with target
+        if (stretch.indexOf('height') !== -1) {
+          sizeStyle.height = typeof targetHeight === 'number' ? `${targetHeight}px` : targetHeight
+        } else if (stretch.indexOf('minHeight') !== -1) {
+          sizeStyle.minHeight = typeof targetHeight === 'number' ? `${targetHeight}px` : targetHeight
+        }
+        if (stretch.indexOf('width') !== -1) {
+          sizeStyle.width = typeof targetWidth === 'number' ? `${targetWidth}px` : targetWidth
+        } else if (stretch.indexOf('minWidth') !== -1) {
+          sizeStyle.minWidth = typeof targetWidth === 'number' ? `${targetWidth}px` : targetWidth
+        }
+
+        // Delay force align to makes ui smooth
+        if (!stretchChecked) {
+          sizeStyle.visibility = 'hidden'
+          setTimeout(() => {
+            if (this.$refs.alignInstance) {
+              this.$refs.alignInstance.forceAlign()
+            }
+          }, 0)
+        }
+      }
       const popupInnerProps = {
         props: {
           prefixCls,
@@ -110,7 +204,7 @@ export default {
           mouseleave: mouseleave || noop,
         },
         ref: 'popupInstance',
-        style: { ...this.getZIndexStyle(), ...popupStyle },
+        style: { ...sizeStyle, ...popupStyle, ...this.getZIndexStyle() },
       }
       let transitionProps = {
         props: Object.assign({
@@ -157,12 +251,34 @@ export default {
       if (!useTransition) {
         transitionProps = {}
       }
+      if (destroyPopupOnHide) {
+        return (<transition
+          {...transitionProps}
+        >
+          {visible
+            ? <Align
+              target={this.getAlignTarget()}
+              key='popup'
+              ref='alignInstance'
+              monitorWindowResize
+              align={align}
+              onAlign={this.onAlign}
+              visible={visible}
+            >
+              <PopupInner
+                {...popupInnerProps}
+              >
+                {$slots.default}
+              </PopupInner>
+            </Align> : null}
+        </transition>)
+      }
       return (<transition
         {...transitionProps}
       >
         <Align
           v-show={visible}
-          target={this.getTarget}
+          target={this.getAlignTarget()}
           key='popup'
           ref='alignInstance'
           monitorWindowResize
@@ -218,11 +334,11 @@ export default {
   },
 
   render () {
-    const { destroyPopup, getMaskElement, getPopupElement, visible } = this
+    const { getMaskElement, getPopupElement } = this
     return (
       <div>
         {getMaskElement()}
-        {(visible || !destroyPopup) ? getPopupElement() : null}
+        {getPopupElement()}
       </div>
     )
   },

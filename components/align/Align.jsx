@@ -27,7 +27,7 @@ export default {
     monitorBufferTime: PropTypes.number.def(50),
     monitorWindowResize: PropTypes.bool.def(false),
     disabled: PropTypes.bool.def(false),
-    // visible: PropTypes.bool.def(false),
+    visible: PropTypes.bool.def(false),
   },
   data () {
     this.aligned = false

@@ -71,7 +71,7 @@ const mixin = {
               if (instance) {
                 const node = instance.$el || instance.elm
                 const top = node.getBoundingClientRect().top
-                if (firstTop === undefined || firstTop > top) {
+                if (node.type !== 'hidden' && (firstTop === undefined || firstTop > top)) {
                   firstTop = top
                   firstNode = node
                 }

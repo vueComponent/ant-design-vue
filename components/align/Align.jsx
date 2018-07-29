@@ -50,7 +50,7 @@ export default {
       const prevProps = this.prevProps
       const props = this.$props
       let reAlign = false
-      if (!props.disabled) {
+      if (!props.disabled && props.visible) {
         const source = this.$el
         const sourceRect = source ? source.getBoundingClientRect() : null
 

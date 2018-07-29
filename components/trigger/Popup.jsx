@@ -31,7 +31,6 @@ export default {
   },
   data () {
     return {
-      destroyPopup: false,
       // Used for stretch
       stretchChecked: false,
       targetWidth: undefined,
@@ -51,23 +50,6 @@ export default {
   },
   beforeDestroy () {
     this.$el.remove()
-  },
-  // beforeUpdate () {
-  //   this.$nextTick(() => {
-  //     const newContainer = this.getContainer()
-  //     if (newContainer !== this._container) {
-  //       this._container = newContainer
-  //       this._container.appendChild(this.$el)
-  //       this.$refs.alignInstance.forceAlign()
-  //     }
-  //   })
-  // },
-  watch: {
-    visible (val) {
-      if (val) {
-        this.destroyPopup = false
-      }
-    },
   },
   methods: {
     onAlign (popupDomNode, align) {
@@ -230,21 +212,13 @@ export default {
         leave: (el, done) => {
           animate(el, `${transitionName}-leave`, done)
         },
-        afterLeave: (el) => {
-          if (this.destroyPopupOnHide) {
-            this.destroyPopup = true
-          }
-        },
       }
 
       if (typeof animation === 'object') {
         useTransition = true
         const { on = {}, props = {}} = animation
         transitionProps.props = { ...transitionProps.props, ...props }
-        transitionProps.on = { ...transitionEvent, ...on, afterLeave: (el) => {
-          transitionEvent.afterLeave(el)
-          on.afterLeave && on.afterLeave(el)
-        } }
+        transitionProps.on = { ...transitionEvent, ...on }
       } else {
         transitionProps.on = transitionEvent
       }

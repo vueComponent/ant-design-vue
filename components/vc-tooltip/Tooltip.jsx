@@ -2,6 +2,7 @@
 import PropTypes from '../_util/vue-types'
 import Trigger from '../trigger'
 import { placements } from './placements'
+import Content from './Content'
 import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util'
 function noop () {}
 export default {
@@ -36,9 +37,13 @@ export default {
         <div class={`${prefixCls}-arrow`} key='arrow'>
           {getComponentFromProp(this, 'arrowContent')}
         </div>,
-        <div class={`${prefixCls}-inner`} key='content' id={tipId}>
-          {getComponentFromProp(this, 'overlay')}
-        </div>,
+        <Content
+          key='content'
+          trigger={this.trigger}
+          prefixCls={prefixCls}
+          id={tipId}
+          overlay={getComponentFromProp(this, 'overlay')}
+        />,
       ])
     },
 

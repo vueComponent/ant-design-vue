@@ -588,7 +588,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / الصفحة" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / الصفحة</div>
@@ -596,7 +596,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -605,7 +605,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="اختيار التاريخ" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="اختيار الوقت" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="البداية" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="اختيار الوقت" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="البداية" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="النهاية" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -648,13 +648,13 @@ exports[`Locale Provider should display the text as ar 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="سبتمبر" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">سبتمبر</div>
@@ -992,7 +992,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / страница" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / страница</div>
@@ -1000,7 +1000,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -1009,7 +1009,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Избор на дата" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Избор на час" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Начална" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Избор на час" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Начална" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Крайна" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -1052,13 +1052,13 @@ exports[`Locale Provider should display the text as bg 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="сеп" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">сеп</div>
@@ -1396,7 +1396,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / pàgina" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / pàgina</div>
@@ -1404,7 +1404,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -1413,7 +1413,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Seleccionar data" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Seleccionar hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data inicial" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Seleccionar hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data inicial" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Data final" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -1456,13 +1456,13 @@ exports[`Locale Provider should display the text as ca 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="set." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set.</div>
@@ -1800,7 +1800,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / strana" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / strana</div>
@@ -1808,7 +1808,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -1817,7 +1817,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Vybrat datum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Vybrat čas" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Od" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Vybrat čas" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Od" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Do" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -1860,13 +1860,13 @@ exports[`Locale Provider should display the text as cs 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="zář" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">zář</div>
@@ -2204,7 +2204,7 @@ exports[`Locale Provider should display the text as de 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / Seite" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / Seite</div>
@@ -2212,7 +2212,7 @@ exports[`Locale Provider should display the text as de 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -2221,7 +2221,7 @@ exports[`Locale Provider should display the text as de 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Datum auswählen" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Zeit auswählen" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Startdatum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Zeit auswählen" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Startdatum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Enddatum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -2264,13 +2264,13 @@ exports[`Locale Provider should display the text as de 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep.</div>
@@ -2608,7 +2608,7 @@ exports[`Locale Provider should display the text as el 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / σελίδα" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / σελίδα</div>
@@ -2616,7 +2616,7 @@ exports[`Locale Provider should display the text as el 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -2625,7 +2625,7 @@ exports[`Locale Provider should display the text as el 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Επιλέξτε ημερομηνία" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Επιλέξτε ώρα" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Αρχική ημερομηνία" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Επιλέξτε ώρα" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Αρχική ημερομηνία" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Τελική ημερομηνία" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -2668,13 +2668,13 @@ exports[`Locale Provider should display the text as el 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Σεπ" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Σεπ</div>
@@ -3012,7 +3012,7 @@ exports[`Locale Provider should display the text as en 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -3020,7 +3020,7 @@ exports[`Locale Provider should display the text as en 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -3029,7 +3029,7 @@ exports[`Locale Provider should display the text as en 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -3072,13 +3072,13 @@ exports[`Locale Provider should display the text as en 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep</div>
@@ -3416,7 +3416,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -3424,7 +3424,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -3433,7 +3433,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -3476,13 +3476,13 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep</div>
@@ -3820,7 +3820,7 @@ exports[`Locale Provider should display the text as es 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / página" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / página</div>
@@ -3828,7 +3828,7 @@ exports[`Locale Provider should display the text as es 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -3837,7 +3837,7 @@ exports[`Locale Provider should display the text as es 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Seleccionar fecha" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Seleccionar hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Fecha inicial" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Seleccionar hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Fecha inicial" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Fecha final" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -3880,13 +3880,13 @@ exports[`Locale Provider should display the text as es 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
@@ -4224,7 +4224,7 @@ exports[`Locale Provider should display the text as et 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / leheküljel" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / leheküljel</div>
@@ -4232,7 +4232,7 @@ exports[`Locale Provider should display the text as et 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -4241,7 +4241,7 @@ exports[`Locale Provider should display the text as et 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Vali kuupäev" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Vali aeg" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Algus kuupäev" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Vali aeg" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Algus kuupäev" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Lõpu kuupäev" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -4284,13 +4284,13 @@ exports[`Locale Provider should display the text as et 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sept" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sept</div>
@@ -4628,7 +4628,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / صفحه" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / صفحه</div>
@@ -4636,7 +4636,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -4645,7 +4645,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="انتخاب تاریخ" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="انتخاب زمان" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="تاریخ شروع" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="انتخاب زمان" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="تاریخ شروع" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="تاریخ پایان" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -4688,13 +4688,13 @@ exports[`Locale Provider should display the text as fa 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="سپتامبر" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">سپتامبر</div>
@@ -5032,7 +5032,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / sivu" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / sivu</div>
@@ -5040,7 +5040,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -5049,7 +5049,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Valitse päivä" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Valitse aika" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Alku päivä" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Valitse aika" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Alku päivä" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Loppu päivä" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -5092,13 +5092,13 @@ exports[`Locale Provider should display the text as fi 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="syys" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">syys</div>
@@ -5436,7 +5436,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -5444,7 +5444,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -5453,7 +5453,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Sélectionner une date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Sélectionner l'heure" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Date de début" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Sélectionner l'heure" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Date de début" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Date de fin" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -5496,13 +5496,13 @@ exports[`Locale Provider should display the text as fr 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sept." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sept.</div>
@@ -5840,7 +5840,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -5848,7 +5848,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -5857,7 +5857,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Sélectionner une date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Sélectionner l'heure" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Date de début" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Sélectionner l'heure" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Date de début" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Date de fin" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -5900,13 +5900,13 @@ exports[`Locale Provider should display the text as fr 2`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sept." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sept.</div>
@@ -6244,7 +6244,7 @@ exports[`Locale Provider should display the text as is 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / síðu" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / síðu</div>
@@ -6252,7 +6252,7 @@ exports[`Locale Provider should display the text as is 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -6261,7 +6261,7 @@ exports[`Locale Provider should display the text as is 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Veldu dag" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Velja tíma" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Upphafsdagur" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Velja tíma" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Upphafsdagur" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Lokadagur" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -6304,13 +6304,13 @@ exports[`Locale Provider should display the text as is 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep</div>
@@ -6648,7 +6648,7 @@ exports[`Locale Provider should display the text as it 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / pagina" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / pagina</div>
@@ -6656,7 +6656,7 @@ exports[`Locale Provider should display the text as it 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -6665,7 +6665,7 @@ exports[`Locale Provider should display the text as it 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Selezionare la data" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Selezionare il tempo" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data d'inizio" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Selezionare il tempo" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data d'inizio" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Data di fine" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -6708,13 +6708,13 @@ exports[`Locale Provider should display the text as it 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
@@ -7052,7 +7052,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / ページ" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / ページ</div>
@@ -7060,7 +7060,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -7069,7 +7069,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="日付を選択" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="時刻を選択" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="開始日付" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="時刻を選択" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="開始日付" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="終了日付" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -7112,13 +7112,13 @@ exports[`Locale Provider should display the text as ja 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017年" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017年</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
@@ -7456,7 +7456,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / 쪽" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / 쪽</div>
@@ -7464,7 +7464,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -7473,7 +7473,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="날짜 선택" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="날짜 선택" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="시작일" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="날짜 선택" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="시작일" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="종료일" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -7516,13 +7516,13 @@ exports[`Locale Provider should display the text as ko 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="9월" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9월</div>
@@ -7860,7 +7860,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / rûpel" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / rûpel</div>
@@ -7868,7 +7868,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -7877,7 +7877,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Dîrok hilbijêre" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Demê hilbijêre" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Dîroka destpêkê" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Demê hilbijêre" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Dîroka destpêkê" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Dîroka dawîn" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -7920,13 +7920,13 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
@@ -8264,7 +8264,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / side" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / side</div>
@@ -8272,7 +8272,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -8281,7 +8281,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Velg dato" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Velg tid" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Startdato" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Velg tid" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Startdato" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Sluttdato" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -8324,13 +8324,13 @@ exports[`Locale Provider should display the text as nb 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
@@ -8668,7 +8668,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / pagina" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / pagina</div>
@@ -8676,7 +8676,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -8685,7 +8685,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Selecteer datum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Selecteer tijd" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Begin datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Selecteer tijd" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Begin datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Eind datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -8728,13 +8728,13 @@ exports[`Locale Provider should display the text as nl 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
@@ -9072,7 +9072,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / pagina" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / pagina</div>
@@ -9080,7 +9080,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -9089,7 +9089,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Selecteer datum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Selecteer tijd" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Begin datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Selecteer tijd" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Begin datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Eind datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -9132,13 +9132,13 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
@@ -9476,7 +9476,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / stronę" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / stronę</div>
@@ -9484,7 +9484,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -9493,7 +9493,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Wybierz datę" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Wybierz godzinę" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data początkowa" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Wybierz godzinę" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data początkowa" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Data końcowa" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -9536,13 +9536,13 @@ exports[`Locale Provider should display the text as pl 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="wrz" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">wrz</div>
@@ -9880,7 +9880,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / página" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / página</div>
@@ -9888,7 +9888,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -9897,7 +9897,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Data" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data inicial" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data inicial" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Data final" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -9940,13 +9940,13 @@ exports[`Locale Provider should display the text as pt 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
@@ -10284,7 +10284,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / páginas" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / páginas</div>
@@ -10292,7 +10292,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -10301,7 +10301,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Selecionar data" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data de início" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Hora" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Data de início" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Data de fim" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -10344,13 +10344,13 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
@@ -10688,7 +10688,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 /странице" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 /странице</div>
@@ -10696,7 +10696,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -10705,7 +10705,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Выберите дату" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Выберите время" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Начальная дата" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Выберите время" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Начальная дата" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Конечная дата" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -10748,13 +10748,13 @@ exports[`Locale Provider should display the text as ru 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="сент." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">сент.</div>
@@ -11092,7 +11092,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / strana" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / strana</div>
@@ -11100,7 +11100,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -11109,7 +11109,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Vybrať dátum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Vybrať čas" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Od" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Vybrať čas" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Od" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Do" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -11152,13 +11152,13 @@ exports[`Locale Provider should display the text as sk 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep</div>
@@ -11496,7 +11496,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / strani" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / strani</div>
@@ -11504,7 +11504,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -11513,7 +11513,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Izberite datum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Izberite čas" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Začetni datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Izberite čas" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Začetni datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Končni datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -11556,13 +11556,13 @@ exports[`Locale Provider should display the text as sl 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
@@ -11900,7 +11900,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / strani" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / strani</div>
@@ -11908,7 +11908,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -11917,7 +11917,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Izaberite datum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Izaberite vreme" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Početni datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Izaberite vreme" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Početni datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Krajnji datum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -11960,13 +11960,13 @@ exports[`Locale Provider should display the text as sr 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
@@ -12304,7 +12304,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / sida" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / sida</div>
@@ -12312,7 +12312,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -12321,7 +12321,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Välj datum" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Välj tid" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Startdatum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Välj tid" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Startdatum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Slutdatum" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -12364,13 +12364,13 @@ exports[`Locale Provider should display the text as sv 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep</div>
@@ -12708,7 +12708,7 @@ exports[`Locale Provider should display the text as th 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / หน้า" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / หน้า</div>
@@ -12716,7 +12716,7 @@ exports[`Locale Provider should display the text as th 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -12725,7 +12725,7 @@ exports[`Locale Provider should display the text as th 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="เลือกวันที่" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="เลือกเวลา" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="วันเริ่มต้น" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="เลือกเวลา" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="วันเริ่มต้น" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="วันสิ้นสุด" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -12768,13 +12768,13 @@ exports[`Locale Provider should display the text as th 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="ก.ย." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">ก.ย.</div>
@@ -13112,7 +13112,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / sayfa" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / sayfa</div>
@@ -13120,7 +13120,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -13129,7 +13129,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Tarih Seç" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Zaman Seç" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Başlangıç Tarihi" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Zaman Seç" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Başlangıç Tarihi" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Bitiş Tarihi" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -13172,13 +13172,13 @@ exports[`Locale Provider should display the text as tr 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Eyl" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Eyl</div>
@@ -13516,7 +13516,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / сторінці" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / сторінці</div>
@@ -13524,7 +13524,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -13533,7 +13533,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Оберіть дату" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Оберіть час" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Початкова дата" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Оберіть час" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Початкова дата" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Кінцева дата" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -13576,13 +13576,13 @@ exports[`Locale Provider should display the text as uk 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="вер" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">вер</div>
@@ -13920,7 +13920,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / trang" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / trang</div>
@@ -13928,7 +13928,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -13937,7 +13937,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Chọn thời điểm" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="Chọn thời gian" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Ngày bắt đầu" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="Chọn thời gian" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Ngày bắt đầu" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="Ngày kết thúc" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -13980,13 +13980,13 @@ exports[`Locale Provider should display the text as vi 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Th09" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Th09</div>
@@ -14324,7 +14324,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 条/页" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 条/页</div>
@@ -14332,7 +14332,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -14341,7 +14341,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="请选择日期" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="请选择时间" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="开始日期" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="请选择时间" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="开始日期" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="结束日期" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -14384,13 +14384,13 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017年" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017年</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
@@ -14728,7 +14728,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 條/頁" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 條/頁</div>
@@ -14736,7 +14736,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
       </div>
     </li>
   </ul>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -14745,7 +14745,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
         </div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="請選擇日期" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-</span><span class="ant-time-picker"><input type="text" placeholder="請選擇時間" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="開始日期" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+</span><span class="ant-time-picker"><input type="text" placeholder="請選擇時間" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span><span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="開始日期" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
 <input
   readonly="true" placeholder="結束日期" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
   </span>
@@ -14788,13 +14788,13 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017年" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017年</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>

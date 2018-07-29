@@ -362,7 +362,7 @@ exports[`RangePicker show month panel according to value 1`] = `
 exports[`RangePicker switch to corresponding month panel when click presetted ranges 1`] = `
 <div>
   <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
-    <div tabindex="0" class="ant-calendar ant-calendar-range ant-calendar-time ant-calendar-range-with-ranges ant-calendar-time ant-calendar-range-with-ranges ant-calendar-picker-container-content">
+    <div tabindex="0" class="ant-calendar ant-calendar-range ant-calendar-time ant-calendar-range-with-ranges ant-calendar-picker-container-content">
       <div class="ant-calendar-panel">
         <div class="ant-calendar-date-panel">
           <div class="ant-calendar-range-part ant-calendar-range-left">

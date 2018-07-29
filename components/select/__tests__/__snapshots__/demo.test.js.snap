@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/select/demo/automatic-tokenization.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 100%;">
+<div class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div>
@@ -17,13 +17,13 @@ exports[`renders ./components/select/demo/automatic-tokenization.md correctly 1`
 
 exports[`renders ./components/select/demo/basic.md correctly 1`] = `
 <div>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 120px;">
+  <div class="ant-select ant-select-enabled" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="Lucy" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Lucy</div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div>
-  <div class="ant-select ant-select-disabled ant-select-allow-clear ant-select ant-select-disabled ant-select-allow-clear" style="width: 120px;">
+  <div class="ant-select ant-select-disabled ant-select-allow-clear" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="-1" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="Lucy" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Lucy</div>
@@ -33,7 +33,7 @@ exports[`renders ./components/select/demo/basic.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/combobox.md correctly 1`] = `
-<div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled" style="width: 200px;">
+<div class="ant-select ant-select-combobox ant-select-enabled" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Enter the account name</div>
@@ -49,13 +49,13 @@ exports[`renders ./components/select/demo/combobox.md correctly 1`] = `
 
 exports[`renders ./components/select/demo/coordinate.md correctly 1`] = `
 <div>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 120px;">
+  <div class="ant-select ant-select-enabled" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="Zhejiang" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Zhejiang</div>
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 120px;">
+  <div class="ant-select ant-select-enabled" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="Hangzhou" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Hangzhou</div>
@@ -65,7 +65,7 @@ exports[`renders ./components/select/demo/coordinate.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/label-in-value.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 120px;">
+<div class="ant-select ant-select-enabled" style="width: 120px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div title="Lucy (101)" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Lucy (101)</div>
@@ -74,7 +74,7 @@ exports[`renders ./components/select/demo/label-in-value.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/multiple.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 100%;">
+<div class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: none;">Please select</div>
@@ -94,7 +94,7 @@ exports[`renders ./components/select/demo/multiple.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/optgroup.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+<div class="ant-select ant-select-enabled" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div title="Lucy" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Lucy</div>
@@ -103,7 +103,7 @@ exports[`renders ./components/select/demo/optgroup.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/options.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 120px;">
+<div class="ant-select ant-select-enabled" style="width: 120px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div title="北京 010" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">北京</div>
@@ -112,7 +112,7 @@ exports[`renders ./components/select/demo/options.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/search.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+<div class="ant-select ant-select-enabled" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Select a person</div>
@@ -125,7 +125,7 @@ exports[`renders ./components/select/demo/search.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/search-box.md correctly 1`] = `
-<div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled" style="width: 200px;">
+<div class="ant-select ant-select-combobox ant-select-enabled" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">input search text</div>
@@ -141,7 +141,7 @@ exports[`renders ./components/select/demo/search-box.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/select-users.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 100%;">
+<div class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Select users</div>
@@ -165,7 +165,7 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
   </div>
   <br>
   <br>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="
@@ -176,7 +176,7 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div>
   <br>
-  <div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-combobox ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <ul>
@@ -188,7 +188,7 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
       </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
   </div>
   <br>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
       <div class="ant-select-selection__rendered">
         <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: none;">Please select</div>
@@ -214,7 +214,7 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
     </div>
   </div>
   <br>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+  <div class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
       <div class="ant-select-selection__rendered">
         <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: none;">Please select</div>
@@ -243,7 +243,7 @@ exports[`renders ./components/select/demo/size.md correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/tags.md correctly 1`] = `
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 100%;">
+<div class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Tags Mode</div>

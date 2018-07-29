@@ -156,7 +156,7 @@ exports[`renders ./components/form/demo/coordinated.vue correctly 1`] = `
       <label for="gender" title="Gender" class="ant-form-item-required">Gender</label>
     </div>
     <div class="ant-col-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="gender"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Select a option and change input text above</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="gender"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Select a option and change input text above</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     </span>
     <!---->
@@ -181,7 +181,7 @@ exports[`renders ./components/form/demo/customized-form-controls.vue correctly 1
       <label for="price" title="Price" class="">Price</label>
     </div>
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><span data-__meta="[object Object]" data-__field="[object Object]" id="price" class=""><input value="0" type="text" class="ant-input" style="width: 65%; margin-right: 3%;"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 32%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="RMB" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">RMB</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><span data-__meta="[object Object]" data-__field="[object Object]" id="price" class=""><input value="0" type="text" class="ant-input" style="width: 65%; margin-right: 3%;"><div class="ant-select ant-select-enabled" style="width: 32%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="RMB" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">RMB</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     </span>
     </span>
@@ -476,7 +476,7 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
       <label for="phone" title="Phone Number" class="ant-form-item-required">Phone Number</label>
     </div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-group-wrapper" style="width: 100%;"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 70px;" data-__meta="[object Object]" data-__field="[object Object]" id="prefix"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="+86" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">+86</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-group-wrapper" style="width: 100%;"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled" style="width: 70px;" data-__meta="[object Object]" data-__field="[object Object]" id="prefix"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="+86" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">+86</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     </span>
     <input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="phone" class="ant-input">
@@ -492,7 +492,7 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
       <label for="website" title="Website" class="ant-form-item-required">Website</label>
     </div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" data-__meta="[object Object]" data-__field="[object Object]" id="website"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">website</div><ul><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" data-__meta="[object Object]" data-__field="[object Object]" id="website"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">website</div><ul><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
       </li>
       </ul>
     </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
@@ -578,7 +578,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
       <label for="range-picker" title="RangePicker" class="ant-form-item-required">RangePicker</label>
     </div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="range-picker"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="range-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
         <input
           readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
           </span>
@@ -592,7 +592,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
       <label for="range-time-picker" title="RangePicker[showTime]" class="ant-form-item-required">RangePicker[showTime]</label>
     </div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" style="width: 350px;" data-__meta="[object Object]" data-__field="[object Object]" id="range-time-picker"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" style="width: 350px;" data-__meta="[object Object]" data-__field="[object Object]" id="range-time-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
         <input
           readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
           </span>
@@ -640,7 +640,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label for="select" title="Select" class="ant-form-item-required">Select</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Please select a country</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Please select a country</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     </span>
     <!---->
@@ -652,7 +652,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label for="select-multiple" title="Select[multiple]" class="ant-form-item-required">Select[multiple]</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select-multiple"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Please select favourite colors</div><div><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select-multiple"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--multiple"><div class="ant-select-selection__rendered"><div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Please select favourite colors</div><div><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
       </li>
     </div>
   </div>
@@ -875,7 +875,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
       <label title="Error" class="">Error</label>
     </div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback has-error"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option 1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option 1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      <div class="ant-form-item-control has-feedback has-error"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option 1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option 1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
     </span>
     <!---->

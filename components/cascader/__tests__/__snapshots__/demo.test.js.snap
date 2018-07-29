@@ -66,7 +66,7 @@ exports[`renders ./components/cascader/demo/search.md correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
-<div><span tabindex="0" class="ant-cascader-picker ant-cascader-picker-large ant-cascader-picker ant-cascader-picker-large"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-lg ant-cascader-input ant-input-lg"><span class="ant-cascader-picker-label"></span>
+<div><span tabindex="0" class="ant-cascader-picker ant-cascader-picker-large"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-lg ant-cascader-input ant-input-lg"><span class="ant-cascader-picker-label"></span>
   <i
     class="anticon anticon-down ant-cascader-picker-arrow"></i>
     </span>
@@ -75,7 +75,7 @@ exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
     <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
     </span>
     <br>
-    <br> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-small ant-cascader-picker ant-cascader-picker-small"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-sm ant-cascader-input ant-input-sm"><span class="ant-cascader-picker-label"></span>
+    <br> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-small"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-sm ant-cascader-input ant-input-sm"><span class="ant-cascader-picker-label"></span>
     <i
       class="anticon anticon-down ant-cascader-picker-arrow"></i>
       </span>

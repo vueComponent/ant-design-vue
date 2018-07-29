@@ -10,7 +10,7 @@ exports[`renders ./components/notification/demo/duration.md correctly 1`] = `<bu
 
 exports[`renders ./components/notification/demo/placement.md correctly 1`] = `
 <div>
-  <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 120px; margin-right: 10px;">
+  <div class="ant-select ant-select-enabled" style="width: 120px; margin-right: 10px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="topRight" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">topRight</div>

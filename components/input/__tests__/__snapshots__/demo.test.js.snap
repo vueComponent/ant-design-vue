@@ -6,10 +6,10 @@ exports[`renders ./components/input/demo/addon.md correctly 1`] = `
     <input defaultvalue="mysite" type="text" class="ant-input"><span class="ant-input-group-addon">.com</span></span>
     </span>
   </div>
-  <div style="margin-bottom: 16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 90px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Http://" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Http://</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+  <div style="margin-bottom: 16px;"><span class="ant-input-group-wrapper"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled" style="width: 90px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Http://" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Http://</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
-<input defaultvalue="mysite" type="text" class="ant-input"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 80px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title=".com" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">.com</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+<input defaultvalue="mysite" type="text" class="ant-input"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled" style="width: 80px;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title=".com" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">.com</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
 </span>
@@ -34,35 +34,35 @@ exports[`renders ./components/input/demo/basic.md correctly 1`] = `<input placeh
 exports[`renders ./components/input/demo/group.md correctly 1`] = `
 <div><span class="ant-input-group ant-input-group-lg"><div class="ant-col-5"><input defaultvalue="0571" type="text" class="ant-input"></div><div class="ant-col-8"><input defaultvalue="26888888" type="text" class="ant-input"></div></span>
   <br> <span class="ant-input-group ant-input-group-compact"><input defaultvalue="0571" type="text" class="ant-input" style="width: 20%;"><input defaultvalue="26888888" type="text" class="ant-input" style="width: 30%;"></span>
-  <br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Zhejiang" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Zhejiang</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+  <br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Zhejiang" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Zhejiang</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 <input defaultvalue="Xihu District, Hangzhou" type="text" class="ant-input" style="width: 50%;">
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 <input defaultvalue="input content" type="text" class="ant-input" style="width: 50%;">
 </span>
 <br> <span class="ant-input-group ant-input-group-compact"><input defaultvalue="input content" type="text" class="ant-input" style="width: 50%;"><span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
 </span>
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1-1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option1-1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option1-1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option1-1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
-<div class="ant-select ant-select-enabled ant-select ant-select-enabled">
+<div class="ant-select ant-select-enabled">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div title="Option2-2" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option2-2</div>
     </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Between" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Between</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Between" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Between</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 <input placeholder="Minimum" type="text" class="ant-input" style="width: 100px; text-align: center;">
 <input placeholder="~" type="text" disabled="disabled" class="ant-input ant-input-disabled" style="width: 30px; border-left: 0; pointer-events: none; background-color: rgb(255, 255, 255);">
 <input placeholder="Maximum" type="text" class="ant-input" style="width: 100px; text-align: center; border-left: 0;">
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Sign Up" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sign Up</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Sign Up" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sign Up</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
-<div class="ant-select ant-select-combobox ant-select-enabled ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
+<div class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
       <div unselectable="unselectable" class="ant-select-selection__placeholder" style="display: block;">Email</div>
@@ -75,7 +75,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div>
 </span>
-<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 30%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Home" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Home</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+<br> <span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-enabled" style="width: 30%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Home" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Home</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
 </div><span tabindex="0" class="ant-cascader-picker" style="width: 70%;"><input value="" placeholder="Select Address" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>

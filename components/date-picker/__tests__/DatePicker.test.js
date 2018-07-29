@@ -180,7 +180,7 @@ describe('DatePicker', () => {
     }, 0)
     await asyncExpect(() => {
       clearInput(wrapper)
-    }, 0)
+    }, 300)
     await asyncExpect(() => {
       openPanel(wrapper)
     }, 0)

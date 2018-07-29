@@ -20,6 +20,7 @@ const Notification = {
     prefixCls: PropTypes.string.def('rc-notification'),
     transitionName: PropTypes.string,
     animation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).def('fade'),
+    maxCount: PropTypes.number,
   },
   data () {
     return {
@@ -38,12 +39,25 @@ const Notification = {
 
     add (notice) {
       const key = notice.key = notice.key || getUuid()
+      const { maxCount } = this.$props
       this.setState(previousState => {
         const notices = previousState.notices
-        if (!notices.filter(v => v.key === key).length) {
-          return {
-            notices: notices.concat(notice),
+        const noticeIndex = notices.map(v => v.key).indexOf(key)
+        const updatedNotices = notices.concat()
+        if (noticeIndex !== -1) {
+          updatedNotices.splice(noticeIndex, 1, notice)
+        } else {
+          if (maxCount && notices.length >= maxCount) {
+            // XXX, use key of first item to update new added (let React to move exsiting
+            // instead of remove and mount). Same key was used before for both a) external
+            // manual control and b) internal react 'key' prop , which is not that good.
+            notice.updateKey = updatedNotices[0].updateKey || updatedNotices[0].key
+            updatedNotices.shift()
           }
+          updatedNotices.push(notice)
+        }
+        return {
+          notices: updatedNotices,
         }
       })
     },
@@ -60,14 +74,18 @@ const Notification = {
   render (h) {
     const { prefixCls, notices, remove, getTransitionName } = this
     const transitionProps = getTransitionProps(getTransitionName())
-    const noticeNodes = notices.map((notice) => {
-      const { content, duration, closable, onClose, key, style, class: className } = notice
+    const noticeNodes = notices.map((notice, index) => {
+      const update = Boolean(index === notices.length - 1 && notice.updateKey)
+      const key = notice.updateKey ? notice.updateKey : notice.key
+
+      const { content, duration, closable, onClose, style, class: className } = notice
       const close = createChainedFunction(remove.bind(this, key), onClose)
       const noticeProps = {
         props: {
           prefixCls,
           duration,
           closable,
+          update,
         },
         on: {
           close,
@@ -80,7 +98,7 @@ const Notification = {
         <Notice
           {...noticeProps}
         >
-          {content(h)}
+          {typeof content === 'function' ? content(h) : content}
         </Notice>
       )
     })

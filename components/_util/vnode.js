@@ -84,13 +84,12 @@ export function cloneElement (n, nodeProps, deep) {
     style = { ...style, ...tempStyle }
   }
 
-  if (typeof data.class === 'string') {
-    cls[data.class] = true
+  if (typeof data.class === 'string' && data.class.trim() !== '') {
     data.class.split(' ').forEach(c => { cls[c.trim()] = true })
   } else {
     cls = { ...data.class, ...cls }
   }
-  if (typeof tempCls === 'string') {
+  if (typeof tempCls === 'string' && tempCls.trim() !== '') {
     tempCls.split(' ').forEach(c => { cls[c.trim()] = true })
   } else {
     cls = { ...cls, ...tempCls }

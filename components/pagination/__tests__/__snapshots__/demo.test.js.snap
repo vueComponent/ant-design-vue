@@ -58,7 +58,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -99,7 +99,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="20 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">20 / page</div>
@@ -161,7 +161,7 @@ exports[`renders ./components/pagination/demo/custom-changer.md correctly 1`] = 
     <a class="ant-pagination-item-link"></a>
   </li>
   <li class="ant-pagination-options">
-    <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+    <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="" class="ant-select-selection-selected-value" style="display: block; opacity: 1;"><span>10条/页</span>
@@ -292,7 +292,7 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
       <a class="ant-pagination-item-link"></a>
     </li>
     <li class="ant-pagination-options">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-pagination-options-size-changer">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>

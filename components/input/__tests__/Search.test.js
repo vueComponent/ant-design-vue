@@ -1,9 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
-import Search from '../Search'
+import Input from '../index'
 import Button from '../../button'
 import focusTest from '../../../tests/shared/focusTest'
 
+const { Search } = Input
 describe('Input.Search', () => {
   focusTest(Search)
 

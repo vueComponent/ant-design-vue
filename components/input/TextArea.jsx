@@ -96,9 +96,11 @@ export default {
         })
       } else {
         this.$forceUpdate()
-        this.$emit('change.value', e.target.value)
-        this.$emit('change', e)
       }
+      if (!e.target.composing) {
+        this.$emit('change.value', e.target.value)
+      }
+      this.$emit('change', e)
       this.$emit('input', e)
     },
 
@@ -132,6 +134,9 @@ export default {
         keydown: handleKeyDown,
         input: handleTextareaChange,
       },
+    }
+    if ($listeners['change.value']) {
+      textareaProps.directives = [{ name: 'ant-input' }]
     }
     return (
       <textarea

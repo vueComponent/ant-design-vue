@@ -3,13 +3,13 @@
 exports[`renders ./components/calendar/demo/basic.md correctly 1`] = `
 <div class=" ant-fullcalendar-fullscreen">
   <div class="ant-fullcalendar-header">
-    <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
+    <div class="ant-select ant-select-enabled ant-fullcalendar-year-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
         </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
-    <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
+    <div class="ant-select ant-select-enabled ant-fullcalendar-month-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
@@ -310,13 +310,13 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
 <div style="width: 300px; border: 1px solid #d9d9d9; border-radius: 4px;">
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+      <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
@@ -617,13 +617,13 @@ exports[`renders ./components/calendar/demo/card.md correctly 1`] = `
 exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
 <div class=" ant-fullcalendar-fullscreen">
   <div class="ant-fullcalendar-header">
-    <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
+    <div class="ant-select ant-select-enabled ant-fullcalendar-year-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
         </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
     </div>
-    <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
+    <div class="ant-select ant-select-enabled ant-fullcalendar-month-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
@@ -1047,13 +1047,13 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
   <div style="display: inline-block; width: 500px; border: 1px solid #d9d9d9; border-radius: 4px;">
     <div class=" ant-fullcalendar-fullscreen">
       <div class="ant-fullcalendar-header">
-        <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
+        <div class="ant-select ant-select-enabled ant-fullcalendar-year-select">
           <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
               <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
             </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
-        <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
+        <div class="ant-select ant-select-enabled ant-fullcalendar-month-select">
           <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
               <div title="Jan" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Jan</div>
@@ -1352,13 +1352,13 @@ exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
   <div style="display: inline-block; width: 500px; margin-left: 20px; border: 1px solid #d9d9d9; border-radius: 4px;">
     <div class=" ant-fullcalendar-fullscreen">
       <div class="ant-fullcalendar-header">
-        <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-year-select">
+        <div class="ant-select ant-select-enabled ant-fullcalendar-year-select">
           <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
               <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
             </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
-        <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-fullcalendar-month-select">
+        <div class="ant-select ant-select-enabled ant-fullcalendar-month-select">
           <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
               <div title="Jan" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Jan</div>

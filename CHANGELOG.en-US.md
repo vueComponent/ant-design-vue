@@ -2,6 +2,15 @@
 
 ---
 
+## 1.0.1
+
+`2018-07-27`
+- 🌟 Optimize Chinese input for `Input` components(just support v-model) [4a5154](https://github.com/vueComponent/ant-design/commit/4a51544bd6470ab628dda80e9d7593e4603dd0b6)
+- 🐞 Fix `treeSelect` `treeData[i].children` throw error when null[#81](https://github.com/vueComponent/ant-design/issues/81)
+- 🐞 Fix `Calendar` change event call twice[#82](https://github.com/vueComponent/ant-design/issues/82)
+- 🐞 Fix the `description` and `title` slot attribute of the `Card` component does not work[#83](https://github.com/vueComponent/ant-design/issues/83)
+- 🐞 Fix `dropdownClassName` attribute of `DataPicker` component does not working[02ab242](https://github.com/vueComponent/ant-design/commit/02ab242197b923f2157f41d98a7930512475a799)
+
 ## 1.0.0
 
 `2018-07-21`

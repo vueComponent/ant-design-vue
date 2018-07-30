@@ -41,6 +41,7 @@ const Picker = {
       PropTypes.arrayOf(MomentType),
     ]),
     align: PropTypes.object.def({}),
+    dropdownClassName: PropTypes.string,
   },
   mixins: [BaseMixin],
 

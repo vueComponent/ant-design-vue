@@ -143,7 +143,7 @@ export default {
         })
       }
       this.sValue = sValue
-
+      this.initLabelAndTitleMap(sValue)
       sValue.forEach((val) => {
         const key = val.key
         let { label, title } = val

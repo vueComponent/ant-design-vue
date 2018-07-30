@@ -137,8 +137,8 @@ function tag () {
   execSync(`git config --global user.email ${process.env.GITHUB_USER_EMAIL}`)
   execSync(`git config --global user.name ${process.env.GITHUB_USER_NAME}`)
   execSync(`git tag ${version}`)
-  execSync(`git push origin ${version}:${version}`)
-  execSync('git push origin master:master')
+  execSync(`git push https://${process.env.GITHUB_TOKEN}@github.com/vueComponent/ant-design.git ${version}:${version}`)
+  execSync(`git push https://${process.env.GITHUB_TOKEN}@github.com/vueComponent/ant-design.git master:master`)
   console.log('tagged')
 }
 
@@ -186,6 +186,12 @@ function githubRelease (done) {
     done()
   })
 }
+
+gulp.task('tag', (done) => {
+  tag()
+  githubRelease(done)
+})
+
 gulp.task('check-git', (done) => {
   runCmd('git', ['status', '--porcelain'], (code, result) => {
     if (/^\?\?/m.test(result)) {

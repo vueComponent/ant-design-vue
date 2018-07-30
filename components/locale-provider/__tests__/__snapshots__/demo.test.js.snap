@@ -33,7 +33,7 @@ exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
           <a class="ant-pagination-item-link"></a>
         </li>
         <li class="ant-pagination-options">
-          <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+          <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
             <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
               <div class="ant-select-selection__rendered">
                 <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -43,7 +43,7 @@ exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
       </ul>
     </div>
     <div class="example">
-      <div class="ant-select ant-select-enabled ant-select ant-select-enabled" style="width: 200px;">
+      <div class="ant-select ant-select-enabled" style="width: 200px;">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div class="ant-select-search ant-select-search--inline" style="display: none;">
@@ -52,7 +52,7 @@ exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
             </div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div> <span class="ant-calendar-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-    </span> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span> <span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
+    </span> <span class="ant-time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span> <span tabindex="0" class="ant-calendar-picker" style="width: 200px;"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
     <input
       readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
       </span>
@@ -106,13 +106,13 @@ exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
   <div style="width: 319px; border: 1px solid #d9d9d9; border-radius: 4px;">
     <div class="">
       <div class="ant-fullcalendar-header">
-        <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+        <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
           <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
               <div title="2016" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2016</div>
             </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
-        <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+        <div class="ant-select-sm ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
           <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
             <div class="ant-select-selection__rendered">
               <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
@@ -437,7 +437,7 @@ exports[`renders ./components/locale-provider/demo/basic.md correctly 1`] = `
     <a class="ant-pagination-item-link"></a>
   </li>
   <li class="ant-pagination-options">
-    <div class="ant-select ant-select-enabled ant-select ant-select-enabled ant-pagination-options-size-changer">
+    <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>

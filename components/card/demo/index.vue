@@ -8,6 +8,7 @@ import Grid from './grid'
 import Inline from './inline'
 import TabsCard from './tabsCard'
 import MoreConfigs from './moreConfigs'
+import FlexibleContent from './flexible-content'
 
 import CN from './../index.zh-CN.md'
 import US from './../index.en-US.md'
@@ -41,6 +42,7 @@ export default {
         <Basic />
         <NoBorder />
         <Concise />
+        <FlexibleContent />
         <ColRowCard />
         <Loading />
         <Grid />

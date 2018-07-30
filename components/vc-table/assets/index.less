@@ -1,5 +1,3 @@
-@import 'normalize.css';
-
 @tablePrefixCls: rc-table;
 @text-color             : #666;
 @font-size-base         : 12px;
@@ -46,6 +44,12 @@
     margin-bottom: -20px;
     overflow-y: scroll;
     box-sizing: border-box;
+  }
+
+  // https://github.com/ant-design/ant-design/issues/10828
+  &-fixed-columns-in-body {
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .@{tablePrefixCls}-title {

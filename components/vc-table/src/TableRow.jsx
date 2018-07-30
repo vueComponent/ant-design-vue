@@ -31,7 +31,7 @@ const TableRow = {
     className: PropTypes.string,
     indent: PropTypes.number,
     indentSize: PropTypes.number,
-    hasExpandIcon: PropTypes.func.isRequired,
+    hasExpandIcon: PropTypes.func,
     hovered: PropTypes.bool.isRequired,
     visible: PropTypes.bool.isRequired,
     store: PropTypes.object.isRequired,
@@ -51,16 +51,18 @@ const TableRow = {
     // hovered: PropTypes.bool,
     // height: PropTypes.any,
   }, {
-    expandIconColumnIndex: 0,
-    expandRowByClick: false,
+    // expandIconColumnIndex: 0,
+    // expandRowByClick: false,
     hasExpandIcon () {},
     renderExpandIcon () {},
     renderExpandIconCell () {},
   }),
 
   data () {
-    this.shouldRender = this.visible
-    return {}
+    // this.shouldRender = this.visible
+    return {
+      shouldRender: this.visible,
+    }
   },
 
   mounted () {
@@ -125,11 +127,15 @@ const TableRow = {
     },
 
     setRowHeight () {
-      const { store, index } = this
-      const fixedColumnsBodyRowsHeight = store.getState().fixedColumnsBodyRowsHeight.slice()
+      const { store, rowKey } = this
+      const { fixedColumnsBodyRowsHeight } = store.getState()
       const height = this.rowRef.getBoundingClientRect().height
-      fixedColumnsBodyRowsHeight[index] = height
-      store.setState({ fixedColumnsBodyRowsHeight })
+      store.setState({
+        fixedColumnsBodyRowsHeight: {
+          ...fixedColumnsBodyRowsHeight,
+          [rowKey]: height,
+        },
+      })
     },
 
     getStyle () {
@@ -174,6 +180,7 @@ const TableRow = {
       prefixCls,
       columns,
       record,
+      rowKey,
       index,
       customRow = noop,
       indent,
@@ -243,7 +250,11 @@ const TableRow = {
         contextmenu: this.onContextMenu,
       },
       class: rowClassName,
-    }, { ...rowProps, style })
+    }, { ...rowProps, style }, {
+      attrs: {
+        'data-row-key': rowKey,
+      },
+    })
     return (
       <BodyRow
         {...bodyRowProps}
@@ -256,7 +267,7 @@ const TableRow = {
 
 function getRowHeight (state, props) {
   const { expandedRowsHeight, fixedColumnsBodyRowsHeight } = state
-  const { fixed, index, rowKey } = props
+  const { fixed, rowKey } = props
 
   if (!fixed) {
     return null
@@ -266,8 +277,8 @@ function getRowHeight (state, props) {
     return expandedRowsHeight[rowKey]
   }
 
-  if (fixedColumnsBodyRowsHeight[index]) {
-    return fixedColumnsBodyRowsHeight[index]
+  if (fixedColumnsBodyRowsHeight[rowKey]) {
+    return fixedColumnsBodyRowsHeight[rowKey]
   }
 
   return null

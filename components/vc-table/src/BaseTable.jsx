@@ -1,10 +1,11 @@
 
 import PropTypes from '../../_util/vue-types'
+import classNames from 'classnames'
 import ColGroup from './ColGroup'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import ExpandableRow from './ExpandableRow'
-import { mergeProps } from '../../_util/props-util'
+import { mergeProps, getOptionProps } from '../../_util/props-util'
 import { connect } from '../../_util/store'
 function noop () {}
 const BaseTable = {
@@ -27,13 +28,25 @@ const BaseTable = {
     table: { default: {}},
   },
   methods: {
+    getColumns (cols) {
+      const { columns = [], fixed } = this.$props
+      const { table } = this
+      const { prefixCls } = table.$props
+      return (cols || columns).map(column => ({
+        ...column,
+        className:
+          !!column.fixed && !fixed
+            ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className || column.class)
+            : column.className || column.class,
+      }))
+    },
     handleRowHover  (isHover, key) {
       this.store.setState({
         currentHoverKey: isHover ? key : null,
       })
     },
 
-    renderRows  (renderData, indent, ancestorKeys = []) {
+    renderRows  (renderData, indent, rows = [], ancestorKeys = []) {
       const {
         columnManager, sComponents: components,
         prefixCls,
@@ -51,14 +64,10 @@ const BaseTable = {
       } = this.table
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this
 
-      const rows = []
-
       for (let i = 0; i < renderData.length; i++) {
         const record = renderData[i]
         const key = getRowKey(record, i)
-        const className = typeof rowClassName === 'string'
-          ? rowClassName
-          : rowClassName(record, i, indent)
+        const className = typeof rowClassName === 'string' ? rowClassName : rowClassName(record, i, indent)
 
         const onHoverProps = {}
         if (columnManager.isAnyColumnsFixed()) {
@@ -71,15 +80,20 @@ const BaseTable = {
         } else if (fixed === 'right') {
           leafColumns = columnManager.rightLeafColumns()
         } else {
-          leafColumns = columnManager.leafColumns()
+          leafColumns = this.getColumns(columnManager.leafColumns())
         }
 
         const rowPrefixCls = `${prefixCls}-row`
+        const rowIndex = rows.filter(row => {
+          const props = getOptionProps(row)
+          return !props.expandedRow
+        }).length
+
         const expandableRowProps = {
           props: {
             ...expander.props,
             fixed,
-            index: i,
+            index: rowIndex,
             prefixCls: rowPrefixCls,
             record,
             rowKey: key,
@@ -98,7 +112,7 @@ const BaseTable = {
                   fixed,
                   indent,
                   record,
-                  index: i,
+                  index: rowIndex,
                   prefixCls: rowPrefixCls,
                   childrenColumnName: childrenColumnName,
                   columns: leafColumns,
@@ -133,17 +147,7 @@ const BaseTable = {
         )
 
         rows.push(row)
-
-        expander.renderRows(
-          this.renderRows,
-          rows,
-          record,
-          i,
-          indent,
-          fixed,
-          key,
-          ancestorKeys
-        )
+        expander.renderRows(this.renderRows, rows, record, i, indent, fixed, key, ancestorKeys)
       }
       return rows
     },
@@ -151,7 +155,8 @@ const BaseTable = {
 
   render () {
     const { sComponents: components, prefixCls, scroll, data, getBodyWrapper } = this.table
-    const { expander, tableClassName, hasHead, hasBody, fixed, columns } = this
+    const { expander, tableClassName, hasHead, hasBody, fixed } = this.$props
+
     const tableStyle = {}
 
     if (!fixed && scroll.x) {
@@ -168,16 +173,12 @@ const BaseTable = {
 
     let body
     if (hasBody) {
-      body = (
-        <BodyWrapper class={`${prefixCls}-tbody`}>
-          {this.renderRows(data, 0)}
-        </BodyWrapper>
-      )
+      body = <BodyWrapper class={`${prefixCls}-tbody`}>{this.renderRows(data, 0)}</BodyWrapper>
       if (getBodyWrapper) {
         body = getBodyWrapper(body)
       }
     }
-
+    const columns = this.getColumns()
     return (
       <Table class={tableClassName} style={tableStyle} key='table'>
         <ColGroup columns={columns} fixed={fixed} />

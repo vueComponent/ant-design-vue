@@ -72,8 +72,10 @@ const ExpandableTable = {
   },
   watch: {
     expandedRowKeys (val) {
-      this.store.setState({
-        expandedRowKeys: val,
+      this.$nextTick(() => {
+        this.store.setState({
+          expandedRowKeys: val,
+        })
       })
     },
   },
@@ -124,6 +126,14 @@ const ExpandableTable = {
 
     renderExpandedRow (record, index, expandedRowRender, className, ancestorKeys, indent, fixed) {
       const { prefixCls, expandIconAsCell, indentSize } = this
+      const parentKey = ancestorKeys[ancestorKeys.length - 1]
+      const rowKey = `${parentKey}-extra-row`
+      const components = {
+        body: {
+          row: 'tr',
+          cell: 'td',
+        },
+      }
       let colCount
       if (fixed === 'left') {
         colCount = this.columnManager.leftLeafColumns().length
@@ -134,12 +144,16 @@ const ExpandableTable = {
       }
       const columns = [{
         key: 'extra-row',
-        customRender: () => ({
-          attrs: {
-            colSpan: colCount,
-          },
-          children: fixed !== 'right' ? expandedRowRender(record, index, indent) : '&nbsp;',
-        }),
+        customRender: () => {
+          const { expandedRowKeys } = this.store.getState()
+          const expanded = !!~expandedRowKeys.indexOf(parentKey)
+          return {
+            attrs: {
+              colSpan: colCount,
+            },
+            children: fixed !== 'right' ? expandedRowRender(record, index, indent, expanded) : '&nbsp;',
+          }
+        },
       }]
       if (expandIconAsCell && fixed !== 'right') {
         columns.unshift({
@@ -147,14 +161,7 @@ const ExpandableTable = {
           customRender: () => null,
         })
       }
-      const parentKey = ancestorKeys[ancestorKeys.length - 1]
-      const rowKey = `${parentKey}-extra-row`
-      const components = {
-        body: {
-          row: 'tr',
-          cell: 'td',
-        },
-      }
+
       return (
         <TableRow
           key={rowKey}
@@ -194,13 +201,7 @@ const ExpandableTable = {
       }
 
       if (childrenData) {
-        rows.push(
-          ...renderRows(
-            childrenData,
-            nextIndent,
-            nextAncestorKeys,
-          )
-        )
+        renderRows(childrenData, nextIndent, rows, nextAncestorKeys)
       }
     },
   },

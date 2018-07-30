@@ -19,11 +19,9 @@ export function measureScrollbar (direction = 'vertical') {
     return scrollbarSize
   }
   const scrollDiv = document.createElement('div')
-  for (const scrollProp in scrollbarMeasure) {
-    if (scrollbarMeasure.hasOwnProperty(scrollProp)) {
-      scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp]
-    }
-  }
+  Object.keys(scrollbarMeasure).forEach(scrollProp => {
+    scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp]
+  })
   document.body.appendChild(scrollDiv)
   let size = 0
   if (direction === 'vertical') {
@@ -39,9 +37,8 @@ export function measureScrollbar (direction = 'vertical') {
 
 export function debounce (func, wait, immediate) {
   let timeout
-  function debounceFunc () {
+  function debounceFunc (...args) {
     const context = this
-    const args = arguments
     // https://fb.me/react-event-pooling
     if (args[0] && args[0].persist) {
       args[0].persist()

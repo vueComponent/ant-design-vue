@@ -95,6 +95,18 @@ export function traverseTreeNodes (treeNodes, subTreeData, callback) {
 }
 
 /**
+ * Use `rc-util` `toArray` to get the children list which keeps the key.
+ * And return single node if children is only one(This can avoid `key` missing check).
+ */
+export function mapChildren (children = [], func) {
+  const list = children.map(func)
+  if (list.length === 1) {
+    return list[0]
+  }
+  return list
+}
+
+/**
  * [Legacy] Return halfChecked when it has value.
  * @param checkedKeys
  * @param halfChecked
@@ -332,10 +344,10 @@ export function calcCheckStateConduct (treeNodes, checkedKeys) {
   }
 }
 
-// function keyListToString (keyList) {
-//   if (!keyList) return keyList
-//   return keyList.map(key => String(key))
-// }
+function keyListToString (keyList) {
+  if (!keyList) return keyList
+  return keyList.map(key => String(key))
+}
 
 /**
  * Calculate the value of checked and halfChecked keys.
@@ -366,8 +378,8 @@ export function calcCheckedKeys (keys, props, children = []) {
     return null
   }
 
-  // keyProps.checkedKeys = keyListToString(keyProps.checkedKeys)
-  // keyProps.halfCheckedKeys = keyListToString(keyProps.halfCheckedKeys)
+  keyProps.checkedKeys = keyListToString(keyProps.checkedKeys)
+  keyProps.halfCheckedKeys = keyListToString(keyProps.halfCheckedKeys)
 
   // Do nothing if is checkStrictly mode
   if (checkStrictly) {

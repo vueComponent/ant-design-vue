@@ -30,7 +30,10 @@ const IframeUploader = {
       PropTypes.object,
       PropTypes.func,
     ]),
-    action: PropTypes.string,
+    action: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func,
+    ]),
     name: PropTypes.string,
   },
   data () {
@@ -223,9 +226,18 @@ const IframeUploader = {
         }
       }
       dataSpan.appendChild(inputs)
-      formNode.submit()
-      dataSpan.innerHTML = ''
-      this.$emit('start', file)
+      new Promise(resolve => {
+        const { action } = this
+        if (typeof action === 'function') {
+          return resolve(action(file))
+        }
+        resolve(action)
+      }).then(action => {
+        formNode.setAttribute('action', action)
+        formNode.submit()
+        dataSpan.innerHTML = ''
+        this.$emit('start', file)
+      })
     },
   },
   mounted () {

@@ -5,15 +5,18 @@ export default {
     const uploaderProps = {
       props: {
         action: '//jsonplaceholder.typicode.com/posts/',
-        type: 'drag',
-        accept: '.png',
+        data: { a: 1, b: 2 },
+        headers: {
+          Authorization: 'xxxxxxx',
+        },
+        directory: true,
         beforeUpload (file) {
           console.log('beforeUpload', file.name)
         },
       },
       on: {
         start (file) {
-          console.log('start', file, file.name)
+          console.log('start', file.name)
         },
         success (file) {
           console.log('success', file)
@@ -25,8 +28,8 @@ export default {
           console.log('error', err)
         },
       },
-      style: { display: 'inline-block', width: '200px', height: '200px', background: '#eee' },
+      style: { margin: '100px' },
     }
-    return <Upload {...uploaderProps}></Upload>
+    return <Upload {...uploaderProps}><a>开始上传</a></Upload>
   },
 }

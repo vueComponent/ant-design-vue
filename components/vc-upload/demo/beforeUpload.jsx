@@ -4,7 +4,7 @@ export default {
   render () {
     const uploaderProps = {
       props: {
-        action: '/upload.do',
+        action: '//jsonplaceholder.typicode.com/posts/',
         multiple: true,
         beforeUpload (file, fileList) {
           console.log(file, fileList)
@@ -18,14 +18,14 @@ export default {
         },
       },
       on: {
-        start: (file) => {
-          console.log('onStart', file.name)
+        start (file) {
+          console.log('start', file, file.name)
         },
         success (file) {
-          console.log('onSuccess', file)
+          console.log('success', file)
         },
         error (err) {
-          console.log('onError', err)
+          console.log('error', err)
         },
       },
     }

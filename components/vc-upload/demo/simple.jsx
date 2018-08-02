@@ -16,7 +16,7 @@ export default {
       return null
     }
     const propsObj = {
-      action: '/upload.do',
+      action: '//jsonplaceholder.typicode.com/posts/',
       data: { a: 1, b: 2 },
       headers: {
         Authorization: 'xxxxxxx',
@@ -27,18 +27,17 @@ export default {
       },
     }
     const propsEvent = {
-      start: (file) => {
-        console.log('onStart', file.name)
-        // this.refs.inner.abort(file);
+      start (file) {
+        console.log('start', file, file.name)
       },
       success (file) {
-        console.log('onSuccess', file)
+        console.log('success', file)
       },
       progress (step, file) {
-        console.log('onProgress', Math.round(step.percent), file.name)
+        console.log('progress', Math.round(step.percent), file.name)
       },
       error (err) {
-        console.log('onError', err)
+        console.log('error', err)
       },
     }
     const uploaderProps = {
@@ -93,8 +92,13 @@ export default {
               height: '500px',
             }}
           >
-            <Upload {...uploaderProps1} style={{ display: 'inline-block' }}>
-              <a>开始上传2</a></Upload>
+            <Upload
+              {...uploaderProps1}
+              component='div'
+              style={{ display: 'inline-block' }}
+            >
+              <a>开始上传2</a>
+            </Upload>
           </div>
         </div>
 

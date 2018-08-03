@@ -14,7 +14,7 @@
 | confirm | 点击确认的回调 | function(e) |
 | visibleChange | 显示隐藏的回调 | function(visible) |
 
-更多属性请参考 [Tooltip](#/cn/components/tooltip/#API)。
+更多属性请参考 [Tooltip](/ant-design/components/tooltip-cn/#API)。
 
 ## 注意
 

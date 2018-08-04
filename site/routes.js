@@ -8,10 +8,10 @@ const beforeEnter = (to, from, next) => {
   next()
 }
 export default [
-  { path: '/ant-design/components',
+  { path: '/ant-design-vue/components',
     component: Layout,
     props: (route) => {
-      const name = route.path.split('/ant-design/components/')[1].split('/')[0]
+      const name = route.path.split('/ant-design-vue/components/')[1].split('/')[0]
       return { name, showDemo: true }
     },
     children: demoRoutes.map((item) => ({
@@ -19,7 +19,7 @@ export default [
       beforeEnter,
     })),
   },
-  { path: '/ant-design/iframe',
+  { path: '/ant-design-vue/iframe',
     component: Iframe,
     children: demoRoutes.map((item) => ({
       ...item,
@@ -30,7 +30,7 @@ export default [
     })),
   },
   {
-    path: '/ant-design',
+    path: '/ant-design-vue',
     component: Layout,
     props: (route) => {
       const name = route.path.split('/docs/vue/')[1].split('/')[0]
@@ -97,8 +97,8 @@ export default [
         component: () => import('../CHANGELOG.zh-CN.md'),
         beforeEnter,
       },
-      { path: '', redirect: '/ant-design/vue/docs/introduce/' },
+      { path: '', redirect: '/ant-design-vue/vue/docs/introduce/' },
     ],
   },
-  { path: '/*', redirect: '/ant-design/docs/vue/introduce/' },
+  { path: '/*', redirect: '/ant-design-vue/docs/vue/introduce/' },
 ]

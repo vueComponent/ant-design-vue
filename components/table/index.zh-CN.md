@@ -46,9 +46,9 @@ const columns = [{
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |
 | footer | 表格尾部 | Function(currentPageData)\|slot-scope |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |
-| loading | 页面是否加载中 | boolean\|[object](/ant-design/components/spin-cn) | false |
+| loading | 页面是否加载中 | boolean\|[object](/ant-design-vue/components/spin-cn) | false |
 | locale | 默认文案设置，目前包括排序、过滤、空数据文案 | object | filterConfirm: '确定' <br> filterReset: '重置' <br> emptyText: '暂无数据' |
-| pagination | 分页器，参考[配置项](#pagination)或 [pagination](/ant-design/components/pagination-cn/)，设为 false 时不展示和进行分页 | object |  |
+| pagination | 分页器，参考[配置项](#pagination)或 [pagination](/ant-design-vue/components/pagination-cn/)，设为 false 时不展示和进行分页 | object |  |
 | rowClassName | 表格行的类名 | Function(record, index):string | - |
 | rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string\|Function(record):string | 'key' |
 | rowSelection | 列表项是否可选择，[配置项](#rowSelection) | object | null |
@@ -142,7 +142,7 @@ const columns = [{
 | --- | --- | --- | --- |
 | position | 指定分页显示的位置 | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
-更多配置项，请查看 [`Pagination`](/ant-design/components/pagination/)。
+更多配置项，请查看 [`Pagination`](/ant-design-vue/components/pagination/)。
 
 ### rowSelection
 

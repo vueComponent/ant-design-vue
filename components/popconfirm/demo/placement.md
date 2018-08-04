@@ -106,7 +106,7 @@ There are 12 `placement` options available. Use `arrowPointAtCenter` if you want
   </div>
 </template>
 <script>
-import { message } from 'vue-antd-ui'
+import { message } from 'ant-design-vue'
 
 export default {
   data () {

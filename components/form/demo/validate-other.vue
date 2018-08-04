@@ -10,7 +10,7 @@ Demostration for validataion configuration for form controls which are not show 
 
 
 <script>
-import { Form } from 'vue-antd-ui'
+import { Form } from 'ant-design-vue'
 
 const Demo = {
   methods: {

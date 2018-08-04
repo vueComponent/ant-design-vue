@@ -27,7 +27,7 @@ customize the progress dot by setting a scoped slot
 | disabledDate | Function that specifies the dates that cannot be selected | (currentDate: moment) => boolean | - |
 | fullscreen | Whether to display in full-screen | boolean | `true` |
 | locale | The calendar's locale | object | [default]
-(https://github.com/vueComponent/ant-design/blob/master/components/date-picker/locale/example.json) |
+(https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) |
 | mode | The display mode of the calendar | `month` \| `year` | `month` |
 | monthCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will be appended to the cell | function(date: moment) | - |
 | monthFullCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will override the cell | function(date: moment) | - |

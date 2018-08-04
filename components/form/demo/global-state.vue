@@ -16,7 +16,7 @@ The properties passed by the upper component must be declared in the props of `F
 
 
 <script>
-import { Form } from 'vue-antd-ui'
+import { Form } from 'ant-design-vue'
 
 const CustomizedForm = Form.create({
   props: ['username'], // must declare like vue `props` https://vuejs.org/v2/api/#props

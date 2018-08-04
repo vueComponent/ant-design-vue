@@ -101,7 +101,7 @@ export default {
       docsList.forEach(({ key, enTitle, title }) => {
         const k = isCN ? `${key}-cn` : key
         docsMenu.push(<a-menu-item key={k}>
-          <router-link to={`/ant-design/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
+          <router-link to={`/ant-design-vue/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
         </a-menu-item>)
       })
       return docsMenu
@@ -172,10 +172,10 @@ export default {
         searchData.push({
           title,
           subtitle,
-          url: `/ant-design/components/${key}/`,
+          url: `/ant-design-vue/components/${key}/`,
         })
         MenuItems.push(<a-menu-item key={key}>
-          <router-link to={`/ant-design/components/${key}/`}>{linkValue}</router-link>
+          <router-link to={`/ant-design-vue/components/${key}/`}>{linkValue}</router-link>
         </a-menu-item>)
       })
       MenuGroup.push(<a-menu-item-group title={type}>{MenuItems}</a-menu-item-group>)

@@ -30,7 +30,7 @@ Table with editable cells.
 <script>
 import EditableCell from './EditableCell'
 /*
-* EditableCell Code https://github.com/vueComponent/ant-design/blob/master/components/table/demo/EditableCell.vue
+* EditableCell Code https://github.com/vueComponent/ant-design-vue/blob/master/components/table/demo/EditableCell.vue
 */
 export default {
   components: {

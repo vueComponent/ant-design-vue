@@ -48,18 +48,18 @@ $ npm run dev
 └── yarn.lock
 ```
 
-现在从 yarn 或 npm 安装并引入 vue-antd-ui。
+现在从 yarn 或 npm 安装并引入 ant-design-vue。
 
 ```bash
-$ yarn add vue-antd-ui
+$ yarn add ant-design-vue
 ```
 
 修改 `src/main.js`，引入 antd 的按钮组件以及全部样式文件。
 
 ```jsx
 import Vue from 'vue'
-import Button from 'vue-antd-ui/lib/button'
-import 'vue-antd-ui/dist/antd.css'
+import Button from 'ant-design-vue/lib/button'
+import 'ant-design-vue/dist/antd.css'
 import App from './App'
 
 Vue.component(Button.name, Button)
@@ -96,7 +96,7 @@ new Vue({
 
 ### 使用 babel-plugin-import
 
-[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一个用于按需加载组件代码和样式的 babel 插件（[原理](/ant-design/docs/vue/getting-started-cn/#按需加载)）。
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一个用于按需加载组件代码和样式的 babel 插件（[原理](/ant-design-vue/docs/vue/getting-started-cn/#按需加载)）。
 
 ```bash
 $ yarn add babel-plugin-import --dev
@@ -119,20 +119,20 @@ $ yarn add babel-plugin-import --dev
 +   "plugins": [
 +     "transform-vue-jsx",
 +     "transform-runtime",
-+     ["import", { "libraryName": "vue-antd-ui", "libraryDirectory": "es", "style": "css" }]
++     ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }]
 +   ]
   }
 ```
 
 
-然后移除前面在 `src/main.js` 里全量添加的 `import 'vue-antd-ui/dist/antd.css';` 样式代码，并且按下面的格式引入模块。
+然后移除前面在 `src/main.js` 里全量添加的 `import 'ant-design-vue/dist/antd.css';` 样式代码，并且按下面的格式引入模块。
 
 ```diff
   // src/main.js
   import Vue from 'vue'
-- import Button from 'vue-antd-ui/lib/button';
-+ import { Button } from 'vue-antd-ui';
-- import 'vue-antd-ui/dist/antd.css'
+- import Button from 'ant-design-vue/lib/button';
++ import { Button } from 'ant-design-vue';
+- import 'ant-design-vue/dist/antd.css'
   import App from './App'
 
   Vue.component(Button.name, Button)
@@ -147,9 +147,9 @@ $ yarn add babel-plugin-import --dev
   })
 ```
 
-最后重启 `npm run dev` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/ant-design/docs/vue/getting-started-cn/#按需加载)。
+最后重启 `npm run dev` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/ant-design-vue/docs/vue/getting-started-cn/#按需加载)。
 
 ### 自定义主题
 
-按照 [配置主题](/ant-design/docs/vue/customize-theme-cn) 的要求，自定义主题需要用到 less 变量覆盖功能。
+按照 [配置主题](/ant-design-vue/docs/vue/customize-theme-cn) 的要求，自定义主题需要用到 less 变量覆盖功能。
 

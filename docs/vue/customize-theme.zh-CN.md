@@ -1,7 +1,7 @@
 
 # 定制主题
 
-vue-antd-ui的组件结构及样式和Antd React完全一致，你可以参考Antd React的定制方式进行配置。
+ant-design-vue的组件结构及样式和Antd React完全一致，你可以参考Antd React的定制方式进行配置。
 
 Ant Design 设计规范上支持一定程度的样式定制，以满足业务和品牌上多样化的视觉需求，包括但不限于主色、圆角、边框和部分组件的视觉定制。
 
@@ -11,7 +11,7 @@ Ant Design 设计规范上支持一定程度的样式定制，以满足业务和
 
 antd 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并定义了一系列全局/组件的样式变量，你可以根据需求进行相应调整。
 
-- [默认样式变量](https://github.com/vueComponent/ant-design/blob/master/components/style/themes/default.less)
+- [默认样式变量](https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less)
 
 如果以上变量不能满足你的定制需求，可以给我们提 issue。
 
@@ -37,7 +37,7 @@ antd 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并定�
 
 - 样式必须加载 less 格式。
   - 如果你在使用 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 的 `style` 配置来引入样式，需要将配置值从 `'css'` 改为 `true`，这样会引入 less 文件。
-  - 如果你是通过 `'vue-antd-ui/dist/antd.css'` 引入样式的，改为 `vue-antd-ui/dist/antd.less`。
+  - 如果你是通过 `'ant-design-vue/dist/antd.css'` 引入样式的，改为 `ant-design-vue/dist/antd.less`。
 - 如果要覆盖 `@icon-url` 变量，内容需要包括引号 `"@icon-url": "'your-icon-font-path'"`。
 
 ### 2) less
@@ -47,7 +47,7 @@ antd 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并定�
 建立一个单独的 `less` 文件如下，再引入这个文件。
 
    ```less
-   @import "~vue-antd-ui/dist/antd.less";   // 引入官方提供的 less 样式入口文件
+   @import "~ant-design-vue/dist/antd.less";   // 引入官方提供的 less 样式入口文件
    @import "your-theme-file.less";   // 用于覆盖上面定义的变量
    ```
 

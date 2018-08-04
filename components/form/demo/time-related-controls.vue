@@ -10,7 +10,7 @@ the `value` of time-related components is `moment`. So, we need to pre-process t
 
 
 <script>
-import { Form } from 'vue-antd-ui'
+import { Form } from 'ant-design-vue'
 
 const TimeRelatedForm = {
   methods: {

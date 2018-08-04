@@ -31,14 +31,14 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 
 ## Environment Support
 
-* Modern browsers and Internet Explorer 9+ (with [polyfills](https://vuecomponent.github.io/ant-design/docs/vue/getting-started-cn/#兼容性))
+* Modern browsers and Internet Explorer 9+ (with [polyfills](https://vuecomponent.github.io/ant-design-vue/docs/vue/getting-started-cn/#兼容性))
 * Server-side Rendering
 
 ## Version
 
-- Stable: [![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat-square)](https://www.npmjs.org/package/vue-antd-ui)
+- Stable: [![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
 
-You can subscribe to this feed for new version notifications: https://github.com/vueComponent/ant-design/releases.atom
+You can subscribe to this feed for new version notifications: https://github.com/vueComponent/ant-design-vue/releases.atom
 
 ## Installation
 
@@ -47,11 +47,11 @@ You can subscribe to this feed for new version notifications: https://github.com
 **We recommend using npm or yarn to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
 ```bash
-$ npm install vue-antd-ui --save
+$ npm install ant-design-vue --save
 ```
 
 ```bash
-$ yarn add vue-antd-ui
+$ yarn add ant-design-vue
 ```
 
 If you are in a bad network environment，you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
@@ -62,7 +62,7 @@ If you are in a bad network environment，you can try other registries and tools
 
 Add `script` and `link` tags in your browser and use the global variable `antd`.
 
-We provide `antd.js` `antd.css` and `antd.min.js` `antd.min.css` under `vue-antd-ui/dist` in antd's npm package. You can also download these files directly from [![jsdelivr](https://data.jsdelivr.com/v1/package/npm/vue-antd-ui/badge)](https://www.jsdelivr.com/package/npm/vue-antd-ui) or [unpkg](https://unpkg.com/vue-antd-ui/dist/).
+We provide `antd.js` `antd.css` and `antd.min.js` `antd.min.css` under `ant-design-vue/dist` in antd's npm package. You can also download these files directly from [![jsdelivr](https://data.jsdelivr.com/v1/package/npm/ant-design-vue/badge)](https://www.jsdelivr.com/package/npm/ant-design-vue) or [unpkg](https://unpkg.com/ant-design-vue/dist/).
 
 > **We strongly discourage loading the entire files** this will add bloat to your application and make it more difficult to receive bugfixes and updates. Antd is intended to be used in conjunction with a build tool, such as [webpack](https://webpack.github.io/), which will make it easy to import only the parts of antd that you are using.
 
@@ -72,14 +72,14 @@ We provide `antd.js` `antd.css` and `antd.min.js` `antd.min.css` under `vue-antd
 
 ```jsx
 import Vue from 'vue'
-import { DatePicker } from 'vue-antd-ui';
+import { DatePicker } from 'ant-design-vue';
 Vue.component(DatePicker.name, DatePicker)
 ```
 
 And import stylesheets manually:
 
 ```jsx
-import 'vue-antd-ui/dist/antd.css';  // or 'vue-antd-ui/dist/antd.less'
+import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 ```
 
 ### Use modularized antd
@@ -90,7 +90,7 @@ import 'vue-antd-ui/dist/antd.css';  // or 'vue-antd-ui/dist/antd.less'
    // .babelrc or babel-loader option
    {
      "plugins": [
-       ["import", { "libraryName": "vue-antd-ui", "libraryDirectory": "es", "style": "css" }] // `style: true` for less
+       ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }] // `style: true` for less
      ]
    }
    ```
@@ -101,33 +101,33 @@ import 'vue-antd-ui/dist/antd.css';  // or 'vue-antd-ui/dist/antd.less'
 
    ```jsx
    // import js and css modularly, parsed by babel-plugin-import
-   import { DatePicker } from 'vue-antd-ui';
+   import { DatePicker } from 'ant-design-vue';
    ```
 
 - Manually import
 
    ```jsx
-   import DatePicker from 'vue-antd-ui/lib/date-picker';  // for js
-   import 'vue-antd-ui/lib/date-picker/style/css';        // for css
-   // import 'vue-antd-ui/lib/date-picker/style';         // that will import less
+   import DatePicker from 'ant-design-vue/lib/date-picker';  // for js
+   import 'ant-design-vue/lib/date-picker/style/css';        // for css
+   // import 'ant-design-vue/lib/date-picker/style';         // that will import less
    ```
 
 
 ## Links
 
-- [Home Page](https://vuecomponent.github.io/ant-design/)
+- [Home Page](https://vuecomponent.github.io/ant-design-vue/)
 - [Ant Design React](https://ant.design/)
-- [Components](https://vuecomponent.github.io/ant-design/docs/react/introduce)
-- [Change Log](/ant-design/changelog)
+- [Components](https://vuecomponent.github.io/ant-design-vue/docs/react/introduce)
+- [Change Log](/ant-design-vue/changelog)
 - [CodeSandbox template](https://codesandbox.io/s/2wpk21kzvr) for bug reports
-- [Customize Theme](/ant-design/docs/vue/customize-theme)
+- [Customize Theme](/ant-design-vue/docs/vue/customize-theme)
 
 
 
 ## Contributing
 
 
-If you'd like to help us improve antd, just create a [Pull Request](https://github.com/vueComponent/ant-design/pulls). Feel free to report bugs and issues [here](https://vuecomponent.github.io/vue-antd-issue-helper/).
+If you'd like to help us improve antd, just create a [Pull Request](https://github.com/vueComponent/ant-design-vue/pulls). Feel free to report bugs and issues [here](https://vuecomponent.github.io/vue-antd-issue-helper/).
 
 > If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
 

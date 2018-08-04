@@ -1,5 +1,5 @@
 {
-    "name": "vue-antd-ui",
+    "name": "ant-design-vue",
     "version": "1.0.1",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
@@ -40,13 +40,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/vueComponent/ant-design.git"
+        "url": "git+https://github.com/vueComponent/ant-design-vue.git"
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/vueComponent/ant-design/issues"
+        "url": "https://github.com/vueComponent/ant-design-vue/issues"
     },
-    "homepage": "https://github.com/vueComponent/ant-design",
+    "homepage": "https://github.com/vueComponent/ant-design-vue",
     "pre-commit": [
         "lint:style",
         "lint"

@@ -10,7 +10,7 @@ When user visit a page with a list of items, and want to create a new item. The 
 
 
 <script>
-import { Form } from 'vue-antd-ui'
+import { Form } from 'ant-design-vue'
 
 const CollectionCreateForm = Form.create()(
   {

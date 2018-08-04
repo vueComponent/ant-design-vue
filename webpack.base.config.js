@@ -8,10 +8,15 @@ const babelConfig = getBabelCommonConfig(false)
 babelConfig.plugins.push(require.resolve('babel-plugin-syntax-dynamic-import'))
 
 const fetch = (str, tag, scoped) => {
-  const $ = cheerio.load(str, { decodeEntities: false, xmlMode: true })
-  if (!tag) return str
+  const $ = cheerio.load(str, {
+    decodeEntities: false,
+    xmlMode: true,
+  })
+  if (!tag) { return str }
   if (tag === 'style') {
-    return scoped ? $(`${tag}[scoped]`).html() : $(`${tag}`).not(`${tag}[scoped]`).html()
+    return scoped
+      ? $(`${tag}[scoped]`).html()
+      : $(`${tag}`).not(`${tag}[scoped]`).html()
   }
   return $(tag).html()
 }
@@ -97,33 +102,47 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
       cn,
       sourceCode,
     }
-    jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle))
-    const codeHtml = code ? md.render(code) : ''
-    const cnHtml = cn ? md.render(cn) : ''
+    jsfiddle = md
+      .utils
+      .escapeHtml(JSON.stringify(jsfiddle))
+    const codeHtml = code
+      ? md.render(code)
+      : ''
+    const cnHtml = cn
+      ? md.render(cn)
+      : ''
     let newContent = `
       <template>
         <demo-box :jsfiddle="${jsfiddle}">
           <template slot="component">${template}</template>
           <template slot="description">${cnHtml}</template>
-          <template slot="us-description">${us ? md.render(us) : ''}</template>
+          <template slot="us-description">${us
+    ? md.render(us)
+    : ''}</template>
           <template slot="code">${codeHtml}</template>
         </demo-box>
       </template>`
-    newContent += script ? `
+    newContent += script
+      ? `
       <script>
       ${script || ''}
       </script>
-      ` : ''
-    newContent += style ? `
+      `
+      : ''
+    newContent += style
+      ? `
       <style>
       ${style || ''}
       </style>
-      ` : ''
-    newContent += scopedStyle ? `
+      `
+      : ''
+    newContent += scopedStyle
+      ? `
       <style scoped>
       ${scopedStyle || ''}
       </style>
-      ` : ''
+      `
+      : ''
     const t = new Token('html_block', '', 0)
     t.content = newContent
     tokens.push(t)
@@ -132,9 +151,7 @@ md.core.ruler.push('update_template', function replace ({ tokens }) {
 
 module.exports = {
   entry: {
-    index: [
-      `./site/${process.env.ENTRY_INDEX || 'index'}.js`,
-    ],
+    index: [`./site/${process.env.ENTRY_INDEX || 'index'}.js`],
   },
   module: {
     rules: [
@@ -143,50 +160,46 @@ module.exports = {
         use: [
           {
             loader: 'vue-antd-md-loader',
-            options: Object.assign(md, { wrapper: 'div',
+            options: Object.assign(md, {
+              wrapper: 'div',
               vueLoaderOptions: {
                 loaders: {
                   js: [
-                    { loader: 'babel-loader',
+                    {
+                      loader: 'babel-loader',
                       options: {
                         presets: ['env'],
-                        plugins: [
-                          'transform-vue-jsx',
-                          'transform-object-rest-spread',
-                        ],
-                      }},
+                        plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
+                      },
+                    },
                   ],
                 },
               },
             }),
           },
         ],
-      },
-      {
+      }, {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
           loaders: {
             js: [
-              { loader: 'babel-loader',
+              {
+                loader: 'babel-loader',
                 options: {
                   presets: ['env'],
-                  plugins: [
-                    'transform-vue-jsx',
-                    'transform-object-rest-spread',
-                    'syntax-dynamic-import',
-                  ],
-                }},
+                  plugins: ['transform-vue-jsx', 'transform-object-rest-spread', 'syntax-dynamic-import'],
+                },
+              },
             ],
           },
         },
-      },
-      {
+      }, {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader', exclude: /node_modules/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
         options: babelConfig,
-      },
-      {
+      }, {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
@@ -196,12 +209,16 @@ module.exports = {
     ],
   },
   resolve: {
-    modules: ['node_modules', path.join(__dirname, '../node_modules')],
-    extensions: ['.js', '.jsx', '.vue', '.md'],
+    modules: [
+      'node_modules', path.join(__dirname, '../node_modules'),
+    ],
+    extensions: [
+      '.js', '.jsx', '.vue', '.md',
+    ],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'antd': path.join(__dirname, 'components'),
-      'vue-antd-ui': path.join(__dirname, 'components'),
+      'ant-design-vue': path.join(__dirname, 'components'),
       '@': path.join(__dirname, ''),
     },
   },

@@ -2,7 +2,7 @@
 
 import { createForm } from '../index'
 import { regionStyle } from './styles'
-import { Switch } from 'vue-antd-ui'
+import { Switch } from 'ant-design-vue'
 
 const TopForm = {
   props: {
@@ -10,16 +10,16 @@ const TopForm = {
   },
   render () {
     const { getFieldProps } = this.form
-    return (<div style={ regionStyle }>
-      <div>has email? </div>
-      <div>
-        <Switch {...getFieldProps('on', {
-          initialValue: true,
-          valuePropName: 'checked',
-        })}
-        />
+    return (
+      <div style={regionStyle}>
+        <div>has email?
+        </div>
+        <div>
+          <Switch
+            {...getFieldProps('on', { initialValue: true, valuePropName: 'checked' })}/>
+        </div>
       </div>
-    </div>)
+    )
   },
 }
 
@@ -35,18 +35,14 @@ const BottomForm = {
       ...regionStyle,
       display: on ? 'block' : 'none',
     }
-    return (<div style={ style }>
-      <div>email: </div>
-      <div>
-        <input {...form.getFieldProps('email', {
-          rules: [{
-            type: 'email',
-          }],
-          hidden: !on,
-        })}
-        />
+    return (
+      <div style={style}>
+        <div>email:</div>
+        <div>
+          <input {...form.getFieldProps('email', { rules: [{ type: 'email' }], hidden: !on })}/>
+        </div>
       </div>
-    </div>)
+    )
   },
 }
 
@@ -63,13 +59,15 @@ const Form = {
 
   render () {
     const { form } = this
-    return (<div>
-      <TopForm form={ form }/>
-      <BottomForm form={ form }/>
-      <div style={ regionStyle }>
-        <button onClick={this.onSubmit}>submit</button>
+    return (
+      <div>
+        <TopForm form={form}/>
+        <BottomForm form={form}/>
+        <div style={regionStyle}>
+          <button onClick={this.onSubmit}>submit</button>
+        </div>
       </div>
-    </div>)
+    )
   },
 }
 
@@ -77,9 +75,11 @@ const NewForm = createForm()(Form)
 
 export default {
   render () {
-    return (<div>
-      <h2>parallel form</h2>
-      <NewForm />
-    </div>)
+    return (
+      <div>
+        <h2>parallel form</h2>
+        <NewForm/>
+      </div>
+    )
   },
 }

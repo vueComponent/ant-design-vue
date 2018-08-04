@@ -48,18 +48,18 @@ Below is the default directory structure.
 └── yarn.lock
 ```
 
-Now we install `vue-antd-ui` from yarn or npm.
+Now we install `ant-design-vue` from yarn or npm.
 
 ```bash
-$ yarn add vue-antd-ui
+$ yarn add ant-design-vue
 ```
 
 Modify `src/main.js`, import Button component from `antd`.
 
 ```jsx
 import Vue from 'vue'
-import Button from 'vue-antd-ui/lib/button'
-import 'vue-antd-ui/dist/antd.css'
+import Button from 'ant-design-vue/lib/button'
+import 'ant-design-vue/dist/antd.css'
 import App from './App'
 
 Vue.component(Button.name, Button)
@@ -99,7 +99,7 @@ Now we need to customize the default webpack config.
 
 ### Use babel-plugin-import
 
-[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) is a babel plugin for importing components on demand ([How does it work?](/ant-design/docs/vue/getting-started/#Import-on-Demand)).
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) is a babel plugin for importing components on demand ([How does it work?](/ant-design-vue/docs/vue/getting-started/#Import-on-Demand)).
 
 ```bash
 $ yarn add babel-plugin-import --dev
@@ -122,19 +122,19 @@ Modify `.babelrc`.
 +   "plugins": [
 +     "transform-vue-jsx",
 +     "transform-runtime",
-+     ["import", { "libraryName": "vue-antd-ui", "libraryDirectory": "es", "style": "css" }]
++     ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }]
 +   ]
   }
 ```
 
-Remove the `import 'vue-antd-ui/dist/antd.css';` statement added before because `babel-plugin-import` will import styles and import components like below:
+Remove the `import 'ant-design-vue/dist/antd.css';` statement added before because `babel-plugin-import` will import styles and import components like below:
 
 ```diff
   // src/main.js
   import Vue from 'vue'
-- import Button from 'vue-antd-ui/lib/button';
-+ import { Button } from 'vue-antd-ui';
-- import 'vue-antd-ui/dist/antd.css'
+- import Button from 'ant-design-vue/lib/button';
++ import { Button } from 'ant-design-vue';
+- import 'ant-design-vue/dist/antd.css'
   import App from './App'
 
   Vue.component(Button.name, Button)
@@ -149,8 +149,8 @@ Remove the `import 'vue-antd-ui/dist/antd.css';` statement added before because 
   })
 ```
 
-Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/ant-design/docs/vue/getting-started/#Import-on-Demand).
+Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/ant-design-vue/docs/vue/getting-started/#Import-on-Demand).
 
 ### Customize Theme
 
-According to the [Customize Theme documentation](/ant-design/docs/vue/customize-theme), to customize the theme, we need to modify `less` variables with tools such as [less-loader](https://github.com/webpack/less-loader).
+According to the [Customize Theme documentation](/ant-design-vue/docs/vue/customize-theme), to customize the theme, we need to modify `less` variables with tools such as [less-loader](https://github.com/webpack/less-loader).

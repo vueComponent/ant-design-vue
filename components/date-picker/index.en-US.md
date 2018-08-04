@@ -31,7 +31,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | disabled | determine whether the DatePicker is disabled | boolean | false |
 | disabledDate | specify the date that cannot be selected | (currentDate: moment) => boolean | - |
 | getCalendarContainer | to set the container of the floating layer, while the default is to create a `div` element in `body` | function(trigger) | - |
-| locale | localization configuration | object | [default](https://github.com/vueComponent/ant-design/blob/master/components/date-picker/locale/example.json) |
+| locale | localization configuration | object | [default](https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) |
 | open | open state of picker | boolean | - |
 | placeholder | placeholder of date input | string\|RangePicker\[] | - |
 | popupStyle | to customize the style of the popup calendar | object | {} |
@@ -58,7 +58,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | disabledTime | to specify the time that cannot be selected | function(date) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM-DD" |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
-| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/ant-design/components/time-picker/#API) |
+| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker/#API) |
 | showTime.defaultValue | to set default time of selected date | [moment](http://momentjs.com/) | moment() |
 | showToday | whether to show "Today" button | boolean | true |
 | value(v-model) | to set date | [moment](http://momentjs.com/) | - |
@@ -107,7 +107,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges | preseted ranges for quick selection | { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } \| () => { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" | - |
-| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/ant-design/components/time-picker/#API) |
+| showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker/#API) |
 | showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
 | value(v-model) | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 

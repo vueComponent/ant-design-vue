@@ -18,7 +18,7 @@ cd site-dist
 git init
 git add -f .
 git commit -m "Travis build"
-git push --force --quiet "https://${GITHUB_TOKEN}@github.com/vueComponent/ant-design.git" master:gh-pages > /dev/null
+git push --force --quiet "https://${GITHUB_TOKEN}@github.com/vueComponent/ant-design-vue.git" master:gh-pages > /dev/null
 
 
 echo "Done updating gh-pages\n"

@@ -2,6 +2,16 @@
 
 ---
 
+## 1.0.2
+
+`2018-08-04`
+- 🎉 修改组件库名称为`ant-design-vue`
+- 🌟 官方站点支持IE9访问[a8a5f8](https://github.com/vueComponent/ant-design-vue/commit/a8a5f854c3b6a78df526caf2fb391e5c9d0848ac)
+- 🐞 修复导出未定义变量引起的提醒问题[#87](https://github.com/vueComponent/ant-design-vue/issues/87)
+- 🐞 修复部分组件类名重复问题[b48bbac](https://github.com/vueComponent/ant-design-vue/commit/b48bbac695dabec9160d947f9b27b2d91028c455)
+- 🐞 修复`Select`组件label不更新问题[da1b924](https://github.com/vueComponent/ant-design-vue/commit/da1b924cba0fcc871b73590ac3ebd96af81b3897)
+- 🛠 更正了若干文档错误
+
 ## 1.0.1
 
 `2018-07-27`

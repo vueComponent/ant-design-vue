@@ -2,6 +2,16 @@
 
 ---
 
+## 1.0.2
+
+`2018-08-04`
+- 🎉 Modify the component library name to `ant-design-vue`
+- 🌟 The official site supports IE9 access[a8a5f8](https://github.com/vueComponent/ant-design-vue/commit/a8a5f854c3b6a78df526caf2fb391e5c9d0848ac)
+- 🐞 Fix reminder issues caused by exporting undefined variables[#87](https://github.com/vueComponent/ant-design-vue/issues/87)
+- 🐞 Fix some component classname duplicates[b48bbac](https://github.com/vueComponent/ant-design-vue/commit/b48bbac695dabec9160d947f9b27b2d91028c455)
+- 🐞 Fix `Select` component label does not update the problem[da1b924](https://github.com/vueComponent/ant-design-vue/commit/da1b924cba0fcc871b73590ac3ebd96af81b3897)
+- 🛠 Corrected some documentation errors
+
 ## 1.0.1
 
 `2018-07-27`

@@ -1,11 +1,14 @@
 import { setTransform, isTransformSupported } from './utils'
 import addDOMEventListener from 'add-dom-event-listener'
 import debounce from 'lodash/debounce'
+import PropTypes from '../../_util/vue-types'
+
 function noop () {
 }
 export default {
   props: {
     scrollAnimated: { type: Boolean, default: true },
+    navWrapper: PropTypes.func.def(arg => arg),
   },
 
   data () {
@@ -243,7 +246,7 @@ export default {
 
     getScrollBarNode (content) {
       const { next, prev } = this
-      const { prefixCls, scrollAnimated } = this.$props
+      const { prefixCls, scrollAnimated, navWrapper } = this.$props
       const showNextPrev = prev || next
 
       const prevButton = (
@@ -299,7 +302,7 @@ export default {
           <div class={`${prefixCls}-nav-wrap`} ref='navWrap'>
             <div class={`${prefixCls}-nav-scroll`}>
               <div class={navClasses} ref='nav'>
-                {content}
+                {navWrapper(content)}
               </div>
             </div>
           </div>

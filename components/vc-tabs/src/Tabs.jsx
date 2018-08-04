@@ -1,11 +1,11 @@
 
-// based on rc-tabs 9.2.4 e16ee09531476757b18b7bc0ec1daddcc0d40d65
 import Icon from '../../icon'
 import KeyCode from './KeyCode'
 import TabContent from './TabContent'
 import ScrollableInkTabBar from './ScrollableInkTabBar'
 import hasProp from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
+import PropTypes from '../../_util/vue-types'
 function getDefaultActiveKey (t) {
   let activeKey
   t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {
@@ -55,6 +55,7 @@ export default {
         return ['line', 'card', 'editable-card'].includes(value)
       },
     },
+    navWrapper: PropTypes.func.def(arg => arg),
   },
   data () {
     return {
@@ -157,6 +158,7 @@ export default {
       classes,
       setActiveKey,
       $slots,
+      navWrapper,
     } = this
     const panels = []
 
@@ -189,6 +191,7 @@ export default {
         prefixCls: prefixCls,
         tabBarPosition: tabBarPosition,
         activeKey: stateActiveKey,
+        navWrapper,
       },
       style: this.tabBarProps.style || {},
       on: {

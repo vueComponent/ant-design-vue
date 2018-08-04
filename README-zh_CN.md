@@ -1,30 +1,30 @@
 <p align="center">
-  <a href="https://vuecomponent.github.io/ant-design/">
-    <img width="230" src="https://raw.githubusercontent.com/vueComponent/ant-design/master/logo.png">
+  <a href="https://vuecomponent.github.io/ant-design-vue/">
+    <img width="230" src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/logo.png">
   </a>
 </p>
 
-# [Ant Design Vue](https://vuecomponent.github.io/ant-design/)
+# [Ant Design Vue](https://vuecomponent.github.io/ant-design-vue/)
 
 [![Travis branch](https://img.shields.io/travis/vueComponent/ant-design.svg?style=flat-square)](https://travis-ci.org/vueComponent/ant-design)
-[![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design)
-[![bitHound Dependencies](https://www.bithound.io/github/vueComponent/ant-design/badges/dependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/vueComponent/ant-design/badges/devDependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design/master/dependencies/npm)
-[![npm package](https://img.shields.io/npm/v/vue-antd-ui.svg?style=flat-square)](https://www.npmjs.org/package/vue-antd-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-antd-ui.svg?style=flat-square)](http://www.npmtrends.com/vue-antd-ui)
+[![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design-vue/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design)
+[![bitHound Dependencies](https://www.bithound.io/github/vueComponent/ant-design-vue/badges/dependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design-vue/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/vueComponent/ant-design-vue/badges/devDependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design-vue/master/dependencies/npm)
+[![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
+[![NPM downloads](http://img.shields.io/npm/dm/ant-design-vue.svg?style=flat-square)](http://www.npmtrends.com/ant-design-vue)
 [![Join the chat at https://gitter.im/vueComponent/ant-design-english](https://badges.gitter.im/vueComponent/ant-design-english.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) (English)
 [![Join the chat at https://gitter.im/vueComponent/ant-design](https://img.shields.io/gitter/room/vueComponent/ant-design.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文）
 
 
 Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。
 
-[官网国内镜像](http://tangjinzhou.gitee.io/ant-design/docs/vue/introduce-cn/)
+[官网国内镜像](http://tangjinzhou.gitee.io/ant-design-vue/docs/vue/introduce-cn/)
 
 [README in English](README.md)
 
 ## 赞助
 
-vue-antd-ui是一个开源的独立项目，为了项目能够更好的持续的发展，我们期望获得你的支持，你可以通过如下任何一种方式支持我们：
+ant-design-vue是一个开源的独立项目，为了项目能够更好的持续的发展，我们期望获得你的支持，你可以通过如下任何一种方式支持我们：
 
 - [Patreon](https://www.patreon.com/tangjinzhou)
 - [opencollective](https://opencollective.com/ant-design-278)
@@ -45,11 +45,11 @@ vue-antd-ui是一个开源的独立项目，为了项目能够更好的持续的
 ### 使用 npm 或 yarn 安装
 
 ```bash
-$ npm install vue-antd-ui --save
+$ npm install ant-design-vue --save
 ```
 
 ```bash
-$ yarn add vue-antd-ui
+$ yarn add ant-design-vue
 ```
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
@@ -57,7 +57,7 @@ $ yarn add vue-antd-ui
 
 ## 链接
 
-- [首页](https://vuecomponent.github.io/ant-design/)
+- [首页](https://vuecomponent.github.io/ant-design-vue/)
 - [Vue官方文档](https://cn.vuejs.org/)
 - [Antd React](http://ant.design/)
 

@@ -7,7 +7,7 @@ const baseWebpackConfig = require('./webpack.base.config')
 module.exports = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/ant-design/',
+    publicPath: '/ant-design-vue/',
     filename: 'build.js',
   },
   module: {
@@ -39,7 +39,7 @@ module.exports = merge(baseWebpackConfig, {
     host: '0.0.0.0',
     historyApiFallback: {
       rewrites: [
-        { from: /./, to: '/ant-design/index.html' },
+        { from: /./, to: '/ant-design-vue/index.html' },
       ],
     },
     disableHostCheck: true,

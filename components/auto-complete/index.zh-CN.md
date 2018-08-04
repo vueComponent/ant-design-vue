@@ -10,7 +10,7 @@
 | autoFocus | 自动获取焦点 | boolean | false |
 | backfill | 使用键盘选择选项的时候把选中项回填到输入框中 | boolean | false |
 | slot="default" (自定义输入框) | 自定义输入框 | HTMLInputElement / HTMLTextAreaElement | `<Input />` |
-| dataSource | 自动完成的数据源 | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |
+| dataSource | 自动完成的数据源 | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |
 | defaultActiveFirstOption | 是否默认高亮第一个选项。 | boolean | true |
 | defaultValue | 指定默认选中的条目 | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes}> | 无 |
 | disabled | 是否禁用 | boolean | false |

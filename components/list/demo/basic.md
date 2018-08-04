@@ -18,7 +18,7 @@ Basic list.
       <a-list-item-meta
         description="Ant Design, a design language for background applications, is refined by Ant UED Team"
       >
-        <a slot="title" href="https://vuecomponent.github.io/ant-design/">{{item.title}}</a>
+        <a slot="title" href="https://vuecomponent.github.io/ant-design-vue/">{{item.title}}</a>
         <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
       </a-list-item-meta>
     </a-list-item>

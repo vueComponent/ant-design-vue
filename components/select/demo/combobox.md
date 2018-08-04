@@ -2,13 +2,13 @@
 <cn>
 #### 智能提示
 输入框自动完成功能，下面是一个账号注册表单的例子。
-推荐使用 [AutoComplete](/ant-design/components/auto-complete-cn/) 组件。
+推荐使用 [AutoComplete](/ant-design-vue/components/auto-complete-cn/) 组件。
 </cn>
 
 <us>
 #### Automatic completion
 Automatic completion of select input.
-Using the [AutoComplete](/ant-design/components/auto-complete/) component is strongly recommended instead as it is more flexible and capable.
+Using the [AutoComplete](/ant-design-vue/components/auto-complete/) component is strongly recommended instead as it is more flexible and capable.
 </us>
 
 ```html

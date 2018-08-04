@@ -10,9 +10,9 @@
 | grid | The grid type of list. You can set grid to something like {gutter: 16, column: 4} | object | - |
 | header | List header renderer | string\|slot | - |
 | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |
-| loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://vuecomponent.github.io/ant-design/components/spin/#API) | false |
+| loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://vuecomponent.github.io/ant-design-vue/components/spin/#API) | false |
 | loadMore | Shows a load more content | string\|slot | - |
-| pagination | Pagination [config](https://vuecomponent.github.io/ant-design/components/pagination/#API), hide it by setting it to false | boolean \| object | false |
+| pagination | Pagination [config](https://vuecomponent.github.io/ant-design-vue/components/pagination/#API), hide it by setting it to false | boolean \| object | false |
 | split | Toggles rendering of the split under the list item | boolean | true |
 | renderItem | Custom item renderer, slot="renderItem" and slot-scope="item, index"  | (item, index) => vNode |  | - |
 

@@ -15,8 +15,8 @@ Wrap your app with `LocaleProvider`, and apply the corresponding language packag
   </a-locale-provider>
 </template>
 <script>
-// you should use import enUS from 'vue-antd-ui/lib/locale-provider/en_US';
-import enUS from 'vue-antd-ui/locale-provider/en_US';
+// you should use import enUS from 'ant-design-vue/lib/locale-provider/en_US';
+import enUS from 'ant-design-vue/locale-provider/en_US';
 export default {
   data(){
     return {

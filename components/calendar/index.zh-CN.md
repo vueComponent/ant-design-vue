@@ -25,7 +25,7 @@
 | defaultValue | 默认展示的日期 | [moment](http://momentjs.com/) | 默认日期 |
 | disabledDate | 不可选择的日期 | (currentDate: moment) => boolean | 无 |
 | fullscreen | 是否全屏显示 | boolean | true |
-| locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design/blob/master/components/date-picker/locale/example.json) |
+| locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) |
 | mode | 初始模式，`month/year` | string | month |
 | monthCellRender | 作用域插槽，自定义渲染月单元格，返回内容会被追加到单元格 | function(date: moment) | 无 |
 | monthFullCellRender | 作用域插槽，自定义渲染月单元格，返回内容覆盖单元格 | function(date: moment) | 无 |

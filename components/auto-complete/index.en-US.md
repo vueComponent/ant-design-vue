@@ -10,7 +10,7 @@
 | autoFocus | get focus when component mounted | boolean | false |
 | backfill | backfill selected item the input when using keyboard | boolean | false |
 | slot="default" (for customize input element) | customize input element | HTMLInputElement / HTMLTextAreaElement | `<Input />` |
-| dataSource | Data source for autocomplete | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |
+| dataSource | Data source for autocomplete | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |
 | defaultValue | Initial selected option. | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | - |
 | disabled | Whether disabled select | boolean | false |

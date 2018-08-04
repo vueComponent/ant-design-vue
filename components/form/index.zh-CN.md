@@ -33,11 +33,11 @@
 
 相关示例如下：
 
-[coordinated-controls](/ant-design/components/form-cn/#components-form-demo-coordinated-controls)
+[coordinated-controls](/ant-design-vue/components/form-cn/#components-form-demo-coordinated-controls)
 
-[dynamic-rules](/ant-design/components/form-cn/#components-form-demo-dynamic-rules)
+[dynamic-rules](/ant-design-vue/components/form-cn/#components-form-demo-dynamic-rules)
 
-[horizontal-login-form](/ant-design/components/form-cn/#components-form-demo-horizontal-login-form)
+[horizontal-login-form](/ant-design-vue/components/form-cn/#components-form-demo-horizontal-login-form)
 
 ### Form.create(options)
 
@@ -136,10 +136,10 @@ CustomizedForm = Form.create({})(CustomizedForm);
 | hasFeedback | 配合 validateStatus 属性使用，展示校验状态图标，建议只配合 Input 组件使用 | boolean | false |
 | help | 提示信息，如不设置，则会根据校验规则自动生成 | string\|slot |  |
 | label | label 标签的文本 | string\|slot |  |
-| labelCol | label 标签布局，同 `<Col>` 组件，设置 `span` `offset` 值，如 `{span: 3, offset: 12}` 或 `sm: {span: 3, offset: 12}` | [object](/ant-design/components/grid-cn/#Col) |  |
+| labelCol | label 标签布局，同 `<Col>` 组件，设置 `span` `offset` 值，如 `{span: 3, offset: 12}` 或 `sm: {span: 3, offset: 12}` | [object](/ant-design-vue/components/grid-cn/#Col) |  |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |
 | validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string |  |
-| wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/ant-design/components/grid-cn/#Col) |  |
+| wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/ant-design-vue/components/grid-cn/#Col) |  |
 | fieldDecoratorId | 对应`getFieldDecorator(id, options)`的第一个参数`id`，如需收集数据需要设置该字段 | string | 无 |
 | fieldDecoratorOptions | 对应`getFieldDecorator(id, options)`的第二个参数`options` | object | {} |
 

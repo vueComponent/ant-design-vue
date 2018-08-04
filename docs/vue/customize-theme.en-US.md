@@ -1,7 +1,7 @@
 
 # Customize Theme
 
-The structure and styles of vue-antd-ui are exactly the same as those of Antd. You can refer to the Antd React customization mode for configuration.
+The structure and styles of ant-design-vue are exactly the same as those of Antd. You can refer to the Antd React customization mode for configuration.
 
 Ant Design allows you to customize some basic design aspects in order to meet the needs of UI diversity from business and brand, including primary color, border radius, border color, etc.
 
@@ -11,7 +11,7 @@ Ant Design allows you to customize some basic design aspects in order to meet th
 
 We are using [Less](http://lesscss.org/) as the development language for styling. A set of less variables are defined for each design aspect that can be customized to your needs.
 
-- [Default Variables](https://github.com/vueComponent/ant-design/blob/master/components/style/themes/default.less)
+- [Default Variables](https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less)
 
 Please report an issue if the existing list of variables is not enough for you.
 
@@ -34,7 +34,7 @@ Note:
 
 - Importing styles from less files is necessary.
   - If you import styles by specifying the `style` option of [babel-plugin-import](https://github.com/ant-design/babel-plugin-import), change it from `'css'` to `true`, which will import the `less` version of antd.
-  - If you import styles from `'vue-antd-ui/dist/antd.css'`, change it to `vue-antd-ui/dist/antd.less`.
+  - If you import styles from `'ant-design-vue/dist/antd.css'`, change it to `ant-design-vue/dist/antd.less`.
 - If you want to override `@icon-url`, the value must be contained in quotes like `"@icon-url": "'your-icon-font-path'"`.
 
 ### 2) Overriding Less variables (alternative way)
@@ -44,7 +44,7 @@ Override variables via less definition files.
 Create a standalone less file like the one below, and import it in your project.
 
    ```less
-   @import "~vue-antd-ui/dist/antd.less";   // import official less entry file
+   @import "~ant-design-vue/dist/antd.less";   // import official less entry file
    @import "your-theme-file.less";   // override variables here
    ```
 

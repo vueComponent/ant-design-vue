@@ -14,7 +14,7 @@ const modulePlugin = new ExtractTextPlugin({
 module.exports = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, './site-dist'),
-    publicPath: '/ant-design/',
+    publicPath: '/ant-design-vue/',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[chunkhash].async.js',
   },

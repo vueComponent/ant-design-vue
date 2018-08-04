@@ -10,7 +10,7 @@ Add or remove form items dynamically.
 
 
 <script>
-import { Form } from 'vue-antd-ui'
+import { Form } from 'ant-design-vue'
 
 let uuid = 0
 const DynamicFieldSet = {

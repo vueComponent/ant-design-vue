@@ -18,18 +18,15 @@ module.exports = function (modules) {
     },
   ]
 
-  // if (distFileBaseName !== 'antd') {
-  //   pluginImportOptions.push({
-  //     style: 'css',
-  //     libraryDirectory: 'components',
-  //     libraryName: 'antd',
-  //   })
-  // }
+  // if (distFileBaseName !== 'antd') {   pluginImportOptions.push({     style:
+  // 'css',     libraryDirectory: 'components',     libraryName: 'antd',   }) }
 
-  babelConfig.plugins.push([
-    require.resolve('babel-plugin-import'),
-    pluginImportOptions,
-  ])
+  babelConfig
+    .plugins
+    .push([
+      require.resolve('babel-plugin-import'),
+      pluginImportOptions,
+    ])
 
   const config = {
     devtool: 'source-map',
@@ -40,8 +37,12 @@ module.exports = function (modules) {
     },
 
     resolve: {
-      modules: ['node_modules', path.join(__dirname, '../node_modules')],
-      extensions: ['.js', '.jsx', '.vue', '.md', '.json'],
+      modules: [
+        'node_modules', path.join(__dirname, '../node_modules'),
+      ],
+      extensions: [
+        '.js', '.jsx', '.vue', '.md', '.json',
+      ],
       alias: {
         'vue$': 'vue/dist/vue.esm.js',
         '@': process.cwd(),
@@ -73,26 +74,24 @@ module.exports = function (modules) {
               options: {
                 loaders: {
                   js: [
-                    { loader: 'babel-loader',
+                    {
+                      loader: 'babel-loader',
                       options: {
                         presets: ['env'],
-                        plugins: [
-                          'transform-vue-jsx',
-                          'transform-object-rest-spread',
-                        ],
-                      }},
+                        plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
+                      },
+                    },
                   ],
                 },
               },
             },
           ],
-        },
-        {
+        }, {
           test: /\.(js|jsx)$/,
-          loader: 'babel-loader', exclude: /node_modules/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
           options: babelConfig,
-        },
-        {
+        }, {
           test: /\.css$/,
           use: ExtractTextPlugin.extract({
             use: [
@@ -101,19 +100,13 @@ module.exports = function (modules) {
                 options: {
                   sourceMap: true,
                 },
-              },
-              {
+              }, {
                 loader: 'postcss-loader',
-                options: Object.assign(
-                  {},
-                  postcssConfig,
-                  { sourceMap: true }
-                ),
+                options: Object.assign({}, postcssConfig, { sourceMap: true }),
               },
             ],
           }),
-        },
-        {
+        }, {
           test: /\.less$/,
           use: ExtractTextPlugin.extract({
             use: [
@@ -122,16 +115,10 @@ module.exports = function (modules) {
                 options: {
                   sourceMap: true,
                 },
-              },
-              {
+              }, {
                 loader: 'postcss-loader',
-                options: Object.assign(
-                  {},
-                  postcssConfig,
-                  { sourceMap: true }
-                ),
-              },
-              {
+                options: Object.assign({}, postcssConfig, { sourceMap: true }),
+              }, {
                 loader: 'less-loader',
                 options: {
                   sourceMap: true,
@@ -144,16 +131,12 @@ module.exports = function (modules) {
     },
 
     plugins: [
-      new ExtractTextPlugin({
-        filename: '[name].css',
-        disable: false,
-        allChunks: true,
-      }),
+      new ExtractTextPlugin({ filename: '[name].css', disable: false, allChunks: true }),
       new CaseSensitivePathsPlugin(),
       new webpack.BannerPlugin(`
 ${distFileBaseName} v${pkg.version}
 
-Copyright 2017-present, vue-antd-ui.
+Copyright 2017-present, ant-design-vue.
 All rights reserved.
       `),
       new webpack.ProgressPlugin((percentage, msg, addInfo) => {
@@ -187,32 +170,38 @@ All rights reserved.
 
     const uncompressedConfig = deepAssign({}, config)
 
-    config.plugins = config.plugins.concat([
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        output: {
-          ascii_only: true,
-        },
-        compress: {
-          warnings: false,
-        },
-      }),
-      new webpack.optimize.ModuleConcatenationPlugin(),
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-      }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
-      }),
-    ])
+    config.plugins = config
+      .plugins
+      .concat([
+        new webpack
+          .optimize
+          .UglifyJsPlugin({
+            sourceMap: true,
+            output: {
+              ascii_only: true,
+            },
+            compress: {
+              warnings: false,
+            },
+          }),
+        new webpack
+          .optimize
+          .ModuleConcatenationPlugin(),
+        new webpack.LoaderOptionsPlugin({ minimize: true }),
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+        }),
+      ])
 
     uncompressedConfig.entry = {
       [distFileBaseName]: entry,
     }
 
-    uncompressedConfig.plugins.push(new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-    }))
+    uncompressedConfig
+      .plugins
+      .push(new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('development'),
+      }))
 
     return [config, uncompressedConfig]
   }

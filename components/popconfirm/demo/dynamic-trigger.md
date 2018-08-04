@@ -28,7 +28,7 @@ Make it pop up under some conditions.
   </div>
 </template>
 <script>
-import { message } from 'vue-antd-ui'
+import { message } from 'ant-design-vue'
 
 export default {
   data () {

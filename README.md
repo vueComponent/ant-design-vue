@@ -6,14 +6,14 @@
 
 # [Ant Design Vue](https://vuecomponent.github.io/ant-design-vue/)
 
-[![Travis branch](https://img.shields.io/travis/vueComponent/ant-design.svg?style=flat-square)](https://travis-ci.org/vueComponent/ant-design-vue)
+[![Travis branch](https://travis-ci.org/vueComponent/ant-design-vue.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design-vue)
 [![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design-vue/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design-vue)
 [![bitHound Dependencies](https://www.bithound.io/github/vueComponent/ant-design-vue/badges/dependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design-vue/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/vueComponent/ant-design-vue/badges/devDependencies.svg)](https://www.bithound.io/github/vueComponent/ant-design-vue/master/dependencies/npm)
 [![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
 [![NPM downloads](http://img.shields.io/npm/dm/ant-design-vue.svg?style=flat-square)](http://www.npmtrends.com/ant-design-vue)
 [![Join the chat at https://gitter.im/vueComponent/ant-design-english](https://badges.gitter.im/vueComponent/ant-design-english.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) (English)
-[![Join the chat at https://gitter.im/vueComponent/ant-design-vue](https://img.shields.io/gitter/room/vueComponent/ant-design.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文）
+[![Join the chat at https://gitter.im/vueComponent/ant-design-vue](https://img.shields.io/gitter/room/vueComponent/ant-design-vue.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-vue?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文）
 
 An enterprise-class UI components based on Ant Design 3.X and Vue.
 
@@ -32,7 +32,7 @@ An enterprise-class UI components based on Ant Design 3.X and Vue.
 ant-design-vue is an open source independent project. In order to achieve better and sustainable development of the project, we hope to get your support. You can support us in any of the following ways:
 
 - [Patreon](https://www.patreon.com/tangjinzhou)
-- [opencollective](https://opencollective.com/ant-design-278)
+- [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
 
 <p align="center">

@@ -7,6 +7,8 @@ import sortBy from 'lodash/sortBy'
 import { isZhCN } from '../util'
 import { Provider, create } from '../../components/_util/store'
 import NProgress from 'nprogress'
+import debounce from 'lodash/debounce'
+import addDOMEventListener from 'add-dom-event-listener'
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -16,6 +18,27 @@ const docsList = [
   { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
   { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
 ]
+function getOffsetTop (element, container = window) {
+  if (!element) {
+    return 0
+  }
+
+  if (!element.getClientRects().length) {
+    return 0
+  }
+
+  const rect = element.getBoundingClientRect()
+
+  if (rect.width || rect.height) {
+    if (container === window) {
+      container = element.ownerDocument.documentElement
+      return rect.top - container.clientTop
+    }
+    return rect.top - container.getBoundingClientRect().top
+  }
+
+  return rect.top
+}
 
 export default {
   props: {
@@ -29,7 +52,9 @@ export default {
     })
     this.subscribe()
     return {
+      showSideBars: true,
       currentSubMenu: [],
+      sidebarHeight: document.documentElement.offsetHeight,
     }
   },
   provide () {
@@ -42,15 +67,29 @@ export default {
       this.unsubscribe()
     }
     clearTimeout(this.timer)
+    if (this.resizeEvent) {
+      this.resizeEvent.remove()
+    }
+    if (this.debouncedResize && this.debouncedResize.cancel) {
+      this.debouncedResize.cancel()
+    }
   },
   mounted () {
-    this.addSubMenu()
-    const nprogressHiddenStyle = document.getElementById('nprogress-style')
-    if (nprogressHiddenStyle) {
-      this.timer = setTimeout(() => {
-        nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle)
-      }, 0)
-    }
+    this.$nextTick(() => {
+      this.addSubMenu()
+      const nprogressHiddenStyle = document.getElementById('nprogress-style')
+      if (nprogressHiddenStyle) {
+        this.timer = setTimeout(() => {
+          nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle)
+        }, 0)
+      }
+
+      this.updateHeight()
+      this.debouncedResize = debounce(() => {
+        this.updateHeight()
+      }, 200)
+      this.resizeEvent = addDOMEventListener(window, 'resize', this.debouncedResize)
+    })
   },
   watch: {
     '$route.path': function () {
@@ -59,6 +98,12 @@ export default {
     },
   },
   methods: {
+    updateHeight () {
+      const el = this.$refs.sidebar.$el
+      const offsetTop = getOffsetTop(el)
+      const docHeight = document.documentElement.offsetHeight
+      this.sidebarHeight = docHeight - offsetTop
+    },
     addSubMenu () {
       if (this.$route.path.indexOf('/docs/vue/') !== -1) {
         this.$nextTick(() => {
@@ -90,7 +135,7 @@ export default {
       })
       const showApi = this.$route.path.indexOf('/components/') !== -1
       return (
-        <a-anchor>
+        <a-anchor offsetTop={70} class='demo-anchor'>
           {lis}
           {showApi ? <a-anchor-link title='API' href='#API' /> : ''}
         </a-anchor>
@@ -124,6 +169,7 @@ export default {
     },
     mountedCallback () {
       NProgress.done()
+      document.documentElement.scrollTop = 0
     },
   },
 
@@ -186,14 +232,17 @@ export default {
     }
     const config = AllDemo[titleMap[reName]]
     this.resetDocumentTitle(config, reName, isCN)
+    const { showSideBars, sidebarHeight } = this
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
-              <a-col span={6} style={{ maxWidth: '260px' }}>
+              <a-col v-show={showSideBars} style={{ height: `${sidebarHeight}px` }} ref='sidebar' class='site-sidebar' xxl={4} xl={5} lg={5} md={6} sm={8} xs={12}>
+                <div class='drawer-mask' onClick={() => { this.showSideBars = false }}></div>
                 <a-menu
+
                   class='aside-container menu-site'
                   selectedKeys={[name]}
                   defaultOpenKeys={['Components']}
@@ -204,8 +253,14 @@ export default {
                     {MenuGroup}
                   </a-sub-menu>
                 </a-menu>
+                <div class='close-drawer' onClick={() => { this.showSideBars = false }}>
+                  <a-icon type='close'/>
+                </div>
               </a-col>
-              <a-col span={18}>
+              <div v-show={!showSideBars} class='open-drawer' onClick={() => { this.showSideBars = true }}>
+                <a-icon type='bars'/>
+              </div>
+              <a-col style='float: right;' xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <div class='content main-container'>
                   <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
@@ -234,8 +289,10 @@ export default {
                 </div>
               </a-col>
             </a-row>
+
           </div>
         </a-locale-provider>
+
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
       </div>
     )

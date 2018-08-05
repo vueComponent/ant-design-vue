@@ -32,11 +32,14 @@ export default {
     return (
       <header id='header'>
         <a-row>
-          <a-col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
+          <a-col class='header-left' xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: '/ant-design-vue' }} id='logo'>
               <img alt='logo' height='32' src='https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/logo.png' />
               <span>  Ant Design Vue</span>
             </router-link>
+            <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
+              {isCN ? 'English' : '中文'}
+            </a-button>
           </a-col>
           <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
             <div id='search-box' style='display: block'>

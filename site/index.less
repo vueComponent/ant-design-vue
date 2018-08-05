@@ -100,9 +100,10 @@
   z-index: 1;
   overflow-y: scroll;
 }
-@media (min-width: 576px) and (max-width: 768px) {
+@media only screen and (max-width: 767.99px) {
   .main-wrapper {
     z-index: 11;
+    margin-top: 0px;
   }
   .site-sidebar{
     width: 100%;
@@ -112,6 +113,7 @@
       width: 80%;
       z-index: 1;
       position: relative;
+      min-height: 100%;
     }
   }
   .drawer-mask{
@@ -141,7 +143,7 @@
     border-radius: 0 4px 4px 0;
   }
   .open-drawer{
-    position: absolute;
+    position: fixed;
     top: 72px;
     width: 41px;
     height: 40px;
@@ -159,6 +161,15 @@
   }
   .toc-affix {
     display: none !important;
+  }
+  .header-left .header-lang-button{
+    margin-right: 10px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+  }
+  #header {
+    position: relative;
   }
 }
 @media (min-width: 768px) {

@@ -81,9 +81,9 @@ export default {
     })
   },
   render () {
-    const { classes, prefixCls, src, icon, childrenStyle, $slots } = this
+    const { classes, prefixCls, src, icon, childrenStyle, $slots, $listeners } = this
     return (
-      <span class={classes}>
+      <span {...{ on: $listeners, class: classes }}>
         {src ? <img src={src}/>
           : (icon ? <Icon type={icon} />
             : <span

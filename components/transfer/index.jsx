@@ -423,7 +423,9 @@ export default {
       <LocaleReceiver
         componentName='Transfer'
         defaultLocale={defaultLocale.Transfer}
-        children={this.renderTransfer}
+        scopedSlots={
+          { default: this.renderTransfer }
+        }
       >
       </LocaleReceiver>
     )

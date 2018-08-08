@@ -171,7 +171,9 @@ export default {
       <LocaleReceiver
         componentName='TimePicker'
         defaultLocale={defaultLocale}
-        children={this.renderTimePicker}
+        scopedSlots={
+          { default: this.renderTimePicker }
+        }
       />
     )
   },

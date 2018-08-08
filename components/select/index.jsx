@@ -156,7 +156,6 @@ export default {
         class: cls,
         ref: 'vcSelect',
       }
-
       return (
         <VcSelect {...selectProps}>
           {
@@ -176,7 +175,9 @@ export default {
       <LocaleReceiver
         componentName='Select'
         defaultLocale={defaultLocale.Select}
-        children={this.renderSelect}
+        scopedSlots={
+          { default: this.renderSelect }
+        }
       />
     )
   },

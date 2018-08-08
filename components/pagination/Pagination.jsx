@@ -71,7 +71,9 @@ export default {
       <LocaleReceiver
         componentName='Pagination'
         defaultLocale={enUS}
-        children={this.renderPagination}
+        scopedSlots={
+          { default: this.renderPagination }
+        }
       />
     )
   },

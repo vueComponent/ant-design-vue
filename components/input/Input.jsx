@@ -3,6 +3,7 @@ import TextArea from './TextArea'
 import omit from 'omit.js'
 import inputProps from './inputProps'
 import { hasProp, getComponentFromProp, getStyle, getClass } from '../_util/props-util'
+import { isIE, isIE9 } from '../_util/env'
 
 function fixControlledValue (value) {
   if (typeof value === 'undefined' || value === null) {
@@ -47,6 +48,10 @@ export default {
       this.$emit('keydown', e)
     },
     handleChange (e) {
+      // https://github.com/vueComponent/ant-design-vue/issues/92
+      if (isIE && !isIE9 && this.stateValue === e.target.value) {
+        return
+      }
       if (!hasProp(this, 'value')) {
         this.stateValue = e.target.value
       } else {

@@ -129,7 +129,9 @@ export default {
       <LocaleReceiver
         componentName='Modal'
         defaultLocale={getConfirmLocale()}
-        children={this.renderFooter}
+        scopedSlots={
+          { default: this.renderFooter }
+        }
       />
     )
     const footer = getComponentFromProp(this, 'footer')

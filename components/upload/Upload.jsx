@@ -228,7 +228,9 @@ export default {
       <LocaleReceiver
         componentName='Upload'
         defaultLocale={defaultLocale.Upload}
-        children={this.renderUploadList}
+        scopedSlots={
+          { default: this.renderUploadList }
+        }
       >
       </LocaleReceiver>
     ) : null

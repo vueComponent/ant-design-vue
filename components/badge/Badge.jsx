@@ -71,8 +71,8 @@ export default {
       [`${prefixCls}-not-a-wrapper`]: !children.length,
     })
     const styleWithOffset = offset ? {
-      marginTop: offset[0],
-      marginLeft: offset[1],
+      marginLeft: typeof offset[0] === 'number' ? `${offset[0]}px` : offset[0],
+      marginTop: typeof offset[1] === 'number' ? `${offset[1]}px` : offset[1],
       ...numberStyle,
     } : numberStyle
     // <Badge status="success" />

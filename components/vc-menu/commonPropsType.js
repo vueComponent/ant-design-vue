@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types'
 export default {
-  prefixCls: PropTypes.string.def('ant-menu'),
+  prefixCls: PropTypes.string.def('rc-menu'),
   focusable: PropTypes.bool.def(true),
   multiple: PropTypes.bool,
   defaultActiveFirst: PropTypes.bool,

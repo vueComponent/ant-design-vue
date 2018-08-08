@@ -62,7 +62,7 @@ export default function connect (mapStateToProps) {
         },
       },
       render () {
-        const { $listeners, $slots, $attrs, $scopedSlots, subscribed, store } = this
+        const { $listeners, $slots = {}, $attrs, $scopedSlots, subscribed, store } = this
         const props = getOptionProps(this)
         const wrapProps = {
           props: {
@@ -72,11 +72,14 @@ export default function connect (mapStateToProps) {
           },
           on: $listeners,
           attrs: $attrs,
-          slots: $slots,
           scopedSlots: $scopedSlots,
         }
         return (
-          <WrappedComponent {...wrapProps}/>
+          <WrappedComponent {...wrapProps}>
+            {Object.keys($slots).map(name => {
+              return <template slot={name}>{$slots[name]}</template>
+            })}
+          </WrappedComponent>
         )
       },
     }

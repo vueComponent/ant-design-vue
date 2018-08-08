@@ -22,12 +22,12 @@ if (typeof window !== 'undefined') {
 }
 
 const BreakpointMap = PropTypes.shape({
-  xs: PropTypes.string,
-  sm: PropTypes.string,
-  md: PropTypes.string,
-  lg: PropTypes.string,
-  xl: PropTypes.string,
-  xxl: PropTypes.strin,
+  xs: PropTypes.number,
+  sm: PropTypes.number,
+  md: PropTypes.number,
+  lg: PropTypes.number,
+  xl: PropTypes.number,
+  xxl: PropTypes.number,
 }).loose
 
 const RowProps = {
@@ -104,7 +104,7 @@ export default {
       if (typeof gutter === 'object') {
         for (let i = 0; i <= responsiveArray.length; i++) {
           const breakpoint = responsiveArray[i]
-          if (this.state.screens[breakpoint] && gutter[breakpoint] !== undefined) {
+          if (this.screens[breakpoint] && gutter[breakpoint] !== undefined) {
             return gutter[breakpoint]
           }
         }

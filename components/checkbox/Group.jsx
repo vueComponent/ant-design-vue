@@ -9,7 +9,7 @@ export default {
       type: String,
     },
     defaultValue: {
-      default: () => [],
+      default: undefined,
       type: Array,
     },
     value: {
@@ -33,7 +33,7 @@ export default {
   data () {
     const { value, defaultValue } = this
     return {
-      sValue: value || defaultValue,
+      sValue: value || defaultValue || [],
     }
   },
   methods: {

@@ -20,7 +20,7 @@ export default {
     class () {
       const { visible, hiddenClassName } = this.$props
       return {
-        [hiddenClassName]: !visible,
+        // [hiddenClassName]: !visible,
       }
     },
   },

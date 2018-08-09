@@ -323,7 +323,7 @@ const SubPopupMenu = {
     const domWrapProps = {
       props: {
         tag: 'ul',
-        hiddenClassName: `${prefixCls}-hidden`,
+        // hiddenClassName: `${prefixCls}-hidden`,
         visible,
       },
       attrs: {

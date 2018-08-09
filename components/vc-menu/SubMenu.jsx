@@ -13,6 +13,7 @@ import {
   loopMenuItemRecursively,
   getMenuIdFromSubMenuEventKey,
 } from './util'
+import getTransitionProps from '../_util/getTransitionProps'
 
 let guid = 0
 
@@ -380,26 +381,26 @@ const SubMenu = {
 
       subPopupMenuProps.class = ` ${baseProps.prefixCls}-sub`
       let animProps = { appear: transitionAppear }
-
+      let transitionProps = {
+        props: animProps,
+        on: {},
+      }
       if (baseProps.openTransitionName) {
-        animProps.name = baseProps.openTransitionName
+        transitionProps = getTransitionProps(baseProps.openTransitionName, { appear: transitionAppear })
       } else if (typeof baseProps.openAnimation === 'object') {
         animProps = { ...animProps, ...baseProps.openAnimation.props || {}}
         if (!transitionAppear) {
           animProps.appear = false
         }
       } else if (typeof baseProps.openAnimation === 'string') {
-        animProps.name = baseProps.openAnimation
+        transitionProps = getTransitionProps(baseProps.openAnimation, { appear: transitionAppear })
       }
-      const transitionProps = {
-        props: animProps,
-      }
+
       if (typeof baseProps.openAnimation === 'object' && baseProps.openAnimation.on) {
         transitionProps.on = { ...baseProps.openAnimation.on }
       }
-
       return <transition {...transitionProps}>
-        <SubPopupMenu {...subPopupMenuProps}/>
+        <SubPopupMenu v-show={props.isOpen} {...subPopupMenuProps}/>
       </transition>
     },
   },
@@ -482,7 +483,7 @@ const SubMenu = {
     )
     const children = this.renderChildren(this.$slots.default)
 
-    const getPopupContainer = this.isRootMenu
+    const getPopupContainer = this.parentMenu.isRootMenu
       ? this.parentMenu.getPopupContainer : triggerNode => triggerNode.parentNode
     const popupPlacement = popupPlacementMap[props.mode]
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {}

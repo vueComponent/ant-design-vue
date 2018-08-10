@@ -131,9 +131,9 @@ export default {
   provide () {
     return {
       iframeDemo: !this.iframeName ? {
-        'fixed-sider': '/ant-design/iframe/layout/#fixed-sider',
-        'fixed-header': '/ant-design/iframe/layout/#fixed-header',
-        'sider': '/ant-design/iframe/layout/#sider',
+        'fixed-sider': '/ant-design-vue/iframe/layout/#fixed-sider',
+        'fixed-header': '/ant-design-vue/iframe/layout/#fixed-header',
+        'sider': '/ant-design-vue/iframe/layout/#sider',
       } : {},
     }
   },

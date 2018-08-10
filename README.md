@@ -27,18 +27,6 @@ An enterprise-class UI components based on Ant Design 3.X and Vue.
 - A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
 
-## Donation
-
-ant-design-vue is an open source independent project. In order to achieve better and sustainable development of the project, we hope to get your support. You can support us in any of the following ways:
-
-- [Patreon](https://www.patreon.com/tangjinzhou)
-- [opencollective](https://opencollective.com/ant-design-vue)
-- [paypal](https://www.paypal.me/tangjinzhou)
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/6937879/43032487-932a5536-8cea-11e8-9175-9c006e938a82.png">
-</p>
-
 ## Using npm or yarn
 
 **We recommend using npm or yarn to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
@@ -59,4 +47,14 @@ If you are in a bad network environment，you can try other registries and tools
 - [Home page](https://vuecomponent.github.io/ant-design-vue/)
 - [Vue](https://vuejs.org/)
 - [Ant Design React](http://ant.design/)
+
+## Donation
+
+ant-design-vue is an MIT-licensed open source project. In order to achieve better and sustainable development of the project, we expect to gain more [backers](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md). You can support us in any of the following ways:
+
+- [Patreon](https://www.patreon.com/tangjinzhou)
+- [opencollective](https://opencollective.com/ant-design-vue)
+- [paypal](https://www.paypal.me/tangjinzhou)
+- [支付宝或微信](https://user-images.githubusercontent.com/6937879/43032487-932a5536-8cea-11e8-9175-9c006e938a82.png)
+
 

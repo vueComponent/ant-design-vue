@@ -1,14 +1,13 @@
 <script>
 import AllDemo from '../demo'
 import Header from './header'
+import Footer from './footer'
 import zhCN from 'antd/locale-provider/zh_CN'
 import enUS from 'antd/locale-provider/default'
 import sortBy from 'lodash/sortBy'
 import { isZhCN } from '../util'
 import { Provider, create } from '../../components/_util/store'
 import NProgress from 'nprogress'
-import debounce from 'lodash/debounce'
-import addDOMEventListener from 'add-dom-event-listener'
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -18,27 +17,6 @@ const docsList = [
   { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
   { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
 ]
-function getOffsetTop (element, container = window) {
-  if (!element) {
-    return 0
-  }
-
-  if (!element.getClientRects().length) {
-    return 0
-  }
-
-  const rect = element.getBoundingClientRect()
-
-  if (rect.width || rect.height) {
-    if (container === window) {
-      container = element.ownerDocument.documentElement
-      return rect.top - container.clientTop
-    }
-    return rect.top - container.getBoundingClientRect().top
-  }
-
-  return rect.top
-}
 
 export default {
   props: {
@@ -83,12 +61,6 @@ export default {
           nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle)
         }, 0)
       }
-
-      this.updateHeight()
-      this.debouncedResize = debounce(() => {
-        this.updateHeight()
-      }, 200)
-      this.resizeEvent = addDOMEventListener(window, 'resize', this.debouncedResize)
     })
   },
   watch: {
@@ -98,12 +70,6 @@ export default {
     },
   },
   methods: {
-    updateHeight () {
-      const el = this.$refs.sidebar.$el
-      const offsetTop = getOffsetTop(el)
-      const docHeight = document.documentElement.offsetHeight
-      this.sidebarHeight = docHeight - offsetTop
-    },
     addSubMenu () {
       if (this.$route.path.indexOf('/docs/vue/') !== -1) {
         this.$nextTick(() => {
@@ -141,10 +107,14 @@ export default {
         </a-anchor>
       )
     },
-    getDocsMenu (isCN) {
+    getDocsMenu (isCN, pagesKey) {
       const docsMenu = []
-      docsList.forEach(({ key, enTitle, title }) => {
+      docsList.forEach(({ key, enTitle, title }, index) => {
         const k = isCN ? `${key}-cn` : key
+        pagesKey.push({ name: k,
+          url: `/ant-design-vue/docs/vue/${k}/`,
+          title: isCN ? title : enTitle,
+        })
         docsMenu.push(<a-menu-item key={k}>
           <router-link to={`/ant-design-vue/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
         </a-menu-item>)
@@ -176,7 +146,6 @@ export default {
   render () {
     const name = this.name
     const isCN = isZhCN(name)
-    // name = name.replace(/-cn\/?$/, '')
     const titleMap = {}
     const menuConfig = {
       General: [],
@@ -187,6 +156,9 @@ export default {
       Feedback: [],
       Other: [],
     }
+    const pagesKey = []
+    let prevPage = null
+    let nextPage = null
     const searchData = []
     for (const [title, d] of Object.entries(AllDemo)) {
       const type = d.type || 'Other'
@@ -196,14 +168,8 @@ export default {
       menuConfig[type] = menuConfig[type] || []
       menuConfig[type].push(d)
     }
+    const docsMenu = this.getDocsMenu(isCN, pagesKey)
     const reName = name.replace(/-cn\/?$/, '')
-    // const Demo = new Vue({
-    //   template: '<demo-component/>',
-    //   components: {
-    //     'demo-component': () => import(`../../components/${AllDemo[titleMap[reName]].key}/demo/index.vue`),
-    //   },
-    // })
-    // AllDemo[titleMap[reName]]
     const MenuGroup = []
     for (const [type, menus] of Object.entries(menuConfig)) {
       const MenuItems = []
@@ -215,6 +181,11 @@ export default {
         if (isCN) {
           key = `${key}-cn`
         }
+        pagesKey.push({
+          name: key,
+          url: `/ant-design-vue/components/${key}/`,
+          title: isCN ? `${title} ${subtitle}` : title,
+        })
         searchData.push({
           title,
           subtitle,
@@ -226,29 +197,34 @@ export default {
       })
       MenuGroup.push(<a-menu-item-group title={type}>{MenuItems}</a-menu-item-group>)
     }
+    pagesKey.forEach((item, index) => {
+      if (item.name === name) {
+        prevPage = pagesKey[index - 1]
+        nextPage = pagesKey[index + 1]
+      }
+    })
     let locale = zhCN
     if (!isCN) {
       locale = enUS
     }
     const config = AllDemo[titleMap[reName]]
     this.resetDocumentTitle(config, reName, isCN)
-    const { showSideBars, sidebarHeight } = this
+    const { showSideBars } = this
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
-              <a-col v-show={showSideBars} style={{ height: `${sidebarHeight}px` }} ref='sidebar' class='site-sidebar' xxl={4} xl={5} lg={5} md={6} sm={8} xs={12}>
+              <a-col v-show={showSideBars} ref='sidebar' class='site-sidebar' xxl={4} xl={5} lg={5} md={6} sm={8} xs={12}>
                 <div class='drawer-mask' onClick={() => { this.showSideBars = false }}></div>
                 <a-menu
-
                   class='aside-container menu-site'
                   selectedKeys={[name]}
                   defaultOpenKeys={['Components']}
                   inlineIndent={40}
                   mode='inline'>
-                  {this.getDocsMenu(isCN)}
+                  {docsMenu}
                   <a-sub-menu title={`Components(${searchData.length})`} key='Components'>
                     {MenuGroup}
                   </a-sub-menu>
@@ -287,12 +263,15 @@ export default {
                     ></router-view>
                   </div> : ''}
                 </div>
+                <section class='prev-next-nav'>
+                  {prevPage ? <router-link class='prev-page' to={`${prevPage.url}`}>{prevPage.title}</router-link> : ''}
+                  {nextPage ? <router-link class='next-page' to={`${nextPage.url}`}>{nextPage.title}</router-link> : ''}
+                </section>
               </a-col>
             </a-row>
-
           </div>
         </a-locale-provider>
-
+        <Footer ref='footer' isCN={isCN}/>
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
       </div>
     )

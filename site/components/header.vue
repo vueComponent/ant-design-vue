@@ -35,7 +35,7 @@ export default {
           <a-col class='header-left' xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: '/ant-design-vue' }} id='logo'>
               <img alt='logo' height='32' src='https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/logo.png' />
-              <span>  Ant Design Vue</span>
+              <span style='color: black;font-size: 16px;font-weight: 400;'>Ant Design Vue</span>
             </router-link>
             <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
               {isCN ? 'English' : '中文'}

@@ -2,6 +2,16 @@
 
 ---
 
+## 1.0.3
+
+`2018-08-11`
+- 🐞 修复`Select`子元素不更新问题 [#106](https://github.com/vueComponent/ant-design-vue/issues/106)
+- 🐞 修复`Badge` offset属性X Y轴顺序错误问题，并新增支持number类型 [#99](https://github.com/vueComponent/ant-design-vue/issues/99)
+- 🐞 修复`Input`在ie下中文placeholder触发input事件问题 [#92](https://github.com/vueComponent/ant-design-vue/issues/92)
+- 🐞 修复`Avatar`不接受事件问题 [#102](https://github.com/vueComponent/ant-design-vue/issues/102)
+- 🐞 修复`grid.row`gutter类型错误问题 [4af03c4](https://github.com/vueComponent/ant-design-vue/commit/4af03c4ab9596ede9d1b79c8308d0a3ed58b7a11)
+- 🐞 修复`CheckboxGroup`在`Form`中报defaultValue warning问题 [#110](https://github.com/vueComponent/ant-design-vue/issues/110)
+
 ## 1.0.2
 
 `2018-08-04`

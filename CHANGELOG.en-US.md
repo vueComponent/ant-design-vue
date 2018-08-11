@@ -2,6 +2,16 @@
 
 ---
 
+## 1.0.3
+
+`2018-08-11`
+- 🐞 Fix `Select` children not to update the problem [#106](https://github.com/vueComponent/ant-design-vue/issues/106)
+- 🐞 Fix `Badge` offset x y axis order error and support number type [#99](https://github.com/vueComponent/ant-design-vue/issues/99)
+- 🐞 Fix `Input` trigger input event problem when placeholder is Chinese in IE[#92](https://github.com/vueComponent/ant-design-vue/issues/92)
+- 🐞 Fix `Avatar` does not accept event issues [#102] (https://github.com/vueComponent/ant-design-vue/issues/102)
+- 🐞 Fix `grid.row` gutter type error problem [4af03c4](https://github.com/vueComponent/ant-design-vue/commit/4af03c4ab9596ede9d1b79c8308d0a3ed58b7a11)
+- 🐞 Fix `CheckboxGroup` to report defaultValue warning in `Form` [#110](https://github.com/vueComponent/ant-design-vue/issues/110)
+
 ## 1.0.2
 
 `2018-08-04`

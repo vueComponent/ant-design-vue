@@ -7,7 +7,7 @@ import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-ut
 function noop () {}
 export default {
   props: {
-    trigger: PropTypes.any.def('hover'),
+    trigger: PropTypes.any.def(['hover']),
     defaultVisible: PropTypes.bool,
     visible: PropTypes.bool,
     placement: PropTypes.string.def('right'),
@@ -39,7 +39,7 @@ export default {
         </div>,
         <Content
           key='content'
-          trigger={this.trigger}
+          trigger={this.$refs.trigger}
           prefixCls={prefixCls}
           id={tipId}
           overlay={getComponentFromProp(this, 'overlay')}

@@ -6,15 +6,12 @@ export default {
     overlay: PropTypes.any,
     trigger: PropTypes.any,
   },
-  methods: {
-    updated () {
-      const { trigger } = this
-      if (trigger) {
-        trigger.forcePopupAlign()
-      }
-    },
+  updated () {
+    const { trigger } = this
+    if (trigger) {
+      trigger.forcePopupAlign()
+    }
   },
-
   render () {
     const { overlay, prefixCls } = this
     return (

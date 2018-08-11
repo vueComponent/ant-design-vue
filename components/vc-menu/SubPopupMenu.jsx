@@ -3,7 +3,6 @@ import PropTypes from '../_util/vue-types'
 import { connect } from '../_util/store'
 import BaseMixin from '../_util/BaseMixin'
 import KeyCode from '../_util/KeyCode'
-import createChainedFunction from '../_util/createChainedFunction'
 import classNames from 'classnames'
 import { getKeyFromChildrenIndex, loopMenuItem, noop } from './util'
 import DOMWrap from './DOMWrap'
@@ -314,7 +313,7 @@ const SubPopupMenu = {
   },
   render () {
     const { ...props } = this.$props
-    const { prefixCls, eventKey, visible } = props
+    const { eventKey, visible } = props
     this.instanceArray = []
     const className = classNames(
       props.prefixCls,

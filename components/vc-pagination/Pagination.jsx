@@ -176,6 +176,11 @@ export default {
       let current = this.stateCurrent
       const newCurrent = this.calculatePage(size)
       current = current > newCurrent ? newCurrent : current
+      // fix the issue:
+      // Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
+      if (newCurrent === 0) {
+        current = this.stateCurrent
+      }
       if (typeof size === 'number') {
         if (!hasProp(this, 'pageSize')) {
           this.setState({

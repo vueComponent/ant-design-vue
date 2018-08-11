@@ -21,7 +21,6 @@ export default {
   data () {
     return {
       goInputText: '',
-      stateCurrent: this.current,
     }
   },
   methods: {
@@ -38,15 +37,12 @@ export default {
       if (val === '') {
         return
       }
-      val = Number(val)
-      if (isNaN(val)) {
-        val = this.stateCurrent
-      }
+      val = isNaN(val) ? this.current : Number(val)
       if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
         this.setState({
           goInputText: '',
-          stateCurrent: this.quickGo(val),
         })
+        this.quickGo(val)
       }
     },
   },

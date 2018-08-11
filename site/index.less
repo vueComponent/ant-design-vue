@@ -94,17 +94,14 @@
     font-size: 12px;
   }
 }
+.site-sidebar{
+ z-index: 1;   
+}
 @media only screen and (max-width: 767.99px) {
   .site-sidebar{
     position: fixed;
     z-index: 1;
     overflow-y: scroll;
-  }
-  .main-wrapper {
-    z-index: 11;
-    margin-top: 0px;
-  }
-  .site-sidebar{
     width: 100%;
     top: 0;
     left: 0;
@@ -114,8 +111,14 @@
       z-index: 1;
       position: relative;
       min-height: 100%;
+      border-right: 1px solid #e8e8e8;
     }
   }
+  .main-wrapper {
+    z-index: 11;
+    margin-top: 0px;
+  }
+  
   .drawer-mask{
     background: #000;
     opacity: 0;

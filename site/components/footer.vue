@@ -68,7 +68,7 @@ export default {
                   </a>
                 </div>
                 <div>
-                  <a rel='noopener noreferrer' target='_blank' href='https://vuecomponent.github.io/issue-helper/?lang=zh'>
+                  <a rel='noopener noreferrer' target='_blank' href={`https://vuecomponent.github.io/issue-helper/${isCN ? '?lang=zh' : ''}`}>
                     <span>{isCN ? '报告 Bug' : 'Bug Report'}</span>
                   </a>
                 </div>

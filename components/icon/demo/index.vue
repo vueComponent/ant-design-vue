@@ -47,7 +47,7 @@ export default {
   render () {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md class='api-container' cn={md.cn} us={md.us}/>
         <md cn='### 方向性图标' us='### Directional Icons'/>
         <IconSet class='icons' catigory='direction' />
         <md cn='### 提示建议性图标' us='### Suggested Icons'/>

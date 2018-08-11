@@ -122,7 +122,7 @@ export default {
       return docsMenu
     },
     resetDocumentTitle (component, name, isCN) {
-      let titleStr = 'Vue Antd'
+      let titleStr = 'Ant Design Vue'
       if (component) {
         const { subtitle, title } = component
         const componentName = isCN ? subtitle + ' ' + title : title
@@ -236,8 +236,8 @@ export default {
               <div v-show={!showSideBars} class='open-drawer' onClick={() => { this.showSideBars = true }}>
                 <a-icon type='bars'/>
               </div>
-              <a-col style='float: right;' xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
-                <div class='content main-container'>
+              <a-col class='main-container' xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
+                <div class='content'>
                   <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
                   </div>

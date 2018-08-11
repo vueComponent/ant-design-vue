@@ -120,6 +120,7 @@ export default function createSlider (Component) {
         this.removeDocumentEvents()
         this.onStart(position)
         this.addDocumentMouseEvents()
+        utils.pauseEvent(e)
       },
       onTouchStart (e) {
         if (utils.isNotTouchEvent(e)) return
@@ -168,19 +169,6 @@ export default function createSlider (Component) {
         this.onMouseMoveListener && this.onMouseMoveListener.remove()
         this.onMouseUpListener && this.onMouseUpListener.remove()
         /* eslint-enable no-unused-expressions */
-      },
-      onMouseUp () {
-        // if (this.$children && this.$children[this.prevMovedHandleIndex]) {
-        //   const handleCom = utils.getComponentProps(this.$children[this.prevMovedHandleIndex], 'clickFocus')
-        //   console.log('handleCom', handleCom)
-        //   if (handleCom) {
-        //     // handleCom.clickFocus()
-        //   }
-
-        // }
-        if (this.handlesRefs[this.prevMovedHandleIndex]) {
-          this.handlesRefs[this.prevMovedHandleIndex].clickFocus()
-        }
       },
       onMouseMove (e) {
         if (!this.$refs.sliderRef) {
@@ -245,11 +233,6 @@ export default function createSlider (Component) {
         const ratio = (value - min) / (max - min)
         return ratio * 100
       },
-      onClickMarkLabel (e, value) {
-        e.stopPropagation()
-        this.onChange({ value })
-        // this.$emit('change', value)
-      },
     },
     render (h) {
       const {
@@ -285,9 +268,6 @@ export default function createSlider (Component) {
           min,
           className: `${prefixCls}-mark`,
         },
-        on: {
-          clickLabel: disabled ? noop : this.onClickMarkLabel,
-        },
       }
       return (
         <div
@@ -295,7 +275,6 @@ export default function createSlider (Component) {
           class={sliderClassName}
           onTouchstart={disabled ? noop : this.onTouchStart}
           onMousedown={disabled ? noop : this.onMouseDown}
-          onMouseup={disabled ? noop : this.onMouseUp}
           onKeydown={disabled ? noop : this.onKeyDown}
           onFocus={disabled ? noop : this.onFocus}
           onBlur={disabled ? noop : this.onBlur}

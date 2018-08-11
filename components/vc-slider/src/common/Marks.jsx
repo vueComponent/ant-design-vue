@@ -56,8 +56,6 @@ const Marks = {
           class={markClassName}
           style={markStyle}
           key={point}
-          // onMousedown={(e) => clickLabel(e, point)}
-          // onTouchstart={(e) => clickLabel(e, point)}
         >
           {markLabel}
         </span>

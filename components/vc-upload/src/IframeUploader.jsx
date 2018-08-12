@@ -129,7 +129,7 @@ const IframeUploader = {
       <body>
       <form method="post"
       encType="multipart/form-data"
-      action="${this.action}" id="form"
+      action="" id="form"
       style="display:block;height:9999px;position:relative;overflow:hidden;">
       <input id="input" type="file"
        name="${this.name}"

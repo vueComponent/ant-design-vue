@@ -1,6 +1,16 @@
 import { getPropsData, getSlotOptions, getKey, getAttrs, getComponentFromProp } from '../_util/props-util'
 import { cloneVNodes } from '../_util/vnode'
+
+export function toTitle (title) {
+  if (typeof title === 'string') {
+    return title
+  }
+  return null
+}
 export function getValuePropValue (child) {
+  if (!child) {
+    return null
+  }
   const props = getPropsData(child)
   if ('value' in props) {
     return props.value
@@ -68,14 +78,18 @@ export function toArray (value) {
   return ret
 }
 
+export function getMapKey (value) {
+  return `${typeof value}-${value}`
+}
+
 export function preventDefaultEvent (e) {
   e.preventDefault()
 }
 
-export function findIndexInValueByKey (value, key) {
+export function findIndexInValueBySingleValue (value, singleValue) {
   let index = -1
   for (let i = 0; i < value.length; i++) {
-    if (value[i].key === key) {
+    if (value[i] === singleValue) {
       index = i
       break
     }
@@ -83,15 +97,16 @@ export function findIndexInValueByKey (value, key) {
   return index
 }
 
-export function findIndexInValueByLabel (value, label) {
-  let index = -1
+export function getLabelFromPropsValue (value, key) {
+  let label
+  value = toArray(value)
   for (let i = 0; i < value.length; i++) {
-    if (toArray(value[i].label).join('') === label) {
-      index = i
+    if (value[i].key === key) {
+      label = value[i].label
       break
     }
   }
-  return index
+  return label
 }
 
 export function getSelectKeys (menuItems, value) {
@@ -107,7 +122,7 @@ export function getSelectKeys (menuItems, value) {
     } else {
       const itemValue = getValuePropValue(item)
       const itemKey = item.key
-      if (findIndexInValueByKey(value, itemValue) !== -1 && itemKey) {
+      if (findIndexInValueBySingleValue(value, itemValue) !== -1 && itemKey) {
         selectedKeys.push(itemKey)
       }
     }
@@ -121,7 +136,7 @@ export const UNSELECTABLE_STYLE = {
 }
 
 export const UNSELECTABLE_ATTRIBUTE = {
-  unselectable: 'unselectable',
+  unselectable: 'on',
 }
 
 export function findFirstMenuItem (children) {
@@ -179,5 +194,11 @@ export function validateOptionValue (value, props) {
       `Invalid \`value\` of type \`${typeof value}\` supplied to Option, ` +
       `expected \`string\` when \`tags/combobox\` is \`true\`.`
     )
+  }
+}
+
+export function saveRef (instance, name) {
+  return (node) => {
+    instance[name] = node
   }
 }

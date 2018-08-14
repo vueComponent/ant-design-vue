@@ -24,6 +24,7 @@ const props = {
   isSelected: PropTypes.bool,
   manualRef: PropTypes.func.def(noop),
   role: PropTypes.any,
+  subMenuKey: PropTypes.string,
   // clearSubMenuTimers: PropTypes.func.def(noop),
 }
 const MenuItem = {

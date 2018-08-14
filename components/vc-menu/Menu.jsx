@@ -27,7 +27,7 @@ const Menu = {
     this.store = create({
       selectedKeys,
       openKeys,
-      activeKey: { '0-menu-': getActiveKey(props, props.activeKey) },
+      activeKey: { '0-menu-': getActiveKey({ ...props, children: this.$slots.default || [] }, props.activeKey) },
     })
 
     // this.isRootMenu = true // 声明在props上
@@ -105,7 +105,7 @@ const Menu = {
     // e.g., in rc-select, we need to navigate menu item while
     // current active item is rc-select input box rather than the menu itself
     onKeyDown (e, callback) {
-      this.$refs.innerMenu.__emit('keydown', e, callback)
+      this.$refs.innerMenu.getWrappedInstance().onKeyDown(e, callback)
     },
     onOpenChange (event) {
       const openKeys = this.store.getState().openKeys.concat()

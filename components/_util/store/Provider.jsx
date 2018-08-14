@@ -7,7 +7,7 @@ export default {
   },
   provide () {
     return {
-      _store: this.$props,
+      storeContext: this.$props,
     }
   },
   render () {

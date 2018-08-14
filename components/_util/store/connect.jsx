@@ -19,13 +19,16 @@ export default function connect (mapStateToProps) {
       name: `Connect_${getDisplayName(WrappedComponent)}`,
       props,
       inject: {
-        _store: { default: {}},
+        storeContext: { default: {}},
       },
       data () {
-        this.store = this._store.store
+        this.store = this.storeContext.store
         return {
           subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
         }
+      },
+      watch: {
+
       },
       mounted () {
         this.trySubscribe()
@@ -41,8 +44,7 @@ export default function connect (mapStateToProps) {
           }
 
           const nextState = finnalMapStateToProps(this.store.getState(), this.$props)
-          if (!shallowEqual(this.nextState, nextState)) {
-            this.nextState = nextState
+          if (!shallowEqual(this.subscribed, nextState)) {
             this.subscribed = nextState
           }
         },
@@ -60,6 +62,9 @@ export default function connect (mapStateToProps) {
             this.unsubscribe = null
           }
         },
+        getWrappedInstance () {
+          return this.$refs.wrappedInstance
+        },
       },
       render () {
         const { $listeners, $slots = {}, $attrs, $scopedSlots, subscribed, store } = this
@@ -75,7 +80,7 @@ export default function connect (mapStateToProps) {
           scopedSlots: $scopedSlots,
         }
         return (
-          <WrappedComponent {...wrapProps}>
+          <WrappedComponent {...wrapProps} ref='wrappedInstance'>
             {Object.keys($slots).map(name => {
               return <template slot={name}>{$slots[name]}</template>
             })}

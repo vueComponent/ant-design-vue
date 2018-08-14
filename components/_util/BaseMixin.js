@@ -1,4 +1,17 @@
 export default {
+  directives: {
+    ref: {
+      bind: function (el, binding, vnode) {
+        binding.value(vnode.componentInstance ? vnode.componentInstance : vnode.elm)
+      },
+      update: function (el, binding, vnode) {
+        binding.value(vnode.componentInstance ? vnode.componentInstance : vnode.elm)
+      },
+      unbind: function (el, binding, vnode) {
+        binding.value(null)
+      },
+    },
+  },
   methods: {
     setState (state, callback) {
       Object.assign(this.$data, typeof state === 'function' ? state(this.$data) : state)

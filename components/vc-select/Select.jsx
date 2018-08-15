@@ -122,14 +122,6 @@ const Select = {
       this.autoFocus && this.focus()
     })
   },
-  beforeUpdate () {
-    const state = this.getDerivedStateFromProps(getOptionProps(this), this.$data)
-    const { _open: open, _value: value, _inputValue: inputValue } = this.$data
-    const { _open = open, _value = value, _inputValue = inputValue } = state
-    if (_open !== open || !isEqual(_value, value) || _inputValue !== inputValue) {
-      // Object.assign(this.$data, state)
-    }
-  },
   watch: {
     __propsSymbol__ () {
       Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data))
@@ -1024,12 +1016,6 @@ const Select = {
       }
 
       const key = getValuePropValue(item)
-      // const label = this.labelMap.get(key)
-      // const backfillValue = {
-      //   key,
-      //   label,
-      //   backfill: true,
-      // }
 
       if (isCombobox(this.$props)) {
         this.setInputValue(key, false)
@@ -1044,7 +1030,7 @@ const Select = {
     _filterOption (input, child, defaultFilter = defaultFilterFn) {
       const { _value: value, _backfillValue: backfillValue } = this.$data
       const lastValue = value[value.length - 1]
-      if (!input || (lastValue && backfillValue)) {
+      if (!input || (lastValue && lastValue === backfillValue)) {
         return true
       }
       let filterFn = this.$props.filterOption
@@ -1249,11 +1235,11 @@ const Select = {
     // },
     renderFilterOptions () {
       const { _inputValue: inputValue } = this.$data
-      const { tags, filterOption, notFoundContent } = this
+      const { children, tags, filterOption, notFoundContent } = this.$props
       const menuItems = []
       const childrenKeys = []
       let options = this.renderFilterOptionsFromChildren(
-        this.$props.children,
+        children,
         childrenKeys,
         menuItems,
       )
@@ -1651,7 +1637,6 @@ const Select = {
   },
 
   render () {
-    console.log('render')
     const props = this.$props
     const multiple = isMultipleOrTags(props)
     const state = this.$data

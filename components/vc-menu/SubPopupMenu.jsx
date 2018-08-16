@@ -258,7 +258,7 @@ const SubPopupMenu = {
       const props = this.$props
       const key = getKeyFromChildrenIndex(child, props.eventKey, i)
       const childProps = child.componentOptions.propsData || {}
-      const isActive = key === state.activeKey[extraProps.subMenuKey]
+      const isActive = key === state.activeKey[this.getEventKey()]
       if (!childProps.disabled) {
         // manualRef的执行顺序不能保证，使用key映射ref在this.instanceArray中的位置
         this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length

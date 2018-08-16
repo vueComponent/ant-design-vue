@@ -292,7 +292,12 @@ const Select = {
       if (this.$data._open && !this.getInputDOMNode()) {
         this.onInputKeyDown(event)
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
-        this.setOpenState(true)
+        // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
+        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(props)) {
+          this.maybeFocus(true)
+        } else {
+          this.setOpenState(true)
+        }
         event.preventDefault()
       }
     },

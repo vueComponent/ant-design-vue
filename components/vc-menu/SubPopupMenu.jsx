@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { getKeyFromChildrenIndex, loopMenuItem, noop } from './util'
 import DOMWrap from './DOMWrap'
 import { cloneElement } from '../_util/vnode'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, getEvents } from '../_util/props-util'
 
 function allDisabled (arr) {
   if (!arr.length) {
@@ -91,7 +91,7 @@ const SubPopupMenu = {
     focusable: PropTypes.bool,
     multiple: PropTypes.bool,
     defaultActiveFirst: PropTypes.bool,
-    activeKey: PropTypes.string,
+    activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
@@ -263,7 +263,7 @@ const SubPopupMenu = {
         // manualRef的执行顺序不能保证，使用key映射ref在this.instanceArray中的位置
         this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length
       }
-
+      const childListeners = getEvents(child)
       const newChildProps = {
         props: {
           mode: props.mode,
@@ -287,7 +287,7 @@ const SubPopupMenu = {
         },
         on: {
           click: (e) => {
-            (childProps.onClick || noop)(e)
+            (childListeners.click || noop)(e)
             this.onClick(e)
           },
           itemHover: this.onItemHover,
@@ -300,7 +300,6 @@ const SubPopupMenu = {
       if (props.mode === 'inline') {
         newChildProps.props.triggerSubMenuAction = 'click'
       }
-
       return cloneElement(child, newChildProps)
     },
 

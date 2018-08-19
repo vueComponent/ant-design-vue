@@ -437,7 +437,7 @@ const Select = {
       if (isMultiple(props)) {
         placeholder = getComponentFromProp(this, 'placeholder') || getComponentFromProp(this, 'searchPlaceholder')
       } else {
-        placeholder = getComponentFromProp(this, 'placeholder')
+        placeholder = getComponentFromProp(this, 'searchPlaceholder')
       }
       if (placeholder) {
         return (

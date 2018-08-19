@@ -13,6 +13,7 @@ export default function wrapWithConnect (WrappedComponent) {
   WrappedComponent.props.children = PropTypes.array.def([])
   return {
     props,
+    model: WrappedComponent.model,
     name: `Proxy_${getDisplayName(WrappedComponent)}`,
     methods: {
       getWrappedInstance () {

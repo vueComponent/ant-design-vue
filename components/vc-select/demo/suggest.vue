@@ -12,8 +12,8 @@ export default {
   methods: {
     onKeyDown (e) {
       if (e.keyCode === 13) {
-        console.log('onEnter', this.state.value)
-        this.jump(this.state.value)
+        console.log('onEnter', this.value)
+        this.jump(this.value)
       }
     },
 

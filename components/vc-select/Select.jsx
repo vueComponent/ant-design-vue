@@ -3,16 +3,18 @@ import KeyCode from '../_util/KeyCode'
 import PropTypes from '../_util/vue-types'
 import classnames from 'classnames'
 import classes from 'component-classes'
-import isEqual from 'lodash/isEqual'
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu'
 import warning from 'warning'
-
+import Vue from 'vue'
 import Option from './Option'
 import { hasProp, getSlotOptions, getPropsData, getValueByProp as getValue, getComponentFromProp, getEvents, getClass, getStyle, getAttrs, getOptionProps } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import proxyComponent from '../_util/proxyComponent'
+import antRefDirective from '../_util/antRefDirective'
+
+Vue.use(antRefDirective)
 
 import {
   getPropValue,
@@ -124,6 +126,7 @@ const Select = {
   },
   watch: {
     __propsSymbol__ () {
+      console.log(getOptionProps(this))
       Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data))
     },
     // value (val) {
@@ -290,7 +293,7 @@ const Select = {
       }
       const keyCode = event.keyCode
       if (this.$data._open && !this.getInputDOMNode()) {
-        this.onInputKeyDown(event)
+        this.onInputKeydown(event)
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
         // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
         if (keyCode === KeyCode.ENTER && !isMultipleOrTags(props)) {
@@ -854,7 +857,7 @@ const Select = {
             },
             class: inputCls,
             directives: [{
-              name: 'ref',
+              name: 'ant-ref',
               value: this.saveInputRef,
             }],
             on: {
@@ -1372,7 +1375,10 @@ const Select = {
         validateOptionValue(childValue, this.$props)
         if (this._filterOption(inputValue, child)) {
           const p = {
-            attrs: UNSELECTABLE_ATTRIBUTE,
+            attrs: {
+              ...UNSELECTABLE_ATTRIBUTE,
+              ...getAttrs(child),
+            },
             key: childValue,
             props: {
               value: childValue,
@@ -1505,7 +1511,7 @@ const Select = {
                 unselectable='unselectable'
                 onMousedown={preventDefaultEvent}
                 class={choiceClassName}
-                key={singleValue.key}
+                key={singleValue}
                 title={toTitle(title)}
               >
                 <div class={`${prefixCls}-selection__choice__content`}>

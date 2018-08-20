@@ -1,5 +1,5 @@
-import '../../style/index.less'
+import '../../style/index.less';
 
 // style dependencies
-import '../../popover/style'
-import '../../button/style'
+import '../../popover/style';
+import '../../button/style';

@@ -24,13 +24,19 @@
   }
 
   &-dark&-horizontal {
-    border-bottom-color: @menu-dark-bg;
+    border-bottom: 0;
   }
 
   &-dark&-horizontal > &-item,
   &-dark&-horizontal > &-submenu {
     border-color: @menu-dark-bg;
     border-bottom: 0;
+    top: 0;
+    margin-top: 0;
+  }
+
+  &-dark&-horizontal > &-item > a:before {
+    bottom: 0;
   }
 
   &-dark &-item,
@@ -113,6 +119,12 @@
     }
     > .@{menu-prefix-cls}-submenu-title {
       color: @disabled-color-dark !important;
+      > .@{menu-prefix-cls}-submenu-arrow {
+        &:before,
+        &:after {
+          background: @disabled-color-dark !important;
+        }
+      }
     }
   }
 }

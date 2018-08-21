@@ -10,7 +10,7 @@
 | mask | Whether to show mask or not. | Boolean | true |
 | maskClosable | Clicking on the mask (area outside the Drawer) to close the Drawer or not. | boolean | true |
 | maskStyle | Style for Drawer's mask element. | object | {} |
-| title | The title for Drawer. | string\|ReactNode | - |
+| title | The title for Drawer. | string\|slot | - |
 | visible | Whether the Drawer dialog is visible or not. | boolean | false |
 | width | Width of the Drawer dialog. | string\|number | 256 |
 | zIndex | The `z-index` of the Drawer. | Number | 1000 |

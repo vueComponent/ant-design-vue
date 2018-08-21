@@ -15,12 +15,12 @@ Basic drawer.
       Open
     </a-button>
     <a-drawer
-      title="Basic Drawer"
       placement="left"
       :closable="false"
       @close="onClose"
       :visible="visible"
     >
+      <span slot="title">Basic Drawer</span>
       <p>Some contents...</p>
       <p>Some contents...</p>
       <p>Some contents...</p>

@@ -3,7 +3,7 @@ import VcDrawer from '../vc-drawer/src'
 import warning from '../_util/warning'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import { getClass, getStyle } from '../_util/props-util'
+import { getClass, getStyle, getComponentFromProp } from '../_util/props-util'
 
 export default {
   name: 'ADrawer',
@@ -113,7 +113,8 @@ export default {
         containerStyle.opacity = 0
         containerStyle.transition = 'opacity .3s'
       }
-      const { prefixCls, title, closable } = this.$props
+      const { prefixCls, closable } = this.$props
+      const title = getComponentFromProp(this, 'title')
       const style = getStyle(this)
       let header
       if (title) {

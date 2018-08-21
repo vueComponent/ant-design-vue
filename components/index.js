@@ -120,6 +120,8 @@ import { default as Upload } from './upload'
 
 import { default as version } from './version'
 
+import { default as Drawer } from './drawer'
+
 const components = [
   Affix,
   Anchor,
@@ -209,6 +211,7 @@ const components = [
   Tooltip,
   Upload,
   Upload.Dragger,
+  Drawer,
 ]
 
 const install = function (Vue) {
@@ -280,6 +283,7 @@ export {
   Timeline,
   Tooltip,
   Upload,
+  Drawer,
 }
 
 export default {

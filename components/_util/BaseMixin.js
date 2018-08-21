@@ -1,3 +1,5 @@
+import { getOptionProps } from './props-util'
+
 export default {
   directives: {
     ref: {
@@ -14,7 +16,11 @@ export default {
   },
   methods: {
     setState (state, callback) {
-      Object.assign(this.$data, typeof state === 'function' ? state(this.$data) : state)
+      const newState = typeof state === 'function' ? state(this.$data) : state
+      if (this.getDerivedStateFromProps) {
+        Object.assign(newState, this.getDerivedStateFromProps(getOptionProps(this), this.$data, true) || {})
+      }
+      Object.assign(this.$data, newState)
       this.$nextTick(() => {
         callback && callback()
       })

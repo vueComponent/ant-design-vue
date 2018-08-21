@@ -3,16 +3,18 @@ import KeyCode from '../_util/KeyCode'
 import PropTypes from '../_util/vue-types'
 import classnames from 'classnames'
 import classes from 'component-classes'
-import isEqual from 'lodash/isEqual'
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu'
 import warning from 'warning'
-
+import Vue from 'vue'
 import Option from './Option'
 import { hasProp, getSlotOptions, getPropsData, getValueByProp as getValue, getComponentFromProp, getEvents, getClass, getStyle, getAttrs, getOptionProps } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import proxyComponent from '../_util/proxyComponent'
+import antRefDirective from '../_util/antRefDirective'
+
+Vue.use(antRefDirective)
 
 import {
   getPropValue,
@@ -99,6 +101,10 @@ const Select = {
   data () {
     const props = getOptionProps(this)
     const optionsInfo = this.getOptionsInfoFromProps(props)
+    warning(
+      this.__propsSymbol__,
+      'Replace slots.default with props.children and pass props.__propsSymbol__'
+    )
     return {
       _value: this.getValueFromProps(props, true), // true: use default value
       _inputValue: props.combobox ? this.getInputValueForCombobox(
@@ -121,14 +127,6 @@ const Select = {
     this.$nextTick(() => {
       this.autoFocus && this.focus()
     })
-  },
-  beforeUpdate () {
-    const state = this.getDerivedStateFromProps(getOptionProps(this), this.$data)
-    const { _open: open, _value: value, _inputValue: inputValue } = this.$data
-    const { _open = open, _value = value, _inputValue = inputValue } = state
-    if (_open !== open || !isEqual(_value, value) || _inputValue !== inputValue) {
-      // Object.assign(this.$data, state)
-    }
   },
   watch: {
     __propsSymbol__ () {
@@ -298,9 +296,14 @@ const Select = {
       }
       const keyCode = event.keyCode
       if (this.$data._open && !this.getInputDOMNode()) {
-        this.onInputKeyDown(event)
+        this.onInputKeydown(event)
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
-        this.setOpenState(true)
+        // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
+        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(props)) {
+          this.maybeFocus(true)
+        } else {
+          this.setOpenState(true)
+        }
         event.preventDefault()
       }
     },
@@ -857,7 +860,7 @@ const Select = {
             },
             class: inputCls,
             directives: [{
-              name: 'ref',
+              name: 'ant-ref',
               value: this.saveInputRef,
             }],
             on: {
@@ -1024,12 +1027,6 @@ const Select = {
       }
 
       const key = getValuePropValue(item)
-      // const label = this.labelMap.get(key)
-      // const backfillValue = {
-      //   key,
-      //   label,
-      //   backfill: true,
-      // }
 
       if (isCombobox(this.$props)) {
         this.setInputValue(key, false)
@@ -1044,7 +1041,7 @@ const Select = {
     _filterOption (input, child, defaultFilter = defaultFilterFn) {
       const { _value: value, _backfillValue: backfillValue } = this.$data
       const lastValue = value[value.length - 1]
-      if (!input || (lastValue && backfillValue)) {
+      if (!input || (lastValue && lastValue === backfillValue)) {
         return true
       }
       let filterFn = this.$props.filterOption
@@ -1249,11 +1246,11 @@ const Select = {
     // },
     renderFilterOptions () {
       const { _inputValue: inputValue } = this.$data
-      const { tags, filterOption, notFoundContent } = this
+      const { children, tags, filterOption, notFoundContent } = this.$props
       const menuItems = []
       const childrenKeys = []
       let options = this.renderFilterOptionsFromChildren(
-        this.$props.children,
+        children,
         childrenKeys,
         menuItems,
       )
@@ -1381,7 +1378,10 @@ const Select = {
         validateOptionValue(childValue, this.$props)
         if (this._filterOption(inputValue, child)) {
           const p = {
-            attrs: UNSELECTABLE_ATTRIBUTE,
+            attrs: {
+              ...UNSELECTABLE_ATTRIBUTE,
+              ...getAttrs(child),
+            },
             key: childValue,
             props: {
               value: childValue,
@@ -1514,7 +1514,7 @@ const Select = {
                 unselectable='unselectable'
                 onMousedown={preventDefaultEvent}
                 class={choiceClassName}
-                key={singleValue.key}
+                key={singleValue}
                 title={toTitle(title)}
               >
                 <div class={`${prefixCls}-selection__choice__content`}>
@@ -1651,7 +1651,6 @@ const Select = {
   },
 
   render () {
-    console.log('render')
     const props = this.$props
     const multiple = isMultipleOrTags(props)
     const state = this.$data
@@ -1766,4 +1765,5 @@ const Select = {
     )
   },
 }
+export { Select }
 export default proxyComponent(Select)

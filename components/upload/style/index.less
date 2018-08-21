@@ -232,6 +232,17 @@
       position: absolute;
       top: 8px;
       left: 8px;
+      text-align: center;
+    }
+
+    .@{upload-item}-icon {
+      color: @disabled-color;
+      font-size: 36px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -18px;
+      margin-left: -18px;
     }
 
     .@{upload-item}-thumbnail img {
@@ -277,12 +288,11 @@
       right: 8px;
       top: 8px;
       line-height: 1;
+      opacity: 1;
     }
   }
 
   &-picture-card {
-    display: inline;
-
     &.@{upload-prefix-cls}-list:after {
       display: none;
     }

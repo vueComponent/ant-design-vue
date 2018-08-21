@@ -4,8 +4,8 @@ import '../assets/index.less'
 
 export default {
   methods: {
-    onChange (value, options) {
-      console.log(`selected ${value}`)
+    onChange (value, option) {
+      console.log(`selected ${value}`, option)
     },
   },
 
@@ -22,7 +22,7 @@ export default {
         >
           <OptGroup>
             <span slot='label'>manager</span>
-            <Option value='jack'>
+            <Option value='jack' test-prop='jack-prop'>
               <b
                 style={{
                   color: 'red',
@@ -31,10 +31,10 @@ export default {
               jack
               </b>
             </Option>
-            <Option value='lucy'>lucy</Option>
+            <Option value='lucy' test-prop='lucy-prop'>lucy</Option>
           </OptGroup>
           <OptGroup label='engineer'>
-            <Option value='yiminghe'>yiminghe</Option>
+            <Option value='yiminghe' test-prop='yiminghe-prop'>yiminghe</Option>
           </OptGroup>
         </Select>
       </div>

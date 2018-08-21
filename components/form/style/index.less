@@ -132,8 +132,9 @@ input[type="checkbox"] {
 .@{form-prefix-cls}-extra {
   color: @text-color-secondary;
   line-height: @line-height-base;
-  transition: color .15s @ease-out;
+  transition: color .3s @ease-out; // sync input color transition
   margin-top: @form-help-margin-top;
+  clear: both;
 }
 
 .@{form-prefix-cls}-extra {
@@ -235,8 +236,13 @@ form {
     margin-left: 0;
   }
 
-  .@{ant-prefix}-input-number + .@{form-prefix-cls}-text {
-    margin-left: 8px;
+  .@{ant-prefix}-input-number {
+    + .@{form-prefix-cls}-text {
+      margin-left: 8px;
+    }
+    &-handler-wrap {
+      z-index: 2; // https://github.com/ant-design/ant-design/issues/6289
+    }
   }
 
   .@{ant-prefix}-select,
@@ -251,7 +257,9 @@ form {
   }
 
   // fix input with addon position. https://github.com/ant-design/ant-design/issues/8243
+  :not(.@{ant-prefix}-input-group-wrapper) > .@{ant-prefix}-input-group,
   .@{ant-prefix}-input-group-wrapper {
+    display: inline-block;
     vertical-align: middle;
     position: relative;
     top: -1px;
@@ -574,7 +582,7 @@ form {
   }
 }
 
-.show-help-motion(show-help, antShowHelp, 0.15s);
+.show-help-motion(show-help, antShowHelp, 0.3s);
 
 @keyframes antShowHelpIn {
   0% {

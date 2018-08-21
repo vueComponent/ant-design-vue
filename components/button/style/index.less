@@ -131,24 +131,6 @@
     margin-left: 8px;
   }
 
-  &-clicked:after {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    bottom: -1px;
-    right: -1px;
-    border-radius: inherit;
-    border: 0 solid @primary-color;
-    opacity: 0.4;
-    animation: buttonEffect .4s;
-    display: block;
-  }
-
-  &-danger&-clicked:after {
-    border-color: @btn-danger-color;
-  }
-
   &-background-ghost {
     background: transparent !important;
     border-color: #fff;
@@ -171,16 +153,9 @@
     letter-spacing: .34em;
     margin-right: -.34em;
   }
-}
 
-@keyframes buttonEffect {
-  to {
-    opacity: 0;
-    top: -6px;
-    left: -6px;
-    bottom: -6px;
-    right: -6px;
-    border-width: 6px;
+  &-block {
+    width: 100%;
   }
 }
 

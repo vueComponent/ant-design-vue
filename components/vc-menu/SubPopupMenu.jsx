@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { getKeyFromChildrenIndex, loopMenuItem, noop } from './util'
 import DOMWrap from './DOMWrap'
 import { cloneElement } from '../_util/vnode'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, getEvents } from '../_util/props-util'
 
 function allDisabled (arr) {
   if (!arr.length) {
@@ -28,16 +28,18 @@ function updateActiveKey (store, menuId, activeKey) {
   })
 }
 
-export function saveRef (c) {
+export function saveRef (key, c) {
   if (c) {
-    const index = this.instanceArray.indexOf(c)
-    if (index !== -1) {
-      // update component if it's already inside instanceArray
-      this.instanceArray[index] = c
-    } else {
-      // add component if it's not in instanceArray yet;
-      this.instanceArray.push(c)
-    }
+    const index = this.instanceArrayKeyIndexMap[key]
+    this.instanceArray[index] = c
+    // const index = this.instanceArray.indexOf(c)
+    // if (index !== -1) {
+    //   // update component if it's already inside instanceArray
+    //   this.instanceArray[index] = c
+    // } else {
+    //   // add component if it's not in instanceArray yet;
+    //   this.instanceArray.push(c)
+    // }
   }
 }
 export function getActiveKey (props, originalActiveKey) {
@@ -89,7 +91,7 @@ const SubPopupMenu = {
     focusable: PropTypes.bool,
     multiple: PropTypes.bool,
     defaultActiveFirst: PropTypes.bool,
-    activeKey: PropTypes.string,
+    activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
@@ -130,10 +132,11 @@ const SubPopupMenu = {
   watch: {
     __propsSymbol__ () {
       const props = getOptionProps(this)
+      const storeActiveKey = this.getStore().getState().activeKey[this.getEventKey()]
       const originalActiveKey = 'activeKey' in props ? props.activeKey
-        : this.getStore().getState().activeKey[this.getEventKey()]
+        : storeActiveKey
       const activeKey = getActiveKey(props, originalActiveKey)
-      if (activeKey !== originalActiveKey) {
+      if (activeKey !== originalActiveKey || storeActiveKey !== activeKey) {
         updateActiveKey(this.getStore(), this.getEventKey(), activeKey)
       }
     },
@@ -255,7 +258,12 @@ const SubPopupMenu = {
       const props = this.$props
       const key = getKeyFromChildrenIndex(child, props.eventKey, i)
       const childProps = child.componentOptions.propsData || {}
-      const isActive = key === state.activeKey
+      const isActive = key === state.activeKey[this.getEventKey()]
+      if (!childProps.disabled) {
+        // manualRef的执行顺序不能保证，使用key映射ref在this.instanceArray中的位置
+        this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length
+      }
+      const childListeners = getEvents(child)
       const newChildProps = {
         props: {
           mode: props.mode,
@@ -266,7 +274,7 @@ const SubPopupMenu = {
           index: i,
           parentMenu: props.parentMenu,
           // customized ref function, need to be invoked manually in child's componentDidMount
-          manualRef: childProps.disabled ? noop : saveRef.bind(this),
+          manualRef: childProps.disabled ? noop : saveRef.bind(this, key),
           eventKey: key,
           active: !childProps.disabled && isActive,
           multiple: props.multiple,
@@ -279,7 +287,7 @@ const SubPopupMenu = {
         },
         on: {
           click: (e) => {
-            (childProps.onClick || noop)(e)
+            (childListeners.click || noop)(e)
             this.onClick(e)
           },
           itemHover: this.onItemHover,
@@ -292,7 +300,6 @@ const SubPopupMenu = {
       if (props.mode === 'inline') {
         newChildProps.props.triggerSubMenuAction = 'click'
       }
-
       return cloneElement(child, newChildProps)
     },
 
@@ -315,6 +322,7 @@ const SubPopupMenu = {
     const { ...props } = this.$props
     const { eventKey, visible } = props
     this.instanceArray = []
+    this.instanceArrayKeyIndexMap = {}
     const className = classNames(
       props.prefixCls,
       `${props.prefixCls}-${props.mode}`,

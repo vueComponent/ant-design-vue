@@ -52,10 +52,10 @@ export default {
   },
   methods: {
     listRefHandler (ref) {
-      this.list = ref && ref.elm
+      this.list = ref
     },
     trackRefHandler (ref) {
-      this.track = ref && ref.elm
+      this.track = ref
     },
     adaptHeight () {
       if (this.adaptiveHeight && this.list) {

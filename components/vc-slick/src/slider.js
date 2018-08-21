@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     innerSliderRefHandler (ref) {
-      this.innerSlider = ref && ref.componentInstance
+      this.innerSlider = ref
     },
     media (query, handler) {
       // javascript handler for  css media query

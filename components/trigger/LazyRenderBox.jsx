@@ -1,6 +1,5 @@
 
 import PropTypes from '../_util/vue-types'
-import { cloneVNode } from '../_util/vnode'
 
 export default {
   props: {
@@ -17,14 +16,12 @@ export default {
       }
       children = (
         <div class={cls}>
-          {visible ? this.$slots.default : (this.preChildren || this.$slots.default)}
+          {this.$slots.default}
         </div>
       )
     } else {
-      children = visible ? this.$slots.default[0] : (this.preChildren || this.$slots.default[0])
+      children = this.$slots.default[0]
     }
-    // mock shouldComponentUpdate
-    this.preChildren = visible ? cloneVNode(children) : this.preChildren
     return children
   },
 }

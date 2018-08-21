@@ -101,6 +101,10 @@ const Select = {
   data () {
     const props = getOptionProps(this)
     const optionsInfo = this.getOptionsInfoFromProps(props)
+    warning(
+      this.__propsSymbol__,
+      'Replace slots.default with props.children and pass props.__propsSymbol__'
+    )
     return {
       _value: this.getValueFromProps(props, true), // true: use default value
       _inputValue: props.combobox ? this.getInputValueForCombobox(
@@ -126,7 +130,6 @@ const Select = {
   },
   watch: {
     __propsSymbol__ () {
-      console.log(getOptionProps(this))
       Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data))
     },
     // value (val) {
@@ -1762,4 +1765,5 @@ const Select = {
     )
   },
 }
+export { Select }
 export default proxyComponent(Select)

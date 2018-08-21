@@ -36,8 +36,7 @@ function getOffset (element, target) {
 }
 
 function getDefaultTarget () {
-  return typeof window !== 'undefined'
-    ? window : null
+  return typeof window !== 'undefined' ? window : null
 }
 
 // Affix
@@ -88,12 +87,16 @@ export default {
   },
   watch: {
     target (val) {
-      this.$nextTick(() => {
-        this.clearEventListeners()
-        this.setTargetEventListeners(val)
-        // Mock Event object.
-        this.updatePosition({})
-      })
+      this.clearEventListeners()
+      this.setTargetEventListeners(val)
+      // Mock Event object.
+      this.updatePosition({})
+    },
+    offsetTop (val) {
+      this.updatePosition({})
+    },
+    offsetBottom (val) {
+      this.updatePosition({})
     },
   },
   beforeDestroy () {
@@ -149,7 +152,9 @@ export default {
       const targetNode = target()
 
       // Backwards support
-      offsetTop = offsetTop || offset
+      // Fix: if offsetTop === 0, it will get undefined,
+      //   if offsetBottom is type of number, offsetMode will be { top: false, ... }
+      offsetTop = typeof offsetTop === 'undefined' ? offset : offsetTop
       const scrollTop = getScroll(targetNode, true)
       const affixNode = this.$el
       const elemOffset = getOffset(affixNode, targetNode)

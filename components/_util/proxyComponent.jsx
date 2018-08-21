@@ -7,16 +7,17 @@ function getDisplayName (WrappedComponent) {
 }
 export default function wrapWithConnect (WrappedComponent) {
   const tempProps = WrappedComponent.props || {}
+  const methods = WrappedComponent.methods || {}
   const props = {}
   Object.keys(tempProps).forEach(k => { props[k] = PropTypes.any })
   WrappedComponent.props.__propsSymbol__ = PropTypes.any
   WrappedComponent.props.children = PropTypes.array.def([])
-  return {
+  const ProxyWrappedComponent = {
     props,
     model: WrappedComponent.model,
     name: `Proxy_${getDisplayName(WrappedComponent)}`,
     methods: {
-      getWrappedInstance () {
+      getProxyWrappedInstance () {
         return this.$refs.wrappedInstance
       },
     },
@@ -37,4 +38,10 @@ export default function wrapWithConnect (WrappedComponent) {
       )
     },
   }
+  Object.keys(methods).map(m => {
+    ProxyWrappedComponent.methods[m] = function () {
+      this.getProxyWrappedInstance()[m](...arguments)
+    }
+  })
+  return ProxyWrappedComponent
 }

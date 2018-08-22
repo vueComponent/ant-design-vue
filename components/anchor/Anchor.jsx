@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import addEventListener from '../_util/Dom/addEventListener'
 import Affix from '../affix'
 import getScroll from '../_util/getScroll'
-import getRequestAnimationFrame from '../_util/getRequestAnimationFrame'
+import raf from 'raf'
 import { initDefaultProps, getClass, getStyle } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 
@@ -42,7 +42,6 @@ function easeInOutCubic (t, b, c, d) {
   return cc / 2 * ((t -= 2) * t * t + 2) + b
 }
 
-const reqAnimFrame = getRequestAnimationFrame()
 const sharpMatcherRegx = /#([^#]+)$/
 function scrollTo (href, offsetTop = 0, getContainer, callback = () => { }) {
   const container = getContainer()
@@ -66,12 +65,12 @@ function scrollTo (href, offsetTop = 0, getContainer, callback = () => { }) {
       container.scrollTop = nextScrollTop
     }
     if (time < 450) {
-      reqAnimFrame(frameFunc)
+      raf(frameFunc)
     } else {
       callback()
     }
   }
-  reqAnimFrame(frameFunc)
+  raf(frameFunc)
   history.pushState(null, '', href)
 }
 
@@ -211,6 +210,7 @@ export default {
       showInkInFixed,
       activeLink,
       $slots,
+      getContainer,
     } = this
 
     const inkClass = classNames(`${prefixCls}-ink-ball`, {
@@ -243,7 +243,7 @@ export default {
     )
 
     return !affix ? anchorContent : (
-      <Affix offsetTop={offsetTop}>
+      <Affix offsetTop={offsetTop} target={getContainer}>
         {anchorContent}
       </Affix>
     )

@@ -1043,7 +1043,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.md correctly 1`] = `
 
 exports[`renders ./components/calendar/demo/select.md correctly 1`] = `
 <div>
-  <div class="ant-alert ant-alert-info ant-alert-no-icon"><span class="ant-alert-message">You selected date: 2017-01-25</span><span class="ant-alert-description"></span></div>
+  <div data-show="true" class="ant-alert ant-alert-info ant-alert-no-icon"><span class="ant-alert-message">You selected date: 2017-01-25</span><span class="ant-alert-description"></span></div>
   <div style="display: inline-block; width: 500px; border: 1px solid #d9d9d9; border-radius: 4px;">
     <div class=" ant-fullcalendar-fullscreen">
       <div class="ant-fullcalendar-header">

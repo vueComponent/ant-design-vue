@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
+import { asyncExpect } from '@/tests/utils'
 import Anchor from '..'
 
 const { Link } = Anchor
@@ -42,7 +43,7 @@ describe('Anchor Render', () => {
     })
   })
 
-  it('Anchor render perfectly for complete href - scoll', (done) => {
+  it('Anchor render perfectly for complete href - scroll', (done) => {
     const wrapper = mount({
       render () {
         return (
@@ -62,7 +63,8 @@ describe('Anchor Render', () => {
     })
   })
 
-  it('Anchor render perfectly for complete href - scollTo', (done) => {
+  it('Anchor render perfectly for complete href - scrollTo', async () => {
+    const scrollToSpy = jest.spyOn(window, 'scrollTo')
     const wrapper = mount({
       render () {
         return (
@@ -75,10 +77,78 @@ describe('Anchor Render', () => {
         )
       },
     }, { sync: false, attachToDocument: true })
-    Vue.nextTick(() => {
+    await asyncExpect(() => {
       wrapper.vm.$refs.anchor.handleScrollTo('##API')
       expect(wrapper.vm.$refs.anchor.$data.activeLink).toBe('##API')
-      done()
+      expect(scrollToSpy).not.toHaveBeenCalled()
+    })
+    await asyncExpect(() => {
+      expect(scrollToSpy).toHaveBeenCalled()
+    }, 1000)
+  })
+
+  it('should remove listener when unmount', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <Anchor ref='anchor'>
+            <Link href='#API' title='API' />
+          </Anchor>
+        )
+      },
+    }, { sync: false, attachToDocument: true })
+    await asyncExpect(() => {
+      const removeListenerSpy = jest.spyOn(wrapper.vm.$refs.anchor.scrollEvent, 'remove')
+      wrapper.destroy()
+      expect(removeListenerSpy).toHaveBeenCalled()
+    })
+  })
+
+  it('should unregister link when unmount children', async () => {
+    const wrapper = mount({
+      props: {
+        showLink: {
+          type: Boolean,
+          default: true,
+        },
+      },
+      render () {
+        return (
+          <Anchor ref='anchor'>
+            {this.showLink ? <Link href='#API' title='API' /> : null}
+          </Anchor>
+        )
+      },
+    }, { sync: false, attachToDocument: true })
+    await asyncExpect(() => {
+      expect(wrapper.vm.$refs.anchor.links).toEqual(['#API'])
+      wrapper.setProps({ showLink: false })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.vm.$refs.anchor.links).toEqual([])
+    })
+  })
+
+  it('should update links when link href update', async () => {
+    const wrapper = mount({
+      props: ['href'],
+      render () {
+        return <Anchor ref='anchor'>
+          <Link href={this.href} title='API' />
+        </Anchor>
+      },
+    }, {
+      sync: false,
+      attachToDocument: true,
+      propsData: {
+        href: '#API',
+      }})
+    await asyncExpect(() => {
+      expect(wrapper.vm.$refs.anchor.links).toEqual(['#API'])
+      wrapper.setProps({ href: '#API_1' })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.vm.$refs.anchor.links).toEqual(['#API_1'])
     })
   })
 })

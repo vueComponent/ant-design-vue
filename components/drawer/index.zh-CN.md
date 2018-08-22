@@ -8,7 +8,7 @@
 | maskClosable | 点击蒙层是否允许关闭 | boolean | true |
 | mask | 是否展示遮罩 | Boolean | true |
 | maskStyle | 遮罩样式 | object | {} |
-| title | 标题 | string \| ReactNode | - |
+| title | 标题 | string \| slot | - |
 | visible | Drawer 是否可见 | boolean | - |
 | width | 宽度 | string \| number | 256 |
 | zIndex | 设置 Drawer 的 `z-index` | Number | 1000 |

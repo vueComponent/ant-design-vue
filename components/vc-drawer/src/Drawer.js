@@ -247,7 +247,10 @@ const Drawer = {
               const $levelMove = transformArguments(levelMove, { target: dom, open })
               levelValue = open ? $levelMove[0] : $levelMove[1] || 0
             }
-            const $value = typeof levelValue === 'number' ? `${levelValue}px` : levelValue
+            const $value = (
+              typeof levelValue === 'number' ||
+              (typeof levelValue === 'string' && levelValue.indexOf('px') === -1)
+            ) ? `${levelValue}px` : levelValue
             const placementPos = placement === 'left' || placement === 'top' ? $value : `-${$value}`
             dom.style.transform = levelValue ? `${placementName}(${placementPos})` : ''
             dom.style.msTransform = levelValue ? `${placementName}(${placementPos})` : ''
@@ -424,7 +427,7 @@ const Drawer = {
         directives: [{
           name: 'ant-ref',
           value: (c) => {
-            this.dom = c && c.elm
+            this.dom = c
           },
         }],
         on: {
@@ -434,19 +437,19 @@ const Drawer = {
       const directivesMaskDom = [{
         name: 'ant-ref',
         value: (c) => {
-          this.maskDom = c && c.elm
+          this.maskDom = c
         },
       }]
       const directivesContentWrapper = [{
         name: 'ant-ref',
         value: (c) => {
-          this.contentWrapper = c && c.elm
+          this.contentWrapper = c
         },
       }]
       const directivesContentDom = [{
         name: 'ant-ref',
         value: (c) => {
-          this.contentDom = c && c.elm
+          this.contentDom = c
         },
       }]
       return (
@@ -564,7 +567,7 @@ const Drawer = {
       const directives = [{
         name: 'ant-ref',
         value: (c) => {
-          this.container = c && c.elm
+          this.container = c
         },
       }]
       return (

@@ -25,6 +25,7 @@ export default {
     zIndex: PropTypes.number,
     prefixCls: PropTypes.string.def('ant-drawer'),
     placement: PropTypes.string.def('right'),
+    level: PropTypes.any.def(null),
   },
   mixins: [BaseMixin],
   data () {

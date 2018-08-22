@@ -2,7 +2,6 @@
 import Basic from './basic'
 import Size from './size'
 import Tags from './tags'
-import Combobox from './combobox'
 import AutomaticTokenization from './automatic-tokenization'
 import LabelInValue from './label-in-value'
 import Multiple from './multiple'
@@ -41,7 +40,6 @@ export default {
         <Basic/>
         <Size/>
         <Tags/>
-        <Combobox/>
         <AutomaticTokenization/>
         <LabelInValue/>
         <Multiple/>

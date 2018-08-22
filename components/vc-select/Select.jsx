@@ -1690,7 +1690,6 @@ const Select = {
       selectionProps.attrs.tabIndex = props.disabled ? -1 : 0
     }
     const rootCls = {
-      ...getClass(this),
       [prefixCls]: true,
       [`${prefixCls}-open`]: open,
       [`${prefixCls}-focused`]: open || !!this._focused,

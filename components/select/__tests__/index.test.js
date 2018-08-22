@@ -52,7 +52,7 @@ describe('Select', () => {
   it('should not have default notFoundContent when mode is combobox', async () => {
     const wrapper = mount(Select, {
       propsData: {
-        mode: 'combobox',
+        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
       },
       sync: false,
     })
@@ -73,7 +73,7 @@ describe('Select', () => {
   it('should not have notFoundContent when mode is combobox and notFoundContent is set', async () => {
     const wrapper = mount(Select, {
       propsData: {
-        mode: 'combobox',
+        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
         notFoundContent: 'not at all',
       },
       sync: false,

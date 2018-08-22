@@ -1,25 +1,27 @@
 
 <cn>
 #### 搜索框
-自动补全和远程数据结合。
+搜索和远程数据结合。
 </cn>
 
 <us>
 #### Search Box
-Autocomplete with remote ajax data.
+Search with remote data.
 </us>
 
 ```html
 <template>
   <a-select
-    mode="combobox"
+    showSearch
     :value="value"
     placeholder="input search text"
     style="width: 200px"
     :defaultActiveFirstOption="false"
     :showArrow="false"
     :filterOption="false"
+    @search="handleSearch"
     @change="handleChange"
+    :notFoundContent="null"
   >
     <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
   </a-select>
@@ -66,15 +68,18 @@ export default {
   data() {
     return {
       data: [],
-      value: '',
+      value: undefined,
     }
   },
   methods: {
+    handleSearch (value) {
+      fetch(value, data => this.data = data);
+    },
     handleChange (value) {
       console.log(value)
       this.value = value
       fetch(value, data => this.data = data);
-    }
+    },
   }
 }
 </script>

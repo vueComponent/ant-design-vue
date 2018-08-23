@@ -71,9 +71,9 @@ A drawer containing an editable form which needs to be collapsed by clicking the
           <a-col :span="12">
             <a-form-item label="DateTime" :fieldDecoratorOptions="{ rules: [{ required: true, message: 'Please choose the dateTime' }]}">
               <a-date-picker
-                  style="width: 100%"
-                  :getPopupContainer="trigger => trigger.parentNode"
-                />
+                style="width: 100%"
+                :getPopupContainer="trigger => trigger.parentNode"
+              />
             </a-form-item>
           </a-col>
         </a-row>

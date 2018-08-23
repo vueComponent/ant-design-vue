@@ -379,7 +379,7 @@ const Drawer = {
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
-        [className]: !!className,
+        ...className,
       })
       const isOpenChange = this.isOpenChange
       const isHorizontal = placement === 'left' || placement === 'right'

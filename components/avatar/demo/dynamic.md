@@ -11,8 +11,8 @@ For letter type Avatar, when the letters are too long to display, the font size 
 ```html
 <template>
   <div>
-    <a-avatar shape="square" size="large" :style="{'backgroundColor': color}">{{avatarValue}}</a-avatar>
-    <a-button @click="changeValue">改变</a-button>
+    <a-avatar shape="square" size="large" :style="{backgroundColor: color, verticalAlign: 'middle'}">{{avatarValue}}</a-avatar>
+    <a-button size="small" :style="{ marginLeft: 16, verticalAlign: 'middle' }" @click="changeValue">改变</a-button>
   </div>
 </template>
 <script>

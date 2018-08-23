@@ -5,6 +5,7 @@
   import Change from './change'
   import Overflow from './overflow'
   import Status from './status'
+  import Title from './title'
 
   import CN from './../index.zh-CN.md'
   import US from './../index.en_US.md'
@@ -39,6 +40,7 @@
           <Dot />
           <Status />
           <Change />
+          <Title />
           <api>
             <CN slot='cn' />
             <US />

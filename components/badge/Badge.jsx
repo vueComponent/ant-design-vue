@@ -19,6 +19,7 @@ export const BadgeProps = {
   text: PropTypes.string,
   offset: PropTypes.array,
   numberStyle: PropTypes.object.def({}),
+  title: PropTypes.string,
 }
 
 export default {
@@ -45,6 +46,7 @@ export default {
       offset,
       $slots,
       numberStyle,
+      title,
     } = this
     let displayCount = count > overflowCount ? `${overflowCount}+` : count
     const isZero = displayCount === '0' || displayCount === 0
@@ -79,7 +81,7 @@ export default {
 
     if (!children.length && status) {
       return (
-        <span class={badgeCls} style={styleWithOffset}>
+        <span {...{ on: this.$listeners }} class={badgeCls} style={styleWithOffset}>
           <span class={statusCls} />
           <span class={`${prefixCls}-status-text`}>{text}</span>
         </span>
@@ -92,8 +94,9 @@ export default {
         v-show={!hidden}
         class={scrollNumberCls}
         count={displayCount}
-        title={count}
+        title={title || count}
         style={styleWithOffset}
+        key='scrollNumber'
       />
     )
 
@@ -102,7 +105,7 @@ export default {
     )
     const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '')
 
-    return (<span class={badgeCls}>
+    return (<span {...{ on: this.$listeners }} class={badgeCls}>
       {children}
       <transition {...transitionProps}>
         {scrollNumber}

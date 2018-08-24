@@ -15,6 +15,7 @@
 | pagination | Pagination [config](https://vuecomponent.github.io/ant-design-vue/components/pagination/#API), hide it by setting it to false | boolean \| object | false |
 | split | Toggles rendering of the split under the list item | boolean | true |
 | renderItem | Custom item renderer, slot="renderItem" and slot-scope="item, index"  | (item, index) => vNode |  | - |
+| rowKey | Specify the key that will be used for uniquely identify each element  | item => string\|number |  |
 
 ### List grid props
 

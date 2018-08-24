@@ -20,7 +20,7 @@
         <a-tooltip
           :title="copied ? '复制成功' : '复制代码'"
           :visible="copyTooltipVisible"
-          @change="onCopyTooltipVisibleChange"
+          @visibleChange="onCopyTooltipVisibleChange"
         >
           <a-icon
             :type="copied && copyTooltipVisible ? 'check' : 'copy'"

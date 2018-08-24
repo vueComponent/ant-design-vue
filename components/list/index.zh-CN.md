@@ -16,6 +16,7 @@
 | size | list 的尺寸 | `default` \| `middle` \| `small` | `default` |
 | split | 是否展示分割线 | boolean | true |
 | renderItem | 自定义`Item`函数，也可使用slot="renderItem" 和 slot-scope="item, index" | (item, index) => vNode |  | - |
+| rowKey | 各项 key 的取值，可以是字符串或一个函数  | item => string\|number |  |
 
 ### List grid props
 

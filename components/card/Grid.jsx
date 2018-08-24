@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types'
 
 export default {
   name: 'ACardGrid',
+  __ANT_CARD_GRID: true,
   props: {
     prefixCls: PropTypes.string.def('ant-card'),
   },

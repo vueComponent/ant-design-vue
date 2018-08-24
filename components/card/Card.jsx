@@ -1,8 +1,10 @@
-
+import omit from 'omit.js'
 import Tabs from '../tabs'
+import Row from '../row'
+import Col from '../col'
 import PropTypes from '../_util/vue-types'
 import addEventListener from '../_util/Dom/addEventListener'
-import { getComponentFromProp, getComponentName } from '../_util/props-util'
+import { getComponentFromProp, getSlotOptions, isEmptyElement, filterEmpty } from '../_util/props-util'
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame'
 import BaseMixin from '../_util/BaseMixin'
 
@@ -16,6 +18,7 @@ export default {
     extra: PropTypes.any,
     bordered: PropTypes.bool.def(true),
     bodyStyle: PropTypes.object,
+    headStyle: PropTypes.object,
     loading: PropTypes.bool.def(false),
     hoverable: PropTypes.bool.def(false),
     type: PropTypes.string,
@@ -49,14 +52,14 @@ export default {
       if (!cardContainerRef) {
         return
       }
-      // 936 is a magic card width pixer number indicated by designer
-      const WIDTH_BOUDARY_PX = 936
-      if (cardContainerRef.offsetWidth >= WIDTH_BOUDARY_PX && !this.widerPadding) {
+      // 936 is a magic card width pixel number indicated by designer
+      const WIDTH_BOUNDARY_PX = 936
+      if (cardContainerRef.offsetWidth >= WIDTH_BOUNDARY_PX && !this.widerPadding) {
         this.setState({ widerPadding: true }, () => {
           this.updateWiderPaddingCalled = true // first render without css transition
         })
       }
-      if (cardContainerRef.offsetWidth < WIDTH_BOUDARY_PX && this.widerPadding) {
+      if (cardContainerRef.offsetWidth < WIDTH_BOUNDARY_PX && this.widerPadding) {
         this.setState({ widerPadding: false }, () => {
           this.updateWiderPaddingCalled = true // first render without css transition
         })
@@ -69,23 +72,32 @@ export default {
       let containGrid
       obj.forEach((element) => {
         if (
-          element &&
-            element.componentOptions &&
-            getComponentName(element.componentOptions) === 'Grid'
+          element && getSlotOptions(element).__ANT_CARD_GRID
         ) {
           containGrid = true
         }
       })
       return containGrid
     },
+    getAction (actions) {
+      if (!actions || !actions.length) {
+        return null
+      }
+      const actionList = actions.map((action, index) => (
+        <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
+          <span>{action}</span>
+        </li>
+      ))
+      return actionList
+    },
   },
   render () {
     const {
-      prefixCls = 'ant-card', bodyStyle, loading,
+      prefixCls = 'ant-card', headStyle = {}, bodyStyle = {}, loading,
       bordered = true, type, tabList, hoverable, activeTabKey, defaultActiveTabKey,
     } = this.$props
 
-    const { $slots, $scopedSlots } = this
+    const { $slots, $scopedSlots, $listeners } = this
 
     const classString = {
       [`${prefixCls}`]: true,
@@ -99,26 +111,62 @@ export default {
       [`${prefixCls}-type-${type}`]: !!type,
     }
 
+    const loadingBlockStyle = (bodyStyle.padding === 0 || bodyStyle.padding === '0px')
+      ? { padding: 24 } : undefined
+
     const loadingBlock = (
-      <div class={`${prefixCls}-loading-content`}>
-        <p class={`${prefixCls}-loading-block`} style={{ width: '94%' }} />
-        <p>
-          <span class={`${prefixCls}-loading-block`} style={{ width: '28%' }} />
-          <span class={`${prefixCls}-loading-block`} style={{ width: '62%' }} />
-        </p>
-        <p>
-          <span class={`${prefixCls}-loading-block`} style={{ width: '22%' }} />
-          <span class={`${prefixCls}-loading-block`} style={{ width: '66%' }} />
-        </p>
-        <p>
-          <span class={`${prefixCls}-loading-block`} style={{ width: '56%' }} />
-          <span class={`${prefixCls}-loading-block`} style={{ width: '39%' }} />
-        </p>
-        <p>
-          <span class={`${prefixCls}-loading-block`} style={{ width: '21%' }} />
-          <span class={`${prefixCls}-loading-block`} style={{ width: '15%' }} />
-          <span class={`${prefixCls}-loading-block`} style={{ width: '40%' }} />
-        </p>
+      <div class={`${prefixCls}-loading-content`} style={loadingBlockStyle}>
+        <Row gutter={8}>
+          <Col span={22}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+        </Row>
+        <Row gutter={8}>
+          <Col span={8}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={15}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+        </Row>
+        <Row gutter={8}>
+          <Col span={6}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={18}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+        </Row>
+        <Row gutter={8}>
+          <Col span={13}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={9}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+        </Row>
+        <Row gutter={8}>
+          <Col span={4}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={3}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={16}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+        </Row>
+        <Row gutter={8}>
+          <Col span={8}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={6}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+          <Col span={8}>
+            <div class={`${prefixCls}-loading-block`} />
+          </Col>
+        </Row>
       </div>
     )
 
@@ -143,7 +191,7 @@ export default {
           const { tab: temp, scopedSlots = {}} = item
           const name = scopedSlots.tab
           const tab = temp !== undefined ? temp : ($scopedSlots[name] ? $scopedSlots[name](item) : null)
-          return <TabPane tab={tab} key={item.key} />
+          return <TabPane tab={tab} key={item.key} disabled={item.disabled}/>
         })}
       </Tabs>
     ) : null
@@ -151,7 +199,7 @@ export default {
     const extraDom = getComponentFromProp(this, 'extra')
     if (titleDom || extraDom || tabs) {
       head = (
-        <div class={`${prefixCls}-head`}>
+        <div class={`${prefixCls}-head`} style={headStyle}>
           <div class={`${prefixCls}-head-wrapper`}>
             {titleDom && <div class={`${prefixCls}-head-title`}>{titleDom}</div>}
             {extraDom && <div class={`${prefixCls}-extra`}>{extraDom}</div>}
@@ -169,11 +217,12 @@ export default {
         {loading ? loadingBlock : children}
       </div>
     )
-    const actions = getComponentFromProp(this, 'actions')
-    const actionDom = actions || null
+    const actions = filterEmpty(this.$slots.actions)
+    const actionDom = actions && actions.length
+      ? <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul> : null
 
     return (
-      <div class={classString} ref='cardContainerRef'>
+      <div class={classString} ref='cardContainerRef' {...{ on: omit($listeners, ['tabChange', 'tab-change']) }}>
         {head}
         {coverDom}
         {children ? body : null}

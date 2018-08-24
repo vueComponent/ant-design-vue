@@ -15,6 +15,7 @@
       style="width:100%"
       title="Card title"
       :tabList="tabList"
+      :activeTabKey="key"
       @tabChange="key => onTabChange(key, 'key')"
     >
       <span slot="customRender" slot-scope="item">

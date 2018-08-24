@@ -19,11 +19,11 @@
     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
     slot="cover"
   />
-  <ul class="ant-card-actions" slot="actions">
-    <li style="width: 33.3333%;"><a-icon type="setting" /></li>
-    <li style="width: 33.3333%;"><a-icon type="edit" /></li>
-    <li style="width: 33.3333%;"> <a-icon type="ellipsis" /></li>
-  </ul>
+  <template class="ant-card-actions" slot="actions">
+    <a-icon type="setting" />
+    <a-icon type="edit" />
+    <a-icon type="ellipsis" />
+  </template>
   <a-card-meta
     title="Card title"
     description="This is the description">

@@ -7,6 +7,7 @@ import Icon from './icon'
 import Loading from './loading'
 import Multiple from './multiple'
 import Size from './size'
+import Block from './block'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -19,7 +20,7 @@ const md = {
           To trigger an operation.
           ## When To Use
           A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
-          ## Examples 
+          ## Examples
           `,
 }
 export default {
@@ -39,6 +40,7 @@ export default {
         <Loading />
         <Multiple />
         <Size />
+        <Block />
         <api>
           <CN slot='cn' />
           <US/>

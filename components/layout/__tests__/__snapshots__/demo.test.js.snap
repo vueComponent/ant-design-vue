@@ -92,7 +92,7 @@ exports[`renders ./components/layout/demo/fixed.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-fixed-sider">
-  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; position: fixed; left: 0px;">
+  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; height: 100vh; position: fixed; left: 0px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu  ant-menu-root ant-menu-inline ant-menu-dark" role="menu" aria-activedescendant="" tabindex="0">

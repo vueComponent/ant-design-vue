@@ -1,4 +1,4 @@
-
+import { cloneElement } from '../../_util/vnode'
 import {
   getTransformByIndex,
   getActiveIndex,
@@ -17,10 +17,6 @@ export default {
     activeKey: String,
     tabBarPosition: String,
   },
-  data () {
-    return {
-    }
-  },
   computed: {
     classes () {
       const { animated, prefixCls } = this
@@ -33,6 +29,29 @@ export default {
     },
   },
   methods: {
+    getTabPanes () {
+      const props = this.$props
+      const activeKey = props.activeKey
+      const children = this.$slots.default || []
+      const newChildren = []
+
+      children.forEach((child) => {
+        if (!child) {
+          return
+        }
+        const key = child.key
+        const active = activeKey === key
+        newChildren.push(cloneElement(child, {
+          props: {
+            active,
+            destroyInactiveTabPane: props.destroyInactiveTabPane,
+            rootPrefixCls: props.prefixCls,
+          },
+        }))
+      })
+
+      return newChildren
+    },
   },
   render () {
     const {
@@ -58,7 +77,7 @@ export default {
         class={classes}
         style={style}
       >
-        {this.$slots.default}
+        {this.getTabPanes()}
       </div>
     )
   },

@@ -2,17 +2,25 @@ import { setTransform, isTransformSupported } from './utils'
 import addDOMEventListener from 'add-dom-event-listener'
 import debounce from 'lodash/debounce'
 import PropTypes from '../../_util/vue-types'
+import BaseMixin from '../../_util/BaseMixin'
 
 function noop () {
 }
 export default {
+  name: 'ScrollableTabBarNode',
+  mixins: [BaseMixin],
   props: {
-    scrollAnimated: { type: Boolean, default: true },
+    saveRef: PropTypes.func.def(() => {}),
+    getRef: PropTypes.func.def(() => {}),
+    tabBarPosition: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).def('left'),
+    prefixCls: PropTypes.string.def(''),
+    scrollAnimated: PropTypes.bool.def(true),
     navWrapper: PropTypes.func.def(arg => arg),
   },
 
   data () {
     this.offset = 0
+    this.prevProps = this.$props
     return {
       next: false,
       prev: false,
@@ -32,7 +40,8 @@ export default {
 
   updated () {
     this.$nextTick(() => {
-      this.updatedCal()
+      this.updatedCal(this.prevProps)
+      this.prevProps = this.$props
     })
   },
 
@@ -53,21 +62,30 @@ export default {
     },
   },
   methods: {
-    updatedCal () {
-      if (this.tabBarPositionChange) {
-        this.tabBarPositionChange = false
+    updatedCal (prevProps) {
+      const props = this.$props
+      if (prevProps && prevProps.tabBarPosition !== props.tabBarPosition) {
+        this.setOffset(0)
         return
       }
-      this.setNextPrev()
-      this.$nextTick(() => {
+      const nextPrev = this.setNextPrev()
+      // wait next, prev show hide
+      /* eslint react/no-did-update-set-state:0 */
+      if (this.isNextPrevShown(this.$data) !== this.isNextPrevShown(nextPrev)) {
+        this.$foreceUpdate()
+        this.$nextTick(() => {
+          this.scrollToActiveTab()
+        })
+      } else if (!prevProps || props.activeKey !== prevProps.activeKey) {
+        // can not use props.activeKey
         this.scrollToActiveTab()
-      })
+      }
     },
     setNextPrev () {
-      const navNode = this.$refs.nav
+      const navNode = this.$props.getRef('nav')
       const navNodeWH = this.getScrollWH(navNode)
-      const containerWH = this.getOffsetWH(this.$refs.container)
-      const navWrapNodeWH = this.getOffsetWH(this.$refs.navWrap)
+      const containerWH = this.getOffsetWH(this.$props.getRef('container'))
+      const navWrapNodeWH = this.getOffsetWH(this.$props.getRef('navWrap'))
       let { offset } = this
       const minOffset = containerWH - navNodeWH
       let { next, prev } = this
@@ -134,7 +152,7 @@ export default {
         this.offset = target
         let navOffset = {}
         const tabBarPosition = this.$props.tabBarPosition
-        const navStyle = this.$refs.nav.style
+        const navStyle = this.$props.getRef('nav').style
         const transformSupported = isTransformSupported(navStyle)
         if (tabBarPosition === 'left' || tabBarPosition === 'right') {
           if (transformSupported) {
@@ -177,6 +195,9 @@ export default {
     },
 
     setNext (v) {
+      if (!v) {
+        // debugger
+      }
       if (this.next !== v) {
         this.next = v
       }
@@ -193,7 +214,7 @@ export default {
       if (e.propertyName !== 'opacity') {
         return
       }
-      const { container } = this
+      const container = this.$props.getRef('container')
       this.scrollToActiveTab({
         target: container,
         currentTarget: container,
@@ -201,8 +222,8 @@ export default {
     },
 
     scrollToActiveTab (e) {
-      const { activeTab } = this
-      const navWrap = this.$refs.navWrap
+      const activeTab = this.$props.getRef('activeTab')
+      const navWrap = this.$props.getRef('navWrap')
       if (e && e.target !== e.currentTarget || !activeTab) {
         return
       }
@@ -230,84 +251,98 @@ export default {
 
     prevClick (e) {
       this.__emit('prevClick', e)
-      const navWrapNode = this.$refs.navWrap
+      const navWrapNode = this.$props.getRef('navWrap')
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       const { offset } = this
       this.setOffset(offset + navWrapNodeWH)
     },
 
     nextClick (e) {
-      this.__emit('nextClick', e)
-      const navWrapNode = this.$refs.navWrap
+      // this.__emit('nextClick', e)
+      const navWrapNode = this.$props.getRef('navWrap')
       const navWrapNodeWH = this.getOffsetWH(navWrapNode)
       const { offset } = this
       this.setOffset(offset - navWrapNodeWH)
     },
+  },
+  render () {
+    const { next, prev } = this
+    const { prefixCls, scrollAnimated, navWrapper } = this.$props
+    const showNextPrev = prev || next
 
-    getScrollBarNode (content) {
-      const { next, prev } = this
-      const { prefixCls, scrollAnimated, navWrapper } = this.$props
-      const showNextPrev = prev || next
+    const prevButton = (
+      <span
+        onClick={prev ? this.prevClick : noop}
+        unselectable='unselectable'
+        class={{
+          [`${prefixCls}-tab-prev`]: 1,
+          [`${prefixCls}-tab-btn-disabled`]: !prev,
+          [`${prefixCls}-tab-arrow-show`]: showNextPrev,
+        }}
+        onTransitionend={this.prevTransitionEnd}
+      >
+        <span class={`${prefixCls}-tab-prev-icon`} />
+      </span>
+    )
 
-      const prevButton = (
-        <span
-          onClick={prev ? this.prevClick : noop}
-          unselectable='unselectable'
-          class={{
-            [`${prefixCls}-tab-prev`]: 1,
-            [`${prefixCls}-tab-btn-disabled`]: !prev,
-            [`${prefixCls}-tab-arrow-show`]: showNextPrev,
-          }}
-          onTransitionEnd={this.prevTransitionEnd}
-        >
-          <span class={`${prefixCls}-tab-prev-icon`} />
-        </span>
-      )
+    const nextButton = (
+      <span
+        onClick={next ? this.nextClick : noop}
+        unselectable='unselectable'
+        class={{
+          [`${prefixCls}-tab-next`]: 1,
+          [`${prefixCls}-tab-btn-disabled`]: !next,
+          [`${prefixCls}-tab-arrow-show`]: showNextPrev,
+        }}
+      >
+        <span class={`${prefixCls}-tab-next-icon`} />
+      </span>
+    )
 
-      const nextButton = (
-        <span
-          onClick={next ? this.nextClick : noop}
-          unselectable='unselectable'
-          class={{
-            [`${prefixCls}-tab-next`]: 1,
-            [`${prefixCls}-tab-btn-disabled`]: !next,
-            [`${prefixCls}-tab-arrow-show`]: showNextPrev,
-          }}
-        >
-          <span class={`${prefixCls}-tab-next-icon`} />
-        </span>
-      )
+    const navClassName = `${prefixCls}-nav`
+    const navClasses = {
+      [navClassName]: true,
+      [
+      scrollAnimated
+        ? `${navClassName}-animated`
+        : `${navClassName}-no-animated`
+      ]: true,
+    }
 
-      const navClassName = `${prefixCls}-nav`
-      const navClasses = {
-        [navClassName]: true,
-        [
-        scrollAnimated
-          ? `${navClassName}-animated`
-          : `${navClassName}-no-animated`
-        ]: true,
-      }
-
-      return (
+    return (
+      <div
+        class={{
+          [`${prefixCls}-nav-container`]: 1,
+          [`${prefixCls}-nav-container-scrolling`]: showNextPrev,
+        }}
+        key='container'
+        {...{ directives: [{
+          name: 'ref',
+          value: this.saveRef('container'),
+        }] }}
+      >
+        {prevButton}
+        {nextButton}
         <div
-          class={{
-            [`${prefixCls}-nav-container`]: 1,
-            [`${prefixCls}-nav-container-scrolling`]: showNextPrev,
-          }}
-          key='container'
-          ref='container'
+          class={`${prefixCls}-nav-wrap`}
+          {...{ directives: [{
+            name: 'ref',
+            value: this.saveRef('navWrap'),
+          }] }}
         >
-          {prevButton}
-          {nextButton}
-          <div class={`${prefixCls}-nav-wrap`} ref='navWrap'>
-            <div class={`${prefixCls}-nav-scroll`}>
-              <div class={navClasses} ref='nav'>
-                {navWrapper(content)}
-              </div>
+          <div class={`${prefixCls}-nav-scroll`}>
+            <div
+              class={navClasses}
+              {...{ directives: [{
+                name: 'ref',
+                value: this.saveRef('nav'),
+              }] }}
+            >
+              {navWrapper(this.$slots.default)}
             </div>
           </div>
         </div>
-      )
-    },
+      </div>
+    )
   },
 }

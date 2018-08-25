@@ -1,13 +1,14 @@
-
+import intersperse from 'intersperse'
 import PropTypes from '../_util/vue-types'
 import classNames from 'classnames'
 import Row from '../grid/Row'
 import Col, { ColProps } from '../grid/Col'
 import warning from '../_util/warning'
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants'
-import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, getSlots } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, getSlots, isValidElement } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import BaseMixin from '../_util/BaseMixin'
+import { cloneElement } from '../_util/vnode'
 export const FormItemProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -48,12 +49,18 @@ export default {
     )
   },
   methods: {
-    getHelpMsg () {
+    getHelpMessage () {
       const help = getComponentFromProp(this, 'help')
       const onlyControl = this.getOnlyControl()
       if (help === undefined && onlyControl) {
         const errors = this.getField().errors
-        return errors ? errors.map((e) => e.message).join(', ') : ''
+        if (errors) {
+          return intersperse(errors.map((e, index) => {
+            return isValidElement(e.message) ? cloneElement(e.message, { key: index }) : e.message
+          }), ' ')
+        } else {
+          return ''
+        }
       }
 
       return help
@@ -79,7 +86,7 @@ export default {
           continue
         }
         const slots = getSlots(child)
-        if (FIELD_META_PROP in attrs) { // And means FIELD_DATA_PROP in chidl.props, too.
+        if (FIELD_META_PROP in attrs) { // And means FIELD_DATA_PROP in child.props, too.
           controls.push(child)
         } else if (slots.default) {
           controls = controls.concat(this.getControls(slots.default, recursively))
@@ -119,24 +126,28 @@ export default {
       return this.getChildAttr(FIELD_DATA_PROP)
     },
 
-    onHelpAnimEnd  () {
-      this.setState({ helpShow: false })
+    onHelpAnimEnd  (_key, helpShow) {
+      this.helpShow = helpShow
+      if (!helpShow) {
+        this.$forceUpdate()
+      }
     },
 
     renderHelp () {
       const prefixCls = this.prefixCls
-      const help = this.getHelpMsg()
+      const help = this.getHelpMessage()
       const children = help ? (
         <div class={`${prefixCls}-explain`} key='help'>
           {help}
         </div>
       ) : null
-      const transitionProps = getTransitionProps('show-help', {
-        afterLeave: this.onHelpAnimEnd,
-      })
       if (children) {
-        this.setState({ helpShow: true })
+        this.helpShow = !!children
       }
+      const transitionProps = getTransitionProps('show-help', {
+        afterEnter: () => this.onHelpAnimEnd('help', true),
+        afterLeave: () => this.onHelpAnimEnd('help', false),
+      })
       return (
         <transition
           {...transitionProps}
@@ -318,7 +329,7 @@ export default {
       const prefixCls = props.prefixCls
       const itemClassName = {
         [`${prefixCls}-item`]: true,
-        [`${prefixCls}-item-with-help`]: !!this.getHelpMsg() || this.helpShow,
+        [`${prefixCls}-item-with-help`]: this.helpShow,
         [`${prefixCls}-item-no-colon`]: !props.colon,
       }
 

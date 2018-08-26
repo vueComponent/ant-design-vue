@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import Vue from 'vue'
 import Drawer from '..'
 import Button from '../../button'
 import { asyncExpect } from '@/tests/utils'
@@ -39,9 +38,9 @@ const MultiDrawer = {
         closable: false,
         visible: this.visible,
         getContainer: false,
-        ...this.$props,
+        wrapClassName: 'test_drawer',
+        placement: this.placement,
       },
-      class: 'test_drawer',
       on: {
         close: this.onClose,
       },
@@ -53,7 +52,7 @@ const MultiDrawer = {
         closable: false,
         visible: this.childrenDrawer,
         getContainer: false,
-        ...this.$props,
+        placement: this.placement,
       },
       on: {
         close: this.onChildrenDrawerClose,
@@ -118,21 +117,45 @@ const MultiDrawer = {
 }
 
 describe('Drawer', () => {
-  // it('render right MultiDrawer', (done) => {
-    // Vue.config.errorHandler = done
-    // const wrapper = mount(MultiDrawer, {
-    //   propsData: {
-    //     placement: 'right',
-    //   },
-    //   aync: true,
-    // })
-    // wrapper.find('#open_drawer').trigger('click')
-    // wrapper.find('#open_two_drawer').trigger('click')
-    // Vue.nextTick(() => {
-    //   console.log(wrapper.find('#open_drawer').html())
-    //   // const translateX = wrapper.find('.ant-drawer.test_drawer').get(0).props.style.transform
-    //   // expect(translateX).toEqual('translateX(-180px)')
-    //   done()
-    // })
-  // })
+  it('render right MultiDrawer', async () => {
+    document.body.innerHTML = ''
+    const wrapper = mount(MultiDrawer, {
+      propsData: {
+        placement: 'right',
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      wrapper.find('#open_drawer').trigger('click')
+    }, 0)
+    await asyncExpect(() => {
+      wrapper.find('#open_two_drawer').trigger('click')
+    }, 0)
+    await asyncExpect(() => {
+      const translateX = wrapper.find('.ant-drawer.test_drawer').element.parentElement.style.transform
+      expect(translateX).toEqual('translateX(-180px)')
+      expect(wrapper.find('#two_drawer_text').exists()).toBe(true)
+    }, 0)
+  })
+
+  it('render right MultiDrawer', async () => {
+    document.body.innerHTML = ''
+    const wrapper = mount(MultiDrawer, {
+      propsData: {
+        placement: 'left',
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      wrapper.find('#open_drawer').trigger('click')
+    }, 0)
+    await asyncExpect(() => {
+      wrapper.find('#open_two_drawer').trigger('click')
+    }, 0)
+    await asyncExpect(() => {
+      const translateX = wrapper.find('.ant-drawer.test_drawer').element.parentElement.style.transform
+      expect(translateX).toEqual('translateX(180px)')
+      expect(wrapper.find('#two_drawer_text').exists()).toBe(true)
+    }, 0)
+  })
 })

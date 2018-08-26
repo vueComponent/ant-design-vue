@@ -13,6 +13,7 @@
 | title | The title for Drawer. | string\|slot | - |
 | visible | Whether the Drawer dialog is visible or not. | boolean | false |
 | width | Width of the Drawer dialog. | string\|number | 256 |
+| wrapClassName | The class name of the container of the Drawer dialog. | string | - |
 | zIndex | The `z-index` of the Drawer. | Number | 1000 |
 | placement | The placement of the Drawer. | 'left' \| 'right' | 'right'
 

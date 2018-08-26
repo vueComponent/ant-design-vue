@@ -57,9 +57,9 @@ const DrawerEventTester = {
 }
 
 describe('Drawer', () => {
-  it('render correctly', async (done) => {
+  it('render correctly', async () => {
     const wrapper = mount(DrawerEventTester, {
-      aync: false,
+      sync: false,
     })
     await asyncExpect(() => {
       const body = wrapper.find('.ant-drawer-body').exists()
@@ -69,13 +69,12 @@ describe('Drawer', () => {
       expect(content).toBe('Here is content of Drawer')
 
       expect(wrapper.html()).toMatchSnapshot()
-      done()
     })
   }, 1000)
 
   it('mask trigger onClose', async () => {
     const wrapper = mount(DrawerEventTester, {
-      aync: false,
+      sync: false,
     })
 
     await asyncExpect(() => {
@@ -89,7 +88,7 @@ describe('Drawer', () => {
 
   it('close button trigger onClose', async () => {
     const wrapper = mount(DrawerEventTester, {
-      aync: false,
+      sync: false,
     })
     await asyncExpect(() => {
       wrapper.find('button.ant-btn').trigger('click')
@@ -105,7 +104,7 @@ describe('Drawer', () => {
       propsData: {
         maskClosable: false,
       },
-      aync: false,
+      sync: false,
     })
     await asyncExpect(() => {
       wrapper.find('button.ant-btn').trigger('click')
@@ -121,7 +120,7 @@ describe('Drawer', () => {
       propsData: {
         destroyOnClose: true,
       },
-      aync: false,
+      sync: false,
     })
     await asyncExpect(() => {
       wrapper.find('button.ant-btn').trigger('click')
@@ -131,6 +130,8 @@ describe('Drawer', () => {
         visible: false,
       })
       wrapper.find('.ant-drawer-wrapper-body').trigger('transitionend')
+    })
+    await asyncExpect(() => {
       expect(wrapper.find('.ant-drawer-wrapper-body').exists()).toBe(false)
     })
   })
@@ -140,7 +141,7 @@ describe('Drawer', () => {
       propsData: {
         destroyOnClose: true,
       },
-      aync: false,
+      sync: false,
     })
     await asyncExpect(() => {
       wrapper.find('button.ant-btn').trigger('click')

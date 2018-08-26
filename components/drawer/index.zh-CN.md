@@ -11,6 +11,7 @@
 | title | 标题 | string \| slot | - |
 | visible | Drawer 是否可见 | boolean | - |
 | width | 宽度 | string \| number | 256 |
+| wrapClassName | 对话框外层容器的类名 | string | - |
 | zIndex | 设置 Drawer 的 `z-index` | Number | 1000 |
 | placement | 抽屉的方向 | 'left' \| 'right' | 'right'
 

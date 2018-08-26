@@ -1,21 +1,14 @@
-import classNames from 'classnames'
 import VcDrawer from '../vc-drawer/src'
-import warning from '../_util/warning'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import { getClass, getStyle, getComponentFromProp } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps } from '../_util/props-util'
 
 export default {
   name: 'ADrawer',
   props: {
     closable: PropTypes.bool.def(true),
     destroyOnClose: PropTypes.bool,
-    getContainer: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.func,
-      PropTypes.bool,
-    ]),
+    getContainer: PropTypes.any,
     maskClosable: PropTypes.bool.def(true),
     mask: PropTypes.bool,
     maskStyle: PropTypes.object,
@@ -26,13 +19,14 @@ export default {
     prefixCls: PropTypes.string.def('ant-drawer'),
     placement: PropTypes.string.def('right'),
     level: PropTypes.any.def(null),
+    wrapClassName: PropTypes.string,
   },
   mixins: [BaseMixin],
   data () {
     this.destoryClose = false
     this.preVisible = this.$props.visible
     return {
-      push: false,
+      _push: false,
     }
   },
   inject: {
@@ -49,9 +43,9 @@ export default {
     this.$nextTick(() => {
       if (this.preVisible !== this.visible && this.parentDrawer) {
         if (this.visible) {
-          this.parentDrawer.handlePush()
+          this.parentDrawer.push()
         } else {
-          this.parentDrawer.handlePull()
+          this.parentDrawer.pull()
         }
       }
       this.preVisible = this.visible
@@ -70,14 +64,14 @@ export default {
       }
       this.close(e)
     },
-    handlePush () {
+    push () {
       this.setState({
-        push: true,
+        _push: true,
       })
     },
-    handlePull () {
+    pull () {
       this.setState({
-        push: false,
+        _push: false,
       })
     },
     onDestoryTransitionEnd () {
@@ -100,7 +94,7 @@ export default {
         return null
       }
       this.destoryClose = false
-      const { placement } = this.$props
+      const { placement, bodyStyle } = this.$props
 
       const containerStyle = placement === 'left' ||
         placement === 'right' ? {
@@ -116,7 +110,6 @@ export default {
       }
       const { prefixCls, closable } = this.$props
       const title = getComponentFromProp(this, 'title')
-      const style = getStyle(this)
       let header
       if (title) {
         header = (
@@ -146,7 +139,7 @@ export default {
         >
           {header}
           {closer}
-          <div class={`${prefixCls}-body`} style={style}>
+          <div class={`${prefixCls}-body`} style={bodyStyle}>
             {this.$slots.default}
           </div>
         </div>
@@ -154,21 +147,21 @@ export default {
     },
   },
   render () {
-    const { zIndex, visible, placement, wrapClassName, mask, ...rest } = this.$props
-    warning(wrapClassName === undefined, 'wrapClassName is deprecated, please use className instead.')
-    const vcDrawerStyle = this.push
+    const props = getOptionProps(this)
+    const { zIndex, visible, placement, mask, wrapClassName, ...rest } = props
+    const vcDrawerStyle = this.$data._push
       ? {
         zIndex,
         transform: `translateX(${placement === 'left' ? 180 : -180}px)`,
       }
       : { zIndex }
-    const className = getClass(this)
     const vcDrawerProps = {
       props: {
         handler: false,
         open: visible,
         showMask: mask,
         placement,
+        wrapClassName,
         ...rest,
       },
       on: {
@@ -176,7 +169,7 @@ export default {
         ...this.$listeners,
       },
       style: vcDrawerStyle,
-      class: classNames(wrapClassName, className),
+
     }
     return (
       <VcDrawer

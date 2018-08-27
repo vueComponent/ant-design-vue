@@ -72,9 +72,7 @@ export default {
           <template slot='overlay'>
             {getComponentFromProp(this, 'overlay')}
           </template>
-          <Button type={type}>
-            <Icon type='down' />
-          </Button>
+          <Button type={type} icon='ellipsis' />
         </Dropdown>
       </ButtonGroup>
     )

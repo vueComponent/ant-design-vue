@@ -1,4 +1,4 @@
-
+import classNames from 'classnames'
 import Dialog from '../vc-dialog'
 import PropTypes from '../_util/vue-types'
 import addEventListener from '../_util/Dom/addEventListener'
@@ -7,7 +7,7 @@ import buttonTypes from '../button/buttonTypes'
 const ButtonType = buttonTypes().type
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { getConfirmLocale } from './locale'
-import { initDefaultProps, getComponentFromProp, getClass, getStyle } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, getClass, getStyle, mergeProps } from '../_util/props-util'
 
 let mousePosition = null
 let mousePositionEventBinded = false
@@ -28,6 +28,8 @@ const modalProps = (defaultProps = {}) => {
     /** 点击模态框右上角叉、取消按钮、Props.maskClosable 值为 true 时的遮罩层或键盘按下 Esc 时的回调*/
     // onCancel: (e: React.MouseEvent<any>) => void,
     afterClose: PropTypes.func.def(noop),
+    /** 居中 */
+    centered: PropTypes.bool,
     /** 宽度*/
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /** 底部内容*/
@@ -40,6 +42,8 @@ const modalProps = (defaultProps = {}) => {
     cancelText: PropTypes.string,
     /** 点击蒙层是否允许关闭*/
     maskClosable: PropTypes.bool,
+    okButtonProps: PropTypes.object,
+    cancelButtonProps: PropTypes.object,
     destroyOnClose: PropTypes.bool,
     wrapClassName: PropTypes.string,
     maskTransitionName: PropTypes.string,
@@ -50,6 +54,7 @@ const modalProps = (defaultProps = {}) => {
     maskStyle: PropTypes.object,
     mask: PropTypes.bool,
     keyboard: PropTypes.bool,
+    wrapProps: PropTypes.object,
   }
   return initDefaultProps(props, defaultProps)
 }
@@ -64,6 +69,8 @@ export default {
     confirmLoading: false,
     visible: false,
     okType: 'primary',
+    // okButtonDisabled: false,
+    // cancelButtonDisabled: false,
   }),
   model: {
     prop: 'visible',
@@ -86,18 +93,21 @@ export default {
     },
     renderFooter (locale) {
       const { okType, confirmLoading } = this
+      const cancelBtnProps = mergeProps({ on: { click: this.handleCancel }}, this.cancelButtonProps || {})
+      const okBtnProps = mergeProps({
+        on: { click: this.handleOk },
+        props: {
+          type: okType,
+          loading: confirmLoading,
+        },
+      },
+      this.okButtonProps || {})
       return (
         <div>
-          <Button
-            onClick={this.handleCancel}
-          >
+          <Button {...cancelBtnProps}>
             {getComponentFromProp(this, 'cancelText') || locale.cancelText}
           </Button>
-          <Button
-            type={okType}
-            loading={confirmLoading}
-            onClick={this.handleOk}
-          >
+          <Button {...okBtnProps}>
             {getComponentFromProp(this, 'okText') || locale.okText}
           </Button>
         </div>
@@ -123,7 +133,7 @@ export default {
   },
 
   render () {
-    const { visible, $listeners, $slots } = this
+    const { visible, wrapClassName, centered, prefixCls, $listeners, $slots } = this
 
     const defaultFooter = (
       <LocaleReceiver
@@ -139,6 +149,8 @@ export default {
     const dialogProps = {
       props: {
         ...this.$props,
+        prefixCls,
+        wrapClassName: classNames({ [`${prefixCls}-centered`]: !!centered }, wrapClassName),
         title,
         footer: footer === undefined ? defaultFooter : footer,
         visible: visible,

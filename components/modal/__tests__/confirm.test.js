@@ -1,5 +1,5 @@
 import Modal from '..'
-
+import { asyncExpect } from '@/tests/utils'
 const { confirm } = Modal
 
 describe('Modal.confirm triggers callbacks correctly', () => {
@@ -70,5 +70,21 @@ describe('Modal.confirm triggers callbacks correctly', () => {
     open({ okCancel: false })
     expect($$('.ant-btn')).toHaveLength(1)
     expect($$('.ant-btn')[0].innerHTML).toContain('OK')
+  })
+  it('trigger onCancel once when click on cancel button', () => {
+    jest.useFakeTimers();
+    ['info', 'success', 'warning', 'error'].forEach(async (type) => {
+      Modal[type]({
+        title: 'title',
+        content: 'content',
+      })
+      expect($$(`.ant-confirm-${type}`)).toHaveLength(1)
+      $$('.ant-btn')[0].click()
+      jest.runAllTimers()
+      await asyncExpect(() => {
+        expect($$(`.ant-confirm-${type}`)).toHaveLength(0)
+      })
+    })
+    jest.useRealTimers()
   })
 })

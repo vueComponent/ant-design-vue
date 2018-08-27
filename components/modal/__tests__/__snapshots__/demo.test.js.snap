@@ -14,6 +14,13 @@ exports[`renders ./components/modal/demo/basic.md correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/modal/demo/button-props.md correctly 1`] = `
+<div>
+  <button type="button" class="ant-btn ant-btn-primary"><span>Open</span></button>
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/modal/demo/confirm.md correctly 1`] = `
 <div>
   <button type="button" class="ant-btn ant-btn-default"><span>Confirm</span></button>

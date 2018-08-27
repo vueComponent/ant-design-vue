@@ -6,6 +6,8 @@ import Duration from './duration'
 import Placement from './placement'
 import WithBtn from './with-btn'
 import WithIcon from './with-icon'
+import Update from './update'
+
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -46,6 +48,7 @@ export default {
         <Placement />
         <WithBtn />
         <WithIcon />
+        <Update />
         <api>
           <CN slot='cn' />
           <US/>

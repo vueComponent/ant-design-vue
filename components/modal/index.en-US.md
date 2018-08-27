@@ -6,6 +6,7 @@
 | afterClose | Specify a function that will be called when modal is closed completely. | function | - |
 | bodyStyle | Body style for modal body element. Such as height, padding etc. | object | {} |
 | cancelText | Text of the Cancel button | string\|slot | `Cancel` |
+| centered | Centered Modal | Boolean | `false` |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | true |
 | confirmLoading | Whether to apply loading visual effect for OK button or not | boolean | false |
 | destroyOnClose | Whether to unmount child compenents on onClose | boolean | false |
@@ -16,7 +17,8 @@
 | maskStyle | Style for modal's mask element. | object | {} |
 | okText | Text of the OK button | string\|slot | `OK` |
 | okType | Button `type` of the OK button | string | `primary` |
-| style | Style of floating layer, typically used at least for adjusting the position. | object | - |
+| okButtonProps | The ok button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/ant-design-vue/components/button/#API), on: {}} | - |
+| cancelButtonProps | The cancel button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/ant-design-vue/components/button/#API), on: {}} | - |
 | title | The modal dialog's title | string\|slot | - |
 | visible | Whether the modal dialog is visible or not | boolean | false |
 | width | Width of the modal dialog | string\|number | 520 |
@@ -49,9 +51,11 @@ The properties of the object are follows:
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | cancelText | Text of the Cancel button | string | `Cancel` |
+| centered | Centered Modal | Boolean | `false` |
 | class | class of container | string | - |
 | content | Content | string\|vNode | - |
 | iconType | Icon `type` of the Icon component | string | `question-circle` |
+| keyboard | Whether support press esc to close | Boolean | true |
 | maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | Boolean | `false` |
 | okText | Text of the OK button | string | `OK` |
 | okType | Button `type` of the OK button | string | `primary` |

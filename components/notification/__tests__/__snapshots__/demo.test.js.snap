@@ -20,6 +20,8 @@ exports[`renders ./components/notification/demo/placement.md correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/notification/demo/update.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+
 exports[`renders ./components/notification/demo/with-btn.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
 exports[`renders ./components/notification/demo/with-icon.md correctly 1`] = `

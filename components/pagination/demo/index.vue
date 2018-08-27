@@ -13,7 +13,7 @@ import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
 const md = {
-  cn: `# Pagination
+  cn: `# Pagination 分页
 
     采用分页的形式分隔长列表，每次只加载一个页面。
 

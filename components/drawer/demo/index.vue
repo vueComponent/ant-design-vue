@@ -13,14 +13,16 @@ import US from '../index.en-US.md'
 import '../style'
 
 const md = {
-  cn: `# 抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。
+  cn: `# Drawer 抽屉
+        抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。
        ## 何时使用
 
       * 当需要一个附加的面板来控制父窗体内容，这个面板在需要时呼出。比如，控制界面展示样式，往界面中添加内容。
       * 当需要在当前任务流中插入临时任务，创建或预览附加内容。比如展示协议条款，创建子对象。
        ## 代码演示
         `,
-  us: `# A Drawer is a panel that is typically overlaid on top of a page and slides in from the side. It contains a set of information or actions. Since that user can interact with the Drawer without leaving the current page, tasks can be achieved more efficient within the same context.
+  us: `# Drawer
+        A Drawer is a panel that is typically overlaid on top of a page and slides in from the side. It contains a set of information or actions. Since that user can interact with the Drawer without leaving the current page, tasks can be achieved more efficient within the same context.
        ## When To Use
 
       * Use a Form to create or edit a set of information.

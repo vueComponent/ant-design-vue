@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 
 export default {
-  wrapperClassName: PropTypes.string,
+  wrapClassName: PropTypes.string,
   width: PropTypes.any,
   height: PropTypes.any,
   defaultOpen: PropTypes.bool,

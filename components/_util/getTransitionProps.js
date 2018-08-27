@@ -1,7 +1,7 @@
 import animate from './css-animation'
 const noop = () => {}
 const getTransitionProps = (transitionName, opt = {}) => {
-  const { beforeEnter, enter, leave, afterLeave, appear = true, tag } = opt
+  const { beforeEnter, enter, afterEnter, leave, afterLeave, appear = true, tag } = opt
   const transitionProps = {
     props: {
       appear,
@@ -12,6 +12,7 @@ const getTransitionProps = (transitionName, opt = {}) => {
       enter: enter || ((el, done) => {
         animate(el, `${transitionName}-enter`, done)
       }),
+      afterEnter: afterEnter || noop,
       leave: leave || ((el, done) => {
         animate(el, `${transitionName}-leave`, done)
       }),

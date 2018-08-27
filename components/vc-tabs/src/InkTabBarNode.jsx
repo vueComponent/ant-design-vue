@@ -1,4 +1,6 @@
+import PropTypes from '../../_util/vue-types'
 import { setTransform, isTransformSupported } from './utils'
+import BaseMixin from '../../_util/BaseMixin'
 
 export function getScroll (w, top) {
   let ret = w[`page${top ? 'Y' : 'X'}Offset`]
@@ -36,11 +38,11 @@ function offset (elem) {
 
 function componentDidUpdate (component, init) {
   const { styles = {}} = component.$props
-  const rootNode = component.$refs.root
-  const wrapNode = component.$refs.nav || rootNode
+  const rootNode = component.getRef('root')
+  const wrapNode = component.getRef('nav') || rootNode
   const containerOffset = offset(wrapNode)
-  const inkBarNode = component.$refs.inkBar
-  const activeTab = component.$refs.activeTab
+  const inkBarNode = component.getRef('inkBar')
+  const activeTab = component.getRef('activeTab')
   const inkBarNodeStyle = inkBarNode.style
   const tabBarPosition = component.$props.tabBarPosition
   if (init) {
@@ -102,6 +104,8 @@ function componentDidUpdate (component, init) {
 }
 
 export default {
+  name: 'InkTabBarNode',
+  mixins: [BaseMixin],
   props: {
     inkBarAnimated: {
       type: Boolean,
@@ -109,6 +113,9 @@ export default {
     },
     prefixCls: String,
     styles: Object,
+    tabBarPosition: String,
+    saveRef: PropTypes.func.def(() => {}),
+    getRef: PropTypes.func.def(() => {}),
   },
   updated () {
     this.$nextTick(function () {
@@ -121,26 +128,28 @@ export default {
       componentDidUpdate(this, true)
     })
   },
-  methods: {
-    getInkBarNode () {
-      const { prefixCls, styles = {}, inkBarAnimated } = this
-      const className = `${prefixCls}-ink-bar`
-      const classes = {
-        [className]: true,
-        [
-        inkBarAnimated
-          ? `${className}-animated`
-          : `${className}-no-animated`
-        ]: true,
-      }
-      return (
-        <div
-          style={styles.inkBar}
-          class={classes}
-          key='inkBar'
-          ref='inkBar'
-        />
-      )
-    },
+  render () {
+    const { prefixCls, styles = {}, inkBarAnimated } = this
+    const className = `${prefixCls}-ink-bar`
+    const classes = {
+      [className]: true,
+      [
+      inkBarAnimated
+        ? `${className}-animated`
+        : `${className}-no-animated`
+      ]: true,
+    }
+    return (
+      <div
+        style={styles.inkBar}
+        class={classes}
+        key='inkBar'
+        {...{ directives: [{
+          name: 'ref',
+          value: this.saveRef('inkBar'),
+        }] }}
+      />
+    )
   },
 }
+

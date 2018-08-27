@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import Vue from 'vue'
 import BaseMixin from '../../_util/BaseMixin'
 import antRefDirective from '../../_util/antRefDirective'
-import { initDefaultProps, getClass, getStyle, getEvents, hasProp } from '../../_util/props-util'
+import { initDefaultProps, getEvents } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import ContainerRender from '../../_util/ContainerRender'
 import getScrollBarSize from '../../_util/getScrollBarSize'
@@ -35,7 +35,7 @@ const Drawer = {
     showMask: true,
     handler: true,
     maskStyle: {},
-    wrapperClassName: '',
+    wrapClassName: '',
   }),
   data () {
     this.levelDom = []
@@ -43,6 +43,7 @@ const Drawer = {
     this.maskDom = null
     this.handlerdom = null
     this.mousePos = null
+    this.sFirstEnter = this.firstEnter
     this.timeout = null
     this.children = null
     this.drawerId = Number((Date.now() + Math.random()).toString()
@@ -50,14 +51,9 @@ const Drawer = {
     const open = this.open !== undefined ? this.open : !!this.defaultOpen
     currentDrawer[this.drawerId] = open
     this.orignalOpen = this.open
-    this.orignalProps = {
-      open,
-      placement: this.placement,
-      level: this.level,
-    }
+    this.preProps = { ...this.$props }
     return {
       sOpen: open,
-      sFirstEnter: this.firstEnter,
     }
   },
   mounted () {
@@ -87,14 +83,31 @@ const Drawer = {
     })
   },
   watch: {
-    open () {
-      this.watchsHandle()
+    open (val) {
+      if (val !== undefined && val !== this.preProps.open) {
+        this.isOpenChange = true
+        // 没渲染 dom 时，获取默认数据;
+        if (!this.container) {
+          this.getDefault(this.$props)
+        }
+        this.setState({
+          sOpen: open,
+        })
+      }
+      this.preProps.open = val
     },
-    placement () {
-      this.watchsHandle()
+    placement (val) {
+      if (val !== this.preProps.placement) {
+        // test 的 bug, 有动画过场，删除 dom
+        this.contentDom = null
+      }
+      this.preProps.placement = val
     },
-    level () {
-      this.watchsHandle()
+    level (val) {
+      if (this.preProps.level !== val) {
+        this.getParentAndLevelDom(this.$props)
+      }
+      this.preProps.level = val
     },
   },
   updated () {
@@ -131,30 +144,6 @@ const Drawer = {
     }
   },
   methods: {
-    watchsHandle () {
-      const nextProps = this.$props
-      const { open, placement, level } = nextProps
-      if (open !== undefined && open !== this.orignalProps.open) {
-        this.isOpenChange = true
-        // 没渲染 dom 时，获取默认数据;
-        if (!this.container) {
-          this.getDefault(nextProps)
-        }
-        this.setState({
-          sOpen: open,
-        })
-        this.orignalProps.open = open
-      }
-      if (placement !== this.orignalProps.placement) {
-        // test 的 bug, 有动画过场，删除 dom
-        this.contentDom = null
-        this.orignalProps.placement = placement
-      }
-      if (this.orignalProps.level !== level) {
-        this.getParentAndLevelDom(nextProps)
-        this.orignalProps.level = level
-      }
-    },
     onMaskTouchEnd (e) {
       this.$emit('maskClick', e)
       this.onTouchEnd(e, true)
@@ -247,10 +236,7 @@ const Drawer = {
               const $levelMove = transformArguments(levelMove, { target: dom, open })
               levelValue = open ? $levelMove[0] : $levelMove[1] || 0
             }
-            const $value = (
-              typeof levelValue === 'number' ||
-              (typeof levelValue === 'string' && levelValue.indexOf('px') === -1)
-            ) ? `${levelValue}px` : levelValue
+            const $value = typeof levelValue === 'number' ? `${levelValue}px` : levelValue
             const placementPos = placement === 'left' || placement === 'top' ? $value : `-${$value}`
             dom.style.transform = levelValue ? `${placementName}(${placementPos})` : ''
             dom.style.msTransform = levelValue ? `${placementName}(${placementPos})` : ''
@@ -372,14 +358,13 @@ const Drawer = {
         maskStyle,
         width,
         height,
+        wrapClassName,
       } = this.$props
       const children = this.$slots.default
-      const className = getClass(this)
-      const style = getStyle(this, true)
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
-        ...className,
+        [wrapClassName]: !!wrapClassName,
       })
       const isOpenChange = this.isOpenChange
       const isHorizontal = placement === 'left' || placement === 'right'
@@ -423,7 +408,6 @@ const Drawer = {
       }
       const domContProps = {
         class: wrapperClassname,
-        style,
         directives: [{
           name: 'ant-ref',
           value: (c) => {

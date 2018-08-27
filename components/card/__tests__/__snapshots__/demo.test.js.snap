@@ -276,16 +276,17 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
       </div>
       <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs no-flex">
         <div role="tablist" tabindex="0" class="ant-tabs-bar">
-          <div class="ant-tabs-extra-content" style="float: right;"></div>
           <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
             <div
               class="ant-tabs-nav-wrap">
               <div class="ant-tabs-nav-scroll">
                 <div class="ant-tabs-nav ant-tabs-nav-animated">
-                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
-                  <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab"><span><i class="anticon anticon-home"></i>tab1
+                  <div>
+                    <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab"><span><i class="anticon anticon-home"></i>tab1
     </span></div>
-                  <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">tab2</div>
+                    <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">tab2</div>
+                  </div>
+                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
                 </div>
               </div>
           </div>
@@ -308,16 +309,17 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
     <div class="ant-card-head-wrapper"></div>
     <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs no-flex">
       <div role="tablist" tabindex="0" class="ant-tabs-bar">
-        <div class="ant-tabs-extra-content" style="float: right;"></div>
         <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
           <div
             class="ant-tabs-nav-wrap">
             <div class="ant-tabs-nav-scroll">
               <div class="ant-tabs-nav ant-tabs-nav-animated">
+                <div>
+                  <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">article</div>
+                  <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">app</div>
+                  <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">project</div>
+                </div>
                 <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">article</div>
-                <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">app</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">project</div>
               </div>
             </div>
         </div>

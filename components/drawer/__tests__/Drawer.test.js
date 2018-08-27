@@ -16,23 +16,22 @@ const DrawerCom = {
       type: Boolean,
       default: false,
     },
-    className: {
+    wrapClassName: {
       type: String,
       default: '',
     },
   },
   render () {
-    const props = {
+    const drawerProps = {
       props: {
         destroyOnClose: true,
         getContainer: false,
         visible: false,
+        wrapClassName: this.wrapClassName,
       },
-      class: this.className,
     }
-    console.dir(props)
     return (
-      <Drawer {...props}>
+      <Drawer {...drawerProps}>
         Here is content of Drawer
       </Drawer>
     )
@@ -58,7 +57,7 @@ describe('Drawer', () => {
     })
   })
 
-  it('have a title', () => {
+  it('have a title', async () => {
     const props = {
       propsData: {
         visible: true,
@@ -68,13 +67,15 @@ describe('Drawer', () => {
       slots: {
         default: 'Here is content of Drawer',
       },
-      sync: true,
+      sync: false,
     }
     const wrapper = mount(Drawer, props)
-    expect(wrapper.html()).toMatchSnapshot()
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
   })
 
-  it('closable is false', () => {
+  it('closable is false', async () => {
     const props = {
       propsData: {
         visible: true,
@@ -84,13 +85,15 @@ describe('Drawer', () => {
       slots: {
         default: 'Here is content of Drawer',
       },
-      sync: true,
+      sync: false,
     }
     const wrapper = mount(Drawer, props)
-    expect(wrapper.html()).toMatchSnapshot()
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
   })
 
-  it('destroyOnClose is true', () => {
+  it('destroyOnClose is true', async () => {
     const props = {
       propsData: {
         destroyOnClose: true,
@@ -100,20 +103,24 @@ describe('Drawer', () => {
       slots: {
         default: 'Here is content of Drawer',
       },
-      sync: true,
+      sync: false,
     }
     const wrapper = mount(Drawer, props)
-    expect(wrapper.html()).toMatchSnapshot()
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
   })
 
-  it('class is test_drawer', () => {
+  it('class is test_drawer', async () => {
     const props = {
       propsData: {
-        className: 'test_drawer',
+        wrapClassName: 'test_drawer',
       },
-      sync: true,
+      sync: false,
     }
     const wrapper = mount(DrawerCom, props)
-    expect(wrapper.html()).toMatchSnapshot()
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
   })
 })

@@ -1,25 +1,22 @@
 
-import TabBarMixin from './TabBarMixin'
-import BaseMixin from '../../_util/BaseMixin'
+import TabBarRootNode from './TabBarRootNode'
+import TabBarTabsNode from './TabBarTabsNode'
+import SaveRef from './SaveRef'
+import { getAttrs } from '../../_util/props-util'
+
 export default {
-  mixins: [TabBarMixin, BaseMixin],
   name: 'TabBar',
-  props: {
-    prefixCls: {
-      default: 'ant-tabs',
-      type: String,
-    },
-    tabBarPosition: {
-      default: 'top',
-      type: String,
-    },
-    disabled: Boolean,
-    activeKey: String,
-    panels: Array,
-  },
-  render (h) {
-    const tabs = this.getTabs(h)
-    return this.getRootNode(tabs, h)
+  inheritAttrs: false,
+  render () {
+    const props = getAttrs(this)
+    const listeners = this.$listeners
+    return (
+      <SaveRef children={(saveRef, getRef) => (
+        <TabBarRootNode saveRef={saveRef} {...{ props, on: listeners }}>
+          <TabBarTabsNode saveRef={saveRef} {...{ props, on: listeners }} />
+        </TabBarRootNode>
+      )}/>
+    )
   },
 }
 

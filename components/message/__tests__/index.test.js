@@ -20,7 +20,6 @@ describe('message', () => {
       expect(document.querySelectorAll('.ant-message')[0].style.top).toBe('100px')
     })
   })
-
   it('should be able to config getContainer', () => {
     message.config({
       getContainer: () => {
@@ -32,6 +31,20 @@ describe('message', () => {
     })
     message.info('whatever')
     expect(document.querySelectorAll('.custom-container').length).toBe(1)
+  })
+
+  it('should be able to config maxCount', async () => {
+    message.config({
+      maxCount: 5,
+    })
+    for (let i = 0; i < 10; i += 1) {
+      message.info('test')
+    }
+    message.info('last')
+    await asyncExpect(() => {
+      expect(document.querySelectorAll('.ant-message-notice').length).toBe(5)
+      expect(document.querySelectorAll('.ant-message-notice')[4].textContent).toBe('last')
+    }, 0)
   })
 
   it('should be able to hide manually', async () => {
@@ -80,6 +93,16 @@ describe('message', () => {
       const aboutDuration = parseInt((Date.now() - now) / 1000, 10)
       expect(aboutDuration).toBe(defaultDuration)
       done()
+    })
+  })
+
+  it('should be called like promise', () => {
+    const defaultDuration = 3
+    const now = Date.now()
+    message.info('whatever').then(() => {
+      // calculate the approximately duration value
+      const aboutDuration = parseInt((Date.now() - now) / 1000, 10)
+      expect(aboutDuration).toBe(defaultDuration)
     })
   })
 

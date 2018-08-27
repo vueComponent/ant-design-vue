@@ -119,20 +119,20 @@ const MultiDrawer = {
 
 describe('Drawer', () => {
   // it('render right MultiDrawer', (done) => {
-    // Vue.config.errorHandler = done
-    // const wrapper = mount(MultiDrawer, {
-    //   propsData: {
-    //     placement: 'right',
-    //   },
-    //   aync: true,
-    // })
-    // wrapper.find('#open_drawer').trigger('click')
-    // wrapper.find('#open_two_drawer').trigger('click')
-    // Vue.nextTick(() => {
-    //   console.log(wrapper.find('#open_drawer').html())
-    //   // const translateX = wrapper.find('.ant-drawer.test_drawer').get(0).props.style.transform
-    //   // expect(translateX).toEqual('translateX(-180px)')
-    //   done()
-    // })
+  // Vue.config.errorHandler = done
+  // const wrapper = mount(MultiDrawer, {
+  //   propsData: {
+  //     placement: 'right',
+  //   },
+  //   aync: true,
+  // })
+  // wrapper.find('#open_drawer').trigger('click')
+  // wrapper.find('#open_two_drawer').trigger('click')
+  // Vue.nextTick(() => {
+  //   console.log(wrapper.find('#open_drawer').html())
+  //   // const translateX = wrapper.find('.ant-drawer.test_drawer').get(0).props.style.transform
+  //   // expect(translateX).toEqual('translateX(-180px)')
+  //   done()
+  // })
   // })
 })

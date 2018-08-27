@@ -2,7 +2,7 @@
 
 exports[`Drawer render correctly 1`] = `
 <div>
-  <button type="button" class="ant-btn ant-btn-default ant-btn-clicked"><span>open</span></button>
+  <button type="button" class="ant-btn ant-btn-default"><span>open</span></button>
   <div class="">
     <div class="ant-drawer ant-drawer-right">
       <div class="ant-drawer-mask"></div>

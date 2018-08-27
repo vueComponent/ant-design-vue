@@ -53,7 +53,7 @@ export default {
       setMomentLocale(val)
     },
   },
-  beforeMount () {
+  created () {
     const { locale } = this
     setMomentLocale(locale)
     changeConfirmLocale(locale && locale.Modal)

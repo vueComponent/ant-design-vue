@@ -10714,7 +10714,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
         <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-        </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
+        </label><span class="ant-transfer-list-header-selected"><span>0 элем.</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
         <div class="ant-transfer-list-body-search-wrapper">
@@ -10735,7 +10735,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
         <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-        </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
+        </label><span class="ant-transfer-list-header-selected"><span>0 элем.</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
         <div class="ant-transfer-list-body-search-wrapper">

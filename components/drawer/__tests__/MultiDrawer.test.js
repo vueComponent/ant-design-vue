@@ -118,7 +118,6 @@ const MultiDrawer = {
 
 describe('Drawer', () => {
   it('render right MultiDrawer', async () => {
-    document.body.innerHTML = ''
     const wrapper = mount(MultiDrawer, {
       propsData: {
         placement: 'right',
@@ -135,7 +134,7 @@ describe('Drawer', () => {
       const translateX = wrapper.find('.ant-drawer.test_drawer').element.parentElement.style.transform
       expect(translateX).toEqual('translateX(-180px)')
       expect(wrapper.find('#two_drawer_text').exists()).toBe(true)
-    }, 0)
+    }, 1000)
   })
 
   it('render right MultiDrawer', async () => {
@@ -156,6 +155,6 @@ describe('Drawer', () => {
       const translateX = wrapper.find('.ant-drawer.test_drawer').element.parentElement.style.transform
       expect(translateX).toEqual('translateX(180px)')
       expect(wrapper.find('#two_drawer_text').exists()).toBe(true)
-    }, 0)
+    }, 1000)
   })
 })

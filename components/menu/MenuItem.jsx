@@ -1,6 +1,6 @@
 
 import { Item, itemProps } from '../vc-menu'
-import { getClass, getStyle } from '../_util/props-util'
+import { getClass, getStyle, getOptionProps } from '../_util/props-util'
 import { cloneVNodes } from '../_util/vnode'
 import Tooltip from '../tooltip'
 function noop () {}
@@ -17,35 +17,27 @@ export default {
     },
   },
   render (h) {
-    const { getInlineCollapsed, $props: props, $slots, $attrs: attrs, $listeners } = this
+    const props = getOptionProps(this)
+    const { getInlineCollapsed, $slots, $attrs: attrs, $listeners } = this
     const inlineCollapsed = getInlineCollapsed()
     const itemProps = {
       props,
       attrs,
       on: $listeners,
-      class: getClass(this),
-      style: getStyle(this),
     }
     const toolTipProps = {
       props: {
+        title: inlineCollapsed && props.level === 1 ? $slots.default : '',
         placement: 'right',
         overlayClassName: `${props.rootPrefixCls}-inline-collapsed-tooltip`,
       },
-      on: {},
     }
     return (
-      inlineCollapsed && props.level === 1
-        ? <Tooltip {...toolTipProps}>
-          <template slot='title'>
-            { cloneVNodes($slots.default, true) }
-          </template>
-          <Item {...itemProps} ref='menuItem'>
-            {$slots.default}
-          </Item>
-        </Tooltip>
-        : <Item {...itemProps} ref='menuItem'>
+      <Tooltip {...toolTipProps}>
+        <Item {...itemProps} ref='menuItem'>
           {$slots.default}
         </Item>
+      </Tooltip>
     )
   },
 }

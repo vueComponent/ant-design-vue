@@ -16,7 +16,28 @@ describe('Menu', () => {
   // afterEach(() => {
   //   jest.useRealTimers()
   // })
-
+  it('If has select nested submenu item ,the menu items on the grandfather level should be highlight', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <Menu defaultSelectedKeys={['1-3-2']} mode='vertical'>
+            <SubMenu key='1' title='submenu1'>
+              <Menu.Item key='1-1'>Option 1</Menu.Item>
+              <Menu.Item key='1-2'>Option 2</Menu.Item>
+              <SubMenu key='1-3' title='submenu1-3'>
+                <Menu.Item key='1-3-1'>Option 3</Menu.Item>
+                <Menu.Item key='1-3-2'>Option 4</Menu.Item>
+              </SubMenu>
+            </SubMenu>
+            <Menu.Item key='2'>menu2</Menu.Item>
+          </Menu>
+        )
+      },
+    }, { attachToDocument: true, sync: false })
+    await asyncExpect(() => {
+      expect($$('.ant-menu-submenu-selected').length).toBe(1)
+    })
+  })
   it('should accept defaultOpenKeys in mode horizontal', async () => {
     const wrapper = mount({
       render () {
@@ -221,19 +242,19 @@ describe('Menu', () => {
       },
     }, { attachToDocument: true, sync: false })
     await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+      expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none')
     })
     wrapper.setProps({ mode: 'vertical' })
     await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
+      expect($$('ul.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
     }, 0)
     wrapper.setProps({ mode: 'inline' })
     await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+      expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none')
     }, 0)
   })
 
-  it('should always follow openKeys when mode is switched', async () => {
+  it('should always follow openKeys when inlineCollapsed is switched', async () => {
     const wrapper = mount({
       props: {
         inlineCollapsed: {
@@ -261,8 +282,8 @@ describe('Menu', () => {
       },
     }, { attachToDocument: true, sync: false })
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-menu-sub').at(0).classes()).toContain('ant-menu-inline')
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+      expect(wrapper.findAll('ul.ant-menu-sub').at(0).classes()).toContain('ant-menu-inline')
+      expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none')
     }, 0)
     wrapper.setProps({ inlineCollapsed: true })
     await asyncExpect(() => {
@@ -271,13 +292,13 @@ describe('Menu', () => {
       wrapper.vm.$forceUpdate()
     })
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-menu').at(0).classes()).toContain('ant-menu-vertical')
-      expect(wrapper.findAll('.ant-menu-sub').length).toBe(0)
+      expect(wrapper.findAll('ul.ant-menu-root').at(0).classes()).toContain('ant-menu-vertical')
+      expect(wrapper.findAll('ul.ant-menu-sub').length).toBe(0)
     }, 0)
     wrapper.setProps({ inlineCollapsed: false })
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-menu-sub').at(0).classes()).toContain('ant-menu-inline')
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+      expect(wrapper.findAll('ul.ant-menu-sub').at(0).classes()).toContain('ant-menu-inline')
+      expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none')
     }, 0)
   })
 
@@ -323,8 +344,8 @@ describe('Menu', () => {
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-menu-submenu').at(0).classes()).toContain('ant-menu-submenu-vertical')
       expect(wrapper.findAll('.ant-menu-submenu').at(0).classes()).toContain('ant-menu-submenu-open')
-      expect($$('.ant-menu-sub')[0].className).toContain('ant-menu-vertical')
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
+      expect($$('ul.ant-menu-sub')[0].className).toContain('ant-menu-vertical')
+      expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none')
     }, 300)
   })
 

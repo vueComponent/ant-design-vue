@@ -68,7 +68,7 @@ When dealing with long content, a fixed sider can provide a better user experien
         </div>
       </a-layout-content>
       <a-layout-footer :style="{ textAlign: 'center' }">
-        Ant Design ©2016 Created by Ant UED
+        Ant Design ©2018 Created by Ant UED
       </a-layout-footer>
     </a-layout>
   </a-layout>

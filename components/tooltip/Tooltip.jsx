@@ -148,7 +148,7 @@ export default {
   },
 
   render (h) {
-    const { $props, $data, $slots } = this
+    const { $props, $data, $slots, $listeners } = this
     const { prefixCls, openClassName, getPopupContainer } = $props
     let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')
     children = children.length === 1 ? children[0] : children
@@ -173,6 +173,7 @@ export default {
       },
       ref: 'tooltip',
       on: {
+        ...$listeners,
         visibleChange: this.onVisibleChange,
         popupAlign: this.onPopupAlign,
       },

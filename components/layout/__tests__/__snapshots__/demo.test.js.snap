@@ -10,7 +10,7 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
   <div class="ant-layout">
     <div class="ant-layout-header">Header</div>
     <div class="ant-layout">
-      <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
+      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </div>
       <div class="ant-layout-content">Content</div>
@@ -21,14 +21,14 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
     <div class="ant-layout-header">Header</div>
     <div class="ant-layout">
       <div class="ant-layout-content">Content</div>
-      <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
+      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </div>
     </div>
     <div class="ant-layout-footer">Footer</div>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
+    <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
       <div class="ant-layout-sider-children">Sider</div>
     </div>
     <div class="ant-layout">
@@ -42,7 +42,7 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/custom-trigger.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-custom-trigger">
-  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
+  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" tabindex="0">
@@ -68,7 +68,7 @@ exports[`renders ./components/layout/demo/custom-trigger.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/fixed.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-fixed">
-  <div class="ant-layout-header" style="position: fixed; width: 100%;">
+  <div class="ant-layout-header" style="position: fixed; z-index: 1; width: 100%;">
     <div class="logo"></div>
     <ul class="ant-menu ant-menu-horizontal ant-menu-root ant-menu-dark" role="menu" tabindex="0" style="line-height: 64px;">
       <li role="menuitem" class="ant-menu-item">nav 1</li>
@@ -85,14 +85,14 @@ exports[`renders ./components/layout/demo/fixed.md correctly 1`] = `
     <div style="background: rgb(255, 255, 255); padding: 24px; min-height: 380px;">Content</div>
   </div>
   <div class="ant-layout-footer" style="text-align: center;">
-    Ant Design ©2016 Created by Ant UED
+    Ant Design ©2018 Created by Ant UED
   </div>
 </div>
 `;
 
 exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-fixed-sider">
-  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; height: 100vh; position: fixed; left: 0px;">
+  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; height: 100vh; position: fixed; left: 0px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" tabindex="0">
@@ -170,7 +170,7 @@ exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
       </div>
     </div>
     <div class="ant-layout-footer" style="text-align: center;">
-      Ant Design ©2016 Created by Ant UED
+      Ant Design ©2018 Created by Ant UED
     </div>
   </div>
 </div>
@@ -178,7 +178,7 @@ exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-responsive">
-  <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px;">
+  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" tabindex="0">
@@ -201,7 +201,7 @@ exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
       </div>
     </div>
     <div class="ant-layout-footer" style="text-align: center;">
-      Ant Design ©2016 Created by Ant UED
+      Ant Design ©2018 Created by Ant UED
     </div>
   </div>
 </div>
@@ -209,7 +209,7 @@ exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/side.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-side" style="min-height: 100vh;">
-  <div class="ant-layout-sider ant-layout-sider-has-trigger" style="max-width: 200px; min-width: 200px; width: 200px;">
+  <div class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-has-trigger" style="max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" tabindex="0">
@@ -233,7 +233,7 @@ exports[`renders ./components/layout/demo/side.md correctly 1`] = `
           <i class="anticon anticon-file"></i> <span>File</span></li>
       </ul>
     </div>
-    <div class="ant-layout-sider-trigger" style="width: 200px;">
+    <div class="ant-layout-sider-trigger">
       <i class="anticon anticon-left"></i>
     </div>
   </div>
@@ -247,7 +247,7 @@ exports[`renders ./components/layout/demo/side.md correctly 1`] = `
       </div>
     </div>
     <div class="ant-layout-footer" style="text-align: center;">
-      Ant Design ©2016 Created by Ant UED
+      Ant Design ©2018 Created by Ant UED
     </div>
   </div>
 </div>
@@ -272,7 +272,7 @@ exports[`renders ./components/layout/demo/top.md correctly 1`] = `
     <div style="background: rgb(255, 255, 255); padding: 24px; min-height: 280px;">Content</div>
   </div>
   <div class="ant-layout-footer" style="text-align: center;">
-    Ant Design ©2016 Created by Ant UED
+    Ant Design ©2018 Created by Ant UED
   </div>
 </div>
 `;
@@ -294,7 +294,7 @@ exports[`renders ./components/layout/demo/top-side.md correctly 1`] = `
         </span>
     </div>
     <div class="ant-layout" style="padding: 24px 0px; background: rgb(255, 255, 255);">
-      <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
+      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
         <div class="ant-layout-sider-children">
           <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" tabindex="0" style="height: 100%;">
             <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">
@@ -329,7 +329,7 @@ exports[`renders ./components/layout/demo/top-side.md correctly 1`] = `
     </div>
   </div>
   <div class="ant-layout-footer" style="text-align: center;">
-    Ant Design ©2016 Created by Ant UED
+    Ant Design ©2018 Created by Ant UED
   </div>
 </div>
 `;
@@ -345,7 +345,7 @@ exports[`renders ./components/layout/demo/top-side-2.md correctly 1`] = `
     </ul>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-sider" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
+    <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
       <div class="ant-layout-sider-children">
         <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" tabindex="0" style="height: 100%; border-right: 0;">
           <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">

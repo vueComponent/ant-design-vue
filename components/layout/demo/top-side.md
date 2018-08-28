@@ -67,7 +67,7 @@ Both the top navigation and the sidebar, commonly used in documentation site.
       </a-layout>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
-      Ant Design ©2016 Created by Ant UED
+      Ant Design ©2018 Created by Ant UED
     </a-layout-footer>
   </a-layout>
 </template>

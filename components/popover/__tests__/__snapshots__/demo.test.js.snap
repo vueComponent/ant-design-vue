@@ -11,6 +11,8 @@ exports[`renders ./components/popover/demo/basic.md correctly 1`] = `<button typ
 
 exports[`renders ./components/popover/demo/control.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Click me</span></button>`;
 
+exports[`renders ./components/popover/demo/hover-with-click.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default" style="width: 500px;"><span>Hover and click / 悬停并单击</span></button>`;
+
 exports[`renders ./components/popover/demo/placement.md correctly 1`] = `
 <div id="components-popover-demo-placement">
   <div style="margin-left: 70px; white-space: nowrap;">

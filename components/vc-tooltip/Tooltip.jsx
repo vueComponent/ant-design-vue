@@ -87,6 +87,7 @@ export default {
         ...extraProps,
       },
       on: {
+        ...this.$listeners,
         popupVisibleChange: this.$listeners.visibleChange || noop,
         popupAlign: this.$listeners.popupAlign || noop,
       },

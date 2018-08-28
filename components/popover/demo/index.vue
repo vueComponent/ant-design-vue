@@ -4,6 +4,7 @@ import ArrowCenter from './arrow-point-at-center'
 import Control from './control'
 import Placement from './placement'
 import TriggerType from './triggerType'
+import HoverWithClick from './hover-with-click'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -44,6 +45,7 @@ export default {
         <Control />
         <Placement />
         <TriggerType />
+        <HoverWithClick />
         <api>
           <template slot='cn'>
             <CN/>

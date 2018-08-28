@@ -5,7 +5,7 @@
 
 <us>
 #### Locale text
-Set `okText` and `cancelText` props to customise the button's labels.
+Set `okText` and `cancelText` props to customize the button's labels.
 </us>
 
 ```html

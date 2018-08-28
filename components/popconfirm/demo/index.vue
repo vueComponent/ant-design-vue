@@ -3,6 +3,7 @@ import Basic from './basic.md'
 import Local from './local.md'
 import Placement from './placement.md'
 import DynamicTrigger from './dynamic-trigger.md'
+import Icon from './icon.md'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -38,15 +39,11 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us}/>
-        <br/>
         <Basic />
-        <br/>
         <Local />
-        <br/>
         <Placement />
-        <br/>
         <DynamicTrigger />
-        <br/>
+        <Icon />
         <api>
           <template slot='cn'>
             <CN/>

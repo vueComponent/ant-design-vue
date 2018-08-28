@@ -6,6 +6,7 @@
 | okText | text of the Confirm button | string\|slot | `Confirm` |
 | okType | Button `type` of the Confirm button | string | `primary` |
 | title | title of the confirmation box | string\|slot | - |
+| icon | customize icon of confirmation | vNode\|slot | &lt;Icon type="exclamation-circle" /&gt; |
 
 ### events
 | Events Name | Description | Arguments |

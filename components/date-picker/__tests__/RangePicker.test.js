@@ -66,7 +66,7 @@ describe('RangePicker', () => {
       },
     }, { sync: false })
     await asyncExpect(() => {
-      rangeCalendarWrapper.find('.ant-calendar-range-quick-selector a').trigger('click')
+      rangeCalendarWrapper.find('.ant-calendar-range-quick-selector .ant-tag').trigger('click')
     })
     await asyncExpect(() => {
       expect(rangeCalendarWrapper.html()).toMatchSnapshot()
@@ -93,7 +93,7 @@ describe('RangePicker', () => {
       },
     }, { sync: false })
     await asyncExpect(() => {
-      rangeCalendarWrapper.find('.ant-calendar-range-quick-selector a').trigger('mouseenter')
+      rangeCalendarWrapper.find('.ant-calendar-range-quick-selector .ant-tag').trigger('mouseenter')
     })
     rangeCalendarWrapper = mount({
       render () {
@@ -225,7 +225,7 @@ describe('RangePicker', () => {
         wrapper.find('.ant-calendar-picker-input').trigger('click')
       })
       await asyncExpect(() => {
-        $$('.ant-calendar-range-quick-selector a')[0].click()
+        $$('.ant-calendar-range-quick-selector .ant-tag')[0].click()
       }, 500)
       await asyncExpect(() => {
         expect(
@@ -258,7 +258,7 @@ describe('RangePicker', () => {
         wrapper.find('.ant-calendar-picker-input').trigger('click')
       })
       await asyncExpect(() => {
-        $$('.ant-calendar-range-quick-selector a')[0].click()
+        $$('.ant-calendar-range-quick-selector .ant-tag')[0].click()
       }, 500)
       await asyncExpect(() => {
         expect(
@@ -297,7 +297,7 @@ describe('RangePicker', () => {
       wrapper.find('.ant-calendar-picker-input').trigger('click')
     })
     await asyncExpect(() => {
-      $$('.ant-calendar-range-quick-selector a')[0].click()
+      $$('.ant-calendar-range-quick-selector .ant-tag')[0].click()
     }, 500)
     await asyncExpect(() => {
       expect(handleOk).toBeCalledWith(range)

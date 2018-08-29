@@ -11,7 +11,7 @@ describe('Input.Search', () => {
   it('should support custom button', async () => {
     const wrapper = mount({
       render () {
-        return <Search enterButton={<button>ok</button>} />
+        return <Search enterButton={<button type='button'>ok</button>} />
       },
     }, { sync: false })
     await asyncExpect(() => {

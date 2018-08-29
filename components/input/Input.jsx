@@ -113,25 +113,16 @@ export default {
         [`${props.prefixCls}-group-wrapper-sm`]: props.size === 'small',
         [`${props.prefixCls}-group-wrapper-lg`]: props.size === 'large',
       })
-      if (addonBefore || addonAfter) {
-        return (
-          <span
-            class={groupClassName}
-            style={getStyle(this)}
-          >
-            <span class={className}>
-              {addonBefore}
-              {children}
-              {addonAfter}
-            </span>
-          </span>
-        )
-      }
       return (
-        <span class={className}>
-          {addonBefore}
-          {children}
-          {addonAfter}
+        <span
+          class={groupClassName}
+          style={getStyle(this)}
+        >
+          <span class={className}>
+            {addonBefore}
+            {children}
+            {addonAfter}
+          </span>
         </span>
       )
     },

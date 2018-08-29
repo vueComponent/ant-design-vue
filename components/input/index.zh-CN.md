@@ -48,7 +48,7 @@
 ### Input.Search 事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| search | 点击搜索或按下回车键时的回调 | function(value) |
+| search | 点击搜索或按下回车键时的回调 | function(value, event) |
 
 其余属性和 Input 一致。
 

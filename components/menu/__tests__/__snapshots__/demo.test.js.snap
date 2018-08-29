@@ -2,7 +2,7 @@
 
 exports[`renders ./components/menu/demo/horizontal.md correctly 1`] = `
 <div>
-  <ul class="ant-menu ant-menu-horizontal ant-menu-root ant-menu-light" role="menu" tabindex="0">
+  <ul class="ant-menu ant-menu-horizontal ant-menu-root ant-menu-light" role="menu">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected">
       <i class="anticon anticon-mail"></i>Navigation One
     </li>
@@ -23,7 +23,7 @@ exports[`renders ./components/menu/demo/horizontal.md correctly 1`] = `
 
 exports[`renders ./components/menu/demo/inline.md correctly 1`] = `
 <div>
-  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" tabindex="0" style="width: 256px;">
+  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" style="width: 256px;">
     <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">
       <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-mail"></i><span>Navigation One</span></span>
         <i class="ant-menu-submenu-arrow"></i>
@@ -67,7 +67,7 @@ exports[`renders ./components/menu/demo/inline-collapsed.md correctly 1`] = `
   <button type="button" class="ant-btn ant-btn-primary" style="margin-bottom: 16px;">
     <i class="anticon anticon-menu-fold"></i>
   </button>
-  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" tabindex="0">
+  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
       <i class="anticon anticon-pie-chart"></i> <span>Option 1</span></li>
     <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;">
@@ -97,7 +97,7 @@ exports[`renders ./components/menu/demo/inline-collapsed.md correctly 1`] = `
 
 exports[`renders ./components/menu/demo/sider-current.md correctly 1`] = `
 <div>
-  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" tabindex="0" style="width: 256px;">
+  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" style="width: 256px;">
     <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open">
       <div aria-expanded="true" aria-owns="sub1$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-mail"></i><span>Navigation One</span></span>
         <i class="ant-menu-submenu-arrow"></i>
@@ -134,7 +134,7 @@ exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
   </label> Change Theme
   <br>
   <br>
-  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" tabindex="0" style="width: 256px;">
+  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" role="menu" style="width: 256px;">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
       <i class="anticon anticon-mail"></i>
       Navigation One
@@ -174,7 +174,7 @@ exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
   </label> Change Theme
   <br>
   <br>
-  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" tabindex="0" style="width: 256px;">
+  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu" style="width: 256px;">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;">
       <i class="anticon anticon-mail"></i>
       Navigation One
@@ -210,7 +210,7 @@ exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
 
 exports[`renders ./components/menu/demo/vertical.md correctly 1`] = `
 <div>
-  <ul class="ant-menu ant-menu-vertical ant-menu-root ant-menu-light" role="menu" tabindex="0" style="width: 256px;">
+  <ul class="ant-menu ant-menu-vertical ant-menu-root ant-menu-light" role="menu" style="width: 256px;">
     <li role="menuitem" class="ant-menu-item">
       <i class="anticon anticon-mail"></i>
       Navigation One

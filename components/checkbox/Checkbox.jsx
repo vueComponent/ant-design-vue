@@ -80,7 +80,9 @@ export default {
         preventDefault () {
           event.preventDefault()
         },
+        nativeEvent: { ...event, shiftKey: this.eventShiftKey },
       })
+      this.eventShiftKey = false
     },
     onMouseEnter (e) {
       this.$emit('mouseenter', e)
@@ -99,6 +101,10 @@ export default {
     },
     onBlur (e) {
       this.$emit('blur', e)
+    },
+    onClick (e) {
+      // onChange没能获取到shiftKey，使用onClick hack
+      this.eventShiftKey = e.shiftKey
     },
   },
   watch: {
@@ -139,6 +145,7 @@ export default {
           <input name={name} type='checkbox' disabled={disabled}
             class={`${prefixCls}-input`} checked={sChecked}
             onChange={onChange} ref='input' id={id}
+            onClick={this.onClick}
             onFocus={onFocus}
             onBlur={onBlur}
           />

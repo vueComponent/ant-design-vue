@@ -35,7 +35,7 @@ export const ColumnProps = {
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['left', 'right'])]),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
-  sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['ascend', 'descend'])]),
+  sortOrder: PropTypes.oneOf(['ascend', 'descend']),
   // children?: ColumnProps<T>[];
   // onCellClick?: (record: T, event: any) => void;
   // onCell?: (record: T) => any;
@@ -80,6 +80,8 @@ export const TableRowSelection = {
   hideDefaultSelections: PropTypes.bool,
   fixed: PropTypes.bool,
   columnWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selectWay: PropTypes.oneOf(['onSelect', 'onSelectMultiple', 'onSelectAll', 'onSelectInvert']),
+  columnTitle: PropTypes.any,
 }
 
 export const TableProps = {
@@ -121,7 +123,7 @@ export const TableProps = {
   footer: PropTypes.func,
   title: PropTypes.func,
   scroll: PropTypes.object,
-  childrenColumnName: PropTypes.string,
+  childrenColumnName: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   bodyStyle: PropTypes.any,
   // className?: PropTypes.string,
   // style?: React.CSSProperties;
@@ -182,6 +184,7 @@ export const SelectionBoxProps = {
 // }
 
 export const FilterMenuProps = {
+  _propsSymbol: PropTypes.any,
   locale: TableLocale,
   selectedKeys: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
   column: PropTypes.object,

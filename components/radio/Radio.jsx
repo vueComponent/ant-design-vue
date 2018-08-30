@@ -65,8 +65,10 @@ export default {
           preventDefault () {
             event.preventDefault()
           },
+          nativeEvent: { ...event, shiftKey: this.eventShiftKey },
         })
       }
+      this.eventShiftKey = false
     },
     focus () {
       this.$refs.input.focus()
@@ -85,6 +87,10 @@ export default {
     },
     onMouseLeave (e) {
       this.$emit('mouseleave', e)
+    },
+    onClick (e) {
+      // onChange没能获取到shiftKey，使用onClick hack
+      this.eventShiftKey = e.shiftKey
     },
   },
   watch: {
@@ -132,6 +138,7 @@ export default {
             onChange={handleChange} id={id} ref='input'
             onFocus={onFocus}
             onBlur={onBlur}
+            onClick={this.onClick}
           />
           <span class={`${prefixCls}-inner`} />
         </span>

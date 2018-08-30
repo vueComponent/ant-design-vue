@@ -21,7 +21,7 @@ Table with editable cells.
           v-if="dataSource.length"
           title="Sure to delete?"
           @confirm="() => onDelete(record.key)">
-          <a href="#">Delete</a>
+          <a href="javascript:;">Delete</a>
         </a-popconfirm>
       </template>
     </a-table>

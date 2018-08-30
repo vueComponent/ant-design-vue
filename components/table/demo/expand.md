@@ -11,7 +11,7 @@ When there's too much information to show and the table can't display all at onc
 ```html
 <template>
   <a-table :columns="columns" :dataSource="data">
-    <a slot="action" slot-scope="text" href="#">Delete</a>
+    <a slot="action" slot-scope="text" href="javascript:;">Delete</a>
     <p slot="expandedRowRender" slot-scope="record" style="margin: 0">{{record.description}}</p>
   </a-table>
 </template>

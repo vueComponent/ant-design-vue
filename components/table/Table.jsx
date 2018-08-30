@@ -31,6 +31,10 @@ function stopPropagation (e) {
   }
 }
 
+function getRowSelection (props) {
+  return props.rowSelection || {}
+}
+
 const defaultPagination = {
   onChange: noop,
   onShowSizeChange: noop,
@@ -52,7 +56,7 @@ export default {
     prefixCls: 'ant-table',
     useFixedHeader: false,
     // rowSelection: null,
-    size: 'large',
+    size: 'default',
     loading: false,
     bordered: false,
     indentSize: 20,
@@ -75,7 +79,7 @@ export default {
     this.CheckboxPropsCache = {}
 
     this.store = createStore({
-      selectedRowKeys: (this.rowSelection || {}).selectedRowKeys || [],
+      selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
       selectionDirty: false,
     })
     return {
@@ -83,6 +87,7 @@ export default {
       // 减少状态
       sFilters: this.getFiltersFromColumns(),
       sPagination: this.getDefaultPagination(this.$props),
+      pivot: undefined,
     }
   },
   watch: {
@@ -151,7 +156,7 @@ export default {
   },
   methods: {
     getCheckboxPropsByItem (item, index) {
-      const { rowSelection = {}} = this
+      const rowSelection = getRowSelection(this.$props)
       if (!rowSelection.getCheckboxProps) {
         return { props: {}}
       }
@@ -165,7 +170,7 @@ export default {
     },
 
     getDefaultSelection () {
-      const { rowSelection = {}} = this
+      const rowSelection = getRowSelection(this.$props)
       if (!rowSelection.getCheckboxProps) {
         return []
       }
@@ -197,8 +202,9 @@ export default {
       })
     },
 
-    setSelectedRowKeys (selectedRowKeys, { selectWay, record, checked, changeRowKeys, nativeEvent }) {
-      const { rowSelection = {}} = this
+    setSelectedRowKeys (selectedRowKeys, selectionInfo) {
+      const { selectWay, record, checked, changeRowKeys, nativeEvent } = selectionInfo
+      const rowSelection = getRowSelection(this.$props)
       if (rowSelection && !('selectedRowKeys' in rowSelection)) {
         this.store.setState({ selectedRowKeys })
       }
@@ -214,6 +220,11 @@ export default {
       }
       if (selectWay === 'onSelect' && rowSelection.onSelect) {
         rowSelection.onSelect(record, checked, selectedRows, nativeEvent)
+      } else if (selectWay === 'onSelectMultiple' && rowSelection.onSelectMultiple) {
+        const changeRows = data.filter(
+          (row, i) => changeRowKeys.indexOf(this.getRecordKey(row, i)) >= 0,
+        )
+        rowSelection.onSelectMultiple(checked, selectedRows, changeRows)
       } else if (selectWay === 'onSelectAll' && rowSelection.onSelectAll) {
         const changeRows = data.filter(
           (row, i) => changeRowKeys.indexOf(this.getRecordKey(row, i)) >= 0,
@@ -305,7 +316,7 @@ export default {
       }
 
       return (a, b) => {
-        const result = sortColumn.sorter(a, b)
+        const result = sortColumn.sorter(a, b, sortOrder)
         if (result !== 0) {
           return (sortOrder === 'descend') ? -result : result
         }
@@ -322,7 +333,7 @@ export default {
         sortColumn = column
       } else { // 当前列已排序
         if (sortOrder === order) { // 切换为未排序状态
-          sortOrder = ''
+          sortOrder = undefined
           sortColumn = null
         } else { // 切换为排序状态
           sortOrder = order
@@ -412,21 +423,65 @@ export default {
       const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
       let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const key = this.getRecordKey(record, rowIndex)
-      if (checked) {
-        selectedRowKeys.push(this.getRecordKey(record, rowIndex))
-      } else {
-        selectedRowKeys = selectedRowKeys.filter((i) => key !== i)
+      const pivot = this.$data.pivot
+      const rows = this.getFlatCurrentPageData()
+      let realIndex = rowIndex
+      if (this.$props.expandedRowRender) {
+        realIndex = rows.findIndex(row => this.getRecordKey(row, rowIndex) === key)
       }
-      this.store.setState({
-        selectionDirty: true,
-      })
-      this.setSelectedRowKeys(selectedRowKeys, {
-        selectWay: 'onSelect',
-        record,
-        checked,
-        changeRowKeys: void (0),
-        nativeEvent,
-      })
+      if (nativeEvent.shiftKey && pivot !== undefined && realIndex !== pivot) {
+        const changeRowKeys = []
+        const direction = Math.sign(pivot - realIndex)
+        const dist = Math.abs(pivot - realIndex)
+        let step = 0
+        while (step <= dist) {
+          const i = realIndex + (step * direction)
+          step += 1
+          const row = rows[i]
+          const rowKey = this.getRecordKey(row, i)
+          const checkboxProps = this.getCheckboxPropsByItem(row, i)
+          if (!checkboxProps.disabled) {
+            if (selectedRowKeys.includes(rowKey)) {
+              if (!checked) {
+                selectedRowKeys = selectedRowKeys.filter((j) => rowKey !== j)
+                changeRowKeys.push(rowKey)
+              }
+            } else if (checked) {
+              selectedRowKeys.push(rowKey)
+              changeRowKeys.push(rowKey)
+            }
+          }
+        }
+
+        this.setState({ pivot: realIndex })
+        this.store.setState({
+          selectionDirty: true,
+        })
+        this.setSelectedRowKeys(selectedRowKeys, {
+          selectWay: 'onSelectMultiple',
+          record,
+          checked,
+          changeRowKeys,
+          nativeEvent,
+        })
+      } else {
+        if (checked) {
+          selectedRowKeys.push(this.getRecordKey(record, realIndex))
+        } else {
+          selectedRowKeys = selectedRowKeys.filter((i) => key !== i)
+        }
+        this.setState({ pivot: realIndex })
+        this.store.setState({
+          selectionDirty: true,
+        })
+        this.setSelectedRowKeys(selectedRowKeys, {
+          selectWay: 'onSelect',
+          record,
+          checked,
+          changeRowKeys: void (0),
+          nativeEvent,
+        })
+      }
     },
 
     handleRadioSelect  (record, rowIndex, e) {
@@ -457,7 +512,7 @@ export default {
         .map((item, i) => this.getRecordKey(item, i))
 
       const changeRowKeys = []
-      let selectWay = ''
+      let selectWay = 'onSelectAll'
       let checked
       // handle default selection
       switch (selectionKey) {
@@ -509,7 +564,7 @@ export default {
         return onSelectFunc(changeableRowKeys)
       }
       this.setSelectedRowKeys(selectedRowKeys, {
-        selectWay: selectWay,
+        selectWay,
         checked,
         changeRowKeys,
       })
@@ -551,17 +606,17 @@ export default {
 
     renderSelectionBox (type) {
       return (_, record, index) => {
-        const rowIndex = this.getRecordKey(record, index) // 从 1 开始
+        const rowKey = this.getRecordKey(record, index) // 从 1 开始
         const props = this.getCheckboxPropsByItem(record, index)
         const handleChange = (e) => {
-          type === 'radio' ? this.handleRadioSelect(record, rowIndex, e)
-            : this.handleSelect(record, rowIndex, e)
+          type === 'radio' ? this.handleRadioSelect(record, index, e)
+            : this.handleSelect(record, index, e)
         }
         const selectionBoxProps = mergeProps({
           props: {
             type,
             store: this.store,
-            rowIndex,
+            rowIndex: rowKey,
             defaultSelection: this.getDefaultSelection(),
           },
           on: {
@@ -584,7 +639,7 @@ export default {
       const recordKey = (typeof rowKey === 'function')
         ? rowKey(record, index) : record[rowKey]
       warning(recordKey !== undefined,
-        'Each record in dataSource of table should have a unique `key` prop, or set `rowKey` to an unique primary key,',
+        'Each record in dataSource of table should have a unique `key` prop, or set `rowKey` of Table to an unique primary key,',
       )
       return recordKey === undefined ? index : recordKey
     },
@@ -612,10 +667,11 @@ export default {
           className: selectionColumnClass,
           fixed: rowSelection.fixed,
           width: rowSelection.columnWidth,
+          title: rowSelection.columnTitle,
         }
         if (rowSelection.type !== 'radio') {
           const checkboxAllDisabled = data.every((item, index) => this.getCheckboxPropsByItem(item, index).props.disabled)
-          selectionColumn.title = (
+          selectionColumn.title = selectionColumn.title || (
             <SelectionCheckboxAll
               store={this.store}
               locale={locale}
@@ -677,6 +733,7 @@ export default {
           const colFilters = this.sFilters[key] || []
           filterDropdown = (
             <FilterDropdown
+              _propsSymbol={Symbol()}
               locale={locale}
               column={column}
               selectedKeys={colFilters}
@@ -884,12 +941,15 @@ export default {
     createComponents (components = {}, prevComponents) {
       const bodyRow = components && components.body && components.body.row
       const preBodyRow = prevComponents && prevComponents.body && prevComponents.body.row
-      if (!this.customComponents || bodyRow !== preBodyRow) {
-        this.customComponents = { ...components }
-        this.customComponents.body = {
+      if (!this.row || bodyRow !== preBodyRow) {
+        this.row = createBodyRow(bodyRow)
+      }
+      this.customComponents = {
+        ...components,
+        body: {
           ...components.body,
-          row: createBodyRow(bodyRow),
-        }
+          row: this.row,
+        },
       }
     },
 

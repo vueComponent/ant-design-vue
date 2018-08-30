@@ -82,8 +82,14 @@ export default {
         preventDefault () {
           e.preventDefault()
         },
-        nativeEvent: e.nativeEvent,
+        nativeEvent: { ...event, shiftKey: this.eventShiftKey },
       })
+      this.eventShiftKey = false
+    },
+    onClick (e) {
+      this.__emit('click', e)
+      // onChange没能获取到shiftKey，使用onClick hack
+      this.eventShiftKey = e.shiftKey
     },
   },
 
@@ -133,6 +139,7 @@ export default {
             on: {
               ...this.$listeners,
               change: this.handleChange,
+              click: this.onClick,
             }}
           }
         />

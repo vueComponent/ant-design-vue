@@ -73,7 +73,7 @@ describe('As Form Control', () => {
             <Form.Item>
               {getFieldDecorator('textarea')(<Input.TextArea />)}
             </Form.Item>
-            <button onClick={this.reset}>reset</button>
+            <button type='button' onClick={this.reset}>reset</button>
           </Form>
         )
       },

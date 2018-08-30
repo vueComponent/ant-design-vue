@@ -6,4 +6,4 @@ exports[`Input.Search should support custom Button 1`] = `
 </span>
 `;
 
-exports[`Input.Search should support custom button 1`] = `<span class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper ant-input-search ant-input-search-enter-button"><input type="text" class="ant-input ant-input-search ant-input-search-enter-button"><span class="ant-input-suffix"><button class="">ok</button></span></span>`;
+exports[`Input.Search should support custom button 1`] = `<span class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper ant-input-search ant-input-search-enter-button"><input type="text" class="ant-input ant-input-search ant-input-search-enter-button"><span class="ant-input-suffix"><button type="button" class="ant-input-search-button">ok</button></span></span>`;

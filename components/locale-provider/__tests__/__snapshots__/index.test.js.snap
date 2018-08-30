@@ -949,7 +949,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="الفلاتر" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="الفلاتر" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -1353,7 +1353,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Филтриране" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Филтриране" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -1757,7 +1757,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrar Menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrar Menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -2161,7 +2161,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtr" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtr" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -2565,7 +2565,7 @@ exports[`Locale Provider should display the text as de 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter-Menü" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter-Menü" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -2969,7 +2969,7 @@ exports[`Locale Provider should display the text as el 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Μενού φίλτρων" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Μενού φίλτρων" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -3373,7 +3373,7 @@ exports[`Locale Provider should display the text as en 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -3777,7 +3777,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -4181,7 +4181,7 @@ exports[`Locale Provider should display the text as es 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrar menú" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrar menú" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -4585,7 +4585,7 @@ exports[`Locale Provider should display the text as et 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtri menüü" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtri menüü" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -4989,7 +4989,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="منوی فیلتر" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="منوی فیلتر" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -5393,7 +5393,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Suodatus valikko" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Suodatus valikko" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -5797,7 +5797,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrer" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrer" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -6201,7 +6201,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrer" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtrer" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -6605,7 +6605,7 @@ exports[`Locale Provider should display the text as is 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Afmarkanir" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Afmarkanir" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -7009,7 +7009,7 @@ exports[`Locale Provider should display the text as it 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menu Filtro" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menu Filtro" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -7413,7 +7413,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="メニューをフィルター" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="メニューをフィルター" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -7817,7 +7817,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="필터 메뉴" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="필터 메뉴" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -8221,7 +8221,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menuê peldanka" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menuê peldanka" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -8625,7 +8625,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtermeny" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtermeny" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -9029,7 +9029,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filteren" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filteren" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -9433,7 +9433,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="FilterMenu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="FilterMenu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -9837,7 +9837,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menu filtra" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menu filtra" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -10241,7 +10241,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtro" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtro" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -10645,7 +10645,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtro" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtro" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -11049,7 +11049,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Фильтр" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Фильтр" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -11453,7 +11453,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -11857,7 +11857,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -12261,7 +12261,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -12665,7 +12665,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtermeny" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filtermeny" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -13069,7 +13069,7 @@ exports[`Locale Provider should display the text as th 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="ตัวกรอง" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="ตัวกรอง" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -13473,7 +13473,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menü Filtrele" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Menü Filtrele" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -13877,7 +13877,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Фільтрувати" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Фільтрувати" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -14281,7 +14281,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Bộ " class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Bộ " class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -14685,7 +14685,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="筛选" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="筛选" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>
@@ -15089,7 +15089,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="篩選器" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+  <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="篩選器" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
     <th
       key="age" class=""><span>Age</span></th>
       </tr>

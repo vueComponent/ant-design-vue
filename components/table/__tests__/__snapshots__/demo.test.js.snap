@@ -7,7 +7,7 @@ exports[`renders ./components/table/demo/ajax.md correctly 1`] = `
       <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
     </div>
     <div class="ant-spin-container ant-spin-blur">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-empty">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -41,12 +41,13 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
             <table class="">
               <colgroup>
+                <col>
                 <col>
                 <col>
                 <col>
@@ -58,6 +59,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   </th>
                   <th key="age" class=""><span>Age</span></th>
                   <th key="address" class=""><span>Address</span></th>
+                  <th key="tags" class=""><span>Tags</span></th>
                   <th key="action" class=""><span>Action</span></th>
                 </tr>
               </thead>
@@ -65,31 +67,34 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">John Brown</a>
+                    <a href="javascript:;">John Brown</a>
                   </td>
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
-                  <td><span><a href="#">Action 一 John Brown</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#" class="ant-dropdown-link">
+                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
+                  <td><span><a href="javascript:;">Invite 一 John Brown</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Jim Green</a>
+                    <a href="javascript:;">Jim Green</a>
                   </td>
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
-                  <td><span><a href="#">Action 一 Jim Green</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#" class="ant-dropdown-link">
+                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
+                  <td><span><a href="javascript:;">Invite 一 Jim Green</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Joe Black</a>
+                    <a href="javascript:;">Joe Black</a>
                   </td>
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
-                  <td><span><a href="#">Action 一 Joe Black</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#" class="ant-dropdown-link">
+                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
+                  <td><span><a href="javascript:;">Invite 一 Joe Black</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
               </tbody>
@@ -118,7 +123,7 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-bordered">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-bordered">
         <div class="ant-table-title">
           Header
         </div>
@@ -142,7 +147,7 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">John Brown</a>
+                    <a href="javascript:;">John Brown</a>
                   </td>
                   <td class="column-money">￥300,000.00</td>
                   <td>New York No. 1 Lake Park</td>
@@ -150,7 +155,7 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Jim Green</a>
+                    <a href="javascript:;">Jim Green</a>
                   </td>
                   <td class="column-money">￥1,256,000.00</td>
                   <td>London No. 1 Lake Park</td>
@@ -158,7 +163,7 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Joe Black</a>
+                    <a href="javascript:;">Joe Black</a>
                   </td>
                   <td class="column-money">￥120,000.00</td>
                   <td>Sidney No. 1 Lake Park</td>
@@ -192,7 +197,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-bordered">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-bordered">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -216,7 +221,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">John Brown</a>
+                    <a href="javascript:;">John Brown</a>
                   </td>
                   <td>32</td>
                   <td>0571-22098909</td>
@@ -226,7 +231,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Jim Green</a>
+                    <a href="javascript:;">Jim Green</a>
                   </td>
                   <td>42</td>
                   <td>0571-22098333</td>
@@ -236,7 +241,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Joe Black</a>
+                    <a href="javascript:;">Joe Black</a>
                   </td>
                   <td>32</td>
                   <td rowspan="2">0575-22098909</td>
@@ -246,7 +251,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Jim Red</a>
+                    <a href="javascript:;">Jim Red</a>
                   </td>
                   <td>18</td>
                   <!---->
@@ -256,7 +261,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
                   <td colspan="5"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
-                    <a href="#">Jake White</a>
+                    <a href="javascript:;">Jake White</a>
                   </td>
                   <!---->
                   <!---->
@@ -289,7 +294,7 @@ exports[`renders ./components/table/demo/custom-filter-panel.md correctly 1`] = 
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -359,7 +364,7 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-bordered">
+        <div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-bordered">
           <div class="ant-table-content">
             <!---->
             <div class="ant-table-body">
@@ -392,7 +397,7 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
                     <td>32</td>
                     <td>London, Park Lane no. 0</td>
                     <td>
-                      <a href="#" class="">Delete</a>
+                      <a href="javascript:;" class="">Delete</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
@@ -408,7 +413,7 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
                     <td>32</td>
                     <td>London, Park Lane no. 1</td>
                     <td>
-                      <a href="#" class="">Delete</a>
+                      <a href="javascript:;" class="">Delete</a>
                     </td>
                   </tr>
                 </tbody>
@@ -438,7 +443,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large ant-table-bordered">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-bordered">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -652,7 +657,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -680,7 +685,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
                   <td>
-                    <a href="#">Delete</a>
+                    <a href="javascript:;">Delete</a>
                   </td>
                 </tr>
                 <!---->
@@ -690,7 +695,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
                   <td>
-                    <a href="#">Delete</a>
+                    <a href="javascript:;">Delete</a>
                   </td>
                 </tr>
                 <!---->
@@ -700,7 +705,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
                   <td>
-                    <a href="#">Delete</a>
+                    <a href="javascript:;">Delete</a>
                   </td>
                 </tr>
                 <!---->
@@ -730,7 +735,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -805,7 +810,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-large ant-table-scroll-position-left ant-table-scroll-position-right">
+      <div class="ant-table ant-table-default ant-table-scroll-position-left ant-table-scroll-position-right">
         <div class="ant-table-content">
           <div class="ant-table-scroll">
             <!---->
@@ -853,7 +858,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     <td>New York Park</td>
                     <td>New York Park</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
@@ -869,7 +874,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     <td>London Park</td>
                     <td>London Park</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                 </tbody>
@@ -923,12 +928,12 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                   <tbody class="ant-table-tbody">
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                   </tbody>
@@ -959,7 +964,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-fixed-header ant-table-large ant-table-scroll-position-left ant-table-scroll-position-right">
+      <div class="ant-table ant-table-fixed-header ant-table-default ant-table-scroll-position-left ant-table-scroll-position-right">
         <div class="ant-table-content">
           <div class="ant-table-scroll">
             <div class="ant-table-header">
@@ -1023,7 +1028,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 0</td>
                     <td>London Park no. 0</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
@@ -1039,7 +1044,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 1</td>
                     <td>London Park no. 1</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
@@ -1055,7 +1060,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 2</td>
                     <td>London Park no. 2</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
@@ -1071,7 +1076,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 3</td>
                     <td>London Park no. 3</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
@@ -1087,7 +1092,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 4</td>
                     <td>London Park no. 4</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
@@ -1103,7 +1108,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 5</td>
                     <td>London Park no. 5</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
@@ -1119,7 +1124,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 6</td>
                     <td>London Park no. 6</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
@@ -1135,7 +1140,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 7</td>
                     <td>London Park no. 7</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
@@ -1151,7 +1156,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 8</td>
                     <td>London Park no. 8</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
@@ -1167,7 +1172,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 9</td>
                     <td>London Park no. 9</td>
                     <td class="ant-table-fixed-columns-in-body">
-                      <a href="#">action</a>
+                      <a href="javascript:;">action</a>
                     </td>
                   </tr>
                 </tbody>
@@ -1274,52 +1279,52 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                   <tbody class="ant-table-tbody">
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
                       <td>
-                        <a href="#">action</a>
+                        <a href="javascript:;">action</a>
                       </td>
                     </tr>
                   </tbody>
@@ -1368,7 +1373,7 @@ exports[`renders ./components/table/demo/fixed-header.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-fixed-header ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-fixed-header ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <div class="ant-table-scroll">
             <div class="ant-table-header">
@@ -1738,7 +1743,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <col style="width: 100px; min-width: 100px;">
                   <col>
                   <col>
-                  <col style="width: 60px; min-width: 60px;">
+                  <col style="width: 80px; min-width: 80px;">
                 </colgroup>
                 <thead class="ant-table-thead">
                   <tr>
@@ -1776,7 +1781,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                 <col style="width: 100px; min-width: 100px;">
                 <col>
                 <col>
-                <col style="width: 60px; min-width: 60px;">
+                <col style="width: 80px; min-width: 80px;">
               </colgroup>
               <tbody class="ant-table-tbody">
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
@@ -1962,7 +1967,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
           <div class="ant-table-header">
             <table class="ant-table-fixed">
               <colgroup>
-                <col style="width: 60px; min-width: 60px;">
+                <col style="width: 80px; min-width: 80px;">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
@@ -1975,7 +1980,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
             <div class="ant-table-body-inner" style="max-height: 240px; overflow-y: scroll;">
               <table class="ant-table-fixed">
                 <colgroup>
-                  <col style="width: 60px; min-width: 60px;">
+                  <col style="width: 80px; min-width: 80px;">
                 </colgroup>
                 <tbody class="ant-table-tbody">
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
@@ -2054,7 +2059,7 @@ exports[`renders ./components/table/demo/head.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -2132,7 +2137,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
 <div class="components-table-demo-nested ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -2169,7 +2174,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td>Jack</td>
                   <td>2014-12-24 23:12:00</td>
                   <td>
-                    <a href="#">Publish</a>
+                    <a href="javascript:;">Publish</a>
                   </td>
                 </tr>
                 <!---->
@@ -2182,7 +2187,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td>Jack</td>
                   <td>2014-12-24 23:12:00</td>
                   <td>
-                    <a href="#">Publish</a>
+                    <a href="javascript:;">Publish</a>
                   </td>
                 </tr>
                 <!---->
@@ -2195,7 +2200,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td>Jack</td>
                   <td>2014-12-24 23:12:00</td>
                   <td>
-                    <a href="#">Publish</a>
+                    <a href="javascript:;">Publish</a>
                   </td>
                 </tr>
                 <!---->
@@ -2231,7 +2236,7 @@ exports[`renders ./components/table/demo/reset-filter.md correctly 1`] = `
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-table ant-table-scroll-position-left ant-table-large">
+        <div class="ant-table ant-table-scroll-position-left ant-table-default">
           <div class="ant-table-content">
             <!---->
             <div class="ant-table-body">
@@ -2310,7 +2315,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -2341,7 +2346,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               </td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->
-                <a href="#">John Brown</a>
+                <a href="javascript:;">John Brown</a>
               </td>
               <td>32</td>
               <td>New York No. 1 Lake Park</td>
@@ -2353,7 +2358,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               </td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->
-                <a href="#">Jim Green</a>
+                <a href="javascript:;">Jim Green</a>
               </td>
               <td>42</td>
               <td>London No. 1 Lake Park</td>
@@ -2365,7 +2370,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               </td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->
-                <a href="#">Joe Black</a>
+                <a href="javascript:;">Joe Black</a>
               </td>
               <td>32</td>
               <td>Sidney No. 1 Lake Park</td>
@@ -2377,7 +2382,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               </td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->
-                <a href="#">Disabled User</a>
+                <a href="javascript:;">Disabled User</a>
               </td>
               <td>99</td>
               <td>Sidney No. 1 Lake Park</td>
@@ -2411,7 +2416,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-table ant-table-scroll-position-left ant-table-large">
+        <div class="ant-table ant-table-scroll-position-left ant-table-default">
           <div class="ant-table-content">
             <!---->
             <div class="ant-table-body">
@@ -2574,7 +2579,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
@@ -2864,12 +2869,13 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-scroll-position-left ant-table-large">
+      <div class="ant-table ant-table-scroll-position-left ant-table-default">
         <div class="ant-table-content">
           <!---->
           <div class="ant-table-body">
             <table class="">
               <colgroup>
+                <col>
                 <col>
                 <col>
                 <col>
@@ -2882,6 +2888,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   </th>
                   <th key="age" rowspan="2" class=""><span>Age</span></th>
                   <th key="address" rowspan="2" class=""><span>Address</span></th>
+                  <th key="tags" rowspan="2" class=""><span>Tags</span></th>
                   <th key="action" rowspan="2" class=""><span>Action</span></th>
                 </tr>
                 <tr>
@@ -2897,8 +2904,8 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td>Brown</td>
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
-                  <td><span><a href="#">Action 一 John</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#" class="ant-dropdown-link">
-          More actions <i class="anticon anticon-down"></i></a></span></td>
+                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
+                  <td><span><a href="javascript:;">Action 一 John</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -2906,8 +2913,8 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td>Green</td>
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
-                  <td><span><a href="#">Action 一 Jim</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#" class="ant-dropdown-link">
-          More actions <i class="anticon anticon-down"></i></a></span></td>
+                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
+                  <td><span><a href="javascript:;">Action 一 Jim</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -2915,8 +2922,8 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td>Black</td>
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
-                  <td><span><a href="#">Action 一 Joe</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="#" class="ant-dropdown-link">
-          More actions <i class="anticon anticon-down"></i></a></span></td>
+                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
+                  <td><span><a href="javascript:;">Action 一 Joe</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
               </tbody>
             </table>

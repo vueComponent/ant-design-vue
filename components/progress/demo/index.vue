@@ -8,11 +8,12 @@ import Format from './format.md'
 import Dynamic from './dynamic.md'
 import Dashboard from './dashboard.md'
 import Segment from './segment.md'
+import Linecap from './linecap.md'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
 const md = {
-  cn: `# 进度条
+  cn: `# Progress 进度条
   展示操作的当前进度。
   ## 何时使用
   在操作需要较长时间才能完成时，为用户显示该操作的当前进度和状态。
@@ -21,7 +22,7 @@ const md = {
   - 当需要显示一个操作完成的百分比时。
         ## 代码演示`,
   us: `# Progress
-  If it will take a long time to complete an operation, you can use 'Progress' to show the current progress and status.
+  If it will take a long time to complete an operation, you can use \`Progress\` to show the current progress and status.
 
   - When an operation will interrupt the current interface, or it needs to run in the background for more than 2 seconds.
   - When you need to display the completion percentage of an operation.
@@ -55,6 +56,8 @@ export default {
         <Dashboard />
         <br/>
         <Segment />
+        <br/>
+        <Linecap />
         <br/>
         <api>
           <template slot='cn'>

@@ -14,20 +14,34 @@ const statusColorMap = {
   success: '#87d068',
 }
 
+export const ProgressType = PropTypes.oneOf(['line', 'circle', 'dashboard'])
+export const ProgressSize = PropTypes.oneOf(['default', 'small'])
+
 export const ProgressProps = {
   prefixCls: PropTypes.string,
-  type: PropTypes.oneOf(['line', 'circle', 'dashboard']),
+  type: ProgressType,
   percent: PropTypes.number,
   successPercent: PropTypes.number,
   format: PropTypes.func,
   status: PropTypes.oneOf(['success', 'active', 'exception']),
   showInfo: PropTypes.bool,
   strokeWidth: PropTypes.number,
+  strokeLinecap: PropTypes.oneOf(['round', 'square']),
+  strokeColor: PropTypes.string,
   trailColor: PropTypes.string,
   width: PropTypes.number,
   gapDegree: PropTypes.number,
   gapPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  size: PropTypes.oneOf(['default', 'small']),
+  size: ProgressSize,
+}
+
+const validProgress = (progress) => {
+  if (!progress || progress < 0) {
+    return 0
+  } else if (progress > 100) {
+    return 100
+  }
+  return progress
 }
 
 export default {
@@ -45,7 +59,8 @@ export default {
     const props = getOptionProps(this)
     const {
       prefixCls, percent = 0, status, format, trailColor, size, successPercent,
-      type, strokeWidth, width, showInfo, gapDegree = 0, gapPosition,
+      type, strokeWidth, width, showInfo, gapDegree = 0, gapPosition, strokeColor, strokeLinecap = 'round',
+      ...restProps
     } = props
     const progressStatus = parseInt((successPercent ? successPercent.toString() : percent.toString()), 10) >= 100 &&
     !('status' in props) ? 'success' : (status || 'normal')
@@ -56,24 +71,27 @@ export default {
     if (showInfo) {
       let text
       const iconType = (type === 'circle' || type === 'dashboard') ? '' : '-circle'
-      if (progressStatus === 'exception') {
-        text = format ? textFormatter(percent) : <Icon type={`cross${iconType}`} />
+      if (format || (progressStatus !== 'exception' && progressStatus !== 'success')) {
+        text = textFormatter(validProgress(percent), validProgress(successPercent))
+      } else if (progressStatus === 'exception') {
+        text = <Icon type={`cross${iconType}`} />
       } else if (progressStatus === 'success') {
-        text = format ? textFormatter(percent) : <Icon type={`check${iconType}`} />
-      } else {
-        text = textFormatter(percent)
+        text = <Icon type={`check${iconType}`} />
       }
       progressInfo = <span class={`${prefixCls}-text`}>{text}</span>
     }
 
     if (type === 'line') {
       const percentStyle = {
-        width: `${percent}%`,
-        height: addUnit(strokeWidth) || (size === 'small' ? '6px' : '8px'),
+        width: `${validProgress(percent)}%`,
+        height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
+        background: strokeColor,
+        borderRadius: strokeLinecap === 'square' ? 0 : '100px',
       }
       const successPercentStyle = {
-        width: `${successPercent}%`,
-        height: addUnit(strokeWidth) || (size === 'small' ? '6px' : '8px'),
+        width: `${validProgress(successPercent)}%`,
+        height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
+        borderRadius: strokeLinecap === 'square' ? 0 : '100px',
       }
       const successSegment = successPercent !== undefined
         ? <div class={`${prefixCls}-success-bg`} style={successPercentStyle} />
@@ -102,10 +120,11 @@ export default {
       progress = (
         <div class={`${prefixCls}-inner`} style={circleStyle}>
           <Circle
-            percent={percent}
+            percent={validProgress(percent)}
             strokeWidth={circleWidth}
             trailWidth={circleWidth}
             strokeColor={statusColorMap[progressStatus]}
+            strokeLinecap={strokeLinecap}
             trailColor={trailColor}
             prefixCls={prefixCls}
             gapDegree={gapDeg || 0}
@@ -124,6 +143,9 @@ export default {
     })
 
     const progressProps = {
+      props: {
+        ...restProps,
+      },
       on: this.$listeners,
       class: classString,
     }

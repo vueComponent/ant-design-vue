@@ -20,4 +20,68 @@ describe('Progress', () => {
       expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(1)
     })
   })
+
+  it('render out-of-range progress', async () => {
+    const wrapper = mount(Progress, {
+      propsData: {
+        percent: 120,
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
+
+  it('render out-of-range progress with info', async () => {
+    const wrapper = mount(Progress, {
+      propsData: {
+        percent: 120,
+        showInfo: true,
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
+
+  it('render negetive progress', async () => {
+    const wrapper = mount(Progress, {
+      propsData: {
+        percent: -20,
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
+
+  it('render negetive successPercent', async () => {
+    const wrapper = mount(Progress, {
+      propsData: {
+        percent: 50,
+        successPercent: -20,
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
+
+  it('render negetive successPercent', async () => {
+    const wrapper = mount(Progress, {
+      propsData: {
+        percent: 50,
+        successPercent: 10,
+        format: (percent, successPercent) => `${percent} ${successPercent}`,
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
 })

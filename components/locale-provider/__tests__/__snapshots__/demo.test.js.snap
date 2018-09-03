@@ -3,9 +3,9 @@
 exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
 <div>
   <div class="change-locale"><span style="margin-right: 16px;">Change locale of components: </span>
-    <div class="ant-radio-group ant-radio-group-default">
-      <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>English</span></label>
-      <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>中文</span></label>
+    <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default">
+      <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value=""><span class="ant-radio-button-inner"></span></span><span>English</span></label>
+      <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="[object Object]"><span class="ant-radio-button-inner"></span></span><span>中文</span></label>
     </div>
   </div>
   <div class="locale-components">
@@ -118,9 +118,9 @@ exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
               <div title="Nov" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Nov</div>
             </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
         </div>
-        <div class="ant-radio-group ant-radio-group-small">
-          <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
-          <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
+        <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+          <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+          <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
         </div>
       </div>
       <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">

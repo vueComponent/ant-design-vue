@@ -259,11 +259,11 @@ exports[`renders ./components/tabs/demo/icon.md correctly 1`] = `
 
 exports[`renders ./components/tabs/demo/position.md correctly 1`] = `
 <div style="width: 500px;">
-  <div class="ant-radio-group ant-radio-group-default" style="margin: 8px;">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>top</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>bottom</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>left</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>right</span></label>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin: 8px;">
+    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>top</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottom"><span class="ant-radio-button-inner"></span></span><span>bottom</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>left</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="right"><span class="ant-radio-button-inner"></span></span><span>right</span></label>
   </div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
@@ -294,10 +294,10 @@ exports[`renders ./components/tabs/demo/position.md correctly 1`] = `
 
 exports[`renders ./components/tabs/demo/size.md correctly 1`] = `
 <div>
-  <div class="ant-radio-group ant-radio-group-default" style="margin-bottom: 16px;">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Small</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Default</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Large</span></label>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 16px;">
+    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label>
   </div>
   <div class="ant-tabs ant-tabs-top ant-tabs-small ant-tabs-line no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
@@ -328,9 +328,9 @@ exports[`renders ./components/tabs/demo/size.md correctly 1`] = `
 
 exports[`renders ./components/tabs/demo/slide.md correctly 1`] = `
 <div style="width: 500px;">
-  <div class="ant-radio-group ant-radio-group-default" style="margin-bottom: 8px;">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 8px;">
+    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label>
   </div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex" style="height: 200px;">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">

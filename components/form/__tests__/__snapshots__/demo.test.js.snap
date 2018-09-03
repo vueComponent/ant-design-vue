@@ -333,10 +333,10 @@ exports[`renders ./components/form/demo/layout.vue correctly 1`] = `
         <label title="Form Layout" class="">Form Layout</label>
       </div>
       <div class="ant-col-14 ant-form-item-control-wrapper">
-        <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label>
+        <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label>
           <label
-            class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label>
-            <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Inline</span></label>
+            class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label>
+            <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span>Inline</span></label>
         </div>
         </span>
         <!---->
@@ -717,10 +717,10 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label for="radio-group" title="Radio.Group" class="">Radio.Group</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-group"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input"><span class="ant-radio-inner"></span></span><span>item 1</span></label>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-group"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="a"><span class="ant-radio-inner"></span></span><span>item 1</span></label>
         <label
-          class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input"><span class="ant-radio-inner"></span></span><span>item 2</span></label>
-          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input"><span class="ant-radio-inner"></span></span><span>item 3</span></label>
+          class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="b"><span class="ant-radio-inner"></span></span><span>item 2</span></label>
+          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="c"><span class="ant-radio-inner"></span></span><span>item 3</span></label>
       </div>
       </span>
       <!---->
@@ -732,10 +732,10 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
       <label for="radio-button" title="Radio.Button" class="">Radio.Button</label>
     </div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-button"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>item 1</span></label>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-button"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="a"><span class="ant-radio-button-inner"></span></span><span>item 1</span></label>
         <label
-          class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>item 2</span></label>
-          <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>item 3</span></label>
+          class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="b"><span class="ant-radio-button-inner"></span></span><span>item 2</span></label>
+          <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="c"><span class="ant-radio-button-inner"></span></span><span>item 3</span></label>
       </div>
       </span>
       <!---->

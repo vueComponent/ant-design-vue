@@ -660,9 +660,9 @@ exports[`Locale Provider should display the text as ar 1`] = `
             <div title="سبتمبر" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">سبتمبر</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>الشهر</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>السنة</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>الشهر</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>السنة</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -1064,9 +1064,9 @@ exports[`Locale Provider should display the text as bg 1`] = `
             <div title="сеп" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">сеп</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Месец</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Година</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Месец</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Година</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -1468,9 +1468,9 @@ exports[`Locale Provider should display the text as ca 1`] = `
             <div title="set." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mes</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Any</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mes</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Any</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -1872,9 +1872,9 @@ exports[`Locale Provider should display the text as cs 1`] = `
             <div title="zář" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">zář</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Měsíc</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Rok</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Měsíc</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Rok</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -2276,9 +2276,9 @@ exports[`Locale Provider should display the text as de 1`] = `
             <div title="Sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Monat</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Jahr</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Monat</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Jahr</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -2680,9 +2680,9 @@ exports[`Locale Provider should display the text as el 1`] = `
             <div title="Σεπ" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Σεπ</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Μήνας</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Έτος</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Μήνας</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Έτος</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -3084,9 +3084,9 @@ exports[`Locale Provider should display the text as en 1`] = `
             <div title="Sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -3488,9 +3488,9 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
             <div title="Sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -3892,9 +3892,9 @@ exports[`Locale Provider should display the text as es 1`] = `
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mes</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Año</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mes</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Año</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -4296,9 +4296,9 @@ exports[`Locale Provider should display the text as et 1`] = `
             <div title="sept" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sept</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Kuu</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Aasta</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Kuu</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Aasta</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -4700,9 +4700,9 @@ exports[`Locale Provider should display the text as fa 1`] = `
             <div title="سپتامبر" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">سپتامبر</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>ماه</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>سال</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>ماه</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>سال</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -5104,9 +5104,9 @@ exports[`Locale Provider should display the text as fi 1`] = `
             <div title="syys" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">syys</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Kuukausi</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Vuosi</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Kuukausi</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Vuosi</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -5508,9 +5508,9 @@ exports[`Locale Provider should display the text as fr 1`] = `
             <div title="sept." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sept.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mois</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Année</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mois</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Année</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -5912,9 +5912,9 @@ exports[`Locale Provider should display the text as fr 2`] = `
             <div title="sept." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sept.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mois</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Année</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mois</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Année</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -6316,9 +6316,9 @@ exports[`Locale Provider should display the text as is 1`] = `
             <div title="sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mánuður</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Ár</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mánuður</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Ár</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -6720,9 +6720,9 @@ exports[`Locale Provider should display the text as it 1`] = `
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mese</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Anno</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mese</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Anno</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -7124,9 +7124,9 @@ exports[`Locale Provider should display the text as ja 1`] = `
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>月</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>年</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>月</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>年</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -7528,9 +7528,9 @@ exports[`Locale Provider should display the text as ko 1`] = `
             <div title="9월" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9월</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>월</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>년</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>월</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>년</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -7932,9 +7932,9 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Meh</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Sal</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Meh</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Sal</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -8336,9 +8336,9 @@ exports[`Locale Provider should display the text as nb 1`] = `
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Måned</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>År</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Måned</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>År</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -8740,9 +8740,9 @@ exports[`Locale Provider should display the text as nl 1`] = `
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Maand</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Jaar</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Maand</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Jaar</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -9144,9 +9144,9 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Maand</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Jaar</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Maand</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Jaar</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -9548,9 +9548,9 @@ exports[`Locale Provider should display the text as pl 1`] = `
             <div title="wrz" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">wrz</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Miesiąc</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Rok</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Miesiąc</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Rok</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -9952,9 +9952,9 @@ exports[`Locale Provider should display the text as pt 1`] = `
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -10356,9 +10356,9 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -10760,9 +10760,9 @@ exports[`Locale Provider should display the text as ru 1`] = `
             <div title="сент." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">сент.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Месяц</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Год</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Месяц</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Год</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -11164,9 +11164,9 @@ exports[`Locale Provider should display the text as sk 1`] = `
             <div title="sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mesiac</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Rok</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mesiac</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Rok</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -11568,9 +11568,9 @@ exports[`Locale Provider should display the text as sl 1`] = `
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mesec</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Leto</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mesec</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Leto</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -11972,9 +11972,9 @@ exports[`Locale Provider should display the text as sr 1`] = `
             <div title="sep." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Mesec</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Godina</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Mesec</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Godina</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -12376,9 +12376,9 @@ exports[`Locale Provider should display the text as sv 1`] = `
             <div title="sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">sep</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Månad</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>År</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Månad</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>År</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -12780,9 +12780,9 @@ exports[`Locale Provider should display the text as th 1`] = `
             <div title="ก.ย." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">ก.ย.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>เดือน</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>ปี</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>เดือน</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>ปี</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -13184,9 +13184,9 @@ exports[`Locale Provider should display the text as tr 1`] = `
             <div title="Eyl" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Eyl</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -13588,9 +13588,9 @@ exports[`Locale Provider should display the text as uk 1`] = `
             <div title="вер" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">вер</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Місяць</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Рік</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Місяць</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Рік</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -13992,9 +13992,9 @@ exports[`Locale Provider should display the text as vi 1`] = `
             <div title="Th09" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Th09</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>Month</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Year</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -14396,9 +14396,9 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>月</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>年</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>月</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>年</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
@@ -14800,9 +14800,9 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
       </div>
-      <div class="ant-radio-group ant-radio-group-small">
-        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>月</span></label>
-        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>年</span></label>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small">
+        <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="date"><span class="ant-radio-button-inner"></span></span><span>月</span></label>
+        <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>年</span></label>
       </div>
     </div>
     <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">

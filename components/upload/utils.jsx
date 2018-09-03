@@ -6,14 +6,13 @@ export function T () {
 // via coping a new Object
 export function fileToObject (file) {
   return {
+    ...file,
     lastModified: file.lastModified,
     lastModifiedDate: file.lastModifiedDate,
-    name: file.filename || file.name,
+    name: file.name,
     size: file.size,
     type: file.type,
     uid: file.uid,
-    response: file.response,
-    error: file.error,
     percent: 0,
     originFileObj: file,
   }

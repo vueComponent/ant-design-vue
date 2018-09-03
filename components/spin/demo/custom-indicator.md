@@ -14,6 +14,16 @@ Use custom loading indicator.
     <a-spin>
       <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
     </a-spin>
+    <a-spin :indicator="indicator" />
   </div>
 </template>
+<script>
+  export default {
+    data () {
+      return {
+        indicator: <i class="anticon anticon-loading anticon-spin ant-spin-dot" style="font-size: 24px;"></i>
+      }
+    },
+  }
+</script>
 ```

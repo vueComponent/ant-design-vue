@@ -613,7 +613,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 عنصر</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -634,7 +634,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 عنصر</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -1017,7 +1017,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 избор</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -1038,7 +1038,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 избор</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -1421,7 +1421,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -1442,7 +1442,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -1825,7 +1825,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 položka</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -1846,7 +1846,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 položka</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -2229,7 +2229,7 @@ exports[`Locale Provider should display the text as de 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 Eintrag</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -2250,7 +2250,7 @@ exports[`Locale Provider should display the text as de 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 Eintrag</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -2633,7 +2633,7 @@ exports[`Locale Provider should display the text as el 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 αντικείμενο</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -2654,7 +2654,7 @@ exports[`Locale Provider should display the text as el 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 αντικείμενο</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -3037,7 +3037,7 @@ exports[`Locale Provider should display the text as en 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -3058,7 +3058,7 @@ exports[`Locale Provider should display the text as en 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -3441,7 +3441,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -3462,7 +3462,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -3845,7 +3845,7 @@ exports[`Locale Provider should display the text as es 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 elemento</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -3866,7 +3866,7 @@ exports[`Locale Provider should display the text as es 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 elemento</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -4249,7 +4249,7 @@ exports[`Locale Provider should display the text as et 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 kogus</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -4270,7 +4270,7 @@ exports[`Locale Provider should display the text as et 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 kogus</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -4653,7 +4653,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 </span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -4674,7 +4674,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 </span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -5057,7 +5057,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 kohde</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -5078,7 +5078,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 kohde</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -5461,7 +5461,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 élément</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -5482,7 +5482,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 élément</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -5865,7 +5865,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 élément</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -5886,7 +5886,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 élément</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -6269,7 +6269,7 @@ exports[`Locale Provider should display the text as is 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 færsla</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -6290,7 +6290,7 @@ exports[`Locale Provider should display the text as is 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 færsla</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -6673,7 +6673,7 @@ exports[`Locale Provider should display the text as it 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 articolo</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -6694,7 +6694,7 @@ exports[`Locale Provider should display the text as it 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 articolo</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -7077,7 +7077,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 アイテム</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -7098,7 +7098,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 アイテム</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -7481,7 +7481,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 개</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -7502,7 +7502,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 개</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -7885,7 +7885,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 tişt</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -7906,7 +7906,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 tişt</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -8289,7 +8289,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 element</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -8310,7 +8310,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 element</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -8693,7 +8693,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -8714,7 +8714,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -9097,7 +9097,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -9118,7 +9118,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -9501,7 +9501,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 obiekt</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -9522,7 +9522,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 obiekt</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -9905,7 +9905,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -9926,7 +9926,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -10309,7 +10309,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -10330,7 +10330,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -10713,7 +10713,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 элем.</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -10734,7 +10734,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 элем.</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -11117,7 +11117,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 položka</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -11138,7 +11138,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 položka</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -11521,7 +11521,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 Objekt</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -11542,7 +11542,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 Objekt</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -11925,7 +11925,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 stavka</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -11946,7 +11946,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 stavka</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -12329,7 +12329,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 element</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -12350,7 +12350,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 element</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -12733,7 +12733,7 @@ exports[`Locale Provider should display the text as th 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 ชิ้น</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -12754,7 +12754,7 @@ exports[`Locale Provider should display the text as th 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 ชิ้น</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -13137,7 +13137,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 Öğe</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -13158,7 +13158,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 Öğe</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -13541,7 +13541,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -13562,7 +13562,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -13945,7 +13945,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 mục</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -13966,7 +13966,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 mục</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -14349,7 +14349,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 项</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -14370,7 +14370,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 项</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -14753,7 +14753,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 項目</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
@@ -14774,7 +14774,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
     </div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
-        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+        <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
         </label><span class="ant-transfer-list-header-selected"><span>0 項目</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body ant-transfer-list-body-with-search">

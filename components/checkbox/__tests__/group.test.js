@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { asyncExpect } from '@/tests/utils'
 import Checkbox from '../index'
 
 describe('CheckboxGroup', () => {
@@ -9,6 +10,8 @@ describe('CheckboxGroup', () => {
         render () {
           return <Checkbox.Group options={['Apple', 'Pear', 'Orange']} onChange={onChange} />
         },
+      }, {
+        sync: false,
       }
     )
     wrapper.findAll('.ant-checkbox-input').at(0).trigger('change')
@@ -34,6 +37,8 @@ describe('CheckboxGroup', () => {
         render () {
           return <Checkbox.Group options={options} onChange={onChangeGroup} disabled />
         },
+      }, {
+        sync: false,
       }
     )
     groupWrapper.findAll('.ant-checkbox-input').at(0).trigger('change')
@@ -55,11 +60,47 @@ describe('CheckboxGroup', () => {
         render () {
           return <Checkbox.Group options={options} onChange={onChangeGroup} />
         },
+      }, {
+        sync: false,
       }
     )
     groupWrapper.findAll('.ant-checkbox-input').at(0).trigger('change')
     expect(onChangeGroup).toBeCalledWith(['Apple'])
     groupWrapper.findAll('.ant-checkbox-input').at(1).trigger('change')
     expect(onChangeGroup).toBeCalledWith(['Apple'])
+  })
+
+  it('passes prefixCls down to checkbox', () => {
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Orange', value: 'Orange' },
+    ]
+
+    const wrapper = mount(
+      {
+        render () {
+          return <Checkbox.Group prefixCls='my-checkbox' options={options} />
+        },
+      }
+    )
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+  it('should be controlled by value', async () => {
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Orange', value: 'Orange' },
+    ]
+
+    const wrapper = mount(Checkbox.Group, {
+      propsData: { options },
+      sync: false,
+    })
+
+    expect(wrapper.vm.sValue).toEqual([])
+    wrapper.setProps({ value: ['Apple'] })
+    await asyncExpect(() => {
+      expect(wrapper.vm.sValue).toEqual(['Apple'])
+    })
   })
 })

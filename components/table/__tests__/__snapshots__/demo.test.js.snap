@@ -748,7 +748,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                     </label>
           </div>
           </span>
@@ -760,7 +760,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
           </thead>
           <tbody class="ant-table-tbody">
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -776,7 +776,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
             <!---->
             <!---->
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2328,7 +2328,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                     </label>
           </div>
           </span>
@@ -2340,7 +2340,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
           </thead>
           <tbody class="ant-table-tbody">
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="John Brown" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="John Brown" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2352,7 +2352,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               <td>New York No. 1 Lake Park</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Jim Green" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Jim Green" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2364,7 +2364,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               <td>London No. 1 Lake Park</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Joe Black" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Joe Black" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2376,7 +2376,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               <td>Sidney No. 1 Lake Park</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2429,7 +2429,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 </colgroup>
                 <thead class="ant-table-thead">
                   <tr>
-                    <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                       </label>
             </div>
             </span>
@@ -2441,7 +2441,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
             </thead>
             <tbody class="ant-table-tbody">
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2451,7 +2451,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 0</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2461,7 +2461,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 1</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2471,7 +2471,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 2</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2481,7 +2481,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 3</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2491,7 +2491,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 4</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2501,7 +2501,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 5</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2511,7 +2511,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 6</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2521,7 +2521,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 7</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2531,7 +2531,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 <td>London, Park Lane no. 8</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                   </label>
                   </span>
                 </td>
@@ -2592,7 +2592,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="selection-column" class="ant-table-selection-column ant-table-selection-column-custom"><span><div class="ant-table-selection"><label class="ant-table-selection-select-all-custom ant-checkbox-wrapper ant-table-selection-select-all-custom"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                  <th key="selection-column" class="ant-table-selection-column ant-table-selection-column-custom"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper ant-table-selection-select-all-custom"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                     </label>
                     <div class="ant-table-selection-down ant-dropdown-trigger">
                       <i class="anticon anticon-down"></i>
@@ -2607,7 +2607,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
           </thead>
           <tbody class="ant-table-tbody">
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2617,7 +2617,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 0</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2627,7 +2627,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 1</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2637,7 +2637,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 2</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2647,7 +2647,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 3</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2657,7 +2657,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 4</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2667,7 +2667,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 5</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2677,7 +2677,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 6</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2687,7 +2687,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 7</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>
@@ -2697,7 +2697,7 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               <td>London, Park Lane no. 8</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
                 </label>
                 </span>
               </td>

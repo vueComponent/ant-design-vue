@@ -127,10 +127,10 @@ exports[`renders ./components/menu/demo/sider-current.md correctly 1`] = `
 
 exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
 <div>
-  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
   </label> Change Mode
   <span classname="ant-divider" style="margin: 0px 1em;"></span>
-  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
   </label> Change Theme
   <br>
   <br>
@@ -170,7 +170,7 @@ exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
 
 exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
 <div>
-  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
   </label> Change Theme
   <br>
   <br>

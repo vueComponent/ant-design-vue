@@ -9,7 +9,7 @@ exports[`Upload List handle error 1`] = `
     <div>
       <div class="ant-progress-outer">
         <div class="ant-progress-inner">
-          <div class="ant-progress-bg" style="width: 0%; height: 2px;"></div>
+          <div class="ant-progress-bg" style="width: 0%; height: 2px; border-radius: 100px;"></div>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@ exports[`Upload List handle error 2`] = `
     <div>
       <div class="ant-progress-outer">
         <div class="ant-progress-inner">
-          <div class="ant-progress-bg" style="width: 0%; height: 2px;"></div>
+          <div class="ant-progress-bg" style="width: 0%; height: 2px; border-radius: 100px;"></div>
         </div>
       </div>
     </div>

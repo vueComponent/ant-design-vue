@@ -22,7 +22,7 @@ export default {
     // onClick: PropTypes.func,
     tabIndex: PropTypes.string,
     readOnly: PropTypes.bool,
-    // autoFocus: PropTypes.bool,
+    autoFocus: PropTypes.bool,
     value: PropTypes.any,
   }, {
     prefixCls: 'rc-checkbox',
@@ -82,7 +82,7 @@ export default {
         preventDefault () {
           e.preventDefault()
         },
-        nativeEvent: { ...event, shiftKey: this.eventShiftKey },
+        nativeEvent: { ...e, shiftKey: this.eventShiftKey },
       })
       this.eventShiftKey = false
     },

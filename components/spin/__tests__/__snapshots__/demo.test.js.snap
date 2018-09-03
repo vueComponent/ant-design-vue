@@ -2,13 +2,16 @@
 
 exports[`renders ./components/spin/demo/basic.md correctly 1`] = `
 <div>
-  <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
 </div>
 `;
 
 exports[`renders ./components/spin/demo/custom-indicator.md correctly 1`] = `
 <div>
-  <div class="ant-spin ant-spin-spinning ant-spin-show-text">
+  <div class="ant-spin ant-spin-spinning">
+    <i class="anticon anticon-loading anticon-spin ant-spin-dot" style="font-size: 24px;"></i>
+  </div>
+  <div class="ant-spin ant-spin-spinning">
     <i class="anticon anticon-loading anticon-spin ant-spin-dot" style="font-size: 24px;"></i>
   </div>
 </div>
@@ -29,7 +32,7 @@ exports[`renders ./components/spin/demo/delayAndDebounce.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/inside.md correctly 1`] = `
 <div class="example">
-  <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
 </div>
 `;
 
@@ -48,9 +51,9 @@ exports[`renders ./components/spin/demo/nested.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/size.md correctly 1`] = `
 <div>
-  <div class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
-  <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
-  <div class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-sm ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-lg ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
 </div>
 `;
 

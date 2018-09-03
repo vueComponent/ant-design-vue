@@ -9,3 +9,25 @@
 | spinning | whether Spin is spinning | boolean | true |
 | tip | customize description content when Spin has children | string | - |
 | wrapperClassName | className of wrapper when Spin has children | string | - |
+
+### Static Method
+
+- `Spin.setDefaultIndicator({indicator})`
+  As `indicator`, you can define the global default spin element
+
+```jsx
+  Spin.setDefaultIndicator({
+    indicator: (h) => {
+      return <i class='anticon anticon-loading anticon-spin ant-spin-dot'></i>
+    },
+  })
+  or
+  Spin.setDefaultIndicator({
+    indicator: {
+      render () {
+        return <i class='anticon anticon-loading anticon-spin ant-spin-dot'></i>
+      },
+    },
+  })
+```
+

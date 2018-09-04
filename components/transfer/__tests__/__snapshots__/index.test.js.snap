@@ -7,22 +7,21 @@ exports[`Transfer should render correctly 1`] = `
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" checked="checked" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span class="ant-transfer-list-header-selected"><span>1/2 items</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
-    <div class="ant-transfer-list-body"><span tag="div" class="ant-transfer-list-content-warp"><ul class="ant-transfer-list-content"><li class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" checked="checked" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+    <div class="ant-transfer-list-body"><span tag="ul" class="ant-transfer-list-content"><li class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" checked="checked" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span></span></li>
       <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled">
         <label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="disabled" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
         </label><span></span></li>
-      </ul>
       </span>
       <div class="ant-transfer-list-body-not-found">Not Found</div>
     </div>
   </div>
   <div class="ant-transfer-operation">
-    <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-      <i class="anticon anticon-left"></i>
-    </button>
     <button type="button" class="ant-btn ant-btn-primary ant-btn-sm">
       <i class="anticon anticon-right"></i>
+    </button>
+    <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
+      <i class="anticon anticon-left"></i>
     </button>
   </div>
   <div class="ant-transfer-list">
@@ -30,9 +29,8 @@ exports[`Transfer should render correctly 1`] = `
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span class="ant-transfer-list-header-selected"><span>1 item</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
-    <div class="ant-transfer-list-body"><span tag="div" class="ant-transfer-list-content-warp"><ul class="ant-transfer-list-content"><li class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+    <div class="ant-transfer-list-body"><span tag="ul" class="ant-transfer-list-content"><li class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span></span></li>
-      </ul>
       </span>
       <div class="ant-transfer-list-body-not-found">Not Found</div>
     </div>
@@ -47,19 +45,18 @@ exports[`Transfer should show sorted targetkey 1`] = `
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span class="ant-transfer-list-header-selected"><span>1 item</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
-    <div class="ant-transfer-list-body"><span tag="div" class="ant-transfer-list-content-warp"><ul class="ant-transfer-list-content"><li title="a" class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+    <div class="ant-transfer-list-body"><span tag="ul" class="ant-transfer-list-content"><li title="a" class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span>a</span></li>
-      </ul>
       </span>
       <div class="ant-transfer-list-body-not-found">Not Found</div>
     </div>
   </div>
   <div class="ant-transfer-operation">
     <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-      <i class="anticon anticon-left"></i>
+      <i class="anticon anticon-right"></i>
     </button>
     <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-      <i class="anticon anticon-right"></i>
+      <i class="anticon anticon-left"></i>
     </button>
   </div>
   <div class="ant-transfer-list">
@@ -67,12 +64,11 @@ exports[`Transfer should show sorted targetkey 1`] = `
       <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span class="ant-transfer-list-header-selected"><span>2 items</span><span class="ant-transfer-list-header-title"></span></span>
     </div>
-    <div class="ant-transfer-list-body"><span tag="div" class="ant-transfer-list-content-warp"><ul class="ant-transfer-list-content"><li title="c" class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+    <div class="ant-transfer-list-body"><span tag="ul" class="ant-transfer-list-content"><li title="c" class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
       </label><span>c</span></li>
       <li title="b" class="ant-transfer-list-content-item">
         <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
         </label><span>b</span></li>
-      </ul>
       </span>
       <div class="ant-transfer-list-body-not-found">Not Found</div>
     </div>

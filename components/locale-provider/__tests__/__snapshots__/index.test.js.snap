@@ -620,16 +620,16 @@ exports[`Locale Provider should display the text as ar 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="ابحث هنا" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">لا يوجد محتوى</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -641,7 +641,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="ابحث هنا" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">لا يوجد محتوى</div>
       </div>
     </div>
@@ -1024,16 +1024,16 @@ exports[`Locale Provider should display the text as bg 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Търсене" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Няма намерени</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -1045,7 +1045,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Търсене" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Няма намерени</div>
       </div>
     </div>
@@ -1428,16 +1428,16 @@ exports[`Locale Provider should display the text as ca 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Cercar aquí" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">No trobat</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -1449,7 +1449,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Cercar aquí" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">No trobat</div>
       </div>
     </div>
@@ -1832,16 +1832,16 @@ exports[`Locale Provider should display the text as cs 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Vyhledávání" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nenalezeno</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -1853,7 +1853,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Vyhledávání" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nenalezeno</div>
       </div>
     </div>
@@ -2236,16 +2236,16 @@ exports[`Locale Provider should display the text as de 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Suchen" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nicht gefunden</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -2257,7 +2257,7 @@ exports[`Locale Provider should display the text as de 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Suchen" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nicht gefunden</div>
       </div>
     </div>
@@ -2640,16 +2640,16 @@ exports[`Locale Provider should display the text as el 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Αναζήτηση" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Δεν βρέθηκε</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -2661,7 +2661,7 @@ exports[`Locale Provider should display the text as el 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Αναζήτηση" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Δεν βρέθηκε</div>
       </div>
     </div>
@@ -3044,16 +3044,16 @@ exports[`Locale Provider should display the text as en 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Not Found</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -3065,7 +3065,7 @@ exports[`Locale Provider should display the text as en 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Not Found</div>
       </div>
     </div>
@@ -3448,16 +3448,16 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Not Found</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -3469,7 +3469,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Not Found</div>
       </div>
     </div>
@@ -3852,16 +3852,16 @@ exports[`Locale Provider should display the text as es 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Buscar aquí" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">No encontrado</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -3873,7 +3873,7 @@ exports[`Locale Provider should display the text as es 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Buscar aquí" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">No encontrado</div>
       </div>
     </div>
@@ -4256,16 +4256,16 @@ exports[`Locale Provider should display the text as et 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Otsi siit" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ei leitud</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -4277,7 +4277,7 @@ exports[`Locale Provider should display the text as et 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Otsi siit" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ei leitud</div>
       </div>
     </div>
@@ -4660,16 +4660,16 @@ exports[`Locale Provider should display the text as fa 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="جستجو" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">داده‌ای موجود نیست</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -4681,7 +4681,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="جستجو" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">داده‌ای موجود نیست</div>
       </div>
     </div>
@@ -5064,16 +5064,16 @@ exports[`Locale Provider should display the text as fi 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Etsi täältä" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ei löytynyt</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -5085,7 +5085,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Etsi täältä" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ei löytynyt</div>
       </div>
     </div>
@@ -5468,16 +5468,16 @@ exports[`Locale Provider should display the text as fr 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Recherche" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Pas de résultat</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -5489,7 +5489,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Recherche" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Pas de résultat</div>
       </div>
     </div>
@@ -5872,16 +5872,16 @@ exports[`Locale Provider should display the text as fr 2`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Recherche" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Pas de résultat</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -5893,7 +5893,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Recherche" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Pas de résultat</div>
       </div>
     </div>
@@ -6276,16 +6276,16 @@ exports[`Locale Provider should display the text as is 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Leita hér" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Engar færslur</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -6297,7 +6297,7 @@ exports[`Locale Provider should display the text as is 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Leita hér" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Engar færslur</div>
       </div>
     </div>
@@ -6680,16 +6680,16 @@ exports[`Locale Provider should display the text as it 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Cerca qui" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Non trovato</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -6701,7 +6701,7 @@ exports[`Locale Provider should display the text as it 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Cerca qui" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Non trovato</div>
       </div>
     </div>
@@ -7084,16 +7084,16 @@ exports[`Locale Provider should display the text as ja 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="ここを検索" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">結果はありません</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -7105,7 +7105,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="ここを検索" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">結果はありません</div>
       </div>
     </div>
@@ -7488,16 +7488,16 @@ exports[`Locale Provider should display the text as ko 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="여기에 검색하세요" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">데이터 없음</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -7509,7 +7509,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="여기에 검색하세요" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">데이터 없음</div>
       </div>
     </div>
@@ -7892,16 +7892,16 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Lêgerîn" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Peyda Nebû</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -7913,7 +7913,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Lêgerîn" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Peyda Nebû</div>
       </div>
     </div>
@@ -8296,16 +8296,16 @@ exports[`Locale Provider should display the text as nb 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Søk her" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ingen treff</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -8317,7 +8317,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Søk her" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ingen treff</div>
       </div>
     </div>
@@ -8700,16 +8700,16 @@ exports[`Locale Provider should display the text as nl 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Zoeken" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Niet gevonden</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -8721,7 +8721,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Zoeken" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Niet gevonden</div>
       </div>
     </div>
@@ -9104,16 +9104,16 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Zoek hier" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Niet gevonden</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -9125,7 +9125,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Zoek hier" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Niet gevonden</div>
       </div>
     </div>
@@ -9508,16 +9508,16 @@ exports[`Locale Provider should display the text as pl 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Szukaj" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nie znaleziono</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -9529,7 +9529,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Szukaj" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nie znaleziono</div>
       </div>
     </div>
@@ -9912,16 +9912,16 @@ exports[`Locale Provider should display the text as pt 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Procurar..." type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Sem resultados</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -9933,7 +9933,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Procurar..." type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Sem resultados</div>
       </div>
     </div>
@@ -10316,16 +10316,16 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Procurar" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Não encontrado</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -10337,7 +10337,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Procurar" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Não encontrado</div>
       </div>
     </div>
@@ -10720,16 +10720,16 @@ exports[`Locale Provider should display the text as ru 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Введите название для поиска" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ничего не найдено</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -10741,7 +10741,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Введите название для поиска" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ничего не найдено</div>
       </div>
     </div>
@@ -11124,16 +11124,16 @@ exports[`Locale Provider should display the text as sk 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Vyhľadávanie" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nenájdené</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -11145,7 +11145,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Vyhľadávanie" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nenájdené</div>
       </div>
     </div>
@@ -11528,16 +11528,16 @@ exports[`Locale Provider should display the text as sl 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Išči tukaj" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ni rezultatov iskanja</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -11549,7 +11549,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Išči tukaj" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Ni rezultatov iskanja</div>
       </div>
     </div>
@@ -11932,16 +11932,16 @@ exports[`Locale Provider should display the text as sr 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Pretražite ovde" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nisu pronađeni rezultati pretrage</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -11953,7 +11953,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Pretražite ovde" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Nisu pronađeni rezultati pretrage</div>
       </div>
     </div>
@@ -12336,16 +12336,16 @@ exports[`Locale Provider should display the text as sv 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Sök" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Info saknas</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -12357,7 +12357,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Sök" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Info saknas</div>
       </div>
     </div>
@@ -12740,16 +12740,16 @@ exports[`Locale Provider should display the text as th 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="ค้นหา" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">ไม่พบข้อมูล</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -12761,7 +12761,7 @@ exports[`Locale Provider should display the text as th 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="ค้นหา" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">ไม่พบข้อมูล</div>
       </div>
     </div>
@@ -13144,16 +13144,16 @@ exports[`Locale Provider should display the text as tr 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Arama" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Bulunamadı</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -13165,7 +13165,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Arama" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Bulunamadı</div>
       </div>
     </div>
@@ -13548,16 +13548,16 @@ exports[`Locale Provider should display the text as uk 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Введіть текст для пошуку" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Нічого не знайдено</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -13569,7 +13569,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Введіть текст для пошуку" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Нічого не знайдено</div>
       </div>
     </div>
@@ -13952,16 +13952,16 @@ exports[`Locale Provider should display the text as vi 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Tìm ở đây" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Không Tìm Thấy</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -13973,7 +13973,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="Tìm ở đây" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">Không Tìm Thấy</div>
       </div>
     </div>
@@ -14356,16 +14356,16 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="请输入搜索内容" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">无匹配结果</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -14377,7 +14377,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="请输入搜索内容" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">无匹配结果</div>
       </div>
     </div>
@@ -14760,16 +14760,16 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="搜尋資料" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">查無此資料</div>
       </div>
     </div>
     <div class="ant-transfer-operation">
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-left"></i>
+        <i class="anticon anticon-right"></i>
       </button>
       <button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm">
-        <i class="anticon anticon-right"></i>
+        <i class="anticon anticon-left"></i>
       </button>
     </div>
     <div class="ant-transfer-list">
@@ -14781,7 +14781,7 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
         <div class="ant-transfer-list-body-search-wrapper">
           <div>
             <input value="" placeholder="搜尋資料" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
-        </div><span tag="div" class="ant-transfer-list-content-warp"></span>
+        </div><span tag="ul" class="ant-transfer-list-content"></span>
         <div class="ant-transfer-list-body-not-found">查無此資料</div>
       </div>
     </div>

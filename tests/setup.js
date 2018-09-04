@@ -30,6 +30,7 @@ Vue.component('transition-group', {
   render (createElement) {
     return createElement(
       this.tag || 'div',
+      null,
       this.$slots.default,
     )
   },

@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-// import PureRenderMixin from 'rc-util/lib/PureRenderMixin'
 import PropTypes from '../_util/vue-types'
 import { isValidElement, initDefaultProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
@@ -8,6 +7,11 @@ import Checkbox from '../checkbox'
 import Search from './search'
 import Item from './item'
 import triggerEvent from '../_util/triggerEvent'
+import addEventListener from '../_util/Dom/addEventListener'
+
+function isIEorEDGE () {
+  return document.documentMode || /Edge/.test(navigator.userAgent)
+}
 
 function noop () {
 }
@@ -67,21 +71,41 @@ export default {
     }
   },
   mounted () {
-    this.timer = window.setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.setState({
         mounted: true,
       })
     }, 0)
+    this.$nextTick(() => {
+      if (this.$refs.listContentWrapper) {
+        const listContentWrapperDom = this.$refs.listContentWrapper.$el
+        this.scrollEvent = addEventListener(listContentWrapperDom, 'scroll', this.handleScroll)
+      }
+    })
   },
   beforeDestroy () {
     clearTimeout(this.timer)
     clearTimeout(this.triggerScrollTimer)
+    clearTimeout(this.fixIERepaintTimer)
+    if (this.scrollEvent) {
+      this.scrollEvent.remove()
+    }
   },
-
-  // shouldComponentUpdate (...args: any[]) {
-  //   return PureRenderMixin.shouldComponentUpdate.apply(this, args)
-  // }
+  updated () {
+    this.$nextTick(() => {
+      if (this.scrollEvent) {
+        this.scrollEvent.remove()
+      }
+      if (this.$refs.listContentWrapper) {
+        const listContentWrapperDom = this.$refs.listContentWrapper.$el
+        this.scrollEvent = addEventListener(listContentWrapperDom, 'scroll', this.handleScroll)
+      }
+    })
+  },
   methods: {
+    handleScroll (e) {
+      this.$emit('scroll', e)
+    },
     getCheckStatus (filteredDataSource) {
       const { checkedKeys } = this.$props
       if (checkedKeys.length === 0) {
@@ -97,21 +121,24 @@ export default {
       this.handleSelect(selectedItem, !result)
     },
     _handleFilter (e) {
-      this.handleSelect(e)
+      this.handleFilter(e)
       if (!e.target.value) {
         return
       }
       // Manually trigger scroll event for lazy search bug
       // https://github.com/ant-design/ant-design/issues/5631
-      this.triggerScrollTimer = window.setTimeout(() => {
-        const listNode = this.$el.querySelectorAll('.ant-transfer-list-content')[0]
+      this.triggerScrollTimer = setTimeout(() => {
+        const transferNode = this.$el
+        const listNode = transferNode.querySelectorAll('.ant-transfer-list-content')[0]
         if (listNode) {
           triggerEvent(listNode, 'scroll')
         }
       }, 0)
+      this.fixIERepaint()
     },
     _handleClear (e) {
       this.handleClear(e)
+      this.fixIERepaint()
     },
     matchFilter (text, item) {
       const { filter, filterOption } = this.$props
@@ -128,6 +155,20 @@ export default {
         renderedText: isRenderResultPlain ? renderResult.value : renderResult,
         renderedEl: isRenderResultPlain ? renderResult.label : renderResult,
       }
+    },
+
+    // Fix IE/Edge repaint
+    // https://github.com/ant-design/ant-design/issues/9697
+    // https://stackoverflow.com/q/27947912/3040605
+    fixIERepaint () {
+      if (!isIEorEDGE()) {
+        return
+      }
+      this.fixIERepaintTimer = window.setTimeout(() => {
+        if (this.$refs.notFoundNode) {
+          this.$refs.notFoundNode.className = this.$refs.notFoundNode.className
+        }
+      }, 0)
     },
     filterNull (arr) {
       return arr.filter((item) => {
@@ -188,7 +229,7 @@ export default {
       <div class={`${prefixCls}-body-search-wrapper`}>
         <Search
           prefixCls={`${prefixCls}-search`}
-          onChange={this.handleFilter}
+          onChange={this._handleFilter}
           handleClear={this.handleClear}
           placeholder={searchPlaceholder}
           value={filter}
@@ -206,22 +247,13 @@ export default {
         {search}
         <transition-group
           {...transitionProps}
-          tag='div'
-          class={`${prefixCls}-content-warp`}
+          tag='ul'
+          class={`${prefixCls}-content`}
+          ref='listContentWrapper'
         >
-          {showItems && showItems.length && this.filterNull(showItems).length ? (
-            <ul
-              key='transferList'
-              class={`${prefixCls}-content`}
-              onScroll={(e) => {
-                this.$emit('scroll', e)
-              }}
-            >
-              {showItems}
-            </ul>
-          ) : null}
+          {showItems}
         </transition-group>
-        <div class={`${prefixCls}-body-not-found`}>
+        <div class={`${prefixCls}-body-not-found`} ref='notFoundNode'>
           {notFoundContent}
         </div>
       </div>

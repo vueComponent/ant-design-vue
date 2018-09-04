@@ -1,6 +1,5 @@
 import PropTypes from '../_util/vue-types'
 import classNames from 'classnames'
-// import PureRenderMixin from 'rc-util/lib/PureRenderMixin'
 import Lazyload from '../vc-lazy-load'
 import Checkbox from '../checkbox'
 
@@ -8,9 +7,6 @@ function noop () {
 }
 
 export default {
-  // shouldComponentUpdate (...args: any[]) {
-  //   return PureRenderMixin.shouldComponentUpdate.apply(this, args)
-  // }
   props: {
     renderedText: PropTypes.any,
     renderedEl: PropTypes.any,
@@ -52,6 +48,7 @@ export default {
           throttle: 0,
           debounce: false,
           ...lazy,
+          _propsSymbol: Symbol(),
         },
       }
       children = <Lazyload {...lazyProps}>{listItem}</Lazyload>

@@ -33,7 +33,7 @@ export const PaginationProps = () => ({
 })
 
 export const PaginationConfig = () => ({
-  ...PaginationProps,
+  ...PaginationProps(),
   position: PropTypes.oneOf(['top', 'bottom', 'both']),
 })
 

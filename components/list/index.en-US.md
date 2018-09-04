@@ -12,10 +12,21 @@
 | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |
 | loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://vuecomponent.github.io/ant-design-vue/components/spin/#API) | false |
 | loadMore | Shows a load more content | string\|slot | - |
+| locale | i18n text including empty text | object | emptyText: 'No Data' <br> |
 | pagination | Pagination [config](https://vuecomponent.github.io/ant-design-vue/components/pagination/#API), hide it by setting it to false | boolean \| object | false |
 | split | Toggles rendering of the split under the list item | boolean | true |
 | renderItem | Custom item renderer, slot="renderItem" and slot-scope="item, index"  | (item, index) => vNode |  | - |
 | rowKey | Specify the key that will be used for uniquely identify each element  | item => string\|number |  |
+
+### pagination
+
+Properties for pagination.
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
+
+More about pagination, please check [`Pagination`](https://vuecomponent.github.io/ant-design-vue/components/pagination/#API).
 
 ### List grid props
 

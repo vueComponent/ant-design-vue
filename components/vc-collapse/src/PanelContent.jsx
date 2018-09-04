@@ -7,6 +7,8 @@ export default {
     prefixCls: PropTypes.string,
     isActive: PropTypes.bool,
     destroyInactivePanel: PropTypes.bool,
+    forceRender: PropTypes.bool,
+    role: PropTypes.any,
   },
   data () {
     return {
@@ -14,22 +16,22 @@ export default {
     }
   },
   render () {
-    this._isActive = this._isActive || this.isActive
+    this._isActive = this.forceRender || this._isActive || this.isActive
     if (!this._isActive) {
       return null
     }
-    const { prefixCls, isActive, destroyInactivePanel } = this.$props
+    const { prefixCls, isActive, destroyInactivePanel, forceRender, role } = this.$props
     const { $slots } = this
     const contentCls = {
       [`${prefixCls}-content`]: true,
       [`${prefixCls}-content-active`]: isActive,
     }
-    const child = !isActive && destroyInactivePanel ? null
+    const child = !forceRender && !isActive && destroyInactivePanel ? null
       : <div class={`${prefixCls}-content-box`}>{$slots.default}</div>
     return (
       <div
         class={contentCls}
-        role='tabpanel'
+        role={role}
       >{child}</div>
     )
   },

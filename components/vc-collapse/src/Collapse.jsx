@@ -1,7 +1,5 @@
-
-import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
-import { hasProp, getPropsData, isEmptyElement } from '../../_util/props-util'
+import { hasProp, getPropsData, isEmptyElement, initDefaultProps } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import openAnimationFactory from './openAnimationFactory'
 import { collapseProps } from './commonProps'
@@ -21,10 +19,11 @@ export default {
     prop: 'activeKey',
     event: 'change',
   },
-  props: {
-    ...collapseProps,
-    openAnimation: PropTypes.object,
-  },
+  props: initDefaultProps(collapseProps, {
+    prefixCls: 'rc-collapse',
+    accordion: false,
+    destroyInactivePanel: false,
+  }),
   data () {
     const { activeKey, defaultActiveKey, openAnimation, prefixCls } = this.$props
     let currentActiveKey = defaultActiveKey
@@ -57,7 +56,7 @@ export default {
     },
     getItems () {
       const activeKey = this.stateActiveKey
-      const { prefixCls, accordion, destroyInactivePanel } = this.$props
+      const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props
       const newChildren = []
       this.$slots.default.forEach((child, index) => {
         if (isEmptyElement(child)) return
@@ -85,6 +84,8 @@ export default {
             prefixCls,
             destroyInactivePanel,
             openAnimation: this.currentOpenAnimations,
+            accordion,
+            expandIcon,
           },
           on: {
             ...panelEvents,
@@ -113,12 +114,12 @@ export default {
     },
   },
   render () {
-    const { prefixCls } = this.$props
+    const { prefixCls, accordion } = this.$props
     const collapseClassName = {
       [prefixCls]: true,
     }
     return (
-      <div class={collapseClassName}>
+      <div class={collapseClassName} role={accordion ? 'tablist' : null}>
         {this.getItems()}
       </div>
     )

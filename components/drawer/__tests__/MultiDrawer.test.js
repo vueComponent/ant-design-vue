@@ -117,7 +117,6 @@ const MultiDrawer = {
 }
 
 describe('Drawer', () => {
-
   it('render right MultiDrawer', async () => {
     const wrapper = mount(MultiDrawer, {
       propsData: {

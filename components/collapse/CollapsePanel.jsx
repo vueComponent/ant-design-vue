@@ -1,13 +1,10 @@
 
-import PropTypes from '../_util/vue-types'
-import { getOptionProps } from '../_util/props-util'
-import RcCollapse from './src'
-import { panelProps } from './src/commonProps'
+import { getOptionProps, getComponentFromProp } from '../_util/props-util'
+import VcCollapse, { panelProps } from '../vc-collapse'
 
 export default {
   name: 'ACollapsePanel',
   props: {
-    name: PropTypes.string,
     ...panelProps,
   },
   render () {
@@ -22,17 +19,17 @@ export default {
       class: collapsePanelClassName,
       on: $listeners,
     }
-    const { default: defaultSlots, header } = this.$slots
+    const header = getComponentFromProp(this, 'header')
     return (
-      <RcCollapse.Panel {...rcCollapePanelProps} >
-        {defaultSlots}
+      <VcCollapse.Panel {...rcCollapePanelProps} >
+        {this.$slots.default}
         {header ? (
           <template slot='header'>
             {header}
           </template>
         ) : null}
 
-      </RcCollapse.Panel>
+      </VcCollapse.Panel>
     )
   },
 }

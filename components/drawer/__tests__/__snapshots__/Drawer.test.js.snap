@@ -6,8 +6,7 @@ exports[`Drawer class is test_drawer 1`] = `
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">
       <div class="ant-drawer-content">
-        <div class="ant-drawer-wrapper-body" style="overflow: auto; height: 100%; opacity: 0;">
-          <button aria-label="Close" class="ant-drawer-close"><span class="ant-drawer-close-x"></span></button>
+        <div class="ant-drawer-wrapper-body" style="overflow: auto; height: 100%; opacity: 0;"><button aria-label="Close" class="ant-drawer-close"><span class="ant-drawer-close-x"></span></button>
           <div class="ant-drawer-body">Here is content of Drawer</div>
         </div>
       </div>
@@ -55,8 +54,7 @@ exports[`Drawer have a title 1`] = `
         <div class="ant-drawer-wrapper-body" style="overflow: auto; height: 100%;">
           <div class="ant-drawer-header">
             <div class="ant-drawer-title">Test Title</div>
-          </div>
-          <button aria-label="Close" class="ant-drawer-close"><span class="ant-drawer-close-x"></span></button>
+          </div><button aria-label="Close" class="ant-drawer-close"><span class="ant-drawer-close-x"></span></button>
           <div class="ant-drawer-body">Here is content of Drawer</div>
         </div>
       </div>
@@ -71,8 +69,7 @@ exports[`Drawer render correctly 1`] = `
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 400px;">
       <div class="ant-drawer-content">
-        <div class="ant-drawer-wrapper-body" style="overflow: auto; height: 100%;">
-          <button aria-label="Close" class="ant-drawer-close"><span class="ant-drawer-close-x"></span></button>
+        <div class="ant-drawer-wrapper-body" style="overflow: auto; height: 100%;"><button aria-label="Close" class="ant-drawer-close"><span class="ant-drawer-close-x"></span></button>
           <div class="ant-drawer-body">Here is content of Drawer</div>
         </div>
       </div>

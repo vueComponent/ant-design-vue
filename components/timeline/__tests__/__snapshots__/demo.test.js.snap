@@ -72,9 +72,7 @@ exports[`renders ./components/timeline/demo/custom.md correctly 1`] = `
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-red">
-      <i class="anticon anticon-clock-circle-o" style="font-size: '16px';"></i>
-    </div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-red"><i class="anticon anticon-clock-circle-o" style="font-size: '16px';"></i></div>
     <div class="ant-timeline-item-content">
       Technical testing 2015-09-01
     </div>
@@ -106,9 +104,7 @@ exports[`renders ./components/timeline/demo/pending.md correctly 1`] = `
   </li>
   <li class="ant-timeline-item ant-timeline-item-pending">
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue">
-      <i class="anticon anticon-loading anticon-spin"></i>
-    </div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><i class="anticon anticon-loading anticon-spin"></i></div>
     <div class="ant-timeline-item-content">Recording...</div>
   </li>
 </ul>

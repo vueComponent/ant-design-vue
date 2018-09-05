@@ -5,14 +5,10 @@ exports[`Popconfirm should show overlay when trigger is clicked 1`] = `
   <div class="ant-popover-arrow"></div>
   <div class="ant-popover-inner">
     <div class="ant-popover-inner-content">
-      <div class="ant-popover-message">
-        <i class="anticon anticon-exclamation-circle"></i>
+      <div class="ant-popover-message"><i class="anticon anticon-exclamation-circle"></i>
         <div class="ant-popover-message-title">code</div>
       </div>
-      <div class="ant-popover-buttons">
-        <button type="button" class="ant-btn ant-btn-default ant-btn-sm"><span>Cancel</span></button>
-        <button type="button" class="ant-btn ant-btn-primary ant-btn-sm"><span>OK</span></button>
-      </div>
+      <div class="ant-popover-buttons"><button type="button" class="ant-btn ant-btn-default ant-btn-sm"><span>Cancel</span></button><button type="button" class="ant-btn ant-btn-primary ant-btn-sm"><span>OK</span></button></div>
     </div>
   </div>
 </div>

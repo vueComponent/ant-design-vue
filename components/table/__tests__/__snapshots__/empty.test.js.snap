@@ -2,67 +2,60 @@
 
 exports[`Table renders empty table 1`] = `
 <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col><col><col><col><col><col><col></colgroup><thead class="ant-table-thead"><tr><th key="1" class=""><span>Column 1</span></th>
-  <th
-    key="2" class=""><span>Column 2</span></th>
-    <th key="3" class=""><span>Column 3</span></th>
-    <th key="4" class=""><span>Column 4</span></th>
-    <th key="5" class=""><span>Column 5</span></th>
-    <th key="6" class=""><span>Column 6</span></th>
-    <th key="7" class=""><span>Column 7</span></th>
-    <th key="8" class=""><span>Column 8</span></th>
-    </tr>
-    </thead>
-    <tbody class="ant-table-tbody"></tbody>
-    </table>
+  <th key="2" class=""><span>Column 2</span></th>
+  <th key="3" class=""><span>Column 3</span></th>
+  <th key="4" class=""><span>Column 4</span></th>
+  <th key="5" class=""><span>Column 5</span></th>
+  <th key="6" class=""><span>Column 6</span></th>
+  <th key="7" class=""><span>Column 7</span></th>
+  <th key="8" class=""><span>Column 8</span></th>
+  </tr>
+  </thead>
+  <tbody class="ant-table-tbody"></tbody>
+  </table>
 </div>
 <div class="ant-table-placeholder">No data</div>
 </div>
 </div>
-</div>
-</span>
-</div>
+</div></span></div>
 `;
 
 exports[`Table renders empty table with custom emptyText 1`] = `
 <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default ant-table-empty"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col><col><col><col><col><col><col></colgroup><thead class="ant-table-thead"><tr><th key="1" class=""><span>Column 1</span></th>
-  <th
-    key="2" class=""><span>Column 2</span></th>
-    <th key="3" class=""><span>Column 3</span></th>
-    <th key="4" class=""><span>Column 4</span></th>
-    <th key="5" class=""><span>Column 5</span></th>
-    <th key="6" class=""><span>Column 6</span></th>
-    <th key="7" class=""><span>Column 7</span></th>
-    <th key="8" class=""><span>Column 8</span></th>
-    </tr>
-    </thead>
-    <tbody class="ant-table-tbody"></tbody>
-    </table>
+  <th key="2" class=""><span>Column 2</span></th>
+  <th key="3" class=""><span>Column 3</span></th>
+  <th key="4" class=""><span>Column 4</span></th>
+  <th key="5" class=""><span>Column 5</span></th>
+  <th key="6" class=""><span>Column 6</span></th>
+  <th key="7" class=""><span>Column 7</span></th>
+  <th key="8" class=""><span>Column 8</span></th>
+  </tr>
+  </thead>
+  <tbody class="ant-table-tbody"></tbody>
+  </table>
 </div>
 <div class="ant-table-placeholder">custom empty text </div>
 </div>
 </div>
-</div>
-</span>
-</div>
+</div></span></div>
 `;
 
 exports[`Table renders empty table with fixed columns 1`] = `
 <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-default ant-table-empty ant-table-scroll-position-left ant-table-scroll-position-right"><div class="ant-table-content"><div class="ant-table-scroll"><!----><div class="ant-table-body"><table class=""><colgroup><col style="width: 100px; min-width: 100px;"><col style="width: 100px; min-width: 100px;"><col><col><col><col><col><col><col><col><col style="width: 100px; min-width: 100px;"></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-fixed-columns-in-body"><span>Full Name</span></th>
-  <th
-    key="age" class="ant-table-fixed-columns-in-body"><span>Age</span></th>
-    <th key="1" class=""><span>Column 1</span></th>
-    <th key="2" class=""><span>Column 2</span></th>
-    <th key="3" class=""><span>Column 3</span></th>
-    <th key="4" class=""><span>Column 4</span></th>
-    <th key="5" class=""><span>Column 5</span></th>
-    <th key="6" class=""><span>Column 6</span></th>
-    <th key="7" class=""><span>Column 7</span></th>
-    <th key="8" class=""><span>Column 8</span></th>
-    <th key="address" class="ant-table-fixed-columns-in-body"><span>Action</span></th>
-    </tr>
-    </thead>
-    <tbody class="ant-table-tbody"></tbody>
-    </table>
+  <th key="age" class="ant-table-fixed-columns-in-body"><span>Age</span></th>
+  <th key="1" class=""><span>Column 1</span></th>
+  <th key="2" class=""><span>Column 2</span></th>
+  <th key="3" class=""><span>Column 3</span></th>
+  <th key="4" class=""><span>Column 4</span></th>
+  <th key="5" class=""><span>Column 5</span></th>
+  <th key="6" class=""><span>Column 6</span></th>
+  <th key="7" class=""><span>Column 7</span></th>
+  <th key="8" class=""><span>Column 8</span></th>
+  <th key="address" class="ant-table-fixed-columns-in-body"><span>Action</span></th>
+  </tr>
+  </thead>
+  <tbody class="ant-table-tbody"></tbody>
+  </table>
 </div>
 <div class="ant-table-placeholder">No data</div>
 </div>
@@ -106,9 +99,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
 </div>
 </div>
 </div>
-</div>
-</span>
-</div>
+</div></span></div>
 `;
 
 exports[`Table renders empty table without emptyText when loading 1`] = `
@@ -148,7 +139,5 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
       <div class="ant-table-placeholder"></div>
     </div>
   </div>
-</div>
-</span>
-</div>
+</div></span></div>
 `;

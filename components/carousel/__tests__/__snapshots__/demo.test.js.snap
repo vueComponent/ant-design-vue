@@ -71,18 +71,10 @@ exports[`renders ./components/carousel/demo/autoplay.md correctly 1`] = `
       </div>
     </div>
     <ul class="slick-dots" style="display: block;">
-      <li class="slick-active">
-        <button class="">1</button>
-      </li>
-      <li class="">
-        <button class="">2</button>
-      </li>
-      <li class="">
-        <button class="">3</button>
-      </li>
-      <li class="">
-        <button class="">4</button>
-      </li>
+      <li class="slick-active"><button class="">1</button></li>
+      <li class=""><button class="">2</button></li>
+      <li class=""><button class="">3</button></li>
+      <li class=""><button class="">4</button></li>
     </ul>
   </div>
 </div>
@@ -159,18 +151,10 @@ exports[`renders ./components/carousel/demo/basic.md correctly 1`] = `
       </div>
     </div>
     <ul class="slick-dots" style="display: block;">
-      <li class="slick-active">
-        <button class="">1</button>
-      </li>
-      <li class="">
-        <button class="">2</button>
-      </li>
-      <li class="">
-        <button class="">3</button>
-      </li>
-      <li class="">
-        <button class="">4</button>
-      </li>
+      <li class="slick-active"><button class="">1</button></li>
+      <li class=""><button class="">2</button></li>
+      <li class=""><button class="">3</button></li>
+      <li class=""><button class="">4</button></li>
     </ul>
   </div>
 </div>
@@ -179,9 +163,7 @@ exports[`renders ./components/carousel/demo/basic.md correctly 1`] = `
 exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
-    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; z-index: 1; display: block;">
-      <i class="anticon anticon-left-circle"></i>
-    </div>
+    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; z-index: 1; display: block;"><i class="anticon anticon-left-circle"></i></div>
     <div class="slick-list">
       <div class="slick-track" style="width: 900%; left: -100%;">
         <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
@@ -249,22 +231,12 @@ exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
         </div>
       </div>
     </div>
-    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;">
-      <i class="anticon anticon-right-circle"></i>
-    </div>
+    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;"><i class="anticon anticon-right-circle"></i></div>
     <ul class="slick-dots" style="display: block;">
-      <li class="slick-active">
-        <button class="">1</button>
-      </li>
-      <li class="">
-        <button class="">2</button>
-      </li>
-      <li class="">
-        <button class="">3</button>
-      </li>
-      <li class="">
-        <button class="">4</button>
-      </li>
+      <li class="slick-active"><button class="">1</button></li>
+      <li class=""><button class="">2</button></li>
+      <li class=""><button class="">3</button></li>
+      <li class=""><button class="">4</button></li>
     </ul>
   </div>
 </div>
@@ -272,97 +244,61 @@ exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
 
 exports[`renders ./components/carousel/demo/customPaging.md correctly 1`] = `
 <div class="ant-carousel">
-  <div class="slick-slider slick-initialized">
-    <button type="button" class="slick-arrow slick-prev" style="display: block;"> Previous</button>
+  <div class="slick-slider slick-initialized"><button type="button" class="slick-arrow slick-prev" style="display: block;"> Previous</button>
     <div class="slick-list">
       <div class="slick-track" style="width: 900%; left: -100%;">
         <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
           <div>
-            <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
-              <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg">
-            </div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
       </div>
-    </div>
-    <button type="button" class="slick-arrow slick-next" style="display: block;"> Next</button>
+    </div><button type="button" class="slick-arrow slick-next" style="display: block;"> Next</button>
     <ul class="slick-dots slick-thumb" style="display: block;">
-      <li class="slick-active">
-        <a class="">
-          <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg">
-        </a>
-      </li>
-      <li class="">
-        <a class="">
-          <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg">
-        </a>
-      </li>
-      <li class="">
-        <a class="">
-          <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg">
-        </a>
-      </li>
-      <li class="">
-        <a class="">
-          <img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg">
-        </a>
-      </li>
+      <li class="slick-active"><a class=""><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></a></li>
+      <li class=""><a class=""><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></a></li>
+      <li class=""><a class=""><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></a></li>
+      <li class=""><a class=""><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></a></li>
     </ul>
   </div>
 </div>
@@ -404,18 +340,10 @@ exports[`renders ./components/carousel/demo/fade.md correctly 1`] = `
       </div>
     </div>
     <ul class="slick-dots" style="display: block;">
-      <li class="slick-active">
-        <button class="">1</button>
-      </li>
-      <li class="">
-        <button class="">2</button>
-      </li>
-      <li class="">
-        <button class="">3</button>
-      </li>
-      <li class="">
-        <button class="">4</button>
-      </li>
+      <li class="slick-active"><button class="">1</button></li>
+      <li class=""><button class="">2</button></li>
+      <li class=""><button class="">3</button></li>
+      <li class=""><button class="">4</button></li>
     </ul>
   </div>
 </div>
@@ -492,18 +420,10 @@ exports[`renders ./components/carousel/demo/vertical.md correctly 1`] = `
       </div>
     </div>
     <ul class="slick-dots" style="display: block;">
-      <li class="slick-active">
-        <button class="">1</button>
-      </li>
-      <li class="">
-        <button class="">2</button>
-      </li>
-      <li class="">
-        <button class="">3</button>
-      </li>
-      <li class="">
-        <button class="">4</button>
-      </li>
+      <li class="slick-active"><button class="">1</button></li>
+      <li class=""><button class="">2</button></li>
+      <li class=""><button class="">3</button></li>
+      <li class=""><button class="">4</button></li>
     </ul>
   </div>
 </div>

@@ -3,9 +3,7 @@
 exports[`Table.sorter renders sorter icon correctly 1`] = `
 <thead class="ant-table-thead">
   <tr>
-    <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-      </span>
-    </th>
+    <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div></span></th>
   </tr>
 </thead>
 `;

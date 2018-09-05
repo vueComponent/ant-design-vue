@@ -94,9 +94,4 @@ exports[`Cascader popup correctly with defaultValue 1`] = `
 </div>
 `;
 
-exports[`Cascader support controlled mode 1`] = `
-<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span>
-<i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i>
-<i class="anticon anticon-down ant-cascader-picker-arrow"></i>
-</span>
-`;
+exports[`Cascader support controlled mode 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;

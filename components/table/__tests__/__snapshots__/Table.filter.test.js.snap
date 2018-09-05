@@ -36,9 +36,7 @@ exports[`Table.filter renders filter correctly 1`] = `
 </div>
 </div>
 </div>
-</div>
-</span>
-</div>
+</div></span></div>
 `;
 
 exports[`Table.filter renders menu correctly 1`] = `
@@ -46,22 +44,13 @@ exports[`Table.filter renders menu correctly 1`] = `
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <div class="ant-table-filter-dropdown ant-dropdown-content">
       <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root" role="menu" tabindex="0">
-        <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-          </label><span>Boy</span></li>
-        <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-          </label><span>Girl</span></li>
+        <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span>Boy</span></li>
+        <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span>Girl</span></li>
         <li role="menuitem" class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
-          <div aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title
-            <i class="ant-dropdown-menu-submenu-arrow"></i>
-          </div>
+          <div aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title<i class="ant-dropdown-menu-submenu-arrow"></i></div>
         </li>
       </ul>
-      <div class="ant-table-filter-dropdown-btns">
-        <a class="ant-table-filter-dropdown-link confirm">OK</a>
-        <a class="ant-table-filter-dropdown-link clear">Reset</a>
-      </div>
+      <div class="ant-table-filter-dropdown-btns"><a class="ant-table-filter-dropdown-link confirm">OK</a><a class="ant-table-filter-dropdown-link clear">Reset</a></div>
     </div>
   </div>
 </div>
@@ -72,22 +61,13 @@ exports[`Table.filter renders radio filter correctly 1`] = `
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <div class="ant-table-filter-dropdown ant-dropdown-content">
       <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root" role="menu" tabindex="0">
-        <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span>
-          </label><span>Boy</span></li>
-        <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span>
-          </label><span>Girl</span></li>
+        <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span></label><span>Boy</span></li>
+        <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span></label><span>Girl</span></li>
         <li role="menuitem" class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
-          <div aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title
-            <i class="ant-dropdown-menu-submenu-arrow"></i>
-          </div>
+          <div aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title<i class="ant-dropdown-menu-submenu-arrow"></i></div>
         </li>
       </ul>
-      <div class="ant-table-filter-dropdown-btns">
-        <a class="ant-table-filter-dropdown-link confirm">OK</a>
-        <a class="ant-table-filter-dropdown-link clear">Reset</a>
-      </div>
+      <div class="ant-table-filter-dropdown-btns"><a class="ant-table-filter-dropdown-link confirm">OK</a><a class="ant-table-filter-dropdown-link clear">Reset</a></div>
     </div>
   </div>
 </div>

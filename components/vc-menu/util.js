@@ -6,6 +6,10 @@ export function getKeyFromChildrenIndex (child, menuEventKey, index) {
   return child.key || `${prefix}item_${index}`
 }
 
+export function getMenuIdFromSubMenuEventKey (eventKey) {
+  return `${eventKey}-menu-`
+}
+
 export function loopMenuItem (children, cb) {
   let index = -1
   children.forEach((c) => {
@@ -21,7 +25,7 @@ export function loopMenuItem (children, cb) {
   })
 }
 
-export function loopMenuItemRecusively (children, keys, ret) {
+export function loopMenuItemRecursively (children, keys, ret) {
   if (!children || ret.find) {
     return
   }
@@ -40,8 +44,66 @@ export function loopMenuItemRecusively (children, keys, ret) {
       if (keys.indexOf(c.key) !== -1) {
         ret.find = true
       } else if (c.componentOptions.children) {
-        loopMenuItemRecusively(c.componentOptions.children, keys, ret)
+        loopMenuItemRecursively(c.componentOptions.children, keys, ret)
       }
     }
   })
+}
+
+export const menuAllProps = {
+  props: [
+    'defaultSelectedKeys',
+    'selectedKeys',
+    'defaultOpenKeys',
+    'openKeys',
+    'mode',
+    'getPopupContainer',
+    'openTransitionName',
+    'openAnimation',
+    'subMenuOpenDelay',
+    'subMenuCloseDelay',
+    'forceSubMenuRender',
+    'triggerSubMenuAction',
+    'level',
+    'selectable',
+    'multiple',
+    'visible',
+    'focusable',
+    'defaultActiveFirst',
+    'prefixCls',
+    'inlineIndent',
+    'parentMenu',
+    'title',
+    'rootPrefixCls',
+    'eventKey',
+    'active',
+    'popupOffset',
+    'isOpen',
+    'renderMenuItem',
+    'manualRef',
+    'subMenuKey',
+    'disabled',
+    'index',
+    'isSelected',
+    'store',
+    'activeKey',
+
+    // the following keys found need to be removed from test regression
+    'attribute',
+    'value',
+    'popupClassName',
+    'inlineCollapsed',
+    'menu',
+    'theme',
+  ],
+  on: [
+    'select',
+    'deselect',
+    'destroy',
+    'openChange',
+    'itemHover',
+    'titleMouseenter',
+    'titleMouseleave',
+    'titleClick',
+  ],
 }

@@ -1,13 +1,13 @@
 
 /* eslint-disable camelcase */
+import shallowequal from 'shallowequal'
+import merge from 'lodash/merge'
+import classes from 'component-classes'
 import PropTypes from '../../_util/vue-types'
 import { debounce, warningOnce } from './utils'
-import shallowequal from 'shallowequal'
 import addEventListener from '../../_util/Dom/addEventListener'
 import { Provider, create } from '../../_util/store'
-import merge from 'lodash/merge'
 import ColumnManager from './ColumnManager'
-import classes from 'component-classes'
 import HeadTable from './HeadTable'
 import BodyTable from './BodyTable'
 import ExpandableTable from './ExpandableTable'
@@ -106,7 +106,7 @@ export default {
     this.store = create({
       currentHoverKey: null,
       fixedColumnsHeadRowsHeight: [],
-      fixedColumnsBodyRowsHeight: [],
+      fixedColumnsBodyRowsHeight: {},
     })
 
     this.setScrollPosition('left')
@@ -266,10 +266,18 @@ export default {
       const fixedColumnsHeadRowsHeight = [].map.call(
         headRows, row => row.getBoundingClientRect().height || 'auto'
       )
-      const fixedColumnsBodyRowsHeight = [].map.call(
-        bodyRows, row => row.getBoundingClientRect().height || 'auto'
-      )
       const state = this.store.getState()
+      const fixedColumnsBodyRowsHeight = [].reduce.call(
+        bodyRows,
+        (acc, row) => {
+          const rowKey = row.getAttribute('data-row-key')
+          const height =
+            row.getBoundingClientRect().height || state.fixedColumnsBodyRowsHeight[rowKey] || 'auto'
+          acc[rowKey] = height
+          return acc
+        },
+        {},
+      )
       if (shallowequal(state.fixedColumnsHeadRowsHeight, fixedColumnsHeadRowsHeight) &&
           shallowequal(state.fixedColumnsBodyRowsHeight, fixedColumnsBodyRowsHeight)) {
         return
@@ -316,6 +324,10 @@ export default {
 
     handleBodyScrollTop  (e) {
       const target = e.target
+      // Fix https://github.com/ant-design/ant-design/issues/9033
+      if (e.currentTarget !== target) {
+        return
+      }
       const { scroll = {}} = this
       const { ref_headTable, ref_bodyTable, ref_fixedColumnsBodyLeft, ref_fixedColumnsBodyRight } = this
       if (target.scrollTop !== this.lastScrollTop && scroll.y && target !== ref_headTable) {
@@ -337,6 +349,32 @@ export default {
     handleBodyScroll (e) {
       this.handleBodyScrollLeft(e)
       this.handleBodyScrollTop(e)
+    },
+    handleWheel (event) {
+      const { scroll = {}} = this.$props
+      if (window.navigator.userAgent.match(/Trident\/7\./) && scroll.y) {
+        event.preventDefault()
+        const wd = event.deltaY
+        const target = event.target
+        const { bodyTable, fixedColumnsBodyLeft, fixedColumnsBodyRight } = this
+        let scrollTop = 0
+
+        if (this.lastScrollTop) {
+          scrollTop = this.lastScrollTop + wd
+        } else {
+          scrollTop = wd
+        }
+
+        if (fixedColumnsBodyLeft && target !== fixedColumnsBodyLeft) {
+          fixedColumnsBodyLeft.scrollTop = scrollTop
+        }
+        if (fixedColumnsBodyRight && target !== fixedColumnsBodyRight) {
+          fixedColumnsBodyRight.scrollTop = scrollTop
+        }
+        if (bodyTable && target !== bodyTable) {
+          bodyTable.scrollTop = scrollTop
+        }
+      }
     },
     saveChildrenRef (name, node) {
       this[`ref_${name}`] = node
@@ -408,6 +446,7 @@ export default {
           fixed={fixed}
           tableClassName={tableClassName}
           getRowKey={this.getRowKey}
+          handleWheel={this.handleWheel}
           handleBodyScroll={this.handleBodyScroll}
           expander={this.expander}
           isAnyColumnsFixed={isAnyColumnsFixed}
@@ -453,7 +492,6 @@ export default {
     const props = getOptionProps(this)
     const { $listeners, columnManager, getRowKey } = this
     const prefixCls = props.prefixCls
-
     let className = props.prefixCls
     if (props.useFixedHeader || (props.scroll && props.scroll.y)) {
       className += ` ${prefixCls}-fixed-header`

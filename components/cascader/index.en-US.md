@@ -14,6 +14,7 @@
 | disabled | whether disabled select | boolean | false |
 | displayRender | render function of displaying selected options, you can use slot="displayRender" and slot-scope="{labels, selectedOptions}" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
 | expandTrigger | expand current item when click or hover, one of 'click' 'hover' | string | 'click' |
+| fieldNames | custom field name for label and value and children | object | `{ label: 'label', value: 'value', children: 'children' }` |
 | getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | Function(triggerNode) | () => document.body |
 | loadData | To load option lazily, and it cannot work with `showSearch` | `(selectedOptions) => void` | - |
 | notFoundContent | Specify content to show when no result matches. | string | 'Not Found' |

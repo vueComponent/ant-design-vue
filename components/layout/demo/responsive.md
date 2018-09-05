@@ -17,6 +17,7 @@ Layout.Sider supports responsive layout.
       breakpoint="lg"
       collapsedWidth="0"
       @collapse="onCollapse"
+      @breakpoint="onBreakpoint"
     >
       <div class="logo" />
       <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['4']">
@@ -46,7 +47,7 @@ Layout.Sider supports responsive layout.
         </div>
       </a-layout-content>
       <a-layout-footer style="textAlign: center">
-        Ant Design ©2016 Created by Ant UED
+        Ant Design ©2018 Created by Ant UED
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -56,6 +57,9 @@ export default {
   methods: {
     onCollapse(collapsed, type) {
       console.log(collapsed, type);
+    },
+    onBreakpoint(broken) {
+      console.log(broken);
     }
   }
 }

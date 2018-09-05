@@ -6,6 +6,8 @@ import RadioGroupMore from './radioGroup-more'
 import RadioGroupOptions from './radioGroup-options'
 import RadioGroupWithName from './radioGroup-with-name'
 import RadioGroup from './radioGroup'
+import RadioButtonSolid from './radioButton-solid'
+
 import Size from './size'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -25,7 +27,7 @@ const md = {
 ## When To Use
 
 - Used to select a single state in multiple options.
-- The difference between Select is that Radio is visible to user and can facilitate the comparison of choice. So, when you want to use Radio, option should not be too much.
+- The difference between Select is that Radio is visible to user and can facilitate the comparison of choice, which makes there shouldn't be too many of them.
   ## Examples
   `,
 }
@@ -41,6 +43,7 @@ export default {
         <Basic />
         <Disabled />
         <RadioButton />
+        <RadioButtonSolid />
         <RadioGroupMore />
         <RadioGroupOptions />
         <RadioGroupWithName />

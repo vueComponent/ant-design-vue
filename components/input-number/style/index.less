@@ -60,7 +60,6 @@
     .disabled();
     .@{input-number-prefix-cls}-input {
       cursor: not-allowed;
-      background-color: @disabled-bg;
     }
     .@{input-number-prefix-cls}-handler-wrap {
       display: none;
@@ -74,17 +73,11 @@
     -moz-appearance: textfield;
     height: @input-height-base - 2px;
     transition: all 0.3s linear;
-    color: @input-color;
-    background-color: @input-bg;
+    background-color: transparent;
     border: 0;
     border-radius: @border-radius-base;
     padding: 0 @control-padding-horizontal - 1px;
-    display: block;
     .placeholder();
-
-    &[disabled] {
-      .disabled();
-    }
   }
 
   &-lg {
@@ -116,7 +109,6 @@
     opacity: 0;
     border-radius: 0 @border-radius-base @border-radius-base 0;
     transition: opacity 0.24s linear 0.1s;
-    z-index: 2; // https://github.com/ant-design/ant-design/issues/6289
   }
 
   &-handler-wrap:hover &-handler {

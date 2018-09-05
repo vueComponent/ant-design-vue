@@ -7,7 +7,7 @@
 
 <us>
 #### Infinite & virtualized
-An example of infinite list & virtualized loading using [vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller). 
+An example of infinite list & virtualized loading using [vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller).
 `Virtualized` rendering is a technique to mount big sets of data. It reduces the amount of rendered DOM nodes by tracking and hiding whatever isn't currently visible.
 </us>
 
@@ -47,7 +47,7 @@ export default {
       busy: false,
     }
   },
-  mounted () {
+  beforeMount () {
     this.getData((res) => {
       this.data = res.results.map((item, index) => ({ ...item, index }))
     })

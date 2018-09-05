@@ -25,6 +25,7 @@ export default {
     okType: btnProps.type.def('primary'),
     okText: PropTypes.any,
     cancelText: PropTypes.any,
+    icon: PropTypes.any,
   },
   mixins: [BaseMixin],
   model: {
@@ -67,10 +68,11 @@ export default {
     },
     renderOverlay (popconfirmLocale) {
       const { prefixCls, okType } = this
+      const icon = getComponentFromProp(this, 'icon') || <Icon type='exclamation-circle' />
       return (
         <div class={`${prefixCls}-inner-content`}>
           <div class={`${prefixCls}-message`}>
-            <Icon type='exclamation-circle' />
+            {icon}
             <div class={`${prefixCls}-message-title`}>
               {getComponentFromProp(this, 'title')}
             </div>

@@ -45,6 +45,7 @@ export default {
 
       <div style={{ width: '300px' }}>
         <Select
+          id='my-select'
           value={this.value}
           placeholder='placeholder'
           dropdownMenuStyle={{ maxHeight: '200px' }}
@@ -71,7 +72,7 @@ export default {
           <Option value='21' disabled text='disabled'>disabled</Option>
           <Option value='31' text='yiminghe'>yiminghe</Option>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
-            return <Option key={i} text={String(i)}>{i}</Option>
+            return <Option key={i} value={i} text={String(i)}>{i}-text</Option>
           })}
         </Select>
       </div>

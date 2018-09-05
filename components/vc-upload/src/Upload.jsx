@@ -10,9 +10,13 @@ function empty () {
 const uploadProps = {
   componentTag: PropTypes.string,
   prefixCls: PropTypes.string,
-  action: PropTypes.string,
+  action: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
   name: PropTypes.string,
   multipart: PropTypes.bool,
+  directory: PropTypes.bool,
   // onError: PropTypes.func,
   // onSuccess: PropTypes.func,
   // onProgress: PropTypes.func,

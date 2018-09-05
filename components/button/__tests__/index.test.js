@@ -1,17 +1,17 @@
 import Button from '../index'
 import Icon from '../../icon'
 import { mount } from '@vue/test-utils'
-import { renderToString } from '@vue/server-test-utils'
 import Vue from 'vue'
+import { asyncExpect } from '@/tests/utils'
 
 describe('Button', () => {
   it('renders correctly', () => {
-    const wrapper = renderToString({
+    const wrapper = mount({
       render () {
         return <Button>Follow</Button>
       },
     })
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('create primary button', () => {
@@ -33,25 +33,52 @@ describe('Button', () => {
     )
     expect(wrapper.text()).toBe('按 钮')
 
-    const wrapper1 = renderToString(
+    const wrapper1 = mount(
       {
         render (h) {
           return <Button icon='search'>按钮</Button>
         },
       }
     )
-    expect(wrapper1).toMatchSnapshot()
 
-    const wrapper2 = renderToString(
+    expect(wrapper1.html()).toMatchSnapshot()
+
+    const wrapper2 = mount(
       {
         render (h) {
           return <Button><Icon type='search' />按钮</Button>
         },
       }
     )
-    expect(wrapper2).toMatchSnapshot()
-
+    expect(wrapper2.html()).toMatchSnapshot()
+    // should not insert space when there is icon
     const wrapper3 = mount(
+      {
+        render (h) {
+          return <Button icon='search'>按钮</Button>
+        },
+      }
+    )
+    expect(wrapper3.html()).toMatchSnapshot()
+    // should not insert space when there is icon while loading
+    const wrapper4 = mount(
+      {
+        render (h) {
+          return <Button icon='search' loading>按钮</Button>
+        },
+      }
+    )
+    expect(wrapper4.html()).toMatchSnapshot()
+    // should insert space while loading
+    const wrapper5 = mount(
+      {
+        render (h) {
+          return <Button loading>按钮</Button>
+        },
+      }
+    )
+    expect(wrapper5.html()).toMatchSnapshot()
+    const wrapper6 = mount(
       {
         render (h) {
           return <Button><span>按钮</span></Button>
@@ -59,11 +86,11 @@ describe('Button', () => {
       }
     )
     Vue.nextTick(() => {
-      expect(wrapper3.find('.ant-btn').contains('.ant-btn-two-chinese-chars')).toBe(true)
+      expect(wrapper6.find('.ant-btn').contains('.ant-btn-two-chinese-chars')).toBe(true)
       done()
     })
   })
-  it('should change loading state instantly by default', () => {
+  it('should change loading state instantly by default', async () => {
     const DefaultButton = {
       data () {
         return {
@@ -80,14 +107,16 @@ describe('Button', () => {
         return <Button loading={this.loading} onClick={this.enterLoading}>Button</Button>
       },
     }
-    const wrapper = mount(DefaultButton)
-    wrapper.trigger('click')
-    Vue.nextTick(() => {
+    const wrapper = mount(DefaultButton, { sync: false })
+    await asyncExpect(() => {
+      wrapper.trigger('click')
+    })
+    await asyncExpect(() => {
       expect(wrapper.findAll('.ant-btn-loading').length).toBe(1)
     })
   })
 
-  it('should change loading state with delay', (done) => {
+  it('should change loading state with delay', async () => {
     const DefaultButton = {
       data () {
         return {
@@ -104,11 +133,12 @@ describe('Button', () => {
         return <Button loading={this.loading} onClick={this.enterLoading}>Button</Button>
       },
     }
-    const wrapper = mount(DefaultButton)
-    wrapper.trigger('click')
-    Vue.nextTick(() => {
+    const wrapper = mount(DefaultButton, { sync: false })
+    await asyncExpect(() => {
+      wrapper.trigger('click')
+    })
+    await asyncExpect(() => {
       expect(wrapper.contains('.ant-btn-loading')).toBe(false)
-      done()
     })
   })
 

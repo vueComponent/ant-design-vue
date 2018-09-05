@@ -5,7 +5,7 @@
 
 <us>
 #### Slider with InputNumber
-Synchronize with [InptNumber](/ant-design-vue/components/input-number/) component.
+Synchronize with [InputNumber](/ant-design-vue/components/input-number/) component.
 </us>
 
 ```html

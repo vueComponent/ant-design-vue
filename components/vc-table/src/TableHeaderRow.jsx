@@ -40,7 +40,7 @@ const TableHeaderRow = {
           })
 
           if (column.align) {
-            headerCellProps.style = { textAlign: column.align }
+            headerCellProps.style = { ...customProps.style, textAlign: column.align }
           }
 
           if (typeof HeaderCell === 'function') {

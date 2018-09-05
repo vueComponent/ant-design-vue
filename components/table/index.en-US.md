@@ -36,13 +36,14 @@ const columns = [{
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | bordered | Whether to show all table borders | boolean | `false` |
+| childrenColumnName | The column contains children to display | string\[] | children |
 | columns | Columns of table | array | - |
 | components | Override default table elements | object | - |
 | dataSource | Data record array to be displayed | any\[] | - |
 | defaultExpandAllRows | Expand all rows initially | boolean | `false` |
 | defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |
 | expandedRowKeys | Current expanded row keys | string\[] | - |
-| expandedRowRender | Expanded container render for each row | Function(record):VNode\|slot-scope | - |
+| expandedRowRender | Expanded container render for each row | Function(record, index, indent, expanded):VNode\|slot-scope | - |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
 | footer | Table footer renderer | Function(currentPageData)\|slot-scope |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |
@@ -101,6 +102,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |
 | colSpan | Span of this column's title | number |  |
 | dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |
@@ -108,13 +110,12 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |
-| filterIcon | Customized filter icon | slot | `false` |
+| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean) | `false` |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |
 | filters | Filter menu config | object\[] | - |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |
 | customRender | Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config | Function(text, record, index) {}\|slot-scope | - |
-| align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | Title of this column | string\|slot | - |
@@ -151,12 +152,13 @@ Properties for row selection.
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| columnWidth | Set the width of the selection column | string\|number | - |
+| columnTitle | Set the title of the selection column | string\|VNode | - |
 | fixed | Fixed selection column on the left | boolean | - |
 | getCheckboxProps | Get Checkbox or Radio props | Function(record) | - |
 | hideDefaultSelections | Remove the default `Select All` and `Select Invert` selections | boolean | `false` |
 | selectedRowKeys | Controlled selected row keys | string\[] | \[] |
-| columnWidth | Set the width of the selection column | string\|number | - |
-| selections | Custom selection [config](#rowSelection), only displays default selections when set to `true` | object\[]\|boolean | - |
+| selections | Custom selection config, only displays default selections when set to `true` | object\[]\|boolean | - |
 | type | `checkbox` or `radio` | `checkbox` \| `radio` | `checkbox` |
 | onChange | Callback executed when selected rows change | Function(selectedRowKeys, selectedRows) | - |
 | onSelect | Callback executed when select/deselect one row | Function(record, selected, selectedRows, nativeEvent) | - |
@@ -164,6 +166,8 @@ Properties for row selection.
 | onSelectInvert | Callback executed when row selection is inverted | Function(selectedRows) | - |
 
 ### selection
+
+Custom selection config
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

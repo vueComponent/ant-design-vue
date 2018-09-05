@@ -2,6 +2,11 @@ import PropTypes from '../../_util/vue-types'
 import get from 'lodash/get'
 import { isValidElement, mergeProps } from '../../_util/props-util'
 
+function isInvalidRenderCellText (text) {
+  return text && !isValidElement(text) &&
+        Object.prototype.toString.call(text) === '[object Object]'
+}
+
 export default {
   name: 'TableCell',
   props: {
@@ -15,11 +20,6 @@ export default {
     component: PropTypes.any,
   },
   methods: {
-    isInvalidRenderCellText (text) {
-      // debugger
-      return text && !isValidElement(text) &&
-        Object.prototype.toString.call(text) === '[object Object]'
-    },
 
     handleClick (e) {
       const { record, column: { onCellClick }} = this
@@ -65,7 +65,7 @@ export default {
 
     if (customRender) {
       text = customRender(text, record, index)
-      if (this.isInvalidRenderCellText(text)) {
+      if (isInvalidRenderCellText(text)) {
         tdProps.attrs = text.attrs || {}
         tdProps.props = text.props || {}
         colSpan = tdProps.attrs.colSpan
@@ -76,11 +76,10 @@ export default {
 
     if (column.customCell) {
       tdProps = mergeProps(tdProps, column.customCell(record))
-      //      tdProps.attrs = { ...tdProps.attrs, ...column.customCell(record) }
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202
-    if (this.isInvalidRenderCellText(text)) {
+    if (isInvalidRenderCellText(text)) {
       text = null
     }
 

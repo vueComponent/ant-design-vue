@@ -83,7 +83,7 @@ export default class ColumnManager {
           parentColumn.colSpan = parentColumn.colSpan || 0
           if (newColumn.children && newColumn.children.length > 0) {
             newColumn.children = _groupColumns(newColumn.children, currentRow + 1, newColumn, rows)
-            parentColumn.colSpan = parentColumn.colSpan + newColumn.colSpan
+            parentColumn.colSpan += newColumn.colSpan
           } else {
             parentColumn.colSpan++
           }

@@ -64,7 +64,7 @@ export default {
         )
       }
       return (
-        <div class={`${prefixCls}-calendar-date`}>
+        <div class={`${prefixCls}-date`}>
           {current.date()}
         </div>
       )

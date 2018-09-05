@@ -55,11 +55,6 @@ export default {
       this.data = data
     },
 
-    expandedRowRender (record) {
-      // console.log(record);
-      return <p>extra: {record.a}</p>
-    },
-
     renderAction (o, row, index) {
       return <a href='#' onClick={() => this.remove(index)}>Delete</a>
     },
@@ -90,7 +85,9 @@ export default {
             columns={this.columns}
             expandIconAsCell={expandIconAsCell}
             expandRowByClick={expandRowByClick}
-            expandedRowRender={this.expandedRowRender}
+            expandedRowRender={(record, index, indent, expanded) =>
+              expanded ? <p>extra: {record.a}</p> : null
+            }
             expandedRowKeys={expandedRowKeys}
             onExpandedRowsChange={this.onExpandedRowsChange}
             onExpand={this.onExpand}

@@ -17,6 +17,10 @@
     transition: opacity .3s;
   }
 
+  &-empty &-body {
+    overflow: auto !important;
+  }
+
   table {
     width: 100%;
     border-collapse: separate;
@@ -35,7 +39,6 @@
 
     &[colspan] {
       text-align: center;
-      border-bottom: 0;
     }
 
     .@{iconfont-css-prefix}-filter,
@@ -76,6 +79,12 @@
 
     &:last-child {
       border-top-right-radius: @border-radius-base;
+    }
+  }
+
+  &-thead > tr:not(:last-child) > th {
+    &[colspan] {
+      border-bottom: 0;
     }
   }
 
@@ -163,7 +172,8 @@
   &-thead > tr > th,
   &-tbody > tr > td {
     padding: @table-padding-vertical @table-padding-horizontal;
-    word-break: break-all;
+    word-break: break-word;
+    -ms-word-break: break-all;
   }
 
   &-thead > tr > th.@{table-prefix-cls}-selection-column-custom {
@@ -224,7 +234,7 @@
     margin-left: 8px;
     display: inline-block;
     width: 14px;
-    height: 14px;
+    height: @font-size-base;
     vertical-align: middle;
     text-align: center;
     font-weight: normal;
@@ -232,10 +242,10 @@
 
     &-up,
     &-down {
-      line-height: 6px;
       display: block;
       width: 14px;
-      height: 6px;
+      height: @font-size-base / 2 - 1px;
+      line-height: @font-size-base / 2 - 1px;
       cursor: pointer;
       position: relative;
       &:hover .@{iconfont-css-prefix} {
@@ -272,14 +282,15 @@
       height: 4px;
       transition: all .3s;
       position: relative;
+      display: block;
     }
 
     &-down {
       margin-top: 1.5px;
     }
 
-    .@{iconfont-css-prefix}-caret-down {
-      top: -1.5px;
+    .@{iconfont-css-prefix}-caret-up {
+      margin-top: 0.5px;
     }
   }
 
@@ -320,7 +331,7 @@
       }
     }
 
-    .@{table-prefix-cls}-thead > tr > th {
+    .@{table-prefix-cls}-thead > tr:not(:last-child) > th {
       border-bottom: @border-width-base @border-style-base @border-color-split;
     }
 
@@ -499,6 +510,7 @@
     overflow: auto;
     overflow-x: hidden;
     table {
+      width: auto;
       min-width: 100%;
     }
   }

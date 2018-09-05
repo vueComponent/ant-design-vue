@@ -1,8 +1,6 @@
 import keyCode from '../../_util/KeyCode'
 
 export function isEventFromHandle (e, handles) {
-  console.log(Object.keys(handles)
-    .some(key => e.target === handles[key].$el))
   return Object.keys(handles)
     .some(key => e.target === handles[key].$el)
 }

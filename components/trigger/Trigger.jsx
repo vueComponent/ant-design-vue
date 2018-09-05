@@ -8,10 +8,11 @@ import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/reques
 import addEventListener from '../_util/Dom/addEventListener'
 import warning from '../_util/warning'
 import Popup from './Popup'
-import { getAlignFromPlacement, getPopupClassNameFromAlign, noop } from './utils'
+import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils'
 import BaseMixin from '../_util/BaseMixin'
 import { cloneElement } from '../_util/vnode'
 import ContainerRender from '../_util/ContainerRender'
+
 Vue.use(antRefDirective)
 
 function returnEmptyString () {
@@ -64,6 +65,8 @@ export default {
       PropTypes.object,
     ]),
     maskAnimation: PropTypes.string,
+    stretch: PropTypes.string,
+    alignPoint: PropTypes.bool, // Maybe we can support user pass position in the future
   },
 
   mixins: [BaseMixin],
@@ -77,6 +80,7 @@ export default {
     }
     return {
       sPopupVisible: popupVisible,
+      point: null,
     }
   },
 
@@ -157,8 +161,14 @@ export default {
       }
     },
     onMouseenter (e) {
+      const { mouseEnterDelay } = this.$props
       this.fireEvents('mouseenter', e)
-      this.delaySetPopupVisible(true, this.$props.mouseEnterDelay)
+      this.delaySetPopupVisible(true, mouseEnterDelay, mouseEnterDelay ? null : e)
+    },
+
+    onMouseMove (e) {
+      this.fireEvents('mousemove', e)
+      this.setPoint(e)
     },
 
     onMouseleave (e) {
@@ -211,7 +221,7 @@ export default {
     onContextmenu (e) {
       e.preventDefault()
       this.fireEvents('contextmenu', e)
-      this.setPopupVisible(true)
+      this.setPopupVisible(true, e)
     },
 
     onContextmenuClose () {
@@ -239,13 +249,15 @@ export default {
       }
       this.preClickTime = 0
       this.preTouchTime = 0
-      event.preventDefault && event.preventDefault()
-      if (event.domEvent) {
+      if (event && event.preventDefault) {
+        event.preventDefault()
+      }
+      if (event && event.domEvent) {
         event.domEvent.preventDefault()
       }
       const nextVisible = !this.$data.sPopupVisible
       if (this.isClickToHide() && !nextVisible || nextVisible && this.isClickToShow()) {
-        this.setPopupVisible(!this.$data.sPopupVisible)
+        this.setPopupVisible(!this.$data.sPopupVisible, event)
       }
     },
 
@@ -275,12 +287,13 @@ export default {
     handleGetPopupClassFromAlign (align) {
       const className = []
       const props = this.$props
-      const { popupPlacement, builtinPlacements, prefixCls } = props
+      const { popupPlacement, builtinPlacements, prefixCls, alignPoint,
+        getPopupClassNameFromAlign } = props
       if (popupPlacement && builtinPlacements) {
-        className.push(getPopupClassNameFromAlign(builtinPlacements, prefixCls, align))
+        className.push(getAlignPopupClassName(builtinPlacements, prefixCls, align, alignPoint))
       }
-      if (props.getPopupClassNameFromAlign) {
-        className.push(props.getPopupClassNameFromAlign(align))
+      if (getPopupClassNameFromAlign) {
+        className.push(getPopupClassNameFromAlign(align))
       }
       return className.join(' ')
     },
@@ -294,7 +307,7 @@ export default {
       return popupAlign
     },
     savePopup (node) {
-      this._component = node && node.componentInstance
+      this._component = node
     },
     getComponent () {
       const self = this
@@ -305,20 +318,28 @@ export default {
       if (this.isMouseLeaveToHide()) {
         mouseProps.mouseleave = self.onPopupMouseleave
       }
-      const { prefixCls, destroyPopupOnHide, sPopupVisible,
-        popupStyle, popupClassName, action,
-        popupAnimation, handleGetPopupClassFromAlign, getRootDomNode,
-        mask, zIndex, popupTransitionName, getPopupAlign,
-        maskAnimation, maskTransitionName, getContainer } = self
+      const {
+        handleGetPopupClassFromAlign, getRootDomNode,
+        getContainer, $listeners } = self
+      const {
+        prefixCls, destroyPopupOnHide, popupClassName, action,
+        popupAnimation, popupTransitionName, popupStyle,
+        mask, maskAnimation, maskTransitionName, zIndex, stretch,
+        alignPoint,
+      } = self.$props
+      const { sPopupVisible, point } = this.$data
+      const align = this.getPopupAlign()
       const popupProps = {
         props: {
           prefixCls,
           destroyPopupOnHide,
           visible: sPopupVisible,
+          point: alignPoint && point,
           action,
-          align: getPopupAlign(),
+          align,
           animation: popupAnimation,
           getClassNameFromAlign: handleGetPopupClassFromAlign,
+          stretch,
           getRootDomNode,
           mask,
           zIndex,
@@ -330,7 +351,7 @@ export default {
           popupStyle,
         },
         on: {
-          align: self.$listeners.popupAlign || noop,
+          align: $listeners.popupAlign || noop,
           ...mouseProps,
         },
         directives: [
@@ -365,7 +386,8 @@ export default {
       return popupContainer
     },
 
-    setPopupVisible (sPopupVisible) {
+    setPopupVisible (sPopupVisible, event) {
+      const { alignPoint } = this.$props
       this.clearDelayTimer()
       if (this.$data.sPopupVisible !== sPopupVisible) {
         if (!hasProp(this, 'popupVisible')) {
@@ -375,18 +397,35 @@ export default {
         }
         this.$listeners.popupVisibleChange && this.$listeners.popupVisibleChange(sPopupVisible)
       }
+      // Always record the point position since mouseEnterDelay will delay the show
+      if (sPopupVisible && alignPoint && event) {
+        this.setPoint(event)
+      }
     },
 
-    delaySetPopupVisible (visible, delayS) {
+    setPoint (point) {
+      const { alignPoint } = this.$props
+      if (!alignPoint || !point) return
+
+      this.setState({
+        point: {
+          pageX: point.pageX,
+          pageY: point.pageY,
+        },
+      })
+    },
+
+    delaySetPopupVisible (visible, delayS, event) {
       const delay = delayS * 1000
       this.clearDelayTimer()
       if (delay) {
+        const point = event ? { pageX: event.pageX, pageY: event.pageY } : null
         this.delayTimer = requestAnimationTimeout(() => {
-          this.setPopupVisible(visible)
+          this.setPopupVisible(visible, point)
           this.clearDelayTimer()
         }, delay)
       } else {
-        this.setPopupVisible(visible)
+        this.setPopupVisible(visible, event)
       }
     },
 
@@ -481,7 +520,10 @@ export default {
     },
   },
   render (h) {
+    const { sPopupVisible } = this
     const children = filterEmpty(this.$slots.default)
+    const { forceRender, alignPoint } = this.$props
+
     if (children.length > 1) {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true)
     }
@@ -510,6 +552,9 @@ export default {
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.on.mouseenter = this.onMouseenter
+      if (alignPoint) {
+        newChildProps.on.mousemove = this.onMouseMove
+      }
     } else {
       newChildProps.on.mouseenter = this.createTwoChains('mouseenter')
     }
@@ -530,7 +575,7 @@ export default {
         }
       }
     }
-    const { sPopupVisible, forceRender } = this
+
     const trigger = cloneElement(child, newChildProps)
 
     return (

@@ -13,39 +13,7 @@ import CommonMixin from './mixin/CommonMixin'
 import DateInput from './date/DateInput'
 import enUs from './locale/en_US'
 import { getTimeConfig, getTodayTime, syncTime } from './util'
-function goStartMonth () {
-  const next = this.sValue.clone()
-  next.startOf('month')
-  this.setValue(next)
-}
-
-function goEndMonth () {
-  const next = this.sValue.clone()
-  next.endOf('month')
-  this.setValue(next)
-}
-
-function goTime (direction, unit) {
-  const next = this.sValue.clone()
-  next.add(direction, unit)
-  this.setValue(next)
-}
-
-function goMonth (direction) {
-  return goTime.call(this, direction, 'months')
-}
-
-function goYear (direction) {
-  return goTime.call(this, direction, 'years')
-}
-
-function goWeek (direction) {
-  return goTime.call(this, direction, 'weeks')
-}
-
-function goDay (direction) {
-  return goTime.call(this, direction, 'days')
-}
+import { goStartMonth, goEndMonth, goTime } from './util/toTime'
 
 function isMoment (value) {
   if (Array.isArray(value)) {
@@ -109,43 +77,47 @@ const Calendar = {
       const { disabledDate, sValue: value } = this
       switch (keyCode) {
         case KeyCode.DOWN:
-          goWeek.call(this, 1)
+          this.goTime(1, 'weeks')
           event.preventDefault()
           return 1
         case KeyCode.UP:
-          goWeek.call(this, -1)
+          this.goTime(-1, 'weeks')
           event.preventDefault()
           return 1
         case KeyCode.LEFT:
           if (ctrlKey) {
-            goYear.call(this, -1)
+            this.goTime(-1, 'years')
           } else {
-            goDay.call(this, -1)
+            this.goTime(-1, 'days')
           }
           event.preventDefault()
           return 1
         case KeyCode.RIGHT:
           if (ctrlKey) {
-            goYear.call(this, 1)
+            this.goTime(1, 'years')
           } else {
-            goDay.call(this, 1)
+            this.goTime(1, 'days')
           }
           event.preventDefault()
           return 1
         case KeyCode.HOME:
-          goStartMonth.call(this)
+          this.setValue(
+            goStartMonth(value),
+          )
           event.preventDefault()
           return 1
         case KeyCode.END:
-          goEndMonth.call(this)
+          this.setValue(
+            goEndMonth(value),
+          )
           event.preventDefault()
           return 1
         case KeyCode.PAGE_DOWN:
-          goMonth.call(this, 1)
+          this.goTime(1, 'month')
           event.preventDefault()
           return 1
         case KeyCode.PAGE_UP:
-          goMonth.call(this, -1)
+          this.goTime(-1, 'month')
           event.preventDefault()
           return 1
         case KeyCode.ENTER:
@@ -212,6 +184,11 @@ const Calendar = {
     },
     closeTimePicker () {
       this.onPanelChange(null, 'date')
+    },
+    goTime (direction, unit) {
+      this.setValue(
+        goTime(this.sValue, direction, unit),
+      )
     },
   },
 

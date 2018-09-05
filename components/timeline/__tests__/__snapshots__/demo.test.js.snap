@@ -17,7 +17,7 @@ exports[`renders ./components/timeline/demo/basic.md correctly 1`] = `
     <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Technical testing 2015-09-01</div>
   </li>
-  <li class="ant-timeline-item ant-timeline-item-last">
+  <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Network problems being solved 2015-09-01</div>
@@ -46,7 +46,7 @@ exports[`renders ./components/timeline/demo/color.md correctly 1`] = `
       <p>Solve initial network problems 3 2015-09-01</p>
     </div>
   </li>
-  <li class="ant-timeline-item ant-timeline-item-last">
+  <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">
@@ -79,7 +79,7 @@ exports[`renders ./components/timeline/demo/custom.md correctly 1`] = `
       Technical testing 2015-09-01
     </div>
   </li>
-  <li class="ant-timeline-item ant-timeline-item-last">
+  <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Network problems being solved 2015-09-01</div>
@@ -99,7 +99,7 @@ exports[`renders ./components/timeline/demo/pending.md correctly 1`] = `
     <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
-  <li class="ant-timeline-item ant-timeline-item-last">
+  <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue"></div>
     <div class="ant-timeline-item-content">Technical testing 2015-09-01</div>

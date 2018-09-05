@@ -5,7 +5,8 @@
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | accept | File types that can be accepted. See [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept) | string | - |
-| action | Required. Uploading URL | string | - |
+| action | Required. Uploading URL | string\|(file) => `Promise` | - |
+| directory | support upload whole directory ([caniuse](https://caniuse.com/#feat=input-file-directory)) | boolean | false |
 | beforeUpload | Hook function which will be executed before uploading. Uploading will be stopped with `false` or a rejected Promise returned. **Warning：this function is not supported in IE9**。 | (file, fileList) => `boolean | Promise` | - |
 | customRequest | override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest | Function | - |
 | data | Uploading params or function which can return uploading params. | object\|function(file) | - |
@@ -29,7 +30,7 @@
 
 ### change
 
-> The function will be called when uploading is in progress, completed or  failed
+> The function will be called when uploading is in progress, completed or failed
 
 When uploading state change, it returns:
 

@@ -6,6 +6,7 @@ import CloseText from './close-text'
 import Description from './description'
 import Icon from './icon'
 import Style from './style'
+import SmoothClosed from './smooth-closed'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -21,7 +22,7 @@ const md = {
 ## When To Use
 - When you need to show alert messages to users.
 - When you need a persistent static container which is closable by user actions.
-## Examples 
+## Examples
 `,
 }
 export default {
@@ -33,13 +34,14 @@ export default {
     return (
       <div id='components-alert-demo'>
         <md cn={md.cn} us={md.us}/>
-        < Banner/>
+        <Banner/>
         <Basic/>
         <Closable/>
         <CloseText/>
         <Description/>
         <Icon/>
         <Style/>
+        <SmoothClosed/>
         <api>
           <CN slot='cn' />
           <US/>

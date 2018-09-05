@@ -7,7 +7,6 @@ export const TimeLineItemProps = {
   color: PropTypes.string,
   dot: PropTypes.any,
   pending: PropTypes.bool,
-  last: PropTypes.bool,
 }
 
 export default {
@@ -15,15 +14,13 @@ export default {
   props: initDefaultProps(TimeLineItemProps, {
     prefixCls: 'ant-timeline',
     color: 'blue',
-    last: false,
     pending: false,
   }),
   render () {
-    const { prefixCls, color = '', last, pending } = getOptionProps(this)
+    const { prefixCls, color = '', pending } = getOptionProps(this)
     const dot = getComponentFromProp(this, 'dot')
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,
-      [`${prefixCls}-item-last`]: last,
       [`${prefixCls}-item-pending`]: pending,
     })
 
@@ -41,7 +38,7 @@ export default {
         <div class={`${prefixCls}-item-tail`} />
         <div
           class={dotClassName}
-          style={{ borderColor: /blue|red|green/.test(color) ? null : color }}
+          style={{ borderColor: /blue|red|green/.test(color) ? undefined : color }}
         >
           {dot}
         </div>

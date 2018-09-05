@@ -6,6 +6,7 @@
 | okText | 确认按钮文字 | string\|slot | 确定 |
 | okType | 确认按钮类型 | string | primary |
 | title | 确认框的描述 | string\|slot | 无 |
+| icon | 自定义弹出气泡 Icon 图标 | ReactNode | &lt;Icon type="exclamation-circle" /&gt; |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |

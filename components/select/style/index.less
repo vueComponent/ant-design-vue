@@ -38,6 +38,7 @@
   .reset-component;
   display: inline-block;
   position: relative;
+  outline: 0;
 
   ul,
   ol {
@@ -114,6 +115,10 @@
       max-width: 100%;
       padding-right: 20px;
     }
+  }
+
+  &-no-arrow &-selection-selected-value {
+    padding-right: 0;
   }
 
   &-disabled {
@@ -252,7 +257,7 @@
 
   &-search__field__mirror {
     position: absolute;
-    top: 0;
+    top: -9999px;
     left: -9999px;
     white-space: pre;
     pointer-events: none;
@@ -371,6 +376,10 @@
     }
   }
 
+  &-allow-clear &-selection--single &-selection-selected-value {
+    padding-right: 16px;
+  }
+
   &-allow-clear &-selection--multiple &-selection__rendered {
     margin-right: 20px; // In case that clear button will overlap content
   }
@@ -470,6 +479,11 @@
       height: 32px;
       line-height: 32px;
       font-size: @font-size-sm;
+    }
+
+    &-item-group-list &-item:first-child:not(:last-child),
+    &-item-group:not(:last-child) &-item-group-list &-item:last-child {
+      border-radius: 0;
     }
 
     &-item {

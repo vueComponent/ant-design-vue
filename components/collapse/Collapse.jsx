@@ -1,9 +1,8 @@
 
 import PropTypes from '../_util/vue-types'
 import animation from '../_util/openAnimation'
-import { getOptionProps } from '../_util/props-util'
-import RcCollapse from './src'
-import { collapseProps } from './src/commonProps'
+import { getOptionProps, initDefaultProps } from '../_util/props-util'
+import VcCollapse, { collapseProps } from '../vc-collapse'
 
 export default {
   name: 'ACollapse',
@@ -11,13 +10,11 @@ export default {
     prop: 'activeKey',
     event: 'change',
   },
-  props: {
-    ...collapseProps,
-    bordered: PropTypes.bool.def(true),
-    openAnimation: PropTypes.any.def(animation),
-    change: PropTypes.func.def(() => {}),
-    accordion: PropTypes.bool,
-  },
+  props: initDefaultProps(collapseProps, {
+    prefixCls: 'ant-collapse',
+    bordered: true,
+    openAnimation: animation,
+  }),
   render () {
     const { prefixCls, bordered, $listeners } = this
     const collapseClassName = {
@@ -30,7 +27,7 @@ export default {
       class: collapseClassName,
       on: $listeners,
     }
-    return <RcCollapse {...rcCollapeProps}>{this.$slots.default}</RcCollapse>
+    return <VcCollapse {...rcCollapeProps}>{this.$slots.default}</VcCollapse>
   },
 }
 

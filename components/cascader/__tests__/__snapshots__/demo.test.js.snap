@@ -46,6 +46,12 @@ exports[`renders ./components/cascader/demo/disabled-option.md correctly 1`] = `
 </span>
 `;
 
+exports[`renders ./components/cascader/demo/fields-name.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
+<i class="anticon anticon-down ant-cascader-picker-arrow"></i>
+</span>
+`;
+
 exports[`renders ./components/cascader/demo/hover.md correctly 1`] = `
 <span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
@@ -59,7 +65,7 @@ exports[`renders ./components/cascader/demo/lazy.md correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/search.md correctly 1`] = `
-<span tabindex="0" class="ant-cascader-picker"><span class="ant-cascader-picker-label"></span>
+<span tabindex="0" class="ant-cascader-picker ant-cascader-picker-show-search"><span class="ant-cascader-picker-label"></span>
 <input value="" placeholder="Please select" type="text" class="ant-input ant-cascader-input  ant-cascader-input ">
 <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
 </span>

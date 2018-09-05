@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { renderToString } from '@vue/server-test-utils'
 import Transfer from '..'
 import Vue from 'vue'
+import { asyncExpect } from '@/tests/utils'
 
 const listCommonProps = {
   dataSource: [{
@@ -97,7 +98,7 @@ describe('Transfer', () => {
       sync: false,
     })
     Vue.nextTick(() => {
-      wrapper.findAll('.ant-btn').at(1).trigger('click') // move selected keys to right list
+      wrapper.findAll('.ant-btn').at(0).trigger('click') // move selected keys to right list
       expect(handleChange).toHaveBeenCalledWith(['a', 'b'], 'right', ['a'])
       done()
     })
@@ -112,7 +113,7 @@ describe('Transfer', () => {
       sync: false,
     })
     Vue.nextTick(() => {
-      wrapper.findAll('.ant-btn').at(1).trigger('click')
+      wrapper.findAll('.ant-btn').at(0).trigger('click')
       expect(handleChange).toHaveBeenCalledWith(['b'], 'right', ['b'])
       done()
     })
@@ -325,7 +326,7 @@ describe('Transfer', () => {
             return !n.vnode.data.domProps.checked
           }).trigger('change')
         Vue.nextTick(() => {
-          wrapper.findAll('.ant-btn').at(1).trigger('click')
+          wrapper.findAll('.ant-btn').at(0).trigger('click')
           expect(handleChange).toHaveBeenCalledWith(['1', '3', '4'], 'right', ['1'])
           done()
         })
@@ -334,13 +335,13 @@ describe('Transfer', () => {
   })
 
   it('should check correctly when there is a search text', (done) => {
-    const props = { ...listCommonProps }
-    delete props.targetKeys
-    delete props.selectedKeys
+    const newProps = { ...listCommonProps }
+    delete newProps.targetKeys
+    delete newProps.selectedKeys
     const handleSelectChange = jest.fn()
     const wrapper = mount(Transfer, {
       propsData: {
-        ...props,
+        ...newProps,
         showSearch: true,
         render: item => item.title,
       },
@@ -398,5 +399,40 @@ describe('Transfer', () => {
     }
     const wrapper = renderToString(Transfer, props)
     expect(wrapper).toMatchSnapshot()
+  })
+  it('should add custom styles when their props are provided', async () => {
+    const style = {
+      backgroundColor: 'red',
+    }
+    const listStyle = {
+      backgroundColor: 'blue',
+    }
+    const operationStyle = {
+      backgroundColor: 'yellow',
+    }
+    const transferProps = {
+      props: {
+        ...listCommonProps,
+        listStyle,
+        operationStyle,
+      },
+      style,
+    }
+    const component = mount({
+      render () {
+        return <Transfer {...transferProps}/>
+      },
+    }, { sync: false })
+    await asyncExpect(() => {
+      const wrapper = component.find('.ant-transfer')
+      const list = component.findAll('.ant-transfer-list')
+      const listSource = list.at(0)
+      const listTarget = list.at(list.length - 1)
+      const operation = component.findAll('.ant-transfer-operation').at(0)
+      expect(wrapper.element.style).toHaveProperty('backgroundColor', 'red')
+      expect(listSource.element.style).toHaveProperty('backgroundColor', 'blue')
+      expect(listTarget.element.style).toHaveProperty('backgroundColor', 'blue')
+      expect(operation.element.style).toHaveProperty('backgroundColor', 'yellow')
+    })
   })
 })

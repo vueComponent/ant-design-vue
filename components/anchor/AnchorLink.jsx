@@ -26,8 +26,8 @@ export default {
     this.antAnchor.unregisterLink(this.href)
   },
   watch: {
-    href (val) {
-      this.antAnchor.unregisterLink(val)
+    href (val, oldVal) {
+      this.antAnchor.unregisterLink(oldVal)
       this.antAnchor.registerLink(val)
     },
   },

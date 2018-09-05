@@ -71,12 +71,16 @@ export default {
     setCheckState () {
       const checked = this.getCheckState()
       const indeterminate = this.getIndeterminateState()
-      if (checked !== this.checked) {
-        this.setState({ checked })
-      }
-      if (indeterminate !== this.indeterminate) {
-        this.setState({ indeterminate })
-      }
+      this.setState((prevState) => {
+        const newState = {}
+        if (indeterminate !== prevState.indeterminate) {
+          newState.indeterminate = indeterminate
+        }
+        if (checked !== prevState.checked) {
+          newState.checked = checked
+        }
+        return newState
+      })
     },
 
     getCheckState () {

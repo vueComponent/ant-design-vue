@@ -1,4 +1,4 @@
-
+import raf from 'raf'
 import PropTypes from '../_util/vue-types'
 import Menu from '../vc-menu'
 import scrollIntoView from 'dom-scroll-into-view'
@@ -23,6 +23,7 @@ export default {
     menuItems: PropTypes.any,
     inputValue: PropTypes.string,
     visible: PropTypes.bool,
+    backfillValue: PropTypes.any,
   },
 
   beforeMount () {
@@ -56,7 +57,7 @@ export default {
   methods: {
     scrollActiveItemToView () {
     // scroll into view
-      const itemComponent = this.$refs.firstActiveItem && this.$refs.firstActiveItem.$el
+      const itemComponent = this.firstActiveItem && this.firstActiveItem.$el
       const props = this.$props
 
       if (itemComponent) {
@@ -69,12 +70,15 @@ export default {
         ) {
           scrollIntoViewOpts.alignWithTop = true
         }
-
-        scrollIntoView(
-          itemComponent,
-          this.$refs.menuRef.$el,
-          scrollIntoViewOpts
-        )
+        // Delay to scroll since current frame item position is not ready when pre view is by filter
+        // https://github.com/ant-design/ant-design/issues/11268#issuecomment-406634462
+        raf(() => {
+          scrollIntoView(
+            itemComponent,
+            this.$refs.menuRef.$el,
+            scrollIntoViewOpts
+          )
+        })
       }
     },
 
@@ -89,6 +93,7 @@ export default {
         inputValue,
         firstActiveValue,
         dropdownMenuStyle,
+        backfillValue,
       } = props
       const { menuDeselect, menuSelect, popupScroll } = this.$listeners
       if (menuItems && menuItems.length) {
@@ -103,6 +108,9 @@ export default {
           on: {},
           style: dropdownMenuStyle,
           ref: 'menuRef',
+          attrs: {
+            role: 'listbox',
+          },
         }
         if (popupScroll) {
           menuProps.on.scroll = popupScroll
@@ -132,7 +140,12 @@ export default {
             ) {
               foundFirst = true
               return cloneElement(item, {
-                ref: 'firstActiveItem',
+                directives: [{
+                  name: 'ref',
+                  value: ref => {
+                    this.firstActiveItem = ref
+                  },
+                }],
               })
             }
             return item
@@ -145,14 +158,19 @@ export default {
             }
             return clone(item)
           })
+        } else {
+          // Clear firstActiveItem when dropdown menu items was empty
+          // Avoid `Unable to find node on an unmounted component`
+          // https://github.com/ant-design/ant-design/issues/10774
+          this.firstActiveItem = null
         }
 
         // clear activeKey when inputValue change
         const lastValue = value && value[value.length - 1]
-        if (inputValue !== this.lastInputValue && (!lastValue || !lastValue.backfill)) {
+        if (inputValue !== this.lastInputValue && (!lastValue || lastValue !== backfillValue)) {
           activeKeyProps.activeKey = ''
         }
-        menuProps.props = { ...menuProps.props, ...activeKeyProps }
+        menuProps.props = { ...activeKeyProps, ...menuProps.props }
         return (
           <Menu {...menuProps}>
             {clonedMenuItems}

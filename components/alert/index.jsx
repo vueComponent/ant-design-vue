@@ -122,7 +122,7 @@ export default {
     })
     return closed ? null : (
       <transition {...transitionProps}>
-        <div v-show={closing} class={alertCls}>
+        <div v-show={closing} class={alertCls} data-show={closing}>
           {showIcon ? <Icon class={`${prefixCls}-icon`} type={iconType} /> : null}
           <span class={`${prefixCls}-message`}>{message}</span>
           <span class={`${prefixCls}-description`}>{description}</span>

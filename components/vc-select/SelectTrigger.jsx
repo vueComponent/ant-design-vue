@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import Trigger from '../trigger'
 import PropTypes from '../_util/vue-types'
 import DropdownMenu from './DropdownMenu'
-import { isSingleMode } from './util'
+import { isSingleMode, saveRef } from './util'
 import BaseMixin from '../_util/BaseMixin'
 
 const BUILT_IN_PLACEMENTS = {
@@ -53,6 +53,11 @@ export default {
     animation: PropTypes.string,
     transitionName: PropTypes.string,
     getPopupContainer: PropTypes.func,
+    backfillValue: PropTypes.any,
+  },
+  created () {
+    this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef')
+    this.saveTriggerRef = saveRef(this, 'triggerRef')
   },
   data () {
     return {
@@ -80,17 +85,17 @@ export default {
     },
 
     getInnerMenu () {
-      return this.$refs.dropdownMenuRef && this.$refs.dropdownMenuRef.$refs.menuRef
+      return this.dropdownMenuRef && this.dropdownMenuRef.$refs.menuRef
     },
 
     getPopupDOMNode () {
-      return this.$refs.triggerRef.getPopupDomNode()
+      return this.triggerRef.getPopupDomNode()
     },
 
     getDropdownElement (newProps) {
       const {
         value, firstActiveValue, defaultActiveFirstOption,
-        dropdownMenuStyle, getDropdownPrefixCls,
+        dropdownMenuStyle, getDropdownPrefixCls, backfillValue,
       } = this
       const { menuSelect, menuDeselect, popupScroll } = this.$listeners
       const dropdownMenuProps = {
@@ -98,6 +103,7 @@ export default {
           ...newProps.props,
           prefixCls: getDropdownPrefixCls(),
           value, firstActiveValue, defaultActiveFirstOption, dropdownMenuStyle,
+          backfillValue,
         },
         on: {
           ...newProps.on,
@@ -105,7 +111,10 @@ export default {
           menuDeselect,
           popupScroll,
         },
-        ref: 'dropdownMenuRef',
+        directives: [{
+          name: 'ref',
+          value: this.saveDropdownMenuRef,
+        }],
       }
       return (
         <DropdownMenu {...dropdownMenuProps} />
@@ -190,7 +199,10 @@ export default {
       on: {
         popupVisibleChange: dropdownVisibleChange,
       },
-      ref: 'triggerRef',
+      directives: [{
+        name: 'ref',
+        value: this.saveTriggerRef,
+      }],
     }
     if (mouseenter) {
       triggerProps.on.mouseenter = mouseenter

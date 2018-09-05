@@ -1,10 +1,26 @@
+import classNames from 'classnames'
 import PropTypes from '../_util/vue-types'
 import Radio from './Radio'
+import { getOptionProps, filterEmpty, hasProp } from '../_util/props-util'
+function noop () {}
+
+function getCheckedValue (children) {
+  let value = null
+  let matched = false
+  children.forEach((radio) => {
+    if (radio && radio.componentOptions && radio.componentOptions.propsData.checked) {
+      value = radio.componentOptions.propsData.value
+      matched = true
+    }
+  })
+  return matched ? { value } : undefined
+}
+
 export default {
   name: 'ARadioGroup',
   props: {
     prefixCls: {
-      default: 'ant-radio-group',
+      default: 'ant-radio',
       type: String,
     },
     defaultValue: PropTypes.any,
@@ -21,6 +37,7 @@ export default {
     },
     disabled: Boolean,
     name: String,
+    buttonStyle: PropTypes.string.def('outline'),
   },
   data () {
     const { value, defaultValue } = this
@@ -54,20 +71,16 @@ export default {
     },
   },
   methods: {
-    handleChange (event) {
-      const target = event.target
-      const { value: targetValue } = target
-      if (this.value === undefined) {
-        this.stateValue = targetValue
+    onRadioChange (ev) {
+      const lastValue = this.stateValue
+      const { value } = ev.target
+      if (!hasProp(this, 'value')) {
+        this.stateValue = value
       }
-      this.$emit('input', targetValue)
-      this.$emit('change', event)
-    },
-    onMouseEnter (e) {
-      this.$emit('mouseenter', e)
-    },
-    onMouseLeave (e) {
-      this.$emit('mouseleave', e)
+      if (value !== lastValue) {
+        this.$emit('input', value)
+        this.$emit('change', ev)
+      }
     },
   },
   watch: {
@@ -76,19 +89,56 @@ export default {
     },
   },
   render () {
-    const { radioOptions, classes, $slots, name,
-      onMouseEnter,
-      onMouseLeave,
-    } = this
+    const { mouseenter = noop, mouseleave = noop } = this.$listeners
+    const props = getOptionProps(this)
+    const { prefixCls, options, buttonStyle } = props
+    const groupPrefixCls = `${prefixCls}-group`
+    const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
+      [`${groupPrefixCls}-${props.size}`]: props.size,
+    })
+
+    let children = filterEmpty(this.$slots.default)
+
+    // 如果存在 options, 优先使用
+    if (options && options.length > 0) {
+      children = options.map((option, index) => {
+        if (typeof option === 'string') {
+          return (
+            <Radio
+              key={index}
+              prefixCls={prefixCls}
+              disabled={props.disabled}
+              value={option}
+              onChange={this.onRadioChange}
+              checked={this.stateValue === option}
+            >
+              {option}
+            </Radio>
+          )
+        } else {
+          return (
+            <Radio
+              key={index}
+              prefixCls={prefixCls}
+              disabled={option.disabled || props.disabled}
+              value={option.value}
+              onChange={this.onRadioChange}
+              checked={this.stateValue === option.value}
+            >
+              {option.label}
+            </Radio>
+          )
+        }
+      })
+    }
+
     return (
       <div
-        class={classes}
-        onMouseenter={onMouseEnter}
-        onMouseleave={onMouseLeave}
+        class={classString}
+        onMouseenter={mouseenter}
+        onMouseleave={mouseleave}
       >
-        {radioOptions.map(({ value, disabled, label }) =>
-          <Radio key={value} value={value} disabled={disabled} name={name}>{label}</Radio>)}
-        { radioOptions.length === 0 && ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')}
+        {children}
       </div>
     )
   },

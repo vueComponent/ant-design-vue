@@ -11,13 +11,24 @@ The simplest usage.
 ```html
 <template>
   <div>
-    <a-affix>
-      <a-button type="primary">Affix top</a-button>
+    <a-affix :offsetTop="this.top">
+      <a-button type="primary" @click="()=>{this.top += 10}">Affix top</a-button>
     </a-affix>
     <br />
-    <a-affix :offsetBottom="0">
-      <a-button type="primary">Affix bottom</a-button>
+    <a-affix :offsetBottom="this.bottom">
+      <a-button type="primary"  @click="()=>{this.bottom += 10}">Affix bottom</a-button>
     </a-affix>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      top: 10,
+      bottom: 10,
+    }
+  }
+}
+</script>
 ```

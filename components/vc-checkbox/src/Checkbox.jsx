@@ -1,12 +1,13 @@
 
 import PropTypes from '../../_util/vue-types'
 import classNames from 'classnames'
-import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util'
+import { getOptionProps, hasProp, initDefaultProps, getAttrs } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
 
 export default {
   name: 'Checkbox',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps({
     prefixCls: PropTypes.string,
     name: PropTypes.string,
@@ -19,17 +20,23 @@ export default {
     // onBlur: PropTypes.func,
     // onChange: PropTypes.func,
     // onClick: PropTypes.func,
-    // tabIndex: PropTypes.string,
-    // readOnly: PropTypes.bool,
-    // autoFocus: PropTypes.bool,
+    tabIndex: PropTypes.string,
+    readOnly: PropTypes.bool,
+    autoFocus: PropTypes.bool,
     value: PropTypes.any,
   }, {
     prefixCls: 'rc-checkbox',
     type: 'checkbox',
     defaultChecked: false,
   }),
+  model: {
+    prop: 'checked',
+    event: 'change',
+  },
   data () {
-    const checked = hasProp(this, 'checked') ? this.checked : this.defaultChecked
+    const checked = hasProp(this, 'checked')
+      ? this.checked
+      : this.defaultChecked
     return {
       sChecked: checked,
     }
@@ -38,6 +45,13 @@ export default {
     checked (val) {
       this.sChecked = val
     },
+  },
+  mounted () {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.$refs.input && this.$refs.input.focus()
+      }
+    })
   },
   methods: {
     focus () {
@@ -56,8 +70,8 @@ export default {
       if (!('checked' in props)) {
         this.sChecked = e.target.checked
       }
-
-      props.onChange({
+      this.$forceUpdate() // change前，维持现有状态
+      this.__emit('change', {
         target: {
           ...props,
           checked: e.target.checked,
@@ -68,8 +82,14 @@ export default {
         preventDefault () {
           e.preventDefault()
         },
-        nativeEvent: e.nativeEvent,
+        nativeEvent: { ...e, shiftKey: this.eventShiftKey },
       })
+      this.eventShiftKey = false
+    },
+    onClick (e) {
+      this.__emit('click', e)
+      // onChange没能获取到shiftKey，使用onClick hack
+      this.eventShiftKey = e.shiftKey
     },
   },
 
@@ -82,24 +102,21 @@ export default {
       disabled,
       readOnly,
       tabIndex,
-      onClick,
-      onFocus,
-      onBlur,
       autoFocus,
       value,
       ...others
-    } = this
-
-    const globalProps = Object.keys(others).reduce((prev, key) => {
+    } = getOptionProps(this)
+    const attrs = getAttrs(this)
+    const globalProps = Object.keys({ ...others, ...attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key]
       }
       return prev
     }, {})
 
-    const { checked } = this.state
+    const { sChecked } = this
     const classString = classNames(prefixCls, {
-      [`${prefixCls}-checked`]: checked,
+      [`${prefixCls}-checked`]: sChecked,
       [`${prefixCls}-disabled`]: disabled,
     })
 
@@ -113,15 +130,18 @@ export default {
           disabled={disabled}
           tabIndex={tabIndex}
           class={`${prefixCls}-input`}
-          checked={!!checked}
-          onClick={onClick}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onChange={this.handleChange}
+          checked={!!sChecked}
           autoFocus={autoFocus}
-          ref={this.saveInput}
+          ref='input'
           value={value}
-          {...globalProps}
+          {...{
+            attrs: globalProps,
+            on: {
+              ...this.$listeners,
+              change: this.handleChange,
+              click: this.onClick,
+            }}
+          }
         />
         <span class={`${prefixCls}-inner`} />
       </span>

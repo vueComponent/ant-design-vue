@@ -5,7 +5,6 @@ import focusTest from '../../../tests/shared/focusTest'
 
 describe('Checkbox', () => {
   focusTest(Checkbox)
-
   it('responses hover events', () => {
     const onMouseEnter = jest.fn()
     const onMouseLeave = jest.fn()

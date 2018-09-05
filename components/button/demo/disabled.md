@@ -18,11 +18,12 @@ To mark a button as disabled, add the `disabled` property to the `Button`.
     <a-button>Default</a-button>
     <a-button disabled>Default(disabled)</a-button>
     <br />
-    <a-button>Ghost</a-button>
-    <a-button disabled>Ghost(disabled)</a-button>
-    <br />
     <a-button type="dashed">Dashed</a-button>
     <a-button type="dashed" disabled>Dashed(disabled)</a-button>
+    <div :style="{ padding: '8px 8px 0 8px', background: 'rgb(190, 200, 200)' }">
+      <a-button ghost>Ghost</a-button>
+      <a-button ghost disabled>Ghost(disabled)</a-button>
+    </div>
   </div>
 </template>
 ```

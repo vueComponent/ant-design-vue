@@ -12,7 +12,7 @@ The combination of radio button style.
 <template>
   <div>
     <div>
-      <a-radio-group @change="onChange" defaultValue="a">
+      <a-radio-group @change="onChange" v-model="value">
         <a-radio-button value="a">Hangzhou</a-radio-button>
         <a-radio-button value="b">Shanghai</a-radio-button>
         <a-radio-button value="c">Beijing</a-radio-button>
@@ -39,6 +39,11 @@ The combination of radio button style.
 </template>
 <script>
 export default {
+  data () {
+    return {
+      value: 'a',
+    }
+  },
   methods: {
     onChange (e) {
       console.log(`checked = ${e.target.value}`)

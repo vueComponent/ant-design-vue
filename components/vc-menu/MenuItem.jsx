@@ -1,9 +1,13 @@
 
 import PropTypes from '../_util/vue-types'
 import KeyCode from '../_util/KeyCode'
-// import { noop } from './util'
 import BaseMixin from '../_util/BaseMixin'
+import scrollIntoView from 'dom-scroll-into-view'
+import { connect } from '../_util/store'
+import { noop, menuAllProps } from './util'
+
 const props = {
+  attribute: PropTypes.object,
   rootPrefixCls: PropTypes.string,
   eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   active: PropTypes.bool,
@@ -17,16 +21,31 @@ const props = {
   parentMenu: PropTypes.object,
   multiple: PropTypes.bool,
   value: PropTypes.any,
+  isSelected: PropTypes.bool,
+  manualRef: PropTypes.func.def(noop),
+  role: PropTypes.any,
+  subMenuKey: PropTypes.string,
   // clearSubMenuTimers: PropTypes.func.def(noop),
 }
 const MenuItem = {
   name: 'MenuItem',
   props,
-  inject: {
-    parentMenuContext: { default: undefined },
-  },
   mixins: [BaseMixin],
   isMenuItem: true,
+  created () {
+    // invoke customized ref to expose component to mixin
+    this.callRef()
+  },
+  updated () {
+    this.$nextTick(() => {
+      if (this.active) {
+        scrollIntoView(this.$el, this.parentMenu.$el, {
+          onlyScrollIfNeeded: true,
+        })
+      }
+    })
+    this.callRef()
+  },
   beforeDestroy () {
     const props = this.$props
     this.__emit('destroy', props.eventKey)
@@ -54,9 +73,6 @@ const MenuItem = {
 
     onMouseEnter (e) {
       const { eventKey } = this
-      // if (parentMenuContext && parentMenuContext.subMenuInstance) {
-      //   parentMenuContext.subMenuInstance.clearSubMenuTimers()
-      // }
       this.__emit('itemHover', {
         key: eventKey,
         hover: true,
@@ -68,8 +84,7 @@ const MenuItem = {
     },
 
     onClick (e) {
-      const { eventKey, multiple } = this.$props
-      const selected = this.isSelected()
+      const { eventKey, multiple, isSelected } = this.$props
       const info = {
         key: eventKey,
         keyPath: [eventKey],
@@ -79,12 +94,12 @@ const MenuItem = {
 
       this.__emit('click', info)
       if (multiple) {
-        if (selected) {
+        if (isSelected) {
           this.__emit('deselect', info)
         } else {
           this.__emit('select', info)
         }
-      } else if (!selected) {
+      } else if (!isSelected) {
         this.__emit('select', info)
       }
     },
@@ -105,44 +120,60 @@ const MenuItem = {
       return `${this.getPrefixCls()}-disabled`
     },
 
-    isSelected () {
-      return this.$props.selectedKeys && this.$props.selectedKeys.indexOf(this.$props.eventKey) !== -1
+    callRef () {
+      if (this.manualRef) {
+        this.manualRef(this)
+      }
     },
   },
 
   render () {
-    const props = this.$props
-    const selected = this.isSelected()
+    const props = { ...this.$props }
     const className = {
       [this.getPrefixCls()]: true,
       [this.getActiveClassName()]: !props.disabled && props.active,
-      [this.getSelectedClassName()]: selected,
+      [this.getSelectedClassName()]: props.isSelected,
       [this.getDisabledClassName()]: props.disabled,
     }
-    const attrs = {
+    let attrs = {
       ...props.attribute,
       title: props.title,
       role: 'menuitem',
-      'aria-selected': selected,
       'aria-disabled': props.disabled,
     }
-    let mouseEvent = {}
-
-    if (!props.disabled) {
-      mouseEvent = {
-        click: this.onClick,
-        mouseleave: this.onMouseLeave,
-        mouseenter: this.onMouseEnter,
+    if (props.role === 'option') {
+      // overwrite to option
+      attrs = {
+        ...attrs,
+        role: 'option',
+        'aria-selected': props.isSelected,
       }
+    } else if (props.role === null) {
+      // sometimes we want to specify role inside <li/> element
+      // <li><a role='menuitem'>Link</a></li> would be a good example
+      delete attrs.role
+    }
+    // In case that onClick/onMouseLeave/onMouseEnter is passed down from owner
+    const mouseEvent = {
+      click: props.disabled ? noop : this.onClick,
+      mouseleave: props.disabled ? noop : this.onMouseLeave,
+      mouseenter: props.disabled ? noop : this.onMouseEnter,
     }
 
     const style = {}
     if (props.mode === 'inline') {
       style.paddingLeft = `${props.inlineIndent * props.level}px`
     }
+    const listeners = { ...this.$listeners }
+    menuAllProps.props.forEach(key => delete props[key])
+    menuAllProps.on.forEach(key => delete listeners[key])
     const liProps = {
-      attrs,
+      attrs: {
+        ...props,
+        ...attrs,
+      },
       on: {
+        ...listeners,
         ...mouseEvent,
       },
     }
@@ -158,6 +189,11 @@ const MenuItem = {
   },
 }
 
-export default MenuItem
+const connected = connect(({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
+  active: activeKey[subMenuKey] === eventKey,
+  isSelected: selectedKeys.indexOf(eventKey) !== -1,
+}))(MenuItem)
+
+export default connected
 export { props as menuItemProps }
 

@@ -1,47 +1,37 @@
 <cn>
 #### 自定义筛选菜单
-通过 `filterDropdown`、`filterDropdownVisible` 和 `filterDropdownVisibleChange` 定义自定义的列筛选功能，并实现一个搜索列的示例。
+通过 `filterDropdown` 定义自定义的列筛选功能，并实现一个搜索列的示例。
 </cn>
 
 <us>
 #### Customized filter panel
-Implement a customized column search example via `filterDropdown`, `filterDropdownVisible` and `filterDropdownVisibleChange`.
+Implement a customized column search example via `filterDropdown`.
 </us>
 
 ```html
 <template>
-  <a-table :dataSource="data">
-    <a-table-column
-      title="Name"
-      dataIndex="name"
-      key="name"
-      :filterDropdownVisible="filterDropdownVisible"
-      @filterDropdownVisibleChange="onFilterDropdownVisibleChange"
-    >
-      <div slot="filterDropdown" class="custom-filter-dropdown">
-        <a-input
-          ref="searchInput"
-          placeholder="Search name"
-          :value="searchText"
-          @change="onInputChange"
-          @pressEnter="onSearch"
-        />
-        <a-button type="primary" @click="onSearch">Search</a-button>
-      </div>
-      <a-icon slot="filterIcon" type="smile-o" :style="{ color: this.filtered ? '#108ee9' : '#aaa' }" />
-    </a-table-column>
-    <a-table-column
-      title="Age"
-      dataIndex="age"
-      key="age"
-    />
-    <a-table-column
-      title="Address"
-      dataIndex="address"
-      key="address"
-      :filters="filters"
-      @filter="(value, record) => record.address.indexOf(value) === 0"
-    />
+  <a-table :dataSource="data" :columns="columns">
+    <div slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters }" class='custom-filter-dropdown'>
+      <a-input
+        ref="searchInput"
+        placeholder='Search name'
+        :value="selectedKeys[0]"
+        @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+        @pressEnter="() => handleSearch(selectedKeys, confirm)"
+      />
+      <a-button type='primary' @click="() => handleSearch(selectedKeys, confirm)">Search</a-button>
+      <a-button @click="() => handleReset(clearFilters)">Reset</a-button>
+    </div>
+    <a-icon slot="filterIcon" slot-scope="filtered" type='smile-o' :style="{ color: filtered ? '#108ee9' : '#aaa' }" />
+    <template slot="customRender" slot-scope="text">
+      <span v-if="searchText">
+        <template v-for="(fragment, i) in text.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))">
+          <span v-if="fragment.toLowerCase() === searchText.toLowerCase()" :key="i" class="highlight">{{fragment}}</span>
+          <template v-else>{{fragment}}</template>
+        </template>
+      </span>
+      <template v-else>{{text}}</template>
+    </template>
   </a-table>
 </template>
 
@@ -66,57 +56,58 @@ const data = [{
   name: 'Jim Red',
   age: 32,
   address: 'London No. 2 Lake Park',
-}];
+}]
 
 export default {
-  data() {
+  data () {
     return {
-      filterDropdownVisible: false,
       data,
       searchText: '',
-      filtered: false,
-      filters: [{
-        text: 'London',
-        value: 'London',
+      columns: [{
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        scopedSlots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+          if (visible) {
+            setTimeout(() => {
+              this.$refs.searchInput.focus()
+            })
+          }
+        },
       }, {
-        text: 'New York',
-        value: 'New York',
+        title: 'Age',
+        dataIndex: 'age',
+        key: 'age',
+      }, {
+        title: 'Address',
+        dataIndex: 'address',
+        key: 'address',
+        filters: [{
+          text: 'London',
+          value: 'London',
+        }, {
+          text: 'New York',
+          value: 'New York',
+        }],
+        onFilter: (value, record) => record.address.indexOf(value) === 0,
       }],
     }
   },
   methods: {
-    onFilterDropdownVisibleChange(visible) {
-      this.filterDropdownVisible = visible;
-      this.$nextTick(() => {
-        this.$refs.searchInput && this.$refs.searchInput.focus()
-      })
+    handleSearch (selectedKeys, confirm) {
+      confirm()
+      this.searchText = selectedKeys[0]
     },
-    onInputChange(e) {
-      this.searchText = e.target.value;
-    },
-    onSearch () {
-      const { searchText } = this;
-      const reg = new RegExp(searchText, 'gi');
-      Object.assign(this, {
-        filterDropdownVisible: false,
-        filtered: !!searchText,
-        data: data.map((record) => {
-          const match = record.name.match(reg);
-          if (!match) {
-            return null;
-          }
-          return {
-            ...record,
-            name: (
-              <span>
-                {record.name.split(reg).map((text, i) => (
-                  i > 0 ? [<span class="highlight">{match[0]}</span>, text] : text
-                ))}
-              </span>
-            ),
-          };
-        }).filter(record => !!record),
-      })
+
+    handleReset (clearFilters) {
+      clearFilters()
+      this.searchText = ''
     },
   },
 }
@@ -131,6 +122,10 @@ export default {
 
 .custom-filter-dropdown input {
   width: 130px;
+  margin-right: 8px;
+}
+
+.custom-filter-dropdown button {
   margin-right: 8px;
 }
 

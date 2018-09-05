@@ -12,7 +12,8 @@ import US from '../index.en-US.md'
 import '../style'
 
 const md = {
-  cn: `# 旋转木马，一组轮播的区域。
+  cn: `# Carousel 走马灯
+        旋转木马，一组轮播的区域。
        ## 何时使用
 
       - 当有一组平级的内容。
@@ -20,7 +21,8 @@ const md = {
       - 常用于一组图片或卡片轮播。
        ## 代码演示
         `,
-  us: `# A carousel component. Scales with its container.
+  us: `# Carousel
+          A carousel component. Scales with its container.
        ## When To Use
 
       - When there is a group of content on the same level.

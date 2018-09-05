@@ -6,7 +6,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
 
 import Spin from '../spin'
-import Pagination from '../pagination'
+import Pagination, { PaginationConfig } from '../pagination'
 import { Row } from '../grid'
 
 import Item from './Item'
@@ -40,7 +40,7 @@ export const ListProps = () => ({
   itemLayout: PropTypes.string,
   loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   loadMore: PropTypes.any,
-  pagination: PropTypes.any,
+  pagination: PaginationConfig(),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,
   renderItem: PropTypes.any,
@@ -108,7 +108,7 @@ export default {
       return renderItem(item, index)
     },
 
-    isSomethingAfterLastTtem () {
+    isSomethingAfterLastItem () {
       const { pagination } = this
       const loadMore = getComponentFromProp(this, 'loadMore')
       const footer = getComponentFromProp(this, 'footer')
@@ -168,7 +168,7 @@ export default {
       [`${prefixCls}-bordered`]: bordered,
       [`${prefixCls}-loading`]: isLoading,
       [`${prefixCls}-grid`]: grid,
-      [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastTtem(),
+      [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastItem(),
     })
     const paginationProps = {
       ...this.defaultPaginationProps,

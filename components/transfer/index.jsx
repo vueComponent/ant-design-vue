@@ -27,6 +27,7 @@ export const TransferProps = {
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   render: PropTypes.func,
   listStyle: PropTypes.object,
+  operationStyle: PropTypes.object,
   titles: PropTypes.arrayOf(PropTypes.string),
   operations: PropTypes.arrayOf(PropTypes.string),
   showSearch: PropTypes.bool,
@@ -56,7 +57,7 @@ export default {
     showSearch: false,
   }),
   data () {
-    this.splitedDataSource = {
+    this.separatedDataSource = {
       leftDataSource: [],
       rightDataSource: [],
     } | null
@@ -99,7 +100,7 @@ export default {
     //     // if (nextProps.targetKeys !== currentProps.targetKeys ||
     //     //   nextProps.dataSource !== currentProps.dataSource) {
     //     //   // clear cached splited dataSource
-    //     //   this.splitedDataSource = null
+    //     //   this.separatedDataSource = null
 
     //     //   if (!nextProps.selectedKeys) {
     //     //     // clear key nolonger existed
@@ -138,7 +139,7 @@ export default {
   methods: {
     updateState () {
       const { sourceSelectedKeys, targetSelectedKeys } = this
-      this.splitedDataSource = null
+      this.separatedDataSource = null
       if (!this.selectedKeys) {
         // clear key nolonger existed
         // clear checkedKeys according to targetKeys
@@ -160,9 +161,9 @@ export default {
         })
       }
     },
-    splitDataSource (props) {
-      if (this.splitedDataSource) {
-        return this.splitedDataSource
+    separateDataSource (props) {
+      if (this.separatedDataSource) {
+        return this.separatedDataSource
       }
 
       const { dataSource, rowKey, targetKeys = [] } = props
@@ -184,12 +185,12 @@ export default {
         }
       })
 
-      this.splitedDataSource = {
+      this.separatedDataSource = {
         leftDataSource,
         rightDataSource,
       }
 
-      return this.splitedDataSource
+      return this.separatedDataSource
     },
 
     moveTo  (direction) {
@@ -343,6 +344,7 @@ export default {
         showSearch,
         searchPlaceholder,
         listStyle,
+        operationStyle,
         filterOption,
         lazy,
       } = props
@@ -350,7 +352,7 @@ export default {
       const { leftFilter, rightFilter, sourceSelectedKeys, targetSelectedKeys, $scopedSlots } = this
       const { body, footer } = $scopedSlots
       const renderItem = props.render
-      const { leftDataSource, rightDataSource } = this.splitDataSource(this.$props)
+      const { leftDataSource, rightDataSource } = this.separateDataSource(this.$props)
       const leftActive = targetSelectedKeys.length > 0
       const rightActive = sourceSelectedKeys.length > 0
 
@@ -390,6 +392,7 @@ export default {
             leftActive={leftActive}
             leftArrowText={operations[1]}
             moveToLeft={this.moveToLeft}
+            style={operationStyle}
           />
           <List
             prefixCls={`${prefixCls}-list`}

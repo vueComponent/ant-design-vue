@@ -1,5 +1,6 @@
 
 import KeyCode from '../_util/KeyCode'
+import contains from '../_util/Dom/contains'
 import LazyRenderBox from './LazyRenderBox'
 import BaseMixin from '../_util/BaseMixin'
 import getTransitionProps from '../_util/getTransitionProps'
@@ -110,9 +111,10 @@ export default {
       // first show
         if (!visible) {
           this.openTime = Date.now()
-          this.lastOutSideFocusNode = document.activeElement
+          // this.lastOutSideFocusNode = document.activeElement
           this.addScrollingEffect()
-          this.$refs.wrap.focus()
+          // this.$refs.wrap.focus()
+          this.tryFocus()
           const dialogNode = this.$refs.dialog.$el
           if (mousePosition) {
             const elOffset = offset(dialogNode)
@@ -132,6 +134,12 @@ export default {
           }
           this.lastOutSideFocusNode = null
         }
+      }
+    },
+    tryFocus () {
+      if (!contains(this.$refs.wrap, document.activeElement)) {
+        this.lastOutSideFocusNode = document.activeElement
+        this.$refs.wrap.focus()
       }
     },
     onAnimateLeave () {
@@ -162,7 +170,9 @@ export default {
     onKeydown (e) {
       const props = this.$props
       if (props.keyboard && e.keyCode === KeyCode.ESC) {
+        e.stopPropagation()
         this.close(e)
+        return
       }
       // keep focus inside dialog
       if (props.visible) {

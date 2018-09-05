@@ -29,6 +29,12 @@ export const PaginationProps = () => ({
   prefixCls: PropTypes.string,
   selectPrefixCls: PropTypes.string,
   itemRender: PropTypes.any,
+  role: PropTypes.string,
+})
+
+export const PaginationConfig = () => ({
+  ...PaginationProps(),
+  position: PropTypes.oneOf(['top', 'bottom', 'both']),
 })
 
 export default {
@@ -43,14 +49,14 @@ export default {
     event: 'change',
   },
   methods: {
-    renderPagination (locale) {
-      const { buildOptionText, size, ...restProps } = getOptionProps(this)
+    renderPagination (contextLocale) {
+      const { buildOptionText, size, locale: customLocale, ...restProps } = getOptionProps(this)
       const isSmall = size === 'small'
       const paginationProps = {
         props: {
           ...restProps,
           selectComponentClass: (isSmall ? MiniSelect : VcSelect),
-          locale,
+          locale: { ...contextLocale, ...customLocale },
           buildOptionText: buildOptionText || this.$scopedSlots.buildOptionText,
         },
         class: {

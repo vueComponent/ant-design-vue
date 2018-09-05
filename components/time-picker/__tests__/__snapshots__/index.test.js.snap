@@ -2,6 +2,6 @@
 
 exports[`TimePicker renders addon correctly 1`] = `
 <div class="ant-time-picker-panel-addon">
-  <button>Ok</button>
+  <button type="button">Ok</button>
 </div>
 `;

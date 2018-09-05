@@ -6,10 +6,11 @@ import Handle from './Handle'
 
 export default function createSliderWithTooltip (Component) {
   return {
-    mixins: [BaseMixin, Component],
+    mixins: [BaseMixin],
     props: {
+      ...Component.props,
       tipFormatter: PropTypes.func.def((value) => { return value }),
-      handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]).def([{}]),
+      handleStyle: PropTypes.arrayOf(PropTypes.object),
       tipProps: PropTypes.object.def({}),
     },
     data () {
@@ -42,13 +43,6 @@ export default function createSliderWithTooltip (Component) {
           visible = visible || false,
           ...restTooltipProps } = tipProps
 
-        let handleStyleWithIndex
-        if (Array.isArray(handleStyle)) {
-          handleStyleWithIndex = handleStyle[index] || handleStyle[0]
-        } else {
-          handleStyleWithIndex = handleStyle
-        }
-
         const tooltipProps = {
           props: {
             ...restTooltipProps,
@@ -69,7 +63,7 @@ export default function createSliderWithTooltip (Component) {
             mouseleave: () => this.handleTooltipVisibleChange(index, false),
           },
           style: {
-            ...handleStyleWithIndex,
+            ...handleStyle[0],
           },
         }
 

@@ -1,5 +1,4 @@
 import PropTypes from '../../_util/vue-types'
-import addEventListener from '../../_util/Dom/addEventListener'
 import BaseMixin from '../../_util/BaseMixin'
 import { getOptionProps } from '../../_util/props-util'
 
@@ -15,45 +14,11 @@ export default {
     max: PropTypes.number,
     value: PropTypes.number,
     tabIndex: PropTypes.number,
+    className: PropTypes.string,
     // handleFocus: PropTypes.func.def(noop),
     // handleBlur: PropTypes.func.def(noop),
   },
-  data () {
-    return {
-      clickFocused: false,
-    }
-  },
-  mounted () {
-    this.$nextTick(() => {
-      // mouseup won't trigger if mouse moved out of handle,
-      // so we listen on document here.
-      this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
-    })
-  },
-  beforeDestroy () {
-    if (this.onMouseUpListener) {
-      this.onMouseUpListener.remove()
-    }
-  },
   methods: {
-    setClickFocus (focused) {
-      this.setState({ clickFocused: focused })
-    },
-    handleMouseUp () {
-      if (document.activeElement === this.$refs.handle) {
-        this.setClickFocus(true)
-      }
-    },
-    handleBlur (e) {
-      this.setClickFocus(false)
-    },
-    handleKeyDown () {
-      this.setClickFocus(false)
-    },
-    clickFocus () {
-      this.setClickFocus(true)
-      this.focus()
-    },
     focus () {
       this.$refs.handle.focus()
     },
@@ -63,13 +28,8 @@ export default {
   },
   render () {
     const {
-      prefixCls, vertical, offset, disabled, min, max, value, tabIndex,
+      className, vertical, offset, disabled, min, max, value, tabIndex,
     } = getOptionProps(this)
-
-    const className = {
-      [`${prefixCls}-handle`]: true,
-      [`${prefixCls}-handle-click-focused`]: this.clickFocused,
-    }
 
     const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` }
     const elStyle = {
@@ -92,11 +52,7 @@ export default {
         ...ariaProps,
       },
       class: className,
-      on: {
-        ...this.$listeners,
-        blur: this.handleBlur,
-        keydown: this.handleKeyDown,
-      },
+      on: this.$listeners,
       ref: 'handle',
       style: elStyle,
     }

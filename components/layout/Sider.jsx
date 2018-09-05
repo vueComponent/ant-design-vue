@@ -19,6 +19,7 @@ import PropTypes from '../_util/vue-types'
 import Icon from '../icon'
 import { initDefaultProps, getOptionProps, hasProp, getComponentFromProp } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
+import isNumeric from '../_util/isNumeric'
 
 const dimensionMap = {
   xs: '480px',
@@ -42,6 +43,7 @@ export const SiderProps = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   breakpoint: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
+  theme: PropTypes.oneOf(['light', 'dark']).def('dark'),
 }
 
 // export interface SiderState {
@@ -160,6 +162,7 @@ export default {
   methods: {
     responsiveHandler (mql) {
       this.setState({ below: mql.matches })
+      this.$emit('breakpoint', mql.matches)
       if (this.sCollapsed !== mql.matches) {
         this.setCollapsed(mql.matches, 'responsive')
       }
@@ -185,14 +188,15 @@ export default {
   },
 
   render () {
-    const { prefixCls,
+    const { prefixCls, theme,
       collapsible, reverseArrow, width, collapsedWidth,
     } = getOptionProps(this)
     const trigger = getComponentFromProp(this, 'trigger')
-    let siderWidth = this.sCollapsed ? collapsedWidth : width
-    siderWidth = typeof siderWidth === 'string' ? siderWidth.replace('px', '') : siderWidth
+    const rawWidth = this.sCollapsed ? collapsedWidth : width
+    // use "px" as fallback unit for width
+    const siderWidth = isNumeric(rawWidth) ? `${rawWidth}px` : String(rawWidth)
     // special trigger when collapsedWidth == 0
-    const zeroWidthTrigger = collapsedWidth === 0 || collapsedWidth === '0' || collapsedWidth === '0px' ? (
+    const zeroWidthTrigger = parseFloat(String(collapsedWidth || 0)) === 0 ? (
       <span onClick={this.toggle} class={`${prefixCls}-zero-width-trigger`}>
         <Icon type='bars' />
       </span>
@@ -213,16 +217,16 @@ export default {
     )
     const divStyle = {
       // ...style,
-      flex: `0 0 ${siderWidth}px`,
-      maxWidth: `${siderWidth}px`, // Fix width transition bug in IE11
-      minWidth: `${siderWidth}px`, // https://github.com/ant-design/ant-design/issues/6349
-      width: `${siderWidth}px`,
+      flex: `0 0 ${siderWidth}`,
+      maxWidth: siderWidth, // Fix width transition bug in IE11
+      minWidth: siderWidth, // https://github.com/ant-design/ant-design/issues/6349
+      width: siderWidth,
     }
-    const siderCls = classNames(prefixCls, {
+    const siderCls = classNames(prefixCls, `${prefixCls}-${theme}`, {
       [`${prefixCls}-collapsed`]: !!this.sCollapsed,
       [`${prefixCls}-has-trigger`]: collapsible && trigger !== null && !zeroWidthTrigger,
       [`${prefixCls}-below`]: !!this.below,
-      [`${prefixCls}-zero-width`]: siderWidth === 0 || siderWidth === '0' || siderWidth === '0px',
+      [`${prefixCls}-zero-width`]: parseFloat(siderWidth) === 0,
     })
     const divProps = {
       on: this.$listeners,

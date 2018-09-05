@@ -22,9 +22,11 @@
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| @change | 选中 option，或 input 的 value 变化时，调用此函数 | function(value) |
-| @search | 搜索补全项的时候调用 | function(value) |
-| @select | 被选中时调用，参数为选中项的 value 值 | function(value, option) |
+| change | 选中 option，或 input 的 value 变化时，调用此函数 | function(value) |
+| blur | 失去焦点时的回调 | function() |
+| focus | 获得焦点时的回调 | function() |
+| search | 搜索补全项的时候调用 | function(value) |
+| select | 被选中时调用，参数为选中项的 value 值 | function(value, option) |
 
 ## 方法
 

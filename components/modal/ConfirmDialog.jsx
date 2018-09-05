@@ -9,7 +9,7 @@ export default {
   functional: true,
   render (h, context) {
     const { props } = context
-    const { onCancel, onOk, close, zIndex, afterClose, visible, keyboard } = props
+    const { onCancel, onOk, close, zIndex, afterClose, visible, keyboard, centered } = props
     const iconType = props.iconType || 'question-circle'
     const okType = props.okType || 'primary'
     const prefixCls = props.prefixCls || 'ant-confirm'
@@ -27,7 +27,6 @@ export default {
     const classString = classNames(
       prefixCls,
       `${prefixCls}-${props.type}`,
-      props.class,
     )
 
     const cancelButton = okCancel && (
@@ -39,6 +38,7 @@ export default {
     return (
       <Dialog
         class={classString}
+        wrapClassName={classNames({ [`${prefixCls}-centered`]: !!centered })}
         onCancel={(e) => close({ triggerCancel: true }, e)}
         visible={visible}
         title=''

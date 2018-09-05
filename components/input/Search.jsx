@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     onSearch (e) {
-      this.$emit('search', this.$refs.input.stateValue)
+      this.$emit('search', this.$refs.input.stateValue, e)
       this.$refs.input.focus()
     },
     focus () {
@@ -39,38 +39,35 @@ export default {
       this.$refs.input.blur()
     },
     getButtonOrIcon () {
-      const { prefixCls, size } = this
+      const { prefixCls, size, disabled } = this
       const enterButton = getComponentFromProp(this, 'enterButton')
-      if (!enterButton) {
-        return <Icon class={`${prefixCls}-icon`} type='search' key='searchIcon' />
-      }
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton
-      if (enterButtonAsElement.componentOptions && enterButtonAsElement.componentOptions.Ctor.extendOptions.__ANT_BUTTON) {
-        return cloneElement(enterButtonAsElement, {
+      let node
+      if (!enterButton) {
+        node = <Icon class={`${prefixCls}-icon`} type='search' key='searchIcon' />
+      } else if (enterButtonAsElement.tag === 'button' || (enterButtonAsElement.componentOptions && enterButtonAsElement.componentOptions.Ctor.extendOptions.__ANT_BUTTON)) {
+        node = cloneElement(enterButtonAsElement, {
           class: `${prefixCls}-button`,
           props: { size },
-          on: {
-            click: this.onSearch,
-          },
         })
-      } else if (enterButtonAsElement.tag === 'button') {
-        return cloneElement(enterButtonAsElement, {
-          on: {
-            click: this.onSearch,
-          },
-        })
+      } else {
+        node = (
+          <Button
+            class={`${prefixCls}-button`}
+            type='primary'
+            size={size}
+            disabled={disabled}
+            key='enterButton'
+          >
+            {enterButton === true ? <Icon type='search' /> : enterButton}
+          </Button>
+        )
       }
-      return (
-        <Button
-          class={`${prefixCls}-button`}
-          type='primary'
-          size={size}
-          onClick={this.onSearch}
-          key='enterButton'
-        >
-          {enterButton === true ? <Icon type='search' /> : enterButton}
-        </Button>
-      )
+      return cloneElement(node, {
+        on: {
+          click: this.onSearch,
+        },
+      })
     },
   },
   render () {
@@ -84,6 +81,8 @@ export default {
       [`${prefixCls}-enter-button`]: !!enterButton,
       [`${prefixCls}-${size}`]: !!size,
     })
+    const on = { ...this.$listeners }
+    delete on.search
     const inputProps = {
       props: {
         ...others,
@@ -93,8 +92,8 @@ export default {
       },
       attrs: this.$attrs,
       on: {
-        ...this.$listeners,
         pressEnter: this.onSearch,
+        ...on,
       },
     }
     return (

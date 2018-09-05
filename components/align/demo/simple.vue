@@ -15,10 +15,10 @@ export default {
   methods: {
     getTarget () {
       const ref = this.$refs.container
-      // if (!ref) {
-      // // parent ref not attached
-      //   ref = document.getElementById('container')
-      // }
+      if (!ref) {
+      // parent ref not attached
+        return document.getElementById('container')
+      }
       return ref
     },
 
@@ -29,9 +29,7 @@ export default {
     },
 
     forceAlign () {
-      this.setState({
-        align: Object.assign({}, this.$data.align),
-      })
+      this.$refs.align.forceAlign()
     },
   },
 
@@ -43,9 +41,13 @@ export default {
         }}
       >
         <p>
-          <button onClick={this.forceAlign}>force align</button>
+          <button onClick={this.forceAlign}>Force align</button>
           &nbsp;&nbsp;&nbsp;
-          <button onClick={this.toggleMonitor}>toggle monitor</button>
+          <label>
+            <input type='checkbox' checked={this.monitor} onInput={this.toggleMonitor} />
+            &nbsp;
+            Monitor window resize
+          </label>
         </p>
         <div
           ref='container'
@@ -57,6 +59,7 @@ export default {
           }}
         >
           <Align
+            ref='align'
             target={this.getTarget}
             monitorWindowResize={this.$data.monitor}
             align={this.$data.align}

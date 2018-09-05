@@ -9,6 +9,15 @@ exports[`renders ./components/button/demo/basic.md correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/button/demo/block.md correctly 1`] = `
+<div>
+  <button type="button" class="ant-btn ant-btn-primary ant-btn-block"><span>Primary</span></button>
+  <button type="button" class="ant-btn ant-btn-default ant-btn-block"><span>Default</span></button>
+  <button type="button" class="ant-btn ant-btn-dashed ant-btn-block"><span>Dashed</span></button>
+  <button type="button" class="ant-btn ant-btn-danger ant-btn-block"><span>danger</span></button>
+</div>
+`;
+
 exports[`renders ./components/button/demo/button-group.md correctly 1`] = `
 <div id="components-button-demo-button-group">
   <h4>Basic</h4>
@@ -56,11 +65,12 @@ exports[`renders ./components/button/demo/disabled.md correctly 1`] = `
   <button type="button" class="ant-btn ant-btn-default"><span>Default</span></button>
   <button type="button" disabled="disabled" class="ant-btn ant-btn-default"><span>Default(disabled)</span></button>
   <br>
-  <button type="button" class="ant-btn ant-btn-default"><span>Ghost</span></button>
-  <button type="button" disabled="disabled" class="ant-btn ant-btn-default"><span>Ghost(disabled)</span></button>
-  <br>
   <button type="button" class="ant-btn ant-btn-dashed"><span>Dashed</span></button>
   <button type="button" disabled="disabled" class="ant-btn ant-btn-dashed"><span>Dashed(disabled)</span></button>
+  <div style="padding: 8px 8px 0px 8px; background: rgb(190, 200, 200);">
+    <button type="button" class="ant-btn ant-btn-default ant-btn-background-ghost"><span>Ghost</span></button>
+    <button type="button" disabled="disabled" class="ant-btn ant-btn-default ant-btn-background-ghost"><span>Ghost(disabled)</span></button>
+  </div>
 </div>
 `;
 
@@ -131,10 +141,10 @@ exports[`renders ./components/button/demo/multiple.md correctly 1`] = `
 
 exports[`renders ./components/button/demo/size.md correctly 1`] = `
 <div>
-  <div class="ant-radio-group ant-radio-group-default">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Large</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Default</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input"><span class="ant-radio-button-inner"></span></span><span>Small</span></label>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default">
+    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label>
+    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label>
   </div>
   <br>
   <br>

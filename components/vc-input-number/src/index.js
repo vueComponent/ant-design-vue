@@ -1,8 +1,10 @@
+// based on rc-input-number 4.0.12
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { initDefaultProps, hasProp } from '../../_util/props-util'
 import classNames from 'classnames'
 import isNegativeZero from 'is-negative-zero'
+import KeyCode from '../../_util/KeyCode'
 import InputHandler from './InputHandler'
 
 function noop () {
@@ -46,7 +48,7 @@ const inputNumberProps = {
   // onKeyDown: PropTypes.func,
   // onKeyUp: PropTypes.func,
   prefixCls: PropTypes.string,
-  tabIndex: PropTypes.string,
+  tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   // onFocus: PropTypes.func,
@@ -143,36 +145,86 @@ export default {
   },
   methods: {
     updatedFunc () {
+      const inputElem = this.$refs.inputRef
+      // Restore cursor
+      try {
+      // Firefox set the input cursor after it get focused.
+      // This caused that if an input didn't init with the selection,
+      // set will cause cursor not correct when first focus.
+      // Safari will focus input if set selection. We need skip this.
+        if (this.cursorStart !== undefined && this.focused) {
+        // In most cases, the string after cursor is stable.
+        // We can move the cursor before it
+
+          if (
+          // If not match full str, try to match part of str
+            !this.partRestoreByAfter(this.cursorAfter)
+          ) {
+          // If not match any of then, let's just keep the position
+          // TODO: Logic should not reach here, need check if happens
+            let pos = this.cursorStart + 1
+
+            // If not have last string, just position to the end
+            if (!this.cursorAfter) {
+              pos = inputElem.value.length
+            } else if (this.lastKeyCode === KeyCode.BACKSPACE) {
+              pos = this.cursorStart - 1
+            } else if (this.lastKeyCode === KeyCode.DELETE) {
+              pos = this.cursorStart
+            }
+            this.fixCaret(pos, pos)
+          } else if (this.currentValue === inputElem.value) {
+          // Handle some special key code
+            switch (this.lastKeyCode) {
+              case KeyCode.BACKSPACE:
+                this.fixCaret(this.cursorStart - 1, this.cursorStart - 1)
+                break
+              case KeyCode.DELETE:
+                this.fixCaret(this.cursorStart + 1, this.cursorStart + 1)
+                break
+              default:
+            // Do nothing
+            }
+          }
+        }
+      } catch (e) {
+      // Do nothing
+      }
+      // Reset last key
+      this.lastKeyCode = null
+
+      // pressingUpOrDown is true means that someone just click up or down button
       if (!this.pressingUpOrDown) {
         return
       }
       if (this.focusOnUpDown && this.focused) {
-        const selectionRange = this.$refs.inputRef.setSelectionRange
-        if (selectionRange &&
-            typeof selectionRange === 'function' &&
-            this.start !== undefined &&
-            this.end !== undefined) {
-          this.$refs.inputRef.setSelectionRange(this.start, this.end)
-        } else {
+        if (document.activeElement !== inputElem) {
           this.focus()
         }
-        this.pressingUpOrDown = false
       }
+
+      this.pressingUpOrDown = false
     },
     onKeyDown (e, ...args) {
-      if (e.keyCode === 38) {
+      if (e.keyCode === KeyCode.UP) {
         const ratio = this.getRatio(e)
         this.up(e, ratio)
         this.stop()
-      } else if (e.keyCode === 40) {
+      } else if (e.keyCode === KeyCode.DOWN) {
         const ratio = this.getRatio(e)
         this.down(e, ratio)
         this.stop()
       }
+      // Trigger user key down
+      this.recordCursorPosition()
+      this.lastKeyCode = e.keyCode
       this.$emit('keydown', e, ...args)
     },
     onKeyUp (e, ...args) {
       this.stop()
+
+      this.recordCursorPosition()
+
       this.$emit('keyup', e, ...args)
     },
     onChange (e) {
@@ -296,8 +348,86 @@ export default {
       const precision = this.getMaxPrecision(currentValue, ratio)
       return Math.pow(10, precision)
     },
+    getInputDisplayValue () {
+      const { focused, inputValue, sValue } = this
+      let inputDisplayValue
+      if (focused) {
+        inputDisplayValue = inputValue
+      } else {
+        inputDisplayValue = this.toPrecisionAsStep(sValue)
+      }
+
+      if (inputDisplayValue === undefined || inputDisplayValue === null) {
+        inputDisplayValue = ''
+      }
+
+      return inputDisplayValue
+    },
+    recordCursorPosition () {
+      // Record position
+      try {
+        const inputElem = this.$refs.inputRef
+        this.cursorStart = inputElem.selectionStart
+        this.cursorEnd = inputElem.selectionEnd
+        this.currentValue = inputElem.value
+        this.cursorBefore = inputElem.value.substring(0, this.cursorStart)
+        this.cursorAfter = inputElem.value.substring(this.cursorEnd)
+      } catch (e) {
+        // Fix error in Chrome:
+        // Failed to read the 'selectionStart' property from 'HTMLInputElement'
+        // http://stackoverflow.com/q/21177489/3040605
+      }
+    },
+    fixCaret (start, end) {
+      if (start === undefined || end === undefined || !this.input || !this.input.value) {
+        return
+      }
+
+      try {
+        const inputElem = this.$refs.inputRef
+        const currentStart = inputElem.selectionStart
+        const currentEnd = inputElem.selectionEnd
+
+        if (start !== currentStart || end !== currentEnd) {
+          inputElem.setSelectionRange(start, end)
+        }
+      } catch (e) {
+        // Fix error in Chrome:
+        // Failed to read the 'selectionStart' property from 'HTMLInputElement'
+        // http://stackoverflow.com/q/21177489/3040605
+      }
+    },
+    restoreByAfter (str) {
+      if (str === undefined) return false
+
+      const fullStr = this.$refs.inputRef.value
+      const index = fullStr.lastIndexOf(str)
+
+      if (index === -1) return false
+
+      if (index + str.length === fullStr.length) {
+        this.fixCaret(index, index)
+
+        return true
+      }
+      return false
+    },
+    partRestoreByAfter (str) {
+      if (str === undefined) return false
+
+      // For loop from full str to the str with last char to map. e.g. 123
+      // -> 123
+      // -> 23
+      // -> 3
+      return Array.prototype.some.call(str, (_, start) => {
+        const partStr = str.substring(start)
+
+        return this.restoreByAfter(partStr)
+      })
+    },
     focus () {
       this.$refs.inputRef.focus()
+      this.recordCursorPosition()
     },
     blur () {
       this.$refs.inputRef.blur()

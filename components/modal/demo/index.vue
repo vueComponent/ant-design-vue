@@ -8,6 +8,7 @@ import Info from './info'
 import Locale from './locale'
 import Manual from './manual'
 import Position from './position'
+import ButtonProps from './button-props'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -26,7 +27,7 @@ the user's workflow, you can use \`Modal\` to create a new floating layer over t
 feedback or display information.
 Additionally, if you need show a simple confirmation dialog, you can use \`antd.Modal.confirm()\`,
 and so on.
-## Examples 
+## Examples
 `,
 }
 export default {
@@ -47,6 +48,7 @@ export default {
         <Locale/>
         <Manual/>
         <Position/>
+        <ButtonProps />
         <api>
           <CN slot='cn' />
           <US/>

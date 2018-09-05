@@ -4,21 +4,26 @@ import classNames from 'classnames'
 import defaultRequest from './request'
 import getUid from './uid'
 import attrAccept from './attr-accept'
+import traverseFileTree from './traverseFileTree'
 
 const upLoadPropTypes = {
   componentTag: PropTypes.string,
   // style: PropTypes.object,
   prefixCls: PropTypes.string,
-  action: PropTypes.string,
   name: PropTypes.string,
   // className: PropTypes.string,
   multiple: PropTypes.bool,
+  directory: PropTypes.bool,
   disabled: PropTypes.bool,
   accept: PropTypes.string,
   // children: PropTypes.any,
   // onStart: PropTypes.func,
   data: PropTypes.oneOfType([
     PropTypes.object,
+    PropTypes.func,
+  ]),
+  action: PropTypes.oneOfType([
+    PropTypes.string,
     PropTypes.func,
   ]),
   headers: PropTypes.object,
@@ -57,16 +62,22 @@ const AjaxUploader = {
       }
     },
     onFileDrop (e) {
+      e.preventDefault()
       if (e.type === 'dragover') {
-        e.preventDefault()
         return
       }
-      const files = Array.prototype.slice.call(e.dataTransfer.files).filter(
-        file => attrAccept(file, this.accept)
-      )
-      this.uploadFiles(files)
-
-      e.preventDefault()
+      if (this.directory) {
+        traverseFileTree(
+          e.dataTransfer.items,
+          this.uploadFiles,
+          _file => attrAccept(_file, this.accept)
+        )
+      } else {
+        const files = Array.prototype.slice.call(e.dataTransfer.files).filter(
+          file => attrAccept(file, this.accept)
+        )
+        this.uploadFiles(files)
+      }
     },
     uploadFiles (files) {
       const postFiles = Array.prototype.slice.call(files)
@@ -86,10 +97,9 @@ const AjaxUploader = {
         before.then((processedFile) => {
           const processedFileType = Object.prototype.toString.call(processedFile)
           if (processedFileType === '[object File]' || processedFileType === '[object Blob]') {
-            this.post(processedFile)
-          } else {
-            this.post(file)
+            return this.post(processedFile)
           }
+          return this.post(file)
         }).catch(e => {
           console && console.log(e); // eslint-disable-line
         })
@@ -105,28 +115,36 @@ const AjaxUploader = {
       if (typeof data === 'function') {
         data = data(file)
       }
-      const { uid } = file
-      const request = this.customRequest || defaultRequest
-      this.reqs[uid] = request({
-        action: this.action,
-        filename: this.name,
-        file,
-        data,
-        headers: this.headers,
-        withCredentials: this.withCredentials,
-        onProgress: e => {
-          this.$emit('progress', e, file)
-        },
-        onSuccess: (ret, xhr) => {
-          delete this.reqs[uid]
-          this.$emit('success', ret, file, xhr)
-        },
-        onError: (err, ret) => {
-          delete this.reqs[uid]
-          this.$emit('error', err, ret, file)
-        },
+      new Promise(resolve => {
+        const { action } = this
+        if (typeof action === 'function') {
+          return resolve(action(file))
+        }
+        resolve(action)
+      }).then(action => {
+        const { uid } = file
+        const request = this.customRequest || defaultRequest
+        this.reqs[uid] = request({
+          action,
+          filename: this.name,
+          file,
+          data,
+          headers: this.headers,
+          withCredentials: this.withCredentials,
+          onProgress: e => {
+            this.$emit('progress', e, file)
+          },
+          onSuccess: (ret, xhr) => {
+            delete this.reqs[uid]
+            this.$emit('success', ret, file, xhr)
+          },
+          onError: (err, ret) => {
+            delete this.reqs[uid]
+            this.$emit('error', err, ret, file)
+          },
+        })
+        this.$emit('start', file)
       })
-      this.$emit('start', file)
     },
     reset () {
       this.setState({
@@ -166,7 +184,7 @@ const AjaxUploader = {
   },
   render () {
     const {
-      componentTag: Tag, prefixCls, disabled, multiple, accept,
+      componentTag: Tag, prefixCls, disabled, multiple, accept, directory,
     } = this.$props
     const cls = classNames({
       [prefixCls]: true,
@@ -199,6 +217,8 @@ const AjaxUploader = {
           key={this.uid}
           style={{ display: 'none' }}
           accept={accept}
+          directory={directory ? 'directory' : null}
+          webkitdirectory={directory ? 'webkitdirectory' : null}
           multiple={multiple}
           onChange={this.onChange}
         />

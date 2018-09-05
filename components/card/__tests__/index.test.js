@@ -38,4 +38,12 @@ describe('Card', () => {
     wrapper.vm.$forceUpdate()
     expect(wrapper.findAll('.ant-card-wider-padding').length).toBe(0)
   })
+  it('should still have padding when card which set padding to 0 is loading', () => {
+    const wrapper = mount({
+      render () {
+        return <Card loading bodyStyle={{ padding: 0 }}>xxx</Card>
+      },
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

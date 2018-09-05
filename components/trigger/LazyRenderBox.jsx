@@ -8,20 +8,21 @@ export default {
   },
   render () {
     const { hiddenClassName, visible } = this.$props
-
+    let children = null
     if (hiddenClassName || !this.$slots.default || this.$slots.default.length > 1) {
-      let cls = ''
+      const cls = ''
       if (!visible && hiddenClassName) {
-        cls += ` ${hiddenClassName}`
+        // cls += ` ${hiddenClassName}`
       }
-      return (
+      children = (
         <div class={cls}>
           {this.$slots.default}
         </div>
       )
+    } else {
+      children = this.$slots.default[0]
     }
-
-    return this.$slots.default[0]
+    return children
   },
 }
 

@@ -8,14 +8,14 @@ import abstractTooltipProps from './abstractTooltipProps'
 
 const splitObject = (obj, keys) => {
   const picked = {}
-  const omited = { ...obj }
+  const omitted = { ...obj }
   keys.forEach(key => {
     if (obj && key in obj) {
       picked[key] = obj[key]
-      delete omited[key]
+      delete omitted[key]
     }
   })
-  return { picked, omited }
+  return { picked, omitted }
 }
 const props = abstractTooltipProps()
 export default {
@@ -82,7 +82,7 @@ export default {
       this.isHoverTrigger()) {
       // Pick some layout related style properties up to span
       // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
-        const { picked, omited } = splitObject(
+        const { picked, omitted } = splitObject(
           getStyle(ele),
           ['position', 'left', 'right', 'top', 'bottom', 'float', 'display', 'zIndex'],
         )
@@ -92,7 +92,7 @@ export default {
           cursor: 'not-allowed',
         }
         const buttonStyle = {
-          ...omited,
+          ...omitted,
           pointerEvents: 'none',
         }
         const spanCls = getClass(ele)
@@ -148,7 +148,7 @@ export default {
   },
 
   render (h) {
-    const { $props, $data, $slots } = this
+    const { $props, $data, $slots, $listeners } = this
     const { prefixCls, openClassName, getPopupContainer } = $props
     let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')
     children = children.length === 1 ? children[0] : children
@@ -173,6 +173,7 @@ export default {
       },
       ref: 'tooltip',
       on: {
+        ...$listeners,
         visibleChange: this.onVisibleChange,
         popupAlign: this.onPopupAlign,
       },

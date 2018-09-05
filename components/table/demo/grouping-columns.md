@@ -78,7 +78,7 @@ const columns = [{
   title: 'Gender',
   dataIndex: 'gender',
   key: 'gender',
-  width: 60,
+  width: 80,
   fixed: 'right',
 }];
 

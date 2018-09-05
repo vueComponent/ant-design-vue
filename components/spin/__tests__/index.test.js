@@ -30,4 +30,33 @@ describe('Spin', () => {
       })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render with delay when it\'s mounted with spinning=true and delay', async () => {
+    const props = {
+      propsData: {
+        delay: 500,
+        spinning: true,
+      },
+      async: false,
+    }
+    const wrapper = mount(Spin, props)
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-spin').classes().includes('ant-spin-spinning')).toEqual(false)
+    })
+  })
+
+  it('should be controlled by spinning', async () => {
+    const props = {
+      propsData: {
+        spinning: false,
+      },
+      async: false,
+    }
+    const wrapper = mount(Spin, props)
+    await asyncExpect(() => {
+      expect(wrapper.vm.stateSpinning).toBe(false)
+      wrapper.setProps({ spinning: true })
+      expect(wrapper.vm.stateSpinning).toBe(true)
+    })
+  })
 })

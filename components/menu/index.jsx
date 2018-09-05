@@ -27,6 +27,7 @@ export const menuProps = {
   inlineIndent: PropTypes.number.def(24),
   inlineCollapsed: PropTypes.bool,
   isRootMenu: PropTypes.bool.def(true),
+  focusable: PropTypes.bool.def(false),
 }
 
 export default {

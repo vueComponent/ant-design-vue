@@ -1,8 +1,8 @@
-
 import PropTypes from '../_util/vue-types'
-import MenuMixin from './MenuMixin'
+import { Provider, create } from '../_util/store'
+import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu'
 import BaseMixin from '../_util/BaseMixin'
-import hasProp from '../_util/props-util'
+import hasProp, { getOptionProps } from '../_util/props-util'
 import commonPropsType from './commonPropsType'
 
 const Menu = {
@@ -11,41 +11,54 @@ const Menu = {
     ...commonPropsType,
     selectable: PropTypes.bool.def(true),
   },
-  mixins: [BaseMixin, MenuMixin],
+  mixins: [BaseMixin],
 
   data () {
-    const props = this.$props
-    let sSelectedKeys = props.defaultSelectedKeys
-    let sOpenKeys = props.defaultOpenKeys
-    if (hasProp(this, 'selectedKeys')) {
-      sSelectedKeys = props.selectedKeys || []
+    const props = getOptionProps(this)
+    let selectedKeys = props.defaultSelectedKeys
+    let openKeys = props.defaultOpenKeys
+    if ('selectedKeys' in props) {
+      selectedKeys = props.selectedKeys || []
     }
-    if (hasProp(this, 'openKeys')) {
-      sOpenKeys = props.openKeys || []
+    if ('openKeys' in props) {
+      openKeys = props.openKeys || []
     }
 
-    // this.isRootMenu = true
-    return {
-      sSelectedKeys,
-      sOpenKeys,
-    }
+    this.store = create({
+      selectedKeys,
+      openKeys,
+      activeKey: { '0-menu-': getActiveKey({ ...props, children: this.$slots.default || [] }, props.activeKey) },
+    })
+
+    // this.isRootMenu = true // 声明在props上
+    return {}
   },
   watch: {
-    '$props': {
-      handler: function (nextProps) {
-        if (hasProp(this, 'selectedKeys')) {
-          this.setState({
-            sSelectedKeys: nextProps.selectedKeys || [],
-          })
-        }
-        if (hasProp(this, 'openKeys')) {
-          this.setState({
-            sOpenKeys: nextProps.openKeys || [],
-          })
-        }
-      },
-      deep: true,
+    selectedKeys (val) {
+      this.store.setState({
+        selectedKeys: val || [],
+      })
     },
+    openKeys (val) {
+      this.store.setState({
+        openKeys: val || [],
+      })
+    },
+    // '$props': {
+    //   handler: function (nextProps) {
+    //     if (hasProp(this, 'selectedKeys')) {
+    //       this.setState({
+    //         sSelectedKeys: nextProps.selectedKeys || [],
+    //       })
+    //     }
+    //     if (hasProp(this, 'openKeys')) {
+    //       this.setState({
+    //         sOpenKeys: nextProps.openKeys || [],
+    //       })
+    //     }
+    //   },
+    //   deep: true,
+    // },
   },
   methods: {
     // onDestroy (key) {
@@ -66,21 +79,21 @@ const Menu = {
       const props = this.$props
       if (props.selectable) {
       // root menu
-        let sSelectedKeys = this.$data.sSelectedKeys
+        let selectedKeys = this.store.getState().selectedKeys
         const selectedKey = selectInfo.key
         if (props.multiple) {
-          sSelectedKeys = sSelectedKeys.concat([selectedKey])
+          selectedKeys = selectedKeys.concat([selectedKey])
         } else {
-          sSelectedKeys = [selectedKey]
+          selectedKeys = [selectedKey]
         }
         if (!hasProp(this, 'selectedKeys')) {
-          this.setState({
-            sSelectedKeys,
+          this.store.setState({
+            selectedKeys,
           })
         }
         this.__emit('select', {
           ...selectInfo,
-          selectedKeys: sSelectedKeys,
+          selectedKeys: selectedKeys,
         })
       }
     },
@@ -88,22 +101,27 @@ const Menu = {
     onClick (e) {
       this.__emit('click', e)
     },
-
+    // onKeyDown needs to be exposed as a instance method
+    // e.g., in rc-select, we need to navigate menu item while
+    // current active item is rc-select input box rather than the menu itself
+    onKeyDown (e, callback) {
+      this.$refs.innerMenu.getWrappedInstance().onKeyDown(e, callback)
+    },
     onOpenChange (event) {
-      const sOpenKeys = this.$data.sOpenKeys.concat()
+      const openKeys = this.store.getState().openKeys.concat()
       let changed = false
       const processSingle = (e) => {
         let oneChanged = false
         if (e.open) {
-          oneChanged = sOpenKeys.indexOf(e.key) === -1
+          oneChanged = openKeys.indexOf(e.key) === -1
           if (oneChanged) {
-            sOpenKeys.push(e.key)
+            openKeys.push(e.key)
           }
         } else {
-          const index = sOpenKeys.indexOf(e.key)
+          const index = openKeys.indexOf(e.key)
           oneChanged = index !== -1
           if (oneChanged) {
-            sOpenKeys.splice(index, 1)
+            openKeys.splice(index, 1)
           }
         }
         changed = changed || oneChanged
@@ -116,29 +134,29 @@ const Menu = {
       }
       if (changed) {
         if (!hasProp(this, 'openKeys')) {
-          this.setState({ sOpenKeys })
+          this.store.setState({ openKeys })
         }
-        this.__emit('openChange', sOpenKeys)
+        this.__emit('openChange', openKeys)
       }
     },
 
     onDeselect (selectInfo) {
       const props = this.$props
       if (props.selectable) {
-        const sSelectedKeys = this.$data.sSelectedKeys.concat()
+        const selectedKeys = this.store.getState().selectedKeys.concat()
         const selectedKey = selectInfo.key
-        const index = sSelectedKeys.indexOf(selectedKey)
+        const index = selectedKeys.indexOf(selectedKey)
         if (index !== -1) {
-          sSelectedKeys.splice(index, 1)
+          selectedKeys.splice(index, 1)
         }
         if (!hasProp(this, 'selectedKeys')) {
-          this.setState({
-            sSelectedKeys,
+          this.store.setState({
+            selectedKeys,
           })
         }
         this.__emit('deselect', {
           ...selectInfo,
-          selectedKeys: sSelectedKeys,
+          selectedKeys: selectedKeys,
         })
       }
     },
@@ -153,40 +171,60 @@ const Menu = {
       return transitionName
     },
 
-    isInlineMode () {
-      return this.$props.mode === 'inline'
-    },
+  //   isInlineMode () {
+  //     return this.$props.mode === 'inline'
+  //   },
 
-    lastOpenSubMenu () {
-      let lastOpen = []
-      const { sOpenKeys } = this.$data
-      if (sOpenKeys.length) {
-        lastOpen = this.getFlatInstanceArray().filter((c) => {
-          return c && sOpenKeys.indexOf(c.eventKey) !== -1
-        })
-      }
-      return lastOpen[0]
-    },
+  //   lastOpenSubMenu () {
+  //     let lastOpen = []
+  //     const { sOpenKeys } = this.$data
+  //     if (sOpenKeys.length) {
+  //       lastOpen = this.getFlatInstanceArray().filter((c) => {
+  //         return c && sOpenKeys.indexOf(c.eventKey) !== -1
+  //       })
+  //     }
+  //     return lastOpen[0]
+  //   },
 
-    renderMenuItem (c, i, subIndex) {
-      if (!c) {
-        return null
-      }
-      const state = this.$data
-      const extraProps = {
-        openKeys: state.sOpenKeys,
-        selectedKeys: state.sSelectedKeys,
-        triggerSubMenuAction: this.$props.triggerSubMenuAction,
-        isRootMenu: this.isRootMenu,
-      }
-      return this.renderCommonMenuItem(c, i, subIndex, extraProps)
-    },
+  //   renderMenuItem (c, i, subIndex) {
+  //     if (!c) {
+  //       return null
+  //     }
+  //     const state = this.$data
+  //     const extraProps = {
+  //       openKeys: state.sOpenKeys,
+  //       selectedKeys: state.sSelectedKeys,
+  //       triggerSubMenuAction: this.$props.triggerSubMenuAction,
+  //       isRootMenu: this.isRootMenu,
+  //     }
+  //     return this.renderCommonMenuItem(c, i, subIndex, extraProps)
+  //   },
   },
 
   render () {
-    const props = { ...this.$props }
-    props.class = ` ${props.prefixCls}-root`
-    return this.renderRoot(props, this.$slots.default)
+    const props = getOptionProps(this)
+    const subPopupMenuProps = {
+      props: {
+        ...props,
+        openTransitionName: this.getOpenTransitionName(),
+        parentMenu: this,
+        children: this.$slots.default || [],
+        __propsSymbol__: Symbol(),
+      },
+      class: `${props.prefixCls}-root`,
+      on: {
+        click: this.onClick,
+        openChange: this.onOpenChange,
+        deselect: this.onDeselect,
+        select: this.onSelect,
+      },
+      ref: 'innerMenu',
+    }
+    return (
+      <Provider store={this.store}>
+        <SubPopupMenu {...subPopupMenuProps} />
+      </Provider>
+    )
   },
 }
 export default Menu

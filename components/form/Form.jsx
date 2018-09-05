@@ -11,6 +11,7 @@ export const FormCreateOption = {
   onFieldsChange: PropTypes.func,
   onValuesChange: PropTypes.func,
   mapPropsToFields: PropTypes.func,
+  validateMessages: PropTypes.any,
   withRef: PropTypes.bool,
 }
 

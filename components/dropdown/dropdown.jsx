@@ -40,24 +40,28 @@ const Dropdown = {
       disabled,
     })
     const overlay = this.overlay || $slots.overlay && $slots.overlay[0]
-    // menu cannot be selectable in dropdown defaultly, but multiple type can be selectable
+    // menu cannot be selectable in dropdown defaultly
+    // menu should be focusable in dropdown defaultly
     const overlayProps = overlay && getPropsData(overlay)
-    let selectable = false
-    if (overlayProps) {
-      selectable = !!overlayProps.selectable || overlayProps.multiple
-    }
-    const fixedModeOverlay = overlay && cloneElement(overlay, {
+    const { selectable = false, focusable = true } = overlayProps || {}
+    const fixedModeOverlay = overlay && overlay.componentOptions ? cloneElement(overlay, {
       props: {
         mode: 'vertical',
         selectable,
-        isRootMenu: false,
+        focusable,
       },
-    })
+    }) : overlay
+    const triggerActions = disabled ? [] : trigger
+    let alignPoint
+    if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
+      alignPoint = true
+    }
     const dropdownProps = {
       props: {
+        alignPoint,
         ...getOptionProps(this),
         transitionName: this.getTransitionName(),
-        trigger: disabled ? [] : trigger,
+        trigger: triggerActions,
       },
       on: $listeners,
     }

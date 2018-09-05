@@ -11,7 +11,7 @@ export default {
   render () {
     const columns = [
       { title: 'title1', dataIndex: 'a',
-        className: 'a',
+        class: 'a',
         key: 'a', width: 100 },
       { id: '123', title: 'title2', dataIndex: 'b',
         className: 'b',
@@ -22,7 +22,7 @@ export default {
       {
         title: 'Operations', dataIndex: '',
         className: 'd',
-        key: 'd', customRender () {
+        key: 'd', customRender: () => {
           return <a href='#'>Operations</a>
         },
       },

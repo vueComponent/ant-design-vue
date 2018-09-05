@@ -9,7 +9,7 @@ import {
   getFullKeyList, getPosition, getDragNodesKeys,
   calcExpandedKeys, calcSelectedKeys,
   calcCheckedKeys, calcDropPosition,
-  arrAdd, arrDel, posToArr,
+  arrAdd, arrDel, posToArr, mapChildren,
 } from './util'
 
 /**
@@ -39,15 +39,18 @@ const Tree = {
     expandedKeys: PropTypes.arrayOf(PropTypes.string),
     defaultCheckedKeys: PropTypes.arrayOf(PropTypes.string),
     checkedKeys: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.string),
+      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       PropTypes.object,
     ]),
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
     selectedKeys: PropTypes.arrayOf(PropTypes.string),
+    // onClick: PropTypes.func,
+    // onDoubleClick: PropTypes.func,
     // onExpand: PropTypes.func,
     // onCheck: PropTypes.func,
     // onSelect: PropTypes.func,
     loadData: PropTypes.func,
+    loadedKeys: PropTypes.arrayOf(PropTypes.string),
     // onMouseEnter: PropTypes.func,
     // onMouseLeave: PropTypes.func,
     // onRightClick: PropTypes.func,
@@ -124,6 +127,8 @@ const Tree = {
       dragOverNodeKey: '',
       dropPosition: null,
       dragNodesKeys: [],
+      sLoadedKeys: [],
+      sLoadingKeys: [],
     }
   },
   provide () {
@@ -151,6 +156,9 @@ const Tree = {
       const { checkedKeys = [], halfCheckedKeys = [] } = calcCheckedKeys(val, this.$props, this.$slots.default) || {}
       this.sCheckedKeys = checkedKeys
       this.sHalfCheckedKeys = halfCheckedKeys
+    },
+    loadedKeys (val) {
+      this.sLoadedKeys = val
     },
   },
 
@@ -183,6 +191,8 @@ const Tree = {
     onNodeDragEnter (event, node) {
       const { sExpandedKeys } = this
       const { pos, eventKey } = node
+
+      if (!this.dragNode) return
 
       const dropPosition = calcDropPosition(event, node)
 
@@ -254,7 +264,7 @@ const Tree = {
       this.__emit('dragend', { event, node })
     },
     onNodeDrop (event, node) {
-      const { dragNodesKeys, dropPosition } = this
+      const { dragNodesKeys = [], dropPosition } = this
 
       const { eventKey, pos } = node
 
@@ -282,6 +292,14 @@ const Tree = {
         dropResult.dropToGap = true
       }
       this.__emit('drop', dropResult)
+    },
+
+    onNodeClick (e, treeNode) {
+      this.__emit('click', e, treeNode)
+    },
+
+    onNodeDoubleClick (e, treeNode) {
+      this.__emit('doubleclick', e, treeNode)
     },
 
     onNodeSelect (e, treeNode) {
@@ -316,8 +334,41 @@ const Tree = {
         selected: targetSelected,
         node: treeNode,
         selectedNodes,
+        nativeEvent: e.nativeEvent,
       }
       this.__emit('select', selectedKeys, eventObj)
+    },
+
+    onNodeLoad (treeNode) {
+      const { loadData } = this.$props
+      const { sLoadedKeys = [], sLoadingKeys = [] } = this.$data
+      const { eventKey } = getOptionProps(treeNode)
+
+      if (!loadData || sLoadedKeys.indexOf(eventKey) !== -1 || sLoadingKeys.indexOf(eventKey) !== -1) {
+        return null
+      }
+
+      this.setState({
+        sLoadingKeys: arrAdd(sLoadingKeys, eventKey),
+      })
+      const promise = loadData(treeNode)
+      promise.then(() => {
+        const newLoadedKeys = arrAdd(this.sLoadedKeys, eventKey)
+        this.setUncontrolledState({
+          sLoadedKeys: newLoadedKeys,
+        })
+        this.setState({
+          sLoadingKeys: arrDel(this.sLoadingKeys, eventKey),
+        })
+
+        const eventObj = {
+          event: 'load',
+          node: treeNode,
+        }
+        this.__emit('load', newLoadedKeys, eventObj)
+      })
+
+      return promise
     },
 
     /**
@@ -351,7 +402,7 @@ const Tree = {
      * When top `onCheckConductFinished` called, will execute all batch update.
      * And trigger `onCheck` event.
      */
-    onCheckConductFinished () {
+    onCheckConductFinished (e) {
       const { sCheckedKeys, sHalfCheckedKeys, checkStrictly, $slots: { default: children }} = this
 
       // Use map to optimize update speed
@@ -380,6 +431,7 @@ const Tree = {
         event: 'check',
         node: this.checkedBatch.treeNode,
         checked: this.checkedBatch.checked,
+        nativeEvent: e.nativeEvent,
       }
 
       if (checkStrictly) {
@@ -439,14 +491,19 @@ const Tree = {
       }
 
       this.setUncontrolledState({ expandedKeys })
-      this.__emit('expand', expandedKeys, { node: treeNode, expanded: targetExpanded })
+      this.__emit('expand', expandedKeys, {
+        node: treeNode,
+        expanded: targetExpanded,
+        nativeEvent: e.nativeEvent,
+      })
 
       // Async Load data
       if (targetExpanded && loadData) {
-        return loadData(treeNode).then(() => {
-          // [Legacy] Refresh logic
+        const loadPromise = this.onNodeLoad(treeNode)
+        return loadPromise ? loadPromise.then(() => {
+        // [Legacy] Refresh logic
           this.setUncontrolledState({ expandedKeys })
-        })
+        }) : null
       }
 
       return null
@@ -500,7 +557,9 @@ const Tree = {
         newState[key] = state[name]
       })
 
-      this.setState(needSync ? newState : null)
+      if (needSync) {
+        this.setState(newState)
+      }
     },
 
     isKeyChecked  (key) {
@@ -515,6 +574,7 @@ const Tree = {
     renderTreeNode  (child, index, level = 0) {
       const {
         sExpandedKeys = [], sSelectedKeys = [], sHalfCheckedKeys = [],
+        sLoadedKeys = [], sLoadingKeys = [],
         dragOverNodeKey, dropPosition,
       } = this
       const pos = getPosition(level, index)
@@ -522,9 +582,12 @@ const Tree = {
 
       return cloneElement(child, {
         props: {
+          key,
           eventKey: key,
           expanded: sExpandedKeys.indexOf(key) !== -1,
           selected: sSelectedKeys.indexOf(key) !== -1,
+          loaded: sLoadedKeys.indexOf(key) !== -1,
+          loading: sLoadingKeys.indexOf(key) !== -1,
           checked: this.isKeyChecked(key),
           halfChecked: sHalfCheckedKeys.indexOf(key) !== -1,
           pos,
@@ -558,7 +621,9 @@ const Tree = {
         tabIndex={focusable ? '0' : null}
         onKeydown={focusable ? this.onKeydown : () => {}}
       >
-        {children.map((child, index) => this.renderTreeNode(child, index))}
+        {mapChildren(children, (node, index) => (
+          this.renderTreeNode(node, index)
+        ))}
       </ul>
     )
   },

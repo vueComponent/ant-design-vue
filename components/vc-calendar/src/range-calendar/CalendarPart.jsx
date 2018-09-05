@@ -25,6 +25,7 @@ const CalendarPart = {
     disabledDate: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
+    disabledMonth: PropTypes.any,
     mode: PropTypes.any,
     // onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,

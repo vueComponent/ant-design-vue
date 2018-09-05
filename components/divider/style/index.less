@@ -22,8 +22,12 @@
     height: 1px;
     width: 100%;
     margin: 24px 0;
+    clear: both;
   }
-  &-horizontal&-with-text {
+
+  &-horizontal&-with-text,
+  &-horizontal&-with-text-left,
+  &-horizontal&-with-text-right {
     display: table;
     white-space: nowrap;
     text-align: center;
@@ -32,7 +36,6 @@
     color: @heading-color;
     font-size: @font-size-lg;
     margin: 16px 0;
-
     &:before,
     &:after {
       content: '';
@@ -44,82 +47,49 @@
       transform: translateY(50%);
     }
   }
-  &-inner-text {
-    display: inline-block;
-    padding: 0 24px;
-  }
-  &-horizontal&-with-text-left {
-    display: table;
-    white-space: nowrap;
-    text-align: center;
-    background: transparent;
-    font-weight: 500;
-    color: @heading-color;
-    font-size: @font-size-base;
-    margin: 16px 0;
 
-    &:before {
-      content: '';
-      display: table-cell;
-      position: relative;
-      top: 50%;
-      width: 5%;
-      border-top: 1px solid @border-color-split;
-      transform: translateY(50%);
-    }
-    &:after {
-      content: '';
-      display: table-cell;
-      position: relative;
-      top: 50%;
-      width: 95%;
-      border-top: 1px solid @border-color-split;
-      transform: translateY(50%);
-    }
-    &-inner-text {
+  &-horizontal&-with-text-left,
+  &-horizontal&-with-text-right {
+    .@{divider-prefix-cls}-inner-text {
       display: inline-block;
       padding: 0 10px;
+    }
+  }
+
+  &-horizontal&-with-text-left {
+    &:before {
+      top: 50%;
+      width: 5%;
+    }
+    &:after {
+      top: 50%;
+      width: 95%;
     }
   }
 
   &-horizontal&-with-text-right {
-    display: table;
-    white-space: nowrap;
-    text-align: center;
-    background: transparent;
-    font-weight: 500;
-    color: @heading-color;
-    font-size: @font-size-base;
-    margin: 16px 0;
-
     &:before {
-      content: '';
-      display: table-cell;
-      position: relative;
       top: 50%;
       width: 95%;
-      border-top: 1px solid @border-color-split;
-      transform: translateY(50%);
     }
     &:after {
-      content: '';
-      display: table-cell;
-      position: relative;
       top: 50%;
       width: 5%;
-      border-top: 1px solid @border-color-split;
-      transform: translateY(50%);
-    }
-    &-inner-text {
-      display: inline-block;
-      padding: 0 10px;
     }
   }
+
+  &-inner-text {
+    display: inline-block;
+    padding: 0 24px;
+  }
+
   &-dashed {
     background: none;
     border-top: 1px dashed @border-color-split;
   }
-  &-horizontal&-with-text&-dashed {
+  &-horizontal&-with-text&-dashed,
+  &-horizontal&-with-text-left&-dashed,
+  &-horizontal&-with-text-right&-dashed {
     border-top: 0;
     &:before,
     &:after {

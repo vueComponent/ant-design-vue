@@ -1,20 +1,30 @@
 
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import isCssAnimationSupported from '../_util/isCssAnimationSupported'
 import { filterEmpty, initDefaultProps, isValidElement, getComponentFromProp } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement } from '../_util/vnode'
 
+export const SpinSize = PropTypes.oneOf(['small', 'default', 'large'])
+
 export const SpinProps = () => ({
   prefixCls: PropTypes.string,
   spinning: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'default', 'large']),
+  size: SpinSize,
   wrapperClassName: PropTypes.string,
   tip: PropTypes.string,
   delay: PropTypes.number,
   indicator: PropTypes.any,
 })
+
+// Render indicator
+let defaultIndicator
+
+export function setDefaultIndicator (content) {
+  defaultIndicator = typeof content.indicator === 'function' ? content.indicator : (h) => {
+    return <content.indicator />
+  }
+}
 
 export default {
   name: 'ASpin',
@@ -31,7 +41,6 @@ export default {
       stateSpinning: spinning,
       debounceTimeout: null,
       delayTimeout: null,
-      notCssAnimationSupported: false,
     }
   },
   methods: {
@@ -41,14 +50,41 @@ export default {
       }
       return null
     },
+    renderIndicator (h, props) {
+      // const h = this.$createElement
+      const { prefixCls } = props
+      const dotClassName = `${prefixCls}-dot`
+      let indicator = getComponentFromProp(this, 'indicator')
+      if (Array.isArray(indicator)) {
+        indicator = filterEmpty(indicator)
+        indicator = indicator.length === 1 ? indicator[0] : indicator
+      }
+      if (isValidElement(indicator)) {
+        return cloneElement(indicator, { class: dotClassName })
+      }
+
+      if (defaultIndicator && isValidElement(defaultIndicator(h))) {
+        return cloneElement(defaultIndicator(h), { class: dotClassName })
+      }
+
+      return (
+        <span class={`${dotClassName} ${prefixCls}-dot-spin`}>
+          <i />
+          <i />
+          <i />
+          <i />
+        </span>
+      )
+    },
   },
   mounted () {
-    if (!isCssAnimationSupported()) {
-      // Show text in IE9
-      this.setState({
-        notCssAnimationSupported: true,
-      })
-    }
+    this.$nextTick(() => {
+      const { spinning, delay } = this
+      if (spinning && delay && !isNaN(Number(delay))) {
+        this.setState({ stateSpinning: false })
+        this.delayTimeout = window.setTimeout(() => this.setState({ stateSpinning: spinning }), delay)
+      }
+    })
   },
   beforeDestroy () {
     if (this.debounceTimeout) {
@@ -82,38 +118,20 @@ export default {
       }
     },
   },
-  render () {
+  render (h) {
     const { size, prefixCls, tip, wrapperClassName, ...restProps } = this.$props
-    const { notCssAnimationSupported, stateSpinning } = this
-    const dotClassName = `${prefixCls}-dot`
+    const { stateSpinning } = this
     const spinClassName = {
       [prefixCls]: true,
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-spinning`]: stateSpinning,
-      [`${prefixCls}-show-text`]: !!tip || notCssAnimationSupported,
+      [`${prefixCls}-show-text`]: !!tip,
     }
-    let indicator = getComponentFromProp(this, 'indicator')
-    if (Array.isArray(indicator)) {
-      indicator = filterEmpty(indicator)
-      indicator = indicator.length === 1 ? indicator[0] : indicator
-    }
-    let spinIndicator = null
-    if (isValidElement(indicator)) {
-      spinIndicator = cloneElement(indicator, { class: dotClassName })
-    }
-    spinIndicator = spinIndicator || (
-      <span class={`${dotClassName} ${prefixCls}-dot-spin`}>
-        <i />
-        <i />
-        <i />
-        <i />
-      </span>
-    )
 
     const spinElement = (
       <div {...restProps} class={spinClassName} >
-        {spinIndicator}
+        {this.renderIndicator(h, this.$props)}
         {tip ? <div class={`${prefixCls}-text`}>{tip}</div> : null}
       </div>
     )

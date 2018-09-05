@@ -5,7 +5,7 @@ export default {
   name: 'ACheckboxGroup',
   props: {
     prefixCls: {
-      default: 'ant-checkbox-group',
+      default: 'ant-checkbox',
       type: String,
     },
     defaultValue: {
@@ -36,26 +36,12 @@ export default {
       sValue: value || defaultValue || [],
     }
   },
-  methods: {
-    handleChange (event) {
-      const target = event.target
-      const { value: targetValue, checked } = target
-      const { sValue } = this
-      let newVal = []
-      if (checked) {
-        newVal = [...sValue, targetValue]
-      } else {
-        newVal = [...sValue]
-        const index = newVal.indexOf(targetValue)
-        index >= 0 && newVal.splice(index, 1)
-      }
-      newVal = [...new Set(newVal)]
-      if (!hasProp(this, 'value')) {
-        this.sValue = newVal
-      }
-      this.$emit('input', newVal)
-      this.$emit('change', newVal)
+  watch: {
+    value (val) {
+      this.sValue = val
     },
+  },
+  methods: {
     getOptions () {
       const { options } = this.$props
       return options.map(option => {
@@ -87,30 +73,27 @@ export default {
     const { $props: props, $data: state, $slots } = this
     const { prefixCls, options } = props
     let children = $slots.default
+    const groupPrefixCls = `${prefixCls}-group`
     if (options && options.length > 0) {
       children = this.getOptions().map(option => (
         <Checkbox
-          key={option.value}
+          prefixCls={prefixCls}
+          key={option.value.toString()}
           disabled={'disabled' in option ? option.disabled : props.disabled}
           value={option.value}
           checked={state.sValue.indexOf(option.value) !== -1}
           onChange={() => this.toggleOption(option)}
-          class={`${prefixCls}-item`}
+          class={`${groupPrefixCls}-item`}
         >
           {option.label}
         </Checkbox>
       ))
     }
     return (
-      <div class={prefixCls}>
+      <div class={groupPrefixCls}>
         {children}
       </div>
     )
-  },
-  watch: {
-    value (val) {
-      this.sValue = val
-    },
   },
 }
 

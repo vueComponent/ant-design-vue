@@ -14,6 +14,8 @@ export default {
     // onSelect: PropTypes.func,
     visible: PropTypes.bool.def(false),
     dropdownMenuColumnStyle: PropTypes.object,
+    defaultFieldNames: PropTypes.object,
+    fieldNames: PropTypes.object,
   },
   data () {
     this.menuItems = {}
@@ -34,6 +36,11 @@ export default {
     },
   },
   methods: {
+    getFieldName (name) {
+      const { fieldNames, defaultFieldNames } = this.$props
+      // 防止只设置单个属性的名字
+      return fieldNames[name] || defaultFieldNames[name]
+    },
     getOption (option, menuIndex) {
       const { prefixCls, expandTrigger } = this
       const onSelect = (e) => {
@@ -45,10 +52,11 @@ export default {
         on: {
           click: onSelect,
         },
-        key: option.value.toString(),
+        key: option[this.getFieldName('value')],
       }
       let menuItemCls = `${prefixCls}-menu-item`
-      const hasChildren = option.children && option.children.length > 0
+      const hasChildren = option[this.getFieldName('children')] &&
+      option[this.getFieldName('children')].length > 0
       if (hasChildren || option.isLeaf === false) {
         menuItemCls += ` ${prefixCls}-menu-item-expand`
       }
@@ -72,14 +80,14 @@ export default {
       let title = ''
       if (option.title) {
         title = option.title
-      } else if (typeof option.label === 'string') {
-        title = option.label
+      } else if (typeof option[this.getFieldName('label')] === 'string') {
+        title = option[this.getFieldName('label')]
       }
       expandProps.attrs.title = title
       expandProps.class = menuItemCls
       return (
         <li {...expandProps}>
-          {option.label}
+          {option[this.getFieldName('label')]}
         </li>
       )
     },
@@ -87,13 +95,15 @@ export default {
     getActiveOptions (values) {
       const activeValue = values || this.activeValue
       const options = this.options
-      return arrayTreeFilter(options, (o, level) => o.value === activeValue[level])
+      return arrayTreeFilter(options,
+        (o, level) => o[this.getFieldName('value')] === activeValue[level],
+        { childrenKeyName: this.getFieldName('children') })
     },
 
     getShowOptions () {
       const { options } = this
       const result = this.getActiveOptions()
-        .map(activeOption => activeOption.children)
+        .map(activeOption => activeOption[this.getFieldName('children')])
         .filter(activeOption => !!activeOption)
       result.unshift(options)
       return result
@@ -126,7 +136,7 @@ export default {
 
     isActiveOption (option, menuIndex) {
       const { activeValue = [] } = this
-      return activeValue[menuIndex] === option.value
+      return activeValue[menuIndex] === option[this.getFieldName('value')]
     },
 
     getMenuItemRef (index) {

@@ -64,6 +64,7 @@ export default {
     changeOnSelect: PropTypes.bool,
     // onKeyDown: PropTypes.func,
     expandTrigger: PropTypes.string.def('click'),
+    fieldNames: PropTypes.object.def({ label: 'label', value: 'value', children: 'children' }),
   },
   mixins: [BaseMixin],
   model: {
@@ -78,6 +79,9 @@ export default {
     } else if (hasProp(this, 'defaultValue')) {
       initialValue = defaultValue || []
     }
+    // warning(!('filedNames' in props),
+    //   '`filedNames` of Cascader is a typo usage and deprecated, please use `fieldNames` intead.');
+
     return {
       sPopupVisible: popupVisible,
       sActiveValue: initialValue,
@@ -109,23 +113,34 @@ export default {
     getPopupDOMNode () {
       return this.$refs.trigger.getPopupDomNode()
     },
+    getFieldName (name) {
+      const { defaultFieldNames, fieldNames } = this
+      return fieldNames[name] || defaultFieldNames[name]
+    },
+    getFieldNames () {
+      return this.fieldNames
+    },
     getCurrentLevelOptions () {
       const { options, sActiveValue = [] } = this
-      const result = arrayTreeFilter(options, (o, level) => o.value === sActiveValue[level])
+      const result = arrayTreeFilter(options,
+        (o, level) => o[this.getFieldName('value')] === sActiveValue[level],
+        { childrenKeyName: this.getFieldName('children') })
       if (result[result.length - 2]) {
-        return result[result.length - 2].children
+        return result[result.length - 2][this.getFieldName('children')]
       }
       return [...options].filter(o => !o.disabled)
     },
     getActiveOptions (activeValue) {
-      return arrayTreeFilter(this.options, (o, level) => o.value === activeValue[level])
+      return arrayTreeFilter(this.options,
+        (o, level) => o[this.getFieldName('value')] === activeValue[level],
+        { childrenKeyName: this.getFieldName('children') })
     },
     setPopupVisible (popupVisible) {
       if (!hasProp(this, 'popupVisible')) {
         this.setState({ sPopupVisible: popupVisible })
       }
       // sync activeValue with value when panel open
-      if (popupVisible && !this.sVisible) {
+      if (popupVisible && !this.sPopupVisible) {
         this.setState({
           sActiveValue: this.sValue,
         })
@@ -134,7 +149,7 @@ export default {
     },
     handleChange (options, setProps, e) {
       if (e.type !== 'keydown' || e.keyCode === KeyCode.ENTER) {
-        this.__emit('change', options.map(o => o.value), options)
+        this.__emit('change', options.map(o => o[this.getFieldName('value')]), options)
         this.setPopupVisible(setProps.visible)
       }
     },
@@ -153,9 +168,9 @@ export default {
       }
       let { sActiveValue } = this
       sActiveValue = sActiveValue.slice(0, menuIndex + 1)
-      sActiveValue[menuIndex] = targetOption.value
+      sActiveValue[menuIndex] = targetOption[this.getFieldName('value')]
       const activeOptions = this.getActiveOptions(sActiveValue)
-      if (targetOption.isLeaf === false && !targetOption.children && loadData) {
+      if (targetOption.isLeaf === false && !targetOption[this.getFieldName('children')] && loadData) {
         if (changeOnSelect) {
           this.handleChange(activeOptions, { visible: true }, e)
         }
@@ -164,7 +179,8 @@ export default {
         return
       }
       const newState = {}
-      if (!targetOption.children || !targetOption.children.length) {
+      if (!targetOption[this.getFieldName('children')] ||
+      !targetOption[this.getFieldName('children')].length) {
         this.handleChange(activeOptions, { visible: false }, e)
         // set value to activeValue when select leaf option
         newState.sValue = sActiveValue
@@ -201,7 +217,9 @@ export default {
       const activeValue = [...this.sActiveValue]
       const currentLevel = activeValue.length - 1 < 0 ? 0 : activeValue.length - 1
       const currentOptions = this.getCurrentLevelOptions()
-      const currentIndex = currentOptions.map(o => o.value).indexOf(activeValue[currentLevel])
+      const currentIndex = currentOptions
+        .map(o => o[this.getFieldName('value')])
+        .indexOf(activeValue[currentLevel])
       if (e.keyCode !== KeyCode.DOWN &&
         e.keyCode !== KeyCode.UP &&
         e.keyCode !== KeyCode.LEFT &&
@@ -233,12 +251,13 @@ export default {
         } else {
           nextIndex = 0
         }
-        activeValue[currentLevel] = currentOptions[nextIndex].value
+        activeValue[currentLevel] = currentOptions[nextIndex][this.getFieldName('value')]
       } else if (e.keyCode === KeyCode.LEFT || e.keyCode === KeyCode.BACKSPACE) {
         activeValue.splice(activeValue.length - 1, 1)
       } else if (e.keyCode === KeyCode.RIGHT) {
-        if (currentOptions[currentIndex] && currentOptions[currentIndex].children) {
-          activeValue.push(currentOptions[currentIndex].children[0].value)
+        if (currentOptions[currentIndex] &&
+          currentOptions[currentIndex][this.getFieldName('children')]) {
+          activeValue.push(currentOptions[currentIndex][this.getFieldName('children')][0][this.getFieldName('value')])
         }
       } else if (e.keyCode === KeyCode.ESC) {
         this.setPopupVisible(false)
@@ -256,7 +275,7 @@ export default {
 
   render () {
     const {
-      $props, $slots, sValue, sActiveValue, handleMenuSelect,
+      $props, $slots, sActiveValue, handleMenuSelect,
       sPopupVisible, handlePopupVisibleChange, handleKeyDown, $listeners,
     } = this
     const {
@@ -269,7 +288,8 @@ export default {
       const menusProps = {
         props: {
           ...$props,
-          value: sValue,
+          fieldNames: this.getFieldNames(),
+          defaultFieldNames: this.defaultFieldNames,
           activeValue: sActiveValue,
           visible: sPopupVisible,
         },

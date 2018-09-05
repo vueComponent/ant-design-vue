@@ -50,7 +50,7 @@ export default {
     add () {
       const panes = this.panes
       const activeKey = `newTab${this.newTabIndex++}`
-      panes.push({ title: 'New Tab', content: 'Content of new Tab', key: activeKey })
+      panes.push({ title: `New Tab ${activeKey}`, content: `Content of new Tab ${activeKey}`, key: activeKey })
       this.panes = panes
       this.activeKey = activeKey
     },

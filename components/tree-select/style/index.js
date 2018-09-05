@@ -1,6 +1,6 @@
-import '../../style/index.less'
-import './index.less'
+import '../../style/index.less';
+import './index.less';
 
 // style dependencies
-import '../../select/style'
-import '../../checkbox/style'
+import '../../select/style';
+import '../../checkbox/style';

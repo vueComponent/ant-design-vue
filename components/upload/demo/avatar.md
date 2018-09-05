@@ -21,7 +21,7 @@ The return value of function `beforeUpload` can be a Promise to check asynchrono
     :beforeUpload="beforeUpload"
     @change="handleChange"
   >
-    <img v-if="imageUrl" :src="imageUrl" alt="" />
+    <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
     <div v-else>
         <a-icon :type="loading ? 'loading' : 'plus'" />
         <div class="ant-upload-text">Upload</div>

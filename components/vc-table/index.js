@@ -1,4 +1,4 @@
-// base rc-table 6.1.7 7cd6abab4a2bd55adc7a9207c23feb62c3cd015b
+// base rc-table 6.2.8
 import T from './src/Table'
 import Column from './src/Column'
 import ColumnGroup from './src/ColumnGroup'

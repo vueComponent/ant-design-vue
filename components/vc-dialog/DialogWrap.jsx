@@ -11,7 +11,6 @@ const DialogWrap = {
   },
   data () {
     this.renderComponent = () => {}
-
     this.removeContainer = () => {}
     return {}
   },
@@ -54,11 +53,12 @@ const DialogWrap = {
     },
 
     getContainer2 () {
-      if (this.getContainer) {
-        return this.getContainer()
-      }
       const container = document.createElement('div')
-      document.body.appendChild(container)
+      if (this.getContainer) {
+        this.getContainer().appendChild(container)
+      } else {
+        document.body.appendChild(container)
+      }
       return container
     },
   },

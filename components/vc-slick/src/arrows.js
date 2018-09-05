@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import { cloneElement } from '../../_util/vnode'
 import { canGoNext } from './utils/innerSliderUtils'
 

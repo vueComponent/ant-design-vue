@@ -322,4 +322,10 @@ export default {
     title: 'List',
     cols: 1,
   },
+  drawer: {
+    category: 'Components',
+    type: 'Feedback',
+    title: 'Drawer',
+    subtitle: '抽屉',
+  },
 }

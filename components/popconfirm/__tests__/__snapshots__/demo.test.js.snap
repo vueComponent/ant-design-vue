@@ -7,10 +7,12 @@ exports[`renders ./components/popconfirm/demo/dynamic-trigger.md correctly 1`] =
   <a href="#" class="">Delete a task</a>
   <br>
   <br> Whether directly execute：
-  <label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+  <label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
   </label>
 </div>
 `;
+
+exports[`renders ./components/popconfirm/demo/icon.md correctly 1`] = `<a href="#" class="">Delete</a>`;
 
 exports[`renders ./components/popconfirm/demo/local.md correctly 1`] = `<a href="#" class="">Delete</a>`;
 

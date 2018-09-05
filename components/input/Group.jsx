@@ -27,8 +27,9 @@ export default {
   methods: {
   },
   render () {
+    const { $listeners } = this
     return (
-      <span class={this.classes} >
+      <span class={this.classes} {...{ on: $listeners }} >
         {filterEmpty(this.$slots.default)}
       </span>
     )

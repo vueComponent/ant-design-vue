@@ -349,7 +349,7 @@ exports[`RangePicker show month panel according to value 1`] = `
         </div>
         <div class="ant-calendar-footer ant-calendar-range-bottom ant-calendar-footer-show-ok">
           <div class="ant-calendar-footer-btn">
-            <a role="button" class="ant-calendar-time-picker-btn">Select time</a>
+            <a role="button" class="ant-calendar-time-picker-btn">select time</a>
             <a role="button" class="ant-calendar-ok-btn">Ok</a>
           </div>
         </div>
@@ -708,10 +708,10 @@ exports[`RangePicker switch to corresponding month panel when click presetted ra
         </div>
         <div class="ant-calendar-footer ant-calendar-range-bottom ant-calendar-footer-show-ok">
           <div class="ant-calendar-footer-extra ant-calendar-range-quick-selector">
-            <a>My Birthday</a>
+            <div class="ant-tag ant-tag-blue">My Birthday</div>
           </div>
           <div class="ant-calendar-footer-btn">
-            <a role="button" class="ant-calendar-time-picker-btn ant-calendar-time-picker-btn-disabled">Select time</a>
+            <a role="button" class="ant-calendar-time-picker-btn ant-calendar-time-picker-btn-disabled">select time</a>
             <a role="button" class="ant-calendar-ok-btn ant-calendar-ok-btn-disabled">Ok</a>
           </div>
         </div>

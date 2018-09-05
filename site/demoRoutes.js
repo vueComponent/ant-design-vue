@@ -407,4 +407,12 @@ export default [
     path: 'carousel-cn',
     component: () => import('../components/carousel/demo/index.vue'),
   },
+  {
+    path: 'drawer',
+    component: () => import('../components/drawer/demo/index.vue'),
+  },
+  {
+    path: 'drawer-cn',
+    component: () => import('../components/drawer/demo/index.vue'),
+  },
 ]

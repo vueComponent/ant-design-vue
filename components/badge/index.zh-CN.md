@@ -21,3 +21,4 @@
 | status | 设置 Badge 为状态点 | Enum{ 'success', 'processing, 'default', 'error', 'warning' } | '' |
 | text | 在设置了 `status` 的前提下有效，设置状态点的文本 | string | '' |
 | numberStyle | 设置状态点的样式 | object | '' |
+| title | 设置鼠标放在状态点上时显示的文字 | string | `count` |

@@ -14,15 +14,15 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
     <template slot="name" slot-scope="text">
-      <a href="#">{{text}}</a>
+      <a href="javascript:;">{{text}}</a>
     </template>
     <template slot="action" slot-scope="text, record">
       <span>
-        <a href="#">Action 一 {{record.name}}</a>
+        <a href="javascript:;">Action 一 {{record.name}}</a>
         <a-divider type="vertical" />
-        <a href="#">Delete</a>
+        <a href="javascript:;">Delete</a>
         <a-divider type="vertical" />
-        <a href="#" class="ant-dropdown-link">
+        <a href="javascript:;" class="ant-dropdown-link">
           More actions <a-icon type="down" />
         </a>
       </span>
@@ -89,10 +89,10 @@ export default {
       dataIndex: 'name',
       customRender: (text, row, index) => {
         if (index < 4) {
-          return <a href="#">{text}</a>;
+          return <a href="javascript:;">{text}</a>;
         }
         return {
-          children: <a href="#">{text}</a>,
+          children: <a href="javascript:;">{text}</a>,
           attrs: {
             colSpan: 5,
           },

@@ -1,16 +1,23 @@
 
-import ScrollableTabBarMixin from './ScrollableTabBarMixin'
-import TabBarMixin from './TabBarMixin'
-import BaseMixin from '../../_util/BaseMixin'
+import ScrollableTabBarNode from './ScrollableTabBarNode'
+import TabBarRootNode from './TabBarRootNode'
+import TabBarTabsNode from './TabBarTabsNode'
+import SaveRef from './SaveRef'
 
 export default {
   name: 'ScrollableTabBar',
-  mixins: [TabBarMixin, ScrollableTabBarMixin, BaseMixin],
-  render (h) {
-    const inkBarNode = this.getInkBarNode()
-    const tabs = this.getTabs(h)
-    const scrollbarNode = this.getScrollBarNode([inkBarNode, tabs])
-    return this.getRootNode(scrollbarNode, h)
+  functional: true,
+  render (h, context) {
+    const { props, listeners = {}} = context
+    return (
+      <SaveRef children={(saveRef, getRef) => (
+        <TabBarRootNode saveRef={saveRef} {...{ props, on: listeners }}>
+          <ScrollableTabBarNode saveRef={saveRef} getRef={getRef} {...{ props, on: listeners }}>
+            <TabBarTabsNode saveRef={saveRef} {...{ props, on: listeners }} />
+          </ScrollableTabBarNode>
+        </TabBarRootNode>
+      )}/>
+    )
   },
 }
 

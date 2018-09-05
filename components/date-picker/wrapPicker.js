@@ -60,6 +60,14 @@ export default function wrapPicker (Picker, props, defaultFormat) {
         this.$emit('blur', e)
       },
 
+      handleMouseEnter (e) {
+        this.$emit('mouseenter', e)
+      },
+
+      handleMouseLeave (e) {
+        this.$emit('mouseleave', e)
+      },
+
       focus () {
         this.$refs.picker.focus()
       },
@@ -129,6 +137,8 @@ export default function wrapPicker (Picker, props, defaultFormat) {
             openChange: this.handleOpenChange,
             focus: this.handleFocus,
             blur: this.handleBlur,
+            mouseenter: this.handleMouseEnter,
+            mouseleave: this.handleMouseLeave,
           },
           ref: 'picker',
           scopedSlots: this.$scopedSlots || {},

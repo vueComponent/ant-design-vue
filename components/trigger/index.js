@@ -1,3 +1,3 @@
-// export this package's api
+// based on rc-trigger 2.5.4
 import Trigger from './Trigger'
 export default Trigger

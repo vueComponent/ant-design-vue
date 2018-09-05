@@ -43,7 +43,7 @@
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | blur | 失去焦点的时回调 | function |
-| change | 选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数 | function(value, option:Option/Array<Option\>) |
+| change | 选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数 | function(value, option:Option/Array&lt;Option>) |
 | deselect | 取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效 | function(value，option:Option) |
 | focus | 获得焦点时回调 | function |
 | inputKeydown | 键盘按下时回调 | function |

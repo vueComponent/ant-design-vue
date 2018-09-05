@@ -4,20 +4,22 @@ exports[`Modal render correctly 1`] = `
 <div>
   <div>
     <div>
-      <div class="ant-modal-mask"></div>
-      <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
-        <div role="document" class="ant-modal" style="width: 520px;">
-          <div class="ant-modal-content">
-            <button aria-label="Close" class="ant-modal-close"><span class="ant-modal-close-x"></span></button>
-            <div class="ant-modal-body">Here is content of Modal</div>
-            <div class="ant-modal-footer">
-              <div>
-                <button type="button" class="ant-btn ant-btn-default"><span>Cancel</span></button>
-                <button type="button" class="ant-btn ant-btn-primary"><span>OK</span></button>
+      <div>
+        <div class="ant-modal-mask"></div>
+        <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
+          <div role="document" class="ant-modal" style="width: 520px;">
+            <div class="ant-modal-content">
+              <button aria-label="Close" class="ant-modal-close"><span class="ant-modal-close-x"></span></button>
+              <div class="ant-modal-body">Here is content of Modal</div>
+              <div class="ant-modal-footer">
+                <div>
+                  <button type="button" class="ant-btn ant-btn-default"><span>Cancel</span></button>
+                  <button type="button" class="ant-btn ant-btn-primary"><span>OK</span></button>
+                </div>
               </div>
             </div>
+            <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;">sentinel</div>
           </div>
-          <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;">sentinel</div>
         </div>
       </div>
     </div>
@@ -30,20 +32,22 @@ exports[`Modal render correctly 2`] = `
 <div>
   <div>
     <div>
-      <div class="ant-modal-mask"></div>
-      <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
-        <div role="document" class="ant-modal" style="width: 520px;">
-          <div class="ant-modal-content">
-            <button aria-label="Close" class="ant-modal-close"><span class="ant-modal-close-x"></span></button>
-            <div class="ant-modal-body">Here is content of Modal</div>
-            <div class="ant-modal-footer">
-              <div>
-                <button type="button" class="ant-btn ant-btn-default"><span>Cancel</span></button>
-                <button type="button" class="ant-btn ant-btn-primary"><span>OK</span></button>
+      <div>
+        <div class="ant-modal-mask"></div>
+        <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
+          <div role="document" class="ant-modal" style="width: 520px;">
+            <div class="ant-modal-content">
+              <button aria-label="Close" class="ant-modal-close"><span class="ant-modal-close-x"></span></button>
+              <div class="ant-modal-body">Here is content of Modal</div>
+              <div class="ant-modal-footer">
+                <div>
+                  <button type="button" class="ant-btn ant-btn-default"><span>Cancel</span></button>
+                  <button type="button" class="ant-btn ant-btn-primary"><span>OK</span></button>
+                </div>
               </div>
             </div>
+            <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;">sentinel</div>
           </div>
-          <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;">sentinel</div>
         </div>
       </div>
     </div>
@@ -56,14 +60,16 @@ exports[`Modal render without footer 1`] = `
 <div>
   <div>
     <div>
-      <div class="ant-modal-mask"></div>
-      <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
-        <div role="document" class="ant-modal" style="width: 520px;">
-          <div class="ant-modal-content">
-            <button aria-label="Close" class="ant-modal-close"><span class="ant-modal-close-x"></span></button>
-            <div class="ant-modal-body">Here is content of Modal</div>
+      <div>
+        <div class="ant-modal-mask"></div>
+        <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
+          <div role="document" class="ant-modal" style="width: 520px;">
+            <div class="ant-modal-content">
+              <button aria-label="Close" class="ant-modal-close"><span class="ant-modal-close-x"></span></button>
+              <div class="ant-modal-body">Here is content of Modal</div>
+            </div>
+            <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;">sentinel</div>
           </div>
-          <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;">sentinel</div>
         </div>
       </div>
     </div>

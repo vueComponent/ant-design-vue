@@ -15,7 +15,7 @@ A Solution for displaying large amounts of data with long columns.
 ```html
 <template>
   <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1500, y: 300 }">
-    <a slot="action" slot-scope="text" href="#">action</a>
+    <a slot="action" slot-scope="text" href="javascript:;">action</a>
   </a-table>
 </template>
 <script>

@@ -13,85 +13,137 @@ export default {
       default: 'circle',
     },
     size: {
-      validator: (val) => (['small', 'large', 'default'].includes(val)),
+      validator: (val) => {
+        return typeof val === 'number' || ['small', 'large', 'default'].includes(val)
+      },
       default: 'default',
     },
     src: String,
     icon: String,
+    alt: String,
+    loadError: Function,
   },
   data () {
     return {
-      isExistSlot: false,
-      childrenWidth: 0,
+      isImgExist: true,
       scale: 1,
     }
   },
-  computed: {
-    classes () {
-      const { prefixCls, shape, size, src, icon } = this
-      return {
-        [`${prefixCls}`]: true,
-        [`${prefixCls}-image`]: !!src,
-        [`${prefixCls}-icon`]: !!icon,
-        [`${prefixCls}-${shape}`]: true,
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-sm`]: size === 'small',
-      }
-    },
-    childrenStyle () {
-      let style = {}
-      const { scale, isExistSlot, childrenWidth } = this
-      if (isExistSlot) {
-        style = {
-          msTransform: `scale(${scale})`,
-          WebkitTransform: `scale(${scale})`,
-          transform: `scale(${scale})`,
-          position: 'absolute',
-          display: 'inline-block',
-          left: `calc(50% - ${Math.round(childrenWidth / 2)}px)`,
-        }
-      }
-      return style
-    },
-  },
-  methods: {
-    setScale () {
-      const { src, icon, $refs, $el } = this
-      const children = $refs.avatorChildren
-      this.isExistSlot = !src && !icon
-      if (children) {
-        this.childrenWidth = children.offsetWidth
-        const avatarWidth = $el.getBoundingClientRect().width
-        if (avatarWidth - 8 < this.childrenWidth) {
-          this.scale = (avatarWidth - 8) / this.childrenWidth
-        } else {
-          this.scale = 1
-        }
-      }
-    },
-  },
   mounted () {
+    this.prevChildren = this.$slots.default
+    this.prevState = { ...this.$data }
     this.$nextTick(() => {
       this.setScale()
     })
   },
   updated () {
-    this.$nextTick(() => {
-      this.setScale()
-    })
+    if (this.preChildren !== this.$slots.default ||
+      (this.prevState.scale !== this.$data.scale && this.$data.scale === 1) ||
+      (this.prevState.isImgExist !== this.$data.isImgExist)) {
+      this.$nextTick(() => {
+        this.setScale()
+      })
+    }
+    this.preChildren = this.$slots.default
+    this.prevState = { ...this.$data }
+  },
+  methods: {
+    setScale () {
+      const childrenNode = this.$refs.avatarChildren
+      if (childrenNode) {
+        const childrenWidth = childrenNode.offsetWidth
+        const avatarWidth = this.$el.getBoundingClientRect().width
+        if (avatarWidth - 8 < childrenWidth) {
+          this.scale = (avatarWidth - 8) / childrenWidth
+        } else {
+          this.scale = 1
+        }
+        this.$forceUpdate()
+      }
+    },
+    handleImgLoadError () {
+      const { loadError } = this.$props
+      const errorFlag = loadError ? loadError() : undefined
+      if (errorFlag !== false) {
+        this.isImgExist = false
+      }
+    },
   },
   render () {
-    const { classes, prefixCls, src, icon, childrenStyle, $slots, $listeners } = this
+    const {
+      prefixCls, shape, size, src, icon, alt,
+    } = this.$props
+
+    const { isImgExist, scale } = this.$data
+
+    const sizeCls = {
+      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-sm`]: size === 'small',
+    }
+
+    const classString = {
+      [prefixCls]: true,
+      ...sizeCls,
+      [`${prefixCls}-${shape}`]: shape,
+      [`${prefixCls}-image`]: src && isImgExist,
+      [`${prefixCls}-icon`]: icon,
+    }
+
+    const sizeStyle = typeof size === 'number' ? {
+      width: `${size}px`,
+      height: `${size}px`,
+      lineHeight: `${size}px`,
+      fontSize: icon ? `${size / 2}px` : '18px',
+    } : {}
+
+    let children = this.$slots.default
+    if (src && isImgExist) {
+      children = (
+        <img
+          src={src}
+          onError={this.handleImgLoadError}
+          alt={alt}
+        />
+      )
+    } else if (icon) {
+      children = <Icon type={icon} />
+    } else {
+      const childrenNode = this.$refs.avatarChildren
+      if (childrenNode || (scale !== 1 && childrenNode)) {
+        const childrenStyle = {
+          msTransform: `scale(${scale})`,
+          WebkitTransform: `scale(${scale})`,
+          transform: `scale(${scale})`,
+          position: 'absolute',
+          display: 'inline-block',
+          left: `calc(50% - ${Math.round(childrenNode.offsetWidth / 2)}px)`,
+        }
+        const sizeChildrenStyle = typeof size === 'number' ? {
+          lineHeight: `${size}px`,
+        } : {}
+        children = (
+          <span
+            class={`${prefixCls}-string`}
+            ref='avatarChildren'
+            style={{ ...sizeChildrenStyle, ...childrenStyle }}
+          >
+            {children}
+          </span>
+        )
+      } else {
+        children = (
+          <span
+            class={`${prefixCls}-string`}
+            ref='avatarChildren'
+          >
+            {children}
+          </span>
+        )
+      }
+    }
     return (
-      <span {...{ on: $listeners, class: classes }}>
-        {src ? <img src={src}/>
-          : (icon ? <Icon type={icon} />
-            : <span
-              ref='avatorChildren'
-              class={prefixCls + '-string'}
-              style={childrenStyle}>
-              {$slots.default}
-            </span>) }
+      <span {...{ on: this.$listeners, class: classString, style: sizeStyle }}>
+        {children}
       </span>
     )
   },

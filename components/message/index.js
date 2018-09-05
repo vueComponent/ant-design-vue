@@ -2,12 +2,13 @@ import Notification from '../vc-notification'
 import Icon from '../icon'
 
 let defaultDuration = 3
-let defaultTop = null
-let messageInstance = null
+let defaultTop
+let messageInstance
 let key = 1
 let prefixCls = 'ant-message'
 let transitionName = 'move-up'
 let getContainer = () => document.body
+let maxCount
 
 function getMessageInstance (callback) {
   if (messageInstance) {
@@ -19,6 +20,7 @@ function getMessageInstance (callback) {
     transitionName,
     style: { top: defaultTop }, // 覆盖原来的样式
     getContainer,
+    maxCount,
   }, (instance) => {
     if (messageInstance) {
       callback(messageInstance)
@@ -51,25 +53,36 @@ function notice (
   }
 
   const target = key++
-  getMessageInstance((instance) => {
-    instance.notice({
-      key: target,
-      duration,
-      style: {},
-      content: (h) => (
-        <div class={`${prefixCls}-custom-content ${prefixCls}-${type}`}>
-          <Icon type={iconType} />
-          <span>{typeof content === 'function' ? content(h) : content}</span>
-        </div>
-      ),
-      onClose,
+  const closePromise = new Promise((resolve) => {
+    const callback = () => {
+      if (typeof onClose === 'function') {
+        onClose()
+      }
+      return resolve(true)
+    }
+    getMessageInstance((instance) => {
+      instance.notice({
+        key: target,
+        duration,
+        style: {},
+        content: (h) => (
+          <div class={`${prefixCls}-custom-content ${prefixCls}-${type}`}>
+            <Icon type={iconType} />
+            <span>{typeof content === 'function' ? content(h) : content}</span>
+          </div>
+        ),
+        onClose: callback,
+      })
     })
   })
-  return () => {
+  const result = () => {
     if (messageInstance) {
       messageInstance.removeNotice(target)
     }
   }
+  result.then = (filled, rejected) => closePromise.then(filled, rejected)
+  result.promise = closePromise
+  return result
 }
 
 // type ConfigContent = React.ReactNode | string;
@@ -121,6 +134,10 @@ export default {
     if (options.transitionName !== undefined) {
       transitionName = options.transitionName
       messageInstance = null // delete messageInstance for new transitionName
+    }
+    if (options.maxCount !== undefined) {
+      maxCount = options.maxCount
+      messageInstance = null
     }
   },
   destroy () {

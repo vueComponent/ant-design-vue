@@ -11,23 +11,23 @@ exports[`Table.filter renders custom content correctly 1`] = `
 `;
 
 exports[`Table.filter renders filter correctly 1`] = `
-<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-large"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class="ant-table-column-has-filters"><span>Name<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
   </tr>
   </thead>
   <tbody class="ant-table-tbody">
-    <tr class="ant-table-row  ant-table-row-level-0">
+    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
       <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
         <!---->Jack</td>
     </tr>
-    <tr class="ant-table-row  ant-table-row-level-0">
+    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
       <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
         <!---->Lucy</td>
     </tr>
-    <tr class="ant-table-row  ant-table-row-level-0">
+    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
       <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
         <!---->Tom</td>
     </tr>
-    <tr class="ant-table-row  ant-table-row-level-0">
+    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
       <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
         <!---->Jerry</td>
     </tr>
@@ -45,15 +45,15 @@ exports[`Table.filter renders menu correctly 1`] = `
 <div>
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <div class="ant-table-filter-dropdown ant-dropdown-content">
-      <ul class="ant-dropdown-menu  ant-dropdown-menu-root ant-dropdown-menu-vertical" role="menu" aria-activedescendant="" tabindex="0">
+      <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root" role="menu" tabindex="0">
         <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
           </label><span>Boy</span></li>
         <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
           </label><span>Girl</span></li>
-        <li class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
-          <div aria-owns="title$Menu" aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title
+        <li role="menuitem" class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
+          <div aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title
             <i class="ant-dropdown-menu-submenu-arrow"></i>
           </div>
         </li>
@@ -71,15 +71,15 @@ exports[`Table.filter renders radio filter correctly 1`] = `
 <div>
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <div class="ant-table-filter-dropdown ant-dropdown-content">
-      <ul class="ant-dropdown-menu  ant-dropdown-menu-root ant-dropdown-menu-vertical" role="menu" aria-activedescendant="" tabindex="0">
+      <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root" role="menu" tabindex="0">
         <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input"><span class="ant-radio-inner"></span></span>
+          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span>
           </label><span>Boy</span></li>
         <li role="menuitem" class="ant-dropdown-menu-item">
-          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input"><span class="ant-radio-inner"></span></span>
+          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span>
           </label><span>Girl</span></li>
-        <li class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
-          <div aria-owns="title$Menu" aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title
+        <li role="menuitem" class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
+          <div aria-haspopup="true" title="Title" class="ant-dropdown-menu-submenu-title">Title
             <i class="ant-dropdown-menu-submenu-arrow"></i>
           </div>
         </li>

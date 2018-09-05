@@ -9,4 +9,5 @@ export default () => ({
   loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   disabled: PropTypes.bool,
   ghost: PropTypes.bool,
+  block: PropTypes.bool,
 })

@@ -7,6 +7,8 @@ import FileList from './fileList.md'
 import Drag from './drag.md'
 import PictureStyle from './picture-style.md'
 import UploadManually from './upload-manually.md'
+import Directory from './directory.md'
+
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -41,23 +43,15 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us}/>
-        <br/>
         <Basic />
-        <br/>
         <Avatar />
-        <br />
         <DefaultFileList />
-        <br/>
         <PictureCard />
-        <br/>
         <FileList />
-        <br/>
         <Drag />
-        <br/>
         <PictureStyle />
-        <br/>
         <UploadManually />
-        <br/>
+        <Directory />
         <api>
           <template slot='cn'>
             <CN/>

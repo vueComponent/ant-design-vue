@@ -92,6 +92,12 @@ export default function createPicker (TheCalendar, props) {
       blur () {
         this.$refs.input.blur()
       },
+      onMouseEnter (e) {
+        this.$emit('mouseenter', e)
+      },
+      onMouseLeave (e) {
+        this.$emit('mouseleave', e)
+      },
     },
 
     render () {
@@ -200,6 +206,8 @@ export default function createPicker (TheCalendar, props) {
           // tabIndex={props.disabled ? -1 : 0}
           // onFocus={focus}
           // onBlur={blur}
+          onMouseenter={this.onMouseEnter}
+          onMouseleave={this.onMouseLeave}
         >
           <VcDatePicker
             {...vcDatePickerProps}

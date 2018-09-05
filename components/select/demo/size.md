@@ -30,18 +30,6 @@ The height of the input field for the select defaults to 32px. If size is set to
     </a-select>
     <br />
     <a-select
-      mode="combobox"
-      :size="size"
-      defaultValue="a1"
-      style="width: 200px"
-      @change="handleChange"
-    >
-      <a-select-option v-for="i in 25" :key="(i + 9).toString(36) + i">
-        {{(i + 9).toString(36) + i}}
-      </a-select-option>
-    </a-select>
-    <br />
-    <a-select
       mode="multiple"
       :size="size"
       placeholder="Please select"

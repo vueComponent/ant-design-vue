@@ -4,7 +4,7 @@
 </cn>
 
 <us>
-#### Customerize tooltip
+#### Customize tooltip
 Use `tipFormatter` to format content of `Toolip`. If `tipFormatter` is null, hide it.
 </us>
 

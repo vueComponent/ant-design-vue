@@ -2,13 +2,14 @@
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu'
 import closest from 'dom-closest'
 import classNames from 'classnames'
+import shallowequal from 'shallowequal'
 import Dropdown from '../dropdown'
 import Icon from '../icon'
 import Checkbox from '../checkbox'
 import Radio from '../radio'
 import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper'
 import { FilterMenuProps } from './interface'
-import { initDefaultProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps } from '../_util/props-util'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 
@@ -23,7 +24,7 @@ export default {
   data () {
     const visible = ('filterDropdownVisible' in this.column)
       ? this.column.filterDropdownVisible : false
-
+    this.preProps = { ...getOptionProps(this) }
     return {
       sSelectedKeys: this.selectedKeys,
       sKeyPathOfSelectedItem: {}, // 记录所有有选中子菜单的祖先菜单
@@ -38,17 +39,41 @@ export default {
     })
   },
   watch: {
-    'column.fixed': function (val) {
-      this.setNeverShown(this.column)
-    },
-    column (val) {
-      if ('filterDropdownVisible' in val) {
-        this.sVisible = val.filterDropdownVisible
+    _propsSymbol () {
+      const nextProps = getOptionProps(this)
+      const { column } = nextProps
+      this.setNeverShown(column)
+      const newState = {}
+
+      /**
+     * if the state is visible the component should ignore updates on selectedKeys prop to avoid
+     * that the user selection is lost
+     * this happens frequently when a table is connected on some sort of realtime data
+     * Fixes https://github.com/ant-design/ant-design/issues/10289 and
+     * https://github.com/ant-design/ant-design/issues/10209
+     */
+      if ('selectedKeys' in nextProps && !shallowequal(this.preProps.selectedKeys, nextProps.selectedKeys)) {
+        newState.sSelectedKeys = nextProps.selectedKeys
       }
+      if ('filterDropdownVisible' in column) {
+        newState.sVisible = column.filterDropdownVisible
+      }
+      if (Object.keys(newState).length > 0) {
+        this.setState(newState)
+      }
+      this.preProps = { ...nextProps }
     },
-    selectedKeys (val) {
-      this.sSelectedKeys = val
-    },
+    // 'column.fixed': function (val) {
+    //   this.setNeverShown(this.column)
+    // },
+    // column (val) {
+    //   if ('filterDropdownVisible' in val) {
+    //     this.sVisible = val.filterDropdownVisible
+    //   }
+    // },
+    // selectedKeys (val) {
+    //   this.sSelectedKeys = val
+    // },
   },
   methods: {
     setNeverShown  (column) {
@@ -96,7 +121,7 @@ export default {
     },
 
     confirmFilter2 () {
-      if (this.sSelectedKeys !== this.selectedKeys) {
+      if (!shallowequal(this.sSelectedKeys, this.selectedKeys)) {
         this.confirmFilter(this.column, this.sSelectedKeys)
       }
     },
@@ -142,7 +167,7 @@ export default {
     },
 
     handleMenuItemClick (info) {
-      if (info.keyPath.length <= 1) {
+      if (!info.keyPath || info.keyPath.length <= 1) {
         return
       }
       const keyPathOfSelectedItem = this.sKeyPathOfSelectedItem
@@ -157,17 +182,19 @@ export default {
     },
 
     renderFilterIcon () {
-      const { column, locale, prefixCls } = this
-      const filterIcon = column.filterIcon
-      const dropdownSelectedClass = this.selectedKeys.length > 0 ? `${prefixCls}-selected` : ''
+      const { column, locale, prefixCls, selectedKeys } = this
+      const filterd = selectedKeys.length > 0
+      let filterIcon = column.filterIcon
+      if (typeof filterIcon === 'function') {
+        filterIcon = filterIcon(filterd)
+      }
+      const dropdownSelectedClass = filterd ? `${prefixCls}-selected` : ''
 
       return filterIcon ? cloneElement(filterIcon, {
         attrs: {
           title: locale.filterTitle,
         },
-        class: classNames(filterIcon.className, {
-          [`${prefixCls}-icon`]: true,
-        }),
+        class: classNames(`${prefixCls}-icon`, filterIcon.className),
       }) : <Icon title={locale.filterTitle} type='filter' class={dropdownSelectedClass} />
     },
   },
@@ -179,9 +206,22 @@ export default {
     const dropdownMenuClass = classNames({
       [`${dropdownPrefixCls}-menu-without-submenu`]: !this.hasSubMenu(),
     })
-    const menus = column.filterDropdown ? (
+    let { filterDropdown } = column
+    if (filterDropdown && typeof filterDropdown === 'function') {
+      filterDropdown = filterDropdown({
+        prefixCls: `${dropdownPrefixCls}-custom`,
+        setSelectedKeys: (selectedKeys) => this.setSelectedKeys({ selectedKeys }),
+        selectedKeys: this.sSelectedKeys,
+        confirm: this.handleConfirm,
+        clearFilters: this.handleClearFilters,
+        filters: column.filters,
+        getPopupContainer: (triggerNode) => triggerNode.parentNode,
+      })
+    }
+
+    const menus = filterDropdown ? (
       <FilterDropdownMenuWrapper>
-        {column.filterDropdown}
+        {filterDropdown}
       </FilterDropdownMenuWrapper>
     ) : (
       <FilterDropdownMenuWrapper class={`${prefixCls}-dropdown`}>

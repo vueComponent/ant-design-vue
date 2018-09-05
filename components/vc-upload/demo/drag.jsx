@@ -4,7 +4,7 @@ export default {
   render () {
     const uploaderProps = {
       props: {
-        action: '/upload.do',
+        action: '//jsonplaceholder.typicode.com/posts/',
         type: 'drag',
         accept: '.png',
         beforeUpload (file) {
@@ -12,17 +12,17 @@ export default {
         },
       },
       on: {
-        start: (file) => {
-          console.log('onStart', file.name)
+        start (file) {
+          console.log('start', file, file.name)
         },
         success (file) {
-          console.log('onSuccess', file)
+          console.log('success', file)
         },
         progress (step, file) {
-          console.log('onProgress', Math.round(step.percent), file.name)
+          console.log('progress', Math.round(step.percent), file.name)
         },
         error (err) {
-          console.log('onError', err)
+          console.log('error', err)
         },
       },
       style: { display: 'inline-block', width: '200px', height: '200px', background: '#eee' },

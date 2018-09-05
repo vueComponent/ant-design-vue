@@ -56,6 +56,7 @@ Array [
   "Timeline",
   "Tooltip",
   "Upload",
+  "Drawer",
   "default",
 ]
 `;

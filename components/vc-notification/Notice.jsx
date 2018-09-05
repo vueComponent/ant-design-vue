@@ -9,15 +9,26 @@ export default {
     duration: PropTypes.number.def(1.5),
     closable: PropTypes.bool,
     prefixCls: PropTypes.string,
+    update: PropTypes.bool,
   },
 
   mounted () {
     this.startCloseTimer()
   },
+  updated () {
+    if (this.update) {
+      this.restartCloseTimer()
+    }
+  },
 
   beforeDestroy () {
     this.clearCloseTimer()
     this.willDestroy = true // beforeDestroy调用后依然会触发onMouseleave事件
+  },
+  watch: {
+    duration () {
+      this.restartCloseTimer()
+    },
   },
   methods: {
     close () {
@@ -39,6 +50,10 @@ export default {
         clearTimeout(this.closeTimer)
         this.closeTimer = null
       }
+    },
+    restartCloseTimer () {
+      this.clearCloseTimer()
+      this.startCloseTimer()
     },
   },
 

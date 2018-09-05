@@ -1,4 +1,4 @@
-
+import Wave from '../_util/wave'
 import Icon from '../icon'
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
@@ -16,7 +16,7 @@ export default {
         large: 'lg',
         small: 'sm',
       },
-      clicked: false,
+      // clicked: false,
       sLoading: !!this.loading,
       hasTwoCNChar: false,
     }
@@ -26,6 +26,14 @@ export default {
   },
   updated () {
     this.fixTwoCNChar()
+  },
+  beforeDestroy () {
+    // if (this.timeout) {
+    //   clearTimeout(this.timeout)
+    // }
+    if (this.delayTimeout) {
+      clearTimeout(this.delayTimeout)
+    }
   },
   watch: {
     loading (val) {
@@ -40,7 +48,7 @@ export default {
   computed: {
     classes () {
       const { prefixCls, type, shape, size, hasTwoCNChar,
-        sLoading, ghost, clicked, sizeMap } = this
+        sLoading, ghost, block, sizeMap } = this
       const sizeCls = sizeMap[size] || ''
       return {
         [`${prefixCls}`]: true,
@@ -48,14 +56,10 @@ export default {
         [`${prefixCls}-${shape}`]: shape,
         [`${prefixCls}-${sizeCls}`]: sizeCls,
         [`${prefixCls}-loading`]: sLoading,
-        [`${prefixCls}-clicked`]: clicked,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar,
+        [`${prefixCls}-block`]: block,
       }
-    },
-    iconType () {
-      const { sLoading, icon } = this
-      return sLoading ? 'loading' : icon
     },
   },
   methods: {
@@ -72,9 +76,9 @@ export default {
       }
     },
     handleClick (event) {
-      this.clicked = true
-      clearTimeout(this.timeout)
-      this.timeout = setTimeout(() => (this.clicked = false), 500)
+      // this.clicked = true
+      // clearTimeout(this.timeout)
+      // this.timeout = setTimeout(() => (this.clicked = false), 500)
       this.$emit('click', event)
     },
     insertSpace (child, needInserted) {
@@ -89,15 +93,14 @@ export default {
       return child
     },
     isNeedInserted () {
-      const { loading, icon, $slots } = this
-      const iconType = loading ? 'loading' : icon
-      return $slots.default && $slots.default.length === 1 && (!iconType || iconType === 'loading')
+      const { icon, $slots } = this
+      return $slots.default && $slots.default.length === 1 && !icon
     },
   },
   render () {
-    const { htmlType, classes,
-      disabled, handleClick, iconType,
-      $slots, $attrs, $listeners } = this
+    const { htmlType, classes, icon,
+      disabled, handleClick,
+      sLoading, $slots, $attrs, $listeners } = this
     const buttonProps = {
       props: {
       },
@@ -112,21 +115,25 @@ export default {
         click: handleClick,
       },
     }
+    const iconType = sLoading ? 'loading' : icon
+    const iconNode = iconType ? <Icon type={iconType} /> : null
     const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], this.isNeedInserted()) : $slots.default
-    return (
-      <button {...buttonProps}>
-        {iconType ? <Icon type={iconType}></Icon> : null}
-        {kids}
-      </button>
-    )
-  },
-  beforeDestroy () {
-    if (this.timeout) {
-      clearTimeout(this.timeout)
+    if ('href' in $attrs) {
+      return (
+        <a {...buttonProps}>
+          {iconNode}{kids}
+        </a>
+      )
+    } else {
+      return (
+        <Wave>
+          <button {...buttonProps}>
+            {iconNode}{kids}
+          </button>
+        </Wave>
+      )
     }
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout)
-    }
   },
+
 }
 

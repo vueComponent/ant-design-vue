@@ -39,6 +39,8 @@ export default {
     showSearch: PropTypes.bool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
+    autoFocus: PropTypes.bool,
+    backfill: PropTypes.bool,
     optionLabelProp: PropTypes.string.def('children'),
     filterOption: PropTypes.oneOfType([
       PropTypes.bool,
@@ -113,7 +115,7 @@ export default {
     const selectProps = {
       props: {
         ...getOptionProps(this),
-        mode: 'combobox',
+        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
         optionLabelProp,
         getInputElement: this.getInputElement,
         notFoundContent: getComponentFromProp(this, 'notFoundContent'),

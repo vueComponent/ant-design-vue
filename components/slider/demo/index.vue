@@ -10,7 +10,7 @@ import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
 const md = {
-  cn: `# Slider
+  cn: `# Slider 滑动输入条
   滑动型输入器，展示当前值和可选范围。
   ## 何时使用
   当用户需要在数值区间/自定义区间内进行选择时，可为连续或离散值。

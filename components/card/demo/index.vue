@@ -1,14 +1,15 @@
 <script>
-import Basic from './basic'
-import NoBorder from './noBorder'
-import Concise from './concise'
-import ColRowCard from './colRowCard'
-import Loading from './loading'
-import Grid from './grid'
-import Inline from './inline'
-import TabsCard from './tabsCard'
-import MoreConfigs from './moreConfigs'
-import FlexibleContent from './flexible-content'
+import Basic from './basic.md'
+import BorderLess from './border-less.md'
+import Concise from './concise.md'
+import FlexibleContent from './flexible-content.md'
+import GridCard from './grid-card.md'
+import InColumn from './in-column.md'
+import Inner from './inner.md'
+import Loading from './loading.md'
+import Meta from './meta.md'
+import Simple from './simple.md'
+import Tabs from './tabs.md'
 
 import CN from './../index.zh-CN.md'
 import US from './../index.en-US.md'
@@ -39,16 +40,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <NoBorder />
-        <Concise />
-        <FlexibleContent />
-        <ColRowCard />
-        <Loading />
-        <Grid />
-        <Inline />
-        <TabsCard />
-        <MoreConfigs />
+        <Basic/>
+        <BorderLess/>
+        <Concise/>
+        <FlexibleContent/>
+        <GridCard/>
+        <InColumn/>
+        <Inner/>
+        <Loading/>
+        <Meta/>
+        <Simple/>
+        <Tabs/>
         <api>
           <CN slot='cn' />
           <US />

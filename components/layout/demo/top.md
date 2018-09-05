@@ -37,7 +37,7 @@ Top-bottom structure is conform with the top-bottom viewing habit, it's a classi
       <div :style="{ background: '#fff', padding: '24px', minHeight: '280px' }">Content</div>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
-      Ant Design ©2016 Created by Ant UED
+      Ant Design ©2018 Created by Ant UED
     </a-layout-footer>
   </a-layout>
 </template>

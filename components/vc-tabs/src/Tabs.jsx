@@ -1,96 +1,81 @@
-
-// based on rc-tabs 9.2.4 e16ee09531476757b18b7bc0ec1daddcc0d40d65
-import Icon from '../../icon'
-import KeyCode from './KeyCode'
-import TabContent from './TabContent'
-import ScrollableInkTabBar from './ScrollableInkTabBar'
-import hasProp from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
-function getDefaultActiveKey (t) {
+import PropTypes from '../../_util/vue-types'
+import KeyCode from './KeyCode'
+import { getOptionProps } from '../../_util/props-util'
+import { cloneElement } from '../../_util/vnode'
+
+function getDefaultActiveKey (props) {
   let activeKey
-  t.$slots.default && t.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {
-    const child = componentOptions.propsData
+  const children = props.children
+  children.forEach((child) => {
     if (child && !activeKey && !child.disabled) {
-      activeKey = tabKey
+      activeKey = child.key
     }
   })
   return activeKey
 }
-function activeKeyIsValid (t, key) {
-  const keys = t.$slots.default && t.$slots.default.map(({ componentOptions = {}, key: tabKey }) => {
-    const child = componentOptions.propsData
-    if (child) {
-      return tabKey
-    }
-  })
-  return key !== undefined && keys.indexOf(key) >= 0
+
+function activeKeyIsValid (props, key) {
+  const children = props.children
+  const keys = children.map(child => child && child.key)
+  return keys.indexOf(key) >= 0
 }
 
 export default {
   name: 'Tabs',
-  components: { Icon },
   model: {
     prop: 'activeKey',
     event: 'change',
   },
   mixins: [BaseMixin],
   props: {
-    prefixCls: {
-      default: 'ant-tabs',
-      type: String,
-    },
-    tabBarPosition: {
-      default: 'top',
-      validator (value) {
-        return ['top', 'bottom', 'left', 'right'].includes(value)
-      },
-    },
-    tabBarProps: Object,
-    tabContentProps: Object,
-    destroyInactiveTabPane: Boolean,
-    activeKey: String,
-    defaultActiveKey: String,
-    type: {
-      validator (value) {
-        return ['line', 'card', 'editable-card'].includes(value)
-      },
-    },
+    destroyInactiveTabPane: PropTypes.bool,
+    renderTabBar: PropTypes.func.isRequired,
+    renderTabContent: PropTypes.func.isRequired,
+    navWrapper: PropTypes.func.def(arg => arg),
+    children: PropTypes.any.def([]),
+    prefixCls: PropTypes.string.def('ant-tabs'),
+    tabBarPosition: PropTypes.string.def('top'),
+    activeKey: PropTypes.string,
+    defaultActiveKey: PropTypes.string,
+    __propsSymbol__: PropTypes.any,
   },
   data () {
+    const props = getOptionProps(this)
+    let activeKey
+    if ('activeKey' in props) {
+      activeKey = props.activeKey
+    } else if ('defaultActiveKey' in props) {
+      activeKey = props.defaultActiveKey
+    } else {
+      activeKey = getDefaultActiveKey(props)
+    }
     return {
-      stateActiveKey: this.getStateActiveKey(),
+      _activeKey: activeKey,
     }
   },
-  computed: {
-    classes () {
-      const { prefixCls, tabBarPosition } = this
-      return {
-        [`${prefixCls}`]: true,
-        [`${prefixCls}-${tabBarPosition}`]: true,
+  watch: {
+    __propsSymbol__ () {
+      const nextProps = getOptionProps(this)
+      if ('activeKey' in nextProps) {
+        this.setState({
+          _activeKey: nextProps.activeKey,
+        })
+      } else if (!activeKeyIsValid(nextProps, this.$data._activeKey)) {
+        // https://github.com/ant-design/ant-design/issues/7093
+        this.setState({
+          _activeKey: getDefaultActiveKey(nextProps),
+        })
       }
     },
-  },
-  beforeUpdate () {
-    if (this.activeKey) {
-      this.stateActiveKey = this.activeKey
-    } else if (!activeKeyIsValid(this, this.stateActiveKey)) {
-      this.stateActiveKey = getDefaultActiveKey(this)
-    }
   },
   methods: {
-    getStateActiveKey () {
-      let activeKey
-      if (this.activeKey) {
-        activeKey = this.activeKey
-      } else if (this.defaultActiveKey) {
-        activeKey = this.defaultActiveKey
-      } else {
-        activeKey = getDefaultActiveKey(this)
+    onTabClick (activeKey, e) {
+      if (this.tabBar.componentOptions &&
+        this.tabBar.componentOptions.listeners &&
+        this.tabBar.componentOptions.listeners.tabClick) {
+        this.tabBar.componentOptions.listeners.tabClick(activeKey, e)
       }
-      return activeKey
-    },
-    handleTabClick (activeKey, e) {
-      this.__emit('tabClick', activeKey, e)
       this.setActiveKey(activeKey)
     },
 
@@ -99,130 +84,106 @@ export default {
       if (eventKeyCode === KeyCode.RIGHT || eventKeyCode === KeyCode.DOWN) {
         e.preventDefault()
         const nextKey = this.getNextActiveKey(true)
-        this.handleTabClick(nextKey)
+        this.onTabClick(nextKey)
       } else if (eventKeyCode === KeyCode.LEFT || eventKeyCode === KeyCode.UP) {
         e.preventDefault()
         const previousKey = this.getNextActiveKey(false)
-        this.handleTabClick(previousKey)
+        this.onTabClick(previousKey)
       }
     },
 
     setActiveKey (activeKey) {
-      if (this.stateActiveKey !== activeKey) {
-        if (!hasProp(this, 'activeKey')) {
-          this.stateActiveKey = activeKey
+      if (this.$data._activeKey !== activeKey) {
+        const props = getOptionProps(this)
+        if (!('activeKey' in props)) {
+          this.setState({
+            _activeKey: activeKey,
+          })
         }
         this.__emit('change', activeKey)
       }
     },
 
     getNextActiveKey (next) {
-      const activeKey = this.stateActiveKey
+      const activeKey = this.$data._activeKey
       const children = []
-      this.$slots.default && this.$slots.default.forEach(({ componentOptions = {}, key: tabKey }) => {
-        const c = componentOptions.propsData
-
+      this.$props.children.forEach((c) => {
         if (c && !c.disabled && c.disabled !== '') {
           if (next) {
-            children.push({ ...c, tabKey })
+            children.push(c)
           } else {
-            children.unshift({ ...c, tabKey })
+            children.unshift(c)
           }
         }
       })
       const length = children.length
-      let ret = length && children[0].tabKey
+      let ret = length && children[0].key
       children.forEach((child, i) => {
-        if (child.tabKey === activeKey) {
+        if (child.key === activeKey) {
           if (i === length - 1) {
-            ret = children[0].tabKey
+            ret = children[0].key
           } else {
-            ret = children[i + 1].tabKey
+            ret = children[i + 1].key
           }
         }
       })
       return ret
     },
   },
-  beforeDestroy () {
-  },
   render () {
+    const props = this.$props
     const {
       prefixCls,
+      navWrapper,
       tabBarPosition,
+      renderTabContent,
+      renderTabBar,
       destroyInactiveTabPane,
-      onNavKeyDown,
-      handleTabClick,
-      stateActiveKey,
-      classes,
-      setActiveKey,
-      $slots,
-    } = this
-    const panels = []
+    } = props
+    const cls = {
+      [prefixCls]: 1,
+      [`${prefixCls}-${tabBarPosition}`]: 1,
+    }
 
-    $slots.default && $slots.default.forEach(({ componentOptions, key: tabKey }) => {
-      if (componentOptions) {
-        if (componentOptions.propsData.tab === undefined) {
-          const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
-          componentOptions.propsData.tab = tab
-        }
-        panels.push({ ...componentOptions.propsData, tabKey })
-      }
-    })
-    const tabContentProps = {
-      props: {
-        ...this.tabContentProps.props,
-        prefixCls,
-        tabBarPosition,
-        activeKey: stateActiveKey,
-        destroyInactiveTabPane,
-        // onChange: setActiveKey,
-      },
-      on: {
-        change: setActiveKey,
-      },
-    }
-    const tabBarProps = {
-      props: {
-        ...this.tabBarProps.props,
-        panels: panels,
-        prefixCls: prefixCls,
-        tabBarPosition: tabBarPosition,
-        activeKey: stateActiveKey,
-      },
-      style: this.tabBarProps.style || {},
-      on: {
-        ...this.tabBarProps.on,
-        keydown: onNavKeyDown,
-        tabClick: handleTabClick,
-      },
-    }
+    this.tabBar = renderTabBar()
     const contents = [
-      <ScrollableInkTabBar
-        {...tabBarProps}
-        key='tabBar'
-      >
-        {$slots.tabBarExtraContent ? <template slot='extraContent'>
-          {$slots.tabBarExtraContent}
-        </template> : null}
-      </ScrollableInkTabBar>,
-      <TabContent
-        {...tabContentProps}
-        key='tabContent'
-      >
-        {$slots.default}
-      </TabContent>,
+      cloneElement(this.tabBar, {
+        props: {
+          prefixCls,
+          navWrapper,
+          tabBarPosition,
+          panels: props.children,
+          activeKey: this.$data._activeKey,
+        },
+        on: {
+          keydown: this.onNavKeyDown,
+          tabClick: this.onTabClick,
+        },
+        key: 'tabBar',
+      }),
+      cloneElement(renderTabContent(), {
+        props: {
+          prefixCls,
+          tabBarPosition,
+          activeKey: this.$data._activeKey,
+          destroyInactiveTabPane,
+        },
+        on: {
+          change: this.setActiveKey,
+        },
+        children: props.children,
+        key: 'tabContent',
+      }),
     ]
     if (tabBarPosition === 'bottom') {
       contents.reverse()
     }
     return (
       <div
-        class={classes}
+        class={cls}
       >
         {contents}
       </div>
     )
   },
 }
-

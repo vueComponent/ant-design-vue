@@ -21,7 +21,7 @@ export function flattenArray (arr) {
 export function treeTraverse (path = '', tree, isLeafNode, errorMessage, callback) {
   if (isLeafNode(path, tree)) {
     callback(path, tree)
-  } else if (tree === undefined) {
+  } else if (tree === undefined || tree === null) {
     return
   } else if (Array.isArray(tree)) {
     tree.forEach((subTree, index) => treeTraverse(

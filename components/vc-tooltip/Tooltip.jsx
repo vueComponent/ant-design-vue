@@ -2,11 +2,12 @@
 import PropTypes from '../_util/vue-types'
 import Trigger from '../trigger'
 import { placements } from './placements'
+import Content from './Content'
 import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util'
 function noop () {}
 export default {
   props: {
-    trigger: PropTypes.any.def('hover'),
+    trigger: PropTypes.any.def(['hover']),
     defaultVisible: PropTypes.bool,
     visible: PropTypes.bool,
     placement: PropTypes.string.def('right'),
@@ -36,9 +37,13 @@ export default {
         <div class={`${prefixCls}-arrow`} key='arrow'>
           {getComponentFromProp(this, 'arrowContent')}
         </div>,
-        <div class={`${prefixCls}-inner`} key='content' id={tipId}>
-          {getComponentFromProp(this, 'overlay')}
-        </div>,
+        <Content
+          key='content'
+          trigger={this.$refs.trigger}
+          prefixCls={prefixCls}
+          id={tipId}
+          overlay={getComponentFromProp(this, 'overlay')}
+        />,
       ])
     },
 
@@ -82,6 +87,7 @@ export default {
         ...extraProps,
       },
       on: {
+        ...this.$listeners,
         popupVisibleChange: this.$listeners.visibleChange || noop,
         popupAlign: this.$listeners.popupAlign || noop,
       },

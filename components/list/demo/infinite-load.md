@@ -10,9 +10,9 @@ The example of infinite load with [vue-infinite-scroll](https://github.com/Eleme
 
 ```html
 <template>
-<div 
-  class="demo-infinite-container" 
-  v-infinite-scroll="handleInfiniteOnLoad" 
+<div
+  class="demo-infinite-container"
+  v-infinite-scroll="handleInfiniteOnLoad"
   :infinite-scroll-disabled="busy"
   :infinite-scroll-distance="10"
 >
@@ -26,7 +26,9 @@ The example of infinite load with [vue-infinite-scroll](https://github.com/Eleme
       </a-list-item-meta>
       <div>Content</div>
     </a-list-item>
-    <a-spin v-if="loading && !busy" class="demo-loading" />
+    <div v-if="loading && !busy" class="demo-loading-container">
+      <a-spin />
+    </div>
   </a-list>
 </div>
 </template>
@@ -43,7 +45,7 @@ export default {
       busy: false,
     }
   },
-  mounted () {
+  beforeMount () {
     this.getData((res) => {
       this.data = res.results
     })
@@ -85,7 +87,7 @@ export default {
   padding: 8px 24px;
   height: 300px;
 }
-.demo-loading {
+.demo-loading-container {
   position: absolute;
   bottom: 40px;
   width: 100%;

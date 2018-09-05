@@ -11,7 +11,7 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
 ```html
 <template>
   <a-layout id="components-layout-demo-fixed">
-    <a-layout-header :style="{ position: 'fixed', width: '100%' }">
+    <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
       <div class="logo" />
       <a-menu
         theme="dark"
@@ -33,7 +33,7 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
       <div :style="{ background: '#fff', padding: '24px', minHeight: '380px' }">Content</div>
     </a-layout-content>
     <a-layout-footer :style="{ textAlign: 'center' }">
-      Ant Design ©2016 Created by Ant UED
+      Ant Design ©2018 Created by Ant UED
     </a-layout-footer>
   </a-layout>
 </template>

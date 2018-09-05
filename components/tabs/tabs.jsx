@@ -1,9 +1,13 @@
-
-import Tabs from '../vc-tabs/src/Tabs'
+import Icon from '../icon'
+import VcTabs, { TabPane } from '../vc-tabs/src'
+import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar'
+import TabContent from '../vc-tabs/src/TabContent'
 import isFlexSupported from '../_util/isFlexSupported'
-import { hasProp, getComponentFromProp, isEmptyElement, getSlotOptions } from '../_util/props-util'
+import { hasProp, getComponentFromProp, isEmptyElement, getSlotOptions, getOptionProps, filterEmpty, mergeProps } from '../_util/props-util'
 import warning from '../_util/warning'
+import { cloneElement } from '../_util/vnode'
 export default {
+  TabPane,
   name: 'ATabs',
   props: {
     prefixCls: { type: String, default: 'ant-tabs' },
@@ -88,6 +92,8 @@ export default {
       $slots,
       tabBarGutter,
     } = this
+    const children = filterEmpty(this.$slots.default)
+    let tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
     let { inkBarAnimated, tabPaneAnimated } = typeof animated === 'object' ? { // eslint-disable-line
       inkBarAnimated: !!animated.inkBar, tabPaneAnimated: !!animated.tabPane,
     } : {
@@ -107,72 +113,148 @@ export default {
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
     }
-    const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
-    const children = []
-    $slots.default && $slots.default.forEach((child) => {
-      if (isEmptyElement(child)) { return }
-      const { componentOptions } = child
-      const __ANT_TAB_PANE = getSlotOptions(child).__ANT_TAB_PANE
-      warning(__ANT_TAB_PANE, '`Tabs children just support TabPane')
-      if (componentOptions && __ANT_TAB_PANE) {
-        componentOptions.propsData = componentOptions.propsData || {}
-        if (componentOptions.propsData.tab === undefined) {
-          const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
-          componentOptions.propsData.tab = tab
-        }
-        children.push(child)
+    // only card type tabs can be added and closed
+    let childrenWithClose = []
+    if (type === 'editable-card') {
+      childrenWithClose = []
+      children.forEach((child, index) => {
+        const props = getOptionProps(child)
+        let closable = props.closable
+        closable = typeof closable === 'undefined' ? true : closable
+        const closeIcon = closable ? (
+          <Icon
+            type='close'
+            onClick={e => this.removeTab(child.key, e)}
+          />
+        ) : null
+        childrenWithClose.push(cloneElement(child, {
+          props: {
+            tab: (
+              <div class={closable ? undefined : `${prefixCls}-tab-unclosable`}>
+                {getComponentFromProp(child, 'tab')}
+                {closeIcon}
+              </div>
+            ),
+          },
+          key: child.key || index,
+        }))
+      })
+      // Add new tab handler
+      if (!hideAdd) {
+        tabBarExtraContent = (
+          <span>
+            <Icon type='plus' class={`${prefixCls}-new-tab`} onClick={this.createNewTab} />
+            {tabBarExtraContent}
+          </span>
+        )
       }
-    })
-    const tabBarProps = {
-      props: {
-        hideAdd,
-        removeTab: this.removeTab,
-        createNewTab: this.createNewTab,
-        inkBarAnimated,
-        tabBarGutter,
-      },
-      on: {
-        tabClick: onTabClick,
-        prevClick: onPrevClick,
-        nextClick: onNextClick,
-      },
-      style: tabBarStyle,
     }
-    const tabContentProps = {
-      props: {
-        animated: tabPaneAnimated,
-        animatedWithMargin: true,
-      },
+
+    tabBarExtraContent = tabBarExtraContent ? (
+      <div class={`${prefixCls}-extra-content`}>
+        {tabBarExtraContent}
+      </div>
+    ) : null
+
+    const renderTabBar = () => {
+      const scrollableInkTabBarProps = {
+        props: {
+          inkBarAnimated,
+          extraContent: tabBarExtraContent,
+          tabBarGutter,
+        },
+        on: {
+          tabClick: onTabClick,
+          prevClick: onPrevClick,
+          nextClick: onNextClick,
+        },
+        style: tabBarStyle,
+      }
+      return <ScrollableInkTabBar {...scrollableInkTabBarProps}/>
     }
     const tabsProps = {
       props: {
-        prefixCls,
+        ...getOptionProps(this),
         tabBarPosition: tabPosition,
-        tabBarProps: tabBarProps,
-        tabContentProps: tabContentProps,
-        destroyInactiveTabPane,
-        defaultActiveKey,
-        type,
+        renderTabBar: renderTabBar,
+        renderTabContent: () => <TabContent animated={tabPaneAnimated} animatedWithMargin />,
+        children: childrenWithClose.length > 0 ? childrenWithClose : children,
+        __propsSymbol__: Symbol(),
       },
-      on: {
-        change: this.handleChange,
-        tabClick: this.onTabClick,
-      },
-    }
-    if (hasProp(this, 'activeKey')) {
-      tabsProps.props.activeKey = activeKey
     }
     return (
-      <Tabs
-        class={cls}
+      <VcTabs
         {...tabsProps}
-      >
-        {children}
-        {tabBarExtraContent ? <template slot='tabBarExtraContent'>
-          {tabBarExtraContent}
-        </template> : null}
-      </Tabs>
+        class={cls}
+        onChange={this.handleChange}
+      />
     )
+    // const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
+    // const children = []
+    // $slots.default && $slots.default.forEach((child) => {
+    //   if (isEmptyElement(child)) { return }
+    //   const { componentOptions } = child
+    //   const __ANT_TAB_PANE = getSlotOptions(child).__ANT_TAB_PANE
+    //   warning(__ANT_TAB_PANE, '`Tabs children just support TabPane')
+    //   if (componentOptions && __ANT_TAB_PANE) {
+    //     componentOptions.propsData = componentOptions.propsData || {}
+    //     if (componentOptions.propsData.tab === undefined) {
+    //       const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
+    //       componentOptions.propsData.tab = tab
+    //     }
+    //     children.push(child)
+    //   }
+    // })
+    // const tabBarProps = {
+    //   props: {
+    //     hideAdd,
+    //     removeTab: this.removeTab,
+    //     createNewTab: this.createNewTab,
+    //     inkBarAnimated,
+    //     tabBarGutter,
+    //   },
+    //   on: {
+    //     tabClick: onTabClick,
+    //     prevClick: onPrevClick,
+    //     nextClick: onNextClick,
+    //   },
+    //   style: tabBarStyle,
+    // }
+    // const tabContentProps = {
+    //   props: {
+    //     animated: tabPaneAnimated,
+    //     animatedWithMargin: true,
+    //   },
+    // }
+    // const tabsProps = {
+    //   props: {
+    //     prefixCls,
+    //     tabBarPosition: tabPosition,
+    //     tabBarProps: tabBarProps,
+    //     tabContentProps: tabContentProps,
+    //     destroyInactiveTabPane,
+    //     defaultActiveKey,
+    //     type,
+    //   },
+    //   on: {
+    //     change: this.handleChange,
+    //     tabClick: this.onTabClick,
+    //   },
+    // }
+    // if (hasProp(this, 'activeKey')) {
+    //   tabsProps.props.activeKey = activeKey
+    // }
+    // return (
+    //   <Tabs
+    //     class={cls}
+    //     {...tabsProps}
+    //   >
+    //     {children}
+    //     {tabBarExtraContent ? <template slot='tabBarExtraContent'>
+    //       {tabBarExtraContent}
+    //     </template> : null}
+    //   </Tabs>
+    // )
   },
 }
 

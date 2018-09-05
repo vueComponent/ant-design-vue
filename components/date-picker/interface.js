@@ -32,6 +32,7 @@ export const PickerProps = () => ({
   pickerInputClass: PropTypes.string,
   timePicker: PropTypes.any,
   autoFocus: PropTypes.bool,
+  tagPrefixCls: PropTypes.string,
 })
 
 export const SinglePickerProps = () => ({

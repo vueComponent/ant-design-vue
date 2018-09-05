@@ -28,7 +28,7 @@ const lazyLoadProps = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  onContentVisible: PropTypes.func,
+  _propsSymbol: PropTypes.any,
 }
 
 export default {
@@ -68,21 +68,17 @@ export default {
       if (this.lazyLoadHandler.flush) {
         this.lazyLoadHandler.flush()
       }
-
       this.resizeHander = addEventListener(window, 'resize', this.lazyLoadHandler)
       this.scrollHander = addEventListener(eventNode, 'scroll', this.lazyLoadHandler)
     })
   },
   watch: {
-    visible (val) {
-      if (!val) {
+    _propsSymbol (val) {
+      if (!this.visible) {
         this.lazyLoadHandler()
       }
     },
   },
-  // shouldComponentUpdate (_nextProps, nextState) {
-  //   return nextState.visible
-  // }
   beforeDestroy () {
     this._mounted = false
     if (this.lazyLoadHandler.cancel) {
@@ -121,12 +117,8 @@ export default {
       const eventNode = this.getEventNode()
 
       if (inViewport(node, eventNode, offset)) {
-        const { onContentVisible } = this.$props
-
         this.setState({ visible: true }, () => {
-          if (onContentVisible) {
-            onContentVisible()
-          }
+          this.__emit('contentVisible')
         })
         this.detachListeners()
       }

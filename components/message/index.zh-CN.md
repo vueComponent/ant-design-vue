@@ -20,12 +20,21 @@
 - `message.config(options)`
 - `message.destroy()`
 
+组件同时提供 promise 接口
+
+- `message[level](content, [duration]).then(afterClose)`
+- `message[level](content, [duration], onClose).then(afterClose)`
+
+其中`message[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise 。
+
+
 ### message.config
 
 ```js
 message.config({
   top: `100px`,
   duration: 2,
+  maxCount: 3,
 });
 ```
 
@@ -33,4 +42,5 @@ message.config({
 | --- | --- | --- | --- |
 | duration | 默认自动关闭延时，单位秒 | number | 3 |
 | getContainer | 配置渲染节点的输出位置 | () => HTMLElement | () => document.body |
+| maxCount | 最大显示数, 超过限制时，最早的消息会被自动关闭 | number | - |
 | top | 消息距离顶部的位置 | string | `24px` |

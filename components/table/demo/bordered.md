@@ -12,7 +12,7 @@ Add border, title and footer for table.
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
     <template slot="name" slot-scope="text">
-      <a href="#">{{text}}</a>
+      <a href="javascript:;">{{text}}</a>
     </template>
     <template slot="title" slot-scope="currentPageData">
       Header

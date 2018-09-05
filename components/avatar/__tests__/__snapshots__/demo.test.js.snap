@@ -1,31 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/avatar/demo/badge.md correctly 1`] = `
-<div><span style="margin-right: 24px;"><span class="ant-badge"><span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span>
-  <sup class="ant-scroll-number ant-badge-count ant-badge-zoom-enter"><span class="ant-scroll-number-only" style="transform: translateY(-1100%);"><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="current">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p></span></sup>
+<div><span style="margin-right: 24px;"><span class="ant-badge"><span class="ant-avatar ant-avatar-square ant-avatar-icon"><i class="anticon anticon-user"></i></span>
+  <sup title="1" class="ant-scroll-number ant-badge-count ant-badge-zoom-enter"><span class="ant-scroll-number-only" style="transform: translateY(-1100%);"><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="current">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p></span></sup>
   </span>
-  </span> <span class="ant-badge"><span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span>
+  </span> <span><span class="ant-badge"><span class="ant-avatar ant-avatar-square ant-avatar-icon"><i class="anticon anticon-user"></i></span>
   <sup class="ant-scroll-number ant-badge-dot ant-badge-zoom-enter"></sup>
+  </span>
   </span>
 </div>
 `;
 
 exports[`renders ./components/avatar/demo/basic.md correctly 1`] = `
 <div>
-  <div><span class="ant-avatar ant-avatar-icon ant-avatar-circle ant-avatar-lg"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-circle"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-circle ant-avatar-sm"><i class="anticon anticon-user"></i></span></div>
+  <div><span class="ant-avatar ant-avatar-circle ant-avatar-icon" style="width: 64px; height: 64px; line-height: 64px; font-size: 32px;"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-lg ant-avatar-circle ant-avatar-icon"><i class="anticon anticon-user"></i></span>    <span class="ant-avatar ant-avatar-circle ant-avatar-icon"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-icon"><i class="anticon anticon-user"></i></span></div>
   <br>
-  <div><span class="ant-avatar ant-avatar-icon ant-avatar-square ant-avatar-lg"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-square"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-icon ant-avatar-square ant-avatar-sm"><i class="anticon anticon-user"></i></span></div>
+  <div><span class="ant-avatar ant-avatar-square ant-avatar-icon" style="width: 64px; height: 64px; line-height: 64px; font-size: 32px;"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-lg ant-avatar-square ant-avatar-icon"><i class="anticon anticon-user"></i></span>    <span class="ant-avatar ant-avatar-square ant-avatar-icon"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-sm ant-avatar-square ant-avatar-icon"><i class="anticon anticon-user"></i></span></div>
 </div>
 `;
 
 exports[`renders ./components/avatar/demo/dynamic.md correctly 1`] = `
-<div><span class="ant-avatar ant-avatar-square ant-avatar-lg" style="background-color: rgb(245, 106, 0);"><span class="ant-avatar-string">U</span></span>
-  <button type="button" class="ant-btn ant-btn-default"><span>改 变</span></button>
+<div><span class="ant-avatar ant-avatar-lg ant-avatar-square" style="background-color: rgb(245, 106, 0); vertical-align: middle;"><span class="ant-avatar-string">U</span></span>
+  <button type="button" class="ant-btn ant-btn-default ant-btn-sm" style="vertical-align: middle;"><span>改 变</span></button>
 </div>
 `;
 
 exports[`renders ./components/avatar/demo/type.md correctly 1`] = `
-<div><span class="ant-avatar ant-avatar-icon ant-avatar-circle"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string">U</span></span> <span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string">USER</span></span>
-  <span class="ant-avatar ant-avatar-image ant-avatar-circle"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span> <span class="ant-avatar ant-avatar-circle" style="color: rgb(245, 106, 0); background-color: rgb(253, 227, 207);"><span class="ant-avatar-string">U</span></span>
-  <span class="ant-avatar ant-avatar-icon ant-avatar-circle" style="background-color: rgb(135, 208, 104);"><i class="anticon anticon-user"></i></span></div>
+<div><span class="ant-avatar ant-avatar-circle ant-avatar-icon"><i class="anticon anticon-user"></i></span> <span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string">U</span></span> <span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string">USER</span></span>
+  <span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span> <span class="ant-avatar ant-avatar-circle" style="color: rgb(245, 106, 0); background-color: rgb(253, 227, 207);"><span class="ant-avatar-string">U</span></span>
+  <span class="ant-avatar ant-avatar-circle ant-avatar-icon" style="background-color: rgb(135, 208, 104);"><i class="anticon anticon-user"></i></span></div>
 `;

@@ -1,6 +1,7 @@
 
+import warning from 'warning'
 import PropTypes from '../_util/vue-types'
-import VcSelect, { Option, OptGroup } from '../vc-select'
+import { Select as VcSelect, Option, OptGroup } from '../vc-select'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
 import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util'
@@ -20,6 +21,7 @@ const AbstractSelectProps = () => ({
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.any,
   dropdownMenuStyle: PropTypes.any,
+  dropdownMatchSelectWidth: PropTypes.bool,
   // onSearch: (value: string) => any,
   filterOption: PropTypes.oneOfType([
     PropTypes.bool,
@@ -28,6 +30,7 @@ const AbstractSelectProps = () => ({
   autoFocus: PropTypes.bool,
   backfill: PropTypes.bool,
   showArrow: PropTypes.bool,
+  getPopupContainer: PropTypes.func,
 })
 const Value = PropTypes.shape({
   key: PropTypes.string,
@@ -48,8 +51,10 @@ const SelectProps = {
   ...AbstractSelectProps(),
   value: SelectValue,
   defaultValue: SelectValue,
-  mode: PropTypes.oneOf(['default', 'multiple', 'tags', 'combobox']),
+  // mode: PropTypes.oneOf(['default', 'multiple', 'tags', 'combobox']),
+  mode: PropTypes.string,
   optionLabelProp: PropTypes.string,
+  firstActiveValue: PropTypes.oneOfType([String, PropTypes.arrayOf(String)]),
   // onChange?: (value: SelectValue, option: React.ReactElement<any> | React.ReactElement<any>[]) => void;
   // onSelect?: (value: SelectValue, option: React.ReactElement<any>) => any;
   // onDeselect?: (value: SelectValue) => any;
@@ -70,7 +75,7 @@ const SelectProps = {
 const SelectPropTypes = {
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(['default', 'large', 'small']),
-  combobox: PropTypes.bool,
+  // combobox: PropTypes.bool,
   notFoundContent: PropTypes.any,
   showSearch: PropTypes.bool,
   optionLabelProp: PropTypes.string,
@@ -83,8 +88,9 @@ export {
   SelectValue,
   SelectProps,
 }
-
+const SECRET_COMBOBOX_MODE_DO_NOT_USE = 'SECRET_COMBOBOX_MODE_DO_NOT_USE'
 export default {
+  SECRET_COMBOBOX_MODE_DO_NOT_USE,
   Option: { ...Option, name: 'ASelectOption' },
   OptGroup: { ...OptGroup, name: 'ASelectOptGroup' },
   name: 'ASelect',
@@ -100,6 +106,14 @@ export default {
     prop: 'value',
     event: 'change',
   },
+  created () {
+    warning(
+      this.$props.mode !== 'combobox',
+      'The combobox mode of Select is deprecated,' +
+      'it will be removed in next major version,' +
+      'please use AutoComplete instead',
+    )
+  },
   methods: {
     focus () {
       this.$refs.vcSelect.focus()
@@ -108,14 +122,16 @@ export default {
       this.$refs.vcSelect.blur()
     },
     getNotFoundContent (locale) {
-      const { mode } = this.$props
       const notFoundContent = getComponentFromProp(this, 'notFoundContent')
-      const isCombobox = mode === 'combobox'
-      if (isCombobox) {
+      if (this.isCombobox()) {
       // AutoComplete don't have notFoundContent defaultly
         return notFoundContent === undefined ? null : notFoundContent
       }
       return notFoundContent === undefined ? locale.notFoundContent : notFoundContent
+    },
+    isCombobox () {
+      const { mode } = this
+      return mode === 'combobox' || mode === SECRET_COMBOBOX_MODE_DO_NOT_USE
     },
     renderSelect (locale) {
       const {
@@ -131,8 +147,7 @@ export default {
       }
 
       let { optionLabelProp } = this.$props
-      const isCombobox = mode === 'combobox'
-      if (isCombobox) {
+      if (this.isCombobox()) {
       // children 带 dom 结构时，无法填入输入框
         optionLabelProp = optionLabelProp || 'value'
       }
@@ -140,7 +155,7 @@ export default {
       const modeConfig = {
         multiple: mode === 'multiple',
         tags: mode === 'tags',
-        combobox: isCombobox,
+        combobox: this.isCombobox(),
       }
       const selectProps = {
         props: {
@@ -151,22 +166,20 @@ export default {
           notFoundContent: this.getNotFoundContent(locale),
           maxTagPlaceholder: getComponentFromProp(this, 'maxTagPlaceholder'),
           placeholder: getComponentFromProp(this, 'placeholder'),
+          children: options
+            ? options.map((option) => {
+              const { key, label = option.title, ...restOption } = option
+              return <Option key={key} {...{ props: restOption }}>{label}</Option>
+            })
+            : filterEmpty(this.$slots.default),
+          __propsSymbol__: Symbol(),
         },
         on: this.$listeners,
         class: cls,
         ref: 'vcSelect',
       }
       return (
-        <VcSelect {...selectProps}>
-          {
-            options
-              ? options.map((option) => {
-                const { key, label = option.title, ...restOption } = option
-                return <Option key={key} {...{ props: restOption }}>{label}</Option>
-              })
-              : filterEmpty(this.$slots.default)
-          }
-        </VcSelect>
+        <VcSelect {...selectProps} />
       )
     },
   },

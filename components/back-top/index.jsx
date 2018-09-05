@@ -1,12 +1,9 @@
-
+import raf from 'raf'
 import PropTypes from '../_util/vue-types'
 import addEventListener from '../_util/Dom/addEventListener'
 import getScroll from '../_util/getScroll'
-import getRequestAnimationFrame from '../_util/getRequestAnimationFrame'
 import BaseMixin from '../_util/BaseMixin'
 import getTransitionProps from '../_util/getTransitionProps'
-
-const reqAnimFrame = getRequestAnimationFrame()
 
 const easeInOutCubic = (t, b, c, d) => {
   const cc = c - b
@@ -74,10 +71,12 @@ export default {
         const time = timestamp - startTime
         this.setScrollTop(easeInOutCubic(time, scrollTop, 0, 450))
         if (time < 450) {
-          reqAnimFrame(frameFunc)
+          raf(frameFunc)
+        } else {
+          this.setScrollTop(0)
         }
       }
-      reqAnimFrame(frameFunc)
+      raf(frameFunc)
       this.$emit('click', e)
     },
 

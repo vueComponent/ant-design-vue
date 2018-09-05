@@ -3,7 +3,9 @@ import * as moment from 'moment'
 import RangeCalendar from '../vc-calendar/src/RangeCalendar'
 import VcDatePicker from '../vc-calendar/src/Picker'
 import classNames from 'classnames'
+import shallowequal from 'shallowequal'
 import Icon from '../icon'
+import Tag from '../tag'
 import interopDefault from '../_util/interopDefault'
 import { RangePickerProps } from './interface'
 import { hasProp, getOptionProps, initDefaultProps, mergeProps } from '../_util/props-util'
@@ -60,6 +62,7 @@ export default {
   name: 'ARangePicker',
   props: initDefaultProps(RangePickerProps(), {
     prefixCls: 'ant-calendar',
+    tagPrefixCls: 'ant-tag',
     allowClear: true,
     showToday: false,
   }),
@@ -89,10 +92,14 @@ export default {
   watch: {
     value (val) {
       const value = val || []
-      this.setState({
-        sValue: value,
-        sShowDate: getShowDateFromValue(value) || this.sShowDate,
-      })
+      let state = { sValue: value }
+      if (!shallowequal(val, this.sValue)) {
+        state = {
+          ...state,
+          sShowDate: getShowDateFromValue(value) || this.sShowDate,
+        }
+      }
+      this.setState(state)
     },
     open (val) {
       this.setState({
@@ -176,6 +183,13 @@ export default {
       }
     },
 
+    onMouseEnter (e) {
+      this.$emit('mouseenter', e)
+    },
+    onMouseLeave (e) {
+      this.$emit('mouseleave', e)
+    },
+
     focus () {
       this.$refs.picker.focus()
     },
@@ -185,7 +199,7 @@ export default {
     },
 
     renderFooter (...args) {
-      const { prefixCls, ranges, $scopedSlots, $slots } = this
+      const { prefixCls, ranges, $scopedSlots, $slots, tagPrefixCls } = this
       const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter
       if (!ranges && !renderExtraFooter) {
         return null
@@ -198,14 +212,16 @@ export default {
       const operations = Object.keys(ranges || {}).map((range) => {
         const value = ranges[range]
         return (
-          <a
+          <Tag
             key={range}
+            prefixCls={tagPrefixCls}
+            color='blue'
             onClick={() => this.handleRangeClick(value)}
             onMouseenter={() => this.setState({ sHoverValue: value })}
             onMouseleave={this.handleRangeMouseLeave}
           >
             {range}
-          </a>
+          </Tag>
         )
       })
       const rangeNode = (
@@ -356,6 +372,8 @@ export default {
         tabIndex={props.disabled ? -1 : 0}
         onFocus={focus}
         onBlur={blur}
+        onMouseenter={this.onMouseEnter}
+        onMouseleave={this.onMouseLeave}
       >
         <VcDatePicker
           {...vcDatePickerProps}

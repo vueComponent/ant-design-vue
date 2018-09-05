@@ -13,7 +13,7 @@ Rows can be selectable by making first column as a selectable column.
 ```html
 <template>
   <a-table :rowSelection="rowSelection" :columns="columns" :dataSource="data">
-    <a slot="name" slot-scope="text" href="#">{{text}}</a>
+    <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
   </a-table>
 </template>
 <script>

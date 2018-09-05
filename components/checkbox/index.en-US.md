@@ -1,6 +1,8 @@
 ## API
 
-### Checkbox
+### Props
+
+#### Checkbox
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -8,13 +10,14 @@
 | checked | Specifies whether the checkbox is selected. | boolean | false |
 | defaultChecked | Specifies the initial state: whether or not the checkbox is selected. | boolean | false |
 | disabled | Disable checkbox | boolean | false |
+| indeterminate | indeterminate checked state of checkbox | boolean | false |
 
-### events
+#### events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | The callback function that is triggered when the state changes. | Function(e:Event) |
 
-### Checkbox Group
+#### Checkbox Group
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -23,14 +26,14 @@
 | options | Specifies options | string\[] | \[] |
 | value | Used for setting the currently selected value. | string\[] | \[] |
 
-### events
+#### events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | The callback function that is triggered when the state changes. | Function(checkedValue) |
 
-## Methods
+### Methods
 
-### Checkbox
+#### Checkbox
 
 | Name | Description |
 | ---- | ----------- |

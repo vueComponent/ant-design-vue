@@ -15,7 +15,7 @@ To fix some columns and scroll inside other columns, and you must set `scroll.x`
 ```html
 <template>
   <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1300 }">
-    <a slot="action" slot-scope="text" href="#">action</a>
+    <a slot="action" slot-scope="text" href="javascript:;">action</a>
   </a-table>
 </template>
 <script>

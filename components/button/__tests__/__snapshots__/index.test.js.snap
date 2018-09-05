@@ -16,6 +16,21 @@ exports[`Button renders Chinese characters correctly 2`] = `
   <i class="anticon anticon-search"></i>按钮</button>
 `;
 
+exports[`Button renders Chinese characters correctly 3`] = `
+<button type="button" class="ant-btn ant-btn-default">
+  <i class="anticon anticon-search"></i><span>按钮</span></button>
+`;
+
+exports[`Button renders Chinese characters correctly 4`] = `
+<button type="button" class="ant-btn ant-btn-default ant-btn-loading">
+  <i class="anticon anticon-loading anticon-spin"></i><span>按钮</span></button>
+`;
+
+exports[`Button renders Chinese characters correctly 5`] = `
+<button type="button" class="ant-btn ant-btn-default ant-btn-loading">
+  <i class="anticon anticon-loading anticon-spin"></i><span>按 钮</span></button>
+`;
+
 exports[`Button renders correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Follow</span></button>`;
 
-exports[`Button should support link button 1`] = `<button target="_blank" href="http://ant.design" type="button" class="ant-btn ant-btn-default"><span>link button</span></button>`;
+exports[`Button should support link button 1`] = `<a target="_blank" href="http://ant.design" type="button" class="ant-btn ant-btn-default"><span>link button</span></a>`;

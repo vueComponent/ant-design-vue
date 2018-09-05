@@ -52,6 +52,7 @@ export default {
     }
     const dialog = (
       <Dialog
+        // getContainer={() => this.$refs.container}
         visible={this.visible}
         wrapClassName={wrapClassName}
         animation='zoom'
@@ -61,7 +62,7 @@ export default {
         mousePosition={this.mousePosition}
         destroyOnClose={this.destroyOnClose}
       >
-        <input />
+        <input autoFocus/>
         <p>basic modal</p>
         <button onClick={this.changeWidth}>change width</button>
         <div style={{ height: '200px' }} />
@@ -70,7 +71,7 @@ export default {
     return (
       <div>
         <h2>ant-design dialog</h2>
-        <div style={{ width: '90%', margin: '0 auto' }}>
+        <div style={{ width: '90%', margin: '0 auto' }} ref='container'>
           <style>
             {`
             .center {

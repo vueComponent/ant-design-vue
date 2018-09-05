@@ -145,4 +145,18 @@ describe('Radio', () => {
       expect(el.element.name).toEqual(GROUP_NAME)
     }))
   })
+
+  it('passes prefixCls down to radio', () => {
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Orange', value: 'Orange' },
+    ]
+
+    const wrapper = mount(RadioGroup, { propsData: {
+      prefixCls: 'my-radio',
+      options,
+    }}
+    )
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

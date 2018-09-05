@@ -38,18 +38,25 @@ Using template style API
       key="address"
     />
     <a-table-column
+      title="Tags"
+      dataIndex="tags"
+      key="tags"
+    >
+      <template slot-scope="tags">
+        <span>
+          <a-tag v-for="tag in tags" color="blue" :key="tag">{{tag}}</a-tag>
+        </span>
+      </template>
+    </a-table-column>
+    <a-table-column
       title="Action"
       key="action"
     >
       <template slot-scope="text, record">
         <span>
-          <a href="#">Action 一 {{record.firstName}}</a>
+          <a href="javascript:;">Action 一 {{record.firstName}}</a>
           <a-divider type="vertical" />
-          <a href="#">Delete</a>
-          <a-divider type="vertical" />
-          <a href="#" class="ant-dropdown-link">
-            More actions <a-icon type="down" />
-          </a>
+          <a href="javascript:;">Delete</a>
         </span>
       </template>
     </a-table-column>
@@ -63,18 +70,21 @@ const data = [{
   lastName: 'Brown',
   age: 32,
   address: 'New York No. 1 Lake Park',
+  tags: ['nice', 'developer'],
 }, {
   key: '2',
   firstName: 'Jim',
   lastName: 'Green',
   age: 42,
   address: 'London No. 1 Lake Park',
+  tags: ['loser'],
 }, {
   key: '3',
   firstName: 'Joe',
   lastName: 'Black',
   age: 32,
   address: 'Sidney No. 1 Lake Park',
+  tags: ['cool', 'teacher'],
 }];
 
 export default {

@@ -9,7 +9,7 @@ exports[`Upload List handle error 1`] = `
     <div>
       <div class="ant-progress-outer">
         <div class="ant-progress-inner">
-          <div class="ant-progress-bg" style="width: 0%; height: 2px;"></div>
+          <div class="ant-progress-bg" style="width: 0%; height: 2px; border-radius: 100px;"></div>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@ exports[`Upload List handle error 2`] = `
     <div>
       <div class="ant-progress-outer">
         <div class="ant-progress-inner">
-          <div class="ant-progress-bg" style="width: 0%; height: 2px;"></div>
+          <div class="ant-progress-bg" style="width: 0%; height: 2px; border-radius: 100px;"></div>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@ exports[`Upload List should non-image format file preview 1`] = `
   <!---->
   </div>
   <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
+    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/aaa" alt="image"></a><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
     <i
       class="anticon anticon-cross"></i>
       <!---->
@@ -79,19 +79,19 @@ exports[`Upload List should non-image format file preview 1`] = `
       <!---->
   </div>
   <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
+    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png?query=123" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
     <i
       class="anticon anticon-cross"></i>
       <!---->
   </div>
   <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
+    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png#anchor" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
     <i
       class="anticon anticon-cross"></i>
       <!---->
   </div>
   <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
+    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
     <i
       class="anticon anticon-cross"></i>
       <!---->

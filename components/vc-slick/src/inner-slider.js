@@ -52,10 +52,10 @@ export default {
   },
   methods: {
     listRefHandler (ref) {
-      this.list = ref && ref.elm
+      this.list = ref
     },
     trackRefHandler (ref) {
-      this.track = ref && ref.elm
+      this.track = ref
     },
     adaptHeight () {
       if (this.adaptiveHeight && this.list) {
@@ -622,48 +622,6 @@ export default {
       })
       this.preProps = { ...nextProps }
     },
-    // '$props': function (props) {
-    //   const spec = {
-    //     listRef: this.list,
-    //     trackRef: this.track,
-    //     children: this.$slots.default,
-    //     ...props,
-    //     ...this.$data,
-    //   }
-    //   let setTrackStyle = false
-    //   for (const key of Object.keys(this.$props)) {
-    //     if (!props.hasOwnProperty(key)) {
-    //       setTrackStyle = true
-    //       break
-    //     }
-    //     if (
-    //       typeof props[key] === 'object' ||
-    //       typeof props[key] === 'function'
-    //     ) {
-    //       continue
-    //     }
-    //     if (props[key] !== this.$props[key]) {
-    //       setTrackStyle = true
-    //       break
-    //     }
-    //   }
-    //   this.updateState(spec, setTrackStyle, () => {
-    //     const children = this.$slots.default
-    //     if (this.currentSlide >= children.length) {
-    //       this.changeSlide({
-    //         message: 'index',
-    //         index:
-    //         children.length - props.slidesToShow,
-    //         currentSlide: this.currentSlide,
-    //       })
-    //     }
-    //     if (props.autoplay) {
-    //       this.handleAutoPlay('update')
-    //     } else {
-    //       this.pause('paused')
-    //     }
-    //   })
-    // },
   },
   render () {
     const className = classnames('slick-slider', {

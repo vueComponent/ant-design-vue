@@ -6,7 +6,8 @@ The whole of the step bar.
 | -------- | ----------- | ---- | ------- |
 | current | to set the current step, counting from 0. You can overwrite this state by using `status` of `Step` | number | 0 |
 | direction | to specify the direction of the step bar, `horizontal` and `vertical` are currently supported | string | `horizontal` |
-| progressDot | Steps with progress dot style, customize the progress dot by setting a scoped slot | Boolean or slot="progressDot" slot-scope="{index, status, title, description, prefixCls})" | false |
+| labelPlacement | support vertial title and description | string | `horizontal` |
+| progressDot | Steps with progress dot style, customize the progress dot by setting a scoped slot. labelPlacement will be `vertical` | Boolean or slot="progressDot" slot-scope="{index, status, title, description, prefixCls})" | false |
 | size | to specify the size of the step bar, `default` and `small` are currently supported | string | `default` |
 | status | to specify the status of current step, can be set to one of the following values: `wait` `process` `finish` `error` | string | `process` |
 

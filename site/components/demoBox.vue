@@ -46,7 +46,6 @@ export default {
     isIframe: Boolean,
   },
   inject: {
-    _store: { default: {}},
     iframeDemo: { default: {}},
     demoContext: { default: {}},
   },
@@ -66,10 +65,10 @@ export default {
     const iframeDemoKey = usTitle.split(' ').join('-').toLowerCase()
     const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
 
-    if (this._store.store) {
-      const { currentSubMenu } = this._store.store.getState()
+    if (this.demoContext.store) {
+      const { currentSubMenu } = this.demoContext.store.getState()
       // id = `${id}-${currentSubMenu.length + 1}`
-      this._store.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
+      this.demoContext.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
     }
     return {
       isOpen: false,

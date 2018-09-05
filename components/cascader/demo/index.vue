@@ -9,6 +9,7 @@ import Hover from './hover'
 import Lazy from './lazy'
 import Search from './search'
 import Size from './size'
+import FieldsName from './fields-name'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -26,7 +27,7 @@ const md = {
 - When you need to select from a set of associated data set. Such as province/city/district, company level, things classification.
 - When selecting from a large data set, with multi-stage classification separated for easy selection.
 - Chooses cascade items in one float layer for better user experience.
-## Examples 
+## Examples
           `,
 }
 export default {
@@ -48,6 +49,7 @@ export default {
         <Lazy/>
         <Search/>
         <Size/>
+        <FieldsName />
         <api>
           <CN slot='cn' />
           <US/>

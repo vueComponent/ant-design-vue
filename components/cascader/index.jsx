@@ -11,11 +11,23 @@ import { hasProp, filterEmpty, getOptionProps, getStyle, getClass, getAttrs } fr
 import BaseMixin from '../_util/BaseMixin'
 
 const CascaderOptionType = PropTypes.shape({
-  value: PropTypes.string.isRequired,
-  label: PropTypes.any.isRequired,
+  value: PropTypes.string,
+  label: PropTypes.any,
   disabled: PropTypes.bool,
   children: PropTypes.array,
-  __IS_FILTERED_OPTION: PropTypes.bool,
+  key: PropTypes.string,
+}).loose
+
+const FieldNamesType = PropTypes.shape({
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  children: PropTypes.string,
+}).loose
+
+const FilledFieldNamesType = PropTypes.shape({
+  value: PropTypes.string,
+  label: PropTypes.string,
+  children: PropTypes.string,
 }).loose
 
 const CascaderExpandTrigger = PropTypes.oneOf(['click', 'hover'])
@@ -66,19 +78,29 @@ const CascaderProps = {
   inputPrefixCls: PropTypes.string.def('ant-input'),
   getPopupContainer: PropTypes.func,
   popupVisible: PropTypes.bool,
+  fieldNames: FieldNamesType,
   autoFocus: PropTypes.bool,
 }
 
-function defaultFilterOption (inputValue, path) {
-  return path.some(option => option.label.indexOf(inputValue) > -1)
+function defaultFilterOption (inputValue, path, names) {
+  return path.some(option => option[names.label].indexOf(inputValue) > -1)
 }
 
-function defaultSortFilteredOption (a, b, inputValue) {
+function defaultSortFilteredOption (a, b, inputValue, names) {
   function callback (elem) {
-    return elem.label.indexOf(inputValue) > -1
+    return elem[names.label].indexOf(inputValue) > -1
   }
 
   return a.findIndex(callback) - b.findIndex(callback)
+}
+
+function getFilledFieldNames (fieldNames = {}) {
+  const names = {
+    children: fieldNames.children || 'children',
+    label: fieldNames.label || 'label',
+    value: fieldNames.value || 'value',
+  }
+  return names
 }
 
 const defaultDisplayRender = ({ labels }) => labels.join(' / ')
@@ -94,13 +116,13 @@ export default {
   },
   data () {
     this.cachedOptions = []
-    const { value, defaultValue, popupVisible, showSearch, options, changeOnSelect, flattenTree } = this
+    const { value, defaultValue, popupVisible, showSearch, options, changeOnSelect, flattenTree, fieldNames } = this
     return {
       sValue: value || defaultValue || [],
       inputValue: '',
       inputFocused: false,
       sPopupVisible: popupVisible,
-      flattenOptions: showSearch && flattenTree(options, changeOnSelect),
+      flattenOptions: showSearch ? flattenTree(options, changeOnSelect, fieldNames) : undefined,
     }
   },
   mounted () {
@@ -119,7 +141,7 @@ export default {
     },
     options (val) {
       if (this.showSearch) {
-        this.setState({ flattenOptions: this.flattenTree(this.options, this.changeOnSelect) })
+        this.setState({ flattenOptions: this.flattenTree(this.options, this.changeOnSelect, this.fieldNames) })
       }
     },
   },
@@ -132,8 +154,9 @@ export default {
         ])
     },
 
-    defaultRenderFilteredOption ({ inputValue, path, prefixCls }) {
-      return path.map(({ label }, index) => {
+    defaultRenderFilteredOption ({ inputValue, path, prefixCls, names }) {
+      return path.map((option, index) => {
+        const label = option[names.label]
         const node = label.indexOf(inputValue) > -1
           ? this.highlightKeyword(label, inputValue, prefixCls) : label
         return index === 0 ? node : [' / ', node]
@@ -176,7 +199,9 @@ export default {
       // Prevent `Trigger` behaviour.
       if (inputFocused || sPopupVisible) {
         e.stopPropagation()
-        e.nativeEvent && e.nativeEvent.stopImmediatePropagation()
+        if (e.nativeEvent && e.nativeEvent.stopImmediatePropagation) {
+          e.nativeEvent.stopImmediatePropagation()
+        }
       }
     },
 
@@ -199,14 +224,16 @@ export default {
     },
 
     getLabel () {
-      const { options, $scopedSlots } = this
+      const { options, $scopedSlots, fieldNames } = this
+      const names = getFilledFieldNames(fieldNames)
       const displayRender = this.displayRender || $scopedSlots.displayRender || defaultDisplayRender
       const value = this.sValue
       const unwrappedValue = Array.isArray(value[0]) ? value[0] : value
       const selectedOptions = arrayTreeFilter(options,
-        (o, level) => o.value === unwrappedValue[level],
+        (o, level) => o[names.value] === unwrappedValue[level],
+        { childrenKeyName: names.children },
       )
-      const labels = selectedOptions.map(o => o.label)
+      const labels = selectedOptions.map(o => o[names.label])
       return displayRender({ labels, selectedOptions })
     },
 
@@ -221,43 +248,49 @@ export default {
       }
     },
 
-    flattenTree (options, changeOnSelect, ancestor = []) {
+    flattenTree (options, changeOnSelect, fieldNames, ancestor = []) {
+      const names = getFilledFieldNames(fieldNames)
       let flattenOptions = []
+      const childrenName = names.children
       options.forEach((option) => {
         const path = ancestor.concat(option)
-        if (changeOnSelect || !option.children || !option.children.length) {
+        if (changeOnSelect || !option[childrenName] || !option[childrenName].length) {
           flattenOptions.push(path)
         }
-        if (option.children) {
-          flattenOptions = flattenOptions.concat(this.flattenTree(option.children, changeOnSelect, path))
+        if (option[childrenName]) {
+          flattenOptions = flattenOptions.concat(
+            this.flattenTree(option[childrenName], changeOnSelect, fieldNames, path)
+          )
         }
       })
       return flattenOptions
     },
 
     generateFilteredOptions (prefixCls) {
-      const { showSearch, notFoundContent, flattenOptions, inputValue, $scopedSlots } = this
+      const { showSearch, notFoundContent, $scopedSlots, fieldNames } = this
+      const names = getFilledFieldNames(fieldNames)
       const {
         filter = defaultFilterOption,
         // render = this.defaultRenderFilteredOption,
         sort = defaultSortFilteredOption,
       } = showSearch
+      const { flattenOptions = [], inputValue } = this.$data
       const render = showSearch.render || $scopedSlots.showSearchRender || this.defaultRenderFilteredOption
-      const filtered = flattenOptions.filter((path) => filter(inputValue, path))
-        .sort((a, b) => sort(a, b, inputValue))
+      const filtered = flattenOptions.filter((path) => filter(inputValue, path, names))
+        .sort((a, b) => sort(a, b, inputValue, names))
 
       if (filtered.length > 0) {
         return filtered.map((path) => {
           return {
             __IS_FILTERED_OPTION: true,
             path,
-            label: render({ inputValue, path, prefixCls }),
-            value: path.map((o) => o.value),
-            disabled: path.some((o) => o.disabled),
+            [names.label]: render({ inputValue, path, prefixCls, names }),
+            [names.value]: path.map((o) => o[names.value]),
+            disabled: path.some((o) => !!o.disabled),
           }
         })
       }
-      return [{ label: notFoundContent, value: 'ANT_CASCADER_NOT_FOUND', disabled: true }]
+      return [{ [names.label]: notFoundContent, [names.value]: 'ANT_CASCADER_NOT_FOUND', disabled: true }]
     },
 
     focus () {
@@ -278,7 +311,8 @@ export default {
   },
 
   render () {
-    const { $slots, sValue: value, sPopupVisible, inputValue, $listeners } = this
+    const { $slots, sPopupVisible, inputValue, $listeners } = this
+    const { sValue: value, inputFocused } = this.$data
     const props = getOptionProps(this)
     const {
       prefixCls, inputPrefixCls, placeholder, size, disabled,
@@ -306,6 +340,8 @@ export default {
         [`${prefixCls}-picker-with-value`]: inputValue,
         [`${prefixCls}-picker-disabled`]: disabled,
         [`${prefixCls}-picker-${size}`]: !!size,
+        [`${prefixCls}-picker-show-search`]: !!showSearch,
+        [`${prefixCls}-picker-focused`]: inputFocused,
       })
 
     // Fix bug of https://github.com/facebook/react/pull/5004
@@ -326,6 +362,7 @@ export default {
       'sortFilteredOption',
       'notFoundContent',
       'defaultValue',
+      'fieldNames',
     ])
 
     let options = this.options

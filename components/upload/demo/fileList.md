@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       fileList: [{
-        uid: -1,
+        uid: '-1',
         name: 'xxx.png',
         status: 'done',
         url: 'http://www.baidu.com/xxx.png',

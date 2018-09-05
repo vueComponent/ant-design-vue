@@ -68,7 +68,7 @@ export default {
       this.progressTimer = setInterval(() => {
         curPercent = getPercent(curPercent)
         this.onProgress({
-          percent: curPercent,
+          percent: curPercent * 100,
         }, file)
       }, 200)
     },
@@ -163,7 +163,10 @@ export default {
       if (result === false) {
         this.onChange({
           file,
-          fileList: uniqBy(fileList.concat(this.sFileList), (item) => item.uid),
+          fileList: uniqBy(
+            this.sFileList.concat(fileList.map(fileToObject)),
+            (item) => item.uid,
+          ),
         })
         return false
       } else if (result && result.then) {

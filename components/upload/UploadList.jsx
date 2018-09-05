@@ -14,8 +14,30 @@ const previewFile = (file, callback) => {
   reader.readAsDataURL(file)
 }
 
-const isImageUrl = (url) => {
-  return /^data:image\//.test(url) || /\.(webp|svg|png|gif|jpg|jpeg)$/.test(url)
+const extname = (url) => {
+  if (!url) {
+    return ''
+  }
+  const temp = url.split('/')
+  const filename = temp[temp.length - 1]
+  const filenameWithoutSuffix = filename.split(/#|\?/)[0]
+  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
+}
+const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp']
+const isImageUrl = (file) => {
+  if (imageTypes.includes(file.type)) {
+    return true
+  }
+  const url = (file.thumbUrl || file.url)
+  const extension = extname(url)
+  if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp)$/i.test(extension)) {
+    return true
+  } else if (/^data:/.test(url)) { // other file types of base64
+    return false
+  } else if (extension) { // other file types which have extension
+    return false
+  }
+  return true
 }
 
 export default {
@@ -81,7 +103,7 @@ export default {
         } else if (!file.thumbUrl && !file.url) {
           icon = <Icon class={`${prefixCls}-list-item-thumbnail`} type='picture' />
         } else {
-          const thumbnail = isImageUrl(file.thumbUrl || file.url) ? (
+          const thumbnail = isImageUrl(file) ? (
             <img src={file.thumbUrl || file.url} alt={file.name} />
           ) : (
             <Icon

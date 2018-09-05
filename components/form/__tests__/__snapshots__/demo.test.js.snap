@@ -6,9 +6,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
     <div class="ant-row" style="margin-left: -12px; margin-right: -12px;">
       <div class="ant-col-8" style="display: block; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-0" title="Field 0" class="ant-form-item-required">Field 0</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-0" title="Field 0" class="ant-form-item-required">Field 0</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-0" class="ant-input"></span>
               <!---->
@@ -18,9 +16,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: block; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-1" title="Field 1" class="ant-form-item-required">Field 1</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-1" title="Field 1" class="ant-form-item-required">Field 1</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-1" class="ant-input"></span>
               <!---->
@@ -30,9 +26,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: block; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-2" title="Field 2" class="ant-form-item-required">Field 2</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-2" title="Field 2" class="ant-form-item-required">Field 2</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-2" class="ant-input"></span>
               <!---->
@@ -42,9 +36,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: block; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-3" title="Field 3" class="ant-form-item-required">Field 3</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-3" title="Field 3" class="ant-form-item-required">Field 3</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-3" class="ant-input"></span>
               <!---->
@@ -54,9 +46,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: block; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-4" title="Field 4" class="ant-form-item-required">Field 4</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-4" title="Field 4" class="ant-form-item-required">Field 4</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-4" class="ant-input"></span>
               <!---->
@@ -66,9 +56,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: block; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-5" title="Field 5" class="ant-form-item-required">Field 5</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-5" title="Field 5" class="ant-form-item-required">Field 5</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-5" class="ant-input"></span>
               <!---->
@@ -78,9 +66,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: none; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-6" title="Field 6" class="ant-form-item-required">Field 6</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-6" title="Field 6" class="ant-form-item-required">Field 6</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-6" class="ant-input"></span>
               <!---->
@@ -90,9 +76,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: none; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-7" title="Field 7" class="ant-form-item-required">Field 7</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-7" title="Field 7" class="ant-form-item-required">Field 7</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-7" class="ant-input"></span>
               <!---->
@@ -102,9 +86,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: none; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-8" title="Field 8" class="ant-form-item-required">Field 8</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-8" title="Field 8" class="ant-form-item-required">Field 8</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-8" class="ant-input"></span>
               <!---->
@@ -114,9 +96,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col-8" style="display: none; padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-form-item-label">
-            <label for="field-9" title="Field 9" class="ant-form-item-required">Field 9</label>
-          </div>
+          <div class="ant-form-item-label"><label for="field-9" title="Field 9" class="ant-form-item-required">Field 9</label></div>
           <div class="ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="placeholder" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="field-9" class="ant-input"></span>
               <!---->
@@ -126,13 +106,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
     </div>
     <div class="ant-row">
-      <div class="ant-col-24" style="text-align: right;">
-        <button type="submit" class="ant-btn ant-btn-primary"><span>Search</span></button>
-        <button type="button" class="ant-btn ant-btn-default" style="margin-left: 8px;"><span>Clear</span></button>
-        <a style="margin-left: 8px; font-size: 12px;">Collapse
-          <i class="anticon anticon-down"></i>
-        </a>
-      </div>
+      <div class="ant-col-24" style="text-align: right;"><button type="submit" class="ant-btn ant-btn-primary"><span>Search</span></button><button type="button" class="ant-btn ant-btn-default" style="margin-left: 8px;"><span>Clear</span></button><a style="margin-left: 8px; font-size: 12px;">Collapse <i class="anticon anticon-down"></i></a></div>
     </div>
   </form>
   <div class="search-result-list">Search Result List</div>
@@ -142,9 +116,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
 exports[`renders ./components/form/demo/coordinated.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col-5 ant-form-item-label">
-      <label for="note" title="Note" class="ant-form-item-required">Note</label>
-    </div>
+    <div class="ant-col-5 ant-form-item-label"><label for="note" title="Note" class="ant-form-item-required">Note</label></div>
     <div class="ant-col-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="note" class="ant-input"></span>
         <!---->
@@ -152,21 +124,17 @@ exports[`renders ./components/form/demo/coordinated.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-5 ant-form-item-label">
-      <label for="gender" title="Gender" class="ant-form-item-required">Gender</label>
-    </div>
+    <div class="ant-col-5 ant-form-item-label"><label for="gender" title="Gender" class="ant-form-item-required">Gender</label></div>
     <div class="ant-col-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="gender"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">Select a option and change input text above</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
-    </div>
-    </span>
+    </div></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-12 ant-col-offset-5 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
         <!---->
       </div>
     </div>
@@ -177,22 +145,17 @@ exports[`renders ./components/form/demo/coordinated.vue correctly 1`] = `
 exports[`renders ./components/form/demo/customized-form-controls.vue correctly 1`] = `
 <form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
-    <div class="ant-form-item-label">
-      <label for="price" title="Price" class="">Price</label>
-    </div>
+    <div class="ant-form-item-label"><label for="price" title="Price" class="">Price</label></div>
     <div class="ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><span data-__meta="[object Object]" data-__field="[object Object]" id="price" class=""><input value="0" type="text" class="ant-input" style="width: 65%; margin-right: 3%;"><div class="ant-select ant-select-enabled" style="width: 32%;"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="RMB" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">RMB</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
-    </div>
-    </span>
-    </span>
+    </div></span></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
         <!---->
       </div>
     </div>
@@ -211,8 +174,7 @@ exports[`renders ./components/form/demo/dynamic-form-item.vue correctly 1`] = `
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
         <!---->
       </div>
     </div>
@@ -223,9 +185,7 @@ exports[`renders ./components/form/demo/dynamic-form-item.vue correctly 1`] = `
 exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col-4 ant-form-item-label">
-      <label for="username" title="Name" class="ant-form-item-required">Name</label>
-    </div>
+    <div class="ant-col-4 ant-form-item-label"><label for="username" title="Name" class="ant-form-item-required">Name</label></div>
     <div class="ant-col-8 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="Please input your name" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="username" class="ant-input"></span>
         <!---->
@@ -233,9 +193,7 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-4 ant-form-item-label">
-      <label for="nickname" title="Nickname" class="">Nickname</label>
-    </div>
+    <div class="ant-col-4 ant-form-item-label"><label for="nickname" title="Nickname" class="">Nickname</label></div>
     <div class="ant-col-8 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="Please input your nickname" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="nickname" class="ant-input"></span>
         <!---->
@@ -246,16 +204,14 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
     <div class="ant-col-8 ant-col-offset-4 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
       Nickname is required
-    </span></label>
-        </span>
+    </span></label></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-8 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" class="ant-btn ant-btn-primary"><span>Check</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" class="ant-btn ant-btn-primary"><span>Check</span></button></span>
         <!---->
       </div>
     </div>
@@ -264,8 +220,7 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/form/demo/form-in-modal.vue correctly 1`] = `
-<div>
-  <button type="button" class="ant-btn ant-btn-primary"><span>New Collection</span></button>
+<div><button type="button" class="ant-btn ant-btn-primary"><span>New Collection</span></button>
   <!---->
 </div>
 `;
@@ -274,9 +229,7 @@ exports[`renders ./components/form/demo/global-state.vue correctly 1`] = `
 <div id="components-form-demo-global-state">
   <form class="ant-form ant-form-inline">
     <div class="ant-row ant-form-item">
-      <div class="ant-form-item-label">
-        <label for="username" title="Username" class="ant-form-item-required">Username</label>
-      </div>
+      <div class="ant-form-item-label"><label for="username" title="Username" class="ant-form-item-required">Username</label></div>
       <div class="ant-form-item-control-wrapper">
         <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><input value="benjycui" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="username" class="ant-input"></span>
           <!---->
@@ -287,37 +240,29 @@ exports[`renders ./components/form/demo/global-state.vue correctly 1`] = `
   "username": {
     "value": "benjycui"
   }
-}</pre></div>
+}</pre>
+</div>
 `;
 
 exports[`renders ./components/form/demo/horizontal-login.vue correctly 1`] = `
 <form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-user" style="color: rgba(0, 0, 0, 0.25);"></i></span>
-        <input placeholder="Username" type="text" data-__meta="[object Object]"
-          data-__field="[object Object]" id="userName" class="ant-input">
-        </span>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-user" style="color: rgba(0, 0, 0, 0.25);"></i></span><input placeholder="Username" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="userName" class="ant-input"></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-lock" style="color: rgba(0, 0, 0, 0.25);"></i></span>
-        <input placeholder="Password" type="password" data-__meta="[object Object]"
-          data-__field="[object Object]" id="password" class="ant-input">
-        </span>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-lock" style="color: rgba(0, 0, 0, 0.25);"></i></span><input placeholder="Password" type="password" data-__meta="[object Object]" data-__field="[object Object]" id="password" class="ant-input"></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Log in</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Log in</span></button></span>
         <!---->
       </div>
     </div>
@@ -329,24 +274,15 @@ exports[`renders ./components/form/demo/layout.vue correctly 1`] = `
 <div>
   <form class="ant-form ant-form-horizontal">
     <div class="ant-row ant-form-item">
-      <div class="ant-col-4 ant-form-item-label">
-        <label title="Form Layout" class="">Form Layout</label>
-      </div>
+      <div class="ant-col-4 ant-form-item-label"><label title="Form Layout" class="">Form Layout</label></div>
       <div class="ant-col-14 ant-form-item-control-wrapper">
-        <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label>
-          <label
-            class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label>
-            <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span>Inline</span></label>
-        </div>
-        </span>
+        <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span>Inline</span></label></div></span>
         <!---->
       </div>
     </div>
 </div>
 <div class="ant-row ant-form-item">
-  <div class="ant-col-4 ant-form-item-label">
-    <label title="Field A" class="">Field A</label>
-  </div>
+  <div class="ant-col-4 ant-form-item-label"><label title="Field A" class="">Field A</label></div>
   <div class="ant-col-14 ant-form-item-control-wrapper">
     <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"></span>
       <!---->
@@ -354,9 +290,7 @@ exports[`renders ./components/form/demo/layout.vue correctly 1`] = `
   </div>
 </div>
 <div class="ant-row ant-form-item">
-  <div class="ant-col-4 ant-form-item-label">
-    <label title="Field B" class="">Field B</label>
-  </div>
+  <div class="ant-col-4 ant-form-item-label"><label title="Field B" class="">Field B</label></div>
   <div class="ant-col-14 ant-form-item-control-wrapper">
     <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"></span>
       <!---->
@@ -365,8 +299,7 @@ exports[`renders ./components/form/demo/layout.vue correctly 1`] = `
 </div>
 <div class="ant-row ant-form-item">
   <div class="ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-    <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-      </span>
+    <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
       <!---->
     </div>
   </div>
@@ -379,35 +312,22 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal login-form" id="components-form-demo-normal-login">
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-user" style="color: rgba(0, 0, 0, 0.25);"></i></span>
-        <input placeholder="Username" type="text" data-__meta="[object Object]"
-          data-__field="[object Object]" id="userName" class="ant-input">
-        </span>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-user" style="color: rgba(0, 0, 0, 0.25);"></i></span><input placeholder="Username" type="text" data-__meta="[object Object]" data-__field="[object Object]" id="userName" class="ant-input"></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-lock" style="color: rgba(0, 0, 0, 0.25);"></i></span>
-        <input placeholder="Password" type="password" data-__meta="[object Object]"
-          data-__field="[object Object]" id="password" class="ant-input">
-        </span>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="anticon anticon-lock" style="color: rgba(0, 0, 0, 0.25);"></i></span><input placeholder="Password" type="password" data-__meta="[object Object]" data-__field="[object Object]" id="password" class="ant-input"></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input id="remember" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>Remember me</span></label>
-        <a
-          href="" class="login-form-forgot">Forgot password</a>
-          <button type="submit" class="ant-btn ant-btn-primary login-form-button"><span>Log in</span></button>Or
-          <a href="">register now!</a>
-          </span>
-          <!---->
+      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input id="remember" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>Remember me</span></label><a href="" class="login-form-forgot">Forgot password</a><button type="submit" class="ant-btn ant-btn-primary login-form-button"><span>Log in</span></button>Or <a href="">register now!</a></span>
+        <!---->
       </div>
     </div>
   </div>
@@ -417,9 +337,7 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
 exports[`renders ./components/form/demo/register.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="email" title="E-mail" class="ant-form-item-required">E-mail</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="email" title="E-mail" class="ant-form-item-required">E-mail</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="email" class="ant-input"></span>
         <!---->
@@ -427,9 +345,7 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="password" title="Password" class="ant-form-item-required">Password</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="password" title="Password" class="ant-form-item-required">Password</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="password" data-__meta="[object Object]" data-__field="[object Object]" id="password" class="ant-input"></span>
         <!---->
@@ -437,9 +353,7 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="confirm" title="Confirm Password" class="ant-form-item-required">Confirm Password</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="confirm" title="Confirm Password" class="ant-form-item-required">Confirm Password</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="password" data-__meta="[object Object]" data-__field="[object Object]" id="confirm" class="ant-input"></span>
         <!---->
@@ -447,9 +361,7 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="nickname" title="" class="ant-form-item-required"><span>Nickname&nbsp;<i class="anticon anticon-question-circle-o"></i></span></label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="nickname" title="" class="ant-form-item-required"><span>Nickname&nbsp;<i class="anticon anticon-question-circle-o"></i></span></label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="nickname" class="ant-input"></span>
         <!---->
@@ -457,60 +369,40 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="residence" title="Habitual Residence" class="ant-form-item-required">Habitual Residence</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="residence" title="Habitual Residence" class="ant-form-item-required">Habitual Residence</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" data-__meta="[object Object]" data-__field="[object Object]" id="residence" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span>
-        <i
-          class="anticon anticon-cross-circle ant-cascader-picker-clear"></i>
-          <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
-          </span>
-          </span>
-          <!---->
+      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" data-__meta="[object Object]" data-__field="[object Object]" id="residence" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span></span>
+        <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="phone" title="Phone Number" class="ant-form-item-required">Phone Number</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="phone" title="Phone Number" class="ant-form-item-required">Phone Number</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-group-wrapper" style="width: 100%;"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-group-addon"><div class="ant-select ant-select-enabled" style="width: 70px;" data-__meta="[object Object]" data-__field="[object Object]" id="prefix"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="+86" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">+86</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
-    </div>
-    </span>
-    <input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="phone" class="ant-input">
-    </span>
-    </span>
-    </span>
+    </div></span><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="phone" class="ant-input"></span></span></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="website" title="Website" class="ant-form-item-required">Website</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="website" title="Website" class="ant-form-item-required">Website</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" data-__meta="[object Object]" data-__field="[object Object]" id="website"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">website</div><ul><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
       </li>
       </ul>
-    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
   </div>
-  </span>
+  </div></span>
   <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="captcha" title="Captcha" class="ant-form-item-required">Captcha</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="captcha" title="Captcha" class="ant-form-item-required">Captcha</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-row" style="margin-left: -4px; margin-right: -4px;"><div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="captcha" class="ant-input"></div><div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><button type="button" class="ant-btn ant-btn-default"><span>Get captcha</span></button>
-      </div>
-    </div>
-    </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-row" style="margin-left: -4px; margin-right: -4px;"><div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="captcha" class="ant-input"></div><div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><button type="button" class="ant-btn ant-btn-default"><span>Get captcha</span></button></div>
+    </div></span>
     <!---->
     <div class="ant-form-extra">We must make sure that your are a human.</div>
   </div>
@@ -518,16 +410,14 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-16 ant-col-sm-offset-8 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input id="agreement" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>I have read the <a href="">agreement</a></span></label>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input id="agreement" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>I have read the <a href="">agreement</a></span></label></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-16 ant-col-sm-offset-8 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Register</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Register</span></button></span>
         <!---->
       </div>
     </div>
@@ -538,84 +428,56 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
 exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="date-picker" title="DatePicker" class="ant-form-item-required">DatePicker</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="date-picker" title="DatePicker" class="ant-form-item-required">DatePicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-      </span>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="date-time-picker" title="DatePicker[showTime]" class="ant-form-item-required">DatePicker[showTime]</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="date-time-picker" title="DatePicker[showTime]" class="ant-form-item-required">DatePicker[showTime]</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-time-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-      </span>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-time-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="month-picker" title="MonthPicker" class="ant-form-item-required">MonthPicker</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="month-picker" title="MonthPicker" class="ant-form-item-required">MonthPicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="month-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-      </span>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="month-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="range-picker" title="RangePicker" class="ant-form-item-required">RangePicker</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="range-picker" title="RangePicker" class="ant-form-item-required">RangePicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="range-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
-        <input
-          readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
-          </span>
-          </span>
-          <!---->
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="range-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span><input readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span></span></span>
+        <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="range-time-picker" title="RangePicker[showTime]" class="ant-form-item-required">RangePicker[showTime]</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="range-time-picker" title="RangePicker[showTime]" class="ant-form-item-required">RangePicker[showTime]</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" style="width: 350px;" data-__meta="[object Object]" data-__field="[object Object]" id="range-time-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span>
-        <input
-          readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span>
-          </span>
-          </span>
-          <!---->
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" style="width: 350px;" data-__meta="[object Object]" data-__field="[object Object]" id="range-time-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span><input readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span></span></span>
+        <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label">
-      <label for="time-picker" title="TimePicker" class="ant-form-item-required">TimePicker</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time-picker" title="TimePicker" class="ant-form-item-required">TimePicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-time-picker" data-__meta="[object Object]" data-__field="[object Object]" id="time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-time-picker" data-__meta="[object Object]" data-__field="[object Object]" id="time-picker"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-16 ant-col-sm-offset-8 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
         <!---->
       </div>
     </div>
@@ -626,9 +488,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
 exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal" id="components-form-demo-validate-other">
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label title="Plain Text" class="">Plain Text</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label title="Plain Text" class="">Plain Text</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-form-text">China</span></span>
         <!---->
@@ -636,116 +496,74 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="select" title="Select" class="ant-form-item-required">Select</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="select" title="Select" class="ant-form-item-required">Select</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">Please select a country</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
-    </div>
-    </span>
+    </div></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="select-multiple" title="Select[multiple]" class="ant-form-item-required">Select[multiple]</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="select-multiple" title="Select[multiple]" class="ant-form-item-required">Select[multiple]</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled" data-__meta="[object Object]" data-__field="[object Object]" id="select-multiple"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" class="ant-select-selection ant-select-selection--multiple"><div class="ant-select-selection__rendered"><div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">Please select favourite colors</div><div><li class="ant-select-search ant-select-search--inline"><div class="ant-select-search__field__wrap"><input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
       </li>
     </div>
   </div>
   </div>
-  </div>
-  </span>
+  </div></span>
   <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="input-number" title="InputNumber" class="">InputNumber</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="input-number" title="InputNumber" class="">InputNumber</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><div class="ant-input-number" data-__meta="[object Object]" data-__field="[object Object]" id="input-number"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span>
-        <span
-          unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
-      </div>
-      <div role="spinbutton" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3" class="ant-input-number-input-wrap">
-        <input autocomplete="off" max="10" min="1" step="1" class="ant-input-number-input">
-      </div>
+      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><div class="ant-input-number" data-__meta="[object Object]" data-__field="[object Object]" id="input-number"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
+      <div role="spinbutton" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3" class="ant-input-number-input-wrap"><input autocomplete="off" max="10" min="1" step="1" class="ant-input-number-input"></div>
     </div><span class="ant-form-text"> machines</span></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="switch" title="Switch" class="">Switch</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="switch" title="Switch" class="">Switch</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-switch" data-__meta="[object Object]" data-__field="[object Object]" id="switch"><span class="ant-switch-inner"></span></span>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-switch" data-__meta="[object Object]" data-__field="[object Object]" id="switch"><span class="ant-switch-inner"></span></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="slider" title="Slider" class="">Slider</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="slider" title="Slider" class="">Slider</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-slider ant-slider-with-marks" data-__meta="[object Object]" data-__field="[object Object]" id="slider"><div class="ant-slider-rail"></div><div class="ant-slider-track" style="left: 0%; width: 0%;"></div><div class="ant-slider-step"><span class="ant-slider-dot ant-slider-dot-active" style="left: 0%;"></span>
-        <span
-          class="ant-slider-dot" style="left: 20%;"></span><span class="ant-slider-dot" style="left: 40%;"></span><span class="ant-slider-dot" style="left: 60%;"></span><span class="ant-slider-dot" style="left: 80%;"></span><span class="ant-slider-dot" style="left: 100%;"></span></div>
-      <div role="slider"
-        tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" class="ant-slider-handle" style="left: 0%;"></div>
-      <div class="ant-slider-mark"><span class="ant-slider-mark-text ant-slider-mark-text-active" style="width: 18%; margin-left: -9%; left: 0%;">A</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 20%;">B</span><span class="ant-slider-mark-text"
-          style="width: 18%; margin-left: -9%; left: 40%;">C</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 60%;">D</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 80%;">E</span>
-        <span
-          class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 100%;">F</span>
-      </div>
-    </div>
-    </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-slider ant-slider-with-marks" data-__meta="[object Object]" data-__field="[object Object]" id="slider"><div class="ant-slider-rail"></div><div class="ant-slider-track" style="left: 0%; width: 0%;"></div><div class="ant-slider-step"><span class="ant-slider-dot ant-slider-dot-active" style="left: 0%;"></span><span class="ant-slider-dot" style="left: 20%;"></span><span class="ant-slider-dot" style="left: 40%;"></span><span class="ant-slider-dot" style="left: 60%;"></span><span class="ant-slider-dot" style="left: 80%;"></span><span class="ant-slider-dot" style="left: 100%;"></span></div>
+      <div role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" class="ant-slider-handle" style="left: 0%;"></div>
+      <div class="ant-slider-mark"><span class="ant-slider-mark-text ant-slider-mark-text-active" style="width: 18%; margin-left: -9%; left: 0%;">A</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 20%;">B</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 40%;">C</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 60%;">D</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 80%;">E</span><span class="ant-slider-mark-text" style="width: 18%; margin-left: -9%; left: 100%;">F</span></div>
+    </div></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="radio-group" title="Radio.Group" class="">Radio.Group</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="radio-group" title="Radio.Group" class="">Radio.Group</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-group"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="a"><span class="ant-radio-inner"></span></span><span>item 1</span></label>
-        <label
-          class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="b"><span class="ant-radio-inner"></span></span><span>item 2</span></label>
-          <label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="c"><span class="ant-radio-inner"></span></span><span>item 3</span></label>
-      </div>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-group"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="a"><span class="ant-radio-inner"></span></span><span>item 1</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="b"><span class="ant-radio-inner"></span></span><span>item 2</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="c"><span class="ant-radio-inner"></span></span><span>item 3</span></label></div></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="radio-button" title="Radio.Button" class="">Radio.Button</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="radio-button" title="Radio.Button" class="">Radio.Button</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-button"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="a"><span class="ant-radio-button-inner"></span></span><span>item 1</span></label>
-        <label
-          class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="b"><span class="ant-radio-button-inner"></span></span><span>item 2</span></label>
-          <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="c"><span class="ant-radio-button-inner"></span></span><span>item 3</span></label>
-      </div>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" data-__meta="[object Object]" data-__field="[object Object]" id="radio-button"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="a"><span class="ant-radio-button-inner"></span></span><span>item 1</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="b"><span class="ant-radio-button-inner"></span></span><span>item 2</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="c"><span class="ant-radio-button-inner"></span></span><span>item 3</span></label></div></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="rate" title="Rate" class="">Rate</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="rate" title="Rate" class="">Rate</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><ul tabindex="0" class="ant-rate" data-__meta="[object Object]" data-__field="[object Object]" id="rate"><li class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-half ant-rate-star-active"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-zero"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li></ul></span>
         <!---->
@@ -753,9 +571,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label for="upload" title="Upload" class="">Upload</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label for="upload" title="Upload" class="">Upload</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><span data-__meta="[object Object]" data-__field="[object Object]" id="upload" class=""><div class="ant-upload ant-upload-select ant-upload-select-picture"><!----></div><div class="ant-upload-list ant-upload-list-picture"></div></span></span>
         <!---->
@@ -764,20 +580,16 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-6 ant-form-item-label">
-      <label title="Dragger" class="">Dragger</label>
-    </div>
+    <div class="ant-col-6 ant-form-item-label"><label title="Dragger" class="">Dragger</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="dropbox"><span data-__meta="[object Object]" data-__field="[object Object]" id="dragger" class=""><div class="ant-upload ant-upload-drag"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span></div>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="dropbox"><span data-__meta="[object Object]" data-__field="[object Object]" id="dragger" class=""><div class="ant-upload ant-upload-drag"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span></div></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-12 ant-col-offset-6 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-        </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
         <!---->
       </div>
     </div>
@@ -788,9 +600,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
 exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item ant-form-item-with-help">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Fail" class="">Fail</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Fail" class="">Fail</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-error"><span class="ant-form-item-children"><input placeholder="unavailable choice" type="text" id="error" class="ant-input"></span>
         <div class="ant-form-explain show-help-enter">Should be combination of numbers &amp; alphabets</div>
@@ -798,9 +608,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Warning" class="">Warning</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Warning" class="">Warning</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-warning"><span class="ant-form-item-children"><input placeholder="Warning" type="text" id="warning" class="ant-input"></span>
         <!---->
@@ -808,9 +616,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item ant-form-item-with-help">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Validating" class="">Validating</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Validating" class="">Validating</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-feedback is-validating"><span class="ant-form-item-children"><input placeholder="I'm the content is being validated" type="text" id="validating" class="ant-input"></span>
         <div class="ant-form-explain show-help-enter">The information is being validated...</div>
@@ -818,9 +624,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Success" class="">Success</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Success" class="">Success</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><input placeholder="I'm the content" type="text" id="success" class="ant-input"></span>
         <!---->
@@ -828,9 +632,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Warning" class="">Warning</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Warning" class="">Warning</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-feedback has-warning"><span class="ant-form-item-children"><input placeholder="Warning" type="text" id="warning" class="ant-input"></span>
         <!---->
@@ -838,9 +640,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item ant-form-item-with-help">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Fail" class="">Fail</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Fail" class="">Fail</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-feedback has-error"><span class="ant-form-item-children"><input placeholder="unavailable choice" type="text" id="error" class="ant-input"></span>
         <div class="ant-form-explain show-help-enter">Should be combination of numbers &amp; alphabets</div>
@@ -848,62 +648,42 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Success" class="">Success</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Success" class="">Success</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-      </span>
-      </span>
+      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
       <!---->
     </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Warning" class="">Warning</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Warning" class="">Warning</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback has-warning"><span class="ant-form-item-children"><span class="ant-time-picker" style="width: 100%;"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span>
-        </span>
+      <div class="ant-form-item-control has-feedback has-warning"><span class="ant-form-item-children"><span class="ant-time-picker" style="width: 100%;"><input type="text" placeholder="Select time" id="" class="ant-time-picker-input"><span class="ant-time-picker-icon"></span></span></span>
         <!---->
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Error" class="">Error</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Error" class="">Error</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
       <div class="ant-form-item-control has-feedback has-error"><span class="ant-form-item-children"><div class="ant-select ant-select-enabled"><div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single"><div class="ant-select-selection__rendered"><div title="Option 1" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Option 1</div></div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
-    </div>
-    </span>
+    </div></span>
     <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item ant-form-item-with-help">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Validating" class="">Validating</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Validating" class="">Validating</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback is-validating"><span class="ant-form-item-children"><span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span>
-        <i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i>
-        <i class="anticon anticon-down ant-cascader-picker-arrow"></i>
-        </span>
-        </span>
+      <div class="ant-form-item-control has-feedback is-validating"><span class="ant-form-item-children"><span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span></span>
         <div class="ant-form-explain show-help-enter">The information is being validated...</div>
       </div>
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="inline" class="">inline</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="inline" class="">inline</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-col-11"><div class="ant-row ant-form-item ant-form-item-with-help"><div class="ant-form-item-control-wrapper"><div class="ant-form-item-control has-error"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-      </span>
-      </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-col-11"><div class="ant-row ant-form-item ant-form-item-with-help"><div class="ant-form-item-control-wrapper"><div class="ant-form-item-control has-error"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
       <div class="ant-form-explain show-help-enter">Please select the correct date</div>
     </div>
   </div>
@@ -915,33 +695,22 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
   <div class="ant-col-11">
     <div class="ant-row ant-form-item">
       <div class="ant-form-item-control-wrapper">
-        <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div>
-        </span>
-        </span>
+        <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
         <!---->
       </div>
     </div>
   </div>
-  </div>
-  </span>
+  </div></span>
   <!---->
   </div>
   </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label">
-      <label title="Success" class="">Success</label>
-    </div>
+    <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Success" class="">Success</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><div class="ant-input-number" style="width: 100%;"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span>
-        <span
-          unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
-      </div>
-      <div role="spinbutton" aria-valuemin="-9007199254740991" class="ant-input-number-input-wrap">
-        <input autocomplete="off" min="-9007199254740991" step="1" class="ant-input-number-input">
-      </div>
-    </div>
-    </span>
+      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><div class="ant-input-number" style="width: 100%;"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
+      <div role="spinbutton" aria-valuemin="-9007199254740991" class="ant-input-number-input-wrap"><input autocomplete="off" min="-9007199254740991" step="1" class="ant-input-number-input"></div>
+    </div></span>
     <!---->
   </div>
   </div>
@@ -952,19 +721,11 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
 exports[`renders ./components/form/demo/without-form-create.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item ant-form-item-with-help">
-    <div class="ant-col-7 ant-form-item-label">
-      <label title="Prime between 8 &amp; 12" class="">Prime between 8 &amp; 12</label>
-    </div>
+    <div class="ant-col-7 ant-form-item-label"><label title="Prime between 8 &amp; 12" class="">Prime between 8 &amp; 12</label></div>
     <div class="ant-col-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-input-number"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span>
-        <span
-          unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span>
-      </div>
-      <div role="spinbutton" aria-valuemin="8" aria-valuemax="12" aria-valuenow="11" class="ant-input-number-input-wrap">
-        <input autocomplete="off" max="12" min="8" step="1" class="ant-input-number-input">
-      </div>
-    </div>
-    </span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-input-number"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
+      <div role="spinbutton" aria-valuemin="8" aria-valuemax="12" aria-valuenow="11" class="ant-input-number-input-wrap"><input autocomplete="off" max="12" min="8" step="1" class="ant-input-number-input"></div>
+    </div></span>
     <div class="ant-form-explain show-help-enter">A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.</div>
   </div>
   </div>

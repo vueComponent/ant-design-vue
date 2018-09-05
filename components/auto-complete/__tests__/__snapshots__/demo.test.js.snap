@@ -7,11 +7,11 @@ exports[`renders ./components/auto-complete/demo/basic.md correctly 1`] = `
       <div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">input here</div>
       <ul>
         <li class="ant-select-search ant-select-search--inline">
-          <div class="ant-select-search__field__wrap">
-            <input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+          <div class="ant-select-search__field__wrap"><input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
         </li>
       </ul>
-    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+  </div>
 </div>
 `;
 
@@ -26,7 +26,8 @@ exports[`renders ./components/auto-complete/demo/certain-category.md correctly 1
             <div class="ant-select-search__field__wrap"><span class="ant-input-affix-wrapper ant-select-search__field" value=""><input value="" type="text" class="ant-input"><span class="ant-input-suffix"><i class="certain-category-icon anticon anticon-search"></i></span></span><span class="ant-select-search__field__mirror">&nbsp;</span></div>
           </li>
         </ul>
-      </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+    </div>
   </div>
 </div>
 `;
@@ -37,11 +38,11 @@ exports[`renders ./components/auto-complete/demo/custom.md correctly 1`] = `
     <div class="ant-select-selection__rendered">
       <ul>
         <li class="ant-select-search ant-select-search--inline">
-          <div class="ant-select-search__field__wrap">
-            <textarea value="" placeholder="input here" class="custom ant-input ant-select-search__field" style="height: 50px;"></textarea><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+          <div class="ant-select-search__field__wrap"><textarea value="" placeholder="input here" class="custom ant-input ant-select-search__field" style="height: 50px;"></textarea><span class="ant-select-search__field__mirror">&nbsp;</span></div>
         </li>
       </ul>
-    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+  </div>
 </div>
 `;
 
@@ -52,11 +53,11 @@ exports[`renders ./components/auto-complete/demo/non-case-sensitive.md correctly
       <div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">input here</div>
       <ul>
         <li class="ant-select-search ant-select-search--inline">
-          <div class="ant-select-search__field__wrap">
-            <input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+          <div class="ant-select-search__field__wrap"><input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
         </li>
       </ul>
-    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+  </div>
 </div>
 `;
 
@@ -67,11 +68,11 @@ exports[`renders ./components/auto-complete/demo/options.md correctly 1`] = `
       <div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">input here</div>
       <ul>
         <li class="ant-select-search ant-select-search--inline">
-          <div class="ant-select-search__field__wrap">
-            <input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
+          <div class="ant-select-search__field__wrap"><input value="" type="text" class="ant-input ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
         </li>
       </ul>
-    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+    </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+  </div>
 </div>
 `;
 
@@ -83,13 +84,11 @@ exports[`renders ./components/auto-complete/demo/uncertain-category.md correctly
         <div unselectable="on" class="ant-select-selection__placeholder" style="display: block;">input here</div>
         <ul>
           <li class="ant-select-search ant-select-search--inline">
-            <div class="ant-select-search__field__wrap"><span class="ant-input-affix-wrapper ant-select-search__field" value=""><input value="" type="text" class="ant-input"><span class="ant-input-suffix"><button type="button" class="search-btn ant-btn ant-btn-primary ant-btn-lg"><i class="anticon anticon-search"></i></button></span></span>
-              <span
-                class="ant-select-search__field__mirror">&nbsp;</span>
-            </div>
+            <div class="ant-select-search__field__wrap"><span class="ant-input-affix-wrapper ant-select-search__field" value=""><input value="" type="text" class="ant-input"><span class="ant-input-suffix"><button type="button" class="search-btn ant-btn ant-btn-primary ant-btn-lg"><i class="anticon anticon-search"></i></button></span></span><span class="ant-select-search__field__mirror">&nbsp;</span></div>
           </li>
         </ul>
-      </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span></div>
+      </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+    </div>
   </div>
 </div>
 `;

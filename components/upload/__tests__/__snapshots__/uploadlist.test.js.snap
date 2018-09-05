@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Upload List handle error 1`] = `
-<span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload ant-upload-btn"><input type="file" accept="" style="display: none;"><button>upload</button></span></div><span tag="div" class="ant-upload-list ant-upload-list-text"><div class="ant-upload-list-item ant-upload-list-item-uploading"><div class="ant-upload-list-item-info"><span><i class="anticon anticon-loading anticon-spin"></i><span title="foo.png" class="ant-upload-list-item-name">foo.png</span></span>
-</div>
-<i class="anticon anticon-cross"></i>
+<span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload ant-upload-btn"><input type="file" accept="" style="display: none;"><button>upload</button></span></div><span tag="div" class="ant-upload-list ant-upload-list-text"><div class="ant-upload-list-item ant-upload-list-item-uploading"><div class="ant-upload-list-item-info"><span><i class="anticon anticon-loading anticon-spin"></i><span title="foo.png" class="ant-upload-list-item-name">foo.png</span></span></div><i class="anticon anticon-cross"></i>
 <div class="ant-upload-list-item-progress">
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-default">
     <div>
@@ -16,14 +14,11 @@ exports[`Upload List handle error 1`] = `
   </div>
 </div>
 </div>
-</span>
-</span>
+</span></span>
 `;
 
 exports[`Upload List handle error 2`] = `
-<span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload ant-upload-btn"><input type="file" accept="" style="display: none;"><button>upload</button></span></div><span tag="div" class="ant-upload-list ant-upload-list-text"><div class="ant-upload-list-item ant-upload-list-item-uploading"><div class="ant-upload-list-item-info"><span><i class="anticon anticon-loading anticon-spin"></i><span title="foo.png" class="ant-upload-list-item-name">foo.png</span></span>
-</div>
-<i class="anticon anticon-cross"></i>
+<span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload ant-upload-btn"><input type="file" accept="" style="display: none;"><button>upload</button></span></div><span tag="div" class="ant-upload-list ant-upload-list-text"><div class="ant-upload-list-item ant-upload-list-item-uploading"><div class="ant-upload-list-item-info"><span><i class="anticon anticon-loading anticon-spin"></i><span title="foo.png" class="ant-upload-list-item-name">foo.png</span></span></div><i class="anticon anticon-cross"></i>
 <div class="ant-upload-list-item-progress">
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-default">
     <div>
@@ -36,66 +31,46 @@ exports[`Upload List handle error 2`] = `
   </div>
 </div>
 </div>
-</span>
-</span>
+</span></span>
 `;
 
 exports[`Upload List should be uploading when upload a file 1`] = `<span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload ant-upload-btn"><input type="file" accept="" style="display: none;"><button>upload</button></span></div><span tag="div" class="ant-upload-list ant-upload-list-text"></span></span>`;
 
 exports[`Upload List should non-image format file preview 1`] = `
-<span><div class="ant-upload ant-upload-select ant-upload-select-picture"><!----></div><span tag="div" class="ant-upload-list ant-upload-list-picture"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa.zip" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa.zip" target="_blank" rel="noopener noreferrer" title="not-image" class="ant-upload-list-item-name">not-image</a></span></div>
-<i
-  class="anticon anticon-cross"></i>
+<span><div class="ant-upload ant-upload-select ant-upload-select-picture"><!----></div><span tag="div" class="ant-upload-list ant-upload-list-picture"><div class="ant-upload-list-item ant-upload-list-item-done"><div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa.zip" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa.zip" target="_blank" rel="noopener noreferrer" title="not-image" class="ant-upload-list-item-name">not-image</a></span></div><i class="anticon anticon-cross"></i>
+<!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/aaa" alt="image"></a><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div><i class="anticon anticon-cross"></i>
   <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/aaa" alt="image"></a><a href="https://cdn.xxx.com/aaa" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa.xx" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa.xx" target="_blank" rel="noopener noreferrer" title="not-image" class="ant-upload-list-item-name">not-image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa.png/xx.xx" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa.png/xx.xx" target="_blank" rel="noopener noreferrer" title="not-image" class="ant-upload-list-item-name">not-image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="data:image/png;base64,UEsDBAoAAAAAADYZYkwAAAAAAAAAAAAAAAAdAAk" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png?query=123" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png#anchor" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  <div class="ant-upload-list-item ant-upload-list-item-done">
-    <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div>
-    <i
-      class="anticon anticon-cross"></i>
-      <!---->
-  </div>
-  </span>
-  </span>
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa.xx" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa.xx" target="_blank" rel="noopener noreferrer" title="not-image" class="ant-upload-list-item-name">not-image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/aaa.png/xx.xx" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><i class="anticon anticon-file" style="font-size: 48px; color: rgba(0, 0, 0, 0.5);"></i></a><a href="https://cdn.xxx.com/aaa.png/xx.xx" target="_blank" rel="noopener noreferrer" title="not-image" class="ant-upload-list-item-name">not-image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="data:image/png;base64,UEsDBAoAAAAAADYZYkwAAAAAAAAAAAAAAAAdAAk" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png?query=123" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=123" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png#anchor" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png#anchor" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+<div class="ant-upload-list-item ant-upload-list-item-done">
+  <div class="ant-upload-list-item-info"><span><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" class="ant-upload-list-item-thumbnail"><img src="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" alt="image"></a><a href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot" target="_blank" rel="noopener noreferrer" title="image" class="ant-upload-list-item-name">image</a></span></div><i class="anticon anticon-cross"></i>
+  <!---->
+</div>
+</span></span>
 `;

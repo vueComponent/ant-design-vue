@@ -3,24 +3,17 @@
 exports[`renders ./components/affix/demo/basic.md correctly 1`] = `
 <div>
   <div>
-    <div class="">
-      <button type="button" class="ant-btn ant-btn-primary"><span>Affix top</span></button>
-    </div>
-  </div>
-  <br>
+    <div class=""><button type="button" class="ant-btn ant-btn-primary"><span>Affix top</span></button></div>
+  </div> <br>
   <div>
-    <div class="">
-      <button type="button" class="ant-btn ant-btn-primary"><span>Affix bottom</span></button>
-    </div>
+    <div class=""><button type="button" class="ant-btn ant-btn-primary"><span>Affix bottom</span></button></div>
   </div>
 </div>
 `;
 
 exports[`renders ./components/affix/demo/on-change.md correctly 1`] = `
 <div>
-  <div class="">
-    <button type="button" class="ant-btn ant-btn-default"><span>120px to affix top</span></button>
-  </div>
+  <div class=""><button type="button" class="ant-btn ant-btn-default"><span>120px to affix top</span></button></div>
 </div>
 `;
 
@@ -28,9 +21,7 @@ exports[`renders ./components/affix/demo/target.md correctly 1`] = `
 <div id="components-affix-demo-target" class="scrollable-container">
   <div class="background">
     <div>
-      <div class="">
-        <button type="button" class="ant-btn ant-btn-primary"><span>Fixed at the top of container</span></button>
-      </div>
+      <div class=""><button type="button" class="ant-btn ant-btn-primary"><span>Fixed at the top of container</span></button></div>
     </div>
   </div>
 </div>

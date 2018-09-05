@@ -19,9 +19,8 @@ exports[`renders ./components/table/demo/ajax.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-          </span>
-          </th>
+                  <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+          </div></span></th>
           <th key="gender" class="ant-table-column-has-filters"><span>Gender<i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
           <th key="email" class=""><span>Email</span></th>
           </tr>
@@ -55,8 +54,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="name" class=""><span><span><i class="anticon anticon-smile-o"></i> Name</span></span>
-                  </th>
+                  <th key="name" class=""><span><span><i class="anticon anticon-smile-o"></i> Name</span></span></th>
                   <th key="age" class=""><span>Age</span></th>
                   <th key="address" class=""><span>Address</span></th>
                   <th key="tags" class=""><span>Tags</span></th>
@@ -66,9 +64,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
               <tbody class="ant-table-tbody">
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">John Brown</a>
-                  </td>
+                    <!----><a href="javascript:;">John Brown</a></td>
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
                   <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
@@ -77,9 +73,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Jim Green</a>
-                  </td>
+                    <!----><a href="javascript:;">Jim Green</a></td>
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
                   <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
@@ -88,9 +82,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Joe Black</a>
-                  </td>
+                    <!----><a href="javascript:;">Joe Black</a></td>
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
                   <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
@@ -103,15 +95,9 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -146,25 +132,19 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
               <tbody class="ant-table-tbody">
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">John Brown</a>
-                  </td>
+                    <!----><a href="javascript:;">John Brown</a></td>
                   <td class="column-money">￥300,000.00</td>
                   <td>New York No. 1 Lake Park</td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Jim Green</a>
-                  </td>
+                    <!----><a href="javascript:;">Jim Green</a></td>
                   <td class="column-money">￥1,256,000.00</td>
                   <td>London No. 1 Lake Park</td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Joe Black</a>
-                  </td>
+                    <!----><a href="javascript:;">Joe Black</a></td>
                   <td class="column-money">￥120,000.00</td>
                   <td>Sidney No. 1 Lake Park</td>
                 </tr>
@@ -177,15 +157,9 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -220,9 +194,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
               <tbody class="ant-table-tbody">
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">John Brown</a>
-                  </td>
+                    <!----><a href="javascript:;">John Brown</a></td>
                   <td>32</td>
                   <td>0571-22098909</td>
                   <td>18889898989</td>
@@ -230,9 +202,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Jim Green</a>
-                  </td>
+                    <!----><a href="javascript:;">Jim Green</a></td>
                   <td>42</td>
                   <td>0571-22098333</td>
                   <td>18889898888</td>
@@ -240,9 +210,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Joe Black</a>
-                  </td>
+                    <!----><a href="javascript:;">Joe Black</a></td>
                   <td>32</td>
                   <td rowspan="2">0575-22098909</td>
                   <td>18900010002</td>
@@ -250,9 +218,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Jim Red</a>
-                  </td>
+                    <!----><a href="javascript:;">Jim Red</a></td>
                   <td>18</td>
                   <!---->
                   <td>18900010002</td>
@@ -260,9 +226,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
                   <td colspan="5"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                    <!---->
-                    <a href="javascript:;">Jake White</a>
-                  </td>
+                    <!----><a href="javascript:;">Jake White</a></td>
                   <!---->
                   <!---->
                   <!---->
@@ -274,15 +238,9 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -342,15 +300,9 @@ exports[`renders ./components/table/demo/custom-filter-panel.md correctly 1`] = 
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -359,8 +311,7 @@ exports[`renders ./components/table/demo/custom-filter-panel.md correctly 1`] = 
 `;
 
 exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
-<div>
-  <button type="button" class="editable-add-btn ant-btn ant-btn-default"><span>Add</span></button>
+<div><button type="button" class="editable-add-btn ant-btn ant-btn-default"><span>Add</span></button>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
@@ -390,15 +341,12 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
                       <div class="editable-cell">
                         <div class="editable-cell-text-wrapper">
                           Edward King 0
-                          <i class="editable-cell-icon anticon anticon-edit"></i>
-                        </div>
+                          <i class="editable-cell-icon anticon anticon-edit"></i></div>
                       </div>
                     </td>
                     <td>32</td>
                     <td>London, Park Lane no. 0</td>
-                    <td>
-                      <a href="javascript:;" class="">Delete</a>
-                    </td>
+                    <td><a href="javascript:;" class="">Delete</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -406,15 +354,12 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
                       <div class="editable-cell">
                         <div class="editable-cell-text-wrapper">
                           Edward King 1
-                          <i class="editable-cell-icon anticon anticon-edit"></i>
-                        </div>
+                          <i class="editable-cell-icon anticon anticon-edit"></i></div>
                       </div>
                     </td>
                     <td>32</td>
                     <td>London, Park Lane no. 1</td>
-                    <td>
-                      <a href="javascript:;" class="">Delete</a>
-                    </td>
+                    <td><a href="javascript:;" class="">Delete</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -422,15 +367,9 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
           </div>
         </div>
         <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-          <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-            <a class="ant-pagination-item-link"></a>
-          </li>
-          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-            <a>1</a>
-          </li>
-          <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-            <a class="ant-pagination-item-link"></a>
-          </li>
+          <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+          <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
           <!---->
         </ul>
       </div>
@@ -619,33 +558,15 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
-          <a>2</a>
-        </li>
-        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
-          <a>3</a>
-        </li>
-        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
-          <a>4</a>
-        </li>
-        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
-          <a>5</a>
-        </li>
-        <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10">
-          <a>10</a>
-        </li>
-        <li title="Next Page" tabindex="0" class=" ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
+        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
+        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
+        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a>5</a></li>
+        <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next"><a class="ant-pagination-item-link"></a></li>
+        <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a>10</a></li>
+        <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -684,9 +605,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td>John Brown</td>
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
-                  <td>
-                    <a href="javascript:;">Delete</a>
-                  </td>
+                  <td><a href="javascript:;">Delete</a></td>
                 </tr>
                 <!---->
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
@@ -694,9 +613,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td>Jim Green</td>
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
-                  <td>
-                    <a href="javascript:;">Delete</a>
-                  </td>
+                  <td><a href="javascript:;">Delete</a></td>
                 </tr>
                 <!---->
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
@@ -704,9 +621,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td>Joe Black</td>
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
-                  <td>
-                    <a href="javascript:;">Delete</a>
-                  </td>
+                  <td><a href="javascript:;">Delete</a></td>
                 </tr>
                 <!---->
               </tbody>
@@ -715,15 +630,9 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -748,11 +657,8 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                    </label>
-          </div>
-          </span>
-          </th>
+                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label>
+          </div></span></th>
           <th key="name" class=""><span>Name</span></th>
           <th key="age" class=""><span>Age</span></th>
           <th key="address" class=""><span>Address</span></th>
@@ -760,10 +666,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
           </thead>
           <tbody class="ant-table-tbody">
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span>John Brown sr.</td>
               <td>60</td>
               <td>New York No. 1 Lake Park</td>
@@ -776,10 +679,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
             <!---->
             <!---->
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span><span class="ant-table-row-expand-icon ant-table-row-spaced"></span>Joe Black</td>
               <td>32</td>
               <td>Sidney No. 1 Lake Park</td>
@@ -790,15 +690,9 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
       </div>
     </div>
     <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-        <a class="ant-pagination-item-link"></a>
-      </li>
-      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-        <a>1</a>
-      </li>
-      <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-        <a class="ant-pagination-item-link"></a>
-      </li>
+      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+      <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
       <!---->
     </ul>
   </div>
@@ -857,9 +751,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     <td>New York Park</td>
                     <td>New York Park</td>
                     <td>New York Park</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -873,9 +765,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     <td>London Park</td>
                     <td>London Park</td>
                     <td>London Park</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -927,14 +817,10 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                   </thead>
                   <tbody class="ant-table-tbody">
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -944,15 +830,9 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -1027,9 +907,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 0</td>
                     <td>London Park no. 0</td>
                     <td>London Park no. 0</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1043,9 +921,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 1</td>
                     <td>London Park no. 1</td>
                     <td>London Park no. 1</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1059,9 +935,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 2</td>
                     <td>London Park no. 2</td>
                     <td>London Park no. 2</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1075,9 +949,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 3</td>
                     <td>London Park no. 3</td>
                     <td>London Park no. 3</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1091,9 +963,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 4</td>
                     <td>London Park no. 4</td>
                     <td>London Park no. 4</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1107,9 +977,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 5</td>
                     <td>London Park no. 5</td>
                     <td>London Park no. 5</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1123,9 +991,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 6</td>
                     <td>London Park no. 6</td>
                     <td>London Park no. 6</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1139,9 +1005,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 7</td>
                     <td>London Park no. 7</td>
                     <td>London Park no. 7</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1155,9 +1019,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 8</td>
                     <td>London Park no. 8</td>
                     <td>London Park no. 8</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                   <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -1171,9 +1033,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 9</td>
                     <td>London Park no. 9</td>
                     <td>London Park no. 9</td>
-                    <td class="ant-table-fixed-columns-in-body">
-                      <a href="javascript:;">action</a>
-                    </td>
+                    <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -1278,54 +1138,34 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                   </colgroup>
                   <tbody class="ant-table-tbody">
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                     <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
-                      <td>
-                        <a href="javascript:;">action</a>
-                      </td>
+                      <td><a href="javascript:;">action</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -1335,33 +1175,15 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
-          <a>2</a>
-        </li>
-        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
-          <a>3</a>
-        </li>
-        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
-          <a>4</a>
-        </li>
-        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
-          <a>5</a>
-        </li>
-        <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10">
-          <a>10</a>
-        </li>
-        <li title="Next Page" tabindex="0" class=" ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
+        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
+        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
+        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a>5</a></li>
+        <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next"><a class="ant-pagination-item-link"></a></li>
+        <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a>10</a></li>
+        <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -1707,18 +1529,10 @@ exports[`renders ./components/table/demo/fixed-header.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
-          <a>2</a>
-        </li>
-        <li title="Next Page" tabindex="0" class=" ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
+        <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -1753,9 +1567,8 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                     <th key="gender" rowspan="4" class="ant-table-fixed-columns-in-body"><span>Gender</span></th>
                   </tr>
                   <tr>
-                    <th key="age" rowspan="3" class="ant-table-column-has-filters"><span>Age<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-            </span>
-            </th>
+                    <th key="age" rowspan="3" class="ant-table-column-has-filters"><span>Age<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+            </div></span></th>
             <th colspan="3" class=""><span>Address</span></th>
             <th key="companyAddress" rowspan="3" class=""><span>Company Address</span></th>
             <th key="companyName" rowspan="3" class=""><span>Company Name</span></th>
@@ -2021,33 +1834,15 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
       </div>
     </div>
     <ul unselectable="unselectable" class="ant-pagination mini ant-table-pagination">
-      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-        <a class="ant-pagination-item-link"></a>
-      </li>
-      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-        <a>1</a>
-      </li>
-      <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
-        <a>2</a>
-      </li>
-      <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
-        <a>3</a>
-      </li>
-      <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
-        <a>4</a>
-      </li>
-      <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next">
-        <a>5</a>
-      </li>
-      <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next">
-        <a class="ant-pagination-item-link"></a>
-      </li>
-      <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10">
-        <a>10</a>
-      </li>
-      <li title="Next Page" tabindex="0" class=" ant-pagination-next">
-        <a class="ant-pagination-item-link"></a>
-      </li>
+      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+      <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
+      <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
+      <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
+      <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a>5</a></li>
+      <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next"><a class="ant-pagination-item-link"></a></li>
+      <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a>10</a></li>
+      <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
       <!---->
     </ul>
   </div>
@@ -2071,61 +1866,48 @@ exports[`renders ./components/table/demo/head.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-          <i
-            title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i>
-            </span>
-            </th>
-            <th key="age" class="ant-table-column-has-filters"><span>Age<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-        </span>
-        </th>
-        <th key="address" class="ant-table-column-has-filters"><span>Address<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-      <i
-        title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i>
-        </span>
-        </th>
+                  <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+          </div><i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+          <th key="age" class="ant-table-column-has-filters"><span>Age<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+        </div></span></th>
+        <th key="address" class="ant-table-column-has-filters"><span>Address<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+      </div><i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+      </tr>
+      </thead>
+      <tbody class="ant-table-tbody">
+        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+          <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+            <!---->John Brown</td>
+          <td class="ant-table-column-has-filters">32</td>
+          <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
         </tr>
-        </thead>
-        <tbody class="ant-table-tbody">
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-              <!---->John Brown</td>
-            <td class="ant-table-column-has-filters">32</td>
-            <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
-          </tr>
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-              <!---->Jim Green</td>
-            <td class="ant-table-column-has-filters">42</td>
-            <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
-          </tr>
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-              <!---->Joe Black</td>
-            <td class="ant-table-column-has-filters">32</td>
-            <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
-          </tr>
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-              <!---->Jim Red</td>
-            <td class="ant-table-column-has-filters">32</td>
-            <td class="ant-table-column-has-filters">London No. 2 Lake Park</td>
-          </tr>
-        </tbody>
-        </table>
+        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+          <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+            <!---->Jim Green</td>
+          <td class="ant-table-column-has-filters">42</td>
+          <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
+        </tr>
+        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+          <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+            <!---->Joe Black</td>
+          <td class="ant-table-column-has-filters">32</td>
+          <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
+        </tr>
+        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+          <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+            <!---->Jim Red</td>
+          <td class="ant-table-column-has-filters">32</td>
+          <td class="ant-table-column-has-filters">London No. 2 Lake Park</td>
+        </tr>
+      </tbody>
+      </table>
     </div>
   </div>
 </div>
 <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-  <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-    <a class="ant-pagination-item-link"></a>
-  </li>
-  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-    <a>1</a>
-  </li>
-  <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-    <a class="ant-pagination-item-link"></a>
-  </li>
+  <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+  <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
   <!---->
 </ul>
 </div>
@@ -2173,9 +1955,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td>500</td>
                   <td>Jack</td>
                   <td>2014-12-24 23:12:00</td>
-                  <td>
-                    <a href="javascript:;">Publish</a>
-                  </td>
+                  <td><a href="javascript:;">Publish</a></td>
                 </tr>
                 <!---->
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
@@ -2186,9 +1966,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td>500</td>
                   <td>Jack</td>
                   <td>2014-12-24 23:12:00</td>
-                  <td>
-                    <a href="javascript:;">Publish</a>
-                  </td>
+                  <td><a href="javascript:;">Publish</a></td>
                 </tr>
                 <!---->
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
@@ -2199,9 +1977,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td>500</td>
                   <td>Jack</td>
                   <td>2014-12-24 23:12:00</td>
-                  <td>
-                    <a href="javascript:;">Publish</a>
-                  </td>
+                  <td><a href="javascript:;">Publish</a></td>
                 </tr>
                 <!---->
               </tbody>
@@ -2210,15 +1986,9 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -2228,11 +1998,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
 
 exports[`renders ./components/table/demo/reset-filter.md correctly 1`] = `
 <div>
-  <div class="table-operations">
-    <button type="button" class="ant-btn ant-btn-default"><span>Sort age</span></button>
-    <button type="button" class="ant-btn ant-btn-default"><span>Clear filters</span></button>
-    <button type="button" class="ant-btn ant-btn-default"><span>Clear filters and sorters</span></button>
-  </div>
+  <div class="table-operations"><button type="button" class="ant-btn ant-btn-default"><span>Sort age</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Clear filters</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Clear filters and sorters</span></button></div>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
@@ -2248,61 +2014,48 @@ exports[`renders ./components/table/demo/reset-filter.md correctly 1`] = `
                 </colgroup>
                 <thead class="ant-table-thead">
                   <tr>
-                    <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-            <i
-              title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i>
-              </span>
-              </th>
-              <th key="age" class="ant-table-column-has-filters"><span>Age<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-          </span>
-          </th>
-          <th key="address" class="ant-table-column-has-filters"><span>Address<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span></div>
-        <i
-          title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i>
-          </span>
-          </th>
+                    <th key="name" class="ant-table-column-has-filters"><span>Name<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+            </div><i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+            <th key="age" class="ant-table-column-has-filters"><span>Age<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+          </div></span></th>
+          <th key="address" class="ant-table-column-has-filters"><span>Address<div class="ant-table-column-sorter"><span title="↑" class="ant-table-column-sorter-up off"><i class="anticon anticon-caret-up"></i></span><span title="↓" class="ant-table-column-sorter-down off"><i class="anticon anticon-caret-down"></i></span>
+        </div><i title="Filter menu" class="anticon anticon-filter ant-dropdown-trigger"></i></span></th>
+        </tr>
+        </thead>
+        <tbody class="ant-table-tbody">
+          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+              <!---->John Brown</td>
+            <td class="ant-table-column-has-filters">32</td>
+            <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
           </tr>
-          </thead>
-          <tbody class="ant-table-tbody">
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->John Brown</td>
-              <td class="ant-table-column-has-filters">32</td>
-              <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
-            </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->Jim Green</td>
-              <td class="ant-table-column-has-filters">42</td>
-              <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
-            </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-              <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->Joe Black</td>
-              <td class="ant-table-column-has-filters">32</td>
-              <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
-            </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-              <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->Jim Red</td>
-              <td class="ant-table-column-has-filters">32</td>
-              <td class="ant-table-column-has-filters">London No. 2 Lake Park</td>
-            </tr>
-          </tbody>
-          </table>
+          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+              <!---->Jim Green</td>
+            <td class="ant-table-column-has-filters">42</td>
+            <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
+          </tr>
+          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+              <!---->Joe Black</td>
+            <td class="ant-table-column-has-filters">32</td>
+            <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
+          </tr>
+          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+            <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+              <!---->Jim Red</td>
+            <td class="ant-table-column-has-filters">32</td>
+            <td class="ant-table-column-has-filters">London No. 2 Lake Park</td>
+          </tr>
+        </tbody>
+        </table>
       </div>
     </div>
   </div>
   <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-    <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-      <a class="ant-pagination-item-link"></a>
-    </li>
-    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-      <a>1</a>
-    </li>
-    <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-      <a class="ant-pagination-item-link"></a>
-    </li>
+    <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+    <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
     <!---->
   </ul>
 </div>
@@ -2328,11 +2081,8 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                    </label>
-          </div>
-          </span>
-          </th>
+                  <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label>
+          </div></span></th>
           <th key="name" class=""><span>Name</span></th>
           <th key="age" class=""><span>Age</span></th>
           <th key="address" class=""><span>Address</span></th>
@@ -2340,50 +2090,30 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
           </thead>
           <tbody class="ant-table-tbody">
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="John Brown" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="John Brown" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->
-                <a href="javascript:;">John Brown</a>
-              </td>
+                <!----><a href="javascript:;">John Brown</a></td>
               <td>32</td>
               <td>New York No. 1 Lake Park</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Jim Green" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Jim Green" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->
-                <a href="javascript:;">Jim Green</a>
-              </td>
+                <!----><a href="javascript:;">Jim Green</a></td>
               <td>42</td>
               <td>London No. 1 Lake Park</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Joe Black" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Joe Black" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->
-                <a href="javascript:;">Joe Black</a>
-              </td>
+                <!----><a href="javascript:;">Joe Black</a></td>
               <td>32</td>
               <td>Sidney No. 1 Lake Park</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-                <!---->
-                <a href="javascript:;">Disabled User</a>
-              </td>
+                <!----><a href="javascript:;">Disabled User</a></td>
               <td>99</td>
               <td>Sidney No. 1 Lake Park</td>
             </tr>
@@ -2393,15 +2123,9 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
       </div>
     </div>
     <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-        <a class="ant-pagination-item-link"></a>
-      </li>
-      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-        <a>1</a>
-      </li>
-      <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-        <a class="ant-pagination-item-link"></a>
-      </li>
+      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+      <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
       <!---->
     </ul>
   </div>
@@ -2411,8 +2135,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
 
 exports[`renders ./components/table/demo/row-selection-and-operation.md correctly 1`] = `
 <div>
-  <div style="margin-bottom: 16px;">
-    <button type="button" disabled="disabled" class="ant-btn ant-btn-primary"><span>Reload</span></button> <span style="margin-left: 8px;"><!----></span></div>
+  <div style="margin-bottom: 16px;"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary"><span>Reload</span></button> <span style="margin-left: 8px;"><!----></span></div>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
@@ -2429,11 +2152,8 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
                 </colgroup>
                 <thead class="ant-table-thead">
                   <tr>
-                    <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                      </label>
-            </div>
-            </span>
-            </th>
+                    <th key="selection-column" class="ant-table-selection-column"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label>
+            </div></span></th>
             <th key="name" class=""><span>Name</span></th>
             <th key="age" class=""><span>Age</span></th>
             <th key="address" class=""><span>Address</span></th>
@@ -2441,100 +2161,70 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
             </thead>
             <tbody class="ant-table-tbody">
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 0</td>
                 <td>32</td>
                 <td>London, Park Lane no. 0</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 1</td>
                 <td>32</td>
                 <td>London, Park Lane no. 1</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 2</td>
                 <td>32</td>
                 <td>London, Park Lane no. 2</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 3</td>
                 <td>32</td>
                 <td>London, Park Lane no. 3</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 4</td>
                 <td>32</td>
                 <td>London, Park Lane no. 4</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 5</td>
                 <td>32</td>
                 <td>London, Park Lane no. 5</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 6</td>
                 <td>32</td>
                 <td>London, Park Lane no. 6</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 7</td>
                 <td>32</td>
                 <td>London, Park Lane no. 7</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 8</td>
                 <td>32</td>
                 <td>London, Park Lane no. 8</td>
               </tr>
               <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
-                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                  </label>
-                  </span>
-                </td>
+                <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 9</td>
                 <td>32</td>
@@ -2546,27 +2236,13 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
-          <a>2</a>
-        </li>
-        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
-          <a>3</a>
-        </li>
-        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
-          <a>4</a>
-        </li>
-        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
-          <a>5</a>
-        </li>
-        <li title="Next Page" tabindex="0" class=" ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
+        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
+        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
+        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
+        <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>
@@ -2592,14 +2268,9 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="selection-column" class="ant-table-selection-column ant-table-selection-column-custom"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper ant-table-selection-select-all-custom"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                    </label>
-                    <div class="ant-table-selection-down ant-dropdown-trigger">
-                      <i class="anticon anticon-down"></i>
-                    </div>
-          </div>
-          </span>
-          </th>
+                  <th key="selection-column" class="ant-table-selection-column ant-table-selection-column-custom"><span><div class="ant-table-selection"><label class="ant-checkbox-wrapper ant-table-selection-select-all-custom"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label>
+                    <div class="ant-table-selection-down ant-dropdown-trigger"><i class="anticon anticon-down"></i></div>
+          </div></span></th>
           <th key="name" class=""><span>Name</span></th>
           <th key="age" class=""><span>Age</span></th>
           <th key="address" class=""><span>Address</span></th>
@@ -2607,100 +2278,70 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
           </thead>
           <tbody class="ant-table-tbody">
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 0</td>
               <td>32</td>
               <td>London, Park Lane no. 0</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 1</td>
               <td>32</td>
               <td>London, Park Lane no. 1</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 2</td>
               <td>32</td>
               <td>London, Park Lane no. 2</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 3</td>
               <td>32</td>
               <td>London, Park Lane no. 3</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 4</td>
               <td>32</td>
               <td>London, Park Lane no. 4</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 5</td>
               <td>32</td>
               <td>London, Park Lane no. 5</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 6</td>
               <td>32</td>
               <td>London, Park Lane no. 6</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 7</td>
               <td>32</td>
               <td>London, Park Lane no. 7</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 8</td>
               <td>32</td>
               <td>London, Park Lane no. 8</td>
             </tr>
             <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
-              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-                </label>
-                </span>
-              </td>
+              <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 9</td>
               <td>32</td>
@@ -2712,27 +2353,13 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
       </div>
     </div>
     <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-        <a class="ant-pagination-item-link"></a>
-      </li>
-      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-        <a>1</a>
-      </li>
-      <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2">
-        <a>2</a>
-      </li>
-      <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3">
-        <a>3</a>
-      </li>
-      <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4">
-        <a>4</a>
-      </li>
-      <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5">
-        <a>5</a>
-      </li>
-      <li title="Next Page" tabindex="0" class=" ant-pagination-next">
-        <a class="ant-pagination-item-link"></a>
-      </li>
+      <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+      <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+      <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
+      <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
+      <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
+      <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
+      <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
       <!---->
     </ul>
   </div>
@@ -2788,15 +2415,9 @@ exports[`renders ./components/table/demo/size.md correctly 1`] = `
           </div>
         </div>
         <ul unselectable="unselectable" class="ant-pagination mini ant-table-pagination">
-          <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-            <a class="ant-pagination-item-link"></a>
-          </li>
-          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-            <a>1</a>
-          </li>
-          <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-            <a class="ant-pagination-item-link"></a>
-          </li>
+          <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+          <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
           <!---->
         </ul>
       </div>
@@ -2848,15 +2469,9 @@ exports[`renders ./components/table/demo/size.md correctly 1`] = `
           </div>
         </div>
         <ul unselectable="unselectable" class="ant-pagination mini ant-table-pagination">
-          <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-            <a class="ant-pagination-item-link"></a>
-          </li>
-          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-            <a>1</a>
-          </li>
-          <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-            <a class="ant-pagination-item-link"></a>
-          </li>
+          <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+          <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
           <!---->
         </ul>
       </div>
@@ -2884,16 +2499,14 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th key="0" colspan="2" class=""><span><span slot="title" style="color: rgb(24, 144, 255);">Name</span></span>
-                  </th>
+                  <th key="0" colspan="2" class=""><span><span slot="title" style="color: rgb(24, 144, 255);">Name</span></span></th>
                   <th key="age" rowspan="2" class=""><span>Age</span></th>
                   <th key="address" rowspan="2" class=""><span>Address</span></th>
                   <th key="tags" rowspan="2" class=""><span>Tags</span></th>
                   <th key="action" rowspan="2" class=""><span>Action</span></th>
                 </tr>
                 <tr>
-                  <th key="firstName" class=""><span><span slot="title" style="color: rgb(24, 144, 255);">First Name</span></span>
-                  </th>
+                  <th key="firstName" class=""><span><span slot="title" style="color: rgb(24, 144, 255);">First Name</span></span></th>
                   <th key="lastName" class=""><span>Last Name</span></th>
                 </tr>
               </thead>
@@ -2931,15 +2544,9 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
         </div>
       </div>
       <ul unselectable="unselectable" class="ant-pagination ant-table-pagination">
-        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev">
-          <a class="ant-pagination-item-link"></a>
-        </li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active">
-          <a>1</a>
-        </li>
-        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next">
-          <a class="ant-pagination-item-link"></a>
-        </li>
+        <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
+        <li title="Next Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
         <!---->
       </ul>
     </div>

@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TimePicker renders addon correctly 1`] = `
-<div class="ant-time-picker-panel-addon">
-  <button type="button">Ok</button>
-</div>
-`;
+exports[`TimePicker renders addon correctly 1`] = `<div class="ant-time-picker-panel-addon"><button type="button">Ok</button></div>`;

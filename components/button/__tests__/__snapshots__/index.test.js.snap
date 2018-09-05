@@ -6,30 +6,15 @@ exports[`Button fixbug renders {0} , 0 and {false} 2`] = `<button type="button" 
 
 exports[`Button fixbug renders {0} , 0 and {false} 3`] = `<button type="button" class="ant-btn ant-btn-default"></button>`;
 
-exports[`Button renders Chinese characters correctly 1`] = `
-<button type="button" class="ant-btn ant-btn-default">
-  <i class="anticon anticon-search"></i><span>按钮</span></button>
-`;
+exports[`Button renders Chinese characters correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><i class="anticon anticon-search"></i><span>按钮</span></button>`;
 
-exports[`Button renders Chinese characters correctly 2`] = `
-<button type="button" class="ant-btn ant-btn-default">
-  <i class="anticon anticon-search"></i>按钮</button>
-`;
+exports[`Button renders Chinese characters correctly 2`] = `<button type="button" class="ant-btn ant-btn-default"><i class="anticon anticon-search"></i>按钮</button>`;
 
-exports[`Button renders Chinese characters correctly 3`] = `
-<button type="button" class="ant-btn ant-btn-default">
-  <i class="anticon anticon-search"></i><span>按钮</span></button>
-`;
+exports[`Button renders Chinese characters correctly 3`] = `<button type="button" class="ant-btn ant-btn-default"><i class="anticon anticon-search"></i><span>按钮</span></button>`;
 
-exports[`Button renders Chinese characters correctly 4`] = `
-<button type="button" class="ant-btn ant-btn-default ant-btn-loading">
-  <i class="anticon anticon-loading anticon-spin"></i><span>按钮</span></button>
-`;
+exports[`Button renders Chinese characters correctly 4`] = `<button type="button" class="ant-btn ant-btn-default ant-btn-loading"><i class="anticon anticon-loading anticon-spin"></i><span>按钮</span></button>`;
 
-exports[`Button renders Chinese characters correctly 5`] = `
-<button type="button" class="ant-btn ant-btn-default ant-btn-loading">
-  <i class="anticon anticon-loading anticon-spin"></i><span>按 钮</span></button>
-`;
+exports[`Button renders Chinese characters correctly 5`] = `<button type="button" class="ant-btn ant-btn-default ant-btn-loading"><i class="anticon anticon-loading anticon-spin"></i><span>按 钮</span></button>`;
 
 exports[`Button renders correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Follow</span></button>`;
 

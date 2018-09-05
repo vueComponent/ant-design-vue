@@ -3,44 +3,24 @@
 exports[`renders ./components/rate/demo/basic.md correctly 1`] = `
 <ul tabindex="0" class="ant-rate">
   <li class="ant-rate-star ant-rate-star-full">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-full">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
 </ul>
 `;
@@ -49,47 +29,26 @@ exports[`renders ./components/rate/demo/character.md correctly 1`] = `
 <div>
   <ul tabindex="0" class="ant-rate">
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-heart"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-heart"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-heart"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-heart"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-heart"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-heart"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-heart"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-heart"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-heart"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-heart"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
-  </ul>
-  <br>
+  </ul> <br>
   <ul tabindex="0" class="ant-rate" style="font-size: 36px;">
     <li class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">A</div>
@@ -111,8 +70,7 @@ exports[`renders ./components/rate/demo/character.md correctly 1`] = `
       <div class="ant-rate-star-first">A</div>
       <div class="ant-rate-star-second">A</div>
     </li>
-  </ul>
-  <br>
+  </ul> <br>
   <ul tabindex="0" class="ant-rate">
     <li class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">好</div>
@@ -134,8 +92,7 @@ exports[`renders ./components/rate/demo/character.md correctly 1`] = `
       <div class="ant-rate-star-first">好</div>
       <div class="ant-rate-star-second">好</div>
     </li>
-  </ul>
-  <br>
+  </ul> <br>
 </div>
 `;
 
@@ -143,87 +100,47 @@ exports[`renders ./components/rate/demo/clear.md correctly 1`] = `
 <div>
   <ul tabindex="0" class="ant-rate">
     <li class="ant-rate-star ant-rate-star-full">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-full">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-full">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
   </ul> allowClear: true
   <br>
   <ul tabindex="0" class="ant-rate">
     <li class="ant-rate-star ant-rate-star-full">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-full">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-full">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
     <li class="ant-rate-star ant-rate-star-zero">
-      <div class="ant-rate-star-first">
-        <i class="anticon anticon-star"></i>
-      </div>
-      <div class="ant-rate-star-second">
-        <i class="anticon anticon-star"></i>
-      </div>
+      <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+      <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
   </ul> allowClear: false
   <br>
@@ -233,44 +150,24 @@ exports[`renders ./components/rate/demo/clear.md correctly 1`] = `
 exports[`renders ./components/rate/demo/disabled.md correctly 1`] = `
 <ul tabindex="-1" class="ant-rate ant-rate-disabled">
   <li class="ant-rate-star ant-rate-star-full">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-full">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
 </ul>
 `;
@@ -278,44 +175,24 @@ exports[`renders ./components/rate/demo/disabled.md correctly 1`] = `
 exports[`renders ./components/rate/demo/half.md correctly 1`] = `
 <ul tabindex="0" class="ant-rate">
   <li class="ant-rate-star ant-rate-star-full">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-full">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-half ant-rate-star-active">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
   <li class="ant-rate-star ant-rate-star-zero">
-    <div class="ant-rate-star-first">
-      <i class="anticon anticon-star"></i>
-    </div>
-    <div class="ant-rate-star-second">
-      <i class="anticon anticon-star"></i>
-    </div>
+    <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
+    <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
 </ul>
 `;

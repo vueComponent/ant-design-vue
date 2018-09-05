@@ -2,33 +2,30 @@
 
 exports[`Table renders JSX correctly 1`] = `
 <div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col><col><col></colgroup><thead class="ant-table-thead"><tr><th key="0" colspan="2" class=""><span>Name</span></th>
-  <th
-    key="age" rowspan="2" class=""><span>Age</span></th>
+  <th key="age" rowspan="2" class=""><span>Age</span></th>
+  </tr>
+  <tr>
+    <th key="firstName" class=""><span>First Name</span></th>
+    <th key="lastName" class=""><span>Last Name</span></th>
+  </tr>
+  </thead>
+  <tbody class="ant-table-tbody">
+    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+      <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+        <!---->John</td>
+      <td>Brown</td>
+      <td>32</td>
     </tr>
-    <tr>
-      <th key="firstName" class=""><span>First Name</span></th>
-      <th key="lastName" class=""><span>Last Name</span></th>
+    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+      <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+        <!---->Jim</td>
+      <td>Green</td>
+      <td>42</td>
     </tr>
-    </thead>
-    <tbody class="ant-table-tbody">
-      <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
-        <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-          <!---->John</td>
-        <td>Brown</td>
-        <td>32</td>
-      </tr>
-      <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
-        <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-          <!---->Jim</td>
-        <td>Green</td>
-        <td>42</td>
-      </tr>
-    </tbody>
-    </table>
+  </tbody>
+  </table>
 </div>
 </div>
 </div>
-</div>
-</span>
-</div>
+</div></span></div>
 `;

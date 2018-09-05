@@ -24,9 +24,7 @@ exports[`renders ./components/divider/demo/orientation.md correctly 1`] = `
 exports[`renders ./components/divider/demo/vertical.md correctly 1`] = `
 <div>
   Text
-  <div class="ant-divider ant-divider-vertical"></div>
-  <a href="#">Link</a>
-  <div class="ant-divider ant-divider-vertical"></div>
-  <a href="#">Link</a>
+  <div class="ant-divider ant-divider-vertical"></div> <a href="#">Link</a>
+  <div class="ant-divider ant-divider-vertical"></div> <a href="#">Link</a>
 </div>
 `;

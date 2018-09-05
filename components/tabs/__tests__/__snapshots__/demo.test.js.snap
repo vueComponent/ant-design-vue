@@ -5,8 +5,7 @@ exports[`renders ./components/tabs/demo/basic.md correctly 1`] = `
   <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
       <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-        <div
-          class="ant-tabs-nav-wrap">
+        <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
@@ -17,15 +16,15 @@ exports[`renders ./components/tabs/demo/basic.md correctly 1`] = `
               <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
+    <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of Tab Pane 1</div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive">Content of Tab Pane 2</div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    </div>
   </div>
-  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
-    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of Tab Pane 1</div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive">Content of Tab Pane 2</div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  </div>
-</div>
 </div>
 `;
 
@@ -33,8 +32,7 @@ exports[`renders ./components/tabs/demo/card.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-no-animation no-flex">
   <div role="tablist" tabindex="0" class="ant-tabs-bar">
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-      <div
-        class="ant-tabs-nav-wrap">
+      <div class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
             <div>
@@ -45,14 +43,14 @@ exports[`renders ./components/tabs/demo/card.md correctly 1`] = `
             <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-tabs-content ant-tabs-content-no-animated">
-  <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of Tab Pane 1</div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-</div>
+  <div class="ant-tabs-content ant-tabs-content-no-animated">
+    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of Tab Pane 1</div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+  </div>
 </div>
 `;
 
@@ -61,8 +59,7 @@ exports[`renders ./components/tabs/demo/card-top.md correctly 1`] = `
   <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-no-animation no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
       <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-        <div
-          class="ant-tabs-nav-wrap">
+        <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
@@ -73,59 +70,52 @@ exports[`renders ./components/tabs/demo/card-top.md correctly 1`] = `
               <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="ant-tabs-content ant-tabs-content-no-animated">
-    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-      <p>Content of Tab Pane 1</p>
-      <p>Content of Tab Pane 1</p>
-      <p>Content of Tab Pane 1</p>
+    <div class="ant-tabs-content ant-tabs-content-no-animated">
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
+        <p>Content of Tab Pane 1</p>
+        <p>Content of Tab Pane 1</p>
+        <p>Content of Tab Pane 1</p>
+      </div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
     </div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
   </div>
-</div>
 </div>
 `;
 
 exports[`renders ./components/tabs/demo/custom-add-trigger.md correctly 1`] = `
 <div>
-  <div style="margin-bottom: 16px;">
-    <button type="button" class="ant-btn ant-btn-default"><span>ADD</span></button>
-  </div>
+  <div style="margin-bottom: 16px;"><button type="button" class="ant-btn ant-btn-default"><span>ADD</span></button></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-editable-card ant-tabs-no-animation no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
       <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-        <div
-          class="ant-tabs-nav-wrap">
+        <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
                 <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">
-                  <div>Tab 1
-                    <i class="anticon anticon-close"></i>
-                  </div>
+                  <div>Tab 1<i class="anticon anticon-close"></i></div>
                 </div>
                 <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">
-                  <div>Tab 2
-                    <i class="anticon anticon-close"></i>
-                  </div>
+                  <div>Tab 2<i class="anticon anticon-close"></i></div>
                 </div>
               </div>
               <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="ant-tabs-content ant-tabs-content-no-animated">
-    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-      Content of Tab 1
+    <div class="ant-tabs-content ant-tabs-content-no-animated">
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
+        Content of Tab 1
+      </div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
     </div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
   </div>
-</div>
 </div>
 `;
 
@@ -133,8 +123,7 @@ exports[`renders ./components/tabs/demo/disabled.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex">
   <div role="tablist" tabindex="0" class="ant-tabs-bar">
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-      <div
-        class="ant-tabs-nav-wrap">
+      <div class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
             <div>
@@ -145,14 +134,14 @@ exports[`renders ./components/tabs/demo/disabled.md correctly 1`] = `
             <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
-  <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Tab 1</div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-</div>
+  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
+    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Tab 1</div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+  </div>
 </div>
 `;
 
@@ -161,20 +150,15 @@ exports[`renders ./components/tabs/demo/editable-card.md correctly 1`] = `
   <div role="tablist" tabindex="0" class="ant-tabs-bar">
     <div class="ant-tabs-extra-content" style="float: right;"><span><i class="anticon anticon-plus ant-tabs-new-tab"></i></span></div>
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-      <div
-        class="ant-tabs-nav-wrap">
+      <div class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
             <div>
               <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">
-                <div>Tab 1
-                  <i class="anticon anticon-close"></i>
-                </div>
+                <div>Tab 1<i class="anticon anticon-close"></i></div>
               </div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">
-                <div>Tab 2
-                  <i class="anticon anticon-close"></i>
-                </div>
+                <div>Tab 2<i class="anticon anticon-close"></i></div>
               </div>
               <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">
                 <div class="ant-tabs-tab-unclosable">Tab 3</div>
@@ -183,28 +167,25 @@ exports[`renders ./components/tabs/demo/editable-card.md correctly 1`] = `
             <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-tabs-content ant-tabs-content-no-animated">
-  <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-    Content of Tab 1
+  <div class="ant-tabs-content ant-tabs-content-no-animated">
+    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
+      Content of Tab 1
+    </div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
   </div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-</div>
 </div>
 `;
 
 exports[`renders ./components/tabs/demo/extra.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex">
   <div role="tablist" tabindex="0" class="ant-tabs-bar">
-    <div class="ant-tabs-extra-content" style="float: right;">
-      <button type="button" class="ant-btn ant-btn-default"><span>Extra Action</span></button>
-    </div>
+    <div class="ant-tabs-extra-content" style="float: right;"><button type="button" class="ant-btn ant-btn-default"><span>Extra Action</span></button></div>
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-      <div
-        class="ant-tabs-nav-wrap">
+      <div class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
             <div>
@@ -215,14 +196,14 @@ exports[`renders ./components/tabs/demo/extra.md correctly 1`] = `
             <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
-  <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of tab 1</div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-</div>
+  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
+    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of tab 1</div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+  </div>
 </div>
 `;
 
@@ -230,8 +211,7 @@ exports[`renders ./components/tabs/demo/icon.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex">
   <div role="tablist" tabindex="0" class="ant-tabs-bar">
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-      <div
-        class="ant-tabs-nav-wrap">
+      <div class="ant-tabs-nav-wrap">
         <div class="ant-tabs-nav-scroll">
           <div class="ant-tabs-nav ant-tabs-nav-animated">
             <div>
@@ -245,31 +225,25 @@ exports[`renders ./components/tabs/demo/icon.md correctly 1`] = `
             <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: -100%;">
-  <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-    Tab 2
+  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: -100%;">
+    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
+      Tab 2
+    </div>
   </div>
-</div>
 </div>
 `;
 
 exports[`renders ./components/tabs/demo/position.md correctly 1`] = `
 <div style="width: 500px;">
-  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin: 8px;">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>top</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottom"><span class="ant-radio-button-inner"></span></span><span>bottom</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>left</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="right"><span class="ant-radio-button-inner"></span></span><span>right</span></label>
-  </div>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin: 8px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>top</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottom"><span class="ant-radio-button-inner"></span></span><span>bottom</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>left</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="right"><span class="ant-radio-button-inner"></span></span><span>right</span></label></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
       <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-        <div
-          class="ant-tabs-nav-wrap">
+        <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
@@ -280,30 +254,25 @@ exports[`renders ./components/tabs/demo/position.md correctly 1`] = `
               <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
+    <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of Tab 1</div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    </div>
   </div>
-  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
-    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of Tab 1</div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  </div>
-</div>
 </div>
 `;
 
 exports[`renders ./components/tabs/demo/size.md correctly 1`] = `
 <div>
-  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 16px;">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label>
-  </div>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 16px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-small ant-tabs-line no-flex">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
       <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-        <div
-          class="ant-tabs-nav-wrap">
+        <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
@@ -314,29 +283,25 @@ exports[`renders ./components/tabs/demo/size.md correctly 1`] = `
               <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
+    <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: -100%;">
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of tab 2</div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    </div>
   </div>
-  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: -100%;">
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of tab 2</div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  </div>
-</div>
 </div>
 `;
 
 exports[`renders ./components/tabs/demo/slide.md correctly 1`] = `
 <div style="width: 500px;">
-  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 8px;">
-    <label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label>
-    <label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label>
-  </div>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 8px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line no-flex" style="height: 200px;">
     <div role="tablist" tabindex="0" class="ant-tabs-bar">
       <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"></span></span>
-        <div
-          class="ant-tabs-nav-wrap">
+        <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
@@ -355,22 +320,22 @@ exports[`renders ./components/tabs/demo/slide.md correctly 1`] = `
               <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
+    <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
+      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of tab 1</div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+    </div>
   </div>
-  <div class="ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
-    <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">Content of tab 1</div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-    <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
-  </div>
-</div>
 </div>
 `;

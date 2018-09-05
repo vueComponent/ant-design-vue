@@ -2,82 +2,50 @@
 
 exports[`renders ./components/dropdown/demo/basic.md correctly 1`] = `
 <a href="#" class="ant-dropdown-link ant-dropdown-trigger">
-  Hover me
-  <i class="anticon anticon-down"></i>
-</a>
+  Hover me <i class="anticon anticon-down"></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/context-menu.md correctly 1`] = `<span class="ant-dropdown-trigger">Right Click on Me</span>`;
 
 exports[`renders ./components/dropdown/demo/dropdown-button.md correctly 1`] = `
 <div>
-  <div class="ant-btn-group ant-dropdown-button">
-    <button type="button" class="ant-btn ant-btn-default"><span>Dropdown</span></button>
-    <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger">
-      <i class="anticon anticon-ellipsis"></i>
-    </button>
-  </div>
-  <div class="ant-btn-group ant-dropdown-button" style="margin-left: 8px;">
-    <button type="button" disabled="disabled" class="ant-btn ant-btn-default"><span>Dropdown</span></button>
-    <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger">
-      <i class="anticon anticon-ellipsis"></i>
-    </button>
-  </div>
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger" style="margin-left: 8px;">
-    Button
-    <i class="anticon anticon-down"></i>
-  </button>
+  <div class="ant-btn-group ant-dropdown-button"><button type="button" class="ant-btn ant-btn-default"><span>Dropdown</span></button><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><i class="anticon anticon-ellipsis"></i></button></div>
+  <div class="ant-btn-group ant-dropdown-button" style="margin-left: 8px;"><button type="button" disabled="disabled" class="ant-btn ant-btn-default"><span>Dropdown</span></button><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><i class="anticon anticon-ellipsis"></i></button></div> <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger" style="margin-left: 8px;">
+    Button <i class="anticon anticon-down"></i></button>
 </div>
 `;
 
 exports[`renders ./components/dropdown/demo/event.md correctly 1`] = `
 <a href="#" class="ant-dropdown-link ant-dropdown-trigger">
-  Hover me, Click menu item
-  <i class="anticon anticon-down"></i>
-</a>
+  Hover me, Click menu item <i class="anticon anticon-down"></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/item.md correctly 1`] = `
 <a href="#" class="ant-dropdown-link ant-dropdown-trigger">
-  Hover me
-  <i class="anticon anticon-down"></i>
-</a>
+  Hover me <i class="anticon anticon-down"></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/overlay-visible.md correctly 1`] = `
 <a href="#" class="ant-dropdown-link ant-dropdown-trigger">
-  Hover me
-  <i class="anticon anticon-down"></i>
-</a>
+  Hover me <i class="anticon anticon-down"></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/placement.md correctly 1`] = `
-<div id="components-dropdown-demo-placement">
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>bottomLeft</span></button>
-  <!---->
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>bottomCenter</span></button>
-  <!---->
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>bottomRight</span></button>
-  <br>
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>topLeft</span></button>
-  <!---->
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>topCenter</span></button>
-  <!---->
-  <button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>topRight</span></button>
+<div id="components-dropdown-demo-placement"><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>bottomLeft</span></button>
+  <!----><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>bottomCenter</span></button>
+  <!----><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>bottomRight</span></button> <br><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>topLeft</span></button>
+  <!----><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>topCenter</span></button>
+  <!----><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><span>topRight</span></button>
   <!---->
 </div>
 `;
 
 exports[`renders ./components/dropdown/demo/sub-menu.md correctly 1`] = `
 <a href="#" class="ant-dropdown-link ant-dropdown-trigger">
-  Cascading menu
-  <i class="anticon anticon-down"></i>
-</a>
+  Cascading menu <i class="anticon anticon-down"></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/trigger.md correctly 1`] = `
 <a href="#" class="ant-dropdown-link ant-dropdown-trigger">
-  Click me
-  <i class="anticon anticon-down"></i>
-</a>
+  Click me <i class="anticon anticon-down"></i></a>
 `;

@@ -3,15 +3,9 @@
 exports[`renders ./components/tag/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-tag ant-tag-zoom-enter">Tag 1</div>
-  <div class="ant-tag ant-tag-zoom-enter">
-    <a href="https://github.com/vueComponent/ant-design">Link</a>
-  </div>
-  <div class="ant-tag ant-tag-zoom-enter">Tag 2
-    <i class="anticon anticon-cross"></i>
-  </div>
-  <div class="ant-tag ant-tag-zoom-enter">Prevent Default
-    <i class="anticon anticon-cross"></i>
-  </div>
+  <div class="ant-tag ant-tag-zoom-enter"><a href="https://github.com/vueComponent/ant-design">Link</a></div>
+  <div class="ant-tag ant-tag-zoom-enter">Tag 2<i class="anticon anticon-cross"></i></div>
+  <div class="ant-tag ant-tag-zoom-enter">Prevent Default<i class="anticon anticon-cross"></i></div>
 </div>
 `;
 
@@ -52,14 +46,11 @@ exports[`renders ./components/tag/demo/control.md correctly 1`] = `
   </div>
   <div class="ant-tag ant-tag-zoom-enter">
     Tag 2
-    <i class="anticon anticon-cross"></i>
-  </div>
+    <i class="anticon anticon-cross"></i></div>
   <div class="ant-tag ant-tag-zoom-enter">
     Tag 3Tag 3Tag 3Tag 3...
-    <i class="anticon anticon-cross"></i>
-  </div>
-  <div class="ant-tag ant-tag-zoom-enter" style="border-style: dashed; background: rgb(255, 255, 255);">
-    <i class="anticon anticon-plus"></i> New Tag
+    <i class="anticon anticon-cross"></i></div>
+  <div class="ant-tag ant-tag-zoom-enter" style="border-style: dashed; background: rgb(255, 255, 255);"><i class="anticon anticon-plus"></i> New Tag
   </div>
 </div>
 `;

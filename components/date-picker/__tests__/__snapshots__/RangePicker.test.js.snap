@@ -8,15 +8,11 @@ exports[`RangePicker show month panel according to value 1`] = `
         <div class="ant-calendar-date-panel">
           <div class="ant-calendar-range-part ant-calendar-range-left">
             <div class="ant-calendar-input-wrap">
-              <div class="ant-calendar-date-input-wrap">
-                <input placeholder="Start date" class="ant-calendar-input ">
-              </div>
+              <div class="ant-calendar-date-input-wrap"><input placeholder="Start date" class="ant-calendar-input "></div>
             </div>
             <div style="outline: none;">
               <div class="ant-calendar-header">
-                <div style="position: relative;">
-                  <a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a>
-                  <a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">1月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span></div>
+                <div style="position: relative;"><a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a><a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">1月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span></div>
               </div>
               <div class="ant-calendar-body">
                 <table cellspacing="0" role="grid" class="ant-calendar-table">
@@ -177,17 +173,11 @@ exports[`RangePicker show month panel according to value 1`] = `
           </div><span class="ant-calendar-range-middle">~</span>
           <div class="ant-calendar-range-part ant-calendar-range-right">
             <div class="ant-calendar-input-wrap">
-              <div class="ant-calendar-date-input-wrap">
-                <input placeholder="End date" class="ant-calendar-input ">
-              </div>
+              <div class="ant-calendar-date-input-wrap"><input placeholder="End date" class="ant-calendar-input "></div>
             </div>
             <div style="outline: none;">
               <div class="ant-calendar-header">
-                <div style="position: relative;"><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">2月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span>
-                  <a title="Next month (PageDown)"
-                    class="ant-calendar-next-month-btn"></a>
-                  <a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a>
-                </div>
+                <div style="position: relative;"><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">2月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span><a title="Next month (PageDown)" class="ant-calendar-next-month-btn"></a><a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a></div>
               </div>
               <div class="ant-calendar-body">
                 <table cellspacing="0" role="grid" class="ant-calendar-table">
@@ -348,10 +338,7 @@ exports[`RangePicker show month panel according to value 1`] = `
           </div>
         </div>
         <div class="ant-calendar-footer ant-calendar-range-bottom ant-calendar-footer-show-ok">
-          <div class="ant-calendar-footer-btn">
-            <a role="button" class="ant-calendar-time-picker-btn">select time</a>
-            <a role="button" class="ant-calendar-ok-btn">Ok</a>
-          </div>
+          <div class="ant-calendar-footer-btn"><a role="button" class="ant-calendar-time-picker-btn">select time</a><a role="button" class="ant-calendar-ok-btn">Ok</a></div>
         </div>
       </div>
     </div>
@@ -367,15 +354,11 @@ exports[`RangePicker switch to corresponding month panel when click presetted ra
         <div class="ant-calendar-date-panel">
           <div class="ant-calendar-range-part ant-calendar-range-left">
             <div class="ant-calendar-input-wrap">
-              <div class="ant-calendar-date-input-wrap">
-                <input placeholder="Start date" class="ant-calendar-input ">
-              </div>
+              <div class="ant-calendar-date-input-wrap"><input placeholder="Start date" class="ant-calendar-input "></div>
             </div>
             <div style="outline: none;">
               <div class="ant-calendar-header">
-                <div style="position: relative;">
-                  <a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a>
-                  <a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">Sep</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2017</a></span></div>
+                <div style="position: relative;"><a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a><a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">Sep</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2017</a></span></div>
               </div>
               <div class="ant-calendar-body">
                 <table cellspacing="0" role="grid" class="ant-calendar-table">
@@ -536,17 +519,11 @@ exports[`RangePicker switch to corresponding month panel when click presetted ra
           </div><span class="ant-calendar-range-middle">~</span>
           <div class="ant-calendar-range-part ant-calendar-range-right">
             <div class="ant-calendar-input-wrap">
-              <div class="ant-calendar-date-input-wrap">
-                <input placeholder="End date" class="ant-calendar-input ">
-              </div>
+              <div class="ant-calendar-date-input-wrap"><input placeholder="End date" class="ant-calendar-input "></div>
             </div>
             <div style="outline: none;">
               <div class="ant-calendar-header">
-                <div style="position: relative;"><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">Oct</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2017</a></span>
-                  <a title="Next month (PageDown)"
-                    class="ant-calendar-next-month-btn"></a>
-                  <a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a>
-                </div>
+                <div style="position: relative;"><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">Oct</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2017</a></span><a title="Next month (PageDown)" class="ant-calendar-next-month-btn"></a><a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a></div>
               </div>
               <div class="ant-calendar-body">
                 <table cellspacing="0" role="grid" class="ant-calendar-table">
@@ -710,10 +687,7 @@ exports[`RangePicker switch to corresponding month panel when click presetted ra
           <div class="ant-calendar-footer-extra ant-calendar-range-quick-selector">
             <div class="ant-tag ant-tag-blue">My Birthday</div>
           </div>
-          <div class="ant-calendar-footer-btn">
-            <a role="button" class="ant-calendar-time-picker-btn ant-calendar-time-picker-btn-disabled">select time</a>
-            <a role="button" class="ant-calendar-ok-btn ant-calendar-ok-btn-disabled">Ok</a>
-          </div>
+          <div class="ant-calendar-footer-btn"><a role="button" class="ant-calendar-time-picker-btn ant-calendar-time-picker-btn-disabled">select time</a><a role="button" class="ant-calendar-ok-btn ant-calendar-ok-btn-disabled">Ok</a></div>
         </div>
       </div>
     </div>

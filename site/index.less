@@ -98,6 +98,9 @@
  z-index: 1;   
 }
 @media only screen and (max-width: 767.99px) {
+  .sponsorsWrap {
+    display: none;
+  }
   .site-sidebar{
     position: fixed;
     z-index: 1;
@@ -190,5 +193,23 @@
   }
   .open-drawer{
     display: none !important;
+  }
+}
+.sponsorsWrap {
+  padding-left: 40px;
+  position: relative;
+  top: -15px;
+  .sponsorsTitle{
+    color: #777;
+    font-weight: 300;
+    font-size: 14px;
+  }
+  ul {
+    overflow: hidden;
+    margin-top: 5px;
+  }
+  .sponsorsItem {
+    display: inline-block;
+    margin-right: 8px;
   }
 }

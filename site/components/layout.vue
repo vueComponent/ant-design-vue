@@ -2,6 +2,7 @@
 import AllDemo from '../demo'
 import Header from './header'
 import Footer from './footer'
+import Sponsors from './sponsors'
 import zhCN from 'antd/locale-provider/zh_CN'
 import enUS from 'antd/locale-provider/default'
 import sortBy from 'lodash/sortBy'
@@ -218,6 +219,7 @@ export default {
             <a-row>
               <a-col v-show={showSideBars} ref='sidebar' class='site-sidebar' xxl={4} xl={5} lg={5} md={6} sm={8} xs={12}>
                 <div class='drawer-mask' onClick={() => { this.showSideBars = false }}></div>
+                <Sponsors title={isCN ? '赞助商' : 'Sponsors'}/>
                 <a-menu
                   class='aside-container menu-site'
                   selectedKeys={[name]}

@@ -27,8 +27,10 @@ $ npm install vue-cli -g
 使用命令行进行初始化。
 
 ```bash
-$ vue init webpack antd-demo
+$ vue create antd-demo
 ```
+
+并配置项目。
 
 若安装缓慢报错，可尝试用 `cnpm` 或别的镜像源自行安装：`rm -rf node_modules && cnpm install`。
 

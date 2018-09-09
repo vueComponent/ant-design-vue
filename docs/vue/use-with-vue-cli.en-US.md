@@ -15,8 +15,10 @@ $ npm install -g vue-cli yarn
 Create a new project named `antd-demo`.
 
 ```bash
-$ vue init webpack antd-demo
+$ vue create antd-demo
 ```
+
+And, setup your vue project configuration. 
 
 The tool will create and initialize environment and dependencies automatically,
 please try config your proxy setting or use another npm registry if any network errors happen during it.
@@ -36,8 +38,11 @@ Below is the default directory structure.
 
 ```
 ├── README.md
+├── babel.config
 ├── package.json
-├── index.html
+├── public
+│   ├── favicon.ico
+│   └── index.html
 ├── src
 │   ├── assets
 │   │   └── logo.png

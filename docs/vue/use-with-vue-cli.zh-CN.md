@@ -15,8 +15,10 @@ $ npm install -g vue-cli yarn
 然后新建一个项目。
 
 ```bash
-$ vue init webpack antd-demo
+$ vue create antd-demo
 ```
+
+并配置项目。
 
 工具会自动初始化一个脚手架并安装 Vue 项目的各种必要依赖，如果在过程中出现网络问题，请尝试配置代理或使用其他 npm registry。
 
@@ -35,9 +37,11 @@ $ npm run dev
 
 ```
 ├── README.md
-├── .babelrc
+├── babel.config
 ├── package.json
-├── index.html
+├── public
+│   ├── favicon.ico
+│   └── index.html
 ├── src
 │   ├── assets
 │   │   └── logo.png

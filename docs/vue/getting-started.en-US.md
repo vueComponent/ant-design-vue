@@ -27,8 +27,10 @@ $ npm install vue-cli -g
 A new project can be created using CLI tools.
 
 ```bash
-$ vue init webpack antd-demo
+$ vue create antd-demo
 ```
+
+And, setup your vue project configuration. 
 
 ### 3. Use antd's Components
 

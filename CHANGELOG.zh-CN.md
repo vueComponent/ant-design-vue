@@ -2,6 +2,20 @@
 
 ---
 
+## 1.1.0
+
+`2018-09-11`
+- 🎉 从[3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0)同步组件到antd [3.8.3](https://github.com/ant-design/ant-design/releases/tag/3.8.3)
+- 🌟 新增`Drawer 抽屉`组件
+- 🐞 修复`Spin`内容闪烁问题 [#174](https://github.com/vueComponent/ant-design-vue/issues/174)
+- 🐞 修复`RangePicker`选择项未禁用问题 [#158](https://github.com/vueComponent/ant-design-vue/issues/158)
+- 🐞 修复`Form`值为 `null`时报错问题 [#153](https://github.com/vueComponent/ant-design-vue/issues/153)
+- 🐞 修复`Modal`子组件重复`mounted`问题 [#152](https://github.com/vueComponent/ant-design-vue/issues/152)
+- 🐞 修复`Transfer`搜索过滤后不能正确显示问题 [#148](https://github.com/vueComponent/ant-design-vue/issues/148)
+- 🐞 修复多级`Tabs`组件嵌套导致`size`不生效问题 [#144](https://github.com/vueComponent/ant-design-vue/issues/144)
+- 🐞 修复`TreeSelect`searchPlaceholder 不生效 [#125](https://github.com/vueComponent/ant-design-vue/issues/125)
+- 🛠 其它未出现在issue中的问题，详见antd changelog
+
 ## 1.0.3
 
 `2018-08-11`

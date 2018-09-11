@@ -2,6 +2,20 @@
 
 ---
 
+## 1.1.0
+
+`2018-09-11`
+- 🎉 Synchronize components from [3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0) to antd [3.8.3](https://github.com/ Ant-design/ant-design/releases/tag/3.8.3)
+- 🌟 Add the `Drawer` component
+- 🐞  Fix `Spin` content flicker problem [#174](https://github.com/vueComponent/ant-design-vue/issues/174)
+- 🐞 Fix `RangePicker` selection is not disabled [#158](https://github.com/vueComponent/ant-design-vue/issues/158)
+- 🐞 Fixed throw error when `Form` value was `null` [#153](https://github.com/vueComponent/ant-design-vue/issues/153)
+- 🐞 Fix the `Modal` subcomponent to repeat the `mounted` question  [#152](https://github.com/vueComponent/ant-design-vue/issues/152)
+- 🐞 Fixed donot `render` after 'Transfer` search filter [#148](https://github.com/vueComponent/ant-design-vue/issues/148)
+- 🐞 Fixed multi-level `Tabs` component nesting causing `size` not to work  [#144](https://github.com/vueComponent/ant-design-vue/issues/144)
+- 🐞 Fix `TreeSelect`searchPlaceholder does not work [#125](https://github.com/vueComponent/ant-design-vue/issues/125)
+- 🛠 Other issues that do not appear in the issue, see antd changelog
+
 ## 1.0.3
 
 `2018-08-11`

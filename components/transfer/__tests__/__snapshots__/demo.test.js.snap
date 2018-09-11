@@ -140,7 +140,10 @@ exports[`renders ./components/transfer/demo/large-data.md correctly 1`] = `
 <div class="ant-transfer">
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>2000 items</span><span class="ant-transfer-list-header-title"></span></span></div>
-    <div class="ant-transfer-list-body">
+    <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
+      <div class="ant-transfer-list-body-search-wrapper">
+        <div><input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
+      </div>
       <ul class="ant-transfer-list-content">
         <div class="LazyLoad" style="height: 32px;"></div>
         <div class="LazyLoad" style="height: 32px;"></div>
@@ -2149,7 +2152,10 @@ exports[`renders ./components/transfer/demo/large-data.md correctly 1`] = `
   <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"></i></button></div>
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span></div>
-    <div class="ant-transfer-list-body">
+    <div class="ant-transfer-list-body ant-transfer-list-body-with-search">
+      <div class="ant-transfer-list-body-search-wrapper">
+        <div><input value="" placeholder="Search here" type="text" class="ant-input ant-transfer-list-search ant-transfer-list-search"><span class="ant-transfer-list-search-action"><i class="anticon anticon-search"></i></span></div>
+      </div>
       <ul class="ant-transfer-list-content"></ul>
       <div class="ant-transfer-list-body-not-found">Not Found</div>
     </div>

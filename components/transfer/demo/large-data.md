@@ -15,6 +15,7 @@
     :targetKeys="targetKeys"
     @change="handleChange"
     :render="item=>item.title"
+    showSearch
   >
   </a-transfer>
 </template>

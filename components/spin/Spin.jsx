@@ -148,7 +148,7 @@ export default {
 
       return (
         <transition-group
-          {...getTransitionProps('fade')}
+          {...getTransitionProps('fade', { appear: false })}
           tag='div'
           class={animateClassName}
         >

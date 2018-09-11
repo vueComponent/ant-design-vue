@@ -203,7 +203,7 @@ export default {
       let footer
       if (tempFooter) {
         footer = (
-          <div class={`${prefixCls}-footer`} ref='footer'>
+          <div key='footer' class={`${prefixCls}-footer`} ref='footer'>
             {tempFooter}
           </div>
         )
@@ -212,7 +212,7 @@ export default {
       let header
       if (title) {
         header = (
-          <div class={`${prefixCls}-header`} ref='header'>
+          <div key='header' class={`${prefixCls}-header`} ref='header'>
             <div class={`${prefixCls}-title`} id={this.titleId}>
               {title}
             </div>
@@ -252,6 +252,7 @@ export default {
             {closer}
             {header}
             <div
+              key='body'
               class={`${prefixCls}-body`}
               style={bodyStyle}
               ref='body'

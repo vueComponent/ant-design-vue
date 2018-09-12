@@ -5,7 +5,7 @@
 ## 1.1.0
 
 `2018-09-11`
-- 🎉 Synchronize components from [3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0) to antd [3.8.3](https://github.com/ Ant-design/ant-design/releases/tag/3.8.3)
+- 🎉 Synchronize components from [3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0) to antd [3.8.2](https://github.com/ Ant-design/ant-design/releases/tag/3.8.2)
 - 🌟 Add the `Drawer` component
 - 🐞  Fix `Spin` content flicker problem [#174](https://github.com/vueComponent/ant-design-vue/issues/174)
 - 🐞 Fix `RangePicker` selection is not disabled [#158](https://github.com/vueComponent/ant-design-vue/issues/158)

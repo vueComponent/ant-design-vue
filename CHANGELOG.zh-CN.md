@@ -5,7 +5,7 @@
 ## 1.1.0
 
 `2018-09-11`
-- 🎉 从[3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0)同步组件到antd [3.8.3](https://github.com/ant-design/ant-design/releases/tag/3.8.3)
+- 🎉 从[3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0)同步组件到antd [3.8.2](https://github.com/ant-design/ant-design/releases/tag/3.8.2)
 - 🌟 新增`Drawer 抽屉`组件
 - 🐞 修复`Spin`内容闪烁问题 [#174](https://github.com/vueComponent/ant-design-vue/issues/174)
 - 🐞 修复`RangePicker`选择项未禁用问题 [#158](https://github.com/vueComponent/ant-design-vue/issues/158)

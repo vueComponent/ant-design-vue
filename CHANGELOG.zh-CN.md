@@ -2,6 +2,14 @@
 
 ---
 
+## 1.1.1
+
+`2018-09-13`
+- 🐞 修复窗口大小改变导致弹窗位置错位问题 [#184](https://github.com/vueComponent/ant-design-vue/issues/184)
+- 🐞 tabs容器添加自定义事件监听 [#189](https://github.com/vueComponent/ant-design-vue/issues/189)
+- 🐞 修复通过API形式调用Modal窗口时，`centered`不生效问题 [#183](https://github.com/vueComponent/ant-design-vue/issues/183)
+- 🐞 Slider marks支持{number: function}形式 [#171](https://github.com/vueComponent/ant-design-vue/issues/171)
+
 ## 1.1.0
 
 `2018-09-11`

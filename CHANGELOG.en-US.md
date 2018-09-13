@@ -2,6 +2,14 @@
 
 ---
 
+## 1.1.1
+
+`2018-09-13`
+- 🐞 dropdown position incorrect caused by window size change [#184](https://github.com/vueComponent/ant-design-vue/issues/184)
+- 🐞 tabs container add custom event listeners [#189](https://github.com/vueComponent/ant-design-vue/issues/189)
+- 🐞 Fixing 'centered` does not work when calling Modal window via API form [#183](https://github.com/vueComponent/ant-design-vue/issues/183)
+- 🐞 Slider marks support {number: function}形式 [#171](https://github.com/vueComponent/ant-design-vue/issues/171)
+
 ## 1.1.0
 
 `2018-09-11`

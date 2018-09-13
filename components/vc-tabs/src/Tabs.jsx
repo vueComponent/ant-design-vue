@@ -1,3 +1,4 @@
+import omit from 'omit.js'
 import BaseMixin from '../../_util/BaseMixin'
 import PropTypes from '../../_util/vue-types'
 import KeyCode from './KeyCode'
@@ -179,9 +180,7 @@ export default {
       contents.reverse()
     }
     return (
-      <div
-        class={cls}
-      >
+      <div {...{ on: omit(this.$listeners, ['change']), class: cls }}>
         {contents}
       </div>
     )

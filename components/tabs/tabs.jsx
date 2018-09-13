@@ -86,10 +86,6 @@ export default {
       onPrevClick,
       onNextClick,
       animated,
-      destroyInactiveTabPane = false,
-      activeKey,
-      defaultActiveKey,
-      $slots,
       tabBarGutter,
     } = this
     const children = filterEmpty(this.$slots.default)
@@ -181,80 +177,15 @@ export default {
         children: childrenWithClose.length > 0 ? childrenWithClose : children,
         __propsSymbol__: Symbol(),
       },
+      on: {
+        ...this.$listeners,
+        change: this.handleChange,
+      },
+      class: cls,
     }
     return (
-      <VcTabs
-        {...tabsProps}
-        class={cls}
-        onChange={this.handleChange}
-      />
+      <VcTabs {...tabsProps} />
     )
-    // const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
-    // const children = []
-    // $slots.default && $slots.default.forEach((child) => {
-    //   if (isEmptyElement(child)) { return }
-    //   const { componentOptions } = child
-    //   const __ANT_TAB_PANE = getSlotOptions(child).__ANT_TAB_PANE
-    //   warning(__ANT_TAB_PANE, '`Tabs children just support TabPane')
-    //   if (componentOptions && __ANT_TAB_PANE) {
-    //     componentOptions.propsData = componentOptions.propsData || {}
-    //     if (componentOptions.propsData.tab === undefined) {
-    //       const tab = (componentOptions.children || []).filter(({ data = {}}) => data.slot === 'tab')
-    //       componentOptions.propsData.tab = tab
-    //     }
-    //     children.push(child)
-    //   }
-    // })
-    // const tabBarProps = {
-    //   props: {
-    //     hideAdd,
-    //     removeTab: this.removeTab,
-    //     createNewTab: this.createNewTab,
-    //     inkBarAnimated,
-    //     tabBarGutter,
-    //   },
-    //   on: {
-    //     tabClick: onTabClick,
-    //     prevClick: onPrevClick,
-    //     nextClick: onNextClick,
-    //   },
-    //   style: tabBarStyle,
-    // }
-    // const tabContentProps = {
-    //   props: {
-    //     animated: tabPaneAnimated,
-    //     animatedWithMargin: true,
-    //   },
-    // }
-    // const tabsProps = {
-    //   props: {
-    //     prefixCls,
-    //     tabBarPosition: tabPosition,
-    //     tabBarProps: tabBarProps,
-    //     tabContentProps: tabContentProps,
-    //     destroyInactiveTabPane,
-    //     defaultActiveKey,
-    //     type,
-    //   },
-    //   on: {
-    //     change: this.handleChange,
-    //     tabClick: this.onTabClick,
-    //   },
-    // }
-    // if (hasProp(this, 'activeKey')) {
-    //   tabsProps.props.activeKey = activeKey
-    // }
-    // return (
-    //   <Tabs
-    //     class={cls}
-    //     {...tabsProps}
-    //   >
-    //     {children}
-    //     {tabBarExtraContent ? <template slot='tabBarExtraContent'>
-    //       {tabBarExtraContent}
-    //     </template> : null}
-    //   </Tabs>
-    // )
   },
 }
 

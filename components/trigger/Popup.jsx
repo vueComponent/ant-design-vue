@@ -237,7 +237,6 @@ export default {
               monitorWindowResize
               align={align}
               onAlign={this.onAlign}
-              visible={visible}
             >
               <PopupInner
                 {...popupInnerProps}

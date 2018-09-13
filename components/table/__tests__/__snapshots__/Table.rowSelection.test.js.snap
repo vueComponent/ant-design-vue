@@ -75,7 +75,7 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
 
 exports[`Table.rowSelection render with default selection correctly 1`] = `
 <div>
-  <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none; left: -999px; top: -995px;">
+  <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root ant-dropdown-menu-light ant-table-selection-menu ant-dropdown-content" role="menu" tabindex="0">
       <li role="menuitem" class="ant-dropdown-menu-item">
         <div>Select current page</div>

@@ -72,3 +72,20 @@
     color: @success-color;
   }
 }
+
+.@{confirm-prefix-cls}-centered {
+  text-align: center;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+  }
+  .@{confirm-prefix-cls} {
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    text-align: left;
+  }
+}

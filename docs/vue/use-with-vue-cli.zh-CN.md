@@ -1,5 +1,5 @@
 
-# 在 vue-cli 中使用
+# 在 vue-cli 3 中使用
 
 [vue-cli](https://github.com/vuejs/vue-cli) 是业界最优秀的 Vue 应用开发工具之一，本文会尝试在 vue-cli 创建的工程中使用 antd 组件，并自定义 webpack 的配置以满足各类工程化需求。
 
@@ -9,7 +9,9 @@
 我们需要在命令行中安装 vue-cli 工具，你可能还需要安装 [yarn](https://github.com/yarnpkg/yarn/)。
 
 ```bash
-$ npm install -g vue-cli yarn
+$ npm install -g @vue/cli
+# OR
+$ yarn global add @vue/cli
 ```
 
 然后新建一个项目。
@@ -26,7 +28,7 @@ $ vue create antd-demo
 
 ```bash
 $ cd antd-demo
-$ npm run dev
+$ npm run serve
 ```
 
 此时浏览器会访问 http://localhost:8080/ ，看到 `Welcome to Your Vue.js App` 的界面就算成功了。

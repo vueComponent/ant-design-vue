@@ -1,5 +1,5 @@
 
-# Use in vue-cli
+# Use in vue-cli 3
 
 [vue-cli](https://github.com/vuejs/vue-cli) is one of the best Vue application development tools. We are going to use `antd` within it and modify the webpack config for some customized needs.
 
@@ -9,7 +9,9 @@
 We need to install `vue-cli` first, you may need install [yarn](https://github.com/yarnpkg/yarn/) too.
 
 ```bash
-$ npm install -g vue-cli yarn
+$ npm install -g @vue/cli
+# OR
+$ yarn global add @vue/cli
 ```
 
 Create a new project named `antd-demo`.
@@ -18,7 +20,7 @@ Create a new project named `antd-demo`.
 $ vue create antd-demo
 ```
 
-And, setup your vue project configuration. 
+And, setup your vue project configuration.
 
 The tool will create and initialize environment and dependencies automatically,
 please try config your proxy setting or use another npm registry if any network errors happen during it.
@@ -27,7 +29,7 @@ Then we go inside `antd-demo` and start it.
 
 ```bash
 $ cd antd-demo
-$ npm run dev
+$ npm run serve
 ```
 
 Open the browser at http://localhost:8080/. It renders a header saying "Welcome to Your Vue.js App" on the page.

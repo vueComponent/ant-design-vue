@@ -1,7 +1,7 @@
 
 # Getting Started
 
-Ant Design Vue is dedicated to providing a **good development experience** for programmers. Make sure that you had installed [Node.js](https://nodejs.org/)(> v6.5) correctly.
+Ant Design Vue is dedicated to providing a **good development experience** for programmers. Make sure that you had installed [Node.js](https://nodejs.org/)(> v8.9) correctly.
 
 > Before delving into Ant Design Vue, a good knowledge base of [Vue](https://cn.vuejs.org/) and [JavaScript ES2015](http://babeljs.io/docs/learn-es2015/) is needed.
 
@@ -19,7 +19,9 @@ The following CodeSandbox demo is the simplest use case, and it's also a good ha
 [vue-cli](https://github.com/vuejs/vue-cli)
 
 ```bash
-$ npm install vue-cli -g
+$ npm install -g @vue/cli
+# OR
+$ yarn global add @vue/cli
 ```
 
 ### 2. Create a New Project
@@ -30,7 +32,7 @@ A new project can be created using CLI tools.
 $ vue create antd-demo
 ```
 
-And, setup your vue project configuration. 
+And, setup your vue project configuration.
 
 ### 3. Use antd's Components
 

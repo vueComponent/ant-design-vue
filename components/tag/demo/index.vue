@@ -4,6 +4,7 @@ import Checkable from './checkable'
 import Colorful from './colorful'
 import Control from './control'
 import HotTags from './hot-tags'
+import Controlled from './controlled'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -43,6 +44,7 @@ export default {
         <Colorful />
         <Control />
         <HotTags />
+        <Controlled />
         <api>
           <template slot='cn'>
             <CN/>

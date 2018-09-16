@@ -52,7 +52,7 @@
 </script>
 
 <style>
-#components-badge-demo .ant-badge:not(.ant-badge-status) {
+#components-badge-demo .ant-badge:not(.ant-badge-not-a-wrapper) {
   margin-right: 20px;
 }
 #components-badge-demo .head-example {
@@ -61,5 +61,8 @@
   border-radius: 4px;
   background: #eee;
   display: inline-block;
+}
+#components-badge-demo .ant-badge-not-a-wrapper:not(.ant-badge-status) {
+  margin-right: 8px;
 }
 </style>

@@ -2,6 +2,13 @@
 
 ---
 
+## 1.1.2
+
+`2018-09-17`
+- 🎉 Synchronize antd3.8.4 style
+- 🌟 Tag component adds `visible` attribute and wave effect
+- 🐞 Fix the 'Cascader` component, the selected item is not expanded [#195](https://github.com/vueComponent/ant-design-vue/issues/195)
+
 ## 1.1.1
 
 `2018-09-13`

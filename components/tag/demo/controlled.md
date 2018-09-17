@@ -13,7 +13,7 @@ By using the `visible` prop, you can control the close state of Tag.
   <div>
     <a-tag
       closable
-      :visible="visible"
+      v-model="visible"
     >
       Movies
     </a-tag>

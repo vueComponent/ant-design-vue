@@ -24,22 +24,18 @@ export default {
       return true
     },
 
-    onClick (node) {
+    onClick (node, waveColor) {
       if (node.className.indexOf('-leave') >= 0) {
         return
       }
       this.removeExtraStyleNode()
       const { insertExtraNode } = this.$props
-      const extraNode = document.createElement('div')
+      this.extraNode = document.createElement('div')
+      const extraNode = this.extraNode
       extraNode.className = 'ant-click-animating-node'
-      const attributeName = insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node'
+      const attributeName = this.getAttributeName()
       node.removeAttribute(attributeName)
       node.setAttribute(attributeName, 'true')
-      // Get wave color from target
-      const waveColor =
-        getComputedStyle(node).getPropertyValue('border-top-color') || // Firefox Compatible
-        getComputedStyle(node).getPropertyValue('border-color') ||
-        getComputedStyle(node).getPropertyValue('background-color')
       // Not white or transparnt or grey
       if (waveColor &&
           waveColor !== '#ffffff' &&
@@ -56,20 +52,14 @@ export default {
       if (insertExtraNode) {
         node.appendChild(extraNode)
       }
-      const transitionEnd = () => {
-        node.removeAttribute(attributeName)
-        this.removeExtraStyleNode()
-        if (insertExtraNode) {
-          node.removeChild(extraNode)
-        }
-        TransitionEvents.removeEndEventListener(node, transitionEnd)
-      }
-      TransitionEvents.addEndEventListener(node, transitionEnd)
+      TransitionEvents.addEndEventListener(node, this.onTransitionEnd)
     },
 
     bindAnimationEvent (node) {
-      if (node.getAttribute('disabled') ||
-          node.className.indexOf('disabled') >= 0) {
+      if (!node ||
+        !node.getAttribute ||
+        node.getAttribute('disabled') ||
+        node.className.indexOf('disabled') >= 0) {
         return
       }
       const onClick = (e) => {
@@ -77,7 +67,13 @@ export default {
         if (e.target.tagName === 'INPUT') {
           return
         }
-        setTimeout(() => this.onClick(node), 0)
+        this.resetEffect(node)
+        // Get wave color from target
+        const waveColor =
+          getComputedStyle(node).getPropertyValue('border-top-color') || // Firefox Compatible
+          getComputedStyle(node).getPropertyValue('border-color') ||
+          getComputedStyle(node).getPropertyValue('background-color')
+        this.clickWaveTimeoutId = window.setTimeout(() => this.onClick(node, waveColor), 0)
       }
       node.addEventListener('click', onClick, true)
       return {
@@ -86,7 +82,31 @@ export default {
         },
       }
     },
+    getAttributeName () {
+      const { insertExtraNode } = this.$props
+      return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node'
+    },
 
+    resetEffect (node) {
+      if (!node || node === this.extraNode) {
+        return
+      }
+      const { insertExtraNode } = this.$props
+      const attributeName = this.getAttributeName()
+      node.removeAttribute(attributeName)
+      this.removeExtraStyleNode()
+      if (insertExtraNode && this.extraNode && node.contains(this.extraNode)) {
+        node.removeChild(this.extraNode)
+      }
+      TransitionEvents.removeEndEventListener(node, this.onTransitionEnd)
+    },
+
+    onTransitionEnd (e) {
+      if (!e || e.animationName !== 'fadeEffect') {
+        return
+      }
+      this.resetEffect(e.target)
+    },
     removeExtraStyleNode () {
       if (this.styleForPesudo && document.body.contains(this.styleForPesudo)) {
         document.body.removeChild(this.styleForPesudo)

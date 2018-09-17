@@ -14,11 +14,11 @@ It's based on `afterClose` event, which will be triggered while the close animat
   <div>
     <template v-for="(tag, index) in tags">
       <a-tooltip v-if="tag.length > 20" :key="tag" :title="tag">
-        <a-tag :key="tag" :closable="index !== 0" @afterClose="() => handleClose(tag)">
+        <a-tag :key="tag" :closable="index !== 0" :afterClose="() => handleClose(tag)">
           {{`${tag.slice(0, 20)}...`}}
         </a-tag>
       </a-tooltip>
-      <a-tag v-else :key="tag" :closable="index !== 0" @afterClose="() => handleClose(tag)">
+      <a-tag v-else :key="tag" :closable="index !== 0" :afterClose="() => handleClose(tag)">
         {{tag}}
       </a-tag>
     </template>

@@ -9,7 +9,7 @@
 | afterClose | Callback executed when close animation is completed | () => void | - |
 | closable | Whether the Tag can be closed | boolean | `false` |
 | color | Color of the Tag | string | - |
-| visible | Whether the Tag is closed or not | boolean | `true` |
+| visible(v-model) | Whether the Tag is closed or not | boolean | `true` |
 
 
 ### Tag Events

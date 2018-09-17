@@ -66,7 +66,7 @@ export default {
     changeConfirmLocale()
   },
   render () {
-    return this.$slots.default[0]
+    return this.$slots.default ? this.$slots.default[0] : null
   },
 }
 

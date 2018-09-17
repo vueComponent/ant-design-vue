@@ -14,6 +14,7 @@ export default {
     color: PropTypes.string,
     closable: PropTypes.bool,
     visible: PropTypes.bool,
+    afterClose: PropTypes.func,
   },
   model: {
     prop: 'visible',
@@ -46,12 +47,13 @@ export default {
   },
   updated () {
     this.$nextTick(() => {
-      if (this.pre_visible && !this.$data._visible) {
+      const preVisible = this.pre_visible
+      this.pre_visible = this.$data._visible
+      if (preVisible && !this.$data._visible) {
         this.close()
-      } else if (!this.pre_visible && this.$data._visible) {
+      } else if (!preVisible && this.$data._visible) {
         this.show()
       }
-      this.pre_visible = this.$data._visible
     })
   },
   methods: {
@@ -62,6 +64,7 @@ export default {
         return
       }
       this.setState({ _visible: false })
+      this.$forceUpdate()
     },
     close  () {
       if (this.$data._closing || this.$data._closed) {
@@ -111,7 +114,7 @@ export default {
 
   render () {
     const { prefixCls, closable, color } = this.$props
-    const closeIcon = closable ? <Icon type='cross' onClick={this.handleIconClick} /> : ''
+    const closeIcon = closable ? <Icon type='close' onClick={this.handleIconClick} /> : ''
     const isPresetColor = this.isPresetColor(color)
     const cls = {
       [`${prefixCls}`]: true,
@@ -123,9 +126,10 @@ export default {
     const tagStyle = {
       backgroundColor: (color && !isPresetColor) ? color : null,
     }
-    const tag = this.$data._closed ? <span /> : (
+    const tag =
       <div
         v-show={!this.$data._closing}
+        data-show={!this.$data._closing}
         {...{ on: omit(this.$listeners, ['close']) }}
         class={cls}
         style={tagStyle}
@@ -133,18 +137,19 @@ export default {
         {this.$slots.default}
         {closeIcon}
       </div>
-    )
-    const transitionProps = this.$data._closed ? {} : getTransitionProps(`${prefixCls}-zoom`, {
+    const transitionProps = getTransitionProps(`${prefixCls}-zoom`, {
       afterLeave: () => this.animationEnd(undefined, false),
       afterEnter: () => this.animationEnd(undefined, true),
     })
     return (
       <Wave>
-        <transition
-          {...transitionProps}
-        >
-          {tag}
-        </transition>
+        {this.$data._closed ? <span/>
+          : <transition
+            {...transitionProps}
+          >
+            {tag}
+          </transition>
+        }
       </Wave>
     )
   },

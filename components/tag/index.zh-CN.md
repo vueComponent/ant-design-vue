@@ -9,7 +9,7 @@
 | afterClose | 关闭动画完成后的回调 | () => void | - |
 | closable | 标签是否可以关闭 | boolean | false |
 | color | 标签色 | string | - |
-| visible | 是否显示标签 | boolean | `true` |
+| visible(v-model) | 是否显示标签 | boolean | `true` |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |

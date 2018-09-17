@@ -67,7 +67,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                     <!----><a href="javascript:;">John Brown</a></td>
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
-                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
+                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 John Brown</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
@@ -76,7 +76,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                     <!----><a href="javascript:;">Jim Green</a></td>
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
-                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
+                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 Jim Green</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
@@ -85,7 +85,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                     <!----><a href="javascript:;">Joe Black</a></td>
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
-                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
+                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 Joe Black</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
@@ -2517,7 +2517,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td>Brown</td>
                   <td>32</td>
                   <td>New York No. 1 Lake Park</td>
-                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
+                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
                   <td><span><a href="javascript:;">Action 一 John</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
@@ -2526,7 +2526,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td>Green</td>
                   <td>42</td>
                   <td>London No. 1 Lake Park</td>
-                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
+                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
                   <td><span><a href="javascript:;">Action 一 Jim</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
@@ -2535,7 +2535,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td>Black</td>
                   <td>32</td>
                   <td>Sidney No. 1 Lake Park</td>
-                  <td><span><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
+                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
                   <td><span><a href="javascript:;">Action 一 Joe</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
               </tbody>

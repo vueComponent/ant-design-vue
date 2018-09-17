@@ -365,7 +365,7 @@ export default {
       'fieldNames',
     ])
 
-    let options = this.options
+    let options = props.options
     if (inputValue) {
       options = this.generateFilteredOptions(prefixCls)
     }

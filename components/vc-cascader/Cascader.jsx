@@ -92,13 +92,13 @@ export default {
     value (val, oldValue) {
       if (!shallowEqualArrays(val, oldValue)) {
         const newValues = {
-          value: oldValue || [],
-          activeValue: oldValue || [],
+          sValue: val || [],
+          sActiveValue: val || [],
         }
         // allow activeValue diff from value
         // https://github.com/ant-design/ant-design/issues/2767
         if (hasProp(this, 'loadData')) {
-          delete newValues.activeValue
+          delete newValues.sActiveValue
         }
         this.setState(newValues)
       }

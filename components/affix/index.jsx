@@ -55,7 +55,7 @@ const AffixProps = {
   prefixCls: PropTypes.string,
 }
 
-export default {
+const Affix = {
   name: 'AAffix',
   props: AffixProps,
   mixins: [BaseMixin],
@@ -264,3 +264,9 @@ export default {
   },
 }
 
+/* istanbul ignore next */
+Affix.install = function (Vue) {
+  Vue.component(Affix.name, Affix)
+}
+
+export default Affix

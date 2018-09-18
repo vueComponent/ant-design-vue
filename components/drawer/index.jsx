@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import { getComponentFromProp, getOptionProps } from '../_util/props-util'
 
-export default {
+const Drawer = {
   name: 'ADrawer',
   props: {
     closable: PropTypes.bool.def(true),
@@ -180,3 +180,10 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Drawer.install = function (Vue) {
+  Vue.component(Drawer.name, Drawer)
+}
+
+export default Drawer

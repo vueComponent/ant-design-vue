@@ -60,4 +60,9 @@ Modal.warning = warning
 Modal.warn = warn
 Modal.confirm = confirm
 
+/* istanbul ignore next */
+Modal.install = function (Vue) {
+  Vue.component(Modal.name, Modal)
+}
+
 export default Modal

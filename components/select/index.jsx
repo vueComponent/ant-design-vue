@@ -89,7 +89,7 @@ export {
   SelectProps,
 }
 const SECRET_COMBOBOX_MODE_DO_NOT_USE = 'SECRET_COMBOBOX_MODE_DO_NOT_USE'
-export default {
+const Select = {
   SECRET_COMBOBOX_MODE_DO_NOT_USE,
   Option: { ...Option, name: 'ASelectOption' },
   OptGroup: { ...OptGroup, name: 'ASelectOptGroup' },
@@ -195,4 +195,13 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Select.install = function (Vue) {
+  Vue.component(Select.name, Select)
+  Vue.component(Select.Option.name, Select.Option)
+  Vue.component(Select.OptGroup.name, Select.OptGroup)
+}
+
+export default Select
 

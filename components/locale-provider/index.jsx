@@ -26,7 +26,7 @@ function setMomentLocale (locale) {
   }
 }
 
-export default {
+const LocaleProvider = {
   name: 'ALocaleProvider',
   props: {
     locale: PropTypes.object.def({}),
@@ -69,4 +69,11 @@ export default {
     return this.$slots.default ? this.$slots.default[0] : null
   },
 }
+
+/* istanbul ignore next */
+LocaleProvider.install = function (Vue) {
+  Vue.component(LocaleProvider.name, LocaleProvider)
+}
+
+export default LocaleProvider
 

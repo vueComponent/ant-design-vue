@@ -67,7 +67,7 @@ export const CarouselProps = {
   slickGoTo: PropTypes.number,
 }
 
-export default {
+const Carousel = {
   name: 'ACarousel',
   props: initDefaultProps(CarouselProps, {
     dots: true,
@@ -157,3 +157,10 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Carousel.install = function (Vue) {
+  Vue.component(Carousel.name, Carousel)
+}
+
+export default Carousel

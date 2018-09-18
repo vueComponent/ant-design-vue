@@ -16,4 +16,12 @@ Object.assign(DatePicker, {
   WeekPicker: wrapPicker(WeekPicker, WeekPickerProps(), 'gggg-wo'),
 })
 
+/* istanbul ignore next */
+DatePicker.install = function (Vue) {
+  Vue.component(DatePicker.name, DatePicker)
+  Vue.component(DatePicker.RangePicker.name, DatePicker.RangePicker)
+  Vue.component(DatePicker.MonthPicker.name, DatePicker.MonthPicker)
+  Vue.component(DatePicker.WeekPicker.name, DatePicker.WeekPicker)
+}
+
 export default DatePicker

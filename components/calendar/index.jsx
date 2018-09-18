@@ -48,7 +48,7 @@ export const CalendarProps = () => ({
   validRange: PropTypes.custom(isMomentArray),
 })
 
-export default {
+const Calendar = {
   name: 'ACalendar',
   mixins: [BaseMixin],
   props: initDefaultProps(CalendarProps(), {
@@ -240,4 +240,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Calendar.install = function (Vue) {
+  Vue.component(Calendar.name, Calendar)
+}
+
+export default Calendar
 

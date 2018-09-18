@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types'
 import classNames from 'classnames'
 import omit from 'omit.js'
-import { SpinProps } from '../spin'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
 
@@ -51,10 +50,9 @@ export const ListProps = () => ({
   locale: PropTypes.object,
 })
 
-export default {
+const List = {
   Item,
   name: 'AList',
-
   props: initDefaultProps(ListProps(), {
     dataSource: [],
     prefixCls: 'ant-list',
@@ -247,3 +245,12 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+List.install = function (Vue) {
+  Vue.component(List.name, List)
+  Vue.component(List.Item.name, List.Item)
+  Vue.component(List.Item.Meta.name, List.Item.Meta)
+}
+
+export default List

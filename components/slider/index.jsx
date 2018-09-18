@@ -44,7 +44,7 @@ export const SliderProps = () => ({
   id: PropTypes.string,
 })
 
-export default {
+const Slider = {
   name: 'ASlider',
   model: {
     prop: 'value',
@@ -141,3 +141,10 @@ export default {
     return <VcSlider {...vcSliderProps} />
   },
 }
+
+/* istanbul ignore next */
+Slider.install = function (Vue) {
+  Vue.component(Slider.name, Slider)
+}
+
+export default Slider

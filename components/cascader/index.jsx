@@ -24,12 +24,6 @@ const FieldNamesType = PropTypes.shape({
   children: PropTypes.string,
 }).loose
 
-const FilledFieldNamesType = PropTypes.shape({
-  value: PropTypes.string,
-  label: PropTypes.string,
-  children: PropTypes.string,
-}).loose
-
 const CascaderExpandTrigger = PropTypes.oneOf(['click', 'hover'])
 
 const ShowSearchType = PropTypes.shape({
@@ -105,7 +99,7 @@ function getFilledFieldNames (fieldNames = {}) {
 
 const defaultDisplayRender = ({ labels }) => labels.join(' / ')
 
-export default {
+const Cascader = {
   inheritAttrs: false,
   name: 'ACascader',
   mixins: [BaseMixin],
@@ -447,4 +441,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Cascader.install = function (Vue) {
+  Vue.component(Cascader.name, Cascader)
+}
+
+export default Cascader
 

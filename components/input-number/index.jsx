@@ -28,7 +28,7 @@ export const InputNumberProps = {
   autoFocus: PropTypes.bool,
 }
 
-export default {
+const InputNumber = {
   name: 'AInputNumber',
   model: {
     prop: 'value',
@@ -64,3 +64,10 @@ export default {
     return <VcInputNumber {...vcInputNumberprops} />
   },
 }
+
+/* istanbul ignore next */
+InputNumber.install = function (Vue) {
+  Vue.component(InputNumber.name, InputNumber)
+}
+
+export default InputNumber

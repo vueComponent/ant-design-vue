@@ -122,7 +122,7 @@ module.exports = {
 另外一种方式是建立一个单独的 `less` 变量文件，引入这个文件覆盖 `antd.less` 里的变量。
 
 ```css
-@import "~antd/dist/antd.less";   // 引入官方提供的 less 样式入口文件
+@import "~ant-design-vue/dist/antd.less";   // 引入官方提供的 less 样式入口文件
 @import "your-theme-file.less";   // 用于覆盖上面定义的变量
 ```
 
@@ -133,7 +133,7 @@ module.exports = {
 注意样式必须加载 less 格式，一个常见的问题就是引入了多份样式，less 的样式被 css 的样式覆盖了。
 
 - 如果你在使用 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 的 `style` 配置来引入样式，需要将配置值从 `'css'` 改为 `true`，这样会引入 less 文件。
-- 如果你是通过 `'antd/dist/antd.css'` 引入样式的，改为 `antd/dist/antd.less`。
+- 如果你是通过 `'ant-design-vue/dist/antd.css'` 引入样式的，改为 `ant-design-vue/dist/antd.less`。
 
 ## 社区教程 for Antd React
 

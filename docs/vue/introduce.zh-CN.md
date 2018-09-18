@@ -1,7 +1,7 @@
 
 # Ant Design of Vue
 
-这里是 Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。
+这里是 Ant Design 的 Vue 实现，开发和服务于企业级后台产品。
 
 <div class="pic-plus">
   <img width="150" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg">
@@ -134,7 +134,7 @@ import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 
 众所周知，Ant Design作为一门设计语言面世，经历过多年的迭代和积累，它对UI的设计思想已经成为一套事实标准，受到众多前端开发者及企业的追捧和喜爱，也是React开发者手中的神兵利器。希望ant-design-vue能够让Vue开发者也享受到Ant Design的优秀设计。
 
-ant-design-vue是Ant Design 3.X的Vue实现，该组件库目前以实现Ant Design React版80%以上的组件，组件的风格与Ant Design 3.4.0版本保持同步，组件的html结构和css样式也保持一致，真正做到了样式0修改，组件API也尽量保持了一致。
+ant-design-vue 是 Ant Design 的Vue实现，组件的风格与Ant Design保持同步，组件的html结构和css样式也保持一致，真正做到了样式0修改，组件API也尽量保持了一致。
 
 Ant Design Vue 致力于提供给程序员**愉悦**的开发体验。
 

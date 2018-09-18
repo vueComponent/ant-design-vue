@@ -23,6 +23,8 @@ An enterprise-class UI components based on Ant Design and Vue.
 
 </div>
 
+[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://vuecomponent.github.io/ant-design-vue/)
+
 [English](./README.md) | 简体中文 | [官网国内镜像](http://tangjinzhou.gitee.io/ant-design-vue/docs/vue/introduce-cn/)
 
 <p align="center">

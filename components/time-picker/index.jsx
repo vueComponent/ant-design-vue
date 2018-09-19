@@ -59,7 +59,7 @@ export const TimePickerProps = () => ({
   addon: PropTypes.any,
 })
 
-export default {
+const TimePicker = {
   name: 'ATimePicker',
   mixins: [BaseMixin],
   props: initDefaultProps(TimePickerProps(), {
@@ -178,4 +178,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+TimePicker.install = function (Vue) {
+  Vue.component(TimePicker.name, TimePicker)
+}
+
+export default TimePicker
 

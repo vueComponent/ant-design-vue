@@ -231,6 +231,11 @@ const install = function (Vue) {
   Vue.prototype.$confirm = Modal.confirm
 }
 
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
+
 export {
   version,
   install,

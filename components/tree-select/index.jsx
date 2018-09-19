@@ -8,7 +8,7 @@ import { initDefaultProps, getOptionProps, getComponentFromProp, filterEmpty } f
 
 export { TreeData, TreeSelectProps } from './interface'
 
-export default {
+const TreeSelect = {
   TreeNode: { ...TreeNode, name: 'ATreeSelectNode' },
   SHOW_ALL,
   SHOW_PARENT,
@@ -113,3 +113,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+TreeSelect.install = function (Vue) {
+  Vue.component(TreeSelect.name, TreeSelect)
+  Vue.component(TreeSelect.TreeNode.name, TreeSelect.TreeNode)
+}
+
+export default TreeSelect

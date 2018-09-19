@@ -3,7 +3,7 @@ export function noop () {
 
 export function getKeyFromChildrenIndex (child, menuEventKey, index) {
   const prefix = menuEventKey || ''
-  return child.key || `${prefix}item_${index}`
+  return child.key === undefined ? `${prefix}item_${index}` : child.key
 }
 
 export function getMenuIdFromSubMenuEventKey (eventKey) {

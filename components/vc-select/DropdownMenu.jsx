@@ -126,7 +126,7 @@ export default {
         let clonedMenuItems = menuItems
         if (selectedKeys.length || firstActiveValue) {
           if (props.visible && !this.lastVisible) {
-            activeKeyProps.activeKey = selectedKeys[0] || firstActiveValue
+            activeKeyProps.activeKey = selectedKeys[0] !== undefined ? selectedKeys[0] : firstActiveValue
           }
           let foundFirst = false
           // set firstActiveItem via cloning menus

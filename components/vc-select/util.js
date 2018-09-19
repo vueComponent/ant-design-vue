@@ -122,7 +122,7 @@ export function getSelectKeys (menuItems, value) {
     } else {
       const itemValue = getValuePropValue(item)
       const itemKey = item.key
-      if (findIndexInValueBySingleValue(value, itemValue) !== -1 && itemKey) {
+      if (findIndexInValueBySingleValue(value, itemValue) !== -1 && itemKey !== undefined) {
         selectedKeys.push(itemKey)
       }
     }

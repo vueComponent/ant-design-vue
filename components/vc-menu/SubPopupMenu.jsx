@@ -45,7 +45,7 @@ export function saveRef (key, c) {
 export function getActiveKey (props, originalActiveKey) {
   let activeKey = originalActiveKey
   const { eventKey, defaultActiveFirst, children } = props
-  if (activeKey) {
+  if (activeKey !== undefined && activeKey !== null) {
     let found
     loopMenuItem(children, (c, i) => {
       const propsData = c.componentOptions.propsData || {}
@@ -205,7 +205,7 @@ const SubPopupMenu = {
 
     getEventKey () {
       // when eventKey not available ,it's menu and return menu id '0-menu-'
-      return this.eventKey || '0-menu-'
+      return this.eventKey !== undefined ? this.eventKey : '0-menu-'
     },
 
     getOpenTransitionName () {

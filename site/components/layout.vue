@@ -98,13 +98,13 @@ export default {
       const lis = []
       currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
         const title = isCN ? cnTitle : usTitle
-        lis.push(<a-anchor-link href={`#${id}`} title={title} />)
+        lis.push(<a-anchor-link key={id} href={`#${id}`} title={title} />)
       })
       const showApi = this.$route.path.indexOf('/components/') !== -1
       return (
-        <a-anchor offsetTop={70} class='demo-anchor'>
+        <a-anchor offsetTop={100} class='demo-anchor'>
           {lis}
-          {showApi ? <a-anchor-link title='API' href='#API' /> : ''}
+          {showApi ? <a-anchor-link key='API' title='API' href='#API' /> : ''}
         </a-anchor>
       )
     },

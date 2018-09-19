@@ -127,6 +127,8 @@ const components = [
   Anchor,
   Anchor.Link,
   AutoComplete,
+  AutoComplete.Option,
+  AutoComplete.OptGroup,
   Alert,
   Avatar,
   BackTop,
@@ -203,6 +205,7 @@ const components = [
   TreeSelect.TreeNode,
   Tabs,
   Tabs.TabPane,
+  Tabs.TabContent,
   Tag,
   Tag.CheckableTag,
   TimePicker,
@@ -226,6 +229,11 @@ const install = function (Vue) {
   Vue.prototype.$error = Modal.error
   Vue.prototype.$warning = Modal.warning
   Vue.prototype.$confirm = Modal.confirm
+}
+
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
 }
 
 export {

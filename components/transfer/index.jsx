@@ -49,7 +49,7 @@ export const TransferLocale = {
   itemsUnit: PropTypes.string,
 }
 
-export default {
+const Transfer = {
   name: 'ATransfer',
   mixins: [BaseMixin],
   props: initDefaultProps(TransferProps, {
@@ -95,46 +95,6 @@ export default {
         })
       }
     },
-    // '$props': {
-    //   handler: function (nextProps) {
-    //     // if (nextProps.targetKeys !== currentProps.targetKeys ||
-    //     //   nextProps.dataSource !== currentProps.dataSource) {
-    //     //   // clear cached splited dataSource
-    //     //   this.separatedDataSource = null
-
-    //     //   if (!nextProps.selectedKeys) {
-    //     //     // clear key nolonger existed
-    //     //     // clear checkedKeys according to targetKeys
-    //     //     const { dataSource, targetKeys = [] } = nextProps
-
-    //     //     const newSourceSelectedKeys = []
-    //     //     const newTargetSelectedKeys = []
-    //     //     dataSource.forEach(({ key }) => {
-    //     //       if (sourceSelectedKeys.includes(key) && !targetKeys.includes(key)) {
-    //     //         newSourceSelectedKeys.push(key)
-    //     //       }
-    //     //       if (targetSelectedKeys.includes(key) && targetKeys.includes(key)) {
-    //     //         newTargetSelectedKeys.push(key)
-    //     //       }
-    //     //     })
-    //     //     this.setState({
-    //     //       sourceSelectedKeys: newSourceSelectedKeys,
-    //     //       targetSelectedKeys: newTargetSelectedKeys,
-    //     //     })
-    //     //   }
-    //     // }
-
-    //     // if (nextProps.selectedKeys) {
-    //     //   const targetKeys = nextProps.targetKeys || []
-    //     //   this.setState({
-    //     //     sourceSelectedKeys: nextProps.selectedKeys.filter(key => !targetKeys.includes(key)),
-    //     //     targetSelectedKeys: nextProps.selectedKeys.filter(key => targetKeys.includes(key)),
-    //     //   })
-    //     // }
-    //     // this.currentProps = { ...this.$props }
-    //   },
-    //   deep: true,
-    // },
   },
   methods: {
     updateState () {
@@ -434,3 +394,10 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Transfer.install = function (Vue) {
+  Vue.component(Transfer.name, Transfer)
+}
+
+export default Transfer

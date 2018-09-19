@@ -19,7 +19,7 @@ const getStepsProps = (defaultProps = {}) => {
   return initDefaultProps(props, defaultProps)
 }
 
-export default {
+const Steps = {
   name: 'ASteps',
   props: getStepsProps({
     prefixCls: 'ant-steps',
@@ -43,4 +43,12 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Steps.install = function (Vue) {
+  Vue.component(Steps.name, Steps)
+  Vue.component(Steps.Step.name, Steps.Step)
+}
+
+export default Steps
 

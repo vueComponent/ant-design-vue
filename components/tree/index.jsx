@@ -92,7 +92,7 @@ export const TreeProps = () => ({
   openAnimation: PropTypes.any,
 })
 
-export default {
+const Tree = {
   name: 'ATree',
   TreeNode: { ...TreeNode, name: 'ATreeNode' },
   props: initDefaultProps(TreeProps(), {
@@ -173,3 +173,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Tree.install = function (Vue) {
+  Vue.component(Tree.name, Tree)
+  Vue.component(Tree.TreeNode.name, Tree.TreeNode)
+}
+
+export default Tree

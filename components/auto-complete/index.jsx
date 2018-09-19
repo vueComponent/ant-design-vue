@@ -31,7 +31,7 @@ const AutoCompleteProps = {
   // onSelect?: (value: SelectValue, option: Object) => any;
 }
 
-export default {
+const AutoComplete = {
   name: 'AAutoComplete',
   props: {
     ...AutoCompleteProps,
@@ -135,4 +135,13 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+AutoComplete.install = function (Vue) {
+  Vue.component(AutoComplete.name, AutoComplete)
+  Vue.component(AutoComplete.Option.name, AutoComplete.Option)
+  Vue.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup)
+}
+
+export default AutoComplete
 

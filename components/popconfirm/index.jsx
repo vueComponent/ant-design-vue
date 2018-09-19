@@ -13,7 +13,7 @@ import defaultLocale from '../locale-provider/default'
 
 const tooltipProps = abstractTooltipProps()
 const btnProps = buttonTypes()
-export default {
+const Popconfirm = {
   name: 'APopconfirm',
   props: {
     ...tooltipProps,
@@ -128,3 +128,9 @@ export default {
   },
 }
 
+/* istanbul ignore next */
+Popconfirm.install = function (Vue) {
+  Vue.component(Popconfirm.name, Popconfirm)
+}
+
+export default Popconfirm

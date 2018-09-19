@@ -16,7 +16,7 @@ export const RateProps = {
   autoFocus: PropTypes.bool,
 }
 
-export default {
+const Rate = {
   name: 'ARate',
   model: {
     prop: 'value',
@@ -59,3 +59,8 @@ export default {
   },
 }
 
+/* istanbul ignore next */
+Rate.install = function (Vue) {
+  Vue.component(Rate.name, Rate)
+}
+export default Rate

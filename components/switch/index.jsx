@@ -4,7 +4,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 import VcSwitch from '../vc-switch'
 import Wave from '../_util/wave'
 
-export default {
+const Switch = {
   name: 'ASwitch',
   model: {
     prop: 'checked',
@@ -60,3 +60,9 @@ export default {
   },
 }
 
+/* istanbul ignore next */
+Switch.install = function (Vue) {
+  Vue.component(Switch.name, Switch)
+}
+
+export default Switch

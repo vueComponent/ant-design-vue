@@ -30,7 +30,7 @@ export const AlertProps = {
   banner: PropTypes.bool,
 }
 
-export default {
+const Alert = {
   props: AlertProps,
   mixins: [BaseMixin],
   name: 'AAlert',
@@ -132,4 +132,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Alert.install = function (Vue) {
+  Vue.component(Alert.name, Alert)
+}
+
+export default Alert
 

@@ -30,7 +30,7 @@ export const menuProps = {
   focusable: PropTypes.bool.def(false),
 }
 
-export default {
+const Menu = {
   name: 'AMenu',
   props: menuProps,
   Divider: { ...Divider, name: 'AMenuDivider' },
@@ -249,4 +249,14 @@ export default {
     return <VcMenu {...menuProps} class={menuClassName}>{$slots.default}</VcMenu>
   },
 }
+
+/* istanbul ignore next */
+Menu.install = function (Vue) {
+  Vue.component(Menu.name, Menu)
+  Vue.component(Menu.Item.name, Menu.Item)
+  Vue.component(Menu.SubMenu.name, Menu.SubMenu)
+  Vue.component(Menu.Divider.name, Menu.Divider)
+  Vue.component(Menu.ItemGroup.name, Menu.ItemGroup)
+}
+export default Menu
 

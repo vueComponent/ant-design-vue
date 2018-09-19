@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-export default {
+const Divider = {
   name: 'ADivider',
   props: {
     prefixCls: PropTypes.string.def('ant'),
@@ -29,4 +29,11 @@ export default {
     )
   },
 }
+
+/* istanbul ignore next */
+Divider.install = function (Vue) {
+  Vue.component(Divider.name, Divider)
+}
+
+export default Divider
 

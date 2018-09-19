@@ -5,7 +5,7 @@ import PropTypes from '../_util/vue-types'
 import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 
 const props = abstractTooltipProps()
-export default {
+const Popover = {
   name: 'APopover',
   props: {
     ...props,
@@ -58,3 +58,9 @@ export default {
   },
 }
 
+/* istanbul ignore next */
+Popover.install = function (Vue) {
+  Vue.component(Popover.name, Popover)
+}
+
+export default Popover

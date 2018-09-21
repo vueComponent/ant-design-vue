@@ -50,7 +50,7 @@ const Menu = {
     prop: 'selectedKeys',
     event: 'selectChange',
   },
-  mounted () {
+  created () {
     this.preProps = { ...this.$props }
   },
   watch: {
@@ -63,6 +63,7 @@ const Menu = {
         }
         if (hasProp(this, 'openKeys')) {
           this.setState({ sOpenKeys: nextProps.openKeys })
+          this.preProps = { ...nextProps }
           return
         }
         if (nextProps.inlineCollapsed && !preProps.inlineCollapsed) {
@@ -108,10 +109,11 @@ const Menu = {
     this.leaveAnimationExecutedWhenInlineCollapsed = false
     this.inlineOpenKeys = []
     let sOpenKeys
-    if (hasProp(this, 'defaultOpenKeys')) {
-      sOpenKeys = props.defaultOpenKeys
-    } else if (hasProp(this, 'openKeys')) {
+
+    if (hasProp(this, 'openKeys')) {
       sOpenKeys = props.openKeys
+    } else if (hasProp(this, 'defaultOpenKeys')) {
+      sOpenKeys = props.defaultOpenKeys
     }
     return {
       sOpenKeys,

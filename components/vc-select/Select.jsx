@@ -1208,7 +1208,7 @@ const Select = {
       })
     },
     forcePopupAlign () {
-      this.selectTriggerRef.triggerRef.forcePopupAlign()
+      this.selectTriggerRef && this.selectTriggerRef.triggerRef.forcePopupAlign()
     },
     // getOptionsAndOpenStatus () {
     //   let sOpen = this.sOpen

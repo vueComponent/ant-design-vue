@@ -1,12 +1,12 @@
 
 <cn>
-#### 基本
-最简单的用法，4.5 秒后自动关闭。
+#### 自定义按钮
+自定义关闭按钮的样式和文字。
 </cn>
 
 <us>
-#### Basic
-The simplest usage that close the notification box after 4.5s.
+#### Custom close button
+To customize the style or font of the close button.
 </us>
 
 ```html

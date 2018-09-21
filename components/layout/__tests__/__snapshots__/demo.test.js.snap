@@ -170,7 +170,7 @@ exports[`renders ./components/layout/demo/side.md correctly 1`] = `
         <li role="menuitem" class="ant-menu-item" style="padding-left: 24px;"><i class="anticon anticon-file"></i> <span>File</span></li>
       </ul>
     </div>
-    <div class="ant-layout-sider-trigger"><i class="anticon anticon-left"></i></div>
+    <div class="ant-layout-sider-trigger" style="width: 200px;"><i class="anticon anticon-left"></i></div>
   </div>
   <div class="ant-layout">
     <div class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></div>

@@ -2,6 +2,16 @@
 
 ---
 
+## 1.1.3
+
+`2018-09-22`
+- 🎉 优化组件注册方式，如Vue.use(Form) [a6620c](https://github.com/vueComponent/ant-design-vue/commit/a6620cbbe58cc1694a994e6714853906d1d794be)
+- 🐞 `Select.Option` 组件`value`属性支持`0` [#194](https://github.com/vueComponent/ant-design-vue/issues/194)
+- 🐞 修复 `Layout.Sider` 折叠按钮宽度不生效问题 [#201](https://github.com/vueComponent/ant-design-vue/issues/201)
+- 🐞 修复 `Menu` 切换inlineCollapsed时，纵向无动画问题 [#200](https://github.com/vueComponent/ant-design-vue/issues/200)
+- 🐞 修复 `Steps` `dot`模式下样式问题 [#199](https://github.com/vueComponent/ant-design-vue/issues/199)
+
+
 ## 1.1.2
 
 `2018-09-17`

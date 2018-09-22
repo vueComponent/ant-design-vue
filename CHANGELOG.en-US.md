@@ -2,6 +2,15 @@
 
 ---
 
+## 1.1.3
+
+`2018-09-22`
+- 🎉 Optimize component registration methods, such as Vue.use(Form) [a6620c](https://github.com/vueComponent/ant-design-vue/commit/a6620cbbe58cc1694a994e6714853906d1d794be)
+- 🐞 `Select.Option` component `value` property supports `0` [#194](https://github.com/vueComponent/ant-design-vue/issues/194)
+- 🐞 Fix `Layout.Sider` trigger button width does not work [#201](https://github.com/vueComponent/ant-design-vue/issues/201)
+- 🐞 Fix `Menu` When switching inlineCollapsed, there is no animation problem [#200](https://github.com/vueComponent/ant-design-vue/issues/200)
+- 🐞 Fix style problem in `Steps` `dot` mode [#199](https://github.com/vueComponent/ant-design-vue/issues/199)
+
 ## 1.1.2
 
 `2018-09-17`

@@ -67,7 +67,13 @@ import App from './App'
 
 Vue.config.productionTip = false
 
+/* v1.1.2 */
 Vue.component(Button.name, Button)
+Vue.component(Button.Group.name, Button.Group)
+
+/* v1.1.3+ Automatically register components under Button, such as Button.Group */
+Vue.use(Button)
+
 Vue.prototype.$message = message
 
 /* eslint-disable no-new */

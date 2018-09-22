@@ -1,6 +1,8 @@
 <script>
 import { isZhCN } from '../util'
 import sortBy from 'lodash/sortBy'
+import packageInfo from '../../package.json'
+
 export default {
   props: {
     name: String,
@@ -66,6 +68,9 @@ export default {
             <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
               {isCN ? 'English' : '中文'}
             </a-button>
+            <a-select size='small' defaultValue={packageInfo.version} class='version'>
+              <a-select-option value={packageInfo.version}>{packageInfo.version}</a-select-option>
+            </a-select>
             <a-menu selectedKeys={['components']} mode='horizontal' class='menu-site' id='nav'>
               <a-menu-item key='components'>
                 {isCN ? '组件' : 'Components'}

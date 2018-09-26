@@ -1,18 +1,18 @@
 import PropTypes from '../../_util/vue-types'
 import classNames from 'classnames'
-import warning from 'warning'
-import { getPosition, getNodeChildren, isCheckDisabled, traverseTreeNodes, mapChildren } from './util'
-import { initDefaultProps, getOptionProps, filterEmpty, getComponentFromProp } from '../../_util/props-util'
+import { getNodeChildren,
+  mapChildren,
+  warnOnlyTreeNode } from './util'
+import { initDefaultProps, filterEmpty, getComponentFromProp } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
 import getTransitionProps from '../../_util/getTransitionProps'
+import { cloneElement } from '../../_util/vnode'
 
 function noop () {}
 const ICON_OPEN = 'open'
 const ICON_CLOSE = 'close'
 
 const defaultTitle = '---'
-
-let onlyTreeNodeWarned = false // Only accept TreeNode
 
 const TreeNode = {
   name: 'TreeNode',
@@ -45,6 +45,7 @@ const TreeNode = {
     disableCheckbox: PropTypes.bool,
     icon: PropTypes.any,
     dataRef: PropTypes.object,
+    switcherIcon: PropTypes.any,
   }, {}),
 
   data () {
@@ -66,84 +67,11 @@ const TreeNode = {
   mounted () {
     this.syncLoadData(this.$props)
   },
-  watch: {
-    expanded (val) {
-      this.syncLoadData({ expanded: val })
-    },
+  updated () {
+    this.syncLoadData(this.$props)
   },
 
   methods: {
-    onUpCheckConduct (treeNode, nodeChecked, nodeHalfChecked, e) {
-      const { pos: nodePos } = getOptionProps(treeNode)
-      const { eventKey, pos, checked, halfChecked } = this
-      const {
-        vcTree: { checkStrictly, isKeyChecked, onBatchNodeCheck, onCheckConductFinished },
-        vcTreeNode: { onUpCheckConduct } = {},
-      } = this
-
-      // Stop conduct when current node is disabled
-      if (isCheckDisabled(this)) {
-        onCheckConductFinished(e)
-        return
-      }
-
-      const children = this.getNodeChildren()
-
-      let checkedCount = nodeChecked ? 1 : 0
-
-      // Statistic checked count
-      children.forEach((node, index) => {
-        const childPos = getPosition(pos, index)
-
-        if (nodePos === childPos || isCheckDisabled(node)) {
-          return
-        }
-        if (isKeyChecked(node.key || childPos)) {
-          checkedCount += 1
-        }
-      })
-
-      // Static enabled children count
-      const enabledChildrenCount = children
-        .filter(node => !isCheckDisabled(node))
-        .length
-
-      // checkStrictly will not conduct check status
-      const nextChecked = checkStrictly ? checked : enabledChildrenCount === checkedCount
-      const nextHalfChecked = checkStrictly // propagated or child checked
-        ? halfChecked : (nodeHalfChecked || (checkedCount > 0 && !nextChecked))
-
-      // Add into batch update
-      if (checked !== nextChecked || halfChecked !== nextHalfChecked) {
-        onBatchNodeCheck(eventKey, nextChecked, nextHalfChecked)
-
-        if (onUpCheckConduct) {
-          onUpCheckConduct(this, nextChecked, nextHalfChecked, e)
-        } else {
-          // Flush all the update
-          onCheckConductFinished(e)
-        }
-      } else {
-        // Flush all the update
-        onCheckConductFinished(e)
-      }
-    },
-
-    onDownCheckConduct (nodeChecked) {
-      const { $slots } = this
-      const children = $slots.default || []
-      const { vcTree: { checkStrictly, isKeyChecked, onBatchNodeCheck }} = this
-      if (checkStrictly) return
-
-      traverseTreeNodes(children, ({ node, key }) => {
-        if (isCheckDisabled(node)) return false
-
-        if (nodeChecked !== isKeyChecked(key)) {
-          onBatchNodeCheck(key, nodeChecked, false)
-        }
-      })
-    },
-
     onSelectorClick (e) {
       // Click trigger before select/check operation
       const { vcTree: { onNodeClick }} = this
@@ -171,27 +99,16 @@ const TreeNode = {
     onCheck (e) {
       if (this.isDisabled()) return
 
-      const { disableCheckbox, checked, eventKey } = this
+      const { disableCheckbox, checked } = this
       const {
-        vcTree: { checkable, onBatchNodeCheck, onCheckConductFinished },
-        vcTreeNode: { onUpCheckConduct } = {},
+        vcTree: { checkable, onNodeCheck },
       } = this
 
       if (!checkable || disableCheckbox) return
 
       e.preventDefault()
       const targetChecked = !checked
-      onBatchNodeCheck(eventKey, targetChecked, false, this)
-
-      // Children conduct
-      this.onDownCheckConduct(targetChecked)
-
-      // Parent conduct
-      if (onUpCheckConduct) {
-        onUpCheckConduct(this, targetChecked, false, e)
-      } else {
-        onCheckConductFinished(e)
-      }
+      onNodeCheck(e, this, targetChecked)
     },
 
     onMouseEnter (e) {
@@ -282,9 +199,8 @@ const TreeNode = {
       const originList = filterEmpty(children)
       const targetList = getNodeChildren(originList)
 
-      if (originList.length !== targetList.length && !onlyTreeNodeWarned) {
-        onlyTreeNodeWarned = true
-        warning(false, 'Tree only accept TreeNode as children.')
+      if (originList.length !== targetList.length) {
+        warnOnlyTreeNode()
       }
 
       return targetList
@@ -341,15 +257,15 @@ const TreeNode = {
 
     // Load data to avoid default expanded tree without data
     syncLoadData (props) {
-      const { expanded } = this
+      const { expanded, loading, loaded } = props
       const { vcTree: { onNodeLoad }} = this
-
+      if (loading) return
       // read from state to avoid loadData at same time
       if (expanded && !this.isLeaf2()) {
         // We needn't reload data when has children in sync logic
         // It's only needed in node expanded
         const hasChildren = this.getNodeChildren().length !== 0
-        if (!hasChildren) {
+        if (!hasChildren && !loaded) {
           onNodeLoad(this)
         }
       }
@@ -359,19 +275,22 @@ const TreeNode = {
     renderSwitcher () {
       const { expanded } = this
       const { vcTree: { prefixCls }} = this
-
+      const switcherIcon = getComponentFromProp(this, 'switcherIcon') || getComponentFromProp(this.vcTree, 'switcherIcon')
       if (this.isLeaf2()) {
-        return <span class={`${prefixCls}-switcher ${prefixCls}-switcher-noop`} />
+        return (
+          <span key='switcher' class={classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher-noop`)}>
+            {typeof switcherIcon === 'function'
+              ? cloneElement(switcherIcon, { props: { ...this.$props, isLeaf: true }}) : switcherIcon}
+          </span>
+        )
       }
 
+      const switcherCls = classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher_${expanded ? ICON_OPEN : ICON_CLOSE}`)
       return (
-        <span
-          class={classNames(
-            `${prefixCls}-switcher`,
-            `${prefixCls}-switcher_${expanded ? ICON_OPEN : ICON_CLOSE}`,
-          )}
-          onClick={this.onExpand}
-        />
+        <span key='switcher' onClick={this.onExpand} class={switcherCls}>
+          {typeof switcherIcon === 'function'
+            ? cloneElement(switcherIcon, { props: { ...this.$props, isLeaf: false }}) : switcherIcon}
+        </span>
       )
     },
 
@@ -388,6 +307,7 @@ const TreeNode = {
 
       return (
         <span
+          key='checkbox'
           class={classNames(
             `${prefixCls}-checkbox`,
             checked && `${prefixCls}-checkbox-checked`,
@@ -407,6 +327,7 @@ const TreeNode = {
 
       return (
         <span
+          key='icon'
           class={classNames(
             `${prefixCls}-iconEle`,
             `${prefixCls}-icon__${this.getNodeState() || 'docu'}`,
@@ -450,6 +371,7 @@ const TreeNode = {
 
       return (
         <span
+          key='selector'
           ref='selectHandle'
           title={typeof title === 'string' ? title : ''}
           class={classNames(
@@ -481,23 +403,12 @@ const TreeNode = {
         renderTreeNode,
       }} = this
 
-      // [Legacy] Animation control
-      const renderFirst = this.renderFirst
-      this.renderFirst = 1
-      let transitionAppear = true
-      if (!renderFirst && expanded) {
-        transitionAppear = false
-      }
-
       let animProps = {}
       if (openTransitionName) {
-        animProps = getTransitionProps(openTransitionName, { appear: transitionAppear })
+        animProps = getTransitionProps(openTransitionName)
       } else if (typeof openAnimation === 'object') {
         animProps = { ...openAnimation }
         animProps.props = { css: false, ...animProps.props }
-        if (!transitionAppear) {
-          delete animProps.props.appear
-        }
       }
 
       // Children TreeNode
@@ -516,6 +427,7 @@ const TreeNode = {
               expanded && `${prefixCls}-child-tree-open`,
             )}
             data-expanded={expanded}
+            role='group'
           >
             {mapChildren(nodeList, (node, index) => (
               renderTreeNode(node, index, pos)
@@ -560,6 +472,7 @@ const TreeNode = {
           'drag-over-gap-bottom': !disabled && dragOverGapBottom,
           'filter-node': filterTreeNode && filterTreeNode(this),
         }}
+        role='treeitem'
         onDragenter={draggable ? this.onDragEnter : noop}
         onDragover={draggable ? this.onDragOver : noop}
         onDragleave={draggable ? this.onDragLeave : noop}

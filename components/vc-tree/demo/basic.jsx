@@ -5,6 +5,24 @@ import Tree, { TreeNode } from '../index'
 import '../assets/index.less'
 import './basic.less'
 
+const treeData = [
+  { key: '0-0', title: 'parent 1', children:
+    [
+      { key: '0-0-0', title: 'parent 1-1', children:
+        [
+          { key: '0-0-0-0', title: 'parent 1-1-0' },
+        ],
+      },
+      { key: '0-0-1', title: 'parent 1-2', children:
+          [
+            { key: '0-0-1-0', title: 'parent 1-2-0', disableCheckbox: true },
+            { key: '0-0-1-1', title: 'parent 1-2-1' },
+          ],
+      },
+    ],
+  },
+]
+
 export default {
   props: {
     keys: PropTypes.array.def(['0-0-0-0']),
@@ -15,7 +33,6 @@ export default {
       defaultExpandedKeys: keys,
       defaultSelectedKeys: keys,
       defaultCheckedKeys: keys,
-      switchIt: true,
     }
   },
   methods: {
@@ -46,15 +63,20 @@ export default {
   },
 
   render () {
-    const customLabel = (<span class='cus-label'>
-      <span>operations: </span>
-      <span style={{ color: 'blue' }} onClick={this.onEdit}>Edit</span>&nbsp;
-      <label onClick={(e) => e.stopPropagation()}><input type='checkbox' /> checked</label> &nbsp;
-      <span style={{ color: 'red' }} onClick={this.onDel}>Delete</span>
-    </span>)
+    const customLabel = (
+      <span class='cus-label'>
+        <span>operations: </span>
+        <span style={{ color: 'blue' }} onClick={this.onEdit}>Edit</span>&nbsp;
+        <label onClick={(e) => e.stopPropagation()}>
+          <input type='checkbox' /> checked
+        </label>
+        &nbsp;
+        <span style={{ color: '#EB0000' }} onClick={this.onDel}>Delete</span>
+      </span>
+    )
     return (<div style={{ margin: '0 20px' }}>
       <h2>simple</h2>
-      <Tree
+      {/* <Tree
         class='myCls' showLine checkable defaultExpandAll
         defaultExpandedKeys={this.defaultExpandedKeys}
         onExpand={this.onExpand}
@@ -76,7 +98,7 @@ export default {
             <TreeNode title='parent 1-2-1' key='0-0-2-1' />
           </TreeNode>
         </TreeNode>
-      </Tree>
+      </Tree> */}
 
       <h2>Check on Click TreeNode</h2>
       <Tree
@@ -90,17 +112,8 @@ export default {
         defaultCheckedKeys={this.defaultCheckedKeys}
         onSelect={this.onSelect}
         onCheck={this.onCheck}
-      >
-        <TreeNode title='parent 1' key='0-0'>
-          <TreeNode title='parent 1-1' key='0-0-0'>
-            <TreeNode title='parent 1-1-0' key='0-0-0-0' />
-          </TreeNode>
-          <TreeNode title='parent 1-2' key='0-0-1'>
-            <TreeNode title='parent 1-2-0' key='0-0-1-0' disableCheckbox />
-            <TreeNode title='parent 1-2-1' key='0-0-1-1' />
-          </TreeNode>
-        </TreeNode>
-      </Tree>
+        treeData={treeData}
+      />
     </div>)
   },
 }

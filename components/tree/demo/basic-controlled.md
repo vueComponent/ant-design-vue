@@ -18,7 +18,7 @@ basic controlled example
     v-model="checkedKeys"
     @select="onSelect"
     :selectedKeys="selectedKeys"
-    :treeNodes="treeData"
+    :treeData="treeData"
   />
 </template>
 <script>
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     onExpand (expandedKeys) {
-      console.log('onExpand', arguments)
+      console.log('onExpand', expandedKeys)
       // if not set autoExpandParent to false, if children expanded, parent can not collapse.
       // or, you can remove all expanded children keys.
       this.expandedKeys = expandedKeys

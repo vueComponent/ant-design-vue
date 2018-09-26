@@ -16,7 +16,7 @@ Drag treeNode to insert after the other treeNode or insert into the other parent
     draggable
     @dragenter="onDragEnter"
     @drop="onDrop"
-    :treeNodes="gData"
+    :treeData="gData"
   />
 </template>
 

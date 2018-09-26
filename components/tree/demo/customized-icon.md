@@ -11,7 +11,7 @@ You can customize icons for different nodes.
 ```html
 <template>
   <a-tree
-    :treeNodes="treeData"
+    :treeData="treeData"
     showIcon
     defaultExpandAll
     :defaultSelectedKeys="['0-0-0']"
@@ -32,7 +32,7 @@ const treeData = [{
   },
   children: [
     { title: 'leaf', key: '0-0-0', slots: { icon: 'meh' }},
-    { title: 'leaf', key: '0-1-1', scopedSlots: { icon: 'custom' }}],
+    { title: 'leaf', key: '0-0-1', scopedSlots: { icon: 'custom' }}],
 }]
 
 export default {

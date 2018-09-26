@@ -12,7 +12,7 @@ To load data asynchronously when click to expand a treeNode.
 <template>
   <a-tree
     :loadData="onLoadData"
-    :treeNodes="treeData"
+    :treeData="treeData"
   />
 </template>
 

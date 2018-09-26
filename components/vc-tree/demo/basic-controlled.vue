@@ -2,8 +2,7 @@
 /* eslint no-console:0 */
 import Tree, { TreeNode } from '../index'
 import '../assets/index.less'
-import { gData,
-  /* filterParentPosition, getFilterExpandedKeys,*/ getRadioSelectKeys } from './util'
+import { gData, getRadioSelectKeys } from './util'
 import '../../vc-dialog/assets/index.less'
 import Modal from '../../vc-dialog'
 import BaseMixin from '../../_util/BaseMixin'
@@ -63,7 +62,7 @@ export default {
     onRbSelect (selectedKeys, info) {
       let _selectedKeys = selectedKeys
       if (info.selected) {
-        _selectedKeys = getRadioSelectKeys(gData, selectedKeys, info.node.props.eventKey)
+        _selectedKeys = getRadioSelectKeys(gData, selectedKeys, info.node.eventKey)
       }
       this.setState({
         selectedKeys: _selectedKeys,

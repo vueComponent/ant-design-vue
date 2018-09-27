@@ -445,7 +445,7 @@ const Tree = {
         // We need to get the latest state of loading/loaded keys
         this.setState(({ _loadedKeys: loadedKeys = [], _loadingKeys: loadingKeys = [] }) => {
           const { loadData } = this.$props
-          const { eventKey } = getOptionProps('treeNode')
+          const { eventKey } = getOptionProps(treeNode)
 
           if (!loadData || loadedKeys.indexOf(eventKey) !== -1 || loadingKeys.indexOf(eventKey) !== -1) {
             return {}
@@ -471,7 +471,7 @@ const Tree = {
           })
 
           return {
-            loadingKeys: arrAdd(loadingKeys, eventKey),
+            _loadingKeys: arrAdd(loadingKeys, eventKey),
           }
         })
       })
@@ -561,7 +561,8 @@ const Tree = {
         _expandedKeys: expandedKeys = [],
         _selectedKeys: selectedKeys = [],
         _halfCheckedKeys: halfCheckedKeys = [],
-        _loadedKeys: loadedKeys = [], _loadingKeys: loadingKeys = [],
+        _loadedKeys: loadedKeys = [],
+        _loadingKeys: loadingKeys = [],
         _dragOverNodeKey: dragOverNodeKey,
         _dropPosition: dropPosition,
       } = this.$data

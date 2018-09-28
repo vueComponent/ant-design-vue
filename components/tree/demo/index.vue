@@ -6,6 +6,7 @@ import Draggable from './draggable'
 import Dynamic from './dynamic'
 import Line from './line'
 import Search from './search'
+import Directory from './directory'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -20,7 +21,7 @@ const md = {
   us: `# Tree
   ## When To Use
 
-Almost anything can be represented in a tree structure. 
+Almost anything can be represented in a tree structure.
 Examples include directories, organization hierarchies, biological classifications, countries, etc. The \`Tree\` component is a way of representing the hierarchical relationship between these things. You can also  expand, collapse, and select a treeNode within a \`Tree\`.
 ## Examples
   `,
@@ -41,6 +42,7 @@ export default {
         <Dynamic/>
         <Line/>
         <Search/>
+        <Directory/>
         <api>
           <template slot='cn'>
             <CN/>

@@ -113,12 +113,8 @@ export default {
         const { children, on = {}, slots = {}, scopedSlots = {}, key, class: cls, style, ...restProps } = item
         const treeNodeProps = {
           ...restProps,
-          icon: restProps.icon ||
-              $slots[slots.icon] ||
-              ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]),
-          title: restProps.title ||
-             $slots[slots.title] ||
-             ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title])(item),
+          icon: $slots[slots.icon] || ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]) || restProps.icon,
+          title: $slots[slots.title] || ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item)) || restProps.title,
           dataRef: item,
           on,
           key,

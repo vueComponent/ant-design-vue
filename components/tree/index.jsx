@@ -1,9 +1,6 @@
 
 import Tree from './Tree'
 import DirectoryTree from './DirectoryTree'
-// export {
-//   TreeProps,
-// } from './Tree'
 
 Tree.TreeNode.name = 'ATreeNode'
 Tree.DirectoryTree = DirectoryTree

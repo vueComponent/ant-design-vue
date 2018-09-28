@@ -382,7 +382,7 @@ const Tree = {
         selected: targetSelected,
         node: treeNode,
         selectedNodes,
-        nativeEvent: e.nativeEvent,
+        nativeEvent: e,
       }
       this.__emit('select', selectedKeys, eventObj)
     },
@@ -397,7 +397,7 @@ const Tree = {
         event: 'check',
         node: treeNode,
         checked,
-        nativeEvent: e.nativeEvent,
+        nativeEvent: e,
       }
 
       if (checkStrictly) {
@@ -500,7 +500,7 @@ const Tree = {
       this.__emit('expand', expandedKeys, {
         node: treeNode,
         expanded: targetExpanded,
-        nativeEvent: e.nativeEvent,
+        nativeEvent: e,
       })
 
       // Async Load data
@@ -608,7 +608,7 @@ const Tree = {
         class={classNames(prefixCls, {
           [`${prefixCls}-show-line`]: showLine,
         })}
-        role='tree-node'
+        role='tree'
         unselectable='on'
         tabIndex={focusable ? tabIndex : null}
         onKeydown={focusable ? this.onKeydown : () => {}}

@@ -258,10 +258,10 @@ const TreeNode = {
     // Load data to avoid default expanded tree without data
     syncLoadData (props) {
       const { expanded, loading, loaded } = props
-      const { vcTree: { onNodeLoad }} = this
+      const { vcTree: { loadData, onNodeLoad }} = this
       if (loading) return
       // read from state to avoid loadData at same time
-      if (expanded && !this.isLeaf2()) {
+      if (loadData && expanded && !this.isLeaf2()) {
         // We needn't reload data when has children in sync logic
         // It's only needed in node expanded
         const hasChildren = this.getNodeChildren().length !== 0
@@ -338,12 +338,11 @@ const TreeNode = {
     },
 
     // Icon + Title
-    renderSelector () {
-      const { selected, icon, loading, dragNodeHighlight, $scopedSlots } = this
-      const { vcTree: { prefixCls, showIcon, draggable, loadData }} = this
+    renderSelector (h) {
+      const { selected, icon, loading, dragNodeHighlight } = this
+      const { vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData }} = this
       const disabled = this.isDisabled()
       const title = getComponentFromProp(this, 'title') || defaultTitle
-      const treeIcon = getComponentFromProp(this, 'icon') || $scopedSlots.icon
       const wrapClass = `${prefixCls}-node-content-wrapper`
 
       // Icon - Still show loading icon when loading without showIcon
@@ -359,7 +358,7 @@ const TreeNode = {
             )}
           >
             {typeof currentIcon === 'function'
-              ? currentIcon({ ...this.$props }) : currentIcon}
+              ? currentIcon(h, { ...this.$props }) : currentIcon}
           </span>
         ) : this.renderIcon()
       } else if (loadData && loading) {
@@ -446,7 +445,7 @@ const TreeNode = {
     },
   },
 
-  render () {
+  render (h) {
     const {
       dragOver, dragOverGapTop, dragOverGapBottom,
       isLeaf,
@@ -481,7 +480,7 @@ const TreeNode = {
       >
         {this.renderSwitcher()}
         {this.renderCheckbox()}
-        {this.renderSelector()}
+        {this.renderSelector(h)}
         {this.renderChildren()}
       </li>
     )

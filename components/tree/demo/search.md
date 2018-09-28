@@ -16,15 +16,15 @@ Searchable Tree.
       @expand="onExpand"
       :expandedKeys="expandedKeys"
       :autoExpandParent="autoExpandParent"
-      :treeNodes="gData"
+      :treeData="gData"
     >
-      <template slot="title" slot-scope="{key}">
-        <span v-if="key.indexOf(searchValue) > -1">
-          {{key.substr(0, key.indexOf(searchValue))}}
+      <template slot="title" slot-scope="{title}">
+        <span v-if="title.indexOf(searchValue) > -1">
+          {{title.substr(0, title.indexOf(searchValue))}}
           <span style="color: #f50">{{searchValue}}</span>
-          {{key.substr(key.indexOf(searchValue) + searchValue.length)}}
+          {{title.substr(title.indexOf(searchValue) + searchValue.length)}}
         </span>
-        <span v-else>{{key}}</span>
+        <span v-else>{{title}}</span>
       </template>
     </a-tree>
   </div>
@@ -43,7 +43,7 @@ const generateData = (_level, _preKey, _tns) => {
   const children = []
   for (let i = 0; i < x; i++) {
     const key = `${preKey}-${i}`
-    tns.push({ key, scopedSlots: { title: 'title' }})
+    tns.push({ title: key, key, scopedSlots: { title: 'title' }})
     if (i < y) {
       children.push(key)
     }

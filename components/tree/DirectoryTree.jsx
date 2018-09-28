@@ -5,6 +5,7 @@ import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util'
 import Tree, { TreeProps } from './Tree'
 import { calcRangeKeys, getFullKeyList } from './util'
 import Icon from '../icon'
+import BaseMixin from '../_util/BaseMixin'
 import { initDefaultProps, getOptionProps } from '../_util/props-util'
 
 // export type ExpandAction = false | 'click' | 'doubleClick';
@@ -27,12 +28,13 @@ function getIcon (h, props) {
 }
 
 export default {
+  mixins: [BaseMixin],
   name: 'ADirectoryTree',
   model: {
     prop: 'checkedKeys',
     event: 'check',
   },
-  props: initDefaultProps({ ...TreeProps(), expandAction: PropTypes.oneOf([false, 'click', 'doubleClick']) }, {
+  props: initDefaultProps({ ...TreeProps(), expandAction: PropTypes.oneOf([false, 'click', 'doubleclick']) }, {
     prefixCls: 'ant-tree',
     showIcon: true,
     expandAction: 'click',
@@ -55,7 +57,7 @@ export default {
 
     // Expanded keys
     if (defaultExpandAll) {
-      state._expandedKeys = getFullKeyList(props.children)
+      state._expandedKeys = getFullKeyList(this.$slots.default)
     } else if (defaultExpandParent) {
       state._expandedKeys = conductExpandParent(expandedKeys || defaultExpandedKeys, keyEntities)
     } else {
@@ -102,7 +104,7 @@ export default {
       const { expandAction } = this.$props
 
       // Expand the tree
-      if (expandAction === 'doubleClick') {
+      if (expandAction === 'doubleclick') {
         this.onDebounceExpand(event, node)
       }
 
@@ -117,7 +119,6 @@ export default {
       const { eventKey = '' } = node
 
       const newState = {}
-
       // Windows / Mac single pick
       const ctrlPick = nativeEvent.ctrlKey || nativeEvent.metaKey
       const shiftPick = nativeEvent.shiftKey
@@ -171,7 +172,7 @@ export default {
       this.$emit('expand', newExpandedKeys, {
         expanded: !expanded,
         node,
-        nativeEvent: event.nativeEvent,
+        nativeEvent: event,
       })
     },
 
@@ -195,10 +196,13 @@ export default {
         selectedKeys,
       },
       class: `${prefixCls}-directory`,
-      select: this.onSelect,
-      click: this.onClick,
-      doubleclick: this.onDoubleClick,
-      expand: this.onExpand,
+      on: {
+        ...this.$listeners,
+        select: this.onSelect,
+        click: this.onClick,
+        doubleclick: this.onDoubleClick,
+        expand: this.onExpand,
+      },
     }
     return (
       <Tree {...treeProps}>{this.$slots.default}</Tree>

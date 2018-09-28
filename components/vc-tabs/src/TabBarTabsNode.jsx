@@ -56,7 +56,7 @@ export default {
           {...events}
           class={cls}
           key={key}
-          style={{ marginRight: tabBarGutter && index === children.length - 1 ? 0 : tabBarGutter }}
+          style={{ marginRight: tabBarGutter && index === children.length - 1 ? 0 : `${tabBarGutter}px` }}
           {...{ directives: directives }}
         >
           {tab}

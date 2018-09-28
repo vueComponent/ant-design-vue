@@ -525,7 +525,7 @@ const Tree = {
 
     onNodeContextMenu (event, node) {
       event.preventDefault()
-      this.__emit('rightclick', { event, node })
+      this.__emit('rightClick', { event, node })
     },
 
     /**

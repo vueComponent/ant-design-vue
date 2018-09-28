@@ -5,7 +5,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| treeNodes | 节点的配置描述，具体项见下表 | array | -- |
+| treeData | 节点的配置描述，具体项见下表, 1.1.4之前的版本使用`treeNodes` | array | -- |
 | autoExpandParent | 是否自动展开父节点 | boolean | true |
 | checkable | 节点前添加 Checkbox 复选框 | boolean | false |
 | checkedKeys(v-model) | （受控）选中复选框的树节点（注意：父子节点有关联，如果传入父节点key，则子节点自动选中；相应当子节点key都传入，父节点也自动选中。当设置`checkable`和`checkStrictly`，它是一个有`checked`和`halfChecked`属性的对象，并且父子节点的选中与否不再关联 | string\[] \| {checked: string\[], halfChecked: string\[]} | \[] |
@@ -20,6 +20,7 @@
 | expandedKeys(.sync) | （受控）展开指定的树节点 | string\[] | \[] |
 | filterTreeNode | 按需筛选树节点（高亮），返回true | function(node) | - |
 | loadData | 异步加载数据 | function(node) | - |
+| loadedKeys | （受控）已经加载的节点，需要配合 `loadData` 使用 | string\[] | \[] |
 | multiple | 支持点选多个节点（节点本身） | boolean | false |
 | selectedKeys(.sync) | （受控）设置选中的树节点 | string\[] | - |
 | showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |
@@ -30,16 +31,17 @@
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| check | 点击复选框触发 | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) | - |
-| dragEnd | dragend 触发时调用 | function({event, node}) | - |
-| dragEnter | dragenter 触发时调用 | function({event, node, expandedKeys}) | - |
-| dragLeave | dragleave 触发时调用 | function({event, node}) | - |
-| dragOver | dragover 触发时调用 | function({event, node}) | - |
-| dragStart | 开始拖拽时调用 | function({event, node}) | - |
-| drop | drop 触发时调用 | function({event, node, dragNode, dragNodesKeys}) | - |
-| expand | 展开/收起节点时触发 | function(expandedKeys, {expanded: bool, node}) | - |
-| rightClick | 响应右键点击 | function({event, node}) | - |
-| select | 点击树节点触发 | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) | - |
+| check | 点击复选框触发 | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) |
+| dragEnd | dragend 触发时调用 | function({event, node}) |
+| dragEnter | dragenter 触发时调用 | function({event, node, expandedKeys}) |
+| dragLeave | dragleave 触发时调用 | function({event, node}) |
+| dragOver | dragover 触发时调用 | function({event, node}) |
+| dragStart | 开始拖拽时调用 | function({event, node}) |
+| drop | drop 触发时调用 | function({event, node, dragNode, dragNodesKeys}) |
+| expand | 展开/收起节点时触发 | function(expandedKeys, {expanded: bool, node}) |
+| load | 节点加载完毕时触发 | function(loadedKeys, {event, node}) |
+| rightClick | 响应右键点击 | function({event, node}) |
+| select | 点击树节点触发 | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) |
 
 ### TreeNode props
 
@@ -59,6 +61,12 @@
 | slots | 使用treeNodes时，可以通过该属性配置支持slot的属性，如 `slots: { title: 'XXX'}` | object | - |
 | scopedSlots | 使用columns时，可以通过该属性配置支持slot-scope的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |
 | on | 事件对象，仅在treeNodes使用方式中生效，如`{click: () => {}}` | object | '---' |
+
+### DirectoryTree props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| expandAction | 目录展开逻辑，可选 `false` `'click'` `'doubleclick'` | string | click |
 
 
 

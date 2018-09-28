@@ -20,6 +20,7 @@
 | expandedKeys(.sync) | (Controlled) Specifies the keys of the expanded treeNodes | string\[] | \[] |
 | filterTreeNode | Defines a function to filter (highlight) treeNodes. When the function returns `true`, the corresponding treeNode will be highlighted | function(node) | - |
 | loadData | Load data asynchronously | function(node) | - |
+| loadedKeys | (Controlled) Set loaded tree nodes. Need work with `loadData` | string\[] | \[] |
 | multiple | Allows selecting multiple treeNodes | boolean | false |
 | selectedKeys(.sync) | (Controlled) Specifies the keys of the selected treeNodes | string\[] | - |
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |
@@ -28,16 +29,17 @@
 ### Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| check | Callback function for when the onCheck event occurs | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) | - |
-| dragEnd | Callback function for when the onDragEnd event occurs | function({event, node}) | - |
-| dragEnter | Callback function for when the onDragEnter event occurs | function({event, node,  expandedKeys}) | - |
-| dragLeave | Callback function for when the onDragLeave event occurs | function({event, node}) | - |
-| dragOver | Callback function for when the onDragOver event occurs | function({event, node}) | - |
-| dragStart | Callback function for when the onDragStart event occurs | function({event, node}) | - |
-| drop | Callback function for when the onDrop event occurs | function({event, node, dragNode, dragNodesKeys}) | - |
-| expand | Callback function for when a treeNode is expanded or collapsed | function(expandedKeys, {expanded: bool, node}) | - |
-| rightClick | Callback function for when the user right clicks a treeNode | function({event, node}) | - |
-| select | Callback function for when the user clicks a treeNode | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) | - |
+| check | Callback function for when the onCheck event occurs | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) |
+| dragEnd | Callback function for when the onDragEnd event occurs | function({event, node}) |
+| dragEnter | Callback function for when the onDragEnter event occurs | function({event, node,  expandedKeys}) |
+| dragLeave | Callback function for when the onDragLeave event occurs | function({event, node}) |
+| dragOver | Callback function for when the onDragOver event occurs | function({event, node}) |
+| dragStart | Callback function for when the onDragStart event occurs | function({event, node}) |
+| drop | Callback function for when the onDrop event occurs | function({event, node, dragNode, dragNodesKeys}) |
+| expand | Callback function for when a treeNode is expanded or collapsed | function(expandedKeys, {expanded: bool, node}) |
+| load | Callback function for when a treeNode is loaded | function(loadedKeys, {event, node}) |
+| rightClick | Callback function for when the user right clicks a treeNode | function({event, node}) |
+| select | Callback function for when the user clicks a treeNode | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) |
 
 ### TreeNode props
 
@@ -59,3 +61,8 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 | scopedSlots | When using treeNodes, you can use this property to configure the properties that support the slot-scope, such as `scopedSlots: { title: 'XXX'}` | object | - |
 | on | When using treeNodes, you can use this property to configure the events, such as `on: { click: () => {}}` | object | - |
 
+### DirectoryTree props
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| expandAction | Directory open logic, optional `false` `'click'` `'doubleclick'` | string | click |

@@ -46,7 +46,7 @@ const BaseTable = {
       })
     },
 
-    renderRows  (renderData, indent, rows = [], ancestorKeys = []) {
+    renderRows  (renderData, indent, ancestorKeys = []) {
       const {
         columnManager, sComponents: components,
         prefixCls,
@@ -63,6 +63,8 @@ const BaseTable = {
         customRow = noop,
       } = this.table
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this
+
+      const rows = []
 
       for (let i = 0; i < renderData.length; i++) {
         const record = renderData[i]
@@ -84,16 +86,12 @@ const BaseTable = {
         }
 
         const rowPrefixCls = `${prefixCls}-row`
-        const rowIndex = rows.filter(row => {
-          const props = getOptionProps(row)
-          return !props.expandedRow
-        }).length
 
         const expandableRowProps = {
           props: {
             ...expander.props,
             fixed,
-            index: rowIndex,
+            index: i,
             prefixCls: rowPrefixCls,
             record,
             rowKey: key,
@@ -112,7 +110,7 @@ const BaseTable = {
                   fixed,
                   indent,
                   record,
-                  index: rowIndex,
+                  index: i,
                   prefixCls: rowPrefixCls,
                   childrenColumnName: childrenColumnName,
                   columns: leafColumns,

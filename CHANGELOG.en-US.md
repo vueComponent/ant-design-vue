@@ -2,6 +2,14 @@
 
 ---
 
+## 1.1.4
+
+`2018-09-29`
+- 🛠 Refactor the `vc-tree` component and add a directory tree component
+- 🐞 Fix `tabs` component property `tabBarGutter` does not work  [#205](https://github.com/vueComponent/ant-design-vue/issues/205)
+- 🐞 Fix `table` component data synchronization error [#202](https://github.com/vueComponent/ant-design-vue/issues/202)
+
+
 ## 1.1.3
 
 `2018-09-22`

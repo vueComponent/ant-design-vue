@@ -2,6 +2,13 @@
 
 ---
 
+## 1.1.4
+
+`2018-09-29`
+- 🛠 重构`vc-tree`组件，并新增目录树组件
+- 🐞 修复`tabs`组件属性`tabBarGutter`不生效问题 [#205](https://github.com/vueComponent/ant-design-vue/issues/205)
+- 🐞 修复`table`组件数据同步出错问题 [#202](https://github.com/vueComponent/ant-design-vue/issues/202)
+
 ## 1.1.3
 
 `2018-09-22`

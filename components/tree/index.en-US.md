@@ -5,7 +5,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| treeNodes | treeNode of tree | array | - |
+| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | array | - |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | true |
 | checkable | Adds a `Checkbox` before the treeNodes | boolean | false |
 | checkedKeys(v-model) | (Controlled) Specifies the keys of the checked treeNodes (PS: When this specifies the key of a treeNode which is also a parent treeNode, all the children treeNodes of will be checked; and vice versa, when it specifies the key of a treeNode which is a child treeNode, its parent treeNode will also be checked. When `checkable` and `checkStrictly` is true, its object has `checked` and `halfChecked` property. Regardless of whether the child or parent treeNode is checked, they won't impact each other. | string\[] \| {checked: string\[], halfChecked: string\[]} | \[] |

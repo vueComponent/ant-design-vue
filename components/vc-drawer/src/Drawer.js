@@ -118,7 +118,6 @@ const Drawer = {
     this.$nextTick(() => {
       // dom 没渲染时，重走一遍。
       if (!this.sFirstEnter && this.container) {
-        console.log(1)
         this.$forceUpdate()
         this.sFirstEnter = true
       }

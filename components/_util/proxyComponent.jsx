@@ -45,7 +45,7 @@ export default function wrapWithConnect (WrappedComponent) {
   }
   Object.keys(methods).map(m => {
     ProxyWrappedComponent.methods[m] = function () {
-      this.getProxyWrappedInstance()[m](...arguments)
+      return this.getProxyWrappedInstance()[m](...arguments)
     }
   })
   return ProxyWrappedComponent

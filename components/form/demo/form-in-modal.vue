@@ -37,7 +37,7 @@ const CollectionCreateForm = Form.create()(
             <a-form-item label='Description'>
               {getFieldDecorator('description')(<a-input type='textarea' />)}
             </a-form-item>
-            <a-form-item className='collection-create-form_last-form-item'>
+            <a-form-item class='collection-create-form_last-form-item'>
               {getFieldDecorator('modifier', {
                 initialValue: 'public',
               })(

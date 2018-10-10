@@ -20,7 +20,11 @@ import {
 function noop () {}
 
 const currentDrawer = {}
-const windowIsUndefined = typeof window === 'undefined'
+const windowIsUndefined = !(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+)
 Vue.use(antRefDirective)
 const Drawer = {
   mixins: [BaseMixin],
@@ -114,6 +118,7 @@ const Drawer = {
     this.$nextTick(() => {
       // dom 没渲染时，重走一遍。
       if (!this.sFirstEnter && this.container) {
+        console.log(1)
         this.$forceUpdate()
         this.sFirstEnter = true
       }
@@ -224,7 +229,7 @@ const Drawer = {
       }
     },
     setLevelDomTransform (open, openTransition, placementName, value) {
-      const { placement, levelMove, duration, ease } = this.$props
+      const { placement, levelMove, duration, ease, getContainer } = this.$props
       if (!windowIsUndefined) {
         this.levelDom.forEach(dom => {
           if (this.isOpenChange || openTransition) {
@@ -243,104 +248,108 @@ const Drawer = {
           }
         })
         // 处理 body 滚动
-        const eventArray = ['touchstart']
-        const domArray = [document.body, this.maskDom, this.handlerdom, this.contentDom]
-        const right = getScrollBarSize(1)
-        let widthTransition = `width ${duration} ${ease}`
-        const trannsformTransition = `transform ${duration} ${ease}`
-        if (open && document.body.style.overflow !== 'hidden') {
-          document.body.style.overflow = 'hidden'
-          if (right) {
-            document.body.style.position = 'relative'
-            document.body.style.width = `calc(100% - ${right}px)`
-            this.dom.style.transition = 'none'
-            switch (placement) {
-              case 'right':
-                this.dom.style.transform = `translateX(-${right}px)`
-                this.dom.style.msTransform = `translateX(-${right}px)`
-                break
-              case 'top':
-              case 'bottom':
-                this.dom.style.width = `calc(100% - ${right}px)`
-                this.dom.style.transform = 'translateZ(0)'
-                break
-              default:
-                break
+        if (getContainer === 'body') {
+          const eventArray = ['touchstart']
+          const domArray = [document.body, this.maskDom, this.handlerdom, this.contentDom]
+          const right = document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) &&
+          window.innerWidth > document.body.offsetWidth
+            ? getScrollBarSize(1) : 0
+          let widthTransition = `width ${duration} ${ease}`
+          const trannsformTransition = `transform ${duration} ${ease}`
+          if (open && document.body.style.overflow !== 'hidden') {
+            document.body.style.overflow = 'hidden'
+            if (right) {
+              document.body.style.position = 'relative'
+              document.body.style.width = `calc(100% - ${right}px)`
+              this.dom.style.transition = 'none'
+              switch (placement) {
+                case 'right':
+                  this.dom.style.transform = `translateX(-${right}px)`
+                  this.dom.style.msTransform = `translateX(-${right}px)`
+                  break
+                case 'top':
+                case 'bottom':
+                  this.dom.style.width = `calc(100% - ${right}px)`
+                  this.dom.style.transform = 'translateZ(0)'
+                  break
+                default:
+                  break
+              }
+              clearTimeout(this.timeout)
+              this.timeout = setTimeout(() => {
+                this.dom.style.transition = `${trannsformTransition},${widthTransition}`
+                this.dom.style.width = ''
+                this.dom.style.transform = ''
+                this.dom.style.msTransform = ''
+              })
             }
-            clearTimeout(this.timeout)
-            this.timeout = setTimeout(() => {
-              this.dom.style.transition = `${trannsformTransition},${widthTransition}`
-              this.dom.style.width = ''
-              this.dom.style.transform = ''
-              this.dom.style.msTransform = ''
+            // 手机禁滚
+            domArray.forEach((item, i) => {
+              if (!item) {
+                return
+              }
+              addEventListener(
+                item,
+                eventArray[i] || 'touchmove',
+                i ? this.removeMoveHandler : this.removeStartHandler,
+                this.passive
+              )
             })
-          }
-          // 手机禁滚
-          domArray.forEach((item, i) => {
-            if (!item) {
-              return
-            }
-            addEventListener(
-              item,
-              eventArray[i] || 'touchmove',
-              i ? this.removeMoveHandler : this.removeStartHandler,
-              this.passive
-            )
-          })
-        } else if (this.getCrrentDrawerSome()) {
-          document.body.style.overflow = ''
-          if ((this.isOpenChange || openTransition) && right) {
-            document.body.style.position = ''
-            document.body.style.width = ''
-            if (trnasitionStr) {
-              document.body.style.overflowX = 'hidden'
-            }
-            this.dom.style.transition = 'none'
-            let heightTransition
-            switch (placement) {
-              case 'right': {
-                this.dom.style.transform = `translateX(${right}px)`
-                this.dom.style.msTransform = `translateX(${right}px)`
-                this.dom.style.width = '100%'
-                widthTransition = `width 0s ${ease} ${duration}`
-                if (this.maskDom) {
-                  this.maskDom.style.left = `-${right}px`
-                  this.maskDom.style.width = `calc(100% + ${right}px)`
+          } else if (this.getCrrentDrawerSome()) {
+            document.body.style.overflow = ''
+            if ((this.isOpenChange || openTransition) && right) {
+              document.body.style.position = ''
+              document.body.style.width = ''
+              if (trnasitionStr) {
+                document.body.style.overflowX = 'hidden'
+              }
+              this.dom.style.transition = 'none'
+              let heightTransition
+              switch (placement) {
+                case 'right': {
+                  this.dom.style.transform = `translateX(${right}px)`
+                  this.dom.style.msTransform = `translateX(${right}px)`
+                  this.dom.style.width = '100%'
+                  widthTransition = `width 0s ${ease} ${duration}`
+                  if (this.maskDom) {
+                    this.maskDom.style.left = `-${right}px`
+                    this.maskDom.style.width = `calc(100% + ${right}px)`
+                  }
+                  break
                 }
-                break
+                case 'top':
+                case 'bottom': {
+                  this.dom.style.width = `calc(100% + ${right}px)`
+                  this.dom.style.height = '100%'
+                  this.dom.style.transform = 'translateZ(0)'
+                  heightTransition = `height 0s ${ease} ${duration}`
+                  break
+                }
+                default:
+                  break
               }
-              case 'top':
-              case 'bottom': {
-                this.dom.style.width = `calc(100% + ${right}px)`
-                this.dom.style.height = '100%'
-                this.dom.style.transform = 'translateZ(0)'
-                heightTransition = `height 0s ${ease} ${duration}`
-                break
-              }
-              default:
-                break
+              clearTimeout(this.timeout)
+              this.timeout = setTimeout(() => {
+                this.dom.style.transition = `${trannsformTransition},${
+                  heightTransition ? `${heightTransition},` : ''}${widthTransition}`
+                this.dom.style.transform = ''
+                this.dom.style.msTransform = ''
+                this.dom.style.width = ''
+                this.dom.style.height = ''
+              })
             }
-            clearTimeout(this.timeout)
-            this.timeout = setTimeout(() => {
-              this.dom.style.transition = `${trannsformTransition},${
-                heightTransition ? `${heightTransition},` : ''}${widthTransition}`
-              this.dom.style.transform = ''
-              this.dom.style.msTransform = ''
-              this.dom.style.width = ''
-              this.dom.style.height = ''
+            domArray.forEach((item, i) => {
+              if (!item) {
+                return
+              }
+              removeEventListener(
+                item,
+                eventArray[i] || 'touchmove',
+                i ? this.removeMoveHandler : this.removeStartHandler,
+                this.passive
+              )
             })
           }
-          domArray.forEach((item, i) => {
-            if (!item) {
-              return
-            }
-            removeEventListener(
-              item,
-              eventArray[i] || 'touchmove',
-              i ? this.removeMoveHandler : this.removeStartHandler,
-              this.passive
-            )
-          })
         }
       }
       const { change } = this.$listeners
@@ -475,28 +484,44 @@ const Drawer = {
       return this.open !== undefined ? this.open : this.sOpen
     },
     getTouchParentScroll (root, currentTarget, differX, differY) {
-      /**
-       * 增加 rect。
-       * 当父级 dom 的 overflow 未开启滚动时，scrollLeft 或 scrollTop 为 0, 而 scrollWidth 增加了，
-       * 父级是跟随子级的 rect, 直到父级设定了滚动.
-       */
-      const rect = currentTarget.getBoundingClientRect()
       if (!currentTarget) {
         return false
-      } else if (
-        (((currentTarget.scrollTop + currentTarget.offsetHeight + currentTarget.offsetTop >=
-          currentTarget.scrollHeight + rect.top &&
-          differY < 0) ||
-          (currentTarget.scrollTop <= 0 && differY > 0)) &&
-          Math.max(Math.abs(differX), Math.abs(differY)) === Math.abs(differY)) ||
-        (((currentTarget.scrollLeft + currentTarget.offsetWidth + currentTarget.offsetLeft >=
-          currentTarget.scrollWidth + rect.left &&
-          differX < 0) ||
-          (currentTarget.scrollLeft <= 0 && differX > 0)) &&
-          Math.max(Math.abs(differX), Math.abs(differY)) === Math.abs(differX))
+      }
+      // root 为 drawer-content 设定了 overflow, 判断为 root 的 parent 时结束滚动；
+      if (currentTarget === root.parentNode) {
+        return true
+      }
+
+      const isY = Math.max(Math.abs(differX), Math.abs(differY)) === Math.abs(differY)
+      const isX = Math.max(Math.abs(differX), Math.abs(differY)) === Math.abs(differX)
+
+      const scrollY = currentTarget.scrollHeight - currentTarget.clientHeight
+      const scrollX = currentTarget.scrollWidth - currentTarget.clientWidth
+      /**
+       * <div style="height: 300px">
+       *   <div style="height: 900px"></div>
+       * </div>
+       * 在没设定 overflow: auto 或 scroll 时，currentTarget 里获取不到 scrollTop 或 scrollLeft,
+       * 预先用 scrollTo 来滚动，如果取出的值跟滚动前取出不同，则 currnetTarget 被设定了 overflow; 否则就是上面这种。
+       */
+      const t = currentTarget.scrollTop
+      const l = currentTarget.scrollLeft
+      currentTarget.scrollTo(currentTarget.scrollLeft + 1, currentTarget.scrollTop + 1)
+      const currentT = currentTarget.scrollTop
+      const currentL = currentTarget.scrollLeft
+      currentTarget.scrollTo(currentTarget.scrollLeft - 1, currentTarget.scrollTop - 1)
+
+      if (
+        isY && (!scrollY || !(currentT - t) ||
+          (scrollY && (currentTarget.scrollTop >= scrollY && differY < 0 ||
+            currentTarget.scrollTop <= 0 && differY > 0))
+        ) ||
+        isX && (!scrollX || !(currentL - l) ||
+          (scrollX && (currentTarget.scrollLeft >= scrollX && differX < 0 ||
+            currentTarget.scrollLeft <= 0 && differX > 0))
+        )
       ) {
-        return root === currentTarget ||
-          this.getTouchParentScroll(root, currentTarget.parentNode, differX, differY)
+        return this.getTouchParentScroll(root, currentTarget.parentNode, differX, differY)
       }
       return false
     },
@@ -546,7 +571,7 @@ const Drawer = {
     const { getContainer, wrapperClassName } = this.$props
     const open = this.getOpen()
     currentDrawer[this.drawerId] = open ? this.container : open
-    this.children = this.getChildToRender(this.sFirstEnter ? open : false)
+    const children = this.getChildToRender(this.sFirstEnter ? open : false)
     if (!getContainer) {
       const directives = [{
         name: 'ant-ref',
@@ -559,21 +584,20 @@ const Drawer = {
           class={wrapperClassName}
           {...{ directives }}
         >
-          {this.children}
+          {children}
         </div>
       )
     }
     if (!this.container || !open && !this.sFirstEnter) {
       return null
     }
-
     return (
       <ContainerRender
         parent={this}
         visible
         autoMount
         autoDestroy={false}
-        getComponent={() => this.children}
+        getComponent={() => children}
         getContainer={this.getSelfContainer}
         children={({ renderComponent, removeContainer }) => {
           this.renderComponent = renderComponent

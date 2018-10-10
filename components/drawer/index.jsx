@@ -113,7 +113,7 @@ const Drawer = {
       let header
       if (title) {
         header = (
-          <div class={`${prefixCls}-header`}>
+          <div key='header' class={`${prefixCls}-header`}>
             <div class={`${prefixCls}-title`}>{title}</div>
           </div>
         )
@@ -122,6 +122,7 @@ const Drawer = {
       if (closable) {
         closer = (
           <button
+            key='closer'
             onClick={this.close}
             aria-label='Close'
             class={`${prefixCls}-close`}
@@ -139,7 +140,7 @@ const Drawer = {
         >
           {header}
           {closer}
-          <div class={`${prefixCls}-body`} style={bodyStyle}>
+          <div key='body' class={`${prefixCls}-body`} style={bodyStyle}>
             {this.$slots.default}
           </div>
         </div>

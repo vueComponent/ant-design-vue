@@ -41,7 +41,7 @@ export default {
     },
 
     renderComponent (props = {}, ready) {
-      const { visible, getComponent, forceRender, getContainer, parent } = this
+      const { visible, forceRender, getContainer, parent } = this
       const self = this
       if (visible || parent.$refs._component || forceRender) {
         let el = this.componentEl
@@ -74,7 +74,7 @@ export default {
               })
             },
             render () {
-              return getComponent(this.comProps)
+              return self.getComponent(this.comProps)
             },
           })
         } else {

@@ -2,6 +2,12 @@
 
 ---
 
+## 1.1.5
+
+`2018-10-10`
+- 🐞 修复`Select`组件键盘事件报错问题 [#217](https://github.com/vueComponent/ant-design-vue/issues/217)
+- 🐞 修复`Drawer`组件children更新问题 [#209](https://github.com/vueComponent/ant-design-vue/issues/209)
+
 ## 1.1.4
 
 `2018-09-29`

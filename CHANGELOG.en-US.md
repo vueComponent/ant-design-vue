@@ -2,6 +2,12 @@
 
 ---
 
+## 1.1.5
+
+`2018-10-10`
+- 🐞 Fix `Select` component keyboard event error [#217](https://github.com/vueComponent/ant-design-vue/issues/217)
+- 🐞 Fix the `Drawer` component children update issue [#209](https://github.com/vueComponent/ant-design-vue/issues/209)
+
 ## 1.1.4
 
 `2018-09-29`

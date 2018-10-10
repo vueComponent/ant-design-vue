@@ -2,7 +2,7 @@
 
 ---
 
-## 1.1.5
+## 1.1.6
 
 `2018-10-10`
 - 🐞 修复`Select`组件键盘事件报错问题 [#217](https://github.com/vueComponent/ant-design-vue/issues/217)

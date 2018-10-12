@@ -4,6 +4,7 @@ import arrayTreeFilter from 'array-tree-filter'
 import BaseMixin from '../_util/BaseMixin'
 
 export default {
+  name: 'CascaderMenus',
   mixins: [BaseMixin],
   props: {
     value: PropTypes.array.def([]),
@@ -46,13 +47,14 @@ export default {
       const onSelect = (e) => {
         this.__emit('select', option, menuIndex, e)
       }
+      const key = option[this.getFieldName('value')]
       const expandProps = {
         attrs: {
         },
         on: {
           click: onSelect,
         },
-        key: option[this.getFieldName('value')],
+        key: Array.isArray(key) ? key.join('__ant__') : key,
       }
       let menuItemCls = `${prefixCls}-menu-item`
       const hasChildren = option[this.getFieldName('children')] &&

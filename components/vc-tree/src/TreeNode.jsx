@@ -358,7 +358,7 @@ const TreeNode = {
             )}
           >
             {typeof currentIcon === 'function'
-              ? currentIcon(h, { ...this.$props }) : currentIcon}
+              ? currentIcon({ ...this.$props }, h) : currentIcon}
           </span>
         ) : this.renderIcon()
       } else if (loadData && loading) {

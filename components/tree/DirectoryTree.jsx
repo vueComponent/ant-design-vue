@@ -19,7 +19,7 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util'
 //   selectedKeys?: string[];
 // }
 
-function getIcon (h, props) {
+function getIcon (props, h) {
   const { isLeaf, expanded } = props
   if (isLeaf) {
     return <Icon type='file' />

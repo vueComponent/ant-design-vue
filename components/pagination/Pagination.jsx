@@ -46,7 +46,7 @@ export default {
   },
   model: {
     prop: 'current',
-    event: 'change',
+    event: 'change.current',
   },
   methods: {
     renderPagination (contextLocale) {

@@ -32,7 +32,6 @@ export default {
     total: PropTypes.number.def(0),
     pageSize: PropTypes.number,
     defaultPageSize: PropTypes.number.def(10),
-    change: PropTypes.func.def(noop),
     hideOnSinglePage: PropTypes.bool.def(false),
     showSizeChanger: PropTypes.bool.def(false),
     showLessItems: PropTypes.bool.def(false),
@@ -50,7 +49,7 @@ export default {
   },
   model: {
     prop: 'current',
-    event: 'change',
+    event: 'change.current',
   },
   data () {
     const hasOnChange = this.onChange !== noop
@@ -174,6 +173,7 @@ export default {
     },
     changePageSize (size) {
       let current = this.stateCurrent
+      const preCurrent = current
       const newCurrent = this.calculatePage(size)
       current = current > newCurrent ? newCurrent : current
       // fix the issue:
@@ -196,7 +196,9 @@ export default {
       }
       this.$emit('update:pageSize', size)
       this.$emit('showSizeChange', current, size)
-      this.$emit('change', current, size)
+      if (current !== preCurrent) {
+        this.$emit('change.current', current, size)
+      }
     },
     handleChange (p) {
       let page = p
@@ -213,6 +215,7 @@ export default {
         }
         // this.$emit('input', page)
         this.$emit('change', page, this.statePageSize)
+        this.$emit('change.current', page, this.statePageSize)
         return page
       }
       return this.stateCurrent

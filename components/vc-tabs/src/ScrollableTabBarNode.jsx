@@ -16,11 +16,12 @@ export default {
     prefixCls: PropTypes.string.def(''),
     scrollAnimated: PropTypes.bool.def(true),
     navWrapper: PropTypes.func.def(arg => arg),
+    activeKey: PropTypes.any,
   },
 
   data () {
     this.offset = 0
-    this.prevProps = this.$props
+    this.prevProps = { ...this.$props }
     return {
       next: false,
       prev: false,
@@ -41,7 +42,7 @@ export default {
   updated () {
     this.$nextTick(() => {
       this.updatedCal(this.prevProps)
-      this.prevProps = this.$props
+      this.prevProps = { ...this.$props }
     })
   },
 
@@ -68,11 +69,10 @@ export default {
         this.setOffset(0)
         return
       }
-      const nextPrev = this.setNextPrev()
       // wait next, prev show hide
       /* eslint react/no-did-update-set-state:0 */
-      if (this.isNextPrevShown(this.$data) !== this.isNextPrevShown(nextPrev)) {
-        this.$foreceUpdate()
+      if (this.isNextPrevShown(this.$data) !== this.isNextPrevShown(this.setNextPrev())) {
+        this.$forceUpdate()
         this.$nextTick(() => {
           this.scrollToActiveTab()
         })

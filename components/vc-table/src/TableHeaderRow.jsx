@@ -21,7 +21,9 @@ const TableHeaderRow = {
     const rowProps = customHeaderRow(row.map(cell => cell.column), index)
     const customStyle = rowProps ? rowProps.style : {}
     const style = { height, ...customStyle }
-
+    if (style.height === null) {
+      delete style.height
+    }
     return (
       <HeaderRow {...rowProps} style={style}>
         {row.map((cell, i) => {

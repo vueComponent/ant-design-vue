@@ -34,7 +34,7 @@ export default {
         return (
           <col
             key={c.key || c.dataIndex}
-            style={{ width, minWidth: width }}
+            style={width ? { width, minWidth: width } : {}}
           />
         )
       })

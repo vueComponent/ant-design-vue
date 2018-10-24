@@ -35,11 +35,19 @@ export function getPrecision (step) {
 }
 
 export function getMousePosition (vertical, e) {
-  return vertical ? e.clientY : e.pageX
+  let zoom = 1
+  if (window.visualViewport) {
+    zoom = +(window.visualViewport.width / document.body.getBoundingClientRect().width).toFixed(2)
+  }
+  return (vertical ? e.clientY : e.pageX) / zoom
 }
 
 export function getTouchPosition (vertical, e) {
-  return vertical ? e.touches[0].clientY : e.touches[0].pageX
+  let zoom = 1
+  if (window.visualViewport) {
+    zoom = +(window.visualViewport.width / document.body.getBoundingClientRect().width).toFixed(2)
+  }
+  return (vertical ? e.touches[0].clientY : e.touches[0].pageX) / zoom
 }
 
 export function getHandleCenterPosition (vertical, handle) {

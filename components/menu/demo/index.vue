@@ -5,6 +5,7 @@ import SiderCurrent from './sider-current'
 import SwitchMode from './switch-mode'
 import Theme from './theme'
 import Vertical from './vertical'
+import Template from './template'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -35,6 +36,7 @@ export default {
         <SwitchMode />
         <Theme />
         <Vertical />
+        <Template />
         <api>
           <CN slot='cn' />
           <US/>

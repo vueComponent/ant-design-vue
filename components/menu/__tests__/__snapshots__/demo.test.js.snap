@@ -126,6 +126,18 @@ exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/menu/demo/template.md correctly 1`] = `
+<div style="width: 256px;"><button type="button" class="ant-btn ant-btn-primary" style="margin-bottom: 16px;"><i class="anticon anticon-menu-fold"></i></button>
+  <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu">
+    <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;"><i class="anticon anticon-pie-chart"></i> <span>Option 1</span></li>
+    <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline" menuinfo="[object Object]">
+      <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-mail"></i><span>Navigation 2</span></span><i class="ant-menu-submenu-arrow"></i></div>
+      <div></div>
+    </li>
+  </ul>
+</div>
+`;
+
 exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
 <div><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label> Change Theme
   <br> <br>

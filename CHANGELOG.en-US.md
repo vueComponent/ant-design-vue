@@ -2,6 +2,16 @@
 
 ---
 
+## 1.1.7
+
+`2018-10-27`
+- 🐞 Fix `Cascader` component type error problem [#219](https://github.com/vueComponent/ant-design-vue/issues/219)
+- 🐞 Fix `Tree` component custom Icon the callback parameter order error [#223](https://github.com/vueComponent/ant-design-vue/issues/223)
+- 🐞 Fix `Table` pagination trigger multiple change events when `showSizeChange=true` [#228](https://github.com/vueComponent/ant-design-vue/issues/228)
+- 🌟 Optimize the `Tabs` component to add tabs to the visible area by default [#215](https://github.com/vueComponent/ant-design-vue/issues/215)
+- 🐞 Fix `RadioGroup` component does not support number 0 problem [#226](https://github.com/vueComponent/ant-design-vue/issues/226)
+- 🐞 Fix `Slider` component When setting zoom is not 1, the position error problem, some browsers need visualViewport Polyfill [#227](https://github.com/vueComponent/ant-design-vue/issues/227)
+
 ## 1.1.6
 
 `2018-10-10`

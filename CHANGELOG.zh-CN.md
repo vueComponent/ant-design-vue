@@ -2,6 +2,16 @@
 
 ---
 
+## 1.1.7
+
+`2018-10-27`
+- 🐞 修复`Cascader`组件类型错误问题 [#219](https://github.com/vueComponent/ant-design-vue/issues/219)
+- 🐞 修复`Tree`组件自定义Icon时回调参数顺序错误问题 [#223](https://github.com/vueComponent/ant-design-vue/issues/223)
+- 🐞 修复`Table`组件多次触发翻页回调问题 [#228](https://github.com/vueComponent/ant-design-vue/issues/228)
+- 🌟 优化`Tabs`组件新增tab默认滚动到可视区域 [#215](https://github.com/vueComponent/ant-design-vue/issues/215)
+- 🐞 修复`RadioGroup`组件不支持数字0问题 [#226](https://github.com/vueComponent/ant-design-vue/issues/226)
+- 🐞 修复`Slider`组件当设置zoom不为1时，位置错误问题，部分浏览器需要visualViewport Polyfill [#227](https://github.com/vueComponent/ant-design-vue/issues/227)
+
 ## 1.1.6
 
 `2018-10-10`

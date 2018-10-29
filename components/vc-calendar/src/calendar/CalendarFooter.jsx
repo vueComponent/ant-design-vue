@@ -51,21 +51,22 @@ const CalendarFooter = {
       }
       let nowEl = null
       if (showToday) {
-        nowEl = <TodayButton {...btnProps} />
+        nowEl = <TodayButton key='todayButton' {...btnProps} />
       }
       delete btnProps.props.value
       let okBtn = null
       if (showOk === true || showOk !== false && !!timePicker) {
-        okBtn = <OkButton {...btnProps} />
+        okBtn = <OkButton key='okButton' {...btnProps} />
       }
       let timePickerBtn = null
       if (timePicker) {
-        timePickerBtn = <TimePickerButton {...btnProps} />
+        timePickerBtn = <TimePickerButton key='timePickerButton' {...btnProps} />
       }
 
       let footerBtn
-      if (nowEl || timePickerBtn || okBtn) {
+      if (nowEl || timePickerBtn || okBtn || extraFooter) {
         footerBtn = (<span class={`${prefixCls}-footer-btn`}>
+          {extraFooter}
           {nowEl}{timePickerBtn}{okBtn}
         </span>)
       }
@@ -75,7 +76,6 @@ const CalendarFooter = {
       }
       footerEl = (
         <div class={cls}>
-          {extraFooter}
           {footerBtn}
         </div>)
     }

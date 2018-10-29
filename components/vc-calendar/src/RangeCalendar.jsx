@@ -1,7 +1,7 @@
 
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
-import { getOptionProps, hasProp, mergeProps } from '../../_util/props-util'
+import { getOptionProps, hasProp, mergeProps, getComponentFromProp } from '../../_util/props-util'
 import moment from 'moment'
 import KeyCode from '../../_util/KeyCode'
 import CalendarPart from './range-calendar/CalendarPart'
@@ -105,6 +105,7 @@ const RangeCalendar = {
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
     dateRender: PropTypes.func,
+    clearIcon: PropTypes.any,
   },
 
   mixins: [BaseMixin, CommonMixin],
@@ -583,6 +584,7 @@ const RangeCalendar = {
       timePicker, showOk, locale, showClear,
       showToday, type,
     } = props
+    const clearIcon = getComponentFromProp(this, 'clearIcon')
     const {
       sHoverValue,
       sSelectedValue,
@@ -657,6 +659,7 @@ const RangeCalendar = {
         showTimePicker: showTimePicker,
         enablePrev: true,
         enableNext: !isClosestMonths || this.isMonthYearPanelShow(sMode[1]),
+        clearIcon,
       },
       on: {
         inputSelect: this.onStartInputSelect,
@@ -680,6 +683,7 @@ const RangeCalendar = {
         disabledMonth: this.disabledEndMonth,
         enablePrev: !isClosestMonths || this.isMonthYearPanelShow(sMode[0]),
         enableNext: true,
+        clearIcon,
       },
       on: {
         inputSelect: this.onEndInputSelect,
@@ -699,7 +703,7 @@ const RangeCalendar = {
           today: this.onToday,
         },
       })
-      TodayButtonNode = <TodayButton {...todayButtonProps}/>
+      TodayButtonNode = <TodayButton key='todayButton' {...todayButtonProps}/>
     }
 
     let TimePickerButtonNode = null
@@ -714,7 +718,7 @@ const RangeCalendar = {
           closeTimePicker: this.onCloseTimePicker,
         },
       })
-      TimePickerButtonNode = <TimePickerButton {...timePickerButtonProps} />
+      TimePickerButtonNode = <TimePickerButton key='timePickerButton' {...timePickerButtonProps} />
     }
 
     let OkButtonNode = null
@@ -727,9 +731,9 @@ const RangeCalendar = {
           ok: this.onOk,
         },
       })
-      OkButtonNode = <OkButton {...okButtonProps}/>
+      OkButtonNode = <OkButton key='okButtonNode' {...okButtonProps}/>
     }
-
+    const extraFooter = this.renderFooter()
     return (
       <div
         ref='rootInstance'
@@ -741,11 +745,12 @@ const RangeCalendar = {
         <div class={`${prefixCls}-panel`}>
           {showClear && sSelectedValue[0] && sSelectedValue[1]
             ? <a
-              class={`${prefixCls}-clear-btn`}
               role='button'
               title={locale.clear}
               onClick={this.clear}
-            /> : null}
+            >
+              {clearIcon || <span class={`${prefixCls}-clear-btn`} />}
+            </a> : null}
           <div
             class={`${prefixCls}-date-panel`}
             onMouseleave={type !== 'both' ? this.onDatePanelLeave : noop}
@@ -757,8 +762,9 @@ const RangeCalendar = {
           </div>
           <div class={cls}>
             {props.renderFooter()}
-            {showToday || props.timePicker || showOkButton ? (
+            {(showToday || props.timePicker || showOkButton || extraFooter) ? (
               <div class={`${prefixCls}-footer-btn`}>
+                {extraFooter}
                 {TodayButtonNode}
                 {TimePickerButtonNode}
                 {OkButtonNode}

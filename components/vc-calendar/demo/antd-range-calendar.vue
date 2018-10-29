@@ -143,6 +143,7 @@ const Demo = {
         locale={cn ? zhCN : enUS}
         disabledTime={disabledTime}
         timePicker={timePickerElement(h)}
+        renderFooter={() => 'extra footer'}
       />
     )
     return (

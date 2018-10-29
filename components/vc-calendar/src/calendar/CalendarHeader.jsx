@@ -77,26 +77,27 @@ const CalendarHeader = {
       const localeData = value.localeData()
       const monthBeforeYear = locale.monthBeforeYear
       const selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`
+      const timeClassName = showTimePicker ? ` ${prefixCls}-time-status` : ''
       const year = (<a
-        class={`${prefixCls}-year-select`}
+        class={`${prefixCls}-year-select${timeClassName}`}
         role='button'
         onClick={showTimePicker ? noop : () => this.showYearPanel('date')}
-        title={locale.yearSelect}
+        title={showTimePicker ? null : locale.yearSelect}
       >
         {value.format(locale.yearFormat)}
       </a>)
       const month = (<a
-        class={`${prefixCls}-month-select`}
+        class={`${prefixCls}-month-select${timeClassName}`}
         role='button'
         onClick={showTimePicker ? noop : this.showMonthPanel}
-        title={locale.monthSelect}
+        title={showTimePicker ? null : locale.monthSelect}
       >
         {locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)}
       </a>)
       let day
       if (showTimePicker) {
         day = (<a
-          class={`${prefixCls}-day-select`}
+          class={`${prefixCls}-day-select${timeClassName}`}
           role='button'
         >
           {value.format(locale.dayFormat)}

@@ -1,7 +1,7 @@
 
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
-import { getOptionProps, hasProp } from '../../_util/props-util'
+import { getOptionProps, hasProp, getComponentFromProp } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import KeyCode from '../../_util/KeyCode'
 import * as moment from 'moment'
@@ -49,9 +49,10 @@ const Calendar = {
     // onPanelChange: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
+    dateRender: PropTypes.func,
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
-    dateRender: PropTypes.func,
+    clearIcon: PropTypes.any,
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
@@ -200,6 +201,7 @@ const Calendar = {
       sValue, sSelectedValue, sMode,
       $props: props,
     } = this
+    const clearIcon = getComponentFromProp(this, 'clearIcon')
     const showTimePicker = sMode === 'time'
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker
       ? getTimeConfig(sSelectedValue, disabledTime) : null
@@ -243,6 +245,7 @@ const Calendar = {
         prefixCls={prefixCls}
         selectedValue={sSelectedValue}
         onChange={this.onDateInputChange}
+        clearIcon={clearIcon}
       />
     ) : null
     const children = [

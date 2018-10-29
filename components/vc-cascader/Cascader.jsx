@@ -1,4 +1,4 @@
-
+import { getComponentFromProp } from '../_util/props-util'
 import PropTypes from '../_util/vue-types'
 import Trigger from '../trigger'
 import Menus from './Menus'
@@ -65,6 +65,8 @@ export default {
     // onKeyDown: PropTypes.func,
     expandTrigger: PropTypes.string.def('click'),
     fieldNames: PropTypes.object.def({ label: 'label', value: 'value', children: 'children' }),
+    expandIcon: PropTypes.any,
+    loadingIcon: PropTypes.any,
   },
   mixins: [BaseMixin],
   model: {
@@ -285,6 +287,8 @@ export default {
     let menus = <div />
     let emptyMenuClassName = ''
     if (options && options.length > 0) {
+      const loadingIcon = getComponentFromProp(this, 'loadingIcon')
+      const expandIcon = getComponentFromProp(this, 'expandIcon') || '>'
       const menusProps = {
         props: {
           ...$props,
@@ -292,6 +296,8 @@ export default {
           defaultFieldNames: this.defaultFieldNames,
           activeValue: sActiveValue,
           visible: sPopupVisible,
+          loadingIcon,
+          expandIcon,
         },
         on: {
           ...$listeners,

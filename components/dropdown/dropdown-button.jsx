@@ -1,7 +1,6 @@
 
 import Button from '../button'
 import { ButtonGroupProps } from '../button/button-group'
-import Icon from '../icon'
 import Dropdown from './dropdown'
 import PropTypes from '../_util/vue-types'
 import { hasProp, getComponentFromProp } from '../_util/props-util'

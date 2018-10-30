@@ -5,11 +5,11 @@ exports[`Cascader can be selected 1`] = `
   <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
     <div class="ant-cascader-menus-content">
       <ul class="ant-cascader-menu">
-        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
-        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
-        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Hangzhou</li>
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Hangzhou<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
     </div>
   </div>
@@ -21,11 +21,11 @@ exports[`Cascader can be selected 2`] = `
   <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
     <div class="ant-cascader-menus-content">
       <ul class="ant-cascader-menu">
-        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
-        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
-        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou</li>
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
         <li title="West Lake" class="ant-cascader-menu-item">West Lake</li>
@@ -40,11 +40,11 @@ exports[`Cascader can be selected 3`] = `
   <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="display: none;">
     <div class="ant-cascader-menus-content">
       <ul class="ant-cascader-menu">
-        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
-        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
-        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou</li>
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
         <li title="West Lake" class="ant-cascader-menu-item ant-cascader-menu-item-active">West Lake</li>
@@ -67,8 +67,8 @@ exports[`Cascader popup correctly when panel is open 1`] = `
   <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
     <div class="ant-cascader-menus-content">
       <ul class="ant-cascader-menu">
-        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Zhejiang</li>
-        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Zhejiang<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
     </div>
   </div>
@@ -80,11 +80,11 @@ exports[`Cascader popup correctly with defaultValue 1`] = `
   <div class="ant-cascader-menus  ant-cascader-menus-placement-bottomLeft" style="left: -999px; top: -995px;">
     <div class="ant-cascader-menus-content">
       <ul class="ant-cascader-menu">
-        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang</li>
-        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu</li>
+        <li title="Zhejiang" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Zhejiang<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
+        <li title="Jiangsu" class="ant-cascader-menu-item ant-cascader-menu-item-expand">Jiangsu<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
-        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou</li>
+        <li title="Hangzhou" class="ant-cascader-menu-item ant-cascader-menu-item-expand ant-cascader-menu-item-active">Hangzhou<span class="ant-cascader-menu-item-expand-icon">&gt;</span></li>
       </ul>
       <ul class="ant-cascader-menu">
         <li title="West Lake" class="ant-cascader-menu-item">West Lake</li>

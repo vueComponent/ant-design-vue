@@ -34,6 +34,7 @@ const uploadProps = {
   // onReady: PropTypes.func,
   withCredentials: PropTypes.bool,
   supportServerRender: PropTypes.bool,
+  openFileDialogOnClick: PropTypes.bool,
 }
 export default {
   name: 'Upload',
@@ -53,6 +54,7 @@ export default {
     multiple: false,
     beforeUpload: empty,
     withCredentials: false,
+    openFileDialogOnClick: true,
   }),
   data () {
     return {

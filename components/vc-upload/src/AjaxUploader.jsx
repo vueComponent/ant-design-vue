@@ -31,6 +31,7 @@ const upLoadPropTypes = {
   customRequest: PropTypes.func,
   // onProgress: PropTypes.func,
   withCredentials: PropTypes.bool,
+  openFileDialogOnClick: PropTypes.bool,
 }
 
 const AjaxUploader = {
@@ -184,22 +185,22 @@ const AjaxUploader = {
   },
   render () {
     const {
-      componentTag: Tag, prefixCls, disabled, multiple, accept, directory,
+      componentTag: Tag, prefixCls, disabled, multiple, accept, directory, openFileDialogOnClick,
     } = this.$props
     const cls = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
     })
     const events = disabled ? {} : {
-      click: this.onClick,
+      click: openFileDialogOnClick ? this.onClick : () => {},
       keydown: this.onKeyDown,
       drop: this.onFileDrop,
       dragover: this.onFileDrop,
     }
     const tagProps = {
       on: {
-        ...events,
         ...this.$listeners,
+        ...events,
       },
       attrs: {
         role: 'button',

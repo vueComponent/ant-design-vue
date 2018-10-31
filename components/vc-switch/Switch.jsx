@@ -62,8 +62,6 @@ export default {
         this.setChecked(false)
       } else if (e.keyCode === 39) { // Right
         this.setChecked(true)
-      } else if (e.keyCode === 32 || e.keyCode === 13) { // Space, Enter
-        this.toggle()
       }
     },
     handleMouseUp (e) {
@@ -80,9 +78,8 @@ export default {
     },
   },
   render () {
-    const { prefixCls, disabled, tabIndex, ...restProps } = getOptionProps(this)
+    const { prefixCls, disabled, loadingIcon, ...restProps } = getOptionProps(this)
     const checked = this.stateChecked
-    const switchTabIndex = disabled ? -1 : (tabIndex || 0)
     const switchClassName = {
       [prefixCls]: true,
       [`${prefixCls}-checked`]: checked,
@@ -97,17 +94,21 @@ export default {
         mouseup: this.handleMouseUp,
       },
       attrs: {
-        tabIndex: switchTabIndex,
+        type: 'button',
+        role: 'switch',
+        'aria-checked': checked,
+        disabled,
       },
       class: switchClassName,
       ref: 'refSwitchNode',
     }
     return (
-      <span {...spanProps}>
+      <button {...spanProps}>
+        {loadingIcon}
         <span class={`${prefixCls}-inner`}>
           {checked ? getComponentFromProp(this, 'checkedChildren') : getComponentFromProp(this, 'unCheckedChildren')}
         </span>
-      </span>
+      </button>
     )
   },
 }

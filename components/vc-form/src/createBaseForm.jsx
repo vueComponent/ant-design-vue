@@ -59,7 +59,11 @@ function createBaseForm (option = {}, mixins = []) {
 
         this.instances = {}
         this.cachedBind = {}
-        this.clearedFieldMetaCache = {};
+        this.clearedFieldMetaCache = {}
+
+        this.renderFields = {}
+        this.domFields = {};
+
         // HACK: https://github.com/ant-design/ant-design/issues/6406
         ['getFieldsValue',
           'getFieldValue',
@@ -91,9 +95,11 @@ function createBaseForm (option = {}, mixins = []) {
       },
       mounted () {
         this.wrappedComponentRef(this.$refs.WrappedComponent)
+        this.cleanUpUselessFields()
       },
       updated () {
         this.wrappedComponentRef(this.$refs.WrappedComponent)
+        this.cleanUpUselessFields()
       },
       destroyed () {
         this.wrappedComponentRef(null)
@@ -151,25 +157,21 @@ function createBaseForm (option = {}, mixins = []) {
             this.cachedBind[name] = {}
           }
           const cache = this.cachedBind[name]
-          if (!cache[action]) {
-            cache[action] = fn.bind(this, name, action)
+          if (!cache[action] || cache[action].oriFn !== fn) {
+            cache[action] = {
+              fn: fn.bind(this, name, action),
+              oriFn: fn,
+            }
           }
-          return cache[action]
-        },
-
-        recoverClearedField (name) {
-          if (this.clearedFieldMetaCache[name]) {
-            this.fieldsStore.setFields({
-              [name]: this.clearedFieldMetaCache[name].field,
-            })
-            this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta)
-            delete this.clearedFieldMetaCache[name]
-          }
+          return cache[action].fn
         },
 
         getFieldDecorator (name, fieldOption) {
           const { props, ...restProps } = this.getFieldProps(name, fieldOption)
           return (fieldElem) => {
+            // We should put field in record if it is rendered
+            this.renderFields[name] = true
+
             const fieldMeta = this.fieldsStore.getFieldMeta(name)
             const originalProps = getOptionProps(fieldElem)
             const originalEvents = getEvents(fieldElem)
@@ -288,7 +290,8 @@ function createBaseForm (option = {}, mixins = []) {
           if (fieldDataProp) {
             inputAttrs[fieldDataProp] = this.fieldsStore.getField(name)
           }
-
+          // This field is rendered, record it
+          this.renderFields[name] = true
           return {
             props: omit(inputProps, ['id']),
             // id: inputProps.id,
@@ -338,19 +341,6 @@ function createBaseForm (option = {}, mixins = []) {
           })
         },
 
-        resetFields (ns) {
-          const newFields = this.fieldsStore.resetFields(ns)
-          if (Object.keys(newFields).length > 0) {
-            this.setFields(newFields)
-          }
-          if (ns) {
-            const names = Array.isArray(ns) ? ns : [ns]
-            names.forEach(name => delete this.clearedFieldMetaCache[name])
-          } else {
-            this.clearedFieldMetaCache = {}
-          }
-        },
-
         setFieldsValue (changedValues, callback) {
           const { fieldsMeta } = this.fieldsStore
           const values = this.fieldsStore.flattenRegisteredFields(changedValues)
@@ -385,11 +375,11 @@ function createBaseForm (option = {}, mixins = []) {
               field: this.fieldsStore.getField(name),
               meta: this.fieldsStore.getFieldMeta(name),
             }
-            this.fieldsStore.clearField(name)
-            delete this.instances[name]
-            delete this.cachedBind[name]
+            this.clearField(name)
+            delete this.domFields[name]
             return
           }
+          this.domFields[name] = true
           this.recoverClearedField(name)
           // const fieldMeta = this.fieldsStore.getFieldMeta(name)
           // if (fieldMeta) {
@@ -402,6 +392,46 @@ function createBaseForm (option = {}, mixins = []) {
           //   }
           // }
           this.instances[name] = component
+        },
+
+        cleanUpUselessFields () {
+          const fieldList = this.fieldsStore.getAllFieldsName()
+          const removedList = fieldList.filter(field => (
+            !this.renderFields[field] && !this.domFields[field]
+          ))
+          if (removedList.length) {
+            removedList.forEach(this.clearField)
+          }
+          this.renderFields = {}
+        },
+
+        clearField (name) {
+          this.fieldsStore.clearField(name)
+          delete this.instances[name]
+          delete this.cachedBind[name]
+        },
+
+        resetFields (ns) {
+          const newFields = this.fieldsStore.resetFields(ns)
+          if (Object.keys(newFields).length > 0) {
+            this.setFields(newFields)
+          }
+          if (ns) {
+            const names = Array.isArray(ns) ? ns : [ns]
+            names.forEach(name => delete this.clearedFieldMetaCache[name])
+          } else {
+            this.clearedFieldMetaCache = {}
+          }
+        },
+
+        recoverClearedField (name) {
+          if (this.clearedFieldMetaCache[name]) {
+            this.fieldsStore.setFields({
+              [name]: this.clearedFieldMetaCache[name].field,
+            })
+            this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta)
+            delete this.clearedFieldMetaCache[name]
+          }
         },
 
         validateFieldsInternal (fields, {

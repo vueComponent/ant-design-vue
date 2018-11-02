@@ -15,14 +15,11 @@ const InputHandler = {
       },
       on: this.$listeners,
     }
-    const spanProps = {
-      attrs: this.$attrs,
-    }
     return (
       <Touchable
         {...touchableProps}
       >
-        <span {...spanProps}>
+        <span>
           {this.$slots.default}
         </span>
       </Touchable>

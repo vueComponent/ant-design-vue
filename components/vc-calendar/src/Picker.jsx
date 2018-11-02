@@ -6,7 +6,7 @@ import { cloneElement } from '../../_util/vnode'
 import createChainedFunction from '../../_util/createChainedFunction'
 import KeyCode from '../../_util/KeyCode'
 import placements from './picker/placements'
-import Trigger from '../../trigger'
+import Trigger from '../../vc-trigger'
 import moment from 'moment'
 import { setTimeout } from 'timers'
 function isMoment (value) {

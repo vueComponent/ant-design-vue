@@ -1,6 +1,6 @@
 import omit from 'omit.js'
 import PropTypes from '../_util/vue-types'
-import Trigger from '../trigger'
+import Trigger from '../vc-trigger'
 import KeyCode from '../_util/KeyCode'
 import { connect } from '../_util/store'
 import SubPopupMenu from './SubPopupMenu'

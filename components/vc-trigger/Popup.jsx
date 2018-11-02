@@ -181,10 +181,7 @@ export default {
           // hiddenClassName,
         },
         class: className,
-        on: {
-          mouseenter: mouseenter || noop,
-          mouseleave: mouseleave || noop,
-        },
+        on: $listeners,
         ref: 'popupInstance',
         style: { ...sizeStyle, ...popupStyle, ...this.getZIndexStyle() },
       }

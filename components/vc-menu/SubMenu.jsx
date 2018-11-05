@@ -66,6 +66,9 @@ const SubMenu = {
     store: PropTypes.object,
     mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
     manualRef: PropTypes.func.def(noop),
+    builtinPlacements: PropTypes.object.def({}),
+    itemIcon: PropTypes.any,
+    expandIcon: PropTypes.any,
   },
   mixins: [BaseMixin],
   isSubMenu: true,
@@ -350,11 +353,14 @@ const SubMenu = {
           subMenuCloseDelay: props.subMenuCloseDelay,
           forceSubMenuRender: props.forceSubMenuRender,
           triggerSubMenuAction: props.triggerSubMenuAction,
+          builtinPlacements: props.builtinPlacements,
           defaultActiveFirst: props.store.getState()
             .defaultActiveFirst[getMenuIdFromSubMenuEventKey(props.eventKey)],
           multiple: props.multiple,
           prefixCls: props.rootPrefixCls,
           manualRef: this.saveMenuInstance,
+          itemIcon: getComponentFromProp(this, 'itemIcon'),
+          expandIcon: getComponentFromProp(this, 'expandIcon'),
           children,
           __propsSymbol__: Symbol(),
         },
@@ -475,10 +481,15 @@ const SubMenu = {
       class: `${prefixCls}-title`,
       ref: 'subMenuTitle',
     }
+    // expand custom icon should NOT be displayed in menu with horizontal mode.
+    let icon = null
+    if (props.mode !== 'horizontal') {
+      icon = getComponentFromProp(this, 'expandIcon', props)
+    }
     const title = (
       <div {...titleProps}>
         {getComponentFromProp(this, 'title')}
-        <i class={`${prefixCls}-arrow`} />
+        {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     )
     const children = this.renderChildren(this.$slots.default)
@@ -503,6 +514,7 @@ const SubMenu = {
             popupClassName={`${prefixCls}-popup ${rootPrefixCls}-${parentMenu.theme} ${popupClassName || ''}`}
             getPopupContainer={getPopupContainer}
             builtinPlacements={placements}
+            builtinPlacements={Object.assign({}, placements, props.builtinPlacements)}
             popupPlacement={popupPlacement}
             popupVisible={isOpen}
             popupAlign={popupAlign}

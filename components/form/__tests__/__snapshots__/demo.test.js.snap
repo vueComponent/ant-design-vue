@@ -520,7 +520,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-6 ant-form-item-label"><label for="input-number" title="InputNumber" class="">InputNumber</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><div class="ant-input-number" data-__meta="[object Object]" data-__field="[object Object]" id="input-number"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
+      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><div class="ant-input-number" data-__meta="[object Object]" data-__field="[object Object]" id="input-number"><div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
       <div role="spinbutton" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3" class="ant-input-number-input-wrap"><input autocomplete="off" max="10" min="1" step="1" class="ant-input-number-input"></div>
     </div><span class="ant-form-text"> machines</span></span>
     <!---->
@@ -530,7 +530,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-6 ant-form-item-label"><label for="switch" title="Switch" class="">Switch</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-switch" data-__meta="[object Object]" data-__field="[object Object]" id="switch"><span class="ant-switch-inner"></span></span></span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" role="switch" class="ant-switch" data-__meta="[object Object]" data-__field="[object Object]" id="switch"><span class="ant-switch-inner"></span></button></span>
         <!---->
       </div>
     </div>
@@ -708,7 +708,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Success" class="">Success</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><div class="ant-input-number" style="width: 100%;"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
+      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><div class="ant-input-number" style="width: 100%;"><div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
       <div role="spinbutton" aria-valuemin="-9007199254740991" class="ant-input-number-input-wrap"><input autocomplete="off" min="-9007199254740991" step="1" class="ant-input-number-input"></div>
     </div></span>
     <!---->
@@ -723,7 +723,7 @@ exports[`renders ./components/form/demo/without-form-create.vue correctly 1`] = 
   <div class="ant-row ant-form-item ant-form-item-with-help">
     <div class="ant-col-7 ant-form-item-label"><label title="Prime between 8 &amp; 12" class="">Prime between 8 &amp; 12</label></div>
     <div class="ant-col-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-input-number"><div class="ant-input-number-handler-wrap"><span unselectable="unselectable" role="button" aria-label="Increase Value" class="ant-input-number-handler ant-input-number-handler-up "><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" class="ant-input-number-handler ant-input-number-handler-down "><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-input-number"><div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><span unselectable="unselectable" class="ant-input-number-handler-up-inner"></span></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><span unselectable="unselectable" class="ant-input-number-handler-down-inner"></span></span></div>
       <div role="spinbutton" aria-valuemin="8" aria-valuemax="12" aria-valuenow="11" class="ant-input-number-input-wrap"><input autocomplete="off" max="12" min="8" step="1" class="ant-input-number-input"></div>
     </div></span>
     <div class="ant-form-explain show-help-enter">A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.</div>

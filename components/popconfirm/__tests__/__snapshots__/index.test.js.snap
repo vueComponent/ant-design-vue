@@ -3,7 +3,7 @@
 exports[`Popconfirm should show overlay when trigger is clicked 1`] = `
 <div class="ant-popover-content">
   <div class="ant-popover-arrow"></div>
-  <div class="ant-popover-inner">
+  <div role="tooltip" class="ant-popover-inner">
     <div class="ant-popover-inner-content">
       <div class="ant-popover-message"><i class="anticon anticon-exclamation-circle"></i>
         <div class="ant-popover-message-title">code</div>

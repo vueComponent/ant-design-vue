@@ -37,14 +37,6 @@ export function saveRef (key, c) {
   if (c) {
     const index = this.instanceArrayKeyIndexMap[key]
     this.instanceArray[index] = c
-    // const index = this.instanceArray.indexOf(c)
-    // if (index !== -1) {
-    //   // update component if it's already inside instanceArray
-    //   this.instanceArray[index] = c
-    // } else {
-    //   // add component if it's not in instanceArray yet;
-    //   this.instanceArray.push(c)
-    // }
   }
 }
 export function getActiveKey (props, originalActiveKey) {
@@ -145,18 +137,6 @@ const SubPopupMenu = {
       updateActiveKey(props.store, getEventKey(props), activeKey)
     }
   },
-  // watch: {
-  //   __propsSymbol__ () {
-  //     const props = getOptionProps(this)
-  //     const storeActiveKey = this.getStore().getState().activeKey[this.getEventKey()]
-  //     const originalActiveKey = 'activeKey' in props ? props.activeKey
-  //       : storeActiveKey
-  //     const activeKey = getActiveKey(props, originalActiveKey)
-  //     if (activeKey !== originalActiveKey || storeActiveKey !== activeKey) {
-  //       updateActiveKey(this.getStore(), this.getEventKey(), activeKey)
-  //     }
-  //   },
-  // },
   methods: {
     // all keyboard events callbacks run from here at first
     onKeyDown  (e, callback) {
@@ -221,7 +201,7 @@ const SubPopupMenu = {
 
     step (direction) {
       let children = this.getFlatInstanceArray()
-      const activeKey = this.$props.store.getState().activeKey[this.getEventKey(this.$props)]
+      const activeKey = this.$props.store.getState().activeKey[getEventKey(this.$props)]
       const len = children.length
       if (!len) {
         return null
@@ -290,7 +270,8 @@ const SubPopupMenu = {
       const props = this.$props
       const key = getKeyFromChildrenIndex(child, props.eventKey, i)
       const childProps = child.componentOptions.propsData || {}
-      const isActive = key === state.activeKey
+
+      const isActive = key === state.activeKey[getEventKey(this.$props)]
       if (!childProps.disabled) {
         // manualRef的执行顺序不能保证，使用key映射ref在this.instanceArray中的位置
         this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length

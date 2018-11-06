@@ -362,7 +362,6 @@ const SubMenu = {
           itemIcon: getComponentFromProp(this, 'itemIcon'),
           expandIcon: getComponentFromProp(this, 'expandIcon'),
           children,
-          __propsSymbol__: Symbol(),
         },
         on: {
           click: this.onSubMenuClick,

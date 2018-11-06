@@ -162,7 +162,6 @@ const Menu = {
         openTransitionName: this.getOpenTransitionName(),
         parentMenu: this,
         children: this.$slots.default || [],
-        __propsSymbol__: Symbol(),
       },
       class: `${props.prefixCls}-root`,
       on: {

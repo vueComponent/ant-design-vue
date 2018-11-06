@@ -336,7 +336,7 @@ const SubPopupMenu = {
   },
   render () {
     const { ...props } = this.$props
-    const { eventKey, visible, level, mode, theme } = props
+    const { eventKey, prefixCls, visible, level, mode, theme } = props
     this.instanceArray = []
     this.instanceArrayKeyIndexMap = {}
     const className = classNames(
@@ -348,7 +348,10 @@ const SubPopupMenu = {
         tag: 'ul',
         // hiddenClassName: `${prefixCls}-hidden`,
         visible,
-        level, mode, theme,
+        prefixCls,
+        level,
+        mode,
+        theme,
         overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator'),
       },
       attrs: {

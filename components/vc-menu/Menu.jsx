@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types'
 import { Provider, create } from '../_util/store'
 import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu'
 import BaseMixin from '../_util/BaseMixin'
-import hasProp, { getOptionProps, getComponentFromProp } from '../_util/props-util'
+import hasProp, { getOptionProps, getComponentFromProp, filterEmpty } from '../_util/props-util'
 import commonPropsType from './commonPropsType'
 
 const Menu = {
@@ -161,7 +161,7 @@ const Menu = {
         overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator', props),
         openTransitionName: this.getOpenTransitionName(),
         parentMenu: this,
-        children: this.$slots.default || [],
+        children: filterEmpty(this.$slots.default || []),
       },
       class: `${props.prefixCls}-root`,
       on: {

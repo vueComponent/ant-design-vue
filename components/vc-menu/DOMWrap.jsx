@@ -286,7 +286,7 @@ const DOMWrap = {
     const tagProps = {
       on: this.$listeners,
     }
-    return <Tag {...tagProps}>{this.renderChildren(filterEmpty(this.$slots.default))}</Tag>
+    return <Tag {...tagProps}>{this.renderChildren(this.$slots.default)}</Tag>
   },
 }
 

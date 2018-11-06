@@ -6,7 +6,7 @@ import { connect } from '../_util/store'
 import SubPopupMenu from './SubPopupMenu'
 import placements from './placements'
 import BaseMixin from '../_util/BaseMixin'
-import { getComponentFromProp } from '../_util/props-util'
+import { getComponentFromProp, filterEmpty } from '../_util/props-util'
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout'
 import {
   noop,
@@ -491,7 +491,7 @@ const SubMenu = {
         {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     )
-    const children = this.renderChildren(this.$slots.default)
+    const children = this.renderChildren(filterEmpty(this.$slots.default))
 
     const getPopupContainer = this.parentMenu.isRootMenu
       ? this.parentMenu.getPopupContainer : triggerNode => triggerNode.parentNode

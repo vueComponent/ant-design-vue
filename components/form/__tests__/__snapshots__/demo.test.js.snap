@@ -530,7 +530,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-6 ant-form-item-label"><label for="switch" title="Switch" class="">Switch</label></div>
     <div class="ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-switch" data-__meta="[object Object]" data-__field="[object Object]" id="switch"><span class="ant-switch-inner"></span></span></span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" role="switch" class="ant-switch" data-__meta="[object Object]" data-__field="[object Object]" id="switch"><span class="ant-switch-inner"></span></button></span>
         <!---->
       </div>
     </div>

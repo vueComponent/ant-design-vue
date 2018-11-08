@@ -17,7 +17,7 @@ exports[`renders ./components/slider/demo/basic.md correctly 1`] = `
     <div role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" class="ant-slider-handle ant-slider-handle-2" style="left: 50%;"></div>
     <div class="ant-slider-mark"></div>
   </div>
-  Disabled: <span tabindex="0" class="ant-switch ant-switch-small"><span class="ant-switch-inner"></span></span>
+  Disabled: <button type="button" role="switch" class="ant-switch ant-switch-small"><span class="ant-switch-inner"></span></button>
 </div>
 `;
 

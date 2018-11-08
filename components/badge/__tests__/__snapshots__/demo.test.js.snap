@@ -7,7 +7,7 @@ exports[`renders ./components/badge/demo/change.md correctly 1`] = `
   <div><span class="ant-badge"><a href="#" class="head-example"></a><sup title="5" class="ant-scroll-number ant-badge-count ant-badge-zoom-enter"><span class="ant-scroll-number-only" style="transform: translateY(-1500%);"><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="current">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p><p class="">0</p><p class="">1</p><p class="">2</p><p class="">3</p><p class="">4</p><p class="">5</p><p class="">6</p><p class="">7</p><p class="">8</p><p class="">9</p></span></sup></span>
     <div class="ant-btn-group"><button type="button" class="ant-btn ant-btn-default"><i class="anticon anticon-minus"></i></button><button type="button" class="ant-btn ant-btn-default"><i class="anticon anticon-plus"></i></button></div>
   </div>
-  <div style="margin-top: 10px;"><span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-dot ant-badge-zoom-enter"></sup></span> <span tabindex="0" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></span></div>
+  <div style="margin-top: 10px;"><span class="ant-badge"><a href="#" class="head-example"></a><sup class="ant-scroll-number ant-badge-dot ant-badge-zoom-enter"></sup></span> <button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked"><span class="ant-switch-inner"></span></button></div>
 </div>
 `;
 

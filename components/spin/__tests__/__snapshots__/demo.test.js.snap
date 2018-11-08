@@ -22,7 +22,7 @@ exports[`renders ./components/spin/demo/delayAndDebounce.md correctly 1`] = `
       </div>
     </div>
   </div>
-  Loading state：<span tabindex="0" class="ant-switch"><span class="ant-switch-inner"></span></span>
+  Loading state：<button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button>
 </div>
 `;
 
@@ -41,7 +41,7 @@ exports[`renders ./components/spin/demo/nested.md correctly 1`] = `
       </div>
     </div>
   </div>
-  Loading state：<span tabindex="0" class="ant-switch"><span class="ant-switch-inner"></span></span>
+  Loading state：<button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button>
 </div>
 `;
 

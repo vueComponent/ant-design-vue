@@ -313,6 +313,7 @@ const Tree = {
         _dragOverNodeKey: '',
       })
       this.__emit('dragend', { event, node })
+      this.dragNode = null
     },
     onNodeDrop (event, node) {
       const { _dragNodesKeys = [], _dropPosition } = this.$data
@@ -342,6 +343,7 @@ const Tree = {
         dropResult.dropToGap = true
       }
       this.__emit('drop', dropResult)
+      this.dragNode = null
     },
 
     onNodeClick (e, treeNode) {
@@ -455,18 +457,21 @@ const Tree = {
           const promise = loadData(treeNode)
           promise.then(() => {
             const newLoadedKeys = arrAdd(this.$data._loadedKeys, eventKey)
-            this.setUncontrolledState({
-              _loadedKeys: newLoadedKeys,
-            })
-            this.setState({
-              _loadingKeys: arrDel(this.$data._loadingKeys, eventKey),
-            })
+            const newLoadingKeys = arrDel(this.$data._loadingKeys, eventKey)
+
+            // onLoad should trigger before internal setState to avoid `loadData` trigger twice.
+            // https://github.com/ant-design/ant-design/issues/12464
             const eventObj = {
               event: 'load',
               node: treeNode,
             }
             this.__emit('load', eventObj)
-
+            this.setUncontrolledState({
+              _loadedKeys: newLoadedKeys,
+            })
+            this.setState({
+              _loadingKeys: newLoadingKeys,
+            })
             resolve()
           })
 

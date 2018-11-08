@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import PropTypes from '../_util/vue-types'
-import { getStyle } from '../_util/props-util'
+import { getStyle, getComponentFromProp } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import createChainedFunction from '../_util/createChainedFunction'
 import getTransitionProps from '../_util/getTransitionProps'
@@ -21,6 +21,7 @@ const Notification = {
     transitionName: PropTypes.string,
     animation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).def('fade'),
     maxCount: PropTypes.number,
+    closeIcon: PropTypes.any,
   },
   data () {
     return {
@@ -86,6 +87,7 @@ const Notification = {
           duration,
           closable,
           update,
+          closeIcon: getComponentFromProp(this, 'closeIcon'),
         },
         on: {
           close,

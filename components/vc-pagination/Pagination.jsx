@@ -1,7 +1,7 @@
 
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import { hasProp } from '../_util/props-util'
+import { hasProp, getComponentFromProp } from '../_util/props-util'
 import Pager from './Pager'
 import Options from './Options'
 import LOCALE from './locale/zh_CN'
@@ -46,6 +46,10 @@ export default {
     simple: PropTypes.bool,
     locale: PropTypes.object.def(LOCALE),
     itemRender: PropTypes.func.def(defaultItemRender),
+    prevIcon: PropTypes.any,
+    nextIcon: PropTypes.any,
+    jumpPrevIcon: PropTypes.any,
+    jumpNextIcon: PropTypes.any,
   },
   model: {
     prop: 'current',
@@ -110,6 +114,11 @@ export default {
   methods: {
     isValid (page) {
       return isInteger(page) && page >= 1 && page !== this.stateCurrent
+    },
+    getItemIcon (icon) {
+      const { prefixCls } = this.$props
+      const iconNode = getComponentFromProp(this, icon, this.$props) || <a class={`${prefixCls}-item-link`} />
+      return iconNode
     },
     calculatePage (p) {
       let pageSize = p
@@ -255,7 +264,7 @@ export default {
     if (this.hideOnSinglePage === true && this.total <= this.statePageSize) {
       return null
     }
-
+    const props = this.$props
     const locale = this.locale
 
     const prefixCls = this.prefixCls
@@ -313,7 +322,7 @@ export default {
             class={`${hasPrev ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
-            {this.itemRender(prevPage, 'prev', <a class={`${prefixCls}-item-link`} />)}
+            {this.itemRender(prevPage, 'prev', this.getItemIcon('prevIcon'))}
           </li>
           <li
             title={this.showTitle ? `${stateCurrent}/${allPages}` : null}
@@ -338,7 +347,7 @@ export default {
             class={`${hasNext ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            {this.itemRender(nextPage, 'next', <a class={`${prefixCls}-item-link`} />)}
+            {this.itemRender(nextPage, 'next', this.getItemIcon('nextIcon'))}
           </li>
           {gotoButton}
         </ul>
@@ -365,6 +374,10 @@ export default {
       const prevItemTitle = this.showLessItems ? locale.prev_3 : locale.prev_5
       const nextItemTitle = this.showLessItems ? locale.next_3 : locale.next_5
       if (this.showPrevNextJumpers) {
+        let jumpPrevClassString = `${prefixCls}-jump-prev`
+        if (props.jumpPrevIcon) {
+          jumpPrevClassString += ` ${prefixCls}-jump-prev-custom-icon`
+        }
         jumpPrev = (
           <li
             title={this.showTitle ? prevItemTitle : null}
@@ -372,13 +385,19 @@ export default {
             onClick={this.jumpPrev}
             tabIndex='0'
             onKeypress={this.runIfEnterJumpPrev}
-            class={`${prefixCls}-jump-prev`}
+            class={jumpPrevClassString}
           >
             {this.itemRender(
-              this.getJumpPrevPage(), 'jump-prev', <a class={`${prefixCls}-item-link`} />
+              this.getJumpPrevPage(),
+              'jump-prev',
+              this.getItemIcon('jumpPrevIcon')
             )}
           </li>
         )
+        let jumpNextClassString = `${prefixCls}-jump-next`
+        if (props.jumpNextIcon) {
+          jumpNextClassString += ` ${prefixCls}-jump-next-custom-icon`
+        }
         jumpNext = (
           <li
             title={this.showTitle ? nextItemTitle : null}
@@ -386,10 +405,12 @@ export default {
             tabIndex='0'
             onClick={this.jumpNext}
             onKeypress={this.runIfEnterJumpNext}
-            class={`${prefixCls}-jump-next`}
+            class={jumpNextClassString}
           >
             {this.itemRender(
-              this.getJumpNextPage(), 'jump-next', <a class={`${prefixCls}-item-link`} />
+              this.getJumpNextPage(),
+              'jump-next',
+              this.getItemIcon('jumpNextIcon')
             )}
           </li>
         )
@@ -527,7 +548,10 @@ export default {
           class={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          {this.itemRender(prevPage, 'prev', <a class={`${prefixCls}-item-link`} />)}
+          {this.itemRender(prevPage,
+            'prev',
+            this.getItemIcon('prevIcon')
+          )}
         </li>
         {pagerList}
         <li
@@ -538,7 +562,10 @@ export default {
           class={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          {this.itemRender(nextPage, 'next', <a class={`${prefixCls}-item-link`} />)}
+          {this.itemRender(nextPage,
+            'next',
+            this.getItemIcon('nextIcon')
+          )}
         </li>
         <Options
           locale={locale}

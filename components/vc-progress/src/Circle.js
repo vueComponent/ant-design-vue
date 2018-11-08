@@ -18,7 +18,7 @@ const Circle = {
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
   methods: {
     getPathStyles () {
-      const { percent, strokeWidth, gapDegree = 0, gapPosition } = this.$props
+      const { percent, strokeWidth, strokeColor, gapDegree = 0, gapPosition } = this.$props
       const radius = 50 - (strokeWidth / 2)
       let beginPositionX = 0
       let beginPositionY = -radius
@@ -48,6 +48,7 @@ const Circle = {
        a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
       const trailPathStyle = {
+        stroke: strokeColor,
         strokeDasharray: `${len - gapDegree}px ${len}px`,
         strokeDashoffset: `-${gapDegree / 2}px`,
         transition: 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s',
@@ -62,13 +63,14 @@ const Circle = {
   },
   render () {
     const {
-      prefixCls, strokeWidth, trailWidth, strokeColor,
+      prefixCls, strokeWidth, trailWidth,
       trailColor, strokeLinecap, percent, ...restProps
     } = this.$props
     const { pathString, trailPathStyle, strokePathStyle } = this.getPathStyles()
     delete restProps.percent
     delete restProps.gapDegree
     delete restProps.gapPosition
+    delete restProps.strokeColor
     const pathFirst = {
       attrs: {
         'd': pathString,
@@ -83,7 +85,6 @@ const Circle = {
       attrs: {
         'd': pathString,
         'stroke-linecap': strokeLinecap,
-        'stroke': strokeColor,
         'stroke-width': percent === 0 ? 0 : strokeWidth,
         'fill-opacity': '0',
       },

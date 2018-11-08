@@ -180,6 +180,7 @@ export default {
       const starProps = {
         props: {
           index,
+          count,
           disabled,
           prefixCls: `${prefixCls}-star`,
           allowHalf,
@@ -213,6 +214,7 @@ export default {
         onBlur={disabled ? noop : this.onBlur}
         onKeydown={disabled ? noop : this.onKeyDown}
         ref='rateRef'
+        role='radiogroup'
       >
         {stars}
       </ul>

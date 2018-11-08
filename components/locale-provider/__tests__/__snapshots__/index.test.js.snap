@@ -9748,7 +9748,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
-            <div title="10 /странице" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 /странице</div>
+            <div title="10 / стр." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / стр.</div>
           </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
         </div>
       </div>

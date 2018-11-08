@@ -1,6 +1,6 @@
 import { getComponentFromProp } from '../_util/props-util'
 import PropTypes from '../_util/vue-types'
-import Trigger from '../trigger'
+import Trigger from '../vc-trigger'
 import Menus from './Menus'
 import KeyCode from '../_util/KeyCode'
 import arrayTreeFilter from 'array-tree-filter'

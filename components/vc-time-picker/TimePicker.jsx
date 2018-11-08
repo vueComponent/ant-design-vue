@@ -1,7 +1,7 @@
 
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import Trigger from '../trigger'
+import Trigger from '../vc-trigger'
 import Panel from './Panel'
 import placements from './placements'
 import moment from 'moment'

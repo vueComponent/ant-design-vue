@@ -1,6 +1,6 @@
 
 import classnames from 'classnames'
-import Trigger from '../trigger'
+import Trigger from '../vc-trigger'
 import PropTypes from '../_util/vue-types'
 import DropdownMenu from './DropdownMenu'
 import { isSingleMode, saveRef } from './util'

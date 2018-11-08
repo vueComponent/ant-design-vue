@@ -1,3 +1,3 @@
-// based on rc-trigger 2.5.4
+// based on rc-trigger 2.6.2
 import Trigger from './Trigger'
 export default Trigger

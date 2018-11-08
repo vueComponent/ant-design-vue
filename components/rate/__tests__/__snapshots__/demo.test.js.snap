@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/rate/demo/basic.md correctly 1`] = `
-<ul tabindex="0" class="ant-rate">
-  <li class="ant-rate-star ant-rate-star-full">
+<ul tabindex="0" role="radiogroup" class="ant-rate">
+  <li role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-full">
+  <li role="radio" aria-checked="true" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
@@ -27,68 +27,68 @@ exports[`renders ./components/rate/demo/basic.md correctly 1`] = `
 
 exports[`renders ./components/rate/demo/character.md correctly 1`] = `
 <div>
-  <ul tabindex="0" class="ant-rate">
-    <li class="ant-rate-star ant-rate-star-zero">
+  <ul tabindex="0" role="radiogroup" class="ant-rate">
+    <li role="radio" aria-checked="false" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-heart"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-heart"></i></div>
     </li>
   </ul> <br>
-  <ul tabindex="0" class="ant-rate" style="font-size: 36px;">
-    <li class="ant-rate-star ant-rate-star-zero">
+  <ul tabindex="0" role="radiogroup" class="ant-rate" style="font-size: 36px;">
+    <li role="radio" aria-checked="false" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">A</div>
       <div class="ant-rate-star-second">A</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">A</div>
       <div class="ant-rate-star-second">A</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">A</div>
       <div class="ant-rate-star-second">A</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">A</div>
       <div class="ant-rate-star-second">A</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">A</div>
       <div class="ant-rate-star-second">A</div>
     </li>
   </ul> <br>
-  <ul tabindex="0" class="ant-rate">
-    <li class="ant-rate-star ant-rate-star-zero">
+  <ul tabindex="0" role="radiogroup" class="ant-rate">
+    <li role="radio" aria-checked="false" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">好</div>
       <div class="ant-rate-star-second">好</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">好</div>
       <div class="ant-rate-star-second">好</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">好</div>
       <div class="ant-rate-star-second">好</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">好</div>
       <div class="ant-rate-star-second">好</div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first">好</div>
       <div class="ant-rate-star-second">好</div>
     </li>
@@ -98,47 +98,47 @@ exports[`renders ./components/rate/demo/character.md correctly 1`] = `
 
 exports[`renders ./components/rate/demo/clear.md correctly 1`] = `
 <div>
-  <ul tabindex="0" class="ant-rate">
-    <li class="ant-rate-star ant-rate-star-full">
+  <ul tabindex="0" role="radiogroup" class="ant-rate">
+    <li role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-full">
+    <li role="radio" aria-checked="true" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-full">
+    <li role="radio" aria-checked="true" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
   </ul> allowClear: true
   <br>
-  <ul tabindex="0" class="ant-rate">
-    <li class="ant-rate-star ant-rate-star-full">
+  <ul tabindex="0" role="radiogroup" class="ant-rate">
+    <li role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-full">
+    <li role="radio" aria-checked="true" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-full">
+    <li role="radio" aria-checked="true" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
-    <li class="ant-rate-star ant-rate-star-zero">
+    <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
       <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
       <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
     </li>
@@ -148,24 +148,24 @@ exports[`renders ./components/rate/demo/clear.md correctly 1`] = `
 `;
 
 exports[`renders ./components/rate/demo/disabled.md correctly 1`] = `
-<ul tabindex="-1" class="ant-rate ant-rate-disabled">
-  <li class="ant-rate-star ant-rate-star-full">
+<ul tabindex="-1" role="radiogroup" class="ant-rate ant-rate-disabled">
+  <li role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-full">
+  <li role="radio" aria-checked="true" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
@@ -173,28 +173,28 @@ exports[`renders ./components/rate/demo/disabled.md correctly 1`] = `
 `;
 
 exports[`renders ./components/rate/demo/half.md correctly 1`] = `
-<ul tabindex="0" class="ant-rate">
-  <li class="ant-rate-star ant-rate-star-full">
+<ul tabindex="0" role="radiogroup" class="ant-rate">
+  <li role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-full">
+  <li role="radio" aria-checked="true" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-half ant-rate-star-active">
+  <li role="radio" aria-checked="true" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-half ant-rate-star-active">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
-  <li class="ant-rate-star ant-rate-star-zero">
+  <li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero">
     <div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div>
     <div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div>
   </li>
 </ul>
 `;
 
-exports[`renders ./components/rate/demo/text.md correctly 1`] = `<span><ul tabindex="0" class="ant-rate"><li class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-zero"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li class="ant-rate-star ant-rate-star-zero"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li></ul> <span class="ant-rate-text">3 stars</span></span>`;
+exports[`renders ./components/rate/demo/text.md correctly 1`] = `<span><ul tabindex="0" role="radiogroup" class="ant-rate"><li role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li role="radio" aria-checked="true" aria-posinset="2" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li role="radio" aria-checked="true" aria-posinset="3" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-full"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li role="radio" aria-checked="false" aria-posinset="4" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li><li role="radio" aria-checked="false" aria-posinset="5" aria-setsize="5" tabindex="0" class="ant-rate-star ant-rate-star-zero"><div class="ant-rate-star-first"><i class="anticon anticon-star"></i></div><div class="ant-rate-star-second"><i class="anticon anticon-star"></i></div></li></ul> <span class="ant-rate-text">3 stars</span></span>`;

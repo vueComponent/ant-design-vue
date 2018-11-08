@@ -15,7 +15,7 @@ export default {
   render () {
     const { overlay, prefixCls } = this
     return (
-      <div class={`${prefixCls}-inner`}>
+      <div class={`${prefixCls}-inner`} role='tooltip'>
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>
     )

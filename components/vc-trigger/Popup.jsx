@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-import Align from '../align'
+import Align from '../vc-align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
 import { noop } from './utils'
@@ -181,10 +181,7 @@ export default {
           // hiddenClassName,
         },
         class: className,
-        on: {
-          mouseenter: mouseenter || noop,
-          mouseleave: mouseleave || noop,
-        },
+        on: $listeners,
         ref: 'popupInstance',
         style: { ...sizeStyle, ...popupStyle, ...this.getZIndexStyle() },
       }

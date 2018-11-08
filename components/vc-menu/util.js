@@ -77,6 +77,7 @@ export const menuAllProps = {
     'rootPrefixCls',
     'eventKey',
     'active',
+    'popupAlign',
     'popupOffset',
     'isOpen',
     'renderMenuItem',
@@ -87,6 +88,8 @@ export const menuAllProps = {
     'isSelected',
     'store',
     'activeKey',
+    'builtinPlacements',
+    'overflowedIndicator',
 
     // the following keys found need to be removed from test regression
     'attribute',
@@ -95,6 +98,8 @@ export const menuAllProps = {
     'inlineCollapsed',
     'menu',
     'theme',
+    'itemIcon',
+    'expandIcon',
   ],
   on: [
     'select',
@@ -106,4 +111,16 @@ export const menuAllProps = {
     'titleMouseleave',
     'titleClick',
   ],
+}
+
+export const getWidth = (elem) => (
+  elem &&
+  typeof elem.getBoundingClientRect === 'function' &&
+  elem.getBoundingClientRect().width
+) || 0
+
+export const setStyle = (elem, styleProperty, value) => {
+  if (elem && typeof elem.style === 'object') {
+    elem.style[styleProperty] = value
+  }
 }

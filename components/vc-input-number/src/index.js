@@ -1,7 +1,7 @@
-// based on rc-input-number 4.0.12
+// based on rc-input-number 4.3.1
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
-import { initDefaultProps, hasProp } from '../../_util/props-util'
+import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util'
 import classNames from 'classnames'
 import isNegativeZero from 'is-negative-zero'
 import KeyCode from '../../_util/KeyCode'
@@ -72,6 +72,7 @@ const inputNumberProps = {
   precision: PropTypes.number,
   required: PropTypes.bool,
   pattern: PropTypes.string,
+  decimalSeparator: PropTypes.string,
 }
 
 export default {
@@ -142,6 +143,22 @@ export default {
         inputValue: this.inputting ? value : this.toPrecisionAsStep(value),
       })
     },
+    max (val) {
+      const props = getOptionProps(this)
+      // Trigger onChange when max or min change
+      // https://github.com/ant-design/ant-design/issues/11574
+      const nextValue = 'value' in props ? props.value : this.sValue
+      if (nextValue > val) {
+        this.__emit('change', val)
+      }
+    },
+    min (val) {
+      const props = getOptionProps(this)
+      const nextValue = 'value' in props ? props.value : this.sValue
+      if (nextValue < val) {
+        this.__emit('change', val)
+      }
+    },
   },
   methods: {
     updatedFunc () {
@@ -158,7 +175,7 @@ export default {
 
           if (
           // If not match full str, try to match part of str
-            !this.partRestoreByAfter(this.cursorAfter)
+            !this.partRestoreByAfter(this.cursorAfter) && this.sValue !== this.value
           ) {
           // If not match any of then, let's just keep the position
           // TODO: Logic should not reach here, need check if happens
@@ -275,8 +292,14 @@ export default {
     },
     getValueFromEvent (e) {
       // optimize for chinese input expierence
-      // https://github.com/ant-design/ant-design/issues/8196
-      return e.target.value.trim().replace(/。/g, '.')
+    // https://github.com/ant-design/ant-design/issues/8196
+      let value = e.target.value.trim().replace(/。/g, '.')
+
+      if (this.decimalSeparator !== undefined) {
+        value = value.replace(this.decimalSeparator, '.')
+      }
+
+      return value
     },
     getValidValue (value, min = this.min, max = this.max) {
       let val = parseFloat(value, 10)
@@ -622,7 +645,12 @@ export default {
         mouseleave: this.stop,
       }
     }
-    const inputDisplayValueFormat = this.formatWrapper(inputDisplayValue)
+    let inputDisplayValueFormat = this.formatWrapper(inputDisplayValue)
+    if (this.decimalSeparator !== undefined) {
+      inputDisplayValueFormat = inputDisplayValueFormat
+        .toString()
+        .replace('.', this.decimalSeparator)
+    }
     const isUpDisabled = !!upDisabledClass || disabled || readOnly
     const isDownDisabled = !!downDisabledClass || disabled || readOnly
     const { mouseenter = noop, mouseleave = noop, mouseover = noop, mouseout = noop } = this.$listeners

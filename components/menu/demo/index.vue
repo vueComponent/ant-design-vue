@@ -1,6 +1,7 @@
 <script>
 import Horizontal from './horizontal'
 import InlineCollapsed from './inline-collapsed'
+import Inline from './inline'
 import SiderCurrent from './sider-current'
 import SwitchMode from './switch-mode'
 import Theme from './theme'
@@ -32,6 +33,7 @@ export default {
         <md cn={md.cn} us={md.us}/>
         <Horizontal />
         <InlineCollapsed />
+        <Inline />
         <SiderCurrent />
         <SwitchMode />
         <Theme />

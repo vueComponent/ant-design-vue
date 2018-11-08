@@ -70,6 +70,14 @@ export default {
   },
 
   mixins: [BaseMixin],
+  provide () {
+    return {
+      vcTriggerContext: this,
+    }
+  },
+  inject: {
+    vcTriggerContext: { default: {}},
+  },
   data () {
     const props = this.$props
     let popupVisible
@@ -122,6 +130,7 @@ export default {
   beforeDestroy () {
     this.clearDelayTimer()
     this.clearOutsideHandler()
+    clearTimeout(this.mouseDownTimeout)
   },
   methods: {
     updatedCal () {
@@ -260,6 +269,19 @@ export default {
         this.setPopupVisible(!this.$data.sPopupVisible, event)
       }
     },
+    onPopupMouseDown  (...args) {
+      const { vcTriggerContext = {}} = this
+      this.hasPopupMouseDown = true
+
+      clearTimeout(this.mouseDownTimeout)
+      this.mouseDownTimeout = setTimeout(() => {
+        this.hasPopupMouseDown = false
+      }, 0)
+
+      if (vcTriggerContext.onPopupMouseDown) {
+        vcTriggerContext.onPopupMouseDown(...args)
+      }
+    },
 
     onDocumentClick (event) {
       if (this.$props.mask && !this.$props.maskClosable) {
@@ -267,8 +289,7 @@ export default {
       }
       const target = event.target
       const root = this.$el
-      const popupNode = this.getPopupDomNode()
-      if (!contains(root, target) && !contains(popupNode, target)) {
+      if (!contains(root, target) && !this.hasPopupMouseDown) {
         this.close()
       }
     },
@@ -318,6 +339,8 @@ export default {
       if (this.isMouseLeaveToHide()) {
         mouseProps.mouseleave = self.onPopupMouseleave
       }
+      mouseProps.mousedown = this.onPopupMouseDown
+      mouseProps.touchstart = this.onPopupMouseDown
       const {
         handleGetPopupClassFromAlign, getRootDomNode,
         getContainer, $listeners } = self

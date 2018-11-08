@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'FontAwesome';
-  src: url('https://cdn.bootcss.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0');
-  src: url('https://cdn.bootcss.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('https://cdn.bootcss.com/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('https://cdn.bootcss.com/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('https://cdn.bootcss.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot');
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf') format('truetype'), url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -92,6 +92,10 @@
   &-submenu {
     &-popup {
       position: absolute;
+
+      .submenu-title-wrapper {
+        padding-right: 20px;
+      }
     }
     > .@{menuPrefixCls} {
       background-color: #fff;
@@ -110,17 +114,19 @@
   &-horizontal {
     background-color: #F3F5F7;
     border: none;
-    border-bottom: 1px solid transparent;
     border-bottom: 1px solid #d9d9d9;
     box-shadow: none;
+    white-space: nowrap;
+    overflow: hidden;
 
     & > .@{menuPrefixCls}-item, & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
       padding: 15px 20px;
     }
 
     & > .@{menuPrefixCls}-submenu, & > .@{menuPrefixCls}-item {
-      float: left;
       border-bottom: 2px solid transparent;
+      display: inline-block;
+      vertical-align: bottom;
 
       &-active {
         border-bottom: 2px solid #2db7f5;

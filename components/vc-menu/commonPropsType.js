@@ -23,4 +23,8 @@ export default {
   forceSubMenuRender: PropTypes.bool,
   selectable: PropTypes.bool,
   isRootMenu: PropTypes.bool.def(true),
+  builtinPlacements: PropTypes.object.def({}),
+  itemIcon: PropTypes.any,
+  expandIcon: PropTypes.any,
+  overflowedIndicator: PropTypes.any,
 }

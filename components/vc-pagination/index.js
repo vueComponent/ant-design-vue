@@ -1,2 +1,2 @@
-// based on rc-pagination 1.16.5
+// based on rc-pagination 1.17.3
 export { default } from './Pagination'

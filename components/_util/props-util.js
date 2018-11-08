@@ -88,19 +88,19 @@ const getOptionProps = (instance) => {
   return filterProps($props, $options.propsData)
 }
 
-const getComponentFromProp = (instance, prop) => {
+const getComponentFromProp = (instance, prop, options) => {
   if (instance.$createElement) {
     const h = instance.$createElement
     const temp = instance[prop]
     if (temp !== undefined) {
-      return typeof temp === 'function' ? temp(h) : temp
+      return typeof temp === 'function' ? temp(h, options) : temp
     }
-    return instance.$slots[prop]
+    return instance.$slots[prop] || (instance.$scopedSlots[prop] && instance.$scopedSlots[prop](options)) || undefined
   } else {
     const h = instance.context.$createElement
     const temp = getPropsData(instance)[prop]
     if (temp !== undefined) {
-      return typeof temp === 'function' ? temp(h) : temp
+      return typeof temp === 'function' ? temp(h, options) : temp
     }
     const slotsProp = []
     const componentOptions = instance.componentOptions || {};

@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types'
 import { Provider, create } from '../_util/store'
 import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu'
 import BaseMixin from '../_util/BaseMixin'
-import hasProp, { getOptionProps } from '../_util/props-util'
+import hasProp, { getOptionProps, getComponentFromProp, filterEmpty } from '../_util/props-util'
 import commonPropsType from './commonPropsType'
 
 const Menu = {
@@ -33,47 +33,13 @@ const Menu = {
     // this.isRootMenu = true // 声明在props上
     return {}
   },
-  watch: {
-    selectedKeys (val) {
-      this.store.setState({
-        selectedKeys: val || [],
-      })
-    },
-    openKeys (val) {
-      this.store.setState({
-        openKeys: val || [],
-      })
-    },
-    // '$props': {
-    //   handler: function (nextProps) {
-    //     if (hasProp(this, 'selectedKeys')) {
-    //       this.setState({
-    //         sSelectedKeys: nextProps.selectedKeys || [],
-    //       })
-    //     }
-    //     if (hasProp(this, 'openKeys')) {
-    //       this.setState({
-    //         sOpenKeys: nextProps.openKeys || [],
-    //       })
-    //     }
-    //   },
-    //   deep: true,
-    // },
+  mounted () {
+    this.updateMiniStore()
+  },
+  updated () {
+    this.updateMiniStore()
   },
   methods: {
-    // onDestroy (key) {
-    //   const state = this.$data
-    //   const sSelectedKeys = state.sSelectedKeys
-    //   const sOpenKeys = state.sOpenKeys
-    //   let index = sSelectedKeys.indexOf(key)
-    //   if (!hasProp(this, 'selectedKeys') && index !== -1) {
-    //     sSelectedKeys.splice(index, 1)
-    //   }
-    //   index = sOpenKeys.indexOf(key)
-    //   if (!hasProp(this, 'openKeys') && index !== -1) {
-    //     sOpenKeys.splice(index, 1)
-    //   }
-    // },
 
     onSelect (selectInfo) {
       const props = this.$props
@@ -170,35 +136,19 @@ const Menu = {
       }
       return transitionName
     },
-
-  //   isInlineMode () {
-  //     return this.$props.mode === 'inline'
-  //   },
-
-  //   lastOpenSubMenu () {
-  //     let lastOpen = []
-  //     const { sOpenKeys } = this.$data
-  //     if (sOpenKeys.length) {
-  //       lastOpen = this.getFlatInstanceArray().filter((c) => {
-  //         return c && sOpenKeys.indexOf(c.eventKey) !== -1
-  //       })
-  //     }
-  //     return lastOpen[0]
-  //   },
-
-  //   renderMenuItem (c, i, subIndex) {
-  //     if (!c) {
-  //       return null
-  //     }
-  //     const state = this.$data
-  //     const extraProps = {
-  //       openKeys: state.sOpenKeys,
-  //       selectedKeys: state.sSelectedKeys,
-  //       triggerSubMenuAction: this.$props.triggerSubMenuAction,
-  //       isRootMenu: this.isRootMenu,
-  //     }
-  //     return this.renderCommonMenuItem(c, i, subIndex, extraProps)
-  //   },
+    updateMiniStore () {
+      const props = getOptionProps(this)
+      if ('selectedKeys' in props) {
+        this.store.setState({
+          selectedKeys: props.selectedKeys || [],
+        })
+      }
+      if ('openKeys' in props) {
+        this.store.setState({
+          openKeys: props.openKeys || [],
+        })
+      }
+    },
   },
 
   render () {
@@ -206,10 +156,12 @@ const Menu = {
     const subPopupMenuProps = {
       props: {
         ...props,
+        itemIcon: getComponentFromProp(this, 'itemIcon', props),
+        expandIcon: getComponentFromProp(this, 'expandIcon', props),
+        overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator', props),
         openTransitionName: this.getOpenTransitionName(),
         parentMenu: this,
-        children: this.$slots.default || [],
-        __propsSymbol__: Symbol(),
+        children: filterEmpty(this.$slots.default || []),
       },
       class: `${props.prefixCls}-root`,
       on: {

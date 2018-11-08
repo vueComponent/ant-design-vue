@@ -13,9 +13,9 @@ describe('Menu', () => {
     // jest.useFakeTimers()
   })
 
-  // afterEach(() => {
-  //   jest.useRealTimers()
-  // })
+  afterEach(() => {
+    // jest.useRealTimers()
+  })
   it('If has select nested submenu item ,the menu items on the grandfather level should be highlight', async () => {
     const wrapper = mount({
       render () {
@@ -123,12 +123,12 @@ describe('Menu', () => {
     wrapper.setProps({ openKeys: [] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-    })
+    }, 0)
 
     wrapper.setProps({ openKeys: ['1'] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-    })
+    }, 0)
   })
 
   it('inline', async () => {
@@ -159,11 +159,11 @@ describe('Menu', () => {
     wrapper.setProps({ openKeys: [] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].style.display).toBe('none')
-    })
+    }, 0)
     wrapper.setProps({ openKeys: ['1'] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
-    })
+    }, 0)
   })
 
   it('vertical', async () => {
@@ -194,11 +194,11 @@ describe('Menu', () => {
     wrapper.setProps({ openKeys: [] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-    })
+    }, 0)
     wrapper.setProps({ openKeys: ['1'] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-    })
+    }, 0)
   })
 
   // https://github.com/ant-design/ant-design/pulls/4677
@@ -375,15 +375,15 @@ describe('Menu', () => {
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0)
         toggleMenu(wrapper, 0, 'click')
-      })
+      }, 0)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(1)
         expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
         toggleMenu(wrapper, 0, 'click')
-      })
+      }, 500)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub')[0].style.display).toBe('none')
-      })
+      }, 500)
     })
 
     it('vertical', async () => {
@@ -403,7 +403,7 @@ describe('Menu', () => {
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0)
         toggleMenu(wrapper, 0, 'mouseenter')
-      })
+      }, 0)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(1)
         expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
@@ -430,12 +430,12 @@ describe('Menu', () => {
       }, { attachToDocument: true, sync: false })
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0)
-        toggleMenu(wrapper, 0, 'mouseenter')
-      })
+        toggleMenu(wrapper, 1, 'mouseenter')
+      }, 0)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(1)
         expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-        toggleMenu(wrapper, 0, 'mouseleave')
+        toggleMenu(wrapper, 1, 'mouseleave')
       }, 500)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')

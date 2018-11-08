@@ -43,7 +43,7 @@ exports[`Table.filter renders menu correctly 1`] = `
 <div>
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <div class="ant-table-filter-dropdown ant-dropdown-content">
-      <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root" role="menu" tabindex="0">
+      <ul role="menu" tabindex="0" class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root">
         <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span>Boy</span></li>
         <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span>Girl</span></li>
         <li role="menuitem" class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">
@@ -60,7 +60,7 @@ exports[`Table.filter renders radio filter correctly 1`] = `
 <div>
   <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
     <div class="ant-table-filter-dropdown ant-dropdown-content">
-      <ul class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root" role="menu" tabindex="0">
+      <ul role="menu" tabindex="0" class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root">
         <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span></label><span>Boy</span></li>
         <li role="menuitem" class="ant-dropdown-menu-item"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span></label><span>Girl</span></li>
         <li role="menuitem" class="ant-dropdown-menu-submenu ant-dropdown-menu-submenu-vertical">

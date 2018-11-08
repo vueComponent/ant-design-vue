@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-import Trigger from '../trigger'
+import Trigger from '../vc-trigger'
 import { placements } from './placements'
 import Content from './Content'
 import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util'

@@ -1,4 +1,4 @@
-// base rc-steps 3.1.1
+// base rc-steps 3.3.0
 import Steps from './Steps'
 import Step from './Step'
 

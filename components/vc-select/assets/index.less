@@ -14,12 +14,6 @@
   color: #666;
   line-height: 28px;
 
-  &-allow-clear {
-    .@{selectPrefixCls}-selection--single .@{selectPrefixCls}-selection__rendered {
-      padding-right: 40px;
-    }
-  }
-
   ul, li {
     margin: 0;
     padding: 0;
@@ -39,8 +33,10 @@
     right: 1px;
     width: 20px;
     outline: none;
-    b {
-      border-color: #999999 transparent transparent transparent;
+  }
+
+  &-arrow &-arrow-icon {
+    border-color: #999999 transparent transparent transparent;
       border-style: solid;
       border-width: 5px 4px 0 4px;
       height: 0;
@@ -50,7 +46,6 @@
       position: absolute;
       top: 50%;
       left: 50%;
-    }
   }
 
   &-selection {
@@ -75,9 +70,8 @@
       font-weight: bold;
       position: absolute;
       line-height: 28px;
-
-      &:after {
-        content: '×'
+      &-icon {
+        font-style: normal;
       }
     }
   }
@@ -118,7 +112,6 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       margin-left: 10px;
-      padding-right: 20px;
       line-height: 28px;
     }
 
@@ -318,8 +311,9 @@
       top: 0;
       right: 2px;
       transition: opacity .3s, transform .3s;
-      &:before {
-        content: '×'
+
+      &-icon {
+        font-style: normal;
       }
 
       &:hover {

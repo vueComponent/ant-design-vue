@@ -5,7 +5,7 @@ import scrollIntoView from 'dom-scroll-into-view'
 import { getSelectKeys, preventDefaultEvent } from './util'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
-import { getSlotOptions } from '../_util/props-util'
+import { getSlotOptions, getComponentFromProp } from '../_util/props-util'
 
 export default {
   name: 'DropdownMenu',
@@ -24,6 +24,8 @@ export default {
     inputValue: PropTypes.string,
     visible: PropTypes.bool,
     backfillValue: PropTypes.any,
+    firstActiveValue: PropTypes.string,
+    menuItemSelectedIcon: PropTypes.any,
   },
 
   beforeMount () {
@@ -54,32 +56,37 @@ export default {
     this.lastInputValue = props.inputValue
     this.prevVisible = this.visible
   },
+  beforeDestroy () {
+    if (this.rafInstance && this.rafInstance.cancel) {
+      this.rafInstance.cancel()
+    }
+  },
   methods: {
     scrollActiveItemToView () {
     // scroll into view
       const itemComponent = this.firstActiveItem && this.firstActiveItem.$el
       const props = this.$props
-
-      if (itemComponent) {
-        const scrollIntoViewOpts = {
-          onlyScrollIfNeeded: true,
-        }
-        if (
-          (!props.value || props.value.length === 0) &&
-        props.firstActiveValue
-        ) {
-          scrollIntoViewOpts.alignWithTop = true
-        }
-        // Delay to scroll since current frame item position is not ready when pre view is by filter
-        // https://github.com/ant-design/ant-design/issues/11268#issuecomment-406634462
-        raf(() => {
-          scrollIntoView(
-            itemComponent,
-            this.$refs.menuRef.$el,
-            scrollIntoViewOpts
-          )
-        })
+      const { value, visible, firstActiveValue } = props
+      if (!itemComponent || !visible) {
+        return
       }
+      const scrollIntoViewOpts = {
+        onlyScrollIfNeeded: true,
+      }
+      if (
+        (!value || value.length === 0) && firstActiveValue
+      ) {
+        scrollIntoViewOpts.alignWithTop = true
+      }
+      // Delay to scroll since current frame item position is not ready when pre view is by filter
+      // https://github.com/ant-design/ant-design/issues/11268#issuecomment-406634462
+      this.rafInstance = raf(() => {
+        scrollIntoView(
+          itemComponent,
+          this.$refs.menuRef.$el,
+          scrollIntoViewOpts
+        )
+      })
     },
 
     renderMenu () {
@@ -95,6 +102,7 @@ export default {
         dropdownMenuStyle,
         backfillValue,
       } = props
+      const menuItemSelectedIcon = getComponentFromProp(this, 'menuItemSelectedIcon')
       const { menuDeselect, menuSelect, popupScroll } = this.$listeners
       if (menuItems && menuItems.length) {
         const selectedKeys = getSelectKeys(menuItems, value)
@@ -102,6 +110,7 @@ export default {
           props: {
             multiple,
             defaultActiveFirst: defaultActiveFirstOption,
+            itemIcon: multiple ? menuItemSelectedIcon : null,
             selectedKeys,
             prefixCls: `${prefixCls}-menu`,
           },
@@ -185,7 +194,10 @@ export default {
     const { popupFocus, popupScroll } = this.$listeners
     return renderMenu ? (
       <div
-        style={{ overflow: 'auto' }}
+        style={{
+          overflow: 'auto',
+          transform: 'translateZ(0)',
+        }}
         onFocus={popupFocus}
         onMousedown={preventDefaultEvent}
         onScroll={popupScroll}

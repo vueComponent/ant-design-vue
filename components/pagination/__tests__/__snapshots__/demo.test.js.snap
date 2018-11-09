@@ -30,7 +30,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><i class="ant-select-arrow-icon"></i></span>
         </div>
       </div>
     </li>
@@ -51,7 +51,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="20 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">20 / page</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><i class="ant-select-arrow-icon"></i></span>
         </div>
       </div>
     </li>
@@ -88,7 +88,7 @@ exports[`renders ./components/pagination/demo/custom-changer.md correctly 1`] = 
           <div class="ant-select-selection-selected-value" style="display: block; opacity: 1;"><span>10条/页</span>
             <!---->
           </div>
-        </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+        </div><span unselectable="unselectable" class="ant-select-arrow"><i class="ant-select-arrow-icon"></i></span>
       </div>
     </div>
   </li>
@@ -152,7 +152,7 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
-          </div><span unselectable="unselectable" class="ant-select-arrow"><b></b></span>
+          </div><span unselectable="unselectable" class="ant-select-arrow"><i class="ant-select-arrow-icon"></i></span>
         </div>
       </div>
       <div class="ant-pagination-options-quick-jumper">Goto<input type="text"></div>

@@ -24,7 +24,12 @@ export default {
       PropTypes.bool,
       PropTypes.func,
     ]),
+    initial: PropTypes.number.def(0),
     current: PropTypes.number.def(0),
+    icons: PropTypes.shape({
+      finish: PropTypes.any,
+      error: PropTypes.any,
+    }).loose,
   },
   data () {
     this.calcStepOffsetWidth = debounce(this.calcStepOffsetWidth, 150)
@@ -83,7 +88,8 @@ export default {
   render () {
     const {
       prefixCls, direction,
-      labelPlacement, iconPrefix, status, size, current, $scopedSlots,
+      labelPlacement, iconPrefix, status, size, current, $scopedSlots, initial,
+      icons,
     } = this
     let progressDot = this.progressDot
     if (progressDot === undefined) {
@@ -110,12 +116,14 @@ export default {
         {
           filteredChildren.map((child, index) => {
             const childProps = getPropsData(child)
+            const stepNumber = initial + index;
             const stepProps = {
               props: {
-                stepNumber: `${index + 1}`,
+                stepNumber: `${stepNumber + 1}`,
                 prefixCls,
                 iconPrefix,
                 progressDot: this.progressDot,
+                icons,
                 ...childProps,
               },
               on: getEvents(child),
@@ -130,9 +138,9 @@ export default {
               stepProps.class = `${prefixCls}-next-error`
             }
             if (!childProps.status) {
-              if (index === current) {
+              if (stepNumber === current) {
                 stepProps.props.status = status
-              } else if (index < current) {
+              } else if (stepNumber < current) {
                 stepProps.props.status = 'finish'
               } else {
                 stepProps.props.status = 'wait'

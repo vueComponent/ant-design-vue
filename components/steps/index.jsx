@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util'
 import VcSteps from '../vc-steps'
 
 const getStepsProps = (defaultProps = {}) => {
@@ -30,7 +30,13 @@ const Steps = {
   render () {
     const props = getOptionProps(this)
     const stepsProps = {
-      props,
+      props: {
+        ...props,
+        icons: props.icons || {
+          error: getComponentFromProp(this, 'icons.error'),
+          finish: getComponentFromProp(this, 'icons.finish'),
+        },
+      },
       on: this.$listeners,
       scopedSlots: this.$scopedSlots,
     }

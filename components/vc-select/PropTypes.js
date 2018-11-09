@@ -17,6 +17,8 @@ export const SelectPropTypes = {
   optionFilterProp: PropTypes.string,
   animation: PropTypes.string,
   choiceTransitionName: PropTypes.string,
+  open: PropTypes.bool,
+  defaultOpen: PropTypes.bool,
   // onChange: PropTypes.func,
   // onBlur: PropTypes.func,
   // onFocus: PropTypes.func,
@@ -41,4 +43,8 @@ export const SelectPropTypes = {
   showAction: PropTypes.arrayOf(PropTypes.string),
   autoFocus: PropTypes.bool,
   getPopupContainer: PropTypes.func,
+  clearIcon: PropTypes.any,
+  inputIcon: PropTypes.any,
+  removeIcon: PropTypes.any,
+  menuItemSelectedIcon: PropTypes.any,
 }

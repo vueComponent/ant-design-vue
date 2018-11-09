@@ -1,4 +1,4 @@
-// based on vc-select 7.7.5
+// based on vc-select 8.4.4
 import ProxySelect, { Select } from './Select'
 import Option from './Option'
 import { SelectPropTypes } from './PropTypes'

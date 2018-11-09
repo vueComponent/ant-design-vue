@@ -5,11 +5,11 @@ exports[`Table.pagination renders pagination correctly 1`] = `
   </tr>
   </thead>
   <tbody class="ant-table-tbody">
-    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+    <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
         <!---->Jack</td>
     </tr>
-    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+    <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
         <!---->Lucy</td>
     </tr>

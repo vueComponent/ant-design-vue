@@ -25,6 +25,7 @@ const ExpandableRow = {
     expandIconColumnIndex: PropTypes.number,
     childrenColumnName: PropTypes.string,
     expandedRowRender: PropTypes.func,
+    expandIcon: PropTypes.func,
     // onExpandedChange: PropTypes.func.isRequired,
     // onRowClick: PropTypes.func,
     // children: PropTypes.func.isRequired,
@@ -60,8 +61,17 @@ const ExpandableRow = {
     },
 
     renderExpandIcon () {
-      const { prefixCls, expanded, record, needIndentSpaced } = this
-
+      const { prefixCls, expanded, record, needIndentSpaced, expandIcon } = this
+      if (expandIcon) {
+        return expandIcon({
+          prefixCls,
+          expanded,
+          record,
+          needIndentSpaced,
+          expandable: this.expandable,
+          onExpand: this.handleExpandChange,
+        })
+      }
       return (
         <ExpandIcon
           expandable={this.expandable}
@@ -99,6 +109,7 @@ const ExpandableRow = {
       record,
       fixed,
       $scopedSlots,
+      expanded,
     } = this
 
     this.tempExpandIconAsCell = fixed !== 'right' ? this.expandIconAsCell : false
@@ -108,6 +119,7 @@ const ExpandableRow = {
     const expandableRowProps = {
       props: {
         indentSize,
+        expanded, // not used in TableRow, but it's required to re-render TableRow when `expanded` changes
         hasExpandIcon: this.hasExpandIcon,
         renderExpandIcon: this.renderExpandIcon,
         renderExpandIconCell: this.renderExpandIconCell,

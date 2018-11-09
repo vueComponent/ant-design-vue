@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import PropTypes from '../../_util/vue-types'
 import { connect } from '../../_util/store'
 import { mergeProps } from '../../_util/props-util'
@@ -12,10 +13,11 @@ const TableHeaderRow = {
     components: PropTypes.object,
     height: PropTypes.any,
     customHeaderRow: PropTypes.func,
+    prefixCls: PropTypes.prefixCls,
   },
   name: 'TableHeaderRow',
   render (h) {
-    const { row, index, height, components, customHeaderRow } = this
+    const { row, index, height, components, customHeaderRow, prefixCls } = this
     const HeaderRow = components.header.row
     const HeaderCell = components.header.cell
     const rowProps = customHeaderRow(row.map(cell => cell.column), index)
@@ -43,6 +45,9 @@ const TableHeaderRow = {
 
           if (column.align) {
             headerCellProps.style = { ...customProps.style, textAlign: column.align }
+            headerCellProps.class = classNames(customProps.cls, column.class, column.className, {
+              [`${prefixCls}-align-${column.align}`]: !!column.align,
+            })
           }
 
           if (typeof HeaderCell === 'function') {

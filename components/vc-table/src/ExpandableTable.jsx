@@ -14,6 +14,7 @@ export const ExpandableTableProps = () => ({
   defaultExpandedRowKeys: PropTypes.array,
   expandIconColumnIndex: PropTypes.number,
   expandedRowRender: PropTypes.func,
+  expandIcon: PropTypes.func,
   childrenColumnName: PropTypes.string,
   indentSize: PropTypes.number,
   // onExpand: PropTypes.func,

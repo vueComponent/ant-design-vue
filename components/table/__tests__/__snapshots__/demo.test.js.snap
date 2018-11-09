@@ -62,7 +62,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">John Brown</a></td>
                   <td>32</td>
@@ -71,7 +71,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td><span><a href="javascript:;">Invite 一 John Brown</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Jim Green</a></td>
                   <td>42</td>
@@ -80,7 +80,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td><span><a href="javascript:;">Invite 一 Jim Green</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
       More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Joe Black</a></td>
                   <td>32</td>
@@ -130,19 +130,19 @@ exports[`renders ./components/table/demo/bordered.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">John Brown</a></td>
                   <td class="column-money">￥300,000.00</td>
                   <td>New York No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Jim Green</a></td>
                   <td class="column-money">￥1,256,000.00</td>
                   <td>London No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Joe Black</a></td>
                   <td class="column-money">￥120,000.00</td>
@@ -192,7 +192,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">John Brown</a></td>
                   <td>32</td>
@@ -200,7 +200,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                   <td>18889898989</td>
                   <td>New York No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Jim Green</a></td>
                   <td>42</td>
@@ -208,7 +208,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                   <td>18889898888</td>
                   <td>London No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Joe Black</a></td>
                   <td>32</td>
@@ -216,7 +216,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                   <td>18900010002</td>
                   <td>Sidney No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Jim Red</a></td>
                   <td>18</td>
@@ -224,7 +224,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.md correctly 1`] = `
                   <td>18900010002</td>
                   <td>London No. 2 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                   <td colspan="5"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Jake White</a></td>
                   <!---->
@@ -270,25 +270,25 @@ exports[`renders ./components/table/demo/custom-filter-panel.md correctly 1`] = 
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td>32</td>
                   <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Joe Black</td>
                   <td>42</td>
                   <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Jim Green</td>
                   <td>32</td>
                   <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                   <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Jim Red</td>
                   <td>32</td>
@@ -335,7 +335,7 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
                   </tr>
                 </thead>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->
                       <div class="editable-cell">
@@ -348,7 +348,7 @@ exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
                     <td>London, Park Lane no. 0</td>
                     <td><a href="javascript:;" class="">Delete</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->
                       <div class="editable-cell">
@@ -402,7 +402,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 0</div>
@@ -417,7 +417,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 1</div>
@@ -432,7 +432,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 2</div>
@@ -447,7 +447,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 3</div>
@@ -462,7 +462,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 4</div>
@@ -477,7 +477,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 5</div>
@@ -492,7 +492,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 6</div>
@@ -507,7 +507,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 7</div>
@@ -522,7 +522,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 8</div>
@@ -537,7 +537,7 @@ exports[`renders ./components/table/demo/edit-row.md correctly 1`] = `
                     <div class="editable-row-operations"><span><a>Edit</a></span></div>
                   </td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->
                     <div>Edrward 9</div>
@@ -600,7 +600,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td class="ant-table-row-expand-icon-cell"><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span></td>
                   <td>John Brown</td>
                   <td>32</td>
@@ -608,7 +608,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td><a href="javascript:;">Delete</a></td>
                 </tr>
                 <!---->
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td class="ant-table-row-expand-icon-cell"><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span></td>
                   <td>Jim Green</td>
                   <td>42</td>
@@ -616,7 +616,7 @@ exports[`renders ./components/table/demo/expand.md correctly 1`] = `
                   <td><a href="javascript:;">Delete</a></td>
                 </tr>
                 <!---->
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td class="ant-table-row-expand-icon-cell"><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span></td>
                   <td>Joe Black</td>
                   <td>32</td>
@@ -665,7 +665,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
           </tr>
           </thead>
           <tbody class="ant-table-tbody">
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
               <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span>John Brown sr.</td>
               <td>60</td>
@@ -678,7 +678,7 @@ exports[`renders ./components/table/demo/expand-children.md correctly 1`] = `
             <!---->
             <!---->
             <!---->
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
               <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span><span class="ant-table-row-expand-icon ant-table-row-spaced"></span>Joe Black</td>
               <td>32</td>
@@ -739,7 +739,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                   </tr>
                 </thead>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -753,7 +753,7 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     <td>New York Park</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Jim Green</td>
                     <td class="ant-table-fixed-columns-in-body">40</td>
@@ -787,12 +787,12 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     </tr>
                   </thead>
                   <tbody class="ant-table-tbody">
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->John Brown</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Jim Green</td>
                       <td>40</td>
@@ -816,10 +816,10 @@ exports[`renders ./components/table/demo/fixed-columns.md correctly 1`] = `
                     </tr>
                   </thead>
                   <tbody class="ant-table-tbody">
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
                   </tbody>
@@ -895,7 +895,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                   <col style="width: 100px; min-width: 100px;">
                 </colgroup>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 0</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -909,7 +909,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 0</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 1</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -923,7 +923,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 1</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 2</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -937,7 +937,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 2</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 3</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -951,7 +951,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 3</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 4</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -965,7 +965,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 4</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 5</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -979,7 +979,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 5</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 6</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -993,7 +993,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 6</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 7</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -1007,7 +1007,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 7</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 8</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -1021,7 +1021,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <td>London Park no. 8</td>
                     <td class="ant-table-fixed-columns-in-body"><a href="javascript:;">action</a></td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                     <td class="ant-table-fixed-columns-in-body"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edrward 9</td>
                     <td class="ant-table-fixed-columns-in-body">32</td>
@@ -1062,52 +1062,52 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <col style="width: 100px; min-width: 100px;">
                   </colgroup>
                   <tbody class="ant-table-tbody">
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 0</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 1</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 2</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 3</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 4</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 5</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 6</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 7</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 8</td>
                       <td>32</td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                       <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                         <!---->Edrward 9</td>
                       <td>32</td>
@@ -1137,34 +1137,34 @@ exports[`renders ./components/table/demo/fixed-columns-header.md correctly 1`] =
                     <col style="width: 100px; min-width: 100px;">
                   </colgroup>
                   <tbody class="ant-table-tbody">
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
-                    <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                    <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                       <td><a href="javascript:;">action</a></td>
                     </tr>
                   </tbody>
@@ -1222,301 +1222,301 @@ exports[`renders ./components/table/demo/fixed-header.md correctly 1`] = `
                   <col>
                 </colgroup>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 0</td>
                     <td>32</td>
                     <td>London, Park Lane no. 0</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 1</td>
                     <td>32</td>
                     <td>London, Park Lane no. 1</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 2</td>
                     <td>32</td>
                     <td>London, Park Lane no. 2</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 3</td>
                     <td>32</td>
                     <td>London, Park Lane no. 3</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 4</td>
                     <td>32</td>
                     <td>London, Park Lane no. 4</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 5</td>
                     <td>32</td>
                     <td>London, Park Lane no. 5</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 6</td>
                     <td>32</td>
                     <td>London, Park Lane no. 6</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 7</td>
                     <td>32</td>
                     <td>London, Park Lane no. 7</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 8</td>
                     <td>32</td>
                     <td>London, Park Lane no. 8</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 9</td>
                     <td>32</td>
                     <td>London, Park Lane no. 9</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="10">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="10">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 10</td>
                     <td>32</td>
                     <td>London, Park Lane no. 10</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="11">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="11">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 11</td>
                     <td>32</td>
                     <td>London, Park Lane no. 11</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="12">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="12">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 12</td>
                     <td>32</td>
                     <td>London, Park Lane no. 12</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="13">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="13">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 13</td>
                     <td>32</td>
                     <td>London, Park Lane no. 13</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="14">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="14">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 14</td>
                     <td>32</td>
                     <td>London, Park Lane no. 14</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="15">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="15">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 15</td>
                     <td>32</td>
                     <td>London, Park Lane no. 15</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="16">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="16">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 16</td>
                     <td>32</td>
                     <td>London, Park Lane no. 16</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="17">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="17">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 17</td>
                     <td>32</td>
                     <td>London, Park Lane no. 17</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="18">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="18">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 18</td>
                     <td>32</td>
                     <td>London, Park Lane no. 18</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="19">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="19">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 19</td>
                     <td>32</td>
                     <td>London, Park Lane no. 19</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="20">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="20">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 20</td>
                     <td>32</td>
                     <td>London, Park Lane no. 20</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="21">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="21">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 21</td>
                     <td>32</td>
                     <td>London, Park Lane no. 21</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="22">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="22">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 22</td>
                     <td>32</td>
                     <td>London, Park Lane no. 22</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="23">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="23">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 23</td>
                     <td>32</td>
                     <td>London, Park Lane no. 23</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="24">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="24">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 24</td>
                     <td>32</td>
                     <td>London, Park Lane no. 24</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="25">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="25">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 25</td>
                     <td>32</td>
                     <td>London, Park Lane no. 25</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="26">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="26">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 26</td>
                     <td>32</td>
                     <td>London, Park Lane no. 26</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="27">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="27">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 27</td>
                     <td>32</td>
                     <td>London, Park Lane no. 27</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="28">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="28">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 28</td>
                     <td>32</td>
                     <td>London, Park Lane no. 28</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="29">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="29">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 29</td>
                     <td>32</td>
                     <td>London, Park Lane no. 29</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="30">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="30">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 30</td>
                     <td>32</td>
                     <td>London, Park Lane no. 30</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="31">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="31">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 31</td>
                     <td>32</td>
                     <td>London, Park Lane no. 31</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="32">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="32">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 32</td>
                     <td>32</td>
                     <td>London, Park Lane no. 32</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="33">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="33">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 33</td>
                     <td>32</td>
                     <td>London, Park Lane no. 33</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="34">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="34">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 34</td>
                     <td>32</td>
                     <td>London, Park Lane no. 34</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="35">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="35">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 35</td>
                     <td>32</td>
                     <td>London, Park Lane no. 35</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="36">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="36">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 36</td>
                     <td>32</td>
                     <td>London, Park Lane no. 36</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="37">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="37">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 37</td>
                     <td>32</td>
                     <td>London, Park Lane no. 37</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="38">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="38">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 38</td>
                     <td>32</td>
                     <td>London, Park Lane no. 38</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="39">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="39">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 39</td>
                     <td>32</td>
                     <td>London, Park Lane no. 39</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="40">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="40">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 40</td>
                     <td>32</td>
                     <td>London, Park Lane no. 40</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="41">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="41">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 41</td>
                     <td>32</td>
                     <td>London, Park Lane no. 41</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="42">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="42">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 42</td>
                     <td>32</td>
                     <td>London, Park Lane no. 42</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="43">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="43">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 43</td>
                     <td>32</td>
                     <td>London, Park Lane no. 43</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="44">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="44">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 44</td>
                     <td>32</td>
                     <td>London, Park Lane no. 44</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="45">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="45">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 45</td>
                     <td>32</td>
                     <td>London, Park Lane no. 45</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="46">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="46">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 46</td>
                     <td>32</td>
                     <td>London, Park Lane no. 46</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="47">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="47">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 47</td>
                     <td>32</td>
                     <td>London, Park Lane no. 47</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="48">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="48">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 48</td>
                     <td>32</td>
                     <td>London, Park Lane no. 48</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="49">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="49">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Edward King 49</td>
                     <td>32</td>
@@ -1597,7 +1597,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                 <col style="width: 80px; min-width: 80px;">
               </colgroup>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">1</td>
@@ -1608,7 +1608,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">2</td>
@@ -1619,7 +1619,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">3</td>
@@ -1630,7 +1630,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">4</td>
@@ -1641,7 +1641,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">5</td>
@@ -1652,7 +1652,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">6</td>
@@ -1663,7 +1663,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">7</td>
@@ -1674,7 +1674,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">8</td>
@@ -1685,7 +1685,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">9</td>
@@ -1696,7 +1696,7 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <td>SoftLake Co</td>
                   <td class="ant-table-fixed-columns-in-body">M</td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                   <td class="ant-table-fixed-columns-in-body ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John Brown</td>
                   <td class="ant-table-column-has-filters">10</td>
@@ -1731,43 +1731,43 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <col style="width: 100px; min-width: 100px;">
                 </colgroup>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                     <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                   </tr>
@@ -1796,34 +1796,34 @@ exports[`renders ./components/table/demo/grouping-columns.md correctly 1`] = `
                   <col style="width: 80px; min-width: 80px;">
                 </colgroup>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                     <td>M</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                     <td>M</td>
                   </tr>
                 </tbody>
@@ -1875,25 +1875,25 @@ exports[`renders ./components/table/demo/head.md correctly 1`] = `
       </tr>
       </thead>
       <tbody class="ant-table-tbody">
-        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+        <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
           <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
             <!---->John Brown</td>
           <td class="ant-table-column-has-filters">32</td>
           <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
         </tr>
-        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+        <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
           <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
             <!---->Jim Green</td>
           <td class="ant-table-column-has-filters">42</td>
           <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
         </tr>
-        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+        <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
           <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
             <!---->Joe Black</td>
           <td class="ant-table-column-has-filters">32</td>
           <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
         </tr>
-        <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+        <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
           <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
             <!---->Jim Red</td>
           <td class="ant-table-column-has-filters">32</td>
@@ -1947,7 +1947,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                   <td class="ant-table-row-expand-icon-cell"><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span></td>
                   <td>Screem</td>
                   <td>iOS</td>
@@ -1958,7 +1958,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td><a href="javascript:;">Publish</a></td>
                 </tr>
                 <!---->
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td class="ant-table-row-expand-icon-cell"><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span></td>
                   <td>Screem</td>
                   <td>iOS</td>
@@ -1969,7 +1969,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
                   <td><a href="javascript:;">Publish</a></td>
                 </tr>
                 <!---->
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td class="ant-table-row-expand-icon-cell"><span class="ant-table-row-expand-icon ant-table-row-collapsed"></span></td>
                   <td>Screem</td>
                   <td>iOS</td>
@@ -2023,25 +2023,25 @@ exports[`renders ./components/table/demo/reset-filter.md correctly 1`] = `
         </tr>
         </thead>
         <tbody class="ant-table-tbody">
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+          <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
             <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
               <!---->John Brown</td>
             <td class="ant-table-column-has-filters">32</td>
             <td class="ant-table-column-has-filters">New York No. 1 Lake Park</td>
           </tr>
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+          <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
             <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
               <!---->Jim Green</td>
             <td class="ant-table-column-has-filters">42</td>
             <td class="ant-table-column-has-filters">London No. 1 Lake Park</td>
           </tr>
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+          <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
             <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
               <!---->Joe Black</td>
             <td class="ant-table-column-has-filters">32</td>
             <td class="ant-table-column-has-filters">Sidney No. 1 Lake Park</td>
           </tr>
-          <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+          <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
             <td class="ant-table-column-has-filters"><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
               <!---->Jim Red</td>
             <td class="ant-table-column-has-filters">32</td>
@@ -2089,28 +2089,28 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
           </tr>
           </thead>
           <tbody class="ant-table-tbody">
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
               <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="John Brown" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!----><a href="javascript:;">John Brown</a></td>
               <td>32</td>
               <td>New York No. 1 Lake Park</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
               <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Jim Green" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!----><a href="javascript:;">Jim Green</a></td>
               <td>42</td>
               <td>London No. 1 Lake Park</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
               <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Joe Black" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!----><a href="javascript:;">Joe Black</a></td>
               <td>32</td>
               <td>Sidney No. 1 Lake Park</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
               <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!----><a href="javascript:;">Disabled User</a></td>
@@ -2160,70 +2160,70 @@ exports[`renders ./components/table/demo/row-selection-and-operation.md correctl
             </tr>
             </thead>
             <tbody class="ant-table-tbody">
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 0</td>
                 <td>32</td>
                 <td>London, Park Lane no. 0</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 1</td>
                 <td>32</td>
                 <td>London, Park Lane no. 1</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 2</td>
                 <td>32</td>
                 <td>London, Park Lane no. 2</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 3</td>
                 <td>32</td>
                 <td>London, Park Lane no. 3</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 4</td>
                 <td>32</td>
                 <td>London, Park Lane no. 4</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 5</td>
                 <td>32</td>
                 <td>London, Park Lane no. 5</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 6</td>
                 <td>32</td>
                 <td>London, Park Lane no. 6</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 7</td>
                 <td>32</td>
                 <td>London, Park Lane no. 7</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 8</td>
                 <td>32</td>
                 <td>London, Park Lane no. 8</td>
               </tr>
-              <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                 <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                 <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                   <!---->Edward King 9</td>
@@ -2277,70 +2277,70 @@ exports[`renders ./components/table/demo/row-selection-custom.md correctly 1`] =
           </tr>
           </thead>
           <tbody class="ant-table-tbody">
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 0</td>
               <td>32</td>
               <td>London, Park Lane no. 0</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 1</td>
               <td>32</td>
               <td>London, Park Lane no. 1</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 2</td>
               <td>32</td>
               <td>London, Park Lane no. 2</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 3</td>
               <td>32</td>
               <td>London, Park Lane no. 3</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="4">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 4</td>
               <td>32</td>
               <td>London, Park Lane no. 4</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="5">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 5</td>
               <td>32</td>
               <td>London, Park Lane no. 5</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="6">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 6</td>
               <td>32</td>
               <td>London, Park Lane no. 6</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="7">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 7</td>
               <td>32</td>
               <td>London, Park Lane no. 7</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="8">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 8</td>
               <td>32</td>
               <td>London, Park Lane no. 8</td>
             </tr>
-            <tr class="ant-table-row  ant-table-row-level-0" data-row-key="9">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
               <td class="ant-table-selection-column ant-table-selection-column-custom"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
               <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                 <!---->Edward King 9</td>
@@ -2391,19 +2391,19 @@ exports[`renders ./components/table/demo/size.md correctly 1`] = `
                   </tr>
                 </thead>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                     <td>32</td>
                     <td>New York No. 1 Lake Park</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Jim Green</td>
                     <td>42</td>
                     <td>London No. 1 Lake Park</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Joe Black</td>
                     <td>32</td>
@@ -2445,19 +2445,19 @@ exports[`renders ./components/table/demo/size.md correctly 1`] = `
                   </tr>
                 </thead>
                 <tbody class="ant-table-tbody">
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->John Brown</td>
                     <td>32</td>
                     <td>New York No. 1 Lake Park</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Jim Green</td>
                     <td>42</td>
                     <td>London No. 1 Lake Park</td>
                   </tr>
-                  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                       <!---->Joe Black</td>
                     <td>32</td>
@@ -2511,7 +2511,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                 </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John</td>
                   <td>Brown</td>
@@ -2520,7 +2520,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
                   <td><span><a href="javascript:;">Action 一 John</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Jim</td>
                   <td>Green</td>
@@ -2529,7 +2529,7 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
                   <td><span><a href="javascript:;">Action 一 Jim</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
-                <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Joe</td>
                   <td>Black</td>

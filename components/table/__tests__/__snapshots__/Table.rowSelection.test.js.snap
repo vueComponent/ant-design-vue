@@ -6,22 +6,22 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
 </tr>
 </thead>
 <tbody class="ant-table-tbody">
-  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+  <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
     <td class="ant-table-fixed-columns-in-body ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
       <!---->Jack</td>
   </tr>
-  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
     <td class="ant-table-fixed-columns-in-body ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
       <!---->Lucy</td>
   </tr>
-  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+  <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
     <td class="ant-table-fixed-columns-in-body ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
       <!---->Tom</td>
   </tr>
-  <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+  <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
     <td class="ant-table-fixed-columns-in-body ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
     <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
       <!---->Jerry</td>
@@ -45,16 +45,16 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
     </tr>
     </thead>
     <tbody class="ant-table-tbody">
-      <tr class="ant-table-row  ant-table-row-level-0" data-row-key="0">
+      <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
         <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
       </tr>
-      <tr class="ant-table-row  ant-table-row-level-0" data-row-key="1">
+      <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
         <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
       </tr>
-      <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
+      <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
         <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
       </tr>
-      <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
+      <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
         <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
       </tr>
     </tbody>

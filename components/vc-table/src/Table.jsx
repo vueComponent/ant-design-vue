@@ -63,6 +63,7 @@ export default {
     childrenColumnName: PropTypes.string,
     indentSize: PropTypes.number,
     expandRowByClick: PropTypes.bool,
+    expandIcon: PropTypes.func,
   }, {
     data: [],
     useFixedHeader: false,
@@ -174,6 +175,13 @@ export default {
         this.resizeEvent = addEventListener(
           window, 'resize', this.debouncedWindowResize
         )
+      }
+      // https://github.com/ant-design/ant-design/issues/11635
+      if (this.ref_headTable) {
+        this.ref_headTable.scrollLeft = 0
+      }
+      if (this.ref_bodyTable) {
+        this.ref_bodyTable.scrollLeft = 0
       }
     })
   },

@@ -51,7 +51,7 @@ exports[`renders ./components/steps/demo/error.md correctly 1`] = `
   </div>
   <div class="ant-steps-item ant-steps-item-error">
     <div class="ant-steps-item-tail"></div>
-    <div class="ant-steps-item-icon"><span class="ant-steps-icon anticon anticon-cross"></span></div>
+    <div class="ant-steps-item-icon"><span class="ant-steps-icon anticon anticon-close"></span></div>
     <div class="ant-steps-item-content">
       <div class="ant-steps-item-title">In Progress</div>
       <div class="ant-steps-item-description">This is a description.</div>

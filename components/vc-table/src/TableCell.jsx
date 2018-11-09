@@ -75,7 +75,7 @@ export default {
     }
 
     if (column.customCell) {
-      tdProps = mergeProps(tdProps, column.customCell(record))
+      tdProps = mergeProps(tdProps, column.customCell(record, index))
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202

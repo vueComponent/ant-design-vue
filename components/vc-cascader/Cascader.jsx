@@ -65,6 +65,7 @@ export default {
     // onKeyDown: PropTypes.func,
     expandTrigger: PropTypes.string.def('click'),
     fieldNames: PropTypes.object.def({ label: 'label', value: 'value', children: 'children' }),
+    getPopupContainer: PropTypes.func,
   },
   mixins: [BaseMixin],
   model: {

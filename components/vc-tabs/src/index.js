@@ -1,4 +1,4 @@
-// based on rc-tabs 9.3.6
+// based on rc-tabs 9.4.8
 import Tabs from './Tabs'
 import TabPane from './TabPane'
 import TabContent from './TabContent'

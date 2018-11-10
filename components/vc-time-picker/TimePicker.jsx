@@ -5,7 +5,7 @@ import Trigger from '../vc-trigger'
 import Panel from './Panel'
 import placements from './placements'
 import moment from 'moment'
-import { initDefaultProps, hasProp } from '../_util/props-util'
+import { initDefaultProps, hasProp, getComponentFromProp } from '../_util/props-util'
 
 function noop () {
 }
@@ -58,6 +58,8 @@ export default {
     // onKeyDown: PropTypes.func,
     autoFocus: PropTypes.bool,
     id: PropTypes.string,
+    inputIcon: PropTypes.any,
+    clearIcon: PropTypes.any,
   }, {
     clearText: 'clear',
     prefixCls: 'rc-time-picker',
@@ -175,6 +177,7 @@ export default {
         use12Hours, focusOnOpen, onKeyDown2, hourStep, minuteStep, secondStep,
         sValue,
       } = this
+      const clearIcon = getComponentFromProp(this, 'clearIcon')
       return (
         <Panel
           clearText={clearText}
@@ -201,7 +204,8 @@ export default {
           minuteStep={minuteStep}
           secondStep={secondStep}
           focusOnOpen={focusOnOpen}
-          onKeyDown={onKeyDown2}
+          onKeydown={onKeyDown2}
+          clearIcon={clearIcon}
         >
           {this.$slots.addon}
         </Panel>
@@ -267,6 +271,7 @@ export default {
       autoFocus, inputReadOnly, sOpen, sValue, onFocus, onBlur,
     } = this
     const popupClassName = this.getPopupClassName()
+    const inputIcon = getComponentFromProp(this, 'inputIcon')
     return (
       <Trigger
         prefixCls={`${prefixCls}-panel`}
@@ -301,7 +306,7 @@ export default {
             readOnly={!!inputReadOnly}
             id={id}
           />
-          <span class={`${prefixCls}-icon`}/>
+          {inputIcon || <span class={`${prefixCls}-icon`}/>}
         </span>
       </Trigger>
     )

@@ -81,3 +81,47 @@ export function getDataAttr (props) {
     return prev
   }, {})
 }
+
+function toNum (style, property) {
+  return +style.getPropertyValue(property).replace('px', '')
+}
+
+function getTypeValue (start, current, end, tabNode, wrapperNode) {
+  let total = getStyle(wrapperNode, `padding-${start}`)
+  if (!tabNode || !tabNode.parentNode) {
+    return total
+  }
+
+  const { childNodes } = tabNode.parentNode
+  Array.prototype.some.call(childNodes, (node) => {
+    const style = getComputedStyle(node)
+    if (node !== tabNode) {
+      total += toNum(style, `margin-${start}`)
+      total += toNum(style, `margin-${end}`)
+      total += node[current]
+
+      if (style.boxSizing === 'content-box') {
+        total += toNum(style, `border-${start}-width`) + toNum(style, `border-${end}-width`)
+      }
+      return false
+    }
+
+    // We need count current node margin
+    // ref: https://github.com/react-component/tabs/pull/139#issuecomment-431005262
+    total += toNum(style, `margin-${start}`)
+
+    return true
+  })
+
+  return total
+}
+
+export function getLeft (tabNode, wrapperNode) {
+  return getTypeValue('left', 'offsetWidth', 'right', tabNode, wrapperNode)
+}
+
+export function getTop (tabNode, wrapperNode) {
+  const top = getTypeValue('top', 'offsetHeight', 'bottom', tabNode, wrapperNode)
+  const height = getStyle(tabNode.parentNode, 'height')
+  return top - height
+}

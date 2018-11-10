@@ -19,7 +19,7 @@ export default {
     getRef: PropTypes.func.def(noop),
   },
   render () {
-    const { panels: children, activeKey, prefixCls, tabBarGutter } = this.$props
+    const { panels: children, activeKey, prefixCls, tabBarGutter, saveRef } = this.$props
     const rst = []
 
     children.forEach((child, index) => {
@@ -43,7 +43,7 @@ export default {
       if (activeKey === key) {
         directives.push({
           name: 'ref',
-          value: this.saveRef('activeTab'),
+          value: saveRef('activeTab'),
         })
       }
       const tab = getComponentFromProp(child, 'tab')
@@ -64,7 +64,14 @@ export default {
       )
     })
 
-    return <div>{rst}</div>
+    return (
+      <div
+        {...{ directives: [{
+          name: 'ref',
+          value: this.saveRef('navTabsContainer'),
+        }] }}
+      >{rst}</div>
+    )
   },
 }
 

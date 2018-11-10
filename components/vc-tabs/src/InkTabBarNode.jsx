@@ -1,46 +1,11 @@
 import PropTypes from '../../_util/vue-types'
-import { setTransform, isTransformSupported } from './utils'
+import { setTransform, isTransformSupported, getLeft, getTop } from './utils'
 import BaseMixin from '../../_util/BaseMixin'
-
-export function getScroll (w, top) {
-  let ret = w[`page${top ? 'Y' : 'X'}Offset`]
-  const method = `scroll${top ? 'Top' : 'Left'}`
-  if (typeof ret !== 'number') {
-    const d = w.document
-    // ie6,7,8 standard mode
-    ret = d.documentElement[method]
-    if (typeof ret !== 'number') {
-      // quirks mode
-      ret = d.body[method]
-    }
-  }
-  return ret
-}
-
-function offset (elem) {
-  let x
-  let y
-  const doc = elem.ownerDocument
-  const body = doc.body
-  const docElem = doc && doc.documentElement
-  const box = elem.getBoundingClientRect()
-  x = box.left
-  y = box.top
-  x -= docElem.clientLeft || body.clientLeft || 0
-  y -= docElem.clientTop || body.clientTop || 0
-  const w = doc.defaultView || doc.parentWindow
-  x += getScroll(w)
-  y += getScroll(w, true)
-  return {
-    left: x, top: y,
-  }
-}
 
 function componentDidUpdate (component, init) {
   const { styles = {}} = component.$props
   const rootNode = component.getRef('root')
   const wrapNode = component.getRef('nav') || rootNode
-  const containerOffset = offset(wrapNode)
   const inkBarNode = component.getRef('inkBar')
   const activeTab = component.getRef('activeTab')
   const inkBarNodeStyle = inkBarNode.style
@@ -51,12 +16,10 @@ function componentDidUpdate (component, init) {
   }
   if (activeTab) {
     const tabNode = activeTab
-    const tabOffset = offset(tabNode)
     const transformSupported = isTransformSupported(inkBarNodeStyle)
     if (tabBarPosition === 'top' || tabBarPosition === 'bottom') {
-      let left = tabOffset.left - containerOffset.left
+      let left = getLeft(tabNode, wrapNode)
       let width = tabNode.offsetWidth
-
       // If tabNode'width width equal to wrapNode'width when tabBarPosition is top or bottom
       // It means no css working, then ink bar should not have width until css is loaded
       // Fix https://github.com/ant-design/ant-design/issues/7564
@@ -80,7 +43,7 @@ function componentDidUpdate (component, init) {
         inkBarNodeStyle.right = `${wrapNode.offsetWidth - left - width}px`
       }
     } else {
-      let top = tabOffset.top - containerOffset.top
+      let top = getTop(tabNode, wrapNode)
       let height = tabNode.offsetHeight
       if (styles.inkBar && styles.inkBar.height !== undefined) {
         height = parseFloat(styles.inkBar.height, 10)

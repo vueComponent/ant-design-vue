@@ -3,6 +3,7 @@ import addDOMEventListener from 'add-dom-event-listener'
 import debounce from 'lodash/debounce'
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
+import { getComponentFromProp } from '../../_util/props-util'
 
 function noop () {
 }
@@ -17,6 +18,8 @@ export default {
     scrollAnimated: PropTypes.bool.def(true),
     navWrapper: PropTypes.func.def(arg => arg),
     activeKey: PropTypes.any,
+    prevIcon: PropTypes.any,
+    nextIcon: PropTypes.any,
   },
 
   data () {
@@ -83,7 +86,8 @@ export default {
     },
     setNextPrev () {
       const navNode = this.$props.getRef('nav')
-      const navNodeWH = this.getScrollWH(navNode)
+      const navTabsContainer = this.$props.getRef('navTabsContainer')
+      const navNodeWH = this.getScrollWH(navTabsContainer || navNode)
       const containerWH = this.getOffsetWH(this.$props.getRef('container'))
       const navWrapNodeWH = this.getOffsetWH(this.$props.getRef('navWrap'))
       let { offset } = this
@@ -267,7 +271,13 @@ export default {
   },
   render () {
     const { next, prev } = this
-    const { prefixCls, scrollAnimated, navWrapper } = this.$props
+    const {
+      prefixCls,
+      scrollAnimated,
+      navWrapper,
+    } = this.$props
+    const prevIcon = getComponentFromProp(this, 'prevIcon')
+    const nextIcon = getComponentFromProp(this, 'nextIcon')
     const showNextPrev = prev || next
 
     const prevButton = (
@@ -281,7 +291,7 @@ export default {
         }}
         onTransitionend={this.prevTransitionEnd}
       >
-        <span class={`${prefixCls}-tab-prev-icon`} />
+        {prevIcon || <span class={`${prefixCls}-tab-prev-icon`} />}
       </span>
     )
 
@@ -295,7 +305,7 @@ export default {
           [`${prefixCls}-tab-arrow-show`]: showNextPrev,
         }}
       >
-        <span class={`${prefixCls}-tab-next-icon`} />
+        {nextIcon || <span class={`${prefixCls}-tab-next-icon`} />}
       </span>
     )
 

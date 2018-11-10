@@ -2,6 +2,7 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import moment from 'moment'
+import { getComponentFromProp } from '../_util/props-util'
 
 const Header = {
   mixins: [BaseMixin],
@@ -28,6 +29,7 @@ const Header = {
     focusOnOpen: PropTypes.bool,
     // onKeyDown: PropTypes.func,
     showStr: PropTypes.bool.def(true),
+    clearIcon: PropTypes.any,
   },
   data () {
     const { value, format } = this
@@ -156,15 +158,20 @@ const Header = {
 
     getClearButton () {
       const { prefixCls, allowEmpty, clearText } = this
+      const clearIcon = getComponentFromProp(this, 'clearIcon')
       if (!allowEmpty) {
         return null
       }
-      return (<a
-        class={`${prefixCls}-clear-btn`}
-        role='button'
-        title={clearText}
-        onMousedown={this.onClear}
-      />)
+      return (
+        <a
+          role='button'
+          class={`${prefixCls}-clear-btn`}
+          title={clearText}
+          onMousedown={this.onClear}
+        >
+          {clearIcon || <i class={`${prefixCls}-clear-btn-icon`} />}
+        </a>
+      )
     },
 
     getProtoValue () {
@@ -176,7 +183,7 @@ const Header = {
       const invalidClass = invalid ? `${prefixCls}-input-invalid` : ''
       return (
         <input
-          class={`${prefixCls}-input  ${invalidClass}`}
+          class={`${prefixCls}-input ${invalidClass}`}
           ref='input'
           onKeydown={this.onKeyDown}
           value={showStr ? str : ''}

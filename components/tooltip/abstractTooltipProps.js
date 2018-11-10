@@ -17,4 +17,5 @@ export default () => ({
   getPopupContainer: PropTypes.func,
   arrowPointAtCenter: PropTypes.bool.def(false),
   autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),
+  align: PropTypes.object.def({}),
 })

@@ -2,6 +2,16 @@
 
 ---
 
+## 1.1.8
+
+`2018-11-11`
+- `Progress`
+  - 🐞 修复circle类型不支持strokeColor问题 [#238](https://github.com/vueComponent/ant-design-vue/issues/238)
+  - 🐞 添加`normal`类型 [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
+- 🐞 修复`Cascader`组件getPopupContainer不生效问题 [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
+- 🌟 `Tooltip`支持align [#252](https://github.com/vueComponent/ant-design-vue/issues/252)
+
+
 ## 1.1.7
 
 `2018-10-27`

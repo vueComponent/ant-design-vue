@@ -2,6 +2,16 @@
 
 ---
 
+## 1.1.8
+
+`2018-11-11`
+- `Progress`
+  - 🐞 Fix `circle` type does not support `strokeColor` problem [#238](https://github.com/vueComponent/ant-design-vue/issues/238)
+  - 🐞 Add `normal` type [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
+- 🐞 Fix `Cascader` component does not support `getPopupContainer` problem  [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
+- 🌟 `Tooltip` support align [#252](https://github.com/vueComponent/ant-design-vue/issues/252)
+
+
 ## 1.1.7
 
 `2018-10-27`

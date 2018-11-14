@@ -84,4 +84,18 @@ describe('Progress', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
   })
+
+  it('render format', async () => {
+    const wrapper = mount(Progress, {
+      propsData: {
+        percent: 50,
+        type: 'circle',
+        strokeColor: 'red',
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
 })

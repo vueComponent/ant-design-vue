@@ -21,6 +21,7 @@ The following APIs are shared by Tooltip, Popconfirm, Popover.
 | placement | The position of the tooltip relative to the target, which can be one of `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom` | string | `top` |
 | trigger | Tooltip trigger mode | `hover` \| `focus` \| `click` \| `contextmenu` | `hover` |
 | visible(v-model) | Whether the floating tooltip card is visible or not | boolean | `false` |
+| align | this value will be merged into placement's config, please refer to the settings [dom-align](https://github.com/yiminghe/dom-align) | Object | - |
 
 ### events
 | Events Name | Description | Arguments |

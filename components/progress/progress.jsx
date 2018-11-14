@@ -23,7 +23,7 @@ export const ProgressProps = {
   percent: PropTypes.number,
   successPercent: PropTypes.number,
   format: PropTypes.func,
-  status: PropTypes.oneOf(['success', 'active', 'exception']),
+  status: PropTypes.oneOf(['normal', 'success', 'active', 'exception']),
   showInfo: PropTypes.bool,
   strokeWidth: PropTypes.number,
   strokeLinecap: PropTypes.oneOf(['round', 'square']),
@@ -123,7 +123,7 @@ export default {
             percent={validProgress(percent)}
             strokeWidth={circleWidth}
             trailWidth={circleWidth}
-            strokeColor={statusColorMap[progressStatus]}
+            strokeColor={strokeColor || statusColorMap[progressStatus]}
             strokeLinecap={strokeLinecap}
             trailColor={trailColor}
             prefixCls={prefixCls}

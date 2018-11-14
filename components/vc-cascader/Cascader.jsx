@@ -67,6 +67,7 @@ export default {
     fieldNames: PropTypes.object.def({ label: 'label', value: 'value', children: 'children' }),
     expandIcon: PropTypes.any,
     loadingIcon: PropTypes.any,
+    getPopupContainer: PropTypes.func,
   },
   mixins: [BaseMixin],
   model: {

@@ -65,9 +65,9 @@ export default {
       } else if (icon && !isString(icon)) {
         iconNode = <span class={`${prefixCls}-icon`}>{icon}</span>
       } else if (icons && icons.finish && status === 'finish') {
-        iconNode = <span class={`${prefixCls}-icon`}>{icons.finish}</span>;
+        iconNode = <span class={`${prefixCls}-icon`}>{icons.finish}</span>
       } else if (icons && icons.error && status === 'error') {
-        iconNode = <span class={`${prefixCls}-icon`}>{icons.error}</span>;
+        iconNode = <span class={`${prefixCls}-icon`}>{icons.error}</span>
       } else if (icon || status === 'finish' || status === 'error') {
         iconNode = <span class={iconClassName} />
       } else {

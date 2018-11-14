@@ -116,7 +116,7 @@ export default {
         {
           filteredChildren.map((child, index) => {
             const childProps = getPropsData(child)
-            const stepNumber = initial + index;
+            const stepNumber = initial + index
             const stepProps = {
               props: {
                 stepNumber: `${stepNumber + 1}`,

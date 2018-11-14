@@ -1,12 +1,23 @@
 
 import TransitionEvents from './css-animation/Event'
 
+let styleForPesudo
+
+// Where el is the DOM element you'd like to test for visibility
+function isHidden (element) {
+  return !element || element.offsetParent === null
+}
+
 export default {
   name: 'Wave',
   props: ['insertExtraNode'],
   mounted () {
     this.$nextTick(() => {
-      this.instance = this.bindAnimationEvent(this.$el)
+      const node = this.$el
+      if (node.nodeType !== 1) {
+        return
+      }
+      this.instance = this.bindAnimationEvent(node)
     })
   },
 
@@ -25,7 +36,7 @@ export default {
     },
 
     onClick (node, waveColor) {
-      if (node.className.indexOf('-leave') >= 0) {
+      if (!node || isHidden(node) || node.className.indexOf('-leave') >= 0) {
         return
       }
       this.removeExtraStyleNode()
@@ -37,6 +48,7 @@ export default {
       node.removeAttribute(attributeName)
       node.setAttribute(attributeName, 'true')
       // Not white or transparnt or grey
+      styleForPesudo = styleForPesudo || document.createElement('style')
       if (waveColor &&
           waveColor !== '#ffffff' &&
           waveColor !== 'rgb(255, 255, 255)' &&
@@ -44,10 +56,12 @@ export default {
           !/rgba\(\d*, \d*, \d*, 0\)/.test(waveColor) && // any transparent rgba color
           waveColor !== 'transparent') {
         extraNode.style.borderColor = waveColor
-        this.styleForPesudo = document.createElement('style')
-        this.styleForPesudo.innerHTML =
+
+        styleForPesudo.innerHTML =
           `[ant-click-animating-without-extra-node]:after { border-color: ${waveColor}; }`
-        document.body.appendChild(this.styleForPesudo)
+        if (!document.body.contains(styleForPesudo)) {
+          document.body.appendChild(styleForPesudo)
+        }
       }
       if (insertExtraNode) {
         node.appendChild(extraNode)
@@ -64,7 +78,7 @@ export default {
       }
       const onClick = (e) => {
         // Fix radio button click twice
-        if (e.target.tagName === 'INPUT') {
+        if (e.target.tagName === 'INPUT' || isHidden(e.target)) {
           return
         }
         this.resetEffect(node)
@@ -108,9 +122,8 @@ export default {
       this.resetEffect(e.target)
     },
     removeExtraStyleNode () {
-      if (this.styleForPesudo && document.body.contains(this.styleForPesudo)) {
-        document.body.removeChild(this.styleForPesudo)
-        this.styleForPesudo = null
+      if (styleForPesudo) {
+        styleForPesudo.innerHTML = ''
       }
     },
   },

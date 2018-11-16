@@ -20,13 +20,13 @@
 | showUploadList | 是否展示 uploadList, 可设为一个对象，用于单独设定 showPreviewIcon 和 showRemoveIcon | Boolean or { showPreviewIcon?: boolean, showRemoveIcon?: boolean } | true |
 | supportServerRender | 服务端渲染时需要打开这个 | boolean | false |
 | withCredentials | 上传请求时是否携带 cookie | boolean | false |
+| remove   | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除。               | Function(file): `boolean | Promise` | 无   |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | change | 上传文件改变时的状态，详见 [change](#change) | Function | 无 |
 | preview | 点击文件链接或预览图标时的回调 | Function(file) | 无 |
-| remove   | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除。               | Function(file): `boolean | Promise` | 无   |
 
 ### change
 

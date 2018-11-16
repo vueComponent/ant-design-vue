@@ -14,7 +14,7 @@ Upload files manually after `beforeUpload` returns `false`.
     <a-upload
       action="//jsonplaceholder.typicode.com/posts/"
       :fileList="fileList"
-      @remove="handleRemove"
+      :remove="handleRemove"
       :beforeUpload="beforeUpload"
     >
       <a-button>

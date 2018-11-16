@@ -291,9 +291,9 @@ describe('Upload List', () => {
         defaultFileList: fileList,
         listType: 'picture-card',
         action: '',
+        remove: handleRemove,
       },
       listeners: {
-        remove: handleRemove,
         change: handleChange,
       },
       slots: {

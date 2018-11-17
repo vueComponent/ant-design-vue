@@ -42,6 +42,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'General',
+  zhType: '通用',
   title: 'Icon',
   subtitle: '图标',
   render () {

@@ -156,6 +156,8 @@
         "webpack-merge": "^4.1.1"
     },
     "dependencies": {
+        "@ant-design/icons": "^1.1.15",
+        "@ant-design/icons-vue": "^1.0.0",
         "add-dom-event-listener": "^1.0.2",
         "array-tree-filter": "^2.1.0",
         "async-validator": "^1.8.2",

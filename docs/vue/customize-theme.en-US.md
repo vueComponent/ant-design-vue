@@ -90,27 +90,17 @@ Create a new file `vue.config.js` in the project directory.
 ```
 // vue.config.js
 module.exports = {
-  configureWebpack: {
-    module: {
-      rules: [{
-        test: /\.less$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-        }, {
-          loader: 'less-loader',
-          options: {
-            modifyVars: {
-              'primary-color': '#1DA57A',
-              'link-color': '#1DA57A',
-              'border-radius-base': '2px',
-            },
-            javascriptEnabled: true,
-          },
-        }],
-      }],
-    },
+  css: {
+    loaderOptions: {
+      less: {
+        modifyVars: {
+          'primary-color': '#1DA57A',
+          'link-color': '#1DA57A',
+          'border-radius-base': '2px',
+        },
+        javascriptEnabled: true
+      }
+    }
   }
 }
 ```

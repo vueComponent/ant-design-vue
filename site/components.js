@@ -55,7 +55,7 @@ import {
   Upload,
   // version,
   Drawer,
-} from 'antd'
+} from 'ant-design-vue'
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification

@@ -2,6 +2,14 @@
 
 ---
 
+## 1.1.9
+
+`2018-11-26`
+- 🐞 Fix the `TreeSelect` component getPopupContainer does not work [#265](https://github.com/vueComponent/ant-design-vue/issues/265)
+- 🐞 Fix `Carousel` component on-demand loading does not work [#271](https://github.com/vueComponent/ant-design-vue/issues/271)
+- 🐞 Fix `Upload` component remove event no return value problem [#259](https://github.com/vueComponent/ant-design-vue/issues/259)
+
+
 ## 1.1.8
 
 `2018-11-11`

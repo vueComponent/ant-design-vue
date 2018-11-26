@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -177,7 +177,7 @@
         "resize-observer-polyfill": "^1.5.0",
         "shallow-equal": "^1.0.0",
         "shallowequal": "^1.0.2",
-        "vue-ref": "^1.0.1",
+        "vue-ref": "^1.0.2",
         "warning": "^3.0.0"
     }
 }

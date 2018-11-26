@@ -1,6 +1,6 @@
 import json2mq from 'json2mq'
 import Vue from 'vue'
-import antRefDirective from '../../_util/antRefDirective'
+import ref from 'vue-ref'
 import BaseMixin from '../../_util/BaseMixin'
 import { cloneElement } from '../../_util/vnode'
 import { getStyle } from '../../_util/props-util'
@@ -9,7 +9,8 @@ import defaultProps from './default-props'
 import { canUseDOM } from './utils/innerSliderUtils'
 const enquire = canUseDOM() && require('enquire.js')
 
-Vue.use(antRefDirective)
+Vue.use(ref, { name: 'ant-ref' })
+
 export default {
   props: {
     ...defaultProps,

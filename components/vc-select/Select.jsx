@@ -12,9 +12,9 @@ import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 import proxyComponent from '../_util/proxyComponent'
-import antRefDirective from '../_util/antRefDirective'
+import ref from 'vue-ref'
 
-Vue.use(antRefDirective)
+Vue.use(ref, { name: 'ant-ref' })
 
 import {
   getPropValue,

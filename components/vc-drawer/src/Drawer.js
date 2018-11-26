@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import Vue from 'vue'
+import ref from 'vue-ref'
 import BaseMixin from '../../_util/BaseMixin'
-import antRefDirective from '../../_util/antRefDirective'
 import { initDefaultProps, getEvents } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import ContainerRender from '../../_util/ContainerRender'
@@ -25,7 +25,8 @@ const windowIsUndefined = !(
   window.document &&
   window.document.createElement
 )
-Vue.use(antRefDirective)
+
+Vue.use(ref, { name: 'ant-ref' })
 const Drawer = {
   mixins: [BaseMixin],
   props: initDefaultProps(drawerProps, {

@@ -28,17 +28,21 @@ export default function wrapWithConnect (WrappedComponent) {
         props: {
           ...props,
           __propsSymbol__: Symbol(),
+          componentWillReceiveProps: { ...props },
           children: $slots.default || props.children || [],
         },
         on: $listeners,
         attrs: $attrs,
-        scopedSlots: $scopedSlots,
       }
+      if (Object.keys($scopedSlots).length) {
+        wrapProps.scopedSlots = $scopedSlots
+      }
+      const slotsKey = Object.keys($slots)
       return (
         <WrappedComponent {...wrapProps} ref='wrappedInstance'>
-          {Object.keys($slots).map(name => {
+          {slotsKey.length ? slotsKey.map(name => {
             return <template slot={name}>{$slots[name]}</template>
-          })}
+          }) : null}
         </WrappedComponent>
       )
     },

@@ -143,6 +143,7 @@
         "vue": "^2.5.16",
         "vue-antd-md-loader": "^1.0.3",
         "vue-clipboard2": "0.0.8",
+        "vue-i18n": "^8.3.2",
         "vue-infinite-scroll": "^2.0.2",
         "vue-jest": "^2.5.0",
         "vue-loader": "^13.0.5",

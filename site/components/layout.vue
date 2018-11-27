@@ -239,7 +239,7 @@ export default {
                 <a-icon type='bars'/>
               </div>
               <a-col class='main-container' xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
-                <div class='content'>
+                <div class='content markdown'>
                   <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
                   </div>

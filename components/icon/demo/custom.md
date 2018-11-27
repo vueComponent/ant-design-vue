@@ -4,8 +4,8 @@
 </cn>
 
 <us>
-#### Basic
-Create a reusable Vue component by using `<Icon component={...} />`. The property `component` takes a Vue component that renders to `svg` element.
+#### Custom Icon
+Create a reusable Vue component by using `<a-icon :component="{...}" />`. The property `component` takes a Vue component that renders to `svg` element.
 </us>
 
 ```html

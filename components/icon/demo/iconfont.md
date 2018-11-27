@@ -11,9 +11,9 @@ If you are using [iconfont.cn](http://iconfont.cn/), you can use the icons in yo
 ```html
 <template>
   <div class="icons-list">
-    <IconFont type="icon-tuichu" />
-    <IconFont type="icon-facebook" />
-    <IconFont type="icon-twitter" />
+    <icon-font type="icon-tuichu" />
+    <icon-font type="icon-facebook" />
+    <icon-font type="icon-twitter" />
   </div>
 </template>
 <script>

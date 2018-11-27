@@ -21,6 +21,7 @@ export default {
       this.$router.push({
         path: path.replace(name, newName),
       })
+      this.$i18n.locale = isZhCN(name) ? 'en-US' : 'zh-CN'
     },
     onSelect (val) {
       this.$router.push(val)

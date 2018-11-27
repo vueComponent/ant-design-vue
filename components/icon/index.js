@@ -1,7 +1,8 @@
 
 import classNames from 'classnames'
-import * as allIcons from '@ant-design/icons/lib/dist'
+import * as allIcons from '@ant-design/icons/lib/dist.js'
 import VueIcon from '@ant-design/icons-vue'
+import PropTypes from '../_util/vue-types'
 import createFromIconfontCN from './IconFont'
 import {
   svgBaseProps, withThemeSuffix,
@@ -18,43 +19,17 @@ setTwoToneColor('#1890ff')
 const defaultTheme = 'outlined'
 let dangerousTheme
 
-// export interface CustomIconComponentProps {
-//   width: string | number;
-//   height: string | number;
-//   fill: string;
-//   viewBox?: string;
-//   className?: string;
-//   style?: React.CSSProperties;
-//   ['aria-hidden']?: string;
-// }
-
-// export type ThemeType = 'filled' | 'outlined' | 'twoTone';
-
-// export interface IconProps {
-//   type?: string;
-//   className?: string;
-//   theme?: ThemeType;
-//   title?: string;
-//   onClick?: React.MouseEventHandler<HTMLElement>;
-//   component?: React.ComponentType<CustomIconComponentProps>;
-//   twoToneColor?: string;
-//   viewBox?: string;
-//   spin?: boolean;
-//   style?: React.CSSProperties;
-//   prefixCls?: string;
-// }
-
-// export interface IconComponent<P> extends React.SFC<P> {
-//   createFromIconfontCN: typeof createFromIconfontCN;
-//   getTwoToneColor: typeof getTwoToneColor;
-//   setTwoToneColor: typeof setTwoToneColor;
-//   unstable_ChangeThemeOfIconsDangerously?: typeof unstable_ChangeThemeOfIconsDangerously;
-//   unstable_ChangeDefaultThemeOfIcons?: typeof unstable_ChangeDefaultThemeOfIcons;
-// }
-
 const Icon = {
   functional: true,
   name: 'AIcon',
+  props: {
+    type: PropTypes.string,
+    component: PropTypes.any,
+    viewBox: PropTypes.any,
+    spin: PropTypes.bool.def(false),
+    theme: PropTypes.oneOf(['filled', 'outlined', 'twoTone']),
+    twoToneColor: PropTypes.string,
+  },
   render (h, context) {
     const { props, slots, listeners } = context
     const {

@@ -1,6 +1,6 @@
 
 import Vue from 'vue'
-import antRefDirective from '../_util/antRefDirective'
+import ref from 'vue-ref'
 import PropTypes from '../_util/vue-types'
 import contains from '../_util/Dom/contains'
 import { hasProp, getComponentFromProp, getEvents, filterEmpty } from '../_util/props-util'
@@ -13,7 +13,7 @@ import BaseMixin from '../_util/BaseMixin'
 import { cloneElement } from '../_util/vnode'
 import ContainerRender from '../_util/ContainerRender'
 
-Vue.use(antRefDirective)
+Vue.use(ref, { name: 'ant-ref' })
 
 function returnEmptyString () {
   return ''

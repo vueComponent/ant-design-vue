@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -69,7 +69,7 @@
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "babel-jest": "^22.4.3",
         "babel-loader": "^7.1.2",
-        "babel-plugin-add-module-exports": "^0.2.1",
+        "babel-plugin-add-module-exports": "^1.0.0",
         "babel-plugin-import": "^1.1.1",
         "babel-plugin-istanbul": "^4.1.1",
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -180,6 +180,7 @@
         "resize-observer-polyfill": "^1.5.0",
         "shallow-equal": "^1.0.0",
         "shallowequal": "^1.0.2",
+        "vue-ref": "^1.0.2",
         "warning": "^3.0.0"
     }
 }

@@ -2,6 +2,14 @@
 
 ---
 
+## 1.1.9
+
+`2018-11-26`
+- 🐞 修复`TreeSelect`组件getPopupContainer不生效问题 [#265](https://github.com/vueComponent/ant-design-vue/issues/265)
+- 🐞 修复`Carousel`组件按需加载不生效问题 [#271](https://github.com/vueComponent/ant-design-vue/issues/271)
+- 🐞 修复`Upload`组件remove事件无返回值问题 [#259](https://github.com/vueComponent/ant-design-vue/issues/259)
+
+
 ## 1.1.8
 
 `2018-11-11`

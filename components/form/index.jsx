@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Form from './Form'
-import antRefDirective from '../_util/antRefDirective'
+import ref from 'vue-ref'
 
-Vue.use(antRefDirective)
+Vue.use(ref, { name: 'ant-ref' })
 
 export { FormProps, FormCreateOption, ValidationRule } from './Form'
 export { FormItemProps } from './FormItem'

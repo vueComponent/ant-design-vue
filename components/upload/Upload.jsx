@@ -124,7 +124,8 @@ export default {
       })
     },
     handleRemove (file) {
-      Promise.resolve(this.$emit('remove', file)).then(ret => {
+      const { remove } = getOptionProps(this)
+      Promise.resolve(typeof remove === 'function' ? remove(file) : remove).then(ret => {
         // Prevent removing file
         if (ret === false) {
           return

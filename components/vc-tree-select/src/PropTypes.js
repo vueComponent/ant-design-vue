@@ -105,4 +105,5 @@ export const SelectPropTypes = {
   notFoundContent: PropTypes.any,
   children: PropTypes.any,
   autoFocus: PropTypes.bool,
+  getPopupContainer: PropTypes.func,
 }

@@ -69,7 +69,7 @@ export const UploadProps = {
   listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
   // className: PropsTypes.string,
   // onPreview: PropsTypes.func,
-  // onRemove: PropsTypes.func,
+  remove: PropsTypes.func,
   supportServerRender: PropsTypes.bool,
   // style: PropsTypes.object,
   disabled: PropsTypes.bool,

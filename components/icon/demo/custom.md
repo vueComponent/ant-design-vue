@@ -11,8 +11,8 @@ Create a reusable Vue component by using `<a-icon :component="{...}" />`. The pr
 ```html
 <template>
   <div class="custom-icons-list">
-    <HeartIcon :style="{ color: 'hotpink' }" />
-    <PandaIcon :style="{ fontSize: '32px' }" />
+    <heart-icon :style="{ color: 'hotpink' }" />
+    <panda-icon :style="{ fontSize: '32px' }" />
   </div>
 <script>
 const HeartSvg = {

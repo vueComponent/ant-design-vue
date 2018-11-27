@@ -1,6 +1,6 @@
 
 import classNames from 'classnames'
-import * as allIcons from '@ant-design/icons/lib/dist.js'
+import * as allIcons from '@ant-design/icons/lib/dist'
 import VueIcon from '@ant-design/icons-vue'
 import PropTypes from '../_util/vue-types'
 import createFromIconfontCN from './IconFont'

@@ -41,7 +41,7 @@ export const CalendarProps = () => ({
   // monthCellRender: PropTypes.func,
   // dateFullCellRender: PropTypes.func,
   // monthFullCellRender: PropTypes.func,
-  locale: PropTypes.any,
+  locale: PropTypes.object,
   // onPanelChange?: (date?: moment.Moment, mode?: CalendarMode) => void;
   // onSelect?: (date?: moment.Moment) => void;
   disabledDate: PropTypes.func,
@@ -226,13 +226,24 @@ const Calendar = {
         </div>
       )
     },
+    getDefaultLocale () {
+      const result = {
+        ...enUS,
+        ...this.$props.locale,
+      }
+      result.lang = {
+        ...result.lang,
+        ...(this.$props.locale || {}).lang,
+      }
+      return result
+    },
   },
 
   render () {
     return (
       <LocaleReceiver
         componentName='Calendar'
-        defaultLocale={enUS}
+        defaultLocale={this.getDefaultLocale}
         scopedSlots={
           { default: this.renderCalendar }
         }

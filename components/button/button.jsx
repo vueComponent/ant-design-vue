@@ -65,7 +65,10 @@ export default {
   methods: {
     fixTwoCNChar () {
       // Fix for HOC usage like <FormatMessage />
-      const node = this.$el
+      const node = this.$refs.buttonNode
+      if (!node) {
+        return
+      }
       const buttonText = node.textContent || node.innerText
       if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
         if (!this.hasTwoCNChar) {
@@ -76,9 +79,10 @@ export default {
       }
     },
     handleClick (event) {
-      // this.clicked = true
-      // clearTimeout(this.timeout)
-      // this.timeout = setTimeout(() => (this.clicked = false), 500)
+      const { sLoading } = this.$data
+      if (sLoading) {
+        return
+      }
       this.$emit('click', event)
     },
     insertSpace (child, needInserted) {
@@ -101,6 +105,9 @@ export default {
     const { htmlType, classes, icon,
       disabled, handleClick,
       sLoading, $slots, $attrs, $listeners } = this
+    const now = new Date()
+    const isChristmas = now.getMonth() === 11 && now.getDate() === 25
+    const title = isChristmas ? 'Ho Ho Ho!' : $attrs.title
     const buttonProps = {
       props: {
       },
@@ -108,8 +115,9 @@ export default {
         ...$attrs,
         type: htmlType,
         disabled,
+        title,
       },
-      class: classes,
+      class: { ...classes, christmas: isChristmas },
       on: {
         ...$listeners,
         click: handleClick,
@@ -118,16 +126,17 @@ export default {
     const iconType = sLoading ? 'loading' : icon
     const iconNode = iconType ? <Icon type={iconType} /> : null
     const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], this.isNeedInserted()) : $slots.default
+
     if ('href' in $attrs) {
       return (
-        <a {...buttonProps}>
+        <a {...buttonProps} ref='buttonNode'>
           {iconNode}{kids}
         </a>
       )
     } else {
       return (
         <Wave>
-          <button {...buttonProps}>
+          <button {...buttonProps} ref='buttonNode'>
             {iconNode}{kids}
           </button>
         </Wave>

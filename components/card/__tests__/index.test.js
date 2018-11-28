@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Card from '../index'
+import Button from '../../button/index'
 
 const testMethod = typeof window !== 'undefined' ? it : xit
 
@@ -42,6 +43,17 @@ describe('Card', () => {
     const wrapper = mount({
       render () {
         return <Card loading bodyStyle={{ padding: 0 }}>xxx</Card>
+      },
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('title should be vertically aligned', () => {
+    const wrapper = mount({
+      render () {
+        return <Card title='Card title' extra={<Button>Button</Button>} style={{ width: '300px' }}>
+          <p>Card content</p>
+        </Card>
       },
     })
     expect(wrapper.html()).toMatchSnapshot()

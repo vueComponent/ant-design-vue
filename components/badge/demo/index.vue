@@ -29,6 +29,7 @@
     category: 'Components',
     subtitle: '徽标数',
     type: 'Data Display',
+    zhType: '数据展示',
     title: 'Badge',
     render () {
       return (
@@ -61,6 +62,7 @@
   border-radius: 4px;
   background: #eee;
   display: inline-block;
+  vertical-align: middle;
 }
 #components-badge-demo .ant-badge-not-a-wrapper:not(.ant-badge-status) {
   margin-right: 8px;

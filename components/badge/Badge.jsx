@@ -73,7 +73,7 @@ export default {
       [`${prefixCls}-not-a-wrapper`]: !children.length,
     })
     const styleWithOffset = offset ? {
-      marginLeft: typeof offset[0] === 'number' ? `${offset[0]}px` : offset[0],
+      right: -parseInt(offset[0], 10),
       marginTop: typeof offset[1] === 'number' ? `${offset[1]}px` : offset[1],
       ...numberStyle,
     } : numberStyle

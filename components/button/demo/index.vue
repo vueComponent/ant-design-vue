@@ -26,6 +26,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'General',
+  zhType: '通用',
   title: 'Button',
   subtitle: '按钮',
   render () {

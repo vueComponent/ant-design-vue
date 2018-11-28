@@ -1,6 +1,7 @@
 import Moment from 'moment'
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
+import MockDate from 'mockdate'
 import Vue from 'vue'
 import Calendar from '..'
 
@@ -151,5 +152,16 @@ describe('Calendar', () => {
       expect(onPanelChangeStub).toHaveBeenCalledTimes(1)
       done()
     })
+  })
+
+  it('Calendar should support locale', () => {
+    MockDate.set(Moment('2018-10-19'))
+    // eslint-disable-next-line
+    const zhCN = require('../locale/zh_CN').default;
+    const wrapper = mount(Calendar, { propsData: {
+      locale: zhCN,
+    }})
+    expect(wrapper.html()).toMatchSnapshot()
+    MockDate.reset()
   })
 })

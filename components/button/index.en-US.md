@@ -17,7 +17,7 @@ To get a customized button, just set `type`/`shape`/`size`/`loading`/`disabled`.
 ### events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| click | set the handler to handle `click` event | function(e) |
+| click | set the handler to handle `click` event | (event) => void |
 
 `<Button>Hello world!</Button>` will be rendered into `<button><span>Hello world!</span></button>`, and all the properties which are not listed above will be transferred to the `<button>` tag.
 

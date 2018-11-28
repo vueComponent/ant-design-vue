@@ -28,7 +28,7 @@ export default {
   subtitle: '锚点',
   cols: 2,
   type: 'Other',
-  zhType: '其它',
+  zhType: '其他',
   title: 'Anchor',
   render () {
     return (

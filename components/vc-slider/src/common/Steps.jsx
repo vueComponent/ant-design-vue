@@ -8,9 +8,10 @@ const calcPoints = (vertical, marks, dots, step, min, max) => {
   )
   const points = Object.keys(marks).map(parseFloat)
   if (dots) {
-    for (let i = min; i <= max; i = i + step) {
-      if (points.indexOf(i) >= 0) continue
-      points.push(i)
+    for (let i = min; i <= max; i += step) {
+      if (points.indexOf(i) === -1) {
+        points.push(i)
+      }
     }
   }
   return points

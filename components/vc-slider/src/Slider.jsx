@@ -98,6 +98,7 @@ const Slider = {
       this.startPosition = position
       if (value === sValue) return
 
+      this.prevMovedHandleIndex = 0
       this.onChange({ sValue: value })
     },
     onEnd () {
@@ -170,6 +171,7 @@ const Slider = {
       const offset = this.calcOffset(sValue)
       const handle = handleGenerator(this.$createElement, {
         className: `${prefixCls}-handle`,
+        prefixCls,
         vertical,
         offset,
         value: sValue,

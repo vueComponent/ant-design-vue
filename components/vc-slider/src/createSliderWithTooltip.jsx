@@ -10,7 +10,7 @@ export default function createSliderWithTooltip (Component) {
     props: {
       ...Component.props,
       tipFormatter: PropTypes.func.def((value) => { return value }),
-      handleStyle: PropTypes.arrayOf(PropTypes.object),
+      handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
       tipProps: PropTypes.object.def({}),
     },
     data () {
@@ -40,8 +40,16 @@ export default function createSliderWithTooltip (Component) {
           prefixCls = 'rc-slider-tooltip',
           overlay = tipFormatter(value),
           placement = 'top',
-          visible = visible || false,
-          ...restTooltipProps } = tipProps
+          visible = false,
+          ...restTooltipProps
+        } = tipProps
+
+        let handleStyleWithIndex
+        if (Array.isArray(handleStyle)) {
+          handleStyleWithIndex = handleStyle[index] || handleStyle[0]
+        } else {
+          handleStyleWithIndex = handleStyle
+        }
 
         const tooltipProps = {
           props: {
@@ -63,7 +71,7 @@ export default function createSliderWithTooltip (Component) {
             mouseleave: () => this.handleTooltipVisibleChange(index, false),
           },
           style: {
-            ...handleStyle[0],
+            ...handleStyleWithIndex,
           },
         }
 

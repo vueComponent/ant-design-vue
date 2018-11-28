@@ -33,7 +33,7 @@ export default {
     return (
       <div>
         <md class='api-container' cn={md.cn} us={md.us}/>
-        <IconDisplay />
+        <IconDisplay class='markdown'/>
         <Basic />
         <Custom />
         <Iconfont />

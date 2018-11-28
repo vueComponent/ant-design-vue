@@ -31,6 +31,8 @@ const AbstractSelectProps = () => ({
   backfill: PropTypes.bool,
   showArrow: PropTypes.bool,
   getPopupContainer: PropTypes.func,
+  open: PropTypes.bool,
+  defaultOpen: PropTypes.bool,
 })
 const Value = PropTypes.shape({
   key: PropTypes.string,

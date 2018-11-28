@@ -12,6 +12,11 @@
 | offsetTop | 距离窗口顶部达到指定偏移量后触发 | number |  |
 | showInkInFixed | 固定模式是否显示小圆点 | boolean | false |
 
+### 事件
+| 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| click | `click` 事件的 handler | Function(e: Event, link: Object) |
+
 ### Link Props
 
 | 成员 | 说明 | 类型 | 默认值 |

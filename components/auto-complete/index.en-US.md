@@ -18,6 +18,8 @@
 | optionLabelProp | Which prop value of option will render as content of select. | string | `children` |
 | placeholder | placeholder of input | string | - |
 | value(v-model) | selected option | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | - |
+| defaultOpen | Initial open state of dropdown | boolean | - |
+| open | Controlled open state of dropdown | boolean | - |
 
 ### events
 | Events Name | Description | Arguments |
@@ -27,6 +29,7 @@
 | focus | Called when entering the component | function() |
 | search | Called when searching items. | function(value) | - |
 | select | Called when a option is selected. param is option's value and option instance. | function(value, option) |
+| dropdown-visible-change | Call when dropdown open | function(open) |
 
 ## Methods
 

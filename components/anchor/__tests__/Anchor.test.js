@@ -151,4 +151,31 @@ describe('Anchor Render', () => {
       expect(wrapper.vm.$refs.anchor.links).toEqual(['#API_1'])
     })
   })
+
+  it('Anchor onClick event', () => {
+    let event
+    let link
+    const handleClick = (...arg) => ([event, link] = arg)
+
+    const href = '#API'
+    const title = 'API'
+
+    const wrapper = mount(
+      {
+        render () {
+          return (
+            <Anchor ref='anchorRef' onClick={handleClick}>
+              <Link href={href} title={title} />
+            </Anchor>
+          )
+        },
+      }
+    )
+
+    wrapper.find(`a[href="${href}"]`).trigger('click')
+
+    wrapper.vm.$refs.anchorRef.handleScroll()
+    expect(event).not.toBe(undefined)
+    expect(link).toEqual({ href, title })
+  })
 })

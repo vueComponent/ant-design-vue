@@ -71,7 +71,6 @@ function scrollTo (href, offsetTop = 0, getContainer, callback = () => { }) {
     }
   }
   raf(frameFunc)
-  history.pushState(null, '', href)
 }
 
 export const AnchorProps = {
@@ -117,6 +116,7 @@ export default {
         $data: this.$data,
         scrollTo: this.handleScrollTo,
       },
+      antAnchorContext: this,
     }
   },
 

@@ -75,6 +75,9 @@ const AutoComplete = {
         this.$refs.select.blur()
       }
     },
+    onDropdownVisibleChange () {
+      this.$emit('dropdown-visible-change', ...arguments)
+    },
   },
 
   render () {
@@ -122,9 +125,7 @@ const AutoComplete = {
       },
       class: cls,
       ref: 'select',
-      on: {
-        ...$listeners,
-      },
+      on: { ...$listeners, 'dropdownVisibleChange': this.onDropdownVisibleChange },
     }
     return (
       <Select

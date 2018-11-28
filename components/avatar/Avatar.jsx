@@ -110,13 +110,11 @@ export default {
     } else {
       const childrenNode = this.$refs.avatarChildren
       if (childrenNode || (scale !== 1 && childrenNode)) {
+        const transformString = `scale(${scale}) translateX(-50%)`
         const childrenStyle = {
-          msTransform: `scale(${scale})`,
-          WebkitTransform: `scale(${scale})`,
-          transform: `scale(${scale})`,
-          position: 'absolute',
-          display: 'inline-block',
-          left: `calc(50% - ${Math.round(childrenNode.offsetWidth / 2)}px)`,
+          msTransform: transformString,
+          WebkitTransform: transformString,
+          transform: transformString,
         }
         const sizeChildrenStyle = typeof size === 'number' ? {
           lineHeight: `${size}px`,

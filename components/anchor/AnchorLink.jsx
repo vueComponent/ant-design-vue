@@ -16,6 +16,7 @@ export default {
   }),
   inject: {
     antAnchor: { default: {}},
+    antAnchorContext: { default: {}},
   },
 
   mounted () {
@@ -32,8 +33,14 @@ export default {
     },
   },
   methods: {
-    handleClick () {
+    handleClick (e) {
       this.antAnchor.scrollTo(this.href)
+      const { scrollTo } = this.antAnchor
+      const { href, title } = this.$props
+      if (this.antAnchorContext.$emit) {
+        this.antAnchorContext.$emit('click', e, { title, href })
+      }
+      scrollTo(href)
     },
   },
   render () {

@@ -23,7 +23,7 @@ describe('Avatar Render', () => {
       },
       sync: false, attachToDocument: true,
     })
-    wrapper.vm.setScale = jest.fn(() => { wrapper.setData({ scale: 0.5 }) })
+    wrapper.vm.setScale = jest.fn(() => { wrapper.setData({ scale: 0.5 }); wrapper.vm.$forceUpdate() })
     await asyncExpect(() => {
       wrapper.find('img').trigger('error')
     }, 0)
@@ -33,14 +33,10 @@ describe('Avatar Render', () => {
       expect(children.at(0).text()).toBe('Fallback')
       expect(wrapper.vm.setScale).toBeCalled()
     })
-    // await asyncExpect(() => {
-    //   console.log(wrapper.vm.scale, document.body.querySelector('.ant-avatar-string'))
-    //   expect(global.document.body.querySelector('.ant-avatar-string').style.transform).toBe('scale(0.5)')
-    //   global.document.body.innerHTML = ''
-    // }, 1000)
     await asyncExpect(() => {
-
-    })
+      expect(global.document.body.querySelector('.ant-avatar-string').style.transform).toContain('scale(0.5)')
+      global.document.body.innerHTML = ''
+    }, 0)
   })
   it('should handle onError correctly', () => {
     global.document.body.innerHTML = ''

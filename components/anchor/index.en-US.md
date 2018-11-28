@@ -12,6 +12,11 @@
 | offsetTop | Pixels to offset from top when calculating position of scroll | number | 0 |
 | showInkInFixed | Whether show ink-balls in Fixed mode | boolean | false |
 
+### Events
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| click | set the handler to handle `click` event | Function(e: Event, link: Object) |
+
 ### Link Props
 
 | Property | Description | Type | Default |

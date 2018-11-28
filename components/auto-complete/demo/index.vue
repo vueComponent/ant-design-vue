@@ -18,13 +18,14 @@ const md = {
         Autocomplete function of input field.
 ## When To Use
 When there is a need for autocomplete functionality.
-## Examples 
+## Examples
 `,
 }
 export default {
   category: 'Components',
   subtitle: '自动完成',
   type: 'Data Entry',
+  zhType: '数据录入',
   cols: 2,
   title: 'AutoComplete',
   render () {

@@ -18,6 +18,8 @@
 | optionLabelProp | 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 `value`。 | string | `children` |
 | placeholder | 输入框提示 | string \| slot | - |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | 无 |
+| defaultOpen | 是否默认展开下拉菜单 | boolean | - |
+| open | 是否展开下拉菜单 | boolean | - |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
@@ -27,6 +29,7 @@
 | focus | 获得焦点时的回调 | function() |
 | search | 搜索补全项的时候调用 | function(value) |
 | select | 被选中时调用，参数为选中项的 value 值 | function(value, option) |
+| dropdown-visible-change | 展开下拉菜单的回调 | function(open) |
 
 ## 方法
 

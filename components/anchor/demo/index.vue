@@ -1,6 +1,7 @@
 <script>
 import Basic from './basic'
 import Static from './static'
+import OnClick from './onClick'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -27,6 +28,7 @@ export default {
   subtitle: '锚点',
   cols: 2,
   type: 'Other',
+  zhType: '其它',
   title: 'Anchor',
   render () {
     return (
@@ -34,6 +36,7 @@ export default {
         <md cn={md.cn} us={md.us}/>
         <Basic/>
         <Static/>
+        <OnClick />
         <api>
           <CN slot='cn' />
           <US/>

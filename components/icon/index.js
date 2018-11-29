@@ -11,7 +11,7 @@ import {
 } from './utils'
 import warning from '../_util/warning'
 import { getTwoToneColor, setTwoToneColor } from './twoTonePrimaryColor'
-import { filterEmpty } from '../_util/props-util'
+import { filterEmpty, getClass } from '../_util/props-util'
 
 // Initial setting
 VueIcon.add(...Object.keys(allIcons).map((key) => allIcons[key]))
@@ -51,6 +51,7 @@ const Icon = {
     )
 
     const classString = classNames({
+      ...getClass(context),
       [`anticon`]: true,
       [`anticon-${type}`]: !!type,
     })

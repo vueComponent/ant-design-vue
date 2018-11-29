@@ -15,6 +15,7 @@ const getStepsProps = (defaultProps = {}) => {
       PropTypes.bool,
       PropTypes.func,
     ]),
+    labelPlacement: PropTypes.string.def('horizontal'),
   }
   return initDefaultProps(props, defaultProps)
 }

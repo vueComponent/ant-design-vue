@@ -118,7 +118,7 @@ const Range = {
       this.onChange({ bounds: nextBounds })
     },
     onEnd () {
-      this.setState({ sHandle: null }, this.onBlur)
+      this.setState({ sHandle: null }, this.blur)
       this.removeDocumentEvents()
       this.$emit('afterChange', this.bounds)
     },
@@ -210,7 +210,7 @@ const Range = {
         nextHandle = nextBounds.indexOf(value)
       }
       this.onChange({
-        handle: nextHandle,
+        sHandle: nextHandle,
         bounds: nextBounds,
       })
       if (isFromKeyboardEvent) {

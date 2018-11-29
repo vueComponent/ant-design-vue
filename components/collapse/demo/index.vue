@@ -29,6 +29,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'Data Display',
+  zhType: '数据展示',
   title: 'Collapse',
   subtitle: '折叠面板',
   cols: 1,

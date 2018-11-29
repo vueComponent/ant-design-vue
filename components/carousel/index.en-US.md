@@ -14,7 +14,7 @@
 
 | Name | Description |
 | ---- | ----------- |
-| goTo(slideNumber) | Change current slide to given slide number |
+| goTo(slideNumber, dontAnimate) | Go to slide index, if dontAnimate=true, it happens without animation |
 | next() | Change current slide to next slide |
 | prev() | Change current slide to previous slide |
 

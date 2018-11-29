@@ -33,6 +33,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'Data Display',
+  zhType: '数据展示',
   title: 'Card',
   subtitle: '卡片',
   cols: 1,

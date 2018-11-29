@@ -119,8 +119,8 @@ const Carousel = {
       this.$refs.slick.slickPrev()
     },
 
-    goTo (slide) {
-      this.$refs.slick.slickGoTo(slide)
+    goTo (slide, dontAnimate = false) {
+      this.$refs.slick.slickGoTo(slide, dontAnimate)
     },
   },
 

@@ -1,8 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/cascader/demo/basic.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/basic.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/change-on-select.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/change-on-select.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
 exports[`renders ./components/cascader/demo/custom-render.md correctly 1`] = `
 <span tabindex="0" class="ant-cascader-picker" style="width: 100%;"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"><span><span>
@@ -11,7 +19,10 @@ exports[`renders ./components/cascader/demo/custom-render.md correctly 1`] = `
         Hangzhou / 
       </span></span><span><span>
       West Lake (<a>752100</a>)
-      </span></span></span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>
+      </span></span></span><i class="anticon anticon-cross-circle">
+  <!----></i><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
 `;
 
 exports[`renders ./components/cascader/demo/custom-trigger.md correctly 1`] = `
@@ -21,16 +32,49 @@ exports[`renders ./components/cascader/demo/custom-trigger.md correctly 1`] = `
   <a href="#" tabindex="0" class="">Change city</a></span>
 `;
 
-exports[`renders ./components/cascader/demo/default-value.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/default-value.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span><i class="anticon anticon-cross-circle">
+  <!----></i><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/disabled-option.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/disabled-option.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/fields-name.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/fields-name.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/hover.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/hover.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/lazy.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/lazy.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/search.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker ant-cascader-picker-show-search"><span class="ant-cascader-picker-label"></span><input value="" placeholder="Please select" type="text" class="ant-input ant-cascader-input  ant-cascader-input "><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;
+exports[`renders ./components/cascader/demo/search.md correctly 1`] = `
+<span tabindex="0" class="ant-cascader-picker ant-cascader-picker-show-search"><span class="ant-cascader-picker-label"></span><input value="" placeholder="Please select" type="text" class="ant-input ant-cascader-input  ant-cascader-input "><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+  </svg></i></span>
+`;
 
-exports[`renders ./components/cascader/demo/size.md correctly 1`] = `<div><span tabindex="0" class="ant-cascader-picker ant-cascader-picker-large"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-lg ant-cascader-input ant-input-lg"><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span><br><br> <span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span><br><br> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-small"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-sm ant-cascader-input ant-input-sm"><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span><br><br></div>`;
+exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
+<div><span tabindex="0" class="ant-cascader-picker ant-cascader-picker-large"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-lg ant-cascader-input ant-input-lg"><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+    </svg></i></span><br><br> <span tabindex="0" class="ant-cascader-picker"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+    </svg></i></span><br><br> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-small"><input value="" placeholder="Please select" type="text" readonly="true" class="ant-input ant-cascader-input ant-input-sm ant-cascader-input ant-input-sm"><span class="ant-cascader-picker-label"></span><i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+    </svg></i></span><br><br></div>
+`;

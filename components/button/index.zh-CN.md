@@ -19,7 +19,7 @@
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| click | `click` 事件的 handler  | function(e) |
+| click | 点击按钮时的回调 | (event) => void |
 
-`<a-button>Hello world!</a-button>` 最终会被渲染为 `<button><span>Hello world!</span></button>`，并且除了上表中的属性，其它属性都会直接传到 `<button></button>`。
+`<a-button>Hello world!</a-button>` 最终会被渲染为 `<button><span>Hello world!</span></button>`，并且除了上表中的属性，其它属性都会直接传到原生 button 上。
 

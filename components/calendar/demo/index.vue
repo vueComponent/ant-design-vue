@@ -28,6 +28,7 @@ When data is in the form of dates, such as schedules, timetables, prices calenda
 export default {
   category: 'Components',
   type: 'Data Display',
+  zhType: '数据展示',
   subtitle: '日历',
   cols: 1,
   title: 'Calendar',

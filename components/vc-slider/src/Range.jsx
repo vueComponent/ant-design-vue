@@ -334,17 +334,17 @@ const Range = {
         disabled,
         min,
         max,
-        handle: handleGenerator,
+        handle,
+        defaultHandle,
         trackStyle,
         handleStyle,
         tabIndex,
-        $createElement,
       } = this
-
+      const handleGenerator = handle || defaultHandle
       const offsets = bounds.map(v => this.calcOffset(v))
 
       const handleClassName = `${prefixCls}-handle`
-      const handles = bounds.map((v, i) => handleGenerator($createElement, {
+      const handles = bounds.map((v, i) => handleGenerator({
         className: classNames({
           [handleClassName]: true,
           [`${handleClassName}-${i + 1}`]: true,

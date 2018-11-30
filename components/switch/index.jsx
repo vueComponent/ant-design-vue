@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types'
 import { getOptionProps, getComponentFromProp } from '../_util/props-util'
 import VcSwitch from '../vc-switch'
 import Wave from '../_util/wave'
+import Icon from '../icon'
 
 const Switch = {
   name: 'ASwitch',
@@ -38,10 +39,17 @@ const Switch = {
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
     }
+    const loadingIcon = loading ? (
+      <Icon
+        type='loading'
+        class={`${prefixCls}-loading-icon`}
+      />
+    ) : null
     const switchProps = {
       props: {
         ...restProps,
         prefixCls,
+        loadingIcon,
       },
       on: this.$listeners,
       class: classes,

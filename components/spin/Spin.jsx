@@ -20,6 +20,10 @@ export const SpinProps = () => ({
 // Render indicator
 let defaultIndicator
 
+function shouldDelay (spinning, delay) {
+  return !!spinning && !!delay && !isNaN(Number(delay))
+}
+
 export function setDefaultIndicator (content) {
   defaultIndicator = typeof content.indicator === 'function' ? content.indicator : (h) => {
     return <content.indicator />
@@ -36,14 +40,63 @@ export default {
     wrapperClassName: '',
   }),
   data () {
-    const { spinning } = this
+    const { spinning, delay } = this
     return {
-      stateSpinning: spinning,
+      sSpinning: spinning && !shouldDelay(spinning, delay),
       debounceTimeout: null,
       delayTimeout: null,
     }
   },
+  mounted () {
+    this.$nextTick(() => {
+      const { spinning, delay } = this
+      if (shouldDelay(spinning, delay)) {
+        this.delayTimeout = window.setTimeout(this.delayUpdateSpinning, delay)
+      }
+    })
+  },
+  updated () {
+    this.$nextTick(() => {
+      const { delay, spinning, sSpinning } = this
+      if (sSpinning === spinning) {
+        return
+      }
+
+      if (this.debounceTimeout) {
+        clearTimeout(this.debounceTimeout)
+      }
+      if (sSpinning && !spinning) {
+        this.debounceTimeout = window.setTimeout(() => this.setState({ sSpinning: spinning }), 200)
+        if (this.delayTimeout) {
+          clearTimeout(this.delayTimeout)
+        }
+      } else {
+        if (shouldDelay(spinning, delay)) {
+          if (this.delayTimeout) {
+            clearTimeout(this.delayTimeout)
+          }
+          this.delayTimeout = window.setTimeout(this.delayUpdateSpinning, delay)
+        } else {
+          this.setState({ sSpinning: spinning })
+        }
+      }
+    })
+  },
+  beforeDestroy () {
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout)
+    }
+    if (this.delayTimeout) {
+      clearTimeout(this.delayTimeout)
+    }
+  },
   methods: {
+    delayUpdateSpinning () {
+      const { spinning, sSpinning } = this
+      if (sSpinning !== spinning) {
+        this.setState({ sSpinning: spinning })
+      }
+    },
     getChildren () {
       if (this.$slots && this.$slots.default) {
         return filterEmpty(this.$slots.default)
@@ -77,55 +130,14 @@ export default {
       )
     },
   },
-  mounted () {
-    this.$nextTick(() => {
-      const { spinning, delay } = this
-      if (spinning && delay && !isNaN(Number(delay))) {
-        this.setState({ stateSpinning: false })
-        this.delayTimeout = window.setTimeout(() => this.setState({ stateSpinning: spinning }), delay)
-      }
-    })
-  },
-  beforeDestroy () {
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout)
-    }
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout)
-    }
-  },
-  watch: {
-    spinning () {
-      const { delay, spinning } = this
-
-      if (this.debounceTimeout) {
-        clearTimeout(this.debounceTimeout)
-      }
-      if (!spinning) {
-        this.debounceTimeout = window.setTimeout(() => this.setState({ stateSpinning: spinning }), 200)
-        if (this.delayTimeout) {
-          clearTimeout(this.delayTimeout)
-        }
-      } else {
-        if (spinning && delay && !isNaN(Number(delay))) {
-          if (this.delayTimeout) {
-            clearTimeout(this.delayTimeout)
-          }
-          this.delayTimeout = window.setTimeout(() => this.setState({ stateSpinning: spinning }), delay)
-        } else {
-          this.setState({ stateSpinning: spinning })
-        }
-      }
-    },
-  },
   render (h) {
     const { size, prefixCls, tip, wrapperClassName, ...restProps } = this.$props
-    const { stateSpinning } = this
+    const { sSpinning } = this
     const spinClassName = {
       [prefixCls]: true,
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-lg`]: size === 'large',
-      [`${prefixCls}-spinning`]: stateSpinning,
+      [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
     }
 
@@ -143,7 +155,7 @@ export default {
       }
       const containerClassName = {
         [`${prefixCls}-container`]: true,
-        [`${prefixCls}-blur`]: stateSpinning,
+        [`${prefixCls}-blur`]: sSpinning,
       }
 
       return (
@@ -152,7 +164,7 @@ export default {
           tag='div'
           class={animateClassName}
         >
-          {stateSpinning && <div key='loading'>{spinElement}</div>}
+          {sSpinning && <div key='loading'>{spinElement}</div>}
           <div class={containerClassName} key='container'>
             {children}
           </div>

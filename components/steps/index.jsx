@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util'
+import { initDefaultProps, getOptionProps } from '../_util/props-util'
 import VcSteps from '../vc-steps'
 import Icon from '../icon'
 

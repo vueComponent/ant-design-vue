@@ -34,13 +34,13 @@ const Steps = {
     const props = getOptionProps(this)
     const { prefixCls } = props
     const icons = {
-      finish: <Icon type='check' className={`${prefixCls}-finish-icon`} />,
-      error: <Icon type='close' className={`${prefixCls}-error-icon`} />,
+      finish: <Icon type='check' class={`${prefixCls}-finish-icon`} />,
+      error: <Icon type='close' class={`${prefixCls}-error-icon`} />,
     }
     const stepsProps = {
       props: {
-        ...props,
         icons,
+        ...props,
       },
       on: this.$listeners,
       scopedSlots: this.$scopedSlots,

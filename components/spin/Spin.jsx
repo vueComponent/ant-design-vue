@@ -41,10 +41,11 @@ export default {
   }),
   data () {
     const { spinning, delay } = this
+    this.debounceTimeout = null
+    this.delayTimeout = null
     return {
       sSpinning: spinning && !shouldDelay(spinning, delay),
-      debounceTimeout: null,
-      delayTimeout: null,
+
     }
   },
   mounted () {

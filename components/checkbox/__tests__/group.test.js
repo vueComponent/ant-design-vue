@@ -103,4 +103,21 @@ describe('CheckboxGroup', () => {
       expect(wrapper.vm.sValue).toEqual(['Apple'])
     })
   })
+
+  // https://github.com/ant-design/ant-design/issues/12642
+  it('should trigger onChange in sub Checkbox', () => {
+    const onChange = jest.fn()
+    const wrapper = mount({
+      render () {
+        return (
+          <Checkbox.Group>
+            <Checkbox value='my' onChange={onChange} />
+          </Checkbox.Group>
+        )
+      },
+    })
+    wrapper.findAll('.ant-checkbox-input').at(0).trigger('change')
+    expect(onChange).toBeCalled()
+    expect(onChange.mock.calls[0][0].target.value).toEqual('my')
+  })
 })

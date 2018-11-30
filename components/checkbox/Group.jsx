@@ -1,6 +1,7 @@
 
 import Checkbox from './Checkbox'
 import hasProp from '../_util/props-util'
+function noop () {}
 export default {
   name: 'ACheckboxGroup',
   props: {
@@ -82,7 +83,7 @@ export default {
           disabled={'disabled' in option ? option.disabled : props.disabled}
           value={option.value}
           checked={state.sValue.indexOf(option.value) !== -1}
-          onChange={() => this.toggleOption(option)}
+          onChange={option.onChange || noop}
           class={`${groupPrefixCls}-item`}
         >
           {option.label}

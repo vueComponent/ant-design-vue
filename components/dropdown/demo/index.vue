@@ -27,6 +27,7 @@ export default {
   category: 'Components',
   subtitle: '下拉菜单',
   type: 'Navigation',
+  zhType: '导航',
   title: 'Dropdown',
   render () {
     return (

@@ -23,6 +23,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'Other',
+  zhType: '其他',
   title: 'Divider',
   subtitle: '分割线',
   render () {

@@ -29,6 +29,7 @@
     category: 'Components',
     subtitle: '多选框',
     type: 'Data Entry',
+    zhType: '数据录入',
     title: 'Checkbox',
     render () {
       return (

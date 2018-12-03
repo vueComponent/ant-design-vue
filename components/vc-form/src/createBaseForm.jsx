@@ -577,9 +577,11 @@ function createBaseForm (option = {}, mixins = []) {
           on: $listeners,
           ref: 'WrappedComponent',
         }
-        return <WrappedComponent {...wrappedComponentProps}>{$slots.default}</WrappedComponent>
+
+        return WrappedComponent ? <WrappedComponent {...wrappedComponentProps}>{$slots.default}</WrappedComponent> : null
       },
     }
+    if (!WrappedComponent) return Form
     if (Array.isArray(WrappedComponent.props)) {
       const newProps = {}
       WrappedComponent.props.forEach((prop) => {

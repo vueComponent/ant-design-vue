@@ -11,25 +11,23 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| form | 经 `Form.create()` 包装过的组件会自带 `this.form` 属性，直接传给 Form 即可。无需手动设置 | object | 无 |
+| form | 经 `Form.create()` 包装过的组件会自带 `this.form` 属性，如果使用template语法，可以使用this.$form.createForm(this, options) | object | 无 |
 | hideRequiredMark | 隐藏所有表单项的必选标记 | Boolean | false |
 | layout | 表单布局 | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
-| autoFormCreate | 自动执行Form.create，建议在template组件下使用，并且不可以和`Form.create()`同时使用 |Function(form)| 无|
-| options | 对应Form.create(options)的`options` | Object | {} |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | submit | 数据验证成功后回调事件 | Function(e:Event) |
 
-### autoFormCreate
+### createForm
 
 ````html
-<a-form :autoFormCreate="(form)=>{this.form = form}">
+<a-form :form="form">
 ...
 </a-form>
 ````
-如果使用`template`语法，可以使用`autoFormCreate`开启自动校验和数据收集功能，但每一个`Form.Item`仅仅对其第一个子组件进行`decorator`。更加复杂的功能建议使用`JSX`。
+如果使用`template`语法，可以使用`this.$form.createForm(this, options)`开启自动校验和数据收集功能。
 
 相关示例如下：
 
@@ -144,7 +142,7 @@ CustomizedForm = Form.create({})(CustomizedForm);
 1. `getFieldDecorator` 不能用于装饰纯函数组件。
 2. `getFieldDecorator` 调用不能位于纯函数组件中 <https://cn.vuejs.org/v2/api/#functional>。
 
-#### getFieldDecorator(id, options) 参数
+#### getFieldDecorator(id, options) \| v-decorator="id, options" 参数
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -162,7 +160,7 @@ CustomizedForm = Form.create({})(CustomizedForm);
 
 注意：
 
-- 一个 Form.Item 建议只放一个被 getFieldDecorator 装饰过的 child，当有多个被装饰过的 child 时，`help` `required` `validateStatus` 无法自动生成。
+- 一个 Form.Item 建议只放一个被 getFieldDecorator或v-decorator 装饰过的 child，当有多个被装饰过的 child 时，`help` `required` `validateStatus` 无法自动生成。
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -175,8 +173,6 @@ CustomizedForm = Form.create({})(CustomizedForm);
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |
 | validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string |  |
 | wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/ant-design-vue/components/grid-cn/#Col) |  |
-| fieldDecoratorId | 对应`getFieldDecorator(id, options)`的第一个参数`id`，如需收集数据需要设置该字段 | string | 无 |
-| fieldDecoratorOptions | 对应`getFieldDecorator(id, options)`的第二个参数`options` | object | {} |
 
 ### 校验规则
 

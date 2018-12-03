@@ -1,14 +1,15 @@
 import intersperse from 'intersperse'
 import PropTypes from '../_util/vue-types'
 import classNames from 'classnames'
+import find from 'lodash/find'
 import Row from '../grid/Row'
 import Col, { ColProps } from '../grid/Col'
 import warning from '../_util/warning'
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants'
-import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, getSlots, isValidElement } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, isValidElement, getSlots } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement } from '../_util/vnode'
+import { cloneElement, cloneVNodes } from '../_util/vnode'
 export const FormItemProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -47,6 +48,10 @@ export default {
       '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
       'while there are more than one `getFieldDecorator` in it.',
     )
+    warning(
+      !this.fieldDecoratorId,
+      '`fieldDecoratorId` is deprecated. please use `v-decorator={id, options}` instead.'
+    )
   },
   methods: {
     getHelpMessage () {
@@ -81,11 +86,8 @@ export default {
         if (getSlotOptions(child).__ANT_FORM_ITEM) {
           continue
         }
-        const attrs = child.data && child.data.attrs
-        if (!attrs) {
-          continue
-        }
         const slots = getSlots(child)
+        const attrs = child.data && child.data.attrs || {}
         if (FIELD_META_PROP in attrs) { // And means FIELD_DATA_PROP in child.props, too.
           controls.push(child)
         } else if (slots.default) {
@@ -339,11 +341,34 @@ export default {
         </Row>
       )
     },
+    decoratorOption (vnode) {
+      if (vnode.data && vnode.data.directives) {
+        const directive = find(vnode.data.directives, ['name', 'decorator']) || {}
+        return directive.value || null
+      } else {
+        return null
+      }
+    },
+    decoratorChildren (vnodes) {
+      const { FormProps } = this
+      const getFieldDecorator = FormProps.form.getFieldDecorator
+      vnodes.forEach((vnode, index) => {
+        const option = this.decoratorOption(vnode)
+        if (option && option.id) {
+          vnodes[index] = getFieldDecorator(option.id, option.options || {})(vnode)
+        } else if (vnode.children) {
+          vnode.children = this.decoratorChildren(cloneVNodes(vnode.children))
+        } else if (vnode.componentOptions && vnode.componentOptions.children) {
+          vnode.componentOptions.children = this.decoratorChildren(cloneVNodes(vnode.componentOptions.children))
+        }
+      })
+      return vnodes
+    },
   },
 
   render () {
-    const { $slots, decoratorFormProps, fieldDecoratorId, fieldDecoratorOptions = {}} = this
-    const child = filterEmpty($slots.default || [])
+    const { $slots, decoratorFormProps, fieldDecoratorId, fieldDecoratorOptions = {}, FormProps } = this
+    let child = filterEmpty($slots.default || [])
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
       const getFieldDecorator = decoratorFormProps.form.getFieldDecorator
       child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions)(child[0])
@@ -351,9 +376,14 @@ export default {
         !(child.length > 1),
         '`autoFormCreate` just `decorator` then first children. but you can use JSX to support multiple children',
       )
+      this.slotDefault = child
+    } else if (FormProps.form) {
+      child = cloneVNodes(child)
+      this.slotDefault = this.decoratorChildren(child)
+    } else {
+      this.slotDefault = child
     }
 
-    this.slotDefault = child
     const children = this.renderChildren()
     return this.renderFormItem(children)
   },

@@ -49,7 +49,7 @@ const getSlots = (ele) => {
   if (ele.$vnode) {
     componentOptions = ele.$vnode.componentOptions || {}
   }
-  const children = componentOptions.children || []
+  const children = ele.children || componentOptions.children || []
   const slots = {}
   children.forEach(child => {
     const name = (child.data && child.data.slot) || 'default'

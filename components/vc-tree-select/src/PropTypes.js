@@ -92,6 +92,7 @@ export const SelectPropTypes = {
   treeIcon: PropTypes.bool,
   treeLine: PropTypes.bool,
   treeDefaultExpandAll: PropTypes.bool,
+  treeDefaultExpandedKeys: PropTypes.arrayOf(String),
   treeCheckable: PropTypes.any, // bool vnode
   treeNodeLabelProp: PropTypes.string,
   treeNodeFilterProp: PropTypes.string,

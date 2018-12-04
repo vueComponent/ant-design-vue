@@ -55,7 +55,10 @@ export default {
     } = props
     const checkboxProps = { props: { ...restProps, prefixCls }, on: restListeners, attrs: getAttrs(this) }
     if (checkboxGroup) {
-      checkboxProps.on.change = () => checkboxGroup.toggleOption({ label: children, value: props.value })
+      checkboxProps.on.change = (...args) => {
+        this.$emit('change', ...args)
+        checkboxGroup.toggleOption({ label: children, value: props.value })
+      }
       checkboxProps.props.checked = checkboxGroup.sValue.indexOf(props.value) !== -1
       checkboxProps.props.disabled = props.disabled || checkboxGroup.disabled
     } else {

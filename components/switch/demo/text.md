@@ -17,7 +17,7 @@ With text and icon.
     <br>
     <a-switch defaultChecked >
       <a-icon type="check" slot="checkedChildren"/>
-      <a-icon type="cross" slot="unCheckedChildren"/>
+      <a-icon type="close" slot="unCheckedChildren"/>
     </a-switch>
   </div>
 </template>

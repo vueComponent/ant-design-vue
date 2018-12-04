@@ -45,19 +45,19 @@ export default function createSlider (Component) {
       max: 100,
       step: 1,
       marks: {},
-      handle (h, { index, ref, className, style, ...restProps }) {
-        delete restProps.dragging
-        const handleProps = {
-          props: {
-            ...restProps,
-          },
-          class: className,
-          style,
-          key: index,
-          ref,
-        }
-        return <Handle {...handleProps} />
-      },
+      // handle ({ index, ref, className, style, ...restProps }) {
+      //   delete restProps.dragging
+      //   const handleProps = {
+      //     props: {
+      //       ...restProps,
+      //     },
+      //     class: className,
+      //     style,
+      //     key: index,
+      //     ref,
+      //   }
+      //   return <Handle {...handleProps} />
+      // },
       included: true,
       disabled: false,
       dots: false,
@@ -106,6 +106,19 @@ export default function createSlider (Component) {
       },
     },
     methods: {
+      defaultHandle ({ index, ref, className, style, ...restProps }) {
+        delete restProps.dragging
+        const handleProps = {
+          props: {
+            ...restProps,
+          },
+          class: className,
+          style,
+          key: index,
+          ref,
+        }
+        return <Handle {...handleProps} />
+      },
       onMouseDown (e) {
         if (e.button !== 0) { return }
         const isVertical = this.vertical

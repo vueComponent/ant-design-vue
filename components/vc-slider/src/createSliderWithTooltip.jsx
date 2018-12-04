@@ -6,7 +6,7 @@ import Handle from './Handle'
 
 export default function createSliderWithTooltip (Component) {
   return {
-    mixins: [BaseMixin],
+    mixins: [BaseMixin, Component],
     props: {
       ...Component.props,
       tipFormatter: PropTypes.func.def((value) => { return value }),

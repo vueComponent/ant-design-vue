@@ -25,9 +25,8 @@
 | --- | --- | --- | --- |
 | defaultValue | 默认选中的选项 | string\[] | \[] |
 | disabled | 整组失效 | boolean | false |
-| options | 指定可选项 | string\[] \| Array&lt;{ label: string value: string disabled?: boolean }> | \[] |
+| options | 指定可选项 | string\[] \| Array&lt;{ label: string value: string disabled?: boolean, onChange?: function }> | \[] |
 | value | 指定选中的选项 | string\[] | \[] |
-| onChange | 变化时回调函数 | Function(checkedValue) | - |
 
 #### 事件
 | 事件名称 | 说明 | 回调参数 |

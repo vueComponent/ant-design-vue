@@ -165,11 +165,13 @@ const Slider = {
         tabIndex,
         min,
         max,
-        handle: handleGenerator,
+        handle,
+        defaultHandle,
       } = this
+      const handleGenerator = handle || defaultHandle
       const { sValue, dragging } = this
       const offset = this.calcOffset(sValue)
-      const handle = handleGenerator(this.$createElement, {
+      const handles = handleGenerator({
         className: `${prefixCls}-handle`,
         prefixCls,
         vertical,
@@ -190,7 +192,7 @@ const Slider = {
       const _trackStyle = trackStyle[0] || trackStyle
       return {
         tracks: this.getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }),
-        handles: handle,
+        handles,
       }
     },
   },

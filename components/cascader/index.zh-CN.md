@@ -26,6 +26,7 @@
 | popupVisible | 控制浮层显隐 | boolean | - |
 | showSearch | 在选择框中显示搜索框 | boolean | false |
 | size | 输入框大小，可选 `large` `default` `small` | string | `default` |
+| suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |
 | value(v-model) | 指定选中项 | string\[] | - |
 
 `showSearch` 为对象时，其中的字段：

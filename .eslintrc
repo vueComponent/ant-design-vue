@@ -12,6 +12,7 @@
         "comma-dangle": [2, "always-multiline"],
         "no-var": "error",
         "no-unused-vars": "warn",
-        "camelcase": "off"
+        "camelcase": "off",
+        "no-extra-boolean-cast": "off"
     }
 }

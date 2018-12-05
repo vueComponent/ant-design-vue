@@ -17,25 +17,34 @@ export default {
     ]),
     checked: PropTypes.bool,
     prefixCls: PropTypes.string,
+    disabled: PropTypes.bool,
   },
   name: 'Item',
   render () {
-    const { renderedText, renderedEl, item, lazy, checked, prefixCls } = this.$props
+    const {
+      renderedText, renderedEl, item, lazy,
+      checked, disabled, prefixCls,
+    } = this.$props
 
     const className = classNames({
       [`${prefixCls}-content-item`]: true,
-      [`${prefixCls}-content-item-disabled`]: item.disabled,
+      [`${prefixCls}-content-item-disabled`]: disabled || item.disabled,
     })
+
+    let title
+    if (typeof renderedText === 'string' || typeof renderedText === 'number') {
+      title = String(renderedText)
+    }
 
     const listItem = (
       <li
         class={className}
-        title={renderedText}
-        onClick={item.disabled ? noop : () => {
+        title={title}
+        onClick={(disabled || item.disabled) ? noop : () => {
           this.$emit('click', item)
         }}
       >
-        <Checkbox checked={checked} disabled={item.disabled} />
+        <Checkbox checked={checked} disabled={disabled || item.disabled} />
         <span>{renderedEl}</span>
       </li>
     )

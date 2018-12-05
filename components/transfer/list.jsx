@@ -51,6 +51,7 @@ export const TransferListProps = {
     PropTypes.bool,
     PropTypes.object,
   ]),
+  disabled: PropTypes.bool,
 }
 
 export default {
@@ -179,14 +180,14 @@ export default {
 
   render () {
     const {
-      prefixCls, dataSource, titleText, checkedKeys, lazy,
-      body = noop, footer = noop, showSearch, filter,
+      prefixCls, dataSource, titleText, checkedKeys, lazy, disabled,
+      body, footer, showSearch, filter,
       searchPlaceholder, notFoundContent, itemUnit, itemsUnit,
     } = this.$props
 
     // Custom Layout
-    const footerDom = footer({ ...this.$props })
-    const bodyDom = body({ ...this.$props })
+    const footerDom = footer && footer({ ...this.$props })
+    const bodyDom = body && body({ ...this.$props })
 
     const listCls = classNames(prefixCls, {
       [`${prefixCls}-with-footer`]: !!footerDom,
@@ -211,6 +212,7 @@ export default {
       const checked = checkedKeys.indexOf(item.key) >= 0
       return (
         <Item
+          disabled={disabled}
           key={item.key}
           item={item}
           lazy={lazy}
@@ -242,7 +244,7 @@ export default {
     })
     const listBody = bodyDom || (
       <div
-        class={showSearch ? `${prefixCls}-body ${prefixCls}-body-with-search` : `${prefixCls}-body`}
+        class={classNames(showSearch ? `${prefixCls}-body ${prefixCls}-body-with-search` : `${prefixCls}-body`)}
       >
         {search}
         <transition-group
@@ -270,6 +272,7 @@ export default {
     const checkAllCheckbox = (
       <Checkbox
         ref='checkbox'
+        disabled={disabled}
         checked={checkedAll}
         indeterminate={checkStatus === 'part'}
         onChange={() => {

@@ -21,6 +21,16 @@ import {
  * other props can pass with context for future refactor.
  */
 
+function getWatch (keys = []) {
+  const watch = {}
+  keys.forEach(k => {
+    watch[k] = function () {
+      this.needSyncKeys[k] = true
+    }
+  })
+  return watch
+}
+
 const Tree = {
   name: 'Tree',
   mixins: [BaseMixin],
@@ -91,6 +101,7 @@ const Tree = {
   }),
 
   data () {
+    this.needSyncKeys = {}
     const state = {
       _posEntities: {},
       _keyEntities: {},
@@ -124,8 +135,10 @@ const Tree = {
   },
 
   watch: {
+    ...getWatch(['treeData', 'children', 'expandedKeys', 'autoExpandParent', 'selectedKeys', 'checkedKeys', 'loadedKeys']),
     __propsSymbol__ () {
       this.setState(this.getDerivedStateFromProps(getOptionProps(this), this.$data))
+      this.needSyncKeys = {}
     },
   },
 
@@ -135,9 +148,9 @@ const Tree = {
       const newState = {
         _prevProps: { ...props },
       }
-
+      const self = this
       function needSync (name) {
-        return (!_prevProps && name in props) || (_prevProps && _prevProps[name] !== props[name])
+        return (!_prevProps && name in props) || (_prevProps && self.needSyncKeys[name])
       }
 
       // ================== Tree Node ==================

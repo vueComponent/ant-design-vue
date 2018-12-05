@@ -76,6 +76,7 @@ export const UploadProps = {
   prefixCls: PropsTypes.string,
   customRequest: PropsTypes.func,
   withCredentials: PropsTypes.bool,
+  openFileDialogOnClick: PropsTypes.bool,
   locale: UploadLocale,
   height: PropsTypes.number,
 }

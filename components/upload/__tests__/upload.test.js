@@ -176,4 +176,55 @@ describe('Upload', () => {
       })
     })
   })
+
+  it('should support linkProps as object', () => {
+    const fileList = [{
+      uid: '-1',
+      name: 'foo.png',
+      status: 'done',
+      url: 'http://www.baidu.com/xxx.png',
+      linkProps: {
+        download: 'image',
+        rel: 'noopener',
+      },
+    }]
+    const props = {
+      propsData: {
+        fileList,
+      },
+      sync: false,
+    }
+    const wrapper = mount(Upload, props)
+    setTimeout(() => {
+      const linkNode = wrapper.find('a.ant-upload-list-item-name')
+      expect(linkNode.props().download).toBe('image')
+      expect(linkNode.props().rel).toBe('noopener')
+    }, 0)
+  })
+
+  it('should support linkProps as json stringify', () => {
+    const linkPropsString = JSON.stringify({
+      download: 'image',
+      rel: 'noopener',
+    })
+    const fileList = [{
+      uid: '-1',
+      name: 'foo.png',
+      status: 'done',
+      url: 'http://www.baidu.com/xxx.png',
+      linkProps: linkPropsString,
+    }]
+    const props = {
+      propsData: {
+        fileList,
+      },
+      sync: false,
+    }
+    const wrapper = mount(Upload, props)
+    setTimeout(() => {
+      const linkNode = wrapper.find('a.ant-upload-list-item-name')
+      expect(linkNode.props().download).toBe('image')
+      expect(linkNode.props().rel).toBe('noopener')
+    }, 0)
+  })
 })

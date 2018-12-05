@@ -20,6 +20,7 @@
 | showUploadList | Whether to show default upload list, could be an object to specify `showPreviewIcon` and `showRemoveIcon` individually | Boolean or { showPreviewIcon?: boolean, showRemoveIcon?: boolean } | true |
 | supportServerRender | Need to be turned on while the server side is rendering. | boolean | false |
 | withCredentials | ajax upload with cookie sent | boolean | false |
+| openFileDialogOnClick | click open file dialog | boolean | true |
 | remove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when return value is `false` or a Promise which resolve(false) or reject. | Function(file): `boolean | Promise` | - |
 
 ### events

@@ -7,8 +7,12 @@ import Progress from '../progress'
 import classNames from 'classnames'
 import { UploadListProps } from './interface'
 
+const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp']
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 const previewFile = (file, callback) => {
+  if (file.type && !imageTypes.includes(file.type)) {
+    callback('')
+  }
   const reader = new window.FileReader()
   reader.onloadend = () => callback(reader.result)
   reader.readAsDataURL(file)
@@ -23,7 +27,7 @@ const extname = (url) => {
   const filenameWithoutSuffix = filename.split(/#|\?/)[0]
   return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
 }
-const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp']
+
 const isImageUrl = (file) => {
   if (imageTypes.includes(file.type)) {
     return true
@@ -148,15 +152,17 @@ export default {
         [`${prefixCls}-list-item`]: true,
         [`${prefixCls}-list-item-${file.status}`]: true,
       })
+      const linkProps = typeof file.linkProps === 'string'
+        ? JSON.parse(file.linkProps) : file.linkProps
       const preview = file.url ? (
         <a
-          {...file.linkProps}
-          href={file.url}
           target='_blank'
           rel='noopener noreferrer'
           class={`${prefixCls}-list-item-name`}
-          onClick={e => this.handlePreview(file, e)}
           title={file.name}
+          {...linkProps}
+          href={file.url}
+          onClick={e => this.handlePreview(file, e)}
         >
           {file.name}
         </a>
@@ -196,16 +202,16 @@ export default {
           }
         },
       }
-      const iconProps1 = {...iconProps, ...{props: {type: 'cross'}}}
+      const iconProps1 = {...iconProps, ...{props: {type: 'close'}}}
       const removeIcon = showRemoveIcon ? (
         <Icon {...iconProps} />
       ) : null
-      const removeIconCross = showRemoveIcon ? (
+      const removeIconClose = showRemoveIcon ? (
         <Icon {...iconProps1}/>
       ) : null
       const actions = (listType === 'picture-card' && file.status !== 'uploading')
         ? <span class={`${prefixCls}-list-item-actions`}>{previewIcon}{removeIcon}</span>
-        : removeIconCross
+        : removeIconClose
       let message
       if (file.response && typeof file.response === 'string') {
         message = file.response

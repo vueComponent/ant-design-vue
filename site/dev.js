@@ -11,7 +11,7 @@ import Api from './components/api'
 import './components'
 import demoBox from './components/demoBox'
 import demoContainer from './components/demoContainer'
-import Test from '../components/avatar/demo/index'
+import Test from '../components/test/index.vue'
 import zhCN from './theme/zh-CN'
 import enUS from './theme/en-US'
 Vue.use(VueClipboard)

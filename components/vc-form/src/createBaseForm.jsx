@@ -37,7 +37,6 @@ function createBaseForm (option = {}, mixins = []) {
     props = {},
     templateContext,
   } = option
-
   return function decorate (WrappedComponent) {
     let formProps = {}
     if (Array.isArray(props)) {
@@ -79,7 +78,7 @@ function createBaseForm (option = {}, mixins = []) {
           submitting: false,
         }
       },
-      watch: {
+      watch: templateContext ? {} : {
         '$props': {
           handler: function (nextProps) {
             if (mapPropsToFields) {
@@ -99,6 +98,12 @@ function createBaseForm (option = {}, mixins = []) {
         this.wrappedComponentRef(null)
       },
       methods: {
+        updateFields (fields = {}) {
+          this.fieldsStore.updateFields(mapPropsToFields(fields))
+          if (templateContext) {
+            templateContext.$forceUpdate()
+          }
+        },
         onCollectCommon (name, action, args) {
           const fieldMeta = this.fieldsStore.getFieldMeta(name)
           if (fieldMeta[action]) {

@@ -22,7 +22,7 @@ Add or remove form items dynamically.
       v-decorator="{
         id: `names[${k}]`,
         options: {
-          validateTrigger: ['onChange', 'onBlur'],
+          validateTrigger: ['change', 'blur'],
           rules: [{
             required: true,
             whitespace: true,

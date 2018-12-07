@@ -8,15 +8,83 @@
 the `value` of time-related components is `moment`. So, we need to pre-process those values.
 </us>
 
-
+<template>
+<a-form @submit="handleSubmit" :form="form">
+  <a-form-item
+    v-bind="formItemLayout"
+    label='DatePicker'
+  >
+    <a-date-picker v-decorator="['date-picker', config]"/>
+  </a-form-item>
+  <a-form-item
+    v-bind="formItemLayout"
+    label='DatePicker[showTime]'
+  >
+    <a-date-picker v-decorator="['date-time-picker', config]" showTime format='YYYY-MM-DD HH:mm:ss' />
+  </a-form-item>
+  <a-form-item
+    v-bind="formItemLayout"
+    label='MonthPicker'
+  >
+    <a-monthPicker v-decorator="['month-picker', config]" />
+  </a-form-item>
+  <a-form-item
+    v-bind="formItemLayout"
+    label='RangePicker'
+  >
+    <a-range-picker v-decorator="['range-picker', rangeConfig]" />
+  </a-form-item>
+  <a-form-item
+    v-bind="formItemLayout"
+    label='RangePicker[showTime]'
+  >
+    <a-range-picker v-decorator="['range-time-picker', rangeConfig]" showTime format='YYYY-MM-DD HH:mm:ss' />
+  </a-form-item>
+  <a-form-item
+    v-bind="formItemLayout"
+    label='TimePicker'
+  >
+    <a-time-picker v-decorator="['time-picker', config]" />
+  </a-form-item>
+  <a-form-item
+    :wrapperCol="{
+      xs: { span: 24, offset: 0 },
+      sm: { span: 16, offset: 8 },
+    }"
+  >
+    <a-button type='primary' htmlType='submit'>Submit</a-button>
+  </a-form-item>
+</a-form>
+</template>
 <script>
-import { Form } from 'ant-design-vue'
-
-const TimeRelatedForm = {
+export default {
+  beforeCreate () {
+    this.form = this.$form.createForm(this)
+  },
+  data () {
+    window.form = this
+    return {
+      formItemLayout: {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 8 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 16 },
+        },
+      },
+      config: {
+        rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+      },
+      rangeConfig: {
+        rules: [{ type: 'array', required: true, message: 'Please select time!' }],
+      },
+    }
+  },
   methods: {
     handleSubmit  (e) {
       e.preventDefault()
-
       this.form.validateFields((err, fieldsValue) => {
         if (err) {
           return
@@ -41,90 +109,9 @@ const TimeRelatedForm = {
       })
     },
   },
-
-  render () {
-    const { getFieldDecorator } = this.form
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    }
-    const config = {
-      rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-    }
-    const rangeConfig = {
-      rules: [{ type: 'array', required: true, message: 'Please select time!' }],
-    }
-    return (
-      <a-form onSubmit={this.handleSubmit}>
-        <a-form-item
-          {...{ props: formItemLayout }}
-          label='DatePicker'
-        >
-          {getFieldDecorator('date-picker', config)(
-            <a-date-picker />
-          )}
-        </a-form-item>
-        <a-form-item
-          {...{ props: formItemLayout }}
-          label='DatePicker[showTime]'
-        >
-          {getFieldDecorator('date-time-picker', config)(
-            <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' />
-          )}
-        </a-form-item>
-        <a-form-item
-          {...{ props: formItemLayout }}
-          label='MonthPicker'
-        >
-          {getFieldDecorator('month-picker', config)(
-            <a-monthPicker />
-          )}
-        </a-form-item>
-        <a-form-item
-          {...{ props: formItemLayout }}
-          label='RangePicker'
-        >
-          {getFieldDecorator('range-picker', rangeConfig)(
-            <a-range-picker />
-          )}
-        </a-form-item>
-        <a-form-item
-          {...{ props: formItemLayout }}
-          label='RangePicker[showTime]'
-        >
-          {getFieldDecorator('range-time-picker', rangeConfig)(
-            <a-range-picker showTime format='YYYY-MM-DD HH:mm:ss' />
-          )}
-        </a-form-item>
-        <a-form-item
-          {...{ props: formItemLayout }}
-          label='TimePicker'
-        >
-          {getFieldDecorator('time-picker', config)(
-            <a-time-picker />
-          )}
-        </a-form-item>
-        <a-form-item
-          wrapperCol={{
-            xs: { span: 24, offset: 0 },
-            sm: { span: 16, offset: 8 },
-          }}
-        >
-          <a-button type='primary' htmlType='submit'>Submit</a-button>
-        </a-form-item>
-      </a-form>
-    )
-  },
 }
-
-export default Form.create()(TimeRelatedForm)
 </script>
+
 
 
 

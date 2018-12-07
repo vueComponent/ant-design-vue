@@ -17,10 +17,10 @@ Horizontal login form is often used in navigation bar.
   >
     <a-input
       placeholder='Username'
-      v-decorator="{
-        id: 'userName',
-        options: {rules: [{ required: true, message: 'Please input your username!' }]}
-      }"
+      v-decorator="[
+        'userName',
+        {rules: [{ required: true, message: 'Please input your username!' }]}
+      ]"
     >
       <a-icon slot="prefix" type='user' style="color:rgba(0,0,0,.25)"/>
     </a-input>
@@ -30,10 +30,10 @@ Horizontal login form is often used in navigation bar.
     :help="passwordError() || ''"
   >
     <a-input
-      v-decorator="{
-        id: 'password',
-        options: {rules: [{ required: true, message: 'Please input your Password!' }]}
-      }"
+      v-decorator="[
+        'password',
+        {rules: [{ required: true, message: 'Please input your Password!' }]}
+      ]"
       type='password'
       placeholder='Password'
     >

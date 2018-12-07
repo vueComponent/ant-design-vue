@@ -58,6 +58,13 @@ const getSlots = (ele) => {
   })
   return slots
 }
+const getAllChildren = (ele) => {
+  let componentOptions = ele.componentOptions || {}
+  if (ele.$vnode) {
+    componentOptions = ele.$vnode.componentOptions || {}
+  }
+  return ele.children || componentOptions.children || []
+}
 const getSlotOptions = (ele) => {
   if (ele.fnOptions) { // 函数式组件
     return ele.fnOptions
@@ -258,5 +265,6 @@ export {
   camelize,
   getSlots,
   getAllProps,
+  getAllChildren,
 }
 export default hasProp

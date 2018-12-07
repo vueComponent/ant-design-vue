@@ -19,9 +19,9 @@ Add or remove form items dynamically.
     :key="k"
   >
     <a-input
-      v-decorator="{
-        id: `names[${k}]`,
-        options: {
+      v-decorator="[
+        `names[${k}]`,
+        {
           validateTrigger: ['change', 'blur'],
           rules: [{
             required: true,
@@ -29,7 +29,7 @@ Add or remove form items dynamically.
             message: 'Please input passenger\'s name or delete this field.',
           }],
         }
-      }"
+      ]"
       placeholder='passenger name'
       style="width: 60%; margin-right: 8px"
     />

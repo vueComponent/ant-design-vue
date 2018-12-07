@@ -21,15 +21,15 @@ Because the width of label is not fixed, you may need to adjust it by customizin
         <a-col v-for="i in 10" :span="8" :key="i" :style="{ display: i < count ? 'block' : 'none' }">
           <a-form-item :label="`Field ${i}`">
               <a-input
-                v-decorator="{
-                  id: `field-${i}`,
-                  options: {
+                v-decorator="[
+                  `field-${i}`,
+                  {
                     rules: [{
                       required: true,
                       message: 'Input something!',
                     }],
                   }
-                }"
+                ]"
                 placeholder='placeholder'
               />
           </a-form-item>

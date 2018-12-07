@@ -17,10 +17,10 @@ Perform different check rules according to different situations.
       label='Name'
     >
       <a-input
-        v-decorator="{
-          id: 'username',
-          options: {rules: [{ required: true, message: 'Please input your name' }]}
-        }"
+        v-decorator="[
+          'username',
+          {rules: [{ required: true, message: 'Please input your name' }]}
+        ]"
        placeholder='Please input your name'
       />
     </a-form-item>
@@ -30,10 +30,10 @@ Perform different check rules according to different situations.
       label='Nickname'
     >
       <a-input
-        v-decorator="{
-          id: 'nickname',
-          options: {rules: [{ required: checkNick, message: 'Please input your nickname' }]}
-        }"
+        v-decorator="[
+          'nickname',
+          {rules: [{ required: checkNick, message: 'Please input your nickname' }]}
+        ]"
         placeholder='Please input your nickname'
       />
     </a-form-item>

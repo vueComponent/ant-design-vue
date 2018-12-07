@@ -19,13 +19,13 @@ Customized or third-party form controls can be used in Form, too. Controls must 
   <a-form layout='inline' @submit="handleSubmit" :form="form">
     <a-form-item label='Price'>
       <price-input
-        v-decorator="{
-          id: 'price',
-          options: {
+        v-decorator="[
+          'price',
+          {
             initialValue: { number: 0, currency: 'rmb' },
             rules: [{ validator: checkPrice }],
           }
-        }"
+        ]"
       />
     </a-form-item>
     <a-form-item>

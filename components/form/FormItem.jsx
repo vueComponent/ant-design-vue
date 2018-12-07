@@ -6,7 +6,7 @@ import Row from '../grid/Row'
 import Col, { ColProps } from '../grid/Col'
 import warning from '../_util/warning'
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants'
-import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, isValidElement, getSlots } from '../_util/props-util'
+import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, isValidElement, getSlots, getAllChildren } from '../_util/props-util'
 import getTransitionProps from '../_util/getTransitionProps'
 import BaseMixin from '../_util/BaseMixin'
 import { cloneElement, cloneVNodes } from '../_util/vnode'
@@ -86,12 +86,12 @@ export default {
         if (getSlotOptions(child).__ANT_FORM_ITEM) {
           continue
         }
-        const slots = getSlots(child)
+        const children = getAllChildren(child)
         const attrs = child.data && child.data.attrs || {}
         if (FIELD_META_PROP in attrs) { // And means FIELD_DATA_PROP in child.props, too.
           controls.push(child)
-        } else if (slots.default) {
-          controls = controls.concat(this.getControls(slots.default, recursively))
+        } else if (children) {
+          controls = controls.concat(this.getControls(children, recursively))
         }
       }
       return controls
@@ -343,8 +343,12 @@ export default {
     },
     decoratorOption (vnode) {
       if (vnode.data && vnode.data.directives) {
-        const directive = find(vnode.data.directives, ['name', 'decorator']) || {}
-        return directive.value || null
+        const directive = find(vnode.data.directives, ['name', 'decorator'])
+        warning(
+          !directive || (directive && Array.isArray(directive.value)),
+          `Invalid directive: type check failed for directive "decorator". Expected Array, got ${typeof directive.value}. At ${vnode.tag}.`,
+        )
+        return directive ? directive.value : null
       } else {
         return null
       }
@@ -353,13 +357,14 @@ export default {
       const { FormProps } = this
       const getFieldDecorator = FormProps.form.getFieldDecorator
       vnodes.forEach((vnode, index) => {
-        const option = this.decoratorOption(vnode)
-        if (option && option.id) {
-          vnodes[index] = getFieldDecorator(option.id, option.options || {})(vnode)
-        } else if (vnode.children) {
+        if (vnode.children) {
           vnode.children = this.decoratorChildren(cloneVNodes(vnode.children))
         } else if (vnode.componentOptions && vnode.componentOptions.children) {
           vnode.componentOptions.children = this.decoratorChildren(cloneVNodes(vnode.componentOptions.children))
+        }
+        const option = this.decoratorOption(vnode)
+        if (option && option[0]) {
+          vnodes[index] = getFieldDecorator(option[0], option[1])(vnode)
         }
       })
       return vnodes

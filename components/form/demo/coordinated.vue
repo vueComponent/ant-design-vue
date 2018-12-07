@@ -17,10 +17,10 @@ Use `setFieldsValue` to set other control's value programmaticly.
       :wrapperCol="{ span: 12 }"
     >
       <a-input
-        v-decorator="{
-          id: 'note',
-          options: {rules: [{ required: true, message: 'Please input your note!' }]}
-        }"
+        v-decorator="[
+          'note',
+          {rules: [{ required: true, message: 'Please input your note!' }]}
+        ]"
       />
     </a-form-item>
     <a-form-item
@@ -29,10 +29,10 @@ Use `setFieldsValue` to set other control's value programmaticly.
       :wrapperCol="{ span: 12 }"
     >
       <a-select
-        v-decorator="{
-          id: 'gender',
-          options: {rules: [{ required: true, message: 'Please select your gender!' }]}
-        }"
+        v-decorator="[
+          'gender',
+          {rules: [{ required: true, message: 'Please select your gender!' }]}
+        ]"
         placeholder='Select a option and change input text above'
         @change="this.handleSelectChange"
       >

@@ -36,12 +36,12 @@ const CustomizedForm = {
     <a-form layout='inline' :form="form">
       <a-form-item label='Username'>
         <a-input
-          v-decorator="{
-            id: 'username',
-            options: {
+          v-decorator="[
+            'username',
+            {
               rules: [{ required: true, message: 'Username is required!' }],
             }
-          }"
+          ]"
         />
       </a-form-item>
     </a-form>

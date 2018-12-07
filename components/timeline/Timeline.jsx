@@ -19,7 +19,6 @@ export default {
   props: initDefaultProps(TimelineProps, {
     prefixCls: 'ant-timeline',
     reverse: false,
-    mode: '',
   }),
   render () {
     const { prefixCls, reverse, mode, ...restProps } = getOptionProps(this)

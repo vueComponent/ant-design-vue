@@ -8,51 +8,66 @@
 When user visit a page with a list of items, and want to create a new item. The page can popup a form in Modal, then let user fill in the form to create an item.
 </us>
 
+<template>
+  <div>
+    <a-button type='primary' @click="showModal">New Collection</a-button>
+    <collection-create-form
+      ref="collectionForm"
+      :visible="visible"
+      @cancel="handleCancel"
+      @create="handleCreate"
+    />
+  </div>
+</template>
 
 <script>
-import { Form } from 'ant-design-vue'
-
-const CollectionCreateForm = Form.create()(
-  {
-    props: ['visible'],
-    render () {
-      const { visible, form } = this
-      const { getFieldDecorator } = form
-      return (
-        <a-modal
-          visible={visible}
-          title='Create a new collection'
-          okText='Create'
-          onCancel={() => { this.$emit('cancel') }}
-          onOk={() => { this.$emit('create') }}
-        >
-          <a-form layout='vertical'>
-            <a-form-item label='Title'>
-              {getFieldDecorator('title', {
+const CollectionCreateForm = {
+  props: ['visible'],
+  beforeCreate () {
+    this.form = this.$form.createForm(this)
+  },
+  template: `
+    <a-modal
+      :visible="visible"
+      title='Create a new collection'
+      okText='Create'
+      @cancel="() => { $emit('cancel') }"
+      @ok="() => { $emit('create') }"
+    >
+      <a-form layout='vertical' :form="form">
+        <a-form-item label='Title'>
+          <a-input
+            v-decorator="[
+              'title',
+              {
                 rules: [{ required: true, message: 'Please input the title of collection!' }],
-              })(
-                <a-input />
-              )}
-            </a-form-item>
-            <a-form-item label='Description'>
-              {getFieldDecorator('description')(<a-input type='textarea' />)}
-            </a-form-item>
-            <a-form-item class='collection-create-form_last-form-item'>
-              {getFieldDecorator('modifier', {
-                initialValue: 'public',
-              })(
-                <a-radio-group>
-                  <a-radio value='public'>Public</a-radio>
-                  <a-radio value='private'>Private</a-radio>
-                </a-radio-group>
-              )}
-            </a-form-item>
-          </a-form>
-        </a-modal>
-      )
-    },
-  }
-)
+              }
+            ]"
+          />
+        </a-form-item>
+        <a-form-item label='Description'>
+          <a-input
+            type='textarea'
+            v-decorator="['description']"
+          />
+        </a-form-item>
+        <a-form-item class='collection-create-form_last-form-item'>
+          <a-radio-group
+            v-decorator="[
+              'modifier',
+              {
+                initialValue: 'private',
+              }
+            ]"
+          >
+              <a-radio value='public'>Public</a-radio>
+              <a-radio value='private'>Private</a-radio>
+            </a-radio-group>
+        </a-form-item>
+      </a-form>
+    </a-modal>
+  `,
+}
 
 export default {
   data () {
@@ -68,37 +83,21 @@ export default {
       this.visible = false
     },
     handleCreate  () {
-      const form = this.formRef.form
+      const form = this.$refs.collectionForm.form
       form.validateFields((err, values) => {
         if (err) {
           return
         }
-
         console.log('Received values of form: ', values)
         form.resetFields()
         this.visible = false
       })
     },
-    saveFormRef  (formRef) {
-      this.formRef = formRef
-    },
   },
-
-  render () {
-    return (
-      <div>
-        <a-button type='primary' onClick={this.showModal}>New Collection</a-button>
-        <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}
-        />
-      </div>
-    )
-  },
+  components: { CollectionCreateForm },
 }
 </script>
+
 
 
 

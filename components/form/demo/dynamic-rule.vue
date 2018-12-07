@@ -10,24 +10,32 @@ Perform different check rules according to different situations.
 
 
 <template>
-  <a-form :autoFormCreate="(form)=>{this.form = form}">
+  <a-form :form="form">
     <a-form-item
       :labelCol="formItemLayout.labelCol"
       :wrapperCol="formItemLayout.wrapperCol"
       label='Name'
-      fieldDecoratorId="username"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your name' }]}"
     >
-      <a-input placeholder='Please input your name' />
+      <a-input
+        v-decorator="[
+          'username',
+          {rules: [{ required: true, message: 'Please input your name' }]}
+        ]"
+       placeholder='Please input your name'
+      />
     </a-form-item>
     <a-form-item
       :labelCol="formItemLayout.labelCol"
       :wrapperCol="formItemLayout.wrapperCol"
       label='Nickname'
-      fieldDecoratorId="nickname"
-      :fieldDecoratorOptions="{rules: [{ required: checkNick, message: 'Please input your nickname' }]}"
     >
-      <a-input placeholder='Please input your nickname' />
+      <a-input
+        v-decorator="[
+          'nickname',
+          {rules: [{ required: checkNick, message: 'Please input your nickname' }]}
+        ]"
+        placeholder='Please input your nickname'
+      />
     </a-form-item>
     <a-form-item
       :labelCol="formTailLayout.labelCol"
@@ -64,6 +72,7 @@ export default {
       checkNick: false,
       formItemLayout,
       formTailLayout,
+      form: this.$form.createForm(this),
     }
   },
   methods: {

@@ -2,6 +2,33 @@
 
 ---
 
+## 1.1.10
+
+`2018-12-7`
+- 🔥🔥🔥 In the 1.1.10 version, the `Form` component better supports the single-file tempalte syntax. In previous versions, complex component requirements were required to be implemented using JSX. In order to better use the automatic collection and validation of Form forms in the template, we have optimized the way components are used. All Demo files are refactored using the latest syntax.
+However, for the previous API, continue to support, you can not worry about the API changes, resulting in problems in the existing system.
+````html
+<template>
+  <a-form :form="form">
+    <a-form-item>
+      <a-input v-decorator="[id, options]">
+    </a-form-item>
+  </a-form>
+</template>
+<script>
+export default {
+  beforeCreate () {
+    this.form = this.$form.createForm(this, options)
+  },
+}
+</script>
+````
+- 🐞 Fix `Steps` component `labelPlacement` does not work [#281](https://github.com/vueComponent/ant-design-vue/issues/281)
+- 🐞 Fix the `Timeline` component style problem, add `reverse` `mode` props [#8e37cd](https://github.com/vueComponent/ant-design-vue/commit/8e37cd89f92ee2541f641fd860785cfd2361b2b3)
+- `Tree`
+  - 🐞 Fix `treeDefaultExpandedKeys` does not work [#284](https://github.com/vueComponent/ant-design-vue/issues/284)
+  - 🐞 Fixes the component not update when other array attributes such as `expandedKeys` `selectedKeys` changed by array’s mutation methods. [#239](https://github.com/vueComponent/ant-design-vue/issues/239)
+
 ## 1.1.9
 
 `2018-11-26`

@@ -49,7 +49,7 @@ const getSlots = (ele) => {
   if (ele.$vnode) {
     componentOptions = ele.$vnode.componentOptions || {}
   }
-  const children = componentOptions.children || []
+  const children = ele.children || componentOptions.children || []
   const slots = {}
   children.forEach(child => {
     const name = (child.data && child.data.slot) || 'default'
@@ -57,6 +57,13 @@ const getSlots = (ele) => {
     slots[name].push(child)
   })
   return slots
+}
+const getAllChildren = (ele) => {
+  let componentOptions = ele.componentOptions || {}
+  if (ele.$vnode) {
+    componentOptions = ele.$vnode.componentOptions || {}
+  }
+  return ele.children || componentOptions.children || []
 }
 const getSlotOptions = (ele) => {
   if (ele.fnOptions) { // 函数式组件
@@ -258,5 +265,6 @@ export {
   camelize,
   getSlots,
   getAllProps,
+  getAllChildren,
 }
 export default hasProp

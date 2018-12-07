@@ -1,6 +1,8 @@
 import PropTypes from '../_util/vue-types'
 import classNames from 'classnames'
+import Vue from 'vue'
 import isRegExp from 'lodash/isRegExp'
+import warning from '../_util/warning'
 import createDOMForm from '../vc-form/src/createDOMForm'
 import createFormField from '../vc-form/src/createFormField'
 import FormItem from './FormItem'
@@ -54,7 +56,7 @@ export const WrappedFormUtils = {
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
-  form: PropTypes.shape(WrappedFormUtils).loose,
+  form: PropTypes.object,
   // onSubmit: React.FormEventHandler<any>;
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.bool,
@@ -110,29 +112,13 @@ export const ValidationRule = {
 //   validateFirst?: boolean;
 // };
 
-export default {
+const Form = {
   name: 'AForm',
   props: initDefaultProps(FormProps, {
     prefixCls: 'ant-form',
     layout: 'horizontal',
     hideRequiredMark: false,
   }),
-  // static defaultProps = {
-  //   prefixCls: 'ant-form',
-  //   layout: 'horizontal',
-  //   hideRequiredMark: false,
-  //   onSubmit (e) {
-  //     e.preventDefault()
-  //   },
-  // };
-
-  // static propTypes = {
-  //   prefixCls: PropTypes.string,
-  //   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
-  //   children: PropTypes.any,
-  //   onSubmit: PropTypes.func,
-  //   hideRequiredMark: PropTypes.bool,
-  // };
 
   Item: FormItem,
 
@@ -146,10 +132,18 @@ export default {
       fieldDataProp: FIELD_DATA_PROP,
     })
   },
+  createForm (context, options = {}) {
+    return new Vue(Form.create({ ...options, templateContext: context })())
+  },
   provide () {
     return {
       FormProps: this.$props,
     }
+  },
+  watch: {
+    form () {
+      this.$forceUpdate()
+    },
   },
   methods: {
     onSubmit (e) {
@@ -174,6 +168,10 @@ export default {
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     })
     if (autoFormCreate) {
+      warning(
+        false,
+        '`autoFormCreate` is deprecated. please use `form` instead.'
+      )
       const DomForm = this.DomForm || createDOMForm({
         fieldNameProp: 'id',
         ...options,
@@ -214,3 +212,5 @@ export default {
     return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>
   },
 }
+
+export default Form

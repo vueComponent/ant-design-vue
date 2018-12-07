@@ -15,9 +15,26 @@ Customized or third-party form controls can be used in Form, too. Controls must 
 </us>
 
 
-<script>
-import { Form } from 'ant-design-vue'
+<template>
+  <a-form layout='inline' @submit="handleSubmit" :form="form">
+    <a-form-item label='Price'>
+      <price-input
+        v-decorator="[
+          'price',
+          {
+            initialValue: { number: 0, currency: 'rmb' },
+            rules: [{ validator: checkPrice }],
+          }
+        ]"
+      />
+    </a-form-item>
+    <a-form-item>
+      <a-button type='primary' htmlType='submit'>Submit</a-button>
+    </a-form-item>
+  </a-form>
+</template>
 
+<script>
 const hasProp = (instance, prop) => {
   const $options = instance.$options || {}
   const propsData = $options.propsData || {}
@@ -25,6 +42,24 @@ const hasProp = (instance, prop) => {
 }
 const PriceInput = {
   props: ['value'],
+  template: `
+    <span>
+      <a-input
+        type='text'
+        :value="number"
+        @change="handleNumberChange"
+        style="width: 63%; margin-right: 2%;"
+      />
+      <a-select
+        :value="currency"
+        style="width: 32%"
+        @change="handleCurrencyChange"
+      >
+        <a-select-option value='rmb'>RMB</a-select-option>
+        <a-select-option value='dollar'>Dollar</a-select-option>
+      </a-select>
+    </span>
+  `,
   data () {
     const value = this.value || {}
     return {
@@ -56,35 +91,16 @@ const PriceInput = {
       this.triggerChange({ currency })
     },
     triggerChange  (changedValue) {
-    // Should provide an event to pass value to Form.
+      // Should provide an event to pass value to Form.
       this.$emit('change', Object.assign({}, this.$data, changedValue))
     },
   },
-
-  render () {
-    const { number, currency } = this
-    return (
-      <span>
-        <a-input
-          type='text'
-          value={number}
-          onChange={this.handleNumberChange}
-          style={{ width: '65%', marginRight: '3%' }}
-        />
-        <a-select
-          value={currency}
-          style={{ width: '32%' }}
-          onChange={this.handleCurrencyChange}
-        >
-          <a-select-option value='rmb'>RMB</a-select-option>
-          <a-select-option value='dollar'>Dollar</a-select-option>
-        </a-select>
-      </span>
-    )
-  },
 }
 
-const Demo = {
+export default {
+  beforeCreate () {
+    this.form = this.$form.createForm(this)
+  },
   methods: {
     handleSubmit  (e) {
       e.preventDefault()
@@ -102,26 +118,11 @@ const Demo = {
       callback('Price must greater than zero!')
     },
   },
-
-  render () {
-    const { getFieldDecorator } = this.form
-    return (
-      <a-form layout='inline' onSubmit={this.handleSubmit}>
-        <a-form-item label='Price'>
-          {getFieldDecorator('price', {
-            initialValue: { number: 0, currency: 'rmb' },
-            rules: [{ validator: this.checkPrice }],
-          })(<PriceInput />)}
-        </a-form-item>
-        <a-form-item>
-          <a-button type='primary' htmlType='submit'>Submit</a-button>
-        </a-form-item>
-      </a-form>
-    )
+  components: {
+    PriceInput,
   },
 }
 
-export default Form.create()(Demo)
 </script>
 
 

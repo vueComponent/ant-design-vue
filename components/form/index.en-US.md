@@ -1,64 +1,53 @@
-
-````html
-<Form.Item {...props}>
-  {children}
-</Form.Item>
-````
-
 ## API
 
 ### Form
 
 | Property | Description | Type | Default Value |
 | -------- | ----------- | ---- | ------------- |
-| form | Decorated by `Form.create()` will be automatically set `this.form` property, so just pass to form, you don't need to set it by yourself after 1.7.0. | object | n/a |
+| form | Decorated by `Form.create()` will be automatically set `this.form` property, so just pass to form. If you use the template syntax, you can use `this.$form.createForm(this, options)` | object | n/a |
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |
 | layout | Define form layout(Support after 2.8) | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
-| autoFormCreate | Automate Form.create, Recommended for use under the `template` component, and cannot be used with `Form.create()` |Function(form)| |
-| options | The `options` corresponding to `Form.create(options)` | Object | {} |
+| autoFormCreate(deprecated) | Automate Form.create, Recommended for use under the `template` component, and cannot be used with `Form.create()`. You should use `$form.createForm` to instead it after 1.1.9.  |Function(form)| |
+| options(deprecated) | The `options` corresponding to `Form.create(options)`.  You should use `$form.createForm` to instead it after 1.1.9.  | Object | {} |
 
 ### Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |
 
-### autoFormCreate
-
-````html
-<a-form :autoFormCreate="(form)=>{this.form = form}">
-...
-</a-form>
-````
-If you use the `template` syntax, you can use ʻautoFormCreate` to turn on automatic validation and data collection, but each `Form.Item` only to `decorator` for its first child. More complex features suggest `JSX`.
-
-Related examples are as follows:
-
-[coordinated-controls](/ant-design-vue/components/form/#components-form-demo-coordinated-controls)
-
-[dynamic-rules](/ant-design-vue/components/form/#components-form-demo-dynamic-rules)
-
-[horizontal-login-form](/ant-design-vue/components/form/#components-form-demo-horizontal-login-form)
-
-### Form.create(options)
+### Form.create(options) \| this.$form.createForm(this, options)
 
 How to use：
 
+#### Used in jsx, the usage is consistent with the React version of antd
 ```jsx
 const CustomizedForm = {}
 
 CustomizedForm = Form.create({})(CustomizedForm);
 ```
-
 Maintain an ref for wrapped component instance, use `wrappedComponentRef`.
-Example: [demo](#components-form-demo-advanced-search)
+
+#### Single file template usage
+````html
+<template>
+<a-form :form="form" />
+</template>
+<script>
+export default {
+  beforeCreate () {
+    this.form = this.$form.createForm(this, options)
+  },
+}
+</script>
+````
 
 
 The following `options` are available:
 
 | Property | Description | Type |
 | -------- | ----------- | ---- |
-| props | declare props on form(和[like vue props]( https://vuejs.org/v2/api/#props)) | {} |
-| mapPropsToFields | Convert props to field value(e.g. reading the values from Redux store). And you must mark returned fields with [`Form.createFormField`](#Form.createFormField) | (props) => Object{ fieldName: FormField { value } } |
+| props | Only supports the use of Form.create({})(CustomizedForm). declare props on form(和[like vue props]( https://vuejs.org/v2/api/#props)) | {} |
+| mapPropsToFields | Convert props to field value(e.g. reading the values from Redux store). And you must mark returned fields with [`Form.createFormField`](#Form.createFormField). If you use `$form.createForm` to create a collector, you can map any data to the Field without being bound by the parent component. | (props) => Object{ fieldName: FormField { value } } |
 | validateMessages | Default validate message. And its format is similar with [newMessages](https://github.com/yiminghe/async-validator/blob/master/src/messages.js)'s returned value | Object { [nested.path]&#x3A; String } |
 | onFieldsChange | Specify a function that will be called when the value a `Form.Item` gets changed. Usage example: saving the field's value to Redux store. | Function(props, fields) |
 | onValuesChange | A handler while value of any field is changed | (props, values) => void |
@@ -69,7 +58,7 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 
 | Method | Description | Type |
 | ------ | ----------- | ---- |
-| getFieldDecorator | Two-way binding for form, please read below for details. |  |
+| getFieldDecorator | Two-way binding for form, single file template can be bound using the directive `v-decorator`. please read below for details. |  |
 | getFieldError | Get the error of a field. | Function(name) |
 | getFieldsError | Get the specified fields' error. If you don't specify a parameter, you will get all fields' error. | Function(\[names: string\[]]) |
 | getFieldsValue | Get the specified fields' values. If you don't specify a parameter, you will get all fields' values. | Function(\[fieldNames: string\[]]) |
@@ -131,9 +120,9 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 
 To mark the returned fields data in `mapPropsToFields`, [demo](#components-form-demo-global-state).
 
-### this.form.getFieldDecorator(id, options)
+### this.form.getFieldDecorator(id, options) and v-decorator="[id, options]"
 
-After wrapped by `getFieldDecorator`, `value`(or other property defined by `valuePropName`) `onChange`(or other property defined by `trigger`) props will be added to form controls，the flow of form data will be handled by Form which will cause:
+After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property defined by `valuePropName`) `onChange`(or other property defined by `trigger`) props will be added to form controls，the flow of form data will be handled by Form which will cause:
 
 1. You shouldn't use `onChange` to collect data, but you still can listen to `onChange`(and so on) events.
 2. You can not set value of form control via `value` `defaultValue` prop, and you should set default value with `initialValue` in `getFieldDecorator` instead.
@@ -141,10 +130,10 @@ After wrapped by `getFieldDecorator`, `value`(or other property defined by `valu
 
 #### Special attention
 
-1. `getFieldDecorator` can not be used to decorate stateless component.
-2. you can't use `getFieldDecorator` in stateless component: <https://vuejs.org/v2/api/#functional>
+1. `getFieldDecorator` and `v-decorator` can not be used to decorate stateless component.
+2. you can't use `getFieldDecorator` and `v-decorator` in stateless component: <https://vuejs.org/v2/api/#functional>
 
-#### getFieldDecorator(id, options) parameters
+#### getFieldDecorator(id, options) and v-decorator="[id, options]" parameters
 
 | Property | Description | Type | Default Value |
 | -------- | ----------- | ---- | ------------- |
@@ -162,7 +151,7 @@ After wrapped by `getFieldDecorator`, `value`(or other property defined by `valu
 
 Note:
 
-- If Form.Item has multiple children that had been decorated by `getFieldDecorator`, `help` and `required` and `validateStatus` can't be generated automatically.
+- If Form.Item has multiple children that had been decorated by `getFieldDecorator` or `v-decorator`, `help` and `required` and `validateStatus` can't be generated automatically.
 
 | Property | Description | Type | Default Value |
 | -------- | ----------- | ---- | ------------- |
@@ -175,8 +164,6 @@ Note:
 | required | Whether provided or not, it will be generated by the validation rule. | boolean | false |
 | validateStatus | The validation status. If not provided, it will be generated by validation rule. options: 'success' 'warning' 'error' 'validating' | string |  |
 | wrapperCol | The layout for input controls, same as `labelCol` | [object](/ant-design-vue/components/grid/#Col) |  |
-| fieldDecoratorId | Corresponds to the first parameter `id` of `getFieldDecorator(id, options)`. If you need to collect data, you need to set this field. | string | |
-| fieldDecoratorOptions | Corresponds to the second parameter `options` of `getFieldDecorator(id, options)`. | object | {} |
 
 ### Validation Rules
 

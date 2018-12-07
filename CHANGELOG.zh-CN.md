@@ -2,6 +2,36 @@
 
 ---
 
+## 1.1.10
+
+`2018-12-7`
+- 🔥🔥🔥 在1.1.10版本中`Form`组件更好地支持单文件tempalte语法，在以往版本中，对于复杂的组件需求，需要使用JSX才可以实现。为了更好地在template中使用Form表单的自动收集校验功能，我们优化了组件的使用方式。文档全部Demo使用最新语法重构。
+不过对于以往API，还是继续支持，你可以不用担心API的改变，导致已有系统出现问题。
+````html
+<template>
+  <a-form :form="form">
+    <a-form-item>
+      <a-input v-decorator="[id, options]">
+    </a-form-item>
+  </a-form>
+</template>
+<script>
+export default {
+  beforeCreate () {
+    this.form = this.$form.createForm(this, options)
+  },
+}
+</script>
+````
+- 🐞 修复`Steps`组件`labelPlacement`不生效问题 [#281](https://github.com/vueComponent/ant-design-vue/issues/281)
+- 🐞 修复`Timeline`组件样式问题，添加`reverse` `mode`属性 [#8e37cd](https://github.com/vueComponent/ant-design-vue/commit/8e37cd89f92ee2541f641fd860785cfd2361b2b3)
+- `Tree`
+  - 🐞 修复`treeDefaultExpandedKeys`不生效问题 [#284](https://github.com/vueComponent/ant-design-vue/issues/284)
+  - 🐞 修复`expandedKeys` `selectedKeys`等其它数组属性通过组件变异方法改变时组件不更新问题 [#239](https://github.com/vueComponent/ant-design-vue/issues/239)
+
+
+---
+
 ## 1.1.9
 
 `2018-11-26`

@@ -10,24 +10,29 @@ Use `setFieldsValue` to set other control's value programmaticly.
 
 
 <template>
-  <a-form @submit="handleSubmit" :autoFormCreate="(form)=>{this.form = form}">
+  <a-form @submit="handleSubmit" :form="form">
     <a-form-item
       label='Note'
       :labelCol="{ span: 5 }"
       :wrapperCol="{ span: 12 }"
-      fieldDecoratorId="note"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your note!' }]}"
     >
-      <a-input />
+      <a-input
+        v-decorator="[
+          'note',
+          {rules: [{ required: true, message: 'Please input your note!' }]}
+        ]"
+      />
     </a-form-item>
     <a-form-item
       label='Gender'
       :labelCol="{ span: 5 }"
       :wrapperCol="{ span: 12 }"
-      fieldDecoratorId="gender"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please select your gender!' }]}"
     >
       <a-select
+        v-decorator="[
+          'gender',
+          {rules: [{ required: true, message: 'Please select your gender!' }]}
+        ]"
         placeholder='Select a option and change input text above'
         @change="this.handleSelectChange"
       >
@@ -50,6 +55,7 @@ export default {
   data () {
     return {
       formLayout: 'horizontal',
+      form: this.$form.createForm(this),
     }
   },
   methods: {

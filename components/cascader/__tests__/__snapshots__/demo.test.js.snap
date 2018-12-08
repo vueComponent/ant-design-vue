@@ -6,19 +6,19 @@ exports[`renders ./components/cascader/demo/change-on-select.md correctly 1`] = 
 
 exports[`renders ./components/cascader/demo/custom-render.md correctly 1`] = `
 <span tabindex="0" class="ant-cascader-picker" style="width: 100%;"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label"><span><span>
-        Zhejiang / 
-      </span></span><span><span>
-        Hangzhou / 
-      </span></span><span><span>
-      West Lake (<a>752100</a>)
-      </span></span></span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>
+          Zhejiang / 
+        </span></span><span><span>
+          Hangzhou / 
+        </span></span><span><span>
+        West Lake (<a>752100</a>)
+        </span></span></span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>
 `;
 
 exports[`renders ./components/cascader/demo/custom-trigger.md correctly 1`] = `
 <span>
-  Unselect
-  &nbsp;
-  <a href="#" tabindex="0" class="">Change city</a></span>
+    Unselect
+    &nbsp;
+    <a href="#" tabindex="0" class="">Change city</a></span>
 `;
 
 exports[`renders ./components/cascader/demo/default-value.md correctly 1`] = `<span tabindex="0" class="ant-cascader-picker"><input value="" type="text" readonly="true" class="ant-input ant-cascader-input  ant-cascader-input "><span class="ant-cascader-picker-label">Zhejiang / Hangzhou / West Lake</span><i class="anticon anticon-cross-circle ant-cascader-picker-clear"></i><i class="anticon anticon-down ant-cascader-picker-arrow"></i></span>`;

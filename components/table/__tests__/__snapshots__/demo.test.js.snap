@@ -69,7 +69,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td>New York No. 1 Lake Park</td>
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 John Brown</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
-      More actions <i class="anticon anticon-down"></i></a></span></td>
+        More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -78,7 +78,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td>London No. 1 Lake Park</td>
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 Jim Green</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
-      More actions <i class="anticon anticon-down"></i></a></span></td>
+        More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
                 <tr class="ant-table-row  ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -87,7 +87,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td>Sidney No. 1 Lake Park</td>
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 Joe Black</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
-      More actions <i class="anticon anticon-down"></i></a></span></td>
+        More actions <i class="anticon anticon-down"></i></a></span></td>
                 </tr>
               </tbody>
             </table>

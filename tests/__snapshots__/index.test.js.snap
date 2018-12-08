@@ -57,6 +57,7 @@ Array [
   "Tooltip",
   "Upload",
   "Drawer",
+  "Skeleton",
   "default",
 ]
 `;

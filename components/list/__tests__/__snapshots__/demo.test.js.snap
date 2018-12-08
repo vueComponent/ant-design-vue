@@ -356,14 +356,14 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             </div>
             <ul class="ant-list-item-action">
               <li><span><i class="anticon anticon-star-o" style="margin-right: 8px;"></i>
-        156
-      </span><em class="ant-list-item-action-split"></em></li>
+          156
+        </span><em class="ant-list-item-action-split"></em></li>
               <li><span><i class="anticon anticon-like-o" style="margin-right: 8px;"></i>
-        156
-      </span><em class="ant-list-item-action-split"></em></li>
+          156
+        </span><em class="ant-list-item-action-split"></em></li>
               <li><span><i class="anticon anticon-message" style="margin-right: 8px;"></i>
-        2
-      </span></li>
+          2
+        </span></li>
             </ul>
           </div>
           <div class="ant-list-item-extra"><img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"></div>
@@ -384,14 +384,14 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             </div>
             <ul class="ant-list-item-action">
               <li><span><i class="anticon anticon-star-o" style="margin-right: 8px;"></i>
-        156
-      </span><em class="ant-list-item-action-split"></em></li>
+          156
+        </span><em class="ant-list-item-action-split"></em></li>
               <li><span><i class="anticon anticon-like-o" style="margin-right: 8px;"></i>
-        156
-      </span><em class="ant-list-item-action-split"></em></li>
+          156
+        </span><em class="ant-list-item-action-split"></em></li>
               <li><span><i class="anticon anticon-message" style="margin-right: 8px;"></i>
-        2
-      </span></li>
+          2
+        </span></li>
             </ul>
           </div>
           <div class="ant-list-item-extra"><img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"></div>
@@ -412,14 +412,14 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             </div>
             <ul class="ant-list-item-action">
               <li><span><i class="anticon anticon-star-o" style="margin-right: 8px;"></i>
-        156
-      </span><em class="ant-list-item-action-split"></em></li>
+          156
+        </span><em class="ant-list-item-action-split"></em></li>
               <li><span><i class="anticon anticon-like-o" style="margin-right: 8px;"></i>
-        156
-      </span><em class="ant-list-item-action-split"></em></li>
+          156
+        </span><em class="ant-list-item-action-split"></em></li>
               <li><span><i class="anticon anticon-message" style="margin-right: 8px;"></i>
-        2
-      </span></li>
+          2
+        </span></li>
             </ul>
           </div>
           <div class="ant-list-item-extra"><img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"></div>

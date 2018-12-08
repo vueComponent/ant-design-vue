@@ -122,6 +122,8 @@ import { default as version } from './version'
 
 import { default as Drawer } from './drawer'
 
+import { default as Skeleton } from './skeleton'
+
 const components = [
   Affix,
   Anchor,
@@ -174,6 +176,7 @@ const components = [
   Tooltip,
   Upload,
   Drawer,
+  Skeleton,
 ]
 
 const install = function (Vue) {
@@ -251,6 +254,7 @@ export {
   Tooltip,
   Upload,
   Drawer,
+  Skeleton,
 }
 
 export default {

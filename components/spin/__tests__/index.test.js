@@ -37,7 +37,7 @@ describe('Spin', () => {
         delay: 500,
         spinning: true,
       },
-      async: false,
+      sync: false,
     }
     const wrapper = mount(Spin, props)
     await asyncExpect(() => {
@@ -50,13 +50,15 @@ describe('Spin', () => {
       propsData: {
         spinning: false,
       },
-      async: false,
+      sync: false,
     }
     const wrapper = mount(Spin, props)
     await asyncExpect(() => {
-      expect(wrapper.vm.stateSpinning).toBe(false)
+      expect(wrapper.vm.sSpinning).toBe(false)
       wrapper.setProps({ spinning: true })
-      expect(wrapper.vm.stateSpinning).toBe(true)
+    })
+    await asyncExpect(() => {
+      expect(wrapper.vm.sSpinning).toBe(true)
     })
   })
 })

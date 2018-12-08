@@ -74,7 +74,7 @@ const Slider = {
         },
       }))
     },
-    handleWithTooltip (h, { value, dragging, index, ref, ...restProps }) {
+    handleWithTooltip ({ value, dragging, index, ref, ...restProps }) {
       const { tooltipPrefixCls, tipFormatter } = this.$props
       const { visibles } = this
       const visible = tipFormatter ? (visibles[index] || dragging) : false

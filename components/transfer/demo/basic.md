@@ -10,19 +10,20 @@ The most basic usage of `Transfer` involves providing the source data and target
 
 ```html
 <template>
-  <a-transfer
-    :dataSource="mockData"
-    :titles="['Source', 'Target']"
-    :targetKeys="targetKeys"
-    :selectedKeys="selectedKeys"
-    @change="handleChange"
-    @selectChange="handleSelectChange"
-    @scroll="handleScroll"
-    :render="item=>item.title"
-    :disabled="disabled"
-  >
-  </a-transfer>
-  <a-switch unCheckedChildren="disabled" checkedChildren="disabled" :checked="disabled" @change="handleDisable" />
+  <div>
+    <a-transfer
+      :dataSource="mockData"
+      :titles="['Source', 'Target']"
+      :targetKeys="targetKeys"
+      :selectedKeys="selectedKeys"
+      @change="handleChange"
+      @selectChange="handleSelectChange"
+      @scroll="handleScroll"
+      :render="item=>item.title"
+      :disabled="disabled"
+    />
+    <a-switch unCheckedChildren="disabled" checkedChildren="disabled" :checked="disabled" @change="handleDisable" />
+  </div>
 </template>
 <script>
 export default {

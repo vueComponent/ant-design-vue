@@ -12,10 +12,12 @@
 | maskStyle | Style for Drawer's mask element. | object | {} |
 | title | The title for Drawer. | string\|slot | - |
 | visible | Whether the Drawer dialog is visible or not. | boolean | false |
-| width | Width of the Drawer dialog. | string\|number | 256 |
 | wrapClassName | The class name of the container of the Drawer dialog. | string | - |
+| width | Width of the Drawer dialog. | string\|number | 256 |
+| height | placement is `top` or `bottom`, height of the Drawer dialog. | string\|number | - |
+| className | The class name of the container of the Drawer dialog. | string | - |
 | zIndex | The `z-index` of the Drawer. | Number | 1000 |
-| placement | The placement of the Drawer. | 'left' \| 'right' | 'right'
+| placement | The placement of the Drawer. | 'top'  \| 'right' \| 'bottom' \| 'left' | 'right' |
 
 
 ## Methods

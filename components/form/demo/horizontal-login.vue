@@ -10,38 +10,45 @@ Horizontal login form is often used in navigation bar.
 
 
 <template>
-<a-form layout='inline' @submit="handleSubmit" :autoFormCreate="(form)=>{this.form = form}">
-  <template v-if="form">
-    <a-form-item
-      :validateStatus="userNameError() ? 'error' : ''"
-      :help="userNameError() || ''"
-      fieldDecoratorId="userName"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your username!' }]}"
+<a-form layout='inline' @submit="handleSubmit" :form="form">
+  <a-form-item
+    :validateStatus="userNameError() ? 'error' : ''"
+    :help="userNameError() || ''"
+  >
+    <a-input
+      placeholder='Username'
+      v-decorator="[
+        'userName',
+        {rules: [{ required: true, message: 'Please input your username!' }]}
+      ]"
     >
-      <a-input placeholder='Username'>
-        <a-icon slot="prefix" type='user' style="color:rgba(0,0,0,.25)"/>
-      </a-input>
-    </a-form-item>
-    <a-form-item
-      :validateStatus="passwordError() ? 'error' : ''"
-      :help="passwordError() || ''"
-      fieldDecoratorId="password"
-      :fieldDecoratorOptions="{rules: [{ required: true, message: 'Please input your Password!' }]}"
+      <a-icon slot="prefix" type='user' style="color:rgba(0,0,0,.25)"/>
+    </a-input>
+  </a-form-item>
+  <a-form-item
+    :validateStatus="passwordError() ? 'error' : ''"
+    :help="passwordError() || ''"
+  >
+    <a-input
+      v-decorator="[
+        'password',
+        {rules: [{ required: true, message: 'Please input your Password!' }]}
+      ]"
+      type='password'
+      placeholder='Password'
     >
-      <a-input type='password' placeholder='Password'>
-        <a-icon slot="prefix" type='lock' style="color:rgba(0,0,0,.25)"/>
-      </a-input>
-    </a-form-item>
-    <a-form-item>
-      <a-button
-        type='primary'
-        htmlType='submit'
-        :disabled="hasErrors(form.getFieldsError())"
-      >
-        Log in
-      </a-button>
-    </a-form-item>
-  </template>
+      <a-icon slot="prefix" type='lock' style="color:rgba(0,0,0,.25)"/>
+    </a-input>
+  </a-form-item>
+  <a-form-item>
+    <a-button
+      type='primary'
+      htmlType='submit'
+      :disabled="hasErrors(form.getFieldsError())"
+    >
+      Log in
+    </a-button>
+  </a-form-item>
 </a-form>
 </template>
 
@@ -53,7 +60,7 @@ export default {
   data () {
     return {
       hasErrors,
-      form: null,
+      form: this.$form.createForm(this),
     }
   },
   mounted () {

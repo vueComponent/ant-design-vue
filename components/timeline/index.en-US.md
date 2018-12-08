@@ -17,6 +17,9 @@ Timeline
 | -------- | ----------- | ---- | ------- |
 | pending | Set the last ghost node's existence or its content | boolean\|string\|slot | `false` |
 | pendingDot | Set the dot of the last ghost node when pending is true | string\|slot | `<Icon type="loading" />` |
+| reverse | reverse nodes or not | boolean | false |
+| mode | By sending `alternate` the timeline will distribute the nodes to the left and right. | `left` \| `alternate` \| `right` | `left` |
+
 
 ### Timeline.Item
 

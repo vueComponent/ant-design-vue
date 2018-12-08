@@ -3,6 +3,8 @@ import Basic from './basic.md'
 import Color from './color.md'
 import Pending from './pending.md'
 import Custom from './custom.md'
+import Alternate from './alternate'
+import Right from './right'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -32,15 +34,12 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us}/>
-        <br/>
         <Basic />
-        <br/>
         <Color />
-        <br/>
         <Pending />
-        <br/>
         <Custom />
-        <br/>
+        <Alternate />
+        <Right />
         <api>
           <template slot='cn'>
             <CN/>

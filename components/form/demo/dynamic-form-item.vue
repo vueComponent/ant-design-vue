@@ -9,11 +9,76 @@ Add or remove form items dynamically.
 </us>
 
 
-<script>
-import { Form } from 'ant-design-vue'
+<template>
+<a-form @submit="handleSubmit" :form="form">
+  <a-form-item
+    v-for="(k, index) in form.getFieldValue('keys')"
+    v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
+    :label="index === 0 ? 'Passengers' : ''"
+    :required="false"
+    :key="k"
+  >
+    <a-input
+      v-decorator="[
+        `names[${k}]`,
+        {
+          validateTrigger: ['change', 'blur'],
+          rules: [{
+            required: true,
+            whitespace: true,
+            message: 'Please input passenger\'s name or delete this field.',
+          }],
+        }
+      ]"
+      placeholder='passenger name'
+      style="width: 60%; margin-right: 8px"
+    />
+    <a-icon
+      v-if="form.getFieldValue('keys').length > 1"
+      class='dynamic-delete-button'
+      type='minus-circle-o'
+      :disabled="form.getFieldValue('keys').length === 1"
+      @click="() => remove(k)"
+    />
+  </a-form-item>
+  <a-form-item v-bind="formItemLayoutWithOutLabel">
+    <a-button type='dashed' @click="add" style="width: 60%">
+      <a-icon type='plus' /> Add field
+    </a-button>
+  </a-form-item>
+  <a-form-item v-bind="formItemLayoutWithOutLabel">
+    <a-button type='primary' htmlType='submit'>Submit</a-button>
+  </a-form-item>
+</a-form>
+</template>
 
+<script>
 let uuid = 0
-const DynamicFieldSet = {
+export default {
+  beforeCreate () {
+    this.form = this.$form.createForm(this)
+    this.form.getFieldDecorator('keys', { initialValue: [] })
+  },
+  data () {
+    return {
+      formItemLayout: {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 4 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 20 },
+        },
+      },
+      formItemLayoutWithOutLabel: {
+        wrapperCol: {
+          xs: { span: 24, offset: 0 },
+          sm: { span: 20, offset: 4 },
+        },
+      },
+    }
+  },
   methods: {
     remove  (k) {
       const { form } = this
@@ -52,73 +117,7 @@ const DynamicFieldSet = {
       })
     },
   },
-
-  render () {
-    const { getFieldDecorator, getFieldValue } = this.form
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 4 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 20 },
-      },
-    }
-    const formItemLayoutWithOutLabel = {
-      wrapperCol: {
-        xs: { span: 24, offset: 0 },
-        sm: { span: 20, offset: 4 },
-      },
-    }
-    getFieldDecorator('keys', { initialValue: [] })
-    const keys = getFieldValue('keys')
-    const formItems = keys.map((k, index) => {
-      return (
-        <a-form-item
-          {...{ props: (index === 0 ? formItemLayout : formItemLayoutWithOutLabel) }}
-          label={index === 0 ? 'Passengers' : ''}
-          required={false}
-          key={k}
-        >
-          {getFieldDecorator(`names[${k}]`, {
-            validateTrigger: ['onChange', 'onBlur'],
-            rules: [{
-              required: true,
-              whitespace: true,
-              message: "Please input passenger's name or delete this field.",
-            }],
-          })(
-            <a-input placeholder='passenger name' style={{ width: '60%', marginRight: '8px' }} />
-          )}
-          {keys.length > 1 ? (
-            <a-icon
-              class='dynamic-delete-button'
-              type='minus-circle-o'
-              disabled={keys.length === 1}
-              onClick={() => this.remove(k)}
-            />
-          ) : null}
-        </a-form-item>
-      )
-    })
-    return (
-      <a-form onSubmit={this.handleSubmit}>
-        {formItems}
-        <a-form-item {...{ props: formItemLayoutWithOutLabel }}>
-          <a-button type='dashed' onClick={this.add} style={{ width: '60%' }}>
-            <a-icon type='plus' /> Add field
-          </a-button>
-        </a-form-item>
-        <a-form-item {...{ props: formItemLayoutWithOutLabel }}>
-          <a-button type='primary' htmlType='submit'>Submit</a-button>
-        </a-form-item>
-      </a-form>
-    )
-  },
 }
-
-export default Form.create()(DynamicFieldSet)
 </script>
 <style>
 .dynamic-delete-button {

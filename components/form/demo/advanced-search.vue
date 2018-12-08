@@ -10,15 +10,59 @@ Three columns layout is often used for advanced searching of data table.
 Because the width of label is not fixed, you may need to adjust it by customizing its style.
 </us>
 
-
+<template>
+  <div id='components-form-demo-advanced-search'>
+    <a-form
+      class='ant-advanced-search-form'
+      @submit="handleSearch"
+      :form="form"
+    >
+      <a-row :gutter="24">
+        <a-col v-for="i in 10" :span="8" :key="i" :style="{ display: i < count ? 'block' : 'none' }">
+          <a-form-item :label="`Field ${i}`">
+              <a-input
+                v-decorator="[
+                  `field-${i}`,
+                  {
+                    rules: [{
+                      required: true,
+                      message: 'Input something!',
+                    }],
+                  }
+                ]"
+                placeholder='placeholder'
+              />
+          </a-form-item>
+        </a-col>
+      </a-row>
+        <a-row>
+          <a-col :span="24" :style="{ textAlign: 'right' }">
+            <a-button type='primary' htmlType='submit'>Search</a-button>
+            <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
+              Clear
+            </a-button>
+            <a :style="{ marginLeft: '8px', fontSize: '12px' }" @click="toggle">
+              Collapse <a-icon :type="expand ? 'up' : 'down'" />
+            </a>
+          </a-col>
+        </a-row>
+      </a-form>
+        <div class='search-result-list'>Search Result List</div>
+      </div>
+</template>
 <script>
-import { Form } from 'ant-design-vue'
 
-const AdvancedSearchForm = {
+export default {
   data () {
     return {
       expand: false,
+      form: this.$form.createForm(this),
     }
+  },
+  computed: {
+    count () {
+      return this.expand ? 11 : 7
+    },
   },
   methods: {
     handleSearch  (e) {
@@ -36,73 +80,8 @@ const AdvancedSearchForm = {
     toggle  () {
       this.expand = !this.expand
     },
-
-    // To generate mock Form.Item
-    getFields () {
-      const count = this.expand ? 10 : 6
-      const { getFieldDecorator } = this.form
-      const children = []
-      for (let i = 0; i < 10; i++) {
-        children.push(
-          <a-col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-            <a-form-item label={`Field ${i}`}>
-              {getFieldDecorator(`field-${i}`, {
-                rules: [{
-                  required: true,
-                  message: 'Input something!',
-                }],
-              })(
-                <a-input placeholder='placeholder' />
-              )}
-            </a-form-item>
-          </a-col>
-        )
-      }
-      return children
-    },
-  },
-
-  render () {
-    return (
-      <a-form
-        class='ant-advanced-search-form'
-        onSubmit={this.handleSearch}
-      >
-        <a-row gutter={24}>{this.getFields()}</a-row>
-        <a-row>
-          <a-col span={24} style={{ textAlign: 'right' }}>
-            <a-button type='primary' htmlType='submit'>Search</a-button>
-            <a-button style={{ marginLeft: '8px' }} onClick={this.handleReset}>
-              Clear
-            </a-button>
-            <a style={{ marginLeft: '8px', fontSize: '12px' }} onClick={this.toggle}>
-              Collapse <a-icon type={this.expand ? 'up' : 'down'} />
-            </a>
-          </a-col>
-        </a-row>
-      </a-form>
-    )
   },
 }
-
-const WrappedAdvancedSearchForm = Form.create()(AdvancedSearchForm)
-
-export default {
-  methods: {
-    saveFormRef (inst) {
-      this.formRef = inst
-    },
-  },
-  render () {
-    return (
-      <div id='components-form-demo-advanced-search'>
-        <WrappedAdvancedSearchForm wrappedComponentRef={(inst) => this.saveFormRef(inst)}/>
-        <div class='search-result-list'>Search Result List</div>
-      </div>
-    )
-  },
-}
-
 </script>
 <style>
 .ant-advanced-search-form {

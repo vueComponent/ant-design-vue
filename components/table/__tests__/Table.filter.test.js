@@ -66,34 +66,38 @@ describe('Table.filter', () => {
     })
   })
 
-  it('renders menu correctly', (done) => {
+  it('renders menu correctly', async () => {
     const wrapper = mount(Table, getTableOptions())
-    Vue.nextTick(() => {
-      const dropdownWrapper = mount({
+    let dropdownWrapper = null
+    await asyncExpect(() => {
+      dropdownWrapper = mount({
         render () {
           return wrapper.find({ name: 'Trigger' }).vm.getComponent()
         },
-      })
+      }, { sync: false })
+    })
+    await asyncExpect(() => {
       expect(dropdownWrapper.html()).toMatchSnapshot()
-      done()
     })
   })
 
-  it('renders radio filter correctly', (done) => {
+  it('renders radio filter correctly', async () => {
     const wrapper = mount(Table, getTableOptions({
       columns: [{
         ...column,
         filterMultiple: false,
       }],
     }))
-    Vue.nextTick(() => {
-      const dropdownWrapper = mount({
+    let dropdownWrapper = null
+    await asyncExpect(() => {
+      dropdownWrapper = mount({
         render () {
           return wrapper.find({ name: 'Trigger' }).vm.getComponent()
         },
-      })
+      }, { sync: false })
+    })
+    await asyncExpect(() => {
       expect(dropdownWrapper.html()).toMatchSnapshot()
-      done()
     })
   })
 

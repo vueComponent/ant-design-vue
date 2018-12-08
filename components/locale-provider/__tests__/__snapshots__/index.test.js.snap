@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Locale Provider set moment locale when locale changes 1`] = `
-<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="请选择日期" class="ant-calendar-picker-input ant-input"><i class="anticon anticon-cross-circle"><!----></i><span class="ant-calendar-picker-icon"></span></div></span></div>
+<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="请选择日期" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-clear anticon anticon-cross-circle"><!----></i><span class="ant-calendar-picker-icon"></span></div></span></div>
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
@@ -179,7 +179,7 @@ exports[`Locale Provider set moment locale when locale changes 1`] = `
 `;
 
 exports[`Locale Provider set moment locale when locale changes 2`] = `
-<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="Sélectionner une date" class="ant-calendar-picker-input ant-input"><i class="anticon anticon-cross-circle"><!----></i><span class="ant-calendar-picker-icon"></span></div></span></div>
+<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="Sélectionner une date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-clear anticon anticon-cross-circle"><!----></i><span class="ant-calendar-picker-icon"></span></div></span></div>
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
@@ -357,7 +357,7 @@ exports[`Locale Provider set moment locale when locale changes 2`] = `
 `;
 
 exports[`Locale Provider set moment locale when locale changes 3`] = `
-<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="anticon anticon-cross-circle"><!----></i><span class="ant-calendar-picker-icon"></span></div></span></div>
+<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-clear anticon anticon-cross-circle"><!----></i><span class="ant-calendar-picker-icon"></span></div></span></div>
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">

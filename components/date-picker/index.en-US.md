@@ -37,11 +37,14 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | popupStyle | to customize the style of the popup calendar | object | {} |
 | dropdownClassName | to customize the className of the popup calendar  | string | - |
 | size | determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | string | - |
+| suffixIcon | The custom suffix icon | VNode \| slot | - |
 
 ### Common Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | openChange | a callback function, can be executed whether the popup calendar is popped up or closed | function(status) |
+| panelChange | callback when picker panel mode is changed | function(value, mode) |
+
 
 ### Common Methods
 
@@ -105,7 +108,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | defaultValue | to set default date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 | disabledTime | to specify the time that cannot be selected | function(dates: [moment, moment], partial: `'start'|'end'`) | - |
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
-| ranges | preseted ranges for quick selection | { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } \| () => { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } | - |
+| ranges | preseted ranges for quick selection | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" | - |
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker/#API) |
 | showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
@@ -114,6 +117,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 ### RangePicker Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
+| calendarChange | a callback function, can be executed when the start time or the end time of the range is changing | function(dates: [moment, moment], dateStrings: [string, string]) |
 | change | a callback function, can be executed when the selected time is changing | function(dates: [moment, moment], dateStrings: [string, string]) |
 | ok | callback when click ok button | function() |
 

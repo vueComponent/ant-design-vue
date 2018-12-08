@@ -3,10 +3,11 @@ import * as moment from 'moment'
 import Calendar from '../vc-calendar'
 import VcDatePicker from '../vc-calendar/src/Picker'
 import Icon from '../icon'
-import { hasProp, getOptionProps, initDefaultProps } from '../_util/props-util'
+import { hasProp, getOptionProps, initDefaultProps, getComponentFromProp, isValidElement } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import { WeekPickerProps } from './interface'
 import interopDefault from '../_util/interopDefault'
+import { cloneElement } from '../_util/vnode'
 
 function formatValue (value, format) {
   return (value && value.format(format)) || ''
@@ -74,6 +75,7 @@ export default {
         this.setState({ sValue: value })
       }
       this.$emit('change', value, formatValue(value, this.format))
+      this.focus()
     },
     clearSelection (e) {
       e.preventDefault()
@@ -92,6 +94,8 @@ export default {
 
   render () {
     const props = getOptionProps(this)
+    let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+    suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
     const {
       prefixCls, disabled, pickerClass, popupStyle,
       pickerInputClass, format, allowClear, locale, localeCode, disabledDate,
@@ -119,11 +123,24 @@ export default {
     )
     const clearIcon = (!disabled && allowClear && this.sValue) ? (
       <Icon
-        type='cross-circle'
+        type='close-circle'
         class={`${prefixCls}-picker-clear`}
         onClick={this.clearSelection}
+        theme='filled'
       />
     ) : null
+
+    const inputIcon = suffixIcon && (
+      isValidElement(suffixIcon)
+        ? cloneElement(
+          suffixIcon,
+          {
+            class: `${prefixCls}-picker-icon`,
+          },
+        ) : <span class={`${prefixCls}-picker-icon`}>{suffixIcon}</span>) || (
+      <Icon type='calendar' class={`${prefixCls}-picker-icon`} />
+    )
+
     const input = ({ value }) => {
       return (
         <span>
@@ -138,7 +155,7 @@ export default {
             onBlur={blur}
           />
           {clearIcon}
-          <span class={`${prefixCls}-picker-icon`} />
+          {inputIcon}
         </span>
       )
     }

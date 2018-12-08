@@ -12,9 +12,9 @@
 
 ````html
 // 默认语言为 en-US，如果你需要设置其他语言，推荐在入口文件全局设置 locale
-// import moment from 'moment';
-// import 'moment/locale/zh-cn';
-// moment.locale('zh-cn');
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 <a-date-picker :defaultValue="moment('2015-01-01', 'YYYY-MM-DD')" />
 ````
@@ -37,12 +37,14 @@
 | popupStyle | 额外的弹出日历样式 | object | {} |
 | dropdownClassName | 额外的弹出日历 className | string | - |
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | string | 无 |
+| suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |
 
 ### 共有的事件
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | openChange | 弹出日历和关闭日历的回调 | function(status) |
+| panelChange | 日期面板变化时的回调 | function(value, mode) | - |
 
 ### 共同的方法
 
@@ -108,7 +110,7 @@
 | defaultValue | 默认日期 | [moment](http://momentjs.com/)\[] | 无 |
 | disabledTime | 不可选择的时间 | function(dates: [moment, moment], partial: `'start'|'end'`) | 无 |
 | format | 展示的日期格式 | string | "YYYY-MM-DD HH:mm:ss" |
-| ranges       | 预设时间范围快捷选择 | { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } \| () => { \[range: string\]&#x3A; [moment](http://momentjs.com/)\[] } | 无 |
+| ranges       | 预设时间范围快捷选择 | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | 无 |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker-cn/#API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/)\[] | [moment(), moment()] |

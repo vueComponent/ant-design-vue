@@ -16,6 +16,7 @@ export const PickerProps = () => ({
   format: PropTypes.string,
   disabled: PropTypes.bool,
   allowClear: PropTypes.bool,
+  suffixIcon: PropTypes.any,
   popupStyle: PropTypes.object,
   dropdownClassName: PropTypes.string,
   locale: PropTypes.any,

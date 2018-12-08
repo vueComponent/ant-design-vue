@@ -1,4 +1,3 @@
-
 import TimePickerPanel from '../vc-time-picker/Panel'
 import classNames from 'classnames'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
@@ -147,9 +146,11 @@ export default function wrapPicker (Picker, props, defaultFormat) {
           <Picker
             {...pickerProps}
           >
-            <template slot='renderExtraFooter'>
-              {this.$slots.renderExtraFooter}
-            </template>
+            {this.$slots && Object.keys(this.$slots).map(key => (
+              <template slot={key} key={key}>
+                {this.$slots[key]}
+              </template>
+            ))}
           </Picker>
         )
       },

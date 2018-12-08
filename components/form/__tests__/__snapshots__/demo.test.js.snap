@@ -434,31 +434,33 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="date-picker" title="DatePicker" class="ant-form-item-required">DatePicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
-      <!---->
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i></div></span></span>
+        <!---->
+      </div>
     </div>
-  </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="date-time-picker" title="DatePicker[showTime]" class="ant-form-item-required">DatePicker[showTime]</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="date-time-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
-      <!---->
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 195px;" data-__meta="[object Object]" data-__field="[object Object]" id="date-time-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i></div></span></span>
+        <!---->
+      </div>
     </div>
-  </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="month-picker" title="MonthPicker" class="ant-form-item-required">MonthPicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="month-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
-      <!---->
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="month-picker"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i></div></span></span>
+        <!---->
+      </div>
     </div>
-  </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="range-picker" title="RangePicker" class="ant-form-item-required">RangePicker</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="range-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span><input readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span></span></span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" data-__meta="[object Object]" data-__field="[object Object]" id="range-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span><input readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path>
+          </svg></i></span></span></span>
         <!---->
       </div>
     </div>
@@ -466,7 +468,9 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="range-time-picker" title="RangePicker[showTime]" class="ant-form-item-required">RangePicker[showTime]</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" style="width: 350px;" data-__meta="[object Object]" data-__field="[object Object]" id="range-time-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span><input readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-picker-icon"></span></span></span></span>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><span tabindex="0" class="ant-calendar-picker" style="width: 350px;" data-__meta="[object Object]" data-__field="[object Object]" id="range-time-picker"><span class="ant-calendar-picker-input ant-input"><input readonly="true" placeholder="Start date" tabindex="-1" class="ant-calendar-range-picker-input"><span class="ant-calendar-range-picker-separator"> ~ </span><input readonly="true" placeholder="End date" tabindex="-1" class="ant-calendar-range-picker-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path>
+          </svg></i></span></span></span>
         <!---->
       </div>
     </div>
@@ -654,10 +658,10 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Success" class="">Success</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
-      <!---->
+      <div class="ant-form-item-control has-feedback has-success"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i></div></span></span>
+        <!---->
+      </div>
     </div>
-  </div>
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Warning" class="">Warning</label></div>
@@ -691,10 +695,10 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="inline" class="">inline</label></div>
     <div class="ant-col-xs-24 ant-col-sm-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-col-11"><div class="ant-row ant-form-item ant-form-item-with-help"><div class="ant-form-item-control-wrapper"><div class="ant-form-item-control has-error"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
-      <div class="ant-form-explain show-help-enter">Please select the correct date</div>
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-col-11"><div class="ant-row ant-form-item ant-form-item-with-help"><div class="ant-form-item-control-wrapper"><div class="ant-form-item-control has-error"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i></div></span></span>
+        <div class="ant-form-explain show-help-enter">Please select the correct date</div>
+      </div>
     </div>
-  </div>
   </div>
   </div>
   <div class="ant-col-2"><span style="display: inline-block; width: 100%; text-align: center;">
@@ -703,11 +707,11 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
   <div class="ant-col-11">
     <div class="ant-row ant-form-item">
       <div class="ant-form-item-control-wrapper">
-        <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span class="ant-calendar-picker-icon"></span></div></span></span>
-        <!---->
+        <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="width: 100%;"><div class=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><i class="ant-calendar-picker-icon anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i></div></span></span>
+          <!---->
+        </div>
       </div>
     </div>
-  </div>
   </div></span>
   <!---->
   </div>

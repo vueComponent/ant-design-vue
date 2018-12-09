@@ -84,6 +84,7 @@ function getNotificationInstance (prefixCls, placement, callback) {
     class: `${prefixCls}-${placement}`,
     style: getPlacementStyle(placement),
     getContainer: defaultGetContainer,
+    closeIcon: (h) => <Icon class={`${prefixCls}-close-icon`} type={'close'}/>,
   }, (notification) => {
     notificationInstance[cacheKey] = notification
     callback(notification)
@@ -93,7 +94,7 @@ function getNotificationInstance (prefixCls, placement, callback) {
 const typeToIcon = {
   success: 'check-circle-o',
   info: 'info-circle-o',
-  error: 'cross-circle-o',
+  error: 'close-circle-o',
   warning: 'exclamation-circle-o',
 }
 

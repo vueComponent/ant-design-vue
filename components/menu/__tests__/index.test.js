@@ -3,6 +3,13 @@ import { asyncExpect } from '@/tests/utils'
 import Menu from '..'
 import Icon from '../../icon'
 
+jest.mock('mutationobserver-shim', () => {
+  global.MutationObserver = function MutationObserver () {
+    this.observe = () => {}
+    this.disconnect = () => {}
+  }
+})
+
 const { SubMenu } = Menu
 function $$ (className) {
   return document.body.querySelectorAll(className)
@@ -292,6 +299,9 @@ describe('Menu', () => {
       wrapper.vm.$forceUpdate()
     })
     await asyncExpect(() => {
+      wrapper.trigger('transitionend', { propertyName: 'width' })
+    })
+    await asyncExpect(() => {
       expect(wrapper.findAll('ul.ant-menu-root').at(0).classes()).toContain('ant-menu-vertical')
       expect(wrapper.findAll('ul.ant-menu-sub').length).toBe(0)
     }, 0)
@@ -337,6 +347,9 @@ describe('Menu', () => {
       // 动画完成后的回调
       wrapper.vm.$refs.menu.switchModeFromInline = false
       wrapper.vm.$forceUpdate()
+    })
+    await asyncExpect(() => {
+      wrapper.trigger('transitionend', { propertyName: 'width' })
     })
     await asyncExpect(() => {
       wrapper.findAll('.ant-menu-submenu-title').at(0).trigger('mouseenter')

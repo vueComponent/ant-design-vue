@@ -54,33 +54,51 @@ const Menu = {
     this.preProps = { ...this.$props }
   },
   watch: {
-    '$props': {
-      handler: function (nextProps) {
-        const { preProps, sOpenKeys } = this
-        const { prefixCls } = preProps
-        if (preProps.mode === 'inline' && nextProps.mode !== 'inline') {
-          this.switchModeFromInline = true
-        }
-        if (hasProp(this, 'openKeys')) {
-          this.setState({ sOpenKeys: nextProps.openKeys })
-          this.preProps = { ...nextProps }
-          return
-        }
-        if (nextProps.inlineCollapsed && !preProps.inlineCollapsed) {
-          this.switchModeFromInline =
-        !!sOpenKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
-          this.inlineOpenKeys = sOpenKeys
+    mode (val, oldVal) {
+      if (oldVal === 'inline' && val !== 'inline') {
+        this.switchingModeFromInline = true
+      }
+    },
+    openKeys (val) {
+      this.setState({ sOpenKeys: val })
+    },
+    inlineCollapsed (val) {
+      if (!hasProp(this, 'openKeys')) {
+        if (val) {
+          this.switchingModeFromInline = true
+          this.inlineOpenKeys = this.sOpenKeys
           this.setState({ sOpenKeys: [] })
-        }
-
-        if (!nextProps.inlineCollapsed && preProps.inlineCollapsed) {
+        } else {
           this.setState({ sOpenKeys: this.inlineOpenKeys })
           this.inlineOpenKeys = []
         }
-        this.preProps = { ...nextProps }
-      },
-      deep: true,
+      }
     },
+    // '$props': {
+    //   handler: function (nextProps) {
+    //     const { preProps, sOpenKeys } = this
+    //     if (preProps.mode === 'inline' && nextProps.mode !== 'inline') {
+    //       this.switchingModeFromInline = true
+    //     }
+    //     if (hasProp(this, 'openKeys')) {
+    //       this.setState({ sOpenKeys: nextProps.openKeys })
+    //       this.preProps = { ...nextProps }
+    //       return
+    //     }
+    //     if (nextProps.inlineCollapsed && !preProps.inlineCollapsed) {
+    //       this.switchingModeFromInline = true
+    //       this.inlineOpenKeys = sOpenKeys
+    //       this.setState({ sOpenKeys: [] })
+    //     }
+
+    //     if (!nextProps.inlineCollapsed && preProps.inlineCollapsed) {
+    //        this.setState({ sOpenKeys: this.inlineOpenKeys })
+    //        this.inlineOpenKeys = []
+    //     }
+    //     this.preProps = { ...nextProps }
+    //   },
+    //   deep: true,
+    // },
     'layoutSiderContext.sCollapsed': function (val) {
       const { openKeys, sOpenKeys = [], prefixCls } = this
       if (hasProp(this, 'openKeys')) {
@@ -88,7 +106,7 @@ const Menu = {
         return
       }
       if (val) {
-        this.switchModeFromInline =
+        this.switchingModeFromInline =
         !!sOpenKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
         this.inlineOpenKeys = sOpenKeys
         this.setState({ sOpenKeys: [] })
@@ -105,7 +123,7 @@ const Menu = {
       !(hasProp(this, 'inlineCollapsed') && props.mode !== 'inline'),
       '`inlineCollapsed` should only be used when Menu\'s `mode` is inline.',
     )
-    this.switchModeFromInline = false
+    this.switchingModeFromInline = false
     this.leaveAnimationExecutedWhenInlineCollapsed = false
     this.inlineOpenKeys = []
     let sOpenKeys
@@ -120,6 +138,24 @@ const Menu = {
     }
   },
   methods: {
+    restoreModeVerticalFromInline () {
+      if (this.switchingModeFromInline) {
+        this.switchingModeFromInline = false
+        this.$forceUpdate()
+      }
+    },
+    handleTransitionEnd (e) {
+      // console.log(111)
+      // when inlineCollapsed menu width animation finished
+      // https://github.com/ant-design/ant-design/issues/12864
+      const widthCollapsed = e.propertyName === 'width' && e.target === e.currentTarget
+      // Fix for <Menu style={{ width: '100%' }} />, the width transition won't trigger when menu is collapsed
+      // https://github.com/ant-design/ant-design-pro/issues/2783
+      const iconScaled = e.propertyName === 'font-size' && e.target.className.indexOf('anticon') >= 0
+      if (widthCollapsed || iconScaled) {
+        this.restoreModeVerticalFromInline()
+      }
+    },
     handleClick (e) {
       this.handleOpenChange([])
       this.$emit('click', e)
@@ -144,7 +180,7 @@ const Menu = {
     },
     getRealMenuMode () {
       const inlineCollapsed = this.getInlineCollapsed()
-      if (this.switchModeFromInline && inlineCollapsed) {
+      if (this.switchingModeFromInline && inlineCollapsed) {
         return 'inline'
       }
       const { mode } = this.$props
@@ -170,29 +206,15 @@ const Menu = {
           case 'vertical-right':
           // When mode switch from inline
           // submenu should hide without animation
-            if (this.switchModeFromInline) {
+            if (this.switchingModeFromInline) {
               menuOpenAnimation = ''
-              this.switchModeFromInline = false
+              this.switchingModeFromInline = false
             } else {
               menuOpenAnimation = 'zoom-big'
             }
             break
           case 'inline':
-            menuOpenAnimation = { on: {
-              ...animation,
-              leave: (node, done) => animation.leave(node, () => {
-              // Make sure inline menu leave animation finished before mode is switched
-                this.switchModeFromInline = false
-                // this.setState({})
-                this.$forceUpdate()
-                // when inlineCollapsed change false to true, all submenu will be unmounted,
-                // so that we don't need handle animation leaving.
-                if (this.getRealMenuMode() === 'vertical') {
-                  return
-                }
-                done()
-              }),
-            }}
+            menuOpenAnimation = { on: animation }
             break
           default:
         }
@@ -223,6 +245,9 @@ const Menu = {
         select: this.handleSelect,
         deselect: this.handleDeselect,
         openChange: this.handleOpenChange,
+      },
+      nativeOn: {
+        transitionend: this.handleTransitionEnd,
       },
     }
     if (!hasProp(this, 'selectedKeys')) {

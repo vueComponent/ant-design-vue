@@ -174,7 +174,7 @@ describe('DatePicker', () => {
     const wrapper = mount(DatePicker, { sync: false, attachToDocument: true })
     await asyncExpect(() => {
       openPanel(wrapper)
-    })
+    }, 0)
     await asyncExpect(() => {
       selectDateFromBody(moment('2016-11-23'))
     }, 0)

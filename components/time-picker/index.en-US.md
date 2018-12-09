@@ -2,7 +2,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| addon | some addon to timepicker panel bottom | slot | - |
+| addon | some addon to timepicker panel bottom | slot \| slot-scope | - |
 | allowEmpty | allow clearing text | boolean | true |
 | autoFocus | get focus when component mounted | boolean | false |
 | clearText | clear tooltip of icon | string | clear |

@@ -60,7 +60,7 @@ export default {
     id: PropTypes.string,
     inputIcon: PropTypes.any,
     clearIcon: PropTypes.any,
-    addon: PropTypes.any,
+    addon: PropTypes.func,
   }, {
     clearText: 'clear',
     prefixCls: 'rc-time-picker',
@@ -172,7 +172,7 @@ export default {
 
     getPanelElement () {
       const {
-        prefixCls, placeholder, disabledHours,
+        prefixCls, placeholder, disabledHours, addon,
         disabledMinutes, disabledSeconds, hideDisabledOptions, inputReadOnly,
         allowEmpty, showHour, showMinute, showSecond, defaultOpenValue, clearText,
         use12Hours, focusOnOpen, onKeyDown2, hourStep, minuteStep, secondStep,
@@ -207,9 +207,8 @@ export default {
           focusOnOpen={focusOnOpen}
           onKeydown={onKeyDown2}
           clearIcon={clearIcon}
-        >
-          {getComponentFromProp(this, 'addon')}
-        </Panel>
+          addon={addon}
+        />
       )
     },
 

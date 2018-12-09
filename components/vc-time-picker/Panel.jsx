@@ -49,6 +49,7 @@ const Panel = {
     hourStep: PropTypes.number,
     minuteStep: PropTypes.number,
     secondStep: PropTypes.number,
+    addon: PropTypes.func.def(noop),
     focusOnOpen: PropTypes.bool,
     // onKeydown: PropTypes.func,
     clearIcon: PropTypes.any,
@@ -112,7 +113,7 @@ const Panel = {
 
   render () {
     const {
-      prefixCls, placeholder, disabledMinutes,
+      prefixCls, placeholder, disabledMinutes, addon,
       disabledSeconds, hideDisabledOptions, allowEmpty, showHour, showMinute, showSecond,
       format, defaultOpenValue, clearText, use12Hours,
       focusOnOpen, hourStep, minuteStep, secondStep, inputReadOnly,
@@ -180,7 +181,7 @@ const Panel = {
           use12Hours={use12Hours}
           isAM={this.isAM()}
         />
-        {this.$slots.default}
+        {addon(this)}
       </div>
     )
   },

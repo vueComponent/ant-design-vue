@@ -139,10 +139,14 @@ const TimePicker = {
       const className = {
         [`${props.prefixCls}-${props.size}`]: !!props.size,
       }
-      let addon = getComponentFromProp(this, 'addon')
-      addon = addon ? <div class={`${props.prefixCls}-panel-addon`}>
-        {addon}
-      </div> : null
+      const tempAddon = getComponentFromProp(this, 'addon', {}, false)
+      const addon = (panel) => {
+        return tempAddon ? (
+          <div class={`${props.prefixCls}-panel-addon`}>
+            {typeof tempAddon === 'function' ? tempAddon(panel) : tempAddon}
+          </div>
+        ) : null
+      }
       const { prefixCls } = props
       let suffixIcon = getComponentFromProp(this, 'suffixIcon')
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon

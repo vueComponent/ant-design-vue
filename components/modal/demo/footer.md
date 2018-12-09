@@ -17,7 +17,7 @@ You could set `footer` to `null` if you don't need default footer buttons.
 <template>
   <div>
     <a-button type="primary" @click="showModal">
-      Open
+      Open Modal with customized footer
     </a-button>
     <a-modal
       v-model="visible"

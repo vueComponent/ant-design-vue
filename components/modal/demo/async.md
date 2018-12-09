@@ -13,7 +13,7 @@ you can use this pattern when you submit a form.
 ```html
 <template>
   <div>
-    <a-button type="primary" @click="showModal">Open</a-button>
+    <a-button type="primary" @click="showModal">Open Modal with async logic</a-button>
     <a-modal
       title="Title"
       :visible="visible"

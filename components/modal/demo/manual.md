@@ -1,27 +1,37 @@
 
 <cn>
-#### 手动移除
-手动关闭modal。
+#### 手动更新和移除
+手动更新和关闭 `Modal.method` 方式创建的对话框。
 </cn>
 
 <us>
-#### Manual to destroy
-Manually destroying a modal.
+#### Manual to update destroy
+Manually updateing and destroying a modal from `Modal.method`.
 </us>
 
 ```html
 <template>
-  <a-button @click="success">Success</a-button>
+  <a-button @click="countDown">Open modal to close in 5s</a-button>
 </template>
 <script>
 export default {
   methods: {
-    success() {
+    countDown() {
+      let secondsToGo = 5;
       const modal = this.$success({
         title: 'This is a notification message',
-        content: 'This modal will be destroyed after 1 second',
+        content: `This modal will be destroyed after ${secondsToGo} second.`,
       });
-      setTimeout(() => modal.destroy(), 1000);
+      const interval = setInterval(() => {
+        secondsToGo -= 1;
+        modal.update({
+          content: `This modal will be destroyed after ${secondsToGo} second.`,
+        });
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(interval)
+        modal.destroy()
+      }, secondsToGo * 1000);
     }
   }
 }

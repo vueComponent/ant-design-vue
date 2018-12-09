@@ -18,6 +18,9 @@ To use `confirm()` to popup a confirmation modal dialog.
     <a-button @click="showDeleteConfirm" type="dashed">
       Delete
     </a-button>
+    <a-button @click="showPropsConfirm" type="dashed">
+      With extra props
+    </a-button>
   </div>
 </template>
 <script>
@@ -52,6 +55,24 @@ export default {
         },
       });
     },
+    showPropsConfirm() {
+      this.$confirm({
+        title: 'Are you sure delete this task?',
+        content: 'Some descriptions',
+        okText: 'Yes',
+        okType: 'danger',
+        okButtonProps: {
+          props: {disabled: true},
+        },
+        cancelText: 'No',
+        onOk() {
+          console.log('OK');
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
+    }
   }
 }
 </script>

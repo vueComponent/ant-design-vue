@@ -71,6 +71,14 @@ describe('Modal.confirm triggers callbacks correctly', () => {
     expect($$('.ant-btn')).toHaveLength(1)
     expect($$('.ant-btn')[0].innerHTML).toContain('OK')
   })
+
+  it('allows extra props on buttons', () => {
+    open({ okButtonProps: { props: { disabled: true }}, cancelButtonProps: { attrs: { 'data-test': 'baz' }}})
+    expect($$('.ant-btn')).toHaveLength(2)
+    expect($$('.ant-btn')[0].attributes['data-test'].value).toBe('baz')
+    expect($$('.ant-btn')[1].disabled).toBe(true)
+  })
+
   it('trigger onCancel once when click on cancel button', () => {
     jest.useFakeTimers();
     ['info', 'success', 'warning', 'error'].forEach(async (type) => {
@@ -78,11 +86,11 @@ describe('Modal.confirm triggers callbacks correctly', () => {
         title: 'title',
         content: 'content',
       })
-      expect($$(`.ant-confirm-${type}`)).toHaveLength(1)
+      expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(1)
       $$('.ant-btn')[0].click()
       jest.runAllTimers()
       await asyncExpect(() => {
-        expect($$(`.ant-confirm-${type}`)).toHaveLength(0)
+        expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(0)
       })
     })
     jest.useRealTimers()

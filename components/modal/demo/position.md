@@ -1,12 +1,12 @@
 
 <cn>
 #### 自定义位置
-您可以直接使用 `centered` 或类似 `style.top` 等样式来设置对话框位置。
+使用 `centered` 或类似 `style.top` 的样式来设置对话框位置。
 </cn>
 
 <us>
 #### To customize the position of modal
-You can use `centered`、`style.top` or other styles to set position of modal dialog.
+You can use `centered`,`style.top` or other styles to set position of modal dialog.
 </us>
 
 ```html

@@ -310,7 +310,8 @@ const Cascader = {
     const { $slots, sPopupVisible, inputValue, $listeners } = this
     const { sValue: value, inputFocused } = this.$data
     const props = getOptionProps(this)
-    const suffixIcon = getComponentFromProp(this, 'suffixIcon')
+    let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+    suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
     const {
       prefixCls, inputPrefixCls, placeholder, size, disabled,
       allowClear, showSearch = false, ...otherProps } = props
@@ -408,9 +409,9 @@ const Cascader = {
     }
     const children = filterEmpty($slots.default)
     const inputIcon = suffixIcon && (
-      isValidElement(suffixIcon[0])
+      isValidElement(suffixIcon)
         ? cloneElement(
-          suffixIcon[0],
+          suffixIcon,
           {
             class: {
               [`${prefixCls}-picker-arrow`]: true,

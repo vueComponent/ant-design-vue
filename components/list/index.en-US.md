@@ -32,7 +32,7 @@ More about pagination, please check [`Pagination`](https://vuecomponent.github.i
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| column | column of grid | number | - |
+| column | column of grid | number oneOf [ 1, 2, 3, 4, 6, 8, 12, 24] | - |
 | gutter | spacing between grid | number | 0 |
 | size | Size of list | `default` \| `middle` \| `small` | `default` |
 | xs | `<576px` column of grid | number | - |

@@ -33,7 +33,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| column | 列数 | number | - |
+| column | 列数 | number oneOf [ 1, 2, 3, 4, 6, 8, 12, 24] | - |
 | gutter | 栅格间隔 | number | 0 |
 | xs | `<576px` 展示的列数 | number | - |
 | sm | `≥576px` 展示的列数 | number | - |

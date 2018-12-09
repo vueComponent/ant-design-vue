@@ -5,8 +5,10 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from './locale/en_US'
 import BaseMixin from '../_util/BaseMixin'
 import PropTypes from '../_util/vue-types'
+import Icon from '../icon'
 import interopDefault from '../_util/interopDefault'
-import { initDefaultProps, hasProp, getOptionProps, getComponentFromProp } from '../_util/props-util'
+import { initDefaultProps, hasProp, getOptionProps, getComponentFromProp, isValidElement } from '../_util/props-util'
+import { cloneElement } from '../_util/vnode'
 
 export function generateShowHourMinuteSecond (format) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -52,6 +54,7 @@ export const TimePickerProps = () => ({
   clearText: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   popupClassName: PropTypes.string,
+  suffixIcon: PropTypes.any,
   align: PropTypes.object,
   placement: PropTypes.any,
   transitionName: PropTypes.string,
@@ -136,7 +139,41 @@ const TimePicker = {
       const className = {
         [`${props.prefixCls}-${props.size}`]: !!props.size,
       }
-      const tempAddon = getComponentFromProp(this, 'addon')
+      let addon = getComponentFromProp(this, 'addon')
+      addon = addon ? <div class={`${props.prefixCls}-panel-addon`}>
+        {addon}
+      </div> : null
+      const { prefixCls } = props
+      let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
+      const clockIcon = suffixIcon && (
+        isValidElement(suffixIcon)
+          ? cloneElement(
+            suffixIcon,
+            {
+              class: `${prefixCls}-clock-icon`,
+            },
+          ) : <span class={`${prefixCls}-clock-icon`}>{suffixIcon}</span>) || (
+        <Icon
+          type='clock-circle'
+          class={`${prefixCls}-clock-icon`}
+          theme='outlined'
+        />
+      )
+
+      const inputIcon = (
+        <span class={`${prefixCls}-icon`}>
+          {clockIcon}
+        </span>
+      )
+
+      const clearIcon = (
+        <Icon
+          type='close-circle'
+          class={`${prefixCls}-panel-clear-btn-icon`}
+          theme='filled'
+        />
+      )
       const timeProps = {
         props: {
           ...generateShowHourMinuteSecond(format),
@@ -144,6 +181,9 @@ const TimePicker = {
           format,
           value: this.sValue,
           placeholder: props.placeholder === undefined ? locale.placeholder : props.placeholder,
+          addon,
+          inputIcon,
+          clearIcon,
         },
         class: className,
         ref: 'timePicker',
@@ -155,13 +195,7 @@ const TimePicker = {
         },
       }
       return (
-        <VcTimePicker {...timeProps}>
-          {tempAddon ? <template slot='addon'>
-            <div class={`${props.prefixCls}-panel-addon`}>
-              {tempAddon}
-            </div>
-          </template> : null}
-        </VcTimePicker>
+        <VcTimePicker {...timeProps}/>
       )
     },
   },

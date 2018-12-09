@@ -7,7 +7,7 @@ import HideColumn from './hide-column'
 import IntervalOptions from './interval-options'
 import Size from './size'
 import Value from './value'
-
+import Suffix from './suffix'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -39,6 +39,7 @@ export default {
         <IntervalOptions/>
         <Size/>
         <Value/>
+        <Suffix/>
         <api>
           <CN slot='cn' />
           <US/>

@@ -60,6 +60,7 @@ export default {
     id: PropTypes.string,
     inputIcon: PropTypes.any,
     clearIcon: PropTypes.any,
+    addon: PropTypes.any,
   }, {
     clearText: 'clear',
     prefixCls: 'rc-time-picker',
@@ -207,7 +208,7 @@ export default {
           onKeydown={onKeyDown2}
           clearIcon={clearIcon}
         >
-          {this.$slots.addon}
+          {getComponentFromProp(this, 'addon')}
         </Panel>
       )
     },

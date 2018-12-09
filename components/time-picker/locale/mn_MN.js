@@ -1,5 +1,5 @@
 const locale = {
-  placeholder: 'Selezionare l\'orario',
+  placeholder: 'Цаг сонгох',
 }
 
 export default locale

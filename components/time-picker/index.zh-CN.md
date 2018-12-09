@@ -23,6 +23,7 @@
 | placeholder | 没有值的时候显示的内容 | string | "请选择时间" |
 | popupClassName | 弹出层类名 | string | '' |
 | secondStep | 秒选项间隔 | number | 1 |
+| suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |
 | use12Hours | 使用 12 小时制，为 true 时 `format` 默认为 `h:mm:ss a` | boolean | false |
 | value(v-model) | 当前时间 | [moment](http://momentjs.com/) | 无 |
 

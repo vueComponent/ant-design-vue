@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
 import message from '..'
+import Icon from '../../icon'
 
 describe('message', () => {
   beforeEach(() => {
@@ -126,7 +127,19 @@ describe('message', () => {
       expect(document.querySelectorAll('.ant-message-notice').length).toBe(0)
     }, 0)
   })
+  it('should allow custom icon', async () => {
+    message.open({ content: 'Message', icon: (h) => <Icon type='smile-o' /> })
+    await asyncExpect(() => {
+      expect(document.querySelectorAll('.anticon-smile-o').length).toBe(1)
+    }, 0)
+  })
 
+  it('should have no icon', async () => {
+    message.open({ content: 'Message' })
+    await asyncExpect(() => {
+      expect(document.querySelectorAll('.ant-message-notice .anticon').length).toBe(0)
+    }, 0)
+  })
   // https://github.com/ant-design/ant-design/issues/8201
   it('should destroy messages correctly', async () => {
     // eslint-disable-next-line

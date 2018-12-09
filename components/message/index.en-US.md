@@ -11,14 +11,9 @@ This components provides some static methods, with usage and arguments as follow
 
 | Argument | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| content | content of the message | string\|vueNode \|function(h) | - |
+| content | content of the message | string\| VNode \|(h) => VNode | - |
 | duration | time(seconds) before auto-dismiss, don't dismiss if set to 0 | number | 1.5 |
 | onClose | Specify a function that will be called when the message is closed | Function | - |
-
-Methods for global configuration and destruction are also provided:
-
-- `message.config(options)`
-- `message.destroy()`
 
 `afterClose` can be called in then-able interface:
 
@@ -28,7 +23,25 @@ Methods for global configuration and destruction are also provided:
 where `level` refers one static methods of `message`. The result of `then` method will be a Promise.
 
 
-### message.config
+- `message.open(config)`
+
+The properties of config are as follows:
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| content | content of the message | string\| VNode \|(h) => VNode | - |
+| duration | time(seconds) before auto-dismiss, don't dismiss if set to 0 | number | 3 |
+| onClose | Specify a function that will be called when the message is closed | function | - |
+| icon | Customized Icon | string\| VNode \|(h) => VNode | - |
+
+### Global static methods
+
+Methods for global configuration and destruction are also provided:
+
+- `message.config(options)`
+- `message.destroy()`
+
+#### message.config
 
 ```js
 message.config({

@@ -15,6 +15,10 @@ describe('Input', () => {
       expect(wrapper.html()).toMatchSnapshot()
     }, 0)
   })
+  it('select()', () => {
+    const wrapper = mount(Input)
+    wrapper.vm.select()
+  })
 })
 
 focusTest(TextArea)

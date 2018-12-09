@@ -14,4 +14,20 @@ describe('Grid', () => {
     const wrapper = mount(Row)
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('renders wrapped Col correctly', () => {
+    const wrapper = mount({
+      render () {
+        return <Row gutter={20}>
+          <div>
+            <Col span='12' />
+          </div>
+          <Col span='12' />
+        </Row>
+      },
+    }
+
+    )
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

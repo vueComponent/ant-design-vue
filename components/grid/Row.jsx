@@ -56,6 +56,11 @@ export default {
     ...RowProps,
     gutter: PropTypes.oneOfType([PropTypes.number, BreakpointMap]).def(0),
   },
+  provide () {
+    return {
+      rowContext: this,
+    }
+  },
   data () {
     return {
       screens: {},
@@ -129,22 +134,7 @@ export default {
       marginLeft: `${gutter / -2}px`,
       marginRight: `${gutter / -2}px`,
     } : {}
-    const cols = ($slots.default || []).map((col) => {
-      if (isEmptyElement(col)) {
-        return null
-      }
-      if (getOptionProps(col) && gutter > 0) {
-        return cloneElement(col, {
-          style: {
-            paddingLeft: `${gutter / 2}px`,
-            paddingRight: `${gutter / 2}px`,
-            ...getStyle(col, true),
-          },
-        })
-      }
-      return col
-    })
-    return <div class={classes} style={rowStyle}>{cols}</div>
+    return <div class={classes} style={rowStyle}>{$slots.default}</div>
   },
 }
 

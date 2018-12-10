@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps } from '../_util/props-util'
 
 const skeletonTitleProps = {
   prefixCls: PropTypes.string,
@@ -16,7 +16,7 @@ const Title = {
     prefixCls: 'ant-skeleton-title',
   }),
   render () {
-    const { prefixCls, width } = getOptionProps(this)
+    const { prefixCls, width } = this.$props
     const zWidth = typeof width === 'number' ? `${width}px` : width
     return (
       <h3

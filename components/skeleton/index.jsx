@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps, hasProp } from '../_util/props-util'
+import { initDefaultProps, hasProp } from '../_util/props-util'
 import Avatar, { SkeletonAvatarProps } from './Avatar'
 import Title, { SkeletonTitleProps } from './Title'
 import Paragraph, { SkeletonParagraphProps } from './Paragraph'
@@ -84,7 +84,7 @@ const Skeleton = {
     const {
       loading, prefixCls,
       avatar, title, paragraph, active,
-    } = getOptionProps(this)
+    } = this.$props
     if (loading || !hasProp(this, 'loading')) {
       const hasAvatar = !!avatar || avatar === ''
       const hasTitle = !!title

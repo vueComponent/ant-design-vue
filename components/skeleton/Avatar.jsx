@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps } from '../_util/props-util'
 
 const skeletonAvatarProps = {
   prefixCls: PropTypes.string,
@@ -16,7 +16,7 @@ const Avatar = {
     size: 'large',
   }),
   render () {
-    const { prefixCls, size, shape } = getOptionProps(this)
+    const { prefixCls, size, shape } = this.$props
 
     const sizeCls = classNames({
       [`${prefixCls}-lg`]: size === 'large',

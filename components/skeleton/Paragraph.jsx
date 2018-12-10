@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps } from '../_util/props-util'
 
 const widthUnit = PropTypes.oneOfType([
   PropTypes.number,
@@ -35,7 +35,7 @@ const Paragraph = {
     },
   },
   render () {
-    const { prefixCls, rows } = getOptionProps(this)
+    const { prefixCls, rows } = this.$props
     const rowList = [...Array(rows)].map((_, index) => {
       const width = this.getWidth(index)
       return <li key={index} style={{ width: typeof width === 'number' ? `${width}px` : width }} />

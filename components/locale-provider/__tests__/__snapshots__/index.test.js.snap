@@ -537,13 +537,17 @@ exports[`Locale Provider set moment locale when locale changes 3`] = `
 exports[`Locale Provider should display the text as ar 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="الصفحة السابقة" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="الصفحة السابقة" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="الصفحة التالية" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="الصفحة التالية" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -910,13 +914,17 @@ exports[`Locale Provider should display the text as ar 1`] = `
 exports[`Locale Provider should display the text as bg 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Предишна страница" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Предишна страница" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Следваща страница" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Следваща страница" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -1283,13 +1291,17 @@ exports[`Locale Provider should display the text as bg 1`] = `
 exports[`Locale Provider should display the text as ca 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Pàgina prèvia" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Pàgina prèvia" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Pàgina següent" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Pàgina següent" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -1656,13 +1668,17 @@ exports[`Locale Provider should display the text as ca 1`] = `
 exports[`Locale Provider should display the text as cs 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Předchozí strana" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Předchozí strana" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Následující strana" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Následující strana" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -2029,13 +2045,17 @@ exports[`Locale Provider should display the text as cs 1`] = `
 exports[`Locale Provider should display the text as de 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Vorherige Seite" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Vorherige Seite" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Nächste Seite" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Nächste Seite" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -2402,13 +2422,17 @@ exports[`Locale Provider should display the text as de 1`] = `
 exports[`Locale Provider should display the text as el 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Προηγούμενη Σελίδα" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Προηγούμενη Σελίδα" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Επόμενη Σελίδα" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Επόμενη Σελίδα" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -2775,13 +2799,17 @@ exports[`Locale Provider should display the text as el 1`] = `
 exports[`Locale Provider should display the text as en 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -3148,13 +3176,17 @@ exports[`Locale Provider should display the text as en 1`] = `
 exports[`Locale Provider should display the text as en-gb 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Previous Page" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Next Page" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -3521,13 +3553,17 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
 exports[`Locale Provider should display the text as es 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Página anterior" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Página anterior" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Página siguiente" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Página siguiente" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -3894,13 +3930,17 @@ exports[`Locale Provider should display the text as es 1`] = `
 exports[`Locale Provider should display the text as et 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Eelmine leht" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Eelmine leht" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Järgmine leht" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Järgmine leht" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -4267,13 +4307,17 @@ exports[`Locale Provider should display the text as et 1`] = `
 exports[`Locale Provider should display the text as fa 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="صفحه قبلی" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="صفحه قبلی" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="صفحه بعدی" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="صفحه بعدی" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -4640,13 +4684,17 @@ exports[`Locale Provider should display the text as fa 1`] = `
 exports[`Locale Provider should display the text as fi 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Edellinen sivu" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Edellinen sivu" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Seuraava sivu" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Seuraava sivu" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -5013,13 +5061,17 @@ exports[`Locale Provider should display the text as fi 1`] = `
 exports[`Locale Provider should display the text as fr 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Page précédente" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Page précédente" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Page suivante" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Page suivante" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -5386,13 +5438,17 @@ exports[`Locale Provider should display the text as fr 1`] = `
 exports[`Locale Provider should display the text as fr 2`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Page précédente" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Page précédente" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Page suivante" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Page suivante" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -5759,13 +5815,17 @@ exports[`Locale Provider should display the text as fr 2`] = `
 exports[`Locale Provider should display the text as is 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Fyrri síða" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Fyrri síða" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Næsta síða" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Næsta síða" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -6132,13 +6192,17 @@ exports[`Locale Provider should display the text as is 1`] = `
 exports[`Locale Provider should display the text as it 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Pagina precedente" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Pagina precedente" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Pagina successiva" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Pagina successiva" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -6505,13 +6569,17 @@ exports[`Locale Provider should display the text as it 1`] = `
 exports[`Locale Provider should display the text as ja 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="前のページ" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="前のページ" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="次のページ" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="次のページ" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -6878,13 +6946,17 @@ exports[`Locale Provider should display the text as ja 1`] = `
 exports[`Locale Provider should display the text as ko 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="이전 페이지" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="이전 페이지" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="다음 페이지" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="다음 페이지" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -7251,13 +7323,17 @@ exports[`Locale Provider should display the text as ko 1`] = `
 exports[`Locale Provider should display the text as ku-iq 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Rûpelê Pêş" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Rûpelê Pêş" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Rûpelê Paş" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Rûpelê Paş" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -7624,13 +7700,17 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
 exports[`Locale Provider should display the text as mn-mn 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Өмнөх хуудас" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Өмнөх хуудас" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Дараагийн хуудас" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Дараагийн хуудас" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -7997,13 +8077,17 @@ exports[`Locale Provider should display the text as mn-mn 1`] = `
 exports[`Locale Provider should display the text as nb 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Forrige side" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Forrige side" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Neste side" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Neste side" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -8370,13 +8454,17 @@ exports[`Locale Provider should display the text as nb 1`] = `
 exports[`Locale Provider should display the text as nl 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Vorige pagina" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Vorige pagina" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Volgende pagina" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Volgende pagina" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -8743,13 +8831,17 @@ exports[`Locale Provider should display the text as nl 1`] = `
 exports[`Locale Provider should display the text as nl-be 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Vorige pagina" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Vorige pagina" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Volgende pagina" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Volgende pagina" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -9116,13 +9208,17 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
 exports[`Locale Provider should display the text as pl 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Poprzednia strona" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Poprzednia strona" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Następna strona" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Następna strona" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -9489,13 +9585,17 @@ exports[`Locale Provider should display the text as pl 1`] = `
 exports[`Locale Provider should display the text as pt 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Página Anterior" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Página Anterior" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Página Seguinte" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Página Seguinte" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -9862,13 +9962,17 @@ exports[`Locale Provider should display the text as pt 1`] = `
 exports[`Locale Provider should display the text as pt-br 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Página anterior" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Página anterior" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Próxima página" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Próxima página" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -10235,13 +10339,17 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
 exports[`Locale Provider should display the text as ru 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Назад" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Назад" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Вперед" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Вперед" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -10608,13 +10716,17 @@ exports[`Locale Provider should display the text as ru 1`] = `
 exports[`Locale Provider should display the text as sk 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Predchádzajúca strana" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Predchádzajúca strana" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Nasledujúca strana" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Nasledujúca strana" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -10981,13 +11093,17 @@ exports[`Locale Provider should display the text as sk 1`] = `
 exports[`Locale Provider should display the text as sl 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Prejšnja stran" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Prejšnja stran" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Naslednja stran" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Naslednja stran" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -11354,13 +11470,17 @@ exports[`Locale Provider should display the text as sl 1`] = `
 exports[`Locale Provider should display the text as sr 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Prethodna strana" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Prethodna strana" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Sledeća strana" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Sledeća strana" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -11727,13 +11847,17 @@ exports[`Locale Provider should display the text as sr 1`] = `
 exports[`Locale Provider should display the text as sv 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Föreg sida" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Föreg sida" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Nästa sida" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Nästa sida" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -12100,13 +12224,17 @@ exports[`Locale Provider should display the text as sv 1`] = `
 exports[`Locale Provider should display the text as th 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="หน้าก่อนหน้า" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="หน้าก่อนหน้า" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="หน้าถัดไป" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="หน้าถัดไป" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -12473,13 +12601,17 @@ exports[`Locale Provider should display the text as th 1`] = `
 exports[`Locale Provider should display the text as tr 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Önceki Sayfa" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Önceki Sayfa" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Sonraki Sayfa" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Sonraki Sayfa" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -12846,13 +12978,17 @@ exports[`Locale Provider should display the text as tr 1`] = `
 exports[`Locale Provider should display the text as uk 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Попередня сторінка" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Попередня сторінка" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Наступна сторінка" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Наступна сторінка" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -13219,13 +13355,17 @@ exports[`Locale Provider should display the text as uk 1`] = `
 exports[`Locale Provider should display the text as vi 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="Trang Trước" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="Trang Trước" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="Trang Kế" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="Trang Kế" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -13592,13 +13732,17 @@ exports[`Locale Provider should display the text as vi 1`] = `
 exports[`Locale Provider should display the text as zh-cn 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="上一页" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="上一页" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="下一页" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="下一页" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">
@@ -13965,13 +14109,17 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
 exports[`Locale Provider should display the text as zh-tw 1`] = `
 <div>
   <ul unselectable="unselectable" class="ant-pagination">
-    <li title="上一頁" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"></a></li>
+    <li title="上一頁" aria-disabled="true" class="ant-pagination-disabled ant-pagination-prev"><a class="ant-pagination-item-link"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg></i></a></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a>1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a>2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a>3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a>4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a>5</a></li>
-    <li title="下一頁" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"></a></li>
+    <li title="下一頁" tabindex="0" class=" ant-pagination-next"><a class="ant-pagination-item-link"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+            <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+          </svg></i></a></li>
     <li class="ant-pagination-options">
       <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" tabindex="0" class="ant-select-selection ant-select-selection--single">

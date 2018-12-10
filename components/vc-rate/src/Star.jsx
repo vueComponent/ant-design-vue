@@ -1,5 +1,6 @@
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
+import { getComponentFromProp } from '../../_util/props-util'
 function noop () {}
 
 export default {
@@ -52,10 +53,8 @@ export default {
   },
   render () {
     const { onHover, onClick, onKeyDown, disabled, prefixCls, index, count, value } = this
-    let character = this.character
-    if (character === undefined) {
-      character = this.$slots.character
-    }
+
+    const character = getComponentFromProp(this, 'character')
     return (
       <li
         class={this.getClassName()}

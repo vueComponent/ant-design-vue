@@ -155,21 +155,6 @@ describe('Tooltip', () => {
   //   expect(wrapper2.find('span').at(0).element.style.display).toBe('block')
   // })
 
-  // it('should not wrap span when trigger is not hover', () => {
-  //   const wrapper = mount(
-  //     <Tooltip
-  //       title='xxxxx'
-  //       trigger='click'
-  //       mouseEnterDelay={0}
-  //       mouseLeaveDelay={0}
-  //     >
-  //       <button disabled>Hello world!</button>
-  //     </Tooltip>
-  //   )
-
-  //   expect(wrapper.find('span')).toHaveLength(0)
-  // })
-
   // it('should works for arrowPointAtCenter', () => {
   //   const arrowWidth = 5
   //   const horizontalArrowShift = 16

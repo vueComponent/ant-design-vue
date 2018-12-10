@@ -3,7 +3,7 @@ import omit from 'omit.js'
 import Tooltip from '../tooltip'
 import abstractTooltipProps from '../tooltip/abstractTooltipProps'
 import PropTypes from '../_util/vue-types'
-import { getOptionProps, hasProp, getComponentFromProp } from '../_util/props-util'
+import { getOptionProps, hasProp, getComponentFromProp, mergeProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import buttonTypes from '../button/buttonTypes'
 import Icon from '../icon'
@@ -26,6 +26,8 @@ const Popconfirm = {
     okText: PropTypes.any,
     cancelText: PropTypes.any,
     icon: PropTypes.any,
+    okButtonProps: PropTypes.object,
+    cancelButtonProps: PropTypes.object,
   },
   mixins: [BaseMixin],
   model: {
@@ -38,18 +40,23 @@ const Popconfirm = {
     },
   },
   data () {
-    return {
-      sVisible: this.$props.visible,
+    const props = getOptionProps(this)
+    const state = { sVisible: false }
+    if ('visible' in props) {
+      state.sVisible = props.visible
+    } else if ('defaultVisible' in props) {
+      state.sVisible = props.defaultVisible
     }
+    return state
   },
   methods: {
     onConfirm (e) {
-      this.setVisible(false)
+      this.setVisible(false, e)
       this.$emit('confirm', e)
     },
 
     onCancel (e) {
-      this.setVisible(false)
+      this.setVisible(false, e)
       this.$emit('cancel', e)
     },
 
@@ -57,18 +64,35 @@ const Popconfirm = {
       this.setVisible(sVisible)
     },
 
-    setVisible (sVisible) {
+    setVisible (sVisible, e) {
       if (!hasProp(this, 'visible')) {
         this.setState({ sVisible })
       }
-      this.$emit('visibleChange', sVisible)
+      this.$emit('visibleChange', sVisible, e)
     },
     getPopupDomNode () {
       return this.$refs.tooltip.getPopupDomNode()
     },
     renderOverlay (popconfirmLocale) {
-      const { prefixCls, okType } = this
-      const icon = getComponentFromProp(this, 'icon') || <Icon type='exclamation-circle' />
+      const { prefixCls, okType, okButtonProps, cancelButtonProps } = this
+      const icon = getComponentFromProp(this, 'icon') || <Icon type='exclamation-circle' theme='filled'/>
+      const cancelBtnProps = mergeProps({
+        props: {
+          size: 'small',
+        },
+        on: {
+          click: this.onCancel,
+        },
+      }, cancelButtonProps)
+      const okBtnProps = mergeProps({
+        props: {
+          type: okType,
+          size: 'small',
+        },
+        on: {
+          click: this.onConfirm,
+        },
+      }, okButtonProps)
       return (
         <div class={`${prefixCls}-inner-content`}>
           <div class={`${prefixCls}-message`}>
@@ -78,10 +102,10 @@ const Popconfirm = {
             </div>
           </div>
           <div class={`${prefixCls}-buttons`}>
-            <Button onClick={this.onCancel} size='small'>
+            <Button {...cancelBtnProps}>
               {getComponentFromProp(this, 'cancelText') || popconfirmLocale.cancelText}
             </Button>
-            <Button onClick={this.onConfirm} type={okType} size='small'>
+            <Button {...okBtnProps}>
               {getComponentFromProp(this, 'okText') || popconfirmLocale.okText}
             </Button>
           </div>

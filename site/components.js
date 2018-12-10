@@ -55,6 +55,7 @@ import {
   Upload,
   // version,
   Drawer,
+  Skeleton,
 } from 'ant-design-vue'
 
 Vue.prototype.$message = message
@@ -117,6 +118,7 @@ Vue.use(TimePicker)
 Vue.use(Timeline)
 Vue.use(Tooltip)
 Vue.use(Upload)
+Vue.use(Skeleton)
 
 /* v1.1.2 registration methods */
 // Vue.component(Affix.name, Affix) // a-affix

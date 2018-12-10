@@ -48,7 +48,6 @@ const Circle = {
        a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
       const trailPathStyle = {
-        stroke: strokeColor,
         strokeDasharray: `${len - gapDegree}px ${len}px`,
         strokeDashoffset: `-${gapDegree / 2}px`,
         transition: 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s',
@@ -102,13 +101,9 @@ const Circle = {
         <path
           {...pathFirst}
         />
-        {
-          percent > 0 ? (
-            <path
-              {...pathSecond}
-            />
-          ) : null
-        }
+        <path
+          {...pathSecond}
+        />
       </svg>
     )
   },

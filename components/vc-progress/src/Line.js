@@ -30,6 +30,7 @@ const Line = {
           `M ${strokeLinecap === 'round' ? center : 0},${center}
            L ${strokeLinecap === 'round' ? right : 100},${center}`
     const viewBoxString = `0 0 100 ${strokeWidth}`
+
     const pathFirst = {
       attrs: {
         'd': pathString,

@@ -177,10 +177,10 @@ describe('DatePicker', () => {
     }, 0)
     await asyncExpect(() => {
       selectDateFromBody(moment('2016-11-23'))
-    }, 0)
+    }, 100)
     await asyncExpect(() => {
       clearInput(wrapper)
-    }, 300)
+    }, 1000)
     await asyncExpect(() => {
       openPanel(wrapper)
     }, 0)

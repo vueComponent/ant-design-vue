@@ -74,11 +74,18 @@ export default {
       if (format || (progressStatus !== 'exception' && progressStatus !== 'success')) {
         text = textFormatter(validProgress(percent), validProgress(successPercent))
       } else if (progressStatus === 'exception') {
-        text = <Icon type={`cross${iconType}`} />
+        text = <Icon type={`close${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />
       } else if (progressStatus === 'success') {
-        text = <Icon type={`check${iconType}`} />
+        text = <Icon type={`check${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />
       }
-      progressInfo = <span class={`${prefixCls}-text`}>{text}</span>
+      progressInfo = (
+        <span
+          class={`${prefixCls}-text`}
+          title={typeof text === 'string' ? text : undefined}
+        >
+          {text}
+        </span>
+      )
     }
 
     if (type === 'line') {

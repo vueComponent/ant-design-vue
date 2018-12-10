@@ -415,4 +415,12 @@ export default [
     path: 'drawer-cn',
     component: () => import('../components/drawer/demo/index.vue'),
   },
+  {
+    path: 'skeleton',
+    component: () => import('../components/skeleton/demo/index.vue'),
+  },
+  {
+    path: 'skeleton-cn',
+    component: () => import('../components/skeleton/demo/index.vue'),
+  },
 ]

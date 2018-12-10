@@ -10,7 +10,7 @@ const getStepsProps = (defaultProps = {}) => {
     iconPrefix: PropTypes.string,
     current: PropTypes.number,
     initial: PropTypes.number,
-    labelPlacement: PropTypes.oneOf(['horizontal', 'vertical']),
+    labelPlacement: PropTypes.oneOf(['horizontal', 'vertical']).def('horizontal'),
     status: PropTypes.oneOf(['wait', 'process', 'finish', 'error']),
     size: PropTypes.oneOf(['default', 'small']),
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -18,7 +18,6 @@ const getStepsProps = (defaultProps = {}) => {
       PropTypes.bool,
       PropTypes.func,
     ]),
-    labelPlacement: PropTypes.string.def('horizontal'),
   }
   return initDefaultProps(props, defaultProps)
 }

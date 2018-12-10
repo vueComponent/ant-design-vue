@@ -51,7 +51,7 @@ exports[`renders ./components/skeleton/demo/complex.md correctly 1`] = `
 `;
 
 exports[`renders ./components/skeleton/demo/list.md correctly 1`] = `
-<div><span tabindex="0" class="ant-switch"><span class="ant-switch-inner"></span></span>
+<div><button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button>
   <div class="ant-list ant-list-vertical ant-list-lg ant-list-split">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">

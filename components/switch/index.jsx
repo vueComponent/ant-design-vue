@@ -50,6 +50,8 @@ const Switch = {
         ...restProps,
         prefixCls,
         loadingIcon,
+        checkedChildren: getComponentFromProp(this, 'checkedChildren'),
+        unCheckedChildren: getComponentFromProp(this, 'unCheckedChildren'),
       },
       on: this.$listeners,
       class: classes,
@@ -59,10 +61,7 @@ const Switch = {
       <Wave insertExtraNode>
         <VcSwitch
           {...switchProps}
-        >
-          <template slot='checkedChildren'>{getComponentFromProp(this, 'checkedChildren')}</template>
-          <template slot='unCheckedChildren'>{getComponentFromProp(this, 'unCheckedChildren')}</template>
-        </VcSwitch>
+        />
       </Wave>
     )
   },

@@ -61,7 +61,7 @@ export default {
     } else if (defaultExpandParent) {
       state._expandedKeys = conductExpandParent(expandedKeys || defaultExpandedKeys, keyEntities)
     } else {
-      state._expandedKeys = defaultExpandedKeys
+      state._expandedKeys = expandedKeys || defaultExpandedKeys
     }
 
     this.onDebounceExpand = debounce(this.expandFolderNode, 200, {
@@ -150,30 +150,20 @@ export default {
     },
 
     expandFolderNode  (event, node) {
-      const { _expandedKeys: expandedKeys = [] } = this.$data
-      const { eventKey = '', expanded, isLeaf } = node
+      const { isLeaf } = node
 
       if (isLeaf || event.shiftKey || event.metaKey || event.ctrlKey) {
         return
       }
 
-      const newExpandedKeys = expandedKeys.slice()
-      const index = newExpandedKeys.indexOf(eventKey)
+      if (this.$refs.tree.$refs.tree) {
+        // Get internal vc-tree
+        const internalTree = this.$refs.tree.$refs.tree
 
-      if (expanded && index >= 0) {
-        newExpandedKeys.splice(index, 1)
-      } else if (!expanded && index === -1) {
-        newExpandedKeys.push(eventKey)
+        // Call internal rc-tree expand function
+        // https://github.com/ant-design/ant-design/issues/12567
+        internalTree.onNodeExpand(event, node)
       }
-
-      this.setUncontrolledState({
-        _expandedKeys: newExpandedKeys,
-      })
-      this.$emit('expand', newExpandedKeys, {
-        expanded: !expanded,
-        node,
-        nativeEvent: event,
-      })
     },
 
     setUncontrolledState (state) {
@@ -195,6 +185,7 @@ export default {
         expandedKeys,
         selectedKeys,
       },
+      ref: 'tree',
       class: `${prefixCls}-directory`,
       on: {
         ...this.$listeners,

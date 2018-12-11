@@ -13,6 +13,13 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 
+function stopPropagation (e) {
+  e.stopPropagation()
+  if (e.nativeEvent.stopImmediatePropagation) {
+    e.nativeEvent.stopImmediatePropagation()
+  }
+}
+
 export default {
   mixins: [BaseMixin],
   name: 'FilterMenu',
@@ -76,6 +83,9 @@ export default {
     // },
   },
   methods: {
+    getDropdownVisible () {
+      return this.neverShown ? false : this.sVisible
+    },
     setNeverShown  (column) {
       const rootNode = this.$el
       const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`)
@@ -111,6 +121,12 @@ export default {
     handleConfirm  () {
       this.setVisible(false)
       this.confirmFilter2()
+      // Call `setSelectedKeys` & `confirm` in the same time will make filter data not up to date
+      // https://github.com/ant-design/ant-design/issues/12284
+      this.$forceUpdate()
+      this.$nextTick(() => {
+        this.confirmFilter
+      })
     },
 
     onVisibleChange  (visible) {
@@ -188,14 +204,27 @@ export default {
       if (typeof filterIcon === 'function') {
         filterIcon = filterIcon(filterd)
       }
-      const dropdownSelectedClass = filterd ? `${prefixCls}-selected` : ''
+      const dropdownIconClass = classNames({
+        [`${prefixCls}-selected`]: filterd,
+        [`${prefixCls}-open`]: this.getDropdownVisible(),
+      })
 
       return filterIcon ? cloneElement(filterIcon, {
         attrs: {
           title: locale.filterTitle,
         },
-        class: classNames(`${prefixCls}-icon`, filterIcon.className),
-      }) : <Icon title={locale.filterTitle} type='filter' class={dropdownSelectedClass} />
+        on: {
+          click: stopPropagation,
+        },
+        class: classNames(`${prefixCls}-icon`, dropdownIconClass, filterIcon.className),
+      })
+        : <Icon
+          title={locale.filterTitle}
+          type='filter'
+          theme='filled'
+          class={dropdownIconClass}
+          onClick={stopPropagation}
+        />
     },
   },
 
@@ -207,7 +236,7 @@ export default {
       [`${dropdownPrefixCls}-menu-without-submenu`]: !this.hasSubMenu(),
     })
     let { filterDropdown } = column
-    if (filterDropdown && typeof filterDropdown === 'function') {
+    if (filterDropdown instanceof Function) {
       filterDropdown = filterDropdown({
         prefixCls: `${dropdownPrefixCls}-custom`,
         setSelectedKeys: (selectedKeys) => this.setSelectedKeys({ selectedKeys }),
@@ -257,7 +286,8 @@ export default {
     return (
       <Dropdown
         trigger={['click']}
-        visible={this.neverShown ? false : this.sVisible}
+        placement='bottomRight'
+        visible={this.getDropdownVisible()}
         onVisibleChange={this.onVisibleChange}
         getPopupContainer={getPopupContainer}
         forceRender

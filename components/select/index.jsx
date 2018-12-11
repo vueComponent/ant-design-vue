@@ -1,10 +1,13 @@
 
 import warning from 'warning'
+import omit from 'omit.js'
 import PropTypes from '../_util/vue-types'
 import { Select as VcSelect, Option, OptGroup } from '../vc-select'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
-import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps, filterEmpty, isValidElement } from '../_util/props-util'
+import Icon from '../icon'
+import { cloneElement } from '../_util/vnode'
 
 const AbstractSelectProps = () => ({
   prefixCls: PropTypes.string,
@@ -33,6 +36,7 @@ const AbstractSelectProps = () => ({
   getPopupContainer: PropTypes.func,
   open: PropTypes.bool,
   defaultOpen: PropTypes.bool,
+  autoClearSearchValue: PropTypes.bool,
 })
 const Value = PropTypes.shape({
   key: PropTypes.string,
@@ -57,12 +61,6 @@ const SelectProps = {
   mode: PropTypes.string,
   optionLabelProp: PropTypes.string,
   firstActiveValue: PropTypes.oneOfType([String, PropTypes.arrayOf(String)]),
-  // onChange?: (value: SelectValue, option: React.ReactElement<any> | React.ReactElement<any>[]) => void;
-  // onSelect?: (value: SelectValue, option: React.ReactElement<any>) => any;
-  // onDeselect?: (value: SelectValue) => any;
-  // onBlur?: () => any;
-  // onFocus?: () => any;
-  // onInputKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   maxTagCount: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
   dropdownMatchSelectWidth: PropTypes.bool,
@@ -72,6 +70,7 @@ const SelectProps = {
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
   options: PropTypes.array,
+  suffixIcon: PropTypes.any,
 }
 
 const SelectPropTypes = {
@@ -143,6 +142,10 @@ const Select = {
         options,
         ...restProps
       } = getOptionProps(this)
+      let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
+      const rest = omit(restProps, ['inputIcon', 'removeIcon', 'clearIcon', 'suffixIcon'])
+
       const cls = {
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-sm`]: size === 'small',
@@ -159,9 +162,32 @@ const Select = {
         tags: mode === 'tags',
         combobox: this.isCombobox(),
       }
+
+      const inputIcon = suffixIcon && (
+        isValidElement(suffixIcon)
+          ? cloneElement(suffixIcon) : suffixIcon) || (
+        <Icon type='down' class={`${prefixCls}-arrow-icon`} />
+      )
+
+      const removeIcon = (
+        <Icon type='close' class={`${prefixCls}-remove-icon`} />
+      )
+
+      const clearIcon = (
+        <Icon type='close-circle' theme='filled' class={`${prefixCls}-clear-icon`} />
+      )
+
+      const menuItemSelectedIcon = (
+        <Icon type='check' class={`${prefixCls}-selected-icon`} />
+      )
+
       const selectProps = {
         props: {
-          ...restProps,
+          inputIcon,
+          removeIcon,
+          clearIcon,
+          menuItemSelectedIcon,
+          ...rest,
           ...modeConfig,
           prefixCls,
           optionLabelProp: optionLabelProp || 'children',
@@ -170,8 +196,8 @@ const Select = {
           placeholder: getComponentFromProp(this, 'placeholder'),
           children: options
             ? options.map((option) => {
-              const { key, label = option.title, ...restOption } = option
-              return <Option key={key} {...{ props: restOption }}>{label}</Option>
+              const { key, label = option.title, on, class: cls, style, ...restOption } = option
+              return <Option key={key} {...{ props: restOption, on, class: cls, style }}>{label}</Option>
             })
             : filterEmpty(this.$slots.default),
           __propsSymbol__: Symbol(),

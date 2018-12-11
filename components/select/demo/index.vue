@@ -10,6 +10,7 @@ import Optgroup from './optgroup'
 import SearchBox from './search-box'
 import Search from './search'
 import SelectUsers from './select-users'
+import Suffix from './suffix'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -48,6 +49,7 @@ export default {
         <SearchBox/>
         <Search/>
         <SelectUsers/>
+        <Suffix/>
         <api>
           <CN slot='cn' />
           <US/>

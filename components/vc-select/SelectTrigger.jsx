@@ -54,6 +54,7 @@ export default {
     transitionName: PropTypes.string,
     getPopupContainer: PropTypes.func,
     backfillValue: PropTypes.any,
+    menuItemSelectedIcon: PropTypes.any,
   },
   created () {
     this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef')
@@ -95,7 +96,7 @@ export default {
     getDropdownElement (newProps) {
       const {
         value, firstActiveValue, defaultActiveFirstOption,
-        dropdownMenuStyle, getDropdownPrefixCls, backfillValue,
+        dropdownMenuStyle, getDropdownPrefixCls, backfillValue, menuItemSelectedIcon,
       } = this
       const { menuSelect, menuDeselect, popupScroll } = this.$listeners
       const dropdownMenuProps = {
@@ -104,6 +105,7 @@ export default {
           prefixCls: getDropdownPrefixCls(),
           value, firstActiveValue, defaultActiveFirstOption, dropdownMenuStyle,
           backfillValue,
+          menuItemSelectedIcon,
         },
         on: {
           ...newProps.on,

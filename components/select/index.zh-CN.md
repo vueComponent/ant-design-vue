@@ -11,6 +11,7 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | allowClear | 支持清除 | boolean | false |
+| autoClearSearchValue | 是否在选中项后清空搜索框，只在 `mode` 为 `multiple` 或 `tags` 时有效。 | boolean | true |
 | autoFocus | 默认获取焦点 | boolean | false |
 | defaultActiveFirstOption | 是否默认高亮第一个选项。 | boolean | true |
 | defaultValue | 指定默认选中的条目 | string\|string\[]\|number\|number\[] | - |
@@ -24,7 +25,7 @@
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 Select 的 value 类型从 `string` 变为 `{key: string, label: vNodes}` 的格式 | boolean | false |
 | maxTagCount | 最多显示多少个 tag | number | - |
 | maxTagPlaceholder | 隐藏 tag 时显示的内容 | slot/function(omittedValues) | - |
-| mode | 设置 Select 的模式 | 'default' \| 'multiple' \| 'tags' \| 'combobox' | - |
+| mode | 设置 Select 的模式为多选或标签 | 'default' \| 'multiple' \| 'tags' \| 'combobox' | - |
 | notFoundContent | 当下拉列表为空时显示的内容 | string\|slot | 'Not Found' |
 | optionFilterProp | 搜索时过滤对应的 option 属性，如设置为 children 表示对内嵌内容进行搜索 | string | value |
 | optionLabelProp | 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 `value`。 | string | `children` （combobox 模式下为 `value`） |
@@ -32,10 +33,12 @@
 | showSearch | 使单选模式可搜索 | boolean | false |
 | showArrow | 是否显示下拉小箭头 | boolean |  true |
 | size | 选择框大小，可选 `large` `small` | string | default |
+| suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |
 | tokenSeparators | 在 tags 和 multiple 模式下自动分词的分隔符 | string\[] |  |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|number\|number\[] | - |
 | options | options 数据，如果设置则不需要手动构造 selectOption 节点 | array&lt;{value, label, [disabled, key, title]}> | \[] |
-
+| defaultOpen | 是否默认展开下拉菜单 | boolean | - |
+| open | 是否展开下拉菜单 | boolean | - |
 
 > 注意，如果发现下拉菜单跟随页面滚动，或者需要在其他弹层中触发 Select，请尝试使用 `getPopupContainer={triggerNode => triggerNode.parentNode}` 将下拉弹层渲染节点固定在触发器的父元素中。
 
@@ -52,6 +55,7 @@
 | popupScroll | 下拉列表滚动时的回调 | function |
 | search | 文本框值变化时回调 | function(value: string) |
 | select | 被选中时调用，参数为选中项的 value (或 key) 值 | function(value, option:Option) |
+| dropdownVisibleChange | 展开下拉菜单的回调 | function(open) |
 
 ### Select Methods
 
@@ -68,6 +72,7 @@
 | key | 和 value 含义一致。如果 Vue 需要你设置此项，此项值与 value 的值相同，然后可以省略 value 设置 | string |  |
 | title | 选中该 Option 后，Select 的 title | string | - |
 | value | 默认根据此属性值进行筛选 | string\|number | - |
+| class | Option 器类名 | string | - |
 
 ### OptGroup props
 

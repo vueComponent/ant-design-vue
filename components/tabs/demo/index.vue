@@ -10,6 +10,7 @@ import Icon from './icon'
 import Position from './position'
 import Size from './size'
 import Slide from './slide'
+import CustomTabBar from './custom-tab-bar'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -53,16 +54,17 @@ export default {
       <div>
         <md cn={md.cn} us={md.us}/>
         <Basic />
-        <CardTop />
-        <Card />
-        <CustomAddTrigger />
         <Disabled />
-        <EditableCard />
-        <Extra />
         <Icon />
-        <Position />
-        <Size />
         <Slide/>
+        <Extra />
+        <Size />
+        <Position />
+        <Card />
+        <EditableCard />
+        <CardTop />
+        <CustomAddTrigger />
+        <CustomTabBar />
         <api>
           <template slot='cn'>
             <CN/>

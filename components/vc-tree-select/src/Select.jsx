@@ -20,9 +20,6 @@ import { initDefaultProps, getOptionProps, hasProp, getAllProps, getComponentFro
 import BaseMixin from '../../_util/BaseMixin'
 import getTransitionProps from '../../_util/getTransitionProps'
 
-function noop () {
-}
-
 function filterFn (input, child) {
   return String(getPropValue(child, labelCompatible(this.$props.treeNodeFilterProp)))
     .indexOf(input) > -1
@@ -842,7 +839,7 @@ const Select = {
     renderTopControlNode () {
       const { sValue: value } = this.$data
       const props = this.$props
-      const { choiceTransitionName, prefixCls, maxTagTextLength } = props
+      const { choiceTransitionName, prefixCls, maxTagTextLength, removeIcon } = props
       const multiple = isMultiple(props)
 
       // single and not combobox, input is inside dropdown
@@ -887,7 +884,7 @@ const Select = {
               onClick={(event) => {
                 this.removeSelected(singleValue.value, event)
               }}
-            />
+            >{removeIcon}</span>
             <span class={`${prefixCls}-selection__choice__content`}>{content}</span>
           </li>
         )
@@ -946,7 +943,7 @@ const Select = {
     const props = this.$props
     const multiple = isMultiple(props)
     const state = this.$data
-    const { disabled, allowClear, prefixCls } = props
+    const { disabled, allowClear, prefixCls, inputIcon, clearIcon } = props
     const ctrlNode = this.renderTopControlNode()
     let extraSelectionProps = {}
     if (!multiple) {
@@ -970,12 +967,11 @@ const Select = {
       [`${prefixCls}-enabled`]: !disabled,
       [`${prefixCls}-allow-clear`]: !!props.allowClear,
     }
-
     const clear = (<span
       key='clear'
       class={`${prefixCls}-selection__clear`}
       onClick={this.onClearSelection}
-    />)
+    >{clearIcon}</span>)
     const selectTriggerProps = {
       props: {
         ...props,
@@ -1026,7 +1022,7 @@ const Select = {
                 class={`${prefixCls}-arrow`}
                 style={{ outline: 'none' }}
               >
-                <b/>
+                {inputIcon}
               </span>)}
             {multiple
               ? this.getSearchPlaceholderElement(!!state.sInputValue || state.sValue.length)

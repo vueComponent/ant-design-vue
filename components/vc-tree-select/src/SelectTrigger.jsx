@@ -280,6 +280,7 @@ const SelectTrigger = {
           ...child.data,
           props: {
             ...getAllProps(child),
+            switcherIcon: props.switcherIcon,
             title: getComponentFromProp(child, 'title') || getComponentFromProp(child, 'label'),
           },
           key: String(child.key),

@@ -34,4 +34,5 @@ export const TreeSelectProps = () => ({
   labelInValue: PropTypes.bool,
   treeCheckStrictly: PropTypes.bool,
   getPopupContainer: PropTypes.func,
+  suffixIcon: PropTypes.any,
 })

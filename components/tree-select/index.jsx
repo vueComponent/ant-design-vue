@@ -4,9 +4,13 @@ import classNames from 'classnames'
 import { TreeSelectProps } from './interface'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import warning from '../_util/warning'
-import { initDefaultProps, getOptionProps, getComponentFromProp, filterEmpty } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, getComponentFromProp, filterEmpty, isValidElement } from '../_util/props-util'
 
 export { TreeData, TreeSelectProps } from './interface'
+
+import Icon from '../icon'
+import omit from 'omit.js'
+import { cloneElement } from '../_util/vnode'
 
 const TreeSelect = {
   TreeNode: { ...TreeNode, name: 'ATreeSelectNode' },
@@ -39,6 +43,25 @@ const TreeSelect = {
     blur () {
       this.$refs.vcTreeSelect.blur()
     },
+    renderSwitcherIcon ({ isLeaf, loading }) {
+      const {
+        prefixCls,
+      } = this.$props
+      if (loading) {
+        return (
+          <Icon
+            type='loading'
+            class={`${prefixCls}-switcher-loading-icon`}
+          />
+        )
+      }
+      if (isLeaf) {
+        return null
+      }
+      return (
+        <Icon type='caret-down' class={`${prefixCls}-switcher-icon`} />
+      )
+    },
     onChange () {
       this.$emit('change', ...arguments)
     },
@@ -64,6 +87,7 @@ const TreeSelect = {
     },
     renderTreeSelect (locale) {
       const props = getOptionProps(this)
+
       const {
         prefixCls,
         size,
@@ -72,6 +96,9 @@ const TreeSelect = {
         dropdownClassName,
         ...restProps
       } = props
+      const rest = omit(restProps, ['inputIcon', 'removeIcon', 'clearIcon', 'switcherIcon', 'suffixIcon'])
+      let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
       this.updateTreeData(props.treeData || [])
       const cls = {
         [`${prefixCls}-lg`]: size === 'large',
@@ -82,9 +109,28 @@ const TreeSelect = {
       if (checkable) {
         checkable = <span class={`${prefixCls}-tree-checkbox-inner`} />
       }
+
+      const inputIcon = suffixIcon && (
+        isValidElement(suffixIcon)
+          ? cloneElement(suffixIcon) : suffixIcon) || (
+        <Icon type='down' class={`${prefixCls}-arrow-icon`} />
+      )
+
+      const removeIcon = (
+        <Icon type='close' class={`${prefixCls}-remove-icon`} />
+      )
+
+      const clearIcon = (
+        <Icon type='close-circle' class={`${prefixCls}-clear-icon`} theme='filled' />
+      )
+
       const VcTreeSelectProps = {
         props: {
-          ...restProps,
+          switcherIcon: this.renderSwitcherIcon,
+          inputIcon,
+          removeIcon,
+          clearIcon,
+          ...rest,
           dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
           prefixCls,
           dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },

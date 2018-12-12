@@ -107,4 +107,8 @@ export const SelectPropTypes = {
   children: PropTypes.any,
   autoFocus: PropTypes.bool,
   getPopupContainer: PropTypes.func,
+  switcherIcon: PropTypes.func,
+  inputIcon: PropTypes.any,
+  removeIcon: PropTypes.any,
+  clearIcon: PropTypes.any,
 }

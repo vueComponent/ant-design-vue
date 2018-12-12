@@ -75,14 +75,18 @@ describe('Table.sorter', () => {
   it('sort records', async () => {
     const wrapper = mount(Table, getTableOptions())
     await asyncExpect(() => {
-      wrapper.find('.ant-table-column-sorter-up').trigger('click')
-    })
-    await asyncExpect(() => {
-      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'].join(''))
-      wrapper.find('.ant-table-column-sorter-down').trigger('click')
+      // descent
+      wrapper.find('.ant-table-column-sorters').trigger('click')
     })
     await asyncExpect(() => {
       expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry'].join(''))
+
+      // ascent
+      wrapper.find('.ant-table-column-sorters').trigger('click')
+    })
+    await asyncExpect(() => {
+      // expect(renderedNames(wrapper)).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'])
+      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'].join(''))
     })
   })
 
@@ -96,18 +100,34 @@ describe('Table.sorter', () => {
     })
   })
 
-  it('fires change event', (done) => {
+  it('fires change event', async () => {
     const handleChange = jest.fn()
     const wrapper = mount(Table, getTableOptions({}, {}, { change: handleChange }))
 
-    wrapper.find('.ant-table-column-sorter-up').trigger('click')
-    Vue.nextTick(() => {
-      const sorter = handleChange.mock.calls[0][2]
-      expect(sorter.column.dataIndex).toBe('name')
-      expect(sorter.order).toBe('ascend')
-      expect(sorter.field).toBe('name')
-      expect(sorter.columnKey).toBe('name')
-      done()
+    wrapper.find('.ant-table-column-sorters').trigger('click')
+    await asyncExpect(() => {
+      const sorter1 = handleChange.mock.calls[0][2]
+      expect(sorter1.column.dataIndex).toBe('name')
+      expect(sorter1.order).toBe('descend')
+      expect(sorter1.field).toBe('name')
+      expect(sorter1.columnKey).toBe('name')
+    })
+    wrapper.find('.ant-table-column-sorters').trigger('click')
+    await asyncExpect(() => {
+      const sorter2 = handleChange.mock.calls[1][2]
+      expect(sorter2.column.dataIndex).toBe('name')
+      expect(sorter2.order).toBe('ascend')
+      expect(sorter2.field).toBe('name')
+      expect(sorter2.columnKey).toBe('name')
+    })
+
+    wrapper.find('.ant-table-column-sorters').trigger('click')
+    await asyncExpect(() => {
+      const sorter3 = handleChange.mock.calls[2][2]
+      expect(sorter3.column).toBe(undefined)
+      expect(sorter3.order).toBe(undefined)
+      expect(sorter3.field).toBe(undefined)
+      expect(sorter3.columnKey).toBe(undefined)
     })
   })
 

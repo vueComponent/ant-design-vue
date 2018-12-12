@@ -413,4 +413,70 @@ describe('Table.rowSelection', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
   })
+
+  // https://github.com/ant-design/ant-design/issues/10629
+  it('should keep all checked state when remove item from dataSource', async () => {
+    const wrapper = mount(Table, {
+      propsData: {
+        columns,
+        dataSource: data,
+        rowSelection: {
+          selectedRowKeys: [0, 1, 2, 3],
+        },
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll({ name: 'ACheckbox' }).length).toBe(5)
+      const allCheckbox = wrapper.findAll({ name: 'ACheckbox' })
+      Array(allCheckbox.length).forEach((_, index) => {
+        const checkbox = allCheckbox.at(index)
+        expect(checkbox.vm.checked).toBe(true)
+        expect(checkbox.vm.indeterminate).toBe(false)
+      })
+      wrapper.setProps({
+        dataSource: data.slice(1),
+        rowSelection: {
+          selectedRowKeys: [1, 2, 3],
+        },
+      })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll({ name: 'ACheckbox' }).length).toBe(4)
+      const allCheckbox = wrapper.findAll({ name: 'ACheckbox' })
+      Array(allCheckbox.length).forEach((_, index) => {
+        const checkbox = allCheckbox.at(index)
+        expect(checkbox.vm.checked).toBe(true)
+        expect(checkbox.vm.indeterminate).toBe(false)
+      })
+    })
+  })
+
+  // https://github.com/ant-design/ant-design/issues/11042
+  it('add columnTitle for rowSelection', async () => {
+    const wrapper = mount(Table, {
+      propsData: {
+        columns,
+        dataSource: data,
+        rowSelection: {
+          columnTitle: '多选',
+        },
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('thead tr div').at(0).text()).toBe('多选')
+    })
+    await asyncExpect(() => {
+      wrapper.setProps({
+        rowSelection: {
+          type: 'radio',
+          columnTitle: '单选',
+        },
+      })
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('thead tr div').at(0).text()).toBe('单选')
+    })
+  })
 })

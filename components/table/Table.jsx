@@ -335,7 +335,7 @@ export default {
       })
     },
 
-    toggleSortOrder (order, column) {
+    toggleSortOrder (column) {
       if (!column.sorter) {
         return
       }

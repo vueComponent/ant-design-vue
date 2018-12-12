@@ -220,7 +220,14 @@ describe('Table.filter', () => {
       dropdownWrapper.find('.confirm').trigger('click')
     })
     await asyncExpect(() => {
-      expect(handleChange).toBeCalledWith({}, { name: ['boy'] }, {})
+      expect(handleChange).toBeCalledWith(
+        {},
+        { name: ['boy'] },
+        {},
+        {
+          currentDataSource: [],
+        }
+      )
     })
   })
 

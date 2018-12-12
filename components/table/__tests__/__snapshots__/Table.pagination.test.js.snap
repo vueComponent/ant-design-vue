@@ -1,18 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table.pagination renders pagination correctly 1`] = `
-<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class=""><span>Name</span></th>
+<div class="ant-table-wrapper"><span tag="div" class="ant-spin-nested-loading"><div class="ant-spin-container"><div class="ant-table ant-table-scroll-position-left ant-table-default"><div class="ant-table-content"><!----><div class="ant-table-body"><table class=""><colgroup><col></colgroup><thead class="ant-table-thead"><tr><th key="name" class=""><div>Name</div></th></tr></thead><tbody class="ant-table-tbody"><tr class="ant-table-row ant-table-row-level-0" data-row-key="0"><td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+  <!---->Jack</td>
   </tr>
-  </thead>
-  <tbody class="ant-table-tbody">
-    <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
-      <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-        <!---->Jack</td>
-    </tr>
-    <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
-      <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-        <!---->Lucy</td>
-    </tr>
+  <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
+    <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+      <!---->Lucy</td>
+  </tr>
   </tbody>
   </table>
 </div>

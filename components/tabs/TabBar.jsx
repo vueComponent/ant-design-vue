@@ -38,9 +38,7 @@ const TabBar = {
         nextIcon,
       },
       style: tabBarStyle,
-      on: {
-        ...context.listeners,
-      },
+      on: context.listeners,
     }
 
     let RenderTabBar

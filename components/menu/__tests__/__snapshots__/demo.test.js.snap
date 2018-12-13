@@ -130,9 +130,14 @@ exports[`renders ./components/menu/demo/template.md correctly 1`] = `
 <div style="width: 256px;"><button type="button" class="ant-btn ant-btn-primary" style="margin-bottom: 16px;"><i class="anticon anticon-menu-fold"></i></button>
   <ul class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" role="menu">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;"><i class="anticon anticon-pie-chart"></i> <span>Option 1</span></li>
-    <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline" menuinfo="[object Object]">
-      <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-mail"></i><span>Navigation 2</span></span><i class="ant-menu-submenu-arrow"></i></div>
-      <div></div>
+    <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open">
+      <div aria-expanded="true" aria-owns="2$Menu" aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span><i class="anticon anticon-mail"></i><span>Navigation 2</span></span><i class="ant-menu-submenu-arrow"></i></div>
+      <ul class="ant-menu ant-menu-inline  ant-menu-sub" role="menu">
+        <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+          <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 48px;"><span><i class="anticon anticon-mail"></i><span>Navigation 3</span></span><i class="ant-menu-submenu-arrow"></i></div>
+          <div></div>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>

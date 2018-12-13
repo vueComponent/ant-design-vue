@@ -18,7 +18,7 @@ The properties of `a-sub-menu` are dynamically changed inside the component. If 
     </a-button>
     <a-menu
       :defaultSelectedKeys="['1']"
-      :defaultOpenKeys="['sub1']"
+      :defaultOpenKeys="['2']"
       mode="inline"
       theme="dark"
       :inlineCollapsed="collapsed"

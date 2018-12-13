@@ -30,6 +30,7 @@
 | treeNodeFilterProp | 输入项过滤对应的 treeNode 属性 | string | 'value' |
 | treeNodeLabelProp | 作为显示的 prop 设置 | string | 'title' |
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |
+| suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |
 
 ### 事件
 

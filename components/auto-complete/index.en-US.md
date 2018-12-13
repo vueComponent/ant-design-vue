@@ -29,7 +29,7 @@
 | focus | Called when entering the component | function() |
 | search | Called when searching items. | function(value) | - |
 | select | Called when a option is selected. param is option's value and option instance. | function(value, option) |
-| dropdown-visible-change | Call when dropdown open | function(open) |
+| dropdownVisibleChange | Call when dropdown open | function(open) |
 
 ## Methods
 

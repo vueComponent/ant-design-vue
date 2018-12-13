@@ -49,26 +49,30 @@ if (isIE9) {
   })
 }
 
-export default {
-  install: (Vue, options) => {
-    Vue.directive('ant-input', {
-      inserted (el, binding, vnode, oldVnode) {
-        if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
-          if (!binding.modifiers || !binding.modifiers.lazy) {
-            el.addEventListener('compositionstart', onCompositionStart)
-            el.addEventListener('compositionend', onCompositionEnd)
-            // Safari < 10.2 & UIWebView doesn't fire compositionend when
-            // switching focus before confirming composition choice
-            // this also fixes the issue where some browsers e.g. iOS Chrome
-            // fires "change" instead of "input" on autocomplete.
-            el.addEventListener('change', onCompositionEnd)
-            /* istanbul ignore if */
-            if (isIE9) {
-              el.vmodel = true
-            }
+export function antInput (Vue) {
+  return Vue.directive('ant-input', {
+    inserted (el, binding, vnode, oldVnode) {
+      if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
+        if (!binding.modifiers || !binding.modifiers.lazy) {
+          el.addEventListener('compositionstart', onCompositionStart)
+          el.addEventListener('compositionend', onCompositionEnd)
+          // Safari < 10.2 & UIWebView doesn't fire compositionend when
+          // switching focus before confirming composition choice
+          // this also fixes the issue where some browsers e.g. iOS Chrome
+          // fires "change" instead of "input" on autocomplete.
+          el.addEventListener('change', onCompositionEnd)
+          /* istanbul ignore if */
+          if (isIE9) {
+            el.vmodel = true
           }
         }
-      },
-    })
+      }
+    },
+  })
+}
+
+export default {
+  install: (Vue, options) => {
+    antInput(Vue)
   },
 }

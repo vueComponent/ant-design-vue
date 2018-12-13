@@ -2,6 +2,40 @@
 
 ---
 
+## 1.2.0
+`2018-12-16`
+### Synchronize with antd 3.10.x
+
+- 🔥🔥🔥 replaced font icons with svg icons which bring benefits below:：
+  - Complete offline usage of icon, no dependency of alipay cdn font icon file and no more empty square during downloading than no need to deploy icon font files locally either.
+  - Much more display accuracy in lower-level screens.
+  - Support multiple colors for icon.
+  - No need to change built-in icons with overriding styles by providing more props in component.
+  - 🌟 Add the `theme` attribute to set the theme style of the icon.
+  - 🌟 Added `component` attribute, you can externally pass a component to customize the control rendering result. 
+  - 🌟 The `twoToneColor` property is added to control the theme color of the two-color icon.
+  - 🌟 Added static methods `Icon.getTowToneColor()` and `Icon.setTwoToneColor(...)` to globally get and set the theme color of all two-color icons.
+  - 🌟 The new static method `Icon.createFromIconfontCN({...})` is added to make it easier to use icons hosted on [`iconfont.cn`](http://iconfont.cn/).
+- 🔥 Added a new component `Skeleton`.
+- 🔥 Menu will automatically close up to fit width in `horizontal` mode.
+- 🔥 The `placement` of the drawer supports `top` and `bottom` to accommodate more scenes.
+- 🌟 The following components add a `suffixIcon` prop, which is used to set the icon behind the input box. For details, please refer to the documentation.
+  - Cascader
+  - DatePicker
+  - Select
+  - TreeSelect
+  - TimePicker
+- 🌟 Added Modal.open for optional icon dialog.
+- 🌟 Modal.info adds the configuration of `getContainer`.
+- 🌟 Improve RangePicker footer UI by merging them.
+- 🌟 The Anchor component adds `onClick` property.
+- 🌟 The Tab component adds the `renderTabBar` property.
+- 🌟 The Input component adds the `select` method.
+- 🌟 Steps adds the `initial` attribute.
+- 🌟 Upload adds `openFileDialogOnClick` prop to allow setting whether to open the upload dialog when the component is clicked.
+- 🌟 InputNumber adds `decimalSeparator` prop to allow setting a custom decimal.
+- 🐞 Fix a lot of hidden bugs that have not yet been issued, and then not list them one by one.
+
 ## 1.1.10
 
 `2018-12-7`

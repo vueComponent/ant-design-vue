@@ -5,6 +5,7 @@ import FormDecoratorDirective from '../_util/FormDecoratorDirective'
 
 Vue.use(ref, { name: 'ant-ref' })
 Vue.use(FormDecoratorDirective)
+Vue.prototype.$form = Form
 
 export { FormProps, FormCreateOption, ValidationRule } from './Form'
 export { FormItemProps } from './FormItem'

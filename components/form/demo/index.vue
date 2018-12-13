@@ -51,7 +51,13 @@ const md = {
 
 这里我们封装了表单域 \`<Form.Item />\` 。
 
-**注意：** 如果使用 \`Form.create\` 处理表单使其具有自动收集数据并校验的功能，建议使用\`jsx\`
+
+ ## 注意： 
+1、如果使用 \`Form.create\` 处理表单使其具有自动收集数据并校验的功能，建议使用\`jsx\`。
+2、如果不是使用Vue.use(Form)形式注册的\`Form\`组件，你需要自行将\`$form\`挂载到Vue原型上。
+\`Vue.prototype.$form = Form\`
+
+
 ## 代码演示
         `,
   us: `# Form
@@ -70,7 +76,11 @@ You can align the controls of a \`form\` using the \`layout\` prop：
 A form consists of one or more form fields whose type includes input, textarea, checkbox, radio, select, tag, and more.
 A form field is defined using \`<Form.Item />\`.
 
-**Note:** If you use \`Form.create\` to process forms with automatic data collection and validation, we recommend using \`jsx\`
+ ## Note:
+1. If you use \`Form.create\` to process the form to have the ability to automatically collect data and verify it, it is recommended to use \`jsx\`.
+2. If you are not using the \`Form\` component registered in Vue.use(Form) form, you need to mount \`$form\` to the Vue prototype yourself.
+\`Vue.prototype.$form = Form\`
+
 ## Examples
         `,
 }

@@ -88,7 +88,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td>New York No. 1 Lake Park</td>
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 John Brown</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
-      More actions <i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></a></span></td>
+        More actions <i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></a></span></td>
                 </tr>
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -97,7 +97,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td>London No. 1 Lake Park</td>
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 Jim Green</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
-      More actions <i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></a></span></td>
+        More actions <i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></a></span></td>
                 </tr>
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
@@ -106,7 +106,7 @@ exports[`renders ./components/table/demo/basic.md correctly 1`] = `
                   <td>Sidney No. 1 Lake Park</td>
                   <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
                   <td><span><a href="javascript:;">Invite 一 Joe Black</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;" class="ant-dropdown-link">
-      More actions <i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></a></span></td>
+        More actions <i class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></a></span></td>
                 </tr>
               </tbody>
             </table>
@@ -2428,7 +2428,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
                   <td>Sidney No. 1 Lake Park</td>
                 </tr>
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
-                  <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
+                  <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
                   <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!----><a href="javascript:;">Disabled User</a></td>
                   <td>99</td>

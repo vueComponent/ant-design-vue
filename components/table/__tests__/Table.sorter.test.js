@@ -79,14 +79,13 @@ describe('Table.sorter', () => {
       wrapper.find('.ant-table-column-sorters').trigger('click')
     })
     await asyncExpect(() => {
-      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry'].join(''))
+      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'].join(''))
 
       // ascent
       wrapper.find('.ant-table-column-sorters').trigger('click')
     })
     await asyncExpect(() => {
-      // expect(renderedNames(wrapper)).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'])
-      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom'].join(''))
+      expect(wrapper.find('.ant-table-tbody').text()).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry'].join(''))
     })
   })
 
@@ -108,7 +107,7 @@ describe('Table.sorter', () => {
     await asyncExpect(() => {
       const sorter1 = handleChange.mock.calls[0][2]
       expect(sorter1.column.dataIndex).toBe('name')
-      expect(sorter1.order).toBe('descend')
+      expect(sorter1.order).toBe('ascend')
       expect(sorter1.field).toBe('name')
       expect(sorter1.columnKey).toBe('name')
     })
@@ -116,7 +115,7 @@ describe('Table.sorter', () => {
     await asyncExpect(() => {
       const sorter2 = handleChange.mock.calls[1][2]
       expect(sorter2.column.dataIndex).toBe('name')
-      expect(sorter2.order).toBe('ascend')
+      expect(sorter2.order).toBe('descend')
       expect(sorter2.field).toBe('name')
       expect(sorter2.columnKey).toBe('name')
     })

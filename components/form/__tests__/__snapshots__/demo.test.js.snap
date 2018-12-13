@@ -206,8 +206,8 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-8 ant-col-offset-4 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
-      Nickname is required
-    </span></label></span>
+        Nickname is required
+      </span></label></span>
         <!---->
       </div>
     </div>
@@ -230,12 +230,12 @@ exports[`renders ./components/form/demo/form-in-modal.vue correctly 1`] = `
 
 exports[`renders ./components/form/demo/global-state.vue correctly 1`] = `
 <div id="components-form-demo-global-state">
-  <!--function (a, b, c, d) { return createElement(vm, a, b, c, d, true); }--> <pre class="language-bash">    {
+  <!--function (a, b, c, d) { return createElement(vm, a, b, c, d, true); }--> <pre class="language-bash">      {
   "username": {
     "value": "benjycui"
   }
 }
-  </pre>
+    </pre>
 </div>
 `;
 
@@ -321,9 +321,9 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
   </div>
   <div class="ant-row ant-form-item">
     <div class="ant-form-item-control-wrapper">
-      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-checked"><input id="remember" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
-      Remember me
-    </span></label><a href="" class="login-form-forgot">Forgot password</a><button type="submit" class="login-form-button ant-btn ant-btn-primary"><span>Log in</span></button>
+      <div class="ant-form-item-control has-success"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input id="remember" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
+        Remember me
+      </span></label><a href="" class="login-form-forgot">Forgot password</a><button type="submit" class="login-form-button ant-btn ant-btn-primary"><span>Log in</span></button>
         Or <a href="">register now!</a></span>
         <!---->
       </div>
@@ -702,8 +702,8 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
   </div>
   </div>
   <div class="ant-col-2"><span style="display: inline-block; width: 100%; text-align: center;">
-        -
-      </span></div>
+          -
+        </span></div>
   <div class="ant-col-11">
     <div class="ant-row ant-form-item">
       <div class="ant-form-item-control-wrapper">

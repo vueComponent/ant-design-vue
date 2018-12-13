@@ -141,11 +141,12 @@ export default {
 
     renderMenuItem (item) {
       const { column } = this
+      const { sSelectedKeys: selectedKeys } = this.$data
       const multiple = ('filterMultiple' in column) ? column.filterMultiple : true
       const input = multiple ? (
-        <Checkbox checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
+        <Checkbox checked={selectedKeys && selectedKeys.indexOf(item.value.toString()) >= 0} />
       ) : (
-        <Radio checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
+        <Radio checked={selectedKeys && selectedKeys.indexOf(item.value.toString()) >= 0} />
       )
 
       return (
@@ -180,11 +181,12 @@ export default {
     },
 
     handleMenuItemClick (info) {
+      const { sSelectedKeys: selectedKeys } = this.$data
       if (!info.keyPath || info.keyPath.length <= 1) {
         return
       }
       const keyPathOfSelectedItem = this.sKeyPathOfSelectedItem
-      if (this.sSelectedKeys.indexOf(info.key) >= 0) {
+      if (selectedKeys && selectedKeys.indexOf(info.key) >= 0) {
         // deselect SubMenu child
         delete keyPathOfSelectedItem[info.key]
       } else {
@@ -196,13 +198,13 @@ export default {
 
     renderFilterIcon () {
       const { column, locale, prefixCls, selectedKeys } = this
-      const filterd = selectedKeys.length > 0
+      const filtered = selectedKeys && selectedKeys.length > 0
       let filterIcon = column.filterIcon
       if (typeof filterIcon === 'function') {
-        filterIcon = filterIcon(filterd)
+        filterIcon = filterIcon(filtered)
       }
       const dropdownIconClass = classNames({
-        [`${prefixCls}-selected`]: filterd,
+        [`${prefixCls}-selected`]: filtered,
         [`${prefixCls}-open`]: this.getDropdownVisible(),
       })
 

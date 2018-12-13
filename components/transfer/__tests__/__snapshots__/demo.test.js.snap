@@ -31,8 +31,8 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
         <div class="LazyLoad" style="height: 32px;"></div>
       </ul>
       <div class="ant-transfer-list-body-not-found"><span>
-    没数据
-  </span></div>
+      没数据
+    </span></div>
     </div>
     <div class="ant-transfer-list-footer"><button type="button" class="ant-btn ant-btn-default ant-btn-sm" style="float: right; margin: 5px;"><span>reload</span></button></div>
   </div>
@@ -49,8 +49,8 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
       </div>
       <ul class="ant-transfer-list-content"></ul>
       <div class="ant-transfer-list-body-not-found"><span>
-    没数据
-  </span></div>
+      没数据
+    </span></div>
     </div>
     <div class="ant-transfer-list-footer"><button type="button" class="ant-btn ant-btn-default ant-btn-sm" style="float: right; margin: 5px;"><span>reload</span></button></div>
   </div>

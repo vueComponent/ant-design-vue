@@ -69,7 +69,7 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 | resetFields | Reset the specified fields' value(to `initialValue`) and status. If you don't specify a parameter, all the fields will be reset. | Function(\[names: string\[]]) |
 | setFields | Set value and error state of fields | ({<br />&nbsp;&nbsp;\[fieldName\]: {value: any, errors: \[Error\] }<br />}) => void |
 | setFieldsValue | Set the value of a field. | Function({ [fieldName]&#x3A; value } |
-| validateFields | Validate the specified fields and get theirs values and errors. If you don't specify the parameter of fieldNames, you will vaildate all fields. | (<br />&nbsp;&nbsp;\[fieldNames: string\[]],<br />&nbsp;&nbsp;\[options: object\],<br />&nbsp;&nbsp;callback(errors, values)<br />) => void |
+| validateFields | Validate the specified fields and get theirs values and errors. If you don't specify the parameter of fieldNames, you will validate all fields. | (<br />&nbsp;&nbsp;\[fieldNames: string\[]],<br />&nbsp;&nbsp;\[options: object\],<br />&nbsp;&nbsp;callback(errors, values)<br />) => void |
 | validateFieldsAndScroll | This function is similar to `validateFields`, but after validation, if the target field is not in visible area of form, form will be automatically scrolled to the target field area. | same as `validateFields` |
 
 ### validateFields/validateFieldsAndScroll
@@ -152,7 +152,7 @@ After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property
 | id | The unique identifier is required. support [nested fields format](https://github.com/react-component/form/pull/48). | string |  |
 | options.getValueFromEvent | Specify how to get value from event or other onChange arguments | function(..args) | [reference](https://github.com/react-component/form#option-object) |
 | options.getValueProps | Get the component props according to field value. | function(value): any | [reference](https://github.com/react-component/form#option-object)
-| options.initialValue | You can specify initial value, type, optional value of children node. (Note: Because `Form` will test equality with `===` internaly, we recommend to use variable as `initialValue`, instead of literal) |  | n/a |
+| options.initialValue | You can specify initial value, type, optional value of children node. (Note: Because `Form` will test equality with `===` internally, we recommend to use variable as `initialValue`, instead of literal) |  | n/a |
 | options.normalize | Normalize value to form component, [a select-all example](https://codesandbox.io/s/kw4l2vqqmv) | function(value, prevValue, allValues): any | - |
 | options.rules | Includes validation rules. Please refer to "Validation Rules" part for details. | object\[] | n/a |
 | options.trigger | When to collect the value of children node | string | 'change' |

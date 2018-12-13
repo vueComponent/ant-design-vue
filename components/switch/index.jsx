@@ -34,7 +34,7 @@ const Switch = {
   },
 
   render () {
-    const { prefixCls, size, loading, ...restProps } = getOptionProps(this)
+    const { prefixCls, size, loading, disabled, ...restProps } = getOptionProps(this)
     const classes = {
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
@@ -52,6 +52,7 @@ const Switch = {
         loadingIcon,
         checkedChildren: getComponentFromProp(this, 'checkedChildren'),
         unCheckedChildren: getComponentFromProp(this, 'unCheckedChildren'),
+        disabled: disabled || loading,
       },
       on: this.$listeners,
       class: classes,

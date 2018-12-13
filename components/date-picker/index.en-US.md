@@ -11,7 +11,7 @@ There are four kinds of picker:
 **Note:** Part of locale of DatePicker, MonthPicker, RangePicker, WeekPicker is read from value. So, please set the locale of moment correctly.
 
 ````html
-// The default locale is en-US, if you want to use other locale, just set locale in entry file globaly.
+// The default locale is en-US, if you want to use other locale, just set locale in entry file globally.
 // import moment from 'moment';
 // import 'moment/locale/zh-cn';
 // moment.locale('zh-cn');
@@ -58,6 +58,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | [moment](http://momentjs.com/) | - |
+| defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | disabledTime | to specify the time that cannot be selected | function(date) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM-DD" |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
@@ -78,6 +79,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | [moment](http://momentjs.com/) | - |
+| defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM" |
 | monthCellContentRender | Custom month cell content render method by setting a scoped slot | slot="monthCellContentRender" slot-scope="date, locale" | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
@@ -93,6 +95,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | [moment](http://momentjs.com/) | - |
+| defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-wo" |
 | value(v-model) | to set date | [moment](http://momentjs.com/) | - |
 
@@ -106,6 +109,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
+| defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | disabledTime | to specify the time that cannot be selected | function(dates: [moment, moment], partial: `'start'|'end'`) | - |
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges | preseted ranges for quick selection | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | - |

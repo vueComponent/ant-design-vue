@@ -66,6 +66,8 @@ export default {
     }
     const classString = classNames({
       [`${prefixCls}-wrapper`]: true,
+      [`${prefixCls}-wrapper-checked`]: checkboxProps.props.checked,
+      [`${prefixCls}-wrapper-disabled`]: checkboxProps.props.disabled,
     })
     const checkboxClass = classNames({
       [`${prefixCls}-indeterminate`]: indeterminate,
@@ -81,7 +83,7 @@ export default {
           class={checkboxClass}
           ref='vcCheckbox'
         />
-        {children !== undefined ? <span>{children}</span> : null}
+        {children !== undefined && <span>{children}</span>}
       </label>
     )
   },

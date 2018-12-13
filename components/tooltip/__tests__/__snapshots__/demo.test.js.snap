@@ -6,8 +6,8 @@ exports[`renders ./components/tooltip/demo/auto-adjust-overflow.md correctly 1`]
 
 exports[`renders ./components/tooltip/demo/basic.md correctly 1`] = `
 <span class="">
-  Tooltip will show when mouse enter.
-</span>
+    Tooltip will show when mouse enter.
+  </span>
 `;
 
 exports[`renders ./components/tooltip/demo/placement.md correctly 1`] = `

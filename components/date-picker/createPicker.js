@@ -218,6 +218,7 @@ export default function createPicker (TheCalendar, props) {
             value={(inputValue && inputValue.format(props.format)) || ''}
             placeholder={placeholder}
             class={props.pickerInputClass}
+            tabIndex={props.tabIndex}
           />
           {clearIcon}
           {inputIcon}

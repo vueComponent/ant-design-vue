@@ -12,7 +12,6 @@ Upload files manually after `beforeUpload` returns `false`.
 <template>
   <div class="clearfix">
     <a-upload
-      action="//jsonplaceholder.typicode.com/posts/"
       :fileList="fileList"
       :remove="handleRemove"
       :beforeUpload="beforeUpload"
@@ -22,11 +21,11 @@ Upload files manually after `beforeUpload` returns `false`.
       </a-button>
     </a-upload>
     <a-button
-      class="upload-demo-start"
       type="primary"
       @click="handleUpload"
       :disabled="fileList.length === 0"
       :loading="uploading"
+      style="margin-top: 16px"
     >
       {{uploading ? 'Uploading' : 'Start Upload' }}
     </a-button>
@@ -80,11 +79,6 @@ export default {
   },
 }
 </script>
-<style scoped>
-  .upload-demo-start {
-    margin-top: 16px;
-  }
-</style>
 ```
 
 

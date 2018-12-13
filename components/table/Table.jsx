@@ -346,9 +346,9 @@ export default {
       const oldSortOrder = this.isSameColumn(sortColumn, column) ? sortOrder : undefined
       // 切换排序状态，按照降序/升序/不排序的顺序
       if (!oldSortOrder) {
-        newSortOrder = 'descend'
-      } else if (oldSortOrder === 'descend') {
         newSortOrder = 'ascend'
+      } else if (oldSortOrder === 'ascend') {
+        newSortOrder = 'descend'
       } else {
         newSortOrder = undefined
       }
@@ -736,14 +736,14 @@ export default {
 
     renderColumnsDropdown (columns, locale) {
       const { prefixCls, dropdownPrefixCls } = this
-      const { sSortOrder: sortOrder } = this
+      const { sSortOrder: sortOrder, sFilters: filters } = this
       return treeMap(columns, (column, i) => {
         const key = this.getColumnKey(column, i)
         let filterDropdown
         let sortButton
         const isSortColumn = this.isSortColumn(column)
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
-          const colFilters = this.sFilters[key] || []
+          const colFilters = key in filters ? filters[key] : []
           filterDropdown = (
             <FilterDropdown
               _propsSymbol={Symbol()}

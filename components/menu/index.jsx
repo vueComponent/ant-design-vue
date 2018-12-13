@@ -144,6 +144,13 @@ const Menu = {
         this.$forceUpdate()
       }
     },
+    // Restore vertical mode when menu is collapsed responsively when mounted
+    // https://github.com/ant-design/ant-design/issues/13104
+    // TODO: not a perfect solution, looking a new way to avoid setting switchingModeFromInline in this situation
+    handleMouseEnter  (e) {
+      this.restoreModeVerticalFromInline()
+      this.$emit('mouseenter', e)
+    },
     handleTransitionEnd (e) {
       // console.log(111)
       // when inlineCollapsed menu width animation finished
@@ -245,6 +252,7 @@ const Menu = {
         select: this.handleSelect,
         deselect: this.handleDeselect,
         openChange: this.handleOpenChange,
+        onMouseenter: this.handleMouseEnter,
       },
       nativeOn: {
         transitionend: this.handleTransitionEnd,

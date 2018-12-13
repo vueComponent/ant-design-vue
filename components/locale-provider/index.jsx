@@ -50,7 +50,9 @@ const LocaleProvider = {
         ...this.locale,
         exist: true,
       }
-      setMomentLocale(val)
+      this.$nextTick(() => {
+        setMomentLocale(val)
+      })
     },
   },
   created () {

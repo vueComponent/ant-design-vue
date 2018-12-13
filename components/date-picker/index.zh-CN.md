@@ -58,6 +58,7 @@ moment.locale('zh-cn');
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | defaultValue | 默认日期 | [moment](http://momentjs.com/) | 无 |
+| defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/) | 无 |
 | disabledTime | 不可选择的时间 | function(date) | 无 |
 | format | 展示的日期格式，配置参考 [moment.js](http://momentjs.com/) | string | "YYYY-MM-DD" |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
@@ -78,6 +79,7 @@ moment.locale('zh-cn');
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | defaultValue | 默认日期 | [moment](http://momentjs.com/) | 无 |
+| defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/) | 无 |
 | format | 展示的日期格式，配置参考 [moment.js](http://momentjs.com/) | string | "YYYY-MM" |
 | monthCellContentRender | 自定义的月份内容渲染方法 | slot="monthCellContentRender" slot-scope="date, locale" | - |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
@@ -94,6 +96,7 @@ moment.locale('zh-cn');
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | defaultValue | 默认日期 | [moment](http://momentjs.com/) | - |
+| defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/) | 无 |
 | format | 展示的日期格式，配置参考 [moment.js](http://momentjs.com/) | string | "YYYY-wo" |
 | value(v-model) | 日期 | [moment](http://momentjs.com/) | - |
 
@@ -108,6 +111,7 @@ moment.locale('zh-cn');
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | defaultValue | 默认日期 | [moment](http://momentjs.com/)\[] | 无 |
+| defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/) | 无 |
 | disabledTime | 不可选择的时间 | function(dates: [moment, moment], partial: `'start'|'end'`) | 无 |
 | format | 展示的日期格式 | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges       | 预设时间范围快捷选择 | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | 无 |

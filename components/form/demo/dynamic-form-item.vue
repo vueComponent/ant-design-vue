@@ -53,6 +53,7 @@ Add or remove form items dynamically.
 </template>
 
 <script>
+let id = 0
 export default {
   beforeCreate () {
     this.form = this.$form.createForm(this)
@@ -98,7 +99,7 @@ export default {
       const { form } = this
       // can use data-binding to get
       const keys = form.getFieldValue('keys')
-      const nextKeys = keys.concat(keys.length)
+      const nextKeys = keys.concat(++id)
       // can use data-binding to set
       // important! notify form to detect changes
       form.setFieldsValue({

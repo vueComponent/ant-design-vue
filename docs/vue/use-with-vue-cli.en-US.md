@@ -1,8 +1,6 @@
-
 # Use in vue-cli 3
 
 [vue-cli](https://github.com/vuejs/vue-cli) is one of the best Vue application development tools. We are going to use `antd` within it and modify the webpack config for some customized needs.
-
 
 ## Install and Initialization
 
@@ -64,22 +62,23 @@ $ yarn add ant-design-vue
 Modify `src/main.js`, import Button component from `antd`.
 
 ```jsx
-import Vue from 'vue'
-import Button from 'ant-design-vue/lib/button'
-import 'ant-design-vue/dist/antd.css'
-import App from './App'
+import Vue from "vue";
+import Button from "ant-design-vue/lib/button";
+import "ant-design-vue/dist/antd.css";
+import App from "./App";
 
-Vue.component(Button.name, Button)
+Vue.component(Button.name, Button);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: "#app",
   components: { App },
-  template: '<App/>'
-})
+  template: "<App/>"
+});
 ```
+
 Modify `src/App.vue`。
 
 ```jsx
@@ -93,9 +92,7 @@ Modify `src/App.vue`。
 ...
 ```
 
-
 Ok, you should now see a blue primary button displayed on the page. Next you can choose any components of `antd` to develop your application. Visit other workflows of `vue-cli` at its [User Guide ](https://github.com/vuejs/vue-cli/blob/master/README.md).
-
 
 ## Advanced Guides
 
@@ -111,6 +108,8 @@ Now we need to customize the default webpack config.
 ```bash
 $ yarn add babel-plugin-import --dev
 ```
+
+#### if you use vue-cli 2
 
 Modify `.babelrc`.
 
@@ -132,6 +131,22 @@ Modify `.babelrc`.
 +     ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }]
 +   ]
   }
+```
+
+#### if you use vue-cli 3
+
+Modify `babel.config.js`
+
+```diff
+ module.exports = {
+  presets: ["@vue/app"],
++ plugins: [
++    [
++      "import",
++      { libraryName: "ant-design-vue", libraryDirectory: "es", style: true }
++    ]
++  ]
+};
 ```
 
 Remove the `import 'ant-design-vue/dist/antd.css';` statement added before because `babel-plugin-import` will import styles and import components like below:

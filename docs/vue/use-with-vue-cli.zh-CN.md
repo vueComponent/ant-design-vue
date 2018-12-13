@@ -1,8 +1,6 @@
-
 # 在 vue-cli 3 中使用
 
 [vue-cli](https://github.com/vuejs/vue-cli) 是业界最优秀的 Vue 应用开发工具之一，本文会尝试在 vue-cli 创建的工程中使用 antd 组件，并自定义 webpack 的配置以满足各类工程化需求。
-
 
 ## 安装和初始化
 
@@ -63,23 +61,24 @@ $ yarn add ant-design-vue
 修改 `src/main.js`，引入 antd 的按钮组件以及全部样式文件。
 
 ```jsx
-import Vue from 'vue'
-import Button from 'ant-design-vue/lib/button'
-import 'ant-design-vue/dist/antd.css'
-import App from './App'
+import Vue from "vue";
+import Button from "ant-design-vue/lib/button";
+import "ant-design-vue/dist/antd.css";
+import App from "./App";
 
-Vue.component(Button.name, Button)
+Vue.component(Button.name, Button);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: "#app",
   components: { App },
-  template: '<App/>'
-})
+  template: "<App/>"
+});
 ```
-修改 `src/App.vue`的template内容。
+
+修改 `src/App.vue`的 template 内容。
 
 ```jsx
 <template>
@@ -108,7 +107,9 @@ new Vue({
 $ yarn add babel-plugin-import --dev
 ```
 
-修改`.babelrc`文件，配置babel-plugin-import
+#### 使用 vue-cli 2 的小伙伴
+
+修改`.babelrc`文件，配置 babel-plugin-import
 
 ```diff
   {
@@ -130,6 +131,21 @@ $ yarn add babel-plugin-import --dev
   }
 ```
 
+#### 使用 vue-cli 3 的小伙伴
+
+修改`babel.config.js`文件，配置 babel-plugin-import
+
+```diff
+ module.exports = {
+  presets: ["@vue/app"],
++  plugins: [
++    [
++      "import",
++      { libraryName: "ant-design-vue", libraryDirectory: "es", style: true }
++    ]
++  ]
+};
+```
 
 然后移除前面在 `src/main.js` 里全量添加的 `import 'ant-design-vue/dist/antd.css';` 样式代码，并且按下面的格式引入模块。
 
@@ -158,4 +174,3 @@ $ yarn add babel-plugin-import --dev
 ### 自定义主题
 
 按照 [配置主题](/ant-design-vue/docs/vue/customize-theme-cn) 的要求，自定义主题需要用到 less 变量覆盖功能。
-

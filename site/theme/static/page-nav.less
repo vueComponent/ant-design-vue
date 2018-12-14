@@ -16,43 +16,10 @@
     text-decoration: none;
   }
 
-  > a.prev-page {
-    &:before {
-      font-family: 'anticon';
-      content: '\e61c';
-      font-size: 12px;
-      margin-right: 1em;
-      color: @site-text-color-secondary;
-      transition: all .3s;
-      position: relative;
-      left: 0;
-    }
-
-    &:hover:before {
-      color: @primary-color;
-      left: -3px;
-    }
-  }
 
   > .next-page {
     text-align: right;
     float: right;
-
-    &:after {
-      font-family: 'anticon';
-      content: '\e61b';
-      font-size: 12px;
-      margin-left: 1em;
-      color: @site-text-color-secondary;
-      transition: all .3s;
-      position: relative;
-      right: 0;
-    }
-
-    &:hover:after {
-      color: @primary-color;
-      right: -3px;
-    }
   }
 
   .chinese {

@@ -79,6 +79,11 @@ export default {
               <a-menu-item key='github'>
                 <a href='https://github.com/vueComponent/ant-design-vue'>GitHub</a>
               </a-menu-item>
+              <a-menu-item key='sponsor'>
+                <router-link to={{ path: '/ant-design-vue/docs/vue/sponsor' }}>
+                  {isCN ? '赞助我们' : 'Sponsor'}
+                </router-link>
+              </a-menu-item>
             </a-menu>
           </a-col>
         </a-row>

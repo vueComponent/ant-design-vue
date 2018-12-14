@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Icon from '..'
 import VueIcon from '@ant-design/icons-vue'
-import Tooltip from '../../tooltip'
 import { getThemeFromTypeName, withThemeSuffix } from '../utils'
 import { cloneElement } from '../../_util/vnode'
 
@@ -125,7 +124,6 @@ describe('Icon', () => {
         render () {
           const component = {
             render () {
-              console.log(this.$slots.default)
               return (
                 <svg>
                   <defs>
@@ -137,7 +135,6 @@ describe('Icon', () => {
                   {
                     this.$slots.default.map(
                       child => {
-                        console.log(child)
                         cloneElement(child, { attrs: child.type === 'path' ? { fill: 'scriptUrl(#gradient)' } : {}})
                       }
                     )

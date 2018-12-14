@@ -1,5 +1,4 @@
 import Radio from './Radio'
-import Wave from '../_util/wave'
 import { getOptionProps } from '../_util/props-util'
 
 export default {

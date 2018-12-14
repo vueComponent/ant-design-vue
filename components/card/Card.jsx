@@ -4,7 +4,7 @@ import Row from '../row'
 import Col from '../col'
 import PropTypes from '../_util/vue-types'
 import addEventListener from '../_util/Dom/addEventListener'
-import { getComponentFromProp, getSlotOptions, isEmptyElement, filterEmpty } from '../_util/props-util'
+import { getComponentFromProp, getSlotOptions, filterEmpty } from '../_util/props-util'
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame'
 import BaseMixin from '../_util/BaseMixin'
 

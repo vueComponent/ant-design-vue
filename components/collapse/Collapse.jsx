@@ -1,5 +1,3 @@
-
-import PropTypes from '../_util/vue-types'
 import animation from '../_util/openAnimation'
 import { getOptionProps, initDefaultProps } from '../_util/props-util'
 import VcCollapse, { collapseProps } from '../vc-collapse'

@@ -4,7 +4,7 @@ import SubMenu from './SubMenu'
 import BaseMixin from '../_util/BaseMixin'
 import { getWidth, setStyle, menuAllProps } from './util'
 import { cloneElement } from '../_util/vnode'
-import { getClass, getPropsData, filterEmpty } from '../_util/props-util'
+import { getClass, getPropsData } from '../_util/props-util'
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -104,7 +104,7 @@ const DOMWrap = {
       // put all the overflowed item inside a submenu
       // with a title of overflow indicator ('...')
       const copy = this.$slots.default[0]
-      const { title, eventKey, ...rest } = getPropsData(copy)
+      const { title, eventKey, ...rest } = getPropsData(copy) // eslint-disable-line no-unused-vars
 
       let style = {}
       let key = `${keyPrefix}-overflowed-indicator`

@@ -191,7 +191,7 @@ export default {
     },
     getDialogElement () {
       const { closable, prefixCls, width, height,
-        title, footer: tempFooter, bodyStyle, visible, bodyProps, $props } = this
+        title, footer: tempFooter, bodyStyle, visible, bodyProps } = this
       const dest = {}
       if (width !== undefined) {
         dest.width = typeof width === 'number' ? `${width}px` : width

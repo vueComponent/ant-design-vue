@@ -5,10 +5,10 @@ function $$ (className) {
   return document.body.querySelectorAll(className)
 }
 describe('Popconfirm', () => {
-  const eventObject = expect.objectContaining({
-    target: expect.anything(),
-    preventDefault: expect.any(Function),
-  })
+  // const eventObject = expect.objectContaining({
+  //   target: expect.anything(),
+  //   preventDefault: expect.any(Function),
+  // })
   it('should popup Popconfirm dialog', async () => {
     const onVisibleChange = jest.fn()
 

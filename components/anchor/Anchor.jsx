@@ -4,7 +4,7 @@ import addEventListener from '../_util/Dom/addEventListener'
 import Affix from '../affix'
 import getScroll from '../_util/getScroll'
 import raf from 'raf'
-import { initDefaultProps, getClass, getStyle } from '../_util/props-util'
+import { initDefaultProps, getClass } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 
 function getDefaultContainer () {

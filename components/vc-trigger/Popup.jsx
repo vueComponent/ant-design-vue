@@ -3,7 +3,6 @@ import PropTypes from '../_util/vue-types'
 import Align from '../vc-align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
-import { noop } from './utils'
 import animate from '../_util/css-animation'
 
 export default {
@@ -143,7 +142,7 @@ export default {
       const { align, visible, prefixCls, animation, popupStyle, getClassNameFromAlign,
         destroyPopupOnHide, stretch,
       } = props
-      const { mouseenter, mouseleave } = $listeners
+      // const { mouseenter, mouseleave } = $listeners
       const className = this.getClassName(this.currentAlignClassName ||
         getClassNameFromAlign(align))
       // const hiddenClassName = `${prefixCls}-hidden`

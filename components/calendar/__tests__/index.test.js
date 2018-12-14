@@ -2,7 +2,6 @@ import Moment from 'moment'
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
 import MockDate from 'mockdate'
-import Vue from 'vue'
 import Calendar from '..'
 
 function $$ (className) {

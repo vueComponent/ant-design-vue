@@ -1,10 +1,9 @@
-import warning from 'warning'
 import classNames from 'classnames'
 import VcDrawer from '../vc-drawer/src'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import Icon from '../icon'
-import { getComponentFromProp, getOptionProps, getClass } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps } from '../_util/props-util'
 
 const Drawer = {
   name: 'ADrawer',

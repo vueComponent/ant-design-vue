@@ -1,8 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement } from '../_util/vnode'
-import { isEmptyElement, getStyle, getOptionProps } from '../_util/props-util'
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
 let enquire = null

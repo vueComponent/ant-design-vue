@@ -12,6 +12,12 @@ export default {
     return (
       <div>
         <CombinationKeyFormat />
+        <Custom />
+        <Decimal />
+        <Formatter/>
+        <SimpleUseTouch/>
+        <Simple/>
+        <SimpleStep/>
       </div>
     )
   },

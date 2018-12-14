@@ -24,7 +24,7 @@ describe('Menu', () => {
     // jest.useRealTimers()
   })
   it('If has select nested submenu item ,the menu items on the grandfather level should be highlight', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultSelectedKeys={['1-3-2']} mode='vertical'>
@@ -46,7 +46,7 @@ describe('Menu', () => {
     })
   })
   it('should accept defaultOpenKeys in mode horizontal', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='horizontal'>
@@ -65,7 +65,7 @@ describe('Menu', () => {
   })
 
   it('should accept defaultOpenKeys in mode inline', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='inline'>
@@ -84,7 +84,7 @@ describe('Menu', () => {
   })
 
   it('should accept defaultOpenKeys in mode vertical', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='vertical'>

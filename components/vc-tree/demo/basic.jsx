@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 /* eslint no-alert:0 */
 import PropTypes from '../../_util/vue-types'
-import Tree, { TreeNode } from '../index'
+import Tree from '../index'
 import '../assets/index.less'
 import './basic.less'
 
@@ -63,7 +63,7 @@ export default {
   },
 
   render () {
-    const customLabel = (
+    const customLabel = ( // eslint-disable-line
       <span class='cus-label'>
         <span>operations: </span>
         <span style={{ color: 'blue' }} onClick={this.onEdit}>Edit</span>&nbsp;

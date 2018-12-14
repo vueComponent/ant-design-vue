@@ -1,7 +1,6 @@
 
 import { Item, itemProps } from '../vc-menu'
-import { getClass, getStyle, getOptionProps } from '../_util/props-util'
-import { cloneVNodes } from '../_util/vnode'
+import { getOptionProps } from '../_util/props-util'
 import Tooltip from '../tooltip'
 function noop () {}
 export default {

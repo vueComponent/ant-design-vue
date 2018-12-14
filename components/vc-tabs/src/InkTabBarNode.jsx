@@ -1,15 +1,16 @@
 import PropTypes from '../../_util/vue-types'
-import { setTransform, isTransformSupported, getLeft, getTop } from './utils'
+import { setTransform, isTransformSupported, getLeft, getTop, getActiveIndex } from './utils'
 import BaseMixin from '../../_util/BaseMixin'
 
 function componentDidUpdate (component, init) {
-  const { styles = {}} = component.$props
+  const { styles = {}, panels, activeKey } = component.$props
   const rootNode = component.getRef('root')
   const wrapNode = component.getRef('nav') || rootNode
   const inkBarNode = component.getRef('inkBar')
   const activeTab = component.getRef('activeTab')
   const inkBarNodeStyle = inkBarNode.style
   const tabBarPosition = component.$props.tabBarPosition
+  const activeIndex = getActiveIndex(panels, activeKey)
   if (init) {
     // prevent mount animation
     inkBarNodeStyle.display = 'none'
@@ -17,6 +18,16 @@ function componentDidUpdate (component, init) {
   if (activeTab) {
     const tabNode = activeTab
     const transformSupported = isTransformSupported(inkBarNodeStyle)
+
+    // Reset current style
+    setTransform(inkBarNodeStyle, '')
+    inkBarNodeStyle.width = ''
+    inkBarNodeStyle.height = ''
+    inkBarNodeStyle.left = ''
+    inkBarNodeStyle.top = ''
+    inkBarNodeStyle.bottom = ''
+    inkBarNodeStyle.right = ''
+
     if (tabBarPosition === 'top' || tabBarPosition === 'bottom') {
       let left = getLeft(tabNode, wrapNode)
       let width = tabNode.offsetWidth
@@ -28,42 +39,35 @@ function componentDidUpdate (component, init) {
       } else if (styles.inkBar && styles.inkBar.width !== undefined) {
         width = parseFloat(styles.inkBar.width, 10)
         if (width) {
-          left = left + (tabNode.offsetWidth - width) / 2
+          left += (tabNode.offsetWidth - width) / 2
         }
       }
       // use 3d gpu to optimize render
       if (transformSupported) {
         setTransform(inkBarNodeStyle, `translate3d(${left}px,0,0)`)
-        inkBarNodeStyle.width = `${width}px`
-        inkBarNodeStyle.height = ''
       } else {
         inkBarNodeStyle.left = `${left}px`
-        inkBarNodeStyle.top = ''
-        inkBarNodeStyle.bottom = ''
-        inkBarNodeStyle.right = `${wrapNode.offsetWidth - left - width}px`
       }
+      inkBarNodeStyle.width = `${width}px`
     } else {
-      let top = getTop(tabNode, wrapNode)
+      let top = getTop(tabNode, wrapNode, true)
       let height = tabNode.offsetHeight
       if (styles.inkBar && styles.inkBar.height !== undefined) {
         height = parseFloat(styles.inkBar.height, 10)
         if (height) {
-          top = top + (tabNode.offsetHeight - height) / 2
+          top += (tabNode.offsetHeight - height) / 2
         }
       }
       if (transformSupported) {
         setTransform(inkBarNodeStyle, `translate3d(0,${top}px,0)`)
-        inkBarNodeStyle.height = `${height}px`
-        inkBarNodeStyle.width = ''
+        inkBarNodeStyle.top = '0'
       } else {
-        inkBarNodeStyle.left = ''
-        inkBarNodeStyle.right = ''
         inkBarNodeStyle.top = `${top}px`
-        inkBarNodeStyle.bottom = `${wrapNode.offsetHeight - top - height}px`
       }
+      inkBarNodeStyle.height = `${height}px`
     }
   }
-  inkBarNodeStyle.display = activeTab ? 'block' : 'none'
+  inkBarNodeStyle.display = activeIndex !== -1 ? 'block' : 'none'
 }
 
 export default {
@@ -79,6 +83,8 @@ export default {
     tabBarPosition: String,
     saveRef: PropTypes.func.def(() => {}),
     getRef: PropTypes.func.def(() => {}),
+    panels: PropTypes.array,
+    activeKey: PropTypes.string,
   },
   updated () {
     this.$nextTick(function () {
@@ -108,7 +114,7 @@ export default {
         class={classes}
         key='inkBar'
         {...{ directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveRef('inkBar'),
         }] }}
       />

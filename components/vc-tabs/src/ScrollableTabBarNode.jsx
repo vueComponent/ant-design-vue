@@ -1,9 +1,10 @@
-import { setTransform, isTransformSupported } from './utils'
+
 import addDOMEventListener from 'add-dom-event-listener'
 import debounce from 'lodash/debounce'
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { getComponentFromProp } from '../../_util/props-util'
+import { setTransform, isTransformSupported } from './utils'
 
 function noop () {
 }
@@ -88,7 +89,9 @@ export default {
       const navNode = this.$props.getRef('nav')
       const navTabsContainer = this.$props.getRef('navTabsContainer')
       const navNodeWH = this.getScrollWH(navTabsContainer || navNode)
-      const containerWH = this.getOffsetWH(this.$props.getRef('container'))
+      // Add 1px to fix `offsetWidth` with decimal in Chrome not correct handle
+      // https://github.com/ant-design/ant-design/issues/13423
+      const containerWH = this.getOffsetWH(this.$props.getRef('container')) + 1
       const navWrapNodeWH = this.getOffsetWH(this.$props.getRef('navWrap'))
       let { offset } = this
       const minOffset = containerWH - navNodeWH
@@ -169,16 +172,14 @@ export default {
               value: `${target}px`,
             }
           }
+        } else if (transformSupported) {
+          navOffset = {
+            value: `translate3d(${target}px,0,0)`,
+          }
         } else {
-          if (transformSupported) {
-            navOffset = {
-              value: `translate3d(${target}px,0,0)`,
-            }
-          } else {
-            navOffset = {
-              name: 'left',
-              value: `${target}px`,
-            }
+          navOffset = {
+            name: 'left',
+            value: `${target}px`,
           }
         }
         if (transformSupported) {
@@ -327,7 +328,7 @@ export default {
         }}
         key='container'
         {...{ directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveRef('container'),
         }] }}
       >
@@ -336,7 +337,7 @@ export default {
         <div
           class={`${prefixCls}-nav-wrap`}
           {...{ directives: [{
-            name: 'ref',
+            name: 'ant-ref',
             value: this.saveRef('navWrap'),
           }] }}
         >
@@ -344,7 +345,7 @@ export default {
             <div
               class={navClasses}
               {...{ directives: [{
-                name: 'ref',
+                name: 'ant-ref',
                 value: this.saveRef('nav'),
               }] }}
             >

@@ -3,7 +3,7 @@ import warning from 'warning'
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { getOptionProps, getComponentFromProp } from '../../_util/props-util'
-
+import { isVertical } from './utils'
 function noop () {
 }
 export default {
@@ -17,9 +17,13 @@ export default {
     onTabClick: PropTypes.func,
     saveRef: PropTypes.func.def(noop),
     getRef: PropTypes.func.def(noop),
+    tabBarPosition: PropTypes.string,
   },
   render () {
-    const { panels: children, activeKey, prefixCls, tabBarGutter, saveRef } = this.$props
+    const { panels: children,
+      activeKey, prefixCls,
+      tabBarGutter, saveRef,
+      tabBarPosition } = this.$props
     const rst = []
 
     children.forEach((child, index) => {
@@ -42,11 +46,16 @@ export default {
       const directives = []
       if (activeKey === key) {
         directives.push({
-          name: 'ref',
+          name: 'ant-ref',
           value: saveRef('activeTab'),
         })
       }
       const tab = getComponentFromProp(child, 'tab')
+      let gutter = tabBarGutter && index === children.length - 1 ? 0 : tabBarGutter
+      gutter = typeof gutter === 'number' ? `${gutter}px` : gutter
+      const style = {
+        [isVertical(tabBarPosition) ? 'marginBottom' : 'marginRight']: gutter,
+      }
       warning(tab !== undefined, 'There must be `tab` property or slot on children of Tabs.')
       rst.push(
         <div
@@ -56,7 +65,7 @@ export default {
           {...events}
           class={cls}
           key={key}
-          style={{ marginRight: tabBarGutter && index === children.length - 1 ? 0 : `${tabBarGutter}px` }}
+          style={style}
           {...{ directives: directives }}
         >
           {tab}
@@ -67,7 +76,7 @@ export default {
     return (
       <div
         {...{ directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveRef('navTabsContainer'),
         }] }}
       >{rst}</div>

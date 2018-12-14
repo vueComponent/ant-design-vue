@@ -1,7 +1,6 @@
 import Icon from '../icon'
 import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar'
 import { cloneElement } from '../_util/vnode'
-
 const TabBar = {
   functional: true,
   render (h, context) {
@@ -12,6 +11,8 @@ const TabBar = {
       tabBarExtraContent,
       tabPosition,
       prefixCls,
+      type = 'line',
+      size,
     } = context.props
     const inkBarAnimated = typeof animated === 'object' ? animated.inkBar : animated
 
@@ -29,6 +30,13 @@ const TabBar = {
       </span>
     )
 
+    // Additional className for style usage
+    const cls = {
+      [`${prefixCls}-${tabPosition}-bar`]: true,
+      [`${prefixCls}-${size}-bar`]: !!size,
+      [`${prefixCls}-card-bar`]: type && type.indexOf('card') >= 0,
+    }
+
     const renderProps = {
       props: {
         ...context.props,
@@ -39,6 +47,7 @@ const TabBar = {
       },
       style: tabBarStyle,
       on: context.listeners,
+      class: cls,
     }
 
     let RenderTabBar

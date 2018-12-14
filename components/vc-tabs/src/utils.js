@@ -94,11 +94,11 @@ function getTypeValue (start, current, end, tabNode, wrapperNode) {
 
   const { childNodes } = tabNode.parentNode
   Array.prototype.some.call(childNodes, (node) => {
-    const style = getComputedStyle(node)
+    const style = window.getComputedStyle(node)
     if (node !== tabNode) {
       total += toNum(style, `margin-${start}`)
-      total += toNum(style, `margin-${end}`)
       total += node[current]
+      total += toNum(style, `margin-${end}`)
 
       if (style.boxSizing === 'content-box') {
         total += toNum(style, `border-${start}-width`) + toNum(style, `border-${end}-width`)

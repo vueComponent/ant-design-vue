@@ -726,7 +726,7 @@ const Select = {
           })}
           <span
             {...{ directives: [{
-              name: 'ref',
+              name: 'ant-ref',
               value: this.saveInputMirrorRef,
             }] }}
             // ref='inputMirrorRef'
@@ -1332,7 +1332,7 @@ const Select = {
         <div
           class={className}
           {...{ directives: [{
-            name: 'ref',
+            name: 'ant-ref',
             value: this.saveTopCtrlRef,
           }] }}
           onClick={this.topCtrlContainerClick}
@@ -1435,7 +1435,7 @@ const Select = {
       },
       class: `${prefixCls}-selection ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`,
       directives: [{
-        name: 'ref',
+        name: 'ant-ref',
         value: this.saveSelectionRef,
       }],
       key: 'selection',
@@ -1489,13 +1489,13 @@ const Select = {
         showAction={props.showAction}
         menuItemSelectedIcon={getComponentFromProp(this, 'menuItemSelectedIcon')}
         {...{ directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveSelectTriggerRef,
         }] }}
       >
         <div
           {...{ directives: [{
-            name: 'ref',
+            name: 'ant-ref',
             value: this.saveRootRef,
           }] }}
           style={getStyle(this)}

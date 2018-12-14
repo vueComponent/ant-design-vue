@@ -23,7 +23,7 @@ export default {
     ]),
     destroyInactiveTabPane: PropTypes.bool.def(false),
     type: PropTypes.oneOf(['line', 'card', 'editable-card']),
-    tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
     size: PropTypes.oneOf(['default', 'small', 'large']),
     animated: PropTypes.oneOfType([
       PropTypes.bool,
@@ -70,6 +70,7 @@ export default {
   },
 
   render () {
+    const props = getOptionProps(this)
     const {
       prefixCls,
       size,
@@ -78,8 +79,7 @@ export default {
       animated = true,
       hideAdd,
       renderTabBar,
-    } = this.$props
-
+    } = props
     const children = filterEmpty(this.$slots.default)
 
     let tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
@@ -87,7 +87,7 @@ export default {
 
     // card tabs should not have animation
     if (type !== 'line') {
-      tabPaneAnimated = animated === undefined ? false : tabPaneAnimated
+      tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false
     }
     const cls = {
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
@@ -135,9 +135,7 @@ export default {
     }
 
     tabBarExtraContent = tabBarExtraContent ? (
-      <div class={`${prefixCls}-extra-content`}>
-        {tabBarExtraContent}
-      </div>
+      <div class={`${prefixCls}-extra-content`}>{tabBarExtraContent}</div>
     ) : null
 
     const renderTabBarSlot = renderTabBar || this.$scopedSlots.renderTabBar
@@ -151,13 +149,16 @@ export default {
         ...this.$listeners,
       },
     }
-
+    const contentCls = {
+      [`${prefixCls}-${tabPosition}-content`]: true,
+      [`${prefixCls}-card-content`]: type.indexOf('card') >= 0,
+    }
     const tabsProps = {
       props: {
         ...getOptionProps(this),
         tabBarPosition: tabPosition,
         renderTabBar: () => <TabBar {...tabBarProps}/>,
-        renderTabContent: () => <TabContent animated={tabPaneAnimated} animatedWithMargin />,
+        renderTabContent: () => <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />,
         children: childrenWithClose.length > 0 ? childrenWithClose : children,
         __propsSymbol__: Symbol(),
       },

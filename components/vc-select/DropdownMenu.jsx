@@ -150,7 +150,7 @@ export default {
               foundFirst = true
               return cloneElement(item, {
                 directives: [{
-                  name: 'ref',
+                  name: 'ant-ref',
                   value: ref => {
                     this.firstActiveItem = ref
                   },

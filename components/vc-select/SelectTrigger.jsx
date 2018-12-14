@@ -114,7 +114,7 @@ export default {
           popupScroll,
         },
         directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveDropdownMenuRef,
         }],
       }
@@ -202,7 +202,7 @@ export default {
         popupVisibleChange: dropdownVisibleChange,
       },
       directives: [{
-        name: 'ref',
+        name: 'ant-ref',
         value: this.saveTriggerRef,
       }],
     }

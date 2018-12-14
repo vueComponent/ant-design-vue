@@ -49,7 +49,7 @@ exports[`renders ./components/alert/demo/custom-icon.md correctly 1`] = `
 exports[`renders ./components/alert/demo/description.md correctly 1`] = `
 <div>
   <div data-show="true" class="ant-alert ant-alert-success ant-alert-with-description ant-alert-no-icon"><span class="ant-alert-message">Success Text</span><span class="ant-alert-description"><p>
-        Success Description <span style="color: red;">Success</span> Description Success Description
+      Success Description <span style="color: red;">Success</span> Description Success Description
     </p></span></div>
   <div data-show="true" class="ant-alert ant-alert-info ant-alert-with-description ant-alert-no-icon"><span class="ant-alert-message">Info Text</span><span class="ant-alert-description">Info Description Info Description Info Description Info Description</span></div>
   <div data-show="true" class="ant-alert ant-alert-warning ant-alert-with-description ant-alert-no-icon"><span class="ant-alert-message">Warning Text</span><span class="ant-alert-description">Warning Description Warning Description Warning Description Warning Description</span></div>

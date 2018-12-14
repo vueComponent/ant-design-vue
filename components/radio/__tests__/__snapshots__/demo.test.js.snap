@@ -37,8 +37,8 @@ exports[`renders ./components/radio/demo/radioGroup.md correctly 1`] = `<div cla
 
 exports[`renders ./components/radio/demo/radioGroup-more.md correctly 1`] = `
 <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-wrapper ant-radio-wrapper-checked" style="display: block; height: 30px; line-height: 30px;"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span>Option A</span></label><label class="ant-radio-wrapper" style="display: block; height: 30px; line-height: 30px;"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span>Option B</span></label><label class="ant-radio-wrapper" style="display: block; height: 30px; line-height: 30px;"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="3"><span class="ant-radio-inner"></span></span><span>Option C</span></label><label class="ant-radio-wrapper" style="display: block; height: 30px; line-height: 30px;"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="4"><span class="ant-radio-inner"></span></span><span>
-      More...
-      <!----></span></label></div>
+    More...
+    <!----></span></label></div>
 `;
 
 exports[`renders ./components/radio/demo/radioGroup-options.md correctly 1`] = `

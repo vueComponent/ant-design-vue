@@ -57,7 +57,7 @@ export default {
     }
     let icon = null
     if (showArrow && typeof expandIcon === 'function') {
-      icon = cloneElement(expandIcon, { ...this.$props })
+      icon = cloneElement(expandIcon(this.$props))
     }
     return (
       <div class={itemCls} role='tablist'>

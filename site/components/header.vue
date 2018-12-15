@@ -80,9 +80,13 @@ export default {
                 <a href='https://github.com/vueComponent/ant-design-vue'>GitHub</a>
               </a-menu-item>
               <a-menu-item key='sponsor'>
-                <router-link to={{ path: '/ant-design-vue/docs/vue/sponsor' }}>
-                  {isCN ? '赞助我们' : 'Sponsor'}
-                </router-link>
+                <a-popover placement='bottom'>
+                  <template slot='content'>
+                    <img/>
+                  </template>
+                  <a-icon type='dingding' />
+                  {isCN ? '钉钉服务群' : 'Ding Group QR Code'}
+                </a-popover>
               </a-menu-item>
             </a-menu>
           </a-col>

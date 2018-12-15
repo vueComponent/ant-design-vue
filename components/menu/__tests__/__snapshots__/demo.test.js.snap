@@ -126,8 +126,8 @@ exports[`renders ./components/menu/demo/sider-current.md correctly 1`] = `
 `;
 
 exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
-<div><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label> Change Mode
-  <span classname="ant-divider" style="margin: 0px 1em;"></span> <label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label> Change Theme
+<div><button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button> Change Mode
+  <span classname="ant-divider" style="margin: 0px 1em;"></span> <button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button> Change Theme
   <br> <br>
   <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" style="width: 256px;">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;"><i class="anticon anticon-mail"><svg viewBox="64 64 896 896" data-icon="mail" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
@@ -181,8 +181,7 @@ exports[`renders ./components/menu/demo/template.md correctly 1`] = `
 `;
 
 exports[`renders ./components/menu/demo/theme.md correctly 1`] = `
-<div><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label> Change Theme
-  <br> <br>
+<div><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked"><span class="ant-switch-inner">dark</span></button> <br> <br>
   <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark" style="width: 256px;">
     <li role="menuitem" class="ant-menu-item ant-menu-item-selected" style="padding-left: 24px;"><i class="anticon anticon-mail"><svg viewBox="64 64 896 896" data-icon="mail" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
           <path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0 0 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z"></path>

@@ -33,16 +33,6 @@ exports[`renders ./components/card/demo/border-less.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/card/demo/concise.md correctly 1`] = `
-<div class="ant-card ant-card-bordered" style="width: 300px;">
-  <div class="ant-card-body">
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
-  </div>
-</div>
-`;
-
 exports[`renders ./components/card/demo/flexible-content.md correctly 1`] = `
 <div class="ant-card ant-card-bordered ant-card-hoverable" style="width: 240px;">
   <div class="ant-card-cover"><img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"></div>

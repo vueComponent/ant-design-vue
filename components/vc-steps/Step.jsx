@@ -79,7 +79,7 @@ export default {
   render () {
     const {
       prefixCls, itemWidth,
-      status = 'wait', icon, tailContent,
+      status = 'wait', tailContent,
       adjustMarginRight,
     } = getOptionProps(this)
 
@@ -89,7 +89,7 @@ export default {
     const classString = {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-${status}`]: true,
-      [`${prefixCls}-item-custom`]: icon,
+      [`${prefixCls}-item-custom`]: getComponentFromProp(this, 'icon'),
     }
     const stepProps = {
       class: classString,

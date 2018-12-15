@@ -32,12 +32,12 @@ export default {
       <div>
         <md cn={md.cn} us={md.us}/>
         <Horizontal />
-        <InlineCollapsed />
         <Inline />
+        <InlineCollapsed />
         <SiderCurrent />
-        <SwitchMode />
-        <Theme />
         <Vertical />
+        <Theme />
+        <SwitchMode />
         <Template />
         <api>
           <CN slot='cn' />

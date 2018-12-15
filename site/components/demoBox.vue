@@ -14,7 +14,7 @@
       <slot v-if="isZhCN" name="description"></slot>
       <slot v-else name="us-description"></slot>
       <span class="btn-toggle" :class="{open: isOpen}" @click="toggle">
-        <a-icon type="down" />
+        <a-icon type="up" />
       </span>
     </section>
     <transition appear :css="false" @enter="enter" @leave="leave">

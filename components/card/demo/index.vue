@@ -1,7 +1,6 @@
 <script>
 import Basic from './basic.md'
 import BorderLess from './border-less.md'
-import Concise from './concise.md'
 import FlexibleContent from './flexible-content.md'
 import GridCard from './grid-card.md'
 import InColumn from './in-column.md'
@@ -43,7 +42,6 @@ export default {
         <md cn={md.cn} us={md.us} />
         <Basic/>
         <BorderLess/>
-        <Concise/>
         <FlexibleContent/>
         <GridCard/>
         <InColumn/>

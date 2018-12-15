@@ -18,6 +18,8 @@ const rangeProps = {
   disabled: PropTypes.bool,
   tabIndex: PropTypes.arrayOf(PropTypes.number),
   prefixCls: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
 }
 const Range = {
   name: 'Range',
@@ -76,7 +78,7 @@ const Range = {
 
       this.setState({ bounds: nextBounds })
 
-      if (bounds.some(v => utils.isValueOutOfRange(v, minAmaxProps))) {
+      if (value.some(v => utils.isValueOutOfRange(v, minAmaxProps))) {
         const newValues = value.map((v) => {
           return utils.ensureValueInRange(v, minAmaxProps)
         })
@@ -118,7 +120,7 @@ const Range = {
       this.onChange({ bounds: nextBounds })
     },
     onEnd () {
-      this.setState({ sHandle: null }, this.blur)
+      this.setState({ sHandle: null })
       this.removeDocumentEvents()
       this.$emit('afterChange', this.bounds)
     },

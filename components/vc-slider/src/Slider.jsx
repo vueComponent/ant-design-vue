@@ -15,6 +15,8 @@ const Slider = {
     disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
     tabIndex: PropTypes.number,
+    min: PropTypes.number,
+    max: PropTypes.number,
   },
   data () {
     const defaultValue = this.defaultValue !== undefined
@@ -22,7 +24,7 @@ const Slider = {
     const value = this.value !== undefined
       ? this.value : defaultValue
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (utils.isDev()) {
       warning(
         !hasProp(this, 'minimumTrackStyle'),
         'minimumTrackStyle will be deprecate, please use trackStyle instead.'
@@ -134,6 +136,9 @@ const Slider = {
       return this.sValue
     },
     trimAlignValue (v, nextProps = {}) {
+      if (v === null) {
+        return null
+      }
       const mergedProps = { ...this.$props, ...nextProps }
       const val = utils.ensureValueInRange(v, mergedProps)
       return utils.ensureValuePrecision(val, mergedProps)

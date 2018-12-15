@@ -14,7 +14,7 @@ export default {
     itemWidth: PropTypes.string,
     status: PropTypes.string,
     iconPrefix: PropTypes.string,
-    icon: PropTypes.node,
+    icon: PropTypes.any,
     adjustMarginRight: PropTypes.string,
     stepNumber: PropTypes.string,
     description: PropTypes.any,

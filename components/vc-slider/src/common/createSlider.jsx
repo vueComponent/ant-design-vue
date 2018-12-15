@@ -69,10 +69,11 @@ export default function createSlider (Component) {
       activeDotStyle: {},
     }),
     data () {
-      if (process.env.NODE_ENV !== 'production') {
+      if (utils.isDev()) {
         const { step, max, min } = this
+        const isPointDiffEven = isFinite(max - min) ? (max - min) % step === 0 : true; // eslint-disable-line
         warning(
-          step && Math.floor(step) === step ? (max - min) % step === 0 : true,
+          step && Math.floor(step) === step ? isPointDiffEven : true,
           'Slider[max] - Slider[min] (%s) should be a multiple of Slider[step] (%s)',
           max - min,
           step
@@ -108,6 +109,9 @@ export default function createSlider (Component) {
     methods: {
       defaultHandle ({ index, ref, className, style, ...restProps }) {
         delete restProps.dragging
+        if (restProps.value === null) {
+          return null
+        }
         const handleProps = {
           props: {
             ...restProps,
@@ -195,12 +199,13 @@ export default function createSlider (Component) {
       onClickMarkLabel (e, value) {
         e.stopPropagation()
         this.onChange({ value })
+        this.onEnd()
       },
       getSliderStart () {
         const slider = this.$refs.sliderRef
         const rect = slider.getBoundingClientRect()
 
-        return this.vertical ? rect.top : rect.left
+        return this.vertical ? rect.top : (rect.left + window.pageXOffset)
       },
       getSliderLength () {
         const slider = this.$refs.sliderRef

@@ -11,6 +11,7 @@
   - Much more display accuracy in lower-level screens.
   - Support multiple colors for icon.
   - No need to change built-in icons with overriding styles by providing more props in component.
+  - 😓 But at the same time bring the problem that the bundle file is too big, related solutions and discussions can check the React version of ant-design [issue](https://github.com/ant-design/ant-design/issues/12011).
   - 🌟 Add the `theme` attribute to set the theme style of the icon.
   - 🌟 Added `component` attribute, you can externally pass a component to customize the control rendering result. 
   - 🌟 The `twoToneColor` property is added to control the theme color of the two-color icon.

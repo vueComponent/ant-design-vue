@@ -84,12 +84,15 @@ export default {
                   <template slot='content'>
                     <img
                       width='160'
+                      height='163'
                       alt='dingding'
                       src='https://user-images.githubusercontent.com/4122593/50038786-571eaf80-0060-11e9-98a1-ea202fc60859.png'
                     />
                   </template>
-                  <a-icon type='dingding' />
-                  {isCN ? '钉钉服务群' : 'Ding Group QR Code'}
+                  <a>
+                    <a-icon type='dingding' style={{ color: '#1890ff' }}/>
+                    {isCN ? '钉钉服务群' : 'Ding Group QR Code'}
+                  </a>
                 </a-popover>
               </a-menu-item>
             </a-menu>

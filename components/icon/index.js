@@ -31,7 +31,7 @@ const Icon = {
     twoToneColor: PropTypes.string,
   },
   render (h, context) {
-    const { props, slots, listeners } = context
+    const { props, slots, listeners, data } = context
     const {
       // affect inner <svg>...</svg>
       type,
@@ -123,9 +123,11 @@ const Icon = {
         />
       )
     }
-
+    const iProps = {
+      ...data, on: listeners, class: classString, staticClass: '',
+    }
     return (
-      <i {...{ on: listeners }} class={classString}>
+      <i {...iProps}>
         {innerNode}
       </i>
     )

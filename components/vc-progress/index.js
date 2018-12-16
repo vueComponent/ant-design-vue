@@ -1,4 +1,4 @@
-// based on rc-progress 2.2.5
+// based on rc-progress 2.2.6
 import Progress, { Line, Circle } from './src/'
 
 export {

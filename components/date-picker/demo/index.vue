@@ -10,6 +10,7 @@ import PresettedRanges from './presetted-ranges'
 import Size from './size'
 import StartEnd from './start-end'
 import Time from './time'
+import Suffix from './suffix'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 const md = {
@@ -28,6 +29,7 @@ By clicking the input box, you can select a date from a popup calendar.
 export default {
   category: 'Components',
   type: 'Data Entry',
+  zhType: '数据录入',
   title: 'DatePicker',
   subtitle: '日期选择框',
   render () {
@@ -45,7 +47,7 @@ export default {
         <Size/>
         <StartEnd/>
         <Time/>
-
+        <Suffix />
         <api>
           <CN slot='cn' />
           <US/>

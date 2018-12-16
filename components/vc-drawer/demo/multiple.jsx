@@ -1,14 +1,9 @@
 import Drawer from '../src/index'
-import Menu from '../../menu/index'
-import Icon from '../../icon/index'
 import Button from '../../button/index'
 import '../assets/index.less'
 import '../../menu/style/index'
 import '../../icon/style/index'
 import '../../button/style/index'
-
-const SubMenu = Menu.SubMenu
-const MenuItemGroup = Menu.ItemGroup
 
 export default {
   data () {

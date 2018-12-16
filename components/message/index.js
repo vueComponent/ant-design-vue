@@ -33,30 +33,21 @@ function getMessageInstance (callback) {
 
 // type NoticeType = 'info' | 'success' | 'error' | 'warning' | 'loading';
 
-function notice (
-  content,
-  duration,
-  type,
-  onClose,
-) {
+function notice (args) {
+  const duration = args.duration !== undefined ? args.duration : defaultDuration
   const iconType = ({
     info: 'info-circle',
     success: 'check-circle',
-    error: 'cross-circle',
+    error: 'close-circle',
     warning: 'exclamation-circle',
     loading: 'loading',
-  })[type]
-
-  if (typeof duration === 'function') {
-    onClose = duration
-    duration = defaultDuration
-  }
+  })[args.type]
 
   const target = key++
   const closePromise = new Promise((resolve) => {
     const callback = () => {
-      if (typeof onClose === 'function') {
-        onClose()
+      if (typeof args.onClose === 'function') {
+        args.onClose()
       }
       return resolve(true)
     }
@@ -66,9 +57,11 @@ function notice (
         duration,
         style: {},
         content: (h) => (
-          <div class={`${prefixCls}-custom-content ${prefixCls}-${type}`}>
-            <Icon type={iconType} />
-            <span>{typeof content === 'function' ? content(h) : content}</span>
+          <div class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}>
+            {args.icon
+              ? (typeof args.icon === 'function' ? args.icon(h) : args.icon)
+              : (iconType ? <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} /> : '')}
+            <span>{typeof content === 'function' ? args.content(h) : args.content}</span>
           </div>
         ),
         onClose: callback,
@@ -97,26 +90,8 @@ function notice (
 //   transitionName?: string;
 // }
 
-export default {
-  info (content, duration, onClose) {
-    return notice(content, duration, 'info', onClose)
-  },
-  success (content, duration, onClose) {
-    return notice(content, duration, 'success', onClose)
-  },
-  error (content, duration, onClose) {
-    return notice(content, duration, 'error', onClose)
-  },
-  // Departed usage, please use warning()
-  warn (content, duration, onClose) {
-    return notice(content, duration, 'warning', onClose)
-  },
-  warning (content, duration, onClose) {
-    return notice(content, duration, 'warning', onClose)
-  },
-  loading (content, duration, onClose) {
-    return notice(content, duration, 'loading', onClose)
-  },
+const api = {
+  open: notice,
   config (options) {
     if (options.top !== undefined) {
       defaultTop = options.top
@@ -146,4 +121,18 @@ export default {
       messageInstance = null
     }
   },
-}
+};
+
+['success', 'info', 'warning', 'error', 'loading'].forEach((type) => {
+  api[type] = (content, duration, onClose) => {
+    if (typeof duration === 'function') {
+      onClose = duration
+      duration = undefined
+    }
+    return api.open({ content, duration: duration, type, onClose })
+  }
+})
+
+api.warn = api.warning
+
+export default api

@@ -34,6 +34,7 @@ function IDialogPropTypes () {
     getContainer: PropTypes.func,
     dialogStyle: PropTypes.object.def({}),
     dialogClass: PropTypes.object.def({}),
+    closeIcon: PropTypes.any,
   }
 }
 

@@ -1,4 +1,4 @@
-// based on rc-tooltip 3.7.2
+// based on rc-tooltip 3.7.3
 import Tooltip from './Tooltip'
 
 export default Tooltip

@@ -148,6 +148,7 @@ export default {
           onChange={onStandaloneChange}
           monthCellContentRender={onMonthCellContentRender}
           defaultValue={defaultCalendarValue}
+          renderFooter={() => 'extra footer'}
         />
 
         <div style={{ marginTop: '200px' }}>

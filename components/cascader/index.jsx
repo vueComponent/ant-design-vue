@@ -7,8 +7,9 @@ import omit from 'omit.js'
 import KeyCode from '../_util/KeyCode'
 import Input from '../input'
 import Icon from '../icon'
-import { hasProp, filterEmpty, getOptionProps, getStyle, getClass, getAttrs } from '../_util/props-util'
+import { hasProp, filterEmpty, getOptionProps, getStyle, getClass, getAttrs, getComponentFromProp, isValidElement } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
+import { cloneElement } from '../_util/vnode'
 
 const CascaderOptionType = PropTypes.shape({
   value: PropTypes.string,
@@ -74,6 +75,7 @@ const CascaderProps = {
   popupVisible: PropTypes.bool,
   fieldNames: FieldNamesType,
   autoFocus: PropTypes.bool,
+  suffixIcon: PropTypes.any,
 }
 
 function defaultFilterOption (inputValue, path, names) {
@@ -88,7 +90,7 @@ function defaultSortFilteredOption (a, b, inputValue, names) {
   return a.findIndex(callback) - b.findIndex(callback)
 }
 
-function getFilledFieldNames (fieldNames = {}) {
+function getFilledFieldNames ({ fieldNames = {}}) {
   const names = {
     children: fieldNames.children || 'children',
     label: fieldNames.label || 'label',
@@ -110,13 +112,13 @@ const Cascader = {
   },
   data () {
     this.cachedOptions = []
-    const { value, defaultValue, popupVisible, showSearch, options, changeOnSelect, flattenTree, fieldNames } = this
+    const { value, defaultValue, popupVisible, showSearch, options, flattenTree } = this
     return {
       sValue: value || defaultValue || [],
       inputValue: '',
       inputFocused: false,
       sPopupVisible: popupVisible,
-      flattenOptions: showSearch ? flattenTree(options, changeOnSelect, fieldNames) : undefined,
+      flattenOptions: showSearch ? flattenTree(options, this.$props) : undefined,
     }
   },
   mounted () {
@@ -135,7 +137,7 @@ const Cascader = {
     },
     options (val) {
       if (this.showSearch) {
-        this.setState({ flattenOptions: this.flattenTree(this.options, this.changeOnSelect, this.fieldNames) })
+        this.setState({ flattenOptions: this.flattenTree(this.options, this.$props) })
       }
     },
   },
@@ -218,8 +220,8 @@ const Cascader = {
     },
 
     getLabel () {
-      const { options, $scopedSlots, fieldNames } = this
-      const names = getFilledFieldNames(fieldNames)
+      const { options, $scopedSlots } = this
+      const names = getFilledFieldNames(this.$props)
       const displayRender = this.displayRender || $scopedSlots.displayRender || defaultDisplayRender
       const value = this.sValue
       const unwrappedValue = Array.isArray(value[0]) ? value[0] : value
@@ -242,18 +244,18 @@ const Cascader = {
       }
     },
 
-    flattenTree (options, changeOnSelect, fieldNames, ancestor = []) {
-      const names = getFilledFieldNames(fieldNames)
+    flattenTree (options, props, ancestor = []) {
+      const names = getFilledFieldNames(props)
       let flattenOptions = []
       const childrenName = names.children
       options.forEach((option) => {
         const path = ancestor.concat(option)
-        if (changeOnSelect || !option[childrenName] || !option[childrenName].length) {
+        if (props.changeOnSelect || !option[childrenName] || !option[childrenName].length) {
           flattenOptions.push(path)
         }
         if (option[childrenName]) {
           flattenOptions = flattenOptions.concat(
-            this.flattenTree(option[childrenName], changeOnSelect, fieldNames, path)
+            this.flattenTree(option[childrenName], props, path)
           )
         }
       })
@@ -261,8 +263,8 @@ const Cascader = {
     },
 
     generateFilteredOptions (prefixCls) {
-      const { showSearch, notFoundContent, $scopedSlots, fieldNames } = this
-      const names = getFilledFieldNames(fieldNames)
+      const { showSearch, notFoundContent, $scopedSlots } = this
+      const names = getFilledFieldNames(this.$props)
       const {
         filter = defaultFilterOption,
         // render = this.defaultRenderFilteredOption,
@@ -308,6 +310,8 @@ const Cascader = {
     const { $slots, sPopupVisible, inputValue, $listeners } = this
     const { sValue: value, inputFocused } = this.$data
     const props = getOptionProps(this)
+    let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+    suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
     const {
       prefixCls, inputPrefixCls, placeholder, size, disabled,
       allowClear, showSearch = false, ...otherProps } = props
@@ -318,7 +322,8 @@ const Cascader = {
     })
     const clearIcon = (allowClear && !disabled && value.length > 0) || inputValue ? (
       <Icon
-        type='cross-circle'
+        type='close-circle'
+        theme='filled'
         class={`${prefixCls}-picker-clear`}
         onClick={this.clearSelection}
         key='clear-icon'
@@ -403,6 +408,19 @@ const Cascader = {
       attrs: getAttrs(this),
     }
     const children = filterEmpty($slots.default)
+    const inputIcon = suffixIcon && (
+      isValidElement(suffixIcon)
+        ? cloneElement(
+          suffixIcon,
+          {
+            class: {
+              [`${prefixCls}-picker-arrow`]: true,
+            },
+          },
+        ) : <span class={`${prefixCls}-picker-arrow`}>{suffixIcon}</span>) || (
+      <Icon type='down' class={arrowCls} />
+    )
+
     const input = children.length ? children : (
       <span
         class={pickerCls}
@@ -417,7 +435,17 @@ const Cascader = {
           {this.getLabel()}
         </span> : null}
         {clearIcon}
-        <Icon type='down' key='down-icon' class={arrowCls} />
+        {inputIcon}
+      </span>
+    )
+
+    const expandIcon = (
+      <Icon type='right' />
+    )
+
+    const loadingIcon = (
+      <span class={`${prefixCls}-menu-item-loading-icon`}>
+        <Icon type='redo' spin />
       </span>
     )
     const cascaderProps = {
@@ -427,6 +455,8 @@ const Cascader = {
         value: value,
         popupVisible: sPopupVisible,
         dropdownMenuColumnStyle: dropdownMenuColumnStyle,
+        expandIcon,
+        loadingIcon,
       },
       on: {
         ...$listeners,

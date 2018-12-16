@@ -1,6 +1,8 @@
+import classNames from 'classnames'
 import VcDrawer from '../vc-drawer/src'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
+import Icon from '../icon'
 import { getComponentFromProp, getOptionProps } from '../_util/props-util'
 
 const Drawer = {
@@ -10,14 +12,15 @@ const Drawer = {
     destroyOnClose: PropTypes.bool,
     getContainer: PropTypes.any,
     maskClosable: PropTypes.bool.def(true),
-    mask: PropTypes.bool,
+    mask: PropTypes.bool.def(true),
     maskStyle: PropTypes.object,
     title: PropTypes.any,
     visible: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
     zIndex: PropTypes.number,
     prefixCls: PropTypes.string.def('ant-drawer'),
-    placement: PropTypes.string.def('right'),
+    placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('right'),
     level: PropTypes.any.def(null),
     wrapClassName: PropTypes.string,
   },
@@ -88,7 +91,16 @@ const Drawer = {
     getDestoryOnClose () {
       return this.destroyOnClose && !this.visible
     },
-
+    // get drawar push width or height
+    getPushTransform (placement) {
+      if (placement === 'left' || placement === 'right') {
+        return `translateX(${placement === 'left' ? 180 : -180}px)`
+      }
+      if (placement === 'top' || placement === 'bottom') {
+        return `translateY(${placement === 'top' ? 180 : -180}px)`
+      }
+    },
+    // render drawer body dom
     renderBody () {
       if (this.destoryClose && !this.visible) {
         return null
@@ -110,6 +122,7 @@ const Drawer = {
       }
       const { prefixCls, closable } = this.$props
       const title = getComponentFromProp(this, 'title')
+      // is have header dom
       let header
       if (title) {
         header = (
@@ -118,6 +131,7 @@ const Drawer = {
           </div>
         )
       }
+      // is have closer button
       let closer
       if (closable) {
         closer = (
@@ -127,7 +141,9 @@ const Drawer = {
             aria-label='Close'
             class={`${prefixCls}-close`}
           >
-            <span class={`${prefixCls}-close-x`} />
+            <span class={`${prefixCls}-close-x`}>
+              <Icon type='close'/>
+            </span>
           </button>
         )
       }
@@ -146,31 +162,49 @@ const Drawer = {
         </div>
       )
     },
+    getRcDrawerStyle () {
+      const { zIndex, placement, maskStyle } = this.$props
+      return this.$data._push
+        ? {
+          ...maskStyle,
+          zIndex,
+          transform: this.getPushTransform(placement),
+        }
+        : {
+          ...maskStyle,
+          zIndex,
+        }
+    },
+
   },
   render () {
     const props = getOptionProps(this)
-    const { zIndex, visible, placement, mask, wrapClassName, ...rest } = props
-    const vcDrawerStyle = this.$data._push
-      ? {
-        zIndex,
-        transform: `translateX(${placement === 'left' ? 180 : -180}px)`,
-      }
-      : { zIndex }
+    const { width, height, visible, placement, wrapClassName, ...rest } = props
+    const haveMask = rest.mask ? '' : 'no-mask'
+    const offsetStyle = {}
+    if (placement === 'left' || placement === 'right') {
+      offsetStyle.width = typeof width === 'number' ? `${width}px` : width
+    } else {
+      offsetStyle.height = typeof height === 'number' ? `${height}px` : height
+    }
     const vcDrawerProps = {
       props: {
         handler: false,
-        open: visible,
-        showMask: mask,
-        placement,
-        wrapClassName,
         ...rest,
+        ...offsetStyle,
+        open: visible,
+        showMask: props.mask,
+        placement,
+        wrapClassName: classNames({
+          [wrapClassName]: !!wrapClassName,
+          [haveMask]: !!haveMask,
+        }),
       },
       on: {
         maskClick: this.onMaskClick,
         ...this.$listeners,
       },
-      style: vcDrawerStyle,
-
+      style: this.getRcDrawerStyle(),
     }
     return (
       <VcDrawer

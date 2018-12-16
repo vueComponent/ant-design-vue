@@ -11,9 +11,15 @@ Show the dynamic switching mode (between 'inline' and 'vertical').
 ```html
 <template>
 <div>
-  <a-checkbox @change="changeMode" /> Change Mode
+  <a-switch
+    :defaultChecked="false"
+    @change="changeMode"
+  /> Change Mode
   <span className="ant-divider" style="margin: 0 1em"/>
-  <a-checkbox @change="changeTheme" /> Change Theme
+  <a-switch
+    :defaultChecked="false"
+    @change="changeTheme"
+  /> Change Theme
   <br />
   <br />
   <a-menu
@@ -59,11 +65,11 @@ export default {
     }
   },
   methods: {
-    changeMode ({ target }) {
-      this.mode = target.checked ? 'vertical' : 'inline'
+    changeMode (checked) {
+      this.mode = checked ? 'vertical' : 'inline'
     },
-    changeTheme ({ target }) {
-      this.theme = target.checked ? 'dark' : 'light'
+    changeTheme (checked) {
+      this.theme = checked ? 'dark' : 'light'
     },
   },
 }

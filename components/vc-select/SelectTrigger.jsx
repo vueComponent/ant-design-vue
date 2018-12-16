@@ -1,6 +1,6 @@
 
 import classnames from 'classnames'
-import Trigger from '../trigger'
+import Trigger from '../vc-trigger'
 import PropTypes from '../_util/vue-types'
 import DropdownMenu from './DropdownMenu'
 import { isSingleMode, saveRef } from './util'
@@ -54,6 +54,7 @@ export default {
     transitionName: PropTypes.string,
     getPopupContainer: PropTypes.func,
     backfillValue: PropTypes.any,
+    menuItemSelectedIcon: PropTypes.any,
   },
   created () {
     this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef')
@@ -95,7 +96,7 @@ export default {
     getDropdownElement (newProps) {
       const {
         value, firstActiveValue, defaultActiveFirstOption,
-        dropdownMenuStyle, getDropdownPrefixCls, backfillValue,
+        dropdownMenuStyle, getDropdownPrefixCls, backfillValue, menuItemSelectedIcon,
       } = this
       const { menuSelect, menuDeselect, popupScroll } = this.$listeners
       const dropdownMenuProps = {
@@ -104,6 +105,7 @@ export default {
           prefixCls: getDropdownPrefixCls(),
           value, firstActiveValue, defaultActiveFirstOption, dropdownMenuStyle,
           backfillValue,
+          menuItemSelectedIcon,
         },
         on: {
           ...newProps.on,
@@ -112,7 +114,7 @@ export default {
           popupScroll,
         },
         directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveDropdownMenuRef,
         }],
       }
@@ -200,7 +202,7 @@ export default {
         popupVisibleChange: dropdownVisibleChange,
       },
       directives: [{
-        name: 'ref',
+        name: 'ant-ref',
         value: this.saveTriggerRef,
       }],
     }

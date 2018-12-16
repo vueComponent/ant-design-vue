@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import warning from 'warning'
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { initDefaultProps, hasProp } from '../../_util/props-util'
@@ -19,6 +18,8 @@ const rangeProps = {
   disabled: PropTypes.bool,
   tabIndex: PropTypes.arrayOf(PropTypes.number),
   prefixCls: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
 }
 const Range = {
   name: 'Range',
@@ -32,7 +33,7 @@ const Range = {
   }),
   data () {
     const { count, min, max } = this
-    const initialValue = Array.apply(null, Array(count + 1))
+    const initialValue = Array(...Array(count + 1))
       .map(() => min)
     const defaultValue = hasProp(this, 'defaultValue') ? this.defaultValue : initialValue
     let { value } = this
@@ -77,8 +78,11 @@ const Range = {
 
       this.setState({ bounds: nextBounds })
 
-      if (bounds.some(v => utils.isValueOutOfRange(v, minAmaxProps))) {
-        this.$emit('change', nextBounds)
+      if (value.some(v => utils.isValueOutOfRange(v, minAmaxProps))) {
+        const newValues = value.map((v) => {
+          return utils.ensureValueInRange(v, minAmaxProps)
+        })
+        this.$emit('change', newValues)
       }
     },
     onChange (state) {
@@ -102,17 +106,17 @@ const Range = {
       this.startPosition = position
 
       const closestBound = this.getClosestBound(value)
-      const boundNeedMoving = this.getBoundNeedMoving(value, closestBound)
+      this.prevMovedHandleIndex = this.getBoundNeedMoving(value, closestBound)
 
       this.setState({
-        sHandle: boundNeedMoving,
-        recent: boundNeedMoving,
+        sHandle: this.prevMovedHandleIndex,
+        recent: this.prevMovedHandleIndex,
       })
 
-      const prevValue = bounds[boundNeedMoving]
+      const prevValue = bounds[this.prevMovedHandleIndex]
       if (value === prevValue) return
       const nextBounds = [...bounds]
-      nextBounds[boundNeedMoving] = value
+      nextBounds[this.prevMovedHandleIndex] = value
       this.onChange({ bounds: nextBounds })
     },
     onEnd () {
@@ -122,28 +126,26 @@ const Range = {
     },
     onMove (e, position) {
       utils.pauseEvent(e)
-      const props = this.$props
       const { bounds, sHandle } = this
       const value = this.calcValueByPos(position)
       const oldValue = bounds[sHandle]
       if (value === oldValue) return
 
-      const nextBounds = [...bounds]
-      nextBounds[sHandle] = value
-      let nextHandle = sHandle
-      if (props.pushable !== false) {
-        this.pushSurroundingHandles(nextBounds, nextHandle)
-      } else if (props.allowCross) {
-        nextBounds.sort((a, b) => a - b)
-        nextHandle = nextBounds.indexOf(value)
-      }
-      this.onChange({
-        sHandle: nextHandle,
-        bounds: nextBounds,
-      })
+      this.moveTo(value)
     },
-    onKeyboard () {
-      warning(true, 'Keyboard support is not yet supported for ranges.')
+    onKeyboard (e) {
+      const valueMutator = utils.getKeyboardValueMutator(e)
+
+      if (valueMutator) {
+        utils.pauseEvent(e)
+        const { bounds, sHandle } = this
+        const oldValue = bounds[sHandle]
+        const mutatedValue = valueMutator(oldValue, this.$props)
+        const value = this.trimAlignValue(mutatedValue)
+        if (value === oldValue) return
+        const isFromKeyboardEvent = true
+        this.moveTo(value, isFromKeyboardEvent)
+      }
     },
     getClosestBound (value) {
       const { bounds } = this
@@ -152,7 +154,7 @@ const Range = {
         if (value > bounds[i]) { closestBound = i }
       }
       if (Math.abs(bounds[closestBound + 1] - value) < Math.abs(bounds[closestBound] - value)) {
-        closestBound = closestBound + 1
+        closestBound += 1
       }
       return closestBound
     },
@@ -197,6 +199,33 @@ const Range = {
       }
       return this._getPointsCache.points
     },
+
+    moveTo (value, isFromKeyboardEvent) {
+      const nextBounds = [...this.bounds]
+      const { sHandle } = this
+      nextBounds[sHandle] = value
+      let nextHandle = sHandle
+      if (this.$props.pushable !== false) {
+        this.pushSurroundingHandles(nextBounds, nextHandle)
+      } else if (this.$props.allowCross) {
+        nextBounds.sort((a, b) => a - b)
+        nextHandle = nextBounds.indexOf(value)
+      }
+      this.onChange({
+        sHandle: nextHandle,
+        bounds: nextBounds,
+      })
+      if (isFromKeyboardEvent) {
+        // known problem: because setState is async,
+        // so trigger focus will invoke handler's onEnd and another handler's onStart too early,
+        // cause onBeforeChange and onAfterChange receive wrong value.
+        // here use setState callback to hack，but not elegant
+        this.setState({}, () => {
+          this.handlesRefs[nextHandle].focus()
+        })
+      }
+    },
+
     pushSurroundingHandles (bounds, handle) {
       const value = bounds[handle]
       let { pushable: threshold } = this
@@ -307,21 +336,22 @@ const Range = {
         disabled,
         min,
         max,
-        handle: handleGenerator,
+        handle,
+        defaultHandle,
         trackStyle,
         handleStyle,
         tabIndex,
-        $createElement,
       } = this
-
+      const handleGenerator = handle || defaultHandle
       const offsets = bounds.map(v => this.calcOffset(v))
 
       const handleClassName = `${prefixCls}-handle`
-      const handles = bounds.map((v, i) => handleGenerator($createElement, {
+      const handles = bounds.map((v, i) => handleGenerator({
         className: classNames({
           [handleClassName]: true,
           [`${handleClassName}-${i + 1}`]: true,
         }),
+        prefixCls,
         vertical,
         offset: offsets[i],
         value: v,

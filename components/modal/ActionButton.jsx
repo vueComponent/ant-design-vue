@@ -9,6 +9,7 @@ const ActionButtonProps = {
   actionFn: PropTypes.func,
   closeModal: PropTypes.func,
   autoFocus: PropTypes.bool,
+  buttonProps: PropTypes.object,
 }
 
 export default {
@@ -58,9 +59,14 @@ export default {
   },
 
   render () {
-    const { type, $slots, loading } = this
+    const { type, $slots, loading, buttonProps } = this
     return (
-      <Button type={type} onClick={this.onClick} loading={loading}>
+      <Button
+        type={type}
+        onClick={this.onClick}
+        loading={loading}
+        {...buttonProps}
+      >
         {$slots.default}
       </Button>
     )

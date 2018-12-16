@@ -30,7 +30,7 @@ Demostration for validataion configuration for form controls which are not show 
       placeholder='Please select a country'
     >
       <a-select-option value='china'>China</a-select-option>
-      <a-select-option value='use'>U.S.A</a-select-option>
+      <a-select-option value='usa'>U.S.A</a-select-option>
     </a-select>
   </a-form-item>
 

@@ -11,7 +11,12 @@ There are two built-in themes: 'light' and 'dark'. The default value is 'light'.
 ```html
 <template>
 <div>
-  <a-checkbox @change="changeTheme" /> Change Theme
+  <a-switch
+    defaultChecked
+    @change="changeTheme"
+    checkedChildren="dark"
+    unCheckedChildren="light"
+  />
   <br />
   <br />
   <a-menu
@@ -63,8 +68,8 @@ export default {
       console.log('click ', e)
       this.current = e.key
     },
-    changeTheme ({ target }) {
-      this.theme = target.checked ? 'light' : 'dark'
+    changeTheme (checked) {
+      this.theme = checked ? 'dark' : 'light'
     },
   },
 }

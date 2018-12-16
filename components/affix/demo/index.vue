@@ -21,6 +21,7 @@ Please note that Affix should not cover other content on the page, especially wh
 export default {
   category: 'Components',
   subtitle: '固钉',
+  zhType: '导航',
   type: 'Navigation',
   title: 'Affix',
   render () {

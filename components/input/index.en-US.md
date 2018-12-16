@@ -19,6 +19,7 @@
 ### Input Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
+| change | callback when user input | function(e) | |
 | pressEnter | The callback function that is triggered when Enter key is pressed. | function(e) |
 
 > When `Input` is used in a `Form.Item` context, if the `Form.Item` has the `id` and `options` props defined

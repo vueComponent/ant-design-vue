@@ -13,6 +13,7 @@ export const TransferOperationProps = {
   moveToRight: PropTypes.any,
   leftActive: PropTypes.bool,
   rightActive: PropTypes.bool,
+  disabled: PropTypes.bool,
 }
 
 export default {
@@ -20,6 +21,7 @@ export default {
   props: { ...TransferOperationProps },
   render () {
     const {
+      disabled,
       moveToLeft = noop,
       moveToRight = noop,
       leftArrowText = '',
@@ -32,7 +34,7 @@ export default {
         <Button
           type='primary'
           size='small'
-          disabled={!rightActive}
+          disabled={disabled || !rightActive}
           onClick={moveToRight}
           icon='right'
         >
@@ -41,7 +43,7 @@ export default {
         <Button
           type='primary'
           size='small'
-          disabled={!leftActive}
+          disabled={disabled || !leftActive}
           onClick={moveToLeft}
           icon='left'
         >

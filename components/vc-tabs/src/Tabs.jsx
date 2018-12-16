@@ -1,9 +1,11 @@
 import omit from 'omit.js'
 import BaseMixin from '../../_util/BaseMixin'
 import PropTypes from '../../_util/vue-types'
+import raf from 'raf'
 import KeyCode from './KeyCode'
 import { getOptionProps } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
+import Sentinel from './Sentinel'
 
 function getDefaultActiveKey (props) {
   let activeKey
@@ -55,6 +57,11 @@ export default {
       _activeKey: activeKey,
     }
   },
+  provide () {
+    return {
+      sentinelContext: this,
+    }
+  },
   watch: {
     __propsSymbol__ () {
       const nextProps = getOptionProps(this)
@@ -69,6 +76,10 @@ export default {
         })
       }
     },
+  },
+  beforeDestroy () {
+    this.destroy = true
+    raf.cancel(this.sentinelId)
   },
   methods: {
     onTabClick (activeKey, e) {
@@ -91,6 +102,35 @@ export default {
         const previousKey = this.getNextActiveKey(false)
         this.onTabClick(previousKey)
       }
+    },
+
+    onScroll  ({ target, currentTarget }) {
+      if (target === currentTarget && target.scrollLeft > 0) {
+        target.scrollLeft = 0
+      }
+    },
+
+    // Sentinel for tab index
+    setSentinelStart (node) {
+      this.sentinelStart = node
+    },
+
+    setSentinelEnd (node) {
+      this.sentinelEnd = node
+    },
+
+    setPanelSentinelStart (node) {
+      if (node !== this.panelSentinelStart) {
+        this.updateSentinelContext()
+      }
+      this.panelSentinelStart = node
+    },
+
+    setPanelSentinelEnd (node) {
+      if (node !== this.panelSentinelEnd) {
+        this.updateSentinelContext()
+      }
+      this.panelSentinelEnd = node
     },
 
     setActiveKey (activeKey) {
@@ -130,6 +170,14 @@ export default {
       })
       return ret
     },
+    updateSentinelContext () {
+      if (this.destroy) return
+
+      raf.cancel(this.sentinelId)
+      this.sentinelId = raf(() => {
+        this.$forceUpdate()
+      })
+    },
   },
   render () {
     const props = this.$props
@@ -147,40 +195,62 @@ export default {
     }
 
     this.tabBar = renderTabBar()
-    const contents = [
-      cloneElement(this.tabBar, {
-        props: {
-          prefixCls,
-          navWrapper,
-          tabBarPosition,
-          panels: props.children,
-          activeKey: this.$data._activeKey,
-        },
-        on: {
-          keydown: this.onNavKeyDown,
-          tabClick: this.onTabClick,
-        },
-        key: 'tabBar',
-      }),
-      cloneElement(renderTabContent(), {
-        props: {
-          prefixCls,
-          tabBarPosition,
-          activeKey: this.$data._activeKey,
-          destroyInactiveTabPane,
-        },
-        on: {
-          change: this.setActiveKey,
-        },
-        children: props.children,
-        key: 'tabContent',
-      }),
-    ]
+    const tabBar = cloneElement(this.tabBar, {
+      props: {
+        prefixCls,
+        navWrapper,
+        tabBarPosition,
+        panels: props.children,
+        activeKey: this.$data._activeKey,
+      },
+      on: {
+        keydown: this.onNavKeyDown,
+        tabClick: this.onTabClick,
+      },
+      key: 'tabBar',
+    })
+    const tabContent = cloneElement(renderTabContent(), {
+      props: {
+        prefixCls,
+        tabBarPosition,
+        activeKey: this.$data._activeKey,
+        destroyInactiveTabPane,
+      },
+      on: {
+        change: this.setActiveKey,
+      },
+      children: props.children,
+      key: 'tabContent',
+    })
+
+    const sentinelStart = (
+      <Sentinel
+        key='sentinelStart'
+        setRef={this.setSentinelStart}
+        nextElement={this.panelSentinelStart}
+      />
+    )
+    const sentinelEnd = (
+      <Sentinel
+        key='sentinelEnd'
+        setRef={this.setSentinelEnd}
+        prevElement={this.panelSentinelEnd}
+      />
+    )
+
+    const contents = []
+
     if (tabBarPosition === 'bottom') {
-      contents.reverse()
+      contents.push(sentinelStart, tabContent, sentinelEnd, tabBar)
+    } else {
+      contents.push(tabBar, sentinelStart, tabContent, sentinelEnd)
+    }
+    const listeners = {
+      ...omit(this.$listeners, ['change']),
+      scroll: this.onScroll,
     }
     return (
-      <div {...{ on: omit(this.$listeners, ['change']), class: cls }}>
+      <div {...{ on: listeners, class: cls }}>
         {contents}
       </div>
     )

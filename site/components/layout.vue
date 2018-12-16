@@ -17,6 +17,8 @@ const docsList = [
   { key: 'customize-theme', enTitle: 'Customize Theme', title: '定制主题' },
   { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
   { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
+  { key: 'faq', enTitle: 'FAQ', title: '常见问题' },
+  { key: 'sponsor', enTitle: 'Sponsor', title: '赞助我们' },
 ]
 
 export default {
@@ -266,8 +268,8 @@ export default {
                   </div> : ''}
                 </div>
                 <section class='prev-next-nav'>
-                  {prevPage ? <router-link class='prev-page' to={`${prevPage.url}`}>{prevPage.title}</router-link> : ''}
-                  {nextPage ? <router-link class='next-page' to={`${nextPage.url}`}>{nextPage.title}</router-link> : ''}
+                  {prevPage ? <router-link class='prev-page' to={`${prevPage.url}`}><a-icon type='left' />&nbsp;&nbsp;{prevPage.title}</router-link> : ''}
+                  {nextPage ? <router-link class='next-page' to={`${nextPage.url}`}>{nextPage.title}&nbsp;&nbsp;<a-icon type='right' /></router-link> : ''}
                 </section>
               </a-col>
             </a-row>

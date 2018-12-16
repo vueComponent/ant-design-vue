@@ -1,15 +1,11 @@
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util'
+import { hasProp, initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import classNames from 'classnames'
 import List from './list'
 import Operation from './operation'
-// import Search from './search'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
-
-// function noop () {
-// }
 
 export const TransferDirection = 'left' | 'right'
 
@@ -23,6 +19,7 @@ export const TransferItem = {
 export const TransferProps = {
   prefixCls: PropTypes.string,
   dataSource: PropTypes.arrayOf(PropTypes.shape(TransferItem).loose),
+  disabled: PropTypes.boolean,
   targetKeys: PropTypes.arrayOf(PropTypes.string),
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   render: PropTypes.func,
@@ -34,6 +31,7 @@ export const TransferProps = {
   filterOption: PropTypes.func,
   searchPlaceholder: PropTypes.string,
   notFoundContent: PropTypes.any,
+  locale: PropTypes.object,
   rowKey: PropTypes.func,
   lazy: PropTypes.oneOfType([
     PropTypes.object,
@@ -44,7 +42,6 @@ export const TransferProps = {
 export const TransferLocale = {
   titles: PropTypes.arrayOf(PropTypes.string),
   notFoundContent: PropTypes.string,
-  searchPlaceholder: PropTypes.string,
   itemUnit: PropTypes.string,
   itemsUnit: PropTypes.string,
 }
@@ -54,9 +51,17 @@ const Transfer = {
   mixins: [BaseMixin],
   props: initDefaultProps(TransferProps, {
     dataSource: [],
+    locale: {},
     showSearch: false,
   }),
   data () {
+    // vue 中 通过slot，不方便传递，保留notFoundContent及searchPlaceholder
+    // warning(
+    //   !(getComponentFromProp(this, 'notFoundContent') || hasProp(this, 'searchPlaceholder')),
+    //   'Transfer[notFoundContent] and Transfer[searchPlaceholder] will be removed, ' +
+    //   'please use Transfer[locale] instead.',
+    // )
+
     this.separatedDataSource = {
       leftDataSource: [],
       rightDataSource: [],
@@ -296,19 +301,33 @@ const Transfer = {
       return direction === 'left' ? 'sourceSelectedKeys' : 'targetSelectedKeys'
     },
 
-    renderTransfer (locale) {
+    getLocale (transferLocale) {
+      // Keep old locale props still working.
+      const oldLocale = {}
+      const notFoundContent = getComponentFromProp(this, 'notFoundContent')
+      if (notFoundContent) {
+        oldLocale.notFoundContent = notFoundContent
+      }
+      if (hasProp(this, 'searchPlaceholder')) {
+        oldLocale.searchPlaceholder = this.$props.searchPlaceholder
+      }
+
+      return ({ ...transferLocale, ...oldLocale, ...this.$props.locale })
+    },
+
+    renderTransfer (transferLocale) {
       const props = getOptionProps(this)
       const {
         prefixCls = 'ant-transfer',
+        disabled,
         operations = [],
         showSearch,
-        searchPlaceholder,
         listStyle,
         operationStyle,
         filterOption,
         lazy,
       } = props
-      const notFoundContent = getComponentFromProp(this, 'notFoundContent')
+      const locale = this.getLocale(transferLocale)
       const { leftFilter, rightFilter, sourceSelectedKeys, targetSelectedKeys, $scopedSlots } = this
       const { body, footer } = $scopedSlots
       const renderItem = props.render
@@ -316,7 +335,7 @@ const Transfer = {
       const leftActive = targetSelectedKeys.length > 0
       const rightActive = sourceSelectedKeys.length > 0
 
-      const cls = classNames(prefixCls)
+      const cls = classNames(prefixCls, disabled && `${prefixCls}-disabled`)
 
       const titles = this.getTitles(locale)
       return (
@@ -335,14 +354,15 @@ const Transfer = {
             handleSelectAll={this.handleLeftSelectAll}
             renderItem={renderItem}
             showSearch={showSearch}
-            searchPlaceholder={searchPlaceholder || locale.searchPlaceholder}
-            notFoundContent={notFoundContent || locale.notFoundContent}
-            itemUnit={locale.itemUnit}
-            itemsUnit={locale.itemsUnit}
             body={body}
             footer={footer}
             lazy={lazy}
             onScroll={this.handleLeftScroll}
+            disabled={disabled}
+            itemUnit={locale.itemUnit}
+            itemsUnit={locale.itemsUnit}
+            notFoundContent={locale.notFoundContent}
+            searchPlaceholder={locale.searchPlaceholder}
           />
           <Operation
             class={`${prefixCls}-operation`}
@@ -353,6 +373,7 @@ const Transfer = {
             leftArrowText={operations[1]}
             moveToLeft={this.moveToLeft}
             style={operationStyle}
+            disabled={disabled}
           />
           <List
             prefixCls={`${prefixCls}-list`}
@@ -368,14 +389,15 @@ const Transfer = {
             handleSelectAll={this.handleRightSelectAll}
             renderItem={renderItem}
             showSearch={showSearch}
-            searchPlaceholder={searchPlaceholder || locale.searchPlaceholder}
-            notFoundContent={notFoundContent || locale.notFoundContent}
-            itemUnit={locale.itemUnit}
-            itemsUnit={locale.itemsUnit}
             body={body}
             footer={footer}
             lazy={lazy}
             onScroll={this.handleRightScroll}
+            disabled={disabled}
+            itemUnit={locale.itemUnit}
+            itemsUnit={locale.itemsUnit}
+            notFoundContent={locale.notFoundContent}
+            searchPlaceholder={locale.searchPlaceholder}
           />
         </div>
       )

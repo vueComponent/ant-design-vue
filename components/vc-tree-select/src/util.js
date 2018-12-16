@@ -1,4 +1,4 @@
-import { getPropsData, getAllProps, getKey, getAttrs, getSlotOptions, filterEmpty, getSlots } from '../../_util/props-util'
+import { getPropsData, getAllProps, getKey, getAttrs, getSlotOptions, getSlots } from '../../_util/props-util'
 import { cloneVNodes, cloneElement } from '../../_util/vnode'
 export function toTitle (title) {
   if (typeof title === 'string') {

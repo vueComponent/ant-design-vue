@@ -1,49 +1,42 @@
 import Icon from '../icon'
 import VcTabs, { TabPane } from '../vc-tabs/src'
-import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar'
 import TabContent from '../vc-tabs/src/TabContent'
 import isFlexSupported from '../_util/isFlexSupported'
-import { hasProp, getComponentFromProp, isEmptyElement, getSlotOptions, getOptionProps, filterEmpty, mergeProps } from '../_util/props-util'
-import warning from '../_util/warning'
+import PropTypes from '../_util/vue-types'
+import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util'
 import { cloneElement } from '../_util/vnode'
+import TabBar from './TabBar'
+
 export default {
   TabPane,
   name: 'ATabs',
   props: {
-    prefixCls: { type: String, default: 'ant-tabs' },
-    activeKey: String,
-    defaultActiveKey: String,
-    hideAdd: { type: Boolean, default: false },
-    tabBarStyle: Object,
-    tabBarExtraContent: [String, Number, Function],
-    destroyInactiveTabPane: { type: Boolean, default: false },
-    type: {
-      validator (value) {
-        return ['line', 'card', 'editable-card'].includes(value)
-      },
-    },
-    tabPosition: {
-      validator (value) {
-        return ['top', 'right', 'bottom', 'left'].includes(value)
-      },
-    },
-    size: {
-      validator (value) {
-        return ['default', 'small', 'large'].includes(value)
-      },
-    },
-    animated: { type: [Boolean, Object], default: undefined },
-    tabBarGutter: Number,
+    prefixCls: PropTypes.string.def('ant-tabs'),
+    activeKey: PropTypes.string,
+    defaultActiveKey: PropTypes.string,
+    hideAdd: PropTypes.bool.def(false),
+    tabBarStyle: PropTypes.object,
+    tabBarExtraContent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.func,
+    ]),
+    destroyInactiveTabPane: PropTypes.bool.def(false),
+    type: PropTypes.oneOf(['line', 'card', 'editable-card']),
+    tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
+    size: PropTypes.oneOf(['default', 'small', 'large']),
+    animated: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.object,
+    ]),
+    tabBarGutter: PropTypes.number,
+    renderTabBar: PropTypes.func,
   },
   model: {
     prop: 'activeKey',
     event: 'change',
   },
   methods: {
-    createNewTab (targetKey) {
-      this.$emit('edit', targetKey, 'add')
-    },
-
     removeTab (targetKey, e) {
       e.stopPropagation()
       if (!targetKey) {
@@ -51,9 +44,11 @@ export default {
       }
       this.$emit('edit', targetKey, 'remove')
     },
-
     handleChange (activeKey) {
       this.$emit('change', activeKey)
+    },
+    createNewTab (targetKey) {
+      this.$emit('edit', targetKey, 'add')
     },
     onTabClick (val) {
       this.$emit('tabClick', val)
@@ -74,37 +69,29 @@ export default {
     }
   },
 
-  render (createElement) {
+  render () {
+    const props = getOptionProps(this)
     const {
       prefixCls,
       size,
       type = 'line',
       tabPosition,
-      tabBarStyle,
+      animated = true,
       hideAdd,
-      onTabClick,
-      onPrevClick,
-      onNextClick,
-      animated,
-      tabBarGutter,
-    } = this
+      renderTabBar,
+    } = props
     const children = filterEmpty(this.$slots.default)
+
     let tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent')
-    let { inkBarAnimated, tabPaneAnimated } = typeof animated === 'object' ? { // eslint-disable-line
-      inkBarAnimated: !!animated.inkBar, tabPaneAnimated: !!animated.tabPane,
-    } : {
-      inkBarAnimated: animated === undefined || animated, tabPaneAnimated: animated === undefined || animated,
-    }
+    let tabPaneAnimated = typeof animated === 'object' ? animated.tabPane : animated
 
     // card tabs should not have animation
     if (type !== 'line') {
-      tabPaneAnimated = animated === undefined ? false : tabPaneAnimated
+      tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false
     }
     const cls = {
-      [`${prefixCls}-small`]: size === 'small',
-      [`${prefixCls}-large`]: size === 'large',
-      [`${prefixCls}-default`]: size === 'default',
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
+      [`${prefixCls}-${size}`]: !!size,
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
@@ -120,6 +107,7 @@ export default {
         const closeIcon = closable ? (
           <Icon
             type='close'
+            class={`${prefixCls}-close-x`}
             onClick={e => this.removeTab(child.key, e)}
           />
         ) : null
@@ -147,33 +135,30 @@ export default {
     }
 
     tabBarExtraContent = tabBarExtraContent ? (
-      <div class={`${prefixCls}-extra-content`}>
-        {tabBarExtraContent}
-      </div>
+      <div class={`${prefixCls}-extra-content`}>{tabBarExtraContent}</div>
     ) : null
 
-    const renderTabBar = () => {
-      const scrollableInkTabBarProps = {
-        props: {
-          inkBarAnimated,
-          extraContent: tabBarExtraContent,
-          tabBarGutter,
-        },
-        on: {
-          tabClick: onTabClick,
-          prevClick: onPrevClick,
-          nextClick: onNextClick,
-        },
-        style: tabBarStyle,
-      }
-      return <ScrollableInkTabBar {...scrollableInkTabBarProps}/>
+    const renderTabBarSlot = renderTabBar || this.$scopedSlots.renderTabBar
+    const tabBarProps = {
+      props: {
+        ...this.$props,
+        tabBarExtraContent,
+        renderTabBar: renderTabBarSlot,
+      },
+      on: {
+        ...this.$listeners,
+      },
+    }
+    const contentCls = {
+      [`${prefixCls}-${tabPosition}-content`]: true,
+      [`${prefixCls}-card-content`]: type.indexOf('card') >= 0,
     }
     const tabsProps = {
       props: {
         ...getOptionProps(this),
         tabBarPosition: tabPosition,
-        renderTabBar: renderTabBar,
-        renderTabContent: () => <TabContent animated={tabPaneAnimated} animatedWithMargin />,
+        renderTabBar: () => <TabBar {...tabBarProps}/>,
+        renderTabContent: () => <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />,
         children: childrenWithClose.length > 0 ? childrenWithClose : children,
         __propsSymbol__: Symbol(),
       },

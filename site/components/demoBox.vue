@@ -13,7 +13,9 @@
     <section class="code-box-meta markdown">
       <slot v-if="isZhCN" name="description"></slot>
       <slot v-else name="us-description"></slot>
-      <span class="btn-toggle" :class="{open: isOpen}" @click="toggle"><i class="anticon anticon-down-circle-o"></i></span>
+      <span class="btn-toggle" :class="{open: isOpen}" @click="toggle">
+        <a-icon type="up" />
+      </span>
     </section>
     <transition appear :css="false" @enter="enter" @leave="leave">
       <section class="highlight-wrapper" style="position: relative;" v-show="isOpen">

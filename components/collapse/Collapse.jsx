@@ -1,9 +1,7 @@
-
-import PropTypes from '../_util/vue-types'
 import animation from '../_util/openAnimation'
 import { getOptionProps, initDefaultProps } from '../_util/props-util'
 import VcCollapse, { collapseProps } from '../vc-collapse'
-
+import Icon from '../icon'
 export default {
   name: 'ACollapse',
   model: {
@@ -15,6 +13,13 @@ export default {
     bordered: true,
     openAnimation: animation,
   }),
+  methods: {
+    renderExpandIcon () {
+      return (
+        <Icon type='right' class='arrow' />
+      )
+    },
+  },
   render () {
     const { prefixCls, bordered, $listeners } = this
     const collapseClassName = {
@@ -23,6 +28,7 @@ export default {
     const rcCollapeProps = {
       props: {
         ...getOptionProps(this),
+        expandIcon: this.renderExpandIcon,
       },
       class: collapseClassName,
       on: $listeners,

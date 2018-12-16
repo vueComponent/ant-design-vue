@@ -328,4 +328,10 @@ export default {
     title: 'Drawer',
     subtitle: '抽屉',
   },
+  skeleton: {
+    category: 'Components',
+    type: 'Feedback',
+    title: 'Skeleton',
+    subtitle: '骨架屏',
+  },
 }

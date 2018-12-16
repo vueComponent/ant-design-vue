@@ -61,6 +61,7 @@ export default {
   category: 'Components',
   subtitle: '栅格',
   type: 'Layout',
+  zhType: '布局',
   cols: 1,
   title: 'Grid',
   render () {

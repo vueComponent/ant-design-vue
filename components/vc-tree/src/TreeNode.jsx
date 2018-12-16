@@ -275,12 +275,12 @@ const TreeNode = {
     renderSwitcher () {
       const { expanded } = this
       const { vcTree: { prefixCls }} = this
-      const switcherIcon = getComponentFromProp(this, 'switcherIcon') || getComponentFromProp(this.vcTree, 'switcherIcon')
+      const switcherIcon = getComponentFromProp(this, 'switcherIcon', {}, false) || getComponentFromProp(this.vcTree, 'switcherIcon', {}, false)
       if (this.isLeaf2()) {
         return (
           <span key='switcher' class={classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher-noop`)}>
             {typeof switcherIcon === 'function'
-              ? cloneElement(switcherIcon, { props: { ...this.$props, isLeaf: true }}) : switcherIcon}
+              ? cloneElement(switcherIcon({ ...this.$props, isLeaf: true })) : switcherIcon}
           </span>
         )
       }
@@ -289,7 +289,7 @@ const TreeNode = {
       return (
         <span key='switcher' onClick={this.onExpand} class={switcherCls}>
           {typeof switcherIcon === 'function'
-            ? cloneElement(switcherIcon, { props: { ...this.$props, isLeaf: false }}) : switcherIcon}
+            ? cloneElement(switcherIcon({ ...this.$props, isLeaf: false })) : switcherIcon}
         </span>
       )
     },

@@ -2,7 +2,9 @@ import { mount } from '@vue/test-utils'
 import Drawer from '..'
 import Button from '../../button'
 import { asyncExpect } from '@/tests/utils'
-
+export function $$ (className) {
+  return document.body.querySelectorAll(className)
+}
 const MultiDrawer = {
   props: {
     placement: {
@@ -27,6 +29,7 @@ const MultiDrawer = {
       this.childrenDrawer = true
     },
     onChildrenDrawerClose () {
+      console.log('hello')
       this.childrenDrawer = false
     },
   },
@@ -35,7 +38,6 @@ const MultiDrawer = {
       props: {
         title: 'Multi-level drawer',
         width: 520,
-        closable: false,
         visible: this.visible,
         getContainer: false,
         wrapClassName: 'test_drawer',
@@ -49,7 +51,7 @@ const MultiDrawer = {
       props: {
         title: 'Two-level Drawer',
         width: 320,
-        closable: false,
+        wrapClassName: 'Two-level',
         visible: this.childrenDrawer,
         getContainer: false,
         placement: this.placement,
@@ -137,7 +139,7 @@ describe('Drawer', () => {
     }, 1000)
   })
 
-  it('render right MultiDrawer', async () => {
+  it('render left MultiDrawer', async () => {
     document.body.innerHTML = ''
     const wrapper = mount(MultiDrawer, {
       propsData: {
@@ -154,6 +156,26 @@ describe('Drawer', () => {
     await asyncExpect(() => {
       const translateX = wrapper.find('.ant-drawer.test_drawer').element.parentElement.style.transform
       expect(translateX).toEqual('translateX(180px)')
+      expect(wrapper.find('#two_drawer_text').exists()).toBe(true)
+    }, 1000)
+  })
+
+  it('render top MultiDrawer', async () => {
+    const wrapper = mount(MultiDrawer, {
+      propsData: {
+        placement: 'top',
+      },
+      sync: false,
+    })
+    await asyncExpect(() => {
+      wrapper.find('#open_drawer').trigger('click')
+    }, 0)
+    await asyncExpect(() => {
+      wrapper.find('#open_two_drawer').trigger('click')
+    }, 0)
+    await asyncExpect(() => {
+      const translateY = wrapper.find('.ant-drawer.test_drawer').element.parentElement.style.transform
+      expect(translateY).toEqual('translateY(180px)')
       expect(wrapper.find('#two_drawer_text').exists()).toBe(true)
     }, 1000)
   })

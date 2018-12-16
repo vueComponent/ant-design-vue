@@ -31,6 +31,7 @@
     category: 'Components',
     subtitle: '面包屑',
     type: 'Navigation',
+    zhType: '导航',
     title: 'Breadcrumb',
     render () {
       return (

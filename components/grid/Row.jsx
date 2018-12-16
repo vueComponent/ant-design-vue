@@ -1,8 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
-import { cloneElement } from '../_util/vnode'
-import { isEmptyElement, getStyle, getOptionProps } from '../_util/props-util'
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
 let enquire = null
@@ -55,6 +53,11 @@ export default {
   props: {
     ...RowProps,
     gutter: PropTypes.oneOfType([PropTypes.number, BreakpointMap]).def(0),
+  },
+  provide () {
+    return {
+      rowContext: this,
+    }
   },
   data () {
     return {
@@ -129,22 +132,7 @@ export default {
       marginLeft: `${gutter / -2}px`,
       marginRight: `${gutter / -2}px`,
     } : {}
-    const cols = ($slots.default || []).map((col) => {
-      if (isEmptyElement(col)) {
-        return null
-      }
-      if (getOptionProps(col) && gutter > 0) {
-        return cloneElement(col, {
-          style: {
-            paddingLeft: `${gutter / 2}px`,
-            paddingRight: `${gutter / 2}px`,
-            ...getStyle(col, true),
-          },
-        })
-      }
-      return col
-    })
-    return <div class={classes} style={rowStyle}>{cols}</div>
+    return <div class={classes} style={rowStyle}>{$slots.default}</div>
   },
 }
 

@@ -1,5 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 import { getComponentFromProp } from '../../_util/props-util'
+import Sentinel from './Sentinel'
+
 export default {
   name: 'TabPane',
   props: {
@@ -11,6 +13,9 @@ export default {
     tab: PropTypes.any,
     closable: PropTypes.bool,
     disabled: PropTypes.bool,
+  },
+  inject: {
+    sentinelContext: { default: {}},
   },
   render () {
     const {
@@ -27,13 +32,33 @@ export default {
       [`${prefixCls}-active`]: active,
     }
     const isRender = destroyInactiveTabPane ? active : this._isActived
+    const shouldRender = isRender || forceRender
+    const { sentinelStart, sentinelEnd, setPanelSentinelStart, setPanelSentinelEnd } = this.sentinelContext
+    let panelSentinelStart
+    let panelSentinelEnd
+    if (active && shouldRender) {
+      panelSentinelStart = (
+        <Sentinel
+          setRef={setPanelSentinelStart}
+          prevElement={sentinelStart}
+        />
+      )
+      panelSentinelEnd = (
+        <Sentinel
+          setRef={setPanelSentinelEnd}
+          nextElement={sentinelEnd}
+        />
+      )
+    }
     return (
       <div
         class={cls}
         role='tabpanel'
         aria-hidden={active ? 'false' : 'true'}
       >
-        {isRender || forceRender ? children : placeholder}
+        {panelSentinelStart}
+        {shouldRender ? children : placeholder}
+        {panelSentinelEnd}
       </div>
     )
   },

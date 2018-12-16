@@ -12,7 +12,7 @@ Basic modal.
 ```html
 <template>
   <div>
-    <a-button type="primary" @click="showModal">Open</a-button>
+    <a-button type="primary" @click="showModal">Open Modal</a-button>
     <a-modal
       title="Basic Modal"
       v-model="visible"

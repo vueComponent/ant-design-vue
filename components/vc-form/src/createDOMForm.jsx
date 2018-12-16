@@ -65,7 +65,7 @@ const mixin = {
           const validNames = this.fieldsStore.getValidFieldsName()
           let firstNode
           let firstTop
-          for (const name of validNames) {
+          validNames.forEach((name) => {
             if (has(error, name)) {
               const instance = this.getFieldInstance(name)
               if (instance) {
@@ -77,7 +77,8 @@ const mixin = {
                 }
               }
             }
-          }
+          })
+
           if (firstNode) {
             const c = options.container || getScrollableContainer(firstNode)
             scrollIntoView(firstNode, c, {

@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import PropTypes from '../../_util/vue-types'
 import { connect } from '../../_util/store'
 import TableCell from './TableCell'
@@ -229,11 +230,8 @@ const TableRow = {
       )
     }
 
-    const rowClassName =
-      `${prefixCls} ${className} ${prefixCls}-level-${indent}`.trim()
+    const { class: customClass, className: customClassName, style: customStyle, ...rowProps } = customRow(record, index) || {}
 
-    const rowProps = customRow(record, index)
-    const customStyle = rowProps ? rowProps.style : {}
     let style = { height: typeof height === 'number' ? `${height}px` : height }
 
     if (!visible) {
@@ -241,6 +239,13 @@ const TableRow = {
     }
 
     style = { ...style, ...customStyle }
+    const rowClassName = classNames(
+      prefixCls,
+      className,
+      `${prefixCls}-level-${indent}`,
+      customClassName,
+      customClass
+    )
     const bodyRowProps = mergeProps({
       on: {
         click: this.onRowClick,

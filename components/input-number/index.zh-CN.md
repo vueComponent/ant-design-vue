@@ -12,6 +12,7 @@
 | min | 最小值 | number | -Infinity |
 | parser | 指定从 formatter 里转换回数字的方式，和 formatter 搭配使用 | function( string): number | - |
 | precision | 数值精度 | number | - |
+| decimalSeparator | 小数点 | string | - |
 | size | 输入框大小 | string | 无 |
 | step | 每次改变步数，可以为小数 | number\|string | 1 |
 | value(v-model) | 当前值 | number |  |

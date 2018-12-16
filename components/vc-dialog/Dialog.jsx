@@ -1,4 +1,4 @@
-
+import { getComponentFromProp } from '../_util/props-util'
 import KeyCode from '../_util/KeyCode'
 import contains from '../_util/Dom/contains'
 import LazyRenderBox from './LazyRenderBox'
@@ -139,7 +139,7 @@ export default {
     tryFocus () {
       if (!contains(this.$refs.wrap, document.activeElement)) {
         this.lastOutSideFocusNode = document.activeElement
-        this.$refs.wrap.focus()
+        this.$refs.sentinelStart.focus()
       }
     },
     onAnimateLeave () {
@@ -178,13 +178,13 @@ export default {
       if (props.visible) {
         if (e.keyCode === KeyCode.TAB) {
           const activeElement = document.activeElement
-          const dialogRoot = this.$refs.wrap
+          const sentinelStart = this.$refs.sentinelStart
           if (e.shiftKey) {
-            if (activeElement === dialogRoot) {
-              this.$refs.sentinel.focus()
+            if (activeElement === sentinelStart) {
+              this.$refs.sentinelEnd.focus()
             }
-          } else if (activeElement === this.$refs.sentinel) {
-            dialogRoot.focus()
+          } else if (activeElement === this.$refs.sentinelEnd) {
+            sentinelStart.focus()
           }
         }
       }
@@ -222,6 +222,7 @@ export default {
 
       let closer
       if (closable) {
+        const closeIcon = getComponentFromProp(this, 'closeIcon')
         closer = (
           <button
             key='close'
@@ -229,11 +230,12 @@ export default {
             aria-label='Close'
             class={`${prefixCls}-close`}
           >
-            <span class={`${prefixCls}-close-x`} />
+            {closeIcon || <span class={`${prefixCls}-close-x`} />}
           </button>)
       }
 
       const style = { ...this.dialogStyle, ...dest }
+      const sentinelStyle = { width: 0, height: 0, overflow: 'hidden' }
       const cls = {
         [prefixCls]: true,
         ...this.dialogClass,
@@ -248,6 +250,9 @@ export default {
           style={style}
           class={cls}
         >
+          <div tabIndex={0} ref='sentinelStart' style={sentinelStyle}>
+          sentinelStart
+          </div>
           <div class={`${prefixCls}-content`}>
             {closer}
             {header}
@@ -262,8 +267,8 @@ export default {
             </div>
             {footer}
           </div>
-          <div tabIndex={0} ref='sentinel' style='width: 0px; height: 0px; overflow: hidden'>
-          sentinel
+          <div tabIndex={0} ref='sentinelEnd' style={sentinelStyle}>
+          sentinelEnd
           </div>
         </LazyRenderBox>
       )

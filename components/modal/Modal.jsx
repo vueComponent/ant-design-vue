@@ -8,6 +8,7 @@ const ButtonType = buttonTypes().type
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { getConfirmLocale } from './locale'
 import { initDefaultProps, getComponentFromProp, getClass, getStyle, mergeProps } from '../_util/props-util'
+import Icon from '../icon'
 
 let mousePosition = null
 let mousePositionEventBinded = false
@@ -144,6 +145,11 @@ export default {
         }
       />
     )
+    const closeIcon = (
+      <span class={`${prefixCls}-close-x`}>
+        <Icon class={`${prefixCls}-close-icon`} type={'close'}/>
+      </span>
+    )
     const footer = getComponentFromProp(this, 'footer')
     const title = getComponentFromProp(this, 'title')
     const dialogProps = {
@@ -155,6 +161,7 @@ export default {
         footer: footer === undefined ? defaultFooter : footer,
         visible: visible,
         mousePosition,
+        closeIcon,
       },
       on: {
         ...$listeners,

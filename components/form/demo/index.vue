@@ -89,6 +89,7 @@ export default {
   category: 'Components',
   subtitle: '表单',
   type: 'Data Entry',
+  zhType: '数据录入',
   cols: 1,
   title: 'Form',
   render () {
@@ -153,5 +154,9 @@ export default {
 <style>
 .code-box-demo .ant-form:not(.ant-form-inline):not(.ant-form-vertical) {
   max-width: 600px;
+}
+.markdown.api-container table td:last-child {
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 </style>

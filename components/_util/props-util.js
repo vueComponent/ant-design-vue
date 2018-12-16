@@ -95,19 +95,22 @@ const getOptionProps = (instance) => {
   return filterProps($props, $options.propsData)
 }
 
-const getComponentFromProp = (instance, prop) => {
+const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
     const h = instance.$createElement
     const temp = instance[prop]
     if (temp !== undefined) {
-      return typeof temp === 'function' ? temp(h) : temp
+      return typeof temp === 'function' && execute ? temp(h, options) : temp
     }
-    return instance.$slots[prop]
+    return instance.$slots[prop] ||
+     (instance.$scopedSlots[prop] && execute && instance.$scopedSlots[prop](options)) ||
+     (instance.$scopedSlots[prop] && instance.$scopedSlots[prop]) ||
+     undefined
   } else {
     const h = instance.context.$createElement
     const temp = getPropsData(instance)[prop]
     if (temp !== undefined) {
-      return typeof temp === 'function' ? temp(h) : temp
+      return typeof temp === 'function' && execute ? temp(h, options) : temp
     }
     const slotsProp = []
     const componentOptions = instance.componentOptions || {};
@@ -231,7 +234,7 @@ const initDefaultProps = (propTypes, defaultProps) => {
 export function mergeProps () {
   const args = [].slice.call(arguments, 0)
   const props = {}
-  args.forEach((p, i) => {
+  args.forEach((p = {}, i) => {
     for (const [k, v] of Object.entries(p)) {
       props[k] = props[k] || {}
       if (isPlainObject(v)) {

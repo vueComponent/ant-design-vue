@@ -27,7 +27,7 @@ const success = function (props) {
 const error = function (props) {
   const config = {
     type: 'error',
-    iconType: 'cross-circle',
+    iconType: 'close-circle',
     okCancel: false,
     ...props,
   }

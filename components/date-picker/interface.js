@@ -16,6 +16,7 @@ export const PickerProps = () => ({
   format: PropTypes.string,
   disabled: PropTypes.bool,
   allowClear: PropTypes.bool,
+  suffixIcon: PropTypes.any,
   popupStyle: PropTypes.object,
   dropdownClassName: PropTypes.string,
   locale: PropTypes.any,
@@ -33,6 +34,7 @@ export const PickerProps = () => ({
   timePicker: PropTypes.any,
   autoFocus: PropTypes.bool,
   tagPrefixCls: PropTypes.string,
+  tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 })
 
 export const SinglePickerProps = () => ({

@@ -92,4 +92,56 @@ describe('Select', () => {
       expect(dropdownWrapper.findAll({ name: 'MenuItem' }).at(0).text()).toBe('not at all')
     })
   })
+
+  it('should be controlled by open prop', async () => {
+    const onDropdownVisibleChange = jest.fn()
+    const wrapper = mount({
+      props: {
+        open: {
+          type: Boolean,
+          default: true,
+        },
+      },
+      render () {
+        return (
+          <Select open={this.open} onDropdownVisibleChange={onDropdownVisibleChange}>
+            <Option value='1'>1</Option>
+          </Select>
+        )
+      },
+    }, { sync: false })
+    let triggerComponent = null
+    mount({
+      render () {
+        triggerComponent = wrapper.find({ name: 'Trigger' }).vm.getComponent()
+        return triggerComponent
+      },
+    }, { sync: false })
+    await asyncExpect(() => {
+      // console.log(triggerComponent.componentInstance.visible)
+      expect(triggerComponent.componentInstance.visible).toBe(true)
+    })
+    await asyncExpect(() => {
+      wrapper.find('.ant-select').trigger('click')
+      expect(onDropdownVisibleChange).toHaveBeenLastCalledWith(false)
+    })
+    await asyncExpect(() => {
+      expect(triggerComponent.componentInstance.visible).toBe(true)
+      wrapper.setProps({ open: false })
+    })
+    await asyncExpect(() => {
+      mount({
+        render () {
+          triggerComponent = wrapper.find({ name: 'Trigger' }).vm.getComponent()
+          return triggerComponent
+        },
+      }, { sync: false })
+    })
+    await asyncExpect(() => {
+      expect(triggerComponent.componentInstance.visible).toBe(false)
+      wrapper.find('.ant-select').trigger('click')
+      expect(onDropdownVisibleChange).toHaveBeenLastCalledWith(true)
+      expect(triggerComponent.componentInstance.visible).toBe(false)
+    })
+  })
 })

@@ -7,4 +7,4 @@ import ref from 'vue-ref'
 
 Vue.use(ref, { name: 'ant-ref' })
 
-export { createForm, createFormField, formShape }
+export { createFormField, formShape, createForm }

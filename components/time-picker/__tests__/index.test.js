@@ -15,7 +15,7 @@ describe('TimePicker', () => {
     const vcTimePicker = wrapper.find({ name: VcTimePicker.name })
     const addonWrapper = mount({
       render () {
-        return vcTimePicker.vm.$slots.addon[0]
+        return vcTimePicker.vm.addon()
       },
     })
     expect(addonWrapper.html()).toMatchSnapshot()

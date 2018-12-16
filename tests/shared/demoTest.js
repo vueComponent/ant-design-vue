@@ -1,12 +1,12 @@
 import glob from 'glob'
-import {mount} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import MockDate from 'mockdate'
 import moment from 'moment'
 import Vue from 'vue'
 import antd from 'ant-design-vue'
 Vue.use(antd)
 
-export default function demoTest(component, options = {}) {
+export default function demoTest (component, options = {}) {
   const suffix = options.suffix || 'md'
   const files = glob.sync(`./components/${component}/demo/*.${suffix}`)
 
@@ -20,7 +20,7 @@ export default function demoTest(component, options = {}) {
     testMethod(`renders ${file} correctly`, (done) => {
       MockDate.set(moment('2016-11-22'))
       const demo = require(`../.${file}`).default || require(`../.${file}`) // eslint-disable-line global-require, import/no-dynamic-require
-      const wrapper = mount(demo, {sync: false})
+      const wrapper = mount(demo, { sync: false })
       Vue.nextTick(() => {
         expect(wrapper.html()).toMatchSnapshot()
         MockDate.reset()

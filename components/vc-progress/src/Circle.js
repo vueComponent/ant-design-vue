@@ -63,13 +63,14 @@ const Circle = {
   },
   render () {
     const {
-      prefixCls, strokeWidth, trailWidth, strokeColor,
+      prefixCls, strokeWidth, trailWidth,
       trailColor, strokeLinecap, percent, ...restProps
     } = this.$props
     const { pathString, trailPathStyle, strokePathStyle } = this.getPathStyles()
     delete restProps.percent
     delete restProps.gapDegree
     delete restProps.gapPosition
+    delete restProps.strokeColor
     const pathFirst = {
       attrs: {
         'd': pathString,
@@ -100,13 +101,9 @@ const Circle = {
         <path
           {...pathFirst}
         />
-        {
-          percent > 0 ? (
-            <path
-              {...pathSecond}
-            />
-          ) : null
-        }
+        <path
+          {...pathSecond}
+        />
       </svg>
     )
   },

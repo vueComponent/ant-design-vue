@@ -14,25 +14,33 @@ export const ColSize = PropTypes.shape({
 const objectOrNumber = PropTypes.oneOfType([PropTypes.number, ColSize])
 
 export const ColProps = {
-  span: objectOrNumber,
-  order: objectOrNumber,
-  offset: objectOrNumber,
-  push: objectOrNumber,
-  pull: objectOrNumber,
-  xs: PropTypes.oneOfType([PropTypes.number, ColSize]),
-  sm: PropTypes.oneOfType([PropTypes.number, ColSize]),
-  md: PropTypes.oneOfType([PropTypes.number, ColSize]),
-  lg: PropTypes.oneOfType([PropTypes.number, ColSize]),
-  xl: PropTypes.oneOfType([PropTypes.number, ColSize]),
-  xxl: PropTypes.oneOfType([PropTypes.number, ColSize]),
+  span: stringOrNumber,
+  order: stringOrNumber,
+  offset: stringOrNumber,
+  push: stringOrNumber,
+  pull: stringOrNumber,
+  xs: objectOrNumber,
+  sm: objectOrNumber,
+  md: objectOrNumber,
+  lg: objectOrNumber,
+  xl: objectOrNumber,
+  xxl: objectOrNumber,
   prefixCls: PropTypes.string,
 }
 
 export default {
   props: ColProps,
   name: 'ACol',
+  inject: {
+    rowContext: {
+      default: null,
+    },
+  },
   render () {
-    const { span, order, offset, push, pull, prefixCls = 'ant-col', $slots, $attrs, $listeners } = this
+    const { span, order, offset, push, pull,
+      prefixCls = 'ant-col',
+      $slots, $attrs, $listeners, rowContext,
+    } = this
     let sizeClassObj = {};
     ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
       let sizeProps = {}
@@ -63,6 +71,16 @@ export default {
       on: $listeners,
       attrs: $attrs,
       class: classes,
+      style: {},
+    }
+    if (rowContext) {
+      const gutter = rowContext.getGutter()
+      if (gutter > 0) {
+        divProps.style = {
+          paddingLeft: `${gutter / 2}px`,
+          paddingRight: `${gutter / 2}px`,
+        }
+      }
     }
     return <div {...divProps}>{$slots.default}</div>
   },

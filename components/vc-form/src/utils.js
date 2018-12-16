@@ -1,3 +1,5 @@
+import warning from 'warning'
+
 function getDisplayName (WrappedComponent) {
   return WrappedComponent.name || 'WrappedComponent'
 }
@@ -22,7 +24,7 @@ export function treeTraverse (path = '', tree, isLeafNode, errorMessage, callbac
   if (isLeafNode(path, tree)) {
     callback(path, tree)
   } else if (tree === undefined || tree === null) {
-    return
+    // Do nothing
   } else if (Array.isArray(tree)) {
     tree.forEach((subTree, index) => treeTraverse(
       `${path}[${index}]`,
@@ -33,7 +35,7 @@ export function treeTraverse (path = '', tree, isLeafNode, errorMessage, callbac
     ))
   } else { // It's object and not a leaf node
     if (typeof tree !== 'object') {
-      console.error(errorMessage)
+      warning(false, errorMessage)
       return
     }
     Object.keys(tree).forEach(subTreeKey => {

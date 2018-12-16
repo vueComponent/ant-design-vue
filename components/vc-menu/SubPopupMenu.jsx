@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { getKeyFromChildrenIndex, loopMenuItem, noop } from './util'
 import DOMWrap from './DOMWrap'
 import { cloneElement } from '../_util/vnode'
-import { initDefaultProps, getOptionProps, getEvents } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, getPropsData, getEvents, getComponentFromProp } from '../_util/props-util'
 
 function allDisabled (arr) {
   if (!arr.length) {
@@ -28,18 +28,15 @@ function updateActiveKey (store, menuId, activeKey) {
   })
 }
 
+function getEventKey (props) {
+  // when eventKey not available ,it's menu and return menu id '0-menu-'
+  return props.eventKey || '0-menu-'
+}
+
 export function saveRef (key, c) {
   if (c) {
     const index = this.instanceArrayKeyIndexMap[key]
     this.instanceArray[index] = c
-    // const index = this.instanceArray.indexOf(c)
-    // if (index !== -1) {
-    //   // update component if it's already inside instanceArray
-    //   this.instanceArray[index] = c
-    // } else {
-    //   // add component if it's not in instanceArray yet;
-    //   this.instanceArray.push(c)
-    // }
   }
 }
 export function getActiveKey (props, originalActiveKey) {
@@ -100,6 +97,8 @@ const SubPopupMenu = {
     triggerSubMenuAction: PropTypes.oneOf(['click', 'hover']),
     inlineIndent: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     manualRef: PropTypes.func,
+    itemIcon: PropTypes.any,
+    expandIcon: PropTypes.any,
     children: PropTypes.any.def([]),
     __propsSymbol__: PropTypes.any, // mock componentWillReceiveProps
   }, {
@@ -129,17 +128,14 @@ const SubPopupMenu = {
       this.manualRef(this)
     }
   },
-  watch: {
-    __propsSymbol__ () {
-      const props = getOptionProps(this)
-      const storeActiveKey = this.getStore().getState().activeKey[this.getEventKey()]
-      const originalActiveKey = 'activeKey' in props ? props.activeKey
-        : storeActiveKey
-      const activeKey = getActiveKey(props, originalActiveKey)
-      if (activeKey !== originalActiveKey || storeActiveKey !== activeKey) {
-        updateActiveKey(this.getStore(), this.getEventKey(), activeKey)
-      }
-    },
+  updated () {
+    const props = getOptionProps(this)
+    const originalActiveKey = 'activeKey' in props ? props.activeKey
+      : props.store.getState().activeKey[getEventKey(props)]
+    const activeKey = getActiveKey(props, originalActiveKey)
+    if (activeKey !== originalActiveKey) {
+      updateActiveKey(props.store, getEventKey(props), activeKey)
+    }
   },
   methods: {
     // all keyboard events callbacks run from here at first
@@ -160,7 +156,7 @@ const SubPopupMenu = {
       }
       if (activeItem) {
         e.preventDefault()
-        updateActiveKey(this.getStore(), this.getEventKey(), activeItem.eventKey)
+        updateActiveKey(this.$props.store, getEventKey(this.$props), activeItem.eventKey)
 
         if (typeof callback === 'function') {
           callback(activeItem)
@@ -172,7 +168,7 @@ const SubPopupMenu = {
 
     onItemHover (e) {
       const { key, hover } = e
-      updateActiveKey(this.getStore(), this.getEventKey(), hover ? key : null)
+      updateActiveKey(this.$props.store, getEventKey(this.$props), hover ? key : null)
     },
 
     onDeselect (selectInfo) {
@@ -199,22 +195,13 @@ const SubPopupMenu = {
       return this.instanceArray
     },
 
-    getStore  () {
-      return this.store
-    },
-
-    getEventKey () {
-      // when eventKey not available ,it's menu and return menu id '0-menu-'
-      return this.eventKey !== undefined ? this.eventKey : '0-menu-'
-    },
-
     getOpenTransitionName () {
       return this.$props.openTransitionName
     },
 
     step (direction) {
       let children = this.getFlatInstanceArray()
-      const activeKey = this.getStore().getState().activeKey[this.getEventKey()]
+      const activeKey = this.$props.store.getState().activeKey[getEventKey(this.$props)]
       const len = children.length
       if (!len) {
         return null
@@ -251,14 +238,40 @@ const SubPopupMenu = {
 
       return null
     },
-
+    getIcon (instance, name) {
+      if (instance.$createElement) {
+        const temp = instance[name]
+        if (temp !== undefined) {
+          return temp
+        }
+        return instance.$slots[name] || instance.$scopedSlots[name]
+      } else {
+        const temp = getPropsData(instance)[name]
+        if (temp !== undefined) {
+          return temp
+        }
+        const slotsProp = []
+        const componentOptions = instance.componentOptions || {};
+        (componentOptions.children || []).forEach((child) => {
+          if (child.data && child.data.slot === name) {
+            if (child.tag === 'template') {
+              slotsProp.push(child.children)
+            } else {
+              slotsProp.push(child)
+            }
+          }
+        })
+        return slotsProp.length ? slotsProp : undefined
+      }
+    },
     renderCommonMenuItem (child, i, extraProps) {
       if (child.tag === undefined) { return child }
-      const state = this.getStore().getState()
+      const state = this.$props.store.getState()
       const props = this.$props
       const key = getKeyFromChildrenIndex(child, props.eventKey, i)
       const childProps = child.componentOptions.propsData || {}
-      const isActive = key === state.activeKey[this.getEventKey()]
+
+      const isActive = key === state.activeKey[getEventKey(this.$props)]
       if (!childProps.disabled) {
         // manualRef的执行顺序不能保证，使用key映射ref在this.instanceArray中的位置
         this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length
@@ -266,7 +279,7 @@ const SubPopupMenu = {
       const childListeners = getEvents(child)
       const newChildProps = {
         props: {
-          mode: props.mode,
+          mode: childProps.mode || props.mode,
           level: props.level,
           inlineIndent: props.inlineIndent,
           renderMenuItem: this.renderMenuItem,
@@ -283,6 +296,9 @@ const SubPopupMenu = {
           subMenuOpenDelay: props.subMenuOpenDelay,
           subMenuCloseDelay: props.subMenuCloseDelay,
           forceSubMenuRender: props.forceSubMenuRender,
+          builtinPlacements: props.builtinPlacements,
+          itemIcon: this.getIcon(child, 'itemIcon') || this.getIcon(this, 'itemIcon'),
+          expandIcon: this.getIcon(child, 'expandIcon') || this.getIcon(this, 'expandIcon'),
           ...extraProps,
         },
         on: {
@@ -307,7 +323,7 @@ const SubPopupMenu = {
       if (!c) {
         return null
       }
-      const state = this.getStore().getState()
+      const state = this.$props.store.getState()
       const extraProps = {
         openKeys: state.openKeys,
         selectedKeys: state.selectedKeys,
@@ -320,7 +336,7 @@ const SubPopupMenu = {
   },
   render () {
     const { ...props } = this.$props
-    const { eventKey, visible } = props
+    const { eventKey, prefixCls, visible, level, mode, theme } = props
     this.instanceArray = []
     this.instanceArrayKeyIndexMap = {}
     const className = classNames(
@@ -332,6 +348,11 @@ const SubPopupMenu = {
         tag: 'ul',
         // hiddenClassName: `${prefixCls}-hidden`,
         visible,
+        prefixCls,
+        level,
+        mode,
+        theme,
+        overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator'),
       },
       attrs: {
         role: props.role || 'menu',

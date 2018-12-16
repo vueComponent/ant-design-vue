@@ -218,6 +218,7 @@ export default {
               onChange={onStandaloneChange}
               disabledDate={disabledDate}
               onSelect={onStandaloneSelect}
+              renderFooter={() => 'extra footer'}
             />
           </div>
           <div style={{ float: 'left', width: '300px' }}>

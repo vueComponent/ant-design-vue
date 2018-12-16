@@ -51,7 +51,7 @@ export function cloneVNodes (vnodes, deep) {
   return res
 }
 
-export function cloneElement (n, nodeProps, deep) {
+export function cloneElement (n, nodeProps = {}, deep) {
   let ele = n
   if (Array.isArray(n)) {
     ele = filterEmpty(n)[0]

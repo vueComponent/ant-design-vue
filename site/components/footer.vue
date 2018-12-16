@@ -14,7 +14,7 @@ export default {
                 <h2>Ant Design</h2>
                 <div>
                   <a href='https://github.com/vueComponent/ant-design-vue' target='_blank '>
-                    <span>GitHub</span></a><span> - </span>
+                    <span>GitHub</span></a><span></span>
                   <span><i class='anticon anticon-github'></i></span>
                 </div>
                 <div>

@@ -71,6 +71,9 @@ export default {
     blur () {
       this.$refs.input.blur()
     },
+    select () {
+      this.$refs.input.select()
+    },
 
     getInputClassName () {
       const { prefixCls, size, disabled } = this.$props

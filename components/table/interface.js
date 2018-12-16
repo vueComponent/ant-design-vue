@@ -63,6 +63,7 @@ export const TableLocale = PropTypes.shape({
   emptyText: PropTypes.any,
   selectAll: PropTypes.any,
   selectInvert: PropTypes.any,
+  sortTitle: PropTypes.string,
 }).loose
 
 export const RowSelectionType = PropTypes.oneOf(['checkbox', 'radio'])

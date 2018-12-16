@@ -1,4 +1,4 @@
-
+import { getComponentFromProp } from '../_util/props-util'
 import PropTypes from '../_util/vue-types'
 import arrayTreeFilter from 'array-tree-filter'
 import BaseMixin from '../_util/BaseMixin'
@@ -17,6 +17,8 @@ export default {
     dropdownMenuColumnStyle: PropTypes.object,
     defaultFieldNames: PropTypes.object,
     fieldNames: PropTypes.object,
+    expandIcon: PropTypes.any,
+    loadingIcon: PropTypes.any,
   },
   data () {
     this.menuItems = {}
@@ -44,6 +46,8 @@ export default {
     },
     getOption (option, menuIndex) {
       const { prefixCls, expandTrigger } = this
+      const loadingIcon = getComponentFromProp(this, 'loadingIcon')
+      const expandIcon = getComponentFromProp(this, 'expandIcon')
       const onSelect = (e) => {
         this.__emit('select', option, menuIndex, e)
       }
@@ -57,10 +61,18 @@ export default {
         key: Array.isArray(key) ? key.join('__ant__') : key,
       }
       let menuItemCls = `${prefixCls}-menu-item`
+      let expandIconNode = null
       const hasChildren = option[this.getFieldName('children')] &&
       option[this.getFieldName('children')].length > 0
       if (hasChildren || option.isLeaf === false) {
         menuItemCls += ` ${prefixCls}-menu-item-expand`
+        if (!option.loading) {
+          expandIconNode = (
+            <span class={`${prefixCls}-menu-item-expand-icon`}>
+              {expandIcon}
+            </span>
+          )
+        }
       }
       if (expandTrigger === 'hover' && hasChildren) {
         expandProps.on = {
@@ -76,8 +88,10 @@ export default {
       if (option.disabled) {
         menuItemCls += ` ${prefixCls}-menu-item-disabled`
       }
+      let loadingIconNode = null
       if (option.loading) {
         menuItemCls += ` ${prefixCls}-menu-item-loading`
+        loadingIconNode = loadingIcon || null
       }
       let title = ''
       if (option.title) {
@@ -90,6 +104,8 @@ export default {
       return (
         <li {...expandProps}>
           {option[this.getFieldName('label')]}
+          {expandIconNode}
+          {loadingIconNode}
         </li>
       )
     },

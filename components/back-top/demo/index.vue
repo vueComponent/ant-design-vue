@@ -21,6 +21,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'Other',
+  zhType: '其他',
   subtitle: '回到顶部',
   title: 'BackTop',
   render () {

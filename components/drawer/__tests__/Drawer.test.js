@@ -57,6 +57,25 @@ describe('Drawer', () => {
     })
   })
 
+  it('render top drawer', async () => {
+    const props = {
+      propsData: {
+        visible: true,
+        height: 400,
+        placement: 'top',
+        getContainer: false,
+      },
+      slots: {
+        default: 'Here is content of Drawer',
+      },
+      sync: false,
+    }
+    const wrapper = mount(Drawer, props)
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
+
   it('have a title', async () => {
     const props = {
       propsData: {

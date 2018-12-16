@@ -5,6 +5,10 @@ function $$ (className) {
   return document.body.querySelectorAll(className)
 }
 describe('Popconfirm', () => {
+  // const eventObject = expect.objectContaining({
+  //   target: expect.anything(),
+  //   preventDefault: expect.any(Function),
+  // })
   it('should popup Popconfirm dialog', async () => {
     const onVisibleChange = jest.fn()
 
@@ -29,12 +33,12 @@ describe('Popconfirm', () => {
       triggerNode.trigger('click')
     })
     await asyncExpect(() => {
-      expect(onVisibleChange).toBeCalledWith(true)
+      expect(onVisibleChange).toHaveBeenLastCalledWith(true, undefined)
       expect($$('.popconfirm-test').length).toBe(1)
       triggerNode.trigger('click')
     }, 1000)
     await asyncExpect(() => {
-      expect(onVisibleChange).toBeCalledWith(false)
+      expect(onVisibleChange).toHaveBeenLastCalledWith(false, undefined)
     })
   })
 

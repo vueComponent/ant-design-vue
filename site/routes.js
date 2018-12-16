@@ -88,6 +88,26 @@ export default [
         beforeEnter,
       },
       {
+        path: 'docs/vue/faq',
+        component: () => import('../docs/vue/faq.en-US.md'),
+        beforeEnter,
+      },
+      {
+        path: 'docs/vue/faq-cn',
+        component: () => import('../docs/vue/faq.zh-CN.md'),
+        beforeEnter,
+      },
+      {
+        path: 'docs/vue/sponsor',
+        component: () => import('../docs/vue/sponsor.en-US.md'),
+        beforeEnter,
+      },
+      {
+        path: 'docs/vue/sponsor-cn',
+        component: () => import('../docs/vue/sponsor.zh-CN.md'),
+        beforeEnter,
+      },
+      {
         path: 'docs/vue/changelog',
         component: () => import('../CHANGELOG.en-US.md'),
         beforeEnter,

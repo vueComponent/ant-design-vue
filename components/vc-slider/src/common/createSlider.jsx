@@ -45,19 +45,19 @@ export default function createSlider (Component) {
       max: 100,
       step: 1,
       marks: {},
-      handle (h, { index, ref, className, style, ...restProps }) {
-        delete restProps.dragging
-        const handleProps = {
-          props: {
-            ...restProps,
-          },
-          class: className,
-          style,
-          key: index,
-          ref,
-        }
-        return <Handle {...handleProps} />
-      },
+      // handle ({ index, ref, className, style, ...restProps }) {
+      //   delete restProps.dragging
+      //   const handleProps = {
+      //     props: {
+      //       ...restProps,
+      //     },
+      //     class: className,
+      //     style,
+      //     key: index,
+      //     ref,
+      //   }
+      //   return <Handle {...handleProps} />
+      // },
       included: true,
       disabled: false,
       dots: false,
@@ -69,10 +69,11 @@ export default function createSlider (Component) {
       activeDotStyle: {},
     }),
     data () {
-      if (process.env.NODE_ENV !== 'production') {
+      if (utils.isDev()) {
         const { step, max, min } = this
+        const isPointDiffEven = isFinite(max - min) ? (max - min) % step === 0 : true; // eslint-disable-line
         warning(
-          step && Math.floor(step) === step ? (max - min) % step === 0 : true,
+          step && Math.floor(step) === step ? isPointDiffEven : true,
           'Slider[max] - Slider[min] (%s) should be a multiple of Slider[step] (%s)',
           max - min,
           step
@@ -80,17 +81,17 @@ export default function createSlider (Component) {
       }
       return {}
     },
-    beforeDestroy () {
-      this.$nextTick(() => {
-        // if (super.componentWillUnmount) super.componentWillUnmount()
-        this.removeDocumentEvents()
-      })
-    },
     mounted () {
       this.$nextTick(() => {
         // Snapshot testing cannot handle refs, so be sure to null-check this.
         this.document = this.$refs.sliderRef && this.$refs.sliderRef.ownerDocument
         // this.setHandleRefs()
+      })
+    },
+    beforeDestroy () {
+      this.$nextTick(() => {
+        // if (super.componentWillUnmount) super.componentWillUnmount()
+        this.removeDocumentEvents()
       })
     },
     computed: {
@@ -106,6 +107,22 @@ export default function createSlider (Component) {
       },
     },
     methods: {
+      defaultHandle ({ index, ref, className, style, ...restProps }) {
+        delete restProps.dragging
+        if (restProps.value === null) {
+          return null
+        }
+        const handleProps = {
+          props: {
+            ...restProps,
+          },
+          class: className,
+          style,
+          key: index,
+          ref,
+        }
+        return <Handle {...handleProps} />
+      },
       onMouseDown (e) {
         if (e.button !== 0) { return }
         const isVertical = this.vertical
@@ -152,23 +169,10 @@ export default function createSlider (Component) {
         this.onEnd(e)
         this.$emit('blur', e)
       },
-      addDocumentTouchEvents () {
-        // just work for Chrome iOS Safari and Android Browser
-        this.onTouchMoveListener = addEventListener(this.document, 'touchmove', this.onTouchMove)
-        this.onTouchUpListener = addEventListener(this.document, 'touchend', this.onEnd)
-      },
-      addDocumentMouseEvents () {
-        this.onMouseMoveListener = addEventListener(this.document, 'mousemove', this.onMouseMove)
-        this.onMouseUpListener = addEventListener(this.document, 'mouseup', this.onEnd)
-      },
-      removeDocumentEvents () {
-        /* eslint-disable no-unused-expressions */
-        this.onTouchMoveListener && this.onTouchMoveListener.remove()
-        this.onTouchUpListener && this.onTouchUpListener.remove()
-
-        this.onMouseMoveListener && this.onMouseMoveListener.remove()
-        this.onMouseUpListener && this.onMouseUpListener.remove()
-        /* eslint-enable no-unused-expressions */
+      onMouseUp () {
+        if (this.handlesRefs[this.prevMovedHandleIndex]) {
+          this.handlesRefs[this.prevMovedHandleIndex].clickFocus()
+        }
       },
       onMouseMove (e) {
         if (!this.$refs.sliderRef) {
@@ -192,21 +196,16 @@ export default function createSlider (Component) {
           this.onKeyboard(e)
         }
       },
-      focus () {
-        if (!this.disabled) {
-          this.handlesRefs[0].focus()
-        }
-      },
-      blur () {
-        if (!this.disabled) {
-          this.handlesRefs[0].blur()
-        }
+      onClickMarkLabel (e, value) {
+        e.stopPropagation()
+        this.onChange({ value })
+        this.onEnd()
       },
       getSliderStart () {
         const slider = this.$refs.sliderRef
         const rect = slider.getBoundingClientRect()
 
-        return this.vertical ? rect.top : rect.left
+        return this.vertical ? rect.top : (rect.left + window.pageXOffset)
       },
       getSliderLength () {
         const slider = this.$refs.sliderRef
@@ -216,6 +215,38 @@ export default function createSlider (Component) {
 
         const coords = slider.getBoundingClientRect()
         return this.vertical ? coords.height : coords.width
+      },
+      addDocumentTouchEvents () {
+        // just work for Chrome iOS Safari and Android Browser
+        this.onTouchMoveListener = addEventListener(this.document, 'touchmove', this.onTouchMove)
+        this.onTouchUpListener = addEventListener(this.document, 'touchend', this.onEnd)
+      },
+      addDocumentMouseEvents () {
+        this.onMouseMoveListener = addEventListener(this.document, 'mousemove', this.onMouseMove)
+        this.onMouseUpListener = addEventListener(this.document, 'mouseup', this.onEnd)
+      },
+      removeDocumentEvents () {
+        /* eslint-disable no-unused-expressions */
+        this.onTouchMoveListener && this.onTouchMoveListener.remove()
+        this.onTouchUpListener && this.onTouchUpListener.remove()
+
+        this.onMouseMoveListener && this.onMouseMoveListener.remove()
+        this.onMouseUpListener && this.onMouseUpListener.remove()
+        /* eslint-enable no-unused-expressions */
+      },
+      focus () {
+        if (!this.disabled) {
+          this.handlesRefs[0].focus()
+        }
+      },
+      blur () {
+        if (!this.disabled) {
+          Object.keys(this.handlesRefs).forEach((key) => {
+            if (this.handlesRefs[key] && this.handlesRefs[key].blur) {
+              this.handlesRefs[key].blur()
+            }
+          })
+        }
       },
       calcValue (offset) {
         const { vertical, min, max } = this
@@ -268,6 +299,9 @@ export default function createSlider (Component) {
           min,
           className: `${prefixCls}-mark`,
         },
+        listeners: {
+          clickLabel: disabled ? noop : this.onClickMarkLabel,
+        },
       }
       return (
         <div
@@ -275,6 +309,7 @@ export default function createSlider (Component) {
           class={sliderClassName}
           onTouchstart={disabled ? noop : this.onTouchStart}
           onMousedown={disabled ? noop : this.onMouseDown}
+          onMouseup={disabled ? noop : this.onMouseUp}
           onKeydown={disabled ? noop : this.onKeyDown}
           onFocus={disabled ? noop : this.onFocus}
           onBlur={disabled ? noop : this.onBlur}

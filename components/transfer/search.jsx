@@ -30,7 +30,7 @@ export default {
     const { placeholder, value, prefixCls } = getOptionProps(this)
     const icon = (value && value.length > 0) ? (
       <a href='#' class={`${prefixCls}-action`} onClick={this.handleClear2}>
-        <Icon type='cross-circle' />
+        <Icon type='close-circle' />
       </a>
     ) : (
       <span class={`${prefixCls}-action`}><Icon type='search' /></span>

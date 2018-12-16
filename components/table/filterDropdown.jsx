@@ -13,6 +13,10 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util'
 import { cloneElement } from '../_util/vnode'
 import BaseMixin from '../_util/BaseMixin'
 
+function stopPropagation (e) {
+  e.stopPropagation()
+}
+
 export default {
   mixins: [BaseMixin],
   name: 'FilterMenu',
@@ -76,6 +80,9 @@ export default {
     // },
   },
   methods: {
+    getDropdownVisible () {
+      return this.neverShown ? false : this.sVisible
+    },
     setNeverShown  (column) {
       const rootNode = this.$el
       const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`)
@@ -111,6 +118,12 @@ export default {
     handleConfirm  () {
       this.setVisible(false)
       this.confirmFilter2()
+      // Call `setSelectedKeys` & `confirm` in the same time will make filter data not up to date
+      // https://github.com/ant-design/ant-design/issues/12284
+      this.$forceUpdate()
+      this.$nextTick(() => {
+        this.confirmFilter
+      })
     },
 
     onVisibleChange  (visible) {
@@ -128,11 +141,12 @@ export default {
 
     renderMenuItem (item) {
       const { column } = this
+      const { sSelectedKeys: selectedKeys } = this.$data
       const multiple = ('filterMultiple' in column) ? column.filterMultiple : true
       const input = multiple ? (
-        <Checkbox checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
+        <Checkbox checked={selectedKeys && selectedKeys.indexOf(item.value.toString()) >= 0} />
       ) : (
-        <Radio checked={this.sSelectedKeys.indexOf(item.value.toString()) >= 0} />
+        <Radio checked={selectedKeys && selectedKeys.indexOf(item.value.toString()) >= 0} />
       )
 
       return (
@@ -167,11 +181,12 @@ export default {
     },
 
     handleMenuItemClick (info) {
+      const { sSelectedKeys: selectedKeys } = this.$data
       if (!info.keyPath || info.keyPath.length <= 1) {
         return
       }
       const keyPathOfSelectedItem = this.sKeyPathOfSelectedItem
-      if (this.sSelectedKeys.indexOf(info.key) >= 0) {
+      if (selectedKeys && selectedKeys.indexOf(info.key) >= 0) {
         // deselect SubMenu child
         delete keyPathOfSelectedItem[info.key]
       } else {
@@ -183,19 +198,32 @@ export default {
 
     renderFilterIcon () {
       const { column, locale, prefixCls, selectedKeys } = this
-      const filterd = selectedKeys.length > 0
+      const filtered = selectedKeys && selectedKeys.length > 0
       let filterIcon = column.filterIcon
       if (typeof filterIcon === 'function') {
-        filterIcon = filterIcon(filterd)
+        filterIcon = filterIcon(filtered)
       }
-      const dropdownSelectedClass = filterd ? `${prefixCls}-selected` : ''
+      const dropdownIconClass = classNames({
+        [`${prefixCls}-selected`]: filtered,
+        [`${prefixCls}-open`]: this.getDropdownVisible(),
+      })
 
       return filterIcon ? cloneElement(filterIcon, {
         attrs: {
           title: locale.filterTitle,
         },
-        class: classNames(`${prefixCls}-icon`, filterIcon.className),
-      }) : <Icon title={locale.filterTitle} type='filter' class={dropdownSelectedClass} />
+        on: {
+          click: stopPropagation,
+        },
+        class: classNames(`${prefixCls}-icon`, dropdownIconClass, filterIcon.className),
+      })
+        : <Icon
+          title={locale.filterTitle}
+          type='filter'
+          theme='filled'
+          class={dropdownIconClass}
+          onClick={stopPropagation}
+        />
     },
   },
 
@@ -207,7 +235,7 @@ export default {
       [`${dropdownPrefixCls}-menu-without-submenu`]: !this.hasSubMenu(),
     })
     let { filterDropdown } = column
-    if (filterDropdown && typeof filterDropdown === 'function') {
+    if (filterDropdown instanceof Function) {
       filterDropdown = filterDropdown({
         prefixCls: `${dropdownPrefixCls}-custom`,
         setSelectedKeys: (selectedKeys) => this.setSelectedKeys({ selectedKeys }),
@@ -257,7 +285,8 @@ export default {
     return (
       <Dropdown
         trigger={['click']}
-        visible={this.neverShown ? false : this.sVisible}
+        placement='bottomRight'
+        visible={this.getDropdownVisible()}
         onVisibleChange={this.onVisibleChange}
         getPopupContainer={getPopupContainer}
         forceRender

@@ -3,6 +3,7 @@ import { Tree as VcTree, TreeNode } from '../vc-tree'
 import animation from '../_util/openAnimation'
 import PropTypes from '../_util/vue-types'
 import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import Icon from '../icon'
 
 function TreeProps () {
   return {
@@ -107,6 +108,44 @@ export default {
   },
   TreeNode,
   methods: {
+    renderSwitcherIcon ({ isLeaf, expanded, loading }) {
+      const {
+        prefixCls,
+        showLine,
+      } = this.$props
+      if (loading) {
+        return (
+          <Icon
+            type='loading'
+            class={`${prefixCls}-switcher-loading-icon`}
+          />
+        )
+      }
+      if (showLine) {
+        if (isLeaf) {
+          return (
+            <Icon
+              type='file'
+              class={`${prefixCls}-switcher-line-icon`}
+            />
+          )
+        }
+        return (
+          <Icon
+            type={expanded ? 'minus-square' : 'plus-square'}
+            class={`${prefixCls}-switcher-line-icon`}
+            theme='outlined'
+          />
+        )
+      } else {
+        if (isLeaf) {
+          return null
+        }
+        return (
+          <Icon type='caret-down' class={`${prefixCls}-switcher-icon`} theme='filled' />
+        )
+      }
+    },
     updataTreeData (treeData) {
       const { $slots, $scopedSlots } = this
       return treeData.map((item) => {
@@ -142,10 +181,12 @@ export default {
         checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
         children: this.$slots.default || [],
         __propsSymbol__: Symbol(),
+        switcherIcon: this.renderSwitcherIcon,
       },
       on: {
         ...this.$listeners,
       },
+      ref: 'tree',
       class: !showIcon && `${prefixCls}-icon-hide`,
     }
     if (treeData) {

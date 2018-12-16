@@ -4,7 +4,8 @@ import classNames from 'classnames'
 import BaseMixin from '../_util/BaseMixin'
 import PropTypes from '../_util/vue-types'
 import getTransitionProps from '../_util/getTransitionProps'
-import { getComponentFromProp } from '../_util/props-util'
+import { getComponentFromProp, isValidElement } from '../_util/props-util'
+import { cloneElement } from '../_util/vnode'
 function noop () { }
 export const AlertProps = {
   /**
@@ -28,6 +29,7 @@ export const AlertProps = {
   iconType: PropTypes.string,
   prefixCls: PropTypes.string,
   banner: PropTypes.bool,
+  icon: PropTypes.any,
 }
 
 const Alert = {
@@ -69,11 +71,14 @@ const Alert = {
     const closeText = getComponentFromProp(this, 'closeText')
     const description = getComponentFromProp(this, 'description')
     const message = getComponentFromProp(this, 'message')
+    const icon = getComponentFromProp(this, 'icon')
     // banner模式默认有 Icon
     showIcon = banner && showIcon === undefined ? true : showIcon
     // banner模式默认为警告
     type = banner && type === undefined ? 'warning' : type || 'info'
-
+    let iconTheme = 'filled'
+    // should we give a warning?
+    // warning(!iconType, `The property 'iconType' is deprecated. Use the property 'icon' instead.`);
     if (!iconType) {
       switch (type) {
         case 'success':
@@ -83,7 +88,7 @@ const Alert = {
           iconType = 'info-circle'
           break
         case 'error':
-          iconType = 'cross-circle'
+          iconType = 'close-circle'
           break
         case 'warning':
           iconType = 'exclamation-circle'
@@ -94,7 +99,7 @@ const Alert = {
 
       // use outline icon in alert with description
       if (description) {
-        iconType += '-o'
+        iconTheme = 'outlined'
       }
     }
 
@@ -113,9 +118,21 @@ const Alert = {
 
     const closeIcon = closable ? (
       <a onClick={this.handleClose} class={`${prefixCls}-close-icon`}>
-        {closeText || <Icon type='cross' />}
+        {closeText || <Icon type='close' />}
       </a>
     ) : null
+
+    const iconNode = icon && (
+      isValidElement(icon)
+        ? cloneElement(
+          icon,
+          {
+            class: `${prefixCls}-icon`,
+          },
+        ) : <span class={`${prefixCls}-icon`}>{icon}</span>) || (
+      <Icon class={`${prefixCls}-icon`} type={iconType} theme={iconTheme} />
+    )
+
     const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
       appear: false,
       afterLeave: this.animationEnd,
@@ -123,7 +140,7 @@ const Alert = {
     return closed ? null : (
       <transition {...transitionProps}>
         <div v-show={closing} class={alertCls} data-show={closing}>
-          {showIcon ? <Icon class={`${prefixCls}-icon`} type={iconType} /> : null}
+          {showIcon ? iconNode : null}
           <span class={`${prefixCls}-message`}>{message}</span>
           <span class={`${prefixCls}-description`}>{description}</span>
           {closeIcon}

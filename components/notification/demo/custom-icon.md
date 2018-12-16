@@ -20,7 +20,7 @@ The icon can be customized to any vue node or (h) => vue node.
         this.$notification.open({
           message: 'Notification Title',
           description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-          icon: <a-icon type="smile-circle" style="color: #108ee9" />,
+          icon: <a-icon type="smile" style="color: #108ee9" />,
         });
       },
     }

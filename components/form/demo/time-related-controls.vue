@@ -1,11 +1,11 @@
 <cn>
 #### 时间类控件
-时间类组件的 `value` 为 `moment` 类型，所以在提交前需要预处理。
+时间类组件的 `value` 类型为 `moment` 对象，所以在提交服务器前需要预处理。
 </cn>
 
 <us>
 #### Time-related Controls
-the `value` of time-related components is `moment`. So, we need to pre-process those values.
+The `value` of time-related components is a `moment` object, which we need to pre-process it before we submit to server.
 </us>
 
 <template>

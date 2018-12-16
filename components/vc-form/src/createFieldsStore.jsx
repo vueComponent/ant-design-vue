@@ -10,22 +10,22 @@ function partOf (a, b) {
   return b.indexOf(a) === 0 && ['.', '['].indexOf(b[a.length]) !== -1
 }
 
+function internalFlattenFields (fields) {
+  return flattenFields(
+    fields,
+    (_, node) => isFormField(node),
+    'You must wrap field data with `createFormField`.'
+  )
+}
+
 class FieldsStore {
   constructor (fields) {
-    this.fields = this.flattenFields(fields)
+    this.fields = internalFlattenFields(fields)
     this.fieldsMeta = {}
   }
 
   updateFields (fields) {
-    this.fields = this.flattenFields(fields)
-  }
-
-  flattenFields (fields) {
-    return flattenFields(
-      fields,
-      (_, node) => isFormField(node),
-      'You must wrap field data with `createFormField`.'
-    )
+    this.fields = internalFlattenFields(fields)
   }
 
   flattenRegisteredFields (fields) {
@@ -33,7 +33,7 @@ class FieldsStore {
     return flattenFields(
       fields,
       path => validFieldsName.indexOf(path) >= 0,
-      'You cannot set field before registering it.'
+      'You cannot set a form field before rendering a field associated with the value.'
     )
   }
 
@@ -58,7 +58,9 @@ class FieldsStore {
     }
     const nowValues = {}
     Object.keys(fieldsMeta)
-      .forEach((f) => { nowValues[f] = this.getValueFromFields(f, nowFields) })
+      .forEach((f) => {
+        nowValues[f] = this.getValueFromFields(f, nowFields)
+      })
     Object.keys(nowValues).forEach((f) => {
       const value = nowValues[f]
       const fieldMeta = this.getFieldMeta(f)

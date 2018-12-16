@@ -48,10 +48,15 @@ export default {
   },
   methods: {
     onStart (file) {
-      const nextFileList = this.sFileList.concat()
       const targetItem = fileToObject(file)
       targetItem.status = 'uploading'
-      nextFileList.push(targetItem)
+      const nextFileList = this.sFileList.concat()
+      const fileIndex = nextFileList.findIndex(({ uid }) => uid === targetItem.uid)
+      if (fileIndex === -1) {
+        nextFileList.push(targetItem)
+      } else {
+        nextFileList[fileIndex] = targetItem
+      }
       this.onChange({
         file: targetItem,
         fileList: nextFileList,

@@ -1,6 +1,7 @@
 
 import VcTable from '../vc-table'
 import classNames from 'classnames'
+import shallowEqual from 'shallowequal'
 import Pagination from '../pagination'
 import Icon from '../icon'
 import Spin from '../spin'
@@ -308,8 +309,8 @@ export default {
       }
     },
 
-    getSorterFn () {
-      const { sSortOrder: sortOrder, sSortColumn: sortColumn } = this
+    getSorterFn (state) {
+      const { sSortOrder: sortOrder, sSortColumn: sortColumn } = state || this.$data
       if (!sortOrder || !sortColumn ||
           typeof sortColumn.sorter !== 'function') {
         return
@@ -323,25 +324,37 @@ export default {
         return 0
       }
     },
-
-    toggleSortOrder (order, column) {
-      let { sSortOrder: sortOrder, sSortColumn: sortColumn } = this
-      // 只同时允许一列进行排序，否则会导致排序顺序的逻辑问题
-      const isSortColumn = this.isSortColumn(column)
-      if (!isSortColumn) { // 当前列未排序
-        sortOrder = order
-        sortColumn = column
-      } else { // 当前列已排序
-        if (sortOrder === order) { // 切换为未排序状态
-          sortOrder = undefined
-          sortColumn = null
-        } else { // 切换为排序状态
-          sortOrder = order
+    isSameColumn (a, b) {
+      if (a && b && a.key && a.key === b.key) {
+        return true
+      }
+      return a === b || shallowEqual(a, b, (value, other) => {
+        if (typeof value === 'function' && typeof other === 'function') {
+          return value === other || value.toString() === other.toString()
         }
+      })
+    },
+
+    toggleSortOrder (column) {
+      if (!column.sorter) {
+        return
+      }
+      const { sSortOrder: sortOrder, sSortColumn: sortColumn } = this
+      // 只同时允许一列进行排序，否则会导致排序顺序的逻辑问题
+      let newSortOrder
+      // 切换另一列时，丢弃 sortOrder 的状态
+      const oldSortOrder = this.isSameColumn(sortColumn, column) ? sortOrder : undefined
+      // 切换排序状态，按照降序/升序/不排序的顺序
+      if (!oldSortOrder) {
+        newSortOrder = 'ascend'
+      } else if (oldSortOrder === 'ascend') {
+        newSortOrder = 'descend'
+      } else {
+        newSortOrder = undefined
       }
       const newState = {
-        sSortOrder: sortOrder,
-        sSortColumn: sortColumn,
+        sSortOrder: newSortOrder,
+        sSortColumn: newSortOrder ? column : null,
       }
 
       // Controlled
@@ -423,7 +436,7 @@ export default {
       const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
       let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const key = this.getRecordKey(record, rowIndex)
-      const pivot = this.$data.pivot
+      const { pivot } = this.$data
       const rows = this.getFlatCurrentPageData()
       let realIndex = rowIndex
       if (this.$props.expandedRowRender) {
@@ -635,7 +648,7 @@ export default {
     },
 
     getRecordKey (record, index) {
-      const rowKey = this.rowKey
+      const { rowKey } = this
       const recordKey = (typeof rowKey === 'function')
         ? rowKey(record, index) : record[rowKey]
       warning(recordKey !== undefined,
@@ -723,14 +736,14 @@ export default {
 
     renderColumnsDropdown (columns, locale) {
       const { prefixCls, dropdownPrefixCls } = this
-      const { sSortOrder: sortOrder } = this
-      return treeMap(columns, (originColumn, i) => {
-        const column = { ...originColumn }
+      const { sSortOrder: sortOrder, sFilters: filters } = this
+      return treeMap(columns, (column, i) => {
         const key = this.getColumnKey(column, i)
         let filterDropdown
         let sortButton
+        const isSortColumn = this.isSortColumn(column)
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
-          const colFilters = this.sFilters[key] || []
+          const colFilters = key in filters ? filters[key] : []
           filterDropdown = (
             <FilterDropdown
               _propsSymbol={Symbol()}
@@ -741,53 +754,81 @@ export default {
               prefixCls={`${prefixCls}-filter`}
               dropdownPrefixCls={dropdownPrefixCls || 'ant-dropdown'}
               getPopupContainer={this.getPopupContainer}
+              key='filter-dropdown'
             />
           )
         }
         if (column.sorter) {
-          const isSortColumn = this.isSortColumn(column)
-          if (isSortColumn) {
-            column.className = classNames(column.className, {
-              [`${prefixCls}-column-sort`]: sortOrder,
-            })
-          }
+          // const isSortColumn = this.isSortColumn(column)
+          // if (isSortColumn) {
+          //   column.className = classNames(column.className, {
+          //     [`${prefixCls}-column-sort`]: sortOrder,
+          //   })
+          // }
           const isAscend = isSortColumn && sortOrder === 'ascend'
           const isDescend = isSortColumn && sortOrder === 'descend'
           sortButton = (
-            <div class={`${prefixCls}-column-sorter`}>
-              <span
+            <div class={`${prefixCls}-column-sorter`} key='sorter'>
+              <Icon
                 class={`${prefixCls}-column-sorter-up ${isAscend ? 'on' : 'off'}`}
-                title='↑'
-                onClick={() => this.toggleSortOrder('ascend', column)}
-              >
-                <Icon type='caret-up' />
-              </span>
-              <span
+                type='caret-up'
+                theme='filled'
+              />
+              <Icon
                 class={`${prefixCls}-column-sorter-down ${isDescend ? 'on' : 'off'}`}
-                title='↓'
-                onClick={() => this.toggleSortOrder('descend', column)}
-              >
-                <Icon type='caret-down' />
-              </span>
+                type='caret-down'
+                theme='filled'
+              />
             </div>
           )
         }
-        column.title = (
-          <span key={key}>
-            {column.title}
-            {sortButton}
-            {filterDropdown}
-          </span>
-        )
-
-        if (sortButton || filterDropdown) {
-          column.className = classNames(`${prefixCls}-column-has-filters`, column.className)
+        return {
+          ...column,
+          className: classNames(column.className, {
+            [`${prefixCls}-column-has-actions`]: sortButton || filterDropdown,
+            [`${prefixCls}-column-has-filters`]: filterDropdown,
+            [`${prefixCls}-column-has-sorters`]: sortButton,
+            [`${prefixCls}-column-sort`]: isSortColumn && sortOrder,
+          }),
+          title: [
+            <div
+              key='title'
+              title={sortButton ? locale.sortTitle : undefined}
+              class={sortButton ? `${prefixCls}-column-sorters` : undefined}
+              onClick={() => this.toggleSortOrder(column)}
+            >
+              {this.renderColumnTitle(column.title)}
+              {sortButton}
+            </div>,
+            filterDropdown,
+          ],
         }
+        // column.title = (
+        //   <span key={key}>
+        //     {column.title}
+        //     {sortButton}
+        //     {filterDropdown}
+        //   </span>
+        // )
 
-        return column
+        // if (sortButton || filterDropdown) {
+        //   column.className = classNames(`${prefixCls}-column-has-filters`, column.className)
+        // }
+
+        // return column
       })
     },
-
+    renderColumnTitle (title) {
+      const { sFilters: filters, sSortOrder: sortOrder } = this.$data
+      // https://github.com/ant-design/ant-design/issues/11246#issuecomment-405009167
+      if (title instanceof Function) {
+        return title({
+          filters,
+          sortOrder,
+        })
+      }
+      return title
+    },
     handleShowSizeChange  (current, pageSize) {
       const pagination = this.sPagination
       pagination.onShowSizeChange(current, pageSize)
@@ -854,7 +895,11 @@ export default {
         sorter.field = state.sSortColumn.dataIndex
         sorter.columnKey = this.getColumnKey(state.sSortColumn)
       }
-      return [pagination, filters, sorter]
+      const extra = {
+        currentDataSource: this.getLocalData(state),
+      }
+
+      return [pagination, filters, sorter, extra]
     },
 
     findColumn (myKey) {
@@ -909,12 +954,14 @@ export default {
       } : item))
     },
 
-    getLocalData () {
-      const { dataSource, sFilters: filters } = this
+    getLocalData (state) {
+      const currentState = state || this.$data
+      const { sFilters: filters } = currentState
+      const { dataSource } = this.$props
       let data = dataSource || []
       // 优化本地排序
       data = data.slice(0)
-      const sorterFn = this.getSorterFn()
+      const sorterFn = this.getSorterFn(currentState)
       if (sorterFn) {
         data = this.recursiveSort(data, sorterFn)
       }

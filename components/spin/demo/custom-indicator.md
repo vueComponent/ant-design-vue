@@ -21,7 +21,7 @@ Use custom loading indicator.
   export default {
     data () {
       return {
-        indicator: <i class="anticon anticon-loading anticon-spin ant-spin-dot" style="font-size: 24px;"></i>
+        indicator: <a-icon type="loading" style="font-size: 24px" spin />
       }
     },
   }

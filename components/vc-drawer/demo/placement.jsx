@@ -1,8 +1,6 @@
 import Drawer from '../src/index'
 import Menu from '../../menu/index'
 import Icon from '../../icon/index'
-import Button from '../../button/index'
-import Select from '../../select/index'
 import '../assets/index.less'
 import '../../menu/style/index'
 import '../../icon/style/index'
@@ -11,7 +9,6 @@ import '../../select/style/index'
 
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
-const Option = Select.Option
 
 export default {
   data () {

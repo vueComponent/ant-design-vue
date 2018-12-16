@@ -1,6 +1,8 @@
+import classNames from 'classnames'
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { getOptionProps } from '../../_util/props-util'
+import addEventListener from '../../_util/Dom/addEventListener'
 
 export default {
   name: 'Handle',
@@ -18,7 +20,42 @@ export default {
     // handleFocus: PropTypes.func.def(noop),
     // handleBlur: PropTypes.func.def(noop),
   },
+  data () {
+    return {
+      clickFocused: false,
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      // mouseup won't trigger if mouse moved out of handle
+      // so we listen on document here.
+      this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
+    })
+  },
+  beforeDestroy () {
+    if (this.onMouseUpListener) {
+      this.onMouseUpListener.remove()
+    }
+  },
   methods: {
+    setClickFocus (focused) {
+      this.setState({ clickFocused: focused })
+    },
+    handleMouseUp () {
+      if (document.activeElement === this.$refs.handle) {
+        this.setClickFocus(true)
+      }
+    },
+    handleBlur () {
+      this.setClickFocus(false)
+    },
+    handleKeyDown () {
+      this.setClickFocus(false)
+    },
+    clickFocus () {
+      this.setClickFocus(true)
+      this.focus()
+    },
     focus () {
       this.$refs.handle.focus()
     },
@@ -28,23 +65,27 @@ export default {
   },
   render () {
     const {
-      className, vertical, offset, disabled, min, max, value, tabIndex,
+      prefixCls, vertical, offset, disabled, min, max, value, tabIndex,
     } = getOptionProps(this)
+
+    const className = classNames(
+      this.$props.className,
+      {
+        [`${prefixCls}-handle-click-focused`]: this.clickFocused,
+      }
+    )
 
     const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` }
     const elStyle = {
       ...postionStyle,
     }
-    let ariaProps = {}
-    if (value !== undefined) {
-      ariaProps = {
-        ...ariaProps,
-        'aria-valuemin': min,
-        'aria-valuemax': max,
-        'aria-valuenow': value,
-        'aria-disabled': !!disabled,
-      }
+    const ariaProps = {
+      'aria-valuemin': min,
+      'aria-valuemax': max,
+      'aria-valuenow': value,
+      'aria-disabled': !!disabled,
     }
+
     const handleProps = {
       attrs: {
         role: 'slider',

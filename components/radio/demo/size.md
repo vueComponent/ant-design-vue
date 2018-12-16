@@ -1,11 +1,11 @@
 <cn>
-#### 单选组合
-一组互斥的 Radio 配合使用。
+#### 大小
+大中小三种组合，可以和表单输入框进行对应配合。
 </cn>
 
 <us>
-#### Radio Group
-A group of radio components.
+#### size
+There are three sizes available: large, medium, and small. It can coordinate with input box.
 </us>
 
 ```html

@@ -325,4 +325,26 @@ describe('RangePicker', () => {
       }).not.toThrow()
     })
   })
+  // https://github.com/ant-design/ant-design/issues/11631
+  it('triggers onOpenChange when click on preset range', async () => {
+    const handleOpenChange = jest.fn()
+    const range = [moment().subtract(2, 'd'), moment()]
+    const wrapper = mount({
+      render () {
+        return <RangePicker onOpenChange={handleOpenChange} ranges={{ 'recent two days': range }} />
+      },
+    }, {
+      sync: false,
+      attachToDocument: true,
+    })
+    await asyncExpect(() => {
+      wrapper.find('.ant-calendar-picker-input').trigger('click')
+    })
+    await asyncExpect(() => {
+      $$('.ant-calendar-range-quick-selector .ant-tag')[0].click()
+    }, 0)
+    await asyncExpect(() => {
+      expect(handleOpenChange).toBeCalledWith(false)
+    })
+  })
 })

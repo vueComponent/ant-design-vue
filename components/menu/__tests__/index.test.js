@@ -3,6 +3,13 @@ import { asyncExpect } from '@/tests/utils'
 import Menu from '..'
 import Icon from '../../icon'
 
+jest.mock('mutationobserver-shim', () => {
+  global.MutationObserver = function MutationObserver () {
+    this.observe = () => {}
+    this.disconnect = () => {}
+  }
+})
+
 const { SubMenu } = Menu
 function $$ (className) {
   return document.body.querySelectorAll(className)
@@ -13,11 +20,11 @@ describe('Menu', () => {
     // jest.useFakeTimers()
   })
 
-  // afterEach(() => {
-  //   jest.useRealTimers()
-  // })
+  afterEach(() => {
+    // jest.useRealTimers()
+  })
   it('If has select nested submenu item ,the menu items on the grandfather level should be highlight', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultSelectedKeys={['1-3-2']} mode='vertical'>
@@ -39,7 +46,7 @@ describe('Menu', () => {
     })
   })
   it('should accept defaultOpenKeys in mode horizontal', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='horizontal'>
@@ -58,7 +65,7 @@ describe('Menu', () => {
   })
 
   it('should accept defaultOpenKeys in mode inline', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='inline'>
@@ -77,7 +84,7 @@ describe('Menu', () => {
   })
 
   it('should accept defaultOpenKeys in mode vertical', async () => {
-    const wrapper = mount({
+    mount({
       render () {
         return (
           <Menu defaultOpenKeys={['1']} mode='vertical'>
@@ -123,12 +130,12 @@ describe('Menu', () => {
     wrapper.setProps({ openKeys: [] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-    })
+    }, 0)
 
     wrapper.setProps({ openKeys: ['1'] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-    })
+    }, 0)
   })
 
   it('inline', async () => {
@@ -159,11 +166,11 @@ describe('Menu', () => {
     wrapper.setProps({ openKeys: [] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].style.display).toBe('none')
-    })
+    }, 0)
     wrapper.setProps({ openKeys: ['1'] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
-    })
+    }, 0)
   })
 
   it('vertical', async () => {
@@ -194,11 +201,11 @@ describe('Menu', () => {
     wrapper.setProps({ openKeys: [] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')
-    })
+    }, 0)
     wrapper.setProps({ openKeys: ['1'] })
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-    })
+    }, 0)
   })
 
   // https://github.com/ant-design/ant-design/pulls/4677
@@ -292,6 +299,9 @@ describe('Menu', () => {
       wrapper.vm.$forceUpdate()
     })
     await asyncExpect(() => {
+      wrapper.trigger('transitionend', { propertyName: 'width' })
+    })
+    await asyncExpect(() => {
       expect(wrapper.findAll('ul.ant-menu-root').at(0).classes()).toContain('ant-menu-vertical')
       expect(wrapper.findAll('ul.ant-menu-sub').length).toBe(0)
     }, 0)
@@ -339,6 +349,9 @@ describe('Menu', () => {
       wrapper.vm.$forceUpdate()
     })
     await asyncExpect(() => {
+      wrapper.trigger('transitionend', { propertyName: 'width' })
+    })
+    await asyncExpect(() => {
       wrapper.findAll('.ant-menu-submenu-title').at(0).trigger('mouseenter')
     })
     await asyncExpect(() => {
@@ -375,15 +388,15 @@ describe('Menu', () => {
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0)
         toggleMenu(wrapper, 0, 'click')
-      })
+      }, 0)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(1)
         expect($$('.ant-menu-sub')[0].style.display).not.toBe('none')
         toggleMenu(wrapper, 0, 'click')
-      })
+      }, 500)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub')[0].style.display).toBe('none')
-      })
+      }, 500)
     })
 
     it('vertical', async () => {
@@ -403,7 +416,7 @@ describe('Menu', () => {
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0)
         toggleMenu(wrapper, 0, 'mouseenter')
-      })
+      }, 0)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(1)
         expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
@@ -430,12 +443,12 @@ describe('Menu', () => {
       }, { attachToDocument: true, sync: false })
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0)
-        toggleMenu(wrapper, 0, 'mouseenter')
-      })
+        toggleMenu(wrapper, 1, 'mouseenter')
+      }, 0)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(1)
         expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none')
-        toggleMenu(wrapper, 0, 'mouseleave')
+        toggleMenu(wrapper, 1, 'mouseleave')
       }, 500)
       await asyncExpect(() => {
         expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none')

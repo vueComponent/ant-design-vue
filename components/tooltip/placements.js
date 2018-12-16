@@ -83,6 +83,7 @@ export default function getPlacements (config) {
       ...rcPlacements[key],
       overflow: getOverflowOptions(autoAdjustOverflow),
     }
+    placementMap[key].ignoreShake = true
   })
   return placementMap
 }

@@ -10,6 +10,7 @@ export default {
         beforeUpload (file) {
           console.log('beforeUpload', file.name)
         },
+        openFileDialogOnClick: false,
       },
       on: {
         start (file) {
@@ -23,6 +24,9 @@ export default {
         },
         error (err) {
           console.log('error', err)
+        },
+        click () {
+          alert('click')
         },
       },
       style: { display: 'inline-block', width: '200px', height: '200px', background: '#eee' },

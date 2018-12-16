@@ -5,7 +5,7 @@ import ColGroup from './ColGroup'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import ExpandableRow from './ExpandableRow'
-import { mergeProps, getOptionProps } from '../../_util/props-util'
+import { mergeProps } from '../../_util/props-util'
 import { connect } from '../../_util/store'
 function noop () {}
 const BaseTable = {

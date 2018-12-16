@@ -64,6 +64,7 @@ export default {
         {
           rows.map((row, index) => (
             <TableHeaderRow
+              prefixCls={prefixCls}
               key={index}
               index={index}
               fixed={fixed}

@@ -146,41 +146,38 @@ describe('DatePicker', () => {
     }, { sync: false, attachToDocument: true })
     await asyncExpect(() => {
       openPanel(wrapper)
-    })
+    }, 0)
     await asyncExpect(() => {
       nextYear()
+    }, 1000)
+    await asyncExpect(() => {
+      expect(handleChange).not.toBeCalled()
+    }, 0)
+    await asyncExpect(() => {
+      nextMonth()
     }, 0)
     await asyncExpect(() => {
       expect(handleChange).not.toBeCalled()
     })
     await asyncExpect(() => {
-      nextMonth()
-    })
-    await asyncExpect(() => {
-      expect(handleChange).not.toBeCalled()
-    })
-    await asyncExpect(() => {
       selectDateFromBody(moment('2017-12-22'))
-    })
+    }, 1000)
     await asyncExpect(() => {
       expect(handleChange).toBeCalled()
-    })
-    await asyncExpect(() => {
-
-    })
+    }, 0)
   })
 
   it('clear input', async () => {
     const wrapper = mount(DatePicker, { sync: false, attachToDocument: true })
     await asyncExpect(() => {
       openPanel(wrapper)
-    })
-    await asyncExpect(() => {
-      selectDateFromBody(moment('2016-11-23'))
     }, 0)
     await asyncExpect(() => {
+      selectDateFromBody(moment('2016-11-23'))
+    }, 100)
+    await asyncExpect(() => {
       clearInput(wrapper)
-    }, 300)
+    }, 1000)
     await asyncExpect(() => {
       openPanel(wrapper)
     }, 0)

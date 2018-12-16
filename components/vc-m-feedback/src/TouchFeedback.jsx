@@ -26,10 +26,7 @@ export default {
   },
   methods: {
     triggerEvent (type, isActive, ev) {
-      // const eventType = `on${type}`
-      // if (this.props[eventType]) {
-      //   this.props[eventType](ev)
-      // }
+      // 暂时仅有input-number用到，事件直接到挂载到Touchable上，不需要像antd那样从子组件触发
       this.$emit(type, ev)
       if (isActive !== this.active) {
         this.setState({
@@ -50,17 +47,10 @@ export default {
       this.triggerEvent('touchcancel', false, e)
     },
     onMouseDown (e) {
-      // todo
       // pc simulate mobile
-      // if (this.props.onTouchStart) {
-      this.triggerEvent('touchstart', true, e)
-      // }
       this.triggerEvent('mousedown', true, e)
     },
     onMouseUp (e) {
-      // if (this.props.onTouchEnd) {
-      this.triggerEvent('touchend', false, e)
-      // }
       this.triggerEvent('mouseup', false, e)
     },
     onMouseLeave (e) {

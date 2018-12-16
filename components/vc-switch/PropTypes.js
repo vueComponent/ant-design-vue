@@ -12,4 +12,5 @@ export const switchPropTypes = {
   checked: PropTypes.bool.def(false),
   defaultChecked: PropTypes.bool.def(false),
   autoFocus: PropTypes.bool.def(false),
+  loadingIcon: PropTypes.any,
 }

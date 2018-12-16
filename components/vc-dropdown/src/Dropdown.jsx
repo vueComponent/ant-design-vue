@@ -1,8 +1,8 @@
 
 import PropTypes from '../../_util/vue-types'
-import Trigger from '../../trigger'
+import Trigger from '../../vc-trigger'
 import placements from './placements'
-import { hasProp, getEvents } from '../../_util/props-util'
+import { hasProp, getEvents, getOptionProps } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
 import { cloneElement } from '../../_util/vnode'
 
@@ -18,6 +18,7 @@ export default {
     overlayStyle: PropTypes.object.def({}),
     placement: PropTypes.string.def('bottomLeft'),
     trigger: PropTypes.array.def(['hover']),
+    alignPoint: PropTypes.bool,
     showAction: PropTypes.array.def([]),
     hideAction: PropTypes.array.def([]),
     getPopupContainer: PropTypes.func,
@@ -67,6 +68,16 @@ export default {
       this.__emit('visibleChange', visible)
     },
 
+    getMinOverlayWidthMatchTrigger () {
+      const props = getOptionProps(this)
+      const { minOverlayWidthMatchTrigger, alignPoint } = props
+      if ('minOverlayWidthMatchTrigger' in props) {
+        return minOverlayWidthMatchTrigger
+      }
+
+      return !alignPoint
+    },
+
     getMenuElement () {
       const { onClick, prefixCls, $slots } = this
       this.childOriginEvents = getEvents($slots.overlay[0])
@@ -87,7 +98,7 @@ export default {
     },
 
     afterVisibleChange (visible) {
-      if (visible && this.$props.minOverlayWidthMatchTrigger) {
+      if (visible && this.getMinOverlayWidthMatchTrigger()) {
         const overlayNode = this.getPopupDomNode()
         const rootNode = this.$el
         if (rootNode && overlayNode && rootNode.offsetWidth > overlayNode.offsetWidth) {
@@ -111,6 +122,10 @@ export default {
       overlayClassName, overlayStyle,
       trigger, ...otherProps
     } = this.$props
+    let triggerHideAction = hideAction
+    if (!triggerHideAction && trigger.indexOf('contextmenu') !== -1) {
+      triggerHideAction = ['click']
+    }
 
     const triggerProps = {
       props: {
@@ -121,7 +136,7 @@ export default {
         builtinPlacements: placements,
         action: trigger,
         showAction,
-        hideAction,
+        hideAction: triggerHideAction || [],
         popupPlacement: placement,
         popupAlign: align,
         popupTransitionName: transitionName,

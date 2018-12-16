@@ -8,8 +8,9 @@ import Icon from '../icon'
 import Tag from '../tag'
 import interopDefault from '../_util/interopDefault'
 import { RangePickerProps } from './interface'
-import { hasProp, getOptionProps, initDefaultProps, mergeProps } from '../_util/props-util'
+import { hasProp, getOptionProps, initDefaultProps, mergeProps, getComponentFromProp, isValidElement } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
+import { cloneElement } from '../_util/vnode'
 function noop () {}
 function getShowDateFromValue (value) {
   const [start, end] = value
@@ -130,6 +131,7 @@ export default {
         formatValue(value[0], this.format),
         formatValue(value[1], this.format),
       ])
+      this.focus()
     },
 
     handleOpenChange (open) {
@@ -174,6 +176,7 @@ export default {
 
       this.setValue(value, true)
       this.$emit('ok', value)
+      this.$emit('openChange', false)
     },
 
     setValue (value, hidePanel) {
@@ -224,17 +227,18 @@ export default {
           </Tag>
         )
       })
-      const rangeNode = (
+      const rangeNode = (operations && operations.length > 0) ? (
         <div class={`${prefixCls}-footer-extra ${prefixCls}-range-quick-selector`} key='range'>
           {operations}
-        </div>
-      )
+        </div>) : null
       return [rangeNode, customFooter]
     },
   },
 
   render () {
     const props = getOptionProps(this)
+    let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+    suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
     const { sValue: value, sShowDate: showDate, sHoverValue: hoverValue, sOpen: open, $listeners, $scopedSlots } = this
     const { calendarChange = noop, ok = noop, focus = noop, blur = noop, panelChange = noop } = $listeners
     const {
@@ -296,7 +300,7 @@ export default {
         ok: ok,
         valueChange: this.handleShowDateChange,
         hoverChange: this.handleHoverChange,
-        panelChange: panelChange,
+        panelChange,
         inputSelect: this.handleCalendarInputSelect,
       },
       class: calendarClassName,
@@ -316,11 +320,23 @@ export default {
 
     const clearIcon = (!props.disabled && props.allowClear && value && (value[0] || value[1])) ? (
       <Icon
-        type='cross-circle'
+        type='close-circle'
         class={`${prefixCls}-picker-clear`}
         onClick={this.clearSelection}
+        theme='filled'
       />
     ) : null
+
+    const inputIcon = suffixIcon && (
+      isValidElement(suffixIcon)
+        ? cloneElement(
+          suffixIcon,
+          {
+            class: `${prefixCls}-picker-icon`,
+          },
+        ) : <span class={`${prefixCls}-picker-icon`}>{suffixIcon}</span>) || (
+      <Icon type='calendar' class={`${prefixCls}-picker-icon`} />
+    )
 
     const input = ({ value: inputValue }) => {
       const start = inputValue[0]
@@ -345,7 +361,7 @@ export default {
             tabIndex={-1}
           />
           {clearIcon}
-          <span class={`${prefixCls}-picker-icon`} />
+          {inputIcon}
         </span>
       )
     }

@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util'
 import VcRate from '../vc-rate'
 import Icon from '../icon'
 
@@ -34,27 +34,19 @@ const Rate = {
     },
   },
   render () {
-    const { character, ...restProps } = getOptionProps(this)
-    const slotCharacter = this.$slots.character
+    const character = getComponentFromProp(this, 'character') || <Icon type='star' theme='filled' />
     const rateProps = {
       props: {
         character,
-        ...restProps,
+        ...getOptionProps(this),
       },
       on: this.$listeners,
       ref: 'refRate',
     }
-    const slotCharacterHtml = slotCharacter !== undefined ? (
-      <template slot='character'>{slotCharacter}</template>
-    ) : <Icon slot='character' type='star' />
     return (
       <VcRate
         {...rateProps}
-      >
-        {
-          character === undefined ? slotCharacterHtml : null
-        }
-      </VcRate>
+      />
     )
   },
 }

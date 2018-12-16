@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 import classNames from 'classnames'
 import KeyCode from '../../_util/KeyCode'
-import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util'
+import { initDefaultProps, hasProp, getOptionProps, getComponentFromProp } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
 import { getOffsetLeft } from './util'
 import Star from './Star'
@@ -169,22 +169,22 @@ export default {
       allowHalf,
       prefixCls,
       disabled,
-      character,
       tabIndex,
     } = getOptionProps(this)
     const { sValue, hoverValue, focused } = this
     const stars = []
     const disabledClass = disabled ? `${prefixCls}-disabled` : ''
-    const slotCharacter = this.$slots.character
+    const character = getComponentFromProp(this, 'character')
     for (let index = 0; index < count; index++) {
       const starProps = {
         props: {
           index,
+          count,
           disabled,
           prefixCls: `${prefixCls}-star`,
           allowHalf,
           value: hoverValue === undefined ? sValue : hoverValue,
-          character: slotCharacter === undefined ? character : undefined,
+          character,
           focused,
         },
         on: {
@@ -197,11 +197,7 @@ export default {
       stars.push(
         <Star
           {...starProps}
-        >
-          {
-            slotCharacter !== undefined ? (<template slot='character'>{slotCharacter}</template>) : null
-          }
-        </Star>
+        />
       )
     }
     return (
@@ -213,6 +209,7 @@ export default {
         onBlur={disabled ? noop : this.onBlur}
         onKeydown={disabled ? noop : this.onKeyDown}
         ref='rateRef'
+        role='radiogroup'
       >
         {stars}
       </ul>

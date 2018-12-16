@@ -6,11 +6,12 @@ const calcPoints = (vertical, marks, dots, step, min, max) => {
     dots ? step > 0 : true,
     '`Slider[step]` should be a positive number in order to make Slider[dots] work.'
   )
-  const points = Object.keys(marks).map(parseFloat)
+  const points = Object.keys(marks).map(parseFloat).sort((a, b) => a - b)
   if (dots) {
-    for (let i = min; i <= max; i = i + step) {
-      if (points.indexOf(i) >= 0) continue
-      points.push(i)
+    for (let i = min; i <= max; i += step) {
+      if (points.indexOf(i) === -1) {
+        points.push(i)
+      }
     }
   }
   return points
@@ -18,7 +19,7 @@ const calcPoints = (vertical, marks, dots, step, min, max) => {
 
 const Steps = {
   functional: true,
-  render (createElement, context) {
+  render (h, context) {
     const { prefixCls, vertical, marks, dots, step, included,
       lowerBound, upperBound, max, min, dotStyle, activeDotStyle } = context.props
     const range = max - min

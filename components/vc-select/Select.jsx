@@ -41,6 +41,8 @@ import {
 import SelectTrigger from './SelectTrigger'
 import { SelectPropTypes } from './PropTypes'
 
+const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY'
+
 function noop () {}
 
 function chaining (...fns) {
@@ -132,43 +134,6 @@ const Select = {
     __propsSymbol__ () {
       Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data))
     },
-    // value (val) {
-    //   let sValue = toArray(val)
-    //   if (this.labelInValue) {
-    //     sValue.forEach(v => {
-    //       v.key = v.key !== undefined ? v.key : v.value
-    //     })
-    //   } else {
-    //     sValue = sValue.map(v => {
-    //       return {
-    //         key: v,
-    //       }
-    //     })
-    //   }
-    //   this.sValue = sValue
-    //   this.initLabelAndTitleMap(sValue)
-    //   sValue.forEach((val) => {
-    //     const key = val.key
-    //     let { label, title } = val
-    //     label = label === undefined ? this.labelMap.get(key) : label
-    //     title = title === undefined ? this.titleMap.get(key) : title
-    //     this.labelMap.set(key, label === undefined ? key : label)
-    //     this.titleMap.set(key, title)
-    //   })
-
-    //   if (this.combobox) {
-    //     this.setState({
-    //       _inputValue: sValue.length ? this.labelMap.get((sValue[0].key)) : '',
-    //     })
-    //   }
-    // },
-    // combobox (val) {
-    //   if (val) {
-    //     this.setState({
-    //       _inputValue: this.sValue.length ? this.labelMap.get((this.sValue[0].key)) : '',
-    //     })
-    //   }
-    // },
   },
   updated () {
     this.$nextTick(() => {
@@ -220,39 +185,7 @@ const Select = {
       }
       return newState
     },
-    // initLabelAndTitleMap (sValue) {
-    //   // 保留已选中的label and title
-    //   const labelArr = []
-    //   const titleArr = []
-    //   const values = sValue || this.sValue
-    //   values.forEach((val) => {
-    //     const key = val.key
-    //     let { label, title } = val
-    //     label = label === undefined ? this.labelMap.get(key) : label
-    //     title = title === undefined ? this.titleMap.get(key) : title
-    //     title = typeof title === 'string' ? title.trim() : title
-    //     labelArr.push([key, label === undefined ? key : label])
-    //     titleArr.push([key, title])
-    //   })
-    //   this.labelMap = new Map(labelArr)
-    //   this.titleMap = new Map(titleArr)
 
-    //   this.updateLabelAndTitleMap(this.$props.children)
-    // },
-    // updateLabelAndTitleMap (children = []) {
-    //   children.forEach(child => {
-    //     if (!child.data || child.data.slot !== undefined) {
-    //       return
-    //     }
-    //     if (getSlotOptions(child).isSelectOptGroup) {
-    //       this.updateLabelAndTitleMap(child.componentOptions.children)
-    //     } else {
-    //       const key = getValuePropValue(child)
-    //       this.titleMap.set(key, getValue(child, 'title'))
-    //       this.labelMap.set(key, this.getLabelFromOption(child))
-    //     }
-    //   })
-    // },
     onInputChange (event) {
       const { tokenSeparators } = this.$props
       const val = event.target.value
@@ -290,21 +223,31 @@ const Select = {
 
     // combobox ignore
     onKeyDown (event) {
-      const props = this.$props
-      if (props.disabled) {
+      const { _open: open } = this.$data
+      const { disabled } = this.$props
+      if (disabled) {
         return
       }
       const keyCode = event.keyCode
-      if (this.$data._open && !this.getInputDOMNode()) {
+      if (open && !this.getInputDOMNode()) {
         this.onInputKeydown(event)
-      } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
+      } else if (
+        keyCode === KeyCode.ENTER ||
+        keyCode === KeyCode.DOWN
+      ) {
         // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
-        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(props)) {
+        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(this.$props)) {
           this.maybeFocus(true)
-        } else {
+        } else if (!open) {
           this.setOpenState(true)
         }
         event.preventDefault()
+      } else if (keyCode === KeyCode.SPACE) {
+        // Not block space if popup is shown
+        if (!open) {
+          this.setOpenState(true)
+          event.preventDefault()
+        }
       }
     },
 
@@ -347,7 +290,7 @@ const Select = {
         return
       }
 
-      if (state._open) {
+      if (this.getRealOpenState(state)) {
         const menu = this.selectTriggerRef.getInnerMenu()
         if (menu && menu.onKeyDown(event, this.handleBackfill)) {
           event.preventDefault()
@@ -371,7 +314,9 @@ const Select = {
         }
         value = value.concat([selectedValue])
       } else {
-        if (lastValue && lastValue === selectedValue && selectedValue !== this.$data._backfillValue) {
+        if (lastValue !== undefined &&
+           lastValue === selectedValue &&
+           selectedValue !== this.$data._backfillValue) {
           this.setOpenState(false, true)
           return
         }
@@ -391,6 +336,10 @@ const Select = {
     },
 
     onMenuDeselect ({ item, domEvent }) {
+      if (domEvent.type === 'keydown' && domEvent.keyCode === KeyCode.ENTER) {
+        this.removeSelected(getValuePropValue(item))
+        return
+      }
       if (domEvent.type === 'click') {
         this.removeSelected(getValuePropValue(item))
       }
@@ -408,76 +357,15 @@ const Select = {
     },
 
     onPlaceholderClick (e) {
-      // if (this.openStatus) {
-      //   e.stopPropagation()
-      // }
       if (this.getInputDOMNode()) {
         this.getInputDOMNode().focus()
       }
     },
 
-    // onOuterFocus (e) {
-    //   if (this.disabled) {
-    //     e.preventDefault()
-    //     return
-    //   }
-    //   this.clearBlurTime()
-    //   if (
-    //     !isMultipleOrTagsOrCombobox(this.$props) &&
-    //   e.target === this.getInputDOMNode()
-    //   ) {
-    //     return
-    //   }
-    //   if (this._focused) {
-    //     return
-    //   }
-    //   this._focused = true
-    //   this.updateFocusClassName()
-    //   this.timeoutFocus()
-    // },
-
     onPopupFocus () {
     // fix ie scrollbar, focus element again
       this.maybeFocus(true, true)
     },
-
-    // onOuterBlur (e) {
-    //   if (this.disabled) {
-    //     e.preventDefault()
-    //     return
-    //   }
-    //   this.blurTimer = setTimeout(() => {
-    //     this._focused = false
-    //     this.updateFocusClassName()
-    //     const props = this.$props
-    //     let { sValue } = this
-    //     const { inputValue } = this
-    //     if (
-    //       isSingleMode(props) &&
-    //     props.showSearch &&
-    //     inputValue &&
-    //     props.defaultActiveFirstOption
-    //     ) {
-    //       const options = this._options || []
-    //       if (options.length) {
-    //         const firstOption = findFirstMenuItem(options)
-    //         if (firstOption) {
-    //           sValue = [
-    //             {
-    //               key: firstOption.key,
-    //               label: this.getLabelFromOption(firstOption),
-    //             },
-    //           ]
-    //           this.fireChange(sValue)
-    //         }
-    //       }
-    //     } else if (isMultipleOrTags(props) && inputValue) {
-    //       this.inputValue = this.getInputDOMNode().value = ''
-    //     }
-    //     this.$emit('blur', this.getVLForOnChange(sValue))
-    //     this.setOpenState(false)
-    //   }, 10)
-    // },
 
     onClearSelection (event) {
       const props = this.$props
@@ -619,42 +507,7 @@ const Select = {
         return this.getOptionBySingleValue(value)
       })
     },
-    // getSingleOptionByValueKey (key) {
-    //   return this.getOptionsFromChildren({
-    //     key,
-    //     label: key,
-    //   }, this.$props.children)
-    // },
 
-    // getOptionsByValue (value) {
-    //   if (value === undefined) {
-    //     return undefined
-    //   }
-    //   if (value.length === 0) {
-    //     return []
-    //   }
-    //   return this.getOptionsFromChildren(value, this.$props.children)
-    // },
-    // getLabelBySingleValue (children = [], value) {
-    //   if (value === undefined) {
-    //     return null
-    //   }
-    //   let label = null
-    //   children.forEach(child => {
-    //     if (!child.data || child.data.slot !== undefined) {
-    //       return
-    //     }
-    //     if (getSlotOptions(child).isSelectOptGroup) {
-    //       const maybe = this.getLabelBySingleValue(child.componentOptions.children, value)
-    //       if (maybe !== null) {
-    //         label = maybe
-    //       }
-    //     } else if (getValuePropValue(child) === value) {
-    //       label = this.getLabelFromOption(child)
-    //     }
-    //   })
-    //   return label
-    // },
     getValueByLabel  (label) {
       if (label === undefined) {
         return null
@@ -668,34 +521,7 @@ const Select = {
       })
       return value
     },
-    // getValueByLabel (children = [], label) {
-    //   if (label === undefined) {
-    //     return null
-    //   }
-    //   let value = null
-    //   children.forEach(child => {
-    //     if (!child.data || child.data.slot !== undefined) {
-    //       return
-    //     }
-    //     if (getSlotOptions(child).isSelectOptGroup) {
-    //       const maybe = this.getValueByLabel(child.componentOptions.children, label)
-    //       if (maybe !== null) {
-    //         value = maybe
-    //       }
-    //     } else if (toArray(this.getLabelFromOption(child)).join('') === label) {
-    //       value = getValuePropValue(child)
-    //     }
-    //   })
-    //   return value
-    // },
 
-    // getLabelFromOption (child) {
-    //   let label = getPropValue(child, this.optionLabelProp)
-    //   if (Array.isArray(label) && label.length === 1 && !label[0].tag) {
-    //     label = label[0].text
-    //   }
-    //   return label
-    // },
     getVLBySingleValue  (value) {
       if (this.$props.labelInValue) {
         return {
@@ -705,9 +531,6 @@ const Select = {
       }
       return value
     },
-    // getLabelFromProps (value) {
-    //   return this.getLabelByValue(this.$props.children || [], value)
-    // },
 
     getVLForOnChange (vls_) {
       let vls = vls_
@@ -729,14 +552,6 @@ const Select = {
       const { label } = this.getOptionInfoBySingleValue(value, optionsInfo)
       return label
     },
-
-    // getLabelByValue (children, value) {
-    //   const label = this.getLabelBySingleValue(children, value)
-    //   if (label === null) {
-    //     return value
-    //   }
-    //   return label
-    // },
 
     getDropdownContainer () {
       if (!this.dropdownContainer) {
@@ -814,20 +629,49 @@ const Select = {
             }
           }
         } else if (isMultipleOrTags(props) && inputValue) {
-          this.$data._inputValue = this.getInputDOMNode().value = ''
+          if (this._mouseDown) {
+            // need update dropmenu when not blur
+            this.setInputValue('')
+          } else {
+            // why not use setState?
+            this.$data._inputValue = this.getInputDOMNode().value = ''
+          }
           value = this.getValueByInput(inputValue)
           if (value !== undefined) {
             this.fireChange(value)
           }
         }
-        this.$emit('blur', this.getVLForOnChange(value))
+        // if click the rest space of Select in multiple mode
+        if (isMultipleOrTags(props) && this._mouseDown) {
+          this.maybeFocus(true, true)
+          this._mouseDown = false
+          return
+        }
         this.setOpenState(false)
+        this.$emit('blur', this.getVLForOnChange(value))
       }, 10)
     },
     inputFocus (e) {
+      if (this.$props.disabled) {
+        e.preventDefault()
+        return
+      }
       this.clearBlurTime()
-      this.clearFocusTime()
-      this.timeoutFocus()
+      if (
+        !isMultipleOrTagsOrCombobox(this.$props) &&
+        e.target === this.getInputDOMNode()
+      ) {
+        return
+      }
+      if (this._focused) {
+        return
+      }
+      this._focused = true
+      this.updateFocusClassName()
+      // only effect multiple or tag mode
+      if (!isMultipleOrTags(this.$props) || !this._mouseDown) {
+        this.timeoutFocus()
+      }
     },
     _getInputElement () {
       const props = this.$props
@@ -882,7 +726,7 @@ const Select = {
           })}
           <span
             {...{ directives: [{
-              name: 'ref',
+              name: 'ant-ref',
               value: this.saveInputMirrorRef,
             }] }}
             // ref='inputMirrorRef'
@@ -918,6 +762,7 @@ const Select = {
         this.maybeFocus(open, needFocus)
         return
       }
+      this.__emit('dropdownVisibleChange', open)
       const nextState = {
         _open: open,
         _backfillValue: undefined,
@@ -971,8 +816,13 @@ const Select = {
       return hasNewValue ? nextValue : undefined
     },
 
-    getRealOpenState  () {
-      let open = this.$data._open
+    getRealOpenState  (state) {
+      const { open: _open } = this.$props
+      if (typeof _open === 'boolean') {
+        return _open
+      }
+
+      let open = (state || this.$data)._open
       const options = this._options || []
       if (isMultipleOrTagsOrCombobox(this.$props) || !this.$props.showSearch) {
         if (open && !options.length) {
@@ -981,29 +831,6 @@ const Select = {
       }
       return open
     },
-    // getValueByInput (string) {
-    //   const { multiple, tokenSeparators, $slots } = this
-    //   let nextValue = this.sValue
-    //   splitBySeparators(string, tokenSeparators).forEach(label => {
-    //     const selectedValue = { key: label, label }
-    //     if (findIndexInValueByLabel(nextValue, label) === -1) {
-    //       if (multiple) {
-    //         const value = this.getValueByLabel($props.children, label)
-    //         if (value) {
-    //           selectedValue.key = value
-    //           nextValue = nextValue.concat(selectedValue)
-    //         }
-    //       } else {
-    //         nextValue = nextValue.concat(selectedValue)
-    //       }
-    //     }
-    //     this.fireSelect({
-    //       key: label,
-    //       label,
-    //     })
-    //   })
-    //   return nextValue
-    // },
 
     focus () {
       if (isSingleMode(this.$props)) {
@@ -1019,6 +846,13 @@ const Select = {
       } else {
         this.getInputDOMNode().blur()
       }
+    },
+    markMouseDown () {
+      this._mouseDown = true
+    },
+
+    markMouseLeave () {
+      this._mouseDown = false
     },
 
     handleBackfill (item) {
@@ -1067,8 +901,8 @@ const Select = {
         this.clearFocusTime()
       }
       this.focusTimer = setTimeout(() => {
-        this._focused = true
-        this.updateFocusClassName()
+        // this._focused = true
+        // this.updateFocusClassName()
         this.$emit('focus')
       }, 10)
     },
@@ -1106,51 +940,12 @@ const Select = {
             input.focus()
             this._focused = true
           }
-        } else {
-          if (activeElement !== this.selectionRef) {
-            this.selectionRef.focus()
-            this._focused = true
-          }
+        } else if (activeElement !== this.selectionRef) {
+          this.selectionRef.focus()
+          this._focused = true
         }
       }
     },
-
-    // addLabelToValue (value_) {
-    //   let value = value_
-    //   if (this.labelInValue) {
-    //     value.forEach(v => {
-    //       v.label = v.label || this.getLabelFromProps(v.key)
-    //     })
-    //   } else {
-    //     value = value.map(v => {
-    //       return {
-    //         key: v,
-    //         label: this.getLabelFromProps(v),
-    //       }
-    //     })
-    //   }
-    //   return value
-    // },
-
-    // addTitleToValue (children = [], values) {
-    //   let nextValues = values
-    //   const keys = values.map(v => v.key)
-    //   children.forEach(child => {
-    //     if (!child) {
-    //       return
-    //     }
-    //     if (getSlotOptions(child).isSelectOptGroup) {
-    //       nextValues = this.addTitleToValue(child.componentOptions.children, nextValues)
-    //     } else {
-    //       const value = getValuePropValue(child)
-    //       const valueIndex = keys.indexOf(value)
-    //       if (valueIndex > -1) {
-    //         nextValues[valueIndex].title = getValue(child, 'title')
-    //       }
-    //     }
-    //   })
-    //   return nextValues
-    // },
 
     removeSelected (selectedKey, e) {
       const props = this.$props
@@ -1208,42 +1003,11 @@ const Select = {
       })
     },
     forcePopupAlign () {
+      if (!this.$data._open) {
+        return
+      }
       this.selectTriggerRef && this.selectTriggerRef.triggerRef.forcePopupAlign()
     },
-    // getOptionsAndOpenStatus () {
-    //   let sOpen = this.sOpen
-    //   if (this.skipAdjustOpen) {
-    //     this.openStatus = sOpen
-    //     return {
-    //       options: this._options,
-    //       open: sOpen,
-    //     }
-    //   }
-    //   const { $props, showSearch } = this
-    //   let options = []
-    //   // If hidden menu due to no options, then it should be calculated again
-    //   if (sOpen || this.hiddenForNoOptions) {
-    //     options = this.renderFilterOptions()
-    //   }
-    //   this._options = options
-
-    //   if (isMultipleOrTagsOrCombobox($props) || !showSearch) {
-    //     if (sOpen && !options.length) {
-    //       sOpen = false
-    //       this.hiddenForNoOptions = true
-    //     }
-    //     // Keep menu open if there are options and hidden for no options before
-    //     if (this.hiddenForNoOptions && options.length) {
-    //       sOpen = true
-    //       this.hiddenForNoOptions = false
-    //     }
-    //   }
-    //   this.openStatus = sOpen
-    //   return {
-    //     options,
-    //     open: sOpen,
-    //   }
-    // },
     renderFilterOptions () {
       const { _inputValue: inputValue } = this.$data
       const { children, tags, filterOption, notFoundContent } = this.$props
@@ -1417,6 +1181,7 @@ const Select = {
         maxTagPlaceholder,
         showSearch,
       } = props
+      const removeIcon = getComponentFromProp(this, 'removeIcon')
       const className = `${prefixCls}-selection__rendered`
       // search input is inside topControlNode in single, multiple & combobox. 2016/04/13
       let innerNode = null
@@ -1427,15 +1192,13 @@ const Select = {
           let opacity = 1
           if (!showSearch) {
             showSelectedValue = true
-          } else {
-            if (open) {
-              showSelectedValue = !inputValue
-              if (showSelectedValue) {
-                opacity = 0.4
-              }
-            } else {
-              showSelectedValue = true
+          } else if (open) {
+            showSelectedValue = !inputValue
+            if (showSelectedValue) {
+              opacity = 0.4
             }
+          } else {
+            showSelectedValue = true
           }
           const singleValue = value[0]
           const { label, title } = this.getOptionInfoBySingleValue(singleValue)
@@ -1486,7 +1249,7 @@ const Select = {
             unselectable='unselectable'
             onMousedown={preventDefaultEvent}
             class={`${prefixCls}-selection__choice ${prefixCls}-selection__choice__disabled`}
-            key={'maxTagPlaceholder'}
+            key='maxTagPlaceholder'
             title={toTitle(content)}
           >
             <div class={`${prefixCls}-selection__choice__content`}>{content}</div>
@@ -1514,7 +1277,7 @@ const Select = {
                 unselectable='unselectable'
                 onMousedown={preventDefaultEvent}
                 class={choiceClassName}
-                key={singleValue}
+                key={singleValue || SELECT_EMPTY_VALUE_KEY}
                 title={toTitle(title)}
               >
                 <div class={`${prefixCls}-selection__choice__content`}>
@@ -1522,11 +1285,13 @@ const Select = {
                 </div>
                 {disabled ? null : (
                   <span
-                    class={`${prefixCls}-selection__choice__remove`}
                     onClick={(event) => {
                       this.removeSelected(singleValue, event)
                     }}
-                  />)}
+                    class={`${prefixCls}-selection__choice__remove`}
+                  >
+                    {removeIcon || <i class={`${prefixCls}-selection__choice__remove-icon`}>×</i>}
+                  </span>)}
               </li>
             )
           })
@@ -1567,7 +1332,7 @@ const Select = {
         <div
           class={className}
           {...{ directives: [{
-            name: 'ref',
+            name: 'ant-ref',
             value: this.saveTopCtrlRef,
           }] }}
           onClick={this.topCtrlContainerClick}
@@ -1585,15 +1350,16 @@ const Select = {
     renderClear () {
       const { prefixCls, allowClear } = this.$props
       const { _value: value, _inputValue: inputValue } = this.$data
+      const clearIcon = getComponentFromProp(this, 'clearIcon')
       const clear = (
         <span
           key='clear'
+          class={`${prefixCls}-selection__clear`}
           onMousedown={preventDefaultEvent}
           style={UNSELECTABLE_STYLE}
           unselectable='unselectable'
-          class={`${prefixCls}-selection__clear`}
           onClick={this.onClearSelection}
-        />
+        >{clearIcon || <i class={`${prefixCls}-selection__clear-icon`}>×</i>}</span>
       )
       if (!allowClear) {
         return null
@@ -1609,16 +1375,7 @@ const Select = {
       }
       return null
     },
-    // rootRefClick (e) {
-    //   // e.stopPropagation()
-    //   if (this._focused) {
-    //     // this.getInputDOMNode().blur()
-    //     this.onOuterBlur()
-    //   } else {
-    //     this.onOuterFocus()
-    //     // this.getInputDOMNode().focus()
-    //   }
-    // },
+
     selectionRefClick (e) {
       e.stopPropagation()
       if (!this.disabled) {
@@ -1655,6 +1412,7 @@ const Select = {
     const multiple = isMultipleOrTags(props)
     const state = this.$data
     const { disabled, prefixCls } = props
+    const inputIcon = getComponentFromProp(this, 'inputIcon')
     const ctrlNode = this.renderTopControlNode()
     const { _open: open, _inputValue: inputValue, _value: value } = this.$data
     if (open) {
@@ -1677,7 +1435,7 @@ const Select = {
       },
       class: `${prefixCls}-selection ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`,
       directives: [{
-        name: 'ref',
+        name: 'ant-ref',
         value: this.saveSelectionRef,
       }],
       key: 'selection',
@@ -1729,18 +1487,22 @@ const Select = {
         onMouseenter={mouseenter}
         onMouseleave={mouseleave}
         showAction={props.showAction}
+        menuItemSelectedIcon={getComponentFromProp(this, 'menuItemSelectedIcon')}
         {...{ directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveSelectTriggerRef,
         }] }}
       >
         <div
           {...{ directives: [{
-            name: 'ref',
+            name: 'ant-ref',
             value: this.saveRootRef,
           }] }}
           style={getStyle(this)}
           class={classnames(rootCls)}
+          onMousedown={this.markMouseDown}
+          onMouseup={this.markMouseLeave}
+          onMouseout={this.markMouseLeave}
           // tabindex='-1'
           // onBlur={this.onOuterBlur}
           // onFocus={this.onOuterFocus}
@@ -1756,7 +1518,7 @@ const Select = {
                 unselectable='unselectable'
                 // onClick={this.onArrowClick}
               >
-                <b />
+                {inputIcon || <i class={`${prefixCls}-arrow-icon`} />}
               </span>)}
           </div>
         </div>

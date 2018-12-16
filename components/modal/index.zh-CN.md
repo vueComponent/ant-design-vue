@@ -49,6 +49,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| autoFocusButton | 指定自动获得焦点的按钮 | null\|string: `ok` `cancel` | `ok` |
 | cancelText | 取消按钮文字 | string | 取消 |
 | centered | 垂直居中展示 Modal | Boolean | `false` |
 | class | 容器类名 | string | - |
@@ -58,15 +59,23 @@
 | keyboard | 是否支持键盘esc关闭 | boolean | true |
 | okText | 确认按钮文字 | string | 确定 |
 | okType | 确认按钮类型 | string | primary |
+| okButtonProps | ok 按钮 props | [ButtonProps](/ant-design-vue/components/button) | - |
+| cancelButtonProps | cancel 按钮 props | [ButtonProps](/ant-design-vue/components/button) | - |
 | title | 标题 | string\|vNode | 无 |
 | width | 宽度 | string\|number | 416 |
 | zIndex | 设置 Modal 的 `z-index` | Number | 1000 |
 | onCancel | 取消回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭 | function | 无 |
 | onOk | 点击确定回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭 | function | 无 |
 
-以上函数调用后，会返回一个引用，可以通过该引用关闭弹窗。
+以上函数调用后，会返回一个引用，可以通过该引用更新和关闭弹窗。
 
 ```jsx
-const ref = Modal.info();
-ref.destroy();
+const modal = Modal.info();
+
+modal.update({
+  title: '修改的标题',
+  content: '修改的内容',
+});
+
+modal.destroy();
 ```

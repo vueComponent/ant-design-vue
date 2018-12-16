@@ -6,7 +6,7 @@
 | -------- | ----------- | ---- | ------------- |
 | form | Decorated by `Form.create()` will be automatically set `this.form` property, so just pass to form. If you use the template syntax, you can use `this.$form.createForm(this, options)` | object | n/a |
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |
-| layout | Define form layout(Support after 2.8) | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
+| layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
 | autoFormCreate(deprecated) | Automate Form.create, Recommended for use under the `template` component, and cannot be used with `Form.create()`. You should use `$form.createForm` to instead it after 1.1.9.  |Function(form)| |
 | options(deprecated) | The `options` corresponding to `Form.create(options)`.  You should use `$form.createForm` to instead it after 1.1.9.  | Object | {} |
 
@@ -67,13 +67,25 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 | isFieldTouched | Check whether a field is touched by `getFieldDecorator`'s `options.trigger` event | (name: string) => boolean |
 | isFieldValidating | Check if the specified field is being validated. | Function(name) |
 | resetFields | Reset the specified fields' value(to `initialValue`) and status. If you don't specify a parameter, all the fields will be reset. | Function(\[names: string\[]]) |
-| setFields | Set the value and error of a field. | Function({ [fieldName]&#x3A; { value: any, errors: [Error] } }) |
-| setFields |  | Function(obj: object) |
+| setFields | Set value and error state of fields | ({<br />&nbsp;&nbsp;\[fieldName\]: {value: any, errors: \[Error\] }<br />}) => void |
 | setFieldsValue | Set the value of a field. | Function({ [fieldName]&#x3A; value } |
-| validateFields | Validate the specified fields and get theirs values and errors. If you don't specify the parameter of fieldNames, you will vaildate all fields. | Function(\[fieldNames: string\[]], [options: object], callback: Function(errors, values)) |
+| validateFields | Validate the specified fields and get theirs values and errors. If you don't specify the parameter of fieldNames, you will validate all fields. | (<br />&nbsp;&nbsp;\[fieldNames: string\[]],<br />&nbsp;&nbsp;\[options: object\],<br />&nbsp;&nbsp;callback(errors, values)<br />) => void |
 | validateFieldsAndScroll | This function is similar to `validateFields`, but after validation, if the target field is not in visible area of form, form will be automatically scrolled to the target field area. | same as `validateFields` |
 
-### this.form.validateFields/validateFieldsAndScroll(\[fieldNames: string\[]], [options: object], callback: Function(errors, values))
+### validateFields/validateFieldsAndScroll
+
+```jsx
+const { form: { validateFields } } = this;
+validateFields((errors, values) => {
+  // ...
+});
+validateFields(['field1', 'field2'], (errors, values) => {
+  // ...
+});
+validateFields(['field1', 'field2'], options, (errors, values) => {
+  // ...
+});
+```
 
 | Method | Description | Type | Default |
 | ------ | ----------- | ---- | ------- |
@@ -125,7 +137,7 @@ To mark the returned fields data in `mapPropsToFields`, [demo](#components-form-
 After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property defined by `valuePropName`) `onChange`(or other property defined by `trigger`) props will be added to form controls，the flow of form data will be handled by Form which will cause:
 
 1. You shouldn't use `onChange` to collect data, but you still can listen to `onChange`(and so on) events.
-2. You can not set value of form control via `value` `defaultValue` prop, and you should set default value with `initialValue` in `getFieldDecorator` instead.
+2. You cannot set value of form control via `value` `defaultValue` prop, and you should set default value with `initialValue` in `getFieldDecorator` instead.
 3. You shouldn't call `v-model` manually, please use `this.form.setFieldsValue` to change value programmatically.
 
 #### Special attention
@@ -139,7 +151,8 @@ After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property
 | -------- | ----------- | ---- | ------------- |
 | id | The unique identifier is required. support [nested fields format](https://github.com/react-component/form/pull/48). | string |  |
 | options.getValueFromEvent | Specify how to get value from event or other onChange arguments | function(..args) | [reference](https://github.com/react-component/form#option-object) |
-| options.initialValue | You can specify initial value, type, optional value of children node. (Note: Because `Form` will test equality with `===` internaly, we recommend to use variable as `initialValue`, instead of literal) |  | n/a |
+| options.getValueProps | Get the component props according to field value. | function(value): any | [reference](https://github.com/react-component/form#option-object)
+| options.initialValue | You can specify initial value, type, optional value of children node. (Note: Because `Form` will test equality with `===` internally, we recommend to use variable as `initialValue`, instead of literal) |  | n/a |
 | options.normalize | Normalize value to form component, [a select-all example](https://codesandbox.io/s/kw4l2vqqmv) | function(value, prevValue, allValues): any | - |
 | options.rules | Includes validation rules. Please refer to "Validation Rules" part for details. | object\[] | n/a |
 | options.trigger | When to collect the value of children node | string | 'change' |
@@ -149,9 +162,7 @@ After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property
 
 ### Form.Item
 
-Note:
-
-- If Form.Item has multiple children that had been decorated by `getFieldDecorator` or `v-decorator`, `help` and `required` and `validateStatus` can't be generated automatically.
+Note: If Form.Item has multiple children that had been decorated by `getFieldDecorator` or `v-decorator`, `help` and `required` and `validateStatus` can't be generated automatically.
 
 | Property | Description | Type | Default Value |
 | -------- | ----------- | ---- | ------------- |

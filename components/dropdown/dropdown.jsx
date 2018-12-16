@@ -1,11 +1,12 @@
 
-import RcDropdown from './src/index'
+import RcDropdown from '../vc-dropdown/src/index'
 import DropdownButton from './dropdown-button'
-// import warning from '../_util/warning'
 import PropTypes from '../_util/vue-types'
 import { cloneElement } from '../_util/vnode'
 import { getOptionProps, getPropsData } from '../_util/props-util'
 import getDropdownProps from './getDropdownProps'
+import Icon from '../icon'
+
 const DropdownProps = getDropdownProps()
 const Dropdown = {
   name: 'ADropdown',
@@ -44,11 +45,19 @@ const Dropdown = {
     // menu should be focusable in dropdown defaultly
     const overlayProps = overlay && getPropsData(overlay)
     const { selectable = false, focusable = true } = overlayProps || {}
+
+    const expandIcon = (
+      <span class={`${prefixCls}-menu-submenu-arrow`}>
+        <Icon type='right' class={`${prefixCls}-menu-submenu-arrow-icon`} />
+      </span>
+    )
+
     const fixedModeOverlay = overlay && overlay.componentOptions ? cloneElement(overlay, {
       props: {
         mode: 'vertical',
         selectable,
         focusable,
+        expandIcon,
       },
     }) : overlay
     const triggerActions = disabled ? [] : trigger

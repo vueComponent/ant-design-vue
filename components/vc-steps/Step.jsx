@@ -14,7 +14,7 @@ export default {
     itemWidth: PropTypes.string,
     status: PropTypes.string,
     iconPrefix: PropTypes.string,
-    icon: PropTypes.node,
+    icon: PropTypes.any,
     adjustMarginRight: PropTypes.string,
     stepNumber: PropTypes.string,
     description: PropTypes.any,
@@ -24,12 +24,16 @@ export default {
       PropTypes.func,
     ]),
     tailContent: PropTypes.any,
+    icons: PropTypes.shape({
+      finish: PropTypes.any,
+      error: PropTypes.any,
+    }).loose,
   },
   methods: {
     renderIconNode () {
       const {
         prefixCls, stepNumber, status,
-        iconPrefix,
+        iconPrefix, icons,
       } = getOptionProps(this)
       let progressDot = this.progressDot
       if (progressDot === undefined) {
@@ -43,8 +47,8 @@ export default {
         [`${prefixCls}-icon`]: true,
         [`${iconPrefix}icon`]: true,
         [`${iconPrefix}icon-${icon}`]: icon && isString(icon),
-        [`${iconPrefix}icon-check`]: !icon && status === 'finish',
-        [`${iconPrefix}icon-cross`]: !icon && status === 'error',
+        [`${iconPrefix}icon-check`]: !icon && status === 'finish' && (icons && !icons.finish),
+        [`${iconPrefix}icon-close`]: !icon && status === 'error' && (icons && !icons.error),
       }
       const iconDot = <span class={`${prefixCls}-icon-dot`}></span>
       // `progressDot` enjoy the highest priority
@@ -60,6 +64,10 @@ export default {
         }
       } else if (icon && !isString(icon)) {
         iconNode = <span class={`${prefixCls}-icon`}>{icon}</span>
+      } else if (icons && icons.finish && status === 'finish') {
+        iconNode = <span class={`${prefixCls}-icon`}>{icons.finish}</span>
+      } else if (icons && icons.error && status === 'error') {
+        iconNode = <span class={`${prefixCls}-icon`}>{icons.error}</span>
       } else if (icon || status === 'finish' || status === 'error') {
         iconNode = <span class={iconClassName} />
       } else {
@@ -71,7 +79,7 @@ export default {
   render () {
     const {
       prefixCls, itemWidth,
-      status = 'wait', icon, tailContent,
+      status = 'wait', tailContent,
       adjustMarginRight,
     } = getOptionProps(this)
 
@@ -81,7 +89,7 @@ export default {
     const classString = {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-${status}`]: true,
-      [`${prefixCls}-item-custom`]: icon,
+      [`${prefixCls}-item-custom`]: getComponentFromProp(this, 'icon'),
     }
     const stepProps = {
       class: classString,

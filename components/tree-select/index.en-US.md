@@ -30,7 +30,7 @@
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |
-
+| suffixIcon | The custom suffix icon | VNode \| slot | - |
 
 ### Events
 | Events Name | Description | Arguments |

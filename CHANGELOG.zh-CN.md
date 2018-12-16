@@ -2,6 +2,40 @@
 
 ---
 
+## 1.2.0
+`2018-12-16`
+### 与antd 3.10.x同步
+
+- 🔥🔥🔥 使用了 svg 图标替换了原先的 font 图标，从而带来了以下优势：
+  可以离线化使用，不需要从支付宝 cdn 下载字体文件，图标不会因为网络问题呈现方块，也无需字体文件本地部署。
+  在低端设备上 svg 有更好的清晰度。
+  支持多色图标。
+  对于内建图标的更换可以提供更多 API，而不需要进行样式覆盖。
+  - 🌟 新增 `theme` 属性，可以设置图标的主题风格。
+  - 🌟 新增 `component` 属性，可以外部传入一个组件来自定义控制渲染结果。
+  - 🌟 新增 `twoToneColor` 属性，可以控制双色图标的主题色。
+  - 🌟 新增静态方法 `Icon.getTowToneColor()` 和 `Icon.setTwoToneColor(...)`，可以全局性的获取和设置所有双色图标的主题色。
+  - 🌟 新增静态方法 `Icon.createFromIconfontCN({...})`，可以更加方便地使用 [`iconfont.cn`](http://iconfont.cn/) 上托管的图标。
+- 🔥 增加了一个新组件`Skeleton`
+- 🔥 Menu 在 `horizontal` 模式下会自动收起来适应宽度。
+- 🔥 Drawer 的 `placement` 支持 `top` 和 `bottom`，可以适应更多场景。
+- 🌟 以下组件均新增了 `suffixIcon` 属性，用于设置输入框后面的图标，具体用法可以参考文档。
+  - Cascader
+  - DatePicker
+  - Select
+  - TreeSelect
+  - TimePicker
+- 🌟 新增 Modal.open 方法，用于可自定义图标的快捷对话框。
+- 🌟 Modal.info 增加 `getContainer` 的配置。
+- 🌟 合并优化了 RangePicker 的日历页脚 UI。
+- 🌟 Anchor 组件增加 `click` 事件。
+- 🌟 Tab 组件增加 `renderTabBar` 属性。
+- 🌟 Input 组件增加 `select` 方法。
+- 🌟 Steps 增加 `initial` 属性。
+- 🌟 Upload 组件新增 `openFileDialogOnClick` 属性，用于设置点击组件时是否打开上传对话框。
+- 🌟 InputNumber 组件新增 `decimalSeparator` 属性，用于设置自定义的小数点。
+- 🐞 修复众多隐蔽暂未提issue的bug，再此不在一一列出
+
 ## 1.1.10
 
 `2018-12-7`

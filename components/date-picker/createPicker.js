@@ -7,7 +7,8 @@ import classNames from 'classnames'
 import Icon from '../icon'
 import interopDefault from '../_util/interopDefault'
 import BaseMixin from '../_util/BaseMixin'
-import { hasProp, getOptionProps, initDefaultProps, mergeProps } from '../_util/props-util'
+import { hasProp, getOptionProps, initDefaultProps, mergeProps, getComponentFromProp, isValidElement } from '../_util/props-util'
+import { cloneElement } from '../_util/vnode'
 
 // export const PickerProps = {
 //   value?: moment.Moment;
@@ -44,14 +45,26 @@ export default function createPicker (TheCalendar, props) {
       return {
         sValue: value,
         showDate: value,
+        _open: !!this.open,
       }
     },
     watch: {
+      open (val) {
+        const props = getOptionProps(this)
+        const state = {}
+        state._open = val
+        if ('value' in props && !val && props.value !== this.showDate) {
+          state.showDate = props.value
+        }
+        this.setState(state)
+      },
       value (val) {
-        this.setState({
-          sValue: val,
-          showDate: val,
-        })
+        const state = {}
+        state.sValue = val
+        if (val !== this.sValue) {
+          state.showDate = val
+        }
+        this.setState(state)
       },
     },
     methods: {
@@ -79,12 +92,19 @@ export default function createPicker (TheCalendar, props) {
           })
         }
         this.$emit('change', value, (value && value.format(this.format)) || '')
+        this.focus()
       },
 
       handleCalendarChange (value) {
         this.setState({ showDate: value })
       },
-
+      handleOpenChange (open) {
+        const props = getOptionProps(this)
+        if (!('open' in props)) {
+          this.setState({ _open: open })
+        }
+        this.$emit('openChange', open)
+      },
       focus () {
         this.$refs.input.focus()
       },
@@ -101,7 +121,10 @@ export default function createPicker (TheCalendar, props) {
     },
 
     render () {
-      const { sValue: value, showDate, $listeners, $scopedSlots } = this
+      const { $listeners, $scopedSlots } = this
+      const { sValue: value, showDate, _open: open } = this.$data
+      let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
       const { panelChange = noop, focus = noop, blur = noop, ok = noop } = $listeners
       const props = getOptionProps(this)
       const { prefixCls, locale, localeCode } = props
@@ -123,9 +146,11 @@ export default function createPicker (TheCalendar, props) {
 
       const pickerProps = { props: {}, on: {}}
       const calendarProps = { props: {}, on: {}}
+      const pickerStyle = {}
       if (props.showTime) {
         // fix https://github.com/ant-design/ant-design/issues/1902
         calendarProps.on.select = this.handleChange
+        pickerStyle.width = '195px'
       } else {
         pickerProps.on.change = this.handleChange
       }
@@ -150,7 +175,7 @@ export default function createPicker (TheCalendar, props) {
         },
         on: {
           ok: ok,
-          panelChange: panelChange,
+          panelChange,
           change: this.handleCalendarChange,
         },
         class: calendarClassName,
@@ -164,11 +189,23 @@ export default function createPicker (TheCalendar, props) {
 
       const clearIcon = (!props.disabled && props.allowClear && value) ? (
         <Icon
-          type='cross-circle'
+          type='close-circle'
           class={`${prefixCls}-picker-clear`}
           onClick={this.clearSelection}
+          theme='filled'
         />
       ) : null
+
+      const inputIcon = suffixIcon && (
+        isValidElement(suffixIcon)
+          ? cloneElement(
+            suffixIcon,
+            {
+              class: `${prefixCls}-picker-icon`,
+            },
+          ) : <span class={`${prefixCls}-picker-icon`}>{suffixIcon}</span>) || (
+        <Icon type='calendar' class={`${prefixCls}-picker-icon`} />
+      )
 
       const input = ({ value: inputValue }) => (
         <div>
@@ -181,9 +218,10 @@ export default function createPicker (TheCalendar, props) {
             value={(inputValue && inputValue.format(props.format)) || ''}
             placeholder={placeholder}
             class={props.pickerInputClass}
+            tabIndex={props.tabIndex}
           />
           {clearIcon}
-          <span class={`${prefixCls}-picker-icon`} />
+          {inputIcon}
         </div>
       )
       const vcDatePickerProps = {
@@ -197,12 +235,15 @@ export default function createPicker (TheCalendar, props) {
         on: {
           ...omit($listeners, 'change'),
           ...pickerProps.on,
+          open,
+          onOpenChange: this.handleOpenChange,
         },
         style: props.popupStyle,
       }
       return (
         <span
           class={props.pickerClass}
+          style={pickerStyle}
           // tabIndex={props.disabled ? -1 : 0}
           // onFocus={focus}
           // onBlur={blur}

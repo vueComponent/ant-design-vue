@@ -147,8 +147,8 @@ const Affix = {
     },
 
     updatePosition (e) {
-      let { offsetTop } = this
       const { offsetBottom, offset, target = getDefaultTarget } = this
+      let { offsetTop } = this
       const targetNode = target()
 
       // Backwards support

@@ -1,6 +1,6 @@
 
 import PropTypes from '../_util/vue-types'
-import { getStyle } from '../_util/props-util'
+import { getStyle, getComponentFromProp } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 
 export default {
@@ -10,6 +10,7 @@ export default {
     closable: PropTypes.bool,
     prefixCls: PropTypes.string,
     update: PropTypes.bool,
+    closeIcon: PropTypes.any,
   },
 
   mounted () {
@@ -65,6 +66,7 @@ export default {
       [`${componentClass}-closable`]: closable,
     }
     const style = getStyle(this)
+    const closeIcon = getComponentFromProp(this, 'closeIcon')
     return (
       <div class={className} style={style || { right: '50%' } } onMouseenter={clearCloseTimer}
         onMouseleave={startCloseTimer}
@@ -72,7 +74,7 @@ export default {
         <div class={`${componentClass}-content`}>{$slots.default}</div>
         {closable
           ? <a tabIndex='0' onClick={close} class={`${componentClass}-close`}>
-            <span class={`${componentClass}-close-x`}></span>
+            {closeIcon || <span class={`${componentClass}-close-x`}/>}
           </a> : null
         }
       </div>

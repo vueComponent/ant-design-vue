@@ -1,7 +1,7 @@
 
 import PropTypes from '../../../_util/vue-types'
 import BaseMixin from '../../../_util/BaseMixin'
-import { getOptionProps } from '../../../_util/props-util'
+import { getOptionProps, getComponentFromProp } from '../../../_util/props-util'
 import { cloneElement } from '../../../_util/vnode'
 import CalendarHeader from '../calendar/CalendarHeader'
 import DateTable from '../date/DateTable'
@@ -32,6 +32,7 @@ const CalendarPart = {
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
     dateRender: PropTypes.func,
+    clearIcon: PropTypes.any,
   },
   render () {
     const { $props: props, $listeners = {}} = this
@@ -48,6 +49,7 @@ const CalendarPart = {
       enablePrev, enableNext, disabledMonth,
       showDateInput, dateRender, showWeekNumber,
     } = props
+    const clearIcon = getComponentFromProp(this, 'clearIcon')
     const { inputSelect = noop,
       valueChange = noop,
       panelChange = noop,
@@ -99,6 +101,7 @@ const CalendarPart = {
         showClear={false}
         selectedValue={selectedValue[index]}
         onChange={inputSelect}
+        clearIcon={clearIcon}
       />
     const headerProps = {
       props: {

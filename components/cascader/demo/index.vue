@@ -10,6 +10,7 @@ import Lazy from './lazy'
 import Search from './search'
 import Size from './size'
 import FieldsName from './fields-name'
+import Suffix from './suffix'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -33,6 +34,7 @@ const md = {
 export default {
   category: 'Components',
   type: 'Data Entry',
+  zhType: '数据录入',
   title: 'Cascader',
   subtitle: '级联选择',
   render () {
@@ -50,6 +52,7 @@ export default {
         <Search/>
         <Size/>
         <FieldsName />
+        <Suffix />
         <api>
           <CN slot='cn' />
           <US/>

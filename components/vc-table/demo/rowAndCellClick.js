@@ -80,10 +80,10 @@ export default {
       customRender: (text) => (
         <span>{text} (Trigger Cell Click)</span>
       ),
-      customCell: (record) => ({
+      customCell: (record, index) => ({
         on: {
           click (e) {
-            console.log('Click cell', record, e.target)
+            console.log('Click cell', ` row ${index}`, record, e.target)
           },
         },
       }),

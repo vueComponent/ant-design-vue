@@ -124,7 +124,6 @@
         "minimist": "^1.2.0",
         "mkdirp": "^0.5.1",
         "mockdate": "^2.0.2",
-        "moment-timezone": "^0.5.17",
         "nprogress": "^0.2.0",
         "postcss": "^6.0.20",
         "postcss-loader": "^2.1.2",
@@ -143,6 +142,7 @@
         "vue": "^2.5.16",
         "vue-antd-md-loader": "^1.0.3",
         "vue-clipboard2": "0.0.8",
+        "vue-i18n": "^8.3.2",
         "vue-infinite-scroll": "^2.0.2",
         "vue-jest": "^2.5.0",
         "vue-loader": "^13.0.5",
@@ -156,6 +156,8 @@
         "webpack-merge": "^4.1.1"
     },
     "dependencies": {
+        "@ant-design/icons": "^1.1.15",
+        "@ant-design/icons-vue": "^1.0.0",
         "add-dom-event-listener": "^1.0.2",
         "array-tree-filter": "^2.1.0",
         "async-validator": "^1.8.2",
@@ -172,6 +174,7 @@
         "json2mq": "^0.2.0",
         "lodash": "^4.17.5",
         "moment": "^2.21.0",
+        "mutationobserver-shim": "^0.3.2",
         "omit.js": "^1.0.0",
         "raf": "^3.4.0",
         "resize-observer-polyfill": "^1.5.0",

@@ -122,9 +122,7 @@ const AutoComplete = {
       },
       class: cls,
       ref: 'select',
-      on: {
-        ...$listeners,
-      },
+      on: $listeners,
     }
     return (
       <Select

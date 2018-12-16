@@ -29,6 +29,7 @@ export default {
   category: 'Components',
   subtitle: '警告提示',
   type: 'Feedback',
+  zhType: '反馈',
   title: 'Alert',
   render () {
     return (

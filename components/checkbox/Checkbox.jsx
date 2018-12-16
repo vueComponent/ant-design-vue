@@ -55,7 +55,10 @@ export default {
     } = props
     const checkboxProps = { props: { ...restProps, prefixCls }, on: restListeners, attrs: getAttrs(this) }
     if (checkboxGroup) {
-      checkboxProps.on.change = () => checkboxGroup.toggleOption({ label: children, value: props.value })
+      checkboxProps.on.change = (...args) => {
+        this.$emit('change', ...args)
+        checkboxGroup.toggleOption({ label: children, value: props.value })
+      }
       checkboxProps.props.checked = checkboxGroup.sValue.indexOf(props.value) !== -1
       checkboxProps.props.disabled = props.disabled || checkboxGroup.disabled
     } else {
@@ -63,6 +66,8 @@ export default {
     }
     const classString = classNames({
       [`${prefixCls}-wrapper`]: true,
+      [`${prefixCls}-wrapper-checked`]: checkboxProps.props.checked,
+      [`${prefixCls}-wrapper-disabled`]: checkboxProps.props.disabled,
     })
     const checkboxClass = classNames({
       [`${prefixCls}-indeterminate`]: indeterminate,
@@ -78,7 +83,7 @@ export default {
           class={checkboxClass}
           ref='vcCheckbox'
         />
-        {children !== undefined ? <span>{children}</span> : null}
+        {children !== undefined && <span>{children}</span>}
       </label>
     )
   },

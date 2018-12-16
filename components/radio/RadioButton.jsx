@@ -1,5 +1,4 @@
 import Radio from './Radio'
-import Wave from '../_util/wave'
 import { getOptionProps } from '../_util/props-util'
 
 export default {
@@ -22,10 +21,6 @@ export default {
       radioProps.props.checked = props.value === this.radioGroupContext.stateValue
       radioProps.props.disabled = props.disabled || this.radioGroupContext.disabled
     }
-    return (
-      <Wave>
-        <Radio {...radioProps}>{this.$slots.default}</Radio>
-      </Wave>
-    )
+    return <Radio {...radioProps}>{this.$slots.default}</Radio>
   },
 }

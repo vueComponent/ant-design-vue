@@ -1,6 +1,7 @@
 
 import PropTypes from '../../../_util/vue-types'
 import BaseMixin from '../../../_util/BaseMixin'
+import { getComponentFromProp } from '../../../_util/props-util'
 import moment from 'moment'
 
 const DateInput = {
@@ -18,6 +19,7 @@ const DateInput = {
     placeholder: PropTypes.string,
     // onSelect: PropTypes.func,
     selectedValue: PropTypes.object,
+    clearIcon: PropTypes.any,
   },
 
   data () {
@@ -38,7 +40,8 @@ const DateInput = {
 
   updated () {
     this.$nextTick(() => {
-      if (!this.invalid) {
+      if (!this.invalid &&
+        !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
         this.$refs.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd)
       }
     })
@@ -121,6 +124,7 @@ const DateInput = {
 
   render () {
     const { invalid, str, locale, prefixCls, placeholder, disabled, showClear } = this
+    const clearIcon = getComponentFromProp(this, 'clearIcon')
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : ''
     return (<div class={`${prefixCls}-input-wrap`}>
       <div class={`${prefixCls}-date-input-wrap`}>
@@ -134,11 +138,12 @@ const DateInput = {
         />
       </div>
       {showClear ? <a
-        class={`${prefixCls}-clear-btn`}
         role='button'
         title={locale.clear}
         onClick={this.onClear}
-      /> : null}
+      >
+        {clearIcon || <span class={`${prefixCls}-clear-btn`}/>}
+      </a> : null}
     </div>)
   },
 }

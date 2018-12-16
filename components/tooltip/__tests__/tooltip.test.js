@@ -1,7 +1,6 @@
 import { asyncExpect } from '@/tests/utils'
 import { mount } from '@vue/test-utils'
 import Tooltip from '..'
-import Button from '../../button'
 
 describe('Tooltip', () => {
   it('check `onVisibleChange` arguments', async () => {
@@ -153,21 +152,6 @@ describe('Tooltip', () => {
   //   )
   //   expect(wrapper1.find('span').at(0).element.style.display).toBe('inline-block')
   //   expect(wrapper2.find('span').at(0).element.style.display).toBe('block')
-  // })
-
-  // it('should not wrap span when trigger is not hover', () => {
-  //   const wrapper = mount(
-  //     <Tooltip
-  //       title='xxxxx'
-  //       trigger='click'
-  //       mouseEnterDelay={0}
-  //       mouseLeaveDelay={0}
-  //     >
-  //       <button disabled>Hello world!</button>
-  //     </Tooltip>
-  //   )
-
-  //   expect(wrapper.find('span')).toHaveLength(0)
   // })
 
   // it('should works for arrowPointAtCenter', () => {

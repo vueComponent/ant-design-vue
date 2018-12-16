@@ -5,7 +5,7 @@ import Icon from '../icon'
 import inputProps from './inputProps'
 import Button from '../button'
 import { cloneElement } from '../_util/vnode'
-import { getOptionProps, getComponentFromProp } from '../_util/props-util'
+import { getOptionProps, getComponentFromProp, isValidElement } from '../_util/props-util'
 import PropTypes from '../_util/vue-types'
 
 export default {
@@ -72,11 +72,20 @@ export default {
   },
   render () {
     const { prefixCls, inputPrefixCls, size,
-      suffix, ...others
+      ...others
     } = getOptionProps(this)
+    const suffix = getComponentFromProp(this, 'suffix')
     const enterButton = getComponentFromProp(this, 'enterButton')
     const buttonOrIcon = this.getButtonOrIcon()
-    const searchSuffix = suffix ? [suffix, buttonOrIcon] : buttonOrIcon
+    let searchSuffix = suffix ? [suffix, buttonOrIcon] : buttonOrIcon
+    if (Array.isArray(searchSuffix)) {
+      searchSuffix = searchSuffix.map((item, index) => {
+        if (!isValidElement(item) || item.key) {
+          return item
+        }
+        return cloneElement(item, { key: index })
+      })
+    }
     const inputClassName = classNames(prefixCls, {
       [`${prefixCls}-enter-button`]: !!enterButton,
       [`${prefixCls}-${size}`]: !!size,

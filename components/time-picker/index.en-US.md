@@ -2,7 +2,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| addon | some addon to timepicker panel bottom | slot | - |
+| addon | some addon to timepicker panel bottom | slot \| slot-scope | - |
 | allowEmpty | allow clearing text | boolean | true |
 | autoFocus | get focus when component mounted | boolean | false |
 | clearText | clear tooltip of icon | string | clear |
@@ -22,6 +22,7 @@
 | placeholder | display when there's no value | string | "Select a time" |
 | popupClassName | className of panel | string | '' |
 | secondStep | interval between seconds in picker | number | 1 |
+| suffixIcon | The custom suffix icon | string \| VNode \| slot | - |
 | use12Hours | display as 12 hours format, with default format `h:mm:ss a` | boolean | false |
 | value(v-model) | to set time | [moment](http://momentjs.com/) | - |
 

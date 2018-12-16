@@ -4,6 +4,7 @@ import BaseMixin from '../_util/BaseMixin'
 import Header from './Header'
 import Combobox from './Combobox'
 import moment from 'moment'
+import { getComponentFromProp } from '../_util/props-util'
 
 function noop () {
 }
@@ -48,8 +49,10 @@ const Panel = {
     hourStep: PropTypes.number,
     minuteStep: PropTypes.number,
     secondStep: PropTypes.number,
+    addon: PropTypes.func.def(noop),
     focusOnOpen: PropTypes.bool,
     // onKeydown: PropTypes.func,
+    clearIcon: PropTypes.any,
   },
   data () {
     return {
@@ -110,12 +113,13 @@ const Panel = {
 
   render () {
     const {
-      prefixCls, placeholder, disabledMinutes,
+      prefixCls, placeholder, disabledMinutes, addon,
       disabledSeconds, hideDisabledOptions, allowEmpty, showHour, showMinute, showSecond,
       format, defaultOpenValue, clearText, use12Hours,
       focusOnOpen, hourStep, minuteStep, secondStep, inputReadOnly,
       sValue, currentSelectPanel, showStr, $listeners = {},
     } = this
+    const clearIcon = getComponentFromProp(this, 'clearIcon')
     const { esc = noop, clear = noop, keydown = noop } = $listeners
 
     const disabledHourOptions = this.disabledHours2()
@@ -156,6 +160,7 @@ const Panel = {
           onKeydown={keydown}
           inputReadOnly={inputReadOnly}
           showStr={showStr}
+          clearIcon={clearIcon}
         />
         <Combobox
           prefixCls={prefixCls}
@@ -176,7 +181,7 @@ const Panel = {
           use12Hours={use12Hours}
           isAM={this.isAM()}
         />
-        {this.$slots.default}
+        {addon(this)}
       </div>
     )
   },

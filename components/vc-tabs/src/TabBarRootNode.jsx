@@ -50,7 +50,7 @@ export default {
         tabIndex='0'
         onKeydown={onKeyDown}
         {...{ directives: [{
-          name: 'ref',
+          name: 'ant-ref',
           value: this.saveRef('root'),
         }] }}
       >

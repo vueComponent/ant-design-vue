@@ -53,6 +53,9 @@ const Menu = {
   created () {
     this.preProps = { ...this.$props }
   },
+  updated () {
+    this.propsUpdating = false
+  },
   watch: {
     mode (val, oldVal) {
       if (oldVal === 'inline' && val !== 'inline') {
@@ -63,59 +66,11 @@ const Menu = {
       this.setState({ sOpenKeys: val })
     },
     inlineCollapsed (val) {
-      if (!hasProp(this, 'openKeys')) {
-        if (val) {
-          this.switchingModeFromInline = true
-          this.inlineOpenKeys = this.sOpenKeys
-          this.setState({ sOpenKeys: [] })
-        } else {
-          this.setState({ sOpenKeys: this.inlineOpenKeys })
-          this.inlineOpenKeys = []
-        }
-      }
+      this.collapsedChange(val)
     },
-    // '$props': {
-    //   handler: function (nextProps) {
-    //     const { preProps, sOpenKeys } = this
-    //     if (preProps.mode === 'inline' && nextProps.mode !== 'inline') {
-    //       this.switchingModeFromInline = true
-    //     }
-    //     if (hasProp(this, 'openKeys')) {
-    //       this.setState({ sOpenKeys: nextProps.openKeys })
-    //       this.preProps = { ...nextProps }
-    //       return
-    //     }
-    //     if (nextProps.inlineCollapsed && !preProps.inlineCollapsed) {
-    //       this.switchingModeFromInline = true
-    //       this.inlineOpenKeys = sOpenKeys
-    //       this.setState({ sOpenKeys: [] })
-    //     }
-
-    //     if (!nextProps.inlineCollapsed && preProps.inlineCollapsed) {
-    //        this.setState({ sOpenKeys: this.inlineOpenKeys })
-    //        this.inlineOpenKeys = []
-    //     }
-    //     this.preProps = { ...nextProps }
-    //   },
-    //   deep: true,
-    // },
     'layoutSiderContext.sCollapsed': function (val) {
-      const { openKeys, sOpenKeys = [], prefixCls } = this
-      if (hasProp(this, 'openKeys')) {
-        this.setState({ sOpenKeys: openKeys })
-        return
-      }
-      if (val) {
-        this.switchingModeFromInline =
-        !!sOpenKeys.length && !!this.$el.querySelectorAll(`.${prefixCls}-submenu-open`).length
-        this.inlineOpenKeys = sOpenKeys
-        this.setState({ sOpenKeys: [] })
-      } else {
-        this.setState({ sOpenKeys: this.inlineOpenKeys })
-        this.inlineOpenKeys = []
-      }
+      this.collapsedChange(val)
     },
-
   },
   data () {
     const props = this.$props
@@ -138,6 +93,20 @@ const Menu = {
     }
   },
   methods: {
+    collapsedChange (val) {
+      if (this.propsUpdating) { return }
+      this.propsUpdating = true
+      if (!hasProp(this, 'openKeys')) {
+        if (val) {
+          this.switchingModeFromInline = true
+          this.inlineOpenKeys = this.sOpenKeys
+          this.setState({ sOpenKeys: [] })
+        } else {
+          this.setState({ sOpenKeys: this.inlineOpenKeys })
+          this.inlineOpenKeys = []
+        }
+      }
+    },
     restoreModeVerticalFromInline () {
       if (this.switchingModeFromInline) {
         this.switchingModeFromInline = false

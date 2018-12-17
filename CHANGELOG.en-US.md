@@ -2,6 +2,12 @@
 
 ---
 
+## 1.2.1
+`2018-12-17`
+
+- 🐞 Fix `Menu` flashing problem when scaling under `Layout`
+- 🐞 Fix `Icon` report Warning problem
+
 ## 1.2.0
 `2018-12-16`
 ### Synchronize with antd 3.10.x

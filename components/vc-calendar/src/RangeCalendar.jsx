@@ -761,7 +761,6 @@ const RangeCalendar = {
             <CalendarPart {...rightPartProps}/>
           </div>
           <div class={cls}>
-            {props.renderFooter()}
             {(showToday || props.timePicker || showOkButton || extraFooter) ? (
               <div class={`${prefixCls}-footer-btn`}>
                 {extraFooter}

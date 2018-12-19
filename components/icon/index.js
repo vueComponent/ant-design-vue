@@ -123,8 +123,9 @@ const Icon = {
         />
       )
     }
+    // functional component not support nativeOn，https://github.com/vuejs/vue/issues/7526
     const iProps = {
-      ...data, on: listeners, class: classString, staticClass: '',
+      ...data, on: { ...listeners, ...data.nativeOn }, class: classString, staticClass: '',
     }
     return (
       <i {...iProps}>

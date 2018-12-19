@@ -105,15 +105,12 @@ export default {
         if (listType === 'picture-card' && file.status === 'uploading') {
           icon = <div class={`${prefixCls}-list-item-uploading-text`}>{locale.uploading}</div>
         } else if (!file.thumbUrl && !file.url) {
-          icon = <Icon class={`${prefixCls}-list-item-thumbnail`} type='picture' />
+          icon = <Icon class={`${prefixCls}-list-item-thumbnail`} type='picture' theme="twoTone"/>
         } else {
           const thumbnail = isImageUrl(file) ? (
             <img src={file.thumbUrl || file.url} alt={file.name} />
           ) : (
-            <Icon
-              type='file'
-              style={{ fontSize: '48px', color: 'rgba(0,0,0,0.5)' }}
-            />
+            <Icon type="file" class={`${prefixCls}-list-item-icon`} theme="twoTone" />
           )
           icon = (
             <a

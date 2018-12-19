@@ -10,6 +10,8 @@ import { initDefaultProps, getComponentFromProp, filterEmpty, getSlotOptions, is
 import getTransitionProps from '../_util/getTransitionProps'
 import BaseMixin from '../_util/BaseMixin'
 import { cloneElement, cloneVNodes } from '../_util/vnode'
+import Icon from '../icon'
+
 export const FormItemProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -204,9 +206,33 @@ export default {
           'is-validating': validateStatus === 'validating',
         })
       }
+      let iconType = ''
+      switch (validateStatus) {
+        case 'success':
+          iconType = 'check-circle'
+          break
+        case 'warning':
+          iconType = 'exclamation-circle'
+          break
+        case 'error':
+          iconType = 'close-circle'
+          break
+        case 'validating':
+          iconType = 'loading'
+          break
+        default:
+          iconType = ''
+          break
+      }
+      const icon = (props.hasFeedback && iconType)
+        ? <span class={`${props.prefixCls}-item-children-icon`}>
+          <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
+        </span> : null
       return (
         <div class={classes}>
-          <span class={`${props.prefixCls}-item-children`}>{c1}</span>
+          <span class={`${props.prefixCls}-item-children`}>
+            {c1}{icon}
+          </span>
           {c2}{c3}
         </div>
       )

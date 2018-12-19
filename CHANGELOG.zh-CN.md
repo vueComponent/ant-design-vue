@@ -2,6 +2,19 @@
 
 ---
 
+## 1.2.2
+`2018-12-19`
+
+- 🐞 修复`Datepicker`渲染两次footer问题。[#315](https://github.com/vueComponent/ant-design-vue/issues/315)
+- `Menu`
+  - 🐞 修复在 `horizontal` 模式下不能自动收起来适应宽度的问题。[aa1b24](https://github.com/vueComponent/ant-design-vue/commit/aa1b2462cb333505d3efc53af1afb30fd0574dc7)。
+  - 🐞 修复在 `inline` 模式下首次展开时没有动画的问题。[d63935](https://github.com/vueComponent/ant-design-vue/commit/d63935e50671fab2aa561a013c35af878c610c7c)
+  - 🐞 修复`Menu`组件在`collapse=true` `openKeys=[]`时闪动问题。[3393f0](https://github.com/vueComponent/ant-design-vue/commit/3393f0e1513c5d29e2734397bb9e0c0b272c259f)
+- 🐞 修复 `Form` 组件在设置`validateStatus`时缺少`Icon`问题。 [#321](https://github.com/vueComponent/ant-design-vue/issues/321)
+- 🐞 修复 Upload 缩略图图标样式错误。[f1e130](https://github.com/vueComponent/ant-design-vue/commit/f1e130bdc0c12c625573c08a35c895b2d5d47568)
+- 🐞 `Icon` 支持 native event [cffef3](https://github.com/vueComponent/ant-design-vue/commit/cffef392e5605de8d342787d7562e81ca8588800)
+
+
 ## 1.2.1
 `2018-12-17`
 

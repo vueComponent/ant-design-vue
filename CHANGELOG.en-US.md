@@ -2,6 +2,18 @@
 
 ---
 
+## 1.2.2
+`2018-12-19`
+
+- 🐞 `Datepicker` render footer twice question. [#315](https://github.com/vueComponent/ant-design-vue/issues/315)
+- `Menu`
+  - 🐞 menu automatically close up to fit width in `horizontal` mode.[aa1b24](https://github.com/vueComponent/ant-design-vue/commit/aa1b2462cb333505d3efc53af1afb30fd0574dc7)。
+  - 🐞 menu first expand not animation in `inline` mode. [d63935](https://github.com/vueComponent/ant-design-vue/commit/d63935e50671fab2aa561a013c35af878c610c7c)
+  - 🐞 flashing problem when change collapse = true and change openKeys=[][3393f0](https://github.com/vueComponent/ant-design-vue/commit/3393f0e1513c5d29e2734397bb9e0c0b272c259f)
+- 🐞 Fix form validateStatus icon not work [#321](https://github.com/vueComponent/ant-design-vue/issues/321)
+- 🐞 `Upload` thumbnail icon broken styles [f1e130](https://github.com/vueComponent/ant-design-vue/commit/f1e130bdc0c12c625573c08a35c895b2d5d47568)
+- 🐞 `Icon` support native event [cffef3](https://github.com/vueComponent/ant-design-vue/commit/cffef392e5605de8d342787d7562e81ca8588800)
+
 ## 1.2.1
 `2018-12-17`
 

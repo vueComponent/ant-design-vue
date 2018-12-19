@@ -234,7 +234,7 @@ const SubMenu = {
 
     onTitleClick (e) {
       const { triggerSubMenuAction, eventKey, isOpen, store } = this.$props
-      this.$emit('titleClick', {
+      this.__emit('titleClick', {
         key: eventKey,
         domEvent: e,
       })
@@ -383,9 +383,8 @@ const SubMenu = {
       // show appear transition if it's not visible (not sure why)
       // show appear transition if it's not inline mode
       const transitionAppear = haveRendered || !baseProps.visible || !baseProps.mode === 'inline'
-
       subPopupMenuProps.class = ` ${baseProps.prefixCls}-sub`
-      let animProps = { appear: transitionAppear }
+      let animProps = { appear: transitionAppear, css: false }
       let transitionProps = {
         props: animProps,
         on: {},
@@ -402,7 +401,7 @@ const SubMenu = {
       }
 
       if (typeof baseProps.openAnimation === 'object' && baseProps.openAnimation.on) {
-        transitionProps.on = { ...baseProps.openAnimation.on }
+        transitionProps.on = baseProps.openAnimation.on
       }
       return <transition {...transitionProps}>
         <SubPopupMenu v-show={props.isOpen} {...subPopupMenuProps}/>

@@ -17,10 +17,10 @@ describe('MonthPicker', () => {
     })
     await asyncExpect(() => {
       openPanel(wrapper)
-    })
+    }, 0)
     await asyncExpect(() => {
       $$('.ant-calendar-month-panel-month')[0].click()
       $$('.ant-calendar-month-panel-cell')[6].getAttribute('class').split(' ').includes('ant-calendar-month-panel-selected-cell')
-    }, 0)
+    }, 1000)
   })
 })

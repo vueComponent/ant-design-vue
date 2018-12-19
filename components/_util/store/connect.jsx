@@ -26,7 +26,7 @@ export default function connect (mapStateToProps) {
       },
       data () {
         this.store = this.storeContext.store
-        this.preProps = { ...omit(getOptionProps(this), ['__propsSymbol__']) }
+        this.preProps = omit(getOptionProps(this), ['__propsSymbol__'])
         return {
           subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
         }
@@ -50,7 +50,7 @@ export default function connect (mapStateToProps) {
           if (!this.unsubscribe) {
             return
           }
-          const props = getOptionProps(this)
+          const props = omit(getOptionProps(this), ['__propsSymbol__'])
           const nextSubscribed = finnalMapStateToProps(this.store.getState(), props)
           if (!shallowEqual(this.preProps, props) || !shallowEqual(this.subscribed, nextSubscribed)) {
             this.subscribed = nextSubscribed

@@ -1,18 +1,32 @@
 import cssAnimation from './css-animation'
 import raf from 'raf'
 
-function animate (node, show, done) {
+function animate (node, show, done, type) {
   let height
   let requestAnimationFrameId
+  let appearRequestAnimationFrameId
   return cssAnimation(node, 'ant-motion-collapse', {
     start () {
+      if (appearRequestAnimationFrameId) {
+        raf.cancel(appearRequestAnimationFrameId)
+      }
       if (!show) {
         node.style.height = `${node.offsetHeight}px`
-        node.style.opacity = 1
+        node.style.opacity = '1'
       } else {
         height = node.offsetHeight
-        node.style.height = 0
-        node.style.opacity = 0
+        // not get offsetHeight when appear
+        // set it into raf get correct offsetHeight
+        if (type === 'appear' && height === 0) {
+          appearRequestAnimationFrameId = raf(() => {
+            height = node.offsetHeight
+            node.style.height = '0px'
+            node.style.opacity = '0'
+          })
+        } else {
+          node.style.height = '0px'
+          node.style.opacity = '0'
+        }
       }
     },
     active () {
@@ -21,16 +35,19 @@ function animate (node, show, done) {
       }
       requestAnimationFrameId = raf(() => {
         node.style.height = `${show ? height : 0}px`
-        node.style.opacity = show ? 1 : 0
+        node.style.opacity = show ? '1' : '0'
       })
     },
     end () {
+      if (appearRequestAnimationFrameId) {
+        raf.cancel(appearRequestAnimationFrameId)
+      }
       if (requestAnimationFrameId) {
         raf.cancel(requestAnimationFrameId)
       }
       node.style.height = ''
       node.style.opacity = ''
-      done()
+      done && done()
     },
   })
 }
@@ -41,6 +58,9 @@ const animation = {
   },
   leave (node, done) {
     return animate(node, false, done)
+  },
+  appear (node, done) {
+    return animate(node, true, done, 'appear')
   },
 }
 

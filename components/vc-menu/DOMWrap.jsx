@@ -4,7 +4,7 @@ import SubMenu from './SubMenu'
 import BaseMixin from '../_util/BaseMixin'
 import { getWidth, setStyle, menuAllProps } from './util'
 import { cloneElement } from '../_util/vnode'
-import { getClass, getPropsData } from '../_util/props-util'
+import { getClass, getPropsData, getEvents } from '../_util/props-util'
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -140,7 +140,7 @@ const DOMWrap = {
         class: `${prefixCls}-overflowed-submenu`,
         key,
         style,
-        on: copy.componentOptions.listeners,
+        on: getEvents(copy),
       }
 
       return (

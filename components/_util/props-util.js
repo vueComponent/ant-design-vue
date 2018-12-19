@@ -1,5 +1,5 @@
 import isPlainObject from 'lodash/isPlainObject'
-
+import classNames from 'classnames'
 function getType (fn) {
   const match = fn && fn.toString().match(/^\s*function (\w+)/)
   return match ? match[1] : ''
@@ -184,6 +184,8 @@ export function getClass (ele) {
   let cls = {}
   if (typeof tempCls === 'string') {
     tempCls.split(' ').forEach(c => { cls[c.trim()] = true })
+  } else if (Array.isArray(tempCls)) {
+    classNames(tempCls).split(' ').forEach(c => { cls[c.trim()] = true })
   } else {
     cls = tempCls
   }

@@ -158,7 +158,7 @@ const Menu = {
         ...props,
         itemIcon: getComponentFromProp(this, 'itemIcon', props),
         expandIcon: getComponentFromProp(this, 'expandIcon', props),
-        overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator', props),
+        overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator', props) || <span>···</span>,
         openTransitionName: this.getOpenTransitionName(),
         parentMenu: this,
         children: filterEmpty(this.$slots.default || []),

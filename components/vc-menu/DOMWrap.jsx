@@ -123,24 +123,25 @@ const DOMWrap = {
       }
 
       const popupClassName = theme ? `${prefixCls}-${theme}` : ''
+      const props = {}
+      menuAllProps.props.forEach(k => {
+        if (rest[k] !== undefined) {
+          props[k] = rest[k]
+        }
+      })
       const subMenuProps = {
         props: {
-          title,
-          overflowedIndicator,
+          title: overflowedIndicator,
           popupClassName,
+          ...props,
           eventKey: `${keyPrefix}-overflowed-indicator`,
           disabled: false,
         },
         class: `${prefixCls}-overflowed-submenu`,
         key,
         style,
-        on: copy.$listeners,
+        on: copy.componentOptions.listeners,
       }
-      menuAllProps.props.forEach(k => {
-        if (rest[k] !== undefined) {
-          subMenuProps.props[k] = rest[k]
-        }
-      })
 
       return (
         <SubMenu
@@ -238,7 +239,7 @@ const DOMWrap = {
         if (this.mode === 'horizontal') {
           let overflowed = this.getOverflowedSubMenuItem(eventKey, [])
           if (lastVisibleIndex !== undefined &&
-          className[`${this.prefixCls}-root`]
+          className[`${this.prefixCls}-root`] !== -1
           ) {
             if (index > lastVisibleIndex) {
               item = cloneElement(

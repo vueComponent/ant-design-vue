@@ -99,6 +99,7 @@ const SubPopupMenu = {
     manualRef: PropTypes.func,
     itemIcon: PropTypes.any,
     expandIcon: PropTypes.any,
+    overflowedIndicator: PropTypes.any,
     children: PropTypes.any.def([]),
     __propsSymbol__: PropTypes.any, // mock componentWillReceiveProps
   }, {
@@ -113,7 +114,8 @@ const SubPopupMenu = {
 
   mixins: [BaseMixin],
   created () {
-    const props = this.$props
+    const props = getOptionProps(this)
+    this.prevProps = { ...props }
     props.store.setState({
       activeKey: {
         ...props.store.getState().activeKey,
@@ -130,12 +132,21 @@ const SubPopupMenu = {
   },
   updated () {
     const props = getOptionProps(this)
+    const prevProps = this.prevProps
     const originalActiveKey = 'activeKey' in props ? props.activeKey
       : props.store.getState().activeKey[getEventKey(props)]
     const activeKey = getActiveKey(props, originalActiveKey)
     if (activeKey !== originalActiveKey) {
       updateActiveKey(props.store, getEventKey(props), activeKey)
+    } else if ('activeKey' in prevProps) {
+      // If prev activeKey is not same as current activeKey,
+      // we should set it.
+      const prevActiveKey = getActiveKey(prevProps, prevProps.activeKey)
+      if (activeKey !== prevActiveKey) {
+        updateActiveKey(props.store, getEventKey(props), activeKey)
+      }
     }
+    this.prevProps = { ...props }
   },
   methods: {
     // all keyboard events callbacks run from here at first

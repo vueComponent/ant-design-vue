@@ -105,6 +105,9 @@ const Menu = {
           this.setState({ sOpenKeys: this.inlineOpenKeys })
           this.inlineOpenKeys = []
         }
+      } else if (val) {
+        // 缩起时，openKeys置为空的动画会闪动，react可以通过是否传递openKeys避免闪动，vue不是很方便动态传递openKeys
+        this.switchingModeFromInline = true
       }
     },
     restoreModeVerticalFromInline () {

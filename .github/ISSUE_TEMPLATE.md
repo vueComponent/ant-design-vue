@@ -1,5 +1,5 @@
 <!--
-IMPORTANT: Please use the following link to create a new issue:
+⚠️ ⚠️ ⚠️  IMPORTANT: Please use the following link to create a new issue: ⚠️ ⚠️ ⚠️
 
   https://vuecomponent.github.io/issue-helper/
 
@@ -7,7 +7,7 @@ If your issue was not created using the app above, it will be closed immediately
 -->
 
 <!--
-注意：请使用下面的链接来新建 issue：
+⚠️ ⚠️ ⚠️  注意：请使用下面的链接来新建 issue： ⚠️ ⚠️ ⚠️
 
   https://vuecomponent.github.io/issue-helper/
   国内镜像：http://tangjinzhou.gitee.io/issue-helper/

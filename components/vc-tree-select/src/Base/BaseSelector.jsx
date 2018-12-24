@@ -26,9 +26,11 @@ export const selectorPropTypes = () => ({
   ariaId: PropTypes.string,
   inputIcon: PropTypes.any,
   clearIcon: PropTypes.any,
+  removeIcon: PropTypes.any,
   selectorValueList: PropTypes.array,
   placeholder: PropTypes.any,
   disabled: PropTypes.bool,
+  focused: PropTypes.bool,
 })
 
 function noop () {}
@@ -53,22 +55,22 @@ export default function (modeName) {
       this.domRef = createRef()
     },
     methods: {
-      onFocus  (...args) {
+      onFocus  (e) {
         const { focused } = this.$props
         const { vcTreeSelect: { onSelectorFocus }} = this
 
         if (!focused) {
           onSelectorFocus()
         }
-        this.__emit('focus', ...args)
+        this.__emit('focus', e)
       },
 
-      onBlur (...args) {
+      onBlur (e) {
         const { vcTreeSelect: { onSelectorBlur }} = this
 
         // TODO: Not trigger when is inner component get focused
         onSelectorBlur()
-        this.__emit('blur', ...args)
+        this.__emit('blur', e)
       },
 
       focus  () {
@@ -76,7 +78,7 @@ export default function (modeName) {
       },
 
       blur  () {
-        this.domRef.current.focus()
+        this.domRef.current.blur()
       },
 
       renderClear () {

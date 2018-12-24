@@ -1,62 +1,46 @@
 import PropTypes from '../../_util/vue-types'
-import { SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from './strategies'
+import { isLabelInValue } from './util'
 
-export const SelectPropTypes = {
-  // className: PropTypes.string,
-  prefixCls: PropTypes.string,
-  multiple: PropTypes.bool,
-  filterTreeNode: PropTypes.any,
-  showSearch: PropTypes.bool,
-  disabled: PropTypes.bool,
-  showArrow: PropTypes.bool,
-  allowClear: PropTypes.bool,
-  defaultOpen: PropTypes.bool,
-  open: PropTypes.bool,
-  transitionName: PropTypes.string,
-  animation: PropTypes.string,
-  choiceTransitionName: PropTypes.string,
-  // onClick: PropTypes.func,
-  // onChange: PropTypes.func,
-  // onSelect: PropTypes.func,
-  // onDeselect: PropTypes.func,
-  // onSearch: PropTypes.func,
-  searchPlaceholder: PropTypes.string,
-  placeholder: PropTypes.any,
-  inputValue: PropTypes.any,
-  value: PropTypes.any,
-  defaultValue: PropTypes.any,
-  label: PropTypes.any, // vnode
-  defaultLabel: PropTypes.any,
-  labelInValue: PropTypes.bool,
-  dropdownClassName: PropTypes.string,
-  dropdownStyle: PropTypes.object,
-  dropdownPopupAlign: PropTypes.object,
-  dropdownVisibleChange: PropTypes.func,
-  maxTagTextLength: PropTypes.number,
-  showCheckedStrategy: PropTypes.oneOf([
-    SHOW_ALL, SHOW_PARENT, SHOW_CHILD,
-  ]),
-  treeCheckStrictly: PropTypes.bool,
-  treeIcon: PropTypes.bool,
-  treeLine: PropTypes.bool,
-  treeDefaultExpandAll: PropTypes.bool,
-  treeDefaultExpandedKeys: PropTypes.arrayOf(String),
-  treeCheckable: PropTypes.any, // bool vnode
-  treeNodeLabelProp: PropTypes.string,
-  treeNodeFilterProp: PropTypes.string,
-  treeData: PropTypes.array,
-  treeDataSimpleMode: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object,
-  ]),
-  loadData: PropTypes.func,
-  dropdownMatchSelectWidth: PropTypes.bool,
-  notFoundContent: PropTypes.any,
-  children: PropTypes.any,
-  autoFocus: PropTypes.bool,
-  getPopupContainer: PropTypes.func,
-  switcherIcon: PropTypes.func,
-  inputIcon: PropTypes.any,
-  removeIcon: PropTypes.any,
-  clearIcon: PropTypes.any,
+const internalValProp = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+])
+
+export function genArrProps (propType) {
+  return PropTypes.oneOfType([
+    propType,
+    PropTypes.arrayOf(propType),
+  ])
+}
+
+/**
+ * Origin code check `multiple` is true when `treeCheckStrictly` & `labelInValue`.
+ * But in process logic is already cover to array.
+ * Check array is not necessary. Let's simplify this check logic.
+ */
+export function valueProp (...args) {
+  const [props, propName, Component] = args
+
+  if (isLabelInValue(props)) {
+    const err = genArrProps(PropTypes.shape({
+      label: PropTypes.node,
+      value: internalValProp,
+    }).loose)(...args)
+    if (err) {
+      return new Error(
+        `Invalid prop \`${propName}\` supplied to \`${Component}\`. ` +
+        `You should use { label: string, value: string | number } or [{ label: string, value: string | number }] instead.`
+      )
+    }
+    return null
+  }
+
+  const err = genArrProps(internalValProp)(...args)
+  if (err) {
+    return new Error(
+      `Invalid prop \`${propName}\` supplied to \`${Component}\`. ` +
+      `You should use string or [string] instead.`
+    )
+  }
+  return null
 }

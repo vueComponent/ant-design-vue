@@ -18,6 +18,7 @@ const MultipleSelector = {
   mixins: [BaseMixin],
   props: {
     ...selectorPropTypes(),
+    ...SearchInput.props,
     selectorValueList: PropTypes.array,
     disabled: PropTypes.bool,
     searchValue: PropTypes.string,
@@ -45,7 +46,7 @@ const MultipleSelector = {
       this.inputRef.current.blur()
     },
 
-    renderPlaceholder  () {
+    _renderPlaceholder  () {
       const {
         prefixCls,
         placeholder, searchPlaceholder,
@@ -178,7 +179,7 @@ const MultipleSelector = {
             tabIndex: -1,
             showArrow: false,
             renderSelection: this.renderSelection,
-            renderPlaceholder: this.renderPlaceholder,
+            renderPlaceholder: this._renderPlaceholder,
           },
           on: $listeners,
         }}

@@ -7,6 +7,7 @@ const SinglePopup = {
   name: 'SinglePopup',
   props: {
     ...BasePopup.props,
+    ...SearchInput.props,
     searchValue: PropTypes.string,
     showSearch: PropTypes.bool,
     dropdownPrefixCls: PropTypes.string,
@@ -21,7 +22,7 @@ const SinglePopup = {
       this.inputRef.current.focus()
     },
 
-    renderPlaceholder  () {
+    _renderPlaceholder  () {
       const { searchPlaceholder, searchValue, prefixCls } = this.$props
 
       if (!searchPlaceholder) {
@@ -52,7 +53,7 @@ const SinglePopup = {
         <span class={`${dropdownPrefixCls}-search`}>
           <SearchInput
             {...{
-              props: { ...this.$props, renderPlaceholder: this.renderPlaceholder },
+              props: { ...this.$props, renderPlaceholder: this._renderPlaceholder },
               on: this.$listeners,
               directives: [{
                 name: 'ant-ref',

@@ -1,398 +1,800 @@
+/**
+ * ARIA: https://www.w3.org/TR/wai-aria/#combobox
+ * Sample 1: https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/combobox/aria1.1pattern/listbox-combo.html
+ * Sample 2: https://www.w3.org/blog/wai-components-gallery/widget/combobox-with-aria-autocompleteinline/
+ *
+ * Tab logic:
+ * Popup is close
+ * 1. Focus input (mark component as focused)
+ * 2. Press enter to show the popup
+ * 3. If popup has input, focus it
+ *
+ * Popup is open
+ * 1. press tab to close the popup
+ * 2. Focus back to the selection input box
+ * 3. Let the native tab going on
+ *
+ * TreeSelect use 2 design type.
+ * In single mode, we should focus on the `span`
+ * In multiple mode, we should focus on the `input`
+ */
+
+import shallowEqual from 'shallowequal'
+import raf from 'raf'
+import warning from 'warning'
 import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
-import classnames from 'classnames'
-import pick from 'lodash/pick'
-import omit from 'omit.js'
-import {
-  getPropValue, getValuePropValue,
-  isMultiple, toArray,
-  UNSELECTABLE_ATTRIBUTE, UNSELECTABLE_STYLE,
-  preventDefaultEvent,
-  getTreeNodesStates, flatToHierarchy, filterParentPosition,
-  isPositionPrefix, labelCompatible, loopAllChildren, filterAllCheckedData,
-  processSimpleTreeData, toTitle,
-} from './util'
+
 import SelectTrigger from './SelectTrigger'
-import _TreeNode from './TreeNode'
+import SingleSelector from './Selector/SingleSelector'
+import MultipleSelector from './Selector/MultipleSelector'
+import SinglePopup from './Popup/SinglePopup'
+import MultiplePopup from './Popup/MultiplePopup'
+
 import { SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from './strategies'
-import { SelectPropTypes } from './PropTypes'
-import { initDefaultProps, getOptionProps, hasProp, getAllProps, getComponentFromProp } from '../../_util/props-util'
 import BaseMixin from '../../_util/BaseMixin'
-import getTransitionProps from '../../_util/getTransitionProps'
-
-function filterFn (input, child) {
-  return String(getPropValue(child, labelCompatible(this.$props.treeNodeFilterProp)))
-    .indexOf(input) > -1
-}
-
-const defaultProps = {
-  prefixCls: 'rc-tree-select',
-  // filterTreeNode: filterFn, // [Legacy] TODO: Set false and filter not hide?
-  showSearch: true,
-  allowClear: false,
-  // placeholder: '',
-  // searchPlaceholder: '',
-  labelInValue: false,
-  // onClick: noop,
-  // onChange: noop,
-  // onSelect: noop,
-  // onDeselect: noop,
-  // onSearch: noop,
-  showArrow: true,
-  dropdownMatchSelectWidth: true,
-  dropdownStyle: {},
-  dropdownVisibleChange: () => { return true },
-  notFoundContent: 'Not Found',
-  showCheckedStrategy: SHOW_CHILD,
-  // skipHandleInitValue: false, // Deprecated (use treeCheckStrictly)
-  treeCheckStrictly: false,
-  treeIcon: false,
-  treeLine: false,
-  treeDataSimpleMode: false,
-  treeDefaultExpandAll: false,
-  treeCheckable: false,
-  treeNodeFilterProp: 'value',
-  treeNodeLabelProp: 'title',
-}
-
-const Select = {
-  mixins: [BaseMixin],
-  name: 'VCTreeSelect',
-  props: initDefaultProps({ ...SelectPropTypes, __propsSymbol__: PropTypes.any }, defaultProps),
-  data () {
-    let value = []
-    const props = getOptionProps(this)
-    this.preProps = { ...props }
-    if ('value' in props) {
-      value = toArray(props.value)
-    } else {
-      value = toArray(props.defaultValue)
+import {
+  createRef, generateAriaId,
+  formatInternalValue, formatSelectorValue,
+  parseSimpleTreeData,
+  convertDataToTree, convertTreeToEntities, conductCheck,
+  getHalfCheckedKeys,
+  flatToHierarchy,
+  isPosRelated, isLabelInValue, getFilterTree,
+  cleanEntity,
+} from './util'
+import SelectNode from './SelectNode'
+import { initDefaultProps, getOptionProps, mergeProps, getPropsData } from '../../_util/props-util'
+function getWatch (keys = []) {
+  const watch = {}
+  keys.forEach(k => {
+    watch[k] = function () {
+      this.needSyncKeys[k] = true
     }
-    // save parsed treeData, for performance (treeData may be very big)
-    this.renderedTreeData = this.renderTreeData()
-    value = this.addLabelToValue(props, value)
-    value = this.getValue(props, value, props.inputValue ? '__strict' : true)
-    const inputValue = props.inputValue || ''
-    // if (props.combobox) {
-    //   inputValue = value.length ? String(value[0].value) : '';
-    // }
+  })
+  return watch
+}
+const Select = {
+  name: 'Select',
+  mixins: [BaseMixin],
+  props: initDefaultProps({
+    prefixCls: PropTypes.string,
+    prefixAria: PropTypes.string,
+    multiple: PropTypes.bool,
+    showArrow: PropTypes.bool,
+    open: PropTypes.bool,
+    value: PropTypes.any,
+
+    autoFocus: PropTypes.bool,
+
+    defaultOpen: PropTypes.bool,
+    defaultValue: PropTypes.any,
+
+    showSearch: PropTypes.bool,
+    placeholder: PropTypes.any,
+    inputValue: PropTypes.string, // [Legacy] Deprecated. Use `searchValue` instead.
+    searchValue: PropTypes.string,
+    autoClearSearchValue: PropTypes.bool,
+    searchPlaceholder: PropTypes.any, // [Legacy] Confuse with placeholder
+    disabled: PropTypes.bool,
+    children: PropTypes.any,
+    labelInValue: PropTypes.bool,
+    maxTagCount: PropTypes.number,
+    maxTagPlaceholder: PropTypes.any,
+    maxTagTextLength: PropTypes.number,
+    showCheckedStrategy: PropTypes.oneOf([
+      SHOW_ALL, SHOW_PARENT, SHOW_CHILD,
+    ]),
+    dropdownClassName: PropTypes.string,
+    dropdownStyle: PropTypes.object,
+    dropdownVisibleChange: PropTypes.func,
+    dropdownMatchSelectWidth: PropTypes.bool,
+    treeData: PropTypes.array,
+    treeDataSimpleMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    treeNodeFilterProp: PropTypes.string,
+    treeNodeLabelProp: PropTypes.string,
+    treeCheckable: PropTypes.any,
+    treeCheckStrictly: PropTypes.bool,
+    treeIcon: PropTypes.bool,
+    treeLine: PropTypes.bool,
+    treeDefaultExpandAll: PropTypes.bool,
+    treeDefaultExpandedKeys: PropTypes.array,
+    treeExpandedKeys: PropTypes.array,
+    loadData: PropTypes.func,
+    filterTreeNode: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+
+    notFoundContent: PropTypes.any,
+    getPopupContainer: PropTypes.func,
+
+    // onSearch: PropTypes.func,
+    // onSelect: PropTypes.func,
+    // onDeselect: PropTypes.func,
+    // onChange: PropTypes.func,
+    // onDropdownVisibleChange: PropTypes.func,
+
+    // onTreeExpand: PropTypes.func,
+    allowClear: PropTypes.bool,
+    transitionName: PropTypes.string,
+    animation: PropTypes.string,
+    choiceTransitionName: PropTypes.string,
+    inputIcon: PropTypes.any,
+    clearIcon: PropTypes.any,
+    removeIcon: PropTypes.any,
+    switcherIcon: PropTypes.any,
+    __propsSymbol__: PropTypes.any,
+  }, {
+    prefixCls: 'rc-tree-select',
+    prefixAria: 'rc-tree-select',
+    showArrow: true,
+    showSearch: true,
+    autoClearSearchValue: true,
+    showCheckedStrategy: SHOW_CHILD,
+
+    // dropdownMatchSelectWidth change the origin design, set to false now
+    // ref: https://github.com/react-component/select/blob/4cad95e098a341a09de239ad6981067188842020/src/Select.jsx#L344
+    // ref: https://github.com/react-component/select/pull/71
+    treeNodeFilterProp: 'value',
+    treeNodeLabelProp: 'title',
+    treeIcon: false,
+    notFoundContent: 'Not Found',
+    dropdownStyle: {},
+    dropdownVisibleChange: () => { return true },
+  }),
+
+  data () {
+    warning(this.$props.__propsSymbol__, 'must pass __propsSymbol__')
+    const {
+      prefixAria,
+      defaultOpen, open,
+    } = this.$props
+    this.needSyncKeys = {}
+    this.selectorRef = createRef()
+    this.selectTriggerRef = createRef()
+
+    // ARIA need `aria-controls` props mapping
+    // Since this need user input. Let's generate ourselves
+    this.ariaId = generateAriaId(`${prefixAria}-list`)
+
+    const state = {
+      _open: open || defaultOpen,
+      _valueList: [],
+      _searchHalfCheckedKeys: [],
+      _missValueList: [], // Contains the value not in the tree
+      _selectorValueList: [], // Used for multiple selector
+      _valueEntities: {},
+      _keyEntities: {},
+      _searchValue: '',
+      _prevProps: {},
+      _init: true,
+      _focused: undefined,
+      _treeNodes: undefined,
+      _filteredTreeNodes: undefined,
+    }
+    const newState = this.getDerivedStateFromProps(this.$props, state)
     return {
-      sValue: value,
-      sInputValue: inputValue,
-      sOpen: props.open || props.defaultOpen,
-      sFocused: false,
+      ...state,
+      ...newState,
     }
   },
 
+  provide () {
+    return {
+      vcTreeSelect: {
+        onSelectorFocus: this.onSelectorFocus,
+        onSelectorBlur: this.onSelectorBlur,
+        onSelectorKeyDown: this.onComponentKeyDown,
+        onSelectorClear: this.onSelectorClear,
+        onMultipleSelectorRemove: this.onMultipleSelectorRemove,
+
+        onTreeNodeSelect: this.onTreeNodeSelect,
+        onTreeNodeCheck: this.onTreeNodeCheck,
+        onPopupKeyDown: this.onComponentKeyDown,
+
+        onSearchInputChange: this.onSearchInputChange,
+        onSearchInputKeyDown: this.onSearchInputKeyDown,
+      },
+    }
+  },
+  watch: {
+    ...getWatch(['treeData', 'defaultValue', 'value']),
+    __propsSymbol__ () {
+      const state = this.getDerivedStateFromProps(this.$props, this.$data)
+      this.setState(state)
+      this.needSyncKeys = {}
+    },
+    '$data._valueList': function () {
+      this.$nextTick(() => {
+        this.forcePopupAlign()
+      })
+    },
+  },
   mounted () {
     this.$nextTick(() => {
-      const { autoFocus, disabled } = this
-      if (isMultiple(this.$props)) {
-        const inputNode = this.getInputDOMNode()
-        if (inputNode.value) {
-          inputNode.style.width = ''
-          inputNode.style.width = `${this.$refs.inputMirrorInstance.clientWidth || this.$refs.inputMirrorInstance.offsetWidth}px`
-        } else {
-          inputNode.style.width = ''
-        }
-      }
+      const { autoFocus, disabled } = this.$props
       if (autoFocus && !disabled) {
         this.focus()
       }
     })
   },
-  watch: {
-    // for performance (use __propsSymbol__ avoid deep watch)
-    __propsSymbol__ () {
-      const nextProps = getOptionProps(this)
-      // save parsed treeData, for performance (treeData may be very big)
-      this.renderedTreeData = this.renderTreeData(nextProps)
-      // Detecting whether the object of `onChange`'s argument  is old ref.
-      // Better to do a deep equal later.
-      this._cacheTreeNodesStates = this._cacheTreeNodesStates !== 'no' &&
-                                 this._savedValue &&
-                                 nextProps.value === this._savedValue
-      if (this.preProps.treeData !== nextProps.treeData ||
-      this.preProps.children !== nextProps.children) {
-      // refresh this._treeNodesStates cache
-        this._treeNodesStates = getTreeNodesStates(
-          this.renderedTreeData || nextProps.children,
-          this.sValue.map(item => item.value)
+
+  methods: {
+    getDerivedStateFromProps (nextProps, prevState) {
+      const h = this.$createElement
+      const { _prevProps: prevProps = {}} = prevState
+      const {
+        treeCheckable, treeCheckStrictly,
+        filterTreeNode, treeNodeFilterProp,
+        treeDataSimpleMode,
+      } = nextProps
+      const newState = {
+        _prevProps: { ...nextProps },
+        _init: false,
+      }
+      const self = this
+      // Process the state when props updated
+      function processState (propName, updater) {
+        if (prevProps[propName] !== nextProps[propName] || self.needSyncKeys[propName]) {
+          updater(nextProps[propName], prevProps[propName])
+          return true
+        }
+        return false
+      }
+
+      let valueRefresh = false
+
+      // Open
+      processState('open', (propValue) => {
+        newState._open = propValue
+      })
+
+      // Tree Nodes
+      let treeNodes
+      let treeDataChanged = false
+      let treeDataModeChanged = false
+      processState('treeData', (propValue) => {
+        treeNodes = convertDataToTree(h, propValue)
+        treeDataChanged = true
+      })
+
+      processState('treeDataSimpleMode', (propValue, prevValue) => {
+        if (!propValue) return
+
+        const prev = !prevValue || prevValue === true ? {} : prevValue
+
+        // Shallow equal to avoid dynamic prop object
+        if (!shallowEqual(propValue, prev)) {
+          treeDataModeChanged = true
+        }
+      })
+
+      // Parse by `treeDataSimpleMode`
+      if (treeDataSimpleMode && (treeDataChanged || treeDataModeChanged)) {
+        const simpleMapper = {
+          id: 'id',
+          pId: 'pId',
+          rootPId: null,
+          ...(treeDataSimpleMode !== true ? treeDataSimpleMode : {}),
+        }
+        treeNodes = convertDataToTree(
+          h,
+          parseSimpleTreeData(nextProps.treeData, simpleMapper)
         )
       }
-      if ('value' in nextProps) {
-        let value = toArray(nextProps.value)
-        value = this.addLabelToValue(nextProps, value)
-        value = this.getValue(nextProps, value)
-        this.setState({
-          sValue: value,
-        }, this.forcePopupAlign)
-      // if (nextProps.combobox) {
-      //   this.setState({
-      //     inputValue: value.length ? String(value[0].key) : '',
-      //   });
-      // }
+
+      // If `treeData` not provide, use children TreeNodes
+      if (!nextProps.treeData) {
+        // processState('children', (propValue) => {
+        //   treeNodes = Array.isArray(propValue) ? propValue : [propValue]
+        // })
+        treeNodes = this.$slots.default
       }
-      if (nextProps.inputValue !== this.preProps.inputValue) {
-        this.setState({
-          sInputValue: nextProps.inputValue,
+
+      // Convert `treeData` to entities
+      if (treeNodes) {
+        const entitiesMap = convertTreeToEntities(treeNodes)
+        newState._treeNodes = treeNodes
+        newState._posEntities = entitiesMap.posEntities
+        newState._valueEntities = entitiesMap.valueEntities
+        newState._keyEntities = entitiesMap.keyEntities
+
+        valueRefresh = true
+      }
+
+      // Value List
+      if (prevState._init) {
+        processState('defaultValue', (propValue) => {
+          newState._valueList = formatInternalValue(propValue, nextProps)
+          valueRefresh = true
         })
       }
-      if ('open' in nextProps) {
-        this.setState({
-          sOpen: nextProps.open,
-        })
-      }
-      this.preProps = { ...nextProps }
-    },
-  },
 
-  beforeUpdate () {
-    if (this._savedValue && this.$props.value &&
-      this.$props.value !== this._savedValue &&
-      this.$props.value === this.preProps.value) {
-      this._cacheTreeNodesStates = false
-      this.getValue(this.$props, this.addLabelToValue(this.$props, toArray(this.$props.value)))
-    }
-  },
-
-  updated () {
-    const state = this.$data
-    const props = this.$props
-    if (state.sOpen && isMultiple(props)) {
-      this.$nextTick(() => {
-        const inputNode = this.getInputDOMNode()
-        if (inputNode.value) {
-          inputNode.style.width = ''
-          inputNode.style.width = `${this.$refs.inputMirrorInstance.clientWidth}px`
-        } else {
-          inputNode.style.width = ''
-        }
+      processState('value', (propValue) => {
+        newState._valueList = formatInternalValue(propValue, nextProps)
+        valueRefresh = true
       })
-    }
-  },
 
-  beforeDestroy () {
-    this.clearDelayTimer()
-    if (this.dropdownContainer) {
-      document.body.removeChild(this.dropdownContainer)
-      this.dropdownContainer = null
-    }
-  },
-  methods: {
-    loopTreeData (data, level = 0, treeCheckable) {
-      return data.map((item, index) => {
-        const pos = `${level}-${index}`
-        const {
-          label,
-          value,
-          disabled,
-          key,
-          selectable,
-          children,
-          isLeaf,
-          ...otherProps
-        } = item
-        const tnProps = {
-          ...pick(item, ['on', 'class', 'style']),
-          props: {
-            value,
-            title: label,
-            disabled: disabled || false,
-            selectable: selectable === false ? selectable : !treeCheckable,
-            ...omit(otherProps, ['on', 'class', 'style']),
-          },
-          key: key || value || pos,
-        }
-        let ret
-        if (children && children.length) {
-          ret = (<_TreeNode {...tnProps}>{this.loopTreeData(children, pos, treeCheckable)}</_TreeNode>)
-        } else {
-          ret = (<_TreeNode {...tnProps} isLeaf={isLeaf}/>)
-        }
-        return ret
-      })
-    },
-    onInputChange (event) {
-      const val = event.target.value
-      const { $props: props } = this
-      this.setState({
-        sInputValue: val,
-        sOpen: true,
-      }, this.forcePopupAlign)
-      if (props.treeCheckable && !val) {
-        this.setState({
-          sValue: this.getValue(props, [...this.sValue], false),
-        })
-      }
-      this.__emit('search', val)
-    },
+      // Selector Value List
+      if (valueRefresh) {
+        // Find out that value not exist in the tree
+        const missValueList = []
+        const filteredValueList = []
+        const keyList = []
 
-    onDropdownVisibleChange (open) {
-      // selection inside combobox cause click
-      if (!open && document.activeElement === this.getInputDOMNode()) {
-        // return;
-      }
-      this.setOpenState(open, undefined, !open)
-    },
-
-    // combobox ignore
-    onKeyDown (event) {
-      const props = this.$props
-      if (props.disabled) {
-        return
-      }
-      const keyCode = event.keyCode
-      if (this.sOpen && !this.getInputDOMNode()) {
-        this.onInputKeyDown(event)
-      } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
-        this.setOpenState(true)
-        event.preventDefault()
-      }
-    },
-
-    onInputKeyDown (event) {
-      const props = this.$props
-      if (props.disabled) {
-        return
-      }
-      const state = this.$data
-      const keyCode = event.keyCode
-      if (isMultiple(props) && !event.target.value && keyCode === KeyCode.BACKSPACE) {
-        const value = state.sValue.concat()
-        if (value.length) {
-          const popValue = value.pop()
-          this.removeSelected(this.isLabelInValue() ? popValue : popValue.value)
+        // Get latest value list
+        let latestValueList = newState._valueList
+        if (!latestValueList) {
+          // Also need add prev missValueList to avoid new treeNodes contains the value
+          latestValueList = [...prevState._valueList, ...prevState._missValueList]
         }
-        return
-      }
-      if (keyCode === KeyCode.DOWN) {
-        if (!state.sOpen) {
-          this.openIfHasChildren()
-          event.preventDefault()
-          event.stopPropagation()
-          return
-        }
-      } else if (keyCode === KeyCode.ESC) {
-        if (state.sOpen) {
-          this.setOpenState(false)
-          event.preventDefault()
-          event.stopPropagation()
-        }
-        return
-      }
-    },
 
-    onSelect (selectedKeys, info) {
-      const item = info.node
-      let value = this.sValue
-      const props = this.$props
-      const selectedValue = getValuePropValue(item)
-      const selectedLabel = this.getLabelFromNode(item)
-      const checkableSelect = props.treeCheckable && info.event === 'select'
-      let event = selectedValue
-      if (this.isLabelInValue()) {
-        event = {
-          value: event,
-          label: selectedLabel,
-        }
-      }
-      if (info.selected === false) {
-        this.onDeselect(info)
-        if (!checkableSelect) return
-      }
-      this.__emit('select', event, item, info)
+        // Get key by value
+        latestValueList
+          .forEach((wrapperValue) => {
+            const { value } = wrapperValue
+            const entity = (newState._valueEntities || prevState._valueEntities)[value]
 
-      const checkEvt = info.event === 'check'
-      if (isMultiple(props)) {
-        this.$nextTick(() => { // clearSearchInput will change sInputValue
-          this.clearSearchInput()
-        })
-        if (checkEvt) {
-          value = this.getCheckedNodes(info, props).map(n => {
-            return {
-              value: getValuePropValue(n),
-              label: this.getLabelFromNode(n),
+            if (entity) {
+              keyList.push(entity.key)
+              filteredValueList.push(wrapperValue)
+              return
             }
+
+            // If not match, it may caused by ajax load. We need keep this
+            missValueList.push(wrapperValue)
+          })
+
+        // We need calculate the value when tree is checked tree
+        if (treeCheckable && !treeCheckStrictly) {
+          // Calculate the keys need to be checked
+          const { checkedKeys } = conductCheck(
+            keyList,
+            true,
+            newState._keyEntities || prevState._keyEntities,
+          )
+
+          // Format value list again for internal usage
+          newState._valueList = checkedKeys.map(key => ({
+            value: (newState._keyEntities || prevState._keyEntities)[key].value,
+          }))
+        } else {
+          newState._valueList = filteredValueList
+        }
+
+        // Fill the missValueList, we still need display in the selector
+        newState._missValueList = missValueList
+
+        // Calculate the value list for `Selector` usage
+        newState._selectorValueList = formatSelectorValue(
+          newState._valueList,
+          nextProps,
+          newState._valueEntities || prevState._valueEntities,
+        )
+      }
+
+      // [Legacy] To align with `Select` component,
+      // We use `searchValue` instead of `inputValue` but still keep the api
+      // `inputValue` support `null` to work as `autoClearSearchValue`
+      processState('inputValue', (propValue) => {
+        if (propValue !== null) {
+          newState._searchValue = propValue
+        }
+      })
+
+      // Search value
+      processState('searchValue', (propValue) => {
+        newState._searchValue = propValue
+      })
+
+      // Do the search logic
+      if (
+        newState._searchValue !== undefined ||
+        (prevState._searchValue && treeNodes)
+      ) {
+        const searchValue = newState._searchValue !== undefined ? newState._searchValue : prevState._searchValue
+        const upperSearchValue = String(searchValue).toUpperCase()
+
+        let filterTreeNodeFn = filterTreeNode
+        if (filterTreeNode === false) {
+          // Don't filter if is false
+          filterTreeNodeFn = () => true
+        } else if (typeof filterTreeNodeFn !== 'function') {
+          // When is not function (true or undefined), use inner filter
+          filterTreeNodeFn = (_, node) => {
+            const nodeValue = String(getPropsData(node)[treeNodeFilterProp]).toUpperCase()
+            return nodeValue.indexOf(upperSearchValue) !== -1
+          }
+        }
+
+        newState._filteredTreeNodes = getFilterTree(
+          this.$createElement,
+          newState._treeNodes || prevState._treeNodes,
+          searchValue,
+          filterTreeNodeFn,
+          newState._valueEntities || prevState._valueEntities,
+        )
+      }
+
+      // We should re-calculate the halfCheckedKeys when in search mode
+      if (
+        valueRefresh && treeCheckable && !treeCheckStrictly &&
+         (newState._searchValue || prevState._searchValue)
+      ) {
+        newState._searchHalfCheckedKeys = getHalfCheckedKeys(
+          newState._valueList,
+          newState._valueEntities || prevState._valueEntities,
+        )
+      }
+
+      // Checked Strategy
+      processState('showCheckedStrategy', () => {
+        newState._selectorValueList = newState._selectorValueList || formatSelectorValue(
+          newState._valueList || prevState._valueList,
+          nextProps,
+          newState._valueEntities || prevState._valueEntities,
+        )
+      })
+
+      return newState
+    },
+    // ==================== Selector ====================
+    onSelectorFocus () {
+      this.setState({ _focused: true })
+    },
+
+    onSelectorBlur () {
+      this.setState({ _focused: false })
+
+      // TODO: Close when Popup is also not focused
+      // this.setState({ open: false });
+    },
+
+    // Handle key board event in both Selector and Popup
+    onComponentKeyDown  (event) {
+      const { _open: open } = this.$data
+      const { keyCode } = event
+
+      if (!open) {
+        if ([KeyCode.ENTER, KeyCode.DOWN].indexOf(keyCode) !== -1) {
+          this.setOpenState(true)
+        }
+      } else if (KeyCode.ESC === keyCode) {
+        this.setOpenState(false)
+      } else if ([KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT, KeyCode.RIGHT].indexOf(keyCode) !== -1) {
+        // TODO: Handle `open` state
+        event.stopPropagation()
+      }
+    },
+
+    onDeselect  (wrappedValue, node, nodeEventInfo) {
+      this.__emit('deselect', wrappedValue, node, nodeEventInfo)
+    },
+
+    onSelectorClear (event) {
+      const { disabled } = this.$props
+      if (disabled) return
+
+      this.triggerChange([], [])
+
+      if (!this.isSearchValueControlled()) {
+        this.setUncontrolledState({
+          _searchValue: '',
+          _filteredTreeNodes: null,
+        })
+      }
+
+      event.stopPropagation()
+    },
+
+    onMultipleSelectorRemove  (event, removeValue) {
+      event.stopPropagation()
+
+      const { _valueList: valueList, _missValueList: missValueList, _valueEntities: valueEntities } = this.$data
+
+      const { treeCheckable, treeCheckStrictly, treeNodeLabelProp, disabled } = this.$props
+      if (disabled) return
+
+      // Find trigger entity
+      const triggerEntity = valueEntities[removeValue]
+
+      // Clean up value
+      let newValueList = valueList
+      if (triggerEntity) {
+        // If value is in tree
+        if (treeCheckable && !treeCheckStrictly) {
+          newValueList = valueList.filter(({ value }) => {
+            const entity = valueEntities[value]
+            return !isPosRelated(entity.pos, triggerEntity.pos)
           })
         } else {
-          if (value.some(i => i.value === selectedValue)) {
-            return
-          }
-          value = value.concat([{
-            value: selectedValue,
-            label: selectedLabel,
-          }])
+          newValueList = valueList.filter(({ value }) => value !== removeValue)
         }
-      } else {
-        if (value.length && value[0].value === selectedValue) {
-          this.setOpenState(false)
-          return
-        }
-        value = [{
-          value: selectedValue,
-          label: selectedLabel,
-        }]
-        this.setOpenState(false)
       }
+
+      const triggerNode = triggerEntity ? triggerEntity.node : null
 
       const extraInfo = {
-        triggerValue: selectedValue,
-        triggerNode: item,
+        triggerValue: removeValue,
+        triggerNode,
       }
-      if (checkEvt) {
-        extraInfo.checked = info.checked
-        // if inputValue existing, tree is checkStrictly
-        extraInfo.allCheckedNodes = props.treeCheckStrictly || this.sInputValue
-          ? info.checkedNodes : flatToHierarchy(info.checkedNodesPositions)
-        this._checkedNodes = info.checkedNodesPositions
-        const _tree = this.getPopupComponentRefs()
-        this._treeNodesStates = _tree.checkKeys
-      } else {
-        extraInfo.selected = info.selected
+      const deselectInfo = {
+        node: triggerNode,
       }
 
-      this.fireChange(value, extraInfo)
-      if (props.inputValue === null) {
+      // [Legacy] Little hack on this to make same action as `onCheck` event.
+      if (treeCheckable) {
+        const filteredEntityList = newValueList.map(({ value }) => valueEntities[value])
+
+        deselectInfo.event = 'check'
+        deselectInfo.checked = false
+        deselectInfo.checkedNodes = filteredEntityList.map(({ node }) => node)
+        deselectInfo.checkedNodesPositions = filteredEntityList
+          .map(({ node, pos }) => ({ node, pos }))
+
+        if (treeCheckStrictly) {
+          extraInfo.allCheckedNodes = deselectInfo.checkedNodes
+        } else {
+          // TODO: It's too expansive to get `halfCheckedKeys` in onDeselect. Not pass this.
+          extraInfo.allCheckedNodes = flatToHierarchy(filteredEntityList)
+            .map(({ node }) => node)
+        }
+      } else {
+        deselectInfo.event = 'select'
+        deselectInfo.selected = false
+        deselectInfo.selectedNodes = newValueList.map(({ value }) => (valueEntities[value] || {}).node)
+      }
+
+      // Some value user pass prop is not in the tree, we also need clean it
+      const newMissValueList = missValueList.filter(({ value }) => value !== removeValue)
+      let wrappedValue
+      if (this.isLabelInValue()) {
+        wrappedValue = {
+          label: triggerNode ? getPropsData(triggerNode)[treeNodeLabelProp] : null,
+          value: removeValue,
+        }
+      } else {
+        wrappedValue = removeValue
+      }
+
+      this.onDeselect(wrappedValue, triggerNode, deselectInfo)
+
+      this.triggerChange(newMissValueList, newValueList, extraInfo)
+    },
+
+    // ===================== Popup ======================
+    onValueTrigger  (isAdd, nodeList, nodeEventInfo, nodeExtraInfo) {
+      const { node } = nodeEventInfo
+      const { value } = node.$props
+      const { _missValueList: missValueList, _valueEntities: valueEntities, _keyEntities: keyEntities, _searchValue: searchValue } = this.$data
+      const {
+        disabled, inputValue,
+        treeNodeLabelProp,
+        treeCheckable, treeCheckStrictly, autoClearSearchValue,
+      } = this.$props
+      const label = node.$props[treeNodeLabelProp]
+
+      if (disabled) return
+
+      // Wrap the return value for user
+      let wrappedValue
+      if (this.isLabelInValue()) {
+        wrappedValue = {
+          value,
+          label,
+        }
+      } else {
+        wrappedValue = value
+      }
+
+      // [Legacy] Origin code not trigger `onDeselect` every time. Let's align the behaviour.
+      if (isAdd) {
+        this.__emit('select', wrappedValue, node, nodeEventInfo)
+      } else {
+        this.__emit('deselect', wrappedValue, node, nodeEventInfo)
+      }
+
+      // Get wrapped value list.
+      // This is a bit hack cause we use key to match the value.
+      let newValueList = nodeList.map(node => {
+        const props = getPropsData(node)
+        return {
+          value: props.value,
+          label: props[treeNodeLabelProp],
+        }
+      })
+
+      // When is `treeCheckable` and with `searchValue`, `valueList` is not full filled.
+      // We need calculate the missing nodes.
+      if (treeCheckable && !treeCheckStrictly) {
+        let keyList = newValueList.map(({ value: val }) => valueEntities[val].key)
+        if (isAdd) {
+          keyList = conductCheck(
+            keyList,
+            true,
+            keyEntities,
+          ).checkedKeys
+        } else {
+          keyList = conductCheck(
+            [valueEntities[value].key],
+            false,
+            keyEntities,
+            { checkedKeys: keyList },
+          ).checkedKeys
+        }
+        newValueList = keyList.map(key => {
+          const props = getPropsData(keyEntities[key].node)
+          return {
+            value: props.value,
+            label: props[treeNodeLabelProp],
+          }
+        })
+      }
+
+      // Clean up `searchValue` when this prop is set
+      if (autoClearSearchValue || inputValue === null) {
+        // Clean state `searchValue` if uncontrolled
+        if (!this.isSearchValueControlled()) {
+          this.setUncontrolledState({
+            _searchValue: '',
+            _filteredTreeNodes: null,
+          })
+        }
+
+        // Trigger onSearch if `searchValue` to be empty.
+        // We should also trigger onSearch with empty string here
+        // since if user use `treeExpandedKeys`, it need user have the ability to reset it.
+        if (searchValue && searchValue.length) {
+          this.__emit('search', '')
+        }
+      }
+
+      // [Legacy] Provide extra info
+      const extraInfo = {
+        ...nodeExtraInfo,
+        triggerValue: value,
+        triggerNode: node,
+      }
+
+      this.triggerChange(missValueList, newValueList, extraInfo)
+    },
+
+    onTreeNodeSelect (_, nodeEventInfo) {
+      const { _valueList: valueList, _valueEntities: valueEntities } = this.$data
+      const { treeCheckable, multiple } = this.$props
+      if (treeCheckable) return
+
+      if (!multiple) {
+        this.setOpenState(false)
+      }
+
+      const isAdd = nodeEventInfo.selected
+      const { $props: { value: selectedValue }} = nodeEventInfo.node
+
+      let newValueList
+
+      if (!multiple) {
+        newValueList = [{ value: selectedValue }]
+      } else {
+        newValueList = valueList.filter(({ value }) => value !== selectedValue)
+        if (isAdd) {
+          newValueList.push({ value: selectedValue })
+        }
+      }
+
+      const selectedNodes = newValueList
+        .map(({ value }) => valueEntities[value])
+        .filter(entity => entity)
+        .map(({ node }) => node)
+
+      this.onValueTrigger(isAdd, selectedNodes, nodeEventInfo, { selected: isAdd })
+    },
+
+    onTreeNodeCheck  (_, nodeEventInfo) {
+      const { _searchValue: searchValue, _keyEntities: keyEntities, _valueEntities: valueEntities, _valueList: valueList } = this.$data
+      const { treeCheckStrictly } = this.$props
+
+      const { checkedNodes, checkedNodesPositions } = nodeEventInfo
+      const isAdd = nodeEventInfo.checked
+
+      const extraInfo = {
+        checked: isAdd,
+      }
+
+      let checkedNodeList = checkedNodes
+
+      // [Legacy] Check event provide `allCheckedNodes`.
+      // When `treeCheckStrictly` or internal `searchValue` is set, TreeNode will be unrelated:
+      // - Related: Show the top checked nodes and has children prop.
+      // - Unrelated: Show all the checked nodes.
+      if (searchValue) {
+        const oriKeyList = valueList
+          .map(({ value }) => valueEntities[value])
+          .filter(entity => entity)
+          .map(({ key }) => key)
+
+        let keyList
+        if (isAdd) {
+          keyList = Array.from(
+            new Set([
+              ...oriKeyList,
+              ...checkedNodeList.map(node => {
+                const { value } = getPropsData(node)
+                return valueEntities[value].key
+              }),
+            ]),
+          )
+        } else {
+          keyList = conductCheck(
+            [getPropsData(nodeEventInfo.node).eventKey],
+            false,
+            keyEntities,
+            { checkedKeys: oriKeyList },
+          ).checkedKeys
+        }
+
+        checkedNodeList = keyList.map(key => keyEntities[key].node)
+
+        // Let's follow as not `treeCheckStrictly` format
+        extraInfo.allCheckedNodes = keyList.map(key => cleanEntity(keyEntities[key]))
+      } else if (treeCheckStrictly) {
+        extraInfo.allCheckedNodes = nodeEventInfo.checkedNodes
+      } else {
+        extraInfo.allCheckedNodes = flatToHierarchy(checkedNodesPositions)
+      }
+
+      this.onValueTrigger(isAdd, checkedNodeList, nodeEventInfo, extraInfo)
+    },
+
+    // ==================== Trigger =====================
+
+    onDropdownVisibleChange  (open) {
+      this.setOpenState(open, true)
+    },
+
+    onSearchInputChange  ({ target: { value }}) {
+      const { _treeNodes: treeNodes, _valueEntities: valueEntities } = this.$data
+      const { filterTreeNode, treeNodeFilterProp } = this.$props
+      this.__emit('search', value)
+
+      let isSet = false
+
+      if (!this.isSearchValueControlled()) {
+        isSet = this.setUncontrolledState({
+          _searchValue: value,
+        })
+        this.setOpenState(true)
+      }
+
+      if (isSet) {
+        // Do the search logic
+        const upperSearchValue = String(value).toUpperCase()
+
+        let filterTreeNodeFn = filterTreeNode
+        if (!filterTreeNodeFn) {
+          filterTreeNodeFn = (_, node) => {
+            const nodeValue = String(getPropsData(node)[treeNodeFilterProp]).toUpperCase()
+            return nodeValue.indexOf(upperSearchValue) !== -1
+          }
+        }
+
         this.setState({
-          sInputValue: '',
+          _filteredTreeNodes: getFilterTree(this.$createElement, treeNodes, value, filterTreeNodeFn, valueEntities),
         })
       }
     },
 
-    onDeselect (info) {
-      this.removeSelected(getValuePropValue(info.node))
-      if (!isMultiple(this.$props)) {
-        this.setOpenState(false)
-      } else {
-        this.clearSearchInput()
-      }
-    },
+    onSearchInputKeyDown  (event) {
+      const { _searchValue: searchValue, _valueList: valueList } = this.$data
 
-    onPlaceholderClick () {
-      this.getInputDOMNode().focus()
-    },
+      const { keyCode } = event
 
-    onClearSelection (event) {
-      const props = this.$props
-      const state = this.$data
-      if (props.disabled) {
-        return
-      }
-      event.stopPropagation()
-      this._cacheTreeNodesStates = 'no'
-      this._checkedNodes = []
-      if (state.sInputValue || state.sValue.length) {
-        this.setOpenState(false)
-        if (typeof props.inputValue === 'undefined') {
-          this.setState({
-            sInputValue: '',
-          }, () => {
-            this.fireChange([])
-          })
-        } else {
-          this.fireChange([])
-        }
+      if (
+        KeyCode.BACKSPACE === keyCode &&
+        this.isMultiple() &&
+        !searchValue &&
+        valueList.length
+      ) {
+        const lastValue = valueList[valueList.length - 1].value
+        this.onMultipleSelectorRemove(event, lastValue)
       }
     },
 
@@ -400,642 +802,250 @@ const Select = {
       this.forcePopupAlign()
     },
 
-    getLabelFromNode (child) {
-      return getPropValue(child, this.$props.treeNodeLabelProp)
-    },
-
-    getLabelFromProps (props, value) {
-      if (value === undefined) {
-        return null
-      }
-      let label = null
-      loopAllChildren(this.renderedTreeData || props.children, item => {
-        if (getValuePropValue(item) === value) {
-          label = this.getLabelFromNode(item)
-        }
-      })
-      if (label === null) {
-        return value
-      }
-      return label
-    },
-
-    getDropdownContainer () {
-      if (!this.dropdownContainer) {
-        this.dropdownContainer = document.createElement('div')
-        document.body.appendChild(this.dropdownContainer)
-      }
-      return this.dropdownContainer
-    },
-
-    getSearchPlaceholderElement (hidden) {
-      const props = this.$props
-      let placeholder
-      if (isMultiple(props)) {
-        placeholder = getComponentFromProp(this, 'placeholder') || getComponentFromProp(this, 'searchPlaceholder')
-      } else {
-        placeholder = getComponentFromProp(this, 'searchPlaceholder')
-      }
-      if (placeholder) {
-        return (
-          <span
-            style={{ display: hidden ? 'none' : 'block' }}
-            onClick={this.onPlaceholderClick}
-            class={`${props.prefixCls}-search__field__placeholder`}
-          >
-            {placeholder}
-          </span>
-        )
-      }
-      return null
-    },
-
-    getInputElement () {
-      const { sInputValue } = this.$data
-      const { prefixCls, disabled } = this.$props
-      const multiple = isMultiple(this.$props)
-      const inputListeners = {
-        input: this.onInputChange,
-        keydown: this.onInputKeyDown,
-      }
-      if (multiple) {
-        inputListeners.blur = this.onBlur
-        inputListeners.focus = this.onFocus
-      }
-      return (
-        <span class={`${prefixCls}-search__field__wrap`}>
-          <input
-            ref='inputInstance'
-            {...{ on: inputListeners }}
-            value={sInputValue}
-            disabled={disabled}
-            class={`${prefixCls}-search__field`}
-            role='textbox'
-          />
-          <span
-            ref='inputMirrorInstance'
-            class={`${prefixCls}-search__field__mirror`}
-          >
-            {sInputValue}&nbsp;
-          </span>
-          {isMultiple(this.$props) ? null : this.getSearchPlaceholderElement(!!sInputValue)}
-        </span>
-      )
-    },
-
-    getInputDOMNode () {
-      return this.$refs.inputInstance
-    },
-
-    getPopupDOMNode () {
-      return this.$refs.trigger.getPopupDOMNode()
-    },
-
-    getPopupComponentRefs () {
-      return this.$refs.trigger.getPopupEleRefs()
-    },
-
-    getValue (_props, val, init = true) {
-      let value = val
-      // if inputValue existing, tree is checkStrictly
-      const _strict = init === '__strict' ||
-        init && (this.sInputValue ||
-        this.inputValue !== _props.inputValue)
-      if (_props.treeCheckable &&
-        (_props.treeCheckStrictly || _strict)) {
-        this.halfCheckedValues = []
-        value = []
-        val.forEach(i => {
-          if (!i.halfChecked) {
-            value.push(i)
-          } else {
-            this.halfCheckedValues.push(i)
-          }
-        })
-      }
-      // if (!(_props.treeCheckable && !_props.treeCheckStrictly)) {
-      if (!_props.treeCheckable || _props.treeCheckable &&
-        (_props.treeCheckStrictly || _strict)) {
-        return value
-      }
-      let checkedTreeNodes
-      if (this._cachetreeData && this._cacheTreeNodesStates && this._checkedNodes &&
-         !this.sInputValue) {
-        this.checkedTreeNodes = checkedTreeNodes = this._checkedNodes
-      } else {
-        /**
-         * Note: `this._treeNodesStates`'s treeNodesStates must correspond to nodes of the
-         * final tree (`processTreeNode` function from SelectTrigger.jsx produce the final tree).
-         *
-         * And, `this._treeNodesStates` from `onSelect` is previous value,
-         * so it perhaps only have a few nodes, but the newly filtered tree can have many nodes,
-         * thus, you cannot use previous _treeNodesStates.
-         */
-        // getTreeNodesStates is not effective.
-        this._treeNodesStates = getTreeNodesStates(
-          this.renderedTreeData || _props.children,
-          value.map(item => item.value)
-        )
-        this.checkedTreeNodes = checkedTreeNodes = this._treeNodesStates.checkedNodes
-      }
-      const mapLabVal = arr => arr.map(itemObj => {
-        return {
-          value: getValuePropValue(itemObj.node),
-          label: getPropValue(itemObj.node, _props.treeNodeLabelProp),
-        }
-      })
-      const props = this.$props
-      let checkedValues = []
-      if (props.showCheckedStrategy === SHOW_ALL) {
-        checkedValues = mapLabVal(checkedTreeNodes)
-      } else if (props.showCheckedStrategy === SHOW_PARENT) {
-        const posArr = filterParentPosition(checkedTreeNodes.map(itemObj => itemObj.pos))
-        checkedValues = mapLabVal(checkedTreeNodes.filter(
-          itemObj => posArr.indexOf(itemObj.pos) !== -1
-        ))
-      } else {
-        checkedValues = mapLabVal(checkedTreeNodes.filter(itemObj => {
-          return !itemObj.node.componentOptions.children
-        }))
-      }
-      return checkedValues
-    },
-
-    getCheckedNodes (info, props) {
-      // TODO treeCheckable does not support tags/dynamic
-      let { checkedNodes } = info
-      // if inputValue existing, tree is checkStrictly
-      if (props.treeCheckStrictly || this.sInputValue) {
-        return checkedNodes
-      }
-      const checkedNodesPositions = info.checkedNodesPositions
-      if (props.showCheckedStrategy === SHOW_ALL) {
-        // checkedNodes = checkedNodes
-      } else if (props.showCheckedStrategy === SHOW_PARENT) {
-        const posArr = filterParentPosition(checkedNodesPositions.map(itemObj => itemObj.pos))
-        checkedNodes = checkedNodesPositions.filter(itemObj => posArr.indexOf(itemObj.pos) !== -1)
-          .map(itemObj => itemObj.node)
-      } else {
-        checkedNodes = checkedNodes.filter(n => {
-          return !n.componentOptions.children
-        })
-      }
-      return checkedNodes
-    },
-
-    getDeselectedValue (selectedValue) {
-      const checkedTreeNodes = this.checkedTreeNodes
-      let unCheckPos
-      checkedTreeNodes.forEach(itemObj => {
-        const nodeProps = getAllProps(itemObj.node)
-        if (nodeProps.value === selectedValue) {
-          unCheckPos = itemObj.pos
-        }
-      })
-      const newVals = []
-      const newCkTns = []
-      checkedTreeNodes.forEach(itemObj => {
-        if (isPositionPrefix(itemObj.pos, unCheckPos) || isPositionPrefix(unCheckPos, itemObj.pos)) {
-          // Filter ancestral and children nodes when uncheck a node.
-          return
-        }
-        const nodeProps = getAllProps(itemObj.node)
-        newCkTns.push(itemObj)
-        newVals.push(nodeProps.value)
-      })
-      this.checkedTreeNodes = this._checkedNodes = newCkTns
-      const nv = this.sValue.filter(val => newVals.indexOf(val.value) !== -1)
-      this.fireChange(nv, { triggerValue: selectedValue, clear: true })
-    },
-
-    setOpenState (open, needFocus, documentClickClose = false) {
-      this.clearDelayTimer()
-      const { $props: props } = this
-      // can not optimize, if children is empty
-      // if (this.sOpen === open) {
-      //   return;
-      // }
-      if (!this.$props.dropdownVisibleChange(open, { documentClickClose })) {
-        return
-      }
-      this.setState({
-        sOpen: open,
-      }, () => {
-        if (needFocus || open) {
-          // Input dom init after first time component render
-          // Add delay for this to get focus
-          setTimeout(() => {
-            if (open || isMultiple(props)) {
-              const input = this.getInputDOMNode()
-              if (input && document.activeElement !== input) {
-                input.focus()
-              }
-            } else if (this.$refs.selection) {
-              this.$refs.selection.focus()
-            }
-          }, 0)
-        }
-      })
-    },
-
-    clearSearchInput () {
-      this.getInputDOMNode().focus()
-      if (!hasProp(this, 'inputValue')) {
-        this.setState({ sInputValue: '' })
-      }
-    },
-
-    addLabelToValue (props, value_) {
-      let value = value_
-      if (this.isLabelInValue()) {
-        value.forEach((v, i) => {
-          if (Object.prototype.toString.call(value[i]) !== '[object Object]') {
-            value[i] = {
-              value: '',
-              label: '',
-            }
-            return
-          }
-          v.label = v.label || this.getLabelFromProps(props, v.value)
-        })
-      } else {
-        value = value.map(v => {
-          return {
-            value: v,
-            label: this.getLabelFromProps(props, v),
-          }
-        })
-      }
-      return value
-    },
-
-    clearDelayTimer () {
-      if (this.delayTimer) {
-        clearTimeout(this.delayTimer)
-        this.delayTimer = null
-      }
-    },
-
-    removeSelected (selectedVal, e) {
-      const props = this.$props
-      if (props.disabled) {
-        return
-      }
-
-      // Do not trigger Trigger popup
-      if (e && e.stopPropagation) {
-        e.stopPropagation()
-      }
-
-      this._cacheTreeNodesStates = 'no'
-      if (props.treeCheckable &&
-        (props.showCheckedStrategy === SHOW_ALL || props.showCheckedStrategy === SHOW_PARENT) &&
-        !(props.treeCheckStrictly || this.sInputValue)) {
-        this.getDeselectedValue(selectedVal)
-        return
-      }
-      // click the node's `x`(in select box), likely trigger the TreeNode's `unCheck` event,
-      // cautiously, they are completely different, think about it, the tree may not render at first,
-      // but the nodes in select box are ready.
-      let label
-      const value = this.sValue.filter((singleValue) => {
-        if (singleValue.value === selectedVal) {
-          label = singleValue.label
-        }
-        return (singleValue.value !== selectedVal)
-      })
-      const canMultiple = isMultiple(props)
-
-      if (canMultiple) {
-        let event = selectedVal
-        if (this.isLabelInValue()) {
-          event = {
-            value: selectedVal,
-            label,
-          }
-        }
-        this.__emit('deselect', event)
-      }
-      if (props.treeCheckable) {
-        if (this.checkedTreeNodes && this.checkedTreeNodes.length) {
-          this.checkedTreeNodes = this._checkedNodes = this.checkedTreeNodes.filter(item => {
-            const nodeProps = getAllProps(item.node)
-            return value.some(i => i.value === nodeProps.value)
-          })
-        }
-      }
-
-      this.fireChange(value, { triggerValue: selectedVal, clear: true })
-    },
-
-    openIfHasChildren () {
-      const props = this.$props
-      if (props.children.length || (props.treeData && props.treeData.length) || !isMultiple(props)) {
-        this.setOpenState(true)
-      }
-    },
-
-    fireChange (value, extraInfo = {}) {
+    /**
+ * Only update the value which is not in props
+ */
+    setUncontrolledState (state) {
+      let needSync = false
+      const newState = {}
       const props = getOptionProps(this)
-      const vals = value.map(i => i.value)
-      const sv = this.sValue.map(i => i.value)
-      if (vals.length !== sv.length || !vals.every((val, index) => sv[index] === val)) {
-        const ex = {
-          preValue: [...this.sValue],
-          ...extraInfo,
-        }
-        let labs = null
-        let vls = value
-        if (!this.isLabelInValue()) {
-          labs = value.map(i => i.label)
-          vls = vls.map(v => v.value)
-        } else if (this.halfCheckedValues && this.halfCheckedValues.length) {
-          this.halfCheckedValues.forEach(i => {
-            if (!vls.some(v => v.value === i.value)) {
-              vls.push(i)
-            }
-          })
-        }
-        if (props.treeCheckable && ex.clear) {
-          const treeData = this.renderedTreeData || props.children
-          ex.allCheckedNodes = flatToHierarchy(filterAllCheckedData(vals, treeData))
-        }
-        if (props.treeCheckable && this.sInputValue) {
-          const _vls = [...this.sValue]
-          if (ex.checked) {
-            value.forEach(i => {
-              if (_vls.every(ii => ii.value !== i.value)) {
-                _vls.push({ ...i })
-              }
-            })
-          } else {
-            let index
-            const includeVal = _vls.some((i, ind) => {
-              if (i.value === ex.triggerValue) {
-                index = ind
-                return true
-              }
-            })
-            if (includeVal) {
-              _vls.splice(index, 1)
-            }
-          }
-          vls = _vls
-          if (!this.isLabelInValue()) {
-            labs = _vls.map(v => v.label)
-            vls = _vls.map(v => v.value)
-          }
-        }
-        this._savedValue = isMultiple(props) ? vls : vls[0]
-        this.__emit('change', this._savedValue, labs, ex)
-        if (!('value' in props)) {
-          this._cacheTreeNodesStates = false
-          this.setState({
-            sValue: this.getValue(props, toArray(this._savedValue).map((v, i) => {
-              return this.isLabelInValue() ? v : {
-                value: v,
-                label: labs && labs[i],
-              }
-            })),
-          }, this.forcePopupAlign)
-        }
+      Object.keys(state).forEach(name => {
+        if (name.slice(1) in props) return
+
+        needSync = true
+        newState[name] = state[name]
+      })
+
+      if (needSync) {
+        this.setState(newState)
       }
+
+      return needSync
     },
 
-    isLabelInValue () {
-      const { treeCheckable, treeCheckStrictly, labelInValue } = this.$props
-      if (treeCheckable && treeCheckStrictly) {
-        return true
+    // [Legacy] Origin provide `documentClickClose` which triggered by `Trigger`
+    // Currently `TreeSelect` align the hide popup logic as `Select` which blur to hide.
+    // `documentClickClose` is not accurate anymore. Let's just keep the key word.
+    setOpenState  (open, byTrigger = false) {
+      const { dropdownVisibleChange } = this.$props
+
+      if (
+        dropdownVisibleChange &&
+        dropdownVisibleChange(open, { documentClickClose: !open && byTrigger }) === false
+      ) {
+        return
       }
-      return labelInValue || false
-    },
-    onFocus (e) {
-      this.__emit('focus', e)
-    },
-    onBlur (e) {
-      this.__emit('blur', e)
+
+      this.setUncontrolledState({ _open: open })
     },
 
-    focus () {
-      if (!isMultiple(this.$props)) {
-        this.$refs.selection.focus()
-      } else {
-        this.getInputDOMNode().focus()
-      }
+    // Tree checkable is also a multiple case
+    isMultiple  () {
+      const { multiple, treeCheckable } = this.$props
+      return !!(multiple || treeCheckable)
     },
 
-    blur () {
-      if (!isMultiple(this.$props)) {
-        this.$refs.selection.blur()
-      } else {
-        this.getInputDOMNode().blur()
-      }
+    isLabelInValue  () {
+      return isLabelInValue(this.$props)
+    },
+
+    // [Legacy] To align with `Select` component,
+    // We use `searchValue` instead of `inputValue`
+    // but currently still need support that.
+    // Add this method the check if is controlled
+    isSearchValueControlled () {
+      const props = getOptionProps(this)
+      const { inputValue } = props
+      if ('searchValue' in props) return true
+      return ('inputValue' in props) && inputValue !== null
     },
 
     forcePopupAlign () {
-      this.$refs.trigger.$refs.trigger.forcePopupAlign()
+      const $trigger = this.selectTriggerRef.current
+      if ($trigger) {
+        $trigger.forcePopupAlign()
+      }
     },
 
-    renderTopControlNode () {
-      const { sValue: value } = this.$data
-      const props = this.$props
-      const { choiceTransitionName, prefixCls, maxTagTextLength, removeIcon } = props
-      const multiple = isMultiple(props)
-
-      // single and not combobox, input is inside dropdown
-      if (!multiple) {
-        let innerNode = (<span
-          key='placeholder'
-          class={`${prefixCls}-selection__placeholder`}
-        >
-          {getComponentFromProp(this, 'placeholder') || ''}
-        </span>)
-        if (value.length) {
-          innerNode = (<span
-            key='value'
-            title={toTitle(value[0].label)}
-            class={`${prefixCls}-selection-selected-value`}
-          >
-            {value[0].label}
-          </span>)
-        }
-        return (<span class={`${prefixCls}-selection__rendered`}>
-          {innerNode}
-        </span>)
-      }
-
-      const selectedValueNodes = value.map((singleValue) => {
-        let content = singleValue.label
-        const title = content
-        if (maxTagTextLength && typeof content === 'string' && content.length > maxTagTextLength) {
-          content = `${content.slice(0, maxTagTextLength)}...`
-        }
-        return (
-          <li
-            style={UNSELECTABLE_STYLE}
-            onMousedown={preventDefaultEvent}
-            class={`${prefixCls}-selection__choice`}
-            key={singleValue.value}
-            title={toTitle(title)}
-            {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
-          >
-            <span
-              class={`${prefixCls}-selection__choice__remove`}
-              onClick={(event) => {
-                this.removeSelected(singleValue.value, event)
-              }}
-            >{removeIcon}</span>
-            <span class={`${prefixCls}-selection__choice__content`}>{content}</span>
-          </li>
-        )
+    delayForcePopupAlign  () {
+      // Wait 2 frame to avoid dom update & dom algin in the same time
+      // https://github.com/ant-design/ant-design/issues/12031
+      raf(() => {
+        raf(this.forcePopupAlign)
       })
-
-      selectedValueNodes.push(<li
-        class={`${prefixCls}-search ${prefixCls}-search--inline`}
-        key='__input'
-      >
-        {this.getInputElement()}
-      </li>)
-      const className = `${prefixCls}-selection__rendered`
-      if (choiceTransitionName) {
-        const transitionProps = getTransitionProps(choiceTransitionName, {
-          tag: 'ul',
-          afterLeave: this.onChoiceAnimationLeave,
-        })
-        return (<transition-group
-          class={className}
-          {...transitionProps}
-        >
-          {selectedValueNodes}
-        </transition-group>)
-      }
-      return (<ul class={className}>{selectedValueNodes}</ul>)
     },
 
-    renderTreeData (props) {
-      const validProps = props || this.$props
-      if (validProps.treeData) {
-        if (props && props.treeData === this.preProps.treeData && this.renderedTreeData) {
-          // cache and use pre data.
-          this._cachetreeData = true
-          return this.renderedTreeData
-        }
-        this._cachetreeData = false
-        let treeData = [...validProps.treeData]
-        // process treeDataSimpleMode
-        if (validProps.treeDataSimpleMode) {
-          let simpleFormat = {
-            id: 'id',
-            pId: 'pId',
-            rootPId: null,
-          }
-          if (Object.prototype.toString.call(validProps.treeDataSimpleMode) === '[object Object]') {
-            simpleFormat = { ...simpleFormat, ...validProps.treeDataSimpleMode }
-          }
-          treeData = processSimpleTreeData(treeData, simpleFormat)
-        }
-        return this.loopTreeData(treeData, undefined, this.preProps.treeCheckable)
+    /**
+ * 1. Update state valueList.
+ * 2. Fire `onChange` event to user.
+ */
+    triggerChange  (missValueList, valueList, extraInfo = {}) {
+      const { _valueEntities: valueEntities, _searchValue: searchValue } = this.$data
+      const props = getOptionProps(this)
+      const { disabled, treeCheckable, treeCheckStrictly } = props
+      if (disabled) return
+
+      // Trigger
+      const extra = {
+        // [Legacy] Always return as array contains label & value
+        preValue: this.$data._selectorValueList.map(({ label, value }) => ({ label, value })),
+        ...extraInfo,
       }
+
+      // Format value by `treeCheckStrictly`
+      const selectorValueList = formatSelectorValue(valueList, props, valueEntities)
+
+      if (!('value' in props)) {
+        const newState = {
+          _missValueList: missValueList,
+          _valueList: valueList,
+          _selectorValueList: selectorValueList,
+        }
+
+        if (searchValue && treeCheckable && !treeCheckStrictly) {
+          newState._searchHalfCheckedKeys = getHalfCheckedKeys(
+            valueList,
+            valueEntities,
+          )
+        }
+
+        this.setState(newState)
+      }
+
+      // Only do the logic when `onChange` function provided
+      if (this.$listeners.change) {
+        let connectValueList
+
+        // Get value by mode
+        if (this.isMultiple()) {
+          connectValueList = [...missValueList, ...selectorValueList]
+        } else {
+          connectValueList = selectorValueList.slice(0, 1)
+        }
+
+        let labelList = null
+        let returnValue
+
+        if (this.isLabelInValue()) {
+          returnValue = connectValueList.map(({ label, value }) => ({ label, value }))
+        } else {
+          labelList = []
+          returnValue = connectValueList.map(({ label, value }) => {
+            labelList.push(label)
+            return value
+          })
+        }
+
+        if (!this.isMultiple()) {
+          returnValue = returnValue[0]
+        }
+        this.__emit('change', returnValue, labelList, extra)
+      }
+    },
+
+    focus () {
+      this.selectorRef.current.focus()
+    },
+
+    blur () {
+      this.selectorRef.current.blur()
     },
   },
 
+  // ===================== Render =====================
+
   render () {
-    const props = this.$props
-    const multiple = isMultiple(props)
-    const state = this.$data
-    const { disabled, allowClear, prefixCls, inputIcon, clearIcon } = props
-    const ctrlNode = this.renderTopControlNode()
-    let extraSelectionProps = {}
-    if (!multiple) {
-      extraSelectionProps = {
-        on: {
-          keydown: this.onKeyDown,
-          blur: this.onBlur,
-          focus: this.onFocus,
-        },
-        attrs: {
-          tabIndex: 0,
-        },
-      }
-    }
-    const rootCls = {
-      [prefixCls]: 1,
-      [`${prefixCls}-open`]: state.sOpen,
-      [`${prefixCls}-focused`]: state.sOpen || state.sFocused,
-      // [`${prefixCls}-combobox`]: isCombobox(props),
-      [`${prefixCls}-disabled`]: disabled,
-      [`${prefixCls}-enabled`]: !disabled,
-      [`${prefixCls}-allow-clear`]: !!props.allowClear,
-    }
-    const clear = (<span
-      key='clear'
-      class={`${prefixCls}-selection__clear`}
-      onClick={this.onClearSelection}
-    >{clearIcon}</span>)
-    const selectTriggerProps = {
+    const {
+      _valueList: valueList, _missValueList: missValueList, _selectorValueList: selectorValueList,
+      _searchHalfCheckedKeys: searchHalfCheckedKeys,
+      _valueEntities: valueEntities, _keyEntities: keyEntities,
+      _searchValue: searchValue,
+      _open: open, _focused: focused,
+      _treeNodes: treeNodes, _filteredTreeNodes: filteredTreeNodes,
+    } = this.$data
+    const props = getOptionProps(this)
+    const { prefixCls, treeExpandedKeys } = props
+    const isMultiple = this.isMultiple()
+
+    const passProps = {
       props: {
         ...props,
-        treeNodes: props.children,
-        treeData: this.renderedTreeData,
-        _cachetreeData: this._cachetreeData,
-        _treeNodesStates: this._treeNodesStates,
-        halfCheckedValues: this.halfCheckedValues,
-        multiple: multiple,
-        disabled: disabled,
-        visible: state.sOpen,
-        inputValue: state.sInputValue,
-        inputElement: this.getInputElement(),
-        value: state.sValue,
-        dropdownVisibleChange: this.onDropdownVisibleChange,
-        getPopupContainer: props.getPopupContainer,
-        filterTreeNode: this.filterTreeNode === undefined ? filterFn : this.filterTreeNode,
+        isMultiple,
+        valueList,
+        searchHalfCheckedKeys,
+        selectorValueList: [...missValueList, ...selectorValueList],
+        valueEntities,
+        keyEntities,
+        searchValue,
+        upperSearchValue: (searchValue || '').toUpperCase(), // Perf save
+        open,
+        focused,
+        dropdownPrefixCls: `${prefixCls}-dropdown`,
+        ariaId: this.ariaId,
       },
       on: {
         ...this.$listeners,
-        select: this.onSelect,
+        choiceAnimationLeave: this.onChoiceAnimationLeave,
       },
-      ref: 'trigger',
+      scopedSlots: this.$scopedSlots,
     }
+    const popupProps = mergeProps(passProps, {
+      props: {
+        treeNodes,
+        filteredTreeNodes,
+        // Tree expanded control
+        treeExpandedKeys,
+        __propsSymbol__: Symbol(),
+      },
+      on: {
+        treeExpanded: this.delayForcePopupAlign,
+      },
+    })
+
+    const Popup = isMultiple ? MultiplePopup : SinglePopup
+    const $popup = (
+      <Popup
+        {...popupProps}
+      />
+    )
+
+    const Selector = isMultiple ? MultipleSelector : SingleSelector
+    const $selector = (
+      <Selector
+        {...passProps}
+        {...{
+          directives: [{
+            name: 'ant-ref',
+            value: this.selectorRef,
+          }] }}
+      />
+    )
+    const selectTriggerProps = mergeProps(passProps, {
+      props: {
+        popupElement: $popup,
+        dropdownVisibleChange: this.onDropdownVisibleChange,
+      },
+      directives: [{
+        name: 'ant-ref',
+        value: this.selectTriggerRef,
+      }],
+    })
     return (
-      <SelectTrigger {...selectTriggerProps}>
-        <span
-          onClick={props.onClick}
-          class={classnames(rootCls)}
-        >
-          <span
-            ref='selection'
-            key='selection'
-            class={`${prefixCls}-selection
-            ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`}
-            role='combobox'
-            aria-autocomplete='list'
-            aria-haspopup='true'
-            aria-expanded={state.sOpen}
-            {...extraSelectionProps}
-          >
-            {ctrlNode}
-            {allowClear && state.sValue.length &&
-          state.sValue[0].value ? clear : null}
-            {multiple || !props.showArrow ? null
-              : (<span
-                key='arrow'
-                class={`${prefixCls}-arrow`}
-                style={{ outline: 'none' }}
-              >
-                {inputIcon}
-              </span>)}
-            {multiple
-              ? this.getSearchPlaceholderElement(!!state.sInputValue || state.sValue.length)
-              : null}
-          </span>
-        </span>
+      <SelectTrigger
+        {...selectTriggerProps}
+      >
+        {$selector}
       </SelectTrigger>
     )
   },
 }
 
+Select.TreeNode = SelectNode
 Select.SHOW_ALL = SHOW_ALL
 Select.SHOW_PARENT = SHOW_PARENT
 Select.SHOW_CHILD = SHOW_CHILD
+
+// Let warning show correct component name
+Select.name = 'TreeSelect'
 
 export default Select

@@ -47,14 +47,14 @@ export default {
   },
   methods: {
     onChange (value) {
-      console.log(arguments)
+      console.log(value)
       this.value = value
     },
     onSearch () {
-      console.log(arguments)
+      console.log(...arguments)
     },
     onSelect () {
-      console.log(arguments)
+      console.log(...arguments)
     },
   },
 }

@@ -121,12 +121,6 @@ const Tree = {
     }
     return {
       ...state,
-      // ...this.getSyncProps(props),
-      // dragOverNodeKey: '',
-      // dropPosition: null,
-      // dragNodesKeys: [],
-      // sLoadedKeys: [],
-      // sLoadingKeys: [],
       ...this.getDerivedStateFromProps(getOptionProps(this), state),
     }
   },

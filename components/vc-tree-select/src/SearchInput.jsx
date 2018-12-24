@@ -91,7 +91,6 @@ const SearchInput = {
     const { vcTreeSelect: {
       onSearchInputChange, onSearchInputKeyDown,
     }} = this
-
     return (
       <span class={`${prefixCls}-search__field__wrap`}>
         <input

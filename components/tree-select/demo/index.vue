@@ -3,6 +3,7 @@ import Basic from './basic'
 import Checkable from './checkable'
 import Multiple from './multiple'
 import TreeData from './treeData'
+import Suffix from './suffix'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -35,6 +36,7 @@ export default {
         <Checkable/>
         <Multiple/>
         <TreeData/>
+        <Suffix />
         <api>
           <template slot='cn'>
             <CN/>

@@ -11,10 +11,18 @@ export default {
   props: TreeNode.props,
   render (h, context) {
     const { props, slots, listeners, data } = context
-    const children = slots().default
+    const $slots = slots()
+    const children = $slots.default
+    delete $slots.default
     const treeNodeProps = {
       ...data, on: { ...listeners, ...data.nativeOn }, props,
     }
-    return <TreeNode {...treeNodeProps}>{children}</TreeNode>
+    const slotsKey = Object.keys($slots)
+    return <TreeNode {...treeNodeProps}>
+      {children}
+      {slotsKey.length ? slotsKey.map(name => {
+        return <template slot={name}>{$slots[name]}</template>
+      }) : null}
+    </TreeNode>
   },
 }

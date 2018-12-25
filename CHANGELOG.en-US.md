@@ -2,6 +2,14 @@
 
 ---
 
+## 1.2.3
+`2018-12-25`
+
+- 📝 Remove Christmas egg.
+- 🐞 Fix some components do not support array type `class` problem[#322](https://github.com/vueComponent/ant-design-vue/issues/322)
+- 🌟 `TreeSelect` adds the `treeExpandedKeys` props and `treeExpand` event to control the expansion of the tree.
+- 🐞 Fix the `Tree` component warning duplicate `key` question when using `TreeNode`。
+
 ## 1.2.2
 `2018-12-19`
 
@@ -31,7 +39,7 @@
   - No need to change built-in icons with overriding styles by providing more props in component.
   - 😓 But at the same time bring the problem that the bundle file is too big, related solutions and discussions can check the React version of ant-design [issue](https://github.com/ant-design/ant-design/issues/12011).
   - 🌟 Add the `theme` attribute to set the theme style of the icon.
-  - 🌟 Added `component` attribute, you can externally pass a component to customize the control rendering result. 
+  - 🌟 Added `component` attribute, you can externally pass a component to customize the control rendering result.
   - 🌟 The `twoToneColor` property is added to control the theme color of the two-color icon.
   - 🌟 Added static methods `Icon.getTowToneColor()` and `Icon.setTwoToneColor(...)` to globally get and set the theme color of all two-color icons.
   - 🌟 The new static method `Icon.createFromIconfontCN({...})` is added to make it easier to use icons hosted on [`iconfont.cn`](http://iconfont.cn/).

@@ -18,7 +18,6 @@ Multiple and checkable.
     treeCheckable
     :showCheckedStrategy="SHOW_PARENT"
     searchPlaceholder='Please select'
-    treeNodeFilterProp='label'
   />
 </template>
 
@@ -27,29 +26,29 @@ import { TreeSelect } from 'ant-design-vue'
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 const treeData = [{
-  label: 'Node1',
+  title: 'Node1',
   value: '0-0',
   key: '0-0',
   children: [{
-    label: 'Child Node1',
+    title: 'Child Node1',
     value: '0-0-0',
     key: '0-0-0',
   }],
 }, {
-  label: 'Node2',
+  title: 'Node2',
   value: '0-1',
   key: '0-1',
   children: [{
-    label: 'Child Node3',
+    title: 'Child Node3',
     value: '0-1-0',
     key: '0-1-0',
     disabled: true,
   }, {
-    label: 'Child Node4',
+    title: 'Child Node4',
     value: '0-1-1',
     key: '0-1-1',
   }, {
-    label: 'Child Node5',
+    title: 'Child Node5',
     value: '0-1-2',
     key: '0-1-2',
   }],
@@ -64,7 +63,7 @@ export default {
   },
   methods: {
     onChange (value) {
-      console.log('onChange ', value, arguments)
+      console.log('onChange ', value)
       this.value = value
     },
   },

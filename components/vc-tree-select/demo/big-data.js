@@ -56,6 +56,7 @@ export default {
             treeCheckable
             showCheckedStrategy={SHOW_PARENT}
             onChange={this.onChange}
+            __propsSymbol__={Symbol()}
           />
         </div>
         <div>
@@ -70,6 +71,7 @@ export default {
             treeCheckStrictly
             showCheckedStrategy={SHOW_PARENT}
             onChange={this.onChangeStrictly}
+            __propsSymbol__={Symbol()}
           />
         </div>
       </div>

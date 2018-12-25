@@ -101,6 +101,8 @@ const Tree = {
   }),
 
   data () {
+    warning(this.$props.__propsSymbol__, 'must pass __propsSymbol__')
+    warning(this.$props.children, 'please children prop replace slots.default')
     this.needSyncKeys = {}
     const state = {
       _posEntities: {},
@@ -119,12 +121,6 @@ const Tree = {
     }
     return {
       ...state,
-      // ...this.getSyncProps(props),
-      // dragOverNodeKey: '',
-      // dropPosition: null,
-      // dragNodesKeys: [],
-      // sLoadedKeys: [],
-      // sLoadingKeys: [],
       ...this.getDerivedStateFromProps(getOptionProps(this), state),
     }
   },
@@ -478,7 +474,7 @@ const Tree = {
               event: 'load',
               node: treeNode,
             }
-            this.__emit('load', eventObj)
+            this.__emit('load', newLoadedKeys, eventObj)
             this.setUncontrolledState({
               _loadedKeys: newLoadedKeys,
             })
@@ -593,7 +589,6 @@ const Tree = {
 
       return cloneElement(child, {
         props: {
-          key,
           eventKey: key,
           expanded: expandedKeys.indexOf(key) !== -1,
           selected: selectedKeys.indexOf(key) !== -1,
@@ -608,6 +603,7 @@ const Tree = {
           dragOverGapTop: dragOverNodeKey === key && dropPosition === -1,
           dragOverGapBottom: dragOverNodeKey === key && dropPosition === 1,
         },
+        key,
       })
     },
   },

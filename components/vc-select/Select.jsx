@@ -107,7 +107,7 @@ const Select = {
       this.__propsSymbol__,
       'Replace slots.default with props.children and pass props.__propsSymbol__'
     )
-    return {
+    const state = {
       _value: this.getValueFromProps(props, true), // true: use default value
       _inputValue: props.combobox ? this.getInputValueForCombobox(
         props,
@@ -119,10 +119,10 @@ const Select = {
       // a flag for aviod redundant getOptionsInfoFromProps call
       _skipBuildOptionsInfo: true,
     }
-  },
-  beforeMount () {
-    const state = this.getDerivedStateFromProps(getOptionProps(this), this.$data)
-    Object.assign(this.$data, state)
+    return {
+      ...state,
+      ...this.getDerivedStateFromProps(props, state),
+    }
   },
 
   mounted () {

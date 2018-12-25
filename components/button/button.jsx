@@ -105,9 +105,6 @@ export default {
     const { htmlType, classes, icon,
       disabled, handleClick,
       sLoading, $slots, $attrs, $listeners } = this
-    const now = new Date()
-    const isChristmas = now.getMonth() === 11 && now.getDate() === 25
-    const title = isChristmas ? 'Ho Ho Ho!' : $attrs.title
     const buttonProps = {
       props: {
       },
@@ -115,9 +112,8 @@ export default {
         ...$attrs,
         type: htmlType,
         disabled,
-        title,
       },
-      class: { ...classes, christmas: isChristmas },
+      class: classes,
       on: {
         ...$listeners,
         click: handleClick,

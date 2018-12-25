@@ -2,7 +2,7 @@ import warning from 'warning'
 import { Tree as VcTree, TreeNode } from '../vc-tree'
 import animation from '../_util/openAnimation'
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, filterEmpty } from '../_util/props-util'
 import Icon from '../icon'
 
 function TreeProps () {
@@ -179,7 +179,7 @@ export default {
       props: {
         ...props,
         checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
-        children: this.$slots.default || [],
+        children: filterEmpty(this.$slots.default || []),
         __propsSymbol__: Symbol(),
         switcherIcon: this.renderSwitcherIcon,
       },

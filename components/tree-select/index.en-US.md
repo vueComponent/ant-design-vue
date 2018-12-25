@@ -21,16 +21,17 @@
 | showCheckedStrategy | The way show selected item in box. **Default:** just show child nodes. **`TreeSelect.SHOW_ALL`:** show all checked treeNodes (include parent treeNode). **`TreeSelect.SHOW_PARENT`:** show checked treeNodes (just show parent treeNode). | enum { TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |
 | showSearch | Whether to display a search input in the dropdown menu(valid only in the single mode) | boolean | false |
 | size | To set the size of the select input, options: `large` `small` | string | 'default' |
+| suffixIcon | The custom suffix icon | VNode \| slot | - |
 | treeCheckable | Whether to show checkbox on the treeNodes | boolean | false |
 | treeCheckStrictly | Whether to check nodes precisely (in the `checkable` mode), means parent and child nodes are not associated, and it will make `labelInValue` be true | boolean | false |
 | treeData | Data of the treeNodes, manual construction work is no longer needed if this property has been set(ensure the Uniqueness of each value) | array&lt;{ value, label, children, [disabled, disableCheckbox, selectable] }> | \[] |
 | treeDataSimpleMode | Enable simple mode of treeData.(treeData should like this: [{id:1, pId:0, value:'1', label:"test1",...},...], pId is parent node's id) | false\|Array&lt;{ id: string, pId: string, rootPId: null }> | false |
 | treeDefaultExpandAll | Whether to expand all treeNodes by default | boolean | false |
 | treeDefaultExpandedKeys | Default expanded treeNodes | string\[] | - |
+| treeExpandedKeys | Set expanded keys | string\[] | - |
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |
-| suffixIcon | The custom suffix icon | VNode \| slot | - |
 
 ### Events
 | Events Name | Description | Arguments |
@@ -38,6 +39,7 @@
 | change | A callback function, can be executed when selected treeNodes or input value change | function(value, label, extra) |
 | search | A callback function, can be executed when the search input changes. | function(value: string) |
 | select | A callback function, can be executed when you select a treeNode. | function(value, node, extra) |
+| treeExpand | A callback function, can be executed when treeNode expanded | function(expandedKeys) |
 
 ### Tree Methods
 
@@ -52,6 +54,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| selectable | can be selected | boolean | true |
 | disableCheckbox | Disables the checkbox of the treeNode | boolean | false |
 | disabled | Disabled or not | boolean | false |
 | isLeaf | Leaf node or not | boolean | false |

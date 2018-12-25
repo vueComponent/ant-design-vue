@@ -71,6 +71,7 @@ export default {
           treeCheckable
           onChange={this.onChange}
           onSelect={this.onSelect}
+          __propsSymbol__={Symbol()}
         />
 
         <h2>use treeDataSimpleMode</h2>
@@ -89,6 +90,7 @@ export default {
           treeCheckable showCheckedStrategy={SHOW_PARENT}
           onChange={this.onChange}
           onSelect={this.onSelect}
+          __propsSymbol__={Symbol()}
         />
         <button onClick={this.onDataChange}>change data</button>
       </div>

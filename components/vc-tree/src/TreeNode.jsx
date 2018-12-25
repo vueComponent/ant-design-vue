@@ -46,6 +46,9 @@ const TreeNode = {
     icon: PropTypes.any,
     dataRef: PropTypes.object,
     switcherIcon: PropTypes.any,
+
+    label: PropTypes.any,
+    value: PropTypes.any,
   }, {}),
 
   data () {

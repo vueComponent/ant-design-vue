@@ -70,11 +70,12 @@ const SearchInput = {
    */
     focus (isDidMount) {
       if (this.inputRef.current) {
-        this.inputRef.current.focus()
         if (isDidMount) {
           setTimeout(() => {
             this.inputRef.current.focus()
           }, 0)
+        } else { // set it into else, Avoid scrolling when focus
+          this.inputRef.current.focus()
         }
       }
     },

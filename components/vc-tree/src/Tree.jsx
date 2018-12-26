@@ -395,6 +395,7 @@ const Tree = {
         selectedNodes,
         nativeEvent: e,
       }
+      this.__emit('update:selectedKeys', selectedKeys)
       this.__emit('select', selectedKeys, eventObj)
     },
     onNodeCheck (e, treeNode, checked) {
@@ -516,6 +517,7 @@ const Tree = {
         expanded: targetExpanded,
         nativeEvent: e,
       })
+      this.__emit('update:expandedKeys', expandedKeys)
 
       // Async Load data
       if (targetExpanded && loadData) {

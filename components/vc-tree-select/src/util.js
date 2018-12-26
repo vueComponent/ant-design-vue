@@ -336,13 +336,17 @@ export function formatSelectorValue (valueList, props, valueEntities) {
  * This will change the label to title value
  */
 function processProps (props) {
-  const { title, label, key, value, class: cls, style, on = {}} = props
+  const { title, label, value, class: cls, style, on = {}} = props
+  let key = props.key
+  if (!key && (key === undefined || key === null)) {
+    key = value
+  }
   const p = {
     props: omit(props, ['on', 'key', 'class', 'className', 'style']),
     on,
     class: cls || props.className,
     style: style,
-    key: typeof key === 'number' ? String(key) : (key || value),
+    key,
   }
   // Warning user not to use deprecated label prop.
   if (label && !title) {

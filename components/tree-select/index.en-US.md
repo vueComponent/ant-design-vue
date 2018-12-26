@@ -28,7 +28,7 @@
 | treeDataSimpleMode | Enable simple mode of treeData.(treeData should like this: [{id:1, pId:0, value:'1', label:"test1",...},...], pId is parent node's id) | false\|Array&lt;{ id: string, pId: string, rootPId: null }> | false |
 | treeDefaultExpandAll | Whether to expand all treeNodes by default | boolean | false |
 | treeDefaultExpandedKeys | Default expanded treeNodes | string\[] \| number\[] | - |
-| treeExpandedKeys | Set expanded keys | string\[] \| number\[] | - |
+| treeExpandedKeys(.sync) | Set expanded keys | string\[] \| number\[] | - |
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |

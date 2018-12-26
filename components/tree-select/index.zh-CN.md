@@ -28,7 +28,7 @@
 | treeDataSimpleMode | 使用简单格式的 treeData，具体设置参考可设置的类型 (此时 treeData 应变为这样的数据结构: [{id:1, pId:0, value:'1', label:"test1",...},...], `pId` 是父节点的 id) | false\|Array&lt;{ id: string, pId: string, rootPId: null }> | false |
 | treeDefaultExpandAll | 默认展开所有树节点 | boolean | false |
 | treeDefaultExpandedKeys | 默认展开的树节点 | string\[] \| number\[] | - |
-| treeExpandedKeys | 设置展开的树节点 | string\[] \| number\[] | - |
+| treeExpandedKeys(.sync) | 设置展开的树节点 | string\[] \| number\[] | - |
 | treeNodeFilterProp | 输入项过滤对应的 treeNode 属性 | string | 'value' |
 | treeNodeLabelProp | 作为显示的 prop 设置 | string | 'title' |
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |

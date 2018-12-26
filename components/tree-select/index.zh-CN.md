@@ -27,8 +27,8 @@
 | treeData | treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（value 在整个树范围内唯一） | array&lt;{value, label, children, [disabled, disableCheckbox, selectable]}> | \[] |
 | treeDataSimpleMode | 使用简单格式的 treeData，具体设置参考可设置的类型 (此时 treeData 应变为这样的数据结构: [{id:1, pId:0, value:'1', label:"test1",...},...], `pId` 是父节点的 id) | false\|Array&lt;{ id: string, pId: string, rootPId: null }> | false |
 | treeDefaultExpandAll | 默认展开所有树节点 | boolean | false |
-| treeDefaultExpandedKeys | 默认展开的树节点 | string\[] | - |
-| treeExpandedKeys | 设置展开的树节点 | string\[] | - |
+| treeDefaultExpandedKeys | 默认展开的树节点 | string\[] \| number\[] | - |
+| treeExpandedKeys | 设置展开的树节点 | string\[] \| number\[] | - |
 | treeNodeFilterProp | 输入项过滤对应的 treeNode 属性 | string | 'value' |
 | treeNodeLabelProp | 作为显示的 prop 设置 | string | 'title' |
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |
@@ -59,7 +59,7 @@
 | disableCheckbox | 禁掉 checkbox | boolean | false |
 | disabled | 是否禁用 | boolean | false |
 | isLeaf | 是否是叶子节点 | boolean | false |
-| key | 此项必须设置（其值在整个树范围内唯一） | string | - |
+| key | 此项必须设置（其值在整个树范围内唯一） | string \| number | - |
 | title | 树节点显示的内容 | string\|slot | '---' |
 | value | 默认根据此属性值进行筛选（其值在整个树范围内唯一） | string | - |
 | scopedSlots | 使用treeData时，可以通过该属性配置支持slot的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |

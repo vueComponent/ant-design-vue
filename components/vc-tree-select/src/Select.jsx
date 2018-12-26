@@ -44,7 +44,7 @@ import {
   cleanEntity,
 } from './util'
 import SelectNode from './SelectNode'
-import { initDefaultProps, getOptionProps, mergeProps, getPropsData } from '../../_util/props-util'
+import { initDefaultProps, getOptionProps, mergeProps, getPropsData, filterEmpty } from '../../_util/props-util'
 function getWatch (keys = []) {
   const watch = {}
   keys.forEach(k => {
@@ -162,7 +162,8 @@ const Select = {
       _missValueList: [], // Contains the value not in the tree
       _selectorValueList: [], // Used for multiple selector
       _valueEntities: {},
-      _keyEntities: {},
+      _posEntities: new Map(),
+      _keyEntities: new Map(),
       _searchValue: '',
       _prevProps: {},
       _init: true,
@@ -286,7 +287,7 @@ const Select = {
         // processState('children', (propValue) => {
         //   treeNodes = Array.isArray(propValue) ? propValue : [propValue]
         // })
-        treeNodes = this.$slots.default
+        treeNodes = filterEmpty(this.$slots.default)
       }
 
       // Convert `treeData` to entities
@@ -354,7 +355,7 @@ const Select = {
 
           // Format value list again for internal usage
           newState._valueList = checkedKeys.map(key => ({
-            value: (newState._keyEntities || prevState._keyEntities)[key].value,
+            value: (newState._keyEntities || prevState._keyEntities).get(key).value,
           }))
         } else {
           newState._valueList = filteredValueList
@@ -621,7 +622,7 @@ const Select = {
           ).checkedKeys
         }
         newValueList = keyList.map(key => {
-          const props = getPropsData(keyEntities[key].node)
+          const props = getPropsData(keyEntities.get(key).node)
           return {
             value: props.value,
             label: props[treeNodeLabelProp],
@@ -731,10 +732,10 @@ const Select = {
           ).checkedKeys
         }
 
-        checkedNodeList = keyList.map(key => keyEntities[key].node)
+        checkedNodeList = keyList.map(key => keyEntities.get(key).node)
 
         // Let's follow as not `treeCheckStrictly` format
-        extraInfo.allCheckedNodes = keyList.map(key => cleanEntity(keyEntities[key]))
+        extraInfo.allCheckedNodes = keyList.map(key => cleanEntity(keyEntities.get(key)))
       } else if (treeCheckStrictly) {
         extraInfo.allCheckedNodes = nodeEventInfo.checkedNodes
       } else {

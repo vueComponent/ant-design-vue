@@ -144,6 +144,7 @@ export default {
       }
       newState._selectedKeys = newSelectedKeys
 
+      this.$emit('update:selectedKeys', newSelectedKeys)
       this.$emit('select', newSelectedKeys, event)
 
       this.setUncontrolledState(newState)
@@ -188,7 +189,7 @@ export default {
       ref: 'tree',
       class: `${prefixCls}-directory`,
       on: {
-        ...this.$listeners,
+        ...omit(this.$listeners, ['update:selectedKeys']),
         select: this.onSelect,
         click: this.onClick,
         doubleclick: this.onDoubleClick,

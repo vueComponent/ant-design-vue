@@ -52,22 +52,22 @@ const Tree = {
     defaultExpandParent: PropTypes.bool,
     autoExpandParent: PropTypes.bool,
     defaultExpandAll: PropTypes.bool,
-    defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
-    expandedKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultCheckedKeys: PropTypes.arrayOf(PropTypes.string),
+    defaultExpandedKeys: PropTypes.array,
+    expandedKeys: PropTypes.array,
+    defaultCheckedKeys: PropTypes.array,
     checkedKeys: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+      PropTypes.array,
       PropTypes.object,
     ]),
-    defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
-    selectedKeys: PropTypes.arrayOf(PropTypes.string),
+    defaultSelectedKeys: PropTypes.array,
+    selectedKeys: PropTypes.array,
     // onClick: PropTypes.func,
     // onDoubleClick: PropTypes.func,
     // onExpand: PropTypes.func,
     // onCheck: PropTypes.func,
     // onSelect: PropTypes.func,
     loadData: PropTypes.func,
-    loadedKeys: PropTypes.arrayOf(PropTypes.string),
+    loadedKeys: PropTypes.array,
     // onMouseEnter: PropTypes.func,
     // onMouseLeave: PropTypes.func,
     // onRightClick: PropTypes.func,
@@ -105,8 +105,8 @@ const Tree = {
     warning(this.$props.children, 'please children prop replace slots.default')
     this.needSyncKeys = {}
     const state = {
-      _posEntities: {},
-      _keyEntities: {},
+      _posEntities: new Map(),
+      _keyEntities: new Map(),
       _expandedKeys: [],
       _selectedKeys: [],
       _checkedKeys: [],
@@ -177,7 +177,7 @@ const Tree = {
         newState._expandedKeys = (props.autoExpandParent || (!_prevProps && props.defaultExpandParent))
           ? conductExpandParent(props.expandedKeys, keyEntities) : props.expandedKeys
       } else if (!_prevProps && props.defaultExpandAll) {
-        newState._expandedKeys = Object.keys(keyEntities)
+        newState._expandedKeys = [...keyEntities.keys()]
       } else if (!_prevProps && props.defaultExpandedKeys) {
         newState._expandedKeys = (props.autoExpandParent || props.defaultExpandParent)
           ? conductExpandParent(props.defaultExpandedKeys, keyEntities) : props.defaultExpandedKeys
@@ -380,7 +380,7 @@ const Tree = {
 
       // [Legacy] Not found related usage in doc or upper libs
       const selectedNodes = selectedKeys.map(key => {
-        const entity = keyEntities[key]
+        const entity = keyEntities.get(key)
         if (!entity) return null
 
         return entity.node
@@ -395,6 +395,7 @@ const Tree = {
         selectedNodes,
         nativeEvent: e,
       }
+      this.__emit('update:selectedKeys', selectedKeys)
       this.__emit('select', selectedKeys, eventObj)
     },
     onNodeCheck (e, treeNode, checked) {
@@ -417,7 +418,7 @@ const Tree = {
         checkedObj = { checked: checkedKeys, halfChecked: halfCheckedKeys }
 
         eventObj.checkedNodes = checkedKeys
-          .map(key => keyEntities[key])
+          .map(key => keyEntities.get(key))
           .filter(entity => entity)
           .map(entity => entity.node)
 
@@ -435,7 +436,7 @@ const Tree = {
         eventObj.halfCheckedKeys = halfCheckedKeys
 
         checkedKeys.forEach((key) => {
-          const entity = keyEntities[key]
+          const entity = keyEntities.get(key)
           if (!entity) return
 
           const { node, pos } = entity
@@ -516,6 +517,7 @@ const Tree = {
         expanded: targetExpanded,
         nativeEvent: e,
       })
+      this.__emit('update:expandedKeys', expandedKeys)
 
       // Async Load data
       if (targetExpanded && loadData) {
@@ -581,8 +583,11 @@ const Tree = {
         _dropPosition: dropPosition,
       } = this.$data
       const pos = getPosition(level, index)
-      const key = child.key || pos
-      if (!keyEntities[key]) {
+      let key = child.key
+      if (!key && (key === undefined || key === null)) {
+        key = pos
+      }
+      if (!keyEntities.get(key)) {
         warnOnlyTreeNode()
         return null
       }

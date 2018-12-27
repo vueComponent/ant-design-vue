@@ -24,7 +24,7 @@ function traverseNodesKey (rootChildren, callback) {
 
 export function getFullKeyList (children) {
   const { keyEntities } = convertTreeToEntities(children)
-  return Object.keys(keyEntities)
+  return [...keyEntities.keys()]
 }
 
 /** 计算选中范围，只考虑expanded情况以优化性能 */

@@ -8,21 +8,21 @@
 | treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | array | - |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | true |
 | checkable | Adds a `Checkbox` before the treeNodes | boolean | false |
-| checkedKeys(v-model) | (Controlled) Specifies the keys of the checked treeNodes (PS: When this specifies the key of a treeNode which is also a parent treeNode, all the children treeNodes of will be checked; and vice versa, when it specifies the key of a treeNode which is a child treeNode, its parent treeNode will also be checked. When `checkable` and `checkStrictly` is true, its object has `checked` and `halfChecked` property. Regardless of whether the child or parent treeNode is checked, they won't impact each other. | string\[] \| {checked: string\[], halfChecked: string\[]} | \[] |
+| checkedKeys(v-model) | (Controlled) Specifies the keys of the checked treeNodes (PS: When this specifies the key of a treeNode which is also a parent treeNode, all the children treeNodes of will be checked; and vice versa, when it specifies the key of a treeNode which is a child treeNode, its parent treeNode will also be checked. When `checkable` and `checkStrictly` is true, its object has `checked` and `halfChecked` property. Regardless of whether the child or parent treeNode is checked, they won't impact each other. | string\[] \| number\[] \| {checked: string\[] \| number\[], halfChecked: string\[] \| number\[]} | \[] |
 | checkStrictly | Check treeNode precisely; parent treeNode and children treeNodes are not associated | boolean | false |
-| defaultCheckedKeys | Specifies the keys of the default checked treeNodes | string\[] | \[] |
+| defaultCheckedKeys | Specifies the keys of the default checked treeNodes | string\[] \| number\[] | \[] |
 | defaultExpandAll | Whether to expand all treeNodes by default | boolean | false |
-| defaultExpandedKeys | Specify the keys of the default expanded treeNodes | string\[] | \[] |
+| defaultExpandedKeys | Specify the keys of the default expanded treeNodes | string\[] \| number\[] | \[] |
 | defaultExpandParent | auto expand parent treeNodes when init | bool | true |
-| defaultSelectedKeys | Specifies the keys of the default selected treeNodes | string\[] | \[] |
+| defaultSelectedKeys | Specifies the keys of the default selected treeNodes | string\[] \| number\[] | \[] |
 | disabled | whether disabled the tree | bool | false |
 | draggable | Specifies whether this Tree is draggable (IE > 8) | boolean | false |
-| expandedKeys(.sync) | (Controlled) Specifies the keys of the expanded treeNodes | string\[] | \[] |
+| expandedKeys(.sync) | (Controlled) Specifies the keys of the expanded treeNodes | string\[] \| number\[] | \[] |
 | filterTreeNode | Defines a function to filter (highlight) treeNodes. When the function returns `true`, the corresponding treeNode will be highlighted | function(node) | - |
 | loadData | Load data asynchronously | function(node) | - |
-| loadedKeys | (Controlled) Set loaded tree nodes. Need work with `loadData` | string\[] | \[] |
+| loadedKeys | (Controlled) Set loaded tree nodes. Need work with `loadData` | string\[] \| number\[] | \[] |
 | multiple | Allows selecting multiple treeNodes | boolean | false |
-| selectedKeys(.sync) | (Controlled) Specifies the keys of the selected treeNodes | string\[] | - |
+| selectedKeys(.sync) | (Controlled) Specifies the keys of the selected treeNodes | string\[] \| number\[] | - |
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |
 | showLine | Shows a connecting line | boolean | false |
 
@@ -54,7 +54,7 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 | disabled | Disables the treeNode | boolean | false |
 | icon | customize icon. When you pass component, whose render will receive full TreeNode props as component props | slot\|slot-scope | - |
 | isLeaf | Determines if this is a leaf node(effective when `loadData` is specified) | boolean | false |
-| key | Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys. P.S.: It must be unique in all of treeNodes of the tree! | string | internal calculated position of treeNode |
+| key | Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys. P.S.: It must be unique in all of treeNodes of the tree! | string \| number | internal calculated position of treeNode |
 | selectable | Set whether the treeNode can be selected | boolean | true |
 | title | Title | string\|slot\|slot-scope | '---' |
 | slots | When using treeNodes, you can use this property to configure the properties that support the slot, such as `slots: { title: 'XXX'}` | object | - |

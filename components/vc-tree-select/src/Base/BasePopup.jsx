@@ -38,7 +38,7 @@ function getDerivedStateFromProps (nextProps, prevState) {
     filteredTreeNodes.length &&
     filteredTreeNodes !== prevProps.filteredTreeNodes
   ) {
-    newState._expandedKeyList = Object.keys(keyEntities)
+    newState._expandedKeyList = [...keyEntities.keys()]
   }
 
   // Cache `expandedKeyList` when filter set
@@ -56,7 +56,7 @@ function getDerivedStateFromProps (nextProps, prevState) {
 
   // Clean loadedKeys if key not exist in keyEntities anymore
   if (nextProps.loadData) {
-    newState._loadedKeys = loadedKeys.filter(key => key in keyEntities)
+    newState._loadedKeys = loadedKeys.filter(key => keyEntities.has(key))
   }
 
   return newState
@@ -70,7 +70,7 @@ const BasePopup = {
     valueList: PropTypes.array,
     searchHalfCheckedKeys: PropTypes.array,
     valueEntities: PropTypes.object,
-    keyEntities: PropTypes.object,
+    keyEntities: Map,
     treeIcon: PropTypes.bool,
     treeLine: PropTypes.bool,
     treeNodeFilterProp: PropTypes.string,
@@ -114,7 +114,7 @@ const BasePopup = {
     // TODO: make `expandedKeyList` control
     let expandedKeyList = treeDefaultExpandedKeys
     if (treeDefaultExpandAll) {
-      expandedKeyList = Object.keys(keyEntities)
+      expandedKeyList = [...keyEntities.keys()]
     }
 
     const state = {
@@ -140,6 +140,7 @@ const BasePopup = {
           this.__emit('treeExpanded')
         })
       }
+      this.__emit('update:treeExpandedKeys', expandedKeyList)
       this.__emit('treeExpand', expandedKeyList)
     },
 

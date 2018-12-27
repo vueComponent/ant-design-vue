@@ -3,6 +3,7 @@ import PropTypes from '../../../_util/vue-types'
 import BaseMixin from '../../../_util/BaseMixin'
 import { getComponentFromProp } from '../../../_util/props-util'
 import moment from 'moment'
+import { formatDate } from '../util'
 
 const DateInput = {
   mixins: [BaseMixin],
@@ -11,7 +12,7 @@ const DateInput = {
     timePicker: PropTypes.object,
     value: PropTypes.object,
     disabledTime: PropTypes.any,
-    format: PropTypes.string,
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     locale: PropTypes.object,
     disabledDate: PropTypes.func,
     // onChange: PropTypes.func,
@@ -25,8 +26,9 @@ const DateInput = {
   data () {
     const selectedValue = this.selectedValue
     return {
-      str: selectedValue && selectedValue.format(this.format) || '',
+      str: formatDate(selectedValue, this.format),
       invalid: false,
+      hasFocus: false,
     }
   },
   watch: {
@@ -40,7 +42,7 @@ const DateInput = {
 
   updated () {
     this.$nextTick(() => {
-      if (!this.invalid &&
+      if (this.$data.hasFocus && !this.invalid &&
         !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
         this.$refs.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd)
       }
@@ -52,56 +54,60 @@ const DateInput = {
       this.cachedSelectionEnd = this.$refs.dateInputInstance.selectionEnd
       // when popup show, click body will call this, bug!
       const selectedValue = this.selectedValue
-      this.setState({
-        str: selectedValue && selectedValue.format(this.format) || '',
-        invalid: false,
-      })
+      if (!this.$data.hasFocus) {
+        this.setState({
+          str: formatDate(selectedValue, this.format),
+          invalid: false,
+        })
+      }
     },
     onInputChange (event) {
       const str = event.target.value
-      this.setState({
-        str,
-      })
-      let value
-      const { disabledDate, format } = this
-      if (str) {
-        const parsed = moment(str, format, true)
-        if (!parsed.isValid()) {
-          this.setState({
-            invalid: true,
-          })
-          return
-        }
-        value = this.value.clone()
-        value
-          .year(parsed.year())
-          .month(parsed.month())
-          .date(parsed.date())
-          .hour(parsed.hour())
-          .minute(parsed.minute())
-          .second(parsed.second())
+      const { disabledDate, format, selectedValue } = this.$props
 
-        if (value && (!disabledDate || !disabledDate(value))) {
-          const originalValue = this.selectedValue
-          if (originalValue && value) {
-            if (!originalValue.isSame(value)) {
-              this.__emit('change', value)
-            }
-          } else if (originalValue !== value) {
-            this.__emit('change', value)
-          }
-        } else {
-          this.setState({
-            invalid: true,
-          })
-          return
-        }
-      } else {
+      // 没有内容，合法并直接退出
+      if (!str) {
         this.__emit('change', null)
+        this.setState({
+          invalid: false,
+          str,
+        })
+        return
       }
-      this.setState({
-        invalid: false,
-      })
+
+      const parsed = moment(str, format, true)
+      if (!parsed.isValid()) {
+        this.setState({
+          invalid: true,
+          str,
+        })
+        return
+      }
+      const value = this.value.clone()
+      value
+        .year(parsed.year())
+        .month(parsed.month())
+        .date(parsed.date())
+        .hour(parsed.hour())
+        .minute(parsed.minute())
+        .second(parsed.second())
+
+      if (!value || (disabledDate && disabledDate(value))) {
+        this.setState({
+          invalid: true,
+          str,
+        })
+        return
+      }
+
+      if (selectedValue !== value || (
+        selectedValue && value && !selectedValue.isSame(value)
+      )) {
+        this.setState({
+          str,
+        })
+        this.__emit('change', value)
+      }
     },
 
     onClear () {
@@ -120,6 +126,16 @@ const DateInput = {
         this.$refs.dateInputInstance.focus()
       }
     },
+    onFocus () {
+      this.setState({ hasFocus: true })
+    },
+
+    onBlur () {
+      this.setState((prevState, prevProps) => ({
+        hasFocus: false,
+        str: formatDate(prevProps.value, prevProps.format),
+      }))
+    },
   },
 
   render () {
@@ -135,6 +151,8 @@ const DateInput = {
           disabled={disabled}
           placeholder={placeholder}
           onInput={this.onInputChange}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
         />
       </div>
       {showClear ? <a

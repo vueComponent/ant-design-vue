@@ -26,7 +26,7 @@ const MomentType = PropTypes.custom(isMoment)
 const Calendar = {
   props: {
     locale: PropTypes.object.def(enUs),
-    format: PropTypes.string,
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     // prefixCls: PropTypes.string,
@@ -295,7 +295,9 @@ const Calendar = {
             selectedValue={sSelectedValue}
             value={sValue}
             disabledDate={disabledDate}
-            okDisabled={!this.isAllowedDate(sSelectedValue)}
+            okDisabled={
+              props.showOk !== false && (!sSelectedValue || !this.isAllowedDate(sSelectedValue))
+            }
             onOk={this.onOk}
             onSelect={this.onSelect}
             onToday={this.onToday}

@@ -183,6 +183,39 @@ const Demo = {
   },
 }
 
+const multiFormats = ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYY', 'D/M/YY']
+
+const DemoMultiFormat = {
+  data: () => ({
+    value: now,
+  }),
+  methods: {
+    onChange (value) {
+      console.log('Calendar change: ', (value && value.format(format)))
+      this.value = value
+    },
+  },
+
+  render () {
+    const state = this.$data
+    return (<div style={{ width: '400px', margin: '20px' }}>
+      <div style={{ marginBottom: '10px' }}>
+        Accepts multiple input formats
+        <br/>
+        <small>{multiFormats.join(', ')}</small>
+      </div>
+      <Calendar
+        locale={cn ? zhCN : enUS}
+        style={{ zIndex: 1000 }}
+        dateInputPlaceholder='please input'
+        format={multiFormats}
+        value={state.value}
+        onChange={this.onChange}
+      />
+    </div>)
+  },
+}
+
 function onStandaloneSelect (value) {
   console.log('onStandaloneSelect')
   console.log(value && value.format(format))
@@ -212,7 +245,7 @@ export default {
               defaultValue={now}
               disabledTime={disabledTime}
               showToday
-              formatter={getFormat(true)}
+              format={getFormat(true)}
               showOk={false}
               timePicker={timePickerElement(h)}
               onChange={onStandaloneChange}
@@ -228,6 +261,9 @@ export default {
             <Demo defaultCalendarValue={defaultCalendarValue} />
           </div>
           <div style={{ clear: 'both' }}></div>
+          <div>
+            <DemoMultiFormat />
+          </div>
         </div>
       </div>
     )

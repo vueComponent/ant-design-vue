@@ -26,8 +26,9 @@ export default function create (options) {
   const Iconfont = {
     functional: true,
     name: 'AIconfont',
+    props: Icon.props,
     render (h, context) {
-      const { props, slots, listeners } = context
+      const { props, slots, listeners, data } = context
       const { type, ...restProps } = props
       const slotsMap = slots()
       const children = slotsMap.default
@@ -40,9 +41,7 @@ export default function create (options) {
         content = children
       }
       return (
-        <Icon
-          {...{ props: restProps, on: listeners }}
-        >
+        <Icon {...{ ...data, props: restProps, on: listeners }}>
           {content}
         </Icon>
 

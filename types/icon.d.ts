@@ -6,7 +6,7 @@ export declare class AIcon extends AntdVueComponent {
 
   style: any;
 
-  theme: 'filled' | 'outlined' | 'twoTone',
+  theme: 'filled' | 'outlined' | 'twoTone';
 
   spin: boolean;
 

@@ -3,7 +3,7 @@ import { AntdVueComponent } from './component';
 
 type Placement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 /** ANotification Layout Component */
-export declare class ANotification extends AntdVueComponent {
+export declare class ANotification {
   static success: (params: Params) => void
 
   static error: (params: Params) => void

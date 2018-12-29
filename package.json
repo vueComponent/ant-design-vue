@@ -16,6 +16,7 @@
         "frontend"
     ],
     "main": "dist/antd.min.js",
+    "typings": "types/index.d.ts",
     "files": [
         "dist",
         "lib",

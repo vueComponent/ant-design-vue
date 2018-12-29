@@ -2,6 +2,18 @@
 
 ---
 
+## 1.2.4
+`2018-12-29`
+
+- 🐞 Fix `Select` component does not trigger `popupScroll` event[#350](https://github.com/vueComponent/ant-design-vue/issues/350)
+- 🐞 Fixing the custom `Icon` component does not support `class` `style` issues.[#351](https://github.com/vueComponent/ant-design-vue/issues/351)
+- 🌟 `Tree` `TreeSelect` supports `key` of `number` type. [#343](https://github.com/vueComponent/ant-design-vue/issues/343)
+- 🌟 `Tree` components `selectedKeys`, `expandedKeys` support the `.sync` modifier.[6373ce](https://github.com/vueComponent/ant-design-vue/commit/6373ce8e92a979abb1f5dc94fa9697ee64b08dc2)
+- `TreeSelect`
+  - 🌟 `treeExpandedKeys` supports the `.sync` modifier.[983318](https://github.com/vueComponent/ant-design-vue/commit/983318b985ad727c008232c75a8598d52d0f924b)
+  - 🐞 Fix page scrolling issue when the first `focus`.[139356](https://github.com/vueComponent/ant-design-vue/commit/1393563c9b7f8cb7d7ddc0409aa5422c53fca60b)
+- 🐞 Remove the expansion animation when the `Menu` component is initialized.[#338](https://github.com/vueComponent/ant-design-vue/issues/338)
+
 ## 1.2.3
 `2018-12-25`
 

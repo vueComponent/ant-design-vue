@@ -2,6 +2,18 @@
 
 ---
 
+## 1.2.4
+`2018-12-29`
+
+- 🐞 修复`Select`组件没有触发`popupScroll`事件问题[#350](https://github.com/vueComponent/ant-design-vue/issues/350)
+- 🐞 修复自定义`Icon`组件不支持`class` `style`问题。[#351](https://github.com/vueComponent/ant-design-vue/issues/351)
+- 🌟 `Tree` `TreeSelect` 支持`number`类型的`key`。[#343](https://github.com/vueComponent/ant-design-vue/issues/343)
+- 🌟 `Tree`组件`selectedKeys`、`expandedKeys`支持`.sync`修饰符。[6373ce](https://github.com/vueComponent/ant-design-vue/commit/6373ce8e92a979abb1f5dc94fa9697ee64b08dc2)
+- `TreeSelect`
+  - 🌟 `treeExpandedKeys`支持`.sync`修饰符。[983318](https://github.com/vueComponent/ant-design-vue/commit/983318b985ad727c008232c75a8598d52d0f924b)
+  - 🐞 修复第一次`focus`时触发页面滚动问题。[139356](https://github.com/vueComponent/ant-design-vue/commit/1393563c9b7f8cb7d7ddc0409aa5422c53fca60b)
+- 🐞 移除`Menu`组件初始化时的展开动画。[#338](https://github.com/vueComponent/ant-design-vue/issues/338)
+
 ## 1.2.3
 `2018-12-25`
 

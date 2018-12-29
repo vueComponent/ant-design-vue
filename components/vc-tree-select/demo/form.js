@@ -25,7 +25,7 @@ const TreeSelectInput = {
 
   render () {
     return (
-      <TreeSelect {...{ props: this.$props }} onChange={this.onChange.bind(this)} />
+      <TreeSelect {...{ props: this.$props }} onChange={this.onChange} />
     )
   },
 }
@@ -57,6 +57,7 @@ const Form = {
         multiple: true,
         treeData: gData,
         treeCheckable: true,
+        __propsSymbol__: Symbol(),
         // treeDefaultExpandAll: true,
       },
     }

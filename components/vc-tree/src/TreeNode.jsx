@@ -19,7 +19,7 @@ const TreeNode = {
   mixins: [BaseMixin],
   __ANT_TREE_NODE: true,
   props: initDefaultProps({
-    eventKey: PropTypes.string, // Pass by parent `cloneElement`
+    eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Pass by parent `cloneElement`
     prefixCls: PropTypes.string,
     // className: PropTypes.string,
     root: PropTypes.object,
@@ -46,6 +46,9 @@ const TreeNode = {
     icon: PropTypes.any,
     dataRef: PropTypes.object,
     switcherIcon: PropTypes.any,
+
+    label: PropTypes.any,
+    value: PropTypes.any,
   }, {}),
 
   data () {

@@ -37,7 +37,8 @@
     top: 1px;
     right: 1px;
     width: 20px;
-    b {
+    &:after {
+      content: '';
       border-color: #999999 transparent transparent transparent;
       border-style: solid;
       border-width: 5px 4px 0 4px;
@@ -66,22 +67,30 @@
     &__clear {
       font-weight: bold;
       position: absolute;
+    }
+  }
 
-      &:after {
-        content: '×'
+  &-enabled {
+    .@{selectPrefixCls}-selection {
+      &:hover {
+        border-color: #23c0fa;
+        box-shadow: 0 0 2px fadeout(#2db7f5, 20%);
+      }
+      &:active {
+        border-color: #2db7f5;
+      }
+    }
+
+    &.@{selectPrefixCls}-focused {
+      .@{selectPrefixCls}-selection {
+        //border-color: #23c0fa;
+        border-color: #7700fa;
+        box-shadow: 0 0 2px fadeout(#2db7f5, 20%);
       }
     }
   }
 
-  &-enabled &-selection {
-    &:hover {
-      border-color: #23c0fa;
-      box-shadow: 0 0 2px fadeout(#2db7f5, 20%);
-    }
-    &:active {
-      border-color: #2db7f5;
-    }
-  }
+
 
   &-selection--single {
     height: 28px;
@@ -105,6 +114,9 @@
     .@{selectPrefixCls}-selection__clear {
       top: 5px;
       right: 20px;
+      &:after {
+        content: '×';
+      }
     }
   }
 
@@ -117,7 +129,7 @@
       cursor: not-allowed;
       color: #ccc;
 
-      &:hover {
+      &:hover{
         cursor: not-allowed;
         color: #ccc;
       }
@@ -130,6 +142,7 @@
   }
 
   &-search__field__placeholder {
+    display: block;
     position: absolute;
     top: 0;
     left: 3px;
@@ -288,6 +301,7 @@
       top: 0;
       right: 2px;
       transition: opacity .3s, transform .3s;
+
       &:before {
         content: '×'
       }
@@ -487,7 +501,7 @@
   }
 
   &-open {
-    .@{selectPrefixCls}-arrow b {
+    .@{selectPrefixCls}-arrow:after {
       border-color: transparent transparent #888 transparent;
       border-width: 0 4px 5px 4px;
     }
@@ -496,5 +510,27 @@
   &-not-found {
     display: inline-block;
     padding: 8px;
+  }
+}
+
+.custom-icon-demo {
+  .@{selectPrefixCls} {
+    &-selection__choice__remove {
+      &:before {
+        content: '';
+      }
+    }
+
+    &-arrow {
+      &:after {
+        display: none;
+      }
+    }
+
+    &-selection__clear {
+      &:after {
+        content: '';
+      }
+    }
   }
 }

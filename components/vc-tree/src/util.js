@@ -63,11 +63,15 @@ export function traverseTreeNodes (treeNodes, callback) {
 
     // Process node if is not root
     if (node) {
+      let key = node.key
+      if (!key && (key === undefined || key === null)) {
+        key = pos
+      }
       const data = {
         node,
         index,
         pos,
-        key: node.key || pos,
+        key,
         parentPos: parent.node ? parent.pos : null,
       }
       callback(data)
@@ -178,8 +182,8 @@ export function convertDataToTree (h, treeData, processer) {
  * @param processTreeEntity  User can customize the entity
  */
 export function convertTreeToEntities (treeNodes, { initWrapper, processEntity, onProcessFinished } = {}) {
-  const posEntities = {}
-  const keyEntities = {}
+  const posEntities = new Map()
+  const keyEntities = new Map()
   let wrapper = {
     posEntities,
     keyEntities,
@@ -193,11 +197,11 @@ export function convertTreeToEntities (treeNodes, { initWrapper, processEntity, 
     const { node, index, pos, key, parentPos } = item
     const entity = { node, index, key, pos }
 
-    posEntities[pos] = entity
-    keyEntities[key] = entity
+    posEntities.set(pos, entity)
+    keyEntities.set(key, entity)
 
     // Fill children
-    entity.parent = posEntities[parentPos]
+    entity.parent = posEntities.get(parentPos)
     if (entity.parent) {
       entity.parent.children = entity.parent.children || []
       entity.parent.children.push(entity)
@@ -241,8 +245,8 @@ export function parseCheckedKeys (keys) {
     return null
   }
 
-  keyProps.checkedKeys = keyListToString(keyProps.checkedKeys)
-  keyProps.halfCheckedKeys = keyListToString(keyProps.halfCheckedKeys)
+  // keyProps.checkedKeys = keyListToString(keyProps.checkedKeys)
+  // keyProps.halfCheckedKeys = keyListToString(keyProps.halfCheckedKeys)
 
   return keyProps
 }
@@ -257,22 +261,22 @@ export function parseCheckedKeys (keys) {
  * @returns {{checkedKeys: [], halfCheckedKeys: []}}
  */
 export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
-  const checkedKeys = {}
-  const halfCheckedKeys = {}; // Record the key has some child checked (include child half checked)
+  const checkedKeys = new Map()
+  const halfCheckedKeys = new Map(); // Record the key has some child checked (include child half checked)
 
   (checkStatus.checkedKeys || []).forEach((key) => {
-    checkedKeys[key] = true
+    checkedKeys.set(key, true)
   });
 
   (checkStatus.halfCheckedKeys || []).forEach((key) => {
-    halfCheckedKeys[key] = true
+    halfCheckedKeys.set(key, true)
   })
 
   // Conduct up
   function conductUp (key) {
-    if (checkedKeys[key] === isCheck) return
+    if (checkedKeys.get(key) === isCheck) return
 
-    const entity = keyEntities[key]
+    const entity = keyEntities.get(key)
     if (!entity) return
 
     const { children, parent, node } = entity
@@ -286,8 +290,8 @@ export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
     (children || [])
       .filter(child => !isCheckDisabled(child.node))
       .forEach(({ key: childKey }) => {
-        const childChecked = checkedKeys[childKey]
-        const childHalfChecked = halfCheckedKeys[childKey]
+        const childChecked = checkedKeys.get(childKey)
+        const childHalfChecked = halfCheckedKeys.get(childKey)
 
         if (childChecked || childHalfChecked) someChildChecked = true
         if (!childChecked) everyChildChecked = false
@@ -295,11 +299,11 @@ export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
 
     // Update checked status
     if (isCheck) {
-      checkedKeys[key] = everyChildChecked
+      checkedKeys.set(key, everyChildChecked)
     } else {
-      checkedKeys[key] = false
+      checkedKeys.set(key, false)
     }
-    halfCheckedKeys[key] = someChildChecked
+    halfCheckedKeys.set(key, someChildChecked)
 
     if (parent) {
       conductUp(parent.key)
@@ -308,16 +312,16 @@ export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
 
   // Conduct down
   function conductDown (key) {
-    if (checkedKeys[key] === isCheck) return
+    if (checkedKeys.get(key) === isCheck) return
 
-    const entity = keyEntities[key]
+    const entity = keyEntities.get(key)
     if (!entity) return
 
     const { children, node } = entity
 
     if (isCheckDisabled(node)) return
 
-    checkedKeys[key] = isCheck;
+    checkedKeys.set(key, isCheck);
 
     (children || []).forEach((child) => {
       conductDown(child.key)
@@ -325,14 +329,14 @@ export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
   }
 
   function conduct (key) {
-    const entity = keyEntities[key]
+    const entity = keyEntities.get(key)
 
     if (!entity) {
       warning(false, `'${key}' does not exist in the tree.`)
       return
     }
     const { children, parent, node } = entity
-    checkedKeys[key] = isCheck
+    checkedKeys.set(key, isCheck)
 
     if (isCheckDisabled(node)) return;
 
@@ -357,18 +361,18 @@ export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
   const halfCheckedKeyList = []
 
   // Fill checked list
-  Object.keys(checkedKeys).forEach((key) => {
-    if (checkedKeys[key]) {
+  for (const [key, value] of checkedKeys) {
+    if (value) {
       checkedKeyList.push(key)
     }
-  })
+  }
 
   // Fill half checked list
-  Object.keys(halfCheckedKeys).forEach((key) => {
-    if (!checkedKeys[key] && halfCheckedKeys[key]) {
+  for (const [key, value] of halfCheckedKeys) {
+    if (!checkedKeys.get(key) && value) {
       halfCheckedKeyList.push(key)
     }
-  })
+  }
 
   return {
     checkedKeys: checkedKeyList,
@@ -382,15 +386,15 @@ export function conductCheck (keyList, isCheck, keyEntities, checkStatus = {}) {
  * @param keyEntities
  */
 export function conductExpandParent (keyList, keyEntities) {
-  const expandedKeys = {}
+  const expandedKeys = new Map()
 
   function conductUp (key) {
-    if (expandedKeys[key]) return
+    if (expandedKeys.get(key)) return
 
-    const entity = keyEntities[key]
+    const entity = keyEntities.get(key)
     if (!entity) return
 
-    expandedKeys[key] = true
+    expandedKeys.set(key, true)
 
     const { parent, node } = entity
 
@@ -405,7 +409,7 @@ export function conductExpandParent (keyList, keyEntities) {
     conductUp(key)
   })
 
-  return Object.keys(expandedKeys)
+  return [...expandedKeys.keys()]
 }
 
 /**

@@ -2,6 +2,26 @@
 
 ---
 
+## 1.2.4
+`2018-12-29`
+
+- 🐞 Fix `Select` component does not trigger `popupScroll` event[#350](https://github.com/vueComponent/ant-design-vue/issues/350)
+- 🐞 Fixing the custom `Icon` component does not support `class` `style` issues.[#351](https://github.com/vueComponent/ant-design-vue/issues/351)
+- 🌟 `Tree` `TreeSelect` supports `key` of `number` type. [#343](https://github.com/vueComponent/ant-design-vue/issues/343)
+- 🌟 `Tree` components `selectedKeys`, `expandedKeys` support the `.sync` modifier.[6373ce](https://github.com/vueComponent/ant-design-vue/commit/6373ce8e92a979abb1f5dc94fa9697ee64b08dc2)
+- `TreeSelect`
+  - 🌟 `treeExpandedKeys` supports the `.sync` modifier.[983318](https://github.com/vueComponent/ant-design-vue/commit/983318b985ad727c008232c75a8598d52d0f924b)
+  - 🐞 Fix page scrolling issue when the first `focus`.[139356](https://github.com/vueComponent/ant-design-vue/commit/1393563c9b7f8cb7d7ddc0409aa5422c53fca60b)
+- 🐞 Remove the expansion animation when the `Menu` component is initialized.[#338](https://github.com/vueComponent/ant-design-vue/issues/338)
+
+## 1.2.3
+`2018-12-25`
+
+- 📝 Remove Christmas egg.
+- 🐞 Fix some components do not support array type `class` problem[#322](https://github.com/vueComponent/ant-design-vue/issues/322)
+- 🌟 `TreeSelect` adds the `treeExpandedKeys` props and `treeExpand` event to control the expansion of the tree.
+- 🐞 Fix the `Tree` component warning duplicate `key` question when using `TreeNode`。
+
 ## 1.2.2
 `2018-12-19`
 
@@ -31,7 +51,7 @@
   - No need to change built-in icons with overriding styles by providing more props in component.
   - 😓 But at the same time bring the problem that the bundle file is too big, related solutions and discussions can check the React version of ant-design [issue](https://github.com/ant-design/ant-design/issues/12011).
   - 🌟 Add the `theme` attribute to set the theme style of the icon.
-  - 🌟 Added `component` attribute, you can externally pass a component to customize the control rendering result. 
+  - 🌟 Added `component` attribute, you can externally pass a component to customize the control rendering result.
   - 🌟 The `twoToneColor` property is added to control the theme color of the two-color icon.
   - 🌟 Added static methods `Icon.getTowToneColor()` and `Icon.setTwoToneColor(...)` to globally get and set the theme color of all two-color icons.
   - 🌟 The new static method `Icon.createFromIconfontCN({...})` is added to make it easier to use icons hosted on [`iconfont.cn`](http://iconfont.cn/).

@@ -4,8 +4,10 @@ import Align from '../vc-align'
 import PopupInner from './PopupInner'
 import LazyRenderBox from './LazyRenderBox'
 import animate from '../_util/css-animation'
+import BaseMixin from '../_util/BaseMixin'
 
 export default {
+  mixins: [BaseMixin],
   props: {
     visible: PropTypes.bool,
     getClassNameFromAlign: PropTypes.func,
@@ -165,7 +167,7 @@ export default {
 
         // Delay force align to makes ui smooth
         if (!stretchChecked) {
-          sizeStyle.visibility = 'hidden'
+          // sizeStyle.visibility = 'hidden'
           setTimeout(() => {
             if (this.$refs.alignInstance) {
               this.$refs.alignInstance.forceAlign()

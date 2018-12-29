@@ -2,7 +2,7 @@ import warning from 'warning'
 import { Tree as VcTree, TreeNode } from '../vc-tree'
 import animation from '../_util/openAnimation'
 import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, getOptionProps, filterEmpty } from '../_util/props-util'
 import Icon from '../icon'
 
 function TreeProps () {
@@ -23,25 +23,25 @@ function TreeProps () {
     /** 默认展开对应树节点 */
     defaultExpandParent: PropTypes.bool,
     /** 默认展开指定的树节点 */
-    defaultExpandedKeys: PropTypes.arrayOf(String),
+    defaultExpandedKeys: PropTypes.array,
     /** （受控）展开指定的树节点 */
-    expandedKeys: PropTypes.arrayOf(String),
+    expandedKeys: PropTypes.array,
     /** （受控）选中复选框的树节点 */
     checkedKeys: PropTypes.oneOfType(
       [
-        PropTypes.arrayOf(PropTypes.string),
+        PropTypes.array,
         PropTypes.shape({
-          checked: PropTypes.arrayOf(String),
-          halfChecked: PropTypes.arrayOf(String),
+          checked: PropTypes.array,
+          halfChecked: PropTypes.array,
         }).loose,
       ]
     ),
     /** 默认选中复选框的树节点 */
-    defaultCheckedKeys: PropTypes.arrayOf(String),
+    defaultCheckedKeys: PropTypes.array,
     /** （受控）设置选中的树节点 */
-    selectedKeys: PropTypes.arrayOf(String),
+    selectedKeys: PropTypes.array,
     /** 默认选中的树节点 */
-    defaultSelectedKeys: PropTypes.arrayOf(String),
+    defaultSelectedKeys: PropTypes.array,
     selectable: PropTypes.bool,
     /** 展开/收起节点时触发 */
     // onExpand: (expandedKeys: string[], info: AntTreeNodeExpandedEvent) => void | PromiseLike<any>,
@@ -57,7 +57,7 @@ function TreeProps () {
     filterAntTreeNode: PropTypes.func,
     /** 异步加载数据 */
     loadData: PropTypes.func,
-    loadedKeys: PropTypes.arrayOf(String),
+    loadedKeys: PropTypes.array,
     // onLoaded: (loadedKeys: string[], info: { event: 'load', node: AntTreeNode; }) => void,
     /** 响应右键点击 */
     // onRightClick: (options: AntTreeNodeMouseEvent) => void,
@@ -179,13 +179,11 @@ export default {
       props: {
         ...props,
         checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
-        children: this.$slots.default || [],
+        children: filterEmpty(this.$slots.default || []),
         __propsSymbol__: Symbol(),
         switcherIcon: this.renderSwitcherIcon,
       },
-      on: {
-        ...this.$listeners,
-      },
+      on: this.$listeners,
       ref: 'tree',
       class: !showIcon && `${prefixCls}-icon-hide`,
     }

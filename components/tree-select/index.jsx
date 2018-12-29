@@ -136,10 +136,12 @@ const TreeSelect = {
           dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
           treeCheckable: checkable,
           notFoundContent: notFoundContent || locale.notFoundContent,
+          __propsSymbol__: Symbol(),
         },
         class: cls,
         on: { ...this.$listeners, change: this.onChange },
         ref: 'vcTreeSelect',
+        scopedSlots: this.$scopedSlots,
       }
       return (
         <VcTreeSelect {...VcTreeSelectProps}>{filterEmpty(this.$slots.default)}</VcTreeSelect>

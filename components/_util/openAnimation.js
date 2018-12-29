@@ -17,7 +17,7 @@ function animate (node, show, done, type) {
         height = node.offsetHeight
         // not get offsetHeight when appear
         // set it into raf get correct offsetHeight
-        if (type === 'appear' && height === 0) {
+        if (height === 0) {
           appearRequestAnimationFrameId = raf(() => {
             height = node.offsetHeight
             node.style.height = '0px'
@@ -58,9 +58,6 @@ const animation = {
   },
   leave (node, done) {
     return animate(node, false, done)
-  },
-  appear (node, done) {
-    return animate(node, true, done, 'appear')
   },
 }
 

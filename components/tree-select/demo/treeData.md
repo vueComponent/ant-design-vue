@@ -16,10 +16,9 @@ The tree structure can be populated using `treeData` property. This is a quick a
     :treeData="treeData"
     placeholder='Please select'
     treeDefaultExpandAll
-    labelInValue
     v-model="value"
   >
-    <span style="color: #08c" slot="label" slot-scope="{key, value}" v-if="key='0-0-1'">
+    <span style="color: #08c" slot="title" slot-scope="{key, value}" v-if="key='0-0-1'">
       <a-icon type="home"/>Child Node1 {{value}}
     </span>
   </a-tree-select>
@@ -27,22 +26,22 @@ The tree structure can be populated using `treeData` property. This is a quick a
 
 <script>
 const treeData = [{
-  label: 'Node1',
+  title: 'Node1',
   value: '0-0',
   key: '0-0',
   children: [{
     value: '0-0-1',
     key: '0-0-1',
-    scopedSlots: { // custom label
-      label: 'label',
+    scopedSlots: { // custom title
+      title: 'title',
     },
   }, {
-    label: 'Child Node2',
+    title: 'Child Node2',
     value: '0-0-2',
     key: '0-0-2',
   }],
 }, {
-  label: 'Node2',
+  title: 'Node2',
   value: '0-1',
   key: '0-1',
 }]

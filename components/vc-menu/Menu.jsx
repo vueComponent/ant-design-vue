@@ -165,6 +165,7 @@ const Menu = {
       },
       class: `${props.prefixCls}-root`,
       on: {
+        ...this.$listeners,
         click: this.onClick,
         openChange: this.onOpenChange,
         deselect: this.onDeselect,

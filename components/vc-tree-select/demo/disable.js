@@ -1,6 +1,7 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
+import BaseMixin from '../../_util/BaseMixin'
 import '../assets/index.less'
-import TreeSelect from '../index'
+import TreeSelect from '../src/index'
 
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
@@ -33,20 +34,18 @@ const treeData = [{
 }]
 
 export default {
-  data () {
-    return {
-      value: ['0-0-0'],
-      disabled: false,
-    }
-  },
-
+  mixins: [BaseMixin],
+  data: () => ({
+    value: ['0-0-0'],
+    disabled: false,
+  }),
   methods: {
-    onChange  (value) {
+    onChange (value) {
       console.log('onChange ', value, arguments)
-      this.value = value
+      this.setState({ value })
     },
     switch (checked) {
-      this.disabled = checked
+      this.setState({ disabled: checked })
     },
   },
 
@@ -61,6 +60,7 @@ export default {
         treeCheckable: true,
         showCheckedStrategy: SHOW_PARENT,
         searchPlaceholder: 'Please select',
+        __propsSymbol__: Symbol(),
       },
       on: {
         change: this.onChange,
@@ -77,4 +77,3 @@ export default {
     )
   },
 }
-

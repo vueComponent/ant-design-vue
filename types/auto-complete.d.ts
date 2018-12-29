@@ -5,9 +5,9 @@
 
 import { AntdComponent } from './component';
 
-export type Value = { key: string };
+export declare type Value = { key: string };
 
-export type SelectValue =
+export declare type SelectValue =
   | string
   | number
   | Value

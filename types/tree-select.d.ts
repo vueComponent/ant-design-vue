@@ -4,7 +4,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { TreeNode } from "../components/vc-tree/src";
+import { TreeNode } from './tree-node';
 
 export interface TreeData {
   key: string;

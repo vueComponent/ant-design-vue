@@ -148,7 +148,7 @@ export declare class TreeSelect extends AntdComponent {
    * Data of the treeNodes, manual construction work is no longer needed
    * if this property has been set(ensure the Uniqueness of each value)
    * @default []
-   * @type aobject[]
+   * @type object[]
    */
   treeData: TreeData[];
 

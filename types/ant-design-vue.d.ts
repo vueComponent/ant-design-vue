@@ -3,6 +3,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
+import Vue from "vue";
+
 import { Affix } from "./affix";
 import { Anchor } from "./anchor/anchor";
 import { AutoComplete } from "./auto-complete";
@@ -57,6 +59,13 @@ import { Tooltip } from "./tootip/tooltip";
 import { Upload } from "./upload";
 import { Drawer } from "./drawer";
 import { Skeleton } from "./skeleton";
+
+/**
+ * Install all ant-design-vue components into Vue.
+ * Please do not invoke this method directly.
+ * Call `Vue.use(Antd)` to install.
+ */
+export function install(vue: typeof Vue): void;
 
 declare const message: Message;
 declare const notification: Notification;

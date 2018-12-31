@@ -1,4 +1,3 @@
-// Type definitions for Ant Design Vue 1.2.2
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
@@ -17,9 +16,9 @@ export declare class Transfer extends AntdComponent {
    * Used for setting the source data. The elements that are part of this array will be present the left column.
    * Except the elements whose keys are included in targetKeys prop.
    * @default []
-   * @type TransferItem
+   * @type TransferItem[]
    */
-  dataSource: TransferItem;
+  dataSource: TransferItem[];
 
   /**
    * Whether disabled transfer

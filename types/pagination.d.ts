@@ -1,4 +1,3 @@
-// Type definitions for Ant Design Vue 1.2.2
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
@@ -52,7 +51,7 @@ export declare class Pagination extends AntdComponent {
    * @default false
    * @type boolean
    */
-  showSizeChanger: Boolean;
+  showSizeChanger: boolean;
 
   /**
    * specify the sizeChanger options

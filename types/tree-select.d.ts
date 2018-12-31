@@ -1,4 +1,3 @@
-// Type definitions for Ant Design Vue 1.2.2
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
@@ -7,7 +6,7 @@ import { AntdComponent } from './component';
 import { TreeNode } from './tree-node';
 
 export interface TreeData {
-  key: string;
+  key: string | number;
   value: string;
   label: any;
   children: any;
@@ -171,9 +170,15 @@ export declare class TreeSelect extends AntdComponent {
 
   /**
    * Default expanded treeNodes
-   * @type string[]
+   * @type string[] | number[]
    */
-  treeDefaultExpandedKeys: string[];
+  treeDefaultExpandedKeys: string[] | number[];
+
+  /**
+   * Set expanded keys
+   * @type string[] | number[]
+   */
+  treeExpandedKeys: string[] | number[];
 
   /**
    * Will be used for filtering if filterTreeNode returns true

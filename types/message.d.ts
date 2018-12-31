@@ -1,4 +1,3 @@
-// Type definitions for Ant Design Vue 1.2.2
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
@@ -72,6 +71,7 @@ export declare class Message {
   warn(content: any, duration?: number, onClose?: () => void): Promise<any>;
   info(content: any, duration?: number, onClose?: () => void): Promise<any>;
   error(content: any, duration?: number, onClose?: () => void): Promise<any>;
+  loading(content: any, duration?: number, onClose?: () => void): Promise<any>;
   open: (config: MessageOptions) => Promise<any>;
   config: (options: MessageConfigOptions) => void;
   destroy: () => void;

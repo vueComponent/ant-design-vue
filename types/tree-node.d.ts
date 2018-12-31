@@ -1,4 +1,3 @@
-// Type definitions for Ant Design Vue 1.2.2
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
@@ -56,9 +55,9 @@ export declare class TreeNode extends AntdComponent {
    * @description Required property, should be unique in the tree
    * (In tree: Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys)
    * @default internal calculated position of treeNode or undefined
-   * @type string
+   * @type string | number
    */
-  key: string;
+  key: string | number;
 
   /**
    * Selectable

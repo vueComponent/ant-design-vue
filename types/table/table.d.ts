@@ -284,11 +284,31 @@ export declare class Table extends AntdComponent {
    * Set props on per header row
    * @type Function
    */
-  customHeaderRow: (column: any, index: number) => any;
+  customHeaderRow: (
+    column: any,
+    index: number
+  ) => {
+    props: object;
+    attrs: object;
+    on: object;
+    class: object;
+    style: object;
+    nativeOn: object;
+  };
 
   /**
    * Set props on per row
    * @type Function
    */
-  customRow: (record: any, index: number) => any;
+  customRow: (
+    record: any,
+    index: number
+  ) => {
+    props: object;
+    attrs: object;
+    on: object;
+    class: object;
+    style: object;
+    nativeOn: object;
+  };
 }

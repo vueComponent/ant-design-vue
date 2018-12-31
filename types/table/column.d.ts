@@ -132,13 +132,31 @@ export declare class Column extends AntdComponent {
    * Set props on per cell
    * @type Function
    */
-  customCell: (record: any) => any;
+  customCell: (
+    record: any
+  ) => {
+    props: object;
+    attrs: object;
+    on: object;
+    class: object;
+    style: object;
+    nativeOn: object;
+  };
 
   /**
    * Set props on per header cell
    * @type
    */
-  customHeaderCell: (column: any) => any;
+  customHeaderCell: (
+    column: any
+  ) => {
+    props: object;
+    attrs: object;
+    on: object;
+    class: object;
+    style: object;
+    nativeOn: object;
+  };
 
   /**
    * Callback executed when the confirm filter button is clicked, Use as a filter event when using template or jsx

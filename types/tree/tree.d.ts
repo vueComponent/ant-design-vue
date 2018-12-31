@@ -39,9 +39,9 @@ export declare class Tree extends AntdComponent {
    * its object has checked and halfChecked property. Regardless of whether the child or parent treeNode is checked,
    * they won't impact each other.
    * @default []
-   * @type string[] | { checked: string[]; halfChecked: string[] }
+   * @type string[] | number[] | { checked: string[]; halfChecked: string[] }
    */
-  checkedKeys: string[] | { checked: string[]; halfChecked: string[] };
+  checkedKeys: string[] | number[] | { checked: string[]; halfChecked: string[] };
 
   /**
    * Check treeNode precisely; parent treeNode and children treeNodes are not associated
@@ -53,9 +53,9 @@ export declare class Tree extends AntdComponent {
   /**
    * Specifies the keys of the default checked treeNodes
    * @default []
-   * @type string[]
+   * @type string[] | number[]
    */
-  defaultCheckedKeys: string[];
+  defaultCheckedKeys: string[] | number[];
 
   /**
    * Whether to expand all treeNodes by default
@@ -67,9 +67,9 @@ export declare class Tree extends AntdComponent {
   /**
    * Specify the keys of the default expanded treeNodes
    * @default []
-   * @type string[]
+   * @type string[] | number[]
    */
-  defaultExpandedKeys: string[];
+  defaultExpandedKeys: string[] | number[];
 
   /**
    * auto expand parent treeNodes when init
@@ -81,9 +81,9 @@ export declare class Tree extends AntdComponent {
   /**
    * Specifies the keys of the default selected treeNodes
    * @default []
-   * @type string[]
+   * @type string[] | number[]
    */
-  defaultSelectedKeys: string[];
+  defaultSelectedKeys: string[] | number[];
 
   /**
    * whether disabled the tree
@@ -102,9 +102,9 @@ export declare class Tree extends AntdComponent {
   /**
    * (Controlled) Specifies the keys of the expanded treeNodes
    * @default []
-   * @type string[]
+   * @type string[] | number[]
    */
-  expandedKeys: string[];
+  expandedKeys: string[] | number[];
 
   /**
    * Defines a function to filter (highlight) treeNodes.
@@ -135,9 +135,9 @@ export declare class Tree extends AntdComponent {
 
   /**
    * (Controlled) Specifies the keys of the selected treeNodes
-   * @type string[]
+   * @type string[] | number[]
    */
-  selectedKeys: string[];
+  selectedKeys: string[] | number[];
 
   /**
    * Shows the icon before a TreeNode's title.

@@ -108,8 +108,8 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| defaultValue | to set default date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
-| defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
+| defaultValue | to set default date | [moment](http://momentjs.com/)\[] | - |
+| defaultPickerValue | to set default picker date | [moment](http://momentjs.com/)\[] | - |
 | disabledTime | to specify the time that cannot be selected | function(dates: [moment, moment], partial: `'start'|'end'`) | - |
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges | preseted ranges for quick selection | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | - |

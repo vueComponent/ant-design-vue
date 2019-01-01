@@ -23,7 +23,7 @@ export declare class DropdownButton extends AntdComponent {
    * @default 'bottomLeft'
    * @type string
    */
-  plcement: 
+  placement: 
   | "topLeft"
   | "topCenter"
   | "topRight"

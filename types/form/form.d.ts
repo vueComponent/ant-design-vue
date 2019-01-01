@@ -184,31 +184,31 @@ export interface WrappedFormUtils {
    * Two-way binding for form, single file template can be bound using the directive v-decorator.
    * @type Function
    */
-  getFieldDecorator(id: string, options: FieldDecoratorOptions);
+  getFieldDecorator(id: string, options: FieldDecoratorOptions): any;
 
   /**
    * Get the error of a field.
    * @type Function (Function(name))
    */
-  getFieldError(name: string);
+  getFieldError(name: string): any;
 
   /**
    * Get the specified fields' error. If you don't specify a parameter, you will get all fields' error.
    * @type Function (Function([names: string[]))
    */
-  getFieldsError(names: string[]);
+  getFieldsError(names: string[]): any;
 
   /**
    * Get the specified fields' values. If you don't specify a parameter, you will get all fields' values.
    * @type Funtion (Function([fieldNames: string[]))
    */
-  getFieldsValue(fieldNames: string[]);
+  getFieldsValue(fieldNames: string[]): any;
 
   /**
    * Get the value of a field.
    * @type Function (Function(fieldName: string))
    */
-  getFieldValue(fieldName: string);
+  getFieldValue(fieldName: string): any;
 
   /**
    * Check whether any of fields is touched by getFieldDecorator's options.trigger event

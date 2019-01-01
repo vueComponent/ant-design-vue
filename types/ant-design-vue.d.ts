@@ -22,6 +22,7 @@ import { Checkbox } from "./checkbox/checkbox";
 import { Col } from "./grid/col";
 import { DatePicker } from "./date-picker/date-picker";
 import { Divider } from "./divider";
+import { Drawer } from "./drawer";
 import { Dropdown } from "./dropdown/dropdown";
 import { Form } from "./form/form";
 import { Icon } from "./icon";
@@ -42,6 +43,7 @@ import { Radio } from "./radio/radio";
 import { Rate } from "./rate";
 import { Row } from "./grid/row";
 import { Select } from "./select/select";
+import { Skeleton } from "./skeleton";
 import { Slider } from "./slider";
 import { Spin } from "./spin";
 import { Steps } from "./steps/steps";
@@ -56,8 +58,6 @@ import { TimePicker } from "./time-picker";
 import { Timeline } from "./timeline/timeline";
 import { Tooltip } from "./tootip/tooltip";
 import { Upload } from "./upload";
-import { Drawer } from "./drawer";
-import { Skeleton } from "./skeleton";
 
 /**
  * Install all ant-design-vue components into Vue.

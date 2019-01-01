@@ -11,6 +11,12 @@ export default {
     type: 'Data Display',
     title: 'Badge',
   },
+  comment: {
+    category: 'Components',
+    subtitle: '评论',
+    type: 'Data Display',
+    title: 'Comment',
+  },
   breadcrumb: {
     category: 'Components',
     subtitle: '面包屑',

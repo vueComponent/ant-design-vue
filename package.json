@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -16,6 +16,7 @@
         "frontend"
     ],
     "main": "dist/antd.min.js",
+    "typings": "types/index.d.ts",
     "files": [
         "dist",
         "lib",

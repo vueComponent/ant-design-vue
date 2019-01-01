@@ -177,6 +177,13 @@ declare interface FieldDecoratorOptions {
    * @type string
    */
   valuePropName?: string;
+
+  /**
+   * Whether to keep the information of the child node all the time.
+   * @default false
+   * @type boolean
+   */
+  preserve?: boolean;
 }
 
 export interface WrappedFormUtils {

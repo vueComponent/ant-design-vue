@@ -1,9 +1,9 @@
-import classNames from 'classnames'
+import warning from 'warning'
 import VcDrawer from '../vc-drawer/src'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import Icon from '../icon'
-import { getComponentFromProp, getOptionProps } from '../_util/props-util'
+import { getComponentFromProp, getOptionProps, getClass } from '../_util/props-util'
 
 const Drawer = {
   name: 'ADrawer',
@@ -26,6 +26,10 @@ const Drawer = {
   },
   mixins: [BaseMixin],
   data () {
+    warning(
+      this.wrapClassName === undefined,
+      'wrapClassName is deprecated, please use className instead.',
+    )
     this.destoryClose = false
     this.preVisible = this.$props.visible
     return {
@@ -195,16 +199,17 @@ const Drawer = {
         open: visible,
         showMask: props.mask,
         placement,
-        wrapClassName: classNames({
-          [wrapClassName]: !!wrapClassName,
-          [haveMask]: !!haveMask,
-        }),
       },
       on: {
         maskClick: this.onMaskClick,
         ...this.$listeners,
       },
       style: this.getRcDrawerStyle(),
+      class: {
+        [wrapClassName]: !!wrapClassName,
+        ...getClass(this),
+        [haveMask]: !!haveMask,
+      },
     }
     return (
       <VcDrawer

@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import Vue from 'vue'
 import ref from 'vue-ref'
 import BaseMixin from '../../_util/BaseMixin'
-import { initDefaultProps, getEvents } from '../../_util/props-util'
+import { initDefaultProps, getEvents, getClass } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import ContainerRender from '../../_util/ContainerRender'
 import getScrollBarSize from '../../_util/getScrollBarSize'
@@ -10,7 +10,7 @@ import drawerProps from './drawerProps'
 import {
   dataToArray,
   transitionEnd,
-  trnasitionStr,
+  transitionStr,
   addEventListener,
   removeEventListener,
   transformArguments,
@@ -40,7 +40,7 @@ const Drawer = {
     showMask: true,
     handler: true,
     maskStyle: {},
-    wrapClassName: '',
+    wrapperClassName: '',
   }),
   data () {
     this.levelDom = []
@@ -51,8 +51,9 @@ const Drawer = {
     this.sFirstEnter = this.firstEnter
     this.timeout = null
     this.children = null
-    this.drawerId = Number((Date.now() + Math.random()).toString()
-      .replace('.', Math.round(Math.random() * 9))).toString(16)
+    this.drawerId = Number(
+      (Date.now() + Math.random()).toString().replace('.', Math.round(Math.random() * 9)),
+    ).toString(16)
     const open = this.open !== undefined ? this.open : !!this.defaultOpen
     currentDrawer[this.drawerId] = open
     this.orignalOpen = this.open
@@ -170,7 +171,7 @@ const Drawer = {
     onWrapperTransitionEnd (e) {
       if (e.target === this.contentWrapper) {
         this.dom.style.transition = ''
-        if (!this.sOpen && this.getCrrentDrawerSome()) {
+        if (!this.sOpen && this.getCurrentDrawerSome()) {
           document.body.style.overflowX = ''
           if (this.maskDom) {
             this.maskDom.style.left = ''
@@ -185,7 +186,7 @@ const Drawer = {
         this.container = this.defaultGetContainer()
       }
     },
-    getCrrentDrawerSome () {
+    getCurrentDrawerSome () {
       return !Object.keys(currentDrawer).some(key => currentDrawer[key])
     },
     getSelfContainer () {
@@ -215,8 +216,11 @@ const Drawer = {
       if (level === 'all') {
         const children = Array.prototype.slice.call(this.parent.children)
         children.forEach(child => {
-          if (child.nodeName !== 'SCRIPT' && child.nodeName !== 'STYLE' &&
-            child.nodeName !== 'LINK' && child !== this.container) {
+          if (child.nodeName !== 'SCRIPT' &&
+            child.nodeName !== 'STYLE' &&
+            child.nodeName !== 'LINK' &&
+            child !== this.container
+          ) {
             this.levelDom.push(child)
           }
         })
@@ -251,9 +255,12 @@ const Drawer = {
         if (getContainer === 'body') {
           const eventArray = ['touchstart']
           const domArray = [document.body, this.maskDom, this.handlerdom, this.contentDom]
-          const right = document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) &&
+          const right =
+           document.body.scrollHeight >
+            (window.innerHeight || document.documentElement.clientHeight) &&
           window.innerWidth > document.body.offsetWidth
-            ? getScrollBarSize(1) : 0
+             ? getScrollBarSize(1)
+             : 0
           let widthTransition = `width ${duration} ${ease}`
           const trannsformTransition = `transform ${duration} ${ease}`
           if (open && document.body.style.overflow !== 'hidden') {
@@ -295,12 +302,12 @@ const Drawer = {
                 this.passive
               )
             })
-          } else if (this.getCrrentDrawerSome()) {
+          } else if (this.getCurrentDrawerSome()) {
             document.body.style.overflow = ''
             if ((this.isOpenChange || openTransition) && right) {
               document.body.style.position = ''
               document.body.style.width = ''
-              if (trnasitionStr) {
+              if (transitionStr) {
                 document.body.style.overflowX = 'hidden'
               }
               this.dom.style.transition = 'none'
@@ -367,21 +374,19 @@ const Drawer = {
         maskStyle,
         width,
         height,
-        wrapClassName,
       } = this.$props
       const children = this.$slots.default
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
-        [wrapClassName]: !!wrapClassName,
+        ...getClass(this),
       })
       const isOpenChange = this.isOpenChange
       const isHorizontal = placement === 'left' || placement === 'right'
       const placementName = `translate${isHorizontal ? 'X' : 'Y'}`
       // 百分比与像素动画不同步，第一次打用后全用像素动画。
       // const defaultValue = !this.contentDom || !level ? '100%' : `${value}px`;
-      const placementPos =
-        placement === 'left' || placement === 'top' ? '-100%' : '100%'
+      const placementPos = placement === 'left' || placement === 'top' ? '-100%' : '100%'
       const transform = open ? '' : `${placementName}(${placementPos})`
       if (isOpenChange === undefined || isOpenChange) {
         const contentValue = this.contentDom ? this.contentDom.getBoundingClientRect()[
@@ -390,7 +395,7 @@ const Drawer = {
         const value = (isHorizontal ? width : height) || contentValue
         this.setLevelDomTransform(open, false, placementName, value)
       }
-      let handlerCildren
+      let handlerChildren
       if (handler !== false) {
         const handlerDefalut = (
           <div class='drawer-handle'>
@@ -400,7 +405,7 @@ const Drawer = {
         const { handler: handlerSlot } = this.$slots
         const handlerSlotVnode = handlerSlot || handlerDefalut
         const { click: handleIconClick } = getEvents(handlerSlotVnode)
-        handlerCildren = cloneElement(handlerSlotVnode, {
+        handlerChildren = cloneElement(handlerSlotVnode, {
           on: {
             click: (e) => {
               handleIconClick && handleIconClick()
@@ -475,7 +480,7 @@ const Drawer = {
             >
               {children}
             </div>
-            {handlerCildren}
+            {handlerChildren}
           </div>
         </div>
       )
@@ -484,7 +489,7 @@ const Drawer = {
       return this.open !== undefined ? this.open : this.sOpen
     },
     getTouchParentScroll (root, currentTarget, differX, differY) {
-      if (!currentTarget) {
+      if (!currentTarget || currentTarget === document) {
         return false
       }
       // root 为 drawer-content 设定了 overflow, 判断为 root 的 parent 时结束滚动；
@@ -506,20 +511,27 @@ const Drawer = {
        */
       const t = currentTarget.scrollTop
       const l = currentTarget.scrollLeft
-      currentTarget.scrollTo(currentTarget.scrollLeft + 1, currentTarget.scrollTop + 1)
+      if (currentTarget.scrollTo) {
+        currentTarget.scrollTo(currentTarget.scrollLeft + 1, currentTarget.scrollTop + 1)
+      }
       const currentT = currentTarget.scrollTop
       const currentL = currentTarget.scrollLeft
-      currentTarget.scrollTo(currentTarget.scrollLeft - 1, currentTarget.scrollTop - 1)
-
+      if (currentTarget.scrollTo) {
+        currentTarget.scrollTo(currentTarget.scrollLeft - 1, currentTarget.scrollTop - 1)
+      }
       if (
-        isY && (!scrollY || !(currentT - t) ||
-          (scrollY && (currentTarget.scrollTop >= scrollY && differY < 0 ||
-            currentTarget.scrollTop <= 0 && differY > 0))
-        ) ||
-        isX && (!scrollX || !(currentL - l) ||
-          (scrollX && (currentTarget.scrollLeft >= scrollX && differX < 0 ||
-            currentTarget.scrollLeft <= 0 && differX > 0))
-        )
+        (isY &&
+          (!scrollY ||
+            !(currentT - t) ||
+            (scrollY &&
+              ((currentTarget.scrollTop >= scrollY && differY < 0) ||
+                (currentTarget.scrollTop <= 0 && differY > 0))))) ||
+        (isX &&
+          (!scrollX ||
+            !(currentL - l) ||
+            (scrollX &&
+              ((currentTarget.scrollLeft >= scrollX && differX < 0) ||
+                (currentTarget.scrollLeft <= 0 && differX > 0)))))
       ) {
         return this.getTouchParentScroll(root, currentTarget.parentNode, differX, differY)
       }
@@ -544,8 +556,8 @@ const Drawer = {
       if (
         currentTarget === this.maskDom ||
         currentTarget === this.handlerdom ||
-        currentTarget === this.contentDom &&
-        this.getTouchParentScroll(currentTarget, e.target, differX, differY)
+        (currentTarget === this.contentDom &&
+        this.getTouchParentScroll(currentTarget, e.target, differX, differY))
       ) {
         e.preventDefault()
       }
@@ -588,7 +600,7 @@ const Drawer = {
         </div>
       )
     }
-    if (!this.container || !open && !this.sFirstEnter) {
+    if (!this.container || (!open && !this.sFirstEnter)) {
       return null
     }
     return (

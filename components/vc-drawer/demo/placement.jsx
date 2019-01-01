@@ -35,7 +35,7 @@ export default {
     return (
       <div >
         {this.childShow && (
-          <Drawer placement={this.placement} width={this.width} hieght={this.height}>
+          <Drawer placement={this.placement} width={this.width} height={this.height}>
             <Menu
               defaultSelectedKeys={['1']}
               defaultOpenKeys={['sub1']}

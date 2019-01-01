@@ -37,6 +37,7 @@ const uploadProps = {
   openFileDialogOnClick: PropTypes.bool,
 }
 export default {
+  inheritAttrs: false,
   name: 'Upload',
   mixins: [BaseMixin],
   props: initDefaultProps(uploadProps, {
@@ -89,6 +90,7 @@ export default {
       },
       on: this.$listeners,
       ref: 'uploaderRef',
+      attrs: this.$attrs,
     }
     if (this.supportServerRender) {
       const ComponentUploader = this.Component

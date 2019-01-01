@@ -1,0 +1,46 @@
+// Project: https://github.com/vueComponent/ant-design-vue
+// Definitions by: akki-jat <https://github.com/akki-jat>
+// Definitions: https://github.com/vueComponent/ant-design-vue/types
+
+import { DatepickerCommon } from "./common";
+import { Moment } from "moment";
+
+export declare class MonthPicker extends DatepickerCommon {
+  /**
+   * to set default date
+   * @type Moment
+   */
+  defaultValue: Moment;
+
+  /**
+   * to set default picker date
+   * @type Moment
+   */
+  defaultPickerValue: Moment;
+
+  /**
+   * to set the date format, refer to moment.js
+   * @default 'YYYY-MM'
+   * @type string
+   * @see http://momentjs.com
+   */
+  format: string;
+
+  /**
+   * Custom month cell content render method by setting a scoped slot
+   * @type Function (slot="monthCellContentRender", slot-scope="date, locale")
+   */
+  monthCellContentRender: Function;
+
+  /**
+   * render extra footer in panel by setting a scoped slot
+   * @type any (slot="renderExtraFooter")
+   */
+  renderExtraFooter: any;
+
+  /**
+   * to set date
+   * @type Moment
+   */
+  value: Moment;
+}

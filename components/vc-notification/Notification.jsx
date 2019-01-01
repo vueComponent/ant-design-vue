@@ -7,6 +7,9 @@ import createChainedFunction from '../_util/createChainedFunction'
 import getTransitionProps from '../_util/getTransitionProps'
 import Notice from './Notice'
 
+function noop () {
+}
+
 let seed = 0
 const now = Date.now()
 
@@ -91,6 +94,7 @@ const Notification = {
         },
         on: {
           close,
+          click: notice.onClick || noop,
         },
         style,
         class: className,

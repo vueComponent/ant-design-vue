@@ -1,4 +1,4 @@
-// based on rc-input-number 4.3.1
+// based on rc-input-number 4.3.7
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util'
@@ -73,6 +73,8 @@ const inputNumberProps = {
   required: PropTypes.bool,
   pattern: PropTypes.string,
   decimalSeparator: PropTypes.string,
+  autoComplete: PropTypes.string,
+  title: PropTypes.string,
 }
 
 export default {
@@ -90,6 +92,7 @@ export default {
     step: 1,
     parser: defaultParser,
     required: false,
+    autoComplete: 'off',
   }),
   data () {
     let value
@@ -274,7 +277,7 @@ export default {
       let val = value
       if (val === '') {
         val = ''
-      } else if (!this.isNotCompleteNumber(val)) {
+      } else if (!this.isNotCompleteNumber(parseFloat(val, 10))) {
         val = this.getValidValue(val)
       } else {
         val = this.sValue
@@ -583,7 +586,8 @@ export default {
     },
   },
   render () {
-    const { prefixCls, disabled, readOnly, useTouch } = this.$props
+    const { prefixCls, disabled, readOnly, useTouch, autoComplete,
+      upHandler, downHandler } = this.$props
     const classes = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
@@ -657,6 +661,7 @@ export default {
     const contentProps = {
       on: { mouseenter, mouseleave, mouseover, mouseout },
       class: classes,
+      attrs: { title: this.$props.title },
     }
     const upHandlerProps = {
       props: {
@@ -697,7 +702,7 @@ export default {
           <InputHandler
             {...upHandlerProps}
           >
-            {this.upHandler || <span
+            {upHandler || <span
               unselectable='unselectable'
               class={`${prefixCls}-handler-up-inner`}
               onClick={preventDefault}
@@ -706,7 +711,7 @@ export default {
           <InputHandler
             {...downHandlerProps}
           >
-            {this.downHandler || <span
+            {downHandler || <span
               unselectable='unselectable'
               class={`${prefixCls}-handler-down-inner`}
               onClick={preventDefault}
@@ -727,7 +732,7 @@ export default {
             onClick={this.handleInputClick}
             class={`${prefixCls}-input`}
             tabIndex={this.tabIndex}
-            autoComplete='off'
+            autoComplete={autoComplete}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             onKeydown={editable ? this.onKeyDown : noop}

@@ -126,6 +126,8 @@ import { default as Skeleton } from './skeleton'
 
 import { default as Comment } from './comment'
 
+import { default as ConfigProvider } from './config-provider'
+
 const components = [
   Affix,
   Anchor,
@@ -180,6 +182,7 @@ const components = [
   Drawer,
   Skeleton,
   Comment,
+  ConfigProvider,
 ]
 
 const install = function (Vue) {
@@ -259,6 +262,7 @@ export {
   Drawer,
   Skeleton,
   Comment,
+  ConfigProvider,
 }
 
 export default {

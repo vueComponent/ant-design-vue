@@ -117,7 +117,7 @@ export default {
     },
 
     resetEffect (node) {
-      if (!node || node === this.extraNode) {
+      if (!node || node === this.extraNode || !(node instanceof Element)) {
         return
       }
       const { insertExtraNode } = this.$props

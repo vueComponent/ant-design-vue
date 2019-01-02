@@ -45,6 +45,13 @@ const AjaxUploader = {
       uid: getUid(),
     }
   },
+  mounted () {
+    this._isMounted = true
+  },
+  beforeDestroy () {
+    this._isMounted = false
+    this.abort()
+  },
   methods: {
     onChange (e) {
       const files = e.target.files
@@ -175,15 +182,7 @@ const AjaxUploader = {
       }
     },
   },
-  mounted () {
-    this.$nextTick(() => {
-      this._isMounted = true
-    })
-  },
-  beforeDestroy () {
-    this._isMounted = false
-    this.abort()
-  },
+
   render () {
     const { $props, $attrs } = this
     const {

@@ -579,9 +579,9 @@ exports[`Locale Provider should display the text as ar 1`] = `
         <div class="ant-transfer-list-body-not-found">لا يوجد محتوى</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -946,9 +946,9 @@ exports[`Locale Provider should display the text as bg 1`] = `
         <div class="ant-transfer-list-body-not-found">Няма намерени</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -1313,9 +1313,9 @@ exports[`Locale Provider should display the text as ca 1`] = `
         <div class="ant-transfer-list-body-not-found">No trobat</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -1680,9 +1680,9 @@ exports[`Locale Provider should display the text as cs 1`] = `
         <div class="ant-transfer-list-body-not-found">Nenalezeno</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -2047,9 +2047,9 @@ exports[`Locale Provider should display the text as de 1`] = `
         <div class="ant-transfer-list-body-not-found">Nicht gefunden</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -2414,9 +2414,9 @@ exports[`Locale Provider should display the text as el 1`] = `
         <div class="ant-transfer-list-body-not-found">Δεν βρέθηκε</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -2781,9 +2781,9 @@ exports[`Locale Provider should display the text as en 1`] = `
         <div class="ant-transfer-list-body-not-found">Not Found</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -3148,9 +3148,9 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
         <div class="ant-transfer-list-body-not-found">Not Found</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -3515,9 +3515,9 @@ exports[`Locale Provider should display the text as es 1`] = `
         <div class="ant-transfer-list-body-not-found">No encontrado</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -3882,9 +3882,9 @@ exports[`Locale Provider should display the text as et 1`] = `
         <div class="ant-transfer-list-body-not-found">Ei leitud</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -4249,9 +4249,9 @@ exports[`Locale Provider should display the text as fa 1`] = `
         <div class="ant-transfer-list-body-not-found">داده‌ای موجود نیست</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -4616,9 +4616,9 @@ exports[`Locale Provider should display the text as fi 1`] = `
         <div class="ant-transfer-list-body-not-found">Ei löytynyt</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -4983,9 +4983,9 @@ exports[`Locale Provider should display the text as fr 1`] = `
         <div class="ant-transfer-list-body-not-found">Pas de résultat</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -5350,9 +5350,9 @@ exports[`Locale Provider should display the text as fr 2`] = `
         <div class="ant-transfer-list-body-not-found">Pas de résultat</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -5717,9 +5717,9 @@ exports[`Locale Provider should display the text as is 1`] = `
         <div class="ant-transfer-list-body-not-found">Engar færslur</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -6084,9 +6084,9 @@ exports[`Locale Provider should display the text as it 1`] = `
         <div class="ant-transfer-list-body-not-found">Non trovato</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -6451,9 +6451,9 @@ exports[`Locale Provider should display the text as ja 1`] = `
         <div class="ant-transfer-list-body-not-found">結果はありません</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -6818,9 +6818,9 @@ exports[`Locale Provider should display the text as ko 1`] = `
         <div class="ant-transfer-list-body-not-found">데이터 없음</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -7185,9 +7185,9 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
         <div class="ant-transfer-list-body-not-found">Peyda Nebû</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -7552,9 +7552,9 @@ exports[`Locale Provider should display the text as mn-mn 1`] = `
         <div class="ant-transfer-list-body-not-found">Олдсонгүй</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -7919,9 +7919,9 @@ exports[`Locale Provider should display the text as nb 1`] = `
         <div class="ant-transfer-list-body-not-found">Ingen treff</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -8286,9 +8286,9 @@ exports[`Locale Provider should display the text as nl 1`] = `
         <div class="ant-transfer-list-body-not-found">Niet gevonden</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -8653,9 +8653,9 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
         <div class="ant-transfer-list-body-not-found">Niet gevonden</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -9020,9 +9020,9 @@ exports[`Locale Provider should display the text as pl 1`] = `
         <div class="ant-transfer-list-body-not-found">Nie znaleziono</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -9387,9 +9387,9 @@ exports[`Locale Provider should display the text as pt 1`] = `
         <div class="ant-transfer-list-body-not-found">Sem resultados</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -9754,9 +9754,9 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
         <div class="ant-transfer-list-body-not-found">Não encontrado</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -10121,9 +10121,9 @@ exports[`Locale Provider should display the text as ru 1`] = `
         <div class="ant-transfer-list-body-not-found">Ничего не найдено</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -10488,9 +10488,9 @@ exports[`Locale Provider should display the text as sk 1`] = `
         <div class="ant-transfer-list-body-not-found">Nenájdené</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -10855,9 +10855,9 @@ exports[`Locale Provider should display the text as sl 1`] = `
         <div class="ant-transfer-list-body-not-found">Ni rezultatov iskanja</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -11222,9 +11222,9 @@ exports[`Locale Provider should display the text as sr 1`] = `
         <div class="ant-transfer-list-body-not-found">Nisu pronađeni rezultati pretrage</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -11589,9 +11589,9 @@ exports[`Locale Provider should display the text as sv 1`] = `
         <div class="ant-transfer-list-body-not-found">Info saknas</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -11956,9 +11956,9 @@ exports[`Locale Provider should display the text as th 1`] = `
         <div class="ant-transfer-list-body-not-found">ไม่พบข้อมูล</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -12323,9 +12323,9 @@ exports[`Locale Provider should display the text as tr 1`] = `
         <div class="ant-transfer-list-body-not-found">Bulunamadı</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -12690,9 +12690,9 @@ exports[`Locale Provider should display the text as uk 1`] = `
         <div class="ant-transfer-list-body-not-found">Нічого не знайдено</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -13057,9 +13057,9 @@ exports[`Locale Provider should display the text as vi 1`] = `
         <div class="ant-transfer-list-body-not-found">Không Tìm Thấy</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -13424,9 +13424,9 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
         <div class="ant-transfer-list-body-not-found">无匹配结果</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">
@@ -13791,9 +13791,9 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
         <div class="ant-transfer-list-body-not-found">查無此資料</div>
       </div>
     </div>
-    <div class="ant-transfer-operation"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-          </svg></i></button><button type="button" disabled="disabled" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+          </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm"><i class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
             <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
           </svg></i></button></div>
     <div class="ant-transfer-list">

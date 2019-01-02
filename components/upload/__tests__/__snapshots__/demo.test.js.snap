@@ -79,4 +79,4 @@ exports[`renders ./components/upload/demo/picture-style.md correctly 1`] = `
 </span></div>
 `;
 
-exports[`renders ./components/upload/demo/upload-manually.md correctly 1`] = `<div class="clearfix"><span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span> <button type="button" disabled="disabled" class="ant-btn ant-btn-primary" style="margin-top: 16px;"><span>Start Upload</span></button></div>`;
+exports[`renders ./components/upload/demo/upload-manually.md correctly 1`] = `<div class="clearfix"><span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span> <button disabled="disabled" type="button" class="ant-btn ant-btn-primary" style="margin-top: 16px;"><span>Start Upload</span></button></div>`;

@@ -50,12 +50,9 @@ describe('Upload', () => {
     }
     const wrapper = mount(Upload, props)
     setTimeout(() => {
-      const mockFile = new File(['foo'], 'foo.png', {
-        type: 'image/png',
-      })
       wrapper.find({ name: 'ajaxUploader' }).vm.onChange({
         target: {
-          files: [mockFile],
+          files: [{ file: 'foo.png' }],
         },
       })
     }, 0)

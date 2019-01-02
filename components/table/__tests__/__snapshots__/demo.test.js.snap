@@ -2456,7 +2456,7 @@ exports[`renders ./components/table/demo/row-selection.md correctly 1`] = `
 
 exports[`renders ./components/table/demo/row-selection-and-operation.md correctly 1`] = `
 <div>
-  <div style="margin-bottom: 16px;"><button type="button" disabled="disabled" class="ant-btn ant-btn-primary"><span>Reload</span></button> <span style="margin-left: 8px;"><!----></span></div>
+  <div style="margin-bottom: 16px;"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary"><span>Reload</span></button> <span style="margin-left: 8px;"><!----></span></div>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">

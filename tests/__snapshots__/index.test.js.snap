@@ -59,6 +59,7 @@ Array [
   "Drawer",
   "Skeleton",
   "Comment",
+  "ConfigProvider",
   "default",
 ]
 `;

@@ -38,4 +38,6 @@ exports[`Button renders Chinese characters correctly 5`] = `
 
 exports[`Button renders correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Follow</span></button>`;
 
-exports[`Button should support link button 1`] = `<a target="_blank" href="http://ant.design" type="button" class="ant-btn ant-btn-default"><span>link button</span></a>`;
+exports[`Button should not render as link button when href is undefined 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>button</span></button>`;
+
+exports[`Button should support link button 1`] = `<a target="_blank" href="http://ant.design" class="ant-btn ant-btn-default"><span>link button</span></a>`;

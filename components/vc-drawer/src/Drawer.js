@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import Vue from 'vue'
 import ref from 'vue-ref'
 import BaseMixin from '../../_util/BaseMixin'
-import { initDefaultProps, getEvents, getClass } from '../../_util/props-util'
+import { initDefaultProps, getEvents } from '../../_util/props-util'
 import { cloneElement } from '../../_util/vnode'
 import ContainerRender from '../../_util/ContainerRender'
 import getScrollBarSize from '../../_util/getScrollBarSize'
@@ -376,6 +376,7 @@ const Drawer = {
         maskStyle,
         width,
         height,
+        wrapStyle,
       } = this.$props
       const children = this.$slots.default
       const wrapperClassname = classnames(prefixCls, {
@@ -422,6 +423,7 @@ const Drawer = {
           }],
         })
       }
+
       const domContProps = {
         class: wrapperClassname,
         directives: [{
@@ -433,6 +435,7 @@ const Drawer = {
         on: {
           transitionend: this.onWrapperTransitionEnd,
         },
+        style: wrapStyle,
       }
       const directivesMaskDom = [{
         name: 'ant-ref',

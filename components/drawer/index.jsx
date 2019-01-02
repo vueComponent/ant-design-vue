@@ -1,4 +1,3 @@
-import warning from 'warning'
 import classnames from 'classnames'
 import VcDrawer from '../vc-drawer/src'
 import PropTypes from '../_util/vue-types'
@@ -15,6 +14,7 @@ const Drawer = {
     maskClosable: PropTypes.bool.def(true),
     mask: PropTypes.bool.def(true),
     maskStyle: PropTypes.object,
+    wrapStyle: PropTypes.object,
     title: PropTypes.any,
     visible: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
@@ -107,7 +107,7 @@ const Drawer = {
         return null
       }
       this.destoryClose = false
-      const { placement, bodyStyle } = this.$props
+      const { placement } = this.$props
 
       const containerStyle = placement === 'left' ||
         placement === 'right' ? {
@@ -157,26 +157,22 @@ const Drawer = {
         >
           {header}
           {closer}
-          <div key='body' class={`${prefixCls}-body`} style={bodyStyle}>
+          <div key='body' class={`${prefixCls}-body`}>
             {this.$slots.default}
           </div>
         </div>
       )
     },
     getRcDrawerStyle () {
-      const { zIndex, placement, maskStyle } = this.$props
-      return this.$data._push
-        ? {
-          ...maskStyle,
-          zIndex,
-          transform: this.getPushTransform(placement),
-        }
-        : {
-          ...maskStyle,
-          zIndex,
-        }
+      const { zIndex, placement, maskStyle, wrapStyle } = this.$props
+      const { _push: push } = this.$data
+      return {
+        ...maskStyle,
+        zIndex,
+        transform: push ? this.getPushTransform(placement) : undefined,
+        ...wrapStyle,
+      }
     },
-
   },
   render () {
     const props = getOptionProps(this)
@@ -200,12 +196,12 @@ const Drawer = {
           [wrapClassName]: !!wrapClassName,
           [haveMask]: !!haveMask,
         }),
+        wrapStyle: this.getRcDrawerStyle(),
       },
       on: {
         maskClick: this.onMaskClick,
         ...this.$listeners,
       },
-      style: this.getRcDrawerStyle(),
     }
     return (
       <VcDrawer

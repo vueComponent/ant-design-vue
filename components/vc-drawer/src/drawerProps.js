@@ -18,4 +18,5 @@ export default {
   showMask: PropTypes.bool,
   maskStyle: PropTypes.object,
   className: PropTypes.string,
+  wrapStyle: PropTypes.object,
 }

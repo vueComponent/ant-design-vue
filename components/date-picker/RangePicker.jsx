@@ -50,11 +50,12 @@ function fixLocale (value, localeCode) {
   if (!value || value.length === 0) {
     return
   }
-  if (value[0]) {
-    value[0].locale(localeCode)
+  const [start, end] = value
+  if (start) {
+    start.locale(localeCode)
   }
-  if (value[1]) {
-    value[1].locale(localeCode)
+  if (end) {
+    end.locale(localeCode)
   }
 }
 
@@ -73,9 +74,10 @@ export default {
   },
   data () {
     const value = this.value || this.defaultValue || []
+    const [start, end] = value
     if (
-      value[0] && !interopDefault(moment).isMoment(value[0]) ||
-      value[1] && !interopDefault(moment).isMoment(value[1])
+      start && !interopDefault(moment).isMoment(start) ||
+      end && !interopDefault(moment).isMoment(end)
     ) {
       throw new Error(
         'The value/defaultValue of RangePicker must be a moment object array after `antd@2.0`, ' +
@@ -127,11 +129,11 @@ export default {
           sShowDate: getShowDateFromValue(value) || sShowDate,
         }))
       }
+      const [start, end] = value
       this.$emit('change', value, [
-        formatValue(value[0], this.format),
-        formatValue(value[1], this.format),
+        formatValue(start, this.format),
+        formatValue(end, this.format),
       ])
-      this.focus()
     },
 
     handleOpenChange (open) {
@@ -143,6 +145,10 @@ export default {
         this.clearHoverValue()
       }
       this.$emit('openChange', open)
+
+      if (!open) {
+        this.focus()
+      }
     },
 
     handleShowDateChange (showDate) {
@@ -160,7 +166,8 @@ export default {
     },
 
     handleCalendarInputSelect (value) {
-      if (!value[0]) {
+      const [start] = value
+      if (!start) {
         return
       }
       this.setState(({ sShowDate }) => ({
@@ -317,8 +324,8 @@ export default {
     if (props.showTime) {
       pickerStyle.width = '350px'
     }
-
-    const clearIcon = (!props.disabled && props.allowClear && value && (value[0] || value[1])) ? (
+    const [startValue, endValue] = value
+    const clearIcon = (!props.disabled && props.allowClear && value && (startValue || endValue)) ? (
       <Icon
         type='close-circle'
         class={`${prefixCls}-picker-clear`}
@@ -339,8 +346,7 @@ export default {
     )
 
     const input = ({ value: inputValue }) => {
-      const start = inputValue[0]
-      const end = inputValue[1]
+      const [start, end] = inputValue
       return (
         <span class={props.pickerInputClass}>
           <input

@@ -13,7 +13,7 @@ export const PickerProps = () => ({
   transitionName: PropTypes.string,
   prefixCls: PropTypes.string,
   inputPrefixCls: PropTypes.string,
-  format: PropTypes.string,
+  format: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   disabled: PropTypes.bool,
   allowClear: PropTypes.bool,
   suffixIcon: PropTypes.any,

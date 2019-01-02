@@ -92,7 +92,6 @@ export default function createPicker (TheCalendar, props) {
           })
         }
         this.$emit('change', value, (value && value.format(this.format)) || '')
-        this.focus()
       },
 
       handleCalendarChange (value) {
@@ -104,6 +103,9 @@ export default function createPicker (TheCalendar, props) {
           this.setState({ _open: open })
         }
         this.$emit('openChange', open)
+        if (!open) {
+          this.focus()
+        }
       },
       focus () {
         this.$refs.input.focus()

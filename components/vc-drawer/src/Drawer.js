@@ -41,6 +41,7 @@ const Drawer = {
     handler: true,
     maskStyle: {},
     wrapperClassName: '',
+    className: '',
   }),
   data () {
     this.levelDom = []
@@ -367,6 +368,7 @@ const Drawer = {
     },
     getChildToRender (open) {
       const {
+        className,
         prefixCls,
         placement,
         handler,
@@ -379,7 +381,7 @@ const Drawer = {
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
-        ...getClass(this),
+        [className]: !!className,
       })
       const isOpenChange = this.isOpenChange
       const isHorizontal = placement === 'left' || placement === 'right'

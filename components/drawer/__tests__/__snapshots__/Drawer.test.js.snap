@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Drawer class is test_drawer 1`] = `
-<div>
+<div class="">
   <div class="ant-drawer ant-drawer-right test_drawer">
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">
@@ -16,7 +16,7 @@ exports[`Drawer class is test_drawer 1`] = `
 `;
 
 exports[`Drawer closable is false 1`] = `
-<div>
+<div class="">
   <div class="ant-drawer ant-drawer-right">
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">
@@ -31,7 +31,7 @@ exports[`Drawer closable is false 1`] = `
 `;
 
 exports[`Drawer destroyOnClose is true 1`] = `
-<div>
+<div class="">
   <div class="ant-drawer ant-drawer-right">
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">
@@ -46,7 +46,7 @@ exports[`Drawer destroyOnClose is true 1`] = `
 `;
 
 exports[`Drawer have a title 1`] = `
-<div>
+<div class="">
   <div class="ant-drawer ant-drawer-right">
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">
@@ -64,7 +64,7 @@ exports[`Drawer have a title 1`] = `
 `;
 
 exports[`Drawer render correctly 1`] = `
-<div>
+<div class="">
   <div class="ant-drawer ant-drawer-right">
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 400px;">
@@ -79,7 +79,7 @@ exports[`Drawer render correctly 1`] = `
 `;
 
 exports[`Drawer render top drawer 1`] = `
-<div>
+<div class="">
   <div class="ant-drawer ant-drawer-top">
     <div class="ant-drawer-mask"></div>
     <div class="ant-drawer-content-wrapper" style="transform: translateY(-100%); height: 400px;">

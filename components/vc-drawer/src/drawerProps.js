@@ -17,4 +17,5 @@ export default {
   handler: PropTypes.any,
   showMask: PropTypes.bool,
   maskStyle: PropTypes.object,
+  className: PropTypes.string,
 }

@@ -21,6 +21,9 @@ const Dropdown = {
     prop: 'visible',
     event: 'visibleChange',
   },
+  inject: {
+    configProvider: { default: {}},
+  },
   methods: {
     getTransitionName () {
       const { placement = '', transitionName } = this.$props
@@ -35,7 +38,15 @@ const Dropdown = {
   },
 
   render () {
-    const { $slots, prefixCls, trigger, disabled, $listeners } = this
+    const { $slots, $listeners } = this
+    const props = getOptionProps(this)
+    const {
+      prefixCls,
+      trigger,
+      disabled,
+      getPopupContainer,
+    } = props
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider
     const dropdownTrigger = cloneElement($slots.default, {
       class: `${prefixCls}-trigger`,
       disabled,
@@ -68,7 +79,8 @@ const Dropdown = {
     const dropdownProps = {
       props: {
         alignPoint,
-        ...getOptionProps(this),
+        ...props,
+        getPopupContainer: getPopupContainer || getContextPopupContainer,
         transitionName: this.getTransitionName(),
         trigger: triggerActions,
       },

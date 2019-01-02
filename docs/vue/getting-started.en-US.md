@@ -5,6 +5,8 @@ Ant Design Vue is dedicated to providing a **good development experience** for p
 
 > Before delving into Ant Design Vue, a good knowledge base of [Vue](https://cn.vuejs.org/) and [JavaScript ES2015](http://babeljs.io/docs/learn-es2015/) is needed.
 
+## Use vue-cli@3
+We provide an [Ant Design Vue](https://github.com/vueComponent/vue-cli-plugin-ant-design) plugin for vue-cli@3, which you can use to quickly build an Ant Design Vue-based project.
 
 ## Playground
 

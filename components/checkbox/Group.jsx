@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     getOptions () {
-      const { options } = this.$props
+      const { options, $scopedSlots } = this
       return options.map(option => {
         if (typeof option === 'string') {
           return {
@@ -52,7 +52,11 @@ export default {
             value: option,
           }
         }
-        return option
+        let label = option.label
+        if (label === undefined && $scopedSlots.label) {
+          label = $scopedSlots.label(option)
+        }
+        return { ...option, label }
       })
     },
     toggleOption (option) {

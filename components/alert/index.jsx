@@ -103,18 +103,19 @@ const Alert = {
       }
     }
 
+    // closeable when closeText is assigned
+    if (closeText) {
+      closable = true
+    }
+
     const alertCls = classNames(prefixCls, {
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-close`]: !closing,
       [`${prefixCls}-with-description`]: !!description,
       [`${prefixCls}-no-icon`]: !showIcon,
       [`${prefixCls}-banner`]: !!banner,
+      [`${prefixCls}-closable`]: closable,
     })
-
-    // closeable when closeText is assigned
-    if (closeText) {
-      closable = true
-    }
 
     const closeIcon = closable ? (
       <a onClick={this.handleClose} class={`${prefixCls}-close-icon`}>

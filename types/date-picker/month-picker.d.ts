@@ -19,12 +19,12 @@ export declare class MonthPicker extends DatepickerCommon {
   defaultPickerValue: Moment;
 
   /**
-   * to set the date format, refer to moment.js
+   * to set the date format, When an array is provided, all values are used for parsing and first value for display. refer to moment.js
    * @default 'YYYY-MM'
-   * @type string
+   * @type string | string[]
    * @see http://momentjs.com
    */
-  format: string;
+  format: string | string[];
 
   /**
    * Custom month cell content render method by setting a scoped slot

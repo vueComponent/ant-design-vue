@@ -3,7 +3,7 @@ import BasicRight from './basic-right'
 import Placement from './placement'
 import UserProfile from './user-profile'
 import MultiLevelDrawer from './multi-level-drawer'
-import FromDrawer from './from-drawer'
+import FormInDrawer from './form-in-drawer'
 // import CustomPaging from './customPaging'
 // import CustomArrows from './customArrows'
 
@@ -50,7 +50,7 @@ export default {
         <md cn={md.cn} us={md.us} />
         <BasicRight />
         <Placement />
-        <FromDrawer />
+        <FormInDrawer />
         <UserProfile />
         <MultiLevelDrawer />
         <api>

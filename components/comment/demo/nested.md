@@ -11,61 +11,41 @@ Comments can be nested.
 ```html
 <template>
   <a-comment>
-    <template slot="actions">
-      <span>Reply to</span>
-    </template>
-    <template slot="author">
-      <a>Han Solo</a>
-    </template>
-    <template slot="avatar">
+    <span slot="actions">Reply to</span>
+    <a slot="author">Han Solo</a>
+    <a-avatar
+      slot="avatar"
+      src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+      alt="Han Solo"
+    />
+    <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+    <a-comment>
+      <span slot="actions">Reply to</span>
+      <a slot="author">Han Solo</a>
       <a-avatar
+        slot="avatar"
         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
         alt="Han Solo"
       />
-    </template>
-    <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
-    <a-comment>
-      <template slot="actions">
-        <span>Reply to</span>
-      </template>
-      <template slot="author">
-        <a>Han Solo</a>
-      </template>
-      <template slot="avatar">
+      <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+      <a-comment>
+        <span slot="actions">Reply to</span>
+        <a slot="author">Han Solo</a>
         <a-avatar
+          slot="avatar"
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
         />
-      </template>
-      <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
-      <a-comment>
-        <template slot="actions">
-          <span>Reply to</span>
-        </template>
-        <template slot="author">
-          <a>Han Solo</a>
-        </template>
-        <template slot="avatar">
-          <a-avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="Han Solo"
-          />
-        </template>
         <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
       </a-comment>
       <a-comment>
-        <template slot="actions">
-          <span>Reply to</span>
-        </template>
-        <template slot="author">
-          <a>Han Solo</a>
-        </template>
-        <template slot="avatar">
-          <a-avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="Han Solo"
-          />
-        </template>
+        <span slot="actions">Reply to</span>
+        <a slot="author">Han Solo</a>
+        <a-avatar
+          slot="avatar"
+          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          alt="Han Solo"
+        />
         <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
       </a-comment>
     </a-comment>

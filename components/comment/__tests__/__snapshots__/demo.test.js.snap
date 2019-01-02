@@ -68,7 +68,7 @@ exports[`renders ./components/comment/demo/list.md correctly 1`] = `
             <div class="ant-comment-inner">
               <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></div>
               <div class="ant-comment-content">
-                <div class="ant-comment-content-author"><span class="ant-comment-content-author-name">Han Solo</span></div>
+                <div class="ant-comment-content-author"><span class="ant-comment-content-author-name">Han Solo</span><span class="ant-comment-content-author-time"><span class="">a day ago</span></span></div>
                 <div class="ant-comment-content-detail">
                   <p>We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.</p>
                 </div>
@@ -86,7 +86,7 @@ exports[`renders ./components/comment/demo/list.md correctly 1`] = `
             <div class="ant-comment-inner">
               <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></div>
               <div class="ant-comment-content">
-                <div class="ant-comment-content-author"><span class="ant-comment-content-author-name">Han Solo</span></div>
+                <div class="ant-comment-content-author"><span class="ant-comment-content-author-name">Han Solo</span><span class="ant-comment-content-author-time"><span class="">2 days ago</span></span></div>
                 <div class="ant-comment-content-detail">
                   <p>We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.</p>
                 </div>

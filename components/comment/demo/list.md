@@ -25,7 +25,7 @@ Displaying a series of comments using the `antd` List Component.
           <span v-for="action in item.actions">{{action}}</span>
         </template>
         <p slot="content">{{item.content}}</p>
-        <a-tooltip slot="dateTime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
+        <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
           <span>{{item.datetime.fromNow()}}</span>
         </a-tooltip>
       </a-comment>

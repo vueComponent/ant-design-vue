@@ -32,7 +32,7 @@ const Comment = {
     renderNested (children) {
       const { prefixCls } = this.$props
 
-      return <div class={classNames(`${prefixCls}-nested`)}>{children}</div>
+      return <div class={`${prefixCls}-nested`}>{children}</div>
     },
   },
 
@@ -41,11 +41,11 @@ const Comment = {
       prefixCls,
     } = this.$props
 
-    const actions = this.$props.actions || getComponentFromProp(this, 'actions')
-    const author = this.$props.author || getComponentFromProp(this, 'author')
-    const avatar = this.$props.avatar || getComponentFromProp(this, 'avatar')
-    const content = this.$props.content || getComponentFromProp(this, 'content')
-    const datetime = this.$props.datetime || getComponentFromProp(this, 'datetime')
+    const actions = getComponentFromProp(this, 'actions')
+    const author = getComponentFromProp(this, 'author')
+    const avatar = getComponentFromProp(this, 'avatar')
+    const content = getComponentFromProp(this, 'content')
+    const datetime = getComponentFromProp(this, 'datetime')
 
     const avatarDom = (
       <div class={`${prefixCls}-avatar`}>
@@ -81,7 +81,7 @@ const Comment = {
     )
     const children = this.$slots.default
     return (
-      <div class={classNames(prefixCls)}>
+      <div class={prefixCls} {...{ on: this.$listeners }}>
         {comment}
         {children ? this.renderNested(children) : null}
       </div>

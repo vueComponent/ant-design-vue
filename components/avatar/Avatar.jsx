@@ -19,6 +19,8 @@ export default {
       default: 'default',
     },
     src: String,
+    /** Srcset of image avatar */
+    srcSet: String,
     icon: String,
     alt: String,
     loadError: Function,
@@ -71,7 +73,7 @@ export default {
   },
   render () {
     const {
-      prefixCls, shape, size, src, icon, alt,
+      prefixCls, shape, size, src, icon, alt, srcSet,
     } = this.$props
 
     const { isImgExist, scale } = this.$data
@@ -101,6 +103,7 @@ export default {
       children = (
         <img
           src={src}
+          srcSet={srcSet}
           onError={this.handleImgLoadError}
           alt={alt}
         />

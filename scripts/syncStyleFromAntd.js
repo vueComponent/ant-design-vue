@@ -6,7 +6,7 @@ const path = require('path')
 
 const owner = 'ant-design'
 const repo = 'ant-design'
-const tag = '3.10.9'
+const tag = '3.11.6'
 const clientId = '5f6ccfdc4cdc69f8ba12'
 const clientSecret = process.env.CLIENT_SECRET
 
@@ -15,7 +15,7 @@ const github = new GitHub()
 async function syncFiles (data = []) {
   for (const item of data) {
     try {
-      const { data: itemData } = await github.repos.getContent({
+      const { data: itemData } = await github.repos.getContents({
         owner,
         repo,
         path: `${item.path}`,

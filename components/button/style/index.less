@@ -1,8 +1,8 @@
-@import "../../style/themes/default";
-@import "../../style/mixins/index";
-@import "./mixin";
+@import '../../style/themes/default';
+@import '../../style/mixins/index';
+@import './mixin';
 
-@btn-prefix-cls: ~"@{ant-prefix}-btn";
+@btn-prefix-cls: ~'@{ant-prefix}-btn';
 
 // for compatible
 @btn-ghost-color: @text-color;
@@ -82,16 +82,16 @@
     right: -1px;
     background: #fff;
     opacity: 0.35;
-    content: "";
+    content: '';
     border-radius: inherit;
     z-index: 1;
-    transition: opacity .2s;
+    transition: opacity 0.2s;
     pointer-events: none;
     display: none;
   }
 
   .@{iconfont-css-prefix} {
-    transition: margin-left .3s @ease-in-out;
+    transition: margin-left 0.3s @ease-in-out;
   }
 
   &&-loading:before {
@@ -102,7 +102,7 @@
     padding-left: 29px;
     pointer-events: none;
     position: relative;
-    .@{iconfont-css-prefix} {
+    .@{iconfont-css-prefix}:not(:last-child) {
       margin-left: -14px;
     }
   }
@@ -150,12 +150,12 @@
   }
 
   &-two-chinese-chars:first-letter {
-    letter-spacing: .34em;
+    letter-spacing: 0.34em;
   }
 
   &-two-chinese-chars > *:not(.@{iconfont-css-prefix}) {
-    letter-spacing: .34em;
-    margin-right: -.34em;
+    letter-spacing: 0.34em;
+    margin-right: -0.34em;
   }
 
   &-block {

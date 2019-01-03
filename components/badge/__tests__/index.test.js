@@ -85,4 +85,18 @@ describe('Badge', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/ant-design/ant-design/issues/13694
+  it('should support offset when count is a ReactNode', () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <Badge count={<span class='custom' style={{ color: '#f5222d' }} />} offset={[10, 20]}>
+            <a href='#' class='head-example' />
+          </Badge>
+        )
+      },
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

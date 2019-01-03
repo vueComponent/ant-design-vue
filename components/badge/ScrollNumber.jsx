@@ -1,8 +1,9 @@
-
+import classNames from 'classnames'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import { getStyle } from '../_util/props-util'
 import omit from 'omit.js'
+import { cloneElement } from '../_util/vnode'
 
 function getNumberArray (num) {
   return num
@@ -14,9 +15,11 @@ function getNumberArray (num) {
 
 const ScrollNumberProps = {
   prefixCls: PropTypes.string.def('ant-scroll-number'),
-  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]).def(null),
+  count: PropTypes.any,
   component: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
+  displayComponent: PropTypes.any,
+  className: PropTypes.object,
 }
 
 export default {
@@ -105,13 +108,19 @@ export default {
   },
 
   render () {
-    const { prefixCls, title, component: Tag = 'sup' } = this
+    const { prefixCls, title, component: Tag = 'sup', displayComponent, className } = this
+    if (displayComponent) {
+      return cloneElement(displayComponent, {
+        class: `${prefixCls}-custom-component`,
+      })
+    }
     const style = getStyle(this, true)
     // fix https://fb.me/react-unknown-prop
     const restProps = omit(this.$props, [
       'count',
       'component',
       'prefixCls',
+      'displayComponent',
     ])
     const newProps = {
       props: {
@@ -120,8 +129,8 @@ export default {
       attrs: {
         title,
       },
-      class: prefixCls,
       style,
+      class: classNames(prefixCls, className),
     }
     // allow specify the border
     // mock border-color by box-shadow for compatible with old usage:
@@ -129,6 +138,7 @@ export default {
     if (style && style.borderColor) {
       newProps.style.boxShadow = `0 0 0 1px ${style.borderColor} inset`
     }
+
     return (
       <Tag {...newProps} >
         { this.renderNumberElement()}

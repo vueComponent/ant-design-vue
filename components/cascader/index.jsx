@@ -10,6 +10,7 @@ import Icon from '../icon'
 import { hasProp, filterEmpty, getOptionProps, getStyle, getClass, getAttrs, getComponentFromProp, isValidElement } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import { cloneElement } from '../_util/vnode'
+import warning from '../_util/warning'
 
 const CascaderOptionType = PropTypes.shape({
   value: PropTypes.string,
@@ -32,6 +33,7 @@ const ShowSearchType = PropTypes.shape({
   render: PropTypes.func,
   sort: PropTypes.func,
   matchInputWidth: PropTypes.bool,
+  limit: PropTypes.oneOfType([Boolean, Number]),
 }).loose
 function noop () {}
 
@@ -78,6 +80,9 @@ const CascaderProps = {
   suffixIcon: PropTypes.any,
 }
 
+// We limit the filtered item count by default
+const defaultLimit = 50
+
 function defaultFilterOption (inputValue, path, names) {
   return path.some(option => option[names.label].indexOf(inputValue) > -1)
 }
@@ -99,6 +104,26 @@ function getFilledFieldNames ({ fieldNames = {}}) {
   return names
 }
 
+function flattenTree (
+  options = [],
+  props,
+  ancestor = [],
+) {
+  const names = getFilledFieldNames(props)
+  let flattenOptions = []
+  const childrenName = names.children
+  options.forEach(option => {
+    const path = ancestor.concat(option)
+    if (props.changeOnSelect || !option[childrenName] || !option[childrenName].length) {
+      flattenOptions.push(path)
+    }
+    if (option[childrenName]) {
+      flattenOptions = flattenOptions.concat(flattenTree(option[childrenName], props, path))
+    }
+  })
+  return flattenOptions
+}
+
 const defaultDisplayRender = ({ labels }) => labels.join(' / ')
 
 const Cascader = {
@@ -110,9 +135,13 @@ const Cascader = {
     prop: 'value',
     event: 'change',
   },
+  inject: {
+    configProvider: { default: {}},
+    localeData: { default: {}},
+  },
   data () {
     this.cachedOptions = []
-    const { value, defaultValue, popupVisible, showSearch, options, flattenTree } = this
+    const { value, defaultValue, popupVisible, showSearch, options } = this
     return {
       sValue: value || defaultValue || [],
       inputValue: '',
@@ -137,7 +166,7 @@ const Cascader = {
     },
     options (val) {
       if (this.showSearch) {
-        this.setState({ flattenOptions: this.flattenTree(this.options, this.$props) })
+        this.setState({ flattenOptions: flattenTree(val, this.$props) })
       }
     },
   },
@@ -171,11 +200,11 @@ const Cascader = {
 
     handlePopupVisibleChange (popupVisible) {
       if (!hasProp(this, 'popupVisible')) {
-        this.setState({
+        this.setState(state => ({
           sPopupVisible: popupVisible,
           inputFocused: popupVisible,
-          inputValue: popupVisible ? this.inputValue : '',
-        })
+          inputValue: popupVisible ? state.inputValue : '',
+        }))
       }
       this.$emit('popupVisibleChange', popupVisible)
     },
@@ -244,24 +273,6 @@ const Cascader = {
       }
     },
 
-    flattenTree (options, props, ancestor = []) {
-      const names = getFilledFieldNames(props)
-      let flattenOptions = []
-      const childrenName = names.children
-      options.forEach((option) => {
-        const path = ancestor.concat(option)
-        if (props.changeOnSelect || !option[childrenName] || !option[childrenName].length) {
-          flattenOptions.push(path)
-        }
-        if (option[childrenName]) {
-          flattenOptions = flattenOptions.concat(
-            this.flattenTree(option[childrenName], props, path)
-          )
-        }
-      })
-      return flattenOptions
-    },
-
     generateFilteredOptions (prefixCls) {
       const { showSearch, notFoundContent, $scopedSlots } = this
       const names = getFilledFieldNames(this.$props)
@@ -269,11 +280,35 @@ const Cascader = {
         filter = defaultFilterOption,
         // render = this.defaultRenderFilteredOption,
         sort = defaultSortFilteredOption,
+        limit = defaultLimit,
       } = showSearch
-      const { flattenOptions = [], inputValue } = this.$data
       const render = showSearch.render || $scopedSlots.showSearchRender || this.defaultRenderFilteredOption
-      const filtered = flattenOptions.filter((path) => filter(inputValue, path, names))
-        .sort((a, b) => sort(a, b, inputValue, names))
+      const { flattenOptions = [], inputValue } = this.$data
+
+      // Limit the filter if needed
+      let filtered
+      if (limit > 0) {
+        filtered = []
+        let matchCount = 0
+
+        // Perf optimization to filter items only below the limit
+        flattenOptions.some(path => {
+          const match = filter(inputValue, path, names)
+          if (match) {
+            filtered.push(path)
+            matchCount += 1
+          }
+          return matchCount >= limit
+        })
+      } else {
+        warning(
+          typeof limit !== 'number',
+          "'limit' of showSearch in Cascader should be positive number or false.",
+        )
+        filtered = flattenOptions.filter(path => filter(inputValue, path, names))
+      }
+
+      filtered.sort((a, b) => sort(a, b, inputValue, names))
 
       if (filtered.length > 0) {
         return filtered.map((path) => {
@@ -307,14 +342,22 @@ const Cascader = {
   },
 
   render () {
-    const { $slots, sPopupVisible, inputValue, $listeners } = this
+    const { $slots, sPopupVisible, inputValue, $listeners, configProvider, localeData } = this
     const { sValue: value, inputFocused } = this.$data
     const props = getOptionProps(this)
     let suffixIcon = getComponentFromProp(this, 'suffixIcon')
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
+    const { getPopupContainer: getContextPopupContainer } = configProvider
     const {
-      prefixCls, inputPrefixCls, placeholder, size, disabled,
-      allowClear, showSearch = false, ...otherProps } = props
+      prefixCls,
+      inputPrefixCls,
+      placeholder = localeData.placeholder,
+      size,
+      disabled,
+      allowClear,
+      showSearch = false,
+      ...otherProps
+    } = props
 
     const sizeCls = classNames({
       [`${inputPrefixCls}-lg`]: size === 'large',
@@ -448,9 +491,11 @@ const Cascader = {
         <Icon type='redo' spin />
       </span>
     )
+    const getPopupContainer = props.getPopupContainer || getContextPopupContainer
     const cascaderProps = {
       props: {
         ...props,
+        getPopupContainer,
         options: options,
         value: value,
         popupVisible: sPopupVisible,

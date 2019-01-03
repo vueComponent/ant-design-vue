@@ -37,7 +37,7 @@ exports[`renders ./components/comment/demo/editor.md correctly 1`] = `
           <div>
             <div class="ant-row ant-form-item">
               <div class="ant-form-item-control-wrapper">
-                <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea value="" rows="4" class="ant-input"></textarea></span>
+                <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea rows="4" class="ant-input"></textarea></span>
                   <!---->
                 </div>
               </div>

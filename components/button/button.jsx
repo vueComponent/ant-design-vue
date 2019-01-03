@@ -120,7 +120,8 @@ export default {
     }
     const iconType = sLoading ? 'loading' : icon
     const iconNode = iconType ? <Icon type={iconType} /> : null
-    const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], this.isNeedInserted()) : $slots.default
+    const children = filterEmpty($slots.default)
+    const kids = children.map(child => this.insertSpace(child, this.isNeedInserted()))
 
     if ($attrs.href !== undefined) {
       return (

@@ -127,22 +127,21 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       label='inline'
       :labelCol="labelCol"
       :wrapperCol="wrapperCol"
+      style="margin-bottom:0;"
     >
-      <a-col :span="11">
-        <a-form-item validateStatus='error' help='Please select the correct date'>
-          <a-date-picker style="width: 100%"/>
-        </a-form-item>
-      </a-col>
-      <a-col :span="2">
-        <span :style="{ display: 'inline-block', width: '100%', textAlign: 'center' }">
-          -
-        </span>
-      </a-col>
-      <a-col :span="11">
-        <a-form-item>
-          <a-date-picker style="width: 100%"/>
-        </a-form-item>
-      </a-col>
+      <a-form-item
+        validateStatus='error'
+        help='Please select the correct date'
+        :style="{ display: 'inline-block', width: 'calc(50% - 12px)' }"
+      >
+        <a-date-picker style="width: 100%"/>
+      </a-form-item>
+      <span :style="{ display: 'inline-block', width: '24px', textAlign: 'center' }">
+        -
+      </span>
+      <a-form-item :style="{ display: 'inline-block', width: 'calc(50% - 12px)' }">
+        <a-date-picker style="width: 100%"/>
+      </a-form-item>
     </a-form-item>
 
     <a-form-item

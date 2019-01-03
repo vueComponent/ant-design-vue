@@ -98,6 +98,21 @@ Demostration for validataion configuration for form controls which are not show 
 
   <a-form-item
     v-bind="formItemLayout"
+    label='Checkbox.Group'
+  >
+    <a-checkbox-group style="width: 100%;" v-decorator="['checkbox-group', {initialValue: ['A', 'B']}]">
+      <a-row>
+        <a-col :span="8"><a-checkbox value="A">A</a-checkbox></a-col>
+        <a-col :span="8"><a-checkbox disabled value="B">B</a-checkbox></a-col>
+        <a-col :span="8"><a-checkbox value="C">C</a-checkbox></a-col>
+        <a-col :span="8"><a-checkbox value="D">D</a-checkbox></a-col>
+        <a-col :span="8"><a-checkbox value="E">E</a-checkbox></a-col>
+      </a-row>
+    </a-checkbox-group>
+  </a-form-item>
+
+  <a-form-item
+    v-bind="formItemLayout"
     label='Rate'
   >
     <a-rate allowHalf v-decorator="['rate', {initialValue: 3.5}]"/>

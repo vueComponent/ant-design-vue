@@ -171,6 +171,8 @@ export default {
         'addonAfter',
         'prefix',
         'suffix',
+        'value',
+        'defaultValue',
       ])
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this
       const inputProps = {

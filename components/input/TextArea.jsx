@@ -1,5 +1,6 @@
 
 import omit from 'omit.js'
+import ResizeObserver from 'resize-observer-polyfill'
 import inputProps from './inputProps'
 import calculateNodeHeight from './calculateNodeHeight'
 import hasProp from '../_util/props-util'
@@ -47,22 +48,53 @@ export default {
   },
   watch: {
     value (val) {
+      this.$nextTick(() => {
+        this.resizeOnNextFrame()
+      })
       this.stateValue = fixControlledValue(val)
-      if (this.nextFrameActionId) {
-        clearNextFrameAction(this.nextFrameActionId)
+    },
+    autosize (val) {
+      if (!val && this.$refs.textArea) {
+        this.textareaStyles = omit(this.textareaStyles, ['overflowY'])
       }
-      this.nextFrameActionId = onNextFrame(this.resizeTextarea)
     },
   },
   mounted () {
     this.$nextTick(() => {
       this.resizeTextarea()
+      this.updateResizeObserverHook()
       if (this.autoFocus) {
         this.focus()
       }
     })
   },
+  updated () {
+    this.updateResizeObserverHook()
+  },
+  beforeDestroy () {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+    }
+  },
   methods: {
+    resizeOnNextFrame () {
+      if (this.nextFrameActionId) {
+        clearNextFrameAction(this.nextFrameActionId)
+      }
+      this.nextFrameActionId = onNextFrame(this.resizeTextarea)
+    },
+    // We will update hooks if `autosize` prop change
+    updateResizeObserverHook () {
+      if (!this.resizeObserver && this.$props.autosize) {
+        // Add resize observer
+        this.resizeObserver = new ResizeObserver(this.resizeOnNextFrame)
+        this.resizeObserver.observe(this.$refs.textArea)
+      } else if (this.resizeObserver && !this.$props.autosize) {
+        // Remove resize observer
+        this.resizeObserver.disconnect()
+        this.resizeObserver = null
+      }
+    },
     handleKeyDown (e) {
       if (e.keyCode === 13) {
         this.$emit('pressEnter', e)
@@ -91,9 +123,7 @@ export default {
     handleTextareaChange (e) {
       if (!hasProp(this, 'value')) {
         this.stateValue = e.target.value
-        this.$nextTick(() => {
-          this.resizeTextarea()
-        })
+        this.resizeTextarea()
       } else {
         this.$forceUpdate()
       }
@@ -126,6 +156,8 @@ export default {
       'prefixCls',
       'autosize',
       'type',
+      'value',
+      'defaultValue',
     ])
     const textareaProps = {
       attrs: { ...otherProps, ...$attrs },

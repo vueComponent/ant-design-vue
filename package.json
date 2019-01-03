@@ -178,7 +178,7 @@
         "mutationobserver-shim": "^0.3.2",
         "omit.js": "^1.0.0",
         "raf": "^3.4.0",
-        "resize-observer-polyfill": "^1.5.0",
+        "resize-observer-polyfill": "^1.5.1",
         "shallow-equal": "^1.0.0",
         "shallowequal": "^1.0.2",
         "vue-ref": "^1.0.3",

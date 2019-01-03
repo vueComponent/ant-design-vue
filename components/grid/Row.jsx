@@ -105,7 +105,7 @@ export default {
     getGutter () {
       const { gutter } = this
       if (typeof gutter === 'object') {
-        for (let i = 0; i <= responsiveArray.length; i++) {
+        for (let i = 0; i < responsiveArray.length; i++) {
           const breakpoint = responsiveArray[i]
           if (this.screens[breakpoint] && gutter[breakpoint] !== undefined) {
             return gutter[breakpoint]

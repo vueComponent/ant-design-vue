@@ -112,7 +112,7 @@ const Icon = {
             ` the 'theme' prop '${theme}' will be ignored.`)
       }
       computedType = withThemeSuffix(
-        removeTypeTheme(alias(type)),
+        removeTypeTheme(alias(computedType)),
         dangerousTheme || theme || defaultTheme,
       )
       innerNode = (

@@ -52,9 +52,11 @@ const getSlots = (ele) => {
   const children = ele.children || componentOptions.children || []
   const slots = {}
   children.forEach(child => {
-    const name = (child.data && child.data.slot) || 'default'
-    slots[name] = slots[name] || []
-    slots[name].push(child)
+    if (!isEmptyElement(child)) {
+      const name = (child.data && child.data.slot) || 'default'
+      slots[name] = slots[name] || []
+      slots[name].push(child)
+    }
   })
   return slots
 }
@@ -213,12 +215,12 @@ export function getComponentName (opts) {
   return opts && (opts.Ctor.options.name || opts.tag)
 }
 
-export function isEmptyElement (ele) {
-  return !(ele.tag || ele.text.trim() !== '')
+export function isEmptyElement (c) {
+  return !(c.tag || (c.text && c.text.trim() !== ''))
 }
 
 export function filterEmpty (children = []) {
-  return children.filter(c => c.tag || (c.text && c.text.trim() !== ''))
+  return children.filter(c => !isEmptyElement(c))
 }
 const initDefaultProps = (propTypes, defaultProps) => {
   Object.keys(defaultProps).forEach(k => {

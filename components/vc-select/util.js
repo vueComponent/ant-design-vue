@@ -5,7 +5,7 @@ export function toTitle (title) {
   if (typeof title === 'string') {
     return title
   }
-  return null
+  return ''
 }
 export function getValuePropValue (child) {
   if (!child) {
@@ -24,9 +24,7 @@ export function getValuePropValue (child) {
       return label
     }
   }
-  throw new Error(
-    `Need at least a key or a value or a label(slot) (only for OptGroup) for ${child}`
-  )
+  throw new Error(`Need at least a key or a value or a label (only for OptGroup) for ${child}`)
 }
 
 export function getPropValue (child, prop) {
@@ -88,10 +86,12 @@ export function preventDefaultEvent (e) {
 
 export function findIndexInValueBySingleValue (value, singleValue) {
   let index = -1
-  for (let i = 0; i < value.length; i++) {
-    if (value[i] === singleValue) {
-      index = i
-      break
+  if (value) {
+    for (let i = 0; i < value.length; i++) {
+      if (value[i] === singleValue) {
+        index = i
+        break
+      }
     }
   }
   return index
@@ -100,10 +100,12 @@ export function findIndexInValueBySingleValue (value, singleValue) {
 export function getLabelFromPropsValue (value, key) {
   let label
   value = toArray(value)
-  for (let i = 0; i < value.length; i++) {
-    if (value[i].key === key) {
-      label = value[i].label
-      break
+  if (value) {
+    for (let i = 0; i < value.length; i++) {
+      if (value[i].key === key) {
+        label = value[i].label
+        break
+      }
     }
   }
   return label
@@ -155,18 +157,18 @@ export function findFirstMenuItem (children) {
   return null
 }
 
-export function includesSeparators (string, separators) {
+export function includesSeparators (str, separators) {
   for (let i = 0; i < separators.length; ++i) {
-    if (string.lastIndexOf(separators[i]) > 0) {
+    if (str.lastIndexOf(separators[i]) > 0) {
       return true
     }
   }
   return false
 }
 
-export function splitBySeparators (string, separators) {
+export function splitBySeparators (str, separators) {
   const reg = new RegExp(`[${separators.join()}]`)
-  return string.split(reg).filter(token => token)
+  return str.split(reg).filter(token => token)
 }
 
 export function defaultFilterFn (input, child) {
@@ -180,9 +182,7 @@ export function defaultFilterFn (input, child) {
   } else {
     value = String(value)
   }
-  return (
-    value.toLowerCase().indexOf(input.toLowerCase()) > -1
-  )
+  return value.toLowerCase().indexOf(input.toLowerCase()) > -1
 }
 
 export function validateOptionValue (value, props) {
@@ -192,7 +192,7 @@ export function validateOptionValue (value, props) {
   if (typeof value !== 'string') {
     throw new Error(
       `Invalid \`value\` of type \`${typeof value}\` supplied to Option, ` +
-      `expected \`string\` when \`tags/combobox\` is \`true\`.`
+        `expected \`string\` when \`tags/combobox\` is \`true\`.`,
     )
   }
 }
@@ -201,4 +201,17 @@ export function saveRef (instance, name) {
   return (node) => {
     instance[name] = node
   }
+}
+
+export function generateUUID () {
+  if (process.env.NODE_ENV === 'test') {
+    return 'test-uuid'
+  }
+  let d = new Date().getTime()
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = (d + Math.random() * 16) % 16 | 0
+    d = Math.floor(d / 16)
+    return (c === 'x' ? r : (r & 0x7) | 0x8).toString(16)
+  })
+  return uuid
 }

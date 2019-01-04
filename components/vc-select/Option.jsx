@@ -7,8 +7,15 @@ export default {
       PropTypes.string,
       PropTypes.number,
     ]),
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     disabled: PropTypes.bool,
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   },
   isSelectOption: true,
 }

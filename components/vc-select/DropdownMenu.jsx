@@ -11,6 +11,7 @@ export default {
   name: 'DropdownMenu',
   mixins: [BaseMixin],
   props: {
+    ariaId: PropTypes.string,
     defaultActiveFirstOption: PropTypes.bool,
     value: PropTypes.any,
     dropdownMenuStyle: PropTypes.object,
@@ -28,8 +29,10 @@ export default {
     menuItemSelectedIcon: PropTypes.any,
   },
 
-  beforeMount () {
+  created () {
+    this.rafInstance = { cancel: () => null }
     this.lastInputValue = this.$props.inputValue
+    this.lastVisible = false
   },
 
   mounted () {
@@ -101,6 +104,7 @@ export default {
         firstActiveValue,
         dropdownMenuStyle,
         backfillValue,
+        visible,
       } = props
       const menuItemSelectedIcon = getComponentFromProp(this, 'menuItemSelectedIcon')
       const { menuDeselect, menuSelect, popupScroll } = this.$listeners
@@ -136,6 +140,8 @@ export default {
         if (selectedKeys.length || firstActiveValue) {
           if (props.visible && !this.lastVisible) {
             activeKeyProps.activeKey = selectedKeys[0] !== undefined ? selectedKeys[0] : firstActiveValue
+          } else if (!visible) {
+            activeKeyProps.activeKey = undefined
           }
           let foundFirst = false
           // set firstActiveItem via cloning menus
@@ -143,9 +149,7 @@ export default {
           const clone = item => {
             if (
               (!foundFirst && selectedKeys.indexOf(item.key) !== -1) ||
-            (!foundFirst &&
-              !selectedKeys.length &&
-              firstActiveValue.indexOf(item.key) !== -1)
+              (!foundFirst && !selectedKeys.length && firstActiveValue.indexOf(item.key) !== -1)
             ) {
               foundFirst = true
               return cloneElement(item, {
@@ -198,6 +202,8 @@ export default {
           overflow: 'auto',
           transform: 'translateZ(0)',
         }}
+        id={this.$props.ariaId}
+        tabIndex='-1'
         onFocus={popupFocus}
         onMousedown={preventDefaultEvent}
         onScroll={popupScroll}

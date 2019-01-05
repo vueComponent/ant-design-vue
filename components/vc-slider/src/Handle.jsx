@@ -26,11 +26,9 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      // mouseup won't trigger if mouse moved out of handle
-      // so we listen on document here.
-      this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
-    })
+    // mouseup won't trigger if mouse moved out of handle
+    // so we listen on document here.
+    this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp)
   },
   beforeDestroy () {
     if (this.onMouseUpListener) {
@@ -46,8 +44,9 @@ export default {
         this.setClickFocus(true)
       }
     },
-    handleBlur () {
+    handleBlur (e) {
       this.setClickFocus(false)
+      this.__emit('blur', e)
     },
     handleKeyDown () {
       this.setClickFocus(false)
@@ -62,12 +61,16 @@ export default {
     blur () {
       this.$refs.handle.blur()
     },
+    // when click can not focus in vue, use mousedown trigger focus
+    handleMousedown (e) {
+      this.focus()
+      this.__emit('mousedown', e)
+    },
   },
   render () {
     const {
       prefixCls, vertical, offset, disabled, min, max, value, tabIndex,
     } = getOptionProps(this)
-
     const className = classNames(
       this.$props.className,
       {
@@ -76,9 +79,7 @@ export default {
     )
 
     const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` }
-    const elStyle = {
-      ...postionStyle,
-    }
+
     const ariaProps = {
       'aria-valuemin': min,
       'aria-valuemax': max,
@@ -93,14 +94,17 @@ export default {
         ...ariaProps,
       },
       class: className,
-      on: this.$listeners,
+      on: {
+        ...this.$listeners,
+        blur: this.handleBlur,
+        keydown: this.handleKeyDown,
+        mousedown: this.handleMousedown,
+      },
       ref: 'handle',
-      style: elStyle,
+      style: postionStyle,
     }
     return (
-      <div
-        {...handleProps}
-      />
+      <div {...handleProps} />
     )
   },
 }

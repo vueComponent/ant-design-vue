@@ -15,6 +15,7 @@
 | tipFormatter | Slider 会把当前值传给 `tipFormatter`，并在 Tooltip 中显示 `tipFormatter` 的返回值，若为 null，则隐藏 Tooltip。 | Function\|null | IDENTITY |
 | value(v-model) | 设置当前取值。当 `range` 为 `false` 时，使用 `number`，否则用 `[number, number]` | number\|number\[] |  |
 | vertical | 值为 `true` 时，Slider 为垂直方向 | Boolean | false |
+| tooltipVisible | 值为`true`时，Tooltip 将会始终显示；否则始终不显示，哪怕在拖拽及移入时。 | Boolean | |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |

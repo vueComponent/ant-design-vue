@@ -41,7 +41,7 @@ export const SliderProps = () => ({
     PropTypes.func,
     PropTypes.object,
   ]),
-  id: PropTypes.string,
+  tooltipVisible: PropTypes.bool,
 })
 
 const Slider = {
@@ -74,11 +74,11 @@ const Slider = {
         },
       }))
     },
-    handleWithTooltip ({ value, dragging, index, ref, ...restProps }) {
-      const { tooltipPrefixCls, tipFormatter } = this.$props
+    handleWithTooltip ({ value, dragging, index, directives, on, ...restProps }) {
+      const { tooltipPrefixCls, tipFormatter, tooltipVisible } = this.$props
       const { visibles } = this
-      const visible = tipFormatter ? (visibles[index] || dragging) : false
-
+      const isTipFormatter = tipFormatter ? visibles[index] || dragging : false
+      const visible = tooltipVisible || (tooltipVisible === undefined && isTipFormatter)
       const tooltipProps = {
         props: {
           prefixCls: tooltipPrefixCls,
@@ -94,8 +94,9 @@ const Slider = {
           value,
           ...restProps,
         },
-        ref,
+        directives,
         on: {
+          ...on,
           mouseenter: () => this.toggleTooltipVisible(index, true),
           mouseleave: () => this.toggleTooltipVisible(index, false),
         },
@@ -114,7 +115,7 @@ const Slider = {
       this.$refs.sliderRef.focus()
     },
     blur () {
-      this.$refs.sliderRef.focus()
+      this.$refs.sliderRef.blur()
     },
   },
   render () {

@@ -6,6 +6,7 @@ import TipFormatter from './tip-formatter.md'
 import Event from './event.md'
 import Mark from './mark.md'
 import Vertical from './vertical.md'
+import ShowTooltip from './show-tooltip.md'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -31,21 +32,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us}/>
-        <br/>
         <Basic />
-        <br />
         <InputNumber />
-        <br />
         <IconSlider />
-        <br />
         <TipFormatter />
-        <br />
         <Event />
-        <br />
         <Mark />
-        <br />
         <Vertical />
-        <br />
+        <ShowTooltip />
         <api>
           <template slot='cn'>
             <CN/>

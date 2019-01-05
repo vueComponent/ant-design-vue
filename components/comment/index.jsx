@@ -1,6 +1,5 @@
 import PropsTypes from '../_util/vue-types'
 import { initDefaultProps, getComponentFromProp } from '../_util/props-util'
-import classNames from 'classnames'
 
 export const CommentProps = {
   actions: PropsTypes.array,

@@ -2,7 +2,6 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import { filterEmpty, initDefaultProps, isValidElement, getComponentFromProp } from '../_util/props-util'
-import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement } from '../_util/vnode'
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large'])

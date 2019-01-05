@@ -146,10 +146,10 @@ export function calcSelectedKeys (selectedKeys, props) {
  * Since React internal will convert key to string,
  * we need do this to avoid `checkStrictly` use number match
  */
-function keyListToString (keyList) {
-  if (!keyList) return keyList
-  return keyList.map(key => String(key))
-}
+// function keyListToString (keyList) {
+//   if (!keyList) return keyList
+//   return keyList.map(key => String(key))
+// }
 
 const internalProcessProps = (props = {}) => {
   return {

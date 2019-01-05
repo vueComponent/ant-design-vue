@@ -48,14 +48,6 @@ export default {
 
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      const { spinning, delay } = this
-      if (shouldDelay(spinning, delay)) {
-        this.delayTimeout = window.setTimeout(this.delayUpdateSpinning, delay)
-      }
-    })
-  },
   updated () {
     this.$nextTick(() => {
       const { delay, spinning, sSpinning } = this
@@ -150,26 +142,18 @@ export default {
     )
     const children = this.getChildren()
     if (children) {
-      let animateClassName = prefixCls + '-nested-loading'
-      if (wrapperClassName) {
-        animateClassName += ' ' + wrapperClassName
-      }
       const containerClassName = {
         [`${prefixCls}-container`]: true,
         [`${prefixCls}-blur`]: sSpinning,
       }
 
       return (
-        <transition-group
-          {...getTransitionProps('fade', { appear: false })}
-          tag='div'
-          class={animateClassName}
-        >
+        <div {...{ on: this.$listeners }} class={[`${prefixCls}-nested-loading`, wrapperClassName]}>
           {sSpinning && <div key='loading'>{spinElement}</div>}
           <div class={containerClassName} key='container'>
             {children}
           </div>
-        </transition-group>
+        </div>
       )
     }
     return spinElement

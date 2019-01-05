@@ -14,7 +14,7 @@ const props = {
   active: PropTypes.bool,
   selectedKeys: PropTypes.array,
   disabled: PropTypes.bool,
-  title: PropTypes.string,
+  title: PropTypes.any,
   index: PropTypes.number,
   inlineIndent: PropTypes.number.def(24),
   level: PropTypes.number.def(1),

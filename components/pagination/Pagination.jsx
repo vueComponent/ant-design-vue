@@ -2,7 +2,6 @@
 import PropTypes from '../_util/vue-types'
 import VcSelect from '../select'
 import MiniSelect from './MiniSelect'
-import enUS from '../vc-pagination/locale/en_US'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import { getOptionProps } from '../_util/props-util'
 import VcPagination from '../vc-pagination'
@@ -121,7 +120,6 @@ export default {
     return (
       <LocaleReceiver
         componentName='Pagination'
-        defaultLocale={enUS}
         scopedSlots={
           { default: this.renderPagination }
         }

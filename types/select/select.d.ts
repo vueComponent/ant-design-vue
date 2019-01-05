@@ -5,6 +5,7 @@
 import { AntdComponent } from "../component";
 import { Option } from "./option";
 import { OptionGroup } from "./option-group";
+import { VNode } from "vue";
 
 export declare class Select extends AntdComponent {
   static Option: Option;
@@ -63,6 +64,12 @@ export declare class Select extends AntdComponent {
    * @type boolean
    */
   dropdownMatchSelectWidth: boolean;
+
+  /**
+   * Customize dropdown content
+   * @type function | slot-scope
+   */
+  dropdownRender?: (menu?: VNode, props?: object) => VNode;
 
   /**
    * style of dropdown menu
@@ -168,9 +175,27 @@ export declare class Select extends AntdComponent {
 
   /**
    * The custom suffix icon
-   * @type any (string | VNode | slot)
+   * @type any (VNode | slot)
    */
   suffixIcon: any;
+
+  /**
+   * The custom remove icon
+   * @type any (VNode | slot)
+   */
+  removeIcon: any;
+
+  /**
+   * The custom clear icon
+   * @type any (VNode | slot)
+   */
+  clearIcon: any;
+
+  /**
+   * The custom menuItemSelected icon
+   * @type any (VNode | slot)
+   */
+  menuItemSelectedIcon: any;
 
   /**
    * Separator used to tokenize on tag/multiple mode

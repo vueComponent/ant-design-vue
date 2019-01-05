@@ -1291,7 +1291,6 @@ const Select = {
           maxTagPlaceholderEl = (<li
             style={UNSELECTABLE_STYLE}
             {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
-            unselectable='unselectable'
             role='presentation'
             onMousedown={preventDefaultEvent}
             class={`${prefixCls}-selection__choice ${prefixCls}-selection__choice__disabled`}
@@ -1321,7 +1320,6 @@ const Select = {
               <li
                 style={UNSELECTABLE_STYLE}
                 {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
-                unselectable='unselectable'
                 onMousedown={preventDefaultEvent}
                 class={choiceClassName}
                 role='presentation'
@@ -1428,7 +1426,7 @@ const Select = {
           class={`${prefixCls}-selection__clear`}
           onMousedown={preventDefaultEvent}
           style={UNSELECTABLE_STYLE}
-          unselectable='unselectable'
+          {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
           onClick={this.onClearSelection}
         >{clearIcon || <i class={`${prefixCls}-selection__clear-icon`}>×</i>}</span>
       )

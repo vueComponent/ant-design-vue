@@ -77,18 +77,6 @@ export default {
     collapsedWidth: 80,
   }),
 
-  // static childContextTypes = {
-  //   siderCollapsed: PropTypes.bool,
-  //   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  // };
-
-  // static contextTypes = {
-  //   siderHook: PropTypes.object,
-  // };
-
-  // private mql: MediaQueryList;
-  // private uniqueId: string;
-
   data () {
     this.uniqueId = generateId('ant-sider-')
     let matchMedia

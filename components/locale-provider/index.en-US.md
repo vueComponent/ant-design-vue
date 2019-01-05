@@ -15,7 +15,10 @@
 </template>
 <script>
 import fr_FR from 'ant-design-vue/lib/locale-provider/fr_FR';
-import 'moment/locale/zh-cn';
+import moment from 'moment';
+import 'moment/locale/fr';
+
+moment.locale('fr');
 export default {
   data() {
     return {

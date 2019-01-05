@@ -4,6 +4,7 @@ import { getOptionProps } from '../_util/props-util'
 import Tooltip from '../tooltip'
 function noop () {}
 export default {
+  inheritAttrs: false,
   props: itemProps,
   name: 'MenuItem',
   inject: {
@@ -17,18 +18,27 @@ export default {
   },
   render (h) {
     const props = getOptionProps(this)
+    const { level, title, rootPrefixCls } = props
     const { getInlineCollapsed, $slots, $attrs: attrs, $listeners } = this
     const inlineCollapsed = getInlineCollapsed()
+    let titleNode
+    if (inlineCollapsed) {
+      titleNode = title || (level === 1 ? $slots.default : '')
+    }
+
     const itemProps = {
-      props,
+      props: {
+        ...props,
+        title: inlineCollapsed ? null : title,
+      },
       attrs,
       on: $listeners,
     }
     const toolTipProps = {
       props: {
-        title: inlineCollapsed && props.level === 1 ? $slots.default : '',
+        title: titleNode,
         placement: 'right',
-        overlayClassName: `${props.rootPrefixCls}-inline-collapsed-tooltip`,
+        overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
       },
     }
     return (

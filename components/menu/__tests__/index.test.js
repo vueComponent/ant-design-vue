@@ -455,4 +455,32 @@ describe('Menu', () => {
       }, 500)
     })
   })
+
+  it('inline title', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <Menu mode='inline' inlineCollapsed>
+            <Menu.Item key='1' title='bamboo lucky'>
+              <Icon type='pie-chart' />
+              <span>
+            Option 1
+                <img
+                  style={{ width: 20 }}
+                  alt='test'
+                  src='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
+                />
+              </span>
+            </Menu.Item>
+          </Menu>
+        )
+      },
+    }, { sync: false, attachToDocument: true })
+
+    wrapper.find('.ant-menu-item').trigger('mouseenter')
+    await asyncExpect(() => {
+      const text = $$('.ant-tooltip-inner')[0].textContent
+      expect(text).toBe('bamboo lucky')
+    }, 500)
+  })
 })

@@ -45,6 +45,7 @@ const Menu = {
   mixins: [BaseMixin],
   inject: {
     layoutSiderContext: { default: {}},
+    configProvider: { default: {}},
   },
   model: {
     prop: 'selectedKeys',
@@ -176,26 +177,19 @@ const Menu = {
       const { openAnimation, openTransitionName } = this.$props
       let menuOpenAnimation = openAnimation || openTransitionName
       if (openAnimation === undefined && openTransitionName === undefined) {
-        switch (menuMode) {
-          case 'horizontal':
-            menuOpenAnimation = 'slide-up'
-            break
-          case 'vertical':
-          case 'vertical-left':
-          case 'vertical-right':
+        if (menuMode === 'horizontal') {
+          menuOpenAnimation = 'slide-up'
+        } else if (menuMode === 'inline') {
+          menuOpenAnimation = { on: animation }
+        } else {
           // When mode switch from inline
           // submenu should hide without animation
-            if (this.switchingModeFromInline) {
-              menuOpenAnimation = ''
-              this.switchingModeFromInline = false
-            } else {
-              menuOpenAnimation = 'zoom-big'
-            }
-            break
-          case 'inline':
-            menuOpenAnimation = { on: animation }
-            break
-          default:
+          if (this.switchingModeFromInline) {
+            menuOpenAnimation = ''
+            this.switchingModeFromInline = false
+          } else {
+            menuOpenAnimation = 'zoom-big'
+          }
         }
       }
       return menuOpenAnimation
@@ -204,7 +198,8 @@ const Menu = {
   render () {
     const { layoutSiderContext, $slots, $listeners } = this
     const { collapsedWidth } = layoutSiderContext
-    const { prefixCls, theme } = this.$props
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider
+    const { prefixCls, theme, getPopupContainer } = this.$props
     const menuMode = this.getRealMenuMode()
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode)
 
@@ -216,6 +211,7 @@ const Menu = {
     const menuProps = {
       props: {
         ...omit(this.$props, ['inlineCollapsed']),
+        getPopupContainer: getPopupContainer || getContextPopupContainer,
         openKeys: this.sOpenKeys,
         mode: menuMode,
       },

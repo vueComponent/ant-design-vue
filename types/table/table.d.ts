@@ -194,6 +194,12 @@ export declare class Table extends AntdComponent {
   ) => any;
 
   /**
+   * Customize row expand Icon.
+   * @type Function | ScopedSlot
+   */
+  expandIcon: Function | ScopedSlot;
+
+  /**
    * Whether to expand row by clicking anywhere in the whole row
    * @default false
    * @type boolean

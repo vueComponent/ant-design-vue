@@ -43,7 +43,8 @@ const columns = [{
 | defaultExpandAllRows | 初始时，是否展开所有行 | boolean | false |
 | defaultExpandedRowKeys | 默认展开的行 | string\[] | - |
 | expandedRowKeys | 展开的行，控制属性 | string\[] | - |
-| expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode\|slot-scope| - |
+| expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| slot="expandedRowRender"  slot-scope="record, index, indent, expanded" | - |
+| expandIcon | 自定义展开图标 | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |
 | footer | 表格尾部 | Function(currentPageData)\|slot-scope |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |
@@ -122,7 +123,7 @@ const columns = [{
 | title | 列头显示文字 | string\|slot | - |
 | width | 列宽度 | string\|number | - |
 | customCell | 设置单元格属性 | Function(record) | - |
-| customHeaderCell | 设置头部单元格属性 | Function(column) | - |
+| customHeaderCell | 设置头部单元格属性 | Function(column, rowIndex) | - |
 | onFilter | 本地模式下，确定筛选的运行函数, 使用template或jsx时作为`filter`事件使用 | Function | - |
 | onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用template或jsx时作为`filterDropdownVisibleChange`事件使用 | function(visible) {} | - |
 | slots | 使用columns时，可以通过该属性配置支持slot的属性，如 `slots: { filterIcon: 'XXX'}` | object | - |

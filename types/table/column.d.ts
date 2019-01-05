@@ -133,7 +133,8 @@ export declare class Column extends AntdComponent {
    * @type Function
    */
   customCell: (
-    record: any
+    record: any,
+    rowIndex: number,
   ) => {
     props: object;
     attrs: object;

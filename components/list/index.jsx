@@ -39,7 +39,10 @@ export const ListProps = () => ({
   itemLayout: PropTypes.string,
   loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   loadMore: PropTypes.any,
-  pagination: PaginationConfig(),
+  pagination: PropTypes.oneOfType([
+    PropTypes.shape(PaginationConfig()).loose,
+    PropTypes.bool,
+  ]),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,
   renderItem: PropTypes.any,

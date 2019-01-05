@@ -67,6 +67,12 @@ export interface NotificationOptions {
    * @type Function
    */
   onClose?: Function;
+
+  /**
+   * Specify a function that will be called when the notification is clicked
+   * @type Function
+   */
+  onClick?: Function;
 }
 
 export interface NotificationConfigOptions {

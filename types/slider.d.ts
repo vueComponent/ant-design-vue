@@ -104,6 +104,13 @@ export declare class Slider extends AntdComponent {
   vertical: boolean;
 
   /**
+   * If true, Tooltip will show always, or it will not show anyway, even if dragging or hovering.
+   * @default false
+   * @type boolean
+   */
+  tooltipVisible: boolean;
+
+  /**
    * remove focus
    */
   blur(): void;

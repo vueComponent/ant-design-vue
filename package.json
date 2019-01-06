@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -20,7 +20,8 @@
     "files": [
         "dist",
         "lib",
-        "es"
+        "es",
+        "types"
     ],
     "scripts": {
         "dev": "cross-env NODE_ENV=development ENTRY_INDEX=dev ./node_modules/.bin/webpack-dev-server --open --hot --port 3001",

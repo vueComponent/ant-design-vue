@@ -252,7 +252,7 @@ export function mergeProps () {
 }
 
 function isValidElement (element) {
-  return element && element.context && element.context._isVue
+  return element && typeof element === 'object' && ('componentOptions' in element && 'context' in element)
 }
 
 export {

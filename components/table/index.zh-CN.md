@@ -108,11 +108,11 @@ const columns = [{
 | align | 设置列内容的对齐方式 | 'left' \| 'right' \| 'center' | 'left' |
 | colSpan | 表头列合并,设置为 0 时，不渲染 | number |  |
 | dataIndex | 列数据在数据项中对应的 key，支持 `a.b.c` 的嵌套写法 | string | - |
-| filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode\|slot | - |
+| filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode \| slot-scope | - |
 | filterDropdownVisible | 用于控制自定义筛选菜单是否可见 | boolean | - |
 | filtered | 标识数据是否经过过滤，筛选图标会高亮 | boolean | false |
 | filteredValue | 筛选的受控属性，外界可用此控制列的筛选状态，值为已筛选的 value 数组 | string\[] | - |
-| filterIcon | 自定义 fiter 图标。 | VNode \| (filtered: boolean) => vNode \|slot \|slot-scope | false |
+| filterIcon | 自定义 fiter 图标。 | VNode \| (filtered: boolean, column: Column) => vNode \|slot \|slot-scope | false |
 | filterMultiple | 是否多选 | boolean | true |
 | filters | 表头的筛选菜单项 | object\[] | - |
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |

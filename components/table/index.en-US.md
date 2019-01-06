@@ -107,11 +107,11 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | colSpan | Span of this column's title | number |  |
 | dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |
-| filterDropdown | Customized filter overlay | slot | - |
+| filterDropdown | Customized filter overlay | slot \| slot-scope | - |
 | filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |
-| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean) | `false` |
+| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean, column: Column) | `false` |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |
 | filters | Filter menu config | object\[] | - |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |

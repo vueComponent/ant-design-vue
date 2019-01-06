@@ -479,4 +479,149 @@ describe('Table.rowSelection', () => {
       expect(wrapper.findAll('thead tr div').at(0).text()).toBe('单选')
     })
   })
+
+  // https://github.com/ant-design/ant-design/issues/11384
+  it('should keep item even if in filter', async () => {
+    const filterColumns = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        filters: [
+          {
+            text: 'Jack',
+            value: 'Jack',
+          },
+          {
+            text: 'Lucy',
+            value: 'Lucy',
+          },
+        ],
+        filterDropdownVisible: true,
+        onFilter: (value, record) => record.name.indexOf(value) === 0,
+      },
+    ]
+
+    const onChange = jest.fn()
+    const rowSelection = {
+      onChange,
+    }
+
+    const wrapper = mount(Table, {
+      propsData: {
+        columns: filterColumns, dataSource: data, rowSelection: rowSelection,
+      },
+      sync: false,
+    })
+
+    const dropdownWrapper = mount({
+      render () {
+        return wrapper.find({ name: 'Trigger' }).vm.getComponent()
+      },
+    }, { sync: false })
+
+    function clickItem () {
+      wrapper
+        .findAll('tbody .ant-table-selection-column .ant-checkbox-input')
+        .at(0)
+        .element.checked = true
+      wrapper
+        .findAll('tbody .ant-table-selection-column .ant-checkbox-input')
+        .at(0)
+        .trigger('change')
+    }
+
+    // Check Jack
+    dropdownWrapper
+      .findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')
+      .at(0)
+      .trigger('click')
+    dropdownWrapper
+      .find('.ant-table-filter-dropdown-btns .ant-table-filter-dropdown-link.confirm')
+      .trigger('click')
+    await asyncExpect(() => {
+      expect(wrapper.findAll('tbody tr').length).toBe(1)
+    })
+    await asyncExpect(() => {
+      clickItem()
+    })
+    await asyncExpect(() => {
+      expect(onChange.mock.calls[0][0].length).toBe(1)
+      expect(onChange.mock.calls[0][1].length).toBe(1)
+    })
+
+    await asyncExpect(() => {
+      dropdownWrapper
+        .findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')
+        .at(0)
+        .trigger('click')
+    })
+
+    await asyncExpect(() => {
+      // Check Lucy
+      dropdownWrapper
+        .findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')
+        .at(1)
+        .trigger('click')
+    })
+    await asyncExpect(() => {
+      dropdownWrapper
+        .find('.ant-table-filter-dropdown-btns .ant-table-filter-dropdown-link.confirm')
+        .trigger('click')
+    })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('tbody tr').length).toBe(1)
+    })
+    await asyncExpect(() => {
+      clickItem()
+    })
+    await asyncExpect(() => {
+      expect(onChange.mock.calls[1][0].length).toBe(2)
+      expect(onChange.mock.calls[1][1].length).toBe(2)
+    })
+  })
+
+  it('render correctly when set childrenColumnName', async () => {
+    const newDatas = [
+      {
+        key: 1,
+        name: 'Jack',
+        children: [
+          {
+            key: 11,
+            name: 'John Brown',
+          },
+        ],
+      },
+      {
+        key: 2,
+        name: 'Lucy',
+        children: [
+          {
+            key: 21,
+            name: 'Lucy Brown',
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mount(Table, {
+      propsData: {
+        columns: columns, dataSource: newDatas, rowSelection: {}, childrenColumnName: 'test',
+      },
+      sync: false,
+    })
+
+    const checkboxes = wrapper.findAll('input')
+    const checkboxAll = wrapper.find({ name: 'SelectionCheckboxAll' })
+
+    checkboxes.at(1).element.checked = true
+    checkboxes.at(1).trigger('change')
+    expect(checkboxAll.vm.$data).toEqual({ indeterminate: true, checked: false })
+
+    checkboxes.at(2).element.checked = true
+    checkboxes.at(2).trigger('change')
+    await asyncExpect(() => {
+      expect(checkboxAll.vm.$data).toEqual({ indeterminate: false, checked: true })
+    })
+  })
 })

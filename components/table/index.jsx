@@ -52,7 +52,7 @@ const Table = {
         Object.keys(slots).forEach(key => {
           const name = slots[key]
           if (column[key] === undefined && $slots[name]) {
-            column[key] = $slots[name]
+            column[key] = $slots[name].length === 1 ? $slots[name][0] : $slots[name]
           }
         })
         Object.keys(scopedSlots).forEach(key => {

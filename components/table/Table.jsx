@@ -16,7 +16,7 @@ import Column from './Column'
 import ColumnGroup from './ColumnGroup'
 import createBodyRow from './createBodyRow'
 import { flatArray, treeMap, flatFilter } from './util'
-import { initDefaultProps, mergeProps, getOptionProps, getComponentFromProp, isValidElement } from '../_util/props-util'
+import { initDefaultProps, mergeProps, getOptionProps, isValidElement, filterEmpty, getAllProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import {
   TableProps,
@@ -740,13 +740,7 @@ export default {
         let filterDropdown
         let sortButton
         let customHeaderCell = column.customHeaderCell
-        const { slots } = column
-        let title = column.title
-        if (title === undefined && slots && slots.title) {
-          title = this.$slots[slots.title]
-          title = title && title[0]
-        }
-        const sortTitle = this.getColumnTitle(title, {}) || locale.sortTitle
+        const sortTitle = this.getColumnTitle(column.title, {}) || locale.sortTitle
         const isSortColumn = this.isSortColumn(column)
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
           const colFilters = key in filters ? filters[key] : []
@@ -842,11 +836,20 @@ export default {
         return
       }
       if (isValidElement(title)) {
-        debugger
-        const props = title.props
-        if (props && props.children) {
-          const { children } = props
-          return this.getColumnTitle(children, props)
+        const props = title.componentOptions
+        let children = null
+        if (props && props.children) { // for component
+          children = filterEmpty(props.children)
+        } else if (title.children) { // for dom
+          children = filterEmpty(title.children)
+        }
+        if (children && children.length === 1) {
+          children = children[0]
+          const attrs = getAllProps(title)
+          if (!children.tag && children.text) { // for textNode
+            children = children.text
+          }
+          return this.getColumnTitle(children, attrs)
         }
       } else {
         return parentNode.title || title

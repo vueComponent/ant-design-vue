@@ -11,22 +11,33 @@ Implement a customized column search example via `filterDropdown`.
 ```html
 <template>
   <a-table :dataSource="data" :columns="columns">
-    <div slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters }" class='custom-filter-dropdown'>
+    <div slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }" class='custom-filter-dropdown'>
       <a-input
         ref="searchInput"
-        placeholder='Search name'
+        :placeholder="`Search ${column.dataIndex}`"
         :value="selectedKeys[0]"
         @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
         @pressEnter="() => handleSearch(selectedKeys, confirm)"
+        style="width: 188px; margin-bottom: 8px; display: block;"
       />
-      <a-button type='primary' @click="() => handleSearch(selectedKeys, confirm)">Search</a-button>
-      <a-button @click="() => handleReset(clearFilters)">Reset</a-button>
+      <a-button
+        type='primary'
+        @click="() => handleSearch(selectedKeys, confirm)"
+        icon="search"
+        size="small"
+        style="width: 90px; margin-right: 8px"
+      >Search</a-button>
+      <a-button
+        @click="() => handleReset(clearFilters)"
+        size="small"
+        style="width: 90px"
+      >Reset</a-button>
     </div>
-    <a-icon slot="filterIcon" slot-scope="filtered" type='smile-o' :style="{ color: filtered ? '#108ee9' : '#aaa' }" />
+    <a-icon slot="filterIcon" slot-scope="filtered" type='search' :style="{ color: filtered ? '#108ee9' : undefined }" />
     <template slot="customRender" slot-scope="text">
       <span v-if="searchText">
-        <template v-for="(fragment, i) in text.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))">
-          <span v-if="fragment.toLowerCase() === searchText.toLowerCase()" :key="i" class="highlight">{{fragment}}</span>
+        <template v-for="(fragment, i) in text.toString().split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))">
+          <mark v-if="fragment.toLowerCase() === searchText.toLowerCase()" :key="i" class="highlight">{{fragment}}</mark>
           <template v-else>{{fragment}}</template>
         </template>
       </span>
@@ -84,18 +95,22 @@ export default {
         title: 'Age',
         dataIndex: 'age',
         key: 'age',
+        scopedSlots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value, record) => record.age.toLowerCase().includes(value.toLowerCase()),
       }, {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',
-        filters: [{
-          text: 'London',
-          value: 'London',
-        }, {
-          text: 'New York',
-          value: 'New York',
-        }],
-        onFilter: (value, record) => record.address.indexOf(value) === 0,
+        scopedSlots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value, record) => record.address.toLowerCase().includes(value.toLowerCase()),
       }],
     }
   },
@@ -115,22 +130,14 @@ export default {
 <style scoped>
 .custom-filter-dropdown {
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 4px;
   background: #fff;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-}
-
-.custom-filter-dropdown input {
-  width: 130px;
-  margin-right: 8px;
-}
-
-.custom-filter-dropdown button {
-  margin-right: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
 }
 
 .highlight {
-  color: #f50;
+  background-color: rgb(255, 192, 105);
+  padding: 0px;
 }
 </style>
 ```

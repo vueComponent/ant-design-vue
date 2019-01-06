@@ -13,7 +13,7 @@ Implement a customized column search example via `filterDropdown`.
   <a-table :dataSource="data" :columns="columns">
     <div slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }" class='custom-filter-dropdown'>
       <a-input
-        ref="searchInput"
+        v-ant-ref="c => searchInput = c"
         :placeholder="`Search ${column.dataIndex}`"
         :value="selectedKeys[0]"
         @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
@@ -74,6 +74,7 @@ export default {
     return {
       data,
       searchText: '',
+      searchInput: null,
       columns: [{
         title: 'Name',
         dataIndex: 'name',
@@ -87,8 +88,8 @@ export default {
         onFilterDropdownVisibleChange: (visible) => {
           if (visible) {
             setTimeout(() => {
-              this.$refs.searchInput.focus()
-            })
+              this.searchInput.focus()
+            },0)
           }
         },
       }, {
@@ -101,6 +102,13 @@ export default {
           customRender: 'customRender',
         },
         onFilter: (value, record) => record.age.toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+          if (visible) {
+            setTimeout(() => {
+              this.searchInput.focus()
+            })
+          }
+        },
       }, {
         title: 'Address',
         dataIndex: 'address',
@@ -111,6 +119,13 @@ export default {
           customRender: 'customRender',
         },
         onFilter: (value, record) => record.address.toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+          if (visible) {
+            setTimeout(() => {
+              this.searchInput.focus()
+            })
+          }
+        },
       }],
     }
   },

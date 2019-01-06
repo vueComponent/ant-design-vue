@@ -180,14 +180,16 @@ export function getClass (ele) {
   } else if (ele.$vnode && ele.$vnode.data) {
     data = ele.$vnode.data
   }
-  const tempCls = data.class || data.staticClass
+  const tempCls = data.class || {}
+  const staticClass = data.staticClass
   let cls = {}
+  staticClass && staticClass.split(' ').forEach(c => { cls[c.trim()] = true })
   if (typeof tempCls === 'string') {
     tempCls.split(' ').forEach(c => { cls[c.trim()] = true })
   } else if (Array.isArray(tempCls)) {
     classNames(tempCls).split(' ').forEach(c => { cls[c.trim()] = true })
   } else {
-    cls = tempCls
+    cls = { ...cls, ...tempCls }
   }
   return cls
 }

@@ -1,3 +1,4 @@
+import PropTypes from '../../_util/vue-types'
 import { cloneElement } from '../../_util/vnode'
 import {
   getTransformByIndex,
@@ -14,7 +15,10 @@ export default {
       default: 'ant-tabs',
       type: String,
     },
-    activeKey: String,
+    activeKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     tabBarPosition: String,
   },
   computed: {

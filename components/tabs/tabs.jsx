@@ -12,8 +12,14 @@ export default {
   name: 'ATabs',
   props: {
     prefixCls: PropTypes.string.def('ant-tabs'),
-    activeKey: PropTypes.string,
-    defaultActiveKey: PropTypes.string,
+    activeKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    defaultActiveKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     hideAdd: PropTypes.bool.def(false),
     tabBarStyle: PropTypes.object,
     tabBarExtraContent: PropTypes.oneOfType([

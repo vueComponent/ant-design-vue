@@ -34,16 +34,16 @@ exports[`Table renders JSX correctly 1`] = `
               </thead>
               <tbody class="ant-table-tbody">
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
-                  <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+                  <td class=""><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John</td>
-                  <td>Brown</td>
-                  <td>32</td>
+                  <td class="">Brown</td>
+                  <td class="">32</td>
                 </tr>
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
-                  <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+                  <td class=""><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Jim</td>
-                  <td>Green</td>
-                  <td>42</td>
+                  <td class="">Green</td>
+                  <td class="">42</td>
                 </tr>
               </tbody>
             </table>

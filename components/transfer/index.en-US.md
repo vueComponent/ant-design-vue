@@ -9,7 +9,7 @@
 | lazy | property of vc-lazy-load for lazy rendering items. Turn off it by set to `false`. | object\|boolean | `{ height: 32, offset: 32 }` |
 | listStyle | A custom CSS style used for rendering the transfer columns. | object |  |
 | locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |
-| operations | A set of operations that are sorted from bottom to top. | string\[] | ['>', '<'] |
+| operations | A set of operations that are sorted from top to bottom. | string\[] | ['>', '<'] |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) |  |
 | selectedKeys | A set of keys of selected items. | string\[] | \[] |
 | showSearch | If included, a search box is shown on each column. | boolean | false |
@@ -21,7 +21,7 @@
 | --- | --- | --- |
 | change | A callback function that is executed when the transfer between columns is complete. | (targetKeys, direction, moveKeys): void |  |
 | scroll | A callback function which is executed when scroll options list | (direction, event): void |  |
-| searchChange | A callback function which is executed when search field are changed | (direction: 'left'\|'right', event: Event): void | - |
+| search | A callback function which is executed when search field are changed | (direction: 'left'\|'right', value: string): void | - |
 | selectChange | A callback function which is executed when selected items are changed. | (sourceSelectedKeys, targetSelectedKeys): void |  |
 
 ## Warning

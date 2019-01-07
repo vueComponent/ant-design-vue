@@ -9,10 +9,6 @@ import Item from './item'
 import triggerEvent from '../_util/triggerEvent'
 import addEventListener from '../_util/Dom/addEventListener'
 
-function isIEorEDGE () {
-  return document.documentMode || /Edge/.test(navigator.userAgent)
-}
-
 function noop () {
 }
 
@@ -87,7 +83,6 @@ export default {
   beforeDestroy () {
     clearTimeout(this.timer)
     clearTimeout(this.triggerScrollTimer)
-    clearTimeout(this.fixIERepaintTimer)
     if (this.scrollEvent) {
       this.scrollEvent.remove()
     }
@@ -135,11 +130,9 @@ export default {
           triggerEvent(listNode, 'scroll')
         }
       }, 0)
-      this.fixIERepaint()
     },
     _handleClear (e) {
       this.handleClear(e)
-      this.fixIERepaint()
     },
     matchFilter (text, item) {
       const { filter, filterOption } = this.$props
@@ -156,20 +149,6 @@ export default {
         renderedText: isRenderResultPlain ? renderResult.value : renderResult,
         renderedEl: isRenderResultPlain ? renderResult.label : renderResult,
       }
-    },
-
-    // Fix IE/Edge repaint
-    // https://github.com/ant-design/ant-design/issues/9697
-    // https://stackoverflow.com/q/27947912/3040605
-    fixIERepaint () {
-      if (!isIEorEDGE()) {
-        return
-      }
-      this.fixIERepaintTimer = window.setTimeout(() => {
-        if (this.$refs.notFoundNode) {
-          this.$refs.notFoundNode.className = this.$refs.notFoundNode.className
-        }
-      }, 0)
     },
     filterNull (arr) {
       return arr.filter((item) => {
@@ -235,6 +214,7 @@ export default {
           handleClear={this.handleClear}
           placeholder={searchPlaceholder}
           value={filter}
+          disabled={disabled}
         />
       </div>
     ) : null
@@ -242,6 +222,10 @@ export default {
     const transitionProps = getTransitionProps(transitionName, {
       leave: noop,
     })
+
+    const searchNotFound = showItems.every(item => item === null) && (
+      <div class={`${prefixCls}-body-not-found`}>{notFoundContent}</div>
+    )
     const listBody = bodyDom || (
       <div
         class={classNames(showSearch ? `${prefixCls}-body ${prefixCls}-body-with-search` : `${prefixCls}-body`)}
@@ -255,9 +239,7 @@ export default {
         >
           {showItems}
         </transition-group>
-        <div class={`${prefixCls}-body-not-found`} ref='notFoundNode'>
-          {notFoundContent}
-        </div>
+        {searchNotFound}
       </div>
     )
 

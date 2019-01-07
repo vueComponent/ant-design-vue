@@ -28,7 +28,9 @@ const TreeSelect = {
     prop: 'value',
     event: 'change',
   },
-
+  inject: {
+    configProvider: { default: {}},
+  },
   created () {
     warning(
       this.multiple !== false || !this.treeCheckable,
@@ -94,8 +96,10 @@ const TreeSelect = {
         notFoundContent,
         dropdownStyle,
         dropdownClassName,
+        getPopupContainer,
         ...restProps
       } = props
+      const { getPopupContainer: getContextPopupContainer } = this.configProvider
       const rest = omit(restProps, ['inputIcon', 'removeIcon', 'clearIcon', 'switcherIcon', 'suffixIcon'])
       let suffixIcon = getComponentFromProp(this, 'suffixIcon')
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
@@ -131,6 +135,7 @@ const TreeSelect = {
           removeIcon,
           clearIcon,
           ...rest,
+          getPopupContainer: getPopupContainer || getContextPopupContainer,
           dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
           prefixCls,
           dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },

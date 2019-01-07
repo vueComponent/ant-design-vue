@@ -28,6 +28,9 @@ export default {
     prop: 'visible',
     event: 'visibleChange',
   },
+  inject: {
+    configProvider: { default: {}},
+  },
   data () {
     return {
       sVisible: !!this.$props.visible,
@@ -139,6 +142,7 @@ export default {
   render (h) {
     const { $props, $data, $slots, $listeners } = this
     const { prefixCls, openClassName, getPopupContainer } = $props
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider
     let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '')
     children = children.length === 1 ? children[0] : children
     let sVisible = $data.sVisible
@@ -156,7 +160,7 @@ export default {
     const tooltipProps = {
       props: {
         ...$props,
-        getTooltipContainer: getPopupContainer,
+        getTooltipContainer: getPopupContainer || getContextPopupContainer,
         builtinPlacements: this.getPlacements(),
         visible: sVisible,
       },

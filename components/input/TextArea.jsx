@@ -25,6 +25,7 @@ function fixControlledValue (value) {
   }
   return value
 }
+function noop () {}
 
 export default {
   name: 'ATextarea',
@@ -165,6 +166,7 @@ export default {
         ...$listeners,
         keydown: handleKeyDown,
         input: handleTextareaChange,
+        change: noop,
       },
     }
     if ($listeners['change.value']) {

@@ -56,7 +56,7 @@ export default {
         if (file.response) {
           return file.response.status === 'success';
         }
-        return true;
+        return false;
       });
 
       this.fileList = fileList

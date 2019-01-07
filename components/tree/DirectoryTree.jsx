@@ -114,7 +114,7 @@ export default {
     onSelect (keys, event) {
       const { multiple } = this.$props
       const children = this.$slots.default || []
-      const { _expandedKeys: expandedKeys = [], _selectedKeys: selectedKeys = [] } = this.$data
+      const { _expandedKeys: expandedKeys = [] } = this.$data
       const { node, nativeEvent } = event
       const { eventKey = '' } = node
 
@@ -124,7 +124,7 @@ export default {
       const shiftPick = nativeEvent.shiftKey
 
       // Generate new selected keys
-      let newSelectedKeys = selectedKeys.slice()
+      let newSelectedKeys
       if (multiple && ctrlPick) {
       // Control click
         newSelectedKeys = keys

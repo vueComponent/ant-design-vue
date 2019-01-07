@@ -105,6 +105,12 @@ export declare class TreeSelect extends AntdComponent {
   searchPlaceholder: any;
 
   /**
+   * work with `search` event to make search value controlled.
+   * @type string
+   */
+  searchValue: string;
+
+  /**
    * Show Checked Strategy
    * @description The way show selected item in box. Default: just show child nodes.
    * TreeSelect.SHOW_ALL: show all checked treeNodes (include parent treeNode).

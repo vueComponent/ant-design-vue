@@ -65,7 +65,7 @@ export declare class Transfer extends AntdComponent {
   };
 
   /**
-   * A set of operations that are sorted from bottom to top.
+   * A set of operations that are sorted from top to bottom.
    * @default ['>', '<']
    * @type string[]
    */

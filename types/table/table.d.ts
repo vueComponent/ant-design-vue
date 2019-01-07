@@ -13,7 +13,7 @@ export declare class PaginationConfig extends Pagination {
   position: "top" | "bottom" | "both";
 }
 
-export interface customSelction {
+export interface customSelection {
   /**
    * Key
    * @description Unique key of this selection
@@ -63,7 +63,7 @@ export interface TableRowSelection {
    * Custom selection config, only displays default selections when set to true
    * @type boolean | object[]
    */
-  selections?: boolean | customSelction[];
+  selections?: boolean | customSelection[];
 
   /**
    * Remove the default Select All and Select Invert selections

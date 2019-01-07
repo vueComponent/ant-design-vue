@@ -2898,31 +2898,31 @@ exports[`renders ./components/table/demo/template.md correctly 1`] = `
               </thead>
               <tbody class="ant-table-tbody">
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
-                  <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+                  <td class=""><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->John</td>
-                  <td>Brown</td>
-                  <td>32</td>
-                  <td>New York No. 1 Lake Park</td>
-                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
-                  <td><span><a href="javascript:;">Action 一 John</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
+                  <td class="">Brown</td>
+                  <td class="">32</td>
+                  <td class="">New York No. 1 Lake Park</td>
+                  <td class=""><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">nice</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">developer</div></span></td>
+                  <td class=""><span><a href="javascript:;">Action 一 John</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
-                  <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+                  <td class=""><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Jim</td>
-                  <td>Green</td>
-                  <td>42</td>
-                  <td>London No. 1 Lake Park</td>
-                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
-                  <td><span><a href="javascript:;">Action 一 Jim</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
+                  <td class="">Green</td>
+                  <td class="">42</td>
+                  <td class="">London No. 1 Lake Park</td>
+                  <td class=""><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">loser</div></span></td>
+                  <td class=""><span><a href="javascript:;">Action 一 Jim</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
                 <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
-                  <td><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
+                  <td class=""><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
                     <!---->Joe</td>
-                  <td>Black</td>
-                  <td>32</td>
-                  <td>Sidney No. 1 Lake Park</td>
-                  <td><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
-                  <td><span><a href="javascript:;">Action 一 Joe</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
+                  <td class="">Black</td>
+                  <td class="">32</td>
+                  <td class="">Sidney No. 1 Lake Park</td>
+                  <td class=""><span><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">cool</div><div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">teacher</div></span></td>
+                  <td class=""><span><a href="javascript:;">Action 一 Joe</a> <div class="ant-divider ant-divider-vertical"></div> <a href="javascript:;">Delete</a></span></td>
                 </tr>
               </tbody>
             </table>

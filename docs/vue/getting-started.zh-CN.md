@@ -6,6 +6,9 @@ Ant Design Vue 致力于提供给程序员**愉悦**的开发体验。
 > 在开始之前，推荐先学习 [Vue](https://cn.vuejs.org/) 和 [ES2015](http://babeljs.io/docs/learn-es2015/)，并正确安装和配置了 [Node.js](https://nodejs.org/) v8.9 或以上。
 > 官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识，并且已经完全掌握了 Vue 的正确开发方式。如果你刚开始学习前端或者 Vue，将 UI 框架作为你的第一步可能不是最好的主意。
 
+## 使用 vue-cli@3
+我们为新版的 vue-cli 准备了相应的 [Ant Design Vue](https://github.com/vueComponent/vue-cli-plugin-ant-design) 插件，你可以用它们快速地搭建一个基于 Ant Design Vue 的项目。
+
 ## 在线演示
 
 最简单的使用方式参照以下 CodeSandbox 演示，也推荐 Fork 本例来进行 `Bug Report`。

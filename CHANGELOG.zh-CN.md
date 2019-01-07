@@ -2,6 +2,12 @@
 
 ---
 
+## 1.2.5
+`2019-01-06`
+
+- 🌟 新增`Typescript`类型文件[#250](https://github.com/vueComponent/ant-design-vue/issues/250)
+- 🐞 修复`Icon`组件不能同时支持static class和dynamic class问题[#371](https://github.com/vueComponent/ant-design-vue/issues/371)
+
 ## 1.2.4
 `2018-12-29`
 

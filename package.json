@@ -173,6 +173,7 @@
         "enquire.js": "^2.1.6",
         "intersperse": "^1.0.0",
         "is-negative-zero": "^2.0.0",
+        "ismobilejs": "^0.5.1",
         "json2mq": "^0.2.0",
         "lodash": "^4.17.5",
         "moment": "^2.21.0",

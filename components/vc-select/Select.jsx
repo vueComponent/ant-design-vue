@@ -103,7 +103,6 @@ const Select = {
     this.saveSelectTriggerRef = saveRef(this, 'selectTriggerRef')
     this.saveRootRef = saveRef(this, 'rootRef')
     this.saveSelectionRef = saveRef(this, 'selectionRef')
-    this.ariaId = generateUUID()
     this._focused = false
     this._mouseDown = false
     this._options = []
@@ -127,6 +126,7 @@ const Select = {
       _backfillValue: '',
       // a flag for aviod redundant getOptionsInfoFromProps call
       _skipBuildOptionsInfo: true,
+      _ariaId: generateUUID(),
     }
     return {
       ...state,
@@ -1497,7 +1497,7 @@ const Select = {
         'aria-autocomplete': 'list',
         'aria-haspopup': 'true',
         'aria-expanded': realOpen,
-        'aria-controls': this.ariaId,
+        'aria-controls': this.$data._ariaId,
       },
       on: {
         click: this.selectionRefClick,
@@ -1562,7 +1562,7 @@ const Select = {
           value: this.saveSelectTriggerRef,
         }] }}
         dropdownRender={props.dropdownRender}
-        ariaId={this.ariaId}
+        ariaId={this.$data._ariaId}
       >
         <div
           {...{ directives: [{

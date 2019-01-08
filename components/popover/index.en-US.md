@@ -4,7 +4,7 @@
 | Param | Description | Type | Default value |
 | ----- | ----------- | ---- | ------------- |
 | content | Content of the card | string\|slot\|vNode | - |
-| title | Title of the card | string\|slot\VNode | - |
+| title | Title of the card | string\|slot\|VNode | - |
 
 Consult [Tooltip's documentation](/ant-design-vue/components/tooltip/#API) to find more APIs.
 

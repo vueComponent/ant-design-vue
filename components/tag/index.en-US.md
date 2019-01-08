@@ -21,7 +21,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| checked | Checked status of Tag | boolean | `false` |
+| checked(v-model) | Checked status of Tag | boolean | `false` |
 
 ### Tag.CheckableTag Events
 | Events Name | Description | Arguments |

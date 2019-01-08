@@ -2,12 +2,12 @@
 
 exports[`renders ./components/tag/demo/basic.md correctly 1`] = `
 <div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">Tag 1</div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter"><a href="https://github.com/vueComponent/ant-design">Link</a></div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">Tag 2<i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+  <div class="ant-tag">Tag 1</div>
+  <div class="ant-tag"><a href="https://github.com/vueComponent/ant-design">Link</a></div>
+  <div class="ant-tag">Tag 2<i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
         <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path>
       </svg></i></div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">Prevent Default<i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+  <div class="ant-tag">Prevent Default<i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
         <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path>
       </svg></i></div>
 </div>
@@ -25,40 +25,40 @@ exports[`renders ./components/tag/demo/colorful.md correctly 1`] = `
 <div>
   <h4 style="margin-bottom: 16px;">Presets:</h4>
   <div>
-    <div data-show="true" class="ant-tag ant-tag-pink ant-tag-zoom-enter">pink</div>
-    <div data-show="true" class="ant-tag ant-tag-red ant-tag-zoom-enter">red</div>
-    <div data-show="true" class="ant-tag ant-tag-orange ant-tag-zoom-enter">orange</div>
-    <div data-show="true" class="ant-tag ant-tag-green ant-tag-zoom-enter">green</div>
-    <div data-show="true" class="ant-tag ant-tag-cyan ant-tag-zoom-enter">cyan</div>
-    <div data-show="true" class="ant-tag ant-tag-blue ant-tag-zoom-enter">blue</div>
-    <div data-show="true" class="ant-tag ant-tag-purple ant-tag-zoom-enter">purple</div>
+    <div class="ant-tag ant-tag-pink">pink</div>
+    <div class="ant-tag ant-tag-red">red</div>
+    <div class="ant-tag ant-tag-orange">orange</div>
+    <div class="ant-tag ant-tag-green">green</div>
+    <div class="ant-tag ant-tag-cyan">cyan</div>
+    <div class="ant-tag ant-tag-blue">blue</div>
+    <div class="ant-tag ant-tag-purple">purple</div>
   </div>
   <h4>Custom:</h4>
   <div>
-    <div data-show="true" class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(255, 85, 0);">#f50</div>
-    <div data-show="true" class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(45, 183, 245);">#2db7f5</div>
-    <div data-show="true" class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(135, 208, 104);">#87d068</div>
-    <div data-show="true" class="ant-tag ant-tag-has-color ant-tag-zoom-enter" style="background-color: rgb(16, 142, 233);">#108ee9</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color: rgb(255, 85, 0);">#f50</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color: rgb(45, 183, 245);">#2db7f5</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color: rgb(135, 208, 104);">#87d068</div>
+    <div class="ant-tag ant-tag-has-color" style="background-color: rgb(16, 142, 233);">#108ee9</div>
   </div>
 </div>
 `;
 
 exports[`renders ./components/tag/demo/control.md correctly 1`] = `
 <div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">
+  <div class="ant-tag">
     Unremovable
   </div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">
+  <div class="ant-tag">
     Tag 2
     <i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
         <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path>
       </svg></i></div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">
+  <div class="ant-tag">
     Tag 3Tag 3Tag 3Tag 3...
     <i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
         <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path>
       </svg></i></div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter" style="border-style: dashed; background: rgb(255, 255, 255);"><i class="anticon anticon-plus"><svg viewBox="64 64 896 896" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+  <div class="ant-tag" style="border-style: dashed; background: rgb(255, 255, 255);"><i class="anticon anticon-plus"><svg viewBox="64 64 896 896" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
         <path d="M848 474H550V152h-76v322H176c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h298v322h76V550h298c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
       </svg></i> New Tag
   </div>
@@ -67,7 +67,7 @@ exports[`renders ./components/tag/demo/control.md correctly 1`] = `
 
 exports[`renders ./components/tag/demo/controlled.md correctly 1`] = `
 <div>
-  <div data-show="true" class="ant-tag ant-tag-zoom-enter">
+  <div class="ant-tag">
     Movies
     <i class="anticon anticon-close"><svg viewBox="64 64 896 896" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
         <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path>

@@ -12,13 +12,13 @@ describe('Tag', () => {
     }, { sync: false, attachToDocument: true })
     await asyncExpect(() => {
       expect(wrapper.findAll('.anticon-close').length).toBe(1)
-      expect(wrapper.findAll('.ant-tag').length).toBe(1)
+      expect(wrapper.findAll('.ant-tag').filter(w => w.isVisible()).length).toBe(1)
       wrapper.find('.anticon-close').trigger('click')
       expect(onClose).toBeCalled()
     })
-    // await asyncExpect(() => {
-    //   expect(wrapper.findAll('.ant-tag').length).toBe(0)
-    // })
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-tag').filter(w => w.isVisible()).length).toBe(0)
+    })
   })
 
   it('should not be closed when prevent default', async () => {
@@ -32,11 +32,11 @@ describe('Tag', () => {
     }, { sync: false })
     await asyncExpect(() => {
       expect(wrapper.findAll('.anticon-close').length).toBe(1)
-      expect(wrapper.findAll('.ant-tag').length).toBe(1)
+      expect(wrapper.findAll('.ant-tag').filter(w => w.isVisible()).length).toBe(1)
       wrapper.find('.anticon-close').trigger('click')
     })
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-tag').length).toBe(1)
+      expect(wrapper.findAll('.ant-tag').filter(w => w.isVisible()).length).toBe(1)
     }, 0)
   })
   describe('visibility', () => {

@@ -22,6 +22,8 @@ const md = {
   - 当需要显示一个操作完成的百分比时。
         ## 代码演示`,
   us: `# Progress
+  Display the current progress of an operation flow.
+  ## When To Use
   If it will take a long time to complete an operation, you can use \`Progress\` to show the current progress and status.
 
   - When an operation will interrupt the current interface, or it needs to run in the background for more than 2 seconds.

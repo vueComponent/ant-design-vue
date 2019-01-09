@@ -268,15 +268,15 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
             </div>
           </div>
         </div>
-        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
+        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
         <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
           <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
-            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
+            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
+            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
           </div>
           <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
         </div>
-        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
+        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
       </div>
     </div>
     <div class="ant-card-body">
@@ -303,16 +303,16 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
             </div>
           </div>
         </div>
-        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
+        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
         <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: -100%;">
           <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
           <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
-            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
+            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
+            <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
           </div>
           <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
         </div>
-        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden;"></div>
+        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
       </div>
     </div>
     <div class="ant-card-body">

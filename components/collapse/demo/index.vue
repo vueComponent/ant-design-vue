@@ -19,11 +19,13 @@ const md = {
 - '手风琴' 是一种特殊的折叠面板，只允许单个内容区域展开。
 
           ## 代码演示`,
-  us: `# When To Use
+  us: `# Collapse
+A content area which can be collapsed and expanded.
+## When To Use
 
 - Can be used to group or hide complex regions to keep the page clean.
 - 'Accordion' is a special kind of 'Collapse', which allows only one panel to be expanded at a time.
-## Examples 
+## Examples
 `,
 }
 export default {

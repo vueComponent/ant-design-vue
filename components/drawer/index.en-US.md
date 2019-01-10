@@ -2,7 +2,6 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| --- | --- | --- | --- |
 | closable | Whether a close (x) button is visible on top right of the Drawer dialog or not. | boolean | true |
 | destroyOnClose | Whether to unmount child components on closing drawer or not. | boolean | false |
 | getContainer | Return the mounted node for Drawer. | HTMLElement \| `() => HTMLElement` \| Selectors | 'body' |

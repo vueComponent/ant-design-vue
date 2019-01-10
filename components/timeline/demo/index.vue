@@ -17,7 +17,7 @@ const md = {
   - 当有一系列信息需按时间排列时，可正序和倒序。
   - 需要有一条时间轴进行视觉上的串联时。。
         ## 代码演示`,
-  us: `# Data Display
+  us: `# Timeline
   Vertical display timeline.
   ## When To Use
   - When a series of information needs to be ordered by time (ascend or descend).

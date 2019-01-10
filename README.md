@@ -69,6 +69,15 @@ If you are in a bad network environment，you can try other registries and tools
 - [Vue](https://vuejs.org/)
 - [Ant Design React](http://ant.design/)
 
+## Ecosystem
+
+| Project | Description |
+|----------|-------------|
+| [vue-ref](https://github.com/vueComponent/vue-ref)          |  You can use the callback to get a reference like react |
+| [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)          |  A vscode extension for ant-design-vue |
+| [vue-cli-plugin-ant-design](https://github.com/vueComponent/vue-cli-plugin-ant-design)               |  Vue-cli 3 plugin to add ant-design-vue |
+| [vue-dash-event](https://github.com/vueComponent/vue-dash-event)             |  The library function, implemented in the DOM template, can use the custom event of the ant-design-vue component (camelCase) |
+
 ## Donation
 
 ant-design-vue is an MIT-licensed open source project. In order to achieve better and sustainable development of the project, we expect to gain more [backers](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md). You can support us in any of the following ways:

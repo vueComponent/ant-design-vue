@@ -69,6 +69,15 @@ $ yarn add ant-design-vue
 - [Vue官方文档](https://cn.vuejs.org/)
 - [Antd React](http://ant.design/)
 
+## 生态
+
+| Project | Description |
+|----------|-------------|
+| [vue-ref](https://github.com/vueComponent/vue-ref)          |  您可以使用回调来获取组件的引用，类似react |
+| [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)          |  ant-design-vue的vscode扩展 |
+| [vue-cli-plugin-ant-design](https://github.com/vueComponent/vue-cli-plugin-ant-design)               |  使用vue-cli3快速使用ant-design-vue组件库 |
+| [vue-dash-event](https://github.com/vueComponent/vue-dash-event)             |  在DOM模板中，您可以使用ant-design-vue组件的自定义事件（camelCase） |
+
 ## 问答
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 

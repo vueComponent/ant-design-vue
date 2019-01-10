@@ -71,7 +71,7 @@ export default {
         this.loading = false
         return
       }
-      this.getData((res) => {
+      this.fetchData((res) => {
         this.data = data.concat(res.results)
         this.loading = false
       })

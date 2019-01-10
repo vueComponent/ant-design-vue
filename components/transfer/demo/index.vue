@@ -3,7 +3,6 @@ import Basic from './basic.md'
 import Search from './search.md'
 import Advanced from './advanced.md'
 import CustomItem from './custom-item.md'
-import LargeData from './large-data.md'
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
 
@@ -49,7 +48,6 @@ export default {
         <Search />
         <Advanced />
         <CustomItem />
-        <LargeData />
         <api>
           <template slot='cn'>
             <CN/>

@@ -1,6 +1,58 @@
 # 更新日志
 
+`ant-design-vue` 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范。
+
+#### 发布周期
+
+* 修订版本号：每周末会进行日常 bugfix 更新。（如果有紧急的 bugfix，则任何时候都可发布）
+* 次版本号：带有新特性的向下兼容的版本。
+* 主版本号：含有破坏性更新和新特性，不在发布周期内。
+
 ---
+
+## 1.3.0
+`2019-01-12`
+
+- 🎉 🎉 🎉 发布 vscode 插件 [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
+
+### 组件功能和样式同步到 antd 3.11.6 版本。
+1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
+
+- 🔥 增加了一个新组件 [Comment](https://vuecomponent.github.io/ant-design-vue/components/comment-cn/)。
+- 🔥 增加了一个新组件 [ConfigProvider](https://vuecomponent.github.io/ant-design-vue/components/config-provider-cn/) 为组件提供统一的全局化配置。
+
+组件修复/功能增强：
+
+- 🌟 Avatar 组件增加 `srcSet` 属性，用于设置图片类头像响应式资源地址。
+- 🌟 Notification 组件增加 `onClick` 属性，点击通知时触发的回调函数。
+- Transfer
+  - 🌟 增加 `search` 事件，搜索框内容时改变时的回调函数，并废弃 `searchChange` 事件。
+  - 🌟 增加 `disabled` 属性，用于禁用搜索框。
+- 🌟 Badge 进行了重构，`count` 支持自定义组件。
+- Slider 
+  - 🌟 增加 `tooltipVisible` 属性，用于 Tooltip 是否始终显示。
+  - 🌟 优化focus效果
+  - 🐞 修复键盘tab键聚焦时，Tooltip不显示问题。
+  - 🐞 修复拖动时Tooltip不停的显隐切换问题。
+- Calendar
+  - 🌟 支持多种时间格式。
+  - 🌟 showSearch 方法增加 `limit` 参数，用于限制搜索结果展示数量。
+- Table
+  - 🌟 增加 `expandIcon` 属性，用于自定义表格展开图标。
+  - 🌟 customCell 方法增加 `index` 参数。
+- Select
+  - 🌟 增加 `removeIcon`、`clearIcon`、`menuItemSelectedIcon` 属性，用于自定义删除、清空、选中的图标。
+  - 🌟 增加 `dropdownRender` 属性， 用于自定义下拉框内容。
+  - 🌟 增加 `loading` 属性， 用于展示加载中状态。
+- 🌟 优化 Button 在含有Icon时的显示效果。 
+- ⚡️ 重构 Tag 组件，简化代码并提升性能。
+- 💄 Menu.Item 组件增加 `title` 属性，用于在收缩时展示的悬浮标题。
+- 💄 微调 Card 头部和加载中的样式细节。
+- 💄 优化 Spin 样式并略微提升了切换状态的性能。
+- 🐞 修复 TextArea 组件高度不能自适应问题。
+- 🐞 修复 Tooltip 在disabled状态下Button中，样式错误问题。[#389](https://github.com/vueComponent/ant-design-vue/issues/389)
+- 🐞 修复一些组件 TypeScript 定义。
+
 
 ## 1.2.5
 `2019-01-06`

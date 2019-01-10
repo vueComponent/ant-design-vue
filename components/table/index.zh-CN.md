@@ -122,8 +122,8 @@ const columns = [{
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | 列头显示文字 | string\|slot | - |
 | width | 列宽度 | string\|number | - |
-| customCell | 设置单元格属性 | Function(record) | - |
-| customHeaderCell | 设置头部单元格属性 | Function(column, rowIndex) | - |
+| customCell | 设置单元格属性 | Function(record, rowIndex) | - |
+| customHeaderCell | 设置头部单元格属性 | Function(column) | - |
 | onFilter | 本地模式下，确定筛选的运行函数, 使用template或jsx时作为`filter`事件使用 | Function | - |
 | onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用template或jsx时作为`filterDropdownVisibleChange`事件使用 | function(visible) {} | - |
 | slots | 使用columns时，可以通过该属性配置支持slot的属性，如 `slots: { filterIcon: 'XXX'}` | object | - |

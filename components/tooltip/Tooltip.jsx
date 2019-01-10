@@ -78,7 +78,7 @@ export default {
           display: 'inline-block', // default inline-block is important
           ...picked,
           cursor: 'not-allowed',
-          width: isAntBtn && ele.componentOptions.propsData.disabled ? '100%' : null,
+          width: isAntBtn && ele.componentOptions.propsData.block ? '100%' : null,
         }
         const buttonStyle = {
           ...omitted,

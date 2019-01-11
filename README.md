@@ -20,6 +20,7 @@ An enterprise-class UI components based on Ant Design and Vue.
 [![Join the chat at https://gitter.im/vueComponent/ant-design-vue](https://img.shields.io/gitter/room/vueComponent/ant-design-vue.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-vue?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文）
 [![backers](https://opencollective.com/ant-design-vue/backers/badge.svg)](#backers)
 [![sponsors](https://opencollective.com/ant-design-vue/sponsors/badge.svg)](#sponsors)
+[![extension-for-VSCode](https://img.shields.io/badge/extension%20for-VSCode-blue.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
 
 </div>
 

@@ -14,6 +14,7 @@
 `2019-01-12`
 
 - 🎉 🎉 🎉 发布 vscode 插件 [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
+- 🎉 🎉 🎉 优化官网文档交互
 
 ### 组件功能和样式同步到 antd 3.11.6 版本。
 1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。

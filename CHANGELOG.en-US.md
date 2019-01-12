@@ -14,6 +14,7 @@
 `2019-01-12`
 
 - 🎉 🎉 🎉 Publish the vscode plugin [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
+- 🎉 🎉 🎉 Optimize official website document interaction
 
 ### Component features and styles are synchronized to antd version 3.11.6.
 1.3.0 brings two new Components, a lot of exciting changes and new features.

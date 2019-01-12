@@ -197,6 +197,7 @@ export const categories = {
     'heart',
     'environment',
     'eye',
+    'eye-invisible',
     'camera',
     'save',
     'team',

@@ -2,14 +2,11 @@
 @menu-item-border: 2px;
 
 #header {
-  transition: all 0.3s;
   background: #fff;
   box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
   position: relative;
   z-index: 10;
   max-width: 100%;
-  width: 100%;
-  position: fixed;
   &.home-nav-bottom {
     background: rgba(255, 255, 255, 0.9);
     border-bottom-color: #ebedee;
@@ -40,7 +37,7 @@
   white-space: nowrap;
   img {
     height: 32px;
-    margin-right: 10px;
+    margin-right: 16px;
   }
   img + img {
     height: 16px;
@@ -94,7 +91,8 @@
   border: 0;
   float: right;
   font-size: 14px;
-  font-family: Lato, @font-family;
+  font-family: Avenir, @font-family;
+  font-variant: tabular-nums;
   &.ant-menu-horizontal {
     border-bottom: none;
 

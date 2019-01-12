@@ -1,5 +1,5 @@
 <template>
-  <section :class="['code-box', isOpen ? 'expand': '']" :id="id">
+  <section :class="['code-box', codeExpand ? 'expand': '']" :id="id">
     <section class="code-box-demo">
       <template v-if="iframeDemo[iframeDemoKey]">
         <div class="browser-mockup with-url">
@@ -13,12 +13,25 @@
     <section class="code-box-meta markdown">
       <slot v-if="isZhCN" name="description"></slot>
       <slot v-else name="us-description"></slot>
-      <span class="btn-toggle" :class="{open: isOpen}" @click="toggle">
-        <a-icon type="up" />
-      </span>
+      <a-tooltip :title="codeExpand ? 'Hide Code' : 'Show Code'">
+        <span class="code-expand-icon">
+          <img
+            alt="expand code"
+            src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
+            :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
+            @click="handleCodeExpand"
+          />
+          <img
+            alt="expand code"
+            src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
+            :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"
+            @click="handleCodeExpand"
+          />
+        </span>
+      </a-tooltip>
     </section>
     <transition appear :css="false" @enter="enter" @leave="leave">
-      <section class="highlight-wrapper" style="position: relative;" v-show="isOpen">
+      <section class="highlight-wrapper" style="position: relative;" v-show="codeExpand">
         <a-tooltip
           :title="copied ? '复制成功' : '复制代码'"
           :visible="copyTooltipVisible"
@@ -73,7 +86,7 @@ export default {
       this.demoContext.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] });
     }
     return {
-      isOpen: false,
+      codeExpand: false,
       isZhCN: isZhCN(name),
       copied: false,
       copyTooltipVisible: false,
@@ -83,8 +96,8 @@ export default {
     };
   },
   methods: {
-    toggle () {
-      this.isOpen = !this.isOpen;
+    handleCodeExpand  ()  {
+      this.codeExpand = !this.codeExpand;
     },
     enter: animate.enter,
     leave: animate.leave,

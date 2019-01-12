@@ -1,4 +1,5 @@
 <script>
+import { enquireScreen } from 'enquire-js';
 import AllDemo from '../demo';
 import Header from './header';
 import Footer from './footer';
@@ -9,6 +10,7 @@ import sortBy from 'lodash/sortBy';
 import { isZhCN } from '../util';
 import { Provider, create } from '../../components/_util/store';
 import NProgress from 'nprogress';
+import MobileMenu from '../../components/vc-drawer/src'; 
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -18,8 +20,14 @@ const docsList = [
   { key: 'changelog', enTitle: 'Change Log', title: '更新日志' },
   { key: 'i18n', enTitle: 'Internationalization', title: '国际化' },
   { key: 'faq', enTitle: 'FAQ', title: '常见问题' },
-  { key: 'sponsor', enTitle: 'Sponsor', title: '赞助我们' },
+  { key: 'sponsor', enTitle: 'Sponsor', title: '支持我们' },
+  { key: 'download', enTitle: 'Download Design Resources', title: '下载设计资源' },
 ];
+
+let isMobile = false;
+enquireScreen(b => {
+  isMobile = b;
+});
 
 export default {
   props: {
@@ -36,6 +44,7 @@ export default {
       showSideBars: true,
       currentSubMenu: [],
       sidebarHeight: document.documentElement.offsetHeight,
+      isMobile,
     };
   },
   provide () {
@@ -64,6 +73,9 @@ export default {
           nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle);
         }, 0);
       }
+      enquireScreen(b => {
+        this.isMobile = !!b;
+      });
     });
   },
   watch: {
@@ -212,16 +224,14 @@ export default {
     }
     const config = AllDemo[titleMap[reName]];
     this.resetDocumentTitle(config, reName, isCN);
-    const { showSideBars } = this;
+    const { showSideBars, isMobile } = this;
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>
         <a-locale-provider locale={locale}>
           <div class='main-wrapper'>
             <a-row>
-              <a-col v-show={showSideBars} ref='sidebar' class='site-sidebar' xxl={4} xl={5} lg={5} md={6} sm={8} xs={12}>
-                <div class='drawer-mask' onClick={() => { this.showSideBars = false; }}></div>
-                <Sponsors title={isCN ? '赞助商' : 'Sponsors'}/>
+              {isMobile ? <MobileMenu ref='sidebar' wrapperClassName='drawer-wrapper'>
                 <a-menu
                   class='aside-container menu-site'
                   selectedKeys={[name]}
@@ -233,18 +243,32 @@ export default {
                     {MenuGroup}
                   </a-sub-menu>
                 </a-menu>
-                <div class='close-drawer' onClick={() => { this.showSideBars = false; }}>
-                  <a-icon type='close'/>
-                </div>
+              </MobileMenu>
+              :
+                <a-col ref='sidebar' class='site-sidebar main-menu' xxl={4} xl={5} lg={5} md={6} sm={8} xs={12}>
+                <a-affix>
+                  <section class="main-menu-inner">
+                    <Sponsors title={isCN ? '赞助商' : 'Sponsors'}/>
+                    <a-menu
+                      class='aside-container menu-site'
+                      selectedKeys={[name]}
+                      defaultOpenKeys={['Components']}
+                      inlineIndent={40}
+                      mode='inline'>
+                      {docsMenu}
+                      <a-sub-menu title={`Components(${searchData.length})`} key='Components'>
+                        {MenuGroup}
+                      </a-sub-menu>
+                    </a-menu>
+                  </section>
+                </a-affix>
               </a-col>
-              <div v-show={!showSideBars} class='open-drawer' onClick={() => { this.showSideBars = true; }}>
-                <a-icon type='bars'/>
-              </div>
-              <a-col class='main-container' xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
-                <div class='content'>
-                  <div class='toc-affix' style='width: 120px;'>
+              }
+              <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
+                <section class='main-container main-container-component'>
+                  {!isMobile ? <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
-                  </div>
+                  </div> : null}
                   {this.showDemo ? <Provider store={this.store} key={isCN ? 'cn' : 'en'}>
                     <router-view
                       class={`demo-cols-${config.cols || 2}`}
@@ -266,16 +290,16 @@ export default {
                       ] }}
                     ></router-view>
                   </div> : ''}
-                </div>
+                </section>
                 <section class='prev-next-nav'>
                   {prevPage ? <router-link class='prev-page' to={`${prevPage.url}`}><a-icon type='left' />&nbsp;&nbsp;{prevPage.title}</router-link> : ''}
                   {nextPage ? <router-link class='next-page' to={`${nextPage.url}`}>{nextPage.title}&nbsp;&nbsp;<a-icon type='right' /></router-link> : ''}
                 </section>
+                <Footer ref='footer' isCN={isCN}/>
               </a-col>
             </a-row>
           </div>
         </a-locale-provider>
-        <Footer ref='footer' isCN={isCN}/>
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
       </div>
     );

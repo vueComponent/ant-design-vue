@@ -45,7 +45,7 @@ export default {
             </a-button>
           </a-col>
           <a-col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>
-            <div id='search-box' style='display: block'>
+            <div id='search-box'>
               <a-icon type='search' />
               <a-select
                 ref='selectBox'
@@ -77,23 +77,45 @@ export default {
                 {isCN ? '组件' : 'Components'}
               </a-menu-item>
               <a-menu-item key='github'>
-                <a href='https://github.com/vueComponent/ant-design-vue'>GitHub</a>
+                <a target="_blank" href='https://github.com/vueComponent/ant-design-vue'>GitHub</a>
               </a-menu-item>
-              <a-menu-item key='sponsor'>
-                <a-popover placement='bottom'>
-                  <template slot='content'>
-                    <img
-                      width='160'
-                      height='163'
-                      alt='dingding'
-                      src='https://user-images.githubusercontent.com/4122593/50038786-571eaf80-0060-11e9-98a1-ea202fc60859.png'
-                    />
-                  </template>
-                  <a>
-                    <a-icon type='dingding' style={{ color: '#1890ff' }}/>
-                    {isCN ? '钉钉服务群' : 'Ding Group QR Code'}
+              <a-sub-menu key="Ecosystem" title={isCN ? '生态系统' : 'Ecosystem'}>
+                <a-menu-item key="design">
+                  <router-link to={{ path: isCN ? '/ant-design-vue/docs/vue/download-cn/' :  '/ant-design-vue/docs/vue/download/'}}>
+                    {isCN ? '设计资源' : 'Design Resources'}
+                  </router-link>
+                </a-menu-item>
+                <a-menu-item key="vscode">
+                  <a target="_blank" href='https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper'>
+                    VS Code Extension
                   </a>
-                </a-popover>
+                </a-menu-item>
+                <a-menu-item key="awesome">
+                  <a target="_blank" href='https://github.com/vueComponent/ant-design-vue-awesome'>
+                    Awesome
+                  </a>
+                </a-menu-item>
+                <a-menu-item key='dingding'>
+                  <a-popover placement='bottom'>
+                    <template slot='content'>
+                      <img
+                        width='160'
+                        height='163'
+                        alt='dingding'
+                        src='https://user-images.githubusercontent.com/4122593/50038786-571eaf80-0060-11e9-98a1-ea202fc60859.png'
+                      />
+                    </template>
+                    <a>
+                      <a-icon type='dingding' style={{ color: '#1890ff' }}/>
+                      {isCN ? '钉钉服务群' : 'Ding Group QR Code'}
+                    </a>
+                  </a-popover>
+                </a-menu-item>
+              </a-sub-menu>
+              <a-menu-item key="sponsor">
+                <router-link to={{ path: isCN ? '/ant-design-vue/docs/vue/sponsor-cn/' :  '/ant-design-vue/docs/vue/sponsor/'}}>
+                  {isCN ? '支持我们' : 'Support us'}
+                </router-link>
               </a-menu-item>
             </a-menu>
           </a-col>

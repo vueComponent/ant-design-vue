@@ -1,6 +1,6 @@
 <template>
 <li
-  :class="justCopied ? 'copied' : ''"
+  :class="justCopied === type ? 'copied' : ''"
   v-clipboard:copy="text"
   v-clipboard:success="onCopied">
   <a-icon :type="type" :theme="theme"/>

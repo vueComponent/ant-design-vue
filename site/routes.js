@@ -100,6 +100,16 @@ export default [
         beforeEnter,
       },
       {
+        path: 'docs/vue/download',
+        component: () => import('../docs/vue/download.en-US.md'),
+        beforeEnter,
+      },
+      {
+        path: 'docs/vue/download-cn',
+        component: () => import('../docs/vue/download.zh-CN.md'),
+        beforeEnter,
+      },
+      {
         path: 'docs/vue/sponsor',
         component: () => import('../docs/vue/sponsor.en-US.md'),
         beforeEnter,

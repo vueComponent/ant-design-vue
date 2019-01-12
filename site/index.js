@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import '../components/style.js';
 import './index.less';
+import 'nprogress/nprogress.css';
 import 'highlight.js/styles/solarized-light.css';
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';

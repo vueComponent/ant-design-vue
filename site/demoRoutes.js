@@ -431,4 +431,12 @@ export default [
     path: 'comment-cn',
     component: () => import('../components/comment/demo/index.vue'),
   },
+  {
+    path: 'config-provider',
+    component: () => import('../components/config-provider/demo/index.vue'),
+  },
+  {
+    path: 'config-provider-cn',
+    component: () => import('../components/config-provider/demo/index.vue'),
+  },
 ];

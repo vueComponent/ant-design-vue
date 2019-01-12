@@ -17,6 +17,12 @@ export default {
     type: 'Data Display',
     title: 'Comment',
   },
+  configProvider: {
+    category: 'Components',
+    subtitle: '全局化配置',
+    type: 'Other',
+    title: 'ConfigProvider',
+  },
   breadcrumb: {
     category: 'Components',
     subtitle: '面包屑',

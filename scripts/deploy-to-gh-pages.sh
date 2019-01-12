@@ -5,7 +5,7 @@ set -e # exit with nonzero exit code if anything fails
 BUMP="bump "
 SITE="update site"
 
-if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_COMMIT_MESSAGE == *$BUMP* || $TRAVIS_COMMIT_MESSAGE == $SITE ]]; then
+if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_COMMIT_MESSAGE == *$BUMP* || $TRAVIS_COMMIT_MESSAGE == *$SITE* ]]; then
 
 echo "Starting to update gh-pages\n"
 

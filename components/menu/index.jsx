@@ -132,7 +132,6 @@ const Menu = {
       this.$emit('mouseenter', e);
     },
     handleTransitionEnd(e) {
-      // console.log(111)
       // when inlineCollapsed menu width animation finished
       // https://github.com/ant-design/ant-design/issues/12864
       const widthCollapsed = e.propertyName === 'width' && e.target === e.currentTarget;

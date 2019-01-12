@@ -29,7 +29,6 @@ const MultiDrawer = {
       this.childrenDrawer = true;
     },
     onChildrenDrawerClose() {
-      console.log('hello');
       this.childrenDrawer = false;
     },
   },

@@ -26,6 +26,7 @@ export const TreeSelectProps = () => ({
   // onChange: (value: any, label: any) => void,
   // onSearch: (value: any) => void,
   searchPlaceholder: PropTypes.string,
+  searchValue: PropTypes.string,
   showCheckedStrategy: PropTypes.oneOf(['SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD']),
   suffixIcon: PropTypes.any,
   treeCheckable: PropTypes.bool,

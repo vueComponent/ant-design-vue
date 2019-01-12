@@ -34,6 +34,9 @@ export default {
     prop: 'visible',
     event: 'visibleChange',
   },
+  inject: {
+    configProvider: { default: {}},
+  },
   render () {
     const {
       type, disabled, htmlType,
@@ -41,14 +44,14 @@ export default {
       visible, placement, getPopupContainer,
       ...restProps
     } = this.$props
-
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider
     const dropdownProps = {
       props: {
         align,
         disabled,
         trigger: disabled ? [] : trigger,
         placement,
-        getPopupContainer,
+        getPopupContainer: getPopupContainer || getContextPopupContainer,
       },
       on: {
         visibleChange: this.onVisibleChange,

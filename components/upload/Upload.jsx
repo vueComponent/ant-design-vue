@@ -14,6 +14,7 @@ import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './u
 export { UploadProps }
 
 export default {
+  inheritAttrs: false,
   name: 'AUpload',
   Dragger: Dragger,
   mixins: [BaseMixin],
@@ -231,6 +232,7 @@ export default {
       },
       ref: 'uploadRef',
       class: `${prefixCls}-btn`,
+      attrs: this.$attrs,
     }
 
     const uploadList = showUploadList ? (

@@ -11,6 +11,8 @@ import SearchBox from './search-box'
 import Search from './search'
 import SelectUsers from './select-users'
 import Suffix from './suffix'
+import HideSelected from './hide-selected'
+import CustomDropdownMenu from './custom-dropdown-menu'
 
 import CN from '../index.zh-CN.md'
 import US from '../index.en-US.md'
@@ -50,6 +52,8 @@ export default {
         <Search/>
         <SelectUsers/>
         <Suffix/>
+        <HideSelected />
+        <CustomDropdownMenu />
         <api>
           <CN slot='cn' />
           <US/>

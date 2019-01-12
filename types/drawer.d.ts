@@ -67,6 +67,12 @@ export declare class Drawer extends AntdComponent {
   wrapClassName: string;
 
   /**
+   * The style of the container of the Drawer dialog.
+   * @type object
+   */
+  wrapStyle: object;
+
+  /**
    * Width of the Drawer dialog.
    * @default 256
    * @type string | number
@@ -78,12 +84,6 @@ export declare class Drawer extends AntdComponent {
    * @type string | number
    */
   height: string | number;
-
-  /**
-   * The class name of the container of the Drawer dialog.
-   * @type string
-   */
-  className: string;
 
   /**
    * The z-index of the Drawer.

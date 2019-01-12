@@ -157,6 +157,7 @@ function notice (args) {
       duration,
       closable: true,
       onClose: args.onClose,
+      onClick: args.onClick,
       key: args.key,
       style: args.style || {},
       class: args.class,

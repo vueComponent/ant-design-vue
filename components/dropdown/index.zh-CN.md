@@ -7,6 +7,8 @@
 | disabled | 菜单是否禁用 | boolean | - |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | `() => document.body` |
 | overlay(slot) | 菜单 | [Menu](/ant-design-vue/components/menu-cn) | - |
+| overlayClassName | 下拉根元素的类名称 | string | - |
+| overlayStyle | 下拉根元素的样式 | object | - |
 | placement | 菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
 | trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
 | visible(v-model) | 菜单是否显示 | boolean | - |

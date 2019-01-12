@@ -2,7 +2,6 @@
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
 import { filterEmpty, initDefaultProps, isValidElement, getComponentFromProp } from '../_util/props-util'
-import getTransitionProps from '../_util/getTransitionProps'
 import { cloneElement } from '../_util/vnode'
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large'])
@@ -47,14 +46,6 @@ export default {
       sSpinning: spinning && !shouldDelay(spinning, delay),
 
     }
-  },
-  mounted () {
-    this.$nextTick(() => {
-      const { spinning, delay } = this
-      if (shouldDelay(spinning, delay)) {
-        this.delayTimeout = window.setTimeout(this.delayUpdateSpinning, delay)
-      }
-    })
   },
   updated () {
     this.$nextTick(() => {
@@ -150,26 +141,18 @@ export default {
     )
     const children = this.getChildren()
     if (children) {
-      let animateClassName = prefixCls + '-nested-loading'
-      if (wrapperClassName) {
-        animateClassName += ' ' + wrapperClassName
-      }
       const containerClassName = {
         [`${prefixCls}-container`]: true,
         [`${prefixCls}-blur`]: sSpinning,
       }
 
       return (
-        <transition-group
-          {...getTransitionProps('fade', { appear: false })}
-          tag='div'
-          class={animateClassName}
-        >
+        <div {...{ on: this.$listeners }} class={[`${prefixCls}-nested-loading`, wrapperClassName]}>
           {sSpinning && <div key='loading'>{spinElement}</div>}
           <div class={containerClassName} key='container'>
             {children}
           </div>
-        </transition-group>
+        </div>
       )
     }
     return spinElement

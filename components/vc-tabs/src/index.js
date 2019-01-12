@@ -1,4 +1,4 @@
-// based on rc-tabs 9.5.7
+// based on rc-tabs 9.5.8
 import ref from 'vue-ref'
 import Vue from 'vue'
 import Tabs from './Tabs'

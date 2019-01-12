@@ -362,9 +362,14 @@ const Range = {
         max,
         disabled,
         style: handleStyle[i],
-        ref: 'handleRefs_' + i,
-        handleFocus: this.onFocus,
-        handleBlur: this.onBlur,
+        directives: [{
+          name: 'ant-ref',
+          value: h => this.saveHandle(i, h),
+        }],
+        on: {
+          focus: this.onFocus,
+          blur: this.onBlur,
+        },
       }))
 
       return {

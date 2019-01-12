@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
+import moment from 'moment'
 import DatePicker from '../'
 
 const { RangePicker } = DatePicker
@@ -34,7 +35,14 @@ describe('DatePicker with showTime', () => {
     const onChangeFn = jest.fn()
     const wrapper = mount({
       render () {
-        return <DatePicker showTime open onChange={onChangeFn} onOk={onOkFn} onOpenChange={onOpenChangeFn} />
+        return <DatePicker
+          showTime
+          open
+          onChange={onChangeFn}
+          onOk={onOkFn}
+          onOpenChange={onOpenChangeFn}
+          defaultValue={moment()}
+        />
       },
     }, { sync: false })
 

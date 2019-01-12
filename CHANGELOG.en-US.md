@@ -1,6 +1,58 @@
 # Change Log
 
+`ant-design-vue` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
+
+#### Release Schedule
+
+* Weekly release: patch version at the end of every week for routine bugfix (anytime for urgent bugfix).
+* Monthly release: minor version for new features.
+* Major version release is not included in this schedule for breaking change and new features.
+
 ---
+
+## 1.3.0
+`2019-01-12`
+
+- 🎉 🎉 🎉 Publish the vscode plugin [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
+
+### Component features and styles are synchronized to antd version 3.11.6.
+1.3.0 brings two new Components, a lot of exciting changes and new features.
+
+- 🔥 Added a new component [Comment](https://vuecomponent.github.io/ant-design-vue/components/comment/)。
+- 🔥 dded a new component [ConfigProvider](https://vuecomponent.github.io/ant-design-vue/components/config-provider/) for user to customize some global setting.
+
+Component Fixes / Enhancements:
+
+- 🌟 Avatar Added `srcSet` prop that is a list of sources to use for different screen resolutions.
+- 🌟 Notification Added `onClick` prop that is called when the notification is clicked. 
+- Transfer
+  - 🌟 Added `search` event that is executed when search field are changed and deprecated `searchChange` event.
+  - 🌟 Added `disabled` prop that whether disable transfer. 
+- 🌟 Refactor Badge, support `count` as custom component.
+- Slider 
+  - 🌟 Added `tooltipVisible` prop that whether Tooltip will always show.
+  - 🌟 Optimize the focus effect
+  - 🐞 Fix tooltip does not display the problem when focus through the keyboard tab.
+  - 🐞 Fix the hidden switch problem of Tooltip while dragging.
+- Calendar
+  - 🌟 Support multiple date format.
+  - 🌟 showSearch added `limit` prop that support limit filtered item count.
+- Table
+  - 🌟 Added `expandIcon` prop that custom the default expand icon.
+  - 🌟 customCell added `index` prop.
+- Select
+  - 🌟 Added `removeIcon`、`clearIcon`、`menuItemSelectedIcon` prop，allow setting `remove`、`clear`、`menuItemSelected` custom icons.
+  - 🌟 Added `dropdownRender` prop that custom dropdown content. 
+  - 🌟 Added `loading` prop that indicate loading state.
+- 🌟 Optimize the display of the Button when it contains an Icon. 
+- ⚡️ Refactor Tag component with less code and better performance.
+- 💄 Added `title` prop that Menu.Item support tooltip title when collapsed.
+- 💄 Chore Card header and loading UI.
+- 💄 Optimized Spin wrapper styles and improve performance slightly.
+- 🐞 Fix TextArea use resize observer to check textarea size.
+- 🐞 Fix Tooltip in the disabled state, the style error problem.[#389](https://github.com/vueComponent/ant-design-vue/issues/389)
+- 🐞 Fix some component TypeScript definitions.
+
 
 ## 1.2.5
 `2019-01-06`

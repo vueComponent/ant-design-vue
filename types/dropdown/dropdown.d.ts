@@ -23,6 +23,18 @@ export declare class Dropdown extends AntdComponent {
   overlay: Menu;
 
   /**
+   * Class name of the dropdown root element
+   * @type string
+   */
+  overlayClassName: string;
+
+  /**
+   * Style of the dropdown root element
+   * @type object
+   */
+  overlayStyle: object;
+
+  /**
    * whether the dropdown menu is visible
    * @type boolean
    */

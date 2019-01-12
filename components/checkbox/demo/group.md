@@ -17,7 +17,9 @@ Generate a group of checkboxes from an array
     <br />
     <a-checkbox-group :options="options" :value="['Pear']" @change="onChange" />
     <br />
-    <a-checkbox-group :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange" />
+    <a-checkbox-group :options="optionsWithDisabled" disabled :defaultValue="['Apple']" @change="onChange">
+      <span style="color: red" slot="label" slot-scope="{value}">{{value}}</span>
+    </a-checkbox-group>
   </div>
 </template>
 <script>
@@ -28,7 +30,7 @@ const options = [
   { label: 'Orange', value: 'Orange' },
 ]
 const optionsWithDisabled = [
-  { label: 'Apple', value: 'Apple' },
+  { value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange', disabled: false },
 ]

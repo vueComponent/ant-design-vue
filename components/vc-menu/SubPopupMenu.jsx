@@ -4,7 +4,7 @@ import { connect } from '../_util/store'
 import BaseMixin from '../_util/BaseMixin'
 import KeyCode from '../_util/KeyCode'
 import classNames from 'classnames'
-import { getKeyFromChildrenIndex, loopMenuItem, noop } from './util'
+import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice } from './util'
 import DOMWrap from './DOMWrap'
 import { cloneElement } from '../_util/vnode'
 import { initDefaultProps, getOptionProps, getPropsData, getEvents, getComponentFromProp } from '../_util/props-util'
@@ -324,7 +324,8 @@ const SubPopupMenu = {
           select: this.onSelect,
         },
       }
-      if (props.mode === 'inline') {
+      // ref: https://github.com/ant-design/ant-design/issues/13943
+      if (props.mode === 'inline' || isMobileDevice()) {
         newChildProps.props.triggerSubMenuAction = 'click'
       }
       return cloneElement(child, newChildProps)

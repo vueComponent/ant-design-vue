@@ -77,7 +77,7 @@ describe('Carousel', () => {
       sync: true,
     }
     const wrapper = mount(Carousel, props)
-    const onWindowResized = wrapper.vm.onWindowResized
+    const { onWindowResized } = wrapper.vm
     const spy = jest.spyOn(wrapper.vm.onWindowResized, 'cancel')
     const spy2 = jest.spyOn(window, 'removeEventListener')
     wrapper.destroy()

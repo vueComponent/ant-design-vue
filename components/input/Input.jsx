@@ -5,6 +5,8 @@ import inputProps from './inputProps'
 import { hasProp, getComponentFromProp, getStyle, getClass } from '../_util/props-util'
 import { isIE, isIE9 } from '../_util/env'
 
+function noop () {}
+
 function fixControlledValue (value) {
   if (typeof value === 'undefined' || value === null) {
     return ''
@@ -171,6 +173,8 @@ export default {
         'addonAfter',
         'prefix',
         'suffix',
+        'value',
+        'defaultValue',
       ])
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this
       const inputProps = {
@@ -182,6 +186,7 @@ export default {
           ...$listeners,
           keydown: handleKeyDown,
           input: handleChange,
+          change: noop,
         },
         class: classNames(getInputClassName(), getClass(this)),
         ref: 'input',

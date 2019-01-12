@@ -19,6 +19,7 @@
 | disabled | Whether disabled select | boolean | false |
 | dropdownClassName | className of dropdown menu | string | - |
 | dropdownMatchSelectWidth | Whether dropdown's width is same with select. | boolean | true |
+| dropdownRender | Customize dropdown content | (menuNode: VNode, props) => VNode | - |
 | dropdownStyle | style of dropdown menu | object | - |
 | filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true |
 | firstActiveValue | Value of action option by default | string\|string\[] | - |
@@ -34,12 +35,16 @@
 | showSearch | Whether show search input in single mode. | boolean | false |
 | showArrow | Whether to show the drop-down arrow | boolean |  true |
 | size | Size of Select input. `default` `large` `small` | string | default |
-| suffixIcon | The custom suffix icon | string \| VNode \| slot | - |
+| suffixIcon | The custom suffix icon | VNode \| slot | - |
+| removeIcon | The custom remove icon | VNode \| slot | - |
+| clearIcon | The custom clear icon | VNode \| slot | - |
+| menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - |
 | tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |
 | value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |
 | options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] |
 | defaultOpen | Initial open state of dropdown | boolean | - |
 | open | Controlled open state of dropdown | boolean | - |
+| loading | indicate loading state | Boolean | false |
 
 ### events
 | Events Name | Description | Arguments |

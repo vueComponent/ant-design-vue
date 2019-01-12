@@ -12,7 +12,7 @@ export default {
   props: {
     prefixCls: PropTypes.string.def('ant-tag'),
     color: PropTypes.string,
-    closable: PropTypes.bool,
+    closable: PropTypes.bool.def(false),
     visible: PropTypes.bool,
     afterClose: PropTypes.func,
   },
@@ -21,22 +21,13 @@ export default {
     event: 'close.visible',
   },
   data () {
-    const props = getOptionProps(this)
-    let state = {}
-    if ('visible' in props) {
-      state = {
-        _visible: props.visible,
-        _closed: !props.visible,
-      }
+    let _visible = true
+    if (hasProp(this, 'visible')) {
+      _visible = this.visible
     }
-    state = {
-      _closing: false,
-      _closed: false,
-      _visible: true,
-      ...state,
+    return {
+      _visible,
     }
-    this.pre_visible = state._visible
-    return state
   },
   watch: {
     visible (val) {
@@ -45,61 +36,26 @@ export default {
       })
     },
   },
-  updated () {
-    this.$nextTick(() => {
-      const preVisible = this.pre_visible
-      this.pre_visible = this.$data._visible
-      if (preVisible && !this.$data._visible) {
-        this.close()
-      } else if (!preVisible && this.$data._visible) {
-        this.show()
-      }
-    })
-  },
   methods: {
-    handleIconClick (e) {
+    setVisible (visible, e) {
       this.$emit('close', e)
       this.$emit('close.visible', false)
-      if (e.defaultPrevented || hasProp(this, 'visible')) {
+      if (e.defaultPrevented) {
         return
       }
-      this.setState({ _visible: false })
-      this.$forceUpdate()
-    },
-    close  () {
-      if (this.$data._closing || this.$data._closed) {
-        return
+      if (!hasProp(this, 'visible')) {
+        this.setState({ _visible: visible })
       }
-      const dom = this.$el
-      dom.style.width = `${dom.getBoundingClientRect().width}px`
-      // It's Magic Code, don't know why
-      dom.style.width = `${dom.getBoundingClientRect().width}px`
-      this.setState({
-        _closing: true,
-      })
     },
 
-    show  () {
-      this.setState({
-        _closed: false,
-      })
+    handleIconClick (e) {
+      this.setVisible(false, e)
     },
 
-    animationEnd  (_, existed) {
-      if (!existed && !this.$data._closed) {
-        this.setState({
-          _closed: true,
-          _closing: false,
-        })
-
-        const afterClose = this.afterClose
-        if (afterClose) {
-          afterClose()
-        }
-      } else {
-        this.setState({
-          _closed: false,
-        })
+    animationEnd  () {
+      const afterClose = this.afterClose
+      if (afterClose) {
+        afterClose()
       }
     },
 
@@ -110,46 +66,51 @@ export default {
           .test(color)
       )
     },
+    getTagStyle () {
+      const { color } = this.$props
+      const isPresetColor = this.isPresetColor(color)
+      return {
+        backgroundColor: color && !isPresetColor ? color : undefined,
+      }
+    },
+
+    getTagClassName () {
+      const { prefixCls, color } = this.$props
+      const isPresetColor = this.isPresetColor(color)
+      return {
+        [prefixCls]: true,
+        [`${prefixCls}-${color}`]: isPresetColor,
+        [`${prefixCls}-has-color`]: color && !isPresetColor,
+      }
+    },
+
+    renderCloseIcon () {
+      const { closable } = this.$props
+      return closable ? <Icon type='close' onClick={this.handleIconClick} /> : null
+    },
   },
 
   render () {
-    const { prefixCls, closable, color } = this.$props
-    const closeIcon = closable ? <Icon type='close' onClick={this.handleIconClick} /> : ''
-    const isPresetColor = this.isPresetColor(color)
-    const cls = {
-      [`${prefixCls}`]: true,
-      [`${prefixCls}-${color}`]: isPresetColor,
-      [`${prefixCls}-has-color`]: (color && !isPresetColor),
-      [`${prefixCls}-close`]: this.$data._closing,
-    }
-
-    const tagStyle = {
-      backgroundColor: (color && !isPresetColor) ? color : null,
-    }
-    const tag =
+    const { prefixCls } = this.$props
+    const { _visible: visible } = this.$data
+    const tag = (
       <div
-        v-show={!this.$data._closing}
-        data-show={!this.$data._closing}
+        v-show={visible}
         {...{ on: omit(this.$listeners, ['close']) }}
-        class={cls}
-        style={tagStyle}
+        class={this.getTagClassName()}
+        style={this.getTagStyle()}
       >
         {this.$slots.default}
-        {closeIcon}
+        {this.renderCloseIcon()}
       </div>
+    )
     const transitionProps = getTransitionProps(`${prefixCls}-zoom`, {
-      afterLeave: () => this.animationEnd(undefined, false),
-      afterEnter: () => this.animationEnd(undefined, true),
+      appear: false,
+      afterLeave: this.animationEnd,
     })
     return (
       <Wave>
-        {this.$data._closed ? <span/>
-          : <transition
-            {...transitionProps}
-          >
-            {tag}
-          </transition>
-        }
+        <transition {...transitionProps}>{tag}</transition>
       </Wave>
     )
   },

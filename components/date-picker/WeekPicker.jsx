@@ -40,18 +40,22 @@ export default {
       )
     }
     return {
-      sValue: value,
+      _value: value,
+      _open: this.open,
     }
   },
   watch: {
     value (val) {
-      this.setState({ sValue: val })
+      this.setState({ _value: val })
+    },
+    open (val) {
+      this.setState({ _open: val })
     },
   },
 
   methods: {
     weekDateRender (current) {
-      const selectedValue = this.sValue
+      const selectedValue = this.$data._value
       const { prefixCls } = this
       if (selectedValue &&
         current.year() === selectedValue.year() &&
@@ -72,10 +76,19 @@ export default {
     },
     handleChange  (value) {
       if (!hasProp(this, 'value')) {
-        this.setState({ sValue: value })
+        this.setState({ _value: value })
       }
       this.$emit('change', value, formatValue(value, this.format))
-      this.focus()
+    },
+    handleOpenChange (open) {
+      if (!hasProp(this, 'open')) {
+        this.setState({ _open: open })
+      }
+      this.$emit('openChange', open)
+
+      if (!open) {
+        this.focus()
+      }
     },
     clearSelection (e) {
       e.preventDefault()
@@ -99,8 +112,9 @@ export default {
     const {
       prefixCls, disabled, pickerClass, popupStyle,
       pickerInputClass, format, allowClear, locale, localeCode, disabledDate,
-      sValue: pickerValue, $listeners, $scopedSlots,
+      $data, $listeners, $scopedSlots,
     } = this
+    const { _value: pickerValue, _open: open } = $data
     const { focus = noop, blur = noop } = $listeners
 
     if (pickerValue && localeCode) {
@@ -121,7 +135,7 @@ export default {
         disabledDate={disabledDate}
       />
     )
-    const clearIcon = (!disabled && allowClear && this.sValue) ? (
+    const clearIcon = (!disabled && allowClear && $data._value) ? (
       <Icon
         type='close-circle'
         class={`${prefixCls}-picker-clear`}
@@ -143,7 +157,7 @@ export default {
 
     const input = ({ value }) => {
       return (
-        <span>
+        <span style={{ display: 'inline-block', width: '100%' }}>
           <input
             ref='input'
             disabled={disabled}
@@ -165,10 +179,12 @@ export default {
         calendar,
         prefixCls: `${prefixCls}-picker-container`,
         value: pickerValue,
+        open,
       },
       on: {
         ...$listeners,
         change: this.handleChange,
+        openChange: this.handleOpenChange,
       },
       style: popupStyle,
     }

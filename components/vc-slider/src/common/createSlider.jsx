@@ -79,6 +79,7 @@ export default function createSlider (Component) {
           step
         )
       }
+      this.handlesRefs = {}
       return {}
     },
     mounted () {
@@ -94,20 +95,8 @@ export default function createSlider (Component) {
         this.removeDocumentEvents()
       })
     },
-    computed: {
-      handlesRefs () {
-        const handlesRefs = []
-        for (const [k, v] of Object.entries(this.$refs)) {
-          const matchs = k.match(/handleRefs_(\d+$)/)
-          if (matchs) {
-            handlesRefs[+matchs[1]] = v
-          }
-        }
-        return handlesRefs
-      },
-    },
     methods: {
-      defaultHandle ({ index, ref, className, style, ...restProps }) {
+      defaultHandle ({ index, directives, className, style, on, ...restProps }) {
         delete restProps.dragging
         if (restProps.value === null) {
           return null
@@ -119,7 +108,8 @@ export default function createSlider (Component) {
           class: className,
           style,
           key: index,
-          ref,
+          directives,
+          on,
         }
         return <Handle {...handleProps} />
       },
@@ -264,6 +254,9 @@ export default function createSlider (Component) {
         const ratio = (value - min) / (max - min)
         return ratio * 100
       },
+      saveHandle (index, handle) {
+        this.handlesRefs[index] = handle
+      },
     },
     render (h) {
       const {
@@ -306,6 +299,7 @@ export default function createSlider (Component) {
       return (
         <div
           ref='sliderRef'
+          tabIndex='-1'
           class={sliderClassName}
           onTouchstart={disabled ? noop : this.onTouchStart}
           onMousedown={disabled ? noop : this.onMouseDown}

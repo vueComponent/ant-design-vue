@@ -18,6 +18,7 @@
 | disabled | 是否禁用 | boolean | false |
 | dropdownClassName | 下拉菜单的 className 属性 | string | - |
 | dropdownMatchSelectWidth | 下拉菜单和选择器同宽 | boolean | true |
+| dropdownRender | 自定义下拉框内容 | (menuNode: VNode, props) => VNode | - |
 | dropdownStyle | 下拉菜单的 style 属性 | object | - |
 | filterOption | 是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 `true`，反之则返回 `false`。 | boolean or function(inputValue, option) | true |
 | firstActiveValue | 默认高亮的选项 | string\|string\[] | - |
@@ -33,7 +34,10 @@
 | showSearch | 使单选模式可搜索 | boolean | false |
 | showArrow | 是否显示下拉小箭头 | boolean |  true |
 | size | 选择框大小，可选 `large` `small` | string | default |
-| suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |
+| suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |
+| removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |
+| clearIcon | 自定义的多选框清空图标 | VNode \| slot | - |
+| menuItemSelectedIcon | 自定义当前选中的条目图标 | VNode \| slot | - |
 | tokenSeparators | 在 tags 和 multiple 模式下自动分词的分隔符 | string\[] |  |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|number\|number\[] | - |
 | options | options 数据，如果设置则不需要手动构造 selectOption 节点 | array&lt;{value, label, [disabled, key, title]}> | \[] |

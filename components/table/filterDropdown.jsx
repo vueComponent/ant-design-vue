@@ -201,7 +201,7 @@ export default {
       const filtered = selectedKeys && selectedKeys.length > 0
       let filterIcon = column.filterIcon
       if (typeof filterIcon === 'function') {
-        filterIcon = filterIcon(filtered)
+        filterIcon = filterIcon(filtered, column)
       }
       const dropdownIconClass = classNames({
         [`${prefixCls}-selected`]: filtered,
@@ -215,7 +215,7 @@ export default {
         on: {
           click: stopPropagation,
         },
-        class: classNames(`${prefixCls}-icon`, dropdownIconClass, filterIcon.className),
+        class: classNames(`${prefixCls}-icon`, dropdownIconClass),
       })
         : <Icon
           title={locale.filterTitle}
@@ -244,6 +244,7 @@ export default {
         clearFilters: this.handleClearFilters,
         filters: column.filters,
         getPopupContainer: (triggerNode) => triggerNode.parentNode,
+        column,
       })
     }
 

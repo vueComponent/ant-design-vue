@@ -22,7 +22,13 @@ The most basic usage of `Transfer` involves providing the source data and target
       :render="item=>item.title"
       :disabled="disabled"
     />
-    <a-switch unCheckedChildren="disabled" checkedChildren="disabled" :checked="disabled" @change="handleDisable" />
+    <a-switch
+      unCheckedChildren="disabled"
+      checkedChildren="disabled"
+      :checked="disabled"
+      @change="handleDisable"
+      style="margin-top: 16px"
+    />
   </div>
 </template>
 <script>

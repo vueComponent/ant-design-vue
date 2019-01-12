@@ -12,7 +12,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| count | Number to show in badge | number\|string |  |
+| count | Number to show in badge | number\|string \| slot |  |
 | dot | Whether to display a red dot instead of `count` | boolean | `false` |
 | offset | set offset of the badge dot, like [x, y] | [number\|string, number\|string] | - |
 | overflowCount | Max count to show | number | 99 |

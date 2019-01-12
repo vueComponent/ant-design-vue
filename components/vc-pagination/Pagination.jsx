@@ -21,6 +21,14 @@ function defaultItemRender (page, type, element) {
   return element
 }
 
+function calculatePage (p, state, props) {
+  let pageSize = p
+  if (typeof pageSize === 'undefined') {
+    pageSize = state.statePageSize
+  }
+  return Math.floor((props.total - 1) / pageSize) + 1
+}
+
 export default {
   name: 'Pagination',
   mixins: [BaseMixin],
@@ -87,7 +95,7 @@ export default {
     pageSize (val) {
       const newState = {}
       let current = this.stateCurrent
-      const newCurrent = this.calculatePage(val)
+      const newCurrent = calculatePage(val, this.$data, this.$props)
       current = current > newCurrent ? newCurrent : current
       if (!hasProp(this, 'current')) {
         newState.stateCurrent = current
@@ -112,42 +120,30 @@ export default {
     },
   },
   methods: {
-    isValid (page) {
-      return isInteger(page) && page >= 1 && page !== this.stateCurrent
+    getJumpPrevPage () {
+      return Math.max(1, this.stateCurrent - (this.showLessItems ? 3 : 5))
+    },
+    getJumpNextPage () {
+      return Math.min(
+        calculatePage(undefined, this.$data, this.$props),
+        this.stateCurrent + (this.showLessItems ? 3 : 5)
+      )
     },
     getItemIcon (icon) {
       const { prefixCls } = this.$props
       const iconNode = getComponentFromProp(this, icon, this.$props) || <a class={`${prefixCls}-item-link`} />
       return iconNode
     },
-    calculatePage (p) {
-      let pageSize = p
-      if (typeof pageSize === 'undefined') {
-        pageSize = this.statePageSize
-      }
-      return Math.floor((this.total - 1) / pageSize) + 1
+    isValid (page) {
+      return isInteger(page) && page >= 1 && page !== this.stateCurrent
     },
-    handleGoTO (event) {
-      if (event.keyCode === KEYCODE.ENTER || event.type === 'click') {
-        this.handleChange(this.stateCurrentInputValue)
-      }
-    },
-    prev () {
-      if (this.hasPrev()) {
-        this.handleChange(this.stateCurrent - 1)
-      }
-    },
-    next () {
-      if (this.hasNext()) {
-        this.handleChange(this.stateCurrent + 1)
-      }
-    },
-    hasPrev () {
-      return this.stateCurrent > 1
-    },
-    hasNext () {
-      return this.stateCurrent < this.calculatePage()
-    },
+    // calculatePage (p) {
+    //   let pageSize = p
+    //   if (typeof pageSize === 'undefined') {
+    //     pageSize = this.statePageSize
+    //   }
+    //   return Math.floor((this.total - 1) / pageSize) + 1
+    // },
     handleKeyDown (event) {
       if (event.keyCode === KEYCODE.ARROW_UP || event.keyCode === KEYCODE.ARROW_DOWN) {
         event.preventDefault()
@@ -183,7 +179,7 @@ export default {
     changePageSize (size) {
       let current = this.stateCurrent
       const preCurrent = current
-      const newCurrent = this.calculatePage(size)
+      const newCurrent = calculatePage(size, this.$data, this.$props)
       current = current > newCurrent ? newCurrent : current
       // fix the issue:
       // Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
@@ -212,9 +208,9 @@ export default {
     handleChange (p) {
       let page = p
       if (this.isValid(page)) {
-        const allTotal = this.calculatePage()
-        if (page > allTotal) {
-          page = allTotal
+        const currentPage = calculatePage(undefined, this.$data, this.$props)
+        if (page > currentPage) {
+          page = currentPage
         }
         if (!hasProp(this, 'current')) {
           this.setState({
@@ -228,6 +224,28 @@ export default {
         return page
       }
       return this.stateCurrent
+    },
+    prev () {
+      if (this.hasPrev()) {
+        this.handleChange(this.stateCurrent - 1)
+      }
+    },
+    next () {
+      if (this.hasNext()) {
+        this.handleChange(this.stateCurrent + 1)
+      }
+    },
+    jumpPrev () {
+      this.handleChange(this.getJumpPrevPage())
+    },
+    jumpNext () {
+      this.handleChange(this.getJumpNextPage())
+    },
+    hasPrev () {
+      return this.stateCurrent > 1
+    },
+    hasNext () {
+      return this.stateCurrent < calculatePage(undefined, this.$data, this.$props)
     },
     runIfEnter (event, callback, ...restParams) {
       if (event.key === 'Enter' || event.charCode === 13) {
@@ -246,17 +264,10 @@ export default {
     runIfEnterJumpNext (event) {
       this.runIfEnter(event, this.jumpNext)
     },
-    getJumpPrevPage () {
-      return Math.max(1, this.stateCurrent - (this.showLessItems ? 3 : 5))
-    },
-    getJumpNextPage () {
-      return Math.min(this.calculatePage(), this.stateCurrent + (this.showLessItems ? 3 : 5))
-    },
-    jumpPrev () {
-      this.handleChange(this.getJumpPrevPage())
-    },
-    jumpNext () {
-      this.handleChange(this.getJumpNextPage())
+    handleGoTO (event) {
+      if (event.keyCode === KEYCODE.ENTER || event.type === 'click') {
+        this.handleChange(this.stateCurrentInputValue)
+      }
     },
   },
   render () {
@@ -268,7 +279,7 @@ export default {
     const locale = this.locale
 
     const prefixCls = this.prefixCls
-    const allPages = this.calculatePage()
+    const allPages = calculatePage(undefined, this.$data, this.$props)
     const pagerList = []
     let jumpPrev = null
     let jumpNext = null
@@ -354,19 +365,36 @@ export default {
       )
     }
     if (allPages <= 5 + pageBufferSize * 2) {
+      const pagerProps = {
+        props: {
+          locale,
+          rootPrefixCls: prefixCls,
+          showTitle: props.showTitle,
+          itemRender: props.itemRender,
+        },
+        on: {
+          click: this.handleChange,
+          keypress: this.runIfEnter,
+        },
+      }
+      if (!allPages) {
+        pagerList.push(
+          <Pager
+            {...pagerProps}
+            key='noPager'
+            page={allPages}
+            class={`${prefixCls}-disabled`}
+          />
+        )
+      }
       for (let i = 1; i <= allPages; i++) {
         const active = stateCurrent === i
         pagerList.push(
           <Pager
-            locale={locale}
-            rootPrefixCls={prefixCls}
-            onClick={this.handleChange}
-            onKeypress={this.runIfEnter}
+            {...pagerProps}
             key={i}
             page={i}
             active={active}
-            showTitle={this.showTitle}
-            itemRender={this.itemRender}
           />
         )
       }
@@ -530,8 +558,8 @@ export default {
         </li>
       )
     }
-    const prevDisabled = !this.hasPrev()
-    const nextDisabled = !this.hasNext()
+    const prevDisabled = !this.hasPrev() || !allPages
+    const nextDisabled = !this.hasNext() || !allPages
     const buildOptionText = this.buildOptionText || this.$scopedSlots.buildOptionText
     return (
       <ul

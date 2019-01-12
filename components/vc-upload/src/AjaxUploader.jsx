@@ -35,6 +35,7 @@ const upLoadPropTypes = {
 }
 
 const AjaxUploader = {
+  inheritAttrs: false,
   name: 'ajaxUploader',
   mixins: [BaseMixin],
   props: upLoadPropTypes,
@@ -43,6 +44,13 @@ const AjaxUploader = {
     return {
       uid: getUid(),
     }
+  },
+  mounted () {
+    this._isMounted = true
+  },
+  beforeDestroy () {
+    this._isMounted = false
+    this.abort()
   },
   methods: {
     onChange (e) {
@@ -174,19 +182,13 @@ const AjaxUploader = {
       }
     },
   },
-  mounted () {
-    this.$nextTick(() => {
-      this._isMounted = true
-    })
-  },
-  beforeDestroy () {
-    this._isMounted = false
-    this.abort()
-  },
+
   render () {
+    const { $props, $attrs } = this
     const {
-      componentTag: Tag, prefixCls, disabled, multiple, accept, directory, openFileDialogOnClick,
-    } = this.$props
+      componentTag: Tag, prefixCls, disabled,
+      multiple, accept, directory, openFileDialogOnClick,
+    } = $props
     const cls = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
@@ -213,6 +215,7 @@ const AjaxUploader = {
         {...tagProps}
       >
         <input
+          id={$attrs.id}
           type='file'
           ref='fileInputRef'
           key={this.uid}

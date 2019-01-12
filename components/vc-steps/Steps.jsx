@@ -105,6 +105,7 @@ export default {
       [`${prefixCls}-${size}`]: size,
       [`${prefixCls}-label-${adjustedlabelPlacement}`]: direction === 'horizontal',
       [`${prefixCls}-dot`]: !!progressDot,
+      [`${prefixCls}-flex-not-supported`]: !flexSupported,
     }
     const stepsProps = {
       class: classString,

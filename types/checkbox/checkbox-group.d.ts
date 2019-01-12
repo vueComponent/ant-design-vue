@@ -19,7 +19,7 @@ export declare class CheckboxGroup extends AntdComponent {
   disabled: boolean;
 
   /**
-   * Specifies options
+   * Specifies options, you can customize `label` with slot = "label" slot-scope = "option"
    * @type Array<string | { label: string, value: string, disabled?: boolean, onChange?: Function }>
    */
   options: Array<

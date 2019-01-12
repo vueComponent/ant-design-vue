@@ -160,7 +160,7 @@ exports[`renders ./components/grid/demo/playfround.md correctly 1`] = `
 <div id="components-grid-demo-playground">
   <div style="margin-bottom: 16px;"><span style="margin-right: 6px;">Gutter (px): </span>
     <div style="width: 50%;">
-      <div class="ant-slider ant-slider-with-marks">
+      <div tabindex="-1" class="ant-slider ant-slider-with-marks">
         <div class="ant-slider-rail"></div>
         <div class="ant-slider-track" style="left: 0%; width: 20%;"></div>
         <div class="ant-slider-step"><span class="ant-slider-dot ant-slider-dot-active" style="left: 0%;"></span><span class="ant-slider-dot ant-slider-dot-active" style="left: 20%;"></span><span class="ant-slider-dot" style="left: 40%;"></span><span class="ant-slider-dot" style="left: 60%;"></span><span class="ant-slider-dot" style="left: 80%;"></span><span class="ant-slider-dot" style="left: 100%;"></span></div>
@@ -169,7 +169,7 @@ exports[`renders ./components/grid/demo/playfround.md correctly 1`] = `
       </div>
     </div> <span style="margin-right: 6px;">Column Count:</span>
     <div style="width: 50%;">
-      <div class="ant-slider ant-slider-with-marks">
+      <div tabindex="-1" class="ant-slider ant-slider-with-marks">
         <div class="ant-slider-rail"></div>
         <div class="ant-slider-track" style="left: 0%; width: 40%;"></div>
         <div class="ant-slider-step"><span class="ant-slider-dot ant-slider-dot-active" style="left: 0%;"></span><span class="ant-slider-dot ant-slider-dot-active" style="left: 20%;"></span><span class="ant-slider-dot ant-slider-dot-active" style="left: 40%;"></span><span class="ant-slider-dot" style="left: 60%;"></span><span class="ant-slider-dot" style="left: 80%;"></span><span class="ant-slider-dot" style="left: 100%;"></span></div>

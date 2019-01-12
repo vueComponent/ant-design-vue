@@ -38,6 +38,12 @@ export interface ShowSearchType {
    * @type boolean
    */
   matchInputWidth?: boolean;
+
+  /**
+   * Set the count of filtered items
+   * @type number | false
+   */
+  limit?: number | false;
 }
 
 export declare class Cascader extends AntdComponent {

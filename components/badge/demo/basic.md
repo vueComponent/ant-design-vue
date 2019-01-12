@@ -17,6 +17,10 @@ Simplest Usage. Badge will be hidden when `count` is `0`, but we can use `showZe
     <a-badge count="0" showZero>
       <a href="#" class="head-example"></a>
     </a-badge>
+    <a-badge>
+      <a-icon slot="count" type="clock-circle" style="color: #f5222d" />
+      <a href="#" class="head-example"></a>
+    </a-badge>
   </div>
 </template>
 ```

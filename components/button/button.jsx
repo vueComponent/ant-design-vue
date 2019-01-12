@@ -3,13 +3,13 @@ import Icon from '../icon'
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
 import buttonTypes from './buttonTypes'
+import { filterEmpty } from '../_util/props-util'
 const props = buttonTypes()
 export default {
+  inheritAttrs: false,
   name: 'AButton',
   __ANT_BUTTON: true,
-  props: {
-    ...props,
-  },
+  props,
   data () {
     return {
       sizeMap: {
@@ -48,13 +48,15 @@ export default {
   computed: {
     classes () {
       const { prefixCls, type, shape, size, hasTwoCNChar,
-        sLoading, ghost, block, sizeMap } = this
+        sLoading, ghost, block, sizeMap, icon, $slots } = this
       const sizeCls = sizeMap[size] || ''
+      const children = filterEmpty($slots.default)
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
         [`${prefixCls}-${sizeCls}`]: sizeCls,
+        [`${prefixCls}-icon-only`]: !children && children !== 0 && icon,
         [`${prefixCls}-loading`]: sLoading,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar,
@@ -106,11 +108,8 @@ export default {
       disabled, handleClick,
       sLoading, $slots, $attrs, $listeners } = this
     const buttonProps = {
-      props: {
-      },
       attrs: {
         ...$attrs,
-        type: htmlType,
         disabled,
       },
       class: classes,
@@ -121,9 +120,10 @@ export default {
     }
     const iconType = sLoading ? 'loading' : icon
     const iconNode = iconType ? <Icon type={iconType} /> : null
-    const kids = $slots.default && $slots.default.length === 1 ? this.insertSpace($slots.default[0], this.isNeedInserted()) : $slots.default
+    const children = filterEmpty($slots.default)
+    const kids = children.map(child => this.insertSpace(child, this.isNeedInserted()))
 
-    if ('href' in $attrs) {
+    if ($attrs.href !== undefined) {
       return (
         <a {...buttonProps} ref='buttonNode'>
           {iconNode}{kids}
@@ -132,7 +132,7 @@ export default {
     } else {
       return (
         <Wave>
-          <button {...buttonProps} ref='buttonNode'>
+          <button {...buttonProps} ref='buttonNode' type={htmlType || 'button'}>
             {iconNode}{kids}
           </button>
         </Wave>

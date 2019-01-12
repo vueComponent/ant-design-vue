@@ -83,6 +83,9 @@ const TimePicker = {
     prop: 'value',
     event: 'change',
   },
+  inject: {
+    configProvider: { default: {}},
+  },
   data () {
     const value = this.value || this.defaultValue
     if (value && !interopDefault(moment).isMoment(value)) {
@@ -147,7 +150,7 @@ const TimePicker = {
           </div>
         ) : null
       }
-      const { prefixCls } = props
+      const { prefixCls, getPopupContainer } = props
       let suffixIcon = getComponentFromProp(this, 'suffixIcon')
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
       const clockIcon = suffixIcon && (
@@ -178,10 +181,12 @@ const TimePicker = {
           theme='filled'
         />
       )
+      const { getPopupContainer: getContextPopupContainer } = this.configProvider
       const timeProps = {
         props: {
           ...generateShowHourMinuteSecond(format),
           ...props,
+          getPopupContainer: getPopupContainer || getContextPopupContainer,
           format,
           value: this.sValue,
           placeholder: props.placeholder === undefined ? locale.placeholder : props.placeholder,

@@ -35,6 +35,9 @@ function closableFn () {
     onClose () {
       console.log('closable close')
     },
+    onClick () {
+      console.log('clicked!!!')
+    },
     closable: true,
   })
 }

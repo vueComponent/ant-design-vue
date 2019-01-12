@@ -50,12 +50,12 @@ export default {
     subscribe () {
       const { store } = this
       this.unsubscribe = store.subscribe(() => {
-        this.setCheckState()
+        this.setCheckState(this.$props)
       })
     },
 
-    checkSelection (data, type, byDefaultChecked) {
-      const { store, getCheckboxPropsByItem, getRecordKey } = this
+    checkSelection (props, data, type, byDefaultChecked) {
+      const { store, getCheckboxPropsByItem, getRecordKey } = props || this.$props
       // type should be 'every' | 'some'
       if (type === 'every' || type === 'some') {
         return (
@@ -68,9 +68,9 @@ export default {
       return false
     },
 
-    setCheckState () {
-      const checked = this.getCheckState()
-      const indeterminate = this.getIndeterminateState()
+    setCheckState (props) {
+      const checked = this.getCheckState(props)
+      const indeterminate = this.getIndeterminateState(props)
       this.setState((prevState) => {
         const newState = {}
         if (indeterminate !== prevState.indeterminate) {
@@ -83,23 +83,23 @@ export default {
       })
     },
 
-    getCheckState () {
+    getCheckState (props) {
       const { store, data } = this
       let checked
       if (!data.length) {
         checked = false
       } else {
         checked = store.getState().selectionDirty
-          ? this.checkSelection(data, 'every', false)
+          ? this.checkSelection(props, data, 'every', false)
           : (
-            this.checkSelection(data, 'every', false) ||
-            this.checkSelection(data, 'every', true)
+            this.checkSelection(props, data, 'every', false) ||
+            this.checkSelection(props, data, 'every', true)
           )
       }
       return checked
     },
 
-    getIndeterminateState () {
+    getIndeterminateState (props) {
       const { store, data } = this
       let indeterminate
       if (!data.length) {
@@ -107,19 +107,19 @@ export default {
       } else {
         indeterminate = store.getState().selectionDirty
           ? (
-            this.checkSelection(data, 'some', false) &&
-              !this.checkSelection(data, 'every', false)
+            this.checkSelection(props, data, 'some', false) &&
+              !this.checkSelection(props, data, 'every', false)
           )
-          : ((this.checkSelection(data, 'some', false) &&
-              !this.checkSelection(data, 'every', false)) ||
-              (this.checkSelection(data, 'some', true) &&
-              !this.checkSelection(data, 'every', true))
+          : ((this.checkSelection(props, data, 'some', false) &&
+              !this.checkSelection(props, data, 'every', false)) ||
+              (this.checkSelection(props, data, 'some', true) &&
+              !this.checkSelection(props, data, 'every', true))
           )
       }
       return indeterminate
     },
 
-    handleSelectAllChagne (e) {
+    handleSelectAllChange (e) {
       const checked = e.target.checked
       this.$emit('select', checked ? 'all' : 'removeAll', 0, null)
     },
@@ -182,7 +182,7 @@ export default {
           checked={checked}
           indeterminate={indeterminate}
           disabled={disabled}
-          onChange={this.handleSelectAllChagne}
+          onChange={this.handleSelectAllChange}
         />
         {customSelections}
       </div>

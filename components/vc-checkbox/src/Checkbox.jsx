@@ -20,7 +20,7 @@ export default {
     // onBlur: PropTypes.func,
     // onChange: PropTypes.func,
     // onClick: PropTypes.func,
-    tabIndex: PropTypes.string,
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     readOnly: PropTypes.bool,
     autoFocus: PropTypes.bool,
     value: PropTypes.any,

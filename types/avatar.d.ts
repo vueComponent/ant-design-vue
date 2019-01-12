@@ -32,6 +32,12 @@ export declare class Avatar extends AntdComponent {
   src: string;
 
   /**
+   * a list of sources to use for different screen resolutions
+   * @type string
+   */
+  srcSet: string;
+
+  /**
    * This attribute defines the alternative text describing the image
    * @type string
    */

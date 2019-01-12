@@ -20,7 +20,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| checked | 设置标签的选中状态 | boolean | false |
+| checked(v-model) | 设置标签的选中状态 | boolean | false |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |

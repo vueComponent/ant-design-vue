@@ -14,7 +14,6 @@ export default () => ({
   prefixCls: PropTypes.string.def('ant-tooltip'),
   mouseEnterDelay: PropTypes.number.def(0.1),
   mouseLeaveDelay: PropTypes.number.def(0.1),
-  getTooltipContainer: PropTypes.func,
   getPopupContainer: PropTypes.func,
   arrowPointAtCenter: PropTypes.bool.def(false),
   autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),

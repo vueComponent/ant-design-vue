@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Dropdown from '..'
+import Menu from '../../menu'
 
 describe('DropdownButton', () => {
   it('pass appropriate props to Dropdown', () => {
@@ -26,7 +27,17 @@ describe('DropdownButton', () => {
   })
 
   it('don\'t pass visible to Dropdown if it\'s not exits', () => {
-    const wrapper = mount(Dropdown.Button)
+    const wrapper = mount({
+      render () {
+        return (
+          <Dropdown.Button
+            overlay={<Menu>
+              <Menu.Item>foo</Menu.Item>
+            </Menu>}
+          />
+        )
+      },
+    })
     const dropdownProps = wrapper.find({ name: 'ADropdown' }).props()
 
     expect('visible' in dropdownProps).toBe(false)

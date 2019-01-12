@@ -16,7 +16,7 @@ import Column from './Column'
 import ColumnGroup from './ColumnGroup'
 import createBodyRow from './createBodyRow'
 import { flatArray, treeMap, flatFilter } from './util'
-import { initDefaultProps, mergeProps, getOptionProps } from '../_util/props-util'
+import { initDefaultProps, mergeProps, getOptionProps, isValidElement, filterEmpty, getAllProps } from '../_util/props-util'
 import BaseMixin from '../_util/BaseMixin'
 import {
   TableProps,
@@ -437,7 +437,7 @@ export default {
       let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const key = this.getRecordKey(record, rowIndex)
       const { pivot } = this.$data
-      const rows = this.getFlatCurrentPageData()
+      const rows = this.getFlatCurrentPageData(this.$props.childrenColumnName)
       let realIndex = rowIndex
       if (this.$props.expandedRowRender) {
         realIndex = rows.findIndex(row => this.getRecordKey(row, rowIndex) === key)
@@ -500,10 +500,8 @@ export default {
     handleRadioSelect  (record, rowIndex, e) {
       const checked = e.target.checked
       const nativeEvent = e.nativeEvent
-      const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
-      let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const key = this.getRecordKey(record, rowIndex)
-      selectedRowKeys = [key]
+      const selectedRowKeys = [key]
       this.store.setState({
         selectionDirty: true,
       })
@@ -517,7 +515,7 @@ export default {
     },
 
     handleSelectRow  (selectionKey, index, onSelectFunc) {
-      const data = this.getFlatCurrentPageData()
+      const data = this.getFlatCurrentPageData(this.$props.childrenColumnName)
       const defaultSelection = this.store.getState().selectionDirty ? [] : this.getDefaultSelection()
       const selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection)
       const changeableRowKeys = data
@@ -662,10 +660,10 @@ export default {
     },
 
     renderRowSelection (locale) {
-      const { prefixCls, rowSelection } = this
+      const { prefixCls, rowSelection, childrenColumnName } = this
       const columns = this.columns.concat()
       if (rowSelection) {
-        const data = this.getFlatCurrentPageData().filter((item, index) => {
+        const data = this.getFlatCurrentPageData(childrenColumnName).filter((item, index) => {
           if (rowSelection.getCheckboxProps) {
             return !this.getCheckboxPropsByItem(item, index).props.disabled
           }
@@ -741,6 +739,8 @@ export default {
         const key = this.getColumnKey(column, i)
         let filterDropdown
         let sortButton
+        let customHeaderCell = column.customHeaderCell
+        const sortTitle = this.getColumnTitle(column.title, {}) || locale.sortTitle
         const isSortColumn = this.isSortColumn(column)
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
           const colFilters = key in filters ? filters[key] : []
@@ -759,12 +759,6 @@ export default {
           )
         }
         if (column.sorter) {
-          // const isSortColumn = this.isSortColumn(column)
-          // if (isSortColumn) {
-          //   column.className = classNames(column.className, {
-          //     [`${prefixCls}-column-sort`]: sortOrder,
-          //   })
-          // }
           const isAscend = isSortColumn && sortOrder === 'ascend'
           const isDescend = isSortColumn && sortOrder === 'descend'
           sortButton = (
@@ -781,7 +775,27 @@ export default {
               />
             </div>
           )
+          customHeaderCell = (col) => {
+            let colProps = {}
+            // Get original first
+            if (column.customHeaderCell) {
+              colProps = {
+                ...column.customHeaderCell(col),
+              }
+            }
+            colProps.on = colProps.on || {}
+            // Add sorter logic
+            const onHeaderCellClick = colProps.on.click
+            colProps.on.click = (...args) => {
+              this.toggleSortOrder(column)
+              if (onHeaderCellClick) {
+                onHeaderCellClick(...args)
+              }
+            }
+            return colProps
+          }
         }
+        const sortTitleString = sortButton && typeof sortTitle === 'string' ? sortTitle : undefined
         return {
           ...column,
           className: classNames(column.className, {
@@ -793,29 +807,16 @@ export default {
           title: [
             <div
               key='title'
-              title={sortButton ? locale.sortTitle : undefined}
+              title={sortTitleString}
               class={sortButton ? `${prefixCls}-column-sorters` : undefined}
-              onClick={() => this.toggleSortOrder(column)}
             >
               {this.renderColumnTitle(column.title)}
               {sortButton}
             </div>,
             filterDropdown,
           ],
+          customHeaderCell,
         }
-        // column.title = (
-        //   <span key={key}>
-        //     {column.title}
-        //     {sortButton}
-        //     {filterDropdown}
-        //   </span>
-        // )
-
-        // if (sortButton || filterDropdown) {
-        //   column.className = classNames(`${prefixCls}-column-has-filters`, column.className)
-        // }
-
-        // return column
       })
     },
     renderColumnTitle (title) {
@@ -829,6 +830,32 @@ export default {
       }
       return title
     },
+
+    getColumnTitle (title, parentNode) {
+      if (!title) {
+        return
+      }
+      if (isValidElement(title)) {
+        const props = title.componentOptions
+        let children = null
+        if (props && props.children) { // for component
+          children = filterEmpty(props.children)
+        } else if (title.children) { // for dom
+          children = filterEmpty(title.children)
+        }
+        if (children && children.length === 1) {
+          children = children[0]
+          const attrs = getAllProps(title)
+          if (!children.tag && children.text) { // for textNode
+            children = children.text
+          }
+          return this.getColumnTitle(children, attrs)
+        }
+      } else {
+        return parentNode.title || title
+      }
+    },
+
     handleShowSizeChange  (current, pageSize) {
       const pagination = this.sPagination
       pagination.onShowSizeChange(current, pageSize)
@@ -939,11 +966,11 @@ export default {
     },
 
     getFlatData () {
-      return flatArray(this.getLocalData())
+      return flatArray(this.getLocalData(null, false))
     },
 
-    getFlatCurrentPageData () {
-      return flatArray(this.getCurrentPageData())
+    getFlatCurrentPageData (childrenColumnName) {
+      return flatArray(this.getCurrentPageData(), childrenColumnName)
     },
 
     recursiveSort (data, sorterFn) {
@@ -954,7 +981,7 @@ export default {
       } : item))
     },
 
-    getLocalData (state) {
+    getLocalData (state, filter = true) {
       const currentState = state || this.$data
       const { sFilters: filters } = currentState
       const { dataSource } = this.$props
@@ -966,7 +993,7 @@ export default {
         data = this.recursiveSort(data, sorterFn)
       }
       // 筛选
-      if (filters) {
+      if (filter && filters) {
         Object.keys(filters).forEach((columnKey) => {
           const col = this.findColumn(columnKey)
           if (!col) {

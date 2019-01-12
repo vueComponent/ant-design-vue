@@ -43,7 +43,8 @@ const columns = [{
 | defaultExpandAllRows | 初始时，是否展开所有行 | boolean | false |
 | defaultExpandedRowKeys | 默认展开的行 | string\[] | - |
 | expandedRowKeys | 展开的行，控制属性 | string\[] | - |
-| expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode\|slot-scope| - |
+| expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| slot="expandedRowRender"  slot-scope="record, index, indent, expanded" | - |
+| expandIcon | 自定义展开图标 | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |
 | footer | 表格尾部 | Function(currentPageData)\|slot-scope |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |
@@ -107,11 +108,11 @@ const columns = [{
 | align | 设置列内容的对齐方式 | 'left' \| 'right' \| 'center' | 'left' |
 | colSpan | 表头列合并,设置为 0 时，不渲染 | number |  |
 | dataIndex | 列数据在数据项中对应的 key，支持 `a.b.c` 的嵌套写法 | string | - |
-| filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode\|slot | - |
+| filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode \| slot-scope | - |
 | filterDropdownVisible | 用于控制自定义筛选菜单是否可见 | boolean | - |
 | filtered | 标识数据是否经过过滤，筛选图标会高亮 | boolean | false |
 | filteredValue | 筛选的受控属性，外界可用此控制列的筛选状态，值为已筛选的 value 数组 | string\[] | - |
-| filterIcon | 自定义 fiter 图标。 | VNode \| (filtered: boolean) => vNode \|slot \|slot-scope | false |
+| filterIcon | 自定义 fiter 图标。 | VNode \| (filtered: boolean, column: Column) => vNode \|slot \|slot-scope | false |
 | filterMultiple | 是否多选 | boolean | true |
 | filters | 表头的筛选菜单项 | object\[] | - |
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |
@@ -121,7 +122,7 @@ const columns = [{
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | 列头显示文字 | string\|slot | - |
 | width | 列宽度 | string\|number | - |
-| customCell | 设置单元格属性 | Function(record) | - |
+| customCell | 设置单元格属性 | Function(record, rowIndex) | - |
 | customHeaderCell | 设置头部单元格属性 | Function(column) | - |
 | onFilter | 本地模式下，确定筛选的运行函数, 使用template或jsx时作为`filter`事件使用 | Function | - |
 | onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用template或jsx时作为`filterDropdownVisibleChange`事件使用 | function(visible) {} | - |

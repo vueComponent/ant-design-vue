@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import classnames from 'classnames'
 import VcDrawer from '../vc-drawer/src'
 import PropTypes from '../_util/vue-types'
 import BaseMixin from '../_util/BaseMixin'
@@ -14,6 +14,7 @@ const Drawer = {
     maskClosable: PropTypes.bool.def(true),
     mask: PropTypes.bool.def(true),
     maskStyle: PropTypes.object,
+    wrapStyle: PropTypes.object,
     title: PropTypes.any,
     visible: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
@@ -22,7 +23,7 @@ const Drawer = {
     prefixCls: PropTypes.string.def('ant-drawer'),
     placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('right'),
     level: PropTypes.any.def(null),
-    wrapClassName: PropTypes.string,
+    wrapClassName: PropTypes.string, // not use class like react, vue will add class to root dom
   },
   mixins: [BaseMixin],
   data () {
@@ -106,7 +107,7 @@ const Drawer = {
         return null
       }
       this.destoryClose = false
-      const { placement, bodyStyle } = this.$props
+      const { placement } = this.$props
 
       const containerStyle = placement === 'left' ||
         placement === 'right' ? {
@@ -156,26 +157,22 @@ const Drawer = {
         >
           {header}
           {closer}
-          <div key='body' class={`${prefixCls}-body`} style={bodyStyle}>
+          <div key='body' class={`${prefixCls}-body`}>
             {this.$slots.default}
           </div>
         </div>
       )
     },
     getRcDrawerStyle () {
-      const { zIndex, placement, maskStyle } = this.$props
-      return this.$data._push
-        ? {
-          ...maskStyle,
-          zIndex,
-          transform: this.getPushTransform(placement),
-        }
-        : {
-          ...maskStyle,
-          zIndex,
-        }
+      const { zIndex, placement, maskStyle, wrapStyle } = this.$props
+      const { _push: push } = this.$data
+      return {
+        ...maskStyle,
+        zIndex,
+        transform: push ? this.getPushTransform(placement) : undefined,
+        ...wrapStyle,
+      }
     },
-
   },
   render () {
     const props = getOptionProps(this)
@@ -195,16 +192,16 @@ const Drawer = {
         open: visible,
         showMask: props.mask,
         placement,
-        wrapClassName: classNames({
+        className: classnames({
           [wrapClassName]: !!wrapClassName,
           [haveMask]: !!haveMask,
         }),
+        wrapStyle: this.getRcDrawerStyle(),
       },
       on: {
         maskClick: this.onMaskClick,
         ...this.$listeners,
       },
-      style: this.getRcDrawerStyle(),
     }
     return (
       <VcDrawer

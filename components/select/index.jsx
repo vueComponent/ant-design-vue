@@ -12,6 +12,10 @@ import { cloneElement } from '../_util/vnode'
 const AbstractSelectProps = () => ({
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(['small', 'large', 'default']),
+  showAction: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(String),
+  ]),
   notFoundContent: PropTypes.any,
   transitionName: PropTypes.string,
   choiceTransitionName: PropTypes.string,
@@ -37,6 +41,8 @@ const AbstractSelectProps = () => ({
   open: PropTypes.bool,
   defaultOpen: PropTypes.bool,
   autoClearSearchValue: PropTypes.bool,
+  dropdownRender: PropTypes.func,
+  loading: PropTypes.bool,
 })
 const Value = PropTypes.shape({
   key: PropTypes.string,
@@ -71,6 +77,9 @@ const SelectProps = {
   getInputElement: PropTypes.func,
   options: PropTypes.array,
   suffixIcon: PropTypes.any,
+  removeIcon: PropTypes.any,
+  clearIcon: PropTypes.any,
+  menuItemSelectedIcon: PropTypes.any,
 }
 
 const SelectPropTypes = {
@@ -107,6 +116,9 @@ const Select = {
     prop: 'value',
     event: 'change',
   },
+  inject: {
+    configProvider: { default: {}},
+  },
   created () {
     warning(
       this.$props.mode !== 'combobox',
@@ -134,17 +146,39 @@ const Select = {
       const { mode } = this
       return mode === 'combobox' || mode === SECRET_COMBOBOX_MODE_DO_NOT_USE
     },
+
+    renderSuffixIcon () {
+      const { prefixCls, loading } = this.$props
+      let suffixIcon = getComponentFromProp(this, 'suffixIcon')
+      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
+      if (suffixIcon) {
+        return isValidElement(suffixIcon)
+          ? cloneElement(suffixIcon, { class: `${prefixCls}-arrow-icon` })
+          : suffixIcon
+      }
+      if (loading) {
+        return <Icon type='loading' />
+      }
+      return <Icon type='down' class={`${prefixCls}-arrow-icon`} />
+    },
+
     renderSelect (locale) {
       const {
         prefixCls,
         size,
         mode,
         options,
+        getPopupContainer,
         ...restProps
       } = getOptionProps(this)
-      let suffixIcon = getComponentFromProp(this, 'suffixIcon')
-      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon
-      const rest = omit(restProps, ['inputIcon', 'removeIcon', 'clearIcon', 'suffixIcon'])
+      const { getPopupContainer: getContextPopupContainer } = this.configProvider
+      let removeIcon = getComponentFromProp(this, 'removeIcon')
+      removeIcon = Array.isArray(removeIcon) ? removeIcon[0] : removeIcon
+      let clearIcon = getComponentFromProp(this, 'clearIcon')
+      clearIcon = Array.isArray(clearIcon) ? clearIcon[0] : clearIcon
+      let menuItemSelectedIcon = getComponentFromProp(this, 'menuItemSelectedIcon')
+      menuItemSelectedIcon = Array.isArray(menuItemSelectedIcon) ? menuItemSelectedIcon[0] : menuItemSelectedIcon
+      const rest = omit(restProps, ['inputIcon', 'removeIcon', 'clearIcon', 'suffixIcon', 'menuItemSelectedIcon'])
 
       const cls = {
         [`${prefixCls}-lg`]: size === 'large',
@@ -162,31 +196,27 @@ const Select = {
         tags: mode === 'tags',
         combobox: this.isCombobox(),
       }
+      const finalRemoveIcon = (removeIcon &&
+        (isValidElement(removeIcon)
+          ? cloneElement(removeIcon, { class: `${prefixCls}-remove-icon` })
+          : removeIcon)) || <Icon type='close' class={`${prefixCls}-remove-icon`} />
 
-      const inputIcon = suffixIcon && (
-        isValidElement(suffixIcon)
-          ? cloneElement(suffixIcon) : suffixIcon) || (
-        <Icon type='down' class={`${prefixCls}-arrow-icon`} />
-      )
+      const finalClearIcon = (clearIcon &&
+        (isValidElement(clearIcon)
+          ? cloneElement(clearIcon, { class: `${prefixCls}-clear-icon` })
+          : clearIcon)) || (<Icon type='close-circle' theme='filled' class={`${prefixCls}-clear-icon`} />)
 
-      const removeIcon = (
-        <Icon type='close' class={`${prefixCls}-remove-icon`} />
-      )
-
-      const clearIcon = (
-        <Icon type='close-circle' theme='filled' class={`${prefixCls}-clear-icon`} />
-      )
-
-      const menuItemSelectedIcon = (
-        <Icon type='check' class={`${prefixCls}-selected-icon`} />
-      )
+      const finalMenuItemSelectedIcon = (menuItemSelectedIcon &&
+        (isValidElement(menuItemSelectedIcon)
+          ? cloneElement(menuItemSelectedIcon, { class: `${prefixCls}-selected-icon` })
+          : menuItemSelectedIcon)) || <Icon type='check' class={`${prefixCls}-selected-icon`} />
 
       const selectProps = {
         props: {
-          inputIcon,
-          removeIcon,
-          clearIcon,
-          menuItemSelectedIcon,
+          inputIcon: this.renderSuffixIcon(),
+          removeIcon: finalRemoveIcon,
+          clearIcon: finalClearIcon,
+          menuItemSelectedIcon: finalMenuItemSelectedIcon,
           ...rest,
           ...modeConfig,
           prefixCls,
@@ -201,6 +231,8 @@ const Select = {
             })
             : filterEmpty(this.$slots.default),
           __propsSymbol__: Symbol(),
+          dropdownRender: getComponentFromProp(this, 'dropdownRender', {}, false),
+          getPopupContainer: getPopupContainer || getContextPopupContainer,
         },
         on: this.$listeners,
         class: cls,

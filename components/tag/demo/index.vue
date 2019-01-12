@@ -37,7 +37,7 @@ export default {
   title: 'Tag',
   render () {
     return (
-      <div>
+      <div id='components-tag-demo'>
         <md cn={md.cn} us={md.us}/>
         <Basic />
         <Checkable />
@@ -56,3 +56,8 @@ export default {
   },
 }
 </script>
+<style>
+#components-tag-demo .ant-tag{
+  margin-bottom: 8px;
+}
+</style>

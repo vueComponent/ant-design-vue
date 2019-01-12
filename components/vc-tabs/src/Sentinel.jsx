@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 import KeyCode from '../../_util/KeyCode'
 
-const sentinelStyle = { width: 0, height: 0, overflow: 'hidden' }
+const sentinelStyle = { width: 0, height: 0, overflow: 'hidden', position: 'absolute' }
 export default {
   name: 'Sentinel',
   props: {

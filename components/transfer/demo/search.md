@@ -16,6 +16,7 @@ Transfer with a search box.
     :filterOption="filterOption"
     :targetKeys="targetKeys"
     @change="handleChange"
+    @search="handleSearch"
     :render="item=>item.title"
   >
   </a-transfer>
@@ -56,6 +57,9 @@ export default {
     handleChange(targetKeys, direction, moveKeys) {
       console.log(targetKeys, direction, moveKeys);
       this.targetKeys = targetKeys
+    },
+    handleSearch (dir, value) {
+      console.log('search:', dir, value);
     },
   },
 }

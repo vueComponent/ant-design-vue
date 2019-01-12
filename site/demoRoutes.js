@@ -423,4 +423,12 @@ export default [
     path: 'skeleton-cn',
     component: () => import('../components/skeleton/demo/index.vue'),
   },
+  {
+    path: 'comment',
+    component: () => import('../components/comment/demo/index.vue'),
+  },
+  {
+    path: 'comment-cn',
+    component: () => import('../components/comment/demo/index.vue'),
+  },
 ]

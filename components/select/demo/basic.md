@@ -21,6 +21,9 @@ Basic Usage
     <a-select defaultValue="lucy" style='width: 120px' disabled>
       <a-select-option value="lucy">Lucy</a-select-option>
     </a-select>
+    <a-select defaultValue="lucy" style='width: 120px' loading>
+      <a-select-option value="lucy">Lucy</a-select-option>
+    </a-select>
   </div>
 </template>
 <script>

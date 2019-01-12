@@ -3,13 +3,14 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
+import { VNode } from 'vue';
 
 export declare class Badge extends AntdComponent {
   /**
-   * Number to show in badge
-   * @type number | string
+   * Number to show in badge, support slot
+   * @type number | string | VNode
    */
-  count: number | string;
+  count: number | string | VNode;
 
   /**
    * to display a red dot instead of count

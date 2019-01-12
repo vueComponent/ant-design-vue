@@ -98,4 +98,9 @@ describe('Progress', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
   })
+
+  it('render normal progress', () => {
+    const wrapper = mount(Progress, { propsData: { status: 'normal' }})
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

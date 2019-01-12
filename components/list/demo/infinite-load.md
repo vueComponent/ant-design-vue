@@ -46,12 +46,12 @@ export default {
     }
   },
   beforeMount () {
-    this.getData((res) => {
+    this.fetchData((res) => {
       this.data = res.results
     })
   },
   methods: {
-    getData  (callback) {
+    fetchData (callback) {
       reqwest({
         url: fakeDataUrl,
         type: 'json',
@@ -71,7 +71,7 @@ export default {
         this.loading = false
         return
       }
-      this.getData((res) => {
+      this.fetchData((res) => {
         this.data = data.concat(res.results)
         this.loading = false
       })

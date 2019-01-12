@@ -173,4 +173,15 @@ describe('Button', () => {
     })
     expect(wrapper2.html()).toMatchSnapshot()
   })
+
+  it('should not render as link button when href is undefined', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <Button type='primary' href={undefined}>button</Button>
+        )
+      },
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

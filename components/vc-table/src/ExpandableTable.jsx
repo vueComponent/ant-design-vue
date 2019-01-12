@@ -1,6 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 import BaseMixin from '../../_util/BaseMixin'
 import { connect } from '../../_util/store'
+import shallowEqual from 'shallowequal'
 import TableRow from './TableRow'
 import { remove } from './utils'
 import { initDefaultProps, getOptionProps } from '../../_util/props-util'
@@ -71,6 +72,12 @@ const ExpandableTable = {
     })
     return {}
   },
+  mounted () {
+    this.handleUpdated()
+  },
+  updated () {
+    this.handleUpdated()
+  },
   watch: {
     expandedRowKeys (val) {
       this.$nextTick(() => {
@@ -81,6 +88,10 @@ const ExpandableTable = {
     },
   },
   methods: {
+    handleUpdated () {
+      // We should record latest expanded rows to avoid multiple rows remove cause `onExpandedRowsChange` trigger many times
+      this.latestExpandedRows = null
+    },
     handleExpandChange (expanded, record, event, rowKey, destroy = false) {
       if (event) {
         event.preventDefault()
@@ -103,7 +114,12 @@ const ExpandableTable = {
       if (!this.expandedRowKeys) {
         this.store.setState({ expandedRowKeys })
       }
-      this.__emit('expandedRowsChange', expandedRowKeys)
+      // De-dup of repeat call
+      if (!this.latestExpandedRows || !shallowEqual(this.latestExpandedRows, expandedRowKeys)) {
+        this.latestExpandedRows = expandedRowKeys
+        this.__emit('expandedRowsChange', expandedRowKeys)
+      }
+
       if (!destroy) {
         this.__emit('expand', expanded, record)
       }

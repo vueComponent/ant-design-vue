@@ -6,8 +6,6 @@ exports[`List should render correctly 1`] = `
   <div class="ant-transfer-list-body"><span tag="ul" class="ant-transfer-list-content"><li class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" checked="checked" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span></label><span></span></li>
     <li class="ant-transfer-list-content-item"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span></label><span></span></li>
     <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="disabled" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span></label><span></span></li>
-    </span>
-    <div class="ant-transfer-list-body-not-found">Not Found</div>
-  </div>
+    </span></div>
 </div>
 `;

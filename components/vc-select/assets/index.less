@@ -1,7 +1,16 @@
 @selectPrefixCls: rc-select;
 
+@keyframes select-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .effect() {
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-fill-mode: both;
   transform-origin: 0 0;
 }
@@ -14,7 +23,8 @@
   color: #666;
   line-height: 28px;
 
-  ul, li {
+  ul,
+  li {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -35,17 +45,36 @@
     outline: none;
   }
 
+  &-arrow &-arrow-loading {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top: 6px;
+    margin-left: -4px;
+    &:after {
+      content: ' ';
+      display: block;
+      width: 12px;
+      height: 12px;
+      margin: 2px;
+      border-radius: 50%;
+      border: 2px solid #999999;
+      border-color: #999999 transparent #999999 transparent;
+      animation: select-ring 1.2s linear infinite;
+    }
+  }
+
   &-arrow &-arrow-icon {
     border-color: #999999 transparent transparent transparent;
-      border-style: solid;
-      border-width: 5px 4px 0 4px;
-      height: 0;
-      width: 0;
-      margin-left: -4px;
-      margin-top: -2px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    width: 0;
+    margin-left: -4px;
+    margin-top: -2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 
   &-selection {
@@ -251,15 +280,18 @@
     margin-right: 4px;
     position: relative;
     overflow: hidden;
-    transition: padding .3s cubic-bezier(0.6, -0.28, 0.735, 0.045), width .3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    transition: padding 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045),
+      width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 
     &__content {
       margin-left: 0;
       margin-right: 0;
-      transition: margin .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    &-zoom-enter, &-zoom-appear, &-zoom-leave {
+    &-zoom-enter,
+    &-zoom-appear,
+    &-zoom-leave {
       .effect();
       opacity: 0;
       animation-play-state: paused;
@@ -310,7 +342,7 @@
       transform: scale(0);
       top: 0;
       right: 2px;
-      transition: opacity .3s, transform .3s;
+      transition: opacity 0.3s, transform 0.3s;
 
       &-icon {
         font-style: normal;
@@ -402,7 +434,8 @@
       }
     }
 
-    &-slide-up-enter, &-slide-up-appear {
+    &-slide-up-enter,
+    &-slide-up-appear {
       .effect();
       opacity: 0;
       animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -416,7 +449,8 @@
       animation-play-state: paused;
     }
 
-    &-slide-up-enter&-slide-up-enter-active&-placement-bottomLeft, &-slide-up-appear&-slide-up-appear-active&-placement-bottomLeft {
+    &-slide-up-enter&-slide-up-enter-active&-placement-bottomLeft,
+    &-slide-up-appear&-slide-up-appear-active&-placement-bottomLeft {
       animation-name: rcSelectDropdownSlideUpIn;
       animation-play-state: running;
     }
@@ -426,7 +460,8 @@
       animation-play-state: running;
     }
 
-    &-slide-up-enter&-slide-up-enter-active&-placement-topLeft, &-slide-up-appear&-slide-up-appear-active&-placement-topLeft {
+    &-slide-up-enter&-slide-up-enter-active&-placement-topLeft,
+    &-slide-up-appear&-slide-up-appear-active&-placement-topLeft {
       animation-name: rcSelectDropdownSlideDownIn;
       animation-play-state: running;
     }
@@ -493,5 +528,4 @@
       border-width: 0 4px 5px 4px;
     }
   }
-
 }

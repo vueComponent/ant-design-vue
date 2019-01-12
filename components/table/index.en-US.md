@@ -44,6 +44,7 @@ const columns = [{
 | defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |
 | expandedRowKeys | Current expanded row keys | string\[] | - |
 | expandedRowRender | Expanded container render for each row | Function(record, index, indent, expanded):VNode\|slot-scope | - |
+| expandIcon | Customize row expand Icon. | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
 | footer | Table footer renderer | Function(currentPageData)\|slot-scope |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |
@@ -106,11 +107,11 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | colSpan | Span of this column's title | number |  |
 | dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |
-| filterDropdown | Customized filter overlay | slot | - |
+| filterDropdown | Customized filter overlay | slot \| slot-scope | - |
 | filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |
-| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean) | `false` |
+| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean, column: Column) | `false` |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |
 | filters | Filter menu config | object\[] | - |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |
@@ -120,7 +121,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | Title of this column | string\|slot | - |
 | width | Width of this column | string\|number | - |
-| customCell | Set props on per cell | Function(record) | - |
+| customCell | Set props on per cell | Function(record, rowIndex) | - |
 | customHeaderCell | Set props on per header cell | Function(column) | - |
 | onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |
 | onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |

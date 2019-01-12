@@ -17,4 +17,10 @@ export declare class MenuItem extends AntdComponent {
    * @type boolean
    */
   disabled: boolean;
+
+  /**
+   * set display title for collapsed item
+   * @type string
+   */
+  title: string;
 }

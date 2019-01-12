@@ -55,6 +55,8 @@ export default {
     getPopupContainer: PropTypes.func,
     backfillValue: PropTypes.any,
     menuItemSelectedIcon: PropTypes.any,
+    dropdownRender: PropTypes.func,
+    ariaId: PropTypes.string,
   },
   created () {
     this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef')
@@ -62,7 +64,7 @@ export default {
   },
   data () {
     return {
-      dropdownWidth: null,
+      dropdownWidth: 0,
     }
   },
 
@@ -99,9 +101,13 @@ export default {
         dropdownMenuStyle, getDropdownPrefixCls, backfillValue, menuItemSelectedIcon,
       } = this
       const { menuSelect, menuDeselect, popupScroll } = this.$listeners
+      const props = this.$props
+
+      const { dropdownRender, ariaId } = props
       const dropdownMenuProps = {
         props: {
           ...newProps.props,
+          ariaId,
           prefixCls: getDropdownPrefixCls(),
           value, firstActiveValue, defaultActiveFirstOption, dropdownMenuStyle,
           backfillValue,
@@ -118,9 +124,12 @@ export default {
           value: this.saveDropdownMenuRef,
         }],
       }
-      return (
-        <DropdownMenu {...dropdownMenuProps} />
-      )
+      const menuNode = <DropdownMenu {...dropdownMenuProps} />
+
+      if (dropdownRender) {
+        return dropdownRender(menuNode, props)
+      }
+      return null
     },
 
     getDropdownTransitionName () {

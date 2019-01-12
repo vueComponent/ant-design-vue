@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { asyncExpect } from '@/tests/utils'
 import Select from '..'
+import Icon from '../../icon'
 import focusTest from '../../../tests/shared/focusTest'
 
 describe('Select', () => {
@@ -142,6 +143,25 @@ describe('Select', () => {
       wrapper.find('.ant-select').trigger('click')
       expect(onDropdownVisibleChange).toHaveBeenLastCalledWith(true)
       expect(triggerComponent.componentInstance.visible).toBe(false)
+    })
+  })
+
+  describe('Select Custom Icons', () => {
+    it('should support customized icons', () => {
+      const wrapper = mount({
+        render () {
+          return (
+            <Select
+              removeIcon={<Icon type='close' />}
+              clearIcon={<Icon type='close' />}
+              menuItemSelectedIcon={<Icon type='close' />}
+            >
+              <Option value='1'>1</Option>
+            </Select>
+          )
+        },
+      })
+      expect(wrapper.html()).toMatchSnapshot()
     })
   })
 })

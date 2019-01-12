@@ -18,6 +18,7 @@
 | multiple | Support multiple or not, will be `true` when enable `treeCheckable`. | boolean | false |
 | placeholder | Placeholder of the select input | string\|slot | - |
 | searchPlaceholder | Placeholder of the search input | string\|slot | - |
+| searchValue(.sync) | work with `search` event to make search value controlled. | string | - |
 | showCheckedStrategy | The way show selected item in box. **Default:** just show child nodes. **`TreeSelect.SHOW_ALL`:** show all checked treeNodes (include parent treeNode). **`TreeSelect.SHOW_PARENT`:** show checked treeNodes (just show parent treeNode). | enum { TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |
 | showSearch | Whether to display a search input in the dropdown menu(valid only in the single mode) | boolean | false |
 | size | To set the size of the select input, options: `large` `small` | string | 'default' |

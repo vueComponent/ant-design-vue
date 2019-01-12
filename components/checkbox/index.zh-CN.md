@@ -25,7 +25,7 @@
 | --- | --- | --- | --- |
 | defaultValue | 默认选中的选项 | string\[] | \[] |
 | disabled | 整组失效 | boolean | false |
-| options | 指定可选项 | string\[] \| Array&lt;{ label: string value: string disabled?: boolean, onChange?: function }> | \[] |
+| options | 指定可选项，可以通过 slot="label" slot-scope="option" 定制`label` | string\[] \| Array&lt;{ label: string value: string disabled?: boolean, onChange?: function }> | \[] |
 | value | 指定选中的选项 | string\[] | \[] |
 
 #### 事件

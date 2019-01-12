@@ -1,3 +1,5 @@
+const isMobile = require('ismobilejs')
+
 export function noop () {
 }
 
@@ -113,14 +115,27 @@ export const menuAllProps = {
   ],
 }
 
-export const getWidth = (elem) => (
-  elem &&
-  typeof elem.getBoundingClientRect === 'function' &&
-  elem.getBoundingClientRect().width
-) || 0
+// ref: https://github.com/ant-design/ant-design/issues/14007
+// ref: https://bugs.chromium.org/p/chromium/issues/detail?id=360889
+// getBoundingClientRect return the full precision value, which is
+// not the same behavior as on chrome. Set the precision to 6 to
+// unify their behavior
+export const getWidth = (elem) => {
+  let width = elem &&
+    typeof elem.getBoundingClientRect === 'function' &&
+    elem.getBoundingClientRect().width
+  if (width) {
+    width = +width.toFixed(6)
+  }
+  return width || 0
+}
 
 export const setStyle = (elem, styleProperty, value) => {
   if (elem && typeof elem.style === 'object') {
     elem.style[styleProperty] = value
   }
+}
+
+export const isMobileDevice = () => {
+  return isMobile.any
 }

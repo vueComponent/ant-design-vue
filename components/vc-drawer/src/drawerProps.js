@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types'
 
 export default {
-  wrapClassName: PropTypes.string,
+  wrapperClassName: PropTypes.string,
   width: PropTypes.any,
   height: PropTypes.any,
   defaultOpen: PropTypes.bool,
@@ -17,4 +17,6 @@ export default {
   handler: PropTypes.any,
   showMask: PropTypes.bool,
   maskStyle: PropTypes.object,
+  className: PropTypes.string,
+  wrapStyle: PropTypes.object,
 }

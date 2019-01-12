@@ -83,6 +83,8 @@ const Affix = {
     // Wait for parent component ref has its value
     this.timeout = setTimeout(() => {
       this.setTargetEventListeners(target)
+      // Mock Event object.
+      this.updatePosition({})
     })
   },
   watch: {

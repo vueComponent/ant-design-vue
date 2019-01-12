@@ -222,7 +222,7 @@ describe('Transfer', () => {
     Vue.nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input').at(0)
       input.element.value = 'a'
-      input.trigger('change')
+      input.trigger('input')
       Vue.nextTick(() => {
         expect(wrapper.findAll('.ant-transfer-list-content')
           .at(0)
@@ -248,7 +248,7 @@ describe('Transfer', () => {
     Vue.nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input').at(0)
       input.element.value = 'content2'
-      input.trigger('change')
+      input.trigger('input')
       Vue.nextTick(() => {
         expect(wrapper.findAll('.ant-transfer-list')
           .at(0)
@@ -280,7 +280,7 @@ describe('Transfer', () => {
     Vue.nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input').at(0)
       input.element.value = 'content2'
-      input.trigger('change')
+      input.trigger('input')
       Vue.nextTick(() => {
         wrapper.findAll('.ant-transfer-list')
           .at(0)
@@ -318,7 +318,7 @@ describe('Transfer', () => {
     Vue.nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input').at(0)
       input.element.value = 'content2'
-      input.trigger('change')
+      input.trigger('input')
       Vue.nextTick(() => {
         wrapper.findAll('.ant-transfer-list')
           .at(0)
@@ -358,7 +358,7 @@ describe('Transfer', () => {
 
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input').at(0)
       input.element.value = 'a'
-      input.trigger('change')
+      input.trigger('input')
       Vue.nextTick(() => {
         wrapper.findAll('.ant-transfer-list')
           .at(0)

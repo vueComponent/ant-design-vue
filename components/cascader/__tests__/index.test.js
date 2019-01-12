@@ -4,6 +4,9 @@ import KeyCode from '../../_util/KeyCode'
 import Cascader from '..'
 import focusTest from '../../../tests/shared/focusTest'
 
+function $$ (className) {
+  return document.body.querySelectorAll(className)
+}
 const options = [{
   value: 'zhejiang',
   label: 'Zhejiang',
@@ -27,6 +30,10 @@ const options = [{
     }],
   }],
 }]
+
+function filter (inputValue, path) {
+  return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1)
+}
 
 describe('Cascader', () => {
   focusTest(Cascader)
@@ -185,6 +192,62 @@ describe('Cascader', () => {
     await asyncExpect(() => {
       // trigger onKeyDown will not trigger onChange by default, so the value is still '123'
       expect(wrapper.vm.inputValue).toBe('123')
+    })
+  })
+
+  describe('limit filtered item count', () => {
+    beforeEach(() => {
+      document.body.outerHTML = ''
+    })
+
+    afterEach(() => {
+      document.body.outerHTML = ''
+    })
+
+    it('limit with positive number', async () => {
+      const wrapper = mount(Cascader, {
+        propsData: { options, showSearch: { filter, limit: 1 }},
+        sync: false,
+        attachToDocument: true,
+      })
+      wrapper.find('input').trigger('click')
+      wrapper.find('input').element.value = 'a'
+      wrapper.find('input').trigger('input')
+      await asyncExpect(() => {
+        expect($$('.ant-cascader-menu-item').length).toBe(1)
+      }, 0)
+    })
+
+    it('not limit', async () => {
+      const wrapper = mount(Cascader, {
+        propsData: { options, showSearch: { filter, limit: false }},
+        sync: false,
+        attachToDocument: true,
+      })
+      wrapper.find('input').trigger('click')
+      wrapper.find('input').element.value = 'a'
+      wrapper.find('input').trigger('input')
+      await asyncExpect(() => {
+        expect($$('.ant-cascader-menu-item').length).toBe(2)
+      }, 0)
+    })
+
+    it('negative limit', async () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+      const wrapper = mount(Cascader, {
+        propsData: { options, showSearch: { filter, limit: -1 }},
+        sync: false,
+        attachToDocument: true,
+      })
+      wrapper.find('input').trigger('click')
+      wrapper.find('input').element.value = 'a'
+      wrapper.find('input').trigger('input')
+      await asyncExpect(() => {
+        expect($$('.ant-cascader-menu-item').length).toBe(2)
+      }, 0)
+      expect(errorSpy).toBeCalledWith(
+        "Warning: 'limit' of showSearch in Cascader should be positive number or false.",
+      )
     })
   })
 })

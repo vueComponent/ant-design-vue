@@ -25,7 +25,7 @@ export default {
     },
     getLevelMove (e) {
       const target = e.target
-      if (target.className === 'drawer1') {
+      if (target.className.indexOf('drawer1') >= 0) {
         return [200, 100]
       }
       return 100
@@ -47,7 +47,7 @@ export default {
           handler={false}
           open={this.open}
           onMaskClick={this.onClick}
-          wrapperClassName='drawer1'
+          class='drawer1'
           placement='right'
         >
           <div>
@@ -56,7 +56,7 @@ export default {
               handler={false}
               open={this.openChild}
               onMaskClick={this.onChildClick}
-              wrapperClassName='drawer2'
+              class='drawer2'
               level='.drawer1'
               placement='right'
               levelMove={100}

@@ -42,6 +42,10 @@ export default {
       cls = `${cls} ${prefixCls}-active`
     }
 
+    if (!page) {
+      cls = `${cls} ${prefixCls}-disabled`
+    }
+
     return (
       <li
         class={cls}

@@ -59,7 +59,7 @@ export declare class LayoutSider extends AntdComponent {
 
   /**
    * width of the collapsed sidebar, by setting to 0 a special trigger will appear
-   * @default 64
+   * @default 80
    * @type number
    */
   collapsedWidth: number;

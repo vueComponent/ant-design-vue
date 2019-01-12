@@ -7,7 +7,7 @@ export function isDev () {
 export function isEventFromHandle (e, handles) {
   try {
     return Object.keys(handles)
-      .some(key => e.target === handles[key].$el)
+      .some(key => e.target === handles[key].$el || e.target === handles[key])
   } catch (error) {
     return false
   }
@@ -120,20 +120,5 @@ export function getKeyboardValueMutator (e) {
     case keyCode.PAGE_DOWN: return (value, props) => value - props.step * 2
 
     default: return undefined
-  }
-}
-
-export function getComponentProps (obj, prop) {
-  if (obj[prop]) {
-    return obj
-  } else if (obj.$children.length) {
-    const len = obj.$children.length
-    for (let i = 0; i < len; i++) {
-      if (obj.$children[i][prop]) {
-        return obj.$children[i]
-      } else if (obj.$children[i].$children.length) {
-        return getComponentProps(obj.$children[i], prop)
-      }
-    }
   }
 }

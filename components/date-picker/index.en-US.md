@@ -80,7 +80,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | [moment](http://momentjs.com/) | - |
 | defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
-| format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM" |
+| format | to set the date format. When an array is provided, all values are used for parsing and first value for display. refer to [moment.js](http://momentjs.com/) | string \| string[] | "YYYY-MM" |
 | monthCellContentRender | Custom month cell content render method by setting a scoped slot | slot="monthCellContentRender" slot-scope="date, locale" | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
 | value(v-model) | to set date | [moment](http://momentjs.com/) | - |
@@ -110,18 +110,18 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | -------- | ----------- | ---- | ------- |
 | defaultValue | to set default date | [moment](http://momentjs.com/)\[] | - |
 | defaultPickerValue | to set default picker date | [moment](http://momentjs.com/)\[] | - |
-| disabledTime | to specify the time that cannot be selected | function(dates: [moment, moment], partial: `'start'|'end'`) | - |
+| disabledTime | to specify the time that cannot be selected | function(dates: \[moment, moment\], partial: `'start'|'end'`) | - |
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges | preseted ranges for quick selection | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" | - |
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker/#API) |
-| showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
+| showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
 | value(v-model) | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 
 ### RangePicker Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| calendarChange | a callback function, can be executed when the start time or the end time of the range is changing | function(dates: [moment, moment], dateStrings: [string, string]) |
+| calendarChange | a callback function, can be executed when the start time or the end time of the range is changing | function(dates: \[moment, moment], dateStrings: \[string, string]) |
 | change | a callback function, can be executed when the selected time is changing | function(dates: [moment, moment], dateStrings: [string, string]) |
-| ok | callback when click ok button | function() |
+| ok | callback when click ok button | function(dates: [moment](http://momentjs.com/)\[]) |
 

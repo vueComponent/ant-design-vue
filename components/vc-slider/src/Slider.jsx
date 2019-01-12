@@ -189,9 +189,14 @@ const Slider = {
         index: 0,
         tabIndex,
         style: handleStyle[0] || handleStyle,
-        ref: 'handleRefs_0',
-        handleFocus: this.onFocus,
-        handleBlur: this.onBlur,
+        directives: [{
+          name: 'ant-ref',
+          value: h => this.saveHandle(0, h),
+        }],
+        on: {
+          focus: this.onFocus,
+          blur: this.onBlur,
+        },
       })
 
       const _trackStyle = trackStyle[0] || trackStyle

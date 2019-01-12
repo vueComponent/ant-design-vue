@@ -8,6 +8,7 @@ export const TransferSearchProps = {
   placeholder: PropTypes.string,
   value: PropTypes.any,
   handleClear: PropTypes.func,
+  disabled: PropTypes.bool,
 }
 
 export default {
@@ -21,16 +22,17 @@ export default {
     },
     handleClear2 (e) {
       e.preventDefault()
-      if (this.handleClear) {
-        this.handleClear(e)
+      const { handleClear, disabled } = this.$props
+      if (!disabled && handleClear) {
+        handleClear(e)
       }
     },
   },
   render () {
-    const { placeholder, value, prefixCls } = getOptionProps(this)
+    const { placeholder, value, prefixCls, disabled } = getOptionProps(this)
     const icon = (value && value.length > 0) ? (
       <a href='#' class={`${prefixCls}-action`} onClick={this.handleClear2}>
-        <Icon type='close-circle' />
+        <Icon type='close-circle' theme='filled'/>
       </a>
     ) : (
       <span class={`${prefixCls}-action`}><Icon type='search' /></span>
@@ -44,6 +46,7 @@ export default {
           value={value}
           ref='input'
           onChange={this.handleChange}
+          disabled={disabled}
         />
         {icon}
       </div>

@@ -159,7 +159,8 @@ class FieldsStore {
   }
 
   getNotCollectedFields () {
-    return this.getValidFieldsName()
+    const fieldsName = this.getValidFieldsName()
+    return fieldsName
       .filter(name => !this.fields[name])
       .map(name => ({
         name,

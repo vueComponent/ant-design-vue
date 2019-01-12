@@ -83,7 +83,7 @@ export default {
       initialValue = defaultValue || []
     }
     // warning(!('filedNames' in props),
-    //   '`filedNames` of Cascader is a typo usage and deprecated, please use `fieldNames` intead.');
+    //   '`filedNames` of Cascader is a typo usage and deprecated, please use `fieldNames` instead.');
 
     return {
       sPopupVisible: popupVisible,
@@ -242,6 +242,7 @@ export default {
         return
       }
       if (e.keyCode === KeyCode.DOWN || e.keyCode === KeyCode.UP) {
+        e.preventDefault()
         let nextIndex = currentIndex
         if (nextIndex !== -1) {
           if (e.keyCode === KeyCode.DOWN) {
@@ -256,8 +257,10 @@ export default {
         }
         activeValue[currentLevel] = currentOptions[nextIndex][this.getFieldName('value')]
       } else if (e.keyCode === KeyCode.LEFT || e.keyCode === KeyCode.BACKSPACE) {
+        e.preventDefault()
         activeValue.splice(activeValue.length - 1, 1)
       } else if (e.keyCode === KeyCode.RIGHT) {
+        e.preventDefault()
         if (currentOptions[currentIndex] &&
           currentOptions[currentIndex][this.getFieldName('children')]) {
           activeValue.push(currentOptions[currentIndex][this.getFieldName('children')][0][this.getFieldName('value')])

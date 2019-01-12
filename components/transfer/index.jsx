@@ -6,6 +6,7 @@ import List from './list'
 import Operation from './operation'
 import LocaleReceiver from '../locale-provider/LocaleReceiver'
 import defaultLocale from '../locale-provider/default'
+import warning from '../_util/warning'
 
 export const TransferDirection = 'left' | 'right'
 
@@ -225,11 +226,16 @@ const Transfer = {
     },
 
     handleFilter (direction, e) {
+      const value = e.target.value
       this.setState({
         // add filter
-        [`${direction}Filter`]: e.target.value,
+        [`${direction}Filter`]: value,
       })
-      this.$emit('searchChange', direction, e)
+      if (this.$listeners.searchChange) {
+        warning(false, '`searchChange` in Transfer is deprecated. Please use `search` instead.')
+        this.$emit('searchChange', direction, e)
+      }
+      this.$emit('search', direction, value)
     },
 
     handleLeftFilter (e) {
@@ -243,6 +249,7 @@ const Transfer = {
       this.setState({
         [`${direction}Filter`]: '',
       })
+      this.$emit('search', direction, '')
     },
 
     handleLeftClear () {

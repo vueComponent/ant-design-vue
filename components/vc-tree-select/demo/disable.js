@@ -1,37 +1,46 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
-import BaseMixin from '../../_util/BaseMixin'
-import '../assets/index.less'
-import TreeSelect from '../src/index'
+import BaseMixin from '../../_util/BaseMixin';
+import '../assets/index.less';
+import TreeSelect from '../src/index';
 
-const SHOW_PARENT = TreeSelect.SHOW_PARENT
+const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 
-const treeData = [{
-  label: 'Node1',
-  value: '0-0',
-  key: '0-0',
-  children: [{
-    label: 'Child Node1',
-    value: '0-0-0',
-    key: '0-0-0',
-  }],
-}, {
-  label: 'Node2',
-  value: '0-1',
-  key: '0-1',
-  children: [{
-    label: 'Child Node3',
-    value: '0-1-0',
-    key: '0-1-0',
-  }, {
-    label: 'Child Node4',
-    value: '0-1-1',
-    key: '0-1-1',
-  }, {
-    label: 'Child Node5',
-    value: '0-1-2',
-    key: '0-1-2',
-  }],
-}]
+const treeData = [
+  {
+    label: 'Node1',
+    value: '0-0',
+    key: '0-0',
+    children: [
+      {
+        label: 'Child Node1',
+        value: '0-0-0',
+        key: '0-0-0',
+      },
+    ],
+  },
+  {
+    label: 'Node2',
+    value: '0-1',
+    key: '0-1',
+    children: [
+      {
+        label: 'Child Node3',
+        value: '0-1-0',
+        key: '0-1-0',
+      },
+      {
+        label: 'Child Node4',
+        value: '0-1-1',
+        key: '0-1-1',
+      },
+      {
+        label: 'Child Node5',
+        value: '0-1-2',
+        key: '0-1-2',
+      },
+    ],
+  },
+];
 
 export default {
   mixins: [BaseMixin],
@@ -40,16 +49,16 @@ export default {
     disabled: false,
   }),
   methods: {
-    onChange (value) {
-      console.log('onChange ', value, arguments)
-      this.setState({ value })
+    onChange(value) {
+      console.log('onChange ', value, arguments);
+      this.setState({ value });
     },
-    switch (checked) {
-      this.setState({ disabled: checked })
+    switch(checked) {
+      this.setState({ disabled: checked });
     },
   },
 
-  render () {
+  render() {
     const tProps = {
       props: {
         treeData,
@@ -68,12 +77,12 @@ export default {
       style: {
         width: '300px',
       },
-    }
+    };
     return (
       <div>
         <TreeSelect {...tProps} />
-        <input type='checkbox' onChange={e => this.switch(e.target.checked)}/> 禁用
+        <input type="checkbox" onChange={e => this.switch(e.target.checked)} /> 禁用
       </div>
-    )
+    );
   },
-}
+};

@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/da_DK'
-import DatePicker from '../date-picker/locale/da_DK'
-import TimePicker from '../time-picker/locale/da_DK'
-import Calendar from '../calendar/locale/da_DK'
+import Pagination from '../vc-pagination/locale/da_DK';
+import DatePicker from '../date-picker/locale/da_DK';
+import TimePicker from '../time-picker/locale/da_DK';
+import Calendar from '../calendar/locale/da_DK';
 
 export default {
   locale: 'da',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Fejl ved upload',
     previewFile: 'Forhåndsvisning',
   },
-}
+};

@@ -1,29 +1,34 @@
-import { placements as rcPlacements } from '../vc-tooltip/placements'
+import { placements as rcPlacements } from '../vc-tooltip/placements';
 
 const autoAdjustOverflowEnabled = {
   adjustX: 1,
   adjustY: 1,
-}
+};
 
 const autoAdjustOverflowDisabled = {
   adjustX: 0,
   adjustY: 0,
-}
+};
 
-const targetOffset = [0, 0]
+const targetOffset = [0, 0];
 
-export function getOverflowOptions (autoAdjustOverflow) {
+export function getOverflowOptions(autoAdjustOverflow) {
   if (typeof autoAdjustOverflow === 'boolean') {
-    return autoAdjustOverflow ? autoAdjustOverflowEnabled : autoAdjustOverflowDisabled
+    return autoAdjustOverflow ? autoAdjustOverflowEnabled : autoAdjustOverflowDisabled;
   }
   return {
     ...autoAdjustOverflowDisabled,
     ...autoAdjustOverflow,
-  }
+  };
 }
 
-export default function getPlacements (config) {
-  const { arrowWidth = 5, horizontalArrowShift = 16, verticalArrowShift = 12, autoAdjustOverflow = true } = config
+export default function getPlacements(config) {
+  const {
+    arrowWidth = 5,
+    horizontalArrowShift = 16,
+    verticalArrowShift = 12,
+    autoAdjustOverflow = true,
+  } = config;
   const placementMap = {
     left: {
       points: ['cr', 'cl'],
@@ -73,17 +78,19 @@ export default function getPlacements (config) {
       points: ['br', 'cl'],
       offset: [-4, verticalArrowShift + arrowWidth],
     },
-  }
+  };
   Object.keys(placementMap).forEach(key => {
-    placementMap[key] = config.arrowPointAtCenter ? {
-      ...placementMap[key],
-      overflow: getOverflowOptions(autoAdjustOverflow),
-      targetOffset,
-    } : {
-      ...rcPlacements[key],
-      overflow: getOverflowOptions(autoAdjustOverflow),
-    }
-    placementMap[key].ignoreShake = true
-  })
-  return placementMap
+    placementMap[key] = config.arrowPointAtCenter
+      ? {
+          ...placementMap[key],
+          overflow: getOverflowOptions(autoAdjustOverflow),
+          targetOffset,
+        }
+      : {
+          ...rcPlacements[key],
+          overflow: getOverflowOptions(autoAdjustOverflow),
+        };
+    placementMap[key].ignoreShake = true;
+  });
+  return placementMap;
 }

@@ -1,28 +1,28 @@
-import InputNumber from '../src/index'
-import '../assets/index.less'
+import InputNumber from '../src/index';
+import '../assets/index.less';
 
-function getSum (str) {
-  let total = 0
-  str.split('').forEach((c) => {
-    const num = Number(c)
+function getSum(str) {
+  let total = 0;
+  str.split('').forEach(c => {
+    const num = Number(c);
 
     if (!isNaN(num)) {
-      total += num
+      total += num;
     }
-  })
+  });
 
-  return total
+  return total;
 }
 
 export default {
-  data () {
+  data() {
     return {
       value: 1000,
-    }
+    };
   },
-  render () {
+  render() {
     return (
-      <div style='margin: 10px;'>
+      <div style="margin: 10px;">
         <InputNumber
           defaultValue={1000}
           formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -33,17 +33,17 @@ export default {
           parser={value => value.replace('%', '')}
         />
         <InputNumber
-          style='width: 100px'
-          formatter={value =>
-            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          }
+          style="width: 100px"
+          formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         />
 
         <div>
           <h1>In Control</h1>
           <InputNumber
             value={this.value}
-            onChange={(value) => { this.value = value }}
+            onChange={value => {
+              this.value = value;
+            }}
             formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           />
         </div>
@@ -57,6 +57,6 @@ export default {
           />
         </div>
       </div>
-    )
+    );
   },
-}
+};

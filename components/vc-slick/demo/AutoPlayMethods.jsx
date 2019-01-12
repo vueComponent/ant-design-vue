@@ -1,16 +1,16 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
   methods: {
-    play () {
-      this.$refs.slider.slickPlay()
+    play() {
+      this.$refs.slider.slickPlay();
     },
-    pause () {
-      this.$refs.slider.slickPause()
+    pause() {
+      this.$refs.slider.slickPause();
     },
   },
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -21,7 +21,7 @@ export default {
         autoplaySpeed: 2000,
       },
       ref: 'slider',
-    }
+    };
     return (
       <div>
         <h2>Auto Play & Pause with buttons</h2>
@@ -46,14 +46,14 @@ export default {
           </div>
         </Slider>
         <div style={{ textAlign: 'center' }}>
-          <button class='button' onClick={this.play}>
+          <button class="button" onClick={this.play}>
             Play
           </button>
-          <button class='button' onClick={this.pause}>
+          <button class="button" onClick={this.pause}>
             Pause
           </button>
         </div>
       </div>
-    )
+    );
   },
-}
+};

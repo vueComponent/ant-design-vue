@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { TabPane } from "./tab-pane";
+import { AntdComponent } from '../component';
+import { TabPane } from './tab-pane';
 
 export declare class Tabs extends AntdComponent {
   static TabPane: TabPane;
@@ -39,7 +39,7 @@ export declare class Tabs extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "default" | "small" | "large";
+  size: 'default' | 'small' | 'large';
 
   /**
    * Extra content in tab bar
@@ -58,14 +58,14 @@ export declare class Tabs extends AntdComponent {
    * @default 'top'
    * @type string
    */
-  tabPosition: "top" | "right" | "bottom" | "left";
+  tabPosition: 'top' | 'right' | 'bottom' | 'left';
 
   /**
    * Basic style of tabs
    * @default 'line'
    * @type string
    */
-  type: "line" | "card" | "editable-card";
+  type: 'line' | 'card' | 'editable-card';
 
   /**
    * The gap between tabs

@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
-import Drawer from '..'
+import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
+import Drawer from '..';
 
 const DrawerCom = {
   props: {
@@ -21,7 +21,7 @@ const DrawerCom = {
       default: '',
     },
   },
-  render () {
+  render() {
     const drawerProps = {
       props: {
         destroyOnClose: true,
@@ -29,14 +29,10 @@ const DrawerCom = {
         visible: false,
         wrapClassName: this.wrapClassName,
       },
-    }
-    return (
-      <Drawer {...drawerProps}>
-        Here is content of Drawer
-      </Drawer>
-    )
+    };
+    return <Drawer {...drawerProps}>Here is content of Drawer</Drawer>;
   },
-}
+};
 
 describe('Drawer', () => {
   it('render correctly', async () => {
@@ -50,12 +46,12 @@ describe('Drawer', () => {
         default: ['Here is content of Drawer'],
       },
       sync: false,
-    }
-    const wrapper = mount(Drawer, props)
+    };
+    const wrapper = mount(Drawer, props);
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render top drawer', async () => {
     const props = {
@@ -69,12 +65,12 @@ describe('Drawer', () => {
         default: 'Here is content of Drawer',
       },
       sync: false,
-    }
-    const wrapper = mount(Drawer, props)
+    };
+    const wrapper = mount(Drawer, props);
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('have a title', async () => {
     const props = {
@@ -87,12 +83,12 @@ describe('Drawer', () => {
         default: 'Here is content of Drawer',
       },
       sync: false,
-    }
-    const wrapper = mount(Drawer, props)
+    };
+    const wrapper = mount(Drawer, props);
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('closable is false', async () => {
     const props = {
@@ -105,12 +101,12 @@ describe('Drawer', () => {
         default: 'Here is content of Drawer',
       },
       sync: false,
-    }
-    const wrapper = mount(Drawer, props)
+    };
+    const wrapper = mount(Drawer, props);
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('destroyOnClose is true', async () => {
     const props = {
@@ -123,12 +119,12 @@ describe('Drawer', () => {
         default: 'Here is content of Drawer',
       },
       sync: false,
-    }
-    const wrapper = mount(Drawer, props)
+    };
+    const wrapper = mount(Drawer, props);
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('class is test_drawer', async () => {
     const props = {
@@ -136,10 +132,10 @@ describe('Drawer', () => {
         wrapClassName: 'test_drawer',
       },
       sync: false,
-    }
-    const wrapper = mount(DrawerCom, props)
+    };
+    const wrapper = mount(DrawerCom, props);
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
-})
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+});

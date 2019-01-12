@@ -1,7 +1,7 @@
 <script>
-import Trigger from '../index'
-import '../assets/index.less'
-import { Input, Button } from 'ant-design-vue'
+import Trigger from '../index';
+import '../assets/index.less';
+import { Input, Button } from 'ant-design-vue';
 function getPopupAlign (state) {
   return {
     offset: [state.offsetX, state.offsetY],
@@ -9,7 +9,7 @@ function getPopupAlign (state) {
       adjustX: 1,
       adjustY: 1,
     },
-  }
+  };
 }
 
 const builtinPlacements = {
@@ -37,14 +37,14 @@ const builtinPlacements = {
   bottomLeft: {
     points: ['tl', 'bl'],
   },
-}
+};
 
 function preventDefault (e) {
-  e.preventDefault()
+  e.preventDefault();
 }
 
 function getPopupContainer (trigger) {
-  return trigger.parentNode
+  return trigger.parentNode;
 }
 
 export default {
@@ -61,87 +61,87 @@ export default {
       transitionName: 'rc-trigger-popup-zoom',
       destroyPopupOnHide: false,
       destroyed: false,
-    }
+    };
   },
   methods: {
     setState (state, callback) {
-      Object.assign(this.$data, state)
+      Object.assign(this.$data, state);
       this.$nextTick(() => {
-        callback && callback()
-      })
+        callback && callback();
+      });
     },
     onPlacementChange (e) {
       this.setState({
         placement: e.target.value,
-      })
+      });
     },
 
     onTransitionChange (e) {
       this.setState({
         transitionName: e.target.checked ? e.target.value : '',
-      })
+      });
     },
 
     onTriggerChange (e) {
-      const trigger = Object.assign({}, this.$data.trigger)
+      const trigger = Object.assign({}, this.$data.trigger);
       if (e.target.checked) {
-        trigger[e.target.value] = 1
+        trigger[e.target.value] = 1;
       } else {
-        delete trigger[e.target.value]
+        delete trigger[e.target.value];
       }
       this.setState({
         trigger,
-      })
+      });
     },
 
     onOffsetXChange (e) {
-      const targetValue = e.target.value
+      const targetValue = e.target.value;
       this.setState({
         offsetX: targetValue || undefined,
-      })
+      });
     },
 
     onOffsetYChange (e) {
-      const targetValue = e.target.value
+      const targetValue = e.target.value;
       this.setState({
         offsetY: targetValue || undefined,
-      })
+      });
     },
 
     onVisibleChange (visible) {
-      console.log('tooltip', visible)
+      console.log('tooltip', visible);
     },
 
     onMask (e) {
       this.setState({
         mask: e.target.checked,
-      })
+      });
     },
 
     onMaskClosable (e) {
       this.setState({
         maskClosable: e.target.checked,
-      })
+      });
     },
 
     destroy () {
       this.setState({
         destroyed: true,
-      })
+      });
     },
 
     handleDestroyPopupOnHide (e) {
       this.setState({
         destroyPopupOnHide: e.target.checked,
-      })
+      });
     },
   },
 
   render () {
-    const state = this.$data
-    const trigger = state.trigger
+    const state = this.$data;
+    const trigger = state.trigger;
     if (state.destroyed) {
-      return null
+      return null;
     }
     return (<div >
       <div style={{ margin: '10px 20px' }}>
@@ -274,7 +274,7 @@ export default {
           <a-button onClick={preventDefault}>trigger</a-button>
         </Trigger>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

@@ -1,14 +1,14 @@
 <script>
-import Basic from './basic.md'
-import InputNumber from './input-number.md'
-import IconSlider from './icon-slider.md'
-import TipFormatter from './tip-formatter.md'
-import Event from './event.md'
-import Mark from './mark.md'
-import Vertical from './vertical.md'
-import ShowTooltip from './show-tooltip.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import InputNumber from './input-number.md';
+import IconSlider from './icon-slider.md';
+import TipFormatter from './tip-formatter.md';
+import Event from './event.md';
+import Mark from './mark.md';
+import Vertical from './vertical.md';
+import ShowTooltip from './show-tooltip.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Slider 滑动输入条
@@ -22,7 +22,7 @@ const md = {
   To input a value in a range.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '滑动输入条',
@@ -47,7 +47,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

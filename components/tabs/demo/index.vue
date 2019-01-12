@@ -1,18 +1,18 @@
 <script>
-import Basic from './basic'
-import CardTop from './card-top'
-import Card from './card'
-import CustomAddTrigger from './custom-add-trigger'
-import Disabled from './disabled'
-import EditableCard from './editable-card'
-import Extra from './extra'
-import Icon from './icon'
-import Position from './position'
-import Size from './size'
-import Slide from './slide'
-import CustomTabBar from './custom-tab-bar'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import CardTop from './card-top';
+import Card from './card';
+import CustomAddTrigger from './custom-add-trigger';
+import Disabled from './disabled';
+import EditableCard from './editable-card';
+import Extra from './extra';
+import Icon from './icon';
+import Position from './position';
+import Size from './size';
+import Slide from './slide';
+import CustomTabBar from './custom-tab-bar';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Tabs 标签页
@@ -42,7 +42,7 @@ Ant Design has 3 types of Tabs for different situations.
 - Normal Tabs: for functional aspects of a page.
 - [RadioButton](/ant-design/components/radio/): for secondary tabs.
     ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '标签页',
@@ -72,7 +72,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

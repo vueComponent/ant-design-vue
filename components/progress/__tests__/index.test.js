@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
-import Progress from '..'
+import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
+import Progress from '..';
 
 describe('Progress', () => {
   it('successPercent should decide the progress status when it exists', async () => {
@@ -10,16 +10,16 @@ describe('Progress', () => {
         successPercent: 50,
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(0)
-    })
+      expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(0);
+    });
 
-    wrapper.setProps({ percent: 50, successPercent: 100 })
+    wrapper.setProps({ percent: 50, successPercent: 100 });
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(1)
-    })
-  })
+      expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(1);
+    });
+  });
 
   it('render out-of-range progress', async () => {
     const wrapper = mount(Progress, {
@@ -27,11 +27,11 @@ describe('Progress', () => {
         percent: 120,
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render out-of-range progress with info', async () => {
     const wrapper = mount(Progress, {
@@ -40,11 +40,11 @@ describe('Progress', () => {
         showInfo: true,
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render negetive progress', async () => {
     const wrapper = mount(Progress, {
@@ -52,11 +52,11 @@ describe('Progress', () => {
         percent: -20,
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render negetive successPercent', async () => {
     const wrapper = mount(Progress, {
@@ -65,11 +65,11 @@ describe('Progress', () => {
         successPercent: -20,
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render negetive successPercent', async () => {
     const wrapper = mount(Progress, {
@@ -79,11 +79,11 @@ describe('Progress', () => {
         format: (percent, successPercent) => `${percent} ${successPercent}`,
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render format', async () => {
     const wrapper = mount(Progress, {
@@ -93,14 +93,14 @@ describe('Progress', () => {
         strokeColor: 'red',
       },
       sync: false,
-    })
+    });
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('render normal progress', () => {
-    const wrapper = mount(Progress, { propsData: { status: 'normal' }})
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-})
+    const wrapper = mount(Progress, { propsData: { status: 'normal' } });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+});

@@ -1,38 +1,38 @@
 <script>
 /* eslint no-console:0 */
-import Tree, { TreeNode } from '../index'
-import '../assets/index.less'
-import cssAnimation from '../../_util/css-animation'
+import Tree, { TreeNode } from '../index';
+import '../assets/index.less';
+import cssAnimation from '../../_util/css-animation';
 
 function animate (node, show, done) {
-  let height = node.offsetHeight
+  let height = node.offsetHeight;
   return cssAnimation(node, 'collapse', {
     start () {
       if (!show) {
-        node.style.height = `${node.offsetHeight}px`
+        node.style.height = `${node.offsetHeight}px`;
       } else {
-        height = node.offsetHeight
-        node.style.height = 0
+        height = node.offsetHeight;
+        node.style.height = 0;
       }
     },
     active () {
-      node.style.height = `${show ? height : 0}px`
+      node.style.height = `${show ? height : 0}px`;
     },
     end () {
-      node.style.height = ''
-      done()
+      node.style.height = '';
+      done();
     },
-  })
+  });
 }
 
 const animation = {
   enter (node, done) {
-    return animate(node, true, done)
+    return animate(node, true, done);
   },
   leave (node, done) {
-    return animate(node, false, done)
+    return animate(node, false, done);
   },
-}
+};
 export default {
   render () {
     return (
@@ -55,9 +55,9 @@ export default {
           </TreeNode>
         </Tree>
       </div>
-    )
+    );
   },
-}
+};
 
 </script>
 <style>

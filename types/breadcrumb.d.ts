@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from "vue";
+import { VNode } from 'vue';
 
 export interface Route {
   path?: String;
@@ -35,11 +35,6 @@ export declare class Breadcrumb extends AntdComponent {
    * @type Function
    */
   itemRender: (
-    {
-      route,
-      params,
-      routes,
-      paths
-    }: { route: any; params: any; routes: any; paths: any }
+    { route, params, routes, paths }: { route: any; params: any; routes: any; paths: any },
   ) => VNode;
 }

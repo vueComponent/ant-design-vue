@@ -1,13 +1,11 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
-import imgList from './imglist'
+import '../assets/index.less';
+import Slider from '../src/slider';
+import imgList from './imglist';
 
-const {
-  abstract01, abstract02, abstract03, abstract04,
-} = imgList
+const { abstract01, abstract02, abstract03, abstract04 } = imgList;
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -17,7 +15,7 @@ export default {
         slidesToShow: 1,
         slidesToScroll: 1,
       },
-    }
+    };
     return (
       <div>
         <h2>Fade</h2>
@@ -36,6 +34,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

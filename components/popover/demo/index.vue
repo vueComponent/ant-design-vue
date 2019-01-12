@@ -1,12 +1,12 @@
 <script>
-import Basic from './basic'
-import ArrowCenter from './arrow-point-at-center'
-import Control from './control'
-import Placement from './placement'
-import TriggerType from './triggerType'
-import HoverWithClick from './hover-with-click'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import ArrowCenter from './arrow-point-at-center';
+import Control from './control';
+import Placement from './placement';
+import TriggerType from './triggerType';
+import HoverWithClick from './hover-with-click';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Popover
@@ -30,7 +30,7 @@ A simple popup menu to provide extra information or operations.
 Comparing with \`Tooltip\`, besides information \`Popover\` card can also provide action elements like links and buttons.
 ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '气泡卡片',
@@ -53,7 +53,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

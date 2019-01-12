@@ -1,9 +1,9 @@
 <script>
-import Horizontal from './horizontal'
-import Vertical from './vertical'
-import Orientation from './orientation'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Horizontal from './horizontal';
+import Vertical from './vertical';
+import Orientation from './orientation';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# 分割线
         区隔内容的分割线。
@@ -19,7 +19,7 @@ const md = {
       - Divide inline text and links such as the operation column of table.
       ## Examples 
       `,
-}
+};
 export default {
   category: 'Components',
   type: 'Other',
@@ -38,7 +38,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

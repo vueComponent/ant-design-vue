@@ -17,6 +17,6 @@ export default {
     title: String,
     content: String,
   },
-}
+};
 </script>
 

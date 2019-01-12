@@ -16,21 +16,21 @@
 </template>
 
 <script>
-import marked from 'marked'
-const hljs = require('highlight.js')
+import marked from 'marked';
+const hljs = require('highlight.js');
 const replaceDelimiters = function (str) {
-  return str.replace(/({{|}})/g, '<span>$1</span>')
-}
+  return str.replace(/({{|}})/g, '<span>$1</span>');
+};
 const renderHighlight = function (str, lang) {
   if (!(lang && hljs.getLanguage(lang))) {
-    return ''
+    return '';
   }
 
   try {
-    return replaceDelimiters(hljs.highlight(lang, str, true).value)
+    return replaceDelimiters(hljs.highlight(lang, str, true).value);
   } catch (err) {}
-}
-const renderer = new marked.Renderer()
+};
+const renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
   return '<h' +
     level +
@@ -40,8 +40,8 @@ renderer.heading = function (text, level) {
     text +
     '</h' +
     level +
-    '>\n'
-}
+    '>\n';
+};
 marked.setOptions({
   renderer,
   gfm: true,
@@ -53,19 +53,19 @@ marked.setOptions({
   smartypants: true,
   html: true,
   highlight: renderHighlight,
-})
-const cnReg = /<cn>([\S\s\t]*?)<\/cn>/
-const usReg = /<us>([\S\s\t]*?)<\/us>/
+});
+const cnReg = /<cn>([\S\s\t]*?)<\/cn>/;
+const usReg = /<us>([\S\s\t]*?)<\/us>/;
 export default {
   name: 'demoContainer',
   props: ['code'],
   data () {
-    const cn = this.code.match(cnReg) || []
-    const us = this.code.match(usReg) || []
-    const cnHtml = marked(cn[1].trim())
-    const usHtml = marked(us[1].trim())
-    const sourceCode = this.code.replace(cn[0], '').replace(us[0], '').trim()
-    const codeHtml = marked('````html\n' + sourceCode + '````')
+    const cn = this.code.match(cnReg) || [];
+    const us = this.code.match(usReg) || [];
+    const cnHtml = marked(cn[1].trim());
+    const usHtml = marked(us[1].trim());
+    const sourceCode = this.code.replace(cn[0], '').replace(us[0], '').trim();
+    const codeHtml = marked('````html\n' + sourceCode + '````');
     return {
       codeHtml,
       cnHtml,
@@ -75,7 +75,7 @@ export default {
         cn: cn[1].trim(),
         us: us[1].trim(),
       },
-    }
+    };
   },
-}
+};
 </script>

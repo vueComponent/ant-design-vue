@@ -1,8 +1,8 @@
-import Avatar from './Avatar'
+import Avatar from './Avatar';
 
 /* istanbul ignore next */
-Avatar.install = function (Vue) {
-  Vue.component(Avatar.name, Avatar)
-}
+Avatar.install = function(Vue) {
+  Vue.component(Avatar.name, Avatar);
+};
 
-export default Avatar
+export default Avatar;

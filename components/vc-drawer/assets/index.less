@@ -5,8 +5,9 @@
   position: fixed;
   top: 0;
   z-index: 9999;
-  >* {
-    transition: transform @duration @ease-in-out-circ, opacity @duration @ease-in-out-circ, box-shaow @duration @ease-in-out-circ;
+  > * {
+    transition: transform @duration @ease-in-out-circ, opacity @duration @ease-in-out-circ,
+      box-shaow @duration @ease-in-out-circ;
   }
   & &-mask {
     background: #000;
@@ -15,15 +16,13 @@
     height: 0;
     position: fixed;
     top: 0;
-    transition: opacity @duration @ease-in-out-circ,
-      width 0s ease @duration,
+    transition: opacity @duration @ease-in-out-circ, width 0s ease @duration,
       height 0s ease @duration;
     display: block !important;
   }
   &-content-wrapper {
     position: fixed;
     background: #fff;
-
   }
   &-content {
     overflow: auto;
@@ -84,14 +83,14 @@
     .@{drawer} {
       &-handle {
         right: -40px;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, .15);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
         border-radius: 0 4px 4px 0;
       }
     }
     &.@{drawer}-open {
       .@{drawer} {
         &-content-wrapper {
-          box-shadow: 2px 0 8px rgba(0, 0, 0, .15);
+          box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
         }
       }
     }
@@ -103,14 +102,14 @@
       }
       &-handle {
         left: -40px;
-        box-shadow: -2px 0 8px rgba(0, 0, 0, .15);
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
         border-radius: 4px 0 0 4px;
       }
     }
     &.@{drawer}-open {
       & .@{drawer} {
         &-content-wrapper {
-          box-shadow: -2px 0 8px rgba(0, 0, 0, .15);
+          box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
         }
       }
     }
@@ -138,14 +137,14 @@
       &-handle {
         top: auto;
         bottom: -40px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         border-radius: 0 0 4px 4px;
       }
     }
     &.@{drawer}-open {
       .@{drawer} {
         &-wrapper {
-          box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
       }
     }
@@ -157,14 +156,14 @@
       }
       &-handle {
         top: -40px;
-        box-shadow: 0 -2px 8px rgba(0, 0, 0, .15);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
         border-radius: 4px 4px 0 0;
       }
     }
     &.@{drawer}-open {
       .@{drawer} {
         &-content-wrapper {
-          box-shadow: 0 -2px 8px rgba(0, 0, 0, .15);
+          box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
         }
       }
     }
@@ -172,7 +171,7 @@
   &.@{drawer}-open {
     .@{drawer} {
       &-mask {
-        opacity: .3;
+        opacity: 0.3;
         width: 100%;
         height: 100%;
         animation: fadeIn 0.3s @ease-in-out-circ;

@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from "vue";
+import { VNode } from 'vue';
 
 export declare class Slider extends AntdComponent {
   /**
@@ -47,11 +47,7 @@ export declare class Slider extends AntdComponent {
    * @type object
    */
   marks: {
-    number:
-      | string
-      | VNode
-      | { style: object; label: string | VNode }
-      | Function;
+    number: string | VNode | { style: object; label: string | VNode } | Function;
   };
 
   /**

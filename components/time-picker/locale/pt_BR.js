@@ -1,5 +1,5 @@
 const locale = {
   placeholder: 'Hora',
-}
+};
 
-export default locale
+export default locale;

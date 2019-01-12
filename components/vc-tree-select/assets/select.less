@@ -1,7 +1,7 @@
 @selectPrefixCls: rc-tree-select;
 
 .effect() {
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-fill-mode: both;
   transform-origin: 0 0;
 }
@@ -19,7 +19,8 @@
     }
   }
 
-  ul, li {
+  ul,
+  li {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -90,8 +91,6 @@
     }
   }
 
-
-
   &-selection--single {
     height: 28px;
     cursor: pointer;
@@ -129,7 +128,7 @@
       cursor: not-allowed;
       color: #ccc;
 
-      &:hover{
+      &:hover {
         cursor: not-allowed;
         color: #ccc;
       }
@@ -211,9 +210,9 @@
     }
 
     .@{selectPrefixCls}-selection__clear {
-       top: 5px;
-       right: 8px;
-     }
+      top: 5px;
+      right: 8px;
+    }
   }
 
   &-enabled {
@@ -224,8 +223,8 @@
           opacity: 1;
           transform: scale(1);
         }
-        .@{selectPrefixCls}-selection__choice__remove +
-        .@{selectPrefixCls}-selection__choice__content {
+        .@{selectPrefixCls}-selection__choice__remove
+          + .@{selectPrefixCls}-selection__choice__content {
           margin-left: -8px;
           margin-right: 8px;
         }
@@ -241,15 +240,18 @@
     margin-right: 4px;
     position: relative;
     overflow: hidden;
-    transition: padding .3s cubic-bezier(0.6, -0.28, 0.735, 0.045), width .3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    transition: padding 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045),
+      width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 
     &__content {
       margin-left: 0;
       margin-right: 0;
-      transition: margin .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    &-zoom-enter, &-zoom-appear, &-zoom-leave {
+    &-zoom-enter,
+    &-zoom-appear,
+    &-zoom-leave {
       .effect();
       opacity: 0;
       animation-play-state: paused;
@@ -300,10 +302,10 @@
       transform: scale(0);
       top: 0;
       right: 2px;
-      transition: opacity .3s, transform .3s;
+      transition: opacity 0.3s, transform 0.3s;
 
       &:before {
-        content: '×'
+        content: '×';
       }
 
       &:hover {
@@ -393,7 +395,8 @@
       }
     }
 
-    &-slide-up-enter, &-slide-up-appear {
+    &-slide-up-enter,
+    &-slide-up-appear {
       .effect();
       opacity: 0;
       animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -407,7 +410,8 @@
       animation-play-state: paused;
     }
 
-    &-slide-up-enter&-slide-up-enter-active&-placement-bottomLeft, &-slide-up-appear&-slide-up-appear-active&-placement-bottomLeft {
+    &-slide-up-enter&-slide-up-enter-active&-placement-bottomLeft,
+    &-slide-up-appear&-slide-up-appear-active&-placement-bottomLeft {
       animation-name: rcSelectDropdownSlideUpIn;
       animation-play-state: running;
     }
@@ -417,7 +421,8 @@
       animation-play-state: running;
     }
 
-    &-slide-up-enter&-slide-up-enter-active&-placement-topLeft, &-slide-up-appear&-slide-up-appear-active&-placement-topLeft {
+    &-slide-up-enter&-slide-up-enter-active&-placement-topLeft,
+    &-slide-up-appear&-slide-up-appear-active&-placement-topLeft {
       animation-name: rcSelectDropdownSlideDownIn;
       animation-play-state: running;
     }

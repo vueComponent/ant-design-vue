@@ -60,5 +60,5 @@ export declare class Alert extends AntdComponent {
    * @default info, in banner mode default is warning
    * @type string
    */
-  type: "success" | "info" | "warning" | "error";
+  type: 'success' | 'info' | 'warning' | 'error';
 }

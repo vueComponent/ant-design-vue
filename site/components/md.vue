@@ -2,9 +2,9 @@
   <div v-html="marked(text)" class="markdown" />
 </template>
 <script>
-import marked from 'marked'
-import { isZhCN } from '../util'
-const renderer = new marked.Renderer()
+import marked from 'marked';
+import { isZhCN } from '../util';
+const renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
   return '<h' +
     level +
@@ -14,8 +14,8 @@ renderer.heading = function (text, level) {
     text +
     '</h' +
     level +
-    '>\n'
-}
+    '>\n';
+};
 marked.setOptions({
   renderer,
   gfm: true,
@@ -25,7 +25,7 @@ marked.setOptions({
   sanitize: true,
   smartLists: true,
   smartypants: true,
-})
+});
 export default {
   name: 'md',
   props: {
@@ -36,19 +36,19 @@ export default {
     demoContext: { default: {}},
   },
   data () {
-    let text = ''
-    const { cn, us } = this
+    let text = '';
+    const { cn, us } = this;
     if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].text) {
-      text = this.$slots.default[0].text
+      text = this.$slots.default[0].text;
     } else {
-      text = isZhCN(this.demoContext.name) ? cn : us
+      text = isZhCN(this.demoContext.name) ? cn : us;
     }
-    text = text || ''
-    text = text.split('\n').map(t => t.trim()).join('\n')
+    text = text || '';
+    text = text.split('\n').map(t => t.trim()).join('\n');
     return {
       marked,
       text,
-    }
+    };
   },
-}
+};
 </script>

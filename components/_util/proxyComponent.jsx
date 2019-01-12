@@ -1,29 +1,30 @@
+import PropTypes from './vue-types';
+import { getOptionProps } from './props-util';
 
-import PropTypes from './vue-types'
-import { getOptionProps } from './props-util'
-
-function getDisplayName (WrappedComponent) {
-  return WrappedComponent.name || 'Component'
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.name || 'Component';
 }
-export default function wrapWithConnect (WrappedComponent) {
-  const tempProps = WrappedComponent.props || {}
-  const methods = WrappedComponent.methods || {}
-  const props = {}
-  Object.keys(tempProps).forEach(k => { props[k] = ({ ...k, required: false }) })
-  WrappedComponent.props.__propsSymbol__ = PropTypes.any
-  WrappedComponent.props.children = PropTypes.array.def([])
+export default function wrapWithConnect(WrappedComponent) {
+  const tempProps = WrappedComponent.props || {};
+  const methods = WrappedComponent.methods || {};
+  const props = {};
+  Object.keys(tempProps).forEach(k => {
+    props[k] = { ...k, required: false };
+  });
+  WrappedComponent.props.__propsSymbol__ = PropTypes.any;
+  WrappedComponent.props.children = PropTypes.array.def([]);
   const ProxyWrappedComponent = {
     props,
     model: WrappedComponent.model,
     name: `Proxy_${getDisplayName(WrappedComponent)}`,
     methods: {
-      getProxyWrappedInstance () {
-        return this.$refs.wrappedInstance
+      getProxyWrappedInstance() {
+        return this.$refs.wrappedInstance;
       },
     },
-    render () {
-      const { $listeners, $slots = {}, $attrs, $scopedSlots } = this
-      const props = getOptionProps(this)
+    render() {
+      const { $listeners, $slots = {}, $attrs, $scopedSlots } = this;
+      const props = getOptionProps(this);
       const wrapProps = {
         props: {
           ...props,
@@ -33,24 +34,26 @@ export default function wrapWithConnect (WrappedComponent) {
         },
         on: $listeners,
         attrs: $attrs,
-      }
+      };
       if (Object.keys($scopedSlots).length) {
-        wrapProps.scopedSlots = $scopedSlots
+        wrapProps.scopedSlots = $scopedSlots;
       }
-      const slotsKey = Object.keys($slots)
+      const slotsKey = Object.keys($slots);
       return (
-        <WrappedComponent {...wrapProps} ref='wrappedInstance'>
-          {slotsKey.length ? slotsKey.map(name => {
-            return <template slot={name}>{$slots[name]}</template>
-          }) : null}
+        <WrappedComponent {...wrapProps} ref="wrappedInstance">
+          {slotsKey.length
+            ? slotsKey.map(name => {
+                return <template slot={name}>{$slots[name]}</template>;
+              })
+            : null}
         </WrappedComponent>
-      )
+      );
     },
-  }
+  };
   Object.keys(methods).map(m => {
-    ProxyWrappedComponent.methods[m] = function () {
-      return this.getProxyWrappedInstance()[m](...arguments)
-    }
-  })
-  return ProxyWrappedComponent
+    ProxyWrappedComponent.methods[m] = function() {
+      return this.getProxyWrappedInstance()[m](...arguments);
+    };
+  });
+  return ProxyWrappedComponent;
 }

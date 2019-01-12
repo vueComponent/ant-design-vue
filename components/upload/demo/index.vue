@@ -1,16 +1,16 @@
 <script>
-import Basic from './basic.md'
-import Avatar from './avatar.md'
-import DefaultFileList from './defaultFileList.md'
-import PictureCard from './picture-card.md'
-import FileList from './fileList.md'
-import Drag from './drag.md'
-import PictureStyle from './picture-style.md'
-import UploadManually from './upload-manually.md'
-import Directory from './directory.md'
+import Basic from './basic.md';
+import Avatar from './avatar.md';
+import DefaultFileList from './defaultFileList.md';
+import PictureCard from './picture-card.md';
+import FileList from './fileList.md';
+import Drag from './drag.md';
+import PictureStyle from './picture-style.md';
+import UploadManually from './upload-manually.md';
+import Directory from './directory.md';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 上传
@@ -33,7 +33,7 @@ const md = {
   - When you need to upload files by dragging and dropping.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '上传',
@@ -59,7 +59,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

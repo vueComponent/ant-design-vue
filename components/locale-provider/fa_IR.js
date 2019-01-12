@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/fa_IR'
-import DatePicker from '../date-picker/locale/fa_IR'
-import TimePicker from '../time-picker/locale/fa_IR'
-import Calendar from '../calendar/locale/fa_IR'
+import Pagination from '../vc-pagination/locale/fa_IR';
+import DatePicker from '../date-picker/locale/fa_IR';
+import TimePicker from '../time-picker/locale/fa_IR';
+import Calendar from '../calendar/locale/fa_IR';
 
 export default {
   locale: 'fa',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'خطا در آپلود',
     previewFile: 'مشاهده‌ی فایل',
   },
-}
+};

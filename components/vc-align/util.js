@@ -1,38 +1,38 @@
-export function buffer (fn, ms) {
-  let timer
+export function buffer(fn, ms) {
+  let timer;
 
-  function clear () {
+  function clear() {
     if (timer) {
-      clearTimeout(timer)
-      timer = null
+      clearTimeout(timer);
+      timer = null;
     }
   }
 
-  function bufferFn () {
-    clear()
-    timer = setTimeout(fn, ms)
+  function bufferFn() {
+    clear();
+    timer = setTimeout(fn, ms);
   }
 
-  bufferFn.clear = clear
+  bufferFn.clear = clear;
 
-  return bufferFn
+  return bufferFn;
 }
 
-export function isSamePoint (prev, next) {
-  if (prev === next) return true
-  if (!prev || !next) return false
+export function isSamePoint(prev, next) {
+  if (prev === next) return true;
+  if (!prev || !next) return false;
 
   if ('pageX' in next && 'pageY' in next) {
-    return prev.pageX === next.pageX && prev.pageY === next.pageY
+    return prev.pageX === next.pageX && prev.pageY === next.pageY;
   }
 
   if ('clientX' in next && 'clientY' in next) {
-    return prev.clientX === next.clientX && prev.clientY === next.clientY
+    return prev.clientX === next.clientX && prev.clientY === next.clientY;
   }
 
-  return false
+  return false;
 }
 
-export function isWindow (obj) {
-  return obj && typeof obj === 'object' && obj.window === obj
+export function isWindow(obj) {
+  return obj && typeof obj === 'object' && obj.window === obj;
 }

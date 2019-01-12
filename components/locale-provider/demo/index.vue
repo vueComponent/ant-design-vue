@@ -1,8 +1,8 @@
 <script>
-import Basic from './basic'
-import All from './all'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import All from './all';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `## API
 
@@ -16,7 +16,7 @@ const md = {
 | -------- | ----------- | ---- | ------- |
 | locale | language package setting, you can find the packages in this path: \`antd/lib/locale-provider/\` | object | - |
 `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '国际化',
@@ -34,7 +34,7 @@ export default {
         <All />
         <md cn={md.cn} us={md.us}/>
       </div>
-    )
+    );
   },
-}
+};
 </script>

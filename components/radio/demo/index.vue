@@ -1,16 +1,16 @@
 <script>
-import Basic from './basic'
-import Disabled from './disabled'
-import RadioButton from './radioButton'
-import RadioGroupMore from './radioGroup-more'
-import RadioGroupOptions from './radioGroup-options'
-import RadioGroupWithName from './radioGroup-with-name'
-import RadioGroup from './radioGroup'
-import RadioButtonSolid from './radioButton-solid'
+import Basic from './basic';
+import Disabled from './disabled';
+import RadioButton from './radioButton';
+import RadioGroupMore from './radioGroup-more';
+import RadioGroupOptions from './radioGroup-options';
+import RadioGroupWithName from './radioGroup-with-name';
+import RadioGroup from './radioGroup';
+import RadioButtonSolid from './radioButton-solid';
 
-import Size from './size'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Size from './size';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 单选框
@@ -30,7 +30,7 @@ const md = {
 - The difference from Select is that Radio is visible to the user and can facilitate the comparison of choice, which means there shouldn't be too many of them.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '单选框',
@@ -56,7 +56,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

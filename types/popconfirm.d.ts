@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { TooltipCommon } from "./tootip/common";
+import { TooltipCommon } from './tootip/common';
 
 export declare class Popconfirm extends TooltipCommon {
   /**
@@ -24,7 +24,7 @@ export declare class Popconfirm extends TooltipCommon {
    * @default 'primary'
    * @type string
    */
-  okType: "primary" | "danger" | "dashed" | "ghost" | "default";
+  okType: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
 
   /**
    * title of the confirmation box

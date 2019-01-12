@@ -1,10 +1,10 @@
-import PropTypes from '../../_util/vue-types'
-import warning from '../../_util/warning'
-import BaseMixin from '../../_util/BaseMixin'
-import { hasProp } from '../../_util/props-util'
-import Track from './common/Track'
-import createSlider from './common/createSlider'
-import * as utils from './utils'
+import PropTypes from '../../_util/vue-types';
+import warning from '../../_util/warning';
+import BaseMixin from '../../_util/BaseMixin';
+import { hasProp } from '../../_util/props-util';
+import Track from './common/Track';
+import createSlider from './common/createSlider';
+import * as utils from './utils';
 
 const Slider = {
   name: 'Slider',
@@ -18,132 +18,129 @@ const Slider = {
     min: PropTypes.number,
     max: PropTypes.number,
   },
-  data () {
-    const defaultValue = this.defaultValue !== undefined
-      ? this.defaultValue : this.min
-    const value = this.value !== undefined
-      ? this.value : defaultValue
+  data() {
+    const defaultValue = this.defaultValue !== undefined ? this.defaultValue : this.min;
+    const value = this.value !== undefined ? this.value : defaultValue;
 
     if (utils.isDev()) {
       warning(
         !hasProp(this, 'minimumTrackStyle'),
-        'minimumTrackStyle will be deprecate, please use trackStyle instead.'
-      )
+        'minimumTrackStyle will be deprecate, please use trackStyle instead.',
+      );
       warning(
         !hasProp(this, 'maximumTrackStyle'),
-        'maximumTrackStyle will be deprecate, please use railStyle instead.'
-      )
+        'maximumTrackStyle will be deprecate, please use railStyle instead.',
+      );
     }
     return {
       sValue: this.trimAlignValue(value),
       dragging: false,
-    }
+    };
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      const { autoFocus, disabled } = this
+      const { autoFocus, disabled } = this;
       if (autoFocus && !disabled) {
-        this.focus()
+        this.focus();
       }
-    })
+    });
   },
   watch: {
     value: {
-      handler (val) {
-        const { min, max } = this
-        this.setChangeValue(val, min, max)
+      handler(val) {
+        const { min, max } = this;
+        this.setChangeValue(val, min, max);
       },
       deep: true,
     },
-    min (val) {
-      const { sValue, max } = this
-      this.setChangeValue(sValue, val, max)
+    min(val) {
+      const { sValue, max } = this;
+      this.setChangeValue(sValue, val, max);
     },
-    max (val) {
-      const { sValue, min } = this
-      this.setChangeValue(sValue, min, val)
+    max(val) {
+      const { sValue, min } = this;
+      this.setChangeValue(sValue, min, val);
     },
   },
   methods: {
-    setChangeValue (value, min, max) {
+    setChangeValue(value, min, max) {
       const minAmaxProps = {
         min,
         max,
-      }
-      const newValue = value !== undefined
-        ? value : this.sValue
-      const nextValue = this.trimAlignValue(newValue, minAmaxProps)
-      if (nextValue === this.sValue) return
+      };
+      const newValue = value !== undefined ? value : this.sValue;
+      const nextValue = this.trimAlignValue(newValue, minAmaxProps);
+      if (nextValue === this.sValue) return;
 
-      this.setState({ sValue: nextValue })
+      this.setState({ sValue: nextValue });
       if (utils.isValueOutOfRange(newValue, minAmaxProps)) {
-        this.$emit('change', nextValue)
+        this.$emit('change', nextValue);
       }
     },
-    onChange (state) {
-      const isNotControlled = !hasProp(this, 'value')
+    onChange(state) {
+      const isNotControlled = !hasProp(this, 'value');
       if (isNotControlled) {
-        this.setState(state)
+        this.setState(state);
       }
 
-      const changedValue = state.sValue
-      this.$emit('change', changedValue)
+      const changedValue = state.sValue;
+      this.$emit('change', changedValue);
     },
-    onStart (position) {
-      this.setState({ dragging: true })
-      const { sValue } = this
-      this.$emit('beforeChange', sValue)
+    onStart(position) {
+      this.setState({ dragging: true });
+      const { sValue } = this;
+      this.$emit('beforeChange', sValue);
 
-      const value = this.calcValueByPos(position)
+      const value = this.calcValueByPos(position);
 
-      this.startValue = value
-      this.startPosition = position
-      if (value === sValue) return
+      this.startValue = value;
+      this.startPosition = position;
+      if (value === sValue) return;
 
-      this.prevMovedHandleIndex = 0
-      this.onChange({ sValue: value })
+      this.prevMovedHandleIndex = 0;
+      this.onChange({ sValue: value });
     },
-    onEnd () {
-      this.setState({ dragging: false })
-      this.removeDocumentEvents()
-      this.$emit('afterChange', this.sValue)
+    onEnd() {
+      this.setState({ dragging: false });
+      this.removeDocumentEvents();
+      this.$emit('afterChange', this.sValue);
     },
-    onMove (e, position) {
-      utils.pauseEvent(e)
-      const { sValue } = this
-      const value = this.calcValueByPos(position)
-      if (value === sValue) return
+    onMove(e, position) {
+      utils.pauseEvent(e);
+      const { sValue } = this;
+      const value = this.calcValueByPos(position);
+      if (value === sValue) return;
 
-      this.onChange({ sValue: value })
+      this.onChange({ sValue: value });
     },
-    onKeyboard (e) {
-      const valueMutator = utils.getKeyboardValueMutator(e)
+    onKeyboard(e) {
+      const valueMutator = utils.getKeyboardValueMutator(e);
 
       if (valueMutator) {
-        utils.pauseEvent(e)
-        const { sValue } = this
-        const mutatedValue = valueMutator(sValue, this.$props)
-        const value = this.trimAlignValue(mutatedValue)
-        if (value === sValue) return
+        utils.pauseEvent(e);
+        const { sValue } = this;
+        const mutatedValue = valueMutator(sValue, this.$props);
+        const value = this.trimAlignValue(mutatedValue);
+        if (value === sValue) return;
 
-        this.onChange({ sValue: value })
+        this.onChange({ sValue: value });
       }
     },
-    getLowerBound () {
-      return this.min
+    getLowerBound() {
+      return this.min;
     },
-    getUpperBound () {
-      return this.sValue
+    getUpperBound() {
+      return this.sValue;
     },
-    trimAlignValue (v, nextProps = {}) {
+    trimAlignValue(v, nextProps = {}) {
       if (v === null) {
-        return null
+        return null;
       }
-      const mergedProps = { ...this.$props, ...nextProps }
-      const val = utils.ensureValueInRange(v, mergedProps)
-      return utils.ensureValuePrecision(val, mergedProps)
+      const mergedProps = { ...this.$props, ...nextProps };
+      const val = utils.ensureValueInRange(v, mergedProps);
+      return utils.ensureValuePrecision(val, mergedProps);
     },
-    getTrack ({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }) {
+    getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }) {
       return (
         <Track
           class={`${prefixCls}-track`}
@@ -156,9 +153,9 @@ const Slider = {
             ..._trackStyle,
           }}
         />
-      )
+      );
     },
-    renderSlider () {
+    renderSlider() {
       const {
         prefixCls,
         vertical,
@@ -172,10 +169,10 @@ const Slider = {
         max,
         handle,
         defaultHandle,
-      } = this
-      const handleGenerator = handle || defaultHandle
-      const { sValue, dragging } = this
-      const offset = this.calcOffset(sValue)
+      } = this;
+      const handleGenerator = handle || defaultHandle;
+      const { sValue, dragging } = this;
+      const offset = this.calcOffset(sValue);
       const handles = handleGenerator({
         className: `${prefixCls}-handle`,
         prefixCls,
@@ -189,23 +186,32 @@ const Slider = {
         index: 0,
         tabIndex,
         style: handleStyle[0] || handleStyle,
-        directives: [{
-          name: 'ant-ref',
-          value: h => this.saveHandle(0, h),
-        }],
+        directives: [
+          {
+            name: 'ant-ref',
+            value: h => this.saveHandle(0, h),
+          },
+        ],
         on: {
           focus: this.onFocus,
           blur: this.onBlur,
         },
-      })
+      });
 
-      const _trackStyle = trackStyle[0] || trackStyle
+      const _trackStyle = trackStyle[0] || trackStyle;
       return {
-        tracks: this.getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }),
+        tracks: this.getTrack({
+          prefixCls,
+          vertical,
+          included,
+          offset,
+          minimumTrackStyle,
+          _trackStyle,
+        }),
         handles,
-      }
+      };
     },
   },
-}
+};
 
-export default createSlider(Slider)
+export default createSlider(Slider);

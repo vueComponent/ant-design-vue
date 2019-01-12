@@ -1,8 +1,8 @@
-import Upload from '../index'
-import axios from 'axios'
+import Upload from '../index';
+import axios from 'axios';
 
 export default {
-  render () {
+  render() {
     const uploaderProps = {
       props: {
         action: '//jsonplaceholder.typicode.com/posts/',
@@ -11,7 +11,7 @@ export default {
         headers: {
           Authorization: '$prefix $token',
         },
-        customRequest ({
+        customRequest({
           action,
           data,
           file,
@@ -23,49 +23,49 @@ export default {
           withCredentials,
         }) {
           // EXAMPLE: post form-data with 'axios'
-          const formData = new FormData()
+          const formData = new FormData();
           if (data) {
             Object.keys(data).map(key => {
-              formData.append(key, data[key])
-            })
+              formData.append(key, data[key]);
+            });
           }
-          formData.append(filename, file)
+          formData.append(filename, file);
 
           axios
             .post(action, formData, {
               withCredentials,
               headers,
               onUploadProgress: ({ total, loaded }) => {
-                onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file)
+                onProgress({ percent: Math.round((loaded / total) * 100).toFixed(2) }, file);
               },
             })
             .then(({ data: response }) => {
-              onSuccess(response, file)
+              onSuccess(response, file);
             })
-            .catch(onError)
+            .catch(onError);
 
           return {
-            abort () {
-              console.log('upload progress is aborted.')
+            abort() {
+              console.log('upload progress is aborted.');
             },
-          }
+          };
         },
       },
       on: {
-        start (file) {
-          console.log('start', file, file.name)
+        start(file) {
+          console.log('start', file, file.name);
         },
-        success (file) {
-          console.log('success', file)
+        success(file) {
+          console.log('success', file);
         },
-        error (err) {
-          console.log('error', err)
+        error(err) {
+          console.log('error', err);
         },
-        progress ({ percent }, file) {
-          console.log('progress', `${percent}%`, file.name)
+        progress({ percent }, file) {
+          console.log('progress', `${percent}%`, file.name);
         },
       },
-    }
+    };
     return (
       <div
         style={{
@@ -73,9 +73,11 @@ export default {
         }}
       >
         <div>
-          <Upload {...uploaderProps}><a>开始上传</a></Upload>
+          <Upload {...uploaderProps}>
+            <a>开始上传</a>
+          </Upload>
         </div>
       </div>
-    )
+    );
   },
-}
+};

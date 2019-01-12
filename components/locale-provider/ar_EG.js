@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/ar_EG'
-import DatePicker from '../date-picker/locale/ar_EG'
-import TimePicker from '../time-picker/locale/ar_EG'
-import Calendar from '../calendar/locale/ar_EG'
+import Pagination from '../vc-pagination/locale/ar_EG';
+import DatePicker from '../date-picker/locale/ar_EG';
+import TimePicker from '../time-picker/locale/ar_EG';
+import Calendar from '../calendar/locale/ar_EG';
 
 export default {
   locale: 'ar',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'مشكلة فى الرفع',
     previewFile: 'استعرض الملف',
   },
-}
+};

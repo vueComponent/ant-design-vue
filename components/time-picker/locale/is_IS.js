@@ -1,5 +1,5 @@
 const locale = {
   placeholder: 'Velja tíma',
-}
+};
 
-export default locale
+export default locale;

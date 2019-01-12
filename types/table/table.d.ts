@@ -2,15 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { Spin } from "../spin";
-import { ScopedSlot, VNode } from "vue/types/vnode";
-import { Pagination } from "../pagination";
-import { Column } from "./column";
-import { ColumnGroup } from "./column-group";
+import { AntdComponent } from '../component';
+import { Spin } from '../spin';
+import { ScopedSlot, VNode } from 'vue/types/vnode';
+import { Pagination } from '../pagination';
+import { Column } from './column';
+import { ColumnGroup } from './column-group';
 
 export declare class PaginationConfig extends Pagination {
-  position: "top" | "bottom" | "both";
+  position: 'top' | 'bottom' | 'both';
 }
 
 export interface customSelection {
@@ -45,7 +45,7 @@ export interface TableRowSelection {
    * @default 'checkbox'
    * @type string
    */
-  type?: "checkbox" | "radio";
+  type?: 'checkbox' | 'radio';
 
   /**
    * Controlled selected row keys
@@ -94,31 +94,19 @@ export interface TableRowSelection {
    * Callback executed when selected rows change
    * @type Function
    */
-  onChange?: (
-    selectedRowKeys: Array<string | number>,
-    selectedRows: object[]
-  ) => any;
+  onChange?: (selectedRowKeys: Array<string | number>, selectedRows: object[]) => any;
 
   /**
    * Callback executed when select/deselect one row
    * @type Function
    */
-  onSelect?: (
-    record: any,
-    selected: boolean,
-    selectedRows: object[],
-    nativeEvent: Event
-  ) => any;
+  onSelect?: (record: any, selected: boolean, selectedRows: object[], nativeEvent: Event) => any;
 
   /**
    * Callback executed when select/deselect all rows
    * @type Function
    */
-  onSelectAll?: (
-    selected: boolean,
-    selectedRows: object[],
-    changeRows: object[]
-  ) => any;
+  onSelectAll?: (selected: boolean, selectedRows: object[], changeRows: object[]) => any;
 
   /**
    * Callback executed when row selection is inverted
@@ -186,12 +174,7 @@ export declare class Table extends AntdComponent {
    * Expanded container render for each row
    * @type Function
    */
-  expandedRowRender: (
-    record: any,
-    index: number,
-    indent: number,
-    expanded: boolean
-  ) => any;
+  expandedRowRender: (record: any, index: number, indent: number, expanded: boolean) => any;
 
   /**
    * Customize row expand Icon.
@@ -278,7 +261,7 @@ export declare class Table extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "default" | "middle" | "small" | "large";
+  size: 'default' | 'middle' | 'small' | 'large';
 
   /**
    * Table title renderer
@@ -292,7 +275,7 @@ export declare class Table extends AntdComponent {
    */
   customHeaderRow: (
     column: any,
-    index: number
+    index: number,
   ) => {
     props: object;
     attrs: object;
@@ -308,7 +291,7 @@ export declare class Table extends AntdComponent {
    */
   customRow: (
     record: any,
-    index: number
+    index: number,
   ) => {
     props: object;
     attrs: object;

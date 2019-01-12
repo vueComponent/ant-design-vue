@@ -1,48 +1,50 @@
-import BaseMixin from '../_util/BaseMixin'
-import { getOptionProps, initDefaultProps } from '../_util/props-util'
-import getTransitionProps from '../_util/getTransitionProps'
-import Icon from '../icon'
-import Tooltip from '../tooltip'
-import Progress from '../progress'
-import classNames from 'classnames'
-import { UploadListProps } from './interface'
+import BaseMixin from '../_util/BaseMixin';
+import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import getTransitionProps from '../_util/getTransitionProps';
+import Icon from '../icon';
+import Tooltip from '../tooltip';
+import Progress from '../progress';
+import classNames from 'classnames';
+import { UploadListProps } from './interface';
 
-const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp']
+const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp'];
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 const previewFile = (file, callback) => {
   if (file.type && !imageTypes.includes(file.type)) {
-    callback('')
+    callback('');
   }
-  const reader = new window.FileReader()
-  reader.onloadend = () => callback(reader.result)
-  reader.readAsDataURL(file)
-}
+  const reader = new window.FileReader();
+  reader.onloadend = () => callback(reader.result);
+  reader.readAsDataURL(file);
+};
 
-const extname = (url) => {
+const extname = url => {
   if (!url) {
-    return ''
+    return '';
   }
-  const temp = url.split('/')
-  const filename = temp[temp.length - 1]
-  const filenameWithoutSuffix = filename.split(/#|\?/)[0]
-  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
-}
+  const temp = url.split('/');
+  const filename = temp[temp.length - 1];
+  const filenameWithoutSuffix = filename.split(/#|\?/)[0];
+  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0];
+};
 
-const isImageUrl = (file) => {
+const isImageUrl = file => {
   if (imageTypes.includes(file.type)) {
-    return true
+    return true;
   }
-  const url = (file.thumbUrl || file.url)
-  const extension = extname(url)
+  const url = file.thumbUrl || file.url;
+  const extension = extname(url);
   if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp)$/i.test(extension)) {
-    return true
-  } else if (/^data:/.test(url)) { // other file types of base64
-    return false
-  } else if (extension) { // other file types which have extension
-    return false
+    return true;
+  } else if (/^data:/.test(url)) {
+    // other file types of base64
+    return false;
+  } else if (extension) {
+    // other file types which have extension
+    return false;
   }
-  return true
-}
+  return true;
+};
 
 export default {
   name: 'AUploadList',
@@ -57,72 +59,82 @@ export default {
     showRemoveIcon: true,
     showPreviewIcon: true,
   }),
-  updated () {
+  updated() {
     this.$nextTick(() => {
       if (this.listType !== 'picture' && this.listType !== 'picture-card') {
-        return
+        return;
       }
       (this.items || []).forEach(file => {
-        if (typeof document === 'undefined' ||
-            typeof window === 'undefined' ||
-            !window.FileReader || !window.File ||
-            !(file.originFileObj instanceof window.File) ||
-            file.thumbUrl !== undefined) {
-          return
+        if (
+          typeof document === 'undefined' ||
+          typeof window === 'undefined' ||
+          !window.FileReader ||
+          !window.File ||
+          !(file.originFileObj instanceof window.File) ||
+          file.thumbUrl !== undefined
+        ) {
+          return;
         }
         /*eslint-disable */
         file.thumbUrl = '';
         /*eslint -enable */
-        previewFile(file.originFileObj, (previewDataUrl) => {
+        previewFile(file.originFileObj, previewDataUrl => {
           /*eslint-disable */
           file.thumbUrl = previewDataUrl;
           /*eslint -enable todo */
           // this.forceUpdate()
-        })
-      })
-    })
+        });
+      });
+    });
   },
   methods: {
-    handleClose (file) {
-      this.$emit('remove', file)
+    handleClose(file) {
+      this.$emit('remove', file);
     },
-    handlePreview (file, e) {
-      const { preview } = this.$listeners
-      if(!preview) {
-        return
+    handlePreview(file, e) {
+      const { preview } = this.$listeners;
+      if (!preview) {
+        return;
       }
-      e.preventDefault()
-      return this.$emit('preview', file)
+      e.preventDefault();
+      return this.$emit('preview', file);
     },
   },
-  render () {
-    const { prefixCls, items = [], listType, showPreviewIcon, showRemoveIcon, locale } = getOptionProps(this)
+  render() {
+    const {
+      prefixCls,
+      items = [],
+      listType,
+      showPreviewIcon,
+      showRemoveIcon,
+      locale,
+    } = getOptionProps(this);
     const list = items.map(file => {
-      let progress
-      let icon = <Icon type={file.status === 'uploading' ? 'loading' : 'paper-clip'} />
+      let progress;
+      let icon = <Icon type={file.status === 'uploading' ? 'loading' : 'paper-clip'} />;
 
       if (listType === 'picture' || listType === 'picture-card') {
         if (listType === 'picture-card' && file.status === 'uploading') {
-          icon = <div class={`${prefixCls}-list-item-uploading-text`}>{locale.uploading}</div>
+          icon = <div class={`${prefixCls}-list-item-uploading-text`}>{locale.uploading}</div>;
         } else if (!file.thumbUrl && !file.url) {
-          icon = <Icon class={`${prefixCls}-list-item-thumbnail`} type='picture' theme="twoTone"/>
+          icon = <Icon class={`${prefixCls}-list-item-thumbnail`} type="picture" theme="twoTone" />;
         } else {
           const thumbnail = isImageUrl(file) ? (
             <img src={file.thumbUrl || file.url} alt={file.name} />
           ) : (
             <Icon type="file" class={`${prefixCls}-list-item-icon`} theme="twoTone" />
-          )
+          );
           icon = (
             <a
               class={`${prefixCls}-list-item-thumbnail`}
               onClick={e => this.handlePreview(file, e)}
               href={file.url || file.thumbUrl}
-              target='_blank'
-              rel='noopener noreferrer'
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {thumbnail}
             </a>
-          )
+          );
         }
       }
 
@@ -132,29 +144,27 @@ export default {
             ...this.progressAttr,
             type: 'line',
             percent: file.percent,
-          }
-        }
+          },
+        };
         // show loading icon if upload progress listener is disabled
-        const loadingProgress = ('percent' in file) ? (
-          <Progress {...progressProps} />
-        ) : null
+        const loadingProgress = 'percent' in file ? <Progress {...progressProps} /> : null;
 
         progress = (
-          <div class={`${prefixCls}-list-item-progress`} key='progress'>
+          <div class={`${prefixCls}-list-item-progress`} key="progress">
             {loadingProgress}
           </div>
-        )
+        );
       }
       const infoUploadingClass = classNames({
         [`${prefixCls}-list-item`]: true,
         [`${prefixCls}-list-item-${file.status}`]: true,
-      })
-      const linkProps = typeof file.linkProps === 'string'
-        ? JSON.parse(file.linkProps) : file.linkProps
+      });
+      const linkProps =
+        typeof file.linkProps === 'string' ? JSON.parse(file.linkProps) : file.linkProps;
       const preview = file.url ? (
         <a
-          target='_blank'
-          rel='noopener noreferrer'
+          target="_blank"
+          rel="noopener noreferrer"
           class={`${prefixCls}-list-item-name`}
           title={file.name}
           {...linkProps}
@@ -171,23 +181,26 @@ export default {
         >
           {file.name}
         </span>
-      )
-      const style = (file.url || file.thumbUrl) ? undefined : {
-        pointerEvents: 'none',
-        opacity: 0.5,
-      }
+      );
+      const style =
+        file.url || file.thumbUrl
+          ? undefined
+          : {
+              pointerEvents: 'none',
+              opacity: 0.5,
+            };
       const previewIcon = showPreviewIcon ? (
         <a
           href={file.url || file.thumbUrl}
-          target='_blank'
-          rel='noopener noreferrer'
+          target="_blank"
+          rel="noopener noreferrer"
           style={style}
           onClick={e => this.handlePreview(file, e)}
           title={locale.previewFile}
         >
-          <Icon type='eye-o' />
+          <Icon type="eye-o" />
         </a>
-      ) : null
+      ) : null;
       const iconProps = {
         props: {
           type: 'delete',
@@ -195,57 +208,59 @@ export default {
         },
         on: {
           click: () => {
-            this.handleClose(file)
-          }
+            this.handleClose(file);
+          },
         },
-      }
-      const iconProps1 = {...iconProps, ...{props: {type: 'close'}}}
-      const removeIcon = showRemoveIcon ? (
-        <Icon {...iconProps} />
-      ) : null
-      const removeIconClose = showRemoveIcon ? (
-        <Icon {...iconProps1}/>
-      ) : null
-      const actions = (listType === 'picture-card' && file.status !== 'uploading')
-        ? <span class={`${prefixCls}-list-item-actions`}>{previewIcon}{removeIcon}</span>
-        : removeIconClose
-      let message
+      };
+      const iconProps1 = { ...iconProps, ...{ props: { type: 'close' } } };
+      const removeIcon = showRemoveIcon ? <Icon {...iconProps} /> : null;
+      const removeIconClose = showRemoveIcon ? <Icon {...iconProps1} /> : null;
+      const actions =
+        listType === 'picture-card' && file.status !== 'uploading' ? (
+          <span class={`${prefixCls}-list-item-actions`}>
+            {previewIcon}
+            {removeIcon}
+          </span>
+        ) : (
+          removeIconClose
+        );
+      let message;
       if (file.response && typeof file.response === 'string') {
-        message = file.response
+        message = file.response;
       } else {
-        message = (file.error && file.error.statusText) || locale.uploadError
+        message = (file.error && file.error.statusText) || locale.uploadError;
       }
-      const iconAndPreview = (file.status === 'error')
-        ? <Tooltip title={message}>{icon}{preview}</Tooltip>
-        : <span>{icon}{preview}</span>
-      const transitionProps = getTransitionProps('fade')
+      const iconAndPreview =
+        file.status === 'error' ? (
+          <Tooltip title={message}>
+            {icon}
+            {preview}
+          </Tooltip>
+        ) : (
+          <span>
+            {icon}
+            {preview}
+          </span>
+        );
+      const transitionProps = getTransitionProps('fade');
       return (
         <div class={infoUploadingClass} key={file.uid}>
-          <div class={`${prefixCls}-list-item-info`}>
-            {iconAndPreview}
-          </div>
+          <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
           {actions}
-          <transition {...transitionProps}>
-            {progress}
-          </transition>
+          <transition {...transitionProps}>{progress}</transition>
         </div>
-      )
-    })
+      );
+    });
     const listClassNames = classNames({
       [`${prefixCls}-list`]: true,
       [`${prefixCls}-list-${listType}`]: true,
-    })
-    const animationDirection =
-      listType === 'picture-card' ? 'animate-inline' : 'animate'
-    const transitionGroupProps = getTransitionProps(`${prefixCls}-${animationDirection}`)
+    });
+    const animationDirection = listType === 'picture-card' ? 'animate-inline' : 'animate';
+    const transitionGroupProps = getTransitionProps(`${prefixCls}-${animationDirection}`);
     return (
-      <transition-group
-        {...transitionGroupProps}
-        tag='div'
-        class={listClassNames}
-      >
+      <transition-group {...transitionGroupProps} tag="div" class={listClassNames}>
         {list}
       </transition-group>
-    )
+    );
   },
-}
+};

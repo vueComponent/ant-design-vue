@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 export default {
   prefixCls: PropTypes.string.def('rc-menu'),
   focusable: PropTypes.bool.def(true),
@@ -7,11 +7,21 @@ export default {
   visible: PropTypes.bool.def(true),
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  defaultSelectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).def([]),
-  defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).def([]),
+  defaultSelectedKeys: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ).def([]),
+  defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).def(
+    [],
+  ),
   openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']).def('vertical'),
+  mode: PropTypes.oneOf([
+    'horizontal',
+    'vertical',
+    'vertical-left',
+    'vertical-right',
+    'inline',
+  ]).def('vertical'),
   triggerSubMenuAction: PropTypes.string.def('hover'),
   subMenuOpenDelay: PropTypes.number.def(0.1),
   subMenuCloseDelay: PropTypes.number.def(0.1),
@@ -27,4 +37,4 @@ export default {
   itemIcon: PropTypes.any,
   expandIcon: PropTypes.any,
   overflowedIndicator: PropTypes.any,
-}
+};

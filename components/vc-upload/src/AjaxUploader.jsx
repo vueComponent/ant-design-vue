@@ -1,10 +1,10 @@
-import PropTypes from '../../_util/vue-types'
-import BaseMixin from '../../_util/BaseMixin'
-import classNames from 'classnames'
-import defaultRequest from './request'
-import getUid from './uid'
-import attrAccept from './attr-accept'
-import traverseFileTree from './traverseFileTree'
+import PropTypes from '../../_util/vue-types';
+import BaseMixin from '../../_util/BaseMixin';
+import classNames from 'classnames';
+import defaultRequest from './request';
+import getUid from './uid';
+import attrAccept from './attr-accept';
+import traverseFileTree from './traverseFileTree';
 
 const upLoadPropTypes = {
   componentTag: PropTypes.string,
@@ -18,121 +18,115 @@ const upLoadPropTypes = {
   accept: PropTypes.string,
   // children: PropTypes.any,
   // onStart: PropTypes.func,
-  data: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-  ]),
-  action: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-  ]),
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  action: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headers: PropTypes.object,
   beforeUpload: PropTypes.func,
   customRequest: PropTypes.func,
   // onProgress: PropTypes.func,
   withCredentials: PropTypes.bool,
   openFileDialogOnClick: PropTypes.bool,
-}
+};
 
 const AjaxUploader = {
   inheritAttrs: false,
   name: 'ajaxUploader',
   mixins: [BaseMixin],
   props: upLoadPropTypes,
-  data () {
-    this.reqs = {}
+  data() {
+    this.reqs = {};
     return {
       uid: getUid(),
-    }
+    };
   },
-  mounted () {
-    this._isMounted = true
+  mounted() {
+    this._isMounted = true;
   },
-  beforeDestroy () {
-    this._isMounted = false
-    this.abort()
+  beforeDestroy() {
+    this._isMounted = false;
+    this.abort();
   },
   methods: {
-    onChange (e) {
-      const files = e.target.files
-      this.uploadFiles(files)
-      this.reset()
+    onChange(e) {
+      const files = e.target.files;
+      this.uploadFiles(files);
+      this.reset();
     },
-    onClick () {
-      const el = this.$refs.fileInputRef
+    onClick() {
+      const el = this.$refs.fileInputRef;
       if (!el) {
-        return
+        return;
       }
-      el.click()
+      el.click();
     },
-    onKeyDown (e) {
+    onKeyDown(e) {
       if (e.key === 'Enter') {
-        this.onClick()
+        this.onClick();
       }
     },
-    onFileDrop (e) {
-      e.preventDefault()
+    onFileDrop(e) {
+      e.preventDefault();
       if (e.type === 'dragover') {
-        return
+        return;
       }
       if (this.directory) {
-        traverseFileTree(
-          e.dataTransfer.items,
-          this.uploadFiles,
-          _file => attrAccept(_file, this.accept)
-        )
+        traverseFileTree(e.dataTransfer.items, this.uploadFiles, _file =>
+          attrAccept(_file, this.accept),
+        );
       } else {
-        const files = Array.prototype.slice.call(e.dataTransfer.files).filter(
-          file => attrAccept(file, this.accept)
-        )
-        this.uploadFiles(files)
+        const files = Array.prototype.slice
+          .call(e.dataTransfer.files)
+          .filter(file => attrAccept(file, this.accept));
+        this.uploadFiles(files);
       }
     },
-    uploadFiles (files) {
-      const postFiles = Array.prototype.slice.call(files)
-      postFiles.forEach((file) => {
-        file.uid = getUid()
-        this.upload(file, postFiles)
-      })
+    uploadFiles(files) {
+      const postFiles = Array.prototype.slice.call(files);
+      postFiles.forEach(file => {
+        file.uid = getUid();
+        this.upload(file, postFiles);
+      });
     },
-    upload (file, fileList) {
+    upload(file, fileList) {
       if (!this.beforeUpload) {
         // always async in case use react state to keep fileList
-        return setTimeout(() => this.post(file), 0)
+        return setTimeout(() => this.post(file), 0);
       }
 
-      const before = this.beforeUpload(file, fileList)
+      const before = this.beforeUpload(file, fileList);
       if (before && before.then) {
-        before.then((processedFile) => {
-          const processedFileType = Object.prototype.toString.call(processedFile)
-          if (processedFileType === '[object File]' || processedFileType === '[object Blob]') {
-            return this.post(processedFile)
-          }
-          return this.post(file)
-        }).catch(e => {
-          console && console.log(e); // eslint-disable-line
-        })
+        before
+          .then(processedFile => {
+            const processedFileType = Object.prototype.toString.call(processedFile);
+            if (processedFileType === '[object File]' || processedFileType === '[object Blob]') {
+              return this.post(processedFile);
+            }
+            return this.post(file);
+          })
+          .catch(e => {
+            console && console.log(e); // eslint-disable-line
+          });
       } else if (before !== false) {
-        setTimeout(() => this.post(file), 0)
+        setTimeout(() => this.post(file), 0);
       }
     },
-    post (file) {
+    post(file) {
       if (!this._isMounted) {
-        return
+        return;
       }
-      let { data } = this.$props
+      let { data } = this.$props;
       if (typeof data === 'function') {
-        data = data(file)
+        data = data(file);
       }
       new Promise(resolve => {
-        const { action } = this
+        const { action } = this;
         if (typeof action === 'function') {
-          return resolve(action(file))
+          return resolve(action(file));
         }
-        resolve(action)
+        resolve(action);
       }).then(action => {
-        const { uid } = file
-        const request = this.customRequest || defaultRequest
+        const { uid } = file;
+        const request = this.customRequest || defaultRequest;
         this.reqs[uid] = request({
           action,
           filename: this.name,
@@ -141,64 +135,71 @@ const AjaxUploader = {
           headers: this.headers,
           withCredentials: this.withCredentials,
           onProgress: e => {
-            this.$emit('progress', e, file)
+            this.$emit('progress', e, file);
           },
           onSuccess: (ret, xhr) => {
-            delete this.reqs[uid]
-            this.$emit('success', ret, file, xhr)
+            delete this.reqs[uid];
+            this.$emit('success', ret, file, xhr);
           },
           onError: (err, ret) => {
-            delete this.reqs[uid]
-            this.$emit('error', err, ret, file)
+            delete this.reqs[uid];
+            this.$emit('error', err, ret, file);
           },
-        })
-        this.$emit('start', file)
-      })
+        });
+        this.$emit('start', file);
+      });
     },
-    reset () {
+    reset() {
       this.setState({
         uid: getUid(),
-      })
+      });
     },
-    abort (file) {
-      const { reqs } = this
+    abort(file) {
+      const { reqs } = this;
       if (file) {
-        let uid = file
+        let uid = file;
         if (file && file.uid) {
-          uid = file.uid
+          uid = file.uid;
         }
         if (reqs[uid]) {
-          reqs[uid].abort()
-          delete reqs[uid]
+          reqs[uid].abort();
+          delete reqs[uid];
         }
       } else {
-        Object.keys(reqs).forEach((uid) => {
+        Object.keys(reqs).forEach(uid => {
           if (reqs[uid]) {
-            reqs[uid].abort()
+            reqs[uid].abort();
           }
 
-          delete reqs[uid]
-        })
+          delete reqs[uid];
+        });
       }
     },
   },
 
-  render () {
-    const { $props, $attrs } = this
+  render() {
+    const { $props, $attrs } = this;
     const {
-      componentTag: Tag, prefixCls, disabled,
-      multiple, accept, directory, openFileDialogOnClick,
-    } = $props
+      componentTag: Tag,
+      prefixCls,
+      disabled,
+      multiple,
+      accept,
+      directory,
+      openFileDialogOnClick,
+    } = $props;
     const cls = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
-    })
-    const events = disabled ? {} : {
-      click: openFileDialogOnClick ? this.onClick : () => {},
-      keydown: this.onKeyDown,
-      drop: this.onFileDrop,
-      dragover: this.onFileDrop,
-    }
+    });
+    const events = disabled
+      ? {}
+      : {
+          click: openFileDialogOnClick ? this.onClick : () => {},
+          keydown: this.onKeyDown,
+          drop: this.onFileDrop,
+          dragover: this.onFileDrop,
+        };
     const tagProps = {
       on: {
         ...this.$listeners,
@@ -209,15 +210,13 @@ const AjaxUploader = {
         tabIndex: disabled ? null : '0',
       },
       class: cls,
-    }
+    };
     return (
-      <Tag
-        {...tagProps}
-      >
+      <Tag {...tagProps}>
         <input
           id={$attrs.id}
-          type='file'
-          ref='fileInputRef'
+          type="file"
+          ref="fileInputRef"
           key={this.uid}
           style={{ display: 'none' }}
           accept={accept}
@@ -228,8 +227,8 @@ const AjaxUploader = {
         />
         {this.$slots.default}
       </Tag>
-    )
+    );
   },
-}
+};
 
-export default AjaxUploader
+export default AjaxUploader;

@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
+import { AntdComponent } from '../component';
 
 export declare class Step extends AntdComponent {
   /**
@@ -22,7 +22,7 @@ export declare class Step extends AntdComponent {
    * @default 'wait'
    * @type string
    */
-  status: "wait" | "process" | "finish" | "error";
+  status: 'wait' | 'process' | 'finish' | 'error';
 
   /**
    * title of the step

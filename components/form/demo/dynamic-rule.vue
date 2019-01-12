@@ -61,11 +61,11 @@ Perform different check rules according to different situations.
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 8 },
-}
+};
 const formTailLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 8, offset: 4 },
-}
+};
 export default {
   data () {
     return {
@@ -73,26 +73,26 @@ export default {
       formItemLayout,
       formTailLayout,
       form: this.$form.createForm(this),
-    }
+    };
   },
   methods: {
     check  () {
       this.form.validateFields(
         (err) => {
           if (!err) {
-            console.info('success')
+            console.info('success');
           }
         },
-      )
+      );
     },
     handleChange  (e) {
-      this.checkNick = e.target.checked
+      this.checkNick = e.target.checked;
       this.$nextTick(() => {
-        this.form.validateFields(['nickname'], { force: true })
-      })
+        this.form.validateFields(['nickname'], { force: true });
+      });
     },
   },
-}
+};
 </script>
 
 

@@ -1,7 +1,4 @@
-import Row from './Row'
-import Col from './Col'
+import Row from './Row';
+import Col from './Col';
 
-export {
-  Row,
-  Col,
-}
+export { Row, Col };

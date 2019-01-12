@@ -1,7 +1,7 @@
-import PropTypes from '../../../_util/vue-types'
-import BasePopup from '../Base/BasePopup'
-import SearchInput from '../SearchInput'
-import { createRef } from '../util'
+import PropTypes from '../../../_util/vue-types';
+import BasePopup from '../Base/BasePopup';
+import SearchInput from '../SearchInput';
+import { createRef } from '../util';
 
 const SinglePopup = {
   name: 'SinglePopup',
@@ -14,19 +14,19 @@ const SinglePopup = {
     disabled: PropTypes.bool,
     searchPlaceholder: PropTypes.string,
   },
-  created () {
-    this.inputRef = createRef()
+  created() {
+    this.inputRef = createRef();
   },
   methods: {
-    onPlaceholderClick  () {
-      this.inputRef.current.focus()
+    onPlaceholderClick() {
+      this.inputRef.current.focus();
     },
 
-    _renderPlaceholder  () {
-      const { searchPlaceholder, searchValue, prefixCls } = this.$props
+    _renderPlaceholder() {
+      const { searchPlaceholder, searchValue, prefixCls } = this.$props;
 
       if (!searchPlaceholder) {
-        return null
+        return null;
       }
 
       return (
@@ -39,14 +39,14 @@ const SinglePopup = {
         >
           {searchPlaceholder}
         </span>
-      )
+      );
     },
 
-    _renderSearch () {
-      const { showSearch, dropdownPrefixCls } = this.$props
+    _renderSearch() {
+      const { showSearch, dropdownPrefixCls } = this.$props;
 
       if (!showSearch) {
-        return null
+        return null;
       }
 
       return (
@@ -55,17 +55,19 @@ const SinglePopup = {
             {...{
               props: { ...this.$props, renderPlaceholder: this._renderPlaceholder },
               on: this.$listeners,
-              directives: [{
-                name: 'ant-ref',
-                value: this.inputRef,
-              }],
+              directives: [
+                {
+                  name: 'ant-ref',
+                  value: this.inputRef,
+                },
+              ],
             }}
           />
         </span>
-      )
+      );
     },
   },
-  render () {
+  render() {
     return (
       <BasePopup
         {...{
@@ -73,8 +75,8 @@ const SinglePopup = {
           on: this.$listeners,
         }}
       />
-    )
+    );
   },
-}
+};
 
-export default SinglePopup
+export default SinglePopup;

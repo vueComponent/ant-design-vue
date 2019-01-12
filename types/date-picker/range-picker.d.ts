@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { DatepickerCommon } from "./common";
-import { Moment } from "moment";
+import { DatepickerCommon } from './common';
+import { Moment } from 'moment';
 
 export declare class RangePicker extends DatepickerCommon {
   /**
@@ -22,7 +22,7 @@ export declare class RangePicker extends DatepickerCommon {
    * to specify the time that cannot be selected
    * @type Function
    */
-  disabledTime: (dates: [Moment, Moment], partial: "start" | "end") => any;
+  disabledTime: (dates: [Moment, Moment], partial: 'start' | 'end') => any;
 
   /**
    * to set the date format, refer to moment.js

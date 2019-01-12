@@ -1,116 +1,116 @@
 <script>
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import '../assets/index.less'
-import '@/components/vc-time-picker/assets/index.less'
-import Picker from '../src/Picker'
-import zhCN from '../src/locale/zh_CN'
-import enUS from '../src/locale/en_US'
-import '../../vc-time-picker/assets/index.less'
-import TimePickerPanel from '../../vc-time-picker/Panel'
-import BaseMixin from '@/components/_util/BaseMixin'
+import '../assets/index.less';
+import '@/components/vc-time-picker/assets/index.less';
+import Picker from '../src/Picker';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
+import '../../vc-time-picker/assets/index.less';
+import TimePickerPanel from '../../vc-time-picker/Panel';
+import BaseMixin from '@/components/_util/BaseMixin';
 
-import RangeCalendar from '../src/RangeCalendar'
+import RangeCalendar from '../src/RangeCalendar';
 
-import moment from 'moment'
-import 'moment/locale/zh-cn'
-import 'moment/locale/en-gb'
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
 
-const cn = window.location.search.indexOf('cn') !== -1
+const cn = window.location.search.indexOf('cn') !== -1;
 
 if (cn) {
-  moment.locale('zh-cn')
+  moment.locale('zh-cn');
 } else {
-  moment.locale('en-gb')
+  moment.locale('en-gb');
 }
 
-const now = moment()
+const now = moment();
 if (cn) {
-  now.utcOffset(8)
+  now.utcOffset(8);
 } else {
-  now.utcOffset(0)
+  now.utcOffset(0);
 }
 
-const defaultCalendarValue = now.clone()
-defaultCalendarValue.add(-1, 'month')
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
 
-const timePickerElement = (h) => <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]}/>
+const timePickerElement = (h) => <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]}/>;
 
 function newArray (start, end) {
-  const result = []
+  const result = [];
   for (let i = start; i < end; i++) {
-    result.push(i)
+    result.push(i);
   }
-  return result
+  return result;
 }
 
 function disabledDate (current) {
-  const date = moment()
-  date.hour(0)
-  date.minute(0)
-  date.second(0)
-  return current.isBefore(date) // can not select days before today
+  const date = moment();
+  date.hour(0);
+  date.minute(0);
+  date.second(0);
+  return current.isBefore(date); // can not select days before today
 }
 
 function disabledTime (time, type) {
-  console.log('disabledTime', time, type)
+  console.log('disabledTime', time, type);
   if (type === 'start') {
     return {
       disabledHours () {
-        const hours = newArray(0, 60)
-        hours.splice(20, 4)
-        return hours
+        const hours = newArray(0, 60);
+        hours.splice(20, 4);
+        return hours;
       },
       disabledMinutes (h) {
         if (h === 20) {
-          return newArray(0, 31)
+          return newArray(0, 31);
         } else if (h === 23) {
-          return newArray(30, 60)
+          return newArray(30, 60);
         }
-        return []
+        return [];
       },
       disabledSeconds () {
-        return [55, 56]
+        return [55, 56];
       },
-    }
+    };
   }
   return {
     disabledHours () {
-      const hours = newArray(0, 60)
-      hours.splice(2, 6)
-      return hours
+      const hours = newArray(0, 60);
+      hours.splice(2, 6);
+      return hours;
     },
     disabledMinutes (h) {
       if (h === 20) {
-        return newArray(0, 31)
+        return newArray(0, 31);
       } else if (h === 23) {
-        return newArray(30, 60)
+        return newArray(30, 60);
       }
-      return []
+      return [];
     },
     disabledSeconds () {
-      return [55, 56]
+      return [55, 56];
     },
-  }
+  };
 }
 
-const formatStr = 'YYYY-MM-DD HH:mm:ss'
+const formatStr = 'YYYY-MM-DD HH:mm:ss';
 function format (v) {
-  return v ? v.format(formatStr) : ''
+  return v ? v.format(formatStr) : '';
 }
 
 function isValidRange (v) {
-  return v && v[0] && v[1]
+  return v && v[0] && v[1];
 }
 
 function onStandaloneChange (value) {
-  console.log('onChange')
-  console.log(value[0] && format(value[0]), value[1] && format(value[1]))
+  console.log('onChange');
+  console.log(value[0] && format(value[0]), value[1] && format(value[1]));
 }
 
 function onStandaloneSelect (value) {
-  console.log('onSelect')
-  console.log(format(value[0]), format(value[1]))
+  console.log('onSelect');
+  console.log(format(value[0]), format(value[1]));
 }
 
 const Demo = {
@@ -119,20 +119,20 @@ const Demo = {
     return {
       value: [],
       hoverValue: [],
-    }
+    };
   },
   methods: {
     onChange (value) {
-      console.log('onChange', value)
-      this.setState({ value })
+      console.log('onChange', value);
+      this.setState({ value });
     },
 
     onHoverChange (hoverValue) {
-      this.setState({ hoverValue })
+      this.setState({ hoverValue });
     },
   },
   render (h) {
-    const state = this.$data
+    const state = this.$data;
     const calendar = (
       <RangeCalendar
         hoverValue={state.hoverValue}
@@ -145,7 +145,7 @@ const Demo = {
         timePicker={timePickerElement(h)}
         renderFooter={() => 'extra footer'}
       />
-    )
+    );
     return (
       <Picker
         value={state.value}
@@ -164,12 +164,12 @@ const Demo = {
                 className='ant-calendar-picker-input ant-input'
                 value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
               />
-            </span>)
+            </span>);
           }
         }
-      </Picker>)
+      </Picker>);
   },
-}
+};
 
 export default {
   render (h) {
@@ -198,8 +198,8 @@ export default {
           <Demo />
         </div>
       </div>
-    )
+    );
   },
-}
+};
 
 </script>

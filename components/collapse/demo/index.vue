@@ -1,12 +1,12 @@
 <script>
-import Accordion from './accordion'
-import Basic from './basic'
-import Borderless from './borderless'
-import Custom from './custom'
-import Mix from './mix'
-import Noarrow from './noarrow'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Accordion from './accordion';
+import Basic from './basic';
+import Borderless from './borderless';
+import Custom from './custom';
+import Mix from './mix';
+import Noarrow from './noarrow';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Collapse折叠面板
@@ -27,7 +27,7 @@ A content area which can be collapsed and expanded.
 - 'Accordion' is a special kind of 'Collapse', which allows only one panel to be expanded at a time.
 ## Examples
 `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Display',
@@ -58,7 +58,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

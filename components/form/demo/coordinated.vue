@@ -56,25 +56,25 @@ export default {
     return {
       formLayout: 'horizontal',
       form: this.$form.createForm(this),
-    }
+    };
   },
   methods: {
     handleSubmit (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', values);
         }
-      })
+      });
     },
     handleSelectChange (value) {
-      console.log(value)
+      console.log(value);
       this.form.setFieldsValue({
         note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 

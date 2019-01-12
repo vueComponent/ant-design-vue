@@ -33,12 +33,12 @@ function validatePrimeNumber (number) {
     return {
       validateStatus: 'success',
       errorMsg: null,
-    }
+    };
   }
   return {
     validateStatus: 'error',
     errorMsg: 'The prime between 8 and 12 is 11!',
-  }
+  };
 }
 export default {
   data () {
@@ -49,17 +49,17 @@ export default {
         value: 11,
       },
       tips: 'A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.',
-    }
+    };
   },
   methods: {
     handleNumberChange (value) {
       this.number = {
         ...validatePrimeNumber(value),
         value,
-      }
+      };
     },
   },
-}
+};
 </script>
 
 

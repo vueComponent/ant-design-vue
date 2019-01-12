@@ -1,15 +1,15 @@
 <script>
-import Banner from './banner'
-import Basic from './basic'
-import Closable from './closable'
-import CloseText from './close-text'
-import Description from './description'
-import Icon from './icon'
-import Style from './style'
-import SmoothClosed from './smooth-closed'
+import Banner from './banner';
+import Basic from './basic';
+import Closable from './closable';
+import CloseText from './close-text';
+import Description from './description';
+import Icon from './icon';
+import Style from './style';
+import SmoothClosed from './smooth-closed';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Alert 警告提示
           警告提示，展现需要关注的信息。
@@ -24,7 +24,7 @@ const md = {
 - When you need a persistent static container which is closable by user actions.
 ## Examples
 `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '警告提示',
@@ -48,9 +48,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-alert-demo .ant-alert {

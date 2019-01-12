@@ -1,31 +1,31 @@
 <script>
 /* eslint react/no-multi-comp:0, no-console:0 */
-import '../assets/index.less'
-import PropTypes from '@/components/_util/vue-types'
-import DatePicker from '../src/Picker'
-import zhCN from '../src/locale/zh_CN'
-import enUS from '../src/locale/en_US'
-import '../../vc-time-picker/assets/index.less'
-import BaseMixin from '@/components/_util/BaseMixin'
+import '../assets/index.less';
+import PropTypes from '@/components/_util/vue-types';
+import DatePicker from '../src/Picker';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
+import '../../vc-time-picker/assets/index.less';
+import BaseMixin from '@/components/_util/BaseMixin';
 
-import MonthCalendar from '../src/MonthCalendar'
+import MonthCalendar from '../src/MonthCalendar';
 
-import moment from 'moment'
-import 'moment/locale/zh-cn'
-import 'moment/locale/en-gb'
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM'
-const cn = window.location.search.indexOf('cn') !== -1
+const format = 'YYYY-MM';
+const cn = window.location.search.indexOf('cn') !== -1;
 
-const now = moment()
+const now = moment();
 if (cn) {
-  now.locale('zh-cn').utcOffset(8)
+  now.locale('zh-cn').utcOffset(8);
 } else {
-  now.locale('en-gb').utcOffset(0)
+  now.locale('en-gb').utcOffset(0);
 }
 
-const defaultCalendarValue = now.clone()
-defaultCalendarValue.add(-1, 'month')
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
 
 const Demo = {
   mixins: [BaseMixin],
@@ -38,35 +38,35 @@ const Demo = {
       showTime: true,
       disabled: false,
       value: this.defaultValue,
-    }
+    };
   },
   methods: {
     onChange (value) {
-      console.log(`DatePicker change: ${value && value.format(format)}`)
+      console.log(`DatePicker change: ${value && value.format(format)}`);
       this.setState({
         value,
-      })
+      });
     },
 
     onShowTimeChange (e) {
       this.setState({
         showTime: e.target.checked,
-      })
+      });
     },
 
     toggleDisabled () {
       this.setState({
         disabled: !this.disabled,
-      })
+      });
     },
   },
 
   render () {
-    const state = this.$data
+    const state = this.$data;
     const calendar = (<MonthCalendar
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
-    />)
+    />);
     return (<div style={{ width: '240px', margin: '20px' }}>
       <div style={{ marginBottom: '10px' }}>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,32 +102,32 @@ const Demo = {
                   value={value && value.format(format)}
                   placeholder='请选择日期'
                 />
-              )
+              );
             },
           }}
         >
         </DatePicker>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 
 function onStandaloneSelect (value) {
-  console.log('month-calendar select', (value && value.format(format)))
+  console.log('month-calendar select', (value && value.format(format)));
 }
 
 function onStandaloneChange (value) {
-  console.log('month-calendar change', (value && value.format(format)))
+  console.log('month-calendar change', (value && value.format(format)));
 }
 
 function disabledDate (value) {
   return value.year() > now.year() ||
-    value.year() === now.year() && value.month() > now.month()
+    value.year() === now.year() && value.month() > now.month();
 }
 
 function onMonthCellContentRender (value) {
   // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
-  return `${value.month() + 1}月`
+  return `${value.month() + 1}月`;
 }
 export default {
   render () {
@@ -155,7 +155,7 @@ export default {
           <Demo defaultValue={now} />
         </div>
       </div>
-    )
+    );
   },
-}
+};
 </script>

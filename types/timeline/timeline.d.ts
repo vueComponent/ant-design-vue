@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { TimelineItem } from "./timeline-item";
+import { AntdComponent } from '../component';
+import { TimelineItem } from './timeline-item';
 
 export declare class Timeline extends AntdComponent {
   static Item: TimelineItem;
@@ -34,5 +34,5 @@ export declare class Timeline extends AntdComponent {
    * @default 'left'
    * @type string
    */
-  mode: "left" | "alternate" | "right";
+  mode: 'left' | 'alternate' | 'right';
 }

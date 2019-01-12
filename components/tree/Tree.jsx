@@ -1,11 +1,11 @@
-import warning from 'warning'
-import { Tree as VcTree, TreeNode } from '../vc-tree'
-import animation from '../_util/openAnimation'
-import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getOptionProps, filterEmpty } from '../_util/props-util'
-import Icon from '../icon'
+import warning from 'warning';
+import { Tree as VcTree, TreeNode } from '../vc-tree';
+import animation from '../_util/openAnimation';
+import PropTypes from '../_util/vue-types';
+import { initDefaultProps, getOptionProps, filterEmpty } from '../_util/props-util';
+import Icon from '../icon';
 
-function TreeProps () {
+function TreeProps() {
   return {
     showLine: PropTypes.bool,
     /** 是否支持多选 */
@@ -27,15 +27,13 @@ function TreeProps () {
     /** （受控）展开指定的树节点 */
     expandedKeys: PropTypes.array,
     /** （受控）选中复选框的树节点 */
-    checkedKeys: PropTypes.oneOfType(
-      [
-        PropTypes.array,
-        PropTypes.shape({
-          checked: PropTypes.array,
-          halfChecked: PropTypes.array,
-        }).loose,
-      ]
-    ),
+    checkedKeys: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.shape({
+        checked: PropTypes.array,
+        halfChecked: PropTypes.array,
+      }).loose,
+    ]),
     /** 默认选中复选框的树节点 */
     defaultCheckedKeys: PropTypes.array,
     /** （受控）设置选中的树节点 */
@@ -80,10 +78,10 @@ function TreeProps () {
     openAnimation: PropTypes.any,
     treeNodes: PropTypes.array,
     treeData: PropTypes.array,
-  }
+  };
 }
 
-export { TreeProps }
+export { TreeProps };
 
 export default {
   name: 'ATree',
@@ -100,80 +98,80 @@ export default {
       props: { appear: null },
     },
   }),
-  created () {
+  created() {
     warning(
       !('treeNodes' in getOptionProps(this)),
-      '`treeNodes` is deprecated. please use treeData instead.'
-    )
+      '`treeNodes` is deprecated. please use treeData instead.',
+    );
   },
   TreeNode,
   methods: {
-    renderSwitcherIcon ({ isLeaf, expanded, loading }) {
-      const {
-        prefixCls,
-        showLine,
-      } = this.$props
+    renderSwitcherIcon({ isLeaf, expanded, loading }) {
+      const { prefixCls, showLine } = this.$props;
       if (loading) {
-        return (
-          <Icon
-            type='loading'
-            class={`${prefixCls}-switcher-loading-icon`}
-          />
-        )
+        return <Icon type="loading" class={`${prefixCls}-switcher-loading-icon`} />;
       }
       if (showLine) {
         if (isLeaf) {
-          return (
-            <Icon
-              type='file'
-              class={`${prefixCls}-switcher-line-icon`}
-            />
-          )
+          return <Icon type="file" class={`${prefixCls}-switcher-line-icon`} />;
         }
         return (
           <Icon
             type={expanded ? 'minus-square' : 'plus-square'}
             class={`${prefixCls}-switcher-line-icon`}
-            theme='outlined'
+            theme="outlined"
           />
-        )
+        );
       } else {
         if (isLeaf) {
-          return null
+          return null;
         }
-        return (
-          <Icon type='caret-down' class={`${prefixCls}-switcher-icon`} theme='filled' />
-        )
+        return <Icon type="caret-down" class={`${prefixCls}-switcher-icon`} theme="filled" />;
       }
     },
-    updataTreeData (treeData) {
-      const { $slots, $scopedSlots } = this
-      return treeData.map((item) => {
-        const { children, on = {}, slots = {}, scopedSlots = {}, key, class: cls, style, ...restProps } = item
+    updataTreeData(treeData) {
+      const { $slots, $scopedSlots } = this;
+      return treeData.map(item => {
+        const {
+          children,
+          on = {},
+          slots = {},
+          scopedSlots = {},
+          key,
+          class: cls,
+          style,
+          ...restProps
+        } = item;
         const treeNodeProps = {
           ...restProps,
-          icon: $slots[slots.icon] || ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]) || restProps.icon,
-          title: $slots[slots.title] || ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item)) || restProps.title,
+          icon:
+            $slots[slots.icon] ||
+            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]) ||
+            restProps.icon,
+          title:
+            $slots[slots.title] ||
+            ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item)) ||
+            restProps.title,
           dataRef: item,
           on,
           key,
           class: cls,
           style,
-        }
+        };
         if (children) {
-          return { ...treeNodeProps, children: this.updataTreeData(children) }
+          return { ...treeNodeProps, children: this.updataTreeData(children) };
         }
-        return treeNodeProps
-      })
+        return treeNodeProps;
+      });
     },
   },
-  render () {
-    const props = getOptionProps(this)
-    const { prefixCls, showIcon, treeNodes } = props
-    const checkable = props.checkable
-    let treeData = props.treeData || treeNodes
+  render() {
+    const props = getOptionProps(this);
+    const { prefixCls, showIcon, treeNodes } = props;
+    const checkable = props.checkable;
+    let treeData = props.treeData || treeNodes;
     if (treeData) {
-      treeData = this.updataTreeData(treeData)
+      treeData = this.updataTreeData(treeData);
     }
     const vcTreeProps = {
       props: {
@@ -186,12 +184,10 @@ export default {
       on: this.$listeners,
       ref: 'tree',
       class: !showIcon && `${prefixCls}-icon-hide`,
-    }
+    };
     if (treeData) {
-      vcTreeProps.props.treeData = treeData
+      vcTreeProps.props.treeData = treeData;
     }
-    return (
-      <VcTree {...vcTreeProps} />
-    )
+    return <VcTree {...vcTreeProps} />;
   },
-}
+};

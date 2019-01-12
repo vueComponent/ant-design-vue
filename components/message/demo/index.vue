@@ -1,11 +1,11 @@
 <script>
-import Duration from './duration'
-import Info from './info'
-import Loading from './loading'
-import Other from './other'
-import Thenable from './thenable'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Duration from './duration';
+import Info from './info';
+import Loading from './loading';
+import Other from './other';
+import Thenable from './thenable';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# 全局提示
 全局展示操作反馈信息。
@@ -20,7 +20,7 @@ Display global messages as feedback in response to user operations.
 - To provide feedback such as success, warning, error etc.
 - A message is displayed at top and center and will be dismissed automatically, as a non-interrupting light-weighted prompt.
 ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '全局提示',
@@ -41,7 +41,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

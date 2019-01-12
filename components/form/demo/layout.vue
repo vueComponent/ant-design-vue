@@ -51,29 +51,29 @@ export default {
   data () {
     return {
       formLayout: 'horizontal',
-    }
+    };
   },
   methods: {
     handleFormLayoutChange  (e) {
-      this.formLayout = e.target.value
+      this.formLayout = e.target.value;
     },
   },
   computed: {
     formItemLayout () {
-      const { formLayout } = this
+      const { formLayout } = this;
       return formLayout === 'horizontal' ? {
         labelCol: { span: 4 },
         wrapperCol: { span: 14 },
-      } : {}
+      } : {};
     },
     buttonItemLayout () {
-      const { formLayout } = this
+      const { formLayout } = this;
       return formLayout === 'horizontal' ? {
         wrapperCol: { span: 14, offset: 4 },
-      } : {}
+      } : {};
     },
   },
-}
+};
 </script>
 
 

@@ -2,9 +2,9 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { VNode } from "vue";
-import { ScopedSlot } from "vue/types/vnode";
+import { AntdComponent } from '../component';
+import { VNode } from 'vue';
+import { ScopedSlot } from 'vue/types/vnode';
 
 export interface ColumnFilterItem {
   text?: string;
@@ -12,7 +12,7 @@ export interface ColumnFilterItem {
   children?: any;
 }
 
-export declare type SortOrder = "ascend" | "descend";
+export declare type SortOrder = 'ascend' | 'descend';
 
 export declare class Column extends AntdComponent {
   /**
@@ -20,7 +20,7 @@ export declare class Column extends AntdComponent {
    * @default 'left'
    * @type string
    */
-  align: "left" | "right" | "center";
+  align: 'left' | 'right' | 'center';
 
   /**
    * Span of this column's title
@@ -90,7 +90,7 @@ export declare class Column extends AntdComponent {
    * @default false
    * @type boolean | string
    */
-  fixed: boolean | "left" | "right";
+  fixed: boolean | 'left' | 'right';
 
   /**
    * Unique key of this column, you can ignore this prop if you've set a unique dataIndex
@@ -149,7 +149,7 @@ export declare class Column extends AntdComponent {
    * @type
    */
   customHeaderCell: (
-    column: any
+    column: any,
   ) => {
     props: object;
     attrs: object;

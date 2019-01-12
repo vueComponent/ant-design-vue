@@ -1,11 +1,11 @@
 export const successRequest = ({ onSuccess, file }) => {
   setTimeout(() => {
-    onSuccess(null, file)
-  })
-}
+    onSuccess(null, file);
+  });
+};
 
 export const errorRequest = ({ onError }) => {
   setTimeout(() => {
-    onError()
-  })
-}
+    onError();
+  });
+};

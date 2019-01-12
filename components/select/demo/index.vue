@@ -1,21 +1,21 @@
 <script>
-import Basic from './basic'
-import Size from './size'
-import Tags from './tags'
-import AutomaticTokenization from './automatic-tokenization'
-import LabelInValue from './label-in-value'
-import Multiple from './multiple'
-import Coordinate from './coordinate'
-import Optgroup from './optgroup'
-import SearchBox from './search-box'
-import Search from './search'
-import SelectUsers from './select-users'
-import Suffix from './suffix'
-import HideSelected from './hide-selected'
-import CustomDropdownMenu from './custom-dropdown-menu'
+import Basic from './basic';
+import Size from './size';
+import Tags from './tags';
+import AutomaticTokenization from './automatic-tokenization';
+import LabelInValue from './label-in-value';
+import Multiple from './multiple';
+import Coordinate from './coordinate';
+import Optgroup from './optgroup';
+import SearchBox from './search-box';
+import Search from './search';
+import SelectUsers from './select-users';
+import Suffix from './suffix';
+import HideSelected from './hide-selected';
+import CustomDropdownMenu from './custom-dropdown-menu';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Select 选择器
           下拉选择器。
@@ -30,7 +30,7 @@ const md = {
         - A dropdown menu for displaying choices - an elegant alternative to the native \`<select>\` element.
         - Utilizing [Radio](/ant-design/components/radio/) is recommended when there are fewer total options (less than 5).
         ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '选择器',
@@ -59,9 +59,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-select-demo .ant-select {

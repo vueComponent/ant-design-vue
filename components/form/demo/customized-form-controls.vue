@@ -36,10 +36,10 @@ Customized or third-party form controls can be used in Form, too. Controls must 
 
 <script>
 const hasProp = (instance, prop) => {
-  const $options = instance.$options || {}
-  const propsData = $options.propsData || {}
-  return prop in propsData
-}
+  const $options = instance.$options || {};
+  const propsData = $options.propsData || {};
+  return prop in propsData;
+};
 const PriceInput = {
   props: ['value'],
   template: `
@@ -61,67 +61,67 @@ const PriceInput = {
     </span>
   `,
   data () {
-    const value = this.value || {}
+    const value = this.value || {};
     return {
       number: value.number || 0,
       currency: value.currency || 'rmb',
-    }
+    };
   },
   watch: {
     value (val = {}) {
-      this.number = val.number || 0
-      this.currency = val.currency || 'rmb'
+      this.number = val.number || 0;
+      this.currency = val.currency || 'rmb';
     },
   },
   methods: {
     handleNumberChange  (e) {
-      const number = parseInt(e.target.value || 0, 10)
+      const number = parseInt(e.target.value || 0, 10);
       if (isNaN(number)) {
-        return
+        return;
       }
       if (!hasProp(this, 'value')) {
-        this.number = number
+        this.number = number;
       }
-      this.triggerChange({ number })
+      this.triggerChange({ number });
     },
     handleCurrencyChange (currency) {
       if (!hasProp(this, 'value')) {
-        this.currency = currency
+        this.currency = currency;
       }
-      this.triggerChange({ currency })
+      this.triggerChange({ currency });
     },
     triggerChange  (changedValue) {
       // Should provide an event to pass value to Form.
-      this.$emit('change', Object.assign({}, this.$data, changedValue))
+      this.$emit('change', Object.assign({}, this.$data, changedValue));
     },
   },
-}
+};
 
 export default {
   beforeCreate () {
-    this.form = this.$form.createForm(this)
+    this.form = this.$form.createForm(this);
   },
   methods: {
     handleSubmit  (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', values);
         }
-      })
+      });
     },
     checkPrice  (rule, value, callback) {
       if (value.number > 0) {
-        callback()
-        return
+        callback();
+        return;
       }
-      callback('Price must greater than zero!')
+      callback('Price must greater than zero!');
     },
   },
   components: {
     PriceInput,
   },
-}
+};
 
 </script>
 

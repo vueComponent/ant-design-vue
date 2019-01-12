@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import { AnchorLink } from "./anchor-link";
+import { AnchorLink } from './anchor-link';
 
 export declare class Anchor extends AntdComponent {
   static Link: AnchorLink;

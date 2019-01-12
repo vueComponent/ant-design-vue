@@ -1,18 +1,18 @@
 <script>
-import Basic from './basic'
-import DateRender from './date-render'
-import DisabledDate from './disabled-date'
-import Disabled from './disabled'
-import ExtraFooter from './extra-footer'
-import Format from './format'
-import Mode from './mode'
-import PresettedRanges from './presetted-ranges'
-import Size from './size'
-import StartEnd from './start-end'
-import Time from './time'
-import Suffix from './suffix'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import DateRender from './date-render';
+import DisabledDate from './disabled-date';
+import Disabled from './disabled';
+import ExtraFooter from './extra-footer';
+import Format from './format';
+import Mode from './mode';
+import PresettedRanges from './presetted-ranges';
+import Size from './size';
+import StartEnd from './start-end';
+import Time from './time';
+import Suffix from './suffix';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# DatePicker 日期选择框
           输入或选择日期的控件。
@@ -25,7 +25,7 @@ const md = {
 By clicking the input box, you can select a date from a popup calendar.
 ## Examples
           `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Entry',
@@ -53,9 +53,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-date-picker-demo .ant-calendar-picker {

@@ -1,5 +1,5 @@
 .effect() {
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-fill-mode: both;
   transform-origin: 0 0;
 }
@@ -13,14 +13,15 @@
     position: absolute;
     border: 1px solid #d9d9d9;
     border-radius: 6px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.17);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.17);
     white-space: nowrap;
 
     &-hidden {
       display: none;
     }
 
-    &.slide-up-enter, &.slide-up-appear {
+    &.slide-up-enter,
+    &.slide-up-appear {
       .effect();
       opacity: 0;
       animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -120,7 +121,7 @@
   0% {
     opacity: 0;
     transform-origin: 0% 0%;
-    transform: scaleY(.8);
+    transform: scaleY(0.8);
   }
   100% {
     opacity: 1;

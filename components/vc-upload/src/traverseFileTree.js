@@ -1,25 +1,25 @@
 const traverseFileTree = (files, callback, isAccepted) => {
   const _traverseFileTree = (item, path) => {
-    path = path || ''
+    path = path || '';
     if (item.isFile) {
-      item.file((file) => {
+      item.file(file => {
         if (isAccepted(file)) {
-          callback([file])
+          callback([file]);
         }
-      })
+      });
     } else if (item.isDirectory) {
-      const dirReader = item.createReader()
+      const dirReader = item.createReader();
 
-      dirReader.readEntries((entries) => {
+      dirReader.readEntries(entries => {
         for (const entrieItem of entries) {
-          _traverseFileTree(entrieItem, `${path}${item.name}/`)
+          _traverseFileTree(entrieItem, `${path}${item.name}/`);
         }
-      })
+      });
     }
-  }
+  };
   for (const file of files) {
-    _traverseFileTree(file.webkitGetAsEntry())
+    _traverseFileTree(file.webkitGetAsEntry());
   }
-}
+};
 
-export default traverseFileTree
+export default traverseFileTree;

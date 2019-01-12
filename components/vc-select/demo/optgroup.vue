@@ -1,11 +1,11 @@
 <script>
-import Select, { Option, OptGroup } from '../index'
-import '../assets/index.less'
+import Select, { Option, OptGroup } from '../index';
+import '../assets/index.less';
 
 export default {
   methods: {
     onChange (value, option) {
-      console.log(`selected ${value}`, option)
+      console.log(`selected ${value}`, option);
     },
   },
 
@@ -38,7 +38,7 @@ export default {
           </OptGroup>
         </Select>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

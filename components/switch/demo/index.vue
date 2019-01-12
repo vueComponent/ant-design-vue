@@ -1,11 +1,11 @@
 <script>
-import Basic from './basic'
-import Disabled from './disabled'
-import Text from './text'
-import Size from './size'
-import Loading from './loading'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Disabled from './disabled';
+import Text from './text';
+import Size from './size';
+import Loading from './loading';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Switch 开关
@@ -27,7 +27,7 @@ const md = {
     - If you need to represent the switching between two states or on-off state.
     - The difference between \`Switch\` and \`Checkbox\` is that \`Switch\` will trigger a state change directly when you toggle it, while \`Checkbox\` is generally used for state marking, which should work in conjunction with submit operation.
     ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '开关',
@@ -54,7 +54,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

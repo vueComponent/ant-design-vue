@@ -1,8 +1,7 @@
-
-import PropTypes from '../_util/vue-types'
-import * as moment from 'moment'
-import interopDefault from '../_util/interopDefault'
-import { changeConfirmLocale } from '../modal/locale'
+import PropTypes from '../_util/vue-types';
+import * as moment from 'moment';
+import interopDefault from '../_util/interopDefault';
+import { changeConfirmLocale } from '../modal/locale';
 
 // export interface Locale {
 //   locale: string;
@@ -18,11 +17,11 @@ import { changeConfirmLocale } from '../modal/locale'
 //   Upload?: Object;
 // }
 
-function setMomentLocale (locale) {
+function setMomentLocale(locale) {
   if (locale && locale.locale) {
-    interopDefault(moment).locale(locale.locale)
+    interopDefault(moment).locale(locale.locale);
   } else {
-    interopDefault(moment).locale('en')
+    interopDefault(moment).locale('en');
   }
 }
 
@@ -31,51 +30,50 @@ const LocaleProvider = {
   props: {
     locale: PropTypes.object.def({}),
   },
-  data () {
+  data() {
     return {
       antLocale: {
         ...this.locale,
         exist: true,
       },
-    }
+    };
   },
-  provide () {
+  provide() {
     return {
       localeData: this.$data,
-    }
+    };
   },
   watch: {
-    locale (val) {
+    locale(val) {
       this.antLocale = {
         ...this.locale,
         exist: true,
-      }
+      };
       this.$nextTick(() => {
-        setMomentLocale(val)
-      })
+        setMomentLocale(val);
+      });
     },
   },
-  created () {
-    const { locale } = this
-    setMomentLocale(locale)
-    changeConfirmLocale(locale && locale.Modal)
+  created() {
+    const { locale } = this;
+    setMomentLocale(locale);
+    changeConfirmLocale(locale && locale.Modal);
   },
-  updated () {
-    const { locale } = this
-    changeConfirmLocale(locale && locale.Modal)
+  updated() {
+    const { locale } = this;
+    changeConfirmLocale(locale && locale.Modal);
   },
-  beforeDestroy () {
-    changeConfirmLocale()
+  beforeDestroy() {
+    changeConfirmLocale();
   },
-  render () {
-    return this.$slots.default ? this.$slots.default[0] : null
+  render() {
+    return this.$slots.default ? this.$slots.default[0] : null;
   },
-}
+};
 
 /* istanbul ignore next */
-LocaleProvider.install = function (Vue) {
-  Vue.component(LocaleProvider.name, LocaleProvider)
-}
+LocaleProvider.install = function(Vue) {
+  Vue.component(LocaleProvider.name, LocaleProvider);
+};
 
-export default LocaleProvider
-
+export default LocaleProvider;

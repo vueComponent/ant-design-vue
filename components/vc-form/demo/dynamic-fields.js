@@ -1,110 +1,120 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import { createForm } from '../index'
-import BaseMixin from '../../_util/BaseMixin'
+import { createForm } from '../index';
+import BaseMixin from '../../_util/BaseMixin';
 
 const Form1 = {
   mixins: [BaseMixin],
   props: {
     form: Object,
   },
-  data () {
+  data() {
     return {
       useInput: true,
-    }
+    };
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
+    onSubmit(e) {
+      e.preventDefault();
       this.form.validateFields((error, values) => {
         if (!error) {
-          console.log('ok', values)
+          console.log('ok', values);
         } else {
-          console.log('error', error, values)
+          console.log('error', error, values);
         }
-      })
+      });
     },
-    changeUseInput (e) {
+    changeUseInput(e) {
       this.setState({
         useInput: e.target.checked,
-      })
+      });
     },
   },
 
-  render () {
-    const { getFieldError, getFieldDecorator } = this.form
+  render() {
+    const { getFieldError, getFieldDecorator } = this.form;
 
     return (
       <form onSubmit={this.onSubmit}>
         <h2>situation 1</h2>
-        {this.useInput ? getFieldDecorator('name', {
-          initialValue: '',
-          rules: [{
-            required: true,
-            message: 'What\'s your name 1?',
-          }],
-        })(<input/>) : null}
+        {this.useInput
+          ? getFieldDecorator('name', {
+              initialValue: '',
+              rules: [
+                {
+                  required: true,
+                  message: "What's your name 1?",
+                },
+              ],
+            })(<input />)
+          : null}
         <span>text content</span>
-        {this.useInput ? null : getFieldDecorator('name', {
-          initialValue: '',
-          rules: [{
-            required: true,
-            message: 'What\'s your name 2?',
-          }],
-        })(<input />)}
+        {this.useInput
+          ? null
+          : getFieldDecorator('name', {
+              initialValue: '',
+              rules: [
+                {
+                  required: true,
+                  message: "What's your name 2?",
+                },
+              ],
+            })(<input />)}
         <div>
           <label>
-            <input type='checkbox' checked={this.useInput} onInput={this.changeUseInput} />
+            <input type="checkbox" checked={this.useInput} onInput={this.changeUseInput} />
             change input
           </label>
           {(getFieldError('name') || []).join(', ')}
         </div>
         <button>Submit</button>
       </form>
-    )
+    );
   },
-}
+};
 
 const Form2 = {
   mixins: [BaseMixin],
   props: {
     form: Object,
   },
-  data () {
+  data() {
     return {
       useInput: true,
-    }
+    };
   },
-  beforeMount () {
-    const { getFieldDecorator } = this.form
+  beforeMount() {
+    const { getFieldDecorator } = this.form;
     this.nameDecorator = getFieldDecorator('name', {
       initialValue: '',
-      rules: [{
-        required: true,
-        message: 'What\'s your name?',
-      }],
-    })
+      rules: [
+        {
+          required: true,
+          message: "What's your name?",
+        },
+      ],
+    });
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
+    onSubmit(e) {
+      e.preventDefault();
       this.form.validateFields((error, values) => {
         if (!error) {
-          console.log('ok', values)
+          console.log('ok', values);
         } else {
-          console.log('error', error, values)
+          console.log('error', error, values);
         }
-      })
+      });
     },
-    changeUseInput (e) {
+    changeUseInput(e) {
       this.setState({
         useInput: e.target.checked,
-      })
+      });
     },
   },
 
-  render () {
-    const { getFieldError } = this.form
+  render() {
+    const { getFieldError } = this.form;
     return (
       <form onSubmit={this.onSubmit}>
         <h2>situation 2</h2>
@@ -113,89 +123,95 @@ const Form2 = {
         {this.useInput ? null : this.nameDecorator(<input />)}
         <div>
           <label>
-            <input type='checkbox' checked={this.useInput} onInput={this.changeUseInput} />
+            <input type="checkbox" checked={this.useInput} onInput={this.changeUseInput} />
             change input
           </label>
           {(getFieldError('name') || []).join(', ')}
         </div>
         <button>Submit</button>
       </form>
-    )
+    );
   },
-}
+};
 
 const Form3 = {
   mixins: [BaseMixin],
   props: {
     form: Object,
   },
-  data () {
+  data() {
     return {
       useInput: false,
-    }
+    };
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
+    onSubmit(e) {
+      e.preventDefault();
       this.form.validateFields((error, values) => {
         if (!error) {
-          console.log('ok', values)
+          console.log('ok', values);
         } else {
-          console.log('error', error, values)
+          console.log('error', error, values);
         }
-      })
+      });
     },
-    changeUseInput (e) {
+    changeUseInput(e) {
       this.setState({
         useInput: e.target.checked,
-      })
+      });
     },
   },
 
-  render () {
-    const { getFieldError, getFieldDecorator } = this.form
+  render() {
+    const { getFieldError, getFieldDecorator } = this.form;
     return (
       <form onSubmit={this.onSubmit}>
         <h2>situation 3</h2>
         {getFieldDecorator('name', {
           initialValue: '',
-          rules: [{
-            required: true,
-            message: 'What\'s your name 1?',
-          }],
+          rules: [
+            {
+              required: true,
+              message: "What's your name 1?",
+            },
+          ],
         })(<input />)}
-        {this.useInput ? null : getFieldDecorator('name2', {
-          initialValue: '',
-          rules: [{
-            required: true,
-            message: 'What\'s your name 2?',
-          }],
-        })(<input />)}
+        {this.useInput
+          ? null
+          : getFieldDecorator('name2', {
+              initialValue: '',
+              rules: [
+                {
+                  required: true,
+                  message: "What's your name 2?",
+                },
+              ],
+            })(<input />)}
         <div>
           <label>
-            <input type='checkbox' checked={this.useInput} onInput={this.changeUseInput} />
+            <input type="checkbox" checked={this.useInput} onInput={this.changeUseInput} />
             Hide second input
           </label>
           {(getFieldError('name') || []).join(', ')}
         </div>
         <button>Submit</button>
       </form>
-    )
+    );
   },
-}
+};
 
-const WrappedForm1 = createForm()(Form1)
-const WrappedForm2 = createForm()(Form2)
-const WrappedForm3 = createForm()(Form3)
+const WrappedForm1 = createForm()(Form1);
+const WrappedForm2 = createForm()(Form2);
+const WrappedForm3 = createForm()(Form3);
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <WrappedForm1 />
         <WrappedForm2 />
         <WrappedForm3 />
       </div>
-    )
+    );
   },
-}
+};

@@ -1,5 +1,5 @@
 const locale = {
   placeholder: 'Velg tid',
-}
+};
 
-export default locale
+export default locale;

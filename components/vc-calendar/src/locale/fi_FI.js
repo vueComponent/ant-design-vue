@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Seuraava vuosikymmen',
   previousCentury: 'Edellinen vuosisata',
   nextCentury: 'Seuraava vuosisata',
-}
+};

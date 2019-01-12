@@ -1,16 +1,16 @@
 <script>
-import Basic from './basic'
-import Changer from './changer'
-import Controlled from './controlled'
-import CustomChanger from './custom-changer'
-import ItemRender from './itemRender'
-import Jump from './jump'
-import Mini from './mini'
-import More from './more'
-import Simple from './simple'
-import Total from './total'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Changer from './changer';
+import Controlled from './controlled';
+import CustomChanger from './custom-changer';
+import ItemRender from './itemRender';
+import Jump from './jump';
+import Mini from './mini';
+import More from './more';
+import Simple from './simple';
+import Total from './total';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Pagination 分页
@@ -33,7 +33,7 @@ const md = {
     - When it will take a long time to load/render all items.
     - If you want to browse the data by navigating through pages.
     ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '分页',
@@ -61,7 +61,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

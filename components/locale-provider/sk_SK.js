@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/sk_SK'
-import DatePicker from '../date-picker/locale/sk_SK'
-import TimePicker from '../time-picker/locale/sk_SK'
-import Calendar from '../calendar/locale/sk_SK'
+import Pagination from '../vc-pagination/locale/sk_SK';
+import DatePicker from '../date-picker/locale/sk_SK';
+import TimePicker from '../time-picker/locale/sk_SK';
+import Calendar from '../calendar/locale/sk_SK';
 
 export default {
   locale: 'sk',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Chyba pri nahrávaní',
     previewFile: 'Zobraziť súbor',
   },
-}
+};

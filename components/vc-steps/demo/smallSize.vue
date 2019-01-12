@@ -1,11 +1,11 @@
 <script>
-import Steps, { Step } from '../index'
-import '../assets/index.less'
-import '../assets/iconfont.less'
+import Steps, { Step } from '../index';
+import '../assets/index.less';
+import '../assets/iconfont.less';
 
 export default {
   data () {
-    return {}
+    return {};
   },
   render () {
     return (
@@ -24,7 +24,7 @@ export default {
           <Step title='步骤3' icon='github' />
         </Steps>
       </div>
-    )
+    );
   },
-}
+};
 </script>

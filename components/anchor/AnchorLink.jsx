@@ -1,12 +1,12 @@
-import PropTypes from '../_util/vue-types'
-import { initDefaultProps, getComponentFromProp } from '../_util/props-util'
-import classNames from 'classnames'
+import PropTypes from '../_util/vue-types';
+import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
+import classNames from 'classnames';
 
 export const AnchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string,
   title: PropTypes.any,
-}
+};
 
 export default {
   name: 'AAnchorLink',
@@ -15,48 +15,44 @@ export default {
     href: '#',
   }),
   inject: {
-    antAnchor: { default: {}},
-    antAnchorContext: { default: {}},
+    antAnchor: { default: {} },
+    antAnchorContext: { default: {} },
   },
 
-  mounted () {
-    this.antAnchor.registerLink(this.href)
+  mounted() {
+    this.antAnchor.registerLink(this.href);
   },
 
-  beforeDestroy () {
-    this.antAnchor.unregisterLink(this.href)
+  beforeDestroy() {
+    this.antAnchor.unregisterLink(this.href);
   },
   watch: {
-    href (val, oldVal) {
-      this.antAnchor.unregisterLink(oldVal)
-      this.antAnchor.registerLink(val)
+    href(val, oldVal) {
+      this.antAnchor.unregisterLink(oldVal);
+      this.antAnchor.registerLink(val);
     },
   },
   methods: {
-    handleClick (e) {
-      this.antAnchor.scrollTo(this.href)
-      const { scrollTo } = this.antAnchor
-      const { href, title } = this.$props
+    handleClick(e) {
+      this.antAnchor.scrollTo(this.href);
+      const { scrollTo } = this.antAnchor;
+      const { href, title } = this.$props;
       if (this.antAnchorContext.$emit) {
-        this.antAnchorContext.$emit('click', e, { title, href })
+        this.antAnchorContext.$emit('click', e, { title, href });
       }
-      scrollTo(href)
+      scrollTo(href);
     },
   },
-  render () {
-    const {
-      prefixCls,
-      href,
-      $slots,
-    } = this
-    const title = getComponentFromProp(this, 'title')
-    const active = this.antAnchor.$data.activeLink === href
+  render() {
+    const { prefixCls, href, $slots } = this;
+    const title = getComponentFromProp(this, 'title');
+    const active = this.antAnchor.$data.activeLink === href;
     const wrapperClassName = classNames(`${prefixCls}-link`, {
       [`${prefixCls}-link-active`]: active,
-    })
+    });
     const titleClassName = classNames(`${prefixCls}-link-title`, {
       [`${prefixCls}-link-title-active`]: active,
-    })
+    });
     return (
       <div class={wrapperClassName}>
         <a
@@ -69,6 +65,6 @@ export default {
         </a>
         {$slots.default}
       </div>
-    )
+    );
   },
-}
+};

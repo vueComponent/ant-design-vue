@@ -1,11 +1,11 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import '../assets/index.less'
-import TreeSelect, { SHOW_PARENT } from '../index'
-import { gData } from './util'
+import '../assets/index.less';
+import TreeSelect, { SHOW_PARENT } from '../index';
+import { gData } from './util';
 
 export default {
-  data () {
+  data() {
     return {
       value: '11',
       // value: ['0-0-0-0-value', '0-0-0-1-value', '0-0-0-2-value'],
@@ -22,52 +22,53 @@ export default {
         id: 'key',
         rootPId: 0,
       },
-    }
+    };
   },
   methods: {
-    onChange (value) {
+    onChange(value) {
       if (value.length === 1) {
         // return;
       }
-      console.log('onChange', arguments, this.simpleTreeData)
-      this.value = value
+      console.log('onChange', arguments, this.simpleTreeData);
+      this.value = value;
     },
 
-    onSelect  () {
+    onSelect() {
       // use onChange instead
       // console.log(arguments);
     },
 
-    onDataChange  () {
-      const data = [...this.simpleTreeData]
+    onDataChange() {
+      const data = [...this.simpleTreeData];
       data.forEach(i => {
         if (i.key === 11) {
-          delete i.disabled
+          delete i.disabled;
         }
         if (i.key === 20) {
-          i.disabled = true
+          i.disabled = true;
         }
-      })
-      this.simpleTreeData = data
+      });
+      this.simpleTreeData = data;
     },
   },
 
-  render () {
+  render() {
     return (
       <div style={{ margin: '20px' }}>
         <h2>check select</h2>
         <TreeSelect
           style={{ width: '300px' }}
-          transitionName='rc-tree-select-dropdown-slide-up'
-          choiceTransitionName='rc-tree-select-selection__choice-zoom'
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
           dropdownStyle={{ height: '200px', overflow: 'auto' }}
           dropdownPopupAlign={{ overflow: { adjustY: 0, adjustX: 0 }, offset: [0, 2] }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          treeLine maxTagTextLength={10}
+          searchPlaceholder="please search"
+          treeLine
+          maxTagTextLength={10}
           value={this.value}
           treeData={gData}
-          treeNodeFilterProp='title'
+          treeNodeFilterProp="title"
           treeCheckable
           onChange={this.onChange}
           onSelect={this.onSelect}
@@ -79,22 +80,23 @@ export default {
           style={{ width: '300px' }}
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          treeLine maxTagTextLength={10}
+          searchPlaceholder="please search"
+          treeLine
+          maxTagTextLength={10}
           inputValue={null}
           value={this.value}
           treeData={this.simpleTreeData}
           treeDefaultExpandAll
-          treeNodeFilterProp='title'
+          treeNodeFilterProp="title"
           treeDataSimpleMode={this.treeDataSimpleMode}
-          treeCheckable showCheckedStrategy={SHOW_PARENT}
+          treeCheckable
+          showCheckedStrategy={SHOW_PARENT}
           onChange={this.onChange}
           onSelect={this.onSelect}
           __propsSymbol__={Symbol()}
         />
         <button onClick={this.onDataChange}>change data</button>
       </div>
-    )
+    );
   },
-}
-
+};

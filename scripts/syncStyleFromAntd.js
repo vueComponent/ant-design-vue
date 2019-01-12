@@ -1,18 +1,18 @@
-const GitHub = require('@octokit/rest')
-const Base64 = require('js-base64').Base64
-const fs = require('fs')
-const fse = require('fs-extra')
-const path = require('path')
+const GitHub = require('@octokit/rest');
+const Base64 = require('js-base64').Base64;
+const fs = require('fs');
+const fse = require('fs-extra');
+const path = require('path');
 
-const owner = 'ant-design'
-const repo = 'ant-design'
-const tag = '3.11.6'
-const clientId = '5f6ccfdc4cdc69f8ba12'
-const clientSecret = process.env.CLIENT_SECRET
+const owner = 'ant-design';
+const repo = 'ant-design';
+const tag = '3.11.6';
+const clientId = '5f6ccfdc4cdc69f8ba12';
+const clientSecret = process.env.CLIENT_SECRET;
 
-const github = new GitHub()
+const github = new GitHub();
 
-async function syncFiles (data = []) {
+async function syncFiles(data = []) {
   for (const item of data) {
     try {
       const { data: itemData } = await github.repos.getContents({
@@ -22,23 +22,22 @@ async function syncFiles (data = []) {
         ref: tag,
         client_id: clientId,
         client_secret: clientSecret,
-      })
+      });
       if (Array.isArray(itemData)) {
-        syncFiles(itemData)
+        syncFiles(itemData);
       } else {
-        const toPath = path.join(__dirname, '..', itemData.path.replace(`/${itemData.name}`, ''))
+        const toPath = path.join(__dirname, '..', itemData.path.replace(`/${itemData.name}`, ''));
         if (!fs.existsSync(toPath)) {
-          fse.ensureDirSync(toPath)
+          fse.ensureDirSync(toPath);
         }
-        console.log('update style: ', path.join(toPath, itemData.name.replace('.tsx', '.js')))
-        const content = Base64.decode(itemData.content)
-        fs.writeFileSync(path.join(toPath, itemData.name.replace('.tsx', '.js')), content)
+        console.log('update style: ', path.join(toPath, itemData.name.replace('.tsx', '.js')));
+        const content = Base64.decode(itemData.content);
+        fs.writeFileSync(path.join(toPath, itemData.name.replace('.tsx', '.js')), content);
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 }
-async function syncStyle () {
+async function syncStyle() {
   const { data = [] } = await github.repos.getContent({
     owner,
     repo,
@@ -46,12 +45,12 @@ async function syncStyle () {
     ref: tag,
     client_id: clientId,
     client_secret: clientSecret,
-  })
+  });
 
   for (const item of data) {
     try {
       if (item.name === 'style') {
-        syncFiles([item])
+        syncFiles([item]);
       } else {
         const { data: itemData } = await github.repos.getContent({
           owner,
@@ -60,10 +59,10 @@ async function syncStyle () {
           ref: tag,
           client_id: clientId,
           client_secret: clientSecret,
-        })
-        syncFiles(itemData)
+        });
+        syncFiles(itemData);
       }
     } catch (e) {}
   }
 }
-syncStyle()
+syncStyle();

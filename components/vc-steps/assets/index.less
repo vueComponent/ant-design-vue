@@ -43,7 +43,7 @@
     border-radius: 26px;
     font-size: 14px;
     margin-right: 8px;
-    transition: background-color .3s, border-color .3s;
+    transition: background-color 0.3s, border-color 0.3s;
 
     > .@{stepsPrefixClass}-icon {
       line-height: 1;
@@ -72,7 +72,7 @@
       height: 1px;
       border-radius: 1px;
       width: 100%;
-      transition: background .3s;
+      transition: background 0.3s;
     }
   }
   &-content {
@@ -133,10 +133,10 @@
 }
 
 .step-item-status(@status) {
-  @icon-color: "@{status}-icon-color";
-  @title-color: "@{status}-title-color";
-  @description-color: "@{status}-description-color";
-  @tail-color: "@{status}-tail-color";
+  @icon-color: '@{status}-icon-color';
+  @title-color: '@{status}-title-color';
+  @description-color: '@{status}-description-color';
+  @tail-color: '@{status}-tail-color';
   &-@{status} &-icon {
     border-color: @@icon-color;
     background-color: #fff;

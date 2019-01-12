@@ -1,13 +1,13 @@
-import AsyncValidator from 'async-validator'
-import warning from 'warning'
-import get from 'lodash/get'
-import set from 'lodash/set'
-import omit from 'lodash/omit'
-import createFieldsStore from './createFieldsStore'
-import { cloneElement } from '../../_util/vnode'
-import BaseMixin from '../../_util/BaseMixin'
-import { getOptionProps, getEvents } from '../../_util/props-util'
-import PropTypes from '../../_util/vue-types'
+import AsyncValidator from 'async-validator';
+import warning from 'warning';
+import get from 'lodash/get';
+import set from 'lodash/set';
+import omit from 'lodash/omit';
+import createFieldsStore from './createFieldsStore';
+import { cloneElement } from '../../_util/vnode';
+import BaseMixin from '../../_util/BaseMixin';
+import { getOptionProps, getEvents } from '../../_util/props-util';
+import PropTypes from '../../_util/vue-types';
 
 import {
   argumentContainer,
@@ -19,11 +19,11 @@ import {
   getParams,
   isEmptyObject,
   flattenArray,
-} from './utils'
+} from './utils';
 
-const DEFAULT_TRIGGER = 'change'
+const DEFAULT_TRIGGER = 'change';
 
-function createBaseForm (option = {}, mixins = []) {
+function createBaseForm(option = {}, mixins = []) {
   const {
     validateMessages,
     onFieldsChange,
@@ -37,15 +37,15 @@ function createBaseForm (option = {}, mixins = []) {
     name: formName,
     props = {},
     templateContext,
-  } = option
-  return function decorate (WrappedComponent) {
-    let formProps = {}
+  } = option;
+  return function decorate(WrappedComponent) {
+    let formProps = {};
     if (Array.isArray(props)) {
-      props.forEach((prop) => {
-        formProps[prop] = PropTypes.any
-      })
+      props.forEach(prop => {
+        formProps[prop] = PropTypes.any;
+      });
     } else {
-      formProps = props
+      formProps = props;
     }
     const Form = {
       mixins: [BaseMixin, ...mixins],
@@ -53,19 +53,20 @@ function createBaseForm (option = {}, mixins = []) {
         ...formProps,
         wrappedComponentRef: PropTypes.func.def(() => {}),
       },
-      data () {
-        const fields = mapPropsToFields && mapPropsToFields(this.$props)
-        this.fieldsStore = createFieldsStore(fields || {})
+      data() {
+        const fields = mapPropsToFields && mapPropsToFields(this.$props);
+        this.fieldsStore = createFieldsStore(fields || {});
 
-        this.instances = {}
-        this.cachedBind = {}
-        this.clearedFieldMetaCache = {}
+        this.instances = {};
+        this.cachedBind = {};
+        this.clearedFieldMetaCache = {};
 
-        this.renderFields = {}
+        this.renderFields = {};
         this.domFields = {};
 
         // HACK: https://github.com/ant-design/ant-design/issues/6406
-        ['getFieldsValue',
+        [
+          'getFieldsValue',
           'getFieldValue',
           'setFieldsInitialValue',
           'getFieldsError',
@@ -73,132 +74,136 @@ function createBaseForm (option = {}, mixins = []) {
           'isFieldValidating',
           'isFieldsValidating',
           'isFieldsTouched',
-          'isFieldTouched'].forEach(key => {
+          'isFieldTouched',
+        ].forEach(key => {
           this[key] = (...args) => {
-            return this.fieldsStore[key](...args)
-          }
-        })
+            return this.fieldsStore[key](...args);
+          };
+        });
 
         return {
           submitting: false,
-        }
+        };
       },
-      watch: templateContext ? {} : {
-        '$props': {
-          handler: function (nextProps) {
-            if (mapPropsToFields) {
-              this.fieldsStore.updateFields(mapPropsToFields(nextProps))
-            }
+      watch: templateContext
+        ? {}
+        : {
+            $props: {
+              handler: function(nextProps) {
+                if (mapPropsToFields) {
+                  this.fieldsStore.updateFields(mapPropsToFields(nextProps));
+                }
+              },
+              deep: true,
+            },
           },
-          deep: true,
-        },
+      mounted() {
+        this.wrappedComponentRef(this.$refs.WrappedComponent);
+        this.cleanUpUselessFields();
       },
-      mounted () {
-        this.wrappedComponentRef(this.$refs.WrappedComponent)
-        this.cleanUpUselessFields()
+      updated() {
+        this.wrappedComponentRef(this.$refs.WrappedComponent);
+        this.cleanUpUselessFields();
       },
-      updated () {
-        this.wrappedComponentRef(this.$refs.WrappedComponent)
-        this.cleanUpUselessFields()
-      },
-      destroyed () {
-        this.wrappedComponentRef(null)
+      destroyed() {
+        this.wrappedComponentRef(null);
       },
       methods: {
-        updateFields (fields = {}) {
-          this.fieldsStore.updateFields(mapPropsToFields(fields))
+        updateFields(fields = {}) {
+          this.fieldsStore.updateFields(mapPropsToFields(fields));
           if (templateContext) {
-            templateContext.$forceUpdate()
+            templateContext.$forceUpdate();
           }
         },
-        onCollectCommon (name, action, args) {
-          const fieldMeta = this.fieldsStore.getFieldMeta(name)
+        onCollectCommon(name, action, args) {
+          const fieldMeta = this.fieldsStore.getFieldMeta(name);
           if (fieldMeta[action]) {
-            fieldMeta[action](...args)
+            fieldMeta[action](...args);
           } else if (fieldMeta.originalProps && fieldMeta.originalProps[action]) {
-            fieldMeta.originalProps[action](...args)
+            fieldMeta.originalProps[action](...args);
           }
           const value = fieldMeta.getValueFromEvent
             ? fieldMeta.getValueFromEvent(...args)
-            : getValueFromEvent(...args)
+            : getValueFromEvent(...args);
           if (onValuesChange && value !== this.fieldsStore.getFieldValue(name)) {
-            const valuesAll = this.fieldsStore.getAllValues()
-            const valuesAllSet = {}
-            valuesAll[name] = value
-            Object.keys(valuesAll).forEach(key => set(valuesAllSet, key, valuesAll[key]))
-            onValuesChange(this, set({}, name, value), valuesAllSet)
+            const valuesAll = this.fieldsStore.getAllValues();
+            const valuesAllSet = {};
+            valuesAll[name] = value;
+            Object.keys(valuesAll).forEach(key => set(valuesAllSet, key, valuesAll[key]));
+            onValuesChange(this, set({}, name, value), valuesAllSet);
           }
-          const field = this.fieldsStore.getField(name)
-          return ({ name, field: { ...field, value, touched: true }, fieldMeta })
+          const field = this.fieldsStore.getField(name);
+          return { name, field: { ...field, value, touched: true }, fieldMeta };
         },
 
-        onCollect (name_, action, ...args) {
-          const { name, field, fieldMeta } = this.onCollectCommon(name_, action, args)
-          const { validate } = fieldMeta
+        onCollect(name_, action, ...args) {
+          const { name, field, fieldMeta } = this.onCollectCommon(name_, action, args);
+          const { validate } = fieldMeta;
           const newField = {
             ...field,
             dirty: hasRules(validate),
-          }
+          };
           this.setFields({
             [name]: newField,
-          })
+          });
         },
 
-        onCollectValidate (name_, action, ...args) {
-          const { field, fieldMeta } = this.onCollectCommon(name_, action, args)
+        onCollectValidate(name_, action, ...args) {
+          const { field, fieldMeta } = this.onCollectCommon(name_, action, args);
           const newField = {
             ...field,
             dirty: true,
-          }
+          };
           this.validateFieldsInternal([newField], {
             action,
             options: {
               firstFields: !!fieldMeta.validateFirst,
             },
-          })
+          });
         },
 
-        getCacheBind (name, action, fn) {
+        getCacheBind(name, action, fn) {
           if (!this.cachedBind[name]) {
-            this.cachedBind[name] = {}
+            this.cachedBind[name] = {};
           }
-          const cache = this.cachedBind[name]
+          const cache = this.cachedBind[name];
           if (!cache[action] || cache[action].oriFn !== fn) {
             cache[action] = {
               fn: fn.bind(this, name, action),
               oriFn: fn,
-            }
+            };
           }
-          return cache[action].fn
+          return cache[action].fn;
         },
 
-        getFieldDecorator (name, fieldOption) {
-          const { props, ...restProps } = this.getFieldProps(name, fieldOption)
-          return (fieldElem) => {
+        getFieldDecorator(name, fieldOption) {
+          const { props, ...restProps } = this.getFieldProps(name, fieldOption);
+          return fieldElem => {
             // We should put field in record if it is rendered
-            this.renderFields[name] = true
+            this.renderFields[name] = true;
 
-            const fieldMeta = this.fieldsStore.getFieldMeta(name)
-            const originalProps = getOptionProps(fieldElem)
-            const originalEvents = getEvents(fieldElem)
+            const fieldMeta = this.fieldsStore.getFieldMeta(name);
+            const originalProps = getOptionProps(fieldElem);
+            const originalEvents = getEvents(fieldElem);
             if (process.env.NODE_ENV !== 'production') {
-              const valuePropName = fieldMeta.valuePropName
+              const valuePropName = fieldMeta.valuePropName;
               warning(
                 !(valuePropName in originalProps),
                 `\`getFieldDecorator\` will override \`${valuePropName}\`, ` +
-                `so please don't set \`${valuePropName} and v-model\` directly ` +
-                `and use \`setFieldsValue\` to set it.`
-              )
-              const defaultValuePropName =
-                `default${valuePropName[0].toUpperCase()}${valuePropName.slice(1)}`
+                  `so please don't set \`${valuePropName} and v-model\` directly ` +
+                  `and use \`setFieldsValue\` to set it.`,
+              );
+              const defaultValuePropName = `default${valuePropName[0].toUpperCase()}${valuePropName.slice(
+                1,
+              )}`;
               warning(
                 !(defaultValuePropName in originalProps),
                 `\`${defaultValuePropName}\` is invalid ` +
-                `for \`getFieldDecorator\` will set \`${valuePropName}\`,` +
-                ` please use \`option.initialValue\` instead.`
-              )
+                  `for \`getFieldDecorator\` will set \`${valuePropName}\`,` +
+                  ` please use \`option.initialValue\` instead.`,
+              );
             }
-            fieldMeta.originalProps = originalProps
+            fieldMeta.originalProps = originalProps;
             // fieldMeta.ref = fieldElem.data && fieldElem.data.ref
             const newProps = {
               props: {
@@ -206,40 +211,40 @@ function createBaseForm (option = {}, mixins = []) {
                 ...this.fieldsStore.getFieldValuePropValue(fieldMeta),
               },
               ...restProps,
-            }
-            newProps.domProps.value = newProps.props.value
-            const newEvents = {}
-            Object.keys(newProps.on).forEach((key) => {
+            };
+            newProps.domProps.value = newProps.props.value;
+            const newEvents = {};
+            Object.keys(newProps.on).forEach(key => {
               if (originalEvents[key]) {
-                const triggerEvents = newProps.on[key]
+                const triggerEvents = newProps.on[key];
                 newEvents[key] = (...args) => {
-                  originalEvents[key](...args)
-                  triggerEvents(...args)
-                }
+                  originalEvents[key](...args);
+                  triggerEvents(...args);
+                };
               } else {
-                newEvents[key] = newProps.on[key]
+                newEvents[key] = newProps.on[key];
               }
-            })
-            return cloneElement(fieldElem, { ...newProps, on: newEvents })
-          }
+            });
+            return cloneElement(fieldElem, { ...newProps, on: newEvents });
+          };
         },
 
-        getFieldProps (name, usersFieldOption = {}) {
+        getFieldProps(name, usersFieldOption = {}) {
           if (!name) {
-            throw new Error('Must call `getFieldProps` with valid name string!')
+            throw new Error('Must call `getFieldProps` with valid name string!');
           }
           if (process.env.NODE_ENV !== 'production') {
             warning(
               this.fieldsStore.isValidNestedFieldName(name),
-              'One field name cannot be part of another, e.g. `a` and `a.b`.'
-            )
+              'One field name cannot be part of another, e.g. `a` and `a.b`.',
+            );
             warning(
               !('exclusive' in usersFieldOption),
-              '`option.exclusive` of `getFieldProps`|`getFieldDecorator` had been remove.'
-            )
+              '`option.exclusive` of `getFieldProps`|`getFieldDecorator` had been remove.',
+            );
           }
 
-          delete this.clearedFieldMetaCache[name]
+          delete this.clearedFieldMetaCache[name];
 
           const fieldOption = {
             name,
@@ -247,57 +252,52 @@ function createBaseForm (option = {}, mixins = []) {
             valuePropName: 'value',
             validate: [],
             ...usersFieldOption,
-          }
+          };
 
-          const {
-            rules,
-            trigger,
-            validateTrigger = trigger,
-            validate,
-          } = fieldOption
+          const { rules, trigger, validateTrigger = trigger, validate } = fieldOption;
 
-          const fieldMeta = this.fieldsStore.getFieldMeta(name)
+          const fieldMeta = this.fieldsStore.getFieldMeta(name);
           if ('initialValue' in fieldOption) {
-            fieldMeta.initialValue = fieldOption.initialValue
+            fieldMeta.initialValue = fieldOption.initialValue;
           }
 
           const inputProps = {
             ...this.fieldsStore.getFieldValuePropValue(fieldOption),
             // ref: name,
-          }
-          const inputListeners = {}
-          const inputAttrs = {}
+          };
+          const inputListeners = {};
+          const inputAttrs = {};
           if (fieldNameProp) {
-            inputProps[fieldNameProp] = formName ? `${formName}_${name}` : name
+            inputProps[fieldNameProp] = formName ? `${formName}_${name}` : name;
           }
 
-          const validateRules = normalizeValidateRules(validate, rules, validateTrigger)
-          const validateTriggers = getValidateTriggers(validateRules)
-          validateTriggers.forEach((action) => {
-            if (inputListeners[action]) return
-            inputListeners[action] = this.getCacheBind(name, action, this.onCollectValidate)
-          })
+          const validateRules = normalizeValidateRules(validate, rules, validateTrigger);
+          const validateTriggers = getValidateTriggers(validateRules);
+          validateTriggers.forEach(action => {
+            if (inputListeners[action]) return;
+            inputListeners[action] = this.getCacheBind(name, action, this.onCollectValidate);
+          });
 
           // make sure that the value will be collect
           if (trigger && validateTriggers.indexOf(trigger) === -1) {
-            inputListeners[trigger] = this.getCacheBind(name, trigger, this.onCollect)
+            inputListeners[trigger] = this.getCacheBind(name, trigger, this.onCollect);
           }
 
           const meta = {
             ...fieldMeta,
             ...fieldOption,
             validate: validateRules,
-          }
-          this.fieldsStore.setFieldMeta(name, meta)
+          };
+          this.fieldsStore.setFieldMeta(name, meta);
           if (fieldMetaProp) {
-            inputAttrs[fieldMetaProp] = meta
+            inputAttrs[fieldMetaProp] = meta;
           }
 
           if (fieldDataProp) {
-            inputAttrs[fieldDataProp] = this.fieldsStore.getField(name)
+            inputAttrs[fieldDataProp] = this.fieldsStore.getField(name);
           }
           // This field is rendered, record it
-          this.renderFields[name] = true
+          this.renderFields[name] = true;
           return {
             props: omit(inputProps, ['id']),
             // id: inputProps.id,
@@ -315,81 +315,85 @@ function createBaseForm (option = {}, mixins = []) {
               },
             ],
             on: inputListeners,
-          }
+          };
         },
 
-        getFieldInstance (name) {
-          return this.instances[name]
+        getFieldInstance(name) {
+          return this.instances[name];
         },
 
-        getRules (fieldMeta, action) {
-          const actionRules = fieldMeta.validate.filter((item) => {
-            return !action || item.trigger.indexOf(action) >= 0
-          }).map((item) => item.rules)
-          return flattenArray(actionRules)
+        getRules(fieldMeta, action) {
+          const actionRules = fieldMeta.validate
+            .filter(item => {
+              return !action || item.trigger.indexOf(action) >= 0;
+            })
+            .map(item => item.rules);
+          return flattenArray(actionRules);
         },
 
-        setFields (maybeNestedFields, callback) {
-          const fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields)
-          this.fieldsStore.setFields(fields)
+        setFields(maybeNestedFields, callback) {
+          const fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields);
+          this.fieldsStore.setFields(fields);
           if (onFieldsChange) {
-            const changedFields = Object.keys(fields)
-              .reduce((acc, name) => set(acc, name, this.fieldsStore.getField(name)), {})
-            onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields())
+            const changedFields = Object.keys(fields).reduce(
+              (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
+              {},
+            );
+            onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields());
           }
           if (templateContext) {
-            templateContext.$forceUpdate()
+            templateContext.$forceUpdate();
           } else {
-            this.$forceUpdate()
+            this.$forceUpdate();
           }
           this.$nextTick(() => {
-            callback && callback()
-          })
+            callback && callback();
+          });
         },
 
-        setFieldsValue (changedValues, callback) {
-          const { fieldsMeta } = this.fieldsStore
-          const values = this.fieldsStore.flattenRegisteredFields(changedValues)
+        setFieldsValue(changedValues, callback) {
+          const { fieldsMeta } = this.fieldsStore;
+          const values = this.fieldsStore.flattenRegisteredFields(changedValues);
           const newFields = Object.keys(values).reduce((acc, name) => {
-            const isRegistered = fieldsMeta[name]
+            const isRegistered = fieldsMeta[name];
             if (process.env.NODE_ENV !== 'production') {
               warning(
                 isRegistered,
                 'Cannot use `setFieldsValue` until ' +
-                  'you use `getFieldDecorator` or `getFieldProps` to register it.'
-              )
+                  'you use `getFieldDecorator` or `getFieldProps` to register it.',
+              );
             }
             if (isRegistered) {
-              const value = values[name]
+              const value = values[name];
               acc[name] = {
                 value,
-              }
+              };
             }
-            return acc
-          }, {})
-          this.setFields(newFields, callback)
+            return acc;
+          }, {});
+          this.setFields(newFields, callback);
           if (onValuesChange) {
-            const allValues = this.fieldsStore.getAllValues()
-            onValuesChange(this, changedValues, allValues)
+            const allValues = this.fieldsStore.getAllValues();
+            onValuesChange(this, changedValues, allValues);
           }
         },
 
-        saveRef (name, _, component) {
+        saveRef(name, _, component) {
           if (!component) {
-            const fieldMeta = this.fieldsStore.getFieldMeta(name)
+            const fieldMeta = this.fieldsStore.getFieldMeta(name);
             if (!fieldMeta.preserve) {
-            // after destroy, delete data
+              // after destroy, delete data
               this.clearedFieldMetaCache[name] = {
                 field: this.fieldsStore.getField(name),
                 meta: fieldMeta,
-              }
-              this.clearField(name)
+              };
+              this.clearField(name);
             }
-            delete this.domFields[name]
-            return
+            delete this.domFields[name];
+            return;
           }
-          this.domFields[name] = true
-          this.recoverClearedField(name)
+          this.domFields[name] = true;
+          this.recoverClearedField(name);
           // const fieldMeta = this.fieldsStore.getFieldMeta(name)
           // if (fieldMeta) {
           //   const ref = fieldMeta.ref
@@ -400,232 +404,239 @@ function createBaseForm (option = {}, mixins = []) {
           //     ref(component)
           //   }
           // }
-          this.instances[name] = component
+          this.instances[name] = component;
         },
 
-        cleanUpUselessFields () {
-          const fieldList = this.fieldsStore.getAllFieldsName()
+        cleanUpUselessFields() {
+          const fieldList = this.fieldsStore.getAllFieldsName();
           const removedList = fieldList.filter(field => {
-            const fieldMeta = this.fieldsStore.getFieldMeta(field)
-            return (!this.renderFields[field] && !this.domFields[field] && !fieldMeta.preserve)
-          })
+            const fieldMeta = this.fieldsStore.getFieldMeta(field);
+            return !this.renderFields[field] && !this.domFields[field] && !fieldMeta.preserve;
+          });
           if (removedList.length) {
-            removedList.forEach(this.clearField)
+            removedList.forEach(this.clearField);
           }
-          this.renderFields = {}
+          this.renderFields = {};
         },
 
-        clearField (name) {
-          this.fieldsStore.clearField(name)
-          delete this.instances[name]
-          delete this.cachedBind[name]
+        clearField(name) {
+          this.fieldsStore.clearField(name);
+          delete this.instances[name];
+          delete this.cachedBind[name];
         },
 
-        resetFields (ns) {
-          const newFields = this.fieldsStore.resetFields(ns)
+        resetFields(ns) {
+          const newFields = this.fieldsStore.resetFields(ns);
           if (Object.keys(newFields).length > 0) {
-            this.setFields(newFields)
+            this.setFields(newFields);
           }
           if (ns) {
-            const names = Array.isArray(ns) ? ns : [ns]
-            names.forEach(name => delete this.clearedFieldMetaCache[name])
+            const names = Array.isArray(ns) ? ns : [ns];
+            names.forEach(name => delete this.clearedFieldMetaCache[name]);
           } else {
-            this.clearedFieldMetaCache = {}
+            this.clearedFieldMetaCache = {};
           }
         },
 
-        recoverClearedField (name) {
+        recoverClearedField(name) {
           if (this.clearedFieldMetaCache[name]) {
             this.fieldsStore.setFields({
               [name]: this.clearedFieldMetaCache[name].field,
-            })
-            this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta)
-            delete this.clearedFieldMetaCache[name]
+            });
+            this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta);
+            delete this.clearedFieldMetaCache[name];
           }
         },
 
-        validateFieldsInternal (fields, {
-          fieldNames,
-          action,
-          options = {},
-        }, callback) {
-          const allRules = {}
-          const allValues = {}
-          const allFields = {}
-          const alreadyErrors = {}
-          fields.forEach((field) => {
-            const name = field.name
+        validateFieldsInternal(fields, { fieldNames, action, options = {} }, callback) {
+          const allRules = {};
+          const allValues = {};
+          const allFields = {};
+          const alreadyErrors = {};
+          fields.forEach(field => {
+            const name = field.name;
             if (options.force !== true && field.dirty === false) {
               if (field.errors) {
-                set(alreadyErrors, name, { errors: field.errors })
+                set(alreadyErrors, name, { errors: field.errors });
               }
-              return
+              return;
             }
-            const fieldMeta = this.fieldsStore.getFieldMeta(name)
+            const fieldMeta = this.fieldsStore.getFieldMeta(name);
             const newField = {
               ...field,
-            }
-            newField.errors = undefined
-            newField.validating = true
-            newField.dirty = true
-            allRules[name] = this.getRules(fieldMeta, action)
-            allValues[name] = newField.value
-            allFields[name] = newField
-          })
-          this.setFields(allFields)
+            };
+            newField.errors = undefined;
+            newField.validating = true;
+            newField.dirty = true;
+            allRules[name] = this.getRules(fieldMeta, action);
+            allValues[name] = newField.value;
+            allFields[name] = newField;
+          });
+          this.setFields(allFields);
           // in case normalize
-          Object.keys(allValues).forEach((f) => {
-            allValues[f] = this.fieldsStore.getFieldValue(f)
-          })
+          Object.keys(allValues).forEach(f => {
+            allValues[f] = this.fieldsStore.getFieldValue(f);
+          });
           if (callback && isEmptyObject(allFields)) {
-            callback(isEmptyObject(alreadyErrors) ? null : alreadyErrors,
-              this.fieldsStore.getFieldsValue(fieldNames))
-            return
+            callback(
+              isEmptyObject(alreadyErrors) ? null : alreadyErrors,
+              this.fieldsStore.getFieldsValue(fieldNames),
+            );
+            return;
           }
-          const validator = new AsyncValidator(allRules)
+          const validator = new AsyncValidator(allRules);
           if (validateMessages) {
-            validator.messages(validateMessages)
+            validator.messages(validateMessages);
           }
-          validator.validate(allValues, options, (errors) => {
+          validator.validate(allValues, options, errors => {
             const errorsGroup = {
               ...alreadyErrors,
-            }
+            };
             if (errors && errors.length) {
-              errors.forEach((e) => {
-                const fieldName = e.field
-                const field = get(errorsGroup, fieldName)
+              errors.forEach(e => {
+                const fieldName = e.field;
+                const field = get(errorsGroup, fieldName);
                 if (typeof field !== 'object' || Array.isArray(field)) {
-                  set(errorsGroup, fieldName, { errors: [] })
+                  set(errorsGroup, fieldName, { errors: [] });
                 }
-                const fieldErrors = get(errorsGroup, fieldName.concat('.errors'))
-                fieldErrors.push(e)
-              })
+                const fieldErrors = get(errorsGroup, fieldName.concat('.errors'));
+                fieldErrors.push(e);
+              });
             }
-            const expired = []
-            const nowAllFields = {}
-            Object.keys(allRules).forEach((name) => {
-              const fieldErrors = get(errorsGroup, name)
-              const nowField = this.fieldsStore.getField(name)
+            const expired = [];
+            const nowAllFields = {};
+            Object.keys(allRules).forEach(name => {
+              const fieldErrors = get(errorsGroup, name);
+              const nowField = this.fieldsStore.getField(name);
               // avoid concurrency problems
               if (nowField.value !== allValues[name]) {
                 expired.push({
                   name,
-                })
+                });
               } else {
-                nowField.errors = fieldErrors && fieldErrors.errors
-                nowField.value = allValues[name]
-                nowField.validating = false
-                nowField.dirty = false
-                nowAllFields[name] = nowField
+                nowField.errors = fieldErrors && fieldErrors.errors;
+                nowField.value = allValues[name];
+                nowField.validating = false;
+                nowField.dirty = false;
+                nowAllFields[name] = nowField;
               }
-            })
-            this.setFields(nowAllFields)
+            });
+            this.setFields(nowAllFields);
             if (callback) {
               if (expired.length) {
                 expired.forEach(({ name }) => {
-                  const fieldErrors = [{
-                    message: `${name} need to revalidate`,
-                    field: name,
-                  }]
+                  const fieldErrors = [
+                    {
+                      message: `${name} need to revalidate`,
+                      field: name,
+                    },
+                  ];
                   set(errorsGroup, name, {
                     expired: true,
                     errors: fieldErrors,
-                  })
-                })
+                  });
+                });
               }
 
-              callback(isEmptyObject(errorsGroup) ? null : errorsGroup,
-                this.fieldsStore.getFieldsValue(fieldNames))
+              callback(
+                isEmptyObject(errorsGroup) ? null : errorsGroup,
+                this.fieldsStore.getFieldsValue(fieldNames),
+              );
             }
-          })
+          });
         },
 
-        validateFields (ns, opt, cb) {
+        validateFields(ns, opt, cb) {
           const pending = new Promise((resolve, reject) => {
-            const { names, options } = getParams(ns, opt, cb)
-            let { callback } = getParams(ns, opt, cb)
+            const { names, options } = getParams(ns, opt, cb);
+            let { callback } = getParams(ns, opt, cb);
             if (!callback || typeof callback === 'function') {
-              const oldCb = callback
+              const oldCb = callback;
               callback = (errors, values) => {
                 if (oldCb) {
-                  oldCb(errors, values)
+                  oldCb(errors, values);
                 } else if (errors) {
-                  reject({ errors, values })
+                  reject({ errors, values });
                 } else {
-                  resolve(values)
+                  resolve(values);
                 }
-              }
+              };
             }
             const fieldNames = names
               ? this.fieldsStore.getValidFieldsFullName(names)
-              : this.fieldsStore.getValidFieldsName()
+              : this.fieldsStore.getValidFieldsName();
             const fields = fieldNames
               .filter(name => {
-                const fieldMeta = this.fieldsStore.getFieldMeta(name)
-                return hasRules(fieldMeta.validate)
-              }).map((name) => {
-                const field = this.fieldsStore.getField(name)
-                field.value = this.fieldsStore.getFieldValue(name)
-                return field
+                const fieldMeta = this.fieldsStore.getFieldMeta(name);
+                return hasRules(fieldMeta.validate);
               })
+              .map(name => {
+                const field = this.fieldsStore.getField(name);
+                field.value = this.fieldsStore.getFieldValue(name);
+                return field;
+              });
             if (!fields.length) {
               if (callback) {
-                callback(null, this.fieldsStore.getFieldsValue(fieldNames))
+                callback(null, this.fieldsStore.getFieldsValue(fieldNames));
               }
-              return
+              return;
             }
             if (!('firstFields' in options)) {
-              options.firstFields = fieldNames.filter((name) => {
-                const fieldMeta = this.fieldsStore.getFieldMeta(name)
-                return !!fieldMeta.validateFirst
-              })
+              options.firstFields = fieldNames.filter(name => {
+                const fieldMeta = this.fieldsStore.getFieldMeta(name);
+                return !!fieldMeta.validateFirst;
+              });
             }
-            this.validateFieldsInternal(fields, {
-              fieldNames,
-              options,
-            }, callback)
-          })
-          pending.catch((e) => e)
-          return pending
+            this.validateFieldsInternal(
+              fields,
+              {
+                fieldNames,
+                options,
+              },
+              callback,
+            );
+          });
+          pending.catch(e => e);
+          return pending;
         },
 
-        isSubmitting () {
+        isSubmitting() {
           if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
             warning(
               false,
               '`isSubmitting` is deprecated. ' +
-                'Actually, it\'s more convenient to handle submitting status by yourself.'
-            )
+                "Actually, it's more convenient to handle submitting status by yourself.",
+            );
           }
-          return this.submitting
+          return this.submitting;
         },
 
-        submit (callback) {
+        submit(callback) {
           if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
             warning(
               false,
               '`submit` is deprecated.' +
-                'Actually, it\'s more convenient to handle submitting status by yourself.'
-            )
+                "Actually, it's more convenient to handle submitting status by yourself.",
+            );
           }
           const fn = () => {
             this.setState({
               submitting: false,
-            })
-          }
+            });
+          };
           this.setState({
             submitting: true,
-          })
-          callback(fn)
+          });
+          callback(fn);
         },
       },
 
-      render () {
-        const { $listeners, $slots } = this
+      render() {
+        const { $listeners, $slots } = this;
         const formProps = {
           [formPropName]: this.getForm(),
-        }
-        const props = getOptionProps(this)
+        };
+        const props = getOptionProps(this);
         const wrappedComponentProps = {
           props: mapProps.call(this, {
             ...formProps,
@@ -633,27 +644,29 @@ function createBaseForm (option = {}, mixins = []) {
           }),
           on: $listeners,
           ref: 'WrappedComponent',
-        }
+        };
 
-        return WrappedComponent ? <WrappedComponent {...wrappedComponentProps}>{$slots.default}</WrappedComponent> : null
+        return WrappedComponent ? (
+          <WrappedComponent {...wrappedComponentProps}>{$slots.default}</WrappedComponent>
+        ) : null;
       },
-    }
-    if (!WrappedComponent) return Form
+    };
+    if (!WrappedComponent) return Form;
     if (Array.isArray(WrappedComponent.props)) {
-      const newProps = {}
-      WrappedComponent.props.forEach((prop) => {
-        newProps[prop] = PropTypes.any
-      })
-      newProps[formPropName] = Object
-      WrappedComponent.props = newProps
+      const newProps = {};
+      WrappedComponent.props.forEach(prop => {
+        newProps[prop] = PropTypes.any;
+      });
+      newProps[formPropName] = Object;
+      WrappedComponent.props = newProps;
     } else {
-      WrappedComponent.props = WrappedComponent.props || {}
+      WrappedComponent.props = WrappedComponent.props || {};
       if (!(formPropName in WrappedComponent.props)) {
-        WrappedComponent.props[formPropName] = Object
+        WrappedComponent.props[formPropName] = Object;
       }
     }
-    return argumentContainer(Form, WrappedComponent)
-  }
+    return argumentContainer(Form, WrappedComponent);
+  };
 }
 
-export default createBaseForm
+export default createBaseForm;

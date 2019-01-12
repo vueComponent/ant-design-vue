@@ -1,10 +1,10 @@
 <script>
-import Basic from './basic.md'
-import Search from './search.md'
-import Advanced from './advanced.md'
-import CustomItem from './custom-item.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import Search from './search.md';
+import Advanced from './advanced.md';
+import CustomItem from './custom-item.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 穿梭框
@@ -33,7 +33,7 @@ One or more elements can be selected from either column, one click on the proper
 
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '穿梭框',
@@ -55,7 +55,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

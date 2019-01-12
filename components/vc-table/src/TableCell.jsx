@@ -1,10 +1,11 @@
-import PropTypes from '../../_util/vue-types'
-import get from 'lodash/get'
-import { isValidElement, mergeProps } from '../../_util/props-util'
+import PropTypes from '../../_util/vue-types';
+import get from 'lodash/get';
+import { isValidElement, mergeProps } from '../../_util/props-util';
 
-function isInvalidRenderCellText (text) {
-  return text && !isValidElement(text) &&
-        Object.prototype.toString.call(text) === '[object Object]'
+function isInvalidRenderCellText(text) {
+  return (
+    text && !isValidElement(text) && Object.prototype.toString.call(text) === '[object Object]'
+  );
 }
 
 export default {
@@ -20,16 +21,18 @@ export default {
     component: PropTypes.any,
   },
   methods: {
-
-    handleClick (e) {
-      const { record, column: { onCellClick }} = this
+    handleClick(e) {
+      const {
+        record,
+        column: { onCellClick },
+      } = this;
       if (onCellClick) {
-        onCellClick(record, e)
+        onCellClick(record, e);
       }
     },
   },
 
-  render (h) {
+  render(h) {
     const {
       record,
       indentSize,
@@ -39,18 +42,18 @@ export default {
       expandIcon,
       column,
       component: BodyCell,
-    } = this
-    const { dataIndex, customRender, className = '' } = column
-    const cls = className || column.class
+    } = this;
+    const { dataIndex, customRender, className = '' } = column;
+    const cls = className || column.class;
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
-    let text
+    let text;
     if (typeof dataIndex === 'number') {
-      text = get(record, dataIndex)
+      text = get(record, dataIndex);
     } else if (!dataIndex || dataIndex.length === 0) {
-      text = record
+      text = record;
     } else {
-      text = get(record, dataIndex)
+      text = get(record, dataIndex);
     }
     let tdProps = {
       props: {},
@@ -59,28 +62,28 @@ export default {
       on: {
         click: this.handleClick,
       },
-    }
-    let colSpan
-    let rowSpan
+    };
+    let colSpan;
+    let rowSpan;
 
     if (customRender) {
-      text = customRender(text, record, index)
+      text = customRender(text, record, index);
       if (isInvalidRenderCellText(text)) {
-        tdProps.attrs = text.attrs || {}
-        tdProps.props = text.props || {}
-        colSpan = tdProps.attrs.colSpan
-        rowSpan = tdProps.attrs.rowSpan
-        text = text.children
+        tdProps.attrs = text.attrs || {};
+        tdProps.props = text.props || {};
+        colSpan = tdProps.attrs.colSpan;
+        rowSpan = tdProps.attrs.rowSpan;
+        text = text.children;
       }
     }
 
     if (column.customCell) {
-      tdProps = mergeProps(tdProps, column.customCell(record, index))
+      tdProps = mergeProps(tdProps, column.customCell(record, index));
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202
     if (isInvalidRenderCellText(text)) {
-      text = null
+      text = null;
     }
 
     const indentText = expandIcon ? (
@@ -88,23 +91,21 @@ export default {
         style={{ paddingLeft: `${indentSize * indent}px` }}
         class={`${prefixCls}-indent indent-level-${indent}`}
       />
-    ) : null
+    ) : null;
 
     if (rowSpan === 0 || colSpan === 0) {
-      return null
+      return null;
     }
     if (column.align) {
-      tdProps.style = { textAlign: column.align }
+      tdProps.style = { textAlign: column.align };
     }
 
     return (
-      <BodyCell
-        {...tdProps}
-      >
+      <BodyCell {...tdProps}>
         {indentText}
         {expandIcon}
         {text}
       </BodyCell>
-    )
+    );
   },
-}
+};

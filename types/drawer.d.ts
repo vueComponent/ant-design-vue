@@ -97,7 +97,7 @@ export declare class Drawer extends AntdComponent {
    * @default 'right'
    * @type string
    */
-  placement: "top" | "right" | "bottom" | "left";
+  placement: 'top' | 'right' | 'bottom' | 'left';
 
   /**
    * Specify a callback that will be called when a user clicks mask, close button or Cancel button.

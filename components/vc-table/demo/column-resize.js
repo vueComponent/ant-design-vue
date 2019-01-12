@@ -1,31 +1,36 @@
 /* eslint-disable no-console,func-names,react/no-multi-comp */
-import Table from '../index'
-import '../assets/index.less'
-import BaseMixin from '../../_util/BaseMixin'
+import Table from '../index';
+import '../assets/index.less';
+import BaseMixin from '../../_util/BaseMixin';
 
 const ResizeableTitle = (h, props, children) => {
-  console.log(props)
-  const { width, ...restProps } = props
+  console.log(props);
+  const { width, ...restProps } = props;
 
   if (!width) {
-    return <th {...restProps} >{children}</th>
+    return <th {...restProps}>{children}</th>;
   }
   return (
-    <th {...restProps} width={width}>{children}</th>
-  )
-}
+    <th {...restProps} width={width}>
+      {children}
+    </th>
+  );
+};
 
 export default {
   mixins: [BaseMixin],
-  data () {
+  data() {
     return {
       columns: [
         { title: 'title1', dataIndex: 'a', key: 'a', width: 100 },
         { id: '123', title: 'title2', dataIndex: 'b', key: 'b', width: 100 },
         { title: 'title3', dataIndex: 'c', key: 'c', width: 200 },
         {
-          title: 'Operations', dataIndex: '', key: 'd', customRender: () => {
-            return <a href='#'>Operations</a>
+          title: 'Operations',
+          dataIndex: '',
+          key: 'd',
+          customRender: () => {
+            return <a href="#">Operations</a>;
           },
         },
       ],
@@ -39,27 +44,27 @@ export default {
           cell: ResizeableTitle,
         },
       },
-    }
+    };
   },
   methods: {
-    handleResize (index) {
+    handleResize(index) {
       return (e, { size }) => {
         this.setState(({ columns }) => {
-          const nextColumns = [...columns]
+          const nextColumns = [...columns];
           nextColumns[index] = {
             ...nextColumns[index],
             width: size.width,
-          }
-          return { columns: nextColumns }
-        })
-      }
+          };
+          return { columns: nextColumns };
+        });
+      };
     },
   },
 
-  render () {
+  render() {
     const columns = this.columns.map((col, index) => ({
       ...col,
-      customHeaderCell: (column) => ({
+      customHeaderCell: column => ({
         props: {
           width: column.width,
         },
@@ -67,14 +72,13 @@ export default {
           resize: this.handleResize(index),
         },
       }),
-    }))
+    }));
 
     return (
       <div>
         <h2>Integrate with react-resizable</h2>
         <Table components={this.components} columns={columns} data={this.data} />
       </div>
-    )
+    );
   },
-}
-
+};

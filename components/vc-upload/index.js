@@ -1,4 +1,4 @@
 // rc-upload 2.6.0
-import upload from './src'
+import upload from './src';
 
-export default upload
+export default upload;

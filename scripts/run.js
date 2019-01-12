@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 
-'use strict'
+'use strict';
 
-require('colorful').colorful()
-const gulp = require('gulp')
-const program = require('commander')
+require('colorful').colorful();
+const gulp = require('gulp');
+const program = require('commander');
 
 program.on('--help', () => {
-  console.log('  Usage:'.to.bold.blue.color)
-  console.log()
-})
+  console.log('  Usage:'.to.bold.blue.color);
+  console.log();
+});
 
-program.parse(process.argv)
+program.parse(process.argv);
 
-const task = program.args[0]
+const task = program.args[0];
 
 if (!task) {
-  program.help()
+  program.help();
 } else {
-  console.log('scripts run', task)
+  console.log('scripts run', task);
 
-  require('./gulpfile')
+  require('./gulpfile');
 
-  gulp.start(task)
+  gulp.start(task);
 }

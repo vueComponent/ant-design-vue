@@ -12,4 +12,4 @@ export default {
   next_5: 'Áfram 5 síður',
   prev_3: 'Til baka 3 síður',
   next_3: 'Áfram 3 síður',
-}
+};

@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { MenuItem } from "./menu-item";
+import { AntdComponent } from '../component';
+import { MenuItem } from './menu-item';
 
 export declare class SubMenu extends AntdComponent {
   /**

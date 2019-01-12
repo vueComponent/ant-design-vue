@@ -1,12 +1,12 @@
 <script>
-import Basic from './basic'
-import Checkable from './checkable'
-import Multiple from './multiple'
-import TreeData from './treeData'
-import Suffix from './suffix'
+import Basic from './basic';
+import Checkable from './checkable';
+import Multiple from './multiple';
+import TreeData from './treeData';
+import Suffix from './suffix';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 树型选择控件。
@@ -22,7 +22,7 @@ const md = {
 Any data whose entries are defined in a hierarchical manner is fit to use this control. Examples of such case may include a corporate hierarchy, a directory structure, and so on.
 ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '树选择',
@@ -44,7 +44,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

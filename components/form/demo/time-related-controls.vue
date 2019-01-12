@@ -59,10 +59,10 @@ The `value` of time-related components is a `moment` object, which we need to pr
 <script>
 export default {
   beforeCreate () {
-    this.form = this.$form.createForm(this)
+    this.form = this.$form.createForm(this);
   },
   data () {
-    window.form = this
+    window.form = this;
     return {
       formItemLayout: {
         labelCol: {
@@ -80,19 +80,19 @@ export default {
       rangeConfig: {
         rules: [{ type: 'array', required: true, message: 'Please select time!' }],
       },
-    }
+    };
   },
   methods: {
     handleSubmit  (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((err, fieldsValue) => {
         if (err) {
-          return
+          return;
         }
 
         // Should format date value before submit.
-        const rangeValue = fieldsValue['range-picker']
-        const rangeTimeValue = fieldsValue['range-time-picker']
+        const rangeValue = fieldsValue['range-picker'];
+        const rangeTimeValue = fieldsValue['range-time-picker'];
         const values = {
           ...fieldsValue,
           'date-picker': fieldsValue['date-picker'].format('YYYY-MM-DD'),
@@ -104,12 +104,12 @@ export default {
             rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss'),
           ],
           'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
-        }
-        console.log('Received values of form: ', values)
-      })
+        };
+        console.log('Received values of form: ', values);
+      });
     },
   },
-}
+};
 </script>
 
 

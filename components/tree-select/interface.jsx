@@ -1,5 +1,5 @@
-import PropTypes from '../_util/vue-types'
-import { AbstractSelectProps } from '../select'
+import PropTypes from '../_util/vue-types';
+import { AbstractSelectProps } from '../select';
 
 export const TreeData = PropTypes.shape({
   key: PropTypes.string,
@@ -7,7 +7,7 @@ export const TreeData = PropTypes.shape({
   label: PropTypes.any,
   scopedSlots: PropTypes.object,
   children: PropTypes.array,
-}).loose
+}).loose;
 
 export const TreeSelectProps = () => ({
   ...AbstractSelectProps(),
@@ -41,4 +41,4 @@ export const TreeSelectProps = () => ({
   treeDefaultExpandedKeys: PropTypes.array,
   treeNodeFilterProp: PropTypes.string,
   treeNodeLabelProp: PropTypes.string,
-})
+});

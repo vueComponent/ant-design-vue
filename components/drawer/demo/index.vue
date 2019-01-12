@@ -1,16 +1,16 @@
 <script>
-import BasicRight from './basic-right'
-import Placement from './placement'
-import UserProfile from './user-profile'
-import MultiLevelDrawer from './multi-level-drawer'
-import FormInDrawer from './form-in-drawer'
+import BasicRight from './basic-right';
+import Placement from './placement';
+import UserProfile from './user-profile';
+import MultiLevelDrawer from './multi-level-drawer';
+import FormInDrawer from './form-in-drawer';
 // import CustomPaging from './customPaging'
 // import CustomArrows from './customArrows'
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
-import '../style'
+import '../style';
 
 const md = {
   cn: `# Drawer 抽屉
@@ -37,7 +37,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 * When a same Form is needed in multiple places.
        ## Examples
         `,
-}
+};
 export default {
   category: 'Components',
   type: 'Feedback',
@@ -58,7 +58,7 @@ export default {
           <US />
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

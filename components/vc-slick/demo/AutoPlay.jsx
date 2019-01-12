@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -14,7 +14,7 @@ export default {
         autoplaySpeed: 2000,
         cssEase: 'linear',
       },
-    }
+    };
     return (
       <div>
         <h2>Auto Play</h2>
@@ -39,6 +39,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

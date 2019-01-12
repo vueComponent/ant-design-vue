@@ -1,13 +1,13 @@
-import PropTypes from '../_util/vue-types'
-import classNames from 'classnames'
-import Vue from 'vue'
-import isRegExp from 'lodash/isRegExp'
-import warning from '../_util/warning'
-import createDOMForm from '../vc-form/src/createDOMForm'
-import createFormField from '../vc-form/src/createFormField'
-import FormItem from './FormItem'
-import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants'
-import { initDefaultProps } from '../_util/props-util'
+import PropTypes from '../_util/vue-types';
+import classNames from 'classnames';
+import Vue from 'vue';
+import isRegExp from 'lodash/isRegExp';
+import warning from '../_util/warning';
+import createDOMForm from '../vc-form/src/createDOMForm';
+import createFormField from '../vc-form/src/createFormField';
+import FormItem from './FormItem';
+import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
+import { initDefaultProps } from '../_util/props-util';
 
 export const FormCreateOption = {
   onFieldsChange: PropTypes.func,
@@ -15,7 +15,7 @@ export const FormCreateOption = {
   mapPropsToFields: PropTypes.func,
   validateMessages: PropTypes.any,
   withRef: PropTypes.bool,
-}
+};
 
 // function create
 export const WrappedFormUtils = {
@@ -52,7 +52,7 @@ export const WrappedFormUtils = {
   resetFields: PropTypes.func,
 
   getFieldDecorator: PropTypes.func,
-}
+};
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
@@ -62,7 +62,7 @@ export const FormProps = {
   hideRequiredMark: PropTypes.bool,
   autoFormCreate: PropTypes.func,
   options: PropTypes.object,
-}
+};
 
 export const ValidationRule = {
   /** validation error message */
@@ -87,7 +87,7 @@ export const ValidationRule = {
   transform: PropTypes.func,
   /** custom validate function (Note: callback must be called) */
   validator: PropTypes.func,
-}
+};
 
 // export type ValidateCallback = (errors: any, values: any) => void;
 
@@ -134,87 +134,106 @@ const Form = {
       ...options,
       fieldMetaProp: FIELD_META_PROP,
       fieldDataProp: FIELD_DATA_PROP,
-    })
+    });
   },
-  createForm (context, options = {}) {
-    return new Vue(Form.create({ ...options, templateContext: context })())
+  createForm(context, options = {}) {
+    return new Vue(Form.create({ ...options, templateContext: context })());
   },
-  provide () {
+  provide() {
     return {
       FormProps: this.$props,
-    }
+    };
   },
   watch: {
-    form () {
-      this.$forceUpdate()
+    form() {
+      this.$forceUpdate();
     },
   },
   methods: {
-    onSubmit (e) {
-      const { $listeners } = this
+    onSubmit(e) {
+      const { $listeners } = this;
       if (!$listeners.submit) {
-        e.preventDefault()
+        e.preventDefault();
       } else {
-        this.$emit('submit', e)
+        this.$emit('submit', e);
       }
     },
   },
 
-  render () {
+  render() {
     const {
-      prefixCls, hideRequiredMark, layout, onSubmit, $slots, autoFormCreate, options = {},
-    } = this
+      prefixCls,
+      hideRequiredMark,
+      layout,
+      onSubmit,
+      $slots,
+      autoFormCreate,
+      options = {},
+    } = this;
 
     const formClassName = classNames(prefixCls, {
       [`${prefixCls}-horizontal`]: layout === 'horizontal',
       [`${prefixCls}-vertical`]: layout === 'vertical',
       [`${prefixCls}-inline`]: layout === 'inline',
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
-    })
+    });
     if (autoFormCreate) {
-      warning(
-        false,
-        '`autoFormCreate` is deprecated. please use `form` instead.'
-      )
-      const DomForm = this.DomForm || createDOMForm({
-        fieldNameProp: 'id',
-        ...options,
-        fieldMetaProp: FIELD_META_PROP,
-        fieldDataProp: FIELD_DATA_PROP,
-        templateContext: this.$vnode.context,
-      })({
-        provide () {
-          return {
-            decoratorFormProps: this.$props,
-          }
-        },
-        data () {
-          return {
-            children: $slots.default,
-            formClassName: formClassName,
-            submit: onSubmit,
-          }
-        },
-        created () {
-          autoFormCreate(this.form)
-        },
-        render () {
-          const { children, formClassName, submit } = this
-          return <form onSubmit={submit} class={formClassName}>{children}</form>
-        },
-      })
+      warning(false, '`autoFormCreate` is deprecated. please use `form` instead.');
+      const DomForm =
+        this.DomForm ||
+        createDOMForm({
+          fieldNameProp: 'id',
+          ...options,
+          fieldMetaProp: FIELD_META_PROP,
+          fieldDataProp: FIELD_DATA_PROP,
+          templateContext: this.$vnode.context,
+        })({
+          provide() {
+            return {
+              decoratorFormProps: this.$props,
+            };
+          },
+          data() {
+            return {
+              children: $slots.default,
+              formClassName: formClassName,
+              submit: onSubmit,
+            };
+          },
+          created() {
+            autoFormCreate(this.form);
+          },
+          render() {
+            const { children, formClassName, submit } = this;
+            return (
+              <form onSubmit={submit} class={formClassName}>
+                {children}
+              </form>
+            );
+          },
+        });
       if (this.domForm) {
-        this.domForm.children = $slots.default
-        this.domForm.submit = onSubmit
-        this.domForm.formClassName = formClassName
+        this.domForm.children = $slots.default;
+        this.domForm.submit = onSubmit;
+        this.domForm.formClassName = formClassName;
       }
-      this.DomForm = DomForm
+      this.DomForm = DomForm;
 
-      return <DomForm wrappedComponentRef={(inst) => { this.domForm = inst }}/>
+      return (
+        <DomForm
+          wrappedComponentRef={inst => {
+            this.domForm = inst;
+          }}
+        />
+      );
     }
 
-    return <form onSubmit={onSubmit} class={formClassName}>{$slots.default}</form>
+    return (
+      <form onSubmit={onSubmit} class={formClassName}>
+        {$slots.default}
+      </form>
+    );
   },
-}
+};
 
-export default Form
+export default Form;

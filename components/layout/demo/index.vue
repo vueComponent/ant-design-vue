@@ -1,16 +1,16 @@
 <script>
-import Basic from './basic'
-import CustomTrigger from './custom-trigger'
-import FixedSider from './fixed-sider'
-import Fixed from './fixed'
-import Responsive from './responsive'
-import Side from './side'
-import TopSide2 from './top-side-2'
-import TopSide from './top-side'
-import Top from './top'
+import Basic from './basic';
+import CustomTrigger from './custom-trigger';
+import FixedSider from './fixed-sider';
+import Fixed from './fixed';
+import Responsive from './responsive';
+import Side from './side';
+import TopSide2 from './top-side-2';
+import TopSide from './top-side';
+import Top from './top';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 布局
@@ -118,7 +118,7 @@ The first level navigation is inclined left near a logo, and the secondary menu 
 
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '布局',
@@ -135,16 +135,16 @@ export default {
         'fixed-header': '/ant-design-vue/iframe/layout/#fixed-header',
         'sider': '/ant-design-vue/iframe/layout/#sider',
       } : {},
-    }
+    };
   },
   render () {
-    const iframeName = this.iframeName
+    const iframeName = this.iframeName;
     if (iframeName === 'fixed-sider') {
-      return <FixedSider/>
+      return <FixedSider/>;
     } else if (iframeName === 'fixed-header') {
-      return <Fixed />
+      return <Fixed />;
     } else if (iframeName === 'sider') {
-      return <Side />
+      return <Side />;
     }
     return (
       <div>
@@ -165,7 +165,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

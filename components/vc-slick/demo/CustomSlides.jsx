@@ -1,19 +1,19 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 const CustomSlide = {
   props: ['index'],
-  render () {
+  render() {
     return (
       <div>
         <h3>{this.index}</h3>
       </div>
-    )
+    );
   },
-}
+};
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -22,7 +22,7 @@ export default {
         slidesToShow: 1,
         slidesToScroll: 1,
       },
-    }
+    };
     return (
       <div>
         <h2>Custom Slides</h2>
@@ -35,6 +35,6 @@ export default {
           <CustomSlide index={6} />
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

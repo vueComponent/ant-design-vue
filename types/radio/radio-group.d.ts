@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
+import { AntdComponent } from '../component';
 
 export declare class RadioGroup extends AntdComponent {
   /**
@@ -35,7 +35,7 @@ export declare class RadioGroup extends AntdComponent {
    * @default 'default'
    * @type String
    */
-  size: "large" | "default" | "small";
+  size: 'large' | 'default' | 'small';
 
   /**
    * Used for setting the currently selected value.
@@ -48,5 +48,5 @@ export declare class RadioGroup extends AntdComponent {
    * @default 'outline'
    * @type string
    */
-  buttonStyle: "outline" | "solid";
+  buttonStyle: 'outline' | 'solid';
 }

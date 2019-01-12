@@ -1,4 +1,4 @@
-import InputNumber from '..'
-import focusTest from '../../../tests/shared/focusTest'
+import InputNumber from '..';
+import focusTest from '../../../tests/shared/focusTest';
 
-focusTest(InputNumber)
+focusTest(InputNumber);

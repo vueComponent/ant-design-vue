@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Επόμενη δεκαετία',
   previousCentury: 'Προηγούμενος αιώνας',
   nextCentury: 'Επόμενος αιώνας',
-}
+};

@@ -28,7 +28,7 @@ export declare class Spin extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "small" | "default" | "large";
+  size: 'small' | 'default' | 'large';
 
   /**
    * whether Spin is spinning

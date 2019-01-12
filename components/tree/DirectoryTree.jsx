@@ -1,12 +1,12 @@
-import omit from 'omit.js'
-import debounce from 'lodash/debounce'
-import PropTypes from '../_util/vue-types'
-import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util'
-import Tree, { TreeProps } from './Tree'
-import { calcRangeKeys, getFullKeyList } from './util'
-import Icon from '../icon'
-import BaseMixin from '../_util/BaseMixin'
-import { initDefaultProps, getOptionProps } from '../_util/props-util'
+import omit from 'omit.js';
+import debounce from 'lodash/debounce';
+import PropTypes from '../_util/vue-types';
+import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
+import Tree, { TreeProps } from './Tree';
+import { calcRangeKeys, getFullKeyList } from './util';
+import Icon from '../icon';
+import BaseMixin from '../_util/BaseMixin';
+import { initDefaultProps, getOptionProps } from '../_util/props-util';
 
 // export type ExpandAction = false | 'click' | 'doubleClick';
 
@@ -19,12 +19,12 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util'
 //   selectedKeys?: string[];
 // }
 
-function getIcon (props, h) {
-  const { isLeaf, expanded } = props
+function getIcon(props, h) {
+  const { isLeaf, expanded } = props;
   if (isLeaf) {
-    return <Icon type='file' />
+    return <Icon type="file" />;
   }
-  return <Icon type={expanded ? 'folder-open' : 'folder'} />
+  return <Icon type={expanded ? 'folder-open' : 'folder'} />;
 }
 
 export default {
@@ -34,11 +34,14 @@ export default {
     prop: 'checkedKeys',
     event: 'check',
   },
-  props: initDefaultProps({ ...TreeProps(), expandAction: PropTypes.oneOf([false, 'click', 'doubleclick']) }, {
-    prefixCls: 'ant-tree',
-    showIcon: true,
-    expandAction: 'click',
-  }),
+  props: initDefaultProps(
+    { ...TreeProps(), expandAction: PropTypes.oneOf([false, 'click', 'doubleclick']) },
+    {
+      prefixCls: 'ant-tree',
+      showIcon: true,
+      expandAction: 'click',
+    },
+  ),
 
   // state: DirectoryTreeState;
   // onDebounceExpand: (event, node: AntTreeNode) => void;
@@ -47,137 +50,139 @@ export default {
   // lastSelectedKey?: string;
   // cachedSelectedKeys?: string[];
 
-  data () {
-    const props = getOptionProps(this)
-    const { defaultExpandAll, defaultExpandParent, expandedKeys, defaultExpandedKeys } = props
-    const { keyEntities } = convertTreeToEntities(this.$slots.default)
-    const state = {}
+  data() {
+    const props = getOptionProps(this);
+    const { defaultExpandAll, defaultExpandParent, expandedKeys, defaultExpandedKeys } = props;
+    const { keyEntities } = convertTreeToEntities(this.$slots.default);
+    const state = {};
     // Selected keys
-    state._selectedKeys = props.selectedKeys || props.defaultSelectedKeys || []
+    state._selectedKeys = props.selectedKeys || props.defaultSelectedKeys || [];
 
     // Expanded keys
     if (defaultExpandAll) {
-      state._expandedKeys = getFullKeyList(this.$slots.default)
+      state._expandedKeys = getFullKeyList(this.$slots.default);
     } else if (defaultExpandParent) {
-      state._expandedKeys = conductExpandParent(expandedKeys || defaultExpandedKeys, keyEntities)
+      state._expandedKeys = conductExpandParent(expandedKeys || defaultExpandedKeys, keyEntities);
     } else {
-      state._expandedKeys = expandedKeys || defaultExpandedKeys
+      state._expandedKeys = expandedKeys || defaultExpandedKeys;
     }
 
     this.onDebounceExpand = debounce(this.expandFolderNode, 200, {
       leading: true,
-    })
+    });
     return {
       _selectedKeys: [],
       _expandedKeys: [],
       ...state,
-    }
+    };
   },
   watch: {
-    expandedKeys (val) {
-      this.setState({ _expandedKeys: val })
+    expandedKeys(val) {
+      this.setState({ _expandedKeys: val });
     },
-    selectedKeys (val) {
-      this.setState({ _selectedKeys: val })
+    selectedKeys(val) {
+      this.setState({ _selectedKeys: val });
     },
   },
   methods: {
-    onExpand (expandedKeys, info) {
-      this.setUncontrolledState({ _expandedKeys: expandedKeys })
+    onExpand(expandedKeys, info) {
+      this.setUncontrolledState({ _expandedKeys: expandedKeys });
 
-      this.$emit('expand', expandedKeys, info)
+      this.$emit('expand', expandedKeys, info);
 
-      return undefined
+      return undefined;
     },
 
-    onClick (event, node) {
-      const { expandAction } = this.$props
+    onClick(event, node) {
+      const { expandAction } = this.$props;
 
       // Expand the tree
       if (expandAction === 'click') {
-        this.onDebounceExpand(event, node)
+        this.onDebounceExpand(event, node);
       }
-      this.$emit('click', event, node)
+      this.$emit('click', event, node);
     },
 
-    onDoubleClick (event, node) {
-      const { expandAction } = this.$props
+    onDoubleClick(event, node) {
+      const { expandAction } = this.$props;
 
       // Expand the tree
       if (expandAction === 'doubleclick') {
-        this.onDebounceExpand(event, node)
+        this.onDebounceExpand(event, node);
       }
 
-      this.$emit('doubleclick', event, node)
+      this.$emit('doubleclick', event, node);
     },
 
-    onSelect (keys, event) {
-      const { multiple } = this.$props
-      const children = this.$slots.default || []
-      const { _expandedKeys: expandedKeys = [] } = this.$data
-      const { node, nativeEvent } = event
-      const { eventKey = '' } = node
+    onSelect(keys, event) {
+      const { multiple } = this.$props;
+      const children = this.$slots.default || [];
+      const { _expandedKeys: expandedKeys = [] } = this.$data;
+      const { node, nativeEvent } = event;
+      const { eventKey = '' } = node;
 
-      const newState = {}
+      const newState = {};
       // Windows / Mac single pick
-      const ctrlPick = nativeEvent.ctrlKey || nativeEvent.metaKey
-      const shiftPick = nativeEvent.shiftKey
+      const ctrlPick = nativeEvent.ctrlKey || nativeEvent.metaKey;
+      const shiftPick = nativeEvent.shiftKey;
 
       // Generate new selected keys
-      let newSelectedKeys
+      let newSelectedKeys;
       if (multiple && ctrlPick) {
-      // Control click
-        newSelectedKeys = keys
-        this.lastSelectedKey = eventKey
-        this.cachedSelectedKeys = newSelectedKeys
+        // Control click
+        newSelectedKeys = keys;
+        this.lastSelectedKey = eventKey;
+        this.cachedSelectedKeys = newSelectedKeys;
       } else if (multiple && shiftPick) {
-      // Shift click
-        newSelectedKeys = Array.from(new Set([
-          ...this.cachedSelectedKeys || [],
-          ...calcRangeKeys(children, expandedKeys, eventKey, this.lastSelectedKey),
-        ]))
+        // Shift click
+        newSelectedKeys = Array.from(
+          new Set([
+            ...(this.cachedSelectedKeys || []),
+            ...calcRangeKeys(children, expandedKeys, eventKey, this.lastSelectedKey),
+          ]),
+        );
       } else {
-      // Single click
-        newSelectedKeys = [eventKey]
-        this.lastSelectedKey = eventKey
-        this.cachedSelectedKeys = newSelectedKeys
+        // Single click
+        newSelectedKeys = [eventKey];
+        this.lastSelectedKey = eventKey;
+        this.cachedSelectedKeys = newSelectedKeys;
       }
-      newState._selectedKeys = newSelectedKeys
+      newState._selectedKeys = newSelectedKeys;
 
-      this.$emit('update:selectedKeys', newSelectedKeys)
-      this.$emit('select', newSelectedKeys, event)
+      this.$emit('update:selectedKeys', newSelectedKeys);
+      this.$emit('select', newSelectedKeys, event);
 
-      this.setUncontrolledState(newState)
+      this.setUncontrolledState(newState);
     },
 
-    expandFolderNode  (event, node) {
-      const { isLeaf } = node
+    expandFolderNode(event, node) {
+      const { isLeaf } = node;
 
       if (isLeaf || event.shiftKey || event.metaKey || event.ctrlKey) {
-        return
+        return;
       }
 
       if (this.$refs.tree.$refs.tree) {
         // Get internal vc-tree
-        const internalTree = this.$refs.tree.$refs.tree
+        const internalTree = this.$refs.tree.$refs.tree;
 
         // Call internal rc-tree expand function
         // https://github.com/ant-design/ant-design/issues/12567
-        internalTree.onNodeExpand(event, node)
+        internalTree.onNodeExpand(event, node);
       }
     },
 
-    setUncontrolledState (state) {
-      const newState = omit(state, Object.keys(getOptionProps(this)).map(p => `_${p}`))
+    setUncontrolledState(state) {
+      const newState = omit(state, Object.keys(getOptionProps(this)).map(p => `_${p}`));
       if (Object.keys(newState).length) {
-        this.setState(newState)
+        this.setState(newState);
       }
     },
   },
 
-  render () {
-    const { prefixCls, ...props } = getOptionProps(this)
-    const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data
+  render() {
+    const { prefixCls, ...props } = getOptionProps(this);
+    const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data;
     const treeProps = {
       props: {
         icon: getIcon,
@@ -195,9 +200,7 @@ export default {
         doubleclick: this.onDoubleClick,
         expand: this.onExpand,
       },
-    }
-    return (
-      <Tree {...treeProps}>{this.$slots.default}</Tree>
-    )
+    };
+    return <Tree {...treeProps}>{this.$slots.default}</Tree>;
   },
-}
+};

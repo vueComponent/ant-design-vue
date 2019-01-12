@@ -1,7 +1,7 @@
 <script>
 /* eslint-disable no-console */
-import '../assets/index.less'
-import Cascader from '../index'
+import '../assets/index.less';
+import Cascader from '../index';
 
 const addressOptions = [{
   label: '福建',
@@ -38,18 +38,18 @@ const addressOptions = [{
     label: '海淀区',
     value: 'haidian',
   }],
-}]
+}];
 
 export default {
   data () {
     return {
       inputValue: '',
-    }
+    };
   },
   methods: {
     onChange (value, selectedOptions) {
-      console.log(value, selectedOptions)
-      this.inputValue = selectedOptions.map(o => o.label).join(', ')
+      console.log(value, selectedOptions);
+      this.inputValue = selectedOptions.map(o => o.label).join(', ');
     },
   },
 
@@ -58,7 +58,7 @@ export default {
       <Cascader options={addressOptions} onChange={this.onChange} transitionName='slide-up'>
         <input value={this.inputValue}/>
       </Cascader>
-    )
+    );
   },
-}
+};
 </script>

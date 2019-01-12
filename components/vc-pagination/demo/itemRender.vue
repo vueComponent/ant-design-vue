@@ -1,26 +1,26 @@
 <script>
-import VcPagination from '../index'
-import '../assets/index.less'
+import VcPagination from '../index';
+import '../assets/index.less';
 
 export default {
   data () {
-    return {}
+    return {};
   },
   methods: {
     itemRender (current, type, element) {
       if (type === 'page') {
-        return <a href={`#${current}`}>{current}</a>
+        return <a href={`#${current}`}>{current}</a>;
       }
-      return element
+      return element;
     },
     textItemRender (current, type, element) {
       if (type === 'prev') {
-        return 'Prev'
+        return 'Prev';
       }
       if (type === 'next') {
-        return 'Next'
+        return 'Next';
       }
-      return element
+      return element;
     },
   },
   render () {
@@ -35,7 +35,7 @@ export default {
           itemRender={this.textItemRender}
         />
       </div>
-    )
+    );
   },
-}
+};
 </script>

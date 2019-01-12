@@ -1,9 +1,8 @@
-import PropTypes from '../_util/vue-types'
-import { getOptionProps } from '../_util/props-util'
-import Button from '../button'
+import PropTypes from '../_util/vue-types';
+import { getOptionProps } from '../_util/props-util';
+import Button from '../button';
 
-function noop () {
-}
+function noop() {}
 
 export const TransferOperationProps = {
   className: PropTypes.string,
@@ -14,12 +13,12 @@ export const TransferOperationProps = {
   leftActive: PropTypes.bool,
   rightActive: PropTypes.bool,
   disabled: PropTypes.bool,
-}
+};
 
 export default {
   name: 'Operation',
   props: { ...TransferOperationProps },
-  render () {
+  render() {
     const {
       disabled,
       moveToLeft = noop,
@@ -28,28 +27,28 @@ export default {
       rightArrowText = '',
       leftActive,
       rightActive,
-    } = getOptionProps(this)
+    } = getOptionProps(this);
     return (
       <div>
         <Button
-          type='primary'
-          size='small'
+          type="primary"
+          size="small"
           disabled={disabled || !rightActive}
           onClick={moveToRight}
-          icon='right'
+          icon="right"
         >
           {rightArrowText}
         </Button>
         <Button
-          type='primary'
-          size='small'
+          type="primary"
+          size="small"
           disabled={disabled || !leftActive}
           onClick={moveToLeft}
-          icon='left'
+          icon="left"
         >
           {leftArrowText}
         </Button>
       </div>
-    )
+    );
   },
-}
+};

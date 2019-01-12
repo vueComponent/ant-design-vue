@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Sledeća decenija',
   previousCentury: 'Prethodni vek',
   nextCentury: 'Sledeći vek',
-}
+};

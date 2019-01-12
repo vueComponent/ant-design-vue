@@ -1,3 +1,3 @@
-import demoTest from '../../../tests/shared/demoTest'
+import demoTest from '../../../tests/shared/demoTest';
 
-demoTest('back-top')
+demoTest('back-top');

@@ -6,11 +6,7 @@ import { AntdComponent } from './component';
 
 export declare type Value = { key: string };
 
-export declare type SelectValue =
-  | string
-  | number
-  | Value
-  | Array<Value | string | number>;
+export declare type SelectValue = string | number | Value | Array<Value | string | number>;
 
 export declare class AutoComplete extends AntdComponent {
   /**

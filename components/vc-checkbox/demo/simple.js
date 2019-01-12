@@ -1,45 +1,36 @@
 /* eslint no-console:0 */
-import Checkbox from '../index'
-import '../assets/index.less'
+import Checkbox from '../index';
+import '../assets/index.less';
 
-function onChange (e) {
-  console.log('Checkbox checked:', (e.target.checked))
+function onChange(e) {
+  console.log('Checkbox checked:', e.target.checked);
 }
 
 export default {
-  data () {
+  data() {
     return {
       disabled: false,
-    }
+    };
   },
   methods: {
-    toggle () {
-      this.disabled = !this.disabled
+    toggle() {
+      this.disabled = !this.disabled;
     },
   },
-  render () {
+  render() {
     return (
       <div style={{ margin: '20px' }}>
         <div>
           <p>
             <label>
-              <Checkbox
-                checked
-                onChange={onChange}
-                disabled={this.disabled}
-              />
+              <Checkbox checked onChange={onChange} disabled={this.disabled} />
               &nbsp; controlled checked rc-checkbox
             </label>
             &nbsp;&nbsp;
           </p>
           <p>
             <label>
-              <input
-                checked
-                type='checkbox'
-                onChange={onChange}
-                disabled={this.disabled}
-              />
+              <input checked type="checkbox" onChange={onChange} disabled={this.disabled} />
               &nbsp; controlled checked native
             </label>
             &nbsp;&nbsp;
@@ -49,11 +40,7 @@ export default {
         <div>
           <p>
             <label>
-              <Checkbox
-                defaultChecked
-                onChange={onChange}
-                disabled={this.disabled}
-              />
+              <Checkbox defaultChecked onChange={onChange} disabled={this.disabled} />
               &nbsp; defaultChecked rc-checkbox
             </label>
             &nbsp;&nbsp;
@@ -64,11 +51,11 @@ export default {
           <p>
             <label>
               <Checkbox
-                name='my-checkbox'
+                name="my-checkbox"
                 defaultChecked
                 onChange={onChange}
                 disabled={this.disabled}
-                id='test'
+                id="test"
               />
               &nbsp; defaultChecked rc-checkbox with name
             </label>
@@ -78,6 +65,6 @@ export default {
 
         <button onClick={this.toggle}>toggle disabled</button>
       </div>
-    )
+    );
   },
-}
+};

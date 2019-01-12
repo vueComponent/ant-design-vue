@@ -24,4 +24,4 @@ export default {
   nextDecade: 'Következő évtized', // 'Next decade',
   previousCentury: 'Múlt évszázad', // 'Last century',
   nextCentury: 'Jövő évszázad', // 'Next century',
-}
+};

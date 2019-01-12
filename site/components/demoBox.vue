@@ -37,9 +37,9 @@
   </section>
 </template>
 <script>
-import animate from 'antd/_util/openAnimation'
-import BaseMixin from 'antd/_util/BaseMixin'
-import { isZhCN } from '../util'
+import animate from 'antd/_util/openAnimation';
+import BaseMixin from 'antd/_util/BaseMixin';
+import { isZhCN } from '../util';
 export default {
   mixins: [BaseMixin],
   name: 'demoBox',
@@ -52,25 +52,25 @@ export default {
     demoContext: { default: {}},
   },
   data () {
-    const { name = '' } = this.demoContext
-    const { html, script, style, us, cn, sourceCode } = this.jsfiddle
+    const { name = '' } = this.demoContext;
+    const { us, cn, sourceCode } = this.jsfiddle;
     // let sourceCode = `<template>${html}</template>\n`
     // sourceCode = script ? sourceCode + '\<script>' + script + '<\/script>' : sourceCode
     // sourceCode = style ? sourceCode + '\<style>' + style + '<\/style>' : sourceCode
-    const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || ''
-    const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || ''
+    const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || '';
+    const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || '';
     if (process.env.NODE_ENV !== 'production' && usTitle === '') {
       throw new Error(
         `not have usTitle`,
-      )
+      );
     }
-    const iframeDemoKey = usTitle.split(' ').join('-').toLowerCase()
-    const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase()
+    const iframeDemoKey = usTitle.split(' ').join('-').toLowerCase();
+    const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase();
 
     if (this.demoContext.store) {
-      const { currentSubMenu } = this.demoContext.store.getState()
+      const { currentSubMenu } = this.demoContext.store.getState();
       // id = `${id}-${currentSubMenu.length + 1}`
-      this.demoContext.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] })
+      this.demoContext.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] });
     }
     return {
       isOpen: false,
@@ -80,16 +80,16 @@ export default {
       sourceCode,
       id,
       iframeDemoKey,
-    }
+    };
   },
   methods: {
     toggle () {
-      this.isOpen = !this.isOpen
+      this.isOpen = !this.isOpen;
     },
     enter: animate.enter,
     leave: animate.leave,
     handleCodeCopied () {
-      this.setState({ copied: true })
+      this.setState({ copied: true });
     },
 
     onCopyTooltipVisibleChange (visible) {
@@ -97,15 +97,15 @@ export default {
         this.setState({
           copyTooltipVisible: visible,
           copied: false,
-        })
-        return
+        });
+        return;
       }
       this.setState({
         copyTooltipVisible: visible,
-      })
+      });
     },
   },
-}
+};
 </script>
 <style scoped lang="less">
 .box-demo {

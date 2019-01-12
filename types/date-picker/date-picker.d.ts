@@ -2,11 +2,11 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { DatepickerCommon } from "./common";
-import { Moment } from "moment";
-import { RangePicker } from "./range-picker";
-import { MonthPicker } from "./month-picker";
-import { WeekPicker } from "./week-picker";
+import { DatepickerCommon } from './common';
+import { Moment } from 'moment';
+import { RangePicker } from './range-picker';
+import { MonthPicker } from './month-picker';
+import { WeekPicker } from './week-picker';
 
 export declare class DatePicker extends DatepickerCommon {
   RangePicker: RangePicker;

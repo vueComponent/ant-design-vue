@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/et_EE'
-import DatePicker from '../date-picker/locale/et_EE'
-import TimePicker from '../time-picker/locale/et_EE'
-import Calendar from '../calendar/locale/et_EE'
+import Pagination from '../vc-pagination/locale/et_EE';
+import DatePicker from '../date-picker/locale/et_EE';
+import TimePicker from '../time-picker/locale/et_EE';
+import Calendar from '../calendar/locale/et_EE';
 
 export default {
   locale: 'et',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Üleslaadimise tõrge',
     previewFile: 'Faili eelvaade',
   },
-}
+};

@@ -1,6 +1,6 @@
 <script>
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# ConfigProvider 全局化配置
@@ -8,7 +8,7 @@ const md = {
   us: `# ConfigProvider
 \`ConfigProvider\` provides a uniform configuration support for components.
 `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '全局化配置',
@@ -26,7 +26,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

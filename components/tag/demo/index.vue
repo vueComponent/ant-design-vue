@@ -1,12 +1,12 @@
 <script>
-import Basic from './basic'
-import Checkable from './checkable'
-import Colorful from './colorful'
-import Control from './control'
-import HotTags from './hot-tags'
-import Controlled from './controlled'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Checkable from './checkable';
+import Colorful from './colorful';
+import Control from './control';
+import HotTags from './hot-tags';
+import Controlled from './controlled';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 标签 Tag
@@ -29,7 +29,7 @@ const md = {
 
 - When categorizing.
     ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '标签',
@@ -52,9 +52,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-tag-demo .ant-tag{

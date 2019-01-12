@@ -1,7 +1,7 @@
 <script>
-import { isZhCN } from '../util'
-import sortBy from 'lodash/sortBy'
-import packageInfo from '../../package.json'
+import { isZhCN } from '../util';
+import sortBy from 'lodash/sortBy';
+import packageInfo from '../../package.json';
 
 export default {
   props: {
@@ -11,27 +11,27 @@ export default {
   data () {
     return {
       value: null,
-    }
+    };
   },
   methods: {
     handleClick () {
-      const name = this.name
-      const path = this.$route.path
-      const newName = isZhCN(name) ? name.replace(/-cn\/?$/, '') : `${name}-cn`
+      const name = this.name;
+      const path = this.$route.path;
+      const newName = isZhCN(name) ? name.replace(/-cn\/?$/, '') : `${name}-cn`;
       this.$router.push({
         path: path.replace(name, newName),
-      })
-      this.$i18n.locale = isZhCN(name) ? 'en-US' : 'zh-CN'
+      });
+      this.$i18n.locale = isZhCN(name) ? 'en-US' : 'zh-CN';
     },
     onSelect (val) {
-      this.$router.push(val)
-      this.value = val
+      this.$router.push(val);
+      this.value = val;
     },
   },
   render () {
-    const name = this.name
-    const searchData = sortBy(this.searchData, ['title'])
-    const isCN = isZhCN(name)
+    const name = this.name;
+    const searchData = sortBy(this.searchData, ['title']);
+    const isCN = isZhCN(name);
     return (
       <header id='header'>
         <a-row>
@@ -99,7 +99,7 @@ export default {
           </a-col>
         </a-row>
       </header>
-    )
+    );
   },
-}
+};
 </script>

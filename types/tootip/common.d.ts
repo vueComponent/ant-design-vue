@@ -2,9 +2,9 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
+import { AntdComponent } from '../component';
 
-export declare type triggerType = "hover" | "focus" | "click" | "contextmenu";
+export declare type triggerType = 'hover' | 'focus' | 'click' | 'contextmenu';
 
 export declare class TooltipCommon extends AntdComponent {
   /**
@@ -68,18 +68,18 @@ export declare class TooltipCommon extends AntdComponent {
    * @type string
    */
   placement:
-    | "top"
-    | "left"
-    | "right"
-    | "bottom"
-    | "topLeft"
-    | "topRight"
-    | "bottomLeft"
-    | "bottomRight"
-    | "leftTop"
-    | "leftBottom"
-    | "rightTop"
-    | "rightBottom";
+    | 'top'
+    | 'left'
+    | 'right'
+    | 'bottom'
+    | 'topLeft'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomRight'
+    | 'leftTop'
+    | 'leftBottom'
+    | 'rightTop'
+    | 'rightBottom';
 
   /**
    * Tooltip trigger mode

@@ -57,31 +57,31 @@ export default {
     return {
       expand: false,
       form: this.$form.createForm(this),
-    }
+    };
   },
   computed: {
     count () {
-      return this.expand ? 11 : 7
+      return this.expand ? 11 : 7;
     },
   },
   methods: {
     handleSearch  (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((error, values) => {
-        console.log('error', error)
-        console.log('Received values of form: ', values)
-      })
+        console.log('error', error);
+        console.log('Received values of form: ', values);
+      });
     },
 
     handleReset () {
-      this.form.resetFields()
+      this.form.resetFields();
     },
 
     toggle  () {
-      this.expand = !this.expand
+      this.expand = !this.expand;
     },
   },
-}
+};
 </script>
 <style>
 .ant-advanced-search-form {

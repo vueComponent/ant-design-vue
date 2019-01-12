@@ -3,7 +3,14 @@
 @font-face {
   font-family: 'FontAwesome';
   src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot');
-  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf') format('truetype'), url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?#fontawesomeregular') format('svg');
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.woff')
+      format('woff'),
+    url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf')
+      format('truetype'),
+    url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?#fontawesomeregular')
+      format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,7 +32,7 @@
   &-collapse {
     overflow: hidden;
     &-active {
-      transition: height .3s ease-out;
+      transition: height 0.3s ease-out;
     }
   }
 
@@ -68,7 +75,8 @@
     margin-top: 0;
   }
 
-  &-item, &-submenu-title {
+  &-item,
+  &-submenu-title {
     margin: 0;
     position: relative;
     display: block;
@@ -76,7 +84,8 @@
     white-space: nowrap;
 
     // Disabled state sets text to gray and nukes hover/tab effects
-    &.@{menuPrefixCls}-item-disabled, &.@{menuPrefixCls}-submenu-disabled {
+    &.@{menuPrefixCls}-item-disabled,
+    &.@{menuPrefixCls}-submenu-disabled {
       color: #777 !important;
     }
   }
@@ -102,7 +111,8 @@
     }
   }
 
-  .@{menuPrefixCls}-submenu-title, .@{menuPrefixCls}-item {
+  .@{menuPrefixCls}-submenu-title,
+  .@{menuPrefixCls}-item {
     .anticon {
       width: 14px;
       height: 14px;
@@ -112,31 +122,33 @@
   }
 
   &-horizontal {
-    background-color: #F3F5F7;
+    background-color: #f3f5f7;
     border: none;
     border-bottom: 1px solid #d9d9d9;
     box-shadow: none;
     white-space: nowrap;
     overflow: hidden;
 
-    & > .@{menuPrefixCls}-item, & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
+    & > .@{menuPrefixCls}-item,
+    & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
       padding: 15px 20px;
     }
 
-    & > .@{menuPrefixCls}-submenu, & > .@{menuPrefixCls}-item {
+    & > .@{menuPrefixCls}-submenu,
+    & > .@{menuPrefixCls}-item {
       border-bottom: 2px solid transparent;
       display: inline-block;
       vertical-align: bottom;
 
       &-active {
         border-bottom: 2px solid #2db7f5;
-        background-color: #F3F5F7;
+        background-color: #f3f5f7;
         color: #2baee9;
       }
     }
 
     &:after {
-      content: "\20";
+      content: '\20';
       display: block;
       height: 0;
       clear: both;
@@ -148,7 +160,8 @@
   &-vertical-right,
   &-inline {
     padding: 12px 0;
-    & > .@{menuPrefixCls}-item, & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
+    & > .@{menuPrefixCls}-item,
+    & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
       padding: 12px 8px 12px 24px;
     }
     .@{menuPrefixCls}-submenu-arrow {
@@ -163,14 +176,14 @@
       right: 16px;
       line-height: 1.5em;
       &:before {
-        content: "\f0da";
+        content: '\f0da';
       }
     }
   }
   &-inline {
     .@{menuPrefixCls}-submenu-arrow {
       transform: rotate(90deg);
-      transition: transform .3s;
+      transition: transform 0.3s;
     }
     & .@{menuPrefixCls}-submenu-open > .@{menuPrefixCls}-submenu-title {
       .@{menuPrefixCls}-submenu-arrow {
@@ -191,7 +204,8 @@
     border-radius: 0;
     box-shadow: none;
 
-    & > .@{menuPrefixCls}-item, & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
+    & > .@{menuPrefixCls}-item,
+    & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
       padding-top: 8px;
       padding-bottom: 8px;
       padding-right: 0;
@@ -199,14 +213,14 @@
   }
 
   .effect() {
-    animation-duration: .3s;
+    animation-duration: 0.3s;
     animation-fill-mode: both;
     transform-origin: 0 0;
   }
 
   &-open {
-
-    &-slide-up-enter, &-slide-up-appear {
+    &-slide-up-enter,
+    &-slide-up-appear {
       .effect();
       opacity: 0;
       animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -220,7 +234,8 @@
       animation-play-state: paused;
     }
 
-    &-slide-up-enter&-slide-up-enter-active, &-slide-up-appear&-slide-up-appear-active {
+    &-slide-up-enter&-slide-up-enter-active,
+    &-slide-up-appear&-slide-up-appear-active {
       animation-name: rcMenuOpenSlideUpIn;
       animation-play-state: running;
     }
@@ -255,7 +270,8 @@
       }
     }
 
-    &-zoom-enter, &-zoom-appear {
+    &-zoom-enter,
+    &-zoom-appear {
       opacity: 0;
       .effect();
       animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -268,7 +284,8 @@
       animation-play-state: paused;
     }
 
-    &-zoom-enter&-zoom-enter-active, &-zoom-appear&-zoom-appear-active {
+    &-zoom-enter&-zoom-enter-active,
+    &-zoom-appear&-zoom-appear-active {
       animation-name: rcMenuOpenZoomIn;
       animation-play-state: running;
     }
@@ -290,7 +307,6 @@
     }
     @keyframes rcMenuOpenZoomOut {
       0% {
-
         transform: scale(1, 1);
       }
       100% {
@@ -299,6 +315,4 @@
       }
     }
   }
-
 }
-

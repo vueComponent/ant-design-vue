@@ -1,20 +1,17 @@
+import PropTypes from '../../../_util/vue-types';
+import BaseMixin from '../../../_util/BaseMixin';
+import { getTodayTime, getMonthName } from '../util/index';
 
-import PropTypes from '../../../_util/vue-types'
-import BaseMixin from '../../../_util/BaseMixin'
-import { getTodayTime, getMonthName } from '../util/index'
+const ROW = 4;
+const COL = 3;
 
-const ROW = 4
-const COL = 3
-
-function chooseMonth (month) {
-  const next = this.sValue.clone()
-  next.month(month)
-  this.setAndSelectValue(next)
+function chooseMonth(month) {
+  const next = this.sValue.clone();
+  next.month(month);
+  this.setAndSelectValue(next);
 }
 
-function noop () {
-
-}
+function noop() {}
 
 const MonthTable = {
   mixins: [BaseMixin],
@@ -26,113 +23,111 @@ const MonthTable = {
     contentRender: PropTypes.any,
     disabledDate: PropTypes.func,
   },
-  data () {
+  data() {
     return {
       sValue: this.value,
-    }
+    };
   },
   watch: {
-    value (val) {
+    value(val) {
       this.setState({
         sValue: val,
-      })
+      });
     },
   },
   methods: {
-    setAndSelectValue (value) {
+    setAndSelectValue(value) {
       this.setState({
         sValue: value,
-      })
-      this.__emit('select', value)
+      });
+      this.__emit('select', value);
     },
 
-    months () {
-      const value = this.sValue
-      const current = value.clone()
-      const months = []
-      let index = 0
+    months() {
+      const value = this.sValue;
+      const current = value.clone();
+      const months = [];
+      let index = 0;
       for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
-        months[rowIndex] = []
+        months[rowIndex] = [];
         for (let colIndex = 0; colIndex < COL; colIndex++) {
-          current.month(index)
-          const content = getMonthName(current)
+          current.month(index);
+          const content = getMonthName(current);
           months[rowIndex][colIndex] = {
             value: index,
             content,
             title: content,
-          }
-          index++
+          };
+          index++;
         }
       }
-      return months
+      return months;
     },
   },
 
-  render () {
-    const props = this.$props
-    const value = this.sValue
-    const today = getTodayTime(value)
-    const months = this.months()
-    const currentMonth = value.month()
-    const { prefixCls, locale, contentRender, cellRender, disabledDate } = props
+  render() {
+    const props = this.$props;
+    const value = this.sValue;
+    const today = getTodayTime(value);
+    const months = this.months();
+    const currentMonth = value.month();
+    const { prefixCls, locale, contentRender, cellRender, disabledDate } = props;
     const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
-        let disabled = false
+        let disabled = false;
         if (disabledDate) {
-          const testValue = value.clone()
-          testValue.month(monthData.value)
-          disabled = disabledDate(testValue)
+          const testValue = value.clone();
+          testValue.month(monthData.value);
+          disabled = disabledDate(testValue);
         }
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
-          [`${prefixCls}-current-cell`]: today.year() === value.year() &&
-          monthData.value === today.month(),
-        }
-        let cellEl
+          [`${prefixCls}-current-cell`]:
+            today.year() === value.year() && monthData.value === today.month(),
+        };
+        let cellEl;
         if (cellRender) {
-          const currentValue = value.clone()
-          currentValue.month(monthData.value)
-          cellEl = cellRender(currentValue, locale)
+          const currentValue = value.clone();
+          currentValue.month(monthData.value);
+          cellEl = cellRender(currentValue, locale);
         } else {
-          let content
+          let content;
           if (contentRender) {
-            const currentValue = value.clone()
-            currentValue.month(monthData.value)
-            content = contentRender(currentValue, locale)
+            const currentValue = value.clone();
+            currentValue.month(monthData.value);
+            content = contentRender(currentValue, locale);
           } else {
-            content = monthData.content
+            content = monthData.content;
           }
-          cellEl = (
-            <a class={`${prefixCls}-month`}>
-              {content}
-            </a>
-          )
+          cellEl = <a class={`${prefixCls}-month`}>{content}</a>;
         }
         return (
           <td
-            role='gridcell'
+            role="gridcell"
             key={monthData.value}
             onClick={disabled ? noop : chooseMonth.bind(this, monthData.value)}
             title={monthData.title}
             class={classNameMap}
           >
             {cellEl}
-          </td>)
-      })
-      return (<tr key={index} role='row'>{tds}</tr>)
-    })
+          </td>
+        );
+      });
+      return (
+        <tr key={index} role="row">
+          {tds}
+        </tr>
+      );
+    });
 
     return (
-      <table class={`${prefixCls}-table`} cellSpacing='0' role='grid'>
-        <tbody class={`${prefixCls}-tbody`}>
-          {monthsEls}
-        </tbody>
+      <table class={`${prefixCls}-table`} cellSpacing="0" role="grid">
+        <tbody class={`${prefixCls}-tbody`}>{monthsEls}</tbody>
       </table>
-    )
+    );
   },
-}
+};
 
-export default MonthTable
-
+export default MonthTable;

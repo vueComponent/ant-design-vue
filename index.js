@@ -1,28 +1,30 @@
 /* eslint no-console:0 */
-function camelCase (name) {
-  return name.charAt(0).toUpperCase() +
+function camelCase(name) {
+  return (
+    name.charAt(0).toUpperCase() +
     name.slice(1).replace(/-(\w)/g, (m, n) => {
-      return n.toUpperCase()
+      return n.toUpperCase();
     })
+  );
 }
 
 // Just import style for https://github.com/ant-design/ant-design/issues/3745
-const req = require.context('./components', true, /^\.\/[^_][\w-]+\/style\/index\.js?$/)
+const req = require.context('./components', true, /^\.\/[^_][\w-]+\/style\/index\.js?$/);
 
-req.keys().forEach((mod) => {
-  let v = req(mod)
+req.keys().forEach(mod => {
+  let v = req(mod);
   if (v && v.default) {
-    v = v.default
+    v = v.default;
   }
-  const match = mod.match(/^\.\/([^_][\w-]+)\/index\.js?$/)
+  const match = mod.match(/^\.\/([^_][\w-]+)\/index\.js?$/);
   if (match && match[1]) {
     if (match[1] === 'message' || match[1] === 'notification') {
       // message & notification should not be capitalized
-      exports[match[1]] = v
+      exports[match[1]] = v;
     } else {
-      exports[camelCase(match[1])] = v
+      exports[camelCase(match[1])] = v;
     }
   }
-})
+});
 
-module.exports = require('./components')
+module.exports = require('./components');

@@ -1,12 +1,12 @@
 <script>
-import Basic from './basic.md'
-import Color from './color.md'
-import Pending from './pending.md'
-import Custom from './custom.md'
-import Alternate from './alternate'
-import Right from './right'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import Color from './color.md';
+import Pending from './pending.md';
+import Custom from './custom.md';
+import Alternate from './alternate';
+import Right from './right';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 时间轴
@@ -24,7 +24,7 @@ const md = {
   - When you need a timeline to make a visual connection.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '时间轴',
@@ -47,7 +47,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

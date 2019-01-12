@@ -20,7 +20,7 @@
   }
 
   &:after {
-    content: " ";
+    content: ' ';
     display: block;
     height: 0;
     clear: both;
@@ -79,9 +79,10 @@
     }
   }
 
-  &-jump-prev, &-jump-next {
+  &-jump-prev,
+  &-jump-next {
     &:after {
-      content: "•••";
+      content: '•••';
       display: block;
       letter-spacing: 2px;
       color: #ccc;
@@ -94,13 +95,12 @@
         color: #2db7f5;
       }
     }
-
   }
 
   &-jump-prev {
     &:hover {
       &:after {
-        content: "«";
+        content: '«';
       }
     }
   }
@@ -108,11 +108,11 @@
   &-jump-next {
     &:hover {
       &:after {
-        content: "»";
+        content: '»';
       }
     }
   }
-  
+
   &-jump-prev-custom-icon,
   &-jump-next-custom-icon {
     position: relative;
@@ -124,9 +124,9 @@
       bottom: 0;
       left: 0;
       margin: auto;
-      transition: all .2s;
+      transition: all 0.2s;
 
-      content: "•••";
+      content: '•••';
       opacity: 1;
       display: block;
       letter-spacing: 2px;
@@ -138,7 +138,7 @@
     .custom-icon-jump-prev,
     .custom-icon-jump-next {
       opacity: 0;
-      transition: all .2s;
+      transition: all 0.2s;
     }
 
     &:hover {
@@ -155,10 +155,15 @@
     }
   }
 
-  &-prev, &-jump-prev, &-jump-next {
+  &-prev,
+  &-jump-prev,
+  &-jump-next {
     margin-right: 8px;
   }
-  &-prev, &-next, &-jump-prev, &-jump-next {
+  &-prev,
+  &-next,
+  &-jump-prev,
+  &-jump-next {
     cursor: pointer;
     color: #666;
     font-size: 10px;
@@ -174,7 +179,7 @@
   &-prev {
     a {
       &:after {
-        content: "‹";
+        content: '‹';
         display: block;
       }
     }
@@ -183,13 +188,14 @@
   &-next {
     a {
       &:after {
-        content: "›";
+        content: '›';
         display: block;
       }
     }
   }
 
-  &-prev, &-next {
+  &-prev,
+  &-next {
     border: 1px solid #d9d9d9;
     font-size: 18px;
     a {
@@ -252,13 +258,15 @@
         border-radius: 6px;
         height: 28px;
         user-select: none;
-        transition: all .3s cubic-bezier(.645,.045,.355,1);
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         position: relative;
-        color: rgba(0,0,0,.65);
+        color: rgba(0, 0, 0, 0.65);
         background-color: #fff;
         border-color: #d9d9d9;
 
-        &:hover, &:active, &:focus {
+        &:hover,
+        &:active,
+        &:focus {
           color: #2db7f5;
           background-color: #fff;
           border-color: #2db7f5;
@@ -268,7 +276,8 @@
   }
 
   &-simple {
-    .@{prefixClass}-prev, .@{prefixClass}-next {
+    .@{prefixClass}-prev,
+    .@{prefixClass}-next {
       border: none;
       height: 24px;
       line-height: 24px;
@@ -315,19 +324,20 @@
         border-radius: 6px;
         height: 26px;
         user-select: none;
-        transition: all .3s cubic-bezier(.645,.045,.355,1);
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         position: relative;
-        color: rgba(0,0,0,.65);
+        color: rgba(0, 0, 0, 0.65);
         background-color: #fff;
         border-color: #d9d9d9;
 
-        &:hover, &:active, &:focus {
+        &:hover,
+        &:active,
+        &:focus {
           color: #2db7f5;
           background-color: #fff;
           border-color: #2db7f5;
         }
       }
-
     }
   }
 }

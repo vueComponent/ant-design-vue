@@ -1,10 +1,10 @@
 <script>
-import Basic from './basic'
-import Static from './static'
-import OnClick from './onClick'
+import Basic from './basic';
+import Static from './static';
+import OnClick from './onClick';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Anchor 锚点
           用于跳转到页面指定位置。
@@ -22,7 +22,7 @@ Hyperlinks to scroll on one page.
 For displaying anchor hyperlinks on page and jumping between them.
 ## Examples
 `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '锚点',
@@ -42,9 +42,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-anchor-demo .ant-affix {

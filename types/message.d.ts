@@ -2,7 +2,6 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-
 export interface MessageOptions {
   /**
    * content of the message
@@ -21,7 +20,7 @@ export interface MessageOptions {
    * type of message
    * @type string
    */
-  type?: "success" | "info" | "warning" | "error" | "loading";
+  type?: 'success' | 'info' | 'warning' | 'error' | 'loading';
 
   /**
    * Customized Icon
@@ -77,7 +76,7 @@ export declare class Message {
   destroy: () => void;
 }
 
-declare module "vue/types/vue" {
+declare module 'vue/types/vue' {
   interface Vue {
     $message: Message;
   }

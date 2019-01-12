@@ -194,11 +194,11 @@ const residences = [{
       label: 'Zhong Hua Men',
     }],
   }],
-}]
+}];
 
 export default {
   beforeCreate () {
-    this.form = this.$form.createForm(this)
+    this.form = this.$form.createForm(this);
   },
   data () {
     return {
@@ -227,47 +227,47 @@ export default {
           },
         },
       },
-    }
+    };
   },
   methods: {
     handleSubmit  (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', values);
         }
-      })
+      });
     },
     handleConfirmBlur  (e) {
-      const value = e.target.value
-      this.confirmDirty = this.confirmDirty || !!value
+      const value = e.target.value;
+      this.confirmDirty = this.confirmDirty || !!value;
     },
     compareToFirstPassword  (rule, value, callback) {
-      const form = this.form
+      const form = this.form;
       if (value && value !== form.getFieldValue('password')) {
-        callback('Two passwords that you enter is inconsistent!')
+        callback('Two passwords that you enter is inconsistent!');
       } else {
-        callback()
+        callback();
       }
     },
     validateToNextPassword  (rule, value, callback) {
-      const form = this.form
+      const form = this.form;
       if (value && this.confirmDirty) {
-        form.validateFields(['confirm'], { force: true })
+        form.validateFields(['confirm'], { force: true });
       }
-      callback()
+      callback();
     },
     handleWebsiteChange  (value) {
-      let autoCompleteResult
+      let autoCompleteResult;
       if (!value) {
-        autoCompleteResult = []
+        autoCompleteResult = [];
       } else {
-        autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`)
+        autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
       }
-      this.autoCompleteResult = autoCompleteResult
+      this.autoCompleteResult = autoCompleteResult;
     },
   },
-}
+};
 </script>
 
 

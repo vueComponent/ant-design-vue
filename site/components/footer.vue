@@ -4,7 +4,7 @@ export default {
     isCN: Boolean,
   },
   render () {
-    const isCN = this.isCN
+    const isCN = this.isCN;
     return (
       <footer id='footer'>
         <div class='footer-wrap'>
@@ -92,7 +92,7 @@ export default {
           </a-row>
         </div>
       </footer>
-    )
+    );
   },
-}
+};
 </script>

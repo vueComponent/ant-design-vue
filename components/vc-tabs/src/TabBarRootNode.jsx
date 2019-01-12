@@ -1,9 +1,7 @@
-
-import { cloneElement } from '../../_util/vnode'
-import PropTypes from '../../_util/vue-types'
-import BaseMixin from '../../_util/BaseMixin'
-function noop () {
-}
+import { cloneElement } from '../../_util/vnode';
+import PropTypes from '../../_util/vue-types';
+import BaseMixin from '../../_util/BaseMixin';
+function noop() {}
 export default {
   name: 'TabBarRootNode',
   mixins: [BaseMixin],
@@ -15,21 +13,19 @@ export default {
     extraContent: PropTypes.any,
   },
   methods: {
-    onKeyDown (e) {
-      this.__emit('keydown', e)
+    onKeyDown(e) {
+      this.__emit('keydown', e);
     },
   },
-  render () {
-    const {
-      prefixCls, onKeyDown, tabBarPosition, extraContent,
-    } = this
+  render() {
+    const { prefixCls, onKeyDown, tabBarPosition, extraContent } = this;
     const cls = {
       [`${prefixCls}-bar`]: true,
-    }
-    const topOrBottom = (tabBarPosition === 'top' || tabBarPosition === 'bottom')
-    const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {}
-    const children = this.$slots.default
-    let newChildren = children
+    };
+    const topOrBottom = tabBarPosition === 'top' || tabBarPosition === 'bottom';
+    const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {};
+    const children = this.$slots.default;
+    let newChildren = children;
     if (extraContent) {
       newChildren = [
         cloneElement(extraContent, {
@@ -39,23 +35,27 @@ export default {
           },
         }),
         cloneElement(children, { key: 'content' }),
-      ]
-      newChildren = topOrBottom ? newChildren : newChildren.reverse()
+      ];
+      newChildren = topOrBottom ? newChildren : newChildren.reverse();
     }
 
     return (
       <div
-        role='tablist'
+        role="tablist"
         class={cls}
-        tabIndex='0'
+        tabIndex="0"
         onKeydown={onKeyDown}
-        {...{ directives: [{
-          name: 'ant-ref',
-          value: this.saveRef('root'),
-        }] }}
+        {...{
+          directives: [
+            {
+              name: 'ant-ref',
+              value: this.saveRef('root'),
+            },
+          ],
+        }}
       >
         {newChildren}
       </div>
-    )
+    );
   },
-}
+};

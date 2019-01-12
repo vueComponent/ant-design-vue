@@ -1,17 +1,16 @@
+import classNames from 'classnames';
+import uniqBy from 'lodash/uniqBy';
+import VcUpload from '../vc-upload';
+import BaseMixin from '../_util/BaseMixin';
+import { getOptionProps, initDefaultProps, hasProp } from '../_util/props-util';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from '../locale-provider/default';
+import Dragger from './Dragger';
+import UploadList from './UploadList';
+import { UploadProps } from './interface';
+import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
 
-import classNames from 'classnames'
-import uniqBy from 'lodash/uniqBy'
-import VcUpload from '../vc-upload'
-import BaseMixin from '../_util/BaseMixin'
-import { getOptionProps, initDefaultProps, hasProp } from '../_util/props-util'
-import LocaleReceiver from '../locale-provider/LocaleReceiver'
-import defaultLocale from '../locale-provider/default'
-import Dragger from './Dragger'
-import UploadList from './UploadList'
-import { UploadProps } from './interface'
-import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils'
-
-export { UploadProps }
+export { UploadProps };
 
 export default {
   inheritAttrs: false,
@@ -32,161 +31,162 @@ export default {
     supportServerRender: true,
   }),
   // recentUploadStatus: boolean | PromiseLike<any>;
-  data () {
-    this.progressTimer = null
+  data() {
+    this.progressTimer = null;
     return {
       sFileList: this.fileList || this.defaultFileList || [],
       dragState: 'drop',
-    }
+    };
   },
-  beforeDestroy () {
-    this.clearProgressTimer()
+  beforeDestroy() {
+    this.clearProgressTimer();
   },
   watch: {
-    fileList (val) {
-      this.sFileList = val
+    fileList(val) {
+      this.sFileList = val;
     },
   },
   methods: {
-    onStart (file) {
-      const targetItem = fileToObject(file)
-      targetItem.status = 'uploading'
-      const nextFileList = this.sFileList.concat()
-      const fileIndex = nextFileList.findIndex(({ uid }) => uid === targetItem.uid)
+    onStart(file) {
+      const targetItem = fileToObject(file);
+      targetItem.status = 'uploading';
+      const nextFileList = this.sFileList.concat();
+      const fileIndex = nextFileList.findIndex(({ uid }) => uid === targetItem.uid);
       if (fileIndex === -1) {
-        nextFileList.push(targetItem)
+        nextFileList.push(targetItem);
       } else {
-        nextFileList[fileIndex] = targetItem
+        nextFileList[fileIndex] = targetItem;
       }
       this.onChange({
         file: targetItem,
         fileList: nextFileList,
-      })
+      });
       // fix ie progress
       if (!window.FormData) {
-        this.autoUpdateProgress(0, targetItem)
+        this.autoUpdateProgress(0, targetItem);
       }
     },
-    autoUpdateProgress (_, file) {
-      const getPercent = genPercentAdd()
-      let curPercent = 0
-      this.clearProgressTimer()
+    autoUpdateProgress(_, file) {
+      const getPercent = genPercentAdd();
+      let curPercent = 0;
+      this.clearProgressTimer();
       this.progressTimer = setInterval(() => {
-        curPercent = getPercent(curPercent)
-        this.onProgress({
-          percent: curPercent * 100,
-        }, file)
-      }, 200)
+        curPercent = getPercent(curPercent);
+        this.onProgress(
+          {
+            percent: curPercent * 100,
+          },
+          file,
+        );
+      }, 200);
     },
-    onSuccess (response, file) {
-      this.clearProgressTimer()
+    onSuccess(response, file) {
+      this.clearProgressTimer();
       try {
         if (typeof response === 'string') {
-          response = JSON.parse(response)
+          response = JSON.parse(response);
         }
-      } catch (e) { /* do nothing */
+      } catch (e) {
+        /* do nothing */
       }
-      const fileList = this.sFileList
-      const targetItem = getFileItem(file, fileList)
+      const fileList = this.sFileList;
+      const targetItem = getFileItem(file, fileList);
       // removed
       if (!targetItem) {
-        return
+        return;
       }
-      targetItem.status = 'done'
-      targetItem.response = response
+      targetItem.status = 'done';
+      targetItem.response = response;
       this.onChange({
         file: { ...targetItem },
         fileList,
-      })
+      });
     },
-    onProgress (e, file) {
-      const fileList = this.sFileList
-      const targetItem = getFileItem(file, fileList)
+    onProgress(e, file) {
+      const fileList = this.sFileList;
+      const targetItem = getFileItem(file, fileList);
       // removed
       if (!targetItem) {
-        return
+        return;
       }
-      targetItem.percent = e.percent
+      targetItem.percent = e.percent;
       this.onChange({
         event: e,
         file: { ...targetItem },
         fileList: this.sFileList,
-      })
+      });
     },
-    onError (error, response, file) {
-      this.clearProgressTimer()
-      const fileList = this.sFileList
-      const targetItem = getFileItem(file, fileList)
+    onError(error, response, file) {
+      this.clearProgressTimer();
+      const fileList = this.sFileList;
+      const targetItem = getFileItem(file, fileList);
       // removed
       if (!targetItem) {
-        return
+        return;
       }
-      targetItem.error = error
-      targetItem.response = response
-      targetItem.status = 'error'
+      targetItem.error = error;
+      targetItem.response = response;
+      targetItem.status = 'error';
       this.onChange({
         file: { ...targetItem },
         fileList,
-      })
+      });
     },
-    handleRemove (file) {
-      const { remove } = getOptionProps(this)
+    handleRemove(file) {
+      const { remove } = getOptionProps(this);
       Promise.resolve(typeof remove === 'function' ? remove(file) : remove).then(ret => {
         // Prevent removing file
         if (ret === false) {
-          return
+          return;
         }
 
-        const removedFileList = removeFileItem(file, this.sFileList)
+        const removedFileList = removeFileItem(file, this.sFileList);
         if (removedFileList) {
           this.onChange({
             file,
             fileList: removedFileList,
-          })
+          });
         }
-      })
+      });
     },
-    handleManualRemove (file) {
-      this.$refs.uploadRef.abort(file)
-      file.status = 'removed' // eslint-disable-line
-      this.handleRemove(file)
+    handleManualRemove(file) {
+      this.$refs.uploadRef.abort(file);
+      file.status = 'removed'; // eslint-disable-line
+      this.handleRemove(file);
     },
-    onChange (info) {
+    onChange(info) {
       if (!hasProp(this, 'fileList')) {
-        this.setState({ sFileList: info.fileList })
+        this.setState({ sFileList: info.fileList });
       }
-      this.$emit('change', info)
+      this.$emit('change', info);
     },
-    onFileDrop (e) {
+    onFileDrop(e) {
       this.setState({
         dragState: e.type,
-      })
+      });
     },
-    reBeforeUpload (file, fileList) {
+    reBeforeUpload(file, fileList) {
       if (!this.beforeUpload) {
-        return true
+        return true;
       }
-      const result = this.beforeUpload(file, fileList)
+      const result = this.beforeUpload(file, fileList);
       if (result === false) {
         this.onChange({
           file,
-          fileList: uniqBy(
-            this.sFileList.concat(fileList.map(fileToObject)),
-            (item) => item.uid,
-          ),
-        })
-        return false
+          fileList: uniqBy(this.sFileList.concat(fileList.map(fileToObject)), item => item.uid),
+        });
+        return false;
       } else if (result && result.then) {
-        return result
+        return result;
       }
-      return true
+      return true;
     },
-    clearProgressTimer () {
-      clearInterval(this.progressTimer)
+    clearProgressTimer() {
+      clearInterval(this.progressTimer);
     },
-    renderUploadList (locale) {
-      const { showUploadList = {}, listType } = getOptionProps(this)
-      const { showRemoveIcon, showPreviewIcon } = showUploadList
+    renderUploadList(locale) {
+      const { showUploadList = {}, listType } = getOptionProps(this);
+      const { showRemoveIcon, showPreviewIcon } = showUploadList;
       const uploadListProps = {
         props: {
           listType,
@@ -198,25 +198,15 @@ export default {
         on: {
           remove: this.handleManualRemove,
         },
-      }
+      };
       if (this.$listeners.preview) {
-        uploadListProps.on.preview = this.$listeners.preview
+        uploadListProps.on.preview = this.$listeners.preview;
       }
-      return (
-        <UploadList
-          {...uploadListProps}
-        />
-      )
+      return <UploadList {...uploadListProps} />;
     },
   },
-  render () {
-    const {
-      prefixCls = '',
-      showUploadList,
-      listType,
-      type,
-      disabled,
-    } = getOptionProps(this)
+  render() {
+    const { prefixCls = '', showUploadList, listType, type, disabled } = getOptionProps(this);
 
     const vcUploadProps = {
       props: {
@@ -233,20 +223,17 @@ export default {
       ref: 'uploadRef',
       class: `${prefixCls}-btn`,
       attrs: this.$attrs,
-    }
+    };
 
     const uploadList = showUploadList ? (
       <LocaleReceiver
-        componentName='Upload'
+        componentName="Upload"
         defaultLocale={defaultLocale.Upload}
-        scopedSlots={
-          { default: this.renderUploadList }
-        }
-      >
-      </LocaleReceiver>
-    ) : null
+        scopedSlots={{ default: this.renderUploadList }}
+      />
+    ) : null;
 
-    const children = this.$slots.default
+    const children = this.$slots.default;
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {
@@ -254,7 +241,7 @@ export default {
         [`${prefixCls}-drag-uploading`]: this.sFileList.some(file => file.status === 'uploading'),
         [`${prefixCls}-drag-hover`]: this.dragState === 'dragover',
         [`${prefixCls}-disabled`]: disabled,
-      })
+      });
       return (
         <span>
           <div
@@ -264,26 +251,24 @@ export default {
             onDragleave={this.onFileDrop}
           >
             <VcUpload {...vcUploadProps}>
-              <div class={`${prefixCls}-drag-container`}>
-                {children}
-              </div>
+              <div class={`${prefixCls}-drag-container`}>{children}</div>
             </VcUpload>
           </div>
           {uploadList}
         </span>
-      )
+      );
     }
 
     const uploadButtonCls = classNames(prefixCls, {
       [`${prefixCls}-select`]: true,
       [`${prefixCls}-select-${listType}`]: true,
       [`${prefixCls}-disabled`]: disabled,
-    })
+    });
     const uploadButton = (
       <div class={uploadButtonCls} style={{ display: children ? '' : 'none' }}>
-        <VcUpload {...vcUploadProps} >{children}</VcUpload>
+        <VcUpload {...vcUploadProps}>{children}</VcUpload>
       </div>
-    )
+    );
 
     if (listType === 'picture-card') {
       return (
@@ -291,13 +276,13 @@ export default {
           {uploadList}
           {uploadButton}
         </span>
-      )
+      );
     }
     return (
       <span>
         {uploadButton}
         {uploadList}
       </span>
-    )
+    );
   },
-}
+};

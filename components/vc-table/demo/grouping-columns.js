@@ -1,7 +1,7 @@
 /* eslint-disable no-console,func-names,react/no-multi-comp */
-import Table from '../index'
-import '../assets/index.less'
-import '../assets/bordered.less'
+import Table from '../index';
+import '../assets/index.less';
+import '../assets/bordered.less';
 
 const columns = [
   {
@@ -64,37 +64,40 @@ const columns = [
     dataIndex: 'gender',
     key: 'gender',
   },
-]
+];
 
-const data = [{
-  key: '1',
-  name: '胡彦斌',
-  age: 32,
-  street: '拱墅区和睦街道',
-  building: 1,
-  number: 2033,
-  companyAddress: '西湖区湖底公园',
-  companyName: '湖底有限公司',
-  gender: '男',
-}, {
-  key: '2',
-  name: '胡彦祖',
-  age: 42,
-  street: '拱墅区和睦街道',
-  building: 3,
-  number: 2035,
-  companyAddress: '西湖区湖底公园',
-  companyName: '湖底有限公司',
-  gender: '男',
-}]
+const data = [
+  {
+    key: '1',
+    name: '胡彦斌',
+    age: 32,
+    street: '拱墅区和睦街道',
+    building: 1,
+    number: 2033,
+    companyAddress: '西湖区湖底公园',
+    companyName: '湖底有限公司',
+    gender: '男',
+  },
+  {
+    key: '2',
+    name: '胡彦祖',
+    age: 42,
+    street: '拱墅区和睦街道',
+    building: 3,
+    number: 2035,
+    companyAddress: '西湖区湖底公园',
+    companyName: '湖底有限公司',
+    gender: '男',
+  },
+];
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <h2>grouping columns</h2>
-        <Table columns={columns} data={data} class='bordered' />
+        <Table columns={columns} data={data} class="bordered" />
       </div>
-    )
+    );
   },
-}
+};

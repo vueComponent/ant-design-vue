@@ -54,11 +54,11 @@ Add or remove form items dynamically.
 </template>
 
 <script>
-let id = 0
+let id = 0;
 export default {
   beforeCreate () {
-    this.form = this.$form.createForm(this)
-    this.form.getFieldDecorator('keys', { initialValue: [] })
+    this.form = this.$form.createForm(this);
+    this.form.getFieldDecorator('keys', { initialValue: [] });
   },
   data () {
     return {
@@ -78,46 +78,46 @@ export default {
           sm: { span: 20, offset: 4 },
         },
       },
-    }
+    };
   },
   methods: {
     remove  (k) {
-      const { form } = this
+      const { form } = this;
       // can use data-binding to get
-      const keys = form.getFieldValue('keys')
+      const keys = form.getFieldValue('keys');
       // We need at least one passenger
       if (keys.length === 1) {
-        return
+        return;
       }
 
       // can use data-binding to set
       form.setFieldsValue({
         keys: keys.filter(key => key !== k),
-      })
+      });
     },
 
     add  () {
-      const { form } = this
+      const { form } = this;
       // can use data-binding to get
-      const keys = form.getFieldValue('keys')
-      const nextKeys = keys.concat(++id)
+      const keys = form.getFieldValue('keys');
+      const nextKeys = keys.concat(++id);
       // can use data-binding to set
       // important! notify form to detect changes
       form.setFieldsValue({
         keys: nextKeys,
-      })
+      });
     },
 
     handleSubmit  (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', values);
         }
-      })
+      });
     },
   },
-}
+};
 </script>
 <style>
 .dynamic-delete-button {

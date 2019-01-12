@@ -1,39 +1,39 @@
 <script>
-import Trigger from '../index'
-import '../assets/index.less'
-import './point.less'
+import Trigger from '../index';
+import '../assets/index.less';
+import './point.less';
 const builtinPlacements = {
   topLeft: {
     points: ['tl', 'tl'],
   },
-}
+};
 
 export default {
   data () {
     return {
       action: 'click',
       mouseEnterDelay: 0,
-    }
+    };
   },
   methods: {
     onActionChange ({ target: { value }}) {
-      this.action = value
+      this.action = value;
     },
 
     onDelayChange ({ target: { value }}) {
-      this.mouseEnterDelay = Number(value) || 0
+      this.mouseEnterDelay = Number(value) || 0;
     },
   },
 
   render () {
-    const { action, mouseEnterDelay } = this
+    const { action, mouseEnterDelay } = this;
     const innerTrigger = (
       <div
         style={{ padding: '20px', background: 'rgba(0, 255, 0, 0.3)' }}
       >
     This is popup
       </div>
-    )
+    );
     return (
       <div>
         <label>
@@ -82,7 +82,7 @@ export default {
           </Trigger>
         </div>
       </div>
-    )
+    );
   },
-}
+};
 </script>

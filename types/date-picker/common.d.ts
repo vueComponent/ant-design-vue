@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { Moment } from "moment";
+import { AntdComponent } from '../component';
+import { Moment } from 'moment';
 
 export declare class DatepickerCommon extends AntdComponent {
   /**
@@ -79,7 +79,7 @@ export declare class DatepickerCommon extends AntdComponent {
    * determine the size of the input box, the height of large and small, are 40px and 24px respectively, while default size is 32px
    * @type string
    */
-  size: "large" | "small" | "default";
+  size: 'large' | 'small' | 'default';
 
   /**
    * The custom suffix icon

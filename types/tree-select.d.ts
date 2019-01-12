@@ -118,7 +118,7 @@ export declare class TreeSelect extends AntdComponent {
    * @default TreeSelect.SHOW_CHILD
    * @type
    */
-  showCheckedStrategy: "SHOW_ALL" | "SHOW_PARENT" | "SHOW_CHILD";
+  showCheckedStrategy: 'SHOW_ALL' | 'SHOW_PARENT' | 'SHOW_CHILD';
 
   /**
    * Whether to display a search input in the dropdown menu(valid only in the single mode)
@@ -132,7 +132,7 @@ export declare class TreeSelect extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "small" | "large" | "default";
+  size: 'small' | 'large' | 'default';
 
   /**
    * Whether to show checkbox on the treeNodes
@@ -163,9 +163,7 @@ export declare class TreeSelect extends AntdComponent {
    * @default false
    * @type boolean | object[]
    */
-  treeDataSimpleMode:
-    | boolean
-    | Array<{ id: string; pId: string; rootPId: any }>;
+  treeDataSimpleMode: boolean | Array<{ id: string; pId: string; rootPId: any }>;
 
   /**
    * Whether to expand all treeNodes by default

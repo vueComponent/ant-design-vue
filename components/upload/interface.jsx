@@ -1,6 +1,12 @@
-import PropsTypes from '../_util/vue-types'
+import PropsTypes from '../_util/vue-types';
 
-export const UploadFileStatus = PropsTypes.oneOf(['error', 'success', 'done', 'uploading', 'removed'])
+export const UploadFileStatus = PropsTypes.oneOf([
+  'error',
+  'success',
+  'done',
+  'uploading',
+  'removed',
+]);
 
 // export const HttpRequestHeader {
 //   [key: string]: string;
@@ -27,30 +33,30 @@ export const UploadFileStatus = PropsTypes.oneOf(['error', 'success', 'done', 'u
 //   type: PropsTypes.string,
 // }).loose
 
-function UploadFile ({ uid, name }) {
-  if (!uid && uid !== 0) return false
-  if (!['string', 'number'].includes(typeof uid)) return false
-  if (name === '' || typeof name !== 'string') return false
-  return true
+function UploadFile({ uid, name }) {
+  if (!uid && uid !== 0) return false;
+  if (!['string', 'number'].includes(typeof uid)) return false;
+  if (name === '' || typeof name !== 'string') return false;
+  return true;
 }
 
 export const UploadChangeParam = {
   file: PropsTypes.custom(UploadFile),
   fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   event: PropsTypes.object,
-}
+};
 
 export const ShowUploadListInterface = PropsTypes.shape({
   showRemoveIcon: PropsTypes.bool,
   showPreviewIcon: PropsTypes.bool,
-}).loose
+}).loose;
 
 export const UploadLocale = PropsTypes.shape({
   uploading: PropsTypes.string,
   removeFile: PropsTypes.string,
   uploadError: PropsTypes.string,
   previewFile: PropsTypes.string,
-}).loose
+}).loose;
 
 export const UploadProps = {
   type: PropsTypes.oneOf(['drag', 'select']),
@@ -79,12 +85,12 @@ export const UploadProps = {
   openFileDialogOnClick: PropsTypes.bool,
   locale: UploadLocale,
   height: PropsTypes.number,
-}
+};
 
 export const UploadState = {
   fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   dragState: PropsTypes.string,
-}
+};
 
 export const UploadListProps = {
   listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
@@ -98,4 +104,4 @@ export const UploadListProps = {
   showRemoveIcon: PropsTypes.bool,
   showPreviewIcon: PropsTypes.bool,
   locale: UploadLocale,
-}
+};

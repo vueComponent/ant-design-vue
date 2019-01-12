@@ -1,20 +1,20 @@
 <script>
-import Align from '../index'
+import Align from '../index';
 
 const align = {
   points: ['cc', 'cc'],
-}
+};
 
 export default {
   data () {
     return {
       point: null,
-    }
+    };
   },
 
   methods: {
     onClick ({ pageX, pageY }) {
-      this.point = { pageX, pageY }
+      this.point = { pageX, pageY };
     },
   },
 
@@ -37,9 +37,9 @@ export default {
           >Align</div>
         </Align>
       </div>
-    )
+    );
   },
-}
+};
 
 </script>
 

@@ -49,7 +49,7 @@ const CustomizedForm = {
   created () {
     this.form = this.$form.createForm(this, {
       onFieldsChange: (_, changedFields) => {
-        this.$emit('change', changedFields)
+        this.$emit('change', changedFields);
       },
       mapPropsToFields: () => {
         return {
@@ -57,12 +57,12 @@ const CustomizedForm = {
             ...this.username,
             value: this.username.value,
           }),
-        }
+        };
       },
       onValuesChange (_, values) {
-        console.log(values)
+        console.log(values);
       },
-    })
+    });
   },
   watch: {
     username () {
@@ -71,10 +71,10 @@ const CustomizedForm = {
           ...this.username,
           value: this.username.value,
         }),
-      })
+      });
     },
   },
-}
+};
 
 export default {
   data () {
@@ -84,18 +84,18 @@ export default {
           value: 'benjycui',
         },
       },
-    }
+    };
   },
   methods: {
     handleFormChange (changedFields) {
-      console.log('changedFields', changedFields)
-      this.fields = { ...this.fields, ...changedFields }
+      console.log('changedFields', changedFields);
+      this.fields = { ...this.fields, ...changedFields };
     },
   },
   components: {
     CustomizedForm,
   },
-}
+};
 </script>
 <style>
 #components-form-demo-global-state .language-bash {

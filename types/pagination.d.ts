@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from "vue";
+import { VNode } from 'vue';
 
 export declare class Pagination extends AntdComponent {
   /**
@@ -90,9 +90,5 @@ export declare class Pagination extends AntdComponent {
    * to customize item innerHTML
    * @type Function
    */
-  itemRender: (
-    page: number,
-    type: "page" | "prev" | "next",
-    originalElement: any
-  ) => VNode;
+  itemRender: (page: number, type: 'page' | 'prev' | 'next', originalElement: any) => VNode;
 }

@@ -8,8 +8,8 @@
 @tooltip-arrow-width: 4px;
 @tooltip-distance: @tooltip-arrow-width+4;
 @tooltip-arrow-color: @tooltip-bg;
-@ease-out-quint      : cubic-bezier(0.23, 1, 0.32, 1);
-@ease-in-quint       : cubic-bezier(0.755, 0.05, 0.855, 0.06);
+@ease-out-quint : cubic-bezier(0.23, 1, 0.32, 1);
+@ease-in-quint : cubic-bezier(0.755, 0.05, 0.855, 0.06);
 
 .borderBox() {
   box-sizing: border-box;
@@ -134,15 +134,17 @@
       background-color: @disabledColor;
     }
 
-    .@{prefixClass}-handle, .@{prefixClass}-dot {
+    .@{prefixClass}-handle,
+    .@{prefixClass}-dot {
       border-color: @disabledColor;
       box-shadow: none;
       background-color: #fff;
       cursor: not-allowed;
     }
 
-    .@{prefixClass}-mark-text, .@{prefixClass}-dot {
-      cursor: not-allowed!important;
+    .@{prefixClass}-mark-text,
+    .@{prefixClass}-dot {
+      cursor: not-allowed !important;
     }
   }
 }
@@ -195,13 +197,14 @@
 }
 
 .motion-common() {
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-fill-mode: both;
   display: block !important;
 }
 
 .make-motion(@className, @keyframeName) {
-  .@{className}-enter, .@{className}-appear {
+  .@{className}-enter,
+  .@{className}-appear {
     .motion-common();
     animation-play-state: paused;
   }
@@ -209,18 +212,20 @@
     .motion-common();
     animation-play-state: paused;
   }
-  .@{className}-enter.@{className}-enter-active, .@{className}-appear.@{className}-appear-active {
-    animation-name: ~"@{keyframeName}In";
+  .@{className}-enter.@{className}-enter-active,
+  .@{className}-appear.@{className}-appear-active {
+    animation-name: ~'@{keyframeName}In';
     animation-play-state: running;
   }
   .@{className}-leave.@{className}-leave-active {
-    animation-name: ~"@{keyframeName}Out";
+    animation-name: ~'@{keyframeName}Out';
     animation-play-state: running;
   }
 }
 .zoom-motion(@className, @keyframeName) {
   .make-motion(@className, @keyframeName);
-  .@{className}-enter, .@{className}-appear {
+  .@{className}-enter,
+  .@{className}-appear {
     transform: scale(0, 0); // need this by yiminghe
     animation-timing-function: @ease-out-quint;
   }

@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { DatepickerCommon } from "./common";
-import { Moment } from "moment";
+import { DatepickerCommon } from './common';
+import { Moment } from 'moment';
 
 export declare class MonthPicker extends DatepickerCommon {
   /**

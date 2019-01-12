@@ -1,5 +1,5 @@
 const locale = {
   placeholder: 'Zaman Seç',
-}
+};
 
-export default locale
+export default locale;

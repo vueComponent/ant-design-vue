@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
-import Skeleton from '..'
+import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
+import Skeleton from '..';
 
 describe('Skeleton', () => {
   const genSkeleton = props => {
@@ -13,70 +13,70 @@ describe('Skeleton', () => {
         default: 'Bamboo',
       },
       sync: false,
-    }
-    return mount(Skeleton, skeletonProps)
-  }
+    };
+    return mount(Skeleton, skeletonProps);
+  };
 
   describe('avatar', () => {
     it('size', async () => {
-      const wrapperSmall = genSkeleton({ avatar: { size: 'small' }})
+      const wrapperSmall = genSkeleton({ avatar: { size: 'small' } });
       await asyncExpect(() => {
-        expect(wrapperSmall.html()).toMatchSnapshot()
-      })
+        expect(wrapperSmall.html()).toMatchSnapshot();
+      });
 
-      const wrapperDefault = genSkeleton({ avatar: { size: 'default' }})
-
-      await asyncExpect(() => {
-        expect(wrapperDefault.html()).toMatchSnapshot()
-      })
-
-      const wrapperLarge = genSkeleton({ avatar: { size: 'large' }})
+      const wrapperDefault = genSkeleton({ avatar: { size: 'default' } });
 
       await asyncExpect(() => {
-        expect(wrapperLarge.html()).toMatchSnapshot()
-      })
-    })
+        expect(wrapperDefault.html()).toMatchSnapshot();
+      });
+
+      const wrapperLarge = genSkeleton({ avatar: { size: 'large' } });
+
+      await asyncExpect(() => {
+        expect(wrapperLarge.html()).toMatchSnapshot();
+      });
+    });
 
     it('shape', async () => {
-      const wrapperCircle = genSkeleton({ avatar: { shape: 'circle' }})
+      const wrapperCircle = genSkeleton({ avatar: { shape: 'circle' } });
       await asyncExpect(() => {
-        expect(wrapperCircle.html()).toMatchSnapshot()
-      })
+        expect(wrapperCircle.html()).toMatchSnapshot();
+      });
 
-      const wrapperSquare = genSkeleton({ avatar: { shape: 'square' }})
+      const wrapperSquare = genSkeleton({ avatar: { shape: 'square' } });
       await asyncExpect(() => {
-        expect(wrapperSquare.html()).toMatchSnapshot()
-      })
-    })
-  })
+        expect(wrapperSquare.html()).toMatchSnapshot();
+      });
+    });
+  });
 
   describe('title', () => {
     it('width', async () => {
-      const wrapper = genSkeleton({ title: { width: '93%' }})
+      const wrapper = genSkeleton({ title: { width: '93%' } });
       await asyncExpect(() => {
-        expect(wrapper.html()).toMatchSnapshot()
-      })
-    })
-  })
+        expect(wrapper.html()).toMatchSnapshot();
+      });
+    });
+  });
 
   describe('paragraph', () => {
     it('rows', async () => {
-      const wrapper = genSkeleton({ paragraph: { rows: 5 }})
+      const wrapper = genSkeleton({ paragraph: { rows: 5 } });
       await asyncExpect(() => {
-        expect(wrapper.html()).toMatchSnapshot()
-      })
-    })
+        expect(wrapper.html()).toMatchSnapshot();
+      });
+    });
 
     it('width', async () => {
-      const wrapperPure = genSkeleton({ paragraph: { width: '93%' }})
+      const wrapperPure = genSkeleton({ paragraph: { width: '93%' } });
       await asyncExpect(() => {
-        expect(wrapperPure.html()).toMatchSnapshot()
-      })
+        expect(wrapperPure.html()).toMatchSnapshot();
+      });
 
-      const wrapperList = genSkeleton({ paragraph: { width: ['28%', '93%'] }})
+      const wrapperList = genSkeleton({ paragraph: { width: ['28%', '93%'] } });
       await asyncExpect(() => {
-        expect(wrapperList.html()).toMatchSnapshot()
-      })
-    })
-  })
-})
+        expect(wrapperList.html()).toMatchSnapshot();
+      });
+    });
+  });
+});

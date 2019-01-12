@@ -1,20 +1,16 @@
-
-import PropTypes from '../../_util/vue-types'
-import classNames from 'classnames'
-import ColGroup from './ColGroup'
-import TableHeader from './TableHeader'
-import TableRow from './TableRow'
-import ExpandableRow from './ExpandableRow'
-import { mergeProps } from '../../_util/props-util'
-import { connect } from '../../_util/store'
-function noop () {}
+import PropTypes from '../../_util/vue-types';
+import classNames from 'classnames';
+import ColGroup from './ColGroup';
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
+import ExpandableRow from './ExpandableRow';
+import { mergeProps } from '../../_util/props-util';
+import { connect } from '../../_util/store';
+function noop() {}
 const BaseTable = {
   name: 'BaseTable',
   props: {
-    fixed: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
+    fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     columns: PropTypes.array.isRequired,
     tableClassName: PropTypes.string.isRequired,
     hasHead: PropTypes.bool.isRequired,
@@ -25,30 +21,31 @@ const BaseTable = {
     isAnyColumnsFixed: PropTypes.bool,
   },
   inject: {
-    table: { default: {}},
+    table: { default: {} },
   },
   methods: {
-    getColumns (cols) {
-      const { columns = [], fixed } = this.$props
-      const { table } = this
-      const { prefixCls } = table.$props
+    getColumns(cols) {
+      const { columns = [], fixed } = this.$props;
+      const { table } = this;
+      const { prefixCls } = table.$props;
       return (cols || columns).map(column => ({
         ...column,
         className:
           !!column.fixed && !fixed
             ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className || column.class)
             : column.className || column.class,
-      }))
+      }));
     },
-    handleRowHover  (isHover, key) {
+    handleRowHover(isHover, key) {
       this.store.setState({
         currentHoverKey: isHover ? key : null,
-      })
+      });
     },
 
-    renderRows  (renderData, indent, ancestorKeys = []) {
+    renderRows(renderData, indent, ancestorKeys = []) {
       const {
-        columnManager, sComponents: components,
+        columnManager,
+        sComponents: components,
         prefixCls,
         childrenColumnName,
         rowClassName,
@@ -61,31 +58,32 @@ const BaseTable = {
           rowMouseleave: onRowMouseLeave = noop,
         },
         customRow = noop,
-      } = this.table
-      const { getRowKey, fixed, expander, isAnyColumnsFixed } = this
+      } = this.table;
+      const { getRowKey, fixed, expander, isAnyColumnsFixed } = this;
 
-      const rows = []
+      const rows = [];
 
       for (let i = 0; i < renderData.length; i++) {
-        const record = renderData[i]
-        const key = getRowKey(record, i)
-        const className = typeof rowClassName === 'string' ? rowClassName : rowClassName(record, i, indent)
+        const record = renderData[i];
+        const key = getRowKey(record, i);
+        const className =
+          typeof rowClassName === 'string' ? rowClassName : rowClassName(record, i, indent);
 
-        const onHoverProps = {}
+        const onHoverProps = {};
         if (columnManager.isAnyColumnsFixed()) {
-          onHoverProps.hover = this.handleRowHover
+          onHoverProps.hover = this.handleRowHover;
         }
 
-        let leafColumns
+        let leafColumns;
         if (fixed === 'left') {
-          leafColumns = columnManager.leftLeafColumns()
+          leafColumns = columnManager.leftLeafColumns();
         } else if (fixed === 'right') {
-          leafColumns = columnManager.rightLeafColumns()
+          leafColumns = columnManager.rightLeafColumns();
         } else {
-          leafColumns = this.getColumns(columnManager.leafColumns())
+          leafColumns = this.getColumns(columnManager.leafColumns());
         }
 
-        const rowPrefixCls = `${prefixCls}-row`
+        const rowPrefixCls = `${prefixCls}-row`;
 
         const expandableRowProps = {
           props: {
@@ -104,87 +102,82 @@ const BaseTable = {
             expandedChange: expander.handleExpandChange,
           },
           scopedSlots: {
-            default: (expandableRow) => {
-              const tableRowProps = mergeProps({
-                props: {
-                  fixed,
-                  indent,
-                  record,
-                  index: i,
-                  prefixCls: rowPrefixCls,
-                  childrenColumnName: childrenColumnName,
-                  columns: leafColumns,
-                  rowKey: key,
-                  ancestorKeys,
-                  components,
-                  isAnyColumnsFixed,
-                  customRow,
+            default: expandableRow => {
+              const tableRowProps = mergeProps(
+                {
+                  props: {
+                    fixed,
+                    indent,
+                    record,
+                    index: i,
+                    prefixCls: rowPrefixCls,
+                    childrenColumnName: childrenColumnName,
+                    columns: leafColumns,
+                    rowKey: key,
+                    ancestorKeys,
+                    components,
+                    isAnyColumnsFixed,
+                    customRow,
+                  },
+                  on: {
+                    rowDoubleclick: onRowDoubleClick,
+                    rowContextmenu: onRowContextMenu,
+                    rowMouseenter: onRowMouseEnter,
+                    rowMouseleave: onRowMouseLeave,
+                    ...onHoverProps,
+                  },
+                  class: className,
+                  ref: `row_${i}_${indent}`,
                 },
-                on: {
-                  rowDoubleclick: onRowDoubleClick,
-                  rowContextmenu: onRowContextMenu,
-                  rowMouseenter: onRowMouseEnter,
-                  rowMouseleave: onRowMouseLeave,
-                  ...onHoverProps,
-                },
-                class: className,
-                ref: `row_${i}_${indent}`,
-              }, expandableRow)
-              return (
-                <TableRow
-                  {...tableRowProps}
-                />
-              )
+                expandableRow,
+              );
+              return <TableRow {...tableRowProps} />;
             },
           },
-        }
-        const row = (
-          <ExpandableRow
-            {...expandableRowProps}
-          />
-        )
+        };
+        const row = <ExpandableRow {...expandableRowProps} />;
 
-        rows.push(row)
-        expander.renderRows(this.renderRows, rows, record, i, indent, fixed, key, ancestorKeys)
+        rows.push(row);
+        expander.renderRows(this.renderRows, rows, record, i, indent, fixed, key, ancestorKeys);
       }
-      return rows
+      return rows;
     },
   },
 
-  render () {
-    const { sComponents: components, prefixCls, scroll, data, getBodyWrapper } = this.table
-    const { expander, tableClassName, hasHead, hasBody, fixed } = this.$props
+  render() {
+    const { sComponents: components, prefixCls, scroll, data, getBodyWrapper } = this.table;
+    const { expander, tableClassName, hasHead, hasBody, fixed } = this.$props;
 
-    const tableStyle = {}
+    const tableStyle = {};
 
     if (!fixed && scroll.x) {
       // not set width, then use content fixed width
       if (scroll.x === true) {
-        tableStyle.tableLayout = 'fixed'
+        tableStyle.tableLayout = 'fixed';
       } else {
-        tableStyle.width = typeof scroll.x === 'number' ? `${scroll.x}px` : scroll.x
+        tableStyle.width = typeof scroll.x === 'number' ? `${scroll.x}px` : scroll.x;
       }
     }
 
-    const Table = hasBody ? components.table : 'table'
-    const BodyWrapper = components.body.wrapper
+    const Table = hasBody ? components.table : 'table';
+    const BodyWrapper = components.body.wrapper;
 
-    let body
+    let body;
     if (hasBody) {
-      body = <BodyWrapper class={`${prefixCls}-tbody`}>{this.renderRows(data, 0)}</BodyWrapper>
+      body = <BodyWrapper class={`${prefixCls}-tbody`}>{this.renderRows(data, 0)}</BodyWrapper>;
       if (getBodyWrapper) {
-        body = getBodyWrapper(body)
+        body = getBodyWrapper(body);
       }
     }
-    const columns = this.getColumns()
+    const columns = this.getColumns();
     return (
-      <Table class={tableClassName} style={tableStyle} key='table'>
+      <Table class={tableClassName} style={tableStyle} key="table">
         <ColGroup columns={columns} fixed={fixed} />
-        {hasHead && <TableHeader expander={expander} columns={columns} fixed={fixed} /> }
+        {hasHead && <TableHeader expander={expander} columns={columns} fixed={fixed} />}
         {body}
       </Table>
-    )
+    );
   },
-}
+};
 
-export default connect()(BaseTable)
+export default connect()(BaseTable);

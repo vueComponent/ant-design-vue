@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/uk_UA'
-import DatePicker from '../date-picker/locale/uk_UA'
-import TimePicker from '../time-picker/locale/uk_UA'
-import Calendar from '../calendar/locale/uk_UA'
+import Pagination from '../vc-pagination/locale/uk_UA';
+import DatePicker from '../date-picker/locale/uk_UA';
+import TimePicker from '../time-picker/locale/uk_UA';
+import Calendar from '../calendar/locale/uk_UA';
 
 export default {
   locale: 'uk',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Помилка завантаження',
     previewFile: 'Попередній перегляд файлу',
   },
-}
+};

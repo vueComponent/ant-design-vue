@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -11,7 +11,7 @@ export default {
         slidesToScroll: 4,
         slidesToShow: 4,
       },
-    }
+    };
     return (
       <div>
         <h2>Uneven sets (infinite)</h2>
@@ -36,6 +36,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

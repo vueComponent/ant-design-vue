@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types'
+import PropTypes from '../../_util/vue-types';
 
 const defaultProps = {
   accessibility: PropTypes.bool.def(true),
@@ -51,6 +51,6 @@ const defaultProps = {
   waitForAnimate: PropTypes.bool.def(true),
   children: PropTypes.array,
   __propsSymbol__: PropTypes.any,
-}
+};
 
-export default defaultProps
+export default defaultProps;

@@ -1,54 +1,54 @@
 <script>
-import '../assets/index.less'
+import '../assets/index.less';
 
-import moment from 'moment'
+import moment from 'moment';
 
-import TimePicker from '../index'
+import TimePicker from '../index';
 
-const format = 'h:mm a'
+const format = 'h:mm a';
 
-const now = moment().hour(0).minute(0)
+const now = moment().hour(0).minute(0);
 
 function onChange (value) {
-  console.log(value && value.format(format))
+  console.log(value && value.format(format));
 }
 
-const showSecond = true
-const str = showSecond ? 'HH:mm:ss' : 'HH:mm'
+const showSecond = true;
+const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
 
-const now1 = moment().hour(14).minute(30)
+const now1 = moment().hour(14).minute(30);
 
 function generateOptions (length, excludedOptions) {
-  const arr = []
+  const arr = [];
   for (let value = 0; value < length; value++) {
     if (excludedOptions.indexOf(value) < 0) {
-      arr.push(value)
+      arr.push(value);
     }
   }
-  return arr
+  return arr;
 }
 
 function onChange1 (value) {
-  console.log(value && value.format(str))
+  console.log(value && value.format(str));
 }
 
 function disabledHours () {
-  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23]
+  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23];
 }
 
 function disabledMinutes (h) {
   switch (h) {
     case 9:
-      return generateOptions(60, [30])
+      return generateOptions(60, [30]);
     case 21:
-      return generateOptions(60, [0])
+      return generateOptions(60, [0]);
     default:
-      return generateOptions(60, [0, 30])
+      return generateOptions(60, [0, 30]);
   }
 }
 
 function disabledSeconds (h, m) {
-  return [h + m % 60]
+  return [h + m % 60];
 }
 
 export default{
@@ -56,21 +56,21 @@ export default{
     return {
       open: false,
       value: moment(),
-    }
+    };
   },
   methods: {
     setOpen ({ open }) {
-      this.open = open
+      this.open = open;
     },
     toggleOpen () {
-      this.open = !this.open
+      this.open = !this.open;
     },
     handleValueChange  (value) {
-      console.log(value && value.format('HH:mm:ss'))
-      this.value = value
+      console.log(value && value.format('HH:mm:ss'));
+      this.value = value;
     },
     clear () {
-      this.value = undefined
+      this.value = undefined;
     },
   },
   render () {
@@ -154,7 +154,7 @@ export default{
           <button onClick={this.clear}>clear</button>
         </div>
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,10 +1,10 @@
 <script>
-import VcPagination from '../index'
-import '../assets/index.less'
+import VcPagination from '../index';
+import '../assets/index.less';
 
 export default {
   data () {
-    return {}
+    return {};
   },
   render () {
     return (
@@ -15,7 +15,7 @@ export default {
           total={50}
         />
       </div>
-    )
+    );
   },
-}
+};
 </script>

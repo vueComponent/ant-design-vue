@@ -1,9 +1,9 @@
 <script>
-import Basic from './basic'
-import Onchange from './on-change'
-import Target from './target'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Onchange from './on-change';
+import Target from './target';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Affix 固钉
           将页面元素钉在可视范围。
@@ -17,7 +17,7 @@ const md = {
 When user browses a long web page, some content need to stick to the viewport. This is common for menus and actions.
 Please note that Affix should not cover other content on the page, especially when the size of the viewport is small.
 ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '固钉',
@@ -36,7 +36,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

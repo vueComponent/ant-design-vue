@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types'
+import PropTypes from '../../_util/vue-types';
 
 export default {
   name: 'ColumnGroup',
@@ -6,4 +6,4 @@ export default {
     title: PropTypes.any,
   },
   isTableColumnGroup: true,
-}
+};

@@ -51,7 +51,7 @@ export declare class Switch extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "small" | "default" | "large";
+  size: 'small' | 'default' | 'large';
 
   /**
    * content to be shown when the state is unchecked

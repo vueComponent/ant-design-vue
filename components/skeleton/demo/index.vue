@@ -1,11 +1,11 @@
 <script>
-import Basic from './basic.md'
-import Active from './active.md'
-import Children from './children.md'
-import Complex from './complex.md'
-import List from './list.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import Active from './active.md';
+import Children from './children.md';
+import Complex from './complex.md';
+import List from './list.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 加载占位图
@@ -27,7 +27,7 @@ const md = {
   - The component contains much information. Such as List or Card.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '加载占位图',
@@ -56,7 +56,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,15 +1,15 @@
-import BaseMixin from '../../_util/BaseMixin'
-import { hasProp, getPropsData, isEmptyElement, initDefaultProps } from '../../_util/props-util'
-import { cloneElement } from '../../_util/vnode'
-import openAnimationFactory from './openAnimationFactory'
-import { collapseProps } from './commonProps'
+import BaseMixin from '../../_util/BaseMixin';
+import { hasProp, getPropsData, isEmptyElement, initDefaultProps } from '../../_util/props-util';
+import { cloneElement } from '../../_util/vnode';
+import openAnimationFactory from './openAnimationFactory';
+import { collapseProps } from './commonProps';
 
-function _toArray (activeKey) {
-  let currentActiveKey = activeKey
+function _toArray(activeKey) {
+  let currentActiveKey = activeKey;
   if (!Array.isArray(currentActiveKey)) {
-    currentActiveKey = currentActiveKey ? [currentActiveKey] : []
+    currentActiveKey = currentActiveKey ? [currentActiveKey] : [];
   }
-  return currentActiveKey
+  return currentActiveKey;
 }
 
 export default {
@@ -24,56 +24,58 @@ export default {
     accordion: false,
     destroyInactivePanel: false,
   }),
-  data () {
-    const { activeKey, defaultActiveKey, openAnimation, prefixCls } = this.$props
-    let currentActiveKey = defaultActiveKey
+  data() {
+    const { activeKey, defaultActiveKey, openAnimation, prefixCls } = this.$props;
+    let currentActiveKey = defaultActiveKey;
     if (hasProp(this, 'activeKey')) {
-      currentActiveKey = activeKey
+      currentActiveKey = activeKey;
     }
-    const currentOpenAnimations = openAnimation || openAnimationFactory(prefixCls)
+    const currentOpenAnimations = openAnimation || openAnimationFactory(prefixCls);
     return {
       currentOpenAnimations,
       stateActiveKey: _toArray(currentActiveKey),
-    }
+    };
   },
   methods: {
-    onClickItem (key) {
-      let activeKey = this.stateActiveKey
+    onClickItem(key) {
+      let activeKey = this.stateActiveKey;
       if (this.accordion) {
-        activeKey = activeKey[0] === key ? [] : [key]
+        activeKey = activeKey[0] === key ? [] : [key];
       } else {
-        activeKey = [...activeKey]
-        const index = activeKey.indexOf(key)
-        const isActive = index > -1
+        activeKey = [...activeKey];
+        const index = activeKey.indexOf(key);
+        const isActive = index > -1;
         if (isActive) {
-        // remove active state
-          activeKey.splice(index, 1)
+          // remove active state
+          activeKey.splice(index, 1);
         } else {
-          activeKey.push(key)
+          activeKey.push(key);
         }
       }
-      this.setActiveKey(activeKey)
+      this.setActiveKey(activeKey);
     },
-    getItems () {
-      const activeKey = this.stateActiveKey
-      const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props
-      const newChildren = []
+    getItems() {
+      const activeKey = this.stateActiveKey;
+      const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props;
+      const newChildren = [];
       this.$slots.default.forEach((child, index) => {
-        if (isEmptyElement(child)) return
-        const { header, headerClass, disabled } = getPropsData(child)
-        let isActive = false
-        const key = child.key || String(index)
+        if (isEmptyElement(child)) return;
+        const { header, headerClass, disabled } = getPropsData(child);
+        let isActive = false;
+        const key = child.key || String(index);
         if (accordion) {
-          isActive = activeKey[0] === key
+          isActive = activeKey[0] === key;
         } else {
-          isActive = activeKey.indexOf(key) > -1
+          isActive = activeKey.indexOf(key) > -1;
         }
 
-        let panelEvents = {}
+        let panelEvents = {};
         if (!disabled && disabled !== '') {
           panelEvents = {
-            itemClick: () => { this.onClickItem(key) },
-          }
+            itemClick: () => {
+              this.onClickItem(key);
+            },
+          };
         }
 
         const props = {
@@ -90,39 +92,38 @@ export default {
           on: {
             ...panelEvents,
           },
-        }
+        };
 
-        newChildren.push(cloneElement(child, props))
-      })
-      return newChildren
+        newChildren.push(cloneElement(child, props));
+      });
+      return newChildren;
     },
-    setActiveKey (activeKey) {
-      this.setState({ stateActiveKey: activeKey })
-      this.$emit('change', this.accordion ? activeKey[0] : activeKey)
+    setActiveKey(activeKey) {
+      this.setState({ stateActiveKey: activeKey });
+      this.$emit('change', this.accordion ? activeKey[0] : activeKey);
     },
   },
   watch: {
-    activeKey (val) {
+    activeKey(val) {
       this.setState({
         stateActiveKey: _toArray(val),
-      })
+      });
     },
-    openAnimation (val) {
+    openAnimation(val) {
       this.setState({
         currentOpenAnimations: val,
-      })
+      });
     },
   },
-  render () {
-    const { prefixCls, accordion } = this.$props
+  render() {
+    const { prefixCls, accordion } = this.$props;
     const collapseClassName = {
       [prefixCls]: true,
-    }
+    };
     return (
       <div class={collapseClassName} role={accordion ? 'tablist' : null}>
         {this.getItems()}
       </div>
-    )
+    );
   },
-}
-
+};

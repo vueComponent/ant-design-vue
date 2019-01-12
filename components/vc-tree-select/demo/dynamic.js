@@ -1,9 +1,9 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import BaseMixin from '../../_util/BaseMixin'
-import '../assets/index.less'
-import TreeSelect from '../src/index'
-import { getNewTreeData, generateTreeNodes } from './util'
+import BaseMixin from '../../_util/BaseMixin';
+import '../assets/index.less';
+import TreeSelect from '../src/index';
+import { getNewTreeData, generateTreeNodes } from './util';
 
 export default {
   mixins: [BaseMixin],
@@ -17,27 +17,27 @@ export default {
     value: { value: '0-0-0-value', label: '0-0-0-label' },
   }),
   methods: {
-    onChange  (value) {
-      console.log(value)
+    onChange(value) {
+      console.log(value);
       this.setState({
         value,
-      })
+      });
     },
 
-    onLoadData (treeNode) {
-      console.log(treeNode)
-      return new Promise((resolve) => {
+    onLoadData(treeNode) {
+      console.log(treeNode);
+      return new Promise(resolve => {
         setTimeout(() => {
-          const treeData = [...this.treeData]
-          getNewTreeData(treeData, treeNode.eventKey, generateTreeNodes(treeNode), 2)
-          this.setState({ treeData })
-          resolve()
-        }, 500)
-      })
+          const treeData = [...this.treeData];
+          getNewTreeData(treeData, treeNode.eventKey, generateTreeNodes(treeNode), 2);
+          this.setState({ treeData });
+          resolve();
+        }, 500);
+      });
     },
   },
 
-  render () {
+  render() {
     return (
       <div style={{ padding: '10px 30px' }}>
         <h2>dynamic render</h2>
@@ -51,6 +51,6 @@ export default {
           __propsSymbol__={Symbol()}
         />
       </div>
-    )
+    );
   },
-}
+};

@@ -1,116 +1,121 @@
-import Slider from '../index'
-import '../assets/index.less'
-const { Range } = Slider
-function log (value) {
+import Slider from '../index';
+import '../assets/index.less';
+const { Range } = Slider;
+function log(value) {
   console.log(value); //eslint-disable-line
 }
 
 const CustomizedRange = {
-  data () {
+  data() {
     return {
       lowerBound: 20,
       upperBound: 40,
       value: [20, 40],
-    }
+    };
   },
   methods: {
-    onLowerBoundChange (e) {
-      this.lowerBound = +e.target.value
+    onLowerBoundChange(e) {
+      this.lowerBound = +e.target.value;
     },
-    onUpperBoundChange (e) {
-      this.upperBound = +e.target.value
+    onUpperBoundChange(e) {
+      this.upperBound = +e.target.value;
     },
-    onSliderChange (value) {
-      log(value)
-      this.value = value
+    onSliderChange(value) {
+      log(value);
+      this.value = value;
     },
-    handleApply () {
-      this.value = [this.lowerBound, this.upperBound]
+    handleApply() {
+      this.value = [this.lowerBound, this.upperBound];
     },
   },
-  render () {
+  render() {
     return (
       <div>
         <label>LowerBound: </label>
-        <input type='number' value={this.lowerBound} onChange={this.onLowerBoundChange} />
+        <input type="number" value={this.lowerBound} onChange={this.onLowerBoundChange} />
         <br />
         <label>UpperBound: </label>
-        <input type='number' value={this.upperBound} onChange={this.onUpperBoundChange} />
+        <input type="number" value={this.upperBound} onChange={this.onUpperBoundChange} />
         <br />
         <button onClick={this.handleApply}>Apply</button>
-        <br /><br />
+        <br />
+        <br />
         <Range allowCross={false} value={this.value} onChange={this.onSliderChange} />
       </div>
-    )
+    );
   },
-}
+};
 
 const DynamicBounds = {
-  data () {
+  data() {
     return {
       min: 0,
       max: 100,
-    }
+    };
   },
   methods: {
-    onSliderChange (value) {
-      log(value)
+    onSliderChange(value) {
+      log(value);
     },
-    onMinChange (e) {
-      this.min = +e.target.value || 0
+    onMinChange(e) {
+      this.min = +e.target.value || 0;
     },
-    onMaxChange (e) {
-      this.max = +e.target.value || 100
+    onMaxChange(e) {
+      this.max = +e.target.value || 100;
     },
   },
-  render () {
+  render() {
     return (
       <div>
         <label>Min: </label>
-        <input type='number' value={this.min} onInput={this.onMinChange} />
+        <input type="number" value={this.min} onInput={this.onMinChange} />
         <br />
         <label>Max: </label>
-        <input type='number' value={this.max} onInput={this.onMaxChange} />
-        <br /><br />
-        <Range defaultValue={[20, 50]} min={this.min} max={this.max}
+        <input type="number" value={this.max} onInput={this.onMaxChange} />
+        <br />
+        <br />
+        <Range
+          defaultValue={[20, 50]}
+          min={this.min}
+          max={this.max}
           onChange={this.onSliderChange}
         />
       </div>
-    )
+    );
   },
-}
+};
 
 const ControlledRange = {
-  data () {
+  data() {
     return {
       value: [20, 40, 60, 80],
-    }
+    };
   },
   methods: {
-    handleChange (value) {
-      this.value = value
+    handleChange(value) {
+      this.value = value;
     },
   },
-  render () {
-    return <Range value={this.value} onChange={this.handleChange} />
+  render() {
+    return <Range value={this.value} onChange={this.handleChange} />;
   },
-}
+};
 
 const ControlledRangeDisableAcross = {
   props: {
     pushable: [Number, Boolean],
   },
-  data () {
+  data() {
     return {
       value: [20, 40, 60, 80],
-    }
+    };
   },
   methods: {
-    handleChange (value) {
-      this.value = value
+    handleChange(value) {
+      this.value = value;
     },
   },
-  render () {
+  render() {
     const rangeRange = {
       props: {
         value: this.value,
@@ -120,34 +125,34 @@ const ControlledRangeDisableAcross = {
       on: {
         change: this.handleChange,
       },
-    }
-    return <Range
-      {...rangeRange}
-    />
+    };
+    return <Range {...rangeRange} />;
   },
-}
+};
 
 const PureRenderRange = {
-  data () {
+  data() {
     return {
       foo: false,
-    }
+    };
   },
   methods: {
-    handleChange (value) {
-      console.log(value)
-      this.foo = !this.foo
+    handleChange(value) {
+      console.log(value);
+      this.foo = !this.foo;
     },
   },
-  render () {
-    return <Range defaultValue={[20, 40, 60, 80]} onChange={this.handleChange} allowCross={false} />
+  render() {
+    return (
+      <Range defaultValue={[20, 40, 60, 80]} onChange={this.handleChange} allowCross={false} />
+    );
   },
-}
+};
 
 export default {
-  render () {
-    const style = { width: '400px', margin: '50px' }
-    const pStyle = { margin: '20px 0' }
+  render() {
+    const style = { width: '400px', margin: '50px' };
+    const pStyle = { margin: '20px 0' };
 
     return (
       <div>
@@ -185,7 +190,10 @@ export default {
         </div>
         <div style={style}>
           <p style={pStyle}>Multi Range with custom track and handle style</p>
-          <Range count={3} defaultValue={[20, 40, 60, 80]} pushable
+          <Range
+            count={3}
+            defaultValue={[20, 40, 60, 80]}
+            pushable
             trackStyle={[{ backgroundColor: 'red' }, { backgroundColor: 'green' }]}
             handleStyle={[{ backgroundColor: 'yellow' }, { backgroundColor: 'gray' }]}
             railStyle={{ backgroundColor: 'black' }}
@@ -204,6 +212,6 @@ export default {
           <PureRenderRange />
         </div>
       </div>
-    )
+    );
   },
-}
+};

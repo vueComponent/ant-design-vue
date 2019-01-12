@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import Vue from "vue";
-import { TooltipCommon } from "./common";
+import Vue from 'vue';
+import { TooltipCommon } from './common';
 
 export declare class Tooltip extends TooltipCommon {
   /**

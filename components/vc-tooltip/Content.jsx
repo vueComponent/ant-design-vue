@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 
 export default {
   props: {
@@ -6,18 +6,18 @@ export default {
     overlay: PropTypes.any,
     trigger: PropTypes.any,
   },
-  updated () {
-    const { trigger } = this
+  updated() {
+    const { trigger } = this;
     if (trigger) {
-      trigger.forcePopupAlign()
+      trigger.forcePopupAlign();
     }
   },
-  render () {
-    const { overlay, prefixCls } = this
+  render() {
+    const { overlay, prefixCls } = this;
     return (
-      <div class={`${prefixCls}-inner`} role='tooltip'>
+      <div class={`${prefixCls}-inner`} role="tooltip">
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>
-    )
+    );
   },
-}
+};

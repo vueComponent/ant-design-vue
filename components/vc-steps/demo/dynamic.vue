@@ -1,7 +1,7 @@
 <script>
-import Steps, { Step } from '../index'
-import '../assets/index.less'
-import '../assets/iconfont.less'
+import Steps, { Step } from '../index';
+import '../assets/index.less';
+import '../assets/iconfont.less';
 
 export default {
   data () {
@@ -19,14 +19,14 @@ export default {
         title: '待运行',
         description: '这里是多信息的描述啊描述啊描述啊描述啊哦耶哦耶哦耶哦耶哦耶哦耶哦耶哦耶哦耶哦耶哦耶哦耶',
       }],
-    }
+    };
   },
   methods: {
     addStep () {
       this.steps.push({
         title: '待运行',
         description: '新的节点',
-      })
+      });
     },
   },
   render () {
@@ -35,7 +35,7 @@ export default {
         <button onClick={this.addStep}>Add new step</button>
         <Steps>{this.steps.map((step, i) => <Step key={i} title={step.title} description={step.description} />)}</Steps>
       </div>
-    )
+    );
   },
-}
+};
 </script>

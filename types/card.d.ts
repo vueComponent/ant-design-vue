@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { Meta } from "./meta";
+import { Meta } from './meta';
 
 export declare class Card extends AntdComponent {
   static Grid: any;

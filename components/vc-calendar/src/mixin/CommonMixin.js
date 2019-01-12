@@ -18,24 +18,23 @@ export default {
   //   return this.props.visible || nextProps.visible
   // },
   methods: {
-    getFormat () {
-      let { format } = this
-      const { locale, timePicker } = this
+    getFormat() {
+      let { format } = this;
+      const { locale, timePicker } = this;
       if (!format) {
         if (timePicker) {
-          format = locale.dateTimeFormat
+          format = locale.dateTimeFormat;
         } else {
-          format = locale.dateFormat
+          format = locale.dateFormat;
         }
       }
-      return format
+      return format;
     },
 
-    focus () {
+    focus() {
       if (this.$refs.rootInstance) {
-        this.$refs.rootInstance.focus()
+        this.$refs.rootInstance.focus();
       }
     },
   },
-
-}
+};

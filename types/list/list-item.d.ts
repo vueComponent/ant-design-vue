@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { Meta } from "../meta";
+import { AntdComponent } from '../component';
+import { Meta } from '../meta';
 
 export declare class ListItem extends AntdComponent {
   static Meta: Meta;

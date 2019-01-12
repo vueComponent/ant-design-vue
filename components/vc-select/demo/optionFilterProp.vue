@@ -1,11 +1,11 @@
 <script>
-import Select, { Option } from '../index'
-import '../assets/index.less'
+import Select, { Option } from '../index';
+import '../assets/index.less';
 
 export default {
   methods: {
     onChange (value, options) {
-      console.log(`selected ${value}`)
+      console.log(`selected ${value}`);
     },
   },
 
@@ -25,7 +25,7 @@ export default {
           <Option value='王五' desc='王五 wang wu'>王五</Option>
         </Select>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

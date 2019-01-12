@@ -1,15 +1,15 @@
 <script>
-import Basic from './basic'
-import CustomIcon from './custom-icon'
-import CustomStyle from './custom-style'
-import Duration from './duration'
-import Placement from './placement'
-import WithBtn from './with-btn'
-import WithIcon from './with-icon'
-import Update from './update'
+import Basic from './basic';
+import CustomIcon from './custom-icon';
+import CustomStyle from './custom-style';
+import Duration from './duration';
+import Placement from './placement';
+import WithBtn from './with-btn';
+import WithIcon from './with-icon';
+import Update from './update';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# 通知提醒框
 全局展示通知提醒信息。
@@ -30,7 +30,7 @@ used in the following cases:
   about upcoming steps the user may have to follow.
 - A notification that is pushed by the application.
 ## Examples `,
-}
+};
 export default {
   category: 'Components',
   type: 'Feedback',
@@ -54,7 +54,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

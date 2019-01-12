@@ -58,19 +58,19 @@ Normal login form which can contain more elements.
 
 export default {
   beforeCreate () {
-    this.form = this.$form.createForm(this)
+    this.form = this.$form.createForm(this);
   },
   methods: {
     handleSubmit (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', values);
         }
-      })
+      });
     },
   },
-}
+};
 </script>
 <style>
 #components-form-demo-normal-login .login-form {

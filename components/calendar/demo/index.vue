@@ -1,10 +1,10 @@
 <script>
-import Basic from './basic'
-import Card from './card'
-import NoticeCalendar from './notice-calendar'
-import Select from './select'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Card from './card';
+import NoticeCalendar from './notice-calendar';
+import Select from './select';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Calendar 日历
           
@@ -24,7 +24,7 @@ Container for displaying data in calendar form.
 When data is in the form of dates, such as schedules, timetables, prices calendar, lunar calendar. This component also supports Year/Month switch.
 ## Examples 
 `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Display',
@@ -45,7 +45,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

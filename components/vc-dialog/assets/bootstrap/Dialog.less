@@ -1,9 +1,9 @@
-@import "./variables.less";
+@import './variables.less';
 
 .clearfix() {
   &:before,
   &:after {
-    content: " "; // 1
+    content: ' '; // 1
     display: table; // 2
   }
   &:after {
@@ -40,7 +40,7 @@
     border: 1px solid @modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
     border: 1px solid @modal-content-border-color;
     border-radius: @border-radius-large;
-    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
     background-clip: padding-box;
     // Remove focus outline from opened rc-dialog
     outline: 0;
@@ -67,11 +67,11 @@
     color: #000;
     text-shadow: 0 1px 0 #fff;
     filter: alpha(opacity=20);
-    opacity: .2;
+    opacity: 0.2;
     text-decoration: none;
 
     &-x:after {
-      content: '×'
+      content: '×';
     }
 
     &:hover {
@@ -125,9 +125,9 @@
     margin: 30px auto;
 
     &-content {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
   }
 }
 
-@import "./effect.less";
+@import './effect.less';

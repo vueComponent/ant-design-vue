@@ -2,9 +2,9 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import Vue from "vue";
-import { FormItem } from "./form-item";
+import { AntdComponent } from '../component';
+import Vue from 'vue';
+import { FormItem } from './form-item';
 
 export interface Field {
   [fieldName: string]: {
@@ -262,7 +262,7 @@ export interface WrappedFormUtils {
   validateFields(
     fieldNames: string[],
     options: ValidateFieldOptions,
-    callback: (erros: Error[], values: any) => any
+    callback: (erros: Error[], values: any) => any,
   ): void;
 
   /**
@@ -273,7 +273,7 @@ export interface WrappedFormUtils {
   validateFieldsAndScroll(
     fieldNames: string[],
     options: ValidateFieldOptions,
-    callback: (erros: Error[], values: any) => any
+    callback: (erros: Error[], values: any) => any,
   ): void;
 }
 
@@ -335,7 +335,7 @@ export declare class Form extends AntdComponent {
    * @default 'horizontal'
    * @type string
    */
-  layout: "horizontal" | "inline" | "vertical";
+  layout: 'horizontal' | 'inline' | 'vertical';
 
   /**
    * Automate Form.create, Recommended for use under the template component, and cannot be used with Form.create().
@@ -355,7 +355,7 @@ export declare class Form extends AntdComponent {
   createForm(context: Vue, options?: IformCreateOption): any;
 }
 
-declare module "vue/types/vue" {
+declare module 'vue/types/vue' {
   interface Vue {
     $form: Form;
   }

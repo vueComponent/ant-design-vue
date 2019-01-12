@@ -1,15 +1,15 @@
 <script>
-import Basic from './basic'
-import Fade from './fade'
-import Autoplay from './autoplay'
-import Vertical from './vertical'
-import CustomPaging from './customPaging'
-import CustomArrows from './customArrows'
+import Basic from './basic';
+import Fade from './fade';
+import Autoplay from './autoplay';
+import Vertical from './vertical';
+import CustomPaging from './customPaging';
+import CustomArrows from './customArrows';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
-import '../style'
+import '../style';
 
 const md = {
   cn: `# Carousel 走马灯
@@ -30,7 +30,7 @@ const md = {
       - Commonly used for a group of pictures/cards.
        ## Examples
         `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Display',
@@ -52,7 +52,7 @@ export default {
           <US />
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

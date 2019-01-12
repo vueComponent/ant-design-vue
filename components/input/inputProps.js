@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 export default {
   prefixCls: {
     default: 'ant-input',
@@ -13,8 +13,8 @@ export default {
   },
   name: String,
   size: {
-    validator (value) {
-      return ['small', 'large', 'default'].includes(value)
+    validator(value) {
+      return ['small', 'large', 'default'].includes(value);
     },
   },
   disabled: {
@@ -34,4 +34,4 @@ export default {
   suffix: PropTypes.any,
   spellCheck: Boolean,
   autoFocus: Boolean,
-}
+};

@@ -3,3 +3,7 @@ node_modules/
 **/style/
 *.html
 /components/test/*
+es/
+lib/
+site-dist/
+dist/

@@ -1,28 +1,28 @@
-import Slider from '../index'
-import Tooltip from '../../vc-tooltip'
-import '../assets/index.less'
-import '../../vc-tooltip/assets/bootstrap.less'
+import Slider from '../index';
+import Tooltip from '../../vc-tooltip';
+import '../assets/index.less';
+import '../../vc-tooltip/assets/bootstrap.less';
 
-const { Handle } = Slider
+const { Handle } = Slider;
 
-const { createSliderWithTooltip } = Slider
-const Range = createSliderWithTooltip(Slider.Range)
+const { createSliderWithTooltip } = Slider;
+const Range = createSliderWithTooltip(Slider.Range);
 
 export default {
-  data () {
+  data() {
     return {
       visibles: [],
-    }
+    };
   },
   methods: {
-    handleTooltipVisibleChange (index, visible) {
-      this.visibles[index] = visible
-      this.visibles = { ...this.visibles }
+    handleTooltipVisibleChange(index, visible) {
+      this.visibles[index] = visible;
+      this.visibles = { ...this.visibles };
     },
   },
-  render () {
-    const handle = (props) => {
-      const { value, dragging, index, ref, style, ...restProps } = props
+  render() {
+    const handle = props => {
+      const { value, dragging, index, ref, style, ...restProps } = props;
       const handleProps = {
         props: {
           ...restProps,
@@ -31,20 +31,19 @@ export default {
         key: index,
         style,
         ref,
-      }
+      };
       return (
         <Tooltip
-          prefixCls='rc-slider-tooltip'
+          prefixCls="rc-slider-tooltip"
           overlay={value}
           visible={dragging}
-          placement='top'
+          placement="top"
           key={index}
         >
-
           <Handle {...handleProps} />
         </Tooltip>
-      )
-    }
+      );
+    };
 
     // const handleRange = (h, { value, ref, dragging, index, disabled, style, ...restProps }) => {
     //   const tipFormatter = value => `${value}%`
@@ -100,7 +99,7 @@ export default {
     //     </Tooltip>
     //   )
     // }
-    const wrapperStyle = 'width: 400px; margin: 50px'
+    const wrapperStyle = 'width: 400px; margin: 50px';
 
     return (
       <div>
@@ -113,6 +112,6 @@ export default {
           <Range min={0} max={20} defaultValue={[3, 10]} tipFormatter={value => `${value}%`} />
         </div>
       </div>
-    )
+    );
   },
-}
+};

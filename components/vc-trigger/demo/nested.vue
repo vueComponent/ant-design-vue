@@ -1,6 +1,6 @@
 <script>
-import Trigger from '../index'
-import '../assets/index.less'
+import Trigger from '../index';
+import '../assets/index.less';
 const builtinPlacements = {
   left: {
     points: ['cr', 'cl'],
@@ -26,12 +26,12 @@ const builtinPlacements = {
   bottomLeft: {
     points: ['tl', 'bl'],
   },
-}
+};
 
 const popupBorderStyle = {
   border: '1px solid red',
   padding: '10px',
-}
+};
 
 export default {
   render () {
@@ -64,7 +64,7 @@ export default {
             action={['click', 'hover']}
             builtinPlacements={builtinPlacements}
           >
-            <div style={popupBorderStyle} slot='popup' onClick={(e) => { e.stopPropagation() }}>
+            <div style={popupBorderStyle} slot='popup' onClick={(e) => { e.stopPropagation(); }}>
               <div ref='saveContainerRef' />
               <Trigger
                 popupPlacement='bottom'
@@ -80,8 +80,8 @@ export default {
           </Trigger>
         </div> : null}
       </div>
-    )
+    );
   },
-}
+};
 
 </script>

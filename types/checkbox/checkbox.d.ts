@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { CheckboxGroup } from "./checkbox-group";
+import { AntdComponent } from '../component';
+import { CheckboxGroup } from './checkbox-group';
 
 export declare class Checkbox extends AntdComponent {
   static Group: CheckboxGroup;

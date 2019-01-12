@@ -1,102 +1,106 @@
-import Slider from '../index'
-import Tooltip from '../../vc-tooltip'
-import '../assets/index.less'
-import '../../vc-tooltip/assets/bootstrap.less'
+import Slider from '../index';
+import Tooltip from '../../vc-tooltip';
+import '../assets/index.less';
+import '../../vc-tooltip/assets/bootstrap.less';
 
-const { Handle } = Slider
+const { Handle } = Slider;
 
-function log (value) {
+function log(value) {
   console.log(value); //eslint-disable-line
 }
 
 const CustomizedSlider = {
-  data () {
+  data() {
     return {
       value: 50,
-    }
+    };
   },
   methods: {
-    onSliderChange (value) {
-      log(value)
-      this.value = value
+    onSliderChange(value) {
+      log(value);
+      this.value = value;
     },
-    onAfterChange (value) {
-      log(value)
+    onAfterChange(value) {
+      log(value);
     },
   },
-  render () {
-    return <Slider value={this.value}
-      onChange={this.onSliderChange} onAfterChange={this.onAfterChange}
-    />
+  render() {
+    return (
+      <Slider
+        value={this.value}
+        onChange={this.onSliderChange}
+        onAfterChange={this.onAfterChange}
+      />
+    );
   },
-}
+};
 
 const DynamicBounds = {
-  data () {
+  data() {
     return {
       min: 0,
       max: 100,
-    }
+    };
   },
   methods: {
-    onSliderChange (value) {
-      log(value)
-      this.value = value
+    onSliderChange(value) {
+      log(value);
+      this.value = value;
     },
-    onAfterChange (value) {
-      log(value)
+    onAfterChange(value) {
+      log(value);
     },
-    onMinChange (e) {
-      this.min = +e.target.value || 0
+    onMinChange(e) {
+      this.min = +e.target.value || 0;
     },
-    onMaxChange (e) {
-      this.max = +e.target.value || 100
+    onMaxChange(e) {
+      this.max = +e.target.value || 100;
     },
   },
-  render () {
+  render() {
     return (
       <div>
         <label>Min: </label>
-        <input type='number' value={this.min} onInput={this.onMinChange} />
+        <input type="number" value={this.min} onInput={this.onMinChange} />
         <br />
         <label>Max: </label>
-        <input type='number' value={this.max} onInput={this.onMaxChange} />
-        <br /><br />
-        <Slider defaultValue={50} min={this.min} max={this.max}
-          onChange={this.onSliderChange}
-        />
+        <input type="number" value={this.max} onInput={this.onMaxChange} />
+        <br />
+        <br />
+        <Slider defaultValue={50} min={this.min} max={this.max} onChange={this.onSliderChange} />
       </div>
-    )
+    );
   },
-}
+};
 
 const SliderWithTooltip = {
-  data () {
+  data() {
     return {
       visibles: [],
-    }
+    };
   },
   methods: {
-    handleTooltipVisibleChange (index, visible) {
-      this.visibles[index] = visible
-      this.visibles = { ...this.visibles }
+    handleTooltipVisibleChange(index, visible) {
+      this.visibles[index] = visible;
+      this.visibles = { ...this.visibles };
     },
-    handleRange (h, { value, dragging, index, disabled, style, ...restProps }) {
-      const tipFormatter = value => `${value}%`
-      const tipProps = { overlayClassName: 'foo' }
+    handleRange(h, { value, dragging, index, disabled, style, ...restProps }) {
+      const tipFormatter = value => `${value}%`;
+      const tipProps = { overlayClassName: 'foo' };
 
       const {
         prefixCls = 'rc-slider-tooltip',
         overlay = tipFormatter(value),
         placement = 'top',
         visible = visible || false,
-        ...restTooltipProps } = tipProps
+        ...restTooltipProps
+      } = tipProps;
 
-      let handleStyleWithIndex
+      let handleStyleWithIndex;
       if (Array.isArray(style)) {
-        handleStyleWithIndex = style[index] || style[0]
+        handleStyleWithIndex = style[index] || style[0];
       } else {
-        handleStyleWithIndex = style
+        handleStyleWithIndex = style;
       }
 
       const tooltipProps = {
@@ -108,7 +112,7 @@ const SliderWithTooltip = {
           ...restTooltipProps,
         },
         key: index,
-      }
+      };
       const handleProps = {
         props: {
           value,
@@ -122,29 +126,24 @@ const SliderWithTooltip = {
         style: {
           ...handleStyleWithIndex,
         },
-      }
+      };
 
       return (
-        <Tooltip
-          {...tooltipProps}
-        >
-
-          <Handle
-            {...handleProps}
-          />
+        <Tooltip {...tooltipProps}>
+          <Handle {...handleProps} />
         </Tooltip>
-      )
+      );
     },
   },
-  render () {
-    return <Slider handle={this.handleRange} />
+  render() {
+    return <Slider handle={this.handleRange} />;
   },
-}
+};
 
 export default {
-  render () {
-    const style = { width: '400px', margin: '50px' }
-    const pStyle = { margin: '20px 0' }
+  render() {
+    const style = { width: '400px', margin: '50px' };
+    const pStyle = { margin: '20px 0' };
 
     return (
       <div>
@@ -162,15 +161,27 @@ export default {
           <Slider dots step={20} defaultValue={100} onAfterChange={log} />
         </div>
         <div style={style}>
-          <p style={pStyle}>Basic Slider，`step=20, dots, dotStyle={"{borderColor: 'orange'}"}, activeDotStyle={"{borderColor: 'yellow'}"}`</p>
-          <Slider dots step={20} defaultValue={100} onAfterChange={log} dotStyle={{ borderColor: 'orange' }} activeDotStyle={{ borderColor: 'yellow' }} />
+          <p style={pStyle}>
+            Basic Slider，`step=20, dots, dotStyle={"{borderColor: 'orange'}"}, activeDotStyle=
+            {"{borderColor: 'yellow'}"}`
+          </p>
+          <Slider
+            dots
+            step={20}
+            defaultValue={100}
+            onAfterChange={log}
+            dotStyle={{ borderColor: 'orange' }}
+            activeDotStyle={{ borderColor: 'yellow' }}
+          />
         </div>
         <div style={style}>
           <p style={pStyle}>Slider with tooltip, with custom `tipFormatter`</p>
           <SliderWithTooltip />
         </div>
         <div style={style}>
-          <p style={pStyle}>Slider with custom handle and track style.<strong>(old api, will be deprecated)</strong></p>
+          <p style={pStyle}>
+            Slider with custom handle and track style.<strong>(old api, will be deprecated)</strong>
+          </p>
           <Slider
             defaultValue={30}
             maximumTrackStyle={{ backgroundColor: 'red', height: '10px' }}
@@ -186,7 +197,9 @@ export default {
           />
         </div>
         <div style={style}>
-          <p style={pStyle}>Slider with custom handle and track style.<strong>(The recommended new api)</strong></p>
+          <p style={pStyle}>
+            Slider with custom handle and track style.<strong>(The recommended new api)</strong>
+          </p>
           <Slider
             defaultValue={30}
             trackStyle={{ backgroundColor: 'blue', height: '10px' }}
@@ -218,6 +231,6 @@ export default {
           <DynamicBounds />
         </div>
       </div>
-    )
+    );
   },
-}
+};

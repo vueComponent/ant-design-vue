@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
+import { AntdComponent } from '../component';
 
 export declare class LayoutSider extends AntdComponent {
   /**
@@ -68,12 +68,12 @@ export declare class LayoutSider extends AntdComponent {
    * breakpoints of the responsive layout
    * @type string
    */
-  breakpoint: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+  breakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
   /**
    * color theme of the sidebar
    * @default 'dark'
    * @type string
    */
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
 }

@@ -1,11 +1,17 @@
-import Slider from '../index'
-import '../assets/index.less'
+import Slider from '../index';
+import '../assets/index.less';
 
 export default {
-  render () {
-    const style = { float: 'left', width: '160px', height: '400px', marginBottom: '160px', marginLeft: '50px' }
-    const parentStyle = { overflow: 'hidden' }
-    const pStyle = { margin: '20px 0' }
+  render() {
+    const style = {
+      float: 'left',
+      width: '160px',
+      height: '400px',
+      marginBottom: '160px',
+      marginLeft: '50px',
+    };
+    const parentStyle = { overflow: 'hidden' };
+    const pStyle = { margin: '20px 0' };
     const marks = {
       '-10': '-10°C',
       0: <strong>0°C</strong>,
@@ -18,9 +24,9 @@ export default {
         },
         label: <strong>100°C</strong>,
       },
-    }
+    };
 
-    function log (value) {
+    function log(value) {
       console.log(value); //eslint-disable-line
     }
     return (
@@ -31,7 +37,15 @@ export default {
         </div>
         <div style={style}>
           <p style={pStyle}>Slider with marks and steps</p>
-          <Slider vertical dots min={-10} marks={marks} step={10} onChange={log} defaultValue={20} />
+          <Slider
+            vertical
+            dots
+            min={-10}
+            marks={marks}
+            step={10}
+            onChange={log}
+            defaultValue={20}
+          />
         </div>
 
         <div style={style}>
@@ -45,13 +59,26 @@ export default {
 
         <div style={style}>
           <p style={pStyle}>Range with marks</p>
-          <Slider.Range vertical min={-10} marks={marks} onChange={log} defaultValue={[20, 25, 30, 40]} />
+          <Slider.Range
+            vertical
+            min={-10}
+            marks={marks}
+            onChange={log}
+            defaultValue={[20, 25, 30, 40]}
+          />
         </div>
         <div style={style}>
           <p style={pStyle}>Range with marks and steps</p>
-          <Slider.Range vertical min={-10} marks={marks} step={10} onChange={log} defaultValue={[20, 40]} />
+          <Slider.Range
+            vertical
+            min={-10}
+            marks={marks}
+            step={10}
+            onChange={log}
+            defaultValue={[20, 40]}
+          />
         </div>
       </div>
-    )
+    );
   },
-}
+};

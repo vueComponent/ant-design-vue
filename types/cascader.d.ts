@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from "vue";
+import { VNode } from 'vue';
 
 export interface CascaderOptionType {
   value?: string;
@@ -87,10 +87,7 @@ export declare class Cascader extends AntdComponent {
    * @type Function
    */
   displayRender: (
-    {
-      labels,
-      selectedOptions
-    }: { labels: string[]; selectedOptions: CascaderOptionType[] }
+    { labels, selectedOptions }: { labels: string[]; selectedOptions: CascaderOptionType[] },
   ) => VNode;
 
   /**
@@ -98,7 +95,7 @@ export declare class Cascader extends AntdComponent {
    * @default 'click'
    * @type string
    */
-  expandTrigger: "click" | "hover";
+  expandTrigger: 'click' | 'hover';
 
   /**
    * custom field name for label and value and children
@@ -162,7 +159,7 @@ export declare class Cascader extends AntdComponent {
    * @default 'bottomLeft'
    * @type string
    */
-  popupPlacement: "bottomLeft" | "bottomRight" | "topLeft" | "topRight";
+  popupPlacement: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
 
   /**
    * set visible of cascader popup
@@ -182,7 +179,7 @@ export declare class Cascader extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "large" | "default" | "small";
+  size: 'large' | 'default' | 'small';
 
   /**
    * The custom suffix icon

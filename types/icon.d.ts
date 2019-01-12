@@ -55,7 +55,7 @@ export declare class Icon extends AntdComponent {
    * @default 'outlined'
    * @type string
    */
-  theme: "filled" | "outlined" | "twoTone";
+  theme: 'filled' | 'outlined' | 'twoTone';
 
   /**
    * Only support the two-tone icon. Specific the primary color.

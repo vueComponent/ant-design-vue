@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -12,14 +12,14 @@ export default {
         vertical: true,
         verticalSwiping: true,
         swipeToSlide: true,
-        beforeChange: function (currentSlide, nextSlide) {
-          console.log('before change', currentSlide, nextSlide)
+        beforeChange: function(currentSlide, nextSlide) {
+          console.log('before change', currentSlide, nextSlide);
         },
-        afterChange: function (currentSlide) {
-          console.log('after change', currentSlide)
+        afterChange: function(currentSlide) {
+          console.log('after change', currentSlide);
         },
       },
-    }
+    };
     return (
       <div>
         <h2>Vertical Mode with Swipe To Slide</h2>
@@ -44,6 +44,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

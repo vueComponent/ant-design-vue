@@ -5,8 +5,8 @@
 import { AntdComponent } from './component';
 
 export interface SkeletonAvatarProps {
-  size?: "large" | "small" | "default";
-  shape?: "circle" | "square";
+  size?: 'large' | 'small' | 'default';
+  shape?: 'circle' | 'square';
 }
 
 export interface SkeletonTitleProps {

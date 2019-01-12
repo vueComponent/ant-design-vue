@@ -1,11 +1,11 @@
 <script>
-import Select, { Option } from '../index'
-import '../assets/index.less'
+import Select, { Option } from '../index';
+import '../assets/index.less';
 
 export default {
   methods: {
     onChange (value, options) {
-      console.log(`selected ${value}`)
+      console.log(`selected ${value}`);
     },
   },
 
@@ -14,7 +14,7 @@ export default {
       0: { name: 'Case 1' },
       1: { name: 'Case 2' },
       2: { name: 'Case 3' },
-    }
+    };
     return (<div>
       <h2>Select optionLabelProp</h2>
       <Select style={{ width: '500px' }} optionLabelProp='children' multiple allowClear>
@@ -24,7 +24,7 @@ export default {
           ))
         }
       </Select>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

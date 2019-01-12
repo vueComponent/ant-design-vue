@@ -1,5 +1,5 @@
 <script>
-import CopyableIcon from './CopyableIcon'
+import CopyableIcon from './CopyableIcon';
 export default {
   props: {
     catigory: String,
@@ -19,22 +19,22 @@ export default {
       newIcons: [
         'zhihu', 'file-markdown', 'slack', 'slack-square', 'behance', 'behance-square', 'dribbble', 'dribbble-square', 'instagram', 'yuque',
       ],
-    }
+    };
   },
 
   render () {
-    const { catigory } = this.$props
+    const { catigory } = this.$props;
     const listClassName = {
       'anticons-list': true,
       clearfix: true,
-    }
+    };
     return (
       <ul class={listClassName}>
         {this.icons[catigory].map(type => (
           <CopyableIcon key={type} type={type} isNew={this.newIcons.indexOf(type) >= 0} />
         ))}
       </ul>
-    )
+    );
   },
-}
+};
 </script>

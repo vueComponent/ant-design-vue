@@ -1,6 +1,5 @@
-
-import PropTypes from '../_util/vue-types'
-import LazyRenderBox from './LazyRenderBox'
+import PropTypes from '../_util/vue-types';
+import LazyRenderBox from './LazyRenderBox';
 
 export default {
   props: {
@@ -8,12 +7,12 @@ export default {
     prefixCls: PropTypes.string,
     visible: PropTypes.bool,
   },
-  render () {
-    const { prefixCls, visible, hiddenClassName } = this.$props
-    const { $listeners } = this
+  render() {
+    const { prefixCls, visible, hiddenClassName } = this.$props;
+    const { $listeners } = this;
     const divProps = {
       on: $listeners,
-    }
+    };
 
     return (
       <div {...divProps} class={!visible ? hiddenClassName : ''}>
@@ -21,7 +20,6 @@ export default {
           {this.$slots.default}
         </LazyRenderBox>
       </div>
-    )
+    );
   },
-}
-
+};

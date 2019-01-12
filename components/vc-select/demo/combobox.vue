@@ -1,32 +1,32 @@
 <script>
-import Select, { Option } from '../index'
-import '../assets/index.less'
+import Select, { Option } from '../index';
+import '../assets/index.less';
 
 export default {
   data () {
     return {
       disabled: false,
       value: '',
-    }
+    };
   },
   methods: {
     onChange (value, option) {
-      console.log('onChange', value, option)
-      this.value = value
+      console.log('onChange', value, option);
+      this.value = value;
     },
 
     onKeyDown (e) {
       if (e.keyCode === 13) {
-        console.log('onEnter', this.value)
+        console.log('onEnter', this.value);
       }
     },
 
     onSelect (v, option) {
-      console.log('onSelect', v, option)
+      console.log('onSelect', v, option);
     },
 
     toggleDisabled () {
-      this.disabled = !this.disabled
+      this.disabled = !this.disabled;
     },
   },
 
@@ -58,7 +58,7 @@ export default {
           <Option value='yiminghe'>yiminghe</Option>
         </Select>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

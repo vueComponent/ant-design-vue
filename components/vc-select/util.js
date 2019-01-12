@@ -1,217 +1,223 @@
-import { getPropsData, getSlotOptions, getKey, getAttrs, getComponentFromProp } from '../_util/props-util'
-import { cloneVNodes } from '../_util/vnode'
+import {
+  getPropsData,
+  getSlotOptions,
+  getKey,
+  getAttrs,
+  getComponentFromProp,
+} from '../_util/props-util';
+import { cloneVNodes } from '../_util/vnode';
 
-export function toTitle (title) {
+export function toTitle(title) {
   if (typeof title === 'string') {
-    return title
+    return title;
   }
-  return ''
+  return '';
 }
-export function getValuePropValue (child) {
+export function getValuePropValue(child) {
   if (!child) {
-    return null
+    return null;
   }
-  const props = getPropsData(child)
+  const props = getPropsData(child);
   if ('value' in props) {
-    return props.value
+    return props.value;
   }
   if (getKey(child) !== undefined) {
-    return getKey(child)
+    return getKey(child);
   }
   if (getSlotOptions(child).isSelectOptGroup) {
-    const label = getComponentFromProp(child, 'label')
+    const label = getComponentFromProp(child, 'label');
     if (label) {
-      return label
+      return label;
     }
   }
-  throw new Error(`Need at least a key or a value or a label (only for OptGroup) for ${child}`)
+  throw new Error(`Need at least a key or a value or a label (only for OptGroup) for ${child}`);
 }
 
-export function getPropValue (child, prop) {
+export function getPropValue(child, prop) {
   if (prop === 'value') {
-    return getValuePropValue(child)
+    return getValuePropValue(child);
   }
   if (prop === 'children') {
-    const newChild = child.$slots ? cloneVNodes(child.$slots.default, true) : cloneVNodes(child.componentOptions.children, true)
+    const newChild = child.$slots
+      ? cloneVNodes(child.$slots.default, true)
+      : cloneVNodes(child.componentOptions.children, true);
     if (newChild.length === 1 && !newChild[0].tag) {
-      return newChild[0].text
+      return newChild[0].text;
     }
-    return newChild
+    return newChild;
   }
-  const data = getPropsData(child)
+  const data = getPropsData(child);
   if (prop in data) {
-    return data[prop]
+    return data[prop];
   } else {
-    return getAttrs(child)[prop]
+    return getAttrs(child)[prop];
   }
 }
 
-export function isMultiple (props) {
-  return props.multiple
+export function isMultiple(props) {
+  return props.multiple;
 }
 
-export function isCombobox (props) {
-  return props.combobox
+export function isCombobox(props) {
+  return props.combobox;
 }
 
-export function isMultipleOrTags (props) {
-  return props.multiple || props.tags
+export function isMultipleOrTags(props) {
+  return props.multiple || props.tags;
 }
 
-export function isMultipleOrTagsOrCombobox (props) {
-  return isMultipleOrTags(props) || isCombobox(props)
+export function isMultipleOrTagsOrCombobox(props) {
+  return isMultipleOrTags(props) || isCombobox(props);
 }
 
-export function isSingleMode (props) {
-  return !isMultipleOrTagsOrCombobox(props)
+export function isSingleMode(props) {
+  return !isMultipleOrTagsOrCombobox(props);
 }
 
-export function toArray (value) {
-  let ret = value
+export function toArray(value) {
+  let ret = value;
   if (value === undefined) {
-    ret = []
+    ret = [];
   } else if (!Array.isArray(value)) {
-    ret = [value]
+    ret = [value];
   }
-  return ret
+  return ret;
 }
 
-export function getMapKey (value) {
-  return `${typeof value}-${value}`
+export function getMapKey(value) {
+  return `${typeof value}-${value}`;
 }
 
-export function preventDefaultEvent (e) {
-  e.preventDefault()
+export function preventDefaultEvent(e) {
+  e.preventDefault();
 }
 
-export function findIndexInValueBySingleValue (value, singleValue) {
-  let index = -1
+export function findIndexInValueBySingleValue(value, singleValue) {
+  let index = -1;
   if (value) {
     for (let i = 0; i < value.length; i++) {
       if (value[i] === singleValue) {
-        index = i
-        break
+        index = i;
+        break;
       }
     }
   }
-  return index
+  return index;
 }
 
-export function getLabelFromPropsValue (value, key) {
-  let label
-  value = toArray(value)
+export function getLabelFromPropsValue(value, key) {
+  let label;
+  value = toArray(value);
   if (value) {
     for (let i = 0; i < value.length; i++) {
       if (value[i].key === key) {
-        label = value[i].label
-        break
+        label = value[i].label;
+        break;
       }
     }
   }
-  return label
+  return label;
 }
 
-export function getSelectKeys (menuItems, value) {
+export function getSelectKeys(menuItems, value) {
   if (value === null || value === undefined) {
-    return []
+    return [];
   }
-  let selectedKeys = []
+  let selectedKeys = [];
   menuItems.forEach(item => {
     if (getSlotOptions(item).isMenuItemGroup) {
-      selectedKeys = selectedKeys.concat(
-        getSelectKeys(item.componentOptions.children, value)
-      )
+      selectedKeys = selectedKeys.concat(getSelectKeys(item.componentOptions.children, value));
     } else {
-      const itemValue = getValuePropValue(item)
-      const itemKey = item.key
+      const itemValue = getValuePropValue(item);
+      const itemKey = item.key;
       if (findIndexInValueBySingleValue(value, itemValue) !== -1 && itemKey !== undefined) {
-        selectedKeys.push(itemKey)
+        selectedKeys.push(itemKey);
       }
     }
-  })
-  return selectedKeys
+  });
+  return selectedKeys;
 }
 
 export const UNSELECTABLE_STYLE = {
   userSelect: 'none',
   WebkitUserSelect: 'none',
-}
+};
 
 export const UNSELECTABLE_ATTRIBUTE = {
   unselectable: 'on',
-}
+};
 
-export function findFirstMenuItem (children) {
+export function findFirstMenuItem(children) {
   for (let i = 0; i < children.length; i++) {
-    const child = children[i]
-    const props = getPropsData(child)
+    const child = children[i];
+    const props = getPropsData(child);
     if (getSlotOptions(child).isMenuItemGroup) {
-      const found = findFirstMenuItem(child.componentOptions.children)
+      const found = findFirstMenuItem(child.componentOptions.children);
       if (found) {
-        return found
+        return found;
       }
     } else if (!props.disabled) {
-      return child
+      return child;
     }
   }
-  return null
+  return null;
 }
 
-export function includesSeparators (str, separators) {
+export function includesSeparators(str, separators) {
   for (let i = 0; i < separators.length; ++i) {
     if (str.lastIndexOf(separators[i]) > 0) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
 
-export function splitBySeparators (str, separators) {
-  const reg = new RegExp(`[${separators.join()}]`)
-  return str.split(reg).filter(token => token)
+export function splitBySeparators(str, separators) {
+  const reg = new RegExp(`[${separators.join()}]`);
+  return str.split(reg).filter(token => token);
 }
 
-export function defaultFilterFn (input, child) {
-  const props = getPropsData(child)
+export function defaultFilterFn(input, child) {
+  const props = getPropsData(child);
   if (props.disabled) {
-    return false
+    return false;
   }
-  let value = getPropValue(child, this.optionFilterProp)
+  let value = getPropValue(child, this.optionFilterProp);
   if (value.length && value[0].text) {
-    value = value[0].text
+    value = value[0].text;
   } else {
-    value = String(value)
+    value = String(value);
   }
-  return value.toLowerCase().indexOf(input.toLowerCase()) > -1
+  return value.toLowerCase().indexOf(input.toLowerCase()) > -1;
 }
 
-export function validateOptionValue (value, props) {
+export function validateOptionValue(value, props) {
   if (isSingleMode(props) || isMultiple(props)) {
-    return
+    return;
   }
   if (typeof value !== 'string') {
     throw new Error(
       `Invalid \`value\` of type \`${typeof value}\` supplied to Option, ` +
         `expected \`string\` when \`tags/combobox\` is \`true\`.`,
-    )
+    );
   }
 }
 
-export function saveRef (instance, name) {
-  return (node) => {
-    instance[name] = node
-  }
+export function saveRef(instance, name) {
+  return node => {
+    instance[name] = node;
+  };
 }
 
-export function generateUUID () {
+export function generateUUID() {
   if (process.env.NODE_ENV === 'test') {
-    return 'test-uuid'
+    return 'test-uuid';
   }
-  let d = new Date().getTime()
+  let d = new Date().getTime();
   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = (d + Math.random() * 16) % 16 | 0
-    d = Math.floor(d / 16)
-    return (c === 'x' ? r : (r & 0x7) | 0x8).toString(16)
-  })
-  return uuid
+    const r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === 'x' ? r : (r & 0x7) | 0x8).toString(16);
+  });
+  return uuid;
 }

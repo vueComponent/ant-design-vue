@@ -43,7 +43,7 @@ export declare class Badge extends AntdComponent {
    * Set Badge as a status dot
    * @type string
    */
-  status: "success" | "processing" | "default" | "error" | "warning";
+  status: 'success' | 'processing' | 'default' | 'error' | 'warning';
 
   /**
    * If status is set, text sets the display text of the status dot

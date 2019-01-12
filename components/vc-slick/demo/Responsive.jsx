@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -38,7 +38,7 @@ export default {
           },
         ],
       },
-    }
+    };
     return (
       <div>
         <h2> Responsive </h2>
@@ -69,6 +69,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

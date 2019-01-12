@@ -1,17 +1,22 @@
-import TouchFeedback from '../index'
-import './simple.less'
+import TouchFeedback from '../index';
+import './simple.less';
 
 export default {
-  render () {
+  render() {
     return (
       <div style={{ marginBottom: 12 }}>
-        <TouchFeedback activeClassName='active' activeStyle={{ color: 'red' }}>
-          <div class='normal' style={{
-            backgroundColor: 'yellow',
-          }}
-          onClick={() => console.log('click div')}>click to active</div>
+        <TouchFeedback activeClassName="active" activeStyle={{ color: 'red' }}>
+          <div
+            class="normal"
+            style={{
+              backgroundColor: 'yellow',
+            }}
+            onClick={() => console.log('click div')}
+          >
+            click to active
+          </div>
         </TouchFeedback>
       </div>
-    )
+    );
   },
-}
+};

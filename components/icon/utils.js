@@ -1,4 +1,4 @@
-import warning from '../_util/warning'
+import warning from '../_util/warning';
 
 // These props make sure that the SVG behaviours like general text.
 // Reference: https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
@@ -8,51 +8,51 @@ export const svgBaseProps = {
   fill: 'currentColor',
   'aria-hidden': 'true',
   focusable: 'false',
-}
+};
 
-const fillTester = /-fill$/
-const outlineTester = /-o$/
-const twoToneTester = /-twotone$/
+const fillTester = /-fill$/;
+const outlineTester = /-o$/;
+const twoToneTester = /-twotone$/;
 
-export function getThemeFromTypeName (type) {
-  let result = null
+export function getThemeFromTypeName(type) {
+  let result = null;
   if (fillTester.test(type)) {
-    result = 'filled'
+    result = 'filled';
   } else if (outlineTester.test(type)) {
-    result = 'outlined'
+    result = 'outlined';
   } else if (twoToneTester.test(type)) {
-    result = 'twoTone'
+    result = 'twoTone';
   }
-  return result
+  return result;
 }
 
-export function removeTypeTheme (type) {
+export function removeTypeTheme(type) {
   return type
     .replace(fillTester, '')
     .replace(outlineTester, '')
-    .replace(twoToneTester, '')
+    .replace(twoToneTester, '');
 }
 
-export function withThemeSuffix (type, theme) {
-  let result = type
+export function withThemeSuffix(type, theme) {
+  let result = type;
   if (theme === 'filled') {
-    result += '-fill'
+    result += '-fill';
   } else if (theme === 'outlined') {
-    result += '-o'
+    result += '-o';
   } else if (theme === 'twoTone') {
-    result += '-twotone'
+    result += '-twotone';
   } else {
-    warning(false, `This icon '${type}' has unknown theme '${theme}'`)
+    warning(false, `This icon '${type}' has unknown theme '${theme}'`);
   }
-  return result
+  return result;
 }
 
 // For alias or compatibility
-export function alias (type) {
+export function alias(type) {
   switch (type) {
     case 'cross':
-      return 'close'
+      return 'close';
     default:
   }
-  return type
+  return type;
 }

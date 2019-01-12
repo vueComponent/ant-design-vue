@@ -1,11 +1,11 @@
 <script>
-import Basic from './basic.md'
-import Disabled from './disabled.md'
-import Digit from './digit.md'
-import Formatter from './formatter.md'
-import Size from './size.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import Disabled from './disabled.md';
+import Digit from './digit.md';
+import Formatter from './formatter.md';
+import Size from './size.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 数字输入框
@@ -19,7 +19,7 @@ const md = {
   When a numeric value needs to be provided.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '数字输入框',
@@ -47,7 +47,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

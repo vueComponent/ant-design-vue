@@ -1,10 +1,9 @@
+import Tooltip from '../tooltip';
+import abstractTooltipProps from '../tooltip/abstractTooltipProps';
+import PropTypes from '../_util/vue-types';
+import { getOptionProps, getComponentFromProp } from '../_util/props-util';
 
-import Tooltip from '../tooltip'
-import abstractTooltipProps from '../tooltip/abstractTooltipProps'
-import PropTypes from '../_util/vue-types'
-import { getOptionProps, getComponentFromProp } from '../_util/props-util'
-
-const props = abstractTooltipProps()
+const props = abstractTooltipProps();
 const Popover = {
   name: 'APopover',
   props: {
@@ -19,48 +18,42 @@ const Popover = {
     event: 'visibleChange',
   },
   methods: {
-    getPopupDomNode () {
-      return this.$refs.tooltip.getPopupDomNode()
+    getPopupDomNode() {
+      return this.$refs.tooltip.getPopupDomNode();
     },
   },
 
-  render (h) {
-    const { title, prefixCls, $slots } = this
-    const props = getOptionProps(this)
-    delete props.title
-    delete props.content
+  render(h) {
+    const { title, prefixCls, $slots } = this;
+    const props = getOptionProps(this);
+    delete props.title;
+    delete props.content;
     const tooltipProps = {
       props: {
         ...props,
       },
       ref: 'tooltip',
       on: this.$listeners,
-    }
+    };
     return (
-      <Tooltip
-        {...tooltipProps}
-      >
-        <template slot='title'>
+      <Tooltip {...tooltipProps}>
+        <template slot="title">
           <div>
-            {(title || $slots.title) &&
-            <div class={`${prefixCls}-title`}>
-              {getComponentFromProp(this, 'title')}
-            </div>
-            }
-            <div class={`${prefixCls}-inner-content`}>
-              {getComponentFromProp(this, 'content')}
-            </div>
+            {(title || $slots.title) && (
+              <div class={`${prefixCls}-title`}>{getComponentFromProp(this, 'title')}</div>
+            )}
+            <div class={`${prefixCls}-inner-content`}>{getComponentFromProp(this, 'content')}</div>
           </div>
         </template>
         {this.$slots.default}
       </Tooltip>
-    )
+    );
   },
-}
+};
 
 /* istanbul ignore next */
-Popover.install = function (Vue) {
-  Vue.component(Popover.name, Popover)
-}
+Popover.install = function(Vue) {
+  Vue.component(Popover.name, Popover);
+};
 
-export default Popover
+export default Popover;

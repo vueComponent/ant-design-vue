@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/en_US'
-import DatePicker from '../date-picker/locale/en_US'
-import TimePicker from '../time-picker/locale/en_US'
-import Calendar from '../calendar/locale/en_US'
+import Pagination from '../vc-pagination/locale/en_US';
+import DatePicker from '../date-picker/locale/en_US';
+import TimePicker from '../time-picker/locale/en_US';
+import Calendar from '../calendar/locale/en_US';
 
 export default {
   locale: 'ne-np',
@@ -42,4 +42,4 @@ export default {
     uploadError: 'अप्लोडमा समस्या भयो',
     previewFile: 'फाइल पूर्वावलोकन गर्नुहोस्',
   },
-}
+};

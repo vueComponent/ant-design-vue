@@ -1,52 +1,58 @@
-import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
-import Input from '../index'
-import Button from '../../button'
-import focusTest from '../../../tests/shared/focusTest'
+import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
+import Input from '../index';
+import Button from '../../button';
+import focusTest from '../../../tests/shared/focusTest';
 
-const { Search } = Input
+const { Search } = Input;
 describe('Input.Search', () => {
-  focusTest(Search)
+  focusTest(Search);
 
   it('should support custom button', async () => {
-    const wrapper = mount({
-      render () {
-        return <Search enterButton={<button type='button'>ok</button>} />
+    const wrapper = mount(
+      {
+        render() {
+          return <Search enterButton={<button type="button">ok</button>} />;
+        },
       },
-    }, { sync: false })
+      { sync: false },
+    );
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 
   it('should support custom Button', async () => {
-    const wrapper = mount({
-      render () {
-        return <Search enterButton={<Button>ok</Button>} />
+    const wrapper = mount(
+      {
+        render() {
+          return <Search enterButton={<Button>ok</Button>} />;
+        },
       },
-    }, { sync: false })
+      { sync: false },
+    );
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
   it('should support ReactNode suffix without error', () => {
     const fn = () => {
       mount({
-        render () {
-          return <Search suffix={<div>ok</div>} />
+        render() {
+          return <Search suffix={<div>ok</div>} />;
         },
-      })
-    }
-    expect(fn).not.toThrow()
-  })
+      });
+    };
+    expect(fn).not.toThrow();
+  });
   it('should disable enter button when disabled prop is true', () => {
     const wrapper = mount({
-      render () {
-        return <Search placeholder='input search text' enterButton disabled />
+      render() {
+        return <Search placeholder="input search text" enterButton disabled />;
       },
-    })
-    expect(wrapper.findAll('.ant-btn-primary[disabled]')).toHaveLength(1)
-  })
+    });
+    expect(wrapper.findAll('.ant-btn-primary[disabled]')).toHaveLength(1);
+  });
 
   // it('should trigger onSearch when click search icon', () => {
   //   const onSearch = jest.fn();
@@ -125,4 +131,4 @@ describe('Input.Search', () => {
   //     preventDefault: expect.any(Function),
   //   }));
   // });
-})
+});

@@ -1,42 +1,42 @@
 <script>
-import Select, { Option } from '../index'
-import '../assets/index.less'
+import Select, { Option } from '../index';
+import '../assets/index.less';
 
 export default {
   data () {
     return {
       destroy: false,
       value: 9,
-    }
+    };
   },
   methods: {
     onChange (e) {
-      let value
+      let value;
       if (e && e.target) {
-        value = e.target.value
+        value = e.target.value;
       } else {
-        value = e
+        value = e;
       }
-      console.log('onChange', value, ...arguments)
-      this.value = value
+      console.log('onChange', value, ...arguments);
+      this.value = value;
     },
 
     onDestroy () {
-      this.destroy = 1
+      this.destroy = 1;
     },
 
     onBlur (v) {
-      console.log('onBlur', v)
+      console.log('onBlur', v);
     },
 
     onFocus () {
-      console.log('onFocus')
+      console.log('onFocus');
     },
   },
 
   render () {
     if (this.destroy) {
-      return null
+      return null;
     }
     return (<div style={{ margin: '20px' }}>
       <div style={{ height: '150px' }}/>
@@ -72,7 +72,7 @@ export default {
           <Option value='21' disabled text='disabled'>disabled</Option>
           <Option value='31' text='yiminghe'>yiminghe</Option>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
-            return <Option key={i} value={i} text={String(i)}>{i}-text</Option>
+            return <Option key={i} value={i} text={String(i)}>{i}-text</Option>;
           })}
         </Select>
       </div>
@@ -88,14 +88,14 @@ export default {
         <option value='21' disabled>disabled</option>
         <option value='31'>yiminghe</option>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
-          return <option value={i} key={i}>{i}</option>
+          return <option value={i} key={i}>{i}</option>;
         })}
       </select>
 
       <p>
         <button onClick={this.onDestroy}>destroy</button>
       </p>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

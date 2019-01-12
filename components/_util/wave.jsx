@@ -1,161 +1,163 @@
-
-import TransitionEvents from './css-animation/Event'
-import raf from '../_util/raf'
-let styleForPesudo
+import TransitionEvents from './css-animation/Event';
+import raf from '../_util/raf';
+let styleForPesudo;
 
 // Where el is the DOM element you'd like to test for visibility
-function isHidden (element) {
+function isHidden(element) {
   if (process.env.NODE_ENV === 'test') {
-    return false
+    return false;
   }
-  return !element || element.offsetParent === null
+  return !element || element.offsetParent === null;
 }
 
 export default {
   name: 'Wave',
   props: ['insertExtraNode'],
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      const node = this.$el
+      const node = this.$el;
       if (node.nodeType !== 1) {
-        return
+        return;
       }
-      this.instance = this.bindAnimationEvent(node)
-    })
+      this.instance = this.bindAnimationEvent(node);
+    });
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.instance) {
-      this.instance.cancel()
+      this.instance.cancel();
     }
     if (this.clickWaveTimeoutId) {
-      clearTimeout(this.clickWaveTimeoutId)
+      clearTimeout(this.clickWaveTimeoutId);
     }
-    this.destroy = true
+    this.destroy = true;
   },
   methods: {
-    isNotGrey (color) {
-      const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\.\d]*)?\)/)
+    isNotGrey(color) {
+      const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\.\d]*)?\)/);
       if (match && match[1] && match[2] && match[3]) {
-        return !(match[1] === match[2] && match[2] === match[3])
+        return !(match[1] === match[2] && match[2] === match[3]);
       }
-      return true
+      return true;
     },
 
-    onClick (node, waveColor) {
+    onClick(node, waveColor) {
       if (!node || isHidden(node) || node.className.indexOf('-leave') >= 0) {
-        return
+        return;
       }
-      this.removeExtraStyleNode()
-      const { insertExtraNode } = this.$props
-      this.extraNode = document.createElement('div')
-      const extraNode = this.extraNode
-      extraNode.className = 'ant-click-animating-node'
-      const attributeName = this.getAttributeName()
-      node.removeAttribute(attributeName)
-      node.setAttribute(attributeName, 'true')
+      this.removeExtraStyleNode();
+      const { insertExtraNode } = this.$props;
+      this.extraNode = document.createElement('div');
+      const extraNode = this.extraNode;
+      extraNode.className = 'ant-click-animating-node';
+      const attributeName = this.getAttributeName();
+      node.removeAttribute(attributeName);
+      node.setAttribute(attributeName, 'true');
       // Not white or transparnt or grey
-      styleForPesudo = styleForPesudo || document.createElement('style')
-      if (waveColor &&
-          waveColor !== '#ffffff' &&
-          waveColor !== 'rgb(255, 255, 255)' &&
-          this.isNotGrey(waveColor) &&
-          !/rgba\(\d*, \d*, \d*, 0\)/.test(waveColor) && // any transparent rgba color
-          waveColor !== 'transparent') {
-        extraNode.style.borderColor = waveColor
+      styleForPesudo = styleForPesudo || document.createElement('style');
+      if (
+        waveColor &&
+        waveColor !== '#ffffff' &&
+        waveColor !== 'rgb(255, 255, 255)' &&
+        this.isNotGrey(waveColor) &&
+        !/rgba\(\d*, \d*, \d*, 0\)/.test(waveColor) && // any transparent rgba color
+        waveColor !== 'transparent'
+      ) {
+        extraNode.style.borderColor = waveColor;
 
-        styleForPesudo.innerHTML =
-          `[ant-click-animating-without-extra-node]:after { border-color: ${waveColor}; }`
+        styleForPesudo.innerHTML = `[ant-click-animating-without-extra-node]:after { border-color: ${waveColor}; }`;
         if (!document.body.contains(styleForPesudo)) {
-          document.body.appendChild(styleForPesudo)
+          document.body.appendChild(styleForPesudo);
         }
       }
       if (insertExtraNode) {
-        node.appendChild(extraNode)
+        node.appendChild(extraNode);
       }
-      TransitionEvents.addStartEventListener(node, this.onTransitionStart)
-      TransitionEvents.addEndEventListener(node, this.onTransitionEnd)
+      TransitionEvents.addStartEventListener(node, this.onTransitionStart);
+      TransitionEvents.addEndEventListener(node, this.onTransitionEnd);
     },
 
-    bindAnimationEvent (node) {
-      if (!node ||
+    bindAnimationEvent(node) {
+      if (
+        !node ||
         !node.getAttribute ||
         node.getAttribute('disabled') ||
-        node.className.indexOf('disabled') >= 0) {
-        return
+        node.className.indexOf('disabled') >= 0
+      ) {
+        return;
       }
-      const onClick = (e) => {
+      const onClick = e => {
         // Fix radio button click twice
         if (e.target.tagName === 'INPUT' || isHidden(e.target)) {
-          return
+          return;
         }
-        this.resetEffect(node)
+        this.resetEffect(node);
         // Get wave color from target
         const waveColor =
           getComputedStyle(node).getPropertyValue('border-top-color') || // Firefox Compatible
           getComputedStyle(node).getPropertyValue('border-color') ||
-          getComputedStyle(node).getPropertyValue('background-color')
-        this.clickWaveTimeoutId = window.setTimeout(() => this.onClick(node, waveColor), 0)
-        raf.cancel(this.animationStartId)
-        this.animationStart = true
+          getComputedStyle(node).getPropertyValue('background-color');
+        this.clickWaveTimeoutId = window.setTimeout(() => this.onClick(node, waveColor), 0);
+        raf.cancel(this.animationStartId);
+        this.animationStart = true;
 
         // Render to trigger transition event cost 3 frames. Let's delay 10 frames to reset this.
         this.animationStartId = raf(() => {
-          this.animationStart = false
-        }, 10)
-      }
-      node.addEventListener('click', onClick, true)
+          this.animationStart = false;
+        }, 10);
+      };
+      node.addEventListener('click', onClick, true);
       return {
         cancel: () => {
-          node.removeEventListener('click', onClick, true)
+          node.removeEventListener('click', onClick, true);
         },
-      }
+      };
     },
-    getAttributeName () {
-      const { insertExtraNode } = this.$props
-      return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node'
+    getAttributeName() {
+      const { insertExtraNode } = this.$props;
+      return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node';
     },
 
-    resetEffect (node) {
+    resetEffect(node) {
       if (!node || node === this.extraNode || !(node instanceof Element)) {
-        return
+        return;
       }
-      const { insertExtraNode } = this.$props
-      const attributeName = this.getAttributeName()
-      node.removeAttribute(attributeName)
-      this.removeExtraStyleNode()
+      const { insertExtraNode } = this.$props;
+      const attributeName = this.getAttributeName();
+      node.removeAttribute(attributeName);
+      this.removeExtraStyleNode();
       if (insertExtraNode && this.extraNode && node.contains(this.extraNode)) {
-        node.removeChild(this.extraNode)
+        node.removeChild(this.extraNode);
       }
-      TransitionEvents.removeStartEventListener(node, this.onTransitionStart)
-      TransitionEvents.removeEndEventListener(node, this.onTransitionEnd)
+      TransitionEvents.removeStartEventListener(node, this.onTransitionStart);
+      TransitionEvents.removeEndEventListener(node, this.onTransitionEnd);
     },
-    onTransitionStart (e) {
-      if (this.destroy) return
+    onTransitionStart(e) {
+      if (this.destroy) return;
 
-      const node = this.$el
+      const node = this.$el;
       if (!e || e.target !== node) {
-        return
+        return;
       }
 
       if (!this.animationStart) {
-        this.resetEffect(node)
+        this.resetEffect(node);
       }
     },
-    onTransitionEnd (e) {
+    onTransitionEnd(e) {
       if (!e || e.animationName !== 'fadeEffect') {
-        return
+        return;
       }
-      this.resetEffect(e.target)
+      this.resetEffect(e.target);
     },
-    removeExtraStyleNode () {
+    removeExtraStyleNode() {
       if (styleForPesudo) {
-        styleForPesudo.innerHTML = ''
+        styleForPesudo.innerHTML = '';
       }
     },
   },
 
-  render () {
-    return this.$slots.default && this.$slots.default[0]
+  render() {
+    return this.$slots.default && this.$slots.default[0];
   },
-}
+};

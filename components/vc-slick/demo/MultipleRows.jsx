@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         centerMode: true,
@@ -14,7 +14,7 @@ export default {
         slidesPerRow: 2,
       },
       class: 'center',
-    }
+    };
     return (
       <div>
         <h2>Multiple Rows</h2>
@@ -69,6 +69,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

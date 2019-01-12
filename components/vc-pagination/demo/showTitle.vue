@@ -1,17 +1,17 @@
 <script>
-import VcPagination from '../index'
-import '../assets/index.less'
+import VcPagination from '../index';
+import '../assets/index.less';
 
 export default {
   data () {
     return {
       current: 3,
-    }
+    };
   },
   methods: {
     onChange (page) {
-      console.log(page)
-      this.current = page
+      console.log(page);
+      this.current = page;
     },
   },
   render () {
@@ -26,7 +26,7 @@ export default {
         />
         <VcPagination showLessItems defaultCurrent={1} total={60} showTitle={false} />
       </div>
-    )
+    );
   },
-}
+};
 </script>

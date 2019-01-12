@@ -1,21 +1,21 @@
 <script>
-import VcPagination from '../index'
-import VcSelect from '../../vc-select'
-import '../assets/index.less'
-import '../../vc-select/assets/index.less'
+import VcPagination from '../index';
+import VcSelect from '../../vc-select';
+import '../assets/index.less';
+import '../../vc-select/assets/index.less';
 
 export default {
   data () {
-    return {}
+    return {};
   },
   methods: {
     onShowSizeChange (current, pageSize) {
-      console.log(current)
-      console.log(pageSize)
+      console.log(current);
+      console.log(pageSize);
     },
     onChange (current, pageSize) {
-      console.log('onChange:current=', current)
-      console.log('onChange:pageSize=', pageSize)
+      console.log('onChange:current=', current);
+      console.log('onChange:pageSize=', pageSize);
     },
   },
   render () {
@@ -35,7 +35,7 @@ export default {
         <p> default node </p>
         <VcPagination simple showQuickJumper={{ goButton: true }} defaultCurrent={1} total={50} />
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,41 +1,41 @@
-import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
-import Radio from '../Radio'
-import focusTest from '../../../tests/shared/focusTest'
+import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
+import Radio from '../Radio';
+import focusTest from '../../../tests/shared/focusTest';
 
 describe('Radio', () => {
-  focusTest(Radio)
+  focusTest(Radio);
 
   it('should render correctly', () => {
     const wrapper = mount({
-      render () {
-        return <Radio class='customized'>Test</Radio>
+      render() {
+        return <Radio class="customized">Test</Radio>;
       },
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 
   it('responses hover events', async () => {
-    const onMouseEnter = jest.fn()
-    const onMouseLeave = jest.fn()
+    const onMouseEnter = jest.fn();
+    const onMouseLeave = jest.fn();
 
-    const wrapper = mount({
-      render () {
-        return <Radio
-          onMouseenter={onMouseEnter}
-          onMouseleave={onMouseLeave}
-        />
+    const wrapper = mount(
+      {
+        render() {
+          return <Radio onMouseenter={onMouseEnter} onMouseleave={onMouseLeave} />;
+        },
       },
-    }, { sync: false })
+      { sync: false },
+    );
     await asyncExpect(() => {
-      wrapper.trigger('mouseenter')
-    })
+      wrapper.trigger('mouseenter');
+    });
     await asyncExpect(() => {
-      expect(onMouseEnter).toHaveBeenCalled()
-    })
-    wrapper.trigger('mouseleave')
+      expect(onMouseEnter).toHaveBeenCalled();
+    });
+    wrapper.trigger('mouseleave');
     await asyncExpect(() => {
-      expect(onMouseLeave).toHaveBeenCalled()
-    })
-  })
-})
+      expect(onMouseLeave).toHaveBeenCalled();
+    });
+  });
+});

@@ -1,16 +1,16 @@
-import Notification from '../vc-notification'
-import Icon from '../icon'
+import Notification from '../vc-notification';
+import Icon from '../icon';
 
 // export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
 // export type IconType = 'success' | 'info' | 'error' | 'warning';
 
-const notificationInstance = {}
-let defaultDuration = 4.5
-let defaultTop = '24px'
-let defaultBottom = '24px'
-let defaultPlacement = 'topRight'
-let defaultGetContainer = () => document.body
+const notificationInstance = {};
+let defaultDuration = 4.5;
+let defaultTop = '24px';
+let defaultBottom = '24px';
+let defaultPlacement = 'topRight';
+let defaultGetContainer = () => document.body;
 
 // export interface ConfigProps {
 //   top?: number;
@@ -19,76 +19,79 @@ let defaultGetContainer = () => document.body
 //   placement?: NotificationPlacement;
 //   getContainer?: () => HTMLElement;
 // }
-function setNotificationConfig (options) {
-  const { duration, placement, bottom, top, getContainer } = options
+function setNotificationConfig(options) {
+  const { duration, placement, bottom, top, getContainer } = options;
   if (duration !== undefined) {
-    defaultDuration = duration
+    defaultDuration = duration;
   }
   if (placement !== undefined) {
-    defaultPlacement = placement
+    defaultPlacement = placement;
   }
   if (bottom !== undefined) {
-    defaultBottom = typeof bottom === 'number' ? `${bottom}px` : bottom
+    defaultBottom = typeof bottom === 'number' ? `${bottom}px` : bottom;
   }
   if (top !== undefined) {
-    defaultTop = typeof top === 'number' ? `${top}px` : top
+    defaultTop = typeof top === 'number' ? `${top}px` : top;
   }
   if (getContainer !== undefined) {
-    defaultGetContainer = getContainer
+    defaultGetContainer = getContainer;
   }
 }
 
-function getPlacementStyle (placement) {
-  let style
+function getPlacementStyle(placement) {
+  let style;
   switch (placement) {
     case 'topLeft':
       style = {
         left: 0,
         top: defaultTop,
         bottom: 'auto',
-      }
-      break
+      };
+      break;
     case 'topRight':
       style = {
         right: 0,
         top: defaultTop,
         bottom: 'auto',
-      }
-      break
+      };
+      break;
     case 'bottomLeft':
       style = {
         left: 0,
         top: 'auto',
         bottom: defaultBottom,
-      }
-      break
+      };
+      break;
     default:
       style = {
         right: 0,
         top: 'auto',
         bottom: defaultBottom,
-      }
-      break
+      };
+      break;
   }
-  return style
+  return style;
 }
 
-function getNotificationInstance (prefixCls, placement, callback) {
-  const cacheKey = `${prefixCls}-${placement}`
+function getNotificationInstance(prefixCls, placement, callback) {
+  const cacheKey = `${prefixCls}-${placement}`;
   if (notificationInstance[cacheKey]) {
-    callback(notificationInstance[cacheKey])
-    return
+    callback(notificationInstance[cacheKey]);
+    return;
   }
-  Notification.newInstance({
-    prefixCls,
-    class: `${prefixCls}-${placement}`,
-    style: getPlacementStyle(placement),
-    getContainer: defaultGetContainer,
-    closeIcon: (h) => <Icon class={`${prefixCls}-close-icon`} type={'close'}/>,
-  }, (notification) => {
-    notificationInstance[cacheKey] = notification
-    callback(notification)
-  })
+  Notification.newInstance(
+    {
+      prefixCls,
+      class: `${prefixCls}-${placement}`,
+      style: getPlacementStyle(placement),
+      getContainer: defaultGetContainer,
+      closeIcon: h => <Icon class={`${prefixCls}-close-icon`} type={'close'} />,
+    },
+    notification => {
+      notificationInstance[cacheKey] = notification;
+      callback(notification);
+    },
+  );
 }
 
 const typeToIcon = {
@@ -96,7 +99,7 @@ const typeToIcon = {
   info: 'info-circle-o',
   error: 'close-circle-o',
   warning: 'exclamation-circle-o',
-}
+};
 
 // export interface ArgsProps {
 //   message: React.ReactNode;
@@ -112,46 +115,39 @@ const typeToIcon = {
 //   className?: string;
 //   readonly type?: IconType;
 // }
-function notice (args) {
-  const { icon, type, description, placement, message, btn } = args
-  const outerPrefixCls = args.prefixCls || 'ant-notification'
-  const prefixCls = `${outerPrefixCls}-notice`
-  const duration = args.duration === undefined ? defaultDuration : args.duration
+function notice(args) {
+  const { icon, type, description, placement, message, btn } = args;
+  const outerPrefixCls = args.prefixCls || 'ant-notification';
+  const prefixCls = `${outerPrefixCls}-notice`;
+  const duration = args.duration === undefined ? defaultDuration : args.duration;
 
-  let iconNode = null
+  let iconNode = null;
   if (icon) {
-    iconNode = (h) => (
-      <span class={`${prefixCls}-icon`}>
-        {typeof icon === 'function' ? icon(h) : icon}
-      </span>
-    )
+    iconNode = h => (
+      <span class={`${prefixCls}-icon`}>{typeof icon === 'function' ? icon(h) : icon}</span>
+    );
   } else if (type) {
-    const iconType = typeToIcon[type]
-    iconNode = (h) => (
-      <Icon
-        class={`${prefixCls}-icon ${prefixCls}-icon-${type}`}
-        type={iconType}
-      />
-    )
+    const iconType = typeToIcon[type];
+    iconNode = h => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} type={iconType} />;
   }
 
-  getNotificationInstance(outerPrefixCls, placement || defaultPlacement, (notification) => {
+  getNotificationInstance(outerPrefixCls, placement || defaultPlacement, notification => {
     notification.notice({
-      content: (h) => (
+      content: h => (
         <div class={iconNode ? `${prefixCls}-with-icon` : ''}>
           {iconNode && iconNode(h)}
           <div class={`${prefixCls}-message`}>
-            {(!description && iconNode)
-              ? <span class={`${prefixCls}-message-single-line-auto-margin`} />
-              : null}
+            {!description && iconNode ? (
+              <span class={`${prefixCls}-message-single-line-auto-margin`} />
+            ) : null}
             {typeof message === 'function' ? message(h) : message}
           </div>
           <div class={`${prefixCls}-description`}>
             {typeof description === 'function' ? description(h) : description}
           </div>
-          {btn ? <span class={`${prefixCls}-btn`}>
-            {typeof btn === 'function' ? btn(h) : btn}
-          </span> : null}
+          {btn ? (
+            <span class={`${prefixCls}-btn`}>{typeof btn === 'function' ? btn(h) : btn}</span>
+          ) : null}
         </div>
       ),
       duration,
@@ -161,33 +157,35 @@ function notice (args) {
       key: args.key,
       style: args.style || {},
       class: args.class,
-    })
-  })
+    });
+  });
 }
 
 const api = {
   open: notice,
-  close (key) {
-    Object.keys(notificationInstance)
-      .forEach(cacheKey => notificationInstance[cacheKey].removeNotice(key))
+  close(key) {
+    Object.keys(notificationInstance).forEach(cacheKey =>
+      notificationInstance[cacheKey].removeNotice(key),
+    );
   },
   config: setNotificationConfig,
-  destroy () {
+  destroy() {
     Object.keys(notificationInstance).forEach(cacheKey => {
-      notificationInstance[cacheKey].destroy()
-      delete notificationInstance[cacheKey]
-    })
+      notificationInstance[cacheKey].destroy();
+      delete notificationInstance[cacheKey];
+    });
   },
 };
 
-['success', 'info', 'warning', 'error'].forEach((type) => {
-  api[type] = (args) => api.open({
-    ...args,
-    type,
-  })
-})
+['success', 'info', 'warning', 'error'].forEach(type => {
+  api[type] = args =>
+    api.open({
+      ...args,
+      type,
+    });
+});
 
-api.warn = api.warning
+api.warn = api.warning;
 
 // export interface NotificationApi {
 //   success(args: ArgsProps): void;
@@ -200,5 +198,4 @@ api.warn = api.warning
 //   config(options: ConfigProps): void;
 //   destroy(): void;
 // }
-export default api
-
+export default api;

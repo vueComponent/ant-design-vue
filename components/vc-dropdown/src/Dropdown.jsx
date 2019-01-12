@@ -1,10 +1,9 @@
-
-import PropTypes from '../../_util/vue-types'
-import Trigger from '../../vc-trigger'
-import placements from './placements'
-import { hasProp, getEvents, getOptionProps } from '../../_util/props-util'
-import BaseMixin from '../../_util/BaseMixin'
-import { cloneElement } from '../../_util/vnode'
+import PropTypes from '../../_util/vue-types';
+import Trigger from '../../vc-trigger';
+import placements from './placements';
+import { hasProp, getEvents, getOptionProps } from '../../_util/props-util';
+import BaseMixin from '../../_util/BaseMixin';
+import { cloneElement } from '../../_util/vnode';
 
 export default {
   mixins: [BaseMixin],
@@ -27,60 +26,60 @@ export default {
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
   },
-  data () {
-    let sVisible = this.defaultVisible
+  data() {
+    let sVisible = this.defaultVisible;
     if (hasProp(this, 'visible')) {
-      sVisible = this.visible
+      sVisible = this.visible;
     }
     return {
       sVisible,
-    }
+    };
   },
   watch: {
-    visible (val) {
+    visible(val) {
       if (val !== undefined) {
         this.setState({
           sVisible: val,
-        })
+        });
       }
     },
   },
   methods: {
-    onClick (e) {
+    onClick(e) {
       // do no call onVisibleChange, if you need click to hide, use onClick and control visible
       if (!hasProp(this, 'visible')) {
         this.setState({
           sVisible: false,
-        })
+        });
       }
-      this.$emit('overlayClick', e)
+      this.$emit('overlayClick', e);
       if (this.childOriginEvents.click) {
-        this.childOriginEvents.click(e)
+        this.childOriginEvents.click(e);
       }
     },
 
-    onVisibleChange (visible) {
+    onVisibleChange(visible) {
       if (!hasProp(this, 'visible')) {
         this.setState({
           sVisible: visible,
-        })
+        });
       }
-      this.__emit('visibleChange', visible)
+      this.__emit('visibleChange', visible);
     },
 
-    getMinOverlayWidthMatchTrigger () {
-      const props = getOptionProps(this)
-      const { minOverlayWidthMatchTrigger, alignPoint } = props
+    getMinOverlayWidthMatchTrigger() {
+      const props = getOptionProps(this);
+      const { minOverlayWidthMatchTrigger, alignPoint } = props;
       if ('minOverlayWidthMatchTrigger' in props) {
-        return minOverlayWidthMatchTrigger
+        return minOverlayWidthMatchTrigger;
       }
 
-      return !alignPoint
+      return !alignPoint;
     },
 
-    getMenuElement () {
-      const { onClick, prefixCls, $slots } = this
-      this.childOriginEvents = getEvents($slots.overlay[0])
+    getMenuElement() {
+      const { onClick, prefixCls, $slots } = this;
+      this.childOriginEvents = getEvents($slots.overlay[0]);
       const extraOverlayProps = {
         props: {
           prefixCls: `${prefixCls}-menu`,
@@ -89,42 +88,50 @@ export default {
         on: {
           click: onClick,
         },
-      }
-      return cloneElement($slots.overlay[0], extraOverlayProps)
+      };
+      return cloneElement($slots.overlay[0], extraOverlayProps);
     },
 
-    getPopupDomNode () {
-      return this.$refs.trigger.getPopupDomNode()
+    getPopupDomNode() {
+      return this.$refs.trigger.getPopupDomNode();
     },
 
-    afterVisibleChange (visible) {
+    afterVisibleChange(visible) {
       if (visible && this.getMinOverlayWidthMatchTrigger()) {
-        const overlayNode = this.getPopupDomNode()
-        const rootNode = this.$el
+        const overlayNode = this.getPopupDomNode();
+        const rootNode = this.$el;
         if (rootNode && overlayNode && rootNode.offsetWidth > overlayNode.offsetWidth) {
-          overlayNode.style.minWidth = `${rootNode.offsetWidth}px`
-          if (this.$refs.trigger &&
+          overlayNode.style.minWidth = `${rootNode.offsetWidth}px`;
+          if (
+            this.$refs.trigger &&
             this.$refs.trigger._component &&
-            this.$refs.trigger._component.alignInstance) {
-            this.$refs.trigger._component.alignInstance.forceAlign()
+            this.$refs.trigger._component.alignInstance
+          ) {
+            this.$refs.trigger._component.alignInstance.forceAlign();
           }
         }
       }
     },
   },
 
-  render () {
+  render() {
     const {
       prefixCls,
-      transitionName, animation,
-      align, placement, getPopupContainer,
-      showAction, hideAction,
-      overlayClassName, overlayStyle,
-      trigger, ...otherProps
-    } = this.$props
-    let triggerHideAction = hideAction
+      transitionName,
+      animation,
+      align,
+      placement,
+      getPopupContainer,
+      showAction,
+      hideAction,
+      overlayClassName,
+      overlayStyle,
+      trigger,
+      ...otherProps
+    } = this.$props;
+    let triggerHideAction = hideAction;
     if (!triggerHideAction && trigger.indexOf('contextmenu') !== -1) {
-      triggerHideAction = ['click']
+      triggerHideAction = ['click'];
     }
 
     const triggerProps = {
@@ -149,18 +156,13 @@ export default {
         popupVisibleChange: this.onVisibleChange,
       },
       ref: 'trigger',
-    }
-    const child = this.$slots.default && this.$slots.default[0]
+    };
+    const child = this.$slots.default && this.$slots.default[0];
     return (
       <Trigger {...triggerProps}>
-        {child && !child.tag
-          ? <span>{child}</span>
-          : child}
-        <template slot='popup'>
-          {this.$slots.overlay && this.getMenuElement()}
-        </template>
+        {child && !child.tag ? <span>{child}</span> : child}
+        <template slot="popup">{this.$slots.overlay && this.getMenuElement()}</template>
       </Trigger>
-    )
+    );
   },
-}
-
+};

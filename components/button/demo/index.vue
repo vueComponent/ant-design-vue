@@ -1,15 +1,15 @@
 <script>
-import Basic from './basic'
-import ButtonGroup from './button-group'
-import Disabled from './disabled'
-import Ghost from './ghost'
-import Icon from './icon'
-import Loading from './loading'
-import Multiple from './multiple'
-import Size from './size'
-import Block from './block'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import ButtonGroup from './button-group';
+import Disabled from './disabled';
+import Ghost from './ghost';
+import Icon from './icon';
+import Loading from './loading';
+import Multiple from './multiple';
+import Size from './size';
+import Block from './block';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Button 按钮
           按钮用于开始一个即时操作。
@@ -22,7 +22,7 @@ const md = {
           A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
           ## Examples
           `,
-}
+};
 export default {
   category: 'Components',
   type: 'General',
@@ -47,9 +47,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 [id^="components-button-demo-"] .ant-btn {

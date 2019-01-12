@@ -1,7 +1,7 @@
 <script>
-import Select, { Option } from '../index'
-import { fetch } from './tbFetchSuggest'
-import '../assets/index.less'
+import Select, { Option } from '../index';
+import { fetch } from './tbFetchSuggest';
+import '../assets/index.less';
 
 export default {
   data () {
@@ -9,34 +9,34 @@ export default {
       disabled: false,
       data: [],
       value: undefined,
-    }
+    };
   },
   methods: {
     onChange (value) {
-      console.log('select ', value)
+      console.log('select ', value);
       // value.label = value.key
-      this.value = value
+      this.value = value;
     },
     fetchData (value) {
       if (value) {
         fetch(value, (data) => {
-          this.data = data
-        })
+          this.data = data;
+        });
       } else {
-        this.data = []
+        this.data = [];
       }
     },
 
     toggleDisabled () {
-      this.disabled = !this.disabled
+      this.disabled = !this.disabled;
     },
   },
 
   render () {
-    const data = this.data
+    const data = this.data;
     const options = data.map((d) => {
-      return <Option key={d.value}><i>{d.text}</i></Option>
-    })
+      return <Option key={d.value}><i>{d.text}</i></Option>;
+    });
     return (<div>
       <h2>force suggest</h2>
       <p>
@@ -58,7 +58,7 @@ export default {
           {options}
         </Select>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

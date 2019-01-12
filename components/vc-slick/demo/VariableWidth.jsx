@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       class: 'slider variable-width',
       props: {
@@ -13,7 +13,7 @@ export default {
         slidesToScroll: 1,
         variableWidth: true,
       },
-    }
+    };
     return (
       <div>
         <h2>Variable width</h2>
@@ -38,6 +38,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

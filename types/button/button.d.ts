@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { ButtonGroup } from "./button-group";
+import { AntdComponent } from '../component';
+import { ButtonGroup } from './button-group';
 
 export declare class Button extends AntdComponent {
   Group: ButtonGroup;
@@ -13,14 +13,14 @@ export declare class Button extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  type: "primary" | "danger" | "dashed" | "ghost" | "default";
+  type: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
 
   /**
    * set the original html type of button
    * @default 'button'
    * @type string
    */
-  htmlType: "button" | "submit" | "reset" | "menu";
+  htmlType: 'button' | 'submit' | 'reset' | 'menu';
 
   /**
    * set the icon of button
@@ -32,14 +32,14 @@ export declare class Button extends AntdComponent {
    * can be set to circle or circle-outline or omitted
    * @type string
    */
-  shape: "circle" | "circle-outline";
+  shape: 'circle' | 'circle-outline';
 
   /**
    * can be set to small large or omitted
    * @default 'default'
    * @type string
    */
-  size: "small" | "large" | "default";
+  size: 'small' | 'large' | 'default';
 
   /**
    * set the loading status of button

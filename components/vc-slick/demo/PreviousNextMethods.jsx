@@ -1,16 +1,16 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
   methods: {
-    next () {
-      this.$refs.slider.slickNext()
+    next() {
+      this.$refs.slider.slickNext();
     },
-    previous () {
-      this.$refs.slider.slickPrev()
+    previous() {
+      this.$refs.slider.slickPrev();
     },
   },
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -20,7 +20,7 @@ export default {
         slidesToScroll: 1,
       },
       ref: 'slider',
-    }
+    };
     return (
       <div>
         <h2>Previous and Next methods</h2>
@@ -45,14 +45,14 @@ export default {
           </div>
         </Slider>
         <div style={{ textAlign: 'center' }}>
-          <button class='button' onClick={this.previous}>
+          <button class="button" onClick={this.previous}>
             Previous
           </button>
-          <button class='button' onClick={this.next}>
+          <button class="button" onClick={this.next}>
             Next
           </button>
         </div>
       </div>
-    )
+    );
   },
-}
+};

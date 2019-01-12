@@ -10,7 +10,7 @@
 </li>
 </template>
 <script>
-import BaseMixin from 'antd/_util/BaseMixin'
+import BaseMixin from 'antd/_util/BaseMixin';
 
 export default {
   mixins: [BaseMixin],
@@ -22,16 +22,16 @@ export default {
     return {
       justCopied: false,
       text: `<a-icon type="${this.type}" />`,
-    }
+    };
   },
   methods: {
     onCopied () {
       this.setState({ justCopied: true }, () => {
         setTimeout(() => {
-          this.setState({ justCopied: false })
-        }, 2000)
-      })
+          this.setState({ justCopied: false });
+        }, 2000);
+      });
     },
   },
-}
+};
 </script>

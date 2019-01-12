@@ -1,13 +1,13 @@
-import * as moment from 'moment'
+import * as moment from 'moment';
 // import { TimePickerProps } from '../time-picker'
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 
 export const MomentType = {
   type: Object,
-  validator: function (value) {
-    return value === undefined || moment.isMoment(value)
+  validator: function(value) {
+    return value === undefined || moment.isMoment(value);
   },
-}
+};
 
 export const PickerProps = () => ({
   transitionName: PropTypes.string,
@@ -35,38 +35,42 @@ export const PickerProps = () => ({
   autoFocus: PropTypes.bool,
   tagPrefixCls: PropTypes.string,
   tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-})
+});
 
 export const SinglePickerProps = () => ({
   value: MomentType,
   defaultValue: MomentType,
   defaultPickerValue: MomentType,
   // onChange?: (date: moment.Moment, dateString: string) => void;
-})
+});
 
 export const DatePickerProps = () => ({
-  ...PickerProps(), ...SinglePickerProps(),
+  ...PickerProps(),
+  ...SinglePickerProps(),
   showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   open: PropTypes.bool,
   disabledTime: PropTypes.func,
   // onOpenChange?: (status: bool) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
   placeholder: PropTypes.string,
-})
+});
 
 export const MonthPickerProps = () => ({
-  ...PickerProps(), ...SinglePickerProps(),
+  ...PickerProps(),
+  ...SinglePickerProps(),
   placeholder: PropTypes.string,
   monthCellContentRender: PropTypes.func,
-})
-function isMomentArray (value) {
+});
+function isMomentArray(value) {
   if (Array.isArray(value)) {
-    return value.length === 0 || value.findIndex((val) => val === undefined || moment.isMoment(val)) !== -1
+    return (
+      value.length === 0 || value.findIndex(val => val === undefined || moment.isMoment(val)) !== -1
+    );
   }
-  return false
+  return false;
 }
 
-export const RangePickerValue = PropTypes.custom(isMomentArray)
+export const RangePickerValue = PropTypes.custom(isMomentArray);
 // export const RangePickerPresetRange = PropTypes.oneOfType([RangePickerValue, PropTypes.func])
 
 export const RangePickerProps = () => ({
@@ -84,12 +88,13 @@ export const RangePickerProps = () => ({
   disabledTime: PropTypes.func,
   showToday: PropTypes.bool,
   // onPanelChange?: (value?: RangePickerValue, mode?: string | string[]) => void;
-})
+});
 
 export const WeekPickerProps = () => ({
-  ...PickerProps(), ...SinglePickerProps(),
+  ...PickerProps(),
+  ...SinglePickerProps(),
   placeholder: PropTypes.string,
-})
+});
 
 // export interface DatePickerDecorator extends React.ClassicComponentClass<DatePickerProps> {
 //   RangePicker: React.ClassicComponentClass<RangePickerProps>;

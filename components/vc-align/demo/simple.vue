@@ -1,6 +1,6 @@
 <script>
-import Align from '../index'
-import BaseMixin from '../../_util/BaseMixin'
+import Align from '../index';
+import BaseMixin from '../../_util/BaseMixin';
 
 export default {
   mixins: [BaseMixin],
@@ -10,26 +10,26 @@ export default {
       align: {
         points: ['tl', 'tc'],
       },
-    }
+    };
   },
   methods: {
     getTarget () {
-      const ref = this.$refs.container
+      const ref = this.$refs.container;
       if (!ref) {
       // parent ref not attached
-        return document.getElementById('container')
+        return document.getElementById('container');
       }
-      return ref
+      return ref;
     },
 
     toggleMonitor () {
       this.setState({
         monitor: !this.$data.monitor,
-      })
+      });
     },
 
     forceAlign () {
-      this.$refs.align.forceAlign()
+      this.$refs.align.forceAlign();
     },
   },
 
@@ -77,8 +77,8 @@ export default {
           </Align>
         </div>
       </div>
-    )
+    );
   },
-}
+};
 
 </script>

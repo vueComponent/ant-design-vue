@@ -1,15 +1,15 @@
-const path = require('path')
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const WebpackChunkHash = require('webpack-chunk-hash')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config')
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackChunkHash = require('webpack-chunk-hash');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.config');
 
 const modulePlugin = new ExtractTextPlugin({
   filename: '[name].[chunkhash].css',
   allChunks: true,
-})
+});
 
 module.exports = merge(baseWebpackConfig, {
   output: {
@@ -31,8 +31,7 @@ module.exports = merge(baseWebpackConfig, {
             {
               loader: 'postcss-loader',
             },
-            { loader: 'less-loader',
-            },
+            { loader: 'less-loader' },
           ],
         }),
       },
@@ -60,8 +59,8 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vender',
-      minChunks: function (module) {
-        return /node_modules/.test(module.context)
+      minChunks: function(module) {
+        return /node_modules/.test(module.context);
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({
@@ -84,4 +83,4 @@ module.exports = merge(baseWebpackConfig, {
     modulePlugin,
     new WebpackChunkHash({ algorithm: 'md5' }),
   ],
-})
+});

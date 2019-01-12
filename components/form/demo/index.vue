@@ -1,37 +1,37 @@
 <script>
-import AdvancedSearch from './advanced-search'
-import AdvancedSearchString from '!raw-loader!./advanced-search'
-import Coordinated from './coordinated'
-import CoordinatedString from '!raw-loader!./coordinated'
-import CustomizedFormControls from './customized-form-controls'
-import CustomizedFormControlsString from '!raw-loader!./customized-form-controls'
-import DynamicFormItem from './dynamic-form-item'
-import DynamicFormItemString from '!raw-loader!./dynamic-form-item'
-import DynamicRule from './dynamic-rule'
-import DynamicRuleString from '!raw-loader!./dynamic-rule'
-import FormInModal from './form-in-modal'
-import FormInModalString from '!raw-loader!./form-in-modal'
-import GlobalState from './global-state'
-import GlobalStateString from '!raw-loader!./global-state'
-import HorizontalLogin from './horizontal-login'
-import HorizontalLoginString from '!raw-loader!./horizontal-login'
-import Layout from './layout'
-import LayoutString from '!raw-loader!./layout'
-import NormalLogin from './normal-login'
-import NormalLoginString from '!raw-loader!./normal-login'
-import Register from './register'
-import RegisterString from '!raw-loader!./register'
-import TimeRelatedControls from './time-related-controls'
-import TimeRelatedControlsString from '!raw-loader!./time-related-controls'
-import ValidateOther from './validate-other'
-import ValidateOtherString from '!raw-loader!./validate-other'
-import ValidateStatic from './validate-static'
-import ValidateStaticString from '!raw-loader!./validate-static'
-import WithoutFormCreate from './without-form-create'
-import WithoutFormCreateString from '!raw-loader!./without-form-create'
+import AdvancedSearch from './advanced-search';
+import AdvancedSearchString from '!raw-loader!./advanced-search';
+import Coordinated from './coordinated';
+import CoordinatedString from '!raw-loader!./coordinated';
+import CustomizedFormControls from './customized-form-controls';
+import CustomizedFormControlsString from '!raw-loader!./customized-form-controls';
+import DynamicFormItem from './dynamic-form-item';
+import DynamicFormItemString from '!raw-loader!./dynamic-form-item';
+import DynamicRule from './dynamic-rule';
+import DynamicRuleString from '!raw-loader!./dynamic-rule';
+import FormInModal from './form-in-modal';
+import FormInModalString from '!raw-loader!./form-in-modal';
+import GlobalState from './global-state';
+import GlobalStateString from '!raw-loader!./global-state';
+import HorizontalLogin from './horizontal-login';
+import HorizontalLoginString from '!raw-loader!./horizontal-login';
+import Layout from './layout';
+import LayoutString from '!raw-loader!./layout';
+import NormalLogin from './normal-login';
+import NormalLoginString from '!raw-loader!./normal-login';
+import Register from './register';
+import RegisterString from '!raw-loader!./register';
+import TimeRelatedControls from './time-related-controls';
+import TimeRelatedControlsString from '!raw-loader!./time-related-controls';
+import ValidateOther from './validate-other';
+import ValidateOtherString from '!raw-loader!./validate-other';
+import ValidateStatic from './validate-static';
+import ValidateStaticString from '!raw-loader!./validate-static';
+import WithoutFormCreate from './without-form-create';
+import WithoutFormCreateString from '!raw-loader!./without-form-create';
 
-import CN from '../index.zh-CN'
-import US from '../index.en-US'
+import CN from '../index.zh-CN';
+import US from '../index.en-US';
 
 const md = {
   cn: `# Form 表单
@@ -83,7 +83,7 @@ A form field is defined using \`<Form.Item />\`.
 
 ## Examples
         `,
-}
+};
 
 export default {
   category: 'Components',
@@ -147,9 +147,9 @@ export default {
           <US />
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 .code-box-demo .ant-form:not(.ant-form-inline):not(.ant-form-vertical) {

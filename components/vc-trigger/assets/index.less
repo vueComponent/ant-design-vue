@@ -14,7 +14,8 @@
     animation-fill-mode: both;
   }
 
-  &-zoom-enter,&-zoom-appear {
+  &-zoom-enter,
+  &-zoom-appear {
     opacity: 0;
     .effect();
     animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -26,7 +27,8 @@
     animation-play-state: paused;
   }
 
-  &-zoom-enter-active, &-zoom-appear-active {
+  &-zoom-enter-active,
+  &-zoom-appear-active {
     .effect();
     animation-name: rcTriggerZoomIn;
     animation-play-state: running;
@@ -67,4 +69,4 @@
     }
   }
 }
-@import "./mask";
+@import './mask';

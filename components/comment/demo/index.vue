@@ -1,10 +1,10 @@
 <script>
-import Basic from './basic'
-import Editor from './editor'
-import List from './list'
-import Nested from './nested'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Editor from './editor';
+import List from './list';
+import Nested from './nested';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Comment评论
@@ -19,7 +19,7 @@ A comment displays user feedback and discussion to website content.
 ## When To Use
 
 Comments can be used to enable discussions on an entity such as a page, blog post, issue or other.`,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Display',
@@ -46,7 +46,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,12 +1,12 @@
 <script>
-import Basic from './basic.md'
-import Half from './half.md'
-import Text from './text.md'
-import Disabled from './disabled.md'
-import Clear from './clear.md'
-import Character from './character.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import Half from './half.md';
+import Text from './text.md';
+import Disabled from './disabled.md';
+import Clear from './clear.md';
+import Character from './character.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Rate
@@ -28,7 +28,7 @@ const md = {
   - A quick rating operation on something.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '评分',
@@ -59,7 +59,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

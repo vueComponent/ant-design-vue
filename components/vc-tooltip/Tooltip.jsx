@@ -1,20 +1,16 @@
-
-import PropTypes from '../_util/vue-types'
-import Trigger from '../vc-trigger'
-import { placements } from './placements'
-import Content from './Content'
-import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util'
-function noop () {}
+import PropTypes from '../_util/vue-types';
+import Trigger from '../vc-trigger';
+import { placements } from './placements';
+import Content from './Content';
+import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util';
+function noop() {}
 export default {
   props: {
     trigger: PropTypes.any.def(['hover']),
     defaultVisible: PropTypes.bool,
     visible: PropTypes.bool,
     placement: PropTypes.string.def('right'),
-    transitionName: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
+    transitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     animation: PropTypes.any,
     afterVisibleChange: PropTypes.func.def(() => {}),
     overlay: PropTypes.any,
@@ -31,41 +27,47 @@ export default {
     builtinPlacements: PropTypes.object,
   },
   methods: {
-    getPopupElement (h) {
-      const { prefixCls, tipId } = this.$props
-      return ([
-        <div class={`${prefixCls}-arrow`} key='arrow'>
+    getPopupElement(h) {
+      const { prefixCls, tipId } = this.$props;
+      return [
+        <div class={`${prefixCls}-arrow`} key="arrow">
           {getComponentFromProp(this, 'arrowContent')}
         </div>,
         <Content
-          key='content'
+          key="content"
           trigger={this.$refs.trigger}
           prefixCls={prefixCls}
           id={tipId}
           overlay={getComponentFromProp(this, 'overlay')}
         />,
-      ])
+      ];
     },
 
-    getPopupDomNode () {
-      return this.$refs.trigger.getPopupDomNode()
+    getPopupDomNode() {
+      return this.$refs.trigger.getPopupDomNode();
     },
   },
-  render (h) {
+  render(h) {
     const {
-      overlayClassName, trigger,
-      mouseEnterDelay, mouseLeaveDelay,
-      overlayStyle, prefixCls,
+      overlayClassName,
+      trigger,
+      mouseEnterDelay,
+      mouseLeaveDelay,
+      overlayStyle,
+      prefixCls,
       afterVisibleChange,
-      transitionName, animation,
-      placement, align,
+      transitionName,
+      animation,
+      placement,
+      align,
       destroyTooltipOnHide,
-      defaultVisible, getTooltipContainer,
+      defaultVisible,
+      getTooltipContainer,
       ...restProps
-    } = getOptionProps(this)
-    const extraProps = { ...restProps }
+    } = getOptionProps(this);
+    const extraProps = { ...restProps };
     if (hasProp(this, 'visible')) {
-      extraProps.popupVisible = this.$props.visible
+      extraProps.popupVisible = this.$props.visible;
     }
     const triggerProps = {
       props: {
@@ -92,13 +94,12 @@ export default {
         popupAlign: this.$listeners.popupAlign || noop,
       },
       ref: 'trigger',
-    }
-    return (<Trigger {...triggerProps}>
-      <template slot='popup'>
-        {this.getPopupElement(h)}
-      </template>
-      {this.$slots.default}
-    </Trigger>)
+    };
+    return (
+      <Trigger {...triggerProps}>
+        <template slot="popup">{this.getPopupElement(h)}</template>
+        {this.$slots.default}
+      </Trigger>
+    );
   },
-}
-
+};

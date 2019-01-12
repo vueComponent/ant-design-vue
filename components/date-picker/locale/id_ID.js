@@ -1,5 +1,5 @@
-import CalendarLocale from '../../vc-calendar/src/locale/id_ID'
-import TimePickerLocale from '../../time-picker/locale/id_ID'
+import CalendarLocale from '../../vc-calendar/src/locale/id_ID';
+import TimePickerLocale from '../../time-picker/locale/id_ID';
 
 // Merge into a locale object
 const locale = {
@@ -11,9 +11,9 @@ const locale = {
   timePickerLocale: {
     ...TimePickerLocale,
   },
-}
+};
 
 // All settings at:
 // https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json
 
-export default locale
+export default locale;

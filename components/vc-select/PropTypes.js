@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 
 export const SelectPropTypes = {
   defaultActiveFirstOption: PropTypes.bool,
@@ -56,4 +56,4 @@ export const SelectPropTypes = {
   dropdownMenuStyle: PropTypes.object,
   notFoundContent: PropTypes.oneOfType([String, Number]),
   tabIndex: PropTypes.oneOfType([String, Number]),
-}
+};

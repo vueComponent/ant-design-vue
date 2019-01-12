@@ -1,5 +1,5 @@
 @checkboxWarpPrefixCls: rc-checkbox;
-@checkboxInnerPrefixCls: ~"@{checkboxWarpPrefixCls}-inner";
+@checkboxInnerPrefixCls: ~'@{checkboxWarpPrefixCls}-inner';
 
 /* 一般状态 */
 .@{checkboxWarpPrefixCls} {
@@ -46,7 +46,8 @@
     border-radius: 3px;
     border-color: #d9d9d9;
     background-color: #ffffff;
-    transition: border-color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: border-color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      background-color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 
   &-input {
@@ -63,7 +64,6 @@
 
 /* 选中状态 */
 .@{checkboxWarpPrefixCls}-checked {
-
   &:hover {
     .@{checkboxInnerPrefixCls} {
       border-color: #3dbcf6;
@@ -94,9 +94,7 @@
 }
 
 .@{checkboxWarpPrefixCls}-disabled {
-
   &.@{checkboxWarpPrefixCls}-checked {
-
     &:hover {
       .@{checkboxInnerPrefixCls} {
         border-color: #d9d9d9;

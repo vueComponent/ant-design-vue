@@ -1,16 +1,16 @@
 <script>
-import Basic from './basic'
-import FlexAlign from './flex-align'
-import FlexOrder from './flex-order'
-import Flex from './flex'
-import Gutter from './gutter'
-import Offset from './offset'
-import ResponsiveMore from './responsive-more'
-import Responsive from './responsive'
-import Sort from './sort'
-import Playfround from './playfround'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import FlexAlign from './flex-align';
+import FlexOrder from './flex-order';
+import Flex from './flex';
+import Gutter from './gutter';
+import Offset from './offset';
+import ResponsiveMore from './responsive-more';
+import Responsive from './responsive';
+import Sort from './sort';
+import Playfround from './playfround';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Grid 栅格
           24 栅格系统。
@@ -19,7 +19,7 @@ const md = {
   us: `# Grid
 24 Grids System。
 ## Design concept`,
-}
+};
 const md2 = {
   cn: `
   在多数业务情况下，Ant Design需要在设计区域内解决大量信息收纳的问题，因此在 12 栅格系统的基础上，我们将整个设计建议区域按照 24 等分的原则进行划分。
@@ -56,7 +56,7 @@ Our grid systems support Flex layout to allow the elements within the parent to 
 Flex layout uses a 24 grid layout to define the width of each "box", but does not rigidly adhere to the grid layout.
 ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '栅格',
@@ -134,8 +134,8 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 

@@ -1,5 +1,5 @@
-import Radio from './Radio'
-import { getOptionProps } from '../_util/props-util'
+import Radio from './Radio';
+import { getOptionProps } from '../_util/props-util';
 
 export default {
   name: 'ARadioButton',
@@ -13,14 +13,14 @@ export default {
   inject: {
     radioGroupContext: { default: undefined },
   },
-  render () {
-    const props = getOptionProps(this)
-    const radioProps = { props, on: { ...this.$listeners }}
+  render() {
+    const props = getOptionProps(this);
+    const radioProps = { props, on: { ...this.$listeners } };
     if (this.radioGroupContext) {
-      radioProps.on.change = this.radioGroupContext.onRadioChange
-      radioProps.props.checked = props.value === this.radioGroupContext.stateValue
-      radioProps.props.disabled = props.disabled || this.radioGroupContext.disabled
+      radioProps.on.change = this.radioGroupContext.onRadioChange;
+      radioProps.props.checked = props.value === this.radioGroupContext.stateValue;
+      radioProps.props.disabled = props.disabled || this.radioGroupContext.disabled;
     }
-    return <Radio {...radioProps}>{this.$slots.default}</Radio>
+    return <Radio {...radioProps}>{this.$slots.default}</Radio>;
   },
-}
+};

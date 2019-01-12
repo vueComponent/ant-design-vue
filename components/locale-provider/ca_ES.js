@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/ca_ES'
-import DatePicker from '../date-picker/locale/ca_ES'
-import TimePicker from '../time-picker/locale/ca_ES'
-import Calendar from '../calendar/locale/ca_ES'
+import Pagination from '../vc-pagination/locale/ca_ES';
+import DatePicker from '../date-picker/locale/ca_ES';
+import TimePicker from '../time-picker/locale/ca_ES';
+import Calendar from '../calendar/locale/ca_ES';
 
 export default {
   locale: 'ca',
@@ -33,4 +33,4 @@ export default {
   Select: {
     notFoundContent: 'No trobat',
   },
-}
+};

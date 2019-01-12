@@ -1,22 +1,20 @@
+import PropTypes from '../_util/vue-types';
+import BaseMixin from '../_util/BaseMixin';
+import Header from './Header';
+import Combobox from './Combobox';
+import moment from 'moment';
+import { getComponentFromProp } from '../_util/props-util';
 
-import PropTypes from '../_util/vue-types'
-import BaseMixin from '../_util/BaseMixin'
-import Header from './Header'
-import Combobox from './Combobox'
-import moment from 'moment'
-import { getComponentFromProp } from '../_util/props-util'
+function noop() {}
 
-function noop () {
-}
-
-function generateOptions (length, disabledOptions, hideDisabledOptions, step = 1) {
-  const arr = []
+function generateOptions(length, disabledOptions, hideDisabledOptions, step = 1) {
+  const arr = [];
   for (let value = 0; value < length; value += step) {
     if (!disabledOptions || disabledOptions.indexOf(value) < 0 || !hideDisabledOptions) {
-      arr.push(value)
+      arr.push(value);
     }
   }
-  return arr
+  return arr;
 }
 const Panel = {
   mixins: [BaseMixin],
@@ -26,7 +24,7 @@ const Panel = {
     defaultOpenValue: {
       type: Object,
       default: () => {
-        return moment()
+        return moment();
       },
     },
     value: PropTypes.any,
@@ -54,87 +52,111 @@ const Panel = {
     // onKeydown: PropTypes.func,
     clearIcon: PropTypes.any,
   },
-  data () {
+  data() {
     return {
       sValue: this.value,
       selectionRange: [],
       currentSelectPanel: '',
       showStr: true,
-    }
+    };
   },
   watch: {
-    value (val) {
+    value(val) {
       if (val) {
         this.setState({
           sValue: val,
           showStr: true,
-        })
+        });
       } else {
         this.setState({
           showStr: false,
-        })
+        });
       }
     },
   },
 
   methods: {
-    onChange (newValue) {
-      this.setState({ sValue: newValue })
-      this.__emit('change', newValue)
+    onChange(newValue) {
+      this.setState({ sValue: newValue });
+      this.__emit('change', newValue);
     },
 
-    onCurrentSelectPanelChange (currentSelectPanel) {
-      this.setState({ currentSelectPanel })
+    onCurrentSelectPanelChange(currentSelectPanel) {
+      this.setState({ currentSelectPanel });
     },
 
     // https://github.com/ant-design/ant-design/issues/5829
-    close () {
-      this.__emit('esc')
+    close() {
+      this.__emit('esc');
     },
 
-    disabledHours2 () {
-      const { use12Hours, disabledHours } = this
-      let disabledOptions = disabledHours()
+    disabledHours2() {
+      const { use12Hours, disabledHours } = this;
+      let disabledOptions = disabledHours();
       if (use12Hours && Array.isArray(disabledOptions)) {
         if (this.isAM()) {
-          disabledOptions = disabledOptions.filter(h => h < 12).map(h => (h === 0 ? 12 : h))
+          disabledOptions = disabledOptions.filter(h => h < 12).map(h => (h === 0 ? 12 : h));
         } else {
-          disabledOptions = disabledOptions.map(h => (h === 12 ? 12 : h - 12))
+          disabledOptions = disabledOptions.map(h => (h === 12 ? 12 : h - 12));
         }
       }
-      return disabledOptions
+      return disabledOptions;
     },
 
-    isAM () {
-      const value = this.sValue || this.defaultOpenValue
-      return value.hour() >= 0 && value.hour() < 12
+    isAM() {
+      const value = this.sValue || this.defaultOpenValue;
+      return value.hour() >= 0 && value.hour() < 12;
     },
   },
 
-  render () {
+  render() {
     const {
-      prefixCls, placeholder, disabledMinutes, addon,
-      disabledSeconds, hideDisabledOptions, allowEmpty, showHour, showMinute, showSecond,
-      format, defaultOpenValue, clearText, use12Hours,
-      focusOnOpen, hourStep, minuteStep, secondStep, inputReadOnly,
-      sValue, currentSelectPanel, showStr, $listeners = {},
-    } = this
-    const clearIcon = getComponentFromProp(this, 'clearIcon')
-    const { esc = noop, clear = noop, keydown = noop } = $listeners
+      prefixCls,
+      placeholder,
+      disabledMinutes,
+      addon,
+      disabledSeconds,
+      hideDisabledOptions,
+      allowEmpty,
+      showHour,
+      showMinute,
+      showSecond,
+      format,
+      defaultOpenValue,
+      clearText,
+      use12Hours,
+      focusOnOpen,
+      hourStep,
+      minuteStep,
+      secondStep,
+      inputReadOnly,
+      sValue,
+      currentSelectPanel,
+      showStr,
+      $listeners = {},
+    } = this;
+    const clearIcon = getComponentFromProp(this, 'clearIcon');
+    const { esc = noop, clear = noop, keydown = noop } = $listeners;
 
-    const disabledHourOptions = this.disabledHours2()
-    const disabledMinuteOptions = disabledMinutes(sValue ? sValue.hour() : null)
-    const disabledSecondOptions = disabledSeconds(sValue ? sValue.hour() : null,
-      sValue ? sValue.minute() : null)
-    const hourOptions = generateOptions(
-      24, disabledHourOptions, hideDisabledOptions, hourStep
-    )
+    const disabledHourOptions = this.disabledHours2();
+    const disabledMinuteOptions = disabledMinutes(sValue ? sValue.hour() : null);
+    const disabledSecondOptions = disabledSeconds(
+      sValue ? sValue.hour() : null,
+      sValue ? sValue.minute() : null,
+    );
+    const hourOptions = generateOptions(24, disabledHourOptions, hideDisabledOptions, hourStep);
     const minuteOptions = generateOptions(
-      60, disabledMinuteOptions, hideDisabledOptions, minuteStep
-    )
+      60,
+      disabledMinuteOptions,
+      hideDisabledOptions,
+      minuteStep,
+    );
     const secondOptions = generateOptions(
-      60, disabledSecondOptions, hideDisabledOptions, secondStep
-    )
+      60,
+      disabledSecondOptions,
+      hideDisabledOptions,
+      secondStep,
+    );
 
     return (
       <div class={`${prefixCls}-inner`}>
@@ -183,9 +205,8 @@ const Panel = {
         />
         {addon(this)}
       </div>
-    )
+    );
   },
-}
+};
 
-export default Panel
-
+export default Panel;

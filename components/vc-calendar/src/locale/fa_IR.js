@@ -24,4 +24,4 @@ export default {
   nextDecade: 'دهه بعد',
   previousCentury: 'قرن قبل',
   nextCentury: 'قرن بعد',
-}
+};

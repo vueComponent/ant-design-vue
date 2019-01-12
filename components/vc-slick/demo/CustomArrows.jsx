@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render (h) {
+  render(h) {
     const settings = {
       props: {
         dots: true,
@@ -11,28 +11,36 @@ export default {
         slidesToScroll: 1,
       },
       scopedSlots: {
-        nextArrow: (props) => {
-          const { class: className, style, on: { click }} = props
+        nextArrow: props => {
+          const {
+            class: className,
+            style,
+            on: { click },
+          } = props;
           return (
             <div
               class={className}
               style={{ ...style, display: 'block', background: 'red' }}
               onClick={click}
             />
-          )
+          );
         },
-        prevArrow: (props) => {
-          const { class: className, style, on: { click }} = props
+        prevArrow: props => {
+          const {
+            class: className,
+            style,
+            on: { click },
+          } = props;
           return (
             <div
               class={className}
               style={{ ...style, display: 'block', background: 'green' }}
               onClick={click}
             />
-          )
+          );
         },
       },
-    }
+    };
     return (
       <div>
         <h2>Custom Arrows</h2>
@@ -57,6 +65,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

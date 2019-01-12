@@ -12,4 +12,4 @@ export default {
   next_5: 'Đến 5 Trang Kế',
   prev_3: 'Về 3 Trang Trước',
   next_3: 'Đến 3 Trang Kế',
-}
+};

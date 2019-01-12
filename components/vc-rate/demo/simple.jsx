@@ -1,21 +1,20 @@
-import Rate from '../index'
-import '../assets/index.less'
+import Rate from '../index';
+import '../assets/index.less';
 
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
   methods: {
-    onChange (v) {
-      console.log('selected star', v)
+    onChange(v) {
+      console.log('selected star', v);
     },
-    onFocus () {
-      console.dir('focus')
+    onFocus() {
+      console.dir('focus');
     },
   },
-  render () {
-    const { onChange, onFocus } = this
+  render() {
+    const { onChange, onFocus } = this;
     const rateProps = {
       props: {
         defaultValue: 2.5,
@@ -25,9 +24,10 @@ export default {
         change: onChange,
       },
       style: {
-        fontSize: '50px', marginTop: '24px',
+        fontSize: '50px',
+        marginTop: '24px',
       },
-    }
+    };
     const rateProps1 = {
       props: {
         defaultValue: 2,
@@ -36,16 +36,17 @@ export default {
         change: onChange,
       },
       style: {
-        fontSize: '50px', marginTop: '24px',
+        fontSize: '50px',
+        marginTop: '24px',
       },
-    }
+    };
     return (
-      <div style='margin: 100px'>
+      <div style="margin: 100px">
         <Rate
           defaultValue={2.5}
           onChange={onChange}
           onFocus={onFocus}
-          style='fontSize: 40px'
+          style="fontSize: 40px"
           allowHalf
           allowClear={false}
           autoFocus
@@ -55,23 +56,19 @@ export default {
         <Rate
           defaultValue={2.5}
           onChange={onChange}
-          style='fontSize: 50px; marginTop: 24px'
+          style="fontSize: 50px; marginTop: 24px"
           allowHalf
-          character='$'
+          character="$"
         />
         <br />
-        <Rate
-          {...rateProps}
-        >
-          <i slot='character' class='anticon anticon-star' />
+        <Rate {...rateProps}>
+          <i slot="character" class="anticon anticon-star" />
         </Rate>
         <br />
-        <Rate
-          {...rateProps1}
-        >
-          <i slot='character' class='anticon anticon-star' />
+        <Rate {...rateProps1}>
+          <i slot="character" class="anticon anticon-star" />
         </Rate>
       </div>
-    )
+    );
   },
-}
+};

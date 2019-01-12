@@ -1,42 +1,42 @@
-import { Line, Circle } from '../index'
-import '../assets/index.less'
+import { Line, Circle } from '../index';
+import '../assets/index.less';
 
 export default {
-  data () {
+  data() {
     return {
       percent: 0,
-    }
+    };
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      this.increase()
-    })
+      this.increase();
+    });
   },
   methods: {
-    increase () {
-      const percent = this.percent + 1
+    increase() {
+      const percent = this.percent + 1;
       if (percent >= 100) {
-        clearTimeout(this.tm)
-        return
+        clearTimeout(this.tm);
+        return;
       }
-      this.percent = percent
-      this.tm = setTimeout(this.increase, 10)
+      this.percent = percent;
+      this.tm = setTimeout(this.increase, 10);
     },
-    restart () {
-      clearTimeout(this.tm)
-      this.percent = 0
+    restart() {
+      clearTimeout(this.tm);
+      this.percent = 0;
       this.$nextTick(() => {
-        this.increase()
-      })
+        this.increase();
+      });
     },
   },
-  render () {
+  render() {
     return (
-      <div style='margin: 10px;width: 200px'>
-        <Circle strokeWidth='6' percent={this.percent} />
-        <Line strokeWidth='4' percent={this.percent} />
+      <div style="margin: 10px;width: 200px">
+        <Circle strokeWidth="6" percent={this.percent} />
+        <Line strokeWidth="4" percent={this.percent} />
         <button onClick={this.restart}>Restart</button>
       </div>
-    )
+    );
   },
-}
+};

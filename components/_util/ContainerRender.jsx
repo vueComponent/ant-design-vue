@@ -1,6 +1,5 @@
-
-import Vue from 'vue'
-import PropTypes from './vue-types'
+import Vue from 'vue';
+import PropTypes from './vue-types';
 
 export default {
   props: {
@@ -14,42 +13,42 @@ export default {
     children: PropTypes.func.isRequired,
   },
 
-  mounted () {
+  mounted() {
     if (this.autoMount) {
-      this.renderComponent()
+      this.renderComponent();
     }
   },
 
-  updated () {
+  updated() {
     if (this.autoMount) {
-      this.renderComponent()
+      this.renderComponent();
     }
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.autoDestroy) {
-      this.removeContainer()
+      this.removeContainer();
     }
   },
   methods: {
-    removeContainer () {
+    removeContainer() {
       if (this.container) {
-        this._component && this._component.$destroy()
-        this.container.parentNode.removeChild(this.container)
-        this.container = null
+        this._component && this._component.$destroy();
+        this.container.parentNode.removeChild(this.container);
+        this.container = null;
       }
     },
 
-    renderComponent (props = {}, ready) {
-      const { visible, forceRender, getContainer, parent } = this
-      const self = this
+    renderComponent(props = {}, ready) {
+      const { visible, forceRender, getContainer, parent } = this;
+      const self = this;
       if (visible || parent.$refs._component || forceRender) {
-        let el = this.componentEl
+        let el = this.componentEl;
         if (!this.container) {
-          this.container = getContainer()
-          el = document.createElement('div')
-          this.componentEl = el
-          this.container.appendChild(el)
+          this.container = getContainer();
+          el = document.createElement('div');
+          this.componentEl = el;
+          this.container.appendChild(el);
         }
 
         if (!this._component) {
@@ -59,36 +58,35 @@ export default {
             },
             parent: self.parent,
             el: el,
-            mounted () {
+            mounted() {
               this.$nextTick(() => {
                 if (ready) {
-                  ready.call(self)
+                  ready.call(self);
                 }
-              })
+              });
             },
-            updated () {
+            updated() {
               this.$nextTick(() => {
                 if (ready) {
-                  ready.call(self)
+                  ready.call(self);
                 }
-              })
+              });
             },
-            render () {
-              return self.getComponent(this.comProps)
+            render() {
+              return self.getComponent(this.comProps);
             },
-          })
+          });
         } else {
-          this._component.comProps = props
+          this._component.comProps = props;
         }
       }
     },
   },
 
-  render () {
+  render() {
     return this.children({
       renderComponent: this.renderComponent,
       removeContainer: this.removeContainer,
-    })
+    });
   },
-}
-
+};

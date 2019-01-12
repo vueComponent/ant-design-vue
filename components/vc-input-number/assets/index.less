@@ -8,7 +8,7 @@
   height: 26px;
   display: inline-block;
   vertical-align: middle;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
   border-radius: 5px;
   box-sizing: content-box;
 
@@ -17,7 +17,7 @@
     line-height: 12px;
     height: 12px;
     overflow: hidden;
-    display:block;
+    display: block;
     touch-action: none;
 
     &-active {
@@ -25,7 +25,8 @@
     }
   }
 
-  &-handler-up-inner, &-handler-down-inner {
+  &-handler-up-inner,
+  &-handler-down-inner {
     color: #666666;
     user-select: none;
     -webkit-user-select: none;
@@ -34,7 +35,8 @@
   &:hover {
     border-color: #23c0fa;
 
-    .@{inputNumberPrefixCls}-handler-up, .@{inputNumberPrefixCls}-handler-wrap {
+    .@{inputNumberPrefixCls}-handler-up,
+    .@{inputNumberPrefixCls}-handler-wrap {
       border-color: #23c0fa;
     }
   }
@@ -42,7 +44,8 @@
   &-disabled:hover {
     border-color: #d9d9d9;
 
-    .@{inputNumberPrefixCls}-handler-up, .@{inputNumberPrefixCls}-handler-wrap {
+    .@{inputNumberPrefixCls}-handler-up,
+    .@{inputNumberPrefixCls}-handler-wrap {
       border-color: #d9d9d9;
     }
   }
@@ -68,13 +71,13 @@
 
   &-handler-wrap {
     float: right;
-    border-left: 1px solid #D9D9D9;
+    border-left: 1px solid #d9d9d9;
     width: 20px;
     height: 26px;
   }
 
   &-handler-up {
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: 1px solid #d9d9d9;
     padding-top: 1px;
     &-inner {
       &:after {
@@ -99,7 +102,8 @@
     }
   }
 
-  &-handler-down-disabled, &-handler-up-disabled {
+  &-handler-down-disabled,
+  &-handler-up-disabled {
     .handler-disabled();
   }
 

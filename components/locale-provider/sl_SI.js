@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/sl_SI'
-import DatePicker from '../date-picker/locale/sl_SI'
-import TimePicker from '../time-picker/locale/sl_SI'
-import Calendar from '../calendar/locale/sl_SI'
+import Pagination from '../vc-pagination/locale/sl_SI';
+import DatePicker from '../date-picker/locale/sl_SI';
+import TimePicker from '../time-picker/locale/sl_SI';
+import Calendar from '../calendar/locale/sl_SI';
 
 export default {
   locale: 'sl',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Napaka pri nalaganju',
     previewFile: 'Predogled datoteke',
   },
-}
+};

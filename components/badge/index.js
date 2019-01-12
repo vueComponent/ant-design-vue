@@ -1,9 +1,8 @@
-import Badge from './Badge'
+import Badge from './Badge';
 
 /* istanbul ignore next */
-Badge.install = function (Vue) {
-  Vue.component(Badge.name, Badge)
-}
+Badge.install = function(Vue) {
+  Vue.component(Badge.name, Badge);
+};
 
-export default Badge
-
+export default Badge;

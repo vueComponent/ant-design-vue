@@ -1,9 +1,9 @@
-import classnames from 'classnames'
-import VcDrawer from '../vc-drawer/src'
-import PropTypes from '../_util/vue-types'
-import BaseMixin from '../_util/BaseMixin'
-import Icon from '../icon'
-import { getComponentFromProp, getOptionProps } from '../_util/props-util'
+import classnames from 'classnames';
+import VcDrawer from '../vc-drawer/src';
+import PropTypes from '../_util/vue-types';
+import BaseMixin from '../_util/BaseMixin';
+import Icon from '../icon';
+import { getComponentFromProp, getOptionProps } from '../_util/props-util';
 
 const Drawer = {
   name: 'ADrawer',
@@ -26,127 +26,124 @@ const Drawer = {
     wrapClassName: PropTypes.string, // not use class like react, vue will add class to root dom
   },
   mixins: [BaseMixin],
-  data () {
-    this.destoryClose = false
-    this.preVisible = this.$props.visible
+  data() {
+    this.destoryClose = false;
+    this.preVisible = this.$props.visible;
     return {
       _push: false,
-    }
+    };
   },
   inject: {
     parentDrawer: {
       default: null,
     },
   },
-  provide () {
+  provide() {
     return {
       parentDrawer: this,
-    }
+    };
   },
-  updated () {
+  updated() {
     this.$nextTick(() => {
       if (this.preVisible !== this.visible && this.parentDrawer) {
         if (this.visible) {
-          this.parentDrawer.push()
+          this.parentDrawer.push();
         } else {
-          this.parentDrawer.pull()
+          this.parentDrawer.pull();
         }
       }
-      this.preVisible = this.visible
-    })
+      this.preVisible = this.visible;
+    });
   },
   methods: {
-    close (e) {
+    close(e) {
       if (this.visible !== undefined) {
-        this.$emit('close', e)
-        return
+        this.$emit('close', e);
+        return;
       }
     },
-    onMaskClick (e) {
+    onMaskClick(e) {
       if (!this.maskClosable) {
-        return
+        return;
       }
-      this.close(e)
+      this.close(e);
     },
-    push () {
+    push() {
       this.setState({
         _push: true,
-      })
+      });
     },
-    pull () {
+    pull() {
       this.setState({
         _push: false,
-      })
+      });
     },
-    onDestoryTransitionEnd () {
-      const isDestroyOnClose = this.getDestoryOnClose()
+    onDestoryTransitionEnd() {
+      const isDestroyOnClose = this.getDestoryOnClose();
       if (!isDestroyOnClose) {
-        return
+        return;
       }
       if (!this.visible) {
-        this.destoryClose = true
-        this.$forceUpdate()
+        this.destoryClose = true;
+        this.$forceUpdate();
       }
     },
 
-    getDestoryOnClose () {
-      return this.destroyOnClose && !this.visible
+    getDestoryOnClose() {
+      return this.destroyOnClose && !this.visible;
     },
     // get drawar push width or height
-    getPushTransform (placement) {
+    getPushTransform(placement) {
       if (placement === 'left' || placement === 'right') {
-        return `translateX(${placement === 'left' ? 180 : -180}px)`
+        return `translateX(${placement === 'left' ? 180 : -180}px)`;
       }
       if (placement === 'top' || placement === 'bottom') {
-        return `translateY(${placement === 'top' ? 180 : -180}px)`
+        return `translateY(${placement === 'top' ? 180 : -180}px)`;
       }
     },
     // render drawer body dom
-    renderBody () {
+    renderBody() {
       if (this.destoryClose && !this.visible) {
-        return null
+        return null;
       }
-      this.destoryClose = false
-      const { placement } = this.$props
+      this.destoryClose = false;
+      const { placement } = this.$props;
 
-      const containerStyle = placement === 'left' ||
-        placement === 'right' ? {
-          overflow: 'auto',
-          height: '100%',
-        } : {}
+      const containerStyle =
+        placement === 'left' || placement === 'right'
+          ? {
+              overflow: 'auto',
+              height: '100%',
+            }
+          : {};
 
-      const isDestroyOnClose = this.getDestoryOnClose()
+      const isDestroyOnClose = this.getDestoryOnClose();
       if (isDestroyOnClose) {
         // Increase the opacity transition, delete children after closing.
-        containerStyle.opacity = 0
-        containerStyle.transition = 'opacity .3s'
+        containerStyle.opacity = 0;
+        containerStyle.transition = 'opacity .3s';
       }
-      const { prefixCls, closable } = this.$props
-      const title = getComponentFromProp(this, 'title')
+      const { prefixCls, closable } = this.$props;
+      const title = getComponentFromProp(this, 'title');
       // is have header dom
-      let header
+      let header;
       if (title) {
         header = (
-          <div key='header' class={`${prefixCls}-header`}>
+          <div key="header" class={`${prefixCls}-header`}>
             <div class={`${prefixCls}-title`}>{title}</div>
           </div>
-        )
+        );
       }
       // is have closer button
-      let closer
+      let closer;
       if (closable) {
         closer = (
-          <button
-            key='closer'
-            onClick={this.close}
-            aria-label='Close'
-            class={`${prefixCls}-close`}
-          >
+          <button key="closer" onClick={this.close} aria-label="Close" class={`${prefixCls}-close`}>
             <span class={`${prefixCls}-close-x`}>
-              <Icon type='close'/>
+              <Icon type="close" />
             </span>
           </button>
-        )
+        );
       }
 
       return (
@@ -157,32 +154,32 @@ const Drawer = {
         >
           {header}
           {closer}
-          <div key='body' class={`${prefixCls}-body`}>
+          <div key="body" class={`${prefixCls}-body`}>
             {this.$slots.default}
           </div>
         </div>
-      )
+      );
     },
-    getRcDrawerStyle () {
-      const { zIndex, placement, maskStyle, wrapStyle } = this.$props
-      const { _push: push } = this.$data
+    getRcDrawerStyle() {
+      const { zIndex, placement, maskStyle, wrapStyle } = this.$props;
+      const { _push: push } = this.$data;
       return {
         ...maskStyle,
         zIndex,
         transform: push ? this.getPushTransform(placement) : undefined,
         ...wrapStyle,
-      }
+      };
     },
   },
-  render () {
-    const props = getOptionProps(this)
-    const { width, height, visible, placement, wrapClassName, ...rest } = props
-    const haveMask = rest.mask ? '' : 'no-mask'
-    const offsetStyle = {}
+  render() {
+    const props = getOptionProps(this);
+    const { width, height, visible, placement, wrapClassName, ...rest } = props;
+    const haveMask = rest.mask ? '' : 'no-mask';
+    const offsetStyle = {};
     if (placement === 'left' || placement === 'right') {
-      offsetStyle.width = typeof width === 'number' ? `${width}px` : width
+      offsetStyle.width = typeof width === 'number' ? `${width}px` : width;
     } else {
-      offsetStyle.height = typeof height === 'number' ? `${height}px` : height
+      offsetStyle.height = typeof height === 'number' ? `${height}px` : height;
     }
     const vcDrawerProps = {
       props: {
@@ -202,20 +199,14 @@ const Drawer = {
         maskClick: this.onMaskClick,
         ...this.$listeners,
       },
-    }
-    return (
-      <VcDrawer
-        {...vcDrawerProps}
-      >
-        {this.renderBody()}
-      </VcDrawer>
-    )
+    };
+    return <VcDrawer {...vcDrawerProps}>{this.renderBody()}</VcDrawer>;
   },
-}
+};
 
 /* istanbul ignore next */
-Drawer.install = function (Vue) {
-  Vue.component(Drawer.name, Drawer)
-}
+Drawer.install = function(Vue) {
+  Vue.component(Drawer.name, Drawer);
+};
 
-export default Drawer
+export default Drawer;

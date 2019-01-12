@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import { isZhCN } from '../util'
+import { isZhCN } from '../util';
 export default {
   name: 'api',
   inject: {
@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       isZhCN: isZhCN(this.demoContext.name),
-    }
+    };
   },
-}
+};
 </script>

@@ -1,21 +1,21 @@
-function enhancer (Component) {
+function enhancer(Component) {
   return {
     mixins: [Component],
-    updated () {
+    updated() {
       this.$nextTick(() => {
         if (!this.$refs.svgPathRef) {
-          return
+          return;
         }
-        const pathStyle = this.$refs.svgPathRef.style
-        pathStyle.transitionDuration = '.3s, .3s, .3s, .06s'
-        const now = Date.now()
+        const pathStyle = this.$refs.svgPathRef.style;
+        pathStyle.transitionDuration = '.3s, .3s, .3s, .06s';
+        const now = Date.now();
         if (this.prevTimeStamp && now - this.prevTimeStamp < 100) {
-          pathStyle.transitionDuration = '0s, 0s'
+          pathStyle.transitionDuration = '0s, 0s';
         }
-        this.prevTimeStamp = Date.now()
-      })
+        this.prevTimeStamp = Date.now();
+      });
     },
-  }
+  };
 }
 
-export default enhancer
+export default enhancer;

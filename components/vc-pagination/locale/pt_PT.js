@@ -12,4 +12,4 @@ export default {
   next_5: 'Avançar 5 Páginas',
   prev_3: 'Recuar 3 Páginas',
   next_3: 'Avançar 3 Páginas',
-}
+};

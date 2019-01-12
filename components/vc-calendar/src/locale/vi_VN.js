@@ -25,4 +25,4 @@ export default {
   nextDecade: 'Thập kỷ sau',
   previousCentury: 'Thế kỷ trước',
   nextCentury: 'Thế kỷ sau',
-}
+};

@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from "vue";
+import { VNode } from 'vue';
 
 export interface NotificationOptions {
   /**
@@ -124,7 +124,7 @@ export declare class Notification {
   destroy(): void;
 }
 
-declare module "vue/types/vue" {
+declare module 'vue/types/vue' {
   interface Vue {
     $notification: Notification;
   }

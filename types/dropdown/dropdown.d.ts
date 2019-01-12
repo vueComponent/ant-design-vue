@@ -2,9 +2,9 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { Menu } from "../menu/menu";
-import { DropdownButton } from "./dropdown-button";
+import { AntdComponent } from '../component';
+import { Menu } from '../menu/menu';
+import { DropdownButton } from './dropdown-button';
 
 export declare class Dropdown extends AntdComponent {
   static Button: DropdownButton;
@@ -14,7 +14,7 @@ export declare class Dropdown extends AntdComponent {
    * @default ['hover']
    * @type string[]
    */
-  trigger: Array<"click" | "hover" | "contextmenu">;
+  trigger: Array<'click' | 'hover' | 'contextmenu'>;
 
   /**
    * the dropdown menu
@@ -58,11 +58,5 @@ export declare class Dropdown extends AntdComponent {
    * @default 'bottomLeft'
    * @type string
    */
-  placement:
-    | "topLeft"
-    | "topCenter"
-    | "topRight"
-    | "bottomLeft"
-    | "bottomCenter"
-    | "bottomRight";
+  placement: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
 }

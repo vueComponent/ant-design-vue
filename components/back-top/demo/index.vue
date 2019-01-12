@@ -1,8 +1,8 @@
 <script>
-import Basic from './basic'
-import Custom from './custom'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Custom from './custom';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# BackTop 回到顶部
           返回页面顶部的操作按钮。
@@ -17,7 +17,7 @@ const md = {
 - When you need to go back to the top very frequently in order to view the contents.
 ## Examples 
 `,
-}
+};
 export default {
   category: 'Components',
   type: 'Other',
@@ -35,7 +35,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

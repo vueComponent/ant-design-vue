@@ -1,15 +1,15 @@
 <script>
-import Hours from './12hours'
-import Addon from './addon'
-import Basic from './basic'
-import Disabled from './disabled'
-import HideColumn from './hide-column'
-import IntervalOptions from './interval-options'
-import Size from './size'
-import Value from './value'
-import Suffix from './suffix'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Hours from './12hours';
+import Addon from './addon';
+import Basic from './basic';
+import Disabled from './disabled';
+import HideColumn from './hide-column';
+import IntervalOptions from './interval-options';
+import Size from './size';
+import Value from './value';
+import Suffix from './suffix';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# TimePicker 时间选择框
           输入或选择时间的控件。
@@ -21,7 +21,7 @@ const md = {
 ## When To Use
 By clicking the input box, you can select a time from a popup panel.
 ## Examples `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '时间选择框',
@@ -45,9 +45,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-timepicker-demo .ant-time-picker { margin: 0 8px 12px 0; }

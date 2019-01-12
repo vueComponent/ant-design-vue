@@ -1,52 +1,53 @@
 /* eslint react/no-multi-comp:0, no-console:0, no-alert: 0 */
-import BaseMixin from '../../_util/BaseMixin'
-import '../assets/index.less'
-import '../../vc-dialog/assets/index.less'
-import Dialog from '../../vc-dialog'
-import TreeSelect, { TreeNode, SHOW_PARENT } from '../src/index'
-import { gData } from './util'
-import './demo.less'
+import BaseMixin from '../../_util/BaseMixin';
+import '../assets/index.less';
+import '../../vc-dialog/assets/index.less';
+import Dialog from '../../vc-dialog';
+import TreeSelect, { TreeNode, SHOW_PARENT } from '../src/index';
+import { gData } from './util';
+import './demo.less';
 
-function isLeaf (value) {
+function isLeaf(value) {
   if (!value) {
-    return false
+    return false;
   }
-  let queues = [...gData]
-  while (queues.length) { // BFS
-    const item = queues.shift()
+  let queues = [...gData];
+  while (queues.length) {
+    // BFS
+    const item = queues.shift();
     if (item.value === value) {
       if (!item.children) {
-        return true
+        return true;
       }
-      return false
+      return false;
     }
     if (item.children) {
-      queues = queues.concat(item.children)
+      queues = queues.concat(item.children);
     }
   }
-  return false
+  return false;
 }
 
-function findPath (value, data) {
-  const sel = []
-  function loop (selected, children) {
+function findPath(value, data) {
+  const sel = [];
+  function loop(selected, children) {
     for (let i = 0; i < children.length; i++) {
-      const item = children[i]
+      const item = children[i];
       if (selected === item.value) {
-        sel.push(item)
-        return
+        sel.push(item);
+        return;
       }
       if (item.children) {
-        loop(selected, item.children, item)
+        loop(selected, item.children, item);
         if (sel.length) {
-          sel.push(item)
-          return
+          sel.push(item);
+          return;
         }
       }
     }
   }
-  loop(value, data)
-  return sel
+  loop(value, data);
+  return sel;
 }
 
 export default {
@@ -73,140 +74,150 @@ export default {
     },
   }),
   methods: {
-    onClick () {
+    onClick() {
       this.setState({
         visible: true,
-      })
+      });
     },
 
-    onClose  () {
+    onClose() {
       this.setState({
         visible: false,
-      })
+      });
     },
 
-    onSearch (value) {
-      console.log('Do Search:', value, arguments)
-      this.setState({ searchValue: value })
+    onSearch(value) {
+      console.log('Do Search:', value, arguments);
+      this.setState({ searchValue: value });
     },
 
-    onChange (value, ...rest) {
-      console.log('onChange', value, ...rest)
-      this.setState({ value })
+    onChange(value, ...rest) {
+      console.log('onChange', value, ...rest);
+      this.setState({ value });
     },
 
-    onChangeChildren (...args) {
-      console.log('onChangeChildren', ...args)
-      const value = args[0]
-      const pre = value ? this.value : undefined
-      this.setState({ value: isLeaf(value) ? value : pre })
+    onChangeChildren(...args) {
+      console.log('onChangeChildren', ...args);
+      const value = args[0];
+      const pre = value ? this.value : undefined;
+      this.setState({ value: isLeaf(value) ? value : pre });
     },
 
-    onChangeLV  (value) {
-      console.log('labelInValue', arguments)
+    onChangeLV(value) {
+      console.log('labelInValue', arguments);
       if (!value) {
-        this.setState({ lv: undefined })
-        return
+        this.setState({ lv: undefined });
+        return;
       }
-      const path = findPath(value.value, gData).map(i => i.label).reverse().join(' > ')
-      this.setState({ lv: { value: value.value, label: path }})
+      const path = findPath(value.value, gData)
+        .map(i => i.label)
+        .reverse()
+        .join(' > ');
+      this.setState({ lv: { value: value.value, label: path } });
     },
 
-    onMultipleChange  (value) {
-      console.log('onMultipleChange', arguments)
-      this.setState({ multipleValue: value })
+    onMultipleChange(value) {
+      console.log('onMultipleChange', arguments);
+      this.setState({ multipleValue: value });
     },
 
-    onSelect () {
+    onSelect() {
       // use onChange instead
-      console.log(arguments)
+      console.log(arguments);
     },
 
-    onDropdownVisibleChange (visible, info) {
-      console.log(visible, this.value, info)
-      if (Array.isArray(this.value) && this.value.length > 1 &&
-        this.value.length < 3) {
-        window.alert('please select more than two item or less than one item.')
-        return false
+    onDropdownVisibleChange(visible, info) {
+      console.log(visible, this.value, info);
+      if (Array.isArray(this.value) && this.value.length > 1 && this.value.length < 3) {
+        window.alert('please select more than two item or less than one item.');
+        return false;
       }
-      return true
+      return true;
     },
 
-    filterTreeNode  (input, child) {
-      return String(child.data.props.title).indexOf(input) === 0
+    filterTreeNode(input, child) {
+      return String(child.data.props.title).indexOf(input) === 0;
     },
   },
 
-  render () {
+  render() {
     return (
       <div style={{ margin: '20px' }}>
         <h2>tree-select in dialog</h2>
-        <button class='btn btn-primary' onClick={this.onClick}>show dialog</button>
-        {this.visible ? <Dialog
-          visible={this.visible}
-          animation='zoom'
-          maskAnimation='fade'
-          onClose={this.onClose}
-          style={{ width: '600px', height: '400px', overflow: 'auto' }}
-          id='area'
-        >
-          <div style={{ height: '600px', paddingTop: '100px' }}>
-            <TreeSelect
-              getPopupContainer={(triggerNode) => triggerNode.parentNode}
-              style={{ width: '300px' }}
-              transitionName='rc-tree-select-dropdown-slide-up'
-              choiceTransitionName='rc-tree-select-selection__choice-zoom'
-              dropdownStyle={{ maxHeight: '200px', overflow: 'auto', zIndex: 1500 }}
-              placeholder={<i>请下拉选择</i>}
-              searchPlaceholder='please search'
-              showSearch allowClear treeLine
-              value={this.value}
-              treeData={gData}
-              treeNodeFilterProp='label'
-              filterTreeNode={false}
-              onSearch={this.onSearch}
-              onChange={this.onChange}
-              onSelect={this.onSelect}
-              __propsSymbol__={Symbol()}
-            />
-          </div>
-        </Dialog> : null}
+        <button class="btn btn-primary" onClick={this.onClick}>
+          show dialog
+        </button>
+        {this.visible ? (
+          <Dialog
+            visible={this.visible}
+            animation="zoom"
+            maskAnimation="fade"
+            onClose={this.onClose}
+            style={{ width: '600px', height: '400px', overflow: 'auto' }}
+            id="area"
+          >
+            <div style={{ height: '600px', paddingTop: '100px' }}>
+              <TreeSelect
+                getPopupContainer={triggerNode => triggerNode.parentNode}
+                style={{ width: '300px' }}
+                transitionName="rc-tree-select-dropdown-slide-up"
+                choiceTransitionName="rc-tree-select-selection__choice-zoom"
+                dropdownStyle={{ maxHeight: '200px', overflow: 'auto', zIndex: 1500 }}
+                placeholder={<i>请下拉选择</i>}
+                searchPlaceholder="please search"
+                showSearch
+                allowClear
+                treeLine
+                value={this.value}
+                treeData={gData}
+                treeNodeFilterProp="label"
+                filterTreeNode={false}
+                onSearch={this.onSearch}
+                onChange={this.onChange}
+                onSelect={this.onSelect}
+                __propsSymbol__={Symbol()}
+              />
+            </div>
+          </Dialog>
+        ) : null}
         <h2>single select</h2>
         <TreeSelect
           style={{ width: '300px' }}
-          transitionName='rc-tree-select-dropdown-slide-up'
-          choiceTransitionName='rc-tree-select-selection__choice-zoom'
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          showSearch allowClear treeLine
+          searchPlaceholder="please search"
+          showSearch
+          allowClear
+          treeLine
           searchValue={this.searchValue}
           value={this.value}
           treeData={gData}
-          treeNodeFilterProp='label'
+          treeNodeFilterProp="label"
           filterTreeNode={false}
           onSearch={this.onSearch}
           open={this.tsOpen}
           onChange={(value, ...args) => {
-            console.log('onChange', value, ...args)
+            console.log('onChange', value, ...args);
             if (value === '0-0-0-0-value') {
-              this.setState({ tsOpen: true })
+              this.setState({ tsOpen: true });
             } else {
-              this.setState({ tsOpen: false })
+              this.setState({ tsOpen: false });
             }
-            this.setState({ value })
-          } }
+            this.setState({ value });
+          }}
           dropdownVisibleChange={(v, info) => {
-            console.log('single onDropdownVisibleChange', v, info)
+            console.log('single onDropdownVisibleChange', v, info);
             // document clicked
             if (info.documentClickClose && this.value === '0-0-0-0-value') {
-              return false
+              return false;
             }
             this.setState({
               tsOpen: v,
-            })
-            return true
-          } }
+            });
+            return true;
+          }}
           onSelect={this.onSelect}
           __propsSymbol__={Symbol()}
         />
@@ -214,15 +225,17 @@ export default {
         <h2>single select (just select children)</h2>
         <TreeSelect
           style={{ width: '300px' }}
-          transitionName='rc-tree-select-dropdown-slide-up'
-          choiceTransitionName='rc-tree-select-selection__choice-zoom'
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          showSearch allowClear treeLine
+          searchPlaceholder="please search"
+          showSearch
+          allowClear
+          treeLine
           value={this.value}
           treeData={gData}
-          treeNodeFilterProp='label'
+          treeNodeFilterProp="label"
           filterTreeNode={false}
           onChange={this.onChangeChildren}
           __propsSymbol__={Symbol()}
@@ -231,15 +244,15 @@ export default {
         <h2>multiple select</h2>
         <TreeSelect
           style={{ width: '300px' }}
-          transitionName='rc-tree-select-dropdown-slide-up'
-          choiceTransitionName='rc-tree-select-selection__choice-zoom'
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
+          searchPlaceholder="please search"
           multiple
           value={this.multipleValue}
           treeData={gData}
-          treeNodeFilterProp='title'
+          treeNodeFilterProp="title"
           onChange={this.onMultipleChange}
           onSelect={this.onSelect}
           allowClear
@@ -248,26 +261,28 @@ export default {
 
         <h2>check select</h2>
         <TreeSelect
-          class='check-select'
-          transitionName='rc-tree-select-dropdown-slide-up'
-          choiceTransitionName='rc-tree-select-selection__choice-zoom'
+          class="check-select"
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
           dropdownStyle={{ height: '200px', overflow: 'auto' }}
           dropdownPopupAlign={{ overflow: { adjustY: 0, adjustX: 0 }, offset: [0, 2] }}
           dropdownVisibleChange={this.onDropdownVisibleChange}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          treeLine maxTagTextLength={10}
+          searchPlaceholder="please search"
+          treeLine
+          maxTagTextLength={10}
           value={this.value}
           autoClearSearchValue
           treeData={gData}
-          treeNodeFilterProp='title'
-          treeCheckable showCheckedStrategy={SHOW_PARENT}
+          treeNodeFilterProp="title"
+          treeCheckable
+          showCheckedStrategy={SHOW_PARENT}
           onChange={this.onChange}
           onSelect={this.onSelect}
           maxTagCount={2}
-          maxTagPlaceholder={(valueList) => {
-            console.log('Max Tag Rest Value:', valueList)
-            return `${valueList.length} rest...`
+          maxTagPlaceholder={valueList => {
+            console.log('Max Tag Rest Value:', valueList);
+            return `${valueList.length} rest...`;
           }}
           __propsSymbol__={Symbol()}
         />
@@ -275,15 +290,18 @@ export default {
         <h2>labelInValue & show path</h2>
         <TreeSelect
           style={{ width: '500px' }}
-          transitionName='rc-tree-select-dropdown-slide-up'
-          choiceTransitionName='rc-tree-select-selection__choice-zoom'
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          showSearch allowClear treeLine
-          value={this.lv} labelInValue
+          searchPlaceholder="please search"
+          showSearch
+          allowClear
+          treeLine
+          value={this.lv}
+          labelInValue
           treeData={gData}
-          treeNodeFilterProp='label'
+          treeNodeFilterProp="label"
           filterTreeNode={false}
           onChange={this.onChangeLV}
           __propsSymbol__={Symbol()}
@@ -294,17 +312,19 @@ export default {
           style={{ width: '300px' }}
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
           placeholder={<i>请下拉选择</i>}
-          searchPlaceholder='please search'
-          treeLine maxTagTextLength={10}
+          searchPlaceholder="please search"
+          treeLine
+          maxTagTextLength={10}
           searchValue={this.simpleSearchValue}
-          onSearch={(simpleSearchValue) => {
-            this.setState({ simpleSearchValue })
+          onSearch={simpleSearchValue => {
+            this.setState({ simpleSearchValue });
           }}
           value={this.value}
           treeData={this.simpleTreeData}
-          treeNodeFilterProp='title'
+          treeNodeFilterProp="title"
           treeDataSimpleMode={this.treeDataSimpleMode}
-          treeCheckable showCheckedStrategy={SHOW_PARENT}
+          treeCheckable
+          showCheckedStrategy={SHOW_PARENT}
           onChange={this.onChange}
           onSelect={this.onSelect}
           __propsSymbol__={Symbol()}
@@ -314,12 +334,18 @@ export default {
         <TreeSelect
           style={{ width: '200px' }}
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
-          defaultValue='leaf1' multiple treeCheckable showCheckedStrategy={SHOW_PARENT}
+          defaultValue="leaf1"
+          multiple
+          treeCheckable
+          showCheckedStrategy={SHOW_PARENT}
           treeDefaultExpandAll
           treeData={[
             { key: '', value: '', label: 'empty value', children: [] },
             {
-              key: '0', value: '0', label: '0 label', children: [
+              key: '0',
+              value: '0',
+              label: '0 label',
+              children: [
                 { key: '00', value: '00', label: '00 label', children: [] },
                 { key: '01', value: '01', label: '01 label', children: [] },
               ],
@@ -333,34 +359,40 @@ export default {
         <TreeSelect
           style={{ width: '200px' }}
           dropdownStyle={{ maxHeight: '200px', overflow: 'auto' }}
-          defaultValue='leaf1'
+          defaultValue="leaf1"
           treeDefaultExpandAll
-          treeNodeFilterProp='title'
+          treeNodeFilterProp="title"
           filterTreeNode={this.filterTreeNode}
           onChange={(val, ...args) => console.log(val, ...args)}
           __propsSymbol__={Symbol()}
         >
-          <TreeNode value='' title='parent 1' key=''>
-            <TreeNode value='parent 1-0' title='parent 1-0' key='0-1-0'>
-              <TreeNode value='leaf1' title='my leaf' key='random' />
-              <TreeNode value='leaf2' title='your leaf' key='random1' disabled />
+          <TreeNode value="" title="parent 1" key="">
+            <TreeNode value="parent 1-0" title="parent 1-0" key="0-1-0">
+              <TreeNode value="leaf1" title="my leaf" key="random" />
+              <TreeNode value="leaf2" title="your leaf" key="random1" disabled />
             </TreeNode>
-            <TreeNode value='parent 1-1' title='parent 1-1' key='0-1-1'>
-              <TreeNode value='sss'
-                title={<span style={{ color: 'red' }}>sss</span>} key='random3'
+            <TreeNode value="parent 1-1" title="parent 1-1" key="0-1-1">
+              <TreeNode
+                value="sss"
+                title={<span style={{ color: 'red' }}>sss</span>}
+                key="random3"
               />
-              <TreeNode value='same value1' title='same txtle' key='0-1-1-1'>
-                <TreeNode value='same value10' title='same titlexd' key='0-1-1-1-0' style={{ color: 'red', background: 'green' }} />
+              <TreeNode value="same value1" title="same txtle" key="0-1-1-1">
+                <TreeNode
+                  value="same value10"
+                  title="same titlexd"
+                  key="0-1-1-1-0"
+                  style={{ color: 'red', background: 'green' }}
+                />
               </TreeNode>
             </TreeNode>
           </TreeNode>
-          <TreeNode value='same value2' title='same title' key='0-2'>
-            <TreeNode value='2same value' title='2same title' key='0-2-0' />
+          <TreeNode value="same value2" title="same title" key="0-2">
+            <TreeNode value="2same value" title="2same title" key="0-2-0" />
           </TreeNode>
-          <TreeNode value='same value3' title='same title' key='0-3' />
+          <TreeNode value="same value3" title="same title" key="0-3" />
         </TreeSelect>
       </div>
-    )
+    );
   },
-}
-
+};

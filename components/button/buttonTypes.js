@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 export default () => ({
   prefixCls: PropTypes.string.def('ant-btn'),
   type: PropTypes.oneOf(['primary', 'danger', 'dashed', 'ghost', 'default']).def('default'),
@@ -10,4 +10,4 @@ export default () => ({
   disabled: PropTypes.bool,
   ghost: PropTypes.bool,
   block: PropTypes.bool,
-})
+});

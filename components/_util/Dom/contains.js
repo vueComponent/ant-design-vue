@@ -1,11 +1,11 @@
-export default function contains (root, n) {
-  let node = n
+export default function contains(root, n) {
+  let node = n;
   while (node) {
     if (node === root) {
-      return true
+      return true;
     }
-    node = node.parentNode
+    node = node.parentNode;
   }
 
-  return false
+  return false;
 }

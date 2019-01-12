@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types'
+import PropTypes from '../../_util/vue-types';
 
 export const ITouchProps = {
   disabled: PropTypes.bool,
@@ -10,4 +10,4 @@ export const ITouchProps = {
   // onMouseDown: PropTypes.func,
   // onMouseUp: PropTypes.func,
   // onMouseLeave: PropTypes.func,
-}
+};

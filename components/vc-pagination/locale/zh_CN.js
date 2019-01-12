@@ -12,4 +12,4 @@ export default {
   next_5: '向后 5 页',
   prev_3: '向前 3 页',
   next_3: '向后 3 页',
-}
+};

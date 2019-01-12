@@ -1,29 +1,29 @@
-
-import { message } from 'ant-design-vue'
-import CopyableIcon from './CopyableIcon'
+import { message } from 'ant-design-vue';
+import CopyableIcon from './CopyableIcon';
 
 const Category = {
   props: ['icons', 'title', 'newIcons', 'theme'],
-  data () {
+  data() {
     return {
       justCopied: null,
-    }
+    };
   },
   methods: {
-    onCopied (type, text) {
-      message.success(<span><code class='copied-code'>{text}</code> copied 🎉</span>)
-      this.justCopied = type
+    onCopied(type, text) {
+      message.success(
+        <span>
+          <code class="copied-code">{text}</code> copied 🎉
+        </span>,
+      );
+      this.justCopied = type;
       setTimeout(() => {
-        this.justCopied = null
-      }, 2000)
+        this.justCopied = null;
+      }, 2000);
     },
   },
-  render () {
-    const {
-      icons, title,
-      theme, newIcons,
-    } = this.$props
-    const items = icons.map((name) => {
+  render() {
+    const { icons, title, theme, newIcons } = this.$props;
+    const items = icons.map(name => {
       return (
         <CopyableIcon
           key={name}
@@ -33,18 +33,16 @@ const Category = {
           justCopied={this.justCopied}
           onCopied={this.onCopied}
         />
-      )
-    })
-    const message = this.$t('message')
+      );
+    });
+    const message = this.$t('message');
     return (
       <div>
         <h3>{message[`app.docs.components.icon.category.${title}`]}</h3>
-        <ul class={'anticons-list'}>
-          {items}
-        </ul>
+        <ul class={'anticons-list'}>{items}</ul>
       </div>
-    )
+    );
   },
-}
+};
 
-export default Category
+export default Category;

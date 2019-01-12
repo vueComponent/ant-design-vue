@@ -1,12 +1,11 @@
-
-import Icon from '../icon'
-import classNames from 'classnames'
-import BaseMixin from '../_util/BaseMixin'
-import PropTypes from '../_util/vue-types'
-import getTransitionProps from '../_util/getTransitionProps'
-import { getComponentFromProp, isValidElement } from '../_util/props-util'
-import { cloneElement } from '../_util/vnode'
-function noop () { }
+import Icon from '../icon';
+import classNames from 'classnames';
+import BaseMixin from '../_util/BaseMixin';
+import PropTypes from '../_util/vue-types';
+import getTransitionProps from '../_util/getTransitionProps';
+import { getComponentFromProp, isValidElement } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
+function noop() {}
 export const AlertProps = {
   /**
    * Type of Alert styles, options:`success`, `info`, `warning`, `error`
@@ -30,82 +29,82 @@ export const AlertProps = {
   prefixCls: PropTypes.string,
   banner: PropTypes.bool,
   icon: PropTypes.any,
-}
+};
 
 const Alert = {
   props: AlertProps,
   mixins: [BaseMixin],
   name: 'AAlert',
-  data () {
+  data() {
     return {
       closing: true,
       closed: false,
-    }
+    };
   },
   methods: {
-    handleClose (e) {
-      e.preventDefault()
-      const dom = this.$el
-      dom.style.height = `${dom.offsetHeight}px`
+    handleClose(e) {
+      e.preventDefault();
+      const dom = this.$el;
+      dom.style.height = `${dom.offsetHeight}px`;
       // Magic code
       // 重复一次后才能正确设置 height
-      dom.style.height = `${dom.offsetHeight}px`
+      dom.style.height = `${dom.offsetHeight}px`;
 
       this.setState({
         closing: false,
-      })
-      this.$emit('close', e)
+      });
+      this.$emit('close', e);
     },
-    animationEnd () {
+    animationEnd() {
       this.setState({
         closed: true,
         closing: true,
-      })
-      this.afterClose()
+      });
+      this.afterClose();
     },
   },
 
-  render () {
-    const { prefixCls = 'ant-alert', banner, closing, closed } = this
-    let { closable, type, showIcon, iconType } = this
-    const closeText = getComponentFromProp(this, 'closeText')
-    const description = getComponentFromProp(this, 'description')
-    const message = getComponentFromProp(this, 'message')
-    const icon = getComponentFromProp(this, 'icon')
+  render() {
+    const { prefixCls = 'ant-alert', banner, closing, closed } = this;
+    let { closable, type, showIcon, iconType } = this;
+    const closeText = getComponentFromProp(this, 'closeText');
+    const description = getComponentFromProp(this, 'description');
+    const message = getComponentFromProp(this, 'message');
+    const icon = getComponentFromProp(this, 'icon');
     // banner模式默认有 Icon
-    showIcon = banner && showIcon === undefined ? true : showIcon
+    showIcon = banner && showIcon === undefined ? true : showIcon;
     // banner模式默认为警告
-    type = banner && type === undefined ? 'warning' : type || 'info'
-    let iconTheme = 'filled'
+    type = banner && type === undefined ? 'warning' : type || 'info';
+    let iconTheme = 'filled';
     // should we give a warning?
     // warning(!iconType, `The property 'iconType' is deprecated. Use the property 'icon' instead.`);
     if (!iconType) {
       switch (type) {
         case 'success':
-          iconType = 'check-circle'
-          break
+          iconType = 'check-circle';
+          break;
         case 'info':
-          iconType = 'info-circle'
-          break
+          iconType = 'info-circle';
+          break;
         case 'error':
-          iconType = 'close-circle'
-          break
+          iconType = 'close-circle';
+          break;
         case 'warning':
-          iconType = 'exclamation-circle'
-          break
+          iconType = 'exclamation-circle';
+          break;
         default:
-          iconType = 'default'
+          iconType = 'default';
       }
 
       // use outline icon in alert with description
       if (description) {
-        iconTheme = 'outlined'
+        iconTheme = 'outlined';
       }
     }
 
     // closeable when closeText is assigned
     if (closeText) {
-      closable = true
+      closable = true;
     }
 
     const alertCls = classNames(prefixCls, {
@@ -115,29 +114,27 @@ const Alert = {
       [`${prefixCls}-no-icon`]: !showIcon,
       [`${prefixCls}-banner`]: !!banner,
       [`${prefixCls}-closable`]: closable,
-    })
+    });
 
     const closeIcon = closable ? (
       <a onClick={this.handleClose} class={`${prefixCls}-close-icon`}>
-        {closeText || <Icon type='close' />}
+        {closeText || <Icon type="close" />}
       </a>
-    ) : null
+    ) : null;
 
-    const iconNode = icon && (
-      isValidElement(icon)
-        ? cloneElement(
-          icon,
-          {
-            class: `${prefixCls}-icon`,
-          },
-        ) : <span class={`${prefixCls}-icon`}>{icon}</span>) || (
-      <Icon class={`${prefixCls}-icon`} type={iconType} theme={iconTheme} />
-    )
+    const iconNode = (icon &&
+      (isValidElement(icon) ? (
+        cloneElement(icon, {
+          class: `${prefixCls}-icon`,
+        })
+      ) : (
+        <span class={`${prefixCls}-icon`}>{icon}</span>
+      ))) || <Icon class={`${prefixCls}-icon`} type={iconType} theme={iconTheme} />;
 
     const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
       appear: false,
       afterLeave: this.animationEnd,
-    })
+    });
     return closed ? null : (
       <transition {...transitionProps}>
         <div v-show={closing} class={alertCls} data-show={closing}>
@@ -147,14 +144,13 @@ const Alert = {
           {closeIcon}
         </div>
       </transition>
-    )
+    );
   },
-}
+};
 
 /* istanbul ignore next */
-Alert.install = function (Vue) {
-  Vue.component(Alert.name, Alert)
-}
+Alert.install = function(Vue) {
+  Vue.component(Alert.name, Alert);
+};
 
-export default Alert
-
+export default Alert;

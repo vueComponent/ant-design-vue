@@ -1,14 +1,14 @@
-@import "boostrap/anim.less";
+@import 'boostrap/anim.less';
 
 @tooltip-prefix-cls: rc-tooltip;
 
 //
 // Tooltips
 // --------------------------------------------------
-@font-size-base         : 12px;
-@line-height-base       : 1.5;
-@border-radius-base     : 3px;
-@overlay-shadow              : 0 0 4px rgba(0, 0, 0, 0.17);
+@font-size-base : 12px;
+@line-height-base : 1.5;
+@border-radius-base : 3px;
+@overlay-shadow : 0 0 4px rgba(0, 0, 0, 0.17);
 //** Tooltip text color
 @tooltip-color: #333333;
 //** Tooltip background color
@@ -34,7 +34,7 @@
   visibility: visible;
   line-height: @line-height-base;
   font-size: @font-size-base;
-  background-color:rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   padding: @tooltip-shadow-width;
   opacity: @tooltip-opacity;
 
@@ -52,12 +52,12 @@
   background-color: @tooltip-bg;
   border-radius: @border-radius-base;
   min-height: 34px;
-  border:@tooltip-border-width solid @tooltip-border-color;
+  border: @tooltip-border-width solid @tooltip-border-color;
 }
 
 // Arrows
 .@{tooltip-prefix-cls}-arrow,
-.@{tooltip-prefix-cls}-arrow-inner{
+.@{tooltip-prefix-cls}-arrow-inner {
   position: absolute;
   width: 0;
   height: 0;
@@ -68,7 +68,7 @@
 .@{tooltip-prefix-cls} {
   &-placement-top &-arrow,
   &-placement-topLeft &-arrow,
-  &-placement-topRight &-arrow{
+  &-placement-topRight &-arrow {
     bottom: -@tooltip-arrow-width + @tooltip-shadow-width;
     margin-left: -@tooltip-arrow-width;
     border-width: @tooltip-arrow-width @tooltip-arrow-width 0;
@@ -77,7 +77,7 @@
 
   &-placement-top &-arrow-inner,
   &-placement-topLeft &-arrow-inner,
-  &-placement-topRight &-arrow-inner{
+  &-placement-topRight &-arrow-inner {
     bottom: @tooltip-border-width;
     margin-left: -@tooltip-arrow-width;
     border-width: @tooltip-arrow-width @tooltip-arrow-width 0;
@@ -161,7 +161,7 @@
   &-placement-bottom &-arrow,
   &-placement-bottomLeft &-arrow,
   &-placement-bottomRight &-arrow {
-    top: -@tooltip-arrow-width + @tooltip-shadow-width;;
+    top: -@tooltip-arrow-width + @tooltip-shadow-width;
     margin-left: -@tooltip-arrow-width;
     border-width: 0 @tooltip-arrow-width @tooltip-arrow-width;
     border-bottom-color: @tooltip-arrow-color;

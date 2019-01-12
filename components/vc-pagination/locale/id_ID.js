@@ -12,4 +12,4 @@ export default {
   next_5: '5 Halaman Berikutnya',
   prev_3: '3 Halaman Sebelumnya',
   next_3: '3 Halaman Berikutnya',
-}
+};

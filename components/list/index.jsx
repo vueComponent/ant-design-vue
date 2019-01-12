@@ -1,22 +1,22 @@
-import PropTypes from '../_util/vue-types'
-import classNames from 'classnames'
-import omit from 'omit.js'
-import LocaleReceiver from '../locale-provider/LocaleReceiver'
-import defaultLocale from '../locale-provider/default'
+import PropTypes from '../_util/vue-types';
+import classNames from 'classnames';
+import omit from 'omit.js';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from '../locale-provider/default';
 
-import Spin from '../spin'
-import Pagination, { PaginationConfig } from '../pagination'
-import { Row } from '../grid'
+import Spin from '../spin';
+import Pagination, { PaginationConfig } from '../pagination';
+import { Row } from '../grid';
 
-import Item from './Item'
-import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util'
-import { cloneElement } from '../_util/vnode'
+import Item from './Item';
+import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
 
-export { ListItemProps, ListItemMetaProps } from './Item'
+export { ListItemProps, ListItemMetaProps } from './Item';
 
-export const ColumnCount = ['', 1, 2, 3, 4, 6, 8, 12, 24]
+export const ColumnCount = ['', 1, 2, 3, 4, 6, 8, 12, 24];
 
-export const ColumnType = ['gutter', 'column', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+export const ColumnType = ['gutter', 'column', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 export const ListGridType = {
   gutter: PropTypes.number,
@@ -27,9 +27,9 @@ export const ListGridType = {
   lg: PropTypes.oneOf(ColumnCount),
   xl: PropTypes.oneOf(ColumnCount),
   xxl: PropTypes.oneOf(ColumnCount),
-}
+};
 
-export const ListSize = ['small', 'default', 'large']
+export const ListSize = ['small', 'default', 'large'];
 
 export const ListProps = () => ({
   bordered: PropTypes.bool,
@@ -39,10 +39,7 @@ export const ListProps = () => ({
   itemLayout: PropTypes.string,
   loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   loadMore: PropTypes.any,
-  pagination: PropTypes.oneOfType([
-    PropTypes.shape(PaginationConfig()).loose,
-    PropTypes.bool,
-  ]),
+  pagination: PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.bool]),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,
   renderItem: PropTypes.any,
@@ -51,7 +48,7 @@ export const ListProps = () => ({
   header: PropTypes.any,
   footer: PropTypes.any,
   locale: PropTypes.object,
-})
+});
 
 const List = {
   Item,
@@ -64,65 +61,65 @@ const List = {
     loading: false,
     pagination: false,
   }),
-  provide () {
+  provide() {
     return {
       listContext: this,
-    }
+    };
   },
-  data () {
-    this.keys = []
+  data() {
+    this.keys = [];
     this.defaultPaginationProps = {
       current: 1,
       pageSize: 10,
       onChange: (page, pageSize) => {
-        const { pagination } = this
-        this.paginationCurrent = page
+        const { pagination } = this;
+        this.paginationCurrent = page;
         if (pagination && pagination.onChange) {
-          pagination.onChange(page, pageSize)
+          pagination.onChange(page, pageSize);
         }
       },
       total: 0,
-    }
+    };
     return {
       paginationCurrent: 1,
-    }
+    };
   },
   methods: {
-    renderItem2 (item, index) {
-      const { dataSource, $scopedSlots, rowKey } = this
-      let key
-      const renderItem = this.renderItem || $scopedSlots.renderItem
+    renderItem2(item, index) {
+      const { dataSource, $scopedSlots, rowKey } = this;
+      let key;
+      const renderItem = this.renderItem || $scopedSlots.renderItem;
       if (typeof rowKey === 'function') {
-        key = rowKey(dataSource[index])
+        key = rowKey(dataSource[index]);
       } else if (typeof rowKey === 'string') {
-        key = dataSource[rowKey]
+        key = dataSource[rowKey];
       } else {
-        key = dataSource.key
+        key = dataSource.key;
       }
 
       if (!key) {
-        key = `list-item-${index}`
+        key = `list-item-${index}`;
       }
 
-      this.keys[index] = key
+      this.keys[index] = key;
 
-      return renderItem(item, index)
+      return renderItem(item, index);
     },
 
-    isSomethingAfterLastItem () {
-      const { pagination } = this
-      const loadMore = getComponentFromProp(this, 'loadMore')
-      const footer = getComponentFromProp(this, 'footer')
-      return !!(loadMore || pagination || footer)
+    isSomethingAfterLastItem() {
+      const { pagination } = this;
+      const loadMore = getComponentFromProp(this, 'loadMore');
+      const footer = getComponentFromProp(this, 'footer');
+      return !!(loadMore || pagination || footer);
     },
 
-    renderEmpty (contextLocale) {
-      const locale = { ...contextLocale, ...this.locale }
-      return <div class={`${this.prefixCls}-empty-text`}>{locale.emptyText}</div>
+    renderEmpty(contextLocale) {
+      const locale = { ...contextLocale, ...this.locale };
+      return <div class={`${this.prefixCls}-empty-text`}>{locale.emptyText}</div>;
     },
   },
 
-  render () {
+  render() {
     const {
       bordered,
       split,
@@ -136,31 +133,31 @@ const List = {
       $listeners,
       $slots,
       paginationCurrent,
-    } = this
-    const loadMore = getComponentFromProp(this, 'loadMore')
-    const footer = getComponentFromProp(this, 'footer')
-    const header = getComponentFromProp(this, 'header')
-    const children = filterEmpty($slots.default || [])
-    let loadingProp = loading
+    } = this;
+    const loadMore = getComponentFromProp(this, 'loadMore');
+    const footer = getComponentFromProp(this, 'footer');
+    const header = getComponentFromProp(this, 'header');
+    const children = filterEmpty($slots.default || []);
+    let loadingProp = loading;
     if (typeof loadingProp === 'boolean') {
       loadingProp = {
         spinning: loadingProp,
-      }
+      };
     }
-    const isLoading = (loadingProp && loadingProp.spinning)
+    const isLoading = loadingProp && loadingProp.spinning;
 
     // large => lg
     // small => sm
-    let sizeCls = ''
+    let sizeCls = '';
     switch (size) {
       case 'large':
-        sizeCls = 'lg'
-        break
+        sizeCls = 'lg';
+        break;
       case 'small':
-        sizeCls = 'sm'
-        break
+        sizeCls = 'sm';
+        break;
       default:
-        break
+        break;
     }
     const classString = classNames(prefixCls, {
       [`${prefixCls}-vertical`]: itemLayout === 'vertical',
@@ -170,69 +167,62 @@ const List = {
       [`${prefixCls}-loading`]: isLoading,
       [`${prefixCls}-grid`]: grid,
       [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastItem(),
-    })
+    });
     const paginationProps = {
       ...this.defaultPaginationProps,
       total: dataSource.length,
       current: paginationCurrent,
-      ...pagination || {},
-    }
-    const largestPage = Math.ceil(
-      paginationProps.total / paginationProps.pageSize,
-    )
+      ...(pagination || {}),
+    };
+    const largestPage = Math.ceil(paginationProps.total / paginationProps.pageSize);
     if (paginationProps.current > largestPage) {
-      paginationProps.current = largestPage
+      paginationProps.current = largestPage;
     }
-    const { class: cls, style, onShowSizeChange = () => {}, ...restProps } = paginationProps
+    const { class: cls, style, onShowSizeChange = () => {}, ...restProps } = paginationProps;
     const paginationContent = pagination ? (
       <div class={`${prefixCls}-pagination`}>
         <Pagination
           {...{
             props: omit(restProps, ['onChange']),
-            class: cls, style,
+            class: cls,
+            style,
             on: { change: this.defaultPaginationProps.onChange, showSizeChange: onShowSizeChange },
           }}
         />
       </div>
-    ) : null
+    ) : null;
 
-    let splitDataSource = [...dataSource]
+    let splitDataSource = [...dataSource];
     if (pagination) {
-      if (
-        dataSource.length >
-        (paginationProps.current - 1) * paginationProps.pageSize
-      ) {
+      if (dataSource.length > (paginationProps.current - 1) * paginationProps.pageSize) {
         splitDataSource = [...dataSource].splice(
           (paginationProps.current - 1) * paginationProps.pageSize,
           paginationProps.pageSize,
-        )
+        );
       }
     }
 
-    let childrenContent
-    childrenContent = isLoading && (<div style={{ minHeight: 53 }} />)
+    let childrenContent;
+    childrenContent = isLoading && <div style={{ minHeight: 53 }} />;
     if (splitDataSource.length > 0) {
-      const items = splitDataSource.map((item, index) => this.renderItem2(item, index))
-      const childrenList = items.map((child, index) => cloneElement(child, {
-        key: this.keys[index],
-      }),
-      )
+      const items = splitDataSource.map((item, index) => this.renderItem2(item, index));
+      const childrenList = items.map((child, index) =>
+        cloneElement(child, {
+          key: this.keys[index],
+        }),
+      );
 
-      childrenContent = grid ? (
-        <Row gutter={grid.gutter}>{childrenList}</Row>
-      ) : childrenList
+      childrenContent = grid ? <Row gutter={grid.gutter}>{childrenList}</Row> : childrenList;
     } else if (!children.length && !isLoading) {
       childrenContent = (
         <LocaleReceiver
-          componentName='Table'
+          componentName="Table"
           defaultLocale={defaultLocale.Table}
-          scopedSlots={
-            { default: this.renderEmpty }
-          }
+          scopedSlots={{ default: this.renderEmpty }}
         />
-      )
+      );
     }
-    const paginationPosition = paginationProps.position || 'bottom'
+    const paginationPosition = paginationProps.position || 'bottom';
 
     return (
       <div class={classString} {...{ on: $listeners }}>
@@ -243,17 +233,18 @@ const List = {
           {children}
         </Spin>
         {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
-        {loadMore || (paginationPosition === 'bottom' || paginationPosition === 'both') && paginationContent}
+        {loadMore ||
+          ((paginationPosition === 'bottom' || paginationPosition === 'both') && paginationContent)}
       </div>
-    )
+    );
   },
-}
+};
 
 /* istanbul ignore next */
-List.install = function (Vue) {
-  Vue.component(List.name, List)
-  Vue.component(List.Item.name, List.Item)
-  Vue.component(List.Item.Meta.name, List.Item.Meta)
-}
+List.install = function(Vue) {
+  Vue.component(List.name, List);
+  Vue.component(List.Item.name, List.Item);
+  Vue.component(List.Item.Meta.name, List.Item.Meta);
+};
 
-export default List
+export default List;

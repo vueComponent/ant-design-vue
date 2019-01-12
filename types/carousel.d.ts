@@ -43,7 +43,7 @@ export declare class Carousel extends AntdComponent {
    * @default 'scrollx'
    * @type string
    */
-  effect: "scrollx" | "fade";
+  effect: 'scrollx' | 'fade';
 
   /**
    * Whether to use a vertical display

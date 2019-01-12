@@ -1,13 +1,13 @@
 <script>
-import CustomIndicator from './custom-indicator'
-import Basic from './basic'
-import DelayAndDebounce from './delayAndDebounce'
-import Inside from './inside'
-import Nested from './nested'
-import Size from './size'
-import Tip from './tip'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CustomIndicator from './custom-indicator';
+import Basic from './basic';
+import DelayAndDebounce from './delayAndDebounce';
+import Inside from './inside';
+import Nested from './nested';
+import Size from './size';
+import Tip from './tip';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Spin 加载中
@@ -26,7 +26,7 @@ const md = {
 
   When part of the page is waiting for asynchronous data or during a rendering process, an appropriate loading animation can effectively alleviate users' inquietude.
   ## Examples `,
-}
+};
 export default {
   category: 'Components',
   type: 'Feedback',
@@ -50,7 +50,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

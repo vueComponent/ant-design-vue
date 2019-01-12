@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render (h) {
+  render(h) {
     const settings = {
       props: {
         dots: true,
@@ -23,7 +23,7 @@ export default {
             >
               {i + 1}
             </div>
-          )
+          );
         },
         appendDots: ({ dots }) => {
           return (
@@ -36,10 +36,10 @@ export default {
             >
               <ul style={{ margin: '0px' }}> {dots} </ul>
             </div>
-          )
+          );
         },
       },
-    }
+    };
     return (
       <div>
         <h2>Append Dots</h2>
@@ -64,6 +64,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

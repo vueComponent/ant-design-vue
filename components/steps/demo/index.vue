@@ -1,15 +1,15 @@
 <script>
-import CustomizedProgressDot from './customized-progress-dot'
-import Error from './error'
-import Icon from './icon'
-import ProgressDot from './progress-dot'
-import Simple from './simple'
-import SmallSize from './small-size'
-import StepNext from './step-next'
-import VerticalSmall from './vertical-small'
-import Vertical from './vertical'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CustomizedProgressDot from './customized-progress-dot';
+import Error from './error';
+import Icon from './icon';
+import ProgressDot from './progress-dot';
+import Simple from './simple';
+import SmallSize from './small-size';
+import StepNext from './step-next';
+import VerticalSmall from './vertical-small';
+import Vertical from './vertical';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Steps
@@ -29,7 +29,7 @@ const md = {
   When the task is complicated or has a certain sequence in the series of subtasks, we can decompose it into several steps to make things easier.
   ## Examples 
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '步骤条',
@@ -65,7 +65,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

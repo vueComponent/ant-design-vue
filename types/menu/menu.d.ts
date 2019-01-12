@@ -2,11 +2,11 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { MenuItem } from "./menu-item";
-import { SubMenu } from "./sub-menu";
-import { MenuItemGroup } from "./menu-item-group";
-import { Divider } from "../divider";
+import { AntdComponent } from '../component';
+import { MenuItem } from './menu-item';
+import { SubMenu } from './sub-menu';
+import { MenuItemGroup } from './menu-item-group';
+import { Divider } from '../divider';
 
 export declare class Menu extends AntdComponent {
   static Item: MenuItem;
@@ -50,12 +50,7 @@ export declare class Menu extends AntdComponent {
    * @default 'vertical'
    * @type string
    */
-  mode:
-    | "horizontal"
-    | "vertical"
-    | "vertical-left"
-    | "vertical-right"
-    | "inline";
+  mode: 'horizontal' | 'vertical' | 'vertical-left' | 'vertical-right' | 'inline';
 
   /**
    * delay time to show submenu when mouse enter, unit: second
@@ -89,7 +84,7 @@ export declare class Menu extends AntdComponent {
    * @default 'light'
    * @type string
    */
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
 
   /**
    * render submenu into DOM before it shows

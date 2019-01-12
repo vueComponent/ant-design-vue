@@ -23,4 +23,4 @@ export default {
   nextDecade: 'كېيىنكى يىللار',
   previousCentury: 'ئالدىنقى ئەسىر',
   nextCentury: 'كېيىنكى ئەسىر',
-}
+};

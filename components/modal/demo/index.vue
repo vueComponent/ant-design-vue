@@ -1,17 +1,17 @@
 <script>
-import Async from './async'
-import Basic from './basic'
-import ConfirmPromise from './confirm-promise'
-import Confirm from './confirm'
-import Footer from './footer'
-import Info from './info'
-import Locale from './locale'
-import Manual from './manual'
-import Position from './position'
-import ButtonProps from './button-props'
+import Async from './async';
+import Basic from './basic';
+import ConfirmPromise from './confirm-promise';
+import Confirm from './confirm';
+import Footer from './footer';
+import Info from './info';
+import Locale from './locale';
+import Manual from './manual';
+import Position from './position';
+import ButtonProps from './button-props';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Modal 对话框
           模态对话框。
@@ -29,7 +29,7 @@ Additionally, if you need show a simple confirmation dialog, you can use \`antd.
 and so on.
 ## Examples
 `,
-}
+};
 export default {
   type: 'Feedback',
   category: 'Components',
@@ -54,9 +54,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 
 <style>

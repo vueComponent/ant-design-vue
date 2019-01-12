@@ -1,27 +1,27 @@
 <script>
-import Ajax from './ajax.md'
-import Basic from './basic.md'
-import Bordered from './bordered.md'
-import ColspanRowspan from './colspan-rowspan.md'
-import CustomFilterPanel from './custom-filter-panel.md'
-import EditCell from './edit-cell.md'
-import EditRow from './edit-row.md'
-import ExpandChildren from './expand-children.md'
-import Expand from './expand.md'
-import FixedColumnsHeader from './fixed-columns-header.md'
-import FixedColumns from './fixed-columns.md'
-import FixedHeader from './fixed-header.md'
-import GroupingColumns from './grouping-columns.md'
-import Head from './head.md'
-import NestedTable from './nested-table.md'
-import ResetFilter from './reset-filter.md'
-import RowSelectionAndOperation from './row-selection-and-operation.md'
-import RowSelectionCustom from './row-selection-custom.md'
-import RowSelection from './row-selection.md'
-import Size from './size.md'
-import Template from './template.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Ajax from './ajax.md';
+import Basic from './basic.md';
+import Bordered from './bordered.md';
+import ColspanRowspan from './colspan-rowspan.md';
+import CustomFilterPanel from './custom-filter-panel.md';
+import EditCell from './edit-cell.md';
+import EditRow from './edit-row.md';
+import ExpandChildren from './expand-children.md';
+import Expand from './expand.md';
+import FixedColumnsHeader from './fixed-columns-header.md';
+import FixedColumns from './fixed-columns.md';
+import FixedHeader from './fixed-header.md';
+import GroupingColumns from './grouping-columns.md';
+import Head from './head.md';
+import NestedTable from './nested-table.md';
+import ResetFilter from './reset-filter.md';
+import RowSelectionAndOperation from './row-selection-and-operation.md';
+import RowSelectionCustom from './row-selection-custom.md';
+import RowSelection from './row-selection.md';
+import Size from './size.md';
+import Template from './template.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Table 表格
@@ -51,7 +51,7 @@ const md = {
 Specify \`dataSource\` of Table as an array of data.
 ## Examples
 `,
-}
+};
 export default {
   category: 'Components',
   cols: 1,
@@ -90,7 +90,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

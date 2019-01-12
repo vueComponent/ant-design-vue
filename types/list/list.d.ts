@@ -2,15 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { VNode } from "vue";
-import { Pagination } from "../pagination";
-import { ListItem } from "./list-item";
+import { AntdComponent } from '../component';
+import { VNode } from 'vue';
+import { Pagination } from '../pagination';
+import { ListItem } from './list-item';
 
-export declare type ColumnCount = "" | 1 | 2 | 3 | 4 | 6 | 8 | 12 | 24;
+export declare type ColumnCount = '' | 1 | 2 | 3 | 4 | 6 | 8 | 12 | 24;
 
 export declare class PaginationConfig extends Pagination {
-  position: "top" | "bottom" | "both";
+  position: 'top' | 'bottom' | 'both';
 }
 
 export class List extends AntdComponent {

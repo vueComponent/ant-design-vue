@@ -16,14 +16,14 @@ export declare class Avatar extends AntdComponent {
    * @default 'circle'
    * @type string
    */
-  shape: "circle" | "square";
+  shape: 'circle' | 'square';
 
   /**
    * the size of the avatar
    * @default 'default'
    * @type number | string
    */
-  size: "small" | "large" | "default" | number;
+  size: 'small' | 'large' | 'default' | number;
 
   /**
    * the address of the image for an image avatar

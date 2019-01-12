@@ -84,7 +84,7 @@ export declare class Upload extends AntdComponent {
    * @default 'text'
    * @type string
    */
-  listType: "text" | "picture" | "picture-card";
+  listType: 'text' | 'picture' | 'picture-card';
 
   /**
    * Whether to support selected multiple file. IE10+ supported.

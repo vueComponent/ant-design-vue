@@ -3,9 +3,9 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from "vue";
-import { TreeNode } from "./tree-node";
-import { Button } from "./button/button";
+import { VNode } from 'vue';
+import { TreeNode } from './tree-node';
+import { Button } from './button/button';
 
 export interface ModalOptions {
   /**
@@ -234,7 +234,7 @@ export declare class Modal extends AntdComponent {
    * @default 'primary'
    * @type string
    */
-  okType: "primary" | "danger" | "dashed" | "ghost" | "default";
+  okType: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
 
   /**
    * The ok button props, follow jsx rules
@@ -282,7 +282,7 @@ export declare class Modal extends AntdComponent {
   zIndex: number;
 }
 
-declare module "vue/types/vue" {
+declare module 'vue/types/vue' {
   interface Vue {
     $info: (modalOptios: ModalOptions) => ModalConfirm;
     $success: (modalOptios: ModalOptions) => ModalConfirm;

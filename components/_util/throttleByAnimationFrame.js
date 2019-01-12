@@ -1,45 +1,45 @@
-import raf from 'raf'
+import raf from 'raf';
 
-export default function throttleByAnimationFrame (fn) {
-  let requestId
+export default function throttleByAnimationFrame(fn) {
+  let requestId;
 
   const later = args => () => {
-    requestId = null
-    fn(...args)
-  }
+    requestId = null;
+    fn(...args);
+  };
 
   const throttled = (...args) => {
     if (requestId == null) {
-      requestId = raf(later(args))
+      requestId = raf(later(args));
     }
-  }
+  };
 
-  throttled.cancel = () => raf.cancel(requestId)
+  throttled.cancel = () => raf.cancel(requestId);
 
-  return throttled
+  return throttled;
 }
 
-export function throttleByAnimationFrameDecorator () {
-  return function (target, key, descriptor) {
-    const fn = descriptor.value
-    let definingProperty = false
+export function throttleByAnimationFrameDecorator() {
+  return function(target, key, descriptor) {
+    const fn = descriptor.value;
+    let definingProperty = false;
     return {
       configurable: true,
-      get () {
+      get() {
         if (definingProperty || this === target.prototype || this.hasOwnProperty(key)) {
-          return fn
+          return fn;
         }
 
-        const boundFn = throttleByAnimationFrame(fn.bind(this))
-        definingProperty = true
+        const boundFn = throttleByAnimationFrame(fn.bind(this));
+        definingProperty = true;
         Object.defineProperty(this, key, {
           value: boundFn,
           configurable: true,
           writable: true,
-        })
-        definingProperty = false
-        return boundFn
+        });
+        definingProperty = false;
+        return boundFn;
       },
-    }
-  }
+    };
+  };
 }

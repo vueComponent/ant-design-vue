@@ -1,8 +1,8 @@
-import createBaseForm from './createBaseForm'
+import createBaseForm from './createBaseForm';
 
 export const mixin = {
   methods: {
-    getForm () {
+    getForm() {
       return {
         getFieldsValue: this.fieldsStore.getFieldsValue,
         getFieldValue: this.fieldsStore.getFieldValue,
@@ -22,13 +22,13 @@ export const mixin = {
         submit: this.submit,
         validateFields: this.validateFields,
         resetFields: this.resetFields,
-      }
+      };
     },
   },
+};
+
+function createForm(options) {
+  return createBaseForm(options, [mixin]);
 }
 
-function createForm (options) {
-  return createBaseForm(options, [mixin])
-}
-
-export default createForm
+export default createForm;

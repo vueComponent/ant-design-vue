@@ -1,92 +1,99 @@
 /* eslint-disable no-console */
-import '../assets/index.less'
-import Notification from '../index'
-let notification = null
-Notification.newInstance({
-  maxCount: 10,
-}, (n) => { notification = n })
+import '../assets/index.less';
+import Notification from '../index';
+let notification = null;
+Notification.newInstance(
+  {
+    maxCount: 10,
+  },
+  n => {
+    notification = n;
+  },
+);
 
-function simpleFn () {
+function simpleFn() {
   notification.notice({
-    content: (h) => {
-      return <span>simple show</span>
+    content: h => {
+      return <span>simple show</span>;
     },
-    onClose () {
-      console.log('simple close')
+    onClose() {
+      console.log('simple close');
     },
-  })
+  });
 }
 
-function durationFn () {
+function durationFn() {
   notification.notice({
-    content: (h) => {
-      return <span>can not close...</span>
+    content: h => {
+      return <span>can not close...</span>;
     },
     duration: null,
-  })
+  });
 }
 
-function closableFn () {
+function closableFn() {
   notification.notice({
-    content: (h) => {
-      return <span>closable</span>
+    content: h => {
+      return <span>closable</span>;
     },
     duration: null,
-    onClose () {
-      console.log('closable close')
+    onClose() {
+      console.log('closable close');
     },
-    onClick () {
-      console.log('clicked!!!')
+    onClick() {
+      console.log('clicked!!!');
     },
     closable: true,
-  })
+  });
 }
 
-function close (key) {
-  notification.removeNotice(key)
+function close(key) {
+  notification.removeNotice(key);
 }
 
-function manualClose () {
-  const key = Date.now()
+function manualClose() {
+  const key = Date.now();
   notification.notice({
-    content: (h) => {
-      return <div>
-        <p>click below button to close</p>
-        <button onClick={close.bind(null, key)}>close</button>
-      </div>
+    content: h => {
+      return (
+        <div>
+          <p>click below button to close</p>
+          <button onClick={close.bind(null, key)}>close</button>
+        </div>
+      );
     },
     key,
     duration: null,
-  })
+  });
 }
 
-let counter = 0
-let intervalKey
-function updatableFn () {
+let counter = 0;
+let intervalKey;
+function updatableFn() {
   if (counter !== 0) {
-    return
+    return;
   }
 
-  const key = 'updatable-notification'
+  const key = 'updatable-notification';
   const initialProps = {
     content: `Timer: ${counter}s`,
     key,
     duration: null,
     closable: true,
-    onClose () {
-      clearInterval(intervalKey)
-      counter = 0
+    onClose() {
+      clearInterval(intervalKey);
+      counter = 0;
     },
-  }
+  };
 
-  notification.notice(initialProps)
+  notification.notice(initialProps);
   intervalKey = setInterval(() => {
-    notification.notice({ ...initialProps, content: `Timer: ${++counter}s` })
-  }, 1000)
+    notification.notice({ ...initialProps, content: `Timer: ${++counter}s` });
+  }, 1000);
 }
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <button onClick={simpleFn}>simple show</button>
@@ -95,6 +102,6 @@ export default {
         <button onClick={manualClose}>controlled close</button>
         <button onClick={updatableFn}>updatable</button>
       </div>
-    )
+    );
   },
-}
+};

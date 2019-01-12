@@ -1,10 +1,10 @@
-import PropTypes from '../_util/vue-types'
-import BaseMixin from '../_util/BaseMixin'
-import { getOptionProps } from '../_util/props-util'
-import VcSlider from '../vc-slider/src/Slider'
-import VcRange from '../vc-slider/src/Range'
-import VcHandle from '../vc-slider/src/Handle'
-import Tooltip from '../tooltip'
+import PropTypes from '../_util/vue-types';
+import BaseMixin from '../_util/BaseMixin';
+import { getOptionProps } from '../_util/props-util';
+import VcSlider from '../vc-slider/src/Slider';
+import VcRange from '../vc-slider/src/Range';
+import VcHandle from '../vc-slider/src/Handle';
+import Tooltip from '../tooltip';
 
 // export interface SliderMarks {
 //   [key]: React.ReactNode | {
@@ -26,23 +26,14 @@ export const SliderProps = () => ({
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.any]),
   marks: PropTypes.object,
   dots: PropTypes.bool,
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number),
-  ]),
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number),
-  ]),
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
   included: PropTypes.bool,
   disabled: PropTypes.bool,
   vertical: PropTypes.bool,
-  tipFormatter: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-  ]),
+  tipFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   tooltipVisible: PropTypes.bool,
-})
+});
 
 const Slider = {
   name: 'ASlider',
@@ -55,30 +46,29 @@ const Slider = {
     ...SliderProps(),
     prefixCls: PropTypes.string.def('ant-slider'),
     tooltipPrefixCls: PropTypes.string.def('ant-tooltip'),
-    tipFormatter: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.object,
-    ]).def(value => value.toString()),
+    tipFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).def(value =>
+      value.toString(),
+    ),
   },
-  data () {
+  data() {
     return {
       visibles: {},
-    }
+    };
   },
   methods: {
-    toggleTooltipVisible (index, visible) {
+    toggleTooltipVisible(index, visible) {
       this.setState(({ visibles }) => ({
         visibles: {
           ...visibles,
           [index]: visible,
         },
-      }))
+      }));
     },
-    handleWithTooltip ({ value, dragging, index, directives, on, ...restProps }) {
-      const { tooltipPrefixCls, tipFormatter, tooltipVisible } = this.$props
-      const { visibles } = this
-      const isTipFormatter = tipFormatter ? visibles[index] || dragging : false
-      const visible = tooltipVisible || (tooltipVisible === undefined && isTipFormatter)
+    handleWithTooltip({ value, dragging, index, directives, on, ...restProps }) {
+      const { tooltipPrefixCls, tipFormatter, tooltipVisible } = this.$props;
+      const { visibles } = this;
+      const isTipFormatter = tipFormatter ? visibles[index] || dragging : false;
+      const visible = tooltipVisible || (tooltipVisible === undefined && isTipFormatter);
       const tooltipProps = {
         props: {
           prefixCls: tooltipPrefixCls,
@@ -88,7 +78,7 @@ const Slider = {
           transitionName: 'fade',
         },
         key: index,
-      }
+      };
       const handleProps = {
         props: {
           value,
@@ -100,26 +90,22 @@ const Slider = {
           mouseenter: () => this.toggleTooltipVisible(index, true),
           mouseleave: () => this.toggleTooltipVisible(index, false),
         },
-      }
+      };
       return (
-        <Tooltip
-          {...tooltipProps}
-        >
-          <VcHandle
-            {...handleProps}
-          />
+        <Tooltip {...tooltipProps}>
+          <VcHandle {...handleProps} />
         </Tooltip>
-      )
+      );
     },
-    focus () {
-      this.$refs.sliderRef.focus()
+    focus() {
+      this.$refs.sliderRef.focus();
     },
-    blur () {
-      this.$refs.sliderRef.blur()
+    blur() {
+      this.$refs.sliderRef.blur();
     },
   },
-  render () {
-    const { range, ...restProps } = getOptionProps(this)
+  render() {
+    const { range, ...restProps } = getOptionProps(this);
     if (range) {
       const vcRangeProps = {
         props: {
@@ -128,8 +114,8 @@ const Slider = {
         },
         ref: 'sliderRef',
         on: this.$listeners,
-      }
-      return <VcRange {...vcRangeProps} />
+      };
+      return <VcRange {...vcRangeProps} />;
     }
     const vcSliderProps = {
       props: {
@@ -138,14 +124,14 @@ const Slider = {
       },
       ref: 'sliderRef',
       on: this.$listeners,
-    }
-    return <VcSlider {...vcSliderProps} />
+    };
+    return <VcSlider {...vcSliderProps} />;
   },
-}
+};
 
 /* istanbul ignore next */
-Slider.install = function (Vue) {
-  Vue.component(Slider.name, Slider)
-}
+Slider.install = function(Vue) {
+  Vue.component(Slider.name, Slider);
+};
 
-export default Slider
+export default Slider;

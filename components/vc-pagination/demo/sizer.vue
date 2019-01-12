@@ -1,19 +1,19 @@
 <script>
-import VcPagination from '../index'
-import VcSelect from '../../vc-select'
-import '../assets/index.less'
-import '../../vc-select/assets/index.less'
+import VcPagination from '../index';
+import VcSelect from '../../vc-select';
+import '../assets/index.less';
+import '../../vc-select/assets/index.less';
 
 export default {
   data () {
     return {
       pageSize: 20,
-    }
+    };
   },
   methods: {
     onShowSizeChange (current, pageSize) {
-      console.log(current)
-      this.pageSize = pageSize
+      console.log(current);
+      this.pageSize = pageSize;
     },
   },
   render () {
@@ -36,7 +36,7 @@ export default {
           total={500}
         />
       </div>
-    )
+    );
   },
-}
+};
 </script>

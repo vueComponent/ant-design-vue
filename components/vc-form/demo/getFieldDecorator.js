@@ -1,55 +1,51 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import { createForm } from '../index'
+import { createForm } from '../index';
 
 const Form = {
   props: {
     form: Object,
   },
 
-  beforeMount () {
+  beforeMount() {
     this.nameDecorator = this.form.getFieldDecorator('name', {
       initialValue: '',
-      rules: [{
-        required: true,
-        message: 'What\'s your name?',
-      }],
-    })
+      rules: [
+        {
+          required: true,
+          message: "What's your name?",
+        },
+      ],
+    });
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
+    onSubmit(e) {
+      e.preventDefault();
       this.form.validateFields((error, values) => {
         if (!error) {
-          console.log('ok', values)
+          console.log('ok', values);
         } else {
-          console.log('error', error, values)
+          console.log('error', error, values);
         }
-      })
+      });
     },
 
-    onChange (e) {
-      console.log(e.target.value)
+    onChange(e) {
+      console.log(e.target.value);
     },
   },
 
-  render () {
-    const { getFieldError } = this.form
+  render() {
+    const { getFieldError } = this.form;
 
     return (
       <form onSubmit={this.onSubmit}>
-        {this.nameDecorator(
-          <input
-            onInput={this.onChange}
-          />
-        )}
-        <div style={{ color: 'red' }}>
-          {(getFieldError('name') || []).join(', ')}
-        </div>
+        {this.nameDecorator(<input onInput={this.onChange} />)}
+        <div style={{ color: 'red' }}>{(getFieldError('name') || []).join(', ')}</div>
         <button>Submit</button>
       </form>
-    )
+    );
   },
-}
+};
 
-export default createForm()(Form)
+export default createForm()(Form);

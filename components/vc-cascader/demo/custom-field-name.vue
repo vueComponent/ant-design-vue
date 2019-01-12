@@ -1,7 +1,7 @@
 <script>
 /* eslint-disable no-console */
-import '../assets/index.less'
-import Cascader from '../index'
+import '../assets/index.less';
+import Cascader from '../index';
 
 const addressOptions = [{
   name: '福建',
@@ -39,18 +39,18 @@ const addressOptions = [{
     code: 'haidian',
     disabled: true,
   }],
-}]
+}];
 
 export default {
   data () {
     return {
       inputValue: '',
-    }
+    };
   },
   methods: {
     onChange (value, selectedOptions) {
-      console.log(value, selectedOptions)
-      this.inputValue = selectedOptions.map(o => o.name).join(', ')
+      console.log(value, selectedOptions);
+      this.inputValue = selectedOptions.map(o => o.name).join(', ');
     },
   },
 
@@ -66,8 +66,8 @@ export default {
           value={this.inputValue}
         />
       </Cascader>
-    )
+    );
   },
-}
+};
 
 </script>

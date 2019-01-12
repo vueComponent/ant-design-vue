@@ -1,24 +1,24 @@
-let animation
+let animation;
 
-function isCssAnimationSupported () {
+function isCssAnimationSupported() {
   if (animation !== undefined) {
-    return animation
+    return animation;
   }
-  const domPrefixes = 'Webkit Moz O ms Khtml'.split(' ')
-  const elm = document.createElement('div')
+  const domPrefixes = 'Webkit Moz O ms Khtml'.split(' ');
+  const elm = document.createElement('div');
   if (elm.style.animationName !== undefined) {
-    animation = true
+    animation = true;
   }
   if (animation !== undefined) {
     for (let i = 0; i < domPrefixes.length; i++) {
       if (elm.style[`${domPrefixes[i]}AnimationName`] !== undefined) {
-        animation = true
-        break
+        animation = true;
+        break;
       }
     }
   }
-  animation = animation || false
-  return animation
+  animation = animation || false;
+  return animation;
 }
 
-export default isCssAnimationSupported
+export default isCssAnimationSupported;

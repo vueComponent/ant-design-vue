@@ -1,11 +1,11 @@
 <script>
-  import Basic from './basic.md'
-  import WithIcon from './withIcon.md'
-  import Separator from './separator.md'
-  import Router from './router'
+  import Basic from './basic.md';
+  import WithIcon from './withIcon.md';
+  import Separator from './separator.md';
+  import Router from './router';
 
-  import US from './../index.en-US.md'
-  import CN from './../index.zh-CN.md'
+  import US from './../index.en-US.md';
+  import CN from './../index.zh-CN.md';
 
   const md = {
     cn: `# Breadcrumb面包屑
@@ -25,7 +25,7 @@
          - When the application has multi-layer architecture.
          ## Examples
         `,
-  }
+  };
 
   export default {
     category: 'Components',
@@ -46,7 +46,7 @@
             <US />
           </api>
         </div>
-      )
+      );
     },
-  }
+  };
 </script>

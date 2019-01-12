@@ -1,4 +1,3 @@
-
 export default {
   name: 'MenuDivider',
   props: {
@@ -8,9 +7,8 @@ export default {
     },
     rootPrefixCls: String,
   },
-  render () {
-    const { rootPrefixCls } = this.$props
-    return <li class={`${rootPrefixCls}-item-divider`}/>
+  render() {
+    const { rootPrefixCls } = this.$props;
+    return <li class={`${rootPrefixCls}-item-divider`} />;
   },
-}
-
+};

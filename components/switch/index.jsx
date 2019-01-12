@@ -1,9 +1,8 @@
-
-import PropTypes from '../_util/vue-types'
-import { getOptionProps, getComponentFromProp } from '../_util/props-util'
-import VcSwitch from '../vc-switch'
-import Wave from '../_util/wave'
-import Icon from '../icon'
+import PropTypes from '../_util/vue-types';
+import { getOptionProps, getComponentFromProp } from '../_util/props-util';
+import VcSwitch from '../vc-switch';
+import Wave from '../_util/wave';
+import Icon from '../icon';
 
 const Switch = {
   name: 'ASwitch',
@@ -25,26 +24,23 @@ const Switch = {
     loading: PropTypes.bool,
   },
   methods: {
-    focus () {
-      this.$refs.refSwitchNode.focus()
+    focus() {
+      this.$refs.refSwitchNode.focus();
     },
-    blur () {
-      this.$refs.refSwitchNode.blur()
+    blur() {
+      this.$refs.refSwitchNode.blur();
     },
   },
 
-  render () {
-    const { prefixCls, size, loading, disabled, ...restProps } = getOptionProps(this)
+  render() {
+    const { prefixCls, size, loading, disabled, ...restProps } = getOptionProps(this);
     const classes = {
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
-    }
+    };
     const loadingIcon = loading ? (
-      <Icon
-        type='loading'
-        class={`${prefixCls}-loading-icon`}
-      />
-    ) : null
+      <Icon type="loading" class={`${prefixCls}-loading-icon`} />
+    ) : null;
     const switchProps = {
       props: {
         ...restProps,
@@ -57,20 +53,18 @@ const Switch = {
       on: this.$listeners,
       class: classes,
       ref: 'refSwitchNode',
-    }
+    };
     return (
       <Wave insertExtraNode>
-        <VcSwitch
-          {...switchProps}
-        />
+        <VcSwitch {...switchProps} />
       </Wave>
-    )
+    );
   },
-}
+};
 
 /* istanbul ignore next */
-Switch.install = function (Vue) {
-  Vue.component(Switch.name, Switch)
-}
+Switch.install = function(Vue) {
+  Vue.component(Switch.name, Switch);
+};
 
-export default Switch
+export default Switch;

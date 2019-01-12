@@ -1,11 +1,11 @@
 <script>
 /* eslint no-console:0 */
-import Tree, { TreeNode } from '../index'
-import '../assets/index.less'
-import { gData, getRadioSelectKeys } from './util'
-import '../../vc-dialog/assets/index.less'
-import Modal from '../../vc-dialog'
-import BaseMixin from '../../_util/BaseMixin'
+import Tree, { TreeNode } from '../index';
+import '../assets/index.less';
+import { gData, getRadioSelectKeys } from './util';
+import '../../vc-dialog/assets/index.less';
+import Modal from '../../vc-dialog';
+import BaseMixin from '../../_util/BaseMixin';
 
 export default {
   mixins: [BaseMixin],
@@ -21,80 +21,80 @@ export default {
       treeData: [],
       visible: false,
       multiple: true,
-    }
+    };
   },
   methods: {
     onExpand (expandedKeys) {
-      console.log('onExpand', arguments)
+      console.log('onExpand', arguments);
       // if not set autoExpandParent to false, if children expanded, parent can not collapse.
       // or, you can remove all expanded chilren keys.
       this.setState({
         expandedKeys,
         autoExpandParent: false,
-      })
+      });
     },
     onCheck (checkedKeys) {
       this.setState({
         checkedKeys,
-      })
+      });
     },
     onCheckStrictly (checkedKeys, /* extra*/) {
-      console.log(arguments)
+      console.log(arguments);
       // const { checkedNodesPositions } = extra;
       // const pps = filterParentPosition(checkedNodesPositions.map(i => i.pos));
       // console.log(checkedNodesPositions.filter(i => pps.indexOf(i.pos) > -1).map(i => i.node.key));
       const cks = {
         checked: checkedKeys.checked || checkedKeys,
         halfChecked: [`0-0-${parseInt(Math.random() * 3, 10)}-key`],
-      }
+      };
       this.setState({
       // checkedKeys,
         checkStrictlyKeys: cks,
       // checkStrictlyKeys: checkedKeys,
-      })
+      });
     },
     onSelect (selectedKeys, info) {
-      console.log('onSelect', selectedKeys, info)
+      console.log('onSelect', selectedKeys, info);
       this.setState({
         selectedKeys,
-      })
+      });
     },
     onRbSelect (selectedKeys, info) {
-      let _selectedKeys = selectedKeys
+      let _selectedKeys = selectedKeys;
       if (info.selected) {
-        _selectedKeys = getRadioSelectKeys(gData, selectedKeys, info.node.eventKey)
+        _selectedKeys = getRadioSelectKeys(gData, selectedKeys, info.node.eventKey);
       }
       this.setState({
         selectedKeys: _selectedKeys,
-      })
+      });
     },
     onClose () {
       this.setState({
         visible: false,
-      })
+      });
     },
     handleOk () {
       this.setState({
         visible: false,
-      })
+      });
     },
     showModal () {
       this.setState({
         expandedKeys: ['0-0-0-key', '0-0-1-key'],
         checkedKeys: ['0-0-0-key'],
         visible: true,
-      })
+      });
       // simulate Ajax
       setTimeout(() => {
         this.setState({
           treeData: [...gData],
-        })
-      }, 2000)
+        });
+      }, 2000);
     },
     triggerChecked () {
       this.setState({
         checkedKeys: [`0-0-${parseInt(Math.random() * 3, 10)}-key`],
-      })
+      });
     },
   },
 
@@ -109,11 +109,11 @@ export default {
             >
               {loop(item.children)}
             </TreeNode>
-          )
+          );
         }
-        return <TreeNode key={item.key} title={item.title} />
-      })
-    }
+        return <TreeNode key={item.key} title={item.title} />;
+      });
+    };
     // console.log(getRadioSelectKeys(gData, this.selectedKeys));
     return (<div style={{ padding: '0 20px' }}>
       <h2>dialog</h2>
@@ -165,8 +165,8 @@ export default {
       >
         {loop(gData)}
       </Tree>
-    </div>)
+    </div>);
   },
-}
+};
 
 </script>

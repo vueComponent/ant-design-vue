@@ -1,5 +1,4 @@
-
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 
 export default {
   name: 'ATableColumnGroup',
@@ -7,4 +6,4 @@ export default {
     title: PropTypes.any,
   },
   __ANT_TABLE_COLUMN_GROUP: true,
-}
+};

@@ -1,6 +1,6 @@
 /* eslint-disable no-console,func-names,react/no-multi-comp */
-import Table from '../index'
-import '../assets/index.less'
+import Table from '../index';
+import '../assets/index.less';
 
 const columns = [
   { title: 'title1', dataIndex: 'a', key: 'a', width: 100 },
@@ -15,23 +15,22 @@ const columns = [
   { title: 'title10', dataIndex: 'b', key: 'j', width: 100 },
   { title: 'title11', dataIndex: 'b', key: 'k', width: 100 },
   { title: 'title12', dataIndex: 'b', key: 'l', width: 100 },
-]
+];
 
 const data = [
   { a: '123', b: 'xxxxxxxx xxxxxxxx', d: 3, key: '1' },
   { a: 'cdd', b: 'edd12221 edd12221', d: 3, key: '2' },
   { a: '133', c: 'edd12221 edd12221', d: 2, key: '3' },
   { a: '133', c: 'edd12221 edd12221', d: 2, key: '4' },
-]
+];
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <h2>Scroll X</h2>
         <Table style={{ width: '800px' }} scroll={{ x: true }} columns={columns} data={data} />
       </div>
-    )
+    );
   },
-}
-
+};

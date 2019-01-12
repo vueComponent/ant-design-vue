@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         centerMode: true,
@@ -12,7 +12,7 @@ export default {
         speed: 500,
       },
       class: 'center',
-    }
+    };
     return (
       <div>
         <h2>Center Mode</h2>
@@ -37,6 +37,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

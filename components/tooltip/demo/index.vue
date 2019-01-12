@@ -1,10 +1,10 @@
 <script>
-import Basic from './basic.md'
-import ArrowPointAtCenter from './arrow-point-at-center.md'
-import AutoAdjustOverflow from './auto-adjust-overflow.md'
-import Placement from './placement.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import ArrowPointAtCenter from './arrow-point-at-center.md';
+import AutoAdjustOverflow from './auto-adjust-overflow.md';
+import Placement from './placement.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Tooltip
@@ -27,7 +27,7 @@ const md = {
   - To provide an explanation of a 'button/text/operation'. It's often used instead of the html 'title' attribute.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '文字提示',
@@ -53,7 +53,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,10 +1,10 @@
 export default {
   methods: {
-    setState (state, callback) {
-      Object.assign(this.$data, state)
+    setState(state, callback) {
+      Object.assign(this.$data, state);
       this.$nextTick(() => {
-        callback && callback()
-      })
+        callback && callback();
+      });
     },
   },
-}
+};

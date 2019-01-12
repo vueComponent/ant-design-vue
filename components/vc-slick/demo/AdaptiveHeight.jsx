@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       class: '',
       props: {
@@ -12,7 +12,7 @@ export default {
         slidesToScroll: 1,
         adaptiveHeight: true,
       },
-    }
+    };
     return (
       <div>
         <h2>Adaptive height</h2>
@@ -40,6 +40,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

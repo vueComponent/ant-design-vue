@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/hu_HU'
-import DatePicker from '../date-picker/locale/hu_HU'
-import TimePicker from '../time-picker/locale/hu_HU'
-import Calendar from '../calendar/locale/hu_HU'
+import Pagination from '../vc-pagination/locale/hu_HU';
+import DatePicker from '../date-picker/locale/hu_HU';
+import TimePicker from '../time-picker/locale/hu_HU';
+import Calendar from '../calendar/locale/hu_HU';
 
 export default {
   locale: 'hu',
@@ -42,4 +42,4 @@ export default {
     uploadError: 'Feltöltési hiba',
     previewFile: 'Fájl előnézet',
   },
-}
+};

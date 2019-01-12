@@ -1,11 +1,11 @@
 <script>
-import Basic from './basic.md'
-import Local from './local.md'
-import Placement from './placement.md'
-import DynamicTrigger from './dynamic-trigger.md'
-import Icon from './icon.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic.md';
+import Local from './local.md';
+import Placement from './placement.md';
+import DynamicTrigger from './dynamic-trigger.md';
+import Icon from './icon.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Popconfirm
@@ -29,7 +29,7 @@ const md = {
   The difference with the 'confirm' modal dialog is that it's more lightweight than the static popped full-screen confirm modal.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '气泡确认框',
@@ -51,7 +51,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

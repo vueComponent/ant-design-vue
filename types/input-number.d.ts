@@ -68,7 +68,7 @@ export declare class InputNumber extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "large" | "small" | "default";
+  size: 'large' | 'small' | 'default';
 
   /**
    * The number to which the current value is increased or decreased. It can be an integer or decimal.

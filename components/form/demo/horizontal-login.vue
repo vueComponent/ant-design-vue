@@ -54,42 +54,42 @@ Horizontal login form is often used in navigation bar.
 
 <script>
 function hasErrors (fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field])
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 export default {
   data () {
     return {
       hasErrors,
       form: this.$form.createForm(this),
-    }
+    };
   },
   mounted () {
     this.$nextTick(() => {
       // To disabled submit button at the beginning.
-      this.form.validateFields()
-    })
+      this.form.validateFields();
+    });
   },
   methods: {
     // Only show error after a field is touched.
     userNameError () {
-      const { getFieldError, isFieldTouched } = this.form
-      return isFieldTouched('userName') && getFieldError('userName')
+      const { getFieldError, isFieldTouched } = this.form;
+      return isFieldTouched('userName') && getFieldError('userName');
     },
     // Only show error after a field is touched.
     passwordError () {
-      const { getFieldError, isFieldTouched } = this.form
-      return isFieldTouched('password') && getFieldError('password')
+      const { getFieldError, isFieldTouched } = this.form;
+      return isFieldTouched('password') && getFieldError('password');
     },
     handleSubmit  (e) {
-      e.preventDefault()
+      e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', values);
         }
-      })
+      });
     },
   },
-}
+};
 </script>
 
 

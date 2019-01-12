@@ -1,19 +1,19 @@
 <script>
-import Basic from './basic'
-import ChangeOnSelect from './change-on-select'
-import CustomRender from './custom-render'
-import CustomTrigger from './custom-trigger'
-import DefaultValue from './default-value'
-import DisabledOption from './disabled-option'
-import Hover from './hover'
-import Lazy from './lazy'
-import Search from './search'
-import Size from './size'
-import FieldsName from './fields-name'
-import Suffix from './suffix'
+import Basic from './basic';
+import ChangeOnSelect from './change-on-select';
+import CustomRender from './custom-render';
+import CustomTrigger from './custom-trigger';
+import DefaultValue from './default-value';
+import DisabledOption from './disabled-option';
+import Hover from './hover';
+import Lazy from './lazy';
+import Search from './search';
+import Size from './size';
+import FieldsName from './fields-name';
+import Suffix from './suffix';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Cascader 级联选择
           级联选择框。
@@ -30,7 +30,7 @@ const md = {
 - Chooses cascade items in one float layer for better user experience.
 ## Examples
           `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Entry',
@@ -58,9 +58,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 #components-cascader-demo .ant-cascader-picker {

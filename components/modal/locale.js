@@ -1,4 +1,4 @@
-import defaultLocale from '../locale-provider/default'
+import defaultLocale from '../locale-provider/default';
 
 // export interface ModalLocale {
 //   okText: string;
@@ -8,21 +8,21 @@ import defaultLocale from '../locale-provider/default'
 
 let runtimeLocale = {
   ...defaultLocale.Modal,
-}
+};
 
-export function changeConfirmLocale (newLocale) {
+export function changeConfirmLocale(newLocale) {
   if (newLocale) {
     runtimeLocale = {
       ...runtimeLocale,
       ...newLocale,
-    }
+    };
   } else {
     runtimeLocale = {
       ...defaultLocale.Modal,
-    }
+    };
   }
 }
 
-export function getConfirmLocale () {
-  return runtimeLocale
+export function getConfirmLocale() {
+  return runtimeLocale;
 }

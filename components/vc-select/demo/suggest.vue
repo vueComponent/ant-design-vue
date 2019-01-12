@@ -1,45 +1,45 @@
 <script>
-import Select, { Option } from '../index'
-import '../assets/index.less'
-import { fetch } from './tbFetchSuggest'
+import Select, { Option } from '../index';
+import '../assets/index.less';
+import { fetch } from './tbFetchSuggest';
 export default {
   data () {
     return {
       data: [],
       value: [],
-    }
+    };
   },
   methods: {
     onKeyDown (e) {
       if (e.keyCode === 13) {
-        console.log('onEnter', this.value)
-        this.jump(this.value)
+        console.log('onEnter', this.value);
+        this.jump(this.value);
       }
     },
 
     onSelect (value) {
-      console.log('select ', value)
-      this.jump(value)
+      console.log('select ', value);
+      this.jump(value);
     },
 
     jump (v) {
-      console.log('jump ', v)
+      console.log('jump ', v);
     // location.href = 'https://s.taobao.com/search?q=' + encodeURIComponent(v);
     },
 
     fetchData (value) {
-      this.value = value
+      this.value = value;
       fetch(value, (data) => {
-        this.data = data
-      })
+        this.data = data;
+      });
     },
   },
 
   render (h) {
-    const data = this.data
+    const data = this.data;
     const options = data.map((d) => {
-      return <Option key={d.value}>{d.text}</Option>
-    })
+      return <Option key={d.value}>{d.text}</Option>;
+    });
     return (<div>
       <h2>suggest</h2>
 
@@ -60,7 +60,7 @@ export default {
           {options}
         </Select>
       </div>
-    </div>)
+    </div>);
   },
-}
+};
 </script>

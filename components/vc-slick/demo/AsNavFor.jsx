@@ -1,28 +1,25 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  data () {
+  data() {
     return {
       nav1: null,
       nav2: null,
-    }
+    };
   },
 
-  mounted () {
-    this.nav1 = this.$refs.slider1
-    this.nav2 = this.$refs.slider2
+  mounted() {
+    this.nav1 = this.$refs.slider1;
+    this.nav2 = this.$refs.slider2;
   },
 
-  render () {
+  render() {
     return (
       <div>
         <h2>Slider Syncing (AsNavFor)</h2>
         <h4>First Slider</h4>
-        <Slider
-          asNavFor={this.nav2}
-          ref='slider1'
-        >
+        <Slider asNavFor={this.nav2} ref="slider1">
           <div>
             <h3>1</h3>
           </div>
@@ -45,7 +42,7 @@ export default {
         <h4>Second Slider</h4>
         <Slider
           asNavFor={this.nav1}
-          ref='slider2'
+          ref="slider2"
           slidesToShow={3}
           swipeToSlide={true}
           focusOnSelect={true}
@@ -70,6 +67,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

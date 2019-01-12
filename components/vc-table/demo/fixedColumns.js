@@ -1,6 +1,6 @@
 /* eslint-disable no-console,func-names,react/no-multi-comp */
-import Table from '../index'
-import '../assets/index.less'
+import Table from '../index';
+import '../assets/index.less';
 
 const data = [
   { a: '123', b: 'xxxxxxxx', d: 3, key: '1' },
@@ -12,9 +12,9 @@ const data = [
   { a: '133', c: 'edd12221', d: 2, key: '7' },
   { a: '133', c: 'edd12221', d: 2, key: '8' },
   { a: '133', c: 'edd12221', d: 2, key: '9' },
-]
+];
 export default {
-  data () {
+  data() {
     this.columns = [
       { title: 'title1', dataIndex: 'a', key: 'a', width: '100px', fixed: 'left' },
       { title: 'title2', dataIndex: 'b', key: 'b', width: '100px', fixed: 'left' },
@@ -22,16 +22,28 @@ export default {
       { title: 'title4', dataIndex: 'b', key: 'd' },
       { title: 'title5', dataIndex: 'b', key: 'e' },
       { title: 'title6', dataIndex: 'b', key: 'f' },
-      { title: <div>title7<br /><br /><br />Hello world!</div>, dataIndex: 'b', key: 'g' },
+      {
+        title: (
+          <div>
+            title7
+            <br />
+            <br />
+            <br />
+            Hello world!
+          </div>
+        ),
+        dataIndex: 'b',
+        key: 'g',
+      },
       { title: 'title8', dataIndex: 'b', key: 'h' },
       { title: 'title9', dataIndex: 'b', key: 'i' },
       { title: 'title10', dataIndex: 'b', key: 'j' },
       { title: 'title11', dataIndex: 'b', key: 'k' },
       { title: 'title12', dataIndex: 'b', key: 'l', width: '100px', fixed: 'right' },
-    ]
-    return {}
+    ];
+    return {};
   },
-  render () {
+  render() {
     return (
       <div style={{ width: '800px' }}>
         <h2>Fixed columns</h2>
@@ -43,6 +55,6 @@ export default {
           data={data}
         />
       </div>
-    )
+    );
   },
-}
+};

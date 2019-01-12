@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         focusOnSelect: true,
@@ -11,7 +11,7 @@ export default {
         slidesToScroll: 1,
         speed: 500,
       },
-    }
+    };
     return (
       <div>
         <h2>FocusOnSelect</h2>
@@ -37,6 +37,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

@@ -1,16 +1,16 @@
-import Wave from '../_util/wave'
-import Icon from '../icon'
-const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/
-const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
-import buttonTypes from './buttonTypes'
-import { filterEmpty } from '../_util/props-util'
-const props = buttonTypes()
+import Wave from '../_util/wave';
+import Icon from '../icon';
+const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
+const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
+import buttonTypes from './buttonTypes';
+import { filterEmpty } from '../_util/props-util';
+const props = buttonTypes();
 export default {
   inheritAttrs: false,
   name: 'AButton',
   __ANT_BUTTON: true,
   props,
-  data () {
+  data() {
     return {
       sizeMap: {
         large: 'lg',
@@ -19,38 +19,51 @@ export default {
       // clicked: false,
       sLoading: !!this.loading,
       hasTwoCNChar: false,
-    }
+    };
   },
-  mounted () {
-    this.fixTwoCNChar()
+  mounted() {
+    this.fixTwoCNChar();
   },
-  updated () {
-    this.fixTwoCNChar()
+  updated() {
+    this.fixTwoCNChar();
   },
-  beforeDestroy () {
+  beforeDestroy() {
     // if (this.timeout) {
     //   clearTimeout(this.timeout)
     // }
     if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout)
+      clearTimeout(this.delayTimeout);
     }
   },
   watch: {
-    loading (val) {
-      clearTimeout(this.delayTimeout)
+    loading(val) {
+      clearTimeout(this.delayTimeout);
       if (typeof val !== 'boolean' && val && val.delay) {
-        this.delayTimeout = setTimeout(() => { this.sLoading = !!val }, val.delay)
+        this.delayTimeout = setTimeout(() => {
+          this.sLoading = !!val;
+        }, val.delay);
       } else {
-        this.sLoading = !!val
+        this.sLoading = !!val;
       }
     },
   },
   computed: {
-    classes () {
-      const { prefixCls, type, shape, size, hasTwoCNChar,
-        sLoading, ghost, block, sizeMap, icon, $slots } = this
-      const sizeCls = sizeMap[size] || ''
-      const children = filterEmpty($slots.default)
+    classes() {
+      const {
+        prefixCls,
+        type,
+        shape,
+        size,
+        hasTwoCNChar,
+        sLoading,
+        ghost,
+        block,
+        sizeMap,
+        icon,
+        $slots,
+      } = this;
+      const sizeCls = sizeMap[size] || '';
+      const children = filterEmpty($slots.default);
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
@@ -61,52 +74,60 @@ export default {
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar,
         [`${prefixCls}-block`]: block,
-      }
+      };
     },
   },
   methods: {
-    fixTwoCNChar () {
+    fixTwoCNChar() {
       // Fix for HOC usage like <FormatMessage />
-      const node = this.$refs.buttonNode
+      const node = this.$refs.buttonNode;
       if (!node) {
-        return
+        return;
       }
-      const buttonText = node.textContent || node.innerText
+      const buttonText = node.textContent || node.innerText;
       if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
         if (!this.hasTwoCNChar) {
-          this.hasTwoCNChar = true
+          this.hasTwoCNChar = true;
         }
       } else if (this.hasTwoCNChar) {
-        this.hasTwoCNChar = false
+        this.hasTwoCNChar = false;
       }
     },
-    handleClick (event) {
-      const { sLoading } = this.$data
+    handleClick(event) {
+      const { sLoading } = this.$data;
       if (sLoading) {
-        return
+        return;
       }
-      this.$emit('click', event)
+      this.$emit('click', event);
     },
-    insertSpace (child, needInserted) {
-      const SPACE = needInserted ? ' ' : ''
+    insertSpace(child, needInserted) {
+      const SPACE = needInserted ? ' ' : '';
       if (typeof child.text === 'string') {
-        let text = child.text.trim()
+        let text = child.text.trim();
         if (isTwoCNChar(text)) {
-          text = text.split('').join(SPACE)
+          text = text.split('').join(SPACE);
         }
-        return <span>{text}</span>
+        return <span>{text}</span>;
       }
-      return child
+      return child;
     },
-    isNeedInserted () {
-      const { icon, $slots } = this
-      return $slots.default && $slots.default.length === 1 && !icon
+    isNeedInserted() {
+      const { icon, $slots } = this;
+      return $slots.default && $slots.default.length === 1 && !icon;
     },
   },
-  render () {
-    const { htmlType, classes, icon,
-      disabled, handleClick,
-      sLoading, $slots, $attrs, $listeners } = this
+  render() {
+    const {
+      htmlType,
+      classes,
+      icon,
+      disabled,
+      handleClick,
+      sLoading,
+      $slots,
+      $attrs,
+      $listeners,
+    } = this;
     const buttonProps = {
       attrs: {
         ...$attrs,
@@ -117,27 +138,28 @@ export default {
         ...$listeners,
         click: handleClick,
       },
-    }
-    const iconType = sLoading ? 'loading' : icon
-    const iconNode = iconType ? <Icon type={iconType} /> : null
-    const children = filterEmpty($slots.default)
-    const kids = children.map(child => this.insertSpace(child, this.isNeedInserted()))
+    };
+    const iconType = sLoading ? 'loading' : icon;
+    const iconNode = iconType ? <Icon type={iconType} /> : null;
+    const children = filterEmpty($slots.default);
+    const kids = children.map(child => this.insertSpace(child, this.isNeedInserted()));
 
     if ($attrs.href !== undefined) {
       return (
-        <a {...buttonProps} ref='buttonNode'>
-          {iconNode}{kids}
+        <a {...buttonProps} ref="buttonNode">
+          {iconNode}
+          {kids}
         </a>
-      )
+      );
     } else {
       return (
         <Wave>
-          <button {...buttonProps} ref='buttonNode' type={htmlType || 'button'}>
-            {iconNode}{kids}
+          <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
+            {iconNode}
+            {kids}
           </button>
         </Wave>
-      )
+      );
     }
   },
-}
-
+};

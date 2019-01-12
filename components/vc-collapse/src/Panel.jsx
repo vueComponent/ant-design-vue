@@ -1,8 +1,7 @@
-
-import PanelContent from './PanelContent'
-import { initDefaultProps, getComponentFromProp } from '../../_util/props-util'
-import { cloneElement } from '../../_util/vnode'
-import { panelProps } from './commonProps'
+import PanelContent from './PanelContent';
+import { initDefaultProps, getComponentFromProp } from '../../_util/props-util';
+import { cloneElement } from '../../_util/vnode';
+import { panelProps } from './commonProps';
 
 export default {
   name: 'Panel',
@@ -14,16 +13,16 @@ export default {
     forceRender: false,
   }),
   methods: {
-    handleItemClick () {
-      this.$emit('itemClick')
+    handleItemClick() {
+      this.$emit('itemClick');
     },
-    handleKeyPress (e) {
+    handleKeyPress(e) {
       if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
-        this.handleItemClick()
+        this.handleItemClick();
       }
     },
   },
-  render () {
+  render() {
     const {
       prefixCls,
       headerClass,
@@ -35,8 +34,8 @@ export default {
       accordion,
       forceRender,
       expandIcon,
-    } = this.$props
-    const { $slots } = this
+    } = this.$props;
+    const { $slots } = this;
 
     const transitionProps = {
       props: Object.assign({
@@ -44,23 +43,23 @@ export default {
         css: false,
       }),
       on: { ...openAnimation },
-    }
+    };
     const headerCls = {
       [`${prefixCls}-header`]: true,
       [headerClass]: headerClass,
-    }
-    const header = getComponentFromProp(this, 'header')
+    };
+    const header = getComponentFromProp(this, 'header');
     const itemCls = {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-active`]: isActive,
       [`${prefixCls}-item-disabled`]: disabled,
-    }
-    let icon = null
+    };
+    let icon = null;
     if (showArrow && typeof expandIcon === 'function') {
-      icon = cloneElement(expandIcon(this.$props))
+      icon = cloneElement(expandIcon(this.$props));
     }
     return (
-      <div class={itemCls} role='tablist'>
+      <div class={itemCls} role="tablist">
         <div
           class={headerCls}
           onClick={this.handleItemClick.bind(this)}
@@ -69,11 +68,10 @@ export default {
           tabIndex={disabled ? -1 : 0}
           aria-expanded={isActive}
         >
-          {showArrow && (icon || <i class='arrow' />)}
+          {showArrow && (icon || <i class="arrow" />)}
           {header}
-        </div><transition
-          {...transitionProps}
-        >
+        </div>
+        <transition {...transitionProps}>
           <PanelContent
             v-show={isActive}
             prefixCls={prefixCls}
@@ -86,7 +84,6 @@ export default {
           </PanelContent>
         </transition>
       </div>
-    )
+    );
   },
-}
-
+};

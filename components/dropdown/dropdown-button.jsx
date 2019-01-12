@@ -1,14 +1,13 @@
-
-import Button from '../button'
-import buttonTypes from '../button/buttonTypes'
-import { ButtonGroupProps } from '../button/button-group'
-import Dropdown from './dropdown'
-import PropTypes from '../_util/vue-types'
-import { hasProp, getComponentFromProp } from '../_util/props-util'
-import getDropdownProps from './getDropdownProps'
-const ButtonTypesProps = buttonTypes()
-const DropdownProps = getDropdownProps()
-const ButtonGroup = Button.Group
+import Button from '../button';
+import buttonTypes from '../button/buttonTypes';
+import { ButtonGroupProps } from '../button/button-group';
+import Dropdown from './dropdown';
+import PropTypes from '../_util/vue-types';
+import { hasProp, getComponentFromProp } from '../_util/props-util';
+import getDropdownProps from './getDropdownProps';
+const ButtonTypesProps = buttonTypes();
+const DropdownProps = getDropdownProps();
+const ButtonGroup = Button.Group;
 const DropdownButtonProps = {
   ...ButtonGroupProps,
   ...DropdownProps,
@@ -17,17 +16,17 @@ const DropdownButtonProps = {
   disabled: PropTypes.bool,
   prefixCls: PropTypes.string.def('ant-dropdown-button'),
   placement: DropdownProps.placement.def('bottomRight'),
-}
-export { DropdownButtonProps }
+};
+export { DropdownButtonProps };
 export default {
   name: 'ADropdownButton',
   props: DropdownButtonProps,
   methods: {
-    onClick (e) {
-      this.$emit('click', e)
+    onClick(e) {
+      this.$emit('click', e);
     },
-    onVisibleChange (val) {
-      this.$emit('visibleChange', val)
+    onVisibleChange(val) {
+      this.$emit('visibleChange', val);
     },
   },
   model: {
@@ -35,16 +34,22 @@ export default {
     event: 'visibleChange',
   },
   inject: {
-    configProvider: { default: {}},
+    configProvider: { default: {} },
   },
-  render () {
+  render() {
     const {
-      type, disabled, htmlType,
-      prefixCls, trigger, align,
-      visible, placement, getPopupContainer,
+      type,
+      disabled,
+      htmlType,
+      prefixCls,
+      trigger,
+      align,
+      visible,
+      placement,
+      getPopupContainer,
       ...restProps
-    } = this.$props
-    const { getPopupContainer: getContextPopupContainer } = this.configProvider
+    } = this.$props;
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const dropdownProps = {
       props: {
         align,
@@ -56,32 +61,21 @@ export default {
       on: {
         visibleChange: this.onVisibleChange,
       },
-    }
+    };
     if (hasProp(this, 'visible')) {
-      dropdownProps.props.visible = visible
+      dropdownProps.props.visible = visible;
     }
 
     return (
-      <ButtonGroup
-        {...restProps}
-        class={prefixCls}
-      >
-        <Button
-          type={type}
-          disabled={disabled}
-          onClick={this.onClick}
-          htmlType={htmlType}
-        >
+      <ButtonGroup {...restProps} class={prefixCls}>
+        <Button type={type} disabled={disabled} onClick={this.onClick} htmlType={htmlType}>
           {this.$slots.default}
         </Button>
         <Dropdown {...dropdownProps}>
-          <template slot='overlay'>
-            {getComponentFromProp(this, 'overlay')}
-          </template>
-          <Button type={type} icon='ellipsis' />
+          <template slot="overlay">{getComponentFromProp(this, 'overlay')}</template>
+          <Button type={type} icon="ellipsis" />
         </Dropdown>
       </ButtonGroup>
-    )
+    );
   },
-}
-
+};

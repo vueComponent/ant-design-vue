@@ -1,7 +1,7 @@
-import PropTypes from '../../_util/vue-types'
-import BaseMixin from '../../_util/BaseMixin'
-import { getComponentFromProp } from '../../_util/props-util'
-function noop () {}
+import PropTypes from '../../_util/vue-types';
+import BaseMixin from '../../_util/BaseMixin';
+import { getComponentFromProp } from '../../_util/props-util';
+function noop() {}
 
 export default {
   name: 'Star',
@@ -17,51 +17,51 @@ export default {
     count: PropTypes.number,
   },
   methods: {
-    onHover (e) {
-      const { index } = this
-      this.$emit('hover', e, index)
+    onHover(e) {
+      const { index } = this;
+      this.$emit('hover', e, index);
     },
-    onClick (e) {
-      const { index } = this
-      this.$emit('click', e, index)
+    onClick(e) {
+      const { index } = this;
+      this.$emit('click', e, index);
     },
-    onKeyDown (e) {
-      const { index } = this.$props
+    onKeyDown(e) {
+      const { index } = this.$props;
       if (e.keyCode === 13) {
-        this.__emit('click', e, index)
+        this.__emit('click', e, index);
       }
     },
-    getClassName () {
-      const { prefixCls, index, value, allowHalf, focused } = this
-      const starValue = index + 1
-      let className = prefixCls
+    getClassName() {
+      const { prefixCls, index, value, allowHalf, focused } = this;
+      const starValue = index + 1;
+      let className = prefixCls;
       if (value === 0 && index === 0 && focused) {
-        className += ` ${prefixCls}-focused`
+        className += ` ${prefixCls}-focused`;
       } else if (allowHalf && value + 0.5 === starValue) {
-        className += ` ${prefixCls}-half ${prefixCls}-active`
+        className += ` ${prefixCls}-half ${prefixCls}-active`;
         if (focused) {
-          className += ` ${prefixCls}-focused`
+          className += ` ${prefixCls}-focused`;
         }
       } else {
-        className += starValue <= value ? ` ${prefixCls}-full` : ` ${prefixCls}-zero`
+        className += starValue <= value ? ` ${prefixCls}-full` : ` ${prefixCls}-zero`;
         if (starValue === value && focused) {
-          className += ` ${prefixCls}-focused`
+          className += ` ${prefixCls}-focused`;
         }
       }
-      return className
+      return className;
     },
   },
-  render () {
-    const { onHover, onClick, onKeyDown, disabled, prefixCls, index, count, value } = this
+  render() {
+    const { onHover, onClick, onKeyDown, disabled, prefixCls, index, count, value } = this;
 
-    const character = getComponentFromProp(this, 'character')
+    const character = getComponentFromProp(this, 'character');
     return (
       <li
         class={this.getClassName()}
         onClick={disabled ? noop : onClick}
         onKeydown={disabled ? noop : onKeyDown}
         onMousemove={disabled ? noop : onHover}
-        role='radio'
+        role="radio"
         aria-checked={value > index ? 'true' : 'false'}
         aria-posinset={index + 1}
         aria-setsize={count}
@@ -70,6 +70,6 @@ export default {
         <div class={`${prefixCls}-first`}>{character}</div>
         <div class={`${prefixCls}-second`}>{character}</div>
       </li>
-    )
+    );
   },
-}
+};

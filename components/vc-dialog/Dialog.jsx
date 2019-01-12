@@ -1,54 +1,54 @@
-import { getComponentFromProp } from '../_util/props-util'
-import KeyCode from '../_util/KeyCode'
-import contains from '../_util/Dom/contains'
-import LazyRenderBox from './LazyRenderBox'
-import BaseMixin from '../_util/BaseMixin'
-import getTransitionProps from '../_util/getTransitionProps'
-import getScrollBarSize from '../_util/getScrollBarSize'
-import getDialogPropTypes from './IDialogPropTypes'
-const IDialogPropTypes = getDialogPropTypes()
+import { getComponentFromProp } from '../_util/props-util';
+import KeyCode from '../_util/KeyCode';
+import contains from '../_util/Dom/contains';
+import LazyRenderBox from './LazyRenderBox';
+import BaseMixin from '../_util/BaseMixin';
+import getTransitionProps from '../_util/getTransitionProps';
+import getScrollBarSize from '../_util/getScrollBarSize';
+import getDialogPropTypes from './IDialogPropTypes';
+const IDialogPropTypes = getDialogPropTypes();
 
-let uuid = 0
-let openCount = 0
+let uuid = 0;
+let openCount = 0;
 
 /* eslint react/no-is-mounted:0 */
-function noop () {}
-function getScroll (w, top) {
-  let ret = w[`page${top ? 'Y' : 'X'}Offset`]
-  const method = `scroll${top ? 'Top' : 'Left'}`
+function noop() {}
+function getScroll(w, top) {
+  let ret = w[`page${top ? 'Y' : 'X'}Offset`];
+  const method = `scroll${top ? 'Top' : 'Left'}`;
   if (typeof ret !== 'number') {
-    const d = w.document
-    ret = d.documentElement[method]
+    const d = w.document;
+    ret = d.documentElement[method];
     if (typeof ret !== 'number') {
-      ret = d.body[method]
+      ret = d.body[method];
     }
   }
-  return ret
+  return ret;
 }
 
-function setTransformOrigin (node, value) {
+function setTransformOrigin(node, value) {
   const style = node.style;
-  ['Webkit', 'Moz', 'Ms', 'ms'].forEach((prefix) => {
-    style[`${prefix}TransformOrigin`] = value
-  })
-  style[`transformOrigin`] = value
+  ['Webkit', 'Moz', 'Ms', 'ms'].forEach(prefix => {
+    style[`${prefix}TransformOrigin`] = value;
+  });
+  style[`transformOrigin`] = value;
 }
 
-function offset (el) {
-  const rect = el.getBoundingClientRect()
+function offset(el) {
+  const rect = el.getBoundingClientRect();
   const pos = {
     left: rect.left,
     top: rect.top,
-  }
-  const doc = el.ownerDocument
-  const w = doc.defaultView || doc.parentWindow
-  pos.left += getScroll(w)
-  pos.top += getScroll(w, true)
-  return pos
+  };
+  const doc = el.ownerDocument;
+  const w = doc.defaultView || doc.parentWindow;
+  pos.left += getScroll(w);
+  pos.top += getScroll(w, true);
+  return pos;
 }
 const initDefaultProps = (propTypes, defaultProps) => {
-  return Object.keys(defaultProps).map(k => propTypes[k].def(defaultProps[k]))
-}
+  return Object.keys(defaultProps).map(k => propTypes[k].def(defaultProps[k]));
+};
 export default {
   mixins: [BaseMixin],
   props: {
@@ -63,10 +63,10 @@ export default {
       prefixCls: 'rc-dialog',
     }),
   },
-  data () {
+  data() {
     return {
       destroyPopup: false,
-    }
+    };
   },
 
   // private inTransition: boolean;
@@ -79,335 +79,338 @@ export default {
   // private bodyIsOverflowing: boolean;
   // private scrollbarWidth: number;
 
-  beforeMount () {
-    this.inTransition = false
-    this.titleId = `rcDialogTitle${uuid++}`
+  beforeMount() {
+    this.inTransition = false;
+    this.titleId = `rcDialogTitle${uuid++}`;
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      this.updatedCallback(false)
-    })
+      this.updatedCallback(false);
+    });
   },
 
   watch: {
-    visible (val) {
+    visible(val) {
       if (val) {
-        this.destroyPopup = false
+        this.destroyPopup = false;
       }
       this.$nextTick(() => {
-        this.updatedCallback(!val)
-      })
+        this.updatedCallback(!val);
+      });
     },
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.visible || this.inTransition) {
-      this.removeScrollingEffect()
+      this.removeScrollingEffect();
     }
   },
   methods: {
-    updatedCallback (visible) {
-      const mousePosition = this.mousePosition
+    updatedCallback(visible) {
+      const mousePosition = this.mousePosition;
       if (this.visible) {
-      // first show
+        // first show
         if (!visible) {
-          this.openTime = Date.now()
+          this.openTime = Date.now();
           // this.lastOutSideFocusNode = document.activeElement
-          this.addScrollingEffect()
+          this.addScrollingEffect();
           // this.$refs.wrap.focus()
-          this.tryFocus()
-          const dialogNode = this.$refs.dialog.$el
+          this.tryFocus();
+          const dialogNode = this.$refs.dialog.$el;
           if (mousePosition) {
-            const elOffset = offset(dialogNode)
-            setTransformOrigin(dialogNode,
-              `${mousePosition.x - elOffset.left}px ${mousePosition.y - elOffset.top}px`)
+            const elOffset = offset(dialogNode);
+            setTransformOrigin(
+              dialogNode,
+              `${mousePosition.x - elOffset.left}px ${mousePosition.y - elOffset.top}px`,
+            );
           } else {
-            setTransformOrigin(dialogNode, '')
+            setTransformOrigin(dialogNode, '');
           }
         }
       } else if (visible) {
-        this.inTransition = true
+        this.inTransition = true;
         if (this.mask && this.lastOutSideFocusNode) {
           try {
-            this.lastOutSideFocusNode.focus()
+            this.lastOutSideFocusNode.focus();
           } catch (e) {
-            this.lastOutSideFocusNode = null
+            this.lastOutSideFocusNode = null;
           }
-          this.lastOutSideFocusNode = null
+          this.lastOutSideFocusNode = null;
         }
       }
     },
-    tryFocus () {
+    tryFocus() {
       if (!contains(this.$refs.wrap, document.activeElement)) {
-        this.lastOutSideFocusNode = document.activeElement
-        this.$refs.sentinelStart.focus()
+        this.lastOutSideFocusNode = document.activeElement;
+        this.$refs.sentinelStart.focus();
       }
     },
-    onAnimateLeave () {
-      const { afterClose, destroyOnClose } = this
+    onAnimateLeave() {
+      const { afterClose, destroyOnClose } = this;
       // need demo?
       // https://github.com/react-component/dialog/pull/28
       if (this.$refs.wrap) {
-        this.$refs.wrap.style.display = 'none'
+        this.$refs.wrap.style.display = 'none';
       }
       if (destroyOnClose) {
-        this.destroyPopup = true
+        this.destroyPopup = true;
       }
-      this.inTransition = false
-      this.removeScrollingEffect()
+      this.inTransition = false;
+      this.removeScrollingEffect();
       if (afterClose) {
-        afterClose()
+        afterClose();
       }
     },
-    onMaskClick (e) {
-    // android trigger click on open (fastclick??)
+    onMaskClick(e) {
+      // android trigger click on open (fastclick??)
       if (Date.now() - this.openTime < 300) {
-        return
+        return;
       }
       if (e.target === e.currentTarget) {
-        this.close(e)
+        this.close(e);
       }
     },
-    onKeydown (e) {
-      const props = this.$props
+    onKeydown(e) {
+      const props = this.$props;
       if (props.keyboard && e.keyCode === KeyCode.ESC) {
-        e.stopPropagation()
-        this.close(e)
-        return
+        e.stopPropagation();
+        this.close(e);
+        return;
       }
       // keep focus inside dialog
       if (props.visible) {
         if (e.keyCode === KeyCode.TAB) {
-          const activeElement = document.activeElement
-          const sentinelStart = this.$refs.sentinelStart
+          const activeElement = document.activeElement;
+          const sentinelStart = this.$refs.sentinelStart;
           if (e.shiftKey) {
             if (activeElement === sentinelStart) {
-              this.$refs.sentinelEnd.focus()
+              this.$refs.sentinelEnd.focus();
             }
           } else if (activeElement === this.$refs.sentinelEnd) {
-            sentinelStart.focus()
+            sentinelStart.focus();
           }
         }
       }
     },
-    getDialogElement () {
-      const { closable, prefixCls, width, height,
-        title, footer: tempFooter, bodyStyle, visible, bodyProps } = this
-      const dest = {}
+    getDialogElement() {
+      const {
+        closable,
+        prefixCls,
+        width,
+        height,
+        title,
+        footer: tempFooter,
+        bodyStyle,
+        visible,
+        bodyProps,
+      } = this;
+      const dest = {};
       if (width !== undefined) {
-        dest.width = typeof width === 'number' ? `${width}px` : width
+        dest.width = typeof width === 'number' ? `${width}px` : width;
       }
       if (height !== undefined) {
-        dest.height = typeof height === 'number' ? `${height}px` : height
+        dest.height = typeof height === 'number' ? `${height}px` : height;
       }
 
-      let footer
+      let footer;
       if (tempFooter) {
         footer = (
-          <div key='footer' class={`${prefixCls}-footer`} ref='footer'>
+          <div key="footer" class={`${prefixCls}-footer`} ref="footer">
             {tempFooter}
           </div>
-        )
+        );
       }
 
-      let header
+      let header;
       if (title) {
         header = (
-          <div key='header' class={`${prefixCls}-header`} ref='header'>
+          <div key="header" class={`${prefixCls}-header`} ref="header">
             <div class={`${prefixCls}-title`} id={this.titleId}>
               {title}
             </div>
           </div>
-        )
+        );
       }
 
-      let closer
+      let closer;
       if (closable) {
-        const closeIcon = getComponentFromProp(this, 'closeIcon')
+        const closeIcon = getComponentFromProp(this, 'closeIcon');
         closer = (
           <button
-            key='close'
+            key="close"
             onClick={this.close || noop}
-            aria-label='Close'
+            aria-label="Close"
             class={`${prefixCls}-close`}
           >
             {closeIcon || <span class={`${prefixCls}-close-x`} />}
-          </button>)
+          </button>
+        );
       }
 
-      const style = { ...this.dialogStyle, ...dest }
-      const sentinelStyle = { width: 0, height: 0, overflow: 'hidden' }
+      const style = { ...this.dialogStyle, ...dest };
+      const sentinelStyle = { width: 0, height: 0, overflow: 'hidden' };
       const cls = {
         [prefixCls]: true,
         ...this.dialogClass,
-      }
-      const transitionName = this.getTransitionName()
+      };
+      const transitionName = this.getTransitionName();
       const dialogElement = (
         <LazyRenderBox
           v-show={visible}
-          key='dialog-element'
-          role='document'
-          ref='dialog'
+          key="dialog-element"
+          role="document"
+          ref="dialog"
           style={style}
           class={cls}
         >
-          <div tabIndex={0} ref='sentinelStart' style={sentinelStyle}>
-          sentinelStart
+          <div tabIndex={0} ref="sentinelStart" style={sentinelStyle}>
+            sentinelStart
           </div>
           <div class={`${prefixCls}-content`}>
             {closer}
             {header}
-            <div
-              key='body'
-              class={`${prefixCls}-body`}
-              style={bodyStyle}
-              ref='body'
-              {...bodyProps}
-            >
+            <div key="body" class={`${prefixCls}-body`} style={bodyStyle} ref="body" {...bodyProps}>
               {this.$slots.default}
             </div>
             {footer}
           </div>
-          <div tabIndex={0} ref='sentinelEnd' style={sentinelStyle}>
-          sentinelEnd
+          <div tabIndex={0} ref="sentinelEnd" style={sentinelStyle}>
+            sentinelEnd
           </div>
         </LazyRenderBox>
-      )
+      );
       const dialogTransitionProps = getTransitionProps(transitionName, {
         afterLeave: this.onAnimateLeave,
-      })
+      });
       return (
-        <transition
-          key='dialog'
-          {...dialogTransitionProps}
-        >
-          {(visible || !this.destroyPopup) ? dialogElement : null}
+        <transition key="dialog" {...dialogTransitionProps}>
+          {visible || !this.destroyPopup ? dialogElement : null}
         </transition>
-      )
+      );
     },
-    getZIndexStyle () {
-      const style = {}
-      const props = this.$props
+    getZIndexStyle() {
+      const style = {};
+      const props = this.$props;
       if (props.zIndex !== undefined) {
-        style.zIndex = props.zIndex
+        style.zIndex = props.zIndex;
       }
-      return style
+      return style;
     },
-    getWrapStyle () {
-      return { ...this.getZIndexStyle(), ...this.wrapStyle }
+    getWrapStyle() {
+      return { ...this.getZIndexStyle(), ...this.wrapStyle };
     },
-    getMaskStyle () {
-      return { ...this.getZIndexStyle(), ...this.maskStyle }
+    getMaskStyle() {
+      return { ...this.getZIndexStyle(), ...this.maskStyle };
     },
-    getMaskElement () {
-      const props = this.$props
-      let maskElement
+    getMaskElement() {
+      const props = this.$props;
+      let maskElement;
       if (props.mask) {
-        const maskTransition = this.getMaskTransitionName()
+        const maskTransition = this.getMaskTransitionName();
         maskElement = (
           <LazyRenderBox
             v-show={props.visible}
             style={this.getMaskStyle()}
-            key='mask'
+            key="mask"
             class={`${props.prefixCls}-mask`}
             {...props.maskProps}
           />
-        )
+        );
         if (maskTransition) {
-          const maskTransitionProps = getTransitionProps(maskTransition)
+          const maskTransitionProps = getTransitionProps(maskTransition);
           maskElement = (
-            <transition
-              key='mask'
-              {...maskTransitionProps}
-            >
+            <transition key="mask" {...maskTransitionProps}>
               {maskElement}
             </transition>
-          )
+          );
         }
       }
-      return maskElement
+      return maskElement;
     },
-    getMaskTransitionName () {
-      const props = this.$props
-      let transitionName = props.maskTransitionName
-      const animation = props.maskAnimation
+    getMaskTransitionName() {
+      const props = this.$props;
+      let transitionName = props.maskTransitionName;
+      const animation = props.maskAnimation;
       if (!transitionName && animation) {
-        transitionName = `${props.prefixCls}-${animation}`
+        transitionName = `${props.prefixCls}-${animation}`;
       }
-      return transitionName
+      return transitionName;
     },
-    getTransitionName () {
-      const props = this.$props
-      let transitionName = props.transitionName
-      const animation = props.animation
+    getTransitionName() {
+      const props = this.$props;
+      let transitionName = props.transitionName;
+      const animation = props.animation;
       if (!transitionName && animation) {
-        transitionName = `${props.prefixCls}-${animation}`
+        transitionName = `${props.prefixCls}-${animation}`;
       }
-      return transitionName
+      return transitionName;
     },
-    setScrollbar () {
+    setScrollbar() {
       if (this.bodyIsOverflowing && this.scrollbarWidth !== undefined) {
-        document.body.style.paddingRight = `${this.scrollbarWidth}px`
+        document.body.style.paddingRight = `${this.scrollbarWidth}px`;
       }
     },
-    addScrollingEffect () {
-      openCount++
+    addScrollingEffect() {
+      openCount++;
       if (openCount !== 1) {
-        return
+        return;
       }
-      this.checkScrollbar()
-      this.setScrollbar()
-      document.body.style.overflow = 'hidden'
-    // this.adjustDialog();
+      this.checkScrollbar();
+      this.setScrollbar();
+      document.body.style.overflow = 'hidden';
+      // this.adjustDialog();
     },
-    removeScrollingEffect () {
-      openCount--
+    removeScrollingEffect() {
+      openCount--;
       if (openCount !== 0) {
-        return
+        return;
       }
-      document.body.style.overflow = ''
-      this.resetScrollbar()
-    // this.resetAdjustments();
+      document.body.style.overflow = '';
+      this.resetScrollbar();
+      // this.resetAdjustments();
     },
-    close (e) {
-      this.__emit('close', e)
+    close(e) {
+      this.__emit('close', e);
     },
-    checkScrollbar () {
-      let fullWindowWidth = window.innerWidth
-      if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
-        const documentElementRect = document.documentElement.getBoundingClientRect()
-        fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
+    checkScrollbar() {
+      let fullWindowWidth = window.innerWidth;
+      if (!fullWindowWidth) {
+        // workaround for missing window.innerWidth in IE8
+        const documentElementRect = document.documentElement.getBoundingClientRect();
+        fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
       }
-      this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth
+      this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
       if (this.bodyIsOverflowing) {
-        this.scrollbarWidth = getScrollBarSize()
+        this.scrollbarWidth = getScrollBarSize();
       }
     },
-    resetScrollbar () {
-      document.body.style.paddingRight = ''
+    resetScrollbar() {
+      document.body.style.paddingRight = '';
     },
-    adjustDialog () {
+    adjustDialog() {
       if (this.$refs.wrap && this.scrollbarWidth !== undefined) {
         const modalIsOverflowing =
-        this.$refs.wrap.scrollHeight > document.documentElement.clientHeight
-        this.$refs.wrap.style.paddingLeft =
-        `${!this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : ''}px`
-        this.$refs.wrap.style.paddingRight =
-        `${this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''}px`
+          this.$refs.wrap.scrollHeight > document.documentElement.clientHeight;
+        this.$refs.wrap.style.paddingLeft = `${
+          !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : ''
+        }px`;
+        this.$refs.wrap.style.paddingRight = `${
+          this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
+        }px`;
       }
     },
-    resetAdjustments () {
+    resetAdjustments() {
       if (this.$refs.wrap) {
-        this.$refs.wrap.style.paddingLeft = this.$refs.wrap.style.paddingLeft = ''
+        this.$refs.wrap.style.paddingLeft = this.$refs.wrap.style.paddingLeft = '';
       }
     },
   },
-  render () {
-    const { prefixCls, maskClosable, visible, wrapClassName, title, wrapProps } = this
-    const style = this.getWrapStyle()
+  render() {
+    const { prefixCls, maskClosable, visible, wrapClassName, title, wrapProps } = this;
+    const style = this.getWrapStyle();
     // clear hide display
     // and only set display after async anim, not here for hide
     if (visible) {
-      style.display = null
+      style.display = null;
     }
     return (
       <div>
@@ -416,9 +419,9 @@ export default {
           tabIndex={-1}
           onKeydown={this.onKeydown}
           class={`${prefixCls}-wrap ${wrapClassName || ''}`}
-          ref='wrap'
+          ref="wrap"
           onClick={maskClosable ? this.onMaskClick : noop}
-          role='dialog'
+          role="dialog"
           aria-labelledby={title ? this.titleId : null}
           style={style}
           {...wrapProps}
@@ -426,7 +429,6 @@ export default {
           {this.getDialogElement()}
         </div>
       </div>
-    )
+    );
   },
-}
-
+};

@@ -1,14 +1,14 @@
-import omit from 'omit.js'
-import Tabs from '../tabs'
-import Row from '../row'
-import Col from '../col'
-import PropTypes from '../_util/vue-types'
-import addEventListener from '../_util/Dom/addEventListener'
-import { getComponentFromProp, getSlotOptions, filterEmpty } from '../_util/props-util'
-import throttleByAnimationFrame from '../_util/throttleByAnimationFrame'
-import BaseMixin from '../_util/BaseMixin'
+import omit from 'omit.js';
+import Tabs from '../tabs';
+import Row from '../row';
+import Col from '../col';
+import PropTypes from '../_util/vue-types';
+import addEventListener from '../_util/Dom/addEventListener';
+import { getComponentFromProp, getSlotOptions, filterEmpty } from '../_util/props-util';
+import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
+import BaseMixin from '../_util/BaseMixin';
 
-const { TabPane } = Tabs
+const { TabPane } = Tabs;
 export default {
   name: 'ACard',
   mixins: [BaseMixin],
@@ -27,77 +27,83 @@ export default {
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
   },
-  data () {
-    this.updateWiderPaddingCalled = false
+  data() {
+    this.updateWiderPaddingCalled = false;
     return {
       widerPadding: false,
-    }
+    };
   },
-  beforeMount () {
-    this.updateWiderPadding = throttleByAnimationFrame(this.updateWiderPadding)
+  beforeMount() {
+    this.updateWiderPadding = throttleByAnimationFrame(this.updateWiderPadding);
   },
-  mounted () {
-    this.updateWiderPadding()
-    this.resizeEvent = addEventListener(window, 'resize', this.updateWiderPadding)
+  mounted() {
+    this.updateWiderPadding();
+    this.resizeEvent = addEventListener(window, 'resize', this.updateWiderPadding);
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.resizeEvent) {
-      this.resizeEvent.remove()
+      this.resizeEvent.remove();
     }
-    this.updateWiderPadding.cancel && this.updateWiderPadding.cancel()
+    this.updateWiderPadding.cancel && this.updateWiderPadding.cancel();
   },
   methods: {
-    updateWiderPadding () {
-      const cardContainerRef = this.$refs.cardContainerRef
+    updateWiderPadding() {
+      const cardContainerRef = this.$refs.cardContainerRef;
       if (!cardContainerRef) {
-        return
+        return;
       }
       // 936 is a magic card width pixel number indicated by designer
-      const WIDTH_BOUNDARY_PX = 936
+      const WIDTH_BOUNDARY_PX = 936;
       if (cardContainerRef.offsetWidth >= WIDTH_BOUNDARY_PX && !this.widerPadding) {
         this.setState({ widerPadding: true }, () => {
-          this.updateWiderPaddingCalled = true // first render without css transition
-        })
+          this.updateWiderPaddingCalled = true; // first render without css transition
+        });
       }
       if (cardContainerRef.offsetWidth < WIDTH_BOUNDARY_PX && this.widerPadding) {
         this.setState({ widerPadding: false }, () => {
-          this.updateWiderPaddingCalled = true // first render without css transition
-        })
+          this.updateWiderPaddingCalled = true; // first render without css transition
+        });
       }
     },
-    onHandleTabChange (key) {
-      this.$emit('tabChange', key)
+    onHandleTabChange(key) {
+      this.$emit('tabChange', key);
     },
-    isContainGrid (obj = []) {
-      let containGrid
-      obj.forEach((element) => {
-        if (
-          element && getSlotOptions(element).__ANT_CARD_GRID
-        ) {
-          containGrid = true
+    isContainGrid(obj = []) {
+      let containGrid;
+      obj.forEach(element => {
+        if (element && getSlotOptions(element).__ANT_CARD_GRID) {
+          containGrid = true;
         }
-      })
-      return containGrid
+      });
+      return containGrid;
     },
-    getAction (actions) {
+    getAction(actions) {
       if (!actions || !actions.length) {
-        return null
+        return null;
       }
       const actionList = actions.map((action, index) => (
         <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
           <span>{action}</span>
         </li>
-      ))
-      return actionList
+      ));
+      return actionList;
     },
   },
-  render () {
+  render() {
     const {
-      prefixCls = 'ant-card', headStyle = {}, bodyStyle = {}, loading,
-      bordered = true, type, tabList, hoverable, activeTabKey, defaultActiveTabKey,
-    } = this.$props
+      prefixCls = 'ant-card',
+      headStyle = {},
+      bodyStyle = {},
+      loading,
+      bordered = true,
+      type,
+      tabList,
+      hoverable,
+      activeTabKey,
+      defaultActiveTabKey,
+    } = this.$props;
 
-    const { $slots, $scopedSlots, $listeners } = this
+    const { $slots, $scopedSlots, $listeners } = this;
 
     const classString = {
       [`${prefixCls}`]: true,
@@ -109,10 +115,10 @@ export default {
       [`${prefixCls}-contain-grid`]: this.isContainGrid($slots.default),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
       [`${prefixCls}-type-${type}`]: !!type,
-    }
+    };
 
-    const loadingBlockStyle = (bodyStyle.padding === 0 || bodyStyle.padding === '0px')
-      ? { padding: 24 } : undefined
+    const loadingBlockStyle =
+      bodyStyle.padding === 0 || bodyStyle.padding === '0px' ? { padding: 24 } : undefined;
 
     const loadingBlock = (
       <div class={`${prefixCls}-loading-content`} style={loadingBlockStyle}>
@@ -168,9 +174,9 @@ export default {
           </Col>
         </Row>
       </div>
-    )
+    );
 
-    const hasActiveTabKey = activeTabKey !== undefined
+    const hasActiveTabKey = activeTabKey !== undefined;
     const tabsProps = {
       props: {
         size: 'large',
@@ -182,21 +188,23 @@ export default {
         change: this.onHandleTabChange,
       },
       class: `${prefixCls}-head-tabs`,
-    }
+    };
 
-    let head
-    const tabs = tabList && tabList.length ? (
-      <Tabs {...tabsProps}>
-        {tabList.map(item => {
-          const { tab: temp, scopedSlots = {}} = item
-          const name = scopedSlots.tab
-          const tab = temp !== undefined ? temp : ($scopedSlots[name] ? $scopedSlots[name](item) : null)
-          return <TabPane tab={tab} key={item.key} disabled={item.disabled}/>
-        })}
-      </Tabs>
-    ) : null
-    const titleDom = getComponentFromProp(this, 'title')
-    const extraDom = getComponentFromProp(this, 'extra')
+    let head;
+    const tabs =
+      tabList && tabList.length ? (
+        <Tabs {...tabsProps}>
+          {tabList.map(item => {
+            const { tab: temp, scopedSlots = {} } = item;
+            const name = scopedSlots.tab;
+            const tab =
+              temp !== undefined ? temp : $scopedSlots[name] ? $scopedSlots[name](item) : null;
+            return <TabPane tab={tab} key={item.key} disabled={item.disabled} />;
+          })}
+        </Tabs>
+      ) : null;
+    const titleDom = getComponentFromProp(this, 'title');
+    const extraDom = getComponentFromProp(this, 'extra');
     if (titleDom || extraDom || tabs) {
       head = (
         <div class={`${prefixCls}-head`} style={headStyle}>
@@ -206,29 +214,34 @@ export default {
           </div>
           {tabs}
         </div>
-      )
+      );
     }
 
-    const children = $slots.default
-    const cover = getComponentFromProp(this, 'cover')
-    const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null
+    const children = $slots.default;
+    const cover = getComponentFromProp(this, 'cover');
+    const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null;
     const body = (
       <div class={`${prefixCls}-body`} style={bodyStyle}>
         {loading ? loadingBlock : children}
       </div>
-    )
-    const actions = filterEmpty(this.$slots.actions)
-    const actionDom = actions && actions.length
-      ? <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul> : null
+    );
+    const actions = filterEmpty(this.$slots.actions);
+    const actionDom =
+      actions && actions.length ? (
+        <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul>
+      ) : null;
 
     return (
-      <div class={classString} ref='cardContainerRef' {...{ on: omit($listeners, ['tabChange', 'tab-change']) }}>
+      <div
+        class={classString}
+        ref="cardContainerRef"
+        {...{ on: omit($listeners, ['tabChange', 'tab-change']) }}
+      >
         {head}
         {coverDom}
         {children ? body : null}
         {actionDom}
       </div>
-    )
+    );
   },
-}
-
+};

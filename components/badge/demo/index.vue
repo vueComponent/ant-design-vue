@@ -1,14 +1,14 @@
 <script>
-  import Basic from './basic.md'
-  import NoWapper from './no-wrapper'
-  import Dot from './dot'
-  import Change from './change'
-  import Overflow from './overflow'
-  import Status from './status'
-  import Title from './title'
+  import Basic from './basic.md';
+  import NoWapper from './no-wrapper';
+  import Dot from './dot';
+  import Change from './change';
+  import Overflow from './overflow';
+  import Status from './status';
+  import Title from './title';
 
-  import CN from './../index.zh-CN.md'
-  import US from './../index.en_US.md'
+  import CN from './../index.zh-CN.md';
+  import US from './../index.en_US.md';
 
   const md = {
     cn: `# Badge徽标数
@@ -23,7 +23,7 @@
          Badge normally appears in proximity to notifications or user avatars with eye-catching appeal, typically displaying unread messages count.
          ## Examples
         `,
-  }
+  };
 
   export default {
     category: 'Components',
@@ -47,9 +47,9 @@
             <US />
           </api>
         </div>
-      )
+      );
     },
-  }
+  };
 </script>
 
 <style>

@@ -7,13 +7,14 @@
   &-slide-fade-enter,
   &-slide-fade-appear,
   &-slide-fade-leave {
-    animation-duration: .3s;
+    animation-duration: 0.3s;
     animation-fill-mode: both;
     animation-timing-function: ease-out;
     animation-play-state: paused;
   }
 
-  &-slide-fade-enter&-slide-fade-enter-active, &-slide-fade-appear&-slide-fade-appear-active {
+  &-slide-fade-enter&-slide-fade-enter-active,
+  &-slide-fade-appear&-slide-fade-appear-active {
     animation-name: rcDialogSlideFadeIn;
     animation-play-state: running;
   }

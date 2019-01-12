@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { TooltipCommon } from "./tootip/common";
+import { TooltipCommon } from './tootip/common';
 
 export declare class Popover extends TooltipCommon {
   /**

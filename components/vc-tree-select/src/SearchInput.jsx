@@ -5,8 +5,8 @@
  * Move the code as a SearchInput for easy management.
  */
 
-import PropTypes from '../../_util/vue-types'
-import { createRef } from './util'
+import PropTypes from '../../_util/vue-types';
+import { createRef } from './util';
 
 const SearchInput = {
   name: 'SearchInput',
@@ -20,109 +20,118 @@ const SearchInput = {
     ariaId: PropTypes.string,
   },
   inject: {
-    vcTreeSelect: { default: {}},
+    vcTreeSelect: { default: {} },
   },
 
-  created () {
-    this.inputRef = createRef()
-    this.mirrorInputRef = createRef()
-    this.prevProps = { ...this.$props }
+  created() {
+    this.inputRef = createRef();
+    this.mirrorInputRef = createRef();
+    this.prevProps = { ...this.$props };
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      const { open, needAlign } = this.$props
+      const { open, needAlign } = this.$props;
       if (needAlign) {
-        this.alignInputWidth()
+        this.alignInputWidth();
       }
 
       if (open) {
-        this.focus(true)
+        this.focus(true);
       }
-    })
+    });
   },
 
-  updated () {
-    const { open, searchValue, needAlign } = this.$props
-    const { prevProps } = this
+  updated() {
+    const { open, searchValue, needAlign } = this.$props;
+    const { prevProps } = this;
     this.$nextTick(() => {
       if (open && prevProps.open !== open) {
-        this.focus()
+        this.focus();
       }
       if (needAlign && searchValue !== prevProps.searchValue) {
-        this.alignInputWidth()
+        this.alignInputWidth();
       }
-      this.prevProps = { ...this.$props }
-    })
+      this.prevProps = { ...this.$props };
+    });
   },
   methods: {
     /**
-   * `scrollWidth` is not correct in IE, do the workaround.
-   * ref: https://github.com/react-component/tree-select/issues/65
-   *  clientWidth 0 when mounted in vue. why?
-   */
-    alignInputWidth () {
-      this.inputRef.current.style.width =
-      `${this.mirrorInputRef.current.clientWidth || this.mirrorInputRef.current.offsetWidth}px`
+     * `scrollWidth` is not correct in IE, do the workaround.
+     * ref: https://github.com/react-component/tree-select/issues/65
+     *  clientWidth 0 when mounted in vue. why?
+     */
+    alignInputWidth() {
+      this.inputRef.current.style.width = `${this.mirrorInputRef.current.clientWidth ||
+        this.mirrorInputRef.current.offsetWidth}px`;
     },
 
     /**
-   * Need additional timeout for focus cause parent dom is not ready when didMount trigger
-   */
-    focus (isDidMount) {
+     * Need additional timeout for focus cause parent dom is not ready when didMount trigger
+     */
+    focus(isDidMount) {
       if (this.inputRef.current) {
         if (isDidMount) {
           setTimeout(() => {
-            this.inputRef.current.focus()
-          }, 0)
-        } else { // set it into else, Avoid scrolling when focus
-          this.inputRef.current.focus()
+            this.inputRef.current.focus();
+          }, 0);
+        } else {
+          // set it into else, Avoid scrolling when focus
+          this.inputRef.current.focus();
         }
       }
     },
 
-    blur () {
+    blur() {
       if (this.inputRef.current) {
-        this.inputRef.current.blur()
+        this.inputRef.current.blur();
       }
     },
   },
 
-  render () {
-    const { searchValue, prefixCls, disabled, renderPlaceholder, open, ariaId } = this.$props
-    const { vcTreeSelect: {
-      onSearchInputChange, onSearchInputKeyDown,
-    }} = this
+  render() {
+    const { searchValue, prefixCls, disabled, renderPlaceholder, open, ariaId } = this.$props;
+    const {
+      vcTreeSelect: { onSearchInputChange, onSearchInputKeyDown },
+    } = this;
     return (
       <span class={`${prefixCls}-search__field__wrap`}>
         <input
-          type='text'
-          {...{ directives: [{
-            name: 'ant-ref',
-            value: this.inputRef,
-          }] }}
+          type="text"
+          {...{
+            directives: [
+              {
+                name: 'ant-ref',
+                value: this.inputRef,
+              },
+            ],
+          }}
           onInput={onSearchInputChange}
           onKeydown={onSearchInputKeyDown}
           value={searchValue}
           disabled={disabled}
           class={`${prefixCls}-search__field`}
-          aria-label='filter select'
-          aria-autocomplete='list'
+          aria-label="filter select"
+          aria-autocomplete="list"
           aria-controls={open ? ariaId : undefined}
-          aria-multiline='false'
+          aria-multiline="false"
         />
         <span
-          {...{ directives: [{
-            name: 'ant-ref',
-            value: this.mirrorInputRef,
-          }] }}
+          {...{
+            directives: [
+              {
+                name: 'ant-ref',
+                value: this.mirrorInputRef,
+              },
+            ],
+          }}
           class={`${prefixCls}-search__field__mirror`}
         >
           {searchValue}&nbsp;
         </span>
         {renderPlaceholder ? renderPlaceholder() : null}
       </span>
-    )
+    );
   },
-}
+};
 
-export default SearchInput
+export default SearchInput;

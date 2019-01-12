@@ -1,6 +1,6 @@
-import PropTypes from '../_util/vue-types'
+import PropTypes from '../_util/vue-types';
 
-function IDialogPropTypes () {
+function IDialogPropTypes() {
   return {
     keyboard: PropTypes.bool,
     mask: PropTypes.bool,
@@ -35,7 +35,7 @@ function IDialogPropTypes () {
     dialogStyle: PropTypes.object.def({}),
     dialogClass: PropTypes.object.def({}),
     closeIcon: PropTypes.any,
-  }
+  };
 }
 
-export default IDialogPropTypes
+export default IDialogPropTypes;

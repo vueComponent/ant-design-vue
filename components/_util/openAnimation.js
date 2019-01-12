@@ -1,64 +1,64 @@
-import cssAnimation from './css-animation'
-import raf from 'raf'
+import cssAnimation from './css-animation';
+import raf from 'raf';
 
-function animate (node, show, done, type) {
-  let height
-  let requestAnimationFrameId
-  let appearRequestAnimationFrameId
+function animate(node, show, done, type) {
+  let height;
+  let requestAnimationFrameId;
+  let appearRequestAnimationFrameId;
   return cssAnimation(node, 'ant-motion-collapse', {
-    start () {
+    start() {
       if (appearRequestAnimationFrameId) {
-        raf.cancel(appearRequestAnimationFrameId)
+        raf.cancel(appearRequestAnimationFrameId);
       }
       if (!show) {
-        node.style.height = `${node.offsetHeight}px`
-        node.style.opacity = '1'
+        node.style.height = `${node.offsetHeight}px`;
+        node.style.opacity = '1';
       } else {
-        height = node.offsetHeight
+        height = node.offsetHeight;
         // not get offsetHeight when appear
         // set it into raf get correct offsetHeight
         if (height === 0) {
           appearRequestAnimationFrameId = raf(() => {
-            height = node.offsetHeight
-            node.style.height = '0px'
-            node.style.opacity = '0'
-          })
+            height = node.offsetHeight;
+            node.style.height = '0px';
+            node.style.opacity = '0';
+          });
         } else {
-          node.style.height = '0px'
-          node.style.opacity = '0'
+          node.style.height = '0px';
+          node.style.opacity = '0';
         }
       }
     },
-    active () {
+    active() {
       if (requestAnimationFrameId) {
-        raf.cancel(requestAnimationFrameId)
+        raf.cancel(requestAnimationFrameId);
       }
       requestAnimationFrameId = raf(() => {
-        node.style.height = `${show ? height : 0}px`
-        node.style.opacity = show ? '1' : '0'
-      })
+        node.style.height = `${show ? height : 0}px`;
+        node.style.opacity = show ? '1' : '0';
+      });
     },
-    end () {
+    end() {
       if (appearRequestAnimationFrameId) {
-        raf.cancel(appearRequestAnimationFrameId)
+        raf.cancel(appearRequestAnimationFrameId);
       }
       if (requestAnimationFrameId) {
-        raf.cancel(requestAnimationFrameId)
+        raf.cancel(requestAnimationFrameId);
       }
-      node.style.height = ''
-      node.style.opacity = ''
-      done && done()
+      node.style.height = '';
+      node.style.opacity = '';
+      done && done();
     },
-  })
+  });
 }
 
 const animation = {
-  enter (node, done) {
-    return animate(node, true, done)
+  enter(node, done) {
+    return animate(node, true, done);
   },
-  leave (node, done) {
-    return animate(node, false, done)
+  leave(node, done) {
+    return animate(node, false, done);
   },
-}
+};
 
-export default animation
+export default animation;

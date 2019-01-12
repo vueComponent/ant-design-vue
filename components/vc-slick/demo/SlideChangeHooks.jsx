@@ -1,14 +1,14 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  data () {
+  data() {
     return {
       activeSlide: 0,
       activeSlide2: 0,
-    }
+    };
   },
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -16,10 +16,14 @@ export default {
         speed: 1000,
         slidesToShow: 1,
         slidesToScroll: 1,
-        beforeChange: (current, next) => { this.activeSlide = next },
-        afterChange: current => { this.activeSlide2 = current },
+        beforeChange: (current, next) => {
+          this.activeSlide = next;
+        },
+        afterChange: current => {
+          this.activeSlide2 = current;
+        },
       },
-    }
+    };
     return (
       <div>
         <h2>beforeChange and afterChange hooks</h2>
@@ -50,6 +54,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

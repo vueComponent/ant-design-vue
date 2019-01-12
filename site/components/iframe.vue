@@ -9,7 +9,7 @@ export default {
   provide () {
     return {
       demoContext: this,
-    }
+    };
   },
   render () {
     // const name = this.name
@@ -24,7 +24,7 @@ export default {
       <div id='iframe-page'>
         <router-view></router-view>
       </div>
-    )
+    );
   },
-}
+};
 </script>

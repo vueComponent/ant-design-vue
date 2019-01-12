@@ -1,14 +1,14 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  data () {
+  data() {
     return {
       display: true,
       width: 600,
-    }
+    };
   },
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -17,39 +17,33 @@ export default {
         slidesToShow: 3,
         slidesToScroll: 1,
       },
-    }
+    };
     return (
       <div>
         <h2> Resizable Collapsible </h2>
         <button
-          class='button'
-          onClick={
-            () => {
-              this.width = this.width + 100
-            }
-          }
+          class="button"
+          onClick={() => {
+            this.width = this.width + 100;
+          }}
         >
           {' '}
           increase{' '}
         </button>
         <button
-          class='button'
-          onClick={
-            () => {
-              this.width = this.width - 100
-            }
-          }
+          class="button"
+          onClick={() => {
+            this.width = this.width - 100;
+          }}
         >
           {' '}
           decrease{' '}
         </button>
         <button
-          class='button'
-          onClick={
-            () => {
-              this.display = !this.display
-            }
-          }
+          class="button"
+          onClick={() => {
+            this.display = !this.display;
+          }}
         >
           {' '}
           toggle{' '}
@@ -82,6 +76,6 @@ export default {
           </Slider>
         </div>
       </div>
-    )
+    );
   },
-}
+};

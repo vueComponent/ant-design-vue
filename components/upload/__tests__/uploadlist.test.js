@@ -1,30 +1,33 @@
-import { mount } from '@vue/test-utils'
-import Vue from 'vue'
-import Upload from '..'
-import { errorRequest, successRequest } from './requests'
-import PropsTypes from '../../_util/vue-types'
-import { UploadListProps } from '../interface'
+import { mount } from '@vue/test-utils';
+import Vue from 'vue';
+import Upload from '..';
+import { errorRequest, successRequest } from './requests';
+import PropsTypes from '../../_util/vue-types';
+import { UploadListProps } from '../interface';
 
-UploadListProps.items = PropsTypes.any
+UploadListProps.items = PropsTypes.any;
 
-const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout))
-const fileList = [{
-  uid: -1,
-  name: 'xxx.png',
-  status: 'done',
-  url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  thumbUrl: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
-}, {
-  uid: -2,
-  name: 'yyy.png',
-  status: 'done',
-  url: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
-  thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-}]
+const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout));
+const fileList = [
+  {
+    uid: -1,
+    name: 'xxx.png',
+    status: 'done',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
+  },
+  {
+    uid: -2,
+    name: 'yyy.png',
+    status: 'done',
+    url: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
+    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  },
+];
 
 describe('Upload List', () => {
   // https://github.com/ant-design/ant-design/issues/4653
-  it('should use file.thumbUrl for <img /> in priority', (done) => {
+  it('should use file.thumbUrl for <img /> in priority', done => {
     const props = {
       propsData: {
         defaultFileList: fileList,
@@ -35,34 +38,37 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     Vue.nextTick(() => {
       fileList.forEach((file, i) => {
-        const linkNode = wrapper.findAll('.ant-upload-list-item-thumbnail').at(i)
-        const imgNode = wrapper.findAll('.ant-upload-list-item-thumbnail img').at(i)
-        expect(linkNode.attributes().href).toBe(file.url)
-        expect(imgNode.attributes().src).toBe(file.thumbUrl)
-      })
-      done()
-    })
-  })
+        const linkNode = wrapper.findAll('.ant-upload-list-item-thumbnail').at(i);
+        const imgNode = wrapper.findAll('.ant-upload-list-item-thumbnail img').at(i);
+        expect(linkNode.attributes().href).toBe(file.url);
+        expect(imgNode.attributes().src).toBe(file.thumbUrl);
+      });
+      done();
+    });
+  });
 
   // https://github.com/ant-design/ant-design/issues/7269
-  it('should remove correct item when uid is 0', (done) => {
-    const list = [{
-      uid: 0,
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
-    }, {
-      uid: 1,
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
-    }]
+  it('should remove correct item when uid is 0', done => {
+    const list = [
+      {
+        uid: 0,
+        name: 'xxx.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
+      },
+      {
+        uid: 1,
+        name: 'xxx.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/IQKRngzUuFzJzGzRJXUs.png',
+      },
+    ];
     const props = {
       propsData: {
         defaultFileList: list,
@@ -72,19 +78,23 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     setTimeout(async () => {
-      expect(wrapper.findAll('.ant-upload-list-item').length).toBe(2)
-      wrapper.findAll('.ant-upload-list-item').at(0).find('.anticon-close').trigger('click')
-      await delay(400)
+      expect(wrapper.findAll('.ant-upload-list-item').length).toBe(2);
+      wrapper
+        .findAll('.ant-upload-list-item')
+        .at(0)
+        .find('.anticon-close')
+        .trigger('click');
+      await delay(400);
       // wrapper.update();
-      expect(wrapper.findAll('.ant-upload-list-item').length).toBe(1)
-      done()
-    }, 0)
-  })
+      expect(wrapper.findAll('.ant-upload-list-item').length).toBe(1);
+      done();
+    }, 0);
+  });
 
-  it('should be uploading when upload a file', (done) => {
+  it('should be uploading when upload a file', done => {
     const props = {
       propsData: {
         action: 'http://jsonplaceholder.typicode.com/posts/',
@@ -93,12 +103,12 @@ describe('Upload List', () => {
       listeners: {
         change: ({ file }) => {
           if (file.status === 'uploading') {
-            expect(wrapper.html()).toMatchSnapshot()
-            done()
+            expect(wrapper.html()).toMatchSnapshot();
+            done();
           }
           if (file.status === 'done') {
-            expect(wrapper.html()).toMatchSnapshot()
-            done()
+            expect(wrapper.html()).toMatchSnapshot();
+            done();
           }
         },
       },
@@ -106,21 +116,21 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     setTimeout(() => {
       const mockFile = new File(['foo'], 'foo.png', {
         type: 'image/png',
-      })
+      });
       wrapper.find({ name: 'ajaxUploader' }).vm.onChange({
         target: {
           files: [mockFile],
         },
-      })
-    }, 0)
-  })
+      });
+    }, 0);
+  });
 
-  it('handle error', (done) => {
+  it('handle error', done => {
     const props = {
       propsData: {
         action: 'http://jsonplaceholder.typicode.com/posts/',
@@ -129,8 +139,8 @@ describe('Upload List', () => {
       listeners: {
         change: ({ file }) => {
           if (file.status !== 'uploading') {
-            expect(wrapper.html()).toMatchSnapshot()
-            done()
+            expect(wrapper.html()).toMatchSnapshot();
+            done();
           }
         },
       },
@@ -138,22 +148,22 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     setTimeout(() => {
       const mockFile = new File(['foo'], 'foo.png', {
         type: 'image/png',
-      })
+      });
       wrapper.find({ name: 'ajaxUploader' }).vm.onChange({
         target: {
           files: [mockFile],
         },
-      })
-    }, 0)
-  })
+      });
+    }, 0);
+  });
 
-  it('does concat filelist when beforeUpload returns false', (done) => {
-    const handleChange = jest.fn()
+  it('does concat filelist when beforeUpload returns false', done => {
+    const handleChange = jest.fn();
     const props = {
       propsData: {
         action: 'http://jsonplaceholder.typicode.com/posts/',
@@ -168,25 +178,25 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
 
     setTimeout(() => {
       const mockFile = new File(['foo'], 'foo.png', {
         type: 'image/png',
-      })
+      });
       wrapper.find({ name: 'ajaxUploader' }).vm.onChange({
         target: {
           files: [mockFile],
         },
-      })
+      });
       Vue.nextTick(() => {
-        expect(wrapper.vm.sFileList.length).toBe(fileList.length + 1)
-        expect(handleChange.mock.calls[0][0].fileList).toHaveLength(3)
-        done()
-      })
-    }, 0)
-  })
+        expect(wrapper.vm.sFileList.length).toBe(fileList.length + 1);
+        expect(handleChange.mock.calls[0][0].fileList).toHaveLength(3);
+        done();
+      });
+    }, 0);
+  });
 
   // https://github.com/ant-design/ant-design/issues/7762
   // it('work with form validation', (done) => {
@@ -257,8 +267,8 @@ describe('Upload List', () => {
   //   }, 0)
   // })
 
-  it('should support onPreview', (done) => {
-    const handlePreview = jest.fn()
+  it('should support onPreview', done => {
+    const handlePreview = jest.fn();
     const props = {
       propsData: {
         defaultFileList: fileList,
@@ -272,20 +282,26 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     setTimeout(async () => {
-      wrapper.findAll('.anticon-eye-o').at(0).trigger('click')
-      expect(handlePreview).toBeCalledWith(fileList[0])
-      wrapper.findAll('.anticon-eye-o').at(1).trigger('click')
-      expect(handlePreview).toBeCalledWith(fileList[1])
-      done()
-    }, 0)
-  })
+      wrapper
+        .findAll('.anticon-eye-o')
+        .at(0)
+        .trigger('click');
+      expect(handlePreview).toBeCalledWith(fileList[0]);
+      wrapper
+        .findAll('.anticon-eye-o')
+        .at(1)
+        .trigger('click');
+      expect(handlePreview).toBeCalledWith(fileList[1]);
+      done();
+    }, 0);
+  });
 
-  it('should support onRemove', (done) => {
-    const handleRemove = jest.fn()
-    const handleChange = jest.fn()
+  it('should support onRemove', done => {
+    const handleRemove = jest.fn();
+    const handleChange = jest.fn();
     const props = {
       propsData: {
         defaultFileList: fileList,
@@ -300,26 +316,32 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
-    jest.setTimeout(300000)
+    };
+    const wrapper = mount(Upload, props);
+    jest.setTimeout(300000);
     setTimeout(async () => {
-      wrapper.findAll('.anticon-delete').at(0).trigger('click')
-      expect(handleRemove).toBeCalledWith(fileList[0])
-      wrapper.findAll('.anticon-delete').at(1).trigger('click')
-      expect(handleRemove).toBeCalledWith(fileList[1])
-      await delay(0)
-      expect(handleChange.mock.calls.length).toBe(2)
-      done()
-    }, 0)
-  })
+      wrapper
+        .findAll('.anticon-delete')
+        .at(0)
+        .trigger('click');
+      expect(handleRemove).toBeCalledWith(fileList[0]);
+      wrapper
+        .findAll('.anticon-delete')
+        .at(1)
+        .trigger('click');
+      expect(handleRemove).toBeCalledWith(fileList[1]);
+      await delay(0);
+      expect(handleChange.mock.calls.length).toBe(2);
+      done();
+    }, 0);
+  });
 
-  it('should generate thumbUrl from file', (done) => {
-    const handlePreview = jest.fn()
-    const newFileList = [...fileList]
-    const newFile = { ...fileList[0], uid: -3, originFileObj: new File([], 'xxx.png') }
-    delete newFile.thumbUrl
-    newFileList.push(newFile)
+  it('should generate thumbUrl from file', done => {
+    const handlePreview = jest.fn();
+    const newFileList = [...fileList];
+    const newFile = { ...fileList[0], uid: -3, originFileObj: new File([], 'xxx.png') };
+    delete newFile.thumbUrl;
+    newFileList.push(newFile);
     const props = {
       propsData: {
         defaultFileList: newFileList,
@@ -333,20 +355,20 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     setTimeout(async () => {
-      const newFile = { ...fileList[2], uid: -4, originFileObj: new File([], 'xxx.png') }
+      const newFile = { ...fileList[2], uid: -4, originFileObj: new File([], 'xxx.png') };
       wrapper.setProps({
         defaultFileList: newFileList.push(newFile),
-      })
-      await delay(200)
-      expect(wrapper.vm.sFileList[2].thumbUrl).not.toBeFalsy()
-      done()
-    }, 1000)
-  })
+      });
+      await delay(200);
+      expect(wrapper.vm.sFileList[2].thumbUrl).not.toBeFalsy();
+      done();
+    }, 1000);
+  });
 
-  it('should non-image format file preview', (done) => {
+  it('should non-image format file preview', done => {
     const list = [
       {
         name: 'not-image',
@@ -405,7 +427,7 @@ describe('Upload List', () => {
         uid: -11,
         url: 'https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot',
       },
-    ]
+    ];
     const props = {
       propsData: {
         defaultFileList: list,
@@ -416,11 +438,11 @@ describe('Upload List', () => {
         default: '<button>upload</button>',
       },
       sync: false,
-    }
-    const wrapper = mount(Upload, props)
+    };
+    const wrapper = mount(Upload, props);
     Vue.nextTick(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-      done()
-    })
-  })
-})
+      expect(wrapper.html()).toMatchSnapshot();
+      done();
+    });
+  });
+});

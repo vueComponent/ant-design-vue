@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -11,12 +11,12 @@ export default {
         slidesToShow: 1,
         slidesToScroll: 1,
       },
-    }
+    };
     return (
       <div style={{ width: '80%', margin: '0 auto' }}>
         <h2> Single Item</h2>
         <Slider {...settings}>
-          <div onClick={(e) => alert(e)}>
+          <div onClick={e => alert(e)}>
             <h3>1</h3>
           </div>
           <div>
@@ -36,6 +36,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

@@ -1,7 +1,6 @@
+import PropTypes from '../_util/vue-types';
 
-import PropTypes from '../_util/vue-types'
-
-const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
 export const ColSize = PropTypes.shape({
   span: stringOrNumber,
@@ -9,9 +8,9 @@ export const ColSize = PropTypes.shape({
   offset: stringOrNumber,
   push: stringOrNumber,
   pull: stringOrNumber,
-}).loose
+}).loose;
 
-const objectOrNumber = PropTypes.oneOfType([PropTypes.number, ColSize])
+const objectOrNumber = PropTypes.oneOfType([PropTypes.number, ColSize]);
 
 export const ColProps = {
   span: stringOrNumber,
@@ -26,7 +25,7 @@ export const ColProps = {
   xl: objectOrNumber,
   xxl: objectOrNumber,
   prefixCls: PropTypes.string,
-}
+};
 
 export default {
   props: ColProps,
@@ -36,29 +35,38 @@ export default {
       default: null,
     },
   },
-  render () {
-    const { span, order, offset, push, pull,
+  render() {
+    const {
+      span,
+      order,
+      offset,
+      push,
+      pull,
       prefixCls = 'ant-col',
-      $slots, $attrs, $listeners, rowContext,
-    } = this
+      $slots,
+      $attrs,
+      $listeners,
+      rowContext,
+    } = this;
     let sizeClassObj = {};
     ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
-      let sizeProps = {}
+      let sizeProps = {};
       if (typeof this[size] === 'number') {
-        sizeProps.span = this[size]
+        sizeProps.span = this[size];
       } else if (typeof this[size] === 'object') {
-        sizeProps = this[size] || {}
+        sizeProps = this[size] || {};
       }
 
       sizeClassObj = {
         ...sizeClassObj,
         [`${prefixCls}-${size}-${sizeProps.span}`]: sizeProps.span !== undefined,
         [`${prefixCls}-${size}-order-${sizeProps.order}`]: sizeProps.order || sizeProps.order === 0,
-        [`${prefixCls}-${size}-offset-${sizeProps.offset}`]: sizeProps.offset || sizeProps.offset === 0,
+        [`${prefixCls}-${size}-offset-${sizeProps.offset}`]:
+          sizeProps.offset || sizeProps.offset === 0,
         [`${prefixCls}-${size}-push-${sizeProps.push}`]: sizeProps.push || sizeProps.push === 0,
         [`${prefixCls}-${size}-pull-${sizeProps.pull}`]: sizeProps.pull || sizeProps.pull === 0,
-      }
-    })
+      };
+    });
     const classes = {
       [`${prefixCls}-${span}`]: span !== undefined,
       [`${prefixCls}-order-${order}`]: order,
@@ -66,23 +74,22 @@ export default {
       [`${prefixCls}-push-${push}`]: push,
       [`${prefixCls}-pull-${pull}`]: pull,
       ...sizeClassObj,
-    }
+    };
     const divProps = {
       on: $listeners,
       attrs: $attrs,
       class: classes,
       style: {},
-    }
+    };
     if (rowContext) {
-      const gutter = rowContext.getGutter()
+      const gutter = rowContext.getGutter();
       if (gutter > 0) {
         divProps.style = {
           paddingLeft: `${gutter / 2}px`,
           paddingRight: `${gutter / 2}px`,
-        }
+        };
       }
     }
-    return <div {...divProps}>{$slots.default}</div>
+    return <div {...divProps}>{$slots.default}</div>;
   },
-}
-
+};

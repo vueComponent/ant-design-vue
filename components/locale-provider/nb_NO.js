@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/nb_NO'
-import DatePicker from '../date-picker/locale/nb_NO'
-import TimePicker from '../time-picker/locale/nb_NO'
-import Calendar from '../calendar/locale/nb_NO'
+import Pagination from '../vc-pagination/locale/nb_NO';
+import DatePicker from '../date-picker/locale/nb_NO';
+import TimePicker from '../time-picker/locale/nb_NO';
+import Calendar from '../calendar/locale/nb_NO';
 
 export default {
   locale: 'nb',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Feil ved opplastning',
     previewFile: 'Forhåndsvisning',
   },
-}
+};

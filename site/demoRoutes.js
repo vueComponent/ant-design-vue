@@ -431,4 +431,4 @@ export default [
     path: 'comment-cn',
     component: () => import('../components/comment/demo/index.vue'),
   },
-]
+];

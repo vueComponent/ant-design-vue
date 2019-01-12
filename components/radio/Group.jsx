@@ -1,8 +1,8 @@
-import classNames from 'classnames'
-import PropTypes from '../_util/vue-types'
-import Radio from './Radio'
-import { getOptionProps, filterEmpty, hasProp } from '../_util/props-util'
-function noop () {}
+import classNames from 'classnames';
+import PropTypes from '../_util/vue-types';
+import Radio from './Radio';
+import { getOptionProps, filterEmpty, hasProp } from '../_util/props-util';
+function noop() {}
 
 export default {
   name: 'ARadioGroup',
@@ -15,8 +15,8 @@ export default {
     value: PropTypes.any,
     size: {
       default: 'default',
-      validator (value) {
-        return ['large', 'default', 'small'].includes(value)
+      validator(value) {
+        return ['large', 'default', 'small'].includes(value);
       },
     },
     options: {
@@ -27,65 +27,65 @@ export default {
     name: String,
     buttonStyle: PropTypes.string.def('outline'),
   },
-  data () {
-    const { value, defaultValue } = this
+  data() {
+    const { value, defaultValue } = this;
     return {
       stateValue: value === undefined ? defaultValue : value,
-    }
+    };
   },
   model: {
     prop: 'value',
   },
-  provide () {
+  provide() {
     return {
       radioGroupContext: this,
-    }
+    };
   },
   computed: {
-    radioOptions () {
-      const { disabled } = this
+    radioOptions() {
+      const { disabled } = this;
       return this.options.map(option => {
         return typeof option === 'string'
           ? { label: option, value: option }
-          : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled }
-      })
+          : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled };
+      });
     },
-    classes () {
-      const { prefixCls, size } = this
+    classes() {
+      const { prefixCls, size } = this;
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${size}`]: size,
-      }
+      };
     },
   },
   methods: {
-    onRadioChange (ev) {
-      const lastValue = this.stateValue
-      const { value } = ev.target
+    onRadioChange(ev) {
+      const lastValue = this.stateValue;
+      const { value } = ev.target;
       if (!hasProp(this, 'value')) {
-        this.stateValue = value
+        this.stateValue = value;
       }
       if (value !== lastValue) {
-        this.$emit('input', value)
-        this.$emit('change', ev)
+        this.$emit('input', value);
+        this.$emit('change', ev);
       }
     },
   },
   watch: {
-    value (val) {
-      this.stateValue = val
+    value(val) {
+      this.stateValue = val;
     },
   },
-  render () {
-    const { mouseenter = noop, mouseleave = noop } = this.$listeners
-    const props = getOptionProps(this)
-    const { prefixCls, options, buttonStyle } = props
-    const groupPrefixCls = `${prefixCls}-group`
+  render() {
+    const { mouseenter = noop, mouseleave = noop } = this.$listeners;
+    const props = getOptionProps(this);
+    const { prefixCls, options, buttonStyle } = props;
+    const groupPrefixCls = `${prefixCls}-group`;
     const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
       [`${groupPrefixCls}-${props.size}`]: props.size,
-    })
+    });
 
-    let children = filterEmpty(this.$slots.default)
+    let children = filterEmpty(this.$slots.default);
 
     // 如果存在 options, 优先使用
     if (options && options.length > 0) {
@@ -102,7 +102,7 @@ export default {
             >
               {option}
             </Radio>
-          )
+          );
         } else {
           return (
             <Radio
@@ -115,20 +115,15 @@ export default {
             >
               {option.label}
             </Radio>
-          )
+          );
         }
-      })
+      });
     }
 
     return (
-      <div
-        class={classString}
-        onMouseenter={mouseenter}
-        onMouseleave={mouseleave}
-      >
+      <div class={classString} onMouseenter={mouseenter} onMouseleave={mouseleave}>
         {children}
       </div>
-    )
+    );
   },
-}
-
+};

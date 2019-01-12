@@ -1,28 +1,28 @@
 <script>
 /* eslint no-console:0 */
-import Tree, { TreeNode } from '../index'
-import '../assets/index.less'
-import './contextmenu.less'
+import Tree, { TreeNode } from '../index';
+import '../assets/index.less';
+import './contextmenu.less';
 
 export default {
   data () {
     return {
       selectedKeys: ['0-1', '0-1-1'],
-    }
+    };
   },
   methods: {
     onSelect (selectedKeys) {
-      this.selectedKeys = selectedKeys
+      this.selectedKeys = selectedKeys;
     },
     onRightClick (info) {
-      console.log('right click', info)
-      this.selectedKeys = [info.node.eventKey]
+      console.log('right click', info);
+      this.selectedKeys = [info.node.eventKey];
     },
     onMouseEnter (info) {
-      console.log('enter', info)
+      console.log('enter', info);
     },
     onMouseLeave (info) {
-      console.log('leave', info)
+      console.log('leave', info);
     },
   },
 
@@ -67,9 +67,9 @@ export default {
           </TreeNode>
         </Tree>
       </div>
-    )
+    );
   },
-}
+};
 
 </script>
 

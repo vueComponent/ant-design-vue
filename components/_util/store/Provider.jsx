@@ -1,16 +1,15 @@
-
-import { storeShape } from './PropTypes'
+import { storeShape } from './PropTypes';
 export default {
   name: 'StoreProvider',
   props: {
     store: storeShape.isRequired,
   },
-  provide () {
+  provide() {
     return {
       storeContext: this.$props,
-    }
+    };
   },
-  render () {
-    return this.$slots.default[0]
+  render() {
+    return this.$slots.default[0];
   },
-}
+};

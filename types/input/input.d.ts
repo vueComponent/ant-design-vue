@@ -2,10 +2,10 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { InputGroup } from "./input-group";
-import { InputSearch } from "./input-search";
-import { TextArea } from "./textarea";
+import { AntdComponent } from '../component';
+import { InputGroup } from './input-group';
+import { InputSearch } from './input-search';
+import { TextArea } from './textarea';
 
 export declare class Input extends AntdComponent {
   static Group: InputGroup;
@@ -54,7 +54,7 @@ export declare class Input extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "small" | "large" | "default";
+  size: 'small' | 'large' | 'default';
 
   /**
    * The suffix icon for the Input.

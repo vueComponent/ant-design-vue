@@ -1,11 +1,10 @@
-
-import PropTypes from '../_util/vue-types'
-import VcSelect from '../select'
-import MiniSelect from './MiniSelect'
-import LocaleReceiver from '../locale-provider/LocaleReceiver'
-import { getOptionProps } from '../_util/props-util'
-import VcPagination from '../vc-pagination'
-import Icon from '../icon'
+import PropTypes from '../_util/vue-types';
+import VcSelect from '../select';
+import MiniSelect from './MiniSelect';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import { getOptionProps } from '../_util/props-util';
+import VcPagination from '../vc-pagination';
+import Icon from '../icon';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,
@@ -15,10 +14,7 @@ export const PaginationProps = () => ({
   pageSize: PropTypes.number,
   hideOnSinglePage: PropTypes.bool,
   showSizeChanger: PropTypes.bool,
-  pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ])),
+  pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   buildOptionText: PropTypes.func,
   showSizeChange: PropTypes.func,
   showQuickJumper: PropTypes.bool,
@@ -30,12 +26,12 @@ export const PaginationProps = () => ({
   selectPrefixCls: PropTypes.string,
   itemRender: PropTypes.any,
   role: PropTypes.string,
-})
+});
 
 export const PaginationConfig = () => ({
   ...PaginationProps(),
   position: PropTypes.oneOf(['top', 'bottom', 'both']),
-})
+});
 
 export default {
   name: 'APagination',
@@ -49,82 +45,66 @@ export default {
     event: 'change.current',
   },
   methods: {
-    getIconsProps  () {
-      const { prefixCls } = this.$props
+    getIconsProps() {
+      const { prefixCls } = this.$props;
       const prevIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <Icon type='left' />
+          <Icon type="left" />
         </a>
-      )
+      );
       const nextIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <Icon type='right' />
+          <Icon type="right" />
         </a>
-      )
+      );
       const jumpPrevIcon = (
         <a class={`${prefixCls}-item-link`}>
           {/* You can use transition effects in the container :) */}
           <div class={`${prefixCls}-item-container`}>
-            <Icon
-              class={`${prefixCls}-item-link-icon`}
-              type='double-left'
-            />
+            <Icon class={`${prefixCls}-item-link-icon`} type="double-left" />
             <span class={`${prefixCls}-item-ellipsis`}>•••</span>
           </div>
         </a>
-      )
+      );
       const jumpNextIcon = (
         <a class={`${prefixCls}-item-link`}>
           {/* You can use transition effects in the container :) */}
           <div class={`${prefixCls}-item-container`}>
-            <Icon
-              class={`${prefixCls}-item-link-icon`}
-              type='double-right'
-            />
+            <Icon class={`${prefixCls}-item-link-icon`} type="double-right" />
             <span class={`${prefixCls}-item-ellipsis`}>•••</span>
           </div>
         </a>
-      )
+      );
       return {
         prevIcon,
         nextIcon,
         jumpPrevIcon,
         jumpNextIcon,
-      }
+      };
     },
-    renderPagination (contextLocale) {
-      const { buildOptionText, size, locale: customLocale, ...restProps } = getOptionProps(this)
-      const isSmall = size === 'small'
+    renderPagination(contextLocale) {
+      const { buildOptionText, size, locale: customLocale, ...restProps } = getOptionProps(this);
+      const isSmall = size === 'small';
       const paginationProps = {
         props: {
           ...restProps,
           ...this.getIconsProps(),
-          selectComponentClass: (isSmall ? MiniSelect : VcSelect),
+          selectComponentClass: isSmall ? MiniSelect : VcSelect,
           locale: { ...contextLocale, ...customLocale },
           buildOptionText: buildOptionText || this.$scopedSlots.buildOptionText,
         },
         class: {
-          'mini': isSmall,
+          mini: isSmall,
         },
         on: this.$listeners,
-      }
+      };
 
-      return (
-        <VcPagination
-          {...paginationProps}
-        />
-      )
+      return <VcPagination {...paginationProps} />;
     },
   },
-  render () {
+  render() {
     return (
-      <LocaleReceiver
-        componentName='Pagination'
-        scopedSlots={
-          { default: this.renderPagination }
-        }
-      />
-    )
+      <LocaleReceiver componentName="Pagination" scopedSlots={{ default: this.renderPagination }} />
+    );
   },
-}
-
+};

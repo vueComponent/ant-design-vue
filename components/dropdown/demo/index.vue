@@ -1,15 +1,15 @@
 <script>
-import Basic from './basic'
-import ContextMenu from './context-menu'
-import DropdownButton from './dropdown-button'
-import Event from './event'
-import Item from './item'
-import OverlayVisible from './overlay-visible'
-import Placement from './placement'
-import SubMenu from './sub-menu'
-import Trigger from './trigger'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import ContextMenu from './context-menu';
+import DropdownButton from './dropdown-button';
+import Event from './event';
+import Item from './item';
+import OverlayVisible from './overlay-visible';
+import Placement from './placement';
+import SubMenu from './sub-menu';
+import Trigger from './trigger';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# 下拉菜单
         向下弹出的列表。
@@ -22,7 +22,7 @@ const md = {
         If there are too many operations to display, you can wrap them in a \`Dropdown\`. By clicking/hovering on the trigger, a dropdown menu should appear, which allows you to choose one option and execute relevant actions.
         ## Examples 
         `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '下拉菜单',
@@ -47,7 +47,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

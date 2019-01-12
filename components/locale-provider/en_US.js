@@ -1,3 +1,3 @@
-import defaultLocale from './default'
+import defaultLocale from './default';
 
-export default defaultLocale
+export default defaultLocale;

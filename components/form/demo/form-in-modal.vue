@@ -24,7 +24,7 @@ When user visit a page with a list of items, and want to create a new item. The 
 const CollectionCreateForm = {
   props: ['visible'],
   beforeCreate () {
-    this.form = this.$form.createForm(this)
+    this.form = this.$form.createForm(this);
   },
   template: `
     <a-modal
@@ -67,35 +67,35 @@ const CollectionCreateForm = {
       </a-form>
     </a-modal>
   `,
-}
+};
 
 export default {
   data () {
     return {
       visible: false,
-    }
+    };
   },
   methods: {
     showModal () {
-      this.visible = true
+      this.visible = true;
     },
     handleCancel  () {
-      this.visible = false
+      this.visible = false;
     },
     handleCreate  () {
-      const form = this.$refs.collectionForm.form
+      const form = this.$refs.collectionForm.form;
       form.validateFields((err, values) => {
         if (err) {
-          return
+          return;
         }
-        console.log('Received values of form: ', values)
-        form.resetFields()
-        this.visible = false
-      })
+        console.log('Received values of form: ', values);
+        form.resetFields();
+        this.visible = false;
+      });
     },
   },
   components: { CollectionCreateForm },
-}
+};
 </script>
 
 

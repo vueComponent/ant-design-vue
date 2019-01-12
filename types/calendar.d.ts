@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { Moment } from "moment";
+import { Moment } from 'moment';
 
 export declare class Calendar extends AntdComponent {
   /**
@@ -53,7 +53,7 @@ export declare class Calendar extends AntdComponent {
    * @default 'month'
    * @type string
    */
-  mode: "month" | "year";
+  mode: 'month' | 'year';
 
   /**
    * Customize the display of the month cell by setting a scoped slot, the returned content will be appended to the cell

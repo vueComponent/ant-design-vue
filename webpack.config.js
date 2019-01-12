@@ -1,8 +1,8 @@
-const path = require('path')
+const path = require('path');
 // const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.config');
 
 module.exports = merge(baseWebpackConfig, {
   output: {
@@ -20,17 +20,12 @@ module.exports = merge(baseWebpackConfig, {
             loader: 'css-loader',
             options: { sourceMap: true },
           },
-          { loader: 'less-loader',
-            options: { sourceMap: true },
-          },
+          { loader: 'less-loader', options: { sourceMap: true } },
         ],
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -38,9 +33,7 @@ module.exports = merge(baseWebpackConfig, {
     port: 3000,
     host: '0.0.0.0',
     historyApiFallback: {
-      rewrites: [
-        { from: /./, to: '/ant-design-vue/index.html' },
-      ],
+      rewrites: [{ from: /./, to: '/ant-design-vue/index.html' }],
     },
     disableHostCheck: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -56,4 +49,4 @@ module.exports = merge(baseWebpackConfig, {
       inject: true,
     }),
   ],
-})
+});

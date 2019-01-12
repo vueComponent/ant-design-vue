@@ -1,15 +1,15 @@
 <script>
-import Basic from './basic'
-import Grid from './grid'
-import InfiniteLoad from './infinite-load'
-import InfiniteVirtualizedLoad from './infinite-virtualized-load'
-import Loadmore from './loadmore'
-import Resposive from './resposive'
-import Simple from './simple'
-import Vertical from './vertical'
+import Basic from './basic';
+import Grid from './grid';
+import InfiniteLoad from './infinite-load';
+import InfiniteVirtualizedLoad from './infinite-virtualized-load';
+import Loadmore from './loadmore';
+import Resposive from './resposive';
+import Simple from './simple';
+import Vertical from './vertical';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# 列表
@@ -25,7 +25,7 @@ const md = {
 A list can be used to display content related to a single subject. The content can consist of multiple elements of varying type and size.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Display',
@@ -51,7 +51,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

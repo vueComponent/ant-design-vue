@@ -17,12 +17,12 @@ export declare class Divider extends AntdComponent {
    * @default 'center'
    * @type string
    */
-  orientation: "left" | "right" | "center";
+  orientation: 'left' | 'right' | 'center';
 
   /**
    * direction type of divider
    * @default 'horizontal'
    * @type string
    */
-  type: "horizontal" | "vertical";
+  type: 'horizontal' | 'vertical';
 }

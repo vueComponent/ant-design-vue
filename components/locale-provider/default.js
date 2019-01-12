@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/en_US'
-import DatePicker from '../date-picker/locale/en_US'
-import TimePicker from '../time-picker/locale/en_US'
-import Calendar from '../calendar/locale/en_US'
+import Pagination from '../vc-pagination/locale/en_US';
+import DatePicker from '../date-picker/locale/en_US';
+import TimePicker from '../time-picker/locale/en_US';
+import Calendar from '../calendar/locale/en_US';
 
 export default {
   locale: 'en',
@@ -47,4 +47,4 @@ export default {
     uploadError: 'Upload error',
     previewFile: 'Preview file',
   },
-}
+};

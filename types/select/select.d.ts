@@ -2,10 +2,10 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { Option } from "./option";
-import { OptionGroup } from "./option-group";
-import { VNode } from "vue";
+import { AntdComponent } from '../component';
+import { Option } from './option';
+import { OptionGroup } from './option-group';
+import { VNode } from 'vue';
 
 export declare class Select extends AntdComponent {
   static Option: Option;
@@ -123,7 +123,7 @@ export declare class Select extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  mode: "default" | "multiple" | "tags";
+  mode: 'default' | 'multiple' | 'tags';
 
   /**
    * Specify content to show when no result matches..
@@ -171,7 +171,7 @@ export declare class Select extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "default" | "large" | "small";
+  size: 'default' | 'large' | 'small';
 
   /**
    * The custom suffix icon

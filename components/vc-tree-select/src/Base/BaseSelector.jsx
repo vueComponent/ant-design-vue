@@ -5,11 +5,11 @@
  *
  * So this file named as Selector to avoid confuse.
  */
-import { createRef } from '../util'
-import PropTypes from '../../../_util/vue-types'
-import classNames from 'classnames'
-import { initDefaultProps, getComponentFromProp } from '../../../_util/props-util'
-import BaseMixin from '../../../_util/BaseMixin'
+import { createRef } from '../util';
+import PropTypes from '../../../_util/vue-types';
+import classNames from 'classnames';
+import { initDefaultProps, getComponentFromProp } from '../../../_util/props-util';
+import BaseMixin from '../../../_util/BaseMixin';
 export const selectorPropTypes = () => ({
   prefixCls: PropTypes.string,
   className: PropTypes.string,
@@ -31,134 +31,142 @@ export const selectorPropTypes = () => ({
   placeholder: PropTypes.any,
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
-})
+});
 
-function noop () {}
-export default function (modeName) {
+function noop() {}
+export default function(modeName) {
   const BaseSelector = {
     name: 'BaseSelector',
     mixins: [BaseMixin],
-    props: initDefaultProps({
-      ...selectorPropTypes(),
+    props: initDefaultProps(
+      {
+        ...selectorPropTypes(),
 
-      // Pass by HOC
-      renderSelection: PropTypes.func.isRequired,
-      renderPlaceholder: PropTypes.func,
-      tabIndex: PropTypes.number,
-    }, {
-      tabIndex: 0,
-    }),
+        // Pass by HOC
+        renderSelection: PropTypes.func.isRequired,
+        renderPlaceholder: PropTypes.func,
+        tabIndex: PropTypes.number,
+      },
+      {
+        tabIndex: 0,
+      },
+    ),
     inject: {
-      vcTreeSelect: { default: {}},
+      vcTreeSelect: { default: {} },
     },
-    created () {
-      this.domRef = createRef()
+    created() {
+      this.domRef = createRef();
     },
     methods: {
-      onFocus  (e) {
-        const { focused } = this.$props
-        const { vcTreeSelect: { onSelectorFocus }} = this
+      onFocus(e) {
+        const { focused } = this.$props;
+        const {
+          vcTreeSelect: { onSelectorFocus },
+        } = this;
 
         if (!focused) {
-          onSelectorFocus()
+          onSelectorFocus();
         }
-        this.__emit('focus', e)
+        this.__emit('focus', e);
       },
 
-      onBlur (e) {
-        const { vcTreeSelect: { onSelectorBlur }} = this
+      onBlur(e) {
+        const {
+          vcTreeSelect: { onSelectorBlur },
+        } = this;
 
         // TODO: Not trigger when is inner component get focused
-        onSelectorBlur()
-        this.__emit('blur', e)
+        onSelectorBlur();
+        this.__emit('blur', e);
       },
 
-      focus  () {
-        this.domRef.current.focus()
+      focus() {
+        this.domRef.current.focus();
       },
 
-      blur  () {
-        this.domRef.current.blur()
+      blur() {
+        this.domRef.current.blur();
       },
 
-      renderClear () {
-        const { prefixCls, allowClear, valueList } = this.$props
-        const { vcTreeSelect: { onSelectorClear }} = this
+      renderClear() {
+        const { prefixCls, allowClear, valueList } = this.$props;
+        const {
+          vcTreeSelect: { onSelectorClear },
+        } = this;
 
         if (!allowClear || !valueList.length || !valueList[0].value) {
-          return null
+          return null;
         }
-        const clearIcon = getComponentFromProp(this, 'clearIcon')
+        const clearIcon = getComponentFromProp(this, 'clearIcon');
         return (
-          <span
-            key='clear'
-            class={`${prefixCls}-selection__clear`}
-            onClick={onSelectorClear}
-          >
+          <span key="clear" class={`${prefixCls}-selection__clear`} onClick={onSelectorClear}>
             {clearIcon}
           </span>
-        )
+        );
       },
 
-      renderArrow () {
-        const { prefixCls, showArrow } = this.$props
+      renderArrow() {
+        const { prefixCls, showArrow } = this.$props;
         if (!showArrow) {
-          return null
+          return null;
         }
-        const inputIcon = getComponentFromProp(this, 'inputIcon')
+        const inputIcon = getComponentFromProp(this, 'inputIcon');
         return (
-          <span
-            key='arrow'
-            class={`${prefixCls}-arrow`}
-            style={{ outline: 'none' }}
-          >
+          <span key="arrow" class={`${prefixCls}-arrow`} style={{ outline: 'none' }}>
             {inputIcon}
           </span>
-        )
+        );
       },
     },
 
-    render () {
+    render() {
       const {
-        prefixCls, className, style,
-        open, focused, disabled, allowClear,
+        prefixCls,
+        className,
+        style,
+        open,
+        focused,
+        disabled,
+        allowClear,
         ariaId,
-        renderSelection, renderPlaceholder,
+        renderSelection,
+        renderPlaceholder,
         tabIndex,
-      } = this.$props
-      const { vcTreeSelect: { onSelectorKeyDown }, $listeners } = this
+      } = this.$props;
+      const {
+        vcTreeSelect: { onSelectorKeyDown },
+        $listeners,
+      } = this;
 
-      let myTabIndex = tabIndex
+      let myTabIndex = tabIndex;
       if (disabled) {
-        myTabIndex = null
+        myTabIndex = null;
       }
 
       return (
         <span
           style={style}
           onClick={$listeners.click || noop}
-          class={classNames(
-            className,
-            prefixCls,
-            {
-              [`${prefixCls}-open`]: open,
-              [`${prefixCls}-focused`]: open || focused,
-              [`${prefixCls}-disabled`]: disabled,
-              [`${prefixCls}-enabled`]: !disabled,
-              [`${prefixCls}-allow-clear`]: allowClear,
-            }
-          )}
+          class={classNames(className, prefixCls, {
+            [`${prefixCls}-open`]: open,
+            [`${prefixCls}-focused`]: open || focused,
+            [`${prefixCls}-disabled`]: disabled,
+            [`${prefixCls}-enabled`]: !disabled,
+            [`${prefixCls}-allow-clear`]: allowClear,
+          })}
           {...{
-            directives: [{
-              name: 'ant-ref',
-              value: this.domRef,
-            }],
+            directives: [
+              {
+                name: 'ant-ref',
+                value: this.domRef,
+              },
+            ],
           }}
-          role='combobox'
+          role="combobox"
           aria-expanded={open}
           aria-owns={open ? ariaId : undefined}
           aria-controls={open ? ariaId : undefined}
-          aria-haspopup='listbox'
+          aria-haspopup="listbox"
           aria-disabled={disabled}
           tabIndex={myTabIndex}
           onFocus={this.onFocus}
@@ -166,11 +174,8 @@ export default function (modeName) {
           onKeydown={onSelectorKeyDown}
         >
           <span
-            key='selection'
-            class={classNames(
-              `${prefixCls}-selection`,
-              `${prefixCls}-selection--${modeName}`
-            )}
+            key="selection"
+            class={classNames(`${prefixCls}-selection`, `${prefixCls}-selection--${modeName}`)}
           >
             {renderSelection()}
             {this.renderClear()}
@@ -179,9 +184,9 @@ export default function (modeName) {
             {renderPlaceholder && renderPlaceholder()}
           </span>
         </span>
-      )
+      );
     },
-  }
+  };
 
-  return BaseSelector
+  return BaseSelector;
 }

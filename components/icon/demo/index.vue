@@ -1,12 +1,12 @@
 <script>
-import IconDisplay from '@/site/theme/template/IconDisplay'
-import Basic from './basic.md'
-import Custom from './custom.md'
-import Iconfont from './iconfont.md'
-import Twotone from './two-tone.md'
+import IconDisplay from '@/site/theme/template/IconDisplay';
+import Basic from './basic.md';
+import Custom from './custom.md';
+import Iconfont from './iconfont.md';
+import Twotone from './two-tone.md';
 
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# 图标 Icon
         语义化的矢量图形。
@@ -22,7 +22,7 @@ const md = {
 > Click the icon and copy the code.
 We are still adding two-tone icons right now.
       `,
-}
+};
 export default {
   category: 'Components',
   type: 'General',
@@ -43,7 +43,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types'
+import PropTypes from '../../_util/vue-types';
 
 export default {
   wrapperClassName: PropTypes.string,
@@ -13,10 +13,15 @@ export default {
   levelMove: PropTypes.oneOfType([PropTypes.number, PropTypes.func, PropTypes.array]),
   ease: PropTypes.string,
   duration: PropTypes.string,
-  getContainer: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object, PropTypes.bool]),
+  getContainer: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
   handler: PropTypes.any,
   showMask: PropTypes.bool,
   maskStyle: PropTypes.object,
   className: PropTypes.string,
   wrapStyle: PropTypes.object,
-}
+};

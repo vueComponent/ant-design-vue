@@ -1,16 +1,16 @@
 <script>
-import Line from './line.md'
-import Circle from './circle.md'
-import LineMini from './line-mini.md'
-import CircleMini from './circle-mini.md'
-import CircleDynamic from './circle-dynamic.md'
-import Format from './format.md'
-import Dynamic from './dynamic.md'
-import Dashboard from './dashboard.md'
-import Segment from './segment.md'
-import Linecap from './linecap.md'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Line from './line.md';
+import Circle from './circle.md';
+import LineMini from './line-mini.md';
+import CircleMini from './circle-mini.md';
+import CircleDynamic from './circle-dynamic.md';
+import Format from './format.md';
+import Dynamic from './dynamic.md';
+import Dashboard from './dashboard.md';
+import Segment from './segment.md';
+import Linecap from './linecap.md';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Progress 进度条
@@ -30,7 +30,7 @@ const md = {
   - When you need to display the completion percentage of an operation.
   ## Examples
   `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '进度条',
@@ -68,7 +68,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

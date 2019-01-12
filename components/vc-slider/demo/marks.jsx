@@ -1,10 +1,10 @@
-import Slider from '../index'
-import '../assets/index.less'
+import Slider from '../index';
+import '../assets/index.less';
 
 export default {
-  render () {
-    const style = { width: '400px', margin: '50px' }
-    const pStyle = { margin: '20px 0' }
+  render() {
+    const style = { width: '400px', margin: '50px' };
+    const pStyle = { margin: '20px 0' };
     const marks = {
       '-10': '-10°C',
       0: <strong>0°C</strong>,
@@ -17,9 +17,9 @@ export default {
         },
         label: <strong>100°C</strong>,
       },
-    }
+    };
 
-    function log (value) {
+    function log(value) {
       console.log(value); //eslint-disable-line
     }
     return (
@@ -51,6 +51,6 @@ export default {
           <Slider.Range min={-10} marks={marks} step={10} onChange={log} defaultValue={[20, 40]} />
         </div>
       </div>
-    )
+    );
   },
-}
+};

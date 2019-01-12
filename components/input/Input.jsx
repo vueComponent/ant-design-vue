@@ -1,17 +1,17 @@
-import classNames from 'classnames'
-import TextArea from './TextArea'
-import omit from 'omit.js'
-import inputProps from './inputProps'
-import { hasProp, getComponentFromProp, getStyle, getClass } from '../_util/props-util'
-import { isIE, isIE9 } from '../_util/env'
+import classNames from 'classnames';
+import TextArea from './TextArea';
+import omit from 'omit.js';
+import inputProps from './inputProps';
+import { hasProp, getComponentFromProp, getStyle, getClass } from '../_util/props-util';
+import { isIE, isIE9 } from '../_util/env';
 
-function noop () {}
+function noop() {}
 
-function fixControlledValue (value) {
+function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
-    return ''
+    return '';
   }
-  return value
+  return value;
 }
 
 export default {
@@ -24,149 +24,127 @@ export default {
     prop: 'value',
     event: 'change.value',
   },
-  data () {
-    const { value, defaultValue } = this.$props
+  data() {
+    const { value, defaultValue } = this.$props;
     return {
       stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
-    }
+    };
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       if (this.autoFocus) {
-        this.focus()
+        this.focus();
       }
-    })
+    });
   },
   watch: {
-    value (val) {
-      this.stateValue = fixControlledValue(val)
+    value(val) {
+      this.stateValue = fixControlledValue(val);
     },
   },
   methods: {
-    handleKeyDown (e) {
+    handleKeyDown(e) {
       if (e.keyCode === 13) {
-        this.$emit('pressEnter', e)
+        this.$emit('pressEnter', e);
       }
-      this.$emit('keydown', e)
+      this.$emit('keydown', e);
     },
-    handleChange (e) {
+    handleChange(e) {
       // https://github.com/vueComponent/ant-design-vue/issues/92
       if (isIE && !isIE9 && this.stateValue === e.target.value) {
-        return
+        return;
       }
       if (!hasProp(this, 'value')) {
-        this.stateValue = e.target.value
+        this.stateValue = e.target.value;
       } else {
-        this.$forceUpdate()
+        this.$forceUpdate();
       }
       if (!e.target.composing) {
-        this.$emit('change.value', e.target.value)
+        this.$emit('change.value', e.target.value);
       }
-      this.$emit('change', e)
-      this.$emit('input', e)
+      this.$emit('change', e);
+      this.$emit('input', e);
     },
 
-    focus () {
-      this.$refs.input.focus()
+    focus() {
+      this.$refs.input.focus();
     },
 
-    blur () {
-      this.$refs.input.blur()
+    blur() {
+      this.$refs.input.blur();
     },
-    select () {
-      this.$refs.input.select()
+    select() {
+      this.$refs.input.select();
     },
 
-    getInputClassName () {
-      const { prefixCls, size, disabled } = this.$props
+    getInputClassName() {
+      const { prefixCls, size, disabled } = this.$props;
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-sm`]: size === 'small',
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-disabled`]: disabled,
-      }
+      };
     },
-    renderLabeledInput (children) {
-      const props = this.$props
-      let addonAfter = getComponentFromProp(this, 'addonAfter')
-      let addonBefore = getComponentFromProp(this, 'addonBefore')
+    renderLabeledInput(children) {
+      const props = this.$props;
+      let addonAfter = getComponentFromProp(this, 'addonAfter');
+      let addonBefore = getComponentFromProp(this, 'addonBefore');
       // Not wrap when there is not addons
-      if ((!addonBefore && !addonAfter)) {
-        return children
+      if (!addonBefore && !addonAfter) {
+        return children;
       }
 
-      const wrapperClassName = `${props.prefixCls}-group`
-      const addonClassName = `${wrapperClassName}-addon`
-      addonBefore = addonBefore ? (
-        <span class={addonClassName}>
-          {addonBefore}
-        </span>
-      ) : null
+      const wrapperClassName = `${props.prefixCls}-group`;
+      const addonClassName = `${wrapperClassName}-addon`;
+      addonBefore = addonBefore ? <span class={addonClassName}>{addonBefore}</span> : null;
 
-      addonAfter = addonAfter ? (
-        <span class={addonClassName}>
-          {addonAfter}
-        </span>
-      ) : null
+      addonAfter = addonAfter ? <span class={addonClassName}>{addonAfter}</span> : null;
 
       const className = {
         [`${props.prefixCls}-wrapper`]: true,
-        [wrapperClassName]: (addonBefore || addonAfter),
-      }
+        [wrapperClassName]: addonBefore || addonAfter,
+      };
 
       const groupClassName = classNames(`${props.prefixCls}-group-wrapper`, {
         [`${props.prefixCls}-group-wrapper-sm`]: props.size === 'small',
         [`${props.prefixCls}-group-wrapper-lg`]: props.size === 'large',
-      })
+      });
       return (
-        <span
-          class={groupClassName}
-          style={getStyle(this)}
-        >
+        <span class={groupClassName} style={getStyle(this)}>
           <span class={className}>
             {addonBefore}
             {children}
             {addonAfter}
           </span>
         </span>
-      )
+      );
     },
-    renderLabeledIcon (children) {
-      const { prefixCls, size } = this.$props
-      let prefix = getComponentFromProp(this, 'prefix')
-      let suffix = getComponentFromProp(this, 'suffix')
+    renderLabeledIcon(children) {
+      const { prefixCls, size } = this.$props;
+      let prefix = getComponentFromProp(this, 'prefix');
+      let suffix = getComponentFromProp(this, 'suffix');
       if (!prefix && !suffix) {
-        return children
+        return children;
       }
 
-      prefix = prefix ? (
-        <span class={`${prefixCls}-prefix`}>
-          {prefix}
-        </span>
-      ) : null
+      prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 
-      suffix = suffix ? (
-        <span class={`${prefixCls}-suffix`}>
-          {suffix}
-        </span>
-      ) : null
+      suffix = suffix ? <span class={`${prefixCls}-suffix`}>{suffix}</span> : null;
       const affixWrapperCls = classNames(getClass(this), `${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
-      })
+      });
       return (
-        <span
-          class={affixWrapperCls}
-          style={getStyle(this)}
-        >
+        <span class={affixWrapperCls} style={getStyle(this)}>
           {prefix}
           {children}
           {suffix}
         </span>
-      )
+      );
     },
 
-    renderInput () {
+    renderInput() {
       const otherProps = omit(this.$props, [
         'prefixCls',
         'addonBefore',
@@ -175,8 +153,8 @@ export default {
         'suffix',
         'value',
         'defaultValue',
-      ])
-      const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this
+      ]);
+      const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
       const inputProps = {
         domProps: {
           value: stateValue,
@@ -190,20 +168,16 @@ export default {
         },
         class: classNames(getInputClassName(), getClass(this)),
         ref: 'input',
-      }
+      };
       if ($listeners['change.value']) {
-        inputProps.directives = [{ name: 'ant-input' }]
+        inputProps.directives = [{ name: 'ant-input' }];
       }
-      return this.renderLabeledIcon(
-        <input
-          {...inputProps}
-        />,
-      )
+      return this.renderLabeledIcon(<input {...inputProps} />);
     },
   },
-  render () {
+  render() {
     if (this.$props.type === 'textarea') {
-      const { $listeners } = this
+      const { $listeners } = this;
       const textareaProps = {
         props: this.$props,
         attrs: this.$attrs,
@@ -217,10 +191,9 @@ export default {
             name: 'ant-input',
           },
         ],
-      }
-      return <TextArea {...textareaProps} ref='input' />
+      };
+      return <TextArea {...textareaProps} ref="input" />;
     }
-    return this.renderLabeledInput(this.renderInput())
+    return this.renderLabeledInput(this.renderInput());
   },
-}
-
+};

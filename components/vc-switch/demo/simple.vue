@@ -1,16 +1,16 @@
 <script>
-import VcSwitch from '../index'
-import '../assets/index.less'
+import VcSwitch from '../index';
+import '../assets/index.less';
 
 export default {
   data () {
     return {
       disabled: false,
-    }
+    };
   },
   methods: {
     toggle () {
-      this.disabled = !this.disabled
+      this.disabled = !this.disabled;
     },
     onChange (value) {
       console.log(`switch checked: ${value}`); // eslint-disable-line
@@ -29,7 +29,7 @@ export default {
           <button onClick={this.toggle}>toggle disabled</button>
         </div>
       </div>
-    )
+    );
   },
-}
+};
 </script>

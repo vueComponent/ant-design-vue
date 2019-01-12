@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types'
+import PropTypes from '../../_util/vue-types';
 
 export default {
   name: 'ColGroup',
@@ -7,40 +7,33 @@ export default {
     columns: PropTypes.array,
   },
   inject: {
-    table: { default: {}},
+    table: { default: {} },
   },
-  render () {
-    const { fixed, table } = this
-    const { prefixCls, expandIconAsCell, columnManager } = table
+  render() {
+    const { fixed, table } = this;
+    const { prefixCls, expandIconAsCell, columnManager } = table;
 
-    let cols = []
+    let cols = [];
 
     if (expandIconAsCell && fixed !== 'right') {
-      cols.push(<col class={`${prefixCls}-expand-icon-col`} key='rc-table-expand-icon-col' />)
+      cols.push(<col class={`${prefixCls}-expand-icon-col`} key="rc-table-expand-icon-col" />);
     }
 
-    let leafColumns
+    let leafColumns;
 
     if (fixed === 'left') {
-      leafColumns = columnManager.leftLeafColumns()
+      leafColumns = columnManager.leftLeafColumns();
     } else if (fixed === 'right') {
-      leafColumns = columnManager.rightLeafColumns()
+      leafColumns = columnManager.rightLeafColumns();
     } else {
-      leafColumns = columnManager.leafColumns()
+      leafColumns = columnManager.leafColumns();
     }
     cols = cols.concat(
       leafColumns.map(c => {
-        const width = typeof c.width === 'number' ? `${c.width}px` : c.width
-        return (
-          <col
-            key={c.key || c.dataIndex}
-            style={width ? { width, minWidth: width } : {}}
-          />
-        )
-      })
-    )
-    return <colgroup>{cols}</colgroup>
+        const width = typeof c.width === 'number' ? `${c.width}px` : c.width;
+        return <col key={c.key || c.dataIndex} style={width ? { width, minWidth: width } : {}} />;
+      }),
+    );
+    return <colgroup>{cols}</colgroup>;
   },
-
-}
-
+};

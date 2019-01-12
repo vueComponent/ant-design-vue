@@ -24,7 +24,7 @@ export declare class Progress extends AntdComponent {
    * @default 'top'
    * @type string
    */
-  gapPosition: "top" | "bottom" | "left" | "right";
+  gapPosition: 'top' | 'bottom' | 'left' | 'right';
 
   /**
    * to set the completion percentage
@@ -45,7 +45,7 @@ export declare class Progress extends AntdComponent {
    * @default 'normal'
    * @type string
    */
-  status: "normal" | "success" | "active" | "exception";
+  status: 'normal' | 'success' | 'active' | 'exception';
 
   /**
    * to set the width of the progress bar, unit: px.
@@ -60,7 +60,7 @@ export declare class Progress extends AntdComponent {
    * @default 'round'
    * @type Enum{ 'round', 'square' }
    */
-  strokeLinecap: "round" | "square";
+  strokeLinecap: 'round' | 'square';
 
   /**
    * color of progress bar
@@ -80,7 +80,7 @@ export declare class Progress extends AntdComponent {
    * @default 'line'
    * @type string
    */
-  type: "line" | "circle" | "dashboard";
+  type: 'line' | 'circle' | 'dashboard';
 
   /**
    * to set the canvas width of the circular progress bar, unit: px

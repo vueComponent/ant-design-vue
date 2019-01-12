@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { Moment } from "moment";
+import { Moment } from 'moment';
 
 export declare class TimePicker extends AntdComponent {
   /**
@@ -163,7 +163,7 @@ export declare class TimePicker extends AntdComponent {
    * @default 'default'
    * @type string
    */
-  size: "large" | "default" | "small";
+  size: 'large' | 'default' | 'small';
 
   /**
    * remove focus

@@ -12,4 +12,4 @@ export default {
   next_5: 'Prossime 5 pagine',
   prev_3: 'Precedente 3 pagine',
   next_3: 'Prossime 3 pagine',
-}
+};

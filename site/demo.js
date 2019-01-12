@@ -340,4 +340,4 @@ export default {
     title: 'Skeleton',
     subtitle: '骨架屏',
   },
-}
+};

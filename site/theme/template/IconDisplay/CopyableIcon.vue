@@ -15,16 +15,16 @@
 export default {
   props: ['type', 'isNew', 'theme', 'justCopied'],
   data () {
-    const { type, theme } = this
+    const { type, theme } = this;
     return {
       text: theme === 'outlined' ? `<a-icon type="${type}" />` : `<a-icon type="${type}" theme="${theme}" />`,
-    }
+    };
   },
   methods: {
     onCopied () {
-      this.$emit('copied', this.type, this.text)
+      this.$emit('copied', this.type, this.text);
     },
   },
-}
+};
 </script>
 

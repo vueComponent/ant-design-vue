@@ -1,9 +1,9 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import BaseMixin from '../../_util/BaseMixin'
-import createDOMForm from '../src/createDOMForm'
-import { Modal } from 'ant-design-vue'
-import { regionStyle, errorStyle } from './styles'
+import BaseMixin from '../../_util/BaseMixin';
+import createDOMForm from '../src/createDOMForm';
+import { Modal } from 'ant-design-vue';
+import { regionStyle, errorStyle } from './styles';
 
 const Form = {
   mixins: [BaseMixin],
@@ -11,36 +11,38 @@ const Form = {
     form: Object,
   },
 
-  data () {
-    return { visible: false }
+  data() {
+    return { visible: false };
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
+    onSubmit(e) {
+      e.preventDefault();
       this.form.validateFieldsAndScroll((error, values) => {
         if (!error) {
-          console.log('ok', values)
+          console.log('ok', values);
         } else {
-          console.log('error', error, values)
+          console.log('error', error, values);
         }
-      })
+      });
     },
 
-    onCancel () {
-      this.setState({ visible: false })
+    onCancel() {
+      this.setState({ visible: false });
     },
 
-    open () {
-      this.setState({ visible: true })
+    open() {
+      this.setState({ visible: true });
     },
   },
 
-  render () {
-    const { getFieldProps, getFieldError } = this.form
+  render() {
+    const { getFieldProps, getFieldError } = this.form;
     return (
-      <div style={{
-        margin: '20px',
-      }}>
+      <div
+        style={{
+          margin: '20px',
+        }}
+      >
         <h2>modal</h2>
         <Modal
           visible={this.visible}
@@ -49,21 +51,31 @@ const Form = {
             overflow: 'auto',
           }}
           onCancel={this.onCancel}
-          title='modal'>
-          <div ref='dialogContent'>
+          title="modal"
+        >
+          <div ref="dialogContent">
             <form onSubmit={this.onSubmit}>
               <input
-                {...getFieldProps('required', { rules: [{ required: true, message: '必填' }] })}/>
+                {...getFieldProps('required', { rules: [{ required: true, message: '必填' }] })}
+              />
               <div style={errorStyle}>
-                {getFieldError('required')
-                  ? getFieldError('required').join(',')
-                  : <b style={{
-                    visibility: 'hidden',
-                  }}>1</b>}
+                {getFieldError('required') ? (
+                  getFieldError('required').join(',')
+                ) : (
+                  <b
+                    style={{
+                      visibility: 'hidden',
+                    }}
+                  >
+                    1
+                  </b>
+                )}
               </div>
-              <div style={{
-                marginTop: '300px',
-              }}>
+              <div
+                style={{
+                  marginTop: '300px',
+                }}
+              >
                 <button>submit</button>
               </div>
             </form>
@@ -73,7 +85,7 @@ const Form = {
           <button onClick={this.open}>open</button>
         </div>
       </div>
-    )
+    );
   },
-}
-export default createDOMForm()(Form)
+};
+export default createDOMForm()(Form);

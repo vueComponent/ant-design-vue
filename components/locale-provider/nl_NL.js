@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/nl_NL'
-import DatePicker from '../date-picker/locale/nl_NL'
-import TimePicker from '../time-picker/locale/nl_NL'
-import Calendar from '../calendar/locale/nl_NL'
+import Pagination from '../vc-pagination/locale/nl_NL';
+import DatePicker from '../date-picker/locale/nl_NL';
+import TimePicker from '../time-picker/locale/nl_NL';
+import Calendar from '../calendar/locale/nl_NL';
 
 export default {
   locale: 'nl',
@@ -41,4 +41,4 @@ export default {
     uploadError: 'Fout tijdens uploaden',
     previewFile: 'Bekijk bestand',
   },
-}
+};

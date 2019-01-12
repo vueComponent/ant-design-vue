@@ -1,19 +1,19 @@
 <script>
-import Basic from './basic.md'
-import BorderLess from './border-less.md'
-import FlexibleContent from './flexible-content.md'
-import GridCard from './grid-card.md'
-import InColumn from './in-column.md'
-import Inner from './inner.md'
-import Loading from './loading.md'
-import Meta from './meta.md'
-import Simple from './simple.md'
-import Tabs from './tabs.md'
+import Basic from './basic.md';
+import BorderLess from './border-less.md';
+import FlexibleContent from './flexible-content.md';
+import GridCard from './grid-card.md';
+import InColumn from './in-column.md';
+import Inner from './inner.md';
+import Loading from './loading.md';
+import Meta from './meta.md';
+import Simple from './simple.md';
+import Tabs from './tabs.md';
 
-import CN from './../index.zh-CN.md'
-import US from './../index.en-US.md'
+import CN from './../index.zh-CN.md';
+import US from './../index.en-US.md';
 
-import '../style'
+import '../style';
 
 const md = {
   cn: `# Card 卡片
@@ -28,7 +28,7 @@ const md = {
          A card can be used to display content related to a single subject. The content can consist of multiple elements of varying types and sizes.
        ## Examples
         `,
-}
+};
 export default {
   category: 'Components',
   type: 'Data Display',
@@ -55,7 +55,7 @@ export default {
           <US />
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

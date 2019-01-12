@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
-import { LayoutSider } from "./layout-sider";
+import { AntdComponent } from '../component';
+import { LayoutSider } from './layout-sider';
 
 export declare class Layout extends AntdComponent {
   static Sider: LayoutSider;

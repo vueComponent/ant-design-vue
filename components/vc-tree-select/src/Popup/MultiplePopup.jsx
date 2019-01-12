@@ -1,3 +1,3 @@
-import BasePopup from '../Base/BasePopup'
+import BasePopup from '../Base/BasePopup';
 
-export default BasePopup
+export default BasePopup;

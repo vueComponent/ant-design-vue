@@ -1,10 +1,9 @@
-
-import classnames from 'classnames'
-import Trigger from '../vc-trigger'
-import PropTypes from '../_util/vue-types'
-import DropdownMenu from './DropdownMenu'
-import { isSingleMode, saveRef } from './util'
-import BaseMixin from '../_util/BaseMixin'
+import classnames from 'classnames';
+import Trigger from '../vc-trigger';
+import PropTypes from '../_util/vue-types';
+import DropdownMenu from './DropdownMenu';
+import { isSingleMode, saveRef } from './util';
+import BaseMixin from '../_util/BaseMixin';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -23,7 +22,7 @@ const BUILT_IN_PLACEMENTS = {
       adjustY: 1,
     },
   },
-}
+};
 
 export default {
   name: 'SelectTrigger',
@@ -58,58 +57,66 @@ export default {
     dropdownRender: PropTypes.func,
     ariaId: PropTypes.string,
   },
-  created () {
-    this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef')
-    this.saveTriggerRef = saveRef(this, 'triggerRef')
+  created() {
+    this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef');
+    this.saveTriggerRef = saveRef(this, 'triggerRef');
   },
-  data () {
+  data() {
     return {
       dropdownWidth: 0,
-    }
+    };
   },
 
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      this.setDropdownWidth()
-    })
+      this.setDropdownWidth();
+    });
   },
 
-  updated () {
+  updated() {
     this.$nextTick(() => {
-      this.setDropdownWidth()
-    })
+      this.setDropdownWidth();
+    });
   },
   methods: {
-    setDropdownWidth () {
-      const width = this.$el.offsetWidth
+    setDropdownWidth() {
+      const width = this.$el.offsetWidth;
       if (width !== this.dropdownWidth) {
-        this.setState({ dropdownWidth: width })
+        this.setState({ dropdownWidth: width });
       }
     },
 
-    getInnerMenu () {
-      return this.dropdownMenuRef && this.dropdownMenuRef.$refs.menuRef
+    getInnerMenu() {
+      return this.dropdownMenuRef && this.dropdownMenuRef.$refs.menuRef;
     },
 
-    getPopupDOMNode () {
-      return this.triggerRef.getPopupDomNode()
+    getPopupDOMNode() {
+      return this.triggerRef.getPopupDomNode();
     },
 
-    getDropdownElement (newProps) {
+    getDropdownElement(newProps) {
       const {
-        value, firstActiveValue, defaultActiveFirstOption,
-        dropdownMenuStyle, getDropdownPrefixCls, backfillValue, menuItemSelectedIcon,
-      } = this
-      const { menuSelect, menuDeselect, popupScroll } = this.$listeners
-      const props = this.$props
+        value,
+        firstActiveValue,
+        defaultActiveFirstOption,
+        dropdownMenuStyle,
+        getDropdownPrefixCls,
+        backfillValue,
+        menuItemSelectedIcon,
+      } = this;
+      const { menuSelect, menuDeselect, popupScroll } = this.$listeners;
+      const props = this.$props;
 
-      const { dropdownRender, ariaId } = props
+      const { dropdownRender, ariaId } = props;
       const dropdownMenuProps = {
         props: {
           ...newProps.props,
           ariaId,
           prefixCls: getDropdownPrefixCls(),
-          value, firstActiveValue, defaultActiveFirstOption, dropdownMenuStyle,
+          value,
+          firstActiveValue,
+          defaultActiveFirstOption,
+          dropdownMenuStyle,
           backfillValue,
           menuItemSelectedIcon,
         },
@@ -119,35 +126,37 @@ export default {
           menuDeselect,
           popupScroll,
         },
-        directives: [{
-          name: 'ant-ref',
-          value: this.saveDropdownMenuRef,
-        }],
-      }
-      const menuNode = <DropdownMenu {...dropdownMenuProps} />
+        directives: [
+          {
+            name: 'ant-ref',
+            value: this.saveDropdownMenuRef,
+          },
+        ],
+      };
+      const menuNode = <DropdownMenu {...dropdownMenuProps} />;
 
       if (dropdownRender) {
-        return dropdownRender(menuNode, props)
+        return dropdownRender(menuNode, props);
       }
-      return null
+      return null;
     },
 
-    getDropdownTransitionName () {
-      const props = this.$props
-      let transitionName = props.transitionName
+    getDropdownTransitionName() {
+      const props = this.$props;
+      let transitionName = props.transitionName;
       if (!transitionName && props.animation) {
-        transitionName = `${this.getDropdownPrefixCls()}-${props.animation}`
+        transitionName = `${this.getDropdownPrefixCls()}-${props.animation}`;
       }
-      return transitionName
+      return transitionName;
     },
 
-    getDropdownPrefixCls () {
-      return `${this.prefixCls}-dropdown`
+    getDropdownPrefixCls() {
+      return `${this.prefixCls}-dropdown`;
     },
   },
 
-  render () {
-    const { $props, $slots, $listeners } = this
+  render() {
+    const { $props, $slots, $listeners } = this;
     const {
       multiple,
       visible,
@@ -161,35 +170,36 @@ export default {
       options,
       getPopupContainer,
       showAction,
-    } = $props
-    const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = $listeners
-    const dropdownPrefixCls = this.getDropdownPrefixCls()
+    } = $props;
+    const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = $listeners;
+    const dropdownPrefixCls = this.getDropdownPrefixCls();
     const popupClassName = {
       [dropdownClassName]: !!dropdownClassName,
       [`${dropdownPrefixCls}--${multiple ? 'multiple' : 'single'}`]: 1,
-    }
+    };
     const popupElement = this.getDropdownElement({
       props: {
         menuItems: options,
         multiple,
         inputValue,
         visible,
-      }, on: {
+      },
+      on: {
         popupFocus,
       },
-    })
-    let hideAction
+    });
+    let hideAction;
     if (disabled) {
-      hideAction = []
+      hideAction = [];
     } else if (isSingleMode($props) && !showSearch) {
-      hideAction = ['click']
+      hideAction = ['click'];
     } else {
-      hideAction = ['blur']
+      hideAction = ['blur'];
     }
-    const popupStyle = { ...dropdownStyle }
-    const widthProp = dropdownMatchSelectWidth ? 'width' : 'minWidth'
+    const popupStyle = { ...dropdownStyle };
+    const widthProp = dropdownMatchSelectWidth ? 'width' : 'minWidth';
     if (this.dropdownWidth) {
-      popupStyle[widthProp] = `${this.dropdownWidth}px`
+      popupStyle[widthProp] = `${this.dropdownWidth}px`;
     }
     const triggerProps = {
       props: {
@@ -210,25 +220,24 @@ export default {
       on: {
         popupVisibleChange: dropdownVisibleChange,
       },
-      directives: [{
-        name: 'ant-ref',
-        value: this.saveTriggerRef,
-      }],
-    }
+      directives: [
+        {
+          name: 'ant-ref',
+          value: this.saveTriggerRef,
+        },
+      ],
+    };
     if (mouseenter) {
-      triggerProps.on.mouseenter = mouseenter
+      triggerProps.on.mouseenter = mouseenter;
     }
     if (mouseleave) {
-      triggerProps.on.mouseleave = mouseleave
+      triggerProps.on.mouseleave = mouseleave;
     }
     return (
       <Trigger {...triggerProps}>
         {$slots.default}
-        <template slot='popup'>
-          {popupElement}
-        </template>
+        <template slot="popup">{popupElement}</template>
       </Trigger>
-    )
+    );
   },
-}
-
+};

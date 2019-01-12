@@ -1,19 +1,19 @@
-import Upload from '../index'
+import Upload from '../index';
 
 export default {
-  data () {
+  data() {
     return {
       destroyed: false,
-    }
+    };
   },
   methods: {
-    destroy () {
-      this.destroyed = true
+    destroy() {
+      this.destroyed = true;
     },
   },
-  render () {
+  render() {
     if (this.destroyed) {
-      return null
+      return null;
     }
     const propsObj = {
       action: '//jsonplaceholder.typicode.com/posts/',
@@ -22,24 +22,24 @@ export default {
         Authorization: 'xxxxxxx',
       },
       multiple: true,
-      beforeUpload (file) {
-        console.log('beforeUpload', file.name)
+      beforeUpload(file) {
+        console.log('beforeUpload', file.name);
       },
-    }
+    };
     const propsEvent = {
-      start (file) {
-        console.log('start', file, file.name)
+      start(file) {
+        console.log('start', file, file.name);
       },
-      success (file) {
-        console.log('success', file)
+      success(file) {
+        console.log('success', file);
       },
-      progress (step, file) {
-        console.log('progress', Math.round(step.percent), file.name)
+      progress(step, file) {
+        console.log('progress', Math.round(step.percent), file.name);
       },
-      error (err) {
-        console.log('error', err)
+      error(err) {
+        console.log('error', err);
       },
-    }
+    };
     const uploaderProps = {
       props: {
         ...propsObj,
@@ -48,7 +48,7 @@ export default {
         ...propsEvent,
       },
       ref: 'inner',
-    }
+    };
     const uploaderProps1 = {
       props: {
         ...propsObj,
@@ -57,11 +57,11 @@ export default {
       on: {
         ...propsEvent,
       },
-    }
+    };
     const style = `
         .rc-upload-disabled {
            opacity:0.5;
-        `
+        `;
     return (
       <div
         style={{
@@ -70,12 +70,12 @@ export default {
       >
         <h2>固定位置</h2>
 
-        <style>
-          {style}
-        </style>
+        <style>{style}</style>
 
         <div>
-          <Upload {...uploaderProps}><a>开始上传</a></Upload>
+          <Upload {...uploaderProps}>
+            <a>开始上传</a>
+          </Upload>
         </div>
 
         <h2>滚动</h2>
@@ -92,11 +92,7 @@ export default {
               height: '500px',
             }}
           >
-            <Upload
-              {...uploaderProps1}
-              component='div'
-              style={{ display: 'inline-block' }}
-            >
+            <Upload {...uploaderProps1} component="div" style={{ display: 'inline-block' }}>
               <a>开始上传2</a>
             </Upload>
           </div>
@@ -104,6 +100,6 @@ export default {
 
         <button onClick={this.destroy}>destroy</button>
       </div>
-    )
+    );
   },
-}
+};

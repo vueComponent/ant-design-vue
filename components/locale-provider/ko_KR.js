@@ -1,7 +1,7 @@
-import Pagination from '../vc-pagination/locale/ko_KR'
-import DatePicker from '../date-picker/locale/ko_KR'
-import TimePicker from '../time-picker/locale/ko_KR'
-import Calendar from '../calendar/locale/ko_KR'
+import Pagination from '../vc-pagination/locale/ko_KR';
+import DatePicker from '../date-picker/locale/ko_KR';
+import TimePicker from '../time-picker/locale/ko_KR';
+import Calendar from '../calendar/locale/ko_KR';
 
 export default {
   locale: 'ko',
@@ -41,4 +41,4 @@ export default {
     uploadError: '업로드 실패',
     previewFile: '파일 미리보기',
   },
-}
+};

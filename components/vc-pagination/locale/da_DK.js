@@ -12,4 +12,4 @@ export default {
   next_5: 'Næste 5 Sider',
   prev_3: 'Forrige 3 Sider',
   next_3: 'Næste 3 Sider',
-}
+};

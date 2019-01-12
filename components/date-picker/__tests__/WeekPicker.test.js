@@ -1,21 +1,24 @@
-import { mount } from '@vue/test-utils'
-import { asyncExpect } from '@/tests/utils'
-import DatePicker from '..'
-import focusTest from '../../../tests/shared/focusTest'
+import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
+import DatePicker from '..';
+import focusTest from '../../../tests/shared/focusTest';
 
-const { WeekPicker } = DatePicker
+const { WeekPicker } = DatePicker;
 
 describe('WeekPicker', async () => {
-  focusTest(WeekPicker)
+  focusTest(WeekPicker);
 
   it('should support style prop', async () => {
-    const wrapper = mount({
-      render () {
-        return <WeekPicker style={{ width: '400px' }} />
+    const wrapper = mount(
+      {
+        render() {
+          return <WeekPicker style={{ width: '400px' }} />;
+        },
       },
-    }, { sync: false })
+      { sync: false },
+    );
     await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
-})
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+});

@@ -12,4 +12,4 @@ export default {
   next_5: 'Seuraavat 5 sivua',
   prev_3: 'Edelliset 3 sivua',
   next_3: 'Seuraavat 3 sivua',
-}
+};

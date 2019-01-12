@@ -1,8 +1,8 @@
-import '../assets/index.less'
-import Slider from '../src/slider'
+import '../assets/index.less';
+import Slider from '../src/slider';
 
 export default {
-  render () {
+  render() {
     const settings = {
       props: {
         dots: true,
@@ -11,7 +11,7 @@ export default {
         slidesToShow: 3,
         slidesToScroll: 3,
       },
-    }
+    };
     return (
       <div>
         <h2> Multiple items </h2>
@@ -45,6 +45,6 @@ export default {
           </div>
         </Slider>
       </div>
-    )
+    );
   },
-}
+};

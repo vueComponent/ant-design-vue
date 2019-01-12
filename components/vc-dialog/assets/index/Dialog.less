@@ -43,11 +43,11 @@
     color: #000;
     text-shadow: 0 1px 0 #fff;
     filter: alpha(opacity=20);
-    opacity: .2;
+    opacity: 0.2;
     text-decoration: none;
 
     &-x:after {
-      content: '×'
+      content: '×';
     }
 
     &:hover {
@@ -81,7 +81,8 @@
     animation-fill-mode: both;
   }
 
-  &-zoom-enter, &-zoom-appear {
+  &-zoom-enter,
+  &-zoom-appear {
     opacity: 0;
     .effect();
     animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -94,7 +95,8 @@
     animation-play-state: paused;
   }
 
-  &-zoom-enter&-zoom-enter-active, &-zoom-appear&-zoom-appear-active {
+  &-zoom-enter&-zoom-enter-active,
+  &-zoom-appear&-zoom-appear-active {
     animation-name: rcDialogZoomIn;
     animation-play-state: running;
   }
@@ -116,7 +118,6 @@
   }
   @keyframes rcDialogZoomOut {
     0% {
-
       transform: scale(1, 1);
     }
     100% {

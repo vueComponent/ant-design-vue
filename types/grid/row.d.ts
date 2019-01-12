@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from "../component";
+import { AntdComponent } from '../component';
 
 export declare class Row extends AntdComponent {
   /**
@@ -32,12 +32,12 @@ export declare class Row extends AntdComponent {
    * @default 'top'
    * @type string
    */
-  align: "top" | "middle" | "bottom";
+  align: 'top' | 'middle' | 'bottom';
 
   /**
    * horizontal arrangement of the flex layout: start end center space-around space-between
    * @default 'start'
    * @type string
    */
-  justify: "start" | "end" | "center" | "space-around" | "space-between";
+  justify: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
 }

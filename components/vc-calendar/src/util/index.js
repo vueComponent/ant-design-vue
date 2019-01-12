@@ -1,103 +1,103 @@
-import moment from 'moment'
+import moment from 'moment';
 
 const defaultDisabledTime = {
-  disabledHours () {
-    return []
+  disabledHours() {
+    return [];
   },
-  disabledMinutes () {
-    return []
+  disabledMinutes() {
+    return [];
   },
-  disabledSeconds () {
-    return []
+  disabledSeconds() {
+    return [];
   },
+};
+
+export function getTodayTime(value) {
+  const today = moment();
+  today.locale(value.locale()).utcOffset(value.utcOffset());
+  return today;
 }
 
-export function getTodayTime (value) {
-  const today = moment()
-  today.locale(value.locale()).utcOffset(value.utcOffset())
-  return today
+export function getTitleString(value) {
+  return value.format('LL');
 }
 
-export function getTitleString (value) {
-  return value.format('LL')
+export function getTodayTimeStr(value) {
+  const today = getTodayTime(value);
+  return getTitleString(today);
 }
 
-export function getTodayTimeStr (value) {
-  const today = getTodayTime(value)
-  return getTitleString(today)
+export function getMonthName(month) {
+  const locale = month.locale();
+  const localeData = month.localeData();
+  return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month);
 }
 
-export function getMonthName (month) {
-  const locale = month.locale()
-  const localeData = month.localeData()
-  return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month)
+export function syncTime(from, to) {
+  if (!moment.isMoment(from) || !moment.isMoment(to)) return;
+  to.hour(from.hour());
+  to.minute(from.minute());
+  to.second(from.second());
 }
 
-export function syncTime (from, to) {
-  if (!moment.isMoment(from) || !moment.isMoment(to)) return
-  to.hour(from.hour())
-  to.minute(from.minute())
-  to.second(from.second())
-}
-
-export function getTimeConfig (value, disabledTime) {
-  let disabledTimeConfig = disabledTime ? disabledTime(value) : {}
+export function getTimeConfig(value, disabledTime) {
+  let disabledTimeConfig = disabledTime ? disabledTime(value) : {};
   disabledTimeConfig = {
     ...defaultDisabledTime,
     ...disabledTimeConfig,
-  }
-  return disabledTimeConfig
+  };
+  return disabledTimeConfig;
 }
 
-export function isTimeValidByConfig (value, disabledTimeConfig) {
-  let invalidTime = false
+export function isTimeValidByConfig(value, disabledTimeConfig) {
+  let invalidTime = false;
   if (value) {
-    const hour = value.hour()
-    const minutes = value.minute()
-    const seconds = value.second()
-    const disabledHours = disabledTimeConfig.disabledHours()
+    const hour = value.hour();
+    const minutes = value.minute();
+    const seconds = value.second();
+    const disabledHours = disabledTimeConfig.disabledHours();
     if (disabledHours.indexOf(hour) === -1) {
-      const disabledMinutes = disabledTimeConfig.disabledMinutes(hour)
+      const disabledMinutes = disabledTimeConfig.disabledMinutes(hour);
       if (disabledMinutes.indexOf(minutes) === -1) {
-        const disabledSeconds = disabledTimeConfig.disabledSeconds(hour, minutes)
-        invalidTime = disabledSeconds.indexOf(seconds) !== -1
+        const disabledSeconds = disabledTimeConfig.disabledSeconds(hour, minutes);
+        invalidTime = disabledSeconds.indexOf(seconds) !== -1;
       } else {
-        invalidTime = true
+        invalidTime = true;
       }
     } else {
-      invalidTime = true
+      invalidTime = true;
     }
   }
-  return !invalidTime
+  return !invalidTime;
 }
 
-export function isTimeValid (value, disabledTime) {
-  const disabledTimeConfig = getTimeConfig(value, disabledTime)
-  return isTimeValidByConfig(value, disabledTimeConfig)
+export function isTimeValid(value, disabledTime) {
+  const disabledTimeConfig = getTimeConfig(value, disabledTime);
+  return isTimeValidByConfig(value, disabledTimeConfig);
 }
 
-export function isAllowedDate (value, disabledDate, disabledTime) {
+export function isAllowedDate(value, disabledDate, disabledTime) {
   if (disabledDate) {
     if (disabledDate(value)) {
-      return false
+      return false;
     }
   }
   if (disabledTime) {
     if (!isTimeValid(value, disabledTime)) {
-      return false
+      return false;
     }
   }
-  return true
+  return true;
 }
 
-export function formatDate (value, format) {
+export function formatDate(value, format) {
   if (!value) {
-    return ''
+    return '';
   }
 
   if (Array.isArray(format)) {
-    format = format[0]
+    format = format[0];
   }
 
-  return value.format(format)
+  return value.format(format);
 }

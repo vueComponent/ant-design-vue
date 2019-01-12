@@ -1,10 +1,10 @@
 <script>
-import Basic from './basic'
-import Badge from './badge'
-import Type from './type'
-import Dynamic from './dynamic'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Basic from './basic';
+import Badge from './badge';
+import Type from './type';
+import Dynamic from './dynamic';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 
 const md = {
   cn: `# Avatar头像
@@ -17,7 +17,7 @@ const md = {
           Avatars can be used to represent people or objects. It supports images, 'Icon's, or letters.
           ## Examples
           `,
-}
+};
 export default {
   category: 'Components',
   subtitle: '头像',
@@ -43,7 +43,7 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>

@@ -1,14 +1,14 @@
 <script>
-import Horizontal from './horizontal'
-import InlineCollapsed from './inline-collapsed'
-import Inline from './inline'
-import SiderCurrent from './sider-current'
-import SwitchMode from './switch-mode'
-import Theme from './theme'
-import Vertical from './vertical'
-import Template from './template'
-import CN from '../index.zh-CN.md'
-import US from '../index.en-US.md'
+import Horizontal from './horizontal';
+import InlineCollapsed from './inline-collapsed';
+import Inline from './inline';
+import SiderCurrent from './sider-current';
+import SwitchMode from './switch-mode';
+import Theme from './theme';
+import Vertical from './vertical';
+import Template from './template';
+import CN from '../index.zh-CN.md';
+import US from '../index.en-US.md';
 const md = {
   cn: `# Menu 导航菜单
           为页面和功能提供导航的菜单列表。
@@ -20,7 +20,7 @@ const md = {
 ## When To Use
 Navigation menu is important for a website, it helps users jump from one site section to another quickly. Mostly, it includes top navigation and side navigation. Top navigation provides all the category and functions of the website. Side navigation provides the Multi-level structure of the website.
 ## Examples`,
-}
+};
 export default {
   category: 'Components',
   cols: 1,
@@ -44,9 +44,9 @@ export default {
           <US/>
         </api>
       </div>
-    )
+    );
   },
-}
+};
 </script>
 <style>
 

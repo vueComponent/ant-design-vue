@@ -1,10 +1,14 @@
-
-import { Option, OptGroup } from '../vc-select'
-import Select, { AbstractSelectProps, SelectValue } from '../select'
-import Input from '../input'
-import InputElement from './InputElement'
-import PropTypes from '../_util/vue-types'
-import { getComponentFromProp, getOptionProps, filterEmpty, isValidElement } from '../_util/props-util'
+import { Option, OptGroup } from '../vc-select';
+import Select, { AbstractSelectProps, SelectValue } from '../select';
+import Input from '../input';
+import InputElement from './InputElement';
+import PropTypes from '../_util/vue-types';
+import {
+  getComponentFromProp,
+  getOptionProps,
+  filterEmpty,
+  isValidElement,
+} from '../_util/props-util';
 
 // const DataSourceItemObject = PropTypes.shape({
 //   value: String,
@@ -29,7 +33,7 @@ const AutoCompleteProps = {
   dropdownMatchSelectWidth: PropTypes.bool,
   // onChange?: (value: SelectValue) => void;
   // onSelect?: (value: SelectValue, option: Object) => any;
-}
+};
 
 const AutoComplete = {
   name: 'AAutoComplete',
@@ -42,10 +46,7 @@ const AutoComplete = {
     autoFocus: PropTypes.bool,
     backfill: PropTypes.bool,
     optionLabelProp: PropTypes.string.def('children'),
-    filterOption: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.func,
-    ]).def(false),
+    filterOption: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]).def(false),
     defaultActiveFirstOption: PropTypes.bool.def(true),
   },
   Option: { ...Option, name: 'AAutoCompleteOption' },
@@ -55,62 +56,58 @@ const AutoComplete = {
     event: 'change',
   },
   methods: {
-    getInputElement () {
-      const { $slots } = this
-      const children = filterEmpty($slots.default)
-      const element = children.length ? children[0] : <Input />
-      return (
-        <InputElement>{element}</InputElement>
-      )
+    getInputElement() {
+      const { $slots } = this;
+      const children = filterEmpty($slots.default);
+      const element = children.length ? children[0] : <Input />;
+      return <InputElement>{element}</InputElement>;
     },
 
-    focus () {
+    focus() {
       if (this.$refs.select) {
-        this.$refs.select.focus()
+        this.$refs.select.focus();
       }
     },
 
-    blur () {
+    blur() {
       if (this.$refs.select) {
-        this.$refs.select.blur()
+        this.$refs.select.blur();
       }
     },
   },
 
-  render () {
-    const {
-      size, prefixCls, optionLabelProp, dataSource, $slots, $listeners,
-    } = this
+  render() {
+    const { size, prefixCls, optionLabelProp, dataSource, $slots, $listeners } = this;
 
     const cls = {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-show-search`]: true,
       [`${prefixCls}-auto-complete`]: true,
-    }
+    };
 
-    let options
-    const childArray = filterEmpty($slots.dataSource)
+    let options;
+    const childArray = filterEmpty($slots.dataSource);
     if (childArray.length) {
-      options = childArray
+      options = childArray;
     } else {
-      options = dataSource ? dataSource.map((item) => {
-        if (isValidElement(item)) {
-          return item
-        }
-        switch (typeof item) {
-          case 'string':
-            return <Option key={item}>{item}</Option>
-          case 'object':
-            return (
-              <Option key={item.value}>
-                {item.text}
-              </Option>
-            )
-          default:
-            throw new Error('AutoComplete[dataSource] only supports type `string[] | Object[]`.')
-        }
-      }) : []
+      options = dataSource
+        ? dataSource.map(item => {
+            if (isValidElement(item)) {
+              return item;
+            }
+            switch (typeof item) {
+              case 'string':
+                return <Option key={item}>{item}</Option>;
+              case 'object':
+                return <Option key={item.value}>{item.text}</Option>;
+              default:
+                throw new Error(
+                  'AutoComplete[dataSource] only supports type `string[] | Object[]`.',
+                );
+            }
+          })
+        : [];
     }
     const selectProps = {
       props: {
@@ -123,23 +120,16 @@ const AutoComplete = {
       class: cls,
       ref: 'select',
       on: $listeners,
-    }
-    return (
-      <Select
-        {...selectProps}
-      >
-        {options}
-      </Select>
-    )
+    };
+    return <Select {...selectProps}>{options}</Select>;
   },
-}
+};
 
 /* istanbul ignore next */
-AutoComplete.install = function (Vue) {
-  Vue.component(AutoComplete.name, AutoComplete)
-  Vue.component(AutoComplete.Option.name, AutoComplete.Option)
-  Vue.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup)
-}
+AutoComplete.install = function(Vue) {
+  Vue.component(AutoComplete.name, AutoComplete);
+  Vue.component(AutoComplete.Option.name, AutoComplete.Option);
+  Vue.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);
+};
 
-export default AutoComplete
-
+export default AutoComplete;

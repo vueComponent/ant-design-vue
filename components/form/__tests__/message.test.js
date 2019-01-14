@@ -1,8 +1,9 @@
 import { mount } from '@vue/test-utils';
+import { asyncExpect } from '@/tests/utils';
 import Form from '..';
 
 describe('Form', () => {
-  it('should display two message', () => {
+  it('should display two message', async () => {
     const rules = [
       {
         pattern: /^\w+$/,
@@ -16,6 +17,7 @@ describe('Form', () => {
     let myForm;
     const Form1 = Form.create()({
       render() {
+        myForm = this.form;
         return (
           <Form>
             <Form.Item label="Account">
@@ -27,13 +29,11 @@ describe('Form', () => {
     });
 
     const wrapper = mount(Form1, {
-      propsData: {
-        wrappedComponentRef: inst => {
-          myForm = inst.form;
-        },
-      },
+      sync: false,
     });
-    myForm.validateFields();
+    await asyncExpect(()=>{
+      myForm.validateFields();
+    }); 
 
     wrapper.vm.$forceUpdate();
     expect(wrapper.html()).toMatchSnapshot();

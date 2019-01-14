@@ -98,15 +98,11 @@ function createBaseForm(option = {}, mixins = []) {
             },
           },
       mounted() {
-        this.wrappedComponentRef(this.$refs.WrappedComponent);
         this.cleanUpUselessFields();
       },
       updated() {
-        this.wrappedComponentRef(this.$refs.WrappedComponent);
+        // form updated add for template v-decorator
         this.cleanUpUselessFields();
-      },
-      destroyed() {
-        this.wrappedComponentRef(null);
       },
       methods: {
         updateFields(fields = {}) {
@@ -636,14 +632,20 @@ function createBaseForm(option = {}, mixins = []) {
         const formProps = {
           [formPropName]: this.getForm(),
         };
-        const props = getOptionProps(this);
+        const {wrappedComponentRef, ...restProps} = getOptionProps(this);
         const wrappedComponentProps = {
           props: mapProps.call(this, {
             ...formProps,
-            ...props,
+            ...restProps,
           }),
           on: $listeners,
           ref: 'WrappedComponent',
+          directives: [
+            {
+              name: 'ant-ref',
+              value: wrappedComponentRef,
+            },
+          ],
         };
 
         return WrappedComponent ? (

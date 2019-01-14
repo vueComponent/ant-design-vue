@@ -200,9 +200,78 @@ const Form3 = {
   },
 };
 
+const Form4 = {
+  mixins: [BaseMixin],
+  props: {
+    form: Object,
+  },
+  data() {
+    return {
+      useInput: true,
+    };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((error, values) => {
+        if (!error) {
+          console.log('ok', values);
+        } else {
+          console.log('error', error, values);
+        }
+      });
+    },
+    changeUseInput(e) {
+      this.setState({
+        useInput: e.target.checked,
+      });
+    },
+  },
+
+  render() {
+    const { getFieldError, getFieldDecorator } = this.form;
+    return (
+      <form onSubmit={this.onSubmit}>
+        <h2>situation 4</h2>
+        {this.useInput
+          ? getFieldDecorator('name', {
+            initialValue: '',
+            trigger: 'input',
+            rules: [
+              {
+                required: true,
+                message: "What's your name 1?",
+              },
+            ],
+          })(<input />)
+          : getFieldDecorator('name2', {
+              initialValue: '',
+              trigger: 'input',
+              rules: [
+                {
+                  required: true,
+                  message: "What's your name 2?",
+                },
+              ],
+            })(<input />)}
+        <div>
+          <label>
+            <input type="checkbox" checked={this.useInput} onInput={this.changeUseInput} />
+            toggle decorator name
+          </label>
+          {(getFieldError('name') || []).join(', ')}
+          {(getFieldError('name2') || []).join(', ')}
+        </div>
+        <button>Submit</button>
+      </form>
+    );
+  },
+};
+
 const WrappedForm1 = createForm()(Form1);
 const WrappedForm2 = createForm()(Form2);
 const WrappedForm3 = createForm()(Form3);
+const WrappedForm4 = createForm()(Form4);
 
 export default {
   render() {
@@ -211,6 +280,7 @@ export default {
         <WrappedForm1 />
         <WrappedForm2 />
         <WrappedForm3 />
+        <WrappedForm4 />
       </div>
     );
   },

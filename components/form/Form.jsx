@@ -149,6 +149,11 @@ const Form = {
       this.$forceUpdate();
     },
   },
+  updated(){
+    if(this.autoFormCreate || this.form) {
+      this.form.cleanUpUselessFields();
+    }
+  },
   methods: {
     onSubmit(e) {
       const { $listeners } = this;

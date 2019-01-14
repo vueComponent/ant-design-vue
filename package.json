@@ -188,7 +188,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "shallow-equal": "^1.0.0",
     "shallowequal": "^1.0.2",
-    "vue-ref": "^1.0.3",
+    "vue-ref": "^1.0.4",
     "warning": "^3.0.0"
   }
 }

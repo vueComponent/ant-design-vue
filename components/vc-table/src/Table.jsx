@@ -373,7 +373,11 @@ export default {
         event.preventDefault();
         const wd = event.deltaY;
         const target = event.target;
-        const { bodyTable, fixedColumnsBodyLeft, fixedColumnsBodyRight } = this;
+        const {
+          ref_bodyTable: bodyTable,
+          ref_fixedColumnsBodyLeft: fixedColumnsBodyLeft,
+          ref_fixedColumnsBodyRight: fixedColumnsBodyRight,
+        } = this;
         let scrollTop = 0;
 
         if (this.lastScrollTop) {

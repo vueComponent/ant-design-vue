@@ -149,8 +149,8 @@ const Form = {
       this.$forceUpdate();
     },
   },
-  updated(){
-    if(this.autoFormCreate || this.form) {
+  updated() {
+    if (this.autoFormCreate || this.form) {
       this.form.cleanUpUselessFields();
     }
   },

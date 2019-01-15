@@ -235,15 +235,15 @@ const Form4 = {
         <h2>situation 4</h2>
         {this.useInput
           ? getFieldDecorator('name', {
-            initialValue: '',
-            trigger: 'input',
-            rules: [
-              {
-                required: true,
-                message: "What's your name 1?",
-              },
-            ],
-          })(<input />)
+              initialValue: '',
+              trigger: 'input',
+              rules: [
+                {
+                  required: true,
+                  message: "What's your name 1?",
+                },
+              ],
+            })(<input />)
           : getFieldDecorator('name2', {
               initialValue: '',
               trigger: 'input',

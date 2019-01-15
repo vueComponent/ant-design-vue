@@ -632,7 +632,7 @@ function createBaseForm(option = {}, mixins = []) {
         const formProps = {
           [formPropName]: this.getForm(),
         };
-        const {wrappedComponentRef, ...restProps} = getOptionProps(this);
+        const { wrappedComponentRef, ...restProps } = getOptionProps(this);
         const wrappedComponentProps = {
           props: mapProps.call(this, {
             ...formProps,

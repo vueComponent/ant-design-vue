@@ -31,9 +31,9 @@ describe('Form', () => {
     const wrapper = mount(Form1, {
       sync: false,
     });
-    await asyncExpect(()=>{
+    await asyncExpect(() => {
       myForm.validateFields();
-    }); 
+    });
 
     wrapper.vm.$forceUpdate();
     expect(wrapper.html()).toMatchSnapshot();

@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.1
+`2019-01-15`
+
+- 🐞 Fixed the `Table` component could not be scrolled under ie.。[#390](https://github.com/vueComponent/ant-design-vue/issues/390)。
+- 🐞 Fix `Form` does not clear that does not need to check the field.[#367](https://github.com/vueComponent/ant-design-vue/issues/367)。
+
 ## 1.3.0
 `2019-01-12`
 
@@ -25,12 +31,12 @@
 Component Fixes / Enhancements:
 
 - 🌟 Avatar Added `srcSet` prop that is a list of sources to use for different screen resolutions.
-- 🌟 Notification Added `onClick` prop that is called when the notification is clicked. 
+- 🌟 Notification Added `onClick` prop that is called when the notification is clicked.
 - Transfer
   - 🌟 Added `search` event that is executed when search field are changed and deprecated `searchChange` event.
-  - 🌟 Added `disabled` prop that whether disable transfer. 
+  - 🌟 Added `disabled` prop that whether disable transfer.
 - 🌟 Refactor Badge, support `count` as custom component.
-- Slider 
+- Slider
   - 🌟 Added `tooltipVisible` prop that whether Tooltip will always show.
   - 🌟 Optimize the focus effect
   - 🐞 Fix tooltip does not display the problem when focus through the keyboard tab.
@@ -43,9 +49,9 @@ Component Fixes / Enhancements:
   - 🌟 customCell added `index` prop.
 - Select
   - 🌟 Added `removeIcon`、`clearIcon`、`menuItemSelectedIcon` prop，allow setting `remove`、`clear`、`menuItemSelected` custom icons.
-  - 🌟 Added `dropdownRender` prop that custom dropdown content. 
+  - 🌟 Added `dropdownRender` prop that custom dropdown content.
   - 🌟 Added `loading` prop that indicate loading state.
-- 🌟 Optimize the display of the Button when it contains an Icon. 
+- 🌟 Optimize the display of the Button when it contains an Icon.
 - ⚡️ Refactor Tag component with less code and better performance.
 - 💄 Added `title` prop that Menu.Item support tooltip title when collapsed.
 - 💄 Chore Card header and loading UI.

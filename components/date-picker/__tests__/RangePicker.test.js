@@ -406,10 +406,10 @@ describe('RangePicker', () => {
     );
     await asyncExpect(() => {
       wrapper.find('.ant-calendar-picker-input').trigger('click');
-    });
+    }, 0);
     await asyncExpect(() => {
       $$('.ant-calendar-range-quick-selector .ant-tag')[0].click();
-    }, 0);
+    }, 1000);
     await asyncExpect(() => {
       expect(handleOpenChange).toBeCalledWith(false);
     });

@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.1
+`2019-01-15`
+
+- 🐞 修复Table组件在ie下滚轮失效的问题。[#390](https://github.com/vueComponent/ant-design-vue/issues/390)。
+- 🐞 修复Form没有清除不在需要校验字段问题。[#367](https://github.com/vueComponent/ant-design-vue/issues/367)。
+
 ## 1.3.0
 `2019-01-12`
 
@@ -30,7 +36,7 @@
   - 🌟 增加 `search` 事件，搜索框内容时改变时的回调函数，并废弃 `searchChange` 事件。
   - 🌟 增加 `disabled` 属性，用于禁用搜索框。
 - 🌟 Badge 进行了重构，`count` 支持自定义组件。
-- Slider 
+- Slider
   - 🌟 增加 `tooltipVisible` 属性，用于 Tooltip 是否始终显示。
   - 🌟 优化focus效果
   - 🐞 修复键盘tab键聚焦时，Tooltip不显示问题。
@@ -45,7 +51,7 @@
   - 🌟 增加 `removeIcon`、`clearIcon`、`menuItemSelectedIcon` 属性，用于自定义删除、清空、选中的图标。
   - 🌟 增加 `dropdownRender` 属性， 用于自定义下拉框内容。
   - 🌟 增加 `loading` 属性， 用于展示加载中状态。
-- 🌟 优化 Button 在含有Icon时的显示效果。 
+- 🌟 优化 Button 在含有Icon时的显示效果。
 - ⚡️ 重构 Tag 组件，简化代码并提升性能。
 - 💄 Menu.Item 组件增加 `title` 属性，用于在收缩时展示的悬浮标题。
 - 💄 微调 Card 头部和加载中的样式细节。

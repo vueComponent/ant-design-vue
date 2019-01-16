@@ -150,7 +150,7 @@ const Form = {
     },
   },
   updated() {
-    if (this.autoFormCreate || this.form) {
+    if (this.form && this.form.cleanUpUselessFields) {
       this.form.cleanUpUselessFields();
     }
   },

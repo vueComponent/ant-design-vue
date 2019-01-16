@@ -10,7 +10,7 @@ import sortBy from 'lodash/sortBy';
 import { isZhCN } from '../util';
 import { Provider, create } from '../../components/_util/store';
 import NProgress from 'nprogress';
-import MobileMenu from '../../components/vc-drawer/src'; 
+import MobileMenu from '../../components/vc-drawer/src';
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -155,6 +155,15 @@ export default {
     mountedCallback () {
       NProgress.done();
       document.documentElement.scrollTop = 0;
+      try {
+        document.getElementById('ad').innerHTML = '';
+        const src = '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio';
+        const hm = document.createElement('script');
+        hm.src = src;
+        hm.id = '_carbonads_js';
+        const s = document.getElementById('ad');
+        s.append(hm);
+      } catch (error) {}
     },
   },
 
@@ -224,7 +233,7 @@ export default {
     }
     const config = AllDemo[titleMap[reName]];
     this.resetDocumentTitle(config, reName, isCN);
-    const { showSideBars, isMobile } = this;
+    const { isMobile } = this;
     return (
       <div class='page-wrapper'>
         <Header searchData={searchData} name={name}/>

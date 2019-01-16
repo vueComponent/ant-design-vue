@@ -16,6 +16,43 @@
             display: none;
         }
     </style>
+    <style>
+    #ad {
+  width: 145px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+}
+#ad a {
+  display: inline-block;
+  color: #7f8c8d;
+  font-weight: normal;
+}
+#ad span {
+  color: #7f8c8d;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+#ad img {
+  width: 125px;
+}
+#ad .carbon-img,
+#ad .carbon-text {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: normal;
+  color: #34495e;
+}
+#ad .carbon-poweredby {
+  color: #aaa;
+  font-weight: normal;
+}
+    </style>
     <script>
         var _hmt = _hmt || [];
         var isGithub = location.host.indexOf('github') !== -1;
@@ -27,11 +64,15 @@
             s.parentNode.insertBefore(hm, s);
         })()
     </script>
+
 </head>
 
 <body>
     <div id="app">
         <router-view></router-view>
+    </div>
+    <div id="ad">
+      <!-- <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio" id="_carbonads_js"></script> -->
     </div>
     <script>
         // var SeedAndDewConfig = {};

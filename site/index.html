@@ -17,7 +17,7 @@
         }
     </style>
     <style>
-    #ad {
+    #ad, #codefund {
   width: 145px;
   position: fixed;
   bottom: 10px;
@@ -28,15 +28,23 @@
   font-size: 13px;
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
-#ad a {
+#ad a, #codefund a {
   display: inline-block;
   color: #7f8c8d;
   font-weight: normal;
+}
+#codefund a {
+  color: #7f8c8d !important;
+  font-weight: normal !important;
 }
 #ad span {
   color: #7f8c8d;
   display: inline-block;
   margin-bottom: 5px;
+}
+#codefund #cf {
+ margin-bottom: 0px!important;
+ border-radius: 0px!important;
 }
 #ad img {
   width: 125px;
@@ -48,9 +56,21 @@
   font-weight: normal;
   color: #34495e;
 }
-#ad .carbon-poweredby {
-  color: #aaa;
-  font-weight: normal;
+#ad .carbon-text,
+#codefund .cf-text {
+  display: -webkit-box!important;
+  -webkit-box-orient: vertical!important;
+  -webkit-line-clamp: 4!important;
+  overflow: hidden!important;
+}
+#codefund .cf-text {
+  padding-bottom: 5px !important;
+  font-size: 12px !important;
+}
+#ad .carbon-poweredby, #codefund .cf-powered-by {
+  color: #aaa !important;
+  font-weight: normal !important;
+  line-height: 1.2 !important;
 }
     </style>
     <script>
@@ -74,6 +94,7 @@
     <div id="ad">
       <!-- <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio" id="_carbonads_js"></script> -->
     </div>
+    <div id="codefund"></div>
     <script>
         // var SeedAndDewConfig = {};
         // (function() {

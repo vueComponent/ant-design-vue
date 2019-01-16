@@ -7,6 +7,7 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import VueClipboard from 'vue-clipboard2';
+import NProgress from 'nprogress';
 import routes from './routes';
 import Md from './components/md';
 import Api from './components/api';
@@ -48,6 +49,10 @@ const router = new VueRouter({
   mode: 'history',
   fallback: false,
   routes,
+});
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
 });
 new Vue({
   el: '#app',

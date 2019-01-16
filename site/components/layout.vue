@@ -7,6 +7,7 @@ import Sponsors from './sponsors';
 import zhCN from 'antd/locale-provider/zh_CN';
 import enUS from 'antd/locale-provider/default';
 import sortBy from 'lodash/sortBy';
+import axios from 'axios';
 import { isZhCN } from '../util';
 import { Provider, create } from '../../components/_util/store';
 import NProgress from 'nprogress';
@@ -156,13 +157,22 @@ export default {
       NProgress.done();
       document.documentElement.scrollTop = 0;
       try {
-        document.getElementById('ad').innerHTML = '';
-        const src = '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio';
-        const hm = document.createElement('script');
-        hm.src = src;
-        hm.id = '_carbonads_js';
-        const s = document.getElementById('ad');
-        s.append(hm);
+        const isGithub = location.host.indexOf('github') !== -1;
+        if(isGithub){
+          document.getElementById('ad').innerHTML = '';
+          const src = '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio';
+          const hm = document.createElement('script');
+          hm.src = src;
+          hm.id = '_carbonads_js';
+          const s = document.getElementById('ad');
+          s.append(hm);
+        } else {
+          axios.get('https://api.codefund.app/properties/162/funder.html?template=square')
+          .then(function (response) {
+            document.getElementById("codefund").innerHTML = response.data;
+          });
+        }
+
       } catch (error) {}
     },
   },

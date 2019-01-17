@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.2
+`2019-01-17`
+
+- 🐞 Fix Form reports an error when using the obsolete API `autoCreateForm`.[#413](https://github.com/vueComponent/ant-design-vue/issues/413)。
+- 🐞 Fix Slider error when clicking mark. [#407](https://github.com/vueComponent/ant-design-vue/issues/407)。
+
 ## 1.3.1
 `2019-01-15`
 

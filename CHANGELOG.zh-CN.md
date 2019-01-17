@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.2
+`2019-01-17`
+
+- 🐞 修复Form在使用废弃API `autoCreateForm` 时报错问题。[#413](https://github.com/vueComponent/ant-design-vue/issues/413)。
+- 🐞 修复Slider点击mark时报错问题。[#407](https://github.com/vueComponent/ant-design-vue/issues/407)。
+
 ## 1.3.1
 `2019-01-15`
 

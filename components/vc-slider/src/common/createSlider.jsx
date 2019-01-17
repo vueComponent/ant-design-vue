@@ -190,7 +190,7 @@ export default function createSlider(Component) {
       },
       onClickMarkLabel(e, value) {
         e.stopPropagation();
-        this.onChange({ value });
+        this.onChange({ sValue: value });
         this.onEnd();
       },
       getSliderStart() {
@@ -294,7 +294,7 @@ export default function createSlider(Component) {
           min,
           className: `${prefixCls}-mark`,
         },
-        listeners: {
+        on: {
           clickLabel: disabled ? noop : this.onClickMarkLabel,
         },
       };

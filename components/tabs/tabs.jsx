@@ -140,9 +140,7 @@ export default {
         tabBarExtraContent,
         renderTabBar: renderTabBarSlot,
       },
-      on: {
-        ...this.$listeners,
-      },
+      on: this.$listeners,
     };
     const contentCls = {
       [`${prefixCls}-${tabPosition}-content`]: true,

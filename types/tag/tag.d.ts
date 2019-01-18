@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { CheckableTag } from './checkable-tag';
 
 export declare class Tag extends AntdComponent {
-  static CheckableTag: CheckableTag;
+  static CheckableTag: typeof CheckableTag;
 
   /**
    * Callback executed when close animation is completed

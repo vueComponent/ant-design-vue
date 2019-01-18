@@ -9,10 +9,10 @@ import { MenuItemGroup } from './menu-item-group';
 import { Divider } from '../divider';
 
 export declare class Menu extends AntdComponent {
-  static Item: MenuItem;
-  static SubMenu: SubMenu;
-  static ItemGroup: MenuItemGroup;
-  static Divider: Divider;
+  static Item: typeof MenuItem;
+  static SubMenu: typeof SubMenu;
+  static ItemGroup: typeof MenuItemGroup;
+  static Divider: typeof Divider;
 
   /**
    * Allow selection of multiple items

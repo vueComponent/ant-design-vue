@@ -7,7 +7,7 @@ import { Meta } from './meta';
 
 export declare class Card extends AntdComponent {
   static Grid: any;
-  static Meta: Meta;
+  static Meta: typeof Meta;
 
   /**
    * The action list, shows at the bottom of the Card.

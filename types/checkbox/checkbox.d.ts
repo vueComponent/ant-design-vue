@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { CheckboxGroup } from './checkbox-group';
 
 export declare class Checkbox extends AntdComponent {
-  static Group: CheckboxGroup;
+  static Group: typeof CheckboxGroup;
 
   /**
    * get focus when component mounted

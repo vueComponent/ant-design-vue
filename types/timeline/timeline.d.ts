@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { TimelineItem } from './timeline-item';
 
 export declare class Timeline extends AntdComponent {
-  static Item: TimelineItem;
+  static Item: typeof TimelineItem;
 
   /**
    * Set the last ghost node's existence or its content

@@ -7,8 +7,8 @@ import { TreeNode } from '../tree-node';
 import { DictionaryTree } from './dictionary-tree';
 
 export declare class Tree extends AntdComponent {
-  static TreeNode: TreeNode;
-  static DirectoryTree: DictionaryTree;
+  static TreeNode: typeof TreeNode;
+  static DirectoryTree: typeof DictionaryTree;
 
   /**
    * treeNode of tree

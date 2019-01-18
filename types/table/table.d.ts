@@ -116,8 +116,8 @@ export interface TableRowSelection {
 }
 
 export declare class Table extends AntdComponent {
-  static Column: Column;
-  static ColumnGroup: ColumnGroup;
+  static Column: typeof Column;
+  static ColumnGroup: typeof ColumnGroup;
 
   /**
    * Whether to show all table borders

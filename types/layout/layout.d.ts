@@ -9,10 +9,10 @@ import LayoutContent from './layout-content';
 import LayoutFooter from './layout-footer';
 
 export declare class Layout extends AntdComponent {
-  static Header: LayoutHeader;
-  static Content: LayoutContent;
-  static Footer: LayoutFooter;
-  static Sider: LayoutSider;
+  static Header: typeof LayoutHeader;
+  static Content: typeof LayoutContent;
+  static Footer: typeof LayoutFooter;
+  static Sider: typeof LayoutSider;
 
   /**
    * container className

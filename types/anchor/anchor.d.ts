@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { AnchorLink } from './anchor-link';
 
 export declare class Anchor extends AntdComponent {
-  static Link: AnchorLink;
+  static Link: typeof AnchorLink;
 
   /**
    * Fixed mode of Anchor

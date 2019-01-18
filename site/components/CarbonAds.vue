@@ -14,6 +14,13 @@ export default {
         this.$el.innerHTML = "";
         this.load();
       }
+      this.adInterval && clearInterval(this.adInterval);
+      this.adInterval = setInterval(()=>{
+        if(!this.$el.querySelector("#carbonads")){
+          this.$el.innerHTML = "";
+          this.load();
+        }
+      }, 10000);
     },
   },
   methods: {

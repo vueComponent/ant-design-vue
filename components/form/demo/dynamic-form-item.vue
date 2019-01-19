@@ -58,7 +58,7 @@ let id = 0;
 export default {
   beforeCreate () {
     this.form = this.$form.createForm(this);
-    this.form.getFieldDecorator('keys', { initialValue: [] });
+    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   data () {
     return {

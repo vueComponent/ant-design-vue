@@ -20,7 +20,7 @@ export default {
           this.$el.innerHTML = "";
           this.load();
         }
-      }, 10000);
+      }, 20000);
     },
   },
   methods: {

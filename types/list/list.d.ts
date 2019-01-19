@@ -14,7 +14,7 @@ export declare class PaginationConfig extends Pagination {
 }
 
 export class List extends AntdComponent {
-  static Item: ListItem;
+  static Item: typeof ListItem;
 
   /**
    * Toggles rendering of the border around the list

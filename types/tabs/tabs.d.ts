@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { TabPane } from './tab-pane';
 
 export declare class Tabs extends AntdComponent {
-  static TabPane: TabPane;
+  static TabPane: typeof TabPane;
 
   /**
    * Current TabPane's key

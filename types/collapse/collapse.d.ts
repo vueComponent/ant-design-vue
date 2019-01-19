@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { CollapsePanel } from './collapse-panel';
 
 export declare class Collapse extends AntdComponent {
-  static Panel: CollapsePanel;
+  static Panel: typeof CollapsePanel;
 
   /**
    * If true, Collapse renders as Accordion

@@ -9,9 +9,9 @@ import { MonthPicker } from './month-picker';
 import { WeekPicker } from './week-picker';
 
 export declare class DatePicker extends DatepickerCommon {
-  RangePicker: RangePicker;
-  MonthPicker: MonthPicker;
-  WeekPickerker: WeekPicker;
+  static RangePicker: typeof RangePicker;
+  static MonthPicker: typeof MonthPicker;
+  static WeekPickerker: typeof WeekPicker;
 
   /**
    * Defualt Value

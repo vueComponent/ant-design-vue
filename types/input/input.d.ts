@@ -8,9 +8,9 @@ import { InputSearch } from './input-search';
 import { TextArea } from './textarea';
 
 export declare class Input extends AntdComponent {
-  static Group: InputGroup;
-  static Search: InputSearch;
-  static TextArea: TextArea;
+  static Group: typeof InputGroup;
+  static Search: typeof InputSearch;
+  static TextArea: typeof TextArea;
 
   /**
    * The label text displayed after (on the right side of) the input field.

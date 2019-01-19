@@ -8,8 +8,8 @@ import { OptionGroup } from './option-group';
 import { VNode } from 'vue';
 
 export declare class Select extends AntdComponent {
-  static Option: Option;
-  static OptGroup: OptionGroup;
+  static Option: typeof Option;
+  static OptGroup: typeof OptionGroup;
 
   /**
    * Show clear button.

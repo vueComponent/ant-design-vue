@@ -7,8 +7,8 @@ import { RadioGroup } from './radio-group';
 import { RadioButton } from './radio-button';
 
 export declare class Radio extends AntdComponent {
-  static Group: RadioGroup;
-  static Button: RadioButton;
+  static Group: typeof RadioGroup;
+  static Button: typeof RadioButton;
 
   /**
    * get focus when component mounted

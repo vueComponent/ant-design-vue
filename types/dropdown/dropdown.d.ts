@@ -7,7 +7,7 @@ import { Menu } from '../menu/menu';
 import { DropdownButton } from './dropdown-button';
 
 export declare class Dropdown extends AntdComponent {
-  static Button: DropdownButton;
+  static Button: typeof DropdownButton;
 
   /**
    * the trigger mode which executes the drop-down action

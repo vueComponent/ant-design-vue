@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { ButtonGroup } from './button-group';
 
 export declare class Button extends AntdComponent {
-  Group: ButtonGroup;
+  static Group: typeof ButtonGroup;
 
   /**
    * can be set to primary ghost dashed danger(added in 2.7) or omitted (meaning default)

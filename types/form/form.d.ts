@@ -319,7 +319,7 @@ export interface IformCreateOption {
 }
 
 export declare class Form extends AntdComponent {
-  static Item: FormItem;
+  static Item: typeof FormItem;
   static create: (options: IformCreateOption) => (WrapedComponent: any) => any;
 
   /**

@@ -16,7 +16,7 @@ export interface TreeData {
 }
 
 export declare class TreeSelect extends AntdComponent {
-  static TreeNode: TreeNode;
+  static TreeNode: typeof TreeNode;
 
   /**
    * Whether allow clear

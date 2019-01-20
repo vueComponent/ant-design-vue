@@ -17,6 +17,7 @@ function transformLess(lessFile, config = {}) {
     paths: [path.dirname(resolvedLessFile)],
     filename: resolvedLessFile,
     plugins: [new NpmImportPlugin({ prefix: '~' })],
+    javascriptEnabled: true,
   };
   return less
     .render(data, lessOpts)

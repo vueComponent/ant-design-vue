@@ -34,7 +34,15 @@ export declare class Breadcrumb extends AntdComponent {
    * Custom item renderer, slot="itemRender" and slot-scope="{route, params, routes, paths}"
    * @type Function
    */
-  itemRender: (
-    { route, params, routes, paths }: { route: any; params: any; routes: any; paths: any },
-  ) => VNode;
+  itemRender: ({
+    route,
+    params,
+    routes,
+    paths,
+  }: {
+    route: any;
+    params: any;
+    routes: any;
+    paths: any;
+  }) => VNode;
 }

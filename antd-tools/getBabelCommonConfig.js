@@ -3,6 +3,7 @@
 module.exports = function(modules) {
   const plugins = [
     require.resolve('babel-plugin-transform-vue-jsx'),
+    require.resolve('babel-plugin-inline-import-data-uri'),
     require.resolve('babel-plugin-transform-es3-member-expression-literals'),
     require.resolve('babel-plugin-transform-es3-property-literals'),
     require.resolve('babel-plugin-transform-object-assign'),

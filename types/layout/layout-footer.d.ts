@@ -6,7 +6,6 @@
 import { AntdComponent } from '../component';
 
 export default class LayoutFooter extends AntdComponent {
-
   /**
    * container className
    * @default undefined

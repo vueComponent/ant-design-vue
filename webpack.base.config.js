@@ -2,6 +2,8 @@ const path = require('path');
 const hljs = require('highlight.js');
 const Token = require('markdown-it/lib/token');
 const cheerio = require('cheerio');
+const WebpackBar = require('webpackbar');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const getBabelCommonConfig = require('./antd-tools/getBabelCommonConfig');
 const babelConfig = getBabelCommonConfig(false);
 
@@ -129,52 +131,45 @@ md.core.ruler.push('update_template', function replace({ tokens }) {
       </script>
       `
       : '';
-    newContent += style
-      ? `
-      <style>
-      ${style || ''}
-      </style>
-      `
-      : '';
-    newContent += scopedStyle
-      ? `
-      <style scoped>
-      ${scopedStyle || ''}
-      </style>
-      `
-      : '';
+    newContent += style ? `<style>${style || ''}</style>` : '';
+    newContent += scopedStyle ? `<style scoped>${scopedStyle || ''}</style>` : '';
     const t = new Token('html_block', '', 0);
     t.content = newContent;
     tokens.push(t);
   }
 });
-
+const vueLoaderOptions = {
+  loaders: {
+    js: [
+      {
+        loader: 'babel-loader',
+        options: {
+          presets: ['env'],
+          plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
+        },
+      },
+    ],
+  },
+};
 module.exports = {
+  mode: 'production',
   entry: {
     index: [`./site/${process.env.ENTRY_INDEX || 'index'}.js`],
   },
   module: {
     rules: [
       {
-        test: /\.md/,
+        test: /\.md$/,
         use: [
+          {
+            loader: 'vue-loader',
+            options: vueLoaderOptions,
+          },
           {
             loader: 'vue-antd-md-loader',
             options: Object.assign(md, {
               wrapper: 'div',
-              vueLoaderOptions: {
-                loaders: {
-                  js: [
-                    {
-                      loader: 'babel-loader',
-                      options: {
-                        presets: ['env'],
-                        plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
-                      },
-                    },
-                  ],
-                },
-              },
+              raw: true,
             }),
           },
         ],
@@ -182,23 +177,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          loaders: {
-            js: [
-              {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['env'],
-                  plugins: [
-                    'transform-vue-jsx',
-                    'transform-object-rest-spread',
-                    'syntax-dynamic-import',
-                  ],
-                },
-              },
-            ],
-          },
-        },
+        options: vueLoaderOptions,
       },
       {
         test: /\.(js|jsx)$/,
@@ -225,4 +204,5 @@ module.exports = {
       '@': path.join(__dirname, ''),
     },
   },
+  plugins: [new VueLoaderPlugin(), new WebpackBar()],
 };

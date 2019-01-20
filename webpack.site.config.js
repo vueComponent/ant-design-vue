@@ -1,55 +1,52 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WebpackChunkHash = require('webpack-chunk-hash');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config');
-
-const modulePlugin = new ExtractTextPlugin({
-  filename: '[name].[chunkhash].css',
-  allChunks: true,
-});
 
 module.exports = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, './site-dist'),
     publicPath: '/ant-design-vue/',
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[chunkhash].async.js',
+    filename: '[name].[contenthash:8].js',
+    chunkFilename: '[contenthash:8].async.js',
   },
   module: {
     rules: [
       {
         test: /\.less$/,
-        use: modulePlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-            },
-            {
-              loader: 'postcss-loader',
-            },
-            { loader: 'less-loader' },
-          ],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          { loader: 'less-loader', options: { javascriptEnabled: true } },
+        ],
       },
       {
         test: /\.css$/,
-        use: modulePlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-            },
-            {
-              loader: 'postcss-loader',
-            },
-          ],
-        }),
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          name: `chunk-vendors`,
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          chunks: 'initial',
+        },
+        common: {
+          name: `chunk-common`,
+          minChunks: 2,
+          priority: -20,
+          chunks: 'initial',
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -57,30 +54,14 @@ module.exports = merge(baseWebpackConfig, {
         NODE_ENV: '"production"',
       },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vender',
-      minChunks: function(module) {
-        return /node_modules/.test(module.context);
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: Infinity,
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
     new HtmlWebpackPlugin({
       template: './site/index.html',
       inject: true,
       production: true,
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
+      chunkFilename: '[id].[contenthash:8].css',
     }),
-    modulePlugin,
-    new WebpackChunkHash({ algorithm: 'md5' }),
   ],
 });

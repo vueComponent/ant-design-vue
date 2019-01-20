@@ -6,7 +6,6 @@
 import { AntdComponent } from '../component';
 
 export default class LayoutContent extends AntdComponent {
-
   /**
    * container className
    * @default undefined

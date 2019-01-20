@@ -5,6 +5,7 @@ const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config');
 
 module.exports = merge(baseWebpackConfig, {
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/ant-design-vue/',
@@ -20,7 +21,7 @@ module.exports = merge(baseWebpackConfig, {
             loader: 'css-loader',
             options: { sourceMap: true },
           },
-          { loader: 'less-loader', options: { sourceMap: true } },
+          { loader: 'less-loader', options: { sourceMap: true, javascriptEnabled: true } },
         ],
       },
       {

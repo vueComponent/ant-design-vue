@@ -86,9 +86,13 @@ export declare class Cascader extends AntdComponent {
    * @default labels => labels.join(' / ')
    * @type Function
    */
-  displayRender: (
-    { labels, selectedOptions }: { labels: string[]; selectedOptions: CascaderOptionType[] },
-  ) => VNode;
+  displayRender: ({
+    labels,
+    selectedOptions,
+  }: {
+    labels: string[];
+    selectedOptions: CascaderOptionType[];
+  }) => VNode;
 
   /**
    * expand current item when click or hover, one of 'click' 'hover'

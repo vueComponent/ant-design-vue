@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config');
@@ -25,32 +25,28 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
     ],
   },
   optimization: {
     splitChunks: {
-        cacheGroups: {
-          vendors: {
-            name: `chunk-vendors`,
-            test: /[\\/]node_modules[\\/]/,
-            priority: -10,
-            chunks: 'initial',
-          },
-          common: {
-            name: `chunk-common`,
-            minChunks: 2,
-            priority: -20,
-            chunks: 'initial',
-            reuseExistingChunk: true,
-          },
+      cacheGroups: {
+        vendors: {
+          name: `chunk-vendors`,
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          chunks: 'initial',
+        },
+        common: {
+          name: `chunk-common`,
+          minChunks: 2,
+          priority: -20,
+          chunks: 'initial',
+          reuseExistingChunk: true,
         },
       },
+    },
   },
   plugins: [
     new webpack.DefinePlugin({

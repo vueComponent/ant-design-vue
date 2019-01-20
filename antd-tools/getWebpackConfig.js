@@ -6,8 +6,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const deepAssign = require('deep-assign');
-const chalk = require('chalk');
 const postcssConfig = require('./postcssConfig');
 const CleanUpStatsPlugin = require('./utils/CleanUpStatsPlugin');
 
@@ -232,7 +230,7 @@ All rights reserved.
   }
 
   return config;
-};
+}
 
 getWebpackConfig.webpack = webpack;
 getWebpackConfig.svgRegex = svgRegex;

@@ -131,12 +131,8 @@ md.core.ruler.push('update_template', function replace({ tokens }) {
       </script>
       `
       : '';
-    newContent += style
-      ? `<style>${style || ''}</style>`
-      : '';
-    newContent += scopedStyle
-      ? `<style scoped>${scopedStyle || ''}</style>`
-      : '';
+    newContent += style ? `<style>${style || ''}</style>` : '';
+    newContent += scopedStyle ? `<style scoped>${scopedStyle || ''}</style>` : '';
     const t = new Token('html_block', '', 0);
     t.content = newContent;
     tokens.push(t);
@@ -149,10 +145,7 @@ const vueLoaderOptions = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
-          plugins: [
-            'transform-vue-jsx',
-            'transform-object-rest-spread',
-          ],
+          plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
         },
       },
     ],
@@ -211,8 +204,5 @@ module.exports = {
       '@': path.join(__dirname, ''),
     },
   },
-  plugins: [
-    new VueLoaderPlugin(),
-    new WebpackBar(),
-  ],
+  plugins: [new VueLoaderPlugin(), new WebpackBar()],
 };

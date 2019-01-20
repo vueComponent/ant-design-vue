@@ -52,8 +52,8 @@
     },
     "homepage": "https://github.com/vueComponent/ant-design-vue",
     "pre-commit": [
-        "lint:style",
-        "lint"
+        "lint",
+        "prettier"
     ],
     "peerDependencies": {
         "vue": ">=2.5.0",

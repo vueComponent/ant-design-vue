@@ -62,7 +62,6 @@ export default {
     this.form = this.$form.createForm(this);
   },
   data () {
-    window.form = this;
     return {
       formItemLayout: {
         labelCol: {

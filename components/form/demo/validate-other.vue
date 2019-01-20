@@ -171,7 +171,6 @@ Demostration for validataion configuration for form controls which are not show 
 <script>
 export default {
   beforeCreate () {
-    window.test = this;
     this.form = this.$form.createForm(this);
   },
   data: () => ({

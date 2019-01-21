@@ -81,6 +81,7 @@ const Circle = {
       attrs: {
         d: pathString,
         stroke: trailColor,
+        'stroke-linecap': strokeLinecap,
         'stroke-width': trailWidth || strokeWidth,
         'fill-opacity': '0',
       },

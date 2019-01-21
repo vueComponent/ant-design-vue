@@ -1,4 +1,4 @@
-// based on rc-input-number 4.3.7
+// based on rc-input-number 4.3.8
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util';
@@ -140,14 +140,16 @@ export default {
       // Trigger onChange when max or min change
       // https://github.com/ant-design/ant-design/issues/11574
       const nextValue = 'value' in props ? props.value : this.sValue;
-      if (nextValue > val) {
+      // ref: null < 20 === true
+      // https://github.com/ant-design/ant-design/issues/14277
+      if (typeof nextValue === 'number' && nextValue > val) {
         this.__emit('change', val);
       }
     },
     min(val) {
       const props = getOptionProps(this);
       const nextValue = 'value' in props ? props.value : this.sValue;
-      if (nextValue < val) {
+      if (typeof nextValue === 'number' && nextValue < val) {
         this.__emit('change', val);
       }
     },

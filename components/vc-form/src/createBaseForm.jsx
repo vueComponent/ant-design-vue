@@ -592,7 +592,12 @@ function createBaseForm(option = {}, mixins = []) {
               callback,
             );
           });
-          pending.catch(e => e);
+          pending.catch((e) => {
+            if (console.error) { // eslint-disable-line
+              console.error(e); // eslint-disable-line
+            }
+            return e;
+          });
           return pending;
         },
 

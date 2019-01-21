@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
 import warning from 'warning';
-import { initDefaultProps, getOptionProps, getSlots } from '../../_util/props-util';
+import { hasProp, initDefaultProps, getOptionProps, getSlots } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
 import proxyComponent from '../../_util/proxyComponent';
@@ -304,9 +304,11 @@ const Tree = {
         });
         this.delayedDragEnterLogic[pos] = setTimeout(() => {
           const newExpandedKeys = arrAdd(expandedKeys, eventKey);
-          this.setState({
-            _expandedKeys: newExpandedKeys,
-          });
+          if (!hasProp(this, 'expandedKeys')) {
+            this.setState({
+              _expandedKeys: newExpandedKeys,
+            });
+          }
           this.__emit('dragenter', { event, node, expandedKeys: newExpandedKeys });
         }, 400);
       }, 0);

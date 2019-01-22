@@ -67,7 +67,7 @@ const Notification = {
     remove(key) {
       this.setState(previousState => {
         return {
-          notices: previousState.notices.filter(notice => notice.key !== key),
+          notices: previousState.notices.filter(notice => notice.key !== key && notice.updateKey !== key),
         };
       });
     },

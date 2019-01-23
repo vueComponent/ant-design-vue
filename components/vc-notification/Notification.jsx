@@ -81,7 +81,7 @@ const Notification = {
       const key = notice.updateKey ? notice.updateKey : notice.key;
 
       const { content, duration, closable, onClose, style, class: className } = notice;
-      const close = createChainedFunction(remove.bind(this, key), onClose);
+      const close = createChainedFunction(remove.bind(this, notice.key), onClose);
       const noticeProps = {
         props: {
           prefixCls,

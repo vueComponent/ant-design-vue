@@ -48,4 +48,16 @@ export declare class Anchor extends AntdComponent {
    * @type boolean
    */
   showInkInFixed: boolean;
+
+  /**
+   * The class name of the container
+   * @type string
+   */
+  wrapperClass: string;
+
+  /**
+   * The style of the container
+   * @type object
+   */
+  wrapperStyle: object;
 }

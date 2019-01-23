@@ -11,6 +11,8 @@
 | offsetBottom | 距离窗口底部达到指定偏移量后触发 | number |  |
 | offsetTop | 距离窗口顶部达到指定偏移量后触发 | number |  |
 | showInkInFixed | 固定模式是否显示小圆点 | boolean | false |
+| wrapperClass | 容器的类名 | string | - |
+| wrapperStyle | 容器样式 | object | - |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |

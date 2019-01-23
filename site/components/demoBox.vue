@@ -16,12 +16,14 @@
       <a-tooltip :title="codeExpand ? 'Hide Code' : 'Show Code'">
         <span class="code-expand-icon">
           <img
+            width="16"
             alt="expand code"
             src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
             :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
             @click="handleCodeExpand"
           />
           <img
+            width="16"
             alt="expand code"
             src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
             :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"

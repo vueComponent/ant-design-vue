@@ -1,12 +1,18 @@
 .@{prefixClass}-month-panel {
   left: 0;
-  top: 0;
+  top:0;
   bottom: 0;
   right: 0;
   background: #ffffff;
   z-index: 10;
   position: absolute;
   outline: none;
+
+  > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .@{prefixClass}-month-panel-hidden {
@@ -37,15 +43,14 @@
   }
 }
 
-.@{prefixClass}-month-panel-prev-year-btn,
-.@{prefixClass}-month-panel-next-year-btn {
+.@{prefixClass}-month-panel-prev-year-btn, .@{prefixClass}-month-panel-next-year-btn {
   position: absolute;
   top: 0;
 }
 
 .@{prefixClass}-month-panel-next-year-btn {
   &:after {
-    content: '»';
+    content: '»'
   }
 }
 
@@ -54,7 +59,7 @@
   left: 0;
 
   &:after {
-    content: '«';
+    content: '«'
   }
 }
 
@@ -72,10 +77,13 @@
 }
 
 .@{prefixClass}-month-panel-body {
+  flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  top: 34px;
-  bottom: 0;
+}
+
+.@{prefixClass}-month-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 
 .@{prefixClass}-month-panel-table {
@@ -87,6 +95,8 @@
 
 .@{prefixClass}-month-panel-cell {
   text-align: center;
+
+
 
   .@{prefixClass}-month-panel-month {
     display: block;
@@ -106,7 +116,7 @@
     }
   }
 
-  &-disabled {
+  &-disabled{
     .@{prefixClass}-month-panel-month {
       color: #bfbfbf;
 

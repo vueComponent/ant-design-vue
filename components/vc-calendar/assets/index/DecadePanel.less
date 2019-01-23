@@ -7,6 +7,8 @@
   z-index: 10;
   position: absolute;
   outline: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .@{prefixClass}-decade-panel-hidden {
@@ -37,15 +39,14 @@
   }
 }
 
-.@{prefixClass}-decade-panel-prev-century-btn,
-.@{prefixClass}-decade-panel-next-century-btn {
+.@{prefixClass}-decade-panel-prev-century-btn, .@{prefixClass}-decade-panel-next-century-btn {
   position: absolute;
   top: 0;
 }
 
 .@{prefixClass}-decade-panel-next-century-btn {
   &:after {
-    content: '»';
+    content: '»'
   }
 }
 
@@ -53,7 +54,7 @@
   user-select: none;
   left: 0;
   &:after {
-    content: '«';
+    content: '«'
   }
 }
 
@@ -63,10 +64,13 @@
 }
 
 .@{prefixClass}-decade-panel-body {
+  flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  bottom: 0;
-  top: 34px;
+}
+
+.@{prefixClass}-decade-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 
 .@{prefixClass}-decade-panel-table {
@@ -107,9 +111,8 @@
   }
 }
 
-.@{prefixClass}-decade-panel-last-century-cell,
-.@{prefixClass}-decade-panel-next-century-cell {
-  .@{prefixClass}-decade-panel-decade {
+.@{prefixClass}-decade-panel-last-century-cell, .@{prefixClass}-decade-panel-next-century-cell {
+  .@{prefixClass}-decade-panel-decade{
     user-select: none;
     -webkit-user-select: none;
     color: rgba(0, 0, 0, 0.25);

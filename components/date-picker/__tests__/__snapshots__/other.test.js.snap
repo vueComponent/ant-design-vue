@@ -53,7 +53,7 @@ exports[`MonthPicker and WeekPicker render WeekPicker 1`] = `
   <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
     <div tabindex="0" class="ant-calendar ant-calendar-week-number ant-calendar-picker-container-content">
       <div class="ant-calendar-panel">
-        <div class="ant-calendar-date-panel">
+        <div tabindex="0" class="ant-calendar-date-panel">
           <div class="ant-calendar-header">
             <div style="position: relative;"><a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a><a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">1月</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2000</a></span><a title="Next month (PageDown)" class="ant-calendar-next-month-btn"></a><a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a></div>
           </div>

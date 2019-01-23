@@ -23,6 +23,7 @@ const CalendarFooter = {
     disabledDate: PropTypes.func,
     showTimePicker: PropTypes.bool,
     okDisabled: PropTypes.bool,
+    mode: PropTypes.string,
   },
   methods: {
     onSelect(value) {
@@ -37,9 +38,9 @@ const CalendarFooter = {
   render() {
     const props = getOptionProps(this);
     const { $listeners } = this;
-    const { value, prefixCls, showOk, timePicker, renderFooter, showToday } = props;
+    const { value, prefixCls, showOk, timePicker, renderFooter, showToday, mode } = props;
     let footerEl = null;
-    const extraFooter = renderFooter();
+    const extraFooter = renderFooter && renderFooter(mode);
     if (showToday || timePicker || extraFooter) {
       const btnProps = {
         props: {

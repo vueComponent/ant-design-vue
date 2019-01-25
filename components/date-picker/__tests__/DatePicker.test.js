@@ -118,6 +118,10 @@ describe('DatePicker', () => {
       openPanel(wrapper);
     });
     await asyncExpect(() => {
+      // selectDateFromBody时(点击其它元素)没有触发input blur事件，强制执行blur
+      $$('.ant-calendar-input')[0].blur();
+    }, 0);
+    await asyncExpect(() => {
       selectDateFromBody(moment('2016-11-13'));
     }, 0);
     await asyncExpect(() => {
@@ -129,7 +133,6 @@ describe('DatePicker', () => {
     await asyncExpect(() => {
       expect($$('.ant-calendar-input')[0].value).toBe('2016-11-14 12:12:12');
     });
-    await asyncExpect(() => {});
   });
 
   it('triggers onChange only when date was selected', async () => {

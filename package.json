@@ -26,7 +26,6 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development ENTRY_INDEX=dev ./node_modules/.bin/webpack-dev-server --open --hot --port 3001",
     "start": "cross-env NODE_ENV=development ./node_modules/.bin/webpack-dev-server --open --hot",
-    "site-test": "cross-env NODE_ENV=production webpack --config ./webpack.site.config.js",
     "test": "cross-env NODE_ENV=test jest --config .jest.js",
     "site": "node scripts/run.js site-dist",
     "copy": "node scripts/run.js copy-html",
@@ -198,6 +197,9 @@
     "warning": "^3.0.0"
   },
   "sideEffects": [
+    "site/*",
+    "components/style.js",
+    "components/**/style/*",
     "dist/*",
     "es/**/style/*",
     "lib/**/style/*",

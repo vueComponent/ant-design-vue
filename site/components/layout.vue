@@ -267,6 +267,7 @@ export default {
               }
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class='main-container main-container-component'>
+                  <CarbonAds />
                   {!isMobile ? <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
                   </div> : null}
@@ -302,7 +303,6 @@ export default {
           </div>
         </a-locale-provider>
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
-        <CarbonAds />
       </div>
     );
   },

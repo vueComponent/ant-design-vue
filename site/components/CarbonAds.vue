@@ -1,31 +1,43 @@
 <script>
+import axios from 'axios';
 const carbonUrls = {
   'vuecomponent.github.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
   'tangjinzhou.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
 };
-const carbonUrl = carbonUrls[location.host];
+const carbonUrl = '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio' || carbonUrls[location.host];
+const isGitee = location.host.indexOf('gitee') !== -1;
 export default {
   mounted() {
     this.load();
   },
   watch: {
     $route(e, t) {
-      if(e.path !== t.path && this.$el.querySelector("#carbonads")){
+      let adId = '#carbonads';
+      if(isGitee) {
+        adId = '#cf';
+      }
+      if(e.path !== t.path && this.$el.querySelector(adId)){
         this.$el.innerHTML = "";
         this.load();
       }
       this.adInterval && clearInterval(this.adInterval);
       this.adInterval = setInterval(()=>{
-        if(!this.$el.querySelector("#carbonads")){
+        if(!this.$el.querySelector(adId)){
           this.$el.innerHTML = "";
           this.load();
         }
       }, 20000);
+
     },
   },
   methods: {
     load() {
-      if(carbonUrl) {
+      if(isGitee) {
+        axios.get('https://api.codefund.app/properties/162/funder.html?template=horizontal')
+        .then(function (response) {
+          document.getElementById("codefund-ads").innerHTML = response.data;
+        });
+      } else if(carbonUrl) {
         const e = document.createElement("script");
         e.id = "_carbonads_js";
         e.src = carbonUrl;
@@ -35,7 +47,7 @@ export default {
   },
   render () {
     return (
-      <div id="carbon-ads"/>
+      isGitee ? <div id="codefund-ads"/> : <div id="carbon-ads"/>
     );
   },
 };
@@ -44,6 +56,7 @@ export default {
  #carbon-ads {
   width: 145px;
   position: fixed;
+  z-index: 9;
   bottom: 10px;
   right: 10px;
   padding: 10px;

@@ -10,6 +10,14 @@
 
 ---
 
+## 1.3.3
+`2019-01-26`
+
+- 🐞 修复message在配置maxcount时，不能关闭提示窗问题。[#428](https://github.com/vueComponent/ant-design-vue/pull/428)。
+- 🐞 修复一些组件 TypeScript 定义。[#422](https://github.com/vueComponent/ant-design-vue/pull/422)。
+- 🌟 Anchor组件新增`warpperClass` `wrapperStyle`属性。[1aa42d](https://github.com/vueComponent/ant-design-vue/commit/1aa42dfe18bd7ac7893a765b6ee341844ea02550)
+- 📝 更新文档：form增加preserve说明，icon修改自定义组件引用文档说明。
+
 ## 1.3.2
 `2019-01-17`
 

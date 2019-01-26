@@ -10,6 +10,14 @@
 
 ---
 
+## 1.3.3
+`2019-01-26`
+
+- 🐞 Fix `message` not close When you configure maxcount.[#428](https://github.com/vueComponent/ant-design-vue/pull/428)。
+- 🐞 Fix some component TypeScript definitions.[#422](https://github.com/vueComponent/ant-design-vue/pull/422)。
+- 🌟 The Anchor component add `warpperClass` `wrapperStyle` property.[1aa42d](https://github.com/vueComponent/ant-design-vue/commit/1aa42dfe18bd7ac7893a765b6ee341844ea02550)
+- 📝 Update the document: form adds the `preserve` description, and the `icon` modifies the custom component reference document description.
+
 ## 1.3.2
 `2019-01-17`
 

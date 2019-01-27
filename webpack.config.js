@@ -1,5 +1,4 @@
 const path = require('path');
-// const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config');
@@ -16,7 +15,7 @@ module.exports = merge(baseWebpackConfig, {
       {
         test: /\.less$/,
         use: [
-          { loader: 'style-loader' },
+          { loader: 'vue-style-loader' },
           {
             loader: 'css-loader',
             options: { sourceMap: true },
@@ -26,7 +25,7 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['vue-style-loader', 'css-loader'],
       },
     ],
   },

@@ -117,12 +117,13 @@ import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 
 - [Home Page](https://vuecomponent.github.io/ant-design-vue/)
 - [Ant Design React](https://ant.design/)
-- [Components](https://vuecomponent.github.io/ant-design-vue/docs/react/introduce)
+- [Components](https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce)
 - [Change Log](/ant-design-vue/changelog)
 - [CodeSandbox template](https://codesandbox.io/s/2wpk21kzvr) for bug reports
 - [Customize Theme](/ant-design-vue/docs/vue/customize-theme)
-
-
+- [FAQ](/ant-design-vue/docs/vue/faq)
+- [Support US](/ant-design-vue/docs/vue/sponsor)
+- [Awesome Ant Design](https://github.com/vueComponent/ant-design-vue-awesome)
 
 ## Contributing
 

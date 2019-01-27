@@ -122,6 +122,9 @@ import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 - [更新日志](/ant-design-vue/changelog-cn)
 - [CodeSandbox 模板](https://codesandbox.io/s/2wpk21kzvr) for bug reports
 - [定制主题](/ant-design-vue/docs/vue/customize-theme-cn)
+- [常见问题](/ant-design-vue/docs/vue/faq-cn)
+- [支持我们](/ant-design-vue/docs/vue/sponsor-cn)
+- [Awesome Ant Design](https://github.com/vueComponent/ant-design-vue-awesome)
 
 
 ## 如何贡献

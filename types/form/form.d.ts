@@ -144,13 +144,6 @@ declare interface FieldDecoratorOptions {
   normalize?: (value: any, prevValue: any, allValues: any) => any;
 
   /**
-   * Keep the field even if field removed
-   * @default false
-   * @type boolean
-   */
-  preserve?: boolean;
-
-  /**
    * Includes validation rules. Please refer to "Validation Rules" part for details.
    * @default n/a
    * @type ValidationRule[]

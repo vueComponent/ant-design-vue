@@ -101,7 +101,7 @@ const BasePopup = {
     __propsSymbol__: PropTypes.any,
   },
   inject: {
-    vcTreeSelect: { default: {} },
+    vcTreeSelect: { default: () => ({}) },
   },
   watch: {
     __propsSymbol__() {

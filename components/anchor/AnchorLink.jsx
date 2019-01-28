@@ -15,8 +15,8 @@ export default {
     href: '#',
   }),
   inject: {
-    antAnchor: { default: {} },
-    antAnchorContext: { default: {} },
+    antAnchor: { default: () => ({}) },
+    antAnchorContext: { default: () => ({}) },
   },
 
   mounted() {

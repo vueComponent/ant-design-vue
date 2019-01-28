@@ -20,7 +20,7 @@ const SearchInput = {
     ariaId: PropTypes.string,
   },
   inject: {
-    vcTreeSelect: { default: {} },
+    vcTreeSelect: { default: () => ({}) },
   },
 
   created() {

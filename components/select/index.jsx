@@ -107,7 +107,7 @@ const Select = {
     event: 'change',
   },
   inject: {
-    configProvider: { default: {} },
+    configProvider: { default: () => ({}) },
   },
   created() {
     warning(

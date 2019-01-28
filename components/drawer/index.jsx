@@ -35,7 +35,7 @@ const Drawer = {
   },
   inject: {
     parentDrawer: {
-      default: null,
+      default: () => null,
     },
   },
   provide() {

@@ -142,8 +142,8 @@ const Cascader = {
     event: 'change',
   },
   inject: {
-    configProvider: { default: {} },
-    localeData: { default: {} },
+    configProvider: { default: () => ({}) },
+    localeData: { default: () => ({}) },
   },
   data() {
     this.cachedOptions = [];

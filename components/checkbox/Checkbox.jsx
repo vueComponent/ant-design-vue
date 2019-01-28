@@ -27,7 +27,7 @@ export default {
     prop: 'checked',
   },
   inject: {
-    checkboxGroupContext: { default: null },
+    checkboxGroupContext: { default: () => null },
   },
   methods: {
     handleChange(event) {

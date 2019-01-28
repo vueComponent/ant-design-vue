@@ -19,7 +19,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement, cloneVNodes } from '../_util/vnode';
 import Icon from '../icon';
 
-function noop(){}
+function noop() {}
 export const FormItemProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -46,8 +46,8 @@ export default {
     colon: true,
   }),
   inject: {
-    FormProps: { default: {} },
-    decoratorFormProps: { default: {} },
+    FormProps: { default: () => ({}) },
+    decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
   },
   data() {

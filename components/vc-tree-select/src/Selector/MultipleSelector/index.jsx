@@ -29,7 +29,7 @@ const MultipleSelector = {
     // onChoiceAnimationLeave: PropTypes.func,
   },
   inject: {
-    vcTreeSelect: { default: {} },
+    vcTreeSelect: { default: () => ({}) },
   },
   created() {
     this.inputRef = createRef();

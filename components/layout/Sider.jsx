@@ -108,7 +108,7 @@ export default {
     };
   },
   inject: {
-    siderHook: { default: {} },
+    siderHook: { default: () => ({}) },
   },
   // getChildContext() {
   //   return {

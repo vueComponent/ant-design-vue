@@ -34,7 +34,7 @@ export default {
     event: 'visibleChange',
   },
   inject: {
-    configProvider: { default: {} },
+    configProvider: { default: () => ({}) },
   },
   render() {
     const {

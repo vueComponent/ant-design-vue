@@ -32,7 +32,7 @@ export default {
   name: 'ACol',
   inject: {
     rowContext: {
-      default: null,
+      default: () => null,
     },
   },
   render() {

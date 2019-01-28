@@ -52,7 +52,7 @@ export default function(modeName) {
       },
     ),
     inject: {
-      vcTreeSelect: { default: {} },
+      vcTreeSelect: { default: () => ({}) },
     },
     created() {
       this.domRef = createRef();

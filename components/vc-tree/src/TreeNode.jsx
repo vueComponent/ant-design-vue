@@ -58,8 +58,8 @@ const TreeNode = {
     };
   },
   inject: {
-    vcTree: { default: {} },
-    vcTreeNode: { default: {} },
+    vcTree: { default: () => ({}) },
+    vcTreeNode: { default: () => ({}) },
   },
   provide() {
     return {

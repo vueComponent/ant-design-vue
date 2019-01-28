@@ -77,7 +77,7 @@ export default {
     };
   },
   inject: {
-    vcTriggerContext: { default: {} },
+    vcTriggerContext: { default: () => ({}) },
   },
   data() {
     const props = this.$props;

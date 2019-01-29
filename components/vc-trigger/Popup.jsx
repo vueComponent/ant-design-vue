@@ -210,9 +210,11 @@ export default {
         enter: (el, done) => {
           // align updated后执行动画
           this.$nextTick(() => {
-            this.$refs.alignInstance.$nextTick(() => {
-              animate(el, `${transitionName}-enter`, done);
-            });
+            if (this.$refs.alignInstance) {
+              this.$refs.alignInstance.$nextTick(() => {
+                animate(el, `${transitionName}-enter`, done);
+              });
+            }
           });
         },
         leave: (el, done) => {

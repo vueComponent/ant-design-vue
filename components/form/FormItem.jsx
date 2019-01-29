@@ -35,6 +35,22 @@ export const FormItemProps = {
   fieldDecoratorId: PropTypes.string,
   fieldDecoratorOptions: PropTypes.object,
 };
+function comeFromSlot(vnodes = [], itemVnode) {
+  let isSlot = false;
+  for (let i = 0, len = vnodes.length; i < len; i++) {
+    const vnode = vnodes[i];
+    if (vnode && (vnode === itemVnode || vnode.$vnode === itemVnode)) {
+      isSlot = true;
+    } else {
+      const children = vnode.componentOptions ? vnode.componentOptions.children : vnode.children;
+      isSlot = comeFromSlot(children, itemVnode);
+    }
+    if (isSlot) {
+      break;
+    }
+  }
+  return isSlot;
+}
 
 export default {
   name: 'AFormItem',
@@ -51,7 +67,20 @@ export default {
     collectFormItemContext: { default: () => noop },
   },
   data() {
-    this.collectFormItemContext(this.$vnode.context);
+    const { templateContext = {} } = this.FormProps.form || {};
+    const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
+      return [...a, ...b];
+    }, []);
+    const isSlot = comeFromSlot(vnodes, this.$vnode);
+    warning(!isSlot, 'You can not set FormItem from slot, please use slot-scope instead slot');
+    let isSlotScope = false;
+    // 进一步判断是否是通过slot-scope传递
+    if (!isSlot && this.$vnode.context !== templateContext) {
+      isSlotScope = comeFromSlot(this.$vnode.context.$children, templateContext.$vnode);
+    }
+    if (!isSlotScope && !isSlot) {
+      this.collectFormItemContext(this.$vnode.context);
+    }
     return { helpShow: false };
   },
   beforeDestroy() {

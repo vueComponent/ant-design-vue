@@ -66,22 +66,16 @@ export default {
     decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
   },
+  created() {
+    this.collectContext();
+  },
   data() {
-    const { templateContext = {} } = this.FormProps.form || {};
-    const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
-      return [...a, ...b];
-    }, []);
-    const isSlot = comeFromSlot(vnodes, this.$vnode);
-    warning(!isSlot, 'You can not set FormItem from slot, please use slot-scope instead slot');
-    let isSlotScope = false;
-    // 进一步判断是否是通过slot-scope传递
-    if (!isSlot && this.$vnode.context !== templateContext) {
-      isSlotScope = comeFromSlot(this.$vnode.context.$children, templateContext.$vnode);
-    }
-    if (!isSlotScope && !isSlot) {
-      this.collectFormItemContext(this.$vnode.context);
-    }
     return { helpShow: false };
+  },
+  beforeUpdate() {
+    if (process.env.NODE_ENV !== 'production') {
+      this.collectContext();
+    }
   },
   beforeDestroy() {
     this.collectFormItemContext(this.$vnode.context, 'delete');
@@ -98,6 +92,24 @@ export default {
     );
   },
   methods: {
+    collectContext() {
+      if (this.FormProps.form && this.FormProps.form.templateContext) {
+        const { templateContext } = this.FormProps.form;
+        const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
+          return [...a, ...b];
+        }, []);
+        const isSlot = comeFromSlot(vnodes, this.$vnode);
+        warning(!isSlot, 'You can not set FormItem from slot, please use slot-scope instead slot');
+        let isSlotScope = false;
+        // 进一步判断是否是通过slot-scope传递
+        if (!isSlot && this.$vnode.context !== templateContext) {
+          isSlotScope = comeFromSlot(this.$vnode.context.$children, templateContext.$vnode);
+        }
+        if (!isSlotScope && !isSlot) {
+          this.collectFormItemContext(this.$vnode.context);
+        }
+      }
+    },
     getHelpMessage() {
       const help = getComponentFromProp(this, 'help');
       const onlyControl = this.getOnlyControl();

@@ -12,7 +12,7 @@ export interface Route {
 }
 
 export declare class Breadcrumb extends AntdComponent {
-  static BreadcrumbItem: typeof BreadcrumbItem;
+  static Item: typeof BreadcrumbItem;
   /**
    * The routing stack information of router
    * @type Route[]

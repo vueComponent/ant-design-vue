@@ -10,6 +10,15 @@
 
 ---
 
+## 1.3.4
+`2019-01-31`
+
+🎉 🎉 🎉 祝大家新年快乐！
+- 🐞 修复AutoComplete组件disabled时，placeholder不显示的问题。[#402](https://github.com/vueComponent/ant-design-vue/issues/402)。
+- 🐞 添加 `BreadcrmbItem` ts类型文件。[#452](https://github.com/vueComponent/ant-design-vue/issues/452)。
+- 🐞 修复当FormItem在子组件中时不更新问题。[#446](https://github.com/vueComponent/ant-design-vue/issues/446)。
+- 🐞 修复一些组件 TypeScript 定义。
+
 ## 1.3.3
 `2019-01-26`
 

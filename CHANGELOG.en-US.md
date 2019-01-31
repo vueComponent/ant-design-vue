@@ -10,6 +10,15 @@
 
 ---
 
+## 1.3.4
+`2019-01-31`
+
+🎉 🎉 🎉 Happy New Year!
+- 🐞 fix: AutoComplete placeholder not display when disabled. [#402](https://github.com/vueComponent/ant-design-vue/issues/402)。
+- 🐞 Add the `BreadcrmbItem` ts type file.[#452](https://github.com/vueComponent/ant-design-vue/issues/452)。
+- 🐞 Fixed an issue where the FormItem was not updated when it was in a subcomponent. [#446](https://github.com/vueComponent/ant-design-vue/issues/446)。
+- 🐞 Fix some component TypeScript definitions.
+
 ## 1.3.3
 `2019-01-26`
 

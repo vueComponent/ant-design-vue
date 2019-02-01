@@ -11,7 +11,7 @@ describe('AutoComplete with Custom Input Element Render', () => {
   it('AutoComplete with custom Input render perfectly', done => {
     const wrapper = mount(
       {
-        render(h) {
+        render() {
           return (
             <AutoComplete ref="component" dataSource={['12345', '23456', '34567']}>
               <input />

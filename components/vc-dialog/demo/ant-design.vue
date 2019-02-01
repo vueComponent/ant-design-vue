@@ -46,7 +46,7 @@ export default {
       };
     },
 
-    onClose (e) {
+    onClose () {
     // console.log(e);
       this.visible = false;
     },
@@ -55,7 +55,7 @@ export default {
       this.destroyOnClose = e.target.checked;
     },
 
-    changeWidth (e) {
+    changeWidth () {
       this.width = this.width === 600 ? 800 : 600;
     },
 

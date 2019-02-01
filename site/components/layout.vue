@@ -53,6 +53,12 @@ export default {
       demoContext: this,
     };
   },
+  watch: {
+    '$route.path': function () {
+      this.store.setState({ currentSubMenu: [] });
+      this.addSubMenu();
+    },
+  },
   beforeDestroy () {
     if (this.unsubscribe) {
       this.unsubscribe();
@@ -78,12 +84,6 @@ export default {
         this.isMobile = !!b;
       });
     });
-  },
-  watch: {
-    '$route.path': function () {
-      this.store.setState({ currentSubMenu: [] });
-      this.addSubMenu();
-    },
   },
   methods: {
     addSubMenu () {

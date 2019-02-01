@@ -5,8 +5,11 @@ import { getOptionProps, getAttrs } from '../_util/props-util';
 function noop() {}
 
 export default {
-  inheritAttrs: false,
   name: 'ACheckbox',
+  inheritAttrs: false,
+  model: {
+    prop: 'checked',
+  },
   props: {
     prefixCls: {
       default: 'ant-checkbox',
@@ -22,9 +25,6 @@ export default {
     indeterminate: Boolean,
     type: PropTypes.string.def('checkbox'),
     autoFocus: Boolean,
-  },
-  model: {
-    prop: 'checked',
   },
   inject: {
     checkboxGroupContext: { default: () => null },

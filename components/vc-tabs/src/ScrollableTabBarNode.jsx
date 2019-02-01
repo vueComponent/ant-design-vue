@@ -29,6 +29,14 @@ export default {
       prev: false,
     };
   },
+  watch: {
+    tabBarPosition() {
+      this.tabBarPositionChange = true;
+      this.$nextTick(() => {
+        this.setOffset(0);
+      });
+    },
+  },
 
   mounted() {
     this.$nextTick(() => {
@@ -55,14 +63,6 @@ export default {
     if (this.debouncedResize && this.debouncedResize.cancel) {
       this.debouncedResize.cancel();
     }
-  },
-  watch: {
-    tabBarPosition(val) {
-      this.tabBarPositionChange = true;
-      this.$nextTick(() => {
-        this.setOffset(0);
-      });
-    },
   },
   methods: {
     updatedCal(prevProps) {
@@ -260,7 +260,7 @@ export default {
       this.setOffset(offset + navWrapNodeWH);
     },
 
-    nextClick(e) {
+    nextClick() {
       // this.__emit('nextClick', e)
       const navWrapNode = this.$props.getRef('navWrap');
       const navWrapNodeWH = this.getOffsetWH(navWrapNode);

@@ -66,18 +66,18 @@ function fixLocale(value, localeCode) {
 }
 
 export default {
-  mixins: [BaseMixin],
   name: 'ARangePicker',
+  mixins: [BaseMixin],
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: initDefaultProps(RangePickerProps(), {
     prefixCls: 'ant-calendar',
     tagPrefixCls: 'ant-tag',
     allowClear: true,
     showToday: false,
   }),
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
   data() {
     const value = this.value || this.defaultValue || [];
     const [start, end] = value;

@@ -57,14 +57,14 @@ export default {
     dropdownRender: PropTypes.func,
     ariaId: PropTypes.string,
   },
-  created() {
-    this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef');
-    this.saveTriggerRef = saveRef(this, 'triggerRef');
-  },
   data() {
     return {
       dropdownWidth: 0,
     };
+  },
+  created() {
+    this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef');
+    this.saveTriggerRef = saveRef(this, 'triggerRef');
   },
 
   mounted() {

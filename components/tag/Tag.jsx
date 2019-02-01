@@ -9,16 +9,16 @@ import BaseMixin from '../_util/BaseMixin';
 export default {
   name: 'ATag',
   mixins: [BaseMixin],
+  model: {
+    prop: 'visible',
+    event: 'close.visible',
+  },
   props: {
     prefixCls: PropTypes.string.def('ant-tag'),
     color: PropTypes.string,
     closable: PropTypes.bool.def(false),
     visible: PropTypes.bool,
     afterClose: PropTypes.func,
-  },
-  model: {
-    prop: 'visible',
-    event: 'close.visible',
   },
   data() {
     let _visible = true;

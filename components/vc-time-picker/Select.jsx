@@ -46,7 +46,7 @@ const Select = {
     });
   },
   watch: {
-    selectedIndex(val) {
+    selectedIndex() {
       this.$nextTick(() => {
         // smooth scroll to selected option
         this.scrollToSelected(120);

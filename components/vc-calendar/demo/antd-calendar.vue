@@ -1,5 +1,5 @@
 <script>
-/* eslint react/no-multi-comp:0, no-console:0 */
+/* eslint react/no-multi-comp:0, no-console:0, no-unused-vars:0 */
 
 import '../assets/index.less';
 import PropTypes from '@/components/_util/vue-types';
@@ -17,7 +17,6 @@ import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM-DD HH:mm:ss';
 const cn = window.location.search.indexOf('cn') !== -1;
-
 const now = moment();
 if (cn) {
   now.locale('zh-cn').utcOffset(8);

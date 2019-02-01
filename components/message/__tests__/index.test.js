@@ -128,7 +128,7 @@ describe('message', () => {
     }, 0);
   });
   it('should allow custom icon', async () => {
-    message.open({ content: 'Message', icon: h => <Icon type="smile-o" /> });
+    message.open({ content: 'Message', icon: h => <Icon type="smile-o" /> }); // eslint-disable-line
     await asyncExpect(() => {
       expect(document.querySelectorAll('.anticon-smile-o').length).toBe(1);
     }, 0);

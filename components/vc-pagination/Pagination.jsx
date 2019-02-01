@@ -28,6 +28,10 @@ function calculatePage(p, state, props) {
 export default {
   name: 'Pagination',
   mixins: [BaseMixin],
+  model: {
+    prop: 'current',
+    event: 'change.current',
+  },
   props: {
     prefixCls: PropTypes.string.def('rc-pagination'),
     selectPrefixCls: PropTypes.string.def('rc-select'),
@@ -54,10 +58,6 @@ export default {
     nextIcon: PropTypes.any,
     jumpPrevIcon: PropTypes.any,
     jumpNextIcon: PropTypes.any,
-  },
-  model: {
-    prop: 'current',
-    event: 'change.current',
   },
   data() {
     const hasOnChange = this.onChange !== noop;

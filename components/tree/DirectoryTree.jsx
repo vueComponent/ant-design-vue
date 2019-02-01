@@ -28,8 +28,8 @@ function getIcon(props, h) {
 }
 
 export default {
-  mixins: [BaseMixin],
   name: 'ADirectoryTree',
+  mixins: [BaseMixin],
   model: {
     prop: 'checkedKeys',
     event: 'check',

@@ -29,6 +29,10 @@ function noop() {}
 export default {
   name: 'Rate',
   mixins: [BaseMixin],
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: initDefaultProps(rateProps, {
     defaultValue: 0,
     count: 5,
@@ -38,10 +42,6 @@ export default {
     tabIndex: 0,
     character: '★',
   }),
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
   data() {
     let value = this.value;
     if (!hasProp(this, 'value')) {
@@ -54,19 +54,19 @@ export default {
       hoverValue: undefined,
     };
   },
-  mounted() {
-    this.$nextTick(() => {
-      if (this.autoFocus && !this.disabled) {
-        this.focus();
-      }
-    });
-  },
   watch: {
     value(val) {
       this.setState({
         sValue: val,
       });
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if (this.autoFocus && !this.disabled) {
+        this.focus();
+      }
+    });
   },
   methods: {
     onHover(event, index) {

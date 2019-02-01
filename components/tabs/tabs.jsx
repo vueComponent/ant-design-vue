@@ -10,6 +10,10 @@ import TabBar from './TabBar';
 export default {
   TabPane,
   name: 'ATabs',
+  model: {
+    prop: 'activeKey',
+    event: 'change',
+  },
   props: {
     prefixCls: PropTypes.string.def('ant-tabs'),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -25,9 +29,12 @@ export default {
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
   },
-  model: {
-    prop: 'activeKey',
-    event: 'change',
+  mounted() {
+    const NO_FLEX = ' no-flex';
+    const tabNode = this.$el;
+    if (tabNode && !isFlexSupported() && tabNode.className.indexOf(NO_FLEX) === -1) {
+      tabNode.className += NO_FLEX;
+    }
   },
   methods: {
     removeTab(targetKey, e) {
@@ -52,14 +59,6 @@ export default {
     onNextClick(val) {
       this.$emit('nextClick', val);
     },
-  },
-
-  mounted() {
-    const NO_FLEX = ' no-flex';
-    const tabNode = this.$el;
-    if (tabNode && !isFlexSupported() && tabNode.className.indexOf(NO_FLEX) === -1) {
-      tabNode.className += NO_FLEX;
-    }
   },
 
   render() {

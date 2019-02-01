@@ -34,6 +34,7 @@ const ALL_HANDLERS = [
 
 export default {
   name: 'Trigger',
+  mixins: [BaseMixin],
   props: {
     action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
     showAction: PropTypes.any.def([]),
@@ -69,8 +70,6 @@ export default {
     stretch: PropTypes.string,
     alignPoint: PropTypes.bool, // Maybe we can support user pass position in the future
   },
-
-  mixins: [BaseMixin],
   provide() {
     return {
       vcTriggerContext: this,
@@ -92,6 +91,20 @@ export default {
       point: null,
     };
   },
+  watch: {
+    popupVisible(val) {
+      if (val !== undefined) {
+        this.sPopupVisible = val;
+      }
+    },
+    sPopupVisible(val) {
+      this.$nextTick(() => {
+        this.renderComponent(null, () => {
+          this.afterPopupVisibleChange(val);
+        });
+      });
+    },
+  },
 
   beforeCreate() {
     ALL_HANDLERS.forEach(h => {
@@ -106,20 +119,6 @@ export default {
       this.renderComponent(null);
       this.updatedCal();
     });
-  },
-  watch: {
-    popupVisible(val) {
-      if (val !== undefined) {
-        this.sPopupVisible = val;
-      }
-    },
-    sPopupVisible(val) {
-      this.$nextTick(() => {
-        this.renderComponent(null, () => {
-          this.afterPopupVisibleChange(val);
-        });
-      });
-    },
   },
 
   updated() {
@@ -565,7 +564,7 @@ export default {
       this.setPopupVisible(false);
     },
   },
-  render(h) {
+  render() {
     const { sPopupVisible } = this;
     const children = filterEmpty(this.$slots.default);
     const { forceRender, alignPoint } = this.$props;

@@ -28,7 +28,7 @@ The properties of `a-sub-menu` are dynamically changed inside the component. If 
           <a-icon type="pie-chart" />
           <span>{{item.title}}</span>
         </a-menu-item>
-        <sub-menu v-else :menuInfo="item" :key="item.key"/>
+        <sub-menu v-else :menu-info="item" :key="item.key"/>
       </template>
     </a-menu>
   </div>

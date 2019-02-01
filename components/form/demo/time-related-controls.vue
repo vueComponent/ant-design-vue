@@ -9,58 +9,71 @@ The `value` of time-related components is a `moment` object, which we need to pr
 </us>
 
 <template>
-<a-form @submit="handleSubmit" :form="form">
-  <a-form-item
-    v-bind="formItemLayout"
-    label='DatePicker'
+  <a-form
+    :form="form"
+    @submit="handleSubmit"
   >
-    <a-date-picker v-decorator="['date-picker', config]"/>
-  </a-form-item>
-  <a-form-item
-    v-bind="formItemLayout"
-    label='DatePicker[showTime]'
-  >
-    <a-date-picker v-decorator="['date-time-picker', config]" showTime format='YYYY-MM-DD HH:mm:ss' />
-  </a-form-item>
-  <a-form-item
-    v-bind="formItemLayout"
-    label='MonthPicker'
-  >
-    <a-monthPicker v-decorator="['month-picker', config]" />
-  </a-form-item>
-  <a-form-item
-    v-bind="formItemLayout"
-    label='RangePicker'
-  >
-    <a-range-picker v-decorator="['range-picker', rangeConfig]" />
-  </a-form-item>
-  <a-form-item
-    v-bind="formItemLayout"
-    label='RangePicker[showTime]'
-  >
-    <a-range-picker v-decorator="['range-time-picker', rangeConfig]" showTime format='YYYY-MM-DD HH:mm:ss' />
-  </a-form-item>
-  <a-form-item
-    v-bind="formItemLayout"
-    label='TimePicker'
-  >
-    <a-time-picker v-decorator="['time-picker', config]" />
-  </a-form-item>
-  <a-form-item
-    :wrapperCol="{
-      xs: { span: 24, offset: 0 },
-      sm: { span: 16, offset: 8 },
-    }"
-  >
-    <a-button type='primary' htmlType='submit'>Submit</a-button>
-  </a-form-item>
-</a-form>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="DatePicker"
+    >
+      <a-date-picker v-decorator="['date-picker', config]" />
+    </a-form-item>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="DatePicker[showTime]"
+    >
+      <a-date-picker
+        v-decorator="['date-time-picker', config]"
+        show-time
+        format="YYYY-MM-DD HH:mm:ss"
+      />
+    </a-form-item>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="MonthPicker"
+    >
+      <a-monthPicker v-decorator="['month-picker', config]" />
+    </a-form-item>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="RangePicker"
+    >
+      <a-range-picker v-decorator="['range-picker', rangeConfig]" />
+    </a-form-item>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="RangePicker[showTime]"
+    >
+      <a-range-picker
+        v-decorator="['range-time-picker', rangeConfig]"
+        show-time
+        format="YYYY-MM-DD HH:mm:ss"
+      />
+    </a-form-item>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="TimePicker"
+    >
+      <a-time-picker v-decorator="['time-picker', config]" />
+    </a-form-item>
+    <a-form-item
+      :wrapper-col="{
+        xs: { span: 24, offset: 0 },
+        sm: { span: 16, offset: 8 },
+      }"
+    >
+      <a-button
+        type="primary"
+        html-type="submit"
+      >
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
 </template>
 <script>
 export default {
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
-  },
   data () {
     return {
       formItemLayout: {
@@ -80,6 +93,9 @@ export default {
         rules: [{ type: 'array', required: true, message: 'Please select time!' }],
       },
     };
+  },
+  beforeCreate () {
+    this.form = this.$form.createForm(this);
   },
   methods: {
     handleSubmit  (e) {

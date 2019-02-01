@@ -203,7 +203,7 @@ export default {
       const transitionName = getTransitionName();
       let useTransition = !!transitionName;
       const transitionEvent = {
-        beforeEnter: el => {
+        beforeEnter: () => {
           // el.style.display = el.__vOriginalDisplay
           // this.$refs.alignInstance.forceAlign()
         },

@@ -10,46 +10,58 @@ Horizontal login form is often used in navigation bar.
 
 
 <template>
-<a-form layout='inline' @submit="handleSubmit" :form="form">
-  <a-form-item
-    :validateStatus="userNameError() ? 'error' : ''"
-    :help="userNameError() || ''"
+  <a-form
+    layout="inline"
+    :form="form"
+    @submit="handleSubmit"
   >
-    <a-input
-      placeholder='Username'
-      v-decorator="[
-        'userName',
-        {rules: [{ required: true, message: 'Please input your username!' }]}
-      ]"
+    <a-form-item
+      :validate-status="userNameError() ? 'error' : ''"
+      :help="userNameError() || ''"
     >
-      <a-icon slot="prefix" type='user' style="color:rgba(0,0,0,.25)"/>
-    </a-input>
-  </a-form-item>
-  <a-form-item
-    :validateStatus="passwordError() ? 'error' : ''"
-    :help="passwordError() || ''"
-  >
-    <a-input
-      v-decorator="[
-        'password',
-        {rules: [{ required: true, message: 'Please input your Password!' }]}
-      ]"
-      type='password'
-      placeholder='Password'
+      <a-input
+        v-decorator="[
+          'userName',
+          {rules: [{ required: true, message: 'Please input your username!' }]}
+        ]"
+        placeholder="Username"
+      >
+        <a-icon
+          slot="prefix"
+          type="user"
+          style="color:rgba(0,0,0,.25)"
+        />
+      </a-input>
+    </a-form-item>
+    <a-form-item
+      :validate-status="passwordError() ? 'error' : ''"
+      :help="passwordError() || ''"
     >
-      <a-icon slot="prefix" type='lock' style="color:rgba(0,0,0,.25)"/>
-    </a-input>
-  </a-form-item>
-  <a-form-item>
-    <a-button
-      type='primary'
-      htmlType='submit'
-      :disabled="hasErrors(form.getFieldsError())"
-    >
-      Log in
-    </a-button>
-  </a-form-item>
-</a-form>
+      <a-input
+        v-decorator="[
+          'password',
+          {rules: [{ required: true, message: 'Please input your Password!' }]}
+        ]"
+        type="password"
+        placeholder="Password"
+      >
+        <a-icon
+          slot="prefix"
+          type="lock"
+          style="color:rgba(0,0,0,.25)"
+        />
+      </a-input>
+    </a-form-item>
+    <a-form-item>
+      <a-button
+        type="primary"
+        html-type="submit"
+        :disabled="hasErrors(form.getFieldsError())"
+      >
+        Log in
+      </a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
 <script>

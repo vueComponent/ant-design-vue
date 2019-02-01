@@ -116,7 +116,7 @@ const renderSlides = function(spec, children, createElement) {
           class: classnames(slideClasses, slideClass),
           style: { outline: 'none', ...(getStyle(child.context) || {}), ...childStyle },
           on: {
-            click: e => {
+            click: () => {
               // child.props && child.props.onClick && child.props.onClick(e)
               if (spec.focusOnSelect) {
                 spec.focusOnSelect(childOnClickOptions);
@@ -148,7 +148,7 @@ const renderSlides = function(spec, children, createElement) {
             },
             style: { ...(getStyle(child.context) || {}), ...childStyle },
             on: {
-              click: e => {
+              click: () => {
                 // child.props && child.props.onClick && child.props.onClick(e)
                 if (spec.focusOnSelect) {
                   spec.focusOnSelect(childOnClickOptions);
@@ -176,7 +176,7 @@ const renderSlides = function(spec, children, createElement) {
             class: classnames(slideClasses, slideClass),
             style: { ...(getStyle(child.context) || {}), ...childStyle },
             on: {
-              click: e => {
+              click: () => {
                 // child.props && child.props.onClick && child.props.onClick(e)
                 if (spec.focusOnSelect) {
                   spec.focusOnSelect(childOnClickOptions);

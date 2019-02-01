@@ -7,6 +7,10 @@ export default {
   name: 'Checkbox',
   mixins: [BaseMixin],
   inheritAttrs: false,
+  model: {
+    prop: 'checked',
+    event: 'change',
+  },
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -31,10 +35,6 @@ export default {
       defaultChecked: false,
     },
   ),
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
   data() {
     const checked = hasProp(this, 'checked') ? this.checked : this.defaultChecked;
     return {

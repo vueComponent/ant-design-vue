@@ -28,6 +28,13 @@ export default {
     firstActiveValue: PropTypes.string,
     menuItemSelectedIcon: PropTypes.any,
   },
+  watch: {
+    visible(val) {
+      if (!val) {
+        this.lastVisible = val;
+      }
+    },
+  },
 
   created() {
     this.rafInstance = { cancel: () => null };
@@ -40,13 +47,6 @@ export default {
       this.scrollActiveItemToView();
     });
     this.lastVisible = this.$props.visible;
-  },
-  watch: {
-    visible(val) {
-      if (!val) {
-        this.lastVisible = val;
-      }
-    },
   },
   updated() {
     const props = this.$props;

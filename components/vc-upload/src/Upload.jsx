@@ -30,9 +30,9 @@ const uploadProps = {
   openFileDialogOnClick: PropTypes.bool,
 };
 export default {
-  inheritAttrs: false,
   name: 'Upload',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(uploadProps, {
     componentTag: 'span',
     prefixCls: 'rc-upload',

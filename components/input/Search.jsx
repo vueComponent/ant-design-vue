@@ -9,6 +9,10 @@ import PropTypes from '../_util/vue-types';
 
 export default {
   name: 'AInputSearch',
+  model: {
+    prop: 'value',
+    event: 'change.value',
+  },
   props: {
     ...inputProps,
     prefixCls: {
@@ -20,10 +24,6 @@ export default {
       type: String,
     },
     enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
-  },
-  model: {
-    prop: 'value',
-    event: 'change.value',
   },
   methods: {
     onSearch(e) {

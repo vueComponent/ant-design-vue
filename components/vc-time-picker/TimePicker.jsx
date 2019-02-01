@@ -9,8 +9,8 @@ import { initDefaultProps, hasProp, getComponentFromProp } from '../_util/props-
 function noop() {}
 
 export default {
-  mixins: [BaseMixin],
   name: 'VcTimePicker',
+  mixins: [BaseMixin],
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -89,13 +89,6 @@ export default {
       sValue: value,
     };
   },
-  mounted() {
-    this.$nextTick(() => {
-      if (this.autoFocus) {
-        this.focus();
-      }
-    });
-  },
 
   watch: {
     value(val) {
@@ -110,6 +103,13 @@ export default {
         });
       }
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.focus();
+      }
+    });
   },
   methods: {
     onPanelChange(value) {

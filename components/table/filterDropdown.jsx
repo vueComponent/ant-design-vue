@@ -17,8 +17,8 @@ function stopPropagation(e) {
 }
 
 export default {
-  mixins: [BaseMixin],
   name: 'FilterMenu',
+  mixins: [BaseMixin],
   props: initDefaultProps(FilterMenuProps, {
     handleFilter() {},
     column: {},
@@ -33,13 +33,6 @@ export default {
       sKeyPathOfSelectedItem: {}, // 记录所有有选中子菜单的祖先菜单
       sVisible: visible,
     };
-  },
-
-  mounted() {
-    const { column } = this;
-    this.$nextTick(() => {
-      this.setNeverShown(column);
-    });
   },
   watch: {
     _propsSymbol() {
@@ -80,6 +73,13 @@ export default {
     // selectedKeys (val) {
     //   this.sSelectedKeys = val
     // },
+  },
+
+  mounted() {
+    const { column } = this;
+    this.$nextTick(() => {
+      this.setNeverShown(column);
+    });
   },
   methods: {
     getDropdownVisible() {

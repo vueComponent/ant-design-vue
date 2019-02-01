@@ -26,16 +26,16 @@ export default {
   // };
 
   // private input: any;
-  props: initDefaultProps(WeekPickerProps(), {
-    format: 'gggg-wo',
-    allowClear: true,
-  }),
   name: 'AWeekPicker',
   mixins: [BaseMixin],
   model: {
     prop: 'value',
     event: 'change',
   },
+  props: initDefaultProps(WeekPickerProps(), {
+    format: 'gggg-wo',
+    allowClear: true,
+  }),
   data() {
     const value = this.value || this.defaultValue;
     if (value && !interopDefault(moment).isMoment(value)) {

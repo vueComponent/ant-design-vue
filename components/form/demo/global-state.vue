@@ -18,13 +18,13 @@ But if you use `this.$form.createForm`, You can use any data, not just the prope
 
 
 <template>
-  <div id='components-form-demo-global-state'>
+  <div id="components-form-demo-global-state">
     <customized-form
       :username="fields.username"
       @change="handleFormChange"
     />
-    <pre class='language-bash'>
-      {{JSON.stringify(fields, null, 2)}}
+    <pre class="language-bash">
+      {{ JSON.stringify(fields, null, 2) }}
     </pre>
   </div>
 </template>
@@ -77,6 +77,9 @@ const CustomizedForm = {
 };
 
 export default {
+  components: {
+    CustomizedForm,
+  },
   data () {
     return {
       fields: {
@@ -91,9 +94,6 @@ export default {
       console.log('changedFields', changedFields);
       this.fields = { ...this.fields, ...changedFields };
     },
-  },
-  components: {
-    CustomizedForm,
   },
 };
 </script>

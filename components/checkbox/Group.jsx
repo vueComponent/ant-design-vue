@@ -3,6 +3,9 @@ import hasProp from '../_util/props-util';
 function noop() {}
 export default {
   name: 'ACheckboxGroup',
+  model: {
+    prop: 'value',
+  },
   props: {
     prefixCls: {
       default: 'ant-checkbox',
@@ -21,9 +24,6 @@ export default {
       type: Array,
     },
     disabled: Boolean,
-  },
-  model: {
-    prop: 'value',
   },
   provide() {
     return {

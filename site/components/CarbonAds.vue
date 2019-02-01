@@ -1,15 +1,12 @@
 <script>
 import axios from 'axios';
 const carbonUrls = {
-  'vuecomponent.github.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
+  'vuecomponent.github.io': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
   'tangjinzhou.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
 };
 const carbonUrl = '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio' || carbonUrls[location.host];
 const isGitee = location.host.indexOf('gitee') !== -1;
 export default {
-  mounted() {
-    this.load();
-  },
   watch: {
     $route(e, t) {
       let adId = '#carbonads';
@@ -29,6 +26,9 @@ export default {
       }, 20000);
 
     },
+  },
+  mounted() {
+    this.load();
   },
   methods: {
     load() {

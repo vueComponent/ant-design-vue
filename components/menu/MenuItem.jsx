@@ -3,9 +3,9 @@ import { getOptionProps } from '../_util/props-util';
 import Tooltip from '../tooltip';
 function noop() {}
 export default {
+  name: 'MenuItem',
   inheritAttrs: false,
   props: itemProps,
-  name: 'MenuItem',
   inject: {
     getInlineCollapsed: { default: () => noop },
   },
@@ -15,7 +15,7 @@ export default {
       this.$refs.menuItem.onKeyDown(e);
     },
   },
-  render(h) {
+  render() {
     const props = getOptionProps(this);
     const { level, title, rootPrefixCls } = props;
     const { getInlineCollapsed, $slots, $attrs: attrs, $listeners } = this;

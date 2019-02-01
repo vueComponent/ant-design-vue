@@ -27,7 +27,7 @@ export default {
     builtinPlacements: PropTypes.object,
   },
   methods: {
-    getPopupElement(h) {
+    getPopupElement() {
       const { prefixCls, tipId } = this.$props;
       return [
         <div class={`${prefixCls}-arrow`} key="arrow">

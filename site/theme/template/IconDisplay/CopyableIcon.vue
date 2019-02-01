@@ -1,15 +1,19 @@
 <template>
-<li
-  :class="justCopied === type ? 'copied' : ''"
-  v-clipboard:copy="text"
-  v-clipboard:success="onCopied">
-  <a-icon :type="type" :theme="theme"/>
-  <span class='anticon-class'>
-    <a-badge :dot="isNew">
-      {{type}}
-    </a-badge>
-  </span>
-</li>
+  <li
+    v-clipboard:copy="text"
+    v-clipboard:success="onCopied"
+    :class="justCopied === type ? 'copied' : ''"
+  >
+    <a-icon
+      :type="type"
+      :theme="theme"
+    />
+    <span class="anticon-class">
+      <a-badge :dot="isNew">
+        {{ type }}
+      </a-badge>
+    </span>
+  </li>
 </template>
 <script>
 export default {

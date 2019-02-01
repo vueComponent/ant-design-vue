@@ -69,6 +69,17 @@ export default {
     };
   },
 
+  watch: {
+    visible(val) {
+      if (val) {
+        this.destroyPopup = false;
+      }
+      this.$nextTick(() => {
+        this.updatedCallback(!val);
+      });
+    },
+  },
+
   // private inTransition: boolean;
   // private titleId: string;
   // private openTime: number;
@@ -87,17 +98,6 @@ export default {
     this.$nextTick(() => {
       this.updatedCallback(false);
     });
-  },
-
-  watch: {
-    visible(val) {
-      if (val) {
-        this.destroyPopup = false;
-      }
-      this.$nextTick(() => {
-        this.updatedCallback(!val);
-      });
-    },
   },
   beforeDestroy() {
     if (this.visible || this.inTransition) {

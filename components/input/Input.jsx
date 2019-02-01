@@ -15,14 +15,14 @@ function fixControlledValue(value) {
 }
 
 export default {
-  inheritAttrs: false,
   name: 'AInput',
-  props: {
-    ...inputProps,
-  },
+  inheritAttrs: false,
   model: {
     prop: 'value',
     event: 'change.value',
+  },
+  props: {
+    ...inputProps,
   },
   data() {
     const { value, defaultValue } = this.$props;
@@ -30,17 +30,17 @@ export default {
       stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
     };
   },
+  watch: {
+    value(val) {
+      this.stateValue = fixControlledValue(val);
+    },
+  },
   mounted() {
     this.$nextTick(() => {
       if (this.autoFocus) {
         this.focus();
       }
     });
-  },
-  watch: {
-    value(val) {
-      this.stateValue = fixControlledValue(val);
-    },
   },
   methods: {
     handleKeyDown(e) {

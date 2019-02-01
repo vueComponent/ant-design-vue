@@ -28,8 +28,8 @@ export const ColProps = {
 };
 
 export default {
-  props: ColProps,
   name: 'ACol',
+  props: ColProps,
   inject: {
     rowContext: {
       default: () => null,

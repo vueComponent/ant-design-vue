@@ -66,11 +66,11 @@ export default {
     decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
   },
-  created() {
-    this.collectContext();
-  },
   data() {
     return { helpShow: false };
+  },
+  created() {
+    this.collectContext();
   },
   beforeUpdate() {
     if (process.env.NODE_ENV !== 'production') {

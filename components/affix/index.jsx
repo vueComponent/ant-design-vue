@@ -81,10 +81,10 @@ const Affix = {
       // Mock Event object.
       this.updatePosition({});
     },
-    offsetTop(val) {
+    offsetTop() {
       this.updatePosition({});
     },
-    offsetBottom(val) {
+    offsetBottom() {
       this.updatePosition({});
     },
   },

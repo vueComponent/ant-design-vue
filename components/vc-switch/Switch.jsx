@@ -5,7 +5,7 @@ import { hasProp, getOptionProps, getComponentFromProp } from '../_util/props-ut
 // function noop () {
 // }
 export default {
-  name: 'vc-switch',
+  name: 'VcSwitch',
   mixins: [BaseMixin],
   model: {
     prop: 'checked',
@@ -28,6 +28,11 @@ export default {
       stateChecked: checked,
     };
   },
+  watch: {
+    checked(val) {
+      this.stateChecked = val;
+    },
+  },
   mounted() {
     this.$nextTick(() => {
       const { autoFocus, disabled } = this;
@@ -35,11 +40,6 @@ export default {
         this.focus();
       }
     });
-  },
-  watch: {
-    checked(val) {
-      this.stateChecked = val;
-    },
   },
   methods: {
     setChecked(checked) {

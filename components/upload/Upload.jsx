@@ -13,10 +13,10 @@ import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './u
 export { UploadProps };
 
 export default {
-  inheritAttrs: false,
   name: 'AUpload',
-  Dragger: Dragger,
   mixins: [BaseMixin],
+  inheritAttrs: false,
+  Dragger: Dragger,
   props: initDefaultProps(UploadProps, {
     prefixCls: 'ant-upload',
     type: 'select',
@@ -38,13 +38,13 @@ export default {
       dragState: 'drop',
     };
   },
-  beforeDestroy() {
-    this.clearProgressTimer();
-  },
   watch: {
     fileList(val) {
       this.sFileList = val;
     },
+  },
+  beforeDestroy() {
+    this.clearProgressTimer();
   },
   methods: {
     onStart(file) {

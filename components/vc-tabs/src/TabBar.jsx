@@ -11,7 +11,7 @@ export default {
     const listeners = this.$listeners;
     return (
       <SaveRef
-        children={(saveRef, getRef) => (
+        children={saveRef => (
           <TabBarRootNode saveRef={saveRef} {...{ props, on: listeners }}>
             <TabBarTabsNode saveRef={saveRef} {...{ props, on: listeners }} />
           </TabBarRootNode>

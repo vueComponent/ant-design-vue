@@ -6,6 +6,9 @@ function noop() {}
 
 export default {
   name: 'ARadioGroup',
+  model: {
+    prop: 'value',
+  },
   props: {
     prefixCls: {
       default: 'ant-radio',
@@ -33,9 +36,6 @@ export default {
       stateValue: value === undefined ? defaultValue : value,
     };
   },
-  model: {
-    prop: 'value',
-  },
   provide() {
     return {
       radioGroupContext: this,
@@ -58,6 +58,11 @@ export default {
       };
     },
   },
+  watch: {
+    value(val) {
+      this.stateValue = val;
+    },
+  },
   methods: {
     onRadioChange(ev) {
       const lastValue = this.stateValue;
@@ -69,11 +74,6 @@ export default {
         this.$emit('input', value);
         this.$emit('change', ev);
       }
-    },
-  },
-  watch: {
-    value(val) {
-      this.stateValue = val;
     },
   },
   render() {

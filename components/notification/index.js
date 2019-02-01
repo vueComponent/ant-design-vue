@@ -85,7 +85,7 @@ function getNotificationInstance(prefixCls, placement, callback) {
       class: `${prefixCls}-${placement}`,
       style: getPlacementStyle(placement),
       getContainer: defaultGetContainer,
-      closeIcon: h => <Icon class={`${prefixCls}-close-icon`} type={'close'} />,
+      closeIcon: h => <Icon class={`${prefixCls}-close-icon`} type={'close'} />, // eslint-disable-line
     },
     notification => {
       notificationInstance[cacheKey] = notification;
@@ -128,7 +128,7 @@ function notice(args) {
     );
   } else if (type) {
     const iconType = typeToIcon[type];
-    iconNode = h => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} type={iconType} />;
+    iconNode = h => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} type={iconType} />; // eslint-disable-line
   }
 
   getNotificationInstance(outerPrefixCls, placement || defaultPlacement, notification => {

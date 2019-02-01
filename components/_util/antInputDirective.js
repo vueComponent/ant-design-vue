@@ -46,7 +46,7 @@ if (isIE9) {
 
 export function antInput(Vue) {
   return Vue.directive('ant-input', {
-    inserted(el, binding, vnode, oldVnode) {
+    inserted(el, binding, vnode) {
       if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
         if (!binding.modifiers || !binding.modifiers.lazy) {
           el.addEventListener('compositionstart', onCompositionStart);
@@ -67,7 +67,7 @@ export function antInput(Vue) {
 }
 
 export default {
-  install: (Vue, options) => {
+  install: Vue => {
     antInput(Vue);
   },
 };

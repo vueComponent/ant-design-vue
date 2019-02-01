@@ -111,7 +111,7 @@ const VuePropTypes = {
 
     let hasCustomValidators = false;
 
-    const nativeChecks = arr.reduce((ret, type, i) => {
+    const nativeChecks = arr.reduce((ret, type) => {
       if (isPlainObject(type)) {
         if (type._vueTypes_name === 'oneOf') {
           return ret.concat(type.type || []);

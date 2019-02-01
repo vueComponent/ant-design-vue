@@ -23,7 +23,7 @@ const Popover = {
     },
   },
 
-  render(h) {
+  render() {
     const { title, prefixCls, $slots } = this;
     const props = getOptionProps(this);
     delete props.title;

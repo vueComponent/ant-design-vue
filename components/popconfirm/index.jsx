@@ -118,7 +118,7 @@ const Popconfirm = {
       );
     },
   },
-  render(h) {
+  render() {
     const props = getOptionProps(this);
     const otherProps = omit(props, ['title', 'content', 'cancelText', 'okText']);
     const tooltipProps = {

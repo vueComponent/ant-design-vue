@@ -25,13 +25,13 @@ const splitObject = (obj, keys) => {
 const props = abstractTooltipProps();
 export default {
   name: 'ATooltip',
-  props: {
-    ...props,
-    title: PropTypes.any,
-  },
   model: {
     prop: 'visible',
     event: 'visibleChange',
+  },
+  props: {
+    ...props,
+    title: PropTypes.any,
   },
   inject: {
     configProvider: { default: () => ({}) },
@@ -156,7 +156,7 @@ export default {
     },
   },
 
-  render(h) {
+  render() {
     const { $props, $data, $slots, $listeners } = this;
     const { prefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;

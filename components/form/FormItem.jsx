@@ -434,7 +434,11 @@ export default {
     decoratorChildren(vnodes) {
       const { FormProps } = this;
       const getFieldDecorator = FormProps.form.getFieldDecorator;
-      vnodes.forEach((vnode, index) => {
+      for (let i = 0, len = vnodes.length; i < len; i++) {
+        const vnode = vnodes[i];
+        if (getSlotOptions(vnode).__ANT_FORM_ITEM) {
+          break;
+        }
         if (vnode.children) {
           vnode.children = this.decoratorChildren(cloneVNodes(vnode.children));
         } else if (vnode.componentOptions && vnode.componentOptions.children) {
@@ -444,9 +448,9 @@ export default {
         }
         const option = this.decoratorOption(vnode);
         if (option && option[0]) {
-          vnodes[index] = getFieldDecorator(option[0], option[1])(vnode);
+          vnodes[i] = getFieldDecorator(option[0], option[1])(vnode);
         }
-      });
+      }
       return vnodes;
     },
   },

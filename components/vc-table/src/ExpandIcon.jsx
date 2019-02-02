@@ -1,8 +1,8 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 export default {
-  mixins: [BaseMixin],
   name: 'ExpandIcon',
+  mixins: [BaseMixin],
   props: {
     record: PropTypes.object,
     prefixCls: PropTypes.string,

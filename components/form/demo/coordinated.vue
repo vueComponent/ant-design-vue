@@ -10,11 +10,14 @@ Use `setFieldsValue` to set other control's value programmaticly.
 
 
 <template>
-  <a-form @submit="handleSubmit" :form="form">
+  <a-form
+    :form="form"
+    @submit="handleSubmit"
+  >
     <a-form-item
-      label='Note'
-      :labelCol="{ span: 5 }"
-      :wrapperCol="{ span: 12 }"
+      label="Note"
+      :label-col="{ span: 5 }"
+      :wrapper-col="{ span: 12 }"
     >
       <a-input
         v-decorator="[
@@ -24,26 +27,33 @@ Use `setFieldsValue` to set other control's value programmaticly.
       />
     </a-form-item>
     <a-form-item
-      label='Gender'
-      :labelCol="{ span: 5 }"
-      :wrapperCol="{ span: 12 }"
+      label="Gender"
+      :label-col="{ span: 5 }"
+      :wrapper-col="{ span: 12 }"
     >
       <a-select
         v-decorator="[
           'gender',
           {rules: [{ required: true, message: 'Please select your gender!' }]}
         ]"
-        placeholder='Select a option and change input text above'
-        @change="this.handleSelectChange"
+        placeholder="Select a option and change input text above"
+        @change="handleSelectChange"
       >
-        <a-select-option value='male'>male</a-select-option>
-        <a-select-option value='female'>female</a-select-option>
+        <a-select-option value="male">
+          male
+        </a-select-option>
+        <a-select-option value="female">
+          female
+        </a-select-option>
       </a-select>
     </a-form-item>
     <a-form-item
-      :wrapperCol="{ span: 12, offset: 5 }"
+      :wrapper-col="{ span: 12, offset: 5 }"
     >
-      <a-button type='primary' htmlType='submit'>
+      <a-button
+        type="primary"
+        html-type="submit"
+      >
         Submit
       </a-button>
     </a-form-item>

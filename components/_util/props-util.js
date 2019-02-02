@@ -250,7 +250,7 @@ const initDefaultProps = (propTypes, defaultProps) => {
 export function mergeProps() {
   const args = [].slice.call(arguments, 0);
   const props = {};
-  args.forEach((p = {}, i) => {
+  args.forEach((p = {}) => {
     for (const [k, v] of Object.entries(p)) {
       props[k] = props[k] || {};
       if (isPlainObject(v)) {

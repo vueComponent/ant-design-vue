@@ -7,7 +7,7 @@ export default {
     columns: PropTypes.array,
   },
   inject: {
-    table: { default: {} },
+    table: { default: () => ({}) },
   },
   render() {
     const { fixed, table } = this;

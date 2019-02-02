@@ -28,13 +28,13 @@ function noop() {}
 
 export default {
   name: 'ATextarea',
-  props: {
-    ...inputProps,
-    autosize: [Object, Boolean],
-  },
   model: {
     prop: 'value',
     event: 'change.value',
+  },
+  props: {
+    ...inputProps,
+    autosize: [Object, Boolean],
   },
   data() {
     const { value, defaultValue } = this.$props;

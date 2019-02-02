@@ -24,13 +24,13 @@ class CleanUpStatsPlugin {
 
   apply(compiler) {
     compiler.hooks.done.tap('CleanUpStatsPlugin', stats => {
-      const { children, warnings } = stats.compilation;
+      const { children } = stats.compilation;
       if (Array.isArray(children)) {
         stats.compilation.children = children.filter(child => this.shouldPickStatChild(child));
       }
-      if (Array.isArray(warnings)) {
-        stats.compilation.warnings = warnings.filter(message => this.shouldPickWarning(message));
-      }
+      // if (Array.isArray(warnings)) {
+      //   stats.compilation.warnings = warnings.filter(message => this.shouldPickWarning(message));
+      // }
     });
   }
 }

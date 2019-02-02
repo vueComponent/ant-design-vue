@@ -1,7 +1,7 @@
 import cssAnimation from './css-animation';
 import raf from 'raf';
 
-function animate(node, show, done, type) {
+function animate(node, show, done) {
   let height;
   let requestAnimationFrameId;
   let appearRequestAnimationFrameId;

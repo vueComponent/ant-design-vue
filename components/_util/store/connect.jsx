@@ -24,7 +24,7 @@ export default function connect(mapStateToProps) {
       name: `Connect_${getDisplayName(WrappedComponent)}`,
       props,
       inject: {
-        storeContext: { default: {} },
+        storeContext: { default: () => ({}) },
       },
       data() {
         this.store = this.storeContext.store;

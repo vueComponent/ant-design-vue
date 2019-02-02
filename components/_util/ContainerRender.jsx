@@ -53,11 +53,11 @@ export default {
 
         if (!this._component) {
           this._component = new Vue({
+            el: el,
+            parent: self.parent,
             data: {
               comProps: props,
             },
-            parent: self.parent,
-            el: el,
             mounted() {
               this.$nextTick(() => {
                 if (ready) {

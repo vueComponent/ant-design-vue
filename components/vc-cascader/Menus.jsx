@@ -24,11 +24,6 @@ export default {
     this.menuItems = {};
     return {};
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.scrollActiveItemToView();
-    });
-  },
   watch: {
     visible(val) {
       if (val) {
@@ -37,6 +32,11 @@ export default {
         });
       }
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.scrollActiveItemToView();
+    });
   },
   methods: {
     getFieldName(name) {

@@ -1,18 +1,20 @@
 <template>
-<div>
-  <demo-box :jsfiddle="jsfiddle">
-    <template slot="component"><slot /></template>
-    <template slot="description">
-      <div v-html="cnHtml"></div>
-    </template>
-    <template slot="us-description">
-      <div v-html="usHtml"></div>
-    </template>
-    <template slot="code">
-      <div v-html="codeHtml"></div>
-    </template>
-  </demo-box>
-</div>
+  <div>
+    <demo-box :jsfiddle="jsfiddle">
+      <template slot="component">
+        <slot />
+      </template>
+      <template slot="description">
+        <div v-html="cnHtml" />
+      </template>
+      <template slot="us-description">
+        <div v-html="usHtml" />
+      </template>
+      <template slot="code">
+        <div v-html="codeHtml" />
+      </template>
+    </demo-box>
+  </div>
 </template>
 
 <script>
@@ -57,7 +59,7 @@ marked.setOptions({
 const cnReg = /<cn>([\S\s\t]*?)<\/cn>/;
 const usReg = /<us>([\S\s\t]*?)<\/us>/;
 export default {
-  name: 'demoContainer',
+  name: 'DemoContainer',
   props: ['code'],
   data () {
     const cn = this.code.match(cnReg) || [];

@@ -37,7 +37,7 @@ export default {
         <a-row>
           <a-col class='header-left' xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: '/ant-design-vue' }} id='logo'>
-              <img alt='logo' height='32' src='https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/logo.png' />
+              <img alt='logo' height='32' src='https://cdn.nlark.com/yuque/0/2019/png/87084/1548485177381-assets/web-upload/d18a622f-08d8-4955-a5c2-38138f80177b.png' />
               <span style='color: black;font-size: 16px;font-weight: 400;'>Ant Design Vue</span>
             </router-link>
             <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
@@ -76,9 +76,6 @@ export default {
               <a-menu-item key='components'>
                 {isCN ? '组件' : 'Components'}
               </a-menu-item>
-              <a-menu-item key='github'>
-                <a target="_blank" href='https://github.com/vueComponent/ant-design-vue'>GitHub</a>
-              </a-menu-item>
               <a-sub-menu key="Ecosystem" title={isCN ? '生态系统' : 'Ecosystem'}>
                 <a-menu-item key="design">
                   <router-link to={{ path: isCN ? '/ant-design-vue/docs/vue/download-cn/' :  '/ant-design-vue/docs/vue/download/'}}>
@@ -95,19 +92,36 @@ export default {
                     Awesome
                   </a>
                 </a-menu-item>
-                <a-menu-item key='dingding'>
-                  <a-popover placement='bottom'>
+                <a-menu-item key="github">
+                  <a target="_blank" href='https://github.com/vueComponent/ant-design-vue'>GitHub</a>
+                </a-menu-item>
+                <a-menu-item key='wechat'>
+                  <a-popover placement='right'>
                     <template slot='content'>
                       <img
                         width='160'
-                        height='163'
-                        alt='dingding'
-                        src='https://user-images.githubusercontent.com/4122593/50038786-571eaf80-0060-11e9-98a1-ea202fc60859.png'
+                        height='160'
+                        alt='wechat'
+                        src='https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1548484520368-assets/web-upload/28b3f1f9-938a-4bd5-ad2d-0cc4d2c200ed.jpeg'
                       />
                     </template>
                     <a>
-                      <a-icon type='dingding' style={{ color: '#1890ff' }}/>
-                      {isCN ? '钉钉服务群' : 'Ding Group QR Code'}
+                      {isCN ? '微信' : 'WeChat'}
+                    </a>
+                  </a-popover>
+                </a-menu-item>
+                <a-menu-item key='qq'>
+                  <a-popover placement='right'>
+                    <template slot='content'>
+                      <img
+                        width='160'
+                        height='160'
+                        alt='qq'
+                        src='https://cdn.nlark.com/yuque/0/2019/png/87084/1548484520571-assets/web-upload/ca2259e1-6600-461b-8c5b-31018e8bcc07.png'
+                      />
+                    </template>
+                    <a>
+                      {isCN ? 'QQ(217490093)' : 'QQ(217490093)'}
                     </a>
                   </a-popover>
                 </a-menu-item>

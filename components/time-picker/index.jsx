@@ -87,7 +87,7 @@ const TimePicker = {
     event: 'change',
   },
   inject: {
-    configProvider: { default: {} },
+    configProvider: { default: () => ({}) },
   },
   data() {
     const value = this.value || this.defaultValue;

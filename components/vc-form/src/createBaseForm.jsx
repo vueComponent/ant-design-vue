@@ -56,7 +56,7 @@ function createBaseForm(option = {}, mixins = []) {
       data() {
         const fields = mapPropsToFields && mapPropsToFields(this.$props);
         this.fieldsStore = createFieldsStore(fields || {});
-
+        this.templateContext = templateContext;
         this.instances = {};
         this.cachedBind = {};
         this.clearedFieldMetaCache = {};

@@ -35,7 +35,7 @@ export default {
     },
   },
 
-  render (h) {
+  render () {
     const data = this.data;
     const options = data.map((d) => {
       return <Option key={d.value}>{d.text}</Option>;

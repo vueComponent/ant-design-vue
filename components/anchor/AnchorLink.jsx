@@ -15,8 +15,14 @@ export default {
     href: '#',
   }),
   inject: {
-    antAnchor: { default: {} },
-    antAnchorContext: { default: {} },
+    antAnchor: { default: () => ({}) },
+    antAnchorContext: { default: () => ({}) },
+  },
+  watch: {
+    href(val, oldVal) {
+      this.antAnchor.unregisterLink(oldVal);
+      this.antAnchor.registerLink(val);
+    },
   },
 
   mounted() {
@@ -25,12 +31,6 @@ export default {
 
   beforeDestroy() {
     this.antAnchor.unregisterLink(this.href);
-  },
-  watch: {
-    href(val, oldVal) {
-      this.antAnchor.unregisterLink(oldVal);
-      this.antAnchor.registerLink(val);
-    },
   },
   methods: {
     handleClick(e) {

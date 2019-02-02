@@ -5,8 +5,8 @@ import { TreeNode } from '../../vc-tree';
  * since TreeNode is so confuse here.
  */
 export default {
-  functional: true,
   name: 'SelectNode',
+  functional: true,
   isTreeNode: true,
   props: TreeNode.props,
   render(h, context) {

@@ -139,15 +139,44 @@ const Form = {
   createForm(context, options = {}) {
     return new Vue(Form.create({ ...options, templateContext: context })());
   },
+  created() {
+    this.formItemContexts = new Map();
+  },
   provide() {
     return {
       FormProps: this.$props,
+      // https://github.com/vueComponent/ant-design-vue/issues/446
+      collectFormItemContext:
+        this.form && this.form.templateContext
+          ? (c, type = 'add') => {
+              const formItemContexts = this.formItemContexts;
+              const number = formItemContexts.get(c) || 0;
+              if (type === 'delete') {
+                if (number <= 1) {
+                  formItemContexts.delete(c);
+                } else {
+                  formItemContexts.set(c, number - 1);
+                }
+              } else {
+                if (c !== this.form.templateContext) {
+                  formItemContexts.set(c, number + 1);
+                }
+              }
+            }
+          : () => {},
     };
   },
   watch: {
     form() {
       this.$forceUpdate();
     },
+  },
+  beforeUpdate() {
+    this.formItemContexts.forEach((number, c) => {
+      if (c.$forceUpdate) {
+        c.$forceUpdate();
+      }
+    });
   },
   updated() {
     if (this.form && this.form.cleanUpUselessFields) {
@@ -232,7 +261,6 @@ const Form = {
         />
       );
     }
-
     return (
       <form onSubmit={onSubmit} class={formClassName}>
         {$slots.default}

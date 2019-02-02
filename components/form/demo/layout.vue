@@ -10,40 +10,51 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
 
 
 <template>
-<div>
-  <a-form :layout="formLayout">
-    <a-form-item
-      label='Form Layout'
-      :labelCol="formItemLayout.labelCol"
-      :wrapperCol="formItemLayout.wrapperCol"
-    >
-      <a-radio-group defaultValue='horizontal' @change="handleFormLayoutChange">
-        <a-radio-button value='horizontal'>Horizontal</a-radio-button>
-        <a-radio-button value='vertical'>Vertical</a-radio-button>
-        <a-radio-button value='inline'>Inline</a-radio-button>
-      </a-radio-group>
-    </a-form-item>
-    <a-form-item
-      label='Field A'
-      :labelCol="formItemLayout.labelCol"
-      :wrapperCol="formItemLayout.wrapperCol"
-    >
-      <a-input placeholder='input placeholder' />
-    </a-form-item>
-    <a-form-item
-      label='Field B'
-      :labelCol="formItemLayout.labelCol"
-      :wrapperCol="formItemLayout.wrapperCol"
-    >
-      <a-input placeholder='input placeholder' />
-    </a-form-item>
-    <a-form-item
-      :wrapperCol="buttonItemLayout.wrapperCol"
-    >
-      <a-button type='primary'>Submit</a-button>
-    </a-form-item>
-  </a-form>
-</div>
+  <div>
+    <a-form :layout="formLayout">
+      <a-form-item
+        label="Form Layout"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <a-radio-group
+          default-value="horizontal"
+          @change="handleFormLayoutChange"
+        >
+          <a-radio-button value="horizontal">
+            Horizontal
+          </a-radio-button>
+          <a-radio-button value="vertical">
+            Vertical
+          </a-radio-button>
+          <a-radio-button value="inline">
+            Inline
+          </a-radio-button>
+        </a-radio-group>
+      </a-form-item>
+      <a-form-item
+        label="Field A"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <a-input placeholder="input placeholder" />
+      </a-form-item>
+      <a-form-item
+        label="Field B"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <a-input placeholder="input placeholder" />
+      </a-form-item>
+      <a-form-item
+        :wrapper-col="buttonItemLayout.wrapperCol"
+      >
+        <a-button type="primary">
+          Submit
+        </a-button>
+      </a-form-item>
+    </a-form>
+  </div>
 </template>
 
 <script>
@@ -52,11 +63,6 @@ export default {
     return {
       formLayout: 'horizontal',
     };
-  },
-  methods: {
-    handleFormLayoutChange  (e) {
-      this.formLayout = e.target.value;
-    },
   },
   computed: {
     formItemLayout () {
@@ -71,6 +77,11 @@ export default {
       return formLayout === 'horizontal' ? {
         wrapperCol: { span: 14, offset: 4 },
       } : {};
+    },
+  },
+  methods: {
+    handleFormLayoutChange  (e) {
+      this.formLayout = e.target.value;
     },
   },
 };

@@ -10,175 +10,250 @@ Demostration for validataion configuration for form controls which are not show 
 
 
 <template>
-<a-form id='components-form-demo-validate-other' @submit="handleSubmit" :form="form">
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Plain Text'
+  <a-form
+    id="components-form-demo-validate-other"
+    :form="form"
+    @submit="handleSubmit"
   >
-    <span class='ant-form-text'>China</span>
-  </a-form-item>
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Select'
-    hasFeedback
-  >
-    <a-select
-      v-decorator="[
-        'select',
-        {rules: [{ required: true, message: 'Please select your country!' }]}
-      ]"
-      placeholder='Please select a country'
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Plain Text"
     >
-      <a-select-option value='china'>China</a-select-option>
-      <a-select-option value='usa'>U.S.A</a-select-option>
-    </a-select>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Select[multiple]'
-  >
-    <a-select
-      v-decorator="[
-        'select-multiple', {
-        rules: [{ required: true, message: 'Please select your favourite colors!', type: 'array' }],
-      }]"
-      mode='multiple'
-      placeholder='Please select favourite colors'
+      <span class="ant-form-text">
+        China
+      </span>
+    </a-form-item>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Select"
+      has-feedback
     >
-      <a-select-option value='red'>Red</a-select-option>
-      <a-select-option value='green'>Green</a-select-option>
-      <a-select-option value='blue'>Blue</a-select-option>
-    </a-select>
-  </a-form-item>
+      <a-select
+        v-decorator="[
+          'select',
+          {rules: [{ required: true, message: 'Please select your country!' }]}
+        ]"
+        placeholder="Please select a country"
+      >
+        <a-select-option value="china">
+          China
+        </a-select-option>
+        <a-select-option value="usa">
+          U.S.A
+        </a-select-option>
+      </a-select>
+    </a-form-item>
 
-  <a-form-item
-    v-bind="formItemLayout"
-    label='InputNumber'
-  >
-    <a-input-number v-decorator="['input-number', { initialValue: 3 }]" :min="1" :max="10" />
-    <span class='ant-form-text'> machines</span>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Switch'
-  >
-    <a-switch v-decorator="['switch', { valuePropName: 'checked' }]"/>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Slider'
-  >
-    <a-slider v-decorator="['slider']" :marks="{ 0: 'A', 20: 'B', 40: 'C', 60: 'D', 80: 'E', 100: 'F' }" />
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Radio.Group'
-  >
-    <a-radio-group v-decorator="['radio-group']">
-      <a-radio value='a'>item 1</a-radio>
-      <a-radio value='b'>item 2</a-radio>
-      <a-radio value='c'>item 3</a-radio>
-    </a-radio-group>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Radio.Button'
-  >
-    <a-radio-group v-decorator="['radio-button']">
-      <a-radio-button value='a'>item 1</a-radio-button>
-      <a-radio-button value='b'>item 2</a-radio-button>
-      <a-radio-button value='c'>item 3</a-radio-button>
-    </a-radio-group>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Checkbox.Group'
-  >
-    <a-checkbox-group style="width: 100%;" v-decorator="['checkbox-group', {initialValue: ['A', 'B']}]">
-      <a-row>
-        <a-col :span="8"><a-checkbox value="A">A</a-checkbox></a-col>
-        <a-col :span="8"><a-checkbox disabled value="B">B</a-checkbox></a-col>
-        <a-col :span="8"><a-checkbox value="C">C</a-checkbox></a-col>
-        <a-col :span="8"><a-checkbox value="D">D</a-checkbox></a-col>
-        <a-col :span="8"><a-checkbox value="E">E</a-checkbox></a-col>
-      </a-row>
-    </a-checkbox-group>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Rate'
-  >
-    <a-rate allowHalf v-decorator="['rate', {initialValue: 3.5}]"/>
-  </a-form-item>
-
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Upload'
-    extra='longgggggggggggggggggggggggggggggggggg'
-  >
-    <a-upload
-      v-decorator="['upload', {
-        valuePropName: 'fileList',
-        getValueFromEvent: normFile,
-      }]"
-      name='logo'
-      action='/upload.do'
-      listType='picture'
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Select[multiple]"
     >
-      <a-button>
-        <a-icon type='upload' /> Click to upload
-      </a-button>
-    </a-upload>
-  </a-form-item>
+      <a-select
+        v-decorator="[
+          'select-multiple', {
+            rules: [{ required: true, message: 'Please select your favourite colors!', type: 'array' }],
+          }]"
+        mode="multiple"
+        placeholder="Please select favourite colors"
+      >
+        <a-select-option value="red">
+          Red
+        </a-select-option>
+        <a-select-option value="green">
+          Green
+        </a-select-option>
+        <a-select-option value="blue">
+          Blue
+        </a-select-option>
+      </a-select>
+    </a-form-item>
 
-  <a-form-item
-    v-bind="formItemLayout"
-    label='Dragger'
-  >
-    <div class='dropbox'>
-      <a-upload-dragger
-        v-decorator="['dragger', {
+    <a-form-item
+      v-bind="formItemLayout"
+      label="InputNumber"
+    >
+      <a-input-number
+        v-decorator="['input-number', { initialValue: 3 }]"
+        :min="1"
+        :max="10"
+      />
+      <span class="ant-form-text">
+        machines
+      </span>
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Switch"
+    >
+      <a-switch v-decorator="['switch', { valuePropName: 'checked' }]" />
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Slider"
+    >
+      <a-slider
+        v-decorator="['slider']"
+        :marks="{ 0: 'A', 20: 'B', 40: 'C', 60: 'D', 80: 'E', 100: 'F' }"
+      />
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Radio.Group"
+    >
+      <a-radio-group v-decorator="['radio-group']">
+        <a-radio value="a">
+          item 1
+        </a-radio>
+        <a-radio value="b">
+          item 2
+        </a-radio>
+        <a-radio value="c">
+          item 3
+        </a-radio>
+      </a-radio-group>
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Radio.Button"
+    >
+      <a-radio-group v-decorator="['radio-button']">
+        <a-radio-button value="a">
+          item 1
+        </a-radio-button>
+        <a-radio-button value="b">
+          item 2
+        </a-radio-button>
+        <a-radio-button value="c">
+          item 3
+        </a-radio-button>
+      </a-radio-group>
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Checkbox.Group"
+    >
+      <a-checkbox-group
+        v-decorator="['checkbox-group', {initialValue: ['A', 'B']}]"
+        style="width: 100%;"
+      >
+        <a-row>
+          <a-col :span="8">
+            <a-checkbox value="A">
+              A
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox
+              disabled
+              value="B"
+            >
+              B
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="C">
+              C
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="D">
+              D
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="E">
+              E
+            </a-checkbox>
+          </a-col>
+        </a-row>
+      </a-checkbox-group>
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Rate"
+    >
+      <a-rate
+        v-decorator="['rate', {initialValue: 3.5}]"
+        allow-half
+      />
+    </a-form-item>
+
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Upload"
+      extra="longgggggggggggggggggggggggggggggggggg"
+    >
+      <a-upload
+        v-decorator="['upload', {
           valuePropName: 'fileList',
           getValueFromEvent: normFile,
         }]"
-        name='files'
-        action='/upload.do'
+        name="logo"
+        action="/upload.do"
+        list-type="picture"
       >
-        <p class='ant-upload-drag-icon'>
-          <a-icon type='inbox' />
-        </p>
-        <p class='ant-upload-text'>Click or drag file to this area to upload</p>
-        <p class='ant-upload-hint'>Support for a single or bulk upload.</p>
-      </a-upload-dragger>
-    </div>
-  </a-form-item>
+        <a-button>
+          <a-icon type="upload" /> Click to upload
+        </a-button>
+      </a-upload>
+    </a-form-item>
 
-  <a-form-item
-    :wrapperCol="{ span: 12, offset: 6 }"
-  >
-    <a-button type='primary' htmlType='submit'>Submit</a-button>
-  </a-form-item>
-</a-form>
+    <a-form-item
+      v-bind="formItemLayout"
+      label="Dragger"
+    >
+      <div class="dropbox">
+        <a-upload-dragger
+          v-decorator="['dragger', {
+            valuePropName: 'fileList',
+            getValueFromEvent: normFile,
+          }]"
+          name="files"
+          action="/upload.do"
+        >
+          <p class="ant-upload-drag-icon">
+            <a-icon type="inbox" />
+          </p>
+          <p class="ant-upload-text">
+            Click or drag file to this area to upload
+          </p>
+          <p class="ant-upload-hint">
+            Support for a single or bulk upload.
+          </p>
+        </a-upload-dragger>
+      </div>
+    </a-form-item>
+
+    <a-form-item
+      :wrapper-col="{ span: 12, offset: 6 }"
+    >
+      <a-button
+        type="primary"
+        html-type="submit"
+      >
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
 <script>
 export default {
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
-  },
   data: () => ({
     formItemLayout: {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
     },
   }),
+  beforeCreate () {
+    this.form = this.$form.createForm(this);
+  },
   methods: {
     handleSubmit  (e) {
       e.preventDefault();

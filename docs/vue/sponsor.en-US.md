@@ -8,7 +8,7 @@ We accept donations through these channels:
 <div>
 <a href="https://www.paypal.me/tangjinzhou" target="_blank">PayPal</a>
 <br/>
-<a href="https://user-images.githubusercontent.com/6937879/43032487-932a5536-8cea-11e8-9175-9c006e938a82.png" target="_blank">Alipay or WeChat</a>
+<a href="https://cdn.nlark.com/yuque/0/2019/png/87084/1548485701785-assets/web-upload/648ca181-a52f-4382-957c-97c5dbb3e1cc.png" target="_blank">Alipay or WeChat</a>
 </div>
 
 ## Recurring Pledges

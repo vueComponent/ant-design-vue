@@ -2,7 +2,7 @@ import '../assets/index.less';
 import Slider from '../src/slider';
 
 export default {
-  render(h) {
+  render() {
     const settings = {
       props: {
         dots: true,

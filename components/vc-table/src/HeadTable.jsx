@@ -12,7 +12,7 @@ export default {
     expander: PropTypes.object.isRequired,
   },
   inject: {
-    table: { default: {} },
+    table: { default: () => ({}) },
   },
   mounted() {
     this.updateTableRef();

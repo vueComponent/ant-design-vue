@@ -5,8 +5,8 @@ import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps } from '../_util/props-util';
 
 export default {
-  mixins: [BaseMixin],
   name: 'SelectionBox',
+  mixins: [BaseMixin],
   props: SelectionBoxProps,
   data() {
     return {

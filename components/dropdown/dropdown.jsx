@@ -21,7 +21,7 @@ const Dropdown = {
     event: 'visibleChange',
   },
   inject: {
-    configProvider: { default: {} },
+    configProvider: { default: () => ({}) },
   },
   methods: {
     getTransitionName() {

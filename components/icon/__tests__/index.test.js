@@ -7,7 +7,7 @@ import { cloneElement } from '../../_util/vnode';
 describe('Icon', () => {
   it('should render to a <i class="xxx"><svg>...</svg></i>', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Icon type="message" class="my-icon-classname" />;
       },
     });
@@ -16,7 +16,7 @@ describe('Icon', () => {
 
   it('should support basic usage', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return (
           <div>
             <Icon type="home" />
@@ -33,7 +33,7 @@ describe('Icon', () => {
 
   it('should support older usage', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return (
           <div>
             <Icon type="home-o" />
@@ -49,7 +49,7 @@ describe('Icon', () => {
 
   it('should support two-tone icon', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Icon type="check-circle" theme="twoTone" twoToneColor="#f5222d" />;
       },
     });
@@ -61,7 +61,7 @@ describe('Icon', () => {
     Icon.setTwoToneColor('#1890ff');
     expect(Icon.getTwoToneColor()).toBe('#1890ff');
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Icon type="check-circle" theme="twoTone" />;
       },
     });
@@ -72,7 +72,7 @@ describe('Icon', () => {
 
   it('should support pass svg paths as children', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return (
           <Icon viewBox="0 0 24 24">
             <title>Cool Home</title>
@@ -86,7 +86,7 @@ describe('Icon', () => {
 
   it('should give warning and render <i>{null}</i>', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Icon viewBox="0 0 24 24" />;
       },
     });

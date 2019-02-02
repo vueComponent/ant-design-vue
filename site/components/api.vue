@@ -1,13 +1,16 @@
 <template>
-  <div class='markdown api-container'>
-    <slot v-if="isZhCN" name="cn"></slot>
-    <slot v-else></slot>
+  <div class="markdown api-container">
+    <slot
+      v-if="isZhCN"
+      name="cn"
+    />
+    <slot v-else />
   </div>
 </template>
 <script>
 import { isZhCN } from '../util';
 export default {
-  name: 'api',
+  name: 'Api',
   inject: {
     demoContext: { default: {}},
   },

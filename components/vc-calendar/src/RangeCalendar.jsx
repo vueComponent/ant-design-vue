@@ -126,7 +126,7 @@ const RangeCalendar = {
     };
   },
   watch: {
-    value(val) {
+    value() {
       const newState = {};
       newState.sValue = normalizeAnchor(this.$props, 0);
       this.setState(newState);

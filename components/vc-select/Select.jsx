@@ -452,7 +452,7 @@ const Select = {
       }
     },
 
-    onPlaceholderClick(e) {
+    onPlaceholderClick() {
       if (this.getInputDOMNode() && this.getInputDOMNode()) {
         this.getInputDOMNode().focus();
       }
@@ -618,7 +618,7 @@ const Select = {
         this._focused = false;
       }
     },
-    inputBlur(e) {
+    inputBlur() {
       this.clearBlurTime();
       if (this.disabled) {
         return;
@@ -1448,7 +1448,7 @@ const Select = {
         }
       }
     },
-    selectionRefFocus(e) {
+    selectionRefFocus() {
       if (this._focused || this.disabled) {
         return;
       }
@@ -1456,7 +1456,7 @@ const Select = {
       this.updateFocusClassName();
       this.$emit('focus');
     },
-    selectionRefBlur(e) {
+    selectionRefBlur() {
       this._focused = false;
       this.updateFocusClassName();
       this.$emit('blur');

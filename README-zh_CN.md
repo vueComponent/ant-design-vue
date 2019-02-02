@@ -91,7 +91,7 @@ ant-design-vue是MIT协议的开源项目。为了项目能够更好的持续的
 - [Patreon](https://www.patreon.com/tangjinzhou)
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
-- [支付宝或微信](https://user-images.githubusercontent.com/6937879/43032487-932a5536-8cea-11e8-9175-9c006e938a82.png)
+- [支付宝或微信](https://cdn.nlark.com/yuque/0/2019/png/87084/1548485701785-assets/web-upload/648ca181-a52f-4382-957c-97c5dbb3e1cc.png)
 
 ## Backers
 

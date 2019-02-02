@@ -6,8 +6,8 @@ import buttonTypes from './buttonTypes';
 import { filterEmpty } from '../_util/props-util';
 const props = buttonTypes();
 export default {
-  inheritAttrs: false,
   name: 'AButton',
+  inheritAttrs: false,
   __ANT_BUTTON: true,
   props,
   data() {
@@ -20,32 +20,6 @@ export default {
       sLoading: !!this.loading,
       hasTwoCNChar: false,
     };
-  },
-  mounted() {
-    this.fixTwoCNChar();
-  },
-  updated() {
-    this.fixTwoCNChar();
-  },
-  beforeDestroy() {
-    // if (this.timeout) {
-    //   clearTimeout(this.timeout)
-    // }
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout);
-    }
-  },
-  watch: {
-    loading(val) {
-      clearTimeout(this.delayTimeout);
-      if (typeof val !== 'boolean' && val && val.delay) {
-        this.delayTimeout = setTimeout(() => {
-          this.sLoading = !!val;
-        }, val.delay);
-      } else {
-        this.sLoading = !!val;
-      }
-    },
   },
   computed: {
     classes() {
@@ -76,6 +50,32 @@ export default {
         [`${prefixCls}-block`]: block,
       };
     },
+  },
+  watch: {
+    loading(val) {
+      clearTimeout(this.delayTimeout);
+      if (typeof val !== 'boolean' && val && val.delay) {
+        this.delayTimeout = setTimeout(() => {
+          this.sLoading = !!val;
+        }, val.delay);
+      } else {
+        this.sLoading = !!val;
+      }
+    },
+  },
+  mounted() {
+    this.fixTwoCNChar();
+  },
+  updated() {
+    this.fixTwoCNChar();
+  },
+  beforeDestroy() {
+    // if (this.timeout) {
+    //   clearTimeout(this.timeout)
+    // }
+    if (this.delayTimeout) {
+      clearTimeout(this.delayTimeout);
+    }
   },
   methods: {
     fixTwoCNChar() {

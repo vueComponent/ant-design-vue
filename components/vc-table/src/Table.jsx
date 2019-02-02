@@ -79,6 +79,60 @@ export default {
       customHeaderRow: () => {},
     },
   ),
+  data() {
+    this.preData = [...this.data];
+    return {
+      columnManager: new ColumnManager(this.columns),
+      sComponents: merge(
+        {
+          table: 'table',
+          header: {
+            wrapper: 'thead',
+            row: 'tr',
+            cell: 'th',
+          },
+          body: {
+            wrapper: 'tbody',
+            row: 'tr',
+            cell: 'td',
+          },
+        },
+        this.components,
+      ),
+    };
+  },
+  watch: {
+    components() {
+      this._components = merge(
+        {
+          table: 'table',
+          header: {
+            wrapper: 'thead',
+            row: 'tr',
+            cell: 'th',
+          },
+          body: {
+            wrapper: 'tbody',
+            row: 'tr',
+            cell: 'td',
+          },
+        },
+        this.components,
+      );
+    },
+    columns(val) {
+      if (val) {
+        this.columnManager.reset(val);
+      }
+    },
+    data(val) {
+      if (val.length === 0 && this.hasScrollX()) {
+        this.$nextTick(() => {
+          this.resetScrollX();
+        });
+      }
+    },
+  },
 
   // static childContextTypes = {
   //   table: PropTypes.any,
@@ -112,64 +166,10 @@ export default {
 
     this.debouncedWindowResize = debounce(this.handleWindowResize, 150);
   },
-  data() {
-    this.preData = [...this.data];
-    return {
-      columnManager: new ColumnManager(this.columns),
-      sComponents: merge(
-        {
-          table: 'table',
-          header: {
-            wrapper: 'thead',
-            row: 'tr',
-            cell: 'th',
-          },
-          body: {
-            wrapper: 'tbody',
-            row: 'tr',
-            cell: 'td',
-          },
-        },
-        this.components,
-      ),
-    };
-  },
   provide() {
     return {
       table: this,
     };
-  },
-  watch: {
-    components(val) {
-      this._components = merge(
-        {
-          table: 'table',
-          header: {
-            wrapper: 'thead',
-            row: 'tr',
-            cell: 'th',
-          },
-          body: {
-            wrapper: 'tbody',
-            row: 'tr',
-            cell: 'td',
-          },
-        },
-        this.components,
-      );
-    },
-    columns(val) {
-      if (val) {
-        this.columnManager.reset(val);
-      }
-    },
-    data(val) {
-      if (val.length === 0 && this.hasScrollX()) {
-        this.$nextTick(() => {
-          this.resetScrollX();
-        });
-      }
-    },
   },
 
   mounted() {
@@ -188,7 +188,7 @@ export default {
     });
   },
 
-  updated(prevProps) {
+  updated() {
     this.$nextTick(() => {
       if (this.columnManager.isAnyColumnsFixed()) {
         this.handleWindowResize();

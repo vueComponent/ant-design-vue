@@ -7,9 +7,9 @@ import { SelectionCheckboxAllProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
 
 export default {
-  props: SelectionCheckboxAllProps,
   name: 'SelectionCheckboxAll',
   mixins: [BaseMixin],
+  props: SelectionCheckboxAllProps,
   data() {
     const { $props: props } = this;
     this.defaultSelections = props.hideDefaultSelections
@@ -33,10 +33,6 @@ export default {
     };
   },
 
-  mounted() {
-    this.subscribe();
-  },
-
   watch: {
     $props: {
       handler: function() {
@@ -44,6 +40,10 @@ export default {
       },
       deep: true,
     },
+  },
+
+  mounted() {
+    this.subscribe();
   },
 
   beforeDestroy() {

@@ -10,56 +10,64 @@ Add or remove form items dynamically.
 
 
 <template>
-<a-form @submit="handleSubmit" :form="form">
-  <a-form-item
-    v-for="(k, index) in form.getFieldValue('keys')"
-    v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
-    :label="index === 0 ? 'Passengers' : ''"
-    :required="false"
-    :key="k"
+  <a-form
+    :form="form"
+    @submit="handleSubmit"
   >
-    <a-input
-      v-decorator="[
-        `names[${k}]`,
-        {
-          validateTrigger: ['change', 'blur'],
-          preserve: true,
-          rules: [{
-            required: true,
-            whitespace: true,
-            message: 'Please input passenger\'s name or delete this field.',
-          }],
-        }
-      ]"
-      placeholder='passenger name'
-      style="width: 60%; margin-right: 8px"
-    />
-    <a-icon
-      v-if="form.getFieldValue('keys').length > 1"
-      class='dynamic-delete-button'
-      type='minus-circle-o'
-      :disabled="form.getFieldValue('keys').length === 1"
-      @click="() => remove(k)"
-    />
-  </a-form-item>
-  <a-form-item v-bind="formItemLayoutWithOutLabel">
-    <a-button type='dashed' @click="add" style="width: 60%">
-      <a-icon type='plus' /> Add field
-    </a-button>
-  </a-form-item>
-  <a-form-item v-bind="formItemLayoutWithOutLabel">
-    <a-button type='primary' htmlType='submit'>Submit</a-button>
-  </a-form-item>
-</a-form>
+    <a-form-item
+      v-for="(k, index) in form.getFieldValue('keys')"
+      :key="k"
+      v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
+      :label="index === 0 ? 'Passengers' : ''"
+      :required="false"
+    >
+      <a-input
+        v-decorator="[
+          `names[${k}]`,
+          {
+            validateTrigger: ['change', 'blur'],
+            preserve: true,
+            rules: [{
+              required: true,
+              whitespace: true,
+              message: 'Please input passenger\'s name or delete this field.',
+            }],
+          }
+        ]"
+        placeholder="passenger name"
+        style="width: 60%; margin-right: 8px"
+      />
+      <a-icon
+        v-if="form.getFieldValue('keys').length > 1"
+        class="dynamic-delete-button"
+        type="minus-circle-o"
+        :disabled="form.getFieldValue('keys').length === 1"
+        @click="() => remove(k)"
+      />
+    </a-form-item>
+    <a-form-item v-bind="formItemLayoutWithOutLabel">
+      <a-button
+        type="dashed"
+        style="width: 60%"
+        @click="add"
+      >
+        <a-icon type="plus" /> Add field
+      </a-button>
+    </a-form-item>
+    <a-form-item v-bind="formItemLayoutWithOutLabel">
+      <a-button
+        type="primary"
+        html-type="submit"
+      >
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
 <script>
 let id = 0;
 export default {
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
-    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
-  },
   data () {
     return {
       formItemLayout: {
@@ -79,6 +87,10 @@ export default {
         },
       },
     };
+  },
+  beforeCreate () {
+    this.form = this.$form.createForm(this);
+    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   methods: {
     remove  (k) {

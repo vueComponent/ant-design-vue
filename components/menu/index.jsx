@@ -49,8 +49,8 @@ const Menu = {
   },
   mixins: [BaseMixin],
   inject: {
-    layoutSiderContext: { default: {} },
-    configProvider: { default: {} },
+    layoutSiderContext: { default: () => ({}) },
+    configProvider: { default: () => ({}) },
   },
   model: {
     prop: 'selectedKeys',

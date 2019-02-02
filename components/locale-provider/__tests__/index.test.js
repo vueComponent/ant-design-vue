@@ -124,7 +124,7 @@ const columns = [
 ];
 
 const App = {
-  render(h) {
+  render() {
     return (
       <div>
         <Pagination defaultCurrent={1} total={50} showSizeChanger />

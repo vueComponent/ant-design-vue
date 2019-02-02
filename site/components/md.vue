@@ -1,5 +1,8 @@
 <template>
-  <div v-html="marked(text)" class="markdown" />
+  <div
+    class="markdown"
+    v-html="marked(text)"
+  />
 </template>
 <script>
 import marked from 'marked';
@@ -27,7 +30,7 @@ marked.setOptions({
   smartypants: true,
 });
 export default {
-  name: 'md',
+  name: 'Md',
   props: {
     cn: String,
     us: String,

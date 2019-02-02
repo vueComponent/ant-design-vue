@@ -7,6 +7,9 @@ function noop() {}
 
 export default {
   name: 'ARadio',
+  model: {
+    prop: 'checked',
+  },
   props: {
     prefixCls: {
       default: 'ant-radio',
@@ -21,9 +24,6 @@ export default {
     id: String,
     autoFocus: Boolean,
     type: PropTypes.string.def('radio'),
-  },
-  model: {
-    prop: 'checked',
   },
   inject: {
     radioGroupContext: { default: undefined },

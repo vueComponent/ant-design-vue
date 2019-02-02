@@ -80,25 +80,21 @@ See [iconfont.cn documents](http://iconfont.cn/help/detail?spm=a313x.7781069.199
 
 ### Custom SVG Icon
 
-You can import SVG icon as an react component by using `webpack` and [`@svgr/webpack`](https://www.npmjs.com/package/@svgr/webpack). `@svgr/webpack`'s `options` [reference](https://github.com/smooth-code/svgr#options).
+You can import SVG icon as an vue component by using `vue cli 3` and [`vue-svg-loader`](https://www.npmjs.com/package/vue-svg-loader). `vue-svg-loader`'s `options` [reference](https://github.com/visualfanatic/vue-svg-loader).
 
 ```js
-// webpack.config.js
-{
-  test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-  use: [
-    {
-      loader: 'babel-loader',
-    },
-    {
-      loader: '@svgr/webpack',
-      options: {
-        babel: false,
-        icon: true,
-      },
-    },
-  ],
-}
+// vue.config.js
+module.exports = {
+  chainWebpack: (config) => {
+    const svgRule = config.module.rule('svg');
+
+    svgRule.uses.clear();
+
+    svgRule
+      .use('vue-svg-loader')
+      .loader('vue-svg-loader');
+  },
+};
 ```
 
 ```jsx

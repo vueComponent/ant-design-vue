@@ -19,6 +19,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement, cloneVNodes } from '../_util/vnode';
 import Icon from '../icon';
 
+function noop() {}
 export const FormItemProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -34,6 +35,22 @@ export const FormItemProps = {
   fieldDecoratorId: PropTypes.string,
   fieldDecoratorOptions: PropTypes.object,
 };
+function comeFromSlot(vnodes = [], itemVnode) {
+  let isSlot = false;
+  for (let i = 0, len = vnodes.length; i < len; i++) {
+    const vnode = vnodes[i];
+    if (vnode && (vnode === itemVnode || vnode.$vnode === itemVnode)) {
+      isSlot = true;
+    } else {
+      const children = vnode.componentOptions ? vnode.componentOptions.children : vnode.children;
+      isSlot = comeFromSlot(children, itemVnode);
+    }
+    if (isSlot) {
+      break;
+    }
+  }
+  return isSlot;
+}
 
 export default {
   name: 'AFormItem',
@@ -45,11 +62,23 @@ export default {
     colon: true,
   }),
   inject: {
-    FormProps: { default: {} },
-    decoratorFormProps: { default: {} },
+    FormProps: { default: () => ({}) },
+    decoratorFormProps: { default: () => ({}) },
+    collectFormItemContext: { default: () => noop },
   },
   data() {
     return { helpShow: false };
+  },
+  created() {
+    this.collectContext();
+  },
+  beforeUpdate() {
+    if (process.env.NODE_ENV !== 'production') {
+      this.collectContext();
+    }
+  },
+  beforeDestroy() {
+    this.collectFormItemContext(this.$vnode.context, 'delete');
   },
   mounted() {
     warning(
@@ -63,6 +92,24 @@ export default {
     );
   },
   methods: {
+    collectContext() {
+      if (this.FormProps.form && this.FormProps.form.templateContext) {
+        const { templateContext } = this.FormProps.form;
+        const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
+          return [...a, ...b];
+        }, []);
+        const isSlot = comeFromSlot(vnodes, this.$vnode);
+        warning(!isSlot, 'You can not set FormItem from slot, please use slot-scope instead slot');
+        let isSlotScope = false;
+        // 进一步判断是否是通过slot-scope传递
+        if (!isSlot && this.$vnode.context !== templateContext) {
+          isSlotScope = comeFromSlot(this.$vnode.context.$children, templateContext.$vnode);
+        }
+        if (!isSlotScope && !isSlot) {
+          this.collectFormItemContext(this.$vnode.context);
+        }
+      }
+    },
     getHelpMessage() {
       const help = getComponentFromProp(this, 'help');
       const onlyControl = this.getOnlyControl();
@@ -387,7 +434,11 @@ export default {
     decoratorChildren(vnodes) {
       const { FormProps } = this;
       const getFieldDecorator = FormProps.form.getFieldDecorator;
-      vnodes.forEach((vnode, index) => {
+      for (let i = 0, len = vnodes.length; i < len; i++) {
+        const vnode = vnodes[i];
+        if (getSlotOptions(vnode).__ANT_FORM_ITEM) {
+          break;
+        }
         if (vnode.children) {
           vnode.children = this.decoratorChildren(cloneVNodes(vnode.children));
         } else if (vnode.componentOptions && vnode.componentOptions.children) {
@@ -397,9 +448,9 @@ export default {
         }
         const option = this.decoratorOption(vnode);
         if (option && option[0]) {
-          vnodes[index] = getFieldDecorator(option[0], option[1])(vnode);
+          vnodes[i] = getFieldDecorator(option[0], option[1])(vnode);
         }
-      });
+      }
       return vnodes;
     },
   },

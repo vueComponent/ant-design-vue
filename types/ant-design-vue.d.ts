@@ -11,7 +11,7 @@ import { Alert } from './alert';
 import { Avatar } from './avatar';
 import { BackTop } from './back-top';
 import { Badge } from './badge';
-import { Breadcrumb } from './breadcrumb';
+import { Breadcrumb } from './breadcrumb/breadcrumb';
 import { Button } from './button/button';
 import { Calendar } from './calendar';
 import { Card } from './card';

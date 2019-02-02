@@ -124,7 +124,7 @@ export default {
       },
       deep: true,
     },
-    dataSource(val) {
+    dataSource() {
       this.store.setState({
         selectionDirty: false,
       });

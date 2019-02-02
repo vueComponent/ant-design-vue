@@ -21,7 +21,7 @@ const BaseTable = {
     isAnyColumnsFixed: PropTypes.bool,
   },
   inject: {
-    table: { default: {} },
+    table: { default: () => ({}) },
   },
   methods: {
     getColumns(cols) {

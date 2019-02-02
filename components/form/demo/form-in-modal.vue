@@ -10,7 +10,12 @@ When user visit a page with a list of items, and want to create a new item. The 
 
 <template>
   <div>
-    <a-button type='primary' @click="showModal">New Collection</a-button>
+    <a-button
+      type="primary"
+      @click="showModal"
+    >
+      New Collection
+    </a-button>
     <collection-create-form
       ref="collectionForm"
       :visible="visible"
@@ -70,6 +75,7 @@ const CollectionCreateForm = {
 };
 
 export default {
+  components: { CollectionCreateForm },
   data () {
     return {
       visible: false,
@@ -94,7 +100,6 @@ export default {
       });
     },
   },
-  components: { CollectionCreateForm },
 };
 </script>
 

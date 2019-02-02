@@ -1,4 +1,5 @@
 {
+  "root": true,
     "env": {
         "browser": true,
         "node": true,
@@ -6,14 +7,18 @@
         "jest": true,
         "es6": true
     },
-    "parser": "babel-eslint",
-    "extends": ["plugin:vue-libs/recommended", "prettier"],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "extends": ["plugin:vue/recommended", "prettier"],
     "rules": {
         "comma-dangle": [2, "always-multiline"],
         "no-var": "error",
-        "no-unused-vars": "warn",
         "camelcase": "off",
         "no-extra-boolean-cast": "off",
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "vue/require-prop-types": "off",
+        "vue/require-default-prop": "off",
+        "vue/no-reserved-keys": "off"
     }
 }

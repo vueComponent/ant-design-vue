@@ -20,6 +20,10 @@ const DropdownButtonProps = {
 export { DropdownButtonProps };
 export default {
   name: 'ADropdownButton',
+  model: {
+    prop: 'visible',
+    event: 'visibleChange',
+  },
   props: DropdownButtonProps,
   methods: {
     onClick(e) {
@@ -29,12 +33,8 @@ export default {
       this.$emit('visibleChange', val);
     },
   },
-  model: {
-    prop: 'visible',
-    event: 'visibleChange',
-  },
   inject: {
-    configProvider: { default: {} },
+    configProvider: { default: () => ({}) },
   },
   render() {
     const {

@@ -415,7 +415,7 @@ const SubMenu = {
     },
   },
 
-  render(h) {
+  render() {
     const props = this.$props;
     const { rootPrefixCls, parentMenu, $listeners = {} } = this;
     const isOpen = props.isOpen;

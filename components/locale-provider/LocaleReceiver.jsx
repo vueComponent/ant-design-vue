@@ -8,7 +8,7 @@ export default {
     children: PropTypes.func,
   },
   inject: {
-    localeData: { default: {} },
+    localeData: { default: () => ({}) },
   },
   methods: {
     getLocale() {

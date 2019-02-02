@@ -16,7 +16,7 @@ describe('Button', () => {
 
   it('create primary button', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Button type="primary">按钮</Button>;
       },
     });
@@ -25,14 +25,14 @@ describe('Button', () => {
 
   it('renders Chinese characters correctly', done => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Button>按钮</Button>;
       },
     });
     expect(wrapper.text()).toBe('按 钮');
 
     const wrapper1 = mount({
-      render(h) {
+      render() {
         return <Button icon="search">按钮</Button>;
       },
     });
@@ -40,7 +40,7 @@ describe('Button', () => {
     expect(wrapper1.html()).toMatchSnapshot();
 
     const wrapper2 = mount({
-      render(h) {
+      render() {
         return (
           <Button>
             <Icon type="search" />
@@ -52,14 +52,14 @@ describe('Button', () => {
     expect(wrapper2.html()).toMatchSnapshot();
     // should not insert space when there is icon
     const wrapper3 = mount({
-      render(h) {
+      render() {
         return <Button icon="search">按钮</Button>;
       },
     });
     expect(wrapper3.html()).toMatchSnapshot();
     // should not insert space when there is icon while loading
     const wrapper4 = mount({
-      render(h) {
+      render() {
         return (
           <Button icon="search" loading>
             按钮
@@ -70,13 +70,13 @@ describe('Button', () => {
     expect(wrapper4.html()).toMatchSnapshot();
     // should insert space while loading
     const wrapper5 = mount({
-      render(h) {
+      render() {
         return <Button loading>按钮</Button>;
       },
     });
     expect(wrapper5.html()).toMatchSnapshot();
     const wrapper6 = mount({
-      render(h) {
+      render() {
         return (
           <Button>
             <span>按钮</span>
@@ -151,7 +151,7 @@ describe('Button', () => {
 
   it('should support link button', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return (
           <Button target="_blank" href="http://ant.design">
             link button
@@ -164,21 +164,21 @@ describe('Button', () => {
 
   it('fixbug renders {0} , 0 and {false}', () => {
     const wrapper = mount({
-      render(h) {
+      render() {
         return <Button>{0}</Button>;
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
 
     const wrapper1 = mount({
-      render(h) {
+      render() {
         return <Button>0</Button>;
       },
     });
     expect(wrapper1.html()).toMatchSnapshot();
 
     const wrapper2 = mount({
-      render(h) {
+      render() {
         return <Button>{false}</Button>;
       },
     });

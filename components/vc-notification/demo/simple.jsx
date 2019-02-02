@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-unused-vars */
 import '../assets/index.less';
 import Notification from '../index';
 let notification = null;
@@ -13,7 +13,7 @@ Notification.newInstance(
 
 function simpleFn() {
   notification.notice({
-    content: h => {
+    content: () => {
       return <span>simple show</span>;
     },
     onClose() {

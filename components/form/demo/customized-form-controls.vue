@@ -16,8 +16,12 @@ Customized or third-party form controls can be used in Form, too. Controls must 
 
 
 <template>
-  <a-form layout='inline' @submit="handleSubmit" :form="form">
-    <a-form-item label='Price'>
+  <a-form
+    layout="inline"
+    :form="form"
+    @submit="handleSubmit"
+  >
+    <a-form-item label="Price">
       <price-input
         v-decorator="[
           'price',
@@ -29,7 +33,12 @@ Customized or third-party form controls can be used in Form, too. Controls must 
       />
     </a-form-item>
     <a-form-item>
-      <a-button type='primary' htmlType='submit'>Submit</a-button>
+      <a-button
+        type="primary"
+        html-type="submit"
+      >
+        Submit
+      </a-button>
     </a-form-item>
   </a-form>
 </template>
@@ -98,6 +107,9 @@ const PriceInput = {
 };
 
 export default {
+  components: {
+    PriceInput,
+  },
   beforeCreate () {
     this.form = this.$form.createForm(this);
   },
@@ -117,9 +129,6 @@ export default {
       }
       callback('Price must greater than zero!');
     },
-  },
-  components: {
-    PriceInput,
   },
 };
 

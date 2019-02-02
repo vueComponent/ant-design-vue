@@ -10,6 +10,23 @@
 
 ---
 
+## 1.3.4
+`2019-01-31`
+
+🎉 🎉 🎉 Happy New Year!
+- 🐞 fix: AutoComplete placeholder not display when disabled. [#402](https://github.com/vueComponent/ant-design-vue/issues/402)。
+- 🐞 Add the `BreadcrmbItem` ts type file.[#452](https://github.com/vueComponent/ant-design-vue/issues/452)。
+- 🐞 Fixed an issue where the FormItem was not updated when it was in a subcomponent. [#446](https://github.com/vueComponent/ant-design-vue/issues/446)。
+- 🐞 Fix some component TypeScript definitions.
+
+## 1.3.3
+`2019-01-26`
+
+- 🐞 Fix `message` not close When you configure maxcount.[#428](https://github.com/vueComponent/ant-design-vue/pull/428)。
+- 🐞 Fix some component TypeScript definitions.[#422](https://github.com/vueComponent/ant-design-vue/pull/422)。
+- 🌟 The Anchor component add `warpperClass` `wrapperStyle` property.[1aa42d](https://github.com/vueComponent/ant-design-vue/commit/1aa42dfe18bd7ac7893a765b6ee341844ea02550)
+- 📝 Update the document: form adds the `preserve` description, and the `icon` modifies the custom component reference document description.
+
 ## 1.3.2
 `2019-01-17`
 

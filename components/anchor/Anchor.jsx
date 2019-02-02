@@ -4,7 +4,7 @@ import addEventListener from '../_util/Dom/addEventListener';
 import Affix from '../affix';
 import getScroll from '../_util/getScroll';
 import raf from 'raf';
-import { initDefaultProps, getClass } from '../_util/props-util';
+import { initDefaultProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 
 function getDefaultContainer() {
@@ -82,6 +82,8 @@ export const AnchorProps = {
   affix: PropTypes.bool,
   showInkInFixed: PropTypes.bool,
   getContainer: PropTypes.func,
+  wrapperClass: PropTypes.string,
+  wrapperStyle: PropTypes.object,
 };
 
 export default {
@@ -213,7 +215,7 @@ export default {
       visible: activeLink,
     });
 
-    const wrapperClass = classNames(getClass(this), `${prefixCls}-wrapper`);
+    const wrapperClass = classNames(this.wrapperClass, `${prefixCls}-wrapper`);
 
     const anchorClass = classNames(prefixCls, {
       fixed: !affix && !showInkInFixed,
@@ -221,7 +223,7 @@ export default {
 
     const wrapperStyle = {
       maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh',
-      // ...getStyle(this, true),
+      ...this.wrapperStyle,
     };
 
     const anchorContent = (

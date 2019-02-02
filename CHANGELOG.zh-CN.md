@@ -10,6 +10,23 @@
 
 ---
 
+## 1.3.4
+`2019-01-31`
+
+🎉 🎉 🎉 祝大家新年快乐！
+- 🐞 修复AutoComplete组件disabled时，placeholder不显示的问题。[#402](https://github.com/vueComponent/ant-design-vue/issues/402)。
+- 🐞 添加 `BreadcrmbItem` ts类型文件。[#452](https://github.com/vueComponent/ant-design-vue/issues/452)。
+- 🐞 修复当FormItem在子组件中时不更新问题。[#446](https://github.com/vueComponent/ant-design-vue/issues/446)。
+- 🐞 修复一些组件 TypeScript 定义。
+
+## 1.3.3
+`2019-01-26`
+
+- 🐞 修复message在配置maxcount时，不能关闭提示窗问题。[#428](https://github.com/vueComponent/ant-design-vue/pull/428)。
+- 🐞 修复一些组件 TypeScript 定义。[#422](https://github.com/vueComponent/ant-design-vue/pull/422)。
+- 🌟 Anchor组件新增`warpperClass` `wrapperStyle`属性。[1aa42d](https://github.com/vueComponent/ant-design-vue/commit/1aa42dfe18bd7ac7893a765b6ee341844ea02550)
+- 📝 更新文档：form增加preserve说明，icon修改自定义组件引用文档说明。
+
 ## 1.3.2
 `2019-01-17`
 

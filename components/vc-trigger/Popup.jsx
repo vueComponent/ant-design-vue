@@ -203,16 +203,18 @@ export default {
       const transitionName = getTransitionName();
       let useTransition = !!transitionName;
       const transitionEvent = {
-        beforeEnter: el => {
+        beforeEnter: () => {
           // el.style.display = el.__vOriginalDisplay
           // this.$refs.alignInstance.forceAlign()
         },
         enter: (el, done) => {
           // align updated后执行动画
           this.$nextTick(() => {
-            this.$refs.alignInstance.$nextTick(() => {
-              animate(el, `${transitionName}-enter`, done);
-            });
+            if (this.$refs.alignInstance) {
+              this.$refs.alignInstance.$nextTick(() => {
+                animate(el, `${transitionName}-enter`, done);
+              });
+            }
           });
         },
         leave: (el, done) => {

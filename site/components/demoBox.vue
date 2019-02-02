@@ -1,50 +1,73 @@
 <template>
-  <section :class="['code-box', codeExpand ? 'expand': '']" :id="id">
+  <section
+    :id="id"
+    :class="['code-box', codeExpand ? 'expand': '']"
+  >
     <section class="code-box-demo">
       <template v-if="iframeDemo[iframeDemoKey]">
         <div class="browser-mockup with-url">
-          <iframe :src="iframeDemo[iframeDemoKey]" height="360"/>
+          <iframe
+            :src="iframeDemo[iframeDemoKey]"
+            height="360"
+          />
         </div>
       </template>
       <template v-else>
-        <slot name="component"></slot>
+        <slot name="component" />
       </template>
     </section>
     <section class="code-box-meta markdown">
-      <slot v-if="isZhCN" name="description"></slot>
-      <slot v-else name="us-description"></slot>
+      <slot
+        v-if="isZhCN"
+        name="description"
+      />
+      <slot
+        v-else
+        name="us-description"
+      />
       <a-tooltip :title="codeExpand ? 'Hide Code' : 'Show Code'">
         <span class="code-expand-icon">
           <img
+            width="16"
             alt="expand code"
             src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
             :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
             @click="handleCodeExpand"
-          />
+          >
           <img
+            width="16"
             alt="expand code"
             src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
             :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"
             @click="handleCodeExpand"
-          />
+          >
         </span>
       </a-tooltip>
     </section>
-    <transition appear :css="false" @enter="enter" @leave="leave">
-      <section class="highlight-wrapper" style="position: relative;" v-show="codeExpand">
+    <transition
+      appear
+      :css="false"
+      @enter="enter"
+      @leave="leave"
+    >
+      <section
+        v-show="codeExpand"
+        class="highlight-wrapper"
+        style="position: relative;"
+      >
         <a-tooltip
           :title="copied ? '复制成功' : '复制代码'"
           :visible="copyTooltipVisible"
           @visibleChange="onCopyTooltipVisibleChange"
         >
           <a-icon
-            :type="copied && copyTooltipVisible ? 'check' : 'copy'"
-            class="code-box-code-copy"
             v-clipboard:copy="sourceCode"
             v-clipboard:success="handleCodeCopied"
+            :type="copied && copyTooltipVisible ? 'check' : 'copy'"
+            class="code-box-code-copy"
           />
         </a-tooltip>
-        <slot name="code"></slot>
+        <slot name="code" />
       </section>
     </transition>
   </section>
@@ -54,8 +77,8 @@ import animate from 'antd/_util/openAnimation';
 import BaseMixin from 'antd/_util/BaseMixin';
 import { isZhCN } from '../util';
 export default {
+  name: 'DemoBox',
   mixins: [BaseMixin],
-  name: 'demoBox',
   props: {
     jsfiddle: Object,
     isIframe: Boolean,

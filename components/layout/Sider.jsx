@@ -71,6 +71,10 @@ export default {
   name: 'ALayoutSider',
   __ANT_LAYOUT_SIDER: true,
   mixins: [BaseMixin],
+  model: {
+    prop: 'collapsed',
+    event: 'collapse',
+  },
   props: initDefaultProps(SiderProps, {
     prefixCls: 'ant-layout-sider',
     collapsible: false,
@@ -108,7 +112,7 @@ export default {
     };
   },
   inject: {
-    siderHook: { default: {} },
+    siderHook: { default: () => ({}) },
   },
   // getChildContext() {
   //   return {
@@ -145,10 +149,6 @@ export default {
     if (this.siderHook.removeSider) {
       this.siderHook.removeSider(this.uniqueId);
     }
-  },
-  model: {
-    prop: 'collapsed',
-    event: 'collapse',
   },
   methods: {
     responsiveHandler(mql) {

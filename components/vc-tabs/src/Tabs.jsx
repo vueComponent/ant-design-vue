@@ -26,11 +26,11 @@ function activeKeyIsValid(props, key) {
 
 export default {
   name: 'Tabs',
+  mixins: [BaseMixin],
   model: {
     prop: 'activeKey',
     event: 'change',
   },
-  mixins: [BaseMixin],
   props: {
     destroyInactiveTabPane: PropTypes.bool,
     renderTabBar: PropTypes.func.isRequired,
@@ -41,7 +41,7 @@ export default {
     tabBarPosition: PropTypes.string.def('top'),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    __propsSymbol__: PropTypes.any,
+    propsSymbol: PropTypes.any,
   },
   data() {
     const props = getOptionProps(this);

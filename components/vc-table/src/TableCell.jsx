@@ -32,7 +32,7 @@ export default {
     },
   },
 
-  render(h) {
+  render() {
     const {
       record,
       indentSize,

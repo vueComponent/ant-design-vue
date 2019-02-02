@@ -36,6 +36,18 @@ export default {
       stateActiveKey: _toArray(currentActiveKey),
     };
   },
+  watch: {
+    activeKey(val) {
+      this.setState({
+        stateActiveKey: _toArray(val),
+      });
+    },
+    openAnimation(val) {
+      this.setState({
+        currentOpenAnimations: val,
+      });
+    },
+  },
   methods: {
     onClickItem(key) {
       let activeKey = this.stateActiveKey;
@@ -101,18 +113,6 @@ export default {
     setActiveKey(activeKey) {
       this.setState({ stateActiveKey: activeKey });
       this.$emit('change', this.accordion ? activeKey[0] : activeKey);
-    },
-  },
-  watch: {
-    activeKey(val) {
-      this.setState({
-        stateActiveKey: _toArray(val),
-      });
-    },
-    openAnimation(val) {
-      this.setState({
-        currentOpenAnimations: val,
-      });
     },
   },
   render() {

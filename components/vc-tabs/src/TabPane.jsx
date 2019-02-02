@@ -15,7 +15,7 @@ export default {
     disabled: PropTypes.bool,
   },
   inject: {
-    sentinelContext: { default: {} },
+    sentinelContext: { default: () => ({}) },
   },
   render() {
     const { destroyInactiveTabPane, active, forceRender, rootPrefixCls } = this.$props;

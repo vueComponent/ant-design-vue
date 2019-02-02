@@ -68,6 +68,10 @@ const modalProps = (defaultProps = {}) => {
 
 export default {
   name: 'AModal',
+  model: {
+    prop: 'visible',
+    event: 'change',
+  },
   props: modalProps({
     prefixCls: 'ant-modal',
     width: 520,
@@ -79,9 +83,24 @@ export default {
     // okButtonDisabled: false,
     // cancelButtonDisabled: false,
   }),
-  model: {
-    prop: 'visible',
-    event: 'change',
+  mounted() {
+    if (mousePositionEventBinded) {
+      return;
+    }
+    // 只有点击事件支持从鼠标位置动画展开
+    addEventListener(document.documentElement, 'click', e => {
+      mousePosition = {
+        x: e.pageX,
+        y: e.pageY,
+      };
+      // 100ms 内发生过点击事件，则从点击位置动画展示
+      // 否则直接 zoom 展示
+      // 这样可以兼容非点击方式展开
+      setTimeout(() => {
+        mousePosition = null;
+      }, 100);
+    });
+    mousePositionEventBinded = true;
   },
   // static info: ModalFunc;
   // static success: ModalFunc;
@@ -123,25 +142,6 @@ export default {
         </div>
       );
     },
-  },
-  mounted() {
-    if (mousePositionEventBinded) {
-      return;
-    }
-    // 只有点击事件支持从鼠标位置动画展开
-    addEventListener(document.documentElement, 'click', e => {
-      mousePosition = {
-        x: e.pageX,
-        y: e.pageY,
-      };
-      // 100ms 内发生过点击事件，则从点击位置动画展示
-      // 否则直接 zoom 展示
-      // 这样可以兼容非点击方式展开
-      setTimeout(() => {
-        mousePosition = null;
-      }, 100);
-    });
-    mousePositionEventBinded = true;
   },
 
   render() {

@@ -78,25 +78,21 @@ new Vue({
 
 ### 自定义 SVG 图标
 
-如果使用 `webpack`，可以通过配置 [@svgr/webpack](https://www.npmjs.com/package/@svgr/webpack) 来将 `svg` 图标作为 `React` 组件导入。`@svgr/webpack` 的 `options` 选项请参阅 [svgr文档](https://github.com/smooth-code/svgr#options)。
+如果使用 `vue cli 3`，可以通过配置 [vue-svg-loader](https://www.npmjs.com/package/vue-svg-loader) 来将 `svg` 图标作为 `Vue` 组件导入。更多`vue-svg-loader` 的使用方式请参阅 [文档](https://github.com/visualfanatic/vue-svg-loader)。
 
 ```js
-// webpack.config.js
-{
-  test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-  use: [
-    {
-      loader: 'babel-loader',
-    },
-    {
-      loader: '@svgr/webpack',
-      options: {
-        babel: false,
-        icon: true,
-      },
-    },
-  ],
-}
+// vue.config.js
+module.exports = {
+  chainWebpack: (config) => {
+    const svgRule = config.module.rule('svg');
+
+    svgRule.uses.clear();
+
+    svgRule
+      .use('vue-svg-loader')
+      .loader('vue-svg-loader');
+  },
+};
 ```
 
 ```jsx
@@ -105,8 +101,10 @@ import MessageSvg from 'path/to/message.svg'; // path to your '*.svg' file.
 new Vue({
   el: '#app',
   template: '<a-icon :component="MessageSvg" />',
-  components: {
-    'my-icon': MyIcon,
+  data() {
+    return {
+      MessageSvg
+    }
   }
 })
 ```

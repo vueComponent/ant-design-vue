@@ -4,7 +4,7 @@ import '../assets/index.less';
 
 export default {
   methods: {
-    onChange (value, options) {
+    onChange (value) {
       console.log(`selected ${value}`);
     },
   },

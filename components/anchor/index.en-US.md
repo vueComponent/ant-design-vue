@@ -11,6 +11,8 @@
 | offsetBottom | Pixels to offset from bottom when calculating position of scroll | number | - |
 | offsetTop | Pixels to offset from top when calculating position of scroll | number | 0 |
 | showInkInFixed | Whether show ink-balls in Fixed mode | boolean | false |
+| wrapperClass | The class name of the container | string | - |
+| wrapperStyle | The style of the container | object | - |
 
 ### Events
 | Events Name | Description | Arguments |

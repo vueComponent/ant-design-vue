@@ -12,10 +12,10 @@
 <template>
   <a-form>
     <a-form-item
-      :labelCol="labelCol"
-      :wrapperCol="wrapperCol"
+      :label-col="labelCol"
+      :wrapper-col="wrapperCol"
       label="Prime between 8 & 12"
-      :validateStatus="number.validateStatus"
+      :validate-status="number.validateStatus"
       :help="number.errorMsg || tips"
     >
       <a-input-number

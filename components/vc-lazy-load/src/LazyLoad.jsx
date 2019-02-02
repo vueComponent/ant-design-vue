@@ -52,6 +52,13 @@ export default {
       visible: false,
     };
   },
+  watch: {
+    _propsSymbol() {
+      if (!this.visible) {
+        this.lazyLoadHandler();
+      }
+    },
+  },
   mounted() {
     this.$nextTick(() => {
       this._mounted = true;
@@ -65,13 +72,6 @@ export default {
       this.resizeHander = addEventListener(window, 'resize', this.lazyLoadHandler);
       this.scrollHander = addEventListener(eventNode, 'scroll', this.lazyLoadHandler);
     });
-  },
-  watch: {
-    _propsSymbol(val) {
-      if (!this.visible) {
-        this.lazyLoadHandler();
-      }
-    },
   },
   beforeDestroy() {
     this._mounted = false;

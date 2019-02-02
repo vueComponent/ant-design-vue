@@ -35,14 +35,14 @@ export const PaginationConfig = () => ({
 
 export default {
   name: 'APagination',
+  model: {
+    prop: 'current',
+    event: 'change.current',
+  },
   props: {
     ...PaginationProps(),
     prefixCls: PropTypes.string.def('ant-pagination'),
     selectPrefixCls: PropTypes.string.def('ant-select'),
-  },
-  model: {
-    prop: 'current',
-    event: 'change.current',
   },
   methods: {
     getIconsProps() {

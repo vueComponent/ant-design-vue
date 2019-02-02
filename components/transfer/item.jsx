@@ -6,6 +6,7 @@ import Checkbox from '../checkbox';
 function noop() {}
 
 export default {
+  name: 'Item',
   props: {
     renderedText: PropTypes.any,
     renderedEl: PropTypes.any,
@@ -15,7 +16,6 @@ export default {
     prefixCls: PropTypes.string,
     disabled: PropTypes.bool,
   },
-  name: 'Item',
   render() {
     const { renderedText, renderedEl, item, lazy, checked, disabled, prefixCls } = this.$props;
 

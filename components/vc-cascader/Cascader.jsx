@@ -45,6 +45,11 @@ const BUILT_IN_PLACEMENTS = {
 };
 
 export default {
+  mixins: [BaseMixin],
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: {
     value: PropTypes.array,
     defaultValue: PropTypes.array,
@@ -68,11 +73,6 @@ export default {
     expandIcon: PropTypes.any,
     loadingIcon: PropTypes.any,
     getPopupContainer: PropTypes.func,
-  },
-  mixins: [BaseMixin],
-  model: {
-    prop: 'value',
-    event: 'change',
   },
   data() {
     let initialValue = [];

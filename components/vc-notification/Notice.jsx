@@ -13,6 +13,11 @@ export default {
     update: PropTypes.bool,
     closeIcon: PropTypes.any,
   },
+  watch: {
+    duration() {
+      this.restartCloseTimer();
+    },
+  },
 
   mounted() {
     this.startCloseTimer();
@@ -26,11 +31,6 @@ export default {
   beforeDestroy() {
     this.clearCloseTimer();
     this.willDestroy = true; // beforeDestroy调用后依然会触发onMouseleave事件
-  },
-  watch: {
-    duration() {
-      this.restartCloseTimer();
-    },
   },
   methods: {
     close() {

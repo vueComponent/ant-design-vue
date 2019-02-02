@@ -53,7 +53,7 @@ export default {
   Meta,
   props: ListItemProps,
   inject: {
-    listContext: { default: {} },
+    listContext: { default: () => ({}) },
   },
 
   render() {

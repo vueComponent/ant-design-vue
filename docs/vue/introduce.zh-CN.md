@@ -71,9 +71,9 @@ $ yarn add ant-design-vue
 ## 示例
 
 ```jsx
-import Vue from 'vue'
+import Vue from 'vue';
 import { DatePicker } from 'ant-design-vue';
-Vue.component(DatePicker.name, DatePicker)
+Vue.use(DatePicker);
 ```
 
 引入样式：

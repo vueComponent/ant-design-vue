@@ -41,7 +41,7 @@ export default {
     tabBarPosition: PropTypes.string.def('top'),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    propsSymbol: PropTypes.any,
+    __propsSymbol__: PropTypes.any,
   },
   data() {
     const props = getOptionProps(this);

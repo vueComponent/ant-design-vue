@@ -5,7 +5,7 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| activeKey | Current TabPane's key | string | - |
+| activeKey(v-model) | Current TabPane's key | string | - |
 | animated | Whether to change tabs with animation. Only works while `tabPosition="top"\|"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |
 | defaultActiveKey | Initial active TabPane's key, if `activeKey` is not set. | string | - |
 | hideAdd | Hide plus icon or not. Only works while `type="editable-card"` | boolean | `false` |

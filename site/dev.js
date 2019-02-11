@@ -3,6 +3,7 @@ import '../components/style.js';
 import './index.less';
 import 'highlight.js/styles/solarized-light.css';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import VueClipboard from 'vue-clipboard2';
@@ -11,9 +12,10 @@ import Api from './components/api';
 import './components';
 import demoBox from './components/demoBox';
 import demoContainer from './components/demoContainer';
-import Test from '../components/test/index.vue';
+import Test from '../components/form/demo/index.vue';
 import zhCN from './theme/zh-CN';
 import enUS from './theme/en-US';
+Vue.use(Vuex);
 Vue.use(VueClipboard);
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -34,8 +36,20 @@ const router = new VueRouter({
   mode: 'history',
   routes: [{ path: '/*', component: Test }],
 });
+
+const store = new Vuex.Store({
+  state: {
+    username: 'zeka',
+  },
+  mutations: {
+    update(state, payload) {
+      state.username = payload.username;
+    },
+  },
+});
 new Vue({
   el: '#app',
   i18n,
   router,
+  store,
 });

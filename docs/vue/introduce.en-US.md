@@ -71,9 +71,9 @@ We provide `antd.js` `antd.css` and `antd.min.js` `antd.min.css` under `ant-desi
 ## Usage
 
 ```jsx
-import Vue from 'vue'
+import Vue from 'vue';
 import { DatePicker } from 'ant-design-vue';
-Vue.component(DatePicker.name, DatePicker)
+Vue.use(DatePicker);
 ```
 
 And import stylesheets manually:

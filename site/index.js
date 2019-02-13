@@ -4,6 +4,7 @@ import './index.less';
 import 'nprogress/nprogress.css';
 import 'highlight.js/styles/solarized-light.css';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import VueClipboard from 'vue-clipboard2';
@@ -28,6 +29,7 @@ const mountedCallback = {
   },
 };
 
+Vue.use(Vuex);
 Vue.use(mountedCallback);
 Vue.use(VueClipboard);
 Vue.use(VueRouter);
@@ -56,8 +58,21 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+
+const store = new Vuex.Store({
+  state: {
+    username: 'zeka',
+  },
+  mutations: {
+    update(state, payload) {
+      state.username = payload.username;
+    },
+  },
+});
+
 new Vue({
   el: '#app',
   i18n,
   router,
+  store,
 });

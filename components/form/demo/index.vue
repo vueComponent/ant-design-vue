@@ -13,6 +13,8 @@ import FormInModal from './form-in-modal';
 import FormInModalString from '!raw-loader!./form-in-modal';
 import GlobalState from './global-state';
 import GlobalStateString from '!raw-loader!./global-state';
+import VuexState from './vuex';
+import VuexStateString from '!raw-loader!./vuex';
 import HorizontalLogin from './horizontal-login';
 import HorizontalLoginString from '!raw-loader!./horizontal-login';
 import Layout from './layout';
@@ -129,6 +131,9 @@ export default {
         </demo-container>
         <demo-container code={GlobalStateString}>
           <GlobalState />
+        </demo-container>
+        <demo-container code={VuexStateString}>
+          <VuexState />
         </demo-container>
         <demo-container code={NormalLoginString}>
           <NormalLogin />

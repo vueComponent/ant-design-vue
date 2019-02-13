@@ -1,5 +1,5 @@
 {
-  "root": true,
+    "root": true,
     "env": {
         "browser": true,
         "node": true,
@@ -8,7 +8,7 @@
         "es6": true
     },
     "parserOptions": {
-      "parser": "babel-eslint"
+        "parser": "babel-eslint"
     },
     "extends": ["plugin:vue/recommended", "prettier"],
     "rules": {
@@ -19,6 +19,7 @@
         "semi": ["error", "always"],
         "vue/require-prop-types": "off",
         "vue/require-default-prop": "off",
-        "vue/no-reserved-keys": "off"
+        "vue/no-reserved-keys": "off",
+        "vue/prop-name-casing": "off"
     }
 }

@@ -137,10 +137,7 @@ export default {
               <tbody class={`${prefixCls}-tbody`}>{yeasEls}</tbody>
             </table>
           </div>
-          {footer && (
-            <div class={`${prefixCls}-footer`}>
-              {footer}
-            </div>)}
+          {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
         </div>
       </div>
     );

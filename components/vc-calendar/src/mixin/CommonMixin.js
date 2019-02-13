@@ -37,7 +37,7 @@ export default {
         this.$refs.rootInstance.focus();
       }
     },
-    saveFocusElement (focusElement) {
+    saveFocusElement(focusElement) {
       this.focusElement = focusElement;
     },
   },

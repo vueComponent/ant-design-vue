@@ -116,10 +116,7 @@ const MonthPanel = {
               prefixCls={prefixCls}
             />
           </div>
-          {footer && (
-            <div class={`${prefixCls}-footer`}>
-              {footer}
-            </div>)}
+          {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
         </div>
       </div>
     );

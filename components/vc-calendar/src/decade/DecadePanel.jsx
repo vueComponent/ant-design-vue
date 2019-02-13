@@ -120,10 +120,7 @@ export default {
             <tbody class={`${prefixCls}-tbody`}>{decadesEls}</tbody>
           </table>
         </div>
-        {footer && (
-          <div class={`${prefixCls}-footer`}>
-            {footer}
-          </div>)}
+        {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
       </div>
     );
   },

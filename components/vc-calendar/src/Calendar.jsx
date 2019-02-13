@@ -7,7 +7,7 @@ import moment from 'moment';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
-import CalendarMixin, {getNowByCurrentStateValue} from './mixin/CalendarMixin';
+import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
 import enUs from './locale/en_US';
@@ -74,8 +74,8 @@ const Calendar = {
       });
     },
   },
-  mounted(){
-    this.$nextTick(()=>{
+  mounted() {
+    this.$nextTick(() => {
       this.saveFocusElement(DateInput.getInstance());
     });
   },
@@ -167,7 +167,7 @@ const Calendar = {
         source: 'dateInput',
       });
     },
-    onDateInputSelect (value)  {
+    onDateInputSelect(value) {
       this.onSelect(value, {
         source: 'dateInputSelect',
       });
@@ -269,11 +269,12 @@ const Calendar = {
         onSelect={this.onDateInputSelect}
       />
     ) : null;
-    const children =[];
+    const children = [];
     if (props.renderSidebar) {
       children.push(props.renderSidebar());
     }
-      children.push(<div class={`${prefixCls}-panel`} key="panel">
+    children.push(
+      <div class={`${prefixCls}-panel`} key="panel">
         {dateInputElement}
         <div tabIndex={props.focusablePanel ? 0 : undefined} class={`${prefixCls}-date-panel`}>
           <CalendarHeader
@@ -328,7 +329,8 @@ const Calendar = {
             onCloseTimePicker={this.closeTimePicker}
           />
         </div>
-      </div>);
+      </div>,
+    );
 
     return this.renderRoot({
       children,

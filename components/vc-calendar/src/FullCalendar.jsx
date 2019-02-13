@@ -4,7 +4,7 @@ import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp } from '../../_util/props-util';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
-import CalendarMixin, {getNowByCurrentStateValue} from './mixin/CalendarMixin';
+import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 import enUs from './locale/en_US';

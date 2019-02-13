@@ -47,15 +47,12 @@ const DateInput = {
   updated() {
     this.$nextTick(() => {
       if (
-        dateInputInstance && 
+        dateInputInstance &&
         this.$data.hasFocus &&
         !this.invalid &&
         !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)
       ) {
-        dateInputInstance.setSelectionRange(
-          cachedSelectionStart,
-          cachedSelectionEnd,
-        );
+        dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
       }
     });
   },
@@ -96,7 +93,7 @@ const DateInput = {
         });
         return;
       }
-      
+
       // 不合法直接退出
       const parsed = moment(str, format, true);
       if (!parsed.isValid()) {
@@ -140,9 +137,9 @@ const DateInput = {
         str: formatDate(prevProps.value, prevProps.format),
       }));
     },
-    onKeyDown  ({ keyCode })  {
+    onKeyDown({ keyCode }) {
       const { value } = this.$props;
-      if (keyCode === KeyCode.ENTER ) {
+      if (keyCode === KeyCode.ENTER) {
         this.__emit('select', value.clone());
       }
     },
@@ -167,12 +164,14 @@ const DateInput = {
       <div class={`${prefixCls}-input-wrap`}>
         <div class={`${prefixCls}-date-input-wrap`}>
           <input
-            {...{directives: [
-              {
-                name: 'ant-ref',
-                value: this.saveDateInput,
-              },
-            ]}}
+            {...{
+              directives: [
+                {
+                  name: 'ant-ref',
+                  value: this.saveDateInput,
+                },
+              ],
+            }}
             class={`${prefixCls}-input ${invalidClass}`}
             value={str}
             disabled={disabled}

@@ -28,7 +28,7 @@ const MonthCalendar = {
 
   data() {
     const props = this.$props;
-    return { 
+    return {
       mode: 'month',
       sValue: props.value || props.defaultValue || moment(),
       sSelectedValue: props.selectedValue || props.defaultSelectedValue,

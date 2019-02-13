@@ -60,6 +60,13 @@ const getSlots = ele => {
   });
   return slots;
 };
+const getSlot = (self, name = 'default', options = {}) => {
+  return (
+    (self.$scopedSlots && self.$scopedSlots[name] && self.$scopedSlots[name](options)) ||
+    self.$slots[name] ||
+    []
+  );
+};
 const getAllChildren = ele => {
   let componentOptions = ele.componentOptions || {};
   if (ele.$vnode) {
@@ -105,9 +112,9 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
     }
     return (
-      instance.$slots[prop] ||
       (instance.$scopedSlots[prop] && execute && instance.$scopedSlots[prop](options)) ||
       instance.$scopedSlots[prop] ||
+      instance.$slots[prop] ||
       undefined
     );
   } else {
@@ -289,6 +296,7 @@ export {
   isValidElement,
   camelize,
   getSlots,
+  getSlot,
   getAllProps,
   getAllChildren,
 };

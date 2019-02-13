@@ -4,6 +4,7 @@ import addEventListener from '../_util/Dom/addEventListener';
 import { isWindow, buffer, isSamePoint } from './util';
 import { cloneElement } from '../_util/vnode.js';
 import clonedeep from 'lodash/cloneDeep';
+import { getSlot } from '../_util/props-util';
 
 function getElement(func) {
   if (typeof func !== 'function' || !func) return null;
@@ -133,8 +134,8 @@ export default {
 
   render() {
     const { childrenProps } = this.$props;
-    const child = this.$slots.default[0];
-    if (childrenProps) {
+    const child = getSlot(this)[0];
+    if (child && childrenProps) {
       return cloneElement(child, { props: childrenProps });
     }
     return child;

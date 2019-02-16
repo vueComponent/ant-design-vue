@@ -3,8 +3,8 @@ import axios from 'axios';
 const carbonUrls = {
   'vuecomponent.github.io': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
   'tangjinzhou.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
-  'antdesignvue.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=antdesignvuegiteeio',
-  'vue.ant.design': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
+  'ant-design-vue.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=antdesignvuegiteeio',
+  'vue.ant.design': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vueantdesign',
 };
 const carbonUrl = carbonUrls[location.host] || '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio';
 export default {

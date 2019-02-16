@@ -18,8 +18,13 @@
     </style>
     <script>
         var _hmt = _hmt || [];
-        var isGithub = location.host.indexOf('github') !== -1;
-        var src = isGithub ? 'https://hm.baidu.com/hm.js?b3ef688fa86bfb75027f1b410180a867' : 'https://hm.baidu.com/hm.js?1564b57c5b8f74933e4fedca9dc75b0d';
+        var srcMap = {
+            'vuecomponent.github.io': 'https://hm.baidu.com/hm.js?b3ef688fa86bfb75027f1b410180a867',
+            'tangjinzhou.gitee.io': 'https://hm.baidu.com/hm.js?1564b57c5b8f74933e4fedca9dc75b0d',
+            'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',
+            'vue.ant.design': 'https://hm.baidu.com/hm.js?f0ba868f114e674b816b4880f7525811',
+        };
+        var src = srcMap[location.host];
         (function() {
             var hm = document.createElement('script');
             hm.src = src;

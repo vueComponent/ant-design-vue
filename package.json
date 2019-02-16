@@ -50,7 +50,7 @@
   "bugs": {
     "url": "https://github.com/vueComponent/ant-design-vue/issues"
   },
-  "homepage": "https://github.com/vueComponent/ant-design-vue",
+  "homepage": "https://vue.ant.design/",
   "pre-commit": [
     "lint",
     "prettier"

@@ -4,16 +4,16 @@ import demoRoutes from './demoRoutes';
 
 export default [
   {
-    path: '/ant-design-vue/components',
+    path: '/components',
     component: Layout,
     props: route => {
-      const name = route.path.split('/ant-design-vue/components/')[1].split('/')[0];
+      const name = route.path.split('/components/')[1].split('/')[0];
       return { name, showDemo: true };
     },
     children: demoRoutes,
   },
   {
-    path: '/ant-design-vue/iframe',
+    path: '/iframe',
     component: Iframe,
     children: demoRoutes.map(item => ({
       ...item,
@@ -24,7 +24,7 @@ export default [
     })),
   },
   {
-    path: '/ant-design-vue',
+    path: '/',
     component: Layout,
     props: route => {
       const name = route.path.split('/docs/vue/')[1].split('/')[0];
@@ -103,8 +103,8 @@ export default [
         path: 'docs/vue/changelog-cn',
         component: () => import('../CHANGELOG.zh-CN.md'),
       },
-      { path: '', redirect: '/ant-design-vue/vue/docs/introduce/' },
+      { path: '', redirect: '/vue/docs/introduce/' },
     ],
   },
-  { path: '/*', redirect: '/ant-design-vue/docs/vue/introduce/' },
+  { path: '/*', redirect: '/docs/vue/introduce/' },
 ];

@@ -38,7 +38,7 @@ export default {
       <header id='header'>
         <a-row>
           <a-col class='header-left' xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
-            <router-link to={{ path: '/ant-design-vue' }} id='logo'>
+            <router-link to={{ path: '/' }} id='logo'>
               <img alt='logo' height='32' src={logo} />
               <img alt='logo' height='16' src={antDesignVue} />
             </router-link>
@@ -80,7 +80,7 @@ export default {
               </a-menu-item>
               <a-sub-menu key="Ecosystem" title={isCN ? '生态系统' : 'Ecosystem'}>
                 <a-menu-item key="design">
-                  <router-link to={{ path: isCN ? '/ant-design-vue/docs/vue/download-cn/' :  '/ant-design-vue/docs/vue/download/'}}>
+                  <router-link to={{ path: isCN ? '/docs/vue/download-cn/' :  '/docs/vue/download/'}}>
                     {isCN ? '设计资源' : 'Design Resources'}
                   </router-link>
                 </a-menu-item>
@@ -104,7 +104,7 @@ export default {
                         width='160'
                         height='160'
                         alt='wechat'
-                        src='https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1548484520368-assets/web-upload/28b3f1f9-938a-4bd5-ad2d-0cc4d2c200ed.jpeg'
+                        src='https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1550303926433-assets/web-upload/3bf5b121-fea2-44bb-9ef9-0d61616c85e3.jpeg'
                       />
                     </template>
                     <a>
@@ -129,7 +129,7 @@ export default {
                 </a-menu-item>
               </a-sub-menu>
               <a-menu-item key="sponsor">
-                <router-link to={{ path: isCN ? '/ant-design-vue/docs/vue/sponsor-cn/' :  '/ant-design-vue/docs/vue/sponsor/'}}>
+                <router-link to={{ path: isCN ? '/docs/vue/sponsor-cn/' :  '/docs/vue/sponsor/'}}>
                   {isCN ? '支持我们' : 'Support us'}
                 </router-link>
               </a-menu-item>

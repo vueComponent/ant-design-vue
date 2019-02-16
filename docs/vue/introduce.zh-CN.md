@@ -30,7 +30,7 @@
 
 ## 支持环境
 
-* 现代浏览器和 IE9 及以上（需要 [polyfills](https://vuecomponent.github.io/ant-design-vue/docs/vue/getting-started-cn/#兼容性)）。
+* 现代浏览器和 IE9 及以上（需要 [polyfills](https://vue.ant.design/docs/vue/getting-started-cn/#兼容性)）。
 * 支持服务端渲染。
 
 ## 版本
@@ -116,20 +116,20 @@ import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 
 ## 链接
 
-- [首页](https://vuecomponent.github.io/ant-design-vue/)
+- [首页](https://vue.ant.design/)
 - [Ant Design React](https://ant.design/)
-- [组件库](https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn)
-- [更新日志](/ant-design-vue/changelog-cn)
+- [组件库](https://vue.ant.design/docs/vue/introduce-cn)
+- [更新日志](/docs/vue/changelog-cn)
 - [CodeSandbox 模板](https://codesandbox.io/s/2wpk21kzvr) for bug reports
-- [定制主题](/ant-design-vue/docs/vue/customize-theme-cn)
-- [常见问题](/ant-design-vue/docs/vue/faq-cn)
-- [支持我们](/ant-design-vue/docs/vue/sponsor-cn)
+- [定制主题](/docs/vue/customize-theme-cn)
+- [常见问题](/docs/vue/faq-cn)
+- [支持我们](/docs/vue/sponsor-cn)
 - [Awesome Ant Design](https://github.com/vueComponent/ant-design-vue-awesome)
 
 
 ## 如何贡献
 
-如果你希望参与贡献，欢迎 [Pull Request](https://github.com/vueComponent/ant-design-vue/pulls)，或给我们 [报告 Bug](https://vuecomponent.github.io/issue-helper/)([国内镜像](http://tangjinzhou.gitee.io/issue-helper/))。
+如果你希望参与贡献，欢迎 [Pull Request](https://github.com/vueComponent/ant-design-vue/pulls)，或给我们 [报告 Bug](https://vuecomponent.github.io/issue-helper/)([国内镜像](http://ant-design-vue.gitee.io/issue-helper/))。
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 

@@ -48,9 +48,9 @@ const columns = [{
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
 | footer | Table footer renderer | Function(currentPageData)\|slot-scope |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |
-| loading | Loading status of table | boolean\|[object](/ant-design-vue/components/spin) | `false` |
+| loading | Loading status of table | boolean\|[object](/components/spin) | `false` |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' |
-| pagination | Pagination [config](#pagination) or [`Pagination`] (/ant-design-vue/components/pagination/), hide it by setting it to `false` | object |  |
+| pagination | Pagination [config](#pagination) or [`Pagination`] (/components/pagination/), hide it by setting it to `false` | object |  |
 | rowClassName | Row's className | Function(record, index):string | - |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
 | rowSelection | Row selection [config](#rowSelection) | object | null |
@@ -145,7 +145,7 @@ Properties for pagination.
 | -------- | ----------- | ---- | ------- |
 | position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
-More about pagination, please check [`Pagination`](/ant-design-vue/components/pagination/).
+More about pagination, please check [`Pagination`](/components/pagination/).
 
 ### rowSelection
 

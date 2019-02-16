@@ -217,7 +217,7 @@ export declare class Table extends AntdComponent {
   locale: object;
 
   /**
-   * Pagination config or [Pagination] (/ant-design-vue/components/pagination/), hide it by setting it to false
+   * Pagination config or [Pagination] (/components/pagination/), hide it by setting it to false
    * @type boolean | PaginationConfig
    */
   pagination: boolean | PaginationConfig;

@@ -52,7 +52,10 @@ function copyHtml() {
   const rl = readline.createInterface({
     input: fs.createReadStream(path.join(cwd, 'site/demoRoutes.js')),
   });
-
+  fs.writeFileSync(
+    path.join(cwd, 'site-dist/404.html'),
+    fs.readFileSync(path.join(cwd, 'site/404.html')),
+  );
   rl.on('line', line => {
     if (line.indexOf('path:') > -1) {
       const name = line.split("'")[1].split("'")[0];

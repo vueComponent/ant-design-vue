@@ -103,7 +103,7 @@ Now we need to customize the default webpack config.
 
 ### Use babel-plugin-import
 
-[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) is a babel plugin for importing components on demand ([How does it work?](/ant-design-vue/docs/vue/getting-started/#Import-on-Demand)).
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) is a babel plugin for importing components on demand ([How does it work?](/docs/vue/getting-started/#Import-on-Demand)).
 
 ```bash
 $ yarn add babel-plugin-import --dev
@@ -171,8 +171,8 @@ Remove the `import 'ant-design-vue/dist/antd.css';` statement added before becau
   })
 ```
 
-Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/ant-design-vue/docs/vue/getting-started/#Import-on-Demand).
+Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/docs/vue/getting-started/#Import-on-Demand).
 
 ### Customize Theme
 
-According to the [Customize Theme documentation](/ant-design-vue/docs/vue/customize-theme), to customize the theme, we need to modify `less` variables with tools such as [less-loader](https://github.com/webpack/less-loader).
+According to the [Customize Theme documentation](/docs/vue/customize-theme), to customize the theme, we need to modify `less` variables with tools such as [less-loader](https://github.com/webpack/less-loader).

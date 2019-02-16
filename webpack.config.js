@@ -7,7 +7,7 @@ module.exports = merge(baseWebpackConfig, {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/ant-design-vue/',
+    publicPath: '/',
     filename: 'build.js',
   },
   module: {
@@ -33,7 +33,7 @@ module.exports = merge(baseWebpackConfig, {
     port: 3000,
     host: '0.0.0.0',
     historyApiFallback: {
-      rewrites: [{ from: /./, to: '/ant-design-vue/index.html' }],
+      rewrites: [{ from: /./, to: '/index.html' }],
     },
     disableHostCheck: true,
     headers: { 'Access-Control-Allow-Origin': '*' },

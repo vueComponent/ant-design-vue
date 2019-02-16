@@ -22,7 +22,7 @@ Second, if you don't use the form's automatic check/collection feature, ie you d
 
 ### How to modify the default theme of Ant Design Vue?
 
-See [Customize Theme](/ant-design-vue/docs/vue/customize-theme/)。
+See [Customize Theme](/docs/vue/customize-theme/)。
 
 ### How to optimize momentjs bundle size with webpack?
 

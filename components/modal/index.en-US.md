@@ -17,8 +17,8 @@
 | maskStyle | Style for modal's mask element. | object | {} |
 | okText | Text of the OK button | string\|slot | `OK` |
 | okType | Button `type` of the OK button | string | `primary` |
-| okButtonProps | The ok button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/ant-design-vue/components/button/#API), on: {}} | - |
-| cancelButtonProps | The cancel button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/ant-design-vue/components/button/#API), on: {}} | - |
+| okButtonProps | The ok button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
+| cancelButtonProps | The cancel button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
 | title | The modal dialog's title | string\|slot | - |
 | visible | Whether the modal dialog is visible or not | boolean | false |
 | width | Width of the modal dialog | string\|number | 520 |
@@ -60,8 +60,8 @@ The properties of the object are follows:
 | maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | Boolean | `false` |
 | okText | Text of the OK button | string | `OK` |
 | okType | Button `type` of the OK button | string | `primary` |
-| okButtonProps | The ok button props | [ButtonProps](/ant-design-vue/components/button) | - |
-| cancelButtonProps | The cancel button props | [ButtonProps](/ant-design-vue/components/button) | - |
+| okButtonProps | The ok button props | [ButtonProps](/components/button) | - |
+| cancelButtonProps | The cancel button props | [ButtonProps](/components/button) | - |
 | title | Title | string\|vNode | - |
 | width | Width of the modal dialog | string\|number | 416 |
 | zIndex | The `z-index` of the Modal | Number | 1000 |

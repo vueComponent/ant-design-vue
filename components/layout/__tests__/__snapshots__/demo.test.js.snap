@@ -10,7 +10,7 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
   <div class="ant-layout">
     <div class="ant-layout-header">Header</div>
     <div class="ant-layout">
-      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
+      <div class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </div>
       <div class="ant-layout-content">Content</div>
@@ -21,14 +21,14 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
     <div class="ant-layout-header">Header</div>
     <div class="ant-layout">
       <div class="ant-layout-content">Content</div>
-      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
+      <div class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </div>
     </div>
     <div class="ant-layout-footer">Footer</div>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
+    <div class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
       <div class="ant-layout-sider-children">Sider</div>
     </div>
     <div class="ant-layout">
@@ -42,7 +42,7 @@ exports[`renders ./components/layout/demo/basic.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/custom-trigger.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-custom-trigger">
-  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
+  <div class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark">
@@ -103,7 +103,7 @@ exports[`renders ./components/layout/demo/fixed.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-fixed-sider">
-  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; height: 100vh; position: fixed; left: 0px;">
+  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; height: 100vh; position: fixed; left: 0px; flex: 0 0 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark">
@@ -162,7 +162,7 @@ exports[`renders ./components/layout/demo/fixed-sider.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-responsive">
-  <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px;">
+  <div class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark">
@@ -197,7 +197,7 @@ exports[`renders ./components/layout/demo/responsive.md correctly 1`] = `
 
 exports[`renders ./components/layout/demo/side.md correctly 1`] = `
 <div class="ant-layout" id="components-layout-demo-side" style="min-height: 100vh;">
-  <div class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-has-trigger" style="max-width: 200px; min-width: 200px; width: 200px;">
+  <div class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-has-trigger" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark">
@@ -296,7 +296,7 @@ exports[`renders ./components/layout/demo/top-side.md correctly 1`] = `
   <div class="ant-layout-content" style="padding: 0px 50px;">
     <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
     <div class="ant-layout" style="padding: 24px 0px; background: rgb(255, 255, 255);">
-      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
+      <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px; background: rgb(255, 255, 255);">
         <div class="ant-layout-sider-children">
           <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" style="height: 100%;">
             <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">
@@ -353,7 +353,7 @@ exports[`renders ./components/layout/demo/top-side-2.md correctly 1`] = `
     </ul>
   </div>
   <div class="ant-layout">
-    <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255);">
+    <div class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px; background: rgb(255, 255, 255);">
       <div class="ant-layout-sider-children">
         <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" style="height: 100%; border-right: 0;">
           <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected">

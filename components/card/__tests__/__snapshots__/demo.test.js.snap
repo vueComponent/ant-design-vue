@@ -251,7 +251,7 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
         <div class="ant-card-head-title">Card title</div>
         <div class="ant-card-extra"><a href="#">More</a></div>
       </div>
-      <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs no-flex">
+      <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs">
         <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar ant-tabs-large-bar">
           <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"><i class="ant-tabs-tab-prev-icon-target anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></i></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"><i class="ant-tabs-tab-next-icon-target anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg></i></span></span>
             <div class="ant-tabs-nav-wrap">
@@ -262,7 +262,7 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
     </span></div>
                     <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">tab2</div>
                   </div>
-                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
                 </div>
               </div>
             </div>
@@ -286,7 +286,7 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
   <div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width: 100%;">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper"></div>
-      <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs no-flex">
+      <div class="ant-tabs ant-tabs-top ant-tabs-large ant-tabs-line ant-card-head-tabs">
         <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar ant-tabs-large-bar">
           <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"><i class="ant-tabs-tab-prev-icon-target anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></i></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"><i class="ant-tabs-tab-next-icon-target anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg></i></span></span>
             <div class="ant-tabs-nav-wrap">
@@ -297,7 +297,7 @@ exports[`renders ./components/card/demo/tabs.md correctly 1`] = `
                     <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">app</div>
                     <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">project</div>
                   </div>
-                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); -webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+                  <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
                 </div>
               </div>
             </div>

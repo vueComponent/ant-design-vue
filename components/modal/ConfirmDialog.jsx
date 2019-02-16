@@ -41,6 +41,7 @@ export default {
       contentPrefixCls,
       `${contentPrefixCls}-${props.type}`,
       `${prefixCls}-${props.type}`,
+      props.class,
     );
 
     const cancelButton = okCancel && (

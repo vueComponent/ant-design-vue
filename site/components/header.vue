@@ -2,6 +2,8 @@
 import { isZhCN } from '../util';
 import sortBy from 'lodash/sortBy';
 import packageInfo from '../../package.json';
+import logo from '../logo.svg';
+import antDesignVue from '../ant-design-vue.svg';
 
 export default {
   props: {
@@ -37,8 +39,8 @@ export default {
         <a-row>
           <a-col class='header-left' xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: '/ant-design-vue' }} id='logo'>
-              <img alt='logo' height='32' src='https://cdn.nlark.com/yuque/0/2019/png/87084/1548485177381-assets/web-upload/d18a622f-08d8-4955-a5c2-38138f80177b.png' />
-              <span style='color: black;font-size: 16px;font-weight: 400;'>Ant Design Vue</span>
+              <img alt='logo' height='32' src={logo} />
+              <img alt='logo' height='16' src={antDesignVue} />
             </router-link>
             <a-button ghost size='small' onClick={this.handleClick} class='header-lang-button' key='lang-button'>
               {isCN ? 'English' : '中文'}

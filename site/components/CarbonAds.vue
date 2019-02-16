@@ -3,16 +3,19 @@ import axios from 'axios';
 const carbonUrls = {
   'vuecomponent.github.io': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
   'tangjinzhou.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
+  'vue.ant.design': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
 };
-const carbonUrl = '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio' || carbonUrls[location.host];
-const isGitee = location.host.indexOf('gitee') !== -1;
+const carbonUrl = carbonUrls[location.host] || '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio';
 export default {
+  props: {
+    isMobile: Boolean,
+  },
   watch: {
     $route(e, t) {
       let adId = '#carbonads';
-      if(isGitee) {
-        adId = '#cf';
-      }
+      // if(isGitee) {
+      //   adId = '#cf';
+      // }
       if(e.path !== t.path && this.$el.querySelector(adId)){
         this.$el.innerHTML = "";
         this.load();
@@ -32,12 +35,13 @@ export default {
   },
   methods: {
     load() {
-      if(isGitee) {
-        axios.get('https://api.codefund.app/properties/162/funder.html?template=horizontal')
-        .then(function (response) {
-          document.getElementById("codefund-ads").innerHTML = response.data;
-        });
-      } else if(carbonUrl) {
+      // if(isGitee) {
+      //   axios.get('https://api.codefund.app/properties/162/funder.html?template=horizontal')
+      //   .then(function (response) {
+      //     document.getElementById("codefund-ads").innerHTML = response.data;
+      //   });
+      // } else 
+      if(carbonUrl) {
         const e = document.createElement("script");
         e.id = "_carbonads_js";
         e.src = carbonUrl;
@@ -47,13 +51,14 @@ export default {
   },
   render () {
     return (
-      isGitee ? <div id="codefund-ads"/> : <div id="carbon-ads"/>
+      <div id="carbon-ads" class={this.isMobile ? 'carbon-mobile':''}/>
     );
   },
 };
 </script>
-<style>
+<style lang="less">
  #carbon-ads {
+  overflow: hidden;
   width: 145px;
   position: fixed;
   z-index: 9;
@@ -63,6 +68,7 @@ export default {
   background-color: #fff;
   border-radius: 3px;
   font-size: 13px;
+  background: #f5f5f5;
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 #carbon-ads a {
@@ -72,8 +78,6 @@ export default {
 }
 #carbon-ads span {
   color: #7f8c8d;
-  display: inline-block;
-  margin-bottom: 5px;
 }
 #carbon-ads img {
   width: 125px;
@@ -81,11 +85,11 @@ export default {
 #carbon-ads .carbon-img,
 #carbon-ads .carbon-text {
   display: block;
-  margin-bottom: 6px;
   font-weight: normal;
   color: #34495e;
 }
 #carbon-ads .carbon-text {
+  margin-top: 6px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
@@ -95,5 +99,17 @@ export default {
   color: #aaa ;
   font-weight: normal ;
   line-height: 1.2 ;
+  margin-top: 6px;
+}
+#carbon-ads.carbon-mobile {
+  width: 100%;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  .carbon-img {
+    float: left;
+    margin-right: 10px;
+  }
 }
 </style>

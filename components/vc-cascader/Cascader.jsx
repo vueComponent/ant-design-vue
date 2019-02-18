@@ -5,7 +5,7 @@ import Menus from './Menus';
 import KeyCode from '../_util/KeyCode';
 import arrayTreeFilter from 'array-tree-filter';
 import shallowEqualArrays from 'shallow-equal/arrays';
-import { hasProp, getEvents } from '../_util/props-util';
+import { hasProp, getEvents, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 
@@ -53,7 +53,7 @@ export default {
   props: {
     value: PropTypes.array,
     defaultValue: PropTypes.array,
-    options: PropTypes.array.def([]).isRequired,
+    options: PropTypes.array,
     // onChange: PropTypes.func,
     // onPopupVisibleChange: PropTypes.func,
     popupVisible: PropTypes.bool,
@@ -96,12 +96,11 @@ export default {
       if (!shallowEqualArrays(val, oldValue)) {
         const newValues = {
           sValue: val || [],
-          sActiveValue: val || [],
         };
         // allow activeValue diff from value
         // https://github.com/ant-design/ant-design/issues/2767
-        if (hasProp(this, 'loadData')) {
-          delete newValues.sActiveValue;
+        if (!hasProp(this, 'loadData')) {
+          newValues.sActiveValue = val || [];
         }
         this.setState(newValues);
       }
@@ -124,7 +123,7 @@ export default {
       return this.fieldNames;
     },
     getCurrentLevelOptions() {
-      const { options, sActiveValue = [] } = this;
+      const { options = [], sActiveValue = [] } = this;
       const result = arrayTreeFilter(
         options,
         (o, level) => o[this.getFieldName('value')] === sActiveValue[level],
@@ -137,7 +136,7 @@ export default {
     },
     getActiveOptions(activeValue) {
       return arrayTreeFilter(
-        this.options,
+        this.options || [],
         (o, level) => o[this.getFieldName('value')] === activeValue[level],
         { childrenKeyName: this.getFieldName('children') },
       );
@@ -213,6 +212,12 @@ export default {
         delete newState.sValue;
       }
       this.setState(newState);
+    },
+    handleItemDoubleClick  ()  {
+      const { changeOnSelect } = this.$props;
+      if (changeOnSelect) {
+        this.setPopupVisible(false);
+      }
     },
     handleKeyDown(e) {
       const { $slots } = this;
@@ -313,7 +318,7 @@ export default {
       prefixCls,
       transitionName,
       popupClassName,
-      options,
+      options = [],
       disabled,
       builtinPlacements,
       popupPlacement,
@@ -338,6 +343,7 @@ export default {
         on: {
           ...$listeners,
           select: handleMenuSelect,
+          itemDoubleClick: this.handleItemDoubleClick
         },
       };
       menus = <Menus {...menusProps} />;
@@ -362,10 +368,11 @@ export default {
       },
       ref: 'trigger',
     };
+    const children = getSlot(this, 'default')[0]
     return (
       <Trigger {...triggerProps}>
-        {$slots.default &&
-          cloneElement($slots.default[0], {
+        {children &&
+          cloneElement(children[0], {
             on: {
               keydown: handleKeyDown,
             },

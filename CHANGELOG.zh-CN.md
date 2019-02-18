@@ -48,8 +48,8 @@
 ### 组件功能和样式同步到 antd 3.11.6 版本。
 1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
 
-- 🔥 增加了一个新组件 [Comment](https://vuecomponent.github.io/ant-design-vue/components/comment-cn/)。
-- 🔥 增加了一个新组件 [ConfigProvider](https://vuecomponent.github.io/ant-design-vue/components/config-provider-cn/) 为组件提供统一的全局化配置。
+- 🔥 增加了一个新组件 [Comment](https://vue.ant.design/components/comment-cn/)。
+- 🔥 增加了一个新组件 [ConfigProvider](https://vue.ant.design/components/config-provider-cn/) 为组件提供统一的全局化配置。
 
 组件修复/功能增强：
 

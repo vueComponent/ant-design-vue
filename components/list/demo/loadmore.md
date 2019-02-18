@@ -26,7 +26,7 @@ Load more list with `loadMore` property.
       <a-list-item-meta
         description="Ant Design, a design language for background applications, is refined by Ant UED Team"
       >
-        <a slot="title" href="https://vuecomponent.github.io/ant-design-vue/">{{item.name.last}}</a>
+        <a slot="title" href="https://vue.ant.design/">{{item.name.last}}</a>
         <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
       </a-list-item-meta>
       <div>content</div>

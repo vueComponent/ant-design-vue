@@ -31,7 +31,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| breakpoint | 触发响应式布局的[断点](/ant-design-vue/components/grid#API) | Enum { 'xs', 'sm', 'md', 'lg', 'xl', 'xxl' } | - |
+| breakpoint | 触发响应式布局的[断点](/components/grid#API) | Enum { 'xs', 'sm', 'md', 'lg', 'xl', 'xxl' } | - |
 | class | 容器 class | string | - |
 | collapsed(v-model) | 当前收起状态 | boolean | - |
 | collapsedWidth | 收缩宽度，设置为 0 会出现特殊 trigger | number | 80 |
@@ -47,7 +47,7 @@
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | collapse | 展开-收起时的回调函数，有点击 trigger 以及响应式反馈两种方式可以触发 | (collapsed, type) => {} |
-| breakpoint | 触发响应式布局[断点](/ant-design-vue/components/grid#api)时的回调 | (broken) => {} |
+| breakpoint | 触发响应式布局[断点](/components/grid#api)时的回调 | (broken) => {} |
 
 #### breakpoint width
 

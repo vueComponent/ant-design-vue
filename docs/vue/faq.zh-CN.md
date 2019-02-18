@@ -22,7 +22,7 @@
 
 ### 如何修改 Ant Design Vue 的默认主题？
 
-参考[主题定制](/ant-design-vue/docs/vue/customize-theme/)。
+参考[主题定制](/docs/vue/customize-theme/)。
 
 ### 如何配置 webpack 以优化 momentjs 的打包大小？
 

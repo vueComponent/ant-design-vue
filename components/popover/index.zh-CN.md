@@ -6,7 +6,7 @@
 | content | 卡片内容 | string\|slot\|VNode | 无 |
 | title | 卡片标题 | string\|slot\|VNode | 无 |
 
-更多属性请参考 [Tooltip](/ant-design-vue/components/tooltip-cn/#API)。
+更多属性请参考 [Tooltip](/components/tooltip-cn/#API)。
 
 ## 注意
 

@@ -48,8 +48,8 @@
 ### Component features and styles are synchronized to antd version 3.11.6.
 1.3.0 brings two new Components, a lot of exciting changes and new features.
 
-- 🔥 Added a new component [Comment](https://vuecomponent.github.io/ant-design-vue/components/comment/)。
-- 🔥 dded a new component [ConfigProvider](https://vuecomponent.github.io/ant-design-vue/components/config-provider/) for user to customize some global setting.
+- 🔥 Added a new component [Comment](https://vue.ant.design/components/comment/)。
+- 🔥 dded a new component [ConfigProvider](https://vue.ant.design/components/config-provider/) for user to customize some global setting.
 
 Component Fixes / Enhancements:
 

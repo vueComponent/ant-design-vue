@@ -1,11 +1,11 @@
 <p align="center">
-  <a href="https://vuecomponent.github.io/ant-design-vue/">
-    <img width="200" src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/logo.png">
+  <a href="https://vue.ant.design/">
+    <img width="200" src="https://cdn.nlark.com/yuque/0/2019/png/87084/1550242938266-assets/web-upload/6011a606-2f3e-4a7a-b58d-28116e39de04.png">
   </a>
 </p>
 
 <h1 align="center">
-  <a href="https://vuecomponent.github.io/ant-design-vue/" target="_blank">Ant Design Vue</a>
+  <a href="https://vue.ant.design/" target="_blank">Ant Design Vue</a>
 </h1>
 
 <div align="center">
@@ -24,9 +24,9 @@ An enterprise-class UI components based on Ant Design and Vue.
 
 </div>
 
-[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://vuecomponent.github.io/ant-design-vue/)
+[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://vue.ant.design/)
 
-[English](./README.md) | 简体中文 | [官网国内镜像](http://tangjinzhou.gitee.io/ant-design-vue/docs/vue/introduce-cn/)
+[English](./README.md) | 简体中文 | [官网国内镜像](http://ant-design-vue.gitee.io/docs/vue/introduce-cn/)
 
 <p align="center">
   <b>Special thanks to the generous sponsorship by:</b>
@@ -66,7 +66,7 @@ $ yarn add ant-design-vue
 
 ## 链接
 
-- [首页](https://vuecomponent.github.io/ant-design-vue/)
+- [首页](https://vue.ant.design/)
 - [Vue官方文档](https://cn.vuejs.org/)
 - [Antd React](http://ant.design/)
 

@@ -7,7 +7,7 @@ exports[`renders ./components/dropdown/demo/basic.md correctly 1`] = `
     </svg></i></a>
 `;
 
-exports[`renders ./components/dropdown/demo/context-menu.md correctly 1`] = `<span class="ant-dropdown-trigger">Right Click on Me</span>`;
+exports[`renders ./components/dropdown/demo/context-menu.md correctly 1`] = `<span class="ant-dropdown-trigger" style="user-select: none;">Right Click on Me</span>`;
 
 exports[`renders ./components/dropdown/demo/dropdown-button.md correctly 1`] = `
 <div>

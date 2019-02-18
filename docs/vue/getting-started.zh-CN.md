@@ -139,7 +139,7 @@ import { Button } from 'ant-design-vue';
 
 ## 配置主题和字体
 
-- [改变主题](/ant-design-vue/docs/vue/customize-theme-cn)
+- [改变主题](/docs/vue/customize-theme-cn)
 - [使用本地字体](https://github.com/ant-design/antd-init/tree/master/examples/local-iconfont)
 
 ## 小贴士

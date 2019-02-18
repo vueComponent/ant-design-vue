@@ -62,7 +62,7 @@ moment.locale('zh-cn');
 | disabledTime | 不可选择的时间 | function(date) | 无 |
 | format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [moment.js](http://momentjs.com/) | string \| string[] | "YYYY-MM-DD" |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
-| showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker-cn/#API) |
+| showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker-cn/#API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/) | moment() |
 | showToday | 是否展示“今天”按钮 | boolean | true |
 | value(v-model) | 日期 | [moment](http://momentjs.com/) | 无 |
@@ -116,7 +116,7 @@ moment.locale('zh-cn');
 | format | 展示的日期格式 | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges       | 预设时间范围快捷选择 | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | 无 |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" | - |
-| showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/ant-design-vue/components/time-picker-cn/#API) |
+| showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker-cn/#API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
 | value(v-model) | 日期 | [moment](http://momentjs.com/)\[] | 无 |
 

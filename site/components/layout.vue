@@ -128,11 +128,11 @@ export default {
       docsList.forEach(({ key, enTitle, title }, index) => {
         const k = isCN ? `${key}-cn` : key;
         pagesKey.push({ name: k,
-          url: `/ant-design-vue/docs/vue/${k}/`,
+          url: `/docs/vue/${k}/`,
           title: isCN ? title : enTitle,
         });
         docsMenu.push(<a-menu-item key={k}>
-          <router-link to={`/ant-design-vue/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
+          <router-link to={`/docs/vue/${k}/`}>{isCN ? title : enTitle }</router-link>
         </a-menu-item>);
       });
       return docsMenu;
@@ -199,16 +199,16 @@ export default {
         }
         pagesKey.push({
           name: key,
-          url: `/ant-design-vue/components/${key}/`,
+          url: `/components/${key}/`,
           title: isCN ? `${title} ${subtitle}` : title,
         });
         searchData.push({
           title,
           subtitle,
-          url: `/ant-design-vue/components/${key}/`,
+          url: `/components/${key}/`,
         });
         MenuItems.push(<a-menu-item key={key}>
-          <router-link to={`/ant-design-vue/components/${key}/`}>{linkValue}</router-link>
+          <router-link to={`/components/${key}/`}>{linkValue}</router-link>
         </a-menu-item>);
       });
       MenuGroup.push(<a-menu-item-group title={type}>{MenuItems}</a-menu-item-group>);
@@ -267,7 +267,7 @@ export default {
               }
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class='main-container main-container-component'>
-                  <CarbonAds />
+                  <CarbonAds isMobile={isMobile}/>
                   {!isMobile ? <div class='toc-affix' style='width: 120px;'>
                     {this.getSubMenu(isCN)}
                   </div> : null}

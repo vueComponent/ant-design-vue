@@ -2,7 +2,7 @@
 
 exports[`Slider should show tooltip when hovering slider handler 1`] = `
 <div>
-  <div class="ant-tooltip  ant-tooltip-placement-top" style="left: -999px; top: -1003px;">
+  <div class="ant-tooltip  ant-tooltip-placement-top" style="left: -999px; top: -1003px; transform-origin: 50% 4px;">
     <div class="ant-tooltip-content">
       <div class="ant-tooltip-arrow"></div>
       <div role="tooltip" class="ant-tooltip-inner">30</div>

@@ -1,35 +1,43 @@
 <!doctype html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="description" content="An enterprise-class UI components based on Ant Design and Vue">
-  <title>Ant Design Vue</title>
-  <link rel="icon" type="image/x-icon" href="https://cdn.nlark.com/yuque/0/2019/png/87084/1548485177381-assets/web-upload/d18a622f-08d8-4955-a5c2-38138f80177b.png">
-  <style id="nprogress-style">
-      #nprogress {
-          display: none;
-      }
-  </style>
-  <script>
-    var _hmt = _hmt || [];
-    var isGithub = location.host.indexOf('github') !== -1;
-    var src = isGithub ? 'https://hm.baidu.com/hm.js?b3ef688fa86bfb75027f1b410180a867' : 'https://hm.baidu.com/hm.js?1564b57c5b8f74933e4fedca9dc75b0d';
-    (function() {
-      var hm = document.createElement('script');
-      hm.src = src;
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(hm, s);
-    })()
-  </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="An enterprise-class UI components based on Ant Design and Vue">
+    <title>Ant Design Vue</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.nlark.com/yuque/0/2019/png/87084/1550242977163-assets/web-upload/5bdc08bb-58a1-4312-8380-d43b1590154c.png">
+    <style id="nprogress-style">
+        #nprogress {
+            display: none;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        var srcMap = {
+            'vuecomponent.github.io': 'https://hm.baidu.com/hm.js?b3ef688fa86bfb75027f1b410180a867',
+            'tangjinzhou.gitee.io': 'https://hm.baidu.com/hm.js?1564b57c5b8f74933e4fedca9dc75b0d',
+            'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',
+            'vue.ant.design': 'https://hm.baidu.com/hm.js?f0ba868f114e674b816b4880f7525811',
+        };
+        var src = srcMap[location.host];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = src;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })()
+    </script>
 </head>
+
 <body>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </body>
+
 </html>

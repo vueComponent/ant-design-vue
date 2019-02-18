@@ -132,7 +132,7 @@ And this plugin can load styles too, read [usage](https://github.com/ant-design/
 
 ## Customization
 
-- [Customize Theme](/ant-design-vue/docs/vue/customize-theme)
+- [Customize Theme](/docs/vue/customize-theme)
 - [Local Iconfont](https://github.com/ant-design/antd-init/tree/master/examples/local-iconfont)
 
 ## Tips

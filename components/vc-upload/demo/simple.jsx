@@ -92,10 +92,11 @@ export default {
               height: '500px',
             }}
           >
-            <Upload {...uploaderProps1} component="div" style={{ display: 'inline-block' }}>
+            <Upload {...uploaderProps1} id="test" component="div" style={{ display: 'inline-block' }}>
               <a>开始上传2</a>
             </Upload>
           </div>
+          <label for="test">Label for Upload</label>
         </div>
 
         <button onClick={this.destroy}>destroy</button>

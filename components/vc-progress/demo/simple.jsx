@@ -30,6 +30,11 @@ export default {
         <h3>Line Progress {this.percent}%</h3>
         <div style={containerStyle}>
           <Line percent={this.percent} strokeWidth="4" strokeColor={this.color} />
+          <Line
+            percent={[this.percent / 2, this.percent / 2]}
+            strokeWidth="4"
+            strokeColor={[this.color, '#CCC']}
+          />
         </div>
         <h3>Circle Progress {this.percent}%</h3>
         <div style={circleContainerStyle}>

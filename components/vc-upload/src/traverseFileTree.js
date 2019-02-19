@@ -3,7 +3,7 @@ function loopFiles(item, callback) {
   let fileList = [];
 
   function sequence() {
-    dirReader.readEntries((entries) => {
+    dirReader.readEntries(entries => {
       const entryList = Array.prototype.slice.apply(entries);
       fileList = fileList.concat(entryList);
 
@@ -31,8 +31,8 @@ const traverseFileTree = (files, callback, isAccepted) => {
         }
       });
     } else if (item.isDirectory) {
-      loopFiles(item, (entries) => {
-        entries.forEach((entryItem) => {
+      loopFiles(item, entries => {
+        entries.forEach(entryItem => {
           _traverseFileTree(entryItem, `${path}${item.name}/`);
         });
       });

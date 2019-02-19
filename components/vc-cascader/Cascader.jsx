@@ -213,7 +213,7 @@ export default {
       }
       this.setState(newState);
     },
-    handleItemDoubleClick  ()  {
+    handleItemDoubleClick() {
       const { changeOnSelect } = this.$props;
       if (changeOnSelect) {
         this.setPopupVisible(false);
@@ -343,7 +343,7 @@ export default {
         on: {
           ...$listeners,
           select: handleMenuSelect,
-          itemDoubleClick: this.handleItemDoubleClick
+          itemDoubleClick: this.handleItemDoubleClick,
         },
       };
       menus = <Menus {...menusProps} />;
@@ -368,7 +368,7 @@ export default {
       },
       ref: 'trigger',
     };
-    const children = getSlot(this, 'default')[0]
+    const children = getSlot(this, 'default')[0];
     return (
       <Trigger {...triggerProps}>
         {children &&

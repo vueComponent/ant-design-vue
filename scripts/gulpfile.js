@@ -56,10 +56,7 @@ function copyHtml() {
     path.join(cwd, 'site-dist/404.html'),
     fs.readFileSync(path.join(cwd, 'site/404.html')),
   );
-  fs.writeFileSync(
-    path.join(cwd, 'site-dist/CNAME'),
-    'vue.ant.design',
-  );
+  fs.writeFileSync(path.join(cwd, 'site-dist/CNAME'), 'vue.ant.design');
   rl.on('line', line => {
     if (line.indexOf('path:') > -1) {
       const name = line.split("'")[1].split("'")[0];

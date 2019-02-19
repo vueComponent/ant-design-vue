@@ -57,6 +57,10 @@ function copyHtml() {
     fs.readFileSync(path.join(cwd, 'site/404.html')),
   );
   fs.writeFileSync(
+    path.join(cwd, 'site-dist/index-cn.html'),
+    fs.readFileSync(path.join(cwd, 'site-dist/index.html')),
+  );
+  fs.writeFileSync(
     path.join(cwd, 'site-dist/CNAME'),
     'vue.ant.design',
   );

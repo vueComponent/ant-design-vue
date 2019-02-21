@@ -58,6 +58,12 @@ $ npm run serve
 $ yarn add ant-design-vue
 ```
 
+然后从 yarn 或 npm 安装并引入 less@2.7.3 less-loader (注意：高版本 less 会报错)
+
+```bash
+$ yarn add less@2.7.3 less-loader --save
+```
+
 修改 `src/main.js`，引入 antd 的按钮组件以及全部样式文件。
 
 ```jsx
@@ -76,6 +82,18 @@ new Vue({
   components: { App },
   template: "<App/>"
 });
+
+/* 
+如果出现：
+[Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+
+(found in <Root>)
+
+请使用：
+new Vue({
+  render: (h) => h(App)
+}).$mount('#app');
+*/
 ```
 
 修改 `src/App.vue`的 template 内容。
@@ -85,7 +103,6 @@ new Vue({
   <div id="app">
     <img src="./assets/logo.png">
     <a-button type="primary">Button></a-button>
-    <router-view/>
   </div>
 </template>
 ...
@@ -169,7 +186,7 @@ $ yarn add babel-plugin-import --dev
   })
 ```
 
-最后重启 `npm run dev` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/docs/vue/getting-started-cn/#按需加载)。
+最后重启 `npm run serve` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/docs/vue/getting-started-cn/#按需加载)。
 
 ### 自定义主题
 

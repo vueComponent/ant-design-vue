@@ -61,7 +61,7 @@ $ yarn add ant-design-vue
 然后从 yarn 或 npm 安装并引入 less@2.7.3 less-loader (注意：高版本 less 会报错)
 
 ```bash
-$ yarn add less@2.7.3 less-loader --save
+$ yarn add less@2.7.3 less-loader
 ```
 
 修改 `src/main.js`，引入 antd 的按钮组件以及全部样式文件。

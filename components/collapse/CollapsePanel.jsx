@@ -4,7 +4,7 @@ import VcCollapse, { panelProps } from '../vc-collapse';
 export default {
   name: 'ACollapsePanel',
   props: {
-    ...panelProps,
+    ...panelProps(),
   },
   render() {
     const { prefixCls, showArrow = true, $listeners } = this;

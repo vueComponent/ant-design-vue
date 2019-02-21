@@ -5,7 +5,7 @@ import { panelProps } from './commonProps';
 
 export default {
   name: 'Panel',
-  props: initDefaultProps(panelProps, {
+  props: initDefaultProps(panelProps(), {
     showArrow: true,
     isActive: false,
     destroyInactivePanel: false,
@@ -14,7 +14,7 @@ export default {
   }),
   methods: {
     handleItemClick() {
-      this.$emit('itemClick');
+      this.$emit('itemClick', this.panelKey);
     },
     handleKeyPress(e) {
       if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
@@ -34,6 +34,7 @@ export default {
       accordion,
       forceRender,
       expandIcon,
+      extra,
     } = this.$props;
     const { $slots } = this;
 
@@ -70,6 +71,7 @@ export default {
         >
           {showArrow && (icon || <i class="arrow" />)}
           {header}
+          {extra && <div class={`${prefixCls}-extra`}>{extra}</div>}
         </div>
         <transition {...transitionProps}>
           <PanelContent

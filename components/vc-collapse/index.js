@@ -1,4 +1,4 @@
-// based on rc-collapse 1.10.2
+// based on rc-collapse 1.11.1
 import CollapsePanel from './src/Panel';
 import Collapse from './src/Collapse';
 import { collapseProps, panelProps } from './src/commonProps';

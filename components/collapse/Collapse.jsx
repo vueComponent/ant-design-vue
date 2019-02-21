@@ -8,7 +8,7 @@ export default {
     prop: 'activeKey',
     event: 'change',
   },
-  props: initDefaultProps(collapseProps, {
+  props: initDefaultProps(collapseProps(), {
     prefixCls: 'ant-collapse',
     bordered: true,
     openAnimation: animation,

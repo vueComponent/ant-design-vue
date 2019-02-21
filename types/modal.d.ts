@@ -280,6 +280,12 @@ export declare class Modal extends AntdComponent {
    * @type number
    */
   zIndex: number;
+
+  static info(options: ModalOptions): ModalConfirm;
+  static success(options: ModalOptions): ModalConfirm;
+  static error(options: ModalOptions): ModalConfirm;
+  static warning(options: ModalOptions): ModalConfirm;
+  static confirm(options: ModalOptions): ModalConfirm;
 }
 
 declare module 'vue/types/vue' {

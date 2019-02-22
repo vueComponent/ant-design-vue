@@ -18,7 +18,7 @@ $ yarn global add @vue/cli
 $ vue create antd-demo
 ```
 
-并配置项目。
+并配置项目。（注意：使用 cli3 创建项目时，需要手动选择 CSS 预处理，并且选择 `Less` 项。）
 
 工具会自动初始化一个脚手架并安装 Vue 项目的各种必要依赖，如果在过程中出现网络问题，请尝试配置代理或使用其他 npm registry。
 
@@ -58,12 +58,6 @@ $ npm run serve
 $ yarn add ant-design-vue
 ```
 
-然后从 yarn 或 npm 安装并引入 less@2.7.3 less-loader (注意：高版本 less 会报错)
-
-```bash
-$ yarn add less@2.7.3 less-loader
-```
-
 修改 `src/main.js`，引入 antd 的按钮组件以及全部样式文件。
 
 ```jsx
@@ -76,24 +70,9 @@ Vue.component(Button.name, Button);
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
 new Vue({
-  el: "#app",
-  components: { App },
-  template: "<App/>"
-});
-
-/* 
-如果出现：
-[Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
-
-(found in <Root>)
-
-请使用：
-new Vue({
-  render: (h) => h(App)
-}).$mount('#app');
-*/
+  render: h => h(App)
+}).$mount("#app");
 ```
 
 修改 `src/App.vue`的 template 内容。
@@ -178,12 +157,9 @@ $ yarn add babel-plugin-import --dev
 
   Vue.config.productionTip = false
 
-  /* eslint-disable no-new */
   new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App/>'
-  })
+    render: h => h(App)
+  }).$mount("#app");
 ```
 
 最后重启 `npm run serve` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/docs/vue/getting-started-cn/#按需加载)。

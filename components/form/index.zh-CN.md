@@ -52,7 +52,7 @@ export default {
 
 经过 `Form.create` 包装的组件将会自带 `this.form` 属性，`this.form` 提供的 API 如下：
 
-> 注意：使用 `getFieldsValue` `getFieldValue` `setFieldsValue` 等时，应确保对应的 field 已经用 `getFieldDecorator` 注册过了。
+> 注意：使用 `getFieldsValue` `getFieldValue` `setFieldsValue` 等时，应确保对应的 field 已经用 `getFieldDecorator` 或 `v-decorator` 注册过了。
 
 | 方法      | 说明                                     | 类型       |
 | ------- | -------------------------------------- | -------- |
@@ -61,8 +61,8 @@ export default {
 | getFieldsError | 获取一组输入控件的 Error ，如不传入参数，则获取全部组件的 Error | Function(\[names: string\[]]) |
 | getFieldsValue | 获取一组输入控件的值，如不传入参数，则获取全部组件的值 | Function(\[fieldNames: string\[]]) |
 | getFieldValue | 获取一个输入控件的值 | Function(fieldName: string) |
-| isFieldsTouched | 判断是否任一输入控件经历过 `getFieldDecorator` 的值收集时机 `options.trigger` | (names?: string\[]) => boolean |
-| isFieldTouched | 判断一个输入控件是否经历过 `getFieldDecorator` 的值收集时机 `options.trigger` | (name: string) => boolean |
+| isFieldsTouched | 判断是否任一输入控件经历过 `getFieldDecorator` 或 `v-decorator` 的值收集时机 `options.trigger` | (names?: string\[]) => boolean |
+| isFieldTouched | 判断一个输入控件是否经历过 `getFieldDecorator` 或 `v-decorator` 的值收集时机 `options.trigger` | (name: string) => boolean |
 | isFieldValidating | 判断一个输入控件是否在校验状态 | Function(name) |
 | resetFields | 重置一组输入控件的值（为 `initialValue`）与状态，如不传入参数，则重置所有组件 | Function(\[names: string\[]]) |
 | setFields | 设置一组输入控件的值与错误状态。 | Function({ [fieldName]&#x3A; { value: any, errors: [Error] } }) |
@@ -136,13 +136,13 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 经过 `getFieldDecorator`或`v-decorator` 包装的控件，表单控件会自动添加 `value`（或 `valuePropName` 指定的其他属性） `onChange`（或 `trigger` 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：
 
 1. 你**不再需要也不应该**用 `onChange` 来做同步，但还是可以继续监听 `onChange` 等事件。
-2. 你不能用控件的 `value` `defaultValue` 等属性来设置表单域的值，默认值可以用 `getFieldDecorator` 里的 `initialValue`。
+2. 你不能用控件的 `value` `defaultValue` 等属性来设置表单域的值，默认值可以用 `getFieldDecorator` 或 `v-decorator` 里的 `initialValue`。
 3. 你不应该用 `v-model`，可以使用 `this.form.setFieldsValue` 来动态改变表单值。
 
 #### 特别注意
 
-1. `getFieldDecorator`和`v-decorator` 不能用于装饰纯函数组件。
-2. `getFieldDecorator`和`v-decorator` 调用不能位于纯函数组件中 <https://cn.vuejs.org/v2/api/#functional>。
+1. `getFieldDecorator` 和 `v-decorator` 不能用于装饰纯函数组件。
+2. `getFieldDecorator` 和 `v-decorator` 调用不能位于纯函数组件中 <https://cn.vuejs.org/v2/api/#functional>。
 
 #### getFieldDecorator(id, options) 和 v-decorator="[id, options]" 参数
 

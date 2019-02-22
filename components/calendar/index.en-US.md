@@ -14,7 +14,7 @@
   @select="onSelect"
 >
   <template slot="dateCellRender" slot-scope="value"></template>
-  <template slot="monthCellRender" slot-scope="value"></template
+  <template slot="monthCellRender" slot-scope="value"></template>
 </a-calendar>
 ````
 customize the progress dot by setting a scoped slot

@@ -5,5 +5,5 @@
 package.json
 es/**
 lib/**
-site-dist/**
+_site/**
 dist/**

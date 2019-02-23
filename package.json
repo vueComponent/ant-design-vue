@@ -28,7 +28,7 @@
     "dev": "cross-env NODE_ENV=development ENTRY_INDEX=dev ./node_modules/.bin/webpack-dev-server --open --hot --port 3001",
     "start": "cross-env NODE_ENV=development ./node_modules/.bin/webpack-dev-server --open --hot",
     "test": "cross-env NODE_ENV=test jest --config .jest.js",
-    "site": "node scripts/run.js site-dist",
+    "site": "node scripts/run.js _site",
     "copy": "node scripts/run.js copy-html",
     "compile": "node antd-tools/cli/run.js compile",
     "pub": "node antd-tools/cli/run.js pub",

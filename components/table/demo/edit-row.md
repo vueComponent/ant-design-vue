@@ -12,7 +12,7 @@ Table with editable rows.
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
     <template v-for="col in ['name', 'age', 'address']" :slot="col" slot-scope="text, record, index">
-      <div>
+      <div :key="col">
         <a-input
           v-if="record.editable"
           style="margin: -5px 0"

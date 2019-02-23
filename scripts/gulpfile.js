@@ -113,6 +113,7 @@ function copyHtml() {
 gulp.task('_site', done => {
   dist(() => {
     copyHtml();
+    done();
   });
 });
 gulp.task('copy-html', () => {

@@ -18,7 +18,7 @@ $ yarn global add @vue/cli
 $ vue create antd-demo
 ```
 
-并配置项目。（注意：使用 cli3 创建项目时，需要手动选择 CSS 预处理，并且选择 `Less` 项。）
+并配置项目。
 
 工具会自动初始化一个脚手架并安装 Vue 项目的各种必要依赖，如果在过程中出现网络问题，请尝试配置代理或使用其他 npm registry。
 

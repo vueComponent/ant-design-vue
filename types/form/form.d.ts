@@ -186,6 +186,8 @@ declare interface FieldDecoratorOptions {
   preserve?: boolean;
 }
 
+export type ValidateCallback = (errors: Error[], values: any) => void;
+
 export interface WrappedFormUtils {
   /**
    * Two-way binding for form, single file template can be bound using the directive v-decorator.
@@ -240,7 +242,7 @@ export interface WrappedFormUtils {
    * If you don't specify a parameter, all the fields will be reset.
    * @type Function (Function([names: string[]]))
    */
-  resetFields(names: string[]): void;
+  resetFields(names?: string[]): void;
 
   /**
    * Set value and error state of fields
@@ -259,23 +261,24 @@ export interface WrappedFormUtils {
    * If you don't specify the parameter of fieldNames, you will validate all fields.
    * @type Function
    */
-  validateFields(
-    fieldNames: string[],
-    options: ValidateFieldOptions,
-    callback: (erros: Error[], values: any) => any,
-  ): void;
+  validateFields(fieldNames: string[], options: ValidateFieldOptions, callback: ValidateCallback): void;
+  validateFields(fieldNames: string[], callback: ValidateCallback): void;
+  validateFields(options: ValidateFieldOptions, callback: ValidateCallback): void;
+  validateFields(callback: ValidateCallback): void;
+  validateFields(): void;
 
   /**
    * This function is similar to validateFields, but after validation, if the target field is not in visible area of form,
    * form will be automatically scrolled to the target field area.
    * @type Function
    */
-  validateFieldsAndScroll(
-    fieldNames: string[],
-    options: ValidateFieldOptions,
-    callback: (erros: Error[], values: any) => any,
-  ): void;
+  validateFieldsAndScroll(fieldNames?: string[], options?: Object, callback?: ValidateCallback): void;
+  validateFieldsAndScroll(fieldNames?: string[], callback?: ValidateCallback): void;
+  validateFieldsAndScroll(options?: Object, callback?: ValidateCallback): void;
+  validateFieldsAndScroll(callback?: ValidateCallback): void;
+  validateFieldsAndScroll(): void;
 }
+
 
 export interface IformCreateOption {
   /**

@@ -50,13 +50,15 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| children | 子菜单的菜单项 | Array&lt;MenuItem\|SubMenu> |  |
 | disabled | 是否禁用 | boolean | false |
 | key | 唯一标志 | string |  |
 | title | 子菜单项值 | string\|slot |  |
 
+Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
+
 ### SubMenu事件
 | 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
 | titleClick | 点击子菜单标题 | ({ key, domEvent }) |
 
 ### Menu.ItemGroup
@@ -64,6 +66,8 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | title | 分组标题 | string\|\|function\|slot |  |
+
+Menu.ItemGroup 的子元素必须是 `MenuItem`.
 
 ### Menu.Divider
 

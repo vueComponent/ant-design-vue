@@ -7,7 +7,7 @@ const baseWebpackConfig = require('./webpack.base.config');
 
 module.exports = merge(baseWebpackConfig, {
   output: {
-    path: path.resolve(__dirname, './site-dist'),
+    path: path.resolve(__dirname, './_site'),
     publicPath: '/',
     filename: '[name].[contenthash:8].js',
     chunkFilename: '[contenthash:8].async.js',

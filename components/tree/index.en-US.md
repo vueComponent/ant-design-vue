@@ -30,11 +30,11 @@
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | check | Callback function for when the onCheck event occurs | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) |
-| dragEnd | Callback function for when the onDragEnd event occurs | function({event, node}) |
-| dragEnter | Callback function for when the onDragEnter event occurs | function({event, node,  expandedKeys}) |
-| dragLeave | Callback function for when the onDragLeave event occurs | function({event, node}) |
-| dragOver | Callback function for when the onDragOver event occurs | function({event, node}) |
-| dragStart | Callback function for when the onDragStart event occurs | function({event, node}) |
+| dragend | Callback function for when the onDragEnd event occurs | function({event, node}) |
+| dragenter | Callback function for when the onDragEnter event occurs | function({event, node,  expandedKeys}) |
+| dragleave | Callback function for when the onDragLeave event occurs | function({event, node}) |
+| dragover | Callback function for when the onDragOver event occurs | function({event, node}) |
+| dragstart | Callback function for when the onDragStart event occurs | function({event, node}) |
 | drop | Callback function for when the onDrop event occurs | function({event, node, dragNode, dragNodesKeys}) |
 | expand | Callback function for when a treeNode is expanded or collapsed | function(expandedKeys, {expanded: bool, node}) |
 | load | Callback function for when a treeNode is loaded | function(loadedKeys, {event, node}) |

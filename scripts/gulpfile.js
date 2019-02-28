@@ -12,7 +12,7 @@ const mkdirp = require('mkdirp');
 const cwd = process.cwd();
 
 function dist(done) {
-  rimraf.sync(path.join(cwd, 'site-dist'));
+  rimraf.sync(path.join(cwd, '_site'));
   process.env.RUN_ENV = 'PRODUCTION';
   const webpackConfig = require(path.join(cwd, 'webpack.site.config.js'));
   webpack(webpackConfig, (err, stats) => {
@@ -53,30 +53,30 @@ function copyHtml() {
     input: fs.createReadStream(path.join(cwd, 'site/demoRoutes.js')),
   });
   fs.writeFileSync(
-    path.join(cwd, 'site-dist/404.html'),
+    path.join(cwd, '_site/404.html'),
     fs.readFileSync(path.join(cwd, 'site/404.html')),
   );
   fs.writeFileSync(
-    path.join(cwd, 'site-dist/index-cn.html'),
-    fs.readFileSync(path.join(cwd, 'site-dist/index.html')),
+    path.join(cwd, '_site/index-cn.html'),
+    fs.readFileSync(path.join(cwd, '_site/index.html')),
   );
-  fs.writeFileSync(path.join(cwd, 'site-dist/CNAME'), 'vue.ant.design');
+  fs.writeFileSync(path.join(cwd, '_site/CNAME'), 'vue.ant.design');
   rl.on('line', line => {
     if (line.indexOf('path:') > -1) {
       const name = line.split("'")[1].split("'")[0];
       console.log('create path:', name);
       const toPaths = [
-        `site-dist/components/${name}`,
-        // `site-dist/components/${name}-cn`,
-        `site-dist/iframe/${name}`,
-        // `site-dist/iframe/${name}-cn`,
+        `_site/components/${name}`,
+        // `_site/components/${name}-cn`,
+        `_site/iframe/${name}`,
+        // `_site/iframe/${name}-cn`,
       ];
       toPaths.forEach(toPath => {
         rimraf.sync(path.join(cwd, toPath));
         mkdirp(path.join(cwd, toPath), function() {
           fs.writeFileSync(
             path.join(cwd, `${toPath}/index.html`),
-            fs.readFileSync(path.join(cwd, 'site-dist/index.html')),
+            fs.readFileSync(path.join(cwd, '_site/index.html')),
           );
         });
       });
@@ -92,16 +92,16 @@ function copyHtml() {
       const paths = file.path.split('/');
       const name = paths[paths.length - 1].split('.')[0].toLowerCase();
       const toPaths = [
-        'site-dist/docs',
-        'site-dist/docs/vue',
-        `site-dist/docs/vue/${name}`,
-        `site-dist/docs/vue/${name}-cn`,
+        '_site/docs',
+        '_site/docs/vue',
+        `_site/docs/vue/${name}`,
+        `_site/docs/vue/${name}-cn`,
       ];
       toPaths.forEach(toPath => {
         mkdirp(path.join(cwd, toPath), function() {
           fs.writeFileSync(
             path.join(cwd, `${toPath}/index.html`),
-            fs.readFileSync(path.join(cwd, 'site-dist/index.html')),
+            fs.readFileSync(path.join(cwd, '_site/index.html')),
           );
         });
       });
@@ -110,9 +110,10 @@ function copyHtml() {
   );
 }
 
-gulp.task('site-dist', done => {
+gulp.task('_site', done => {
   dist(() => {
     copyHtml();
+    done();
   });
 });
 gulp.task('copy-html', () => {

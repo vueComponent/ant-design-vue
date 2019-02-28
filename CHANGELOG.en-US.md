@@ -10,6 +10,18 @@
 
 ---
 
+## 1.3.5
+`2019-02-23`
+
+- 🌟 Optimize the `Popover` `Popconfirm` component arrow style.
+- 🐞 Fix using autoprefixer 9.4.5 in postcss (vue-cli) will throw an error `Replace text-decoration-skip: ink to text-decoration-skip-ink: auto, because spec had been changed`. [#471](https://github.com/vueComponent/ant-design-vue/pull/471)
+- Tree
+  - 🐞 Fixed growing space of Tree nodes.[#502](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 🐞 Fixing the `Tree` node can't drag and drop the target node problem.[#469](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 📝 Update the document: `Tree` component `dragxxx` event changed to all lowercase.[#467](https://github.com/vueComponent/ant-design-vue/issues/467)
+- 🐞 Fix `Modal.confirm` `class` does not work.[#475](https://github.com/vueComponent/ant-design-vue/pull/475)
+- 🐞 Fix some TypeScript definitions.
+
 ## 1.3.4
 `2019-01-31`
 

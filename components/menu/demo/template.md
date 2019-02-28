@@ -1,13 +1,13 @@
 <cn>
 #### 单文件递归菜单
 使用单文件方式递归生成菜单。
-因组件内部会动态更改`a-sub-menu`的属性，如果拆分成单文件，无法将属性挂载到`a-sub-menu`上，你需要自行声明属性并挂载。为了实现方便，避免了属性的声明，本示例将其声明为函数式组件，并将所有属性挂载到`a-sub-menu`上。
+因组件内部会动态更改`a-sub-menu`的属性，如果拆分成单文件，无法将属性挂载到`a-sub-menu`上，你需要自行声明属性并挂载。为了方便，避免属性的声明，我们推荐使用函数式组件。
 </cn>
 
 <us>
 #### Single file recursive menu
 Use the single file method to recursively generate menus.
-The properties of `a-sub-menu` are dynamically changed inside the component. If you split the file into a single file and you cannot mount the `props` to `a-sub-menu`, you need to declare the `props` and mount it yourself. For the sake of convenience, the declaration of the `props` is avoided. This example declares it as a functional component and mounts all properties to `a-sub-menu`.
+The properties of `a-sub-menu` are dynamically changed inside the component. If you split the file into a single file and you cannot mount the `props` to `a-sub-menu`, you need to declare the `props` and mount it yourself. For convenience, to avoid the declaration of attributes, we recommend using functional components.
 </us>
 
 ```html
@@ -35,7 +35,10 @@ The properties of `a-sub-menu` are dynamically changed inside the component. If 
 </template>
 
 <script>
-/* SubMenu.vue https://github.com/vueComponent/ant-design-vue/blob/master/components/menu/demo/SubMenu.vue */
+/* 
+ * recommend SubMenu.vue https://github.com/vueComponent/ant-design-vue/blob/master/components/menu/demo/SubMenu.vue
+ * SubMenu1.vue https://github.com/vueComponent/ant-design-vue/blob/master/components/menu/demo/SubMenu1.vue
+ * */
 import SubMenu from './SubMenu'
 export default {
   components: {

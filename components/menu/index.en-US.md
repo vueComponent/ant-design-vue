@@ -52,10 +52,11 @@
 
 | Param | Description | Type | Default value |
 | ----- | ----------- | ---- | ------------- |
-| children | sub menus or sub menu items | Array&lt;MenuItem\|SubMenu> |  |
 | disabled | whether sub menu is disabled or not | boolean | false |
 | key | unique id of the sub menu | string |  |
 | title | title of the sub menu | string\|slot |  |
+
+The children of Menu.SubMenu must be `MenuItem` or `SubMenu`.
 
 ### Menu.SubMenu Events
 | Events Name | Description | Arguments |
@@ -68,6 +69,8 @@
 | ----- | ----------- | ---- | ------------- |
 | children | sub menu items | MenuItem\[] |  |
 | title | title of the group | string\|slot |  |
+
+The children of Menu.ItemGroup must be `MenuItem`.
 
 ### Menu.Divider
 

@@ -47,7 +47,7 @@ export declare class Slider extends AntdComponent {
    * @type object
    */
   marks: {
-    number: string | VNode | { style: object; label: string | VNode } | Function;
+    [key: number]: string | VNode | { style: object; label: string | VNode } | Function;
   };
 
   /**

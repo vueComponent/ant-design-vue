@@ -164,7 +164,11 @@
       }
     }
   }
-
+  ul > li {
+    &:first-child {
+      padding-top: 4px;
+    }
+  }
   > li {
     &:first-child {
       padding-top: 7px;
@@ -177,6 +181,18 @@
     display: none;
     &-open {
       display: block;
+    }
+    // https://github.com/ant-design/ant-design/issues/14958
+    > li {
+      // Provide additional padding between top child node and parent node
+      &:first-child {
+        padding-top: 8px;
+      }
+
+      // Hide additional padding between last child node and next parent node
+      &:last-child {
+        padding-bottom: 0;
+      }
     }
   }
   li&-treenode-disabled {

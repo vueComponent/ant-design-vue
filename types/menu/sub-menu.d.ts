@@ -20,12 +20,6 @@ export declare class SubMenu extends AntdComponent {
   disabled: boolean;
 
   /**
-   * sub menus or sub menu items
-   * @type Array<MenuItem | SubMenu>
-   */
-  children: Array<MenuItem | SubMenu>;
-
-  /**
    * title of the sub menu
    * @type string | slot
    */

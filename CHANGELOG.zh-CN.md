@@ -10,6 +10,19 @@
 
 ---
 
+
+## 1.3.5
+`2019-02-23`
+
+- 🌟 优化 `Popover` `Popconfirm` 组件箭头样式。
+- 🐞 修复在 postcss（vue-cli）中使用 autoprefixer 9.4.5 会抛出错误 `Replace text-decoration-skip: ink to text-decoration-skip-ink: auto, because spec had been changed` 的问题。[#471](https://github.com/vueComponent/ant-design-vue/pull/471)
+- Tree
+  - 🐞 修复 Tree 节点内底部边距叠加的问题。[#502](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 🐞 修复 `Tree` 结点无法拖拽插入目标结点问题。[#469](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 📝 更新文档：`Tree` 组件 `dragxxx` 事件改成全小写。[#467](https://github.com/vueComponent/ant-design-vue/issues/467)
+- 🐞 修复 `Modal.confirm` `class` 不生效问题。[#475](https://github.com/vueComponent/ant-design-vue/pull/475)
+- 🐞 修复 TypeScript 类型定义。
+
 ## 1.3.4
 `2019-01-31`
 

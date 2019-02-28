@@ -19,7 +19,7 @@ The tree structure can be populated using `treeData` property. This is a quick a
     v-model="value"
   >
     <span style="color: #08c" slot="title" slot-scope="{key, value}" v-if="key='0-0-1'">
-      <a-icon type="home"/>Child Node1 {{value}}
+      Child Node1 {{value}}
     </span>
   </a-tree-select>
 </template>

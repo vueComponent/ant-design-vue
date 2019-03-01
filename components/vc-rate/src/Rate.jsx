@@ -20,6 +20,7 @@ const rateProps = {
   allowClear: PropTypes.bool,
   prefixCls: PropTypes.string,
   character: PropTypes.any,
+  characterRender: PropTypes.func,
   tabIndex: PropTypes.number,
   autoFocus: PropTypes.bool,
 };
@@ -174,6 +175,7 @@ export default {
     const stars = [];
     const disabledClass = disabled ? `${prefixCls}-disabled` : '';
     const character = getComponentFromProp(this, 'character');
+    const characterRender = this.characterRender || this.$scopedSlots.characterRender;
     for (let index = 0; index < count; index++) {
       const starProps = {
         props: {
@@ -184,6 +186,7 @@ export default {
           allowHalf,
           value: hoverValue === undefined ? sValue : hoverValue,
           character,
+          characterRender,
           focused,
         },
         on: {

@@ -13,6 +13,7 @@ export default {
     allowHalf: PropTypes.bool,
     disabled: PropTypes.bool,
     character: PropTypes.any,
+    characterRender: PropTypes.func,
     focused: PropTypes.bool,
     count: PropTypes.number,
   },
@@ -52,10 +53,10 @@ export default {
     },
   },
   render() {
-    const { onHover, onClick, onKeyDown, disabled, prefixCls, index, count, value } = this;
+    const { onHover, onClick, onKeyDown, disabled, prefixCls, characterRender, index, count, value } = this;
 
     const character = getComponentFromProp(this, 'character');
-    return (
+    let star = (
       <li
         class={this.getClassName()}
         onClick={disabled ? noop : onClick}
@@ -71,5 +72,9 @@ export default {
         <div class={`${prefixCls}-second`}>{character}</div>
       </li>
     );
+    if (characterRender) {
+      star = characterRender(star, this.$props);
+    }
+    return star;
   },
 };

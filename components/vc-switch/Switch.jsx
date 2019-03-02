@@ -51,10 +51,10 @@ export default {
       }
       this.$emit('change', checked);
     },
-    toggle() {
+    handleClick(e) {
       const checked = !this.stateChecked;
-      this.setChecked(checked);
-      this.$emit('click', checked);
+      this.setChecked(checked, e);
+      this.$emit('click', checked, e);
     },
     handleKeyDown(e) {
       if (e.keyCode === 37) {
@@ -91,7 +91,7 @@ export default {
       on: {
         ...this.$listeners,
         keydown: this.handleKeyDown,
-        click: this.toggle,
+        click: this.handleClick,
         mouseup: this.handleMouseUp,
       },
       attrs: {

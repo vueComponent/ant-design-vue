@@ -58,7 +58,7 @@ function generateOptions(length, extraOptionGen) {
   return arr;
 }
 
-function onInputSelect(direction, value) {
+function onInputSelect(direction, value, cause) {
   if (!value) {
     return;
   }
@@ -70,7 +70,7 @@ function onInputSelect(direction, value) {
     selectedValue[1 - index] = this.showTimePicker ? selectedValue[index] : undefined;
   }
   this.__emit('inputSelect', selectedValue);
-  this.fireSelectValueChange(selectedValue);
+  this.fireSelectValueChange(selectedValue, null, cause || { source: 'dateInput' });
 }
 
 const RangeCalendar = {
@@ -369,13 +369,23 @@ const RangeCalendar = {
       }
     },
 
-    onStartInputSelect(...oargs) {
+    onStartInputChange(...oargs) {
       const args = ['left'].concat(oargs);
       return onInputSelect.apply(this, args);
     },
 
-    onEndInputSelect(...oargs) {
+    onEndInputChange(...oargs) {
       const args = ['right'].concat(oargs);
+      return onInputSelect.apply(this, args);
+    },
+
+    onStartInputSelect(value) {
+      const args = ['left', value, { source: 'dateInputSelect' }];
+      return onInputSelect.apply(this, args);
+    },
+
+    onEndInputSelect(value) {
+      const args = ['right', value, { source: 'dateInputSelect' }];
       return onInputSelect.apply(this, args);
     },
 
@@ -502,7 +512,7 @@ const RangeCalendar = {
       return v1.diff(v2, 'days');
     },
 
-    fireSelectValueChange(selectedValue, direct) {
+    fireSelectValueChange(selectedValue, direct, cause) {
       const { timePicker, prevSelectedValue } = this;
       if (timePicker) {
         const timePickerProps = getOptionProps(timePicker);
@@ -540,7 +550,7 @@ const RangeCalendar = {
           firstSelectedValue: null,
         });
         this.fireHoverValueChange([]);
-        this.__emit('select', selectedValue);
+        this.__emit('select', selectedValue, cause);
       }
       if (!hasProp(this, 'selectedValue')) {
         this.setState({
@@ -677,6 +687,7 @@ const RangeCalendar = {
         clearIcon,
       },
       on: {
+        inputChange: this.onStartInputChange,
         inputSelect: this.onStartInputSelect,
         valueChange: this.onStartValueChange,
         panelChange: this.onStartPanelChange,
@@ -701,6 +712,7 @@ const RangeCalendar = {
         clearIcon,
       },
       on: {
+        inputChange: this.onEndInputChange,
         inputSelect: this.onEndInputSelect,
         valueChange: this.onEndValueChange,
         panelChange: this.onEndPanelChange,

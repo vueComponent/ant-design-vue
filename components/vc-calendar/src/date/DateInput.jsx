@@ -138,9 +138,12 @@ const DateInput = {
       }));
     },
     onKeyDown({ keyCode }) {
-      const { value } = this.$props;
+      const { value, disabledDate } = this.$props;
       if (keyCode === KeyCode.ENTER) {
-        this.__emit('select', value.clone());
+        const validateDate = !disabledDate || !disabledDate(value);
+        if(validateDate) {
+          this.__emit('select', value.clone());
+        }
       }
     },
     getRootDOMNode() {

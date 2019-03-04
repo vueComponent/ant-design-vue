@@ -28,6 +28,7 @@ const Combobox = {
     prefixCls: PropTypes.string,
     value: PropTypes.object,
     // onChange: PropTypes.func,
+    // onAmPmChange: PropTypes.func,
     showHour: PropTypes.bool,
     showMinute: PropTypes.bool,
     showSecond: PropTypes.bool,
@@ -71,6 +72,7 @@ const Combobox = {
             }
           }
         }
+        this.__emit('amPmChange', ampm);
       } else {
         value.second(+itemValue);
       }

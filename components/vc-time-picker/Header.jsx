@@ -158,29 +158,6 @@ const Header = {
       this.__emit('keydown', e);
     },
 
-    onClear() {
-      this.__emit('clear');
-      this.setState({ str: '' });
-    },
-
-    getClearButton() {
-      const { prefixCls, allowEmpty, clearText } = this;
-      const clearIcon = getComponentFromProp(this, 'clearIcon');
-      if (!allowEmpty) {
-        return null;
-      }
-      return (
-        <a
-          role="button"
-          class={`${prefixCls}-clear-btn`}
-          title={clearText}
-          onMousedown={this.onClear}
-        >
-          {clearIcon || <i class={`${prefixCls}-clear-btn-icon`} />}
-        </a>
-      );
-    },
-
     getProtoValue() {
       return this.value || this.defaultOpenValue;
     },
@@ -207,7 +184,6 @@ const Header = {
     return (
       <div class={`${prefixCls}-input-wrap`}>
         {this.getInput()}
-        {this.getClearButton()}
       </div>
     );
   },

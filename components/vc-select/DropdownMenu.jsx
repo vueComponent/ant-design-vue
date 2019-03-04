@@ -130,12 +130,17 @@ export default {
         }
         const activeKeyProps = {};
 
+        let defaultActiveFirst = defaultActiveFirstOption;
         let clonedMenuItems = menuItems;
         if (selectedKeys.length || firstActiveValue) {
           if (props.visible && !this.lastVisible) {
             activeKeyProps.activeKey =
               selectedKeys[0] !== undefined ? selectedKeys[0] : firstActiveValue;
           } else if (!visible) {
+            // Do not trigger auto active since we already have selectedKeys
+            if (selectedKeys[0]) {
+              defaultActiveFirst = false;
+            }
             activeKeyProps.activeKey = undefined;
           }
           let foundFirst = false;
@@ -180,7 +185,7 @@ export default {
         if (inputValue !== this.lastInputValue && (!lastValue || lastValue !== backfillValue)) {
           activeKeyProps.activeKey = '';
         }
-        menuProps.props = { ...activeKeyProps, ...menuProps.props };
+        menuProps.props = { ...activeKeyProps, ...menuProps.props, defaultActiveFirst };
         return <Menu {...menuProps}>{clonedMenuItems}</Menu>;
       }
       return null;

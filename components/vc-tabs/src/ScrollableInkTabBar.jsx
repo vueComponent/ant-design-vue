@@ -22,12 +22,13 @@ export default {
   render() {
     const props = { ...this.$props };
     const listeners = this.$listeners;
+    const { renderTabBarNode } = this.scopedSlots;
     return (
       <SaveRef
         children={(saveRef, getRef) => (
           <TabBarRootNode saveRef={saveRef} {...{ props, on: listeners }}>
             <ScrollableTabBarNode saveRef={saveRef} getRef={getRef} {...{ props, on: listeners }}>
-              <TabBarTabsNode saveRef={saveRef} {...{ props, on: listeners }} />
+              <TabBarTabsNode saveRef={saveRef} {...{ props: {...props, renderTabBarNode}, on: listeners }} />
               <InkTabBarNode saveRef={saveRef} getRef={getRef} {...{ props, on: listeners }} />
             </ScrollableTabBarNode>
           </TabBarRootNode>

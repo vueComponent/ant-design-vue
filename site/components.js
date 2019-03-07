@@ -58,6 +58,7 @@ import {
   Skeleton,
   Comment,
   ConfigProvider,
+  Empty,
 } from 'ant-design-vue';
 
 Vue.prototype.$message = message;
@@ -123,6 +124,7 @@ Vue.use(Upload);
 Vue.use(Skeleton);
 Vue.use(Comment);
 Vue.use(ConfigProvider);
+Vue.use(Empty);
 
 /* v1.1.2 registration methods */
 // Vue.component(Affix.name, Affix) // a-affix

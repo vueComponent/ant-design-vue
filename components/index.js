@@ -131,6 +131,8 @@ import { default as Comment } from './comment';
 
 import { default as ConfigProvider } from './config-provider';
 
+import { default as Empty } from './empty';
+
 const components = [
   Affix,
   Anchor,
@@ -186,6 +188,7 @@ const components = [
   Skeleton,
   Comment,
   ConfigProvider,
+  Empty,
 ];
 
 const install = function(Vue) {
@@ -266,6 +269,7 @@ export {
   Skeleton,
   Comment,
   ConfigProvider,
+  Empty,
 };
 
 export default {

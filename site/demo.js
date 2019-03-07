@@ -23,6 +23,12 @@ export default {
     type: 'Other',
     title: 'ConfigProvider',
   },
+  Empty: {
+    category: 'Components',
+    subtitle: '空状态',
+    type: 'Data Display',
+    title: 'Empty',
+  },
   breadcrumb: {
     category: 'Components',
     subtitle: '面包屑',

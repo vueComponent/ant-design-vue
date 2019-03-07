@@ -53,3 +53,4 @@ import './drawer/style';
 import './skeleton/style';
 import './comment/style';
 import './config-provider/style';
+import './empty/style';

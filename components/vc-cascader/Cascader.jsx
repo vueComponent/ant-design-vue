@@ -372,7 +372,7 @@ export default {
     return (
       <Trigger {...triggerProps}>
         {children &&
-          cloneElement(children[0], {
+          cloneElement(children, {
             on: {
               keydown: handleKeyDown,
             },

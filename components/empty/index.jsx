@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider';
 import { getComponentFromProp } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import emptyImg from './empty.svg';
@@ -29,10 +29,7 @@ const Empty = {
         prefixCls: customizePrefixCls,
         ...restProps
       } = this.$props;
-
-      // todo
-      // const prefixCls = getPrefixCls('empty', customizePrefixCls);
-      const prefixCls = customizePrefixCls || 'ant-empty';
+      const prefixCls = ConfigConsumerProps.getPrefixCls('empty', customizePrefixCls);
       const image = getComponentFromProp(this, 'image');
       const description = getComponentFromProp(this, 'description');
 
@@ -54,7 +51,7 @@ const Empty = {
 
           <p class={`${prefixCls}-description`}>{des}</p>
 
-          {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default[0]}</div>}
+          {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default}</div>}
         </div>
       );
     },

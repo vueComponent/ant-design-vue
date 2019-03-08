@@ -1,17 +1,41 @@
 import PropTypes from '../_util/vue-types';
+import { filterEmpty } from '../_util/props-util';
+import defaultRenderEmpty from './renderEmpty';
 
 const ConfigProvider = {
   name: 'AConfigProvider',
   props: {
     getPopupContainer: PropTypes.func,
+    prefixCls: PropTypes.string,
+    renderEmpty: PropTypes.any,
+    csp: PropTypes.any,
+    autoInsertSpaceInButton: PropTypes.bool,
   },
   provide() {
     return {
-      configProvider: this.$props,
+      configProvider: {
+        ...this.$props,
+        renderEmpty: this.$props.renderEmpty || this.$slots.renderEmpty || defaultRenderEmpty,
+        getPrefixCls: this.getPrefixCls,
+      },
     };
   },
+  methods: {
+    getPrefixCls(suffixCls, customizePrefixCls) {
+      const { prefixCls = 'ant' } = this.$props;
+      if (customizePrefixCls) return customizePrefixCls;
+      return suffixCls ? `${prefixCls}-${suffixCls}` : prefixCls;
+    },
+  },
   render() {
-    return this.$slots.default ? this.$slots.default[0] : null;
+    return this.$slots.default ? filterEmpty(this.$slots.default) : null;
+  },
+};
+
+export const ConfigConsumerProps = {
+  getPrefixCls: (suffixCls, customizePrefixCls) => {
+    if (customizePrefixCls) return customizePrefixCls;
+    return `ant-${suffixCls}`;
   },
 };
 

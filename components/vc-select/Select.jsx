@@ -1488,7 +1488,6 @@ const Select = {
   },
 
   render() {
-    console.log('12');
     const props = this.$props;
     const multiple = isMultipleOrTags(props);
     // Default set showArrow to true if not set (not set directly in defaultProps to handle multiple case)

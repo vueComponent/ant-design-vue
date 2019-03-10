@@ -8,9 +8,8 @@ Vue.use(ref, { name: 'ant-ref' });
 
 const Line = {
   props: initDefaultProps(propTypes, defaultProps),
-  data() {
+  created() {
     this.paths = {};
-    return {};
   },
   render() {
     const {
@@ -67,6 +66,7 @@ const Line = {
           stackPtg += ptg;
 
           const pathProps = {
+            key: index,
             attrs: {
               d: pathString,
               'stroke-linecap': strokeLinecap,

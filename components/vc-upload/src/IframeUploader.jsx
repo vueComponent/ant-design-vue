@@ -70,7 +70,7 @@ const IframeUploader = {
         name:
           target.value &&
           target.value.substring(target.value.lastIndexOf('\\') + 1, target.value.length),
-      });;
+      });
       this.startUpload();
       const { $props: props } = this;
       if (!props.beforeUpload) {

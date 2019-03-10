@@ -20,9 +20,8 @@ Vue.use(ref, { name: 'ant-ref' });
 
 const Circle = {
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
-  data() {
+  created() {
     this.paths = {};
-    return {};
   },
   methods: {
     getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0, gapPosition) {

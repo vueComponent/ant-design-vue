@@ -21,7 +21,8 @@ module.exports = {
   ],
   transform: {
     ".*\\.(vue|md)$": "<rootDir>/node_modules/vue-jest",
-    "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
+    "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.svg$": "<rootDir>/node_modules/jest-transform-stub"
   },
   testRegex: libDir === 'dist'
     ? 'demo\\.test\\.js$'

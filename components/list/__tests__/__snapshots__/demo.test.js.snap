@@ -117,7 +117,7 @@ exports[`renders ./components/list/demo/infinite-load.md correctly 1`] = `
   <div class="ant-list ant-list-split">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-list-empty-text">No data</div>
+        <div class="ant-list-empty-text"></div>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 
 export default {
@@ -23,6 +24,9 @@ export default {
     icon: String,
     alt: String,
     loadError: Function,
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
   },
   data() {
     return {
@@ -73,7 +77,10 @@ export default {
     },
   },
   render() {
-    const { prefixCls, shape, size, src, icon, alt, srcSet } = this.$props;
+    const { prefixCls: customizePrefixCls, shape, size, src, icon, alt, srcSet } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('avatar', customizePrefixCls);
 
     const { isImgExist, scale } = this.$data;
 

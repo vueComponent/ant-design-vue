@@ -3,6 +3,7 @@ import Select, { AbstractSelectProps, SelectValue } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 import {
   getComponentFromProp,
   getOptionProps,
@@ -55,6 +56,9 @@ const AutoComplete = {
     prop: 'value',
     event: 'change',
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   methods: {
     getInputElement() {
       const { $slots } = this;
@@ -77,7 +81,10 @@ const AutoComplete = {
   },
 
   render() {
-    const { size, prefixCls, optionLabelProp, dataSource, $slots, $listeners } = this;
+    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $slots, $listeners } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const cls = {
       [`${prefixCls}-lg`]: size === 'large',

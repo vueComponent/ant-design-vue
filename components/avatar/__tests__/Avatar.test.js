@@ -76,4 +76,40 @@ describe('Avatar Render', () => {
     expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
     expect(global.document.body.querySelector('img').getAttribute('src')).toBe(LOAD_SUCCESS_SRC);
   });
+
+  it('should show image on success after a failure state', () => {
+    global.document.body.innerHTML = '';
+    const LOAD_FAILURE_SRC = 'http://error.url';
+    const LOAD_SUCCESS_SRC = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
+
+    const Foo = {
+      data() {
+        return {
+          src: LOAD_FAILURE_SRC,
+        };
+      },
+      methods: {
+        handleImgError() {
+          this.src = LOAD_SUCCESS_SRC;
+          return false;
+        },
+      },
+
+      render() {
+        const { src } = this;
+        return <Avatar src={src} loadError={this.handleImgError}>Fallback</Avatar>;
+      },
+    };
+
+    const wrapper = mount(Foo, { attachToDocument: true });
+    wrapper.find('img').trigger('error');
+
+    expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(false);
+    expect(wrapper.find('.ant-avatar-string').length).toBe(1);
+
+    wrapper.setProps({ src: LOAD_SUCCESS_SRC });
+
+    expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
+    expect(wrapper.find('.ant-avatar-image').length).toBe(1);
+  });
 });

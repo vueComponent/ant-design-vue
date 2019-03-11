@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { Meta } from '../meta';
 
 export declare class ListItem extends AntdComponent {
-  static Meta: Meta;
+  static Meta: typeof Meta;
 
   /**
    * The actions content of list item. If itemLayout is vertical, shows the content on bottom,

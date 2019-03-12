@@ -21,11 +21,11 @@ import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 
 const CascaderOptionType = PropTypes.shape({
-  value: PropTypes.string,
+  value: PropTypes.any,
   label: PropTypes.any,
   disabled: PropTypes.bool,
   children: PropTypes.array,
-  key: PropTypes.string,
+  key: PropTypes.any,
 }).loose;
 
 const FieldNamesType = PropTypes.shape({
@@ -49,7 +49,7 @@ const CascaderProps = {
   /** 可选项数据源 */
   options: PropTypes.arrayOf(CascaderOptionType).def([]),
   /** 默认的选中项 */
-  defaultValue: PropTypes.arrayOf(PropTypes.string),
+  defaultValue: PropTypes.arrayOf(PropTypes.any),
   /** 指定选中项 */
   value: PropTypes.arrayOf(PropTypes.string),
   /** 选择完成后的回调 */

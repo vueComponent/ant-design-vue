@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ACardMeta',
@@ -8,8 +9,15 @@ export default {
     title: PropTypes.any,
     description: PropTypes.any,
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   render() {
-    const { prefixCls = 'ant-card' } = this.$props;
+    const { prefixCls: customizePrefixCls } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('card', customizePrefixCls);
+
     const classString = {
       [`${prefixCls}-meta`]: true,
     };

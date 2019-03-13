@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ACardGrid',
@@ -6,8 +7,15 @@ export default {
   props: {
     prefixCls: PropTypes.string.def('ant-card'),
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   render() {
-    const { prefixCls = 'ant-card' } = this.$props;
+    const { prefixCls: customizePrefixCls } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('card', customizePrefixCls);
+
     const classString = {
       [`${prefixCls}-grid`]: true,
     };

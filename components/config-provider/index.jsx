@@ -15,10 +15,16 @@ const ConfigProvider = {
     return {
       configProvider: {
         ...this.$props,
-        renderEmpty: this.$props.renderEmpty || this.$slots.renderEmpty || defaultRenderEmpty,
+        renderEmpty: this.renderEmptySlots,
         getPrefixCls: this.getPrefixCls,
       },
     };
+  },
+  computed: {
+    renderEmptySlots() {
+      const customRender = (this.$scopedSlots && this.$scopedSlots['renderEmpty']) || this.$slots['renderEmpty'];
+      return this.$props.renderEmpty || customRender || defaultRenderEmpty;
+    },
   },
   methods: {
     getPrefixCls(suffixCls, customizePrefixCls) {
@@ -37,6 +43,7 @@ export const ConfigConsumerProps = {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;
   },
+  renderEmpty: defaultRenderEmpty,
 };
 
 /* istanbul ignore next */

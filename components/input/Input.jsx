@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import TextArea from './TextArea';
 import omit from 'omit.js';
 import inputProps from './inputProps';
-import { hasProp, getComponentFromProp, getStyle, getClass } from '../_util/props-util';
+import { hasProp, getComponentFromProp } from '../_util/props-util';
 import { isIE, isIE9 } from '../_util/env';
 
 function noop() {}
@@ -111,7 +111,7 @@ export default {
         [`${props.prefixCls}-group-wrapper-lg`]: props.size === 'large',
       });
       return (
-        <span class={groupClassName} style={getStyle(this)}>
+        <span class={groupClassName}>
           <span class={className}>
             {addonBefore}
             {children}
@@ -131,12 +131,12 @@ export default {
       prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 
       suffix = suffix ? <span class={`${prefixCls}-suffix`}>{suffix}</span> : null;
-      const affixWrapperCls = classNames(getClass(this), `${prefixCls}-affix-wrapper`, {
+      const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
       });
       return (
-        <span class={affixWrapperCls} style={getStyle(this)}>
+        <span class={affixWrapperCls}>
           {prefix}
           {children}
           {suffix}
@@ -166,7 +166,7 @@ export default {
           input: handleChange,
           change: noop,
         },
-        class: classNames(getInputClassName(), getClass(this)),
+        class: getInputClassName(),
         ref: 'input',
       };
       if ($listeners['change.value']) {

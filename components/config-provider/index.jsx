@@ -1,6 +1,17 @@
+import Vue from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
+
+function getWatch(keys = []) {
+  const watch = {};
+  keys.forEach(k => {
+    watch[k] = function() {
+      this._proxyVm._data[k] = value;
+    };
+  });
+  return watch;
+}
 
 const ConfigProvider = {
   name: 'AConfigProvider',
@@ -12,9 +23,26 @@ const ConfigProvider = {
     autoInsertSpaceInButton: PropTypes.bool,
   },
   provide() {
+    const _self = this;
+    this._proxyVm = new Vue({
+      data() {
+        return {
+          ..._self.$props,
+          getPrefixCls: _self.getPrefixCls,
+          renderEmpty: _self.renderEmptyComponent,
+        };
+      },
+    });
     return {
-      configProvider: this,
+      configProvider: this._proxyVm._data,
     };
+  },
+  watch: {
+    ...getWatch([
+      'prefixCls',
+      'csp',
+      'autoInsertSpaceInButton',
+    ]),
   },
   methods: {
     renderEmptyComponent() {

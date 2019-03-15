@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
@@ -31,6 +32,7 @@ export default {
   name: 'ACol',
   props: ColProps,
   inject: {
+    configProvider: { default: () => ({}) },
     rowContext: {
       default: () => null,
     },
@@ -42,12 +44,15 @@ export default {
       offset,
       push,
       pull,
-      prefixCls = 'ant-col',
+      prefixCls: customizePrefixCls,
       $slots,
       $attrs,
       $listeners,
       rowContext,
     } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('col', customizePrefixCls);
+
     let sizeClassObj = {};
     ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
       let sizeProps = {};

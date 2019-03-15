@@ -1,5 +1,7 @@
 import Checkbox from './Checkbox';
 import hasProp from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
+
 function noop() {}
 export default {
   name: 'ACheckboxGroup',
@@ -8,7 +10,6 @@ export default {
   },
   props: {
     prefixCls: {
-      default: 'ant-checkbox',
       type: String,
     },
     defaultValue: {
@@ -29,6 +30,9 @@ export default {
     return {
       checkboxGroupContext: this,
     };
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
   },
   data() {
     const { value, defaultValue } = this;
@@ -75,7 +79,10 @@ export default {
   },
   render() {
     const { $props: props, $data: state, $slots } = this;
-    const { prefixCls, options } = props;
+    const { prefixCls: customizePrefixCls, options } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
+
     let children = $slots.default;
     const groupPrefixCls = `${prefixCls}-group`;
     if (options && options.length > 0) {

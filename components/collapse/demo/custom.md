@@ -1,21 +1,21 @@
 <cn>
 #### 自定义面板
-自定义各个面板的背景色、圆角和边距。
+自定义各个面板的背景色、圆角、边距和图标。
 </cn>
 
 <us>
 #### Custom Panel
-Customize the background, border and margin styles for each panel.
+Customize the background, border and margin styles and icon for each panel.
 </us>
 
 ```html
 <template>
   <div>
     <a-collapse defaultActiveKey="1" :bordered="false">
-      <a-collapse-panel key="1" :style="customStyle">
-        <template slot="header">
-          This is panel header 1<a-icon type="question-circle-o" />
-        </template>
+      <template v-slot:expandIcon="props">
+        <a-icon  type="caret-right" rotate="{isActive ? 90 : 0}" />
+      </template>
+      <a-collapse-panel  header="This is panel header 1" key="1" :style="customStyle">
         <p>{{text}}</p>
       </a-collapse-panel>
       <a-collapse-panel header="This is panel header 2" key="2" :style="customStyle">

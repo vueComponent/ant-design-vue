@@ -287,6 +287,7 @@ const Cascader = {
     },
 
     generateFilteredOptions(prefixCls, renderEmpty) {
+      const h = this.$createElement;
       const { showSearch, notFoundContent, $scopedSlots } = this;
       const names = getFilledFieldNames(this.$props);
       const {
@@ -337,7 +338,7 @@ const Cascader = {
       }
       return [
         {
-          [names.label]: notFoundContent || renderEmpty('Cascader'),
+          [names.label]: notFoundContent || renderEmpty(h, 'Cascader'),
           [names.value]: 'ANT_CASCADER_NOT_FOUND',
           disabled: true,
         },
@@ -378,9 +379,11 @@ const Cascader = {
       showSearch = false,
       ...otherProps
     } = props;
-
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty = this.configProvider.renderEmpty || ((componentName) => ConfigConsumerProps.renderEmpty(componentName));
+    const renderEmpty = (
+      this.configProvider.renderEmptyComponent &&
+      this.configProvider.renderEmptyComponent()
+    ) || ConfigConsumerProps.renderEmpty;
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 
@@ -450,8 +453,8 @@ const Cascader = {
     }
     // The default value of `matchInputWidth` is `true`
     const resultListMatchInputWidth = showSearch.matchInputWidth !== false;
-    if (resultListMatchInputWidth && inputValue && this.input) {
-      dropdownMenuColumnStyle.width = this.input.input.offsetWidth;
+    if (resultListMatchInputWidth && inputValue && this.$refs.input) {
+      dropdownMenuColumnStyle.width = this.$refs.input.$el.offsetWidth + 'px';
     }
     // showSearch时，focus、blur在input上触发，反之在ref='picker'上触发
     const inputProps = {

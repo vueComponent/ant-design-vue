@@ -20,7 +20,7 @@ Use ConfigProvider set global Empty style.
 
     <a-divider />
     <a-config-provider>
-      <template v-slot:renderEmpty>
+      <template v-if="customize" v-slot:renderEmpty>
         <div style="textAlign: center">
           <a-icon type="smile" style="fontSize: 20px" />
           <p>Data Not Found</p>
@@ -54,7 +54,7 @@ Use ConfigProvider set global Empty style.
 export default {
   data() {
     return {
-      customize: true,
+      customize: false,
       style: {width: '200px'},
       columns: [
         {

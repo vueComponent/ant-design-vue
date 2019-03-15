@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="184px" height="152px" xmlns="http://www.w3.org/2000/svg">
-  <g id="Vue" fill="none" fill-rule="evenodd">
+<svg width="184" height="152" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
     <g transform="translate(24 31.67)">
       <ellipse fill-opacity=".8" fill="#F5F5F7" cx="67.797" cy="106.89" rx="67.797" ry="12.668"/>
       <path d="M122.034 69.674L98.109 40.229c-1.148-1.386-2.826-2.225-4.593-2.225h-51.44c-1.766 0-3.444.839-4.592 2.225L13.56 69.674v15.383h108.475V69.674z" fill="#AEB8C2"/>

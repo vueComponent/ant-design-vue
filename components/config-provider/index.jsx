@@ -13,20 +13,14 @@ const ConfigProvider = {
   },
   provide() {
     return {
-      configProvider: {
-        ...this.$props,
-        renderEmpty: this.renderEmptySlots,
-        getPrefixCls: this.getPrefixCls,
-      },
+      configProvider: this,
     };
   },
-  computed: {
-    renderEmptySlots() {
+  methods: {
+    renderEmptyComponent() {
       const customRender = (this.$scopedSlots && this.$scopedSlots['renderEmpty']) || this.$slots['renderEmpty'];
       return this.$props.renderEmpty || customRender || defaultRenderEmpty;
     },
-  },
-  methods: {
     getPrefixCls(suffixCls, customizePrefixCls) {
       const { prefixCls = 'ant' } = this.$props;
       if (customizePrefixCls) return customizePrefixCls;

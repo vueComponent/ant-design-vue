@@ -1,27 +1,31 @@
 import PropTypes from '../_util/vue-types';
 import Empty from '../empty';
 import emptyImg from './empty.svg';
+import { ConfigConsumerProps } from '.';
 
-const renderEmpty = {
+const RenderEmpty = {
   functional: true,
-  inject: ['configProvider'],
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   props: {
     componentName: PropTypes.string,
   },
   render(createElement, context) {
     const { props, injections } = context;
     function renderHtml(componentName) {
-      const prefix = injections.configProvider.getPrefixCls('empty');
+      const getPrefixCls = injections.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const prefix = getPrefixCls('empty');
       switch (componentName) {
         case 'Table':
         case 'List':
-          return <Empty image={emptyImg} className={`${prefix}-normal`} />;
+          return <Empty image={emptyImg} class={`${prefix}-normal`} />;
 
         case 'Select':
         case 'TreeSelect':
         case 'Cascader':
         case 'Transfer':
-          return <Empty image={emptyImg} className={`${prefix}-small`} />;
+          return <Empty image={emptyImg} class={`${prefix}-small`} />;
 
         default:
           return <Empty />;
@@ -30,5 +34,9 @@ const renderEmpty = {
     return renderHtml(props.componentName);
   },
 };
+
+function renderEmpty(h, componentName) {
+  return <RenderEmpty componentName={componentName} />;
+}
 
 export default renderEmpty;

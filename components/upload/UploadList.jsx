@@ -34,7 +34,7 @@ const isImageUrl = file => {
   }
   const url = file.thumbUrl || file.url;
   const extension = extname(url);
-  if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp)$/i.test(extension)) {
+  if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp|ico)$/i.test(extension)) {
     return true;
   } else if (/^data:/.test(url)) {
     // other file types of base64

@@ -261,7 +261,11 @@ export interface WrappedFormUtils {
    * If you don't specify the parameter of fieldNames, you will validate all fields.
    * @type Function
    */
-  validateFields(fieldNames: string[], options: ValidateFieldOptions, callback: ValidateCallback): void;
+  validateFields(
+    fieldNames: string[],
+    options: ValidateFieldOptions,
+    callback: ValidateCallback,
+  ): void;
   validateFields(fieldNames: string[], callback: ValidateCallback): void;
   validateFields(options: ValidateFieldOptions, callback: ValidateCallback): void;
   validateFields(callback: ValidateCallback): void;
@@ -272,13 +276,16 @@ export interface WrappedFormUtils {
    * form will be automatically scrolled to the target field area.
    * @type Function
    */
-  validateFieldsAndScroll(fieldNames?: string[], options?: Object, callback?: ValidateCallback): void;
+  validateFieldsAndScroll(
+    fieldNames?: string[],
+    options?: Object,
+    callback?: ValidateCallback,
+  ): void;
   validateFieldsAndScroll(fieldNames?: string[], callback?: ValidateCallback): void;
   validateFieldsAndScroll(options?: Object, callback?: ValidateCallback): void;
   validateFieldsAndScroll(callback?: ValidateCallback): void;
   validateFieldsAndScroll(): void;
 }
-
 
 export interface IformCreateOption {
   /**

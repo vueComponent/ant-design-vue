@@ -7,7 +7,7 @@ import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
 
-const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp'];
+const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp', 'ico'];
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 const previewFile = (file, callback) => {
   if (file.type && !imageTypes.includes(file.type)) {

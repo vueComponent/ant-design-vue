@@ -10,7 +10,7 @@
 | allowClear | whether allow clear | boolean | true |
 | autoFocus | get focus when component mounted | boolean | false |
 | changeOnSelect | change value on each selection if set to true, see above demo for details | boolean | false |
-| defaultValue | initial selected value | string\[] | \[] |
+| defaultValue | initial selected value | string\[] \| number\[] | \[] |
 | disabled | whether disabled select | boolean | false |
 | displayRender | render function of displaying selected options, you can use slot="displayRender" and slot-scope="{labels, selectedOptions}" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
 | expandTrigger | expand current item when click or hover, one of 'click' 'hover' | string | 'click' |
@@ -27,7 +27,7 @@
 | showSearch | Whether show search input in single mode. | boolean\|object | false |
 | size | input size, one of `large` `default` `small` | string | `default` |
 | suffixIcon | The custom suffix icon | string \| VNode \| slot | - |
-| value(v-model) | selected value | string\[] | - |
+| value(v-model) | selected value | string\[] \| number\[] | - |
 
 Fields in `showSearch`:
 

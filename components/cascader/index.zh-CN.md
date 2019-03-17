@@ -10,7 +10,7 @@
 | allowClear | 是否支持清除 | boolean | true |
 | autoFocus | 自动获取焦点 | boolean | false |
 | changeOnSelect | 当此项为 true 时，点选每级菜单选项值都会发生变化，具体见上面的演示 | boolean | false |
-| defaultValue | 默认的选中项 | string\[] | \[] |
+| defaultValue | 默认的选中项 | string\[] \| number\[] | \[] |
 | disabled | 禁用 | boolean | false |
 | displayRender | 选择后展示的渲染函数,可使用slot="displayRender" 和 slot-scope="{labels, selectedOptions}" | `({labels, selectedOptions}) => vNode` | `labels => labels.join(' / ')` |
 | expandTrigger | 次级菜单的展开方式，可选 'click' 和 'hover' | string | 'click' |
@@ -27,7 +27,7 @@
 | showSearch | 在选择框中显示搜索框 | boolean | false |
 | size | 输入框大小，可选 `large` `default` `small` | string | `default` |
 | suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |
-| value(v-model) | 指定选中项 | string\[] | - |
+| value(v-model) | 指定选中项 | string\[] \| number\[] | - |
 
 `showSearch` 为对象时，其中的字段：
 

@@ -10,6 +10,14 @@
 
 ---
 
+## 1.3.6
+`2019-03-17`
+- 🐞 修复 `Select` title属性显示错乱问题 [#588](https://github.com/vueComponent/ant-design-vue/issues/588)
+- 🐞 修复 `InputSearch` 不支持 slot 方式自定义 addonAfter 和 addonBefore 问题 [#581](https://github.com/vueComponent/ant-design-vue/issues/581)
+- 🐞 修复 `Input` 重复 class 问题 [#faf9ba](https://github.com/vueComponent/ant-design-vue/commit/faf9ba0033eed9ae6ac17879f2e39dd341db847f)
+- 🐞 修复 `Message` 通过函数自定义 content 不生效问题 [#554](https://github.com/vueComponent/ant-design-vue/issues/554)
+- 🌟 `Cascader` 的 `option.value` 同时支持 `String` `Number` 类型 [#595](https://github.com/vueComponent/ant-design-vue/issues/595)
+- 🐞 修复 TypeScript 类型定义。
 
 ## 1.3.5
 `2019-02-23`

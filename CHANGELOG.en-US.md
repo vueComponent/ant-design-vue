@@ -10,6 +10,15 @@
 
 ---
 
+## 1.3.6
+`2019-03-17`
+- 🐞 Fix `Select` title attribute to display confusion [#588](https://github.com/vueComponent/ant-design-vue/issues/588)
+- 🐞 Fix `InputSearch` does not support slot mode customization addonAfter and addonBefore issues [#581](https://github.com/vueComponent/ant-design-vue/issues/581)
+- 🐞 Fix `Input` repeat class question [#faf9ba](https://github.com/vueComponent/ant-design-vue/commit/faf9ba0033eed9ae6ac17879f2e39dd341db847f)
+- 🐞 Fix `Message` Customize content by function does not work [#554](https://github.com/vueComponent/ant-design-vue/issues/554)
+- 🌟 `Cascader` `option.value` supports `String` `Number` type [#595](https://github.com/vueComponent/ant-design-vue/issues/595)
+- 🐞 Fix some TypeScript definitions.
+
 ## 1.3.5
 `2019-02-23`
 

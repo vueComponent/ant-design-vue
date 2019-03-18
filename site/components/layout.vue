@@ -4,6 +4,7 @@ import AllDemo from '../demo';
 import Header from './header';
 import Footer from './footer';
 import CarbonAds from './CarbonAds';
+import Geektime from './geektime';
 import Sponsors from './sponsors';
 import zhCN from 'antd/locale-provider/zh_CN';
 import enUS from 'antd/locale-provider/default';
@@ -303,6 +304,7 @@ export default {
           </div>
         </a-locale-provider>
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
+        <Geektime />
       </div>
     );
   },

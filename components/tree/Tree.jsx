@@ -129,7 +129,7 @@ export default {
         return <Icon type="caret-down" class={`${prefixCls}-switcher-icon`} theme="filled" />;
       }
     },
-    updataTreeData(treeData) {
+    updateTreeData(treeData) {
       const { $slots, $scopedSlots } = this;
       return treeData.map(item => {
         const {
@@ -159,7 +159,7 @@ export default {
           style,
         };
         if (children) {
-          return { ...treeNodeProps, children: this.updataTreeData(children) };
+          return { ...treeNodeProps, children: this.updateTreeData(children) };
         }
         return treeNodeProps;
       });
@@ -171,7 +171,7 @@ export default {
     const checkable = props.checkable;
     let treeData = props.treeData || treeNodes;
     if (treeData) {
-      treeData = this.updataTreeData(treeData);
+      treeData = this.updateTreeData(treeData);
     }
     const vcTreeProps = {
       props: {

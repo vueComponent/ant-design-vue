@@ -10,6 +10,10 @@
 
 ---
 
+## 1.3.7
+`2019-03-18`
+- 🐞 Fix `Select` `selectedKeys` type validation error [#597](https://github.com/vueComponent/ant-design-vue/issues/597)
+
 ## 1.3.6
 `2019-03-17`
 - 🐞 Fix `Select` title attribute to display confusion [#588](https://github.com/vueComponent/ant-design-vue/issues/588)

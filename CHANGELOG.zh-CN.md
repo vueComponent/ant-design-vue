@@ -10,6 +10,10 @@
 
 ---
 
+## 1.3.7
+`2019-03-18`
+- 🐞 修复 `Select` `selectedKeys` 类型校验错误 [#597](https://github.com/vueComponent/ant-design-vue/issues/597)
+
 ## 1.3.6
 `2019-03-17`
 - 🐞 修复 `Select` title属性显示错乱问题 [#588](https://github.com/vueComponent/ant-design-vue/issues/588)

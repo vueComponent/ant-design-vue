@@ -9,6 +9,7 @@
 | count | star count | number | 5 |
 | defaultValue | default value | number | 0 |
 | disabled | read only, unable to interact | boolean | false |
+| tooltips | Customize tooltip by each character | string\[] | - |
 | value(v-model) | current value | number | - |
 
 

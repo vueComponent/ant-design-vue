@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from 'classnames';
 import { getOptionProps, getAttrs } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 function noop() {}
 
@@ -12,7 +13,6 @@ export default {
   },
   props: {
     prefixCls: {
-      default: 'ant-radio',
       type: String,
     },
     defaultChecked: Boolean,
@@ -27,6 +27,7 @@ export default {
   },
   inject: {
     radioGroupContext: { default: undefined },
+    configProvider: { default: () => ({}) },
   },
   methods: {
     handleChange(event) {
@@ -47,7 +48,10 @@ export default {
     const props = getOptionProps(this);
     const children = $slots.default;
     const { mouseenter = noop, mouseleave = noop, ...restListeners } = $listeners;
-    const { prefixCls, ...restProps } = props;
+    const { prefixCls: customizePrefixCls, ...restProps } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('radio', customizePrefixCls);
+
     const radioProps = {
       props: { ...restProps, prefixCls },
       on: restListeners,

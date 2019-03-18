@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 function noop() {}
 
 export default {
@@ -11,7 +12,6 @@ export default {
   },
   props: {
     prefixCls: {
-      default: 'ant-radio',
       type: String,
     },
     defaultValue: PropTypes.any,
@@ -40,6 +40,9 @@ export default {
     return {
       radioGroupContext: this,
     };
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
   },
   computed: {
     radioOptions() {
@@ -79,7 +82,10 @@ export default {
   render() {
     const { mouseenter = noop, mouseleave = noop } = this.$listeners;
     const props = getOptionProps(this);
-    const { prefixCls, options, buttonStyle } = props;
+    const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('radio', customizePrefixCls);
+
     const groupPrefixCls = `${prefixCls}-group`;
     const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
       [`${groupPrefixCls}-${props.size}`]: props.size,

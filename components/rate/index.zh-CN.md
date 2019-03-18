@@ -9,6 +9,7 @@
 | count | star 总数 | number | 5 |
 | defaultValue | 默认值 | number | 0 |
 | disabled | 只读，无法进行交互 | boolean | false |
+| tooltips | 自定义每项的提示信息 | string\[] | - |
 | value(v-model) | 当前数，受控值 | number | - |
 
 ### 事件

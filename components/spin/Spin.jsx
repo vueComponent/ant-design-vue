@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import {
@@ -7,6 +8,7 @@ import {
   getComponentFromProp,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
 
@@ -40,56 +42,43 @@ export default {
   name: 'ASpin',
   mixins: [BaseMixin],
   props: initDefaultProps(SpinProps(), {
-    prefixCls: 'ant-spin',
     size: 'default',
     spinning: true,
     wrapperClassName: '',
   }),
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   data() {
     const { spinning, delay } = this;
-    this.debounceTimeout = null;
-    this.delayTimeout = null;
+    this.originalUpdateSpinning = this.updateSpinning;
+    this.debouncifyUpdateSpinning(this.$props);
     return {
       sSpinning: spinning && !shouldDelay(spinning, delay),
     };
   },
+  mounted() {
+    this.updateSpinning();
+  },
   updated() {
     this.$nextTick(() => {
-      const { delay, spinning, sSpinning } = this;
-      if (sSpinning === spinning) {
-        return;
-      }
-
-      if (this.debounceTimeout) {
-        clearTimeout(this.debounceTimeout);
-      }
-      if (sSpinning && !spinning) {
-        this.debounceTimeout = window.setTimeout(() => this.setState({ sSpinning: spinning }), 200);
-        if (this.delayTimeout) {
-          clearTimeout(this.delayTimeout);
-        }
-      } else {
-        if (shouldDelay(spinning, delay)) {
-          if (this.delayTimeout) {
-            clearTimeout(this.delayTimeout);
-          }
-          this.delayTimeout = window.setTimeout(this.delayUpdateSpinning, delay);
-        } else {
-          this.setState({ sSpinning: spinning });
-        }
-      }
+      this.debouncifyUpdateSpinning();
+      this.updateSpinning();
     });
   },
   beforeDestroy() {
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout);
+    if (this.updateSpinning && this.updateSpinning.cancel) {
+      this.updateSpinning.cancel();
     }
   },
   methods: {
-    delayUpdateSpinning() {
+    debouncifyUpdateSpinning(props) {
+      const { delay } = props || this.$props;
+      if(delay) {
+        this.updateSpinning = debounce(this.originalUpdateSpinning, delay);
+      }
+    },
+    updateSpinning() {
       const { spinning, sSpinning } = this;
       if (sSpinning !== spinning) {
         this.setState({ sSpinning: spinning });
@@ -101,9 +90,8 @@ export default {
       }
       return null;
     },
-    renderIndicator(h, props) {
+    renderIndicator(h, prefixCls) {
       // const h = this.$createElement
-      const { prefixCls } = props;
       const dotClassName = `${prefixCls}-dot`;
       let indicator = getComponentFromProp(this, 'indicator');
       if (Array.isArray(indicator)) {
@@ -129,7 +117,10 @@ export default {
     },
   },
   render(h) {
-    const { size, prefixCls, tip, wrapperClassName, ...restProps } = this.$props;
+    const { size, prefixCls: customizePrefixCls, tip, wrapperClassName, ...restProps } = this.$props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('spin', customizePrefixCls);
+
     const { sSpinning } = this;
     const spinClassName = {
       [prefixCls]: true,
@@ -141,7 +132,7 @@ export default {
 
     const spinElement = (
       <div {...restProps} class={spinClassName}>
-        {this.renderIndicator(h, this.$props)}
+        {this.renderIndicator(h, prefixCls)}
         {tip ? <div class={`${prefixCls}-text`}>{tip}</div> : null}
       </div>
     );

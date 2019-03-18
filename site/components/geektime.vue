@@ -1,7 +1,7 @@
 <template>
   <div id="geektime">
     <a
-      href="http://gk.link/a/102BE"
+      href="https://time.geekbang.org/course/intro/163?code=KHKYcoBU6vZa8nMglg7AWfDxxi3BWrz9INAzAY3umPk%3D"
       target="_blank"
     >
       <img

@@ -14,10 +14,10 @@
 ### Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | a callback function, can be executed when the checked state is changing | Function(checked:Boolean) |
+| change | trigger when the checked state is changing | Function(checked: boolean, event: Event) |  |
+| click | trigger when clicked | Function(checked: boolean, event: Event) |  |
 
 ## Methods
-
 | Name | Description |
 | ---- | ----------- |
 | blur() | remove focus |

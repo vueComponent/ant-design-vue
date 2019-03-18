@@ -12,9 +12,7 @@ const skeletonParagraphProps = {
 export const SkeletonParagraphProps = PropTypes.shape(skeletonParagraphProps);
 
 const Paragraph = {
-  props: initDefaultProps(skeletonParagraphProps, {
-    prefixCls: 'ant-skeleton-paragraph',
-  }),
+  props: skeletonParagraphProps,
   methods: {
     getWidth(index) {
       const { width, rows = 2 } = this;

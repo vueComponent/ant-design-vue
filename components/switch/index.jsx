@@ -3,6 +3,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 
 const Switch = {
   name: 'ASwitch',
@@ -11,7 +12,7 @@ const Switch = {
     event: 'change',
   },
   props: {
-    prefixCls: PropTypes.string.def('ant-switch'),
+    prefixCls: PropTypes.string,
     // size=default and size=large are the same
     size: PropTypes.oneOf(['small', 'default', 'large']),
     disabled: PropTypes.bool,
@@ -23,6 +24,9 @@ const Switch = {
     autoFocus: PropTypes.bool,
     loading: PropTypes.bool,
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   methods: {
     focus() {
       this.$refs.refSwitchNode.focus();
@@ -33,7 +37,10 @@ const Switch = {
   },
 
   render() {
-    const { prefixCls, size, loading, disabled, ...restProps } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('switch', customizePrefixCls);
+
     const classes = {
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,

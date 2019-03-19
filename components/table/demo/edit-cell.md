@@ -14,7 +14,7 @@ Table with editable cells.
     <a-button class="editable-add-btn" @click="handleAdd">Add</a-button>
     <a-table bordered :dataSource="dataSource" :columns="columns">
       <template slot="name" slot-scope="text, record">
-        <editable-cell :text="text" @change="onCellChange(record.key, 'name')"/>
+        <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)"/>
       </template>
       <template slot="operation" slot-scope="text, record">
         <a-popconfirm
@@ -69,15 +69,13 @@ export default {
     }
   },
   methods: {
-    onCellChange (key, dataIndex) {
-      return (value) => {
+    onCellChange (key, dataIndex, value) {
         const dataSource = [...this.dataSource]
         const target = dataSource.find(item => item.key === key)
         if (target) {
           target[dataIndex] = value
           this.dataSource = dataSource
         }
-      }
     },
     onDelete (key) {
       const dataSource = [...this.dataSource]

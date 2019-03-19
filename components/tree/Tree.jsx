@@ -1,3 +1,5 @@
+import _extends from 'babel-runtime/helpers/extends';
+import _objectWithoutProperties from 'babel-runtime/helpers/objectWithoutProperties';
 import warning from 'warning';
 import { Tree as VcTree, TreeNode } from '../vc-tree';
 import animation from '../_util/openAnimation';
@@ -27,13 +29,10 @@ function TreeProps() {
     /** （受控）展开指定的树节点 */
     expandedKeys: PropTypes.array,
     /** （受控）选中复选框的树节点 */
-    checkedKeys: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.shape({
-        checked: PropTypes.array,
-        halfChecked: PropTypes.array,
-      }).loose,
-    ]),
+    checkedKeys: PropTypes.oneOfType([PropTypes.array, PropTypes.shape({
+      checked: PropTypes.array,
+      halfChecked: PropTypes.array
+    }).loose]),
     /** 默认选中复选框的树节点 */
     defaultCheckedKeys: PropTypes.array,
     /** （受控）设置选中的树节点 */
@@ -78,6 +77,7 @@ function TreeProps() {
     openAnimation: PropTypes.any,
     treeNodes: PropTypes.array,
     treeData: PropTypes.array,
+    replaceFields:PropTypes.object
   };
 }
 
@@ -87,107 +87,129 @@ export default {
   name: 'ATree',
   model: {
     prop: 'checkedKeys',
-    event: 'check',
+    event: 'check'
   },
   props: initDefaultProps(TreeProps(), {
     prefixCls: 'ant-tree',
     checkable: false,
     showIcon: false,
+    replaceFields:{
+      children:'children',
+      title:'title',
+      key:'key'
+    },
     openAnimation: {
       on: animation,
-      props: { appear: null },
-    },
+      props: { appear: null }
+    }
   }),
-  created() {
-    warning(
-      !('treeNodes' in getOptionProps(this)),
-      '`treeNodes` is deprecated. please use treeData instead.',
-    );
+  created: function created() {
+    warning(!('treeNodes' in getOptionProps(this)), '`treeNodes` is deprecated. please use treeData instead.');
   },
-  TreeNode,
+
+  TreeNode: TreeNode,
   methods: {
-    renderSwitcherIcon({ isLeaf, expanded, loading }) {
-      const { prefixCls, showLine } = this.$props;
+    renderSwitcherIcon: function renderSwitcherIcon(_ref) {
+      var isLeaf = _ref.isLeaf,
+          expanded = _ref.expanded,
+          loading = _ref.loading;
+      var h = this.$createElement;
+      var _$props = this.$props,
+          prefixCls = _$props.prefixCls,
+          showLine = _$props.showLine;
+
       if (loading) {
-        return <Icon type="loading" class={`${prefixCls}-switcher-loading-icon`} />;
+        return h(Icon, {
+          attrs: { type: 'loading' },
+          'class': prefixCls + '-switcher-loading-icon' });
       }
       if (showLine) {
         if (isLeaf) {
-          return <Icon type="file" class={`${prefixCls}-switcher-line-icon`} />;
+          return h(Icon, {
+            attrs: { type: 'file' },
+            'class': prefixCls + '-switcher-line-icon' });
         }
-        return (
-          <Icon
-            type={expanded ? 'minus-square' : 'plus-square'}
-            class={`${prefixCls}-switcher-line-icon`}
-            theme="outlined"
-          />
-        );
+        return h(Icon, {
+          attrs: {
+            type: expanded ? 'minus-square' : 'plus-square',
+
+            theme: 'outlined'
+          },
+          'class': prefixCls + '-switcher-line-icon' });
       } else {
         if (isLeaf) {
           return null;
         }
-        return <Icon type="caret-down" class={`${prefixCls}-switcher-icon`} theme="filled" />;
+        return h(Icon, {
+          attrs: { type: 'caret-down', theme: 'filled' },
+          'class': prefixCls + '-switcher-icon' });
       }
     },
-    updateTreeData(treeData) {
-      const { $slots, $scopedSlots } = this;
-      return treeData.map(item => {
-        const {
-          children,
-          on = {},
-          slots = {},
-          scopedSlots = {},
-          key,
-          class: cls,
-          style,
-          ...restProps
-        } = item;
-        const treeNodeProps = {
-          ...restProps,
-          icon:
-            $slots[slots.icon] ||
-            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]) ||
-            restProps.icon,
-          title:
-            $slots[slots.title] ||
-            ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item)) ||
-            restProps.title,
+    updataTreeData: function updataTreeData(treeData) {
+      var _this = this;
+      var replaceFields = this.$props.replaceFields
+      var defalutFields = { children:'children', title:'title', key:'key' }
+      replaceFields = { ...defalutFields,  ...replaceFields }
+
+      var $slots = this.$slots,
+          $scopedSlots = this.$scopedSlots;
+
+      return treeData.map(function (item) {
+        var children = item[replaceFields.children],
+            _item$on = item.on,
+            on = _item$on === undefined ? {} : _item$on,
+            _item$slots = item.slots,
+            slots = _item$slots === undefined ? {} : _item$slots,
+            _item$scopedSlots = item.scopedSlots,
+            scopedSlots = _item$scopedSlots === undefined ? {} : _item$scopedSlots,
+            key = item[replaceFields.key],
+            cls = item['class'],
+            style = item.style,
+            restProps = _objectWithoutProperties(item, ['children', 'on', 'slots', 'scopedSlots', 'key', 'class', 'style']);
+
+        var treeNodeProps = _extends({}, restProps, {
+          icon: $slots[slots.icon] || $scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon] || restProps.icon,
+          title: $slots[slots.title] || $scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item) || restProps[replaceFields.title],
           dataRef: item,
-          on,
-          key,
-          class: cls,
-          style,
-        };
+          on: on,
+          key: key,
+          'class': cls,
+          style: style
+        });
         if (children) {
-          return { ...treeNodeProps, children: this.updateTreeData(children) };
+          return _extends({}, treeNodeProps, { children: _this.updataTreeData(children) });
         }
         return treeNodeProps;
       });
-    },
-  },
-  render() {
-    const props = getOptionProps(this);
-    const { prefixCls, showIcon, treeNodes } = props;
-    const checkable = props.checkable;
-    let treeData = props.treeData || treeNodes;
-    if (treeData) {
-      treeData = this.updateTreeData(treeData);
     }
-    const vcTreeProps = {
-      props: {
-        ...props,
-        checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
-        children: filterEmpty(this.$slots.default || []),
+  },
+  render: function render() {
+    var h = arguments[0];
+
+    var props = getOptionProps(this);
+    var prefixCls = props.prefixCls,
+        showIcon = props.showIcon,
+        treeNodes = props.treeNodes;
+
+    var checkable = props.checkable;
+    var treeData = props.treeData || treeNodes;
+    if (treeData) {
+      treeData = this.updataTreeData(treeData);
+    }
+    var vcTreeProps = {
+      props: _extends({}, props, {
+        checkable: checkable ? h('span', { 'class': prefixCls + '-checkbox-inner' }) : checkable,
+        children: filterEmpty(this.$slots['default'] || []),
         __propsSymbol__: Symbol(),
-        switcherIcon: this.renderSwitcherIcon,
-      },
+        switcherIcon: this.renderSwitcherIcon
+      }),
       on: this.$listeners,
       ref: 'tree',
-      class: !showIcon && `${prefixCls}-icon-hide`,
+      'class': !showIcon && prefixCls + '-icon-hide'
     };
     if (treeData) {
       vcTreeProps.props.treeData = treeData;
     }
-    return <VcTree {...vcTreeProps} />;
-  },
+    return h(VcTree, vcTreeProps);
+  }
 };

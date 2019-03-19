@@ -5,9 +5,9 @@
       target="_blank"
     >
       <img
-        width="160"
+        width="150"
         alt="Vue 实战教程"
-        src="https://cdn.nlark.com/yuque/0/2019/gif/87084/1552897186489-assets/web-upload/3ac01ea3-9c6f-4f23-b52e-d47dae5532d2.gif"
+        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1552980096914-assets/web-upload/ec3701d2-34ed-4274-b8f4-e0592e020db0.jpeg"
       >
     </a>
   </div>  
@@ -22,8 +22,8 @@ export default {
 <style lang="less">
   #geektime {
     position: fixed;
-    bottom: 6px;
-    right: 6px;
+    bottom: 15px;
+    right: 15px;
   }
 </style>
 

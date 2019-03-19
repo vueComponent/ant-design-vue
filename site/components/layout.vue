@@ -268,8 +268,7 @@ export default {
               }
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class='main-container main-container-component'>
-                  <CarbonAds isMobile={isMobile}/>
-                  {!isMobile ? <div class='toc-affix' style='width: 120px;'>
+                  {!isMobile ? <div class='toc-affix' style='width: 150px;'>
                     {this.getSubMenu(isCN)}
                   </div> : null}
                   {this.showDemo ? <Provider store={this.store} key={isCN ? 'cn' : 'en'}>

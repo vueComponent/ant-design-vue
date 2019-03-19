@@ -12,7 +12,7 @@
 | hideOnSinglePage | Whether to hide pager on single page | boolean | false |
 | itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode | - |
 | pageSize(.sync) | number of data items per page | number | - |
-| pageSizeOptions | specify the sizeChanger options | string\[] | ['10', '20', '30', '40'] |
+| pageSizeOptions | specify the sizeChanger options | string\[] | \['10', '20', '30', '40'] |
 | showQuickJumper | determine whether you can jump to pages directly | boolean | false |
 | showSizeChanger | determine whether `pageSize` can be changed | boolean | false |
 | showTotal | to display the total number and range | Function(total, range) | - |

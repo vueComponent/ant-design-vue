@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import omit from 'omit.js';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
+import { ConfigConsumerProps } from '../config-provider';
 
 import Spin from '../spin';
 import Pagination, { PaginationConfig } from '../pagination';
@@ -55,7 +56,6 @@ const List = {
   name: 'AList',
   props: initDefaultProps(ListProps(), {
     dataSource: [],
-    prefixCls: 'ant-list',
     bordered: false,
     split: true,
     loading: false,
@@ -65,6 +65,9 @@ const List = {
     return {
       listContext: this,
     };
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
   },
   data() {
     this.keys = [];
@@ -86,15 +89,15 @@ const List = {
   },
   methods: {
     renderItem2(item, index) {
-      const { dataSource, $scopedSlots, rowKey } = this;
+      const { $scopedSlots, rowKey } = this;
       let key;
       const renderItem = this.renderItem || $scopedSlots.renderItem;
       if (typeof rowKey === 'function') {
-        key = rowKey(dataSource[index]);
+        key = rowKey(item);
       } else if (typeof rowKey === 'string') {
-        key = dataSource[rowKey];
+        key = item[rowKey];
       } else {
-        key = dataSource.key;
+        key = item.key;
       }
 
       if (!key) {
@@ -113,19 +116,23 @@ const List = {
       return !!(loadMore || pagination || footer);
     },
 
-    renderEmpty(contextLocale) {
-      const locale = { ...contextLocale, ...this.locale };
-      return <div class={`${this.prefixCls}-empty-text`}>{locale.emptyText}</div>;
+    renderEmpty(prefixCls, renderEmpty) {
+      const locale = this;
+      return (
+        <div class={`${prefixCls}-empty-text`}>
+        {(locale && locale.emptyText) || renderEmpty(h, 'List')}
+        </div>
+      );
     },
   },
 
   render() {
     const {
+      prefixCls: customizePrefixCls,
       bordered,
       split,
       itemLayout,
       pagination,
-      prefixCls,
       grid,
       dataSource,
       size,
@@ -134,6 +141,9 @@ const List = {
       $slots,
       paginationCurrent,
     } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('list', customizePrefixCls);
+
     const loadMore = getComponentFromProp(this, 'loadMore');
     const footer = getComponentFromProp(this, 'footer');
     const header = getComponentFromProp(this, 'header');
@@ -214,13 +224,11 @@ const List = {
 
       childrenContent = grid ? <Row gutter={grid.gutter}>{childrenList}</Row> : childrenList;
     } else if (!children.length && !isLoading) {
-      childrenContent = (
-        <LocaleReceiver
-          componentName="Table"
-          defaultLocale={defaultLocale.Table}
-          scopedSlots={{ default: this.renderEmpty }}
-        />
-      );
+      const renderEmpty = (
+        this.configProvider.renderEmpty &&
+        this.configProvider.renderEmpty()
+      ) || ConfigConsumerProps.renderEmpty;
+      childrenContent = this.renderEmpty(prefixCls, renderEmpty);
     }
     const paginationPosition = paginationProps.position || 'bottom';
 

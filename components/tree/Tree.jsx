@@ -77,6 +77,10 @@ function TreeProps() {
     openAnimation: PropTypes.any,
     treeNodes: PropTypes.array,
     treeData: PropTypes.array,
+    /**
+     * @default{title,key,children}
+     * 替换treeNode中 title,key,children字段为本地数据中对应的字段
+     */
     replaceFields:PropTypes.object
   };
 }

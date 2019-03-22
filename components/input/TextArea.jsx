@@ -173,11 +173,10 @@ export default {
     return (
       <textarea
         {...textareaProps}
-        value={stateValue}
         class={getTextAreaClassName()}
         style={textareaStyles}
         ref="textArea"
-      />
+      >{{ stateValue }}</textarea>
     );
   },
 };

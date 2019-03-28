@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import uniqBy from 'lodash/uniqBy';
+import findIndex from 'lodash/findIndex';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, hasProp } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
+import { ConfigConsumerProps } from '../config-provider';
 import Dragger from './Dragger';
 import UploadList from './UploadList';
 import { UploadProps } from './interface';
@@ -18,7 +20,6 @@ export default {
   inheritAttrs: false,
   Dragger: Dragger,
   props: initDefaultProps(UploadProps, {
-    prefixCls: 'ant-upload',
     type: 'select',
     multiple: false,
     action: '',
@@ -30,6 +31,9 @@ export default {
     disabled: false,
     supportServerRender: true,
   }),
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   // recentUploadStatus: boolean | PromiseLike<any>;
   data() {
     this.progressTimer = null;
@@ -51,7 +55,7 @@ export default {
       const targetItem = fileToObject(file);
       targetItem.status = 'uploading';
       const nextFileList = this.sFileList.concat();
-      const fileIndex = nextFileList.findIndex(({ uid }) => uid === targetItem.uid);
+      const fileIndex = findIndex(nextFileList, ({ uid }) => uid === targetItem.uid);
       if (fileIndex === -1) {
         nextFileList.push(targetItem);
       } else {
@@ -134,9 +138,13 @@ export default {
     },
     handleRemove(file) {
       const { remove } = getOptionProps(this);
+      const { status } = file;
+      file.status = 'removed'; // eslint-disable-line
+
       Promise.resolve(typeof remove === 'function' ? remove(file) : remove).then(ret => {
         // Prevent removing file
         if (ret === false) {
+          file.status = status;
           return;
         }
 
@@ -150,8 +158,9 @@ export default {
       });
     },
     handleManualRemove(file) {
-      this.$refs.uploadRef.abort(file);
-      file.status = 'removed'; // eslint-disable-line
+      if(this.$refs.uploadRef) {
+        this.$refs.uploadRef.abort(file);
+      }
       this.handleRemove(file);
     },
     onChange(info) {
@@ -176,7 +185,8 @@ export default {
           fileList: uniqBy(this.sFileList.concat(fileList.map(fileToObject)), item => item.uid),
         });
         return false;
-      } else if (result && result.then) {
+      }
+      if (result && result.then) {
         return result;
       }
       return true;
@@ -206,7 +216,10 @@ export default {
     },
   },
   render() {
-    const { prefixCls = '', showUploadList, listType, type, disabled } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, showUploadList, listType, type, disabled } = getOptionProps(this);
+
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
     const vcUploadProps = {
       props: {
@@ -264,8 +277,15 @@ export default {
       [`${prefixCls}-select-${listType}`]: true,
       [`${prefixCls}-disabled`]: disabled,
     });
+
+    // Remove id to avoid open by label when trigger is hidden
+    // https://github.com/ant-design/ant-design/issues/14298
+    if (!children) {
+      delete vcUploadProps.props.id;
+    }
+
     const uploadButton = (
-      <div class={uploadButtonCls} style={{ display: children ? '' : 'none' }}>
+      <div class={uploadButtonCls} style={children ? undefined : { display: 'none' }}>
         <VcUpload {...vcUploadProps}>{children}</VcUpload>
       </div>
     );

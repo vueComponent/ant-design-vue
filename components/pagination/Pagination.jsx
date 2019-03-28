@@ -17,7 +17,7 @@ export const PaginationProps = () => ({
   pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   buildOptionText: PropTypes.func,
   showSizeChange: PropTypes.func,
-  showQuickJumper: PropTypes.bool,
+  showQuickJumper: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.object])),
   showTotal: PropTypes.any,
   size: PropTypes.string,
   simple: PropTypes.bool,

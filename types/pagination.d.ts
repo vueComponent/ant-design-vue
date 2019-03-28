@@ -65,7 +65,7 @@ export declare class Pagination extends AntdComponent {
    * @default false
    * @type boolean
    */
-  showQuickJumper: boolean;
+  showQuickJumper: boolean | { goButton?: VNode };
 
   /**
    * to display the total number and range

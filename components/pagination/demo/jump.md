@@ -10,10 +10,21 @@ Jump to a page directly.
 
 ```html
 <template>
-  <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
+  <div id="components-pagination-demo-mini">
+    <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
+    <a-pagination :locale="locale" :showQuickJumper="goButton" :defaultCurrent="2" :total="500" @change="onChange" />
+  </div>
 </template>
 <script>
   export default {
+    data() {
+      const goButton = { goButton: <a-button>跳转</a-button> };
+      const locale = { jump_to: '向第' };
+      return {
+        locale,
+        goButton,
+      }
+    },
     methods: {
       onChange(pageNumber) {
         console.log('Page: ', pageNumber);
@@ -21,4 +32,11 @@ Jump to a page directly.
     }
   }
 </script>
+<style scoped>
+#components-pagination-demo-mini .ant-pagination:not(:last-child) {
+  margin-bottom: 24px;
+}
+</style>
 ```
+
+

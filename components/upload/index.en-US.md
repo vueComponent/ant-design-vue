@@ -28,6 +28,7 @@
 | --- | --- | --- |
 | change | A callback function, can be executed when uploading state is changing. See [change](#change) | Function | - |
 | preview | A callback function, will be executed when file link or preview icon is clicked. | Function(file) | - |
+| reject | A callback function, will be executed when drop files is not accept. | Function(fileList) | - |
 
 
 ### change

@@ -205,13 +205,13 @@ export interface WrappedFormUtils {
    * Get the specified fields' error. If you don't specify a parameter, you will get all fields' error.
    * @type Function (Function([names: string[]))
    */
-  getFieldsError(names: string[]): object;
+  getFieldsError(names?: string[]): object;
 
   /**
    * Get the specified fields' values. If you don't specify a parameter, you will get all fields' values.
    * @type Funtion (Function([fieldNames: string[]))
    */
-  getFieldsValue(fieldNames: string[]): object;
+  getFieldsValue(fieldNames?: string[]): object;
 
   /**
    * Get the value of a field.

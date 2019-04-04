@@ -15,7 +15,8 @@
 | width | 宽度 | string \| number | 256 |
 | height | 高度, 在 `placement` 为 `top` 或 `bottom` 时使用 | string \| number | 256 |
 | zIndex | 设置 Drawer 的 `z-index` | Number | 1000 |
-| placement | 抽屉的方向 | 'top'  \| 'right' \| 'bottom' \| 'left' | 'right'
+| placement | 抽屉的方向 | 'top'  \| 'right' \| 'bottom' \| 'left' | 'right'|
+| handle | 设置后抽屉直接挂载到DOM上，你可以通过该handle控制抽屉打开关闭 | VNode \| slot | - |
 
 ## 方法
 

@@ -8,6 +8,9 @@ import createFormField from '../vc-form/src/createFormField';
 import FormItem from './FormItem';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import { initDefaultProps } from '../_util/props-util';
+import Row from '../grid/Row';
+import Col from '../grid/Col';
+import Input from '../input';
 
 export const FormCreateOption = {
   onFieldsChange: PropTypes.func,
@@ -57,6 +60,25 @@ export const WrappedFormUtils = {
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
   form: PropTypes.object,
+  col: PropTypes.object,
+  row: PropTypes.object,
+  /** 为输入控件设置统一布局 labelCol 会被item上的labelCol覆盖 */
+  labelCol: PropTypes.object,
+  /** 为输入控件设置统一布局 wrapperCol 会被item上的wrapperCol覆盖 */
+  wrapperCol: PropTypes.object,
+  /**
+   * field string 传递给输入控件的id
+   * el(form)=>VNode | VNode 当需要其他的输入控件时
+   * col 行布局
+   * placeholder 传递给默认输入控件
+   * otherElProps {getFieldDecorator(field,omit(options,[rules,initialValue])}
+   * 其他需要的参数  formItem的props 和 传递给输入控件的rules,initialValue
+   *@description 表单项FormItem的配置描述
+   *
+   */
+  formItems: PropTypes.array,
+  /** 设置输入控件的初始值 {[field]:any} */
+  initialValues: PropTypes.object,
   // onSubmit: React.FormEventHandler<any>;
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.bool,
@@ -192,6 +214,34 @@ const Form = {
         this.$emit('submit', e);
       }
     },
+    renderItem() {
+      const { initialValues, form } = this;
+      return this.formItems.map(item => {
+        let { field, el, col, initialValue, placeholder, rules, otherElProps, ...restProps } = item;
+        let elm = <a-input placeholder={placeholder} />;
+        if (el) {
+          elm = typeof el === 'function' ? el(form) : el;
+        }
+        if (field) {
+          typeof rules === 'function' && (rules = rules(form));
+          elm = form.getFieldDecorator(field, {
+            rules,
+            initialValue: (initialValues || {})[field] || initialValue,
+            ...otherElProps,
+          })(elm);
+        }
+        let itemProps = {
+          labelCol: this.labelCol,
+          wrapperCol: this.wrapperCol,
+          ...restProps,
+        };
+        return (
+          <Col {...{ props: col | this.col }}>
+            <FormItem {...{ props: itemProps }}>{elm}</FormItem>
+          </Col>
+        );
+      });
+    },
   },
 
   render() {
@@ -201,6 +251,7 @@ const Form = {
       layout,
       onSubmit,
       $slots,
+      formItems,
       autoFormCreate,
       options = {},
     } = this;
@@ -262,9 +313,11 @@ const Form = {
       );
     }
     return (
-      <form onSubmit={onSubmit} class={formClassName}>
-        {$slots.default}
-      </form>
+      <Row {...{ props: this.row }}>
+        <form onSubmit={onSubmit} class={formClassName}>
+          {formItems ? this.renderItem() : $slots.default}
+        </form>
+      </Row>
     );
   },
 };

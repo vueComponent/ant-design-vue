@@ -299,8 +299,9 @@ export default {
     },
 
     renderWrapper(children) {
-      const { prefixCls, wrapperCol = {} } = this;
-      const { class: cls, style, id, on, ...restProps } = wrapperCol;
+      const { prefixCls, wrapperCol } = this;
+      const { class: cls, style, id, on, ...restProps } =
+        wrapperCol || this.FormProps.wrapperCol || {};
       const className = classNames(`${prefixCls}-item-control-wrapper`, cls);
       const colProps = {
         props: restProps,
@@ -354,16 +355,11 @@ export default {
     },
 
     renderLabel() {
-      const { prefixCls, labelCol = {}, colon, id } = this;
+      const { prefixCls, labelCol, colon, id } = this;
       const label = getComponentFromProp(this, 'label');
       const required = this.isRequired();
-      const {
-        class: labelColClass,
-        style: labelColStyle,
-        id: labelColId,
-        on,
-        ...restProps
-      } = labelCol;
+      const { class: labelColClass, style: labelColStyle, id: labelColId, on, ...restProps } =
+        labelCol || this.FormProps.labelCol || {};
       const labelColClassName = classNames(`${prefixCls}-item-label`, labelColClass);
       const labelClassName = classNames({
         [`${prefixCls}-item-required`]: required,
@@ -446,9 +442,12 @@ export default {
             cloneVNodes(vnode.componentOptions.children),
           );
         }
-        const option = this.decoratorOption(vnode);
-        if (option && option[0]) {
-          vnodes[i] = getFieldDecorator(option[0], option[1])(vnode);
+        if (!this.FormProps.formItems) {
+          //如果form组件传入formTtems 则不用进行getFieldDecorator
+          const option = this.decoratorOption(vnode);
+          if (option && option[0]) {
+            vnodes[i] = getFieldDecorator(option[0], option[1])(vnode);
+          }
         }
       }
       return vnodes;

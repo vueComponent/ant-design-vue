@@ -2,7 +2,9 @@
 import AdvancedSearch from './advanced-search';
 import AdvancedSearchString from '!raw-loader!./advanced-search';
 import Coordinated from './coordinated';
+import Feature from './feature';
 import CoordinatedString from '!raw-loader!./coordinated';
+import FeatureString from '!raw-loader!./feature';
 import CustomizedFormControls from './customized-form-controls';
 import CustomizedFormControlsString from '!raw-loader!./customized-form-controls';
 import DynamicFormItem from './dynamic-form-item';
@@ -54,7 +56,7 @@ const md = {
 这里我们封装了表单域 \`<Form.Item />\` 。
 
 
- ## 注意： 
+ ## 注意：
 1、如果使用 \`Form.create\` 处理表单使其具有自动收集数据并校验的功能，建议使用\`jsx\`。
 2、如果不是使用Vue.use(Form)形式注册的\`Form\`组件，你需要自行将\`$form\`挂载到Vue原型上。
 \`Vue.prototype.$form = Form\`
@@ -100,6 +102,9 @@ export default {
         <md cn={md.cn} us={md.us} />
         <demo-container code={CoordinatedString}>
           <Coordinated />
+        </demo-container>
+        <demo-container code={FeatureString}>
+          <Feature />
         </demo-container>
         <demo-container code={DynamicRuleString}>
           <DynamicRule />

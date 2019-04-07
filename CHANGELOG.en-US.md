@@ -10,6 +10,38 @@
 
 ---
 
+## 1.3.8
+`2019-04-04`
+- 🐞 Fix `Table` unclickable problem under IE [#504](https://github.com/vueComponent/ant-design-vue/issues/504)
+- 🐞 Fix `Table` Header is not aligned under Firefox [#579](https://github.com/vueComponent/ant-design-vue/issues/579)
+- 🌟 Drawer `Drawer` add custom `handel` 
+- 🐞 Fix TypeScript type definitions.
+
+## 1.3.7
+`2019-03-18`
+- 🐞 Fix `Select` `selectedKeys` type validation error [#597](https://github.com/vueComponent/ant-design-vue/issues/597)
+
+## 1.3.6
+`2019-03-17`
+- 🐞 Fix `Select` title attribute to display confusion [#588](https://github.com/vueComponent/ant-design-vue/issues/588)
+- 🐞 Fix `InputSearch` does not support slot mode customization addonAfter and addonBefore issues [#581](https://github.com/vueComponent/ant-design-vue/issues/581)
+- 🐞 Fix `Input` repeat class question [#faf9ba](https://github.com/vueComponent/ant-design-vue/commit/faf9ba0033eed9ae6ac17879f2e39dd341db847f)
+- 🐞 Fix `Message` Customize content by function does not work [#554](https://github.com/vueComponent/ant-design-vue/issues/554)
+- 🌟 `Cascader` `option.value` supports `String` `Number` type [#595](https://github.com/vueComponent/ant-design-vue/issues/595)
+- 🐞 Fix some TypeScript definitions.
+
+## 1.3.5
+`2019-02-23`
+
+- 🌟 Optimize the `Popover` `Popconfirm` component arrow style.
+- 🐞 Fix using autoprefixer 9.4.5 in postcss (vue-cli) will throw an error `Replace text-decoration-skip: ink to text-decoration-skip-ink: auto, because spec had been changed`. [#471](https://github.com/vueComponent/ant-design-vue/pull/471)
+- Tree
+  - 🐞 Fixed growing space of Tree nodes.[#502](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 🐞 Fixing the `Tree` node can't drag and drop the target node problem.[#469](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 📝 Update the document: `Tree` component `dragxxx` event changed to all lowercase.[#467](https://github.com/vueComponent/ant-design-vue/issues/467)
+- 🐞 Fix `Modal.confirm` `class` does not work.[#475](https://github.com/vueComponent/ant-design-vue/pull/475)
+- 🐞 Fix some TypeScript definitions.
+
 ## 1.3.4
 `2019-01-31`
 

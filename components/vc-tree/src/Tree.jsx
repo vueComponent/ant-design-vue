@@ -323,7 +323,7 @@ const Tree = {
         if (dropPosition === _dropPosition) return;
 
         this.setState({
-          _dropPosition,
+          _dropPosition: dropPosition,
         });
       }
       this.__emit('dragover', { event, node });

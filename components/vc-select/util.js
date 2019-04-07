@@ -9,7 +9,7 @@ import { cloneVNodes } from '../_util/vnode';
 
 export function toTitle(title) {
   if (typeof title === 'string') {
-    return title;
+    return title.trim();
   }
   return '';
 }

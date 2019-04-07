@@ -1,7 +1,6 @@
 <template functional>
   <a-sub-menu
-    :key="data.key"
-    v-on="listeners"
+    :key="props.menuInfo.key"
   >
     <span slot="title">
       <a-icon type="mail" /><span>{{ props.menuInfo.title }}</span>

@@ -10,6 +10,38 @@
 
 ---
 
+## 1.3.8
+`2019-04-04`
+- 🐞 修复 `Table` 在 IE 下不可点击问题 [#504](https://github.com/vueComponent/ant-design-vue/issues/504)
+- 🐞 修复 `Table` 在 Firefox 下 Header 没对齐问题 [#579](https://github.com/vueComponent/ant-design-vue/issues/579)
+- 🌟 抽屉 `Drawer` 添加自定义 `handel` 功能
+- 🐞 修复 TypeScript 类型定义。
+
+## 1.3.7
+`2019-03-18`
+- 🐞 修复 `Select` `selectedKeys` 类型校验错误 [#597](https://github.com/vueComponent/ant-design-vue/issues/597)
+
+## 1.3.6
+`2019-03-17`
+- 🐞 修复 `Select` title属性显示错乱问题 [#588](https://github.com/vueComponent/ant-design-vue/issues/588)
+- 🐞 修复 `InputSearch` 不支持 slot 方式自定义 addonAfter 和 addonBefore 问题 [#581](https://github.com/vueComponent/ant-design-vue/issues/581)
+- 🐞 修复 `Input` 重复 class 问题 [#faf9ba](https://github.com/vueComponent/ant-design-vue/commit/faf9ba0033eed9ae6ac17879f2e39dd341db847f)
+- 🐞 修复 `Message` 通过函数自定义 content 不生效问题 [#554](https://github.com/vueComponent/ant-design-vue/issues/554)
+- 🌟 `Cascader` 的 `option.value` 同时支持 `String` `Number` 类型 [#595](https://github.com/vueComponent/ant-design-vue/issues/595)
+- 🐞 修复 TypeScript 类型定义。
+
+## 1.3.5
+`2019-02-23`
+
+- 🌟 优化 `Popover` `Popconfirm` 组件箭头样式。
+- 🐞 修复在 postcss（vue-cli）中使用 autoprefixer 9.4.5 会抛出错误 `Replace text-decoration-skip: ink to text-decoration-skip-ink: auto, because spec had been changed` 的问题。[#471](https://github.com/vueComponent/ant-design-vue/pull/471)
+- Tree
+  - 🐞 修复 Tree 节点内底部边距叠加的问题。[#502](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 🐞 修复 `Tree` 结点无法拖拽插入目标结点问题。[#469](https://github.com/vueComponent/ant-design-vue/issues/502)
+  - 📝 更新文档：`Tree` 组件 `dragxxx` 事件改成全小写。[#467](https://github.com/vueComponent/ant-design-vue/issues/467)
+- 🐞 修复 `Modal.confirm` `class` 不生效问题。[#475](https://github.com/vueComponent/ant-design-vue/pull/475)
+- 🐞 修复 TypeScript 类型定义。
+
 ## 1.3.4
 `2019-01-31`
 

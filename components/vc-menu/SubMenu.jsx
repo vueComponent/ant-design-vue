@@ -48,7 +48,6 @@ const SubMenu = {
     triggerSubMenuAction: PropTypes.string,
     popupClassName: PropTypes.string,
     getPopupContainer: PropTypes.func,
-    test: PropTypes.any,
     forceSubMenuRender: PropTypes.bool,
     openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     disabled: PropTypes.bool,

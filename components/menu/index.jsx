@@ -21,7 +21,7 @@ export const menuProps = {
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   mode: MenuMode.def('vertical'),
   selectable: PropTypes.bool,
-  selectedKeys: PropTypes.arrayOf(PropTypes.string),
+  selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   defaultSelectedKeys: PropTypes.array,
   openKeys: PropTypes.array,
   defaultOpenKeys: PropTypes.array,

@@ -4,6 +4,7 @@ import AllDemo from '../demo';
 import Header from './header';
 import Footer from './footer';
 import CarbonAds from './CarbonAds';
+import Geektime from './geektime';
 import Sponsors from './sponsors';
 import zhCN from 'antd/locale-provider/zh_CN';
 import enUS from 'antd/locale-provider/default';
@@ -268,7 +269,7 @@ export default {
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class='main-container main-container-component'>
                   <CarbonAds isMobile={isMobile}/>
-                  {!isMobile ? <div class='toc-affix' style='width: 120px;'>
+                  {!isMobile ? <div class='toc-affix' style='width: 150px;'>
                     {this.getSubMenu(isCN)}
                   </div> : null}
                   {this.showDemo ? <Provider store={this.store} key={isCN ? 'cn' : 'en'}>
@@ -303,6 +304,7 @@ export default {
           </div>
         </a-locale-provider>
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
+        <Geektime />
       </div>
     );
   },

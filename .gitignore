@@ -62,7 +62,7 @@ typings/
 dist
 lib
 es
-site-dist
+_site
 yarn.lock
 package-lock.json
 /coverage

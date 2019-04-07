@@ -32,11 +32,11 @@
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | check | 点击复选框触发 | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) |
-| dragEnd | dragend 触发时调用 | function({event, node}) |
-| dragEnter | dragenter 触发时调用 | function({event, node, expandedKeys}) |
-| dragLeave | dragleave 触发时调用 | function({event, node}) |
-| dragOver | dragover 触发时调用 | function({event, node}) |
-| dragStart | 开始拖拽时调用 | function({event, node}) |
+| dragend | dragend 触发时调用 | function({event, node}) |
+| dragenter | dragenter 触发时调用 | function({event, node, expandedKeys}) |
+| dragleave | dragleave 触发时调用 | function({event, node}) |
+| dragover | dragover 触发时调用 | function({event, node}) |
+| dragstart | 开始拖拽时调用 | function({event, node}) |
 | drop | drop 触发时调用 | function({event, node, dragNode, dragNodesKeys}) |
 | expand | 展开/收起节点时触发 | function(expandedKeys, {expanded: bool, node}) |
 | load | 节点加载完毕时触发 | function(loadedKeys, {event, node}) |

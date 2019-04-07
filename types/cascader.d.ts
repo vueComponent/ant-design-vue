@@ -6,11 +6,11 @@ import { AntdComponent } from './component';
 import { VNode } from 'vue';
 
 export interface CascaderOptionType {
-  value?: string;
+  value?: string | number;
   label?: any;
   disabled?: boolean;
   children?: any;
-  key?: string;
+  key?: string | number;
 }
 
 export interface ShowSearchType {
@@ -70,9 +70,9 @@ export declare class Cascader extends AntdComponent {
 
   /**
    * initial selected value
-   * @type string[]
+   * @type Array<string | number>
    */
-  defaultValue: string[];
+  defaultValue: Array<string | number>;
 
   /**
    * Whether disabled select
@@ -193,9 +193,9 @@ export declare class Cascader extends AntdComponent {
 
   /**
    * selected value
-   * @type string[]
+   * @type Array<string | number>
    */
-  value: string[];
+  value: Array<string | number>;
 
   /**
    * remove focus

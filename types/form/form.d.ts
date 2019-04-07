@@ -186,6 +186,8 @@ declare interface FieldDecoratorOptions {
   preserve?: boolean;
 }
 
+export type ValidateCallback = (errors: Error[], values: any) => void;
+
 export interface WrappedFormUtils {
   /**
    * Two-way binding for form, single file template can be bound using the directive v-decorator.
@@ -203,13 +205,13 @@ export interface WrappedFormUtils {
    * Get the specified fields' error. If you don't specify a parameter, you will get all fields' error.
    * @type Function (Function([names: string[]))
    */
-  getFieldsError(names: string[]): object;
+  getFieldsError(names?: string[]): object;
 
   /**
    * Get the specified fields' values. If you don't specify a parameter, you will get all fields' values.
    * @type Funtion (Function([fieldNames: string[]))
    */
-  getFieldsValue(fieldNames: string[]): object;
+  getFieldsValue(fieldNames?: string[]): object;
 
   /**
    * Get the value of a field.
@@ -240,7 +242,7 @@ export interface WrappedFormUtils {
    * If you don't specify a parameter, all the fields will be reset.
    * @type Function (Function([names: string[]]))
    */
-  resetFields(names: string[]): void;
+  resetFields(names?: string[]): void;
 
   /**
    * Set value and error state of fields
@@ -262,8 +264,12 @@ export interface WrappedFormUtils {
   validateFields(
     fieldNames: string[],
     options: ValidateFieldOptions,
-    callback: (erros: Error[], values: any) => any,
+    callback: ValidateCallback,
   ): void;
+  validateFields(fieldNames: string[], callback: ValidateCallback): void;
+  validateFields(options: ValidateFieldOptions, callback: ValidateCallback): void;
+  validateFields(callback: ValidateCallback): void;
+  validateFields(): void;
 
   /**
    * This function is similar to validateFields, but after validation, if the target field is not in visible area of form,
@@ -271,10 +277,14 @@ export interface WrappedFormUtils {
    * @type Function
    */
   validateFieldsAndScroll(
-    fieldNames: string[],
-    options: ValidateFieldOptions,
-    callback: (erros: Error[], values: any) => any,
+    fieldNames?: string[],
+    options?: Object,
+    callback?: ValidateCallback,
   ): void;
+  validateFieldsAndScroll(fieldNames?: string[], callback?: ValidateCallback): void;
+  validateFieldsAndScroll(options?: Object, callback?: ValidateCallback): void;
+  validateFieldsAndScroll(callback?: ValidateCallback): void;
+  validateFieldsAndScroll(): void;
 }
 
 export interface IformCreateOption {

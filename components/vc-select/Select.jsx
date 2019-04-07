@@ -1074,14 +1074,12 @@ const Select = {
 
         value.forEach(singleValue => {
           const key = singleValue;
+          const attrs = {
+            ...UNSELECTABLE_ATTRIBUTE,
+            role: 'option',
+          };
           const menuItem = (
-            <MenuItem
-              style={UNSELECTABLE_STYLE}
-              {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
-              value={key}
-              key={key}
-              role="option"
-            >
+            <MenuItem style={UNSELECTABLE_STYLE} {...{ attrs }} value={key} key={key}>
               {key}
             </MenuItem>
           );
@@ -1298,15 +1296,18 @@ const Select = {
                 ? maxTagPlaceholder(omittedValues)
                 : maxTagPlaceholder;
           }
+          const attrs = {
+            ...UNSELECTABLE_ATTRIBUTE,
+            role: 'presentation',
+            title: toTitle(content),
+          };
           maxTagPlaceholderEl = (
             <li
               style={UNSELECTABLE_STYLE}
-              {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
-              role="presentation"
+              {...{ attrs }}
               onMousedown={preventDefaultEvent}
               class={`${prefixCls}-selection__choice ${prefixCls}-selection__choice__disabled`}
               key="maxTagPlaceholder"
-              title={toTitle(content)}
             >
               <div class={`${prefixCls}-selection__choice__content`}>{content}</div>
             </li>
@@ -1328,15 +1329,19 @@ const Select = {
             const choiceClassName = disabled
               ? `${prefixCls}-selection__choice ${prefixCls}-selection__choice__disabled`
               : `${prefixCls}-selection__choice`;
+            // attrs 放在一起，避免动态title混乱问题，很奇怪的问题 https://github.com/vueComponent/ant-design-vue/issues/588
+            const attrs = {
+              ...UNSELECTABLE_ATTRIBUTE,
+              role: 'presentation',
+              title: toTitle(title),
+            };
             return (
               <li
                 style={UNSELECTABLE_STYLE}
-                {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
+                {...{ attrs }}
                 onMousedown={preventDefaultEvent}
                 class={choiceClassName}
-                role="presentation"
                 key={singleValue || SELECT_EMPTY_VALUE_KEY}
-                title={toTitle(title)}
               >
                 <div class={`${prefixCls}-selection__choice__content`}>{content}</div>
                 {disabled ? null : (

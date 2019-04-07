@@ -15,11 +15,21 @@ const md = {
           按钮用于开始一个即时操作。
           ## 何时使用
           标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。
+          ## 组件注册
+          \`\`\`js
+          import { Button } from 'ant-design-vue';
+          Vue.use(Button);
+          \`\`\`
           ## 代码演示`,
   us: `# Button
           To trigger an operation.
           ## When To Use
           A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
+          ## Component Registration
+          \`\`\`js
+          import { Button } from 'ant-design-vue';
+          Vue.use(Button);
+          \`\`\`
           ## Examples
           `,
 };

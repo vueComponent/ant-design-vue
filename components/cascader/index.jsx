@@ -22,11 +22,11 @@ import warning from '../_util/warning';
 import { ConfigConsumerProps } from '../config-provider';
 
 const CascaderOptionType = PropTypes.shape({
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.any,
   disabled: PropTypes.bool,
   children: PropTypes.array,
-  key: PropTypes.string,
+  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }).loose;
 
 const FieldNamesType = PropTypes.shape({
@@ -50,9 +50,9 @@ const CascaderProps = {
   /** 可选项数据源 */
   options: PropTypes.arrayOf(CascaderOptionType).def([]),
   /** 默认的选中项 */
-  defaultValue: PropTypes.arrayOf(PropTypes.string),
+  defaultValue: PropTypes.array,
   /** 指定选中项 */
-  value: PropTypes.arrayOf(PropTypes.string),
+  value: PropTypes.array,
   /** 选择完成后的回调 */
   // onChange?: (value: string[], selectedOptions?: CascaderOptionType[]) => void;
   /** 选择后展示的渲染函数 */

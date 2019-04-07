@@ -408,8 +408,8 @@ const Drawer = {
             <i class="drawer-handle-icon" />
           </div>
         );
-        const { handler: handlerSlot } = this.$slots;
-        const handlerSlotVnode = handlerSlot || handlerDefalut;
+        const { handler: handlerSlot } = this;
+        const handlerSlotVnode = (handlerSlot && handlerSlot[0]) || handlerDefalut;
         const { click: handleIconClick } = getEvents(handlerSlotVnode);
         handlerChildren = cloneElement(handlerSlotVnode, {
           on: {

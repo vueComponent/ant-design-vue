@@ -6,7 +6,7 @@ const carbonUrls = {
   'ant-design-vue.gitee.io':'//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=antdesignvuegiteeio',
   'vue.ant.design': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vueantdesign',
 };
-const carbonUrl = carbonUrls[location.host] || '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio';
+const carbonUrl = carbonUrls[location.host] || '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vueantdesign';
 export default {
   props: {
     isMobile: Boolean,
@@ -59,18 +59,22 @@ export default {
 </script>
 <style lang="less">
  #carbon-ads {
+  width: 280px;
+  float: right;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  padding: 0;
   overflow: hidden;
-  width: 145px;
-  position: fixed;
   z-index: 9;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px;
   background-color: #fff;
   border-radius: 3px;
   font-size: 13px;
   background: #f5f5f5;
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+}
+#carbonads {
+  overflow: hidden;
 }
 #carbon-ads a {
   display: inline-block;
@@ -81,7 +85,8 @@ export default {
   color: #7f8c8d;
 }
 #carbon-ads img {
-  width: 125px;
+  float: left;
+  margin-right: 10px;
 }
 #carbon-ads .carbon-img,
 #carbon-ads .carbon-text {
@@ -90,7 +95,7 @@ export default {
   color: #34495e;
 }
 #carbon-ads .carbon-text {
-  margin-top: 6px;
+  padding-top: 6px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;

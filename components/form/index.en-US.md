@@ -54,7 +54,7 @@ The following `options` are available:
 
 If the form has been decorated by `Form.create` then it has `this.form` property. `this.form` provides some APIs as follows:
 
-> Note: Before using `getFieldsValue` `getFieldValue` `setFieldsValue` and so on, please make sure that corresponding field had been registered with `getFieldDecorator`.
+> Note: Before using `getFieldsValue` `getFieldValue` `setFieldsValue` and so on, please make sure that corresponding field had been registered with `getFieldDecorator` or `v-decorator`.
 
 | Method | Description | Type |
 | ------ | ----------- | ---- |
@@ -63,8 +63,8 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 | getFieldsError | Get the specified fields' error. If you don't specify a parameter, you will get all fields' error. | Function(\[names: string\[]]) |
 | getFieldsValue | Get the specified fields' values. If you don't specify a parameter, you will get all fields' values. | Function(\[fieldNames: string\[]]) |
 | getFieldValue | Get the value of a field. | Function(fieldName: string) |
-| isFieldsTouched | Check whether any of fields is touched by `getFieldDecorator`'s `options.trigger` event | (names?: string\[]) => boolean |
-| isFieldTouched | Check whether a field is touched by `getFieldDecorator`'s `options.trigger` event | (name: string) => boolean |
+| isFieldsTouched | Check whether any of fields is touched by `getFieldDecorator`'s or `v-decorator`'s `options.trigger` event | (names?: string\[]) => boolean |
+| isFieldTouched | Check whether a field is touched by `getFieldDecorator`'s or `v-decorator`'s `options.trigger` event | (name: string) => boolean |
 | isFieldValidating | Check if the specified field is being validated. | Function(name) |
 | resetFields | Reset the specified fields' value(to `initialValue`) and status. If you don't specify a parameter, all the fields will be reset. | Function(\[names: string\[]]) |
 | setFields | Set value and error state of fields. | ({<br />&nbsp;&nbsp;\[fieldName\]: {value: any, errors: \[Error\] }<br />}) => void |
@@ -137,7 +137,7 @@ To mark the returned fields data in `mapPropsToFields`, [demo](#components-form-
 After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property defined by `valuePropName`) `onChange`(or other property defined by `trigger`) props will be added to form controls，the flow of form data will be handled by Form which will cause:
 
 1. You shouldn't use `onChange` to collect data, but you still can listen to `onChange`(and so on) events.
-2. You cannot set value of form control via `value` `defaultValue` prop, and you should set default value with `initialValue` in `getFieldDecorator` instead.
+2. You cannot set value of form control via `value` `defaultValue` prop, and you should set default value with `initialValue` in `getFieldDecorator` or `v-decorator` instead.
 3. You shouldn't call `v-model` manually, please use `this.form.setFieldsValue` to change value programmatically.
 
 #### Special attention

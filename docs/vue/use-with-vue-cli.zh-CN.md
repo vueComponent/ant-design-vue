@@ -70,12 +70,9 @@ Vue.component(Button.name, Button);
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
 new Vue({
-  el: "#app",
-  components: { App },
-  template: "<App/>"
-});
+  render: h => h(App)
+}).$mount("#app");
 ```
 
 修改 `src/App.vue`的 template 内容。
@@ -85,7 +82,6 @@ new Vue({
   <div id="app">
     <img src="./assets/logo.png">
     <a-button type="primary">Button></a-button>
-    <router-view/>
   </div>
 </template>
 ...
@@ -161,15 +157,12 @@ $ yarn add babel-plugin-import --dev
 
   Vue.config.productionTip = false
 
-  /* eslint-disable no-new */
   new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App/>'
-  })
+    render: h => h(App)
+  }).$mount("#app");
 ```
 
-最后重启 `npm run dev` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/docs/vue/getting-started-cn/#按需加载)。
+最后重启 `npm run serve` 访问页面，antd 组件的 js 和 css 代码都会按需加载，你在控制台也不会看到这样的[警告信息](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png)。关于按需加载的原理和其他方式可以阅读[这里](/docs/vue/getting-started-cn/#按需加载)。
 
 ### 自定义主题
 

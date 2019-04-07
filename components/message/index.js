@@ -74,7 +74,7 @@ function notice(args) {
             ) : (
               ''
             )}
-            <span>{typeof content === 'function' ? args.content(h) : args.content}</span>
+            <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
           </div>
         ),
         onClose: callback,

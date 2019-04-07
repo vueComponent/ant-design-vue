@@ -11,7 +11,7 @@ For multi-line input.
 ```html
 <template>
   <div>
-    <a-button @click="() => this.autoResize = !autoResize">
+    <a-button style="margin-bottom: 16px" @click="() => this.autoResize = !autoResize">
       Auto Resize: {String(autoResize)}
     </a-button>
     <a-textarea :rows="4" :autosize="autoResize" :defaultValue="defaultValue" />

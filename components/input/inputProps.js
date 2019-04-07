@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 export default {
   prefixCls: {
-    default: 'ant-input',
     type: String,
   },
   defaultValue: [String, Number],
@@ -34,4 +33,5 @@ export default {
   suffix: PropTypes.any,
   spellCheck: Boolean,
   autoFocus: Boolean,
+  allowClear: Boolean,
 };

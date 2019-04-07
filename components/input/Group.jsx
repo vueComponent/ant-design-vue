@@ -1,9 +1,10 @@
 import { filterEmpty } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
+
 export default {
   name: 'AInputGroup',
   props: {
     prefixCls: {
-      default: 'ant-input-group',
       type: String,
     },
     size: {
@@ -13,9 +14,15 @@ export default {
     },
     compact: Boolean,
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   computed: {
     classes() {
-      const { prefixCls, size, compact = false } = this;
+      const { prefixCls: customizePrefixCls, size, compact = false } = this;
+      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const prefixCls = getPrefixCls('input-group', customizePrefixCls);
+
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-lg`]: size === 'large',

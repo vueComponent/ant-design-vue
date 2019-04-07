@@ -6,6 +6,7 @@ import Button from '../button';
 import { cloneElement } from '../_util/vnode';
 import { getOptionProps, getComponentFromProp, isValidElement } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'AInputSearch',
@@ -25,6 +26,9 @@ export default {
     },
     enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   methods: {
     onSearch(e) {
       this.$emit('search', this.$refs.input.stateValue, e);
@@ -37,62 +41,96 @@ export default {
     blur() {
       this.$refs.input.blur();
     },
-    getButtonOrIcon() {
-      const { prefixCls, size, disabled } = this;
+    renderSuffix(prefixCls) {
+      const suffix = getComponentFromProp(this, 'suffix');
       const enterButton = getComponentFromProp(this, 'enterButton');
+      if (enterButton) return suffix;
+
+      const node = (
+        <Icon
+          class={`${prefixCls}-icon`}
+          type="search"
+          key="searchIcon"
+          onClick={this.onSearch}
+        />
+      );
+
+      if (suffix) {
+        let cloneSuffix = suffix;
+        if (isValidElement(cloneSuffix) && !cloneSuffix.key) {
+          cloneSuffix = cloneElement(cloneSuffix, {
+            key: 'originSuffix',
+          });
+        }
+        return [cloneSuffix, node];
+      }
+
+      return node;
+    },
+    renderAddonAfter(prefixCls) {
+      const { size, disabled } = this;
+      const enterButton = getComponentFromProp(this, 'enterButton');
+      const addonAfter = getComponentFromProp(this, 'addonAfter');
+      if(!enterButton) return addonAfter;
+      const btnClassName = `${prefixCls}-button`;
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
-      let node;
-      if (!enterButton) {
-        node = <Icon class={`${prefixCls}-icon`} type="search" key="searchIcon" />;
-      } else if (
+      let button;
+      if (
         enterButtonAsElement.tag === 'button' ||
         (enterButtonAsElement.componentOptions &&
           enterButtonAsElement.componentOptions.Ctor.extendOptions.__ANT_BUTTON)
       ) {
-        node = cloneElement(enterButtonAsElement, {
-          class: `${prefixCls}-button`,
+        button = cloneElement(enterButtonAsElement, {
+          class: btnClassName,
           props: { size },
+          on: {
+            click: this.onSearch,
+          },
         });
       } else {
-        node = (
+        button = (
           <Button
-            class={`${prefixCls}-button`}
+            class={btnClassName}
             type="primary"
             size={size}
             disabled={disabled}
             key="enterButton"
+            onClick={this.onSearch}
           >
             {enterButton === true ? <Icon type="search" /> : enterButton}
           </Button>
         );
       }
-      return cloneElement(node, {
-        on: {
-          click: this.onSearch,
-        },
-      });
+      if (addonAfter) {
+        return [button, addonAfter];
+      }
+
+      return button;
     },
   },
   render() {
-    const { prefixCls, inputPrefixCls, size, ...others } = getOptionProps(this);
-    const suffix = getComponentFromProp(this, 'suffix');
+    const {
+      prefixCls: customizePrefixCls,
+      inputPrefixCls: customizeInputPrefixCls,
+      size,
+      ...others
+    } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('input-search', customizePrefixCls);
+    const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+
     const enterButton = getComponentFromProp(this, 'enterButton');
-    const addonAfter = getComponentFromProp(this, 'addonAfter');
     const addonBefore = getComponentFromProp(this, 'addonBefore');
-    const buttonOrIcon = this.getButtonOrIcon();
-    let searchSuffix = suffix ? [suffix, buttonOrIcon] : buttonOrIcon;
-    if (Array.isArray(searchSuffix)) {
-      searchSuffix = searchSuffix.map((item, index) => {
-        if (!isValidElement(item) || item.key) {
-          return item;
-        }
-        return cloneElement(item, { key: index });
+    let inputClassName;
+    if(enterButton) {
+      inputClassName = classNames(prefixCls, {
+        [`${prefixCls}-enter-button`]: !!enterButton,
+        [`${prefixCls}-${size}`]: !!size,
       });
+    } else {
+      inputClassName = prefixCls;
     }
-    const inputClassName = classNames(prefixCls, {
-      [`${prefixCls}-enter-button`]: !!enterButton,
-      [`${prefixCls}-${size}`]: !!size,
-    });
+
     const on = { ...this.$listeners };
     delete on.search;
     const inputProps = {
@@ -100,16 +138,18 @@ export default {
         ...others,
         prefixCls: inputPrefixCls,
         size,
-        suffix: searchSuffix,
-        addonAfter,
+        suffix: this.renderSuffix(prefixCls),
+        addonAfter: this.renderAddonAfter(prefixCls),
         addonBefore,
       },
       attrs: this.$attrs,
+      class: inputClassName,
+      ref: 'input',
       on: {
         pressEnter: this.onSearch,
         ...on,
       },
     };
-    return <Input {...inputProps} class={inputClassName} ref="input" />;
+    return <Input {...inputProps} />;
   },
 };

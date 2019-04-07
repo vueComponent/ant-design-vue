@@ -4,6 +4,10 @@ import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import { isIE, isIE9 } from '../_util/env';
+import { ConfigConsumerProps } from '../config-provider';
+import Password from './Password';
+import Icon from '../icon';
+import warning from '../_util/warning';
 
 function noop() {}
 
@@ -12,6 +16,10 @@ function fixControlledValue(value) {
     return '';
   }
   return value;
+}
+
+function hasPrefixSuffix(props) {
+  return 'prefix' in props || props.suffix || props.allowClear;
 }
 
 export default {
@@ -23,6 +31,9 @@ export default {
   },
   props: {
     ...inputProps,
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
   },
   data() {
     const { value, defaultValue } = this.$props;
@@ -49,22 +60,6 @@ export default {
       }
       this.$emit('keydown', e);
     },
-    handleChange(e) {
-      // https://github.com/vueComponent/ant-design-vue/issues/92
-      if (isIE && !isIE9 && this.stateValue === e.target.value) {
-        return;
-      }
-      if (!hasProp(this, 'value')) {
-        this.stateValue = e.target.value;
-      } else {
-        this.$forceUpdate();
-      }
-      if (!e.target.composing) {
-        this.$emit('change.value', e.target.value);
-      }
-      this.$emit('change', e);
-      this.$emit('input', e);
-    },
 
     focus() {
       this.$refs.input.focus();
@@ -77,8 +72,8 @@ export default {
       this.$refs.input.select();
     },
 
-    getInputClassName() {
-      const { prefixCls, size, disabled } = this.$props;
+    getInputClassName(prefixCls) {
+      const { size, disabled } = this.$props;
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-sm`]: size === 'small',
@@ -86,7 +81,64 @@ export default {
         [`${prefixCls}-disabled`]: disabled,
       };
     },
-    renderLabeledInput(children) {
+
+    setValue(value, e) {
+      // https://github.com/vueComponent/ant-design-vue/issues/92
+      if (isIE && !isIE9 && this.stateValue === value) {
+        return;
+      }
+      if (!hasProp(this, 'value')) {
+        this.stateValue = value;
+      } else {
+        this.$forceUpdate();
+      }
+      if (!e.target.composing) {
+        this.$emit('change.value', value);
+      }
+      this.$emit('change', e);
+      this.$emit('input', e);
+    },
+
+    handleReset(e) {
+      this.setValue('', e);
+    },
+
+    handleChange(e) {
+      this.setValue(e.target.value, e);
+    },
+
+    renderClearIcon(prefixCls) {
+      const { allowClear } = this.$props;
+      const { stateValue } = this;
+      if (!allowClear || stateValue === undefined || stateValue === null || stateValue === '') {
+        return null;
+      }
+      return (
+        <Icon
+          type="close-circle"
+          theme="filled"
+          onClick={this.handleReset}
+          class={`${prefixCls}-clear-icon`}
+          role="button"
+        />
+      );
+    },
+
+    renderSuffix(prefixCls) {
+      const { allowClear } = this.$props;
+      let suffix = getComponentFromProp(this, 'suffix');
+      if (suffix || allowClear) {
+        return (
+          <span class={`${prefixCls}-suffix`}>
+            {this.renderClearIcon(prefixCls)}
+            {suffix}
+          </span>
+        );
+      }
+      return null;
+    },
+
+    renderLabeledInput(prefixCls, children) {
       const props = this.$props;
       let addonAfter = getComponentFromProp(this, 'addonAfter');
       let addonBefore = getComponentFromProp(this, 'addonBefore');
@@ -95,24 +147,24 @@ export default {
         return children;
       }
 
-      const wrapperClassName = `${props.prefixCls}-group`;
+      const wrapperClassName = `${prefixCls}-group`;
       const addonClassName = `${wrapperClassName}-addon`;
       addonBefore = addonBefore ? <span class={addonClassName}>{addonBefore}</span> : null;
 
       addonAfter = addonAfter ? <span class={addonClassName}>{addonAfter}</span> : null;
 
-      const className = {
-        [`${props.prefixCls}-wrapper`]: true,
+      const mergedWrapperClassName = {
+        [`${prefixCls}-wrapper`]: true,
         [wrapperClassName]: addonBefore || addonAfter,
       };
 
-      const groupClassName = classNames(`${props.prefixCls}-group-wrapper`, {
-        [`${props.prefixCls}-group-wrapper-sm`]: props.size === 'small',
-        [`${props.prefixCls}-group-wrapper-lg`]: props.size === 'large',
+      const mergedGroupClassName = classNames(`${prefixCls}-group-wrapper`, {
+        [`${prefixCls}-group-wrapper-sm`]: props.size === 'small',
+        [`${prefixCls}-group-wrapper-lg`]: props.size === 'large',
       });
       return (
-        <span class={groupClassName}>
-          <span class={className}>
+        <span class={mergedGroupClassName}>
+          <span class={mergedWrapperClassName}>
             {addonBefore}
             {children}
             {addonAfter}
@@ -120,17 +172,15 @@ export default {
         </span>
       );
     },
-    renderLabeledIcon(children) {
-      const { prefixCls, size } = this.$props;
-      let prefix = getComponentFromProp(this, 'prefix');
-      let suffix = getComponentFromProp(this, 'suffix');
-      if (!prefix && !suffix) {
+    renderLabeledIcon(prefixCls, children) {
+      const { size } = this.$props;
+      let suffix = this.renderSuffix(prefixCls);
+      if (!hasPrefixSuffix(this.$props)) {
         return children;
       }
-
+      let prefix = getComponentFromProp(this, 'prefix');
       prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 
-      suffix = suffix ? <span class={`${prefixCls}-suffix`}>{suffix}</span> : null;
       const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
@@ -144,7 +194,7 @@ export default {
       );
     },
 
-    renderInput() {
+    renderInput(prefixCls) {
       const otherProps = omit(this.$props, [
         'prefixCls',
         'addonBefore',
@@ -166,13 +216,13 @@ export default {
           input: handleChange,
           change: noop,
         },
-        class: getInputClassName(),
+        class: getInputClassName(prefixCls),
         ref: 'input',
       };
       if ($listeners['change.value']) {
         inputProps.directives = [{ name: 'ant-input' }];
       }
-      return this.renderLabeledIcon(<input {...inputProps} />);
+      return this.renderLabeledIcon(prefixCls,<input {...inputProps} />);
     },
   },
   render() {
@@ -194,6 +244,9 @@ export default {
       };
       return <TextArea {...textareaProps} ref="input" />;
     }
-    return this.renderLabeledInput(this.renderInput());
+    const { prefixCls: customizePrefixCls } = this.$props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('input', customizePrefixCls);
+    return this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
   },
 };

@@ -15,6 +15,7 @@
 | suffix | 带有后缀图标的 input | string\|slot |  |
 | type | 声明 input 类型，同原生 input 标签的 type 属性，见：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#属性)(请直接使用 `Input.TextArea` 代替 `type="textarea"`)。 | string | `text` |
 | value(v-model) | 输入框内容 | string |  |
+| allowClear | 可以点击清除图标删除内容 | boolean | |
 
 ### Input 事件
 | 事件名称 | 说明 | 回调参数 |
@@ -44,7 +45,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| enterButton | 是否有确认按钮，可设为按钮文字 | boolean\|slot | false |
+| enterButton | 是否有确认按钮，可设为按钮文字。该属性会与 addon 冲突。 | boolean\|slot | false |
 
 ### Input.Search 事件
 | 事件名称 | 说明 | 回调参数 |
@@ -66,3 +67,22 @@
   <a-input />
 </a-input-group>
 ````
+
+
+#### Input.Password
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| visibilityToggle | 是否显示切换按钮 | boolean | true |
+
+## FAQ
+
+### 为什么我动态改变 `prefix/suffix` 时，Input 会失去焦点？
+
+当 Input 动态添加或者删除 `prefix/suffix` 时，Vue 会重新创建 DOM 结构而新的 input 是没有焦点的。
+你可以预设一个空的 `<span />` 来保持 DOM 结构不变：
+
+```jsx
+const suffix = condition ? <Icon type="smile" /> : <span />;
+
+<Input suffix={suffix} />
+```

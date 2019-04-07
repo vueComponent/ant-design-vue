@@ -24,6 +24,7 @@ const SIZING_STYLE = [
   'font-family',
   'font-weight',
   'font-size',
+  'font-variant',
   'text-rendering',
   'text-transform',
   'width',
@@ -37,7 +38,7 @@ const SIZING_STYLE = [
 const computedStyleCache = {};
 let hiddenTextarea;
 
-function calculateNodeStyling(node, useCache = false) {
+export function calculateNodeStyling(node, useCache = false) {
   const nodeRef =
     node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
 

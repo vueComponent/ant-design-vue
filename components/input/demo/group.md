@@ -14,12 +14,14 @@ Note: You don't need `Col` to control the width in the `compact` mode.
 <template>
 <div>
   <a-input-group size="large">
-    <a-col :span="5">
-      <a-input defaultValue="0571" />
-    </a-col>
-    <a-col :span="8">
-      <a-input defaultValue="26888888" />
-    </a-col>
+    <a-row :gutter="8">
+       <a-col :span="5">
+        <a-input defaultValue="0571" />
+      </a-col>
+      <a-col :span="8">
+        <a-input defaultValue="26888888" />
+      </a-col>
+    </a-row>
   </a-input-group>
   <br />
   <a-input-group compact>
@@ -45,7 +47,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
   <br />
   <a-input-group compact>
     <a-input style="width: 50%" defaultValue="input content" />
-    <a-date-picker />
+    <a-date-picker style="width: 50%" />
   </a-input-group>
   <br />
   <a-input-group compact>

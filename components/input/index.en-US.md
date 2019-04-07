@@ -15,6 +15,7 @@
 | suffix | The suffix icon for the Input. | string\|slot |  |
 | type | The type of input, see: [MDN](https://developer.mozilla.org/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)(use `Input.TextArea` instead of `type="textarea"`) | string | `text` |
 | value(v-model) | The input content value | string |  |
+| allowClear | allow to remove input content with clear icon | boolean | |
 
 ### Input Events
 | Events Name | Description | Arguments |
@@ -45,7 +46,7 @@ The rest of the props of `Input.TextArea` are the same as the original [textarea
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| enterButton | to show an enter button after input | boolean\|slot | false |
+| enterButton | to show an enter button after input. This prop is conflict with addon. | boolean\|slot | false |
 
 ### Input.Search Events
 | Events Name | Description | Arguments |
@@ -67,3 +68,21 @@ Supports all props of `Input`.
   <a-input />
 </a-input-group>
 ````
+#### Input.Password
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| visibilityToggle | Whether show toggle button | boolean | true |
+
+## FAQ
+
+### Why Input lose focus when change `prefix/suffix`
+
+When Input dynamic add or remove `prefix/suffix` will make Vue recreate the dom structure and new input will be not focused.
+You can set an empty `<span />` element to keep the dom structure:
+
+```jsx
+const suffix = condition ? <Icon type="smile" /> : <span />;
+
+<Input suffix={suffix} />
+```

@@ -16,6 +16,7 @@
 | height | placement is `top` or `bottom`, height of the Drawer dialog. | string\|number | - |
 | zIndex | The `z-index` of the Drawer. | Number | 1000 |
 | placement | The placement of the Drawer. | 'top'  \| 'right' \| 'bottom' \| 'left' | 'right' |
+| handle | After setting, the drawer is directly mounted on the DOM, and you can control the drawer to open or close through this `handle`. | VNode \| slot | - |
 
 
 ## Methods

@@ -24,6 +24,7 @@ const Drawer = {
     placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('right'),
     level: PropTypes.any.def(null),
     wrapClassName: PropTypes.string, // not use class like react, vue will add class to root dom
+    handle: PropTypes.any,
   },
   mixins: [BaseMixin],
   data() {
@@ -181,10 +182,11 @@ const Drawer = {
     } else {
       offsetStyle.height = typeof height === 'number' ? `${height}px` : height;
     }
+    const handler = getComponentFromProp(this, 'handle') || false;
     const vcDrawerProps = {
       props: {
-        handler: false,
         ...rest,
+        handler,
         ...offsetStyle,
         open: visible,
         showMask: props.mask,

@@ -10,6 +10,13 @@
 
 ---
 
+## 1.3.8
+`2019-04-04`
+- 🐞 修复 `Table` 在 IE 下不可点击问题 [#504](https://github.com/vueComponent/ant-design-vue/issues/504)
+- 🐞 修复 `Table` 在 Firefox 下 Header 没对齐问题 [#579](https://github.com/vueComponent/ant-design-vue/issues/579)
+- 🌟 抽屉 `Drawer` 添加自定义 `handel` 功能
+- 🐞 修复 TypeScript 类型定义。
+
 ## 1.3.7
 `2019-03-18`
 - 🐞 修复 `Select` `selectedKeys` 类型校验错误 [#597](https://github.com/vueComponent/ant-design-vue/issues/597)

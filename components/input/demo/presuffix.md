@@ -13,7 +13,9 @@ Add prefix or suffix icons inside input.
   <div class="components-input-demo-presuffix">
     <a-input placeholder="Basic usage" v-model="userName" ref="userNameInput">
       <a-icon slot="prefix" type="user" />
-      <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty" />
+      <a-tooltip slot="suffix" title="Extra information">
+        <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+      </a-tooltip>
     </a-input>
   </div>
 </template>

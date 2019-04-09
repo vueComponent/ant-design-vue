@@ -69,14 +69,20 @@ describe('Avatar Render', () => {
     };
 
     const wrapper = mount(Foo, { sync: false, attachToDocument: true },);
-    // mock img load Error, since jsdom do not load resource by default
-    // https://github.com/jsdom/jsdom/issues/1816
-    wrapper.find('img').trigger('error');
-    expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
-    expect(global.document.body.querySelector('img').getAttribute('src')).toBe(LOAD_SUCCESS_SRC);
+    await asyncExpect(() => {
+      // mock img load Error, since jsdom do not load resource by default
+      // https://github.com/jsdom/jsdom/issues/1816
+      wrapper.find('img').trigger('error');
+    }, 0);
+    await asyncExpect(() => {
+      expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
+    }, 0);
+    await asyncExpect(() => {
+      expect(global.document.body.querySelector('img').getAttribute('src')).toBe(LOAD_SUCCESS_SRC);
+    }, 0);
   });
 
-  it('should show image on success after a failure state', async () => {
+  it('should show image on success after a failure state', async() => {
     global.document.body.innerHTML = '';
     const LOAD_FAILURE_SRC = 'http://error.url';
     const LOAD_SUCCESS_SRC = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
@@ -101,14 +107,14 @@ describe('Avatar Render', () => {
     await asyncExpect(() => {
       expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(false);
       expect(wrapper.findAll('.ant-avatar-string').length).toBe(1);
-    });
+    }, 0);
 
     await asyncExpect(() => {
-      wrapper.setProps({ src: LOAD_SUCCESS_SRC });
+      wrapper.setData({ src: LOAD_SUCCESS_SRC });
     });
     await asyncExpect(() => {
       expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
       expect(wrapper.findAll('.ant-avatar-image').length).toBe(1);
-    });
+    }, 0);
   });
 });

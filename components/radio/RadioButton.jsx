@@ -25,8 +25,8 @@ export default {
     }, on: { ...this.$listeners } };
     if (this.radioGroupContext) {
       radioProps.on.change = this.radioGroupContext.onRadioChange;
-      radioProps.props.checked = props.value === this.radioGroupContext.stateValue;
-      radioProps.props.disabled = props.disabled || this.radioGroupContext.disabled;
+      radioProps.props.checked = this.$props.value === this.radioGroupContext.stateValue;
+      radioProps.props.disabled = this.$props.disabled || this.radioGroupContext.disabled;
     }
     return <Radio {...radioProps}>{this.$slots.default}</Radio>;
   },

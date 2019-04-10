@@ -88,7 +88,7 @@ module.exports = {
 
 ### 在 vue cli 3中定制主题
 
-项目更目录下新建文件`vue.config.js`
+项目根目录下新建文件`vue.config.js`
 ```
 // vue.config.js
 module.exports = {

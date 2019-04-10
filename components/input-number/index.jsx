@@ -49,7 +49,7 @@ const InputNumber = {
   render() {
     const { prefixCls: customizePrefixCls, size, ...others } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const prefixCls = getPrefixCls('input-group', customizePrefixCls);
+    const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 
     const inputNumberClass = classNames({
       [`${prefixCls}-lg`]: size === 'large',

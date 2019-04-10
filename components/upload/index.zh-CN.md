@@ -28,6 +28,7 @@
 | --- | --- | --- |
 | change | 上传文件改变时的状态，详见 [change](#change) | Function | 无 |
 | preview | 点击文件链接或预览图标时的回调 | Function(file) | 无 |
+| reject | 拖拽文件不符合accept类型时的回调 | Function(fileList) | 无 |
 
 ### change
 

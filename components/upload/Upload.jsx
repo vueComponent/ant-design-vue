@@ -136,6 +136,9 @@ export default {
         fileList,
       });
     },
+    onReject(fileList) {
+      this.$emit('reject', fileList);
+    },
     handleRemove(file) {
       const { remove } = getOptionProps(this);
       const { status } = file;
@@ -232,6 +235,7 @@ export default {
         error: this.onError,
         progress: this.onProgress,
         success: this.onSuccess,
+        reject: this.onReject,
       },
       ref: 'uploadRef',
       class: `${prefixCls}-btn`,

@@ -24,6 +24,7 @@
 | multiple | 支持点选多个节点（节点本身） | boolean | false |
 | selectedKeys(.sync) | （受控）设置选中的树节点 | string\[] \| number\[] | - |
 | showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |
+| switcherIcon | 自定义树节点的展开/折叠图标 | slot(vnode) | - |
 | showLine | 是否展示连接线 | boolean | false |
 
 
@@ -67,6 +68,12 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | expandAction | 目录展开逻辑，可选 `false` `'click'` `'doubleclick'` | string | click |
+
+## FAQ
+
+### 在 showLine 时，如何隐藏子节点图标？
+
+文件图标通过 switcherIcon 来实现，如果不需要你可以覆盖对应的样式
 
 
 

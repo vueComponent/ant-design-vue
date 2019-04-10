@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import PropTypes from '../_util/vue-types';
-import { filterEmpty } from '../_util/props-util';
+import { filterEmpty, getComponentFromProp } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
 
 function getWatch(keys = []) {
@@ -46,7 +46,7 @@ const ConfigProvider = {
   },
   methods: {
     renderEmptyComponent() {
-      const customRender = (this.$scopedSlots && this.$scopedSlots['renderEmpty']) || this.$slots['renderEmpty'];
+      const customRender = getComponentFromProp(this,'renderEmpty');
       return this.$props.renderEmpty || customRender || defaultRenderEmpty;
     },
     getPrefixCls(suffixCls, customizePrefixCls) {

@@ -24,6 +24,7 @@
 | multiple | Allows selecting multiple treeNodes | boolean | false |
 | selectedKeys(.sync) | (Controlled) Specifies the keys of the selected treeNodes | string\[] \| number\[] | - |
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |
+| switcherIcon | customize collapse/expand icon of tree node | slot(vnode) | - |
 | showLine | Shows a connecting line | boolean | false |
 
 ### Events
@@ -66,3 +67,9 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | expandAction | Directory open logic, optional `false` `'click'` `'doubleclick'` | string | click |
+
+## FAQ
+
+### How to hide file icon when use showLine?
+
+File icon realize by using switcherIcon. You can overwrite the style to hide it

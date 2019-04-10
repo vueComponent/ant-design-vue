@@ -2,6 +2,7 @@ import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponentFromProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 const props = abstractTooltipProps();
 const Popover = {
@@ -17,6 +18,9 @@ const Popover = {
     prop: 'visible',
     event: 'visibleChange',
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   methods: {
     getPopupDomNode() {
       return this.$refs.tooltip.getPopupDomNode();
@@ -24,13 +28,17 @@ const Popover = {
   },
 
   render() {
-    const { title, prefixCls, $slots } = this;
+    const { title, prefixCls: customizePrefixCls, $slots } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('popover', customizePrefixCls);
+
     const props = getOptionProps(this);
     delete props.title;
     delete props.content;
     const tooltipProps = {
       props: {
         ...props,
+        prefixCls,
       },
       ref: 'tooltip',
       on: this.$listeners,

@@ -10,7 +10,7 @@
 | overlayClassName | Class name of the dropdown root element | string | - |
 | overlayStyle | Style of the dropdown root element | object | - |
 | placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
-| trigger | the trigger mode which executes the drop-down action | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
+| trigger | the trigger mode which executes the drop-down action, hover doesn't work on mobile device | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
 | visible(v-model) | whether the dropdown menu is visible | boolean | - |
 
 ### events

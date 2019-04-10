@@ -4,6 +4,7 @@ import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { getOptionProps, getPropsData } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
+import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 
 const DropdownProps = getDropdownProps();
@@ -34,40 +35,46 @@ const Dropdown = {
       }
       return 'slide-up';
     },
+    renderOverlay(prefixCls) {
+      const { $slots } = this;
+      const overlay = this.overlay || ($slots.overlay && $slots.overlay[0]);
+      // menu cannot be selectable in dropdown defaultly
+      // menu should be focusable in dropdown defaultly
+      const overlayProps = overlay && getPropsData(overlay);
+      const { selectable = false, focusable = true } = overlayProps || {};
+      const expandIcon = (
+        <span class={`${prefixCls}-menu-submenu-arrow`}>
+          <Icon type="right" class={`${prefixCls}-menu-submenu-arrow-icon`} />
+        </span>
+      );
+
+      const fixedModeOverlay =
+        overlay && overlay.componentOptions
+          ? cloneElement(overlay, {
+              props: {
+                mode: 'vertical',
+                selectable,
+                focusable,
+                expandIcon,
+              },
+            })
+          : overlay;
+      return fixedModeOverlay;
+    },
   },
 
   render() {
     const { $slots, $listeners } = this;
     const props = getOptionProps(this);
-    const { prefixCls, trigger, disabled, getPopupContainer } = props;
+    const { prefixCls: customizePrefixCls, trigger, disabled, getPopupContainer } = props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
+
     const dropdownTrigger = cloneElement($slots.default, {
       class: `${prefixCls}-trigger`,
       disabled,
     });
-    const overlay = this.overlay || ($slots.overlay && $slots.overlay[0]);
-    // menu cannot be selectable in dropdown defaultly
-    // menu should be focusable in dropdown defaultly
-    const overlayProps = overlay && getPropsData(overlay);
-    const { selectable = false, focusable = true } = overlayProps || {};
-
-    const expandIcon = (
-      <span class={`${prefixCls}-menu-submenu-arrow`}>
-        <Icon type="right" class={`${prefixCls}-menu-submenu-arrow-icon`} />
-      </span>
-    );
-
-    const fixedModeOverlay =
-      overlay && overlay.componentOptions
-        ? cloneElement(overlay, {
-            props: {
-              mode: 'vertical',
-              selectable,
-              focusable,
-              expandIcon,
-            },
-          })
-        : overlay;
     const triggerActions = disabled ? [] : trigger;
     let alignPoint;
     if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
@@ -77,6 +84,7 @@ const Dropdown = {
       props: {
         alignPoint,
         ...props,
+        prefixCls,
         getPopupContainer: getPopupContainer || getContextPopupContainer,
         transitionName: this.getTransitionName(),
         trigger: triggerActions,
@@ -86,7 +94,7 @@ const Dropdown = {
     return (
       <RcDropdown {...dropdownProps}>
         {dropdownTrigger}
-        <template slot="overlay">{fixedModeOverlay}</template>
+        <template slot="overlay">{this.renderOverlay(prefixCls)}</template>
       </RcDropdown>
     );
   },

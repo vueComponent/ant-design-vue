@@ -1,7 +1,6 @@
 import VcTreeSelect, { TreeNode, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from '../vc-tree-select';
 import classNames from 'classnames';
 import { TreeSelectProps } from './interface';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import warning from '../_util/warning';
 import {
   initDefaultProps,
@@ -10,9 +9,8 @@ import {
   filterEmpty,
   isValidElement,
 } from '../_util/props-util';
-
+import { ConfigConsumerProps } from '../config-provider';
 export { TreeData, TreeSelectProps } from './interface';
-
 import Icon from '../icon';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
@@ -24,7 +22,6 @@ const TreeSelect = {
   SHOW_CHILD,
   name: 'ATreeSelect',
   props: initDefaultProps(TreeSelectProps(), {
-    prefixCls: 'ant-select',
     transitionName: 'slide-up',
     choiceTransitionName: 'zoom',
     showSearch: false,
@@ -50,8 +47,7 @@ const TreeSelect = {
     blur() {
       this.$refs.vcTreeSelect.blur();
     },
-    renderSwitcherIcon({ isLeaf, loading }) {
-      const { prefixCls } = this.$props;
+    renderSwitcherIcon(prefixCls, { isLeaf, loading }) {
       if (loading) {
         return <Icon type="loading" class={`${prefixCls}-switcher-loading-icon`} />;
       }
@@ -83,18 +79,26 @@ const TreeSelect = {
         Object.assign(list[i], item);
       }
     },
-    renderTreeSelect(locale) {
-      const props = getOptionProps(this);
+  },
 
+  render(h) {
+    const props = getOptionProps(this);
       const {
-        prefixCls,
+        prefixCls: customizePrefixCls,
         size,
-        notFoundContent,
         dropdownStyle,
         dropdownClassName,
         getPopupContainer,
         ...restProps
       } = props;
+      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const prefixCls = getPrefixCls('select', customizePrefixCls);
+
+      const renderEmpty = (
+        this.configProvider.renderEmpty &&
+        this.configProvider.renderEmpty()
+      ) || ConfigConsumerProps.renderEmpty;
+      const notFoundContent = getComponentFromProp(this, 'notFoundContent');
       const { getPopupContainer: getContextPopupContainer } = this.configProvider;
       const rest = omit(restProps, [
         'inputIcon',
@@ -126,10 +130,9 @@ const TreeSelect = {
       const clearIcon = (
         <Icon type="close-circle" class={`${prefixCls}-clear-icon`} theme="filled" />
       );
-
       const VcTreeSelectProps = {
         props: {
-          switcherIcon: this.renderSwitcherIcon,
+          switcherIcon: (nodeProps) => this.renderSwitcherIcon(prefixCls, nodeProps),
           inputIcon,
           removeIcon,
           clearIcon,
@@ -139,7 +142,7 @@ const TreeSelect = {
           prefixCls,
           dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
           treeCheckable: checkable,
-          notFoundContent: notFoundContent || locale.notFoundContent,
+          notFoundContent: notFoundContent || renderEmpty(h, 'Select'),
           __propsSymbol__: Symbol(),
         },
         class: cls,
@@ -148,17 +151,6 @@ const TreeSelect = {
         scopedSlots: this.$scopedSlots,
       };
       return <VcTreeSelect {...VcTreeSelectProps}>{filterEmpty(this.$slots.default)}</VcTreeSelect>;
-    },
-  },
-
-  render() {
-    return (
-      <LocaleReceiver
-        componentName="Select"
-        defaultLocale={{}}
-        scopedSlots={{ default: this.renderTreeSelect }}
-      />
-    );
   },
 };
 

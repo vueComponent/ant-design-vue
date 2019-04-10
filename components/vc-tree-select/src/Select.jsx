@@ -104,7 +104,7 @@ const Select = {
       treeDataSimpleMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
       treeNodeFilterProp: PropTypes.string,
       treeNodeLabelProp: PropTypes.string,
-      treeCheckable: PropTypes.oneOfType([PropTypes.any, PropTypes.bool]),
+      treeCheckable: PropTypes.oneOfType([PropTypes.any, PropTypes.object, PropTypes.bool]),
       // treeCheckable: PropTypes.any,
       treeCheckStrictly: PropTypes.bool,
       treeIcon: PropTypes.bool,

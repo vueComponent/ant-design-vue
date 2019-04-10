@@ -33,7 +33,7 @@ export default {
   },
   mixins: [BaseMixin],
   methods: {
-    onChange(e) {
+    onChange() {
       this.setState({
         visible: !this.visible,
       });

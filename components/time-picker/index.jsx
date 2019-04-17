@@ -1,9 +1,11 @@
 import * as moment from 'moment';
+import omit from 'omit.js';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from './locale/en_US';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
+import warning from '../_util/warning';
 import Icon from '../icon';
 import interopDefault from '../_util/interopDefault';
 import {
@@ -14,6 +16,7 @@ import {
   isValidElement,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import { ConfigConsumerProps } from '../config-provider';
 
 export function generateShowHourMinuteSecond(format) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -53,10 +56,12 @@ export const TimePickerProps = () => ({
   minuteStep: PropTypes.number,
   secondStep: PropTypes.number,
   allowEmpty: PropTypes.bool,
+  allowClear: PropTypes.bool,
   inputReadOnly: PropTypes.bool,
   clearText: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   popupClassName: PropTypes.string,
+  popupStyle: PropTypes.object,
   suffixIcon: PropTypes.any,
   align: PropTypes.object,
   placement: PropTypes.any,
@@ -69,7 +74,6 @@ const TimePicker = {
   name: 'ATimePicker',
   mixins: [BaseMixin],
   props: initDefaultProps(TimePickerProps(), {
-    prefixCls: 'ant-time-picker',
     align: {
       offset: [0, -2],
     },
@@ -94,6 +98,10 @@ const TimePicker = {
     if (value && !interopDefault(moment).isMoment(value)) {
       throw new Error('The value/defaultValue of TimePicker must be a moment object, ');
     }
+    warning(
+      !hasProp(this, 'allowEmpty'),
+      '`allowEmpty` in TimePicker is deprecated. Please use `allowClear` instead.',
+    );
     return {
       sValue: value,
     };
@@ -135,23 +143,15 @@ const TimePicker = {
       return 'HH:mm:ss';
     },
 
-    renderTimePicker(locale) {
-      const props = getOptionProps(this);
-      delete props.defaultValue;
+    getAllowClear() {
+      const { allowClear, allowEmpty } = this.$props;
+      if ('allowClear' in this.$props) {
+        return allowClear;
+      }
+      return allowEmpty;
+    },
 
-      const format = this.getDefaultFormat();
-      const className = {
-        [`${props.prefixCls}-${props.size}`]: !!props.size,
-      };
-      const tempAddon = getComponentFromProp(this, 'addon', {}, false);
-      const addon = panel => {
-        return tempAddon ? (
-          <div class={`${props.prefixCls}-panel-addon`}>
-            {typeof tempAddon === 'function' ? tempAddon(panel) : tempAddon}
-          </div>
-        ) : null;
-      };
-      const { prefixCls, getPopupContainer } = props;
+    renderInputIcon(prefixCls) {
       let suffixIcon = getComponentFromProp(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const clockIcon = (suffixIcon &&
@@ -163,25 +163,56 @@ const TimePicker = {
           <span class={`${prefixCls}-clock-icon`}>{suffixIcon}</span>
         ))) || <Icon type="clock-circle" class={`${prefixCls}-clock-icon`} theme="outlined" />;
 
-      const inputIcon = <span class={`${prefixCls}-icon`}>{clockIcon}</span>;
+      return <span class={`${prefixCls}-icon`}>{clockIcon}</span>;
+    },
 
-      const clearIcon = (
-        <Icon type="close-circle" class={`${prefixCls}-panel-clear-btn-icon`} theme="filled" />
-      );
+    renderClearIcon(prefixCls) {
+      const clearIcon = <Icon type="close-circle" class={`${prefixCls}-clear`} theme="filled" />;
+      return clearIcon;
+    },
+
+    renderTimePicker(locale) {
+      let props = getOptionProps(this);
+      props = omit(props, ['defaultValue', 'suffixIcon', 'allowEmpty', 'allowClear']);
+
+      const {
+        prefixCls: customizePrefixCls,
+        getPopupContainer,
+        placeholder,
+        size,
+      } = props;
+      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
+
+      const format = this.getDefaultFormat();
+      const pickerClassName = {
+        [`${prefixCls}-${size}`]: !!size,
+      };
+      const tempAddon = getComponentFromProp(this, 'addon', {}, false);
+      const pickerAddon = panel => {
+        return tempAddon ? (
+          <div class={`${prefixCls}-panel-addon`}>
+            {typeof tempAddon === 'function' ? tempAddon(panel) : tempAddon}
+          </div>
+        ) : null;
+      };
+      const inputIcon = this.renderInputIcon(prefixCls);
+      const clearIcon = this.renderClearIcon(prefixCls);
       const { getPopupContainer: getContextPopupContainer } = this.configProvider;
       const timeProps = {
         props: {
           ...generateShowHourMinuteSecond(format),
           ...props,
+          prefixCls,
           getPopupContainer: getPopupContainer || getContextPopupContainer,
           format,
           value: this.sValue,
-          placeholder: props.placeholder === undefined ? locale.placeholder : props.placeholder,
-          addon,
+          placeholder: placeholder === undefined ? locale.placeholder : placeholder,
+          addon: pickerAddon,
           inputIcon,
           clearIcon,
         },
-        class: className,
+        class: pickerClassName,
         ref: 'timePicker',
         on: {
           ...this.$listeners,

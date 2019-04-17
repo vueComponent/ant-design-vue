@@ -5,6 +5,7 @@ import isFlexSupported from '../_util/isFlexSupported';
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import { ConfigConsumerProps } from '../config-provider';
 import TabBar from './TabBar';
 
 export default {
@@ -15,7 +16,7 @@ export default {
     event: 'change',
   },
   props: {
-    prefixCls: PropTypes.string.def('ant-tabs'),
+    prefixCls: PropTypes.string,
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     hideAdd: PropTypes.bool.def(false),
@@ -28,6 +29,9 @@ export default {
     animated: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
   },
   mounted() {
     const NO_FLEX = ' no-flex';
@@ -64,7 +68,7 @@ export default {
   render() {
     const props = getOptionProps(this);
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       size,
       type = 'line',
       tabPosition,
@@ -72,6 +76,8 @@ export default {
       hideAdd,
       renderTabBar,
     } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('tabs', customizePrefixCls);
     const children = filterEmpty(this.$slots.default);
 
     let tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent');
@@ -136,6 +142,7 @@ export default {
     const tabBarProps = {
       props: {
         ...this.$props,
+        prefixCls,
         tabBarExtraContent,
         renderTabBar: renderTabBarSlot,
       },
@@ -148,6 +155,7 @@ export default {
     const tabsProps = {
       props: {
         ...getOptionProps(this),
+        prefixCls,
         tabBarPosition: tabPosition,
         renderTabBar: () => <TabBar {...tabBarProps} />,
         renderTabContent: () => (

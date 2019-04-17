@@ -68,6 +68,7 @@ Vue.prototype.$success = Modal.success;
 Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
+Vue.prototype.$destroyAll = Modal.destroyAll;
 
 /* v1.1.3+ registration methods */
 Vue.use(Affix);

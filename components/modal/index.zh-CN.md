@@ -10,6 +10,7 @@
 | confirmLoading | 确定按钮 loading | boolean | 无 |
 | destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | false |
 | footer | 底部内容，当不需要默认底部按钮时，可以设为 `:footer="null"` | string\|slot | 确定取消按钮 |
+| forceRender | 强制渲染 Modal | boolean | false |
 | getContainer | 指定 Modal 挂载的 HTML 节点 | (instance): HTMLElement | () => document.body |
 | keyboard | 是否支持键盘esc关闭 | boolean | true |
 | mask | 是否展示遮罩 | Boolean | true |
@@ -54,7 +55,9 @@
 | centered | 垂直居中展示 Modal | Boolean | `false` |
 | class | 容器类名 | string | - |
 | content | 内容 | string\|vNode | 无 |
-| iconType | 图标 Icon 类型 | string | question-circle |
+| icon | 自定义图标（1.40.0 新增） | string\|slot | `<Icon type="question-circle">` |
+| iconType | 图标类型（1.40.0 后废弃，请使用 `icon`） | string | `question-circle` |
+| mask | 是否展示遮罩 | Boolean | true |
 | maskClosable | 点击蒙层是否允许关闭 | Boolean | `false` |
 | keyboard | 是否支持键盘esc关闭 | boolean | true |
 | okText | 确认按钮文字 | string | 确定 |
@@ -78,4 +81,16 @@ modal.update({
 });
 
 modal.destroy();
+```
+- `Modal.destroyAll`
+
+使用 `Modal.destroyAll()` 可以销毁弹出的确认窗（即上述的 Modal.info、Modal.success、Modal.error、Modal.warning、Modal.confirm）。通常用于路由监听当中，处理路由前进、后退不能销毁确认对话框的问题，而不用各处去使用实例的返回值进行关闭（modal.destroy() 适用于主动关闭，而不是路由这样被动关闭）
+
+```jsx
+const router = new VueRouter({ ... })
+
+// router change
+router.beforeEach((to, from, next) => {
+  Modal.destroyAll();
+})
 ```

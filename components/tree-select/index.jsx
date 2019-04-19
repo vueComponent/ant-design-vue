@@ -63,25 +63,28 @@ const TreeSelect = {
     onChange() {
       this.$emit('change', ...arguments);
     },
-    updateTreeData(list = []) {
-      for (let i = 0, len = list.length; i < len; i++) {
-        const { label, title, scopedSlots = {}, children } = list[i];
-        const { $scopedSlots } = this;
+    updateTreeData(treeData) {
+      const { $scopedSlots } = this;
+      return treeData.map(item => {
+        const { label, title, scopedSlots = {}, children } = item;
         let newLabel = typeof label === 'function' ? label(this.$createElement) : label;
         let newTitle = typeof title === 'function' ? title(this.$createElement) : title;
         if (!newLabel && scopedSlots.label && $scopedSlots[scopedSlots.label]) {
-          newLabel = $scopedSlots.label(list[i]);
+          newLabel = $scopedSlots.label(item);
         }
         if (!newTitle && scopedSlots.title && $scopedSlots[scopedSlots.title]) {
-          newTitle = $scopedSlots.title(list[i]);
+          newTitle = $scopedSlots.title(item);
         }
-        const item = {
-          // label: newLabel,
+        const treeNodeProps = {
+          ...item,
           title: newTitle || newLabel,
+          dataRef: item,
         };
-        this.updateTreeData(children || []);
-        Object.assign(list[i], item);
-      }
+        if (children) {
+          return { ...treeNodeProps, children: this.updateTreeData(children) };
+        }
+        return treeNodeProps;
+      });
     },
     renderTreeSelect(locale) {
       const props = getOptionProps(this);
@@ -105,7 +108,10 @@ const TreeSelect = {
       ]);
       let suffixIcon = getComponentFromProp(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
-      this.updateTreeData(props.treeData || []);
+      let treeData = props.treeData;
+      if (treeData) {
+        treeData = this.updateTreeData(treeData);
+      }
       const cls = {
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-sm`]: size === 'small',
@@ -128,20 +134,23 @@ const TreeSelect = {
       );
 
       const VcTreeSelectProps = {
-        props: {
-          switcherIcon: this.renderSwitcherIcon,
-          inputIcon,
-          removeIcon,
-          clearIcon,
-          ...rest,
-          getPopupContainer: getPopupContainer || getContextPopupContainer,
-          dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
-          prefixCls,
-          dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
-          treeCheckable: checkable,
-          notFoundContent: notFoundContent || locale.notFoundContent,
-          __propsSymbol__: Symbol(),
-        },
+        props: Object.assign(
+          {
+            switcherIcon: this.renderSwitcherIcon,
+            inputIcon,
+            removeIcon,
+            clearIcon,
+            ...rest,
+            getPopupContainer: getPopupContainer || getContextPopupContainer,
+            dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
+            prefixCls,
+            dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
+            treeCheckable: checkable,
+            notFoundContent: notFoundContent || locale.notFoundContent,
+            __propsSymbol__: Symbol(),
+          },
+          treeData ? { treeData } : {},
+        ),
         class: cls,
         on: { ...this.$listeners, change: this.onChange },
         ref: 'vcTreeSelect',

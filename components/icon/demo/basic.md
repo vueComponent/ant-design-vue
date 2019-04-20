@@ -15,6 +15,7 @@ Use tag `<Icon />` to create an icon and set its type in the `type` prop. Specif
     <a-icon type="setting" theme="filled" />
     <a-icon type="smile" theme="outlined" />
     <a-icon type="sync" spin />
+    <a-icon type="smile" :rotate="180" />
     <a-icon type="loading" />
   </div>
 </template>

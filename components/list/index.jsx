@@ -1,8 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
 import { ConfigConsumerProps } from '../config-provider';
 
 import Spin from '../spin';

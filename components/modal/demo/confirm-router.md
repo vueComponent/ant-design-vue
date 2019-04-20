@@ -23,7 +23,7 @@ export default {
       for (let i = 0; i < 3; i += 1) {
         setTimeout(() => {
           this.$confirm({
-            content: (  // JSX support
+            content: (
               <Button onClick={this.destroyAll}>
                 Click to destroy all
               </Button>

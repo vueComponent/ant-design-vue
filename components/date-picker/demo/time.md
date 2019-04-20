@@ -14,7 +14,6 @@ This property provide an additional time selection. When `showTime` is an Object
   <div>
     <a-date-picker
       showTime
-      format="YYYY-MM-DD HH:mm:ss"
       placeholder="Select Time"
       @change="onChange"
       @ok="onOk"

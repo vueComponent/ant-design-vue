@@ -32,6 +32,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | disabledDate | specify the date that cannot be selected | (currentDate: moment) => boolean | - |
 | getCalendarContainer | to set the container of the floating layer, while the default is to create a `div` element in `body` | function(trigger) | - |
 | locale | localization configuration | object | [default](https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) |
+| mode | picker panel mode | `time|date|month|year` | 'date' |
 | open | open state of picker | boolean | - |
 | placeholder | placeholder of date input | string\|RangePicker\[] | - |
 | popupStyle | to customize the style of the popup calendar | object | {} |
@@ -61,7 +62,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | disabledTime | to specify the time that cannot be selected | function(date) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-MM-DD" |
-| renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
+| renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" slot-scope="mode" | - |
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/components/time-picker/#API) |
 | showTime.defaultValue | to set default time of selected date | [moment](http://momentjs.com/) | moment() |
 | showToday | whether to show "Today" button | boolean | true |
@@ -82,7 +83,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | format | to set the date format. When an array is provided, all values are used for parsing and first value for display. refer to [moment.js](http://momentjs.com/) | string \| string[] | "YYYY-MM" |
 | monthCellContentRender | Custom month cell content render method by setting a scoped slot | slot="monthCellContentRender" slot-scope="date, locale" | - |
-| renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" | - |
+| renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" slot-scope="mode" | - |
 | value(v-model) | to set date | [moment](http://momentjs.com/) | - |
 
 ### MonthPicker Events
@@ -98,6 +99,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | defaultPickerValue | to set default picker date | [moment](http://momentjs.com/) | - |
 | format | to set the date format, refer to [moment.js](http://momentjs.com/) | string | "YYYY-wo" |
 | value(v-model) | to set date | [moment](http://momentjs.com/) | - |
+| renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" slot-scope="mode" | - |
 
 ### WeekPicker Events
 | Events Name | Description | Arguments |
@@ -113,7 +115,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | disabledTime | to specify the time that cannot be selected | function(dates: \[moment, moment\], partial: `'start'|'end'`) | - |
 | format | to set the date format | string | "YYYY-MM-DD HH:mm:ss" |
 | ranges | preseted ranges for quick selection | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | - |
-| renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" | - |
+| renderExtraFooter | render extra footer in panel by setting a scoped slot| slot="renderExtraFooter" slot-scope="mode" | - |
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/components/time-picker/#API) |
 | showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
 | value(v-model) | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |

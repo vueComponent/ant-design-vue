@@ -9,18 +9,19 @@ import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } 
 const DatePicker = wrapPicker(
   { ...createPicker(VcCalendar, DatePickerProps()), name: 'ADatePicker' },
   DatePickerProps(),
+  'date'
 );
 
 const MonthPicker = wrapPicker(
   { ...createPicker(MonthCalendar, MonthPickerProps()), name: 'AMonthPicker' },
   MonthPickerProps(),
-  'YYYY-MM',
+  'month',
 );
 
 Object.assign(DatePicker, {
-  RangePicker: wrapPicker(RangePicker, RangePickerProps()),
+  RangePicker: wrapPicker(RangePicker, RangePickerProps(), 'date'),
   MonthPicker,
-  WeekPicker: wrapPicker(WeekPicker, WeekPickerProps(), 'gggg-wo'),
+  WeekPicker: wrapPicker(WeekPicker, WeekPickerProps(), 'week'),
 });
 
 /* istanbul ignore next */

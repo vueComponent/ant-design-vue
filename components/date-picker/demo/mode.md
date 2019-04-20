@@ -25,6 +25,7 @@ Determing which panel to show with `mode` and `onPanelChange`.
       :value="value"
       :mode="mode2"
       @panelChange="handlePanelChange2"
+      @change="handleChange"
     />
   </div>
 </template>
@@ -43,7 +44,9 @@ export default {
         this.mode1 = 'time'
       }
     },
-
+    handleChange(value){
+      this.value = value
+    },
     handlePanelChange1(value, mode) {
       this.mode1 = mode
     },

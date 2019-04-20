@@ -29,7 +29,7 @@ When user visit a page with a list of items, and want to create a new item. The 
 const CollectionCreateForm = {
   props: ['visible'],
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'form_in_modal' });
   },
   template: `
     <a-modal

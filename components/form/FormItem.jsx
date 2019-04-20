@@ -18,6 +18,7 @@ import getTransitionProps from '../_util/getTransitionProps';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement, cloneVNodes } from '../_util/vnode';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 
 function noop() {}
 export const FormItemProps = {
@@ -65,6 +66,7 @@ export default {
     FormProps: { default: () => ({}) },
     decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
+    configProvider: { default: () => ({}) },
   },
   data() {
     return { helpShow: false };
@@ -197,8 +199,7 @@ export default {
       }
     },
 
-    renderHelp() {
-      const prefixCls = this.prefixCls;
+    renderHelp(prefixCls) {
       const help = this.getHelpMessage();
       const children = help ? (
         <div class={`${prefixCls}-explain`} key="help">
@@ -219,8 +220,7 @@ export default {
       );
     },
 
-    renderExtra() {
-      const { prefixCls } = this;
+    renderExtra(prefixCls) {
       const extra = getComponentFromProp(this, 'extra');
       return extra ? <div class={`${prefixCls}-extra`}>{extra}</div> : null;
     },
@@ -244,7 +244,7 @@ export default {
       return '';
     },
 
-    renderValidateWrapper(c1, c2, c3) {
+    renderValidateWrapper(prefixCls, c1, c2, c3) {
       const props = this.$props;
       const onlyControl = this.getOnlyControl;
       const validateStatus =
@@ -252,9 +252,9 @@ export default {
           ? this.getValidateStatus()
           : props.validateStatus;
 
-      let classes = `${props.prefixCls}-item-control`;
+      let classes = `${prefixCls}-item-control`;
       if (validateStatus) {
-        classes = classNames(`${props.prefixCls}-item-control`, {
+        classes = classNames(`${prefixCls}-item-control`, {
           'has-feedback': props.hasFeedback || validateStatus === 'validating',
           'has-success': validateStatus === 'success',
           'has-warning': validateStatus === 'warning',
@@ -282,13 +282,13 @@ export default {
       }
       const icon =
         props.hasFeedback && iconType ? (
-          <span class={`${props.prefixCls}-item-children-icon`}>
+          <span class={`${prefixCls}-item-children-icon`}>
             <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
           </span>
         ) : null;
       return (
         <div class={classes}>
-          <span class={`${props.prefixCls}-item-children`}>
+          <span class={`${prefixCls}-item-children`}>
             {c1}
             {icon}
           </span>
@@ -298,8 +298,8 @@ export default {
       );
     },
 
-    renderWrapper(children) {
-      const { prefixCls, wrapperCol = {} } = this;
+    renderWrapper(prefixCls, children) {
+      const { wrapperCol = {} } = this;
       const { class: cls, style, id, on, ...restProps } = wrapperCol;
       const className = classNames(`${prefixCls}-item-control-wrapper`, cls);
       const colProps = {
@@ -353,8 +353,8 @@ export default {
       }
     },
 
-    renderLabel() {
-      const { prefixCls, labelCol = {}, colon, id } = this;
+    renderLabel(prefixCls) {
+      const { labelCol = {}, colon, id } = this;
       const label = getComponentFromProp(this, 'label');
       const required = this.isRequired();
       const {
@@ -398,21 +398,29 @@ export default {
         </Col>
       ) : null;
     },
-    renderChildren() {
+    renderChildren(prefixCls) {
       return [
-        this.renderLabel(),
+        this.renderLabel(prefixCls),
         this.renderWrapper(
-          this.renderValidateWrapper(this.slotDefault, this.renderHelp(), this.renderExtra()),
+          prefixCls,
+          this.renderValidateWrapper(
+            prefixCls,
+            this.slotDefault,
+            this.renderHelp(prefixCls),
+            this.renderExtra(prefixCls)
+          ),
         ),
       ];
     },
-    renderFormItem(children) {
-      const props = this.$props;
-      const prefixCls = props.prefixCls;
+    renderFormItem() {
+      const { prefixCls: customizePrefixCls, colon } = this.$props;
+      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const prefixCls = getPrefixCls('form', customizePrefixCls);
+      const children = this.renderChildren(prefixCls);
       const itemClassName = {
         [`${prefixCls}-item`]: true,
         [`${prefixCls}-item-with-help`]: this.helpShow,
-        [`${prefixCls}-item-no-colon`]: !props.colon,
+        [`${prefixCls}-item-no-colon`]: !colon,
       };
 
       return <Row class={classNames(itemClassName)}>{children}</Row>;
@@ -478,8 +486,6 @@ export default {
     } else {
       this.slotDefault = child;
     }
-
-    const children = this.renderChildren();
-    return this.renderFormItem(children);
+    return this.renderFormItem();
   },
 };

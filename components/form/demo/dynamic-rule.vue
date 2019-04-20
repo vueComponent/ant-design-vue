@@ -77,7 +77,7 @@ export default {
       checkNick: false,
       formItemLayout,
       formTailLayout,
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this, { name: 'dynamic_rule' }),
     };
   },
   methods: {

@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       formLayout: 'horizontal',
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     };
   },
   methods: {

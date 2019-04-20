@@ -72,7 +72,7 @@ export default {
   data () {
     return {
       hasErrors,
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this, { name: 'horizontal_login' }),
     };
   },
   mounted () {

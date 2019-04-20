@@ -8,6 +8,7 @@ import createFormField from '../vc-form/src/createFormField';
 import FormItem from './FormItem';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import { initDefaultProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const FormCreateOption = {
   onFieldsChange: PropTypes.func,
@@ -15,6 +16,7 @@ export const FormCreateOption = {
   mapPropsToFields: PropTypes.func,
   validateMessages: PropTypes.any,
   withRef: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 // function create
@@ -119,15 +121,11 @@ export const ValidationRule = {
 const Form = {
   name: 'AForm',
   props: initDefaultProps(FormProps, {
-    prefixCls: 'ant-form',
     layout: 'horizontal',
     hideRequiredMark: false,
   }),
-
   Item: FormItem,
-
   createFormField: createFormField,
-
   create: (options = {}) => {
     return createDOMForm({
       fieldNameProp: 'id',
@@ -166,6 +164,9 @@ const Form = {
           : () => {},
     };
   },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   watch: {
     form() {
       this.$forceUpdate();
@@ -196,7 +197,7 @@ const Form = {
 
   render() {
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       hideRequiredMark,
       layout,
       onSubmit,
@@ -204,6 +205,8 @@ const Form = {
       autoFormCreate,
       options = {},
     } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('form', customizePrefixCls);
 
     const formClassName = classNames(prefixCls, {
       [`${prefixCls}-horizontal`]: layout === 'horizontal',

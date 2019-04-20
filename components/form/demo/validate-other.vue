@@ -5,7 +5,7 @@
 
 <us>
 #### Other Form Controls
-Demostration for validataion configuration for form controls which are not show in the above demos.
+Demonstration of validation configuration for form controls which are not shown in the demos above.
 </us>
 
 
@@ -252,7 +252,7 @@ export default {
     },
   }),
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'validate_other' });
   },
   methods: {
     handleSubmit  (e) {

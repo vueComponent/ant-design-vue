@@ -95,7 +95,7 @@ export default {
     };
   },
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'time_related_controls' });
   },
   methods: {
     handleSubmit  (e) {

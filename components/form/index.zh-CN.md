@@ -46,6 +46,7 @@ export default {
 | --- | --- | --- |
 | props | 仅仅支持Form.create({})(CustomizedForm)的使用方式，父组件需要映射到表单项上的属性声明(和[vue组件props一致]( https://vuejs.org/v2/api/#props)) | {} |
 | mapPropsToFields | 把父组件的属性映射到表单项上（如：把 Redux store 中的值读出），需要对返回值中的表单域数据用 [`Form.createFormField`](#Form.createFormField) 标记，如果使用$form.createForm创建收集器，你可以将任何数据映射到Field中，不受父组件约束 | (props) => ({ \[fieldName\]: FormField { value } }) |
+| name | 设置表单域内字段 id 的前缀 | - |
 | validateMessages | 默认校验信息，可用于把默认错误信息改为中文等，格式与 [newMessages](https://github.com/yiminghe/async-validator/blob/master/src/messages.js) 返回值一致 | Object { [nested.path]&#x3A; String } |
 | onFieldsChange | 当 `Form.Item` 子节点的值发生改变时触发，可以把对应的值转存到 Redux store | Function(props, fields) |
 | onValuesChange | 任一表单域的值发生改变时的回调 | (props, values) => void |

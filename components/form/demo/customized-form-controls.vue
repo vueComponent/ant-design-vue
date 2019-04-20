@@ -111,7 +111,7 @@ export default {
     PriceInput,
   },
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'customized_form_controls' });
   },
   methods: {
     handleSubmit  (e) {

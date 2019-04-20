@@ -89,7 +89,7 @@ export default {
     };
   },
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'dynamic_form_item' });
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   methods: {
@@ -112,7 +112,7 @@ export default {
       const { form } = this;
       // can use data-binding to get
       const keys = form.getFieldValue('keys');
-      const nextKeys = keys.concat(++id);
+      const nextKeys = keys.concat(id++);
       // can use data-binding to set
       // important! notify form to detect changes
       form.setFieldsValue({

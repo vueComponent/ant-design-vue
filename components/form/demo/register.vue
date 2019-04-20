@@ -248,7 +248,7 @@ export default {
     };
   },
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'register' });
   },
   methods: {
     handleSubmit  (e) {

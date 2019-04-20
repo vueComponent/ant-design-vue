@@ -77,7 +77,7 @@ export default {
   data () {
     return {
       expand: false,
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this, { name: 'advanced_search' }),
     };
   },
   computed: {

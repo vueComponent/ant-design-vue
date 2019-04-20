@@ -77,7 +77,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       validate-status="warning"
     >
       <a-input
-        id="warning"
+        id="warning2"
         placeholder="Warning"
       />
     </a-form-item>
@@ -91,7 +91,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       help="Should be combination of numbers & alphabets"
     >
       <a-input
-        id="error"
+        id="error2"
         placeholder="unavailable choice"
       />
     </a-form-item>

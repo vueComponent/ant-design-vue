@@ -82,7 +82,7 @@ Normal login form which can contain more elements.
 
 export default {
   beforeCreate () {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this, { name: 'normal_login' });
   },
   methods: {
     handleSubmit (e) {

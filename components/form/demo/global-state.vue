@@ -48,6 +48,7 @@ const CustomizedForm = {
   `,
   created () {
     this.form = this.$form.createForm(this, {
+      name: 'global_state',
       onFieldsChange: (_, changedFields) => {
         this.$emit('change', changedFields);
       },

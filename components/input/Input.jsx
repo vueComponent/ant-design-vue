@@ -4,6 +4,7 @@ import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import { isIE, isIE9 } from '../_util/env';
+import Icon from '../icon'
 
 function noop() {}
 
@@ -121,7 +122,7 @@ export default {
       );
     },
     renderLabeledIcon(children) {
-      const { prefixCls, size } = this.$props;
+      const { prefixCls, size, allowClear } = this.$props;
       let prefix = getComponentFromProp(this, 'prefix');
       let suffix = getComponentFromProp(this, 'suffix');
       if (!prefix && !suffix) {
@@ -130,7 +131,7 @@ export default {
 
       prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 
-      suffix = suffix ? <span class={`${prefixCls}-suffix`}>{suffix}</span> : null;
+      suffix = suffix || allowClear ? <span class={`${prefixCls}-suffix`}>{this.renderClearIcon()}{suffix}</span> : null;
       const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
@@ -143,6 +144,24 @@ export default {
         </span>
       );
     },
+    handleReset(){
+      this.stateValue = '';
+    },
+    renderClearIcon() {
+      const { prefixCls, allowClear } = this.$props;
+      const value = this.stateValue
+      if (!allowClear || value === undefined || value === '') {
+        return null;
+      }
+      return (
+        <Icon
+          type="close-circle"
+          theme="filled"
+          onClick={this.handleReset}
+          className={`${prefixCls}-clear-icon`}
+        />
+      )
+    },
 
     renderInput() {
       const otherProps = omit(this.$props, [
@@ -153,6 +172,7 @@ export default {
         'suffix',
         'value',
         'defaultValue',
+        'allowClear'
       ]);
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
       const inputProps = {

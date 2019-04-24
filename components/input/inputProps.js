@@ -34,5 +34,5 @@ export default {
   suffix: PropTypes.any,
   spellCheck: Boolean,
   autoFocus: Boolean,
-  allowClear: Boolean
+  allowClear: Boolean,
 };

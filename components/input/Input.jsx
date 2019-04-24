@@ -4,7 +4,7 @@ import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import { isIE, isIE9 } from '../_util/env';
-import Icon from '../icon'
+import Icon from '../icon';
 
 function noop() {}
 
@@ -125,13 +125,19 @@ export default {
       const { prefixCls, size, allowClear } = this.$props;
       let prefix = getComponentFromProp(this, 'prefix');
       let suffix = getComponentFromProp(this, 'suffix');
-      if (!prefix && !suffix) {
+      if (!prefix && !suffix && !allowClear) {
         return children;
       }
 
       prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 
-      suffix = suffix || allowClear ? <span class={`${prefixCls}-suffix`}>{this.renderClearIcon()}{suffix}</span> : null;
+      suffix =
+        suffix || allowClear ? (
+          <span class={`${prefixCls}-suffix`}>
+            {this.renderClearIcon()}
+            {suffix}
+          </span>
+        ) : null;
       const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
@@ -144,12 +150,13 @@ export default {
         </span>
       );
     },
-    handleReset(){
+    handleReset() {
       this.stateValue = '';
+      this.focus();
     },
     renderClearIcon() {
       const { prefixCls, allowClear } = this.$props;
-      const value = this.stateValue
+      const value = this.stateValue;
       if (!allowClear || value === undefined || value === '') {
         return null;
       }
@@ -158,9 +165,9 @@ export default {
           type="close-circle"
           theme="filled"
           onClick={this.handleReset}
-          className={`${prefixCls}-clear-icon`}
+          class={`${prefixCls}-clear-icon`}
         />
-      )
+      );
     },
 
     renderInput() {
@@ -172,7 +179,7 @@ export default {
         'suffix',
         'value',
         'defaultValue',
-        'allowClear'
+        'allowClear',
       ]);
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
       const inputProps = {

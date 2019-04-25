@@ -151,8 +151,8 @@ export default {
       );
     },
     handleReset(e) {
-      this.handleChange(e)
-      this.focus()
+      this.handleChange(e);
+      this.focus();
     },
     renderClearIcon() {
       const { prefixCls, allowClear } = this.$props;

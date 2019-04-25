@@ -74,4 +74,10 @@ export declare class Input extends AntdComponent {
    * @type string | number
    */
   value: string | number;
+
+  /**
+   * allow to remove input content with clear icon
+   * @default false
+   */
+  allowClear: boolean;
 }

@@ -10,9 +10,17 @@ A standard progress bar.
 
 ```html
 <template>
-  <a-tooltip title="3 done / 3 in progress / 4 to do">
-    <a-progress :percent="60" :successPercent="30" />
-  </a-tooltip>
+  <div>
+    <a-tooltip title="3 done / 3 in progress / 4 to do">
+      <a-progress :percent="60" :successPercent="30" />
+    </a-tooltip>
+    <a-tooltip title="3 done / 3 in progress / 4 to do">
+      <a-progress :percent="60" :successPercent="30" type="circle" />
+    </a-tooltip>
+    <a-tooltip title="3 done / 3 in progress / 4 to do">
+      <a-progress :percent="60" :successPercent="30" type="dashboard" />
+    </a-tooltip>
+  </div>
 </template>
 ```
 

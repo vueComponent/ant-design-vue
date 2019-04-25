@@ -8,7 +8,7 @@ import Group from './group';
 import TextArea from './textarea';
 import Addon from './addon';
 import Tooltip from './tooltip';
-import AllowClear from './allowClear'
+import AllowClear from './allowClear';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {

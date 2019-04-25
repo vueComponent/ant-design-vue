@@ -150,9 +150,9 @@ export default {
         </span>
       );
     },
-    handleReset() {
-      this.stateValue = '';
-      this.focus();
+    handleReset(e) {
+      this.handleChange(e)
+      this.focus()
     },
     renderClearIcon() {
       const { prefixCls, allowClear } = this.$props;

@@ -30,6 +30,12 @@ export default {
       scale: 1,
     };
   },
+  watch: {
+    src() {
+      this.isImgExist = true;
+      this.scale = 1;
+    },
+  },
   mounted() {
     this.prevChildren = this.$slots.default;
     this.prevState = { ...this.$data };

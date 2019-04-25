@@ -80,7 +80,7 @@ export default {
     const addonAfter = getComponentFromProp(this, 'addonAfter');
     const addonBefore = getComponentFromProp(this, 'addonBefore');
     const buttonOrIcon = this.getButtonOrIcon();
-    let searchSuffix = suffix ? [suffix, buttonOrIcon] : buttonOrIcon;
+    let searchSuffix = addonAfter ? [buttonOrIcon, addonAfter] : buttonOrIcon;
     if (Array.isArray(searchSuffix)) {
       searchSuffix = searchSuffix.map((item, index) => {
         if (!isValidElement(item) || item.key) {
@@ -100,8 +100,8 @@ export default {
         ...others,
         prefixCls: inputPrefixCls,
         size,
-        suffix: searchSuffix,
-        addonAfter,
+        suffix,
+        addonAfter: searchSuffix,
         addonBefore,
       },
       attrs: this.$attrs,

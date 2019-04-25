@@ -15,6 +15,7 @@
 | suffix | 带有后缀图标的 input | string\|slot |  |
 | type | 声明 input 类型，同原生 input 标签的 type 属性，见：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#属性)(请直接使用 `Input.TextArea` 代替 `type="textarea"`)。 | string | `text` |
 | value(v-model) | 输入框内容 | string |  |
+| allowClear | 可以点击清除图标删除内容 | boolean | false
 
 ### Input 事件
 | 事件名称 | 说明 | 回调参数 |

@@ -8,6 +8,7 @@ import Group from './group';
 import TextArea from './textarea';
 import Addon from './addon';
 import Tooltip from './tooltip';
+import AllowClear from './allowClear'
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
@@ -22,7 +23,7 @@ const md = {
 Keyboard and mouse can be used for providing or changing data.
 ## When To Use
 - A user input in a form field is needed.
-- A search input is required. 
+- A search input is required.
 ## Examples `,
 };
 export default {
@@ -43,6 +44,7 @@ export default {
         <TextArea />
         <Addon />
         <Tooltip />
+        <AllowClear />
         <api>
           <CN slot='cn' />
           <US/>

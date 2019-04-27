@@ -97,10 +97,10 @@ export default {
         this.sPopupVisible = val;
       }
     },
-    sPopupVisible(val) {
+    sPopupVisible() {
       this.$nextTick(() => {
         this.renderComponent(null, () => {
-          this.afterPopupVisibleChange(val);
+          this.afterPopupVisibleChange(this.popupVisible);
         });
       });
     },

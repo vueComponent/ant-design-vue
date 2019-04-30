@@ -261,7 +261,7 @@ export default {
     }
 
     const menus = filterDropdown ? (
-      <FilterDropdownMenuWrapper>{filterDropdown}</FilterDropdownMenuWrapper>
+      <FilterDropdownMenuWrapper class={`${prefixCls}-dropdown`}>{filterDropdown}</FilterDropdownMenuWrapper>
     ) : (
       <FilterDropdownMenuWrapper class={`${prefixCls}-dropdown`}>
         <Menu

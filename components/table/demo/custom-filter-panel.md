@@ -11,7 +11,7 @@ Implement a customized column search example via `filterDropdown`.
 ```html
 <template>
   <a-table :dataSource="data" :columns="columns">
-    <div slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }" class='custom-filter-dropdown'>
+    <div slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }" style="padding: 8px">
       <a-input
         v-ant-ref="c => searchInput = c"
         :placeholder="`Search ${column.dataIndex}`"
@@ -143,12 +143,6 @@ export default {
 }
 </script>
 <style scoped>
-.custom-filter-dropdown {
-  padding: 8px;
-  border-radius: 4px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
-}
 
 .highlight {
   background-color: rgb(255, 192, 105);

@@ -14,7 +14,13 @@ Simple table with actions.
     <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
     <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
     <span slot="tags" slot-scope="tags">
-      <a-tag v-for="tag in tags" color="blue" :key="tag">{{tag}}</a-tag>
+      <a-tag
+        v-for="tag in tags"
+        :color="tag==='loser' ? 'volcano' : (tag.length > 5 ? 'geekblue' : 'green')"
+        :key="tag"
+      >
+        {{tag.toUpperCase()}}
+      </a-tag>
     </span>
     <span slot="action" slot-scope="text, record">
       <a href="javascript:;">Invite 一 {{record.name}}</a>

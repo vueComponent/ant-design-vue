@@ -1,13 +1,13 @@
 <cn>
 #### 固定表头
 方便一页内展示大量数据。
-需要指定 column 的 `width` 属性，否则列头和内容可能不对齐。
+需要指定 column 的 `width` 属性，否则列头和内容可能不对齐。（建议留一列不设宽度以适应弹性布局）
 </cn>
 
 <us>
 #### Fixed Header
 Display large amounts of data in scrollable view.
-> Specify the width of each column if header and cell do not align properly.
+> Specify width of columns if header and cell do not align properly.(Leave one column at least without width to fit fluid layout)
 </us>
 
 ```html

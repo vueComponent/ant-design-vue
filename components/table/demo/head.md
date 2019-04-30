@@ -2,6 +2,7 @@
 #### 筛选和排序
 对某一列数据进行筛选，使用列的 `filters` 属性来指定需要筛选菜单的列，`onFilter` 用于筛选当前数据，`filterMultiple` 用于指定多选和单选。
 对某一列数据进行排序，通过指定列的 `sorter` 函数即可启动排序按钮。`sorter: function(rowA, rowB) { ... }`， rowA、rowB 为比较的两个行数据。
+`sortDirections: ['ascend' | 'descend']`改变每列可用的排序方式，切换排序时按数组内容依次切换，设置在table props上时对所有列生效。
 使用 `defaultSortOrder` 属性，设置列的默认排序顺序。
 </cn>
 
@@ -9,6 +10,7 @@
 #### Filter and sorter
 Use `filters` to generate filter menu in columns, `onFilter` to determine filtered result, and `filterMultiple` to indicate whether it's multiple or single selection.
 Use `sorter` to make a column sortable. `sorter` can be a function of the type `function(a, b) { ... }` for sorting data locally.
+`sortDirections: ['ascend' | 'descend']` defines available sort methods for each columns, effective for all columns when set on table props.
 Uses `defaultSortOrder` to make a column sorted by default.
 If a `sortOrder` or `defaultSortOrder` is specified with the value `ascend` or `descend`, you can access this value from within the function passed to the `sorter` as explained above. Such a function can take the form: `function(a, b, sortOrder) { ... }`.
 </us>
@@ -42,6 +44,7 @@ const columns = [{
   // here is that finding the name started with `value`
   onFilter: (value, record) => record.name.indexOf(value) === 0,
   sorter: (a, b) => a.name.length - b.name.length,
+  sortDirections: ['descend'],
 }, {
   title: 'Age',
   dataIndex: 'age',
@@ -59,6 +62,7 @@ const columns = [{
   filterMultiple: false,
   onFilter: (value, record) => record.address.indexOf(value) === 0,
   sorter: (a, b) => a.address.length - b.address.length,
+  sortDirections: ['descend', 'ascend'],
 }];
 
 const data = [{

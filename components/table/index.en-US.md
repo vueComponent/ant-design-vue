@@ -50,7 +50,7 @@ const columns = [{
 | indentSize | Indent size in pixels of tree data | number | 15 |
 | loading | Loading status of table | boolean\|[object](/components/spin) | `false` |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' |
-| pagination | Pagination [config](#pagination) or [`Pagination`] (/components/pagination/), hide it by setting it to `false` | object |  |
+| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object |  |
 | rowClassName | Row's className | Function(record, index):string | - |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
 | rowSelection | Row selection [config](#rowSelection) | object | null |
@@ -81,9 +81,11 @@ Follow [Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx) syntax
         xxx...
       },
       on: {
-        click: () => {},       // click row
-        mouseenter: () => {},  // mouse enter row
-        xxxx...
+        click: (event) => {},       // click row
+        doubleclick: (event) => {}, // double click row
+        contextmenu: (event) => {}  // right button click row
+        mouseenter: (event) => {}   // mouse enter row
+        mouseleave: (event) => {}   // mouse leave row
       },
     };
   )}

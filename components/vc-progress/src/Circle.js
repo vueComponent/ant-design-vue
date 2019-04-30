@@ -8,7 +8,7 @@ import { propTypes, defaultProps } from './types';
 const circlePropTypes = {
   ...propTypes,
   gapPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  gapDegree: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  gapDegree: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]),
 };
 
 const circleDefaultProps = {

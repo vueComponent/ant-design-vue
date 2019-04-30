@@ -38,8 +38,8 @@ const Circle = {
     } = props;
     const circleSize = width || 120;
     const circleStyle = {
-      width: circleSize,
-      height: circleSize,
+      width: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
+      height: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
       fontSize: circleSize * 0.15 + 6,
     };
     const circleWidth = strokeWidth || 6;

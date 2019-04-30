@@ -16,13 +16,13 @@ const Line = {
     } = props;
     const percentStyle = {
       width: `${validProgress(percent)}%`,
-      height: strokeWidth || (size === 'small' ? 6 : 8),
+      height: strokeWidth || (size === 'small' ? '6px' : '8px'),
       background: strokeColor,
       borderRadius: strokeLinecap === 'square' ? 0 : '100px',
     };
     const successPercentStyle = {
       width: `${validProgress(successPercent)}%`,
-      height: strokeWidth || (size === 'small' ? 6 : 8),
+      height: strokeWidth || (size === 'small' ? '6px' : '8px'),
       borderRadius: strokeLinecap === 'square' ? 0 : '100px',
     };
     const successSegment =

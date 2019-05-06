@@ -124,9 +124,18 @@ export default {
       const { prefixCls, size } = this.$props;
       let prefix = getComponentFromProp(this, 'prefix');
       let suffix = getComponentFromProp(this, 'suffix');
-      if (!prefix && !suffix) {
-        return children;
-      }
+
+      // if (!prefix && !suffix) {
+      //   return children;
+      // }
+
+      /**
+       * 注释掉上面的代码是因为
+       * https://github.com/vueComponent/ant-design-vue/issues/685
+       * 当 prevfix 和 suffix 都不存在的时候 最终render出来的 dom 结构发生了变化 （ 少了一个 span 包裹 ）
+       * 当 prevfix 或者 suffix 从隐藏到现实 render 出来的 dom 缺少一个span包裹, vue 应该会替换掉整个dom，从而导致第一次变化的时候，input是个全新的并且没有聚焦
+       *
+       */
 
       prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 

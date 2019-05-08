@@ -95,6 +95,8 @@ import { default as Slider } from './slider';
 
 import { default as Spin } from './spin';
 
+import { default as Statistic } from './statistic';
+
 import { default as Steps } from './steps';
 
 import { default as Switch } from './switch';
@@ -170,6 +172,7 @@ const components = [
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,
@@ -250,6 +253,7 @@ export {
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,

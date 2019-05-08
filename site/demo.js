@@ -5,6 +5,12 @@ export default {
     type: 'Data Display',
     title: 'Avatar',
   },
+  statistic: {
+    category: 'Components',
+    subtitle: '统计数值',
+    type: 'Data Display',
+    title: 'Statistic',
+  },
   badge: {
     category: 'Components',
     subtitle: '徽标数',

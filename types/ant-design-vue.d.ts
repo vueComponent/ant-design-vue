@@ -46,6 +46,7 @@ import { Select } from './select/select';
 import { Skeleton } from './skeleton';
 import { Slider } from './slider';
 import { Spin } from './spin';
+import { Statistic } from './statistic';
 import { Steps } from './steps/steps';
 import { Switch } from './switch';
 import { Table } from './table/table';
@@ -110,6 +111,7 @@ export {
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,

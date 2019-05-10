@@ -7,7 +7,7 @@ import Statistic, { StatisticProps } from './Statistic';
 import { formatCountdown } from './utils';
 
 // const REFRESH_INTERVAL = 1000 / 30;
-const REFRESH_INTERVAL = 10000;
+const REFRESH_INTERVAL = 1000 / 30;
 
 function getTime(value) {
   return interopDefault(moment)(value).valueOf();
@@ -19,6 +19,12 @@ export default {
     prefixCls: 'ant-statistic',
     format: 'HH:mm:ss',
   }),
+
+  data() {
+    return {
+      uniKey: 0,
+    };
+  },
 
   countdownId: undefined,
 
@@ -54,7 +60,7 @@ export default {
         return;
       }
       this.countdownId = window.setInterval(() => {
-        this.$forceUpdate();
+        this.uniKey++;
       }, REFRESH_INTERVAL);
     },
 
@@ -87,7 +93,7 @@ export default {
 
   render() {
     return (
-      <Statistic {...{ props: {...this.$props, valueRender: this.valueRenderHtml, formatter: this.formatCountdown} }} />
+      <Statistic key={this.uniKey} {...{ props: {...this.$props, valueRender: this.valueRenderHtml, formatter: this.formatCountdown} }} />
     );
   },
 };

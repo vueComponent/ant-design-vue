@@ -28,7 +28,7 @@ Countdown component.
 export default {
   data () {
     return {
-      deadline: Date.now() + 1000 * 60 * 60 * 24 * 2 * 1 + 1000 * 30,
+      deadline: Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30,
     }
   },
   methods: {

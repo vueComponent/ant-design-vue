@@ -77,7 +77,7 @@ export default {
     },
 
     // Countdown do not need display the timestamp
-    valueRenderHtml: (node) =>
+    valueRenderHtml: node =>
       cloneElement(node, {
         props: {
           title: undefined,
@@ -87,7 +87,15 @@ export default {
 
   render() {
     return (
-      <Statistic {...{ props: {...this.$props, valueRender: this.valueRenderHtml, formatter: this.formatCountdown} }} />
+      <Statistic
+        {...{
+          props: {
+            ...this.$props,
+            valueRender: this.valueRenderHtml,
+            formatter: this.formatCountdown,
+          },
+        }}
+      />
     );
   },
 };

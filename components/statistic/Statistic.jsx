@@ -27,17 +27,14 @@ export default {
   }),
 
   render() {
-    const {
-      prefixCls,
-      value = 0,
-      valueStyle,
-      valueRender,
-    } = this.$props;
+    const { prefixCls, value = 0, valueStyle, valueRender } = this.$props;
     const title = getComponentFromProp(this, 'title');
     let prefix = getComponentFromProp(this, 'prefix');
     let suffix = getComponentFromProp(this, 'suffix');
     const formatter = getComponentFromProp(this, 'formatter');
-    let valueNode = <StatisticNumber {...{ props: this.$props }} value={value}  formatter={formatter} />;
+    let valueNode = (
+      <StatisticNumber {...{ props: this.$props }} value={value} formatter={formatter} />
+    );
     if (valueRender) {
       valueNode = valueRender(valueNode);
     }

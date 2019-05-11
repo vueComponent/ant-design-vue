@@ -21,7 +21,7 @@ function formatTimeStr(duration, format) {
     if (current.indexOf(name) !== -1) {
       const value = Math.floor(leftDuration / unit);
       leftDuration -= value * unit;
-      return current.replace(new RegExp(`${name}+`, 'g'), (match) => {
+      return current.replace(new RegExp(`${name}+`, 'g'), match => {
         const len = match.length;
         return padStart(value.toString(), len, '0');
       });

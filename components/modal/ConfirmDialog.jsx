@@ -64,7 +64,7 @@ export default {
         {cancelText}
       </ActionButton>
     );
-    const iconNode = typeof icon === 'string' ? <Icon type={icon} /> : icon;
+    const iconNode = typeof icon === 'string' ? <Icon type={icon} /> : icon(h);
 
     return (
       <Dialog

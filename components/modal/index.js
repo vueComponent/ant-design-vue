@@ -1,5 +1,6 @@
 import Modal, { destroyFns } from './Modal';
 import modalConfirm from './confirm';
+import Icon from '../icon';
 
 // export { ActionButtonProps } from './ActionButton'
 // export { ModalProps, ModalFuncProps } from './Modal'
@@ -7,7 +8,9 @@ import modalConfirm from './confirm';
 const info = function(props) {
   const config = {
     type: 'info',
-    icon: <Icon type="info-circle" />,
+    icon: (h) => {
+      return <Icon type="info-circle" />;
+    },
     okCancel: false,
     ...props,
   };
@@ -17,7 +20,9 @@ const info = function(props) {
 const success = function(props) {
   const config = {
     type: 'success',
-    icon: <Icon type="check-circle" />,
+    icon: (h) => {
+      return <Icon type="check-circle" />;
+    },
     okCancel: false,
     ...props,
   };
@@ -27,7 +32,9 @@ const success = function(props) {
 const error = function(props) {
   const config = {
     type: 'error',
-    icon: <Icon type="close-circle" />,
+    icon: (h) => {
+      return <Icon type="close-circle" />;
+    },
     okCancel: false,
     ...props,
   };
@@ -37,7 +44,9 @@ const error = function(props) {
 const warning = function(props) {
   const config = {
     type: 'warning',
-    icon: <Icon type="exclamation-circle" />,
+    icon: (h) => {
+      return <Icon type="exclamation-circle" />;
+    },
     okCancel: false,
     ...props,
   };

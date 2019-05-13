@@ -20,20 +20,20 @@ import Button from '../../button'
 export default {
   methods: {
     showConfirm() {
+      const _self = this
       for (let i = 0; i < 3; i += 1) {
         setTimeout(() => {
           this.$confirm({
-            content: (
-              <Button onClick={this.destroyAll}>
-                Click to destroy all
-              </Button>
-            ),
+            content: 'destroy all',
             onOk() {
               return new Promise((resolve, reject) => {
                 setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
               }).catch(() => console.log('Oops errors!'));
             },
-            onCancel() {},
+            cancelText: 'Click to destroy all',
+            onCancel() {
+              _self.destroyAll()
+            },
           });
         }, i * 500);
       }

@@ -11,7 +11,7 @@ A button is on the left, and a related functional menu is on the right.
 ```html
 <template>
 <div>
-  <a-dropdown-button @click="handleMenuClick">
+  <a-dropdown-button @click="handleButtonClick">
     Dropdown
     <a-menu slot="overlay" @click="handleMenuClick">
       <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>

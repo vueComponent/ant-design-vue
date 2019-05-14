@@ -49,9 +49,7 @@ const LocaleProvider = {
         ...this.locale,
         exist: true,
       };
-      this.$nextTick(() => {
-        setMomentLocale(val);
-      });
+      setMomentLocale(val);
     },
   },
   created() {

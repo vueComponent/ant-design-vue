@@ -22,6 +22,8 @@ exports[`renders ./components/modal/demo/confirm.md correctly 1`] = `<div><butto
 
 exports[`renders ./components/modal/demo/confirm-promise.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Confirm</span></button>`;
 
+exports[`renders ./components/modal/demo/confirm-router.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Confirm</span></button>`;
+
 exports[`renders ./components/modal/demo/footer.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Open Modal with customized footer</span></button>
   <!---->

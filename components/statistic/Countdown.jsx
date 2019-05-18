@@ -6,7 +6,6 @@ import { initDefaultProps } from '../_util/props-util';
 import Statistic, { StatisticProps } from './Statistic';
 import { formatCountdown } from './utils';
 
-// const REFRESH_INTERVAL = 1000 / 30;
 const REFRESH_INTERVAL = 1000 / 30;
 
 function getTime(value) {

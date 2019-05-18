@@ -439,4 +439,12 @@ export default [
     path: 'config-provider-cn',
     component: () => import('../components/config-provider/demo/index.vue'),
   },
+  {
+    path: 'empty',
+    component: () => import('../components/empty/demo/index.vue'),
+  },
+  {
+    path: 'empty-cn',
+    component: () => import('../components/empty/demo/index.vue'),
+  },
 ];

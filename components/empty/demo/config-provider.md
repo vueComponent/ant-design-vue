@@ -21,14 +21,14 @@ Use ConfigProvider set global Empty style.
     <a-divider />
     <a-config-provider>
       <template v-if="customize" v-slot:renderEmpty>
-        <div style="textAlign: center">
-          <a-icon type="smile" style="fontSize: 20px" />
+        <div style="text-align: center">
+          <a-icon type="smile" style="font-size: 20px" />
           <p>Data Not Found</p>
         </div>
       </template>
       <div class="config-provider">
         <h3>Select</h3>
-        <a-select :style="style" />
+        <a-select :style="style" :options="[]" />
 
         <h3>TreeSelect</h3>
         <a-tree-select :style="style" :treeData="[]" />
@@ -37,15 +37,16 @@ Use ConfigProvider set global Empty style.
         <a-cascader :style="style" :options="[]" :showSearch="true" />
 
         <h3>Transfer</h3>
-        <a-transfer />
+        <a-transfer :dataSource="[]" />
 
         <h3>Table</h3>
         <a-table
-          style="marginTop: 8px"
+          style="margin-top: 8px"
           :columns="columns"
+          :dataSource="[]"
         />
         <h3>List</h3>
-        <a-list />
+        <a-list :dataSource="[]" />
       </div>
     </a-config-provider>
   </div>
@@ -69,7 +70,7 @@ export default {
         },
       ]
     }
-  },
+  }
 }
 
 </script>

@@ -46,7 +46,7 @@ const ConfigProvider = {
   },
   methods: {
     renderEmptyComponent() {
-      const customRender = getComponentFromProp(this,'renderEmpty');
+      const customRender = getComponentFromProp(this,'renderEmpty', {}, false);
       return this.$props.renderEmpty || customRender || defaultRenderEmpty;
     },
     getPrefixCls(suffixCls, customizePrefixCls) {

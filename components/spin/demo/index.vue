@@ -6,6 +6,7 @@ import Inside from './inside';
 import Nested from './nested';
 import Size from './size';
 import Tip from './tip';
+import Loading from './loading';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -41,6 +42,7 @@ export default {
         <Inside />
         <Nested />
         <Tip />
+        <Loading />
         <DelayAndDebounce />
         <CustomIndicator />
         <api>
@@ -52,5 +54,8 @@ export default {
       </div>
     );
   },
+  // mounted () {
+  //   this.$loading();
+  // },
 };
 </script>

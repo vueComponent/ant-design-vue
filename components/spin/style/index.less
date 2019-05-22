@@ -188,6 +188,19 @@
   &&-show-text &-text {
     display: block;
   }
+
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: @zindex-loading;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {

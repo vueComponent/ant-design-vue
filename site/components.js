@@ -67,6 +67,7 @@ Vue.prototype.$success = Modal.success;
 Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
+Vue.prototype.$loading = Spin.open;
 
 /* v1.1.3+ registration methods */
 Vue.use(Affix);

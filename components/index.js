@@ -200,6 +200,7 @@ const install = function(Vue) {
   Vue.prototype.$error = Modal.error;
   Vue.prototype.$warning = Modal.warning;
   Vue.prototype.$confirm = Modal.confirm;
+  Vue.prototype.$loading = Spin.open;
 };
 
 /* istanbul ignore if */

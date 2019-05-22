@@ -51,6 +51,7 @@ function loading(config) {
   loadingInstance = render(currentConfig);
 
   return {
+    close,
     destroy: close,
     update,
   };

@@ -52,6 +52,7 @@
 | autoFocusButton | 指定自动获得焦点的按钮 | null\|string: `ok` `cancel` | `ok` |
 | cancelText | 取消按钮文字 | string | 取消 |
 | centered | 垂直居中展示 Modal | Boolean | `false` |
+| closable | 是否显示右上角的关闭按钮 | boolean | `false` |
 | class | 容器类名 | string | - |
 | content | 内容 | string\|vNode | 无 |
 | iconType | 图标 Icon 类型 | string | question-circle |

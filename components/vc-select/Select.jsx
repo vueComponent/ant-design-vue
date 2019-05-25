@@ -1462,9 +1462,7 @@ const Select = {
       this.$emit('focus');
     },
     selectionRefBlur() {
-      this._focused = false;
-      this.updateFocusClassName();
-      this.$emit('blur');
+      this.inputBlur();
     },
   },
 

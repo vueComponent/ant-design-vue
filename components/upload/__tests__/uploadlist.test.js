@@ -97,7 +97,7 @@ describe('Upload List', () => {
   it('should be uploading when upload a file', done => {
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         customRequest: successRequest,
       },
       listeners: {
@@ -133,7 +133,7 @@ describe('Upload List', () => {
   it('handle error', done => {
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         customRequest: errorRequest,
       },
       listeners: {
@@ -166,7 +166,7 @@ describe('Upload List', () => {
     const handleChange = jest.fn();
     const props = {
       propsData: {
-        action: 'http://jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         listType: 'picture',
         defaultFileList: fileList,
         beforeUpload: () => false,

@@ -5,9 +5,12 @@ export default {
   render() {
     const uploaderProps = {
       props: {
-        action: '//jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         multiple: false,
-        data: { a: 1, b: 2 },
+        data: {
+          a: 1,
+          b: 2,
+        },
         headers: {
           Authorization: '$prefix $token',
         },
@@ -25,24 +28,25 @@ export default {
           // EXAMPLE: post form-data with 'axios'
           const formData = new FormData();
           if (data) {
-            Object.keys(data).map(key => {
-              formData.append(key, data[key]);
-            });
+            Object
+              .keys(data)
+              .map(key => {
+                formData.append(key, data[key]);
+              });
           }
           formData.append(filename, file);
 
-          axios
-            .post(action, formData, {
-              withCredentials,
-              headers,
-              onUploadProgress: ({ total, loaded }) => {
-                onProgress({ percent: Math.round((loaded / total) * 100).toFixed(2) }, file);
-              },
-            })
-            .then(({ data: response }) => {
-              onSuccess(response, file);
-            })
-            .catch(onError);
+          axios.post(action, formData, {
+            withCredentials,
+            headers,
+            onUploadProgress: ({total, loaded}) => {
+              onProgress({
+                percent: Math.round((loaded / total) * 100).toFixed(2),
+              }, file);
+            },
+          }).then(({data: response}) => {
+            onSuccess(response, file);
+          }).catch(onError);
 
           return {
             abort() {
@@ -61,17 +65,17 @@ export default {
         error(err) {
           console.log('error', err);
         },
-        progress({ percent }, file) {
+        progress({
+          percent,
+        }, file) {
           console.log('progress', `${percent}%`, file.name);
         },
       },
     };
     return (
-      <div
-        style={{
-          margin: '100px',
-        }}
-      >
+      <div style={{
+        margin: '100px',
+      }}>
         <div>
           <Upload {...uploaderProps}>
             <a>开始上传</a>

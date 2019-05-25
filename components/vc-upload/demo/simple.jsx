@@ -2,11 +2,9 @@ import Upload from '../index';
 
 export default {
   data() {
-    return {
-      destroyed: false,
-    };
+    return {destroyed: false};
   },
-  methods: {
+  methods : {
     destroy() {
       this.destroyed = true;
     },
@@ -16,8 +14,11 @@ export default {
       return null;
     }
     const propsObj = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      data: { a: 1, b: 2 },
+      action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+      data: {
+        a: 1,
+        b: 2,
+      },
       headers: {
         Authorization: 'xxxxxxx',
       },
@@ -63,14 +64,15 @@ export default {
            opacity:0.5;
         `;
     return (
-      <div
-        style={{
-          margin: '100px',
-        }}
-      >
+      <div style={{
+        margin: '100px',
+      }}>
         <h2>固定位置</h2>
 
-        <style>{style}</style>
+        <style>
+          {
+            style
+          }</style>
 
         <div>
           <Upload {...uploaderProps}>
@@ -82,17 +84,19 @@ export default {
 
         <div
           style={{
-            height: '200px',
-            overflow: 'auto',
-            border: '1px solid red',
-          }}
-        >
-          <div
-            style={{
-              height: '500px',
-            }}
-          >
-            <Upload {...uploaderProps1} component="div" style={{ display: 'inline-block' }}>
+          height: '200px',
+          overflow: 'auto',
+          border: '1px solid red',
+        }}>
+          <div style={{
+            height: '500px',
+          }}>
+            <Upload
+              {...uploaderProps1}
+              component="div"
+              style={{
+              display: 'inline-block',
+            }}>
               <a>开始上传2</a>
             </Upload>
           </div>

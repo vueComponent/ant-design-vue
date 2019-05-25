@@ -4,7 +4,7 @@ export default {
   render() {
     const uploaderProps = {
       props: {
-        action: '//jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         multiple: true,
         beforeUpload(file, fileList) {
           console.log(file, fileList);
@@ -30,11 +30,9 @@ export default {
       },
     };
     return (
-      <div
-        style={{
-          margin: '100px',
-        }}
-      >
+      <div style={{
+        margin: '100px',
+      }}>
         <div>
           <Upload {...uploaderProps}>
             <a>开始上传</a>

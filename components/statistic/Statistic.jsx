@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, initDefaultProps } from '../_util/props-util';
-
+import { ConfigConsumerProps } from '../config-provider';
 import StatisticNumber from './Number';
 
 export const StatisticProps = {
@@ -25,9 +25,20 @@ export default {
     decimalSeparator: '.',
     groupSeparator: ',',
   }),
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
 
   render() {
-    const { prefixCls, value = 0, valueStyle, valueRender } = this.$props;
+    const {
+      prefixCls: customizePrefixCls,
+      value = 0,
+      valueStyle,
+      valueRender,
+    } = this.$props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('statistic', customizePrefixCls);
+
     const title = getComponentFromProp(this, 'title');
     let prefix = getComponentFromProp(this, 'prefix');
     let suffix = getComponentFromProp(this, 'suffix');

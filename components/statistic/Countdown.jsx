@@ -2,7 +2,6 @@ import * as moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { cloneElement } from '../_util/vnode';
 import { initDefaultProps } from '../_util/props-util';
-
 import Statistic, { StatisticProps } from './Statistic';
 import { formatCountdown } from './utils';
 
@@ -15,7 +14,6 @@ function getTime(value) {
 export default {
   name: 'AStatisticCountdown',
   props: initDefaultProps(StatisticProps, {
-    prefixCls: 'ant-statistic',
     format: 'HH:mm:ss',
   }),
 

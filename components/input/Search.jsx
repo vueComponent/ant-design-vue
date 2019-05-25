@@ -9,6 +9,7 @@ import PropTypes from '../_util/vue-types';
 
 export default {
   name: 'AInputSearch',
+  inheritAttrs: false,
   model: {
     prop: 'value',
     event: 'change.value',

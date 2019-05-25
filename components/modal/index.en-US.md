@@ -54,6 +54,7 @@ The properties of the object are follows:
 | autoFocusButton | Specify which button to autofocus | null\|string: `ok` `cancel` | `ok` |
 | cancelText | Text of the Cancel button | string | `Cancel` |
 | centered | Centered Modal | Boolean | `false` |
+| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |
 | class | class of container | string | - |
 | content | Content | string\|vNode | - |
 | icon | custom icon (`Added in 1.40.0`) | string\|slot | `<Icon type="question-circle">` |

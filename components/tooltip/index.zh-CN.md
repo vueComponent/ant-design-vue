@@ -21,6 +21,7 @@
 | placement | 气泡框位置，可选 `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom` | string | top |
 | trigger | 触发行为，可选 `hover/focus/click/contextmenu` | string | hover |
 | visible(v-model) | 用于手动控制浮层显隐 | boolean | false |
+| destroyTooltipOnHide | 隐藏后是否销毁tooltip | boolean | false |
 | align | 该值将合并到 placement 的配置中，设置参考 [dom-align](https://github.com/yiminghe/dom-align) | Object | 无 |
 
 ### 事件

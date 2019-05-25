@@ -7,7 +7,7 @@
       <img
         width="150"
         alt="Vue 实战教程"
-        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1552980096914-assets/web-upload/ec3701d2-34ed-4274-b8f4-e0592e020db0.jpeg"
+        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1554903088531-assets/web-upload/c496a156-aabc-4a9b-8cb6-a7a6617706ce.jpeg"
       >
     </a>
   </div>  

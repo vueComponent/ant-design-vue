@@ -363,6 +363,12 @@ export declare class Form extends AntdComponent {
   options: object;
 
   createForm(context: Vue, options?: IformCreateOption): any;
+
+  /**
+   * Convert props to field value
+   * @param field
+   */
+  createFormField(field: any): any;
 }
 
 declare module 'vue/types/vue' {

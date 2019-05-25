@@ -36,6 +36,7 @@ export default {
         this._component && this._component.$destroy();
         this.container.parentNode.removeChild(this.container);
         this.container = null;
+        this._component = null;
       }
     },
 

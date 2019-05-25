@@ -24,6 +24,7 @@ export default {
       okButtonProps,
       cancelButtonProps,
       iconType = 'question-circle',
+      closable = false,
     } = props;
     warning(
       !('iconType' in props),
@@ -73,6 +74,7 @@ export default {
         wrapClassName={classNames({ [`${contentPrefixCls}-centered`]: !!centered })}
         onCancel={e => close({ triggerCancel: true }, e)}
         visible={visible}
+        closable={closable}
         title=""
         transitionName={transitionName}
         footer=""

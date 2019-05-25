@@ -8,6 +8,14 @@ export default [
     component: () => import('../components/avatar/demo/index.vue'),
   },
   {
+    path: 'statistic',
+    component: () => import('../components/statistic/demo/index.vue'),
+  },
+  {
+    path: 'statistic-cn',
+    component: () => import('../components/statistic/demo/index.vue'),
+  },
+  {
     path: 'badge',
     component: () => import('../components/badge/demo/index.vue'),
   },

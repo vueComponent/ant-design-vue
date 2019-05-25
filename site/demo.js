@@ -352,4 +352,10 @@ export default {
     title: 'Skeleton',
     subtitle: '骨架屏',
   },
+  statistic: {
+    category: 'Components',
+    subtitle: '统计数值',
+    type: 'Data Display',
+    title: 'Statistic',
+  },
 };

@@ -1,0 +1,23 @@
+@import '../../style/themes/default';
+@import '../../style/mixins/index';
+
+@statistic-prefix-cls: ~'@{ant-prefix}-statistic';
+
+.@{statistic-prefix-cls} {
+  .reset-component;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+
+  &-content-value,
+  &-content-prefix {
+    font-size: 1.7em;
+  }
+  &-content-value-decimal {
+    font-size: 0.7em;
+  }
+  &-content-suffix {
+    font-size: 1.1em;
+  }
+}

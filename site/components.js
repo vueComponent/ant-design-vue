@@ -40,6 +40,7 @@ import {
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,
@@ -110,6 +111,7 @@ Vue.use(Row);
 Vue.use(Select);
 Vue.use(Slider);
 Vue.use(Spin);
+Vue.use(Statistic);
 Vue.use(Steps);
 Vue.use(Switch);
 Vue.use(Table);

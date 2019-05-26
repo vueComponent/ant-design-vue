@@ -10,6 +10,20 @@
 
 ---
 
+## 1.3.9
+`2019-05-26`
+- 🐞 Fix `TreeSelect` without `dataRef` [#712](https://github.com/vueComponent/ant-design-vue/issues/712)
+- 🌟 `Tooltip` add `destroyTooltipOnHide` to identify whether to destroy tooltip after hiding [#727](https://github.com/vueComponent/ant-design-vue/issues/727)
+- 🐞 Fix `Avatar` does not update the problem when setting `src` dynamically [#731](https://github.com/vueComponent/ant-design-vue/issues/731)
+- 🐞 Fix `LocaleProvider` change `moment` language does not work [28b7a6](https://github.com/vueComponent/ant-design-vue/commit/28b7a68dc48a0a994e98063d462b99380e3ee547)
+- 🌟 `Modal.confirm` add `closable` configuration [#798](https://github.com/vueComponent/ant-design-vue/pull/798)
+- 🐞 Fixed a problem when `Select` custom `dropdownRender` was not automatically closed [#644](https://github.com/vueComponent/ant-design-vue/issues/644)
+- 🐞 Fix the problem of removing Dom error under ie9, no need to introduce polyfill separately [#705](https://github.com/vueComponent/ant-design-vue/issues/705)
+- 🐞 Fix `Input.Search` repeat mount id problem [#726](https://github.com/vueComponent/ant-design-vue/issues/726)
+- 🐞 Fix `Table` does not work when customizing expandIcon using function form [#751](https://github.com/vueComponent/ant-design-vue/issues/751)
+- 🐞 Fix `Icon` `extraCommonProps` property does not work [#737](https://github.com/vueComponent/ant-design-vue/issues/737)
+- 🐞 Fix `DirectoryTree` expandAction="doubleclick" does not work [#745](https://github.com/vueComponent/ant-design-vue/issues/745)
+
 ## 1.3.8
 `2019-04-04`
 - 🐞 Fix `Table` unclickable problem under IE [#504](https://github.com/vueComponent/ant-design-vue/issues/504)

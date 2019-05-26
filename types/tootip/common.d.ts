@@ -96,6 +96,13 @@ export declare class TooltipCommon extends AntdComponent {
   visible: boolean;
 
   /**
+   * Whether to destroy tooltip on hide
+   * @default false
+   * @type boolean
+   */
+  destroyTooltipOnHide: boolean;
+
+  /**
    * this value will be merged into placement's config, please refer to the settings dom-align
    * @type object
    */

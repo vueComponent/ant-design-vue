@@ -36,6 +36,6 @@ export default {
         background: '#eee',
       },
     };
-    return <Upload {...uploaderProps}/>;
+    return <Upload {...uploaderProps} />;
   },
 };

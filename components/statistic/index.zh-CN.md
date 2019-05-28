@@ -26,4 +26,4 @@
 #### Statistic.Countdown事件
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| onFinish | 倒计时完成时触发 | () => void |
+| finish | 倒计时完成时触发 | () => void |

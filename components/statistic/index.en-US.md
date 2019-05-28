@@ -27,4 +27,4 @@
 #### Statistic.Countdown Events
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| onFinish | Trigger when time's up | () => void | - |
+| finish | Trigger when time's up | () => void | - |

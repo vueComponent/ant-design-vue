@@ -47,7 +47,7 @@ export default {
         },
         on: {
           [iconTrigger]: this.onChange,
-          onMouseDown: (e) => {
+          onMouseDown: e => {
             // Prevent focused state lost
             // https://github.com/ant-design/ant-design/issues/15173
             e.preventDefault();
@@ -60,14 +60,7 @@ export default {
     },
   },
   render() {
-    const {
-      prefixCls,
-      inputPrefixCls,
-      size,
-      suffix,
-      visibilityToggle,
-      ...restProps
-    } = this.$props;
+    const { prefixCls, inputPrefixCls, size, suffix, visibilityToggle, ...restProps } = this.$props;
     const suffixIcon = visibilityToggle && this.getIcon();
     const inputClassName = classNames(prefixCls, {
       [`${prefixCls}-${size}`]: !!size,

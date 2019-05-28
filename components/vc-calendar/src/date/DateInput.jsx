@@ -141,7 +141,7 @@ const DateInput = {
       const { value, disabledDate } = this.$props;
       if (keyCode === KeyCode.ENTER) {
         const validateDate = !disabledDate || !disabledDate(value);
-        if(validateDate) {
+        if (validateDate) {
           this.__emit('select', value.clone());
         }
       }

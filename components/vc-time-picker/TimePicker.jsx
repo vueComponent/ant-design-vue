@@ -1,7 +1,13 @@
 import moment from 'moment';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { initDefaultProps, hasProp, getComponentFromProp,isValidElement, getEvents } from '../_util/props-util';
+import {
+  initDefaultProps,
+  hasProp,
+  getComponentFromProp,
+  isValidElement,
+  getEvents,
+} from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import Trigger from '../vc-trigger';
 import Panel from './Panel';

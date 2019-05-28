@@ -42,7 +42,7 @@ export declare class Statistic extends AntdComponent {
    * suffix node of value
    * @type string | VNode
    */
-  suffix: string | VNode;;
+  suffix: string | VNode;
 
   /**
    * Display title
@@ -55,5 +55,4 @@ export declare class Statistic extends AntdComponent {
    * @type string or number
    */
   value: string | number;
-
 }

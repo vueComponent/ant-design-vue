@@ -151,7 +151,9 @@ export default {
     const iconNode = iconType ? <Icon type={iconType} /> : null;
     const children = filterEmpty($slots.default);
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
-    const kids = children.map(child => this.insertSpace(child, this.isNeedInserted() && autoInsertSpace));
+    const kids = children.map(child =>
+      this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
+    );
 
     if ($attrs.href !== undefined) {
       return (

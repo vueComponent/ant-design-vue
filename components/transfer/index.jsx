@@ -348,10 +348,9 @@ const Transfer = {
       const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
       const prefixCls = getPrefixCls('transfer', customizePrefixCls);
 
-      const renderEmpty = (
-        this.configProvider.renderEmpty &&
-        this.configProvider.renderEmpty()
-      ) || ConfigConsumerProps.renderEmpty;
+      const renderEmpty =
+        (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
+        ConfigConsumerProps.renderEmpty;
       const locale = this.getLocale(transferLocale, renderEmpty);
       const {
         leftFilter,

@@ -2,7 +2,13 @@ import warning from 'warning';
 import { Tree as VcTree, TreeNode } from '../vc-tree';
 import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, filterEmpty, getComponentFromProp, getClass } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getOptionProps,
+  filterEmpty,
+  getComponentFromProp,
+  getClass,
+} from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
@@ -131,7 +137,7 @@ export default {
         const switcherCls = `${prefixCls}-switcher-icon`;
         if (isLeaf) {
           return null;
-        }else if (switcherIcon) {
+        } else if (switcherIcon) {
           const switcherOriginCls = getClass(switcherIcon[0]);
           return cloneElement(switcherIcon, {
             class: {
@@ -198,7 +204,7 @@ export default {
         checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
         children: filterEmpty(this.$slots.default || []),
         __propsSymbol__: Symbol(),
-        switcherIcon: (nodeProps) => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
+        switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
       },
       on: this.$listeners,
       ref: 'tree',

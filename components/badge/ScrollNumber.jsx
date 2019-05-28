@@ -118,8 +118,8 @@ export default {
       const { sCount } = this;
       if (sCount && Number(sCount) % 1 === 0) {
         return getNumberArray(sCount)
-        .map((num, i) => this.renderCurrentNumber(prefixCls, num, i))
-        .reverse();
+          .map((num, i) => this.renderCurrentNumber(prefixCls, num, i))
+          .reverse();
       }
       return sCount;
     },

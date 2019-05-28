@@ -1,5 +1,10 @@
 import animation from '../_util/openAnimation';
-import { getOptionProps, initDefaultProps, getComponentFromProp, isValidElement } from '../_util/props-util';
+import {
+  getOptionProps,
+  initDefaultProps,
+  getComponentFromProp,
+  isValidElement,
+} from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import VcCollapse, { collapseProps } from '../vc-collapse';
 import Icon from '../icon';
@@ -22,12 +27,14 @@ export default {
   methods: {
     renderExpandIcon(panelProps, prefixCls) {
       const expandIcon = getComponentFromProp(this, 'expandIcon', panelProps);
-      const icon = expandIcon || <Icon type="right" rotate={panelProps.isActive ? 90 : undefined} />;
+      const icon = expandIcon || (
+        <Icon type="right" rotate={panelProps.isActive ? 90 : undefined} />
+      );
       return isValidElement(expandIcon ? icon[0] : icon)
-      ? cloneElement(icon, {
-          class: `${prefixCls}-arrow`,
-        })
-      : icon;
+        ? cloneElement(icon, {
+            class: `${prefixCls}-arrow`,
+          })
+        : icon;
     },
   },
   render() {
@@ -42,7 +49,7 @@ export default {
       props: {
         ...getOptionProps(this),
         prefixCls,
-        expandIcon: (panelProps) => this.renderExpandIcon(panelProps, prefixCls),
+        expandIcon: panelProps => this.renderExpandIcon(panelProps, prefixCls),
       },
       class: collapseClassName,
       on: $listeners,

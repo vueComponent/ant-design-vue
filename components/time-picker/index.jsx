@@ -175,12 +175,7 @@ const TimePicker = {
       let props = getOptionProps(this);
       props = omit(props, ['defaultValue', 'suffixIcon', 'allowEmpty', 'allowClear']);
 
-      const {
-        prefixCls: customizePrefixCls,
-        getPopupContainer,
-        placeholder,
-        size,
-      } = props;
+      const { prefixCls: customizePrefixCls, getPopupContainer, placeholder, size } = props;
       const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
       const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
 

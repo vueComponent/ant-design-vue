@@ -165,10 +165,9 @@ const Select = {
     } = getOptionProps(this);
 
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty = (
-      this.configProvider.renderEmpty &&
-      this.configProvider.renderEmpty()
-    ) || ConfigConsumerProps.renderEmpty;
+    const renderEmpty =
+      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
+      ConfigConsumerProps.renderEmpty;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;

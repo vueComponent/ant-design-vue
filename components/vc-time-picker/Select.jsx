@@ -67,10 +67,10 @@ const Select = {
           [`${prefixCls}-select-option-disabled`]: item.disabled,
         });
         const onClick = item.disabled
-        ? undefined
-        : () => {
-            this.onSelect(item.value);
-          };
+          ? undefined
+          : () => {
+              this.onSelect(item.value);
+            };
         return (
           <li role="button" onClick={onClick} class={cls} key={index} disabled={item.disabled}>
             {item.value}

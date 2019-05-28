@@ -1,4 +1,3 @@
-
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponentFromProp } from '../_util/props-util';

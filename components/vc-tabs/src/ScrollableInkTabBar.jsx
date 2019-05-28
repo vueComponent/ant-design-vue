@@ -28,7 +28,10 @@ export default {
         children={(saveRef, getRef) => (
           <TabBarRootNode saveRef={saveRef} {...{ props, on: listeners }}>
             <ScrollableTabBarNode saveRef={saveRef} getRef={getRef} {...{ props, on: listeners }}>
-              <TabBarTabsNode saveRef={saveRef} {...{ props: {...props, renderTabBarNode}, on: listeners }} />
+              <TabBarTabsNode
+                saveRef={saveRef}
+                {...{ props: { ...props, renderTabBarNode }, on: listeners }}
+              />
               <InkTabBarNode saveRef={saveRef} getRef={getRef} {...{ props, on: listeners }} />
             </ScrollableTabBarNode>
           </TabBarRootNode>

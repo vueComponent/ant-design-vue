@@ -43,14 +43,11 @@ describe('TimePicker', () => {
     );
   });
   it('not render clean icon when allowClear is false', () => {
-    const wrapper = mount(
-      {
-        render() {
-          return <TimePicker defaultValue={moment('2000-01-01 00:00:00')} allowClear={false} />;
-        },
-      }
-    );
+    const wrapper = mount({
+      render() {
+        return <TimePicker defaultValue={moment('2000-01-01 00:00:00')} allowClear={false} />;
+      },
+    });
     expect(wrapper.html()).toMatchSnapshot();
   });
-
 });

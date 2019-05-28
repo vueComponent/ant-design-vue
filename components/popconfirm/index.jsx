@@ -144,7 +144,9 @@ const Popconfirm = {
       <LocaleReceiver
         componentName="Popconfirm"
         defaultLocale={defaultLocale.Popconfirm}
-        scopedSlots={{ default: (popconfirmLocale) => this.renderOverlay(prefixCls, popconfirmLocale) }}
+        scopedSlots={{
+          default: popconfirmLocale => this.renderOverlay(prefixCls, popconfirmLocale),
+        }}
       />
     );
     return (

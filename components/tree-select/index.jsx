@@ -86,77 +86,74 @@ const TreeSelect = {
 
   render(h) {
     const props = getOptionProps(this);
-      const {
-        prefixCls: customizePrefixCls,
-        size,
-        dropdownStyle,
-        dropdownClassName,
-        getPopupContainer,
-        ...restProps
-      } = props;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-      const prefixCls = getPrefixCls('select', customizePrefixCls);
+    const {
+      prefixCls: customizePrefixCls,
+      size,
+      dropdownStyle,
+      dropdownClassName,
+      getPopupContainer,
+      ...restProps
+    } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const prefixCls = getPrefixCls('select', customizePrefixCls);
 
-      const renderEmpty = (
-        this.configProvider.renderEmpty &&
-        this.configProvider.renderEmpty()
-      ) || ConfigConsumerProps.renderEmpty;
-      const notFoundContent = getComponentFromProp(this, 'notFoundContent');
-      const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-      const rest = omit(restProps, [
-        'inputIcon',
-        'removeIcon',
-        'clearIcon',
-        'switcherIcon',
-        'suffixIcon',
-      ]);
-      let suffixIcon = getComponentFromProp(this, 'suffixIcon');
-      suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
-      let treeData = props.treeData;
-      if (treeData) {
-        treeData = this.updateTreeData(treeData);
-      }
-      const cls = {
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-sm`]: size === 'small',
-      };
+    const renderEmpty =
+      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
+      ConfigConsumerProps.renderEmpty;
+    const notFoundContent = getComponentFromProp(this, 'notFoundContent');
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    const rest = omit(restProps, [
+      'inputIcon',
+      'removeIcon',
+      'clearIcon',
+      'switcherIcon',
+      'suffixIcon',
+    ]);
+    let suffixIcon = getComponentFromProp(this, 'suffixIcon');
+    suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
+    let treeData = props.treeData;
+    if (treeData) {
+      treeData = this.updateTreeData(treeData);
+    }
+    const cls = {
+      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-sm`]: size === 'small',
+    };
 
-      let checkable = getComponentFromProp(this, 'treeCheckable');
-      if (checkable) {
-        checkable = <span class={`${prefixCls}-tree-checkbox-inner`} />;
-      }
+    let checkable = getComponentFromProp(this, 'treeCheckable');
+    if (checkable) {
+      checkable = <span class={`${prefixCls}-tree-checkbox-inner`} />;
+    }
 
-      const inputIcon = (suffixIcon &&
-        (isValidElement(suffixIcon) ? cloneElement(suffixIcon) : suffixIcon)) || (
-        <Icon type="down" class={`${prefixCls}-arrow-icon`} />
-      );
+    const inputIcon = (suffixIcon &&
+      (isValidElement(suffixIcon) ? cloneElement(suffixIcon) : suffixIcon)) || (
+      <Icon type="down" class={`${prefixCls}-arrow-icon`} />
+    );
 
-      const removeIcon = <Icon type="close" class={`${prefixCls}-remove-icon`} />;
+    const removeIcon = <Icon type="close" class={`${prefixCls}-remove-icon`} />;
 
-      const clearIcon = (
-        <Icon type="close-circle" class={`${prefixCls}-clear-icon`} theme="filled" />
-      );
-      const VcTreeSelectProps = {
-        props: {
-          switcherIcon: (nodeProps) => this.renderSwitcherIcon(prefixCls, nodeProps),
-          inputIcon,
-          removeIcon,
-          clearIcon,
-          ...rest,
-          getPopupContainer: getPopupContainer || getContextPopupContainer,
-          dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
-          prefixCls,
-          dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
-          treeCheckable: checkable,
-          notFoundContent: notFoundContent || renderEmpty(h, 'Select'),
-          __propsSymbol__: Symbol(),
-        },
-        class: cls,
-        on: { ...this.$listeners, change: this.onChange },
-        ref: 'vcTreeSelect',
-        scopedSlots: this.$scopedSlots,
-      };
-      return <VcTreeSelect {...VcTreeSelectProps}>{filterEmpty(this.$slots.default)}</VcTreeSelect>;
+    const clearIcon = <Icon type="close-circle" class={`${prefixCls}-clear-icon`} theme="filled" />;
+    const VcTreeSelectProps = {
+      props: {
+        switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, nodeProps),
+        inputIcon,
+        removeIcon,
+        clearIcon,
+        ...rest,
+        getPopupContainer: getPopupContainer || getContextPopupContainer,
+        dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
+        prefixCls,
+        dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
+        treeCheckable: checkable,
+        notFoundContent: notFoundContent || renderEmpty(h, 'Select'),
+        __propsSymbol__: Symbol(),
+      },
+      class: cls,
+      on: { ...this.$listeners, change: this.onChange },
+      ref: 'vcTreeSelect',
+      scopedSlots: this.$scopedSlots,
+    };
+    return <VcTreeSelect {...VcTreeSelectProps}>{filterEmpty(this.$slots.default)}</VcTreeSelect>;
   },
 };
 

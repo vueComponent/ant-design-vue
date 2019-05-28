@@ -15,14 +15,17 @@ export default {
     configProvider: { default: () => ({}) },
   },
   render() {
-    const {prefixCls: customizePrefixCls, ...otherProps} = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, ...otherProps } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('radio-button', customizePrefixCls);
 
-    const radioProps = { props: {
-      ...otherProps,
-      prefixCls,
-    }, on: { ...this.$listeners } };
+    const radioProps = {
+      props: {
+        ...otherProps,
+        prefixCls,
+      },
+      on: { ...this.$listeners },
+    };
     if (this.radioGroupContext) {
       radioProps.on.change = this.radioGroupContext.onRadioChange;
       radioProps.props.checked = this.$props.value === this.radioGroupContext.stateValue;

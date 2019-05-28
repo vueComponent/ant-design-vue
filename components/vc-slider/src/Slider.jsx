@@ -103,7 +103,7 @@ const Slider = {
     onEnd(force) {
       const { dragging } = this;
       this.removeDocumentEvents();
-      if(dragging || force) {
+      if (dragging || force) {
         this.$emit('afterChange', this.sValue);
       }
       this.setState({ dragging: false });

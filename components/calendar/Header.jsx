@@ -135,7 +135,7 @@ export default {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls,type, value, locale, fullscreen } = this;
+    const { prefixCls: customizePrefixCls, type, value, locale, fullscreen } = this;
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
 

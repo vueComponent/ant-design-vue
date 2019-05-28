@@ -142,9 +142,7 @@ const Drawer = {
         return null;
       }
       this.destroyClose = false;
-      const {
-        placement,
-      } = this.$props;
+      const { placement } = this.$props;
 
       const containerStyle =
         placement === 'left' || placement === 'right'
@@ -179,8 +177,12 @@ const Drawer = {
     const props = getOptionProps(this);
     const {
       prefixCls: customizePrefixCls,
-      width, height, visible,
-      placement, wrapClassName, ...rest
+      width,
+      height,
+      visible,
+      placement,
+      wrapClassName,
+      ...rest
     } = props;
     const haveMask = rest.mask ? '' : 'no-mask';
     const offsetStyle = {};

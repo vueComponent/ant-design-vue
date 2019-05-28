@@ -161,7 +161,7 @@ export default {
       });
     },
     handleManualRemove(file) {
-      if(this.$refs.uploadRef) {
+      if (this.$refs.uploadRef) {
         this.$refs.uploadRef.abort(file);
       }
       this.handleRemove(file);
@@ -219,7 +219,13 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, showUploadList, listType, type, disabled } = getOptionProps(this);
+    const {
+      prefixCls: customizePrefixCls,
+      showUploadList,
+      listType,
+      type,
+      disabled,
+    } = getOptionProps(this);
 
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);

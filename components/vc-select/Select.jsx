@@ -153,7 +153,7 @@ const Select = {
     this.$nextTick(() => {
       // when defaultOpen is true, we should auto focus search input
       // https://github.com/ant-design/ant-design/issues/14254
-      if(this.autoFocus || this._open) {
+      if (this.autoFocus || this._open) {
         this.focus();
       }
     });
@@ -1127,7 +1127,7 @@ const Select = {
         };
         options = [<MenuItem {...p}>{notFoundContent}</MenuItem>];
       }
-      return {empty, options};
+      return { empty, options };
     },
 
     renderFilterOptionsFromChildren(children = [], childrenKeys, menuItems) {
@@ -1401,7 +1401,7 @@ const Select = {
       // showArrow : Set to true if not multiple by default but keep set value.
       const { showArrow = !multiple, loading, prefixCls } = this.$props;
       const inputIcon = getComponentFromProp(this, 'inputIcon');
-      if (!showArrow && !loading ) {
+      if (!showArrow && !loading) {
         return null;
       }
       // if loading  have loading icon

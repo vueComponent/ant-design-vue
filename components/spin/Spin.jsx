@@ -74,7 +74,7 @@ export default {
   methods: {
     debouncifyUpdateSpinning(props) {
       const { delay } = props || this.$props;
-      if(delay) {
+      if (delay) {
         this.updateSpinning = debounce(this.originalUpdateSpinning, delay);
       }
     },
@@ -117,7 +117,13 @@ export default {
     },
   },
   render(h) {
-    const { size, prefixCls: customizePrefixCls, tip, wrapperClassName, ...restProps } = this.$props;
+    const {
+      size,
+      prefixCls: customizePrefixCls,
+      tip,
+      wrapperClassName,
+      ...restProps
+    } = this.$props;
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 

@@ -117,9 +117,9 @@ const Range = {
       this.onChange({ bounds: nextBounds });
     },
     onEnd(force) {
-      const {sHandle} = this;
+      const { sHandle } = this;
       this.removeDocumentEvents();
-      if(sHandle || force) {
+      if (sHandle || force) {
         this.$emit('afterChange', this.bounds);
       }
       this.setState({ sHandle: null });

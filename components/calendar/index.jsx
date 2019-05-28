@@ -167,7 +167,12 @@ const Calendar = {
       if (value && localeCode) {
         value.locale(localeCode);
       }
-      const { prefixCls: customizePrefixCls, fullscreen, dateFullCellRender, monthFullCellRender } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        fullscreen,
+        dateFullCellRender,
+        monthFullCellRender,
+      } = props;
       const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
       const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
       const type = mode === 'year' ? 'month' : 'date';

@@ -9,7 +9,7 @@ import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } 
 const DatePicker = wrapPicker(
   { ...createPicker(VcCalendar, DatePickerProps()), name: 'ADatePicker' },
   DatePickerProps(),
-  'date'
+  'date',
 );
 
 const MonthPicker = wrapPicker(

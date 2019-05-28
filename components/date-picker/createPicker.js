@@ -58,7 +58,7 @@ export default function createPicker(TheCalendar, props) {
           state.showDate = props.value;
         }
         this.setState(state);
-        this.prevState = {...this.$data, ...state};
+        this.prevState = { ...this.$data, ...state };
       },
       value(val) {
         const state = {};
@@ -67,15 +67,15 @@ export default function createPicker(TheCalendar, props) {
           state.showDate = val;
         }
         this.setState(state);
-        this.prevState = {...this.$data, ...state};
+        this.prevState = { ...this.$data, ...state };
       },
     },
     mounted() {
-      this.prevState = {...this.$data};
+      this.prevState = { ...this.$data };
     },
     updated() {
       this.$nextTick(() => {
-        if(!hasProp(this, 'open') && this.prevState._open && !this._open) {
+        if (!hasProp(this, 'open') && this.prevState._open && !this._open) {
           this.focus();
         }
       });

@@ -111,20 +111,20 @@ export default {
         };
       }
       this.setState(state);
-      this.prevState = {...this.$data, ...state};
+      this.prevState = { ...this.$data, ...state };
     },
     open(val) {
-      const state = { sOpen: val};
+      const state = { sOpen: val };
       this.setState(state);
-      this.prevState = {...this.$data, ...state};
+      this.prevState = { ...this.$data, ...state };
     },
   },
   mounted() {
-    this.prevState = {...this.$data};
+    this.prevState = { ...this.$data };
   },
   updated() {
     this.$nextTick(() => {
-      if(!hasProp(this, 'open') && this.prevState.sOpen && !this.sOpen) {
+      if (!hasProp(this, 'open') && this.prevState.sOpen && !this.sOpen) {
         this.focus();
       }
     });

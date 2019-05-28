@@ -3,7 +3,6 @@ import Tooltip from '../../vc-tooltip';
 import '../assets/index.less';
 import '../../vc-tooltip/assets/bootstrap.less';
 
-
 const { createSliderWithTooltip } = Slider;
 
 function log(value) {

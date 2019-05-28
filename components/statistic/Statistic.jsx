@@ -30,12 +30,7 @@ export default {
   },
 
   render() {
-    const {
-      prefixCls: customizePrefixCls,
-      value = 0,
-      valueStyle,
-      valueRender,
-    } = this.$props;
+    const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 

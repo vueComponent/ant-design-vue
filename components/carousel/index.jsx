@@ -136,7 +136,6 @@ const Carousel = {
       props.fade = true;
     }
 
-
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     let className = getPrefixCls('carousel', props.prefixCls);
 

@@ -38,15 +38,11 @@ const ConfigProvider = {
     };
   },
   watch: {
-    ...getWatch([
-      'prefixCls',
-      'csp',
-      'autoInsertSpaceInButton',
-    ]),
+    ...getWatch(['prefixCls', 'csp', 'autoInsertSpaceInButton']),
   },
   methods: {
     renderEmptyComponent() {
-      const customRender = getComponentFromProp(this,'renderEmpty', {}, false);
+      const customRender = getComponentFromProp(this, 'renderEmpty', {}, false);
       return this.$props.renderEmpty || customRender || defaultRenderEmpty;
     },
     getPrefixCls(suffixCls, customizePrefixCls) {

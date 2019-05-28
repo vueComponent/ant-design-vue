@@ -56,20 +56,20 @@ export default {
     value(val) {
       const state = { _value: val };
       this.setState(state);
-      this.prevState = {...this.$data, ...state};
+      this.prevState = { ...this.$data, ...state };
     },
     open(val) {
       const state = { _open: val };
       this.setState(state);
-      this.prevState = {...this.$data, ...state};
+      this.prevState = { ...this.$data, ...state };
     },
   },
   mounted() {
-    this.prevState = {...this.$data};
+    this.prevState = { ...this.$data };
   },
   updated() {
     this.$nextTick(() => {
-      if(!hasProp(this, 'open') && this.prevState._open && !this._open) {
+      if (!hasProp(this, 'open') && this.prevState._open && !this._open) {
         this.focus();
       }
     });
@@ -77,7 +77,7 @@ export default {
   methods: {
     weekDateRender(current) {
       const selectedValue = this.$data._value;
-      const { _prefixCls: prefixCls, $scopedSlots  } = this;
+      const { _prefixCls: prefixCls, $scopedSlots } = this;
       const dateRender = this.dateRender || $scopedSlots.dateRender;
       const dateNode = dateRender ? dateRender(current) : current.date();
       if (
@@ -111,7 +111,7 @@ export default {
       this.handleChange(null);
     },
     renderFooter(...args) {
-      const {_prefixCls: prefixCls, $scopedSlots} = this;
+      const { _prefixCls: prefixCls, $scopedSlots } = this;
       const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter;
       return renderExtraFooter ? (
         <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(...args)}</div>

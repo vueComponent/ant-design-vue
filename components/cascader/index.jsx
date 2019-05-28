@@ -380,10 +380,9 @@ const Cascader = {
       ...otherProps
     } = props;
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty = (
-      this.configProvider.renderEmpty &&
-      this.configProvider.renderEmpty()
-    ) || ConfigConsumerProps.renderEmpty;
+    const renderEmpty =
+      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
+      ConfigConsumerProps.renderEmpty;
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 

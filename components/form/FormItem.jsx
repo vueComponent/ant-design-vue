@@ -407,7 +407,7 @@ export default {
             prefixCls,
             this.slotDefault,
             this.renderHelp(prefixCls),
-            this.renderExtra(prefixCls)
+            this.renderExtra(prefixCls),
           ),
         ),
       ];

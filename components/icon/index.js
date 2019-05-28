@@ -54,11 +54,11 @@ function renderIcon(h, locale, context) {
   });
 
   const svgStyle = rotate
-  ? {
-      msTransform: `rotate(${rotate}deg)`,
-      transform: `rotate(${rotate}deg)`,
-    }
-  : undefined;
+    ? {
+        msTransform: `rotate(${rotate}deg)`,
+        transform: `rotate(${rotate}deg)`,
+      }
+    : undefined;
 
   let innerNode;
 
@@ -121,7 +121,7 @@ function renderIcon(h, locale, context) {
     );
   }
   let iconTabIndex = tabIndex;
-  if (iconTabIndex === undefined && ('click' in listeners)) {
+  if (iconTabIndex === undefined && 'click' in listeners) {
     iconTabIndex = -1;
   }
   const { attrs, ...restDataProps } = data;
@@ -158,7 +158,7 @@ const Icon = {
     return (
       <LocaleReceiver
         componentName="Icon"
-        scopedSlots={{ default: (locale) => renderIcon(h, locale, context) }}
+        scopedSlots={{ default: locale => renderIcon(h, locale, context) }}
       />
     );
   },

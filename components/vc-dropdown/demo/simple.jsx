@@ -17,13 +17,9 @@ export default {
   render() {
     return (
       <div style="margin: 100px">
-        <div style="height: 100px"/>
+        <div style="height: 100px" />
         <div>
-          <Dropdown
-            trigger={['click']}
-            animation="slide-up"
-            onVisibleChange={this.onVisibleChange}
-          >
+          <Dropdown trigger={['click']} animation="slide-up" onVisibleChange={this.onVisibleChange}>
             <Menu slot="overlay" onSelect={this.onSelect}>
               <MenuItem disabled>disabled</MenuItem>
               <MenuItem key="1">one</MenuItem>

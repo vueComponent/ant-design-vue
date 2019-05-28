@@ -118,7 +118,7 @@ export function parseSimpleTreeData(treeData, { id, pId, rootPId }) {
   const rootNodeList = [];
 
   // Fill in the map
-  const nodeList = treeData.map((node) => {
+  const nodeList = treeData.map(node => {
     const clone = { ...node };
     const key = clone[id];
     keyNodes[key] = clone;
@@ -239,7 +239,7 @@ export function formatInternalValue(value, props) {
 
   // Parse label in value
   if (isLabelInValue(props)) {
-    return valueList.map((val) => {
+    return valueList.map(val => {
       if (typeof val !== 'object' || !val) {
         return {
           value: '',

@@ -53,7 +53,17 @@ export default {
     },
   },
   render() {
-    const { onHover, onClick, onKeyDown, disabled, prefixCls, characterRender, index, count, value } = this;
+    const {
+      onHover,
+      onClick,
+      onKeyDown,
+      disabled,
+      prefixCls,
+      characterRender,
+      index,
+      count,
+      value,
+    } = this;
 
     const character = getComponentFromProp(this, 'character');
     let star = (

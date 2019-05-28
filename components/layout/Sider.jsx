@@ -179,7 +179,14 @@ export default {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, theme, collapsible, reverseArrow, width, collapsedWidth } = getOptionProps(this);
+    const {
+      prefixCls: customizePrefixCls,
+      theme,
+      collapsible,
+      reverseArrow,
+      width,
+      collapsedWidth,
+    } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
 
@@ -190,9 +197,12 @@ export default {
     // special trigger when collapsedWidth == 0
     const zeroWidthTrigger =
       parseFloat(String(collapsedWidth || 0)) === 0 ? (
-        <span onClick={this.toggle} class={`${prefixCls}-zero-width-trigger ${prefixCls}-zero-width-trigger-${
-          reverseArrow ? 'right' : 'left'
-        }`}>
+        <span
+          onClick={this.toggle}
+          class={`${prefixCls}-zero-width-trigger ${prefixCls}-zero-width-trigger-${
+            reverseArrow ? 'right' : 'left'
+          }`}
+        >
           <Icon type="bars" />
         </span>
       ) : null;

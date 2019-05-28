@@ -243,8 +243,7 @@ export default {
         )}
       >
         {search}
-        {
-          !searchNotFound &&
+        {!searchNotFound && (
           <transition-group
             {...transitionProps}
             tag="ul"
@@ -253,7 +252,7 @@ export default {
           >
             {showItems}
           </transition-group>
-        }
+        )}
         {searchNotFound}
       </div>
     );

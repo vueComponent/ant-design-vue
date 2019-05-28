@@ -18,10 +18,7 @@ export default {
     align: PropTypes.object,
     overlayStyle: PropTypes.object.def({}),
     placement: PropTypes.string.def('bottomLeft'),
-    overlay: PropTypes.oneOfType([
-      PropTypes.any,
-      PropTypes.func,
-    ]),
+    overlay: PropTypes.oneOfType([PropTypes.any, PropTypes.func]),
     trigger: PropTypes.array.def(['hover']),
     alignPoint: PropTypes.bool,
     showAction: PropTypes.array.def([]),
@@ -153,7 +150,9 @@ export default {
     renderChildren() {
       const children = this.$slots.default && this.$slots.default[0];
       const { sVisible } = this;
-      return (sVisible && children) ? cloneElement(children, { class: this.getOpenClassName() }) : children;
+      return sVisible && children
+        ? cloneElement(children, { class: this.getOpenClassName() })
+        : children;
     },
   },
 

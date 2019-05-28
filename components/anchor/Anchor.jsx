@@ -212,7 +212,15 @@ export default {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, offsetTop, affix, showInkInFixed, activeLink, $slots, getContainer } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      offsetTop,
+      affix,
+      showInkInFixed,
+      activeLink,
+      $slots,
+      getContainer,
+    } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);

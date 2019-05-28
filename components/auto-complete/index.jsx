@@ -81,7 +81,14 @@ const AutoComplete = {
   },
 
   render() {
-    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $slots, $listeners } = this;
+    const {
+      size,
+      prefixCls: customizePrefixCls,
+      optionLabelProp,
+      dataSource,
+      $slots,
+      $listeners,
+    } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);

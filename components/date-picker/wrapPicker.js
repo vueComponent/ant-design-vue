@@ -113,9 +113,9 @@ export default function wrapPicker(Picker, props, pickerType) {
         } = props;
         const mergedPickerType = showTime ? `${pickerType}Time` : pickerType;
         const mergedFormat =
-        format ||
-        locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
-        DEFAULT_FORMAT[mergedPickerType];
+          format ||
+          locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
+          DEFAULT_FORMAT[mergedPickerType];
 
         const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
         const prefixCls = getPrefixCls('calendar', customizePrefixCls);

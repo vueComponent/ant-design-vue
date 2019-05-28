@@ -181,11 +181,7 @@ const Header = {
 
   render() {
     const { prefixCls } = this;
-    return (
-      <div class={`${prefixCls}-input-wrap`}>
-        {this.getInput()}
-      </div>
-    );
+    return <div class={`${prefixCls}-input-wrap`}>{this.getInput()}</div>;
   },
 };
 

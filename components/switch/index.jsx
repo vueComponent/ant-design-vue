@@ -37,7 +37,9 @@ const Switch = {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(
+      this,
+    );
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
 

@@ -47,12 +47,7 @@ export default {
       if (enterButton) return suffix;
 
       const node = (
-        <Icon
-          class={`${prefixCls}-icon`}
-          type="search"
-          key="searchIcon"
-          onClick={this.onSearch}
-        />
+        <Icon class={`${prefixCls}-icon`} type="search" key="searchIcon" onClick={this.onSearch} />
       );
 
       if (suffix) {
@@ -71,7 +66,7 @@ export default {
       const { size, disabled } = this;
       const enterButton = getComponentFromProp(this, 'enterButton');
       const addonAfter = getComponentFromProp(this, 'addonAfter');
-      if(!enterButton) return addonAfter;
+      if (!enterButton) return addonAfter;
       const btnClassName = `${prefixCls}-button`;
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
       let button;
@@ -122,7 +117,7 @@ export default {
     const enterButton = getComponentFromProp(this, 'enterButton');
     const addonBefore = getComponentFromProp(this, 'addonBefore');
     let inputClassName;
-    if(enterButton) {
+    if (enterButton) {
       inputClassName = classNames(prefixCls, {
         [`${prefixCls}-enter-button`]: !!enterButton,
         [`${prefixCls}-${size}`]: !!size,

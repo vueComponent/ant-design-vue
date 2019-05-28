@@ -5,7 +5,6 @@ import { Col } from '../grid';
 import { ConfigConsumerProps } from '../config-provider';
 import { ListGridType } from './index';
 
-
 export const ListItemProps = {
   prefixCls: PropTypes.string,
   extra: PropTypes.any,
@@ -62,7 +61,7 @@ export default {
   props: ListItemProps,
   inject: {
     listContext: { default: () => ({}) },
-    configProvider: { default: () =>({}) },
+    configProvider: { default: () => ({}) },
   },
   render() {
     const { grid } = this.listContext;

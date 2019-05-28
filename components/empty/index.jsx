@@ -25,10 +25,7 @@ const Empty = {
   },
   methods: {
     renderEmpty(contentLocale) {
-      const {
-        prefixCls: customizePrefixCls,
-        ...restProps
-      } = this.$props;
+      const { prefixCls: customizePrefixCls, ...restProps } = this.$props;
       const prefixCls = ConfigConsumerProps.getPrefixCls('empty', customizePrefixCls);
       const image = getComponentFromProp(this, 'image');
       const description = getComponentFromProp(this, 'description');
@@ -57,9 +54,7 @@ const Empty = {
     },
   },
   render() {
-    return (
-      <LocaleReceiver componentName="Empty" scopedSlots={{ default: this.renderEmpty }} />
-    );
+    return <LocaleReceiver componentName="Empty" scopedSlots={{ default: this.renderEmpty }} />;
   },
 };
 

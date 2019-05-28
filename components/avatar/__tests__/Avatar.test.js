@@ -44,7 +44,7 @@ describe('Avatar Render', () => {
       global.document.body.innerHTML = '';
     }, 0);
   });
-  it('should handle onError correctly', async() => {
+  it('should handle onError correctly', async () => {
     global.document.body.innerHTML = '';
     const LOAD_FAILURE_SRC = 'http://error.url';
     const LOAD_SUCCESS_SRC = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
@@ -68,7 +68,7 @@ describe('Avatar Render', () => {
       },
     };
 
-    const wrapper = mount(Foo, { sync: false, attachToDocument: true },);
+    const wrapper = mount(Foo, { sync: false, attachToDocument: true });
     await asyncExpect(() => {
       // mock img load Error, since jsdom do not load resource by default
       // https://github.com/jsdom/jsdom/issues/1816
@@ -82,7 +82,7 @@ describe('Avatar Render', () => {
     }, 0);
   });
 
-  it('should show image on success after a failure state', async() => {
+  it('should show image on success after a failure state', async () => {
     global.document.body.innerHTML = '';
     const LOAD_FAILURE_SRC = 'http://error.url';
     const LOAD_SUCCESS_SRC = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';

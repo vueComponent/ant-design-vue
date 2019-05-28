@@ -93,8 +93,8 @@ export default {
     const prefixCls = getPrefixCls('progress', customizePrefixCls);
 
     const progressStatus =
-      parseInt(successPercent !== undefined ? successPercent.toString() : percent.toString(), 10) >= 100 &&
-      !('status' in props)
+      parseInt(successPercent !== undefined ? successPercent.toString() : percent.toString(), 10) >=
+        100 && !('status' in props)
         ? 'success'
         : status || 'normal';
     let progress;
@@ -108,11 +108,7 @@ export default {
           prefixCls,
         },
       };
-      progress = (
-        <Line {...lineProps}>
-          {progressInfo}
-        </Line>
-      );
+      progress = <Line {...lineProps}>{progressInfo}</Line>;
     } else if (type === 'circle' || type === 'dashboard') {
       const circleProps = {
         props: {
@@ -121,11 +117,7 @@ export default {
           progressStatus,
         },
       };
-      progress = (
-        <Circle {...circleProps}>
-          {progressInfo}
-        </Circle>
-      );
+      progress = <Circle {...circleProps}>{progressInfo}</Circle>;
     }
 
     const classString = classNames(prefixCls, {

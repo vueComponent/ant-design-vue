@@ -92,7 +92,7 @@ export default {
       selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
       selectionDirty: false,
     });
-    this.prevRowSelection = this.rowSelection ? {...this.rowSelection} : this.rowSelection;
+    this.prevRowSelection = this.rowSelection ? { ...this.rowSelection } : this.rowSelection;
     return {
       ...this.getDefaultSortOrder(this.columns),
       // 减少状态
@@ -127,12 +127,12 @@ export default {
           if (rowSelection && val.getCheckboxProps !== rowSelection.getCheckboxProps) {
             this.CheckboxPropsCache = {};
           }
-        } else if(val && !this.prevRowSelection) {
+        } else if (val && !this.prevRowSelection) {
           this.store.setState({
             selectedRowKeys: [],
           });
         }
-        this.prevRowSelection = val ? {...val} : val;
+        this.prevRowSelection = val ? { ...val } : val;
       },
       deep: true,
     },
@@ -379,7 +379,7 @@ export default {
         // 按照sortDirections的内容依次切换排序状态
         const methodIndex = sortDirections.indexOf(sortOrder) + 1;
         newSortOrder =
-        methodIndex === sortDirections.length ? undefined : sortDirections[methodIndex];
+          methodIndex === sortDirections.length ? undefined : sortDirections[methodIndex];
       } else {
         newSortOrder = sortDirections[0];
       }
@@ -869,10 +869,7 @@ export default {
             [`${prefixCls}-column-sort`]: isSortColumn && sortOrder,
           }),
           title: [
-            <div
-              key="title"
-              class={sortButton ? `${prefixCls}-column-sorters` : undefined}
-            >
+            <div key="title" class={sortButton ? `${prefixCls}-column-sorters` : undefined}>
               {this.renderColumnTitle(column.title)}
               {sortButton}
             </div>,
@@ -1151,10 +1148,7 @@ export default {
   },
 
   render() {
-    const {
-      prefixCls: customizePrefixCls,
-      dropdownPrefixCls: customizeDropdownPrefixCls,
-    } = this;
+    const { prefixCls: customizePrefixCls, dropdownPrefixCls: customizeDropdownPrefixCls } = this;
     const data = this.getCurrentPageData();
 
     let loading = this.loading;
@@ -1170,10 +1164,9 @@ export default {
       };
     }
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty = (
-      this.configProvider.renderEmpty &&
-      this.configProvider.renderEmpty()
-    ) || ConfigConsumerProps.renderEmpty;
+    const renderEmpty =
+      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
+      ConfigConsumerProps.renderEmpty;
 
     const prefixCls = getPrefixCls('table', customizePrefixCls);
     const dropdownPrefixCls = getPrefixCls('dropdown', customizeDropdownPrefixCls);
@@ -1182,7 +1175,9 @@ export default {
       <LocaleReceiver
         componentName="Table"
         defaultLocale={defaultLocale.Table}
-        children={locale => this.renderTable(prefixCls, renderEmpty, dropdownPrefixCls, locale, loading)}
+        children={locale =>
+          this.renderTable(prefixCls, renderEmpty, dropdownPrefixCls, locale, loading)
+        }
       />
     );
 

@@ -10,24 +10,29 @@ Add unit through `prefix` and `suffix`.
 
 ```html
 <template>
-  <div>
-    <a-statistic
-      title="Feedback"
-      :value="11.28"
-      :precision="2"
-      suffix="%"
-      :valueStyle="{color: '#3f8600'}"
-      style="margin-right: 50px"
-    >
-      <a-icon slot="prefix" type="arrow-up" />
-    </a-statistic>
-    <a-statistic
-      title="Unmerged"
-      :value="78"
-      valueClass="demo-class"
-    >
-      <span slot="suffix"> / 100</span>
-    </a-statistic>
-  </div>
+  <a-row :gutter="16">
+    <a-col :span="12">
+      <a-statistic
+        title="Feedback"
+        :value="1128"
+        style="margin-right: 50px"
+      >
+        <template v-slot:suffix>
+          <a-icon type="like" />
+        </template>
+      </a-statistic>
+    </a-col>
+    <a-col :span="12">
+      <a-statistic
+        title="Unmerged"
+        :value="93"
+        valueClass="demo-class"
+      >
+        <template v-slot:suffix>
+          <span> / 100</span>
+        </template>
+      </a-statistic>
+    </a-col>
+  </a-row>
 </template>
 ```

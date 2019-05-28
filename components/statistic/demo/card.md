@@ -10,23 +10,41 @@ Display statistic data in Card.
 
 ```html
 <template>
-  <div>
-    <a-card style="padding: 30px">
-      <a-statistic
-        title="Feedback"
-        :value="1128"
-        style="margin-right: 50px"
-      >
-        <a-icon slot="prefix" type="like" />
-      </a-statistic>
-      <a-statistic
-        title="Unmerged"
-        :value="1234567890"
-        valueClass="demo-class"
-      >
-        <span slot="suffix"> / 100</span>
-      </a-statistic>
-    </a-card>
+  <div style="background: #ECECEC; padding: 30px">
+    <a-row :gutter="16">
+      <a-col :span="12">
+        <a-card>
+          <a-statistic
+            title="Feedback"
+            :value="11.28"
+            :precision="2"
+            suffix="%"
+            :valueStyle="{color: '#3f8600'}"
+            style="margin-right: 50px"
+          >
+            <template v-slot:prefix>
+                <a-icon type="arrow-up" />
+              </template>
+          </a-statistic>
+        </a-card>
+      </a-col>
+      <a-col :span="12">
+        <a-card>
+          <a-statistic
+              title="Idle"
+              :value="9.3"
+              :precision="2"
+              suffix="%"
+              valueClass="demo-class"
+              :valueStyle="{ color: '#cf1322' }"
+            >
+              <template v-slot:prefix>
+                <a-icon type="arrow-down" />
+              </template>
+            </a-statistic>
+        </a-card>
+      </a-col>
+    </a-row>
   </div>
 </template>
 ```

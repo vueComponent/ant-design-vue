@@ -22,7 +22,7 @@ A loading indicator can be added to a button by setting the `loading` property o
       mouseenter me!
     </a-button>
     <a-button type="primary" icon="poweroff" :loading="iconLoading" @click="enterIconLoading">
-      延迟1s
+      1s delay
     </a-button>
     <br />
     <a-button shape="circle" loading />

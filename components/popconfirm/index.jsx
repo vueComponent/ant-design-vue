@@ -81,24 +81,24 @@ const Popconfirm = {
         {
           props: {
             size: 'small',
+            ...cancelButtonProps,
           },
           on: {
             click: this.onCancel,
           },
         },
-        cancelButtonProps,
       );
       const okBtnProps = mergeProps(
         {
           props: {
             type: okType,
             size: 'small',
+            ...okButtonProps,
           },
           on: {
             click: this.onConfirm,
           },
         },
-        okButtonProps,
       );
       return (
         <div class={`${prefixCls}-inner-content`}>

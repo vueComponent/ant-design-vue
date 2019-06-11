@@ -10,6 +10,10 @@
 
 ---
 
+## 1.3.10
+`2019-06-11`
+- 🐞 Remove useless `module.export` of package. [#850](https://github.com/vueComponent/ant-design-vue/issues/850)
+
 ## 1.3.9
 `2019-05-26`
 - 🐞 Fix `TreeSelect` without `dataRef` [#712](https://github.com/vueComponent/ant-design-vue/issues/712)

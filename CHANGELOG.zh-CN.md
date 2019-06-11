@@ -10,6 +10,10 @@
 
 ---
 
+## 1.3.10
+`2019-06-11`
+- 🐞 移除打包后多余的 `module.export` [#850](https://github.com/vueComponent/ant-design-vue/issues/850)
+
 ## 1.3.9
 `2019-05-26`
 - 🐞 修复 `TreeSelect` 没有 `dataRef` 的问题 [#712](https://github.com/vueComponent/ant-design-vue/issues/712)

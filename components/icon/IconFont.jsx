@@ -1,9 +1,10 @@
 import Icon from './index';
+import { mergeProps } from '../_util/props-util';
 
 const customCache = new Set();
 
 export default function create(options) {
-  const { scriptUrl } = options;
+  const { scriptUrl, extraCommonProps = {} } = options;
 
   /**
    * DOM API required.
@@ -43,7 +44,8 @@ export default function create(options) {
       if (children) {
         content = children;
       }
-      return <Icon {...{ ...data, props: restProps, on: listeners }}>{content}</Icon>;
+      const iconProps = mergeProps(extraCommonProps, data, { props: restProps, on: listeners });
+      return <Icon {...iconProps}>{content}</Icon>;
     },
   };
   return Iconfont;

@@ -10,6 +10,24 @@
 
 ---
 
+## 1.3.10
+`2019-06-11`
+- 🐞 移除打包后多余的 `module.export` [#850](https://github.com/vueComponent/ant-design-vue/issues/850)
+
+## 1.3.9
+`2019-05-26`
+- 🐞 修复 `TreeSelect` 没有 `dataRef` 的问题 [#712](https://github.com/vueComponent/ant-design-vue/issues/712)
+- 🌟 `Tooltip` 添加 `destroyTooltipOnHide` 用于标识隐藏后是否销毁tooltip [#727](https://github.com/vueComponent/ant-design-vue/issues/727)
+- 🐞 修复 `Avatar` 动态设置 src 时不更新问题 [#731](https://github.com/vueComponent/ant-design-vue/issues/731)
+- 🐞 修复 `LocaleProvider` 更改 `moment` 语言不生效问题 [28b7a6](https://github.com/vueComponent/ant-design-vue/commit/28b7a68dc48a0a994e98063d462b99380e3ee547)
+- 🌟 `Modal.confirm` 新增 `closable` 配置 [#798](https://github.com/vueComponent/ant-design-vue/pull/798)
+- 🐞 修复 `Select` 自定义 `dropdownRender` 时，没能自动关闭的问题 [#644](https://github.com/vueComponent/ant-design-vue/issues/644)
+- 🐞 修复在 ie9 下移除 Dom 报错问题，无需单独引入 polyfill [#705](https://github.com/vueComponent/ant-design-vue/issues/705)
+- 🐞 修复 `Input.Search` 重复挂载 id 问题 [#726](https://github.com/vueComponent/ant-design-vue/issues/726)
+- 🐞 修复 `Table` 使用函数形式自定义 expandIcon 时不生效问题 [#751](https://github.com/vueComponent/ant-design-vue/issues/751)
+- 🐞 修复 `Icon` extraCommonProps 属性不生效问题 [#737](https://github.com/vueComponent/ant-design-vue/issues/737)
+- 🐞 修复 `DirectoryTree` expandAction="doubleclick" 不生效问题 [#745](https://github.com/vueComponent/ant-design-vue/issues/745)
+
 ## 1.3.8
 `2019-04-04`
 - 🐞 修复 `Table` 在 IE 下不可点击问题 [#504](https://github.com/vueComponent/ant-design-vue/issues/504)

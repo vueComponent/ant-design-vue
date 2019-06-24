@@ -16,7 +16,7 @@ You can gain full control over filelist by configuring `fileList`. You can accom
 
 ```html
 <template>
-  <a-upload action="//jsonplaceholder.typicode.com/posts/" :multiple="true" :fileList="fileList" @change="handleChange">
+  <a-upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" :multiple="true" :fileList="fileList" @change="handleChange">
     <a-button>
       <a-icon type="upload" /> Upload
     </a-button>
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     handleChange(info) {
-      let fileList = info.fileList;
+      let fileList = [...info.fileList];
 
       // 1. Limit the number of uploaded files
       //    Only to show two recent uploaded files, and old ones will be replaced by the new
@@ -49,14 +49,6 @@ export default {
           file.url = file.response.url;
         }
         return file;
-      });
-
-      // 3. filter successfully uploaded files according to response from server
-      fileList = fileList.filter((file) => {
-        if (file.response) {
-          return file.response.status === 'success';
-        }
-        return false;
       });
 
       this.fileList = fileList

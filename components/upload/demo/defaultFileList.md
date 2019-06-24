@@ -10,7 +10,7 @@ Use `defaultFileList` for uploaded files when page init.
 
 ```html
 <template>
-  <a-upload action="//jsonplaceholder.typicode.com/posts/" :defaultFileList="defaultFileList">
+  <a-upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" :defaultFileList="defaultFileList">
     <a-button>
       <a-icon type="upload" /> Upload
     </a-button>

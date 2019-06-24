@@ -435,7 +435,7 @@ const TreeNode = {
           onMouseleave={this.onMouseLeave}
           onContextmenu={this.onContextMenu}
           onClick={this.onSelectorClick}
-          onDoubleclick={this.onSelectorDoubleClick}
+          onDblclick={this.onSelectorDoubleClick}
           onDragstart={draggable ? this.onDragStart : noop}
         >
           {$icon}

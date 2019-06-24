@@ -7,7 +7,7 @@ export default {
         action: () => {
           return new Promise(resolve => {
             setTimeout(() => {
-              resolve('//jsonplaceholder.typicode.com/posts/');
+              resolve('https://www.mocky.io/v2/5cc8019d300000980a055e76');
             }, 2000);
           });
         },
@@ -23,7 +23,9 @@ export default {
           console.log('error', err);
         },
       },
-      style: { margin: '100px' },
+      style: {
+        margin: '100px',
+      },
     };
     return (
       <Upload {...uploaderProps}>

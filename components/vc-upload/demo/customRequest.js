@@ -5,9 +5,12 @@ export default {
   render() {
     const uploaderProps = {
       props: {
-        action: '//jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         multiple: false,
-        data: { a: 1, b: 2 },
+        data: {
+          a: 1,
+          b: 2,
+        },
         headers: {
           Authorization: '$prefix $token',
         },
@@ -36,7 +39,12 @@ export default {
               withCredentials,
               headers,
               onUploadProgress: ({ total, loaded }) => {
-                onProgress({ percent: Math.round((loaded / total) * 100).toFixed(2) }, file);
+                onProgress(
+                  {
+                    percent: Math.round((loaded / total) * 100).toFixed(2),
+                  },
+                  file,
+                );
               },
             })
             .then(({ data: response }) => {

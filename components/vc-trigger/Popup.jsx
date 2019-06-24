@@ -49,7 +49,11 @@ export default {
     });
   },
   beforeDestroy() {
-    this.$el.remove();
+    if (this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    } else if (this.$el.remove) {
+      this.$el.remove();
+    }
   },
   methods: {
     onAlign(popupDomNode, align) {

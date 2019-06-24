@@ -10,6 +10,7 @@ import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'AInputSearch',
+  inheritAttrs: false,
   model: {
     prop: 'value',
     event: 'change.value',

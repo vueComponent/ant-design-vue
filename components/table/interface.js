@@ -128,6 +128,7 @@ export const TableProps = {
   childrenColumnName: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   bodyStyle: PropTypes.any,
   sortDirections: PropTypes.array,
+  expandIcon: PropTypes.func,
   // className?: PropTypes.string,
   // style?: React.CSSProperties;
   // children?: React.ReactNode;

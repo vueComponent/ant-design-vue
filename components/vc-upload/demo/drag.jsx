@@ -4,7 +4,7 @@ export default {
   render() {
     const uploaderProps = {
       props: {
-        action: '//jsonplaceholder.typicode.com/posts/',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         type: 'drag',
         accept: '.png',
         beforeUpload(file) {
@@ -29,7 +29,12 @@ export default {
           alert('click');
         },
       },
-      style: { display: 'inline-block', width: '200px', height: '200px', background: '#eee' },
+      style: {
+        display: 'inline-block',
+        width: '200px',
+        height: '200px',
+        background: '#eee',
+      },
     };
     return <Upload {...uploaderProps} />;
   },

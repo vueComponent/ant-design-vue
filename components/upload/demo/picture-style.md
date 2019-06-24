@@ -12,7 +12,7 @@ If uploaded file is a picture, the thumbnail can be shown. `IE8/9` do not suppor
 <template>
   <div>
     <a-upload
-      action="//jsonplaceholder.typicode.com/posts/"
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       listType="picture"
       :defaultFileList="fileList"
     >
@@ -23,7 +23,7 @@ If uploaded file is a picture, the thumbnail can be shown. `IE8/9` do not suppor
     <br />
     <br />
     <a-upload
-      action="//jsonplaceholder.typicode.com/posts/"
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       listType="picture"
       :defaultFileList="fileList"
       class="upload-list-inline"

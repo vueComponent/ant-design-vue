@@ -4,8 +4,11 @@ export default {
   render() {
     const uploaderProps = {
       props: {
-        action: '//jsonplaceholder.typicode.com/posts/',
-        data: { a: 1, b: 2 },
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        data: {
+          a: 1,
+          b: 2,
+        },
         headers: {
           Authorization: 'xxxxxxx',
         },
@@ -28,7 +31,9 @@ export default {
           console.log('error', err);
         },
       },
-      style: { margin: '100px' },
+      style: {
+        margin: '100px',
+      },
     };
     return (
       <Upload {...uploaderProps}>

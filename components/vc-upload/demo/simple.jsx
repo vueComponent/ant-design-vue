@@ -2,9 +2,7 @@ import Upload from '../index';
 
 export default {
   data() {
-    return {
-      destroyed: false,
-    };
+    return { destroyed: false };
   },
   methods: {
     destroy() {
@@ -16,8 +14,11 @@ export default {
       return null;
     }
     const propsObj = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      data: { a: 1, b: 2 },
+      action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+      data: {
+        a: 1,
+        b: 2,
+      },
       headers: {
         Authorization: 'xxxxxxx',
       },

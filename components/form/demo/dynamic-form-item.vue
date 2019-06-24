@@ -26,7 +26,6 @@ Add or remove form items dynamically.
           `names[${k}]`,
           {
             validateTrigger: ['change', 'blur'],
-            preserve: true,
             rules: [{
               required: true,
               whitespace: true,

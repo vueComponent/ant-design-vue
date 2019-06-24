@@ -74,8 +74,6 @@ function babelify(js, modules) {
   delete babelConfig.cacheDirectory;
   if (modules === false) {
     babelConfig.plugins.push(replaceLib);
-  } else {
-    babelConfig.plugins.push(require.resolve('babel-plugin-add-module-exports'));
   }
   let stream = js.pipe(babel(babelConfig)).pipe(
     through2.obj(function z(file, encoding, next) {

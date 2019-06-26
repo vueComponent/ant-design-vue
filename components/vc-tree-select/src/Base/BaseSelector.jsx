@@ -27,7 +27,6 @@ export const selectorPropTypes = () => ({
   inputIcon: PropTypes.any,
   clearIcon: PropTypes.any,
   removeIcon: PropTypes.any,
-  selectorValueList: PropTypes.array,
   placeholder: PropTypes.any,
   disabled: PropTypes.bool,
   focused: PropTypes.bool,

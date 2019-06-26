@@ -203,7 +203,7 @@ export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntiti
       match = true;
     }
     const $slots = getSlots(node);
-    const children = toNodeArray($slots.default)
+    const children = $slots.default
       .map(mapFilteredNodeToData)
       .filter(n => n);
     delete $slots.default;
@@ -299,7 +299,8 @@ export function formatSelectorValue(valueList, props, valueEntities) {
           value,
         };
       });
-    } else if (showCheckedStrategy === SHOW_CHILD) {
+    }
+    if (showCheckedStrategy === SHOW_CHILD) {
       // Only get the children checked value
       const targetValueList = [];
 

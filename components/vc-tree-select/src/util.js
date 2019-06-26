@@ -203,9 +203,7 @@ export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntiti
       match = true;
     }
     const $slots = getSlots(node);
-    const children = $slots.default
-      .map(mapFilteredNodeToData)
-      .filter(n => n);
+    const children = $slots.default.map(mapFilteredNodeToData).filter(n => n);
     delete $slots.default;
     const slotsKey = Object.keys($slots);
     if (children.length || match) {

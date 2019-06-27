@@ -24,7 +24,7 @@ const MultipleSelector = {
     searchValue: PropTypes.string,
     labelInValue: PropTypes.bool,
     maxTagCount: PropTypes.number,
-    maxTagPlaceholder: PropTypes.oneOfType([PropTypes.any, PropTypes.func]),
+    maxTagPlaceholder: PropTypes.any,
 
     // onChoiceAnimationLeave: PropTypes.func,
   },

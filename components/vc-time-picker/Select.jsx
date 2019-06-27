@@ -67,7 +67,7 @@ const Select = {
           [`${prefixCls}-select-option-disabled`]: item.disabled,
         });
         const onClick = item.disabled
-          ? undefined
+          ? noop
           : () => {
               this.onSelect(item.value);
             };
@@ -106,14 +106,14 @@ const Select = {
   },
 
   render() {
-    if (this.options.length === 0) {
+    const { prefixCls, options, active } = this;
+    if (options.length === 0) {
       return null;
     }
 
-    const { prefixCls } = this;
     const cls = {
       [`${prefixCls}-select`]: 1,
-      [`${prefixCls}-select-active`]: this.active,
+      [`${prefixCls}-select-active`]: active,
     };
 
     return (

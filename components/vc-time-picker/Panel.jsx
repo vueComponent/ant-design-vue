@@ -199,7 +199,6 @@ const Panel = {
           disabledMinutes={disabledMinutes}
           disabledSeconds={disabledSeconds}
           onChange={this.onChange}
-          onClear={clear}
           allowEmpty={allowEmpty}
           focusOnOpen={focusOnOpen}
           onKeydown={keydown}

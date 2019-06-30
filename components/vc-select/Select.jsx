@@ -156,6 +156,9 @@ const Select = {
       if (this.autoFocus || this._open) {
         this.focus();
       }
+      // this.setState({
+      //   _ariaId: generateUUID(),
+      // });
     });
   },
   watch: {
@@ -665,11 +668,9 @@ const Select = {
           } else {
             // why not use setState?
             this.$data._inputValue = '';
-            this.$nextTick(() => {
-              if (this.getInputDOMNode && this.getInputDOMNode()) {
-                this.getInputDOMNode().value = '';
-              }
-            });
+            if (this.getInputDOMNode && this.getInputDOMNode()) {
+              this.getInputDOMNode().value = '';
+            }
           }
           const tmpValue = this.getValueByInput(inputValue);
           if (tmpValue !== undefined) {
@@ -1405,9 +1406,6 @@ const Select = {
         return null;
       }
       // if loading  have loading icon
-      // if (multiple && !loading) {
-      //   return null;
-      // }
       const defaultIcon = loading ? (
         <i class={`${prefixCls}-arrow-loading`} />
       ) : (

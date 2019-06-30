@@ -42,14 +42,14 @@ export default {
     });
   },
   methods: {
-    setChecked(checked) {
+    setChecked(checked, e) {
       if (this.disabled) {
         return;
       }
       if (!hasProp(this, 'checked')) {
         this.stateChecked = checked;
       }
-      this.$emit('change', checked);
+      this.$emit('change', checked, e);
     },
     handleClick(e) {
       const checked = !this.stateChecked;
@@ -59,10 +59,10 @@ export default {
     handleKeyDown(e) {
       if (e.keyCode === 37) {
         // Left
-        this.setChecked(false);
+        this.setChecked(false, e);
       } else if (e.keyCode === 39) {
         // Right
-        this.setChecked(true);
+        this.setChecked(true, e);
       }
     },
     handleMouseUp(e) {

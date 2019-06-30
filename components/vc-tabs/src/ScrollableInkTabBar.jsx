@@ -22,7 +22,7 @@ export default {
   render() {
     const props = { ...this.$props };
     const listeners = this.$listeners;
-    const { renderTabBarNode } = this.$scopedSlots;
+    const { default:renderTabBarNode } = this.$scopedSlots;
     return (
       <SaveRef
         children={(saveRef, getRef) => (

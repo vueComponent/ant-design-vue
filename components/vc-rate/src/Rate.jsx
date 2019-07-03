@@ -89,15 +89,16 @@ export default {
       this.$emit('hoverChange', undefined);
     },
     onClick(event, index) {
-      const value = this.getStarValue(index, event.pageX);
+      const { allowClear, sValue: value } = this;
+      const newValue = this.getStarValue(index, event.pageX);
       let isReset = false;
-      if (this.allowClear) {
-        isReset = value === this.sValue;
+      if (allowClear) {
+        isReset = newValue === value;
       }
       this.onMouseLeave(true);
-      this.changeValue(isReset ? 0 : value);
+      this.changeValue(isReset ? 0 : newValue);
       this.setState({
-        cleanedValue: isReset ? value : null,
+        cleanedValue: isReset ? newValue : null,
       });
     },
     onFocus() {

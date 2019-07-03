@@ -67,19 +67,20 @@ export default {
 
     const character = getComponentFromProp(this, 'character');
     let star = (
-      <li
-        class={this.getClassName()}
-        onClick={disabled ? noop : onClick}
-        onKeydown={disabled ? noop : onKeyDown}
-        onMousemove={disabled ? noop : onHover}
-        role="radio"
-        aria-checked={value > index ? 'true' : 'false'}
-        aria-posinset={index + 1}
-        aria-setsize={count}
-        tabIndex={0}
-      >
-        <div class={`${prefixCls}-first`}>{character}</div>
-        <div class={`${prefixCls}-second`}>{character}</div>
+      <li class={this.getClassName()}>
+        <div
+          onClick={disabled ? noop : onClick}
+          onKeydown={disabled ? noop : onKeyDown}
+          onMousemove={disabled ? noop : onHover}
+          role="radio"
+          aria-checked={value > index ? 'true' : 'false'}
+          aria-posinset={index + 1}
+          aria-setsize={count}
+          tabIndex={0}
+        >
+          <div class={`${prefixCls}-first`}>{character}</div>
+          <div class={`${prefixCls}-second`}>{character}</div>
+        </div>
       </li>
     );
     if (characterRender) {

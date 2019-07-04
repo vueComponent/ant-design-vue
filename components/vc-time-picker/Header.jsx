@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import moment from 'moment';
 import { getComponentFromProp } from '../_util/props-util';
+import { isIE, isIE9 } from '../_util/env';
 
 const Header = {
   mixins: [BaseMixin],
@@ -64,6 +65,11 @@ const Header = {
   methods: {
     onInputChange(event) {
       const str = event.target.value;
+      // https://github.com/vueComponent/ant-design-vue/issues/92
+      if (isIE && !isIE9 && this.str === str) {
+        return;
+      }
+
       this.showStr = true;
       this.setState({
         str,

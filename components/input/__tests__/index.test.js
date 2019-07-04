@@ -43,7 +43,7 @@ describe('TextArea', () => {
 
     await asyncExpect(() => {
       expect(mockFunc).toHaveBeenCalledTimes(2);
-    }, 0);
+    }, 100);
   });
 
   it('should support disabled', async () => {

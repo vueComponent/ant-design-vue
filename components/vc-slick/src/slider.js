@@ -110,9 +110,7 @@ export default {
     if (settings.centerMode) {
       if (settings.slidesToScroll > 1 && process.env.NODE_ENV !== 'production') {
         console.warn(
-          `slidesToScroll should be equal to 1 in centerMode, you are using ${
-            settings.slidesToScroll
-          }`,
+          `slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`,
         );
       }
       settings.slidesToScroll = 1;
@@ -121,16 +119,12 @@ export default {
     if (settings.fade) {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== 'production') {
         console.warn(
-          `slidesToShow should be equal to 1 when fade is true, you're using ${
-            settings.slidesToShow
-          }`,
+          `slidesToShow should be equal to 1 when fade is true, you're using ${settings.slidesToShow}`,
         );
       }
       if (settings.slidesToScroll > 1 && process.env.NODE_ENV !== 'production') {
         console.warn(
-          `slidesToScroll should be equal to 1 when fade is true, you're using ${
-            settings.slidesToScroll
-          }`,
+          `slidesToScroll should be equal to 1 when fade is true, you're using ${settings.slidesToScroll}`,
         );
       }
       settings.slidesToShow = 1;

@@ -41,8 +41,9 @@
     <!-- Hotjar Tracking Code for http://vue.ant.design -->
     <script>
         (function(h, o, t, j, a, r) {
+          if(location.href.indexOf('iframe') === -1 && (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design')) {
             h.hj = h.hj || function() {
-                (h.hj.q = h.hj.q || []).push(arguments)
+              (h.hj.q = h.hj.q || []).push(arguments)
             };
             h._hjSettings = {
                 hjid: 1359441,
@@ -53,6 +54,7 @@
             r.async = 1;
             r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
             a.appendChild(r);
+          }
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
 </body>

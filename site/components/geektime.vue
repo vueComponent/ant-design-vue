@@ -1,29 +1,46 @@
 <template>
-  <div id="geektime">
+  <div id="geektime" v-show="visible">
     <a
       href="https://time.geekbang.org/course/intro/163?code=KHKYcoBU6vZa8nMglg7AWfDxxi3BWrz9INAzAY3umPk%3D"
       target="_blank"
     >
       <img
-        width="150"
+        width="170"
         alt="Vue 实战教程"
-        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1554903088531-assets/web-upload/c496a156-aabc-4a9b-8cb6-a7a6617706ce.jpeg"
+        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1562230861353-assets/web-upload/2fab2df7-5cc9-4791-b344-a97da29eb400.jpeg"
       >
     </a>
-  </div>  
+    <div v-if="isMobile" class="close" @click="visible=false">
+      <a-icon type="close"></a-icon>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-
+  props: ['isMobile'],
+  data() {
+    return {
+      visible: true
+    }
+  }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   #geektime {
     position: fixed;
     bottom: 15px;
     right: 15px;
+    .close {
+      position: absolute;
+      text-align: center;
+      top: -8px;
+      right: -8px;
+      font-size: 16px;
+      padding: 15px;
+      color: #6e3041;
+    }
   }
 </style>
 

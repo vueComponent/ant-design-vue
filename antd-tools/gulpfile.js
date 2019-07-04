@@ -145,14 +145,10 @@ function tag() {
   execSync(`git config --global user.name ${process.env.GITHUB_USER_NAME}`);
   execSync(`git tag ${version}`);
   execSync(
-    `git push https://${
-      process.env.GITHUB_TOKEN
-    }@github.com/vueComponent/ant-design-vue.git ${version}:${version}`,
+    `git push https://${process.env.GITHUB_TOKEN}@github.com/vueComponent/ant-design-vue.git ${version}:${version}`,
   );
   execSync(
-    `git push https://${
-      process.env.GITHUB_TOKEN
-    }@github.com/vueComponent/ant-design-vue.git master:master`,
+    `git push https://${process.env.GITHUB_TOKEN}@github.com/vueComponent/ant-design-vue.git master:master`,
   );
   console.log('tagged');
 }
@@ -204,24 +200,30 @@ function githubRelease(done) {
     });
 }
 
-gulp.task('tag', done => {
-  tag();
-  githubRelease(done);
-});
+gulp.task(
+  'tag',
+  gulp.series(done => {
+    tag();
+    githubRelease(done);
+  }),
+);
 
-gulp.task('check-git', done => {
-  runCmd('git', ['status', '--porcelain'], (code, result) => {
-    if (/^\?\?/m.test(result)) {
-      return done(`There are untracked files in the working tree.\n${result}
+gulp.task(
+  'check-git',
+  gulp.series(done => {
+    runCmd('git', ['status', '--porcelain'], (code, result) => {
+      if (/^\?\?/m.test(result)) {
+        return done(`There are untracked files in the working tree.\n${result}
       `);
-    }
-    if (/^([ADRM]| [ADRM])/m.test(result)) {
-      return done(`There are uncommitted changes in the working tree.\n${result}
+      }
+      if (/^([ADRM]| [ADRM])/m.test(result)) {
+        return done(`There are uncommitted changes in the working tree.\n${result}
       `);
-    }
-    return done();
-  });
-});
+      }
+      return done();
+    });
+  }),
+);
 
 function publish(tagString, done) {
   let args = ['publish', '--with-antd-tools'];
@@ -265,86 +267,105 @@ function pub(done) {
   });
 }
 
-gulp.task('dist', ['compile'], done => {
-  dist(done);
-});
-gulp.task('compile', ['compile-with-es'], done => {
-  compile().on('finish', function() {
-    done();
-  });
-});
-gulp.task('compile-with-es', done => {
-  compile(false).on('finish', function() {
-    done();
-  });
-});
-
-gulp.task('pub', ['check-git', 'compile'], done => {
-  if (!process.env.GITHUB_TOKEN) {
-    console.log('no GitHub token found, skip');
-  } else {
-    pub(done);
-  }
-});
-
-gulp.task('pub-with-ci', done => {
-  if (!process.env.NPM_TOKEN) {
-    console.log('no NPM token found, skip');
-  } else {
-    const github = new GitHub();
-    github.authenticate({
-      type: 'oauth',
-      token: process.env.GITHUB_TOKEN,
+gulp.task(
+  'compile-with-es',
+  gulp.series(done => {
+    compile(false).on('finish', function() {
+      done();
     });
-    const [_, owner, repo] = execSync('git remote get-url origin') // eslint-disable-line
-      .toString()
-      .match(/github.com[:/](.+)\/(.+)\.git/);
-    const getLatestRelease = github.repos.getLatestRelease({
-      owner,
-      repo,
-    });
-    const getCommits = github.repos.getCommits({
-      owner,
-      repo,
-      per_page: 1,
-    });
-    Promise.all([getLatestRelease, getCommits]).then(([latestRelease, commits]) => {
-      const preVersion = latestRelease.data.tag_name;
-      const { version } = packageJson;
-      const [_, newVersion] = commits.data[0].commit.message.trim().match(/bump (.+)/) || []; // eslint-disable-line
-      if (
-        compareVersions(version, preVersion) === 1 &&
-        newVersion &&
-        newVersion.trim() === version
-      ) {
-        gulp.run('pub', err => {
-          err && console.log('err', err);
-          done();
-        });
-      } else {
-        console.log('donot need publish' + version);
-      }
-    });
-  }
-});
+  }),
+);
 
-function reportError() {
-  console.log(chalk.bgRed('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
-  console.log(chalk.bgRed('!! `npm publish` is forbidden for this package. !!'));
-  console.log(chalk.bgRed('!! Use `npm run pub` instead.        !!'));
-  console.log(chalk.bgRed('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
-}
+gulp.task(
+  'compile',
+  gulp.series('compile-with-es', done => {
+    compile().on('finish', function() {
+      done();
+    });
+  }),
+);
 
-gulp.task('guard', done => {
-  const npmArgs = getNpmArgs();
-  if (npmArgs) {
-    for (let arg = npmArgs.shift(); arg; arg = npmArgs.shift()) {
-      if (/^pu(b(l(i(sh?)?)?)?)?$/.test(arg) && npmArgs.indexOf('--with-antd-tools') < 0) {
-        reportError();
-        done(1);
-        return;
+gulp.task(
+  'dist',
+  gulp.series('compile', done => {
+    dist(done);
+  }),
+);
+
+gulp.task(
+  'pub',
+  gulp.series('check-git', 'compile', done => {
+    if (!process.env.GITHUB_TOKEN) {
+      console.log('no GitHub token found, skip');
+    } else {
+      pub(done);
+    }
+  }),
+);
+
+gulp.task(
+  'pub-with-ci',
+  gulp.series(done => {
+    if (!process.env.NPM_TOKEN) {
+      console.log('no NPM token found, skip');
+    } else {
+      const github = new GitHub();
+      github.authenticate({
+        type: 'oauth',
+        token: process.env.GITHUB_TOKEN,
+      });
+      const [_, owner, repo] = execSync('git remote get-url origin') // eslint-disable-line
+        .toString()
+        .match(/github.com[:/](.+)\/(.+)\.git/);
+      const getLatestRelease = github.repos.getLatestRelease({
+        owner,
+        repo,
+      });
+      const getCommits = github.repos.getCommits({
+        owner,
+        repo,
+        per_page: 1,
+      });
+      Promise.all([getLatestRelease, getCommits]).then(([latestRelease, commits]) => {
+        const preVersion = latestRelease.data.tag_name;
+        const { version } = packageJson;
+        const [_, newVersion] = commits.data[0].commit.message.trim().match(/bump (.+)/) || []; // eslint-disable-line
+        if (
+          compareVersions(version, preVersion) === 1 &&
+          newVersion &&
+          newVersion.trim() === version
+        ) {
+          gulp.run('pub', err => {
+            err && console.log('err', err);
+            done();
+          });
+        } else {
+          console.log('donot need publish' + version);
+        }
+      });
+    }
+  }),
+);
+
+gulp.task(
+  'guard',
+  gulp.series(done => {
+    function reportError() {
+      console.log(chalk.bgRed('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
+      console.log(chalk.bgRed('!! `npm publish` is forbidden for this package. !!'));
+      console.log(chalk.bgRed('!! Use `npm run pub` instead.        !!'));
+      console.log(chalk.bgRed('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
+    }
+    const npmArgs = getNpmArgs();
+    if (npmArgs) {
+      for (let arg = npmArgs.shift(); arg; arg = npmArgs.shift()) {
+        if (/^pu(b(l(i(sh?)?)?)?)?$/.test(arg) && npmArgs.indexOf('--with-antd-tools') < 0) {
+          reportError();
+          done(1);
+          return;
+        }
       }
     }
-  }
-  done();
-});
+    done();
+  }),
+);

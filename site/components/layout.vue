@@ -304,7 +304,7 @@ export default {
           </div>
         </a-locale-provider>
         { name.indexOf('back-top') === -1 ? <a-back-top /> : null }
-        { isCN && <Geektime /> }
+        { isCN && <Geektime isMobile={isMobile} /> }
       </div>
     );
   },

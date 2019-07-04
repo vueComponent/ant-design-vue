@@ -55,7 +55,15 @@ const AutoComplete = {
     prop: 'value',
     event: 'change',
   },
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     getInputElement() {
       const { $slots } = this;
       const children = filterEmpty($slots.default);

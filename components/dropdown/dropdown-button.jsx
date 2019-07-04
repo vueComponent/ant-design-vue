@@ -25,16 +25,24 @@ export default {
     event: 'visibleChange',
   },
   props: DropdownButtonProps,
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     onClick(e) {
       this.$emit('click', e);
     },
     onVisibleChange(val) {
       this.$emit('visibleChange', val);
     },
-  },
-  inject: {
-    configProvider: { default: () => ({}) },
   },
   render() {
     const {

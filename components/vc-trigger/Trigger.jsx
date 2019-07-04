@@ -77,6 +77,7 @@ export default {
   },
   inject: {
     vcTriggerContext: { default: () => ({}) },
+    savePopupRef: { default: () => noop },
   },
   data() {
     const props = this.$props;
@@ -350,6 +351,7 @@ export default {
     },
     savePopup(node) {
       this._component = node;
+      this.savePopupRef(node);
     },
     getComponent() {
       const self = this;

@@ -422,7 +422,7 @@ export default {
         const directive = find(vnode.data.directives, ['name', 'decorator']);
         warning(
           !directive || (directive && Array.isArray(directive.value)),
-          `Invalid directive: type check failed for directive "decorator". Expected Array, got ${typeof directive.value}. At ${
+          `Invalid directive: type check failed for directive "decorator". Expected Array, got ${typeof (directive ? directive.value : directive)}. At ${
             vnode.tag
           }.`,
         );

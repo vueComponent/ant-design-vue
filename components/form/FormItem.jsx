@@ -122,7 +122,12 @@ export default {
               let message = isValidElement(e.message)
                 ? cloneElement(e.message, { key: index })
                 : e.message;
-               return message.replace(e.field, label);
+
+              if (label && label !== e.field) {
+                message = message.replace(e.field, label);
+              }
+              
+              return message;
             }),
             ' ',
           );

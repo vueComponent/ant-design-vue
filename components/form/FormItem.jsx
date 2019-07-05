@@ -112,15 +112,17 @@ export default {
     },
     getHelpMessage() {
       const help = getComponentFromProp(this, 'help');
+      const label = getComponentFromProp(this, 'label');
       const onlyControl = this.getOnlyControl();
       if (help === undefined && onlyControl) {
         const errors = this.getField().errors;
         if (errors) {
           return intersperse(
             errors.map((e, index) => {
-              return isValidElement(e.message)
+              let message = isValidElement(e.message)
                 ? cloneElement(e.message, { key: index })
                 : e.message;
+               return message.replace(e.field, label);
             }),
             ' ',
           );

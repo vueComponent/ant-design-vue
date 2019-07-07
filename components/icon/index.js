@@ -112,7 +112,12 @@ const Icon = {
         dangerousTheme || theme || defaultTheme,
       );
       innerNode = (
-        <VueIcon class={svgClassString} type={computedType} primaryColor={twoToneColor} />
+        <VueIcon
+          focusable="false"
+          class={svgClassString}
+          type={computedType}
+          primaryColor={twoToneColor}
+        />
       );
     }
     // functional component not support nativeOn，https://github.com/vuejs/vue/issues/7526

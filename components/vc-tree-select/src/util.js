@@ -385,7 +385,9 @@ function processEntity(entity, wrapper) {
   if (currentEntity) {
     warning(
       false,
-      `Conflict! value of node '${entity.key}' (${value}) has already used by node '${currentEntity.key}'.`,
+      `Conflict! value of node '${entity.key}' (${value}) has already used by node '${
+        currentEntity.key
+      }'.`,
     );
   }
   wrapper.valueEntities[value] = entity;

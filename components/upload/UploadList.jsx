@@ -7,15 +7,15 @@ import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
 
-var isImageFileType = (type) => !!type && type.indexOf('image/') === 0;
+const isImageFileType = (type) => !!type && type.indexOf('image/') === 0;
 
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
-var previewFile = function previewFile(file, callback) {
+const previewFile = function previewFile(file, callback) {
   if (!isImageFileType(file.type)) {
     callback('');
     return;
   }
-  var reader = new window.FileReader();
+  const reader = new window.FileReader();
   reader.onloadend = function () {
     return callback(reader.result);
   };

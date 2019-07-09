@@ -7,14 +7,18 @@ import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
 
-const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp', 'ico'];
+var isImageFileType = (type) => !!type && type.indexOf('image/') === 0;
+
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
-const previewFile = (file, callback) => {
-  if (file.type && !imageTypes.includes(file.type)) {
+var previewFile = function previewFile(file, callback) {
+  if (!isImageFileType(file.type)) {
     callback('');
+    return;
   }
-  const reader = new window.FileReader();
-  reader.onloadend = () => callback(reader.result);
+  var reader = new window.FileReader();
+  reader.onloadend = function () {
+    return callback(reader.result);
+  };
   reader.readAsDataURL(file);
 };
 
@@ -29,7 +33,7 @@ const extname = url => {
 };
 
 const isImageUrl = file => {
-  if (imageTypes.includes(file.type)) {
+  if (isImageFileType(file.type)) {
     return true;
   }
   const url = file.thumbUrl || file.url;

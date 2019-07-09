@@ -10,7 +10,7 @@ import { UploadListProps } from './interface';
 const isImageFileType = (type) => !!type && type.indexOf('image/') === 0;
 
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
-const previewFile = function previewFile(file, callback) {
+const previewFile = (file, callback) => {
   if (!isImageFileType(file.type)) {
     callback('');
     return;

@@ -244,6 +244,7 @@ export default function createPicker(TheCalendar, props) {
           onOpenChange: this.handleOpenChange,
         },
         style: props.popupStyle,
+        scopedSlots: $scopedSlots.default ? $scopedSlots : null,
       };
       return (
         <span
@@ -255,7 +256,7 @@ export default function createPicker(TheCalendar, props) {
           onMouseenter={this.onMouseEnter}
           onMouseleave={this.onMouseLeave}
         >
-          <VcDatePicker {...vcDatePickerProps}>{input}</VcDatePicker>
+          <VcDatePicker {...vcDatePickerProps}>{$scopedSlots.default ? '' : input}</VcDatePicker>
         </span>
       );
     },

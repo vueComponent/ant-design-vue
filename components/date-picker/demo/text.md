@@ -1,12 +1,12 @@
 
 <cn>
 #### 自定义渲染
-增加选择时间功能，当 `showTime` 为一个对象时，其属性会传递给内建的 `TimePicker`。
+增加自定义渲染功能，在默认 `slot` 中，你可以设置任何你想渲染的组件。
 </cn>
 
 <us>
 #### Custum Time
-This property provide an additional time selection. When `showTime` is an Object, its properties will be passed on to built-in `TimePicker`.
+Added custom rendering function, in the default `slot', you can set any component you want to render..
 </us>
 
 ```html

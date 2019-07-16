@@ -409,7 +409,7 @@ export default {
           openChange: this.handleOpenChange,
         },
         style: popupStyle,
-        scopedSlots: $scopedSlots.default ? $scopedSlots : null,
+        scopedSlots: { default: input, ...$scopedSlots },
       },
     );
     return (
@@ -423,7 +423,7 @@ export default {
         onMouseenter={this.onMouseEnter}
         onMouseleave={this.onMouseLeave}
       >
-        <VcDatePicker {...vcDatePickerProps}>{$scopedSlots.default ? '' : input}</VcDatePicker>
+        <VcDatePicker {...vcDatePickerProps} />
       </span>
     );
   },

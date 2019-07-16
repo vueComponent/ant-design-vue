@@ -133,7 +133,7 @@ export default {
         let defaultActiveFirst = defaultActiveFirstOption;
         if (selectedKeys.length || firstActiveValue) {
           if (props.visible && !this.lastVisible) {
-            activeKeyProps.activeKey = selectedKeys[0] || firstActiveValue;;
+            activeKeyProps.activeKey = selectedKeys[0] || firstActiveValue;
           } else if (!visible) {
             // Do not trigger auto active since we already have selectedKeys
             if (selectedKeys[0]) {
@@ -183,7 +183,7 @@ export default {
         if (inputValue !== this.lastInputValue && (!lastValue || lastValue !== backfillValue)) {
           activeKeyProps.activeKey = '';
         }
-        menuProps.props = { ...activeKeyProps, ...menuProps.props, ...{defaultActiveFirst} };
+        menuProps.props = { ...activeKeyProps, ...menuProps.props, defaultActiveFirst };
         return <Menu {...menuProps}>{clonedMenuItems}</Menu>;
       }
       return null;

@@ -10,6 +10,23 @@
 
 ---
 
+## 1.3.11
+`2019-07-22`
+
+- Dropdown
+  - 🐞 Uodate disable style [#912](https://github.com/vueComponent/ant-design-vue/pull/912) [#921](https://github.com/vueComponent/ant-design-vue/pull/921)
+  - 🐞 Fix `SubMenu` flashing problem [#975](https://github.com/vueComponent/ant-design-vue/issues/970)
+- 🌟 `AutoComplete` `Cascader` `DatePicker` `DropDown` `Select` `TimePicker` add an instance of the popup reference `popupRef`  [f9373e](https://github.com/vueComponent/ant-design-vue/commit/f9373e44ce229ab0ba94ababbd686e6ad6e9f10f)
+- 🐞 Fix `DatePicker` can not open when placeholder is chinese at ie 10 and 11 [#865](https://github.com/vueComponent/ant-design-vue/issues/865)
+- 🌟 `DatePicker` add custom render trigger [#957](https://github.com/vueComponent/ant-design-vue/pull/957)
+- 🌟 `@ant-design/icons-vue` update to `^2.0.0`
+- 🌟 `Icon` add `focusable="false"` [#924](https://github.com/vueComponent/ant-design-vue/issues/924)
+- 🐞 Fix custom `Form` prompts for custom components. `warning` problem [#915](https://github.com/vueComponent/ant-design-vue/issues/915)
+- 🐞 Fix `FormItem` `v-decorator` error [#930](https://github.com/vueComponent/ant-design-vue/issues/930)
+- 🐞 Fixed an issue where the `Upload` component reported an error in `form.resetFields()` [#929](https://github.com/vueComponent/ant-design-vue/pull/929)
+- 🐞 Fix `Select` shows bounce problem [#970](https://github.com/vueComponent/ant-design-vue/issues/970)
+- 🐞 Fix TypeScript type definitions.
+
 ## 1.3.10
 `2019-06-11`
 - 🐞 Remove useless `module.export` of package. [#850](https://github.com/vueComponent/ant-design-vue/issues/850)
@@ -32,7 +49,7 @@
 `2019-04-04`
 - 🐞 Fix `Table` unclickable problem under IE [#504](https://github.com/vueComponent/ant-design-vue/issues/504)
 - 🐞 Fix `Table` Header is not aligned under Firefox [#579](https://github.com/vueComponent/ant-design-vue/issues/579)
-- 🌟 Drawer `Drawer` add custom `handel` 
+- 🌟 Drawer `Drawer` add custom `handel`
 - 🐞 Fix TypeScript type definitions.
 
 ## 1.3.7

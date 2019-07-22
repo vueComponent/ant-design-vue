@@ -10,6 +10,10 @@
 
 ---
 
+## 1.3.13
+`2019-07-22`
+- 🐞 Fix `dist` missing `antd.less` file problem [#995](https://github.com/vueComponent/ant-design-vue/issues/995)
+
 ## 1.3.12
 `2019-07-22`
 - 🐞 `package.json` `files` add `scripts`

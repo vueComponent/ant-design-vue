@@ -97,7 +97,7 @@ export default {
       return null;
     }
     if (column.align) {
-      tdProps.style = { textAlign: column.align };
+      tdProps.style = { ...tdProps.style, textAlign: column.align };
     }
 
     return (

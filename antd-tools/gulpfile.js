@@ -321,12 +321,12 @@ gulp.task(
         owner,
         repo,
       });
-      const getCommits = github.repos.getCommits({
+      const listCommits = github.repos.listCommits({
         owner,
         repo,
         per_page: 1,
       });
-      Promise.all([getLatestRelease, getCommits]).then(([latestRelease, commits]) => {
+      Promise.all([getLatestRelease, listCommits]).then(([latestRelease, commits]) => {
         const preVersion = latestRelease.data.tag_name;
         const { version } = packageJson;
         const [_, newVersion] = commits.data[0].commit.message.trim().match(/bump (.+)/) || []; // eslint-disable-line
@@ -335,8 +335,7 @@ gulp.task(
           newVersion &&
           newVersion.trim() === version
         ) {
-          gulp.run('pub', err => {
-            err && console.log('err', err);
+          runCmd('npm', ['pub'], code => {
             done();
           });
         } else {

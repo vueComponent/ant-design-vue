@@ -30,4 +30,5 @@ export default () => ({
   autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),
   destroyTooltipOnHide: PropTypes.bool.def(false),
   align: PropTypes.object.def({}),
+  builtinPlacements: PropTypes.object.def({}),
 });

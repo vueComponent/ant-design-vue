@@ -118,6 +118,7 @@ export default {
   },
   render() {
     const {
+      type,
       htmlType,
       classes,
       icon,
@@ -151,15 +152,19 @@ export default {
           {kids}
         </a>
       );
-    } else {
-      return (
-        <Wave>
-          <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
-            {iconNode}
-            {kids}
-          </button>
-        </Wave>
-      );
     }
+
+    const buttonNode = (
+      <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
+        {iconNode}
+        {kids}
+      </button>
+    );
+
+    if (type === 'link') {
+      return buttonNode;
+    }
+
+    return <Wave>{buttonNode}</Wave>;
   },
 };

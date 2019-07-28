@@ -14,7 +14,8 @@
     <a-button type="primary" ghost>Primary</a-button>
     <a-button ghost>Default</a-button>
     <a-button type="dashed" ghost>Dashed</a-button>
-    <a-button type="danger" ghost>danger</a-button>
+    <a-button type="danger" ghost>Danger</a-button>
+    <a-button type="link" ghost>Link</a-button>
   </div>
 </template>
 ```

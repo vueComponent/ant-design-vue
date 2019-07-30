@@ -5,7 +5,7 @@ import focusTest from '../../../tests/shared/focusTest';
 
 const { WeekPicker } = DatePicker;
 
-describe('WeekPicker', async () => {
+describe('WeekPicker', () => {
   focusTest(WeekPicker);
 
   it('should support style prop', async () => {

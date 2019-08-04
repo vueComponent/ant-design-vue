@@ -1,5 +1,8 @@
 <template>
-  <div id="geektime" v-show="visible">
+  <div
+    v-show="visible"
+    id="geektime"
+  >
     <a
       href="https://time.geekbang.org/course/intro/163?code=KHKYcoBU6vZa8nMglg7AWfDxxi3BWrz9INAzAY3umPk%3D"
       target="_blank"
@@ -10,8 +13,12 @@
         src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1562230861353-assets/web-upload/2fab2df7-5cc9-4791-b344-a97da29eb400.jpeg"
       >
     </a>
-    <div v-if="isMobile" class="close" @click="visible=false">
-      <a-icon type="close"></a-icon>
+    <div
+      v-if="isMobile"
+      class="close"
+      @click="visible=false"
+    >
+      <a-icon type="close" />
     </div>
   </div>
 </template>
@@ -21,9 +28,9 @@ export default {
   props: ['isMobile'],
   data() {
     return {
-      visible: true
-    }
-  }
+      visible: true,
+    };
+  },
 };
 </script>
 

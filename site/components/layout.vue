@@ -5,6 +5,7 @@ import Header from './header';
 import Footer from './footer';
 import CarbonAds from './CarbonAds';
 import Geektime from './geektime';
+import GeektimeAds from './geektime_ads';
 import Sponsors from './sponsors';
 import zhCN from 'antd/locale-provider/zh_CN';
 import enUS from 'antd/locale-provider/default';
@@ -268,7 +269,8 @@ export default {
               }
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class='main-container main-container-component'>
-                  <CarbonAds isMobile={isMobile}/>
+                  <CarbonAds isMobile={isMobile} />
+                  <GeektimeAds isMobile={isMobile} />
                   {!isMobile ? <div class='toc-affix' style='width: 150px;'>
                     {this.getSubMenu(isCN)}
                   </div> : null}

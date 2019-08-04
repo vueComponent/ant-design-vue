@@ -59,16 +59,14 @@ export default {
 </script>
 <style lang="less">
  #carbon-ads {
-  width: 280px;
-  float: right;
-  position: relative;
-  right: 0;
-  bottom: 0;
+  width: 266px;
+  position: fixed;
+  left: 0;
+  bottom: 0px;
   padding: 0;
   overflow: hidden;
   z-index: 9;
   background-color: #fff;
-  border-radius: 3px;
   font-size: 13px;
   background: #f5f5f5;
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
@@ -86,7 +84,7 @@ export default {
 }
 #carbon-ads img {
   float: left;
-  margin-right: 10px;
+  padding-right: 10px;
 }
 #carbon-ads .carbon-img,
 #carbon-ads .carbon-text {
@@ -113,6 +111,7 @@ export default {
   right: 0;
   bottom: 0;
   padding: 0;
+  margin-bottom: 15px;
   .carbon-img {
     float: left;
     margin-right: 10px;

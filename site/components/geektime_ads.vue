@@ -11,8 +11,8 @@
       <img
         height="100"
         alt="浏览器工作原理与实践"
-        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1564994550991-assets/web-upload/fd11d2ba-7351-47d5-bf87-aa9eb2a10256.jpeg"
-      />
+        src="http://pvrd7go2h.bkt.clouddn.com/geektime-browser.jpeg"
+      >
     </a>
   </div>
 </template>

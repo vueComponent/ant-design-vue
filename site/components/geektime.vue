@@ -10,7 +10,7 @@
       <img
         width="170"
         alt="Vue 实战教程"
-        src="https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1562230861353-assets/web-upload/2fab2df7-5cc9-4791-b344-a97da29eb400.jpeg"
+        src="http://pvrd7go2h.bkt.clouddn.com/geektime-vue.jpeg"
       >
     </a>
     <div

@@ -88,14 +88,14 @@ const columns = [{
       },
 
     };
-  )}
+  }}
   customHeaderRow={(column) => {
     return {
       on: {
         click: () => {},        // 点击表头行
       }
     };
-  )}
+  }}
 />
 ```
 

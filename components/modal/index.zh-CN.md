@@ -54,7 +54,7 @@
 | centered | 垂直居中展示 Modal | Boolean | `false` |
 | closable | 是否显示右上角的关闭按钮 | boolean | `false` |
 | class | 容器类名 | string | - |
-| content | 内容 | string\|vNode | 无 |
+| content | 内容 | string \|vNode \|function(h) | 无 |
 | iconType | 图标 Icon 类型 | string | question-circle |
 | maskClosable | 点击蒙层是否允许关闭 | Boolean | `false` |
 | keyboard | 是否支持键盘esc关闭 | boolean | true |
@@ -62,7 +62,7 @@
 | okType | 确认按钮类型 | string | primary |
 | okButtonProps | ok 按钮 props | [ButtonProps](/components/button) | - |
 | cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button) | - |
-| title | 标题 | string\|vNode | 无 |
+| title | 标题 | string\|vNode \|function(h) | 无 |
 | width | 宽度 | string\|number | 416 |
 | zIndex | 设置 Modal 的 `z-index` | Number | 1000 |
 | onCancel | 取消回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭 | function | 无 |

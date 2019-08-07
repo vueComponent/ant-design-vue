@@ -1135,7 +1135,8 @@ const Select = {
           } else if (!label && key) {
             label = key;
           }
-          const childChildren = getSlots(child).default;
+          let childChildren = getSlots(child).default;
+          childChildren = typeof childChildren === 'function' ? childChildren() : childChildren;
           // Match option group label
           if (inputValue && this._filterOption(inputValue, child)) {
             const innerItems = childChildren.map(subChild => {

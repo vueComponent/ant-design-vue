@@ -44,6 +44,11 @@ const filterProps = (props, propsData = {}) => {
   });
   return res;
 };
+
+const getScopedSlots = ele => {
+  return (ele.data && ele.data.scopedSlots) || {};
+};
+
 const getSlots = ele => {
   let componentOptions = ele.componentOptions || {};
   if (ele.$vnode) {
@@ -58,8 +63,9 @@ const getSlots = ele => {
       slots[name].push(child);
     }
   });
-  return slots;
+  return { ...slots, ...getScopedSlots(ele) };
 };
+
 const getAllChildren = ele => {
   let componentOptions = ele.componentOptions || {};
   if (ele.$vnode) {

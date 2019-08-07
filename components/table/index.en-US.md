@@ -86,14 +86,14 @@ Follow [Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx) syntax
         xxxx...
       },
     };
-  }}
+  )}
   customHeaderRow={(column) => {
     return {
       on: {
         click: () => {},        // click header row
       },
     };
-  }}
+  )}
 />
 ```
 

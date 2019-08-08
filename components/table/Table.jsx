@@ -833,6 +833,7 @@ export default {
               theme="filled"
             />
           );
+
           sortButton = (
             <div title={locale.sortTitle} class={`${prefixCls}-column-sorter`} key="sorter">
               {ascend}

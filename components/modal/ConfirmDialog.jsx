@@ -92,9 +92,13 @@ export default {
       >
         <div class={`${contentPrefixCls}-body-wrapper`}>
           <div class={`${contentPrefixCls}-body`}>
-            {iconNode}
-            <span class={`${contentPrefixCls}-title`}>{props.title}</span>
-            <div class={`${contentPrefixCls}-content`}>{props.content}</div>
+            <Icon type={iconType} />
+            <span class={`${contentPrefixCls}-title`}>
+              {typeof props.title === 'function' ? props.title(h) : props.title}
+            </span>
+            <div class={`${contentPrefixCls}-content`}>
+              {typeof props.content === 'function' ? props.content(h) : props.content}
+            </div>
           </div>
           <div class={`${contentPrefixCls}-btns`}>
             {cancelButton}

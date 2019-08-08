@@ -38,7 +38,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i></a></li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div tabindex="-1" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>
@@ -67,7 +67,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i></a></li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
+      <div tabindex="-1" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="20 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">20 / page</div>
@@ -110,7 +110,7 @@ exports[`renders ./components/pagination/demo/custom-changer.md correctly 1`] = 
           <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
         </svg></i></a></li>
   <li class="ant-pagination-options">
-    <div class="ant-select ant-select-enabled ant-pagination-options-size-changer">
+    <div tabindex="-1" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="" class="ant-select-selection-selected-value" style="display: block; opacity: 1;"><span>10条/页</span>
@@ -196,7 +196,7 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i></a></li>
     <li class="ant-pagination-options">
-      <div class="ant-select ant-select-enabled ant-select-sm ant-pagination-options-size-changer">
+      <div tabindex="-1" class="ant-select ant-select-enabled ant-select-sm ant-pagination-options-size-changer">
         <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / page" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / page</div>

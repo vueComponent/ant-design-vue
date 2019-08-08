@@ -636,9 +636,20 @@ const Select = {
         this._focused = false;
       }
     },
-    inputBlur() {
+    inputBlur(e) {
+      if (
+        e.relatedTarget &&
+        this.selectTriggerRef &&
+        this.selectTriggerRef.getInnerMenu() &&
+        this.selectTriggerRef.getInnerMenu().$el === e.relatedTarget
+      ) {
+        e.target.focus();
+        e.preventDefault();
+        return;
+      }
       this.clearBlurTime();
       if (this.disabled) {
+        e.preventDefault();
         return;
       }
       this.blurTimer = setTimeout(() => {
@@ -1148,7 +1159,8 @@ const Select = {
           } else if (!label && key) {
             label = key;
           }
-          const childChildren = getSlots(child).default;
+          let childChildren = getSlots(child).default;
+          childChildren = typeof childChildren === 'function' ? childChildren() : childChildren;
           // Match option group label
           if (inputValue && this._filterOption(inputValue, child)) {
             const innerItems = childChildren.map(subChild => {
@@ -1460,31 +1472,36 @@ const Select = {
     },
 
     selectionRefClick(e) {
-      e.stopPropagation();
+      //e.stopPropagation();
       if (!this.disabled) {
         const input = this.getInputDOMNode();
         if (this._focused && this.$data._open) {
-          this._focused = false;
+          // this._focused = false;
           this.setOpenState(false, false);
           input && input.blur();
         } else {
           this.clearBlurTime();
-          this._focused = true;
+          //this._focused = true;
           this.setOpenState(true, true);
           input && input.focus();
         }
       }
     },
-    selectionRefFocus() {
-      if (this._focused || this.disabled) {
+    selectionRefFocus(e) {
+      if (this._focused || this.disabled || isMultipleOrTagsOrCombobox(this.$props)) {
+        e.preventDefault();
         return;
       }
       this._focused = true;
       this.updateFocusClassName();
       this.$emit('focus');
     },
-    selectionRefBlur() {
-      this.inputBlur();
+    selectionRefBlur(e) {
+      if (isMultipleOrTagsOrCombobox(this.$props)) {
+        e.preventDefault();
+        return;
+      }
+      this.inputBlur(e);
     },
   },
 
@@ -1517,21 +1534,21 @@ const Select = {
         'aria-controls': this.$data._ariaId,
       },
       on: {
-        click: this.selectionRefClick,
+        // click: this.selectionRefClick,
       },
       class: `${prefixCls}-selection ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`,
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.saveSelectionRef,
-        },
-      ],
+      // directives: [
+      //   {
+      //     name: 'ant-ref',
+      //     value: this.saveSelectionRef,
+      //   },
+      // ],
       key: 'selection',
     };
     if (!isMultipleOrTagsOrCombobox(props)) {
       selectionProps.on.keydown = this.onKeyDown;
-      selectionProps.on.focus = this.selectionRefFocus;
-      selectionProps.on.blur = this.selectionRefBlur;
+      // selectionProps.on.focus = this.selectionRefFocus;
+      // selectionProps.on.blur = this.selectionRefBlur;
       selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
     }
     const rootCls = {
@@ -1593,7 +1610,7 @@ const Select = {
             directives: [
               {
                 name: 'ant-ref',
-                value: this.saveRootRef,
+                value: chaining(this.saveRootRef, this.saveSelectionRef),
               },
             ],
           }}
@@ -1602,9 +1619,10 @@ const Select = {
           onMousedown={this.markMouseDown}
           onMouseup={this.markMouseLeave}
           onMouseout={this.markMouseLeave}
-          // tabindex='-1'
-          // onBlur={this.onOuterBlur}
-          // onFocus={this.onOuterFocus}
+          tabindex="-1"
+          onBlur={this.selectionRefBlur}
+          onFocus={this.selectionRefFocus}
+          onClick={this.selectionRefClick}
         >
           <div {...selectionProps}>
             {ctrlNode}

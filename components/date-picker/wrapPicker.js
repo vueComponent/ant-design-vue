@@ -52,6 +52,11 @@ export default function wrapPicker(Picker, props, pickerType) {
     inject: {
       configProvider: { default: () => ({}) },
     },
+    provide() {
+      return {
+        savePopupRef: this.savePopupRef,
+      };
+    },
     mounted() {
       const { autoFocus, disabled } = this;
       if (autoFocus && !disabled) {
@@ -61,6 +66,9 @@ export default function wrapPicker(Picker, props, pickerType) {
       }
     },
     methods: {
+      savePopupRef(ref) {
+        this.popupRef = ref;
+      },
       handleOpenChange(open) {
         this.$emit('openChange', open);
       },

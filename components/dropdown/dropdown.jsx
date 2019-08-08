@@ -21,10 +21,18 @@ const Dropdown = {
     prop: 'visible',
     event: 'visibleChange',
   },
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
   inject: {
     configProvider: { default: () => ({}) },
   },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     getTransitionName() {
       const { placement = '', transitionName } = this.$props;
       if (transitionName !== undefined) {

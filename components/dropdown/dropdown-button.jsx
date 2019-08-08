@@ -13,6 +13,7 @@ const DropdownButtonProps = {
   ...ButtonGroupProps,
   ...DropdownProps,
   type: PropTypes.oneOf(['primary', 'ghost', 'dashed', 'danger', 'default']).def('default'),
+  size: PropTypes.oneOf(['small', 'large', 'default']).def('default'),
   htmlType: ButtonTypesProps.htmlType,
   href: PropTypes.string,
   disabled: PropTypes.bool,
@@ -27,16 +28,24 @@ export default {
     event: 'visibleChange',
   },
   props: DropdownButtonProps,
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
+  inject: {
+    configProvider: { default: () => ({}) },
+  },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     onClick(e) {
       this.$emit('click', e);
     },
     onVisibleChange(val) {
       this.$emit('visibleChange', val);
     },
-  },
-  inject: {
-    configProvider: { default: () => ({}) },
   },
   render() {
     const {
@@ -71,20 +80,21 @@ export default {
       dropdownProps.props.visible = visible;
     }
 
+    const buttonGroupProps = {
+      props: {
+        ...restProps,
+      },
+      class: prefixCls,
+    };
+
     return (
-      <ButtonGroup {...restProps} class={prefixCls}>
-        <Button
-          type={type}
-          disabled={disabled}
-          onClick={this.onClick}
-          htmlType={htmlType}
-          href={href}
-        >
+      <ButtonGroup {...buttonGroupProps}>
+        <Button type={type} disabled={disabled} onClick={this.onClick} htmlType={htmlType}>
           {this.$slots.default}
         </Button>
         <Dropdown {...dropdownProps}>
           <template slot="overlay">{getComponentFromProp(this, 'overlay')}</template>
-          <Button type={type} icon="ellipsis" />
+          <Button type={type} disabled={disabled} icon="ellipsis" />
         </Dropdown>
       </ButtonGroup>
     );

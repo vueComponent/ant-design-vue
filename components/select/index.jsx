@@ -105,6 +105,11 @@ const Select = {
     prop: 'value',
     event: 'change',
   },
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
   inject: {
     configProvider: { default: () => ({}) },
   },
@@ -117,6 +122,9 @@ const Select = {
     );
   },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     focus() {
       this.$refs.vcSelect.focus();
     },

@@ -8,6 +8,7 @@ import KeyCode from '../../../_util/KeyCode';
 let cachedSelectionStart;
 let cachedSelectionEnd;
 let dateInputInstance;
+import { isIE, isIE9 } from '../../../_util/env';
 
 const DateInput = {
   mixins: [BaseMixin],
@@ -82,6 +83,10 @@ const DateInput = {
     },
     onInputChange(event) {
       const str = event.target.value;
+      // https://github.com/vueComponent/ant-design-vue/issues/92
+      if (isIE && !isIE9 && this.str === str) {
+        return;
+      }
       const { disabledDate, format, selectedValue } = this.$props;
 
       // 没有内容，合法并直接退出

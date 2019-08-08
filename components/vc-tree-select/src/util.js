@@ -7,7 +7,7 @@ import {
 } from '../../vc-tree/src/util';
 import SelectNode from './SelectNode';
 import { SHOW_CHILD, SHOW_PARENT } from './strategies';
-import { getSlots, getPropsData } from '../../_util/props-util';
+import { getSlots, getPropsData, isEmptyElement } from '../../_util/props-util';
 
 let warnDeprecatedLabel = false;
 
@@ -196,29 +196,20 @@ export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntiti
   }
 
   function mapFilteredNodeToData(node) {
-    if (!node) return null;
+    if (!node || isEmptyElement(node)) return null;
 
     let match = false;
     if (filterFunc(searchValue, node)) {
       match = true;
     }
-    const $slots = getSlots(node);
-    const children = $slots.default.map(mapFilteredNodeToData).filter(n => n);
-    delete $slots.default;
-    const slotsKey = Object.keys($slots);
+    let children = getSlots(node).default;
+    children = ((typeof children === 'function' ? children() : children) || [])
+      .map(mapFilteredNodeToData)
+      .filter(n => n);
     if (children.length || match) {
       return (
         <SelectNode {...node.data} key={valueEntities[getPropsData(node).value].key}>
           {children}
-          {slotsKey.length
-            ? slotsKey.map(name => {
-                return (
-                  <template slot={name}>
-                    {$slots[name][0].tag === 'template' ? $slots[name][0].children : $slots[name]}
-                  </template>
-                );
-              })
-            : null}
         </SelectNode>
       );
     }

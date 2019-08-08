@@ -142,6 +142,11 @@ const Cascader = {
     prop: 'value',
     event: 'change',
   },
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
   inject: {
     configProvider: { default: () => ({}) },
     localeData: { default: () => ({}) },
@@ -178,6 +183,9 @@ const Cascader = {
     },
   },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     highlightKeyword(str, keyword, prefixCls) {
       return str
         .split(keyword)

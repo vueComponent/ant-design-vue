@@ -90,6 +90,11 @@ const TimePicker = {
     prop: 'value',
     event: 'change',
   },
+  provide() {
+    return {
+      savePopupRef: this.savePopupRef,
+    };
+  },
   inject: {
     configProvider: { default: () => ({}) },
   },
@@ -112,6 +117,9 @@ const TimePicker = {
     },
   },
   methods: {
+    savePopupRef(ref) {
+      this.popupRef = ref;
+    },
     handleChange(value) {
       if (!hasProp(this, 'value')) {
         this.setState({ sValue: value });

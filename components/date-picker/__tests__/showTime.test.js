@@ -137,7 +137,7 @@ describe('DatePicker with showTime', () => {
   });
 });
 
-describe('RangePicker with showTime', async () => {
+describe('RangePicker with showTime', () => {
   it('should trigger onChange when select value', async () => {
     const onChangeFn = jest.fn();
     const onOpenChangeFn = jest.fn();

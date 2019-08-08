@@ -6,7 +6,7 @@ import omit from 'lodash/omit';
 import createFieldsStore from './createFieldsStore';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, getEvents } from '../../_util/props-util';
+import { getOptionProps, getEvents, slotHasProp, getComponentName } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
 
 import {
@@ -184,16 +184,27 @@ function createBaseForm(option = {}, mixins = []) {
             if (process.env.NODE_ENV !== 'production') {
               const valuePropName = fieldMeta.valuePropName;
               warning(
-                !(valuePropName in originalProps),
+                !slotHasProp(fieldElem, valuePropName),
                 `\`getFieldDecorator\` will override \`${valuePropName}\`, ` +
                   `so please don't set \`${valuePropName} and v-model\` directly ` +
                   `and use \`setFieldsValue\` to set it.`,
+              );
+              warning(
+                !(
+                  !slotHasProp(fieldElem, valuePropName) &&
+                  valuePropName in originalProps &&
+                  !(fieldOption && fieldOption.initialValue)
+                ),
+                `${getComponentName(
+                  fieldElem.componentOptions,
+                )} \`default value\` can not collect, ` +
+                  ` please use \`option.initialValue\` to set default value.`,
               );
               const defaultValuePropName = `default${valuePropName[0].toUpperCase()}${valuePropName.slice(
                 1,
               )}`;
               warning(
-                !(defaultValuePropName in originalProps),
+                !slotHasProp(fieldElem, defaultValuePropName),
                 `\`${defaultValuePropName}\` is invalid ` +
                   `for \`getFieldDecorator\` will set \`${valuePropName}\`,` +
                   ` please use \`option.initialValue\` instead.`,

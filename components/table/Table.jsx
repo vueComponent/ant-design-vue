@@ -1,12 +1,6 @@
 import VcTable from '../vc-table';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
-import Pagination from '../pagination';
-import Icon from '../icon';
-import Spin from '../spin';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
-import warning from '../_util/warning';
 import FilterDropdown from './filterDropdown';
 import createStore from './createStore';
 import SelectionBox from './SelectionBox';
@@ -26,6 +20,12 @@ import {
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import { TableProps } from './interface';
+import Pagination from '../pagination';
+import Icon from '../icon';
+import Spin, { SpinProps } from '../spin';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from '../locale-provider/default';
+import warning from '../_util/warning';
 
 function noop() {}
 
@@ -796,7 +796,7 @@ export default {
         let filterDropdown;
         let sortButton;
         let customHeaderCell = column.customHeaderCell;
-        // const sortTitle = this.getColumnTitle(column.title, {}) || locale.sortTitle;
+        const title = this.renderColumnTitle(column.title);
         const isSortColumn = this.isSortColumn(column);
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
           const colFilters = key in filters ? filters[key] : [];
@@ -859,7 +859,6 @@ export default {
             return colProps;
           };
         }
-        // const sortTitleString = sortButton && typeof sortTitle === 'string' ? sortTitle : undefined;
         return {
           ...column,
           className: classNames(column.className, {
@@ -869,8 +868,11 @@ export default {
             [`${prefixCls}-column-sort`]: isSortColumn && sortOrder,
           }),
           title: [
-            <div key="title" class={sortButton ? `${prefixCls}-column-sorters` : undefined}>
-              {this.renderColumnTitle(column.title)}
+            <div
+              key="title"
+              class={sortButton ? `${prefixCls}-column-sorters` : undefined}
+            >
+              {title}
               {sortButton}
             </div>,
             filterDropdown,
@@ -890,34 +892,6 @@ export default {
       }
       return title;
     },
-
-    // getColumnTitle(title, parentNode) {
-    //   if (!title) {
-    //     return;
-    //   }
-    //   if (isValidElement(title)) {
-    //     const props = title.componentOptions;
-    //     let children = null;
-    //     if (props && props.children) {
-    //       // for component
-    //       children = filterEmpty(props.children);
-    //     } else if (title.children) {
-    //       // for dom
-    //       children = filterEmpty(title.children);
-    //     }
-    //     if (children && children.length === 1) {
-    //       children = children[0];
-    //       const attrs = getAllProps(title);
-    //       if (!children.tag && children.text) {
-    //         // for textNode
-    //         children = children.text;
-    //       }
-    //       return this.getColumnTitle(children, attrs);
-    //     }
-    //   } else {
-    //     return parentNode.title || title;
-    //   }
-    // },
 
     handleShowSizeChange(current, pageSize) {
       const pagination = this.sPagination;

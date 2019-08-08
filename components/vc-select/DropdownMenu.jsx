@@ -107,7 +107,6 @@ export default {
         const menuProps = {
           props: {
             multiple,
-            defaultActiveFirst: defaultActiveFirstOption,
             itemIcon: multiple ? menuItemSelectedIcon : null,
             selectedKeys,
             prefixCls: `${prefixCls}-menu`,
@@ -134,8 +133,7 @@ export default {
         let clonedMenuItems = menuItems;
         if (selectedKeys.length || firstActiveValue) {
           if (props.visible && !this.lastVisible) {
-            activeKeyProps.activeKey =
-              selectedKeys[0] !== undefined ? selectedKeys[0] : firstActiveValue;
+            activeKeyProps.activeKey = selectedKeys[0] || firstActiveValue;
           } else if (!visible) {
             // Do not trigger auto active since we already have selectedKeys
             if (selectedKeys[0]) {

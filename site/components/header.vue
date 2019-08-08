@@ -104,7 +104,7 @@ export default {
                         width='160'
                         height='160'
                         alt='wechat'
-                        src='https://cdn.nlark.com/yuque/0/2019/jpeg/87084/1550303926433-assets/web-upload/3bf5b121-fea2-44bb-9ef9-0d61616c85e3.jpeg'
+                        src='http://pvrd7go2h.bkt.clouddn.com/wechat.jpeg'
                       />
                     </template>
                     <a>
@@ -119,7 +119,7 @@ export default {
                         width='160'
                         height='160'
                         alt='qq'
-                        src='https://cdn.nlark.com/yuque/0/2019/png/87084/1548484520571-assets/web-upload/ca2259e1-6600-461b-8c5b-31018e8bcc07.png'
+                        src='http://pvrd7go2h.bkt.clouddn.com/qq.png'
                       />
                     </template>
                     <a>

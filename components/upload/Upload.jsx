@@ -44,7 +44,7 @@ export default {
   },
   watch: {
     fileList(val) {
-      this.sFileList = val;
+      this.sFileList = val || [];
     },
   },
   beforeDestroy() {

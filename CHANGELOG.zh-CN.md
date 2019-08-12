@@ -10,6 +10,18 @@
 
 ---
 
+## 1.3.14
+`2019-08-12`
+- 🐞 修复 `MenuItem` 解析数组 `class` 不正确问题 [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
+- 🐞 修复 npm install 时报错问题 [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 修复 `Select` 组件不触发 focus 事件问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 修复 `DropdownButton` `size` 属性不生效问题 [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
+- 🐞 修复 `Table` 组件不支持 vue 2.6 v-slot 语法问题 [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
+- 🌟 `Popover` 添加 `builtinPlacements` 属性 [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)
+- 🌟 `Button` 支持 `link` 类型 [#1077](https://github.com/vueComponent/ant-design-vue/pull/1077)
+- 🌟 `Modal.confirm` `title` and `content` 支持 function
+
 ## 1.3.13
 `2019-07-22`
 - 🐞 修复 dist 缺少 antd.less 文件问题 [#995](https://github.com/vueComponent/ant-design-vue/issues/995)

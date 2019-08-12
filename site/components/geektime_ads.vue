@@ -12,7 +12,7 @@
         height="100"
         alt="浏览器工作原理与实践"
         src="http://pvrd7go2h.bkt.clouddn.com/geektime-browser.jpeg"
-      >
+      />
     </a>
   </div>
 </template>
@@ -40,12 +40,10 @@ export default {
 
 <style lang="less" scoped>
 #geektime-ads {
-  max-width: 280px;
-  height: 100px;
-  float: right;
-  position: relative;
-  right: 0;
-  bottom: 0;
+  width: 266px;
+  position: fixed;
+  left: 0;
+  bottom: 0px;
   padding: 0;
   overflow: hidden;
   z-index: 9;

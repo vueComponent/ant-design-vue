@@ -14,8 +14,8 @@
 `2019-08-12`
 - 🐞 修复 `MenuItem` 解析数组 `class` 不正确问题 [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
 - 🐞 修复 npm install 时报错问题 [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
-- 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/997)
-- 🐞 修复 `Select` 组件不触发 focus 事件问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 修复 `Select` 组件不触发 focus 事件问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
 - 🐞 修复 `DropdownButton` `size` 属性不生效问题 [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
 - 🐞 修复 `Table` 组件不支持 vue 2.6 v-slot 语法问题 [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
 - 🌟 `Popover` 添加 `builtinPlacements` 属性 [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)

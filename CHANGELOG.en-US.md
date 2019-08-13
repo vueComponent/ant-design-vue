@@ -14,8 +14,8 @@
 `2019-08-12`
 - 🐞 Fix `MenuItem` parsing array `class` incorrect question [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
 - 🐞 Fix an error when npm install [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
-- 🐞 Fix `Select` component cannot scroll under IE [#999] (https://github.com/vueComponent/ant-design-vue/issues/997)
-- 🐞 Fix `Select` component does not trigger focus event problem [#999] (https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 Fix `Select` component cannot scroll under IE [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Select` component does not trigger focus event problem [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
 - 🐞 Fix `DropdownButton` `size` attribute does not work [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
 - 🐞 Fix `Table` component does not support vue 2.6 v-slot syntax problem [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
 - 🌟 `Popover` add `builtinPlacements` attribute [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)

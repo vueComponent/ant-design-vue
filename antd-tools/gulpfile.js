@@ -335,7 +335,7 @@ gulp.task(
           newVersion &&
           newVersion.trim() === version
         ) {
-          runCmd('npm', ['pub'], code => {
+          runCmd('npm', ['run', 'pub'], code => {
             done();
           });
         } else {

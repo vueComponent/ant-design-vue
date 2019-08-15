@@ -193,7 +193,7 @@ function createBaseForm(option = {}, mixins = []) {
                 !(
                   !slotHasProp(fieldElem, valuePropName) &&
                   valuePropName in originalProps &&
-                  !(fieldOption && fieldOption.initialValue)
+                  !(fieldOption && initialValue in fieldOption)
                 ),
                 `${getComponentName(
                   fieldElem.componentOptions,

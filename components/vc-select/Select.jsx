@@ -619,10 +619,10 @@ const Select = {
     inputBlur(e) {
       const target = e.relatedTarget || document.activeElement;
       if (
-        target &&
-        this.selectTriggerRef &&
-        this.selectTriggerRef.getInnerMenu() &&
-        this.selectTriggerRef.getInnerMenu().$el === target ||
+        (target &&
+          this.selectTriggerRef &&
+          this.selectTriggerRef.getInnerMenu() &&
+          this.selectTriggerRef.getInnerMenu().$el === target) ||
         contains(e.target, target)
       ) {
         e.target.focus();
@@ -1519,10 +1519,10 @@ const Select = {
       key: 'selection',
     };
     //if (!isMultipleOrTagsOrCombobox(props)) {
-     // selectionProps.on.keydown = this.onKeyDown;
-      // selectionProps.on.focus = this.selectionRefFocus;
-      // selectionProps.on.blur = this.selectionRefBlur;
-     // selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
+    // selectionProps.on.keydown = this.onKeyDown;
+    // selectionProps.on.focus = this.selectionRefFocus;
+    // selectionProps.on.blur = this.selectionRefBlur;
+    // selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
     //}
     const rootCls = {
       [prefixCls]: true,

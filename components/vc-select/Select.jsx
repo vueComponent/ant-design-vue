@@ -164,7 +164,7 @@ const Select = {
       if (isMultipleOrTags(this.$props)) {
         const inputNode = this.getInputDOMNode();
         const mirrorNode = this.getInputMirrorDOMNode();
-        if (inputNode.value && inputNode.value && mirrorNode) {
+        if (inputNode && inputNode.value && mirrorNode) {
           inputNode.style.width = '';
           inputNode.style.width = `${mirrorNode.clientWidth + 10}px`;
         } else if (inputNode) {

@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.15
+`2019-08-17`
+- 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 修复 `Form` `initialValue` 为空时报 warning 问题 [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
+- 🐞 修复 `Form` 校验 Number 类型时错误问题 [#1090](https://github.com/vueComponent/ant-design-vue/issues/1090)
+
 ## 1.3.14
 `2019-08-12`
 - 🐞 修复 `MenuItem` 解析数组 `class` 不正确问题 [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)

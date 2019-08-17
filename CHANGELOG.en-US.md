@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.15
+`2019-08-17`
+- 🐞 Fix `Select` component cannot scroll under IE [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Form` `initialValue` warning  [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
+- 🐞 Fix `Form` error when verifying `Number` type [#1090](https://github.com/vueComponent/ant-design-vue/issues/1090)
+
 ## 1.3.14
 `2019-08-12`
 - 🐞 Fix `MenuItem` parsing array `class` incorrect question [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)

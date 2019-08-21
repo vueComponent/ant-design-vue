@@ -23,7 +23,7 @@ The most basic usage of `Transfer` involves providing the source data and target
       :disabled="disabled"
     />
     <a-switch
-      unCheckedChildren="enable"
+      unCheckedChildren="enabled"
       checkedChildren="disabled"
       :checked="disabled"
       @change="handleDisable"

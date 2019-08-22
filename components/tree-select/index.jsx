@@ -134,20 +134,23 @@ const TreeSelect = {
 
     const clearIcon = <Icon type="close-circle" class={`${prefixCls}-clear-icon`} theme="filled" />;
     const VcTreeSelectProps = {
-      props: {
-        switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, nodeProps),
-        inputIcon,
-        removeIcon,
-        clearIcon,
-        ...rest,
-        getPopupContainer: getPopupContainer || getContextPopupContainer,
-        dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
-        prefixCls,
-        dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
-        treeCheckable: checkable,
-        notFoundContent: notFoundContent || renderEmpty(h, 'Select'),
-        __propsSymbol__: Symbol(),
-      },
+      props: Object.assign(
+        {
+          switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, nodeProps),
+          inputIcon,
+          removeIcon,
+          clearIcon,
+          ...rest,
+          getPopupContainer: getPopupContainer || getContextPopupContainer,
+          dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
+          prefixCls,
+          dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
+          treeCheckable: checkable,
+          notFoundContent: notFoundContent || renderEmpty(h, 'Select'),
+          __propsSymbol__: Symbol(),
+        },
+        treeData ? { treeData } : {},
+      ),
       class: cls,
       on: { ...this.$listeners, change: this.onChange },
       ref: 'vcTreeSelect',

@@ -8,7 +8,7 @@ ant-design-vue 是采用 MIT 许可的开源项目，使用完全免费。 但�
 <div>
 <a href="https://www.paypal.me/tangjinzhou" target="_blank">PayPal</a>
 <br/>
-<a href="http://pvrd7go2h.bkt.clouddn.com/alipay-and-wechat.png" target="_blank">支付宝或微信</a>
+<a href="http://qn.antdv.com/alipay-and-wechat.png" target="_blank">支付宝或微信</a>
 </div>
 
 ## 周期性赞助

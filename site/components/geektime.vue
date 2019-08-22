@@ -10,7 +10,7 @@
       <img
         width="170"
         alt="Vue 实战教程"
-        src="http://pvrd7go2h.bkt.clouddn.com/geektime-vue.jpeg"
+        src="http://qn.antdv.com/geektime-vue.jpeg"
       >
     </a>
     <div

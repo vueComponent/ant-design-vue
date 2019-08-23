@@ -1,8 +1,7 @@
 <script>
 import axios from 'axios';
 const carbonUrls = {
-  'vuecomponent.github.io':
-    '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vuecomponentgithubio',
+  'www.antdv.com': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=antdvcom',
   'tangjinzhou.gitee.io':
     '//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
   'ant-design-vue.gitee.io':

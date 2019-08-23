@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vue.ant.design/">
-    <img width="200" src="http://qn.antdv.com/logo.png">
+    <img width="200" src="https://qn.antdv.com/logo.png">
   </a>
 </p>
 
@@ -91,7 +91,7 @@ ant-design-vue是MIT协议的开源项目。为了项目能够更好的持续的
 - [Patreon](https://www.patreon.com/tangjinzhou)
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
-- [支付宝或微信](http://qn.antdv.com/alipay-and-wechat.png)
+- [支付宝或微信](https://qn.antdv.com/alipay-and-wechat.png)
 
 ## Backers
 

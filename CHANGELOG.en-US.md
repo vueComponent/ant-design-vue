@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.16
+`2019-08-25`
+- 🐞 Fix `Select` component to uninstall component error when there is no input [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)
+- 🐞 Fix `Collapse` error when no child element [#1116](https://github.com/vueComponent/ant-design-vue/pull/1116)
+- 🐞 Fix TypeScript type definitions.
+
 ## 1.3.15
 `2019-08-17`
 - 🐞 Fix `Select` component cannot scroll under IE [#999](https://github.com/vueComponent/ant-design-vue/issues/999)

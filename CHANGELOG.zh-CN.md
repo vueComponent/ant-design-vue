@@ -10,6 +10,12 @@
 
 ---
 
+## 1.3.16
+`2019-08-25`
+- 🐞 修复 `Select` 组件在没有 input 时，卸载组件报错问题 [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)
+- 🐞 修复 `Collapse` 无子元素时报错问题 [#1116](https://github.com/vueComponent/ant-design-vue/pull/1116)
+- 🐞 修复 TypeScript 类型定义。
+
 ## 1.3.15
 `2019-08-17`
 - 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)

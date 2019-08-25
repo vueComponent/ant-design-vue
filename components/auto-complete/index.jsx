@@ -144,8 +144,8 @@ const AutoComplete = {
       on: $listeners,
     };
     return <Select {...selectProps}>{options}</Select>;
-  }
-}
+  },
+};
 
 /* istanbul ignore next */
 AutoComplete.install = function(Vue) {

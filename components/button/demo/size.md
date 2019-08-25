@@ -23,6 +23,7 @@ If a large or small button is desired, set the `size` property to either `large`
     <a-button :size="size">Normal</a-button>
     <a-button type="dashed" :size="size">Dashed</a-button>
     <a-button type="danger" :size="size">Danger</a-button>
+    <a-button type="link" :size="size">Link</a-button>
     <br />
     <a-button type="primary" shape="circle" icon="download" :size="size" />
     <a-button type="primary" shape="round" icon="download" :size="size">Download</a-button>

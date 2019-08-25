@@ -16,7 +16,7 @@
     &:focus,
     &:active,
     &.active {
-      .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
+      .button-color(@color; @background; @border);
       text-shadow: none;
       box-shadow: none;
     }
@@ -89,11 +89,21 @@
   text-shadow: none;
   &:hover,
   &:focus {
-    .button-color(~`colorPalette('@{color}', 5) `; transparent; ~`colorPalette('@{color}', 5) `);
+    & when (@border = transparent) {
+      .button-color(~`colorPalette('@{color}', 5) `; transparent; transparent);
+    }
+    & when not(@border = transparent) {
+      .button-color(~`colorPalette('@{color}', 5) `; transparent; ~`colorPalette('@{color}', 5) `);
+    }
   }
   &:active,
   &.active {
-    .button-color(~`colorPalette('@{color}', 7) `; transparent; ~`colorPalette('@{color}', 7) `);
+    & when (@border = transparent) {
+      .button-color(~`colorPalette('@{color}', 7) `; transparent; transparent);
+    }
+    & when not(@border = transparent) {
+      .button-color(~`colorPalette('@{color}', 7) `; transparent; ~`colorPalette('@{color}', 7) `);
+    }
   }
   .button-disabled();
 }

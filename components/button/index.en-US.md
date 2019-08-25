@@ -11,7 +11,7 @@ To get a customized button, just set `type`/`shape`/`size`/`loading`/`disabled`.
 | loading | set the loading status of button | boolean \| { delay: number } | false |
 | shape | can be set to `circle`, `round` or omitted | string | - |
 | size | can be set to `small` `large` or omitted | string | `default` |
-| type | can be set to `primary` `ghost` `dashed` `danger`(added in 2.7) or omitted (meaning `default`) | string | `default` |
+| type | can be set to `primary` `ghost` `dashed` `danger` `link` or omitted (meaning `default`) | string | `default` |
 | block | option to fit button width to its parent width | boolean | `false` |
 
 ### events

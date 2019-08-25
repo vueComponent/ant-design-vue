@@ -5,14 +5,14 @@
     :class="isMobile ? 'geektime-ads-mobile':''"
   >
     <a
-      href="https://time.geekbang.org/column/intro/216?utm_term=zeusH8E0I&utm_source=website&utm_medium=tangjinzhou"
+      href="https://time.geekbang.org/column/intro/154?utm_term=zeusGZFFE&utm_source=app&utm_medium=tangjinzhou"
       target="_blank"
     >
       <img
         height="100"
-        alt="浏览器工作原理与实践"
-        src="http://pvrd7go2h.bkt.clouddn.com/geektime-browser.jpeg"
-      >
+        alt="重学前端"
+        src="https://qn.antdv.com/chongxueqianduan.jpg"
+      />
     </a>
   </div>
 </template>
@@ -40,12 +40,10 @@ export default {
 
 <style lang="less" scoped>
 #geektime-ads {
-  max-width: 280px;
-  height: 100px;
-  float: right;
-  position: relative;
-  right: 0;
-  bottom: 0;
+  width: 266px;
+  position: fixed;
+  left: 0;
+  bottom: 0px;
   padding: 0;
   overflow: hidden;
   z-index: 9;

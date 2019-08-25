@@ -112,9 +112,10 @@ export default {
     },
     getItems() {
       const newChildren = [];
-      this.$slots.default.forEach((child, index) => {
-        newChildren.push(this.getNewChild(child, index));
-      });
+      this.$slots.default &&
+        this.$slots.default.forEach((child, index) => {
+          newChildren.push(this.getNewChild(child, index));
+        });
       return newChildren;
     },
     setActiveKey(activeKey) {

@@ -104,7 +104,7 @@ export default {
                         width='160'
                         height='160'
                         alt='wechat'
-                        src='http://pvrd7go2h.bkt.clouddn.com/wechat.jpeg'
+                        src='https://qn.antdv.com/wechat.jpeg'
                       />
                     </template>
                     <a>
@@ -119,7 +119,7 @@ export default {
                         width='160'
                         height='160'
                         alt='qq'
-                        src='http://pvrd7go2h.bkt.clouddn.com/qq.png'
+                        src='https://qn.antdv.com/qq.png'
                       />
                     </template>
                     <a>

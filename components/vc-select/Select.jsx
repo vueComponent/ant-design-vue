@@ -50,6 +50,7 @@ import {
   validateOptionValue,
 } from './util';
 import { SelectPropTypes } from './PropTypes';
+import contains from '../_util/Dom/contains';
 
 Vue.use(ref, { name: 'ant-ref' });
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
@@ -171,7 +172,7 @@ const Select = {
       if (isMultipleOrTags(this.$props)) {
         const inputNode = this.getInputDOMNode();
         const mirrorNode = this.getInputMirrorDOMNode();
-        if (inputNode.value && inputNode.value && mirrorNode) {
+        if (inputNode && inputNode.value && mirrorNode) {
           inputNode.style.width = '';
           inputNode.style.width = `${mirrorNode.clientWidth + 10}px`;
         } else if (inputNode) {
@@ -346,10 +347,7 @@ const Select = {
       if (open && !this.getInputDOMNode()) {
         this.onInputKeydown(event);
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
-        // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
-        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(this.$props)) {
-          this.maybeFocus(true);
-        } else if (!open) {
+        if (!open) {
           this.setOpenState(true);
         }
         event.preventDefault();
@@ -637,11 +635,13 @@ const Select = {
       }
     },
     inputBlur(e) {
+      const target = e.relatedTarget || document.activeElement;
       if (
-        e.relatedTarget &&
-        this.selectTriggerRef &&
-        this.selectTriggerRef.getInnerMenu() &&
-        this.selectTriggerRef.getInnerMenu().$el === e.relatedTarget
+        (target &&
+          this.selectTriggerRef &&
+          this.selectTriggerRef.getInnerMenu() &&
+          this.selectTriggerRef.getInnerMenu().$el === target) ||
+        contains(e.target, target)
       ) {
         e.target.focus();
         e.preventDefault();
@@ -1545,12 +1545,12 @@ const Select = {
       // ],
       key: 'selection',
     };
-    if (!isMultipleOrTagsOrCombobox(props)) {
-      selectionProps.on.keydown = this.onKeyDown;
-      // selectionProps.on.focus = this.selectionRefFocus;
-      // selectionProps.on.blur = this.selectionRefBlur;
-      selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
-    }
+    //if (!isMultipleOrTagsOrCombobox(props)) {
+    // selectionProps.on.keydown = this.onKeyDown;
+    // selectionProps.on.focus = this.selectionRefFocus;
+    // selectionProps.on.blur = this.selectionRefBlur;
+    // selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
+    //}
     const rootCls = {
       [prefixCls]: true,
       [`${prefixCls}-open`]: open,
@@ -1619,10 +1619,11 @@ const Select = {
           onMousedown={this.markMouseDown}
           onMouseup={this.markMouseLeave}
           onMouseout={this.markMouseLeave}
-          tabindex="-1"
+          tabIndex={props.disabled ? -1 : props.tabIndex}
           onBlur={this.selectionRefBlur}
           onFocus={this.selectionRefFocus}
           onClick={this.selectionRefClick}
+          onKeydown={isMultipleOrTagsOrCombobox(props) ? noop : this.onKeyDown}
         >
           <div {...selectionProps}>
             {ctrlNode}

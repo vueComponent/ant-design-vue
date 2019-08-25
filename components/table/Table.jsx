@@ -869,10 +869,7 @@ export default {
             [`${prefixCls}-column-sort`]: isSortColumn && sortOrder,
           }),
           title: [
-            <div
-              key="title"
-              class={sortButton ? `${prefixCls}-column-sorters` : undefined}
-            >
+            <div key="title" class={sortButton ? `${prefixCls}-column-sorters` : undefined}>
               {title}
               {sortButton}
             </div>,

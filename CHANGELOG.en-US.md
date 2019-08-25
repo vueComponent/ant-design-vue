@@ -10,6 +10,30 @@
 
 ---
 
+## 1.3.16
+`2019-08-25`
+- 🐞 Fix `Select` component to uninstall component error when there is no input [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)
+- 🐞 Fix `Collapse` error when no child element [#1116](https://github.com/vueComponent/ant-design-vue/pull/1116)
+- 🐞 Fix TypeScript type definitions.
+
+## 1.3.15
+`2019-08-17`
+- 🐞 Fix `Select` component cannot scroll under IE [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Form` `initialValue` warning  [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
+- 🐞 Fix `Form` error when verifying `Number` type [#1090](https://github.com/vueComponent/ant-design-vue/issues/1090)
+
+## 1.3.14
+`2019-08-12`
+- 🐞 Fix `MenuItem` parsing array `class` incorrect question [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
+- 🐞 Fix an error when npm install [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 Fix `Select` component cannot scroll under IE [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Select` component does not trigger focus event problem [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `DropdownButton` `size` attribute does not work [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
+- 🐞 Fix `Table` component does not support vue 2.6 v-slot syntax problem [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
+- 🌟 `Popover` add `builtinPlacements` attribute [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)
+- 🌟 `Button` support `link` type [#1077](https://github.com/vueComponent/ant-design-vue/pull/1077)
+- 🌟 `Modal.confirm` `title` and `content` support function [#824](https://github.com/vueComponent/ant-design-vue/issues/824)
+
 ## 1.3.13
 `2019-07-22`
 - 🐞 Fix `dist` missing `antd.less` file problem [#995](https://github.com/vueComponent/ant-design-vue/issues/995)

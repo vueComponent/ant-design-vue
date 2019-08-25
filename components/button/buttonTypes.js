@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 export default () => ({
-  prefixCls: PropTypes.string,
-  type: PropTypes.oneOf(['primary', 'danger', 'dashed', 'ghost', 'default']).def('default'),
+  prefixCls: PropTypes.string.def('ant-btn'),
+  type: PropTypes.oneOf(['primary', 'danger', 'dashed', 'ghost', 'link', 'default']).def('default'),
   htmlType: PropTypes.oneOf(['button', 'submit', 'reset']).def('button'),
   icon: PropTypes.string,
   shape: PropTypes.oneOf(['circle', 'circle-outline', 'round']),

@@ -95,7 +95,7 @@ exports[`renders ./components/transfer/demo/basic.md correctly 1`] = `
         </ul>
       </div>
     </div>
-  </div> <button type="button" role="switch" class="ant-switch" style="margin-top: 16px;"><span class="ant-switch-inner">disabled</span></button>
+  </div> <button type="button" role="switch" class="ant-switch" style="margin-top: 16px;"><span class="ant-switch-inner">enabled</span></button>
 </div>
 `;
 

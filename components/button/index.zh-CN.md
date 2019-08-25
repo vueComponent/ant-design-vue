@@ -13,7 +13,7 @@
 | loading | 设置按钮载入状态 | boolean \| { delay: number } | `false` |
 | shape | 设置按钮形状，可选值为 `circle`、 `round`  或者不设 | string | - |
 | size | 设置按钮大小，可选值为 `small` `large` 或者不设 | string | `default` |
-| type | 设置按钮类型，可选值为 `primary` `dashed` `danger` | string | - |
+| type | 设置按钮类型，可选值为 `primary` `dashed` `danger` `link` 或者不设| string | `default` |
 | block | 将按钮宽度调整为其父宽度的选项 | boolean | `false` |
 
 ### 事件

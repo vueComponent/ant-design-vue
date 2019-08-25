@@ -58,8 +58,8 @@
         "prettier"
     ],
     "peerDependencies": {
-        "vue": ">=2.5.0",
-        "vue-template-compiler": ">=2.5.0"
+        "vue": ">=2.6.6",
+        "vue-template-compiler": ">=2.6.6"
     },
     "devDependencies": {
         "@commitlint/cli": "^6.2.0",
@@ -120,6 +120,7 @@
         "istanbul-instrumenter-loader": "^3.0.0",
         "jest": "^24.0.0",
         "jest-serializer-vue": "^1.0.0",
+        "jest-transform-stub": "^2.0.0",
         "js-base64": "^2.4.8",
         "jsonp": "^0.2.1",
         "less": "^3.9.0",
@@ -154,17 +155,17 @@
         "through2": "^2.0.3",
         "uglifyjs-webpack-plugin": "^2.1.1",
         "url-loader": "^1.1.2",
-        "vue": "^2.5.16",
+        "vue": "^2.6.6",
         "vue-antd-md-loader": "^1.1.0",
         "vue-clipboard2": "0.0.8",
         "vue-eslint-parser": "^5.0.0",
         "vue-i18n": "^8.3.2",
         "vue-infinite-scroll": "^2.0.2",
         "vue-jest": "^2.5.0",
-        "vue-loader": "^15.5.1",
+        "vue-loader": "^15.6.2",
         "vue-router": "^3.0.1",
-        "vue-server-renderer": "^2.5.16",
-        "vue-template-compiler": "^2.5.16",
+        "vue-server-renderer": "^2.6.6",
+        "vue-template-compiler": "^2.6.6",
         "vue-virtual-scroller": "^0.12.0",
         "vuex": "^3.1.0",
         "webpack": "^4.28.4",

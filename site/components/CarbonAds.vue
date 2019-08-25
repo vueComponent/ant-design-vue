@@ -2,10 +2,10 @@
 import axios from 'axios';
 const carbonUrls = {
   'www.antdv.com': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=antdvcom',
-  'tangjinzhou.gitee.io':
-    '//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
-  'ant-design-vue.gitee.io':
-    '//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=antdesignvuegiteeio',
+  // 'tangjinzhou.gitee.io':
+  //   '//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=tangjinzhougiteeio',
+  // 'ant-design-vue.gitee.io':
+  //   '//cdn.carbonads.com/carbon.js?serve=CK7DL2JN&placement=antdesignvuegiteeio',
   'vue.ant.design': '//cdn.carbonads.com/carbon.js?serve=CK7DL2JW&placement=vueantdesign',
 };
 const carbonUrl =

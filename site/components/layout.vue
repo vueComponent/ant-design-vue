@@ -28,6 +28,7 @@ const docsList = [
 ];
 
 let isMobile = false;
+const isGitee = window.location.host.indexOf('gitee.io') > -1;
 enquireScreen(b => {
   isMobile = b;
 });
@@ -74,6 +75,17 @@ export default {
     }
   },
   mounted() {
+    if(isGitee) {
+      this.$info({
+        title: '提示',
+        content: '访问国内镜像站点的用户请访问 antdv.com 站点',
+        okText:'立即跳转',
+        onOk() {
+          location.href = 'https://www.antdv.com';
+        },
+      });
+    }
+    
     this.$nextTick(() => {
       this.addSubMenu();
       const nprogressHiddenStyle = document.getElementById('nprogress-style');
@@ -263,7 +275,7 @@ export default {
                 >
                   <a-affix>
                     <section class="main-menu-inner">
-                      <Sponsors title={isCN ? '赞助商' : 'Sponsors'} />
+                      <Sponsors isCN={isCN} />
                       <a-menu
                         class="aside-container menu-site"
                         selectedKeys={[name]}

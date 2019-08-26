@@ -8824,8 +8824,8 @@ exports[`Locale Provider should display the text as it 1`] = `
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i></a></li>
     <li class="ant-pagination-options">
-      <div tabindex="-1" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+      <div tabindex="0" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / pagina" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / pagina</div>
           </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
@@ -8833,8 +8833,8 @@ exports[`Locale Provider should display the text as it 1`] = `
       </div>
     </li>
   </ul>
-  <div tabindex="-1" class="ant-select ant-select-enabled" style="width: 200px;">
-    <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+  <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
+    <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
           <div class="ant-select-search__field__wrap"><input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
@@ -8881,15 +8881,15 @@ exports[`Locale Provider should display the text as it 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div tabindex="-1" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
           </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
         </div>
       </div>
-      <div tabindex="-1" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
           </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
@@ -9238,8 +9238,8 @@ exports[`Locale Provider should display the text as ja 1`] = `
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i></a></li>
     <li class="ant-pagination-options">
-      <div tabindex="-1" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+      <div tabindex="0" class="ant-select ant-select-enabled ant-pagination-options-size-changer">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="10 / ページ" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">10 / ページ</div>
           </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
@@ -9247,8 +9247,8 @@ exports[`Locale Provider should display the text as ja 1`] = `
       </div>
     </li>
   </ul>
-  <div tabindex="-1" class="ant-select ant-select-enabled" style="width: 200px;">
-    <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+  <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
+    <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div class="ant-select-search ant-select-search--inline" style="display: none;">
           <div class="ant-select-search__field__wrap"><input autocomplete="off" value="" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
@@ -9295,15 +9295,15 @@ exports[`Locale Provider should display the text as ja 1`] = `
   </div>
   <div class="">
     <div class="ant-fullcalendar-header">
-      <div tabindex="-1" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-year-select">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="2017年" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017年</div>
           </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
         </div>
       </div>
-      <div tabindex="-1" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
           <div class="ant-select-selection__rendered">
             <div title="9月" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">9月</div>
           </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>

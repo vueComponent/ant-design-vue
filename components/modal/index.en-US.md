@@ -55,7 +55,7 @@ The properties of the object are follows:
 | centered | Centered Modal | Boolean | `false` |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |
 | class | class of container | string | - |
-| content | Content | string\|vNode | - |
+| content | Content | string\|vNode \|function(h) | - |
 | iconType | Icon `type` of the Icon component | string | `question-circle` |
 | keyboard | Whether support press esc to close | Boolean | true |
 | maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | Boolean | `false` |
@@ -63,7 +63,7 @@ The properties of the object are follows:
 | okType | Button `type` of the OK button | string | `primary` |
 | okButtonProps | The ok button props | [ButtonProps](/components/button) | - |
 | cancelButtonProps | The cancel button props | [ButtonProps](/components/button) | - |
-| title | Title | string\|vNode | - |
+| title | Title | string\|vNode \|function(h) | - |
 | width | Width of the modal dialog | string\|number | 416 |
 | zIndex | The `z-index` of the Modal | Number | 1000 |
 | onCancel | Specify a function that will be called when the user clicks the Cancel button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |

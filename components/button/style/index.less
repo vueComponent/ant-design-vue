@@ -69,6 +69,10 @@
     .btn-danger;
   }
 
+  &-link {
+    .btn-link;
+  }
+
   &-circle,
   &-circle-outline {
     .btn-circle(@btn-prefix-cls);
@@ -155,6 +159,12 @@
 
   &-background-ghost&-danger {
     .button-variant-ghost(@btn-danger-color);
+  }
+
+  &-background-ghost&-link {
+    .button-variant-ghost(@link-color; transparent);
+
+    color: @component-background;
   }
 
   &-two-chinese-chars:first-letter {

@@ -52,11 +52,11 @@ const columns = [{
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' |
 | pagination | Pagination [config](#pagination) or [`Pagination`] (/components/pagination/), hide it by setting it to `false` | object |  |
 | rowClassName | Row's className | Function(record, index):string | - |
-| rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
+| rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record, index):string | `key` |
 | rowSelection | Row selection [config](#rowSelection) | object | null |
 | scroll | Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area. It is recommended to set a number for `x`, if you want to set it to `true`, you need to add style `.ant-table td { white-space: nowrap; }`. | { x: number \| true, y: number } | - |
 | showHeader | Whether to show table header | boolean | `true` |
-| size | Size of table | `default` \| `middle` \| `small` | `default` |
+| size | Size of table | `default` \| `middle` \| `small` \| `large` | `default` |
 | title | Table title renderer | Function(currentPageData)\|slot-scope |  |
 | customHeaderRow | Set props on per header row | Function(column, index) | - |
 | customRow | Set props on per row | Function(record, index) | - |

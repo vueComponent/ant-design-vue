@@ -39,7 +39,7 @@ const Table = {
           column.key = key;
         }
         if (getSlotOptions(element).__ANT_TABLE_COLUMN_GROUP) {
-          column.children = this.normalize(children);
+          column.children = this.normalize(typeof children === 'function' ? children() : children);
         } else {
           const customRender =
             element.data && element.data.scopedSlots && element.data.scopedSlots.default;

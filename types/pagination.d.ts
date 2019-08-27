@@ -11,84 +11,84 @@ export declare class Pagination extends AntdComponent {
    * @default 0
    * @type number
    */
-  total: number;
+  total?: number;
 
   /**
    * default initial page number
    * @default 1
    * @type number
    */
-  defaultCurrent: number;
+  defaultCurrent?: number;
 
   /**
    * current page number
    * @type number
    */
-  current: number;
+  current?: number;
 
   /**
    * default number of data items per page
    * @default 10
    * @type number
    */
-  defaultPageSize: number;
+  defaultPageSize?: number;
 
   /**
    * number of data items per page
    * @type number
    */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Whether to hide pager on single page
    * @default false
    * @type boolean
    */
-  hideOnSinglePage: boolean;
+  hideOnSinglePage?: boolean;
 
   /**
    * determine whether pageSize can be changed
    * @default false
    * @type boolean
    */
-  showSizeChanger: boolean;
+  showSizeChanger?: boolean;
 
   /**
    * specify the sizeChanger options
    * @default ['10', '20', '30', '40']
    * @type string[]
    */
-  pageSizeOptions: string[];
+  pageSizeOptions?: string[];
 
   /**
    * determine whether you can jump to pages directly
    * @default false
    * @type boolean
    */
-  showQuickJumper: boolean;
+  showQuickJumper?: boolean;
 
   /**
    * to display the total number and range
    * @type Function
    */
-  showTotal: (total: number, range: [number, number]) => any;
+  showTotal?: (total: number, range: [number, number]) => any;
 
   /**
    * specify the size of Pagination, can be set to small
    * @default ''
    * @type string
    */
-  size: string;
+  size?: string;
 
   /**
    * whether to use simple mode
    * @type boolean
    */
-  simple: boolean;
+  simple?: boolean;
 
   /**
    * to customize item innerHTML
    * @type Function
    */
-  itemRender: (page: number, type: 'page' | 'prev' | 'next', originalElement: any) => VNode;
+  itemRender?: (page: number, type: 'page' | 'prev' | 'next', originalElement: any) => VNode;
 }

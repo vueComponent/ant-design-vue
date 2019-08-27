@@ -29,7 +29,7 @@ export default {
     showConfirm() {
       this.$confirm({
         title: 'Do you Want to delete these items?',
-        content: 'Some descriptions',
+        content: h => <div style="color:red;">Some descriptions</div>,
         onOk() {
           console.log('OK');
         },

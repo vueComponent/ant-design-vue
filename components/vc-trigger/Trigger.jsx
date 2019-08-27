@@ -77,6 +77,7 @@ export default {
   },
   inject: {
     vcTriggerContext: { default: () => ({}) },
+    savePopupRef: { default: () => noop },
   },
   data() {
     const props = this.$props;
@@ -100,7 +101,7 @@ export default {
     sPopupVisible(val) {
       this.$nextTick(() => {
         this.renderComponent(null, () => {
-          this.afterPopupVisibleChange(val);
+          this.afterPopupVisibleChange(this.sPopupVisible);
         });
       });
     },
@@ -236,10 +237,12 @@ export default {
     },
 
     onBlur(e) {
-      this.fireEvents('blur', e);
-      this.clearDelayTimer();
-      if (this.isBlurToHide()) {
-        this.delaySetPopupVisible(false, this.$props.blurDelay);
+      if (!contains(e.target, e.relatedTarget)) {
+        this.fireEvents('blur', e);
+        this.clearDelayTimer();
+        if (this.isBlurToHide()) {
+          this.delaySetPopupVisible(false, this.$props.blurDelay);
+        }
       }
     },
 
@@ -350,6 +353,7 @@ export default {
     },
     savePopup(node) {
       this._component = node;
+      this.savePopupRef(node);
     },
     getComponent() {
       const self = this;

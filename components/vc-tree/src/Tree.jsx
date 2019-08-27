@@ -253,7 +253,10 @@ const Tree = {
       this.dragNode = node;
 
       this.setState({
-        _dragNodesKeys: getDragNodesKeys(children, node),
+        _dragNodesKeys: getDragNodesKeys(
+          typeof children === 'function' ? children() : children,
+          node,
+        ),
         _expandedKeys: arrDel(_expandedKeys, eventKey),
       });
       this.__emit('dragstart', { event, node });

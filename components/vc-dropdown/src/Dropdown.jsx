@@ -18,7 +18,7 @@ export default {
     align: PropTypes.object,
     overlayStyle: PropTypes.object.def({}),
     placement: PropTypes.string.def('bottomLeft'),
-    overlay: PropTypes.oneOfType([PropTypes.any, PropTypes.func]),
+    overlay: PropTypes.any,
     trigger: PropTypes.array.def(['hover']),
     alignPoint: PropTypes.bool,
     showAction: PropTypes.array.def([]),

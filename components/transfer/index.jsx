@@ -12,6 +12,7 @@ import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import warning from '../_util/warning';
+import Base from '../base';
 
 export const TransferDirection = 'left' | 'right';
 
@@ -433,6 +434,7 @@ const Transfer = {
 
 /* istanbul ignore next */
 Transfer.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Transfer.name, Transfer);
 };
 

@@ -14,6 +14,7 @@ import {
   isValidElement,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import Base from '../base';
 
 export function generateShowHourMinuteSecond(format) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -215,6 +216,7 @@ const TimePicker = {
 
 /* istanbul ignore next */
 TimePicker.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(TimePicker.name, TimePicker);
 };
 

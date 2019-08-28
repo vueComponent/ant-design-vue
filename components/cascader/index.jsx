@@ -19,6 +19,7 @@ import {
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
+import Base from '../base';
 
 const CascaderOptionType = PropTypes.shape({
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -528,6 +529,7 @@ const Cascader = {
 
 /* istanbul ignore next */
 Cascader.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Cascader.name, Cascader);
 };
 

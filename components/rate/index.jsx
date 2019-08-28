@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getComponentFromProp } from '../_util/props-util';
 import VcRate from '../vc-rate';
 import Icon from '../icon';
+import Base from '../base';
 
 export const RateProps = {
   prefixCls: PropTypes.string,
@@ -50,6 +51,7 @@ const Rate = {
 
 /* istanbul ignore next */
 Rate.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Rate.name, Rate);
 };
 export default Rate;

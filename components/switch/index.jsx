@@ -3,6 +3,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import Icon from '../icon';
+import Base from '../base';
 
 const Switch = {
   name: 'ASwitch',
@@ -64,6 +65,7 @@ const Switch = {
 
 /* istanbul ignore next */
 Switch.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Switch.name, Switch);
 };
 

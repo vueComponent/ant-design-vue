@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import * as moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { changeConfirmLocale } from '../modal/locale';
-
+import Base from '../base';
 // export interface Locale {
 //   locale: string;
 //   Pagination?: Object;
@@ -71,6 +71,7 @@ const LocaleProvider = {
 
 /* istanbul ignore next */
 LocaleProvider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(LocaleProvider.name, LocaleProvider);
 };
 

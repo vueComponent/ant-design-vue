@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import Base from '../base';
 const Divider = {
   name: 'ADivider',
   props: {
@@ -32,6 +33,7 @@ const Divider = {
 
 /* istanbul ignore next */
 Divider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Divider.name, Divider);
 };
 

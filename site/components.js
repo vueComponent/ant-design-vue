@@ -58,6 +58,7 @@ import {
   Skeleton,
   Comment,
   ConfigProvider,
+  Base,
 } from 'ant-design-vue';
 
 Vue.prototype.$message = message;
@@ -69,6 +70,7 @@ Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
 
 /* v1.1.3+ registration methods */
+Vue.use(Base);
 Vue.use(Affix);
 Vue.use(Anchor);
 Vue.use(AutoComplete);

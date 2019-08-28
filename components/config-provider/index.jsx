@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import Base from '../base';
 
 const ConfigProvider = {
   name: 'AConfigProvider',
@@ -17,6 +18,7 @@ const ConfigProvider = {
 
 /* istanbul ignore next */
 ConfigProvider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(ConfigProvider.name, ConfigProvider);
 };
 

@@ -29,6 +29,8 @@ import { default as BackTop } from './back-top';
 
 import { default as Badge } from './badge';
 
+import { default as Base } from './base';
+
 import { default as Breadcrumb } from './breadcrumb';
 
 import { default as Button } from './button';
@@ -136,6 +138,7 @@ import { default as ConfigProvider } from './config-provider';
 import { default as Empty } from './empty';
 
 const components = [
+  Base,
   Affix,
   Anchor,
   AutoComplete,
@@ -215,6 +218,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
+  Base,
   version,
   install,
   message,

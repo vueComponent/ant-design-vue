@@ -10,6 +10,7 @@ import Button from '../button';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const tooltipProps = abstractTooltipProps();
 const btnProps = buttonTypes();
@@ -160,6 +161,7 @@ const Popconfirm = {
 
 /* istanbul ignore next */
 Popconfirm.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Popconfirm.name, Popconfirm);
 };
 

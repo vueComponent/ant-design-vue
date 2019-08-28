@@ -10,6 +10,7 @@ import { Row } from '../grid';
 import Item from './Item';
 import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import Base from '../base';
 
 export { ListItemProps, ListItemMetaProps } from './Item';
 
@@ -247,6 +248,7 @@ const List = {
 
 /* istanbul ignore next */
 List.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(List.name, List);
   Vue.component(List.Item.name, List.Item);
   Vue.component(List.Item.Meta.name, List.Item.Meta);

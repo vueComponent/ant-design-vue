@@ -6,6 +6,7 @@ import getTransitionProps from '../_util/getTransitionProps';
 import { getComponentFromProp, isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 function noop() {}
 export const AlertProps = {
   /**
@@ -157,6 +158,7 @@ const Alert = {
 
 /* istanbul ignore next */
 Alert.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Alert.name, Alert);
 };
 

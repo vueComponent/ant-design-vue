@@ -2,6 +2,7 @@ import Vue from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, getComponentFromProp } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
+import Base from '../base';
 
 function getWatch(keys = []) {
   const watch = {};
@@ -12,6 +13,7 @@ function getWatch(keys = []) {
   });
   return watch;
 }
+
 
 const ConfigProvider = {
   name: 'AConfigProvider',
@@ -66,6 +68,7 @@ export const ConfigConsumerProps = {
 
 /* istanbul ignore next */
 ConfigProvider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(ConfigProvider.name, ConfigProvider);
 };
 

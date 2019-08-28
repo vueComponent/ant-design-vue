@@ -10,6 +10,8 @@ import {
   isValidElement,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
+
 export { TreeData, TreeSelectProps } from './interface';
 import Icon from '../icon';
 import omit from 'omit.js';
@@ -162,6 +164,7 @@ const TreeSelect = {
 
 /* istanbul ignore next */
 TreeSelect.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(TreeSelect.name, TreeSelect);
   Vue.component(TreeSelect.TreeNode.name, TreeSelect.TreeNode);
 };

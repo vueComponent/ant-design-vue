@@ -1,6 +1,7 @@
 import Modal, { destroyFns } from './Modal';
 import modalConfirm from './confirm';
 import Icon from '../icon';
+import Base from '../base';
 
 // export { ActionButtonProps } from './ActionButton'
 // export { ModalProps, ModalFuncProps } from './Modal'
@@ -80,6 +81,7 @@ Modal.destroyAll = function() {
 
 /* istanbul ignore next */
 Modal.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Modal.name, Modal);
 };
 

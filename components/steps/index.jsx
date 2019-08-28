@@ -3,6 +3,7 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import Icon from '../icon';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const getStepsProps = (defaultProps = {}) => {
   const props = {
@@ -55,6 +56,7 @@ const Steps = {
 
 /* istanbul ignore next */
 Steps.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Steps.name, Steps);
   Vue.component(Steps.Step.name, Steps.Step);
 };

@@ -10,6 +10,7 @@ import {
   filterEmpty,
   isValidElement,
 } from '../_util/props-util';
+import Base from '../base';
 
 // const DataSourceItemObject = PropTypes.shape({
 //   value: String,
@@ -149,6 +150,7 @@ const AutoComplete = {
 
 /* istanbul ignore next */
 AutoComplete.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(AutoComplete.name, AutoComplete);
   Vue.component(AutoComplete.Option.name, AutoComplete.Option);
   Vue.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);

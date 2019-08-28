@@ -5,6 +5,7 @@ import getScroll from '../_util/getScroll';
 import BaseMixin from '../_util/BaseMixin';
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const easeInOutCubic = (t, b, c, d) => {
   const cc = c - b;
@@ -133,6 +134,7 @@ const BackTop = {
 
 /* istanbul ignore next */
 BackTop.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(BackTop.name, BackTop);
 };
 

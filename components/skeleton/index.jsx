@@ -5,6 +5,7 @@ import { ConfigConsumerProps } from '../config-provider';
 import Avatar, { SkeletonAvatarProps } from './Avatar';
 import Title, { SkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps } from './Paragraph';
+import Base from '../base';
 
 export const SkeletonProps = {
   active: PropTypes.bool,
@@ -161,6 +162,7 @@ const Skeleton = {
 };
 /* istanbul ignore next */
 Skeleton.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Skeleton.name, Skeleton);
 };
 export default Skeleton;

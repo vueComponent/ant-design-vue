@@ -8,6 +8,7 @@ import { hasProp } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 export const MenuMode = PropTypes.oneOf([
   'vertical',
@@ -270,6 +271,7 @@ const Menu = {
 
 /* istanbul ignore next */
 Menu.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Menu.name, Menu);
   Vue.component(Menu.Item.name, Menu.Item);
   Vue.component(Menu.SubMenu.name, Menu.SubMenu);

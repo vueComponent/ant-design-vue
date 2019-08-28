@@ -1,7 +1,7 @@
 import PropsTypes from '../_util/vue-types';
 import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-
+import Base from '../base';
 export const CommentProps = {
   actions: PropsTypes.array,
   /** The element to display as the comment author. */
@@ -93,6 +93,7 @@ const Comment = {
 
 /* istanbul ignore next */
 Comment.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Comment.name, Comment);
 };
 export default Comment;

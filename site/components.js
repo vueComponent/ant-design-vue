@@ -60,6 +60,7 @@ import {
   Comment,
   ConfigProvider,
   Empty,
+  Base,
 } from 'ant-design-vue';
 
 Vue.prototype.$message = message;
@@ -72,6 +73,7 @@ Vue.prototype.$confirm = Modal.confirm;
 Vue.prototype.$destroyAll = Modal.destroyAll;
 
 /* v1.1.3+ registration methods */
+Vue.use(Base);
 Vue.use(Affix);
 Vue.use(Anchor);
 Vue.use(AutoComplete);

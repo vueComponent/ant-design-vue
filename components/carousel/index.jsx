@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import debounce from 'lodash/debounce';
 import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
@@ -164,6 +165,7 @@ const Carousel = {
 
 /* istanbul ignore next */
 Carousel.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Carousel.name, Carousel);
 };
 

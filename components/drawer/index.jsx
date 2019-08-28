@@ -5,6 +5,7 @@ import BaseMixin from '../_util/BaseMixin';
 import Icon from '../icon';
 import { getComponentFromProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const Drawer = {
   name: 'ADrawer',
@@ -221,6 +222,7 @@ const Drawer = {
 
 /* istanbul ignore next */
 Drawer.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Drawer.name, Drawer);
 };
 

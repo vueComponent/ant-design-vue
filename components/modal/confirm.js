@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import ConfirmDialog from './ConfirmDialog';
 import { destroyFns } from './Modal';
+import Base from '../base';
 
 export default function confirm(config) {
   const div = document.createElement('div');
@@ -42,7 +43,8 @@ export default function confirm(config) {
 
   function render(props) {
     confirmDialogProps.props = props;
-    return new Vue({
+    const V = Base.Vue || Vue;
+    return new V({
       el: el,
       data() {
         return { confirmDialogProps };

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Icon from '../icon';
 import VcInputNumber from '../vc-input-number/src';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 export const InputNumberProps = {
   prefixCls: PropTypes.string,
@@ -75,6 +76,7 @@ const InputNumber = {
 
 /* istanbul ignore next */
 InputNumber.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(InputNumber.name, InputNumber);
 };
 

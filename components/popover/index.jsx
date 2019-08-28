@@ -3,6 +3,7 @@ import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const props = abstractTooltipProps();
 const Popover = {
@@ -61,6 +62,7 @@ const Popover = {
 
 /* istanbul ignore next */
 Popover.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Popover.name, Popover);
 };
 

@@ -2,6 +2,7 @@
 
 exports[`antd dist files exports modules correctly 1`] = `
 Array [
+  "Base",
   "version",
   "install",
   "message",

@@ -19,11 +19,7 @@ export function resetWarned() {
   warned = {};
 }
 
-export function call(
-  method,
-  valid,
-  message,
-) {
+export function call(method, valid, message) {
   if (!valid && !warned[message]) {
     method(false, message);
     warned[message] = true;

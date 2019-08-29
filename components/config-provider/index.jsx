@@ -14,7 +14,6 @@ function getWatch(keys = []) {
   return watch;
 }
 
-
 const ConfigProvider = {
   name: 'AConfigProvider',
   props: {

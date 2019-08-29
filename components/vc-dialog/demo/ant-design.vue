@@ -18,8 +18,9 @@ export default {
       width: 600,
       destroyOnClose: false,
       center: false,
-      mousePosition: {},
+      mousePosition: undefined,
       useIcon: false,
+      forceRender: false,
     };
   },
   methods: {
@@ -55,6 +56,10 @@ export default {
       this.destroyOnClose = e.target.checked;
     },
 
+    onForceRenderChange (e) {
+      this.forceRender = e.target.checked;
+    },
+
     changeWidth () {
       this.width = this.width === 600 ? 800 : 600;
     },
@@ -87,6 +92,7 @@ export default {
         mousePosition={this.mousePosition}
         destroyOnClose={this.destroyOnClose}
         closeIcon={this.useIcon ? this.getSvg(clearPath, {}, true) : undefined}
+        forceRender={this.forceRender}
       >
         <input autoFocus/>
         <p>basic modal</p>
@@ -132,6 +138,15 @@ export default {
                 onChange={this.handleCenter}
               />
             </label>
+            &nbsp;
+          <label>
+            force render
+            <input
+              type="checkbox"
+              checked={this.forceRender}
+              onChange={this.onForceRenderChange}
+            />
+          </label>
           </p>
           {dialog}
         </div>

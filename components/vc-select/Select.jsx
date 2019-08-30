@@ -338,7 +338,11 @@ const Select = {
       if (open && !this.getInputDOMNode()) {
         this.onInputKeydown(event);
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
-        if (!open) {
+        // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
+        // https://github.com/vueComponent/ant-design-vue/issues/1142
+        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(this.$props)) {
+          this.maybeFocus(true);
+        } else if (!open) {
           this.setOpenState(true);
         }
         event.preventDefault();

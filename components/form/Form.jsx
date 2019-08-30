@@ -63,6 +63,7 @@ export const FormProps = {
   hideRequiredMark: PropTypes.bool,
   autoFormCreate: PropTypes.func,
   options: PropTypes.object,
+  selfUpdate: PropTypes.bool,
 };
 
 export const ValidationRule = {

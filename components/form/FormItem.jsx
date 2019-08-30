@@ -34,6 +34,7 @@ export const FormItemProps = {
   colon: PropTypes.bool,
   fieldDecoratorId: PropTypes.string,
   fieldDecoratorOptions: PropTypes.object,
+  selfUpdate: PropTypes.bool,
 };
 function comeFromSlot(vnodes = [], itemVnode) {
   let isSlot = false;
@@ -68,6 +69,11 @@ export default {
   },
   data() {
     return { helpShow: false };
+  },
+  computed: {
+    itemSelfUpdate() {
+      return !!(this.selfUpdate === undefined ? this.FormProps.selfUpdate : this.selfUpdate);
+    },
   },
   created() {
     this.collectContext();
@@ -448,7 +454,7 @@ export default {
         }
         const option = this.decoratorOption(vnode);
         if (option && option[0]) {
-          vnodes[i] = getFieldDecorator(option[0], option[1])(vnode);
+          vnodes[i] = getFieldDecorator(option[0], option[1], this)(vnode);
         }
       }
       return vnodes;
@@ -466,7 +472,7 @@ export default {
     let child = filterEmpty($slots.default || []);
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
       const getFieldDecorator = decoratorFormProps.form.getFieldDecorator;
-      child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions)(child[0]);
+      child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions, this)(child[0]);
       warning(
         !(child.length > 1),
         '`autoFormCreate` just `decorator` then first children. but you can use JSX to support multiple children',

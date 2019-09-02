@@ -13,7 +13,7 @@ Customize the background, border and margin styles and icon for each panel.
   <div>
     <a-collapse defaultActiveKey="1" :bordered="false">
       <template v-slot:expandIcon="props">
-        <a-icon  type="caret-right" rotate="{isActive ? 90 : 0}" />
+        <a-icon  type="caret-right" :rotate="props.isActive ? 90 : 0" />
       </template>
       <a-collapse-panel  header="This is panel header 1" key="1" :style="customStyle">
         <p>{{text}}</p>

@@ -55,9 +55,9 @@ export default {
       [`${prefixCls}-item-active`]: isActive,
       [`${prefixCls}-item-disabled`]: disabled,
     };
-    let icon = null;
+    let icon = <i class="arrow" />;
     if (showArrow && typeof expandIcon === 'function') {
-      icon = cloneElement(expandIcon(this.$props));
+      icon = expandIcon(this.$props);
     }
     return (
       <div class={itemCls} role="tablist">
@@ -69,7 +69,7 @@ export default {
           tabIndex={disabled ? -1 : 0}
           aria-expanded={isActive}
         >
-          {showArrow && (icon || <i class="arrow" />)}
+          {showArrow && icon}
           {header}
           {extra && <div class={`${prefixCls}-extra`}>{extra}</div>}
         </div>

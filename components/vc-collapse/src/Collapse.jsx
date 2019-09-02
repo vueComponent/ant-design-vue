@@ -9,7 +9,7 @@ function _toArray(activeKey) {
   if (!Array.isArray(currentActiveKey)) {
     currentActiveKey = currentActiveKey ? [currentActiveKey] : [];
   }
-  return currentActiveKey;
+  return currentActiveKey.map(key => String(key));
 }
 export default {
   name: 'Collapse',
@@ -84,15 +84,13 @@ export default {
       let panelEvents = {};
       if (!disabled && disabled !== '') {
         panelEvents = {
-          itemClick: panelKey => {
-            this.onClickItem(panelKey);
-          },
+          itemClick:  this.onClickItem,
         };
       }
 
       const props = {
+        key,
         props: {
-          key,
           panelKey: key,
           header,
           headerClass,
@@ -103,9 +101,7 @@ export default {
           accordion,
           expandIcon,
         },
-        on: {
-          ...panelEvents,
-        },
+        on: panelEvents,
       };
 
       return cloneElement(child, props);

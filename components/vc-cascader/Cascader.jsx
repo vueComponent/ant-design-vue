@@ -243,8 +243,10 @@ export default {
         e.keyCode !== KeyCode.LEFT &&
         e.keyCode !== KeyCode.RIGHT &&
         e.keyCode !== KeyCode.ENTER &&
+        e.keyCode !== KeyCode.SPACE &&
         e.keyCode !== KeyCode.BACKSPACE &&
-        e.keyCode !== KeyCode.ESC
+        e.keyCode !== KeyCode.ESC &&
+        e.keyCode !== KeyCode.TAB
       ) {
         return;
       }
@@ -254,7 +256,8 @@ export default {
         e.keyCode !== KeyCode.BACKSPACE &&
         e.keyCode !== KeyCode.LEFT &&
         e.keyCode !== KeyCode.RIGHT &&
-        e.keyCode !== KeyCode.ESC
+        e.keyCode !== KeyCode.ESC &&
+        e.keyCode !== KeyCode.TAB
       ) {
         this.setPopupVisible(true);
         return;
@@ -289,7 +292,7 @@ export default {
             ],
           );
         }
-      } else if (e.keyCode === KeyCode.ESC) {
+      } else if (e.keyCode === KeyCode.ESC || e.keyCode === KeyCode.TAB) {
         this.setPopupVisible(false);
         return;
       }

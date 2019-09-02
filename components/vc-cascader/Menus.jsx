@@ -56,10 +56,13 @@ export default {
       };
       const key = option[this.getFieldName('value')];
       const expandProps = {
-        attrs: {},
+        attrs: {
+          role: "menuitem",
+        },
         on: {
           click: onSelect,
           doubleclick: onItemDoubleClick,
+          mousedown: e => e.preventDefault(),
         },
         key: Array.isArray(key) ? key.join('__ant__') : key,
       };
@@ -73,7 +76,7 @@ export default {
           expandIconNode = <span class={`${prefixCls}-menu-item-expand-icon`}>{expandIcon}</span>;
         }
       }
-      if (expandTrigger === 'hover' && hasChildren) {
+      if (expandTrigger === 'hover' && (hasChildren || option.isLeaf === false)) {
         expandProps.on = {
           mouseenter: this.delayOnSelect.bind(this, onSelect),
           mouseleave: this.delayOnSelect.bind(this),

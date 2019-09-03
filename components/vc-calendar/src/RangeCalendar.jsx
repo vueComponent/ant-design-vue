@@ -611,7 +611,6 @@ const RangeCalendar = {
       showToday,
       type,
       seperator,
-      mode,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const { sHoverValue, sSelectedValue, sMode, showTimePicker, sValue, $listeners } = this;

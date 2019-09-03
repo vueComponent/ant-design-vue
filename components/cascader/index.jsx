@@ -75,7 +75,7 @@ const CascaderProps = {
   /** 是否支持清除*/
   allowClear: PropTypes.bool.def(true),
   showSearch: PropTypes.oneOfType([Boolean, ShowSearchType]),
-  notFoundContent: PropTypes.an,
+  notFoundContent: PropTypes.any,
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */
   expandTrigger: CascaderExpandTrigger,

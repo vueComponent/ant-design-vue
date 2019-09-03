@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../_util/Dom/addEventListener';
-import { isWindow, buffer, isSamePoint } from './util';
+import { isWindow, buffer, isSamePoint, isSimilarValue, restoreFocus } from './util';
 import { cloneElement } from '../_util/vnode.js';
 import clonedeep from 'lodash/cloneDeep';
 import { getSlot } from '../_util/props-util';
@@ -73,7 +73,7 @@ export default {
           if (
             !reAlign &&
             source &&
-            (preRect.width !== sourceRect.width || preRect.height !== sourceRect.height)
+            (!isSimilarValue(preRect.width, sourceRect.width) || !isSimilarValue(preRect.height, sourceRect.height))
           ) {
             reAlign = true;
           }
@@ -121,11 +121,16 @@ export default {
         const element = getElement(target);
         const point = getPoint(target);
 
+        // IE lose focus after element realign
+        // We should record activeElement and restore later
+        const activeElement = document.activeElement;
+
         if (element) {
           result = alignElement(source, element, align);
         } else if (point) {
           result = alignPoint(source, point, align);
         }
+        restoreFocus(activeElement, source);
         this.aligned = true;
         this.$listeners.align && this.$listeners.align(source, result);
       }

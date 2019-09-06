@@ -6,7 +6,7 @@ export default {
   props: {
     prefixCls: {
       type: String,
-      default: 'ant-avatar',
+      default: undefined,
     },
     shape: {
       validator: val => ['circle', 'square'].includes(val),
@@ -36,8 +36,12 @@ export default {
   },
   watch: {
     src() {
-      this.isImgExist = true;
-      this.scale = 1;
+      this.$nextTick(() => {
+        this.isImgExist = true;
+        this.scale = 1;
+        // force uodate for position
+        this.$forceUpdate();
+      });
     },
   },
   mounted() {

@@ -21,8 +21,10 @@ export default {
   },
   watch: {
     href(val, oldVal) {
-      this.antAnchor.unregisterLink(oldVal);
-      this.antAnchor.registerLink(val);
+      this.$nextTick(() => {
+        this.antAnchor.unregisterLink(oldVal);
+        this.antAnchor.registerLink(val);
+      });
     },
   },
 

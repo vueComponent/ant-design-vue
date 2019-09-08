@@ -60,9 +60,11 @@ export default {
     },
   },
   watch: {
-    loading(val) {
-      clearTimeout(this.delayTimeout);
-      if (typeof val !== 'boolean' && val && val.delay) {
+    loading(val, preVal) {
+      if (preVal && typeof preVal !== 'boolean') {
+        clearTimeout(this.delayTimeout);
+      }
+      if (val && typeof val !== 'boolean' && val.delay) {
         this.delayTimeout = setTimeout(() => {
           this.sLoading = !!val;
         }, val.delay);

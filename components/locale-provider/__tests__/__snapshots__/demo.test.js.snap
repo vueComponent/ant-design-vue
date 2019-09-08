@@ -43,7 +43,7 @@ exports[`renders ./components/locale-provider/demo/all.md correctly 1`] = `
           <path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path>
         </svg></i></span></span>
     </div>
-    <div class="example"><button type="button" class="ant-btn ant-btn-primary"><span>Show Modal</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Show info</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Show confirm</span></button> <a href="#" class="">Click to confirm</a></div>
+    <div class="example"><button type="button" class="ant-btn ant-btn-primary"><span>Show Modal</span></button> <button type="button" class="ant-btn"><span>Show info</span></button> <button type="button" class="ant-btn"><span>Show confirm</span></button> <a href="#" class="">Click to confirm</a></div>
     <div classname="example">
       <div class="ant-transfer">
         <div class="ant-transfer-list">

@@ -213,7 +213,7 @@ exports[`renders ./components/card/demo/loading.md correctly 1`] = `
         </div>
       </div>
     </div>
-  </div> <button type="button" class="ant-btn ant-btn-default" style="margin-top: 16px;"><span>Toggle loading</span></button>
+  </div> <button type="button" class="ant-btn" style="margin-top: 16px;"><span>Toggle loading</span></button>
 </div>
 `;
 

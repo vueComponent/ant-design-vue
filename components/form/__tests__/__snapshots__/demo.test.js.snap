@@ -106,7 +106,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
     </div>
     <div class="ant-row">
-      <div class="ant-col-24" style="text-align: right;"><button type="submit" class="ant-btn ant-btn-primary"><span>Search</span></button> <button type="button" class="ant-btn ant-btn-default" style="margin-left: 8px;"><span>Clear</span></button> <a style="margin-left: 8px; font-size: 12px;">
+      <div class="ant-col-24" style="text-align: right;"><button type="submit" class="ant-btn ant-btn-primary"><span>Search</span></button> <button type="button" class="ant-btn" style="margin-left: 8px;"><span>Clear</span></button> <a style="margin-left: 8px; font-size: 12px;">
           Collapse <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
               <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
             </svg></i></a></div>
@@ -436,7 +436,7 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
     <div class="ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="register_captcha" title="Captcha" class="ant-form-item-required">Captcha</label></div>
     <div class="ant-col-xs-24 ant-col-sm-16 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-row" style="margin-left: -4px; margin-right: -4px;"><div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><span class="ant-input-affix-wrapper"><input type="text" data-__meta="[object Object]" data-__field="[object Object]" id="register_captcha" class="ant-input"></span></div>
-      <div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><button type="button" class="ant-btn ant-btn-default"><span>Get captcha</span></button></div>
+      <div class="ant-col-12" style="padding-left: 4px; padding-right: 4px;"><button type="button" class="ant-btn"><span>Get captcha</span></button></div>
     </div></span>
     <!---->
     <div class="ant-form-extra">We must make sure that your are a human.</div>

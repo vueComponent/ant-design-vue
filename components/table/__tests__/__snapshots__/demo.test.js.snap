@@ -382,7 +382,7 @@ exports[`renders ./components/table/demo/custom-filter-panel.md correctly 1`] = 
 `;
 
 exports[`renders ./components/table/demo/edit-cell.md correctly 1`] = `
-<div><button type="button" class="editable-add-btn ant-btn ant-btn-default"><span>Add</span></button>
+<div><button type="button" class="editable-add-btn ant-btn"><span>Add</span></button>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
@@ -2290,7 +2290,7 @@ exports[`renders ./components/table/demo/nested-table.md correctly 1`] = `
 
 exports[`renders ./components/table/demo/reset-filter.md correctly 1`] = `
 <div>
-  <div class="table-operations"><button type="button" class="ant-btn ant-btn-default"><span>Sort age</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Clear filters</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Clear filters and sorters</span></button></div>
+  <div class="table-operations"><button type="button" class="ant-btn"><span>Sort age</span></button> <button type="button" class="ant-btn"><span>Clear filters</span></button> <button type="button" class="ant-btn"><span>Clear filters and sorters</span></button></div>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">

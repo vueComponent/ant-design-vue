@@ -154,7 +154,7 @@ exports[`renders ./components/list/demo/loadmore.md correctly 1`] = `
       <div style="min-height: 53;"></div>
     </div>
   </div>
-  <div style="text-align: center; margin-top: 12px; height: 32px; line-height: 32px;"><button type="button" class="ant-btn ant-btn-default"><span>loading more</span></button></div>
+  <div style="text-align: center; margin-top: 12px; height: 32px; line-height: 32px;"><button type="button" class="ant-btn"><span>loading more</span></button></div>
 </div>
 `;
 

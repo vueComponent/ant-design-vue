@@ -1,10 +1,9 @@
 import { filterEmpty } from '../_util/props-util';
+import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
 
 const ButtonGroupProps = {
-  prefixCls: {
-    type: String,
-  },
+  prefixCls: PropTypes.string,
   size: {
     validator(value) {
       return ['small', 'large', 'default'].includes(value);

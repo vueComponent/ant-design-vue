@@ -17,7 +17,6 @@ export default {
     event: 'change',
   },
   props: initDefaultProps(collapseProps(), {
-    prefixCls: 'ant-collapse',
     bordered: true,
     openAnimation: animation,
   }),
@@ -30,7 +29,7 @@ export default {
       const icon = expandIcon || (
         <Icon type="right" rotate={panelProps.isActive ? 90 : undefined} />
       );
-      return isValidElement(expandIcon ? icon[0] : icon)
+      return isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
         ? cloneElement(icon, {
             class: `${prefixCls}-arrow`,
           })

@@ -17,6 +17,7 @@ const Drawer = {
     mask: PropTypes.bool.def(true),
     maskStyle: PropTypes.object,
     wrapStyle: PropTypes.object,
+    bodyStyle: PropTypes.object,
     title: PropTypes.any,
     visible: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
@@ -106,13 +107,11 @@ const Drawer = {
       }
     },
     getRcDrawerStyle() {
-      const { zIndex, placement, maskStyle, wrapStyle } = this.$props;
+      const { zIndex, placement } = this.$props;
       const { _push: push } = this.$data;
       return {
-        ...maskStyle,
         zIndex,
         transform: push ? this.getPushTransform(placement) : undefined,
-        ...wrapStyle,
       };
     },
     renderHeader(prefixCls) {
@@ -143,7 +142,7 @@ const Drawer = {
         return null;
       }
       this.destroyClose = false;
-      const { placement } = this.$props;
+      const { placement, bodyStyle } = this.$props;
 
       const containerStyle =
         placement === 'left' || placement === 'right'
@@ -167,7 +166,7 @@ const Drawer = {
           onTransitionend={this.onDestroyTransitionEnd}
         >
           {this.renderHeader(prefixCls)}
-          <div key="body" class={`${prefixCls}-body`}>
+          <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
             {this.$slots.default}
           </div>
         </div>

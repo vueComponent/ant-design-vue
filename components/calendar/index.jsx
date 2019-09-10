@@ -159,7 +159,17 @@ const Calendar = {
         return inRange;
       };
     },
-
+    getDefaultLocale() {
+      const result = {
+        ...enUS,
+        ...this.$props.locale,
+      };
+      result.lang = {
+        ...result.lang,
+        ...(this.$props.locale || {}).lang,
+      };
+      return result;
+    },
     renderCalendar(locale, localeCode) {
       const props = getOptionProps(this);
       const { sValue: value, sMode: mode, $listeners, $scopedSlots } = this;
@@ -229,17 +239,6 @@ const Calendar = {
           <FullCalendar {...fullCalendarProps} />
         </div>
       );
-    },
-    getDefaultLocale() {
-      const result = {
-        ...enUS,
-        ...this.$props.locale,
-      };
-      result.lang = {
-        ...result.lang,
-        ...(this.$props.locale || {}).lang,
-      };
-      return result;
     },
   },
 

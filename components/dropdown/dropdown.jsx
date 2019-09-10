@@ -2,7 +2,7 @@ import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import { getOptionProps, getPropsData } from '../_util/props-util';
+import { getOptionProps, getPropsData, getComponentFromProp } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
@@ -12,7 +12,7 @@ const Dropdown = {
   name: 'ADropdown',
   props: {
     ...DropdownProps,
-    prefixCls: PropTypes.string.def('ant-dropdown'),
+    prefixCls: PropTypes.string,
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
     placement: DropdownProps.placement.def('bottomLeft'),
@@ -44,11 +44,11 @@ const Dropdown = {
       return 'slide-up';
     },
     renderOverlay(prefixCls) {
-      const { $slots } = this;
-      const overlay = this.overlay || ($slots.overlay && $slots.overlay[0]);
+      const overlay = getComponentFromProp(this, 'overlay');
+      const overlayNode = Array.isArray(overlay) ? overlay[0] : overlay;
       // menu cannot be selectable in dropdown defaultly
       // menu should be focusable in dropdown defaultly
-      const overlayProps = overlay && getPropsData(overlay);
+      const overlayProps = overlayNode && getPropsData(overlayNode);
       const { selectable = false, focusable = true } = overlayProps || {};
       const expandIcon = (
         <span class={`${prefixCls}-menu-submenu-arrow`}>
@@ -57,8 +57,8 @@ const Dropdown = {
       );
 
       const fixedModeOverlay =
-        overlay && overlay.componentOptions
-          ? cloneElement(overlay, {
+        overlayNode && overlayNode.componentOptions
+          ? cloneElement(overlayNode, {
               props: {
                 mode: 'vertical',
                 selectable,

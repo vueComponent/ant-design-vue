@@ -5,7 +5,7 @@ export default {
   name: 'ACardGrid',
   __ANT_CARD_GRID: true,
   props: {
-    prefixCls: PropTypes.string.def('ant-card'),
+    prefixCls: PropTypes.string,
   },
   inject: {
     configProvider: { default: () => ({}) },

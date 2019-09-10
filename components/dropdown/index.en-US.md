@@ -6,7 +6,7 @@
 | -------- | ----------- | ---- | ------- |
 | disabled | whether the dropdown menu is disabled | boolean | - |
 | getPopupContainer | to set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. [example](https://codepen.io/afc163/pen/zEjNOy?editors=0010) | Function(triggerNode) | `() => document.body` |
-| overlay(slot) | the dropdown menu | [Menu](/components/menu) | - |
+| overlay(slot-scope) | the dropdown menu | [Menu](/components/menu) | - |
 | overlayClassName | Class name of the dropdown root element | string | - |
 | overlayStyle | Style of the dropdown root element | object | - |
 | placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
@@ -29,7 +29,7 @@ You should use [Menu](/components/menu/) as `overlay`. The menu items and divide
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | disabled | whether the dropdown menu is disabled | boolean | - |
-| overlay(slot) | the dropdown menu | [Menu](/components/menu) | - |
+| overlay(slot-scope) | the dropdown menu | [Menu](/components/menu) | - |
 | placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
 | size | size of the button, the same as [Button](/components/button) | string | `default` |
 | trigger | the trigger mode which executes the drop-down action | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |

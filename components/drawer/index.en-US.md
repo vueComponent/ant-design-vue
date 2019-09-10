@@ -12,6 +12,7 @@
 | visible | Whether the Drawer dialog is visible or not. | boolean | false |
 | wrapClassName | The class name of the container of the Drawer dialog. | string | - |
 | wrapStyle |  The style of the container of the Drawer dialog. | object | - |
+| bodyStyle | Style of floating layer, typically used for adjusting its position. | object | - |
 | width | Width of the Drawer dialog. | string\|number | 256 |
 | height | placement is `top` or `bottom`, height of the Drawer dialog. | string\|number | - |
 | zIndex | The `z-index` of the Drawer. | Number | 1000 |

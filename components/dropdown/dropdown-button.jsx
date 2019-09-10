@@ -89,7 +89,13 @@ export default {
 
     return (
       <ButtonGroup {...buttonGroupProps}>
-        <Button type={type} disabled={disabled} onClick={this.onClick} htmlType={htmlType}>
+        <Button
+          type={type}
+          disabled={disabled}
+          onClick={this.onClick}
+          htmlType={htmlType}
+          href={href}
+        >
           {this.$slots.default}
         </Button>
         <Dropdown {...dropdownProps}>

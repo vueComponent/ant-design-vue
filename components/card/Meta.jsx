@@ -5,7 +5,7 @@ import { ConfigConsumerProps } from '../config-provider';
 export default {
   name: 'ACardMeta',
   props: {
-    prefixCls: PropTypes.string.def('ant-card'),
+    prefixCls: PropTypes.string,
     title: PropTypes.any,
     description: PropTypes.any,
   },

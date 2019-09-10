@@ -1,3 +1,4 @@
+import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
 import hasProp from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
@@ -9,22 +10,11 @@ export default {
     prop: 'value',
   },
   props: {
-    prefixCls: {
-      type: String,
-    },
-    defaultValue: {
-      default: undefined,
-      type: Array,
-    },
-    value: {
-      default: undefined,
-      type: Array,
-    },
-    options: {
-      default: () => [],
-      type: Array,
-    },
-    disabled: Boolean,
+    prefixCls: PropTypes.string,
+    defaultValue: PropTypes.array,
+    value: PropTypes.array,
+    options: PropTypes.array.def([]),
+    disabled: PropTypes.bool,
   },
   provide() {
     return {

@@ -73,6 +73,12 @@ export declare class Drawer extends AntdComponent {
   wrapStyle: object;
 
   /**
+   * Style of floating layer, typically used for adjusting its position.
+   * @type object
+   */
+  bodyStyle: object;
+
+  /**
    * Width of the Drawer dialog.
    * @default 256
    * @type string | number

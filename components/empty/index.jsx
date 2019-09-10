@@ -3,6 +3,7 @@ import { ConfigConsumerProps } from '../config-provider';
 import { getComponentFromProp } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import emptyImg from './empty.svg';
+import Base from '../base';
 
 export const TransferLocale = () => {
   return {
@@ -41,13 +42,10 @@ const Empty = {
       } else {
         imageNode = image;
       }
-
       return (
-        <div class={prefixCls} {...restProps}>
+        <div class={prefixCls} {...{ on: this.$listeners }}>
           <div class={`${prefixCls}-image`}>{imageNode}</div>
-
           <p class={`${prefixCls}-description`}>{des}</p>
-
           {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default}</div>}
         </div>
       );
@@ -60,6 +58,7 @@ const Empty = {
 
 /* istanbul ignore next */
 Empty.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Empty.name, Empty);
 };
 

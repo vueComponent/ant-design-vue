@@ -63,6 +63,13 @@ export default {
       this.setState(state);
       this.prevState = { ...this.$data, ...state };
     },
+    _open(val, oldVal) {
+      this.$nextTick(() => {
+        if (!hasProp(this, 'open') && oldVal && !val) {
+          this.focus();
+        }
+      });
+    },
   },
   mounted() {
     this.prevState = { ...this.$data };

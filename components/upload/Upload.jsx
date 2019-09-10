@@ -140,7 +140,7 @@ export default {
       this.$emit('reject', fileList);
     },
     handleRemove(file) {
-      const { remove } = getOptionProps(this);
+      const { remove } = this;
       const { status } = file;
       file.status = 'removed'; // eslint-disable-line
 

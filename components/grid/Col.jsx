@@ -11,7 +11,7 @@ export const ColSize = PropTypes.shape({
   pull: stringOrNumber,
 }).loose;
 
-const objectOrNumber = PropTypes.oneOfType([PropTypes.number, ColSize]);
+const objectOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number, ColSize]);
 
 export const ColProps = {
   span: stringOrNumber,

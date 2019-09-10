@@ -1,7 +1,5 @@
 ## API
 
-> You can consult [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/wiki) about how to implement server side upload interface.
-
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | accept | File types that can be accepted. See [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | - |
@@ -49,7 +47,7 @@ When uploading state change, it returns:
 
    ```js
    {
-      uid: 'uid',      // unique identifier，negative is recommend，to prevent interference with internal generated id
+      uid: 'uid',   // unique identifier, negative is recommend, to prevent interference with internal generated id
       name: 'xx.png'   // file name
       status: 'done', // options：uploading, done, error, removed
       response: '{"status": "success"}', // response from server

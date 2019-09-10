@@ -68,10 +68,10 @@ function renderIcon(h, locale, context) {
     const innerSvgProps = {
       attrs: {
         ...svgBaseProps,
-        style: svgStyle,
         viewBox,
       },
       class: svgClassString,
+      style: svgStyle,
     };
     if (!viewBox) {
       delete innerSvgProps.attrs.viewBox;
@@ -90,6 +90,7 @@ function renderIcon(h, locale, context) {
         ...svgBaseProps,
       },
       class: svgClassString,
+      style: svgStyle,
     };
     innerNode = (
       <svg {...innerSvgProps} viewBox={viewBox}>

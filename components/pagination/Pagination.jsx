@@ -4,6 +4,7 @@ import MiniSelect from './MiniSelect';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getOptionProps } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
+import enUS from '../pagination/locale/en_US';
 import Icon from '../icon';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -44,7 +45,7 @@ export default {
     ...PaginationProps(),
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     getIconsProps(prefixCls) {
@@ -118,7 +119,7 @@ export default {
   },
   render() {
     return (
-      <LocaleReceiver componentName="Pagination" scopedSlots={{ default: this.renderPagination }} />
+      <LocaleReceiver componentName="Pagination" defaultLocale={enUS} scopedSlots={{ default: this.renderPagination }} />
     );
   },
 };

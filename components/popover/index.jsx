@@ -10,7 +10,7 @@ const Popover = {
   name: 'APopover',
   props: {
     ...props,
-    prefixCls: PropTypes.string.def('ant-popover'),
+    prefixCls: PropTypes.string,
     transitionName: PropTypes.string.def('zoom-big'),
     content: PropTypes.any,
     title: PropTypes.any,
@@ -20,7 +20,7 @@ const Popover = {
     event: 'visibleChange',
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     getPopupDomNode() {

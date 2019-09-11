@@ -33,7 +33,7 @@ const TreeSelect = {
     event: 'change',
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   created() {
     warning(
@@ -99,9 +99,7 @@ const TreeSelect = {
     const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
-    const renderEmpty =
-      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
-      ConfigConsumerProps.renderEmpty;
+    const renderEmpty = this.configProvider.renderEmpty;
     const notFoundContent = getComponentFromProp(this, 'notFoundContent');
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const rest = omit(restProps, [

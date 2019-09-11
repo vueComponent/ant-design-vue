@@ -41,7 +41,7 @@ const Popconfirm = {
     },
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const props = getOptionProps(this);

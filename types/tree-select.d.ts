@@ -18,6 +18,10 @@ export interface TreeData {
 export declare class TreeSelect extends AntdComponent {
   static TreeNode: typeof TreeNode;
 
+  treeIcon?: boolean;
+
+  notFoundContent?: any;
+
   /**
    * Whether allow clear
    * @default false

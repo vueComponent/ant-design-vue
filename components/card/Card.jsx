@@ -30,7 +30,7 @@ export default {
     defaultActiveTabKey: PropTypes.string,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     this.updateWiderPaddingCalled = false;
@@ -109,7 +109,7 @@ export default {
       defaultActiveTabKey,
     } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const { $slots, $scopedSlots, $listeners } = this;

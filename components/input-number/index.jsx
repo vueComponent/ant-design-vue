@@ -36,7 +36,7 @@ const InputNumber = {
     step: 1,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     focus() {
@@ -49,7 +49,7 @@ const InputNumber = {
 
   render() {
     const { prefixCls: customizePrefixCls, size, ...others } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 
     const inputNumberClass = classNames({

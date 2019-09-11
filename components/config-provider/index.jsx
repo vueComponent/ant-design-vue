@@ -42,9 +42,10 @@ const ConfigProvider = {
     ...getWatch(['prefixCls', 'csp', 'autoInsertSpaceInButton']),
   },
   methods: {
-    renderEmptyComponent() {
-      const customRender = getComponentFromProp(this, 'renderEmpty', {}, false);
-      return this.$props.renderEmpty || customRender || defaultRenderEmpty;
+    renderEmptyComponent(h, name) {
+      const renderEmpty =
+        getComponentFromProp(this, 'renderEmpty', {}, false) || defaultRenderEmpty;
+      return renderEmpty(h, name);
     },
     getPrefixCls(suffixCls, customizePrefixCls) {
       const { prefixCls = 'ant' } = this.$props;

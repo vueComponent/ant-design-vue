@@ -70,7 +70,7 @@ const Skeleton = {
     paragraph: true,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const {
@@ -81,7 +81,7 @@ const Skeleton = {
       paragraph,
       active,
     } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('skeleton', customizePrefixCls);
 
     if (loading || !hasProp(this, 'loading')) {

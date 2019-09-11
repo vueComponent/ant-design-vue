@@ -60,7 +60,7 @@ export default {
     showPreviewIcon: true,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   updated() {
     this.$nextTick(() => {
@@ -112,7 +112,7 @@ export default {
       showRemoveIcon,
       locale,
     } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
     const list = items.map(file => {

@@ -31,7 +31,7 @@ export default {
     renderTabBar: PropTypes.func,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   mounted() {
     const NO_FLEX = ' no-flex';
@@ -76,7 +76,7 @@ export default {
       hideAdd,
       renderTabBar,
     } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
     const children = filterEmpty(this.$slots.default);
 

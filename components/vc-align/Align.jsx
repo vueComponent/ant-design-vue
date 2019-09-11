@@ -73,7 +73,8 @@ export default {
           if (
             !reAlign &&
             source &&
-            (!isSimilarValue(preRect.width, sourceRect.width) || !isSimilarValue(preRect.height, sourceRect.height))
+            (!isSimilarValue(preRect.width, sourceRect.width) ||
+              !isSimilarValue(preRect.height, sourceRect.height))
           ) {
             reAlign = true;
           }

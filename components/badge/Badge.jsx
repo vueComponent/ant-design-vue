@@ -32,7 +32,7 @@ export default {
     overflowCount: 99,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     getBadgeClassName(prefixCls) {
@@ -157,7 +157,7 @@ export default {
       $slots,
     } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
 

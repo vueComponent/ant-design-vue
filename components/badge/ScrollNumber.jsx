@@ -29,7 +29,7 @@ export default {
   mixins: [BaseMixin],
   props: ScrollNumberProps,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -133,7 +133,7 @@ export default {
       displayComponent,
       className,
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('scroll-number', customizePrefixCls);
     if (displayComponent) {
       return cloneElement(displayComponent, {

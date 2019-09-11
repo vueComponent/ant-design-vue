@@ -34,7 +34,7 @@ export default {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     savePopupRef(ref) {
@@ -62,7 +62,7 @@ export default {
       ...restProps
     } = this.$props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown-button', customizePrefixCls);
     const dropdownProps = {
       props: {

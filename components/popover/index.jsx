@@ -30,7 +30,7 @@ const Popover = {
 
   render() {
     const { title, prefixCls: customizePrefixCls, $slots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('popover', customizePrefixCls);
 
     const props = getOptionProps(this);

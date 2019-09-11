@@ -14,12 +14,12 @@ export default {
     compact: Boolean,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   computed: {
     classes() {
       const { prefixCls: customizePrefixCls, size, compact = false } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('input-group', customizePrefixCls);
 
       return {

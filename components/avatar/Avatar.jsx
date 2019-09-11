@@ -26,7 +26,7 @@ export default {
     loadError: Function,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -89,7 +89,7 @@ export default {
   render() {
     const { prefixCls: customizePrefixCls, shape, size, src, icon, alt, srcSet } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('avatar', customizePrefixCls);
 
     const { isImgExist, scale } = this.$data;

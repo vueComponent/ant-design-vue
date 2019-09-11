@@ -96,7 +96,7 @@ const TreeSelect = {
       getPopupContainer,
       ...restProps
     } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const renderEmpty = this.configProvider.renderEmpty;

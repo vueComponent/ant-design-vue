@@ -17,7 +17,7 @@ export default {
   inject: {
     antAnchor: { default: () => ({}) },
     antAnchorContext: { default: () => ({}) },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   watch: {
     href(val, oldVal) {
@@ -49,7 +49,7 @@ export default {
   render() {
     const { prefixCls: customizePrefixCls, href, $slots } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
 
     const title = getComponentFromProp(this, 'title');

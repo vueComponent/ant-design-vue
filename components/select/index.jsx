@@ -112,7 +112,7 @@ const Select = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   created() {
     warning(
@@ -173,10 +173,8 @@ const Select = {
       ...restProps
     } = getOptionProps(this);
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty =
-      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
-      ConfigConsumerProps.renderEmpty;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const renderEmpty = this.configProvider.renderEmpty;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;

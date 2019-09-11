@@ -24,7 +24,7 @@ export default {
     yearSelectTotal: 20,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   // private calenderHeaderNode: HTMLDivElement;
   methods: {
@@ -136,7 +136,7 @@ export default {
 
   render() {
     const { prefixCls: customizePrefixCls, type, value, locale, fullscreen } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
 
     const yearSelect = this.getYearSelectElement(prefixCls, value.year());

@@ -35,7 +35,7 @@ export default {
     title: PropTypes.any,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -161,7 +161,7 @@ export default {
     const { $props, $data, $slots, $listeners } = this;
     const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
     let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '');
     children = children.length === 1 ? children[0] : children;

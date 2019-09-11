@@ -22,7 +22,7 @@ export default {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const { value, defaultValue } = this;
@@ -70,7 +70,7 @@ export default {
   render() {
     const { $props: props, $data: state, $slots } = this;
     const { prefixCls: customizePrefixCls, options } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
     let children = $slots.default;

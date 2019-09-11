@@ -59,7 +59,7 @@ export default {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -119,7 +119,7 @@ export default {
 
   render() {
     const { type, justify, align, prefixCls: customizePrefixCls, $slots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('row', customizePrefixCls);
 
     const gutter = this.getGutter();

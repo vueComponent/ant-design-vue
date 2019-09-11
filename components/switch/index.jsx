@@ -26,7 +26,7 @@ const Switch = {
     loading: PropTypes.bool,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     focus() {
@@ -41,7 +41,7 @@ const Switch = {
     const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(
       this,
     );
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
 
     const classes = {

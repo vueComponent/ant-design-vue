@@ -89,7 +89,7 @@ export default {
     // cancelButtonDisabled: false,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   mounted() {
     if (mousePositionEventBinded) {
@@ -162,7 +162,7 @@ export default {
       $slots,
     } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('modal', customizePrefixCls);
 
     const defaultFooter = (

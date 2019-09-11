@@ -126,7 +126,7 @@ const Popconfirm = {
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('popover', customizePrefixCls);
 
     const otherProps = omit(props, ['title', 'content', 'cancelText', 'okText']);

@@ -47,7 +47,7 @@ export default {
     wrapperClassName: '',
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const { spinning, delay } = this;
@@ -124,7 +124,7 @@ export default {
       wrapperClassName,
       ...restProps
     } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 
     const { sSpinning } = this;

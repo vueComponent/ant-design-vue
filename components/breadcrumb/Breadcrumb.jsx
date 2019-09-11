@@ -34,7 +34,7 @@ export default {
   name: 'ABreadcrumb',
   props: BreadcrumbProps,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     defaultItemRender({ route, params, routes, paths }) {
@@ -46,7 +46,7 @@ export default {
   render() {
     let crumbs;
     const { prefixCls: customizePrefixCls, routes, params = {}, $slots, $scopedSlots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
     const children = filterEmpty($slots.default);

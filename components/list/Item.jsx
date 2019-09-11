@@ -24,12 +24,12 @@ export const Meta = {
   name: 'AListItemMeta',
   __ANT_LIST_ITEM_META: true,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render(h, context) {
     const { props, slots, listeners, injections } = context;
     const slotsMap = slots();
-    const getPrefixCls = injections.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = injections.configProvider.getPrefixCls;
     const { prefixCls: customizePrefixCls } = props;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
 
@@ -61,12 +61,12 @@ export default {
   props: ListItemProps,
   inject: {
     listContext: { default: () => ({}) },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { grid } = this.listContext;
     const { prefixCls: customizePrefixCls, $slots, $listeners } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
 
     const classString = `${prefixCls}-item`;

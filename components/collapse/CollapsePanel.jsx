@@ -8,11 +8,11 @@ export default {
     ...panelProps(),
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { prefixCls: customizePrefixCls, showArrow = true, $listeners } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
 
     const collapsePanelClassName = {

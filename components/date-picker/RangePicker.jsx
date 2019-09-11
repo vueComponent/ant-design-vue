@@ -78,7 +78,7 @@ export default {
     showToday: false,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const value = this.value || this.defaultValue || [];
@@ -285,7 +285,7 @@ export default {
       localeCode,
       format,
     } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('calendar', customizePrefixCls);
     const tagPrefixCls = getPrefixCls('tag', customizeTagPrefixCls);
     this._prefixCls = prefixCls;

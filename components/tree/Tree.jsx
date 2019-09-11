@@ -107,7 +107,7 @@ export default {
     },
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   created() {
     warning(
@@ -189,7 +189,7 @@ export default {
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, showIcon, treeNodes } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tree', customizePrefixCls);
     const switcherIcon = getComponentFromProp(this, 'switcherIcon');
     const checkable = props.checkable;

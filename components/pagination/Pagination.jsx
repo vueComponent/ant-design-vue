@@ -4,7 +4,7 @@ import MiniSelect from './MiniSelect';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getOptionProps } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
-import enUS from '../pagination/locale/en_US';
+import enUS from '../vc-pagination/locale/en_US';
 import Icon from '../icon';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -93,7 +93,7 @@ export default {
         locale: customLocale,
         ...restProps
       } = getOptionProps(this);
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('pagination', customizePrefixCls);
       const selectPrefixCls = getPrefixCls('select', customizeSelectPrefixCls);
 
@@ -119,7 +119,11 @@ export default {
   },
   render() {
     return (
-      <LocaleReceiver componentName="Pagination" defaultLocale={enUS} scopedSlots={{ default: this.renderPagination }} />
+      <LocaleReceiver
+        componentName="Pagination"
+        defaultLocale={enUS}
+        scopedSlots={{ default: this.renderPagination }}
+      />
     );
   },
 };

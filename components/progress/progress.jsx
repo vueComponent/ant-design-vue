@@ -45,7 +45,7 @@ export default {
     strokeLinecap: 'round',
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     renderProcessInfo(prefixCls, progressStatus) {
@@ -89,7 +89,7 @@ export default {
       strokeLinecap = 'round',
       ...restProps
     } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('progress', customizePrefixCls);
 
     const progressStatus =

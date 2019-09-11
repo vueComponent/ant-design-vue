@@ -58,7 +58,7 @@ const AutoComplete = {
     event: 'change',
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   provide() {
     return {
@@ -99,7 +99,7 @@ const AutoComplete = {
       $listeners,
     } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const cls = {

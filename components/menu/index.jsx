@@ -52,7 +52,7 @@ const Menu = {
   mixins: [BaseMixin],
   inject: {
     layoutSiderContext: { default: () => ({}) },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   model: {
     prop: 'selectedKeys',
@@ -209,7 +209,7 @@ const Menu = {
     const { collapsedWidth } = layoutSiderContext;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const { prefixCls: customizePrefixCls, theme, getPopupContainer } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('menu', customizePrefixCls);
     const menuMode = this.getRealMenuMode();
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode);

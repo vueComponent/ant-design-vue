@@ -68,7 +68,7 @@ export default {
     FormProps: { default: () => ({}) },
     decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return { helpShow: false };
@@ -421,7 +421,7 @@ export default {
     },
     renderFormItem() {
       const { prefixCls: customizePrefixCls, colon } = this.$props;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('form', customizePrefixCls);
       const children = this.renderChildren(prefixCls);
       const itemClassName = {

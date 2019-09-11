@@ -14,12 +14,12 @@ function generator(props, name) {
       name,
       props: BasicComponent.props,
       inject: {
-        configProvider: { default: () => ({}) },
+        configProvider: { default: () => ConfigConsumerProps },
       },
       render() {
         const { suffixCls } = props;
         const { prefixCls: customizePrefixCls } = this.$props;
-        const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+        const getPrefixCls = this.configProvider.getPrefixCls;
         const prefixCls = getPrefixCls(suffixCls, customizePrefixCls);
 
         const basicComponentProps = {

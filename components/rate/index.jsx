@@ -28,7 +28,7 @@ const Rate = {
   },
   props: RateProps,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     focus() {
@@ -50,7 +50,7 @@ const Rate = {
   },
   render() {
     const { prefixCls: customizePrefixCls, ...restProps } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
 
     const character = getComponentFromProp(this, 'character') || (

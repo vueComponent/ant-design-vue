@@ -25,7 +25,7 @@ export default {
     autoFocus: PropTypes.bool,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
     checkboxGroupContext: { default: () => null },
   },
   methods: {
@@ -48,7 +48,7 @@ export default {
     const children = $slots.default;
     const { mouseenter = noop, mouseleave = noop, ...restListeners } = $listeners;
     const { prefixCls: customizePrefixCls, indeterminate, ...restProps } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
     const checkboxProps = {

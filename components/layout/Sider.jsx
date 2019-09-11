@@ -112,7 +112,7 @@ export default {
   },
   inject: {
     siderHook: { default: () => ({}) },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   // getChildContext() {
   //   return {
@@ -187,7 +187,7 @@ export default {
       width,
       collapsedWidth,
     } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
 
     const trigger = getComponentFromProp(this, 'trigger');

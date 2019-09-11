@@ -61,7 +61,7 @@ const Calendar = {
     event: 'change',
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const value = this.value || this.defaultValue || interopDefault(moment)();
@@ -182,7 +182,7 @@ const Calendar = {
         dateFullCellRender,
         monthFullCellRender,
       } = props;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
       const type = mode === 'year' ? 'month' : 'date';
 

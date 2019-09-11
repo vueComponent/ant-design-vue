@@ -12,11 +12,11 @@ export default {
   },
   inject: {
     radioGroupContext: { default: undefined },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { prefixCls: customizePrefixCls, ...otherProps } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('radio-button', customizePrefixCls);
 
     const radioProps = {

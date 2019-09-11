@@ -17,11 +17,11 @@ export default {
     pending: false,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { prefixCls: customizePrefixCls, color = '', pending } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('timeline', customizePrefixCls);
 
     const dot = getComponentFromProp(this, 'dot');

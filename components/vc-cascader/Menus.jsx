@@ -57,7 +57,7 @@ export default {
       const key = option[this.getFieldName('value')];
       const expandProps = {
         attrs: {
-          role: "menuitem",
+          role: 'menuitem',
         },
         on: {
           click: onSelect,

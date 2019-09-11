@@ -38,7 +38,7 @@ const Alert = {
   props: AlertProps,
   mixins: [BaseMixin],
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -71,7 +71,7 @@ const Alert = {
 
   render() {
     const { prefixCls: customizePrefixCls, banner, closing, closed } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
     let { closable, type, showIcon, iconType } = this;

@@ -73,7 +73,7 @@ export default {
   }),
 
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   // CheckboxPropsCache: {
   //   [key: string]: any;
@@ -1135,10 +1135,8 @@ export default {
         props: { ...loading },
       };
     }
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty =
-      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
-      ConfigConsumerProps.renderEmpty;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const renderEmpty = this.configProvider.renderEmpty;
 
     const prefixCls = getPrefixCls('table', customizePrefixCls);
     const dropdownPrefixCls = getPrefixCls('dropdown', customizeDropdownPrefixCls);

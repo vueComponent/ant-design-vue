@@ -32,7 +32,7 @@ export default {
   name: 'ACol',
   props: ColProps,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
     rowContext: {
       default: () => null,
     },
@@ -50,7 +50,7 @@ export default {
       $listeners,
       rowContext,
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('col', customizePrefixCls);
 
     let sizeClassObj = {};

@@ -149,7 +149,7 @@ const Cascader = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
     localeData: { default: () => ({}) },
   },
   data() {
@@ -388,10 +388,8 @@ const Cascader = {
       showSearch = false,
       ...otherProps
     } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
-    const renderEmpty =
-      (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
-      ConfigConsumerProps.renderEmpty;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const renderEmpty = this.configProvider.renderEmpty;
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 

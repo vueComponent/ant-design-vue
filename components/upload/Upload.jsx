@@ -32,7 +32,7 @@ export default {
     supportServerRender: true,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   // recentUploadStatus: boolean | PromiseLike<any>;
   data() {
@@ -227,7 +227,7 @@ export default {
       disabled,
     } = getOptionProps(this);
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
     const vcUploadProps = {

@@ -167,7 +167,7 @@ const Form = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   watch: {
     form() {
@@ -207,7 +207,7 @@ const Form = {
       autoFormCreate,
       options = {},
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
 
     const formClassName = classNames(prefixCls, {

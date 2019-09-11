@@ -27,7 +27,7 @@ export default {
   },
   inject: {
     radioGroupContext: { default: undefined },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     handleChange(event) {
@@ -49,7 +49,7 @@ export default {
     const children = $slots.default;
     const { mouseenter = noop, mouseleave = noop, ...restListeners } = $listeners;
     const { prefixCls: customizePrefixCls, ...restProps } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const radioProps = {

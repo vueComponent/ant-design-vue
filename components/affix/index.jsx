@@ -57,7 +57,7 @@ const Affix = {
   props: AffixProps,
   mixins: [BaseMixin],
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     this.events = ['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'];
@@ -246,7 +246,7 @@ const Affix = {
 
   render() {
     const { prefixCls, affixStyle, placeholderStyle, $slots, $props } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const className = classNames({
       [getPrefixCls('affix', prefixCls)]: affixStyle,
     });

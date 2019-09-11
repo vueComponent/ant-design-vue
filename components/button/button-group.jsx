@@ -15,7 +15,7 @@ export default {
   name: 'AButtonGroup',
   props: ButtonGroupProps,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -27,7 +27,7 @@ export default {
   },
   render() {
     const { prefixCls: customizePrefixCls, size, sizeMap, $slots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('btn-group', customizePrefixCls);
 
     // large => lg

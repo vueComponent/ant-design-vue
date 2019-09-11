@@ -84,7 +84,7 @@ export default {
       let panelEvents = {};
       if (!disabled && disabled !== '') {
         panelEvents = {
-          itemClick:  this.onClickItem,
+          itemClick: this.onClickItem,
         };
       }
 

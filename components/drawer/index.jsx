@@ -41,7 +41,7 @@ const Drawer = {
     parentDrawer: {
       default: () => null,
     },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   provide() {
     return {
@@ -192,7 +192,7 @@ const Drawer = {
       offsetStyle.height = typeof height === 'number' ? `${height}px` : height;
     }
     const handler = getComponentFromProp(this, 'handle') || false;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('drawer', customizePrefixCls);
 
     const vcDrawerProps = {

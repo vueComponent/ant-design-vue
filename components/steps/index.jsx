@@ -26,13 +26,13 @@ const Steps = {
     current: 0,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   Step: { ...VcSteps.Step, name: 'AStep' },
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, iconPrefix: customizeIconPrefixCls } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
     const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
 

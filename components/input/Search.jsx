@@ -20,7 +20,7 @@ export default {
     enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     onSearch(e) {
@@ -103,7 +103,7 @@ export default {
       size,
       ...others
     } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input-search', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 

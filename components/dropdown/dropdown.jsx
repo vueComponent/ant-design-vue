@@ -27,7 +27,7 @@ const Dropdown = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     savePopupRef(ref) {
@@ -76,7 +76,7 @@ const Dropdown = {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, trigger, disabled, getPopupContainer } = props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
 
     const dropdownTrigger = cloneElement($slots.default, {

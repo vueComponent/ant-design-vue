@@ -37,7 +37,7 @@ const BackTop = {
     visibilityHeight: PropTypes.number.def(400),
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     this.scrollEvent = null;
@@ -108,7 +108,7 @@ const BackTop = {
   render() {
     const { prefixCls: customizePrefixCls, $slots, $listeners } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('back-top', customizePrefixCls);
 
     const defaultElement = (

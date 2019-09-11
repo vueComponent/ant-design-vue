@@ -75,7 +75,7 @@ const Carousel = {
     draggable: false,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
 
   beforeMount() {
@@ -137,7 +137,7 @@ const Carousel = {
       props.fade = true;
     }
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     let className = getPrefixCls('carousel', props.prefixCls);
 
     if (props.vertical) {

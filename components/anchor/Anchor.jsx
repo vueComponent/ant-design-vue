@@ -97,7 +97,7 @@ export default {
     getContainer: getDefaultContainer,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     this.links = [];
@@ -222,7 +222,7 @@ export default {
       getContainer,
     } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
     this._sPrefixCls = prefixCls;
 

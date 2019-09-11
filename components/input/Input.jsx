@@ -33,7 +33,7 @@ export default {
     ...inputProps,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const { value, defaultValue } = this.$props;
@@ -266,7 +266,7 @@ export default {
       return <TextArea {...textareaProps} ref="input" />;
     }
     const { prefixCls: customizePrefixCls } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     return this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
   },

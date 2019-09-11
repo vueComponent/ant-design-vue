@@ -97,7 +97,7 @@ const TimePicker = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const value = this.value || this.defaultValue;
@@ -185,7 +185,7 @@ const TimePicker = {
       props = omit(props, ['defaultValue', 'suffixIcon', 'allowEmpty', 'allowClear']);
 
       const { prefixCls: customizePrefixCls, getPopupContainer, placeholder, size } = props;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
 
       const format = this.getDefaultFormat();

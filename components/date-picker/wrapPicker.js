@@ -50,7 +50,7 @@ export default function wrapPicker(Picker, props, pickerType) {
       event: 'change',
     },
     inject: {
-      configProvider: { default: () => ({}) },
+      configProvider: { default: () => ConfigConsumerProps },
     },
     provide() {
       return {
@@ -125,7 +125,7 @@ export default function wrapPicker(Picker, props, pickerType) {
           locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
           DEFAULT_FORMAT[mergedPickerType];
 
-        const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+        const getPrefixCls = this.configProvider.getPrefixCls;
         const prefixCls = getPrefixCls('calendar', customizePrefixCls);
         const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 

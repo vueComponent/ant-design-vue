@@ -38,7 +38,7 @@ export default {
     allowClear: true,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const value = this.value || this.defaultValue;
@@ -153,7 +153,7 @@ export default {
       $scopedSlots,
     } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('calendar', customizePrefixCls);
     this._prefixCls = prefixCls;
 

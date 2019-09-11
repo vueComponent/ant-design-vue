@@ -42,7 +42,7 @@ export default {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   computed: {
     radioOptions() {
@@ -83,7 +83,7 @@ export default {
     const { mouseenter = noop, mouseleave = noop } = this.$listeners;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const groupPrefixCls = `${prefixCls}-group`;

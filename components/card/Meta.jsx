@@ -10,12 +10,12 @@ export default {
     description: PropTypes.any,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const classString = {

@@ -26,11 +26,11 @@ export default {
     reverse: false,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { prefixCls: customizePrefixCls, reverse, mode, ...restProps } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('timeline', customizePrefixCls);
 
     const pendingDot = getComponentFromProp(this, 'pendingDot');

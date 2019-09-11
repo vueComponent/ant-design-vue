@@ -34,7 +34,7 @@ export default function createPicker(TheCalendar, props) {
       event: 'change',
     },
     inject: {
-      configProvider: { default: () => ({}) },
+      configProvider: { default: () => ConfigConsumerProps },
     },
     data() {
       const value = this.value || this.defaultValue;
@@ -139,7 +139,7 @@ export default function createPicker(TheCalendar, props) {
       const props = getOptionProps(this);
 
       const { prefixCls: customizePrefixCls, locale, localeCode } = props;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('calendar', customizePrefixCls);
       this._prefixCls = prefixCls;
 

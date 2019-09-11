@@ -39,7 +39,7 @@ export default {
     autosize: [Object, Boolean],
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const { value, defaultValue } = this.$props;
@@ -155,7 +155,7 @@ export default {
       'value',
       'defaultValue',
     ]);
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
 
     const cls = classNames(prefixCls, {

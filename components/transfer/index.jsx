@@ -60,7 +60,7 @@ const Transfer = {
     showSearch: false,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     // vue 中 通过slot，不方便传递，保留notFoundContent及searchPlaceholder
@@ -346,12 +346,10 @@ const Transfer = {
         filterOption,
         lazy,
       } = props;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('transfer', customizePrefixCls);
 
-      const renderEmpty =
-        (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
-        ConfigConsumerProps.renderEmpty;
+      const renderEmpty = this.configProvider.renderEmpty;
       const locale = this.getLocale(transferLocale, renderEmpty);
       const {
         leftFilter,

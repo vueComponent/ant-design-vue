@@ -20,7 +20,7 @@ const Comment = {
   name: 'AComment',
   props: CommentProps,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     getAction(actions) {
@@ -40,7 +40,7 @@ const Comment = {
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('comment', customizePrefixCls);
 
     const actions = getComponentFromProp(this, 'actions');

@@ -13,7 +13,7 @@ export default {
   __ANT_BUTTON: true,
   props,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
         icon,
         $slots,
       } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
 

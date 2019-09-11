@@ -66,7 +66,7 @@ const List = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     this.keys = [];
@@ -140,7 +140,7 @@ const List = {
       $slots,
       paginationCurrent,
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
 
     const loadMore = getComponentFromProp(this, 'loadMore');
@@ -223,9 +223,7 @@ const List = {
 
       childrenContent = grid ? <Row gutter={grid.gutter}>{childrenList}</Row> : childrenList;
     } else if (!children.length && !isLoading) {
-      const renderEmpty =
-        (this.configProvider.renderEmpty && this.configProvider.renderEmpty) ||
-        ConfigConsumerProps.renderEmpty;
+      const renderEmpty = this.configProvider.renderEmpty;
       childrenContent = this.renderEmpty(prefixCls, renderEmpty);
     }
     const paginationPosition = paginationProps.position || 'bottom';

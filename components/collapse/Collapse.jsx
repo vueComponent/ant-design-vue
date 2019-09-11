@@ -21,7 +21,7 @@ export default {
     openAnimation: animation,
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     renderExpandIcon(panelProps, prefixCls) {
@@ -38,7 +38,7 @@ export default {
   },
   render() {
     const { prefixCls: customizePrefixCls, bordered, $listeners } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
 
     const collapseClassName = {

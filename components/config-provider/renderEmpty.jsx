@@ -6,7 +6,7 @@ import { ConfigConsumerProps } from './';
 const RenderEmpty = {
   functional: true,
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   props: {
     componentName: PropTypes.string,
@@ -14,8 +14,7 @@ const RenderEmpty = {
   render(createElement, context) {
     const { props, injections } = context;
     function renderHtml(componentName) {
-      const getPrefixCls =
-        injections.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+      const getPrefixCls = injections.configProvider.getPrefixCls;
       const prefix = getPrefixCls('empty');
       switch (componentName) {
         case 'Table':

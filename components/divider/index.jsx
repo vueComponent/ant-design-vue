@@ -11,11 +11,11 @@ const Divider = {
     orientation: PropTypes.oneOf(['left', 'right']),
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
     const { prefixCls: customizePrefixCls, type, $slots, dashed, orientation = '' } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('divider', customizePrefixCls);
     const orientationPrefix = orientation.length > 0 ? '-' + orientation : orientation;
 

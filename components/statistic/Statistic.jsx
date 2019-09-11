@@ -26,12 +26,12 @@ export default {
     groupSeparator: ',',
   }),
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
 
   render() {
     const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls || ConfigConsumerProps.getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
     const title = getComponentFromProp(this, 'title');

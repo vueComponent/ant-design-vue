@@ -17,14 +17,6 @@ export default {
   },
   props: {
     ...inputProps,
-    prefixCls: {
-      default: 'ant-input-search',
-      type: String,
-    },
-    inputPrefixCls: {
-      default: 'ant-input',
-      type: String,
-    },
     enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   },
   inject: {
@@ -52,13 +44,13 @@ export default {
       );
 
       if (suffix) {
-        let cloneSuffix = suffix;
-        if (isValidElement(cloneSuffix) && !cloneSuffix.key) {
-          cloneSuffix = cloneElement(cloneSuffix, {
-            key: 'originSuffix',
-          });
-        }
-        return [cloneSuffix, node];
+        // let cloneSuffix = suffix;
+        // if (isValidElement(cloneSuffix) && !cloneSuffix.key) {
+        //   cloneSuffix = cloneElement(cloneSuffix, {
+        //     key: 'originSuffix',
+        //   });
+        // }
+        return [suffix, node];
       }
 
       return node;

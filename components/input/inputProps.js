@@ -1,8 +1,7 @@
 import PropTypes from '../_util/vue-types';
 export default {
-  prefixCls: {
-    type: String,
-  },
+  prefixCls: PropTypes.string,
+  inputPrefixCls: PropTypes.string,
   defaultValue: [String, Number],
   value: [String, Number],
   placeholder: [String, Number],

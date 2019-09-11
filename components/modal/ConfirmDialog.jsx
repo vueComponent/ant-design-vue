@@ -3,7 +3,6 @@ import Icon from '../icon';
 import Dialog from './Modal';
 import ActionButton from './ActionButton';
 import { getConfirmLocale } from './locale';
-import { hasProp } from '../_util/props-util';
 import warning from '../_util/warning';
 
 export default {
@@ -92,7 +91,7 @@ export default {
       >
         <div class={`${contentPrefixCls}-body-wrapper`}>
           <div class={`${contentPrefixCls}-body`}>
-            <Icon type={iconType} />
+            {iconNode}
             <span class={`${contentPrefixCls}-title`}>
               {typeof props.title === 'function' ? props.title(h) : props.title}
             </span>

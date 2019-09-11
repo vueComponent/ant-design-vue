@@ -3,6 +3,26 @@ import Form from '..';
 import { asyncExpect } from '@/tests/utils';
 
 describe('Form', () => {
+  // Mock of `querySelector`
+  const originQuerySelector = HTMLElement.prototype.querySelector;
+  HTMLElement.prototype.querySelector = function querySelector(str) {
+    const match = str.match(/^\[id=('|")(.*)('|")]$/);
+    const id = match && match[2];
+
+    // Use origin logic
+    if (id) {
+      const [input] = this.getElementsByTagName('input');
+      if (input && input.id === id) {
+        return input;
+      }
+    }
+
+    return originQuerySelector.call(this, str);
+  };
+
+  afterAll(() => {
+    HTMLElement.prototype.querySelector = originQuerySelector;
+  });
   it('should remove duplicated user input colon', () => {
     const wrapper = mount({
       render() {

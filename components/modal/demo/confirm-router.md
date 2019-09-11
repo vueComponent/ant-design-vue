@@ -20,7 +20,7 @@ import Button from '../../button'
 export default {
   methods: {
     showConfirm() {
-      const _self = this
+      const self = this
       for (let i = 0; i < 3; i += 1) {
         setTimeout(() => {
           this.$confirm({
@@ -32,7 +32,7 @@ export default {
             },
             cancelText: 'Click to destroy all',
             onCancel() {
-              _self.destroyAll()
+              self.destroyAll()
             },
           });
         }, i * 500);

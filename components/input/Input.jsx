@@ -38,12 +38,12 @@ export default {
   data() {
     const { value, defaultValue } = this.$props;
     return {
-      stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
+      stateValue: !hasProp(this, 'value') ? defaultValue : value,
     };
   },
   watch: {
     value(val) {
-      this.stateValue = fixControlledValue(val);
+      this.stateValue = val;
     },
   },
   mounted() {
@@ -95,6 +95,21 @@ export default {
       if (!e.target.composing) {
         this.$emit('change.value', value);
       }
+      let event = e;
+      if (e.type === 'click' && this.$refs.input) {
+        // click clear icon
+        event = { ...e };
+        event.target = this.$refs.input;
+        event.currentTarget = this.$refs.input;
+        const originalInputValue = this.$refs.input.value;
+        // change input value cause e.target.value should be '' when clear input
+        this.$refs.input.value = '';
+        this.$emit('change', event);
+        this.$emit('input', event);
+        // reset input value
+        this.$refs.input.value = originalInputValue;
+        return;
+      }
       this.$emit('change', e);
       this.$emit('input', e);
     },
@@ -129,7 +144,7 @@ export default {
       let suffix = getComponentFromProp(this, 'suffix');
       if (suffix || allowClear) {
         return (
-          <span class={`${prefixCls}-suffix`}>
+          <span class={`${prefixCls}-suffix`} key="suffix">
             {this.renderClearIcon(prefixCls)}
             {suffix}
           </span>
@@ -179,14 +194,18 @@ export default {
         return children;
       }
       let prefix = getComponentFromProp(this, 'prefix');
-      prefix = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
+      prefix = prefix ? (
+        <span class={`${prefixCls}-prefix`} key="prefix">
+          {prefix}
+        </span>
+      ) : null;
 
       const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
       });
       return (
-        <span class={affixWrapperCls}>
+        <span class={affixWrapperCls} key="affix">
           {prefix}
           {children}
           {suffix}
@@ -201,13 +220,14 @@ export default {
         'addonAfter',
         'prefix',
         'suffix',
+        'allowClear',
         'value',
         'defaultValue',
       ]);
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
       const inputProps = {
         domProps: {
-          value: stateValue,
+          value: fixControlledValue(stateValue),
         },
         attrs: { ...otherProps, ...this.$attrs },
         on: {
@@ -218,6 +238,7 @@ export default {
         },
         class: getInputClassName(prefixCls),
         ref: 'input',
+        key: 'ant-input',
       };
       if ($listeners['change.value']) {
         inputProps.directives = [{ name: 'ant-input' }];

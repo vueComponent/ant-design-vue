@@ -1,4 +1,3 @@
-import intersperse from 'intersperse';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import find from 'lodash/find';
@@ -21,6 +20,10 @@ import Icon from '../icon';
 import { ConfigConsumerProps } from '../config-provider';
 
 function noop() {}
+
+function intersperseSpace(list) {
+  return list.reduce((current, item) => [...current, ' ', item], []).slice(1);
+}
 export const FormItemProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -59,7 +62,6 @@ export default {
   mixins: [BaseMixin],
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
-    prefixCls: 'ant-form',
     colon: true,
   }),
   inject: {
@@ -83,8 +85,10 @@ export default {
     this.collectFormItemContext(this.$vnode.context, 'delete');
   },
   mounted() {
+    const { help, validateStatus } = this.$props;
     warning(
-      this.getControls(this.slotDefault, true).length <= 1,
+      this.getControls(this.slotDefault, true).length <= 1 ||
+        (help !== undefined || validateStatus !== undefined),
       '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
         'while there are more than one `getFieldDecorator` in it.',
     );
@@ -118,13 +122,16 @@ export default {
       if (help === undefined && onlyControl) {
         const errors = this.getField().errors;
         if (errors) {
-          return intersperse(
+          return intersperseSpace(
             errors.map((e, index) => {
-              return isValidElement(e.message)
-                ? cloneElement(e.message, { key: index })
-                : e.message;
+              let node = null;
+              if (isValidElement(e)) {
+                node = e;
+              } else if (isValidElement(e.message)) {
+                node = e.message;
+              }
+              return node ? cloneElement(node, { key: index }) : e.message;
             }),
-            ' ',
           );
         } else {
           return '';
@@ -339,15 +346,15 @@ export default {
       if (!id) {
         return;
       }
-      const controls = document.querySelectorAll(`[id="${id}"]`);
-      if (controls.length !== 1) {
+      const formItemNode = this.$el;
+      const control = formItemNode.querySelector(`[id="${id}"]`);
+      if (control) {
         // Only prevent in default situation
         // Avoid preventing event in `label={<a href="xx">link</a>}``
         if (typeof label === 'string') {
           e.preventDefault();
         }
-        const control = this.$el.querySelector(`[id="${id}"]`);
-        if (control && control.focus) {
+        if (control.focus) {
           control.focus();
         }
       }

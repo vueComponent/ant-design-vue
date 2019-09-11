@@ -68,21 +68,8 @@ Supports all props of `Input`.
   <a-input />
 </a-input-group>
 ````
-#### Input.Password
+#### Input.Password (Added in 1.14.0)
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | visibilityToggle | Whether show toggle button | boolean | true |
-
-## FAQ
-
-### Why Input lose focus when change `prefix/suffix`
-
-When Input dynamic add or remove `prefix/suffix` will make Vue recreate the dom structure and new input will be not focused.
-You can set an empty `<span />` element to keep the dom structure:
-
-```jsx
-const suffix = condition ? <Icon type="smile" /> : <span />;
-
-<Input suffix={suffix} />
-```

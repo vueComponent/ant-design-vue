@@ -27,7 +27,7 @@ You can use the Input in conjunction with [Tooltip](/components/tooltip/) compon
       @change="onChange"
       @blur="onBlur"
       placeholder="Input a number"
-      maxLength="25"
+      :maxLength="25"
       style="width: 120px"
     />
   </a-tooltip>

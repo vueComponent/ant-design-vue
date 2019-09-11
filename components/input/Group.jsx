@@ -1,12 +1,11 @@
+import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'AInputGroup',
   props: {
-    prefixCls: {
-      type: String,
-    },
+    prefixCls: PropTypes.string,
     size: {
       validator(value) {
         return ['small', 'large', 'default'].includes(value);

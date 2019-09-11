@@ -2,9 +2,6 @@ import classNames from 'classnames';
 import Input from './Input';
 import Icon from '../icon';
 import inputProps from './inputProps';
-import Button from '../button';
-import { cloneElement } from '../_util/vnode';
-import { getOptionProps, getComponentFromProp, isValidElement } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 
@@ -47,7 +44,7 @@ export default {
         },
         on: {
           [iconTrigger]: this.onChange,
-          onMouseDown: e => {
+          mousedown: e => {
             // Prevent focused state lost
             // https://github.com/ant-design/ant-design/issues/15173
             e.preventDefault();

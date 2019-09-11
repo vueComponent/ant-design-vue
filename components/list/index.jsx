@@ -224,7 +224,7 @@ const List = {
       childrenContent = grid ? <Row gutter={grid.gutter}>{childrenList}</Row> : childrenList;
     } else if (!children.length && !isLoading) {
       const renderEmpty =
-        (this.configProvider.renderEmpty && this.configProvider.renderEmpty()) ||
+        (this.configProvider.renderEmpty && this.configProvider.renderEmpty) ||
         ConfigConsumerProps.renderEmpty;
       childrenContent = this.renderEmpty(prefixCls, renderEmpty);
     }

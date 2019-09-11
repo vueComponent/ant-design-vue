@@ -57,7 +57,8 @@ The properties of the object are follows:
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |
 | class | class of container | string | - |
 | content | Content | string\|vNode \|function(h) | - |
-| iconType | Icon `type` of the Icon component | string | `question-circle` |
+| icon | custom icon (`Added in 1.14.0`) | string\|()=>VNode | `<Icon type="question-circle">` |
+| iconType | Icon `type` of the Icon component (deperated after `1.14.0`) | string | `question-circle` |
 | keyboard | Whether support press esc to close | Boolean | true |
 | mask | Whether show mask or not. | Boolean | true |
 | maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | Boolean | `false` |

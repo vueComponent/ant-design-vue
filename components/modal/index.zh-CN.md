@@ -56,7 +56,9 @@
 | closable | 是否显示右上角的关闭按钮 | boolean | `false` |
 | class | 容器类名 | string | - |
 | content | 内容 | string \|vNode \|function(h) | 无 |
-| iconType | 图标 Icon 类型 | string | question-circle |
+| icon | 自定义图标（1.14.0 新增） | string\|()=>VNode | `<Icon type="question-circle">` |
+| iconType | 图标类型（1.14.0 后废弃，请使用 `icon`） | string | `question-circle` |
+| mask | 是否展示遮罩 | Boolean | true |
 | maskClosable | 点击蒙层是否允许关闭 | Boolean | `false` |
 | keyboard | 是否支持键盘esc关闭 | boolean | true |
 | okText | 确认按钮文字 | string | 确定 |

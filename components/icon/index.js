@@ -13,6 +13,7 @@ import {
 import warning from '../_util/warning';
 import { getTwoToneColor, setTwoToneColor } from './twoTonePrimaryColor';
 import { filterEmpty, getClass } from '../_util/props-util';
+import Base from '../base';
 
 // Initial setting
 VueIcon.add(...Object.keys(allIcons).map(key => allIcons[key]));
@@ -137,6 +138,7 @@ Icon.setTwoToneColor = setTwoToneColor;
 
 /* istanbul ignore next */
 Icon.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Icon.name, Icon);
 };
 

@@ -3,6 +3,7 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import Icon from '../icon';
+import Base from '../base';
 
 const Switch = {
   name: 'ASwitch',
@@ -17,7 +18,7 @@ const Switch = {
     disabled: PropTypes.bool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
-    tabIndex: PropTypes.number,
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
     autoFocus: PropTypes.bool,
@@ -64,6 +65,7 @@ const Switch = {
 
 /* istanbul ignore next */
 Switch.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Switch.name, Switch);
 };
 

@@ -15,6 +15,8 @@ export interface ShowUploadList {
 }
 
 export declare class Upload extends AntdComponent {
+  static Dragger: typeof Upload;
+
   /**
    * File types that can be accepted.
    * @type string

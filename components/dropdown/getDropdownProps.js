@@ -21,4 +21,5 @@ export default () => ({
   forceRender: PropTypes.bool,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
+  minOverlayWidthMatchTrigger: PropTypes.bool,
 });

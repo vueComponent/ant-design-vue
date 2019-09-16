@@ -10,6 +10,55 @@
 
 ---
 
+## 1.3.16
+`2019-08-25`
+- 🐞 修复 `Select` 组件在没有 input 时，卸载组件报错问题 [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)
+- 🐞 修复 `Collapse` 无子元素时报错问题 [#1116](https://github.com/vueComponent/ant-design-vue/pull/1116)
+- 🐞 修复 TypeScript 类型定义。
+
+## 1.3.15
+`2019-08-17`
+- 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 修复 `Form` `initialValue` 为空时报 warning 问题 [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
+- 🐞 修复 `Form` 校验 Number 类型时错误问题 [#1090](https://github.com/vueComponent/ant-design-vue/issues/1090)
+
+## 1.3.14
+`2019-08-12`
+- 🐞 修复 `MenuItem` 解析数组 `class` 不正确问题 [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
+- 🐞 修复 npm install 时报错问题 [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 修复 `Select` 组件在 IE 下无法滚动问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 修复 `Select` 组件不触发 focus 事件问题 [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 修复 `DropdownButton` `size` 属性不生效问题 [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
+- 🐞 修复 `Table` 组件不支持 vue 2.6 v-slot 语法问题 [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
+- 🌟 `Popover` 添加 `builtinPlacements` 属性 [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)
+- 🌟 `Button` 支持 `link` 类型 [#1077](https://github.com/vueComponent/ant-design-vue/pull/1077)
+- 🌟 `Modal.confirm` `title` and `content` 支持 function
+
+## 1.3.13
+`2019-07-22`
+- 🐞 修复 dist 缺少 antd.less 文件问题 [#995](https://github.com/vueComponent/ant-design-vue/issues/995)
+
+## 1.3.12
+`2019-07-22`
+- 🐞 `package.json` `files` 添加 `scripts`
+
+## 1.3.11
+`2019-07-22`
+
+- Dropdown
+  - 🐞修复 `disable` 时的样式问题 [#912](https://github.com/vueComponent/ant-design-vue/pull/912) [#921](https://github.com/vueComponent/ant-design-vue/pull/921)
+  - 🐞修复 `SubMenu` 闪动问题 [#975](https://github.com/vueComponent/ant-design-vue/issues/970)
+- 🌟 `AutoComplete` `Cascader` `DatePicker` `DropDown` `Select` `TimePicker` 添加弹出内容的实例引用 `popupRef` [f9373e](https://github.com/vueComponent/ant-design-vue/commit/f9373e44ce229ab0ba94ababbd686e6ad6e9f10f)
+- 🐞 修复 `DatePicker` 在ie 10 11下 placeholder 为中文时不能打开的问题 [#865](https://github.com/vueComponent/ant-design-vue/issues/865)
+- 🌟 `DatePicker` 添加自定义渲染触发器功能  [#957](https://github.com/vueComponent/ant-design-vue/pull/957)
+- 🌟 `@ant-design/icons-vue` 升级为 `^2.0.0`
+- 🌟 `Icon` 添加属性 `focusable="false"` [#924](https://github.com/vueComponent/ant-design-vue/issues/924)
+- 🐞 修复自定义 `Form` 校验自定义组件时提示 `warning` 问题 [#915](https://github.com/vueComponent/ant-design-vue/issues/915)
+- 🐞 修复 `FormItem` `v-decorator` 指令报错问题 [#930](https://github.com/vueComponent/ant-design-vue/issues/930)
+- 🐞 修复 `Upload` 组件在 `form.resetFields()` 时报错问题 [#929](https://github.com/vueComponent/ant-design-vue/pull/929)
+- 🐞 修复 `Select` 显示跳动问题 [#970](https://github.com/vueComponent/ant-design-vue/issues/970)
+- 🐞 修复 TypeScript 类型定义。
+
 ## 1.3.10
 `2019-06-11`
 - 🐞 移除打包后多余的 `module.export` [#850](https://github.com/vueComponent/ant-design-vue/issues/850)

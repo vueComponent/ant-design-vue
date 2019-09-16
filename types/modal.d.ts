@@ -37,9 +37,9 @@ export interface ModalOptions {
 
   /**
    * Modal content
-   * @type string | VNode
+   * @type string | VNode | (h) => VNode
    */
-  content?: string | VNode;
+  content?: any;
 
   /**
    * Icon type of the Icon component
@@ -90,9 +90,9 @@ export interface ModalOptions {
 
   /**
    * Title
-   * @type string | VNode
+   * @type string | VNode | (h) => VNode
    */
-  title?: string | VNode;
+  title?: any;
 
   /**
    * Width of the modal dialog

@@ -6,6 +6,7 @@ import omit from 'omit.js';
 import getScroll from '../_util/getScroll';
 import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
+import Base from '../base';
 
 function getTargetRect(target) {
   return target !== window ? target.getBoundingClientRect() : { top: 0, left: 0, bottom: 0 };
@@ -259,6 +260,7 @@ const Affix = {
 
 /* istanbul ignore next */
 Affix.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Affix.name, Affix);
 };
 

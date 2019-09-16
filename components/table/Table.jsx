@@ -765,8 +765,9 @@ export default {
         const key = this.getColumnKey(column, i);
         let filterDropdown;
         let sortButton;
+        let sortTitle;
         let customHeaderCell = column.customHeaderCell;
-        const sortTitle = this.getColumnTitle(column.title, {}) || locale.sortTitle;
+        const title = this.renderColumnTitle(column.title);
         const isSortColumn = this.isSortColumn(column);
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
           const colFilters = key in filters ? filters[key] : [];
@@ -785,6 +786,9 @@ export default {
           );
         }
         if (column.sorter) {
+          sortTitle =
+            this.getColumnTitle(Array.isArray(title) ? filterEmpty(title)[0] : title, {}) ||
+            locale.sortTitle;
           const isAscend = isSortColumn && sortOrder === 'ascend';
           const isDescend = isSortColumn && sortOrder === 'descend';
           sortButton = (
@@ -836,7 +840,7 @@ export default {
               title={sortTitleString}
               class={sortButton ? `${prefixCls}-column-sorters` : undefined}
             >
-              {this.renderColumnTitle(column.title)}
+              {title}
               {sortButton}
             </div>,
             filterDropdown,

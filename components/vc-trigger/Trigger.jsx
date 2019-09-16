@@ -101,7 +101,7 @@ export default {
     sPopupVisible(val) {
       this.$nextTick(() => {
         this.renderComponent(null, () => {
-          this.afterPopupVisibleChange(val);
+          this.afterPopupVisibleChange(this.sPopupVisible);
         });
       });
     },
@@ -237,10 +237,12 @@ export default {
     },
 
     onBlur(e) {
-      this.fireEvents('blur', e);
-      this.clearDelayTimer();
-      if (this.isBlurToHide()) {
-        this.delaySetPopupVisible(false, this.$props.blurDelay);
+      if (!contains(e.target, e.relatedTarget)) {
+        this.fireEvents('blur', e);
+        this.clearDelayTimer();
+        if (this.isBlurToHide()) {
+          this.delaySetPopupVisible(false, this.$props.blurDelay);
+        }
       }
     },
 

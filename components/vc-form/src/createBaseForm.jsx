@@ -6,7 +6,7 @@ import omit from 'lodash/omit';
 import createFieldsStore from './createFieldsStore';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, getEvents } from '../../_util/props-util';
+import { getOptionProps, getEvents, slotHasProp, getComponentName } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
 
 import {
@@ -60,7 +60,7 @@ function createBaseForm(option = {}, mixins = []) {
         this.instances = {};
         this.cachedBind = {};
         this.clearedFieldMetaCache = {};
-
+        this.formItems = {};
         this.renderFields = {};
         this.domFields = {};
 
@@ -172,8 +172,9 @@ function createBaseForm(option = {}, mixins = []) {
           return cache[action].fn;
         },
 
-        getFieldDecorator(name, fieldOption) {
+        getFieldDecorator(name, fieldOption, formItem) {
           const { props, ...restProps } = this.getFieldProps(name, fieldOption);
+          this.formItems[name] = formItem;
           return fieldElem => {
             // We should put field in record if it is rendered
             this.renderFields[name] = true;
@@ -184,16 +185,27 @@ function createBaseForm(option = {}, mixins = []) {
             if (process.env.NODE_ENV !== 'production') {
               const valuePropName = fieldMeta.valuePropName;
               warning(
-                !(valuePropName in originalProps),
+                !slotHasProp(fieldElem, valuePropName),
                 `\`getFieldDecorator\` will override \`${valuePropName}\`, ` +
                   `so please don't set \`${valuePropName} and v-model\` directly ` +
                   `and use \`setFieldsValue\` to set it.`,
+              );
+              warning(
+                !(
+                  !slotHasProp(fieldElem, valuePropName) &&
+                  valuePropName in originalProps &&
+                  !(fieldOption && initialValue in fieldOption)
+                ),
+                `${getComponentName(
+                  fieldElem.componentOptions,
+                )} \`default value\` can not collect, ` +
+                  ` please use \`option.initialValue\` to set default value.`,
               );
               const defaultValuePropName = `default${valuePropName[0].toUpperCase()}${valuePropName.slice(
                 1,
               )}`;
               warning(
-                !(defaultValuePropName in originalProps),
+                !slotHasProp(fieldElem, defaultValuePropName),
                 `\`${defaultValuePropName}\` is invalid ` +
                   `for \`getFieldDecorator\` will set \`${valuePropName}\`,` +
                   ` please use \`option.initialValue\` instead.`,
@@ -330,17 +342,26 @@ function createBaseForm(option = {}, mixins = []) {
         setFields(maybeNestedFields, callback) {
           const fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields);
           this.fieldsStore.setFields(fields);
+          const changedFields = Object.keys(fields).reduce(
+            (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
+            {},
+          );
           if (onFieldsChange) {
-            const changedFields = Object.keys(fields).reduce(
-              (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
-              {},
-            );
             onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields());
           }
-          if (templateContext) {
-            templateContext.$forceUpdate();
-          } else {
-            this.$forceUpdate();
+          const formContext = templateContext || this;
+          let allUpdate = false;
+          Object.keys(changedFields).forEach(key => {
+            let formItem = this.formItems[key];
+            formItem = typeof formItem === 'function' ? formItem() : formItem;
+            if (formItem && formItem.itemSelfUpdate) {
+              formItem.$forceUpdate();
+            } else {
+              allUpdate = true;
+            }
+          });
+          if (allUpdate) {
+            formContext.$forceUpdate();
           }
           this.$nextTick(() => {
             callback && callback();

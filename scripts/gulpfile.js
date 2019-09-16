@@ -110,12 +110,18 @@ function copyHtml() {
   );
 }
 
-gulp.task('_site', done => {
-  dist(() => {
+gulp.task(
+  '_site',
+  gulp.series(done => {
+    dist(() => {
+      copyHtml();
+      done();
+    });
+  }),
+);
+gulp.task(
+  'copy-html',
+  gulp.series(() => {
     copyHtml();
-    done();
-  });
-});
-gulp.task('copy-html', () => {
-  copyHtml();
-});
+  }),
+);

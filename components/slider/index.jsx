@@ -5,6 +5,7 @@ import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
+import Base from '../base';
 
 // export interface SliderMarks {
 //   [key]: React.ReactNode | {
@@ -131,6 +132,7 @@ const Slider = {
 
 /* istanbul ignore next */
 Slider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Slider.name, Slider);
 };
 

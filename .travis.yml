@@ -1,7 +1,7 @@
 language: node_js
 sudo: required
 node_js:
-  - 10.10.0
+  - 12.4.0
 before_script:
   - npm install vue vue-template-compiler
 script:

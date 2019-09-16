@@ -12,6 +12,7 @@ import {
 } from '../_util/props-util';
 import Icon from '../icon';
 import { cloneElement } from '../_util/vnode';
+import Base from '../base';
 
 const AbstractSelectProps = () => ({
   prefixCls: PropTypes.string,
@@ -261,6 +262,7 @@ const Select = {
 
 /* istanbul ignore next */
 Select.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Select.name, Select);
   Vue.component(Select.Option.name, Select.Option);
   Vue.component(Select.OptGroup.name, Select.OptGroup);

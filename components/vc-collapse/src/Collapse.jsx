@@ -70,44 +70,46 @@ export default {
       const activeKey = this.stateActiveKey;
       const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props;
       const newChildren = [];
-      this.$slots.default.forEach((child, index) => {
-        if (isEmptyElement(child)) return;
-        const { header, headerClass, disabled } = getPropsData(child);
-        let isActive = false;
-        const key = child.key || String(index);
-        if (accordion) {
-          isActive = activeKey[0] === key;
-        } else {
-          isActive = activeKey.indexOf(key) > -1;
-        }
+      if (this.$slots.default) {
+        this.$slots.default.forEach((child, index) => {
+          if (isEmptyElement(child)) return;
+          const { header, headerClass, disabled } = getPropsData(child);
+          let isActive = false;
+          const key = child.key || String(index);
+          if (accordion) {
+            isActive = activeKey[0] === key;
+          } else {
+            isActive = activeKey.indexOf(key) > -1;
+          }
 
-        let panelEvents = {};
-        if (!disabled && disabled !== '') {
-          panelEvents = {
-            itemClick: () => {
-              this.onClickItem(key);
+          let panelEvents = {};
+          if (!disabled && disabled !== '') {
+            panelEvents = {
+              itemClick: () => {
+                this.onClickItem(key);
+              },
+            };
+          }
+
+          const props = {
+            props: {
+              header,
+              headerClass,
+              isActive,
+              prefixCls,
+              destroyInactivePanel,
+              openAnimation: this.currentOpenAnimations,
+              accordion,
+              expandIcon,
+            },
+            on: {
+              ...panelEvents,
             },
           };
-        }
 
-        const props = {
-          props: {
-            header,
-            headerClass,
-            isActive,
-            prefixCls,
-            destroyInactivePanel,
-            openAnimation: this.currentOpenAnimations,
-            accordion,
-            expandIcon,
-          },
-          on: {
-            ...panelEvents,
-          },
-        };
-
-        newChildren.push(cloneElement(child, props));
-      });
+          newChildren.push(cloneElement(child, props));
+        });
+      }
       return newChildren;
     },
     setActiveKey(activeKey) {

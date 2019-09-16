@@ -8,8 +8,7 @@ import { PREFIX_CLS } from './Constants';
 import Header from './Header';
 import interopDefault from '../_util/interopDefault';
 import enUS from './locale/en_US';
-
-export { HeaderProps } from './Header';
+import Base from '../base';
 
 function noop() {
   return null;
@@ -242,7 +241,8 @@ const Calendar = {
 
 /* istanbul ignore next */
 Calendar.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Calendar.name, Calendar);
 };
-
+export { HeaderProps } from './Header';
 export default Calendar;

@@ -1,5 +1,6 @@
 import Modal from './Modal';
 import modalConfirm from './confirm';
+import Base from '../base';
 
 // export { ActionButtonProps } from './ActionButton'
 // export { ModalProps, ModalFuncProps } from './Modal'
@@ -62,6 +63,7 @@ Modal.confirm = confirm;
 
 /* istanbul ignore next */
 Modal.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Modal.name, Modal);
 };
 

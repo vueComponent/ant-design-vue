@@ -12,6 +12,7 @@ const DropdownButtonProps = {
   ...ButtonGroupProps,
   ...DropdownProps,
   type: PropTypes.oneOf(['primary', 'ghost', 'dashed', 'danger', 'default']).def('default'),
+  size: PropTypes.oneOf(['small', 'large', 'default']).def('default'),
   htmlType: ButtonTypesProps.htmlType,
   disabled: PropTypes.bool,
   prefixCls: PropTypes.string.def('ant-dropdown-button'),
@@ -74,8 +75,15 @@ export default {
       dropdownProps.props.visible = visible;
     }
 
+    const buttonGroupProps = {
+      props: {
+        ...restProps,
+      },
+      class: prefixCls,
+    };
+
     return (
-      <ButtonGroup {...restProps} class={prefixCls}>
+      <ButtonGroup {...buttonGroupProps}>
         <Button type={type} disabled={disabled} onClick={this.onClick} htmlType={htmlType}>
           {this.$slots.default}
         </Button>

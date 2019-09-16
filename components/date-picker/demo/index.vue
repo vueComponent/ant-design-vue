@@ -11,6 +11,7 @@ import Size from './size';
 import StartEnd from './start-end';
 import Time from './time';
 import Suffix from './suffix';
+import Text from './text';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
@@ -47,6 +48,7 @@ export default {
         <Size/>
         <StartEnd/>
         <Time/>
+        <Text />
         <Suffix />
         <api>
           <CN slot='cn' />

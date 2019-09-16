@@ -10,6 +10,55 @@
 
 ---
 
+## 1.3.16
+`2019-08-25`
+- 🐞 Fix `Select` component to uninstall component error when there is no input [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)
+- 🐞 Fix `Collapse` error when no child element [#1116](https://github.com/vueComponent/ant-design-vue/pull/1116)
+- 🐞 Fix TypeScript type definitions.
+
+## 1.3.15
+`2019-08-17`
+- 🐞 Fix `Select` component cannot scroll under IE [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Form` `initialValue` warning  [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
+- 🐞 Fix `Form` error when verifying `Number` type [#1090](https://github.com/vueComponent/ant-design-vue/issues/1090)
+
+## 1.3.14
+`2019-08-12`
+- 🐞 Fix `MenuItem` parsing array `class` incorrect question [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
+- 🐞 Fix an error when npm install [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
+- 🐞 Fix `Select` component cannot scroll under IE [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Select` component does not trigger focus event problem [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `DropdownButton` `size` attribute does not work [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
+- 🐞 Fix `Table` component does not support vue 2.6 v-slot syntax problem [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
+- 🌟 `Popover` add `builtinPlacements` attribute [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)
+- 🌟 `Button` support `link` type [#1077](https://github.com/vueComponent/ant-design-vue/pull/1077)
+- 🌟 `Modal.confirm` `title` and `content` support function [#824](https://github.com/vueComponent/ant-design-vue/issues/824)
+
+## 1.3.13
+`2019-07-22`
+- 🐞 Fix `dist` missing `antd.less` file problem [#995](https://github.com/vueComponent/ant-design-vue/issues/995)
+
+## 1.3.12
+`2019-07-22`
+- 🐞 `package.json` `files` add `scripts`
+
+## 1.3.11
+`2019-07-22`
+
+- Dropdown
+  - 🐞 Uodate disable style [#912](https://github.com/vueComponent/ant-design-vue/pull/912) [#921](https://github.com/vueComponent/ant-design-vue/pull/921)
+  - 🐞 Fix `SubMenu` flashing problem [#975](https://github.com/vueComponent/ant-design-vue/issues/970)
+- 🌟 `AutoComplete` `Cascader` `DatePicker` `DropDown` `Select` `TimePicker` add an instance of the popup reference `popupRef`  [f9373e](https://github.com/vueComponent/ant-design-vue/commit/f9373e44ce229ab0ba94ababbd686e6ad6e9f10f)
+- 🐞 Fix `DatePicker` can not open when placeholder is chinese at ie 10 and 11 [#865](https://github.com/vueComponent/ant-design-vue/issues/865)
+- 🌟 `DatePicker` add custom render trigger [#957](https://github.com/vueComponent/ant-design-vue/pull/957)
+- 🌟 `@ant-design/icons-vue` update to `^2.0.0`
+- 🌟 `Icon` add `focusable="false"` [#924](https://github.com/vueComponent/ant-design-vue/issues/924)
+- 🐞 Fix custom `Form` prompts for custom components. `warning` problem [#915](https://github.com/vueComponent/ant-design-vue/issues/915)
+- 🐞 Fix `FormItem` `v-decorator` error [#930](https://github.com/vueComponent/ant-design-vue/issues/930)
+- 🐞 Fixed an issue where the `Upload` component reported an error in `form.resetFields()` [#929](https://github.com/vueComponent/ant-design-vue/pull/929)
+- 🐞 Fix `Select` shows bounce problem [#970](https://github.com/vueComponent/ant-design-vue/issues/970)
+- 🐞 Fix TypeScript type definitions.
+
 ## 1.3.10
 `2019-06-11`
 - 🐞 Remove useless `module.export` of package. [#850](https://github.com/vueComponent/ant-design-vue/issues/850)
@@ -32,7 +81,7 @@
 `2019-04-04`
 - 🐞 Fix `Table` unclickable problem under IE [#504](https://github.com/vueComponent/ant-design-vue/issues/504)
 - 🐞 Fix `Table` Header is not aligned under Firefox [#579](https://github.com/vueComponent/ant-design-vue/issues/579)
-- 🌟 Drawer `Drawer` add custom `handel` 
+- 🌟 Drawer `Drawer` add custom `handel`
 - 🐞 Fix TypeScript type definitions.
 
 ## 1.3.7

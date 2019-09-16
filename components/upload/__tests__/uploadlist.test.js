@@ -339,7 +339,11 @@ describe('Upload List', () => {
   it('should generate thumbUrl from file', done => {
     const handlePreview = jest.fn();
     const newFileList = [...fileList];
-    const newFile = { ...fileList[0], uid: -3, originFileObj: new File([], 'xxx.png', { type: 'image/png' }) };
+    const newFile = {
+      ...fileList[0],
+      uid: -3,
+      originFileObj: new File([], 'xxx.png', { type: 'image/png' }),
+    };
     delete newFile.thumbUrl;
     newFileList.push(newFile);
     const props = {
@@ -358,7 +362,11 @@ describe('Upload List', () => {
     };
     const wrapper = mount(Upload, props);
     setTimeout(async () => {
-      const newFile = { ...fileList[2], uid: -4, originFileObj: new File([], 'xxx.png', { type: 'image/png' }) };
+      const newFile = {
+        ...fileList[2],
+        uid: -4,
+        originFileObj: new File([], 'xxx.png', { type: 'image/png' }),
+      };
       wrapper.setProps({
         defaultFileList: newFileList.push(newFile),
       });

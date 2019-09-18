@@ -40,12 +40,7 @@ const Rate = {
     characterRender(node, { index }) {
       const { tooltips } = this.$props;
       if (!tooltips) return node;
-      const tooltipsProps = {
-        props: {
-          title: tooltips[index],
-        },
-      };
-      return <Tooltip {...tooltipsProps}>{node}</Tooltip>;
+      return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
     },
   },
   render() {

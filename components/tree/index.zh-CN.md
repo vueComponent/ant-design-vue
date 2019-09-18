@@ -24,7 +24,7 @@
 | multiple | 支持点选多个节点（节点本身） | boolean | false |
 | selectedKeys(.sync) | （受控）设置选中的树节点 | string\[] \| number\[] | - |
 | showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |
-| switcherIcon | 自定义树节点的展开/折叠图标 | slot(vnode) | - |
+| switcherIcon | 自定义树节点的展开/折叠图标 | slot | - |
 | showLine | 是否展示连接线 | boolean | false |
 
 

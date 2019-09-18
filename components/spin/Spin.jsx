@@ -51,10 +51,11 @@ export default {
   },
   data() {
     const { spinning, delay } = this;
+    const shouldBeDelayed = shouldDelay(spinning, delay);
     this.originalUpdateSpinning = this.updateSpinning;
     this.debouncifyUpdateSpinning(this.$props);
     return {
-      sSpinning: spinning && !shouldDelay(spinning, delay),
+      sSpinning: spinning && !shouldBeDelayed,
     };
   },
   mounted() {

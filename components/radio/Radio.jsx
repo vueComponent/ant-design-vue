@@ -12,9 +12,7 @@ export default {
     prop: 'checked',
   },
   props: {
-    prefixCls: {
-      type: String,
-    },
+    prefixCls: PropTypes.string,
     defaultChecked: Boolean,
     checked: { type: Boolean, default: undefined },
     disabled: Boolean,
@@ -41,6 +39,12 @@ export default {
     blur() {
       this.$refs.vcCheckbox.blur();
     },
+    onChange(e) {
+      this.$emit('change', e);
+      if (this.radioGroupContext && this.radioGroupContext.onRadioChange) {
+        this.radioGroupContext.onRadioChange(e);
+      }
+    },
   },
 
   render() {
@@ -60,7 +64,7 @@ export default {
 
     if (radioGroup) {
       radioProps.props.name = radioGroup.name;
-      radioProps.on.change = radioGroup.onRadioChange;
+      radioProps.on.change = this.onChange;
       radioProps.props.checked = props.value === radioGroup.stateValue;
       radioProps.props.disabled = props.disabled || radioGroup.disabled;
     } else {

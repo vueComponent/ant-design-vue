@@ -1,4 +1,4 @@
-import warning from 'warning';
+import warning from '../_util/warning';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { Select as VcSelect, Option, OptGroup } from '../vc-select';
@@ -96,7 +96,6 @@ const Select = {
   name: 'ASelect',
   props: {
     ...SelectProps,
-    prefixCls: PropTypes.string,
     showSearch: PropTypes.bool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),

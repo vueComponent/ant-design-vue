@@ -16,7 +16,7 @@ You can customize icons for different nodes.
     defaultExpandAll
     :defaultSelectedKeys="['0-0-0']"
   >
-    <a-icon type="down" slot="switcherIcon" />
+    <a-icon type="down" slot="switcherIcon" class="test" />
     <a-icon slot="smile" type="smile-o" />
     <a-icon slot="meh" type="smile-o" />
     <template slot="custom" slot-scope="{selected}">

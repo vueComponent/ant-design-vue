@@ -8,7 +8,7 @@ export const StatisticProps = {
   decimalSeparator: PropTypes.string,
   groupSeparator: PropTypes.string,
   format: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   valueStyle: PropTypes.any,
   valueRender: PropTypes.any,
   formatter: PropTypes.any,
@@ -21,7 +21,6 @@ export const StatisticProps = {
 export default {
   name: 'AStatistic',
   props: initDefaultProps(StatisticProps, {
-    prefixCls: 'ant-statistic',
     decimalSeparator: '.',
     groupSeparator: ',',
   }),
@@ -37,9 +36,9 @@ export default {
     const title = getComponentFromProp(this, 'title');
     let prefix = getComponentFromProp(this, 'prefix');
     let suffix = getComponentFromProp(this, 'suffix');
-    const formatter = getComponentFromProp(this, 'formatter');
+    const formatter = getComponentFromProp(this, 'formatter', {}, false);
     let valueNode = (
-      <StatisticNumber {...{ props: this.$props }} value={value} formatter={formatter} />
+      <StatisticNumber {...{ props: { ...this.$props, prefixCls, value, formatter } }} />
     );
     if (valueRender) {
       valueNode = valueRender(valueNode);

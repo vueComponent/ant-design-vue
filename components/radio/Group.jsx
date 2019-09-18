@@ -11,9 +11,7 @@ export default {
     prop: 'value',
   },
   props: {
-    prefixCls: {
-      type: String,
-    },
+    prefixCls: PropTypes.string,
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     size: {
@@ -103,7 +101,6 @@ export default {
               prefixCls={prefixCls}
               disabled={props.disabled}
               value={option}
-              onChange={this.onRadioChange}
               checked={this.stateValue === option}
             >
               {option}
@@ -116,7 +113,6 @@ export default {
               prefixCls={prefixCls}
               disabled={option.disabled || props.disabled}
               value={option.value}
-              onChange={this.onRadioChange}
               checked={this.stateValue === option.value}
             >
               {option.label}

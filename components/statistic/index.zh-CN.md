@@ -5,13 +5,14 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | -------- | ----------- | ---- | ------- |
 | decimalSeparator | 设置小数点 | string | . |
-| formatter | 自定义数值展示 | v-slot \| (h) => VNode | - |
+| formatter | 自定义数值展示 | v-slot \| ({h, value}) => VNode | - |
 | groupSeparator | 设置千分位标识符 | string | , |
 | precision | 数值精度 | number | - |
 | prefix | 设置数值的前缀 | string \| v-slot | - |
 | suffix | 设置数值的后缀 | string \| v-slot | - |
 | title | 数值的标题 | string \| v-slot | - |
 | value | 数值内容 | string \| number | - |
+| valueStyle | 设置数值的样式 | style | - |
 
 ### Statistic.Countdown
 
@@ -22,6 +23,7 @@
 | suffix | 设置数值的后缀 | string \| v-slot | - |
 | title | 数值的标题 | string \| v-slot | - |
 | value | 数值内容 | number \| moment | - |
+| valueStyle | 设置数值的样式 | style | - |
 
 #### Statistic.Countdown事件
 | 事件名称 | 说明 | 回调参数 |

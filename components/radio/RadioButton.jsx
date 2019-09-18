@@ -1,4 +1,5 @@
 import Radio from './Radio';
+import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -6,9 +7,6 @@ export default {
   name: 'ARadioButton',
   props: {
     ...Radio.props,
-    prefixCls: {
-      type: String,
-    },
   },
   inject: {
     radioGroupContext: { default: undefined },

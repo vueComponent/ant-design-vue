@@ -16,8 +16,6 @@ const md = {
 
   - 网络较慢，需要长时间等待加载处理的情况下。
   - 图文信息内容较多的列表/卡片中。
-  - 只适合用在第一次加载数据的场景。
-  - 可以被 Spin 完全代替，但是在可用的场景下可以比 Spin 提供更好的视觉效果和用户体验。
             ## 代码演示`,
   us: `# Skeleton
 
@@ -27,8 +25,6 @@ const md = {
 
   - When resource needs long time to load, like low network speed.
   - The component contains much information. Such as List or Card.
-  - Only works when loading data at first time.
-  - Could be replaced by Spin in all situation, but provide better user experience then spin if it works.
   ## Examples
   `,
 };
@@ -38,12 +34,12 @@ export default {
   type: 'Feedback',
   title: 'Skeleton',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <br/>
-        <Basic/>
+        <md cn={md.cn} us={md.us} />
+        <br />
+        <Basic />
         <br />
         <Complex />
         <br />
@@ -52,12 +48,12 @@ export default {
         <Children />
         <br />
         <List />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

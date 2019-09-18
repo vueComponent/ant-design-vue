@@ -12,12 +12,11 @@ export default {
       groupSeparator = '',
       prefixCls,
     } = context.props;
-
     let valueNode;
 
     if (typeof formatter === 'function') {
       // Customize formatter
-      valueNode = formatter(value);
+      valueNode = formatter({ value, h });
     } else {
       // Internal formatter
       const val = String(value);

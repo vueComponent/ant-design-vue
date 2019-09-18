@@ -17,24 +17,16 @@ export default {
     format: 'HH:mm:ss',
   }),
 
-  data() {
-    return {
-      uniKey: 0,
-    };
+  created() {
+    this.countdownId = undefined;
   },
 
-  countdownId: undefined,
-
   mounted() {
-    this.$nextTick(() => {
-      this.syncTimer();
-    });
+    this.syncTimer();
   },
 
   updated() {
-    this.$nextTick(() => {
-      this.syncTimer();
-    });
+    this.syncTimer();
   },
 
   beforeDestroy() {
@@ -53,11 +45,9 @@ export default {
     },
 
     startTimer() {
-      if (this.countdownId) {
-        return;
-      }
+      if (this.countdownId) return;
       this.countdownId = window.setInterval(() => {
-        this.uniKey++;
+        this.$refs.statistic.$forceUpdate();
       }, REFRESH_INTERVAL);
     },
 
@@ -74,7 +64,7 @@ export default {
       }
     },
 
-    formatCountdown(value, config) {
+    formatCountdown({ value, config }) {
       const { format } = this.$props;
       return formatCountdown(value, { ...config, format });
     },
@@ -91,13 +81,14 @@ export default {
   render() {
     return (
       <Statistic
-        key={this.uniKey}
+        ref="statistic"
         {...{
           props: {
             ...this.$props,
             valueRender: this.valueRenderHtml,
             formatter: this.formatCountdown,
           },
+          on: this.$listeners,
         }}
       />
     );

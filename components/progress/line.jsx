@@ -1,5 +1,4 @@
 import { validProgress } from './utils';
-import { ProgressProps } from './progress';
 
 const Line = {
   functional: true,

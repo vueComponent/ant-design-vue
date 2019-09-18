@@ -1,6 +1,5 @@
 import { Circle as VCCircle } from '../vc-progress';
 import { validProgress } from './utils';
-import { ProgressProps } from './progress';
 
 const statusColorMap = {
   normal: '#108ee9',

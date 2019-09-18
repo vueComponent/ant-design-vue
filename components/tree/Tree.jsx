@@ -141,7 +141,6 @@ export default {
           const switcherOriginCls = getClass(switcherIcon[0]);
           return cloneElement(switcherIcon, {
             class: {
-              ...switcherOriginCls,
               [switcherCls]: true,
             },
           });

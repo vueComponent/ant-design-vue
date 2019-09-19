@@ -15,6 +15,8 @@
 | getPopupContainer | To set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. | Function(triggerNode) | () => document.body |
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{value: string, label: VNode, halfChecked: string[]}` | boolean | false |
 | loadData | Load data asynchronously. | function(node) | - |
+| maxTagCount | Max tag count to show | number | - |
+| maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - |
 | multiple | Support multiple or not, will be `true` when enable `treeCheckable`. | boolean | false |
 | placeholder | Placeholder of the select input | string\|slot | - |
 | searchPlaceholder | Placeholder of the search input | string\|slot | - |

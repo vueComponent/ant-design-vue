@@ -1,7 +1,7 @@
 import Icon from '../icon';
 import VcTabs, { TabPane } from '../vc-tabs/src';
 import TabContent from '../vc-tabs/src/TabContent';
-import isFlexSupported from '../_util/isFlexSupported';
+import { isFlexSupported } from '../_util/styleChecker';
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
@@ -36,7 +36,7 @@ export default {
   mounted() {
     const NO_FLEX = ' no-flex';
     const tabNode = this.$el;
-    if (tabNode && !isFlexSupported() && tabNode.className.indexOf(NO_FLEX) === -1) {
+    if (tabNode && !isFlexSupported && tabNode.className.indexOf(NO_FLEX) === -1) {
       tabNode.className += NO_FLEX;
     }
   },

@@ -17,7 +17,7 @@ export declare class TimePicker extends AntdComponent {
    * @default true
    * @type boolean
    */
-  allowEmpty: boolean;
+  allowClear: boolean;
 
   /**
    * get focus when component mounted
@@ -131,6 +131,8 @@ export declare class TimePicker extends AntdComponent {
    * @type string
    */
   popupClassName: string;
+
+  popupStyle: object;
 
   /**
    * interval between seconds in picker

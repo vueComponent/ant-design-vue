@@ -115,8 +115,8 @@ const Slider = {
       ...restProps
     } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('skeleton', customizePrefixCls);
-    const tooltipPrefixCls = getPrefixCls('skeleton', customizeTooltipPrefixCls);
+    const prefixCls = getPrefixCls('slider', customizePrefixCls);
+    const tooltipPrefixCls = getPrefixCls('tooltip', customizeTooltipPrefixCls);
     if (range) {
       const vcRangeProps = {
         props: {

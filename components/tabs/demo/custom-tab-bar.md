@@ -17,7 +17,7 @@ Customized bar of tab.
     <a-tab-pane tab="Tab 2" key="2" forceRender>Content of Tab Pane 2</a-tab-pane>
     <a-tab-pane tab="Tab 3" key="3">Content of Tab Pane 3</a-tab-pane>
     <template slot="renderTabBar" slot-scope="props, DefaultTabBar">
-      <component :is="DefaultTabBar" {...props} />
+      <component :is="DefaultTabBar" v-bind="props" :style="{ zIndex: 1, background: '#fff' }" />
     </template>
   </a-tabs>
 </div>

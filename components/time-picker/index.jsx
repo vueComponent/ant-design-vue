@@ -154,7 +154,7 @@ const TimePicker = {
 
     getAllowClear() {
       const { allowClear, allowEmpty } = this.$props;
-      if ('allowClear' in this.$props) {
+      if (hasProp(this, 'allowClear')) {
         return allowClear;
       }
       return allowEmpty;
@@ -207,6 +207,7 @@ const TimePicker = {
         props: {
           ...generateShowHourMinuteSecond(format),
           ...props,
+          allowEmpty: this.getAllowClear(),
           prefixCls,
           getPopupContainer: getPopupContainer || getContextPopupContainer,
           format,

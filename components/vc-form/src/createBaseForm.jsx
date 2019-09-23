@@ -61,7 +61,7 @@ function createBaseForm(option = {}, mixins = []) {
         this.instances = {};
         this.cachedBind = {};
         this.clearedFieldMetaCache = {};
-
+        this.formItems = {};
         this.renderFields = {};
         this.domFields = {};
 
@@ -182,8 +182,9 @@ function createBaseForm(option = {}, mixins = []) {
           return cache[action].fn;
         },
 
-        getFieldDecorator(name, fieldOption) {
+        getFieldDecorator(name, fieldOption, formItem) {
           const { props, ...restProps } = this.getFieldProps(name, fieldOption);
+          this.formItems[name] = formItem;
           return fieldElem => {
             // We should put field in record if it is rendered
             this.renderFields[name] = true;
@@ -351,24 +352,30 @@ function createBaseForm(option = {}, mixins = []) {
         setFields(maybeNestedFields, callback) {
           const fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields);
           this.fieldsStore.setFields(fields);
+          const changedFields = Object.keys(fields).reduce(
+            (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
+            {},
+          );
           if (onFieldsChange) {
             const changedFields = Object.keys(fields).reduce(
               (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
               {},
             );
-            onFieldsChange(
-              {
-                [formPropName]: this.getForm(),
-                ...this.$props,
-              },
-              changedFields,
-              this.fieldsStore.getNestedAllFields(),
-            );
+            onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields());
           }
-          if (templateContext) {
-            templateContext.$forceUpdate();
-          } else {
-            this.$forceUpdate();
+          const formContext = templateContext || this;
+          let allUpdate = false;
+          Object.keys(changedFields).forEach(key => {
+            let formItem = this.formItems[key];
+            formItem = typeof formItem === 'function' ? formItem() : formItem;
+            if (formItem && formItem.itemSelfUpdate) {
+              formItem.$forceUpdate();
+            } else {
+              allUpdate = true;
+            }
+          });
+          if (allUpdate) {
+            formContext.$forceUpdate();
           }
           this.$nextTick(() => {
             callback && callback();

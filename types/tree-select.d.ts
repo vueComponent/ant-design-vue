@@ -89,6 +89,10 @@ export declare class TreeSelect extends AntdComponent {
    */
   loadData: (node: any) => void;
 
+  maxTagCount: number;
+
+  maxTagPlaceholder: any;
+
   /**
    * Support multiple or not, will be true when enable treeCheckable.
    * @default false

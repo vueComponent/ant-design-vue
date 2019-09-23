@@ -63,6 +63,7 @@ const SelectProps = {
   firstActiveValue: PropTypes.oneOfType([String, PropTypes.arrayOf(String)]),
   maxTagCount: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
+  maxTagTextLength: PropTypes.number,
   dropdownMatchSelectWidth: PropTypes.bool,
   optionFilterProp: PropTypes.string,
   labelInValue: PropTypes.boolean,

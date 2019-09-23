@@ -26,6 +26,7 @@
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 Select 的 value 类型从 `string` 变为 `{key: string, label: vNodes}` 的格式 | boolean | false |
 | maxTagCount | 最多显示多少个 tag | number | - |
 | maxTagPlaceholder | 隐藏 tag 时显示的内容 | slot/function(omittedValues) | - |
+| maxTagTextLength	| 最大显示的 tag 文本长度 | number | - |
 | mode | 设置 Select 的模式为多选或标签 | 'default' \| 'multiple' \| 'tags' \| 'combobox' | - |
 | notFoundContent | 当下拉列表为空时显示的内容 | string\|slot | 'Not Found' |
 | optionFilterProp | 搜索时过滤对应的 option 属性，如设置为 children 表示对内嵌内容进行搜索 | string | value |

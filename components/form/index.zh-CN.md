@@ -7,6 +7,7 @@
 | form | 经 `Form.create()` 包装过的组件会自带 `this.form` 属性，如果使用template语法，可以使用this.$form.createForm(this, options) | object | 无 |
 | hideRequiredMark | 隐藏所有表单项的必选标记 | Boolean | false |
 | layout | 表单布局 | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
+| selfUpdate | 自定义字段更新逻辑，说明[见下](/components/form-cn/#selfUpdate)，需1.3.17版本以上 | boolean | false |
 
 ### 事件
 | 事件名称 | 说明 | 回调参数 |
@@ -175,6 +176,7 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |
 | validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string |  |
 | wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/components/grid-cn/#Col) |  |
+| selfUpdate | 自定义字段更新逻辑，你可以通过 Form 的 selfUpdate 进行统一设置。当和 Form 同时设置时，以 Item 为准。 说明[见下](/components/form-cn/#selfUpdate) 需1.3.17版本以上 | boolean | false |
 
 ### 校验规则
 
@@ -194,4 +196,10 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 
 更多高级用法可研究 [async-validator](https://github.com/yiminghe/async-validator)。
 
+
+### selfUpdate
+
+设置 `selfUpdate` 为 `true` 后，`Form` 通过增量方式更新，只更新被修改的字段。大部分场景下，你只需要编写代码即可。而在某些特定场景，例如修改某个字段值后出现新的字段选项、或者纯粹希望表单任意变化都需要进行渲染。你可以通过修改 Form.Item 取消 selfUpdate，或者在 `change` / `onValuesChange` 回调中手动调用 `this.$forceUpdate()` 更新组件。[示例]()
+
+如果你并不精通 Vue，并不建议使用 selfUpdate，如果出现性能问题，可以尝试这把 Form 相关的业务独立到一个单独的组件中，减少组件渲染的消耗。
 

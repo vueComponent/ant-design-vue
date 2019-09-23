@@ -79,7 +79,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls, disabled, loadingIcon, ...restProps } = getOptionProps(this);
+    const { prefixCls, disabled, loadingIcon, tabIndex, ...restProps } = getOptionProps(this);
     const checked = this.stateChecked;
     const switchClassName = {
       [prefixCls]: true,
@@ -99,6 +99,7 @@ export default {
         role: 'switch',
         'aria-checked': checked,
         disabled,
+        tabIndex,
       },
       class: switchClassName,
       ref: 'refSwitchNode',

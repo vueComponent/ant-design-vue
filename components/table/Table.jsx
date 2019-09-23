@@ -16,6 +16,7 @@ import {
   isValidElement,
   filterEmpty,
   getAllProps,
+  getComponentFromProp,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -84,7 +85,11 @@ export default {
 
   data() {
     // this.columns = props.columns || normalizeColumns(props.children)
-
+    const props = getOptionProps(this);
+    warning(
+      !('expandedRowRender' in props) || !('scroll' in props),
+      '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
+    );
     this.createComponents(this.components);
     this.CheckboxPropsCache = {};
 
@@ -92,7 +97,6 @@ export default {
       selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
       selectionDirty: false,
     });
-    this.prevRowSelection = this.rowSelection ? { ...this.rowSelection } : this.rowSelection;
     return {
       ...this.getDefaultSortOrder(this.columns),
       // 减少状态
@@ -118,7 +122,7 @@ export default {
       deep: true,
     },
     rowSelection: {
-      handler(val) {
+      handler(val, oldVal) {
         if (val && 'selectedRowKeys' in val) {
           this.store.setState({
             selectedRowKeys: val.selectedRowKeys || [],
@@ -127,12 +131,11 @@ export default {
           if (rowSelection && val.getCheckboxProps !== rowSelection.getCheckboxProps) {
             this.CheckboxPropsCache = {};
           }
-        } else if (val && !this.prevRowSelection) {
+        } else if (oldVal && !val) {
           this.store.setState({
             selectedRowKeys: [],
           });
         }
-        this.prevRowSelection = val ? { ...val } : val;
       },
       deep: true,
     },
@@ -823,6 +826,7 @@ export default {
               class={`${prefixCls}-column-sorter-up ${isAscend ? 'on' : 'off'}`}
               type="caret-up"
               theme="filled"
+              key="caret-up"
             />
           );
 
@@ -831,6 +835,7 @@ export default {
               class={`${prefixCls}-column-sorter-down ${isDescend ? 'on' : 'off'}`}
               type="caret-down"
               theme="filled"
+              key="caret-down"
             />
           );
 

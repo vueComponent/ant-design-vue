@@ -10,6 +10,75 @@
 
 ---
 
+## 1.14.0-beta.0
+
+`2019-01-06`
+
+- 🎉 新的组件 `Empty`，同时优化了各个组件的空数据状态样式！
+- 🎉 **新增 `Statistic` 统计/倒计时组件**。
+- 🎉 添加新的国际化资源北印度语（kn_IN）和坎那达语（kn_IN）。
+- 🌟 ConfigProvider 组件添加 `prefixCls` 属性。
+- Button
+  - 🌟 Button 添加圆边形状。
+- Collapse
+  - 🌟 新增 `expandIcon` 属性，允许用户自定义 Collapse 折叠图标。
+- ConfigProvider
+  - 🌟 支持 Content Security Policy (CSP) 配置。
+  - 🌟 提供 `autoInsertSpaceInButton` 属性以移除按钮中 2 个汉字时字间的空格。
+- DatePicker
+  - 🌟 将会读取本地化格式配置作为默认日期格式。
+- Icon
+  - 🌟 Icon 组件添加 `aria-label` 属性以提升无障碍体验。
+  - 🌟 新增 `rotate` 属性，允许用户修改图标旋转角度。
+  - 🌟 新增 Icon `eye-invisible`。
+- Input
+  - 🌟 添加 Input.Password 密码输入组件。
+  - 🌟 支持 `allowClear`。
+- Modal
+  - 🌟 添加 `forceRender` 属性。
+  - 🌟 添加 `destroyAll` 方法。
+  - 🌟 Modal.confirm/info/warning/error 新增 `icon` 属性。原有的 `iconType` 废弃。
+- 🌟 Card 组件添加 `small` 类型。
+- Form
+  - 🌟 添加 `name` 选项到 `Form.create`。
+  - 🌟 新增 `selfUpdate` 属性，用于提升表单性能 [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
+- 🌟 Tree 添加 `switcherIcon` 属性。
+- Dropdown
+  - 🌟 Dropdown.Button 支持 `href` 属性。
+  - 🌟 添加 `openClassName` 属性。
+- Table
+  - 🌟 添加属性 `sortDirections` 到 Table 和 Table.Column。
+  - 🐞 修复 Badge 组件遮盖 Table 固定列的问题。
+  - 🐞 修复行选择器列的 `columnWidth` 设置不生效的问题。
+- DatePicker
+  - 🌟 DatePicker component 添加 `renderFooter` 属性。
+  - 🐞 修复 WeekPicker 不支持 `dateRender` 的问题。
+  - 🐞 修复禁用按钮在 DatePicker 面板中的样式问题。
+  - 🌟 在所有模式中支持 `renderExtraFooter` 属性。
+  - 🐞 修复月份选择器在开始年份和结束年份相等时的显示问题。
+- TimePicker
+  - 🌟 TimePicker 添加新的属性 `popupStyle` 和事件 `amPmChange`。
+  - 🐞 修复 TimePicker 在跟 Input.Group 一起使用时图标会消失的问题。
+  - 🌟 废弃 `allowEmpty` 属性，改用 `allowClear` 替代。并与 DatePicker 统一样式。
+- 🌟 组件 Rate 支持 `tooltips`。
+- Upload
+  - 💄 添加新的 Less 变量 `upload-picture-card-border-style` 并修复 `upload-picture-card-size` 的拼写错误。
+  - 🐞 修复在 Upload 组件中无法识别 `dpg` 后缀文件为图片的问题。
+- Modal
+  - 🌟 Modal 函数组件新增 `mask` 属性支持。
+  - 🌟 Modal 函数组件新增 `transitionName` 和 `maskTransitionName` 属性支持。
+- Spin
+  - 🐞 修复 Table 在低版本 IE 中 spinning 会遮挡操作的问题。
+- Progress
+  - 🌟 所有类型都支持 `successPercent` 属性。
+- Pagination
+  - 🐞 修复省略号不居中的样式问题。
+- 🐞 修复 Radio 组件在 Chrome 下的样式问题。
+- 🐞 修复 Steps 组件在 IE9 下的样式问题。
+- 🐞 修复嵌套的 TimeLine 最后一条线丢失的问题。
+- 🐞 修复 Spin 组件初始设置 `delay` 属性后不显示的问题。
+- 🐞 修复水波纹在 Edge 下的样式问题。
+
 ## 1.3.16
 `2019-08-25`
 - 🐞 修复 `Select` 组件在没有 input 时，卸载组件报错问题 [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)

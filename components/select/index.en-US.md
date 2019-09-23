@@ -27,6 +27,7 @@
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: vNodes}` | boolean | false |
 | maxTagCount | Max tag count to show | number | - |
 | maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - |
+| maxTagTextLength	| Max text length to show | number | - |
 | mode | Set mode of Select | 'default' \| 'multiple' \| 'tags' | 'default' |
 | notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |

@@ -119,6 +119,12 @@ export declare class Select extends AntdComponent {
   maxTagPlaceholder: any;
 
   /**
+   * Max text length to show
+   * @type number
+   */
+  maxTagTextLength: number;
+
+  /**
    * Set mode of Select
    * @default 'default'
    * @type string

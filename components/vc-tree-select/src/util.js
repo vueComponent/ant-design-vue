@@ -7,7 +7,7 @@ import {
 } from '../../vc-tree/src/util';
 import SelectNode from './SelectNode';
 import { SHOW_CHILD, SHOW_PARENT } from './strategies';
-import { getSlots, getPropsData, isEmptyElement } from '../../_util/props-util';
+import { getSlots, getPropsData, isEmptyElement, getAttrs } from '../../_util/props-util';
 
 let warnDeprecatedLabel = false;
 
@@ -251,9 +251,9 @@ export function getLabel(wrappedValue, entity, treeNodeLabelProp) {
   }
 
   if (entity) {
-    const props = getPropsData(entity.node);
+    const props = Object.assign(getPropsData(entity.node), getAttrs(entity.node));
     if (Object.keys(props).length) {
-      return props[treeNodeLabelProp];
+      return props[treeNodeLabelProp] || props.dataRef[treeNodeLabelProp];
     }
   }
 

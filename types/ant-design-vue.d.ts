@@ -20,6 +20,7 @@ import { Carousel } from './carousel';
 import { Cascader } from './cascader';
 import { Checkbox } from './checkbox/checkbox';
 import { Col } from './grid/col';
+import { ConfigProvider } from './config-provider';
 import { DatePicker } from './date-picker/date-picker';
 import { Divider } from './divider';
 import { Drawer } from './drawer';
@@ -87,6 +88,7 @@ export {
   Cascader,
   Checkbox,
   Col,
+  ConfigProvider,
   DatePicker,
   Divider,
   Dropdown,

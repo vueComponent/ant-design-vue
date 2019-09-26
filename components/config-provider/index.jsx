@@ -19,8 +19,8 @@ const ConfigProvider = {
   props: {
     getPopupContainer: PropTypes.func,
     prefixCls: PropTypes.string,
-    renderEmpty: PropTypes.any,
-    csp: PropTypes.any,
+    renderEmpty: PropTypes.func,
+    csp: PropTypes.object,
     autoInsertSpaceInButton: PropTypes.bool,
   },
   provide() {

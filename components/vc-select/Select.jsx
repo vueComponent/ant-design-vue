@@ -449,6 +449,7 @@ const Select = {
     onArrowClick(e) {
       e.stopPropagation();
       e.preventDefault();
+      this.clearBlurTime();
       if (!this.disabled) {
         this.setOpenState(!this.$data._open, !this.$data._open);
       }
@@ -623,6 +624,7 @@ const Select = {
     inputBlur(e) {
       const target = e.relatedTarget || document.activeElement;
       if (
+        e.relatedTarget === this.$refs.arrow ||
         (target &&
           this.selectTriggerRef &&
           this.selectTriggerRef.getInnerMenu() &&
@@ -685,7 +687,7 @@ const Select = {
         }
         this.setOpenState(false);
         this.$emit('blur', this.getVLForOnChange(value));
-      }, 10);
+      }, 200);
     },
     inputFocus(e) {
       if (this.$props.disabled) {
@@ -1412,6 +1414,7 @@ const Select = {
           style={UNSELECTABLE_STYLE}
           {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
           onClick={this.onArrowClick}
+          ref="arrow"
         >
           {inputIcon || defaultIcon}
         </span>

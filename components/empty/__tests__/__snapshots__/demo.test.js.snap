@@ -108,8 +108,7 @@ exports[`renders ./components/empty/demo/config-provider.md correctly 1`] = `
 exports[`renders ./components/empty/demo/customize.md correctly 1`] = `
 <div class="ant-empty">
   <div class="ant-empty-image"><img alt="empty" src="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"></div>
-  <p class="ant-empty-description"><span>
-    Customize <a href="#API">Description</a></span></p>
+  <p class="ant-empty-description"><span> Customize <a href="#API">Description</a></span></p>
   <div class="ant-empty-footer"> <button type="button" class="ant-btn ant-btn-primary"><span>Create Now</span></button></div>
 </div>
 `;

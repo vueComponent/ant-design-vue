@@ -350,7 +350,8 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
     </span></label><a href="" class="login-form-forgot">
           Forgot password
         </a><button type="submit" class="login-form-button ant-btn ant-btn-primary"><span>Log in</span></button>
-        Or <a href="">
+        Or
+        <a href="">
           register now!
         </a></span>
         <!---->
@@ -446,7 +447,8 @@ exports[`renders ./components/form/demo/register.vue correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-16 ant-col-sm-offset-8 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input id="register_agreement" type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
-      I have read the <a href="">
+      I have read the
+      <a href="">
         agreement
       </a></span></label></span>
         <!---->

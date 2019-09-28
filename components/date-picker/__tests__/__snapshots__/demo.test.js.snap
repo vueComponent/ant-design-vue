@@ -72,7 +72,7 @@ exports[`renders ./components/date-picker/demo/suffix.md correctly 1`] = `
 
 exports[`renders ./components/date-picker/demo/text.md correctly 1`] = `
 <div><span class="ant-calendar-picker"><span class="">SelectTime</span></span> <br> <span tabindex="0" class="ant-calendar-picker"><span class="">
-    请选择
+      请选择
     </span></span></div>
 `;
 

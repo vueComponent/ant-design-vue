@@ -3,7 +3,7 @@
 ### Card
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | actions | The action list, shows at the bottom of the Card. | slots | - |
 | activeTabKey | Current TabPane's key | string | - |
 | headStyle | Inline style to apply to the card head | object | - |
@@ -20,16 +20,17 @@
 | type | Card style type, can be set to `inner` or not set | string | - |
 
 ### events
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| tabChange | Callback when tab is switched | (key) => void | - |
+
+| Events Name | Description                   | Arguments     |
+| ----------- | ----------------------------- | ------------- |
+| tabChange   | Callback when tab is switched | (key) => void | - |
 
 ### Card.Grid
 
 ### Card.Meta
 
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| avatar | avatar or icon | slot | - |
-| description | description content | string\|slot | - |
-| title | title content | string\|slot | - |
+| Property    | Description         | Type         | Default |
+| ----------- | ------------------- | ------------ | ------- |
+| avatar      | avatar or icon      | slot         | -       |
+| description | description content | string\|slot | -       |
+| title       | title content       | string\|slot | -       |

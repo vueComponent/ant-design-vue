@@ -18,17 +18,16 @@ Usage of basic Tag, and it could be closable by set `closable` property. Closabl
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    log (e) {
-      console.log(e)
+  export default {
+    methods: {
+      log(e) {
+        console.log(e);
+      },
+      preventDefault(e) {
+        e.preventDefault();
+        console.log('Clicked! But prevent default.');
+      },
     },
-    preventDefault (e) {
-      e.preventDefault()
-      console.log('Clicked! But prevent default.')
-    },
-  },
-}
+  };
 </script>
 ```
-

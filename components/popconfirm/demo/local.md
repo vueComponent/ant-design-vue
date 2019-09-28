@@ -15,4 +15,3 @@ Set `okText` and `cancelText` props to customize the button's labels.
   </a-popconfirm>
 </template>
 ```
-

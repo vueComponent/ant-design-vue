@@ -18,5 +18,3 @@ Appropriate for a narrow area.
   </div>
 </template>
 ```
-
-

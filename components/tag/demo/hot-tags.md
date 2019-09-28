@@ -24,26 +24,26 @@ Select your favourite topics.
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      checked1: false,
-      checked2: false,
-      checked3: false,
-      tags: ['Movies', 'Books', 'Music', 'Sports'],
-      selectedTags: [],
-    }
-  },
-  methods: {
-    handleChange (tag, checked) {
-      const { selectedTags } = this
-      const nextSelectedTags = checked
-        ? [...selectedTags, tag]
-        : selectedTags.filter(t => t !== tag)
-      console.log('You are interested in: ', nextSelectedTags)
-      this.selectedTags = nextSelectedTags
+  export default {
+    data() {
+      return {
+        checked1: false,
+        checked2: false,
+        checked3: false,
+        tags: ['Movies', 'Books', 'Music', 'Sports'],
+        selectedTags: [],
+      };
     },
-  },
-}
+    methods: {
+      handleChange(tag, checked) {
+        const { selectedTags } = this;
+        const nextSelectedTags = checked
+          ? [...selectedTags, tag]
+          : selectedTags.filter(t => t !== tag);
+        console.log('You are interested in: ', nextSelectedTags);
+        this.selectedTags = nextSelectedTags;
+      },
+    },
+  };
 </script>
 ```

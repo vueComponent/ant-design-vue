@@ -19,10 +19,6 @@ A numeric-only input box whose values can be increased or decreased using a deci
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 ```
-
-
-
-

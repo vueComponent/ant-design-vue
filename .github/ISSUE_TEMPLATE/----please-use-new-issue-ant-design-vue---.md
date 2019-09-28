@@ -1,9 +1,7 @@
 ---
-name: "⚠️  Please use issue-helper ⚠️"
-about: The issue which is not created via https://vuecomponent.github.io/issue-helper/ will be closed
-  immediately.
+name: '⚠️  Please use issue-helper ⚠️'
+about: The issue which is not created via https://vuecomponent.github.io/issue-helper/ will be closed immediately.
 labels:
-
 ---
 
 The issue which is not created via https://vuecomponent.github.io/issue-helper/ will be closed immediately.

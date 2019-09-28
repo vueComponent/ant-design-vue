@@ -1,4 +1,3 @@
-
 <cn>
 #### 后缀图标
 最简单的用法，在浮层中可以选择或者输入日期。
@@ -38,14 +37,12 @@ Basic use case. Users can select or input a date in panel.
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    onChange(date, dateString) {
-      console.log(date, dateString);
-    }
-  }
-}
+  export default {
+    methods: {
+      onChange(date, dateString) {
+        console.log(date, dateString);
+      },
+    },
+  };
 </script>
 ```
-
-

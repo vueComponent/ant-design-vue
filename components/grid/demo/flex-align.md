@@ -37,5 +37,3 @@ Flex child elements vertically aligned.
   </div>
 </template>
 ```
-
-

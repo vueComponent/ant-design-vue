@@ -13,10 +13,11 @@
 | render | 每行数据渲染函数，该函数的入参为 `dataSource` 中的项，返回值为 element。或者返回一个普通对象，其中 `label` 字段为 element，`value` 字段为 title | Function(record) |  |
 | selectedKeys | 设置哪些项应该被选中 | string\[] | \[] |
 | showSearch | 是否显示搜索框 | boolean | false |
-| targetKeys | 显示在右侧框数据的key集合 | string\[] | \[] |
+| targetKeys | 显示在右侧框数据的 key 集合 | string\[] | \[] |
 | titles | 标题集合，顺序从左至右 | string\[] | \['', ''] |
 
 ### 事件
+
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | change | 选项在两栏之间转移时的回调函数 | (targetKeys, direction, moveKeys): void |  |
@@ -26,7 +27,7 @@
 
 ## 注意
 
-按照Vue最新的规范，所有的组件数组最好绑定 key。在 Transfer 中，`dataSource`里的数据值需要指定 `key` 值。对于 `dataSource` 默认将每列数据的 `key` 属性作为唯一的标识。
+按照 Vue 最新的规范，所有的组件数组最好绑定 key。在 Transfer 中，`dataSource`里的数据值需要指定 `key` 值。对于 `dataSource` 默认将每列数据的 `key` 属性作为唯一的标识。
 
 如果你的数据没有这个属性，务必使用 `rowKey` 来指定数据列的主键。
 

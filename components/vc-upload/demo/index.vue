@@ -7,7 +7,7 @@ import CustomRequest from './customRequest';
 import DirectoryUpload from './directoryUpload';
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <Simple />

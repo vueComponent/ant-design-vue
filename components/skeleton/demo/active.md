@@ -13,4 +13,3 @@ Display active animation.
   <a-skeleton active />
 </template>
 ```
-

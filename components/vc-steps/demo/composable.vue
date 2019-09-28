@@ -4,19 +4,24 @@ import '../assets/index.less';
 import '../assets/iconfont.less';
 
 export default {
-  data () {
+  data() {
     return {
-      description: '这里是多信息的描述啊这里是多信息的描述啊这里是多信息的描述啊这里是多信息的描述啊这里是多信息的描述啊',
+      description:
+        '这里是多信息的描述啊这里是多信息的描述啊这里是多信息的描述啊这里是多信息的描述啊这里是多信息的描述啊',
     };
   },
-  render () {
+  render() {
     const { description } = this;
     return (
       <Steps current={1}>
-        <Step title='已完成' description={description} />
-        <Step title='进行中' description={description} />
-        <Step title='进行中' description={description} style={{ fontWeight: 'bold', fontStyle: 'italic' }}/>
-        <Step title='待运行' description={description} />
+        <Step title="已完成" description={description} />
+        <Step title="进行中" description={description} />
+        <Step
+          title="进行中"
+          description={description}
+          style={{ fontWeight: 'bold', fontStyle: 'italic' }}
+        />
+        <Step title="待运行" description={description} />
       </Steps>
     );
   },

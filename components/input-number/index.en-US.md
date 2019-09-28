@@ -1,7 +1,7 @@
 ## API
 
 | property | description | type | default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | autoFocus | get focus when component mounted | boolean | false |
 | defaultValue | initial value | number |  |
 | disabled | disable the input | boolean | false |
@@ -15,15 +15,15 @@
 | step | The number to which the current value is increased or decreased. It can be an integer or decimal. | number\|string | 1 |
 | value(v-model) | current value | number |  |
 
-
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | The callback triggered when the value is changed. | function(value: number \| string) |  |
 
 ## Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |

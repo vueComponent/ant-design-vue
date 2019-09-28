@@ -28,20 +28,20 @@ Basic drawer.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      visible: false,
-    }
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true
+  export default {
+    data() {
+      return {
+        visible: false,
+      };
     },
-    onClose() {
-      this.visible = false
+    methods: {
+      showDrawer() {
+        this.visible = true;
+      },
+      onClose() {
+        this.visible = false;
+      },
     },
-  },
-}
+  };
 </script>
 ```

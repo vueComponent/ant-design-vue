@@ -8,19 +8,18 @@ import Simple from './simple.jsx';
 import SmallStep from './small-step.jsx';
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <CombinationKeyFormat />
         <Custom />
         <Decimal />
-        <Formatter/>
-        <SimpleUseTouch/>
-        <Simple/>
-        <SmallStep/>
+        <Formatter />
+        <SimpleUseTouch />
+        <Simple />
+        <SmallStep />
       </div>
     );
   },
 };
 </script>
-

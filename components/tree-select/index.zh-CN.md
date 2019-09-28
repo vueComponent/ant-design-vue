@@ -1,4 +1,3 @@
-
 ## API
 
 ### Tree props
@@ -11,13 +10,13 @@
 | dropdownClassName | 下拉菜单的 className 属性 | string | - |
 | dropdownMatchSelectWidth | 下拉菜单和选择器同宽 | boolean | true |
 | dropdownStyle | 下拉菜单的样式 | object | - |
-| filterTreeNode | 是否根据输入项进行筛选，默认用 treeNodeFilterProp 的值作为要筛选的 TreeNode 的属性值 | boolean\|Function(inputValue: string, treeNode: TreeNode) (函数需要返回bool值) | Function |
+| filterTreeNode | 是否根据输入项进行筛选，默认用 treeNodeFilterProp 的值作为要筛选的 TreeNode 的属性值 | boolean\|Function(inputValue: string, treeNode: TreeNode) (函数需要返回 bool 值) | Function |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 value 类型从 `string` 变为 `{value: string, label: VNode, halfChecked(treeCheckStrictly 时有效): string[] }` 的格式 | boolean | false |
 | loadData | 异步加载数据 | function(node) | - |
 | maxTagCount | 最多显示多少个 tag | number | - |
 | maxTagPlaceholder | 隐藏 tag 时显示的内容 | slot/function(omittedValues) | - |
-| multiple | 支持多选（当设置 treeCheckable 时自动变为true） | boolean | false |
+| multiple | 支持多选（当设置 treeCheckable 时自动变为 true） | boolean | false |
 | placeholder | 选择框默认文字 | string\|slot | - |
 | searchPlaceholder | 搜索框默认文字 | string\|slot | - |
 | searchValue(.sync) | 搜索框的值，可以通过 `search` 事件获取用户输入 | string | - |
@@ -39,18 +38,18 @@
 
 ### 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 选中树节点时调用此函数 | function(value, label, extra) |
-| search | 文本框值变化时回调 | function(value: string) |
-| select | 被选中时调用 | function(value, node, extra) |
-| treeExpand | 展开节点时调用 | function(expandedKeys) |
+| 事件名称   | 说明                   | 回调参数                      |
+| ---------- | ---------------------- | ----------------------------- |
+| change     | 选中树节点时调用此函数 | function(value, label, extra) |
+| search     | 文本框值变化时回调     | function(value: string)       |
+| select     | 被选中时调用           | function(value, node, extra)  |
+| treeExpand | 展开节点时调用         | function(expandedKeys)        |
 
 ### Tree 方法
 
-| 名称 | 描述 |
-| --- | --- |
-| blur() | 移除焦点 |
+| 名称    | 描述     |
+| ------- | -------- |
+| blur()  | 移除焦点 |
 | focus() | 获取焦点 |
 
 ### TreeNode props
@@ -66,4 +65,4 @@
 | key | 此项必须设置（其值在整个树范围内唯一） | string \| number | - |
 | title | 树节点显示的内容 | string\|slot | '---' |
 | value | 默认根据此属性值进行筛选（其值在整个树范围内唯一） | string | - |
-| scopedSlots | 使用treeData时，可以通过该属性配置支持slot的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |
+| scopedSlots | 使用 treeData 时，可以通过该属性配置支持 slot 的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |

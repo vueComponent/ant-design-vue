@@ -1,4 +1,3 @@
-
 <cn>
 #### 自定义图标
 图标可以被自定义。
@@ -16,15 +15,15 @@ The icon can be customized to any vue node or (h) => vue node.
 <script>
   export default {
     methods: {
-      openNotification () {
+      openNotification() {
         this.$notification.open({
           message: 'Notification Title',
-          description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          description:
+            'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
           icon: <a-icon type="smile" style="color: #108ee9" />,
         });
       },
-    }
-  }
+    },
+  };
 </script>
 ```
-

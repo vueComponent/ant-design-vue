@@ -18,5 +18,3 @@ Basic timeline.
   </a-timeline>
 </template>
 ```
-
-

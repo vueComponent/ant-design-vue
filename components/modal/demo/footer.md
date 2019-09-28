@@ -1,4 +1,3 @@
-
 <cn>
 #### 自定义页脚
 更复杂的例子，自定义了页脚的按钮，点击提交后进入 loading 状态，完成后关闭。
@@ -19,11 +18,7 @@ You could set `footer` to `null` if you don't need default footer buttons.
     <a-button type="primary" @click="showModal">
       Open Modal with customized footer
     </a-button>
-    <a-modal
-      v-model="visible"
-      title="Title"
-      onOk="handleOk"
-    >
+    <a-modal v-model="visible" title="Title" onOk="handleOk">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
         <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
@@ -39,29 +34,28 @@ You could set `footer` to `null` if you don't need default footer buttons.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      loading: false,
-      visible: false,
-    }
-  },
-  methods: {
-    showModal() {
-      this.visible = true;
+  export default {
+    data() {
+      return {
+        loading: false,
+        visible: false,
+      };
     },
-    handleOk(e) {
-      this.loading = true;
-      setTimeout(() => {
+    methods: {
+      showModal() {
+        this.visible = true;
+      },
+      handleOk(e) {
+        this.loading = true;
+        setTimeout(() => {
+          this.visible = false;
+          this.loading = false;
+        }, 3000);
+      },
+      handleCancel(e) {
         this.visible = false;
-        this.loading = false;
-      }, 3000);
+      },
     },
-    handleCancel(e) {
-      this.visible = false;
-    },
-  }
-}
+  };
 </script>
 ```
-

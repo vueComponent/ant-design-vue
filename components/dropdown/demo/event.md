@@ -11,9 +11,7 @@ An event will be triggered when you click menu items, in which you can make diff
 ```html
 <template>
   <a-dropdown>
-    <a class="ant-dropdown-link" href="#">
-      Hover me, Click menu item <a-icon type="down" />
-    </a>
+    <a class="ant-dropdown-link" href="#"> Hover me, Click menu item <a-icon type="down" /> </a>
     <a-menu slot="overlay" @click="onClick">
       <a-menu-item key="1">1st menu item</a-menu-item>
       <a-menu-item key="2">2nd menu item</a-menu-item>
@@ -23,12 +21,12 @@ An event will be triggered when you click menu items, in which you can make diff
 </template>
 
 <script>
-export default {
-  methods: {
-    onClick({ key }) {
-      console.log(`Click on item ${key}`);
-    }
-  }
-}
+  export default {
+    methods: {
+      onClick({ key }) {
+        console.log(`Click on item ${key}`);
+      },
+    },
+  };
 </script>
 ```

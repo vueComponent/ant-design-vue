@@ -40,11 +40,7 @@ Use ConfigProvider set global Empty style.
         <a-transfer :dataSource="[]" />
 
         <h3>Table</h3>
-        <a-table
-          style="margin-top: 8px"
-          :columns="columns"
-          :dataSource="[]"
-        />
+        <a-table style="margin-top: 8px" :columns="columns" :dataSource="[]" />
         <h3>List</h3>
         <a-list :dataSource="[]" />
       </div>
@@ -52,34 +48,31 @@ Use ConfigProvider set global Empty style.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      customize: false,
-      style: {width: '200px'},
-      columns: [
-        {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-        },
-        {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
-        },
-      ]
-    }
-  }
-}
-
+  export default {
+    data() {
+      return {
+        customize: false,
+        style: { width: '200px' },
+        columns: [
+          {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+          },
+          {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+          },
+        ],
+      };
+    },
+  };
 </script>
 <style>
-.code-box-demo .config-provider h3 {
-  font-size: inherit;
-  margin: 16px 0 8px 0;
-}
+  .code-box-demo .config-provider h3 {
+    font-size: inherit;
+    margin: 16px 0 8px 0;
+  }
 </style>
 ```
-
-

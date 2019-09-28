@@ -1,4 +1,3 @@
-
 ## API
 
 ```jsx
@@ -17,11 +16,11 @@
 
 布局容器。
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| class | 容器 class | string | - |
-| style | 指定样式 | object | - |
-| hasSider | 表示子元素里有 Sider，一般不用指定。可用于服务端渲染时避免样式闪动 | boolean | - |
+| 参数     | 说明                                                               | 类型    | 默认值 |
+| -------- | ------------------------------------------------------------------ | ------- | ------ |
+| class    | 容器 class                                                         | string  | -      |
+| style    | 指定样式                                                           | object  | -      |
+| hasSider | 表示子元素里有 Sider，一般不用指定。可用于服务端渲染时避免样式闪动 | boolean | -      |
 
 > `Layout.Header` `Layout.Footer` `Layout.Content` API 与 `Layout` 相同
 
@@ -44,6 +43,7 @@
 | width | 宽度 | number\|string | 200 |
 
 ### 事件
+
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | collapse | 展开-收起时的回调函数，有点击 trigger 以及响应式反馈两种方式可以触发 | (collapsed, type) => {} |

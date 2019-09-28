@@ -10,7 +10,7 @@ Customized description content.
 
 ```html
 <style scoped>
-  .spin-content{
+  .spin-content {
     border: 1px solid #91d5ff;
     background-color: #e6f7ff;
     padding: 30px;

@@ -19,19 +19,19 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      checked1: false,
-      checked2: false,
-      checked3: false,
-    }
-  },
-  methods: {
-    handleChange (checked) {
-      console.log(checked)
+  export default {
+    data() {
+      return {
+        checked1: false,
+        checked2: false,
+        checked3: false,
+      };
     },
-  },
-}
+    methods: {
+      handleChange(checked) {
+        console.log(checked);
+      },
+    },
+  };
 </script>
 ```

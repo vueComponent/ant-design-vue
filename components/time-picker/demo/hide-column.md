@@ -13,11 +13,11 @@ While part of `format` is omitted, the corresponding column in panel will disapp
   <a-time-picker :defaultValue="moment('12:08', 'HH:mm')" format="HH:mm" />
 </template>
 <script>
-import moment from 'moment';
-export default {
-  methods: {
-    moment,
-  },
-}
+  import moment from 'moment';
+  export default {
+    methods: {
+      moment,
+    },
+  };
 </script>
 ```

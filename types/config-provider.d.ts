@@ -1,6 +1,6 @@
 import { AntdComponent } from './component';
 
-import { Locale } from './locale-provider'
+import { Locale } from './locale-provider';
 
 export interface CSPConfig {
   nonce?: string;

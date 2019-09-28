@@ -13,4 +13,3 @@ Complex combination with avatar and multiple paragraphs.
   <a-skeleton avatar :paragraph="{rows: 4}" />
 </template>
 ```
-

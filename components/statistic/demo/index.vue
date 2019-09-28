@@ -25,23 +25,23 @@ export default {
   type: 'Data Display',
   zhType: '数据展示',
   title: 'Statistic',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <br/>
-        <Unit/>
-        <br/>
-        <Card/>
-        <br/>
-        <Countdown/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <br />
+        <Unit />
+        <br />
+        <Card />
+        <br />
+        <Countdown />
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

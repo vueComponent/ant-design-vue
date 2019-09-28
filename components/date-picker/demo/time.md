@@ -1,4 +1,3 @@
-
 <cn>
 #### 日期时间选择
 增加选择时间功能，当 `showTime` 为一个对象时，其属性会传递给内建的 `TimePicker`。
@@ -12,12 +11,7 @@ This property provide an additional time selection. When `showTime` is an Object
 ```html
 <template>
   <div>
-    <a-date-picker
-      showTime
-      placeholder="Select Time"
-      @change="onChange"
-      @ok="onOk"
-    />
+    <a-date-picker showTime placeholder="Select Time" @change="onChange" @ok="onOk" />
     <br />
     <a-range-picker
       :showTime="{ format: 'HH:mm' }"
@@ -29,17 +23,16 @@ This property provide an additional time selection. When `showTime` is an Object
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    onChange(value, dateString) {
-      console.log('Selected Time: ', value);
-      console.log('Formatted Selected Time: ', dateString);
+  export default {
+    methods: {
+      onChange(value, dateString) {
+        console.log('Selected Time: ', value);
+        console.log('Formatted Selected Time: ', dateString);
+      },
+      onOk(value) {
+        console.log('onOk: ', value);
+      },
     },
-    onOk(value) {
-      console.log('onOk: ', value);
-    }
-  }
-}
+  };
 </script>
 ```
-

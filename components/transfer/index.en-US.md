@@ -1,7 +1,7 @@
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | dataSource | Used for setting the source data. The elements that are part of this array will be present the left column. Except the elements whose keys are included in `targetKeys` prop. | \[{key: string.isRequired,title: string.isRequired,description: string,disabled: bool}\] | \[] |
 | disabled | Whether disabled transfer | boolean | false |
 | filterOption | A function to determine whether an item should show in search result list | (inputValue, option): boolean |  |
@@ -17,6 +17,7 @@
 | titles | A set of titles that are sorted from left to right. | string\[] | - |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | A callback function that is executed when the transfer between columns is complete. | (targetKeys, direction, moveKeys): void |  |

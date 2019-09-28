@@ -17,8 +17,8 @@ Jump to a page directly.
     methods: {
       onChange(pageNumber) {
         console.log('Page: ', pageNumber);
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 ```

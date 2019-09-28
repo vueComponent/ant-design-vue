@@ -40,19 +40,19 @@ export default {
   type: 'Data Entry',
   title: 'Transfer',
   cols: '1',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Search />
         <Advanced />
         <CustomItem />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

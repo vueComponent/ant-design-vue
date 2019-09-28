@@ -16,12 +16,11 @@
 | width | 宽度 | string \| number | 256 |
 | height | 高度, 在 `placement` 为 `top` 或 `bottom` 时使用 | string \| number | 256 |
 | zIndex | 设置 Drawer 的 `z-index` | Number | 1000 |
-| placement | 抽屉的方向 | 'top'  \| 'right' \| 'bottom' \| 'left' | 'right'|
-| handle | 设置后抽屉直接挂载到DOM上，你可以通过该handle控制抽屉打开关闭 | VNode \| slot | - |
+| placement | 抽屉的方向 | 'top' \| 'right' \| 'bottom' \| 'left' | 'right' |
+| handle | 设置后抽屉直接挂载到 DOM 上，你可以通过该 handle 控制抽屉打开关闭 | VNode \| slot | - |
 
 ## 方法
 
-| 名称 | 描述 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| close | 点击遮罩层或右上角叉或取消按钮的回调 | function(e) | 无 |
-
+| 名称  | 描述                                 | 类型        | 默认值 |
+| ----- | ------------------------------------ | ----------- | ------ |
+| close | 点击遮罩层或右上角叉或取消按钮的回调 | function(e) | 无     |

@@ -49,14 +49,14 @@ export default {
   type: 'Data Display',
   title: 'Tabs',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Disabled />
         <Icon />
-        <Slide/>
+        <Slide />
         <Extra />
         <Size />
         <Position />
@@ -65,10 +65,10 @@ export default {
         <CardTop />
         <CustomAddTrigger />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

@@ -31,5 +31,4 @@ And you can always set it to a hex color string for custom color.
     </div>
   </div>
 </template>
-
 ```

@@ -11,23 +11,23 @@ Disabled state of `Switch`.
 ```html
 <template>
   <div>
-    <a-switch defaultChecked :disabled="disabled" style="margin-bottom:5px"/>
-    <br/>
-    <a-button type="primary" @click='onToggle'>Toggle disabled</a-button>
+    <a-switch defaultChecked :disabled="disabled" style="margin-bottom:5px" />
+    <br />
+    <a-button type="primary" @click="onToggle">Toggle disabled</a-button>
   </div>
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         disabled: true,
-      }
+      };
     },
     methods: {
-      onToggle(){
-        this.disabled = !this.disabled
-      }
+      onToggle() {
+        this.disabled = !this.disabled;
+      },
     },
-  }
+  };
 </script>
 ```

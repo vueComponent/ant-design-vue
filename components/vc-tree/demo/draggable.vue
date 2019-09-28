@@ -8,7 +8,7 @@ import BaseMixin from '../../_util/BaseMixin';
 
 export default {
   mixins: [BaseMixin],
-  data () {
+  data() {
     return {
       gData,
       autoExpandParent: true,
@@ -16,16 +16,16 @@ export default {
     };
   },
   methods: {
-    onDragStart  (info) {
+    onDragStart(info) {
       console.log('start', info);
     },
-    onDragEnter (info) {
+    onDragEnter(info) {
       console.log('enter', info);
       this.setState({
         expandedKeys: info.expandedKeys,
       });
     },
-    onDrop (info) {
+    onDrop(info) {
       console.log('drop', info);
       const dropKey = info.node.eventKey;
       const dragKey = info.dragNode.eventKey;
@@ -61,7 +61,7 @@ export default {
           ar.splice(i + 1, 0, dragObj);
         }
       } else {
-        loop(data, dropKey, (item) => {
+        loop(data, dropKey, item => {
           item.children = item.children || [];
           // where to insert 示例添加到尾部，可以是随意位置
           item.children.push(dragObj);
@@ -71,7 +71,7 @@ export default {
         gData: data,
       });
     },
-    onExpand (expandedKeys) {
+    onExpand(expandedKeys) {
       console.log('onExpand', arguments);
       this.setState({
         expandedKeys,
@@ -80,32 +80,38 @@ export default {
     },
   },
 
-  render () {
+  render() {
     const loop = data => {
-      return data.map((item) => {
+      return data.map(item => {
         if (item.children && item.children.length) {
-          return <TreeNode key={item.key} title={item.title}>{loop(item.children)}</TreeNode>;
+          return (
+            <TreeNode key={item.key} title={item.title}>
+              {loop(item.children)}
+            </TreeNode>
+          );
         }
         return <TreeNode key={item.key} title={item.title} />;
       });
     };
-    return (<div class='draggable-demo'>
-      <h2>draggable</h2>
-      <p>drag a node into another node</p>
-      <div class='draggable-container'>
-        <Tree
-          expandedKeys={this.expandedKeys}
-          onExpand={this.onExpand} autoExpandParent={this.autoExpandParent}
-          draggable
-          onDragstart={this.onDragStart}
-          onDragenter={this.onDragEnter}
-          onDrop={this.onDrop}
-        >
-          {loop(this.gData)}
-        </Tree>
+    return (
+      <div class="draggable-demo">
+        <h2>draggable</h2>
+        <p>drag a node into another node</p>
+        <div class="draggable-container">
+          <Tree
+            expandedKeys={this.expandedKeys}
+            onExpand={this.onExpand}
+            autoExpandParent={this.autoExpandParent}
+            draggable
+            onDragstart={this.onDragStart}
+            onDragenter={this.onDragEnter}
+            onDrop={this.onDrop}
+          >
+            {loop(this.gData)}
+          </Tree>
+        </div>
       </div>
-    </div>);
+    );
   },
 };
-
 </script>

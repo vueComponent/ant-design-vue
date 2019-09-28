@@ -5,7 +5,7 @@
 ```
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | current(v-model) | current page number | number | - |
 | defaultCurrent | default initial page number | number | 1 |
 | defaultPageSize | default number of data items per page | number | 10 |
@@ -21,6 +21,7 @@
 | total | total number of data items | number | 0 |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | a callback function, executed when the page number is changed, and it takes the resulting page number and pageSize as its arguments | Function(page, pageSize) | noop |

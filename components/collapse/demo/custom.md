@@ -13,9 +13,9 @@ Customize the background, border and margin styles and icon for each panel.
   <div>
     <a-collapse defaultActiveKey="1" :bordered="false">
       <template v-slot:expandIcon="props">
-        <a-icon  type="caret-right" :rotate="props.isActive ? 90 : 0" />
+        <a-icon type="caret-right" :rotate="props.isActive ? 90 : 0" />
       </template>
-      <a-collapse-panel  header="This is panel header 1" key="1" :style="customStyle">
+      <a-collapse-panel header="This is panel header 1" key="1" :style="customStyle">
         <p>{{text}}</p>
       </a-collapse-panel>
       <a-collapse-panel header="This is panel header 2" key="2" :style="customStyle">
@@ -29,12 +29,13 @@ Customize the background, border and margin styles and icon for each panel.
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-        customStyle: 'background: #f7f7f7;border-radius: 4px;margin-bottom: 24px;border: 0;overflow: hidden'
-      }
+        customStyle:
+          'background: #f7f7f7;border-radius: 4px;margin-bottom: 24px;border: 0;overflow: hidden',
+      };
     },
-  }
+  };
 </script>
 ```

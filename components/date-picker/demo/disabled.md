@@ -1,4 +1,3 @@
-
 <cn>
 #### 禁用
 选择框的不可用状态。
@@ -23,15 +22,15 @@ A disabled state of the `DatePicker`.
   </div>
 </template>
 <script>
-import moment from 'moment';
-export default {
-  data(){
-    this.dateFormat = 'YYYY-MM-DD'
-    return {}
-  },
-  methods: {
-    moment,
-  }
-}
+  import moment from 'moment';
+  export default {
+    data() {
+      this.dateFormat = 'YYYY-MM-DD';
+      return {};
+    },
+    methods: {
+      moment,
+    },
+  };
 </script>
 ```

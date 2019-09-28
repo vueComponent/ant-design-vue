@@ -26,6 +26,3 @@ Set the color of circles. `green` means completed or success status, `red` means
   </a-timeline>
 </template>
 ```
-
-
-

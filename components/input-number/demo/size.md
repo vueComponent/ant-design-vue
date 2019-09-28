@@ -23,7 +23,7 @@ There are three sizes available to a numeric input box. By default, the size is 
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 <style scoped>
   .ant-input-number {
@@ -31,6 +31,3 @@ There are three sizes available to a numeric input box. By default, the size is 
   }
 </style>
 ```
-
-
-

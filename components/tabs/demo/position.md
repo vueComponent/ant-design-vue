@@ -23,20 +23,19 @@ Tab's position: left, right, top or bottom.
       <a-tab-pane tab="Tab 3" key="3">Content of Tab 3</a-tab-pane>
     </a-tabs>
   </div>
-
 </template>
 <script>
-export default {
-  data () {
-    return {
-      tabPosition: 'top',
-    }
-  },
-  methods: {
-    callback (val) {
-      console.log(val)
+  export default {
+    data() {
+      return {
+        tabPosition: 'top',
+      };
     },
-  },
-}
+    methods: {
+      callback(val) {
+        console.log(val);
+      },
+    },
+  };
 </script>
 ```

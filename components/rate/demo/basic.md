@@ -10,15 +10,15 @@ The simplest usage.
 
 ```html
 <template>
-  <a-rate v-model='value'/>
+  <a-rate v-model="value" />
 </template>
 <script>
-export default {
-  data() {
-    return {
-      value: 2,
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        value: 2,
+      };
+    },
+  };
 </script>
 ```

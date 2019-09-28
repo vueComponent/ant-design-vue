@@ -1,4 +1,3 @@
-
 <cn>
 #### 基本
 基础分页。
@@ -18,9 +17,8 @@ Basic pagination.
     data() {
       return {
         current: 2,
-      }
-    }
-  }
+      };
+    },
+  };
 </script>
 ```
-

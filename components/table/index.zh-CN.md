@@ -1,32 +1,38 @@
-
 ```jsx
-const dataSource = [{
-  key: '1',
-  name: '胡彦斌',
-  age: 32,
-  address: '西湖区湖底公园1号'
-}, {
-  key: '2',
-  name: '胡彦祖',
-  age: 42,
-  address: '西湖区湖底公园1号'
-}];
+const dataSource = [
+  {
+    key: '1',
+    name: '胡彦斌',
+    age: 32,
+    address: '西湖区湖底公园1号',
+  },
+  {
+    key: '2',
+    name: '胡彦祖',
+    age: 42,
+    address: '西湖区湖底公园1号',
+  },
+];
 
-const columns = [{
-  title: '姓名',
-  dataIndex: 'name',
-  key: 'name',
-}, {
-  title: '年龄',
-  dataIndex: 'age',
-  key: 'age',
-}, {
-  title: '住址',
-  dataIndex: 'address',
-  key: 'address',
-}];
+const columns = [
+  {
+    title: '姓名',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: '年龄',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: '住址',
+    dataIndex: 'address',
+    key: 'address',
+  },
+];
 
-<Table dataSource={dataSource} columns={columns} />
+<Table dataSource={dataSource} columns={columns} />;
 ```
 
 ## API
@@ -43,7 +49,7 @@ const columns = [{
 | defaultExpandAllRows | 初始时，是否展开所有行 | boolean | false |
 | defaultExpandedRowKeys | 默认展开的行 | string\[] | - |
 | expandedRowKeys | 展开的行，控制属性 | string\[] | - |
-| expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| slot="expandedRowRender"  slot-scope="record, index, indent, expanded" | - |
+| expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| slot="expandedRowRender" slot-scope="record, index, indent, expanded" | - |
 | expandIcon | 自定义展开图标 | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |
 | footer | 表格尾部 | Function(currentPageData)\|slot-scope |  |
@@ -62,17 +68,16 @@ const columns = [{
 | customRow | 设置行属性 | Function(record, index) | - |
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| expandedRowsChange | 展开的行变化时触发 | Function(expandedRows) |
-| change | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter) |
-| expand | 点击展开图标时触发 | Function(expanded, record) |
 
+| 事件名称           | 说明                       | 回调参数                              |
+| ------------------ | -------------------------- | ------------------------------------- |
+| expandedRowsChange | 展开的行变化时触发         | Function(expandedRows)                |
+| change             | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter) |
+| expand             | 点击展开图标时触发         | Function(expanded, record)            |
 
 #### customRow 用法
 
-适用于 `customRow` `customHeaderRow` `customCell` `customHeaderCell`。
-遵循[Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx)语法。
+适用于 `customRow` `customHeaderRow` `customCell` `customHeaderCell`。遵循[Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx)语法。
 
 ```jsx
 <Table
@@ -119,31 +124,31 @@ const columns = [{
 | filters | 表头的筛选菜单项 | object\[] | - |
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |
 | key | Vue 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |
-| customRender | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并,可参考demo 表格行/列合并 | Function(text, record, index) {}\|slot-scope | - |
+| customRender | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并,可参考 demo 表格行/列合并 | Function(text, record, index) {}\|slot-scope | - |
 | sorter | 排序函数，本地排序使用一个函数(参考 [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 的 compareFunction)，需要服务端排序可设为 true | Function\|boolean | - |
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | 列头显示文字 | string\|slot | - |
 | width | 列宽度 | string\|number | - |
 | customCell | 设置单元格属性 | Function(record, rowIndex) | - |
 | customHeaderCell | 设置头部单元格属性 | Function(column) | - |
-| onFilter | 本地模式下，确定筛选的运行函数, 使用template或jsx时作为`filter`事件使用 | Function | - |
-| onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用template或jsx时作为`filterDropdownVisibleChange`事件使用 | function(visible) {} | - |
-| slots | 使用columns时，可以通过该属性配置支持slot的属性，如 `slots: { filterIcon: 'XXX'}` | object | - |
-| scopedSlots | 使用columns时，可以通过该属性配置支持slot-scope的属性，如 `scopedSlots: { customRender: 'XXX'}` | object | - |
+| onFilter | 本地模式下，确定筛选的运行函数, 使用 template 或 jsx 时作为`filter`事件使用 | Function | - |
+| onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用 template 或 jsx 时作为`filterDropdownVisibleChange`事件使用 | function(visible) {} | - |
+| slots | 使用 columns 时，可以通过该属性配置支持 slot 的属性，如 `slots: { filterIcon: 'XXX'}` | object | - |
+| scopedSlots | 使用 columns 时，可以通过该属性配置支持 slot-scope 的属性，如 `scopedSlots: { customRender: 'XXX'}` | object | - |
 
 ### ColumnGroup
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | title | 列头显示文字 | string\|slot | - |
-| slots | 使用columns时，可以通过该属性配置支持slot的属性，如 `slots: { title: 'XXX'}` | object | - |
+| slots | 使用 columns 时，可以通过该属性配置支持 slot 的属性，如 `slots: { title: 'XXX'}` | object | - |
 
 ### pagination
 
 分页的配置项。
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
+| 参数     | 说明               | 类型                        | 默认值   |
+| -------- | ------------------ | --------------------------- | -------- |
 | position | 指定分页显示的位置 | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
 更多配置项，请查看 [`Pagination`](/components/pagination/)。
@@ -171,18 +176,17 @@ const columns = [{
 
 自定义选择配置项
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| key | Vue 需要的 key，建议设置 | string | - |
-| text | 选择项显示的文字 | string\|VNode | - |
-| onSelect | 选择项点击回调 | Function(changeableRowKeys) | - |
-
+| 参数     | 说明                     | 类型                        | 默认值 |
+| -------- | ------------------------ | --------------------------- | ------ |
+| key      | Vue 需要的 key，建议设置 | string                      | -      |
+| text     | 选择项显示的文字         | string\|VNode               | -      |
+| onSelect | 选择项点击回调           | Function(changeableRowKeys) | -      |
 
 ## 注意
 
 在 Table 中，`dataSource` 和 `columns` 里的数据值都需要指定 `key` 值。对于 `dataSource` 默认将每列数据的 `key` 属性作为唯一的标识。
 
-如果你的数据没有这个属性，务必使用 `rowKey` 来指定数据列的主键。若没有指定，控制台会出现缺少key的提示，表格组件也会出现各类奇怪的错误。
+如果你的数据没有这个属性，务必使用 `rowKey` 来指定数据列的主键。若没有指定，控制台会出现缺少 key 的提示，表格组件也会出现各类奇怪的错误。
 
 ```jsx
 // 比如你的数据主键是 uid

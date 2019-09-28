@@ -19,7 +19,7 @@ Supports two sizes: `default` and `small`.
       <p>card content</p>
       <p>card content</p>
     </a-card>
-    <br>
+    <br />
     <a-card size="small" title="Small size card" style="width: 300px">
       <a href="#" slot="extra">more</a>
       <p>card content</p>

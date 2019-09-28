@@ -17,5 +17,3 @@ Referring to the Bootstrap [responsive design] (http://getbootstrap.com/css/#gri
   </a-row>
 </template>
 ```
-
-

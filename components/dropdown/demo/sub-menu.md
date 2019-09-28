@@ -11,9 +11,7 @@ The menu has multiple levels.
 ```html
 <template>
   <a-dropdown>
-    <a class="ant-dropdown-link" href="#">
-      Cascading menu <a-icon type="down" />
-    </a>
+    <a class="ant-dropdown-link" href="#"> Cascading menu <a-icon type="down" /> </a>
     <a-menu slot="overlay">
       <a-menu-item>1st menu item</a-menu-item>
       <a-menu-item>2nd menu item</a-menu-item>

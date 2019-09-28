@@ -33,7 +33,7 @@ const Demo = {
     defaultValue: PropTypes.object,
   },
 
-  data () {
+  data() {
     return {
       showTime: true,
       disabled: false,
@@ -41,96 +41,91 @@ const Demo = {
     };
   },
   methods: {
-    onChange (value) {
+    onChange(value) {
       console.log(`DatePicker change: ${value && value.format(format)}`);
       this.setState({
         value,
       });
     },
 
-    onShowTimeChange (e) {
+    onShowTimeChange(e) {
       this.setState({
         showTime: e.target.checked,
       });
     },
 
-    toggleDisabled () {
+    toggleDisabled() {
       this.setState({
         disabled: !this.disabled,
       });
     },
   },
 
-  render () {
+  render() {
     const state = this.$data;
-    const calendar = (<MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-    />);
-    return (<div style={{ width: '240px', margin: '20px' }}>
-      <div style={{ marginBottom: '10px' }}>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label>
-          <input
-            checked={state.disabled}
-            onChange={this.toggleDisabled}
-            type='checkbox'
-          /> disabled
-        </label>
-      </div>
-      <div style={{
-        boxSizing: 'border-box',
-        position: 'relative',
-        display: 'block',
-        lineHeight: 1.5,
-        marginBottom: '22px',
-      }}
-      >
-        <DatePicker
-          animation='slide-up'
-          disabled={state.disabled}
-          calendar={calendar}
-          value={state.value}
-          onChange={this.onChange}
-          scopedSlots={{
-            default: ({ value }) => {
-              return (
-                <input
-                  style={{ width: '200px' }}
-                  readOnly
-                  disabled={state.disabled}
-                  value={value && value.format(format)}
-                  placeholder='请选择日期'
-                />
-              );
-            },
+    const calendar = <MonthCalendar locale={cn ? zhCN : enUS} style={{ zIndex: 1000 }} />;
+    return (
+      <div style={{ width: '240px', margin: '20px' }}>
+        <div style={{ marginBottom: '10px' }}>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <label>
+            <input checked={state.disabled} onChange={this.toggleDisabled} type="checkbox" />{' '}
+            disabled
+          </label>
+        </div>
+        <div
+          style={{
+            boxSizing: 'border-box',
+            position: 'relative',
+            display: 'block',
+            lineHeight: 1.5,
+            marginBottom: '22px',
           }}
         >
-        </DatePicker>
+          <DatePicker
+            animation="slide-up"
+            disabled={state.disabled}
+            calendar={calendar}
+            value={state.value}
+            onChange={this.onChange}
+            scopedSlots={{
+              default: ({ value }) => {
+                return (
+                  <input
+                    style={{ width: '200px' }}
+                    readOnly
+                    disabled={state.disabled}
+                    value={value && value.format(format)}
+                    placeholder="请选择日期"
+                  />
+                );
+              },
+            }}
+          ></DatePicker>
+        </div>
       </div>
-    </div>);
+    );
   },
 };
 
-function onStandaloneSelect (value) {
-  console.log('month-calendar select', (value && value.format(format)));
+function onStandaloneSelect(value) {
+  console.log('month-calendar select', value && value.format(format));
 }
 
-function onStandaloneChange (value) {
-  console.log('month-calendar change', (value && value.format(format)));
+function onStandaloneChange(value) {
+  console.log('month-calendar change', value && value.format(format));
 }
 
-function disabledDate (value) {
-  return value.year() > now.year() ||
-    value.year() === now.year() && value.month() > now.month();
+function disabledDate(value) {
+  return value.year() > now.year() || (value.year() === now.year() && value.month() > now.month());
 }
 
-function onMonthCellContentRender (value) {
+function onMonthCellContentRender(value) {
   // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
   return `${value.month() + 1}月`;
 }
 export default {
-  render () {
+  render() {
     return (
       <div
         style={{

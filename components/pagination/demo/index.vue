@@ -40,10 +40,10 @@ export default {
   type: 'Navigation',
   title: 'Pagination',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <More />
         <Changer />
@@ -55,10 +55,10 @@ export default {
         <Total />
         <ItemRender />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

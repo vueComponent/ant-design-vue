@@ -20,10 +20,10 @@
 > Dropdown 下的 Menu 默认不可选中。如果需要菜单可选中，可以指定 `<Menu selectable>`.
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| visibleChange | 菜单显示状态改变时调用，参数为 visible   | function(visible) |
 
+| 事件名称      | 说明                                   | 回调参数          |
+| ------------- | -------------------------------------- | ----------------- |
+| visibleChange | 菜单显示状态改变时调用，参数为 visible | function(visible) |
 
 ### Dropdown.Button
 
@@ -37,8 +37,9 @@
 | type | 按钮类型，和 [Button](/components/button-cn/) 一致 | string | 'default' |
 | visible(v-model) | 菜单是否显示 | boolean | - |
 
-### Dropdown.Button事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| click | 点击左侧按钮的回调，和 [Button](/components/button-cn/) 一致 | Function |
-| visibleChange | 菜单显示状态改变时调用，参数为 visible   | function(visible) |
+### Dropdown.Button 事件
+
+| 事件名称      | 说明                                                         | 回调参数          |
+| ------------- | ------------------------------------------------------------ | ----------------- |
+| click         | 点击左侧按钮的回调，和 [Button](/components/button-cn/) 一致 | Function          |
+| visibleChange | 菜单显示状态改变时调用，参数为 visible                       | function(visible) |

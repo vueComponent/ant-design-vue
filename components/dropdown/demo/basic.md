@@ -11,9 +11,7 @@ The most basic dropdown menu.
 ```html
 <template>
   <a-dropdown>
-    <a class="ant-dropdown-link" href="#">
-      Hover me <a-icon type="down" />
-    </a>
+    <a class="ant-dropdown-link" href="#"> Hover me <a-icon type="down" /> </a>
     <a-menu slot="overlay">
       <a-menu-item>
         <a href="javascript:;">1st menu item</a>

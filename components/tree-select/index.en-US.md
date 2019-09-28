@@ -1,10 +1,9 @@
-
 ## API
 
 ### Tree props
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | allowClear | Whether allow clear | boolean | false |
 | defaultValue | To set the initial selected treeNode(s). | string\|string\[] | - |
 | disabled | Disabled or not | boolean | false |
@@ -38,6 +37,7 @@
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | A callback function, can be executed when selected treeNodes or input value change | function(value, label, extra) |
@@ -47,17 +47,17 @@
 
 ### Tree Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |
 
 ### TreeNode props
 
 > We recommend you to use `treeData` rather than `TreeNode`, to avoid the trouble of manual construction.
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | selectable | can be selected | boolean | true |
 | disableCheckbox | Disables the checkbox of the treeNode | boolean | false |
 | disabled | Disabled or not | boolean | false |

@@ -21,5 +21,3 @@ To change the element sort by Flex layout order.
   </div>
 </template>
 ```
-
-

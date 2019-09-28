@@ -21,33 +21,32 @@ Add prefix or suffix icons inside input.
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      userName: '',
-    }
-  },
-  methods: {
-    emitEmpty () {
-      this.$refs.userNameInput.focus()
-      this.userName = ''
+  export default {
+    data() {
+      return {
+        userName: '',
+      };
     },
-  },
-}
+    methods: {
+      emitEmpty() {
+        this.$refs.userNameInput.focus();
+        this.userName = '';
+      },
+    },
+  };
 </script>
 <style scoped>
-.components-input-demo-presuffix .anticon-close-circle {
-  cursor: pointer;
-  color: #ccc;
-  transition: color 0.3s;
-  font-size: 12px;
-}
-.components-input-demo-presuffix .anticon-close-circle:hover {
-  color: #999;
-}
-.components-input-demo-presuffix .anticon-close-circle:active {
-  color: #666;
-}
+  .components-input-demo-presuffix .anticon-close-circle {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    font-size: 12px;
+  }
+  .components-input-demo-presuffix .anticon-close-circle:hover {
+    color: #999;
+  }
+  .components-input-demo-presuffix .anticon-close-circle:active {
+    color: #666;
+  }
 </style>
 ```
-

@@ -54,5 +54,3 @@ Use `row-flex` define `flex` layout, its child elements depending on the value o
   </div>
 </template>
 ```
-
-

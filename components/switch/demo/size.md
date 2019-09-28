@@ -11,9 +11,9 @@
 ```html
 <template>
   <div>
-    <a-switch defaultChecked/>
-    <br>
-    <a-switch size="small" defaultChecked/>
+    <a-switch defaultChecked />
+    <br />
+    <a-switch size="small" defaultChecked />
   </div>
 </template>
 ```

@@ -1,4 +1,3 @@
-
 <cn>
 #### 文本域
 用于多行输入。
@@ -11,7 +10,6 @@ For multi-line input.
 
 ```html
 <template>
-  <a-textarea placeholder="Basic usage" :rows="4"/>
+  <a-textarea placeholder="Basic usage" :rows="4" />
 </template>
 ```
-

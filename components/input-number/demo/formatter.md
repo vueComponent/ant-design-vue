@@ -34,9 +34,6 @@ Display value within it's situation with `formatter`, and we usually use `parser
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 ```
-
-
-

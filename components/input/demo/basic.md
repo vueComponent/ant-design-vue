@@ -10,6 +10,6 @@ Basic usage example.
 
 ```html
 <template>
-  <a-input placeholder="Basic usage"/>
+  <a-input placeholder="Basic usage" />
 </template>
 ```

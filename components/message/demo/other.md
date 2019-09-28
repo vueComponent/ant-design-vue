@@ -1,4 +1,3 @@
-
 <cn>
 #### 其他提示类型
 包括成功、失败、警告。
@@ -20,17 +19,16 @@ Messages of success, error and warning types.
 <script>
   export default {
     methods: {
-      success () {
+      success() {
         this.$message.success('This is a message of success');
       },
-      error () {
+      error() {
         this.$message.error('This is a message of error');
       },
-      warning () {
+      warning() {
         this.$message.warning('This is message of warning');
       },
-    }
-  }
+    },
+  };
 </script>
 ```
-

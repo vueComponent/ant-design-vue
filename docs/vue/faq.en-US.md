@@ -1,6 +1,6 @@
 # FAQ
 
-Here are the frequently asked questions about Ant Design Vue that you should look up before you ask in community or create new issue. 
+Here are the frequently asked questions about Ant Design Vue that you should look up before you ask in community or create new issue.
 
 ### Are you going to provide Sass/Stylus(etc...) style file?
 
@@ -41,4 +41,3 @@ Try `defaultValue` or `change` or `v-model` to change `value`.
 Yes, ant-design-vue is designed to develop a complete background application, we override some global styles for styling convenience, and it can't be removed now. More info trace https://github.com/ant-design/ant-design/issues/4331 .
 
 Or, follow the instructions in [How to avoid modifying global styles?](docs/react/customize-theme#How-to-avoid-modifying-global-styles-?)
-

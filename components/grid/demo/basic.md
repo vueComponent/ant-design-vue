@@ -31,5 +31,3 @@ You can create a basic grid system by using a single set of `Row` and `Col` grid
   </div>
 </template>
 ```
-
-

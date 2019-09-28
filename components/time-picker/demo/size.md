@@ -17,11 +17,11 @@ The input box comes in three sizes. large is used in the form, while the medium 
   </div>
 </template>
 <script>
-import moment from 'moment';
-export default {
-  methods: {
-    moment,
-  },
-}
+  import moment from 'moment';
+  export default {
+    methods: {
+      moment,
+    },
+  };
 </script>
 ```

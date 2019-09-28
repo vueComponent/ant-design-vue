@@ -54,10 +54,6 @@
         "url": "https://github.com/vueComponent/ant-design-vue/issues"
     },
     "homepage": "https://vue.ant.design/",
-    "pre-commit": [
-        "lint",
-        "prettier"
-    ],
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged"

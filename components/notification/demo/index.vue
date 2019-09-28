@@ -37,10 +37,10 @@ export default {
   noinstant: true,
   title: 'Notification',
   subtitle: '通知提醒框',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <CustomIcon />
         <CustomStyle />
@@ -50,8 +50,8 @@ export default {
         <WithIcon />
         <Update />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

@@ -22,15 +22,13 @@
     data() {
       return {
         loading: true,
-      }
+      };
     },
     methods: {
       handleClick() {
-        this.loading = !this.loading
-      }
+        this.loading = !this.loading;
+      },
     },
-  }
+  };
 </script>
 ```
-
-

@@ -2,14 +2,11 @@
 
 ConfigProvider 使用 Vue 的 [provide / inject](https://vuejs.org/v2/api/#provide-inject) 特性，只需在应用外围包裹一次即可全局生效。
 
-
-
-
-````html
+```html
 <a-config-provider :getPopupContainer="getPopupContainer">
   <app />
 </a-config-provider>
-````
+```
 
 ### Content Security Policy
 

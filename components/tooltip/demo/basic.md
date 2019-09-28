@@ -11,11 +11,10 @@ The simplest usage.
 ```html
 <template>
   <a-tooltip>
-    <template slot='title'>
+    <template slot="title">
       prompt text
     </template>
     Tooltip will show when mouse enter.
   </a-tooltip>
 </template>
 ```
-

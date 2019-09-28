@@ -28,23 +28,22 @@ export default {
   zhType: '数据录入',
   cols: 2,
   title: 'AutoComplete',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <CertainCategory/>
-        <Custom/>
-        <NonCaseSensitive/>
-        <Options/>
-        <UncertainCategory/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <CertainCategory />
+        <Custom />
+        <NonCaseSensitive />
+        <Options />
+        <UncertainCategory />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
   },
 };
 </script>
-

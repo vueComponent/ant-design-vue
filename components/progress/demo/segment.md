@@ -23,4 +23,3 @@ A standard progress bar.
   </div>
 </template>
 ```
-

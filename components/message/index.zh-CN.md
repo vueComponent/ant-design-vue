@@ -22,11 +22,10 @@
 
 其中`message[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise 。
 
-
 - `message.open(config)`
 
 | 参数 | 说明 | 类型 | 默认值 |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | content | 提示内容 | string\| VNode \|(h) => VNode | - |
 | duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number | 3 |
 | onClose | 关闭时触发的回调函数 | Function | - |

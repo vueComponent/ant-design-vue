@@ -36,24 +36,24 @@ export default {
   category: 'Components',
   subtitle: '对话框',
   title: 'Modal',
-  render () {
+  render() {
     return (
-      <div id='components-modal-demo'>
-        <md cn={md.cn} us={md.us}/>
-        <Async/>
-        <Basic/>
-        <ConfirmPromise/>
-        <Confirm/>
-        <Footer/>
-        <Info/>
-        <Locale/>
-        <Manual/>
-        <Position/>
+      <div id="components-modal-demo">
+        <md cn={md.cn} us={md.us} />
+        <Async />
+        <Basic />
+        <ConfirmPromise />
+        <Confirm />
+        <Footer />
+        <Info />
+        <Locale />
+        <Manual />
+        <Position />
         <ButtonProps />
         <ConfirmRouter />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

@@ -24,4 +24,3 @@ A circular progress bar.
   }
 </style>
 ```
-

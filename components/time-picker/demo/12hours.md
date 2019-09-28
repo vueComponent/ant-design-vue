@@ -17,12 +17,12 @@ TimePicker of 12 hours format, with default format `h:mm:ss a`.
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    onChange(time, timeString){
-      console.log(time, timeString);
-    }
-  },
-}
+  export default {
+    methods: {
+      onChange(time, timeString) {
+        console.log(time, timeString);
+      },
+    },
+  };
 </script>
 ```

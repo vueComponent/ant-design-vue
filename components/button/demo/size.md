@@ -30,27 +30,23 @@ If a large or small button is desired, set the `size` property to either `large`
     <a-button type="primary" icon="download" :size="size">Download</a-button>
     <br />
     <a-button-group :size="size">
-      <a-button type="primary">
-        <a-icon type="left" />Backward
-      </a-button>
-      <a-button type="primary">
-        Forward<a-icon type="right" />
-      </a-button>
+      <a-button type="primary"> <a-icon type="left" />Backward </a-button>
+      <a-button type="primary"> Forward<a-icon type="right" /> </a-button>
     </a-button-group>
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      size: 'large',
-    }
-  },
-  methods: {
-    handleSizeChange (e) {
-      this.size = e.target.value
+  export default {
+    data() {
+      return {
+        size: 'large',
+      };
     },
-  },
-}
+    methods: {
+      handleSizeChange(e) {
+        this.size = e.target.value;
+      },
+    },
+  };
 </script>
 ```

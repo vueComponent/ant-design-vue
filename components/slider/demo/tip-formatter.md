@@ -16,18 +16,17 @@ Use `tipFormatter` to format content of `Toolip`. If `tipFormatter` is null, hid
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      disabled: false,
-    }
-  },
-  methods: {
-    formatter(value) {
-      return `${value}%`;
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        disabled: false,
+      };
+    },
+    methods: {
+      formatter(value) {
+        return `${value}%`;
+      },
+    },
+  };
 </script>
 ```
-

@@ -1,8 +1,7 @@
-
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | afterClose | Specify a function that will be called when modal is closed completely. | function | - |
 | bodyStyle | Body style for modal body element. Such as height, padding etc. | object | {} |
 | cancelText | Text of the Cancel button | string\|slot | `Cancel` |
@@ -27,6 +26,7 @@
 | zIndex | The `z-index` of the Modal | Number | 1000 |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | cancel | Specify a function that will be called when a user clicks mask, close button on top right or Cancel button | function(e) |
@@ -46,11 +46,10 @@ There are five ways to display the information based on the content's nature:
 - `Modal.warning`
 - `Modal.confirm`
 
-The items listed above are all functions, expecting a settings object as parameter.
-The properties of the object are follows:
+The items listed above are all functions, expecting a settings object as parameter. The properties of the object are follows:
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | autoFocusButton | Specify which button to autofocus | null\|string: `ok` `cancel` | `ok` |
 | cancelText | Text of the Cancel button | string | `Cancel` |
 | centered | Centered Modal | Boolean | `false` |

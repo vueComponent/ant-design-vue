@@ -19,19 +19,16 @@ Click the button to toggle between available and disabled states.
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         disabled: true,
-      }
+      };
     },
     methods: {
       toggle() {
-        this.disabled = !this.disabled
-      }
+        this.disabled = !this.disabled;
+      },
     },
-  }
+  };
 </script>
 ```
-
-
-

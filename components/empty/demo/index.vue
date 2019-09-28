@@ -34,7 +34,7 @@ export default {
   type: 'Data Display',
   title: 'Empty',
   subtitle: '空状态',
-  render () {
+  render() {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
@@ -42,7 +42,7 @@ export default {
         <ConfigProvider />
         <Customize />
         <api>
-          <CN slot='cn' />
+          <CN slot="cn" />
           <US />
         </api>
       </div>

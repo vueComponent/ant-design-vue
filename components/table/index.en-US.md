@@ -1,32 +1,38 @@
-
 ```jsx
-const dataSource = [{
-  key: '1',
-  name: 'Mike',
-  age: 32,
-  address: '10 Downing Street'
-}, {
-  key: '2',
-  name: 'John',
-  age: 42,
-  address: '10 Downing Street'
-}];
+const dataSource = [
+  {
+    key: '1',
+    name: 'Mike',
+    age: 32,
+    address: '10 Downing Street',
+  },
+  {
+    key: '2',
+    name: 'John',
+    age: 42,
+    address: '10 Downing Street',
+  },
+];
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-  key: 'age',
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-}];
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+];
 
-<Table dataSource={dataSource} columns={columns} />
+<Table dataSource={dataSource} columns={columns} />;
 ```
 
 ## API
@@ -34,7 +40,7 @@ const columns = [{
 ### Table
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | bordered | Whether to show all table borders | boolean | `false` |
 | childrenColumnName | The column contains children to display | string\[] | children |
 | columns | Columns of table | array | - |
@@ -62,6 +68,7 @@ const columns = [{
 | customRow | Set props on per row | Function(record, index) | - |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter) |  |
@@ -70,8 +77,7 @@ const columns = [{
 
 #### customRow usage
 
-Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`.
-Follow [Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx) syntax。
+Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`. Follow [Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx) syntax。
 
 ```jsx
 <Table
@@ -104,7 +110,7 @@ Follow [Vue jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx) syntax
 One of the Table `columns` prop for describing the table's columns, Column has the same API.
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |
 | colSpan | Span of this column's title | number |  |
 | dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |
@@ -130,21 +136,19 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { filterIcon: 'XXX'}` | object | - |
 | scopedSlots | When using columns, you can use this property to configure the properties that support the slot-scope, such as `scopedSlots: { customRender: 'XXX'}` | object | - |
 
-
 ### ColumnGroup
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | title | Title of the column group | string\|slot | - |
 | slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { title: 'XXX'}` | object | - |
-
 
 ### pagination
 
 Properties for pagination.
 
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| Property | Description                          | Type                        | Default  |
+| -------- | ------------------------------------ | --------------------------- | -------- |
 | position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
 More about pagination, please check [`Pagination`](/components/pagination/).
@@ -154,7 +158,7 @@ More about pagination, please check [`Pagination`](/components/pagination/).
 Properties for row selection.
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | columnWidth | Set the width of the selection column | string\|number | - |
 | columnTitle | Set the title of the selection column | string\|VNode | - |
 | fixed | Fixed selection column on the left | boolean | - |
@@ -173,11 +177,10 @@ Properties for row selection.
 Custom selection config
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | key | Unique key of this selection | string | - |
 | text | Display text of this selection | string\|VNode | - |
 | onSelect | Callback executed when this selection is clicked | Function(changeableRowKeys) | - |
-
 
 ## Note
 

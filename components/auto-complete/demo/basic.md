@@ -1,4 +1,3 @@
-
 <cn>
 #### 基本使用
 基本使用。通过 dataSource 设置自动完成的数据源
@@ -20,25 +19,20 @@ Basic Usage, set datasource of autocomplete with `dataSource` property.
   />
 </template>
 <script>
-export default {
-  data() {
-    return {
-      dataSource: [],
-    }
-  },
-  methods: {
-    handleSearch(value) {
-      this.dataSource = !value ? [] : [
-        value,
-        value + value,
-        value + value + value,
-      ]
+  export default {
+    data() {
+      return {
+        dataSource: [],
+      };
     },
-    onSelect(value) {
-      console.log('onSelect', value);
-    }
-  }
-}
+    methods: {
+      handleSearch(value) {
+        this.dataSource = !value ? [] : [value, value + value, value + value + value];
+      },
+      onSelect(value) {
+        console.log('onSelect', value);
+      },
+    },
+  };
 </script>
 ```
-

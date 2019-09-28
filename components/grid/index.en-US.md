@@ -3,7 +3,7 @@
 ### Row
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | align | the vertical alignment of the flex layout: `top` `middle` `bottom` | string | `top` |
 | gutter | spacing between grids, could be a number or a object like `{ xs: 8, sm: 16, md: 24}` | number/object | 0 |
 | justify | horizontal arrangement of the flex layout: `start` `end` `center` `space-around` `space-between` | string | `start` |
@@ -12,7 +12,7 @@
 ### Col
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | offset | the number of cells to offset Col from the left | number | 0 |
 | order | raster order, used in `flex` layout mode | number | 0 |
 | pull | the number of cells that raster is moved to the left | number | 0 |

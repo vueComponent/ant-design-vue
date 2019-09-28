@@ -3,18 +3,18 @@ import VcPagination from '../index';
 import '../assets/index.less';
 
 export default {
-  data () {
+  data() {
     return {
       current: 3,
     };
   },
   methods: {
-    onChange (page) {
+    onChange(page) {
       console.log(page);
       this.current = page;
     },
   },
-  render () {
+  render() {
     return (
       <div>
         <VcPagination

@@ -1,7 +1,7 @@
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | addon | some addon to timepicker panel bottom | slot \| slot-scope | - |
 | allowClear | allow clearing text | boolean | true |
 | autoFocus | get focus when component mounted | boolean | false |
@@ -28,6 +28,7 @@
 | value(v-model) | to set time | [moment](http://momentjs.com/) | - |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | a callback function, can be executed when the selected time is changing | function(time: moment, timeString: string): void |
@@ -35,8 +36,7 @@
 
 ## Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
-
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |

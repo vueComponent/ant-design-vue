@@ -23,25 +23,25 @@ Display statistic data in Card.
             style="margin-right: 50px"
           >
             <template v-slot:prefix>
-                <a-icon type="arrow-up" />
-              </template>
+              <a-icon type="arrow-up" />
+            </template>
           </a-statistic>
         </a-card>
       </a-col>
       <a-col :span="12">
         <a-card>
           <a-statistic
-              title="Idle"
-              :value="9.3"
-              :precision="2"
-              suffix="%"
-              valueClass="demo-class"
-              :valueStyle="{ color: '#cf1322' }"
-            >
-              <template v-slot:prefix>
-                <a-icon type="arrow-down" />
-              </template>
-            </a-statistic>
+            title="Idle"
+            :value="9.3"
+            :precision="2"
+            suffix="%"
+            valueClass="demo-class"
+            :valueStyle="{ color: '#cf1322' }"
+          >
+            <template v-slot:prefix>
+              <a-icon type="arrow-down" />
+            </template>
+          </a-statistic>
         </a-card>
       </a-col>
     </a-row>

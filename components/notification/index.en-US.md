@@ -12,7 +12,7 @@
 The properties of config are as follows:
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | btn | Customized close button | vueNode \|function(h) | - |
 | class | Customized CSS class | string | - |
 | description | The content of notification box (required) | string\| vueNode \|function(h) | - |
@@ -38,7 +38,7 @@ notification.config({
 ```
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | bottom | Distance from the bottom of the viewport, when `placement` is `bottomRight` or `bottomLeft` (unit: pixels). | string | `24px` |
 | duration | Time in seconds before Notification is closed. When set to 0 or null, it will never be closed automatically | number | 4.5 |
 | getContainer | Return the mount node for Notification | () => HTMLNode | () => document.body |

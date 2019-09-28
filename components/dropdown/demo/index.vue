@@ -29,22 +29,22 @@ export default {
   type: 'Navigation',
   zhType: '导航',
   title: 'Dropdown',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <ContextMenu />
         <DropdownButton />
         <Event />
-        <Item/>
+        <Item />
         <OverlayVisible />
         <Placement />
         <SubMenu />
         <Trigger />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

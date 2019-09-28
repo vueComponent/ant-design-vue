@@ -3,17 +3,13 @@ import VcPagination from '../index';
 import '../assets/index.less';
 
 export default {
-  data () {
+  data() {
     return {};
   },
-  render () {
+  render() {
     return (
       <div>
-        <VcPagination
-          simple
-          defaultCurrent={1}
-          total={50}
-        />
+        <VcPagination simple defaultCurrent={1} total={50} />
       </div>
     );
   },

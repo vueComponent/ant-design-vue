@@ -20,11 +20,9 @@ Use tag `<Icon />` to create an icon and set its type in the `type` prop. Specif
   </div>
 </template>
 <style scoped>
-.icons-list >>> .anticon {
-  margin-right: 6px;
-  font-size: 24px;
-}
+  .icons-list >>> .anticon {
+    margin-right: 6px;
+    font-size: 24px;
+  }
 </style>
 ```
-
-

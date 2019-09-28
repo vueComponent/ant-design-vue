@@ -7,18 +7,22 @@ import TimePicker from '../index';
 
 const format = 'h:mm a';
 
-const now = moment().hour(0).minute(0);
+const now = moment()
+  .hour(0)
+  .minute(0);
 
-function onChange (value) {
+function onChange(value) {
   console.log(value && value.format(format));
 }
 
 const showSecond = true;
 const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
 
-const now1 = moment().hour(14).minute(30);
+const now1 = moment()
+  .hour(14)
+  .minute(30);
 
-function generateOptions (length, excludedOptions) {
+function generateOptions(length, excludedOptions) {
   const arr = [];
   for (let value = 0; value < length; value++) {
     if (excludedOptions.indexOf(value) < 0) {
@@ -28,15 +32,15 @@ function generateOptions (length, excludedOptions) {
   return arr;
 }
 
-function onChange1 (value) {
+function onChange1(value) {
   console.log(value && value.format(str));
 }
 
-function disabledHours () {
+function disabledHours() {
   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23];
 }
 
-function disabledMinutes (h) {
+function disabledMinutes(h) {
   switch (h) {
     case 9:
       return generateOptions(60, [30]);
@@ -47,58 +51,54 @@ function disabledMinutes (h) {
   }
 }
 
-function disabledSeconds (h, m) {
-  return [h + m % 60];
+function disabledSeconds(h, m) {
+  return [h + (m % 60)];
 }
 
-export default{
-  data () {
+export default {
+  data() {
     return {
       open: false,
       value: moment(),
     };
   },
   methods: {
-    setOpen ({ open }) {
+    setOpen({ open }) {
       this.open = open;
     },
-    toggleOpen () {
+    toggleOpen() {
       this.open = !this.open;
     },
-    handleValueChange  (value) {
+    handleValueChange(value) {
       console.log(value && value.format('HH:mm:ss'));
       this.value = value;
     },
-    clear () {
+    clear() {
       this.value = undefined;
     },
   },
-  render () {
+  render() {
     return (
       <div>
         <TimePicker
           showSecond={false}
           defaultValue={now}
-          class='xxx'
+          class="xxx"
           onChange={onChange}
           format={format}
           use12Hours
           inputReadOnly
         />
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div>
           <h3>Disabled picker</h3>
-          <TimePicker
-            defaultValue={now1}
-            disabled
-            onChange={onChange1}
-          />
+          <TimePicker defaultValue={now1} disabled onChange={onChange1} />
           <h3>Disabled options</h3>
           <TimePicker
             showSecond={showSecond}
             defaultValue={now1}
-            class='xxx'
+            class="xxx"
             onChange={onChange1}
             disabledHours={disabledHours}
             disabledMinutes={disabledMinutes}
@@ -111,7 +111,7 @@ export default{
           <TimePicker defaultValue={moment()} showSecond={false} />
 
           <TimePicker defaultValue={moment()} showMinute={false} showSecond={false} />
-          <TimePicker defaultValue={moment()} showHour={false} showSecond={false}/>
+          <TimePicker defaultValue={moment()} showHour={false} showSecond={false} />
           <TimePicker defaultValue={moment()} showHour={false} showMinute={false} />
         </div>
         <TimePicker
@@ -119,7 +119,7 @@ export default{
           showSecond={showSecond}
           // use to control utfOffset, locale, default open value
           defaultOpenValue={moment()}
-          class='xxx'
+          class="xxx"
           onChange={onChange1}
           disabledHours={() => [0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23]}
           disabledMinutes={() => [0, 2, 4, 6, 8]}
@@ -127,30 +127,19 @@ export default{
         />
         <div>
           <button onClick={this.toggleOpen}>Toggle open</button>
-          <TimePicker
-            open={this.open}
-            onOpen={this.setOpen}
-            onClose={this.setOpen}
-            focusOnOpen
-          />
+          <TimePicker open={this.open} onOpen={this.setOpen} onClose={this.setOpen} focusOnOpen />
         </div>
         <TimePicker
           style={{ width: '100px' }}
           showSecond={showSecond}
           defaultValue={moment()}
-          class='xxx'
+          class="xxx"
           onChange={onChange}
         />
         <TimePicker defaultValue={moment()} showSecond={false} minuteStep={15} />
         <div>
-          <TimePicker
-            defaultValue={this.value}
-            onChange={this.handleValueChange}
-          />
-          <TimePicker
-            value={this.value}
-            onChange={this.handleValueChange}
-          />
+          <TimePicker defaultValue={this.value} onChange={this.handleValueChange} />
+          <TimePicker value={this.value} onChange={this.handleValueChange} />
           <button onClick={this.clear}>clear</button>
         </div>
       </div>

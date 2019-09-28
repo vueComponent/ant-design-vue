@@ -24,4 +24,3 @@ Simplest Usage. Badge will be hidden when `count` is `0`, but we can use `showZe
   </div>
 </template>
 ```
-

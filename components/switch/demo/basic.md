@@ -11,20 +11,19 @@ The most basic usage.
 ```html
 <template>
   <div>
-    <a-switch defaultChecked @change='onChange'/>
+    <a-switch defaultChecked @change="onChange" />
   </div>
 </template>
 <script>
   export default {
-    data () {
-      return {
-      }
+    data() {
+      return {};
     },
     methods: {
-      onChange(checked){
+      onChange(checked) {
         console.log(`a-switch to ${checked}`);
-      }
+      },
     },
-  }
+  };
 </script>
 ```

@@ -21,12 +21,12 @@ We can use Checkbox and Grid Checkbox.group, to implement complex layout
   </a-checkbox-group>
 </template>
 <script>
-export default {
-  methods: {
-    onChange (checkedValues) {
-      console.log('checked = ', checkedValues)
+  export default {
+    methods: {
+      onChange(checkedValues) {
+        console.log('checked = ', checkedValues);
+      },
     },
-  },
-}
+  };
 </script>
 ```

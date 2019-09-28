@@ -30,15 +30,13 @@ You can set it to a object like `{ xs: 8, sm: 16, md: 24, lg: 32 }` for responsi
   </div>
 </template>
 <style scoped>
-.gutter-example >>> .ant-row > div {
-  background: transparent;
-  border: 0;
-}
-.gutter-box {
-  background: #00A0E9;
-  padding: 5px 0;
-}
+  .gutter-example >>> .ant-row > div {
+    background: transparent;
+    border: 0;
+  }
+  .gutter-box {
+    background: #00a0e9;
+    padding: 5px 0;
+  }
 </style>
 ```
-
-

@@ -53,23 +53,23 @@ Layout.Sider supports responsive layout.
   </a-layout>
 </template>
 <script>
-export default {
-  methods: {
-    onCollapse(collapsed, type) {
-      console.log(collapsed, type);
+  export default {
+    methods: {
+      onCollapse(collapsed, type) {
+        console.log(collapsed, type);
+      },
+      onBreakpoint(broken) {
+        console.log(broken);
+      },
     },
-    onBreakpoint(broken) {
-      console.log(broken);
-    }
-  }
-}
+  };
 </script>
 
 <style>
-#components-layout-demo-responsive .logo {
-  height: 32px;
-  background: rgba(255,255,255,.2);
-  margin: 16px;
-}
+  #components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
 </style>
 ```

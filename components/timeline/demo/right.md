@@ -21,5 +21,3 @@ Right alternate timeline.
   </a-timeline>
 </template>
 ```
-
-

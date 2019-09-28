@@ -1,4 +1,3 @@
-
 ## API
 
 日期类组件包括以下四种形式。
@@ -10,14 +9,12 @@
 
 **注意：**DatePicker、MonthPicker、RangePicker、WeekPicker 部分 locale 是从 value 中读取，所以请先正确设置 moment 的 locale。
 
-````html
-// 默认语言为 en-US，如果你需要设置其他语言，推荐在入口文件全局设置 locale
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-moment.locale('zh-cn');
+```html
+// 默认语言为 en-US，如果你需要设置其他语言，推荐在入口文件全局设置 locale import moment from
+'moment'; import 'moment/locale/zh-cn'; moment.locale('zh-cn');
 
 <a-date-picker :defaultValue="moment('2015-01-01', 'YYYY-MM-DD')" />
-````
+```
 
 ### 共同的 API
 
@@ -41,16 +38,16 @@ moment.locale('zh-cn');
 
 ### 共有的事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| openChange | 弹出日历和关闭日历的回调 | function(status) |
-| panelChange | 日期面板变化时的回调 | function(value, mode) | - |
+| 事件名称    | 说明                     | 回调参数              |
+| ----------- | ------------------------ | --------------------- |
+| openChange  | 弹出日历和关闭日历的回调 | function(status)      |
+| panelChange | 日期面板变化时的回调     | function(value, mode) | - |
 
 ### 共同的方法
 
-| 名称 | 描述 |
-| --- | --- |
-| blur() | 移除焦点 |
+| 名称    | 描述     |
+| ------- | -------- |
+| blur()  | 移除焦点 |
 | focus() | 获取焦点 |
 
 ### DatePicker
@@ -68,12 +65,12 @@ moment.locale('zh-cn');
 | showToday | 是否展示“今天”按钮 | boolean | true |
 | value(v-model) | 日期 | [moment](http://momentjs.com/) | 无 |
 
-### DatePicker事件
+### DatePicker 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 时间发生变化的回调 | function(date: moment, dateString: string) |
-| ok | 点击确定按钮的回调 | function() |
+| 事件名称 | 说明               | 回调参数                                   |
+| -------- | ------------------ | ------------------------------------------ |
+| change   | 时间发生变化的回调 | function(date: moment, dateString: string) |
+| ok       | 点击确定按钮的回调 | function()                                 |
 
 ### MonthPicker
 
@@ -86,11 +83,11 @@ moment.locale('zh-cn');
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" slot-scope="mode" | - |
 | value(v-model) | 日期 | [moment](http://momentjs.com/) | 无 |
 
-### MonthPicker事件
+### MonthPicker 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 时间发生变化的回调，发生在用户选择时间时 | function(date: moment, dateString: string) |
+| 事件名称 | 说明                                     | 回调参数                                   |
+| -------- | ---------------------------------------- | ------------------------------------------ |
+| change   | 时间发生变化的回调，发生在用户选择时间时 | function(date: moment, dateString: string) |
 
 ### WeekPicker
 
@@ -102,11 +99,11 @@ moment.locale('zh-cn');
 | value(v-model) | 日期 | [moment](http://momentjs.com/) | - |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" slot-scope="mode" | - |
 
-### WeekPicker事件
+### WeekPicker 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 时间发生变化的回调，发生在用户选择时间时 | function(date: moment, dateString: string) |
+| 事件名称 | 说明                                     | 回调参数                                   |
+| -------- | ---------------------------------------- | ------------------------------------------ |
+| change   | 时间发生变化的回调，发生在用户选择时间时 | function(date: moment, dateString: string) |
 
 ### RangePicker
 
@@ -122,11 +119,10 @@ moment.locale('zh-cn');
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
 | value(v-model) | 日期 | [moment](http://momentjs.com/)\[] | 无 |
 
-### RangePicker事件
+### RangePicker 事件
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | calendarChange | 待选日期发生变化的回调 | function(dates: \[moment, moment\], dateStrings: \[string, string\]) |
 | change | 日期范围发生变化的回调 | function(dates: \[moment, moment\], dateStrings: \[string, string\]) | 无 |
 | ok | 点击确定按钮的回调 | function(dates: [moment](http://momentjs.com/)\[]) |
-

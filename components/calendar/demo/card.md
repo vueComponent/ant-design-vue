@@ -15,13 +15,12 @@ Nested inside a container element for rendering in limited space.
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    onPanelChange(value, mode) {
-      console.log(value, mode);
-    }
-  }
-}
+  export default {
+    methods: {
+      onPanelChange(value, mode) {
+        console.log(value, mode);
+      },
+    },
+  };
 </script>
 ```
-

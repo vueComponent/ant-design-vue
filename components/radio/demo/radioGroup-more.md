@@ -21,22 +21,22 @@ Vertical RadioGroup, with more radios.
   </a-radio-group>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      value: 1,
-      radioStyle: {
-        display: 'block',
-        height: '30px',
-        lineHeight: '30px',
-      },
-    }
-  },
-  methods: {
-    onChange (e) {
-      console.log('radio checked', e.target.value)
+  export default {
+    data() {
+      return {
+        value: 1,
+        radioStyle: {
+          display: 'block',
+          height: '30px',
+          lineHeight: '30px',
+        },
+      };
     },
-  },
-}
+    methods: {
+      onChange(e) {
+        console.log('radio checked', e.target.value);
+      },
+    },
+  };
 </script>
 ```

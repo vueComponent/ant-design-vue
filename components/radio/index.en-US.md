@@ -1,11 +1,9 @@
-
-
 ## API
 
 ### Radio
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | autoFocus | get focus when component mounted | boolean | false |
 | checked | Specifies whether the radio is selected. | boolean | - |
 | defaultChecked | Specifies the initial state: whether or not the radio is selected. | boolean |  | false |
@@ -17,7 +15,7 @@
 Radio group can wrap a group of `Radio`。
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | defaultValue | Default selected value | any | - |
 | disabled | Disable all radio buttons | boolean | false |
 | name | The `name` property of all `input[type="radio"]` children | string | - |
@@ -27,6 +25,7 @@ Radio group can wrap a group of `Radio`。
 | buttonStyle | style type of radio button | `outline` \| `solid` | `outline` |
 
 ### RadioGroup Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | The callback function that is triggered when the state changes. | Function(e:Event) |
@@ -35,7 +34,7 @@ Radio group can wrap a group of `Radio`。
 
 ### Radio
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |

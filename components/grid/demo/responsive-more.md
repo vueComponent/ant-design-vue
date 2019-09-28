@@ -19,5 +19,3 @@ where `:xs="6"` is equivalent to `:xs="{span: 6}"`.
   </a-row>
 </template>
 ```
-
-

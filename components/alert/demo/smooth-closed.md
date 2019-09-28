@@ -21,17 +21,17 @@ Smoothly and unaffectedly unmount Alert.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      visible: true,
-    }
-  },
-  methods: {
-    handleClose(){
-      this.visible = false
-    }
-  }
-}
+  export default {
+    data() {
+      return {
+        visible: true,
+      };
+    },
+    methods: {
+      handleClose() {
+        this.visible = false;
+      },
+    },
+  };
 </script>
 ```

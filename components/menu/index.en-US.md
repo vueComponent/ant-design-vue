@@ -1,7 +1,6 @@
-
 ## API
 
-````html
+```html
 <template>
   <a-menu>
     <a-menu-item>菜单项</a-menu-item>
@@ -10,12 +9,12 @@
     </a-sub-menu>
   </a-menu>
 </template>
-````
+```
 
 ### Menu
 
 | Param | Description | Type | Default value |
-| ----- | ----------- | ---- | ------------- |
+| --- | --- | --- | --- |
 | defaultOpenKeys | array with the keys of default opened sub menus |  |  |
 | defaultSelectedKeys | array with the keys of default selected menu items | string\[] |  |
 | forceSubMenuRender | render submenu into DOM before it shows | boolean | false |
@@ -32,6 +31,7 @@
 | theme | color theme of the menu | string: `light` `dark` | `light` |
 
 ### Menu Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | click | callback executed when a menu item is clicked | function({ item, key, keyPath }) |
@@ -39,36 +39,36 @@
 | openChange | called when open/close sub menu | function(openKeys: string\[]) |
 | select | callback executed when a menu item is selected | function({ item, key, selectedKeys }) |
 
-
 ### Menu.Item
 
-| Param | Description | Type | Default value |
-| ----- | ----------- | ---- | ------------- |
-| disabled | whether menu item is disabled or not | boolean | false |
-| key | unique id of the menu item | string |  |
-| title | set display title for collapsed item | string |  |
+| Param    | Description                          | Type    | Default value |
+| -------- | ------------------------------------ | ------- | ------------- |
+| disabled | whether menu item is disabled or not | boolean | false         |
+| key      | unique id of the menu item           | string  |               |
+| title    | set display title for collapsed item | string  |               |
 
 ### Menu.SubMenu
 
-| Param | Description | Type | Default value |
-| ----- | ----------- | ---- | ------------- |
-| disabled | whether sub menu is disabled or not | boolean | false |
-| key | unique id of the sub menu | string |  |
-| title | title of the sub menu | string\|slot |  |
+| Param    | Description                         | Type         | Default value |
+| -------- | ----------------------------------- | ------------ | ------------- |
+| disabled | whether sub menu is disabled or not | boolean      | false         |
+| key      | unique id of the sub menu           | string       |               |
+| title    | title of the sub menu               | string\|slot |               |
 
 The children of Menu.SubMenu must be `MenuItem` or `SubMenu`.
 
 ### Menu.SubMenu Events
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| titleClick | callback executed when the sub menu title is clicked | function({ key, domEvent }) |
+
+| Events Name | Description                                          | Arguments                   |
+| ----------- | ---------------------------------------------------- | --------------------------- |
+| titleClick  | callback executed when the sub menu title is clicked | function({ key, domEvent }) |
 
 ### Menu.ItemGroup
 
-| Param | Description | Type | Default value |
-| ----- | ----------- | ---- | ------------- |
-| children | sub menu items | MenuItem\[] |  |
-| title | title of the group | string\|slot |  |
+| Param    | Description        | Type         | Default value |
+| -------- | ------------------ | ------------ | ------------- |
+| children | sub menu items     | MenuItem\[]  |               |
+| title    | title of the group | string\|slot |               |
 
 The children of Menu.ItemGroup must be `MenuItem`.
 

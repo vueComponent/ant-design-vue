@@ -32,10 +32,10 @@ export default {
   subtitle: '输入框',
   type: 'Data Entry',
   title: 'Input',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <AutosizeTextarea />
         <Presuffix />
@@ -48,15 +48,12 @@ export default {
         <AllowClear />
         <PasswordInput />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
   },
 };
 </script>
-<style>
-
-</style>
-
+<style></style>

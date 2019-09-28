@@ -54,17 +54,17 @@ Inline menu could be collapsed.
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      collapsed: false,
-    }
-  },
-  methods: {
-    toggleCollapsed () {
-      this.collapsed = !this.collapsed
+  export default {
+    data() {
+      return {
+        collapsed: false,
+      };
     },
-  },
-}
+    methods: {
+      toggleCollapsed() {
+        this.collapsed = !this.collapsed;
+      },
+    },
+  };
 </script>
 ```

@@ -17,22 +17,22 @@ Basic slider. When `range` is `true`, display as dual thumb mode. When `disable`
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      disabled: false,
-    }
-  },
-  methods: {
-    handleDisabledChange(disabled) {
-      this.disabled = disabled
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        disabled: false,
+      };
+    },
+    methods: {
+      handleDisabledChange(disabled) {
+        this.disabled = disabled;
+      },
+    },
+  };
 </script>
 <style scoped>
-.code-box-demo .ant-slider {
-  margin-bottom: 16px;
-}
+  .code-box-demo .ant-slider {
+    margin-bottom: 16px;
+  }
 </style>
 ```

@@ -1,4 +1,3 @@
-
 <cn>
 #### 受控面板
 通过组合 `mode` 与 `onPanelChange` 控制要展示的面板。
@@ -30,35 +29,34 @@ Determing which panel to show with `mode` and `onPanelChange`.
   </div>
 </template>
 <script>
-export default {
-  data(){
-    return {
-      mode1: 'time',
-      mode2: ['month', 'month'],
-      value: [],
-    }
-  },
-  methods: {
-    handleOpenChange1(open) {
-      if (open) {
-        this.mode1 = 'time'
-      }
+  export default {
+    data() {
+      return {
+        mode1: 'time',
+        mode2: ['month', 'month'],
+        value: [],
+      };
     },
-    handleChange(value){
-      this.value = value
+    methods: {
+      handleOpenChange1(open) {
+        if (open) {
+          this.mode1 = 'time';
+        }
+      },
+      handleChange(value) {
+        this.value = value;
+      },
+      handlePanelChange1(value, mode) {
+        this.mode1 = mode;
+      },
+      handlePanelChange2(value, mode) {
+        this.value = value;
+        this.mode2 = [
+          mode[0] === 'date' ? 'month' : mode[0],
+          mode[1] === 'date' ? 'month' : mode[1],
+        ];
+      },
     },
-    handlePanelChange1(value, mode) {
-      this.mode1 = mode
-    },
-    handlePanelChange2 (value, mode) {
-      this.value = value
-      this.mode2 = [
-        mode[0] === 'date' ? 'month' : mode[0],
-        mode[1] === 'date' ? 'month' : mode[1],
-      ]
-    },
-  }
-}
+  };
 </script>
 ```
-

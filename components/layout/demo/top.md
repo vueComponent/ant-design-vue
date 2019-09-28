@@ -42,13 +42,12 @@ Top-bottom structure is conform with the top-bottom viewing habit, it's a classi
   </a-layout>
 </template>
 <style>
-#components-layout-demo-top .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255,255,255,.2);
-  margin: 16px 24px 16px 0;
-  float: left;
-}
+  #components-layout-demo-top .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+  }
 </style>
-
 ```

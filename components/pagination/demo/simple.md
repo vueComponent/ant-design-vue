@@ -1,4 +1,3 @@
-
 <cn>
 #### 简洁
 简单的翻页。
@@ -14,4 +13,3 @@ Simple mode.
   <a-pagination simple :defaultCurrent="2" :total="50" />
 </template>
 ```
-

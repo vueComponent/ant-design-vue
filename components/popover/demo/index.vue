@@ -36,10 +36,10 @@ export default {
   subtitle: '气泡卡片',
   type: 'Data Display',
   title: 'Popover',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <ArrowCenter />
         <Control />
@@ -47,10 +47,10 @@ export default {
         <TriggerType />
         <HoverWithClick />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

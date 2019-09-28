@@ -22,8 +22,8 @@ Use text link for prev and next button.
           return <a>Next</a>;
         }
         return originalElement;
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 ```

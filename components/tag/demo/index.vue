@@ -35,10 +35,10 @@ export default {
   subtitle: '标签',
   type: 'Data Display',
   title: 'Tag',
-  render () {
+  render() {
     return (
-      <div id='components-tag-demo'>
-        <md cn={md.cn} us={md.us}/>
+      <div id="components-tag-demo">
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Checkable />
         <Colorful />
@@ -46,10 +46,10 @@ export default {
         <HotTags />
         <Controlled />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );
@@ -57,7 +57,7 @@ export default {
 };
 </script>
 <style>
-#components-tag-demo .ant-tag{
+#components-tag-demo .ant-tag {
   margin-bottom: 8px;
 }
 </style>

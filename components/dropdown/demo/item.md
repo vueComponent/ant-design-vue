@@ -11,9 +11,7 @@ Divider and disabled menu item.
 ```html
 <template>
   <a-dropdown>
-    <a class="ant-dropdown-link" href="#">
-      Hover me <a-icon type="down" />
-    </a>
+    <a class="ant-dropdown-link" href="#"> Hover me <a-icon type="down" /> </a>
     <a-menu slot="overlay">
       <a-menu-item key="0">
         <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>

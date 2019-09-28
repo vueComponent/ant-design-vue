@@ -51,6 +51,7 @@ import {
 } from './util';
 import { SelectPropTypes } from './PropTypes';
 import contains from '../_util/Dom/contains';
+import { isIE, isEdge } from '../_util/env';
 
 Vue.use(ref, { name: 'ant-ref' });
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
@@ -463,6 +464,7 @@ const Select = {
     onArrowClick(e) {
       e.stopPropagation();
       e.preventDefault();
+      this.clearBlurTime();
       if (!this.disabled) {
         this.setOpenState(!this.$data._open, !this.$data._open);
       }
@@ -640,12 +642,17 @@ const Select = {
     },
     inputBlur(e) {
       const target = e.relatedTarget || document.activeElement;
+
+      // https://github.com/vueComponent/ant-design-vue/issues/999
+      // https://github.com/vueComponent/ant-design-vue/issues/1223
       if (
-        (target &&
-          this.selectTriggerRef &&
-          this.selectTriggerRef.getInnerMenu() &&
-          this.selectTriggerRef.getInnerMenu().$el === target) ||
-        contains(e.target, target)
+        (isIE || isEdge) &&
+        (e.relatedTarget === this.$refs.arrow ||
+          (target &&
+            this.selectTriggerRef &&
+            this.selectTriggerRef.getInnerMenu() &&
+            this.selectTriggerRef.getInnerMenu().$el === target) ||
+          contains(e.target, target))
       ) {
         e.target.focus();
         e.preventDefault();
@@ -701,7 +708,7 @@ const Select = {
         }
         this.setOpenState(false);
         this.$emit('blur', this.getVLForOnChange(value));
-      }, 10);
+      }, 200);
     },
     inputFocus(e) {
       if (this.$props.disabled) {
@@ -1434,6 +1441,7 @@ const Select = {
           style={UNSELECTABLE_STYLE}
           {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
           onClick={this.onArrowClick}
+          ref="arrow"
         >
           {inputIcon || defaultIcon}
         </span>

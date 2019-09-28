@@ -51,6 +51,7 @@ import {
 } from './util';
 import { SelectPropTypes } from './PropTypes';
 import contains from '../_util/Dom/contains';
+import { isIE, isEdge } from '../_util/env';
 
 Vue.use(ref, { name: 'ant-ref' });
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
@@ -623,13 +624,17 @@ const Select = {
     },
     inputBlur(e) {
       const target = e.relatedTarget || document.activeElement;
+
+      // https://github.com/vueComponent/ant-design-vue/issues/999
+      // https://github.com/vueComponent/ant-design-vue/issues/1223
       if (
-        e.relatedTarget === this.$refs.arrow ||
-        (target &&
-          this.selectTriggerRef &&
-          this.selectTriggerRef.getInnerMenu() &&
-          this.selectTriggerRef.getInnerMenu().$el === target) ||
-        contains(e.target, target)
+        (isIE || isEdge) &&
+        (e.relatedTarget === this.$refs.arrow ||
+          (target &&
+            this.selectTriggerRef &&
+            this.selectTriggerRef.getInnerMenu() &&
+            this.selectTriggerRef.getInnerMenu().$el === target) ||
+          contains(e.target, target))
       ) {
         e.target.focus();
         e.preventDefault();

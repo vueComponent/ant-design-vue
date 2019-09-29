@@ -455,4 +455,12 @@ export default [
     path: 'empty-cn',
     component: () => import('../components/empty/demo/index.vue'),
   },
+  {
+    path: 'result',
+    component: () => import('../components/result/demo/index.vue'),
+  },
+  {
+    path: 'result-cn',
+    component: () => import('../components/result/demo/index.vue'),
+  },
 ];

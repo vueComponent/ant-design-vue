@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      sVisible: !!this.$props.visible,
+      sVisible: !!this.$props.visible || !!this.$props.defaultVisible,
     };
   },
   watch: {

@@ -137,6 +137,8 @@ import { default as ConfigProvider } from './config-provider';
 
 import { default as Empty } from './empty';
 
+import { default as Result } from './result';
+
 const components = [
   Base,
   Affix,
@@ -195,6 +197,7 @@ const components = [
   Comment,
   ConfigProvider,
   Empty,
+  Result,
 ];
 
 const install = function(Vue) {
@@ -279,6 +282,7 @@ export {
   Comment,
   ConfigProvider,
   Empty,
+  Result,
 };
 
 export default {

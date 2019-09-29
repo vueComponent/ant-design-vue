@@ -28,7 +28,6 @@ const Header = {
     currentSelectPanel: PropTypes.string,
     focusOnOpen: PropTypes.bool,
     // onKeyDown: PropTypes.func,
-    showStr: PropTypes.bool.def(true),
     clearIcon: PropTypes.any,
   },
   data() {
@@ -70,7 +69,6 @@ const Header = {
         return;
       }
 
-      this.showStr = true;
       this.setState({
         str,
       });
@@ -169,14 +167,14 @@ const Header = {
     },
 
     getInput() {
-      const { prefixCls, placeholder, inputReadOnly, invalid, str, showStr } = this;
+      const { prefixCls, placeholder, inputReadOnly, invalid, str } = this;
       const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
       return (
         <input
           class={`${prefixCls}-input ${invalidClass}`}
           ref="input"
           onKeydown={this.onKeyDown}
-          value={showStr ? str : ''}
+          value={str}
           placeholder={placeholder}
           onInput={this.onInputChange}
           readOnly={!!inputReadOnly}

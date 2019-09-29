@@ -16,6 +16,7 @@ import { Button } from './button/button';
 import { Calendar } from './calendar';
 import { Card } from './card';
 import { Collapse } from './collapse/collapse';
+import { Comment } from './comment';
 import { Carousel } from './carousel';
 import { Cascader } from './cascader';
 import { Checkbox } from './checkbox/checkbox';

@@ -64,6 +64,7 @@ export const CarouselProps = {
   variableWidth: PropTypes.bool,
   useCSS: PropTypes.bool,
   slickGoTo: PropTypes.number,
+  responsive: PropTypes.array.def(null),
 };
 
 const Carousel = {

@@ -71,7 +71,6 @@ const Panel = {
       sValue: this.value,
       selectionRange: [],
       currentSelectPanel: '',
-      showStr: true,
     };
   },
   watch: {
@@ -79,11 +78,6 @@ const Panel = {
       if (val) {
         this.setState({
           sValue: val,
-          showStr: true,
-        });
-      } else {
-        this.setState({
-          showStr: false,
         });
       }
     },
@@ -150,7 +144,6 @@ const Panel = {
       inputReadOnly,
       sValue,
       currentSelectPanel,
-      showStr,
       $listeners = {},
     } = this;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
@@ -203,7 +196,6 @@ const Panel = {
           focusOnOpen={focusOnOpen}
           onKeydown={keydown}
           inputReadOnly={inputReadOnly}
-          showStr={showStr}
           clearIcon={clearIcon}
         />
         <Combobox

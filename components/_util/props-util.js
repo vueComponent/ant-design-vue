@@ -133,7 +133,7 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
     const componentOptions = instance.componentOptions || {};
     (componentOptions.children || []).forEach(child => {
       if (child.data && child.data.slot === prop) {
-        delete child.data.slot;
+        delete child.data.attrs.slot;
         if (child.tag === 'template') {
           slotsProp.push(child.children);
         } else {

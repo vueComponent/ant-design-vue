@@ -463,4 +463,12 @@ export default [
     path: 'result-cn',
     component: () => import('../components/result/demo/index.vue'),
   },
+  {
+    path: 'descriptions',
+    component: () => import('../components/descriptions/demo/index.vue'),
+  },
+  {
+    path: 'descriptions-cn',
+    component: () => import('../components/descriptions/demo/index.vue'),
+  },
 ];

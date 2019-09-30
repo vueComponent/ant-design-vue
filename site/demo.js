@@ -364,4 +364,10 @@ export default {
     type: 'Data Display',
     title: 'Statistic',
   },
+  descriptions: {
+    category: 'Components',
+    subtitle: '描述列表',
+    type: 'Data Display',
+    title: 'Descriptions'
+  }
 };

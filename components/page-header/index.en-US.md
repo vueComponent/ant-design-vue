@@ -1,17 +1,3 @@
----
-category: Components
-type: Navigation
-title: PageHeader
-cols: 1
-subtitle:
----
-
-The header can be used to declare the page topic, display important information about the page that the user is interested in, and carry the action items related to the current page (including page-level operations, inter-page navigation, etc.)
-
-## When To Use
-
-It can also be used as inter-page navigation when it is needed to make the user quickly understand what the current page is and to facilitate the user to use the page function.
-
 ## API
 
 | Param | Description | Type | Default value |

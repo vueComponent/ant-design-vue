@@ -140,6 +140,7 @@ import { default as Empty } from './empty';
 import { default as Result } from './result';
 
 import { default as Descriptions } from './descriptions';
+import { default as PageHeader } from './page-header';
 
 const components = [
   Base,
@@ -201,6 +202,7 @@ const components = [
   Empty,
   Result,
   Descriptions,
+  PageHeader,
 ];
 
 const install = function(Vue) {
@@ -287,6 +289,7 @@ export {
   Empty,
   Result,
   Descriptions,
+  PageHeader,
 };
 
 export default {

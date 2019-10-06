@@ -47,4 +47,7 @@ export default {
   Icon: {
     icon: 'icon',
   },
+  PageHeader: {
+    back: 'Back',
+  },
 };

@@ -20,7 +20,11 @@ export default function demoTest(component, options = {}) {
       const demo = require(`../.${file}`).default || require(`../.${file}`); // eslint-disable-line global-require, import/no-dynamic-require
       const wrapper = mount(demo, { sync: false });
       Vue.nextTick(() => {
-        expect(wrapper.html()).toMatchSnapshot();
+        // should get dom from element
+        // snap files copy from antd does not need to change
+        // or just change a little
+        const dom = options.getDomFromElement ? wrapper.element : wrapper.html();
+        expect(dom).toMatchSnapshot();
         MockDate.reset();
         wrapper.destroy();
         done();

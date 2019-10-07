@@ -62,6 +62,7 @@ import { Timeline } from './timeline/timeline';
 import { Tooltip } from './tootip/tooltip';
 import { Upload } from './upload';
 import { Result } from './result';
+import { Descriptions } from './descriptions/descriptions'
 
 /**
  * Install all ant-design-vue components into Vue.
@@ -131,4 +132,5 @@ export {
   Drawer,
   Skeleton,
   Result,
+  Descriptions,
 };

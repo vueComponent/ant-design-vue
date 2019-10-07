@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
     };
   };
   // ref: https://github.com/ant-design/ant-design/issues/18774
-  if (!window.matchMedia) window.matchMedia = matchMediaPolyfill
+  if (!window.matchMedia) window.matchMedia = matchMediaPolyfill;
   // eslint-disable-next-line global-require
   enquire = require('enquire.js');
 }

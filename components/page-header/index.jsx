@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-
+import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Breadcrumb from '../breadcrumb';
@@ -7,6 +7,19 @@ import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import Base from '../base';
+
+export const PageHeaderProps = {
+  backIcon: PropTypes.any,
+  prefixCls: PropTypes.string,
+  title: PropTypes.any,
+  subTitle: PropTypes.any,
+  breadcrumb: PropTypes.object,
+  tags: PropTypes.any,
+  footer: PropTypes.any,
+  extra: PropTypes.any,
+  avatar: PropTypes.object,
+  className: PropTypes.string,
+};
 
 const renderBack = (h, prefixCls, backIcon, onBack) => {
   if (!backIcon || !onBack) {
@@ -77,19 +90,19 @@ const renderChildren = (h, prefixCls, children) => {
 
 const PageHeader = {
   name: 'APageHeader',
-  functional: true,
+  props: PageHeaderProps,
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
   },
-  render(h, ctx) {
-    const { getPrefixCls } = ctx.injections.configProvider;
+  render(h) {
+    const { getPrefixCls } = this.configProvider;
     const {
       prefixCls: customizePrefixCls,
       footer,
       breadcrumb,
       className: customizeClassName,
-    } = ctx.props;
-    const { children } = ctx;
+    } = this.$props;
+    const children = this.$slots.default;
 
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
     const breadcrumbDom = breadcrumb && breadcrumb.routes ? renderBreadcrumb(h, breadcrumb) : null;
@@ -101,7 +114,7 @@ const PageHeader = {
     return (
       <div class={className}>
         {breadcrumbDom}
-        {renderTitle(h, prefixCls, { ...ctx.props, onBack: ctx.listeners.back })}
+        {renderTitle(h, prefixCls, { ...this.$props, ...this.$slots, onBack: this.$listeners.back })}
         {children && renderChildren(h, prefixCls, children)}
         {renderFooter(h, prefixCls, footer)}
       </div>

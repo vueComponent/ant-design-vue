@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import PropTypes from '../_util/vue-types';
+import { getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Breadcrumb from '../breadcrumb';
@@ -50,16 +51,16 @@ const renderBreadcrumb = (h, breadcrumb) => {
   return <Breadcrumb {...{ props: breadcrumb }} />;
 };
 
-const renderTitle = (h, prefixCls, props) => {
+const renderTitle = (h, prefixCls, instance) => {
   const {
-    title,
     avatar,
-    subTitle,
-    tags,
-    extra,
-    backIcon = <Icon type="arrow-left" />,
-    onBack,
-  } = props;
+  } = instance;
+  const title = getComponentFromProp(instance, 'title');
+  const subTitle = getComponentFromProp(instance, 'subTitle');
+  const tags = getComponentFromProp(instance, 'tags');
+  const extra = getComponentFromProp(instance, 'extra');
+  const backIcon = getComponentFromProp(instance, 'backIcon') || <Icon type="arrow-left" />;
+  const onBack = instance.$listeners.back;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
     const backIconDom = renderBack(h, prefixCls, backIcon, onBack);
@@ -98,10 +99,10 @@ const PageHeader = {
     const { getPrefixCls } = this.configProvider;
     const {
       prefixCls: customizePrefixCls,
-      footer,
       breadcrumb,
       className: customizeClassName,
     } = this.$props;
+    const footer = getComponentFromProp(this, 'footer');
     const children = this.$slots.default;
 
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
@@ -114,7 +115,7 @@ const PageHeader = {
     return (
       <div class={className}>
         {breadcrumbDom}
-        {renderTitle(h, prefixCls, { ...this.$props, ...this.$slots, onBack: this.$listeners.back })}
+        {renderTitle(h, prefixCls, this)}
         {children && renderChildren(h, prefixCls, children)}
         {renderFooter(h, prefixCls, footer)}
       </div>

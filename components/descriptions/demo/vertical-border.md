@@ -15,7 +15,7 @@ Descriptions with border and background color.
     <a-descriptions-item label="Billing Mode">Prepaid</a-descriptions-item>
     <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
     <a-descriptions-item label="Order time">2018-04-24 18:00:00</a-descriptions-item>
-    <a-descriptions-item label="Usage Time" :span="3">
+    <a-descriptions-item label="Usage Time" :span="2">
       2019-04-24 18:00:00
     </a-descriptions-item>
     <a-descriptions-item label="Status" :span="3">

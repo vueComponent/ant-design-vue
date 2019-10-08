@@ -1404,9 +1404,10 @@ const Select = {
         return null;
       }
       // if loading  have loading icon
-      if (multiple && !loading) {
-        return null;
-      }
+      // fixed bug #825 showArrow in multiple.
+      // if (multiple && !loading) {
+      //   return null;
+      // }
       const defaultIcon = loading ? (
         <i class={`${prefixCls}-arrow-loading`} />
       ) : (

@@ -129,6 +129,10 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
     }
+    const slotScope = getScopedSlots(instance)[prop];
+    if (slotScope !== undefined) {
+      return typeof slotScope === 'function' && execute ? slotScope(h, options) : slotScope;
+    }
     const slotsProp = [];
     const componentOptions = instance.componentOptions || {};
     (componentOptions.children || []).forEach(child => {

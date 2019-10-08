@@ -10,6 +10,18 @@
 
 ---
 
+## 1.3.17
+`2019-09-29`
+- 🌟 `Form` adds the `selfUpdate` attribute to improve form performance [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
+- `Select`
+  - 🐞 Fix keydown keyboard event invalidation
+  - 🐞 Fix arrow icon can't close pop-up question [#1067](https://github.com/vueComponent/ant-design-vue/issues/1176)
+  - 🐞 Fix IE browser to automatically close the problem [#1223](https://github.com/vueComponent/ant-design-vue/issues/1223)
+  - 🌟 Add maxTagTextLength attribute [#1217](https://github.com/vueComponent/ant-design-vue/pull/1217)
+- 🐞 Fixed an issue with 'TimePicker` input error [#1176](https://github.com/vueComponent/ant-design-vue/issues/1176)
+- 🐞 Fix `defaultVisible` attribute invalidation problem for `Tooltip` component [#1232](https://github.com/vueComponent/ant-design-vue/issues/1232)
+- 🐞 Fix `Comment` `ConfigProvider` TypeScript type definition problem.
+
 ## 1.3.16
 
 `2019-08-25`

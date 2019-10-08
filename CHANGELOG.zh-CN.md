@@ -79,6 +79,18 @@
 - 🐞 修复 Spin 组件初始设置 `delay` 属性后不显示的问题。
 - 🐞 修复水波纹在 Edge 下的样式问题。
 
+## 1.3.17
+`2019-09-29`
+- 🌟 `Form` 新增 `selfUpdate` 属性，用于提升表单性能 [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
+- `Select`
+  - 🐞 修复 keydown 键盘事件失效问题
+  - 🐞 修复箭头图标无法关闭弹出框问题 [#1067](https://github.com/vueComponent/ant-design-vue/issues/1176)
+  - 🐞 修复 IE 浏览器自动收起问题 [#1223](https://github.com/vueComponent/ant-design-vue/issues/1223)
+  - 🌟 添加 maxTagTextLength 属性 [#1217](https://github.com/vueComponent/ant-design-vue/pull/1217)
+- 🐞 修复 `TimePicker` 输入时报错的问题 [#1176](https://github.com/vueComponent/ant-design-vue/issues/1176)
+- 🐞 修复 `Tooltip` 组件的 `defaultVisible` 属性失效问题 [#1232](https://github.com/vueComponent/ant-design-vue/issues/1232)
+- 🐞 修复 `Comment` `ConfigProvider` TypeScript 类型定义问题。
+
 ## 1.3.16
 
 `2019-08-25`

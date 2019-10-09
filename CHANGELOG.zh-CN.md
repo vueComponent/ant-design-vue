@@ -67,6 +67,7 @@
 - Modal
   - 🌟 Modal 函数组件新增 `mask` 属性支持。
   - 🌟 Modal 函数组件新增 `transitionName` 和 `maskTransitionName` 属性支持。
+  - 🐞 修复鼠标移动到遮罩层自动关闭的问题 [#842](https://github.com/vueComponent/ant-design-vue/issues/842)
 - Spin
   - 🐞 修复 Table 在低版本 IE 中 spinning 会遮挡操作的问题。
 - Progress

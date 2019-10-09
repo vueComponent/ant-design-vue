@@ -8,7 +8,7 @@
 Using pre & post tabs example.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div style="margin-bottom: 16px">

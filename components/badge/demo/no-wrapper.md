@@ -9,7 +9,7 @@
 Used in standalone when children is empty.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-badge count="25" />

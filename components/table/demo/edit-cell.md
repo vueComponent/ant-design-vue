@@ -8,7 +8,7 @@
 Table with editable cells.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button class="editable-add-btn" @click="handleAdd">Add</a-button>

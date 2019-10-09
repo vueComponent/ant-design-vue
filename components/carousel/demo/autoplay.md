@@ -8,7 +8,7 @@
 Timing of scrolling to the next card/picture.
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel autoplay>
     <div><h3>1</h3></div>

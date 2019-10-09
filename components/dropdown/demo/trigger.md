@@ -8,7 +8,7 @@
 The default trigger mode is `hover`, you can change it to `click`.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown :trigger="['click']">
     <a class="ant-dropdown-link" href="#"> Click me <a-icon type="down" /> </a>

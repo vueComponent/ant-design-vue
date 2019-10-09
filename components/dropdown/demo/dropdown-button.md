@@ -8,7 +8,7 @@
 A button is on the left, and a related functional menu is on the right.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-dropdown-button @click="handleButtonClick">

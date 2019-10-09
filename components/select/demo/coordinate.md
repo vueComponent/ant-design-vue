@@ -10,7 +10,7 @@ Coordinating the selection of provinces and cities is a common use case and demo
 Using the [Cascader](/components/cascader) component is strongly recommended instead as it is more flexible and capable.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-select :defaultValue="provinceData[0]" style="width: 120px" @change="handleProvinceChange">

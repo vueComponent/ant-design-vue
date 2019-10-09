@@ -8,7 +8,7 @@
 Basic list.
 </us>
 
-```html
+```tpl
 <template>
   <a-list itemLayout="horizontal" :dataSource="data">
     <a-list-item slot="renderItem" slot-scope="item, index">

@@ -8,7 +8,7 @@
 Passing `okButtonProps` and `cancelButtonProps` can customize the ok button and cancel button props.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showModal">Open Modal with customized button props</a-button>

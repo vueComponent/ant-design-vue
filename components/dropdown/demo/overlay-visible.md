@@ -8,7 +8,7 @@
 The default is to close the menu when you click on menu items, this feature can be turned off.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown v-model="visible">
     <a class="ant-dropdown-link" href="#"> Hover me <a-icon type="down" /> </a>

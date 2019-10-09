@@ -8,7 +8,7 @@
 Load more list with `loadMore` property.
 </us>
 
-```html
+```tpl
 <template>
   <a-list class="demo-loadmore-list" :loading="loading" itemLayout="horizontal" :dataSource="data">
     <div

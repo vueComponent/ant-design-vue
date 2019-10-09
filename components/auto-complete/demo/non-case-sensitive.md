@@ -8,7 +8,7 @@
 A non-case-sensitive AutoComplete
 </us>
 
-```html
+```tpl
 <template>
   <a-auto-complete
     :dataSource="dataSource"

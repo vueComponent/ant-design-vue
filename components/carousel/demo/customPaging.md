@@ -8,7 +8,7 @@
 Custom paging display
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel arrows dotsClass="slick-dots slick-thumb">
     <a slot="customPaging" slot-scope="props">

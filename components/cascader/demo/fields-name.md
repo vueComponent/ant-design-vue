@@ -8,7 +8,7 @@
 Custom Field Names.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader
     :fieldNames="{ label: 'name', value: 'code', children: 'items' }"

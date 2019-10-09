@@ -8,7 +8,7 @@
 You can set a custom text by setting the `format` prop.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress type="circle" :percent="75" :format="percent => `${percent} Days`" />

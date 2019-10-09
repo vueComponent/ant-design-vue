@@ -8,7 +8,7 @@
 Determing which panel to show with `mode` and `onPanelChange`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker

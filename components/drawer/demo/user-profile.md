@@ -8,7 +8,7 @@
 Use when you need to quickly preview the outline of the object. Such as list item preview.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-list

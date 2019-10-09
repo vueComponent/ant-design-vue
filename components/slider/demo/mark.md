@@ -10,7 +10,7 @@ When `included` is false, means that different thumbs are coordinative.
 when `step` is null, users can only slide the thumbs onto marks.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-slider-demo-mark">
     <h4>included=true</h4>

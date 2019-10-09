@@ -8,7 +8,7 @@
 Two compacted table size: `middle` and `small`, `small` size is used in Modal only.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-table-demo-size">
     <h4>Middle size table</h4>

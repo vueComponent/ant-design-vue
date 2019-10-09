@@ -8,7 +8,7 @@
 You could pass `slot="dataSource` as children of `AutoComplete`, instead of using `dataSource`。
 </us>
 
-```html
+```tpl
 <template>
   <a-auto-complete style="width: 200px" @search="handleSearch" placeholder="input here">
     <template slot="dataSource">

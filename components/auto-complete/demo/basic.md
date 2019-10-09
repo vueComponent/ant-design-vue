@@ -8,7 +8,7 @@
 Basic Usage, set datasource of autocomplete with `dataSource` property.
 </us>
 
-```html
+```tpl
 <template>
   <a-auto-complete
     :dataSource="dataSource"

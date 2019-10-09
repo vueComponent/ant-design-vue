@@ -8,7 +8,7 @@
 Disabled part of dates and time by `disabledDate` and `disabledTime` respectively, and `disabledTime` only works with `showTime`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker

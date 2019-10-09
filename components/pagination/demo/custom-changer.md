@@ -8,7 +8,7 @@
 Customize dropdown options such as adding all options
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination
     :pageSizeOptions="pageSizeOptions"

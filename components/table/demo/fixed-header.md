@@ -10,7 +10,7 @@ Display large amounts of data in scrollable view.
 > Specify width of columns if header and cell do not align properly.(Leave one column at least without width to fit fluid layout)
 </us>
 
-```html
+```tpl
 <template>
   <a-table
     :columns="columns"

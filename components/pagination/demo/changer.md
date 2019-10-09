@@ -8,7 +8,7 @@
 Change `pageSize`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-pagination

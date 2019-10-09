@@ -8,7 +8,7 @@
 The simplest usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-rate v-model="value" />
 </template>

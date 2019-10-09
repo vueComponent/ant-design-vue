@@ -8,7 +8,7 @@
 Simplest Usage. Badge will be hidden when `count` is `0`, but we can use `showZero` to show it.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-badge count="5">

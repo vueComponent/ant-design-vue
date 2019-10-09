@@ -8,7 +8,7 @@
 Try to copy `Lucy,Jack` to the input. Only available in tags and multiple mode.
 </us>
 
-```html
+```tpl
 <template>
   <a-select mode="tags" style="width: 100%" :tokenSeparators="[',']" @change="handleChange">
     <a-select-option v-for="i in 25" :key="(i + 9).toString(36) + i"

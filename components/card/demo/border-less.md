@@ -8,7 +8,7 @@
   A borderless card on a gray background.
 </us>
 
-```html
+```tpl
 <template>
   <div style="background:#ECECEC; padding:30px">
     <a-card title="Card title" :bordered="false" style="width: 300px">

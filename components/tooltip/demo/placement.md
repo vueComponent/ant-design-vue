@@ -8,7 +8,7 @@
 The ToolTip has 12 placements choice.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-a-tooltip-demo-placement">
     <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">

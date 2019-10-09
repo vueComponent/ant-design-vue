@@ -8,7 +8,7 @@ Switch 失效状态。
 Disabled state of `Switch`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch defaultChecked :disabled="disabled" style="margin-bottom:5px" />

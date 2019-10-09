@@ -9,7 +9,7 @@
 To change the element sort by Flex layout order.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-row type="flex">

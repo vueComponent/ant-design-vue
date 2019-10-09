@@ -8,7 +8,7 @@
 Slides use fade for transition.
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel effect="fade">
     <div><h3>1</h3></div>

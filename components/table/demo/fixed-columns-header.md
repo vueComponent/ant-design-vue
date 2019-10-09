@@ -12,7 +12,7 @@ A Solution for displaying large amounts of data with long columns.
 > A fixed value which is greater than table width for `scroll.x` is recommended. The sum of unfixed columns should not greater than `scroll.x`.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1500, y: 300 }">
     <a slot="action" slot-scope="text" href="javascript:;">action</a>

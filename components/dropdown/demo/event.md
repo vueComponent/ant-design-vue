@@ -8,7 +8,7 @@
 An event will be triggered when you click menu items, in which you can make different operations according to item's key.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown>
     <a class="ant-dropdown-link" href="#"> Hover me, Click menu item <a-icon type="down" /> </a>

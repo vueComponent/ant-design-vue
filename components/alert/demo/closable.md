@@ -8,7 +8,7 @@
 To show close button.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert

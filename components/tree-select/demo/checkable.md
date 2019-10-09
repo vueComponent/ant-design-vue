@@ -8,7 +8,7 @@
 Multiple and checkable.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree-select
     style="width: 300px"

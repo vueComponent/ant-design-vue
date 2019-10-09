@@ -8,7 +8,7 @@
 Lookup-Patterns - Uncertain Category
 </us>
 
-```html
+```tpl
 <template>
   <div class="global-search-wrapper" style="width: 300px">
     <a-auto-complete

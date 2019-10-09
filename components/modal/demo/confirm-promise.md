@@ -9,7 +9,7 @@ To use `confirm()` to popup confirmation modal dialog. Let onCancel/onOk functio
 delay closing the dialog.
 </us>
 
-```html
+```tpl
 <template>
   <a-button @click="showConfirm">
     Confirm

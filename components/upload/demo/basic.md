@@ -8,7 +8,7 @@
 Classic mode. File selection dialog pops up when upload button is clicked.
 </us>
 
-```html
+```tpl
 <template>
   <a-upload
     name="file"

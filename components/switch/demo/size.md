@@ -8,7 +8,7 @@
 `size="small"` represents a small sized switch.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch defaultChecked />

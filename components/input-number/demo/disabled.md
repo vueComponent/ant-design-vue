@@ -8,7 +8,7 @@
 Click the button to toggle between available and disabled states.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-number :min="1" :max="10" :disabled="disabled" :defaultValue="3" />

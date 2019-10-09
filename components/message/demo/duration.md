@@ -8,7 +8,7 @@
 Customize message display duration from default `3s` to `10s`.
 </us>
 
-```html
+```tpl
 <template>
   <a-button @click="success">Customized display duration</a-button>
 </template>

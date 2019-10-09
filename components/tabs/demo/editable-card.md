@@ -10,7 +10,7 @@ Only card type Tabs support adding & closable.
 +Use `closable={false}` to disable close.
 </us>
 
-```html
+```tpl
 <template>
   <a-tabs v-model="activeKey" type="editable-card" @edit="onEdit">
     <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">

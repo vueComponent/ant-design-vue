@@ -8,7 +8,7 @@
 The basic example.
 </us>
 
-```html
+```tpl
 <template>
   <a-popconfirm
     title="Are you sure delete this task?"

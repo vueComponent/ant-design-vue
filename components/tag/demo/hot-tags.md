@@ -8,7 +8,7 @@
 Select your favourite topics.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <strong :style="{ marginRight: 8 }">Categories:</strong>

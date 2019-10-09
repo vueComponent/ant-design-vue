@@ -8,7 +8,7 @@
 Inline menu could be collapsed.
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 256px">
     <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">

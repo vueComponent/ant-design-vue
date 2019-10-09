@@ -8,7 +8,7 @@
 Showing more detailed info of every row.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" class="components-table-demo-nested">
     <a slot="operation" slot-scope="text" href="javascript:;">Publish</a>

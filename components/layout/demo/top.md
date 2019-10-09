@@ -12,7 +12,7 @@ We always put contents in a fixed size navigation (eg: `1200px`), the layout of 
 Top-bottom structure is conform with the top-bottom viewing habit, it's a classical navigation pattern of websites. This pattern demonstrates efficiency in the main workarea, while using some vertical space. And because the horizontal space of the navigation is limited, this pattern is not suitable for cases when the first level navigation contains many elements or links
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-top" class="layout">
     <a-layout-header>

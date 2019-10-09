@@ -8,7 +8,7 @@
 The most basic usage of `Transfer` involves providing the source data and target keys arrays, plus the rendering and some callback functions.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-transfer

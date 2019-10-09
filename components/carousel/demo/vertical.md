@@ -8,7 +8,7 @@
 Vertical pagination.
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel vertical>
     <div><h3>1</h3></div>

@@ -10,7 +10,7 @@ Rows can be selectable by making first column as a selectable column.
 > selection happens when clicking checkbox defaultly.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :rowSelection="rowSelection" :columns="columns" :dataSource="data">
     <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>

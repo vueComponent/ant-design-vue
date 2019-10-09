@@ -8,7 +8,7 @@
 Normal messages as feedbacks.
 </us>
 
-```html
+```tpl
 <template>
   <a-button type="primary" @click="info">Display normal message</a-button>
 </template>

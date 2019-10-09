@@ -8,7 +8,7 @@
 We can set the date format by `format`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker :defaultValue="moment('2015/01/01', dateFormat)" :format="dateFormat" />

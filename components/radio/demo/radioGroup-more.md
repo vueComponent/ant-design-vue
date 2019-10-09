@@ -8,7 +8,7 @@
 Vertical RadioGroup, with more radios.
 </us>
 
-```html
+```tpl
 <template>
   <a-radio-group @change="onChange" v-model="value">
     <a-radio :style="radioStyle" :value="1">Option A</a-radio>

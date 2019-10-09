@@ -8,7 +8,7 @@
 The input box comes in three sizes. `default` will be used if `size` is omitted.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group v-model="size">

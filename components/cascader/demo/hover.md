@@ -8,7 +8,7 @@
 Hover to expand sub menu, click to select option.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader
     :options="options"

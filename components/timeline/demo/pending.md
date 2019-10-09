@@ -9,7 +9,7 @@ When the timeline is incomplete and ongoing, put a ghost node at last. Set `pend
 `reverse={true}` is used for reversing nodes.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-timeline pending="Recording..." :reverse="reverse">

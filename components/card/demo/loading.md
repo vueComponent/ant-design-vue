@@ -8,7 +8,7 @@
   Shows a loading indirector while the contents of the card is being featched
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-card :loading="loading" title="Card title">

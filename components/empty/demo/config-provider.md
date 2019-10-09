@@ -8,7 +8,7 @@
 Use ConfigProvider set global Empty style.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch

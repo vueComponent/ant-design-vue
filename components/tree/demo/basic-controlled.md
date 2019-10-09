@@ -8,7 +8,7 @@
 basic controlled example
 </us>
 
-```html
+```tpl
 <template>
   <a-tree
     checkable

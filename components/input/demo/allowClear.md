@@ -8,7 +8,7 @@
 Input type of password.
 </us>
 
-```html
+```tpl
 <template>
   <a-input placeholder="input with clear icon" allowClear @change="onChange" />
 </template>

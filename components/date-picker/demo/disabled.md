@@ -8,7 +8,7 @@
 A disabled state of the `DatePicker`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker :defaultValue="moment('2015-06-06', dateFormat)" disabled />

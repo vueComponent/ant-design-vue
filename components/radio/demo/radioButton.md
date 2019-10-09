@@ -8,7 +8,7 @@
 The combination of radio button style.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>

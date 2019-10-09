@@ -8,7 +8,7 @@
 Creating a grid list by setting the `grid` property of List
 </us>
 
-```html
+```tpl
 <template>
   <a-list :grid="{ gutter: 16, column: 4 }" :dataSource="data">
     <a-list-item slot="renderItem" slot-scope="item, index">

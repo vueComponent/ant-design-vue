@@ -8,7 +8,7 @@
 To load data asynchronously when click to expand a treeNode.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree :loadData="onLoadData" :treeData="treeData" />
 </template>

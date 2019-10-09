@@ -8,7 +8,7 @@
 You can use your own custom icons by setting the property `icon` for `Steps.Step`.
 </us>
 
-```html
+```tpl
 <template>
   <a-steps>
     <a-step status="finish" title="Login">

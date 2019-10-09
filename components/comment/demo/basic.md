@@ -8,7 +8,7 @@
 A basic comment with author, avatar, time and actions.
 </us>
 
-```html
+```tpl
 <template>
   <a-comment>
     <template slot="actions">

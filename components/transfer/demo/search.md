@@ -8,7 +8,7 @@
 Transfer with a search box.
 </us>
 
-```html
+```tpl
 <template>
   <a-transfer
     :dataSource="mockData"

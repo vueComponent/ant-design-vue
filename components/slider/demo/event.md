@@ -9,7 +9,7 @@ The `onChange` callback function will fire when the user changes the slider's va
 The `onAfterChange` callback function will fire when `onmouseup` fired.
 </us>
 
-```html
+```tpl
 <template>
   <div class="code-box-demo">
     <a-slider :defaultValue="30" @change="onChange" @afterChange="onAfterChange" />

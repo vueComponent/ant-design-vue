@@ -8,7 +8,7 @@
 Multiple selection, selecting from existing items (scroll the menu).
 </us>
 
-```html
+```tpl
 <template>
   <a-select
     mode="multiple"

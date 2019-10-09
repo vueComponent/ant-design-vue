@@ -8,7 +8,7 @@
 Built-in directory tree. `multiple` support `ctrl(Windows)` / `command(Mac)` selection.
 </us>
 
-```html
+```tpl
 <template>
   <a-directory-tree multiple defaultExpandAll @select="onSelect" @expand="onExpand">
     <a-tree-node title="parent 0" key="0-0">

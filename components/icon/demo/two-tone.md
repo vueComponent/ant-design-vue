@@ -8,7 +8,7 @@
 Specific them property `theme` to `twoTone` to render two-tone icons. You can also set the primary color.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icons-list">
     <a-icon type="smile" theme="twoTone" />

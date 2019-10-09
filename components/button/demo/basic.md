@@ -8,7 +8,7 @@
 There are `primary` button, `default` button, `dashed` button and `danger` button and `link` button in antd.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary">Primary</a-button>

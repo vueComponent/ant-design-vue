@@ -8,7 +8,7 @@
 Group table head with `columns[n].children`.
 </us>
 
-```html
+```tpl
 <template>
   <a-table
     :columns="columns"

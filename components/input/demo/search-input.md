@@ -8,7 +8,7 @@
 Example of creating a search box by grouping a standard input with a search button.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-search placeholder="input search text" style="width: 200px" @search="onSearch" />

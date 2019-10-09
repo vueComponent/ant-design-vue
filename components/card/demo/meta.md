@@ -8,7 +8,7 @@
   A Card that supports `cover`, `avatar`, `title` and `description`.
 </us>
 
-```html
+```tpl
 <template>
   <a-card hoverable style="width: 300px">
     <img

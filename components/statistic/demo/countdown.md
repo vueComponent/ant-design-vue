@@ -8,7 +8,7 @@
 Countdown component.
 </us>
 
-```html
+```tpl
 <template>
   <a-row :gutter="16">
     <a-col :span="12">

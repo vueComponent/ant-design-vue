@@ -8,7 +8,7 @@
 Manually updateing and destroying a modal from `Modal.method`.
 </us>
 
-```html
+```tpl
 <template>
   <a-button @click="countDown">Open modal to close in 5s</a-button>
 </template>

@@ -8,7 +8,7 @@
 Smoothly and unaffectedly unmount Alert.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert

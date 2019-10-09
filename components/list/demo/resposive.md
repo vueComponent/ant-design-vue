@@ -8,7 +8,7 @@
 Responsive grid list. The size property is as same as [Layout Grid](https://vue.ant.design/components/grid/#Col).
 </us>
 
-```html
+```tpl
 <template>
   <a-list :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }" :dataSource="data">
     <a-list-item slot="renderItem" slot-scope="item, index">

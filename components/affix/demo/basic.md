@@ -8,7 +8,7 @@
 The simplest usage.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-affix :offsetTop="this.top">

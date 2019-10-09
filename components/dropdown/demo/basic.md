@@ -8,7 +8,7 @@
 The most basic dropdown menu.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown>
     <a class="ant-dropdown-link" href="#"> Hover me <a-icon type="down" /> </a>

@@ -12,7 +12,7 @@ the modal dialog will be closed.
 You could set `footer` to `null` if you don't need default footer buttons.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showModal">

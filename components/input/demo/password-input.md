@@ -8,7 +8,7 @@
 Input type of password and added in 1.4.0.
 </us>
 
-```html
+```tpl
 <template>
   <a-input-password placeholder="input password" />
 </template>

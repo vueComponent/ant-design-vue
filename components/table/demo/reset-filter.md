@@ -14,7 +14,7 @@ Control filters and sorters by `filteredValue` and `sortOrder`.
 > 3. `column.key` is required.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div class="table-operations">

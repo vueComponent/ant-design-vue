@@ -8,7 +8,7 @@
 There are three sizes of an Input box: `large` (40px)、`default` (32px) and `small` (24px).
 </us>
 
-```html
+```tpl
 <template>
   <div class="components-input-demo-size">
     <a-input size="large" placeholder="large size" />

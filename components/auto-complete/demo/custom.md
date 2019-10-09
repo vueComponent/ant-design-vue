@@ -8,7 +8,7 @@
 Customize Input Component
 </us>
 
-```html
+```tpl
 <template>
   <a-auto-complete
     :dataSource="dataSource"

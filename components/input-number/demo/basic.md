@@ -8,7 +8,7 @@
 Numeric-only input box.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-number :min="1" :max="10" v-model="value" @change="onChange" />

@@ -8,7 +8,7 @@
 With text and icon.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch checkedChildren="开" unCheckedChildren="关" defaultChecked />

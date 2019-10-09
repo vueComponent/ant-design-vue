@@ -8,7 +8,7 @@
 A standard progress bar.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-tooltip title="3 done / 3 in progress / 4 to do">

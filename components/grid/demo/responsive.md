@@ -8,7 +8,7 @@
 Referring to the Bootstrap [responsive design] (http://getbootstrap.com/css/#grid-media-queries), here preset six dimensions: `xs` `sm` `md` `lg` `xl`.
 </us>
 
-```html
+```tpl
 <template>
   <a-row>
     <a-col :xs="2" :sm="4" :md="6" :lg="8" :xl="10">Col</a-col>

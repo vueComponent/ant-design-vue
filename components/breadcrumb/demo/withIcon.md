@@ -8,7 +8,7 @@
  The icon should be placed in front of the text
 </us>
 
-```html
+```tpl
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item href="">

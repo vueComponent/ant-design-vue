@@ -8,7 +8,7 @@
 Display statistic data in Card.
 </us>
 
-```html
+```tpl
 <template>
   <div style="background: #ECECEC; padding: 30px">
     <a-row :gutter="16">

@@ -8,7 +8,7 @@
 Use `tipFormatter` to format content of `Toolip`. If `tipFormatter` is null, hide it.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-slider :tipFormatter="formatter" />

@@ -8,7 +8,7 @@
 A complete multiple select sample with remote search, debounce fetch, ajax callback order flow, and loading state.
 </us>
 
-```html
+```tpl
 <template>
   <a-select
     mode="multiple"

@@ -8,7 +8,7 @@
 Implement a customized column search example via `filterDropdown`.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :dataSource="data" :columns="columns">
     <div

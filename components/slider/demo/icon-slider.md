@@ -8,7 +8,7 @@
 You can add an icon beside the slider to make it meaningful.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icon-wrapper">
     <a-icon :style="{color: preColor}" type="frown-o" />

@@ -8,7 +8,7 @@
 Mark a pending state of switch.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch loading defaultChecked />

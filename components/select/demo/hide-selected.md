@@ -8,7 +8,7 @@
 Hide already selected options in the dropdown.
 </us>
 
-```html
+```tpl
 <template>
   <a-select
     mode="multiple"

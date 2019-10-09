@@ -10,7 +10,7 @@ Buttons can be grouped by placing multiple `Button` components into a `Button.Gr
 The `size` can be set to `large`, `small` or left unset resulting in a default size.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-button-demo-button-group">
     <h4>Basic</h4>

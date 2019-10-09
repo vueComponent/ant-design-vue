@@ -8,7 +8,7 @@
 Wrap your app with `LocaleProvider`, and apply the corresponding language package.
 </us>
 
-```html
+```tpl
 <template>
   <a-locale-provider :locale="zhCN">
     <a-pagination :defaultCurrent="1" :total="50" showSizeChanger />

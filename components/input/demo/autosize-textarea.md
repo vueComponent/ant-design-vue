@@ -9,7 +9,7 @@
 An options object can be provided to `autosize` to specify the minimum and maximum number of lines the textarea will automatically adjust.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-textarea placeholder="Autosize height based on content lines" autosize />

@@ -8,7 +8,7 @@
 Use tag `<Icon />` to create an icon and set its type in the `type` prop. Specific the `spin` property to show spinning animation and the `theme` property to switch different themes.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icons-list">
     <a-icon type="home" />

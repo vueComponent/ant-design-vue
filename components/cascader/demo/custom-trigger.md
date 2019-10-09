@@ -8,7 +8,7 @@
 Separate trigger button and result.
 </us>
 
-```html
+```tpl
 <template>
   <span>
     {{text}} &nbsp;

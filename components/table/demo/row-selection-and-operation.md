@@ -8,7 +8,7 @@
 To perform operations and clear selections after selecting some rows, use `rowSelection.selectedRowKeys` to control selected rows.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div style="margin-bottom: 16px">

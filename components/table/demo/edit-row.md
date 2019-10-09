@@ -8,7 +8,7 @@
 Table with editable rows.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
     <template

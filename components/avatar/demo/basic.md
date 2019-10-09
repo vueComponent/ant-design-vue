@@ -8,7 +8,7 @@
 Three sizes and two shapes are available.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>

@@ -8,7 +8,7 @@
 Cascade selection box for selecting province/city/district.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-cascader

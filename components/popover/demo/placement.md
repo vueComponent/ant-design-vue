@@ -8,7 +8,7 @@
 There are 12 `placement` options available.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-popover-demo-placement">
     <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">

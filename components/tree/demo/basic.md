@@ -8,7 +8,7 @@
 The most basic usage, tell you how to use checkable, selectable, disabled, defaultExpandKeys, and etc.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree
     checkable

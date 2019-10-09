@@ -8,7 +8,7 @@
 Mouse to click, focus and move in.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-popover title="Title" trigger="hover">

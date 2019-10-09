@@ -12,7 +12,7 @@ When `RangePicker` does not satisfied your requirements, try to implement simila
 > * Improve user experience with `open` and `onOpenChange`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker

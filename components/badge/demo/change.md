@@ -8,7 +8,7 @@
   The count will be animated as it changes.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>

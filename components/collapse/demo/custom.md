@@ -8,7 +8,7 @@
 Customize the background, border and margin styles and icon for each panel.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-collapse defaultActiveKey="1" :bordered="false">

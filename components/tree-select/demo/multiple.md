@@ -8,7 +8,7 @@
 Multiple selection usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree-select
     showSearch

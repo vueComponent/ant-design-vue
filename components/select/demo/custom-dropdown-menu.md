@@ -8,7 +8,7 @@
 Customize the dropdown menu via `dropdownRender`.
 </us>
 
-```html
+```tpl
 <template>
   <a-select defaultValue="lucy" style="width: 120px">
     <div slot="dropdownRender" slot-scope="menu">

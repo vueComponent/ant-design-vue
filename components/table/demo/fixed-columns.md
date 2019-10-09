@@ -12,7 +12,7 @@ To fix some columns and scroll inside other columns, and you must set `scroll.x`
 > A fixed value which is greater than table width for `scroll.x` is recommended. The sum of unfixed columns should not greater than `scroll.x`.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1300 }">
     <a slot="action" slot-scope="text" href="javascript:;">action</a>

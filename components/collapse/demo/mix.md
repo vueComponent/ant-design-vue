@@ -8,7 +8,7 @@
 `Collapse` is nested inside the `Collapse`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-collapse @change="changeActivekey">

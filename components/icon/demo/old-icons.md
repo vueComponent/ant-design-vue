@@ -8,7 +8,7 @@
 Test old icons before `1.2.0`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-icon v-for="icon in icons" :key="icon" :type="icon" />

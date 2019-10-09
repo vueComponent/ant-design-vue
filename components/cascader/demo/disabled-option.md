@@ -8,7 +8,7 @@
 Disable option by specifying the `disabled` property in `options`.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader :options="options" @change="onChange" />
 </template>

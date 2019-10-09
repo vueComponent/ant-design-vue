@@ -8,7 +8,7 @@
 Usage of basic Tag, and it could be closable by set `closable` property. Closable Tag supports `onClose` `afterClose` events.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-tag>Tag 1</a-tag>

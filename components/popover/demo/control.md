@@ -8,7 +8,7 @@
 Use `visible` prop to control the display of the card.
 </us>
 
-```html
+```tpl
 <template>
   <a-popover title="Title" trigger="click" v-model="visible">
     <a @click="hide" slot="content">Close</a>

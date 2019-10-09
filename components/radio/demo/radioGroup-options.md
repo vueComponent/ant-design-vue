@@ -8,7 +8,7 @@
 Render radios by configuring `options`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group :options="plainOptions" @change="onChange1" :defaultValue="value1" />

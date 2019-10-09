@@ -8,7 +8,7 @@
 Add prefix or suffix icons inside input.
 </us>
 
-```html
+```tpl
 <template>
   <div class="components-input-demo-presuffix">
     <a-input placeholder="Basic usage" v-model="userName" ref="userNameInput">

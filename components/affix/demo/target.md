@@ -8,7 +8,7 @@
 Set a `target` for 'Affix', which is listen to scroll event of target element (default is `window`).
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-affix-demo-target" class="scrollable-container" ref="container">
     <div class="background">

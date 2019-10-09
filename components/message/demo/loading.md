@@ -8,7 +8,7 @@
 Display a global loading indicator, which is dismissed by itself asynchronously.
 </us>
 
-```html
+```tpl
 <template>
   <a-button @click="success">Display a loading indicator</a-button>
 </template>

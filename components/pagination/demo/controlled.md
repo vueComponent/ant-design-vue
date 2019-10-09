@@ -8,7 +8,7 @@
 Controlled page number.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination @change="onChange" :current="current" :total="50" />
 </template>

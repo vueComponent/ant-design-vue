@@ -8,7 +8,7 @@
 Set orientation of divider to left or right.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-divider orientation="left">Left Text</a-divider>

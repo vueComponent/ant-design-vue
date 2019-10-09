@@ -8,7 +8,7 @@
 Large size tabs are usally used in page header, and small size could be used in Modal.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group v-model="size" style="margin-bottom: 16px">

@@ -8,7 +8,7 @@
 Cascade selection box for selecting province/city/district.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader :options="options" @change="onChange" placeholder="Please select" />
 </template>

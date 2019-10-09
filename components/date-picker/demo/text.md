@@ -8,7 +8,7 @@
 Added custom rendering function, in the default `slot', you can set any component you want to render..
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker placeholder="Select Time" v-model="time1" @change="onChange" @ok="onOk">

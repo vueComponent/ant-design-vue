@@ -8,7 +8,7 @@
 There are 12 `placement` options available. Use `arrowPointAtCenter` if you want arrow point at the center of target.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-a-popconfirm-demo-placement">
     <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">

@@ -8,7 +8,7 @@
 Both the top navigation and the sidebar, commonly used in documentation site.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-top-side">
     <a-layout-header class="header">

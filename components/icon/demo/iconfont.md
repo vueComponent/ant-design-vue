@@ -8,7 +8,7 @@
 If you are using [iconfont.cn](http://iconfont.cn/), you can use the icons in your project gracefully.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icons-list">
     <icon-font type="icon-tuichu" />

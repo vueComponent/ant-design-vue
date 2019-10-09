@@ -8,7 +8,7 @@
 A group of radio components.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group @change="onChange" v-model="value">

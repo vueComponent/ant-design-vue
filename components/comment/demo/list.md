@@ -8,7 +8,7 @@
 Displaying a series of comments using the `antd` List Component.
 </us>
 
-```html
+```tpl
 <template>
   <a-list
     class="comment-list"

@@ -8,7 +8,7 @@
 The icon can be customized to any vue node or (h) => vue node.
 </us>
 
-```html
+```tpl
 <template>
   <a-button type="primary" @click="openNotification">Open the notification box</a-button>
 </template>

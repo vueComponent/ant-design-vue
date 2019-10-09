@@ -8,7 +8,7 @@
 2000 items.
 </us>
 
-```html
+```tpl
 <template>
   <a-transfer
     :dataSource="mockData"

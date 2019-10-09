@@ -8,7 +8,7 @@
 Jump to a page directly.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
 </template>

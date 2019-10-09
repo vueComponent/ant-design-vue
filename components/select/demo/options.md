@@ -8,7 +8,7 @@
 The select list can be populated using `options` property. This is a quick and easy way to provide the select content.
 </us>
 
-```html
+```tpl
 <template>
   <a-select defaultValue="beijing" style="width: 120px" @change="handleChange" :options="options" />
 </template>

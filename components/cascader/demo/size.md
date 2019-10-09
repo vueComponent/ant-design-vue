@@ -8,7 +8,7 @@
 Cascade selection box of different sizes.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-cascader size="large" :options="options" @change="onChange" /><br /><br />

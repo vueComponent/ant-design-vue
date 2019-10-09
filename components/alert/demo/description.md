@@ -8,7 +8,7 @@
 Additional description for alert message.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert message="Success Text" type="success">

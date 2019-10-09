@@ -8,7 +8,7 @@
 The following example shows how to create a popover which can be hovered and clicked.
 </us>
 
-```html
+```tpl
 <template>
   <a-popover
     style="width: 500px"

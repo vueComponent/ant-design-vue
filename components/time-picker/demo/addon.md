@@ -8,7 +8,7 @@
 Render addon contents to timepicker panel's bottom.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-time-picker @openChange="handleOpenChange" :open="open">

@@ -8,7 +8,7 @@
 Make it pop up under some conditions.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-popconfirm

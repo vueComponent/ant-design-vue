@@ -8,7 +8,7 @@
 Add border, title and footer for table.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
     <template slot="name" slot-scope="text">

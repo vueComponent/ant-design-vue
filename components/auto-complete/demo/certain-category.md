@@ -8,7 +8,7 @@
 Lookup-Patterns - Certain Category
 </us>
 
-```html
+```tpl
 <template>
   <div class="certain-category-search-wrapper" style="width: 250px">
     <a-auto-complete

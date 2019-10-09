@@ -8,7 +8,7 @@
 Use form in drawer with submit button.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showDrawer"> <a-icon type="plus" /> New account </a-button>

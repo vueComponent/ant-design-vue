@@ -8,7 +8,7 @@
 The menu has multiple levels.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown>
     <a class="ant-dropdown-link" href="#"> Cascading menu <a-icon type="down" /> </a>

@@ -8,7 +8,7 @@
 A disabled state of the `TimePicker`.
 </us>
 
-```html
+```tpl
 <template>
   <a-time-picker :defaultValue="moment('12:08:23', 'HH:mm:ss')" disabled />
 </template>

@@ -8,7 +8,7 @@
 Render extra footer in panel for customized requirements.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker>

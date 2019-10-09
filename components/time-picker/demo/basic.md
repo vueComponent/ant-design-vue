@@ -8,7 +8,7 @@
 Click `TimePicker`, and then we could select or input a time in panel.
 </us>
 
-```html
+```tpl
 <template>
   <a-time-picker @change="onChange" :defaultOpenValue="moment('00:00:00', 'HH:mm:ss')" />
 </template>

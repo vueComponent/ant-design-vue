@@ -8,7 +8,7 @@
 You can disable showing arrow icon by passing `:showArrow="false"` to `a-collapse-panel` component.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-collapse defaultActiveKey="1" @change="changeActivekey">

@@ -8,7 +8,7 @@
 Components which need localization support are listed here, you can toggle the language in the demo.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div class="change-locale">

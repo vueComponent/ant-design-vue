@@ -8,7 +8,7 @@
 Cooperate with the content and buttons, to represent the progress of a process.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-steps :current="current">

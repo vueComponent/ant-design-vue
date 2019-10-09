@@ -8,7 +8,7 @@
 Drag treeNode to insert after the other treeNode or insert into the other parent TreeNode.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree
     class="draggable-tree"

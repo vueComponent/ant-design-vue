@@ -8,7 +8,7 @@
 Divider default type is `horizontal`. Support inner text inside Divider.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <p>

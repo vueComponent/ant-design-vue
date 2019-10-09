@@ -10,7 +10,7 @@ the notification closes automatically. If not specified, default value is 4.5 se
 the notification box will never close automatically.
 </us>
 
-```html
+```tpl
 <template>
   <a-button type="primary" @click="openNotification">Open the notification box</a-button>
 </template>

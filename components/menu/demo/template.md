@@ -10,7 +10,7 @@ Use the single file method to recursively generate menus.
 The properties of `a-sub-menu` are dynamically changed inside the component. If you split the file into a single file and you cannot mount the `props` to `a-sub-menu`, you need to declare the `props` and mount it yourself. For convenience, to avoid the declaration of attributes, we recommend using functional components.
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 256px">
     <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">

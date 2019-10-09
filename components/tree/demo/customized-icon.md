@@ -8,7 +8,7 @@
 You can customize icons for different nodes.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree :treeData="treeData" showIcon defaultExpandAll :defaultSelectedKeys="['0-0-0']">
     <a-icon type="down" slot="switcherIcon" />

@@ -8,7 +8,7 @@
 Add copywriting in rate components.
 </us>
 
-```html
+```tpl
 <template>
   <span>
     <a-rate :tooltips="desc" v-model="value" />

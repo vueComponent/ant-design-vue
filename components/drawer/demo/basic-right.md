@@ -8,7 +8,7 @@
 Basic drawer.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showDrawer">

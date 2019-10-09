@@ -8,7 +8,7 @@
 Both the top navigation and the sidebar, commonly used in application site.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-top-side-2">
     <a-layout-header class="header">

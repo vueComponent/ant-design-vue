@@ -8,7 +8,7 @@
 Submenus open as pop-ups.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-menu style="width: 256px" mode="vertical" @click="handleClick">

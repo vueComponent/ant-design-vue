@@ -8,7 +8,7 @@
 A simple playground for column count and gutter.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-grid-demo-playground">
     <div style="marginBottom:16px">

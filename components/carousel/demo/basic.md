@@ -8,7 +8,7 @@
 Basic usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel :afterChange="onChange">
     <div><h3>1</h3></div>

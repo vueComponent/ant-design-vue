@@ -8,7 +8,7 @@
 To customize the text of the buttons, you need to set `okText` and `cancelText` props.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showModal">Modal</a-button>

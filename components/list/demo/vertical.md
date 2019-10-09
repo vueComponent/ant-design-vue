@@ -8,7 +8,7 @@
 Setting `itemLayout` property with `vertical` to create a vertical list.
 </us>
 
-```html
+```tpl
 <template>
   <a-list itemLayout="vertical" size="large" :pagination="pagination" :dataSource="listData">
     <div slot="footer"><b>ant design vue</b> footer part</div>

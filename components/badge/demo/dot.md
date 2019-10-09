@@ -9,7 +9,7 @@ This will simply display a red badge, without a specific count.
 If count equals 0, it won't display the dot.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-badge-demo-dot">
     <a-badge dot>

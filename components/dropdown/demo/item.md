@@ -8,7 +8,7 @@
 Divider and disabled menu item.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown>
     <a class="ant-dropdown-link" href="#"> Hover me <a-icon type="down" /> </a>

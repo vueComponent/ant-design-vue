@@ -12,7 +12,7 @@ You can control the indent width by setting `indentSize`.
 > Note, no support for recursive selection of tree structure data table yet.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" :rowSelection="rowSelection" />
 </template>

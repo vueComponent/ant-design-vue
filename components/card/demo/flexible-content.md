@@ -8,7 +8,7 @@
   You can use `Card.Meta` to support more flexible content.
 </us>
 
-```html
+```tpl
 <template>
   <a-card hoverable style="width: 240px">
     <img

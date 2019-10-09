@@ -11,7 +11,7 @@ An example of infinite list & virtualized loading using [vue-virtual-scroller](h
 `Virtualized` rendering is a technique to mount big sets of data. It reduces the amount of rendered DOM nodes by tracking and hiding whatever isn't currently visible.
 </us>
 
-```html
+```tpl
 <template>
   <a-list>
     <virtual-scroller

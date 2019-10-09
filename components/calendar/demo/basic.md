@@ -8,7 +8,7 @@
 A basic calendar component with Year/Month switch.
 </us>
 
-```html
+```tpl
 <template>
   <a-calendar @panelChange="onPanelChange" />
 </template>

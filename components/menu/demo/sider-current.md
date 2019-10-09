@@ -8,7 +8,7 @@
 Click the menu and you will see that all the other menus gets collapsed to keep the entire menu compact.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-menu mode="inline" :openKeys="openKeys" @openChange="onOpenChange" style="width: 256px">

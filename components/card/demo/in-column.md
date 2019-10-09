@@ -8,7 +8,7 @@
   Cards usually cooperate with grid column layout in overview page.
 </us>
 
-```html
+```tpl
 <template>
   <div style="background-color: #ececec; padding: 20px;">
     <a-row :gutter="16">

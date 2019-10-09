@@ -8,7 +8,7 @@
 We can set presetted ranges to RangePicker to improve user experience.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-range-picker

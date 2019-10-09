@@ -8,7 +8,7 @@
 By using the `visible` prop, you can control the close state of Tag.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-tag closable v-model="visible">

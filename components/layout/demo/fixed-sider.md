@@ -8,7 +8,7 @@
 When dealing with long content, a fixed sider can provide a better user experience.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-fixed-sider">
     <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }">

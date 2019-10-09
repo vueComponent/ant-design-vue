@@ -8,7 +8,7 @@
 Basic pagination.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination v-model="current" :total="50" />
 </template>

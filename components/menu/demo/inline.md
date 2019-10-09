@@ -8,7 +8,7 @@
 Vertical menu with inline submenus.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-menu

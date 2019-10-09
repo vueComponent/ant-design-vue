@@ -8,7 +8,7 @@
 `message` provides promise interface for `onClose`. The above example will display a new message when old message is about to finish.
 </us>
 
-```html
+```tpl
 <template>
   <a-button @click="success">Display a sequence of message</a-button>
 </template>

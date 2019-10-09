@@ -8,7 +8,7 @@
 Using `OptGroup` to group the options.
 </us>
 
-```html
+```tpl
 <template>
   <a-select defaultValue="lucy" style="width: 200px" @change="handleChange">
     <a-select-opt-group>

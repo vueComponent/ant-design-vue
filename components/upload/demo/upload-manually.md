@@ -8,7 +8,7 @@
 Upload files manually after `beforeUpload` returns `false`.
 </us>
 
-```html
+```tpl
 <template>
   <div class="clearfix">
     <a-upload :fileList="fileList" :remove="handleRemove" :beforeUpload="beforeUpload">

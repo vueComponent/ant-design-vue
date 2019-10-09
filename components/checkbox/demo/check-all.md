@@ -8,7 +8,7 @@
 The `indeterminate` property can help you to achieve a 'check all' effect.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div :style="{ borderBottom: '1px solid #E9E9E9' }">

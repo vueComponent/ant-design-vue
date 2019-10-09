@@ -8,7 +8,7 @@
 Generate a group of checkboxes from an array
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-checkbox-group :options="plainOptions" v-model="value" @change="onChange" />

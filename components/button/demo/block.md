@@ -8,7 +8,7 @@
 `block` property will make the button fit to its parent width.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" block>Primary</a-button>

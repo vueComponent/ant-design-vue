@@ -8,7 +8,7 @@
 Specifies a delay for loading state. If `spinning` ends during delay, loading status won't appear.
 </us>
 
-```html
+```tpl
 <style scoped>
   .spin-content {
     border: 1px solid #91d5ff;

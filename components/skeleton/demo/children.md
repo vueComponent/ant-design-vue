@@ -8,7 +8,7 @@
 Skeleton contains sub component.
 </us>
 
-```html
+```tpl
 <template>
   <div class="article">
     <a-skeleton :loading="loading">

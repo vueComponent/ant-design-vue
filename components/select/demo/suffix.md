@@ -8,7 +8,7 @@
 Basic Usage
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-select defaultValue="lucy" style="width: 120px" @change="handleChange">

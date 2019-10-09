@@ -8,7 +8,7 @@
 Set `okText` and `cancelText` props to customize the button's labels.
 </us>
 
-```html
+```tpl
 <template>
   <a-popconfirm title="Are you sure？" okText="Yes" cancelText="No">
     <a href="#">Delete</a>

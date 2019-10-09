@@ -10,7 +10,7 @@
 Default activate first tab.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-select style="width: 200px" v-model="parentPos">

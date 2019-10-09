@@ -10,7 +10,7 @@
 If you want specific control over the positioning and placement of the `Icon`, then that should be done by placing the `Icon` component within the `Button` rather than using the `icon` property.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" shape="circle" icon="search"></a-button>

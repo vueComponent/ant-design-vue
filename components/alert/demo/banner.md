@@ -8,7 +8,7 @@
 Display Alert as a banner at top of page.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert message="Warning text" banner />

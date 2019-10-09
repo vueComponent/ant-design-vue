@@ -8,7 +8,7 @@
 In order to fit in more tabs, they can slide left and right (or up and down).
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 500px">
     <a-radio-group v-model="mode" :style="{ marginBottom: '8px' }">

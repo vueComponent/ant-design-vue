@@ -8,7 +8,7 @@
 More than one panel can be expanded at a time, the first panel is initialized to be active in this case.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-collapse v-model="activeKey">

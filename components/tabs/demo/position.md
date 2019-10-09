@@ -8,7 +8,7 @@
 Tab's position: left, right, top or bottom.
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 500px">
     <a-radio-group v-model="tabPosition" style="margin:8px">

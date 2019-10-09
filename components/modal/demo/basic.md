@@ -8,7 +8,7 @@
 Basic modal.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showModal">Open Modal</a-button>

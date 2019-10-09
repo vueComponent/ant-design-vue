@@ -8,7 +8,7 @@
 A notification box with a icon at the left side.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button @click="() => openNotificationWithIcon('success')">Success</a-button>

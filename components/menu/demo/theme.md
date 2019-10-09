@@ -8,7 +8,7 @@
 There are two built-in themes: 'light' and 'dark'. The default value is 'light'.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch

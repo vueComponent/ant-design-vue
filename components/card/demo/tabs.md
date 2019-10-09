@@ -8,7 +8,7 @@
   More content can be hosted
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-card

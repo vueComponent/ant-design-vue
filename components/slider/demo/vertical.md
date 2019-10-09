@@ -8,7 +8,7 @@
 The vertical Slider.
 </us>
 
-```html
+```tpl
 <template>
   <div style="height: 300px">
     <div style="float:left;height: 300px;marginLeft: 70px">

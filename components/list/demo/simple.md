@@ -12,7 +12,7 @@ If a large or small list is desired, set the size property to either large or sm
 Customizing the header and footer of list by setting `header` and `footer` property.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <h3 :style="{ marginBottom: '16px' }">Default Size</h3>

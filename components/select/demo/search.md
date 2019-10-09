@@ -8,7 +8,7 @@
 Search the options while expanded.
 </us>
 
-```html
+```tpl
 <template>
   <a-select
     showSearch

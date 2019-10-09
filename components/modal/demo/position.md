@@ -8,7 +8,7 @@
 You can use `centered`,`style.top` or other styles to set position of modal dialog.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-modal-demo-position">
     <a-button type="primary" @click="() => setModal1Visible(true)"

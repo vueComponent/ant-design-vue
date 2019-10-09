@@ -8,7 +8,7 @@
 You can use the Input in conjunction with [Tooltip](/components/tooltip/) component to create a Numeric Input, which can provide a good experience for extra-long content display.
 </us>
 
-```html
+```tpl
 <template>
   <a-tooltip :trigger="['focus']" placement="topLeft" overlayClassName="numeric-input">
     <span slot="title" v-if="value" class="numeric-input-title">

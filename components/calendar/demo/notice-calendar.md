@@ -8,7 +8,7 @@
 This component can be rendered by using `dateCellRender` and `monthCellRender` with the data you need.
 </us>
 
-```html
+```tpl
 <template>
   <a-calendar>
     <ul class="events" slot="dateCellRender" slot-scope="value">

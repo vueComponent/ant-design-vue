@@ -10,7 +10,7 @@ Load options lazily with `loadData`.
 > Note: `loadData` cannot work with `showSearch`.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader
     :options="options"

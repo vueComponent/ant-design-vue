@@ -8,7 +8,7 @@
 Used together with `vue-router`
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-breadcrumb :routes="routes">

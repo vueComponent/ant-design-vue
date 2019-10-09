@@ -8,7 +8,7 @@
 Simple table with actions.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data">
     <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>

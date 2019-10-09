@@ -8,7 +8,7 @@
 For letter type Avatar, when the letters are too long to display, the font size can be automatically adjusted according to the width of the Avatar.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-avatar shape="square" size="large" :style="{backgroundColor: color, verticalAlign: 'middle'}"

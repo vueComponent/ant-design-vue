@@ -8,7 +8,7 @@
 Adjust popup placement automatically when popup is invisible
 </us>
 
-```html
+```tpl
 <template>
   <div :style="wrapStyles">
     <a-tooltip placement="left" title="Prompt Text" :getPopupContainer="getPopupContainer">

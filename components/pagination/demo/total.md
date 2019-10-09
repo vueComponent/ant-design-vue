@@ -8,7 +8,7 @@
 You can show the total number of data by setting `showTotal`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-pagination

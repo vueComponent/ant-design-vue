@@ -8,7 +8,7 @@
 Classic page layouts.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-layout-demo-basic">
     <a-layout>

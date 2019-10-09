@@ -8,7 +8,7 @@
 When `tooltipVisible` is `true`, ToolTip will show always, or ToolTip will not show anyway, even if dragging or hovering.
 </us>
 
-```html
+```tpl
 <template>
   <a-slider :defaultValue="30" :tooltipVisible="true" />
 </template>

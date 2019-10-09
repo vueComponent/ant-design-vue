@@ -8,7 +8,7 @@
 A dynamic progress bar is better.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress type="circle" :percent="percent" />

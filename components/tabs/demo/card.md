@@ -8,7 +8,7 @@
 Another type Tabs, which doesn't support vertical mode.
 </us>
 
-```html
+```tpl
 <template>
   <a-tabs @change="callback" type="card">
     <a-tab-pane tab="Tab 1" key="1">Content of Tab Pane 1</a-tab-pane>

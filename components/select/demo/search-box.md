@@ -8,7 +8,7 @@
 Search with remote data.
 </us>
 
-```html
+```tpl
 <template>
   <a-select
     showSearch

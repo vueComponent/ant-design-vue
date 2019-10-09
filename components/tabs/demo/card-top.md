@@ -8,7 +8,7 @@
 Should be used at the top of container, needs to override styles.
 </us>
 
-```html
+```tpl
 <template>
   <div class="card-container">
     <a-tabs type="card">

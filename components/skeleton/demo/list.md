@@ -8,7 +8,7 @@
 Use skeleton in list component.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch :checked="!loading" @change="onChange" />

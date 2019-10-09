@@ -8,7 +8,7 @@
 Use custom loading indicator.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-spin>

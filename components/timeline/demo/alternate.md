@@ -8,7 +8,7 @@
 Alternate timeline.
 </us>
 
-```html
+```tpl
 <template>
   <a-timeline mode="alternate">
     <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>

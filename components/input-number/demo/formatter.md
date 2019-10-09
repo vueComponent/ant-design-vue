@@ -8,7 +8,7 @@
 Display value within it's situation with `formatter`, and we usually use `parser` at the same time.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-number

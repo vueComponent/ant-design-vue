@@ -8,7 +8,7 @@
 `ghost` property will make button's background transparent, it is common used in colored background.
 </us>
 
-```html
+```tpl
 <template>
   <div :style="{ background: 'rgb(190, 200, 200)', padding: '26px 16px 16px' }">
     <a-button type="primary" ghost>Primary</a-button>

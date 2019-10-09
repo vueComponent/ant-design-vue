@@ -8,7 +8,7 @@
 Custom arrows display
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel arrows>
     <div

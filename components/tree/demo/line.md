@@ -8,7 +8,7 @@
 Tree With Line
 </us>
 
-```html
+```tpl
 <template>
   <a-tree showLine :defaultExpandedKeys="['0-0-0']" @select="onSelect">
     <a-tree-node key="0-0">

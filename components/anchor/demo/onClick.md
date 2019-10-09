@@ -8,7 +8,7 @@
 Clicking on an anchor does not record history.
 </us>
 
-```html
+```tpl
 <template>
   <a-anchor :affix="false" @click="handleClick">
     <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />

@@ -8,7 +8,7 @@
 The most basic usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree-select
     showSearch

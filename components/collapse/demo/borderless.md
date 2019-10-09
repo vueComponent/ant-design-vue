@@ -8,7 +8,7 @@
 A borderless style of Collapse.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-collapse defaultActiveKey="1" :bordered="false">

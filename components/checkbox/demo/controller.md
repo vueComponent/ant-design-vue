@@ -8,7 +8,7 @@
 Communicated with other components
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <p :style="{ marginBottom: '20px' }">

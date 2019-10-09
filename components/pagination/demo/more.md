@@ -8,7 +8,7 @@
 Mode pages.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination :defaultCurrent="6" :total="500" />
 </template>

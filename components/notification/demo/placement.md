@@ -8,7 +8,7 @@
 A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` or `topLeft`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-select v-model="selected" :style="{ width: '120px', marginRight: '10px' }">

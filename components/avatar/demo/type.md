@@ -8,7 +8,7 @@
 Image, Icon and letter are supported, and the latter two kinds avatar can have custom colors and background colors.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-avatar icon="user" />

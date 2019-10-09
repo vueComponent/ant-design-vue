@@ -8,7 +8,7 @@
 Comments can be nested.
 </us>
 
-```html
+```tpl
 <template>
   <a-comment>
     <span slot="actions">Reply to</span>

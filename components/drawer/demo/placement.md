@@ -8,7 +8,7 @@
 Basic drawer.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group style="margin-right: 8px" :defaultValue="placement" @change="onChange">

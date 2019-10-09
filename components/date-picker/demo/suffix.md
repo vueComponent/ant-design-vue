@@ -8,7 +8,7 @@
 Basic use case. Users can select or input a date in panel.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker @change="onChange">

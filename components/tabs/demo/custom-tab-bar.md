@@ -8,7 +8,7 @@
 Customized bar of tab.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-tabs defaultActiveKey="1">

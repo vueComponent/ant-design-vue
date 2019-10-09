@@ -8,7 +8,7 @@
 You can customize the labels of the transfer buttons, the width and height of the columns, and what should be displayed in the footer.
 </us>
 
-```html
+```tpl
 <template>
   <a-transfer
     :dataSource="mockData"

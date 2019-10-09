@@ -8,7 +8,7 @@
 The tree structure can be populated using `treeData` property. This is a quick and easy way to provide the tree content.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree-select
     style="width: 300px"

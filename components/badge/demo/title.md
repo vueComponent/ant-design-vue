@@ -8,7 +8,7 @@
   The badge will display `title` when hovered over, instead of `count`.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-badge-demo-title">
     <a-badge :count="5" title="Custom hover text">

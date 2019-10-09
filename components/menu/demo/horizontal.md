@@ -8,7 +8,7 @@
 Horizontal top navigation menu.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-menu v-model="current" mode="horizontal">

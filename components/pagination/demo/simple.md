@@ -8,7 +8,7 @@
 Simple mode.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination simple :defaultCurrent="2" :total="50" />
 </template>

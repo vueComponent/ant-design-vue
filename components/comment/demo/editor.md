@@ -8,7 +8,7 @@
 Comment can be used as editor, user can customize the editor component.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-list

@@ -8,7 +8,7 @@
 Messages of success, error and warning types.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button @click="success">Success</a-button>

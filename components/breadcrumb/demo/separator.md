@@ -9,7 +9,7 @@
   slot="separator"
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-breadcrumb separator=">">

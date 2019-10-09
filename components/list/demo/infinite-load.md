@@ -8,7 +8,7 @@
 The example of infinite load with [vue-infinite-scroll](https://github.com/ElemeFE/vue-infinite-scroll).
 </us>
 
-```html
+```tpl
 <template>
   <div
     class="demo-infinite-container"

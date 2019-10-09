@@ -9,7 +9,7 @@ Generating a set of Tags by array, you can add and remove dynamically.
 It's based on `afterClose` event, which will be triggered while the close animation end.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <template v-for="(tag, index) in tags">

@@ -8,7 +8,7 @@
 For instance, add an external link after the selected value.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader
     :options="options"

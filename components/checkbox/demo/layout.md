@@ -8,7 +8,7 @@ Checkbox.Group内嵌Checkbox并与Grid组件一起使用，可以实现灵活的
 We can use Checkbox and Grid Checkbox.group, to implement complex layout
 </us>
 
-```html
+```tpl
 <template>
   <a-checkbox-group @change="onChange">
     <a-row>

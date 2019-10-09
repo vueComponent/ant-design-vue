@@ -8,7 +8,7 @@
 Synchronize with [InputNumber](/components/input-number/) component.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-row>

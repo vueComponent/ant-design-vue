@@ -8,7 +8,7 @@ tags select，随意输入的内容（scroll the menu）
 Select with tags, transform input to tag (scroll the menu)
 </us>
 
-```html
+```tpl
 <template>
   <a-select mode="tags" style="width: 100%" @change="handleChange" placeholder="Tags Mode">
     <a-select-option v-for="i in 25" :key="(i + 9).toString(36) + i"

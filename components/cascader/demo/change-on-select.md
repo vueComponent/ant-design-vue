@@ -8,7 +8,7 @@
 Allow only select parent options.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader :options="options" @change="onChange" changeOnSelect />
 </template>

@@ -8,7 +8,7 @@
 When there's too much information to show and the table can't display all at once.
 </us>
 
-```html
+```tpl
 <template>
   <a-table :columns="columns" :dataSource="data">
     <a slot="action" slot-scope="text" href="javascript:;">Delete</a>

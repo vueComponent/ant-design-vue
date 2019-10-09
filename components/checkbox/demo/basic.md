@@ -8,7 +8,7 @@
 Basic usage of checkbox
 </us>
 
-```html
+```tpl
 <template>
   <a-checkbox @change="onChange">Checkbox</a-checkbox>
 </template>

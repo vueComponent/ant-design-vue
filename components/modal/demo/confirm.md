@@ -8,7 +8,7 @@
 To use `confirm()` to popup a confirmation modal dialog.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button @click="showConfirm">

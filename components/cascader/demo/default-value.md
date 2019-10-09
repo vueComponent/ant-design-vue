@@ -8,7 +8,7 @@
 Specifies default value by an array.
 </us>
 
-```html
+```tpl
 <template>
   <a-cascader
     :options="options"

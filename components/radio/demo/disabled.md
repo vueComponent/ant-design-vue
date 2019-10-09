@@ -8,7 +8,7 @@ Radio 不可用。
 Radio unavailable.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio :defaultChecked="false" :disabled="disabled">Disabled</a-radio>

@@ -8,7 +8,7 @@
 Simplest Usage.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-statistic title="Active Users" :value="112893" style="margin-right: 50px" />

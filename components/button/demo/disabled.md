@@ -8,7 +8,7 @@
 To mark a button as disabled, add the `disabled` property to the `Button`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary">Primary</a-button>

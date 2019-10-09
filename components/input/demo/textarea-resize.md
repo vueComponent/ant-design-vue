@@ -8,7 +8,7 @@
 For multi-line input.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button style="margin-bottom: 16px" @click="() => this.autoResize = !autoResize">

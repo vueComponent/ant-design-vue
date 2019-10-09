@@ -11,7 +11,7 @@ This example shows how to fetch and present data from a remote server, and how t
 **Note, this example use [Mock API](https://randomuser.me) that you can look up in Network Console.**
 </us>
 
-```html
+```tpl
 <template>
   <a-table
     :columns="columns"

@@ -8,7 +8,7 @@
 Replace the default star to other character like alphabet, digit, iconfont or even Chinese word.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-rate allowHalf>

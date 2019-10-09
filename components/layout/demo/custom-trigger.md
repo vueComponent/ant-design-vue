@@ -8,7 +8,7 @@
 If you want to use a customized trigger, you can hide the default one by setting `:trigger="null"`.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider :trigger="null" collapsible v-model="collapsed">

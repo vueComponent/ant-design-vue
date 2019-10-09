@@ -8,7 +8,7 @@
 Default activate first tab.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-tabs defaultActiveKey="1" @change="callback">

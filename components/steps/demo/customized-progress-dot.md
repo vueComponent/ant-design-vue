@@ -8,7 +8,7 @@
 You can customize the display for Steps with progress dot style.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-steps :current="1">

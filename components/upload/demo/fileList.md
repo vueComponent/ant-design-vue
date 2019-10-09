@@ -14,7 +14,7 @@ You can gain full control over filelist by configuring `fileList`. You can accom
 3) filter successfully uploaded files according to response from server.
 </us>
 
-```html
+```tpl
 <template>
   <a-upload
     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"

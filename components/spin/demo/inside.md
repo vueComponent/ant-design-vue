@@ -8,7 +8,7 @@
 Spin in a container.
 </us>
 
-```html
+```tpl
 <style scoped>
   .example {
     text-align: center;

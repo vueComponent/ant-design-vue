@@ -8,7 +8,7 @@
 Hide default plus icon, and bind event for customized trigger.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div :style="{ marginBottom: '16px' }">

@@ -8,7 +8,7 @@
 `Modal.destroyAll()` could destroy all confirmation modal dialogs. Usually, you can use it in router change event to destroy confirm modal dialog automatically
 </us>
 
-```html
+```tpl
 <template>
   <a-button @click="showConfirm">
     Confirm

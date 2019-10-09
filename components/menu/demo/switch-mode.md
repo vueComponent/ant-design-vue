@@ -8,7 +8,7 @@
 Show the dynamic switching mode (between 'inline' and 'vertical').
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-switch :defaultChecked="false" @change="changeMode" /> Change Mode

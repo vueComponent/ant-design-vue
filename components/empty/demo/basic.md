@@ -8,7 +8,7 @@
 Simplest Usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-empty />
 </template>

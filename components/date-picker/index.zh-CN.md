@@ -58,7 +58,7 @@
 | defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/) | 无 |
 | disabledTime | 不可选择的时间 | function(date) | 无 |
 | format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [moment.js](http://momentjs.com/) | string \| string[] | "YYYY-MM-DD" |
-| mode | 日期面板的状态 | `time|date|month|year` | 'date' |
+| mode | 日期面板的状态（[设置后无法选择年份/月份？](/docs/vue/faq#当我指定了-DatePicker/RangePicker-的-mode-属性后，点击后无法选择年份/月份？)） | `time|date|month|year` | 'date' |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" slot-scope="mode" | - |
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker-cn/#API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/) | moment() |

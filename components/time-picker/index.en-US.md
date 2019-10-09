@@ -1,9 +1,9 @@
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | addon | some addon to timepicker panel bottom | slot \| slot-scope | - |
-| allowEmpty | allow clearing text | boolean | true |
+| allowClear | allow clearing text | boolean | true |
 | autoFocus | get focus when component mounted | boolean | false |
 | clearText | clear tooltip of icon | string | clear |
 | defaultOpenValue | default open panel value, used to set utcOffset,locale if value/defaultValue absent | [moment](http://momentjs.com/) | moment() |
@@ -21,12 +21,14 @@
 | open(.sync) | whether to popup panel | boolean | false |
 | placeholder | display when there's no value | string | "Select a time" |
 | popupClassName | className of panel | string | '' |
+| popupStyle | style of panel | object | - |
 | secondStep | interval between seconds in picker | number | 1 |
 | suffixIcon | The custom suffix icon | string \| VNode \| slot | - |
 | use12Hours | display as 12 hours format, with default format `h:mm:ss a` | boolean | false |
 | value(v-model) | to set time | [moment](http://momentjs.com/) | - |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | a callback function, can be executed when the selected time is changing | function(time: moment, timeString: string): void |
@@ -34,8 +36,7 @@
 
 ## Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
-
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |

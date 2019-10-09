@@ -8,7 +8,7 @@
 If you need several buttons, we recommend that you use 1 primary button + n secondary buttons, and if there are more than three operations, you can group some of them into `Dropdown.Button`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary">Primary</a-button>
@@ -19,19 +19,17 @@ If you need several buttons, we recommend that you use 1 primary button + n seco
         <a-menu-item key="2">2nd item</a-menu-item>
         <a-menu-item key="3">3rd item</a-menu-item>
       </a-menu>
-      <a-button>
-        Actions <a-icon type="down" />
-      </a-button>
+      <a-button> Actions <a-icon type="down" /> </a-button>
     </a-dropdown>
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    handleMenuClick(e) {
-      console.log('click', e);
-    }
-  }
-}
+  export default {
+    methods: {
+      handleMenuClick(e) {
+        console.log('click', e);
+      },
+    },
+  };
 </script>
 ```

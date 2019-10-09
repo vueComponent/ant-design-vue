@@ -10,7 +10,7 @@
 > it is an absolute controlled component and has no uncontrolled mode.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-checkable-tag v-model="checked1" @change="handleChange">Tag1</a-checkable-tag>
@@ -19,19 +19,19 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      checked1: false,
-      checked2: false,
-      checked3: false,
-    }
-  },
-  methods: {
-    handleChange (checked) {
-      console.log(checked)
+  export default {
+    data() {
+      return {
+        checked1: false,
+        checked2: false,
+        checked3: false,
+      };
     },
-  },
-}
+    methods: {
+      handleChange(checked) {
+        console.log(checked);
+      },
+    },
+  };
 </script>
 ```

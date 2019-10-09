@@ -1,4 +1,3 @@
-
 <cn>
 #### 位置
 可以设置通知从右上角、右下角、左下角、左上角弹出。
@@ -9,7 +8,7 @@
 A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` or `topLeft`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-select v-model="selected" :style="{ width: '120px', marginRight: '10px' }">
@@ -21,28 +20,28 @@ A notification box can pop up from `topRight` or `bottomRight` or `bottomLeft` o
 <script>
   const options = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
   export default {
-    data () {
+    data() {
       return {
         options,
         selected: 'topRight',
-      }
+      };
     },
     watch: {
       selected(val) {
         this.$notification.config({
           placement: val,
         });
-      }
+      },
     },
     methods: {
-      openNotification (val) {
+      openNotification(val) {
         this.$notification.open({
           message: 'Notification Title',
-          description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          description:
+            'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
       },
-    }
-  }
+    },
+  };
 </script>
 ```
-

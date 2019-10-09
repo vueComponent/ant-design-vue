@@ -10,7 +10,7 @@ Layout.Sider supports responsive layout.
 > Note: You can get a responsive layout by setting `breakpoint`, the Sider will collapse to the width of `collapsedWidth` when window width is below the `breakpoint`. And a special trigger will appear if the `collapsedWidth` is set to `0`.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-responsive">
     <a-layout-sider
@@ -53,23 +53,23 @@ Layout.Sider supports responsive layout.
   </a-layout>
 </template>
 <script>
-export default {
-  methods: {
-    onCollapse(collapsed, type) {
-      console.log(collapsed, type);
+  export default {
+    methods: {
+      onCollapse(collapsed, type) {
+        console.log(collapsed, type);
+      },
+      onBreakpoint(broken) {
+        console.log(broken);
+      },
     },
-    onBreakpoint(broken) {
-      console.log(broken);
-    }
-  }
-}
+  };
 </script>
 
 <style>
-#components-layout-demo-responsive .logo {
-  height: 32px;
-  background: rgba(255,255,255,.2);
-  margin: 16px;
-}
+  #components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
 </style>
 ```

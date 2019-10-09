@@ -8,14 +8,14 @@
 Accordion mode, only one panel can be expanded at a time. The first panel will be expanded by default.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-collapse accordion>
       <a-collapse-panel header="This is panel header 1" key="1">
         <p>{{text}}</p>
       </a-collapse-panel>
-      <a-collapse-panel header="This is panel header 2" key="2" :disabled='false'>
+      <a-collapse-panel header="This is panel header 2" key="2" :disabled="false">
         <p>{{text}}</p>
       </a-collapse-panel>
       <a-collapse-panel header="This is panel header 3" key="3">
@@ -26,11 +26,11 @@ Accordion mode, only one panel can be expanded at a time. The first panel will b
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-      }
+      };
     },
-  }
+  };
 </script>
 ```

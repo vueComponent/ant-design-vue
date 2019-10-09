@@ -28,26 +28,26 @@ if (cn) {
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
-function onSelect (value) {
+function onSelect(value) {
   console.log('select', value.format(format));
 }
 
 export default {
   mixins: [BaseMixin],
-  data () {
+  data() {
     return {
       type: 'month',
     };
   },
   methods: {
-    onTypeChange (type) {
+    onTypeChange(type) {
       this.setState({
         type,
       });
     },
   },
 
-  render () {
+  render() {
     return (
       <div style={{ zIndex: 1000, position: 'relative' }}>
         <FullCalendar
@@ -72,5 +72,4 @@ export default {
     );
   },
 };
-
 </script>

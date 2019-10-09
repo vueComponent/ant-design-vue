@@ -8,6 +8,6 @@ const ILazyRenderBoxPropTypes = {
 export default {
   props: ILazyRenderBoxPropTypes,
   render() {
-    return <div>{this.$slots.default}</div>;
+    return <div {...{ on: this.$listeners }}>{this.$slots.default}</div>;
   },
 };

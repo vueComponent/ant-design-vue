@@ -220,7 +220,7 @@ const Tree = {
           checkedKeyEntity = parseCheckedKeys(props.defaultCheckedKeys) || {};
         } else if (treeNode) {
           // If treeNode changed, we also need check it
-          checkedKeyEntity = {
+          checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {
             checkedKeys: prevState._checkedKeys,
             halfCheckedKeys: prevState._halfCheckedKeys,
           };

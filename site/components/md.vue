@@ -1,23 +1,14 @@
 <template>
-  <div
-    class="markdown"
-    v-html="marked(text)"
-  />
+  <div class="markdown" v-html="marked(text)" />
 </template>
 <script>
 import marked from 'marked';
 import { isZhCN } from '../util';
 const renderer = new marked.Renderer();
-renderer.heading = function (text, level) {
-  return '<h' +
-    level +
-    ' id="' +
-    text.replace(/[^\w]+/g, '-') +
-    '">' +
-    text +
-    '</h' +
-    level +
-    '>\n';
+renderer.heading = function(text, level) {
+  return (
+    '<h' + level + ' id="' + text.replace(/[^\w]+/g, '-') + '">' + text + '</h' + level + '>\n'
+  );
 };
 marked.setOptions({
   renderer,
@@ -36,9 +27,9 @@ export default {
     us: String,
   },
   inject: {
-    demoContext: { default: {}},
+    demoContext: { default: {} },
   },
-  data () {
+  data() {
     let text = '';
     const { cn, us } = this;
     if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].text) {
@@ -47,7 +38,10 @@ export default {
       text = isZhCN(this.demoContext.name) ? cn : us;
     }
     text = text || '';
-    text = text.split('\n').map(t => t.trim()).join('\n');
+    text = text
+      .split('\n')
+      .map(t => t.trim())
+      .join('\n');
     return {
       marked,
       text,

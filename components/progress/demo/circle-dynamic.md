@@ -8,7 +8,7 @@
 A dynamic progress bar is better.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress type="circle" :percent="percent" />
@@ -20,10 +20,10 @@ A dynamic progress bar is better.
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         percent: 0,
-      }
+      };
     },
     methods: {
       increase() {
@@ -31,18 +31,16 @@ A dynamic progress bar is better.
         if (percent > 100) {
           percent = 100;
         }
-        this.percent = percent
+        this.percent = percent;
       },
       decline() {
         let percent = this.percent - 10;
         if (percent < 0) {
           percent = 0;
         }
-        this.percent = percent
+        this.percent = percent;
       },
     },
-  }
+  };
 </script>
 ```
-
-

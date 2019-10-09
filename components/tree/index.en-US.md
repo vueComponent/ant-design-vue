@@ -1,10 +1,9 @@
-
 ## API
 
 ### Tree props
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | array | - |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | true |
 | checkable | Adds a `Checkbox` before the treeNodes | boolean | false |
@@ -24,14 +23,16 @@
 | multiple | Allows selecting multiple treeNodes | boolean | false |
 | selectedKeys(.sync) | (Controlled) Specifies the keys of the selected treeNodes | string\[] \| number\[] | - |
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |
+| switcherIcon | customize collapse/expand icon of tree node | slot | - |
 | showLine | Shows a connecting line | boolean | false |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | check | Callback function for when the onCheck event occurs | function(checkedKeys, e:{checked: bool, checkedNodes, node, event}) |
 | dragend | Callback function for when the onDragEnd event occurs | function({event, node}) |
-| dragenter | Callback function for when the onDragEnter event occurs | function({event, node,  expandedKeys}) |
+| dragenter | Callback function for when the onDragEnter event occurs | function({event, node, expandedKeys}) |
 | dragleave | Callback function for when the onDragLeave event occurs | function({event, node}) |
 | dragover | Callback function for when the onDragOver event occurs | function({event, node}) |
 | dragstart | Callback function for when the onDragStart event occurs | function({event, node}) |
@@ -43,11 +44,10 @@
 
 ### TreeNode props
 
-
 One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the same API.
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | class | className | string | - |
 | style | style | string\|object | - |
 | disableCheckbox | Disables the checkbox of the treeNode | boolean | false |
@@ -66,3 +66,9 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | expandAction | Directory open logic, optional `false` `'click'` `'doubleclick'` | string | click |
+
+## FAQ
+
+### How to hide file icon when use showLine?
+
+File icon realize by using switcherIcon. You can overwrite the style to hide it

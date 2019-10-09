@@ -127,6 +127,10 @@ export function cloneElement(n, nodeProps = {}, deep) {
     node.data.on = { ...(node.data.on || {}), ...on };
   }
 
+  if (node.fnOptions && node.fnOptions.functional) {
+    node.data.on = { ...(node.data.on || {}), ...on };
+  }
+
   if (key !== undefined) {
     node.key = key;
     node.data.key = key;

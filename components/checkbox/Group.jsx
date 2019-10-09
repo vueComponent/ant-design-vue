@@ -1,5 +1,8 @@
+import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
 import hasProp from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
+
 function noop() {}
 export default {
   name: 'ACheckboxGroup',
@@ -7,28 +10,19 @@ export default {
     prop: 'value',
   },
   props: {
-    prefixCls: {
-      default: 'ant-checkbox',
-      type: String,
-    },
-    defaultValue: {
-      default: undefined,
-      type: Array,
-    },
-    value: {
-      default: undefined,
-      type: Array,
-    },
-    options: {
-      default: () => [],
-      type: Array,
-    },
-    disabled: Boolean,
+    prefixCls: PropTypes.string,
+    defaultValue: PropTypes.array,
+    value: PropTypes.array,
+    options: PropTypes.array.def([]),
+    disabled: PropTypes.bool,
   },
   provide() {
     return {
       checkboxGroupContext: this,
     };
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const { value, defaultValue } = this;
@@ -75,7 +69,10 @@ export default {
   },
   render() {
     const { $props: props, $data: state, $slots } = this;
-    const { prefixCls, options } = props;
+    const { prefixCls: customizePrefixCls, options } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
+
     let children = $slots.default;
     const groupPrefixCls = `${prefixCls}-group`;
     if (options && options.length > 0) {

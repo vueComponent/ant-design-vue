@@ -97,6 +97,8 @@ import { default as Slider } from './slider';
 
 import { default as Spin } from './spin';
 
+import { default as Statistic } from './statistic';
+
 import { default as Steps } from './steps';
 
 import { default as Switch } from './switch';
@@ -132,6 +134,8 @@ import { default as Skeleton } from './skeleton';
 import { default as Comment } from './comment';
 
 import { default as ConfigProvider } from './config-provider';
+
+import { default as Empty } from './empty';
 
 const components = [
   Base,
@@ -173,6 +177,7 @@ const components = [
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,
@@ -189,6 +194,7 @@ const components = [
   Skeleton,
   Comment,
   ConfigProvider,
+  Empty,
 ];
 
 const install = function(Vue) {
@@ -203,6 +209,7 @@ const install = function(Vue) {
   Vue.prototype.$error = Modal.error;
   Vue.prototype.$warning = Modal.warning;
   Vue.prototype.$confirm = Modal.confirm;
+  Vue.prototype.$destroyAll = Modal.destroyAll;
 };
 
 /* istanbul ignore if */
@@ -254,6 +261,7 @@ export {
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,
@@ -270,6 +278,7 @@ export {
   Skeleton,
   Comment,
   ConfigProvider,
+  Empty,
 };
 
 export default {

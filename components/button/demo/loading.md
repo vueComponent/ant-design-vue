@@ -8,7 +8,7 @@
 A loading indicator can be added to a button by setting the `loading` property on the `Button`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" loading>
@@ -30,21 +30,21 @@ A loading indicator can be added to a button by setting the `loading` property o
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      loading: false,
-      iconLoading: false,
-    }
-  },
-  methods: {
-    enterLoading () {
-      this.loading = true
+  export default {
+    data() {
+      return {
+        loading: false,
+        iconLoading: false,
+      };
     },
-    enterIconLoading () {
-      this.iconLoading = { delay: 1000 }
+    methods: {
+      enterLoading() {
+        this.loading = true;
+      },
+      enterIconLoading() {
+        this.iconLoading = { delay: 1000 };
+      },
     },
-  },
-}
+  };
 </script>
 ```

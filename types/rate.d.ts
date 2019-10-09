@@ -60,6 +60,8 @@ export declare class Rate extends AntdComponent {
    */
   value: number;
 
+  tooltips: Array<string>;
+
   /**
    * remove focus
    */

@@ -16,13 +16,9 @@ The properties passed by the upper component must be declared in the props of `F
 But if you use `this.$form.createForm`, You can use any data, not just the properties of the upper components.
 </us>
 
-
 <template>
   <div id="components-form-demo-global-state">
-    <customized-form
-      :username="fields.username"
-      @change="handleFormChange"
-    />
+    <customized-form :username="fields.username" @change="handleFormChange" />
     <pre class="language-bash">
       {{ JSON.stringify(fields, null, 2) }}
     </pre>
@@ -46,8 +42,9 @@ const CustomizedForm = {
       </a-form-item>
     </a-form>
   `,
-  created () {
+  created() {
     this.form = this.$form.createForm(this, {
+      name: 'global_state',
       onFieldsChange: (_, changedFields) => {
         this.$emit('change', changedFields);
       },
@@ -59,13 +56,13 @@ const CustomizedForm = {
           }),
         };
       },
-      onValuesChange (_, values) {
+      onValuesChange(_, values) {
         console.log(values);
       },
     });
   },
   watch: {
-    username () {
+    username() {
       this.form.updateFields({
         username: this.$form.createFormField({
           ...this.username,
@@ -80,7 +77,7 @@ export default {
   components: {
     CustomizedForm,
   },
-  data () {
+  data() {
     return {
       fields: {
         username: {
@@ -90,7 +87,7 @@ export default {
     };
   },
   methods: {
-    handleFormChange (changedFields) {
+    handleFormChange(changedFields) {
       console.log('changedFields', changedFields);
       this.fields = { ...this.fields, ...changedFields };
     },
@@ -104,8 +101,3 @@ export default {
   margin-top: 24px;
 }
 </style>
-
-
-
-
-

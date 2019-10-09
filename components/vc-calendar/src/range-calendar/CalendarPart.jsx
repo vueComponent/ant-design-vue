@@ -59,6 +59,7 @@ const CalendarPart = {
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const {
+      inputChange = noop,
       inputSelect = noop,
       valueChange = noop,
       panelChange = noop,
@@ -91,7 +92,7 @@ const CalendarPart = {
           value: selectedValue[index],
         },
         on: {
-          change: inputSelect,
+          change: inputChange,
         },
       });
     }
@@ -109,6 +110,8 @@ const CalendarPart = {
         showClear={false}
         selectedValue={selectedValue[index]}
         onChange={inputSelect}
+        onChange={inputChange}
+        onSelect={inputSelect}
         clearIcon={clearIcon}
       />
     );

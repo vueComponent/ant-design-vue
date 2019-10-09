@@ -116,10 +116,13 @@ const Range = {
       nextBounds[this.prevMovedHandleIndex] = value;
       this.onChange({ bounds: nextBounds });
     },
-    onEnd() {
-      this.setState({ sHandle: null });
+    onEnd(force) {
+      const { sHandle } = this;
       this.removeDocumentEvents();
-      this.$emit('afterChange', this.bounds);
+      if (sHandle || force) {
+        this.$emit('afterChange', this.bounds);
+      }
+      this.setState({ sHandle: null });
     },
     onMove(e, position) {
       utils.pauseEvent(e);
@@ -136,7 +139,7 @@ const Range = {
       if (valueMutator) {
         utils.pauseEvent(e);
         const { bounds, sHandle } = this;
-        const oldValue = bounds[sHandle];
+        const oldValue = bounds[sHandle === null ? this.recent : sHandle];
         const mutatedValue = valueMutator(oldValue, this.$props);
         const value = this.trimAlignValue(mutatedValue);
         if (value === oldValue) return;
@@ -201,9 +204,10 @@ const Range = {
 
     moveTo(value, isFromKeyboardEvent) {
       const nextBounds = [...this.bounds];
-      const { sHandle } = this;
-      nextBounds[sHandle] = value;
-      let nextHandle = sHandle;
+      const { sHandle, recent } = this;
+      const handle = sHandle === null ? recent : sHandle;
+      nextBounds[handle] = value;
+      let nextHandle = handle;
       if (this.$props.pushable !== false) {
         this.pushSurroundingHandles(nextBounds, nextHandle);
       } else if (this.$props.allowCross) {

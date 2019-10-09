@@ -8,24 +8,24 @@
   Cards usually cooperate with grid column layout in overview page.
 </us>
 
-```html
+```tpl
 <template>
   <div style="background-color: #ececec; padding: 20px;">
     <a-row :gutter="16">
       <a-col :span="8">
-        <a-card title="Card title" :bordered=false>
+        <a-card title="Card title" :bordered="false">
           <p>card content</p>
         </a-card>
       </a-col>
       <a-col :span="8">
-        <a-card title="Card title" :bordered=false>
+        <a-card title="Card title" :bordered="false">
           <p>card content</p>
-        </a-card> 
+        </a-card>
       </a-col>
       <a-col :span="8">
-        <a-card title="Card title" :bordered=false>
+        <a-card title="Card title" :bordered="false">
           <p>card content</p>
-        </a-card>   
+        </a-card>
       </a-col>
     </a-row>
   </div>

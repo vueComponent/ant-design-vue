@@ -8,7 +8,7 @@
 Create a reusable Vue component by using `<a-icon :component="{...}" />`. The property `component` takes a Vue component that renders to `svg` element.
 </us>
 
-```html
+```tpl
 <template>
   <div class="custom-icons-list">
     <heart-icon :style="{ color: 'hotpink' }" />
@@ -16,15 +16,15 @@ Create a reusable Vue component by using `<a-icon :component="{...}" />`. The pr
   </div>
 </template>
 <script>
-const HeartSvg = {
-  template: `
+  const HeartSvg = {
+    template: `
     <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 1024 1024">
       <path d="M923 283.6c-13.4-31.1-32.6-58.9-56.9-82.8-24.3-23.8-52.5-42.4-84-55.5-32.5-13.5-66.9-20.3-102.4-20.3-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5-24.4 23.9-43.5 51.7-56.9 82.8-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3 0.1-35.3-7-69.6-20.9-101.9z" />
     </svg>
-  `
-}
-const PandaSvg = {
-  template: `
+  `,
+  };
+  const PandaSvg = {
+    template: `
     <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor">
       <path d="M99.096 315.634s-82.58-64.032-82.58-132.13c0-66.064 33.032-165.162 148.646-148.646 83.37 11.91 99.096 165.162 99.096 165.162l-165.162 115.614zM924.906 315.634s82.58-64.032 82.58-132.13c0-66.064-33.032-165.162-148.646-148.646-83.37 11.91-99.096 165.162-99.096 165.162l165.162 115.614z" fill="#6B676E" p-id="1143" />
       <path d="M1024 561.548c0 264.526-229.23 429.42-512.002 429.42S0 826.076 0 561.548 283.96 66.064 512.002 66.064 1024 297.022 1024 561.548z" fill="#FFEBD2" p-id="1144" />
@@ -35,43 +35,41 @@ const PandaSvg = {
       <path d="M330.324 495.484m-33.032 0a33.032 33.032 0 1 0 66.064 0 33.032 33.032 0 1 0-66.064 0Z" fill="#464655" p-id="1149" />
       <path d="M693.678 495.484m-33.032 0a33.032 33.032 0 1 0 66.064 0 33.032 33.032 0 1 0-66.064 0Z" fill="#464655" p-id="1150" />
     </svg>
-  `
-}
+  `,
+  };
 
-const HeartIcon = {
-  template: `
+  const HeartIcon = {
+    template: `
     <a-icon :component="HeartSvg" />
   `,
-  data() {
-    return {
-      HeartSvg
-    }
-  }
-}
+    data() {
+      return {
+        HeartSvg,
+      };
+    },
+  };
 
-const PandaIcon = {
-  template: `
+  const PandaIcon = {
+    template: `
     <a-icon :component="PandaSvg" />
   `,
-  data() {
-    return {
-      PandaSvg
-    }
-  }
-}
+    data() {
+      return {
+        PandaSvg,
+      };
+    },
+  };
 
-export default {
-  components: {
-    HeartIcon,
-    PandaIcon,
-  }
-}
+  export default {
+    components: {
+      HeartIcon,
+      PandaIcon,
+    },
+  };
 </script>
 <style scoped>
-.custom-icons-list >>> .anticon {
-  margin-right: 6px;
-}
+  .custom-icons-list >>> .anticon {
+    margin-right: 6px;
+  }
 </style>
 ```
-
-

@@ -34,9 +34,13 @@ if (cn) {
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
-const timePickerElement = (h) => <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]}/>;
+const timePickerElement = h => (
+  <TimePickerPanel
+    defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]}
+  />
+);
 
-function newArray (start, end) {
+function newArray(start, end) {
   const result = [];
   for (let i = start; i < end; i++) {
     result.push(i);
@@ -44,7 +48,7 @@ function newArray (start, end) {
   return result;
 }
 
-function disabledDate (current) {
+function disabledDate(current) {
   const date = moment();
   date.hour(0);
   date.minute(0);
@@ -52,16 +56,16 @@ function disabledDate (current) {
   return current.isBefore(date); // can not select days before today
 }
 
-function disabledTime (time, type) {
+function disabledTime(time, type) {
   console.log('disabledTime', time, type);
   if (type === 'start') {
     return {
-      disabledHours () {
+      disabledHours() {
         const hours = newArray(0, 60);
         hours.splice(20, 4);
         return hours;
       },
-      disabledMinutes (h) {
+      disabledMinutes(h) {
         if (h === 20) {
           return newArray(0, 31);
         } else if (h === 23) {
@@ -69,18 +73,18 @@ function disabledTime (time, type) {
         }
         return [];
       },
-      disabledSeconds () {
+      disabledSeconds() {
         return [55, 56];
       },
     };
   }
   return {
-    disabledHours () {
+    disabledHours() {
       const hours = newArray(0, 60);
       hours.splice(2, 6);
       return hours;
     },
-    disabledMinutes (h) {
+    disabledMinutes(h) {
       if (h === 20) {
         return newArray(0, 31);
       } else if (h === 23) {
@@ -88,50 +92,50 @@ function disabledTime (time, type) {
       }
       return [];
     },
-    disabledSeconds () {
+    disabledSeconds() {
       return [55, 56];
     },
   };
 }
 
 const formatStr = 'YYYY-MM-DD HH:mm:ss';
-function format (v) {
+function format(v) {
   return v ? v.format(formatStr) : '';
 }
 
-function isValidRange (v) {
+function isValidRange(v) {
   return v && v[0] && v[1];
 }
 
-function onStandaloneChange (value) {
+function onStandaloneChange(value) {
   console.log('onChange');
   console.log(value[0] && format(value[0]), value[1] && format(value[1]));
 }
 
-function onStandaloneSelect (value) {
+function onStandaloneSelect(value) {
   console.log('onSelect');
   console.log(format(value[0]), format(value[1]));
 }
 
 const Demo = {
   mixins: [BaseMixin],
-  data () {
+  data() {
     return {
       value: [],
       hoverValue: [],
     };
   },
   methods: {
-    onChange (value) {
+    onChange(value) {
       console.log('onChange', value);
       this.setState({ value });
     },
 
-    onHoverChange (hoverValue) {
+    onHoverChange(hoverValue) {
       this.setState({ hoverValue });
     },
   },
-  render (h) {
+  render(h) {
     const state = this.$data;
     const calendar = (
       <RangeCalendar
@@ -147,32 +151,28 @@ const Demo = {
       />
     );
     return (
-      <Picker
-        value={state.value}
-        onChange={this.onChange}
-        animation='slide-up'
-        calendar={calendar}
-      >
-        {
-          ({ value }) => {
-            return (<span>
+      <Picker value={state.value} onChange={this.onChange} animation="slide-up" calendar={calendar}>
+        {({ value }) => {
+          return (
+            <span>
               <input
-                placeholder='please select'
+                placeholder="please select"
                 style={{ width: '350px' }}
                 disabled={state.disabled}
                 readOnly
-                className='ant-calendar-picker-input ant-input'
-                value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
+                className="ant-calendar-picker-input ant-input"
+                value={(isValidRange(value) && `${format(value[0])} - ${format(value[1])}`) || ''}
               />
-            </span>);
-          }
-        }
-      </Picker>);
+            </span>
+          );
+        }}
+      </Picker>
+    );
   },
 };
 
 export default {
-  render (h) {
+  render(h) {
     return (
       <div>
         <h2>calendar</h2>
@@ -201,5 +201,4 @@ export default {
     );
   },
 };
-
 </script>

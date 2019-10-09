@@ -8,7 +8,7 @@
 Click the button to toggle between available and disabled states.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-number :min="1" :max="10" :disabled="disabled" :defaultValue="3" />
@@ -19,19 +19,16 @@ Click the button to toggle between available and disabled states.
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         disabled: true,
-      }
+      };
     },
     methods: {
       toggle() {
-        this.disabled = !this.disabled
-      }
+        this.disabled = !this.disabled;
+      },
     },
-  }
+  };
 </script>
 ```
-
-
-

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import placements from './placements';
@@ -12,10 +13,12 @@ export default {
     prefixCls: PropTypes.string.def('rc-dropdown'),
     transitionName: PropTypes.string,
     overlayClassName: PropTypes.string.def(''),
+    openClassName: PropTypes.string,
     animation: PropTypes.any,
     align: PropTypes.object,
     overlayStyle: PropTypes.object.def({}),
     placement: PropTypes.string.def('bottomLeft'),
+    overlay: PropTypes.any,
     trigger: PropTypes.array.def(['hover']),
     alignPoint: PropTypes.bool,
     showAction: PropTypes.array.def([]),
@@ -77,9 +80,21 @@ export default {
       return !alignPoint;
     },
 
+    getOverlayElement() {
+      const overlay = this.overlay || this.$slots.overlay || this.$scopedSlots.overlay;
+      let overlayElement;
+      if (typeof overlay === 'function') {
+        overlayElement = overlay();
+      } else {
+        overlayElement = overlay;
+      }
+      return overlayElement;
+    },
+
     getMenuElement() {
       const { onClick, prefixCls, $slots } = this;
       this.childOriginEvents = getEvents($slots.overlay[0]);
+      const overlayElement = this.getOverlayElement();
       const extraOverlayProps = {
         props: {
           prefixCls: `${prefixCls}-menu`,
@@ -89,11 +104,30 @@ export default {
           click: onClick,
         },
       };
+      if (typeof overlayElement.type === 'string') {
+        delete extraOverlayProps.props.prefixCls;
+      }
       return cloneElement($slots.overlay[0], extraOverlayProps);
+    },
+
+    getMenuElementOrLambda() {
+      const overlay = this.overlay || this.$slots.overlay || this.$scopedSlots.overlay;
+      if (typeof overlay === 'function') {
+        return this.getMenuElement;
+      }
+      return this.getMenuElement();
     },
 
     getPopupDomNode() {
       return this.$refs.trigger.getPopupDomNode();
+    },
+
+    getOpenClassName() {
+      const { openClassName, prefixCls } = this.$props;
+      if (openClassName !== undefined) {
+        return openClassName;
+      }
+      return `${prefixCls}-open`;
     },
 
     afterVisibleChange(visible) {
@@ -111,6 +145,14 @@ export default {
           }
         }
       }
+    },
+
+    renderChildren() {
+      const children = this.$slots.default && this.$slots.default[0];
+      const { sVisible } = this;
+      return sVisible && children
+        ? cloneElement(children, { class: this.getOpenClassName() })
+        : children;
     },
   },
 
@@ -160,7 +202,7 @@ export default {
     const child = this.$slots.default && this.$slots.default[0];
     return (
       <Trigger {...triggerProps}>
-        {child && !child.tag ? <span>{child}</span> : child}
+        {this.renderChildren()}
         <template slot="popup">{this.$slots.overlay && this.getMenuElement()}</template>
       </Trigger>
     );

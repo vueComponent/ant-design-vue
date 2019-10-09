@@ -8,7 +8,7 @@ Radio 不可用。
 Radio unavailable.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio :defaultChecked="false" :disabled="disabled">Disabled</a-radio>
@@ -22,17 +22,17 @@ Radio unavailable.
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      disabled: true,
-    }
-  },
-  methods: {
-    toggleDisabled () {
-      this.disabled = !this.disabled
+  export default {
+    data() {
+      return {
+        disabled: true,
+      };
     },
-  },
-}
+    methods: {
+      toggleDisabled() {
+        this.disabled = !this.disabled;
+      },
+    },
+  };
 </script>
 ```

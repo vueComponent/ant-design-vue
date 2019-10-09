@@ -1,4 +1,4 @@
-// based on rc-input-number 4.3.8
+// based on rc-input-number 4.4.0
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util';
@@ -32,6 +32,9 @@ const DELAY = 600;
  * The reason this is used, instead of Infinity is because numbers above the MSI are unstable
  */
 const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
+
+const isValidProps = value => value !== undefined && value !== null;
+
 const inputNumberProps = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -290,7 +293,7 @@ export default {
       // https://github.com/ant-design/ant-design/issues/8196
       let value = e.target.value.trim().replace(/。/g, '.');
 
-      if (this.decimalSeparator !== undefined) {
+      if (isValidProps(this.decimalSeparator)) {
         value = value.replace(this.decimalSeparator, '.');
       }
 
@@ -312,7 +315,7 @@ export default {
     },
     setValue(v, callback) {
       // trigger onChange
-      const newValue = this.isNotCompleteNumber(parseFloat(v, 10)) ? undefined : parseFloat(v, 10);
+      const newValue = this.isNotCompleteNumber(parseFloat(v, 10)) ? null : parseFloat(v, 10);
       const changed = newValue !== this.sValue || `${newValue}` !== `${this.inputValue}`; // https://github.com/ant-design/ant-design/issues/7363
       if (!hasProp(this, 'value')) {
         this.setState(
@@ -336,7 +339,7 @@ export default {
       }
     },
     getPrecision(value) {
-      if (hasProp(this, 'precision')) {
+      if (isValidProps(this.precision)) {
         return this.precision;
       }
       const valueString = value.toString();
@@ -355,7 +358,7 @@ export default {
     // if this.props.precision is undefined
     // https://github.com/react-component/input-number/issues/39
     getMaxPrecision(currentValue, ratio = 1) {
-      if (hasProp(this, 'precision')) {
+      if (isValidProps(this.precision)) {
         return this.precision;
       }
       const { step } = this;
@@ -492,7 +495,7 @@ export default {
       if (this.isNotCompleteNumber(num)) {
         return num;
       }
-      if (hasProp(this, 'precision')) {
+      if (isValidProps(this.precision)) {
         return Number(Number(num).toFixed(this.precision));
       }
       return Number(num);
@@ -657,7 +660,7 @@ export default {
       };
     }
     let inputDisplayValueFormat = this.formatWrapper(inputDisplayValue);
-    if (this.decimalSeparator !== undefined) {
+    if (isValidProps(this.decimalSeparator)) {
       inputDisplayValueFormat = inputDisplayValueFormat
         .toString()
         .replace('.', this.decimalSeparator);

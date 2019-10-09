@@ -6,12 +6,12 @@ export default {
     name: String,
     hash: String,
   },
-  provide () {
+  provide() {
     return {
       demoContext: this,
     };
   },
-  render () {
+  render() {
     // const name = this.name
     // const titleMap = {}
     // for (const [title] of Object.entries(AllDemo)) {
@@ -21,7 +21,7 @@ export default {
     // const Demo = AllDemo[titleMap[name.replace(/-cn\/?$/, '')]]
     // const hash = this.$route.hash.replace('#', '')
     return (
-      <div id='iframe-page'>
+      <div id="iframe-page">
         <router-view></router-view>
       </div>
     );

@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input.Search should support custom Button 1`] = `<span class="ant-input-affix-wrapper ant-input-search ant-input-search-enter-button"><input type="text" class="ant-input"><span class="ant-input-suffix"><button type="button" class="ant-btn ant-btn-default ant-input-search-button"><span>ok</span></button></span></span>`;
+exports[`Input.Search should support custom Button 1`] = `<span class="ant-input-group-wrapper ant-input-search ant-input-search-enter-button"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-affix-wrapper"><input type="text" class="ant-input"></span><span class="ant-input-group-addon"><button type="button" class="ant-btn ant-input-search-button"><span>ok</span></button></span></span></span>`;
 
-exports[`Input.Search should support custom button 1`] = `<span class="ant-input-affix-wrapper ant-input-search ant-input-search-enter-button"><input type="text" class="ant-input"><span class="ant-input-suffix"><button type="button" class="ant-input-search-button">ok</button></span></span>`;
+exports[`Input.Search should support custom button 1`] = `<span class="ant-input-group-wrapper ant-input-search ant-input-search-enter-button"><span class="ant-input-wrapper ant-input-group"><span class="ant-input-affix-wrapper"><input type="text" class="ant-input"></span><span class="ant-input-group-addon"><button type="button" class="ant-input-search-button">ok</button></span></span></span>`;

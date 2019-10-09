@@ -4,9 +4,9 @@
 
 #### Release Schedule
 
-* Weekly release: patch version at the end of every week for routine bugfix (anytime for urgent bugfix).
-* Monthly release: minor version for new features.
-* Major version release is not included in this schedule for breaking change and new features.
+- Weekly release: patch version at the end of every week for routine bugfix (anytime for urgent bugfix).
+- Monthly release: minor version for new features.
+- Major version release is not included in this schedule for breaking change and new features.
 
 ---
 
@@ -23,23 +23,29 @@
 - 🐞 Fix `Comment` `ConfigProvider` TypeScript type definition problem.
 
 ## 1.3.16
+
 `2019-08-25`
+
 - 🐞 Fix `Select` component to uninstall component error when there is no input [#1091](https://github.com/vueComponent/ant-design-vue/pull/1091)
 - 🐞 Fix `Collapse` error when no child element [#1116](https://github.com/vueComponent/ant-design-vue/pull/1116)
 - 🐞 Fix TypeScript type definitions.
 
 ## 1.3.15
+
 `2019-08-17`
+
 - 🐞 Fix `Select` component cannot scroll under IE [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
-- 🐞 Fix `Form` `initialValue` warning  [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
+- 🐞 Fix `Form` `initialValue` warning [#1076](https://github.com/vueComponent/ant-design-vue/issues/1076)
 - 🐞 Fix `Form` error when verifying `Number` type [#1090](https://github.com/vueComponent/ant-design-vue/issues/1090)
 
 ## 1.3.14
+
 `2019-08-12`
+
 - 🐞 Fix `MenuItem` parsing array `class` incorrect question [#1009](https://github.com/vueComponent/ant-design-vue/issues/1009)
 - 🐞 Fix an error when npm install [#997](https://github.com/vueComponent/ant-design-vue/issues/997)
-- 🐞 Fix `Select` component cannot scroll under IE [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
-- 🐞 Fix `Select` component does not trigger focus event problem [#999] (https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Select` component cannot scroll under IE [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
+- 🐞 Fix `Select` component does not trigger focus event problem [#999](https://github.com/vueComponent/ant-design-vue/issues/999)
 - 🐞 Fix `DropdownButton` `size` attribute does not work [#71b7c9](https://github.com/vueComponent/ant-design-vue/commit/71b7c9d33895f55694e28aaba4b2cfca7228771b)
 - 🐞 Fix `Table` component does not support vue 2.6 v-slot syntax problem [#1058](https://github.com/vueComponent/ant-design-vue/issues/1058)
 - 🌟 `Popover` add `builtinPlacements` attribute [#1073](https://github.com/vueComponent/ant-design-vue/issues/1073)
@@ -47,20 +53,25 @@
 - 🌟 `Modal.confirm` `title` and `content` support function [#824](https://github.com/vueComponent/ant-design-vue/issues/824)
 
 ## 1.3.13
+
 `2019-07-22`
+
 - 🐞 Fix `dist` missing `antd.less` file problem [#995](https://github.com/vueComponent/ant-design-vue/issues/995)
 
 ## 1.3.12
+
 `2019-07-22`
+
 - 🐞 `package.json` `files` add `scripts`
 
 ## 1.3.11
+
 `2019-07-22`
 
 - Dropdown
   - 🐞 Uodate disable style [#912](https://github.com/vueComponent/ant-design-vue/pull/912) [#921](https://github.com/vueComponent/ant-design-vue/pull/921)
   - 🐞 Fix `SubMenu` flashing problem [#975](https://github.com/vueComponent/ant-design-vue/issues/970)
-- 🌟 `AutoComplete` `Cascader` `DatePicker` `DropDown` `Select` `TimePicker` add an instance of the popup reference `popupRef`  [f9373e](https://github.com/vueComponent/ant-design-vue/commit/f9373e44ce229ab0ba94ababbd686e6ad6e9f10f)
+- 🌟 `AutoComplete` `Cascader` `DatePicker` `DropDown` `Select` `TimePicker` add an instance of the popup reference `popupRef` [f9373e](https://github.com/vueComponent/ant-design-vue/commit/f9373e44ce229ab0ba94ababbd686e6ad6e9f10f)
 - 🐞 Fix `DatePicker` can not open when placeholder is chinese at ie 10 and 11 [#865](https://github.com/vueComponent/ant-design-vue/issues/865)
 - 🌟 `DatePicker` add custom render trigger [#957](https://github.com/vueComponent/ant-design-vue/pull/957)
 - 🌟 `@ant-design/icons-vue` update to `^2.0.0`
@@ -72,11 +83,15 @@
 - 🐞 Fix TypeScript type definitions.
 
 ## 1.3.10
+
 `2019-06-11`
+
 - 🐞 Remove useless `module.export` of package. [#850](https://github.com/vueComponent/ant-design-vue/issues/850)
 
 ## 1.3.9
+
 `2019-05-26`
+
 - 🐞 Fix `TreeSelect` without `dataRef` [#712](https://github.com/vueComponent/ant-design-vue/issues/712)
 - 🌟 `Tooltip` add `destroyTooltipOnHide` to identify whether to destroy tooltip after hiding [#727](https://github.com/vueComponent/ant-design-vue/issues/727)
 - 🐞 Fix `Avatar` does not update the problem when setting `src` dynamically [#731](https://github.com/vueComponent/ant-design-vue/issues/731)
@@ -90,18 +105,24 @@
 - 🐞 Fix `DirectoryTree` expandAction="doubleclick" does not work [#745](https://github.com/vueComponent/ant-design-vue/issues/745)
 
 ## 1.3.8
+
 `2019-04-04`
+
 - 🐞 Fix `Table` unclickable problem under IE [#504](https://github.com/vueComponent/ant-design-vue/issues/504)
 - 🐞 Fix `Table` Header is not aligned under Firefox [#579](https://github.com/vueComponent/ant-design-vue/issues/579)
 - 🌟 Drawer `Drawer` add custom `handel`
 - 🐞 Fix TypeScript type definitions.
 
 ## 1.3.7
+
 `2019-03-18`
+
 - 🐞 Fix `Select` `selectedKeys` type validation error [#597](https://github.com/vueComponent/ant-design-vue/issues/597)
 
 ## 1.3.6
+
 `2019-03-17`
+
 - 🐞 Fix `Select` title attribute to display confusion [#588](https://github.com/vueComponent/ant-design-vue/issues/588)
 - 🐞 Fix `InputSearch` does not support slot mode customization addonAfter and addonBefore issues [#581](https://github.com/vueComponent/ant-design-vue/issues/581)
 - 🐞 Fix `Input` repeat class question [#faf9ba](https://github.com/vueComponent/ant-design-vue/commit/faf9ba0033eed9ae6ac17879f2e39dd341db847f)
@@ -110,6 +131,7 @@
 - 🐞 Fix some TypeScript definitions.
 
 ## 1.3.5
+
 `2019-02-23`
 
 - 🌟 Optimize the `Popover` `Popconfirm` component arrow style.
@@ -122,15 +144,18 @@
 - 🐞 Fix some TypeScript definitions.
 
 ## 1.3.4
+
 `2019-01-31`
 
 🎉 🎉 🎉 Happy New Year!
+
 - 🐞 fix: AutoComplete placeholder not display when disabled. [#402](https://github.com/vueComponent/ant-design-vue/issues/402)。
 - 🐞 Add the `BreadcrmbItem` ts type file.[#452](https://github.com/vueComponent/ant-design-vue/issues/452)。
 - 🐞 Fixed an issue where the FormItem was not updated when it was in a subcomponent. [#446](https://github.com/vueComponent/ant-design-vue/issues/446)。
 - 🐞 Fix some component TypeScript definitions.
 
 ## 1.3.3
+
 `2019-01-26`
 
 - 🐞 Fix `message` not close When you configure maxcount.[#428](https://github.com/vueComponent/ant-design-vue/pull/428)。
@@ -139,24 +164,28 @@
 - 📝 Update the document: form adds the `preserve` description, and the `icon` modifies the custom component reference document description.
 
 ## 1.3.2
+
 `2019-01-17`
 
 - 🐞 Fix Form reports an error when using the obsolete API `autoCreateForm`.[#413](https://github.com/vueComponent/ant-design-vue/issues/413)。
 - 🐞 Fix Slider error when clicking mark. [#407](https://github.com/vueComponent/ant-design-vue/issues/407)。
 
 ## 1.3.1
+
 `2019-01-15`
 
 - 🐞 Fixed the `Table` component could not be scrolled under ie.。[#390](https://github.com/vueComponent/ant-design-vue/issues/390)。
 - 🐞 Fix `Form` does not clear that does not need to check the field.[#367](https://github.com/vueComponent/ant-design-vue/issues/367)。
 
 ## 1.3.0
+
 `2019-01-12`
 
 - 🎉 🎉 🎉 Publish the vscode plugin [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
 - 🎉 🎉 🎉 Optimize official website document interaction
 
 ### Component features and styles are synchronized to antd version 3.11.6.
+
 1.3.0 brings two new Components, a lot of exciting changes and new features.
 
 - 🔥 Added a new component [Comment](https://vue.ant.design/components/comment/)。
@@ -194,14 +223,15 @@ Component Fixes / Enhancements:
 - 🐞 Fix Tooltip in the disabled state, the style error problem.[#389](https://github.com/vueComponent/ant-design-vue/issues/389)
 - 🐞 Fix some component TypeScript definitions.
 
-
 ## 1.2.5
+
 `2019-01-06`
 
 - 🌟 Add `Typescript` type file[#250](https://github.com/vueComponent/ant-design-vue/issues/250)
 - 🐞 Fix `Icon` component can't support static class and dynamic class problems at the same time[#371](https://github.com/vueComponent/ant-design-vue/issues/371)
 
 ## 1.2.4
+
 `2018-12-29`
 
 - 🐞 Fix `Select` component does not trigger `popupScroll` event[#350](https://github.com/vueComponent/ant-design-vue/issues/350)
@@ -214,6 +244,7 @@ Component Fixes / Enhancements:
 - 🐞 Remove the expansion animation when the `Menu` component is initialized.[#338](https://github.com/vueComponent/ant-design-vue/issues/338)
 
 ## 1.2.3
+
 `2018-12-25`
 
 - 📝 Remove Christmas egg.
@@ -222,6 +253,7 @@ Component Fixes / Enhancements:
 - 🐞 Fix the `Tree` component warning duplicate `key` question when using `TreeNode`。
 
 ## 1.2.2
+
 `2018-12-19`
 
 - 🐞 `Datepicker` render footer twice question. [#315](https://github.com/vueComponent/ant-design-vue/issues/315)
@@ -234,13 +266,16 @@ Component Fixes / Enhancements:
 - 🐞 `Icon` support native event [cffef3](https://github.com/vueComponent/ant-design-vue/commit/cffef392e5605de8d342787d7562e81ca8588800)
 
 ## 1.2.1
+
 `2018-12-17`
 
 - 🐞 Fix `Menu` flashing problem when scaling under `Layout`
 - 🐞 Fix `Icon` report Warning problem
 
 ## 1.2.0
+
 `2018-12-16`
+
 ### Synchronize with antd 3.10.x
 
 - 🔥🔥🔥 replaced font icons with svg icons which bring benefits below:：
@@ -277,9 +312,10 @@ Component Fixes / Enhancements:
 ## 1.1.10
 
 `2018-12-7`
-- 🔥🔥🔥 In the 1.1.10 version, the `Form` component better supports the single-file tempalte syntax. In previous versions, complex component requirements were required to be implemented using JSX. In order to better use the automatic collection and validation of Form forms in the template, we have optimized the way components are used. All Demo files are refactored using the latest syntax.
-However, for the previous API, continue to support, you can not worry about the API changes, resulting in problems in the existing system.
-````html
+
+- 🔥🔥🔥 In the 1.1.10 version, the `Form` component better supports the single-file tempalte syntax. In previous versions, complex component requirements were required to be implemented using JSX. In order to better use the automatic collection and validation of Form forms in the template, we have optimized the way components are used. All Demo files are refactored using the latest syntax. However, for the previous API, continue to support, you can not worry about the API changes, resulting in problems in the existing system.
+
+```html
 <template>
   <a-form :form="form">
     <a-form-item>
@@ -294,7 +330,8 @@ export default {
   },
 }
 </script>
-````
+```
+
 - 🐞 Fix `Steps` component `labelPlacement` does not work [#281](https://github.com/vueComponent/ant-design-vue/issues/281)
 - 🐞 Fix the `Timeline` component style problem, add `reverse` `mode` props [#8e37cd](https://github.com/vueComponent/ant-design-vue/commit/8e37cd89f92ee2541f641fd860785cfd2361b2b3)
 - `Tree`
@@ -304,24 +341,25 @@ export default {
 ## 1.1.9
 
 `2018-11-26`
+
 - 🐞 Fix the `TreeSelect` component getPopupContainer does not work [#265](https://github.com/vueComponent/ant-design-vue/issues/265)
 - 🐞 Fix `Carousel` component on-demand loading does not work [#271](https://github.com/vueComponent/ant-design-vue/issues/271)
 - 🐞 Fix `Upload` component remove event no return value problem [#259](https://github.com/vueComponent/ant-design-vue/issues/259)
 
-
 ## 1.1.8
 
 `2018-11-11`
+
 - `Progress`
   - 🐞 Fix `circle` type does not support `strokeColor` problem [#238](https://github.com/vueComponent/ant-design-vue/issues/238)
   - 🐞 Add `normal` type [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
-- 🐞 Fix `Cascader` component does not support `getPopupContainer` problem  [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
+- 🐞 Fix `Cascader` component does not support `getPopupContainer` problem [#257](https://github.com/vueComponent/ant-design-vue/issues/257)
 - 🌟 `Tooltip` support align [#252](https://github.com/vueComponent/ant-design-vue/issues/252)
-
 
 ## 1.1.7
 
 `2018-10-27`
+
 - 🐞 Fix `Cascader` component type error problem [#219](https://github.com/vueComponent/ant-design-vue/issues/219)
 - 🐞 Fix `Tree` component custom Icon the callback parameter order error [#223](https://github.com/vueComponent/ant-design-vue/issues/223)
 - 🐞 Fix `Table` pagination trigger multiple change events when `showSizeChange=true` [#228](https://github.com/vueComponent/ant-design-vue/issues/228)
@@ -332,20 +370,22 @@ export default {
 ## 1.1.6
 
 `2018-10-10`
+
 - 🐞 Fix `Select` component keyboard event error [#217](https://github.com/vueComponent/ant-design-vue/issues/217)
 - 🐞 Fix the `Drawer` component children update issue [#209](https://github.com/vueComponent/ant-design-vue/issues/209)
 
 ## 1.1.4
 
 `2018-09-29`
-- 🛠 Refactor the `vc-tree` component and add a directory tree component
-- 🐞 Fix `tabs` component property `tabBarGutter` does not work  [#205](https://github.com/vueComponent/ant-design-vue/issues/205)
-- 🐞 Fix `table` component data synchronization error [#202](https://github.com/vueComponent/ant-design-vue/issues/202)
 
+- 🛠 Refactor the `vc-tree` component and add a directory tree component
+- 🐞 Fix `tabs` component property `tabBarGutter` does not work [#205](https://github.com/vueComponent/ant-design-vue/issues/205)
+- 🐞 Fix `table` component data synchronization error [#202](https://github.com/vueComponent/ant-design-vue/issues/202)
 
 ## 1.1.3
 
 `2018-09-22`
+
 - 🎉 Optimize component registration methods, such as Vue.use(Form) [a6620c](https://github.com/vueComponent/ant-design-vue/commit/a6620cbbe58cc1694a994e6714853906d1d794be)
 - 🐞 `Select.Option` component `value` property supports `0` [#194](https://github.com/vueComponent/ant-design-vue/issues/194)
 - 🐞 Fix `Layout.Sider` trigger button width does not work [#201](https://github.com/vueComponent/ant-design-vue/issues/201)
@@ -355,6 +395,7 @@ export default {
 ## 1.1.2
 
 `2018-09-17`
+
 - 🎉 Synchronize antd3.8.4 style
 - 🌟 Tag component adds `visible` attribute and wave effect
 - 🐞 Fix the 'Cascader` component, the selected item is not expanded [#195](https://github.com/vueComponent/ant-design-vue/issues/195)
@@ -362,6 +403,7 @@ export default {
 ## 1.1.1
 
 `2018-09-13`
+
 - 🐞 dropdown position incorrect caused by window size change [#184](https://github.com/vueComponent/ant-design-vue/issues/184)
 - 🐞 tabs container add custom event listeners [#189](https://github.com/vueComponent/ant-design-vue/issues/189)
 - 🐞 Fixing 'centered` does not work when calling Modal window via API form [#183](https://github.com/vueComponent/ant-design-vue/issues/183)
@@ -370,30 +412,33 @@ export default {
 ## 1.1.0
 
 `2018-09-11`
+
 - 🎉 Synchronize components from [3.4.0](https://github.com/ant-design/ant-design/releases/tag/3.4.0) to antd [3.8.2](https://github.com/ Ant-design/ant-design/releases/tag/3.8.2)
 - 🌟 Add the `Drawer` component
-- 🐞  Fix `Spin` content flicker problem [#174](https://github.com/vueComponent/ant-design-vue/issues/174)
+- 🐞 Fix `Spin` content flicker problem [#174](https://github.com/vueComponent/ant-design-vue/issues/174)
 - 🐞 Fix `RangePicker` selection is not disabled [#158](https://github.com/vueComponent/ant-design-vue/issues/158)
 - 🐞 Fixed throw error when `Form` value was `null` [#153](https://github.com/vueComponent/ant-design-vue/issues/153)
-- 🐞 Fix the `Modal` subcomponent to repeat the `mounted` question  [#152](https://github.com/vueComponent/ant-design-vue/issues/152)
+- 🐞 Fix the `Modal` subcomponent to repeat the `mounted` question [#152](https://github.com/vueComponent/ant-design-vue/issues/152)
 - 🐞 Fixed donot `render` after 'Transfer` search filter [#148](https://github.com/vueComponent/ant-design-vue/issues/148)
-- 🐞 Fixed multi-level `Tabs` component nesting causing `size` not to work  [#144](https://github.com/vueComponent/ant-design-vue/issues/144)
+- 🐞 Fixed multi-level `Tabs` component nesting causing `size` not to work [#144](https://github.com/vueComponent/ant-design-vue/issues/144)
 - 🐞 Fix `TreeSelect`searchPlaceholder does not work [#125](https://github.com/vueComponent/ant-design-vue/issues/125)
 - 🛠 Other issues that do not appear in the issue, see antd changelog
 
 ## 1.0.3
 
 `2018-08-11`
+
 - 🐞 Fix `Select` children not to update the problem [#106](https://github.com/vueComponent/ant-design-vue/issues/106)
 - 🐞 Fix `Badge` offset x y axis order error and support number type [#99](https://github.com/vueComponent/ant-design-vue/issues/99)
 - 🐞 Fix `Input` trigger input event problem when placeholder is Chinese in IE[#92](https://github.com/vueComponent/ant-design-vue/issues/92)
-- 🐞 Fix `Avatar` does not accept event issues [#102] (https://github.com/vueComponent/ant-design-vue/issues/102)
+- 🐞 Fix `Avatar` does not accept event issues [#102](https://github.com/vueComponent/ant-design-vue/issues/102)
 - 🐞 Fix `grid.row` gutter type error problem [4af03c4](https://github.com/vueComponent/ant-design-vue/commit/4af03c4ab9596ede9d1b79c8308d0a3ed58b7a11)
 - 🐞 Fix `CheckboxGroup` to report defaultValue warning in `Form` [#110](https://github.com/vueComponent/ant-design-vue/issues/110)
 
 ## 1.0.2
 
 `2018-08-04`
+
 - 🎉 Modify the component library name to `ant-design-vue`
 - 🌟 The official site supports IE9 access[a8a5f8](https://github.com/vueComponent/ant-design-vue/commit/a8a5f854c3b6a78df526caf2fb391e5c9d0848ac)
 - 🐞 Fix reminder issues caused by exporting undefined variables[#87](https://github.com/vueComponent/ant-design-vue/issues/87)
@@ -404,6 +449,7 @@ export default {
 ## 1.0.1
 
 `2018-07-27`
+
 - 🌟 Optimize Chinese input for `Input` components(just support v-model) [4a5154](https://github.com/vueComponent/ant-design-vue/commit/4a51544bd6470ab628dda80e9d7593e4603dd0b6)
 - 🐞 Fix `treeSelect` `treeData[i].children` throw error when null[#81](https://github.com/vueComponent/ant-design-vue/issues/81)
 - 🐞 Fix `Calendar` change event call twice[#82](https://github.com/vueComponent/ant-design-vue/issues/82)
@@ -413,62 +459,69 @@ export default {
 ## 1.0.0
 
 `2018-07-21`
+
 - 🌟 Add `Carousel` component [edddbd](https://github.com/vueComponent/ant-design-vue/commit/edddbd982a279b62229ce825855c14c556866ece)
 - modify some error document
 
 ## 0.7.1
 
 `2018-07-17`
+
 - 🐞 fix `Tooltip` containing disabled button does not show and style[#73](https://github.com/vueComponent/ant-design-vue/issues/73)
 - 🐞 add `Table` panagation deep watch[#b464c6](https://github.com/vueComponent/ant-design-vue/commit/b464c6f6ee4df6df1b6c55f29ac85b2f462763bc)
-
 
 ## 0.7.0
 
 `2018-07-11`
+
 - 🌟 Add `TreeSelect` component
 - 🌟 `Select` add `options`, Easy to generate a selection list directly[#37](https://github.com/vueComponent/ant-design-vue/issues/37)
 - 🐞 Fix `blur` event error when using `Select` component in `Tooltip`[#67](https://github.com/vueComponent/ant-design-vue/issues/67)
 - 🐞 Modify the `Upload` component `action` attribute to optional[#66](https://github.com/vueComponent/ant-design-vue/issues/66)
 
-
 ## 0.6.8
 
 `2018-07-05`
+
 - 🐞 Fix `notification` h is not defined[#63](https://github.com/vueComponent/ant-design-vue/issues/63)
 - 🐞 Fix `Transfer` local-provider miss `titles`[#64](https://github.com/vueComponent/ant-design-vue/issues/64)
 
 ## 0.6.7
 
 `2018-07-03`
+
 - 🐞 Fix `Form` component cannot be updated when using template syntax[#62](https://github.com/vueComponent/ant-design-vue/issues/62)
 
 ## 0.6.6
 
 `2018-07-03`
+
 - 🐞 Fix `Upload` type validation error issue and update related demo[#61](https://github.com/vueComponent/ant-design-vue/issues/61)
 - 🐞 Fix `Upload` image preview does not jump correctly[1584b3](https://github.com/vueComponent/ant-design-vue/commit/1584b3839e500d2d6b07abf704f5cd084ca00e87)
-
 
 ## 0.6.5
 
 `2018-07-01`
+
 - 🐞 Fix `Select` `getPopupContainer` not working [#56](https://github.com/vueComponent/ant-design-vue/issues/56)
 - 🐞 Fix `Select` popup position is not updated[8254f7](https://github.com/vueComponent/ant-design-vue/commit/8254f783a32189b63ffcf2c53702b50afef1f3db)
 
 ## 0.6.4
 
 `2018-06-28`
+
 - 🐞 Fix `InputSearch` `v-model` return wrong value[#53](https://github.com/vueComponent/ant-design-vue/issues/53)
 
 ## 0.6.3
 
 `2018-06-26`
+
 - 🐞 Fix `Popover` `v-model` not working[#49](https://github.com/vueComponent/ant-design-vue/issues/49)
 
 ## 0.6.2
 
 `2018-06-24`
+
 - 🌟 `Form` component data auto-checking support for `template` syntax[7c9232](https://github.com/vueComponent/ant-design-vue/commit/7c923278b3678a822ff90da0cb8db7653d79e15c)
 - `Select`: 🐞 add `focus` `blur` methods[52f6f5](https://github.com/vueComponent/ant-design-vue/commit/52f6f50dbe38631c0e698a6ea23b3686f6c2a375)
 - `Radio`
@@ -479,6 +532,7 @@ export default {
 ## 0.6.1
 
 `2018-06-17`
+
 - 🌟 Add `List` Component
 - `Table`
   - 🐞 Fix `'querySelectorAll` error when updating height[#33](https://github.com/vueComponent/ant-design-vue/issues/33)
@@ -496,21 +550,24 @@ export default {
 ## 0.6.0
 
 `2018-06-04`
+
 - 🌟 Add `Anchor` Component
 - `Table`
   - 🐞 Fix show `emptyText` problem when `loading.spinning` [17b9dc](https://github.com/vueComponent/ant-design-vue/commit/17b9dc14f5225eb75542facdb5053f4916b9d77f)
   - 🐞 Fixed `header style` not working [#30](https://github.com/vueComponent/ant-design-vue/pull/30)
-- 🐞  `DatePicker`: Fix the issue of `change` event repeatedly call when `showTime` is `true` [81ab82](https://github.com/vueComponent/ant-design-vue/commit/81ab829b1d0f67ee926b106de788fc5b41ec4f9c)
-- 🐞  `InputNumber`: Fix `placeholder` not working [ce39dc](https://github.com/vueComponent/ant-design-vue/commit/ce39dc3506474a4b31632e03c38b518cf4060cef#diff-c9d10303f22c684e66d71ab1f9dac5f9R50)
+- 🐞 `DatePicker`: Fix the issue of `change` event repeatedly call when `showTime` is `true` [81ab82](https://github.com/vueComponent/ant-design-vue/commit/81ab829b1d0f67ee926b106de788fc5b41ec4f9c)
+- 🐞 `InputNumber`: Fix `placeholder` not working [ce39dc](https://github.com/vueComponent/ant-design-vue/commit/ce39dc3506474a4b31632e03c38b518cf4060cef#diff-c9d10303f22c684e66d71ab1f9dac5f9R50)
 
 ## 0.5.4
 
 `2018-05-26`
+
 - 🐞 Fix missing `less` file problem in dist directory[ca084b9](https://github.com/vueComponent/ant-design-vue/commit/ca084b9e6f0958c25a8278454c864ac8127cce95)
 
 ## 0.5.3
 
 `2018-05-25`
+
 - 🐞 Fixed issue with building `antd-with-locales.js` containing test files[90583a3](https://github.com/vueComponent/ant-design-vue/commit/90583a3c42e8b520747d6f6ac10cfd718d447030)
 
 ## 0.5.2
@@ -555,7 +612,7 @@ export default {
 
 `2018-04-24`
 
-- 🐞  fix menu click bug
+- 🐞 fix menu click bug
 
 ## 0.4.1
 
@@ -567,12 +624,11 @@ export default {
 
 #### Layout
 
-- add  `layout` component
+- add `layout` component
 
 #### Others
 
 - support use [Vue.use(antd)](https://github.com/vueComponent/ant-design-vue/issues/3)
-
 
 ## 0.3.1
 

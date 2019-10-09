@@ -12,58 +12,45 @@ If a large or small list is desired, set the size property to either large or sm
 Customizing the header and footer of list by setting `header` and `footer` property.
 </us>
 
-```html
+```tpl
 <template>
-<div>
-  <h3 :style="{ marginBottom: '16px' }">Default Size</h3>
-  <a-list
-    bordered
-    :dataSource="data"
-  >
-    <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
-    <div slot="header">Header</div>
-    <div slot="footer">Footer</div>
-  </a-list>
-  <h3 :style="{ margin: '16px 0' }">Small Size</h3>
-  <a-list
-    size="small"
-    bordered
-    :dataSource="data"
-  >
-    <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
-    <div slot="header">Header</div>
-    <div slot="footer">Footer</div>
-  </a-list>
-  <h3 :style="{ margin: '16px 0' }">Large Size</h3>
-  <a-list
-    size="large"
-    bordered
-    :dataSource="data"
-  >
-    <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
-    <div slot="header">Header</div>
-    <div slot="footer">Footer</div>
-  </a-list>
-</div>
+  <div>
+    <h3 :style="{ marginBottom: '16px' }">Default Size</h3>
+    <a-list bordered :dataSource="data">
+      <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+      <div slot="header">Header</div>
+      <div slot="footer">Footer</div>
+    </a-list>
+    <h3 :style="{ margin: '16px 0' }">Small Size</h3>
+    <a-list size="small" bordered :dataSource="data">
+      <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+      <div slot="header">Header</div>
+      <div slot="footer">Footer</div>
+    </a-list>
+    <h3 :style="{ margin: '16px 0' }">Large Size</h3>
+    <a-list size="large" bordered :dataSource="data">
+      <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+      <div slot="header">Header</div>
+      <div slot="footer">Footer</div>
+    </a-list>
+  </div>
 </template>
 <script>
-const data = [
-  'Racing car sprays burning fuel into crowd.',
-  'Japanese princess to wed commoner.',
-  'Australian walks 100km after outback crash.',
-  'Man charged over missing wedding girl.',
-  'Los Angeles battles huge wildfires.',
-]
+  const data = [
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash.',
+    'Man charged over missing wedding girl.',
+    'Los Angeles battles huge wildfires.',
+  ];
 
-export default {
-  data () {
-    return {
-      data,
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        data,
+      };
+    },
+  };
 </script>
-<style>
-
-</style>
+<style></style>
 ```

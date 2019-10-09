@@ -8,18 +8,19 @@
 Components which need localization support are listed here, you can toggle the language in the demo.
 </us>
 
-```html
+```tpl
 <template>
-<div>
-  <div class="change-locale">
-    <span :style="{ marginRight: '16px' }">Change locale of components: </span>
-    <a-radio-group :defaultValue="null" @change="changeLocale">
-      <a-radio-button key="en" :value="null">English</a-radio-button>
-      <a-radio-button key="cn" :value="zhCN">中文</a-radio-button>
-    </a-radio-group>
-  </div>
-  <a-locale-provider :locale="locale">
-    <div class="locale-components" :key="(!!locale).toString()"> <!-- HACK: just refresh in production environment-->
+  <div>
+    <div class="change-locale">
+      <span :style="{ marginRight: '16px' }">Change locale of components: </span>
+      <a-radio-group :defaultValue="null" @change="changeLocale">
+        <a-radio-button key="en" :value="null">English</a-radio-button>
+        <a-radio-button key="cn" :value="zhCN">中文</a-radio-button>
+      </a-radio-group>
+    </div>
+    <a-locale-provider :locale="locale">
+      <div class="locale-components" :key="(!!locale).toString()">
+        <!-- HACK: just refresh in production environment-->
         <div class="example">
           <a-pagination :defaultCurrent="1" :total="50" showSizeChanger />
         </div>
@@ -41,12 +42,7 @@ Components which need localization support are listed here, you can toggle the l
           </a-popconfirm>
         </div>
         <div className="example">
-          <a-transfer
-            :dataSource="[]"
-            showSearch
-            :targetKeys="[]"
-            :render="item => item.title"
-          />
+          <a-transfer :dataSource="[]" showSearch :targetKeys="[]" :render="item => item.title" />
         </div>
         <div :style="{ width: '319px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
           <a-calendar :fullscreen="false" :value="moment()" />
@@ -55,84 +51,89 @@ Components which need localization support are listed here, you can toggle the l
           <p>Locale Modal</p>
         </a-modal>
       </div>
-  </a-locale-provider>
-</div>
+    </a-locale-provider>
+  </div>
 </template>
 <script>
-// you should use import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import zhCN from 'ant-design-vue/locale-provider/zh_CN';
-import { Modal } from 'ant-design-vue';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-moment.locale('en');
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  filters: [{
-    text: 'filter1',
-    value: 'filter1',
-  }],
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-}];
-export default {
-  data() {
-    return {
-      visible: false,
-      locale: null,
-      zhCN,
-    }
-  },
-  methods: {
-    moment,
-    showModal() {
-      this.visible = true;
+  // you should use import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+  import zhCN from 'ant-design-vue/locale-provider/zh_CN';
+  import { Modal } from 'ant-design-vue';
+  import moment from 'moment';
+  import 'moment/locale/zh-cn';
+  moment.locale('en');
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      filters: [
+        {
+          text: 'filter1',
+          value: 'filter1',
+        },
+      ],
     },
-    hideModal() {
-      this.visible = false;
+    {
+      title: 'Age',
+      dataIndex: 'age',
     },
-    info() {
-      Modal.info({
-        title: 'some info',
-        content: 'some info',
-      });
+  ];
+  export default {
+    data() {
+      return {
+        visible: false,
+        locale: null,
+        zhCN,
+      };
     },
-    confirm() {
-      Modal.confirm({
-        title: 'some info',
-        content: 'some info',
-      });
+    methods: {
+      moment,
+      showModal() {
+        this.visible = true;
+      },
+      hideModal() {
+        this.visible = false;
+      },
+      info() {
+        Modal.info({
+          title: 'some info',
+          content: 'some info',
+        });
+      },
+      confirm() {
+        Modal.confirm({
+          title: 'some info',
+          content: 'some info',
+        });
+      },
+      changeLocale(e) {
+        const localeValue = e.target.value;
+        this.locale = localeValue;
+        if (!localeValue) {
+          moment.locale('en');
+        } else {
+          moment.locale('zh-cn');
+        }
+      },
     },
-    changeLocale(e) {
-      const localeValue = e.target.value;
-      this.locale = localeValue
-      if (!localeValue) {
-        moment.locale('en');
-      } else {
-        moment.locale('zh-cn');
-      }
-    },
-  }
-}
+  };
 </script>
 
 <style scoped>
-.locale-components {
-  border-top: 1px solid #d9d9d9;
-  padding-top: 16px;
-}
+  .locale-components {
+    border-top: 1px solid #d9d9d9;
+    padding-top: 16px;
+  }
 
-.example {
-  margin: 16px 0;
-}
+  .example {
+    margin: 16px 0;
+  }
 
-.example > * {
-  margin-right: 8px;
-}
+  .example > * {
+    margin-right: 8px;
+  }
 
-.change-locale {
-  margin-bottom: 16px;
-}
+  .change-locale {
+    margin-bottom: 16px;
+  }
 </style>
 ```

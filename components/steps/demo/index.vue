@@ -36,33 +36,33 @@ export default {
   type: 'Navigation',
   cols: 1,
   title: 'Steps',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Simple />
-        <br/>
+        <br />
         <SmallSize />
-        <br/>
+        <br />
         <Icon />
-        <br/>
+        <br />
         <StepNext />
-        <br/>
+        <br />
         <Vertical />
-        <br/>
+        <br />
         <VerticalSmall />
-        <br/>
+        <br />
         <Error />
-        <br/>
+        <br />
         <ProgressDot />
-        <br/>
+        <br />
         <CustomizedProgressDot />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

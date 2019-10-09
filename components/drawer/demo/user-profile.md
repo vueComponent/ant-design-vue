@@ -8,7 +8,7 @@
 Use when you need to quickly preview the outline of the object. Such as list item preview.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-list
@@ -24,21 +24,16 @@ Use when you need to quickly preview the outline of the object. Such as list ite
     >
       <a-list-item slot="renderItem" slot-scope="item, index">
         <a slot="actions" @click="showDrawer">View Profile</a>
-        <a-list-item-meta
-          description="Progresser AFX"
-        >
+        <a-list-item-meta description="Progresser AFX">
           <a slot="title" href="https://vue.ant.design/">{{item.name}}</a>
-          <a-avatar slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+          <a-avatar
+            slot="avatar"
+            src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
+          />
         </a-list-item-meta>
       </a-list-item>
     </a-list>
-    <a-drawer
-      width=640
-      placement="right"
-      :closable="false"
-      @close="onClose"
-      :visible="visible"
-    >
+    <a-drawer width="640" placement="right" :closable="false" @close="onClose" :visible="visible">
       <p :style="[pStyle, pStyle2]">User Profile</p>
       <p :style="pStyle">Personal</p>
       <a-row>
@@ -88,7 +83,7 @@ Use when you need to quickly preview the outline of the object. Such as list ite
           <description-item title="Department" content="AFX" />
         </a-col>
         <a-col :span="12">
-          <description-item title="Supervisor" >
+          <description-item title="Supervisor">
             <a slot="content">Lin</a>
           </description-item>
         </a-col>
@@ -113,10 +108,8 @@ Use when you need to quickly preview the outline of the object. Such as list ite
       </a-row>
       <a-row>
         <a-col :span="24">
-          <description-item
-            title="Github"
-          >
-            <a slot='content' href="https://github.com/vueComponent/ant-design-vue">
+          <description-item title="Github">
+            <a slot="content" href="https://github.com/vueComponent/ant-design-vue">
               github.com/vueComponent/ant-design-vue
             </a>
           </description-item>
@@ -126,35 +119,35 @@ Use when you need to quickly preview the outline of the object. Such as list ite
   </div>
 </template>
 <script>
-import descriptionItem from './descriptionItem'
+  import descriptionItem from './descriptionItem';
 
-export default {
-  data() {
-    return {
-      visible: false,
-      pStyle: {
-        fontSize: '16px',
-        color: 'rgba(0,0,0,0.85)',
-        lineHeight: '24px',
-        display: 'block',
-        marginBottom: '16px',
+  export default {
+    data() {
+      return {
+        visible: false,
+        pStyle: {
+          fontSize: '16px',
+          color: 'rgba(0,0,0,0.85)',
+          lineHeight: '24px',
+          display: 'block',
+          marginBottom: '16px',
+        },
+        pStyle2: {
+          marginBottom: '24px',
+        },
+      };
+    },
+    components: {
+      descriptionItem,
+    },
+    methods: {
+      showDrawer() {
+        this.visible = true;
       },
-      pStyle2: {
-        marginBottom: '24px'
-      }
-    }
-  },
-  components: {
-    descriptionItem,
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true
+      onClose() {
+        this.visible = false;
+      },
     },
-    onClose() {
-      this.visible = false
-    },
-  },
-}
+  };
 </script>
 ```

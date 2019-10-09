@@ -129,8 +129,8 @@ export default {
         }
         const activeKeyProps = {};
 
-        let clonedMenuItems = menuItems;
         let defaultActiveFirst = defaultActiveFirstOption;
+        let clonedMenuItems = menuItems;
         if (selectedKeys.length || firstActiveValue) {
           if (props.visible && !this.lastVisible) {
             activeKeyProps.activeKey = selectedKeys[0] || firstActiveValue;

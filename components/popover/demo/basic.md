@@ -8,7 +8,7 @@
 The most basic example. The size of the floating layer depends on the contents region.
 </us>
 
-```html
+```tpl
 <template>
   <a-popover title="Title">
     <template slot="content">

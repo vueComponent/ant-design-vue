@@ -13,7 +13,7 @@ exports[`renders ./components/affix/demo/basic.md correctly 1`] = `
 
 exports[`renders ./components/affix/demo/on-change.md correctly 1`] = `
 <div>
-  <div class=""><button type="button" class="ant-btn ant-btn-default"><span>120px to affix top</span></button></div>
+  <div class=""><button type="button" class="ant-btn"><span>120px to affix top</span></button></div>
 </div>
 `;
 

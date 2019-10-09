@@ -9,6 +9,7 @@ import Icon from '../icon';
 import Button from '../button';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
+import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
 const tooltipProps = abstractTooltipProps();
@@ -17,7 +18,7 @@ const Popconfirm = {
   name: 'APopconfirm',
   props: {
     ...tooltipProps,
-    prefixCls: PropTypes.string.def('ant-popover'),
+    prefixCls: PropTypes.string,
     transitionName: PropTypes.string.def('zoom-big'),
     content: PropTypes.any,
     title: PropTypes.any,
@@ -38,6 +39,9 @@ const Popconfirm = {
     visible(val) {
       this.sVisible = val;
     },
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const props = getOptionProps(this);
@@ -73,8 +77,8 @@ const Popconfirm = {
     getPopupDomNode() {
       return this.$refs.tooltip.getPopupDomNode();
     },
-    renderOverlay(popconfirmLocale) {
-      const { prefixCls, okType, okButtonProps, cancelButtonProps } = this;
+    renderOverlay(prefixCls, popconfirmLocale) {
+      const { okType, okButtonProps, cancelButtonProps } = this;
       const icon = getComponentFromProp(this, 'icon') || (
         <Icon type="exclamation-circle" theme="filled" />
       );
@@ -121,10 +125,15 @@ const Popconfirm = {
   },
   render() {
     const props = getOptionProps(this);
+    const { prefixCls: customizePrefixCls } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('popover', customizePrefixCls);
+
     const otherProps = omit(props, ['title', 'content', 'cancelText', 'okText']);
     const tooltipProps = {
       props: {
         ...otherProps,
+        prefixCls,
         visible: this.sVisible,
       },
       ref: 'tooltip',
@@ -136,7 +145,9 @@ const Popconfirm = {
       <LocaleReceiver
         componentName="Popconfirm"
         defaultLocale={defaultLocale.Popconfirm}
-        scopedSlots={{ default: this.renderOverlay }}
+        scopedSlots={{
+          default: popconfirmLocale => this.renderOverlay(prefixCls, popconfirmLocale),
+        }}
       />
     );
     return (

@@ -12,16 +12,16 @@
 
 ### SkeletonAvatarProps
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| size | Set the size of avatar | Enum{ 'large', 'small', 'default' } | - |
-| shape | Set the shape of avatar | Enum{ 'circle', 'square' } | - |
+| Property | Description             | Type                                | Default |
+| -------- | ----------------------- | ----------------------------------- | ------- |
+| size     | Set the size of avatar  | Enum{ 'large', 'small', 'default' } | -       |
+| shape    | Set the shape of avatar | Enum{ 'circle', 'square' }          | -       |
 
 ### SkeletonTitleProps
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| width | Set the width of title | number \| string | - |
+| Property | Description            | Type             | Default |
+| -------- | ---------------------- | ---------------- | ------- |
+| width    | Set the width of title | number \| string | -       |
 
 ### SkeletonParagraphProps
 

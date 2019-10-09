@@ -4,7 +4,9 @@ import MiniSelect from './MiniSelect';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getOptionProps } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
+import enUS from '../vc-pagination/locale/en_US';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,
@@ -41,12 +43,12 @@ export default {
   },
   props: {
     ...PaginationProps(),
-    prefixCls: PropTypes.string.def('ant-pagination'),
-    selectPrefixCls: PropTypes.string.def('ant-select'),
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
-    getIconsProps() {
-      const { prefixCls } = this.$props;
+    getIconsProps(prefixCls) {
       const prevIcon = (
         <a class={`${prefixCls}-item-link`}>
           <Icon type="left" />
@@ -83,12 +85,25 @@ export default {
       };
     },
     renderPagination(contextLocale) {
-      const { buildOptionText, size, locale: customLocale, ...restProps } = getOptionProps(this);
+      const {
+        prefixCls: customizePrefixCls,
+        selectPrefixCls: customizeSelectPrefixCls,
+        buildOptionText,
+        size,
+        locale: customLocale,
+        ...restProps
+      } = getOptionProps(this);
+      const getPrefixCls = this.configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('pagination', customizePrefixCls);
+      const selectPrefixCls = getPrefixCls('select', customizeSelectPrefixCls);
+
       const isSmall = size === 'small';
       const paginationProps = {
         props: {
+          prefixCls,
+          selectPrefixCls,
           ...restProps,
-          ...this.getIconsProps(),
+          ...this.getIconsProps(prefixCls),
           selectComponentClass: isSmall ? MiniSelect : VcSelect,
           locale: { ...contextLocale, ...customLocale },
           buildOptionText: buildOptionText || this.$scopedSlots.buildOptionText,
@@ -104,7 +119,11 @@ export default {
   },
   render() {
     return (
-      <LocaleReceiver componentName="Pagination" scopedSlots={{ default: this.renderPagination }} />
+      <LocaleReceiver
+        componentName="Pagination"
+        defaultLocale={enUS}
+        scopedSlots={{ default: this.renderPagination }}
+      />
     );
   },
 };

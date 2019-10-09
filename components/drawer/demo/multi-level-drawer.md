@@ -8,7 +8,7 @@
 Open a new drawer on top of an existing drawer to handle multi branch tasks
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showDrawer">
@@ -16,7 +16,7 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks
     </a-button>
     <a-drawer
       title="Multi-level drawer"
-      width=520
+      width="520"
       :closable="false"
       @close="onClose"
       :visible="visible"
@@ -26,7 +26,7 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks
       </a-button>
       <a-drawer
         title="Two-level Drawer"
-        width=320
+        width="320"
         :closable="false"
         @close="onChildrenDrawerClose"
         :visible="childrenDrawer"
@@ -48,10 +48,7 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks
           borderRadius: '0 0 4px 4px',
         }"
       >
-        <a-button
-          style="marginRight: 8px"
-          @click="onClose"
-        >
+        <a-button style="marginRight: 8px" @click="onClose">
           Cancel
         </a-button>
         <a-button @click="onClose" type="primary">
@@ -62,27 +59,27 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      visible: false,
-      childrenDrawer: false
-    }
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true
+  export default {
+    data() {
+      return {
+        visible: false,
+        childrenDrawer: false,
+      };
     },
-    onClose() {
-      this.visible = false
+    methods: {
+      showDrawer() {
+        this.visible = true;
+      },
+      onClose() {
+        this.visible = false;
+      },
+      showChildrenDrawer() {
+        this.childrenDrawer = true;
+      },
+      onChildrenDrawerClose() {
+        this.childrenDrawer = false;
+      },
     },
-    showChildrenDrawer() {
-      this.childrenDrawer = true
-    },
-    onChildrenDrawerClose() {
-      this.childrenDrawer = false
-    },
-  },
-}
+  };
 </script>
 ```

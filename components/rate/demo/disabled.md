@@ -8,7 +8,7 @@
 Read only, can't use mouse to interact.
 </us>
 
-```html
+```tpl
 <template>
   <a-rate :defaultValue="2" disabled />
 </template>

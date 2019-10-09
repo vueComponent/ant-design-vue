@@ -30,8 +30,12 @@ exports[`renders ./components/skeleton/demo/children.md correctly 1`] = `
 <div class="article">
   <div>
     <h4>Ant Design Vue, a design language</h4>
-    <p>We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.</p>
-  </div> <button type="button" class="ant-btn ant-btn-default"><span>Show Skeleton</span></button>
+    <p>
+      We supply a series of design principles, practical patterns and high quality design
+      resources (Sketch and Axure), to help people create their product prototypes beautifully
+      and efficiently.
+    </p>
+  </div> <button type="button" class="ant-btn"><span>Show Skeleton</span></button>
 </div>
 `;
 

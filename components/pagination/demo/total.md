@@ -1,4 +1,3 @@
-
 <cn>
 #### 总数
 通过设置 `showTotal` 展示总共有多少数据。
@@ -9,7 +8,7 @@
 You can show the total number of data by setting `showTotal`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-pagination
@@ -28,4 +27,3 @@ You can show the total number of data by setting `showTotal`.
   </div>
 </template>
 ```
-

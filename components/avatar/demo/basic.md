@@ -8,16 +8,16 @@
 Three sizes and two shapes are available.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>
       <a-avatar :size="64" icon="user" />
-      <a-avatar size="large" icon="user"/>
-      <a-avatar icon="user"/>
-      <a-avatar size="small" icon="user"/>
+      <a-avatar size="large" icon="user" />
+      <a-avatar icon="user" />
+      <a-avatar size="small" icon="user" />
     </div>
-    <br/>
+    <br />
     <div>
       <a-avatar shape="square" :size="64" icon="user" />
       <a-avatar shape="square" size="large" icon="user" />

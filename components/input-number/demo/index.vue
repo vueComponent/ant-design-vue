@@ -25,26 +25,26 @@ export default {
   subtitle: '数字输入框',
   type: 'Data Entry',
   title: 'InputNumber',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <br />
         <Basic />
-        <br/>
+        <br />
         <Size />
         <br />
         <Disabled />
-        <br/>
+        <br />
         <Digit />
-        <br/>
+        <br />
         <Formatter />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

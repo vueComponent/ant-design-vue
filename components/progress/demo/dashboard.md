@@ -8,7 +8,7 @@ By setting `type=dashboard`, you can get a dashboard style of progress easily.
 A standard progress bar.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress type="dashboard" :percent="75" />

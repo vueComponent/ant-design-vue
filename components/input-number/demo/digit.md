@@ -8,7 +8,7 @@
 A numeric-only input box whose values can be increased or decreased using a decimal step. The number of decimals (also known as precision) is determined by the step prop.
 </us>
 
-```html
+```tpl
 <template>
   <a-input-number :min="0" :max="10" :step="0.1" @change="onChange" />
 </template>
@@ -19,10 +19,6 @@ A numeric-only input box whose values can be increased or decreased using a deci
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 ```
-
-
-
-

@@ -8,21 +8,21 @@
 Wrap your app with `LocaleProvider`, and apply the corresponding language package.
 </us>
 
-```html
+```tpl
 <template>
   <a-locale-provider :locale="zhCN">
     <a-pagination :defaultCurrent="1" :total="50" showSizeChanger />
   </a-locale-provider>
 </template>
 <script>
-// you should use import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
-import zhCN from 'ant-design-vue/locale-provider/zh_CN';
-export default {
-  data(){
-    return {
-      zhCN,
-    }
-  }
-}
+  // you should use import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
+  import zhCN from 'ant-design-vue/locale-provider/zh_CN';
+  export default {
+    data() {
+      return {
+        zhCN,
+      };
+    },
+  };
 </script>
 ```

@@ -8,7 +8,7 @@
 Comment can be used as editor, user can customize the editor component.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-list
@@ -35,15 +35,10 @@ Comment can be used as editor, user can customize the editor component.
       />
       <div slot="content">
         <a-form-item>
-          <a-textarea :rows="4" @change="handleChange" :value="value" ></a-textarea>
+          <a-textarea :rows="4" @change="handleChange" :value="value"></a-textarea>
         </a-form-item>
         <a-form-item>
-          <a-button
-            htmlType="submit"
-            :loading="submitting"
-            @click="handleSubmit"
-            type="primary"
-          >
+          <a-button htmlType="submit" :loading="submitting" @click="handleSubmit" type="primary">
             Add Comment
           </a-button>
         </a-form-item>
@@ -52,42 +47,42 @@ Comment can be used as editor, user can customize the editor component.
   </div>
 </template>
 <script>
-import moment from 'moment'
-export default {
-  data () {
-    return {
-      comments: [],
-      submitting: false,
-      value: '',
-      moment,
-    }
-  },
-  methods: {
-    handleSubmit() {
-      if (!this.value) {
-        return;
-      }
-
-      this.submitting = true
-
-      setTimeout(() => {
-        this.submitting = false
-        this.comments = [
-          {
-            author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: this.value,
-            datetime: moment().fromNow(),
-          },
-          ...this.comments,
-        ]
-        this.value = ''
-      }, 1000)
+  import moment from 'moment';
+  export default {
+    data() {
+      return {
+        comments: [],
+        submitting: false,
+        value: '',
+        moment,
+      };
     },
-    handleChange(e) {
-      this.value = e.target.value
-    }
-  },
-}
+    methods: {
+      handleSubmit() {
+        if (!this.value) {
+          return;
+        }
+
+        this.submitting = true;
+
+        setTimeout(() => {
+          this.submitting = false;
+          this.comments = [
+            {
+              author: 'Han Solo',
+              avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+              content: this.value,
+              datetime: moment().fromNow(),
+            },
+            ...this.comments,
+          ];
+          this.value = '';
+        }, 1000);
+      },
+      handleChange(e) {
+        this.value = e.target.value;
+      },
+    },
+  };
 </script>
 ```

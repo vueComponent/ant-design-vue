@@ -28,20 +28,20 @@ export default {
   subtitle: '树选择',
   type: 'Data Entry',
   title: 'TreeSelect',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <Checkable/>
-        <Multiple/>
-        <TreeData/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <Checkable />
+        <Multiple />
+        <TreeData />
         <Suffix />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

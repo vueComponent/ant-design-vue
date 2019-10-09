@@ -11,13 +11,10 @@ Generally, the mainnav is placed on the left side of the page, and the secondary
 The level of the aside navigation is scalable. The first, second, and third level navigations could be present more fluently and relevantly, and aside navigation can be fixed, allowing the user to quickly switch and spot the current position, improving the user experience. However, this navigation occupies some horizontal space of the contents
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-    <a-layout-sider
-      collapsible
-      v-model="collapsed"
-    >
+    <a-layout-sider collapsible v-model="collapsed">
       <div class="logo" />
       <a-menu theme="dark" :defaultSelectedKeys="['1']" mode="inline">
         <a-menu-item key="1">
@@ -28,17 +25,13 @@ The level of the aside navigation is scalable. The first, second, and third leve
           <a-icon type="desktop" />
           <span>Option 2</span>
         </a-menu-item>
-        <a-sub-menu
-          key="sub1"
-        >
+        <a-sub-menu key="sub1">
           <span slot="title"><a-icon type="user" /><span>User</span></span>
           <a-menu-item key="3">Tom</a-menu-item>
           <a-menu-item key="4">Bill</a-menu-item>
           <a-menu-item key="5">Alex</a-menu-item>
         </a-sub-menu>
-        <a-sub-menu
-          key="sub2"
-        >
+        <a-sub-menu key="sub2">
           <span slot="title"><a-icon type="team" /><span>Team</span></span>
           <a-menu-item key="6">Team 1</a-menu-item>
           <a-menu-item key="8">Team 2</a-menu-item>
@@ -67,20 +60,20 @@ The level of the aside navigation is scalable. The first, second, and third leve
   </a-layout>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      collapsed: false,
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        collapsed: false,
+      };
+    },
+  };
 </script>
 
 <style>
-#components-layout-demo-side .logo {
-  height: 32px;
-  background: rgba(255,255,255,.2);
-  margin: 16px;
-}
+  #components-layout-demo-side .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
 </style>
 ```

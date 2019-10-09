@@ -48,6 +48,10 @@ export interface ModalOptions {
    */
   iconType?: string;
 
+  icon?: string | Function;
+
+  mask?: boolean;
+
   /**
    * Whether support press esc to close
    * @default true

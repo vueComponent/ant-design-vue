@@ -7,13 +7,14 @@ import addEventListener from '../_util/Dom/addEventListener';
 import { getComponentFromProp, getSlotOptions, filterEmpty } from '../_util/props-util';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import BaseMixin from '../_util/BaseMixin';
+import { ConfigConsumerProps } from '../config-provider';
 
 const { TabPane } = Tabs;
 export default {
   name: 'ACard',
   mixins: [BaseMixin],
   props: {
-    prefixCls: PropTypes.string.def('ant-card'),
+    prefixCls: PropTypes.string,
     title: PropTypes.any,
     extra: PropTypes.any,
     bordered: PropTypes.bool.def(true),
@@ -22,10 +23,14 @@ export default {
     loading: PropTypes.bool.def(false),
     hoverable: PropTypes.bool.def(false),
     type: PropTypes.string,
+    size: PropTypes.oneOf(['default', 'small']),
     actions: PropTypes.any,
     tabList: PropTypes.array,
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     this.updateWiderPaddingCalled = false;
@@ -91,17 +96,21 @@ export default {
   },
   render() {
     const {
-      prefixCls = 'ant-card',
+      prefixCls: customizePrefixCls,
       headStyle = {},
       bodyStyle = {},
       loading,
       bordered = true,
+      size = 'default',
       type,
       tabList,
       hoverable,
       activeTabKey,
       defaultActiveTabKey,
     } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const { $slots, $scopedSlots, $listeners } = this;
 
@@ -114,6 +123,7 @@ export default {
       [`${prefixCls}-padding-transition`]: this.updateWiderPaddingCalled,
       [`${prefixCls}-contain-grid`]: this.isContainGrid($slots.default),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
+      [`${prefixCls}-${size}`]: size !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,
     };
 
@@ -159,17 +169,6 @@ export default {
             <div class={`${prefixCls}-loading-block`} />
           </Col>
           <Col span={16}>
-            <div class={`${prefixCls}-loading-block`} />
-          </Col>
-        </Row>
-        <Row gutter={8}>
-          <Col span={8}>
-            <div class={`${prefixCls}-loading-block`} />
-          </Col>
-          <Col span={6}>
-            <div class={`${prefixCls}-loading-block`} />
-          </Col>
-          <Col span={8}>
             <div class={`${prefixCls}-loading-block`} />
           </Col>
         </Row>

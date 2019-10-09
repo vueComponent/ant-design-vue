@@ -8,23 +8,22 @@
 Controlled page number.
 </us>
 
-```html
+```tpl
 <template>
-  <a-pagination  @change="onChange" :current="current" :total="50" />
+  <a-pagination @change="onChange" :current="current" :total="50" />
 </template>
 <script>
   export default {
     data() {
       return {
-        current: 3
-      }
+        current: 3,
+      };
     },
     methods: {
       onChange(current) {
-        this.current = current
-      }
-    }
-  }
+        this.current = current;
+      },
+    },
+  };
 </script>
 ```
-

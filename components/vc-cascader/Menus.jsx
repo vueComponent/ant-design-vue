@@ -9,7 +9,7 @@ export default {
   props: {
     value: PropTypes.array.def([]),
     activeValue: PropTypes.array.def([]),
-    options: PropTypes.array.isRequired,
+    options: PropTypes.array,
     prefixCls: PropTypes.string.def('rc-cascader-menus'),
     expandTrigger: PropTypes.string.def('click'),
     // onSelect: PropTypes.func,
@@ -51,11 +51,18 @@ export default {
       const onSelect = e => {
         this.__emit('select', option, menuIndex, e);
       };
+      const onItemDoubleClick = e => {
+        this.__emit('itemDoubleClick', option, menuIndex, e);
+      };
       const key = option[this.getFieldName('value')];
       const expandProps = {
-        attrs: {},
+        attrs: {
+          role: 'menuitem',
+        },
         on: {
           click: onSelect,
+          doubleclick: onItemDoubleClick,
+          mousedown: e => e.preventDefault(),
         },
         key: Array.isArray(key) ? key.join('__ant__') : key,
       };
@@ -69,7 +76,7 @@ export default {
           expandIconNode = <span class={`${prefixCls}-menu-item-expand-icon`}>{expandIcon}</span>;
         }
       }
-      if (expandTrigger === 'hover' && hasChildren) {
+      if (expandTrigger === 'hover' && (hasChildren || option.isLeaf === false)) {
         expandProps.on = {
           mouseenter: this.delayOnSelect.bind(this, onSelect),
           mouseleave: this.delayOnSelect.bind(this),

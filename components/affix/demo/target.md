@@ -8,7 +8,7 @@
 Set a `target` for 'Affix', which is listen to scroll event of target element (default is `window`).
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-affix-demo-target" class="scrollable-container" ref="container">
     <div class="background">
@@ -21,14 +21,14 @@ Set a `target` for 'Affix', which is listen to scroll event of target element (d
   </div>
 </template>
 <style>
-#components-affix-demo-target.scrollable-container {
-  height: 100px;
-  overflow-y: scroll;
-}
-#components-affix-demo-target .background {
-  padding-top: 60px;
-  height: 300px;
-  background-image: url('https://zos.alipayobjects.com/rmsportal/RmjwQiJorKyobvI.jpg');
-}
+  #components-affix-demo-target.scrollable-container {
+    height: 100px;
+    overflow-y: scroll;
+  }
+  #components-affix-demo-target .background {
+    padding-top: 60px;
+    height: 300px;
+    background-image: url('https://zos.alipayobjects.com/rmsportal/RmjwQiJorKyobvI.jpg');
+  }
 </style>
 ```

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 function noop() {}
 
 export default {
@@ -10,10 +11,7 @@ export default {
     prop: 'value',
   },
   props: {
-    prefixCls: {
-      default: 'ant-radio',
-      type: String,
-    },
+    prefixCls: PropTypes.string,
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     size: {
@@ -40,6 +38,9 @@ export default {
     return {
       radioGroupContext: this,
     };
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   computed: {
     radioOptions() {
@@ -79,7 +80,10 @@ export default {
   render() {
     const { mouseenter = noop, mouseleave = noop } = this.$listeners;
     const props = getOptionProps(this);
-    const { prefixCls, options, buttonStyle } = props;
+    const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('radio', customizePrefixCls);
+
     const groupPrefixCls = `${prefixCls}-group`;
     const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
       [`${groupPrefixCls}-${props.size}`]: props.size,
@@ -97,7 +101,6 @@ export default {
               prefixCls={prefixCls}
               disabled={props.disabled}
               value={option}
-              onChange={this.onRadioChange}
               checked={this.stateValue === option}
             >
               {option}
@@ -110,7 +113,6 @@ export default {
               prefixCls={prefixCls}
               disabled={option.disabled || props.disabled}
               value={option.value}
-              onChange={this.onRadioChange}
               checked={this.stateValue === option.value}
             >
               {option.label}

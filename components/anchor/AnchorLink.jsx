@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
 import classNames from 'classnames';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const AnchorLinkProps = {
   prefixCls: PropTypes.string,
@@ -11,17 +12,19 @@ export const AnchorLinkProps = {
 export default {
   name: 'AAnchorLink',
   props: initDefaultProps(AnchorLinkProps, {
-    prefixCls: 'ant-anchor',
     href: '#',
   }),
   inject: {
     antAnchor: { default: () => ({}) },
     antAnchorContext: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   watch: {
     href(val, oldVal) {
-      this.antAnchor.unregisterLink(oldVal);
-      this.antAnchor.registerLink(val);
+      this.$nextTick(() => {
+        this.antAnchor.unregisterLink(oldVal);
+        this.antAnchor.registerLink(val);
+      });
     },
   },
 
@@ -44,7 +47,11 @@ export default {
     },
   },
   render() {
-    const { prefixCls, href, $slots } = this;
+    const { prefixCls: customizePrefixCls, href, $slots } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('anchor', customizePrefixCls);
+
     const title = getComponentFromProp(this, 'title');
     const active = this.antAnchor.$data.activeLink === href;
     const wrapperClassName = classNames(`${prefixCls}-link`, {

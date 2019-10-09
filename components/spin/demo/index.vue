@@ -32,10 +32,10 @@ export default {
   type: 'Feedback',
   title: 'Spin',
   subtitle: '加载中',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Size />
         <Inside />
@@ -44,10 +44,10 @@ export default {
         <DelayAndDebounce />
         <CustomIndicator />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

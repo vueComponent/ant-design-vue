@@ -1,15 +1,23 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ACardMeta',
   props: {
-    prefixCls: PropTypes.string.def('ant-card'),
+    prefixCls: PropTypes.string,
     title: PropTypes.any,
     description: PropTypes.any,
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   render() {
-    const { prefixCls = 'ant-card' } = this.$props;
+    const { prefixCls: customizePrefixCls } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('card', customizePrefixCls);
+
     const classString = {
       [`${prefixCls}-meta`]: true,
     };

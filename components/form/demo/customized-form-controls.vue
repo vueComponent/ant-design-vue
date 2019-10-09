@@ -14,13 +14,8 @@ Customized or third-party form controls can be used in Form, too. Controls must 
 > * It must be a class component.
 </us>
 
-
 <template>
-  <a-form
-    layout="inline"
-    :form="form"
-    @submit="handleSubmit"
-  >
+  <a-form layout="inline" :form="form" @submit="handleSubmit">
     <a-form-item label="Price">
       <price-input
         v-decorator="[
@@ -28,15 +23,12 @@ Customized or third-party form controls can be used in Form, too. Controls must 
           {
             initialValue: { number: 0, currency: 'rmb' },
             rules: [{ validator: checkPrice }],
-          }
+          },
         ]"
       />
     </a-form-item>
     <a-form-item>
-      <a-button
-        type="primary"
-        html-type="submit"
-      >
+      <a-button type="primary" html-type="submit">
         Submit
       </a-button>
     </a-form-item>
@@ -69,7 +61,7 @@ const PriceInput = {
       </a-select>
     </span>
   `,
-  data () {
+  data() {
     const value = this.value || {};
     return {
       number: value.number || 0,
@@ -77,13 +69,13 @@ const PriceInput = {
     };
   },
   watch: {
-    value (val = {}) {
+    value(val = {}) {
       this.number = val.number || 0;
       this.currency = val.currency || 'rmb';
     },
   },
   methods: {
-    handleNumberChange  (e) {
+    handleNumberChange(e) {
       const number = parseInt(e.target.value || 0, 10);
       if (isNaN(number)) {
         return;
@@ -93,13 +85,13 @@ const PriceInput = {
       }
       this.triggerChange({ number });
     },
-    handleCurrencyChange (currency) {
+    handleCurrencyChange(currency) {
       if (!hasProp(this, 'value')) {
         this.currency = currency;
       }
       this.triggerChange({ currency });
     },
-    triggerChange  (changedValue) {
+    triggerChange(changedValue) {
       // Should provide an event to pass value to Form.
       this.$emit('change', Object.assign({}, this.$data, changedValue));
     },
@@ -110,11 +102,11 @@ export default {
   components: {
     PriceInput,
   },
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'customized_form_controls' });
   },
   methods: {
-    handleSubmit  (e) {
+    handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -122,7 +114,7 @@ export default {
         }
       });
     },
-    checkPrice  (rule, value, callback) {
+    checkPrice(rule, value, callback) {
       if (value.number > 0) {
         callback();
         return;
@@ -131,9 +123,4 @@ export default {
     },
   },
 };
-
 </script>
-
-
-
-

@@ -44,4 +44,22 @@ describe('DropdownButton', () => {
 
     expect('visible' in dropdownProps).toBe(false);
   });
+
+  it('should support href like Button', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Dropdown.Button
+            href="https://ant.design"
+            overlay={
+              <Menu>
+                <Menu.Item>foo</Menu.Item>
+              </Menu>
+            }
+          />
+        );
+      },
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

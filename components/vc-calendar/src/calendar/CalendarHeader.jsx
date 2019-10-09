@@ -36,6 +36,7 @@ const CalendarHeader = {
     mode: PropTypes.any,
     monthCellRender: PropTypes.func,
     monthCellContentRender: PropTypes.func,
+    renderFooter: PropTypes.func,
   },
   data() {
     this.nextMonth = goMonth.bind(this, 1);
@@ -140,6 +141,7 @@ const CalendarHeader = {
       enableNext,
       enablePrev,
       disabledMonth,
+      renderFooter,
     } = props;
 
     let panel = null;
@@ -154,6 +156,7 @@ const CalendarHeader = {
           disabledDate={disabledMonth}
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
+          renderFooter={renderFooter}
         />
       );
     }
@@ -165,6 +168,7 @@ const CalendarHeader = {
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
+          renderFooter={renderFooter}
         />
       );
     }
@@ -175,6 +179,7 @@ const CalendarHeader = {
           defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
+          renderFooter={renderFooter}
         />
       );
     }

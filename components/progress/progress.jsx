@@ -1,18 +1,16 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
-import { Circle } from '../vc-progress';
+import Line from './line';
+import Circle from './circle';
+import { validProgress } from './utils';
 
 function addUnit(num, unit) {
   const unitType = unit || 'px';
   return num ? num + unitType : null;
 }
-const statusColorMap = {
-  normal: '#108ee9',
-  exception: '#ff5500',
-  success: '#87d068',
-};
 
 export const ProgressType = PropTypes.oneOf(['line', 'circle', 'dashboard']);
 export const ProgressSize = PropTypes.oneOf(['default', 'small']);
@@ -35,15 +33,6 @@ export const ProgressProps = {
   size: ProgressSize,
 };
 
-const validProgress = progress => {
-  if (!progress || progress < 0) {
-    return 0;
-  } else if (progress > 100) {
-    return 100;
-  }
-  return progress;
-};
-
 export default {
   name: 'AProgress',
   props: initDefaultProps(ProgressProps, {
@@ -51,14 +40,39 @@ export default {
     percent: 0,
     showInfo: true,
     trailColor: '#f3f3f3',
-    prefixCls: 'ant-progress',
     size: 'default',
+    gapDegree: 0,
+    strokeLinecap: 'round',
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
+  methods: {
+    renderProcessInfo(prefixCls, progressStatus) {
+      const { showInfo, format, type, percent, successPercent } = this.$props;
+      if (!showInfo) return null;
 
+      let text;
+      const textFormatter = format || (percentNumber => `${percentNumber}%`);
+      const iconType = type === 'circle' || type === 'dashboard' ? '' : '-circle';
+      if (format || (progressStatus !== 'exception' && progressStatus !== 'success')) {
+        text = textFormatter(validProgress(percent), validProgress(successPercent));
+      } else if (progressStatus === 'exception') {
+        text = <Icon type={`close${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;
+      } else if (progressStatus === 'success') {
+        text = <Icon type={`check${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;
+      }
+      return (
+        <span class={`${prefixCls}-text`} title={typeof text === 'string' ? text : undefined}>
+          {text}
+        </span>
+      );
+    },
+  },
   render() {
     const props = getOptionProps(this);
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       percent = 0,
       status,
       format,
@@ -75,85 +89,35 @@ export default {
       strokeLinecap = 'round',
       ...restProps
     } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('progress', customizePrefixCls);
+
     const progressStatus =
-      parseInt(successPercent ? successPercent.toString() : percent.toString(), 10) >= 100 &&
-      !('status' in props)
+      parseInt(successPercent !== undefined ? successPercent.toString() : percent.toString(), 10) >=
+        100 && !('status' in props)
         ? 'success'
         : status || 'normal';
-    let progressInfo;
     let progress;
-    const textFormatter = format || (percentNumber => `${percentNumber}%`);
+    const progressInfo = this.renderProcessInfo(prefixCls, progressStatus);
 
-    if (showInfo) {
-      let text;
-      const iconType = type === 'circle' || type === 'dashboard' ? '' : '-circle';
-      if (format || (progressStatus !== 'exception' && progressStatus !== 'success')) {
-        text = textFormatter(validProgress(percent), validProgress(successPercent));
-      } else if (progressStatus === 'exception') {
-        text = <Icon type={`close${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;
-      } else if (progressStatus === 'success') {
-        text = <Icon type={`check${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;
-      }
-      progressInfo = (
-        <span class={`${prefixCls}-text`} title={typeof text === 'string' ? text : undefined}>
-          {text}
-        </span>
-      );
-    }
-
+    // Render progress shape
     if (type === 'line') {
-      const percentStyle = {
-        width: `${validProgress(percent)}%`,
-        height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        background: strokeColor,
-        borderRadius: strokeLinecap === 'square' ? 0 : '100px',
+      const lineProps = {
+        props: {
+          ...props,
+          prefixCls,
+        },
       };
-      const successPercentStyle = {
-        width: `${validProgress(successPercent)}%`,
-        height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : '100px',
-      };
-      const successSegment =
-        successPercent !== undefined ? (
-          <div class={`${prefixCls}-success-bg`} style={successPercentStyle} />
-        ) : null;
-      progress = (
-        <div>
-          <div class={`${prefixCls}-outer`}>
-            <div class={`${prefixCls}-inner`}>
-              <div class={`${prefixCls}-bg`} style={percentStyle} />
-              {successSegment}
-            </div>
-          </div>
-          {progressInfo}
-        </div>
-      );
+      progress = <Line {...lineProps}>{progressInfo}</Line>;
     } else if (type === 'circle' || type === 'dashboard') {
-      const circleSize = width || 120;
-      const circleStyle = {
-        width: addUnit(circleSize),
-        height: addUnit(circleSize),
-        fontSize: addUnit(circleSize * 0.15 + 6),
+      const circleProps = {
+        props: {
+          ...props,
+          prefixCls,
+          progressStatus,
+        },
       };
-      const circleWidth = strokeWidth || 6;
-      const gapPos = gapPosition || (type === 'dashboard' && 'bottom') || 'top';
-      const gapDeg = gapDegree || (type === 'dashboard' && 75);
-      progress = (
-        <div class={`${prefixCls}-inner`} style={circleStyle}>
-          <Circle
-            percent={validProgress(percent)}
-            strokeWidth={circleWidth}
-            trailWidth={circleWidth}
-            strokeColor={strokeColor || statusColorMap[progressStatus]}
-            strokeLinecap={strokeLinecap}
-            trailColor={trailColor}
-            prefixCls={prefixCls}
-            gapDegree={gapDeg || 0}
-            gapPosition={gapPos}
-          />
-          {progressInfo}
-        </div>
-      );
+      progress = <Circle {...circleProps}>{progressInfo}</Circle>;
     }
 
     const classString = classNames(prefixCls, {

@@ -45,6 +45,7 @@ Array [
   "Select",
   "Slider",
   "Spin",
+  "Statistic",
   "Steps",
   "Switch",
   "Table",
@@ -61,6 +62,7 @@ Array [
   "Skeleton",
   "Comment",
   "ConfigProvider",
+  "Empty",
   "default",
 ]
 `;

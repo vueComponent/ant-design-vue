@@ -33,7 +33,7 @@ describe('Select', () => {
           .findAll({ name: 'MenuItem' })
           .at(0)
           .text(),
-      ).toBe('Not Found');
+      ).toBe('No Data');
     });
   });
 

@@ -53,6 +53,7 @@ export const DatePickerProps = () => ({
   // onOpenChange?: (status: bool) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
   placeholder: PropTypes.string,
+  mode: PropTypes.oneOf(['time', 'date', 'month', 'year']),
 });
 
 export const MonthPickerProps = () => ({

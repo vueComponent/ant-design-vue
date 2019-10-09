@@ -1,11 +1,11 @@
 ## API
 
-````html
+```html
 <a-auto-complete :dataSource="dataSource" />
-````
+```
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | allowClear | Show clear button, effective in multiple mode only. | boolean | false |
 | autoFocus | get focus when component mounted | boolean | false |
 | backfill | backfill selected item the input when using keyboard | boolean | false |
@@ -22,6 +22,7 @@
 | open | Controlled open state of dropdown | boolean | - |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | Called when select an option or input value change, or value of input is changed | function(value) |
@@ -33,7 +34,7 @@
 
 ## Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |

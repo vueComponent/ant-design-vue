@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, initDefaultProps, getComponentFromProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const TimeLineItemProps = {
   prefixCls: PropTypes.string,
@@ -12,12 +13,17 @@ export const TimeLineItemProps = {
 export default {
   name: 'ATimelineItem',
   props: initDefaultProps(TimeLineItemProps, {
-    prefixCls: 'ant-timeline',
     color: 'blue',
     pending: false,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   render() {
-    const { prefixCls, color = '', pending } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, color = '', pending } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('timeline', customizePrefixCls);
+
     const dot = getComponentFromProp(this, 'dot');
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,

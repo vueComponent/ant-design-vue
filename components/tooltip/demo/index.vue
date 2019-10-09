@@ -33,24 +33,24 @@ export default {
   subtitle: '文字提示',
   type: 'Data Display',
   title: 'Tooltip',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <br />
         <Basic />
-        <br/>
+        <br />
         <Placement />
-        <br/>
+        <br />
         <ArrowPointAtCenter />
-        <br/>
+        <br />
         <AutoAdjustOverflow />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

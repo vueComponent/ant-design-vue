@@ -65,6 +65,13 @@ const getSlots = ele => {
   });
   return { ...slots, ...getScopedSlots(ele) };
 };
+const getSlot = (self, name = 'default', options = {}) => {
+  return (
+    (self.$scopedSlots && self.$scopedSlots[name] && self.$scopedSlots[name](options)) ||
+    self.$slots[name] ||
+    []
+  );
+};
 
 const getAllChildren = ele => {
   let componentOptions = ele.componentOptions || {};
@@ -111,9 +118,9 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
     }
     return (
-      instance.$slots[prop] ||
       (instance.$scopedSlots[prop] && execute && instance.$scopedSlots[prop](options)) ||
       instance.$scopedSlots[prop] ||
+      instance.$slots[prop] ||
       undefined
     );
   } else {
@@ -122,10 +129,15 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
     }
+    const slotScope = getScopedSlots(instance)[prop];
+    if (slotScope !== undefined) {
+      return typeof slotScope === 'function' && execute ? slotScope(h, options) : slotScope;
+    }
     const slotsProp = [];
     const componentOptions = instance.componentOptions || {};
     (componentOptions.children || []).forEach(child => {
       if (child.data && child.data.slot === prop) {
+        delete child.data.attrs.slot;
         if (child.tag === 'template') {
           slotsProp.push(child.children);
         } else {
@@ -295,6 +307,7 @@ export {
   isValidElement,
   camelize,
   getSlots,
+  getSlot,
   getAllProps,
   getAllChildren,
 };

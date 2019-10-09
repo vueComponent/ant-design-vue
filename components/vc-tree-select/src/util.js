@@ -20,7 +20,7 @@ export function toTitle(title) {
 }
 
 export function toArray(data) {
-  if (!data) return [];
+  if (data === undefined || data === null) return [];
 
   return Array.isArray(data) ? data : [data];
 }
@@ -288,7 +288,8 @@ export function formatSelectorValue(valueList, props, valueEntities) {
           value,
         };
       });
-    } else if (showCheckedStrategy === SHOW_CHILD) {
+    }
+    if (showCheckedStrategy === SHOW_CHILD) {
       // Only get the children checked value
       const targetValueList = [];
 

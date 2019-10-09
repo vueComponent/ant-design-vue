@@ -1,12 +1,10 @@
 ## API
 
-> 服务端上传接口实现可以参考 [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/wiki)。
-
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | accept | 接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | 无 |
 | action | 上传的地址 | string\|(file) => `Promise` | 无 |
-| directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)）| boolean | false |
+| directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false |
 | beforeUpload | 上传文件之前的钩子，参数为上传的文件，若返回 `false` 则停止上传。支持返回一个 Promise 对象，Promise 对象 reject 时则停止上传，resolve 时开始上传（ resolve 传入 `File` 或 `Blob` 对象则上传 resolve 传入对象）。**注意：IE9 不支持该方法**。 | (file, fileList) => `boolean | Promise` | 无 |
 | customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | Function | 无 |
 | data | 上传所需参数或返回上传参数的方法 | object\|(file) => object | 无 |
@@ -24,10 +22,12 @@
 | remove   | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除。               | Function(file): `boolean | Promise` | 无   |
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 上传文件改变时的状态，详见 [change](#change) | Function | 无 |
-| preview | 点击文件链接或预览图标时的回调 | Function(file) | 无 |
+
+| 事件名称 | 说明                                         | 回调参数           |
+| -------- | -------------------------------------------- | ------------------ |
+| change   | 上传文件改变时的状态，详见 [change](#change) | Function           | 无 |
+| preview  | 点击文件链接或预览图标时的回调               | Function(file)     | 无 |
+| reject   | 拖拽文件不符合 accept 类型时的回调           | Function(fileList) | 无 |
 
 ### change
 

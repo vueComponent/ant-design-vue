@@ -34,12 +34,12 @@ export default {
   type: 'Feedback',
   title: 'Skeleton',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <br/>
-        <Basic/>
+        <md cn={md.cn} us={md.us} />
+        <br />
+        <Basic />
         <br />
         <Complex />
         <br />
@@ -48,12 +48,12 @@ export default {
         <Children />
         <br />
         <List />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

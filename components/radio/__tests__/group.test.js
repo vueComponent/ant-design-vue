@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Radio from '../Radio';
 import RadioGroup from '../Group';
+import RadioButton from '../RadioButton';
 
 describe('Radio', () => {
   function createRadioGroup(props, listeners = {}) {
@@ -50,10 +51,16 @@ describe('Radio', () => {
       },
     });
 
-    wrapper.trigger('mouseenter');
+    wrapper
+      .findAll('div')
+      .at(0)
+      .trigger('mouseenter');
     expect(onMouseEnter).toHaveBeenCalled();
 
-    wrapper.trigger('mouseleave');
+    wrapper
+      .findAll('div')
+      .at(0)
+      .trigger('mouseleave');
     expect(onMouseLeave).toHaveBeenCalled();
   });
 
@@ -88,6 +95,80 @@ describe('Radio', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
+
+  it('both of radio and radioGroup will trigger onchange event when they exists', async () => {
+    const onChange = jest.fn();
+    const onChangeRadioGroup = jest.fn();
+
+    const wrapper = mount(
+      {
+        props: ['value'],
+        render() {
+          const groupProps = {};
+          if (this.value !== undefined) {
+            groupProps.value = this.value;
+          }
+          return (
+            <RadioGroup ref="radioGroup" {...groupProps} onChange={onChangeRadioGroup}>
+              <Radio value="A" onChange={onChange}>
+                A
+              </Radio>
+              <Radio value="B" onChange={onChange}>
+                B
+              </Radio>
+              <Radio value="C" onChange={onChange}>
+                C
+              </Radio>
+            </RadioGroup>
+          );
+        },
+      },
+      { sync: false },
+    );
+    const radios = wrapper.findAll('input');
+
+    // uncontrolled component
+    wrapper.vm.$refs.radioGroup.stateValue = 'B';
+    radios.at(0).trigger('change');
+    expect(onChange.mock.calls.length).toBe(1);
+    expect(onChangeRadioGroup.mock.calls.length).toBe(1);
+
+    // controlled component
+    wrapper.setProps({ value: 'A' });
+    radios.at(1).trigger('change');
+    expect(onChange.mock.calls.length).toBe(2);
+  });
+
+  it('Trigger onChange when both of radioButton and radioGroup exists', () => {
+    const onChange = jest.fn();
+    const props = {};
+    const wrapper = mount(
+      createRadioGroup(props, {
+        change: onChange,
+      }),
+      { sync: false },
+    );
+    const radios = wrapper.findAll('input');
+
+    // uncontrolled component
+    wrapper.vm.$refs.radioGroup.stateValue = 'B';
+    radios.at(0).trigger('change');
+    expect(onChange.mock.calls.length).toBe(1);
+
+    // controlled component
+    wrapper.setProps({ value: 'A' });
+    radios.at(1).trigger('change');
+    expect(onChange.mock.calls.length).toBe(2);
+  });
+
+  // it('should only trigger once when in group with options', () => {
+  //   const onChange = jest.fn();
+  //   const options = [{ label: 'Bamboo', value: 'Bamboo' }];
+  //   const wrapper = mount(<RadioGroup options={options} onChange={onChange} />);
+
+  //   wrapper.find('input').trigger('change');
+  //   expect(onChange).toHaveBeenCalledTimes(1);
+  // });
 
   // it('won\'t fire change events when value not changes', async () => {
   //   const onChange = jest.fn()

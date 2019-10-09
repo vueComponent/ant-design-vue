@@ -8,7 +8,7 @@
 By using `status` of `Steps`, you can specify the state for current step.
 </us>
 
-```html
+```tpl
 <template>
   <a-steps :current="1" status="error">
     <a-step title="Finished" description="This is a description." />

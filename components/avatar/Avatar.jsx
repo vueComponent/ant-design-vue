@@ -1,3 +1,4 @@
+import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 
 export default {
@@ -5,7 +6,7 @@ export default {
   props: {
     prefixCls: {
       type: String,
-      default: 'ant-avatar',
+      default: undefined,
     },
     shape: {
       validator: val => ['circle', 'square'].includes(val),
@@ -24,6 +25,9 @@ export default {
     alt: String,
     loadError: Function,
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     return {
       isImgExist: true,
@@ -32,8 +36,12 @@ export default {
   },
   watch: {
     src() {
-      this.isImgExist = true;
-      this.scale = 1;
+      this.$nextTick(() => {
+        this.isImgExist = true;
+        this.scale = 1;
+        // force uodate for position
+        this.$forceUpdate();
+      });
     },
   },
   mounted() {
@@ -79,7 +87,10 @@ export default {
     },
   },
   render() {
-    const { prefixCls, shape, size, src, icon, alt, srcSet } = this.$props;
+    const { prefixCls: customizePrefixCls, shape, size, src, icon, alt, srcSet } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('avatar', customizePrefixCls);
 
     const { isImgExist, scale } = this.$data;
 

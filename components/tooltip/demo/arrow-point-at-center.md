@@ -8,7 +8,7 @@
 By specifying `arrowPointAtCenter` prop, the arrow will point to the center of the target element.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-tooltip placement="topLeft" title="Prompt Text">

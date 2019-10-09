@@ -1,17 +1,25 @@
 import PropTypes from '../../_util/vue-types';
 
-const collapseProps = {
+const collapseProps = () => ({
   prefixCls: PropTypes.string,
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  activeKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  ]),
+  defaultActiveKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  ]),
   accordion: PropTypes.bool,
   destroyInactivePanel: PropTypes.bool,
   bordered: PropTypes.bool,
   expandIcon: PropTypes.func,
   openAnimation: PropTypes.object,
-};
+});
 
-const panelProps = {
+const panelProps = () => ({
   openAnimation: PropTypes.object,
   prefixCls: PropTypes.string,
   header: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
@@ -23,6 +31,8 @@ const panelProps = {
   accordion: PropTypes.bool,
   forceRender: PropTypes.bool,
   expandIcon: PropTypes.func,
-};
+  extra: PropTypes.any,
+  panelKey: PropTypes.any,
+});
 
 export { collapseProps, panelProps };

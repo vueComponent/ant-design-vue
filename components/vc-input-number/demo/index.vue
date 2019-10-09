@@ -1,26 +1,25 @@
 <script>
-import CombinationKeyFormat from '../vc-input-number/demo/combination-key-format';
-import Custom from '../vc-input-number/demo/custom';
-import Decimal from '../vc-input-number/demo/decimal';
-import Formatter from '../vc-input-number/demo/formatter';
-import SimpleUseTouch from '../vc-input-number/demo/simple-use-touch';
-import Simple from '../vc-input-number/demo/simple';
-import SimpleStep from '../vc-input-number/demo/simple-step';
+import CombinationKeyFormat from './combination-key-format.jsx';
+import Custom from './custom.jsx';
+import Decimal from './decimal.jsx';
+import Formatter from './formatter.jsx';
+import SimpleUseTouch from './simple-use-touch.jsx';
+import Simple from './simple.jsx';
+import SmallStep from './small-step.jsx';
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <CombinationKeyFormat />
         <Custom />
         <Decimal />
-        <Formatter/>
-        <SimpleUseTouch/>
-        <Simple/>
-        <SimpleStep/>
+        <Formatter />
+        <SimpleUseTouch />
+        <Simple />
+        <SmallStep />
       </div>
     );
   },
 };
 </script>
-

@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
 const getStepsProps = (defaultProps = {}) => {
@@ -22,14 +23,19 @@ const getStepsProps = (defaultProps = {}) => {
 const Steps = {
   name: 'ASteps',
   props: getStepsProps({
-    prefixCls: 'ant-steps',
-    iconPrefix: 'ant',
     current: 0,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   Step: { ...VcSteps.Step, name: 'AStep' },
   render() {
     const props = getOptionProps(this);
-    const { prefixCls } = props;
+    const { prefixCls: customizePrefixCls, iconPrefix: customizeIconPrefixCls } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('steps', customizePrefixCls);
+    const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
+
     const icons = {
       finish: <Icon type="check" class={`${prefixCls}-finish-icon`} />,
       error: <Icon type="close" class={`${prefixCls}-error-icon`} />,
@@ -37,6 +43,8 @@ const Steps = {
     const stepsProps = {
       props: {
         icons,
+        iconPrefix,
+        prefixCls,
         ...props,
       },
       on: this.$listeners,

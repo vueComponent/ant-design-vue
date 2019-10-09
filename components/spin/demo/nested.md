@@ -8,9 +8,9 @@
 Embedding content into `Spin` will alter it into loading state.
 </us>
 
-```html
+```tpl
 <style scoped>
-  .spin-content{
+  .spin-content {
     border: 1px solid #91d5ff;
     background-color: #e6f7ff;
     padding: 30px;
@@ -28,16 +28,16 @@ Embedding content into `Spin` will alter it into loading state.
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
-        spinning: false
-      }
+        spinning: false,
+      };
     },
     methods: {
-      changeSpinning(){
-        this.spinning = !this.spinning
-      }
+      changeSpinning() {
+        this.spinning = !this.spinning;
+      },
     },
-  }
+  };
 </script>
 ```

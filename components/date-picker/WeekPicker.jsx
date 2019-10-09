@@ -2,6 +2,7 @@ import * as moment from 'moment';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 import {
   hasProp,
   getOptionProps,
@@ -36,6 +37,9 @@ export default {
     format: 'gggg-wo',
     allowClear: true,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     const value = this.value || this.defaultValue;
     if (value && !interopDefault(moment).isMoment(value)) {
@@ -50,17 +54,39 @@ export default {
   },
   watch: {
     value(val) {
-      this.setState({ _value: val });
+      const state = { _value: val };
+      this.setState(state);
+      this.prevState = { ...this.$data, ...state };
     },
     open(val) {
-      this.setState({ _open: val });
+      const state = { _open: val };
+      this.setState(state);
+      this.prevState = { ...this.$data, ...state };
+    },
+    _open(val, oldVal) {
+      this.$nextTick(() => {
+        if (!hasProp(this, 'open') && oldVal && !val) {
+          this.focus();
+        }
+      });
     },
   },
-
+  mounted() {
+    this.prevState = { ...this.$data };
+  },
+  updated() {
+    this.$nextTick(() => {
+      if (!hasProp(this, 'open') && this.prevState._open && !this._open) {
+        this.focus();
+      }
+    });
+  },
   methods: {
     weekDateRender(current) {
       const selectedValue = this.$data._value;
-      const { prefixCls } = this;
+      const { _prefixCls: prefixCls, $scopedSlots } = this;
+      const dateRender = this.dateRender || $scopedSlots.dateRender;
+      const dateNode = dateRender ? dateRender(current) : current.date();
       if (
         selectedValue &&
         current.year() === selectedValue.year() &&
@@ -68,11 +94,11 @@ export default {
       ) {
         return (
           <div class={`${prefixCls}-selected-day`}>
-            <div class={`${prefixCls}-date`}>{current.date()}</div>
+            <div class={`${prefixCls}-date`}>{dateNode}</div>
           </div>
         );
       }
-      return <div class={`${prefixCls}-date`}>{current.date()}</div>;
+      return <div class={`${prefixCls}-date`}>{dateNode}</div>;
     },
     handleChange(value) {
       if (!hasProp(this, 'value')) {
@@ -85,17 +111,19 @@ export default {
         this.setState({ _open: open });
       }
       this.$emit('openChange', open);
-
-      if (!open) {
-        this.focus();
-      }
     },
     clearSelection(e) {
       e.preventDefault();
       e.stopPropagation();
       this.handleChange(null);
     },
-
+    renderFooter(...args) {
+      const { _prefixCls: prefixCls, $scopedSlots } = this;
+      const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter;
+      return renderExtraFooter ? (
+        <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(...args)}</div>
+      ) : null;
+    },
     focus() {
       this.$refs.input.focus();
     },
@@ -110,7 +138,7 @@ export default {
     let suffixIcon = getComponentFromProp(this, 'suffixIcon');
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       disabled,
       pickerClass,
       popupStyle,
@@ -124,6 +152,11 @@ export default {
       $listeners,
       $scopedSlots,
     } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('calendar', customizePrefixCls);
+    this._prefixCls = prefixCls;
+
     const { _value: pickerValue, _open: open } = $data;
     const { focus = noop, blur = noop } = $listeners;
 
@@ -143,6 +176,7 @@ export default {
         showDateInput={false}
         showToday={false}
         disabledDate={disabledDate}
+        renderFooter={this.renderFooter}
       />
     );
     const clearIcon =

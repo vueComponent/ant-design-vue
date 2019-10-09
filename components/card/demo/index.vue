@@ -36,22 +36,22 @@ export default {
   title: 'Card',
   subtitle: '卡片',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic/>
-        <BorderLess/>
-        <FlexibleContent/>
-        <GridCard/>
-        <InColumn/>
-        <Inner/>
-        <Loading/>
-        <Meta/>
-        <Simple/>
-        <Tabs/>
+        <Basic />
+        <BorderLess />
+        <FlexibleContent />
+        <GridCard />
+        <InColumn />
+        <Inner />
+        <Loading />
+        <Meta />
+        <Simple />
+        <Tabs />
         <api>
-          <CN slot='cn' />
+          <CN slot="cn" />
           <US />
         </api>
       </div>

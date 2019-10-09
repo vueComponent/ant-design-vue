@@ -8,14 +8,9 @@
 Built-in directory tree. `multiple` support `ctrl(Windows)` / `command(Mac)` selection.
 </us>
 
-```html
+```tpl
 <template>
-  <a-directory-tree
-    multiple
-    defaultExpandAll
-    @select="onSelect"
-    @expand="onExpand"
-  >
+  <a-directory-tree multiple defaultExpandAll @select="onSelect" @expand="onExpand">
     <a-tree-node title="parent 0" key="0-0">
       <a-tree-node title="leaf 0-0" key="0-0-0" isLeaf />
       <a-tree-node title="leaf 0-1" key="0-0-1" isLeaf />
@@ -27,17 +22,15 @@ Built-in directory tree. `multiple` support `ctrl(Windows)` / `command(Mac)` sel
   </a-directory-tree>
 </template>
 <script>
-export default {
-  methods: {
-    onSelect (keys) {
-      console.log('Trigger Select', keys);
+  export default {
+    methods: {
+      onSelect(keys) {
+        console.log('Trigger Select', keys);
+      },
+      onExpand() {
+        console.log('Trigger Expand');
+      },
     },
-    onExpand () {
-      console.log('Trigger Expand');
-    },
-  },
-}
-
+  };
 </script>
-
 ```

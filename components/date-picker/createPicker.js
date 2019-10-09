@@ -4,6 +4,7 @@ import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import classNames from 'classnames';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
 import BaseMixin from '../_util/BaseMixin';
 import {
@@ -23,15 +24,7 @@ import { cloneElement } from '../_util/vnode';
 function noop() {}
 export default function createPicker(TheCalendar, props) {
   return {
-    // static defaultProps = {
-    //   prefixCls: 'ant-calendar',
-    //   allowClear: true,
-    //   showToday: true,
-    // };
-
-    // private input: any;
     props: initDefaultProps(props, {
-      prefixCls: 'ant-calendar',
       allowClear: true,
       showToday: true,
     }),
@@ -39,6 +32,9 @@ export default function createPicker(TheCalendar, props) {
     model: {
       prop: 'value',
       event: 'change',
+    },
+    inject: {
+      configProvider: { default: () => ConfigConsumerProps },
     },
     data() {
       const value = this.value || this.defaultValue;
@@ -71,10 +67,17 @@ export default function createPicker(TheCalendar, props) {
         }
         this.setState(state);
       },
+      _open(val, oldVal) {
+        this.$nextTick(() => {
+          if (!hasProp(this, 'open') && oldVal && !val) {
+            this.focus();
+          }
+        });
+      },
     },
     methods: {
       renderFooter(...args) {
-        const { prefixCls, $scopedSlots, $slots } = this;
+        const { $scopedSlots, $slots, _prefixCls: prefixCls } = this;
         const renderExtraFooter =
           this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter;
         return renderExtraFooter ? (
@@ -111,9 +114,6 @@ export default function createPicker(TheCalendar, props) {
           this.setState({ _open: open });
         }
         this.$emit('openChange', open);
-        if (!open) {
-          this.focus();
-        }
       },
       focus() {
         this.$refs.input.focus();
@@ -137,7 +137,12 @@ export default function createPicker(TheCalendar, props) {
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const { panelChange = noop, focus = noop, blur = noop, ok = noop } = $listeners;
       const props = getOptionProps(this);
-      const { prefixCls, locale, localeCode } = props;
+
+      const { prefixCls: customizePrefixCls, locale, localeCode } = props;
+      const getPrefixCls = this.configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('calendar', customizePrefixCls);
+      this._prefixCls = prefixCls;
+
       const dateRender = props.dateRender || $scopedSlots.dateRender;
       const monthCellContentRender =
         props.monthCellContentRender || $scopedSlots.monthCellContentRender;

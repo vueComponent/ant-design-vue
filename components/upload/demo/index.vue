@@ -39,10 +39,10 @@ export default {
   subtitle: '上传',
   type: 'Data Entry',
   title: 'Upload',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Avatar />
         <DefaultFileList />
@@ -53,10 +53,10 @@ export default {
         <UploadManually />
         <Directory />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

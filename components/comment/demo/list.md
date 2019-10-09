@@ -8,7 +8,7 @@
 Displaying a series of comments using the `antd` List Component.
 </us>
 
-```html
+```tpl
 <template>
   <a-list
     class="comment-list"
@@ -17,10 +17,7 @@ Displaying a series of comments using the `antd` List Component.
     :dataSource="data"
   >
     <a-list-item slot="renderItem" slot-scope="item, index">
-      <a-comment
-        :author="item.author"
-        :avatar="item.avatar"
-      >
+      <a-comment :author="item.author" :avatar="item.avatar">
         <template slot="actions">
           <span v-for="action in item.actions">{{action}}</span>
         </template>
@@ -33,29 +30,31 @@ Displaying a series of comments using the `antd` List Component.
   </a-list>
 </template>
 <script>
-import moment from 'moment'
-export default {
-  data () {
-    return {
-      data: [
-        {
-          actions: ['Reply to'],
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(1, 'days'),
-        },
-        {
-          actions: ['Reply to'],
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(2, 'days'),
-        },
-      ],
-      moment,
-    }
-  },
-}
+  import moment from 'moment';
+  export default {
+    data() {
+      return {
+        data: [
+          {
+            actions: ['Reply to'],
+            author: 'Han Solo',
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            content:
+              'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+            datetime: moment().subtract(1, 'days'),
+          },
+          {
+            actions: ['Reply to'],
+            author: 'Han Solo',
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            content:
+              'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+            datetime: moment().subtract(2, 'days'),
+          },
+        ],
+        moment,
+      };
+    },
+  };
 </script>
 ```

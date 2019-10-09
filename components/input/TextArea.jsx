@@ -1,8 +1,10 @@
+import classNames from 'classnames';
 import omit from 'omit.js';
 import ResizeObserver from 'resize-observer-polyfill';
 import inputProps from './inputProps';
 import calculateNodeHeight from './calculateNodeHeight';
 import hasProp from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 function onNextFrame(cb) {
   if (window.requestAnimationFrame) {
@@ -35,6 +37,9 @@ export default {
   props: {
     ...inputProps,
     autosize: [Object, Boolean],
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     const { value, defaultValue } = this.$props;
@@ -105,18 +110,9 @@ export default {
       if (!autosize || !this.$refs.textArea) {
         return;
       }
-      const minRows = autosize ? autosize.minRows : null;
-      const maxRows = autosize ? autosize.maxRows : null;
+      const { minRows, maxRows } = autosize;
       const textareaStyles = calculateNodeHeight(this.$refs.textArea, false, minRows, maxRows);
       this.textareaStyles = textareaStyles;
-    },
-
-    getTextAreaClassName() {
-      const { prefixCls, disabled } = this.$props;
-      return {
-        [prefixCls]: true,
-        [`${prefixCls}-disabled`]: disabled,
-      };
     },
 
     handleTextareaChange(e) {
@@ -144,12 +140,13 @@ export default {
   render() {
     const {
       stateValue,
-      getTextAreaClassName,
       handleKeyDown,
       handleTextareaChange,
       textareaStyles,
       $attrs,
       $listeners,
+      prefixCls: customizePrefixCls,
+      disabled,
     } = this;
     const otherProps = omit(this.$props, [
       'prefixCls',
@@ -158,6 +155,13 @@ export default {
       'value',
       'defaultValue',
     ]);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('input', customizePrefixCls);
+
+    const cls = classNames(prefixCls, {
+      [`${prefixCls}-disabled`]: disabled,
+    });
+
     const textareaProps = {
       attrs: { ...otherProps, ...$attrs },
       on: {
@@ -174,7 +178,7 @@ export default {
       <textarea
         {...textareaProps}
         value={stateValue}
-        class={getTextAreaClassName()}
+        class={cls}
         style={textareaStyles}
         ref="textArea"
       />

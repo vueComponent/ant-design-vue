@@ -8,7 +8,7 @@
   Standalone badge with status.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-badge status="success" />

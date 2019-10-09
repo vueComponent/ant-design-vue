@@ -93,7 +93,7 @@ const Select = {
       children: PropTypes.any,
       labelInValue: PropTypes.bool,
       maxTagCount: PropTypes.number,
-      maxTagPlaceholder: PropTypes.any,
+      maxTagPlaceholder: PropTypes.oneOfType([PropTypes.any, PropTypes.func]),
       maxTagTextLength: PropTypes.number,
       showCheckedStrategy: PropTypes.oneOf([SHOW_ALL, SHOW_PARENT, SHOW_CHILD]),
       dropdownClassName: PropTypes.string,
@@ -104,7 +104,8 @@ const Select = {
       treeDataSimpleMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
       treeNodeFilterProp: PropTypes.string,
       treeNodeLabelProp: PropTypes.string,
-      treeCheckable: PropTypes.any,
+      treeCheckable: PropTypes.oneOfType([PropTypes.any, PropTypes.object, PropTypes.bool]),
+      // treeCheckable: PropTypes.any,
       treeCheckStrictly: PropTypes.bool,
       treeIcon: PropTypes.bool,
       treeLine: PropTypes.bool,
@@ -594,6 +595,7 @@ const Select = {
         disabled,
         inputValue,
         treeNodeLabelProp,
+        multiple,
         treeCheckable,
         treeCheckStrictly,
         autoClearSearchValue,
@@ -653,7 +655,7 @@ const Select = {
       // Clean up `searchValue` when this prop is set
       if (autoClearSearchValue || inputValue === null) {
         // Clean state `searchValue` if uncontrolled
-        if (!this.isSearchValueControlled()) {
+        if (!this.isSearchValueControlled() && (multiple || treeCheckable)) {
           this.setUncontrolledState({
             _searchValue: '',
             _filteredTreeNodes: null,
@@ -773,6 +775,17 @@ const Select = {
     // ==================== Trigger =====================
 
     onDropdownVisibleChange(open) {
+      const { multiple, treeCheckable } = this.$props;
+      const { _searchValue } = this;
+
+      // When set open success and single mode,
+      // we will reset the input content.
+      if (open && !multiple && !treeCheckable && _searchValue) {
+        this.setUncontrolledState({
+          _searchValue: '',
+          _filteredTreeNodes: null,
+        });
+      }
       this.setOpenState(open, true);
     },
 
@@ -796,7 +809,9 @@ const Select = {
         const upperSearchValue = String(value).toUpperCase();
 
         let filterTreeNodeFn = filterTreeNode;
-        if (!filterTreeNodeFn) {
+        if (filterTreeNode === false) {
+          filterTreeNodeFn = () => true;
+        } else if (!filterTreeNodeFn) {
           filterTreeNodeFn = (_, node) => {
             const nodeValue = String(getPropsData(node)[treeNodeFilterProp]).toUpperCase();
             return nodeValue.indexOf(upperSearchValue) !== -1;
@@ -908,7 +923,11 @@ const Select = {
      * 2. Fire `onChange` event to user.
      */
     triggerChange(missValueList, valueList, extraInfo = {}) {
-      const { _valueEntities: valueEntities, _searchValue: searchValue } = this.$data;
+      const {
+        _valueEntities: valueEntities,
+        _searchValue: searchValue,
+        _selectorValueList: prevSelectorValueList,
+      } = this.$data;
       const props = getOptionProps(this);
       const { disabled, treeCheckable, treeCheckStrictly } = props;
       if (disabled) return;
@@ -916,7 +935,7 @@ const Select = {
       // Trigger
       const extra = {
         // [Legacy] Always return as array contains label & value
-        preValue: this.$data._selectorValueList.map(({ label, value }) => ({ label, value })),
+        preValue: prevSelectorValueList.map(({ label, value }) => ({ label, value })),
         ...extraInfo,
       };
 

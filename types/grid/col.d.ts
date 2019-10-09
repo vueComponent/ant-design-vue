@@ -3,76 +3,76 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-
+type ColSpanType = number | string;
 export declare class Col extends AntdComponent {
   /**
    * raster number of cells to occupy, 0 corresponds to display: none
    * @default none (0)
-   * @type number
+   * @type ColSpanType
    */
-  span: number;
+  span: ColSpanType;
 
   /**
    * raster order, used in flex layout mode
    * @default 0
-   * @type number
+   * @type ColSpanType
    */
-  order: number;
+  order: ColSpanType;
 
   /**
    * the number of cells to offset Col from the left
    * @default 0
-   * @type number
+   * @type ColSpanType
    */
-  offset: number;
+  offset: ColSpanType;
 
   /**
    * the number of cells that raster is moved to the right
    * @default 0
-   * @type number
+   * @type ColSpanType
    */
-  push: number;
+  push: ColSpanType;
 
   /**
    * the number of cells that raster is moved to the left
    * @default 0
-   * @type number
+   * @type ColSpanType
    */
-  pull: number;
+  pull: ColSpanType;
 
   /**
    * <576px and also default setting, could be a span value or an object containing above props
-   * @type { span: number, offset: number } | number
+   * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
-  xs: { span: number; offset: number } | number;
+  xs: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 
   /**
    * ≥576px, could be a span value or an object containing above props
-   * @type { span: number, offset: number } | number
+   * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
-  sm: { span: number; offset: number } | number;
+  sm: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 
   /**
    * ≥768px, could be a span value or an object containing above props
-   * @type { span: number, offset: number } | number
+   * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
-  md: { span: number; offset: number } | number;
+  md: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 
   /**
    * ≥992px, could be a span value or an object containing above props
-   * @type { span: number, offset: number } | number
+   * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
-  lg: { span: number; offset: number } | number;
+  lg: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 
   /**
    * ≥1200px, could be a span value or an object containing above props
-   * @type { span: number, offset: number } | number
+   * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
-  xl: { span: number; offset: number } | number;
+  xl: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 
   /**
    * ≥1600px, could be a span value or an object containing above props
-   * @type { span: number, offset: number } | number
+   * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
-  xxl: { span: number; offset: number } | number;
+  xxl: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 }

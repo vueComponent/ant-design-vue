@@ -33,6 +33,7 @@ export default {
     event: 'change.current',
   },
   props: {
+    disabled: PropTypes.bool,
     prefixCls: PropTypes.string.def('rc-pagination'),
     selectPrefixCls: PropTypes.string.def('rc-select'),
     current: PropTypes.number,
@@ -134,8 +135,28 @@ export default {
       );
       return iconNode;
     },
+    getValidValue(e) {
+      const inputValue = e.target.value;
+      const { stateCurrentInputValue } = this.$data;
+      let value;
+      if (inputValue === '') {
+        value = inputValue;
+      } else if (isNaN(Number(inputValue))) {
+        value = stateCurrentInputValue;
+      } else {
+        value = Number(inputValue);
+      }
+      return value;
+    },
     isValid(page) {
       return isInteger(page) && page >= 1 && page !== this.stateCurrent;
+    },
+    shouldDisplayQuickJumper() {
+      const { showQuickJumper, pageSize, total } = this.$props;
+      if (total <= pageSize) {
+        return false;
+      }
+      return showQuickJumper;
     },
     // calculatePage (p) {
     //   let pageSize = p
@@ -153,14 +174,6 @@ export default {
       const inputValue = event.target.value;
       const stateCurrentInputValue = this.stateCurrentInputValue;
       let value;
-
-      if (inputValue === '') {
-        value = inputValue;
-      } else if (isNaN(Number(inputValue))) {
-        value = stateCurrentInputValue;
-      } else {
-        value = Number(inputValue);
-      }
 
       if (value !== stateCurrentInputValue) {
         this.setState({
@@ -206,8 +219,9 @@ export default {
       }
     },
     handleChange(p) {
+      const { disabled } = this.$props;
       let page = p;
-      if (this.isValid(page)) {
+      if (this.isValid(page) && !disabled) {
         const currentPage = calculatePage(undefined, this.$data, this.$props);
         if (page > currentPage) {
           page = currentPage;
@@ -271,6 +285,8 @@ export default {
     },
   },
   render() {
+    const { prefixCls, disabled } = this.$props;
+
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
     if (this.hideOnSinglePage === true && this.total <= this.statePageSize) {
       return null;
@@ -278,7 +294,6 @@ export default {
     const props = this.$props;
     const locale = this.locale;
 
-    const prefixCls = this.prefixCls;
     const allPages = calculatePage(undefined, this.$data, this.$props);
     const pagerList = [];
     let jumpPrev = null;
@@ -524,7 +539,7 @@ export default {
       totalText = (
         <li class={`${prefixCls}-total-text`}>
           {this.showTotal(this.total, [
-            (stateCurrent - 1) * statePageSize + 1,
+            this.total === 0 ? 0 : (stateCurrent - 1) * statePageSize + 1,
             stateCurrent * statePageSize > this.total ? this.total : stateCurrent * statePageSize,
           ])}
         </li>
@@ -534,7 +549,11 @@ export default {
     const nextDisabled = !this.hasNext() || !allPages;
     const buildOptionText = this.buildOptionText || this.$scopedSlots.buildOptionText;
     return (
-      <ul class={`${prefixCls}`} unselectable="unselectable" ref="paginationNode">
+      <ul
+        class={{ [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled }}
+        unselectable="unselectable"
+        ref="paginationNode"
+      >
         {totalText}
         <li
           title={this.showTitle ? locale.prev_page : null}
@@ -558,6 +577,7 @@ export default {
           {this.itemRender(nextPage, 'next', this.getItemIcon('nextIcon'))}
         </li>
         <Options
+          disabled={disabled}
           locale={locale}
           rootPrefixCls={prefixCls}
           selectComponentClass={this.selectComponentClass}
@@ -567,7 +587,7 @@ export default {
           pageSize={statePageSize}
           pageSizeOptions={this.pageSizeOptions}
           buildOptionText={buildOptionText || null}
-          quickGo={this.showQuickJumper ? this.handleChange : null}
+          quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
         />
       </ul>

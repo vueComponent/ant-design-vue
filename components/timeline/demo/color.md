@@ -8,7 +8,7 @@
 Set the color of circles. `green` means completed or success status, `red` means warning or error, and `blue` means ongoing or other default status.
 </us>
 
-```html
+```tpl
 <template>
   <a-timeline>
     <a-timeline-item color="green">Create a services site 2015-09-01</a-timeline-item>
@@ -26,6 +26,3 @@ Set the color of circles. `green` means completed or success status, `red` means
   </a-timeline>
 </template>
 ```
-
-
-

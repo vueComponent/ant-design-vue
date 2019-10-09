@@ -24,16 +24,16 @@ export default {
   zhType: '导航',
   type: 'Navigation',
   title: 'Affix',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Onchange />
         <Target />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

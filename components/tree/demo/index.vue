@@ -31,23 +31,23 @@ export default {
   type: 'Data Display',
   title: 'Tree',
   subtitle: '树形控件',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <BasicControlled/>
-        <Basic/>
-        <CustomizedIcon/>
-        <Draggable/>
-        <Dynamic/>
-        <Line/>
-        <Search/>
-        <Directory/>
+        <md cn={md.cn} us={md.us} />
+        <BasicControlled />
+        <Basic />
+        <CustomizedIcon />
+        <Draggable />
+        <Dynamic />
+        <Line />
+        <Search />
+        <Directory />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

@@ -1,4 +1,3 @@
-
 <cn>
 #### block 按钮
 `block`属性将使按钮适合其父宽度。
@@ -9,7 +8,7 @@
 `block` property will make the button fit to its parent width.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" block>Primary</a-button>
@@ -20,4 +19,3 @@
   </div>
 </template>
 ```
-

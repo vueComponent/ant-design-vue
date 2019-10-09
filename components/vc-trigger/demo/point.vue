@@ -9,54 +9,46 @@ const builtinPlacements = {
 };
 
 export default {
-  data () {
+  data() {
     return {
       action: 'click',
       mouseEnterDelay: 0,
     };
   },
   methods: {
-    onActionChange ({ target: { value }}) {
+    onActionChange({ target: { value } }) {
       this.action = value;
     },
 
-    onDelayChange ({ target: { value }}) {
+    onDelayChange({ target: { value } }) {
       this.mouseEnterDelay = Number(value) || 0;
     },
   },
 
-  render () {
+  render() {
     const { action, mouseEnterDelay } = this;
     const innerTrigger = (
-      <div
-        style={{ padding: '20px', background: 'rgba(0, 255, 0, 0.3)' }}
-      >
-    This is popup
-      </div>
+      <div style={{ padding: '20px', background: 'rgba(0, 255, 0, 0.3)' }}>This is popup</div>
     );
     return (
       <div>
         <label>
-          Trigger type:
-          {' '}
+          Trigger type:{' '}
           <select value={action} onChange={this.onActionChange}>
             <option>click</option>
             <option>hover</option>
             <option>contextmenu</option>
           </select>
-        </label>
-
-        {' '}
-
-        {action === 'hover' && <label>
-          Mouse enter delay:
-          {' '}
-          <input type='text' value={mouseEnterDelay} onChange={this.onDelayChange} />
-        </label>}
-
+        </label>{' '}
+        {action === 'hover' && (
+          <label>
+            Mouse enter delay:{' '}
+            <input type="text" value={mouseEnterDelay} onChange={this.onDelayChange} />
+          </label>
+        )}
         <div style={{ margin: '50px' }}>
           <Trigger
-            popupPlacement='topLeft'
+            popupPlacement="topLeft"
             action={[action]}
             popupAlign={{
               overflow: {
@@ -65,7 +57,7 @@ export default {
               },
             }}
             mouseEnterDelay={mouseEnterDelay}
-            popupClassName='point-popup'
+            popupClassName="point-popup"
             builtinPlacements={builtinPlacements}
             popup={innerTrigger}
             alignPoint

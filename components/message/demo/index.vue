@@ -27,18 +27,18 @@ export default {
   type: 'Feedback',
   noinstant: true,
   title: 'Message',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Info />
         <Duration />
         <Loading />
         <Other />
         <Thenable />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

@@ -8,7 +8,7 @@
 You can add an icon beside the slider to make it meaningful.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icon-wrapper">
     <a-icon :style="{color: preColor}" type="frown-o" />
@@ -18,57 +18,56 @@ You can add an icon beside the slider to make it meaningful.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      value: 0,
-      min: 0,
-      max: 20,
-    }
-  },
-  methods: {
-    handleChange(value) {
-      this.value = value
-    }
-  },
-  computed: {
-    preColor() {
-      const { max, min, value } = this
-      const mid = ((max - min) / 2).toFixed(5);
-      return value >= mid ? '' : 'rgba(0, 0, 0, .45)';
-      const nextColor = value >= mid ? 'rgba(0, 0, 0, .45)' : '';
+  export default {
+    data() {
+      return {
+        value: 0,
+        min: 0,
+        max: 20,
+      };
     },
-    nextColor() {
-      const { max, min, value } = this
-      const mid = ((max - min) / 2).toFixed(5);
-      return value >= mid ? 'rgba(0, 0, 0, .45)' : '';
-    }
-  }
-}
+    methods: {
+      handleChange(value) {
+        this.value = value;
+      },
+    },
+    computed: {
+      preColor() {
+        const { max, min, value } = this;
+        const mid = ((max - min) / 2).toFixed(5);
+        return value >= mid ? '' : 'rgba(0, 0, 0, .45)';
+        const nextColor = value >= mid ? 'rgba(0, 0, 0, .45)' : '';
+      },
+      nextColor() {
+        const { max, min, value } = this;
+        const mid = ((max - min) / 2).toFixed(5);
+        return value >= mid ? 'rgba(0, 0, 0, .45)' : '';
+      },
+    },
+  };
 </script>
 <style scoped>
-.icon-wrapper {
-  position: relative;
-  padding: 0px 30px;
-}
+  .icon-wrapper {
+    position: relative;
+    padding: 0px 30px;
+  }
 
-.icon-wrapper .anticon {
-  position: absolute;
-  top: -2px;
-  width: 16px;
-  height: 16px;
-  line-height: 1;
-  font-size: 16px;
-  color: rgba(0, 0, 0, .25);
-}
+  .icon-wrapper .anticon {
+    position: absolute;
+    top: -2px;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.25);
+  }
 
-.icon-wrapper .anticon:first-child {
-  left: 0;
-}
+  .icon-wrapper .anticon:first-child {
+    left: 0;
+  }
 
-.icon-wrapper .anticon:last-child {
-  right: 0;
-}
+  .icon-wrapper .anticon:last-child {
+    right: 0;
+  }
 </style>
 ```
-

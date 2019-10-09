@@ -1,5 +1,5 @@
 // export this package's api
-// base 2.4.4
+// base 2.5.4
 import Vue from 'vue';
 import TreeSelect from './src';
 import ref from 'vue-ref';

@@ -12,27 +12,20 @@ We can store form data into Vuex Store.
 You must wrap field data with `Form.createFormField` in `mapPropsToFields`.
 </us>
 
-
 <template>
   <div id="components-form-demo-vuex">
-    <a-form
-      :form="form"
-      @submit="handleSubmit"
-    >
+    <a-form :form="form" @submit="handleSubmit">
       <a-form-item label="Username">
         <a-input
           v-decorator="[
             'username',
             {
               rules: [{ required: true, message: 'Username is required!' }],
-            }
+            },
           ]"
         />
       </a-form-item>
-      <a-button
-        type="primary"
-        html-type="submit"
-      >
+      <a-button type="primary" html-type="submit">
         Submit
       </a-button>
     </a-form>
@@ -40,19 +33,19 @@ You must wrap field data with `Form.createFormField` in `mapPropsToFields`.
 </template>
 
 <script>
-export default  {
+export default {
   computed: {
-    username () {
+    username() {
       return this.$store.state.username;
     },
   },
   watch: {
-    username (val) {
+    username(val) {
       console.log('this.$store.state.username: ', val);
-      this.form.setFieldsValue({username: val});
+      this.form.setFieldsValue({ username: val });
     },
   },
-  created () {
+  created() {
     this.form = this.$form.createForm(this, {
       onFieldsChange: (_, changedFields) => {
         this.$emit('change', changedFields);
@@ -64,15 +57,15 @@ export default  {
           }),
         };
       },
-      onValuesChange: (_, values) =>{
+      onValuesChange: (_, values) => {
         console.log(values);
-        // Synchronize to vuex store in real time 
+        // Synchronize to vuex store in real time
         // this.$store.commit('update', values)
       },
     });
   },
   methods: {
-    handleSubmit (e) {
+    handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -91,8 +84,3 @@ export default  {
   margin-top: 24px;
 }
 </style>
-
-
-
-
-

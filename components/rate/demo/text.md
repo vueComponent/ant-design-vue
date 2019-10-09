@@ -8,20 +8,21 @@
 Add copywriting in rate components.
 </us>
 
-```html
+```tpl
 <template>
   <span>
-    <a-rate v-model='value'/>
-    <span class="ant-rate-text">{{value}} stars</span>
+    <a-rate :tooltips="desc" v-model="value" />
+    <span class="ant-rate-text">{{desc[value - 1]}}</span>
   </span>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      value: 3,
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        value: 3,
+        desc: ['terrible', 'bad', 'normal', 'good', 'wonderful'],
+      };
+    },
+  };
 </script>
 ```

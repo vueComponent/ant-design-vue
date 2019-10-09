@@ -1,9 +1,10 @@
+import moment from 'moment';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp } from '../../_util/props-util';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
-import CalendarMixin from './mixin/CalendarMixin';
+import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 import enUs from './locale/en_US';
@@ -15,8 +16,6 @@ const FullCalendar = {
     prefixCls: PropTypes.string.def('rc-calendar'),
     defaultType: PropTypes.string.def('date'),
     type: PropTypes.string,
-    // locale: PropTypes.object,
-    // onTypeChange: PropTypes.func,
     fullscreen: PropTypes.bool.def(false),
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
@@ -27,6 +26,10 @@ const FullCalendar = {
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool.def(true),
     disabledDate: PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    selectedValue: PropTypes.object,
+    defaultSelectedValue: PropTypes.object,
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
   },
@@ -38,14 +41,28 @@ const FullCalendar = {
     } else {
       type = this.defaultType;
     }
+    const props = this.$props;
     return {
       sType: type,
+      sValue: props.value || props.defaultValue || moment(),
+      sSelectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   },
   watch: {
     type(val) {
       this.setState({
         sType: val,
+      });
+    },
+    value(val) {
+      const sValue = val || this.defaultValue || getNowByCurrentStateValue(this.sValue);
+      this.setState({
+        sValue,
+      });
+    },
+    selectedValue(val) {
+      this.setState({
+        sSelectedValue: val,
       });
     },
   },

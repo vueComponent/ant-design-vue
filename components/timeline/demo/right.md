@@ -8,7 +8,7 @@
 Right alternate timeline.
 </us>
 
-```html
+```tpl
 <template>
   <a-timeline mode="right">
     <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
@@ -21,5 +21,3 @@ Right alternate timeline.
   </a-timeline>
 </template>
 ```
-
-

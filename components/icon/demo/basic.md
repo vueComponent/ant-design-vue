@@ -8,22 +8,21 @@
 Use tag `<Icon />` to create an icon and set its type in the `type` prop. Specific the `spin` property to show spinning animation and the `theme` property to switch different themes.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icons-list">
     <a-icon type="home" />
     <a-icon type="setting" theme="filled" />
     <a-icon type="smile" theme="outlined" />
     <a-icon type="sync" spin />
+    <a-icon type="smile" :rotate="180" />
     <a-icon type="loading" />
   </div>
 </template>
 <style scoped>
-.icons-list >>> .anticon {
-  margin-right: 6px;
-  font-size: 24px;
-}
+  .icons-list >>> .anticon {
+    margin-right: 6px;
+    font-size: 24px;
+  }
 </style>
 ```
-
-

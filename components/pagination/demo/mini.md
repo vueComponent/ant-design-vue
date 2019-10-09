@@ -1,4 +1,3 @@
-
 <cn>
 #### 迷你
 迷你版本。
@@ -9,7 +8,7 @@
 Mini size pagination.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-pagination-demo-mini">
     <a-pagination size="small" :total="50" />
@@ -18,9 +17,8 @@ Mini size pagination.
   </div>
 </template>
 <style scoped>
-#components-pagination-demo-mini .ant-pagination:not(:last-child) {
-  margin-bottom: 24px;
-}
+  #components-pagination-demo-mini .ant-pagination:not(:last-child) {
+    margin-bottom: 24px;
+  }
 </style>
 ```
-

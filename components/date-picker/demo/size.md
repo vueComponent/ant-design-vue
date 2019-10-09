@@ -1,4 +1,3 @@
-
 <cn>
 #### 三种大小
 三种大小的输入框，若不设置，则为 `default`。
@@ -9,7 +8,7 @@
 The input box comes in three sizes. `default` will be used if `size` is omitted.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group v-model="size">
@@ -28,13 +27,13 @@ The input box comes in three sizes. `default` will be used if `size` is omitted.
   </div>
 </template>
 <script>
-import moment from 'moment';
-export default {
-  data(){
-    return {
-      size: 'default',
-    }
-  },
-}
+  import moment from 'moment';
+  export default {
+    data() {
+      return {
+        size: 'default',
+      };
+    },
+  };
 </script>
 ```

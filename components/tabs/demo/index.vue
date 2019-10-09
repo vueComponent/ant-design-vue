@@ -10,7 +10,7 @@ import Icon from './icon';
 import Position from './position';
 import Size from './size';
 import Slide from './slide';
-import CustomTabBar from './custom-tab-bar';
+// import CustomTabBar from './custom-tab-bar';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -49,14 +49,14 @@ export default {
   type: 'Data Display',
   title: 'Tabs',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Disabled />
         <Icon />
-        <Slide/>
+        <Slide />
         <Extra />
         <Size />
         <Position />
@@ -64,12 +64,11 @@ export default {
         <EditableCard />
         <CardTop />
         <CustomAddTrigger />
-        <CustomTabBar />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

@@ -1,6 +1,6 @@
 # FAQ
 
-Here are the frequently asked questions about Ant Design Vue that you should look up before you ask in community or create new issue. 
+Here are the frequently asked questions about Ant Design Vue that you should look up before you ask in community or create new issue.
 
 ### Are you going to provide Sass/Stylus(etc...) style file?
 
@@ -42,3 +42,8 @@ Yes, ant-design-vue is designed to develop a complete background application, we
 
 Or, follow the instructions in [How to avoid modifying global styles?](docs/react/customize-theme#How-to-avoid-modifying-global-styles-?)
 
+### When I set `mode` to DatePicker/RangePicker, I cannot select year or month anymore?
+
+In a real world development, you may need a YearPicker, MonthRangePicker or WeekRangePicker. You are trying to add `mode` to DatePicker/RangePicker expected to implement those pickers. However, the DatePicker/RangePicker cannot be selected and the panels won't close now.
+
+That is because `<DatePicker mode="year" />` do not equal to `YearPicker`, `<RangePicker mode="month" />` do not equal to `MonthRangePicker` either. The `mode` property was added to support [showing time picker panel in DatePicker](https://github.com/ant-design/ant-design/issues/5190), which simply control the displayed panel and won't change the original date picking behavior of `DatePicker/RangePicker` (for instance you still need to click date cell to finish selection in a DatePicker, whatever the `mode` is).

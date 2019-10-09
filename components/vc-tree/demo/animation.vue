@@ -4,10 +4,10 @@ import Tree, { TreeNode } from '../index';
 import '../assets/index.less';
 import cssAnimation from '../../_util/css-animation';
 
-function animate (node, show, done) {
+function animate(node, show, done) {
   let height = node.offsetHeight;
   return cssAnimation(node, 'collapse', {
-    start () {
+    start() {
       if (!show) {
         node.style.height = `${node.offsetHeight}px`;
       } else {
@@ -15,10 +15,10 @@ function animate (node, show, done) {
         node.style.height = 0;
       }
     },
-    active () {
+    active() {
       node.style.height = `${show ? height : 0}px`;
     },
-    end () {
+    end() {
       node.style.height = '';
       done();
     },
@@ -26,31 +26,31 @@ function animate (node, show, done) {
 }
 
 const animation = {
-  enter (node, done) {
+  enter(node, done) {
     return animate(node, true, done);
   },
-  leave (node, done) {
+  leave(node, done) {
     return animate(node, false, done);
   },
 };
 export default {
-  render () {
+  render() {
     return (
       <div>
         <h2>expanded</h2>
         <Tree
           defaultExpandAll={false}
           defaultExpandedKeys={['p1']}
-          openAnimation={{ on: animation, props: { appear: true }}}
+          openAnimation={{ on: animation, props: { appear: true } }}
         >
-          <TreeNode title='parent 1' key='p1'>
-            <TreeNode key='p10' title='leaf'/>
-            <TreeNode title='parent 1-1' key='p11'>
-              <TreeNode title='parent 2-1' key='p21'>
-                <TreeNode title='leaf'/>
-                <TreeNode title='leaf'/>
+          <TreeNode title="parent 1" key="p1">
+            <TreeNode key="p10" title="leaf" />
+            <TreeNode title="parent 1-1" key="p11">
+              <TreeNode title="parent 2-1" key="p21">
+                <TreeNode title="leaf" />
+                <TreeNode title="leaf" />
               </TreeNode>
-              <TreeNode key='p22' title='leaf'/>
+              <TreeNode key="p22" title="leaf" />
             </TreeNode>
           </TreeNode>
         </Tree>
@@ -58,7 +58,6 @@ export default {
     );
   },
 };
-
 </script>
 <style>
 .collapse {

@@ -8,7 +8,7 @@
 Timing of scrolling to the next card/picture.
 </us>
 
-```html
+```tpl
 <template>
   <a-carousel autoplay>
     <div><h3>1</h3></div>
@@ -18,21 +18,20 @@ Timing of scrolling to the next card/picture.
   </a-carousel>
 </template>
 <script>
-export default {
-}
+  export default {};
 </script>
 <style scoped>
-/* For demo */
-.ant-carousel >>> .slick-slide {
-  text-align: center;
-  height: 160px;
-  line-height: 160px;
-  background: #364d79;
-  overflow: hidden;
-}
+  /* For demo */
+  .ant-carousel >>> .slick-slide {
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+  }
 
-.ant-carousel >>> .slick-slide h3 {
-  color: #fff;
-}
+  .ant-carousel >>> .slick-slide h3 {
+    color: #fff;
+  }
 </style>
 ```

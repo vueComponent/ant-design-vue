@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import KeyCode from '../../_util/KeyCode';
@@ -14,6 +15,10 @@ const MonthCalendar = {
     prefixCls: PropTypes.string.def('rc-calendar'),
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    selectedValue: PropTypes.object,
+    defaultSelectedValue: PropTypes.object,
     disabledDate: PropTypes.func,
     monthCellContentRender: PropTypes.func,
     renderFooter: PropTypes.func.def(() => null),
@@ -22,7 +27,12 @@ const MonthCalendar = {
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
 
   data() {
-    return { mode: 'month' };
+    const props = this.$props;
+    return {
+      mode: 'month',
+      sValue: props.value || props.defaultValue || moment(),
+      sSelectedValue: props.selectedValue || props.defaultSelectedValue,
+    };
   },
   methods: {
     onKeyDown(event) {

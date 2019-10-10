@@ -8,7 +8,7 @@
 Show processing results.
 </us>
 
-```html
+```tpl
 <template>
   <a-result title="Your operation has been executed">
     <template v-slot:extra>

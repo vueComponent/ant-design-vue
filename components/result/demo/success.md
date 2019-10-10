@@ -8,7 +8,7 @@
 Show successful results.
 </us>
 
-```html
+```tpl
 <template>
   <a-result 
     status="success"

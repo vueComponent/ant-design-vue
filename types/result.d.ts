@@ -5,14 +5,14 @@ export declare class Result extends AntdComponent {
    * result title
    * @type string
    */
-  title: string;
+  title: any;
 
   /**
    * result sub title
    *
    * @type string
    */
-  subTitle: string;
+  subTitle: any;
 
   /**
    * result status,decide icons and colors

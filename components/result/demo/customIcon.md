@@ -8,7 +8,7 @@
 Custom icon.
 </us>
 
-```html
+```tpl
 <template>
   <a-result title="Great, we have done all the operations!">
     <template v-slot:icon>

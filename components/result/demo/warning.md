@@ -8,7 +8,7 @@
 The result of the warning.
 </us>
 
-```html
+```tpl
 <template>
   <a-result status="warning" title="There are some problems with your operation.">
     <template v-slot:extra>

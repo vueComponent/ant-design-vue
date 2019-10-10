@@ -8,7 +8,7 @@
 Complex error feedback.
 </us>
 
-```html
+```tpl
 <template>
   <a-result 
     status="error"

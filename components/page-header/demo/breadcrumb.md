@@ -8,9 +8,9 @@
 With breadcrumbs, it is suitable for deeper pages, allowing users to navigate quickly.
 </us>
 
-```html
+```tpl
 <template>
-  <a-page-header title="Title" :breadcrumb="{routes}" subTitle="This is a subtitle" />
+  <a-page-header title="Title" :breadcrumb="{ props: { routes } }" subTitle="This is a subtitle" />
 </template>
 <script>
   export default {

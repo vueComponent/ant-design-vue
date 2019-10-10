@@ -3,8 +3,6 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { Avatar } from './avatar'
-import { Breadcrumb } from './breadcrumb/breadcrumb';
 
 export declare class PageHeader extends AntdComponent {
 
@@ -33,7 +31,7 @@ export declare class PageHeader extends AntdComponent {
    */
   subTitle: any;
 
-  breadcrumb: Breadcrumb;
+  breadcrumb: object;
 
   /**
    * Custom tags
@@ -53,17 +51,10 @@ export declare class PageHeader extends AntdComponent {
    */
   extra: any;
 
-  avatar: Avatar;
+  avatar: object;
 
   /**
    * Specify a callback that will be called when a user clicks backIcon.
    */
   back(): void;
-
-  /**
-   * Custom class
-   * @type string
-   */
-  className: string;
-
 }

@@ -8,7 +8,7 @@
 Standard header, suitable for use in scenarios that require a brief description.
 </us>
 
-```html
+```tpl
 <template>
   <a-page-header @back="() => null" title="Title" subTitle="This is a subtitle" />
 </template>

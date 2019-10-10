@@ -22,7 +22,7 @@ describe('PageHeader', () => {
     ];
     const wrapper = mount({
       render() {
-        return <PageHeader title="Page Title" breadcrumb={{ routes }} />;
+        return <PageHeader title="Page Title" breadcrumb={{ props: { routes } }} />;
       },
     });
     expect(wrapper.findAll('.ant-page-header-back')).toHaveLength(0);
@@ -37,7 +37,7 @@ describe('PageHeader', () => {
     ];
     const wrapper = mount({
       render() {
-        return <PageHeader title="Page Title" breadcrumb={{ routes }} />;
+        return <PageHeader title="Page Title" breadcrumb={{ props: { routes } }} />;
       },
     });
     expect(wrapper.findAll('.ant-breadcrumb')).toHaveLength(1);
@@ -80,10 +80,10 @@ describe('PageHeader', () => {
     expect(callback).toHaveBeenCalled();
   });
 
-  it('pageHeader should support className', () => {
+  it('pageHeader should support class', () => {
     const wrapper = mount({
       render() {
-        return <PageHeader title="Page Title" className="not-works" backIcon={false} />;
+        return <PageHeader title="Page Title" class="not-works" backIcon={false} />;
       },
     });
     expect(wrapper.element).toMatchSnapshot();
@@ -115,7 +115,7 @@ describe('PageHeader', () => {
     ];
     const wrapper = mount({
       render() {
-        return <PageHeader title="Title" breadcrumb={{ routes }} />;
+        return <PageHeader title="Title" breadcrumb={{ props: { routes } }} />;
       },
     });
     expect(wrapper.findAll('.ant-breadcrumb')).toHaveLength(1);
@@ -123,7 +123,7 @@ describe('PageHeader', () => {
     const wrapperBack = mount(
       {
         render() {
-          return <PageHeader title="Title" breadcrumb={{ routes }} onBack={() => {}} />;
+          return <PageHeader title="Title" breadcrumb={{ props: { routes } }} onBack={() => {}} />;
         },
       },
       { localVue },

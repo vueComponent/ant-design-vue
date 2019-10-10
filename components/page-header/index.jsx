@@ -19,10 +19,10 @@ export const PageHeaderProps = {
   footer: PropTypes.any,
   extra: PropTypes.any,
   avatar: PropTypes.object,
-  className: PropTypes.string,
 };
 
-const renderBack = (h, prefixCls, backIcon, onBack) => {
+const renderBack = (instance, prefixCls, backIcon, onBack) => {
+  const h = instance.$createElement;
   if (!backIcon || !onBack) {
     return null;
   }
@@ -32,11 +32,9 @@ const renderBack = (h, prefixCls, backIcon, onBack) => {
         <div class={`${prefixCls}-back`}>
           <TransButton
             onClick={e => {
-              if (onBack) {
-                onBack(e);
-              }
+              instance.$emit('back', e);
             }}
-            className={`${prefixCls}-back-button`}
+            class={`${prefixCls}-back-button`}
             aria-label={back}
           >
             {backIcon}
@@ -48,7 +46,7 @@ const renderBack = (h, prefixCls, backIcon, onBack) => {
 };
 
 const renderBreadcrumb = (h, breadcrumb) => {
-  return <Breadcrumb {...{ props: breadcrumb }} />;
+  return <Breadcrumb {...breadcrumb } />;
 };
 
 const renderTitle = (h, prefixCls, instance) => {
@@ -63,11 +61,11 @@ const renderTitle = (h, prefixCls, instance) => {
   const onBack = instance.$listeners.back;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
-    const backIconDom = renderBack(h, prefixCls, backIcon, onBack);
+    const backIconDom = renderBack(instance, prefixCls, backIcon, onBack);
     return (
       <div class={headingPrefixCls}>
         {backIconDom}
-        {avatar && <Avatar {...{ props: avatar }} />}
+        {avatar && <Avatar {...avatar } />}
         {title && <span class={`${headingPrefixCls}-title`}>{title}</span>}
         {subTitle && <span class={`${headingPrefixCls}-sub-title`}>{subTitle}</span>}
         {tags && <span class={`${headingPrefixCls}-tags`}>{tags}</span>}
@@ -100,14 +98,13 @@ const PageHeader = {
     const {
       prefixCls: customizePrefixCls,
       breadcrumb,
-      className: customizeClassName,
     } = this.$props;
     const footer = getComponentFromProp(this, 'footer');
     const children = this.$slots.default;
 
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
-    const breadcrumbDom = breadcrumb && breadcrumb.routes ? renderBreadcrumb(h, breadcrumb) : null;
-    const className = classnames(prefixCls, customizeClassName, {
+    const breadcrumbDom = breadcrumb && breadcrumb.props && breadcrumb.props.routes ? renderBreadcrumb(h, breadcrumb) : null;
+    const className = classnames(prefixCls, {
       'has-breadcrumb': breadcrumbDom,
       'has-footer': footer,
     });

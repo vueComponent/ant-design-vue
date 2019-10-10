@@ -3,6 +3,7 @@
  * This helps accessibility reader to tread as a interactive button to operation.
  */
 import KeyCode from './KeyCode';
+import PropTypes from './vue-types';
 
 const inlineStyle = {
   border: 0,
@@ -13,13 +14,8 @@ const inlineStyle = {
 };
 
 const TransButton = {
-  props: ['noStyle', 'className'],
-
-  data() {
-    return {
-      div: null,
-      lastKeyCode: null,
-    };
+  props: {
+    noStyle: PropTypes.bool,
   },
 
   methods: {
@@ -32,9 +28,8 @@ const TransButton = {
 
     onKeyUp(event) {
       const { keyCode } = event;
-      const { click } = this.$listeners;
-      if (keyCode === KeyCode.ENTER && click) {
-        click();
+      if (keyCode === KeyCode.ENTER) {
+        this.$emit('click', event);
       }
     },
 
@@ -56,12 +51,10 @@ const TransButton = {
   },
 
   render() {
-    const { noStyle, className, ...restProps } = this.$props;
-    const { click } = this.$listeners;
+    const { noStyle } = this.$props;
 
     return (
       <div
-        class={className}
         role="button"
         tabIndex={0}
         {...{
@@ -71,11 +64,10 @@ const TransButton = {
               value: this.setRef,
             },
           ],
-          props: restProps,
           on: {
+            ...this.$listeners,
             keydown: this.onKeyDown,
             keyup: this.onKeyUp,
-            click: click,
           },
         }}
         style={{ ...(!noStyle ? inlineStyle : null) }}

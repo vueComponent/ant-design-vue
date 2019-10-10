@@ -6,9 +6,9 @@
 | subTitle | custom subTitle text | string\|slot | - |
 | avatar | Avatar next to the title bar | [avatar props](/components/avatar/) | - |
 | backIcon | custom back icon, if false the back icon will not be displayed | string\|slot | `<Icon type="arrow-left" />` |
-| tags | Tag list next to title | [Tag](https://ant.design/components/tag-cn/)[] \| [Tag](https://ant.design/components/tag-cn/) | - |
+| tags | Tag list next to title | [Tag](/components/tag/)[] \| [Tag](/components/tag/) | - |
 | extra | Operating area, at the end of the line of the title line | string\|slot | - |
-| breadcrumb | breadcrumb config | [breadcrumb](https://ant.design/components/breadcrumb-cn/) | - |
+| breadcrumb | breadcrumb config | [breadcrumb](/components/breadcrumb/) | - |
 | footer | PageHeader's footer, generally used to render TabBar | string\|slot | - |
 
 ### Events

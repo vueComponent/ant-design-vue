@@ -3,9 +3,9 @@ import { getOptionProps, getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Base from '../base';
-import noFound from './noFound.svg';
-import serverError from './serverError.svg';
-import unauthorized from './unauthorized.svg';
+import noFound from './noFound';
+import serverError from './serverError';
+import unauthorized from './unauthorized';
 
 export const IconMap = {
   success: 'check-circle',
@@ -34,10 +34,10 @@ export const ResultProps = {
 
 const renderIcon = (h, prefixCls, { status, icon }) => {
   if (ExceptionStatus.includes(status)) {
-    const svgImg = ExceptionMap[status];
+    const SVGComponent = ExceptionMap[status];
     return (
       <div class={`${prefixCls}-icon ${prefixCls}-image`}>
-        <img alt={status} src={svgImg} />
+        <SVGComponent />
       </div>
     );
   }
@@ -60,7 +60,7 @@ const Result = {
       prefixCls: customizePrefixCls,
       status,
       ...restProps
-    } = getOptionProps(this);
+    } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('result', customizePrefixCls);
 

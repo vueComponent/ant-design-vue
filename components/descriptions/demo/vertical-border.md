@@ -8,7 +8,7 @@
 Descriptions with border and background color.
 </us>
 
-```html
+```tpl
 <template>
   <a-descriptions title="User Info" layout="vertical" bordered>
     <a-descriptions-item label="Product">Cloud Database</a-descriptions-item>

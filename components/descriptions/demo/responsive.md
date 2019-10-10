@@ -8,7 +8,7 @@
 通过响应式的配置可以实现在小屏幕设备上的完美呈现。
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-descriptions

@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getSlots, getComponentFromProp } from '../_util/props-util';
 
@@ -14,16 +13,16 @@ const Col = {
   props: ColProps,
   render() {
     const { child, bordered, colon, type, layout } = this.$props;
-    const { prefixCls, span = 1} = getOptionProps(child);
+    const { prefixCls, span = 1 } = getOptionProps(child);
 
     const label = getComponentFromProp(child, 'label');
     const slots = getSlots(child);
     const labelProps = {
       attrs: {},
-      class: classnames(`${prefixCls}-item-label`, {
+      class: [`${prefixCls}-item-label`, {
         [`${prefixCls}-item-colon`]: colon,
         [`${prefixCls}-item-no-label`]: !label,
-      }),
+      }],
       key: 'label',
     };
     if (layout === 'vertical') {
@@ -35,7 +34,7 @@ const Col = {
         return <th {...labelProps}>{label}</th>;
       }
       return (
-        <td class={classnames(`${prefixCls}-item-content`)} key="content" colSpan={span * 2 - 1}>
+        <td class={`${prefixCls}-item-content`} key="content" colSpan={span * 2 - 1}>
           {slots.default}
         </td>
       );
@@ -43,7 +42,7 @@ const Col = {
     if (layout === 'vertical') {
       if (type === 'content') {
         return (
-          <td colSpan={span} class={classnames(`${prefixCls}-item`)}>
+          <td colSpan={span} class={`${prefixCls}-item`}>
             <span class={`${prefixCls}-item-content`} key="content">
               {slots.default}
             </span>
@@ -51,9 +50,9 @@ const Col = {
         );
       }
       return (
-        <td colSpan={span} class={classnames(`${prefixCls}-item`)}>
+        <td colSpan={span} class={`${prefixCls}-item`}>
           <span
-            class={classnames(`${prefixCls}-item-label`, { [`${prefixCls}-item-colon`]: colon })}
+            class={[`${prefixCls}-item-label`, { [`${prefixCls}-item-colon`]: colon }]}
             key="label"
           >
             {label}
@@ -62,7 +61,7 @@ const Col = {
       );
     }
     return (
-      <td colSpan={span} class={classnames(`${prefixCls}-item`)}>
+      <td colSpan={span} class={`${prefixCls}-item`}>
         <span {...labelProps}>{label}</span>
         <span class={`${prefixCls}-item-content`} key="content">
           {slots.default}

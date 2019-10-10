@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import { ConfigConsumerProps } from '../config-provider';
@@ -227,10 +226,10 @@ const Descriptions = {
     const childrenArray = generateChildrenRows(cloneChildren, column);
     return (
       <div
-        class={classnames(prefixCls, {
+        class={[prefixCls, {
           [`${prefixCls}-${size}`]: size !== 'default',
           [`${prefixCls}-bordered`]: !!bordered,
-        })}
+        }]}
       >
         {title && <div class={`${prefixCls}-title`}>{title}</div>}
         <div class={`${prefixCls}-view`}>

@@ -8,7 +8,7 @@
 Custom sizes to fit in a variety of containers.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group @change="onChange" v-model="size">

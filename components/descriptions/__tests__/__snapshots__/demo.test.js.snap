@@ -239,11 +239,11 @@ exports[`renders ./components/descriptions/demo/vertical-border.md correctly 1`]
         </tr>
         <tr class="ant-descriptions-row">
           <th colspan="1" class="ant-descriptions-item-label ant-descriptions-item-colon">Order time</th>
-          <th colspan="5" class="ant-descriptions-item-label ant-descriptions-item-colon">Usage Time</th>
+          <th colspan="3" class="ant-descriptions-item-label ant-descriptions-item-colon">Usage Time</th>
         </tr>
         <tr class="ant-descriptions-row">
           <td colspan="1" class="ant-descriptions-item-content">2018-04-24 18:00:00</td>
-          <td colspan="5" class="ant-descriptions-item-content">
+          <td colspan="3" class="ant-descriptions-item-content">
             2019-04-24 18:00:00
           </td>
         </tr>

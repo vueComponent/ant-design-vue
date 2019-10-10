@@ -8,7 +8,7 @@
 Simplest Usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-descriptions title="User Info">
     <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>

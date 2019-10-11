@@ -9,6 +9,17 @@
 @btn-ghost-bg: transparent;
 @btn-ghost-border: @border-color-base;
 
+.btn-link() {
+  .button-variant-other(@primary-color, transparent, transparent);
+  box-shadow: none;
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+  }
+  .button-disabled(@disabled-color; transparent; transparent);
+}
+
 // Button styles
 // -----------------------------
 .@{btn-prefix-cls} {
@@ -67,6 +78,10 @@
 
   &-danger {
     .btn-danger;
+  }
+
+  &-link {
+    .btn-link;
   }
 
   &-round {
@@ -160,6 +175,11 @@
 
   &-background-ghost&-danger {
     .button-variant-ghost(@btn-danger-color);
+  }
+
+  &-background-ghost&-link {
+    .button-variant-ghost(@primary-color; transparent);
+    color: @component-background;
   }
 
   &-two-chinese-chars::first-letter {

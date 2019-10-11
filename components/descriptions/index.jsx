@@ -87,7 +87,7 @@ const generateChildrenRows = (children, column) => {
 
       warning(
         leftSpans === 0 && lastSpanSame,
-        'Descriptions: Sum of column `span` in a line exceeds `column` of Descriptions.',
+        '[ant-design-vue: Descriptions] Sum of column `span` in a line exceeds `column` of Descriptions.',
       );
     }
   });
@@ -226,10 +226,13 @@ const Descriptions = {
     const childrenArray = generateChildrenRows(cloneChildren, column);
     return (
       <div
-        class={[prefixCls, {
-          [`${prefixCls}-${size}`]: size !== 'default',
-          [`${prefixCls}-bordered`]: !!bordered,
-        }]}
+        class={[
+          prefixCls,
+          {
+            [`${prefixCls}-${size}`]: size !== 'default',
+            [`${prefixCls}-bordered`]: !!bordered,
+          },
+        ]}
       >
         {title && <div class={`${prefixCls}-title`}>{title}</div>}
         <div class={`${prefixCls}-view`}>

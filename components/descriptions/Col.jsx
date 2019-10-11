@@ -10,20 +10,24 @@ const ColProps = {
 };
 
 const Col = {
+  functional: true,
   props: ColProps,
-  render() {
-    const { child, bordered, colon, type, layout } = this.$props;
+  render(h, ctx) {
+    const { child, bordered, colon, type, layout } = ctx.props;
     const { prefixCls, span = 1 } = getOptionProps(child);
-
+    const { key } = ctx.data;
     const label = getComponentFromProp(child, 'label');
     const slots = getSlots(child);
     const labelProps = {
       attrs: {},
-      class: [`${prefixCls}-item-label`, {
-        [`${prefixCls}-item-colon`]: colon,
-        [`${prefixCls}-item-no-label`]: !label,
-      }],
-      key: 'label',
+      class: [
+        `${prefixCls}-item-label`,
+        {
+          [`${prefixCls}-item-colon`]: colon,
+          [`${prefixCls}-item-no-label`]: !label,
+        },
+      ],
+      key: `${key}-label`,
     };
     if (layout === 'vertical') {
       labelProps.attrs.colSpan = span * 2 - 1;
@@ -34,7 +38,7 @@ const Col = {
         return <th {...labelProps}>{label}</th>;
       }
       return (
-        <td class={`${prefixCls}-item-content`} key="content" colSpan={span * 2 - 1}>
+        <td class={`${prefixCls}-item-content`} key={`${key}-content`} colSpan={span * 2 - 1}>
           {slots.default}
         </td>
       );
@@ -43,7 +47,7 @@ const Col = {
       if (type === 'content') {
         return (
           <td colSpan={span} class={`${prefixCls}-item`}>
-            <span class={`${prefixCls}-item-content`} key="content">
+            <span class={`${prefixCls}-item-content`} key={`${key}-content`}>
               {slots.default}
             </span>
           </td>
@@ -53,7 +57,7 @@ const Col = {
         <td colSpan={span} class={`${prefixCls}-item`}>
           <span
             class={[`${prefixCls}-item-label`, { [`${prefixCls}-item-colon`]: colon }]}
-            key="label"
+            key={`${key}-label`}
           >
             {label}
           </span>
@@ -63,7 +67,7 @@ const Col = {
     return (
       <td colSpan={span} class={`${prefixCls}-item`}>
         <span {...labelProps}>{label}</span>
-        <span class={`${prefixCls}-item-content`} key="content">
+        <span class={`${prefixCls}-item-content`} key={`${key}-content`}>
           {slots.default}
         </span>
       </td>

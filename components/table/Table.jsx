@@ -87,7 +87,7 @@ export default {
     // this.columns = props.columns || normalizeColumns(props.children)
     const props = getOptionProps(this);
     warning(
-      !('expandedRowRender' in props) || !('scroll' in props),
+      !props.expandedRowRender || !('scroll' in props),
       '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
     );
     this.createComponents(this.components);

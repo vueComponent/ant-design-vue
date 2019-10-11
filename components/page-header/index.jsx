@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
@@ -104,10 +103,10 @@ const PageHeader = {
 
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
     const breadcrumbDom = breadcrumb && breadcrumb.props && breadcrumb.props.routes ? renderBreadcrumb(h, breadcrumb) : null;
-    const className = classnames(prefixCls, {
+    const className = [prefixCls, {
       'has-breadcrumb': breadcrumbDom,
       'has-footer': footer,
-    });
+    }];
 
     return (
       <div class={className}>

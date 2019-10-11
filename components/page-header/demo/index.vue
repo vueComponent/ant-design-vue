@@ -1,6 +1,8 @@
 <script>
 import Basic from './basic';
 import Breadcrumb from './breadcrumb';
+import Actions from './actions';
+import Responsive from './responsive';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -42,6 +44,8 @@ export default {
         <md cn={md.cn} us={md.us} />
         <Basic />
         <Breadcrumb />
+        <Actions />
+        <Responsive />
         <api>
           <CN slot="cn" />
           <US />

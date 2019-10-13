@@ -16,15 +16,6 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
     <template slot="name" slot-scope="text">
       <a href="javascript:;">{{text}}</a>
     </template>
-    <template slot="action" slot-scope="text, record">
-      <span>
-        <a href="javascript:;">Action 一 {{record.name}}</a>
-        <a-divider type="vertical" />
-        <a href="javascript:;">Delete</a>
-        <a-divider type="vertical" />
-        <a href="javascript:;" class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
-      </span>
-    </template>
   </a-table>
 </template>
 <script>

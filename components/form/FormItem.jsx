@@ -47,7 +47,9 @@ function comeFromSlot(vnodes = [], itemVnode) {
     if (vnode && (vnode === itemVnode || vnode.$vnode === itemVnode)) {
       isSlot = true;
     } else {
-      const children = vnode.componentOptions ? vnode.componentOptions.children : vnode.children;
+      const componentOptions =
+        vnode.componentOptions || (vnode.$vnode && vnode.$vnode.componentOptions);
+      const children = componentOptions ? componentOptions.children : vnode.$children;
       isSlot = comeFromSlot(children, itemVnode);
     }
     if (isSlot) {

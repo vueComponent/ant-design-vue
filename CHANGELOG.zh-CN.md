@@ -10,9 +10,9 @@
 
 ---
 
-## 1.14.0
+## 1.4.0
 
-`2019-10-12`
+`2019-10-14`
 
 - 🎉 新的组件 `Empty`，同时优化了各个组件的空数据状态样式！
 - 🎉 新增 `Statistic` 统计/倒计时组件。
@@ -42,6 +42,7 @@
 - Form
   - 🌟 添加 `name` 选项到 `Form.create`。
   - 🌟 新增 `selfUpdate` 属性，用于提升表单性能 [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
+  - 🐞 修复当 `FormItem` 通过 slot 传递时浏览器卡死问题 [#1271](https://github.com/vueComponent/ant-design-vue/issues/1271)
 - 🌟 Tree 添加 `switcherIcon` 属性。
 - Dropdown
   - 🌟 Dropdown.Button 支持 `href` 属性。
@@ -81,7 +82,9 @@
 - 🐞 修复水波纹在 Edge 下的样式问题。
 
 ## 1.3.17
+
 `2019-09-29`
+
 - 🌟 `Form` 新增 `selfUpdate` 属性，用于提升表单性能 [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
 - `Select`
   - 🐞 修复 keydown 键盘事件失效问题

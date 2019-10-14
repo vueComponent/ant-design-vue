@@ -10,25 +10,25 @@
 
 ---
 
-## 1.14.0
+## 1.4.0
 
-`2019-10-12`
+`2019-10-14`
 
-- 🎉 New component Empty, and improved empty data style of all components! 
+- 🎉 New component Empty, and improved empty data style of all components!
 - 🎉 New component Statistic.
 - 🎉 Hindi locale added (hi_IN).
 - 🎉 Kannada locale added (kn_IN).
-- 🌟 ConfigProvider component support prefixCls. 
+- 🌟 ConfigProvider component support prefixCls.
 - Button
   - 🌟 Button support round shape.
 - Collapse
-  - 🌟 Add `expandIcon` to allow customization of Collapse icon. 
+  - 🌟 Add `expandIcon` to allow customization of Collapse icon.
 - ConfigProvider
-  - 🌟 Support Content Security Policy (CSP) config. 
-  - 🌟 Support `autoInsertSpaceInButton` to remove space between 2 Chinese characters on Button. 
+  - 🌟 Support Content Security Policy (CSP) config.
+  - 🌟 Support `autoInsertSpaceInButton` to remove space between 2 Chinese characters on Button.
 - Icon
-  - 🌟 Icon component add `aria-label` prop to enhance accessibility. 
-  - 🌟 Add `rotate` to allow icon rotate as specified degrees. 
+  - 🌟 Icon component add `aria-label` prop to enhance accessibility.
+  - 🌟 Add `rotate` to allow icon rotate as specified degrees.
   - 🌟 Add `eye-invisible` icon.
 - Input
   - 🌟 Add Input.Password.
@@ -36,14 +36,15 @@
 - Modal
   - 🌟 Add `forceRender` support.
   - 🌟 Add `destroyAll` method.
-  - 🌟 Add `icon` to Modal.confirm/info/warning/error, `iconType`  is deprecated.
-  - 🌟 Add `mask` property support for Modal method. 
+  - 🌟 Add `icon` to Modal.confirm/info/warning/error, `iconType` is deprecated.
+  - 🌟 Add `mask` property support for Modal method.
   - 🌟 Add `transitionName` and `maskTransitionName` property support for Modal method.
   - 🐞 Fix the problem that the mouse moves to the mask layer to close automatically [#842](https://github.com/vueComponent/ant-design-vue/issues/842)
 - 🌟 Add `small` type Card component.
 - Form
   - 🌟 Add `name` option to `Form.create`。
   - 🌟 Add `selfUpdate` to improve performance [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
+  - 🐞 Fix browser stuck when `FormItem` is passed through slot [#1271](https://github.com/vueComponent/ant-design-vue/issues/1271)
 - 🌟 Add switcherIcon prop to Tree.
 - Dropdown
   - 🌟 Dropdown.Button support `href`.
@@ -51,19 +52,19 @@
 - Table
   - 🌟 Add prop `sortDirections` for Table and Table.Column.
   - 🐞 Fixed Badge component display over the fixed table column.
-  - 🐞 Fixed rowSelection columnWidth doesn't work. 
+  - 🐞 Fixed rowSelection columnWidth doesn't work.
 - DatePicker
-  - 🌟 Will read format as default format in locale if provided. 
+  - 🌟 Will read format as default format in locale if provided.
   - 🌟 Add new `renderFooter` API for DatePicker.
   - 🐞 Fixed `dateRender` not supported at WeekPicker.
-  - 🐞 Fixed disabled button style in DatePicker panel. 
+  - 🐞 Fixed disabled button style in DatePicker panel.
   - 🌟 support prop `renderExtraFooter` in all mode.
-  - 🐞 Fixed month range display when start year equals end year. 
+  - 🐞 Fixed month range display when start year equals end year.
 - TimePicker
   - 🌟 TimePicker support new prop `popupStyle` and new event `amPmChange`.
-  - 🐞 Fixed TimePicker Icon disappear when used with Input.Group. 
+  - 🐞 Fixed TimePicker Icon disappear when used with Input.Group.
   - 🌟 Deprecated `allowEmpty` prop and use `allowClear` instead. Sync style with DatePicker.
-- 🌟 Rate component support `tooltips`. 
+- 🌟 Rate component support `tooltips`.
 - Upload
   - 💄 Add new less var `upload-picture-card-border-style` and Fixed `upload-picture-card-size` typo.
   - 🐞 Fixed `dpg` file type is not recognizable as image in Upload component.
@@ -72,7 +73,7 @@
 - Progress
   - 🌟 All types support `successPercent` prop.
 - Pagination
-  - 🐞 Fix ellipsis misalignment. 
+  - 🐞 Fix ellipsis misalignment.
 - 🐞 Fixed Radio style bug in Chrome.
 - 🐞 Fixed Steps style issue on IE9.
 - 🐞 Fixed nested Timeline last item missing line.
@@ -80,7 +81,9 @@
 - 🐞 Fix wave style issue in Edge.
 
 ## 1.3.17
+
 `2019-09-29`
+
 - 🌟 `Form` adds the `selfUpdate` attribute to improve form performance [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
 - `Select`
   - 🐞 Fix keydown keyboard event invalidation

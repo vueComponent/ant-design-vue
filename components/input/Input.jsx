@@ -39,6 +39,7 @@ export default {
     const { value, defaultValue } = this.$props;
     return {
       stateValue: !hasProp(this, 'value') ? defaultValue : value,
+      isComposing: false
     };
   },
   watch: {
@@ -83,6 +84,9 @@ export default {
     },
 
     setValue(value, e) {
+      if (this.isComposing) {
+        return;
+      }
       // https://github.com/vueComponent/ant-design-vue/issues/92
       if (isIE && !isIE9 && this.stateValue === value) {
         return;
@@ -121,7 +125,14 @@ export default {
     handleChange(e) {
       this.setValue(e.target.value, e);
     },
-
+    handleComposition(e) {
+      if (e.type === 'compositionstart') {
+        this.isComposing = true;
+      }else if (e.type === 'compositionend') {
+        this.isComposing = false;
+        this.handleChange(e);
+      }
+    },
     renderClearIcon(prefixCls) {
       const { allowClear } = this.$props;
       const { stateValue } = this;
@@ -224,7 +235,7 @@ export default {
         'value',
         'defaultValue',
       ]);
-      const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
+      const { stateValue, getInputClassName, handleKeyDown, handleChange, handleComposition, $listeners } = this;
       const inputProps = {
         domProps: {
           value: fixControlledValue(stateValue),
@@ -235,6 +246,8 @@ export default {
           keydown: handleKeyDown,
           input: handleChange,
           change: noop,
+          compositionstart: handleComposition,
+          compositionend: handleComposition
         },
         class: getInputClassName(prefixCls),
         ref: 'input',
@@ -248,14 +261,16 @@ export default {
   },
   render() {
     if (this.$props.type === 'textarea') {
-      const { $listeners } = this;
+      const { $listeners, handleChange, handleKeyDown, handleComposition } = this;
       const textareaProps = {
         props: this.$props,
         attrs: this.$attrs,
         on: {
           ...$listeners,
-          change: this.handleChange,
-          keydown: this.handleKeyDown,
+          change: handleChange,
+          keydown: handleKeyDown,
+          compositionstart: handleComposition,
+          compositionend: handleComposition
         },
         directives: [
           {

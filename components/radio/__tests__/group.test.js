@@ -80,6 +80,8 @@ describe('Radio', () => {
       wrapper.vm.$refs.radioGroup.stateValue = 'B';
       // wrapper.setData({ value: 'B' })
       radios.at(0).trigger('change');
+    });
+    await asyncExpect(() => {
       expect(onChange.mock.calls.length).toBe(1);
     });
     await asyncExpect(() => {
@@ -89,6 +91,8 @@ describe('Radio', () => {
       // controlled component
       wrapper.setProps({ value: 'A' });
       radios.at(1).trigger('change');
+    });
+    await asyncExpect(() => {
       expect(onChange.mock.calls.length).toBe(2);
     });
     await asyncExpect(() => {
@@ -131,7 +135,9 @@ describe('Radio', () => {
     wrapper.vm.$refs.radioGroup.stateValue = 'B';
     radios.at(0).trigger('change');
     expect(onChange.mock.calls.length).toBe(1);
-    expect(onChangeRadioGroup.mock.calls.length).toBe(1);
+    await asyncExpect(() => {
+      expect(onChangeRadioGroup.mock.calls.length).toBe(1);
+    });
 
     // controlled component
     wrapper.setProps({ value: 'A' });
@@ -139,7 +145,7 @@ describe('Radio', () => {
     expect(onChange.mock.calls.length).toBe(2);
   });
 
-  it('Trigger onChange when both of radioButton and radioGroup exists', () => {
+  it('Trigger onChange when both of radioButton and radioGroup exists', async () => {
     const onChange = jest.fn();
     const props = {};
     const wrapper = mount(
@@ -153,12 +159,15 @@ describe('Radio', () => {
     // uncontrolled component
     wrapper.vm.$refs.radioGroup.stateValue = 'B';
     radios.at(0).trigger('change');
-    expect(onChange.mock.calls.length).toBe(1);
-
+    await asyncExpect(() => {
+      expect(onChange.mock.calls.length).toBe(1);
+    });
     // controlled component
     wrapper.setProps({ value: 'A' });
     radios.at(1).trigger('change');
-    expect(onChange.mock.calls.length).toBe(2);
+    await asyncExpect(() => {
+      expect(onChange.mock.calls.length).toBe(2);
+    });
   });
 
   // it('should only trigger once when in group with options', () => {

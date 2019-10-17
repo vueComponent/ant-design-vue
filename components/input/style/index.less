@@ -39,4 +39,27 @@
   }
 }
 
+// fix style #1296, remove annotation when upgrade ant-design version > 3.21.3
+.@{ant-prefix}-input-clear-icon {
+  color: @disabled-color;
+  font-size: @font-size-sm;
+  // https://github.com/ant-design/ant-design/pull/18151
+  // https://codesandbox.io/s/wizardly-sun-u10br
+  vertical-align: 0;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: @text-color-secondary;
+  }
+
+  &:active {
+    color: @text-color;
+  }
+
+  + i {
+    margin-left: 6px;
+  }
+}
+
 @import './search-input';

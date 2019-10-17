@@ -5,9 +5,7 @@ import inputProps from './inputProps';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import { isIE, isIE9 } from '../_util/env';
 import { ConfigConsumerProps } from '../config-provider';
-import Password from './Password';
 import Icon from '../icon';
-import warning from '../_util/warning';
 
 function noop() {}
 

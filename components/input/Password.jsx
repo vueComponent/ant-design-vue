@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { getComponentFromProp, getOptionProps } from '../_util/props-util';
 import Input from './Input';
 import Icon from '../icon';
 import inputProps from './inputProps';
@@ -57,19 +58,33 @@ export default {
     },
   },
   render() {
-    const { prefixCls, inputPrefixCls, size, suffix, visibilityToggle, ...restProps } = this.$props;
+    const { prefixCls, inputPrefixCls, size, suffix, visibilityToggle, ...restProps } = getOptionProps(this);
     const suffixIcon = visibilityToggle && this.getIcon();
     const inputClassName = classNames(prefixCls, {
       [`${prefixCls}-${size}`]: !!size,
     });
+    const inputProps = {
+      props: {
+        ...restProps,
+        prefixCls: inputPrefixCls,
+        size,
+        suffix: suffixIcon,
+        prefix: getComponentFromProp(this, 'prefix'),
+        addonAfter: getComponentFromProp(this, 'addonAfter'),
+        addonBefore: getComponentFromProp(this, 'addonBefore'),
+      },
+      attrs: {
+        ...this.$attrs,
+        type: this.visible ? 'text' : 'password',
+      },
+      class: inputClassName,
+      on: {
+        ...this.$listeners,
+      },
+    };
     return (
       <Input
-        {...restProps}
-        type={this.visible ? 'text' : 'password'}
-        size={size}
-        class={inputClassName}
-        prefixCls={inputPrefixCls}
-        suffix={suffixIcon}
+        {...inputProps}
       />
     );
   },

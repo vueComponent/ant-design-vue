@@ -114,6 +114,9 @@ export default {
 
     handleReset(e) {
       this.setValue('', e);
+      this.$nextTick(() => {
+        this.focus();
+      });
     },
 
     handleChange(e) {
@@ -123,7 +126,13 @@ export default {
     renderClearIcon(prefixCls) {
       const { allowClear, disabled } = this.$props;
       const { stateValue } = this;
-      if (!allowClear || disabled || stateValue === undefined || stateValue === null || stateValue === '') {
+      if (
+        !allowClear ||
+        disabled ||
+        stateValue === undefined ||
+        stateValue === null ||
+        stateValue === ''
+      ) {
         return null;
       }
       return (

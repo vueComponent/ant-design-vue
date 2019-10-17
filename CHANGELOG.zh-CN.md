@@ -10,6 +10,17 @@
 
 ---
 
+## 1.4.1
+
+`2019-10-17`
+
+- 🐞 修复 `Input.Password` 无法使用 `v-model` 的问题 [#1306](https://github.com/vueComponent/ant-design-vue/issues/1306)
+- 🌟 优化 `Input` 的清除按钮显示逻辑 [#1296](https://github.com/vueComponent/ant-design-vue/issues/1296)
+- 🌟 点击清除按钮后 `Input` 变为 `focus` 状态
+- 🐞 修复 `Progress` 的 `strokeWidth` 属性失效问题 [#1301](https://github.com/vueComponent/ant-design-vue/issues/1301)
+- 🐞 修复 Radio.Group 触发多次 change 回调问题 [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复 Form initialValue 报错问题 [#1291](https://github.com/vueComponent/ant-design-vue/issues/1291)
+
 ## 1.4.0
 
 `2019-10-14`

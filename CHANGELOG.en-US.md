@@ -10,6 +10,17 @@
 
 ---
 
+## 1.4.1
+
+`2019-10-17`
+
+- 🐞 fix `Input.Password` cannot use `v-model` [#1306](https://github.com/vueComponent/ant-design-vue/issues/1306)
+- 🌟 Optimize the clear button of `Input` to display the logic. [#1296](https://github.com/vueComponent/ant-design-vue/issues/1296)
+- 🌟 After click clear button, `Input` becomes the `focus` state.
+- 🐞 fix progress strokeWidth not work [#1301](https://github.com/vueComponent/ant-design-vue/issues/1301)
+- 🐞 Fix Radio.Group triggers multiple change callback issues [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 Fix Form initialValue error [#1291](https://github.com/vueComponent/ant-design-vue/issues/1291)
+
 ## 1.4.0
 
 `2019-10-14`

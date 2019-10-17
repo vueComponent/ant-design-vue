@@ -121,9 +121,9 @@ export default {
     },
 
     renderClearIcon(prefixCls) {
-      const { allowClear } = this.$props;
+      const { allowClear, disabled } = this.$props;
       const { stateValue } = this;
-      if (!allowClear || stateValue === undefined || stateValue === null || stateValue === '') {
+      if (!allowClear || disabled || stateValue === undefined || stateValue === null || stateValue === '') {
         return null;
       }
       return (

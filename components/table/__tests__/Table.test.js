@@ -97,7 +97,7 @@ describe('Table', () => {
     });
   });
 
-  it('align column should not override cell style', () => {
+  it('align column should not override cell style', done => {
     const columns = [
       { title: 'Name', dataIndex: 'name', key: 'name' },
       {

@@ -30,6 +30,7 @@ export default {
   },
   data() {
     const { value, defaultValue } = this;
+    this.updatingValue = false;
     return {
       stateValue: value === undefined ? defaultValue : value,
     };
@@ -61,6 +62,7 @@ export default {
   },
   watch: {
     value(val) {
+      this.updatingValue = false;
       this.stateValue = val;
     },
   },
@@ -72,11 +74,13 @@ export default {
         this.stateValue = value;
       }
       // nextTick for https://github.com/vueComponent/ant-design-vue/issues/1280
+      if (!this.updatingValue && value !== lastValue) {
+        this.updatingValue = true;
+        this.$emit('input', value);
+        this.$emit('change', ev);
+      }
       this.$nextTick(() => {
-        if (value !== lastValue) {
-          this.$emit('input', value);
-          this.$emit('change', ev);
-        }
+        this.updatingValue = false;
       });
     },
   },

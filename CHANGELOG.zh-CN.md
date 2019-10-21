@@ -10,6 +10,13 @@
 
 ---
 
+## 1.4.2
+
+`2019-10-21`
+
+- 🐞 修复 Radio.Group 触发多次 change 回调问题 [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复 Pagination 输入框跳转无效问题 [#1316](https://github.com/vueComponent/ant-design-vue/issues/1316)
+
 ## 1.4.1
 
 `2019-10-17`

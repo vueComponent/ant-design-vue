@@ -10,6 +10,13 @@
 
 ---
 
+## 1.4.2
+
+`2019-10-21`
+
+- 🐞 Fix `Radio.Group` triggers multiple change callback issues [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 Fix `Pagination` keyup enter not work [#1316](https://github.com/vueComponent/ant-design-vue/issues/1316)
+
 ## 1.4.1
 
 `2019-10-17`

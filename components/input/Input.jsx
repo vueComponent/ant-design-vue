@@ -16,8 +16,12 @@ function fixControlledValue(value) {
   return value;
 }
 
-function hasPrefixSuffix(props) {
-  return 'prefix' in props || props.suffix || props.allowClear;
+function hasPrefixSuffix(instance) {
+  return !!(
+    getComponentFromProp(instance, 'prefix') ||
+    getComponentFromProp(instance, 'suffix') ||
+    instance.$props.allowClear
+  );
 }
 
 export default {
@@ -197,7 +201,7 @@ export default {
     renderLabeledIcon(prefixCls, children) {
       const { size } = this.$props;
       let suffix = this.renderSuffix(prefixCls);
-      if (!hasPrefixSuffix(this.$props)) {
+      if (!hasPrefixSuffix(this)) {
         return children;
       }
       let prefix = getComponentFromProp(this, 'prefix');

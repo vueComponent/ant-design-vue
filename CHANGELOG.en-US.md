@@ -10,6 +10,12 @@
 
 ---
 
+## 1.4.3
+
+`2019-10-22`
+
+- 🐞 Fix Cascader component style issues caused by Input [#1293](https://github.com/vueComponent/ant-design-vue/issues/1280)
+
 ## 1.4.2
 
 `2019-10-21`

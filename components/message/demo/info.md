@@ -1,4 +1,3 @@
-
 <cn>
 #### 普通提示
 信息提醒反馈。
@@ -9,18 +8,17 @@
 Normal messages as feedbacks.
 </us>
 
-```html
+```tpl
 <template>
   <a-button type="primary" @click="info">Display normal message</a-button>
 </template>
 <script>
   export default {
     methods: {
-      info () {
+      info() {
         this.$message.info('This is a normal message');
       },
-    }
-  }
+    },
+  };
 </script>
 ```
-

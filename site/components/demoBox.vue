@@ -1,15 +1,9 @@
 <template>
-  <section
-    :id="id"
-    :class="['code-box', codeExpand ? 'expand': '']"
-  >
+  <section :id="id" :class="['code-box', codeExpand ? 'expand' : '']">
     <section class="code-box-demo">
       <template v-if="iframeDemo[iframeDemoKey]">
         <div class="browser-mockup with-url">
-          <iframe
-            :src="iframeDemo[iframeDemoKey]"
-            height="360"
-          />
+          <iframe :src="iframeDemo[iframeDemoKey]" height="360" />
         </div>
       </template>
       <template v-else>
@@ -17,14 +11,8 @@
       </template>
     </section>
     <section class="code-box-meta markdown">
-      <slot
-        v-if="isZhCN"
-        name="description"
-      />
-      <slot
-        v-else
-        name="us-description"
-      />
+      <slot v-if="isZhCN" name="description" />
+      <slot v-else name="us-description" />
       <a-tooltip :title="codeExpand ? 'Hide Code' : 'Show Code'">
         <span class="code-expand-icon">
           <img
@@ -33,28 +21,19 @@
             src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
             :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
             @click="handleCodeExpand"
-          >
+          />
           <img
             width="16"
             alt="expand code"
             src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
             :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"
             @click="handleCodeExpand"
-          >
+          />
         </span>
       </a-tooltip>
     </section>
-    <transition
-      appear
-      :css="false"
-      @enter="enter"
-      @leave="leave"
-    >
-      <section
-        v-show="codeExpand"
-        class="highlight-wrapper"
-        style="position: relative;"
-      >
+    <transition appear :css="false" @enter="enter" @leave="leave">
+      <section v-show="codeExpand" class="highlight-wrapper" style="position: relative;">
         <a-tooltip
           :title="copied ? '复制成功' : '复制代码'"
           :visible="copyTooltipVisible"
@@ -84,10 +63,10 @@ export default {
     isIframe: Boolean,
   },
   inject: {
-    iframeDemo: { default: {}},
-    demoContext: { default: {}},
+    iframeDemo: { default: {} },
+    demoContext: { default: {} },
   },
-  data () {
+  data() {
     const { name = '' } = this.demoContext;
     const { us, cn, sourceCode } = this.jsfiddle;
     // let sourceCode = `<template>${html}</template>\n`
@@ -96,17 +75,22 @@ export default {
     const usTitle = (us.split('#### ')[1] || '').split('\n')[0] || '';
     const cnTitle = (cn.split('#### ')[1] || '').split('\n')[0] || '';
     if (process.env.NODE_ENV !== 'production' && usTitle === '') {
-      throw new Error(
-        `not have usTitle`,
-      );
+      throw new Error(`not have usTitle`);
     }
-    const iframeDemoKey = usTitle.split(' ').join('-').toLowerCase();
-    const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')].join('-').toLowerCase();
+    const iframeDemoKey = usTitle
+      .split(' ')
+      .join('-')
+      .toLowerCase();
+    const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')]
+      .join('-')
+      .toLowerCase();
 
     if (this.demoContext.store) {
       const { currentSubMenu } = this.demoContext.store.getState();
       // id = `${id}-${currentSubMenu.length + 1}`
-      this.demoContext.store.setState({ currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }] });
+      this.demoContext.store.setState({
+        currentSubMenu: [...currentSubMenu, { cnTitle, usTitle, id }],
+      });
     }
     return {
       codeExpand: false,
@@ -119,16 +103,16 @@ export default {
     };
   },
   methods: {
-    handleCodeExpand  ()  {
+    handleCodeExpand() {
       this.codeExpand = !this.codeExpand;
     },
     enter: animate.enter,
     leave: animate.leave,
-    handleCodeCopied () {
+    handleCodeCopied() {
       this.setState({ copied: true });
     },
 
-    onCopyTooltipVisibleChange (visible) {
+    onCopyTooltipVisibleChange(visible) {
       if (visible) {
         this.setState({
           copyTooltipVisible: visible,
@@ -167,7 +151,8 @@ export default {
   &.bordered {
     border-bottom: 1px dashed #e9e9e9;
   }
-  h3, h4 {
+  h3,
+  h4 {
     position: absolute;
     top: -14px;
     padding: 1px 8px;
@@ -189,8 +174,8 @@ export default {
   }
 }
 .box-demo-code {
-  -webkit-transition: height .2s ease-in-out;
-  transition: height .2s ease-in-out;
+  -webkit-transition: height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
   overflow: auto;
   border-top: 1px dashed #e9e9e9;
   pre {
@@ -199,9 +184,9 @@ export default {
   code {
     margin: 0;
     background: #f7f7f7;
-    padding: .2em .4em;
+    padding: 0.2em 0.4em;
     border-radius: 3px;
-    font-size: .9em;
+    font-size: 0.9em;
     border: 1px solid #eee;
   }
 }

@@ -8,7 +8,6 @@
 There are three layout for form: `horizontal`, `vertical`, `inline`.
 </us>
 
-
 <template>
   <div>
     <a-form :layout="formLayout">
@@ -17,10 +16,7 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
         :label-col="formItemLayout.labelCol"
         :wrapper-col="formItemLayout.wrapperCol"
       >
-        <a-radio-group
-          default-value="horizontal"
-          @change="handleFormLayoutChange"
-        >
+        <a-radio-group default-value="horizontal" @change="handleFormLayoutChange">
           <a-radio-button value="horizontal">
             Horizontal
           </a-radio-button>
@@ -46,9 +42,7 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
       >
         <a-input placeholder="input placeholder" />
       </a-form-item>
-      <a-form-item
-        :wrapper-col="buttonItemLayout.wrapperCol"
-      >
+      <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
         <a-button type="primary">
           Submit
         </a-button>
@@ -59,34 +53,34 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       formLayout: 'horizontal',
     };
   },
   computed: {
-    formItemLayout () {
+    formItemLayout() {
       const { formLayout } = this;
-      return formLayout === 'horizontal' ? {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 14 },
-      } : {};
+      return formLayout === 'horizontal'
+        ? {
+            labelCol: { span: 4 },
+            wrapperCol: { span: 14 },
+          }
+        : {};
     },
-    buttonItemLayout () {
+    buttonItemLayout() {
       const { formLayout } = this;
-      return formLayout === 'horizontal' ? {
-        wrapperCol: { span: 14, offset: 4 },
-      } : {};
+      return formLayout === 'horizontal'
+        ? {
+            wrapperCol: { span: 14, offset: 4 },
+          }
+        : {};
     },
   },
   methods: {
-    handleFormLayoutChange  (e) {
+    handleFormLayoutChange(e) {
       this.formLayout = e.target.value;
     },
   },
 };
 </script>
-
-
-
-

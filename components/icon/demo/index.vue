@@ -29,18 +29,18 @@ export default {
   zhType: '通用',
   title: 'Icon',
   subtitle: '图标',
-  render () {
+  render() {
     return (
       <div>
-        <md class='api-container' cn={md.cn} us={md.us}/>
-        <IconDisplay class='markdown'/>
+        <md class="api-container" cn={md.cn} us={md.us} />
+        <IconDisplay class="markdown" />
         <Basic />
         <Custom />
         <Iconfont />
         <Twotone />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

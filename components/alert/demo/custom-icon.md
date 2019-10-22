@@ -8,22 +8,22 @@
 Decent icon make information more clear and more friendly.
 </us>
 
-```html
+```tpl
 <template>
   <div>
-    <a-alert message="showIcon = false" type="success" >
+    <a-alert message="showIcon = false" type="success">
       <a-icon type="smile" slot="icon" />
     </a-alert>
-    <a-alert message="Success Tips" type="success" showIcon >
+    <a-alert message="Success Tips" type="success" showIcon>
       <a-icon type="smile" slot="icon" />
     </a-alert>
-    <a-alert message="Informational Notes" type="info" showIcon >
+    <a-alert message="Informational Notes" type="info" showIcon>
       <a-icon type="smile" slot="icon" />
     </a-alert>
-    <a-alert message="Warning" type="warning" showIcon >
+    <a-alert message="Warning" type="warning" showIcon>
       <a-icon type="smile" slot="icon" />
     </a-alert>
-    <a-alert message="Error" type="error" showIcon >
+    <a-alert message="Error" type="error" showIcon>
       <a-icon type="smile" slot="icon" />
     </a-alert>
     <a-alert

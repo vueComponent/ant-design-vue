@@ -77,6 +77,16 @@
     left: 50%;
   }
 
+  // select with arrow or loader
+  &:not(.@{selectPrefixCls}-no-arrow),
+  &-loading {
+    .@{selectPrefixCls}-selection--multiple {
+      .@{selectPrefixCls}-selection__clear {
+        right: 20px;
+      }
+    }
+  }
+
   &-selection {
     outline: none;
     user-select: none;

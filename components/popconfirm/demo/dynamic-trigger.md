@@ -8,7 +8,7 @@
 Make it pop up under some conditions.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-popconfirm
@@ -28,41 +28,41 @@ Make it pop up under some conditions.
   </div>
 </template>
 <script>
-import { message } from 'ant-design-vue'
+  import { message } from 'ant-design-vue';
 
-export default {
-  data () {
-    return {
-      visible: false,
-      condition: true,
-    }
-  },
-  methods: {
-    changeCondition (e) {
-      this.condition = e.target.checked
+  export default {
+    data() {
+      return {
+        visible: false,
+        condition: true,
+      };
     },
-    confirm () {
-      this.visible = false
-      message.success('Next step.')
+    methods: {
+      changeCondition(e) {
+        this.condition = e.target.checked;
+      },
+      confirm() {
+        this.visible = false;
+        message.success('Next step.');
+      },
+      cancel() {
+        this.visible = false;
+        message.error('Click on cancel.');
+      },
+      handleVisibleChange(visible) {
+        if (!visible) {
+          this.visible = false;
+          return;
+        }
+        // Determining condition before show the popconfirm.
+        console.log(this.condition);
+        if (this.condition) {
+          this.confirm(); // next step
+        } else {
+          this.visible = true;
+        }
+      },
     },
-    cancel () {
-      this.visible = false
-      message.error('Click on cancel.')
-    },
-    handleVisibleChange (visible) {
-      if (!visible) {
-        this.visible = false
-        return
-      }
-      // Determining condition before show the popconfirm.
-      console.log(this.condition)
-      if (this.condition) {
-        this.confirm() // next step
-      } else {
-        this.visible = true
-      }
-    },
-  },
-}
+  };
 </script>
 ```

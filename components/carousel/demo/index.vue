@@ -37,7 +37,7 @@ export default {
   zhType: '数据展示',
   title: 'Carousel',
   subtitle: '走马灯',
-  render () {
+  render() {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
@@ -48,7 +48,7 @@ export default {
         <CustomPaging />
         <CustomArrows />
         <api>
-          <CN slot='cn' />
+          <CN slot="cn" />
           <US />
         </api>
       </div>

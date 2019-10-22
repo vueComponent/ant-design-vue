@@ -1,10 +1,17 @@
+import moment from 'moment';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
+import {
+  initDefaultProps,
+  hasProp,
+  getComponentFromProp,
+  isValidElement,
+  getEvents,
+} from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
 import Trigger from '../vc-trigger';
 import Panel from './Panel';
 import placements from './placements';
-import moment from 'moment';
-import { initDefaultProps, hasProp, getComponentFromProp } from '../_util/props-util';
 
 function noop() {}
 
@@ -38,11 +45,13 @@ export default {
       showMinute: PropTypes.bool,
       showSecond: PropTypes.bool,
       popupClassName: PropTypes.string,
+      popupStyle: PropTypes.object,
       disabledHours: PropTypes.func,
       disabledMinutes: PropTypes.func,
       disabledSeconds: PropTypes.func,
       hideDisabledOptions: PropTypes.bool,
       // onChange: PropTypes.func,
+      // onAmPmChange: PropTypes.func,
       // onOpen: PropTypes.func,
       // onClose: PropTypes.func,
       // onFocus: PropTypes.func,
@@ -67,6 +76,7 @@ export default {
       defaultOpen: false,
       inputReadOnly: false,
       popupClassName: '',
+      popupStyle: {},
       align: {},
       id: '',
       allowEmpty: true,
@@ -116,7 +126,12 @@ export default {
       this.setValue(value);
     },
 
-    onPanelClear() {
+    onAmPmChange(ampm) {
+      this.__emit('amPmChange', ampm);
+    },
+
+    onClear(event) {
+      event.stopPropagation();
       this.setValue(null);
       this.setOpen(false);
     },
@@ -200,7 +215,7 @@ export default {
           value={sValue}
           inputReadOnly={inputReadOnly}
           onChange={this.onPanelChange}
-          onClear={this.onPanelClear}
+          onAmPmChange={this.onAmPmChange}
           defaultOpenValue={defaultOpenValue}
           showHour={showHour}
           showMinute={showMinute}
@@ -275,6 +290,37 @@ export default {
     onBlur(e) {
       this.__emit('blur', e);
     },
+    renderClearButton() {
+      const { sValue } = this;
+      const { prefixCls, allowEmpty, clearText } = this.$props;
+      if (!allowEmpty || !sValue) {
+        return null;
+      }
+      const clearIcon = getComponentFromProp(this, 'clearIcon');
+      if (isValidElement(clearIcon)) {
+        const { click } = getEvents(clearIcon) || {};
+        return cloneElement(clearIcon, {
+          on: {
+            click: (...args) => {
+              if (click) click(...args);
+              this.onClear(...args);
+            },
+          },
+        });
+      }
+
+      return (
+        <a
+          role="button"
+          class={`${prefixCls}-clear`}
+          title={clearText}
+          onClick={this.onClear}
+          tabIndex={0}
+        >
+          {clearIcon || <i class={`${prefixCls}-clear-icon`} />}
+        </a>
+      );
+    },
   },
 
   render() {
@@ -295,6 +341,7 @@ export default {
       sValue,
       onFocus,
       onBlur,
+      popupStyle,
     } = this;
     const popupClassName = this.getPopupClassName();
     const inputIcon = getComponentFromProp(this, 'inputIcon');
@@ -302,6 +349,7 @@ export default {
       <Trigger
         prefixCls={`${prefixCls}-panel`}
         popupClassName={popupClassName}
+        popupStyle={popupStyle}
         popupAlign={align}
         builtinPlacements={placements}
         popupPlacement={placement}
@@ -331,6 +379,7 @@ export default {
             id={id}
           />
           {inputIcon || <span class={`${prefixCls}-icon`} />}
+          {this.renderClearButton()}
         </span>
       </Trigger>
     );

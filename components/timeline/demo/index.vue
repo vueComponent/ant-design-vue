@@ -30,10 +30,10 @@ export default {
   subtitle: '时间轴',
   type: 'Data Display',
   title: 'Timeline',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Color />
         <Pending />
@@ -41,10 +41,10 @@ export default {
         <Alternate />
         <Right />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

@@ -5,26 +5,29 @@ import wrapPicker from './wrapPicker';
 import RangePicker from './RangePicker';
 import WeekPicker from './WeekPicker';
 import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } from './interface';
+import Base from '../base';
 
 const DatePicker = wrapPicker(
   { ...createPicker(VcCalendar, DatePickerProps()), name: 'ADatePicker' },
   DatePickerProps(),
+  'date',
 );
 
 const MonthPicker = wrapPicker(
   { ...createPicker(MonthCalendar, MonthPickerProps()), name: 'AMonthPicker' },
   MonthPickerProps(),
-  'YYYY-MM',
+  'month',
 );
 
 Object.assign(DatePicker, {
-  RangePicker: wrapPicker(RangePicker, RangePickerProps()),
+  RangePicker: wrapPicker(RangePicker, RangePickerProps(), 'date'),
   MonthPicker,
-  WeekPicker: wrapPicker(WeekPicker, WeekPickerProps(), 'gggg-wo'),
+  WeekPicker: wrapPicker(WeekPicker, WeekPickerProps(), 'week'),
 });
 
 /* istanbul ignore next */
 DatePicker.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(DatePicker.name, DatePicker);
   Vue.component(DatePicker.RangePicker.name, DatePicker.RangePicker);
   Vue.component(DatePicker.MonthPicker.name, DatePicker.MonthPicker);

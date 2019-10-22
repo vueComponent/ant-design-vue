@@ -3,17 +3,17 @@ import VcPagination from '../index';
 import '../assets/index.less';
 
 export default {
-  data () {
+  data() {
     return {};
   },
   methods: {
-    itemRender (current, type, element) {
+    itemRender(current, type, element) {
       if (type === 'page') {
         return <a href={`#${current}`}>{current}</a>;
       }
       return element;
     },
-    textItemRender (current, type, element) {
+    textItemRender(current, type, element) {
       if (type === 'prev') {
         return 'Prev';
       }
@@ -23,17 +23,11 @@ export default {
       return element;
     },
   },
-  render () {
+  render() {
     return (
       <div>
-        <VcPagination
-          total={100}
-          itemRender={this.itemRender}
-        />
-        <VcPagination
-          total={100}
-          itemRender={this.textItemRender}
-        />
+        <VcPagination total={100} itemRender={this.itemRender} />
+        <VcPagination total={100} itemRender={this.textItemRender} />
       </div>
     );
   },

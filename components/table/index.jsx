@@ -10,6 +10,7 @@ import {
   camelize,
   getSlots,
 } from '../_util/props-util';
+import Base from '../base';
 
 const Table = {
   name: 'ATable',
@@ -107,6 +108,7 @@ const Table = {
 };
 /* istanbul ignore next */
 Table.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Table.name, Table);
   Vue.component(Table.Column.name, Table.Column);
   Vue.component(Table.ColumnGroup.name, Table.ColumnGroup);

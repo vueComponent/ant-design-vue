@@ -8,7 +8,7 @@
 To show close button.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert
@@ -27,12 +27,12 @@ To show close button.
   </div>
 </template>
 <script>
-export default {
-  methods: {
-    onClose(e) {
-      console.log(e, 'I was closed.');
-    }
-  }
-}
+  export default {
+    methods: {
+      onClose(e) {
+        console.log(e, 'I was closed.');
+      },
+    },
+  };
 </script>
 ```

@@ -3,6 +3,11 @@ import BaseMixin from '../../../_util/BaseMixin';
 import { getComponentFromProp } from '../../../_util/props-util';
 import moment from 'moment';
 import { formatDate } from '../util';
+import KeyCode from '../../../_util/KeyCode';
+
+let cachedSelectionStart;
+let cachedSelectionEnd;
+let dateInputInstance;
 import { isIE, isIE9 } from '../../../_util/env';
 
 const DateInput = {
@@ -43,21 +48,24 @@ const DateInput = {
   updated() {
     this.$nextTick(() => {
       if (
+        dateInputInstance &&
         this.$data.hasFocus &&
         !this.invalid &&
-        !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)
+        !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)
       ) {
-        this.$refs.dateInputInstance.setSelectionRange(
-          this.cachedSelectionStart,
-          this.cachedSelectionEnd,
-        );
+        dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
       }
     });
   },
+  getInstance() {
+    return dateInputInstance;
+  },
   methods: {
     updateState() {
-      this.cachedSelectionStart = this.$refs.dateInputInstance.selectionStart;
-      this.cachedSelectionEnd = this.$refs.dateInputInstance.selectionEnd;
+      if (dateInputInstance) {
+        cachedSelectionStart = dateInputInstance.selectionStart;
+        cachedSelectionEnd = dateInputInstance.selectionEnd;
+      }
       // when popup show, click body will call this, bug!
       const selectedValue = this.selectedValue;
       if (!this.$data.hasFocus) {
@@ -66,6 +74,12 @@ const DateInput = {
           invalid: false,
         });
       }
+    },
+    onClear() {
+      this.setState({
+        str: '',
+      });
+      this.__emit('clear', null);
     },
     onInputChange(event) {
       const str = event.target.value;
@@ -85,6 +99,7 @@ const DateInput = {
         return;
       }
 
+      // 不合法直接退出
       const parsed = moment(str, format, true);
       if (!parsed.isValid()) {
         this.setState({
@@ -112,37 +127,40 @@ const DateInput = {
 
       if (selectedValue !== value || (selectedValue && value && !selectedValue.isSame(value))) {
         this.setState({
+          invalid: false,
           str,
         });
         this.__emit('change', value);
       }
     },
-
-    onClear() {
-      this.setState({
-        str: '',
-      });
-      this.__emit('clear', null);
-    },
-
-    getRootDOMNode() {
-      return this.$el;
-    },
-
-    focus() {
-      if (this.$refs.dateInputInstance) {
-        this.$refs.dateInputInstance.focus();
-      }
-    },
     onFocus() {
       this.setState({ hasFocus: true });
     },
-
     onBlur() {
       this.setState((prevState, prevProps) => ({
         hasFocus: false,
         str: formatDate(prevProps.value, prevProps.format),
       }));
+    },
+    onKeyDown({ keyCode }) {
+      const { value, disabledDate } = this.$props;
+      if (keyCode === KeyCode.ENTER) {
+        const validateDate = !disabledDate || !disabledDate(value);
+        if (validateDate) {
+          this.__emit('select', value.clone());
+        }
+      }
+    },
+    getRootDOMNode() {
+      return this.$el;
+    },
+    focus() {
+      if (dateInputInstance) {
+        dateInputInstance.focus();
+      }
+    },
+    saveDateInput(dateInput) {
+      dateInputInstance = dateInput;
     },
   },
 
@@ -154,12 +172,20 @@ const DateInput = {
       <div class={`${prefixCls}-input-wrap`}>
         <div class={`${prefixCls}-date-input-wrap`}>
           <input
-            ref="dateInputInstance"
+            {...{
+              directives: [
+                {
+                  name: 'ant-ref',
+                  value: this.saveDateInput,
+                },
+              ],
+            }}
             class={`${prefixCls}-input ${invalidClass}`}
             value={str}
             disabled={disabled}
             placeholder={placeholder}
             onInput={this.onInputChange}
+            onKeydown={this.onKeyDown}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           />

@@ -1,61 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta name="description" content="An enterprise-class UI components based on Ant Design and Vue">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta
+      name="description"
+      content="An enterprise-class UI components based on Ant Design and Vue"
+    />
     <title>Ant Design Vue</title>
-    <link rel="shortcut icon" type="image/x-icon" href="https://qn.antdv.com/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://qn.antdv.com/favicon.ico" />
     <style id="nprogress-style">
-        #nprogress {
-            display: none;
-        }
+      #nprogress {
+        display: none;
+      }
     </style>
     <script>
-        var _hmt = _hmt || [];
-        var srcMap = {
-            'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',
-            'vue.ant.design': 'https://hm.baidu.com/hm.js?f0ba868f114e674b816b4880f7525811',
-            'www.antdv.com': 'https://hm.baidu.com/hm.js?4ad38a0c8f0960d731b654425317da22',
-        };
-        var src = srcMap[location.host] || 'https://hm.baidu.com/hm.js?4ad38a0c8f0960d731b654425317da22';
-        (function() {
-            var hm = document.createElement('script');
-            hm.src = src;
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(hm, s);
-        })()
+      var _hmt = _hmt || [];
+      var srcMap = {
+        'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',
+        'vue.ant.design': 'https://hm.baidu.com/hm.js?f0ba868f114e674b816b4880f7525811',
+        'www.antdv.com': 'https://hm.baidu.com/hm.js?4ad38a0c8f0960d731b654425317da22',
+      };
+      var src =
+        srcMap[location.host] || 'https://hm.baidu.com/hm.js?4ad38a0c8f0960d731b654425317da22';
+      (function() {
+        var hm = document.createElement('script');
+        hm.src = src;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <router-view></router-view>
+      <router-view></router-view>
     </div>
     <!-- Hotjar Tracking Code for http://vue.ant.design -->
     <script>
-        (function(h, o, t, j, a, r) {
-            if (location.href.indexOf('iframe') === -1 && (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design')) {
-                h.hj = h.hj || function() {
-                    (h.hj.q = h.hj.q || []).push(arguments)
-                };
-                h._hjSettings = {
-                    hjid: 1359441,
-                    hjsv: 6
-                };
-                a = o.getElementsByTagName('head')[0];
-                r = o.createElement('script');
-                r.async = 1;
-                r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-                a.appendChild(r);
-            }
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+      (function(h, o, t, j, a, r) {
+        if (
+          location.href.indexOf('iframe') === -1 &&
+          (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design')
+        ) {
+          h.hj =
+            h.hj ||
+            function() {
+              (h.hj.q = h.hj.q || []).push(arguments);
+            };
+          h._hjSettings = {
+            hjid: 1359441,
+            hjsv: 6,
+          };
+          a = o.getElementsByTagName('head')[0];
+          r = o.createElement('script');
+          r.async = 1;
+          r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+          a.appendChild(r);
+        }
+      })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
-</body>
-
+  </body>
 </html>

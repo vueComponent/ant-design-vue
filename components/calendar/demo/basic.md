@@ -8,17 +8,17 @@
 A basic calendar component with Year/Month switch.
 </us>
 
-```html
+```tpl
 <template>
   <a-calendar @panelChange="onPanelChange" />
 </template>
 <script>
-export default {
-  methods: {
-    onPanelChange(value, mode) {
-      console.log(value, mode);
-    }
-  }
-}
+  export default {
+    methods: {
+      onPanelChange(value, mode) {
+        console.log(value, mode);
+      },
+    },
+  };
 </script>
 ```

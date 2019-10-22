@@ -8,16 +8,16 @@ TimePicker 浮层中的列会随着 `format` 变化，当略去 `format` 中的�
 While part of `format` is omitted, the corresponding column in panel will disappear, too.
 </us>
 
-```html
+```tpl
 <template>
   <a-time-picker :defaultValue="moment('12:08', 'HH:mm')" format="HH:mm" />
 </template>
 <script>
-import moment from 'moment';
-export default {
-  methods: {
-    moment,
-  },
-}
+  import moment from 'moment';
+  export default {
+    methods: {
+      moment,
+    },
+  };
 </script>
 ```

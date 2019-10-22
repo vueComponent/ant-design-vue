@@ -8,14 +8,10 @@
 Basic drawer.
 </us>
 
-```html
+```tpl
 <template>
   <div>
-    <a-radio-group
-      style="margin-right: 8px"
-      :defaultValue="placement"
-      @change="onChange"
-    >
+    <a-radio-group style="margin-right: 8px" :defaultValue="placement" @change="onChange">
       <a-radio value="top">top</a-radio>
       <a-radio value="right">right</a-radio>
       <a-radio value="bottom">bottom</a-radio>
@@ -38,24 +34,24 @@ Basic drawer.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      visible: false,
-      placement: 'left'
-    }
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true
+  export default {
+    data() {
+      return {
+        visible: false,
+        placement: 'left',
+      };
     },
-    onClose() {
-      this.visible = false
+    methods: {
+      showDrawer() {
+        this.visible = true;
+      },
+      onClose() {
+        this.visible = false;
+      },
+      onChange(e) {
+        this.placement = e.target.value;
+      },
     },
-    onChange(e) {
-      this.placement = e.target.value
-    }
-  },
-}
+  };
 </script>
 ```

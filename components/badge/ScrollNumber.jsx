@@ -4,6 +4,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getStyle } from '../_util/props-util';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
+import { ConfigConsumerProps } from '../config-provider';
 
 function getNumberArray(num) {
   return num
@@ -16,7 +17,7 @@ function getNumberArray(num) {
 }
 
 const ScrollNumberProps = {
-  prefixCls: PropTypes.string.def('ant-scroll-number'),
+  prefixCls: PropTypes.string,
   count: PropTypes.any,
   component: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
@@ -27,6 +28,9 @@ const ScrollNumberProps = {
 export default {
   mixins: [BaseMixin],
   props: ScrollNumberProps,
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     return {
       animateStarted: true,
@@ -93,7 +97,7 @@ export default {
       return childrenToReturn;
     },
 
-    renderCurrentNumber(num, i) {
+    renderCurrentNumber(prefixCls, num, i) {
       const position = this.getPositionByNum(num, i);
       const removeTransition =
         this.animateStarted || getNumberArray(this.lastCount)[i] === undefined;
@@ -104,25 +108,33 @@ export default {
         transform: `translateY(${-position * 100}%)`,
       };
       return (
-        <span class={`${this.prefixCls}-only`} style={style} key={i}>
+        <span class={`${prefixCls}-only`} style={style} key={i}>
           {this.renderNumberList(position)}
         </span>
       );
     },
 
-    renderNumberElement() {
+    renderNumberElement(prefixCls) {
       const { sCount } = this;
-      if (!sCount || isNaN(sCount)) {
-        return sCount;
+      if (sCount && Number(sCount) % 1 === 0) {
+        return getNumberArray(sCount)
+          .map((num, i) => this.renderCurrentNumber(prefixCls, num, i))
+          .reverse();
       }
-      return getNumberArray(sCount)
-        .map((num, i) => this.renderCurrentNumber(num, i))
-        .reverse();
+      return sCount;
     },
   },
 
   render() {
-    const { prefixCls, title, component: Tag = 'sup', displayComponent, className } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      title,
+      component: Tag = 'sup',
+      displayComponent,
+      className,
+    } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('scroll-number', customizePrefixCls);
     if (displayComponent) {
       return cloneElement(displayComponent, {
         class: `${prefixCls}-custom-component`,
@@ -148,6 +160,6 @@ export default {
       newProps.style.boxShadow = `0 0 0 1px ${style.borderColor} inset`;
     }
 
-    return <Tag {...newProps}>{this.renderNumberElement()}</Tag>;
+    return <Tag {...newProps}>{this.renderNumberElement(prefixCls)}</Tag>;
   },
 };

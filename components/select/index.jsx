@@ -1,9 +1,8 @@
-import warning from 'warning';
+import warning from '../_util/warning';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { Select as VcSelect, Option, OptGroup } from '../vc-select';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
+import { ConfigConsumerProps } from '../config-provider';
 import {
   getComponentFromProp,
   getOptionProps,
@@ -12,6 +11,7 @@ import {
 } from '../_util/props-util';
 import Icon from '../icon';
 import { cloneElement } from '../_util/vnode';
+import Base from '../base';
 
 const AbstractSelectProps = () => ({
   prefixCls: PropTypes.string,
@@ -63,6 +63,7 @@ const SelectProps = {
   firstActiveValue: PropTypes.oneOfType([String, PropTypes.arrayOf(String)]),
   maxTagCount: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
+  maxTagTextLength: PropTypes.number,
   dropdownMatchSelectWidth: PropTypes.bool,
   optionFilterProp: PropTypes.string,
   labelInValue: PropTypes.boolean,
@@ -96,7 +97,6 @@ const Select = {
   name: 'ASelect',
   props: {
     ...SelectProps,
-    prefixCls: PropTypes.string.def('ant-select'),
     showSearch: PropTypes.bool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
@@ -112,7 +112,7 @@ const Select = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   created() {
     warning(
@@ -132,21 +132,24 @@ const Select = {
     blur() {
       this.$refs.vcSelect.blur();
     },
-    getNotFoundContent(locale) {
+    getNotFoundContent(renderEmpty) {
+      const h = this.$createElement;
       const notFoundContent = getComponentFromProp(this, 'notFoundContent');
-      if (this.isCombobox()) {
-        // AutoComplete don't have notFoundContent defaultly
-        return notFoundContent === undefined ? null : notFoundContent;
+      if (notFoundContent !== undefined) {
+        return notFoundContent;
       }
-      return notFoundContent === undefined ? locale.notFoundContent : notFoundContent;
+      if (this.isCombobox()) {
+        return null;
+      }
+      return renderEmpty(h, 'Select');
     },
     isCombobox() {
       const { mode } = this;
       return mode === 'combobox' || mode === SECRET_COMBOBOX_MODE_DO_NOT_USE;
     },
 
-    renderSuffixIcon() {
-      const { prefixCls, loading } = this.$props;
+    renderSuffixIcon(prefixCls) {
+      const { loading } = this.$props;
       let suffixIcon = getComponentFromProp(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       if (suffixIcon) {
@@ -159,108 +162,109 @@ const Select = {
       }
       return <Icon type="down" class={`${prefixCls}-arrow-icon`} />;
     },
-
-    renderSelect(locale) {
-      const { prefixCls, size, mode, options, getPopupContainer, ...restProps } = getOptionProps(
-        this,
-      );
-      const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-      let removeIcon = getComponentFromProp(this, 'removeIcon');
-      removeIcon = Array.isArray(removeIcon) ? removeIcon[0] : removeIcon;
-      let clearIcon = getComponentFromProp(this, 'clearIcon');
-      clearIcon = Array.isArray(clearIcon) ? clearIcon[0] : clearIcon;
-      let menuItemSelectedIcon = getComponentFromProp(this, 'menuItemSelectedIcon');
-      menuItemSelectedIcon = Array.isArray(menuItemSelectedIcon)
-        ? menuItemSelectedIcon[0]
-        : menuItemSelectedIcon;
-      const rest = omit(restProps, [
-        'inputIcon',
-        'removeIcon',
-        'clearIcon',
-        'suffixIcon',
-        'menuItemSelectedIcon',
-      ]);
-
-      const cls = {
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-sm`]: size === 'small',
-      };
-
-      let { optionLabelProp } = this.$props;
-      if (this.isCombobox()) {
-        // children 带 dom 结构时，无法填入输入框
-        optionLabelProp = optionLabelProp || 'value';
-      }
-
-      const modeConfig = {
-        multiple: mode === 'multiple',
-        tags: mode === 'tags',
-        combobox: this.isCombobox(),
-      };
-      const finalRemoveIcon = (removeIcon &&
-        (isValidElement(removeIcon)
-          ? cloneElement(removeIcon, { class: `${prefixCls}-remove-icon` })
-          : removeIcon)) || <Icon type="close" class={`${prefixCls}-remove-icon`} />;
-
-      const finalClearIcon = (clearIcon &&
-        (isValidElement(clearIcon)
-          ? cloneElement(clearIcon, { class: `${prefixCls}-clear-icon` })
-          : clearIcon)) || (
-        <Icon type="close-circle" theme="filled" class={`${prefixCls}-clear-icon`} />
-      );
-
-      const finalMenuItemSelectedIcon = (menuItemSelectedIcon &&
-        (isValidElement(menuItemSelectedIcon)
-          ? cloneElement(menuItemSelectedIcon, { class: `${prefixCls}-selected-icon` })
-          : menuItemSelectedIcon)) || <Icon type="check" class={`${prefixCls}-selected-icon`} />;
-
-      const selectProps = {
-        props: {
-          inputIcon: this.renderSuffixIcon(),
-          removeIcon: finalRemoveIcon,
-          clearIcon: finalClearIcon,
-          menuItemSelectedIcon: finalMenuItemSelectedIcon,
-          ...rest,
-          ...modeConfig,
-          prefixCls,
-          optionLabelProp: optionLabelProp || 'children',
-          notFoundContent: this.getNotFoundContent(locale),
-          maxTagPlaceholder: getComponentFromProp(this, 'maxTagPlaceholder'),
-          placeholder: getComponentFromProp(this, 'placeholder'),
-          children: options
-            ? options.map(option => {
-                const { key, label = option.title, on, class: cls, style, ...restOption } = option;
-                return (
-                  <Option key={key} {...{ props: restOption, on, class: cls, style }}>
-                    {label}
-                  </Option>
-                );
-              })
-            : filterEmpty(this.$slots.default),
-          __propsSymbol__: Symbol(),
-          dropdownRender: getComponentFromProp(this, 'dropdownRender', {}, false),
-          getPopupContainer: getPopupContainer || getContextPopupContainer,
-        },
-        on: this.$listeners,
-        class: cls,
-        ref: 'vcSelect',
-      };
-      return <VcSelect {...selectProps} />;
-    },
   },
   render() {
-    return (
-      <LocaleReceiver
-        componentName="Select"
-        defaultLocale={defaultLocale.Select}
-        scopedSlots={{ default: this.renderSelect }}
-      />
+    const {
+      prefixCls: customizePrefixCls,
+      size,
+      mode,
+      options,
+      getPopupContainer,
+      ...restProps
+    } = getOptionProps(this);
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const renderEmpty = this.configProvider.renderEmpty;
+    const prefixCls = getPrefixCls('select', customizePrefixCls);
+
+    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    let removeIcon = getComponentFromProp(this, 'removeIcon');
+    removeIcon = Array.isArray(removeIcon) ? removeIcon[0] : removeIcon;
+    let clearIcon = getComponentFromProp(this, 'clearIcon');
+    clearIcon = Array.isArray(clearIcon) ? clearIcon[0] : clearIcon;
+    let menuItemSelectedIcon = getComponentFromProp(this, 'menuItemSelectedIcon');
+    menuItemSelectedIcon = Array.isArray(menuItemSelectedIcon)
+      ? menuItemSelectedIcon[0]
+      : menuItemSelectedIcon;
+    const rest = omit(restProps, [
+      'inputIcon',
+      'removeIcon',
+      'clearIcon',
+      'suffixIcon',
+      'menuItemSelectedIcon',
+    ]);
+
+    const cls = {
+      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-sm`]: size === 'small',
+    };
+
+    let { optionLabelProp } = this.$props;
+    if (this.isCombobox()) {
+      // children 带 dom 结构时，无法填入输入框
+      optionLabelProp = optionLabelProp || 'value';
+    }
+
+    const modeConfig = {
+      multiple: mode === 'multiple',
+      tags: mode === 'tags',
+      combobox: this.isCombobox(),
+    };
+    const finalRemoveIcon = (removeIcon &&
+      (isValidElement(removeIcon)
+        ? cloneElement(removeIcon, { class: `${prefixCls}-remove-icon` })
+        : removeIcon)) || <Icon type="close" class={`${prefixCls}-remove-icon`} />;
+
+    const finalClearIcon = (clearIcon &&
+      (isValidElement(clearIcon)
+        ? cloneElement(clearIcon, { class: `${prefixCls}-clear-icon` })
+        : clearIcon)) || (
+      <Icon type="close-circle" theme="filled" class={`${prefixCls}-clear-icon`} />
     );
+
+    const finalMenuItemSelectedIcon = (menuItemSelectedIcon &&
+      (isValidElement(menuItemSelectedIcon)
+        ? cloneElement(menuItemSelectedIcon, { class: `${prefixCls}-selected-icon` })
+        : menuItemSelectedIcon)) || <Icon type="check" class={`${prefixCls}-selected-icon`} />;
+
+    const selectProps = {
+      props: {
+        inputIcon: this.renderSuffixIcon(prefixCls),
+        removeIcon: finalRemoveIcon,
+        clearIcon: finalClearIcon,
+        menuItemSelectedIcon: finalMenuItemSelectedIcon,
+        ...rest,
+        ...modeConfig,
+        prefixCls,
+        optionLabelProp: optionLabelProp || 'children',
+        notFoundContent: this.getNotFoundContent(renderEmpty),
+        maxTagPlaceholder: getComponentFromProp(this, 'maxTagPlaceholder'),
+        placeholder: getComponentFromProp(this, 'placeholder'),
+        children: options
+          ? options.map(option => {
+              const { key, label = option.title, on, class: cls, style, ...restOption } = option;
+              return (
+                <Option key={key} {...{ props: restOption, on, class: cls, style }}>
+                  {label}
+                </Option>
+              );
+            })
+          : filterEmpty(this.$slots.default),
+        __propsSymbol__: Symbol(),
+        dropdownRender: getComponentFromProp(this, 'dropdownRender', {}, false),
+        getPopupContainer: getPopupContainer || getContextPopupContainer,
+      },
+      on: this.$listeners,
+      class: cls,
+      ref: 'vcSelect',
+    };
+    return <VcSelect {...selectProps} />;
   },
 };
 
 /* istanbul ignore next */
 Select.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Select.name, Select);
   Vue.component(Select.Option.name, Select.Option);
   Vue.component(Select.OptGroup.name, Select.OptGroup);

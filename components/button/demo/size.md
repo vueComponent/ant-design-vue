@@ -10,7 +10,7 @@ Ant Design supports a default button size as well as a large and small size.
 If a large or small button is desired, set the `size` property to either `large` or `small` respectively. Omit the `size` property for a button with the default size.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group :value="size" @change="handleSizeChange">
@@ -26,30 +26,27 @@ If a large or small button is desired, set the `size` property to either `large`
     <a-button type="link" :size="size">Link</a-button>
     <br />
     <a-button type="primary" shape="circle" icon="download" :size="size" />
+    <a-button type="primary" shape="round" icon="download" :size="size">Download</a-button>
     <a-button type="primary" icon="download" :size="size">Download</a-button>
     <br />
     <a-button-group :size="size">
-      <a-button type="primary">
-        <a-icon type="left" />Backward
-      </a-button>
-      <a-button type="primary">
-        Forward<a-icon type="right" />
-      </a-button>
+      <a-button type="primary"> <a-icon type="left" />Backward </a-button>
+      <a-button type="primary"> Forward<a-icon type="right" /> </a-button>
     </a-button-group>
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      size: 'large',
-    }
-  },
-  methods: {
-    handleSizeChange (e) {
-      this.size = e.target.value
+  export default {
+    data() {
+      return {
+        size: 'large',
+      };
     },
-  },
-}
+    methods: {
+      handleSizeChange(e) {
+        this.size = e.target.value;
+      },
+    },
+  };
 </script>
 ```

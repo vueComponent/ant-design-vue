@@ -8,8 +8,8 @@
 Basic usage example.
 </us>
 
-```html
+```tpl
 <template>
-  <a-input placeholder="Basic usage"/>
+  <a-input placeholder="Basic usage" />
 </template>
 ```

@@ -37,25 +37,25 @@ export default {
   zhType: '数据录入',
   title: 'Cascader',
   subtitle: '级联选择',
-  render () {
+  render() {
     return (
-      <div id='components-cascader-demo'>
-        <md cn={md.cn} us={md.us}/>
+      <div id="components-cascader-demo">
+        <md cn={md.cn} us={md.us} />
         <Basic />
-        <ChangeOnSelect/>
-        <CustomRender/>
-        <CustomTrigger/>
-        <DefaultValue/>
-        <DisabledOption/>
-        <Hover/>
-        <Lazy/>
-        <Search/>
-        <Size/>
+        <ChangeOnSelect />
+        <CustomRender />
+        <CustomTrigger />
+        <DefaultValue />
+        <DisabledOption />
+        <Hover />
+        <Lazy />
+        <Search />
+        <Size />
         <FieldsName />
         <Suffix />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

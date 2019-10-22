@@ -158,7 +158,7 @@ export default function createSlider(Component) {
         }
       },
       onBlur(e) {
-        this.onEnd(e);
+        this.onEnd();
         this.$emit('blur', e);
       },
       onMouseUp() {
@@ -191,7 +191,7 @@ export default function createSlider(Component) {
       onClickMarkLabel(e, value) {
         e.stopPropagation();
         this.onChange({ sValue: value });
-        this.onEnd();
+        this.onEnd(true);
       },
       getSliderStart() {
         const slider = this.$refs.sliderRef;

@@ -8,62 +8,49 @@
 Communicated with other components
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <p :style="{ marginBottom: '20px' }">
-      <a-checkbox
-        :checked="checked"
-        :disabled="disabled"
-        @change="onChange"
-      >
+      <a-checkbox :checked="checked" :disabled="disabled" @change="onChange">
         {{label}}
       </a-checkbox>
     </p>
     <p>
-      <a-button
-        type="primary"
-        size="small"
-        @click="toggleChecked"
-      >
+      <a-button type="primary" size="small" @click="toggleChecked">
         {{!checked ? 'Check' : 'Uncheck'}}
       </a-button>
-      <a-button
-        :style="{ marginLeft: '10px' }"
-        type="primary"
-        size="small"
-        @click="toggleDisable"
-      >
+      <a-button :style="{ marginLeft: '10px' }" type="primary" size="small" @click="toggleDisable">
         {{!disabled ? 'Disable' : 'Enable'}}
       </a-button>
     </p>
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      checked: true,
-      disabled: false,
-    }
-  },
-  computed: {
-    label () {
-      const { checked, disabled } = this
-      return `${checked ? 'Checked' : 'Unchecked'}-${disabled ? 'Disabled' : 'Enabled'}`
+  export default {
+    data() {
+      return {
+        checked: true,
+        disabled: false,
+      };
     },
-  },
-  methods: {
-    toggleChecked () {
-      this.checked = !this.checked
+    computed: {
+      label() {
+        const { checked, disabled } = this;
+        return `${checked ? 'Checked' : 'Unchecked'}-${disabled ? 'Disabled' : 'Enabled'}`;
+      },
     },
-    toggleDisable () {
-      this.disabled = !this.disabled
+    methods: {
+      toggleChecked() {
+        this.checked = !this.checked;
+      },
+      toggleDisable() {
+        this.disabled = !this.disabled;
+      },
+      onChange(e) {
+        this.checked = e.target.checked;
+      },
     },
-    onChange (e) {
-      this.checked = e.target.checked
-    },
-  },
-}
+  };
 </script>
 ```

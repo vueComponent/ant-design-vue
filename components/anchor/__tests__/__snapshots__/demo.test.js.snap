@@ -7,7 +7,7 @@ exports[`renders ./components/anchor/demo/basic.md correctly 1`] = `
       <div class="ant-anchor">
         <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
         <div class="ant-anchor-link"><a href="#components-anchor-demo-basic" title="Basic demo" class="ant-anchor-link-title">Basic demo</a></div>
-        <div class="ant-anchor-link"><a href="#components-anchor-demo-static-anchor" title="Fixed demo" class="ant-anchor-link-title">Fixed demo</a></div>
+        <div class="ant-anchor-link"><a href="#components-anchor-demo-static" title="Static demo" class="ant-anchor-link-title">Static demo</a></div>
         <div class="ant-anchor-link"><a href="#API" title="API" class="ant-anchor-link-title">API</a>
           <div class="ant-anchor-link"><a href="#Anchor-Props" title="Anchor Props" class="ant-anchor-link-title">Anchor Props</a></div>
           <div class="ant-anchor-link"><a href="#Link-Props" title="Link Props" class="ant-anchor-link-title">Link Props</a></div>
@@ -23,7 +23,7 @@ exports[`renders ./components/anchor/demo/onClick.md correctly 1`] = `
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
     <div class="ant-anchor-link"><a href="#components-anchor-demo-basic" title="Basic demo" class="ant-anchor-link-title">Basic demo</a></div>
-    <div class="ant-anchor-link"><a href="#components-anchor-demo-static-anchor" title="Fixed demo" class="ant-anchor-link-title">Fixed demo</a></div>
+    <div class="ant-anchor-link"><a href="#components-anchor-demo-static" title="Static demo" class="ant-anchor-link-title">Static demo</a></div>
     <div class="ant-anchor-link"><a href="#API" title="API" class="ant-anchor-link-title">API</a>
       <div class="ant-anchor-link"><a href="#Anchor-Props" title="Anchor Props" class="ant-anchor-link-title">Anchor Props</a></div>
       <div class="ant-anchor-link"><a href="#Link-Props" title="Link Props" class="ant-anchor-link-title">Link Props</a></div>
@@ -37,7 +37,7 @@ exports[`renders ./components/anchor/demo/static.md correctly 1`] = `
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
     <div class="ant-anchor-link"><a href="#components-anchor-demo-basic" title="Basic demo" class="ant-anchor-link-title">Basic demo</a></div>
-    <div class="ant-anchor-link"><a href="#components-anchor-demo-static-anchor" title="Fixed demo" class="ant-anchor-link-title">Fixed demo</a></div>
+    <div class="ant-anchor-link"><a href="#components-anchor-demo-static" title="Static demo" class="ant-anchor-link-title">Static demo</a></div>
     <div class="ant-anchor-link"><a href="#API" title="API" class="ant-anchor-link-title">API</a>
       <div class="ant-anchor-link"><a href="#Anchor-Props" title="Anchor Props" class="ant-anchor-link-title">Anchor Props</a></div>
       <div class="ant-anchor-link"><a href="#Link-Props" title="Link Props" class="ant-anchor-link-title">Link Props</a></div>

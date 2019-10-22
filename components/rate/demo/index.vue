@@ -35,28 +35,28 @@ export default {
   type: 'Data Entry',
   cols: 1,
   title: 'Rate',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <br/>
-        <Basic/>
-        <br/>
-        <Half/>
-        <br/>
-        <Text/>
-        <br/>
-        <Disabled/>
-        <br/>
-        <Clear/>
-        <br/>
-        <Character/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <br />
+        <Basic />
+        <br />
+        <Half />
+        <br />
+        <Text />
+        <br />
+        <Disabled />
+        <br />
+        <Clear />
+        <br />
+        <Character />
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

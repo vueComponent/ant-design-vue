@@ -2,17 +2,13 @@
   <div
     v-if="isEffective(effectiveTime)"
     id="geektime-ads"
-    :class="isMobile ? 'geektime-ads-mobile':''"
+    :class="isMobile ? 'geektime-ads-mobile' : ''"
   >
     <a
       href="https://time.geekbang.org/column/intro/154?utm_term=zeusGZFFE&utm_source=app&utm_medium=tangjinzhou"
       target="_blank"
     >
-      <img
-        height="100"
-        alt="重学前端"
-        src="https://qn.antdv.com/chongxueqianduan.jpg"
-      />
+      <img height="100" alt="重学前端" src="https://qn.antdv.com/chongxueqianduan.jpg" />
     </a>
   </div>
 </template>
@@ -62,4 +58,3 @@ export default {
   margin-bottom: 15px;
 }
 </style>
-

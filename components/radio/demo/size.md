@@ -8,7 +8,7 @@
 There are three sizes available: large, medium, and small. It can coordinate with input box.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>

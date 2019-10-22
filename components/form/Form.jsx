@@ -8,6 +8,8 @@ import createFormField from '../vc-form/src/createFormField';
 import FormItem from './FormItem';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import { initDefaultProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 export const FormCreateOption = {
   onFieldsChange: PropTypes.func,
@@ -15,6 +17,7 @@ export const FormCreateOption = {
   mapPropsToFields: PropTypes.func,
   validateMessages: PropTypes.any,
   withRef: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 // function create
@@ -62,6 +65,7 @@ export const FormProps = {
   hideRequiredMark: PropTypes.bool,
   autoFormCreate: PropTypes.func,
   options: PropTypes.object,
+  selfUpdate: PropTypes.bool,
 };
 
 export const ValidationRule = {
@@ -119,15 +123,11 @@ export const ValidationRule = {
 const Form = {
   name: 'AForm',
   props: initDefaultProps(FormProps, {
-    prefixCls: 'ant-form',
     layout: 'horizontal',
     hideRequiredMark: false,
   }),
-
   Item: FormItem,
-
   createFormField: createFormField,
-
   create: (options = {}) => {
     return createDOMForm({
       fieldNameProp: 'id',
@@ -137,7 +137,8 @@ const Form = {
     });
   },
   createForm(context, options = {}) {
-    return new Vue(Form.create({ ...options, templateContext: context })());
+    const V = Base.Vue || Vue;
+    return new V(Form.create({ ...options, templateContext: context })());
   },
   created() {
     this.formItemContexts = new Map();
@@ -165,6 +166,9 @@ const Form = {
             }
           : () => {},
     };
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   watch: {
     form() {
@@ -196,7 +200,7 @@ const Form = {
 
   render() {
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       hideRequiredMark,
       layout,
       onSubmit,
@@ -204,6 +208,8 @@ const Form = {
       autoFormCreate,
       options = {},
     } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('form', customizePrefixCls);
 
     const formClassName = classNames(prefixCls, {
       [`${prefixCls}-horizontal`]: layout === 'horizontal',

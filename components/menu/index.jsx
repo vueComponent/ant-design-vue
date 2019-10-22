@@ -7,6 +7,8 @@ import Item from './MenuItem';
 import { hasProp } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 export const MenuMode = PropTypes.oneOf([
   'vertical',
@@ -27,7 +29,7 @@ export const menuProps = {
   defaultOpenKeys: PropTypes.array,
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   openTransitionName: PropTypes.string,
-  prefixCls: PropTypes.string.def('ant-menu'),
+  prefixCls: PropTypes.string,
   multiple: PropTypes.bool,
   inlineIndent: PropTypes.number.def(24),
   inlineCollapsed: PropTypes.bool,
@@ -50,7 +52,7 @@ const Menu = {
   mixins: [BaseMixin],
   inject: {
     layoutSiderContext: { default: () => ({}) },
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   model: {
     prop: 'selectedKeys',
@@ -206,7 +208,9 @@ const Menu = {
     const { layoutSiderContext, $slots, $listeners } = this;
     const { collapsedWidth } = layoutSiderContext;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const { prefixCls, theme, getPopupContainer } = this.$props;
+    const { prefixCls: customizePrefixCls, theme, getPopupContainer } = this.$props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('menu', customizePrefixCls);
     const menuMode = this.getRealMenuMode();
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode);
 
@@ -221,6 +225,7 @@ const Menu = {
         getPopupContainer: getPopupContainer || getContextPopupContainer,
         openKeys: this.sOpenKeys,
         mode: menuMode,
+        prefixCls,
       },
       on: {
         ...$listeners,
@@ -266,6 +271,7 @@ const Menu = {
 
 /* istanbul ignore next */
 Menu.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Menu.name, Menu);
   Vue.component(Menu.Item.name, Menu.Item);
   Vue.component(Menu.SubMenu.name, Menu.SubMenu);

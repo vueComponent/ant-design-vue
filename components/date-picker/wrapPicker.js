@@ -4,6 +4,21 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
+
+const DEFAULT_FORMAT = {
+  date: 'YYYY-MM-DD',
+  dateTime: 'YYYY-MM-DD HH:mm:ss',
+  week: 'gggg-wo',
+  month: 'YYYY-MM',
+};
+
+const LOCALE_FORMAT_MAPPING = {
+  date: 'dateFormat',
+  dateTime: 'dateTimeFormat',
+  week: 'weekFormat',
+  month: 'monthFormat',
+};
 
 function getColumns({ showHour, showMinute, showSecond, use12Hours }) {
   let column = 0;
@@ -22,20 +37,20 @@ function getColumns({ showHour, showMinute, showSecond, use12Hours }) {
   return column;
 }
 
-export default function wrapPicker(Picker, props, defaultFormat) {
+export default function wrapPicker(Picker, props, pickerType) {
   return {
     name: Picker.name,
     props: initDefaultProps(props, {
-      format: defaultFormat || 'YYYY-MM-DD',
       transitionName: 'slide-up',
       popupStyle: {},
       locale: {},
-      prefixCls: 'ant-calendar',
-      inputPrefixCls: 'ant-input',
     }),
     model: {
       prop: 'value',
       event: 'change',
+    },
+    inject: {
+      configProvider: { default: () => ConfigConsumerProps },
     },
     provide() {
       return {
@@ -96,7 +111,24 @@ export default function wrapPicker(Picker, props, defaultFormat) {
 
       renderPicker(locale, localeCode) {
         const props = getOptionProps(this);
-        const { prefixCls, inputPrefixCls, size, showTime, disabled } = props;
+        const {
+          prefixCls: customizePrefixCls,
+          inputPrefixCls: customizeInputPrefixCls,
+          size,
+          showTime,
+          disabled,
+          format,
+        } = props;
+        const mergedPickerType = showTime ? `${pickerType}Time` : pickerType;
+        const mergedFormat =
+          format ||
+          locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
+          DEFAULT_FORMAT[mergedPickerType];
+
+        const getPrefixCls = this.configProvider.getPrefixCls;
+        const prefixCls = getPrefixCls('calendar', customizePrefixCls);
+        const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+
         const pickerClass = classNames(`${prefixCls}-picker`, {
           [`${prefixCls}-picker-${size}`]: !!size,
         });
@@ -128,6 +160,7 @@ export default function wrapPicker(Picker, props, defaultFormat) {
         const pickerProps = {
           props: {
             ...props,
+            format: mergedFormat,
             pickerClass,
             pickerInputClass,
             locale,

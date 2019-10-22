@@ -39,22 +39,22 @@ export default {
   zhType: '通用',
   title: 'Button',
   subtitle: '按钮',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <ButtonGroup />
         <Disabled />
         <Ghost />
-        <Icon/>
+        <Icon />
         <Loading />
         <Multiple />
         <Size />
         <Block />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
@@ -62,11 +62,11 @@ export default {
 };
 </script>
 <style>
-[id^="components-button-demo-"] .ant-btn {
+[id^='components-button-demo-'] .ant-btn {
   margin-right: 8px;
   margin-bottom: 12px;
 }
-[id^="components-button-demo-"] .ant-btn-group > .ant-btn {
+[id^='components-button-demo-'] .ant-btn-group > .ant-btn {
   margin-right: 0;
 }
 </style>

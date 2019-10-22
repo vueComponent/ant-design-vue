@@ -1,15 +1,14 @@
-
 ## API
 
 ### Tree props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| treeData | 节点的配置描述，具体项见下表, 1.1.4之前的版本使用`treeNodes` | array | -- |
+| treeData | 节点的配置描述，具体项见下表, 1.1.4 之前的版本使用`treeNodes` | array | -- |
 | autoExpandParent | 是否自动展开父节点 | boolean | true |
 | checkable | 节点前添加 Checkbox 复选框 | boolean | false |
-| checkedKeys(v-model) | （受控）选中复选框的树节点（注意：父子节点有关联，如果传入父节点key，则子节点自动选中；相应当子节点key都传入，父节点也自动选中。当设置`checkable`和`checkStrictly`，它是一个有`checked`和`halfChecked`属性的对象，并且父子节点的选中与否不再关联 | string\[] \| number\[] \| {checked: string\[] \| number\[], halfChecked: string\[] \| number\[]} | \[] |
-| checkStrictly | checkable状态下节点选择完全受控（父子节点选中状态不再关联） | boolean | false |
+| checkedKeys(v-model) | （受控）选中复选框的树节点（注意：父子节点有关联，如果传入父节点 key，则子节点自动选中；相应当子节点 key 都传入，父节点也自动选中。当设置`checkable`和`checkStrictly`，它是一个有`checked`和`halfChecked`属性的对象，并且父子节点的选中与否不再关联 | string\[] \| number\[] \| {checked: string\[] \| number\[], halfChecked: string\[] \| number\[]} | \[] |
+| checkStrictly | checkable 状态下节点选择完全受控（父子节点选中状态不再关联） | boolean | false |
 | defaultCheckedKeys | 默认选中复选框的树节点 | string\[] \| number\[] | \[] |
 | defaultExpandAll | 默认展开所有树节点 | boolean | false |
 | defaultExpandedKeys | 默认展开指定的树节点 | string\[] \| number\[] | \[] |
@@ -18,14 +17,14 @@
 | disabled | 将树禁用 | bool | false |
 | draggable | 设置节点可拖拽 | boolean | false |
 | expandedKeys(.sync) | （受控）展开指定的树节点 | string\[] \| number\[] | \[] |
-| filterTreeNode | 按需筛选树节点（高亮），返回true | function(node) | - |
+| filterTreeNode | 按需筛选树节点（高亮），返回 true | function(node) | - |
 | loadData | 异步加载数据 | function(node) | - |
 | loadedKeys | （受控）已经加载的节点，需要配合 `loadData` 使用 | string\[] \| number\[] | \[] |
 | multiple | 支持点选多个节点（节点本身） | boolean | false |
 | selectedKeys(.sync) | （受控）设置选中的树节点 | string\[] \| number\[] | - |
 | showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |
+| switcherIcon | 自定义树节点的展开/折叠图标 | slot | - |
 | showLine | 是否展示连接线 | boolean | false |
-
 
 ### 事件
 
@@ -58,15 +57,18 @@
 | key | 被树的 (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys 属性所用。注意：整个树范围内的所有节点的 key 值不能重复！ | string \| number | 内部计算出的节点位置 |
 | selectable | 设置节点是否可被选中 | boolean | true |
 | title | 标题 | string\|slot\|slot-scope | '---' |
-| slots | 使用treeNodes时，可以通过该属性配置支持slot的属性，如 `slots: { title: 'XXX'}` | object | - |
-| scopedSlots | 使用columns时，可以通过该属性配置支持slot-scope的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |
-| on | 事件对象，仅在treeNodes使用方式中生效，如`{click: () => {}}` | object | '---' |
+| slots | 使用 treeNodes 时，可以通过该属性配置支持 slot 的属性，如 `slots: { title: 'XXX'}` | object | - |
+| scopedSlots | 使用 columns 时，可以通过该属性配置支持 slot-scope 的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |
+| on | 事件对象，仅在 treeNodes 使用方式中生效，如`{click: () => {}}` | object | '---' |
 
 ### DirectoryTree props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| expandAction | 目录展开逻辑，可选 `false` `'click'` `'doubleclick'` | string | click |
+| 参数         | 说明                                                 | 类型   | 默认值 |
+| ------------ | ---------------------------------------------------- | ------ | ------ |
+| expandAction | 目录展开逻辑，可选 `false` `'click'` `'doubleclick'` | string | click  |
 
+## FAQ
 
+### 在 showLine 时，如何隐藏子节点图标？
 
+文件图标通过 switcherIcon 来实现，如果不需要你可以覆盖对应的样式

@@ -1,4 +1,3 @@
-
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 |
@@ -7,6 +6,7 @@
 | style | 设置图标的样式，例如 `fontSize` 和 `color` | CSSProperties | - |
 | theme | 图标主题风格。可选实心、描线、双色等主题风格，适用于官方图标 | 'filled' \| 'outlined' \| 'twoTone' | 'outlined' |
 | spin | 是否有旋转动画 | boolean | false |
+| rotate | 图标旋转角度（1.4.0 后新增，IE9 无效） | number | - |
 | component | 控制如何渲染图标，通常是一个渲染根标签为 `<svg>` 的 `Vue` 组件，**会使 `type` 属性失效** | ComponentType<CustomIconComponentProps\> | - |
 | twoToneColor | 仅适用双色图标。设置双色图标的主要颜色 | string (十六进制颜色) | - |
 
@@ -40,7 +40,7 @@
 对于双色图标，可以通过使用 `Icon.getTwoToneColor()` 和 `Icon.setTwoToneColor(colorString)` 来全局设置图标主色。
 
 ```jsx
-import { Icon } from 'ant-design-vue'
+import { Icon } from 'ant-design-vue';
 
 Icon.setTwoToneColor('#eb2f96');
 Icon.getTwoToneColor(); // #eb2f96
@@ -59,8 +59,8 @@ new Vue({
   template: '<my-icon type="icon-example" />',
   components: {
     'my-icon': MyIcon,
-  }
-})
+  },
+});
 ```
 
 其本质上是创建了一个使用 `<use>` 标签来渲染图标的组件。
@@ -83,14 +83,12 @@ new Vue({
 ```js
 // vue.config.js
 module.exports = {
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     const svgRule = config.module.rule('svg');
 
     svgRule.uses.clear();
 
-    svgRule
-      .use('vue-svg-loader')
-      .loader('vue-svg-loader');
+    svgRule.use('vue-svg-loader').loader('vue-svg-loader');
   },
 };
 ```
@@ -103,18 +101,18 @@ new Vue({
   template: '<a-icon :component="MessageSvg" />',
   data() {
     return {
-      MessageSvg
-    }
-  }
-})
+      MessageSvg,
+    };
+  },
+});
 ```
 
 `Icon` 中的 `component` 组件的接受的属性如下：
 
-| 字段 | 说明 | 类型 | 只读值 |
-| --- | --- | --- | --- |
-| width | `svg` 元素宽度 | string \| number | '1em' |
-| height | `svg` 元素高度 | string \| number | '1em' |
-| fill | `svg` 元素填充的颜色 | string | 'currentColor' |
-| class | 计算后的 `svg` 类名 | string | - |
-| style | 计算后的 `svg` 元素样式 | CSSProperties | - |
+| 字段   | 说明                    | 类型             | 只读值         |
+| ------ | ----------------------- | ---------------- | -------------- |
+| width  | `svg` 元素宽度          | string \| number | '1em'          |
+| height | `svg` 元素高度          | string \| number | '1em'          |
+| fill   | `svg` 元素填充的颜色    | string           | 'currentColor' |
+| class  | 计算后的 `svg` 类名     | string           | -              |
+| style  | 计算后的 `svg` 元素样式 | CSSProperties    | -              |

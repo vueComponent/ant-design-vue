@@ -8,11 +8,10 @@
   It can be placed inside the ordinary card to display the information of the multilevel structure
 </us>
 
-```html
+```tpl
 <template>
   <a-card title="Card title">
-    <p style="fontSize: 14px;color: rgba(0, 0, 0, 0.85); marginBottom: 16px;fontWeight: 500"
-    >
+    <p style="fontSize: 14px;color: rgba(0, 0, 0, 0.85); marginBottom: 16px;fontWeight: 500">
       Group title
     </p>
     <a-card title="Inner card title">
@@ -25,5 +24,4 @@
     </a-card>
   </a-card>
 </template>
-
 ```

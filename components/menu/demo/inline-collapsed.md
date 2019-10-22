@@ -8,7 +8,7 @@
 Inline menu could be collapsed.
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 256px">
     <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
@@ -54,17 +54,17 @@ Inline menu could be collapsed.
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      collapsed: false,
-    }
-  },
-  methods: {
-    toggleCollapsed () {
-      this.collapsed = !this.collapsed
+  export default {
+    data() {
+      return {
+        collapsed: false,
+      };
     },
-  },
-}
+    methods: {
+      toggleCollapsed() {
+        this.collapsed = !this.collapsed;
+      },
+    },
+  };
 </script>
 ```

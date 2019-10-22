@@ -8,7 +8,7 @@
 Appropriate for a narrow area.
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 170px">
     <a-progress :percent="30" size="small" />
@@ -18,5 +18,3 @@ Appropriate for a narrow area.
   </div>
 </template>
 ```
-
-

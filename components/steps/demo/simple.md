@@ -8,7 +8,7 @@
 The most basic step bar.
 </us>
 
-```html
+```tpl
 <template>
   <a-steps :current="1">
     <a-step>

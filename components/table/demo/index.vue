@@ -58,10 +58,10 @@ export default {
   type: 'Data Display',
   title: 'Table',
   subtitle: '表格',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Ajax />
         <Basic />
         <Bordered />
@@ -84,10 +84,10 @@ export default {
         <Size />
         <Template />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

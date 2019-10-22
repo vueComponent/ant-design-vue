@@ -8,7 +8,7 @@
 The following example shows how to create a popover which can be hovered and clicked.
 </us>
 
-```html
+```tpl
 <template>
   <a-popover
     style="width: 500px"
@@ -33,27 +33,27 @@ The following example shows how to create a popover which can be hovered and cli
   </a-popover>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      clicked: false,
-      hovered: false,
-    }
-  },
-  methods: {
-    hide () {
-      this.clicked = false
-      this.hovered = false
+  export default {
+    data() {
+      return {
+        clicked: false,
+        hovered: false,
+      };
     },
-    handleHoverChange (visible) {
-      this.clicked = false
-      this.hovered = visible
+    methods: {
+      hide() {
+        this.clicked = false;
+        this.hovered = false;
+      },
+      handleHoverChange(visible) {
+        this.clicked = false;
+        this.hovered = visible;
+      },
+      handleClickChange(visible) {
+        this.clicked = visible;
+        this.hovered = false;
+      },
     },
-    handleClickChange (visible) {
-      this.clicked = visible
-      this.hovered = false
-    },
-  },
-}
+  };
 </script>
 ```

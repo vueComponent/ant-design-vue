@@ -36,27 +36,27 @@ export default {
   subtitle: '选择器',
   type: 'Data Entry',
   title: 'Select',
-  render () {
+  render() {
     return (
-      <div id='components-select-demo'>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <Size/>
-        <Tags/>
-        <AutomaticTokenization/>
-        <LabelInValue/>
-        <Multiple/>
-        <Coordinate/>
-        <Optgroup/>
-        <SearchBox/>
-        <Search/>
-        <SelectUsers/>
-        <Suffix/>
+      <div id="components-select-demo">
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <Size />
+        <Tags />
+        <AutomaticTokenization />
+        <LabelInValue />
+        <Multiple />
+        <Coordinate />
+        <Optgroup />
+        <SearchBox />
+        <Search />
+        <SelectUsers />
+        <Suffix />
         <HideSelected />
         <CustomDropdownMenu />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

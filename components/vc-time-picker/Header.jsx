@@ -28,7 +28,6 @@ const Header = {
     currentSelectPanel: PropTypes.string,
     focusOnOpen: PropTypes.bool,
     // onKeyDown: PropTypes.func,
-    showStr: PropTypes.bool.def(true),
     clearIcon: PropTypes.any,
   },
   data() {
@@ -70,7 +69,6 @@ const Header = {
         return;
       }
 
-      this.showStr = true;
       this.setState({
         str,
       });
@@ -164,42 +162,19 @@ const Header = {
       this.__emit('keydown', e);
     },
 
-    onClear() {
-      this.__emit('clear');
-      this.setState({ str: '' });
-    },
-
-    getClearButton() {
-      const { prefixCls, allowEmpty, clearText } = this;
-      const clearIcon = getComponentFromProp(this, 'clearIcon');
-      if (!allowEmpty) {
-        return null;
-      }
-      return (
-        <a
-          role="button"
-          class={`${prefixCls}-clear-btn`}
-          title={clearText}
-          onMousedown={this.onClear}
-        >
-          {clearIcon || <i class={`${prefixCls}-clear-btn-icon`} />}
-        </a>
-      );
-    },
-
     getProtoValue() {
       return this.value || this.defaultOpenValue;
     },
 
     getInput() {
-      const { prefixCls, placeholder, inputReadOnly, invalid, str, showStr } = this;
+      const { prefixCls, placeholder, inputReadOnly, invalid, str } = this;
       const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
       return (
         <input
           class={`${prefixCls}-input ${invalidClass}`}
           ref="input"
           onKeydown={this.onKeyDown}
-          value={showStr ? str : ''}
+          value={str}
           placeholder={placeholder}
           onInput={this.onInputChange}
           readOnly={!!inputReadOnly}
@@ -210,12 +185,7 @@ const Header = {
 
   render() {
     const { prefixCls } = this;
-    return (
-      <div class={`${prefixCls}-input-wrap`}>
-        {this.getInput()}
-        {this.getClearButton()}
-      </div>
-    );
+    return <div class={`${prefixCls}-input-wrap`}>{this.getInput()}</div>;
   },
 };
 

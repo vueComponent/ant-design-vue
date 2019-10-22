@@ -20,10 +20,10 @@
 <script>
 import marked from 'marked';
 const hljs = require('highlight.js');
-const replaceDelimiters = function (str) {
+const replaceDelimiters = function(str) {
   return str.replace(/({{|}})/g, '<span>$1</span>');
 };
-const renderHighlight = function (str, lang) {
+const renderHighlight = function(str, lang) {
   if (!(lang && hljs.getLanguage(lang))) {
     return '';
   }
@@ -33,16 +33,10 @@ const renderHighlight = function (str, lang) {
   } catch (err) {}
 };
 const renderer = new marked.Renderer();
-renderer.heading = function (text, level) {
-  return '<h' +
-    level +
-    ' id="' +
-    text.replace(/[^\w]+/g, '-') +
-    '">' +
-    text +
-    '</h' +
-    level +
-    '>\n';
+renderer.heading = function(text, level) {
+  return (
+    '<h' + level + ' id="' + text.replace(/[^\w]+/g, '-') + '">' + text + '</h' + level + '>\n'
+  );
 };
 marked.setOptions({
   renderer,
@@ -61,12 +55,15 @@ const usReg = /<us>([\S\s\t]*?)<\/us>/;
 export default {
   name: 'DemoContainer',
   props: ['code'],
-  data () {
+  data() {
     const cn = this.code.match(cnReg) || [];
     const us = this.code.match(usReg) || [];
     const cnHtml = marked(cn[1].trim());
     const usHtml = marked(us[1].trim());
-    const sourceCode = this.code.replace(cn[0], '').replace(us[0], '').trim();
+    const sourceCode = this.code
+      .replace(cn[0], '')
+      .replace(us[0], '')
+      .trim();
     const codeHtml = marked('````html\n' + sourceCode + '````');
     return {
       codeHtml,

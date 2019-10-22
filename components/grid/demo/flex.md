@@ -9,7 +9,7 @@ Flex 布局基础。
 Use `row-flex` define `flex` layout, its child elements depending on the value of the `start`,` center`, `end`,` space-between`, `space-around`, which are defined in its parent node layout mode.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <p>sub-element align left</p>
@@ -54,5 +54,3 @@ Use `row-flex` define `flex` layout, its child elements depending on the value o
   </div>
 </template>
 ```
-
-

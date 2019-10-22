@@ -85,6 +85,7 @@ export const UploadProps = {
   openFileDialogOnClick: PropsTypes.bool,
   locale: UploadLocale,
   height: PropsTypes.number,
+  id: PropsTypes.string,
 };
 
 export const UploadState = {

@@ -8,7 +8,7 @@
 You can customize the style of the button, just note the size limit: no more than `40px * 40px`.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-back-top-demo-custom">
     <a-back-top>

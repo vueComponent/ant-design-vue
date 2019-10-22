@@ -6,6 +6,8 @@ import SearchInput from './search-input';
 import Size from './size';
 import Group from './group';
 import TextArea from './textarea';
+import AllowClear from './allowClear';
+import PasswordInput from './password-input';
 import Addon from './addon';
 import Tooltip from './tooltip';
 import CN from '../index.zh-CN.md';
@@ -22,7 +24,7 @@ const md = {
 Keyboard and mouse can be used for providing or changing data.
 ## When To Use
 - A user input in a form field is needed.
-- A search input is required. 
+- A search input is required.
 ## Examples `,
 };
 export default {
@@ -30,10 +32,10 @@ export default {
   subtitle: '输入框',
   type: 'Data Entry',
   title: 'Input',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <AutosizeTextarea />
         <Presuffix />
@@ -43,16 +45,15 @@ export default {
         <TextArea />
         <Addon />
         <Tooltip />
+        <AllowClear />
+        <PasswordInput />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
   },
 };
 </script>
-<style>
-
-</style>
-
+<style></style>

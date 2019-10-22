@@ -8,7 +8,7 @@
 The simplest use.
 </us>
 
-```html
+```tpl
 <template>
   <a-radio>Radio</a-radio>
 </template>

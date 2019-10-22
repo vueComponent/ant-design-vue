@@ -3,6 +3,8 @@ import { initDefaultProps, getOptionProps } from '../_util/props-util';
 import classNames from 'classnames';
 import Icon from '../icon';
 import VcInputNumber from '../vc-input-number/src';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 export const InputNumberProps = {
   prefixCls: PropTypes.string,
@@ -31,9 +33,11 @@ const InputNumber = {
     event: 'change',
   },
   props: initDefaultProps(InputNumberProps, {
-    prefixCls: 'ant-input-number',
     step: 1,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   methods: {
     focus() {
       this.$refs.inputNumberRef.focus();
@@ -44,16 +48,20 @@ const InputNumber = {
   },
 
   render() {
-    const { size, ...others } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, size, ...others } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('input-number', customizePrefixCls);
+
     const inputNumberClass = classNames({
-      [`${this.prefixCls}-lg`]: size === 'large',
-      [`${this.prefixCls}-sm`]: size === 'small',
+      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-sm`]: size === 'small',
     });
-    const upIcon = <Icon type="up" class={`${this.prefixCls}-handler-up-inner`} />;
-    const downIcon = <Icon type="down" class={`${this.prefixCls}-handler-down-inner`} />;
+    const upIcon = <Icon type="up" class={`${prefixCls}-handler-up-inner`} />;
+    const downIcon = <Icon type="down" class={`${prefixCls}-handler-down-inner`} />;
 
     const vcInputNumberprops = {
       props: {
+        prefixCls,
         upHandler: upIcon,
         downHandler: downIcon,
         ...others,
@@ -68,6 +76,7 @@ const InputNumber = {
 
 /* istanbul ignore next */
 InputNumber.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(InputNumber.name, InputNumber);
 };
 

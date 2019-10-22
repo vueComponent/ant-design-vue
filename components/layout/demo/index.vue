@@ -104,7 +104,7 @@ The first level navigation is inclined left near a logo, and the secondary menu 
 
 - **Enlarge the size of the font**
 
-  \`12px\`、\`14px\` is a standard font size of navigations，\`14px\` is used for the first and the second level of the navigation. You can choose an appropriate font size regarding the level of your navigation.
+  \`12px\`, \`14px\` is a standard font size of navigations, \`14px\` is used for the first and the second level of the navigation. You can choose an appropriate font size regarding the level of your navigation.
 
 ## Component Overview
 
@@ -128,19 +128,21 @@ export default {
   props: {
     iframeName: String,
   },
-  provide () {
+  provide() {
     return {
-      iframeDemo: !this.iframeName ? {
-        'fixed-sider': '/iframe/layout/#fixed-sider',
-        'fixed-header': '/iframe/layout/#fixed-header',
-        'sider': '/iframe/layout/#sider',
-      } : {},
+      iframeDemo: !this.iframeName
+        ? {
+            'fixed-sider': '/iframe/layout/#fixed-sider',
+            'fixed-header': '/iframe/layout/#fixed-header',
+            sider: '/iframe/layout/#sider',
+          }
+        : {},
     };
   },
-  render () {
+  render() {
     const iframeName = this.iframeName;
     if (iframeName === 'fixed-sider') {
-      return <FixedSider/>;
+      return <FixedSider />;
     } else if (iframeName === 'fixed-header') {
       return <Fixed />;
     } else if (iframeName === 'sider') {
@@ -148,21 +150,21 @@ export default {
     }
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <CustomTrigger />
-        <TopSide2/>
-        <TopSide/>
-        <Top/>
+        <TopSide2 />
+        <TopSide />
+        <Top />
         <Responsive />
         <FixedSider />
         <Fixed />
-        <Side/>
+        <Side />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

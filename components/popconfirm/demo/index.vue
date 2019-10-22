@@ -35,20 +35,20 @@ export default {
   subtitle: '气泡确认框',
   type: 'Feedback',
   title: 'Popconfirm',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Local />
         <Placement />
         <DynamicTrigger />
         <Icon />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

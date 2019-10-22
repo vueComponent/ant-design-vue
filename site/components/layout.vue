@@ -75,17 +75,17 @@ export default {
     }
   },
   mounted() {
-    if(isGitee) {
+    if (isGitee) {
       this.$info({
         title: '提示',
         content: '访问国内镜像站点的用户请访问 antdv.com 站点',
-        okText:'立即跳转',
+        okText: '立即跳转',
         onOk() {
           location.href = 'https://www.antdv.com';
         },
       });
     }
-    
+
     this.$nextTick(() => {
       this.addSubMenu();
       const nprogressHiddenStyle = document.getElementById('nprogress-style');

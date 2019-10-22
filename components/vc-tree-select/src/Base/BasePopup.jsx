@@ -21,7 +21,7 @@ function getDerivedStateFromProps(nextProps, prevState) {
     keyEntities,
     treeExpandedKeys,
     filteredTreeNodes,
-    searchValue,
+    upperSearchValue,
   } = nextProps;
 
   const newState = {
@@ -47,9 +47,9 @@ function getDerivedStateFromProps(nextProps, prevState) {
   }
 
   // Cache `expandedKeyList` when filter set
-  if (searchValue && !prevProps.searchValue) {
+  if (upperSearchValue && !prevProps.upperSearchValue) {
     newState._cachedExpandedKeyList = expandedKeyList;
-  } else if (!searchValue && prevProps.searchValue && !treeExpandedKeys) {
+  } else if (!upperSearchValue && prevProps.upperSearchValue && !treeExpandedKeys) {
     newState._expandedKeyList = cachedExpandedKeyList || [];
     newState._cachedExpandedKeyList = [];
   }
@@ -90,7 +90,7 @@ const BasePopup = {
     searchValue: PropTypes.string,
     treeNodes: PropTypes.any,
     filteredTreeNodes: PropTypes.any,
-    notFoundContent: PropTypes.string,
+    notFoundContent: PropTypes.any,
 
     ariaId: PropTypes.string,
     switcherIcon: PropTypes.any,
@@ -154,8 +154,8 @@ const BasePopup = {
      * Not pass `loadData` when searching. To avoid loop ajax call makes browser crash.
      */
     getLoadData() {
-      const { loadData, searchValue } = this.$props;
-      if (searchValue) return null;
+      const { loadData, upperSearchValue } = this.$props;
+      if (upperSearchValue) return null;
       return loadData;
     },
 

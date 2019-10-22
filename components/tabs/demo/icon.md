@@ -8,7 +8,7 @@
 The Tab with Icon.
 </us>
 
-```html
+```tpl
 <template>
   <a-tabs defaultActiveKey="2">
     <a-tab-pane key="1">

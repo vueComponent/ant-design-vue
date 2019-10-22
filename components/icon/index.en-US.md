@@ -4,8 +4,9 @@
 | --- | --- | --- | --- |
 | type | Type of the ant design icon | string | - |
 | style | Style properties of icon, like `fontSize` and `color` | CSSProperties | - |
-| theme | Theme of the ant design icon  | 'filled' \| 'outlined' \| 'twoTone' | 'outlined' |
+| theme | Theme of the ant design icon | 'filled' \| 'outlined' \| 'twoTone' | 'outlined' |
 | spin | Rotate icon with animation | boolean | false |
+| rotate | Rotate degrees (added in 1.4.0, not working in IE9) | number | - |
 | component | The component used for the root node. This will override the **`type`** property. | ComponentType<CustomIconComponentProps\> | - |
 | twoToneColor | Only support the two-tone icon. Specific the primary color. | string (hex color) | - |
 
@@ -39,7 +40,7 @@ All the icons will render to `<svg>`. You can still set `style` and `class` for 
 When using the two-tone icons, you can use the static methods `Icon.getTwoToneColor()` and `Icon.setTwoToneColor(colorString)` to spicify the primary color.
 
 ```jsx
-import { Icon } from 'ant-design-vue'
+import { Icon } from 'ant-design-vue';
 
 Icon.setTwoToneColor('#eb2f96');
 Icon.getTwoToneColor(); // #eb2f96
@@ -61,8 +62,8 @@ new Vue({
   template: '<my-icon type="icon-example" />',
   components: {
     'my-icon': MyIcon,
-  }
-})
+  },
+});
 ```
 
 It create a component that uses SVG sprites in essence.
@@ -85,14 +86,12 @@ You can import SVG icon as an vue component by using `vue cli 3` and [`vue-svg-l
 ```js
 // vue.config.js
 module.exports = {
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     const svgRule = config.module.rule('svg');
 
     svgRule.uses.clear();
 
-    svgRule
-      .use('vue-svg-loader')
-      .loader('vue-svg-loader');
+    svgRule.use('vue-svg-loader').loader('vue-svg-loader');
   },
 };
 ```
@@ -106,16 +105,16 @@ new Vue({
   template: '<a-icon :component="MessageSvg" />',
   components: {
     'my-icon': MyIcon,
-  }
-})
+  },
+});
 ```
 
 The following properties are available for the component:
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| width | The width of the `svg` element | string \| number | '1em' |
-| height | The height of the `svg` element | string \| number | '1em' |
-| fill | Define the color used to paint the `svg` element | string | 'currentColor' |
-| class | The computed class name of the `svg` element | string | - |
-| style | The computed style of the `svg` element | CSSProperties | - |
+| Property | Description                                      | Type             | Default        |
+| -------- | ------------------------------------------------ | ---------------- | -------------- |
+| width    | The width of the `svg` element                   | string \| number | '1em'          |
+| height   | The height of the `svg` element                  | string \| number | '1em'          |
+| fill     | Define the color used to paint the `svg` element | string           | 'currentColor' |
+| class    | The computed class name of the `svg` element     | string           | -              |
+| style    | The computed style of the `svg` element          | CSSProperties    | -              |

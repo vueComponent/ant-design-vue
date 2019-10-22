@@ -19,6 +19,14 @@ describe('Input', () => {
     const wrapper = mount(Input);
     wrapper.vm.select();
   });
+
+  it('should not support allowClear when it is disabled', () => {
+    const wrapper = mount(Input, {
+      propsData: { allowClear: true, defaultValue: '111', disabled: true },
+      sync: false,
+    });
+    expect(wrapper.findAll('.ant-input-clear-icon').length).toBe(0);
+  });
 });
 
 focusTest(TextArea);

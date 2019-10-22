@@ -1,10 +1,9 @@
-
 ## API
 
 ### Anchor Props
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | affix | Fixed mode of Anchor | boolean | true |
 | bounds | Bounding distance of anchor area | number | 5(px) |
 | getContainer | Scrolling container | () => HTMLElement | () => window |
@@ -15,13 +14,14 @@
 | wrapperStyle | The style of the container | object | - |
 
 ### Events
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| click | set the handler to handle `click` event | Function(e: Event, link: Object) |
+
+| Events Name | Description                             | Arguments                        |
+| ----------- | --------------------------------------- | -------------------------------- |
+| click       | set the handler to handle `click` event | Function(e: Event, link: Object) |
 
 ### Link Props
 
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| href | target of hyperlink | string |  |
-| title | content of  hyperlink | string\|slot |  |
+| Property | Description          | Type         | Default |
+| -------- | -------------------- | ------------ | ------- |
+| href     | target of hyperlink  | string       |         |
+| title    | content of hyperlink | string\|slot |         |

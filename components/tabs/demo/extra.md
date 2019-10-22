@@ -8,7 +8,7 @@
 You can add extra actions to the right of Tabs.
 </us>
 
-```html
+```tpl
 <template>
   <a-tabs>
     <a-tab-pane tab="Tab 1" key="1">Content of tab 1</a-tab-pane>

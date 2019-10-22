@@ -8,16 +8,16 @@
 Replace the default star to other character like alphabet, digit, iconfont or even Chinese word.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-rate allowHalf>
-      <a-icon slot="character" type="heart"/>
+      <a-icon slot="character" type="heart" />
     </a-rate>
     <br />
-    <a-rate character="A" allowHalf style="fontSize: 36px"/>
+    <a-rate character="A" allowHalf style="fontSize: 36px" />
     <br />
-    <a-rate character="好" allowHalf/>
+    <a-rate character="好" allowHalf />
     <br />
   </div>
 </template>

@@ -30,11 +30,15 @@ export default {
       }
       return format;
     },
-
     focus() {
-      if (this.$refs.rootInstance) {
+      if (this.focusElement) {
+        this.focusElement.focus();
+      } else if (this.$refs.rootInstance) {
         this.$refs.rootInstance.focus();
       }
+    },
+    saveFocusElement(focusElement) {
+      this.focusElement = focusElement;
     },
   },
 };

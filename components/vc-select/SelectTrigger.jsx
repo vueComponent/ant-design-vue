@@ -42,6 +42,7 @@ export default {
     multiple: PropTypes.bool,
     inputValue: PropTypes.string,
     filterOption: PropTypes.any,
+    empty: PropTypes.bool,
     options: PropTypes.any,
     prefixCls: PropTypes.string,
     popupClassName: PropTypes.string,
@@ -170,12 +171,14 @@ export default {
       options,
       getPopupContainer,
       showAction,
+      empty,
     } = $props;
     const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = $listeners;
     const dropdownPrefixCls = this.getDropdownPrefixCls();
     const popupClassName = {
       [dropdownClassName]: !!dropdownClassName,
       [`${dropdownPrefixCls}--${multiple ? 'multiple' : 'single'}`]: 1,
+      [`${dropdownPrefixCls}--empty`]: empty,
     };
     const popupElement = this.getDropdownElement({
       props: {

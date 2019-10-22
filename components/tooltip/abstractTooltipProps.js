@@ -22,7 +22,7 @@ export default () => ({
   // onVisibleChange: PropTypes.func,
   overlayStyle: PropTypes.object.def({}),
   overlayClassName: PropTypes.string,
-  prefixCls: PropTypes.string.def('ant-tooltip'),
+  prefixCls: PropTypes.string,
   mouseEnterDelay: PropTypes.number.def(0.1),
   mouseLeaveDelay: PropTypes.number.def(0.1),
   getPopupContainer: PropTypes.func,

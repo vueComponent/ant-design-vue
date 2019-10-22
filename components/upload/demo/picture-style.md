@@ -8,7 +8,7 @@
 If uploaded file is a picture, the thumbnail can be shown. `IE8/9` do not support local thumbnail show. Please use `thumbUrl` instead.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-upload
@@ -16,9 +16,7 @@ If uploaded file is a picture, the thumbnail can be shown. `IE8/9` do not suppor
       listType="picture"
       :defaultFileList="fileList"
     >
-      <a-button>
-        <a-icon type="upload" /> upload
-      </a-button>
+      <a-button> <a-icon type="upload" /> upload </a-button>
     </a-upload>
     <br />
     <br />
@@ -28,32 +26,35 @@ If uploaded file is a picture, the thumbnail can be shown. `IE8/9` do not suppor
       :defaultFileList="fileList"
       class="upload-list-inline"
     >
-      <a-button>
-        <a-icon type="upload" /> upload
-      </a-button>
+      <a-button> <a-icon type="upload" /> upload </a-button>
     </a-upload>
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      fileList: [{
-        uid: '-1',
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: '-2',
-        name: 'yyy.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }],
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        fileList: [
+          {
+            uid: '-1',
+            name: 'xxx.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            thumbUrl:
+              'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+          {
+            uid: '-2',
+            name: 'yyy.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            thumbUrl:
+              'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+        ],
+      };
+    },
+  };
 </script>
 <style scoped>
   /* tile uploaded pictures */
@@ -70,6 +71,3 @@ export default {
   }
 </style>
 ```
-
-
-

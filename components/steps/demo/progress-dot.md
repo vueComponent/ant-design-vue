@@ -8,7 +8,7 @@
 Steps with progress dot style.
 </us>
 
-```html
+```tpl
 <template>
   <a-steps progressDot :current="1">
     <a-step title="Finished" description="This is a description." />

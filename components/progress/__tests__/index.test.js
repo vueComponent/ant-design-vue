@@ -19,6 +19,11 @@ describe('Progress', () => {
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(1);
     });
+
+    wrapper.setProps({ percent: 100, successPercent: 0 });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-progress-status-success')).toHaveLength(0);
+    });
   });
 
   it('render out-of-range progress', async () => {

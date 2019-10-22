@@ -1,16 +1,15 @@
-
 ## API
 
-````html
+```html
 <a-select>
   <a-select-option value="lucy">lucy</a-select-option>
 </a-select>
-````
+```
 
 ### Select props
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | allowClear | Show clear button. | boolean | false |
 | autoClearSearchValue | Whether the current search will be cleared on selecting an item. Only applies when `mode` is set to `multiple` or `tags`. | boolean | true |
 | autoFocus | Get focus by default | boolean | false |
@@ -23,17 +22,18 @@
 | dropdownStyle | style of dropdown menu | object | - |
 | filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true |
 | firstActiveValue | Value of action option by default | string\|string\[] | - |
-| getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative.  | function(triggerNode) | () => document.body |
+| getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | function(triggerNode) | () => document.body |
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: vNodes}` | boolean | false |
 | maxTagCount | Max tag count to show | number | - |
 | maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - |
+| maxTagTextLength | Max text length to show | number | - |
 | mode | Set mode of Select | 'default' \| 'multiple' \| 'tags' | 'default' |
 | notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |
 | optionLabelProp | Which prop value of option will render as content of select. | string | `value` for `combobox`, `children` for other modes |
 | placeholder | Placeholder of select | string\|slot | - |
 | showSearch | Whether show search input in single mode. | boolean | false |
-| showArrow | Whether to show the drop-down arrow | boolean |  true |
+| showArrow | Whether to show the drop-down arrow | boolean | true |
 | size | Size of Select input. `default` `large` `small` | string | default |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |
 | removeIcon | The custom remove icon | VNode \| slot | - |
@@ -47,6 +47,7 @@
 | loading | indicate loading state | Boolean | false |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | blur | Called when blur | function |
@@ -63,15 +64,15 @@
 
 ### Select Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | Remove focus |
-| focus() | Get focus |
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | Remove focus |
+| focus() | Get focus    |
 
 ### Option props
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | disabled | Disable this option | boolean | false |
 | key | Same usage as `value`. If Vue request you to set this property, you can set it to value of option, and then omit value property. | string |  |
 | title | `title` of Select after select this Option | string | - |
@@ -80,7 +81,7 @@
 
 ### OptGroup props
 
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| key |  | string | - |
-| label | Group label | string\|slot | - |
+| Property | Description | Type         | Default |
+| -------- | ----------- | ------------ | ------- |
+| key      |             | string       | -       |
+| label    | Group label | string\|slot | -       |

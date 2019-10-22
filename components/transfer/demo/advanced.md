@@ -8,7 +8,7 @@
 You can customize the labels of the transfer buttons, the width and height of the columns, and what should be displayed in the footer.
 </us>
 
-```html
+```tpl
 <template>
   <a-transfer
     :dataSource="mockData"
@@ -31,51 +31,46 @@ You can customize the labels of the transfer buttons, the width and height of th
     >
       reload
     </a-button>
-    <span
-      slot="notFoundContent"
-    >
+    <span slot="notFoundContent">
       没数据
     </span>
   </a-transfer>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      mockData: [],
-      targetKeys: [],
-    }
-  },
-  mounted() {
-    this.getMock()
-  },
-  methods: {
-    getMock() {
-      const targetKeys = [];
-      const mockData = [];
-      for (let i = 0; i < 20; i++) {
-        const data = {
-          key: i.toString(),
-          title: `content${i + 1}`,
-          description: `description of content${i + 1}`,
-          chosen: Math.random() * 2 > 1,
-        };
-        if (data.chosen) {
-          targetKeys.push(data.key);
+  export default {
+    data() {
+      return {
+        mockData: [],
+        targetKeys: [],
+      };
+    },
+    mounted() {
+      this.getMock();
+    },
+    methods: {
+      getMock() {
+        const targetKeys = [];
+        const mockData = [];
+        for (let i = 0; i < 20; i++) {
+          const data = {
+            key: i.toString(),
+            title: `content${i + 1}`,
+            description: `description of content${i + 1}`,
+            chosen: Math.random() * 2 > 1,
+          };
+          if (data.chosen) {
+            targetKeys.push(data.key);
+          }
+          mockData.push(data);
         }
-        mockData.push(data);
-      }
-      this.mockData = mockData
-      this.targetKeys = targetKeys
+        this.mockData = mockData;
+        this.targetKeys = targetKeys;
+      },
+      handleChange(targetKeys, direction, moveKeys) {
+        console.log(targetKeys, direction, moveKeys);
+        this.targetKeys = targetKeys;
+      },
     },
-    handleChange(targetKeys, direction, moveKeys) {
-      console.log(targetKeys, direction, moveKeys);
-      this.targetKeys = targetKeys
-    },
-  },
-}
+  };
 </script>
 ```
-
-
-

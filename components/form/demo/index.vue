@@ -94,7 +94,7 @@ export default {
   zhType: '数据录入',
   cols: 1,
   title: 'Form',
-  render () {
+  render() {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
@@ -148,7 +148,7 @@ export default {
           <ValidateOther />
         </demo-container>
         <api>
-          <CN slot='cn' />
+          <CN slot="cn" />
           <US />
         </api>
       </div>

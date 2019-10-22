@@ -2,11 +2,12 @@ import classNames from 'classnames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../_util/Dom/addEventListener';
+import { getConfirmLocale } from './locale';
+import Icon from '../icon';
 import Button from '../button';
 import buttonTypes from '../button/buttonTypes';
 const ButtonType = buttonTypes().type;
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { getConfirmLocale } from './locale';
 import {
   initDefaultProps,
   getComponentFromProp,
@@ -14,7 +15,7 @@ import {
   getStyle,
   mergeProps,
 } from '../_util/props-util';
-import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 
 let mousePosition = null;
 let mousePositionEventBinded = false;
@@ -42,13 +43,16 @@ const modalProps = (defaultProps = {}) => {
     /** 底部内容*/
     footer: PropTypes.any,
     /** 确认按钮文字*/
-    okText: PropTypes.string,
+    okText: PropTypes.any,
     /** 确认按钮类型*/
     okType: ButtonType,
     /** 取消按钮文字*/
-    cancelText: PropTypes.string,
+    cancelText: PropTypes.any,
+    icon: PropTypes.any,
     /** 点击蒙层是否允许关闭*/
     maskClosable: PropTypes.bool,
+    /** 强制渲染 Modal*/
+    forceRender: PropTypes.bool,
     okButtonProps: PropTypes.object,
     cancelButtonProps: PropTypes.object,
     destroyOnClose: PropTypes.bool,
@@ -66,6 +70,8 @@ const modalProps = (defaultProps = {}) => {
   return initDefaultProps(props, defaultProps);
 };
 
+export const destroyFns = [];
+
 export default {
   name: 'AModal',
   model: {
@@ -73,7 +79,6 @@ export default {
     event: 'change',
   },
   props: modalProps({
-    prefixCls: 'ant-modal',
     width: 520,
     transitionName: 'zoom',
     maskTransitionName: 'fade',
@@ -83,6 +88,9 @@ export default {
     // okButtonDisabled: false,
     // cancelButtonDisabled: false,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   mounted() {
     if (mousePositionEventBinded) {
       return;
@@ -145,7 +153,17 @@ export default {
   },
 
   render() {
-    const { visible, wrapClassName, centered, prefixCls, $listeners, $slots } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      visible,
+      wrapClassName,
+      centered,
+      $listeners,
+      $slots,
+    } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('modal', customizePrefixCls);
 
     const defaultFooter = (
       <LocaleReceiver

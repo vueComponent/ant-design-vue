@@ -243,14 +243,16 @@ export default {
         )}
       >
         {search}
-        <transition-group
-          {...transitionProps}
-          tag="ul"
-          class={`${prefixCls}-content`}
-          ref="listContentWrapper"
-        >
-          {showItems}
-        </transition-group>
+        {!searchNotFound && (
+          <transition-group
+            {...transitionProps}
+            tag="ul"
+            class={`${prefixCls}-content`}
+            ref="listContentWrapper"
+          >
+            {showItems}
+          </transition-group>
+        )}
         {searchNotFound}
       </div>
     );

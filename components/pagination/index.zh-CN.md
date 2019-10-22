@@ -12,7 +12,7 @@
 | hideOnSinglePage | 只有一页时是否隐藏分页器 | boolean | false |
 | itemRender | 用于自定义页码的结构，可用于优化 SEO | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode | - |
 | pageSize(.sync) | 每页条数 | number | - |
-| pageSizeOptions | 指定每页可以显示多少条 | string\[] | ['10', '20', '30', '40'] |
+| pageSizeOptions | 指定每页可以显示多少条 | string\[] | \['10', '20', '30', '40'] |
 | showQuickJumper | 是否可以快速跳转至某页 | boolean | false |
 | showSizeChanger | 是否可以改变 pageSize | boolean | false |
 | showTotal | 用于显示数据总量和当前数据顺序 | Function(total, range) | - |
@@ -21,7 +21,8 @@
 | total | 数据总数 | number | 0 |
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 页码改变的回调，参数是改变后的页码及每页条数 | Function(page, pageSize) | noop |
-| showSizeChange | pageSize 变化的回调 | Function(current, size) | noop |
+
+| 事件名称       | 说明                                         | 回调参数                 |
+| -------------- | -------------------------------------------- | ------------------------ |
+| change         | 页码改变的回调，参数是改变后的页码及每页条数 | Function(page, pageSize) | noop |
+| showSizeChange | pageSize 变化的回调                          | Function(current, size)  | noop |

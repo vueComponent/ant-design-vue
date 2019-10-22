@@ -11,27 +11,20 @@
     cursor: pointer;
     transition: all 0.3s;
     &:hover {
-      color: #333;
+      color: fade(@black, 80%);
     }
   }
 
-  &:not(&-small) > .@{ant-prefix}-input-suffix {
-    right: @control-padding-horizontal;
-  }
+  &-enter-button {
+    .@{ant-prefix}-input-group-addon {
+      padding: 0;
+      border: 0;
 
-  > .@{ant-prefix}-input-suffix > .@{search-prefix}-button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    > .@{iconfont-css-prefix}-search {
-      font-size: @font-size-lg;
+      .@{search-prefix}-button {
+        width: 100%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
-  }
-
-  &.@{search-prefix}-enter-button > .@{ant-prefix}-input {
-    padding-right: 46px;
-  }
-
-  &.@{search-prefix}-enter-button > .@{ant-prefix}-input-suffix {
-    right: 0;
   }
 }

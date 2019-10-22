@@ -14,7 +14,6 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
 3. `help`: display validate message.
 </us>
 
-
 <template>
   <a-form>
     <a-form-item
@@ -24,10 +23,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       validate-status="error"
       help="Should be combination of numbers & alphabets"
     >
-      <a-input
-        id="error"
-        placeholder="unavailable choice"
-      />
+      <a-input id="error" placeholder="unavailable choice" />
     </a-form-item>
 
     <a-form-item
@@ -36,10 +32,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       label="Warning"
       validate-status="warning"
     >
-      <a-input
-        id="warning"
-        placeholder="Warning"
-      />
+      <a-input id="warning" placeholder="Warning" />
     </a-form-item>
 
     <a-form-item
@@ -50,10 +43,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       validate-status="validating"
       help="The information is being validated..."
     >
-      <a-input
-        id="validating"
-        placeholder="I'm the content is being validated"
-      />
+      <a-input id="validating" placeholder="I'm the content is being validated" />
     </a-form-item>
 
     <a-form-item
@@ -63,10 +53,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       has-feedback
       validate-status="success"
     >
-      <a-input
-        id="success"
-        placeholder="I'm the content"
-      />
+      <a-input id="success" placeholder="I'm the content" />
     </a-form-item>
 
     <a-form-item
@@ -76,10 +63,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       has-feedback
       validate-status="warning"
     >
-      <a-input
-        id="warning"
-        placeholder="Warning"
-      />
+      <a-input id="warning2" placeholder="Warning" />
     </a-form-item>
 
     <a-form-item
@@ -90,10 +74,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       validate-status="error"
       help="Should be combination of numbers & alphabets"
     >
-      <a-input
-        id="error"
-        placeholder="unavailable choice"
-      />
+      <a-input id="error2" placeholder="unavailable choice" />
     </a-form-item>
 
     <a-form-item
@@ -144,10 +125,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
       validate-status="validating"
       help="The information is being validated..."
     >
-      <a-cascader
-        :default-value="['1']"
-        :options="[]"
-      />
+      <a-cascader :default-value="['1']" :options="[]" />
     </a-form-item>
 
     <a-form-item
@@ -184,7 +162,7 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       labelCol: {
         xs: { span: 24 },
@@ -198,7 +176,3 @@ export default {
   },
 };
 </script>
-
-
-
-

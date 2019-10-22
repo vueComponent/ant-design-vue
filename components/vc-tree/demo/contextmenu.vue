@@ -5,28 +5,28 @@ import '../assets/index.less';
 import './contextmenu.less';
 
 export default {
-  data () {
+  data() {
     return {
       selectedKeys: ['0-1', '0-1-1'],
     };
   },
   methods: {
-    onSelect (selectedKeys) {
+    onSelect(selectedKeys) {
       this.selectedKeys = selectedKeys;
     },
-    onRightClick (info) {
+    onRightClick(info) {
       console.log('right click', info);
       this.selectedKeys = [info.node.eventKey];
     },
-    onMouseEnter (info) {
+    onMouseEnter(info) {
       console.log('enter', info);
     },
-    onMouseLeave (info) {
+    onMouseLeave(info) {
       console.log('leave', info);
     },
   },
 
-  render () {
+  render() {
     return (
       <div>
         <h2>right click contextmenu</h2>
@@ -39,30 +39,33 @@ export default {
           showLine
           showIcon={false}
         >
-          <TreeNode title='parent 1' key='0-1'>
-            <TreeNode title='parent 1-0' key='0-1-1'>
-              <TreeNode title='leaf0' isLeaf />
-              <TreeNode title='leaf1' isLeaf />
-              <TreeNode title='leaf2' isLeaf />
+          <TreeNode title="parent 1" key="0-1">
+            <TreeNode title="parent 1-0" key="0-1-1">
+              <TreeNode title="leaf0" isLeaf />
+              <TreeNode title="leaf1" isLeaf />
+              <TreeNode title="leaf2" isLeaf />
             </TreeNode>
-            <TreeNode title='parent 1-1'>
-              <TreeNode title='leaf' isLeaf />
+            <TreeNode title="parent 1-1">
+              <TreeNode title="leaf" isLeaf />
             </TreeNode>
           </TreeNode>
         </Tree>
         <h2>hover popup contextmenu</h2>
         <Tree
-          onMouseenter={this.onMouseEnter} onMouseleave={this.onMouseLeave}
+          onMouseenter={this.onMouseEnter}
+          onMouseleave={this.onMouseLeave}
           onSelect={this.onSelect}
-          multiple defaultExpandAll showLine
+          multiple
+          defaultExpandAll
+          showLine
         >
-          <TreeNode title='parent 1' key='0-1'>
-            <TreeNode title='parent 1-0' key='0-1-1'>
-              <TreeNode title='leaf' isLeaf />
-              <TreeNode title='leaf' />
+          <TreeNode title="parent 1" key="0-1">
+            <TreeNode title="parent 1-0" key="0-1-1">
+              <TreeNode title="leaf" isLeaf />
+              <TreeNode title="leaf" />
             </TreeNode>
-            <TreeNode title='parent 1-1'>
-              <TreeNode title='leaf' />
+            <TreeNode title="parent 1-1">
+              <TreeNode title="leaf" />
             </TreeNode>
           </TreeNode>
         </Tree>
@@ -70,6 +73,4 @@ export default {
     );
   },
 };
-
 </script>
-

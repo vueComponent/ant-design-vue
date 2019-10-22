@@ -1,7 +1,6 @@
-
 ## API
 
-````html
+```html
 <template>
   <a-menu>
     <a-menu-item>菜单项</a-menu-item>
@@ -10,7 +9,7 @@
     </a-sub-menu>
   </a-menu>
 </template>
-````
+```
 
 ### Menu
 
@@ -30,42 +29,44 @@
 | subMenuOpenDelay | 用户鼠标进入子菜单后开启延时，单位：秒 | number | 0 |
 | theme | 主题颜色 | string: `light` `dark` | `light` |
 
-### Menu事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| click | 点击 MenuItem 调用此函数 | function({ item, key, keyPath }) |
-| deselect | 取消选中时调用，仅在 multiple 生效 | function({ item, key, selectedKeys }) |
-| openChange | SubMenu 展开/关闭的回调 | function(openKeys: string\[]) |
-| select | 被选中时调用 | function({ item, key, selectedKeys }) |
+### Menu 事件
+
+| 事件名称   | 说明                               | 回调参数                              |
+| ---------- | ---------------------------------- | ------------------------------------- |
+| click      | 点击 MenuItem 调用此函数           | function({ item, key, keyPath })      |
+| deselect   | 取消选中时调用，仅在 multiple 生效 | function({ item, key, selectedKeys }) |
+| openChange | SubMenu 展开/关闭的回调            | function(openKeys: string\[])         |
+| select     | 被选中时调用                       | function({ item, key, selectedKeys }) |
 
 ### Menu.Item
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| disabled | 是否禁用 | boolean | false |
-| key | item 的唯一标志 | string |  |
-| title | 设置收缩时展示的悬浮标题 | string |  |
+| 参数     | 说明                     | 类型    | 默认值 |
+| -------- | ------------------------ | ------- | ------ |
+| disabled | 是否禁用                 | boolean | false  |
+| key      | item 的唯一标志          | string  |        |
+| title    | 设置收缩时展示的悬浮标题 | string  |        |
 
 ### Menu.SubMenu
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| disabled | 是否禁用 | boolean | false |
-| key | 唯一标志 | string |  |
-| title | 子菜单项值 | string\|slot |  |
+| 参数     | 说明       | 类型         | 默认值 |
+| -------- | ---------- | ------------ | ------ |
+| disabled | 是否禁用   | boolean      | false  |
+| key      | 唯一标志   | string       |        |
+| title    | 子菜单项值 | string\|slot |        |
 
 Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
 
-### SubMenu事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
+### SubMenu 事件
+
+| 事件名称   | 说明           | 回调参数            |
+| ---------- | -------------- | ------------------- |
 | titleClick | 点击子菜单标题 | ({ key, domEvent }) |
 
 ### Menu.ItemGroup
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| title | 分组标题 | string\|\|function\|slot |  |
+| 参数  | 说明     | 类型                     | 默认值 |
+| ----- | -------- | ------------------------ | ------ |
+| title | 分组标题 | string\|\|function\|slot |        |
 
 Menu.ItemGroup 的子元素必须是 `MenuItem`.
 

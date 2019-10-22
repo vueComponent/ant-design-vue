@@ -2,7 +2,15 @@ import warning from 'warning';
 import { Tree as VcTree, TreeNode } from '../vc-tree';
 import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, filterEmpty } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getOptionProps,
+  filterEmpty,
+  getComponentFromProp,
+  getClass,
+} from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
+import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 
 function TreeProps() {
@@ -73,6 +81,7 @@ function TreeProps() {
     // onDrop: (options: AntTreeNodeMouseEvent) => void,
     showIcon: PropTypes.bool,
     icon: PropTypes.func,
+    switcherIcon: PropTypes.any,
     prefixCls: PropTypes.string,
     filterTreeNode: PropTypes.func,
     openAnimation: PropTypes.any,
@@ -90,7 +99,6 @@ export default {
     event: 'check',
   },
   props: initDefaultProps(TreeProps(), {
-    prefixCls: 'ant-tree',
     checkable: false,
     showIcon: false,
     openAnimation: {
@@ -98,6 +106,9 @@ export default {
       props: { appear: null },
     },
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   created() {
     warning(
       !('treeNodes' in getOptionProps(this)),
@@ -106,8 +117,8 @@ export default {
   },
   TreeNode,
   methods: {
-    renderSwitcherIcon({ isLeaf, expanded, loading }) {
-      const { prefixCls, showLine } = this.$props;
+    renderSwitcherIcon(prefixCls, switcherIcon, { isLeaf, expanded, loading }) {
+      const { showLine } = this.$props;
       if (loading) {
         return <Icon type="loading" class={`${prefixCls}-switcher-loading-icon`} />;
       }
@@ -123,10 +134,19 @@ export default {
           />
         );
       } else {
+        const switcherCls = `${prefixCls}-switcher-icon`;
         if (isLeaf) {
           return null;
+        } else if (switcherIcon) {
+          const switcherOriginCls = getClass(switcherIcon[0]);
+          return cloneElement(switcherIcon, {
+            class: {
+              [switcherCls]: true,
+            },
+          });
+        } else {
+          return <Icon type="caret-down" class={`${prefixCls}-switcher-icon`} theme="filled" />;
         }
-        return <Icon type="caret-down" class={`${prefixCls}-switcher-icon`} theme="filled" />;
       }
     },
     updateTreeData(treeData) {
@@ -167,7 +187,10 @@ export default {
   },
   render() {
     const props = getOptionProps(this);
-    const { prefixCls, showIcon, treeNodes } = props;
+    const { prefixCls: customizePrefixCls, showIcon, treeNodes } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('tree', customizePrefixCls);
+    const switcherIcon = getComponentFromProp(this, 'switcherIcon');
     const checkable = props.checkable;
     let treeData = props.treeData || treeNodes;
     if (treeData) {
@@ -176,10 +199,11 @@ export default {
     const vcTreeProps = {
       props: {
         ...props,
+        prefixCls,
         checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
         children: filterEmpty(this.$slots.default || []),
         __propsSymbol__: Symbol(),
-        switcherIcon: this.renderSwitcherIcon,
+        switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
       },
       on: this.$listeners,
       ref: 'tree',

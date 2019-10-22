@@ -1,4 +1,3 @@
-
 ## API
 
 ```jsx
@@ -18,7 +17,7 @@
 The wrapper.
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | class | container className | string | - |
 | style | to customize the styles | object\|string | - |
 | hasSider | whether contain Sider in children, don't have to assign it normally. Useful in ssr avoid style flickering | boolean | - |
@@ -30,7 +29,7 @@ The wrapper.
 The sidebar.
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | breakpoint | [breakpoints](/ant-desing-vue/components/grid#api) of the responsive layout | Enum { 'xs', 'sm', 'md', 'lg', 'xl', 'xxl' } | - |
 | class | container className | string | - |
 | collapsed(v-model) | to set the current status | boolean | - |
@@ -44,6 +43,7 @@ The sidebar.
 | width | width of the sidebar | number\|string | 200 |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | collapse | the callback function, executed by clicking the trigger or activating the responsive layout | (collapsed, type) => {} |

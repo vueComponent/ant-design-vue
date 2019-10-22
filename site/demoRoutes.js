@@ -8,6 +8,14 @@ export default [
     component: () => import('../components/avatar/demo/index.vue'),
   },
   {
+    path: 'statistic',
+    component: () => import('../components/statistic/demo/index.vue'),
+  },
+  {
+    path: 'statistic-cn',
+    component: () => import('../components/statistic/demo/index.vue'),
+  },
+  {
     path: 'badge',
     component: () => import('../components/badge/demo/index.vue'),
   },
@@ -438,5 +446,13 @@ export default [
   {
     path: 'config-provider-cn',
     component: () => import('../components/config-provider/demo/index.vue'),
+  },
+  {
+    path: 'empty',
+    component: () => import('../components/empty/demo/index.vue'),
+  },
+  {
+    path: 'empty-cn',
+    component: () => import('../components/empty/demo/index.vue'),
   },
 ];

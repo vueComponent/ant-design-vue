@@ -4,7 +4,7 @@ import BaseMixin from '../../_util/BaseMixin';
 
 export default {
   mixins: [BaseMixin],
-  data () {
+  data() {
     return {
       monitor: true,
       align: {
@@ -13,27 +13,27 @@ export default {
     };
   },
   methods: {
-    getTarget () {
+    getTarget() {
       const ref = this.$refs.container;
       if (!ref) {
-      // parent ref not attached
+        // parent ref not attached
         return document.getElementById('container');
       }
       return ref;
     },
 
-    toggleMonitor () {
+    toggleMonitor() {
       this.setState({
         monitor: !this.$data.monitor,
       });
     },
 
-    forceAlign () {
+    forceAlign() {
       this.$refs.align.forceAlign();
     },
   },
 
-  render () {
+  render() {
     return (
       <div
         style={{
@@ -44,14 +44,13 @@ export default {
           <button onClick={this.forceAlign}>Force align</button>
           &nbsp;&nbsp;&nbsp;
           <label>
-            <input type='checkbox' checked={this.monitor} onInput={this.toggleMonitor} />
-            &nbsp;
-            Monitor window resize
+            <input type="checkbox" checked={this.monitor} onInput={this.toggleMonitor} />
+            &nbsp; Monitor window resize
           </label>
         </p>
         <div
-          ref='container'
-          id='container'
+          ref="container"
+          id="container"
           style={{
             width: '80%',
             height: '500px',
@@ -59,7 +58,7 @@ export default {
           }}
         >
           <Align
-            ref='align'
+            ref="align"
             target={this.getTarget}
             monitorWindowResize={this.$data.monitor}
             align={this.$data.align}
@@ -80,5 +79,4 @@ export default {
     );
   },
 };
-
 </script>

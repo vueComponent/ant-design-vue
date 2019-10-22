@@ -32,17 +32,17 @@ export default {
   subtitle: '日历',
   cols: 1,
   title: 'Calendar',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Card />
         <NoticeCalendar />
         <Select />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

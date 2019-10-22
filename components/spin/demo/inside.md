@@ -8,11 +8,11 @@
 Spin in a container.
 </us>
 
-```html
+```tpl
 <style scoped>
   .example {
     text-align: center;
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     margin-bottom: 20px;
     padding: 30px 50px;

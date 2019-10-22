@@ -51,6 +51,7 @@ import {
 } from './util';
 import { SelectPropTypes } from './PropTypes';
 import contains from '../_util/Dom/contains';
+import { isIE, isEdge } from '../_util/env';
 
 Vue.use(ref, { name: 'ant-ref' });
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
@@ -83,7 +84,7 @@ const Select = {
     showSearch: SelectPropTypes.showSearch.def(true),
     allowClear: SelectPropTypes.allowClear.def(false),
     placeholder: SelectPropTypes.placeholder.def(''),
-    showArrow: SelectPropTypes.showArrow.def(true),
+    // showArrow: SelectPropTypes.showArrow.def(true),
     dropdownMatchSelectWidth: PropTypes.bool.def(true),
     dropdownStyle: SelectPropTypes.dropdownStyle.def({}),
     dropdownMenuStyle: PropTypes.object.def({}),
@@ -119,6 +120,7 @@ const Select = {
     this._focused = false;
     this._mouseDown = false;
     this._options = [];
+    this._empty = false;
   },
   data() {
     const props = getOptionProps(this);
@@ -151,7 +153,14 @@ const Select = {
 
   mounted() {
     this.$nextTick(() => {
-      this.autoFocus && this.focus();
+      // when defaultOpen is true, we should auto focus search input
+      // https://github.com/ant-design/ant-design/issues/14254
+      if (this.autoFocus || this._open) {
+        this.focus();
+      }
+      // this.setState({
+      //   _ariaId: generateUUID(),
+      // });
     });
   },
   watch: {
@@ -258,6 +267,7 @@ const Select = {
           value: singleValue,
           label: this.getLabelFromOption(props, option),
           title: getValue(option, 'title'),
+          disabled: getValue(option, 'disabled'),
         };
       });
       if (preState) {
@@ -338,7 +348,11 @@ const Select = {
       if (open && !this.getInputDOMNode()) {
         this.onInputKeydown(event);
       } else if (keyCode === KeyCode.ENTER || keyCode === KeyCode.DOWN) {
-        if (!open) {
+        // vue state是同步更新，onKeyDown在onMenuSelect后会再次调用，单选时不在调用setOpenState
+        // https://github.com/vueComponent/ant-design-vue/issues/1142
+        if (keyCode === KeyCode.ENTER && !isMultipleOrTags(this.$props)) {
+          this.maybeFocus(true);
+        } else if (!open) {
           this.setOpenState(true);
         }
         event.preventDefault();
@@ -357,6 +371,7 @@ const Select = {
         return;
       }
       const state = this.$data;
+      const isRealOpen = this.getRealOpenState(state);
       const keyCode = event.keyCode;
       if (isMultipleOrTags(props) && !event.target.value && keyCode === KeyCode.BACKSPACE) {
         event.preventDefault();
@@ -376,7 +391,10 @@ const Select = {
       } else if (keyCode === KeyCode.ENTER && state._open) {
         // Aviod trigger form submit when select item
         // https://github.com/ant-design/ant-design/issues/10861
-        event.preventDefault();
+        // https://github.com/ant-design/ant-design/issues/14544
+        if (isRealOpen || !props.combobox) {
+          event.preventDefault();
+        }
       } else if (keyCode === KeyCode.ESC) {
         if (state._open) {
           this.setOpenState(false);
@@ -386,7 +404,7 @@ const Select = {
         return;
       }
 
-      if (this.getRealOpenState(state) && this.selectTriggerRef) {
+      if (isRealOpen && this.selectTriggerRef) {
         const menu = this.selectTriggerRef.getInnerMenu();
         if (menu && menu.onKeyDown(event, this.handleBackfill)) {
           event.preventDefault();
@@ -411,6 +429,7 @@ const Select = {
         value = value.concat([selectedValue]);
       } else {
         if (
+          !isCombobox(props) &&
           lastValue !== undefined &&
           lastValue === selectedValue &&
           selectedValue !== this.$data._backfillValue
@@ -445,6 +464,7 @@ const Select = {
     onArrowClick(e) {
       e.stopPropagation();
       e.preventDefault();
+      this.clearBlurTime();
       if (!this.disabled) {
         this.setOpenState(!this.$data._open, !this.$data._open);
       }
@@ -530,6 +550,10 @@ const Select = {
       let value = null;
       Object.keys(this.$data._optionsInfo).forEach(key => {
         const info = this.$data._optionsInfo[key];
+        const { disabled } = info;
+        if (disabled) {
+          return;
+        }
         const oldLable = toArray(info.label);
         if (oldLable && oldLable.join('') === label) {
           value = info.value;
@@ -618,12 +642,17 @@ const Select = {
     },
     inputBlur(e) {
       const target = e.relatedTarget || document.activeElement;
+
+      // https://github.com/vueComponent/ant-design-vue/issues/999
+      // https://github.com/vueComponent/ant-design-vue/issues/1223
       if (
-        (target &&
-          this.selectTriggerRef &&
-          this.selectTriggerRef.getInnerMenu() &&
-          this.selectTriggerRef.getInnerMenu().$el === target) ||
-        contains(e.target, target)
+        (isIE || isEdge) &&
+        (e.relatedTarget === this.$refs.arrow ||
+          (target &&
+            this.selectTriggerRef &&
+            this.selectTriggerRef.getInnerMenu() &&
+            this.selectTriggerRef.getInnerMenu().$el === target) ||
+          contains(e.target, target))
       ) {
         e.target.focus();
         e.preventDefault();
@@ -661,11 +690,9 @@ const Select = {
           } else {
             // why not use setState?
             this.$data._inputValue = '';
-            this.$nextTick(() => {
-              if (this.getInputDOMNode && this.getInputDOMNode()) {
-                this.getInputDOMNode().value = '';
-              }
-            });
+            if (this.getInputDOMNode && this.getInputDOMNode()) {
+              this.getInputDOMNode().value = '';
+            }
           }
           const tmpValue = this.getValueByInput(inputValue);
           if (tmpValue !== undefined) {
@@ -681,7 +708,7 @@ const Select = {
         }
         this.setOpenState(false);
         this.$emit('blur', this.getVLForOnChange(value));
-      }, 10);
+      }, 200);
     },
     inputFocus(e) {
       if (this.$props.disabled) {
@@ -1051,6 +1078,7 @@ const Select = {
       const { children, tags, filterOption, notFoundContent } = this.$props;
       const menuItems = [];
       const childrenKeys = [];
+      let empty = false;
       let options = this.renderFilterOptionsFromChildren(children, childrenKeys, menuItems);
       if (tags) {
         // tags value must be string
@@ -1061,6 +1089,12 @@ const Select = {
             (!inputValue || String(singleValue).indexOf(String(inputValue)) > -1)
           );
         });
+
+        // sort by length
+        value.sort((val1, val2) => {
+          return val1.length - val2.length;
+        });
+
         value.forEach(singleValue => {
           const key = singleValue;
           const attrs = {
@@ -1103,6 +1137,7 @@ const Select = {
       }
 
       if (!options.length && notFoundContent) {
+        empty = true;
         const p = {
           attrs: UNSELECTABLE_ATTRIBUTE,
           key: 'NOT_FOUND',
@@ -1115,7 +1150,7 @@ const Select = {
         };
         options = [<MenuItem {...p}>{notFoundContent}</MenuItem>];
       }
-      return options;
+      return { empty, options };
     },
 
     renderFilterOptionsFromChildren(children = [], childrenKeys, menuItems) {
@@ -1387,15 +1422,13 @@ const Select = {
       );
     },
     renderArrow(multiple) {
-      const { showArrow, loading, prefixCls } = this.$props;
+      // showArrow : Set to true if not multiple by default but keep set value.
+      const { showArrow = !multiple, loading, prefixCls } = this.$props;
       const inputIcon = getComponentFromProp(this, 'inputIcon');
-      if (!showArrow) {
+      if (!showArrow && !loading) {
         return null;
       }
       // if loading  have loading icon
-      if (multiple && !loading) {
-        return null;
-      }
       const defaultIcon = loading ? (
         <i class={`${prefixCls}-arrow-loading`} />
       ) : (
@@ -1408,6 +1441,7 @@ const Select = {
           style={UNSELECTABLE_STYLE}
           {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
           onClick={this.onArrowClick}
+          ref="arrow"
         >
           {inputIcon || defaultIcon}
         </span>
@@ -1486,14 +1520,19 @@ const Select = {
   render() {
     const props = this.$props;
     const multiple = isMultipleOrTags(props);
+    // Default set showArrow to true if not set (not set directly in defaultProps to handle multiple case)
+    const { showArrow = true } = props;
     const state = this.$data;
-    const { disabled, prefixCls } = props;
+    const { disabled, prefixCls, loading } = props;
     const ctrlNode = this.renderTopControlNode();
     const { _open: open, _inputValue: inputValue, _value: value } = this.$data;
     if (open) {
-      this._options = this.renderFilterOptions();
+      const filterOptions = this.renderFilterOptions();
+      this._empty = filterOptions.empty;
+      this._options = filterOptions.options;
     }
     const realOpen = this.getRealOpenState();
+    const empty = this._empty;
     const options = this._options || [];
     const { $listeners } = this;
     const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = $listeners;
@@ -1532,7 +1571,8 @@ const Select = {
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-enabled`]: !disabled,
       [`${prefixCls}-allow-clear`]: !!props.allowClear,
-      [`${prefixCls}-no-arrow`]: !props.showArrow,
+      [`${prefixCls}-no-arrow`]: !showArrow,
+      [`${prefixCls}-loading`]: !!loading,
     };
     return (
       <SelectTrigger
@@ -1548,6 +1588,7 @@ const Select = {
         combobox={props.combobox}
         showSearch={props.showSearch}
         options={options}
+        empty={empty}
         multiple={multiple}
         disabled={disabled}
         visible={realOpen}

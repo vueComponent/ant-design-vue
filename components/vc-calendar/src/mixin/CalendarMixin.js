@@ -4,16 +4,13 @@ import { hasProp } from '../../../_util/props-util';
 import moment from 'moment';
 import { isAllowedDate, getTodayTime } from '../util/index';
 function noop() {}
-function getNow() {
-  return moment();
-}
 
-function getNowByCurrentStateValue(value) {
+export function getNowByCurrentStateValue(value) {
   let ret;
   if (value) {
     ret = getTodayTime(value);
   } else {
-    ret = getNow();
+    ret = moment();
   }
   return ret;
 }
@@ -29,6 +26,7 @@ function isMoment(value) {
 const MomentType = PropTypes.custom(isMoment);
 const CalendarMixin = {
   mixins: [BaseMixin],
+  name: 'CalendarMixinWrapper',
   props: {
     value: MomentType,
     defaultValue: MomentType,
@@ -36,7 +34,7 @@ const CalendarMixin = {
 
   data() {
     const props = this.$props;
-    const sValue = props.value || props.defaultValue || getNow();
+    const sValue = props.value || props.defaultValue || getNowByCurrentStateValue();
     return {
       sValue,
       sSelectedValue: props.selectedValue || props.defaultSelectedValue,

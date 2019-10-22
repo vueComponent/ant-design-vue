@@ -1,13 +1,14 @@
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
+import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
 
-const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp', 'ico'];
+const imageTypes = ['image', 'webp', 'png', 'svg', 'gif', 'jpg', 'jpeg', 'bmp', 'dpg', 'ico'];
 // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 const previewFile = (file, callback) => {
   if (file.type && !imageTypes.includes(file.type)) {
@@ -34,7 +35,7 @@ const isImageUrl = file => {
   }
   const url = file.thumbUrl || file.url;
   const extension = extname(url);
-  if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp|ico)$/i.test(extension)) {
+  if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp|dpg|ico)$/i.test(extension)) {
     return true;
   } else if (/^data:/.test(url)) {
     // other file types of base64
@@ -55,10 +56,12 @@ export default {
       strokeWidth: 2,
       showInfo: false,
     },
-    prefixCls: 'ant-upload',
     showRemoveIcon: true,
     showPreviewIcon: true,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   updated() {
     this.$nextTick(() => {
       if (this.listType !== 'picture' && this.listType !== 'picture-card') {
@@ -102,13 +105,16 @@ export default {
   },
   render() {
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       items = [],
       listType,
       showPreviewIcon,
       showRemoveIcon,
       locale,
     } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('upload', customizePrefixCls);
+
     const list = items.map(file => {
       let progress;
       let icon = <Icon type={file.status === 'uploading' ? 'loading' : 'paper-clip'} />;

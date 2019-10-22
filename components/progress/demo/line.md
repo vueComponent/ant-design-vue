@@ -8,7 +8,7 @@
 A standard progress bar.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress :percent="30" />
@@ -19,4 +19,3 @@ A standard progress bar.
   </div>
 </template>
 ```
-

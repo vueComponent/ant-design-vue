@@ -1,6 +1,7 @@
 import PropsTypes from '../_util/vue-types';
 import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
-
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 export const CommentProps = {
   actions: PropsTypes.array,
   /** The element to display as the comment author. */
@@ -17,9 +18,10 @@ export const CommentProps = {
 
 const Comment = {
   name: 'AComment',
-  props: initDefaultProps(CommentProps, {
-    prefixCls: 'ant-comment',
-  }),
+  props: CommentProps,
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   methods: {
     getAction(actions) {
       if (!actions || !actions.length) {
@@ -36,7 +38,10 @@ const Comment = {
   },
 
   render() {
-    const { prefixCls } = this.$props;
+    const { prefixCls: customizePrefixCls } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('comment', customizePrefixCls);
 
     const actions = getComponentFromProp(this, 'actions');
     const author = getComponentFromProp(this, 'author');
@@ -88,6 +93,7 @@ const Comment = {
 
 /* istanbul ignore next */
 Comment.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Comment.name, Comment);
 };
 export default Comment;

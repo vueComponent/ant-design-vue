@@ -98,6 +98,7 @@ const Picker = {
       const calendarProps = getOptionProps(props.calendar);
       if (
         cause.source === 'keyboard' ||
+        cause.source === 'dateInputSelect' ||
         (!calendarProps.timePicker && cause.source !== 'dateInput') ||
         cause.source === 'todayButton'
       ) {
@@ -107,7 +108,7 @@ const Picker = {
     },
 
     onKeyDown(event) {
-      if (event.keyCode === KeyCode.DOWN && !this.sOpen) {
+      if (!this.sOpen && (event.keyCode === KeyCode.DOWN || event.keyCode === KeyCode.ENTER)) {
         this.openCalendar();
         event.preventDefault();
       }

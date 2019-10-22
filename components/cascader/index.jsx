@@ -19,6 +19,8 @@ import {
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const CascaderOptionType = PropTypes.shape({
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -73,7 +75,7 @@ const CascaderProps = {
   /** 是否支持清除*/
   allowClear: PropTypes.bool.def(true),
   showSearch: PropTypes.oneOfType([Boolean, ShowSearchType]),
-  notFoundContent: PropTypes.any.def('Not Found'),
+  notFoundContent: PropTypes.any,
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */
   expandTrigger: CascaderExpandTrigger,
@@ -81,8 +83,8 @@ const CascaderProps = {
   changeOnSelect: PropTypes.bool,
   /** 浮层可见变化时回调 */
   // onPopupVisibleChange?: (popupVisible: boolean) => void;
-  prefixCls: PropTypes.string.def('ant-cascader'),
-  inputPrefixCls: PropTypes.string.def('ant-input'),
+  prefixCls: PropTypes.string,
+  inputPrefixCls: PropTypes.string,
   getPopupContainer: PropTypes.func,
   popupVisible: PropTypes.bool,
   fieldNames: FieldNamesType,
@@ -147,7 +149,7 @@ const Cascader = {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
     localeData: { default: () => ({}) },
   },
   data() {
@@ -293,7 +295,8 @@ const Cascader = {
       }
     },
 
-    generateFilteredOptions(prefixCls) {
+    generateFilteredOptions(prefixCls, renderEmpty) {
+      const h = this.$createElement;
       const { showSearch, notFoundContent, $scopedSlots } = this;
       const names = getFilledFieldNames(this.$props);
       const {
@@ -343,7 +346,11 @@ const Cascader = {
         });
       }
       return [
-        { [names.label]: notFoundContent, [names.value]: 'ANT_CASCADER_NOT_FOUND', disabled: true },
+        {
+          [names.label]: notFoundContent || renderEmpty(h, 'Cascader'),
+          [names.value]: 'ANT_CASCADER_NOT_FOUND',
+          disabled: true,
+        },
       ];
     },
 
@@ -372,8 +379,8 @@ const Cascader = {
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
     const { getPopupContainer: getContextPopupContainer } = configProvider;
     const {
-      prefixCls,
-      inputPrefixCls,
+      prefixCls: customizePrefixCls,
+      inputPrefixCls: customizeInputPrefixCls,
       placeholder = localeData.placeholder,
       size,
       disabled,
@@ -381,6 +388,10 @@ const Cascader = {
       showSearch = false,
       ...otherProps
     } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const renderEmpty = this.configProvider.renderEmpty;
+    const prefixCls = getPrefixCls('cascader', customizePrefixCls);
+    const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 
     const sizeCls = classNames({
       [`${inputPrefixCls}-lg`]: size === 'large',
@@ -431,7 +442,7 @@ const Cascader = {
 
     let options = props.options;
     if (inputValue) {
-      options = this.generateFilteredOptions(prefixCls);
+      options = this.generateFilteredOptions(prefixCls, renderEmpty);
     }
     // Dropdown menu should keep previous status until it is fully closed.
     if (!sPopupVisible) {
@@ -448,8 +459,8 @@ const Cascader = {
     }
     // The default value of `matchInputWidth` is `true`
     const resultListMatchInputWidth = showSearch.matchInputWidth !== false;
-    if (resultListMatchInputWidth && inputValue && this.input) {
-      dropdownMenuColumnStyle.width = this.input.input.offsetWidth;
+    if (resultListMatchInputWidth && inputValue && this.$refs.input) {
+      dropdownMenuColumnStyle.width = this.$refs.input.$el.offsetWidth + 'px';
     }
     // showSearch时，focus、blur在input上触发，反之在ref='picker'上触发
     const inputProps = {
@@ -510,6 +521,7 @@ const Cascader = {
         ...props,
         getPopupContainer,
         options: options,
+        prefixCls,
         value: value,
         popupVisible: sPopupVisible,
         dropdownMenuColumnStyle: dropdownMenuColumnStyle,
@@ -528,6 +540,7 @@ const Cascader = {
 
 /* istanbul ignore next */
 Cascader.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Cascader.name, Cascader);
 };
 

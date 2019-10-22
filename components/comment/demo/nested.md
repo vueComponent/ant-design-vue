@@ -8,7 +8,7 @@
 Comments can be nested.
 </us>
 
-```html
+```tpl
 <template>
   <a-comment>
     <span slot="actions">Reply to</span>
@@ -18,7 +18,10 @@ Comments can be nested.
       src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       alt="Han Solo"
     />
-    <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+    <p slot="content">
+      We supply a series of design principles, practical patterns and high quality design resources
+      (Sketch and Axure).
+    </p>
     <a-comment>
       <span slot="actions">Reply to</span>
       <a slot="author">Han Solo</a>
@@ -27,7 +30,10 @@ Comments can be nested.
         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
         alt="Han Solo"
       />
-      <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+      <p slot="content">
+        We supply a series of design principles, practical patterns and high quality design
+        resources (Sketch and Axure).
+      </p>
       <a-comment>
         <span slot="actions">Reply to</span>
         <a slot="author">Han Solo</a>
@@ -36,7 +42,10 @@ Comments can be nested.
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
         />
-        <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+        <p slot="content">
+          We supply a series of design principles, practical patterns and high quality design
+          resources (Sketch and Axure).
+        </p>
       </a-comment>
       <a-comment>
         <span slot="actions">Reply to</span>
@@ -46,7 +55,10 @@ Comments can be nested.
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
         />
-        <p slot="content">We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+        <p slot="content">
+          We supply a series of design principles, practical patterns and high quality design
+          resources (Sketch and Axure).
+        </p>
       </a-comment>
     </a-comment>
   </a-comment>

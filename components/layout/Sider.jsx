@@ -23,6 +23,7 @@ import {
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import isNumeric from '../_util/isNumeric';
+import { ConfigConsumerProps } from '../config-provider';
 
 const dimensionMap = {
   xs: '480px',
@@ -76,14 +77,12 @@ export default {
     event: 'collapse',
   },
   props: initDefaultProps(SiderProps, {
-    prefixCls: 'ant-layout-sider',
     collapsible: false,
     defaultCollapsed: false,
     reverseArrow: false,
     width: 200,
     collapsedWidth: 80,
   }),
-
   data() {
     this.uniqueId = generateId('ant-sider-');
     let matchMedia;
@@ -113,6 +112,7 @@ export default {
   },
   inject: {
     siderHook: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   // getChildContext() {
   //   return {
@@ -179,9 +179,17 @@ export default {
   },
 
   render() {
-    const { prefixCls, theme, collapsible, reverseArrow, width, collapsedWidth } = getOptionProps(
-      this,
-    );
+    const {
+      prefixCls: customizePrefixCls,
+      theme,
+      collapsible,
+      reverseArrow,
+      width,
+      collapsedWidth,
+    } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
+
     const trigger = getComponentFromProp(this, 'trigger');
     const rawWidth = this.sCollapsed ? collapsedWidth : width;
     // use "px" as fallback unit for width
@@ -189,7 +197,12 @@ export default {
     // special trigger when collapsedWidth == 0
     const zeroWidthTrigger =
       parseFloat(String(collapsedWidth || 0)) === 0 ? (
-        <span onClick={this.toggle} class={`${prefixCls}-zero-width-trigger`}>
+        <span
+          onClick={this.toggle}
+          class={`${prefixCls}-zero-width-trigger ${prefixCls}-zero-width-trigger-${
+            reverseArrow ? 'right' : 'left'
+          }`}
+        >
           <Icon type="bars" />
         </span>
       ) : null;

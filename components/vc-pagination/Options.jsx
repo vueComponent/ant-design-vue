@@ -49,10 +49,11 @@ export default {
         return;
       }
       if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
+        // https://github.com/vueComponent/ant-design-vue/issues/1316
+        this.quickGo(this.getValidValue());
         this.setState({
           goInputText: '',
         });
-        this.quickGo(this.getValidValue());
       }
     },
   },

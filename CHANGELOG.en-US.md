@@ -10,6 +10,31 @@
 
 ---
 
+## 1.4.3
+
+`2019-10-22`
+
+- 🐞 Fix Cascader component style issues caused by Input [#1293](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 Fix some component can not use `<template slot="xxx" />` [041839](https://github.com/vueComponent/ant-design-vue/commit/041839b90131d3a4e6a5663986b811d60d4e6ba2)
+
+## 1.4.2
+
+`2019-10-21`
+
+- 🐞 Fix `Radio.Group` triggers multiple change callback issues [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 Fix `Pagination` keyup enter not work [#1316](https://github.com/vueComponent/ant-design-vue/issues/1316)
+
+## 1.4.1
+
+`2019-10-17`
+
+- 🐞 fix `Input.Password` cannot use `v-model` [#1306](https://github.com/vueComponent/ant-design-vue/issues/1306)
+- 🌟 Optimize the clear button of `Input` to display the logic. [#1296](https://github.com/vueComponent/ant-design-vue/issues/1296)
+- 🌟 After click clear button, `Input` becomes the `focus` state.
+- 🐞 fix progress strokeWidth not work [#1301](https://github.com/vueComponent/ant-design-vue/issues/1301)
+- 🐞 Fix Radio.Group triggers multiple change callback issues [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 Fix Form initialValue error [#1291](https://github.com/vueComponent/ant-design-vue/issues/1291)
+
 ## 1.4.0
 
 `2019-10-14`

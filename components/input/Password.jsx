@@ -13,6 +13,7 @@ const ActionMap = {
 
 export default {
   name: 'AInputPassword',
+  mixins: [BaseMixin],
   model: {
     prop: 'value',
     event: 'change.value',
@@ -29,7 +30,6 @@ export default {
       visible: false,
     };
   },
-  mixins: [BaseMixin],
   methods: {
     onChange() {
       this.setState({
@@ -58,7 +58,14 @@ export default {
     },
   },
   render() {
-    const { prefixCls, inputPrefixCls, size, suffix, visibilityToggle, ...restProps } = getOptionProps(this);
+    const {
+      prefixCls,
+      inputPrefixCls,
+      size,
+      suffix,
+      visibilityToggle,
+      ...restProps
+    } = getOptionProps(this);
     const suffixIcon = visibilityToggle && this.getIcon();
     const inputClassName = classNames(prefixCls, {
       [`${prefixCls}-${size}`]: !!size,
@@ -78,14 +85,8 @@ export default {
         type: this.visible ? 'text' : 'password',
       },
       class: inputClassName,
-      on: {
-        ...this.$listeners,
-      },
+      on: this.$listeners,
     };
-    return (
-      <Input
-        {...inputProps}
-      />
-    );
+    return <Input {...inputProps} />;
   },
 };

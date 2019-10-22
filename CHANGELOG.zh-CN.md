@@ -15,6 +15,7 @@
 `2019-10-22`
 
 - 🐞 修复 Input 导致的 Cascader 组件样式问题 [#1293](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复部分组件不能使用 `<template slot="xxx" />` 问题 [041839](https://github.com/vueComponent/ant-design-vue/commit/041839b90131d3a4e6a5663986b811d60d4e6ba2)
 
 ## 1.4.2
 

@@ -15,6 +15,7 @@
 `2019-10-22`
 
 - 🐞 Fix Cascader component style issues caused by Input [#1293](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 Fix some component can not use `<template slot="xxx" />` [041839](https://github.com/vueComponent/ant-design-vue/commit/041839b90131d3a4e6a5663986b811d60d4e6ba2)
 
 ## 1.4.2
 

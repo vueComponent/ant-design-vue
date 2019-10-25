@@ -54,7 +54,7 @@ function clearBrowserBugTimeout(node) {
 const cssAnimation = (node, transitionName, endCallback) => {
   const nameIsObj = typeof transitionName === 'object';
   const className = nameIsObj ? transitionName.name : transitionName;
-  const activeClassName = nameIsObj ? transitionName.active : `${transitionName} ${transitionName}-active`;
+  const activeClassName = nameIsObj ? transitionName.active : `${transitionName}-active`;
   let end = endCallback;
   let start;
   let active;
@@ -83,10 +83,7 @@ const cssAnimation = (node, transitionName, endCallback) => {
     clearBrowserBugTimeout(node);
 
     nodeClasses.remove(className);
-    activeClassName.split(' ').forEach((className)=>{
-      nodeClasses.remove(className);
-    });
-    //nodeClasses.remove(activeClassName);
+    nodeClasses.remove(activeClassName);
 
     Event.removeEndEventListener(node, node.rcEndListener);
     node.rcEndListener = null;
@@ -107,10 +104,7 @@ const cssAnimation = (node, transitionName, endCallback) => {
 
   node.rcAnimTimeout = requestAnimationTimeout(() => {
     node.rcAnimTimeout = null;
-    // nodeClasses.add(activeClassName);
-    activeClassName.split(' ').forEach((className)=>{
-      nodeClasses.add(className);
-    });
+    nodeClasses.add(activeClassName);
     if (active) {
       requestAnimationTimeout(active, 0);
     }

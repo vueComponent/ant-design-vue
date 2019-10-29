@@ -19,6 +19,9 @@
       }
     </style>
     <script>
+      if (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design') {
+        location.replace(location.href.replace(location.host, 'www.antdv.com'));
+      }
       var _hmt = _hmt || [];
       var srcMap = {
         'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',

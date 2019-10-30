@@ -4,19 +4,19 @@ exports[`renders ./components/collapse/demo/accordion.md correctly 1`] = `
 <div>
   <div role="tablist" class="ant-collapse">
     <div role="tablist" class="ant-collapse-item">
-      <div role="tab" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="tab" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 1</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="tab" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="tab" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 2</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="tab" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="tab" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 3</div>
       <!---->
@@ -29,7 +29,7 @@ exports[`renders ./components/collapse/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-collapse">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
-      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="" style="transform: rotate(90deg);">
+      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="" style="transform: rotate(90deg);">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 1</div>
       <div class="ant-collapse-content ant-collapse-content-active ant-motion-collapse">
@@ -39,13 +39,13 @@ exports[`renders ./components/collapse/demo/basic.md correctly 1`] = `
       </div>
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 2</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item ant-collapse-item-disabled">
-      <div role="button" tabindex="-1" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="-1" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 3</div>
       <!---->
@@ -58,7 +58,7 @@ exports[`renders ./components/collapse/demo/borderless.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-borderless">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
-      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="" style="transform: rotate(90deg);">
+      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="" style="transform: rotate(90deg);">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 1</div>
       <div class="ant-collapse-content ant-collapse-content-active ant-motion-collapse">
@@ -68,13 +68,13 @@ exports[`renders ./components/collapse/demo/borderless.md correctly 1`] = `
       </div>
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 2</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 3</div>
       <!---->
@@ -87,7 +87,7 @@ exports[`renders ./components/collapse/demo/custom.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-borderless">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
-      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="" style="transform: rotate(90deg);">
+      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="" style="transform: rotate(90deg);">
             <path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path>
           </svg></i>This is panel header 1</div>
       <div class="ant-collapse-content ant-collapse-content-active ant-motion-collapse">
@@ -97,13 +97,13 @@ exports[`renders ./components/collapse/demo/custom.md correctly 1`] = `
       </div>
     </div>
     <div role="tablist" class="ant-collapse-item" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path>
           </svg></i>This is panel header 2</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path>
           </svg></i>This is panel header 3</div>
       <!---->
@@ -116,19 +116,19 @@ exports[`renders ./components/collapse/demo/mix.md correctly 1`] = `
 <div>
   <div class="ant-collapse">
     <div role="tablist" class="ant-collapse-item">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 1</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 2</div>
       <!---->
     </div>
     <div role="tablist" class="ant-collapse-item">
-      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+      <div role="button" tabindex="0" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header 3</div>
       <!---->
@@ -141,7 +141,7 @@ exports[`renders ./components/collapse/demo/noarrow.md correctly 1`] = `
 <div>
   <div class="ant-collapse">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
-      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="" style="transform: rotate(90deg);">
+      <div role="button" tabindex="0" aria-expanded="true" class="ant-collapse-header"><i aria-label="icon: right" class="anticon anticon-right ant-collapse-arrow"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="" style="transform: rotate(90deg);">
             <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
           </svg></i>This is panel header with arrow icon</div>
       <div class="ant-collapse-content ant-collapse-content-active ant-motion-collapse">

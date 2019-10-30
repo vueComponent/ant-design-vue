@@ -115,6 +115,7 @@ function renderIcon(h, locale, context) {
     );
     innerNode = (
       <VueIcon
+        focusable="false"
         class={svgClassString}
         type={computedType}
         primaryColor={twoToneColor}
@@ -163,84 +164,6 @@ const Icon = {
         scopedSlots={{ default: locale => renderIcon(h, locale, context) }}
       />
     );
-
-    const classString = classNames({
-      ...getClass(context),
-      [`anticon`]: true,
-      [`anticon-${type}`]: !!type,
-    });
-
-    const svgClassString = classNames({
-      [`anticon-spin`]: !!spin || type === 'loading',
-    });
-
-    let innerNode;
-
-    // component > children > type
-    if (Component) {
-      const innerSvgProps = {
-        attrs: {
-          ...svgBaseProps,
-          viewBox,
-        },
-        class: svgClassString,
-      };
-      if (!viewBox) {
-        delete innerSvgProps.attrs.viewBox;
-      }
-
-      innerNode = <Component {...innerSvgProps}>{children}</Component>;
-    }
-    if (children) {
-      warning(
-        Boolean(viewBox) || (children.length === 1 && children[0].tag === 'use'),
-        'Make sure that you provide correct `viewBox`' +
-          ' prop (default `0 0 1024 1024`) to the icon.',
-      );
-      const innerSvgProps = {
-        attrs: {
-          ...svgBaseProps,
-        },
-        class: svgClassString,
-      };
-      innerNode = (
-        <svg {...innerSvgProps} viewBox={viewBox}>
-          {children}
-        </svg>
-      );
-    }
-
-    if (typeof type === 'string') {
-      let computedType = type;
-      if (theme) {
-        const themeInName = getThemeFromTypeName(type);
-        warning(
-          !themeInName || theme === themeInName,
-          `The icon name '${type}' already specify a theme '${themeInName}',` +
-            ` the 'theme' prop '${theme}' will be ignored.`,
-        );
-      }
-      computedType = withThemeSuffix(
-        removeTypeTheme(alias(computedType)),
-        dangerousTheme || theme || defaultTheme,
-      );
-      innerNode = (
-        <VueIcon
-          focusable="false"
-          class={svgClassString}
-          type={computedType}
-          primaryColor={twoToneColor}
-        />
-      );
-    }
-    // functional component not support nativeOn，https://github.com/vuejs/vue/issues/7526
-    const iProps = {
-      ...data,
-      on: { ...listeners, ...data.nativeOn },
-      class: classString,
-      staticClass: '',
-    };
-    return <i {...iProps}>{innerNode}</i>;
   },
 };
 

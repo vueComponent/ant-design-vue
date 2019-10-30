@@ -46,7 +46,7 @@ export default {
     const { checkboxGroupContext: checkboxGroup, $listeners, $slots } = this;
     const props = getOptionProps(this);
     const children = $slots.default;
-    const { mouseenter = noop, mouseleave = noop, ...restListeners } = $listeners;
+    const { mouseenter = noop, mouseleave = noop, input, ...restListeners } = $listeners;
     const { prefixCls: customizePrefixCls, indeterminate, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);

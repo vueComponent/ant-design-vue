@@ -10,6 +10,19 @@
 
 ---
 
+## 1.4.4
+
+`2019-10-30`
+
+- 🌟 Progress format 支持 v-slot [#1348](https://github.com/vueComponent/ant-design-vue/issues/1348)
+- 🐞 修复 RangePicker 年份面板失效问题 [#1321](https://github.com/vueComponent/ant-design-vue/issues/1321)
+- 🐞 修复 Pagination simple 模式失效问题 [#1333](https://github.com/vueComponent/ant-design-vue/issues/1333)
+- 🐞 修复 AutoComplete 快速输入时闪动现象 [#1327](https://github.com/vueComponent/ant-design-vue/issues/1327)
+- 🐞 修复 Button loading 模式下不居中问题 [#1337](https://github.com/vueComponent/ant-design-vue/issues/1337)
+- 🐞 修复 Menu margin 间距重叠，以及导致的展开时卡顿问题 [#873](https://github.com/vueComponent/ant-design-vue/issues/873)
+- 🐞 修复 Checkbox v-model 参数校验失败问题 [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+- 🐞 修复 Checkbox.Group 更新 value undefined 时报错问题 [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+
 ## 1.4.3
 
 `2019-10-22`

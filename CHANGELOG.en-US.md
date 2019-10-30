@@ -10,6 +10,19 @@
 
 ---
 
+## 1.4.4
+
+`2019-10-30`
+
+- 🌟 Progress format support v-slot [#1348](https://github.com/vueComponent/ant-design-vue/issues/1348)
+- 🐞 Fix RangePicker Year Panel not work [#1321](https://github.com/vueComponent/ant-design-vue/issues/1321)
+- 🐞 Fix Pagination simple mode not work [#1333](https://github.com/vueComponent/ant-design-vue/issues/1333)
+- 🐞 Fix AutoComplete flashing on fast input [#1327](https://github.com/vueComponent/ant-design-vue/issues/1327)
+- 🐞 Fix Button loading mode is not centered [#1337](https://github.com/vueComponent/ant-design-vue/issues/1337)
+- 🐞 Fix Menu menu collapsed in Chrome [#873](https://github.com/vueComponent/ant-design-vue/issues/873)
+- 🐞 Fix Checkbox v-model parameter validation failure [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+- 🐞 Fix Checkbox.Group error when update value to undefined [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+
 ## 1.4.3
 
 `2019-10-22`

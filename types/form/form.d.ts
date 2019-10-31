@@ -3,6 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
+import { Col } from '../grid/col';
 import Vue from 'vue';
 import { FormItem } from './form-item';
 
@@ -349,11 +350,23 @@ export declare class Form extends AntdComponent {
   hideRequiredMark: boolean;
 
   /**
+   * The layout of label. You can set span offset to something like {span: 3, offset: 12} or sm: {span: 3, offset: 12} same as with <Col>
+   * @type Col
+   */
+  labelCol: Col;
+
+  /**
    * Define form layout
    * @default 'horizontal'
    * @type string
    */
   layout: 'horizontal' | 'inline' | 'vertical';
+
+  /**
+   * The layout for input controls, same as labelCol
+   * @type Col
+   */
+  wrapperCol: Col;
 
   /**
    * Automate Form.create, Recommended for use under the template component, and cannot be used with Form.create().

@@ -39,7 +39,7 @@ export default {
     const { value, defaultValue } = this.$props;
     return {
       stateValue: !hasProp(this, 'value') ? defaultValue : value,
-      isComposing: false
+      isComposing: false,
     };
   },
   watch: {
@@ -123,7 +123,9 @@ export default {
     },
 
     handleChange(e) {
-      this.setValue(e.target.value, e);
+      if (!e.target.composing) {
+        this.setValue(e.target.value, e);
+      }
     },
     handleComposition(e) {
       if (e.type === 'compositionstart') {
@@ -247,7 +249,7 @@ export default {
           input: handleChange,
           change: noop,
           compositionstart: handleComposition,
-          compositionend: handleComposition
+          compositionend: handleComposition,
         },
         class: getInputClassName(prefixCls),
         ref: 'input',
@@ -270,7 +272,7 @@ export default {
           change: handleChange,
           keydown: handleKeyDown,
           compositionstart: handleComposition,
-          compositionend: handleComposition
+          compositionend: handleComposition,
         },
         directives: [
           {

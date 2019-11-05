@@ -87,6 +87,11 @@ function TreeProps() {
     openAnimation: PropTypes.any,
     treeNodes: PropTypes.array,
     treeData: PropTypes.array,
+    /**
+     * @default{title,key,children}
+     * 替换treeNode中 title,key,children字段为treeData中对应的字段
+     */
+    replaceFields: PropTypes.object,
   };
 }
 
@@ -151,13 +156,15 @@ export default {
     },
     updateTreeData(treeData) {
       const { $slots, $scopedSlots } = this;
+      const defaultFields = { children: 'children', title: 'title', key: 'key' };
+      const replaceFields = { ...defaultFields, ...this.$props.replaceFields };
       return treeData.map(item => {
+        const key = item[replaceFields.key];
+        const children = item[replaceFields.children];
         const {
-          children,
           on = {},
           slots = {},
           scopedSlots = {},
-          key,
           class: cls,
           style,
           ...restProps
@@ -171,7 +178,7 @@ export default {
           title:
             $slots[slots.title] ||
             ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item)) ||
-            restProps.title,
+            restProps[replaceFields.title],
           dataRef: item,
           on,
           key,

@@ -24,6 +24,7 @@ const Switch = {
     defaultChecked: PropTypes.bool,
     autoFocus: PropTypes.bool,
     loading: PropTypes.bool,
+    beforeChange: PropTypes.func,
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },

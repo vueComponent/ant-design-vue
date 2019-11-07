@@ -1,4 +1,5 @@
 import { switchPropTypes } from './PropTypes';
+import { isFunction } from '../_util/vue-types/utils';
 import BaseMixin from '../_util/BaseMixin';
 import { hasProp, getOptionProps, getComponentFromProp } from '../_util/props-util';
 
@@ -43,26 +44,42 @@ export default {
   },
   methods: {
     setChecked(checked, e) {
-      if (this.disabled) {
-        return;
-      }
       if (!hasProp(this, 'checked')) {
         this.stateChecked = checked;
       }
       this.$emit('change', checked, e);
     },
+    handleChange(checked, e) {
+      if (this.disabled) {
+        return;
+      }
+      if (isFunction(this.beforeChange)) {
+        const before = this.beforeChange(checked);
+        if (before) { // true or Promise
+          if (before.then) {
+            before.then(() => {
+              this.setChecked(checked, e);
+            });
+          } else {
+            this.setChecked(checked, e);
+          }
+        }
+      } else {
+        this.setChecked(checked, e);
+      }
+    },
     handleClick(e) {
       const checked = !this.stateChecked;
-      this.setChecked(checked, e);
+      this.handleChange(checked, e);
       this.$emit('click', checked, e);
     },
     handleKeyDown(e) {
       if (e.keyCode === 37) {
         // Left
-        this.setChecked(false, e);
+        this.handleChange(false, e);
       } else if (e.keyCode === 39) {
         // Right
-        this.setChecked(true, e);
+        this.handleChange(true, e);
       }
     },
     handleMouseUp(e) {

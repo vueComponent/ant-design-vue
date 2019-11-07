@@ -10,6 +10,7 @@
 | loading           | 加载中的开关                        | boolean      | false   |
 | size              | 开关大小，可选值：`default` `small` | string       | default |
 | unCheckedChildren | 非选中时的内容                      | string\|slot |         |
+| beforeChange | 切换前的钩子，[示例用法](#components-switch-demo-beforechange) | function |  |
 
 ### 事件
 

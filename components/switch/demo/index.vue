@@ -4,6 +4,7 @@ import Disabled from './disabled';
 import Text from './text';
 import Size from './size';
 import Loading from './loading';
+import BeforeChange from './before-change';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -46,6 +47,8 @@ export default {
         <Size />
         <br />
         <Loading />
+        <br />
+        <BeforeChange />
         <br />
         <api>
           <template slot="cn">

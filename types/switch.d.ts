@@ -60,6 +60,11 @@ export declare class Switch extends AntdComponent {
   unCheckedChildren: any;
 
   /**
+   * before Switch's state changed
+   */
+  beforeChange: (checked: boolean) => any;
+
+  /**
    * remove focus
    */
   blur(): void;

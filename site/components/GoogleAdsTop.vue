@@ -23,11 +23,9 @@ export default {
         <ins
           ref="ins"
           class="adsbygoogle"
-          style="display:block"
+          style="display:inline-block;width:728px;height:90px"
           data-ad-client="ca-pub-4801326429087140"
-          data-ad-slot="7647023136"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
+          data-ad-slot="2425414214"
         ></ins>
       </div>
     );

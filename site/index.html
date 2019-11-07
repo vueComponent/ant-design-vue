@@ -43,6 +43,17 @@
     <div id="app">
       <router-view></router-view>
     </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151755889-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-151755889-1');
+    </script>
     <!-- Hotjar Tracking Code for http://vue.ant.design -->
     <script>
       (function(h, o, t, j, a, r) {

@@ -124,7 +124,7 @@ exports[`renders ./components/comment/demo/nested.md correctly 1`] = `
       </ul>
     </div>
   </div>
-  <div class="undefined-nested">
+  <div class="ant-comment-nested">
     <div class="ant-comment">
       <div class="ant-comment-inner">
         <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
@@ -141,7 +141,7 @@ exports[`renders ./components/comment/demo/nested.md correctly 1`] = `
           </ul>
         </div>
       </div>
-      <div class="undefined-nested">
+      <div class="ant-comment-nested">
         <div class="ant-comment">
           <div class="ant-comment-inner">
             <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>

@@ -30,9 +30,7 @@ const Comment = {
       const actionList = actions.map((action, index) => <li key={`action-${index}`}>{action}</li>);
       return actionList;
     },
-    renderNested(children) {
-      const { prefixCls } = this.$props;
-
+    renderNested(prefixCls, children) {
       return <div class={`${prefixCls}-nested`}>{children}</div>;
     },
   },
@@ -85,7 +83,7 @@ const Comment = {
     return (
       <div class={prefixCls} {...{ on: this.$listeners }}>
         {comment}
-        {children ? this.renderNested(children) : null}
+        {children ? this.renderNested(prefixCls, children) : null}
       </div>
     );
   },

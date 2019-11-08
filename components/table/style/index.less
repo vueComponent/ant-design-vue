@@ -200,6 +200,16 @@
   &-tbody > tr > td {
     border-bottom: @border-width-base @border-style-base @border-color-split;
     transition: all 0.3s, border 0s;
+
+    &.has-tooltip {
+
+      > div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+    }
   }
 
   &-thead > tr,

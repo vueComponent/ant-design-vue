@@ -1,6 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import get from 'lodash/get';
 import { isValidElement, mergeProps } from '../../_util/props-util';
+import Tooltip from '../../tooltip';
 
 function isInvalidRenderCellText(text) {
   return (
@@ -20,6 +21,33 @@ export default {
     expandIcon: PropTypes.any,
     component: PropTypes.any,
   },
+  data() {
+    return {
+      tooltipContent: '',
+      notShowTooltip: false,
+      tooltipVisible: false,
+    };
+  },
+  mounted() {
+    if (this.column.showOverflowTooltip) {
+      let cell = this.$el;
+      let cellWidth = cell.getBoundingClientRect().width;
+
+      // get real text width
+      let textWrapper = document.createElement('span');
+      textWrapper.innerText = this.tooltipContent;
+      document.body.appendChild(textWrapper);
+      let range = document.createRange();
+      range.setStart(textWrapper, 0);
+      range.setEnd(textWrapper, 1);
+      const textWidth = range.getBoundingClientRect().width;
+      document.body.removeChild(textWrapper);
+
+      if (cellWidth > textWidth) {
+        this.notShowTooltip = true;
+      }
+    }
+  },
   methods: {
     handleClick(e) {
       const {
@@ -29,6 +57,9 @@ export default {
       if (onCellClick) {
         onCellClick(record, e);
       }
+    },
+    handleVisibilityChange(visible) {
+      this.tooltipVisible = this.notShowTooltip ? false : visible;
     },
   },
 
@@ -55,6 +86,8 @@ export default {
     } else {
       text = get(record, dataIndex);
     }
+    this.tooltipContent = text;
+
     let tdProps = {
       props: {},
       attrs: {},
@@ -100,12 +133,31 @@ export default {
       tdProps.style = { ...tdProps.style, textAlign: column.align };
     }
 
-    return (
-      <BodyCell {...tdProps}>
-        {indentText}
-        {expandIcon}
-        {text}
-      </BodyCell>
-    );
+    if (column.showOverflowTooltip) {
+      return (
+          <BodyCell {...tdProps} class="has-tooltip" style={{maxWidth: 0}}>
+            <Tooltip
+              onVisibleChange={this.handleVisibilityChange}
+              visible={this.tooltipVisible}
+              placement="top"
+              title={this.tooltipContent}>
+              <div>
+                {indentText}
+                {expandIcon}
+                {text}
+              </div>
+            </Tooltip>
+          </BodyCell>
+      );
+    } else {
+      return (
+        <BodyCell {...tdProps}>
+          {indentText}
+          {expandIcon}
+          {text}
+        </BodyCell>
+      );
+    }
+
   },
 };

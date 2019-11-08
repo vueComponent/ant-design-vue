@@ -37,6 +37,7 @@ export const ColumnProps = {
   filteredValue: PropTypes.array,
   sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['ascend', 'descend'])]),
   sortDirections: PropTypes.array,
+  showOverflowTooltip: PropTypes.bool,
   // children?: ColumnProps<T>[];
   // onCellClick?: (record: T, event: any) => void;
   // onCell?: (record: T) => any;

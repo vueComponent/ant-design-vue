@@ -61,6 +61,17 @@ export default {
     handleVisibilityChange(visible) {
       this.tooltipVisible = this.notShowTooltip ? false : visible;
     },
+    getRawText(record, dataIndex) {
+      let text;
+      if (typeof dataIndex === 'number') {
+        text = get(record, dataIndex);
+      } else if (!dataIndex || dataIndex.length === 0) {
+        text = record;
+      } else {
+        text = get(record, dataIndex);
+      }
+      return text;
+    },
   },
 
   render() {
@@ -78,14 +89,7 @@ export default {
     const cls = className || column.class;
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
-    let text;
-    if (typeof dataIndex === 'number') {
-      text = get(record, dataIndex);
-    } else if (!dataIndex || dataIndex.length === 0) {
-      text = record;
-    } else {
-      text = get(record, dataIndex);
-    }
+    let text = this.getRawText(record, dataIndex);
     this.tooltipContent = text;
 
     let tdProps = {
@@ -133,31 +137,25 @@ export default {
       tdProps.style = { ...tdProps.style, textAlign: column.align };
     }
 
-    if (column.showOverflowTooltip) {
-      return (
-          <BodyCell {...tdProps} class="has-tooltip" style={{maxWidth: 0}}>
-            <Tooltip
-              onVisibleChange={this.handleVisibilityChange}
-              visible={this.tooltipVisible}
-              placement="top"
-              title={this.tooltipContent}>
-              <div>
-                {indentText}
-                {expandIcon}
-                {text}
-              </div>
-            </Tooltip>
-          </BodyCell>
-      );
-    } else {
-      return (
-        <BodyCell {...tdProps}>
-          {indentText}
-          {expandIcon}
-          {text}
-        </BodyCell>
-      );
-    }
+    const cellContent = [
+      indentText,
+      expandIcon,
+      text,
+    ];
 
+    return column.showOverflowTooltip ? (
+      <BodyCell {...tdProps} class="has-tooltip" style={{maxWidth: 0}}>
+        <Tooltip
+          onVisibleChange={this.handleVisibilityChange}
+          visible={this.tooltipVisible}
+          title={this.tooltipContent}>
+          <div>{cellContent}</div>
+        </Tooltip>
+      </BodyCell>
+    ) : (
+      <BodyCell {...tdProps}>
+        {cellContent}
+      </BodyCell>
+    );
   },
 };

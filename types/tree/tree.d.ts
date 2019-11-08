@@ -17,12 +17,15 @@ export declare class Tree extends AntdComponent {
   treeData: TreeNode[];
 
    /**
-   * @default{ children:'children', title:'title', key:'key' }
-   * Replace the title,key and children fields in treeNode with the corresponding fields in treeData
+   *
+   *@description Replace the title,key and children fields in treeNode with the corresponding fields in treeData
    */
   replaceFields?: {
+    /**@default 'children' */
     children?: string;
+    /**@default 'title' */
     title?: string;
+    /**@default 'key' */
     key?: string;
   };
 

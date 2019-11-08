@@ -133,31 +133,25 @@ export default {
       tdProps.style = { ...tdProps.style, textAlign: column.align };
     }
 
-    if (column.showOverflowTooltip) {
-      return (
-          <BodyCell {...tdProps} class="has-tooltip" style={{maxWidth: 0}}>
-            <Tooltip
-              onVisibleChange={this.handleVisibilityChange}
-              visible={this.tooltipVisible}
-              placement="top"
-              title={this.tooltipContent}>
-              <div>
-                {indentText}
-                {expandIcon}
-                {text}
-              </div>
-            </Tooltip>
-          </BodyCell>
-      );
-    } else {
-      return (
-        <BodyCell {...tdProps}>
-          {indentText}
-          {expandIcon}
-          {text}
-        </BodyCell>
-      );
-    }
+    const cellContent = [
+      indentText,
+      expandIcon,
+      text,
+    ];
 
+    return column.showOverflowTooltip ? (
+      <BodyCell {...tdProps} class="has-tooltip" style={{maxWidth: 0}}>
+        <Tooltip
+          onVisibleChange={this.handleVisibilityChange}
+          visible={this.tooltipVisible}
+          title={this.tooltipContent}>
+          <div>{cellContent}</div>
+        </Tooltip>
+      </BodyCell>
+    ) : (
+      <BodyCell {...tdProps}>
+        {cellContent}
+      </BodyCell>
+    );
   },
 };

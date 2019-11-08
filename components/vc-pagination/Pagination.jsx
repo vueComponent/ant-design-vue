@@ -170,10 +170,9 @@ export default {
         event.preventDefault();
       }
     },
-    handleKeyUp(event) {
-      const inputValue = event.target.value;
+    handleKeyUp(e) {
+      const value = this.getValidValue(e);
       const stateCurrentInputValue = this.stateCurrentInputValue;
-      let value;
 
       if (value !== stateCurrentInputValue) {
         this.setState({
@@ -181,11 +180,11 @@ export default {
         });
       }
 
-      if (event.keyCode === KEYCODE.ENTER) {
+      if (e.keyCode === KEYCODE.ENTER) {
         this.handleChange(value);
-      } else if (event.keyCode === KEYCODE.ARROW_UP) {
+      } else if (e.keyCode === KEYCODE.ARROW_UP) {
         this.handleChange(value - 1);
-      } else if (event.keyCode === KEYCODE.ARROW_DOWN) {
+      } else if (e.keyCode === KEYCODE.ARROW_DOWN) {
         this.handleChange(value + 1);
       }
     },

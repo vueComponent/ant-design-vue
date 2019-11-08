@@ -5,7 +5,7 @@
 import { AntdComponent } from '../component';
 import { VNode } from 'vue';
 
-export declare class AStatisticCountdown extends AntdComponent {
+export declare class StatisticCountdown extends AntdComponent {
   format: string;
   /**
    * prefix node of value

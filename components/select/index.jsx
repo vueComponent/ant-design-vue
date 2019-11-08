@@ -43,7 +43,7 @@ const AbstractSelectProps = () => ({
   loading: PropTypes.bool,
 });
 const Value = PropTypes.shape({
-  key: PropTypes.string,
+  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }).loose;
 
 const SelectValue = PropTypes.oneOfType([

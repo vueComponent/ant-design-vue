@@ -15,6 +15,7 @@ function chooseYear(year) {
   const value = this.sValue.clone();
   value.year(year);
   value.month(this.sValue.month());
+  this.sValue = value
   this.__emit('select', value);
 }
 

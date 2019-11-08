@@ -10,6 +10,33 @@
 
 ---
 
+## 1.4.4
+
+`2019-10-30`
+
+- 🌟 Progress format 支持 v-slot [#1348](https://github.com/vueComponent/ant-design-vue/issues/1348)
+- 🐞 修复 RangePicker 年份面板失效问题 [#1321](https://github.com/vueComponent/ant-design-vue/issues/1321)
+- 🐞 修复 Pagination simple 模式失效问题 [#1333](https://github.com/vueComponent/ant-design-vue/issues/1333)
+- 🐞 修复 AutoComplete 快速输入时闪动现象 [#1327](https://github.com/vueComponent/ant-design-vue/issues/1327)
+- 🐞 修复 Button loading 模式下不居中问题 [#1337](https://github.com/vueComponent/ant-design-vue/issues/1337)
+- 🐞 修复 Menu margin 间距重叠，以及导致的展开时卡顿问题 [#873](https://github.com/vueComponent/ant-design-vue/issues/873)
+- 🐞 修复 Checkbox v-model 参数校验失败问题 [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+- 🐞 修复 Checkbox.Group 更新 value undefined 时报错问题 [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+
+## 1.4.3
+
+`2019-10-22`
+
+- 🐞 修复 Input 导致的 Cascader 组件样式问题 [#1293](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复部分组件不能使用 `<template slot="xxx" />` 问题 [041839](https://github.com/vueComponent/ant-design-vue/commit/041839b90131d3a4e6a5663986b811d60d4e6ba2)
+
+## 1.4.2
+
+`2019-10-21`
+
+- 🐞 修复 Radio.Group 触发多次 change 回调问题 [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复 Pagination 输入框跳转无效问题 [#1316](https://github.com/vueComponent/ant-design-vue/issues/1316)
+
 ## 1.4.1
 
 `2019-10-17`

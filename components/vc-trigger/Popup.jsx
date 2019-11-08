@@ -30,6 +30,7 @@ export default {
     }),
   },
   data() {
+    this.domEl = null;
     return {
       // Used for stretch
       stretchChecked: false,
@@ -42,6 +43,12 @@ export default {
       this.rootNode = this.getPopupDomNode();
       this.setStretchSize();
     });
+  },
+  beforeUpdate() {
+    if (this.domEl && this.domEl.rcEndListener) {
+      this.domEl.rcEndListener();
+      this.domEl = null;
+    }
   },
   updated() {
     this.$nextTick(() => {
@@ -209,17 +216,21 @@ export default {
       const transitionEvent = {
         beforeEnter: () => {
           // el.style.display = el.__vOriginalDisplay
-          // this.$refs.alignInstance.forceAlign()
+          // this.$refs.alignInstance.forceAlign();
         },
         enter: (el, done) => {
-          // align updated后执行动画
+          // render 后 vue 会移除通过animate动态添加的 class导致动画闪动，延迟两帧添加动画class，可以进一步定位或者重写 transition 组件
           this.$nextTick(() => {
             if (this.$refs.alignInstance) {
               this.$refs.alignInstance.$nextTick(() => {
+                this.domEl = el;
                 animate(el, `${transitionName}-enter`, done);
               });
             }
           });
+        },
+        beforeLeave: () => {
+          this.domEl = null;
         },
         leave: (el, done) => {
           animate(el, `${transitionName}-leave`, done);

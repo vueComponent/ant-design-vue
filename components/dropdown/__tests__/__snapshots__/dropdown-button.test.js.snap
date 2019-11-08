@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DropdownButton should support href like Button 1`] = `
-<div class="ant-btn-group ant-dropdown-button"><a href="https://ant.design" class="ant-btn ant-btn-default"></a><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><i aria-label="icon: ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<div class="ant-btn-group ant-dropdown-button"><a href="https://ant.design" class="ant-btn ant-btn-default"></a><button type="button" class="ant-btn ant-btn-default ant-btn-icon-only ant-dropdown-trigger"><i aria-label="icon: ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
         <path d="M176 511a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm280 0a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm280 0a56 56 0 1 0 112 0 56 56 0 1 0-112 0z"></path>
       </svg></i></button></div>
 `;

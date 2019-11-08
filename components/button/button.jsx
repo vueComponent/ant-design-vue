@@ -45,13 +45,14 @@ export default {
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
 
       const sizeCls = sizeMap[size] || '';
+      const iconType = sLoading ? 'loading' : icon;
       const children = filterEmpty($slots.default);
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
         [`${prefixCls}-${sizeCls}`]: sizeCls,
-        [`${prefixCls}-icon-only`]: !children && children !== 0 && icon,
+        [`${prefixCls}-icon-only`]: children.length === 0 && iconType,
         [`${prefixCls}-loading`]: sLoading,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar && autoInsertSpace,

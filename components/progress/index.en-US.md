@@ -5,7 +5,7 @@ Properties that shared by all types.
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | type | to set the type, options: `line` `circle` `dashboard` | string | `line` |
-| format | template function of the content | function(percent, successPercent) | `percent => percent + '%'` |
+| format | template function of the content | function(percent, successPercent) \| v-slot:format="percent, successPercent" | `percent => percent + '%'` |
 | percent | to set the completion percentage | number | 0 |
 | showInfo | whether to display the progress value and the status icon | boolean | true |
 | status | to set the status of the Progress, options: `success` `exception` `active` `normal` | string | - |

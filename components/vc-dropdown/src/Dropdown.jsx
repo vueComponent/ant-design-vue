@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import placements from './placements';

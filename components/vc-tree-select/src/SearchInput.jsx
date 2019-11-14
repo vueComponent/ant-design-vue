@@ -103,6 +103,9 @@ const SearchInput = {
                 name: 'ant-ref',
                 value: this.inputRef,
               },
+              {
+                name: 'ant-input',
+              },
             ],
           }}
           onInput={onSearchInputChange}

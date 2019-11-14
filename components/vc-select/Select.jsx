@@ -733,7 +733,19 @@ const Select = {
       const props = this.$props;
       const { _inputValue: inputValue } = this.$data;
       const attrs = getAttrs(this);
-      const defaultInput = <input id={attrs.id} autoComplete="off" />;
+      const defaultInput = (
+        <input
+          {...{
+            directives: [
+              {
+                name: 'ant-input',
+              },
+            ],
+          }}
+          id={attrs.id}
+          autoComplete="off"
+        />
+      );
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;
       const inputCls = classnames(getClass(inputElement), {

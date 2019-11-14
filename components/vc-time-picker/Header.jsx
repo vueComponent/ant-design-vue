@@ -178,6 +178,13 @@ const Header = {
           placeholder={placeholder}
           onInput={this.onInputChange}
           readOnly={!!inputReadOnly}
+          {...{
+            directives: [
+              {
+                name: 'ant-input',
+              },
+            ],
+          }}
         />
       );
     },

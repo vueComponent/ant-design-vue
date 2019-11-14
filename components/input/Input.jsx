@@ -251,9 +251,7 @@ export default {
         ref: 'input',
         key: 'ant-input',
       };
-      if ($listeners['change.value']) {
-        inputProps.directives = [{ name: 'ant-input' }];
-      }
+      inputProps.directives = [{ name: 'ant-input' }];
       return this.renderLabeledIcon(prefixCls, <input {...inputProps} />);
     },
   },

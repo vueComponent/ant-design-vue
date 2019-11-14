@@ -355,6 +355,13 @@ export default {
               onKeyup={this.handleKeyUp}
               onInput={this.handleKeyUp}
               size="3"
+              {...{
+                directives: [
+                  {
+                    name: 'ant-input',
+                  },
+                ],
+              }}
             />
             <span class={`${prefixCls}-slash`}>／</span>
             {allPages}

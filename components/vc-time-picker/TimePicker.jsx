@@ -377,6 +377,13 @@ export default {
             autoFocus={autoFocus}
             readOnly={!!inputReadOnly}
             id={id}
+            {...{
+              directives: [
+                {
+                  name: 'ant-input',
+                },
+              ],
+            }}
           />
           {inputIcon || <span class={`${prefixCls}-icon`} />}
           {this.renderClearButton()}

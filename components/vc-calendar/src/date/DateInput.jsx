@@ -178,6 +178,9 @@ const DateInput = {
                   name: 'ant-ref',
                   value: this.saveDateInput,
                 },
+                {
+                  name: 'ant-input',
+                },
               ],
             }}
             class={`${prefixCls}-input ${invalidClass}`}

@@ -1,5 +1,5 @@
 <cn>
-#### 基本用法
+#### 自定义TreeNode字段
 替换treeNode中 title,key,children字段为treeData中对应的字段
 </cn>
 

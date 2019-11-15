@@ -184,18 +184,18 @@ span.@{radio-prefix-cls} + * {
     line-height: @input-height-sm - 2px;
   }
 
-  // &:not(:first-child) {
-  //   &::before {
-  //     position: absolute;
-  //     top: 0;
-  //     left: -1px;
-  //     display: block;
-  //     width: 1px;
-  //     height: 100%;
-  //     background-color: @border-color-base;
-  //     content: '';
-  //   }
-  // }
+  &:not(:first-child) {
+    &::before {
+      position: absolute;
+      top: 0;
+      left: -1px;
+      display: block;
+      width: 1px;
+      height: 100%;
+      background-color: @border-color-base;
+      content: '';
+    }
+  }
   &:first-child {
     border-left: @border-width-base @border-style-base @border-color-base;
     border-radius: @border-radius-base 0 0 @border-radius-base;

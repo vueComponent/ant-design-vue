@@ -88,7 +88,7 @@ const columns = [
       },
       on: { // 事件
         click: (event) => {},       // 点击行
-        doubleclick: (event) => {},
+        dbclick: (event) => {},
         contextmenu: (event) => {},
         mouseenter: (event) => {},  // 鼠标移入行
         mouseleave: (event) => {}

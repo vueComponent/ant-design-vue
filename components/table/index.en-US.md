@@ -88,7 +88,7 @@ Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`. Follow [V
       },
       on: {
         click: (event) => {},       // click row
-        doubleclick: (event) => {}, // double click row
+        dbclick: (event) => {}, // double click row
         contextmenu: (event) => {}  // right button click row
         mouseenter: (event) => {}   // mouse enter row
         mouseleave: (event) => {}   // mouse leave row

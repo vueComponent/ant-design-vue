@@ -124,6 +124,7 @@ export default {
     },
 
     handleChange(e) {
+      if (e.target.composing) return;
       this.setValue(e.target.value, e);
     },
 
@@ -237,6 +238,7 @@ export default {
       ]);
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
       const inputProps = {
+        directives: [{ name: 'ant-input' }],
         domProps: {
           value: fixControlledValue(stateValue),
         },
@@ -251,7 +253,6 @@ export default {
         ref: 'input',
         key: 'ant-input',
       };
-      inputProps.directives = [{ name: 'ant-input' }];
       return this.renderLabeledIcon(prefixCls, <input {...inputProps} />);
     },
   },
@@ -263,8 +264,9 @@ export default {
         attrs: this.$attrs,
         on: {
           ...$listeners,
-          change: this.handleChange,
+          input: this.handleChange,
           keydown: this.handleKeyDown,
+          change: noop,
         },
         directives: [
           {

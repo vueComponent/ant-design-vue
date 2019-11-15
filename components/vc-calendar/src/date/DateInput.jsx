@@ -82,6 +82,7 @@ const DateInput = {
       this.__emit('clear', null);
     },
     onInputChange(event) {
+      if (event.target.composing) return;
       const str = event.target.value;
       // https://github.com/vueComponent/ant-design-vue/issues/92
       if (isIE && !isIE9 && this.str === str) {

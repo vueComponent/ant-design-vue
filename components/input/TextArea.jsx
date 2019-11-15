@@ -116,6 +116,7 @@ export default {
     },
 
     handleTextareaChange(e) {
+      if (e.target.composing) return;
       if (!hasProp(this, 'value')) {
         this.stateValue = e.target.value;
         this.resizeTextarea();
@@ -163,6 +164,7 @@ export default {
     });
 
     const textareaProps = {
+      directives: [{ name: 'ant-input' }],
       attrs: { ...otherProps, ...$attrs },
       on: {
         ...$listeners,
@@ -171,9 +173,6 @@ export default {
         change: noop,
       },
     };
-    if ($listeners['change.value']) {
-      textareaProps.directives = [{ name: 'ant-input' }];
-    }
     return (
       <textarea
         {...textareaProps}

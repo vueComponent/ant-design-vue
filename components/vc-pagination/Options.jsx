@@ -32,6 +32,7 @@ export default {
       return `${opt.value} ${this.locale.items_per_page}`;
     },
     handleChange(e) {
+      if (e.target.composing) return;
       this.setState({
         goInputText: e.target.value,
       });
@@ -126,7 +127,7 @@ export default {
             disabled={disabled}
             type="text"
             value={goInputText}
-            onChange={this.handleChange}
+            onInput={this.handleChange}
             onKeyup={this.go}
             onBlur={this.handleBlur}
             {...{

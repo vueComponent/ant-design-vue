@@ -303,6 +303,7 @@ const Select = {
     },
 
     onInputChange(event) {
+      if (event.target.composing) return;
       const { tokenSeparators } = this.$props;
       const val = event.target.value;
       if (

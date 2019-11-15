@@ -7,6 +7,8 @@
 | form | Decorated by `Form.create()` will be automatically set `this.form` property, so just pass to form. If you use the template syntax, you can use `this.$form.createForm(this, options)` | object | n/a |
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |
 | layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
+| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |
+| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |
 | autoFormCreate(deprecated) | Automate Form.create, Recommended for use under the `template` component, and cannot be used with `Form.create()`. You should use `$form.createForm` to instead it after 1.1.9. | Function(form) |  |
 | options(deprecated) | The `options` corresponding to `Form.create(options)`. You should use `$form.createForm` to instead it after 1.1.9. | Object | {} |
 

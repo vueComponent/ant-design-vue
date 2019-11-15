@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
+import { ColProps } from '../grid/Col';
 import Vue from 'vue';
 import isRegExp from 'lodash/isRegExp';
 import warning from '../_util/warning';
@@ -59,6 +60,8 @@ export const WrappedFormUtils = {
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
+  labelCol: PropTypes.shape(ColProps).loose,
+  wrapperCol: PropTypes.shape(ColProps).loose,
   form: PropTypes.object,
   // onSubmit: React.FormEventHandler<any>;
   prefixCls: PropTypes.string,

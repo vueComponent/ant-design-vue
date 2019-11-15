@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Base from '../components/base';
 // Vue.config.silent = true
 
 /* eslint-disable global-require */
@@ -25,6 +26,7 @@ const mockMath = Object.create(global.Math);
 mockMath.random = () => 0.5;
 global.Math = mockMath;
 
+Vue.use(Base);
 Vue.component('transition-group', {
   props: ['tag'],
   render(createElement) {

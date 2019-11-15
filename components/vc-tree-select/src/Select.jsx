@@ -790,7 +790,6 @@ const Select = {
     },
 
     onSearchInputChange(event) {
-      if (event.target.composing) return;
       const value = event.target.value;
       const { _treeNodes: treeNodes, _valueEntities: valueEntities } = this.$data;
       const { filterTreeNode, treeNodeFilterProp } = this.$props;

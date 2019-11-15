@@ -302,10 +302,11 @@ const Select = {
       return value;
     },
 
-    onInputChange(event) {
-      if (event.target.composing) return;
+    onInputChange(e) {
+      const { value: val, composing } = e.target;
+      const { _inputValue = '' } = this;
+      if (composing || _inputValue === val) return;
       const { tokenSeparators } = this.$props;
-      const val = event.target.value;
       if (
         isMultipleOrTags(this.$props) &&
         tokenSeparators.length &&

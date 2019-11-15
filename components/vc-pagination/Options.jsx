@@ -32,9 +32,10 @@ export default {
       return `${opt.value} ${this.locale.items_per_page}`;
     },
     handleChange(e) {
-      if (e.target.composing) return;
+      const { value, composing } = e.target;
+      if (composing || this.goInputText === value) return;
       this.setState({
-        goInputText: e.target.value,
+        goInputText: value,
       });
     },
     handleBlur() {

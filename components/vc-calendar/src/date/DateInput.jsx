@@ -81,13 +81,11 @@ const DateInput = {
       });
       this.__emit('clear', null);
     },
-    onInputChange(event) {
-      if (event.target.composing) return;
-      const str = event.target.value;
-      // https://github.com/vueComponent/ant-design-vue/issues/92
-      if (isIE && !isIE9 && this.str === str) {
-        return;
-      }
+    onInputChange(e) {
+      const { value: str, composing } = e.target;
+      const { str: oldStr = '' } = this;
+      if (composing || oldStr === str) return;
+
       const { disabledDate, format, selectedValue } = this.$props;
 
       // 没有内容，合法并直接退出

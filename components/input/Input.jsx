@@ -38,7 +38,7 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    const { value, defaultValue } = this.$props;
+    const { value = '', defaultValue = '' } = this.$props;
     return {
       stateValue: !hasProp(this, 'value') ? defaultValue : value,
     };
@@ -85,8 +85,7 @@ export default {
     },
 
     setValue(value, e) {
-      // https://github.com/vueComponent/ant-design-vue/issues/92
-      if (isIE && !isIE9 && this.stateValue === value) {
+      if (this.stateValue === value) {
         return;
       }
       if (!hasProp(this, 'value')) {
@@ -94,9 +93,7 @@ export default {
       } else {
         this.$forceUpdate();
       }
-      if (!e.target.composing) {
-        this.$emit('change.value', value);
-      }
+      this.$emit('change.value', value);
       let event = e;
       if (e.type === 'click' && this.$refs.input) {
         // click clear icon
@@ -124,8 +121,9 @@ export default {
     },
 
     handleChange(e) {
-      if (e.target.composing) return;
-      this.setValue(e.target.value, e);
+      const { value, composing } = e.target;
+      if (composing || this.stateValue === value) return;
+      this.setValue(value, e);
     },
 
     renderClearIcon(prefixCls) {

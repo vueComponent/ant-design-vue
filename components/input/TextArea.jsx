@@ -42,7 +42,7 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    const { value, defaultValue } = this.$props;
+    const { value = '', defaultValue = '' } = this.$props;
     return {
       stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
       nextFrameActionId: undefined,
@@ -116,16 +116,16 @@ export default {
     },
 
     handleTextareaChange(e) {
-      if (e.target.composing) return;
+      const { value, composing } = e.target;
+      if (composing || this.stateValue === value) return;
       if (!hasProp(this, 'value')) {
-        this.stateValue = e.target.value;
+        this.stateValue = value;
         this.resizeTextarea();
       } else {
         this.$forceUpdate();
       }
-      if (!e.target.composing) {
-        this.$emit('change.value', e.target.value);
-      }
+
+      this.$emit('change.value', value);
       this.$emit('change', e);
       this.$emit('input', e);
     },

@@ -52,7 +52,7 @@ export const Meta = {
 };
 
 function getGrid(grid, t) {
-  return grid[t] && Math.floor(24 / grid[t]);
+  return grid[t] || (24 / grid[t] && Math.floor(24 / grid[t])) ;
 }
 
 export default {

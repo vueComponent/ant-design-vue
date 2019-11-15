@@ -1,6 +1,7 @@
 import omit from 'omit.js';
 import debounce from 'lodash/debounce';
 import PropTypes from '../_util/vue-types';
+import warning from '../_util/warning';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
 import Tree, { TreeProps } from './Tree';
 import { calcRangeKeys, getFullKeyList } from './util';
@@ -9,7 +10,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { initDefaultProps, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
-// export type ExpandAction = false | 'click' | 'doubleClick'; export interface
+// export type ExpandAction = false | 'click' | 'dbclick'; export interface
 // DirectoryTreeProps extends TreeProps {   expandAction?: ExpandAction; }
 // export interface DirectoryTreeState {   expandedKeys?: string[];
 // selectedKeys?: string[]; }
@@ -32,7 +33,7 @@ export default {
   props: initDefaultProps(
     {
       ...TreeProps(),
-      expandAction: PropTypes.oneOf([false, 'click', 'doubleclick']),
+      expandAction: PropTypes.oneOf([false, 'click', 'doubleclick', 'dbclick']),
     },
     {
       showIcon: true,
@@ -103,11 +104,12 @@ export default {
       const { expandAction } = this.$props;
 
       // Expand the tree
-      if (expandAction === 'doubleclick') {
+      if (expandAction === 'dbclick' || expandAction === 'doubleclick') {
         this.onDebounceExpand(event, node);
       }
 
       this.$emit('doubleclick', event, node);
+      this.$emit('dbclick', event, node);
     },
 
     onSelect(keys, event) {
@@ -181,6 +183,10 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tree', customizePrefixCls);
     const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data;
+    warning(
+      !this.$listeners.doubleclick,
+      '`doubleclick` is deprecated. please use `dbclick` instead.',
+    );
     const treeProps = {
       props: {
         icon: getIcon,
@@ -195,7 +201,7 @@ export default {
         ...omit(this.$listeners, ['update:selectedKeys']),
         select: this.onSelect,
         click: this.onClick,
-        doubleclick: this.onDoubleClick,
+        dbclick: this.onDoubleClick,
         expand: this.onExpand,
       },
     };

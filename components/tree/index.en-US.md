@@ -63,9 +63,9 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 
 ### DirectoryTree props
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| expandAction | Directory open logic, optional `false` `'click'` `'doubleclick'` | string | click |
+| Property     | Description                                                  | Type   | Default |
+| ------------ | ------------------------------------------------------------ | ------ | ------- |
+| expandAction | Directory open logic, optional `false` `'click'` `'dbclick'` | string | click   |
 
 ## FAQ
 

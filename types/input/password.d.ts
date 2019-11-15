@@ -4,6 +4,6 @@
 
 import { AntdComponent } from '../component';
 
-export declare class Passward extends AntdComponent {
+export declare class Password extends AntdComponent {
   visibilityToggle?: boolean;
 }

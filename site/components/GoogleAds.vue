@@ -19,7 +19,7 @@ export default {
   },
   render() {
     return (
-      <div class="google-ads">
+      <div class="google-ads" id="api">
         <ins
           ref="ins"
           class="adsbygoogle"

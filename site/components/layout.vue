@@ -131,9 +131,11 @@ export default {
         const title = isCN ? cnTitle : usTitle;
         lis.push(<a-anchor-link key={id} href={`#${id}`} title={title} />);
       });
+      const showApi = this.$route.path.indexOf('/components/') !== -1;
       return (
         <a-anchor offsetTop={100} class="demo-anchor">
           {lis}
+          {showApi ? <a-anchor-link key="API" title="API" href="#api" /> : ''}
         </a-anchor>
       );
     },

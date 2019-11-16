@@ -10,6 +10,24 @@
 
 ---
 
+## 1.4.5
+
+`2019-11-16`
+
+- 🌟 `Form` support `labelCol` `wrapperCol` for setting layout [#1365](https://github.com/vueComponent/ant-design-vue/pull/1365)
+- 🌟 `Input` `Select` `DatePicker` trigger change event after input Chinese, reducing unnecessary performance consumption [#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
+- 🐞 Fixed when the placeholder of `Input` `Select` is Chinese, the change event is automatically triggered under ie [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
+- Tree
+
+  - 🌟 Add the `replaceFields` field to customize the `title` `children` [#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
+  - 🌟 update event `doubleclick` to `dbclick` [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
+
+- 🐞 Fix `Input` Delete content under ie9 does not trigger change event [#1421](https://github.com/vueComponent/ant-design-vue/issues/1421)
+- 🐞 Fix `Dropdown` `disabled` invalid problem [#1400](https://github.com/vueComponent/ant-design-vue/issues/1400)
+- 🐞 Fix Select type error when `lableInValue` [#1393](https://github.com/vueComponent/ant-design-vue/pull/1393)
+- 🐞 Fix Comment style question [#1389](https://github.com/vueComponent/ant-design-vue/pull/1389)
+- 🐞 Fix `Statistic` `Password` TypeScript type definition.
+
 ## 1.4.4
 
 `2019-10-30`

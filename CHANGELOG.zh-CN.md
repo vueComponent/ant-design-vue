@@ -10,6 +10,24 @@
 
 ---
 
+## 1.4.5
+
+`2019-11-16`
+
+- 🌟 `Form` 支持 `labelCol` `wrapperCol` 统一设置布局 [#1365](https://github.com/vueComponent/ant-design-vue/pull/1365)
+- 🌟 `Input` `Select` `DatePicker` 输入中文完毕后触发相关事件，减少不必要的性能消耗[#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
+- 🐞 修复 `Input` `Select` 的 placeholder 为中文时，在 ie 下自动触发 change 事件问题 [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
+- Tree
+
+  - 🌟 添加 replaceFields 字段用来自定义 title children。[#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
+  - 🌟 更新事件 doubleclick 为 dbclick [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
+
+- 🐞 修复 Input 在 ie9 下删除内容不触发 change 事件问题 [#1421](https://github.com/vueComponent/ant-design-vue/issues/1421)
+- 🐞 修复 Dropdown disabled 无效问题 [#1400](https://github.com/vueComponent/ant-design-vue/issues/1400)
+- 🐞 修复 Select lableInValue 时类型校验错误 [#1393](https://github.com/vueComponent/ant-design-vue/pull/1393)
+- 🐞 修复 Comment 样式问题 [#1389](https://github.com/vueComponent/ant-design-vue/pull/1389)
+- 🐞 修复 `Statistic` `Password` TypeScript 类型定义。
+
 ## 1.4.4
 
 `2019-10-30`

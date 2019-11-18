@@ -33,25 +33,25 @@ export default {
   subtitle: '开关',
   type: 'Data Entry',
   title: 'Switch',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
-        <br/>
+        <br />
         <Disabled />
-        <br/>
+        <br />
         <Text />
-        <br/>
+        <br />
         <Size />
-        <br/>
+        <br />
         <Loading />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

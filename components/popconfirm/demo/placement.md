@@ -8,7 +8,7 @@
 There are 12 `placement` options available. Use `arrowPointAtCenter` if you want arrow point at the center of target.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-a-popconfirm-demo-placement">
     <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">
@@ -90,8 +90,8 @@ There are 12 `placement` options available. Use `arrowPointAtCenter` if you want
       </a-popconfirm>
       <a-popconfirm placement="bottom" okText="Yes" cancelText="No" @confirm="confirm">
         <template slot="title">
-            <p>{{text}}</p>
-            <p>{{text}}</p>
+          <p>{{text}}</p>
+          <p>{{text}}</p>
         </template>
         <a-button>Bottom</a-button>
       </a-popconfirm>
@@ -106,30 +106,29 @@ There are 12 `placement` options available. Use `arrowPointAtCenter` if you want
   </div>
 </template>
 <script>
-import { message } from 'ant-design-vue'
+  import { message } from 'ant-design-vue';
 
-export default {
-  data () {
-    return {
-      buttonWidth: 70,
-      text: 'Are you sure to delete this task?',
-    }
-  },
-  methods: {
-    confirm () {
-      message.info('Clicked on Yes.')
+  export default {
+    data() {
+      return {
+        buttonWidth: 70,
+        text: 'Are you sure to delete this task?',
+      };
     },
-  },
-}
+    methods: {
+      confirm() {
+        message.info('Clicked on Yes.');
+      },
+    },
+  };
 </script>
 <style scoped>
-#components-a-popconfirm-demo-placement .ant-btn {
-  width: 70px;
-  text-align: center;
-  padding: 0;
-  margin-right: 8px;
-  margin-bottom: 8px;
-}
+  #components-a-popconfirm-demo-placement .ant-btn {
+    width: 70px;
+    text-align: center;
+    padding: 0;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
 </style>
 ```
-

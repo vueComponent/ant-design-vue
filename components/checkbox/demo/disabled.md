@@ -8,7 +8,7 @@ checkbox 不可用
 Disabled checkbox
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-checkbox :defaultChecked="false" disabled />

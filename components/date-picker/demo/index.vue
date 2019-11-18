@@ -11,6 +11,7 @@ import Size from './size';
 import StartEnd from './start-end';
 import Time from './time';
 import Suffix from './suffix';
+import Text from './text';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
@@ -32,25 +33,26 @@ export default {
   zhType: '数据录入',
   title: 'DatePicker',
   subtitle: '日期选择框',
-  render () {
+  render() {
     return (
-      <div id='components-date-picker-demo'>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <DateRender/>
-        <DisabledDate/>
-        <Disabled/>
-        <ExtraFooter/>
-        <Format/>
-        <Mode/>
-        <PresettedRanges/>
-        <Size/>
-        <StartEnd/>
-        <Time/>
+      <div id="components-date-picker-demo">
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <DateRender />
+        <DisabledDate />
+        <Disabled />
+        <ExtraFooter />
+        <Format />
+        <Mode />
+        <PresettedRanges />
+        <Size />
+        <StartEnd />
+        <Time />
+        <Text />
         <Suffix />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
@@ -61,5 +63,4 @@ export default {
 #components-date-picker-demo .ant-calendar-picker {
   margin: 0 8px 12px 0;
 }
-
 </style>

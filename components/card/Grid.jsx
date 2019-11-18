@@ -1,13 +1,21 @@
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ACardGrid',
   __ANT_CARD_GRID: true,
   props: {
-    prefixCls: PropTypes.string.def('ant-card'),
+    prefixCls: PropTypes.string,
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
-    const { prefixCls = 'ant-card' } = this.$props;
+    const { prefixCls: customizePrefixCls } = this.$props;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('card', customizePrefixCls);
+
     const classString = {
       [`${prefixCls}-grid`]: true,
     };

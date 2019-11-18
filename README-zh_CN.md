@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vue.ant.design/">
-    <img width="200" src="https://cdn.nlark.com/yuque/0/2019/png/87084/1550242938266-assets/web-upload/6011a606-2f3e-4a7a-b58d-28116e39de04.png">
+    <img width="200" src="https://qn.antdv.com/logo.png">
   </a>
 </p>
 
@@ -12,15 +12,7 @@
 
 An enterprise-class UI components based on Ant Design and Vue.
 
-[![Travis branch](https://travis-ci.org/vueComponent/ant-design-vue.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design-vue)
-[![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design-vue/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design-vue)
-[![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
-[![NPM downloads](http://img.shields.io/npm/dm/ant-design-vue.svg?style=flat-square)](http://www.npmtrends.com/ant-design-vue)
-[![Join the chat at https://gitter.im/vueComponent/ant-design-english](https://badges.gitter.im/vueComponent/ant-design-english.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) (English)
-[![Join the chat at https://gitter.im/vueComponent/ant-design-vue](https://img.shields.io/gitter/room/vueComponent/ant-design-vue.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-vue?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文）
-[![backers](https://opencollective.com/ant-design-vue/backers/badge.svg)](#backers)
-[![sponsors](https://opencollective.com/ant-design-vue/sponsors/badge.svg)](#sponsors)
-[![extension-for-VSCode](https://img.shields.io/badge/extension%20for-VSCode-blue.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
+[![Travis branch](https://travis-ci.org/vueComponent/ant-design-vue.svg?branch=master)](https://travis-ci.org/vueComponent/ant-design-vue) [![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design-vue/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design-vue) [![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue) [![NPM downloads](http://img.shields.io/npm/dm/ant-design-vue.svg?style=flat-square)](http://www.npmtrends.com/ant-design-vue) [![Join the chat at https://gitter.im/vueComponent/ant-design-english](https://badges.gitter.im/vueComponent/ant-design-english.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) (English) [![Join the chat at https://gitter.im/vueComponent/ant-design-vue](https://img.shields.io/gitter/room/vueComponent/ant-design-vue.svg?style=flat-square)](https://gitter.im/vueComponent/ant-design-vue?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)（中文） [![backers](https://opencollective.com/ant-design-vue/backers/badge.svg)](#backers) [![sponsors](https://opencollective.com/ant-design-vue/sponsors/badge.svg)](#sponsors) [![extension-for-VSCode](https://img.shields.io/badge/extension%20for-VSCode-blue.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
 
 </div>
 
@@ -63,66 +55,44 @@ $ yarn add ant-design-vue
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
-
 ## 链接
 
 - [首页](https://vue.ant.design/)
-- [Vue官方文档](https://cn.vuejs.org/)
+- [Vue 官方文档](https://cn.vuejs.org/)
 - [Antd React](http://ant.design/)
 
 ## 生态
 
 | Project | Description |
-|----------|-------------|
-| [vue-ref](https://github.com/vueComponent/vue-ref)          |  您可以使用回调来获取组件的引用，类似react |
-| [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)          |  ant-design-vue的vscode扩展 |
-| [vue-cli-plugin-ant-design](https://github.com/vueComponent/vue-cli-plugin-ant-design)               |  使用vue-cli3快速使用ant-design-vue组件库 |
-| [vue-dash-event](https://github.com/vueComponent/vue-dash-event)             |  在DOM模板中，您可以使用ant-design-vue组件的自定义事件（camelCase） |
+| --- | --- |
+| [vue-ref](https://github.com/vueComponent/vue-ref) | 您可以使用回调来获取组件的引用，类似 react |
+| [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper) | ant-design-vue 的 vscode 扩展 |
+| [vue-cli-plugin-ant-design](https://github.com/vueComponent/vue-cli-plugin-ant-design) | 使用 vue-cli3 快速使用 ant-design-vue 组件库 |
+| [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | 在 DOM 模板中，您可以使用 ant-design-vue 组件的自定义事件（camelCase） |
 
 ## 问答
+
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/104172832)
 
 ## 赞助
 
-ant-design-vue是MIT协议的开源项目。为了项目能够更好的持续的发展，我们期望获得更多的[支持者](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)，你可以通过如下任何一种方式支持我们：
+ant-design-vue 是 MIT 协议的开源项目。为了项目能够更好的持续的发展，我们期望获得更多的[支持者](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)，你可以通过如下任何一种方式支持我们：
 
 - [Patreon](https://www.patreon.com/tangjinzhou)
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
-- [支付宝或微信](https://cdn.nlark.com/yuque/0/2019/png/87084/1548485701785-assets/web-upload/648ca181-a52f-4382-957c-97c5dbb3e1cc.png)
+- [支付宝或微信](https://qn.antdv.com/alipay-and-wechat.png)
 
 ## Backers
 
 Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/ant-design-vue#backer)]
 
-<a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="limichange donation total 24$ by qq from 2018.9"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/9/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/backer/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/10/avatar.svg"></a>
+<a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="limichange donation total 24$ by qq from 2018.9"></a> <a href="https://opencollective.com/ant-design-vue/backer/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/10/avatar.svg"></a>
 
 ## Sponsors
 
 Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/ant-design-vue#sponsor)]
 
-<a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/9/avatar.svg"></a>
-<a href="https://opencollective.com/ant-design-vue/sponsor/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/10/avatar.svg"></a>
-
+<a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/10/avatar.svg"></a>

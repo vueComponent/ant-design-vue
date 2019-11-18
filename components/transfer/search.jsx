@@ -47,7 +47,6 @@ export default {
           placeholder={placeholder}
           class={prefixCls}
           value={value}
-          ref="input"
           onChange={this.handleChange}
           disabled={disabled}
         />

@@ -1,5 +1,6 @@
 import cssAnimation from './css-animation';
 import raf from 'raf';
+import Vue from 'vue';
 
 function animate(node, show, done) {
   let height;
@@ -54,7 +55,9 @@ function animate(node, show, done) {
 
 const animation = {
   enter(node, done) {
-    return animate(node, true, done);
+    Vue.nextTick(() => {
+      animate(node, true, done);
+    });
   },
   leave(node, done) {
     return animate(node, false, done);

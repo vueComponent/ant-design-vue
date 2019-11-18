@@ -16,10 +16,12 @@ import { Button } from './button/button';
 import { Calendar } from './calendar';
 import { Card } from './card';
 import { Collapse } from './collapse/collapse';
+import { Comment } from './comment';
 import { Carousel } from './carousel';
 import { Cascader } from './cascader';
 import { Checkbox } from './checkbox/checkbox';
 import { Col } from './grid/col';
+import { ConfigProvider } from './config-provider';
 import { DatePicker } from './date-picker/date-picker';
 import { Divider } from './divider';
 import { Drawer } from './drawer';
@@ -46,6 +48,7 @@ import { Select } from './select/select';
 import { Skeleton } from './skeleton';
 import { Slider } from './slider';
 import { Spin } from './spin';
+import { Statistic } from './statistic/statistic';
 import { Steps } from './steps/steps';
 import { Switch } from './switch';
 import { Table } from './table/table';
@@ -86,6 +89,7 @@ export {
   Cascader,
   Checkbox,
   Col,
+  ConfigProvider,
   DatePicker,
   Divider,
   Dropdown,
@@ -110,6 +114,7 @@ export {
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,

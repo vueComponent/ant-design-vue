@@ -8,7 +8,7 @@
 The default trigger mode is `hover`, you can change it to `contextMenu`.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown :trigger="['contextmenu']">
     <span style="user-select: none">Right Click on Me</span>

@@ -9,33 +9,29 @@ When the timeline is incomplete and ongoing, put a ghost node at last. Set `pend
 `reverse={true}` is used for reversing nodes.
 </us>
 
-```html
+```tpl
 <template>
-<div>
-  <a-timeline pending="Recording..." :reverse="reverse">
-    <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
-    <a-timeline-item>Solve initial network problems 2015-09-01</a-timeline-item>
-    <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
-  </a-timeline>
-  <a-button type="primary" style="margin-top: 16px" @click="handleClick">Toggle Reverse</a-button>
-</div>
+  <div>
+    <a-timeline pending="Recording..." :reverse="reverse">
+      <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
+      <a-timeline-item>Solve initial network problems 2015-09-01</a-timeline-item>
+      <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
+    </a-timeline>
+    <a-button type="primary" style="margin-top: 16px" @click="handleClick">Toggle Reverse</a-button>
+  </div>
 </template>
 <script>
   export default {
     data() {
       return {
         reverse: false,
-      }
+      };
     },
     methods: {
-      handleClick(){
-        this.reverse = !this.reverse
-      }
-    }
-  }
+      handleClick() {
+        this.reverse = !this.reverse;
+      },
+    },
+  };
 </script>
 ```
-
-
-
-

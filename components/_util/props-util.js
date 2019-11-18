@@ -44,6 +44,11 @@ const filterProps = (props, propsData = {}) => {
   });
   return res;
 };
+
+const getScopedSlots = ele => {
+  return (ele.data && ele.data.scopedSlots) || {};
+};
+
 const getSlots = ele => {
   let componentOptions = ele.componentOptions || {};
   if (ele.$vnode) {
@@ -58,8 +63,16 @@ const getSlots = ele => {
       slots[name].push(child);
     }
   });
-  return slots;
+  return { ...slots, ...getScopedSlots(ele) };
 };
+const getSlot = (self, name = 'default', options = {}) => {
+  return (
+    (self.$scopedSlots && self.$scopedSlots[name] && self.$scopedSlots[name](options)) ||
+    self.$slots[name] ||
+    []
+  );
+};
+
 const getAllChildren = ele => {
   let componentOptions = ele.componentOptions || {};
   if (ele.$vnode) {
@@ -105,9 +118,9 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
     }
     return (
-      instance.$slots[prop] ||
       (instance.$scopedSlots[prop] && execute && instance.$scopedSlots[prop](options)) ||
       instance.$scopedSlots[prop] ||
+      instance.$slots[prop] ||
       undefined
     );
   } else {
@@ -116,10 +129,17 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
     }
+    const slotScope = getScopedSlots(instance)[prop];
+    if (slotScope !== undefined) {
+      return typeof slotScope === 'function' && execute ? slotScope(h, options) : slotScope;
+    }
     const slotsProp = [];
     const componentOptions = instance.componentOptions || {};
     (componentOptions.children || []).forEach(child => {
       if (child.data && child.data.slot === prop) {
+        if (child.data.attrs) {
+          delete child.data.attrs.slot;
+        }
         if (child.tag === 'template') {
           slotsProp.push(child.children);
         } else {
@@ -289,6 +309,7 @@ export {
   isValidElement,
   camelize,
   getSlots,
+  getSlot,
   getAllProps,
   getAllChildren,
 };

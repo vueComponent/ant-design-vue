@@ -8,7 +8,7 @@
 Disabled a tab.
 </us>
 
-```html
+```tpl
 <template>
   <a-tabs defaultActiveKey="1">
     <a-tab-pane tab="Tab 1" key="1">Tab 1</a-tab-pane>

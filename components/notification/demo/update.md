@@ -1,4 +1,3 @@
-
 <cn>
 #### 更新消息内容
 可以通过唯一的 key 来更新内容。
@@ -9,15 +8,15 @@
 Update content with unique key.
 </us>
 
-```html
+```tpl
 <template>
   <a-button type="primary" @click="openNotification">Open the notification box</a-button>
 </template>
 <script>
-  const key = 'updatable'
+  const key = 'updatable';
   export default {
     methods: {
-      openNotification () {
+      openNotification() {
         this.$notification.open({
           key,
           message: 'Notification Title',
@@ -31,8 +30,7 @@ Update content with unique key.
           });
         }, 1000);
       },
-    }
-  }
+    },
+  };
 </script>
 ```
-

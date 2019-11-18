@@ -1,8 +1,7 @@
-
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | afterClose | Called when close animation is finished | () => void | - |
 | banner | Whether to show as banner | boolean | false |
 | closable | Whether Alert can be closed | boolean | - |
@@ -14,7 +13,7 @@
 | type | Type of Alert styles, options: `success`, `info`, `warning`, `error` | string | `info`, in `banner` mode default is `warning` |
 
 ### events
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| close | Callback when Alert is closed | (e: MouseEvent) => void |
 
+| Events Name | Description                   | Arguments               |
+| ----------- | ----------------------------- | ----------------------- |
+| close       | Callback when Alert is closed | (e: MouseEvent) => void |

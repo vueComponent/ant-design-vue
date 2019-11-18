@@ -10,7 +10,7 @@
 where `:xs="6"` is equivalent to `:xs="{span: 6}"`.
 </us>
 
-```html
+```tpl
 <template>
   <a-row>
     <a-col :xs="{ span: 5, offset: 1 }" :lg="{ span: 6, offset: 2 }">Col</a-col>
@@ -19,5 +19,3 @@ where `:xs="6"` is equivalent to `:xs="{span: 6}"`.
   </a-row>
 </template>
 ```
-
-

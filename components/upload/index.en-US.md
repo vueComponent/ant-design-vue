@@ -1,9 +1,7 @@
 ## API
 
-> You can consult [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/wiki) about how to implement server side upload interface.
-
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | accept | File types that can be accepted. See [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | - |
 | action | Uploading URL | string\|(file) => `Promise` | - |
 | directory | support upload whole directory ([caniuse](https://caniuse.com/#feat=input-file-directory)) | boolean | false |
@@ -24,11 +22,12 @@
 | remove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when return value is `false` or a Promise which resolve(false) or reject. | Function(file): `boolean | Promise` | - |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | A callback function, can be executed when uploading state is changing. See [change](#change) | Function | - |
 | preview | A callback function, will be executed when file link or preview icon is clicked. | Function(file) | - |
-
+| reject | A callback function, will be executed when drop files is not accept. | Function(fileList) | - |
 
 ### change
 
@@ -48,7 +47,7 @@ When uploading state change, it returns:
 
    ```js
    {
-      uid: 'uid',      // unique identifier，negative is recommend，to prevent interference with internal generated id
+      uid: 'uid',   // unique identifier, negative is recommend, to prevent interference with internal generated id
       name: 'xx.png'   // file name
       status: 'done', // options：uploading, done, error, removed
       response: '{"status": "success"}', // response from server
@@ -58,4 +57,3 @@ When uploading state change, it returns:
 
 2. `fileList` current list of files
 3. `event` response from server, including uploading progress, supported by advanced browsers.
-

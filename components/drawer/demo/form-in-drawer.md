@@ -8,12 +8,10 @@
 Use form in drawer with submit button.
 </us>
 
-```html
+```tpl
 <template>
   <div>
-    <a-button type="primary" @click="showDrawer">
-      <a-icon type="plus" /> New account
-    </a-button>
+    <a-button type="primary" @click="showDrawer"> <a-icon type="plus" /> New account </a-button>
     <a-drawer
       title="Create a new account"
       :width="720"
@@ -127,10 +125,7 @@ Use form in drawer with submit button.
           textAlign: 'right',
         }"
       >
-        <a-button
-          :style="{marginRight: '8px'}"
-          @click="onClose"
-        >
+        <a-button :style="{marginRight: '8px'}" @click="onClose">
           Cancel
         </a-button>
         <a-button @click="onClose" type="primary">Submit</a-button>
@@ -139,21 +134,21 @@ Use form in drawer with submit button.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      form: this.$form.createForm(this),
-      visible: false,
-    }
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true
+  export default {
+    data() {
+      return {
+        form: this.$form.createForm(this),
+        visible: false,
+      };
     },
-    onClose() {
-      this.visible = false
+    methods: {
+      showDrawer() {
+        this.visible = true;
+      },
+      onClose() {
+        this.visible = false;
+      },
     },
-  },
-}
+  };
 </script>
 ```

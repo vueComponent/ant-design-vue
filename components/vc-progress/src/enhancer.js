@@ -2,18 +2,27 @@ function enhancer(Component) {
   return {
     mixins: [Component],
     updated() {
-      this.$nextTick(() => {
-        if (!this.$refs.svgPathRef) {
+      const now = Date.now();
+      let updated = false;
+
+      Object.keys(this.paths).forEach(key => {
+        const path = this.paths[key];
+
+        if (!path) {
           return;
         }
-        const pathStyle = this.$refs.svgPathRef.style;
+
+        updated = true;
+        const pathStyle = path.style;
         pathStyle.transitionDuration = '.3s, .3s, .3s, .06s';
-        const now = Date.now();
+
         if (this.prevTimeStamp && now - this.prevTimeStamp < 100) {
           pathStyle.transitionDuration = '0s, 0s';
         }
-        this.prevTimeStamp = Date.now();
       });
+      if (updated) {
+        this.prevTimeStamp = Date.now();
+      }
     },
   };
 }

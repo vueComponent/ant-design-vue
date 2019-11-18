@@ -8,7 +8,7 @@
 A simple mini version step bar in the vertical direction.
 </us>
 
-```html
+```tpl
 <template>
   <a-steps direction="vertical" size="small" :current="1">
     <a-step title="Finished" description="This is a description." />

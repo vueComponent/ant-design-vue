@@ -5,6 +5,7 @@ import omit from 'omit.js';
 import Wave from '../_util/wave';
 import { hasProp } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
+import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ATag',
@@ -14,11 +15,14 @@ export default {
     event: 'close.visible',
   },
   props: {
-    prefixCls: PropTypes.string.def('ant-tag'),
+    prefixCls: PropTypes.string,
     color: PropTypes.string,
     closable: PropTypes.bool.def(false),
     visible: PropTypes.bool,
     afterClose: PropTypes.func,
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     let _visible = true;
@@ -75,8 +79,8 @@ export default {
       };
     },
 
-    getTagClassName() {
-      const { prefixCls, color } = this.$props;
+    getTagClassName(prefixCls) {
+      const { color } = this.$props;
       const isPresetColor = this.isPresetColor(color);
       return {
         [prefixCls]: true,
@@ -92,13 +96,15 @@ export default {
   },
 
   render() {
-    const { prefixCls } = this.$props;
+    const { prefixCls: customizePrefixCls } = this.$props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
     const tag = (
       <div
         v-show={visible}
         {...{ on: omit(this.$listeners, ['close']) }}
-        class={this.getTagClassName()}
+        class={this.getTagClassName(prefixCls)}
         style={this.getTagStyle()}
       >
         {this.$slots.default}

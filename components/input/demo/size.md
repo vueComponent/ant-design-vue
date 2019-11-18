@@ -8,7 +8,7 @@
 There are three sizes of an Input box: `large` (40px)、`default` (32px) and `small` (24px).
 </us>
 
-```html
+```tpl
 <template>
   <div class="components-input-demo-size">
     <a-input size="large" placeholder="large size" />
@@ -17,11 +17,9 @@ There are three sizes of an Input box: `large` (40px)、`default` (32px) and `sm
   </div>
 </template>
 <style scoped>
-.components-input-demo-size .ant-input {
-  width: 200px;
-  margin: 0 8px 8px 0;
-}
+  .components-input-demo-size .ant-input {
+    width: 200px;
+    margin: 0 8px 8px 0;
+  }
 </style>
 ```
-
-

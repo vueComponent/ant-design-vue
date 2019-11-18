@@ -7,6 +7,12 @@
   z-index: 10;
   position: absolute;
   outline: none;
+
+  > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .@{prefixClass}-year-panel-hidden {
@@ -72,10 +78,13 @@
 }
 
 .@{prefixClass}-year-panel-body {
+  flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  bottom: 0;
-  top: 34px;
+}
+
+.@{prefixClass}-year-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 
 .@{prefixClass}-year-panel-table {

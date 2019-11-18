@@ -5,20 +5,20 @@ import '../assets/index.less';
 import '../../vc-select/assets/index.less';
 
 export default {
-  data () {
+  data() {
     return {};
   },
   methods: {
-    onShowSizeChange (current, pageSize) {
+    onShowSizeChange(current, pageSize) {
       console.log(current);
       console.log(pageSize);
     },
-    onChange (current, pageSize) {
+    onChange(current, pageSize) {
       console.log('onChange:current=', current);
       console.log('onChange:pageSize=', pageSize);
     },
   },
-  render () {
+  render() {
     return (
       <div>
         <p> customize node </p>

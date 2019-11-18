@@ -23,16 +23,16 @@ export default {
   cols: 1,
   type: 'Other',
   title: 'LocaleProvider',
-  render () {
+  render() {
     return (
       <div>
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
         <Basic />
         <All />
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
       </div>
     );
   },

@@ -7,6 +7,7 @@ import Dynamic from './dynamic';
 import Line from './line';
 import Search from './search';
 import Directory from './directory';
+import ReplaceFields from './replaceFields';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -31,23 +32,24 @@ export default {
   type: 'Data Display',
   title: 'Tree',
   subtitle: '树形控件',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <BasicControlled/>
-        <Basic/>
-        <CustomizedIcon/>
-        <Draggable/>
-        <Dynamic/>
-        <Line/>
-        <Search/>
-        <Directory/>
+        <md cn={md.cn} us={md.us} />
+        <BasicControlled />
+        <Basic />
+        <ReplaceFields/>
+        <CustomizedIcon />
+        <Draggable />
+        <Dynamic />
+        <Line />
+        <Search />
+        <Directory />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

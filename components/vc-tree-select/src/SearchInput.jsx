@@ -86,12 +86,19 @@ const SearchInput = {
         this.inputRef.current.blur();
       }
     },
+    handleInputChange(e) {
+      const { value, composing } = e.target;
+      const { searchValue = '' } = this;
+      if (composing || searchValue === value) return;
+      this.vcTreeSelect.onSearchInputChange(e);
+    },
   },
 
   render() {
     const { searchValue, prefixCls, disabled, renderPlaceholder, open, ariaId } = this.$props;
     const {
-      vcTreeSelect: { onSearchInputChange, onSearchInputKeyDown },
+      vcTreeSelect: { onSearchInputKeyDown },
+      handleInputChange,
     } = this;
     return (
       <span class={`${prefixCls}-search__field__wrap`}>
@@ -103,9 +110,12 @@ const SearchInput = {
                 name: 'ant-ref',
                 value: this.inputRef,
               },
+              {
+                name: 'ant-input',
+              },
             ],
           }}
-          onInput={onSearchInputChange}
+          onInput={handleInputChange}
           onKeydown={onSearchInputKeyDown}
           value={searchValue}
           disabled={disabled}

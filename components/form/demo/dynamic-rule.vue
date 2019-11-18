@@ -8,7 +8,6 @@
 Perform different check rules according to different situations.
 </us>
 
-
 <template>
   <a-form :form="form">
     <a-form-item
@@ -19,7 +18,7 @@ Perform different check rules according to different situations.
       <a-input
         v-decorator="[
           'username',
-          {rules: [{ required: true, message: 'Please input your name' }]}
+          { rules: [{ required: true, message: 'Please input your name' }] },
         ]"
         placeholder="Please input your name"
       />
@@ -32,30 +31,18 @@ Perform different check rules according to different situations.
       <a-input
         v-decorator="[
           'nickname',
-          {rules: [{ required: checkNick, message: 'Please input your nickname' }]}
+          { rules: [{ required: checkNick, message: 'Please input your nickname' }] },
         ]"
         placeholder="Please input your nickname"
       />
     </a-form-item>
-    <a-form-item
-      :label-col="formTailLayout.labelCol"
-      :wrapper-col="formTailLayout.wrapperCol"
-    >
-      <a-checkbox
-        :checked="checkNick"
-        @change="handleChange"
-      >
+    <a-form-item :label-col="formTailLayout.labelCol" :wrapper-col="formTailLayout.wrapperCol">
+      <a-checkbox :checked="checkNick" @change="handleChange">
         Nickname is required
       </a-checkbox>
     </a-form-item>
-    <a-form-item
-      :label-col="formTailLayout.labelCol"
-      :wrapper-col="formTailLayout.wrapperCol"
-    >
-      <a-button
-        type="primary"
-        @click="check"
-      >
+    <a-form-item :label-col="formTailLayout.labelCol" :wrapper-col="formTailLayout.wrapperCol">
+      <a-button type="primary" @click="check">
         Check
       </a-button>
     </a-form-item>
@@ -72,25 +59,23 @@ const formTailLayout = {
   wrapperCol: { span: 8, offset: 4 },
 };
 export default {
-  data () {
+  data() {
     return {
       checkNick: false,
       formItemLayout,
       formTailLayout,
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this, { name: 'dynamic_rule' }),
     };
   },
   methods: {
-    check  () {
-      this.form.validateFields(
-        (err) => {
-          if (!err) {
-            console.info('success');
-          }
-        },
-      );
+    check() {
+      this.form.validateFields(err => {
+        if (!err) {
+          console.info('success');
+        }
+      });
     },
-    handleChange  (e) {
+    handleChange(e) {
       this.checkNick = e.target.checked;
       this.$nextTick(() => {
         this.form.validateFields(['nickname'], { force: true });
@@ -99,8 +84,3 @@ export default {
   },
 };
 </script>
-
-
-
-
-

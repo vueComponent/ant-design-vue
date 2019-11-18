@@ -8,7 +8,7 @@
 The simplest usage.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-affix :offsetTop="this.top">
@@ -16,19 +16,19 @@ The simplest usage.
     </a-affix>
     <br />
     <a-affix :offsetBottom="this.bottom">
-      <a-button type="primary"  @click="()=>{this.bottom += 10}">Affix bottom</a-button>
+      <a-button type="primary" @click="()=>{this.bottom += 10}">Affix bottom</a-button>
     </a-affix>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      top: 10,
-      bottom: 10,
-    }
-  }
-}
+  export default {
+    data() {
+      return {
+        top: 10,
+        bottom: 10,
+      };
+    },
+  };
 </script>
 ```

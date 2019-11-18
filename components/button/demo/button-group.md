@@ -10,7 +10,7 @@ Buttons can be grouped by placing multiple `Button` components into a `Button.Gr
 The `size` can be set to `large`, `small` or left unset resulting in a default size.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-button-demo-button-group">
     <h4>Basic</h4>
@@ -32,12 +32,8 @@ The `size` can be set to `large`, `small` or left unset resulting in a default s
 
     <h4>With Icon</h4>
     <a-button-group>
-      <a-button type="primary">
-        <a-icon type="left" />Go back
-      </a-button>
-      <a-button type="primary">
-        Go forward<a-icon type="right" />
-      </a-button>
+      <a-button type="primary"> <a-icon type="left" />Go back </a-button>
+      <a-button type="primary"> Go forward<a-icon type="right" /> </a-button>
     </a-button-group>
     <a-button-group>
       <a-button type="primary" icon="cloud" />
@@ -46,17 +42,17 @@ The `size` can be set to `large`, `small` or left unset resulting in a default s
   </div>
 </template>
 <style>
-#components-button-demo-button-group h4 {
-  margin: 16px 0;
-  font-size: 14px;
-  line-height: 1;
-  font-weight: normal;
-}
-#components-button-demo-button-group h4:first-child {
-  margin-top: 0;
-}
-#components-button-demo-button-group .ant-btn-group {
-  margin-right: 8px;
-}
+  #components-button-demo-button-group h4 {
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: normal;
+  }
+  #components-button-demo-button-group h4:first-child {
+    margin-top: 0;
+  }
+  #components-button-demo-button-group .ant-btn-group {
+    margin-right: 8px;
+  }
 </style>
 ```

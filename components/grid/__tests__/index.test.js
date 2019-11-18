@@ -21,9 +21,9 @@ describe('Grid', () => {
         return (
           <Row gutter={20}>
             <div>
-              <Col span="12" />
+              <Col span={12} />
             </div>
-            <Col span="12" />
+            <Col span={12} />
           </Row>
         );
       },

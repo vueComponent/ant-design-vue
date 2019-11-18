@@ -6,11 +6,13 @@ import { AntdComponent } from '../component';
 import { InputGroup } from './input-group';
 import { InputSearch } from './input-search';
 import { TextArea } from './textarea';
+import { Password } from './password';
 
 export declare class Input extends AntdComponent {
   static Group: typeof InputGroup;
   static Search: typeof InputSearch;
   static TextArea: typeof TextArea;
+  static Password: typeof Password;
 
   /**
    * The label text displayed after (on the right side of) the input field.
@@ -74,4 +76,6 @@ export declare class Input extends AntdComponent {
    * @type string | number
    */
   value: string | number;
+
+  allowClear?: boolean;
 }

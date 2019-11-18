@@ -10,25 +10,23 @@ export default {
   isTreeNode: true,
   props: TreeNode.props,
   render(h, context) {
-    const { props, slots, listeners, data } = context;
-    const $slots = slots();
+    const { props, slots, listeners, data, scopedSlots } = context;
+    const $slots = slots() || {};
     const children = $slots.default;
-    delete $slots.default;
+    const slotsKey = Object.keys($slots);
+    const scopedSlotsTemp = {}; // for vue 2.5.x
+    slotsKey.forEach(name => {
+      scopedSlotsTemp[name] = () => $slots[name];
+    });
     const treeNodeProps = {
       ...data,
       on: { ...listeners, ...data.nativeOn },
       props,
+      scopedSlots: {
+        ...scopedSlotsTemp,
+        ...scopedSlots,
+      },
     };
-    const slotsKey = Object.keys($slots);
-    return (
-      <TreeNode {...treeNodeProps}>
-        {children}
-        {slotsKey.length
-          ? slotsKey.map(name => {
-              return <template slot={name}>{$slots[name]}</template>;
-            })
-          : null}
-      </TreeNode>
-    );
+    return <TreeNode {...treeNodeProps}>{children}</TreeNode>;
   },
 };

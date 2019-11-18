@@ -1,4 +1,3 @@
-
 <cn>
 #### 自定义日期范围选择
 当 `RangePicker` 无法满足业务需求时，可以使用两个 `DatePicker` 实现类似的功能。
@@ -13,7 +12,7 @@ When `RangePicker` does not satisfied your requirements, try to implement simila
 > * Improve user experience with `open` and `onOpenChange`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-date-picker
@@ -36,46 +35,46 @@ When `RangePicker` does not satisfied your requirements, try to implement simila
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      startValue: null,
-      endValue: null,
-      endOpen: false,
-    }
-  },
-  watch: {
-    startValue(val) {
-      console.log('startValue', val)
+  export default {
+    data() {
+      return {
+        startValue: null,
+        endValue: null,
+        endOpen: false,
+      };
     },
-    endValue(val) {
-      console.log('endValue', val)
-    }
-  },
-  methods: {
-    disabledStartDate (startValue) {
-      const endValue = this.endValue;
-      if (!startValue || !endValue) {
-        return false;
-      }
-      return startValue.valueOf() > endValue.valueOf();
+    watch: {
+      startValue(val) {
+        console.log('startValue', val);
+      },
+      endValue(val) {
+        console.log('endValue', val);
+      },
     },
-    disabledEndDate (endValue) {
-      const startValue = this.startValue;
-      if (!endValue || !startValue) {
-        return false;
-      }
-      return startValue.valueOf() >= endValue.valueOf();
+    methods: {
+      disabledStartDate(startValue) {
+        const endValue = this.endValue;
+        if (!startValue || !endValue) {
+          return false;
+        }
+        return startValue.valueOf() > endValue.valueOf();
+      },
+      disabledEndDate(endValue) {
+        const startValue = this.startValue;
+        if (!endValue || !startValue) {
+          return false;
+        }
+        return startValue.valueOf() >= endValue.valueOf();
+      },
+      handleStartOpenChange(open) {
+        if (!open) {
+          this.endOpen = true;
+        }
+      },
+      handleEndOpenChange(open) {
+        this.endOpen = open;
+      },
     },
-    handleStartOpenChange (open) {
-      if (!open) {
-        this.endOpen = true;
-      }
-    },
-    handleEndOpenChange (open) {
-      this.endOpen = open;
-    },
-  },
-}
+  };
 </script>
 ```

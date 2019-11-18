@@ -6,6 +6,8 @@ import omit from 'omit.js';
 import getScroll from '../_util/getScroll';
 import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 function getTargetRect(target) {
   return target !== window ? target.getBoundingClientRect() : { top: 0, left: 0, bottom: 0 };
@@ -54,6 +56,9 @@ const Affix = {
   name: 'AAffix',
   props: AffixProps,
   mixins: [BaseMixin],
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     this.events = ['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'];
     this.eventHandlers = {};
@@ -166,7 +171,8 @@ const Affix = {
 
       const targetRect = getTargetRect(targetNode);
       const targetInnerHeight = targetNode.innerHeight || targetNode.clientHeight;
-      if (scrollTop > elemOffset.top - offsetTop && offsetMode.top) {
+      // ref: https://github.com/ant-design/ant-design/issues/13662
+      if (scrollTop >= elemOffset.top - offsetTop && offsetMode.top) {
         // Fixed Top
         const width = `${elemOffset.width}px`;
         const top = `${targetRect.top + offsetTop}px`;
@@ -181,7 +187,7 @@ const Affix = {
           height: `${elemSize.height}px`,
         });
       } else if (
-        scrollTop < elemOffset.top + elemSize.height + offsetBottom - targetInnerHeight &&
+        scrollTop <= elemOffset.top + elemSize.height + offsetBottom - targetInnerHeight &&
         offsetMode.bottom
       ) {
         // Fixed Bottom
@@ -240,8 +246,9 @@ const Affix = {
 
   render() {
     const { prefixCls, affixStyle, placeholderStyle, $slots, $props } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const className = classNames({
-      [prefixCls || 'ant-affix']: affixStyle,
+      [getPrefixCls('affix', prefixCls)]: affixStyle,
     });
 
     const props = {
@@ -259,6 +266,7 @@ const Affix = {
 
 /* istanbul ignore next */
 Affix.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Affix.name, Affix);
 };
 

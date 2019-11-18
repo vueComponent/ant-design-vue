@@ -1,18 +1,23 @@
+import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
+
 export default {
   name: 'ACheckableTag',
   model: {
     prop: 'checked',
   },
   props: {
-    prefixCls: {
-      default: 'ant-tag',
-      type: String,
-    },
+    prefixCls: PropTypes.string,
     checked: Boolean,
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   computed: {
     classes() {
-      const { prefixCls, checked } = this;
+      const { checked, prefixCls: customizePrefixCls } = this;
+      const getPrefixCls = this.configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('tag', customizePrefixCls);
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-checkable`]: true,

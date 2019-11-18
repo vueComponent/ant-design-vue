@@ -8,7 +8,7 @@
 `strokeLinecap="square|round"` 可以调整进度条边缘的形状。
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress strokeLinecap="square" :percent="75" />
@@ -17,4 +17,3 @@
   </div>
 </template>
 ```
-

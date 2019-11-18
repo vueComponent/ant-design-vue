@@ -8,7 +8,7 @@
 A simple card only containing a content area.
 </us>
 
-```html
+```tpl
 <template>
   <a-card style="width: 300px">
     <p>Card content</p>

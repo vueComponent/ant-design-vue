@@ -33,7 +33,10 @@ export default {
     this.willDestroy = true; // beforeDestroy调用后依然会触发onMouseleave事件
   },
   methods: {
-    close() {
+    close(e) {
+      if (e) {
+        e.stopPropagation();
+      }
       this.clearCloseTimer();
       this.__emit('close');
     },

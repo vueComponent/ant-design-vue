@@ -30,16 +30,16 @@ export default {
   type: 'Other',
   zhType: '其他',
   title: 'Anchor',
-  render () {
+  render() {
     return (
-      <div id='components-anchor-demo'>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <Static/>
+      <div id="components-anchor-demo">
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <Static />
         <OnClick />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

@@ -9,7 +9,7 @@ import BaseMixin from '../../_util/BaseMixin';
 
 export default {
   mixins: [BaseMixin],
-  data () {
+  data() {
     return {
       // expandedKeys: getFilterExpandedKeys(gData, ['0-0-0-key']),
       expandedKeys: ['0-0-0-key'],
@@ -24,7 +24,7 @@ export default {
     };
   },
   methods: {
-    onExpand (expandedKeys) {
+    onExpand(expandedKeys) {
       console.log('onExpand', arguments);
       // if not set autoExpandParent to false, if children expanded, parent can not collapse.
       // or, you can remove all expanded chilren keys.
@@ -33,12 +33,12 @@ export default {
         autoExpandParent: false,
       });
     },
-    onCheck (checkedKeys) {
+    onCheck(checkedKeys) {
       this.setState({
         checkedKeys,
       });
     },
-    onCheckStrictly (checkedKeys, /* extra*/) {
+    onCheckStrictly(checkedKeys /* extra*/) {
       console.log(arguments);
       // const { checkedNodesPositions } = extra;
       // const pps = filterParentPosition(checkedNodesPositions.map(i => i.pos));
@@ -48,18 +48,18 @@ export default {
         halfChecked: [`0-0-${parseInt(Math.random() * 3, 10)}-key`],
       };
       this.setState({
-      // checkedKeys,
+        // checkedKeys,
         checkStrictlyKeys: cks,
-      // checkStrictlyKeys: checkedKeys,
+        // checkStrictlyKeys: checkedKeys,
       });
     },
-    onSelect (selectedKeys, info) {
+    onSelect(selectedKeys, info) {
       console.log('onSelect', selectedKeys, info);
       this.setState({
         selectedKeys,
       });
     },
-    onRbSelect (selectedKeys, info) {
+    onRbSelect(selectedKeys, info) {
       let _selectedKeys = selectedKeys;
       if (info.selected) {
         _selectedKeys = getRadioSelectKeys(gData, selectedKeys, info.node.eventKey);
@@ -68,17 +68,17 @@ export default {
         selectedKeys: _selectedKeys,
       });
     },
-    onClose () {
+    onClose() {
       this.setState({
         visible: false,
       });
     },
-    handleOk () {
+    handleOk() {
       this.setState({
         visible: false,
       });
     },
-    showModal () {
+    showModal() {
       this.setState({
         expandedKeys: ['0-0-0-key', '0-0-1-key'],
         checkedKeys: ['0-0-0-key'],
@@ -91,22 +91,19 @@ export default {
         });
       }, 2000);
     },
-    triggerChecked () {
+    triggerChecked() {
       this.setState({
         checkedKeys: [`0-0-${parseInt(Math.random() * 3, 10)}-key`],
       });
     },
   },
 
-  render () {
+  render() {
     const loop = data => {
-      return data.map((item) => {
+      return data.map(item => {
         if (item.children) {
           return (
-            <TreeNode
-              key={item.key} title={item.title}
-              disableCheckbox={item.key === '0-0-0-key'}
-            >
+            <TreeNode key={item.key} title={item.title} disableCheckbox={item.key === '0-0-0-key'}>
               {loop(item.children)}
             </TreeNode>
           );
@@ -115,58 +112,70 @@ export default {
       });
     };
     // console.log(getRadioSelectKeys(gData, this.selectedKeys));
-    return (<div style={{ padding: '0 20px' }}>
-      <h2>dialog</h2>
-      <button class='btn btn-primary' onClick={this.showModal}>show dialog</button>
-      <Modal
-        title='TestDemo' visible={this.visible}
-        onOk={this.handleOk} onClose={this.onClose}
-      >
-        {this.treeData.length ? (
-          <Tree
-            checkable class='dialog-tree'
-            onExpand={this.onExpand} expandedKeys={this.expandedKeys}
-            autoExpandParent={this.autoExpandParent}
-            onCheck={this.onCheck} checkedKeys={this.checkedKeys}
-          >
-            {loop(this.treeData)}
-          </Tree>
-        ) : 'loading...'}
-      </Modal>
+    return (
+      <div style={{ padding: '0 20px' }}>
+        <h2>dialog</h2>
+        <button class="btn btn-primary" onClick={this.showModal}>
+          show dialog
+        </button>
+        <Modal title="TestDemo" visible={this.visible} onOk={this.handleOk} onClose={this.onClose}>
+          {this.treeData.length ? (
+            <Tree
+              checkable
+              class="dialog-tree"
+              onExpand={this.onExpand}
+              expandedKeys={this.expandedKeys}
+              autoExpandParent={this.autoExpandParent}
+              onCheck={this.onCheck}
+              checkedKeys={this.checkedKeys}
+            >
+              {loop(this.treeData)}
+            </Tree>
+          ) : (
+            'loading...'
+          )}
+        </Modal>
 
-      <h2>controlled</h2>
-      <Tree
-        checkable
-        onExpand={this.onExpand} expandedKeys={this.expandedKeys}
-        autoExpandParent={this.autoExpandParent}
-        onCheck={this.onCheck} checkedKeys={this.checkedKeys}
-        onSelect={this.onSelect} selectedKeys={this.selectedKeys}
-      >
-        {loop(gData)}
-      </Tree>
-      <button onClick={this.triggerChecked}>trigger checked</button>
+        <h2>controlled</h2>
+        <Tree
+          checkable
+          onExpand={this.onExpand}
+          expandedKeys={this.expandedKeys}
+          autoExpandParent={this.autoExpandParent}
+          onCheck={this.onCheck}
+          checkedKeys={this.checkedKeys}
+          onSelect={this.onSelect}
+          selectedKeys={this.selectedKeys}
+        >
+          {loop(gData)}
+        </Tree>
+        <button onClick={this.triggerChecked}>trigger checked</button>
 
-      <h2>checkStrictly</h2>
-      <Tree
-        checkable multiple={this.multiple} defaultExpandAll
-        onExpand={this.onExpand} expandedKeys={this.expandedKeys}
-        onCheck={this.onCheckStrictly}
-        checkedKeys={this.checkStrictlyKeys}
-        checkStrictly
-      >
-        {loop(gData)}
-      </Tree>
+        <h2>checkStrictly</h2>
+        <Tree
+          checkable
+          multiple={this.multiple}
+          defaultExpandAll
+          onExpand={this.onExpand}
+          expandedKeys={this.expandedKeys}
+          onCheck={this.onCheckStrictly}
+          checkedKeys={this.checkStrictlyKeys}
+          checkStrictly
+        >
+          {loop(gData)}
+        </Tree>
 
-      <h2>radio's behavior select (in the same level)</h2>
-      <Tree
-        multiple defaultExpandAll
-        onSelect={this.onRbSelect}
-        selectedKeys={getRadioSelectKeys(gData, this.selectedKeys) }
-      >
-        {loop(gData)}
-      </Tree>
-    </div>);
+        <h2>radio's behavior select (in the same level)</h2>
+        <Tree
+          multiple
+          defaultExpandAll
+          onSelect={this.onRbSelect}
+          selectedKeys={getRadioSelectKeys(gData, this.selectedKeys)}
+        >
+          {loop(gData)}
+        </Tree>
+      </div>
+    );
   },
 };
-
 </script>

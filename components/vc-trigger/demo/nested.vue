@@ -34,54 +34,69 @@ const popupBorderStyle = {
 };
 
 export default {
-  render () {
+  render() {
     return (
       <div style={{ margin: '200px' }}>
         <div>
-          <Trigger
-            popupPlacement='left'
-            action={['click']}
-            builtinPlacements={builtinPlacements}
-          >
-            <div slot='popup' style={popupBorderStyle}>i am a click popup</div>
+          <Trigger popupPlacement="left" action={['click']} builtinPlacements={builtinPlacements}>
+            <div slot="popup" style={popupBorderStyle}>
+              i am a click popup
+            </div>
             <span>
-              <div ref='saveContainerRef1' />
+              <div ref="saveContainerRef1" />
               <Trigger
-                popupPlacement='bottom'
+                popupPlacement="bottom"
                 action={['hover']}
                 builtinPlacements={builtinPlacements}
                 getPopupContainer={() => this.$refs.saveContainerRef1}
               >
-                <div slot='popup' style={popupBorderStyle}>i am a hover popup</div>
-                <span href='#' style={{ margin: '20px' }}>trigger</span>
+                <div slot="popup" style={popupBorderStyle}>
+                  i am a hover popup
+                </div>
+                <span href="#" style={{ margin: '20px' }}>
+                  trigger
+                </span>
               </Trigger>
             </span>
           </Trigger>
         </div>
-        { false ? <div style={{ margin: '50px' }}>
-          <Trigger
-            popupPlacement='right'
-            action={['click', 'hover']}
-            builtinPlacements={builtinPlacements}
-          >
-            <div style={popupBorderStyle} slot='popup' onClick={(e) => { e.stopPropagation(); }}>
-              <div ref='saveContainerRef' />
-              <Trigger
-                popupPlacement='bottom'
-                action={['click']}
-                builtinPlacements={builtinPlacements}
-                getPopupContainer={() => this.$refs.saveContainerRef}
+        {false ? (
+          <div style={{ margin: '50px' }}>
+            <Trigger
+              popupPlacement="right"
+              action={['click', 'hover']}
+              builtinPlacements={builtinPlacements}
+            >
+              <div
+                style={popupBorderStyle}
+                slot="popup"
+                onClick={e => {
+                  e.stopPropagation();
+                }}
               >
-                <div slot='popup' style={popupBorderStyle}>I am inner Trigger Popup</div>
-                <span href='#' style={{ margin: 20 }}>clickToShowInnerTrigger</span>
-              </Trigger>
-            </div>
-            <span href='#' style={{ margin: '20px' }} onClick={console.log}>trigger</span>
-          </Trigger>
-        </div> : null}
+                <div ref="saveContainerRef" />
+                <Trigger
+                  popupPlacement="bottom"
+                  action={['click']}
+                  builtinPlacements={builtinPlacements}
+                  getPopupContainer={() => this.$refs.saveContainerRef}
+                >
+                  <div slot="popup" style={popupBorderStyle}>
+                    I am inner Trigger Popup
+                  </div>
+                  <span href="#" style={{ margin: 20 }}>
+                    clickToShowInnerTrigger
+                  </span>
+                </Trigger>
+              </div>
+              <span href="#" style={{ margin: '20px' }} onClick={console.log}>
+                trigger
+              </span>
+            </Trigger>
+          </div>
+        ) : null}
       </div>
     );
   },
 };
-
 </script>

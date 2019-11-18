@@ -18,6 +18,7 @@ let files = [];
 
 const ignoreFiles = [
   '**/node_modules/**',
+  'package.json',
   'build/**',
   'es/**',
   'lib/**',

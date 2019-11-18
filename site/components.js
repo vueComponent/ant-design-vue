@@ -40,6 +40,7 @@ import {
   Select,
   Slider,
   Spin,
+  Statistic,
   Steps,
   Switch,
   Table,
@@ -58,6 +59,8 @@ import {
   Skeleton,
   Comment,
   ConfigProvider,
+  Empty,
+  Base,
 } from 'ant-design-vue';
 
 Vue.prototype.$message = message;
@@ -67,8 +70,10 @@ Vue.prototype.$success = Modal.success;
 Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
+Vue.prototype.$destroyAll = Modal.destroyAll;
 
 /* v1.1.3+ registration methods */
+Vue.use(Base);
 Vue.use(Affix);
 Vue.use(Anchor);
 Vue.use(AutoComplete);
@@ -108,6 +113,7 @@ Vue.use(Row);
 Vue.use(Select);
 Vue.use(Slider);
 Vue.use(Spin);
+Vue.use(Statistic);
 Vue.use(Steps);
 Vue.use(Switch);
 Vue.use(Table);
@@ -123,6 +129,7 @@ Vue.use(Upload);
 Vue.use(Skeleton);
 Vue.use(Comment);
 Vue.use(ConfigProvider);
+Vue.use(Empty);
 
 /* v1.1.2 registration methods */
 // Vue.component(Affix.name, Affix) // a-affix

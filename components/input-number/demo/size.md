@@ -8,7 +8,7 @@
 There are three sizes available to a numeric input box. By default, the size is `32px`. The two additional sizes are `large` and `small` which means `40px` and `24px`, respectively.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-number size="large" :min="1" :max="100000" :defaultValue="3" @change="onChange" />
@@ -23,7 +23,7 @@ There are three sizes available to a numeric input box. By default, the size is 
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 <style scoped>
   .ant-input-number {
@@ -31,6 +31,3 @@ There are three sizes available to a numeric input box. By default, the size is 
   }
 </style>
 ```
-
-
-

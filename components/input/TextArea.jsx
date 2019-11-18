@@ -1,8 +1,10 @@
+import classNames from 'classnames';
 import omit from 'omit.js';
 import ResizeObserver from 'resize-observer-polyfill';
 import inputProps from './inputProps';
 import calculateNodeHeight from './calculateNodeHeight';
 import hasProp from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 function onNextFrame(cb) {
   if (window.requestAnimationFrame) {
@@ -36,8 +38,11 @@ export default {
     ...inputProps,
     autosize: [Object, Boolean],
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
-    const { value, defaultValue } = this.$props;
+    const { value = '', defaultValue = '' } = this.$props;
     return {
       stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
       nextFrameActionId: undefined,
@@ -105,30 +110,22 @@ export default {
       if (!autosize || !this.$refs.textArea) {
         return;
       }
-      const minRows = autosize ? autosize.minRows : null;
-      const maxRows = autosize ? autosize.maxRows : null;
+      const { minRows, maxRows } = autosize;
       const textareaStyles = calculateNodeHeight(this.$refs.textArea, false, minRows, maxRows);
       this.textareaStyles = textareaStyles;
     },
 
-    getTextAreaClassName() {
-      const { prefixCls, disabled } = this.$props;
-      return {
-        [prefixCls]: true,
-        [`${prefixCls}-disabled`]: disabled,
-      };
-    },
-
     handleTextareaChange(e) {
+      const { value, composing } = e.target;
+      if (composing || this.stateValue === value) return;
       if (!hasProp(this, 'value')) {
-        this.stateValue = e.target.value;
+        this.stateValue = value;
         this.resizeTextarea();
       } else {
         this.$forceUpdate();
       }
-      if (!e.target.composing) {
-        this.$emit('change.value', e.target.value);
-      }
+
+      this.$emit('change.value', value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
@@ -144,12 +141,13 @@ export default {
   render() {
     const {
       stateValue,
-      getTextAreaClassName,
       handleKeyDown,
       handleTextareaChange,
       textareaStyles,
       $attrs,
       $listeners,
+      prefixCls: customizePrefixCls,
+      disabled,
     } = this;
     const otherProps = omit(this.$props, [
       'prefixCls',
@@ -158,7 +156,15 @@ export default {
       'value',
       'defaultValue',
     ]);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('input', customizePrefixCls);
+
+    const cls = classNames(prefixCls, {
+      [`${prefixCls}-disabled`]: disabled,
+    });
+
     const textareaProps = {
+      directives: [{ name: 'ant-input' }],
       attrs: { ...otherProps, ...$attrs },
       on: {
         ...$listeners,
@@ -167,14 +173,11 @@ export default {
         change: noop,
       },
     };
-    if ($listeners['change.value']) {
-      textareaProps.directives = [{ name: 'ant-input' }];
-    }
     return (
       <textarea
         {...textareaProps}
         value={stateValue}
-        class={getTextAreaClassName()}
+        class={cls}
         style={textareaStyles}
         ref="textArea"
       />

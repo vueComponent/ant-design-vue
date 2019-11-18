@@ -1,7 +1,7 @@
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | dataSource | Used for setting the source data. The elements that are part of this array will be present the left column. Except the elements whose keys are included in `targetKeys` prop. | \[{key: string.isRequired,title: string.isRequired,description: string,disabled: bool}\] | \[] |
 | disabled | Whether disabled transfer | boolean | false |
 | filterOption | A function to determine whether an item should show in search result list | (inputValue, option): boolean |  |
@@ -9,7 +9,7 @@
 | lazy | property of vc-lazy-load for lazy rendering items. Turn off it by set to `false`. | object\|boolean | `{ height: 32, offset: 32 }` |
 | listStyle | A custom CSS style used for rendering the transfer columns. | object |  |
 | locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |
-| operations | A set of operations that are sorted from top to bottom. | string\[] | ['>', '<'] |
+| operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '<'] |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) |  |
 | selectedKeys | A set of keys of selected items. | string\[] | \[] |
 | showSearch | If included, a search box is shown on each column. | boolean | false |
@@ -17,6 +17,7 @@
 | titles | A set of titles that are sorted from left to right. | string\[] | - |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | A callback function that is executed when the transfer between columns is complete. | (targetKeys, direction, moveKeys): void |  |

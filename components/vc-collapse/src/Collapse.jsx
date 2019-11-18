@@ -9,9 +9,8 @@ function _toArray(activeKey) {
   if (!Array.isArray(currentActiveKey)) {
     currentActiveKey = currentActiveKey ? [currentActiveKey] : [];
   }
-  return currentActiveKey;
+  return currentActiveKey.map(key => String(key));
 }
-
 export default {
   name: 'Collapse',
   mixins: [BaseMixin],
@@ -19,7 +18,7 @@ export default {
     prop: 'activeKey',
     event: 'change',
   },
-  props: initDefaultProps(collapseProps, {
+  props: initDefaultProps(collapseProps(), {
     prefixCls: 'rc-collapse',
     accordion: false,
     destroyInactivePanel: false,
@@ -66,48 +65,53 @@ export default {
       }
       this.setActiveKey(activeKey);
     },
-    getItems() {
+    getNewChild(child, index) {
+      if (isEmptyElement(child)) return;
       const activeKey = this.stateActiveKey;
       const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props;
-      const newChildren = [];
-      this.$slots.default.forEach((child, index) => {
-        if (isEmptyElement(child)) return;
-        const { header, headerClass, disabled } = getPropsData(child);
-        let isActive = false;
-        const key = child.key || String(index);
-        if (accordion) {
-          isActive = activeKey[0] === key;
-        } else {
-          isActive = activeKey.indexOf(key) > -1;
-        }
 
-        let panelEvents = {};
-        if (!disabled && disabled !== '') {
-          panelEvents = {
-            itemClick: () => {
-              this.onClickItem(key);
-            },
-          };
-        }
+      // If there is no key provide, use the panel order as default key
+      const key = child.key || String(index);
+      const { header, headerClass, disabled } = getPropsData(child);
+      let isActive = false;
 
-        const props = {
-          props: {
-            header,
-            headerClass,
-            isActive,
-            prefixCls,
-            destroyInactivePanel,
-            openAnimation: this.currentOpenAnimations,
-            accordion,
-            expandIcon,
-          },
-          on: {
-            ...panelEvents,
-          },
+      if (accordion) {
+        isActive = activeKey[0] === key;
+      } else {
+        isActive = activeKey.indexOf(key) > -1;
+      }
+
+      let panelEvents = {};
+      if (!disabled && disabled !== '') {
+        panelEvents = {
+          itemClick: this.onClickItem,
         };
+      }
 
-        newChildren.push(cloneElement(child, props));
-      });
+      const props = {
+        key,
+        props: {
+          panelKey: key,
+          header,
+          headerClass,
+          isActive,
+          prefixCls,
+          destroyInactivePanel,
+          openAnimation: this.currentOpenAnimations,
+          accordion,
+          expandIcon,
+        },
+        on: panelEvents,
+      };
+
+      return cloneElement(child, props);
+    },
+    getItems() {
+      const newChildren = [];
+      this.$slots.default &&
+        this.$slots.default.forEach((child, index) => {
+          newChildren.push(this.getNewChild(child, index));
+        });
       return newChildren;
     },
     setActiveKey(activeKey) {

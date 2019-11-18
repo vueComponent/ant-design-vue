@@ -8,7 +8,7 @@
 Display value within it's situation with `formatter`, and we usually use `parser` at the same time.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-input-number
@@ -34,9 +34,6 @@ Display value within it's situation with `formatter`, and we usually use `parser
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 ```
-
-
-

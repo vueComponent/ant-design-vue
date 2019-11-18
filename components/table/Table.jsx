@@ -1,12 +1,6 @@
 import VcTable from '../vc-table';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
-import Pagination from '../pagination';
-import Icon from '../icon';
-import Spin from '../spin';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
-import warning from '../_util/warning';
 import FilterDropdown from './filterDropdown';
 import createStore from './createStore';
 import SelectionBox from './SelectionBox';
@@ -22,9 +16,17 @@ import {
   isValidElement,
   filterEmpty,
   getAllProps,
+  getComponentFromProp,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
+import { ConfigConsumerProps } from '../config-provider';
 import { TableProps } from './interface';
+import Pagination from '../pagination';
+import Icon from '../icon';
+import Spin, { SpinProps } from '../spin';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from '../locale-provider/default';
+import warning from '../_util/warning';
 
 function noop() {}
 
@@ -44,6 +46,8 @@ const defaultPagination = {
   onShowSizeChange: noop,
 };
 
+const ROW_SELECTION_COLUMN_WIDTH = '62px';
+
 /**
  * Avoid creating new object, so that parent component's shouldComponentUpdate
  * can works appropriately。
@@ -57,7 +61,6 @@ export default {
   mixins: [BaseMixin],
   props: initDefaultProps(TableProps, {
     dataSource: [],
-    prefixCls: 'ant-table',
     useFixedHeader: false,
     // rowSelection: null,
     size: 'default',
@@ -67,8 +70,12 @@ export default {
     locale: {},
     rowKey: 'key',
     showHeader: true,
+    sortDirections: ['ascend', 'descend'],
   }),
 
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   // CheckboxPropsCache: {
   //   [key: string]: any;
   // };
@@ -78,7 +85,11 @@ export default {
 
   data() {
     // this.columns = props.columns || normalizeColumns(props.children)
-
+    const props = getOptionProps(this);
+    warning(
+      !props.expandedRowRender || !('scroll' in props),
+      '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
+    );
     this.createComponents(this.components);
     this.CheckboxPropsCache = {};
 
@@ -111,7 +122,7 @@ export default {
       deep: true,
     },
     rowSelection: {
-      handler(val) {
+      handler(val, oldVal) {
         if (val && 'selectedRowKeys' in val) {
           this.store.setState({
             selectedRowKeys: val.selectedRowKeys || [],
@@ -120,6 +131,10 @@ export default {
           if (rowSelection && val.getCheckboxProps !== rowSelection.getCheckboxProps) {
             this.CheckboxPropsCache = {};
           }
+        } else if (oldVal && !val) {
+          this.store.setState({
+            selectedRowKeys: [],
+          });
         }
       },
       deep: true,
@@ -185,19 +200,31 @@ export default {
     },
 
     getDefaultPagination(props) {
-      const pagination = props.pagination || {};
+      const pagination = typeof props.pagination === 'object' ? props.pagination : {};
+      let current;
+      if ('current' in pagination) {
+        current = pagination.current;
+      } else if ('defaultCurrent' in pagination) {
+        current = pagination.defaultCurrent;
+      }
+      let pageSize;
+      if ('pageSize' in pagination) {
+        pageSize = pagination.pageSize;
+      } else if ('defaultPageSize' in pagination) {
+        pageSize = pagination.defaultPageSize;
+      }
       return this.hasPagination(props)
         ? {
             ...defaultPagination,
             ...pagination,
-            current: pagination.defaultCurrent || pagination.current || 1,
-            pageSize: pagination.defaultPageSize || pagination.pageSize || 10,
+            current: current || 1,
+            pageSize: pageSize || 10,
           }
         : {};
     },
 
-    onRow(record, index) {
-      const { prefixCls, customRow } = this;
+    onRow(prefixCls, record, index) {
+      const { customRow } = this;
       const custom = customRow ? customRow(record, index) : {};
       return mergeProps(custom, {
         props: {
@@ -346,18 +373,18 @@ export default {
       if (!column.sorter) {
         return;
       }
+      const sortDirections = column.sortDirections || this.sortDirections;
       const { sSortOrder: sortOrder, sSortColumn: sortColumn } = this;
       // 只同时允许一列进行排序，否则会导致排序顺序的逻辑问题
       let newSortOrder;
       // 切换另一列时，丢弃 sortOrder 的状态
-      const oldSortOrder = this.isSameColumn(sortColumn, column) ? sortOrder : undefined;
-      // 切换排序状态，按照降序/升序/不排序的顺序
-      if (!oldSortOrder) {
-        newSortOrder = 'ascend';
-      } else if (oldSortOrder === 'ascend') {
-        newSortOrder = 'descend';
+      if (this.isSameColumn(sortColumn, column) && sortOrder !== undefined) {
+        // 按照sortDirections的内容依次切换排序状态
+        const methodIndex = sortDirections.indexOf(sortOrder) + 1;
+        newSortOrder =
+          methodIndex === sortDirections.length ? undefined : sortDirections[methodIndex];
       } else {
-        newSortOrder = undefined;
+        newSortOrder = sortDirections[0];
       }
       const newState = {
         sSortOrder: newSortOrder,
@@ -683,8 +710,15 @@ export default {
       return this.$el;
     },
 
-    renderRowSelection(locale) {
-      const { prefixCls, rowSelection, childrenColumnName } = this;
+    generatePopupContainerFunc() {
+      const { scroll } = this.$props;
+
+      // Use undefined to let rc component use default logic.
+      return scroll ? this.getPopupContainer : undefined;
+    },
+
+    renderRowSelection(prefixCls, locale) {
+      const { rowSelection, childrenColumnName } = this;
       const columns = this.columns.concat();
       if (rowSelection) {
         const data = this.getFlatCurrentPageData(childrenColumnName).filter((item, index) => {
@@ -701,7 +735,7 @@ export default {
           customRender: this.renderSelectionBox(rowSelection.type),
           className: selectionColumnClass,
           fixed: rowSelection.fixed,
-          width: rowSelection.columnWidth,
+          width: rowSelection.columnWidth || ROW_SELECTION_COLUMN_WIDTH,
           title: rowSelection.columnTitle,
         };
         if (rowSelection.type !== 'radio') {
@@ -720,7 +754,7 @@ export default {
               onSelect={this.handleSelectRow}
               selections={rowSelection.selections}
               hideDefaultSelections={rowSelection.hideDefaultSelections}
-              getPopupContainer={this.getPopupContainer}
+              getPopupContainer={this.generatePopupContainerFunc()}
             />
           );
         }
@@ -758,15 +792,14 @@ export default {
       return this.getColumnKey(sortColumn) === this.getColumnKey(column);
     },
 
-    renderColumnsDropdown(columns, locale) {
-      const { prefixCls, dropdownPrefixCls } = this;
+    renderColumnsDropdown(prefixCls, dropdownPrefixCls, columns, locale) {
       const { sSortOrder: sortOrder, sFilters: filters } = this;
       return treeMap(columns, (column, i) => {
         const key = this.getColumnKey(column, i);
         let filterDropdown;
         let sortButton;
         let customHeaderCell = column.customHeaderCell;
-        const sortTitle = this.getColumnTitle(column.title, {}) || locale.sortTitle;
+        const title = this.renderColumnTitle(column.title);
         const isSortColumn = this.isSortColumn(column);
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
           const colFilters = key in filters ? filters[key] : [];
@@ -779,26 +812,37 @@ export default {
               confirmFilter={this.handleFilter}
               prefixCls={`${prefixCls}-filter`}
               dropdownPrefixCls={dropdownPrefixCls || 'ant-dropdown'}
-              getPopupContainer={this.getPopupContainer}
+              getPopupContainer={this.generatePopupContainerFunc()}
               key="filter-dropdown"
             />
           );
         }
         if (column.sorter) {
+          const sortDirections = column.sortDirections || this.sortDirections;
           const isAscend = isSortColumn && sortOrder === 'ascend';
           const isDescend = isSortColumn && sortOrder === 'descend';
+          const ascend = sortDirections.indexOf('ascend') !== -1 && (
+            <Icon
+              class={`${prefixCls}-column-sorter-up ${isAscend ? 'on' : 'off'}`}
+              type="caret-up"
+              theme="filled"
+              key="caret-up"
+            />
+          );
+
+          const descend = sortDirections.indexOf('descend') !== -1 && (
+            <Icon
+              class={`${prefixCls}-column-sorter-down ${isDescend ? 'on' : 'off'}`}
+              type="caret-down"
+              theme="filled"
+              key="caret-down"
+            />
+          );
+
           sortButton = (
-            <div class={`${prefixCls}-column-sorter`} key="sorter">
-              <Icon
-                class={`${prefixCls}-column-sorter-up ${isAscend ? 'on' : 'off'}`}
-                type="caret-up"
-                theme="filled"
-              />
-              <Icon
-                class={`${prefixCls}-column-sorter-down ${isDescend ? 'on' : 'off'}`}
-                type="caret-down"
-                theme="filled"
-              />
+            <div title={locale.sortTitle} class={`${prefixCls}-column-sorter`} key="sorter">
+              {ascend}
+              {descend}
             </div>
           );
           customHeaderCell = col => {
@@ -821,7 +865,6 @@ export default {
             return colProps;
           };
         }
-        const sortTitleString = sortButton && typeof sortTitle === 'string' ? sortTitle : undefined;
         return {
           ...column,
           className: classNames(column.className, {
@@ -831,12 +874,8 @@ export default {
             [`${prefixCls}-column-sort`]: isSortColumn && sortOrder,
           }),
           title: [
-            <div
-              key="title"
-              title={sortTitleString}
-              class={sortButton ? `${prefixCls}-column-sorters` : undefined}
-            >
-              {this.renderColumnTitle(column.title)}
+            <div key="title" class={sortButton ? `${prefixCls}-column-sorters` : undefined}>
+              {title}
               {sortButton}
             </div>,
             filterDropdown,
@@ -857,34 +896,6 @@ export default {
       return title;
     },
 
-    getColumnTitle(title, parentNode) {
-      if (!title) {
-        return;
-      }
-      if (isValidElement(title)) {
-        const props = title.componentOptions;
-        let children = null;
-        if (props && props.children) {
-          // for component
-          children = filterEmpty(props.children);
-        } else if (title.children) {
-          // for dom
-          children = filterEmpty(title.children);
-        }
-        if (children && children.length === 1) {
-          children = children[0];
-          const attrs = getAllProps(title);
-          if (!children.tag && children.text) {
-            // for textNode
-            children = children.text;
-          }
-          return this.getColumnTitle(children, attrs);
-        }
-      } else {
-        return parentNode.title || title;
-      }
-    },
-
     handleShowSizeChange(current, pageSize) {
       const pagination = this.sPagination;
       pagination.onShowSizeChange(current, pageSize);
@@ -903,7 +914,7 @@ export default {
       );
     },
 
-    renderPagination(paginationPosition) {
+    renderPagination(prefixCls, paginationPosition) {
       // 强制不需要分页
       if (!this.hasPagination()) {
         return null;
@@ -920,7 +931,7 @@ export default {
       const { class: cls, style, onChange, onShowSizeChange, ...restProps } = pagination; // eslint-disable-line
       const paginationProps = mergeProps({
         key: `pagination-${paginationPosition}`,
-        class: classNames(cls, `${this.prefixCls}-pagination`),
+        class: classNames(cls, `${prefixCls}-pagination`),
         props: {
           ...restProps,
           total,
@@ -1063,11 +1074,16 @@ export default {
       };
     },
 
-    renderTable(contextLocale, loading) {
+    renderTable(prefixCls, renderEmpty, dropdownPrefixCls, contextLocale, loading) {
       const locale = { ...contextLocale, ...this.locale };
-      const { prefixCls, showHeader, ...restProps } = getOptionProps(this);
+      const { showHeader, ...restProps } = getOptionProps(this);
       const data = this.getCurrentPageData();
       const expandIconAsCell = this.expandedRowRender && this.expandIconAsCell !== false;
+
+      const mergedLocale = { ...contextLocale, ...locale };
+      if (!locale || !locale.emptyText) {
+        mergedLocale.emptyText = renderEmpty(h, 'Table');
+      }
 
       const classString = classNames({
         [`${prefixCls}-${this.size}`]: true,
@@ -1076,8 +1092,8 @@ export default {
         [`${prefixCls}-without-column-header`]: !showHeader,
       });
 
-      let columns = this.renderRowSelection(locale);
-      columns = this.renderColumnsDropdown(columns, locale);
+      let columns = this.renderRowSelection(prefixCls, mergedLocale);
+      columns = this.renderColumnsDropdown(prefixCls, dropdownPrefixCls, columns, mergedLocale);
       columns = columns.map((column, i) => {
         const newColumn = { ...column };
         newColumn.key = this.getColumnKey(newColumn, i);
@@ -1091,7 +1107,7 @@ export default {
         key: 'table',
         props: {
           ...restProps,
-          customRow: this.onRow,
+          customRow: (record, index) => this.onRow(prefixCls, record, index),
           components: this.customComponents,
           prefixCls,
           data,
@@ -1099,7 +1115,7 @@ export default {
           showHeader,
           expandIconColumnIndex,
           expandIconAsCell,
-          emptyText: !(loading.props && loading.props.spinning) && locale.emptyText,
+          emptyText: !(loading.props && loading.props.spinning) && mergedLocale.emptyText,
         },
         on: this.$listeners,
         class: classString,
@@ -1109,7 +1125,7 @@ export default {
   },
 
   render() {
-    const { prefixCls } = this;
+    const { prefixCls: customizePrefixCls, dropdownPrefixCls: customizeDropdownPrefixCls } = this;
     const data = this.getCurrentPageData();
 
     let loading = this.loading;
@@ -1124,12 +1140,19 @@ export default {
         props: { ...loading },
       };
     }
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const renderEmpty = this.configProvider.renderEmpty;
+
+    const prefixCls = getPrefixCls('table', customizePrefixCls);
+    const dropdownPrefixCls = getPrefixCls('dropdown', customizeDropdownPrefixCls);
 
     const table = (
       <LocaleReceiver
         componentName="Table"
         defaultLocale={defaultLocale.Table}
-        children={locale => this.renderTable(locale, loading)}
+        children={locale =>
+          this.renderTable(prefixCls, renderEmpty, dropdownPrefixCls, locale, loading)
+        }
       />
     );
 
@@ -1149,9 +1172,9 @@ export default {
     return (
       <div class={classNames(`${prefixCls}-wrapper`)}>
         <Spin {...spinProps}>
-          {this.renderPagination('top')}
+          {this.renderPagination(prefixCls, 'top')}
           {table}
-          {this.renderPagination('bottom')}
+          {this.renderPagination(prefixCls, 'bottom')}
         </Spin>
       </div>
     );

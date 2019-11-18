@@ -1,10 +1,10 @@
 ## API
 
-````html
+```html
 <a-select>
   <a-select-option value="lucy">lucy</a-select-option>
 </a-select>
-````
+```
 
 ### Select props
 
@@ -26,13 +26,14 @@
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 Select 的 value 类型从 `string` 变为 `{key: string, label: vNodes}` 的格式 | boolean | false |
 | maxTagCount | 最多显示多少个 tag | number | - |
 | maxTagPlaceholder | 隐藏 tag 时显示的内容 | slot/function(omittedValues) | - |
+| maxTagTextLength | 最大显示的 tag 文本长度 | number | - |
 | mode | 设置 Select 的模式为多选或标签 | 'default' \| 'multiple' \| 'tags' \| 'combobox' | - |
 | notFoundContent | 当下拉列表为空时显示的内容 | string\|slot | 'Not Found' |
 | optionFilterProp | 搜索时过滤对应的 option 属性，如设置为 children 表示对内嵌内容进行搜索 | string | value |
 | optionLabelProp | 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 `value`。 | string | `children` （combobox 模式下为 `value`） |
 | placeholder | 选择框默认文字 | string\|slot | - |
 | showSearch | 使单选模式可搜索 | boolean | false |
-| showArrow | 是否显示下拉小箭头 | boolean |  true |
+| showArrow | 是否显示下拉小箭头 | boolean | true |
 | size | 选择框大小，可选 `large` `small` | string | default |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |
 | removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |
@@ -47,6 +48,7 @@
 > 注意，如果发现下拉菜单跟随页面滚动，或者需要在其他弹层中触发 Select，请尝试使用 `getPopupContainer={triggerNode => triggerNode.parentNode}` 将下拉弹层渲染节点固定在触发器的父元素中。
 
 ### 事件
+
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | blur | 失去焦点的时回调 | function |
@@ -63,9 +65,9 @@
 
 ### Select Methods
 
-| 名称 | 说明 |
-| --- | --- |
-| blur() | 取消焦点 |
+| 名称    | 说明     |
+| ------- | -------- |
+| blur()  | 取消焦点 |
 | focus() | 获取焦点 |
 
 ### Option props
@@ -80,7 +82,7 @@
 
 ### OptGroup props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| key |  | string | - |
-| label | 组名 | string\|\|function(h)\|slot | 无 |
+| 参数  | 说明 | 类型                        | 默认值 |
+| ----- | ---- | --------------------------- | ------ |
+| key   |      | string                      | -      |
+| label | 组名 | string\|\|function(h)\|slot | 无     |

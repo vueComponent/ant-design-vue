@@ -18,6 +18,10 @@ export interface TreeData {
 export declare class TreeSelect extends AntdComponent {
   static TreeNode: typeof TreeNode;
 
+  treeIcon?: boolean;
+
+  notFoundContent?: any;
+
   /**
    * Whether allow clear
    * @default false
@@ -84,6 +88,10 @@ export declare class TreeSelect extends AntdComponent {
    * @type
    */
   loadData: (node: any) => void;
+
+  maxTagCount: number;
+
+  maxTagPlaceholder: any;
 
   /**
    * Support multiple or not, will be true when enable treeCheckable.

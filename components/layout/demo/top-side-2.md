@@ -8,7 +8,7 @@
 Both the top navigation and the sidebar, commonly used in application site.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-top-side-2">
     <a-layout-header class="header">
@@ -61,7 +61,9 @@ Both the top navigation and the sidebar, commonly used in application site.
           <a-breadcrumb-item>List</a-breadcrumb-item>
           <a-breadcrumb-item>App</a-breadcrumb-item>
         </a-breadcrumb>
-        <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
+        <a-layout-content
+          :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
+        >
           Content
         </a-layout-content>
       </a-layout>
@@ -69,22 +71,22 @@ Both the top navigation and the sidebar, commonly used in application site.
   </a-layout>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      collapsed: false,
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        collapsed: false,
+      };
+    },
+  };
 </script>
 
 <style>
-#components-layout-demo-top-side-2 .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255,255,255,.2);
-  margin: 16px 28px 16px 0;
-  float: left;
-}
+  #components-layout-demo-top-side-2 .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px 0;
+    float: left;
+  }
 </style>
 ```

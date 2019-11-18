@@ -28,6 +28,7 @@ const Combobox = {
     prefixCls: PropTypes.string,
     value: PropTypes.object,
     // onChange: PropTypes.func,
+    // onAmPmChange: PropTypes.func,
     showHour: PropTypes.bool,
     showMinute: PropTypes.bool,
     showSecond: PropTypes.bool,
@@ -43,8 +44,8 @@ const Combobox = {
   },
   methods: {
     onItemChange(type, itemValue) {
-      const { defaultOpenValue, use12Hours, isAM } = this;
-      const value = (this.value || defaultOpenValue).clone();
+      const { defaultOpenValue, use12Hours, value: propValue, isAM } = this;
+      const value = (propValue || defaultOpenValue).clone();
 
       if (type === 'hour') {
         if (use12Hours) {
@@ -71,6 +72,7 @@ const Combobox = {
             }
           }
         }
+        this.__emit('amPmChange', ampm);
       } else {
         value.second(+itemValue);
       }
@@ -104,17 +106,24 @@ const Combobox = {
           selectedIndex={hourOptionsAdj.indexOf(hourAdj)}
           type="hour"
           onSelect={this.onItemChange}
-          onMouseenter={this.onEnterSelectPanel.bind(this, 'hour')}
+          onMouseenter={() => this.onEnterSelectPanel('hour')}
         />
       );
     },
 
     getMinuteSelect(minute) {
-      const { prefixCls, minuteOptions, disabledMinutes, defaultOpenValue, showMinute } = this;
+      const {
+        prefixCls,
+        minuteOptions,
+        disabledMinutes,
+        defaultOpenValue,
+        showMinute,
+        value: propValue,
+      } = this;
       if (!showMinute) {
         return null;
       }
-      const value = this.value || defaultOpenValue;
+      const value = propValue || defaultOpenValue;
       const disabledOptions = disabledMinutes(value.hour());
 
       return (
@@ -124,17 +133,24 @@ const Combobox = {
           selectedIndex={minuteOptions.indexOf(minute)}
           type="minute"
           onSelect={this.onItemChange}
-          onMouseenter={this.onEnterSelectPanel.bind(this, 'minute')}
+          onMouseenter={() => this.onEnterSelectPanel('minute')}
         />
       );
     },
 
     getSecondSelect(second) {
-      const { prefixCls, secondOptions, disabledSeconds, showSecond, defaultOpenValue } = this;
+      const {
+        prefixCls,
+        secondOptions,
+        disabledSeconds,
+        showSecond,
+        defaultOpenValue,
+        value: propValue,
+      } = this;
       if (!showSecond) {
         return null;
       }
-      const value = this.value || defaultOpenValue;
+      const value = propValue || defaultOpenValue;
       const disabledOptions = disabledSeconds(value.hour(), value.minute());
 
       return (
@@ -144,7 +160,7 @@ const Combobox = {
           selectedIndex={secondOptions.indexOf(second)}
           type="second"
           onSelect={this.onItemChange}
-          onMouseenter={this.onEnterSelectPanel.bind(this, 'second')}
+          onMouseenter={() => this.onEnterSelectPanel('second')}
         />
       );
     },
@@ -168,15 +184,15 @@ const Combobox = {
           selectedIndex={selected}
           type="ampm"
           onSelect={this.onItemChange}
-          onMouseenter={this.onEnterSelectPanel.bind(this, 'ampm')}
+          onMouseenter={() => this.onEnterSelectPanel('ampm')}
         />
       );
     },
   },
 
   render() {
-    const { prefixCls, defaultOpenValue } = this;
-    const value = this.value || defaultOpenValue;
+    const { prefixCls, defaultOpenValue, value: propValue } = this;
+    const value = propValue || defaultOpenValue;
     return (
       <div class={`${prefixCls}-combobox`}>
         {this.getHourSelect(value.hour())}

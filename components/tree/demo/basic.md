@@ -8,7 +8,7 @@
 The most basic usage, tell you how to use checkable, selectable, disabled, defaultExpandKeys, and etc.
 </us>
 
-```html
+```tpl
 <template>
   <a-tree
     checkable
@@ -23,42 +23,43 @@ The most basic usage, tell you how to use checkable, selectable, disabled, defau
   </a-tree>
 </template>
 <script>
-const treeData = [{
-  title: 'parent 1',
-  key: '0-0',
-  children: [{
-    title: 'parent 1-0',
-    key: '0-0-0',
-    disabled: true,
-    children: [
-      { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
-      { title: 'leaf', key: '0-0-0-1' },
-    ],
-  }, {
-    title: 'parent 1-1',
-    key: '0-0-1',
-    children: [
-      { key: '0-0-1-0', slots: { title: 'title0010' }},
-    ],
-  }],
-}]
-
-export default {
-  data () {
-    return {
-      treeData,
-    }
-  },
-  methods: {
-    onSelect (selectedKeys, info) {
-      console.log('selected', selectedKeys, info)
+  const treeData = [
+    {
+      title: 'parent 1',
+      key: '0-0',
+      children: [
+        {
+          title: 'parent 1-0',
+          key: '0-0-0',
+          disabled: true,
+          children: [
+            { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
+            { title: 'leaf', key: '0-0-0-1' },
+          ],
+        },
+        {
+          title: 'parent 1-1',
+          key: '0-0-1',
+          children: [{ key: '0-0-1-0', slots: { title: 'title0010' } }],
+        },
+      ],
     },
-    onCheck (checkedKeys, info) {
-      console.log('onCheck', checkedKeys, info)
-    },
-  },
-}
+  ];
 
+  export default {
+    data() {
+      return {
+        treeData,
+      };
+    },
+    methods: {
+      onSelect(selectedKeys, info) {
+        console.log('selected', selectedKeys, info);
+      },
+      onCheck(checkedKeys, info) {
+        console.log('onCheck', checkedKeys, info);
+      },
+    },
+  };
 </script>
-
 ```

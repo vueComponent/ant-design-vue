@@ -9,6 +9,7 @@ import {
   getStyle,
   isValidElement,
 } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
 
 const splitObject = (obj, keys) => {
@@ -34,11 +35,11 @@ export default {
     title: PropTypes.any,
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
-      sVisible: !!this.$props.visible,
+      sVisible: !!this.$props.visible || !!this.$props.defaultVisible,
     };
   },
   watch: {
@@ -158,8 +159,10 @@ export default {
 
   render() {
     const { $props, $data, $slots, $listeners } = this;
-    const { prefixCls, openClassName, getPopupContainer } = $props;
+    const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
     let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '');
     children = children.length === 1 ? children[0] : children;
     let sVisible = $data.sVisible;
@@ -179,6 +182,7 @@ export default {
     const tooltipProps = {
       props: {
         ...$props,
+        prefixCls,
         getTooltipContainer: getPopupContainer || getContextPopupContainer,
         builtinPlacements: this.getPlacements(),
         visible: sVisible,

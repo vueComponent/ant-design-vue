@@ -8,11 +8,11 @@
 Clicking on an anchor does not record history.
 </us>
 
-```html
+```tpl
 <template>
   <a-anchor :affix="false" @click="handleClick">
     <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />
-    <a-anchor-link href="#components-anchor-demo-static-anchor" title="Fixed demo" />
+    <a-anchor-link href="#components-anchor-demo-static" title="Static demo" />
     <a-anchor-link href="#API" title="API">
       <a-anchor-link href="#Anchor-Props" title="Anchor Props" />
       <a-anchor-link href="#Link-Props" title="Link Props" />
@@ -20,13 +20,13 @@ Clicking on an anchor does not record history.
   </a-anchor>
 </template>
 <script>
-export default {
-  methods: {
-    handleClick (e, link) {
-      e.preventDefault();
-      console.log(link);
-    }
-  }
-}
+  export default {
+    methods: {
+      handleClick(e, link) {
+        e.preventDefault();
+        console.log(link);
+      },
+    },
+  };
 </script>
 ```

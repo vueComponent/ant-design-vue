@@ -1,7 +1,7 @@
 ## API
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | autoFocus | get focus when component mounted | boolean | false |
 | checked(v-model) | determine whether the `Switch` is checked | boolean | false |
 | checkedChildren | content to be shown when the state is checked | string\|slot |  |
@@ -12,13 +12,15 @@
 | unCheckedChildren | content to be shown when the state is unchecked | string\|slot |  |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | a callback function, can be executed when the checked state is changing | Function(checked:Boolean) |
+| change | trigger when the checked state is changing | Function(checked: boolean, event: Event) |  |
+| click | trigger when clicked | Function(checked: boolean, event: Event) |  |
 
 ## Methods
 
-| Name | Description |
-| ---- | ----------- |
-| blur() | remove focus |
-| focus() | get focus |
+| Name    | Description  |
+| ------- | ------------ |
+| blur()  | remove focus |
+| focus() | get focus    |

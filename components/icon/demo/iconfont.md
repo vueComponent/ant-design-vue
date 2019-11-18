@@ -8,7 +8,7 @@
 If you are using [iconfont.cn](http://iconfont.cn/), you can use the icons in your project gracefully.
 </us>
 
-```html
+```tpl
 <template>
   <div class="icons-list">
     <icon-font type="icon-tuichu" />
@@ -17,23 +17,21 @@ If you are using [iconfont.cn](http://iconfont.cn/), you can use the icons in yo
   </div>
 </template>
 <script>
-import { Icon } from 'ant-design-vue';
+  import { Icon } from 'ant-design-vue';
 
-const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
-})
-export default {
-  components: {
-    IconFont,
-  }
-}
+  const IconFont = Icon.createFromIconfontCN({
+    scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
+  });
+  export default {
+    components: {
+      IconFont,
+    },
+  };
 </script>
 <style scoped>
-.icons-list >>> .anticon {
-  margin-right: 6px;
-  font-size: 24px;
-}
+  .icons-list >>> .anticon {
+    margin-right: 6px;
+    font-size: 24px;
+  }
 </style>
 ```
-
-

@@ -5,6 +5,8 @@
 import { AntdComponent } from './component';
 import { Meta } from './meta';
 
+export type CardSize = 'default' | 'small';
+
 export declare class Card extends AntdComponent {
   static Grid: any;
   static Meta: typeof Meta;
@@ -89,4 +91,10 @@ export declare class Card extends AntdComponent {
    * @type string
    */
   type: string;
+
+  /**
+   * Size of card
+   * @type string
+   */
+  size: CardSize;
 }

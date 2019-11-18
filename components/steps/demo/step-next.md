@@ -8,7 +8,7 @@
 Cooperate with the content and buttons, to represent the progress of a process.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-steps :current="current">
@@ -16,10 +16,7 @@ Cooperate with the content and buttons, to represent the progress of a process.
     </a-steps>
     <div class="steps-content">{{steps[current].content}}</div>
     <div class="steps-action">
-      <a-button
-        v-if="current < steps.length - 1"
-        type="primary" @click="next"
-      >
+      <a-button v-if="current < steps.length - 1" type="primary" @click="next">
         Next
       </a-button>
       <a-button
@@ -29,11 +26,7 @@ Cooperate with the content and buttons, to represent the progress of a process.
       >
         Done
       </a-button>
-      <a-button
-        v-if="current>0"
-        style="margin-left: 8px"
-        @click="prev"
-      >
+      <a-button v-if="current>0" style="margin-left: 8px" @click="prev">
         Previous
       </a-button>
     </div>
@@ -44,27 +37,31 @@ Cooperate with the content and buttons, to represent the progress of a process.
     data() {
       return {
         current: 0,
-        steps: [{
-          title: 'First',
-          content: 'First-content',
-        }, {
-          title: 'Second',
-          content: 'Second-content',
-        }, {
-          title: 'Last',
-          content: 'Last-content',
-        }],
-      }
+        steps: [
+          {
+            title: 'First',
+            content: 'First-content',
+          },
+          {
+            title: 'Second',
+            content: 'Second-content',
+          },
+          {
+            title: 'Last',
+            content: 'Last-content',
+          },
+        ],
+      };
     },
     methods: {
       next() {
-        this.current++
+        this.current++;
       },
       prev() {
-        this.current--
-      }
+        this.current--;
+      },
     },
-  }
+  };
 </script>
 <style scoped>
   .steps-content {

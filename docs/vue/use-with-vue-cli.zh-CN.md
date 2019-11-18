@@ -61,18 +61,18 @@ $ yarn add ant-design-vue
 修改 `src/main.js`，引入 antd 的按钮组件以及全部样式文件。
 
 ```jsx
-import Vue from "vue";
-import Button from "ant-design-vue/lib/button";
-import "ant-design-vue/dist/antd.css";
-import App from "./App";
+import Vue from 'vue';
+import Button from 'ant-design-vue/lib/button';
+import 'ant-design-vue/dist/antd.css';
+import App from './App';
 
 Vue.component(Button.name, Button);
 
 Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App)
-}).$mount("#app");
+  render: h => h(App),
+}).$mount('#app');
 ```
 
 修改 `src/App.vue`的 template 内容。

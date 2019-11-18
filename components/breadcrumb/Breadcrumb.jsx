@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { filterEmpty, getComponentFromProp, getSlotOptions } from '../_util/props-util';
 import warning from '../_util/warning';
+import { ConfigConsumerProps } from '../config-provider';
 import BreadcrumbItem from './BreadcrumbItem';
 
 const Route = PropTypes.shape({
@@ -10,7 +11,7 @@ const Route = PropTypes.shape({
 }).loose;
 
 const BreadcrumbProps = {
-  prefixCls: PropTypes.string.def('ant-breadcrumb'),
+  prefixCls: PropTypes.string,
   routes: PropTypes.arrayOf(Route),
   params: PropTypes.any,
   separator: PropTypes.any,
@@ -32,6 +33,9 @@ function getBreadcrumbName(route, params) {
 export default {
   name: 'ABreadcrumb',
   props: BreadcrumbProps,
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   methods: {
     defaultItemRender({ route, params, routes, paths }) {
       const isLastItem = routes.indexOf(route) === routes.length - 1;
@@ -41,7 +45,10 @@ export default {
   },
   render() {
     let crumbs;
-    const { prefixCls, routes, params = {}, $slots, $scopedSlots } = this;
+    const { prefixCls: customizePrefixCls, routes, params = {}, $slots, $scopedSlots } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
+
     const children = filterEmpty($slots.default);
     const separator = getComponentFromProp(this, 'separator');
     if (routes && routes.length > 0) {

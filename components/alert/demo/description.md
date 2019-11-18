@@ -8,13 +8,10 @@
 Additional description for alert message.
 </us>
 
-```html
+```tpl
 <template>
   <div>
-    <a-alert
-      message="Success Text"
-      type="success"
-    >
+    <a-alert message="Success Text" type="success">
       <p slot="description">
         Success Description <span style="color: red">Success</span> Description Success Description
       </p>

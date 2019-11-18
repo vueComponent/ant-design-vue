@@ -8,7 +8,7 @@
 Fixed Header is generally used to fix the top navigation to facilitate page switching.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-fixed">
     <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
@@ -38,13 +38,12 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
   </a-layout>
 </template>
 <style>
-#components-layout-demo-fixed .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255,255,255,.2);
-  margin: 16px 24px 16px 0;
-  float: left;
-}
+  #components-layout-demo-fixed .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+  }
 </style>
-
 ```

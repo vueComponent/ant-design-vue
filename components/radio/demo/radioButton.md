@@ -8,7 +8,7 @@
 The combination of radio button style.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>
@@ -38,17 +38,17 @@ The combination of radio button style.
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      value: 'a',
-    }
-  },
-  methods: {
-    onChange (e) {
-      console.log(`checked = ${e.target.value}`)
+  export default {
+    data() {
+      return {
+        value: 'a',
+      };
     },
-  },
-}
+    methods: {
+      onChange(e) {
+        console.log(`checked = ${e.target.value}`);
+      },
+    },
+  };
 </script>
 ```

@@ -92,7 +92,7 @@ md.core.ruler.push('update_template', function replace({ tokens }) {
         token.content = '';
       }
     }
-    if (token.type === 'fence' && token.info === 'html' && token.markup === '```') {
+    if (token.type === 'fence' && token.info === 'tpl' && token.markup === '```') {
       sourceCode = token.content;
       code = '````html\n' + token.content + '````';
       template = fetch(token.content, 'template');
@@ -201,6 +201,8 @@ module.exports = {
       vue$: 'vue/dist/vue.esm.js',
       antd: path.join(__dirname, 'components'),
       'ant-design-vue': path.join(__dirname, 'components'),
+      'ant-design-vue/es': path.join(__dirname, 'components'),
+      'ant-design-vue/lib': path.join(__dirname, 'components'),
       '@': path.join(__dirname, ''),
     },
   },

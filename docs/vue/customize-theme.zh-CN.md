@@ -1,7 +1,6 @@
-
 # 定制主题
 
-ant-design-vue的组件结构及样式和Antd React完全一致，你可以参考Antd React的定制方式进行配置。
+ant-design-vue 的组件结构及样式和 Antd React 完全一致，你可以参考 Antd React 的定制方式进行配置。
 
 Ant Design 设计规范上支持一定程度的样式定制，以满足业务和品牌上多样化的视觉需求，包括但不限于主色、圆角、边框和部分组件的视觉定制。
 
@@ -14,28 +13,26 @@ antd 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并定�
 以下是一些最常用的通用变量，所有样式变量可以在 [这里](https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less) 找到。
 
 ```less
-@primary-color: #1890ff;                         // 全局主色
-@link-color: #1890ff;                            // 链接色
-@success-color: #52c41a;                         // 成功色
-@warning-color: #faad14;                         // 警告色
-@error-color: #f5222d;                           // 错误色
-@font-size-base: 14px;                           // 主字号
-@heading-color: rgba(0, 0, 0, .85);              // 标题色
-@text-color: rgba(0, 0, 0, .65);                 // 主文本色
-@text-color-secondary : rgba(0, 0, 0, .45);      // 次文本色
-@disabled-color : rgba(0, 0, 0, .25);            // 失效色
-@border-radius-base: 4px;                        // 组件/浮层圆角
-@border-color-base: #d9d9d9;                     // 边框色
-@box-shadow-base: 0 2px 8px rgba(0, 0, 0, .15);  // 浮层阴影
+@primary-color: #1890ff; // 全局主色
+@link-color: #1890ff; // 链接色
+@success-color: #52c41a; // 成功色
+@warning-color: #faad14; // 警告色
+@error-color: #f5222d; // 错误色
+@font-size-base: 14px; // 主字号
+@heading-color: rgba(0, 0, 0, 0.85); // 标题色
+@text-color: rgba(0, 0, 0, 0.65); // 主文本色
+@text-color-secondary : rgba(0, 0, 0, .45); // 次文本色
+@disabled-color : rgba(0, 0, 0, .25); // 失效色
+@border-radius-base: 4px; // 组件/浮层圆角
+@border-color-base: #d9d9d9; // 边框色
+@box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // 浮层阴影
 ```
 
 如果以上变量不能满足你的定制需求，可以给我们提 issue。
 
 ## 定制方式
 
-我们使用 [modifyVars](http://lesscss.org/usage/#using-less-in-the-browser-modify-variables) 的方式来进行覆盖变量。
-下面将针对不同的场景提供一些常用的定制方式。
-
+我们使用 [modifyVars](http://lesscss.org/usage/#using-less-in-the-browser-modify-variables) 的方式来进行覆盖变量。下面将针对不同的场景提供一些常用的定制方式。
 
 ### 在 webpack 中定制主题
 
@@ -69,9 +66,10 @@ module.exports = {
 
 注意 less-loader 的处理范围不要过滤掉 `node_modules` 下的 antd 包。
 
-### 在 vue cli 2中定制主题
+### 在 vue cli 2 中定制主题
 
 修改`build/utils.js`文件
+
 ```diff
 // build/utils.js
 - less: generateLoaders('less'),
@@ -86,9 +84,10 @@ module.exports = {
 
 ```
 
-### 在 vue cli 3中定制主题
+### 在 vue cli 3 中定制主题
 
 项目根目录下新建文件`vue.config.js`
+
 ```
 // vue.config.js
 module.exports = {
@@ -112,8 +111,8 @@ module.exports = {
 另外一种方式是建立一个单独的 `less` 变量文件，引入这个文件覆盖 `antd.less` 里的变量。
 
 ```css
-@import "~ant-design-vue/dist/antd.less";   // 引入官方提供的 less 样式入口文件
-@import "your-theme-file.less";   // 用于覆盖上面定义的变量
+@import '~ant-design-vue/dist/antd.less'; // 引入官方提供的 less 样式入口文件
+@import 'your-theme-file.less'; // 用于覆盖上面定义的变量
 ```
 
 注意，这种方式已经载入了所有组件的样式，不需要也无法和按需加载插件 `babel-plugin-import` 的 `style` 属性一起使用。

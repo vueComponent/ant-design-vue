@@ -4,48 +4,55 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| form | 经 `Form.create()` 包装过的组件会自带 `this.form` 属性，如果使用template语法，可以使用this.$form.createForm(this, options) | object | 无 |
+| form | 经 `Form.create()` 包装过的组件会自带 `this.form` 属性，如果使用 template 语法，可以使用 this.\$form.createForm(this, options) | object | 无 |
 | hideRequiredMark | 隐藏所有表单项的必选标记 | Boolean | false |
 | layout | 表单布局 | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
+| labelCol | label 标签布局，同 `<Col>` 组件，设置 `span` `offset` 值，如 `{span: 3, offset: 12}` 或 `sm: {span: 3, offset: 12}` | [object](/components/grid-cn/#Col) |  |
+| wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/components/grid-cn/#Col) |  |
+| selfUpdate | 自定义字段更新逻辑，说明[见下](/components/form-cn/#selfUpdate)，需 1.3.17 版本以上 | boolean | false |
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| submit | 数据验证成功后回调事件 | Function(e:Event) |
 
-### Form.create(options) \| this.$form.createForm(this, options)
+| 事件名称 | 说明                   | 回调参数          |
+| -------- | ---------------------- | ----------------- |
+| submit   | 数据验证成功后回调事件 | Function(e:Event) |
+
+### Form.create(options) \| this.\$form.createForm(this, options)
 
 使用方式如下：
 
-#### jsx使用方式，使用方式和React版antd一致
+#### jsx 使用方式，使用方式和 React 版 antd 一致
+
 ```jsx
-const CustomizedForm = {}
+const CustomizedForm = {};
 
 CustomizedForm = Form.create({})(CustomizedForm);
 ```
-如果需要为包装组件实例维护一个ref，可以使用`wrappedComponentRef`。
 
-#### 单文件template使用方式
-````html
+如果需要为包装组件实例维护一个 ref，可以使用`wrappedComponentRef`。
+
+#### 单文件 template 使用方式
+
+```html
 <template>
-<a-form :form="form" />
+  <a-form :form="form" />
 </template>
 <script>
-export default {
-  beforeCreate () {
-    this.form = this.$form.createForm(this, options)
-  },
-}
+  export default {
+    beforeCreate() {
+      this.form = this.$form.createForm(this, options);
+    },
+  };
 </script>
-````
-
+```
 
 `options` 的配置项如下。
 
 | 参数 | 说明 | 类型 |
 | --- | --- | --- |
-| props | 仅仅支持Form.create({})(CustomizedForm)的使用方式，父组件需要映射到表单项上的属性声明(和[vue组件props一致]( https://vuejs.org/v2/api/#props)) | {} |
-| mapPropsToFields | 把父组件的属性映射到表单项上（如：把 Redux store 中的值读出），需要对返回值中的表单域数据用 [`Form.createFormField`](#Form.createFormField) 标记，如果使用$form.createForm创建收集器，你可以将任何数据映射到Field中，不受父组件约束 | (props) => ({ \[fieldName\]: FormField { value } }) |
+| props | 仅仅支持 Form.create({})(CustomizedForm)的使用方式，父组件需要映射到表单项上的属性声明(和[vue 组件 props 一致](https://vuejs.org/v2/api/#props)) | {} |
+| mapPropsToFields | 把父组件的属性映射到表单项上（如：把 Redux store 中的值读出），需要对返回值中的表单域数据用 [`Form.createFormField`](#Form.createFormField) 标记，如果使用\$form.createForm 创建收集器，你可以将任何数据映射到 Field 中，不受父组件约束 | (props) => ({ \[fieldName\]: FormField { value } }) |
+| name | 设置表单域内字段 id 的前缀 | - |
 | validateMessages | 默认校验信息，可用于把默认错误信息改为中文等，格式与 [newMessages](https://github.com/yiminghe/async-validator/blob/master/src/messages.js) 返回值一致 | Object { [nested.path]&#x3A; String } |
 | onFieldsChange | 当 `Form.Item` 子节点的值发生改变时触发，可以把对应的值转存到 Redux store | Function(props, fields) |
 | onValuesChange | 任一表单域的值发生改变时的回调 | (props, values) => void |
@@ -54,9 +61,9 @@ export default {
 
 > 注意：使用 `getFieldsValue` `getFieldValue` `setFieldsValue` 等时，应确保对应的 field 已经用 `getFieldDecorator` 或 `v-decorator` 注册过了。
 
-| 方法      | 说明                                     | 类型       |
-| ------- | -------------------------------------- | -------- |
-| getFieldDecorator | 用于和表单进行双向绑定，单文件template可以使用指令`v-decorator`进行绑定，详见下方描述 |  |
+| 方法       | 说明                                     | 类型       |
+| --- | --- | --- |
+| getFieldDecorator | 用于和表单进行双向绑定，单文件 template 可以使用指令`v-decorator`进行绑定，详见下方描述 |  |
 | getFieldError | 获取某个输入控件的 Error | Function(name) |
 | getFieldsError | 获取一组输入控件的 Error ，如不传入参数，则获取全部组件的 Error | Function(\[names: string\[]]) |
 | getFieldsValue | 获取一组输入控件的值，如不传入参数，则获取全部组件的值 | Function(\[fieldNames: string\[]]) |
@@ -66,14 +73,16 @@ export default {
 | isFieldValidating | 判断一个输入控件是否在校验状态 | Function(name) |
 | resetFields | 重置一组输入控件的值（为 `initialValue`）与状态，如不传入参数，则重置所有组件 | Function(\[names: string\[]]) |
 | setFields | 设置一组输入控件的值与错误状态。 | Function({ [fieldName]&#x3A; { value: any, errors: [Error] } }) |
-| setFieldsValue | 设置一组输入控件的值 | Function({ [fieldName]&#x3A; value } |
+| setFieldsValue | 设置一组输入控件的值 | Function({ [fieldName]&#x3A; value }) |
 | validateFields | 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件 | Function(\[fieldNames: string\[]], [options: object], callback: Function(errors, values)) |
 | validateFieldsAndScroll | 与 `validateFields` 相似，但校验完后，如果校验不通过的菜单域不在可见范围内，则自动滚动进可见范围 | 参考 `validateFields` |
 
 ### validateFields/validateFieldsAndScroll
 
 ```jsx
-const { form: { validateFields } } = this;
+const {
+  form: { validateFields },
+} = this;
 validateFields((errors, values) => {
   // ...
 });
@@ -96,36 +105,35 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 
 - `errors`:
 
-   ```js
-   {
-     "userName": {
-       "errors": [
-         {
-           "message": "Please input your username!",
-           "field": "userName"
-         }
-       ]
-     },
-     "password": {
-       "errors": [
-         {
-           "message": "Please input your Password!",
-           "field": "password"
-         }
-       ]
-     }
-   }
-   ```
+  ```js
+  {
+    "userName": {
+      "errors": [
+        {
+          "message": "Please input your username!",
+          "field": "userName"
+        }
+      ]
+    },
+    "password": {
+      "errors": [
+        {
+          "message": "Please input your Password!",
+          "field": "password"
+        }
+      ]
+    }
+  }
+  ```
 
 - `values`:
 
-   ```js
-   {
-     "userName": "username",
-     "password": "password",
-   }
-   ```
-
+  ```js
+  {
+    "userName": "username",
+    "password": "password",
+  }
+  ```
 
 ### Form.createFormField
 
@@ -161,7 +169,7 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 
 ### Form.Item
 
-注意：一个 Form.Item 建议只放一个被 getFieldDecorator或v-decorator 装饰过的 child，当有多个被装饰过的 child 时，`help` `required` `validateStatus` 无法自动生成。
+注意：一个 Form.Item 建议只放一个被 getFieldDecorator 或 v-decorator 装饰过的 child，当有多个被装饰过的 child 时，`help` `required` `validateStatus` 无法自动生成。
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -174,6 +182,7 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |
 | validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string |  |
 | wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/components/grid-cn/#Col) |  |
+| selfUpdate | 自定义字段更新逻辑，你可以通过 Form 的 selfUpdate 进行统一设置。当和 Form 同时设置时，以 Item 为准。 说明[见下](/components/form-cn/#selfUpdate) 需 1.3.17 版本以上 | boolean | false |
 
 ### 校验规则
 
@@ -193,4 +202,8 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 
 更多高级用法可研究 [async-validator](https://github.com/yiminghe/async-validator)。
 
+### selfUpdate
 
+设置 `selfUpdate` 为 `true` 后，`Form` 通过增量方式更新，只更新被修改的字段。大部分场景下，你只需要编写代码即可。而在某些特定场景，例如修改某个字段值后出现新的字段选项、或者纯粹希望表单任意变化都需要进行渲染。你可以通过修改 Form.Item 取消 selfUpdate，或者在 `change` / `onValuesChange` 回调中手动调用 `this.$forceUpdate()` 更新组件。[示例]()
+
+如果你并不精通 Vue，并不建议使用 selfUpdate，如果出现性能问题，可以尝试这把 Form 相关的业务独立到一个单独的组件中，减少组件渲染的消耗。

@@ -1,4 +1,3 @@
-
 # Getting Started
 
 Ant Design Vue is dedicated to providing a **good development experience** for programmers. Make sure that you had installed [Node.js](https://nodejs.org/)(> v8.9) correctly.
@@ -6,6 +5,7 @@ Ant Design Vue is dedicated to providing a **good development experience** for p
 > Before delving into Ant Design Vue, a good knowledge base of [Vue](https://cn.vuejs.org/) and [JavaScript ES2015](http://babeljs.io/docs/learn-es2015/) is needed.
 
 ## Use vue-cli@3
+
 We provide an [Ant Design Vue](https://github.com/vueComponent/vue-cli-plugin-ant-design) plugin for vue-cli@3, which you can use to quickly build an Ant Design Vue-based project.
 
 ## Playground
@@ -38,52 +38,55 @@ And, setup your vue project configuration.
 
 ### 3. Use antd's Components
 
-
 ```bash
 $ npm i --save ant-design-vue
 ```
-**Fully import**
-```jsx
-import Vue from 'vue'
-import Antd from 'ant-design-vue'
-import App from './App'
-import 'ant-design-vue/dist/antd.css'
-Vue.config.productionTip = false
 
-Vue.use(Antd)
+**Fully import**
+
+```jsx
+import Vue from 'vue';
+import Antd from 'ant-design-vue';
+import App from './App';
+import 'ant-design-vue/dist/antd.css';
+Vue.config.productionTip = false;
+
+Vue.use(Antd);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
-})
+  template: '<App/>',
+});
 ```
+
 The above imports Antd entirely. Note that CSS file needs to be imported separately.
 
 **Only import the components you need**
-```jsx
-import Vue from 'vue'
-import { Button, message } from 'ant-design-vue'
-import App from './App'
 
-Vue.config.productionTip = false
+```jsx
+import Vue from 'vue';
+import { Button, message } from 'ant-design-vue';
+import App from './App';
+
+Vue.config.productionTip = false;
 
 /* v1.1.2 */
-Vue.component(Button.name, Button)
-Vue.component(Button.Group.name, Button.Group)
+Vue.component(Button.name, Button);
+Vue.component(Button.Group.name, Button.Group);
 
 /* v1.1.3+ Automatically register components under Button, such as Button.Group */
-Vue.use(Button)
+Vue.use(Button);
 
-Vue.prototype.$message = message
+Vue.prototype.$message = message;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
-})
+  template: '<App/>',
+});
 ```
 
 > All the components in antd are listed in the sidebar.
@@ -101,7 +104,6 @@ You need to provide [es5-shim](https://github.com/es-shims/es5-shim) and [es6-sh
 If you are using babel, we strongly recommend using [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) and [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/) instead of those two shims.
 
 > Please avoid using both the babel and shim methods at the same time.
-
 
 ## Import on Demand
 
@@ -139,4 +141,3 @@ And this plugin can load styles too, read [usage](https://github.com/ant-design/
 
 - You can use any `npm` modules.
 - Although Vue's official recommended template to write components, JSX is a better choice for complex components.
-

@@ -9,34 +9,39 @@ The `onChange` callback function will fire when the user changes the slider's va
 The `onAfterChange` callback function will fire when `onmouseup` fired.
 </us>
 
-```html
+```tpl
 <template>
   <div class="code-box-demo">
     <a-slider :defaultValue="30" @change="onChange" @afterChange="onAfterChange" />
-    <a-slider range :step="10" :defaultValue="[20, 50]" @change="onChange" @afterChange="onAfterChange" />
+    <a-slider
+      range
+      :step="10"
+      :defaultValue="[20, 50]"
+      @change="onChange"
+      @afterChange="onAfterChange"
+    />
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      disabled: false,
-    }
-  },
-  methods: {
-    onChange(value) {
-      console.log('change: ', value);
+  export default {
+    data() {
+      return {
+        disabled: false,
+      };
     },
-    onAfterChange(value) {
-      console.log('afterChange: ', value);
-    }
-  },
-}
+    methods: {
+      onChange(value) {
+        console.log('change: ', value);
+      },
+      onAfterChange(value) {
+        console.log('afterChange: ', value);
+      },
+    },
+  };
 </script>
 <style scoped>
-.code-box-demo .ant-slider {
-  margin-bottom: 16px;
-}
+  .code-box-demo .ant-slider {
+    margin-bottom: 16px;
+  }
 </style>
 ```
-

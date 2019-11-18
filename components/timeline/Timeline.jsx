@@ -9,6 +9,7 @@ import {
 import { cloneElement } from '../_util/vnode';
 import TimelineItem from './TimelineItem';
 import Icon from '../icon';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const TimelineProps = {
   prefixCls: PropTypes.string,
@@ -22,11 +23,16 @@ export const TimelineProps = {
 export default {
   name: 'ATimeline',
   props: initDefaultProps(TimelineProps, {
-    prefixCls: 'ant-timeline',
     reverse: false,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   render() {
-    const { prefixCls, reverse, mode, ...restProps } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, reverse, mode, ...restProps } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('timeline', customizePrefixCls);
+
     const pendingDot = getComponentFromProp(this, 'pendingDot');
     const pending = getComponentFromProp(this, 'pending');
     const pendingNode = typeof pending === 'boolean' ? null : pending;

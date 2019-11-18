@@ -16,9 +16,6 @@ const Marks = {
     } = context.props;
     const { clickLabel } = context.listeners;
     const marksKeys = Object.keys(marks);
-    const marksCount = marksKeys.length;
-    const unit = marksCount > 1 ? 100 / (marksCount - 1) : 100;
-    const markWidth = unit * 0.9;
 
     const range = max - min;
     const elements = marksKeys
@@ -46,9 +43,9 @@ const Marks = {
         };
 
         const leftStyle = {
-          width: `${markWidth}%`,
-          marginLeft: `${-markWidth / 2}%`,
           left: `${((point - min) / range) * 100}%`,
+          transform: `translateX(-50%)`,
+          msTransform: `translateX(-50%)`,
         };
 
         const style = vertical ? bottomStyle : leftStyle;

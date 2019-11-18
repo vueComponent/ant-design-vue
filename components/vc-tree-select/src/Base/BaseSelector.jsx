@@ -14,7 +14,7 @@ export const selectorPropTypes = () => ({
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   open: PropTypes.bool,
-  valueList: PropTypes.array, // Name as valueList to diff the single value
+  selectorValueList: PropTypes.array,
   allowClear: PropTypes.bool,
   showArrow: PropTypes.bool,
   // onClick: PropTypes.func,
@@ -27,7 +27,6 @@ export const selectorPropTypes = () => ({
   inputIcon: PropTypes.any,
   clearIcon: PropTypes.any,
   removeIcon: PropTypes.any,
-  selectorValueList: PropTypes.array,
   placeholder: PropTypes.any,
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
@@ -89,12 +88,12 @@ export default function(modeName) {
       },
 
       renderClear() {
-        const { prefixCls, allowClear, valueList } = this.$props;
+        const { prefixCls, allowClear, selectorValueList } = this.$props;
         const {
           vcTreeSelect: { onSelectorClear },
         } = this;
 
-        if (!allowClear || !valueList.length || !valueList[0].value) {
+        if (!allowClear || !selectorValueList.length || !selectorValueList[0].value) {
           return null;
         }
         const clearIcon = getComponentFromProp(this, 'clearIcon');

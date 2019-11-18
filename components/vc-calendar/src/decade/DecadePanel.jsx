@@ -26,6 +26,7 @@ export default {
     value: PropTypes.object,
     defaultValue: PropTypes.object,
     rootPrefixCls: PropTypes.string,
+    renderFooter: PropTypes.func,
   },
   data() {
     this.nextCentury = goYear.bind(this, 100);
@@ -37,7 +38,7 @@ export default {
 
   render() {
     const value = this.sValue;
-    const locale = this.locale;
+    const { locale, renderFooter } = this.$props;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -59,6 +60,7 @@ export default {
       }
     }
 
+    const footer = renderFooter && renderFooter('decade');
     const decadesEls = decades.map((row, decadeIndex) => {
       const tds = row.map(decadeData => {
         const dStartDecade = decadeData.startDecade;
@@ -118,6 +120,7 @@ export default {
             <tbody class={`${prefixCls}-tbody`}>{decadesEls}</tbody>
           </table>
         </div>
+        {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
       </div>
     );
   },

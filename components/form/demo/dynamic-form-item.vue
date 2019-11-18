@@ -8,12 +8,8 @@
 Add or remove form items dynamically.
 </us>
 
-
 <template>
-  <a-form
-    :form="form"
-    @submit="handleSubmit"
-  >
+  <a-form :form="form" @submit="handleSubmit">
     <a-form-item
       v-for="(k, index) in form.getFieldValue('keys')"
       :key="k"
@@ -26,12 +22,14 @@ Add or remove form items dynamically.
           `names[${k}]`,
           {
             validateTrigger: ['change', 'blur'],
-            rules: [{
-              required: true,
-              whitespace: true,
-              message: 'Please input passenger\'s name or delete this field.',
-            }],
-          }
+            rules: [
+              {
+                required: true,
+                whitespace: true,
+                message: 'Please input passenger\'s name or delete this field.',
+              },
+            ],
+          },
         ]"
         placeholder="passenger name"
         style="width: 60%; margin-right: 8px"
@@ -45,19 +43,12 @@ Add or remove form items dynamically.
       />
     </a-form-item>
     <a-form-item v-bind="formItemLayoutWithOutLabel">
-      <a-button
-        type="dashed"
-        style="width: 60%"
-        @click="add"
-      >
+      <a-button type="dashed" style="width: 60%" @click="add">
         <a-icon type="plus" /> Add field
       </a-button>
     </a-form-item>
     <a-form-item v-bind="formItemLayoutWithOutLabel">
-      <a-button
-        type="primary"
-        html-type="submit"
-      >
+      <a-button type="primary" html-type="submit">
         Submit
       </a-button>
     </a-form-item>
@@ -67,7 +58,7 @@ Add or remove form items dynamically.
 <script>
 let id = 0;
 export default {
-  data () {
+  data() {
     return {
       formItemLayout: {
         labelCol: {
@@ -87,12 +78,12 @@ export default {
       },
     };
   },
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'dynamic_form_item' });
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   methods: {
-    remove  (k) {
+    remove(k) {
       const { form } = this;
       // can use data-binding to get
       const keys = form.getFieldValue('keys');
@@ -107,11 +98,11 @@ export default {
       });
     },
 
-    add  () {
+    add() {
       const { form } = this;
       // can use data-binding to get
       const keys = form.getFieldValue('keys');
-      const nextKeys = keys.concat(++id);
+      const nextKeys = keys.concat(id++);
       // can use data-binding to set
       // important! notify form to detect changes
       form.setFieldsValue({
@@ -119,7 +110,7 @@ export default {
       });
     },
 
-    handleSubmit  (e) {
+    handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -137,7 +128,7 @@ export default {
   top: 4px;
   font-size: 24px;
   color: #999;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .dynamic-delete-button:hover {
   color: #777;
@@ -147,8 +138,3 @@ export default {
   opacity: 0.5;
 }
 </style>
-
-
-
-
-

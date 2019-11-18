@@ -27,10 +27,10 @@ export default {
   type: 'Navigation',
   title: 'Menu',
   subtitle: '导航菜单',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Horizontal />
         <Inline />
         <InlineCollapsed />
@@ -40,15 +40,12 @@ export default {
         <SwitchMode />
         <Template />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
   },
 };
 </script>
-<style>
-
-</style>
-
+<style></style>

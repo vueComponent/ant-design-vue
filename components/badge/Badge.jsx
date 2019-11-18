@@ -5,6 +5,7 @@ import { initDefaultProps, filterEmpty, getComponentFromProp } from '../_util/pr
 import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const BadgeProps = {
   /** Number to show in badge */
@@ -26,15 +27,16 @@ export const BadgeProps = {
 export default {
   name: 'ABadge',
   props: initDefaultProps(BadgeProps, {
-    prefixCls: 'ant-badge',
-    scrollNumberPrefixCls: 'ant-scroll-number',
     showZero: false,
     dot: false,
     overflowCount: 99,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   methods: {
-    getBadgeClassName() {
-      const { prefixCls, status } = this.$props;
+    getBadgeClassName(prefixCls) {
+      const { status } = this.$props;
       const children = filterEmpty(this.$slots.default);
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: !!status,
@@ -78,7 +80,7 @@ export default {
       return this.getNumberedDispayCount();
     },
 
-    getScollNumberTitle() {
+    getScrollNumberTitle() {
       const { title } = this.$props;
       const count = this.badgeCount;
       if (title) {
@@ -98,8 +100,8 @@ export default {
         : numberStyle;
     },
 
-    renderStatusText() {
-      const { prefixCls, text } = this.$props;
+    renderStatusText(prefixCls) {
+      const { text } = this.$props;
       const hidden = this.isHidden();
       return hidden || !text ? null : <span class={`${prefixCls}-status-text`}>{text}</span>;
     },
@@ -115,8 +117,8 @@ export default {
       });
     },
 
-    renderBadgeNumber() {
-      const { prefixCls, scrollNumberPrefixCls, status } = this.$props;
+    renderBadgeNumber(prefixCls, scrollNumberPrefixCls) {
+      const { status } = this.$props;
       const count = this.badgeCount;
       const displayCount = this.getDispayCount();
       const isDot = this.isDot();
@@ -138,7 +140,7 @@ export default {
           className={scrollNumberCls}
           count={displayCount}
           displayComponent={this.renderDispayComponent()} // <Badge status="success" count={<Icon type="xxx" />}></Badge>
-          title={this.getScollNumberTitle()}
+          title={this.getScrollNumberTitle()}
           style={this.getStyleWithOffset()}
           key="scrollNumber"
         />
@@ -147,15 +149,26 @@ export default {
   },
 
   render() {
-    const { prefixCls, status, text, $slots } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      scrollNumberPrefixCls: customizeScrollNumberPrefixCls,
+      status,
+      text,
+      $slots,
+    } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('badge', customizePrefixCls);
+    const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
+
     const children = filterEmpty($slots.default);
     let count = getComponentFromProp(this, 'count');
     if (Array.isArray(count)) {
       count = count[0];
     }
     this.badgeCount = count;
-    const scrollNumber = this.renderBadgeNumber();
-    const statusText = this.renderStatusText();
+    const scrollNumber = this.renderBadgeNumber(prefixCls, scrollNumberPrefixCls);
+    const statusText = this.renderStatusText(prefixCls);
     const statusCls = classNames({
       [`${prefixCls}-status-dot`]: !!status,
       [`${prefixCls}-status-${status}`]: !!status,
@@ -166,7 +179,7 @@ export default {
       return (
         <span
           {...{ on: this.$listeners }}
-          class={this.getBadgeClassName()}
+          class={this.getBadgeClassName(prefixCls)}
           style={this.getStyleWithOffset()}
         >
           <span class={statusCls} />
@@ -178,7 +191,7 @@ export default {
     const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '');
 
     return (
-      <span {...{ on: this.$listeners }} class={this.getBadgeClassName()}>
+      <span {...{ on: this.$listeners }} class={this.getBadgeClassName(prefixCls)}>
         {children}
         <transition {...transitionProps}>{scrollNumber}</transition>
         {statusText}

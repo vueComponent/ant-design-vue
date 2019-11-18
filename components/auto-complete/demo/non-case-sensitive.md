@@ -1,4 +1,3 @@
-
 <cn>
 #### 不区分大小写
 不区分大小写的 AutoComplete
@@ -9,7 +8,7 @@
 A non-case-sensitive AutoComplete
 </us>
 
-```html
+```tpl
 <template>
   <a-auto-complete
     :dataSource="dataSource"
@@ -19,18 +18,19 @@ A non-case-sensitive AutoComplete
   />
 </template>
 <script>
-export default {
-  data() {
-    return {
-      dataSource: ['Burns Bay Road', 'Downing Street', 'Wall Street'],
-    }
-  },
-  methods: {
-    filterOption(input, option) {
-      return option.componentOptions.children[0].text.toUpperCase().indexOf(input.toUpperCase()) >= 0
-    }
-  }
-}
+  export default {
+    data() {
+      return {
+        dataSource: ['Burns Bay Road', 'Downing Street', 'Wall Street'],
+      };
+    },
+    methods: {
+      filterOption(input, option) {
+        return (
+          option.componentOptions.children[0].text.toUpperCase().indexOf(input.toUpperCase()) >= 0
+        );
+      },
+    },
+  };
 </script>
 ```
-

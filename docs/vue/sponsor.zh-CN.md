@@ -5,15 +5,17 @@ ant-design-vue 是采用 MIT 许可的开源项目，使用完全免费。 但�
 ## 一次性赞助
 
 你可以通过以下任意一种方式赞助:
+
 <div>
 <a href="https://www.paypal.me/tangjinzhou" target="_blank">PayPal</a>
 <br/>
-<a href="https://cdn.nlark.com/yuque/0/2019/png/87084/1548485701785-assets/web-upload/648ca181-a52f-4382-957c-97c5dbb3e1cc.png" target="_blank">支付宝或微信</a>
+<a href="https://qn.antdv.com/alipay-and-wechat.png" target="_blank">支付宝或微信</a>
 </div>
 
 ## 周期性赞助
 
 周期性赞助可以获得额外的回报，比如你的名字会出现在 Vue 的 GitHub 仓库中，再比如你的公司 logo 会出现在我们的官网上。
+
 <div>
 <a href="https://www.patreon.com/tangjinzhou" target="_blank">Patreon</a>
 <br/>
@@ -23,8 +25,6 @@ ant-design-vue 是采用 MIT 许可的开源项目，使用完全免费。 但�
 ## 企业赞助
 
 您可以通过邮件咨询[415800467@qq.com](415800467@qq.com)。
-
-
 
 ## 当前的赞助商
 

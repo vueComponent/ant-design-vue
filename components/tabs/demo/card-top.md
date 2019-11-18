@@ -8,8 +8,7 @@
 Should be used at the top of container, needs to override styles.
 </us>
 
-```html
-
+```tpl
 <template>
   <div class="card-container">
     <a-tabs type="card">
@@ -32,46 +31,45 @@ Should be used at the top of container, needs to override styles.
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-    }
-  },
-  methods: {
-    callback (key) {
-      console.log(key)
+  export default {
+    data() {
+      return {};
     },
-  },
-}
+    methods: {
+      callback(key) {
+        console.log(key);
+      },
+    },
+  };
 </script>
 <style>
-.card-container {
-  background: #F5F5F5;
-  overflow: hidden;
-  padding: 24px;
-}
-.card-container > .ant-tabs-card > .ant-tabs-content {
-  height: 120px;
-  margin-top: -16px;
-}
+  .card-container {
+    background: #f5f5f5;
+    overflow: hidden;
+    padding: 24px;
+  }
+  .card-container > .ant-tabs-card > .ant-tabs-content {
+    height: 120px;
+    margin-top: -16px;
+  }
 
-.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
-  background: #fff;
-  padding: 16px;
-}
+  .card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+  }
 
-.card-container > .ant-tabs-card > .ant-tabs-bar {
-  border-color: #fff;
-}
+  .card-container > .ant-tabs-card > .ant-tabs-bar {
+    border-color: #fff;
+  }
 
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
-  border-color: transparent;
-  background: transparent;
-}
+  .card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+  }
 
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
-  border-color: #fff;
-  background: #fff;
-}
+  .card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    border-color: #fff;
+    background: #fff;
+  }
 </style>
 ```

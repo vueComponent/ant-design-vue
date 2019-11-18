@@ -9,7 +9,7 @@ Generating a set of Tags by array, you can add and remove dynamically.
 It's based on `afterClose` event, which will be triggered while the close animation end.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <template v-for="(tag, index) in tags">
@@ -39,46 +39,46 @@ It's based on `afterClose` event, which will be triggered while the close animat
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      tags: ['Unremovable', 'Tag 2', 'Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3'],
-      inputVisible: false,
-      inputValue: '',
-    }
-  },
-  methods: {
-    handleClose (removedTag) {
-      const tags = this.tags.filter(tag => tag !== removedTag)
-      console.log(tags)
-      this.tags = tags
-    },
-
-    showInput () {
-      this.inputVisible = true
-      this.$nextTick(function () {
-        this.$refs.input.focus()
-      })
-    },
-
-    handleInputChange (e) {
-      this.inputValue = e.target.value
-    },
-
-    handleInputConfirm () {
-      const inputValue = this.inputValue
-      let tags = this.tags
-      if (inputValue && tags.indexOf(inputValue) === -1) {
-        tags = [...tags, inputValue]
-      }
-      console.log(tags)
-      Object.assign(this, {
-        tags,
+  export default {
+    data() {
+      return {
+        tags: ['Unremovable', 'Tag 2', 'Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3'],
         inputVisible: false,
         inputValue: '',
-      })
+      };
     },
-  },
-}
+    methods: {
+      handleClose(removedTag) {
+        const tags = this.tags.filter(tag => tag !== removedTag);
+        console.log(tags);
+        this.tags = tags;
+      },
+
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(function() {
+          this.$refs.input.focus();
+        });
+      },
+
+      handleInputChange(e) {
+        this.inputValue = e.target.value;
+      },
+
+      handleInputConfirm() {
+        const inputValue = this.inputValue;
+        let tags = this.tags;
+        if (inputValue && tags.indexOf(inputValue) === -1) {
+          tags = [...tags, inputValue];
+        }
+        console.log(tags);
+        Object.assign(this, {
+          tags,
+          inputVisible: false,
+          inputValue: '',
+        });
+      },
+    },
+  };
 </script>
 ```

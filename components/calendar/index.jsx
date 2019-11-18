@@ -4,12 +4,11 @@ import { getOptionProps, hasProp, initDefaultProps } from '../_util/props-util';
 import * as moment from 'moment';
 import FullCalendar from '../vc-calendar/src/FullCalendar';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { PREFIX_CLS } from './Constants';
 import Header from './Header';
 import interopDefault from '../_util/interopDefault';
+import { ConfigConsumerProps } from '../config-provider';
 import enUS from './locale/en_US';
-
-export { HeaderProps } from './Header';
+import Base from '../base';
 
 function noop() {
   return null;
@@ -55,18 +54,21 @@ const Calendar = {
   props: initDefaultProps(CalendarProps(), {
     locale: {},
     fullscreen: true,
-    prefixCls: PREFIX_CLS,
     mode: 'month',
   }),
   model: {
     prop: 'value',
     event: 'change',
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     const value = this.value || this.defaultValue || interopDefault(moment)();
     if (!interopDefault(moment).isMoment(value)) {
       throw new Error('The value/defaultValue of Calendar must be a moment object, ');
     }
+    this._sPrefixCls = undefined;
     return {
       sValue: value,
       sMode: this.mode,
@@ -86,23 +88,23 @@ const Calendar = {
   },
   methods: {
     monthCellRender2(value) {
-      const { prefixCls, $scopedSlots } = this;
+      const { _sPrefixCls, $scopedSlots } = this;
       const monthCellRender = this.monthCellRender || $scopedSlots.monthCellRender || noop;
       return (
-        <div class={`${prefixCls}-month`}>
-          <div class={`${prefixCls}-value`}>{value.localeData().monthsShort(value)}</div>
-          <div class={`${prefixCls}-content`}>{monthCellRender(value)}</div>
+        <div class={`${_sPrefixCls}-month`}>
+          <div class={`${_sPrefixCls}-value`}>{value.localeData().monthsShort(value)}</div>
+          <div class={`${_sPrefixCls}-content`}>{monthCellRender(value)}</div>
         </div>
       );
     },
 
     dateCellRender2(value) {
-      const { prefixCls, $scopedSlots } = this;
+      const { _sPrefixCls, $scopedSlots } = this;
       const dateCellRender = this.dateCellRender || $scopedSlots.dateCellRender || noop;
       return (
-        <div class={`${prefixCls}-date`}>
-          <div class={`${prefixCls}-value`}>{zerofixed(value.date())}</div>
-          <div class={`${prefixCls}-content`}>{dateCellRender(value)}</div>
+        <div class={`${_sPrefixCls}-date`}>
+          <div class={`${_sPrefixCls}-value`}>{zerofixed(value.date())}</div>
+          <div class={`${_sPrefixCls}-content`}>{dateCellRender(value)}</div>
         </div>
       );
     },
@@ -157,15 +159,37 @@ const Calendar = {
         return inRange;
       };
     },
-
+    getDefaultLocale() {
+      const result = {
+        ...enUS,
+        ...this.$props.locale,
+      };
+      result.lang = {
+        ...result.lang,
+        ...(this.$props.locale || {}).lang,
+      };
+      return result;
+    },
     renderCalendar(locale, localeCode) {
       const props = getOptionProps(this);
       const { sValue: value, sMode: mode, $listeners, $scopedSlots } = this;
       if (value && localeCode) {
         value.locale(localeCode);
       }
-      const { prefixCls, fullscreen, dateFullCellRender, monthFullCellRender } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        fullscreen,
+        dateFullCellRender,
+        monthFullCellRender,
+      } = props;
+      const getPrefixCls = this.configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
       const type = mode === 'year' ? 'month' : 'date';
+
+      // To support old version react.
+      // Have to add prefixCls on the instance.
+      // https://github.com/facebook/react/issues/12397
+      this._sPrefixCls = prefixCls;
 
       let cls = '';
       if (fullscreen) {
@@ -216,17 +240,6 @@ const Calendar = {
         </div>
       );
     },
-    getDefaultLocale() {
-      const result = {
-        ...enUS,
-        ...this.$props.locale,
-      };
-      result.lang = {
-        ...result.lang,
-        ...(this.$props.locale || {}).lang,
-      };
-      return result;
-    },
   },
 
   render() {
@@ -242,7 +255,8 @@ const Calendar = {
 
 /* istanbul ignore next */
 Calendar.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Calendar.name, Calendar);
 };
-
+export { HeaderProps } from './Header';
 export default Calendar;

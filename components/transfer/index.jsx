@@ -11,7 +11,9 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
+import { ConfigConsumerProps } from '../config-provider';
 import warning from '../_util/warning';
+import Base from '../base';
 
 export const TransferDirection = 'left' | 'right';
 
@@ -57,6 +59,9 @@ const Transfer = {
     locale: {},
     showSearch: false,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     // vue 中 通过slot，不方便传递，保留notFoundContent及searchPlaceholder
     // warning(
@@ -312,9 +317,12 @@ const Transfer = {
       return direction === 'left' ? 'sourceSelectedKeys' : 'targetSelectedKeys';
     },
 
-    getLocale(transferLocale) {
+    getLocale(transferLocale, renderEmpty) {
+      const h = this.$createElement;
       // Keep old locale props still working.
-      const oldLocale = {};
+      const oldLocale = {
+        notFoundContent: renderEmpty(h, 'Transfer'),
+      };
       const notFoundContent = getComponentFromProp(this, 'notFoundContent');
       if (notFoundContent) {
         oldLocale.notFoundContent = notFoundContent;
@@ -329,7 +337,7 @@ const Transfer = {
     renderTransfer(transferLocale) {
       const props = getOptionProps(this);
       const {
-        prefixCls = 'ant-transfer',
+        prefixCls: customizePrefixCls,
         disabled,
         operations = [],
         showSearch,
@@ -338,7 +346,11 @@ const Transfer = {
         filterOption,
         lazy,
       } = props;
-      const locale = this.getLocale(transferLocale);
+      const getPrefixCls = this.configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('transfer', customizePrefixCls);
+
+      const renderEmpty = this.configProvider.renderEmpty;
+      const locale = this.getLocale(transferLocale, renderEmpty);
       const {
         leftFilter,
         rightFilter,
@@ -433,6 +445,7 @@ const Transfer = {
 
 /* istanbul ignore next */
 Transfer.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Transfer.name, Transfer);
 };
 

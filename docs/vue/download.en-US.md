@@ -1,8 +1,6 @@
-
-
 Please find below some of the design resources and tools about Ant Design Vue that we consider valuable. More of this is still being collected.
 
-> The following design resources are developed and maintained by the [Ant Design](https://ant.design). 
+> The following design resources are developed and maintained by the [Ant Design](https://ant.design).
 
 <div class="resource-cards">
   <a target="_blank" href="https://github.com/ant-design/ant-design/releases/download/resource/Ant.Design.Components.Beta.3.10.5.sketch" class="resource-card">

@@ -44,17 +44,6 @@ exports[`Card should still have padding when card which set padding to 0 is load
           <div class="ant-card-loading-block"></div>
         </div>
       </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col-8" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col-6" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col-8" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -65,7 +54,7 @@ exports[`Card title should be vertically aligned 1`] = `
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card title</div>
-      <div class="ant-card-extra"><button type="button" class="ant-btn ant-btn-default"><span>Button</span></button></div>
+      <div class="ant-card-extra"><button type="button" class="ant-btn"><span>Button</span></button></div>
     </div>
   </div>
   <div class="ant-card-body">

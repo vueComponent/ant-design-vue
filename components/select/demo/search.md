@@ -1,4 +1,3 @@
-
 <cn>
 #### 带搜索框
 展开后可对选项进行搜索。
@@ -9,7 +8,7 @@
 Search the options while expanded.
 </us>
 
-```html
+```tpl
 <template>
   <a-select
     showSearch
@@ -27,22 +26,23 @@ Search the options while expanded.
   </a-select>
 </template>
 <script>
-export default {
-  methods: {
-    handleChange (value) {
-      console.log(`selected ${value}`);
+  export default {
+    methods: {
+      handleChange(value) {
+        console.log(`selected ${value}`);
+      },
+      handleBlur() {
+        console.log('blur');
+      },
+      handleFocus() {
+        console.log('focus');
+      },
+      filterOption(input, option) {
+        return (
+          option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        );
+      },
     },
-    handleBlur() {
-      console.log('blur');
-    },
-    handleFocus() {
-      console.log('focus');
-    },
-    filterOption(input, option) {
-      return option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
-    }
-  }
-}
+  };
 </script>
 ```
-

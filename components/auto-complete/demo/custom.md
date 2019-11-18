@@ -1,4 +1,3 @@
-
 <cn>
 #### 自定义输入组件
 自定义输入组件。
@@ -9,7 +8,7 @@
 Customize Input Component
 </us>
 
-```html
+```tpl
 <template>
   <a-auto-complete
     :dataSource="dataSource"
@@ -26,28 +25,23 @@ Customize Input Component
   </a-auto-complete>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      dataSource: [],
-    }
-  },
-  methods: {
-    onSelect(value) {
-      console.log('onSelect', value);
+  export default {
+    data() {
+      return {
+        dataSource: [],
+      };
     },
-    handleSearch(value) {
-      this.dataSource = !value ? [] : [
-        value,
-        value + value,
-        value + value + value,
-      ]
+    methods: {
+      onSelect(value) {
+        console.log('onSelect', value);
+      },
+      handleSearch(value) {
+        this.dataSource = !value ? [] : [value, value + value, value + value + value];
+      },
+      handleKeyPress(ev) {
+        console.log('handleKeyPress', ev);
+      },
     },
-    handleKeyPress(ev) {
-      console.log('handleKeyPress', ev);
-    }
-  }
-}
+  };
 </script>
 ```
-

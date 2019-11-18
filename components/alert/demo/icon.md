@@ -8,7 +8,7 @@
 Decent icon make information more clear and more friendly.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert message="Success Tips" type="success" showIcon />

@@ -1,15 +1,13 @@
-
-
 ## API
 
 ### Radio
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| autoFocus | 自动获取焦点 | boolean | false |
-| checked | 指定当前是否选中 | boolean | false |
-| defaultChecked | 初始是否选中 | boolean | false |
-| value | 根据 value 进行比较，判断是否选中 | any | - |
+| 参数           | 说明                              | 类型    | 默认值 |
+| -------------- | --------------------------------- | ------- | ------ |
+| autoFocus      | 自动获取焦点                      | boolean | false  |
+| checked        | 指定当前是否选中                  | boolean | false  |
+| defaultChecked | 初始是否选中                      | boolean | false  |
+| value          | 根据 value 进行比较，判断是否选中 | any     | -      |
 
 ### RadioGroup
 
@@ -27,15 +25,15 @@
 
 ### RadioGroup 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 选项变化时的回调函数 | Function(e:Event) |
+| 事件名称 | 说明                 | 回调参数          |
+| -------- | -------------------- | ----------------- |
+| change   | 选项变化时的回调函数 | Function(e:Event) |
 
 ## 方法
 
 ### Radio
 
-| 名称 | 描述 |
-| --- | --- |
-| blur() | 移除焦点 |
+| 名称    | 描述     |
+| ------- | -------- |
+| blur()  | 移除焦点 |
 | focus() | 获取焦点 |

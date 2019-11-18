@@ -3,51 +3,57 @@
 ### Form
 
 | Property | Description | Type | Default Value |
-| -------- | ----------- | ---- | ------------- |
+| --- | --- | --- | --- |
 | form | Decorated by `Form.create()` will be automatically set `this.form` property, so just pass to form. If you use the template syntax, you can use `this.$form.createForm(this, options)` | object | n/a |
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |
 | layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |
-| autoFormCreate(deprecated) | Automate Form.create, Recommended for use under the `template` component, and cannot be used with `Form.create()`. You should use `$form.createForm` to instead it after 1.1.9.  |Function(form)| |
-| options(deprecated) | The `options` corresponding to `Form.create(options)`.  You should use `$form.createForm` to instead it after 1.1.9.  | Object | {} |
+| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |
+| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |
+| autoFormCreate(deprecated) | Automate Form.create, Recommended for use under the `template` component, and cannot be used with `Form.create()`. You should use `$form.createForm` to instead it after 1.1.9. | Function(form) |  |
+| options(deprecated) | The `options` corresponding to `Form.create(options)`. You should use `$form.createForm` to instead it after 1.1.9. | Object | {} |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |
 
-### Form.create(options) \| this.$form.createForm(this, options)
+### Form.create(options) \| this.\$form.createForm(this, options)
 
 How to use：
 
 #### Used in jsx, the usage is consistent with the React version of antd
+
 ```jsx
-const CustomizedForm = {}
+const CustomizedForm = {};
 
 CustomizedForm = Form.create({})(CustomizedForm);
 ```
+
 Maintain an ref for wrapped component instance, use `wrappedComponentRef`.
 
 #### Single file template usage
-````html
+
+```html
 <template>
-<a-form :form="form" />
+  <a-form :form="form" />
 </template>
 <script>
-export default {
-  beforeCreate () {
-    this.form = this.$form.createForm(this, options)
-  },
-}
+  export default {
+    beforeCreate() {
+      this.form = this.$form.createForm(this, options);
+    },
+  };
 </script>
-````
-
+```
 
 The following `options` are available:
 
 | Property | Description | Type |
-| -------- | ----------- | ---- |
-| props | Only supports the use of Form.create({})(CustomizedForm). declare props on form(和[like vue props]( https://vuejs.org/v2/api/#props)) | {} |
+| --- | --- | --- |
+| props | Only supports the use of Form.create({})(CustomizedForm). declare props on form(和[like vue props](https://vuejs.org/v2/api/#props)) | {} |
 | mapPropsToFields | Convert props to field value(e.g. reading the values from Redux store). And you must mark returned fields with [`Form.createFormField`](#Form.createFormField). If you use `$form.createForm` to create a collector, you can map any data to the Field without being bound by the parent component. | (props) => Object{ fieldName: FormField { value } } |
+| name | Set the id prefix of fields under form | - |
 | validateMessages | Default validate message. And its format is similar with [newMessages](https://github.com/yiminghe/async-validator/blob/master/src/messages.js)'s returned value | Object { [nested.path]&#x3A; String } |
 | onFieldsChange | Specify a function that will be called when the value a `Form.Item` gets changed. Usage example: saving the field's value to Redux store. | Function(props, fields) |
 | onValuesChange | A handler while value of any field is changed | (props, values) => void |
@@ -57,7 +63,7 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 > Note: Before using `getFieldsValue` `getFieldValue` `setFieldsValue` and so on, please make sure that corresponding field had been registered with `getFieldDecorator` or `v-decorator`.
 
 | Method | Description | Type |
-| ------ | ----------- | ---- |
+| --- | --- | --- |
 | getFieldDecorator | Two-way binding for form, single file template can be bound using the directive `v-decorator`. please read below for details. |  |
 | getFieldError | Get the error of a field. | Function(name) |
 | getFieldsError | Get the specified fields' error. If you don't specify a parameter, you will get all fields' error. | Function(\[names: string\[]]) |
@@ -68,14 +74,16 @@ If the form has been decorated by `Form.create` then it has `this.form` property
 | isFieldValidating | Check if the specified field is being validated. | Function(name) |
 | resetFields | Reset the specified fields' value(to `initialValue`) and status. If you don't specify a parameter, all the fields will be reset. | Function(\[names: string\[]]) |
 | setFields | Set value and error state of fields. | ({<br />&nbsp;&nbsp;\[fieldName\]: {value: any, errors: \[Error\] }<br />}) => void |
-| setFieldsValue | Set the value of a field. | Function({ [fieldName]&#x3A; value } |
+| setFieldsValue | Set the value of a field. | Function({ [fieldName]&#x3A; value }) |
 | validateFields | Validate the specified fields and get theirs values and errors. If you don't specify the parameter of fieldNames, you will validate all fields. | (<br />&nbsp;&nbsp;\[fieldNames: string\[]],<br />&nbsp;&nbsp;\[options: object\],<br />&nbsp;&nbsp;callback(errors, values)<br />) => void |
 | validateFieldsAndScroll | This function is similar to `validateFields`, but after validation, if the target field is not in visible area of form, form will be automatically scrolled to the target field area. | same as `validateFields` |
 
 ### validateFields/validateFieldsAndScroll
 
 ```jsx
-const { form: { validateFields } } = this;
+const {
+  form: { validateFields },
+} = this;
 validateFields((errors, values) => {
   // ...
 });
@@ -88,7 +96,7 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 ```
 
 | Method | Description | Type | Default |
-| ------ | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | options.first | If `true`, every field will stop validation at first failed rule | boolean | false |
 | options.firstFields | Those fields will stop validation at first failed rule | String\[] | \[] |
 | options.force | Should validate validated field again when `validateTrigger` is been triggered again | boolean | false |
@@ -98,35 +106,35 @@ validateFields(['field1', 'field2'], options, (errors, values) => {
 
 - `errors`:
 
-   ```js
-   {
-     "userName": {
-       "errors": [
-         {
-           "message": "Please input your username!",
-           "field": "userName"
-         }
-       ]
-     },
-     "password": {
-       "errors": [
-         {
-           "message": "Please input your Password!",
-           "field": "password"
-         }
-       ]
-     }
-   }
-   ```
+  ```js
+  {
+    "userName": {
+      "errors": [
+        {
+          "message": "Please input your username!",
+          "field": "userName"
+        }
+      ]
+    },
+    "password": {
+      "errors": [
+        {
+          "message": "Please input your Password!",
+          "field": "password"
+        }
+      ]
+    }
+  }
+  ```
 
 - `values`:
 
-   ```js
-   {
-     "userName": "username",
-     "password": "password",
-   }
-   ```
+  ```js
+  {
+    "userName": "username",
+    "password": "password",
+  }
+  ```
 
 ### Form.createFormField
 
@@ -148,10 +156,10 @@ After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property
 #### getFieldDecorator(id, options) and v-decorator="[id, options]" parameters
 
 | Property | Description | Type | Default Value |
-| -------- | ----------- | ---- | ------------- |
+| --- | --- | --- | --- |
 | id | The unique identifier is required. support [nested fields format](https://github.com/react-component/form/pull/48). | string |  |
 | options.getValueFromEvent | Specify how to get value from event or other onChange arguments | function(..args) | [reference](https://github.com/react-component/form#option-object) |
-| options.getValueProps | Get the component props according to field value. | function(value): any | [reference](https://github.com/react-component/form#option-object)
+| options.getValueProps | Get the component props according to field value. | function(value): any | [reference](https://github.com/react-component/form#option-object) |
 | options.initialValue | You can specify initial value, type, optional value of children node. (Note: Because `Form` will test equality with `===` internally, we recommend to use variable as `initialValue`, instead of literal) |  | n/a |
 | options.normalize | Normalize value to form component, [a select-all example](https://codesandbox.io/s/kw4l2vqqmv) | function(value, prevValue, allValues): any | - |
 | options.preserve | Keep the field even if field removed | boolean | false |
@@ -166,7 +174,7 @@ After wrapped by `getFieldDecorator` or `v-decorator`, `value`(or other property
 Note: If Form.Item has multiple children that had been decorated by `getFieldDecorator` or `v-decorator`, `help` and `required` and `validateStatus` can't be generated automatically.
 
 | Property | Description | Type | Default Value |
-| -------- | ----------- | ---- | ------------- |
+| --- | --- | --- | --- |
 | colon | Used with `label`, whether to display `:` after label text. | boolean | true |
 | extra | The extra prompt message. It is similar to help. Usage example: to display error message and prompt message at the same time. | string\|slot |  |
 | hasFeedback | Used with `validateStatus`, this option specifies the validation status icon. Recommended to be used only with `Input`. | boolean | false |
@@ -180,7 +188,7 @@ Note: If Form.Item has multiple children that had been decorated by `getFieldDec
 ### Validation Rules
 
 | Property | Description | Type | Default Value |
-| -------- | ----------- | ---- | ------------- |
+| --- | --- | --- | --- |
 | enum | validate a value from a list of possible values | string | - |
 | len | validate an exact length of a field | number | - |
 | max | validate a max length of a field | number | - |
@@ -194,4 +202,3 @@ Note: If Form.Item has multiple children that had been decorated by `getFieldDec
 | whitespace | treat required fields that only contain whitespace as errors | boolean | `false` |
 
 See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
-

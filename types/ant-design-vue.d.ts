@@ -26,6 +26,7 @@ import { DatePicker } from './date-picker/date-picker';
 import { Divider } from './divider';
 import { Drawer } from './drawer';
 import { Dropdown } from './dropdown/dropdown';
+import { Empty } from './empty';
 import { Form } from './form/form';
 import { Icon } from './icon';
 import { Input } from './input/input';
@@ -93,6 +94,7 @@ export {
   DatePicker,
   Divider,
   Dropdown,
+  Empty,
   Form,
   Icon,
   Input,

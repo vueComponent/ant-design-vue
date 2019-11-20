@@ -66,7 +66,7 @@
 
 | 参数         | 说明                                             | 类型   | 默认值 |
 | ------------ | ------------------------------------------------ | ------ | ------ |
-| expandAction | 目录展开逻辑，可选 `false` `'click'` `'dbclick'` | string | click  |
+| expandAction | 目录展开逻辑，可选 `false` `'click'` `'dblclick'` | string | click  |
 
 ## FAQ
 

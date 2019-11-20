@@ -7,7 +7,7 @@ import { Tree } from './tree';
 
 export declare class DictionaryTree extends Tree {
   /**
-   * Directory open logic, optional false 'click' 'doubleclick'
+   * Directory open logic, optional false 'click' 'dblclick'
    * @default 'click'
    * @type string
    */

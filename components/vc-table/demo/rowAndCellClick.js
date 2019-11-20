@@ -116,7 +116,7 @@ export default {
         customRow={(record, index) => ({
           on: {
             click: onRowClick.bind(null, record, index),
-            dbclick: onRowDoubleClick.bind(null, record, index),
+            dblclick: onRowDoubleClick.bind(null, record, index),
           },
         })}
       />

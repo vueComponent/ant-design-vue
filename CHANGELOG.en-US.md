@@ -10,6 +10,16 @@
 
 ---
 
+## 1.4.6
+
+`2019-11-20`
+
+- 🐞 Fix `Cascader` can't enter a space question [#1427](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 Fix `AutoComplete` can't delete the last character [#1429] (https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 Update `dbclick` in `Tree`'s `expandAction` to `dblclick` [#1437] (https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🐞 Update `dbclick` in the `Table` document to `dblclick` [#1437] (https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🌟 Add the TS type declaration for the `Empty` component [#1439] (https://github.com/vueComponent/ant-design-vue/pull/1439)
+
 ## 1.4.5
 
 `2019-11-16`
@@ -18,7 +28,6 @@
 - 🌟 `Input` `Select` `DatePicker` trigger change event after input Chinese, reducing unnecessary performance consumption [#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
 - 🐞 Fixed when the placeholder of `Input` `Select` is Chinese, the change event is automatically triggered under ie [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
 - Tree
-
   - 🌟 Add the `replaceFields` field to customize the `title` `children` [#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
   - 🌟 update event `doubleclick` to `dbclick` [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
 

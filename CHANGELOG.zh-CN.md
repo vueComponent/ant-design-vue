@@ -10,6 +10,16 @@
 
 ---
 
+## 1.4.6
+
+`2019-11-20`
+
+- 🐞 修复 `Cascader` 不能输入空格的问题 [#1427](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 修复 `AutoComplete` 不能删除最后一个字符的问题 [#1429](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 更新 `Tree` 的 `expandAction` 中的 `dbclick` 为 `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🐞 更新 `Table` 文档中的 `dbclick` 为 `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🌟 添加 `Empty` 组件的 TS 类型声明 [#1439](https://github.com/vueComponent/ant-design-vue/pull/1439)
+
 ## 1.4.5
 
 `2019-11-16`
@@ -18,7 +28,6 @@
 - 🌟 `Input` `Select` `DatePicker` 输入中文完毕后触发相关事件，减少不必要的性能消耗[#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
 - 🐞 修复 `Input` `Select` 的 placeholder 为中文时，在 ie 下自动触发 change 事件问题 [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
 - Tree
-
   - 🌟 添加 replaceFields 字段用来自定义 title children。[#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
   - 🌟 更新事件 doubleclick 为 dbclick [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
 

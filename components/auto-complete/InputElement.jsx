@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
+import { getOptionProps } from '../_util/props-util';
 function chaining(...fns) {
   return function(...args) {
     // eslint-disable-line
@@ -12,6 +13,7 @@ function chaining(...fns) {
   };
 }
 export default {
+  name: 'InputElement',
   props: {
     value: PropTypes.any,
     disabled: PropTypes.bool,
@@ -29,7 +31,8 @@ export default {
 
   render() {
     const { $slots = {}, $listeners = {}, $props = {}, $attrs = {} } = this;
-    const value = $props.value === undefined ? '' : $props.value;
+    const props = getOptionProps(this);
+    const value = props.value === undefined ? '' : props.value;
     const children = $slots.default[0];
     const { componentOptions = {} } = $slots.default[0];
     const { listeners = {} } = componentOptions;
@@ -43,7 +46,7 @@ export default {
       domProps: {
         value,
       },
-      props: $props,
+      props,
       on: newEvent,
       attrs: { ...$attrs, value },
       ref: 'ele',

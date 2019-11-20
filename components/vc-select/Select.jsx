@@ -304,7 +304,7 @@ const Select = {
 
     onInputChange(e) {
       const { value: val, composing } = e.target;
-      const { _inputValue = '' } = this;
+      const { _inputValue = '' } = this.$data;
       if (composing || _inputValue === val) return;
       const { tokenSeparators } = this.$props;
       if (

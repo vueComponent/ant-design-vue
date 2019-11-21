@@ -308,6 +308,7 @@ const SubPopupMenu = {
         this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length;
       }
       const childListeners = getEvents(child);
+      const isSubMenu = child.componentOptions && child.componentOptions.Ctor.options.isSubMenu;
       const newChildProps = {
         props: {
           mode: childProps.mode || props.mode,
@@ -333,10 +334,12 @@ const SubPopupMenu = {
           ...extraProps,
         },
         on: {
-          click: e => {
-            (childListeners.click || noop)(e);
-            this.onClick(e);
-          },
+          click: isSubMenu
+            ? noop
+            : e => {
+                (childListeners.click || noop)(e);
+                this.onClick(e);
+              },
           itemHover: this.onItemHover,
           openChange: this.onOpenChange,
           deselect: this.onDeselect,

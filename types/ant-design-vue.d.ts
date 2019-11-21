@@ -86,6 +86,7 @@ export {
   Calendar,
   Card,
   Collapse,
+  Comment,
   Carousel,
   Cascader,
   Checkbox,

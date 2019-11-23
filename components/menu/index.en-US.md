@@ -29,6 +29,7 @@
 | subMenuCloseDelay | delay time to hide submenu when mouse leave, unit: second | number | 0.1 |
 | subMenuOpenDelay | delay time to show submenu when mouse enter, unit: second | number | 0 |
 | theme | color theme of the menu | string: `light` `dark` | `light` |
+| overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
 
 ### Menu Events
 

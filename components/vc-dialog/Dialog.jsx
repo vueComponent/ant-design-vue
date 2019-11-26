@@ -64,6 +64,12 @@ export default {
     };
   },
 
+  provide() {
+    return {
+      dialogContext: this,
+    };
+  },
+
   watch: {
     visible(val) {
       if (val) {

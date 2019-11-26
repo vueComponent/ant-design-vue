@@ -147,6 +147,7 @@ const Select = {
     };
     return {
       ...state,
+      _mirrorInputValue: state._inputValue, // https://github.com/vueComponent/ant-design-vue/issues/1458
       ...this.getDerivedStateFromProps(props, state),
     };
   },
@@ -166,6 +167,9 @@ const Select = {
   watch: {
     __propsSymbol__() {
       Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data));
+    },
+    '$data._inputValue': function(val) {
+      this.$data._mirrorInputValue = val;
     },
   },
   updated() {
@@ -305,7 +309,12 @@ const Select = {
     onInputChange(e) {
       const { value: val, composing } = e.target;
       const { _inputValue = '' } = this.$data;
-      if (composing || _inputValue === val) return;
+      if (composing || _inputValue === val) {
+        this.setState({
+          _mirrorInputValue: val,
+        });
+        return;
+      }
       const { tokenSeparators } = this.$props;
       if (
         isMultipleOrTags(this.$props) &&
@@ -606,7 +615,7 @@ const Select = {
     getPlaceholderElement() {
       const { $props: props, $data: state } = this;
       let hidden = false;
-      if (state._inputValue) {
+      if (state._mirrorInputValue) {
         hidden = true;
       }
       const value = state._value;
@@ -733,7 +742,7 @@ const Select = {
     },
     _getInputElement() {
       const props = this.$props;
-      const { _inputValue: inputValue } = this.$data;
+      const { _inputValue: inputValue, _mirrorInputValue } = this.$data;
       const attrs = getAttrs(this);
       const defaultInput = (
         <input
@@ -802,7 +811,7 @@ const Select = {
             // ref='inputMirrorRef'
             class={`${props.prefixCls}-search__field__mirror`}
           >
-            {inputValue}&nbsp;
+            {_mirrorInputValue}&nbsp;
           </span>
         </div>
       );

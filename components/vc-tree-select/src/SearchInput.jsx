@@ -22,7 +22,16 @@ const SearchInput = {
   inject: {
     vcTreeSelect: { default: () => ({}) },
   },
-
+  data() {
+    return {
+      mirrorSearchValue: this.searchValue,
+    };
+  },
+  watch: {
+    searchValue(val) {
+      this.mirrorSearchValue = val;
+    },
+  },
   created() {
     this.inputRef = createRef();
     this.mirrorInputRef = createRef();
@@ -89,7 +98,10 @@ const SearchInput = {
     handleInputChange(e) {
       const { value, composing } = e.target;
       const { searchValue = '' } = this;
-      if (composing || searchValue === value) return;
+      if (composing || searchValue === value) {
+        this.mirrorSearchValue = value;
+        return;
+      }
       this.vcTreeSelect.onSearchInputChange(e);
     },
   },
@@ -99,6 +111,7 @@ const SearchInput = {
     const {
       vcTreeSelect: { onSearchInputKeyDown },
       handleInputChange,
+      mirrorSearchValue,
     } = this;
     return (
       <span class={`${prefixCls}-search__field__wrap`}>
@@ -136,7 +149,7 @@ const SearchInput = {
           }}
           class={`${prefixCls}-search__field__mirror`}
         >
-          {searchValue}&nbsp;
+          {mirrorSearchValue}&nbsp;
         </span>
         {renderPlaceholder ? renderPlaceholder() : null}
       </span>

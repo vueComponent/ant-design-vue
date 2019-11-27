@@ -12,8 +12,8 @@ This component provides a configuration to all Vue components underneath itself 
   export default {
     methods: {
       getPopupContainer(el, dialogContext) {
-        if(dialogContext) {
-          return dialogContext.$refs.wrap;
+        if (dialogContext) {
+          return dialogContext.getDialogWrap();
         } else {
           return document.body;
         }

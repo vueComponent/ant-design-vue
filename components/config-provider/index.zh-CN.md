@@ -12,8 +12,8 @@ ConfigProvider 使用 Vue 的 [provide / inject](https://vuejs.org/v2/api/#provi
   export default {
     methods: {
       getPopupContainer(el, dialogContext) {
-        if(dialogContext) {
-          return dialogContext.$refs.wrap;
+        if (dialogContext) {
+          return dialogContext.getDialogWrap();
         } else {
           return document.body;
         }

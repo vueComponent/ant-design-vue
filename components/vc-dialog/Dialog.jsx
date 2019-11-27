@@ -112,6 +112,10 @@ export default {
     clearTimeout(this.timeoutId);
   },
   methods: {
+    // 对外暴露的 api 不要更改名称或删除
+    getDialogWrap() {
+      return this.$refs.wrap;
+    },
     updatedCallback(visible) {
       const mousePosition = this.mousePosition;
       if (this.visible) {

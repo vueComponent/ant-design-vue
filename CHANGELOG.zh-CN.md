@@ -10,6 +10,17 @@
 
 ---
 
+## 1.4.7
+
+`2019-11-27`
+
+- 🌟 `ConfigProvider` 的 `getPopupContainer` 新增弹窗上下文做为第二个参数，用于统一配置 `Modal` 内的 `getPopupContainer` [7a3c88](https://github.com/vueComponent/ant-design-vue/commit/7a3c88107598b4b1cf6842d3254b43dc26103c14)
+- 🐞 修复 `ConfigProvider` 在 Vue 2.5 版本下报错问题 [309baa](https://github.com/vueComponent/ant-design-vue/commit/309baa138a9c9a1885c17ef636c9132349024359)
+- 🐞 修复 `Menu` click 事件触发两次的问题 [#1450](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 修复 `Select` 内的 input 框宽度不正确的问题 [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458)
+- 🐞 修复 `Select` 在输入中文时 `placeholder` 不消失的问题 [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458#issuecomment-557477782)
+- 🌟 添加 `Comment` 组件的 TS 类型声明 [#1453](https://github.com/vueComponent/ant-design-vue/pull/1453)
+
 ## 1.4.6
 
 `2019-11-20`
@@ -28,6 +39,7 @@
 - 🌟 `Input` `Select` `DatePicker` 输入中文完毕后触发相关事件，减少不必要的性能消耗[#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
 - 🐞 修复 `Input` `Select` 的 placeholder 为中文时，在 ie 下自动触发 change 事件问题 [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
 - Tree
+
   - 🌟 添加 replaceFields 字段用来自定义 title children。[#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
   - 🌟 更新事件 doubleclick 为 dbclick [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
 

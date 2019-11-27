@@ -10,15 +10,26 @@
 
 ---
 
+## 1.4.7
+
+`2019-11-27`
+
+- 🌟 `getPopupContainer` of`ConfigProvider` Added popup context as the second parameter for uniform configuration of `getPopupContainer` in`Modal` [7a3c88] (https://github.com/vueComponent/ant-design -vue / commit / 7a3c88107598b4b1cf6842d3254b43dc26103c14)
+- 🐞 Fix `ConfigProvider` reporting error in Vue 2.5 [309baa](https://github.com/vueComponent/ant-design-vue/commit/309baa138a9c9a1885c17ef636c9132349024359)
+- 🐞 Fix `Menu` click event is triggered twice [#1450](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 Fix incorrect width of input box in `Select` [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458)
+- 🐞 Fix `Select` the problem that `placeholder` does not disappear when inputting Chinese [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458#issuecomment-557477782)
+- 🌟 Add the TS type declaration for the `Comment` component [#1453](https://github.com/vueComponent/ant-design-vue/pull/1453)
+
 ## 1.4.6
 
 `2019-11-20`
 
 - 🐞 Fix `Cascader` can't enter a space question [#1427](https://github.com/vueComponent/ant-design-vue/issues/1427)
-- 🐞 Fix `AutoComplete` can't delete the last character [#1429] (https://github.com/vueComponent/ant-design-vue/issues/1427)
-- 🐞 Update `dbclick` in `Tree`'s `expandAction` to `dblclick` [#1437] (https://github.com/vueComponent/ant-design-vue/issues/1437)
-- 🐞 Update `dbclick` in the `Table` document to `dblclick` [#1437] (https://github.com/vueComponent/ant-design-vue/issues/1437)
-- 🌟 Add the TS type declaration for the `Empty` component [#1439] (https://github.com/vueComponent/ant-design-vue/pull/1439)
+- 🐞 Fix `AutoComplete` can't delete the last character [#1429](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 Update `dbclick` in `Tree`'s `expandAction` to `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🐞 Update `dbclick` in the `Table` document to `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🌟 Add the TS type declaration for the `Empty` component [#1439](https://github.com/vueComponent/ant-design-vue/pull/1439)
 
 ## 1.4.5
 
@@ -28,6 +39,7 @@
 - 🌟 `Input` `Select` `DatePicker` trigger change event after input Chinese, reducing unnecessary performance consumption [#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
 - 🐞 Fixed when the placeholder of `Input` `Select` is Chinese, the change event is automatically triggered under ie [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
 - Tree
+
   - 🌟 Add the `replaceFields` field to customize the `title` `children` [#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
   - 🌟 update event `doubleclick` to `dbclick` [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
 

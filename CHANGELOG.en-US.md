@@ -10,6 +10,13 @@
 
 ---
 
+## 1.4.8
+
+`2019-11-28`
+
+- 🐞 Fix `Menu` not trigger click event [#1470](https://github.com/vueComponent/ant-design-vue/issues/1470)
+- 🐞 Fix `Tooltip` not hide in keep-alive [16ec40](https://github.com/vueComponent/ant-design-vue/commit/16ec40a012d7c400bf3028e6c938050dd6d7de2f)
+
 ## 1.4.7
 
 `2019-11-27`

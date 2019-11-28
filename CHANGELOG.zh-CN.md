@@ -10,6 +10,13 @@
 
 ---
 
+## 1.4.8
+
+`2019-11-28`
+
+- 🐞 修复 `Menu` click 事件不触发的问题 [#1470](https://github.com/vueComponent/ant-design-vue/issues/1470)
+- 🐞 修复 `Tooltip` 在 keep-alive 下不消失的问题 [16ec40](https://github.com/vueComponent/ant-design-vue/commit/16ec40a012d7c400bf3028e6c938050dd6d7de2f)
+
 ## 1.4.7
 
 `2019-11-27`

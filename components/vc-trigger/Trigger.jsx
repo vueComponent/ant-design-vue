@@ -115,7 +115,9 @@ export default {
       };
     });
   },
-
+  deactivated() {
+    this.setPopupVisible(false);
+  },
   mounted() {
     this.$nextTick(() => {
       this.renderComponent(null);

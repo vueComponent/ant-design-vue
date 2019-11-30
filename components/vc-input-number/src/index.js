@@ -68,6 +68,8 @@ const inputNumberProps = {
   decimalSeparator: PropTypes.string,
   autoComplete: PropTypes.string,
   title: PropTypes.string,
+  name: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default {

@@ -142,7 +142,7 @@ const Drawer = {
         return null;
       }
       this.destroyClose = false;
-      const { placement, bodyStyle } = this.$props;
+      const { placement, bodyStyle, wrapStyle } = this.$props;
 
       const containerStyle =
         placement === 'left' || placement === 'right'
@@ -162,7 +162,7 @@ const Drawer = {
       return (
         <div
           class={`${prefixCls}-wrapper-body`}
-          style={containerStyle}
+          style={{...containerStyle, ...wrapStyle}}
           onTransitionend={this.onDestroyTransitionEnd}
         >
           {this.renderHeader(prefixCls)}

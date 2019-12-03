@@ -28,6 +28,7 @@ To use `confirm()` to popup a confirmation modal dialog.
       showConfirm() {
         this.$confirm({
           title: 'Do you Want to delete these items?',
+          closable: true,
           content: h => <div style="color:red;">Some descriptions</div>,
           onOk() {
             console.log('OK');

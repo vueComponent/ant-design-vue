@@ -17,12 +17,15 @@ function makeMap(str, expectsLowerCase) {
 const isTextInputType = makeMap('text,number,password,search,email,tel,url');
 
 function onCompositionStart(e) {
+  e.target.originPlaceholder = e.target.placeholder;
+  e.target.placeholder = '';
   e.target.composing = true;
 }
 
 function onCompositionEnd(e) {
   // prevent triggering an input event for no reason
   if (!e.target.composing) return;
+  e.target.placeholder = e.target.originPlaceholder;
   e.target.composing = false;
   trigger(e.target, 'input');
 }

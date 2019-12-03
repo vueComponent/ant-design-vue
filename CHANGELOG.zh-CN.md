@@ -10,6 +10,34 @@
 
 ---
 
+## 1.4.8
+
+`2019-11-28`
+
+- 🐞 修复 `Menu` click 事件不触发的问题 [#1470](https://github.com/vueComponent/ant-design-vue/issues/1470)
+- 🐞 修复 `Tooltip` 在 keep-alive 下不消失的问题 [16ec40](https://github.com/vueComponent/ant-design-vue/commit/16ec40a012d7c400bf3028e6c938050dd6d7de2f)
+
+## 1.4.7
+
+`2019-11-27`
+
+- 🌟 `ConfigProvider` 的 `getPopupContainer` 新增弹窗上下文做为第二个参数，用于统一配置 `Modal` 内的 `getPopupContainer` [7a3c88](https://github.com/vueComponent/ant-design-vue/commit/7a3c88107598b4b1cf6842d3254b43dc26103c14)
+- 🐞 修复 `ConfigProvider` 在 Vue 2.5 版本下报错问题 [309baa](https://github.com/vueComponent/ant-design-vue/commit/309baa138a9c9a1885c17ef636c9132349024359)
+- 🐞 修复 `Menu` click 事件触发两次的问题 [#1450](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 修复 `Select` 内的 input 框宽度不正确的问题 [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458)
+- 🐞 修复 `Select` 在输入中文时 `placeholder` 不消失的问题 [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458#issuecomment-557477782)
+- 🌟 添加 `Comment` 组件的 TS 类型声明 [#1453](https://github.com/vueComponent/ant-design-vue/pull/1453)
+
+## 1.4.6
+
+`2019-11-20`
+
+- 🐞 修复 `Cascader` 不能输入空格的问题 [#1427](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 修复 `AutoComplete` 不能删除最后一个字符的问题 [#1429](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 更新 `Tree` 的 `expandAction` 中的 `dbclick` 为 `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🐞 更新 `Table` 文档中的 `dbclick` 为 `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🌟 添加 `Empty` 组件的 TS 类型声明 [#1439](https://github.com/vueComponent/ant-design-vue/pull/1439)
+
 ## 1.4.5
 
 `2019-11-16`

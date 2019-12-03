@@ -66,7 +66,7 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 
 | Property     | Description                                                  | Type   | Default |
 | ------------ | ------------------------------------------------------------ | ------ | ------- |
-| expandAction | Directory open logic, optional `false` `'click'` `'dbclick'` | string | click   |
+| expandAction | Directory open logic, optional `false` `'click'` `'dblclick'` | string | click   |
 
 ## FAQ
 

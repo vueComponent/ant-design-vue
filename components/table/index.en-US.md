@@ -71,7 +71,7 @@ const columns = [
 
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter) |  |
+| change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter, { currentDataSource }) |  |
 | expand | Callback executed when the row expand icon is clicked | Function(expanded, record) |  |
 | expandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
 
@@ -88,7 +88,7 @@ Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`. Follow [V
       },
       on: {
         click: (event) => {},       // click row
-        dbclick: (event) => {}, // double click row
+        dblclick: (event) => {}, // double click row
         contextmenu: (event) => {}  // right button click row
         mouseenter: (event) => {}   // mouse enter row
         mouseleave: (event) => {}   // mouse leave row

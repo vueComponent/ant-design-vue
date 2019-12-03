@@ -380,7 +380,7 @@ const Tree = {
     },
 
     onNodeDoubleClick(e, treeNode) {
-      this.__emit('dbclick', e, treeNode);
+      this.__emit('dblclick', e, treeNode);
     },
 
     onNodeSelect(e, treeNode) {

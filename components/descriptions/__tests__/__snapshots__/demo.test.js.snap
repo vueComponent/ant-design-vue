@@ -90,7 +90,7 @@ exports[`renders ./components/descriptions/demo/responsive.md correctly 1`] = `
             <td colspan="1" class="ant-descriptions-item-content">Cloud Database</td>
             <th class="ant-descriptions-item-label ant-descriptions-item-colon">Billing</th>
             <td colspan="1" class="ant-descriptions-item-content">Prepaid</td>
-            <th class="ant-descriptions-item-label ant-descriptions-item-colon">time</th>
+            <th class="ant-descriptions-item-label ant-descriptions-item-colon">Time</th>
             <td colspan="1" class="ant-descriptions-item-content">18:00:00</td>
           </tr>
           <tr class="ant-descriptions-row">
@@ -112,7 +112,7 @@ exports[`renders ./components/descriptions/demo/responsive.md correctly 1`] = `
               <br>
               Storage space: 10 GB
               <br>
-              Replication_factor:3
+              Replication_factor: 3
               <br>
               Region: East China 1
             </td>
@@ -137,7 +137,7 @@ exports[`renders ./components/descriptions/demo/size.md correctly 1`] = `
             <td colspan="1" class="ant-descriptions-item-content">Cloud Database</td>
             <th class="ant-descriptions-item-label ant-descriptions-item-colon">Billing</th>
             <td colspan="1" class="ant-descriptions-item-content">Prepaid</td>
-            <th class="ant-descriptions-item-label ant-descriptions-item-colon">time</th>
+            <th class="ant-descriptions-item-label ant-descriptions-item-colon">Time</th>
             <td colspan="1" class="ant-descriptions-item-content">18:00:00</td>
           </tr>
           <tr class="ant-descriptions-row">
@@ -159,7 +159,7 @@ exports[`renders ./components/descriptions/demo/size.md correctly 1`] = `
               <br>
               Storage space: 10 GB
               <br>
-              Replication_factor:3
+              Replication_factor: 3
               <br>
               Region: East China 1<br></td>
           </tr>
@@ -175,7 +175,7 @@ exports[`renders ./components/descriptions/demo/size.md correctly 1`] = `
           <tr class="ant-descriptions-row">
             <td colspan="1" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon">Product</span><span class="ant-descriptions-item-content">Cloud Database</span></td>
             <td colspan="1" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon">Billing</span><span class="ant-descriptions-item-content">Prepaid</span></td>
-            <td colspan="1" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon">time</span><span class="ant-descriptions-item-content">18:00:00</span></td>
+            <td colspan="1" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon">Time</span><span class="ant-descriptions-item-content">18:00:00</span></td>
           </tr>
           <tr class="ant-descriptions-row">
             <td colspan="1" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon">Amount</span><span class="ant-descriptions-item-content">$80.00</span></td>
@@ -276,7 +276,7 @@ exports[`renders ./components/descriptions/demo/vertical-border.md correctly 1`]
             <br>
             Storage space: 10 GB
             <br>
-            Replication_factor:3
+            Replication_factor: 3
             <br>
             Region: East China 1<br></td>
         </tr>

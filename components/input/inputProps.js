@@ -33,4 +33,8 @@ export default {
   spellCheck: Boolean,
   autoFocus: Boolean,
   allowClear: Boolean,
+  lazy: {
+    default: true,
+    type: Boolean,
+  },
 };

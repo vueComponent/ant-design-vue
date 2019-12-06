@@ -30,7 +30,7 @@ export default {
   },
 
   render() {
-    const { $slots = {}, $listeners = {}, $props = {}, $attrs = {} } = this;
+    const { $slots = {}, $listeners = {}, $attrs = {} } = this;
     const props = getOptionProps(this);
     const value = props.value === undefined ? '' : props.value;
     const children = $slots.default[0];

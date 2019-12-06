@@ -69,10 +69,11 @@ const AutoComplete = {
     savePopupRef(ref) {
       this.popupRef = ref;
     },
+
     getInputElement() {
       const { $slots } = this;
       const children = filterEmpty($slots.default);
-      const element = children.length ? children[0] : <Input />;
+      const element = children.length ? children[0] : <Input lazy={false} />;
       return <InputElement>{element}</InputElement>;
     },
 

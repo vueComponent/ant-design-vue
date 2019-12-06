@@ -22,6 +22,7 @@ function showIf(condition, el) {
 }
 
 const CalendarHeader = {
+  name: 'CalendarHeader',
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
@@ -149,7 +150,7 @@ const CalendarHeader = {
       panel = (
         <MonthPanel
           locale={locale}
-          defaultValue={value}
+          value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}

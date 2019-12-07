@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { getOptionProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
 export const BasicProps = {
   prefixCls: PropTypes.string,
@@ -12,8 +13,15 @@ function generator(props, name) {
     return {
       name,
       props: BasicComponent.props,
+      inject: {
+        configProvider: { default: () => ConfigConsumerProps },
+      },
       render() {
-        const { prefixCls } = props;
+        const { suffixCls } = props;
+        const { prefixCls: customizePrefixCls } = this.$props;
+        const getPrefixCls = this.configProvider.getPrefixCls;
+        const prefixCls = getPrefixCls(suffixCls, customizePrefixCls);
+
         const basicComponentProps = {
           props: {
             prefixCls,
@@ -73,28 +81,28 @@ const BasicLayout = {
 
 const Layout = generator(
   {
-    prefixCls: 'ant-layout',
+    suffixCls: 'layout',
   },
   'ALayout',
 )(BasicLayout);
 
 const Header = generator(
   {
-    prefixCls: 'ant-layout-header',
+    suffixCls: 'layout-header',
   },
   'ALayoutHeader',
 )(Basic);
 
 const Footer = generator(
   {
-    prefixCls: 'ant-layout-footer',
+    suffixCls: 'layout-footer',
   },
   'ALayoutFooter',
 )(Basic);
 
 const Content = generator(
   {
-    prefixCls: 'ant-layout-content',
+    suffixCls: 'layout-content',
   },
   'ALayoutContent',
 )(Basic);

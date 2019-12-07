@@ -27,23 +27,23 @@ export default {
   title: 'Comment',
   subtitle: '评论',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <br/>
-        <List/>
-        <br/>
-        <Nested/>
-        <br/>
-        <Editor/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <br />
+        <List />
+        <br />
+        <Nested />
+        <br />
+        <Editor />
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

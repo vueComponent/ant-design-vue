@@ -9,7 +9,7 @@
 By using `push` and` pull` class you can easily change column order.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-row>
@@ -19,5 +19,3 @@ By using `push` and` pull` class you can easily change column order.
   </div>
 </template>
 ```
-
-

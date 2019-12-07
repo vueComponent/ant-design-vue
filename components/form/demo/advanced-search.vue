@@ -12,11 +12,7 @@ Because the width of label is not fixed, you may need to adjust it by customizin
 
 <template>
   <div id="components-form-demo-advanced-search">
-    <a-form
-      class="ant-advanced-search-form"
-      :form="form"
-      @submit="handleSearch"
-    >
+    <a-form class="ant-advanced-search-form" :form="form" @submit="handleSearch">
       <a-row :gutter="24">
         <a-col
           v-for="i in 10"
@@ -29,11 +25,13 @@ Because the width of label is not fixed, you may need to adjust it by customizin
               v-decorator="[
                 `field-${i}`,
                 {
-                  rules: [{
-                    required: true,
-                    message: 'Input something!',
-                  }],
-                }
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Input something!',
+                    },
+                  ],
+                },
               ]"
               placeholder="placeholder"
             />
@@ -41,26 +39,14 @@ Because the width of label is not fixed, you may need to adjust it by customizin
         </a-col>
       </a-row>
       <a-row>
-        <a-col
-          :span="24"
-          :style="{ textAlign: 'right' }"
-        >
-          <a-button
-            type="primary"
-            html-type="submit"
-          >
+        <a-col :span="24" :style="{ textAlign: 'right' }">
+          <a-button type="primary" html-type="submit">
             Search
           </a-button>
-          <a-button
-            :style="{ marginLeft: '8px' }"
-            @click="handleReset"
-          >
+          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
             Clear
           </a-button>
-          <a
-            :style="{ marginLeft: '8px', fontSize: '12px' }"
-            @click="toggle"
-          >
+          <a :style="{ marginLeft: '8px', fontSize: '12px' }" @click="toggle">
             Collapse <a-icon :type="expand ? 'up' : 'down'" />
           </a>
         </a-col>
@@ -72,21 +58,20 @@ Because the width of label is not fixed, you may need to adjust it by customizin
   </div>
 </template>
 <script>
-
 export default {
-  data () {
+  data() {
     return {
       expand: false,
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this, { name: 'advanced_search' }),
     };
   },
   computed: {
-    count () {
+    count() {
       return this.expand ? 11 : 7;
     },
   },
   methods: {
-    handleSearch  (e) {
+    handleSearch(e) {
       e.preventDefault();
       this.form.validateFields((error, values) => {
         console.log('error', error);
@@ -94,11 +79,11 @@ export default {
       });
     },
 
-    handleReset () {
+    handleReset() {
       this.form.resetFields();
     },
 
-    toggle  () {
+    toggle() {
       this.expand = !this.expand;
     },
   },
@@ -133,7 +118,3 @@ export default {
   padding-top: 80px;
 }
 </style>
-
-
-
-

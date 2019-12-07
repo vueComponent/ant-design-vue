@@ -10,11 +10,11 @@ exports[`renders ./components/notification/demo/duration.md correctly 1`] = `<bu
 
 exports[`renders ./components/notification/demo/placement.md correctly 1`] = `
 <div>
-  <div class="ant-select ant-select-enabled" style="width: 120px; margin-right: 10px;">
-    <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" tabindex="0" class="ant-select-selection ant-select-selection--single">
+  <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px; margin-right: 10px;">
+    <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
       <div class="ant-select-selection__rendered">
         <div title="topRight" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">topRight</div>
-      </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
+      </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
     </div>
   </div> <button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>
 </div>
@@ -24,4 +24,4 @@ exports[`renders ./components/notification/demo/update.md correctly 1`] = `<butt
 
 exports[`renders ./components/notification/demo/with-btn.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./components/notification/demo/with-icon.md correctly 1`] = `<div><button type="button" class="ant-btn ant-btn-default"><span>Success</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Info</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Warning</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Error</span></button></div>`;
+exports[`renders ./components/notification/demo/with-icon.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Success</span></button> <button type="button" class="ant-btn"><span>Info</span></button> <button type="button" class="ant-btn"><span>Warning</span></button> <button type="button" class="ant-btn"><span>Error</span></button></div>`;

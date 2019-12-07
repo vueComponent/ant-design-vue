@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import ConfirmDialog from './ConfirmDialog';
+import { destroyFns } from './Modal';
+import Base from '../base';
 
 export default function confirm(config) {
   const div = document.createElement('div');
@@ -30,11 +32,19 @@ export default function confirm(config) {
     if (config.onCancel && triggerCancel) {
       config.onCancel(...args);
     }
+    for (let i = 0; i < destroyFns.length; i++) {
+      const fn = destroyFns[i];
+      if (fn === close) {
+        destroyFns.splice(i, 1);
+        break;
+      }
+    }
   }
 
   function render(props) {
     confirmDialogProps.props = props;
-    return new Vue({
+    const V = Base.Vue || Vue;
+    return new V({
       el: el,
       data() {
         return { confirmDialogProps };
@@ -48,7 +58,7 @@ export default function confirm(config) {
   }
 
   confirmDialogInstance = render(currentConfig);
-
+  destroyFns.push(close);
   return {
     destroy: close,
     update,

@@ -10,6 +10,7 @@ import {
   camelize,
   getSlots,
 } from '../_util/props-util';
+import Base from '../base';
 
 const Table = {
   name: 'ATable',
@@ -39,7 +40,7 @@ const Table = {
           column.key = key;
         }
         if (getSlotOptions(element).__ANT_TABLE_COLUMN_GROUP) {
-          column.children = this.normalize(children);
+          column.children = this.normalize(typeof children === 'function' ? children() : children);
         } else {
           const customRender =
             element.data && element.data.scopedSlots && element.data.scopedSlots.default;
@@ -107,6 +108,7 @@ const Table = {
 };
 /* istanbul ignore next */
 Table.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Table.name, Table);
   Vue.component(Table.Column.name, Table.Column);
   Vue.component(Table.ColumnGroup.name, Table.ColumnGroup);

@@ -8,7 +8,7 @@
 Using pre & post tabs example.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div style="margin-bottom: 16px">
@@ -30,7 +30,7 @@ Using pre & post tabs example.
     </div>
     <div style="margin-bottom: 16px">
       <a-input defaultValue="mysite">
-        <a-icon slot="addonAfter" type="setting"/>
+        <a-icon slot="addonAfter" type="setting" />
       </a-input>
     </div>
   </div>

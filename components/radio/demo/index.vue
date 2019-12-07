@@ -36,10 +36,10 @@ export default {
   subtitle: '单选框',
   type: 'Data Entry',
   title: 'Radio',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <Disabled />
         <RadioButton />
@@ -50,10 +50,10 @@ export default {
         <RadioGroup />
         <Size />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

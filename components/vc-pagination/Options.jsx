@@ -5,8 +5,7 @@ import BaseMixin from '../_util/BaseMixin';
 export default {
   mixins: [BaseMixin],
   props: {
-    rootPrefixCls: PropTypes.String,
-    selectPrefixCls: PropTypes.String,
+    disabled: PropTypes.bool,
     changeSize: PropTypes.func,
     quickGo: PropTypes.func,
     selectComponentClass: PropTypes.any,
@@ -15,6 +14,8 @@ export default {
     pageSize: PropTypes.number,
     buildOptionText: PropTypes.func,
     locale: PropTypes.object,
+    rootPrefixCls: PropTypes.string,
+    selectPrefixCls: PropTypes.string,
     goButton: PropTypes.any,
   },
   data() {
@@ -23,25 +24,38 @@ export default {
     };
   },
   methods: {
+    getValidValue() {
+      const { goInputText, current } = this;
+      return isNaN(goInputText) ? current : Number(goInputText);
+    },
     defaultBuildOptionText(opt) {
       return `${opt.value} ${this.locale.items_per_page}`;
     },
     handleChange(e) {
+      const { value, composing } = e.target;
+      if (composing || this.goInputText === value) return;
       this.setState({
-        goInputText: e.target.value,
+        goInputText: value,
       });
     },
-    go(e) {
-      let val = this.goInputText;
-      if (val === '') {
+    handleBlur() {
+      const { goButton, quickGo } = this;
+      if (goButton) {
         return;
       }
-      val = isNaN(val) ? this.current : Number(val);
+      quickGo(this.getValidValue());
+    },
+    go(e) {
+      const { goInputText } = this;
+      if (goInputText === '') {
+        return;
+      }
       if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
+        // https://github.com/vueComponent/ant-design-vue/issues/1316
+        this.quickGo(this.getValidValue());
         this.setState({
           goInputText: '',
         });
-        this.quickGo(val);
       }
     },
   },
@@ -54,34 +68,38 @@ export default {
       goButton,
       selectComponentClass: Select,
       defaultBuildOptionText,
+      selectPrefixCls,
+      pageSize,
+      pageSizeOptions,
+      goInputText,
+      disabled,
     } = this;
     const prefixCls = `${rootPrefixCls}-options`;
     let changeSelect = null;
     let goInput = null;
     let gotoButton = null;
 
-    if (!(changeSize || quickGo)) {
+    if (!changeSize && !quickGo) {
       return null;
     }
 
     if (changeSize && Select) {
-      const Option = Select.Option;
-      const pageSize = this.pageSize || this.pageSizeOptions[0];
       const buildOptionText = this.buildOptionText || defaultBuildOptionText;
-      const options = this.pageSizeOptions.map((opt, i) => (
-        <Option key={i} value={opt}>
+      const options = pageSizeOptions.map((opt, i) => (
+        <Select.Option key={i} value={opt}>
           {buildOptionText({ value: opt })}
-        </Option>
+        </Select.Option>
       ));
 
       changeSelect = (
         <Select
-          prefixCls={this.selectPrefixCls}
+          disabled={disabled}
+          prefixCls={selectPrefixCls}
           showSearch={false}
           class={`${prefixCls}-size-changer`}
           optionLabelProp="children"
           dropdownMatchSelectWidth={false}
-          value={pageSize.toString()}
+          value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={value => this.changeSize(Number(value))}
           getPopupContainer={triggerNode => triggerNode.parentNode}
         >
@@ -92,28 +110,34 @@ export default {
 
     if (quickGo) {
       if (goButton) {
-        if (typeof goButton === 'boolean') {
-          gotoButton = (
-            <button type="button" onClick={this.go} onKeyup={this.go}>
+        gotoButton =
+          typeof goButton === 'boolean' ? (
+            <button type="button" onClick={this.go} onKeyup={this.go} disabled={disabled}>
               {locale.jump_to_confirm}
             </button>
-          );
-        } else {
-          gotoButton = (
+          ) : (
             <span onClick={this.go} onKeyup={this.go}>
               {goButton}
             </span>
           );
-        }
       }
       goInput = (
         <div class={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
           <input
+            disabled={disabled}
             type="text"
-            value={this.goInputText}
+            value={goInputText}
             onInput={this.handleChange}
             onKeyup={this.go}
+            onBlur={this.handleBlur}
+            {...{
+              directives: [
+                {
+                  name: 'ant-input',
+                },
+              ],
+            }}
           />
           {locale.page}
           {gotoButton}

@@ -35,27 +35,27 @@ export default {
   title: 'Collapse',
   subtitle: '折叠面板',
   cols: 1,
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <br/>
-        <Accordion/>
-        <br/>
-        <Mix/>
-        <br/>
-        <Borderless/>
-        <br/>
-        <Custom/>
-        <br/>
-        <Noarrow/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <br />
+        <Accordion />
+        <br />
+        <Mix />
+        <br />
+        <Borderless />
+        <br />
+        <Custom />
+        <br />
+        <Noarrow />
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

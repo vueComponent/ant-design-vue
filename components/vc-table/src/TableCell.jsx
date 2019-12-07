@@ -67,7 +67,7 @@ export default {
     let rowSpan;
 
     if (customRender) {
-      text = customRender(text, record, index);
+      text = customRender(text, record, index, column);
       if (isInvalidRenderCellText(text)) {
         tdProps.attrs = text.attrs || {};
         tdProps.props = text.props || {};
@@ -97,7 +97,7 @@ export default {
       return null;
     }
     if (column.align) {
-      tdProps.style = { textAlign: column.align };
+      tdProps.style = { ...tdProps.style, textAlign: column.align };
     }
 
     return (

@@ -8,9 +8,8 @@
 Display active animation.
 </us>
 
-```html
+```tpl
 <template>
   <a-skeleton active />
 </template>
 ```
-

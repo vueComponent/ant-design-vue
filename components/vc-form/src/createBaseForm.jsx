@@ -2,6 +2,7 @@ import AsyncValidator from 'async-validator';
 import warning from 'warning';
 import get from 'lodash/get';
 import set from 'lodash/set';
+import eq from 'lodash/eq';
 import omit from 'lodash/omit';
 import createFieldsStore from './createFieldsStore';
 import { cloneElement } from '../../_util/vnode';
@@ -60,7 +61,7 @@ function createBaseForm(option = {}, mixins = []) {
         this.instances = {};
         this.cachedBind = {};
         this.clearedFieldMetaCache = {};
-
+        this.formItems = {};
         this.renderFields = {};
         this.domFields = {};
 
@@ -126,7 +127,14 @@ function createBaseForm(option = {}, mixins = []) {
             const valuesAllSet = {};
             valuesAll[name] = value;
             Object.keys(valuesAll).forEach(key => set(valuesAllSet, key, valuesAll[key]));
-            onValuesChange(this, set({}, name, value), valuesAllSet);
+            onValuesChange(
+              {
+                [formPropName]: this.getForm(),
+                ...this.$props,
+              },
+              set({}, name, value),
+              valuesAllSet,
+            );
           }
           const field = this.fieldsStore.getField(name);
           return { name, field: { ...field, value, touched: true }, fieldMeta };
@@ -135,6 +143,7 @@ function createBaseForm(option = {}, mixins = []) {
         onCollect(name_, action, ...args) {
           const { name, field, fieldMeta } = this.onCollectCommon(name_, action, args);
           const { validate } = fieldMeta;
+          this.fieldsStore.setFieldsAsDirty();
           const newField = {
             ...field,
             dirty: hasRules(validate),
@@ -150,6 +159,7 @@ function createBaseForm(option = {}, mixins = []) {
             ...field,
             dirty: true,
           };
+          this.fieldsStore.setFieldsAsDirty();
           this.validateFieldsInternal([newField], {
             action,
             options: {
@@ -172,8 +182,9 @@ function createBaseForm(option = {}, mixins = []) {
           return cache[action].fn;
         },
 
-        getFieldDecorator(name, fieldOption) {
+        getFieldDecorator(name, fieldOption, formItem) {
           const { props, ...restProps } = this.getFieldProps(name, fieldOption);
+          this.formItems[name] = formItem;
           return fieldElem => {
             // We should put field in record if it is rendered
             this.renderFields[name] = true;
@@ -193,7 +204,7 @@ function createBaseForm(option = {}, mixins = []) {
                 !(
                   !slotHasProp(fieldElem, valuePropName) &&
                   valuePropName in originalProps &&
-                  !(fieldOption && fieldOption.initialValue)
+                  !(fieldOption && 'initialValue' in fieldOption)
                 ),
                 `${getComponentName(
                   fieldElem.componentOptions,
@@ -243,7 +254,7 @@ function createBaseForm(option = {}, mixins = []) {
           if (process.env.NODE_ENV !== 'production') {
             warning(
               this.fieldsStore.isValidNestedFieldName(name),
-              'One field name cannot be part of another, e.g. `a` and `a.b`.',
+              `One field name cannot be part of another, e.g. \`a\` and \`a.b\`. Check field: ${name}`,
             );
             warning(
               !('exclusive' in usersFieldOption),
@@ -341,6 +352,10 @@ function createBaseForm(option = {}, mixins = []) {
         setFields(maybeNestedFields, callback) {
           const fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields);
           this.fieldsStore.setFields(fields);
+          const changedFields = Object.keys(fields).reduce(
+            (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
+            {},
+          );
           if (onFieldsChange) {
             const changedFields = Object.keys(fields).reduce(
               (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
@@ -348,10 +363,19 @@ function createBaseForm(option = {}, mixins = []) {
             );
             onFieldsChange(this, changedFields, this.fieldsStore.getNestedAllFields());
           }
-          if (templateContext) {
-            templateContext.$forceUpdate();
-          } else {
-            this.$forceUpdate();
+          const formContext = templateContext || this;
+          let allUpdate = false;
+          Object.keys(changedFields).forEach(key => {
+            let formItem = this.formItems[key];
+            formItem = typeof formItem === 'function' ? formItem() : formItem;
+            if (formItem && formItem.itemSelfUpdate) {
+              formItem.$forceUpdate();
+            } else {
+              allUpdate = true;
+            }
+          });
+          if (allUpdate) {
+            formContext.$forceUpdate();
           }
           this.$nextTick(() => {
             callback && callback();
@@ -381,7 +405,14 @@ function createBaseForm(option = {}, mixins = []) {
           this.setFields(newFields, callback);
           if (onValuesChange) {
             const allValues = this.fieldsStore.getAllValues();
-            onValuesChange(this, changedValues, allValues);
+            onValuesChange(
+              {
+                [formPropName]: this.getForm(),
+                ...this.$props,
+              },
+              changedValues,
+              allValues,
+            );
           }
         },
 
@@ -501,7 +532,38 @@ function createBaseForm(option = {}, mixins = []) {
             };
             if (errors && errors.length) {
               errors.forEach(e => {
-                const fieldName = e.field;
+                const errorFieldName = e.field;
+                let fieldName = errorFieldName;
+
+                // Handle using array validation rule.
+                // ref: https://github.com/ant-design/ant-design/issues/14275
+                Object.keys(allRules).some(ruleFieldName => {
+                  const rules = allRules[ruleFieldName] || [];
+
+                  // Exist if match rule
+                  if (ruleFieldName === errorFieldName) {
+                    fieldName = ruleFieldName;
+                    return true;
+                  }
+
+                  // Skip if not match array type
+                  if (
+                    rules.every(({ type }) => type !== 'array') &&
+                    errorFieldName.indexOf(ruleFieldName) !== 0
+                  ) {
+                    return false;
+                  }
+
+                  // Exist if match the field name
+                  const restPath = errorFieldName.slice(ruleFieldName.length + 1);
+                  if (/^\d+$/.test(restPath)) {
+                    fieldName = ruleFieldName;
+                    return true;
+                  }
+
+                  return false;
+                });
+
                 const field = get(errorsGroup, fieldName);
                 if (typeof field !== 'object' || Array.isArray(field)) {
                   set(errorsGroup, fieldName, { errors: [] });
@@ -516,7 +578,7 @@ function createBaseForm(option = {}, mixins = []) {
               const fieldErrors = get(errorsGroup, name);
               const nowField = this.fieldsStore.getField(name);
               // avoid concurrency problems
-              if (nowField.value !== allValues[name]) {
+              if (!eq(nowField.value, allValues[name])) {
                 expired.push({
                   name,
                 });
@@ -583,9 +645,7 @@ function createBaseForm(option = {}, mixins = []) {
                 return field;
               });
             if (!fields.length) {
-              if (callback) {
-                callback(null, this.fieldsStore.getFieldsValue(fieldNames));
-              }
+              callback(null, this.fieldsStore.getFieldsValue(fieldNames));
               return;
             }
             if (!('firstFields' in options)) {
@@ -604,7 +664,7 @@ function createBaseForm(option = {}, mixins = []) {
             );
           });
           pending.catch(e => {
-            if (console.error) {
+            if (console.error && process.env.NODE_ENV !== 'production') {
               console.error(e);
             }
             return e;
@@ -627,7 +687,7 @@ function createBaseForm(option = {}, mixins = []) {
           if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
             warning(
               false,
-              '`submit` is deprecated.' +
+              '`submit` is deprecated. ' +
                 "Actually, it's more convenient to handle submitting status by yourself.",
             );
           }

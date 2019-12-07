@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import PropTypes from './vue-types';
 
 export default {
@@ -51,9 +50,8 @@ export default {
           this.componentEl = el;
           this.container.appendChild(el);
         }
-
         if (!this._component) {
-          this._component = new Vue({
+          this._component = new this.$root.constructor({
             el: el,
             parent: self.parent,
             data: {

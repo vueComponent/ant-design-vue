@@ -5,22 +5,22 @@ import Vue from 'vue';
 const { Column, ColumnGroup } = Table;
 
 describe('Table', () => {
-  it('renders JSX correctly', done => {
-    const data = [
-      {
-        key: '1',
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-      },
-      {
-        key: '2',
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-      },
-    ];
+  const data = [
+    {
+      key: '1',
+      firstName: 'John',
+      lastName: 'Brown',
+      age: 32,
+    },
+    {
+      key: '2',
+      firstName: 'Jim',
+      lastName: 'Green',
+      age: 42,
+    },
+  ];
 
+  it('renders JSX correctly', done => {
     const wrapper = mount(
       {
         render() {
@@ -93,6 +93,36 @@ describe('Table', () => {
 
       await new Promise(resolve => setTimeout(resolve, 1000));
       expect(wrapper.findAll('.ant-spin')).toHaveLength(1);
+      done();
+    });
+  });
+
+  it('align column should not override cell style', done => {
+    const columns = [
+      { title: 'Name', dataIndex: 'name', key: 'name' },
+      {
+        title: 'Age',
+        dataIndex: 'age',
+        key: 'age',
+        align: 'center',
+        customCell: (record, rowIndex) => {
+          return {
+            style: {
+              color: 'red',
+            },
+          };
+        },
+      },
+    ];
+    const wrapper = mount(Table, {
+      propsData: {
+        columns,
+        dataSource: data,
+      },
+      sync: false,
+    });
+    Vue.nextTick(() => {
+      expect(wrapper.html()).toMatchSnapshot();
       done();
     });
   });

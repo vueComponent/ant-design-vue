@@ -8,7 +8,7 @@
 By setting like this: `<Steps size="small">`, you can get a mini version.
 </us>
 
-```html
+```tpl
 <template>
   <a-steps :current="1" size="small">
     <a-step title="Finished" />

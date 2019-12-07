@@ -20,8 +20,7 @@ $ vue create antd-demo
 
 And, setup your vue project configuration.
 
-The tool will create and initialize environment and dependencies automatically,
-please try config your proxy setting or use another npm registry if any network errors happen during it.
+The tool will create and initialize environment and dependencies automatically, please try config your proxy setting or use another npm registry if any network errors happen during it.
 
 Then we go inside `antd-demo` and start it.
 
@@ -62,10 +61,10 @@ $ yarn add ant-design-vue
 Modify `src/main.js`, import Button component from `antd`.
 
 ```jsx
-import Vue from "vue";
-import Button from "ant-design-vue/lib/button";
-import "ant-design-vue/dist/antd.css";
-import App from "./App";
+import Vue from 'vue';
+import Button from 'ant-design-vue/lib/button';
+import 'ant-design-vue/dist/antd.css';
+import App from './App';
 
 Vue.component(Button.name, Button);
 
@@ -73,9 +72,9 @@ Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-  el: "#app",
+  el: '#app',
   components: { App },
-  template: "<App/>"
+  template: '<App/>',
 });
 ```
 
@@ -96,8 +95,7 @@ Ok, you should now see a blue primary button displayed on the page. Next you can
 
 ## Advanced Guides
 
-We are successfully running antd components now but in the real world, there are still lots of problems about antd-demo.
-For instance, we actually import all styles of components in the project which may be a network performance issue.
+We are successfully running antd components now but in the real world, there are still lots of problems about antd-demo. For instance, we actually import all styles of components in the project which may be a network performance issue.
 
 Now we need to customize the default webpack config.
 

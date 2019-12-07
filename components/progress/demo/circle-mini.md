@@ -8,7 +8,7 @@
 A smaller circular progress bar.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-progress type="circle" :percent="30" :width="80" />
@@ -24,5 +24,3 @@ A smaller circular progress bar.
   }
 </style>
 ```
-
-

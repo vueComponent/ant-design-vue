@@ -22,7 +22,16 @@ const SearchInput = {
   inject: {
     vcTreeSelect: { default: () => ({}) },
   },
-
+  data() {
+    return {
+      mirrorSearchValue: this.searchValue,
+    };
+  },
+  watch: {
+    searchValue(val) {
+      this.mirrorSearchValue = val;
+    },
+  },
   created() {
     this.inputRef = createRef();
     this.mirrorInputRef = createRef();
@@ -86,12 +95,23 @@ const SearchInput = {
         this.inputRef.current.blur();
       }
     },
+    handleInputChange(e) {
+      const { value, composing } = e.target;
+      const { searchValue = '' } = this;
+      if (composing || searchValue === value) {
+        this.mirrorSearchValue = value;
+        return;
+      }
+      this.vcTreeSelect.onSearchInputChange(e);
+    },
   },
 
   render() {
     const { searchValue, prefixCls, disabled, renderPlaceholder, open, ariaId } = this.$props;
     const {
-      vcTreeSelect: { onSearchInputChange, onSearchInputKeyDown },
+      vcTreeSelect: { onSearchInputKeyDown },
+      handleInputChange,
+      mirrorSearchValue,
     } = this;
     return (
       <span class={`${prefixCls}-search__field__wrap`}>
@@ -103,9 +123,12 @@ const SearchInput = {
                 name: 'ant-ref',
                 value: this.inputRef,
               },
+              {
+                name: 'ant-input',
+              },
             ],
           }}
-          onInput={onSearchInputChange}
+          onInput={handleInputChange}
           onKeydown={onSearchInputKeyDown}
           value={searchValue}
           disabled={disabled}
@@ -126,7 +149,7 @@ const SearchInput = {
           }}
           class={`${prefixCls}-search__field__mirror`}
         >
-          {searchValue}&nbsp;
+          {mirrorSearchValue}&nbsp;
         </span>
         {renderPlaceholder ? renderPlaceholder() : null}
       </span>

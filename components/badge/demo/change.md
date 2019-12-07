@@ -8,7 +8,7 @@
   The count will be animated as it changes.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <div>
@@ -33,25 +33,25 @@
   </div>
 </template>
 <script>
-export default {
-  data(){
-    return {
-      count: 5,
-      show: true,
-    }
-  },
-  methods: {
-    decline () {
-      let count = this.count - 1
-      if (count < 0) {
-        count = 0
-      }
-      this.count = count
+  export default {
+    data() {
+      return {
+        count: 5,
+        show: true,
+      };
     },
-    increase () {
-      this.count++
+    methods: {
+      decline() {
+        let count = this.count - 1;
+        if (count < 0) {
+          count = 0;
+        }
+        this.count = count;
+      },
+      increase() {
+        this.count++;
+      },
     },
-  }
-}
+  };
 </script>
 ```

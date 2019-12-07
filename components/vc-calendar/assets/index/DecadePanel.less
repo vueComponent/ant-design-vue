@@ -7,6 +7,8 @@
   z-index: 10;
   position: absolute;
   outline: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .@{prefixClass}-decade-panel-hidden {
@@ -63,10 +65,13 @@
 }
 
 .@{prefixClass}-decade-panel-body {
+  flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  bottom: 0;
-  top: 34px;
+}
+
+.@{prefixClass}-decade-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 
 .@{prefixClass}-decade-panel-table {

@@ -8,10 +8,10 @@
 Numeric-only input box.
 </us>
 
-```html
+```tpl
 <template>
   <div>
-    <a-input-number :min="1" :max="10" v-model="value" @change="onChange" />
+    <a-input-number id="inputNumber" :min="1" :max="10" v-model="value" @change="onChange" />
     当前值：{{value}}
   </div>
 </template>
@@ -19,17 +19,14 @@ Numeric-only input box.
   export default {
     data() {
       return {
-        value: 3
-      }
+        value: 3,
+      };
     },
     methods: {
       onChange(value) {
         console.log('changed', value);
       },
     },
-  }
+  };
 </script>
 ```
-
-
-

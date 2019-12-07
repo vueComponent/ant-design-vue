@@ -1,4 +1,3 @@
-
 # Ant Design of Vue
 
 Following the Ant Design specification, we developed a Vue UI library `antd` that contains a set of high quality components and demos for building rich, interactive user interfaces.
@@ -8,7 +7,6 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
   <span>+</span>
   <img width="160" src="https://cn.vuejs.org/images/logo.png">
 </div>
-
 
 <style>
 .pic-plus > * {
@@ -22,7 +20,6 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 }
 </style>
 
-
 ## Features
 
 - An enterprise-class UI design language for web applications.
@@ -31,8 +28,8 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 
 ## Environment Support
 
-* Modern browsers and Internet Explorer 9+ (with [polyfills](https://vue.ant.design/docs/vue/getting-started/#Compatibility))
-* Server-side Rendering
+- Modern browsers and Internet Explorer 9+ (with [polyfills](https://vue.ant.design/docs/vue/getting-started/#Compatibility))
+- Server-side Rendering
 
 ## Version
 
@@ -79,39 +76,38 @@ Vue.use(DatePicker);
 And import stylesheets manually:
 
 ```jsx
-import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
+import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 ```
 
 ### Use modularized antd
 
 - Use [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) (Recommended)
 
-   ```js
-   // .babelrc or babel-loader option
-   {
-     "plugins": [
-       ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }] // `style: true` for less
-     ]
-   }
-   ```
+  ```js
+  // .babelrc or babel-loader option
+  {
+    "plugins": [
+      ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }] // `style: true` for less
+    ]
+  }
+  ```
 
-   > Note: Don't set `libraryDirectory` if you are using webpack 1.
+  > Note: Don't set `libraryDirectory` if you are using webpack 1.
 
-   This allows you to import components from antd without having to manually import the corresponding stylesheet. The antd babel plugin will automatically import stylesheets.
+  This allows you to import components from antd without having to manually import the corresponding stylesheet. The antd babel plugin will automatically import stylesheets.
 
-   ```jsx
-   // import js and css modularly, parsed by babel-plugin-import
-   import { DatePicker } from 'ant-design-vue';
-   ```
+  ```jsx
+  // import js and css modularly, parsed by babel-plugin-import
+  import { DatePicker } from 'ant-design-vue';
+  ```
 
 - Manually import
 
-   ```jsx
-   import DatePicker from 'ant-design-vue/lib/date-picker';  // for js
-   import 'ant-design-vue/lib/date-picker/style/css';        // for css
-   // import 'ant-design-vue/lib/date-picker/style';         // that will import less
-   ```
-
+  ```jsx
+  import DatePicker from 'ant-design-vue/lib/date-picker'; // for js
+  import 'ant-design-vue/lib/date-picker/style/css'; // for css
+  // import 'ant-design-vue/lib/date-picker/style';         // that will import less
+  ```
 
 ## Links
 
@@ -127,10 +123,9 @@ import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 
 ## Contributing
 
-
 If you'd like to help us improve antd, just create a [Pull Request](https://github.com/vueComponent/ant-design-vue/pulls). Feel free to report bugs and issues [here](https://vuecomponent.github.io/issue-helper/).
 
-> If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
+> If you're new to posting issues, we ask that you read [_How To Ask Questions The Smart Way_](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
 
 ## THANK YOU
 

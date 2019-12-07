@@ -8,7 +8,7 @@
 Simplest Skeleton usage.
 </us>
 
-```html
+```tpl
 <template>
   <a-skeleton />
 </template>

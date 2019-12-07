@@ -1,4 +1,6 @@
 import { filterEmpty, parseStyleText } from './props-util';
+import classNames from 'classnames';
+
 export function cloneVNode(vnode, deep) {
   const componentOptions = vnode.componentOptions;
   const data = vnode.data;
@@ -88,6 +90,12 @@ export function cloneElement(n, nodeProps = {}, deep) {
     data.class.split(' ').forEach(c => {
       cls[c.trim()] = true;
     });
+  } else if (Array.isArray(data.class)) {
+    classNames(data.class)
+      .split(' ')
+      .forEach(c => {
+        cls[c.trim()] = true;
+      });
   } else {
     cls = { ...data.class, ...cls };
   }
@@ -116,6 +124,10 @@ export function cloneElement(n, nodeProps = {}, deep) {
       node.componentOptions.children = children;
     }
   } else {
+    node.data.on = { ...(node.data.on || {}), ...on };
+  }
+
+  if (node.fnOptions && node.fnOptions.functional) {
     node.data.on = { ...(node.data.on || {}), ...on };
   }
 

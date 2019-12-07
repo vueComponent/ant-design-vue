@@ -10,10 +10,7 @@ When user visit a page with a list of items, and want to create a new item. The 
 
 <template>
   <div>
-    <a-button
-      type="primary"
-      @click="showModal"
-    >
+    <a-button type="primary" @click="showModal">
       New Collection
     </a-button>
     <collection-create-form
@@ -28,8 +25,8 @@ When user visit a page with a list of items, and want to create a new item. The 
 <script>
 const CollectionCreateForm = {
   props: ['visible'],
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'form_in_modal' });
   },
   template: `
     <a-modal
@@ -76,19 +73,19 @@ const CollectionCreateForm = {
 
 export default {
   components: { CollectionCreateForm },
-  data () {
+  data() {
     return {
       visible: false,
     };
   },
   methods: {
-    showModal () {
+    showModal() {
       this.visible = true;
     },
-    handleCancel  () {
+    handleCancel() {
       this.visible = false;
     },
-    handleCreate  () {
+    handleCreate() {
       const form = this.$refs.collectionForm.form;
       form.validateFields((err, values) => {
         if (err) {
@@ -102,8 +99,3 @@ export default {
   },
 };
 </script>
-
-
-
-
-

@@ -9,12 +9,15 @@
 An options object can be provided to `autosize` to specify the minimum and maximum number of lines the textarea will automatically adjust.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-textarea placeholder="Autosize height based on content lines" autosize />
     <div style="margin: 24px 0" />
-    <a-textarea placeholder="Autosize height with minimum and maximum number of lines" :autosize="{ minRows: 2, maxRows: 6 }" />
+    <a-textarea
+      placeholder="Autosize height with minimum and maximum number of lines"
+      :autosize="{ minRows: 2, maxRows: 6 }"
+    />
   </div>
 </template>
 ```

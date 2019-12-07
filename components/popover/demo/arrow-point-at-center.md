@@ -8,7 +8,7 @@
 The arrow points to the center of the target element, which set `arrowPointAtCenter`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-popover placement="topLeft">

@@ -8,12 +8,10 @@
 The default trigger mode is `hover`, you can change it to `click`.
 </us>
 
-```html
+```tpl
 <template>
   <a-dropdown :trigger="['click']">
-    <a class="ant-dropdown-link" href="#">
-      Click me <a-icon type="down" />
-    </a>
+    <a class="ant-dropdown-link" href="#"> Click me <a-icon type="down" /> </a>
     <a-menu slot="overlay">
       <a-menu-item key="0">
         <a href="http://www.alipay.com/">1st menu item</a>

@@ -1,30 +1,34 @@
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
+
 const Divider = {
   name: 'ADivider',
   props: {
-    prefixCls: PropTypes.string.def('ant'),
+    prefixCls: PropTypes.string,
     type: PropTypes.oneOf(['horizontal', 'vertical', '']).def('horizontal'),
     dashed: PropTypes.bool,
     orientation: PropTypes.oneOf(['left', 'right']),
   },
-  computed: {
-    classString() {
-      const { prefixCls, type, $slots, dashed, orientation = '' } = this;
-      const orientationPrefix = orientation.length > 0 ? '-' + orientation : orientation;
-
-      return {
-        [`${prefixCls}-divider`]: true,
-        [`${prefixCls}-divider-${type}`]: true,
-        [`${prefixCls}-divider-with-text${orientationPrefix}`]: $slots.default,
-        [`${prefixCls}-divider-dashed`]: !!dashed,
-      };
-    },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
-    const { classString, prefixCls, $slots } = this;
+    const { prefixCls: customizePrefixCls, type, $slots, dashed, orientation = '' } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('divider', customizePrefixCls);
+    const orientationPrefix = orientation.length > 0 ? '-' + orientation : orientation;
+
+    const classString = {
+      [prefixCls]: true,
+      [`${prefixCls}-${type}`]: true,
+      [`${prefixCls}-with-text${orientationPrefix}`]: $slots.default,
+      [`${prefixCls}-dashed`]: !!dashed,
+    };
+
     return (
       <div class={classString}>
-        {$slots.default && <span class={`${prefixCls}-divider-inner-text`}>{$slots.default}</span>}
+        {$slots.default && <span class={`${prefixCls}-inner-text`}>{$slots.default}</span>}
       </div>
     );
   },
@@ -32,6 +36,7 @@ const Divider = {
 
 /* istanbul ignore next */
 Divider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Divider.name, Divider);
 };
 

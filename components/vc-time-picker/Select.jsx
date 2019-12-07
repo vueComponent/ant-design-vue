@@ -17,7 +17,7 @@ const scrollTo = (element, to, duration) => {
   const perTick = (difference / duration) * 10;
 
   requestAnimationFrame(() => {
-    element.scrollTop = element.scrollTop + perTick;
+    element.scrollTop += perTick;
     if (element.scrollTop === to) return;
     scrollTo(element, to, duration - 10);
   });
@@ -66,16 +66,26 @@ const Select = {
           [`${prefixCls}-select-option-selected`]: selectedIndex === index,
           [`${prefixCls}-select-option-disabled`]: item.disabled,
         });
-        let onClick = noop;
-        if (!item.disabled) {
-          onClick = this.onSelect.bind(this, item.value);
-        }
+        const onClick = item.disabled
+          ? noop
+          : () => {
+              this.onSelect(item.value);
+            };
         return (
-          <li class={cls} key={index} onClick={onClick} disabled={item.disabled}>
+          <li role="button" onClick={onClick} class={cls} key={index} disabled={item.disabled}>
             {item.value}
           </li>
         );
       });
+    },
+
+    handleMouseEnter(e) {
+      this.setState({ active: true });
+      this.__emit('mouseenter', e);
+    },
+
+    handleMouseLeave() {
+      this.setState({ active: false });
     },
 
     scrollToSelected(duration) {
@@ -93,26 +103,17 @@ const Select = {
       const to = topOption.offsetTop;
       scrollTo(select, to, duration);
     },
-
-    handleMouseEnter(e) {
-      this.setState({ active: true });
-      this.__emit('mouseenter', e);
-    },
-
-    handleMouseLeave() {
-      this.setState({ active: false });
-    },
   },
 
   render() {
-    if (this.options.length === 0) {
+    const { prefixCls, options, active } = this;
+    if (options.length === 0) {
       return null;
     }
 
-    const { prefixCls } = this;
     const cls = {
       [`${prefixCls}-select`]: 1,
-      [`${prefixCls}-select-active`]: this.active,
+      [`${prefixCls}-select-active`]: active,
     };
 
     return (

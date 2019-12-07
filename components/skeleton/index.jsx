@@ -1,9 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 import Avatar, { SkeletonAvatarProps } from './Avatar';
 import Title, { SkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps } from './Paragraph';
+import Base from '../base';
 
 export const SkeletonProps = {
   active: PropTypes.bool,
@@ -63,13 +65,25 @@ function getParagraphBasicProps(hasAvatar, hasTitle) {
 const Skeleton = {
   name: 'ASkeleton',
   props: initDefaultProps(SkeletonProps, {
-    prefixCls: 'ant-skeleton',
     avatar: false,
     title: true,
     paragraph: true,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   render() {
-    const { loading, prefixCls, avatar, title, paragraph, active } = this.$props;
+    const {
+      prefixCls: customizePrefixCls,
+      loading,
+      avatar,
+      title,
+      paragraph,
+      active,
+    } = this.$props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('skeleton', customizePrefixCls);
+
     if (loading || !hasProp(this, 'loading')) {
       const hasAvatar = !!avatar || avatar === '';
       const hasTitle = !!title;
@@ -80,6 +94,7 @@ const Skeleton = {
       if (hasAvatar) {
         const avatarProps = {
           props: {
+            prefixCls: `${prefixCls}-avatar`,
             ...getAvatarBasicProps(hasTitle, hasParagraph),
             ...getComponentProps(avatar),
           },
@@ -99,6 +114,7 @@ const Skeleton = {
         if (hasTitle) {
           const titleProps = {
             props: {
+              prefixCls: `${prefixCls}-title`,
               ...getTitleBasicProps(hasAvatar, hasParagraph),
               ...getComponentProps(title),
             },
@@ -112,6 +128,7 @@ const Skeleton = {
         if (hasParagraph) {
           const paragraphProps = {
             props: {
+              prefixCls: `${prefixCls}-paragraph`,
               ...getParagraphBasicProps(hasAvatar, hasTitle),
               ...getComponentProps(paragraph),
             },
@@ -145,6 +162,7 @@ const Skeleton = {
 };
 /* istanbul ignore next */
 Skeleton.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Skeleton.name, Skeleton);
 };
 export default Skeleton;

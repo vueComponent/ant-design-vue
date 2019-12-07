@@ -5,6 +5,7 @@ import Dropdown from './dropdown';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
+import { ConfigConsumerProps } from '../config-provider';
 const ButtonTypesProps = buttonTypes();
 const DropdownProps = getDropdownProps();
 const ButtonGroup = Button.Group;
@@ -12,9 +13,11 @@ const DropdownButtonProps = {
   ...ButtonGroupProps,
   ...DropdownProps,
   type: PropTypes.oneOf(['primary', 'ghost', 'dashed', 'danger', 'default']).def('default'),
+  size: PropTypes.oneOf(['small', 'large', 'default']).def('default'),
   htmlType: ButtonTypesProps.htmlType,
+  href: PropTypes.string,
   disabled: PropTypes.bool,
-  prefixCls: PropTypes.string.def('ant-dropdown-button'),
+  prefixCls: PropTypes.string,
   placement: DropdownProps.placement.def('bottomRight'),
 };
 export { DropdownButtonProps };
@@ -31,7 +34,7 @@ export default {
     };
   },
   inject: {
-    configProvider: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
     savePopupRef(ref) {
@@ -49,15 +52,18 @@ export default {
       type,
       disabled,
       htmlType,
-      prefixCls,
+      prefixCls: customizePrefixCls,
       trigger,
       align,
       visible,
       placement,
       getPopupContainer,
+      href,
       ...restProps
     } = this.$props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('dropdown-button', customizePrefixCls);
     const dropdownProps = {
       props: {
         align,
@@ -74,9 +80,22 @@ export default {
       dropdownProps.props.visible = visible;
     }
 
+    const buttonGroupProps = {
+      props: {
+        ...restProps,
+      },
+      class: prefixCls,
+    };
+
     return (
-      <ButtonGroup {...restProps} class={prefixCls}>
-        <Button type={type} disabled={disabled} onClick={this.onClick} htmlType={htmlType}>
+      <ButtonGroup {...buttonGroupProps}>
+        <Button
+          type={type}
+          disabled={disabled}
+          onClick={this.onClick}
+          htmlType={htmlType}
+          href={href}
+        >
           {this.$slots.default}
         </Button>
         <Dropdown {...dropdownProps}>

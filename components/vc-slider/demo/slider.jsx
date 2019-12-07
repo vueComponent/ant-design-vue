@@ -3,7 +3,7 @@ import Tooltip from '../../vc-tooltip';
 import '../assets/index.less';
 import '../../vc-tooltip/assets/bootstrap.less';
 
-const { Handle } = Slider;
+const { createSliderWithTooltip } = Slider;
 
 function log(value) {
   console.log(value); //eslint-disable-line
@@ -73,72 +73,7 @@ const DynamicBounds = {
   },
 };
 
-const SliderWithTooltip = {
-  data() {
-    return {
-      visibles: [],
-    };
-  },
-  methods: {
-    handleTooltipVisibleChange(index, visible) {
-      this.visibles[index] = visible;
-      this.visibles = { ...this.visibles };
-    },
-    handleRange(h, { value, dragging, index, disabled, style, ...restProps }) {
-      const tipFormatter = value => `${value}%`;
-      const tipProps = { overlayClassName: 'foo' };
-
-      const {
-        prefixCls = 'rc-slider-tooltip',
-        overlay = tipFormatter(value),
-        placement = 'top',
-        visible = visible || false,
-        ...restTooltipProps
-      } = tipProps;
-
-      let handleStyleWithIndex;
-      if (Array.isArray(style)) {
-        handleStyleWithIndex = style[index] || style[0];
-      } else {
-        handleStyleWithIndex = style;
-      }
-
-      const tooltipProps = {
-        props: {
-          prefixCls,
-          overlay,
-          placement,
-          visible: (!disabled && (this.visibles[index] || dragging)) || visible,
-          ...restTooltipProps,
-        },
-        key: index,
-      };
-      const handleProps = {
-        props: {
-          value,
-          ...restProps,
-        },
-        on: {
-          mouseenter: () => this.handleTooltipVisibleChange(index, true),
-          mouseleave: () => this.handleTooltipVisibleChange(index, false),
-          visibleChange: log,
-        },
-        style: {
-          ...handleStyleWithIndex,
-        },
-      };
-
-      return (
-        <Tooltip {...tooltipProps}>
-          <Handle {...handleProps} />
-        </Tooltip>
-      );
-    },
-  },
-  render() {
-    return <Slider handle={this.handleRange} />;
-  },
-};
+const SliderWithTooltip = createSliderWithTooltip(Slider);
 
 export default {
   render() {
@@ -176,7 +111,11 @@ export default {
         </div>
         <div style={style}>
           <p style={pStyle}>Slider with tooltip, with custom `tipFormatter`</p>
-          <SliderWithTooltip />
+          <SliderWithTooltip
+            tipFormatter={v => `${v} %`}
+            tipProps={{ overlayClassName: 'foo' }}
+            onChange={log}
+          />
         </div>
         <div style={style}>
           <p style={pStyle}>

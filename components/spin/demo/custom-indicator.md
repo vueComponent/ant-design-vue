@@ -8,7 +8,7 @@
 Use custom loading indicator.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-spin>
@@ -19,11 +19,11 @@ Use custom loading indicator.
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />
-      }
+        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
+      };
     },
-  }
+  };
 </script>
 ```

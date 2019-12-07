@@ -42,27 +42,27 @@ export default {
     });
   },
   methods: {
-    setChecked(checked) {
+    setChecked(checked, e) {
       if (this.disabled) {
         return;
       }
       if (!hasProp(this, 'checked')) {
         this.stateChecked = checked;
       }
-      this.$emit('change', checked);
+      this.$emit('change', checked, e);
     },
-    toggle() {
+    handleClick(e) {
       const checked = !this.stateChecked;
-      this.setChecked(checked);
-      this.$emit('click', checked);
+      this.setChecked(checked, e);
+      this.$emit('click', checked, e);
     },
     handleKeyDown(e) {
       if (e.keyCode === 37) {
         // Left
-        this.setChecked(false);
+        this.setChecked(false, e);
       } else if (e.keyCode === 39) {
         // Right
-        this.setChecked(true);
+        this.setChecked(true, e);
       }
     },
     handleMouseUp(e) {
@@ -79,7 +79,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls, disabled, loadingIcon, ...restProps } = getOptionProps(this);
+    const { prefixCls, disabled, loadingIcon, tabIndex, ...restProps } = getOptionProps(this);
     const checked = this.stateChecked;
     const switchClassName = {
       [prefixCls]: true,
@@ -91,7 +91,7 @@ export default {
       on: {
         ...this.$listeners,
         keydown: this.handleKeyDown,
-        click: this.toggle,
+        click: this.handleClick,
         mouseup: this.handleMouseUp,
       },
       attrs: {
@@ -99,6 +99,7 @@ export default {
         role: 'switch',
         'aria-checked': checked,
         disabled,
+        tabIndex,
       },
       class: switchClassName,
       ref: 'refSwitchNode',

@@ -1,22 +1,26 @@
 import Wave from '../_util/wave';
 import Icon from '../icon';
-const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
-const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 import buttonTypes from './buttonTypes';
 import { filterEmpty } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
+
+const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
+const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 const props = buttonTypes();
 export default {
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
   props,
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     return {
       sizeMap: {
         large: 'lg',
         small: 'sm',
       },
-      // clicked: false,
       sLoading: !!this.loading,
       hasTwoCNChar: false,
     };
@@ -24,7 +28,7 @@ export default {
   computed: {
     classes() {
       const {
-        prefixCls,
+        prefixCls: customizePrefixCls,
         type,
         shape,
         size,
@@ -36,25 +40,32 @@ export default {
         icon,
         $slots,
       } = this;
+      const getPrefixCls = this.configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('btn', customizePrefixCls);
+      const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+
       const sizeCls = sizeMap[size] || '';
+      const iconType = sLoading ? 'loading' : icon;
       const children = filterEmpty($slots.default);
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
         [`${prefixCls}-${sizeCls}`]: sizeCls,
-        [`${prefixCls}-icon-only`]: !children && children !== 0 && icon,
+        [`${prefixCls}-icon-only`]: children.length === 0 && iconType,
         [`${prefixCls}-loading`]: sLoading,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
-        [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar,
+        [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar && autoInsertSpace,
         [`${prefixCls}-block`]: block,
       };
     },
   },
   watch: {
-    loading(val) {
-      clearTimeout(this.delayTimeout);
-      if (typeof val !== 'boolean' && val && val.delay) {
+    loading(val, preVal) {
+      if (preVal && typeof preVal !== 'boolean') {
+        clearTimeout(this.delayTimeout);
+      }
+      if (val && typeof val !== 'boolean' && val.delay) {
         this.delayTimeout = setTimeout(() => {
           this.sLoading = !!val;
         }, val.delay);
@@ -118,6 +129,7 @@ export default {
   },
   render() {
     const {
+      type,
       htmlType,
       classes,
       icon,
@@ -142,7 +154,10 @@ export default {
     const iconType = sLoading ? 'loading' : icon;
     const iconNode = iconType ? <Icon type={iconType} /> : null;
     const children = filterEmpty($slots.default);
-    const kids = children.map(child => this.insertSpace(child, this.isNeedInserted()));
+    const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+    const kids = children.map(child =>
+      this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
+    );
 
     if ($attrs.href !== undefined) {
       return (
@@ -151,15 +166,19 @@ export default {
           {kids}
         </a>
       );
-    } else {
-      return (
-        <Wave>
-          <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
-            {iconNode}
-            {kids}
-          </button>
-        </Wave>
-      );
     }
+
+    const buttonNode = (
+      <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
+        {iconNode}
+        {kids}
+      </button>
+    );
+
+    if (type === 'link') {
+      return buttonNode;
+    }
+
+    return <Wave>{buttonNode}</Wave>;
   },
 };

@@ -13,6 +13,7 @@ export default {
     allowHalf: PropTypes.bool,
     disabled: PropTypes.bool,
     character: PropTypes.any,
+    characterRender: PropTypes.func,
     focused: PropTypes.bool,
     count: PropTypes.number,
   },
@@ -52,24 +53,39 @@ export default {
     },
   },
   render() {
-    const { onHover, onClick, onKeyDown, disabled, prefixCls, index, count, value } = this;
+    const {
+      onHover,
+      onClick,
+      onKeyDown,
+      disabled,
+      prefixCls,
+      characterRender,
+      index,
+      count,
+      value,
+    } = this;
 
     const character = getComponentFromProp(this, 'character');
-    return (
-      <li
-        class={this.getClassName()}
-        onClick={disabled ? noop : onClick}
-        onKeydown={disabled ? noop : onKeyDown}
-        onMousemove={disabled ? noop : onHover}
-        role="radio"
-        aria-checked={value > index ? 'true' : 'false'}
-        aria-posinset={index + 1}
-        aria-setsize={count}
-        tabIndex={0}
-      >
-        <div class={`${prefixCls}-first`}>{character}</div>
-        <div class={`${prefixCls}-second`}>{character}</div>
+    let star = (
+      <li class={this.getClassName()}>
+        <div
+          onClick={disabled ? noop : onClick}
+          onKeydown={disabled ? noop : onKeyDown}
+          onMousemove={disabled ? noop : onHover}
+          role="radio"
+          aria-checked={value > index ? 'true' : 'false'}
+          aria-posinset={index + 1}
+          aria-setsize={count}
+          tabIndex={0}
+        >
+          <div class={`${prefixCls}-first`}>{character}</div>
+          <div class={`${prefixCls}-second`}>{character}</div>
+        </div>
       </li>
     );
+    if (characterRender) {
+      star = characterRender(star, this.$props);
+    }
+    return star;
   },
 };

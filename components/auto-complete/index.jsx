@@ -3,12 +3,14 @@ import Select, { AbstractSelectProps, SelectValue } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 import {
   getComponentFromProp,
   getOptionProps,
   filterEmpty,
   isValidElement,
 } from '../_util/props-util';
+import Base from '../base';
 
 // const DataSourceItemObject = PropTypes.shape({
 //   value: String,
@@ -55,6 +57,9 @@ const AutoComplete = {
     prop: 'value',
     event: 'change',
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   provide() {
     return {
       savePopupRef: this.savePopupRef,
@@ -64,10 +69,11 @@ const AutoComplete = {
     savePopupRef(ref) {
       this.popupRef = ref;
     },
+
     getInputElement() {
       const { $slots } = this;
       const children = filterEmpty($slots.default);
-      const element = children.length ? children[0] : <Input />;
+      const element = children.length ? children[0] : <Input lazy={false} />;
       return <InputElement>{element}</InputElement>;
     },
 
@@ -85,7 +91,17 @@ const AutoComplete = {
   },
 
   render() {
-    const { size, prefixCls, optionLabelProp, dataSource, $slots, $listeners } = this;
+    const {
+      size,
+      prefixCls: customizePrefixCls,
+      optionLabelProp,
+      dataSource,
+      $slots,
+      $listeners,
+    } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const cls = {
       [`${prefixCls}-lg`]: size === 'large',
@@ -135,6 +151,7 @@ const AutoComplete = {
 
 /* istanbul ignore next */
 AutoComplete.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(AutoComplete.name, AutoComplete);
   Vue.component(AutoComplete.Option.name, AutoComplete.Option);
   Vue.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);

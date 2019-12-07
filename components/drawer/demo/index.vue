@@ -44,7 +44,7 @@ export default {
   zhType: '反馈',
   title: 'Drawer',
   subtitle: '抽屉',
-  render () {
+  render() {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
@@ -54,7 +54,7 @@ export default {
         <UserProfile />
         <MultiLevelDrawer />
         <api>
-          <CN slot='cn' />
+          <CN slot="cn" />
           <US />
         </api>
       </div>

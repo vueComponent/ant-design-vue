@@ -1,19 +1,24 @@
 import { Circle } from '../index';
 import '../assets/index.less';
 
+const colorMap = ['#3FC7FA', '#85D262', '#FE8C6A'];
+function getColor(index) {
+  return colorMap[(index + colorMap.length) % colorMap.length];
+}
+
 export default {
   data() {
     return {
       percent: 30,
-      color: '#3FC7FA',
+      colorIndex: 0,
     };
   },
   methods: {
     changeState() {
-      const colorMap = ['#3FC7FA', '#85D262', '#FE8C6A'];
       const value = parseInt(Math.random() * 100, 10);
+      const colorIndex = parseInt(Math.random() * 3, 10);
       this.percent = value;
-      this.color = colorMap[parseInt(Math.random() * 3, 10)];
+      this.colorIndex = colorIndex;
     },
   },
   render() {
@@ -21,18 +26,13 @@ export default {
       width: '200px',
       height: '200px',
     };
+    const { percent, colorIndex } = this;
+    const color = getColor(colorIndex);
     return (
       <div>
-        <div style={circleContainerStyle}>
-          <Circle
-            percent={this.percent}
-            gapDegree="70"
-            gapPosition="top"
-            strokeWidth="6"
-            strokeLinecap="square"
-            strokeColor={this.color}
-          />
-        </div>
+        <p>
+          <button onClick={this.changeState}>Change State [{percent}]</button>
+        </p>
         <div style={circleContainerStyle}>
           <Circle
             percent={this.percent}
@@ -41,6 +41,17 @@ export default {
             strokeWidth="6"
             strokeLinecap="square"
             strokeColor={this.color}
+          />
+        </div>
+        <div style={circleContainerStyle}>
+          <Circle
+            percent={[percent / 3, percent / 3, percent / 3]}
+            gapDegree="70"
+            gapPosition="bottom"
+            strokeWidth="6"
+            trailWidth="6"
+            strokeLinecap="round"
+            strokeColor={[color, getColor(colorIndex + 1), getColor(colorIndex + 2)]}
           />
         </div>
         <div style={circleContainerStyle}>
@@ -63,9 +74,6 @@ export default {
             strokeColor={this.color}
           />
         </div>
-        <p>
-          <button onClick={this.changeState}>Change State</button>
-        </p>
       </div>
     );
   },

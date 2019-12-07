@@ -8,7 +8,7 @@
 Support select half star.
 </us>
 
-```html
+```tpl
 <template>
   <a-rate :defaultValue="2.5" allowHalf />
 </template>

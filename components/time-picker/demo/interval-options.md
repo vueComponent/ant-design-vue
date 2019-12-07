@@ -8,7 +8,7 @@
 Show stepped options by `hourStep` `minuteStep` `secondStep`.
 </us>
 
-```html
+```tpl
 <template>
   <a-time-picker :minuteStep="15" :secondStep="10" />
 </template>

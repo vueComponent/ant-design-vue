@@ -8,7 +8,7 @@
 `${overflowCount}+` is displayed when count is larger than `overflowCount`. The default value of `overflowCount` is `99`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-badge :count="99">

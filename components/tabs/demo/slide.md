@@ -8,14 +8,20 @@
 In order to fit in more tabs, they can slide left and right (or up and down).
 </us>
 
-```html
+```tpl
 <template>
   <div style="width: 500px">
     <a-radio-group v-model="mode" :style="{ marginBottom: '8px' }">
       <a-radio-button value="top">Horizontal</a-radio-button>
       <a-radio-button value="left">Vertical</a-radio-button>
     </a-radio-group>
-    <a-tabs defaultActiveKey="1" :tabPosition="mode" :style="{ height: '200px'}" @prevClick="callback" @nextClick="callback">
+    <a-tabs
+      defaultActiveKey="1"
+      :tabPosition="mode"
+      :style="{ height: '200px'}"
+      @prevClick="callback"
+      @nextClick="callback"
+    >
       <a-tab-pane tab="Tab 1" key="1">Content of tab 1</a-tab-pane>
       <a-tab-pane tab="Tab 2" key="2">Content of tab 2</a-tab-pane>
       <a-tab-pane tab="Tab 3" key="3">Content of tab 3</a-tab-pane>
@@ -29,20 +35,19 @@ In order to fit in more tabs, they can slide left and right (or up and down).
       <a-tab-pane tab="Tab 11" key="11">Content of tab 11</a-tab-pane>
     </a-tabs>
   </div>
-
 </template>
 <script>
-export default {
-  data () {
-    return {
-      mode: 'top',
-    }
-  },
-  methods: {
-    callback (val) {
-      console.log(val)
+  export default {
+    data() {
+      return {
+        mode: 'top',
+      };
     },
-  },
-}
+    methods: {
+      callback(val) {
+        console.log(val);
+      },
+    },
+  };
 </script>
 ```

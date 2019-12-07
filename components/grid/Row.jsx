@@ -1,5 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
+import { ConfigConsumerProps } from '../config-provider';
+
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
 let enquire = null;
@@ -55,6 +57,9 @@ export default {
     return {
       rowContext: this,
     };
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -113,7 +118,10 @@ export default {
   },
 
   render() {
-    const { type, justify, align, prefixCls = 'ant-row', $slots } = this;
+    const { type, justify, align, prefixCls: customizePrefixCls, $slots } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('row', customizePrefixCls);
+
     const gutter = this.getGutter();
     const classes = {
       [prefixCls]: !type,

@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/popover/demo/arrow-point-at-center.md correctly 1`] = `<div><button type="button" class="ant-btn ant-btn-default"><span>Align edge / 边缘对齐</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Arrow points to center / 箭头指向中心</span></button></div>`;
+exports[`renders ./components/popover/demo/arrow-point-at-center.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Align edge / 边缘对齐</span></button> <button type="button" class="ant-btn"><span>Arrow points to center / 箭头指向中心</span></button></div>`;
 
 exports[`renders ./components/popover/demo/basic.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Hover me</span></button>`;
 
 exports[`renders ./components/popover/demo/control.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Click me</span></button>`;
 
-exports[`renders ./components/popover/demo/hover-with-click.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default" style="width: 500px;"><span>Hover and click / 悬停并单击</span></button>`;
+exports[`renders ./components/popover/demo/hover-with-click.md correctly 1`] = `<button type="button" class="ant-btn" style="width: 500px;"><span>Hover and click / 悬停并单击</span></button>`;
 
 exports[`renders ./components/popover/demo/placement.md correctly 1`] = `
 <div id="components-popover-demo-placement">
-  <div style="margin-left: 70px; white-space: nowrap;"><button type="button" class="ant-btn ant-btn-default"><span>TL</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Top</span></button> <button type="button" class="ant-btn ant-btn-default"><span>TR</span></button></div>
-  <div style="width: 70px; float: left;"><button type="button" class="ant-btn ant-btn-default"><span>LT</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Left</span></button> <button type="button" class="ant-btn ant-btn-default"><span>LB</span></button></div>
-  <div style="width: 70px; margin-left: 304px;"><button type="button" class="ant-btn ant-btn-default"><span>RT</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Right</span></button> <button type="button" class="ant-btn ant-btn-default"><span>RB</span></button></div>
-  <div style="margin-left: 70px; clear: both; white-space: nowrap;"><button type="button" class="ant-btn ant-btn-default"><span>BL</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Bottom</span></button> <button type="button" class="ant-btn ant-btn-default"><span>BR</span></button></div>
+  <div style="margin-left: 70px; white-space: nowrap;"><button type="button" class="ant-btn"><span>TL</span></button> <button type="button" class="ant-btn"><span>Top</span></button> <button type="button" class="ant-btn"><span>TR</span></button></div>
+  <div style="width: 70px; float: left;"><button type="button" class="ant-btn"><span>LT</span></button> <button type="button" class="ant-btn"><span>Left</span></button> <button type="button" class="ant-btn"><span>LB</span></button></div>
+  <div style="width: 70px; margin-left: 304px;"><button type="button" class="ant-btn"><span>RT</span></button> <button type="button" class="ant-btn"><span>Right</span></button> <button type="button" class="ant-btn"><span>RB</span></button></div>
+  <div style="margin-left: 70px; clear: both; white-space: nowrap;"><button type="button" class="ant-btn"><span>BL</span></button> <button type="button" class="ant-btn"><span>Bottom</span></button> <button type="button" class="ant-btn"><span>BR</span></button></div>
 </div>
 `;
 

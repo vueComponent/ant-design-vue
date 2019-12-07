@@ -1,8 +1,8 @@
-import { PREFIX_CLS } from './Constants';
 import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 const Option = Select.Option;
 
 export const HeaderProps = {
@@ -20,15 +20,16 @@ export const HeaderProps = {
 
 export default {
   props: initDefaultProps(HeaderProps, {
-    prefixCls: `${PREFIX_CLS}-header`,
     yearSelectOffset: 10,
     yearSelectTotal: 20,
   }),
-
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   // private calenderHeaderNode: HTMLDivElement;
   methods: {
-    getYearSelectElement(year) {
-      const { yearSelectOffset, yearSelectTotal, locale, prefixCls, fullscreen, validRange } = this;
+    getYearSelectElement(prefixCls, year) {
+      const { yearSelectOffset, yearSelectTotal, locale, fullscreen, validRange } = this;
       let start = year - yearSelectOffset;
       let end = start + yearSelectTotal;
       if (validRange) {
@@ -66,8 +67,8 @@ export default {
       return months;
     },
 
-    getMonthSelectElement(month, months) {
-      const { prefixCls, fullscreen, validRange, value } = this;
+    getMonthSelectElement(prefixCls, month, months) {
+      const { fullscreen, validRange, value } = this;
       const options = [];
       let start = 0;
       let end = 12;
@@ -76,7 +77,8 @@ export default {
         const currentYear = value.get('year');
         if (rangeEnd.get('year') === currentYear) {
           end = rangeEnd.get('month') + 1;
-        } else if (rangeStart.get('year') === currentYear) {
+        }
+        if (rangeStart.get('year') === currentYear) {
           start = rangeStart.get('month');
         }
       }
@@ -133,11 +135,14 @@ export default {
   },
 
   render() {
-    const { type, value, prefixCls, locale, fullscreen } = this;
-    const yearSelect = this.getYearSelectElement(value.year());
+    const { prefixCls: customizePrefixCls, type, value, locale, fullscreen } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
+
+    const yearSelect = this.getYearSelectElement(prefixCls, value.year());
     const monthSelect =
       type === 'date'
-        ? this.getMonthSelectElement(value.month(), this.getMonthsLocale(value))
+        ? this.getMonthSelectElement(prefixCls, value.month(), this.getMonthsLocale(value))
         : null;
     const size = fullscreen ? 'default' : 'small';
     const typeSwitch = (

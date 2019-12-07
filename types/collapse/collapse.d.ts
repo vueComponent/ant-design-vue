@@ -41,4 +41,10 @@ export declare class Collapse extends AntdComponent {
    * @type boolean
    */
   destroyInactivePanel: boolean;
+
+  /**
+   * allow to customize collapse icon.
+   * @type any (function | slot-scope)
+   */
+  expandIcon: any;
 }

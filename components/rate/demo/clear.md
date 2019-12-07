@@ -8,7 +8,7 @@
 Support set allow to clear star when click again.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-rate :defaultValue="3" /> allowClear: true

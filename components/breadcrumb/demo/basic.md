@@ -8,7 +8,7 @@
   The simplest use
 </us>
 
-```html
+```tpl
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item>Home</a-breadcrumb-item>

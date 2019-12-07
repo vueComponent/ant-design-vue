@@ -28,12 +28,12 @@ describe('Radio', () => {
       { sync: false },
     );
     await asyncExpect(() => {
-      wrapper.trigger('mouseenter');
+      wrapper.find('label').trigger('mouseenter');
     });
     await asyncExpect(() => {
       expect(onMouseEnter).toHaveBeenCalled();
     });
-    wrapper.trigger('mouseleave');
+    wrapper.find('label').trigger('mouseleave');
     await asyncExpect(() => {
       expect(onMouseLeave).toHaveBeenCalled();
     });

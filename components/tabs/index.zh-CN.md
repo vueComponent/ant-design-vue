@@ -1,4 +1,3 @@
-
 ## API
 
 ### Tabs
@@ -17,18 +16,19 @@
 | tabBarGutter | tabs 之间的间隙 | number | 无 |
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 切换面板的回调 | Function(activeKey) {} |
-| edit | 新增和删除页签的回调，在 `type="editable-card"` 时有效 | (targetKey, action): void |
-| nextClick | next 按钮被点击的回调 | Function |
-| prevClick | prev 按钮被点击的回调 | Function |
-| tabClick | tab 被点击的回调 | Function |
+
+| 事件名称  | 说明                                                   | 回调参数                  |
+| --------- | ------------------------------------------------------ | ------------------------- |
+| change    | 切换面板的回调                                         | Function(activeKey) {}    |
+| edit      | 新增和删除页签的回调，在 `type="editable-card"` 时有效 | (targetKey, action): void |
+| nextClick | next 按钮被点击的回调                                  | Function                  |
+| prevClick | prev 按钮被点击的回调                                  | Function                  |
+| tabClick  | tab 被点击的回调                                       | Function                  |
 
 ### Tabs.TabPane
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| forceRender | 被隐藏时是否渲染 DOM 结构 | boolean | false |
-| key | 对应 activeKey | string | 无 |
-| tab | 选项卡头显示文字 | string\|slot | 无 |
+| 参数        | 说明                      | 类型         | 默认值 |
+| ----------- | ------------------------- | ------------ | ------ |
+| forceRender | 被隐藏时是否渲染 DOM 结构 | boolean      | false  |
+| key         | 对应 activeKey            | string       | 无     |
+| tab         | 选项卡头显示文字          | string\|slot | 无     |

@@ -8,7 +8,6 @@
 `Form.create` will collect and validate form data automatically. But if you don't need this feature or the default behaviour cannot satisfy your business, you can drop `Form.create` and handle form data manually.
 </us>
 
-
 <template>
   <a-form>
     <a-form-item
@@ -18,17 +17,12 @@
       :validate-status="number.validateStatus"
       :help="number.errorMsg || tips"
     >
-      <a-input-number
-        :min="8"
-        :max="12"
-        :value="number.value"
-        @change="handleNumberChange"
-      />
+      <a-input-number :min="8" :max="12" :value="number.value" @change="handleNumberChange" />
     </a-form-item>
   </a-form>
 </template>
 <script>
-function validatePrimeNumber (number) {
+function validatePrimeNumber(number) {
   if (number === 11) {
     return {
       validateStatus: 'success',
@@ -41,18 +35,19 @@ function validatePrimeNumber (number) {
   };
 }
 export default {
-  data () {
+  data() {
     return {
       labelCol: { span: 7 },
       wrapperCol: { span: 12 },
       number: {
         value: 11,
       },
-      tips: 'A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.',
+      tips:
+        'A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.',
     };
   },
   methods: {
-    handleNumberChange (value) {
+    handleNumberChange(value) {
       this.number = {
         ...validatePrimeNumber(value),
         value,
@@ -61,7 +56,3 @@ export default {
   },
 };
 </script>
-
-
-
-

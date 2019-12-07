@@ -8,7 +8,7 @@
 Use `type="vertical"` make it vertical.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     Text

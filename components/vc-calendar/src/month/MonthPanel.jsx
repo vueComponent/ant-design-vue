@@ -12,6 +12,7 @@ function goYear(direction) {
 function noop() {}
 
 const MonthPanel = {
+  name: 'MonthPanel',
   mixins: [BaseMixin],
   props: {
     value: PropTypes.any,
@@ -23,6 +24,7 @@ const MonthPanel = {
     // onChange: PropTypes.func,
     disabledDate: PropTypes.func,
     // onSelect: PropTypes.func,
+    renderFooter: PropTypes.func,
   },
 
   data() {
@@ -69,10 +71,13 @@ const MonthPanel = {
       locale,
       rootPrefixCls,
       disabledDate,
+      renderFooter,
       $listeners = {},
     } = this;
     const year = sValue.year();
     const prefixCls = `${rootPrefixCls}-month-panel`;
+
+    const footer = renderFooter && renderFooter('month');
     return (
       <div class={prefixCls}>
         <div>
@@ -112,6 +117,7 @@ const MonthPanel = {
               prefixCls={prefixCls}
             />
           </div>
+          {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
         </div>
       </div>
     );

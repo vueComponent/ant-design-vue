@@ -3,6 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
+import { Col } from '../grid/col';
 import Vue from 'vue';
 import { FormItem } from './form-item';
 
@@ -16,34 +17,36 @@ export interface Field {
 export interface FieldValue {
   [fieldName: string]: any;
 }
+/** dom-scroll-into-view 组件配置参数 */
+export type DomScrollIntoViewConfig = {
+  /** 是否和左边界对齐 */
+  alignWithLeft?: boolean;
+  /** 是否和上边界对齐  */
+  alignWithTop?: boolean;
+  /** 顶部偏移量 */
+  offsetTop?: number;
+  /** 左侧偏移量 */
+  offsetLeft?: number;
+  /** 底部偏移量 */
+  offsetBottom?: number;
+  /** 右侧偏移量 */
+  offsetRight?: number;
+  /** 是否允许容器水平滚动 */
+  allowHorizontalScroll?: boolean;
+  /** 当内容可见时是否允许滚动容器 */
+  onlyScrollIfNeeded?: boolean;
+};
 
-export interface ValidateFieldOptions {
-  /**
-   * If true, every field will stop validation at first failed rule
-   * @default false
-   * @type boolean
-   */
+export type ValidateFieldsOptions = {
+  /** 所有表单域是否在第一个校验规则失败后停止继续校验 */
   first?: boolean;
-
-  /**
-   * Those fields will stop validation at first failed rule
-   * @type string[]
-   */
+  /** 指定哪些表单域在第一个校验规则失败后停止继续校验 */
   firstFields?: string[];
-
-  /**
-   * Should validate validated field again when validateTrigger is been triggered again
-   * @default false
-   * @type boolean
-   */
+  /** 已经校验过的表单域，在 validateTrigger 再次被触发时是否再次校验 */
   force?: boolean;
-
-  /**
-   * Config scroll behavior of validateFieldsAndScroll
-   * @type object
-   */
-  scroll?: object;
-}
+  /** 定义 validateFieldsAndScroll 的滚动行为 */
+  scroll?: DomScrollIntoViewConfig;
+};
 
 declare interface ValidationRule {
   /**
@@ -211,7 +214,7 @@ export interface WrappedFormUtils {
    * Get the specified fields' values. If you don't specify a parameter, you will get all fields' values.
    * @type Funtion (Function([fieldNames: string[]))
    */
-  getFieldsValue(fieldNames?: string[]): object;
+  getFieldsValue(fieldNames?: string[]): { [field: string]: any };
 
   /**
    * Get the value of a field.
@@ -262,13 +265,16 @@ export interface WrappedFormUtils {
    * @type Function
    */
   validateFields(
-    fieldNames: string[],
-    options: ValidateFieldOptions,
+    fieldNames: Array<string>,
+    options: ValidateFieldsOptions,
     callback: ValidateCallback,
   ): void;
-  validateFields(fieldNames: string[], callback: ValidateCallback): void;
-  validateFields(options: ValidateFieldOptions, callback: ValidateCallback): void;
+  validateFields(options: ValidateFieldsOptions, callback: ValidateCallback): void;
+  validateFields(fieldNames: Array<string>, callback: ValidateCallback): void;
+  validateFields(fieldNames: Array<string>, options: ValidateFieldsOptions): void;
+  validateFields(fieldNames: Array<string>): void;
   validateFields(callback: ValidateCallback): void;
+  validateFields(options: ValidateFieldsOptions): void;
   validateFields(): void;
 
   /**
@@ -277,13 +283,16 @@ export interface WrappedFormUtils {
    * @type Function
    */
   validateFieldsAndScroll(
-    fieldNames?: string[],
-    options?: Object,
-    callback?: ValidateCallback,
+    fieldNames: Array<string>,
+    options: ValidateFieldsOptions,
+    callback: ValidateCallback,
   ): void;
-  validateFieldsAndScroll(fieldNames?: string[], callback?: ValidateCallback): void;
-  validateFieldsAndScroll(options?: Object, callback?: ValidateCallback): void;
-  validateFieldsAndScroll(callback?: ValidateCallback): void;
+  validateFieldsAndScroll(options: ValidateFieldsOptions, callback: ValidateCallback): void;
+  validateFieldsAndScroll(fieldNames: Array<string>, callback: ValidateCallback): void;
+  validateFieldsAndScroll(fieldNames: Array<string>, options: ValidateFieldsOptions): void;
+  validateFieldsAndScroll(fieldNames: Array<string>): void;
+  validateFieldsAndScroll(callback: ValidateCallback): void;
+  validateFieldsAndScroll(options: ValidateFieldsOptions): void;
   validateFieldsAndScroll(): void;
 }
 
@@ -341,11 +350,23 @@ export declare class Form extends AntdComponent {
   hideRequiredMark: boolean;
 
   /**
+   * The layout of label. You can set span offset to something like {span: 3, offset: 12} or sm: {span: 3, offset: 12} same as with <Col>
+   * @type Col
+   */
+  labelCol: Col;
+
+  /**
    * Define form layout
    * @default 'horizontal'
    * @type string
    */
   layout: 'horizontal' | 'inline' | 'vertical';
+
+  /**
+   * The layout for input controls, same as labelCol
+   * @type Col
+   */
+  wrapperCol: Col;
 
   /**
    * Automate Form.create, Recommended for use under the template component, and cannot be used with Form.create().

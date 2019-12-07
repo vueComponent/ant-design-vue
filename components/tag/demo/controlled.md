@@ -8,32 +8,25 @@
 By using the `visible` prop, you can control the close state of Tag.
 </us>
 
-```html
+```tpl
 <template>
   <div>
-    <a-tag
-      closable
-      v-model="visible"
-    >
+    <a-tag closable v-model="visible">
       Movies
     </a-tag>
     <br />
-    <a-button
-      size="small"
-      @click="()=>{this.visible = !this.visible}"
-    >
+    <a-button size="small" @click="()=>{this.visible = !this.visible}">
       Toggle
     </a-button>
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      visible: true,
-    }
-  }
-}
+  export default {
+    data() {
+      return {
+        visible: true,
+      };
+    },
+  };
 </script>
 ```
-

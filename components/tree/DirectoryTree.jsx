@@ -1,23 +1,19 @@
 import omit from 'omit.js';
 import debounce from 'lodash/debounce';
 import PropTypes from '../_util/vue-types';
+import warning from '../_util/warning';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
 import Tree, { TreeProps } from './Tree';
 import { calcRangeKeys, getFullKeyList } from './util';
 import Icon from '../icon';
 import BaseMixin from '../_util/BaseMixin';
 import { initDefaultProps, getOptionProps } from '../_util/props-util';
+import { ConfigConsumerProps } from '../config-provider';
 
-// export type ExpandAction = false | 'click' | 'doubleClick';
-
-// export interface DirectoryTreeProps extends TreeProps {
-//   expandAction?: ExpandAction;
-// }
-
-// export interface DirectoryTreeState {
-//   expandedKeys?: string[];
-//   selectedKeys?: string[];
-// }
+// export type ExpandAction = false | 'click' | 'dblclick'; export interface
+// DirectoryTreeProps extends TreeProps {   expandAction?: ExpandAction; }
+// export interface DirectoryTreeState {   expandedKeys?: string[];
+// selectedKeys?: string[]; }
 
 function getIcon(props, h) {
   const { isLeaf, expanded } = props;
@@ -35,21 +31,24 @@ export default {
     event: 'check',
   },
   props: initDefaultProps(
-    { ...TreeProps(), expandAction: PropTypes.oneOf([false, 'click', 'doubleclick']) },
     {
-      prefixCls: 'ant-tree',
+      ...TreeProps(),
+      expandAction: PropTypes.oneOf([false, 'click', 'doubleclick', 'dblclick']),
+    },
+    {
       showIcon: true,
       expandAction: 'click',
     },
   ),
 
-  // state: DirectoryTreeState;
-  // onDebounceExpand: (event, node: AntTreeNode) => void;
-
-  // // Shift click usage
-  // lastSelectedKey?: string;
-  // cachedSelectedKeys?: string[];
-
+  // state: DirectoryTreeState; onDebounceExpand: (event, node: AntTreeNode) =>
+  // void; // Shift click usage lastSelectedKey?: string; cachedSelectedKeys?:
+  // string[];
+  inject: {
+    configProvider: {
+      default: () => ConfigConsumerProps,
+    },
+  },
   data() {
     const props = getOptionProps(this);
     const { defaultExpandAll, defaultExpandParent, expandedKeys, defaultExpandedKeys } = props;
@@ -67,9 +66,7 @@ export default {
       state._expandedKeys = expandedKeys || defaultExpandedKeys;
     }
 
-    this.onDebounceExpand = debounce(this.expandFolderNode, 200, {
-      leading: true,
-    });
+    this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
     return {
       _selectedKeys: [],
       _expandedKeys: [],
@@ -107,11 +104,12 @@ export default {
       const { expandAction } = this.$props;
 
       // Expand the tree
-      if (expandAction === 'doubleclick') {
+      if (expandAction === 'dblclick' || expandAction === 'doubleclick') {
         this.onDebounceExpand(event, node);
       }
 
       this.$emit('doubleclick', event, node);
+      this.$emit('dblclick', event, node);
     },
 
     onSelect(keys, event) {
@@ -181,8 +179,14 @@ export default {
   },
 
   render() {
-    const { prefixCls, ...props } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, ...props } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('tree', customizePrefixCls);
     const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data;
+    warning(
+      !this.$listeners.doubleclick,
+      '`doubleclick` is deprecated. please use `dblclick` instead.',
+    );
     const treeProps = {
       props: {
         icon: getIcon,
@@ -197,7 +201,7 @@ export default {
         ...omit(this.$listeners, ['update:selectedKeys']),
         select: this.onSelect,
         click: this.onClick,
-        doubleclick: this.onDoubleClick,
+        dblclick: this.onDoubleClick,
         expand: this.onExpand,
       },
     };

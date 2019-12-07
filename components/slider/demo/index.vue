@@ -28,10 +28,10 @@ export default {
   subtitle: '滑动输入条',
   type: 'Data Entry',
   title: 'Slider',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Basic />
         <InputNumber />
         <IconSlider />
@@ -41,10 +41,10 @@ export default {
         <Vertical />
         <ShowTooltip />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

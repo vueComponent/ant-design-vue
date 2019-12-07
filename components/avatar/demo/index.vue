@@ -24,23 +24,23 @@ export default {
   type: 'Data Display',
   zhType: '数据展示',
   title: 'Avatar',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <br/>
-        <Badge/>
-        <br/>
-        <Type/>
-        <br/>
-        <Dynamic/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <br />
+        <Badge />
+        <br />
+        <Type />
+        <br />
+        <Dynamic />
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

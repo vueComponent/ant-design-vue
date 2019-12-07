@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import shallowequal from 'shallowequal';
 import Icon from '../icon';
 import Tag from '../tag';
+import { ConfigConsumerProps } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
 import { RangePickerProps } from './interface';
 import {
@@ -73,11 +74,12 @@ export default {
     event: 'change',
   },
   props: initDefaultProps(RangePickerProps(), {
-    prefixCls: 'ant-calendar',
-    tagPrefixCls: 'ant-tag',
     allowClear: true,
     showToday: false,
   }),
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     const value = this.value || this.defaultValue || [];
     const [start, end] = value;
@@ -111,8 +113,14 @@ export default {
       this.setState(state);
     },
     open(val) {
-      this.setState({
-        sOpen: val,
+      const state = { sOpen: val };
+      this.setState(state);
+    },
+    sOpen(val, oldVal) {
+      this.$nextTick(() => {
+        if (!hasProp(this, 'open') && oldVal && !val) {
+          this.focus();
+        }
       });
     },
   },
@@ -148,10 +156,6 @@ export default {
         this.clearHoverValue();
       }
       this.$emit('openChange', open);
-
-      if (!open) {
-        this.focus();
-      }
     },
 
     handleShowDateChange(showDate) {
@@ -212,7 +216,8 @@ export default {
     },
 
     renderFooter(...args) {
-      const { prefixCls, ranges, $scopedSlots, $slots, tagPrefixCls } = this;
+      const { ranges, $scopedSlots, $slots } = this;
+      const { _prefixCls: prefixCls, _tagPrefixCls: tagPrefixCls } = this;
       const renderExtraFooter =
         this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter;
       if (!ranges && !renderExtraFooter) {
@@ -268,7 +273,8 @@ export default {
       panelChange = noop,
     } = $listeners;
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
+      tagPrefixCls: customizeTagPrefixCls,
       popupStyle,
       disabledDate,
       disabledTime,
@@ -279,6 +285,12 @@ export default {
       localeCode,
       format,
     } = props;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('calendar', customizePrefixCls);
+    const tagPrefixCls = getPrefixCls('tag', customizeTagPrefixCls);
+    this._prefixCls = prefixCls;
+    this._tagPrefixCls = tagPrefixCls;
+
     const dateRender = props.dateRender || $scopedSlots.dateRender;
     fixLocale(value, localeCode);
     fixLocale(showDate, localeCode);

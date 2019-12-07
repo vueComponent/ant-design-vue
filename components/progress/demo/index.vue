@@ -36,36 +36,36 @@ export default {
   subtitle: '进度条',
   type: 'Feedback',
   title: 'Progress',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <br/>
+        <md cn={md.cn} us={md.us} />
+        <br />
         <Line />
-        <br/>
+        <br />
         <Circle />
-        <br/>
+        <br />
         <LineMini />
-        <br/>
+        <br />
         <CircleMini />
-        <br/>
+        <br />
         <CircleDynamic />
-        <br/>
+        <br />
         <Format />
-        <br/>
+        <br />
         <Dynamic />
-        <br/>
+        <br />
         <Dashboard />
-        <br/>
+        <br />
         <Segment />
-        <br/>
+        <br />
         <Linecap />
-        <br/>
+        <br />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

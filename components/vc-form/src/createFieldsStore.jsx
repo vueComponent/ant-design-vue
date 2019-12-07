@@ -1,6 +1,6 @@
 import set from 'lodash/set';
 import createFormField, { isFormField } from './createFormField';
-import { flattenFields, getErrorStrs, startsWith } from './utils';
+import { hasRules, flattenFields, getErrorStrs, startsWith } from './utils';
 
 function partOf(a, b) {
   return b.indexOf(a) === 0 && ['.', '['].indexOf(b[a.length]) !== -1;
@@ -90,6 +90,19 @@ class FieldsStore {
 
   setFieldMeta(name, meta) {
     this.fieldsMeta[name] = meta;
+  }
+
+  setFieldsAsDirty() {
+    Object.keys(this.fields).forEach(name => {
+      const field = this.fields[name];
+      const fieldMeta = this.fieldsMeta[name];
+      if (field && fieldMeta && hasRules(fieldMeta.validate)) {
+        this.fields[name] = {
+          ...field,
+          dirty: true,
+        };
+      }
+    });
   }
 
   getFieldMeta(name) {

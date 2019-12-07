@@ -169,7 +169,7 @@ describe('Icon', () => {
     });
   });
 
-  it('should support svg react component', () => {
+  it('should support svg vue component', () => {
     const SvgComponent = {
       render() {
         return (

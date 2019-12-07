@@ -5,7 +5,7 @@ import { panelProps } from './commonProps';
 
 export default {
   name: 'Panel',
-  props: initDefaultProps(panelProps, {
+  props: initDefaultProps(panelProps(), {
     showArrow: true,
     isActive: false,
     destroyInactivePanel: false,
@@ -14,7 +14,7 @@ export default {
   }),
   methods: {
     handleItemClick() {
-      this.$emit('itemClick');
+      this.$emit('itemClick', this.panelKey);
     },
     handleKeyPress(e) {
       if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
@@ -34,6 +34,7 @@ export default {
       accordion,
       forceRender,
       expandIcon,
+      extra,
     } = this.$props;
     const { $slots } = this;
 
@@ -54,9 +55,9 @@ export default {
       [`${prefixCls}-item-active`]: isActive,
       [`${prefixCls}-item-disabled`]: disabled,
     };
-    let icon = null;
+    let icon = <i class="arrow" />;
     if (showArrow && typeof expandIcon === 'function') {
-      icon = cloneElement(expandIcon(this.$props));
+      icon = expandIcon(this.$props);
     }
     return (
       <div class={itemCls} role="tablist">
@@ -68,8 +69,9 @@ export default {
           tabIndex={disabled ? -1 : 0}
           aria-expanded={isActive}
         >
-          {showArrow && (icon || <i class="arrow" />)}
+          {showArrow && icon}
           {header}
+          {extra && <div class={`${prefixCls}-extra`}>{extra}</div>}
         </div>
         <transition {...transitionProps}>
           <PanelContent

@@ -8,7 +8,7 @@
 Replace the default icon with customized text.
 </us>
 
-```html
+```tpl
 <template>
   <a-alert message="Info Text" type="info" closeText="Close Now" />
 </template>

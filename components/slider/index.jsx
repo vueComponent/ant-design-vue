@@ -5,6 +5,8 @@ import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
+import Base from '../base';
+import { ConfigConsumerProps } from '../config-provider';
 
 // export interface SliderMarks {
 //   [key]: React.ReactNode | {
@@ -42,10 +44,11 @@ const Slider = {
     event: 'change',
   },
   mixins: [BaseMixin],
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   props: {
     ...SliderProps(),
-    prefixCls: PropTypes.string.def('ant-slider'),
-    tooltipPrefixCls: PropTypes.string.def('ant-tooltip'),
     tipFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).def(value =>
       value.toString(),
     ),
@@ -64,8 +67,8 @@ const Slider = {
         },
       }));
     },
-    handleWithTooltip({ value, dragging, index, directives, on, ...restProps }) {
-      const { tooltipPrefixCls, tipFormatter, tooltipVisible } = this.$props;
+    handleWithTooltip(tooltipPrefixCls, { value, dragging, index, directives, on, ...restProps }) {
+      const { tipFormatter, tooltipVisible } = this.$props;
       const { visibles } = this;
       const isTipFormatter = tipFormatter ? visibles[index] || dragging : false;
       const visible = tooltipVisible || (tooltipVisible === undefined && isTipFormatter);
@@ -105,12 +108,22 @@ const Slider = {
     },
   },
   render() {
-    const { range, ...restProps } = getOptionProps(this);
+    const {
+      range,
+      prefixCls: customizePrefixCls,
+      tooltipPrefixCls: customizeTooltipPrefixCls,
+      ...restProps
+    } = getOptionProps(this);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('slider', customizePrefixCls);
+    const tooltipPrefixCls = getPrefixCls('tooltip', customizeTooltipPrefixCls);
     if (range) {
       const vcRangeProps = {
         props: {
           ...restProps,
-          handle: this.handleWithTooltip,
+          prefixCls,
+          tooltipPrefixCls,
+          handle: info => this.handleWithTooltip(tooltipPrefixCls, info),
         },
         ref: 'sliderRef',
         on: this.$listeners,
@@ -120,7 +133,9 @@ const Slider = {
     const vcSliderProps = {
       props: {
         ...restProps,
-        handle: this.handleWithTooltip,
+        prefixCls,
+        tooltipPrefixCls,
+        handle: info => this.handleWithTooltip(tooltipPrefixCls, info),
       },
       ref: 'sliderRef',
       on: this.$listeners,
@@ -131,6 +146,7 @@ const Slider = {
 
 /* istanbul ignore next */
 Slider.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(Slider.name, Slider);
 };
 

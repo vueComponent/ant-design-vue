@@ -1,4 +1,3 @@
-
 <cn>
 #### 自定义页脚按钮属性
 传入 `okButtonProps` 和 `cancelButtonProps` 可分别自定义确定按钮和取消按钮的 props。
@@ -9,7 +8,7 @@
 Passing `okButtonProps` and `cancelButtonProps` can customize the ok button and cancel button props.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button type="primary" @click="showModal">Open Modal with customized button props</a-button>
@@ -27,26 +26,25 @@ Passing `okButtonProps` and `cancelButtonProps` can customize the ok button and 
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      visible: false,
-    }
-  },
-  methods: {
-    showModal() {
-      this.visible = true
+  export default {
+    data() {
+      return {
+        visible: false,
+      };
     },
-    handleOk(e) {
-      console.log(e);
-      this.visible = false
+    methods: {
+      showModal() {
+        this.visible = true;
+      },
+      handleOk(e) {
+        console.log(e);
+        this.visible = false;
+      },
+      handleCancel(e) {
+        console.log(e);
+        this.visible = false;
+      },
     },
-    handleCancel(e) {
-      console.log(e);
-      this.visible = false
-    }
-  }
-}
+  };
 </script>
 ```
-

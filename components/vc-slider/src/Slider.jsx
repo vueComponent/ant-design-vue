@@ -100,10 +100,13 @@ const Slider = {
       this.prevMovedHandleIndex = 0;
       this.onChange({ sValue: value });
     },
-    onEnd() {
-      this.setState({ dragging: false });
+    onEnd(force) {
+      const { dragging } = this;
       this.removeDocumentEvents();
-      this.$emit('afterChange', this.sValue);
+      if (dragging || force) {
+        this.$emit('afterChange', this.sValue);
+      }
+      this.setState({ dragging: false });
     },
     onMove(e, position) {
       utils.pauseEvent(e);

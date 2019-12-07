@@ -9,6 +9,18 @@ module.exports = function getRunCmdEnv() {
   });
   // make sure `antd-tools/node_modules/.bin` in the PATH env
   const nodeModulesBinDir = path.join(__dirname, '../../node_modules/.bin');
-  env.PATH = env.PATH ? `${nodeModulesBinDir}:${env.PATH}` : nodeModulesBinDir;
+
+  Object.entries(env)
+    .filter(
+      v =>
+        v
+          .slice(0, 1)
+          .pop()
+          .toLowerCase() === 'path',
+    )
+    .forEach(v => {
+      const key = v.slice(0, 1).pop();
+      env[key] = env[key] ? `${nodeModulesBinDir}:${env[key]}` : nodeModulesBinDir;
+    });
   return env;
 };

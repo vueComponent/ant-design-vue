@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import { ConfigConsumerProps } from '../config-provider';
 
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
@@ -10,7 +11,7 @@ export const ColSize = PropTypes.shape({
   pull: stringOrNumber,
 }).loose;
 
-const objectOrNumber = PropTypes.oneOfType([PropTypes.number, ColSize]);
+const objectOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number, ColSize]);
 
 export const ColProps = {
   span: stringOrNumber,
@@ -31,6 +32,7 @@ export default {
   name: 'ACol',
   props: ColProps,
   inject: {
+    configProvider: { default: () => ConfigConsumerProps },
     rowContext: {
       default: () => null,
     },
@@ -42,12 +44,15 @@ export default {
       offset,
       push,
       pull,
-      prefixCls = 'ant-col',
+      prefixCls: customizePrefixCls,
       $slots,
       $attrs,
       $listeners,
       rowContext,
     } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('col', customizePrefixCls);
+
     let sizeClassObj = {};
     ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
       let sizeProps = {};

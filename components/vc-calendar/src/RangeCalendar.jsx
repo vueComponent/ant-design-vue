@@ -58,7 +58,7 @@ function generateOptions(length, extraOptionGen) {
   return arr;
 }
 
-function onInputSelect(direction, value) {
+function onInputSelect(direction, value, cause) {
   if (!value) {
     return;
   }
@@ -70,7 +70,7 @@ function onInputSelect(direction, value) {
     selectedValue[1 - index] = this.showTimePicker ? selectedValue[index] : undefined;
   }
   this.__emit('inputSelect', selectedValue);
-  this.fireSelectValueChange(selectedValue);
+  this.fireSelectValueChange(selectedValue, null, cause || { source: 'dateInput' });
 }
 
 const RangeCalendar = {
@@ -79,6 +79,7 @@ const RangeCalendar = {
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     dateInputPlaceholder: PropTypes.any,
+    seperator: PropTypes.string.def('~'),
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
@@ -368,13 +369,23 @@ const RangeCalendar = {
       }
     },
 
-    onStartInputSelect(...oargs) {
+    onStartInputChange(...oargs) {
       const args = ['left'].concat(oargs);
       return onInputSelect.apply(this, args);
     },
 
-    onEndInputSelect(...oargs) {
+    onEndInputChange(...oargs) {
       const args = ['right'].concat(oargs);
+      return onInputSelect.apply(this, args);
+    },
+
+    onStartInputSelect(value) {
+      const args = ['left', value, { source: 'dateInputSelect' }];
+      return onInputSelect.apply(this, args);
+    },
+
+    onEndInputSelect(value) {
+      const args = ['right', value, { source: 'dateInputSelect' }];
       return onInputSelect.apply(this, args);
     },
 
@@ -501,7 +512,7 @@ const RangeCalendar = {
       return v1.diff(v2, 'days');
     },
 
-    fireSelectValueChange(selectedValue, direct) {
+    fireSelectValueChange(selectedValue, direct, cause) {
       const { timePicker, prevSelectedValue } = this;
       if (timePicker) {
         const timePickerProps = getOptionProps(timePicker);
@@ -539,7 +550,7 @@ const RangeCalendar = {
           firstSelectedValue: null,
         });
         this.fireHoverValueChange([]);
-        this.__emit('select', selectedValue);
+        this.__emit('select', selectedValue, cause);
       }
       if (!hasProp(this, 'selectedValue')) {
         this.setState({
@@ -599,6 +610,7 @@ const RangeCalendar = {
       showClear,
       showToday,
       type,
+      seperator,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const { sHoverValue, sSelectedValue, sMode, showTimePicker, sValue, $listeners } = this;
@@ -674,6 +686,7 @@ const RangeCalendar = {
         clearIcon,
       },
       on: {
+        inputChange: this.onStartInputChange,
         inputSelect: this.onStartInputSelect,
         valueChange: this.onStartValueChange,
         panelChange: this.onStartPanelChange,
@@ -698,6 +711,7 @@ const RangeCalendar = {
         clearIcon,
       },
       on: {
+        inputChange: this.onEndInputChange,
         inputSelect: this.onEndInputSelect,
         valueChange: this.onEndValueChange,
         panelChange: this.onEndPanelChange,
@@ -748,7 +762,7 @@ const RangeCalendar = {
       });
       OkButtonNode = <OkButton key="okButtonNode" {...okButtonProps} />;
     }
-    const extraFooter = this.renderFooter();
+    const extraFooter = this.renderFooter(sMode);
     return (
       <div ref="rootInstance" class={className} tabIndex="0" onKeydown={this.onKeyDown}>
         {props.renderSidebar()}
@@ -764,7 +778,7 @@ const RangeCalendar = {
             onMouseenter={type !== 'both' ? this.onDatePanelEnter : noop}
           >
             <CalendarPart {...leftPartProps} />
-            <span class={`${prefixCls}-range-middle`}>~</span>
+            <span class={`${prefixCls}-range-middle`}>{seperator}</span>
             <CalendarPart {...rightPartProps} />
           </div>
           <div class={cls}>

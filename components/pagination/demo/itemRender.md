@@ -8,7 +8,7 @@
 Use text link for prev and next button.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination :total="500" :itemRender="itemRender" />
 </template>
@@ -22,8 +22,8 @@ Use text link for prev and next button.
           return <a>Next</a>;
         }
         return originalElement;
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 ```

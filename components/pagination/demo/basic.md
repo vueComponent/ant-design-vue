@@ -1,4 +1,3 @@
-
 <cn>
 #### 基本
 基础分页。
@@ -9,7 +8,7 @@
 Basic pagination.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination v-model="current" :total="50" />
 </template>
@@ -18,9 +17,8 @@ Basic pagination.
     data() {
       return {
         current: 2,
-      }
-    }
-  }
+      };
+    },
+  };
 </script>
 ```
-

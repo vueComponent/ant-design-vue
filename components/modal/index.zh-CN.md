@@ -10,15 +10,16 @@
 | confirmLoading | 确定按钮 loading | boolean | 无 |
 | destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | false |
 | footer | 底部内容，当不需要默认底部按钮时，可以设为 `:footer="null"` | string\|slot | 确定取消按钮 |
+| forceRender | 强制渲染 Modal | boolean | false |
 | getContainer | 指定 Modal 挂载的 HTML 节点 | (instance): HTMLElement | () => document.body |
-| keyboard | 是否支持键盘esc关闭 | boolean | true |
+| keyboard | 是否支持键盘 esc 关闭 | boolean | true |
 | mask | 是否展示遮罩 | Boolean | true |
 | maskClosable | 点击蒙层是否允许关闭 | boolean | true |
 | maskStyle | 遮罩样式 | object | {} |
 | okText | 确认按钮文字 | string\|slot | 确定 |
 | okType | 确认按钮类型 | string | primary |
-| okButtonProps | ok 按钮 props, 遵循jsx[规范](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
-| cancelButtonProps | cancel 按钮 props,  遵循jsx[规范](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
+| okButtonProps | ok 按钮 props, 遵循 jsx[规范](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
+| cancelButtonProps | cancel 按钮 props, 遵循 jsx[规范](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
 | title | 标题 | string\|slot | 无 |
 | visible(v-model) | 对话框是否可见 | boolean | 无 |
 | width | 宽度 | string\|number | 520 |
@@ -26,10 +27,11 @@
 | zIndex | 设置 Modal 的 `z-index` | Number | 1000 |
 
 ### 事件
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| cancel | 点击遮罩层或右上角叉或取消按钮的回调 | function(e) |
-| ok | 点击确定回调 | function(e) |
+
+| 事件名称 | 说明                                 | 回调参数    |
+| -------- | ------------------------------------ | ----------- |
+| cancel   | 点击遮罩层或右上角叉或取消按钮的回调 | function(e) |
+| ok       | 点击确定回调                         | function(e) |
 
 #### 注意
 
@@ -54,15 +56,17 @@
 | centered | 垂直居中展示 Modal | Boolean | `false` |
 | closable | 是否显示右上角的关闭按钮 | boolean | `false` |
 | class | 容器类名 | string | - |
-| content | 内容 | string\|vNode | 无 |
-| iconType | 图标 Icon 类型 | string | question-circle |
+| content | 内容 | string \|vNode \|function(h) | 无 |
+| icon | 自定义图标（1.14.0 新增） | string\|()=>VNode | `<Icon type="question-circle">` |
+| iconType | 图标类型（1.14.0 后废弃，请使用 `icon`） | string | `question-circle` |
+| mask | 是否展示遮罩 | Boolean | true |
 | maskClosable | 点击蒙层是否允许关闭 | Boolean | `false` |
-| keyboard | 是否支持键盘esc关闭 | boolean | true |
+| keyboard | 是否支持键盘 esc 关闭 | boolean | true |
 | okText | 确认按钮文字 | string | 确定 |
 | okType | 确认按钮类型 | string | primary |
 | okButtonProps | ok 按钮 props | [ButtonProps](/components/button) | - |
 | cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button) | - |
-| title | 标题 | string\|vNode | 无 |
+| title | 标题 | string\|vNode \|function(h) | 无 |
 | width | 宽度 | string\|number | 416 |
 | zIndex | 设置 Modal 的 `z-index` | Number | 1000 |
 | onCancel | 取消回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭 | function | 无 |
@@ -79,4 +83,17 @@ modal.update({
 });
 
 modal.destroy();
+```
+
+- `Modal.destroyAll`
+
+使用 `Modal.destroyAll()` 可以销毁弹出的确认窗（即上述的 Modal.info、Modal.success、Modal.error、Modal.warning、Modal.confirm）。通常用于路由监听当中，处理路由前进、后退不能销毁确认对话框的问题，而不用各处去使用实例的返回值进行关闭（modal.destroy() 适用于主动关闭，而不是路由这样被动关闭）
+
+```jsx
+const router = new VueRouter({ ... })
+
+// router change
+router.beforeEach((to, from, next) => {
+  Modal.destroyAll();
+})
 ```

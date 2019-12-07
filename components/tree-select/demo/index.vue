@@ -9,7 +9,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 树型选择控件。
+  cn: `# 树型选择控件
   ## 何时使用
 
 类似 Select 的选择控件，可选择的数据结构是一个树形结构时，可以使用 TreeSelect，例如公司层级、学科系统、分类目录等等。
@@ -28,20 +28,20 @@ export default {
   subtitle: '树选择',
   type: 'Data Entry',
   title: 'TreeSelect',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
-        <Basic/>
-        <Checkable/>
-        <Multiple/>
-        <TreeData/>
+        <md cn={md.cn} us={md.us} />
+        <Basic />
+        <Checkable />
+        <Multiple />
+        <TreeData />
         <Suffix />
         <api>
-          <template slot='cn'>
-            <CN/>
+          <template slot="cn">
+            <CN />
           </template>
-          <US/>
+          <US />
         </api>
       </div>
     );

@@ -1,3 +1,3 @@
-// based on rc-cascader 0.16.2
+// based on rc-cascader 0.17.4
 import Cascader from './Cascader';
 export default Cascader;

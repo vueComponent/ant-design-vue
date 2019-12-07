@@ -1,7 +1,8 @@
 export default {
   methods: {
     handelClick(e) {
-      this.$emit('click', e);
+      e.stopPropagation();
+      //this.$emit('click', e);
     },
   },
   render() {

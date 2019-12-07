@@ -1,10 +1,9 @@
-
 ## API
 
 ### Tabs
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | activeKey(v-model) | Current TabPane's key | string | - |
 | animated | Whether to change tabs with animation. Only works while `tabPosition="top"\|"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |
 | defaultActiveKey | Initial active TabPane's key, if `activeKey` is not set. | string | - |
@@ -17,6 +16,7 @@
 | tabBarGutter | The gap between tabs | number | - |
 
 ### Events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | Callback executed when active tab is changed | Function(activeKey) {} |
@@ -25,11 +25,10 @@
 | prevClick | Callback executed when prev button is clicked | Function |
 | tabClick | Callback executed when tab is clicked | Function |
 
-
 ### Tabs.TabPane
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --- | --- | --- | --- |
 | forceRender | Forced render of content in tabs, not lazy render after clicking on tabs | boolean | false |
 | key | TabPane's key | string | - |
 | tab | Show text in TabPane's head | string\|slot | - |

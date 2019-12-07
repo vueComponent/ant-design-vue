@@ -5,15 +5,17 @@ ant-design-vue is an MIT licensed open source project and completely free to use
 ## One-time Donations
 
 We accept donations through these channels:
+
 <div>
 <a href="https://www.paypal.me/tangjinzhou" target="_blank">PayPal</a>
 <br/>
-<a href="https://cdn.nlark.com/yuque/0/2019/png/87084/1548485701785-assets/web-upload/648ca181-a52f-4382-957c-97c5dbb3e1cc.png" target="_blank">Alipay or WeChat</a>
+<a href="https://qn.antdv.com/alipay-and-wechat.png" target="_blank">Alipay or WeChat</a>
 </div>
 
 ## Recurring Pledges
 
 Recurring pledges come with exclusive perks, e.g. having your name listed in the Vue GitHub repository, or have your company logo placed on this website.
+
 <div>
 <a href="https://www.patreon.com/tangjinzhou" target="_blank">Patreon</a>
 <br/>
@@ -24,13 +26,12 @@ Recurring pledges come with exclusive perks, e.g. having your name listed in the
 
 You can consult me by email [415800467@qq.com](415800467@qq.com).
 
-
-
 ## Current sponsors
 
 ### Sponsors
 
 Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/ant-design-vue#sponsor)]
+
 <div>
 <a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a>

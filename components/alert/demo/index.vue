@@ -31,21 +31,21 @@ export default {
   type: 'Feedback',
   zhType: '反馈',
   title: 'Alert',
-  render () {
+  render() {
     return (
-      <div id='components-alert-demo'>
-        <md cn={md.cn} us={md.us}/>
-        <Banner/>
-        <Basic/>
-        <Closable/>
-        <CloseText/>
-        <Description/>
-        <Icon/>
-        <Style/>
-        <SmoothClosed/>
+      <div id="components-alert-demo">
+        <md cn={md.cn} us={md.us} />
+        <Banner />
+        <Basic />
+        <Closable />
+        <CloseText />
+        <Description />
+        <Icon />
+        <Style />
+        <SmoothClosed />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

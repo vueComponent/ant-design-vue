@@ -10,13 +10,13 @@ export default {
   name: 'ScrollableTabBarNode',
   mixins: [BaseMixin],
   props: {
-    saveRef: PropTypes.func.def(() => {}),
+    activeKey: PropTypes.any,
     getRef: PropTypes.func.def(() => {}),
+    saveRef: PropTypes.func.def(() => {}),
     tabBarPosition: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).def('left'),
     prefixCls: PropTypes.string.def(''),
     scrollAnimated: PropTypes.bool.def(true),
     navWrapper: PropTypes.func.def(arg => arg),
-    activeKey: PropTypes.any,
     prevIcon: PropTypes.any,
     nextIcon: PropTypes.any,
   },
@@ -260,8 +260,8 @@ export default {
       this.setOffset(offset + navWrapNodeWH);
     },
 
-    nextClick() {
-      // this.__emit('nextClick', e)
+    nextClick(e) {
+      this.__emit('nextClick', e);
       const navWrapNode = this.$props.getRef('navWrap');
       const navWrapNodeWH = this.getOffsetWH(navWrapNode);
       const { offset } = this;

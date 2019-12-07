@@ -1,8 +1,8 @@
+import moment from 'moment';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import Header from './Header';
 import Combobox from './Combobox';
-import moment from 'moment';
 import { getComponentFromProp } from '../_util/props-util';
 
 function noop() {}
@@ -16,6 +16,20 @@ function generateOptions(length, disabledOptions, hideDisabledOptions, step = 1)
   }
   return arr;
 }
+
+function toNearestValidTime(time, hourOptions, minuteOptions, secondOptions) {
+  const hour = hourOptions
+    .slice()
+    .sort((a, b) => Math.abs(time.hour() - a) - Math.abs(time.hour() - b))[0];
+  const minute = minuteOptions
+    .slice()
+    .sort((a, b) => Math.abs(time.minute() - a) - Math.abs(time.minute() - b))[0];
+  const second = secondOptions
+    .slice()
+    .sort((a, b) => Math.abs(time.second() - a) - Math.abs(time.second() - b))[0];
+  return moment(`${hour}:${minute}:${second}`, 'HH:mm:ss');
+}
+
 const Panel = {
   mixins: [BaseMixin],
   props: {
@@ -57,7 +71,6 @@ const Panel = {
       sValue: this.value,
       selectionRange: [],
       currentSelectPanel: '',
-      showStr: true,
     };
   },
   watch: {
@@ -65,11 +78,6 @@ const Panel = {
       if (val) {
         this.setState({
           sValue: val,
-          showStr: true,
-        });
-      } else {
-        this.setState({
-          showStr: false,
         });
       }
     },
@@ -79,6 +87,10 @@ const Panel = {
     onChange(newValue) {
       this.setState({ sValue: newValue });
       this.__emit('change', newValue);
+    },
+
+    onAmPmChange(ampm) {
+      this.__emit('amPmChange', ampm);
     },
 
     onCurrentSelectPanelChange(currentSelectPanel) {
@@ -132,7 +144,6 @@ const Panel = {
       inputReadOnly,
       sValue,
       currentSelectPanel,
-      showStr,
       $listeners = {},
     } = this;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
@@ -157,13 +168,18 @@ const Panel = {
       hideDisabledOptions,
       secondStep,
     );
-
+    const validDefaultOpenValue = toNearestValidTime(
+      defaultOpenValue,
+      hourOptions,
+      minuteOptions,
+      secondOptions,
+    );
     return (
       <div class={`${prefixCls}-inner`}>
         <Header
           clearText={clearText}
           prefixCls={prefixCls}
-          defaultOpenValue={defaultOpenValue}
+          defaultOpenValue={validDefaultOpenValue}
           value={sValue}
           currentSelectPanel={currentSelectPanel}
           onEsc={esc}
@@ -176,20 +192,19 @@ const Panel = {
           disabledMinutes={disabledMinutes}
           disabledSeconds={disabledSeconds}
           onChange={this.onChange}
-          onClear={clear}
           allowEmpty={allowEmpty}
           focusOnOpen={focusOnOpen}
           onKeydown={keydown}
           inputReadOnly={inputReadOnly}
-          showStr={showStr}
           clearIcon={clearIcon}
         />
         <Combobox
           prefixCls={prefixCls}
           value={sValue}
-          defaultOpenValue={defaultOpenValue}
+          defaultOpenValue={validDefaultOpenValue}
           format={format}
           onChange={this.onChange}
+          onAmPmChange={this.onAmPmChange}
           showHour={showHour}
           showMinute={showMinute}
           showSecond={showSecond}

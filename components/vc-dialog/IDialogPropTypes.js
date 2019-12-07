@@ -31,10 +31,12 @@ function IDialogPropTypes() {
     bodyProps: PropTypes.any,
     maskProps: PropTypes.any,
     wrapProps: PropTypes.any,
-    getContainer: PropTypes.func,
+    getContainer: PropTypes.any,
     dialogStyle: PropTypes.object.def({}),
     dialogClass: PropTypes.object.def({}),
     closeIcon: PropTypes.any,
+    forceRender: PropTypes.bool,
+    getOpenCount: PropTypes.func,
   };
 }
 

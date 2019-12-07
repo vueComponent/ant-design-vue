@@ -8,7 +8,7 @@
 Jump to a page directly.
 </us>
 
-```html
+```tpl
 <template>
   <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
 </template>
@@ -17,8 +17,8 @@ Jump to a page directly.
     methods: {
       onChange(pageNumber) {
         console.log('Page: ', pageNumber);
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 ```

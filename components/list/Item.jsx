@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { getSlotOptions, getComponentFromProp, isEmptyElement } from '../_util/props-util';
 import { Col } from '../grid';
+import { ConfigConsumerProps } from '../config-provider';
 import { ListGridType } from './index';
 
 export const ListItemProps = {
@@ -22,10 +23,16 @@ export const Meta = {
   functional: true,
   name: 'AListItemMeta',
   __ANT_LIST_ITEM_META: true,
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   render(h, context) {
-    const { props, slots, listeners } = context;
+    const { props, slots, listeners, injections } = context;
     const slotsMap = slots();
-    const { prefixCls = 'ant-list' } = props;
+    const getPrefixCls = injections.configProvider.getPrefixCls;
+    const { prefixCls: customizePrefixCls } = props;
+    const prefixCls = getPrefixCls('list', customizePrefixCls);
+
     const avatar = props.avatar || slotsMap.avatar;
     const title = props.title || slotsMap.title;
     const description = props.description || slotsMap.description;
@@ -54,11 +61,14 @@ export default {
   props: ListItemProps,
   inject: {
     listContext: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
-
   render() {
     const { grid } = this.listContext;
-    const { prefixCls = 'ant-list', $slots, $listeners } = this;
+    const { prefixCls: customizePrefixCls, $slots, $listeners } = this;
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('list', customizePrefixCls);
+
     const classString = `${prefixCls}-item`;
     const extra = getComponentFromProp(this, 'extra');
     const actions = getComponentFromProp(this, 'actions');

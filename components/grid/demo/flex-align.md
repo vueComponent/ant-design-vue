@@ -8,7 +8,7 @@ Flex 子元素垂直对齐。
 Flex child elements vertically aligned.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <p>Align Top</p>
@@ -37,5 +37,3 @@ Flex child elements vertically aligned.
   </div>
 </template>
 ```
-
-

@@ -8,17 +8,11 @@
 Upload files manually after `beforeUpload` returns `false`.
 </us>
 
-```html
+```tpl
 <template>
   <div class="clearfix">
-    <a-upload
-      :fileList="fileList"
-      :remove="handleRemove"
-      :beforeUpload="beforeUpload"
-    >
-      <a-button>
-        <a-icon type="upload" /> Select File
-      </a-button>
+    <a-upload :fileList="fileList" :remove="handleRemove" :beforeUpload="beforeUpload">
+      <a-button> <a-icon type="upload" /> Select File </a-button>
     </a-upload>
     <a-button
       type="primary"
@@ -32,54 +26,51 @@ Upload files manually after `beforeUpload` returns `false`.
   </div>
 </template>
 <script>
-import reqwest from 'reqwest'
-export default {
-  data () {
-    return {
-      fileList: [],
-      uploading: false,
-    }
-  },
-  methods: {
-    handleRemove(file) {
-      const index = this.fileList.indexOf(file);
-      const newFileList = this.fileList.slice();
-      newFileList.splice(index, 1);
-      this.fileList = newFileList
+  import reqwest from 'reqwest';
+  export default {
+    data() {
+      return {
+        fileList: [],
+        uploading: false,
+      };
     },
-    beforeUpload(file) {
-      this.fileList = [...this.fileList, file]
-      return false;
-    },
-    handleUpload() {
-      const { fileList } = this;
-      const formData = new FormData();
-      fileList.forEach((file) => {
-        formData.append('files[]', file);
-      });
-      this.uploading = true
+    methods: {
+      handleRemove(file) {
+        const index = this.fileList.indexOf(file);
+        const newFileList = this.fileList.slice();
+        newFileList.splice(index, 1);
+        this.fileList = newFileList;
+      },
+      beforeUpload(file) {
+        this.fileList = [...this.fileList, file];
+        return false;
+      },
+      handleUpload() {
+        const { fileList } = this;
+        const formData = new FormData();
+        fileList.forEach(file => {
+          formData.append('files[]', file);
+        });
+        this.uploading = true;
 
-      // You can use any AJAX library you like
-      reqwest({
-        url: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        method: 'post',
-        processData: false,
-        data: formData,
-        success: () => {
-          this.fileList = []
-          this.uploading = false
-          this.$message.success('upload successfully.');
-        },
-        error: () => {
-          this.uploading = false
-          this.$message.error('upload failed.');
-        },
-      });
-    }
-  },
-}
+        // You can use any AJAX library you like
+        reqwest({
+          url: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+          method: 'post',
+          processData: false,
+          data: formData,
+          success: () => {
+            this.fileList = [];
+            this.uploading = false;
+            this.$message.success('upload successfully.');
+          },
+          error: () => {
+            this.uploading = false;
+            this.$message.error('upload failed.');
+          },
+        });
+      },
+    },
+  };
 </script>
 ```
-
-
-

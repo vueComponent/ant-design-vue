@@ -8,7 +8,7 @@
 The input box comes in three sizes. large is used in the form, while the medium size is the default.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-time-picker :defaultValue="moment('12:08:23', 'HH:mm:ss')" size="large" />
@@ -17,11 +17,11 @@ The input box comes in three sizes. large is used in the form, while the medium 
   </div>
 </template>
 <script>
-import moment from 'moment';
-export default {
-  methods: {
-    moment,
-  },
-}
+  import moment from 'moment';
+  export default {
+    methods: {
+      moment,
+    },
+  };
 </script>
 ```

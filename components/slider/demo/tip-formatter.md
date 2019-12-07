@@ -8,7 +8,7 @@
 Use `tipFormatter` to format content of `Toolip`. If `tipFormatter` is null, hide it.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-slider :tipFormatter="formatter" />
@@ -16,18 +16,17 @@ Use `tipFormatter` to format content of `Toolip`. If `tipFormatter` is null, hid
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      disabled: false,
-    }
-  },
-  methods: {
-    formatter(value) {
-      return `${value}%`;
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        disabled: false,
+      };
+    },
+    methods: {
+      formatter(value) {
+        return `${value}%`;
+      },
+    },
+  };
 </script>
 ```
-

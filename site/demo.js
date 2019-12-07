@@ -23,6 +23,12 @@ export default {
     type: 'Other',
     title: 'ConfigProvider',
   },
+  Empty: {
+    category: 'Components',
+    subtitle: '空状态',
+    type: 'Data Display',
+    title: 'Empty',
+  },
   breadcrumb: {
     category: 'Components',
     subtitle: '面包屑',
@@ -345,5 +351,11 @@ export default {
     type: 'Feedback',
     title: 'Skeleton',
     subtitle: '骨架屏',
+  },
+  statistic: {
+    category: 'Components',
+    subtitle: '统计数值',
+    type: 'Data Display',
+    title: 'Statistic',
   },
 };

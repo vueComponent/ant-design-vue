@@ -18,9 +18,11 @@ exports[`renders ./components/modal/demo/button-props.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/modal/demo/confirm.md correctly 1`] = `<div><button type="button" class="ant-btn ant-btn-default"><span>Confirm</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>Delete</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>With extra props</span></button></div>`;
+exports[`renders ./components/modal/demo/confirm.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Confirm</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>Delete</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>With extra props</span></button></div>`;
 
-exports[`renders ./components/modal/demo/confirm-promise.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Confirm</span></button>`;
+exports[`renders ./components/modal/demo/confirm-promise.md correctly 1`] = `<button type="button" class="ant-btn"><span>Confirm</span></button>`;
+
+exports[`renders ./components/modal/demo/confirm-router.md correctly 1`] = `<button type="button" class="ant-btn"><span>Confirm</span></button>`;
 
 exports[`renders ./components/modal/demo/footer.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Open Modal with customized footer</span></button>
@@ -28,14 +30,14 @@ exports[`renders ./components/modal/demo/footer.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/modal/demo/info.md correctly 1`] = `<div><button type="button" class="ant-btn ant-btn-default"><span>Info</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Success</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Error</span></button> <button type="button" class="ant-btn ant-btn-default"><span>Warning</span></button></div>`;
+exports[`renders ./components/modal/demo/info.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Info</span></button> <button type="button" class="ant-btn"><span>Success</span></button> <button type="button" class="ant-btn"><span>Error</span></button> <button type="button" class="ant-btn"><span>Warning</span></button></div>`;
 
 exports[`renders ./components/modal/demo/locale.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Modal</span></button>
-  <!----> <br> <br> <button type="button" class="ant-btn ant-btn-default"><span>Confirm</span></button></div>
+  <!----> <br> <br> <button type="button" class="ant-btn"><span>Confirm</span></button></div>
 `;
 
-exports[`renders ./components/modal/demo/manual.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-default"><span>Open modal to close in 5s</span></button>`;
+exports[`renders ./components/modal/demo/manual.md correctly 1`] = `<button type="button" class="ant-btn"><span>Open modal to close in 5s</span></button>`;
 
 exports[`renders ./components/modal/demo/position.md correctly 1`] = `
 <div id="components-modal-demo-position"><button type="button" class="ant-btn ant-btn-primary"><span>Display a modal dialog at 20px to Top</span></button>

@@ -8,13 +8,9 @@
 Tree With Line
 </us>
 
-```html
+```tpl
 <template>
-  <a-tree
-    showLine
-    :defaultExpandedKeys="['0-0-0']"
-    @select="onSelect"
-  >
+  <a-tree showLine :defaultExpandedKeys="['0-0-0']" @select="onSelect">
     <a-tree-node key="0-0">
       <span slot="title" style="color: #1890ff">parent 1</span>
       <a-tree-node title="parent 1-0" key="0-0-0">
@@ -34,13 +30,12 @@ Tree With Line
 </template>
 
 <script>
-export default {
-  methods: {
-    onSelect (selectedKeys, info) {
-      console.log('selected', selectedKeys, info)
+  export default {
+    methods: {
+      onSelect(selectedKeys, info) {
+        console.log('selected', selectedKeys, info);
+      },
     },
-  },
-}
+  };
 </script>
-
 ```

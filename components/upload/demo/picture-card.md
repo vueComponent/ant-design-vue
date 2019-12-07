@@ -8,7 +8,7 @@
 After users upload picture, the thumbnail will be shown in list. The upload button will disappear when count meets limitation.
 </us>
 
-```html
+```tpl
 <template>
   <div class="clearfix">
     <a-upload
@@ -29,32 +29,34 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      previewVisible: false,
-      previewImage: '',
-      fileList: [{
-        uid: '-1',
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }],
-    }
-  },
-  methods: {
-    handleCancel () {
-      this.previewVisible = false
+  export default {
+    data() {
+      return {
+        previewVisible: false,
+        previewImage: '',
+        fileList: [
+          {
+            uid: '-1',
+            name: 'xxx.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+        ],
+      };
     },
-    handlePreview (file) {
-      this.previewImage = file.url || file.thumbUrl
-      this.previewVisible = true
+    methods: {
+      handleCancel() {
+        this.previewVisible = false;
+      },
+      handlePreview(file) {
+        this.previewImage = file.url || file.thumbUrl;
+        this.previewVisible = true;
+      },
+      handleChange({ fileList }) {
+        this.fileList = fileList;
+      },
     },
-    handleChange ({ fileList }) {
-      this.fileList = fileList
-    },
-  },
-}
+  };
 </script>
 <style>
   /* you can make up upload button and sample style by using stylesheets */
@@ -69,5 +71,3 @@ export default {
   }
 </style>
 ```
-
-

@@ -8,7 +8,7 @@
 A group of radio components.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-radio-group @change="onChange" v-model="value">
@@ -20,17 +20,17 @@ A group of radio components.
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      value: 1,
-    }
-  },
-  methods: {
-    onChange (e) {
-      console.log('radio checked', e.target.value)
+  export default {
+    data() {
+      return {
+        value: 1,
+      };
     },
-  },
-}
+    methods: {
+      onChange(e) {
+        console.log('radio checked', e.target.value);
+      },
+    },
+  };
 </script>
 ```

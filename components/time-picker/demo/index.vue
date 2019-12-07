@@ -27,22 +27,22 @@ export default {
   subtitle: '时间选择框',
   type: 'Data Entry',
   title: 'TimePicker',
-  render () {
+  render() {
     return (
-      <div id='components-timepicker-demo'>
-        <md cn={md.cn} us={md.us}/>
-        <Hours/>
-        <Addon/>
-        <Basic/>
-        <Disabled/>
-        <HideColumn/>
-        <IntervalOptions/>
-        <Size/>
-        <Value/>
-        <Suffix/>
+      <div id="components-timepicker-demo">
+        <md cn={md.cn} us={md.us} />
+        <Hours />
+        <Addon />
+        <Basic />
+        <Disabled />
+        <HideColumn />
+        <IntervalOptions />
+        <Size />
+        <Value />
+        <Suffix />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );
@@ -50,5 +50,7 @@ export default {
 };
 </script>
 <style>
-#components-timepicker-demo .ant-time-picker { margin: 0 8px 12px 0; }
+#components-timepicker-demo .ant-time-picker {
+  margin: 0 8px 12px 0;
+}
 </style>

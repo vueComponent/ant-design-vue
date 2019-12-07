@@ -4,6 +4,8 @@ import addEventListener from '../_util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import BaseMixin from '../_util/BaseMixin';
 import getTransitionProps from '../_util/getTransitionProps';
+import { ConfigConsumerProps } from '../config-provider';
+import Base from '../base';
 
 const easeInOutCubic = (t, b, c, d) => {
   const cc = c - b;
@@ -24,6 +26,7 @@ const BackTopProps = {
   // onClick?: React.MouseEventHandler<any>;
   target: PropTypes.func,
   prefixCls: PropTypes.string,
+  // visible: PropTypes.bool, // Only for test. Don't use it.
 };
 
 const BackTop = {
@@ -33,13 +36,15 @@ const BackTop = {
     ...BackTopProps,
     visibilityHeight: PropTypes.number.def(400),
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     this.scrollEvent = null;
     return {
       visible: false,
     };
   },
-
   mounted() {
     this.$nextTick(() => {
       const getTarget = this.target || getDefaultTarget;
@@ -101,7 +106,10 @@ const BackTop = {
   },
 
   render() {
-    const { prefixCls = 'ant-back-top', $slots, $listeners } = this;
+    const { prefixCls: customizePrefixCls, $slots, $listeners } = this;
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('back-top', customizePrefixCls);
 
     const defaultElement = (
       <div class={`${prefixCls}-content`}>
@@ -126,6 +134,7 @@ const BackTop = {
 
 /* istanbul ignore next */
 BackTop.install = function(Vue) {
+  Vue.use(Base);
   Vue.component(BackTop.name, BackTop);
 };
 

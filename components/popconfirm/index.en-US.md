@@ -1,7 +1,7 @@
 ## API
 
 | Param | Description | Type | Default value |
-| ----- | ----------- | ---- | ------------- |
+| --- | --- | --- | --- |
 | cancelText | text of the Cancel button | string\|slot | `Cancel` |
 | okText | text of the Confirm button | string\|slot | `Confirm` |
 | okType | Button `type` of the Confirm button | string | `primary` |
@@ -9,6 +9,7 @@
 | icon | customize icon of confirmation | vNode\|slot | &lt;Icon type="exclamation-circle" /&gt; |
 
 ### events
+
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | cancel | callback of cancel | function(e) | - |

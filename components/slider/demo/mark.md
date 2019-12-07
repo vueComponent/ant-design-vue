@@ -10,7 +10,7 @@ When `included` is false, means that different thumbs are coordinative.
 when `step` is null, users can only slide the thumbs onto marks.
 </us>
 
-```html
+```tpl
 <template>
   <div id="components-slider-demo-mark">
     <h4>included=true</h4>
@@ -28,40 +28,38 @@ when `step` is null, users can only slide the thumbs onto marks.
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      marks: {
-        0: '0°C',
-        26: '26°C',
-        37: '37°C',
-        100: {
-          style: {
-            color: '#f50',
+  export default {
+    data() {
+      return {
+        marks: {
+          0: '0°C',
+          26: '26°C',
+          37: '37°C',
+          100: {
+            style: {
+              color: '#f50',
+            },
+            label: <strong>100°C</strong>,
           },
-          label: <strong>100°C</strong>,
         },
-      },
-    }
-  },
-  methods: {
-    onChange(value) {
-      console.log('change: ', value);
+      };
     },
-    onAfterChange(value) {
-      console.log('afterChange: ', value);
-    }
-  },
-}
+    methods: {
+      onChange(value) {
+        console.log('change: ', value);
+      },
+      onAfterChange(value) {
+        console.log('afterChange: ', value);
+      },
+    },
+  };
 </script>
 <style scoped>
-#components-slider-demo-mark h4 {
-  margin: 0 0 16px;
-}
-#components-slider-demo-mark .ant-slider-with-marks {
-  margin-bottom: 44px;
-}
+  #components-slider-demo-mark h4 {
+    margin: 0 0 16px;
+  }
+  #components-slider-demo-mark .ant-slider-with-marks {
+    margin-bottom: 44px;
+  }
 </style>
 ```
-
-

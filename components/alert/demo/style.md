@@ -8,7 +8,7 @@
 There are 4 types of Alert: `success`, `info`, `warning`, `error`.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-alert message="Success Text" type="success" />

@@ -26,16 +26,16 @@ export default {
   zhType: '其他',
   title: 'Divider',
   subtitle: '分割线',
-  render () {
+  render() {
     return (
       <div>
-        <md cn={md.cn} us={md.us}/>
+        <md cn={md.cn} us={md.us} />
         <Vertical />
         <Horizontal />
         <Orientation />
         <api>
-          <CN slot='cn' />
-          <US/>
+          <CN slot="cn" />
+          <US />
         </api>
       </div>
     );

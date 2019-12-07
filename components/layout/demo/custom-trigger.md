@@ -8,14 +8,10 @@
 If you want to use a customized trigger, you can hide the default one by setting `:trigger="null"`.
 </us>
 
-```html
+```tpl
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider
-      :trigger="null"
-      collapsible
-      v-model="collapsed"
-    >
+    <a-layout-sider :trigger="null" collapsible v-model="collapsed">
       <div class="logo" />
       <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
         <a-menu-item key="1">
@@ -40,38 +36,40 @@ If you want to use a customized trigger, you can hide the default one by setting
           @click="()=> collapsed = !collapsed"
         />
       </a-layout-header>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+      <a-layout-content
+        :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+      >
         Content
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 <script>
-export default {
-  data(){
-    return {
-      collapsed: false,
-    }
-  },
-}
+  export default {
+    data() {
+      return {
+        collapsed: false,
+      };
+    },
+  };
 </script>
 <style>
-#components-layout-demo-custom-trigger .trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color .3s;
-}
+  #components-layout-demo-custom-trigger .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
 
-#components-layout-demo-custom-trigger .trigger:hover {
-  color: #1890ff;
-}
+  #components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+  }
 
-#components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  background: rgba(255,255,255,.2);
-  margin: 16px;
-}
+  #components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
 </style>
 ```

@@ -15,6 +15,7 @@ function chooseYear(year) {
   const value = this.sValue.clone();
   value.year(year);
   value.month(this.sValue.month());
+  this.sValue = value;
   this.__emit('select', value);
 }
 
@@ -25,6 +26,7 @@ export default {
     value: PropTypes.object,
     defaultValue: PropTypes.object,
     locale: PropTypes.object,
+    renderFooter: PropTypes.func,
   },
   data() {
     this.nextDecade = goYear.bind(this, 10);
@@ -59,7 +61,7 @@ export default {
   },
 
   render() {
-    const { sValue: value, locale, $listeners = {} } = this;
+    const { sValue: value, locale, renderFooter, $listeners = {} } = this;
     const decadePanelShow = $listeners.decadePanelShow || noop;
     const years = this.years();
     const currentYear = value.year();
@@ -101,7 +103,7 @@ export default {
         </tr>
       );
     });
-
+    const footer = renderFooter && renderFooter('year');
     return (
       <div class={prefixCls}>
         <div>
@@ -136,6 +138,7 @@ export default {
               <tbody class={`${prefixCls}-tbody`}>{yeasEls}</tbody>
             </table>
           </div>
+          {footer && <div class={`${prefixCls}-footer`}>{footer}</div>}
         </div>
       </div>
     );

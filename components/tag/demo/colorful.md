@@ -9,7 +9,7 @@ We preset a series of colorful tag style for different situation usage.
 And you can always set it to a hex color string for custom color.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <h4 style="margin-bottom: 16px">Presets:</h4>
@@ -31,5 +31,4 @@ And you can always set it to a hex color string for custom color.
     </div>
   </div>
 </template>
-
 ```

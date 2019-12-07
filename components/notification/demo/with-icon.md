@@ -1,4 +1,3 @@
-
 <cn>
 #### 带有图标的通知提醒框
 通知提醒框左侧有图标。
@@ -9,7 +8,7 @@
 A notification box with a icon at the left side.
 </us>
 
-```html
+```tpl
 <template>
   <div>
     <a-button @click="() => openNotificationWithIcon('success')">Success</a-button>
@@ -21,14 +20,14 @@ A notification box with a icon at the left side.
 <script>
   export default {
     methods: {
-      openNotificationWithIcon (type) {
+      openNotificationWithIcon(type) {
         this.$notification[type]({
           message: 'Notification Title',
-          description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          description:
+            'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
       },
-    }
-  }
+    },
+  };
 </script>
 ```
-

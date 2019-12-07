@@ -1,13 +1,13 @@
 <script>
-import Simple from '../vc-upload/demo/simple';
-import Drag from '../vc-upload/demo/drag';
-import AsyncAction from '../vc-upload/demo/asyncAction';
-import BeforeUpload from '../vc-upload/demo/beforeUpload';
-import CustomRequest from '../vc-upload/demo/customRequest';
-import DirectoryUpload from '../vc-upload/demo/directoryUpload';
+import Simple from './simple';
+import Drag from './drag';
+import AsyncAction from './asyncAction';
+import BeforeUpload from './beforeUpload';
+import CustomRequest from './customRequest';
+import DirectoryUpload from './directoryUpload';
 
 export default {
-  render () {
+  render() {
     return (
       <div>
         <Simple />

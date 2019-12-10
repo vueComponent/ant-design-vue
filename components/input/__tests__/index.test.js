@@ -4,10 +4,12 @@ import Input from '..';
 import Form from '../../form';
 import focusTest from '../../../tests/shared/focusTest';
 
-const { TextArea } = Input;
+const { TextArea, Password } = Input;
 
 describe('Input', () => {
   focusTest(Input);
+  focusTest(TextArea);
+  focusTest(Password);
 
   it('should support maxLength', async () => {
     const wrapper = mount(Input, { attrs: { maxLength: 3 }, sync: false });

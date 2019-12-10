@@ -60,11 +60,6 @@ export default {
                     AntD Library
                   </a>
                 </div>
-                <div>
-                  <a href="http://ant-design-vue.gitee.io/" target="_blank">
-                    <span>{isCN ? '国内镜像' : 'China Mirror'} 🇨🇳</span>
-                  </a>
-                </div>
               </div>
             </a-col>
             <a-col md={6} sm={24} xs={24}>

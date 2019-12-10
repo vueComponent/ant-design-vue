@@ -66,6 +66,7 @@ const modalProps = (defaultProps = {}) => {
     mask: PropTypes.bool,
     keyboard: PropTypes.bool,
     wrapProps: PropTypes.object,
+    focusTriggerAfterClose: PropTypes.bool,
   };
   return initDefaultProps(props, defaultProps);
 };

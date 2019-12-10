@@ -10,10 +10,10 @@
 | header | List header renderer | string\|slot | - |
 | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |
 | rowKey | Item's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
-| loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://vue.ant.design/components/spin/#API) | false |
+| loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://www.antdv.com/components/spin/#API) | false |
 | loadMore | Shows a load more content | string\|slot | - |
 | locale | i18n text including empty text | object | emptyText: 'No Data' <br> |
-| pagination | Pagination [config](https://vue.ant.design/components/pagination/#API), hide it by setting it to false | boolean \| object | false |
+| pagination | Pagination [config](https://www.antdv.com/components/pagination/#API), hide it by setting it to false | boolean \| object | false |
 | split | Toggles rendering of the split under the list item | boolean | true |
 | renderItem | Custom item renderer, slot="renderItem" and slot-scope="item, index" | (item, index) => vNode |  | - |
 
@@ -25,7 +25,7 @@ Properties for pagination.
 | -------- | ------------------------------------ | --------------------------- | -------- |
 | position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
-More about pagination, please check [`Pagination`](https://vue.ant.design/components/pagination/#API).
+More about pagination, please check [`Pagination`](https://www.antdv.com/components/pagination/#API).
 
 ### List grid props
 

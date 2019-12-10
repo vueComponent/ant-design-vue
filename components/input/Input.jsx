@@ -3,7 +3,6 @@ import TextArea from './TextArea';
 import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
-import { isIE, isIE9 } from '../_util/env';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 
@@ -122,7 +121,7 @@ export default {
 
     handleChange(e) {
       const { value, composing } = e.target;
-      if (composing || this.stateValue === value) return;
+      if (composing && this.lazy) return;
       this.setValue(value, e);
     },
 
@@ -233,6 +232,7 @@ export default {
         'allowClear',
         'value',
         'defaultValue',
+        'lazy',
       ]);
       const { stateValue, getInputClassName, handleKeyDown, handleChange, $listeners } = this;
       const inputProps = {

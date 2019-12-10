@@ -31,6 +31,12 @@ export default {
     };
   },
   methods: {
+    focus() {
+      this.$refs.input.focus();
+    },
+    blur() {
+      this.$refs.input.blur();
+    },
     onChange() {
       this.setState({
         visible: !this.visible,
@@ -85,6 +91,7 @@ export default {
         type: this.visible ? 'text' : 'password',
       },
       class: inputClassName,
+      ref: 'input',
       on: this.$listeners,
     };
     return <Input {...inputProps} />;

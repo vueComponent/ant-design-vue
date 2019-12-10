@@ -628,7 +628,7 @@ export default {
       };
     }
 
-    const trigger = cloneElement(child, newChildProps);
+    this.trigger = cloneElement(child, newChildProps);
 
     return (
       <ContainerRender
@@ -640,7 +640,7 @@ export default {
         getContainer={this.getContainer}
         children={({ renderComponent }) => {
           this.renderComponent = renderComponent;
-          return trigger;
+          return this.trigger;
         }}
       />
     );

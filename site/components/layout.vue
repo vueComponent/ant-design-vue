@@ -296,7 +296,6 @@ export default {
               )}
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class="main-container main-container-component">
-                  <GoogleAdsTop key={`GoogleAdsTop_${$route.path}`} />
                   {!isMobile ? <CarbonAds /> : null}
                   <GeektimeAds isMobile={isMobile} />
                   {!isMobile ? (

@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.4.8",
+    "version": "1.4.9",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -53,7 +53,7 @@
     "bugs": {
         "url": "https://github.com/vueComponent/ant-design-vue/issues"
     },
-    "homepage": "https://vue.ant.design/",
+    "homepage": "https://www.antdv.com/",
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged"
@@ -176,7 +176,8 @@
         "webpack-cli": "^3.2.1",
         "webpack-dev-server": "^3.1.14",
         "webpack-merge": "^4.1.1",
-        "webpackbar": "^3.1.5"
+        "webpackbar": "^3.1.5",
+        "xhr-mock": "^2.5.1"
     },
     "dependencies": {
         "@ant-design/icons": "^2.1.1",

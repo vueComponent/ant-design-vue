@@ -4,7 +4,7 @@ exports[`Modal render correctly 1`] = `
 <div>
   <div>
     <div>
-      <div>
+      <div class="ant-modal-root">
         <div class="ant-modal-mask"></div>
         <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
           <div role="document" class="ant-modal" style="width: 520px;">
@@ -29,7 +29,7 @@ exports[`Modal render correctly 2`] = `
 <div>
   <div>
     <div>
-      <div>
+      <div class="ant-modal-root">
         <div class="ant-modal-mask"></div>
         <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
           <div role="document" class="ant-modal" style="width: 520px;">
@@ -54,7 +54,7 @@ exports[`Modal render without footer 1`] = `
 <div>
   <div>
     <div>
-      <div>
+      <div class="ant-modal-root">
         <div class="ant-modal-mask"></div>
         <div tabindex="-1" role="dialog" class="ant-modal-wrap ">
           <div role="document" class="ant-modal" style="width: 520px;">

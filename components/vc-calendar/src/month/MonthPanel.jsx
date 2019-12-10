@@ -12,6 +12,7 @@ function goYear(direction) {
 function noop() {}
 
 const MonthPanel = {
+  name: 'MonthPanel',
   mixins: [BaseMixin],
   props: {
     value: PropTypes.any,

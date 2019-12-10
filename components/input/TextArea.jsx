@@ -155,6 +155,7 @@ export default {
       'type',
       'value',
       'defaultValue',
+      'lazy',
     ]);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);

@@ -28,7 +28,7 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 
 ## Environment Support
 
-- Modern browsers and Internet Explorer 9+ (with [polyfills](https://vue.ant.design/docs/vue/getting-started/#Compatibility))
+- Modern browsers and Internet Explorer 9+ (with [polyfills](https://www.antdv.com/docs/vue/getting-started/#Compatibility))
 - Server-side Rendering
 
 ## Version
@@ -111,9 +111,9 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 ## Links
 
-- [Home Page](https://vue.ant.design/)
-- [Ant Design React](https://ant.design/)
-- [Components](https://vue.ant.design/docs/vue/introduce)
+- [Home Page](https://www.antdv.com/)
+- [Ant Design Of React](https://ant.design/)
+- [Components](https://www.antdv.com/docs/vue/introduce)
 - [Change Log](/docs/vue/changelog)
 - [CodeSandbox template](https://codesandbox.io/s/2wpk21kzvr) for bug reports
 - [Customize Theme](/docs/vue/customize-theme)

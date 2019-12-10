@@ -53,7 +53,6 @@ The items listed above are all functions, expecting a settings object as paramet
 | autoFocusButton | Specify which button to autofocus | null\|string: `ok` `cancel` | `ok` |
 | cancelText | Text of the Cancel button | string | `Cancel` |
 | centered | Centered Modal | Boolean | `false` |
-| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |
 | class | class of container | string | - |
 | content | Content | string\|vNode \|function(h) | - |
 | icon | custom icon (`Added in 1.14.0`) | string\|()=>VNode | `<Icon type="question-circle">` |

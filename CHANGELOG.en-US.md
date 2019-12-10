@@ -362,8 +362,8 @@
 
 1.3.0 brings two new Components, a lot of exciting changes and new features.
 
-- 🔥 Added a new component [Comment](https://vue.ant.design/components/comment/)。
-- 🔥 dded a new component [ConfigProvider](https://vue.ant.design/components/config-provider/) for user to customize some global setting.
+- 🔥 Added a new component [Comment](https://www.antdv.com/components/comment/)。
+- 🔥 dded a new component [ConfigProvider](https://www.antdv.com/components/config-provider/) for user to customize some global setting.
 
 Component Fixes / Enhancements:
 

@@ -53,7 +53,7 @@
     "bugs": {
         "url": "https://github.com/vueComponent/ant-design-vue/issues"
     },
-    "homepage": "https://vue.ant.design/",
+    "homepage": "https://www.antdv.com/",
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged"

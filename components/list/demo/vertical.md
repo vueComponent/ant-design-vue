@@ -37,7 +37,7 @@ Setting `itemLayout` property with `vertical` to create a vertical list.
   const listData = [];
   for (let i = 0; i < 23; i++) {
     listData.push({
-      href: 'https://vue.ant.design/',
+      href: 'https://www.antdv.com/',
       title: `ant design vue part ${i}`,
       avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
       description:

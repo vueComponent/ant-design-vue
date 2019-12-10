@@ -1,11 +1,11 @@
 <p align="center">
-  <a href="https://vue.ant.design/">
+  <a href="https://www.antdv.com/">
     <img width="200" src="https://qn.antdv.com/logo.png">
   </a>
 </p>
 
 <h1 align="center">
-  <a href="https://vue.ant.design/" target="_blank">Ant Design Vue</a>
+  <a href="https://www.antdv.com/" target="_blank">Ant Design Vue</a>
 </h1>
 
 <div align="center">
@@ -16,7 +16,7 @@ An enterprise-class UI components based on Ant Design and Vue.
 
 </div>
 
-[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://vue.ant.design/)
+[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://www.antdv.com/)
 
 English | [简体中文](./README-zh_CN.md) | [官网国内镜像](http://ant-design-vue.gitee.io/docs/vue/introduce-cn/)
 
@@ -57,9 +57,9 @@ If you are in a bad network environment，you can try other registries and tools
 
 ## Links
 
-- [Home page](https://vue.ant.design/)
+- [Home page](https://www.antdv.com/)
 - [Vue](https://vuejs.org/)
-- [Ant Design React](http://ant.design/)
+- [Ant Design Of React](http://ant.design/)
 
 ## Ecosystem
 

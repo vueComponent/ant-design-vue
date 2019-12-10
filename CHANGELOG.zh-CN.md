@@ -23,9 +23,9 @@
 - 🐞 修复在引用不同 Vue 变量时，无法弹出内容的问题 [6362bf](https://github.com/vueComponent/ant-design-vue/commit/6362bf9edb441c0c0096beca1d2c8727003dbb15)
 - 🌟 `Table` `customRender` 添加第三个 column 参数 [#1513](https://github.com/vueComponent/ant-design-vue/pull/1513)
 - 🌟 `InputPassword` 添加 focus、blur 方法 [#1485](https://github.com/vueComponent/ant-design-vue/pull/1485)
-- 🐞 修复 `Tooltip` 使用在原生html元素时报错的问题 [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
+- 🐞 修复 `Tooltip` 使用在原生 html 元素时报错的问题 [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
 - 🐞 修复 `Menu` 在 edge 浏览器下报错的问题 [#1492](https://github.com/vueComponent/ant-design-vue/issues/1492)
-- 🐞 修复 `Select` 的 empty 不居中的问题 [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445) 
+- 🐞 修复 `Select` 的 empty 不居中的问题 [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445)
 - 🐞 修复弹窗类组件内存泄漏问题 [#1483](https://github.com/vueComponent/ant-design-vue/pull/1483)
 
 ## 1.4.8
@@ -363,8 +363,8 @@
 
 1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
 
-- 🔥 增加了一个新组件 [Comment](https://vue.ant.design/components/comment-cn/)。
-- 🔥 增加了一个新组件 [ConfigProvider](https://vue.ant.design/components/config-provider-cn/) 为组件提供统一的全局化配置。
+- 🔥 增加了一个新组件 [Comment](https://www.antdv.com/components/comment-cn/)。
+- 🔥 增加了一个新组件 [ConfigProvider](https://www.antdv.com/components/config-provider-cn/) 为组件提供统一的全局化配置。
 
 组件修复/功能增强：
 

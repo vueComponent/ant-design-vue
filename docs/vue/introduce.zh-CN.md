@@ -28,7 +28,7 @@
 
 ## 支持环境
 
-- 现代浏览器和 IE9 及以上（需要 [polyfills](https://vue.ant.design/docs/vue/getting-started-cn/#兼容性)）。
+- 现代浏览器和 IE9 及以上（需要 [polyfills](https://www.antdv.com/docs/vue/getting-started-cn/#兼容性)）。
 - 支持服务端渲染。
 
 ## 版本
@@ -113,9 +113,9 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 ## 链接
 
-- [首页](https://vue.ant.design/)
-- [Ant Design React](https://ant.design/)
-- [组件库](https://vue.ant.design/docs/vue/introduce-cn)
+- [首页](https://www.antdv.com/)
+- [Ant Design Of React](https://ant.design/)
+- [组件库](https://www.antdv.com/docs/vue/introduce-cn)
 - [更新日志](/docs/vue/changelog-cn)
 - [CodeSandbox 模板](https://codesandbox.io/s/2wpk21kzvr) for bug reports
 - [定制主题](/docs/vue/customize-theme-cn)

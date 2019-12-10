@@ -53,7 +53,7 @@ export default {
         if (!this._component) {
           this._component = new this.$root.constructor({
             el: el,
-            parent: self.parent,
+            parent: self,
             data: {
               comProps: props,
             },

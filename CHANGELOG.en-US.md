@@ -10,6 +10,24 @@
 
 ---
 
+## 1.4.9
+
+`2019-12-10`
+
+- 🐞 Fix body scrolling issue when `Modal` is opened [#1472](https://github.com/vueComponent/ant-design-vue/issues/1472)
+- 🐞 Fix `Drawer` wrapStyle not working [#1481](https://github.com/vueComponent/ant-design-vue/issues/1481)
+- 🐞 Fix `InputNumber` id mount position is incorrect [#1477](https://github.com/vueComponent/ant-design-vue/issues/1477)
+- 🐞 Fix `Tabs` nextClick event does not fire [#1489](https://github.com/vueComponent/ant-design-vue/pull/1489)
+- 🐞 Fix `MonthPicker` cannot be changed in open state [#1510](https://github.com/vueComponent/ant-design-vue/issues/1510)
+- 🐞 Fix the issue that `AutoComplete` does not disappear when entering Chinese [#1506](https://github.com/vueComponent/ant-design-vue/issues/1506)
+- 🐞 Fix the problem that the content cannot pop up when referencing different Vue variables [6362bf](https://github.com/vueComponent/ant-design-vue/commit/6362bf9edb441c0c0096beca1d2c8727003dbb15)
+- 🌟 `Table` `customRender` Add a third column parameter [#1513](https://github.com/vueComponent/ant-design-vue/pull/1513)
+- 🌟 `InputPassword` adds focus and blur methods [#1485](https://github.com/vueComponent/ant-design-vue/pull/1485)
+- 🐞 Fix `Tooltip` report error when using native html element [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
+- 🐞 Fix `Menu` report error in edge browser [#1492](https://github.com/vueComponent/ant-design-vue/issues/1492)
+- 🐞 Fix empty centering of `Select` [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445)
+- 🐞 Fix popup window component memory leak problem [#1483](https://github.com/vueComponent/ant-design-vue/pull/1483)
+
 ## 1.4.8
 
 `2019-11-28`

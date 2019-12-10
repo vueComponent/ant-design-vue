@@ -10,6 +10,24 @@
 
 ---
 
+## 1.4.9
+
+`2019-12-10`
+
+- 🐞 修复 `Modal` 打开时，body 滚动问题 [#1472](https://github.com/vueComponent/ant-design-vue/issues/1472)
+- 🐞 修复 `Drawer` wrapStyle 不生效问题 [#1481](https://github.com/vueComponent/ant-design-vue/issues/1481)
+- 🐞 修复 `InputNumber` id 挂载位置不正确的问题 [#1477](https://github.com/vueComponent/ant-design-vue/issues/1477)
+- 🐞 修复 `Tabs` nextClick 事件不触发的问题 [#1489](https://github.com/vueComponent/ant-design-vue/pull/1489)
+- 🐞 修复 `MonthPicker` 在 open 状态下，不能更改值的问题 [#1510](https://github.com/vueComponent/ant-design-vue/issues/1510)
+- 🐞 修复 `AutoComplete` 在输入中文时 `placeholder` 不消失的问题 [#1506](https://github.com/vueComponent/ant-design-vue/issues/1506)
+- 🐞 修复在引用不同 Vue 变量时，无法弹出内容的问题 [6362bf](https://github.com/vueComponent/ant-design-vue/commit/6362bf9edb441c0c0096beca1d2c8727003dbb15)
+- 🌟 `Table` `customRender` 添加第三个 column 参数 [#1513](https://github.com/vueComponent/ant-design-vue/pull/1513)
+- 🌟 `InputPassword` 添加 focus、blur 方法 [#1485](https://github.com/vueComponent/ant-design-vue/pull/1485)
+- 🐞 修复 `Tooltip` 使用在原生html元素时报错的问题 [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
+- 🐞 修复 `Menu` 在 edge 浏览器下报错的问题 [#1492](https://github.com/vueComponent/ant-design-vue/issues/1492)
+- 🐞 修复 `Select` 的 empty 不居中的问题 [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445) 
+- 🐞 修复弹窗类组件内存泄漏问题 [#1483](https://github.com/vueComponent/ant-design-vue/pull/1483)
+
 ## 1.4.8
 
 `2019-11-28`

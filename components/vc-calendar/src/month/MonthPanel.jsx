@@ -4,9 +4,7 @@ import { hasProp } from '../../../_util/props-util';
 import MonthTable from './MonthTable';
 
 function goYear(direction) {
-  const next = this.sValue.clone();
-  next.add(direction, 'year');
-  this.setAndChangeValue(next);
+  this.changeYear(direction);
 }
 
 function noop() {}
@@ -25,6 +23,7 @@ const MonthPanel = {
     disabledDate: PropTypes.func,
     // onSelect: PropTypes.func,
     renderFooter: PropTypes.func,
+    changeYear: PropTypes.func.def(noop),
   },
 
   data() {
@@ -44,18 +43,13 @@ const MonthPanel = {
     },
   },
   methods: {
-    setAndChangeValue(value) {
-      this.setValue(value);
-      this.__emit('change', value);
-    },
-
     setAndSelectValue(value) {
       this.setValue(value);
       this.__emit('select', value);
     },
 
     setValue(value) {
-      if (!hasProp(this, 'value')) {
+      if (hasProp(this, 'value')) {
         this.setState({
           sValue: value,
         });

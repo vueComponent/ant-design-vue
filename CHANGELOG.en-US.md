@@ -10,6 +10,12 @@
 
 ---
 
+## 1.4.10
+
+`2019-12-11`
+
+- 🐞 Fixed the left and right arrows of MonthPicker cannot be worked [#1543](https://github.com/vueComponent/ant-design-vue/issues/1543)
+
 ## 1.4.9
 
 `2019-12-10`

@@ -19,7 +19,7 @@ export const TreeSelectProps = () => ({
   loadData: PropTypes.func,
   maxTagCount: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array, PropTypes.number]),
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
   multiple: PropTypes.bool,
   notFoundContent: PropTypes.any,

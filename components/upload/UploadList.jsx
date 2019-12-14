@@ -84,8 +84,8 @@ export default {
         previewFile(file.originFileObj, previewDataUrl => {
           /*eslint-disable */
           file.thumbUrl = previewDataUrl;
-          /*eslint -enable todo */
-          // this.forceUpdate()
+          /*eslint -enable */
+          this.$forceUpdate();
         });
       });
     });

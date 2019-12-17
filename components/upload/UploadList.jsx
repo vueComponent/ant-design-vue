@@ -82,8 +82,8 @@ export default {
         file.thumbUrl = '';
         /*eslint -enable */
         previewFile(file.originFileObj, previewDataUrl => {
-          /*eslint-disable */
-          file.thumbUrl = previewDataUrl;
+          // Need append '' to avoid dead loop
+          file.thumbUrl = previewDataUrl || '';
           /*eslint -enable */
           this.$forceUpdate();
         });

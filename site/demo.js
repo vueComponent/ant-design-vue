@@ -93,6 +93,13 @@ export default {
     title: 'Pagination',
     cols: 1,
   },
+  pageHeader: {
+    category: 'Components',
+    subtitle: '页头',
+    type: 'Navigation',
+    title: 'PageHeader',
+    cols: 1,
+  },
   popconfirm: {
     category: 'Components',
     subtitle: '气泡确认框',

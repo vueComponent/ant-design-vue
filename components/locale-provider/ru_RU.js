@@ -39,4 +39,7 @@ export default {
   Empty: {
     description: 'Нет данных',
   },
+  PageHeader: {
+    back: 'назад',
+  },
 };

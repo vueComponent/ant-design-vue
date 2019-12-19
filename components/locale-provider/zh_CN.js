@@ -47,4 +47,7 @@ export default {
   Icon: {
     icon: '图标',
   },
+  PageHeader: {
+    back: '返回',
+  },
 };

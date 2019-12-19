@@ -65,7 +65,7 @@ export default {
         }
         return (
           <BreadcrumbItem separator={separator} key={route.breadcrumbName || path}>
-            {itemRender({ route, params, routes, paths })}
+            {itemRender({ route, params, routes, paths, h })}
           </BreadcrumbItem>
         );
       });

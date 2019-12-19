@@ -65,6 +65,7 @@ Array [
   "Empty",
   "Result",
   "Descriptions",
+  "PageHeader",
   "default",
 ]
 `;

@@ -470,5 +470,11 @@ export default [
   {
     path: 'descriptions-cn',
     component: () => import('../components/descriptions/demo/index.vue'),
+    path: 'page-header',
+    component: () => import('../components/page-header/demo/index.vue'),
+  },
+  {
+    path: 'page-header-cn',
+    component: () => import('../components/page-header/demo/index.vue'),
   },
 ];

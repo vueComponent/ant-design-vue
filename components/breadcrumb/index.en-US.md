@@ -2,7 +2,7 @@
 
 | Property | Description | Type | Optional | Default |
 | --- | --- | --- | --- | --- |
-| itemRender | Custom item renderer, slot="itemRender" and slot-scope="{route, params, routes, paths}" | ({route, params, routes, paths}) => vNode |  | - |
+| itemRender | Custom item renderer, slot="itemRender" and slot-scope="{route, params, routes, paths}" | ({route, params, routes, paths, h}) => vNode |  | - |
 | params | Routing parameters | object |  | - |
 | routes | The routing stack information of router | object\[] |  | - |
 | separator | Custom separator | string\|slot |  | `/` |

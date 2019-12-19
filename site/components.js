@@ -63,6 +63,7 @@ import {
   Base,
   Result,
   Descriptions,
+  PageHeader,
 } from 'ant-design-vue';
 
 Vue.prototype.$message = message;
@@ -134,6 +135,7 @@ Vue.use(ConfigProvider);
 Vue.use(Empty);
 Vue.use(Result);
 Vue.use(Descriptions);
+Vue.use(PageHeader);
 
 /* v1.1.2 registration methods */
 // Vue.component(Affix.name, Affix) // a-affix

@@ -39,4 +39,7 @@ export default {
   Empty: {
     description: 'No hay datos',
   },
+  PageHeader: {
+    back: 'volver',
+  },
 };

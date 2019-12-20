@@ -151,7 +151,7 @@
         "rimraf": "^2.6.2",
         "rucksack-css": "^1.0.2",
         "selenium-server": "^3.0.1",
-        "semver": "^5.3.0",
+        "semver": "^7.0.0",
         "style-loader": "^0.23.0",
         "stylelint": "^9.10.1",
         "stylelint-config-prettier": "^4.0.0",

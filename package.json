@@ -41,7 +41,6 @@
         "dist": "node antd-tools/cli/run.js dist",
         "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./components",
         "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
-        "commitmsg": "commitlint -x @commitlint/config-conventional -e $GIT_PARAMS",
         "codecov": "codecov",
         "postinstall": "node scripts/postinstall || echo \"ignore\""
     },
@@ -54,11 +53,6 @@
         "url": "https://github.com/vueComponent/ant-design-vue/issues"
     },
     "homepage": "https://www.antdv.com/",
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
     "peerDependencies": {
         "vue": ">=2.6.0",
         "vue-template-compiler": ">=2.6.0"
@@ -119,7 +113,7 @@
         "gulp-strip-code": "^0.1.4",
         "highlight.js": "^9.12.0",
         "html-webpack-plugin": "^3.2.0",
-        "husky": "^0.14.3",
+        "husky": "^3.1.0",
         "istanbul-instrumenter-loader": "^3.0.0",
         "jest": "^24.0.0",
         "jest-serializer-vue": "^1.0.0",
@@ -142,7 +136,6 @@
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "postcss": "^7.0.6",
         "postcss-loader": "^3.0.0",
-        "pre-commit": "^1.2.2",
         "prettier": "^1.18.2",
         "pretty-quick": "^1.11.1",
         "querystring": "^0.2.0",

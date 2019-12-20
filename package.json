@@ -106,7 +106,7 @@
         "css-loader": "^0.28.7",
         "deep-assign": "^2.0.0",
         "enquire-js": "^0.2.1",
-        "eslint": "^5.8.0",
+        "eslint": "^6.0.0",
         "eslint-config-prettier": "^6.0.0",
         "eslint-plugin-html": "^6.0.0",
         "eslint-plugin-markdown": "^1.0.0",

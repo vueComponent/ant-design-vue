@@ -100,7 +100,7 @@
         "cheerio": "^1.0.0-rc.2",
         "codecov": "^3.0.0",
         "colorful": "^2.1.0",
-        "commander": "^2.15.0",
+        "commander": "^4.0.0",
         "compare-versions": "^3.3.0",
         "cross-env": "^5.1.4",
         "css-loader": "^0.28.7",

@@ -102,7 +102,7 @@
         "colorful": "^2.1.0",
         "commander": "^4.0.0",
         "compare-versions": "^3.3.0",
-        "cross-env": "^5.1.4",
+        "cross-env": "^6.0.0",
         "css-loader": "^0.28.7",
         "deep-assign": "^2.0.0",
         "enquire-js": "^0.2.1",

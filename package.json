@@ -103,7 +103,7 @@
         "commander": "^4.0.0",
         "compare-versions": "^3.3.0",
         "cross-env": "^6.0.0",
-        "css-loader": "^0.28.7",
+        "css-loader": "^3.0.0",
         "deep-assign": "^2.0.0",
         "enquire-js": "^0.2.1",
         "eslint": "^6.0.0",

@@ -60,8 +60,8 @@
         }
     },
     "peerDependencies": {
-        "vue": ">=2.6.6",
-        "vue-template-compiler": ">=2.6.6"
+        "vue": ">=2.6.0",
+        "vue-template-compiler": ">=2.6.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^6.2.0",
@@ -159,7 +159,7 @@
         "through2": "^2.0.3",
         "uglifyjs-webpack-plugin": "^2.1.1",
         "url-loader": "^1.1.2",
-        "vue": "^2.6.6",
+        "vue": "^2.6.11",
         "vue-antd-md-loader": "^1.1.0",
         "vue-clipboard2": "0.0.8",
         "vue-eslint-parser": "^5.0.0",
@@ -168,8 +168,8 @@
         "vue-jest": "^2.5.0",
         "vue-loader": "^15.6.2",
         "vue-router": "^3.0.1",
-        "vue-server-renderer": "^2.6.6",
-        "vue-template-compiler": "^2.6.6",
+        "vue-server-renderer": "^2.6.11",
+        "vue-template-compiler": "^2.6.11",
         "vue-virtual-scroller": "^0.12.0",
         "vuex": "^3.1.0",
         "webpack": "^4.28.4",

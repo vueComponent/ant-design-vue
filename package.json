@@ -207,7 +207,7 @@
         "shallow-equal": "^1.0.0",
         "shallowequal": "^1.0.2",
         "vue-ref": "^1.0.4",
-        "warning": "^3.0.0"
+        "warning": "^4.0.0"
     },
     "sideEffects": [
         "site/*",

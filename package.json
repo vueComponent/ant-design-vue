@@ -146,7 +146,7 @@
         "prettier": "^1.18.2",
         "pretty-quick": "^1.11.1",
         "querystring": "^0.2.0",
-        "raw-loader": "^1.0.0-beta.0",
+        "raw-loader": "^4.0.0",
         "reqwest": "^2.0.5",
         "rimraf": "^2.6.2",
         "rucksack-css": "^1.0.2",

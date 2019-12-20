@@ -96,7 +96,7 @@
         "babel-polyfill": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "case-sensitive-paths-webpack-plugin": "^2.1.2",
-        "chalk": "^2.3.2",
+        "chalk": "^3.0.0",
         "cheerio": "^1.0.0-rc.2",
         "codecov": "^3.0.0",
         "colorful": "^2.1.0",

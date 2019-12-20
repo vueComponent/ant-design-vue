@@ -107,7 +107,7 @@
         "deep-assign": "^2.0.0",
         "enquire-js": "^0.2.1",
         "eslint": "^5.8.0",
-        "eslint-config-prettier": "^3.0.1",
+        "eslint-config-prettier": "^6.0.0",
         "eslint-plugin-html": "^6.0.0",
         "eslint-plugin-markdown": "^1.0.0",
         "eslint-plugin-vue": "^6.0.0",

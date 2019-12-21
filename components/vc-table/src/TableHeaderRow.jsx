@@ -20,7 +20,10 @@ const TableHeaderRow = {
     const { row, index, height, components, customHeaderRow, prefixCls } = this;
     const HeaderRow = components.header.row;
     const HeaderCell = components.header.cell;
-    const rowProps = customHeaderRow(row.map(cell => cell.column), index);
+    const rowProps = customHeaderRow(
+      row.map(cell => cell.column),
+      index,
+    );
     const customStyle = rowProps ? rowProps.style : {};
     const style = { height, ...customStyle };
     if (style.height === null) {

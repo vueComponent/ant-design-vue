@@ -10,7 +10,6 @@ const IDialogPropTypes = getDialogPropTypes();
 
 let uuid = 0;
 
-/* eslint react/no-is-mounted:0 */
 function noop() {}
 function getScroll(w, top) {
   let ret = w[`page${top ? 'Y' : 'X'}Offset`];
@@ -111,7 +110,7 @@ export default {
     },
     updatedCallback(visible) {
       const mousePosition = this.mousePosition;
-      const {mask, focusTriggerAfterClose} = this;
+      const { mask, focusTriggerAfterClose } = this;
       if (this.visible) {
         // first show
         if (!visible) {
@@ -375,7 +374,7 @@ export default {
         cacheOverflow = {
           overflowX: document.body.style.overflowX,
           overflowY: document.body.style.overflowY,
-          overflow:  document.body.style.overflow,
+          overflow: document.body.style.overflow,
         };
         switchScrollingEffect();
         // Must be set after switchScrollingEffect
@@ -383,7 +382,7 @@ export default {
       } else if (!openCount) {
         // IE browser doesn't merge overflow style, need to set it separately
         // https://github.com/ant-design/ant-design/issues/19393
-        if (cacheOverflow.overflow  !== undefined) {
+        if (cacheOverflow.overflow !== undefined) {
           document.body.style.overflow = cacheOverflow.overflow;
         }
         if (cacheOverflow.overflowX !== undefined) {

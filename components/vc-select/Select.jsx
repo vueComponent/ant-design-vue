@@ -622,7 +622,13 @@ const Select = {
       if (value.length) {
         hidden = true;
       }
-      if (!state._mirrorInputValue && isCombobox(props) && value.length === 1 && (state._value && !state._value[0])) {
+      if (
+        !state._mirrorInputValue &&
+        isCombobox(props) &&
+        value.length === 1 &&
+        state._value &&
+        !state._value[0]
+      ) {
         hidden = false;
       }
       const placeholder = props.placeholder;

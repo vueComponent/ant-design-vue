@@ -162,7 +162,7 @@ const Drawer = {
       return (
         <div
           class={`${prefixCls}-wrapper-body`}
-          style={{...containerStyle, ...wrapStyle}}
+          style={{ ...containerStyle, ...wrapStyle }}
           onTransitionend={this.onDestroyTransitionEnd}
         >
           {this.renderHeader(prefixCls)}

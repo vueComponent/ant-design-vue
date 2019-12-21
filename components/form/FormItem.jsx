@@ -96,7 +96,8 @@ export default {
     const { help, validateStatus } = this.$props;
     warning(
       this.getControls(this.slotDefault, true).length <= 1 ||
-        (help !== undefined || validateStatus !== undefined),
+        help !== undefined ||
+        validateStatus !== undefined,
       '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
         'while there are more than one `getFieldDecorator` in it.',
     );

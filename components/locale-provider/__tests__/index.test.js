@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import moment from 'moment';

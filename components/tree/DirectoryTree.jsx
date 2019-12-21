@@ -171,7 +171,10 @@ export default {
     },
 
     setUncontrolledState(state) {
-      const newState = omit(state, Object.keys(getOptionProps(this)).map(p => `_${p}`));
+      const newState = omit(
+        state,
+        Object.keys(getOptionProps(this)).map(p => `_${p}`),
+      );
       if (Object.keys(newState).length) {
         this.setState(newState);
       }

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export function $$(className) {
   return document.body.querySelectorAll(className);
 }

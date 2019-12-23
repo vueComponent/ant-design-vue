@@ -71,7 +71,8 @@ const SearchInput = {
      */
     alignInputWidth() {
       this.inputRef.current.style.width = `${this.mirrorInputRef.current.clientWidth ||
-        this.mirrorInputRef.current.offsetWidth}px`;
+        this.mirrorInputRef.current.offsetWidth ||
+        1}px`;
     },
 
     /**

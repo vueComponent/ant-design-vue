@@ -118,6 +118,12 @@ export default {
             </a-col>
           </a-row>
         </div>
+        <div style="padding: 10px 144px;">
+          备案号：
+          <a href="http://www.beian.miit.gov.cn/" target="_blank">
+            浙ICP备19034671号
+          </a>
+        </div>
       </footer>
     );
   },

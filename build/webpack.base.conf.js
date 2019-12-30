@@ -4,7 +4,7 @@ const Token = require('markdown-it/lib/token');
 const cheerio = require('cheerio');
 const WebpackBar = require('webpackbar');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const getBabelCommonConfig = require('./antd-tools/getBabelCommonConfig');
+const getBabelCommonConfig = require('../antd-tools/getBabelCommonConfig');
 const babelConfig = getBabelCommonConfig(false);
 
 babelConfig.plugins.push(require.resolve('babel-plugin-syntax-dynamic-import'));
@@ -199,11 +199,11 @@ module.exports = {
     extensions: ['.js', '.jsx', '.vue', '.md'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      antd: path.join(__dirname, 'components'),
-      'ant-design-vue': path.join(__dirname, 'components'),
-      'ant-design-vue/es': path.join(__dirname, 'components'),
-      'ant-design-vue/lib': path.join(__dirname, 'components'),
-      '@': path.join(__dirname, ''),
+      antd: path.join(__dirname, '../components'),
+      'ant-design-vue': path.join(__dirname, '../components'),
+      'ant-design-vue/es': path.join(__dirname, '../components'),
+      'ant-design-vue/lib': path.join(__dirname, '../components'),
+      '@': path.join(__dirname, '../'),
     },
   },
   plugins: [new VueLoaderPlugin(), new WebpackBar()],

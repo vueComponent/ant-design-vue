@@ -29,6 +29,7 @@ export default function connect(mapStateToProps) {
       data() {
         this.store = this.storeContext.store;
         this.preProps = omit(getOptionProps(this), ['__propsSymbol__']);
+        console.log('');
         return {
           subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
         };

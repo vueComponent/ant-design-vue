@@ -14,7 +14,7 @@ const cwd = process.cwd();
 function dist(done) {
   rimraf.sync(path.join(cwd, '_site'));
   process.env.RUN_ENV = 'PRODUCTION';
-  const webpackConfig = require(path.join(cwd, 'webpack.site.config.js'));
+  const webpackConfig = require(path.join(cwd, 'build/webpack.site.conf.js'));
   webpack(webpackConfig, (err, stats) => {
     if (err) {
       console.error(err.stack || err);

@@ -32,7 +32,7 @@ export default {
   },
   watch: {
     value(val) {
-      this.sValue = val;
+      this.sValue = val || [];
     },
   },
   methods: {

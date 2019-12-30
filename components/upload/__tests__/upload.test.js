@@ -3,10 +3,13 @@ import Upload from '..';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from '../utils';
 import PropsTypes from '../../_util/vue-types';
 import { UploadListProps } from '../interface';
+import { setup, teardown } from './mock';
 
 UploadListProps.items = PropsTypes.any;
 
 describe('Upload', () => {
+  beforeEach(() => setup());
+  afterEach(() => teardown());
   it('should get refs inside Upload in componentDidMount', () => {
     let ref = null;
     const APP = {

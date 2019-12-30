@@ -127,6 +127,7 @@ export default {
         prefixCls: inputPrefixCls,
         size,
         suffix: this.renderSuffix(prefixCls),
+        prefix: getComponentFromProp(this, 'prefix'),
         addonAfter: this.renderAddonAfter(prefixCls),
         addonBefore,
       },

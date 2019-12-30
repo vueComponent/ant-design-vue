@@ -22,6 +22,7 @@ function showIf(condition, el) {
 }
 
 const CalendarHeader = {
+  name: 'CalendarHeader',
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
@@ -67,6 +68,14 @@ const CalendarHeader = {
     onDecadeSelect(value) {
       this.__emit('panelChange', value, 'year');
       this.__emit('valueChange', value);
+    },
+
+    changeYear(direction) {
+      if (direction > 0) {
+        this.nextYear();
+      } else {
+        this.previousYear();
+      }
     },
 
     monthYearElement(showTimePicker) {
@@ -149,7 +158,7 @@ const CalendarHeader = {
       panel = (
         <MonthPanel
           locale={locale}
-          defaultValue={value}
+          value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
@@ -157,6 +166,7 @@ const CalendarHeader = {
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
           renderFooter={renderFooter}
+          changeYear={this.changeYear}
         />
       );
     }

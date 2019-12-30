@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/dropdown/demo/basic.md correctly 1`] = `
-<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
     </svg></i></a>
 `;
@@ -10,31 +10,31 @@ exports[`renders ./components/dropdown/demo/context-menu.md correctly 1`] = `<sp
 
 exports[`renders ./components/dropdown/demo/dropdown-button.md correctly 1`] = `
 <div>
-  <div class="ant-btn-group ant-dropdown-button"><button type="button" class="ant-btn ant-btn-default"><span>Dropdown</span></button><button type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><i aria-label="icon: ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+  <div class="ant-btn-group ant-dropdown-button"><button type="button" class="ant-btn ant-btn-default"><span>Dropdown</span></button><button type="button" class="ant-btn ant-btn-default ant-btn-icon-only ant-dropdown-trigger"><i aria-label="icon: ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
           <path d="M176 511a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm280 0a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm280 0a56 56 0 1 0 112 0 56 56 0 1 0-112 0z"></path>
         </svg></i></button></div>
-  <div class="ant-btn-group ant-dropdown-button" style="margin-left: 8px;"><button disabled="disabled" type="button" class="ant-btn ant-btn-default"><span>Dropdown</span></button><button disabled="disabled" type="button" class="ant-btn ant-btn-default ant-dropdown-trigger"><i aria-label="icon: ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+  <div class="ant-btn-group ant-dropdown-button" style="margin-left: 8px;"><button disabled="disabled" type="button" class="ant-btn ant-btn-default"><span>Dropdown</span></button><button disabled="disabled" type="button" class="ant-btn ant-btn-default ant-btn-icon-only ant-dropdown-trigger"><i aria-label="icon: ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
           <path d="M176 511a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm280 0a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm280 0a56 56 0 1 0 112 0 56 56 0 1 0-112 0z"></path>
-        </svg></i></button></div> <button type="button" class="ant-btn ant-dropdown-trigger" style="margin-left: 8px;"><span>Button</span><i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+        </svg></i></button></div> <button type="button" class="ant-btn ant-dropdown-trigger" style="margin-left: 8px;"><span>Button</span><i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i></button>
 </div>
 `;
 
 exports[`renders ./components/dropdown/demo/event.md correctly 1`] = `
-<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me, Click menu item <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me, Click menu item <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
     </svg></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/item.md correctly 1`] = `
-<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
     </svg></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/overlay-visible.md correctly 1`] = `
-<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Hover me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
     </svg></i></a>
 `;
@@ -50,13 +50,13 @@ exports[`renders ./components/dropdown/demo/placement.md correctly 1`] = `
 `;
 
 exports[`renders ./components/dropdown/demo/sub-menu.md correctly 1`] = `
-<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Cascading menu <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Cascading menu <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
     </svg></i></a>
 `;
 
 exports[`renders ./components/dropdown/demo/trigger.md correctly 1`] = `
-<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Click me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+<a href="#" class="ant-dropdown-link ant-dropdown-trigger"> Click me <i aria-label="icon: down" class="anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
     </svg></i></a>
 `;

@@ -163,7 +163,7 @@ exports[`renders ./components/carousel/demo/basic.md correctly 1`] = `
 exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
-    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; z-index: 1; display: block;"><i aria-label="icon: left-circle" class="anticon anticon-left-circle"><svg viewBox="64 64 896 896" data-icon="left-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; z-index: 1; display: block;"><i aria-label="icon: left-circle" class="anticon anticon-left-circle"><svg viewBox="64 64 896 896" data-icon="left-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
           <path d="M603.3 327.5l-246 178a7.95 7.95 0 0 0 0 12.9l246 178c5.3 3.8 12.7 0 12.7-6.5V643c0-10.2-4.9-19.9-13.2-25.9L457.4 512l145.4-105.2c8.3-6 13.2-15.6 13.2-25.9V334c0-6.5-7.4-10.3-12.7-6.5z"></path>
           <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
         </svg></i></div>
@@ -234,7 +234,7 @@ exports[`renders ./components/carousel/demo/customArrows.md correctly 1`] = `
         </div>
       </div>
     </div>
-    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;"><i aria-label="icon: right-circle" class="anticon anticon-right-circle"><svg viewBox="64 64 896 896" data-icon="right-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;"><i aria-label="icon: right-circle" class="anticon anticon-right-circle"><svg viewBox="64 64 896 896" data-icon="right-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
           <path d="M666.7 505.5l-246-178A8 8 0 0 0 408 334v46.9c0 10.2 4.9 19.9 13.2 25.9L566.6 512 421.2 617.2c-8.3 6-13.2 15.6-13.2 25.9V690c0 6.5 7.4 10.3 12.7 6.5l246-178c4.4-3.2 4.4-9.8 0-13z"></path>
           <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
         </svg></i></div>

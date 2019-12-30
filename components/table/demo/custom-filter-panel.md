@@ -109,7 +109,7 @@ Implement a customized column search example via `filterDropdown`.
               filterIcon: 'filterIcon',
               customRender: 'customRender',
             },
-            onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
+            onFilter: (value, record) => record.name.toString().toLowerCase().includes(value.toLowerCase()),
             onFilterDropdownVisibleChange: visible => {
               if (visible) {
                 setTimeout(() => {
@@ -127,7 +127,7 @@ Implement a customized column search example via `filterDropdown`.
               filterIcon: 'filterIcon',
               customRender: 'customRender',
             },
-            onFilter: (value, record) => record.age.toLowerCase().includes(value.toLowerCase()),
+            onFilter: (value, record) => record.age.toString().toLowerCase().includes(value.toLowerCase()),
             onFilterDropdownVisibleChange: visible => {
               if (visible) {
                 setTimeout(() => {
@@ -145,7 +145,7 @@ Implement a customized column search example via `filterDropdown`.
               filterIcon: 'filterIcon',
               customRender: 'customRender',
             },
-            onFilter: (value, record) => record.address.toLowerCase().includes(value.toLowerCase()),
+            onFilter: (value, record) => record.address.toString().toLowerCase().includes(value.toLowerCase()),
             onFilterDropdownVisibleChange: visible => {
               if (visible) {
                 setTimeout(() => {

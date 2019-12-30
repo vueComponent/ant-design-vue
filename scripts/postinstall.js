@@ -33,5 +33,5 @@ if (!ADBLOCK && !CI && !DISABLE_OPENCOLLECTIVE && !SILENT) {
       emoji.get('pray') +
       '\u001B[0m',
   );
-  log('\u001B[96m>\u001B[94m https://ant-design-vue.gitee.io/docs/vue/sponsor-cn \u001B[0m\n');
+  log('\u001B[96m>\u001B[94m https://www.antdv.com/docs/vue/sponsor-cn \u001B[0m\n');
 }

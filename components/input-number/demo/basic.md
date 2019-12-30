@@ -11,7 +11,7 @@ Numeric-only input box.
 ```tpl
 <template>
   <div>
-    <a-input-number :min="1" :max="10" v-model="value" @change="onChange" />
+    <a-input-number id="inputNumber" :min="1" :max="10" v-model="value" @change="onChange" />
     当前值：{{value}}
   </div>
 </template>

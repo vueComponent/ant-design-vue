@@ -12,6 +12,10 @@
       content="An enterprise-class UI components based on Ant Design and Vue"
     />
     <title>Ant Design Vue</title>
+    <meta
+      name="keywords"
+      content="ant design vue,ant-design-vue,ant-design-vue admin,ant design pro,vue ant design,vue ant design pro,vue ant design admin,ant design vue官网,ant design vue中文文档,ant design vue文档"
+    />
     <link rel="shortcut icon" type="image/x-icon" href="https://qn.antdv.com/favicon.ico" />
     <style id="nprogress-style">
       #nprogress {
@@ -19,6 +23,9 @@
       }
     </style>
     <script>
+      if (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design') {
+        location.replace(location.href.replace(location.host, 'www.antdv.com'));
+      }
       var _hmt = _hmt || [];
       var srcMap = {
         'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',
@@ -40,13 +47,21 @@
     <div id="app">
       <router-view></router-view>
     </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151755889-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-151755889-1');
+    </script>
     <!-- Hotjar Tracking Code for http://vue.ant.design -->
     <script>
       (function(h, o, t, j, a, r) {
-        if (
-          location.href.indexOf('iframe') === -1 &&
-          (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design')
-        ) {
+        if (location.href.indexOf('iframe') === -1) {
           h.hj =
             h.hj ||
             function() {

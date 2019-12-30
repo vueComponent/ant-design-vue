@@ -1,40 +1,3 @@
-```jsx
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
-  },
-  {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street',
-  },
-];
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-];
-
-<Table dataSource={dataSource} columns={columns} />;
-```
-
 ## API
 
 ### Table
@@ -71,7 +34,7 @@ const columns = [
 
 | Events Name | Description | Arguments |
 | --- | --- | --- |
-| change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter) |  |
+| change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter, { currentDataSource }) |  |
 | expand | Callback executed when the row expand icon is clicked | Function(expanded, record) |  |
 | expandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
 
@@ -88,7 +51,7 @@ Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`. Follow [V
       },
       on: {
         click: (event) => {},       // click row
-        doubleclick: (event) => {}, // double click row
+        dblclick: (event) => {}, // double click row
         contextmenu: (event) => {}  // right button click row
         mouseenter: (event) => {}   // mouse enter row
         mouseleave: (event) => {}   // mouse leave row

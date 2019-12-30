@@ -81,7 +81,9 @@ const Dropdown = {
 
     const dropdownTrigger = cloneElement($slots.default, {
       class: `${prefixCls}-trigger`,
-      disabled,
+      props: {
+        disabled,
+      },
     });
     const triggerActions = disabled ? [] : trigger;
     let alignPoint;

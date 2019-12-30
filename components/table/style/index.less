@@ -386,6 +386,13 @@
     .@{table-prefix-cls}-tbody > tr > td {
       border-right: @border-width-base @border-style-base @border-color-split;
     }
+
+    .@{table-prefix-cls}-title + .@{table-prefix-cls}-content {
+      .@{table-prefix-cls}-fixed-left,
+      .@{table-prefix-cls}-fixed-right {
+        border-radius: 0;
+      }
+    }
   }
 
   &-placeholder {

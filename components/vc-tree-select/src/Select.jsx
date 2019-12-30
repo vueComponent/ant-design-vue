@@ -789,7 +789,8 @@ const Select = {
       this.setOpenState(open, true);
     },
 
-    onSearchInputChange({ target: { value } }) {
+    onSearchInputChange(event) {
+      const value = event.target.value;
       const { _treeNodes: treeNodes, _valueEntities: valueEntities } = this.$data;
       const { filterTreeNode, treeNodeFilterProp } = this.$props;
       this.__emit('update:searchValue', value);

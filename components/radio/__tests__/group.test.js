@@ -139,7 +139,7 @@ describe('Radio', () => {
     expect(onChange.mock.calls.length).toBe(2);
   });
 
-  it('Trigger onChange when both of radioButton and radioGroup exists', () => {
+  it('Trigger onChange when both of radioButton and radioGroup exists', async () => {
     const onChange = jest.fn();
     const props = {};
     const wrapper = mount(
@@ -155,10 +155,12 @@ describe('Radio', () => {
     radios.at(0).trigger('change');
     expect(onChange.mock.calls.length).toBe(1);
 
-    // controlled component
-    wrapper.setProps({ value: 'A' });
-    radios.at(1).trigger('change');
-    expect(onChange.mock.calls.length).toBe(2);
+    asyncExpect(() => {
+      // controlled component
+      wrapper.setProps({ value: 'A' });
+      radios.at(1).trigger('change');
+      expect(onChange.mock.calls.length).toBe(2);
+    });
   });
 
   // it('should only trigger once when in group with options', () => {
@@ -216,7 +218,10 @@ describe('Radio', () => {
   });
 
   it('passes prefixCls down to radio', () => {
-    const options = [{ label: 'Apple', value: 'Apple' }, { label: 'Orange', value: 'Orange' }];
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Orange', value: 'Orange' },
+    ];
 
     const wrapper = mount(RadioGroup, {
       propsData: {

@@ -42,7 +42,7 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    const { value, defaultValue } = this.$props;
+    const { value = '', defaultValue = '' } = this.$props;
     return {
       stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
       nextFrameActionId: undefined,
@@ -116,15 +116,16 @@ export default {
     },
 
     handleTextareaChange(e) {
+      const { value, composing } = e.target;
+      if (composing || this.stateValue === value) return;
       if (!hasProp(this, 'value')) {
-        this.stateValue = e.target.value;
+        this.stateValue = value;
         this.resizeTextarea();
       } else {
         this.$forceUpdate();
       }
-      if (!e.target.composing) {
-        this.$emit('change.value', e.target.value);
-      }
+
+      this.$emit('change.value', value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
@@ -154,6 +155,7 @@ export default {
       'type',
       'value',
       'defaultValue',
+      'lazy',
     ]);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
@@ -163,6 +165,7 @@ export default {
     });
 
     const textareaProps = {
+      directives: [{ name: 'ant-input' }],
       attrs: { ...otherProps, ...$attrs },
       on: {
         ...$listeners,
@@ -171,9 +174,6 @@ export default {
         change: noop,
       },
     };
-    if ($listeners['change.value']) {
-      textareaProps.directives = [{ name: 'ant-input' }];
-    }
     return (
       <textarea
         {...textareaProps}

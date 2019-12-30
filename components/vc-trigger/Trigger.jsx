@@ -78,6 +78,7 @@ export default {
   inject: {
     vcTriggerContext: { default: () => ({}) },
     savePopupRef: { default: () => noop },
+    dialogContext: { default: () => null },
   },
   data() {
     const props = this.$props;
@@ -114,7 +115,9 @@ export default {
       };
     });
   },
-
+  deactivated() {
+    this.setPopupVisible(false);
+  },
   mounted() {
     this.$nextTick(() => {
       this.renderComponent(null);
@@ -420,7 +423,7 @@ export default {
     },
 
     getContainer() {
-      const { $props: props } = this;
+      const { $props: props, dialogContext } = this;
       const popupContainer = document.createElement('div');
       // Make sure default popup container will never cause scrollbar appearing
       // https://github.com/react-component/trigger/issues/41
@@ -429,7 +432,7 @@ export default {
       popupContainer.style.left = '0';
       popupContainer.style.width = '100%';
       const mountNode = props.getPopupContainer
-        ? props.getPopupContainer(this.$el)
+        ? props.getPopupContainer(this.$el, dialogContext)
         : props.getDocument().body;
       mountNode.appendChild(popupContainer);
       this.popupContainer = popupContainer;
@@ -625,7 +628,7 @@ export default {
       };
     }
 
-    const trigger = cloneElement(child, newChildProps);
+    this.trigger = cloneElement(child, newChildProps);
 
     return (
       <ContainerRender
@@ -637,7 +640,7 @@ export default {
         getContainer={this.getContainer}
         children={({ renderComponent }) => {
           this.renderComponent = renderComponent;
-          return trigger;
+          return this.trigger;
         }}
       />
     );

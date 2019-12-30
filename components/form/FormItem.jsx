@@ -47,7 +47,9 @@ function comeFromSlot(vnodes = [], itemVnode) {
     if (vnode && (vnode === itemVnode || vnode.$vnode === itemVnode)) {
       isSlot = true;
     } else {
-      const children = vnode.componentOptions ? vnode.componentOptions.children : vnode.children;
+      const componentOptions =
+        vnode.componentOptions || (vnode.$vnode && vnode.$vnode.componentOptions);
+      const children = componentOptions ? componentOptions.children : vnode.$children;
       isSlot = comeFromSlot(children, itemVnode);
     }
     if (isSlot) {
@@ -94,7 +96,8 @@ export default {
     const { help, validateStatus } = this.$props;
     warning(
       this.getControls(this.slotDefault, true).length <= 1 ||
-        (help !== undefined || validateStatus !== undefined),
+        help !== undefined ||
+        validateStatus !== undefined,
       '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
         'while there are more than one `getFieldDecorator` in it.',
     );
@@ -312,7 +315,8 @@ export default {
     },
 
     renderWrapper(prefixCls, children) {
-      const { wrapperCol = {} } = this;
+      const { FormProps: { wrapperCol: wrapperColForm = {} } = {} } = this;
+      const { wrapperCol = wrapperColForm } = this;
       const { class: cls, style, id, on, ...restProps } = wrapperCol;
       const className = classNames(`${prefixCls}-item-control-wrapper`, cls);
       const colProps = {
@@ -367,7 +371,8 @@ export default {
     },
 
     renderLabel(prefixCls) {
-      const { labelCol = {}, colon, id } = this;
+      const { FormProps: { labelCol: labelColForm = {} } = {} } = this;
+      const { labelCol = labelColForm, colon, id } = this;
       const label = getComponentFromProp(this, 'label');
       const required = this.isRequired();
       const {

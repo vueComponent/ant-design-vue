@@ -14,6 +14,8 @@ import { isZhCN } from '../util';
 import { Provider, create } from '../../components/_util/store';
 import NProgress from 'nprogress';
 import MobileMenu from '../../components/vc-drawer/src';
+import GoogleAdsTop from './GoogleAdsTop';
+import GoogleAds from './GoogleAds';
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -133,7 +135,7 @@ export default {
       return (
         <a-anchor offsetTop={100} class="demo-anchor">
           {lis}
-          {showApi ? <a-anchor-link key="API" title="API" href="#API" /> : ''}
+          {showApi ? <a-anchor-link key="API" title="API" href="#api" /> : ''}
         </a-anchor>
       );
     },
@@ -240,7 +242,7 @@ export default {
     }
     const config = AllDemo[titleMap[reName]];
     this.resetDocumentTitle(config, reName, isCN);
-    const { isMobile } = this;
+    const { isMobile, $route } = this;
     return (
       <div class="page-wrapper">
         <Header searchData={searchData} name={name} />
@@ -294,10 +296,11 @@ export default {
               )}
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class="main-container main-container-component">
-                  <CarbonAds isMobile={isMobile} />
+                  <GoogleAdsTop key={`GoogleAdsTop_${$route.path}`} />
+                  {!isMobile ? <CarbonAds /> : null}
                   <GeektimeAds isMobile={isMobile} />
                   {!isMobile ? (
-                    <div class="toc-affix" style="width: 150px;">
+                    <div class={['toc-affix', isCN ? 'toc-affix-cn' : '']} style="width: 150px;">
                       {this.getSubMenu(isCN)}
                     </div>
                   ) : null}
@@ -330,6 +333,7 @@ export default {
                           ],
                         }}
                       ></router-view>
+                      <GoogleAds key={`GoogleAds_${$route.path}`} />
                     </div>
                   ) : (
                     ''

@@ -4,9 +4,9 @@
       href="https://time.geekbang.org/course/intro/163?code=KHKYcoBU6vZa8nMglg7AWfDxxi3BWrz9INAzAY3umPk%3D"
       target="_blank"
     >
-      <img width="170" alt="Vue 实战教程" src="https://qn.antdv.com/geektime-vue.jpeg" />
+      <img width="150" alt="Vue 实战教程" src="https://qn.antdv.com/geektime-vue.jpeg" />
     </a>
-    <div v-if="isMobile" class="close" @click="visible = false">
+    <div class="close" @click="visible = false">
       <a-icon type="close" />
     </div>
   </div>
@@ -26,8 +26,8 @@ export default {
 <style lang="less" scoped>
 #geektime {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: 10px;
+  right: 10px;
   .close {
     position: absolute;
     text-align: center;

@@ -53,9 +53,14 @@ export default {
       if (!showInfo) return null;
 
       let text;
-      const textFormatter = format || (percentNumber => `${percentNumber}%`);
+      const textFormatter =
+        format || this.$scopedSlots.format || (percentNumber => `${percentNumber}%`);
       const iconType = type === 'circle' || type === 'dashboard' ? '' : '-circle';
-      if (format || (progressStatus !== 'exception' && progressStatus !== 'success')) {
+      if (
+        format ||
+        this.$scopedSlots.format ||
+        (progressStatus !== 'exception' && progressStatus !== 'success')
+      ) {
         text = textFormatter(validProgress(percent), validProgress(successPercent));
       } else if (progressStatus === 'exception') {
         text = <Icon type={`close${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;

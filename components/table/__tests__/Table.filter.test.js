@@ -21,7 +21,10 @@ describe('Table.filter', () => {
       {
         text: 'Title',
         value: 'title',
-        children: [{ text: 'Designer', value: 'designer' }, { text: 'Coder', value: 'coder' }],
+        children: [
+          { text: 'Designer', value: 'designer' },
+          { text: 'Coder', value: 'coder' },
+        ],
       },
     ],
     onFilter: filterFn,
@@ -358,7 +361,10 @@ describe('Table.filter', () => {
               title="name"
               dataIndex="name"
               key="name"
-              filters={[{ text: 'Jack', value: 'Jack' }, { text: 'Lucy', value: 'Lucy' }]}
+              filters={[
+                { text: 'Jack', value: 'Jack' },
+                { text: 'Lucy', value: 'Lucy' },
+              ]}
               filteredValue={this.filters.name}
               onFilter={filterFn}
             />
@@ -399,7 +405,10 @@ describe('Table.filter', () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            filters: [{ text: 'Jack', value: 'Jack' }, { text: 'Lucy', value: 'Lucy' }],
+            filters: [
+              { text: 'Jack', value: 'Jack' },
+              { text: 'Lucy', value: 'Lucy' },
+            ],
             onFilter: filterFn,
             filteredValue: ['Jack'],
           },

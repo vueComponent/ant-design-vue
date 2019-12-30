@@ -4,10 +4,10 @@
 
 import { AntdComponent } from '../component';
 import { VNode } from 'vue';
-import AStatisticCountdown from './statistic-countdown';
+import { StatisticCountdown } from './statistic-countdown';
 
 export declare class Statistic extends AntdComponent {
-  static AStatisticCountdown: typeof AStatisticCountdown;
+  static Countdown: typeof StatisticCountdown;
   /**
    * decimal separator
    * @default '.'

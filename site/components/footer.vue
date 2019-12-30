@@ -60,11 +60,6 @@ export default {
                     AntD Library
                   </a>
                 </div>
-                <div>
-                  <a href="http://ant-design-vue.gitee.io/" target="_blank">
-                    <span>{isCN ? '国内镜像' : 'China Mirror'} 🇨🇳</span>
-                  </a>
-                </div>
               </div>
             </a-col>
             <a-col md={6} sm={24} xs={24}>
@@ -122,6 +117,12 @@ export default {
               </div>
             </a-col>
           </a-row>
+        </div>
+        <div style="padding: 10px 144px;">
+          备案号：
+          <a href="http://www.beian.miit.gov.cn/" target="_blank">
+            浙ICP备19034671号
+          </a>
         </div>
       </footer>
     );

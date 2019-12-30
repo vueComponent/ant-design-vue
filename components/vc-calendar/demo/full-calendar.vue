@@ -1,5 +1,5 @@
 <script>
-/* eslint react/no-multi-comp:0, no-console:0 */
+/* eslint no-console:0 */
 import '../assets/index.less';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';

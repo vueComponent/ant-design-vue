@@ -32,8 +32,10 @@ export default {
       return `${opt.value} ${this.locale.items_per_page}`;
     },
     handleChange(e) {
+      const { value, composing } = e.target;
+      if (composing || this.goInputText === value) return;
       this.setState({
-        goInputText: e.target.value,
+        goInputText: value,
       });
     },
     handleBlur() {
@@ -49,10 +51,11 @@ export default {
         return;
       }
       if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
+        // https://github.com/vueComponent/ant-design-vue/issues/1316
+        this.quickGo(this.getValidValue());
         this.setState({
           goInputText: '',
         });
-        this.quickGo(this.getValidValue());
       }
     },
   },
@@ -125,9 +128,16 @@ export default {
             disabled={disabled}
             type="text"
             value={goInputText}
-            onChange={this.handleChange}
+            onInput={this.handleChange}
             onKeyup={this.go}
             onBlur={this.handleBlur}
+            {...{
+              directives: [
+                {
+                  name: 'ant-input',
+                },
+              ],
+            }}
           />
           {locale.page}
           {gotoButton}

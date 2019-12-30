@@ -62,12 +62,10 @@ const Header = {
   },
 
   methods: {
-    onInputChange(event) {
-      const str = event.target.value;
-      // https://github.com/vueComponent/ant-design-vue/issues/92
-      if (isIE && !isIE9 && this.str === str) {
-        return;
-      }
+    onInputChange(e) {
+      const { value: str, composing } = e.target;
+      const { str: oldStr = '' } = this;
+      if (composing || oldStr === str) return;
 
       this.setState({
         str,
@@ -178,6 +176,13 @@ const Header = {
           placeholder={placeholder}
           onInput={this.onInputChange}
           readOnly={!!inputReadOnly}
+          {...{
+            directives: [
+              {
+                name: 'ant-input',
+              },
+            ],
+          }}
         />
       );
     },

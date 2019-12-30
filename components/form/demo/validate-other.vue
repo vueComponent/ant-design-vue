@@ -9,13 +9,18 @@ Demonstration of validation configuration for form controls which are not shown 
 </us>
 
 <template>
-  <a-form id="components-form-demo-validate-other" :form="form" @submit="handleSubmit">
-    <a-form-item v-bind="formItemLayout" label="Plain Text">
+  <a-form
+    id="components-form-demo-validate-other"
+    :form="form"
+    v-bind="formItemLayout"
+    @submit="handleSubmit"
+  >
+    <a-form-item label="Plain Text">
       <span class="ant-form-text">
         China
       </span>
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="Select" has-feedback>
+    <a-form-item label="Select" has-feedback>
       <a-select
         v-decorator="[
           'select',
@@ -32,7 +37,7 @@ Demonstration of validation configuration for form controls which are not shown 
       </a-select>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Select[multiple]">
+    <a-form-item label="Select[multiple]">
       <a-select
         v-decorator="[
           'select-multiple',
@@ -57,25 +62,25 @@ Demonstration of validation configuration for form controls which are not shown 
       </a-select>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="InputNumber">
+    <a-form-item label="InputNumber">
       <a-input-number v-decorator="['input-number', { initialValue: 3 }]" :min="1" :max="10" />
       <span class="ant-form-text">
         machines
       </span>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Switch">
+    <a-form-item label="Switch">
       <a-switch v-decorator="['switch', { valuePropName: 'checked' }]" />
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Slider">
+    <a-form-item label="Slider">
       <a-slider
         v-decorator="['slider']"
         :marks="{ 0: 'A', 20: 'B', 40: 'C', 60: 'D', 80: 'E', 100: 'F' }"
       />
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Radio.Group">
+    <a-form-item label="Radio.Group">
       <a-radio-group v-decorator="['radio-group']">
         <a-radio value="a">
           item 1
@@ -89,7 +94,7 @@ Demonstration of validation configuration for form controls which are not shown 
       </a-radio-group>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Radio.Button">
+    <a-form-item label="Radio.Button">
       <a-radio-group v-decorator="['radio-button']">
         <a-radio-button value="a">
           item 1
@@ -103,7 +108,7 @@ Demonstration of validation configuration for form controls which are not shown 
       </a-radio-group>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Checkbox.Group">
+    <a-form-item label="Checkbox.Group">
       <a-checkbox-group
         v-decorator="['checkbox-group', { initialValue: ['A', 'B'] }]"
         style="width: 100%;"
@@ -138,15 +143,11 @@ Demonstration of validation configuration for form controls which are not shown 
       </a-checkbox-group>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Rate">
+    <a-form-item label="Rate">
       <a-rate v-decorator="['rate', { initialValue: 3.5 }]" allow-half />
     </a-form-item>
 
-    <a-form-item
-      v-bind="formItemLayout"
-      label="Upload"
-      extra="longgggggggggggggggggggggggggggggggggg"
-    >
+    <a-form-item label="Upload" extra="longgggggggggggggggggggggggggggggggggg">
       <a-upload
         v-decorator="[
           'upload',
@@ -163,7 +164,7 @@ Demonstration of validation configuration for form controls which are not shown 
       </a-upload>
     </a-form-item>
 
-    <a-form-item v-bind="formItemLayout" label="Dragger">
+    <a-form-item label="Dragger">
       <div class="dropbox">
         <a-upload-dragger
           v-decorator="[

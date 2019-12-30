@@ -61,7 +61,7 @@ export default {
         },
         on: {
           click: onSelect,
-          doubleclick: onItemDoubleClick,
+          dblclick: onItemDoubleClick,
           mousedown: e => e.preventDefault(),
         },
         key: Array.isArray(key) ? key.join('__ant__') : key,

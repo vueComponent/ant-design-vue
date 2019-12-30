@@ -4,10 +4,12 @@ import Input from '..';
 import Form from '../../form';
 import focusTest from '../../../tests/shared/focusTest';
 
-const { TextArea } = Input;
+const { TextArea, Password } = Input;
 
 describe('Input', () => {
   focusTest(Input);
+  focusTest(TextArea);
+  focusTest(Password);
 
   it('should support maxLength', async () => {
     const wrapper = mount(Input, { attrs: { maxLength: 3 }, sync: false });
@@ -18,6 +20,14 @@ describe('Input', () => {
   it('select()', () => {
     const wrapper = mount(Input);
     wrapper.vm.select();
+  });
+
+  it('should not support allowClear when it is disabled', () => {
+    const wrapper = mount(Input, {
+      propsData: { allowClear: true, defaultValue: '111', disabled: true },
+      sync: false,
+    });
+    expect(wrapper.findAll('.ant-input-clear-icon').length).toBe(0);
   });
 });
 

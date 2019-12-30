@@ -5,6 +5,7 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | treeData | 节点的配置描述，具体项见下表, 1.1.4 之前的版本使用`treeNodes` | array | -- |
+| replaceFields | 替换 treeNode 中 title,key,children 字段为 treeData 中对应的字段 | object | {children:'children', title:'title', key:'key' } |
 | autoExpandParent | 是否自动展开父节点 | boolean | true |
 | checkable | 节点前添加 Checkbox 复选框 | boolean | false |
 | checkedKeys(v-model) | （受控）选中复选框的树节点（注意：父子节点有关联，如果传入父节点 key，则子节点自动选中；相应当子节点 key 都传入，父节点也自动选中。当设置`checkable`和`checkStrictly`，它是一个有`checked`和`halfChecked`属性的对象，并且父子节点的选中与否不再关联 | string\[] \| number\[] \| {checked: string\[] \| number\[], halfChecked: string\[] \| number\[]} | \[] |
@@ -63,9 +64,9 @@
 
 ### DirectoryTree props
 
-| 参数         | 说明                                                 | 类型   | 默认值 |
-| ------------ | ---------------------------------------------------- | ------ | ------ |
-| expandAction | 目录展开逻辑，可选 `false` `'click'` `'doubleclick'` | string | click  |
+| 参数         | 说明                                              | 类型   | 默认值 |
+| ------------ | ------------------------------------------------- | ------ | ------ |
+| expandAction | 目录展开逻辑，可选 `false` `'click'` `'dblclick'` | string | click  |
 
 ## FAQ
 

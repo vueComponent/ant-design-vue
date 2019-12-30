@@ -123,7 +123,7 @@ const BasePopup = {
       _keyList: [],
       _expandedKeyList: expandedKeyList,
       // Cache `expandedKeyList` when tree is in filter. This is used in `getDerivedStateFromProps`
-      _cachedExpandedKeyList: [], // eslint-disable-line react/no-unused-state
+      _cachedExpandedKeyList: [],
       _loadedKeys: [],
       _prevProps: {},
     };

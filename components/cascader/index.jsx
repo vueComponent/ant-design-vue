@@ -251,7 +251,7 @@ const Cascader = {
     },
 
     handleKeyDown(e) {
-      if (e.keyCode === KeyCode.BACKSPACE) {
+      if (e.keyCode === KeyCode.BACKSPACE || e.keyCode === KeyCode.SPACE) {
         e.stopPropagation();
       }
     },

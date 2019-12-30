@@ -10,12 +10,120 @@
 
 ---
 
-## 1.14.0-beta.0
+## 1.4.10
 
-`2019-09-23`
+`2019-12-11`
+
+- 🐞 修复 `MonthPicker` 左右箭头切换月份失效问题 [#1543](https://github.com/vueComponent/ant-design-vue/issues/1543)
+
+## 1.4.9
+
+`2019-12-10`
+
+- 🐞 修复 `Modal` 打开时，body 滚动问题 [#1472](https://github.com/vueComponent/ant-design-vue/issues/1472)
+- 🐞 修复 `Drawer` wrapStyle 不生效问题 [#1481](https://github.com/vueComponent/ant-design-vue/issues/1481)
+- 🐞 修复 `InputNumber` id 挂载位置不正确的问题 [#1477](https://github.com/vueComponent/ant-design-vue/issues/1477)
+- 🐞 修复 `Tabs` nextClick 事件不触发的问题 [#1489](https://github.com/vueComponent/ant-design-vue/pull/1489)
+- 🐞 修复 `MonthPicker` 在 open 状态下，不能更改值的问题 [#1510](https://github.com/vueComponent/ant-design-vue/issues/1510)
+- 🐞 修复 `AutoComplete` 在输入中文时 `placeholder` 不消失的问题 [#1506](https://github.com/vueComponent/ant-design-vue/issues/1506)
+- 🐞 修复在引用不同 Vue 变量时，无法弹出内容的问题 [6362bf](https://github.com/vueComponent/ant-design-vue/commit/6362bf9edb441c0c0096beca1d2c8727003dbb15)
+- 🌟 `Table` `customRender` 添加第三个 column 参数 [#1513](https://github.com/vueComponent/ant-design-vue/pull/1513)
+- 🌟 `InputPassword` 添加 focus、blur 方法 [#1485](https://github.com/vueComponent/ant-design-vue/pull/1485)
+- 🐞 修复 `Tooltip` 使用在原生 html 元素时报错的问题 [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
+- 🐞 修复 `Menu` 在 edge 浏览器下报错的问题 [#1492](https://github.com/vueComponent/ant-design-vue/issues/1492)
+- 🐞 修复 `Select` 的 empty 不居中的问题 [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445)
+- 🐞 修复弹窗类组件内存泄漏问题 [#1483](https://github.com/vueComponent/ant-design-vue/pull/1483)
+
+## 1.4.8
+
+`2019-11-28`
+
+- 🐞 修复 `Menu` click 事件不触发的问题 [#1470](https://github.com/vueComponent/ant-design-vue/issues/1470)
+- 🐞 修复 `Tooltip` 在 keep-alive 下不消失的问题 [16ec40](https://github.com/vueComponent/ant-design-vue/commit/16ec40a012d7c400bf3028e6c938050dd6d7de2f)
+
+## 1.4.7
+
+`2019-11-27`
+
+- 🌟 `ConfigProvider` 的 `getPopupContainer` 新增弹窗上下文做为第二个参数，用于统一配置 `Modal` 内的 `getPopupContainer` [7a3c88](https://github.com/vueComponent/ant-design-vue/commit/7a3c88107598b4b1cf6842d3254b43dc26103c14)
+- 🐞 修复 `ConfigProvider` 在 Vue 2.5 版本下报错问题 [309baa](https://github.com/vueComponent/ant-design-vue/commit/309baa138a9c9a1885c17ef636c9132349024359)
+- 🐞 修复 `Menu` click 事件触发两次的问题 [#1450](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 修复 `Select` 内的 input 框宽度不正确的问题 [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458)
+- 🐞 修复 `Select` 在输入中文时 `placeholder` 不消失的问题 [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458#issuecomment-557477782)
+- 🌟 添加 `Comment` 组件的 TS 类型声明 [#1453](https://github.com/vueComponent/ant-design-vue/pull/1453)
+
+## 1.4.6
+
+`2019-11-20`
+
+- 🐞 修复 `Cascader` 不能输入空格的问题 [#1427](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 修复 `AutoComplete` 不能删除最后一个字符的问题 [#1429](https://github.com/vueComponent/ant-design-vue/issues/1427)
+- 🐞 更新 `Tree` 的 `expandAction` 中的 `dbclick` 为 `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🐞 更新 `Table` 文档中的 `dbclick` 为 `dblclick` [#1437](https://github.com/vueComponent/ant-design-vue/issues/1437)
+- 🌟 添加 `Empty` 组件的 TS 类型声明 [#1439](https://github.com/vueComponent/ant-design-vue/pull/1439)
+
+## 1.4.5
+
+`2019-11-16`
+
+- 🌟 `Form` 支持 `labelCol` `wrapperCol` 统一设置布局 [#1365](https://github.com/vueComponent/ant-design-vue/pull/1365)
+- 🌟 `Input` `Select` `DatePicker` 输入中文完毕后触发相关事件，减少不必要的性能消耗[#1281](https://github.com/vueComponent/ant-design-vue/issues/1281)
+- 🐞 修复 `Input` `Select` 的 placeholder 为中文时，在 ie 下自动触发 change 事件问题 [#1387](https://github.com/vueComponent/ant-design-vue/issues/1387)
+- Tree
+
+  - 🌟 添加 replaceFields 字段用来自定义 title children。[#1395](https://github.com/vueComponent/ant-design-vue/issues/1395)
+  - 🌟 更新事件 doubleclick 为 dbclick [5e27ff](https://github.com/vueComponent/ant-design-vue/commit/5e27ff8da4419f490ab5c6ebeaf43d933519fcd7)
+
+- 🐞 修复 Input 在 ie9 下删除内容不触发 change 事件问题 [#1421](https://github.com/vueComponent/ant-design-vue/issues/1421)
+- 🐞 修复 Dropdown disabled 无效问题 [#1400](https://github.com/vueComponent/ant-design-vue/issues/1400)
+- 🐞 修复 Select lableInValue 时类型校验错误 [#1393](https://github.com/vueComponent/ant-design-vue/pull/1393)
+- 🐞 修复 Comment 样式问题 [#1389](https://github.com/vueComponent/ant-design-vue/pull/1389)
+- 🐞 修复 `Statistic` `Password` TypeScript 类型定义。
+
+## 1.4.4
+
+`2019-10-30`
+
+- 🌟 Progress format 支持 v-slot [#1348](https://github.com/vueComponent/ant-design-vue/issues/1348)
+- 🐞 修复 RangePicker 年份面板失效问题 [#1321](https://github.com/vueComponent/ant-design-vue/issues/1321)
+- 🐞 修复 Pagination simple 模式失效问题 [#1333](https://github.com/vueComponent/ant-design-vue/issues/1333)
+- 🐞 修复 AutoComplete 快速输入时闪动现象 [#1327](https://github.com/vueComponent/ant-design-vue/issues/1327)
+- 🐞 修复 Button loading 模式下不居中问题 [#1337](https://github.com/vueComponent/ant-design-vue/issues/1337)
+- 🐞 修复 Menu margin 间距重叠，以及导致的展开时卡顿问题 [#873](https://github.com/vueComponent/ant-design-vue/issues/873)
+- 🐞 修复 Checkbox v-model 参数校验失败问题 [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+- 🐞 修复 Checkbox.Group 更新 value undefined 时报错问题 [#1356](https://github.com/vueComponent/ant-design-vue/issues/1356)
+
+## 1.4.3
+
+`2019-10-22`
+
+- 🐞 修复 Input 导致的 Cascader 组件样式问题 [#1293](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复部分组件不能使用 `<template slot="xxx" />` 问题 [041839](https://github.com/vueComponent/ant-design-vue/commit/041839b90131d3a4e6a5663986b811d60d4e6ba2)
+
+## 1.4.2
+
+`2019-10-21`
+
+- 🐞 修复 Radio.Group 触发多次 change 回调问题 [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复 Pagination 输入框跳转无效问题 [#1316](https://github.com/vueComponent/ant-design-vue/issues/1316)
+
+## 1.4.1
+
+`2019-10-17`
+
+- 🐞 修复 `Input.Password` 无法使用 `v-model` 的问题 [#1306](https://github.com/vueComponent/ant-design-vue/issues/1306)
+- 🌟 优化 `Input` 的清除按钮显示逻辑 [#1296](https://github.com/vueComponent/ant-design-vue/issues/1296)
+- 🌟 点击清除按钮后 `Input` 变为 `focus` 状态
+- 🐞 修复 `Progress` 的 `strokeWidth` 属性失效问题 [#1301](https://github.com/vueComponent/ant-design-vue/issues/1301)
+- 🐞 修复 Radio.Group 触发多次 change 回调问题 [#1280](https://github.com/vueComponent/ant-design-vue/issues/1280)
+- 🐞 修复 Form initialValue 报错问题 [#1291](https://github.com/vueComponent/ant-design-vue/issues/1291)
+
+## 1.4.0
+
+`2019-10-14`
 
 - 🎉 新的组件 `Empty`，同时优化了各个组件的空数据状态样式！
-- 🎉 **新增 `Statistic` 统计/倒计时组件**。
+- 🎉 新增 `Statistic` 统计/倒计时组件。
 - 🎉 添加新的国际化资源北印度语（kn_IN）和坎那达语（kn_IN）。
 - 🌟 ConfigProvider 组件添加 `prefixCls` 属性。
 - Button
@@ -42,6 +150,7 @@
 - Form
   - 🌟 添加 `name` 选项到 `Form.create`。
   - 🌟 新增 `selfUpdate` 属性，用于提升表单性能 [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
+  - 🐞 修复当 `FormItem` 通过 slot 传递时浏览器卡死问题 [#1271](https://github.com/vueComponent/ant-design-vue/issues/1271)
 - 🌟 Tree 添加 `switcherIcon` 属性。
 - Dropdown
   - 🌟 Dropdown.Button 支持 `href` 属性。
@@ -81,7 +190,9 @@
 - 🐞 修复水波纹在 Edge 下的样式问题。
 
 ## 1.3.17
+
 `2019-09-29`
+
 - 🌟 `Form` 新增 `selfUpdate` 属性，用于提升表单性能 [#1049](https://github.com/vueComponent/ant-design-vue/issues/1049)
 - `Select`
   - 🐞 修复 keydown 键盘事件失效问题
@@ -258,8 +369,8 @@
 
 1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
 
-- 🔥 增加了一个新组件 [Comment](https://vue.ant.design/components/comment-cn/)。
-- 🔥 增加了一个新组件 [ConfigProvider](https://vue.ant.design/components/config-provider-cn/) 为组件提供统一的全局化配置。
+- 🔥 增加了一个新组件 [Comment](https://www.antdv.com/components/comment-cn/)。
+- 🔥 增加了一个新组件 [ConfigProvider](https://www.antdv.com/components/config-provider-cn/) 为组件提供统一的全局化配置。
 
 组件修复/功能增强：
 

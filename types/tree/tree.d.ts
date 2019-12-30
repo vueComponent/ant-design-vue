@@ -17,6 +17,19 @@ export declare class Tree extends AntdComponent {
   treeData: TreeNode[];
 
   /**
+   *
+   *@description Replace the title,key and children fields in treeNode with the corresponding fields in treeData
+   */
+  replaceFields?: {
+    /**@default 'children' */
+    children?: string;
+    /**@default 'title' */
+    title?: string;
+    /**@default 'key' */
+    key?: string;
+  };
+
+  /**
    * Whether to automatically expand a parent treeNode
    * @default true
    * @type boolean

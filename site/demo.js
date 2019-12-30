@@ -375,6 +375,6 @@ export default {
     category: 'Components',
     subtitle: '描述列表',
     type: 'Data Display',
-    title: 'Descriptions'
-  }
+    title: 'Descriptions',
+  },
 };

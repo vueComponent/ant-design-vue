@@ -45,13 +45,11 @@ const renderBack = (instance, prefixCls, backIcon, onBack) => {
 };
 
 const renderBreadcrumb = (h, breadcrumb) => {
-  return <Breadcrumb {...breadcrumb } />;
+  return <Breadcrumb {...breadcrumb} />;
 };
 
 const renderTitle = (h, prefixCls, instance) => {
-  const {
-    avatar,
-  } = instance;
+  const { avatar } = instance;
   const title = getComponentFromProp(instance, 'title');
   const subTitle = getComponentFromProp(instance, 'subTitle');
   const tags = getComponentFromProp(instance, 'tags');
@@ -64,7 +62,7 @@ const renderTitle = (h, prefixCls, instance) => {
     return (
       <div class={headingPrefixCls}>
         {backIconDom}
-        {avatar && <Avatar {...avatar } />}
+        {avatar && <Avatar {...avatar} />}
         {title && <span class={`${headingPrefixCls}-title`}>{title}</span>}
         {subTitle && <span class={`${headingPrefixCls}-sub-title`}>{subTitle}</span>}
         {tags && <span class={`${headingPrefixCls}-tags`}>{tags}</span>}
@@ -94,19 +92,22 @@ const PageHeader = {
   },
   render(h) {
     const { getPrefixCls } = this.configProvider;
-    const {
-      prefixCls: customizePrefixCls,
-      breadcrumb,
-    } = this.$props;
+    const { prefixCls: customizePrefixCls, breadcrumb } = this.$props;
     const footer = getComponentFromProp(this, 'footer');
     const children = this.$slots.default;
 
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
-    const breadcrumbDom = breadcrumb && breadcrumb.props && breadcrumb.props.routes ? renderBreadcrumb(h, breadcrumb) : null;
-    const className = [prefixCls, {
-      'has-breadcrumb': breadcrumbDom,
-      'has-footer': footer,
-    }];
+    const breadcrumbDom =
+      breadcrumb && breadcrumb.props && breadcrumb.props.routes
+        ? renderBreadcrumb(h, breadcrumb)
+        : null;
+    const className = [
+      prefixCls,
+      {
+        'has-breadcrumb': breadcrumbDom,
+        'has-footer': footer,
+      },
+    ];
 
     return (
       <div class={className}>

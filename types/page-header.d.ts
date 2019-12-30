@@ -5,7 +5,6 @@
 import { AntdComponent } from './component';
 
 export declare class PageHeader extends AntdComponent {
-
   /**
    * Custom backIcon
    * @default <Icon type="arrow-left" />

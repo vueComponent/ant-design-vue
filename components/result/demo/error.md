@@ -10,7 +10,7 @@ Complex error feedback.
 
 ```tpl
 <template>
-  <a-result 
+  <a-result
     status="error"
     title="Submission Failed"
     subTitle="Please check and modify the following information before resubmitting."

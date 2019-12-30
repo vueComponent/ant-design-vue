@@ -43,11 +43,12 @@ const renderIcon = (h, prefixCls, { status, icon }) => {
   }
   // prop `icon` require slot or VNode
   const iconString = IconMap[status];
-  const iconNode = icon || <Icon type={iconString} theme="filled"/>;
+  const iconNode = icon || <Icon type={iconString} theme="filled" />;
   return <div class={`${prefixCls}-icon`}>{iconNode}</div>;
 };
 
-const renderExtra = (h, prefixCls, extra) => extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
+const renderExtra = (h, prefixCls, extra) =>
+  extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
 
 const Result = {
   name: 'AResult',
@@ -56,11 +57,7 @@ const Result = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render(h) {
-    const {
-      prefixCls: customizePrefixCls,
-      status,
-      ...restProps
-    } = this;
+    const { prefixCls: customizePrefixCls, status, ...restProps } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('result', customizePrefixCls);
 

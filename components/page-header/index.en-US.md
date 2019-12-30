@@ -13,6 +13,6 @@
 
 ### Events
 
-| Events Name | Description | Arguments |
-| ------------- | -------------------------------------- | ----------------- |
-| back | back icon click event | function(e) |
+| Events Name | Description           | Arguments   |
+| ----------- | --------------------- | ----------- |
+| back        | back icon click event | function(e) |

@@ -4,7 +4,7 @@ let enquire;
 
 // TODO: Will be removed in antd 4.0 because we will no longer support ie9
 if (typeof window !== 'undefined') {
-  const matchMediaPolyfill = (mediaQuery) => {
+  const matchMediaPolyfill = mediaQuery => {
     return {
       media: mediaQuery,
       matches: false,
@@ -65,12 +65,10 @@ const responsiveObserve = {
     }
   },
   unregister() {
-    Object.keys(responsiveMap).map((screen) =>
-      enquire.unregister(responsiveMap[screen]),
-    );
+    Object.keys(responsiveMap).map(screen => enquire.unregister(responsiveMap[screen]));
   },
   register() {
-    Object.keys(responsiveMap).map((screen) =>
+    Object.keys(responsiveMap).map(screen =>
       enquire.register(responsiveMap[screen], {
         match: () => {
           const pointMap = {

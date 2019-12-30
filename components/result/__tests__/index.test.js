@@ -3,16 +3,19 @@ import Result from '../index';
 import Button from '../../button';
 
 describe('Result', () => {
-
   it('🙂  successPercent should decide the progress status when it exists', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <Result
             status="success"
             title="Successfully Purchased Cloud Server ECS!"
             subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-            extra={<Button type="primary" key="console">Go Console</Button>}
+            extra={
+              <Button type="primary" key="console">
+                Go Console
+              </Button>
+            }
           />
         );
       },
@@ -39,8 +42,8 @@ describe('Result', () => {
 
   it('🙂  When status = 404, the icon is an image', () => {
     const wrapper = mount({
-      render () {
-        return <Result status='404' />;
+      render() {
+        return <Result status="404" />;
       },
     });
     expect(wrapper.findAll('.ant-result-404 .ant-result-image')).toHaveLength(1);
@@ -48,8 +51,8 @@ describe('Result', () => {
 
   it('🙂  When extra is undefined, the extra dom is undefined', () => {
     const wrapper = mount({
-      render () {
-        return <Result status='404' />;
+      render() {
+        return <Result status="404" />;
       },
     });
     expect(wrapper.findAll('.ant-result-extra')).toHaveLength(0);
@@ -57,8 +60,8 @@ describe('Result', () => {
 
   it('🙂  result should support className', () => {
     const wrapper = mount({
-      render () {
-        return <Result status='404' title='404' class='my-result' />;
+      render() {
+        return <Result status="404" title="404" class="my-result" />;
       },
     });
     expect(wrapper.findAll('.ant-result.my-result')).toHaveLength(1);

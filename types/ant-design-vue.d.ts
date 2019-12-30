@@ -63,7 +63,7 @@ import { Timeline } from './timeline/timeline';
 import { Tooltip } from './tootip/tooltip';
 import { Upload } from './upload';
 import { Result } from './result';
-import { Descriptions } from './descriptions/descriptions'
+import { Descriptions } from './descriptions/descriptions';
 import { PageHeader } from './page-header';
 
 /**

@@ -34,5 +34,4 @@ export declare class Result extends AntdComponent {
    * 	@type any v-slot
    */
   extra: any;
-
 }

@@ -106,11 +106,17 @@ Table with editable rows.
       },
       save(key) {
         const newData = [...this.data];
+        const newCacheData = [...this.cacheData];
         const target = newData.filter(item => key === item.key)[0];
-        if (target) {
+        const targetCache = newCacheData.filter(item => key === item.key)[0];
+        if (target && targetCache) {
           delete target.editable;
           this.data = newData;
-          this.cacheData = newData.map(item => ({ ...item }));
+          Object.assign(
+            targetCache,
+            target
+          );
+          this.cacheData = newCacheData;
         }
       },
       cancel(key) {

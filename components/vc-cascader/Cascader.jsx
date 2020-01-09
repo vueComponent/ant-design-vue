@@ -155,7 +155,11 @@ export default {
     },
     handleChange(options, setProps, e) {
       if (e.type !== 'keydown' || e.keyCode === KeyCode.ENTER) {
-        this.__emit('change', options.map(o => o[this.getFieldName('value')]), options);
+        this.__emit(
+          'change',
+          options.map(o => o[this.getFieldName('value')]),
+          options,
+        );
         this.setPopupVisible(setProps.visible);
       }
     },

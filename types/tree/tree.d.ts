@@ -16,7 +16,7 @@ export declare class Tree extends AntdComponent {
    */
   treeData: TreeNode[];
 
-   /**
+  /**
    *
    *@description Replace the title,key and children fields in treeNode with the corresponding fields in treeData
    */

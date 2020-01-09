@@ -40,8 +40,8 @@ export default {
         [`${prefixCls}-icon`]: true,
         [`${iconPrefix}icon`]: true,
         [`${iconPrefix}icon-${icon}`]: icon && isString(icon),
-        [`${iconPrefix}icon-check`]: !icon && status === 'finish' && (icons && !icons.finish),
-        [`${iconPrefix}icon-close`]: !icon && status === 'error' && (icons && !icons.error),
+        [`${iconPrefix}icon-check`]: !icon && status === 'finish' && icons && !icons.finish,
+        [`${iconPrefix}icon-close`]: !icon && status === 'error' && icons && !icons.error,
       };
       const iconDot = <span class={`${prefixCls}-icon-dot`} />;
       // `progressDot` enjoy the highest priority

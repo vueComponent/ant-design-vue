@@ -1,40 +1,3 @@
-```jsx
-const dataSource = [
-  {
-    key: '1',
-    name: '胡彦斌',
-    age: 32,
-    address: '西湖区湖底公园1号',
-  },
-  {
-    key: '2',
-    name: '胡彦祖',
-    age: 42,
-    address: '西湖区湖底公园1号',
-  },
-];
-
-const columns = [
-  {
-    title: '姓名',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: '年龄',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: '住址',
-    dataIndex: 'address',
-    key: 'address',
-  },
-];
-
-<Table dataSource={dataSource} columns={columns} />;
-```
-
 ## API
 
 ### Table
@@ -69,11 +32,11 @@ const columns = [
 
 ### 事件
 
-| 事件名称           | 说明                       | 回调参数                              |
-| ------------------ | -------------------------- | ------------------------------------- |
-| expandedRowsChange | 展开的行变化时触发         | Function(expandedRows)                |
-| change             | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter, { currentDataSource }) |
-| expand             | 点击展开图标时触发         | Function(expanded, record)            |
+| 事件名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| expandedRowsChange | 展开的行变化时触发 | Function(expandedRows) |
+| change | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter, { currentDataSource }) |
+| expand | 点击展开图标时触发 | Function(expanded, record) |
 
 #### customRow 用法
 

@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "pre-commit": "pretty-quick --staged",
+    "pre-publish": "npm run lint",
+    "commit-msg": "commitlint -x @commitlint/config-conventional -e $GIT_PARAMS"
+  }
+}

@@ -20,6 +20,8 @@ import RowSelectionCustom from './row-selection-custom.md';
 import RowSelection from './row-selection.md';
 import Size from './size.md';
 import Template from './template.md';
+import ResizableColumn from './resizable-column';
+import ResizableColumnString from '!raw-loader!./resizable-column';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -83,6 +85,9 @@ export default {
         <RowSelection />
         <Size />
         <Template />
+        <demo-container code={ResizableColumnString}>
+          <ResizableColumn />
+        </demo-container>
         <api>
           <template slot="cn">
             <CN />

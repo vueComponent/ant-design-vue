@@ -24,7 +24,7 @@ Disabled part of dates and time by `disabledDate` and `disabledTime` respectivel
       :disabledDate="disabledDate"
       :disabledTime="disabledRangeTime"
       :showTime="{
-        hideDisabledOptions: true, 
+        hideDisabledOptions: true,
         defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('11:59:59', 'HH:mm:ss')]
       }"
       format="YYYY-MM-DD HH:mm:ss"

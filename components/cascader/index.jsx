@@ -386,6 +386,7 @@ const Cascader = {
       disabled,
       allowClear,
       showSearch = false,
+      notFoundContent,
       ...otherProps
     } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -441,9 +442,21 @@ const Cascader = {
     ]);
 
     let options = props.options;
-    if (inputValue) {
-      options = this.generateFilteredOptions(prefixCls, renderEmpty);
+    const names = getFilledFieldNames(this.$props);
+    if (options && options.length > 0) {
+      if (inputValue) {
+        options = this.generateFilteredOptions(prefixCls, renderEmpty);
+      }
+    } else {
+      options = [
+        {
+          [names.label]: notFoundContent || renderEmpty(h, 'Cascader'),
+          [names.value]: 'ANT_CASCADER_NOT_FOUND',
+          disabled: true,
+        },
+      ];
     }
+
     // Dropdown menu should keep previous status until it is fully closed.
     if (!sPopupVisible) {
       options = this.cachedOptions;
@@ -459,7 +472,7 @@ const Cascader = {
     }
     // The default value of `matchInputWidth` is `true`
     const resultListMatchInputWidth = showSearch.matchInputWidth !== false;
-    if (resultListMatchInputWidth && inputValue && this.$refs.input) {
+    if (resultListMatchInputWidth && (inputValue || isNotFound) && this.$refs.input) {
       dropdownMenuColumnStyle.width = this.$refs.input.$el.offsetWidth + 'px';
     }
     // showSearch时，focus、blur在input上触发，反之在ref='picker'上触发

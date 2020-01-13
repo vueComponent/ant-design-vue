@@ -166,7 +166,7 @@ export default {
           ...restProps,
           icon:
             $slots[slots.icon] ||
-            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]) ||
+            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon](item)) ||
             restProps.icon,
           title:
             $slots[slots.title] ||

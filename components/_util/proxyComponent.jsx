@@ -9,7 +9,7 @@ export default function wrapWithConnect(WrappedComponent) {
   const methods = WrappedComponent.methods || {};
   const props = {};
   Object.keys(tempProps).forEach(k => {
-    props[k] = { ...k, required: false };
+    props[k] = { ...tempProps[k], required: false };
   });
   WrappedComponent.props.__propsSymbol__ = PropTypes.any;
   WrappedComponent.props.children = PropTypes.array.def([]);

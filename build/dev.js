@@ -70,7 +70,12 @@ const i18n = new VueI18n({
 
 const router = new VueRouter({
   mode: 'history',
-  routes: [{ path: '/*', component: Test }],
+  routes: [{
+    path: '/test',
+    component: () => import('../components/test/index.vue'),
+  }, { 
+    path: '/*', component: Test 
+  }],
 });
 
 const store = new Vuex.Store({
@@ -113,12 +118,14 @@ const renderTemplate = name => {
     Tooltip: 'tooltip', // for DemoBox
   };
 
-  const demoPaths = fs.readdirSync(path.join(__dirname, `../components/${name}/demo`));
-
-  demoPaths.forEach(demoPath => {
-    const demo = fs
-      .readFileSync(path.join(__dirname, `../components/${name}/demo/${demoPath}`))
-      .toString();
+  const demoPaths = fs
+    .readdirSync(path.join(__dirname, `../components/${name}/demo`))
+    .map(p => `../components/${name}/demo/${p}`);
+  const testPaths = fs
+    .readdirSync(path.join(__dirname, `../components/test`))
+    .map(p => `../components/test/${p}`);
+  [...demoPaths, ...testPaths].forEach(demoPath => {
+    const demo = fs.readFileSync(path.join(__dirname, demoPath)).toString();
 
     const componentsInDemo = demo.match(/a-(\w+(-\w+)*)/g) || [];
     componentsInDemo.forEach(name => {
@@ -146,6 +153,22 @@ const renderTemplate = name => {
   });
   fs.writeFileSync(OUTPUT_PATH, template);
 };
+
+function fsExistsSync(path) {
+  try {
+    fs.accessSync(path, fs.F_OK);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+if (!fsExistsSync(path.join(__dirname, '../components/test/index.vue'))) {
+  if (!fsExistsSync(path.join(__dirname, '../components/test'))) {
+    fs.mkdirSync(path.join(__dirname, '../components/test'));
+  }
+  fs.writeFileSync(path.join(__dirname, '../components/test/index.vue'), `<template></template>`);
+}
 
 let demoWatcher;
 

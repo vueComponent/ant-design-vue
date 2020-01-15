@@ -18,7 +18,7 @@ export default function connect(mapStateToProps) {
       __propsSymbol__: PropTypes.any,
     };
     Object.keys(tempProps).forEach(k => {
-      props[k] = { ...k, required: false };
+      props[k] = { ...tempProps[k], required: false };
     });
     const Connect = {
       name: `Connect_${getDisplayName(WrappedComponent)}`,

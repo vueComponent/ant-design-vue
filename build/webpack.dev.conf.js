@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.config');
+const baseWebpackConfig = require('./webpack.base.conf');
 
 module.exports = merge(baseWebpackConfig, {
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     filename: 'build.js',
   },
@@ -36,6 +36,8 @@ module.exports = merge(baseWebpackConfig, {
       rewrites: [{ from: /./, to: '/index.html' }],
     },
     disableHostCheck: true,
+    hot: true,
+    open: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
   },
   performance: {

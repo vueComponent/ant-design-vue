@@ -18,6 +18,7 @@ const Drawer = {
     maskStyle: PropTypes.object,
     wrapStyle: PropTypes.object,
     bodyStyle: PropTypes.object,
+    drawerStyle: PropTypes.object,
     title: PropTypes.any,
     visible: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
@@ -107,11 +108,12 @@ const Drawer = {
       }
     },
     getRcDrawerStyle() {
-      const { zIndex, placement } = this.$props;
+      const { zIndex, placement, wrapStyle } = this.$props;
       const { _push: push } = this.$data;
       return {
         zIndex,
         transform: push ? this.getPushTransform(placement) : undefined,
+        ...wrapStyle,
       };
     },
     renderHeader(prefixCls) {
@@ -142,7 +144,7 @@ const Drawer = {
         return null;
       }
       this.destroyClose = false;
-      const { placement, bodyStyle, wrapStyle } = this.$props;
+      const { placement, bodyStyle, drawerStyle } = this.$props;
 
       const containerStyle =
         placement === 'left' || placement === 'right'
@@ -162,7 +164,7 @@ const Drawer = {
       return (
         <div
           class={`${prefixCls}-wrapper-body`}
-          style={{ ...containerStyle, ...wrapStyle }}
+          style={{ ...containerStyle, ...drawerStyle }}
           onTransitionend={this.onDestroyTransitionEnd}
         >
           {this.renderHeader(prefixCls)}

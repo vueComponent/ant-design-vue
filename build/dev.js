@@ -128,16 +128,16 @@ const renderTemplate = name => {
     const demo = fs.readFileSync(path.join(__dirname, demoPath)).toString();
 
     const componentsInDemo = demo.match(/a-(\w+(-\w+)*)/g) || [];
-    componentsInDemo.forEach(name => {
-      const componentName = name.replace(/-(\w)/g, ($, $1) => $1.toUpperCase()).replace(/^a/, '');
+    componentsInDemo.forEach(n => {
+      const componentName = n.replace(/-(\w)/g, ($, $1) => $1.toUpperCase()).replace(/^a/, '');
 
       if (componentsInPrototype.includes(componentName)) {
         return;
       }
 
-      const componentPath = path.join(__dirname, `../components/${name.replace(/^a-/, '')}`);
+      const componentPath = path.join(__dirname, `../components/${n.replace(/^a-/, '')}`);
       if (fs.existsSync(componentPath)) {
-        components[componentName] = name.replace(/^a-/, '');
+        components[componentName] = n.replace(/^a-/, '');
       }
     });
   });
@@ -182,6 +182,11 @@ chokidar.watch(configPath, { ignoreInitial: true }).on('change', async () => {
     renderTemplate(devComponent);
   });
 
+  renderTemplate(devComponent);
+});
+
+testWatcher = chokidar.watch(path.join(__dirname, `../components/test`));
+testWatcher.on('change', () => {
   renderTemplate(devComponent);
 });
 

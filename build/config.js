@@ -1,3 +1,3 @@
 module.exports = {
-  devComponent: 'select',
+  devComponent: 'input',
 };

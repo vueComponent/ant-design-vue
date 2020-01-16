@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | bordered | 是否展示外边框和列边框 | boolean | false |
 | childrenColumnName | 指定树形结构的列名 | string\[] | children |
-| columns | 表格列的配置描述，具体项见下表 | array | - |
+| columns | 表格列的配置描述，具体项见[下表](#Column) | array | - |
 | components | 覆盖默认的 table 元素 | object | - |
 | dataSource | 数据数组 | any\[] |  |
 | defaultExpandAllRows | 初始时，是否展开所有行 | boolean | false |

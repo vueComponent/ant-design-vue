@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | bordered | Whether to show all table borders | boolean | `false` |
 | childrenColumnName | The column contains children to display | string\[] | children |
-| columns | Columns of table | array | - |
+| columns | Columns of table [config](#Column) | array | - |
 | components | Override default table elements | object | - |
 | dataSource | Data record array to be displayed | any\[] | - |
 | defaultExpandAllRows | Expand all rows initially | boolean | `false` |

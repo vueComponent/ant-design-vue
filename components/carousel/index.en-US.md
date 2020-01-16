@@ -6,6 +6,7 @@
 | autoplay | Whether to scroll automatically | boolean | `false` |
 | beforeChange | Callback function called before the current index changes | function(from, to) | - |
 | dots | Whether to show the dots at the bottom of the gallery | boolean | `true` |
+| dotsClass | Class name of the dots | string | `slick-dots` |
 | easing | Transition interpolation function name | string | `linear` |
 | effect | Transition effect | `scrollx` \| `fade` | `scrollx` |
 | vertical | Whether to use a vertical display | boolean | `false` |

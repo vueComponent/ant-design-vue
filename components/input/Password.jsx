@@ -14,6 +14,7 @@ const ActionMap = {
 export default {
   name: 'AInputPassword',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   model: {
     prop: 'value',
     event: 'change.value',

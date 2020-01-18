@@ -5,6 +5,7 @@ import { getStyle, getClass } from '../_util/props-util';
 const IDialogPropTypes = getDialogPropTypes();
 let openCount = 0;
 const DialogWrap = {
+  inheritAttrs: false,
   props: {
     ...IDialogPropTypes,
     visible: IDialogPropTypes.visible.def(false),

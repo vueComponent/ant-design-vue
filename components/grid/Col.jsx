@@ -46,7 +46,6 @@ export default {
       pull,
       prefixCls: customizePrefixCls,
       $slots,
-      $attrs,
       $listeners,
       rowContext,
     } = this;
@@ -82,7 +81,6 @@ export default {
     };
     const divProps = {
       on: $listeners,
-      attrs: $attrs,
       class: classes,
       style: {},
     };

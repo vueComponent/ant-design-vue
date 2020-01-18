@@ -62,6 +62,6 @@ exports[`renders ./components/input/demo/size.md correctly 1`] = `<div class="co
 
 exports[`renders ./components/input/demo/textarea.md correctly 1`] = `<textarea placeholder="Basic usage" rows="4" class="ant-input"></textarea>`;
 
-exports[`renders ./components/input/demo/textarea-resize.md correctly 1`] = `<div><button type="button" class="ant-btn" style="margin-bottom: 16px;"><span>Auto Resize: {String(autoResize)}</span></button> <textarea rows="4" class="ant-input"></textarea></div>`;
+exports[`renders ./components/input/demo/textarea-resize.md correctly 1`] = `<div><button type="button" class="ant-btn" style="margin-bottom: 16px;"><span>Auto Resize: false</span></button> <textarea rows="4" class="ant-input"></textarea></div>`;
 
 exports[`renders ./components/input/demo/tooltip.md correctly 1`] = `<input placeholder="Input a number" type="text" maxlength="25" class="ant-input" style="width: 120px;">`;

@@ -75,6 +75,7 @@ export const destroyFns = [];
 
 export default {
   name: 'AModal',
+  inheritAttrs: false,
   model: {
     prop: 'visible',
     event: 'change',
@@ -161,6 +162,7 @@ export default {
       centered,
       $listeners,
       $slots,
+      $attrs,
     } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -197,6 +199,7 @@ export default {
       },
       class: getClass(this),
       style: getStyle(this),
+      attrs: $attrs,
     };
     return <Dialog {...dialogProps}>{$slots.default}</Dialog>;
   },

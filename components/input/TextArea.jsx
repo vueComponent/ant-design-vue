@@ -30,6 +30,7 @@ function noop() {}
 
 export default {
   name: 'ATextarea',
+  inheritAttrs: false,
   model: {
     prop: 'value',
     event: 'change.value',

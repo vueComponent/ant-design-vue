@@ -23,7 +23,7 @@ export default function wrapWithConnect(WrappedComponent) {
       },
     },
     render() {
-      const { $listeners, $slots = {}, $attrs, $scopedSlots } = this;
+      const { $listeners, $slots = {}, $scopedSlots } = this;
       const props = getOptionProps(this);
       const wrapProps = {
         props: {
@@ -33,7 +33,6 @@ export default function wrapWithConnect(WrappedComponent) {
           children: $slots.default || props.children || [],
         },
         on: $listeners,
-        attrs: $attrs,
       };
       if (Object.keys($scopedSlots).length) {
         wrapProps.scopedSlots = $scopedSlots;

@@ -81,7 +81,7 @@ export default function connect(mapStateToProps) {
       },
       render() {
         this.preProps = { ...this.$props };
-        const { $listeners, $slots = {}, $attrs, $scopedSlots, subscribed, store } = this;
+        const { $listeners, $slots = {}, $scopedSlots, subscribed, store } = this;
         const props = getOptionProps(this);
         this.preProps = { ...omit(props, ['__propsSymbol__']) };
         const wrapProps = {
@@ -91,7 +91,6 @@ export default function connect(mapStateToProps) {
             store,
           },
           on: $listeners,
-          attrs: $attrs,
           scopedSlots: $scopedSlots,
         };
         return (

@@ -2,7 +2,13 @@ import Vue from 'vue';
 import ref from 'vue-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../_util/Dom/contains';
-import { hasProp, getComponentFromProp, getEvents, filterEmpty } from '../_util/props-util';
+import {
+  hasProp,
+  getComponentFromProp,
+  getEvents,
+  filterEmpty,
+  getListeners,
+} from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../_util/Dom/addEventListener';
 import warning from '../_util/warning';
@@ -448,7 +454,8 @@ export default {
             sPopupVisible,
           });
         }
-        this.$listeners.popupVisibleChange && this.$listeners.popupVisibleChange(sPopupVisible);
+        const listeners = getListeners(this);
+        listeners.popupVisibleChange && listeners.popupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
       if (sPopupVisible && alignPoint && event) {

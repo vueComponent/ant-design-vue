@@ -10,7 +10,7 @@ import ColumnManager from './ColumnManager';
 import HeadTable from './HeadTable';
 import BodyTable from './BodyTable';
 import ExpandableTable from './ExpandableTable';
-import { initDefaultProps, getOptionProps } from '../../_util/props-util';
+import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 
 export default {
@@ -143,7 +143,7 @@ export default {
     ['rowClick', 'rowDoubleclick', 'rowContextmenu', 'rowMouseenter', 'rowMouseleave'].forEach(
       name => {
         warningOnce(
-          this.$listeners[name] === undefined,
+          getListeners(this)[name] === undefined,
           `${name} is deprecated, please use customRow instead.`,
         );
       },
@@ -509,7 +509,7 @@ export default {
 
   render() {
     const props = getOptionProps(this);
-    const { $listeners, columnManager, getRowKey } = this;
+    const { columnManager, getRowKey } = this;
     const prefixCls = props.prefixCls;
     let className = props.prefixCls;
     if (props.useFixedHeader || (props.scroll && props.scroll.y)) {
@@ -529,7 +529,7 @@ export default {
         columnManager,
         getRowKey,
       },
-      on: { ...$listeners },
+      on: getListeners(this),
       scopedSlots: {
         default: expander => {
           this.expander = expander;

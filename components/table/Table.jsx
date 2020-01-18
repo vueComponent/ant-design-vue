@@ -17,6 +17,7 @@ import {
   filterEmpty,
   getAllProps,
   getComponentFromProp,
+  getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -1117,7 +1118,7 @@ export default {
           expandIconAsCell,
           emptyText: !(loading.props && loading.props.spinning) && mergedLocale.emptyText,
         },
-        on: this.$listeners,
+        on: getListeners(this),
         class: classString,
       };
       return <VcTable {...vcTableProps} />;

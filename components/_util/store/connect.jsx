@@ -1,6 +1,6 @@
 import shallowEqual from 'shallowequal';
 import omit from 'omit.js';
-import { getOptionProps } from '../props-util';
+import { getOptionProps, getListeners } from '../props-util';
 import PropTypes from '../vue-types';
 import proxyComponent from '../proxyComponent';
 
@@ -81,7 +81,7 @@ export default function connect(mapStateToProps) {
       },
       render() {
         this.preProps = { ...this.$props };
-        const { $listeners, $slots = {}, $scopedSlots, subscribed, store } = this;
+        const { $slots = {}, $scopedSlots, subscribed, store } = this;
         const props = getOptionProps(this);
         this.preProps = { ...omit(props, ['__propsSymbol__']) };
         const wrapProps = {
@@ -90,7 +90,7 @@ export default function connect(mapStateToProps) {
             ...subscribed,
             store,
           },
-          on: $listeners,
+          on: getListeners(this),
           scopedSlots: $scopedSlots,
         };
         return (

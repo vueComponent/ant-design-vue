@@ -9,6 +9,7 @@ import {
   getOptionProps,
   filterEmpty,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import Base from '../base';
 
@@ -91,14 +92,7 @@ const AutoComplete = {
   },
 
   render() {
-    const {
-      size,
-      prefixCls: customizePrefixCls,
-      optionLabelProp,
-      dataSource,
-      $slots,
-      $listeners,
-    } = this;
+    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $slots } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
@@ -143,7 +137,7 @@ const AutoComplete = {
       },
       class: cls,
       ref: 'select',
-      on: $listeners,
+      on: getListeners(this),
     };
     return <Select {...selectProps}>{options}</Select>;
   },

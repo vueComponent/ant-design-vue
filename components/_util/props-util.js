@@ -201,7 +201,7 @@ export function getEvents(child) {
 // use getListeners instead this.$listeners
 // https://github.com/vueComponent/ant-design-vue/issues/1705
 export function getListeners(context) {
-  return context.$vnode ? context.$vnode.componentOptions.listeners || {} : context.$listeners;
+  return (context.$vnode ? context.$vnode.componentOptions.listeners : context.$listeners) || {};
 }
 export function getClass(ele) {
   let data = {};

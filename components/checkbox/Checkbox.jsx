@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import VcCheckbox from '../vc-checkbox';
-import { getOptionProps, getAttrs } from '../_util/props-util';
+import { getOptionProps, getAttrs, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 function noop() {}
 
@@ -43,10 +43,10 @@ export default {
   },
 
   render() {
-    const { checkboxGroupContext: checkboxGroup, $listeners, $slots } = this;
+    const { checkboxGroupContext: checkboxGroup, $slots } = this;
     const props = getOptionProps(this);
     const children = $slots.default;
-    const { mouseenter = noop, mouseleave = noop, input, ...restListeners } = $listeners;
+    const { mouseenter = noop, mouseleave = noop, input, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, indeterminate, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);

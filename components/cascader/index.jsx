@@ -15,6 +15,7 @@ import {
   getAttrs,
   getComponentFromProp,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
@@ -372,7 +373,7 @@ const Cascader = {
   },
 
   render() {
-    const { $slots, sPopupVisible, inputValue, $listeners, configProvider, localeData } = this;
+    const { $slots, sPopupVisible, inputValue, configProvider, localeData } = this;
     const { sValue: value, inputFocused } = this.$data;
     const props = getOptionProps(this);
     let suffixIcon = getComponentFromProp(this, 'suffixIcon');
@@ -542,7 +543,7 @@ const Cascader = {
         loadingIcon,
       },
       on: {
-        ...$listeners,
+        ...getListeners(this),
         popupVisibleChange: this.handlePopupVisibleChange,
         change: this.handleChange,
       },

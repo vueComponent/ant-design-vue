@@ -1,5 +1,5 @@
 import PropTypes from './vue-types';
-import { getOptionProps } from './props-util';
+import { getOptionProps, getListeners } from './props-util';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.name || 'Component';
@@ -23,7 +23,7 @@ export default function wrapWithConnect(WrappedComponent) {
       },
     },
     render() {
-      const { $listeners, $slots = {}, $scopedSlots } = this;
+      const { $slots = {}, $scopedSlots } = this;
       const props = getOptionProps(this);
       const wrapProps = {
         props: {
@@ -32,7 +32,7 @@ export default function wrapWithConnect(WrappedComponent) {
           componentWillReceiveProps: { ...props },
           children: $slots.default || props.children || [],
         },
-        on: $listeners,
+        on: getListeners(this),
       };
       if (Object.keys($scopedSlots).length) {
         wrapProps.scopedSlots = $scopedSlots;

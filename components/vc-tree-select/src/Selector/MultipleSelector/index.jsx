@@ -3,7 +3,7 @@ import { createRef } from '../../util';
 import generateSelector, { selectorPropTypes } from '../../Base/BaseSelector';
 import SearchInput from '../../SearchInput';
 import Selection from './Selection';
-import { getComponentFromProp } from '../../../../_util/props-util';
+import { getComponentFromProp, getListeners } from '../../../../_util/props-util';
 import getTransitionProps from '../../../../_util/getTransitionProps';
 import BaseMixin from '../../../../_util/BaseMixin';
 const TREE_SELECT_EMPTY_VALUE_KEY = 'RC_TREE_SELECT_EMPTY_VALUE_KEY';
@@ -87,10 +87,9 @@ const MultipleSelector = {
       } = this.$props;
       const {
         vcTreeSelect: { onMultipleSelectorRemove },
-        $listeners,
         $slots,
       } = this;
-
+      const listeners = getListeners(this);
       // Check if `maxTagCount` is set
       let myValueList = selectorValueList;
       if (maxTagCount >= 0) {
@@ -105,7 +104,7 @@ const MultipleSelector = {
               label,
               value,
             },
-            on: { ...$listeners, remove: onMultipleSelectorRemove },
+            on: { ...listeners, remove: onMultipleSelectorRemove },
           }}
           key={value || TREE_SELECT_EMPTY_VALUE_KEY}
         >
@@ -134,7 +133,7 @@ const MultipleSelector = {
                 label: content,
                 value: null,
               },
-              on: $listeners,
+              on: listeners,
             }}
             key="rc-tree-select-internal-max-tag-counter"
           >
@@ -153,7 +152,7 @@ const MultipleSelector = {
                 ...this.$props,
                 needAlign: true,
               },
-              on: $listeners,
+              on: listeners,
               directives: [
                 {
                   name: 'ant-ref',
@@ -187,7 +186,8 @@ const MultipleSelector = {
   },
 
   render() {
-    const { $listeners, $slots } = this;
+    const { $slots } = this;
+    const listeners = getListeners(this);
     return (
       <Selector
         {...{
@@ -198,7 +198,7 @@ const MultipleSelector = {
             renderSelection: this.renderSelection,
             renderPlaceholder: this._renderPlaceholder,
           },
-          on: $listeners,
+          on: listeners,
         }}
       >
         {$slots.default}

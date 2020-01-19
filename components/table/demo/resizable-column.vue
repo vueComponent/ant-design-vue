@@ -9,7 +9,7 @@ Implement resizable column by integrate with [vue-draggable-resizable](https://g
 </us>
 
 <template>
-  <a-table bordered :columns="columns" :components="components" :dataSource="data">
+  <a-table bordered :columns="columns" :components="components" :data-source="data">
     <template v-slot:action>
       <a href="javascript:;">Delete</a>
     </template>

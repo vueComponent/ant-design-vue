@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import { initDefaultProps } from '../../_util/props-util';
+import { initDefaultProps, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import AjaxUpload from './AjaxUploader';
 import IframeUpload from './IframeUploader';
@@ -83,7 +83,7 @@ export default {
       props: {
         ...this.$props,
       },
-      on: this.$listeners,
+      on: getListeners(this),
       ref: 'uploaderRef',
       attrs: this.$attrs,
     };

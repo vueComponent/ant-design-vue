@@ -375,7 +375,7 @@ export default {
       }
       mouseProps.mousedown = this.onPopupMouseDown;
       mouseProps.touchstart = this.onPopupMouseDown;
-      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $listeners } = self;
+      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer } = self;
       const {
         prefixCls,
         destroyPopupOnHide,
@@ -415,7 +415,7 @@ export default {
           popupStyle,
         },
         on: {
-          align: $listeners.popupAlign || noop,
+          align: getListeners(this).popupAlign || noop,
           ...mouseProps,
         },
         directives: [
@@ -520,7 +520,7 @@ export default {
 
     createTwoChains(event) {
       let fn = () => {};
-      const events = this.$listeners;
+      const events = getListeners(this);
       if (this.childOriginEvents[event] && events[event]) {
         return this[`fire${event}`];
       }

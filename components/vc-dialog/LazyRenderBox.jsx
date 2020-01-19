@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import { getListeners } from '../_util/props-util';
 
 const ILazyRenderBoxPropTypes = {
   visible: PropTypes.bool,
@@ -9,6 +10,6 @@ const ILazyRenderBoxPropTypes = {
 export default {
   props: ILazyRenderBoxPropTypes,
   render() {
-    return <div {...{ on: this.$listeners }}>{this.$slots.default}</div>;
+    return <div {...{ on: getListeners(this) }}>{this.$slots.default}</div>;
   },
 };

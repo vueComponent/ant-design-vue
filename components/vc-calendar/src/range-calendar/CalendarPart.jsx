@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getOptionProps, getComponentFromProp } from '../../../_util/props-util';
+import { getOptionProps, getComponentFromProp, getListeners } from '../../../_util/props-util';
 import { cloneElement } from '../../../_util/vnode';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
@@ -34,7 +34,7 @@ const CalendarPart = {
     clearIcon: PropTypes.any,
   },
   render() {
-    const { $props: props, $listeners = {} } = this;
+    const { $props: props } = this;
     const {
       prefixCls,
       value,
@@ -65,7 +65,7 @@ const CalendarPart = {
       panelChange = noop,
       select = noop,
       dayHover = noop,
-    } = $listeners;
+    } = getListeners(this);
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig =
       shouldShowTimePicker && disabledTime ? getTimeConfig(selectedValue, disabledTime) : null;

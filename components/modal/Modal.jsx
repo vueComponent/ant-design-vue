@@ -14,6 +14,7 @@ import {
   getClass,
   getStyle,
   mergeProps,
+  getListeners,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -160,7 +161,6 @@ export default {
       visible,
       wrapClassName,
       centered,
-      $listeners,
       $slots,
       $attrs,
     } = this;
@@ -194,7 +194,7 @@ export default {
         closeIcon,
       },
       on: {
-        ...$listeners,
+        ...getListeners(this),
         close: this.handleCancel,
       },
       class: getClass(this),

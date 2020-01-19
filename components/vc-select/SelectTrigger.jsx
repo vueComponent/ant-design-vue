@@ -4,6 +4,7 @@ import PropTypes from '../_util/vue-types';
 import DropdownMenu from './DropdownMenu';
 import { isSingleMode, saveRef } from './util';
 import BaseMixin from '../_util/BaseMixin';
+import { getListeners } from '../_util/props-util';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -105,7 +106,7 @@ export default {
         backfillValue,
         menuItemSelectedIcon,
       } = this;
-      const { menuSelect, menuDeselect, popupScroll } = this.$listeners;
+      const { menuSelect, menuDeselect, popupScroll } = getListeners(this);
       const props = this.$props;
 
       const { dropdownRender, ariaId } = props;
@@ -157,7 +158,7 @@ export default {
   },
 
   render() {
-    const { $props, $slots, $listeners } = this;
+    const { $props, $slots } = this;
     const {
       multiple,
       visible,
@@ -173,7 +174,7 @@ export default {
       showAction,
       empty,
     } = $props;
-    const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = $listeners;
+    const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = getListeners(this);
     const dropdownPrefixCls = this.getDropdownPrefixCls();
     const popupClassName = {
       [dropdownClassName]: !!dropdownClassName,

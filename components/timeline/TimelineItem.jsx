@@ -1,6 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, initDefaultProps, getComponentFromProp } from '../_util/props-util';
+import {
+  getOptionProps,
+  initDefaultProps,
+  getComponentFromProp,
+  getListeners,
+} from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const TimeLineItemProps = {
@@ -37,7 +42,7 @@ export default {
     });
     const liProps = {
       class: itemClassName,
-      on: this.$listeners,
+      on: getListeners(this),
     };
     return (
       <li {...liProps}>

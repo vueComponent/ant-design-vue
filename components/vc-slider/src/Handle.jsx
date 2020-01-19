@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps } from '../../_util/props-util';
+import { getOptionProps, getListeners } from '../../_util/props-util';
 import addEventListener from '../../_util/Dom/addEventListener';
 
 export default {
@@ -92,7 +92,7 @@ export default {
       },
       class: className,
       on: {
-        ...this.$listeners,
+        ...getListeners(this),
         blur: this.handleBlur,
         keydown: this.handleKeyDown,
         mousedown: this.handleMousedown,

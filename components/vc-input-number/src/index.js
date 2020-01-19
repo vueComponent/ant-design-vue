@@ -1,7 +1,7 @@
 // based on rc-input-number 4.4.0
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util';
+import { initDefaultProps, hasProp, getOptionProps, getListeners } from '../../_util/props-util';
 import classNames from 'classnames';
 import isNegativeZero from 'is-negative-zero';
 import KeyCode from '../../_util/KeyCode';
@@ -674,7 +674,7 @@ export default {
       mouseleave = noop,
       mouseover = noop,
       mouseout = noop,
-    } = this.$listeners;
+    } = getListeners(this);
     const contentProps = {
       on: { mouseenter, mouseleave, mouseover, mouseout },
       class: classes,

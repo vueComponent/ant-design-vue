@@ -238,7 +238,6 @@ export default {
         beforeUpload: this.reBeforeUpload,
       },
       on: {
-        // ...this.$listeners,
         start: this.onStart,
         error: this.onError,
         progress: this.onProgress,

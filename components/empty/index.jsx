@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp, getListeners } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import emptyImg from './empty.svg';
 import Base from '../base';
@@ -43,7 +43,7 @@ const Empty = {
         imageNode = image;
       }
       return (
-        <div class={prefixCls} {...{ on: this.$listeners }}>
+        <div class={prefixCls} {...{ on: getListeners(this) }}>
           <div class={`${prefixCls}-image`}>{imageNode}</div>
           <p class={`${prefixCls}-description`}>{des}</p>
           {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default}</div>}

@@ -56,6 +56,7 @@ import {
   mergeProps,
   getPropsData,
   filterEmpty,
+  getListeners,
 } from '../../_util/props-util';
 function getWatch(keys = []) {
   const watch = {};
@@ -958,7 +959,7 @@ const Select = {
       }
 
       // Only do the logic when `onChange` function provided
-      if (this.$listeners.change) {
+      if (getListeners(this).change) {
         let connectValueList;
 
         // Get value by mode
@@ -1034,7 +1035,7 @@ const Select = {
         ariaId: this.ariaId,
       },
       on: {
-        ...this.$listeners,
+        ...getListeners(this),
         choiceAnimationLeave: this.onChoiceAnimationLeave,
       },
       scopedSlots: this.$scopedSlots,

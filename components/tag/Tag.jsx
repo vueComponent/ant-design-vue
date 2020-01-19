@@ -3,7 +3,7 @@ import Icon from '../icon';
 import getTransitionProps from '../_util/getTransitionProps';
 import omit from 'omit.js';
 import Wave from '../_util/wave';
-import { hasProp } from '../_util/props-util';
+import { hasProp, getListeners } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -103,7 +103,7 @@ export default {
     const tag = (
       <div
         v-show={visible}
-        {...{ on: omit(this.$listeners, ['close']) }}
+        {...{ on: omit(getListeners(this), ['close']) }}
         class={this.getTagClassName(prefixCls)}
         style={this.getTagStyle()}
       >

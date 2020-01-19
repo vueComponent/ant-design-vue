@@ -1,4 +1,4 @@
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 import Upload from './Upload';
 import { UploadProps } from './interface';
 
@@ -12,7 +12,7 @@ export default {
         ...props,
         type: 'drag',
       },
-      on: this.$listeners,
+      on: getListeners(this),
       style: { height: this.height },
     };
     return <Upload {...draggerProps}>{this.$slots.default}</Upload>;

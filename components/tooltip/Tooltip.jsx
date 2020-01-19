@@ -8,6 +8,7 @@ import {
   getClass,
   getStyle,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
@@ -161,7 +162,7 @@ export default {
   },
 
   render() {
-    const { $props, $data, $slots, $listeners } = this;
+    const { $props, $data, $slots } = this;
     const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -192,7 +193,7 @@ export default {
       },
       ref: 'tooltip',
       on: {
-        ...$listeners,
+        ...getListeners(this),
         visibleChange: this.onVisibleChange,
         popupAlign: this.onPopupAlign,
       },

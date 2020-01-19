@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { hasProp } from '../../../_util/props-util';
+import { hasProp, getListeners } from '../../../_util/props-util';
 import MonthTable from './MonthTable';
 
 function goYear(direction) {
@@ -66,7 +66,6 @@ const MonthPanel = {
       rootPrefixCls,
       disabledDate,
       renderFooter,
-      $listeners = {},
     } = this;
     const year = sValue.year();
     const prefixCls = `${rootPrefixCls}-month-panel`;
@@ -86,7 +85,7 @@ const MonthPanel = {
             <a
               class={`${prefixCls}-year-select`}
               role="button"
-              onClick={$listeners.yearPanelShow || noop}
+              onClick={getListeners(this).yearPanelShow || noop}
               title={locale.yearSelect}
             >
               <span class={`${prefixCls}-year-select-content`}>{year}</span>

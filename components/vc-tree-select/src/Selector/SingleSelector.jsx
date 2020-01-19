@@ -1,6 +1,6 @@
 import generateSelector, { selectorPropTypes } from '../Base/BaseSelector';
 import { toTitle } from '../util';
-import { getOptionProps } from '../../../_util/props-util';
+import { getOptionProps, getListeners } from '../../../_util/props-util';
 import { createRef } from '../util';
 const Selector = generateSelector('single');
 
@@ -47,7 +47,7 @@ const SingleSelector = {
         ...getOptionProps(this),
         renderSelection: this.renderSelection,
       },
-      on: this.$listeners,
+      on: getListeners(this),
       directives: [
         {
           name: 'ant-ref',

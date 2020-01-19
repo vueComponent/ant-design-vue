@@ -4,7 +4,7 @@ import Icon from '../icon';
 import inputProps from './inputProps';
 import Button from '../button';
 import { cloneElement } from '../_util/vnode';
-import { getOptionProps, getComponentFromProp, isValidElement } from '../_util/props-util';
+import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -119,7 +119,7 @@ export default {
       inputClassName = prefixCls;
     }
 
-    const on = { ...this.$listeners };
+    const on = { ...getListeners(this) };
     delete on.search;
     const inputProps = {
       props: {

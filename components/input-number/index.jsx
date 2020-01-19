@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps } from '../_util/props-util';
+import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-util';
 import classNames from 'classnames';
 import Icon from '../icon';
 import VcInputNumber from '../vc-input-number/src';
@@ -68,7 +68,7 @@ const InputNumber = {
       },
       class: inputNumberClass,
       ref: 'inputNumberRef',
-      on: this.$listeners,
+      on: getListeners(this),
     };
     return <VcInputNumber {...vcInputNumberprops} />;
   },

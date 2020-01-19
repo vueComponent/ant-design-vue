@@ -1,5 +1,5 @@
 import PropTypes from '../../../_util/vue-types';
-import { getOptionProps } from '../../../_util/props-util';
+import { getOptionProps, getListeners } from '../../../_util/props-util';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
 import { getTitleString, getTodayTime } from '../util/';
@@ -50,8 +50,7 @@ const DateTBody = {
       disabledDate,
       hoverValue,
     } = props;
-    const { $listeners = {} } = this;
-    const { select = noop, dayHover = noop } = $listeners;
+    const { select = noop, dayHover = noop } = getListeners(this);
     let iIndex;
     let jIndex;
     let current;

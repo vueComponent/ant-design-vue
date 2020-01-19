@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { getComponentFromProp, getOptionProps } from '../_util/props-util';
+import { getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
 import Input from './Input';
 import Icon from '../icon';
 import inputProps from './inputProps';
@@ -93,7 +93,7 @@ export default {
       },
       class: inputClassName,
       ref: 'input',
-      on: this.$listeners,
+      on: getListeners(this),
     };
     return <Input {...inputProps} />;
   },

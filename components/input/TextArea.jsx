@@ -3,7 +3,7 @@ import omit from 'omit.js';
 import ResizeObserver from 'resize-observer-polyfill';
 import inputProps from './inputProps';
 import calculateNodeHeight from './calculateNodeHeight';
-import hasProp from '../_util/props-util';
+import hasProp, { getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 function onNextFrame(cb) {
@@ -146,7 +146,6 @@ export default {
       handleTextareaChange,
       textareaStyles,
       $attrs,
-      $listeners,
       prefixCls: customizePrefixCls,
       disabled,
     } = this;
@@ -169,7 +168,7 @@ export default {
       directives: [{ name: 'ant-input' }],
       attrs: { ...otherProps, ...$attrs },
       on: {
-        ...$listeners,
+        ...getListeners(this),
         keydown: handleKeyDown,
         input: handleTextareaChange,
         change: noop,

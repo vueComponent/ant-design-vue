@@ -124,7 +124,7 @@
         "less": "^3.9.0",
         "less-loader": "^5.0.0",
         "less-plugin-npm-import": "^2.1.0",
-        "lint-staged": "^9.0.0",
+        "lint-staged": "^10.0.0",
         "markdown-it": "^10.0.0",
         "markdown-it-anchor": "^5.0.0",
         "marked": "0.3.18",

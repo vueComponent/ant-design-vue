@@ -195,7 +195,6 @@ const AjaxUploader = {
     } = $props;
     const cls = classNames({
       [prefixCls]: true,
-      [`${prefixCls}-btn`]: true,
       [`${prefixCls}-disabled`]: disabled,
     });
     const events = disabled

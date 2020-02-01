@@ -273,7 +273,7 @@ export default {
             onDragover={this.onFileDrop}
             onDragleave={this.onFileDrop}
           >
-            <VcUpload {...vcUploadProps}>
+            <VcUpload {...vcUploadProps} class={`${prefixCls}-btn`}>
               <div class={`${prefixCls}-drag-container`}>{children}</div>
             </VcUpload>
           </div>

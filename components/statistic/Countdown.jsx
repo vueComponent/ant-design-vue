@@ -53,10 +53,15 @@ export default {
     },
 
     stopTimer() {
+      const { value } = this.$props;
       if (this.countdownId) {
         clearInterval(this.countdownId);
         this.countdownId = undefined;
-        this.$emit('finish');
+
+        const timestamp = getTime(value);
+        if (timestamp < Date.now()) {
+          this.$emit('finish');
+        }
       }
     },
 

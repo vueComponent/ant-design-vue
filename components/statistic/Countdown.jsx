@@ -47,13 +47,8 @@ export default {
     startTimer() {
       if (this.countdownId) return;
       this.countdownId = window.setInterval(() => {
-        const { value } = this.$props;
-        const timestamp = getTime(value);
-
-        if (timestamp < Date.now()) {
-          this.stopTimer();
-        }
         this.$refs.statistic.$forceUpdate();
+        this.syncTimer();
       }, REFRESH_INTERVAL);
     },
 

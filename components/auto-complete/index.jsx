@@ -72,10 +72,10 @@ const AutoComplete = {
     },
 
     getInputElement() {
-      const { $slots } = this;
+      const { $slots, placeholder } = this;
       const children = filterEmpty($slots.default);
       const element = children.length ? children[0] : <Input lazy={false} />;
-      return <InputElement>{element}</InputElement>;
+      return <InputElement placeholder={placeholder}>{element}</InputElement>;
     },
 
     focus() {
@@ -134,6 +134,7 @@ const AutoComplete = {
         optionLabelProp,
         getInputElement: this.getInputElement,
         notFoundContent: getComponentFromProp(this, 'notFoundContent'),
+        placeholder: '',
       },
       class: cls,
       ref: 'select',

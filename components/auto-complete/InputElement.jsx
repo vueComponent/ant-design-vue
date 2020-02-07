@@ -18,6 +18,7 @@ export default {
   props: {
     value: PropTypes.any,
     disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
   },
   methods: {
     focus() {
@@ -31,7 +32,7 @@ export default {
   },
 
   render() {
-    const { $slots = {}, $attrs = {} } = this;
+    const { $slots = {}, $attrs = {}, placeholder } = this;
     const listeners = getListeners(this);
     const props = getOptionProps(this);
     const value = props.value === undefined ? '' : props.value;
@@ -43,14 +44,20 @@ export default {
     for (const [eventName, event] of Object.entries(listeners)) {
       newEvent[eventName] = chaining(event, events[eventName]);
     }
-
+    const attrs = { ...$attrs, value };
+    // https://github.com/vueComponent/ant-design-vue/issues/1761
+    delete props.placeholder;
+    if (placeholder) {
+      props.placeholder = placeholder;
+      attrs.placeholder = placeholder;
+    }
     return cloneElement(children, {
       domProps: {
         value,
       },
       props,
       on: newEvent,
-      attrs: { ...$attrs, value },
+      attrs,
       ref: 'ele',
     });
   },

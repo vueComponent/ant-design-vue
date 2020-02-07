@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, getListeners } from '../../_util/props-util';
-import addEventListener from '../../_util/Dom/addEventListener';
+import addEventListener from '../../vc-util/Dom/addEventListener';
 
 export default {
   name: 'Handle',

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from '../../../_util/vue-types';
-import addEventListener from '../../../_util/Dom/addEventListener';
+import addEventListener from '../../../vc-util/Dom/addEventListener';
 import warning from '../../../_util/warning';
 import { initDefaultProps } from '../../../_util/props-util';
 import Steps from './Steps';

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
 import Icon from '../icon';
 import Button from '../button';

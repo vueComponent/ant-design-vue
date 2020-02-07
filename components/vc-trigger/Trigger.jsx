@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import ref from 'vue-ref';
 import PropTypes from '../_util/vue-types';
-import contains from '../_util/Dom/contains';
+import contains from '../vc-util/Dom/contains';
 import {
   hasProp,
   getComponentFromProp,
@@ -10,7 +10,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import warning from '../_util/warning';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';

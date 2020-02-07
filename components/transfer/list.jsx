@@ -7,7 +7,7 @@ import Checkbox from '../checkbox';
 import Search from './search';
 import Item from './item';
 import triggerEvent from '../_util/triggerEvent';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 
 function noop() {}
 

@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
 import getScroll from '../_util/getScroll';
 import raf from 'raf';

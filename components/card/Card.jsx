@@ -3,7 +3,7 @@ import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import {
   getComponentFromProp,
   getSlotOptions,

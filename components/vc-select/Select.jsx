@@ -51,7 +51,7 @@ import {
   validateOptionValue,
 } from './util';
 import { SelectPropTypes } from './PropTypes';
-import contains from '../_util/Dom/contains';
+import contains from '../vc-util/Dom/contains';
 import { isIE, isEdge } from '../_util/env';
 
 Vue.use(ref, { name: 'ant-ref' });

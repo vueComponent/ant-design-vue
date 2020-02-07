@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 import classes from 'component-classes';
 import PropTypes from '../../_util/vue-types';
 import { debounce, warningOnce } from './utils';
-import addEventListener from '../../_util/Dom/addEventListener';
+import addEventListener from '../../vc-util/Dom/addEventListener';
 import { Provider, create } from '../../_util/store';
 import ColumnManager from './ColumnManager';
 import HeadTable from './HeadTable';

@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'tree', // dev components
+    componentName: 'affix', // dev components
   },
 };

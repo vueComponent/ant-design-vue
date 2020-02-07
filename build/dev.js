@@ -11,7 +11,19 @@ const devWebpack = require('./webpack.dev.conf');
 
 const configPath = path.join(__dirname, './config.js');
 
-let { devComponent } = require('./config');
+/**
+ * a-bc-d --> aBcD
+ * @param {string} s
+ */
+const camelize = s => s.replace(/-(\w)/g, ($, $1) => $1.toUpperCase());
+
+/**
+ * radio-group --> radio
+ * @param {string} s
+ */
+const getUpper = s => s.replace(/(-[a-z]*)/g, '');
+
+let { componentName } = require('./config').dev;
 
 const componentsInPrototype = ['Modal', 'message', 'notification'];
 
@@ -116,6 +128,7 @@ const generateInstall = components =>
 const renderTemplate = name => {
   const components = {
     Tooltip: 'tooltip', // for DemoBox
+    Icon: 'icon', // Basic
   };
 
   const demoPaths = fs
@@ -128,16 +141,20 @@ const renderTemplate = name => {
     const demo = fs.readFileSync(path.join(__dirname, demoPath)).toString();
 
     const componentsInDemo = demo.match(/a-(\w+(-\w+)*)/g) || [];
-    componentsInDemo.forEach(n => {
-      const componentName = n.replace(/-(\w)/g, ($, $1) => $1.toUpperCase()).replace(/^a/, '');
+    componentsInDemo.forEach(name => {
+      const dirName = name.replace(/^a-/, '');
+      const componentName = camelize(name).replace(/^a/, '');
+      const upperComponentDir = getUpper(dirName);
+      const upperComponentName = upperComponentDir.replace(/^[a-z]/, $ => $.toUpperCase());
 
-      if (componentsInPrototype.includes(componentName)) {
-        return;
-      }
-
-      const componentPath = path.join(__dirname, `../components/${n.replace(/^a-/, '')}`);
+      const componentPath = path.join(__dirname, `../components/${dirName}`);
       if (fs.existsSync(componentPath)) {
-        components[componentName] = n.replace(/^a-/, '');
+        if (componentsInPrototype.includes(componentName)) {
+          return;
+        }
+        components[componentName] = dirName;
+      } else if (fs.existsSync(path.join(__dirname, `../components/${upperComponentDir}`))) {
+        components[upperComponentName] = upperComponentDir;
       }
     });
   });
@@ -173,24 +190,19 @@ if (!fsExistsSync(path.join(__dirname, '../components/test/index.vue'))) {
 let demoWatcher;
 
 chokidar.watch(configPath, { ignoreInitial: true }).on('change', async () => {
-  devComponent = importFresh(configPath).devComponent;
+  ({ componentName } = importFresh(configPath).dev);
 
   demoWatcher && (await demoWatcher.close());
 
-  demoWatcher = chokidar.watch(path.join(__dirname, `../components/${devComponent}/demo`));
+  demoWatcher = chokidar.watch(path.join(__dirname, `../components/${componentName}/demo`));
   demoWatcher.on('change', () => {
-    renderTemplate(devComponent);
+    renderTemplate(componentName);
   });
 
-  renderTemplate(devComponent);
+  renderTemplate(componentName);
 });
 
-testWatcher = chokidar.watch(path.join(__dirname, `../components/test`));
-testWatcher.on('change', () => {
-  renderTemplate(devComponent);
-});
-
-renderTemplate(devComponent);
+renderTemplate(componentName);
 
 const compiler = webpack(devWebpack);
 

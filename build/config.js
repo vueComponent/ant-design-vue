@@ -1,3 +1,5 @@
 module.exports = {
-  devComponent: 'menu',
+  dev: {
+    componentName: 'tree', // dev components
+  },
 };

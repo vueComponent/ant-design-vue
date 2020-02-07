@@ -58,3 +58,4 @@ import './statistic/style';
 import './result/style';
 import './descriptions/style';
 import './page-header/style';
+import './typography/style';

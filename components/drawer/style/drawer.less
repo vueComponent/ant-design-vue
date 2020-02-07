@@ -140,6 +140,7 @@
   &-content {
     position: relative;
     z-index: 1;
+    overflow: auto;
     background-color: @component-background;
     background-clip: padding-box;
     border: 0;
@@ -195,6 +196,10 @@
     font-size: @font-size-base;
     line-height: @line-height-base;
     word-wrap: break-word;
+  }
+  &-wrapper-body {
+    height: 100%;
+    overflow: auto;
   }
 
   &-mask {

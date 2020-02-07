@@ -48,7 +48,7 @@
 
     position: relative;
     top: -0.5px;
-    margin: 0 8px 0 2px;
+    margin: 0 @form-item-label-colon-margin-right 0 @form-item-label-colon-margin-left;
   }
 
   &.@{form-prefix-cls}-item-no-colon::after {
@@ -137,11 +137,22 @@
 form {
   .has-feedback {
     .@{ant-prefix}-input {
-      padding-right: 24px;
+      padding-right: @input-padding-horizontal-base + @input-affix-width;
     }
 
-    .@{ant-prefix}-input-password-icon {
-      margin-right: 18px;
+    // https://github.com/ant-design/ant-design/issues/19884
+    .@{ant-prefix}-input-affix-wrapper {
+      .@{ant-prefix}-input-suffix {
+        padding-right: 18px;
+      }
+      .@{ant-prefix}-input {
+        padding-right: @input-padding-horizontal-base + @input-affix-width * 2;
+      }
+      &.@{ant-prefix}-input-affix-wrapper-input-with-clear-btn {
+        .@{ant-prefix}-input {
+          padding-right: @input-padding-horizontal-base + @input-affix-width * 3;
+        }
+      }
     }
 
     // Fix overlapping between feedback icon and <Select>'s arrow.
@@ -152,7 +163,7 @@ form {
     :not(.@{ant-prefix}-input-group-addon)
       > .@{ant-prefix}-select
       .@{ant-prefix}-select-selection__clear {
-      right: 28px;
+      right: (@form-component-height / 2) + @form-feedback-icon-size - 2px;
     }
     > .@{ant-prefix}-select .@{ant-prefix}-select-selection-selected-value,
     :not(.@{ant-prefix}-input-group-addon)
@@ -163,17 +174,17 @@ form {
 
     .@{ant-prefix}-cascader-picker {
       &-arrow {
-        margin-right: 17px;
+        margin-right: (@form-component-height / 2) + @form-feedback-icon-size - 13px;
       }
       &-clear {
-        right: 28px;
+        right: (@form-component-height / 2) + @form-feedback-icon-size - 2px;
       }
     }
 
     // Fix issue: https://github.com/ant-design/ant-design/issues/7854
     .@{ant-prefix}-input-search:not(.@{ant-prefix}-input-search-enter-button) {
       .@{ant-prefix}-input-suffix {
-        right: 28px;
+        right: (@form-component-height / 2) + @form-feedback-icon-size - 2px;
       }
     }
 
@@ -182,7 +193,7 @@ form {
     .@{ant-prefix}-time-picker {
       &-icon,
       &-clear {
-        right: 28px;
+        right: (@form-component-height / 2) + @form-feedback-icon-size - 2px;
       }
     }
   }
@@ -251,10 +262,17 @@ form {
   // fix input with addon position. https://github.com/ant-design/ant-design/issues/8243
   :not(.@{ant-prefix}-input-group-wrapper) > .@{ant-prefix}-input-group,
   .@{ant-prefix}-input-group-wrapper {
-    position: relative;
-    top: -1px;
     display: inline-block;
     vertical-align: middle;
+  }
+
+  // https://github.com/ant-design/ant-design/issues/20616
+  &:not(.@{form-prefix-cls}-vertical) {
+    :not(.@{ant-prefix}-input-group-wrapper) > .@{ant-prefix}-input-group,
+    .@{ant-prefix}-input-group-wrapper {
+      position: relative;
+      top: -1px;
+    }
   }
 }
 
@@ -448,8 +466,13 @@ form {
     }
   }
 
-  .@{ant-prefix}-cascader-picker:focus .@{ant-prefix}-cascader-input {
-    .active(@warning-color);
+  .@{ant-prefix}-cascader-picker {
+    &:focus .@{ant-prefix}-cascader-input {
+      .active(@warning-color);
+    }
+    &:hover .@{ant-prefix}-cascader-input {
+      border-color: @warning-color;
+    }
   }
 }
 
@@ -522,8 +545,13 @@ form {
     }
   }
 
-  .@{ant-prefix}-cascader-picker:focus .@{ant-prefix}-cascader-input {
-    .active(@error-color);
+  .@{ant-prefix}-cascader-picker {
+    &:focus .@{ant-prefix}-cascader-input {
+      .active(@error-color);
+    }
+    &:hover .@{ant-prefix}-cascader-input {
+      border-color: @error-color;
+    }
   }
 
   // transfer

@@ -41,7 +41,6 @@
     width: 14px;
     height: 14px;
     margin-top: -5px;
-    margin-left: -7px;
     background-color: @slider-handle-background-color;
     border: solid @slider-handle-border-width @slider-handle-color;
     border-radius: 50%;
@@ -186,6 +185,13 @@
       top: auto;
       left: 2px;
       margin-bottom: -4px;
+    }
+  }
+
+  &-tooltip {
+    // https://github.com/ant-design/ant-design/issues/20014
+    .@{ant-prefix}-tooltip-inner {
+      min-width: unset;
     }
   }
 }

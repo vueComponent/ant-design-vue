@@ -1,21 +1,29 @@
 ## API
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| offsetBottom | Pixels to offset from bottom when calculating position of scroll | number | - |
-| offsetTop | Pixels to offset from top when calculating position of scroll | number | 0 |
-| target | specifies the scrollable area dom node | () => HTMLElement | () => window |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| offsetBottom | Offset from the bottom of the viewport (in pixels) | number | - |  |
+| offsetTop | Offset from the top of the viewport (in pixels) | number | 0 |  |
+| target | Specifies the scrollable area DOM node | () => HTMLElement | () => window |  |
 
 ### events
 
-| Events Name | Description                              | Arguments         |
-| ----------- | ---------------------------------------- | ----------------- |
-| onChange    | Callback for when affix state is changed | Function(affixed) |
+| Events Name | Description                              | Arguments         | Version |
+| ----------- | ---------------------------------------- | ----------------- | ------- |
+| change      | Callback for when Affix state is changed | Function(affixed) |
 
-**Note:** Children of `Affix` can not be `position: absolute`, but you can set `Affix` as `position: absolute`:
+**Note:** Children of `Affix` must not have the property `position: absolute`, but you can set `position: absolute` on `Affix` itself:
 
 ```html
 <a-affix :style="{ position: 'absolute', top: y, left: x}">
   ...
 </a-affix>
 ```
+
+## FAQ
+
+### Affix bind container with `target`, sometime move out of container.
+
+We don't listen window scroll for performance consideration.
+
+Related issues：[#3938](https://github.com/ant-design/ant-design/issues/3938) [#5642](https://github.com/ant-design/ant-design/issues/5642) [#16120](https://github.com/ant-design/ant-design/issues/16120)

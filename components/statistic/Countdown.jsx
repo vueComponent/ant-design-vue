@@ -48,6 +48,7 @@ export default {
       if (this.countdownId) return;
       this.countdownId = window.setInterval(() => {
         this.$refs.statistic.$forceUpdate();
+        this.syncTimer();
       }, REFRESH_INTERVAL);
     },
 

@@ -48,28 +48,29 @@ There are five ways to display the information based on the content's nature:
 
 The items listed above are all functions, expecting a settings object as parameter. The properties of the object are follows:
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| autoFocusButton | Specify which button to autofocus | null\|string: `ok` `cancel` | `ok` |
-| cancelText | Text of the Cancel button | string | `Cancel` |
-| centered | Centered Modal | Boolean | `false` |
-| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |
-| class | class of container | string | - |
-| content | Content | string\|vNode \|function(h) | - |
-| icon | custom icon (`Added in 1.14.0`) | string\|()=>VNode | `<Icon type="question-circle">` |
-| iconType | Icon `type` of the Icon component (deperated after `1.14.0`) | string | `question-circle` |
-| keyboard | Whether support press esc to close | Boolean | true |
-| mask | Whether show mask or not. | Boolean | true |
-| maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | Boolean | `false` |
-| okText | Text of the OK button | string | `OK` |
-| okType | Button `type` of the OK button | string | `primary` |
-| okButtonProps | The ok button props | [ButtonProps](/components/button) | - |
-| cancelButtonProps | The cancel button props | [ButtonProps](/components/button) | - |
-| title | Title | string\|vNode \|function(h) | - |
-| width | Width of the modal dialog | string\|number | 416 |
-| zIndex | The `z-index` of the Modal | Number | 1000 |
-| onCancel | Specify a function that will be called when the user clicks the Cancel button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |
-| onOk | Specify a function that will be called when the user clicks the OK button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| autoFocusButton | Specify which button to autofocus | null\|string: `ok` `cancel` | `ok` |  |
+| cancelText | Text of the Cancel button | string | `Cancel` |  |
+| centered | Centered Modal | Boolean | `false` |  |
+| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |  |
+| class | class of container | string | - |  |
+| content | Content | string\|vNode \|function(h) | - |  |
+| icon | custom icon (`Added in 1.14.0`) | string\|()=>VNode | `<Icon type="question-circle">` |  |
+| iconType | Icon `type` of the Icon component (deperated after `1.14.0`) | string | `question-circle` |  |
+| keyboard | Whether support press esc to close | Boolean | true |  |
+| mask | Whether show mask or not. | Boolean | true |  |
+| maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | Boolean | `false` |  |
+| okText | Text of the OK button | string | `OK` |  |
+| okType | Button `type` of the OK button | string | `primary` |  |
+| okButtonProps | The ok button props | [ButtonProps](/components/button) | - |  |
+| cancelButtonProps | The cancel button props | [ButtonProps](/components/button) | - |  |
+| title | Title | string\|vNode \|function(h) | - |  |
+| width | Width of the modal dialog | string\|number | 416 |  |
+| zIndex | The `z-index` of the Modal | Number | 1000 |  |
+| onCancel | Specify a function that will be called when the user clicks the Cancel button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |  |
+| onOk | Specify a function that will be called when the user clicks the OK button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |  |
+| parentContext | The parent context of the popup is generally used to get the parent provider, such as the configuration of `ConfigProvider` | vue instance | - | 1.4.11 |
 
 All the `Modal.method`s will return a reference, and then we can update and close the modal dialog by the reference.
 

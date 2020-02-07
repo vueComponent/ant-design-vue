@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
-import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util';
+import { hasProp, getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
 function noop() {}
 export default {
   props: {
@@ -69,6 +69,7 @@ export default {
     if (hasProp(this, 'visible')) {
       extraProps.popupVisible = this.$props.visible;
     }
+    const listeners = getListeners(this);
     const triggerProps = {
       props: {
         popupClassName: overlayClassName,
@@ -89,9 +90,9 @@ export default {
         ...extraProps,
       },
       on: {
-        ...this.$listeners,
-        popupVisibleChange: this.$listeners.visibleChange || noop,
-        popupAlign: this.$listeners.popupAlign || noop,
+        ...listeners,
+        popupVisibleChange: listeners.visibleChange || noop,
+        popupAlign: listeners.popupAlign || noop,
       },
       ref: 'trigger',
     };

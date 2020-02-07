@@ -1,10 +1,11 @@
 import Dialog from './Dialog';
 import ContainerRender from '../_util/ContainerRender';
 import getDialogPropTypes from './IDialogPropTypes';
-import { getStyle, getClass } from '../_util/props-util';
+import { getStyle, getClass, getListeners } from '../_util/props-util';
 const IDialogPropTypes = getDialogPropTypes();
 let openCount = 0;
 const DialogWrap = {
+  inheritAttrs: false,
   props: {
     ...IDialogPropTypes,
     visible: IDialogPropTypes.visible.def(false),
@@ -36,7 +37,7 @@ const DialogWrap = {
   },
   methods: {
     getComponent(extra = {}) {
-      const { $attrs, $listeners, $props, $slots, getContainer } = this;
+      const { $attrs, $props, $slots, getContainer } = this;
       const { on, ...otherProps } = extra;
       const dialogProps = {
         props: {
@@ -50,7 +51,7 @@ const DialogWrap = {
         ref: '_component',
         key: 'dialog',
         on: {
-          ...$listeners,
+          ...getListeners(this),
           ...on,
         },
       };

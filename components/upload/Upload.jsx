@@ -3,7 +3,7 @@ import uniqBy from 'lodash/uniqBy';
 import findIndex from 'lodash/findIndex';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, initDefaultProps, hasProp } from '../_util/props-util';
+import { getOptionProps, initDefaultProps, hasProp, getListeners } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import { ConfigConsumerProps } from '../config-provider';
@@ -212,8 +212,9 @@ export default {
           remove: this.handleManualRemove,
         },
       };
-      if (this.$listeners.preview) {
-        uploadListProps.on.preview = this.$listeners.preview;
+      const listeners = getListeners(this);
+      if (listeners.preview) {
+        uploadListProps.on.preview = listeners.preview;
       }
       return <UploadList {...uploadListProps} />;
     },
@@ -237,7 +238,6 @@ export default {
         beforeUpload: this.reBeforeUpload,
       },
       on: {
-        // ...this.$listeners,
         start: this.onStart,
         error: this.onError,
         progress: this.onProgress,
@@ -273,7 +273,7 @@ export default {
             onDragover={this.onFileDrop}
             onDragleave={this.onFileDrop}
           >
-            <VcUpload {...vcUploadProps}>
+            <VcUpload {...vcUploadProps} class={`${prefixCls}-btn`}>
               <div class={`${prefixCls}-drag-container`}>{children}</div>
             </VcUpload>
           </div>

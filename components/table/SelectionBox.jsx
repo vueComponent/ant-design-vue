@@ -2,7 +2,7 @@ import Checkbox from '../checkbox';
 import Radio from '../radio';
 import { SelectionBoxProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 
 export default {
   name: 'SelectionBox',
@@ -48,14 +48,13 @@ export default {
 
   render() {
     const { type, rowIndex, ...rest } = getOptionProps(this);
-    const { checked, $attrs, $listeners } = this;
+    const { checked } = this;
     const checkboxProps = {
       props: {
         checked,
         ...rest,
       },
-      attrs: $attrs,
-      on: $listeners,
+      on: getListeners(this),
     };
     if (type === 'radio') {
       checkboxProps.props.value = rowIndex;

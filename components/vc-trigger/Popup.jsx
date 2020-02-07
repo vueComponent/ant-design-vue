@@ -4,6 +4,7 @@ import PopupInner from './PopupInner';
 import LazyRenderBox from './LazyRenderBox';
 import animate from '../_util/css-animation';
 import BaseMixin from '../_util/BaseMixin';
+import { getListeners } from '../_util/props-util';
 
 export default {
   mixins: [BaseMixin],
@@ -72,7 +73,8 @@ export default {
         this.currentAlignClassName = currentAlignClassName;
         popupDomNode.className = this.getClassName(currentAlignClassName);
       }
-      this.$listeners.align && this.$listeners.align(popupDomNode, align);
+      const listeners = getListeners(this);
+      listeners.align && listeners.align(popupDomNode, align);
     },
 
     // Record size if stretch needed
@@ -148,7 +150,7 @@ export default {
       return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`;
     },
     getPopupElement() {
-      const { $props: props, $slots, $listeners, getTransitionName } = this;
+      const { $props: props, $slots, getTransitionName } = this;
       const { stretchChecked, targetHeight, targetWidth } = this.$data;
 
       const {
@@ -161,7 +163,6 @@ export default {
         destroyPopupOnHide,
         stretch,
       } = props;
-      // const { mouseenter, mouseleave } = $listeners
       const className = this.getClassName(
         this.currentAlignClassName || getClassNameFromAlign(align),
       );
@@ -201,7 +202,7 @@ export default {
           // hiddenClassName,
         },
         class: className,
-        on: $listeners,
+        on: getListeners(this),
         ref: 'popupInstance',
         style: { ...sizeStyle, ...popupStyle, ...this.getZIndexStyle() },
       };

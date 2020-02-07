@@ -127,6 +127,8 @@ export interface ModalOptions {
    * @type Function
    */
   onOk?: () => any;
+
+  parentContext: Object;
 }
 
 export interface ModalConfirm {

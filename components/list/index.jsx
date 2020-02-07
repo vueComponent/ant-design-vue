@@ -8,7 +8,12 @@ import Pagination, { PaginationConfig } from '../pagination';
 import { Row } from '../grid';
 
 import Item from './Item';
-import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getComponentFromProp,
+  filterEmpty,
+  getListeners,
+} from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import Base from '../base';
 
@@ -136,7 +141,6 @@ const List = {
       dataSource,
       size,
       loading,
-      $listeners,
       $slots,
       paginationCurrent,
     } = this;
@@ -229,7 +233,7 @@ const List = {
     const paginationPosition = paginationProps.position || 'bottom';
 
     return (
-      <div class={classString} {...{ on: $listeners }}>
+      <div class={classString} {...{ on: getListeners(this) }}>
         {(paginationPosition === 'top' || paginationPosition === 'both') && paginationContent}
         {header && <div class={`${prefixCls}-header`}>{header}</div>}
         <Spin {...{ props: loadingProp }}>

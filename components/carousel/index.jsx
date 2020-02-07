@@ -1,6 +1,11 @@
 import PropTypes from '../_util/vue-types';
 import debounce from 'lodash/debounce';
-import { initDefaultProps, getComponentFromProp, filterEmpty } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getComponentFromProp,
+  filterEmpty,
+  getListeners,
+} from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
@@ -132,7 +137,7 @@ const Carousel = {
     const props = {
       ...this.$props,
     };
-    const { $slots, $listeners } = this;
+    const { $slots } = this;
 
     if (props.effect === 'fade') {
       props.fade = true;
@@ -150,7 +155,7 @@ const Carousel = {
         nextArrow: getComponentFromProp(this, 'nextArrow'),
         prevArrow: getComponentFromProp(this, 'prevArrow'),
       },
-      on: $listeners,
+      on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
 

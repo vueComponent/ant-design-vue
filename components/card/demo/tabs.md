@@ -30,7 +30,7 @@
       @tabChange="key => onTabChange(key, 'noTitleKey')"
     >
       <p v-if="noTitleKey === 'article'">article content</p>
-      <p v-else="noTitleKey === 'app'">app content</p>
+      <p v-else-if="noTitleKey === 'app'">app content</p>
       <p v-else="noTitleKey === 'project'">project content</p>
     </a-card>
   </div>

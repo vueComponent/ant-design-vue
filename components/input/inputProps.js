@@ -30,7 +30,7 @@ export default {
   // onBlur?: React.FormEventHandler<any>;
   prefix: PropTypes.any,
   suffix: PropTypes.any,
-  spellCheck: Boolean,
+  // spellCheck: Boolean,
   autoFocus: Boolean,
   allowClear: Boolean,
   lazy: {

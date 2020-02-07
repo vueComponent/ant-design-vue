@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getOptionProps } from '../../../_util/props-util';
+import { getOptionProps, getListeners } from '../../../_util/props-util';
 import TodayButton from './TodayButton';
 import OkButton from './OkButton';
 import TimePickerButton from './TimePickerButton';
@@ -37,7 +37,6 @@ const CalendarFooter = {
 
   render() {
     const props = getOptionProps(this);
-    const { $listeners } = this;
     const { value, prefixCls, showOk, timePicker, renderFooter, showToday, mode } = props;
     let footerEl = null;
     const extraFooter = renderFooter && renderFooter(mode);
@@ -47,7 +46,7 @@ const CalendarFooter = {
           ...props,
           value: value,
         },
-        on: $listeners,
+        on: getListeners(this),
       };
       let nowEl = null;
       if (showToday) {

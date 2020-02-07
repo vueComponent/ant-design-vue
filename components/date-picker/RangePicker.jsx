@@ -15,6 +15,7 @@ import {
   mergeProps,
   getComponentFromProp,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
@@ -262,16 +263,16 @@ export default {
       sShowDate: showDate,
       sHoverValue: hoverValue,
       sOpen: open,
-      $listeners,
       $scopedSlots,
     } = this;
+    const listeners = getListeners(this);
     const {
       calendarChange = noop,
       ok = noop,
       focus = noop,
       blur = noop,
       panelChange = noop,
-    } = $listeners;
+    } = listeners;
     const {
       prefixCls: customizePrefixCls,
       tagPrefixCls: customizeTagPrefixCls,
@@ -407,7 +408,7 @@ export default {
     const vcDatePickerProps = mergeProps(
       {
         props,
-        on: $listeners,
+        on: listeners,
       },
       pickerChangeHandler,
       {

@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
 
 import { Store } from './createStore';
+import { getListeners } from '../_util/props-util';
 
 const BodyRowProps = {
   store: Store,
@@ -48,7 +49,7 @@ export default function createTableRow(Component = 'tr') {
       };
 
       return (
-        <Component class={className} {...{ on: this.$listeners }}>
+        <Component class={className} {...{ on: getListeners(this) }}>
           {this.$slots.default}
         </Component>
       );

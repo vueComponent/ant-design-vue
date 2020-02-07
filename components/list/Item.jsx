@@ -1,6 +1,11 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import { getSlotOptions, getComponentFromProp, isEmptyElement } from '../_util/props-util';
+import {
+  getSlotOptions,
+  getComponentFromProp,
+  isEmptyElement,
+  getListeners,
+} from '../_util/props-util';
 import { Col } from '../grid';
 import { ConfigConsumerProps } from '../config-provider';
 import { ListGridType } from './index';
@@ -65,7 +70,8 @@ export default {
   },
   render() {
     const { grid } = this.listContext;
-    const { prefixCls: customizePrefixCls, $slots, $listeners } = this;
+    const { prefixCls: customizePrefixCls, $slots } = this;
+    const listeners = getListeners(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
 
@@ -127,7 +133,7 @@ export default {
         xl={getGrid(grid, 'xl')}
         xxl={getGrid(grid, 'xxl')}
       >
-        <div {...{ on: $listeners }} class={classString}>
+        <div {...{ on: listeners }} class={classString}>
           {extra && extraContent}
           {!extra && metaContent}
           {!extra && content}
@@ -135,7 +141,7 @@ export default {
         </div>
       </Col>
     ) : (
-      <div {...{ on: $listeners }} class={classString}>
+      <div {...{ on: listeners }} class={classString}>
         {extra && extraContent}
         {!extra && metaContent}
         {!extra && content}

@@ -2,7 +2,13 @@ import Vue from 'vue';
 import ref from 'vue-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../_util/Dom/contains';
-import { hasProp, getComponentFromProp, getEvents, filterEmpty } from '../_util/props-util';
+import {
+  hasProp,
+  getComponentFromProp,
+  getEvents,
+  filterEmpty,
+  getListeners,
+} from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../_util/Dom/addEventListener';
 import warning from '../_util/warning';
@@ -369,7 +375,7 @@ export default {
       }
       mouseProps.mousedown = this.onPopupMouseDown;
       mouseProps.touchstart = this.onPopupMouseDown;
-      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $listeners } = self;
+      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer } = self;
       const {
         prefixCls,
         destroyPopupOnHide,
@@ -409,7 +415,7 @@ export default {
           popupStyle,
         },
         on: {
-          align: $listeners.popupAlign || noop,
+          align: getListeners(this).popupAlign || noop,
           ...mouseProps,
         },
         directives: [
@@ -448,7 +454,8 @@ export default {
             sPopupVisible,
           });
         }
-        this.$listeners.popupVisibleChange && this.$listeners.popupVisibleChange(sPopupVisible);
+        const listeners = getListeners(this);
+        listeners.popupVisibleChange && listeners.popupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
       if (sPopupVisible && alignPoint && event) {
@@ -513,7 +520,7 @@ export default {
 
     createTwoChains(event) {
       let fn = () => {};
-      const events = this.$listeners;
+      const events = getListeners(this);
       if (this.childOriginEvents[event] && events[event]) {
         return this[`fire${event}`];
       }

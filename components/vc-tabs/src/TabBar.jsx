@@ -1,14 +1,14 @@
 import TabBarRootNode from './TabBarRootNode';
 import TabBarTabsNode from './TabBarTabsNode';
 import SaveRef from './SaveRef';
-import { getAttrs } from '../../_util/props-util';
+import { getAttrs, getListeners } from '../../_util/props-util';
 
 export default {
   name: 'TabBar',
   inheritAttrs: false,
   render() {
     const props = getAttrs(this);
-    const listeners = this.$listeners;
+    const listeners = getListeners(this);
     return (
       <SaveRef
         children={saveRef => (

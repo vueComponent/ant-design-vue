@@ -8,6 +8,7 @@ import {
   filterEmpty,
   getComponentFromProp,
   getClass,
+  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
@@ -166,7 +167,7 @@ export default {
           ...restProps,
           icon:
             $slots[slots.icon] ||
-            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon]) ||
+            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon](item)) ||
             restProps.icon,
           title:
             $slots[slots.title] ||
@@ -205,7 +206,7 @@ export default {
         __propsSymbol__: Symbol(),
         switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
       },
-      on: this.$listeners,
+      on: getListeners(this),
       ref: 'tree',
       class: !showIcon && `${prefixCls}-icon-hide`,
     };

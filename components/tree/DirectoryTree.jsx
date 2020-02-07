@@ -7,7 +7,12 @@ import Tree, { TreeProps } from './Tree';
 import { calcRangeKeys, getFullKeyList } from './util';
 import Icon from '../icon';
 import BaseMixin from '../_util/BaseMixin';
-import { initDefaultProps, getOptionProps } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getOptionProps,
+  getListeners,
+  getComponentFromProp,
+} from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 // export type ExpandAction = false | 'click' | 'dblclick'; export interface
@@ -186,10 +191,8 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tree', customizePrefixCls);
     const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data;
-    warning(
-      !this.$listeners.doubleclick,
-      '`doubleclick` is deprecated. please use `dblclick` instead.',
-    );
+    const listeners = getListeners(this);
+    warning(!listeners.doubleclick, '`doubleclick` is deprecated. please use `dblclick` instead.');
     const treeProps = {
       props: {
         icon: getIcon,
@@ -197,11 +200,12 @@ export default {
         prefixCls,
         expandedKeys,
         selectedKeys,
+        switcherIcon: getComponentFromProp(this, 'switcherIcon'),
       },
       ref: 'tree',
       class: `${prefixCls}-directory`,
       on: {
-        ...omit(this.$listeners, ['update:selectedKeys']),
+        ...omit(listeners, ['update:selectedKeys']),
         select: this.onSelect,
         click: this.onClick,
         dblclick: this.onDoubleClick,

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Line from './line';
@@ -136,7 +136,7 @@ export default {
       props: {
         ...restProps,
       },
-      on: this.$listeners,
+      on: getListeners(this),
       class: classString,
     };
     return <div {...progressProps}>{progress}</div>;

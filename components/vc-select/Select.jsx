@@ -19,6 +19,7 @@ import {
   getAttrs,
   getOptionProps,
   getSlots,
+  getListeners,
 } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { cloneElement } from '../_util/vnode';
@@ -790,7 +791,7 @@ const Select = {
               keydown: chaining(
                 this.onInputKeydown,
                 inputEvents.keydown,
-                this.$listeners.inputKeydown,
+                getListeners(this).inputKeydown,
               ),
               focus: chaining(this.inputFocus, inputEvents.focus),
               blur: chaining(this.inputBlur, inputEvents.blur),
@@ -1554,8 +1555,7 @@ const Select = {
     const realOpen = this.getRealOpenState();
     const empty = this._empty;
     const options = this._options || [];
-    const { $listeners } = this;
-    const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = $listeners;
+    const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = getListeners(this);
     const selectionProps = {
       props: {},
       attrs: {

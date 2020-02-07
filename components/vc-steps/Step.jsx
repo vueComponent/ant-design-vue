@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp } from '../_util/props-util';
+import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 
 function isString(str) {
   return typeof str === 'string';
@@ -88,7 +88,7 @@ export default {
     };
     const stepProps = {
       class: classString,
-      on: this.$listeners,
+      on: getListeners(this),
     };
     const stepItemStyle = {};
     if (itemWidth) {

@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { filterEmpty } from '../_util/props-util';
+import { filterEmpty, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -32,9 +32,8 @@ export default {
   },
   methods: {},
   render() {
-    const { $listeners } = this;
     return (
-      <span class={this.classes} {...{ on: $listeners }}>
+      <span class={this.classes} {...{ on: getListeners(this) }}>
         {filterEmpty(this.$slots.default)}
       </span>
     );

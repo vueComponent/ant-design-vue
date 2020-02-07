@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from 'classnames';
-import { getOptionProps, getAttrs } from '../_util/props-util';
+import { getOptionProps, getAttrs, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 function noop() {}
@@ -48,10 +48,10 @@ export default {
   },
 
   render() {
-    const { $slots, $listeners, radioGroupContext: radioGroup } = this;
+    const { $slots, radioGroupContext: radioGroup } = this;
     const props = getOptionProps(this);
     const children = $slots.default;
-    const { mouseenter = noop, mouseleave = noop, ...restListeners } = $listeners;
+    const { mouseenter = noop, mouseleave = noop, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);

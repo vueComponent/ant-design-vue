@@ -1,6 +1,12 @@
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
-import { getOptionProps, hasProp, initDefaultProps, getAttrs } from '../../_util/props-util';
+import {
+  getOptionProps,
+  hasProp,
+  initDefaultProps,
+  getAttrs,
+  getListeners,
+} from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 
 export default {
@@ -137,7 +143,7 @@ export default {
           {...{
             attrs: globalProps,
             on: {
-              ...this.$listeners,
+              ...getListeners(this),
               change: this.handleChange,
               click: this.onClick,
             },

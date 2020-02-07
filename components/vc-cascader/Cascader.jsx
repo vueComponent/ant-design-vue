@@ -1,4 +1,4 @@
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp, getListeners } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import Menus from './Menus';
@@ -313,14 +313,13 @@ export default {
   render() {
     const {
       $props,
-      $slots,
       sActiveValue,
       handleMenuSelect,
       sPopupVisible,
       handlePopupVisibleChange,
       handleKeyDown,
-      $listeners,
     } = this;
+    const listeners = getListeners(this);
     const {
       prefixCls,
       transitionName,
@@ -348,7 +347,7 @@ export default {
           expandIcon,
         },
         on: {
-          ...$listeners,
+          ...listeners,
           select: handleMenuSelect,
           itemDoubleClick: this.handleItemDoubleClick,
         },
@@ -370,7 +369,7 @@ export default {
         popupClassName: popupClassName + emptyMenuClassName,
       },
       on: {
-        ...$listeners,
+        ...listeners,
         popupVisibleChange: handlePopupVisibleChange,
       },
       ref: 'trigger',

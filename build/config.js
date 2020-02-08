@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'avatar', // dev components
+    componentName: 'back-top', // dev components
   },
 };

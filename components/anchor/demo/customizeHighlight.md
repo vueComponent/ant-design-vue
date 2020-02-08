@@ -1,16 +1,16 @@
 <cn>
-#### 静态位置
-不浮动，状态不随页面滚动变化。
+#### 自定义锚点高亮
+自定义锚点高亮。
 </cn>
 
 <us>
-#### Static
-Do not change state when page is scrolling.
+#### Customize the anchor highlight
+Customize the anchor highlight.
 </us>
 
 ```tpl
 <template>
-  <a-anchor :affix="false">
+  <a-anchor :affix="false" :getCurrentAnchor="getCurrentAnchor">
     <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />
     <a-anchor-link href="#components-anchor-demo-static" title="Static demo" />
     <a-anchor-link href="#API" title="API">
@@ -19,4 +19,13 @@ Do not change state when page is scrolling.
     </a-anchor-link>
   </a-anchor>
 </template>
+<script>
+export default {
+  methods: {
+    getCurrentAnchor() {
+      return '#components-anchor-demo-static';
+    }
+  }
+}
+</script>
 ```

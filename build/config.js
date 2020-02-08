@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'alert', // dev components
+    componentName: 'anchor', // dev components
   },
 };

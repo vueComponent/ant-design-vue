@@ -2,6 +2,9 @@
 import Basic from './basic';
 import Static from './static';
 import OnClick from './onClick';
+import CustomizeHighlight from './customizeHighlight';
+import OnChange from './OnChange';
+import TargetOffset from './targetOffset';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -37,6 +40,9 @@ export default {
         <Basic />
         <Static />
         <OnClick />
+        <CustomizeHighlight />
+        <OnChange />
+        <TargetOffset />
         <api>
           <CN slot="cn" />
           <US />

@@ -1,16 +1,16 @@
 <cn>
-#### 静态位置
-不浮动，状态不随页面滚动变化。
+#### 设置锚点滚动偏移量
+锚点目标滚动到屏幕正中间。
 </cn>
 
 <us>
-#### Static
-Do not change state when page is scrolling.
+#### Set Anchor scroll offset
+Anchor target scroll to screen center.
 </us>
 
 ```tpl
 <template>
-  <a-anchor :affix="false">
+  <a-anchor :targetOffset="targetOffset">
     <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />
     <a-anchor-link href="#components-anchor-demo-static" title="Static demo" />
     <a-anchor-link href="#API" title="API">
@@ -19,4 +19,16 @@ Do not change state when page is scrolling.
     </a-anchor-link>
   </a-anchor>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      targetOffset: undefined,
+    }
+  },
+  mounted() {
+    this.targetOffset = window.innerHeight / 2;
+  }
+}
+</script>
 ```

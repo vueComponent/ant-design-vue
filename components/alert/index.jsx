@@ -7,6 +7,7 @@ import { getComponentFromProp, isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
+
 function noop() {}
 export const AlertProps = {
   /**
@@ -42,7 +43,7 @@ const Alert = {
   },
   data() {
     return {
-      closing: true,
+      closing: false,
       closed: false,
     };
   },
@@ -56,14 +57,14 @@ const Alert = {
       dom.style.height = `${dom.offsetHeight}px`;
 
       this.setState({
-        closing: false,
+        closing: true,
       });
       this.$emit('close', e);
     },
     animationEnd() {
       this.setState({
+        closing: false,
         closed: true,
-        closing: true,
       });
       this.afterClose();
     },
@@ -84,8 +85,7 @@ const Alert = {
     // banner模式默认为警告
     type = banner && type === undefined ? 'warning' : type || 'info';
     let iconTheme = 'filled';
-    // should we give a warning?
-    // warning(!iconType, `The property 'iconType' is deprecated. Use the property 'icon' instead.`);
+
     if (!iconType) {
       switch (type) {
         case 'success':
@@ -117,7 +117,7 @@ const Alert = {
 
     const alertCls = classNames(prefixCls, {
       [`${prefixCls}-${type}`]: true,
-      [`${prefixCls}-close`]: !closing,
+      [`${prefixCls}-closing`]: closing,
       [`${prefixCls}-with-description`]: !!description,
       [`${prefixCls}-no-icon`]: !showIcon,
       [`${prefixCls}-banner`]: !!banner,
@@ -125,8 +125,12 @@ const Alert = {
     });
 
     const closeIcon = closable ? (
-      <a onClick={this.handleClose} class={`${prefixCls}-close-icon`}>
-        {closeText || <Icon type="close" />}
+      <a type="button" onClick={this.handleClose} class={`${prefixCls}-close-icon`} tabIndex={0}>
+        {closeText ? (
+          <span class={`${prefixCls}-close-text`}>{closeText}</span>
+        ) : (
+          <Icon type="close" />
+        )}
       </a>
     ) : null;
 
@@ -145,7 +149,7 @@ const Alert = {
     });
     return closed ? null : (
       <transition {...transitionProps}>
-        <div v-show={closing} class={alertCls} data-show={closing}>
+        <div v-show={!closing} class={alertCls} data-show={!closing}>
           {showIcon ? iconNode : null}
           <span class={`${prefixCls}-message`}>{message}</span>
           <span class={`${prefixCls}-description`}>{description}</span>

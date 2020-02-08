@@ -3,6 +3,26 @@ import { asyncExpect } from '@/tests/utils';
 import Avatar from '..';
 
 describe('Avatar Render', () => {
+  let originOffsetWidth;
+  beforeAll(() => {
+    // Mock offsetHeight
+    originOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth').get;
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      get() {
+        if (this.className === 'ant-avatar-string') {
+          return 100;
+        }
+        return 80;
+      },
+    });
+  });
+
+  afterAll(() => {
+    // Restore Mock offsetHeight
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      get: originOffsetWidth,
+    });
+  });
   it('Render long string correctly', () => {
     const wrapper = mount(Avatar, {
       slots: {
@@ -25,6 +45,9 @@ describe('Avatar Render', () => {
       attachToDocument: true,
     });
     wrapper.vm.setScale = jest.fn(() => {
+      if (wrapper.vm.scale === 0.5) {
+        return;
+      }
       wrapper.setData({ scale: 0.5 });
       wrapper.vm.$forceUpdate();
     });
@@ -35,14 +58,14 @@ describe('Avatar Render', () => {
       const children = wrapper.findAll('.ant-avatar-string');
       expect(children.length).toBe(1);
       expect(children.at(0).text()).toBe('Fallback');
-      expect(wrapper.vm.setScale).toBeCalled();
+      expect(wrapper.vm.setScale).toHaveBeenCalled();
     });
     await asyncExpect(() => {
       expect(global.document.body.querySelector('.ant-avatar-string').style.transform).toContain(
         'scale(0.5)',
       );
       global.document.body.innerHTML = '';
-    }, 0);
+    }, 1000);
   });
   it('should handle onError correctly', async () => {
     global.document.body.innerHTML = '';

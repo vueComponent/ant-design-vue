@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'auto-complete', // dev components
+    componentName: 'avatar', // dev components
   },
 };

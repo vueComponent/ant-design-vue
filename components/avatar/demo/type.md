@@ -12,6 +12,9 @@ Image, Icon and letter are supported, and the latter two kinds avatar can have c
 <template>
   <div>
     <a-avatar icon="user" />
+    <a-avatar>
+      <a-icon type="user" slot="icon" />
+    </a-avatar>
     <a-avatar>U</a-avatar>
     <a-avatar>USER</a-avatar>
     <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />

@@ -5,7 +5,7 @@
 
 <us>
 #### With Badge
-Usually used for messages remind.
+Usually used for reminders and notifications.
 </us>
 
 ```tpl

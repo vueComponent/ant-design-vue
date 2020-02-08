@@ -22,7 +22,7 @@ Lookup-Patterns - Uncertain Category
     >
       <template slot="dataSource">
         <a-select-option v-for="item in dataSource" :key="item.category" :text="item.category">
-          {{item.query}} 在
+          Found {{item.query}} on
           <a
             :href="`https://s.taobao.com/search?q=${item.query}`"
             target="_blank"
@@ -30,12 +30,11 @@ Lookup-Patterns - Uncertain Category
           >
             {{item.category}}
           </a>
-          区块中
-          <span className="global-search-item-count">约 {{item.count}} 个结果</span>
+          <span className="global-search-item-count">{{item.count}} results</span>
         </a-select-option>
       </template>
       <a-input>
-        <a-button slot="suffix" class="search-btn" size="large" type="primary">
+        <a-button slot="suffix" style="margin-right: -12px" class="search-btn" size="large" type="primary">
           <a-icon type="search" />
         </a-button>
       </a-input>
@@ -93,18 +92,23 @@ Lookup-Patterns - Uncertain Category
     padding-right: 62px;
   }
 
-  .global-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input-suffix {
-    right: 0;
-  }
-
   .global-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input-suffix button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
 
+  .global-search-item {
+    display: flex;
+  }
+
+  .global-search-item-desc {
+    flex: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   .global-search-item-count {
-    position: absolute;
-    right: 16px;
+    flex: none;
   }
 </style>
 ```

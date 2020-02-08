@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'anchor', // dev components
+    componentName: 'auto-complete', // dev components
   },
 };

@@ -10,28 +10,45 @@ Basic Usage, set datasource of autocomplete with `dataSource` property.
 
 ```tpl
 <template>
+<div>
   <a-auto-complete
     :dataSource="dataSource"
     style="width: 200px"
     @select="onSelect"
-    @search="handleSearch"
+    @search="onSearch"
     placeholder="input here"
   />
+  <br />
+  <br />
+  <a-auto-complete
+    :value="value"
+    :dataSource="dataSource"
+    style="width: 200px"
+    @select="onSelect"
+    @search="onSearch"
+    @change="onChange"
+    placeholder="control mode"
+  />
+</div>
 </template>
 <script>
   export default {
     data() {
       return {
+        value: '',
         dataSource: [],
       };
     },
     methods: {
-      handleSearch(value) {
-        this.dataSource = !value ? [] : [value, value + value, value + value + value];
+      onSearch(searchText) {
+        this.dataSource = !searchText ? [] : [searchText, searchText.repeat(2), searchText.repeat(3)];
       },
       onSelect(value) {
         console.log('onSelect', value);
       },
+      onChange(value) {
+        this.value = value;
+      }
     },
   };
 </script>

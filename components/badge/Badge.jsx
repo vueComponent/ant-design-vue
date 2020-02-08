@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
+import { PresetColorTypes } from '../_util/colors';
 import classNames from 'classnames';
 import {
   initDefaultProps,
@@ -23,12 +24,15 @@ export const BadgeProps = {
   prefixCls: PropTypes.string,
   scrollNumberPrefixCls: PropTypes.string,
   status: PropTypes.oneOf(['success', 'processing', 'default', 'error', 'warning']),
+  color: PropTypes.string,
   text: PropTypes.string,
   offset: PropTypes.array,
   numberStyle: PropTypes.object.def({}),
   title: PropTypes.string,
 };
-
+function isPresetColor(color) {
+  return PresetColorTypes.indexOf(color) !== -1;
+}
 export default {
   name: 'ABadge',
   props: initDefaultProps(BadgeProps, {
@@ -40,35 +44,6 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
-    getBadgeClassName(prefixCls) {
-      const { status } = this.$props;
-      const children = filterEmpty(this.$slots.default);
-      return classNames(prefixCls, {
-        [`${prefixCls}-status`]: !!status,
-        [`${prefixCls}-not-a-wrapper`]: !children.length,
-      });
-    },
-
-    isZero() {
-      const numberedDispayCount = this.getNumberedDispayCount();
-      return numberedDispayCount === '0' || numberedDispayCount === 0;
-    },
-
-    isDot() {
-      const { dot, status } = this.$props;
-      const isZero = this.isZero();
-      return (dot && !isZero) || status;
-    },
-
-    isHidden() {
-      const { showZero } = this.$props;
-      const displayCount = this.getDispayCount();
-      const isZero = this.isZero();
-      const isDot = this.isDot();
-      const isEmpty = displayCount === null || displayCount === undefined || displayCount === '';
-      return (isEmpty || (isZero && !showZero)) && !isDot;
-    },
-
     getNumberedDispayCount() {
       const { overflowCount } = this.$props;
       const count = this.badgeCount;
@@ -104,6 +79,37 @@ export default {
           }
         : numberStyle;
     },
+    getBadgeClassName(prefixCls) {
+      const { status } = this.$props;
+      const children = filterEmpty(this.$slots.default);
+      return classNames(prefixCls, {
+        [`${prefixCls}-status`]: !!status,
+        [`${prefixCls}-not-a-wrapper`]: !children.length,
+      });
+    },
+    hasStatus() {
+      const { status, color } = this.$props;
+      return !!status || !!color;
+    },
+    isZero() {
+      const numberedDispayCount = this.getNumberedDispayCount();
+      return numberedDispayCount === '0' || numberedDispayCount === 0;
+    },
+
+    isDot() {
+      const { dot, status } = this.$props;
+      const isZero = this.isZero();
+      return (dot && !isZero) || this.hasStatus();
+    },
+
+    isHidden() {
+      const { showZero } = this.$props;
+      const displayCount = this.getDispayCount();
+      const isZero = this.isZero();
+      const isDot = this.isDot();
+      const isEmpty = displayCount === null || displayCount === undefined || displayCount === '';
+      return (isEmpty || (isZero && !showZero)) && !isDot;
+    },
 
     renderStatusText(prefixCls) {
       const { text } = this.$props;
@@ -134,7 +140,7 @@ export default {
         [`${prefixCls}-count`]: !isDot,
         [`${prefixCls}-multiple-words`]:
           !isDot && count && count.toString && count.toString().length > 1,
-        [`${prefixCls}-status-${status}`]: !!status,
+        [`${prefixCls}-status-${status}`]: this.hasStatus(),
       };
 
       return hidden ? null : (
@@ -159,6 +165,7 @@ export default {
       scrollNumberPrefixCls: customizeScrollNumberPrefixCls,
       status,
       text,
+      color,
       $slots,
     } = this;
 
@@ -175,20 +182,28 @@ export default {
     const scrollNumber = this.renderBadgeNumber(prefixCls, scrollNumberPrefixCls);
     const statusText = this.renderStatusText(prefixCls);
     const statusCls = classNames({
-      [`${prefixCls}-status-dot`]: !!status,
+      [`${prefixCls}-status-dot`]: this.hasStatus(),
       [`${prefixCls}-status-${status}`]: !!status,
+      [`${prefixCls}-status-${color}`]: isPresetColor(color),
     });
-
+    const statusStyle = {};
+    if (color && !isPresetColor(color)) {
+      statusStyle.background = color;
+    }
     // <Badge status="success" />
-    if (!children.length && status) {
+    if (!children.length && this.hasStatus()) {
+      const styleWithOffset = this.getStyleWithOffset();
+      const statusTextColor = styleWithOffset && styleWithOffset.color;
       return (
         <span
           {...{ on: getListeners(this) }}
           class={this.getBadgeClassName(prefixCls)}
-          style={this.getStyleWithOffset()}
+          style={styleWithOffset}
         >
-          <span class={statusCls} />
-          <span class={`${prefixCls}-status-text`}>{text}</span>
+          <span class={statusCls} style={statusStyle} />
+          <span style={{ color: statusTextColor }} class={`${prefixCls}-status-text`}>
+            {text}
+          </span>
         </span>
       );
     }

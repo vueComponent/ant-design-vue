@@ -6,6 +6,7 @@ import Change from './change';
 import Overflow from './overflow';
 import Status from './status';
 import Title from './title';
+import Colors from './colors';
 
 import CN from './../index.zh-CN.md';
 import US from './../index.en_US.md';
@@ -42,6 +43,7 @@ export default {
         <Status />
         <Change />
         <Title />
+        <Colors />
         <api>
           <CN slot="cn" />
           <US />

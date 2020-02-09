@@ -26,8 +26,8 @@ A loading indicator can be added to a button by setting the `loading` property o
     </a-button>
     <br />
     <a-button type="primary" loading />
-    <a-button shape="circle" loading />
     <a-button type="primary" shape="circle" loading />
+    <a-button type="danger" shape="round" loading />
   </div>
 </template>
 <script>

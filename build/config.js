@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'badge', // dev components
+    componentName: 'button', // dev components
   },
 };

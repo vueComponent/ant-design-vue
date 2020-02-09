@@ -149,7 +149,7 @@
         "style-loader": "^1.0.0",
         "stylelint": "^13.0.0",
         "stylelint-config-prettier": "^8.0.0",
-        "stylelint-config-standard": "^19.0.0",
+        "stylelint-config-standard": "^20.0.0",
         "terser-webpack-plugin": "^2.3.1",
         "through2": "^3.0.0",
         "url-loader": "^3.0.0",

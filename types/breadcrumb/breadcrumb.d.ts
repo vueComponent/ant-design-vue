@@ -5,6 +5,7 @@
 import { AntdComponent } from '../component';
 import { VNode } from 'vue';
 import { BreadcrumbItem } from './breadcrumb-item';
+import { BreadcrumbSeparator } from './breadcrumb-separator';
 
 export interface Route {
   path?: String;
@@ -13,6 +14,7 @@ export interface Route {
 
 export declare class Breadcrumb extends AntdComponent {
   static Item: typeof BreadcrumbItem;
+  static Separator: typeof BreadcrumbSeparator;
   /**
    * The routing stack information of router
    * @type Route[]

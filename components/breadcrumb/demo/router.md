@@ -30,19 +30,33 @@ Used together with `vue-router`
     data() {
       const { lang } = this.$route.params;
       return {
-        basePath: `/${lang}/components/breadcrumb`,
+        basePath: '/components/breadcrumb',
         routes: [
           {
             path: 'index',
-            breadcrumbName: '首页',
+            breadcrumbName: 'home',
           },
           {
             path: 'first',
-            breadcrumbName: '一级面包屑',
+            breadcrumbName: 'first',
+            children: [
+              {
+                path: '/general',
+                breadcrumbName: 'General',
+              },
+              {
+                path: '/layout',
+                breadcrumbName: 'Layout',
+              },
+              {
+                path: '/navigation',
+                breadcrumbName: 'Navigation',
+              },
+            ],
           },
           {
             path: 'second',
-            breadcrumbName: '当前页面',
+            breadcrumbName: 'second',
           },
         ],
       };

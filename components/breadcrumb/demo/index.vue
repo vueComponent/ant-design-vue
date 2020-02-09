@@ -3,6 +3,8 @@ import Basic from './basic.md';
 import WithIcon from './withIcon.md';
 import Separator from './separator.md';
 import Router from './router';
+import Overlay from './Overlay';
+import SeparatorIndepent from './separator-indepent';
 
 import US from './../index.en-US.md';
 import CN from './../index.zh-CN.md';
@@ -41,6 +43,8 @@ export default {
         <WithIcon />
         <Separator />
         <Router />
+        <SeparatorIndepent />
+        <Overlay />
         <api>
           <CN slot="cn" />
           <US />

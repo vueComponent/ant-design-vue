@@ -4,12 +4,4 @@
 
 import { AntdComponent } from '../component';
 
-export declare class BreadcrumbItem extends AntdComponent {
-  /**
-   * add navigation
-   * @default ''
-   * @type string
-   */
-  href?: String;
-  overlay?: any;
-}
+export declare class BreadcrumbSeparator extends AntdComponent {}

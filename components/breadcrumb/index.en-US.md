@@ -1,11 +1,24 @@
 ## API
 
-| Property | Description | Type | Optional | Default |
-| --- | --- | --- | --- | --- |
-| itemRender | Custom item renderer, slot="itemRender" and slot-scope="{route, params, routes, paths}" | ({route, params, routes, paths, h}) => vNode |  | - |
-| params | Routing parameters | object |  | - |
-| routes | The routing stack information of router | object\[] |  | - |
-| separator | Custom separator | string\|slot |  | `/` |
+| Property | Description | Type | Optional | Default | Version |
+| --- | --- | --- | --- | --- | --- |
+| itemRender | Custom item renderer, slot="itemRender" and slot-scope="{route, params, routes, paths}" | ({route, params, routes, paths, h}) => vNode |  | - |  |
+| params | Routing parameters | object |  | - |  |
+| routes | The routing stack information of router | [routes\[\]](#routes) |  | - |  |
+| separator | Custom separator | string\|slot |  | `/` |  |
+
+### routes
+
+```ts
+interface Route {
+  path: string;
+  breadcrumbName: string;
+  children: Array<{
+    path: string;
+    breadcrumbName: string;
+  }>;
+}
+```
 
 ### Use with browserHistory
 
@@ -31,15 +44,29 @@ The link of Breadcrumb item targets `#` by default, you can use `itemRender` to 
         routes: [
           {
             path: 'index',
-            breadcrumbName: '首页',
+            breadcrumbName: 'home',
           },
           {
             path: 'first',
-            breadcrumbName: '一级面包屑',
+            breadcrumbName: 'first',
+            children: [
+              {
+                path: '/general',
+                breadcrumbName: 'General',
+              },
+              {
+                path: '/layout',
+                breadcrumbName: 'Layout',
+              },
+              {
+                path: '/navigation',
+                breadcrumbName: 'Navigation',
+              },
+            ],
           },
           {
             path: 'second',
-            breadcrumbName: '当前页面',
+            breadcrumbName: 'second',
           },
         ],
       };

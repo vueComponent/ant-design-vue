@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'breadcrumb', // dev components
+    componentName: 'calendar', // dev components
   },
 };

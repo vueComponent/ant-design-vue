@@ -3,6 +3,8 @@ import Basic from './basic';
 import Card from './card';
 import NoticeCalendar from './notice-calendar';
 import Select from './select';
+import CustomizeHeader from './customize-header.vue';
+import CustomizeHeaderString from '!raw-loader!./customize-header.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
@@ -40,6 +42,10 @@ export default {
         <Card />
         <NoticeCalendar />
         <Select />
+        <CustomizeHeader />
+        <demo-container code={CustomizeHeaderString}>
+          <CustomizeHeader />
+        </demo-container>
         <api>
           <CN slot="cn" />
           <US />

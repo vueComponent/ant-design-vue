@@ -25,6 +25,7 @@
 | monthFullCellRender | 作用域插槽，自定义渲染月单元格，返回内容覆盖单元格 | function(date: moment) | 无 |
 | validRange | 设置可以显示的日期 | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | 无 |
 | value(v-model) | 展示日期 | [moment](http://momentjs.com/) | 当前日期 |
+| headerRender | 自定义头部内容 | function(object:{value: moment, type: string, onChange: f(), onTypeChange: f()}) \| slot-scope | - | 1.5.0 |
 
 ### 事件
 

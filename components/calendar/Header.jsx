@@ -1,9 +1,21 @@
 import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
+import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-const Option = Select.Option;
+
+const { Option } = Select;
+
+function getMonthsLocale(value) {
+  const current = value.clone();
+  const localeData = value.localeData();
+  const months = [];
+  for (let i = 0; i < 12; i++) {
+    current.month(i);
+    months.push(localeData.monthsShort(current));
+  }
+  return months;
+}
 
 export const HeaderProps = {
   prefixCls: PropTypes.string,
@@ -16,6 +28,7 @@ export const HeaderProps = {
   // onTypeChange: PropTypes.(type: string) => void,
   value: PropTypes.any,
   validRange: PropTypes.array,
+  headerRender: PropTypes.func,
 };
 
 export default {
@@ -29,7 +42,7 @@ export default {
   // private calenderHeaderNode: HTMLDivElement;
   methods: {
     getYearSelectElement(prefixCls, year) {
-      const { yearSelectOffset, yearSelectTotal, locale, fullscreen, validRange } = this;
+      const { yearSelectOffset, yearSelectTotal, locale = {}, fullscreen, validRange } = this;
       let start = year - yearSelectOffset;
       let end = start + yearSelectTotal;
       if (validRange) {
@@ -54,17 +67,6 @@ export default {
           {options}
         </Select>
       );
-    },
-
-    getMonthsLocale(value) {
-      const current = value.clone();
-      const localeData = value.localeData();
-      const months = [];
-      for (let i = 0; i < 12; i++) {
-        current.month(i);
-        months.push(localeData.monthsShort(current));
-      }
-      return months;
     },
 
     getMonthSelectElement(prefixCls, month, months) {
@@ -125,37 +127,68 @@ export default {
       this.$emit('valueChange', newValue);
     },
 
-    onTypeChange(e) {
-      this.$emit('typeChange', e.target.value);
+    onInternalTypeChange(e) {
+      this.onTypeChange(e.target.value);
+    },
+
+    onTypeChange(val) {
+      this.$emit('typeChange', val);
     },
 
     getCalenderHeaderNode() {
       return this.$refs.calenderHeaderNode;
     },
+    getMonthYearSelections(getPrefixCls) {
+      const { prefixCls: customizePrefixCls, type, value } = this.$props;
+
+      const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
+      const yearReactNode = this.getYearSelectElement(prefixCls, value.year());
+      const monthReactNode =
+        type === 'month'
+          ? this.getMonthSelectElement(prefixCls, value.month(), getMonthsLocale(value))
+          : null;
+      return {
+        yearReactNode,
+        monthReactNode,
+      };
+    },
+
+    getTypeSwitch() {
+      const { locale = {}, type, fullscreen } = this.$props;
+      const size = fullscreen ? 'default' : 'small';
+      return (
+        <Group onChange={this.onInternalTypeChange} value={type} size={size}>
+          <Button value="month">{locale.month}</Button>
+          <Button value="year">{locale.year}</Button>
+        </Group>
+      );
+    },
+    onValueChange() {
+      this.$emit('valueChange', ...arguments);
+    },
+    headerRenderCustom(headerRender) {
+      const { type, value } = this.$props;
+      return headerRender({
+        value,
+        type: type || 'month',
+        onChange: this.onValueChange,
+        onTypeChange: this.onTypeChange,
+      });
+    },
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, type, value, locale, fullscreen } = this;
+    const { prefixCls: customizePrefixCls, headerRender } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('fullcalendar', customizePrefixCls);
-
-    const yearSelect = this.getYearSelectElement(prefixCls, value.year());
-    const monthSelect =
-      type === 'date'
-        ? this.getMonthSelectElement(prefixCls, value.month(), this.getMonthsLocale(value))
-        : null;
-    const size = fullscreen ? 'default' : 'small';
-    const typeSwitch = (
-      <Group onChange={this.onTypeChange} value={type} size={size}>
-        <Button value="date">{locale.month}</Button>
-        <Button value="month">{locale.year}</Button>
-      </Group>
-    );
-
-    return (
+    const typeSwitch = this.getTypeSwitch();
+    const { yearReactNode, monthReactNode } = this.getMonthYearSelections(getPrefixCls);
+    return headerRender ? (
+      this.headerRenderCustom(headerRender)
+    ) : (
       <div class={`${prefixCls}-header`} ref="calenderHeaderNode">
-        {yearSelect}
-        {monthSelect}
+        {yearReactNode}
+        {monthReactNode}
         {typeSwitch}
       </div>
     );

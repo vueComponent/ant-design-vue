@@ -17,9 +17,9 @@
       slot="cover"
     />
     <template class="ant-card-actions" slot="actions">
-      <a-icon type="setting" />
-      <a-icon type="edit" />
-      <a-icon type="ellipsis" />
+      <a-icon type="setting" key="setting" />
+      <a-icon type="edit" key="edit" />
+      <a-icon type="ellipsis" key="ellipsis" />
     </template>
     <a-card-meta title="Card title" description="This is the description">
       <a-avatar

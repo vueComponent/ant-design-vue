@@ -7,18 +7,20 @@ export default {
   __ANT_CARD_GRID: true,
   props: {
     prefixCls: PropTypes.string,
+    hoverable: PropTypes.bool,
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
-    const { prefixCls: customizePrefixCls } = this.$props;
+    const { prefixCls: customizePrefixCls, hoverable = true } = this.$props;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const classString = {
       [`${prefixCls}-grid`]: true,
+      [`${prefixCls}-grid-hoverable`]: hoverable,
     };
     return (
       <div {...{ on: getListeners(this) }} class={classString}>

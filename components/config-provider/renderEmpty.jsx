@@ -1,6 +1,5 @@
 import PropTypes from '../_util/vue-types';
 import Empty from '../empty';
-import emptyImg from './empty.svg';
 import { ConfigConsumerProps } from './';
 
 const RenderEmpty = {
@@ -19,13 +18,14 @@ const RenderEmpty = {
       switch (componentName) {
         case 'Table':
         case 'List':
-          return <Empty image={emptyImg} class={`${prefix}-normal`} />;
+          return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 
         case 'Select':
         case 'TreeSelect':
         case 'Cascader':
         case 'Transfer':
-          return <Empty image={emptyImg} class={`${prefix}-small`} />;
+        case 'Mentions':
+          return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} class={`${prefix}-small`} />;
 
         default:
           return <Empty />;

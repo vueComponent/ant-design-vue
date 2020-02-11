@@ -162,7 +162,7 @@ export default {
 
   render() {
     if (this.configProvider.csp) {
-      this.csp = csp;
+      this.csp = this.configProvider.csp;
     }
     return this.$slots.default && this.$slots.default[0];
   },

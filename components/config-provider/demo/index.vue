@@ -1,4 +1,5 @@
 <script>
+import Locale from './locale.md';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -16,9 +17,14 @@ export default {
   type: '其他',
   title: 'ConfigProvider',
   render() {
+    const csp = { nonce: 'test-antd' };
     return (
       <div>
         <md cn={md.cn} us={md.us} />
+        <Locale />
+        <a-config-provider csp={csp}>
+          <a-button>确定</a-button>
+        </a-config-provider>
         <api>
           <template slot="cn">
             <CN />

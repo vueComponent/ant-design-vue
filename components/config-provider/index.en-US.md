@@ -25,7 +25,7 @@ This component provides a configuration to all Vue components underneath itself 
 
 ### Content Security Policy
 
-Some component use dynamic style to support wave effect. You can config `csp` prop if Content Security Policy (CSP) is enabled:
+Some components use dynamic style to support wave effect. You can config `csp` prop if Content Security Policy (CSP) is enabled:
 
 ```html
 <a-config-provider :csp="{ nonce: 'YourNonceCode' }">
@@ -35,10 +35,36 @@ Some component use dynamic style to support wave effect. You can config `csp` pr
 
 ## API
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| autoInsertSpaceInButton | Set `false` to remove space between 2 chinese characters on Button | boolean | true |
-| csp | Set [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) config | { nonce: string } | - |
-| renderEmpty | set empty content of components. Ref [Empty](/components/empty/) | slot-scope \| Function(componentName: string): ReactNode | - |
-| getPopupContainer | to set the container of the popup element. The default is to create a `div` element in `body`. | Function(triggerNode, dialogContext) | `() => document.body` |
-| prefixCls | set prefix class | string | ant |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| autoInsertSpaceInButton | Set `false` to remove space between 2 chinese characters on Button | boolean | true |  |
+| csp | Set [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) config | { nonce: string } | - |  |
+| renderEmpty | set empty content of components. Ref [Empty](/components/empty/) | slot-scope \| Function(componentName: string): ReactNode | - |  |
+| getPopupContainer | to set the container of the popup element. The default is to create a `div` element in `body`. | Function(triggerNode, dialogContext) | `() => document.body` |  |
+| locale | language package setting, you can find the packages in [antd/es/locale](http://unpkg.com/ant-design-vue/es/locale/) | object | - | 1.5.0 |
+| prefixCls | set prefix class | string | ant |  |
+| pageHeader | Unify the ghost of pageHeader ,Ref [pageHeader](<(/components/page-header)> | { ghost:boolean } | 'true' | 1.5.0 |
+
+## FAQ
+
+#### Does the locale problem still exist in DatePicker even if ConfigProvider `locale` is used?
+
+Please make sure you set moment locale by `moment.locale('zh-cn')` or that you don't have two different versions of moment.
+
+#### Modal throw error when setting `getPopupContainer`?
+
+When you config `getPopupContainer` to parentNode globally, Modal will throw error of `triggerNode is undefined` because it did not have a triggerNode.
+
+```diff
+ <ConfigProvider
+-  getPopupContainer={triggerNode => triggerNode.parentNode}
++  getPopupContainer={node => {
++    if (node) {
++      return node.parentNode;
++    }
++    return document.body;
++  }}
+ >
+   <App />
+ </ConfigProvider>
+```

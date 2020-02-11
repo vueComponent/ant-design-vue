@@ -50,7 +50,46 @@ export interface ResponsiveObject {
   breakpoint: number;
   settings: 'unslick' | Settings;
 }
-export declare class Carousel extends Settings, AntdComponent {
+export declare class Carousel extends AntdComponent {
+  accessibility?: boolean;
+  adaptiveHeight?: boolean;
+  arrows?: boolean;
+  autoplaySpeed?: number;
+  autoplay?: boolean;
+  centerMode?: boolean;
+  centerPadding?: string;
+  cssEase?: string;
+  dotsClass?: string;
+  dots?: boolean;
+  draggable?: boolean;
+  easing?: string;
+  edgeFriction?: number;
+  fade?: boolean;
+  focusOnSelect?: boolean;
+  infinite?: boolean;
+  initialSlide?: number;
+  pauseOnDotsHover?: boolean;
+  pauseOnFocus?: boolean;
+  pauseOnHover?: boolean;
+  responsive?: ResponsiveObject[];
+  rows?: number;
+  rtl?: boolean;
+  slide?: string;
+  slidesPerRow?: number;
+  slidesToScroll?: number;
+  slidesToShow?: number;
+  speed?: number;
+  swipeToSlide?: boolean;
+  swipe?: boolean;
+  touchMove?: boolean;
+  touchThreshold?: number;
+  useCSS?: boolean;
+  useTransform?: boolean;
+  variableWidth?: boolean;
+  vertical?: boolean;
+  verticalSwiping?: boolean;
+  waitForAnimate?: boolean;
+  dotPosition?: DotPosition;
   /**
    * Callback function called after the current index changes
    * @type Function

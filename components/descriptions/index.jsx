@@ -193,7 +193,7 @@ const Descriptions = {
       });
     });
   },
-  beforeDestory() {
+  beforeDestroy() {
     ResponsiveObserve.unsubscribe(this.token);
   },
   render() {

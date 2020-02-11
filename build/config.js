@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'carousel', // dev components
+    componentName: 'checkbox', // dev components
   },
 };

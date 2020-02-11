@@ -11,7 +11,7 @@ Generate a group of checkboxes from an array
 ```tpl
 <template>
   <div>
-    <a-checkbox-group :options="plainOptions" v-model="value" @change="onChange" />
+    <a-checkbox-group name="checkboxgroup" :options="plainOptions" v-model="value" @change="onChange" />
     <br />
     <a-checkbox-group :options="plainOptions" :defaultValue="['Apple']" @change="onChange" />
     <br />

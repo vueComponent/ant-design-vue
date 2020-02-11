@@ -22,9 +22,6 @@ export default {
       <div>
         <md cn={md.cn} us={md.us} />
         <Locale />
-        <a-config-provider csp={csp}>
-          <a-button>确定</a-button>
-        </a-config-provider>
         <api>
           <template slot="cn">
             <CN />

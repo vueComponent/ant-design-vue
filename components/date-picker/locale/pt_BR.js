@@ -1,4 +1,4 @@
-import CalendarLocale from '../../vc-calendar/src/locale/pt_BR';
+import CalendarLocale from 'rc-calendar/lib/locale/pt_BR';
 import TimePickerLocale from '../../time-picker/locale/pt_BR';
 
 // Merge into a locale object
@@ -14,7 +14,6 @@ const locale = {
 };
 
 // All settings at:
-// https://github.com/ant-design/ant-design/blob/master/components/date-picker/l
-// o cale/example.json
+// https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json
 
 export default locale;

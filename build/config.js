@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'collapse', // dev components
+    componentName: 'config-provider', // dev components
   },
 };

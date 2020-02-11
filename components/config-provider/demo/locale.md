@@ -71,8 +71,8 @@ Components which need localization support are listed here, you can toggle the l
   </div>
 </template>
 <script>
-import enUS from 'ant-design-vue/locale-provider/en_US';
-import zhCN from 'ant-design-vue/locale-provider/zh_CN';
+import enUS from 'ant-design-vue/locale/en_US';
+import zhCN from 'ant-design-vue/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 

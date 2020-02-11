@@ -1,4 +1,4 @@
-import CalendarLocale from '../../vc-calendar/src/locale/fr_FR';
+import CalendarLocale from 'rc-calendar/lib/locale/fr_FR';
 import TimePickerLocale from '../../time-picker/locale/fr_FR';
 
 // Merge into a locale object
@@ -13,6 +13,7 @@ const locale = {
   },
 };
 
-// All settings at: https://github.com/ant-design/ant-design/issues/424
+// All settings at:
+// https://github.com/ant-design/ant-design/issues/424
 
 export default locale;

@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import debounce from 'lodash/debounce';
-import {
+import hasProp, {
   initDefaultProps,
   getComponentFromProp,
   filterEmpty,
@@ -8,6 +8,7 @@ import {
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
+import warning from '../_util/warning';
 
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
@@ -20,7 +21,8 @@ if (typeof window !== 'undefined') {
       removeListener() {},
     };
   };
-  window.matchMedia = window.matchMedia || matchMediaPolyfill;
+  // ref: https://github.com/ant-design/ant-design/issues/18774
+  if (!window.matchMedia) window.matchMedia = matchMediaPolyfill;
 }
 // Use require over import (will be lifted up)
 // make sure matchMedia polyfill run before require('vc-slick')
@@ -71,6 +73,7 @@ export const CarouselProps = {
   useCSS: PropTypes.bool,
   slickGoTo: PropTypes.number,
   responsive: PropTypes.array,
+  dotPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
 };
 
 const Carousel = {
@@ -91,6 +94,13 @@ const Carousel = {
   },
 
   mounted() {
+    if (hasProp(this, 'vertical')) {
+      warning(
+        !this.vertical,
+        'Carousel',
+        '`vertical` is deprecated, please use `dotPosition` instead.',
+      );
+    }
     const { autoplay } = this;
     if (autoplay) {
       window.addEventListener('resize', this.onWindowResized);
@@ -98,7 +108,6 @@ const Carousel = {
     // https://github.com/ant-design/ant-design/issues/7191
     this.innerSlider = this.$refs.slick && this.$refs.slick.innerSlider;
   },
-
   beforeDestroy() {
     const { autoplay } = this;
     if (autoplay) {
@@ -107,6 +116,15 @@ const Carousel = {
     }
   },
   methods: {
+    getDotPosition() {
+      if (this.dotPosition) {
+        return this.dotPosition;
+      }
+      if (hasProp(this, 'vertical')) {
+        return this.vertical ? 'right' : 'bottom';
+      }
+      return 'bottom';
+    },
     onWindowResized() {
       // Fix https://github.com/ant-design/ant-design/issues/2550
       const { autoplay } = this;
@@ -134,9 +152,7 @@ const Carousel = {
   },
 
   render() {
-    const props = {
-      ...this.$props,
-    };
+    const props = { ...this.$props };
     const { $slots } = this;
 
     if (props.effect === 'fade') {
@@ -145,7 +161,10 @@ const Carousel = {
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     let className = getPrefixCls('carousel', props.prefixCls);
-
+    const dotsClass = 'slick-dots';
+    const dotPosition = this.getDotPosition();
+    props.vertical = dotPosition === 'left' || dotPosition === 'right';
+    props.dotsClass = `${dotsClass} ${dotsClass}-${dotPosition || 'bottom'} ${props.dotsClass}`;
     if (props.vertical) {
       className = `${className} ${className}-vertical`;
     }
@@ -158,11 +177,11 @@ const Carousel = {
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
-
+    const children = filterEmpty($slots.default);
     return (
       <div class={className}>
         <SlickCarousel ref="slick" {...SlickCarouselProps}>
-          {filterEmpty($slots.default)}
+          {children}
         </SlickCarousel>
       </div>
     );

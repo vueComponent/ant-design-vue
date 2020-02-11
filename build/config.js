@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'card', // dev components
+    componentName: 'carousel', // dev components
   },
 };

@@ -4,6 +4,7 @@
 
 import { AntdComponent } from './component';
 
+export type DotPosition = 'top' | 'bottom' | 'left' | 'right';
 export interface Settings {
   accessibility?: boolean;
   adaptiveHeight?: boolean;
@@ -12,7 +13,6 @@ export interface Settings {
   autoplay?: boolean;
   centerMode?: boolean;
   centerPadding?: string;
-  className?: string;
   cssEase?: string;
   dotsClass?: string;
   dots?: boolean;
@@ -44,12 +44,13 @@ export interface Settings {
   vertical?: boolean;
   verticalSwiping?: boolean;
   waitForAnimate?: boolean;
+  dotPosition?: DotPosition;
 }
 export interface ResponsiveObject {
   breakpoint: number;
   settings: 'unslick' | Settings;
 }
-export declare class Carousel extends AntdComponent {
+export declare class Carousel extends Settings, AntdComponent {
   /**
    * Callback function called after the current index changes
    * @type Function

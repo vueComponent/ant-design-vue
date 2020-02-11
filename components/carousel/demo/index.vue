@@ -2,7 +2,7 @@
 import Basic from './basic';
 import Fade from './fade';
 import Autoplay from './autoplay';
-import Vertical from './vertical';
+import Position from './position';
 import CustomPaging from './customPaging';
 import CustomArrows from './customArrows';
 
@@ -42,7 +42,7 @@ export default {
       <div>
         <md cn={md.cn} us={md.us} />
         <Basic />
-        <Vertical />
+        <Position />
         <Fade />
         <Autoplay />
         <CustomPaging />

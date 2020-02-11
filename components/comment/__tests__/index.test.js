@@ -6,6 +6,7 @@ import List from '../../list';
 import Form from '../../form';
 import Button from '../../button';
 import Input from '../../input';
+import mountTest from '../../../tests/shared/mountTest';
 
 const CommentTest = {
   data() {
@@ -87,6 +88,7 @@ const CommentTest = {
 };
 
 describe('Comment', () => {
+  mountTest(Comment);
   it('Comment can be used as editor, user can customize the editor component.', async () => {
     const wrapper = mount(CommentTest, {
       sync: false,

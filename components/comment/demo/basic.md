@@ -12,7 +12,7 @@ A basic comment with author, avatar, time and actions.
 <template>
   <a-comment>
     <template slot="actions">
-      <span>
+      <span key="comment-basic-like">
         <a-tooltip title="Like">
           <a-icon type="like" :theme="action === 'liked' ? 'filled' : 'outlined'" @click="like" />
         </a-tooltip>
@@ -20,7 +20,7 @@ A basic comment with author, avatar, time and actions.
           {{likes}}
         </span>
       </span>
-      <span>
+      <span key="comment-basic-dislike">
         <a-tooltip title="Dislike">
           <a-icon
             type="dislike"
@@ -32,7 +32,7 @@ A basic comment with author, avatar, time and actions.
           {{dislikes}}
         </span>
       </span>
-      <span>Reply to</span>
+      <span key="comment-basic-reply-to">Reply to</span>
     </template>
     <a slot="author">Han Solo</a>
     <a-avatar

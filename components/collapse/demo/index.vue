@@ -5,6 +5,7 @@ import Borderless from './borderless';
 import Custom from './custom';
 import Mix from './mix';
 import Noarrow from './noarrow';
+import Extra from './extra';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -40,17 +41,12 @@ export default {
       <div>
         <md cn={md.cn} us={md.us} />
         <Basic />
-        <br />
         <Accordion />
-        <br />
         <Mix />
-        <br />
         <Borderless />
-        <br />
         <Custom />
-        <br />
         <Noarrow />
-        <br />
+        <Extra />
         <api>
           <template slot="cn">
             <CN />

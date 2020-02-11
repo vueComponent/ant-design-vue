@@ -1,27 +1,36 @@
 <cn>
-#### 折叠面板
+#### 额外节点
 可以同时展开多个面板，这个例子默认展开了第一个。
 </cn>
 
 <us>
-#### Collapse
-By default, any number of panels can be expanded at a time. The first panel is expanded in this example.
+#### Extra node
+More than one panel can be expanded at a time, the first panel is initialized to be active in this case.
 </us>
 
 ```tpl
 <template>
   <div>
-    <a-collapse v-model="activeKey">
+    <a-collapse v-model="activeKey" :expandIconPosition="expandIconPosition">
       <a-collapse-panel header="This is panel header 1" key="1">
         <p>{{text}}</p>
+        <a-icon slot="extra" type="setting" @click="handleClick" />
       </a-collapse-panel>
       <a-collapse-panel header="This is panel header 2" key="2" :disabled="false">
         <p>{{text}}</p>
+        <a-icon slot="extra" type="setting" @click="handleClick" />
       </a-collapse-panel>
       <a-collapse-panel header="This is panel header 3" key="3" disabled>
         <p>{{text}}</p>
+        <a-icon slot="extra" type="setting" @click="handleClick" />
       </a-collapse-panel>
     </a-collapse>
+    <br />
+    <span>Expand Icon Position: </span>
+    <a-select v-model="expandIconPosition">
+      <a-select-option value="left">left</a-select-option>
+      <a-select-option value="right">right</a-select-option>
+    </a-select>
   </div>
 </template>
 <script>
@@ -30,6 +39,7 @@ By default, any number of panels can be expanded at a time. The first panel is e
       return {
         text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
         activeKey: ['1'],
+        expandIconPosition: 'left'
       };
     },
     watch: {
@@ -37,6 +47,12 @@ By default, any number of panels can be expanded at a time. The first panel is e
         console.log(key);
       },
     },
+    methods: {
+      handleClick(event) {
+        // If you don't want click extra trigger collapse, you can prevent this:
+        event.stopPropagation();
+      }
+    }
   };
 </script>
 ```

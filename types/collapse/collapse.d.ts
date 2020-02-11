@@ -4,10 +4,11 @@
 
 import { AntdComponent } from '../component';
 import { CollapsePanel } from './collapse-panel';
-
+export type ExpandIconPosition = 'left' | 'right';
 export declare class Collapse extends AntdComponent {
   static Panel: typeof CollapsePanel;
 
+  expandIconPosition?: ExpandIconPosition;
   /**
    * If true, Collapse renders as Accordion
    * @default false

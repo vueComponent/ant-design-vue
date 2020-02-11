@@ -5,7 +5,7 @@
 
 <us>
 #### No arrow
-You can disable showing arrow icon by passing `:showArrow="false"` to `a-collapse-panel` component.
+You can hide the arrow icon by passing `showArrow={false}` to `CollapsePanel` component.
 </us>
 
 ```tpl

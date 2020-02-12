@@ -10,6 +10,25 @@
 
 ---
 
+# 1.4.11
+
+`2020-02-12`
+
+- 🌟 DirectoryTree 新增自定义 switcherIcon 功能 [#1743](https://github.com/vueComponent/ant-design-vue/issues/1743)
+- 🌟 新增可拖拽调整表格列宽[示例](https://www.antdv.com/components/table/#components-table-demo-resizable-column)
+- 🌟 替换所有组件的 `this.$listeners` 避免组件重复渲染 [#1705](https://github.com/vueComponent/ant-design-vue/issues/1705)
+- 🐞 修复 ConfigProvider 组件更改属性时，报错问题 [7a4003](https://github.com/vueComponent/ant-design-vue/commit/7a40031955d520487dcaf9054a1280ae72230049)
+- 🐞 修复 AutoComplete 组件自定义输入框时，placeholder 不消失问题 [#1761](https://github.com/vueComponent/ant-design-vue/issues/1761)
+- 🐞 修复 Statistic.Countdown 不触发 finish 事件的问题 [#1731](https://github.com/vueComponent/ant-design-vue/pull/1731)
+- 🐞 修复 Upload 组件预览图片不刷新问题 [f74469](https://github.com/vueComponent/ant-design-vue/commit/f744690e929d9d6da03c5c513b3ac5497c6490ef)
+- 🐞 修复 TimePicker id 不唯一问题 [#1566](https://github.com/vueComponent/ant-design-vue/pull/1566)
+- 🐞 修复 Pagination 分页无动画问题 [#1540](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 修复 Cascader 的 option 为空数组时,下拉列表不展示空元素问题 [#1701](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 修复 Input 组件的 spellcheck 渲染不正确问题 [#1707](https://github.com/vueComponent/ant-design-vue/issues/1707)
+- 🐞 修复 Tree 组件无法自定义 icon 问题 [#1712](https://github.com/vueComponent/ant-design-vue/pull/1712)
+- 🐞 修复 SubMenu forceSubMenuRender 属性失效问题 [#1668](https://github.com/vueComponent/ant-design-vue/issues/1668)
+- 🐞 修复 Upload 按钮样式错位问题 [#1742](https://github.com/vueComponent/ant-design-vue/pull/1742)
+
 ## 1.4.10
 
 `2019-12-11`

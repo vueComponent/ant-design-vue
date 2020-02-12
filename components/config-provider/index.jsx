@@ -7,7 +7,7 @@ import Base from '../base';
 function getWatch(keys = []) {
   const watch = {};
   keys.forEach(k => {
-    watch[k] = function() {
+    watch[k] = function(value) {
       this._proxyVm._data[k] = value;
     };
   });

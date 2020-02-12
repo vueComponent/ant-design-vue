@@ -10,11 +10,24 @@
 
 ---
 
-# 1.4.11
+## 1.4.11
 
 `2020-02-12`
 
--🌟 DirectoryTree adds custom switcherIcon function [#1743](https://github.com/vueComponent/ant-design-vue/issues/1743) -🌟 Add draggable table column width [example](https://www.antdv.com/components/table/#components-table-demo-resizable-column) -🌟 Replace `this.$listeners` of all components to avoid repeated rendering of components [#1705](https://github.com/vueComponent/ant-design-vue/issues/1705) -🐞 Fix ConfigProvider component error report error [7a4003](https://github.com/vueComponent/ant-design-vue/commit/7a40031955d520487dcaf9054a1280ae72230049) -🐞 Fix placeholder does not disappear when custom input box of AutoComplete component [#1761](https://github.com/vueComponent/ant-design-vue/issues/1761) -🐞 Fix Statistic.Countdown does not trigger finish event [#1731](https://github.com/vueComponent/ant-design-vue/pull/1731) -🐞 Fix upload component preview image not refreshing [f74469](https://github.com/vueComponent/ant-design-vue/commit/f744690e929d9d6da03c5c513b3ac5497c6490ef) -🐞 Fix TimePicker id is not unique [#1566](https://github.com/vueComponent/ant-design-vue/pull/1566) -🐞 Fix Pagination pagination without animation [#1540](https://github.com/vueComponent/ant-design-vue/issues/1540) -🐞 Fix drop-down list does not show empty elements when Cascader's option is empty array [#1701](https://github.com/vueComponent/ant-design-vue/issues/1540) -🐞 Fix spellcheck rendering incorrect for Input component [#1707](https://github.com/vueComponent/ant-design-vue/issues/1707) -🐞 Fix Tree component cannot customize icon [#1712](https://github.com/vueComponent/ant-design-vue/pull/1712) -🐞 Fix SubMenu forceSubMenuRender property is invalid [#1668](https://github.com/vueComponent/ant-design-vue/issues/1668) -🐞 Fix style of upload button is misaligned [#1742](https://github.com/vueComponent/ant-design-vue/pull/1742)
+- 🌟 DirectoryTree adds custom switcherIcon function [#1743](https://github.com/vueComponent/ant-design-vue/issues/1743)
+- 🌟 Add draggable table column width [example](https://www.antdv.com/components/table/#components-table-demo-resizable-column)
+- 🌟 Replace `this.$listeners` of all components to avoid repeated rendering of components [#1705](https://github.com/vueComponent/ant-design-vue/issues/1705)
+- 🐞 Fix ConfigProvider component error report error [7a4003](https://github.com/vueComponent/ant-design-vue/commit/7a40031955d520487dcaf9054a1280ae72230049)
+- 🐞 Fix placeholder does not disappear when custom input box of AutoComplete component [#1761](https://github.com/vueComponent/ant-design-vue/issues/1761)
+- 🐞 Fix Statistic.Countdown does not trigger finish event [#1731](https://github.com/vueComponent/ant-design-vue/pull/1731)
+- 🐞 Fix upload component preview image not refreshing [f74469](https://github.com/vueComponent/ant-design-vue/commit/f744690e929d9d6da03c5c513b3ac5497c6490ef)
+- 🐞 Fix TimePicker id is not unique [#1566](https://github.com/vueComponent/ant-design-vue/pull/1566)
+- 🐞 Fix Pagination pagination without animation [#1540](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 Fix drop-down list does not show empty elements when Cascader's option is empty array [#1701](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 Fix spellcheck rendering incorrect for Input component [#1707](https://github.com/vueComponent/ant-design-vue/issues/1707)
+- 🐞 Fix Tree component cannot customize icon [#1712](https://github.com/vueComponent/ant-design-vue/pull/1712)
+- 🐞 Fix SubMenu forceSubMenuRender property is invalid [#1668](https://github.com/vueComponent/ant-design-vue/issues/1668)
+- 🐞 Fix style of upload button is misaligned [#1742](https://github.com/vueComponent/ant-design-vue/pull/1742)
 
 ## 1.4.10
 

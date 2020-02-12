@@ -8,13 +8,13 @@ const Divider = {
     prefixCls: PropTypes.string,
     type: PropTypes.oneOf(['horizontal', 'vertical', '']).def('horizontal'),
     dashed: PropTypes.bool,
-    orientation: PropTypes.oneOf(['left', 'right']),
+    orientation: PropTypes.oneOf(['left', 'right', 'center']),
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
-    const { prefixCls: customizePrefixCls, type, $slots, dashed, orientation = '' } = this;
+    const { prefixCls: customizePrefixCls, type, $slots, dashed, orientation = 'center' } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('divider', customizePrefixCls);
     const orientationPrefix = orientation.length > 0 ? '-' + orientation : orientation;
@@ -27,7 +27,7 @@ const Divider = {
     };
 
     return (
-      <div class={classString}>
+      <div class={classString} role="separator">
         {$slots.default && <span class={`${prefixCls}-inner-text`}>{$slots.default}</span>}
       </div>
     );

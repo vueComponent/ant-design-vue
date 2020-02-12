@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'date-picker', // dev components
+    componentName: 'divider', // dev components
   },
 };

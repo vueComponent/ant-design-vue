@@ -10,6 +10,7 @@ export const MomentType = {
 };
 
 export const PickerProps = () => ({
+  name: PropTypes.string,
   transitionName: PropTypes.string,
   prefixCls: PropTypes.string,
   inputPrefixCls: PropTypes.string,
@@ -26,7 +27,6 @@ export const PickerProps = () => ({
   open: PropTypes.bool,
   // onOpenChange: PropTypes.(status: bool) => void,
   disabledDate: PropTypes.func,
-  renderExtraFooter: PropTypes.any,
   showToday: PropTypes.bool,
   dateRender: PropTypes.any, // (current: moment.Moment, today: moment.Moment) => React.ReactNode,
   pickerClass: PropTypes.string,
@@ -41,6 +41,8 @@ export const SinglePickerProps = () => ({
   value: MomentType,
   defaultValue: MomentType,
   defaultPickerValue: MomentType,
+  renderExtraFooter: PropTypes.any,
+  placeholder: PropTypes.string,
   // onChange?: (date: moment.Moment, dateString: string) => void;
 });
 
@@ -52,7 +54,6 @@ export const DatePickerProps = () => ({
   disabledTime: PropTypes.func,
   // onOpenChange?: (status: bool) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
-  placeholder: PropTypes.string,
   mode: PropTypes.oneOf(['time', 'date', 'month', 'year']),
 });
 
@@ -76,9 +77,11 @@ export const RangePickerValue = PropTypes.custom(isMomentArray);
 
 export const RangePickerProps = () => ({
   ...PickerProps(),
+  tagPrefixCls: PropTypes.string,
   value: RangePickerValue,
   defaultValue: RangePickerValue,
   defaultPickerValue: RangePickerValue,
+  timePicker: PropTypes.any,
   // onChange?: (dates: RangePickerValue, dateStrings: [string, string]) => void;
   // onCalendarChange?: (dates: RangePickerValue, dateStrings: [string, string]) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
@@ -86,8 +89,10 @@ export const RangePickerProps = () => ({
   ranges: PropTypes.object,
   placeholder: PropTypes.arrayOf(String),
   mode: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
+  separator: PropTypes.any,
   disabledTime: PropTypes.func,
   showToday: PropTypes.bool,
+  renderExtraFooter: PropTypes.any,
   // onPanelChange?: (value?: RangePickerValue, mode?: string | string[]) => void;
 });
 

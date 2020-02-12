@@ -19,11 +19,12 @@ function isMoment(value) {
 }
 const MomentType = PropTypes.custom(isMoment);
 const Picker = {
+  name: 'Picker',
   props: {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
-    format: PropTypes.string,
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     // onChange: PropTypes.func,
     // onOpenChange: PropTypes.func,
     children: PropTypes.func,

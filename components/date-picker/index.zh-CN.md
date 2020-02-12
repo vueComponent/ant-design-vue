@@ -7,13 +7,46 @@
 - RangePicker
 - WeekPicker
 
+### 国际化配置
+
+默认配置为 en-US，如果你需要设置其他语言，推荐在入口处使用我们提供的国际化组件，详见：[ConfigProvider 国际化](http://ant.design/components/config-provider-cn/)。
+
+如有特殊需求（仅修改单一组件的语言），请使用 locale 参数，参考：[默认配置](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)。
+
+```html
+<template>
+  <a-date-picker :locale="locale" />
+</template>
+<script>
+  import locale from 'ant-design-vue/es/date-picker/locale/zh_CN';
+  export default {
+    data() {
+      return {
+        locale,
+      };
+    },
+  };
+</script>
+```
+
 **注意：**DatePicker、MonthPicker、RangePicker、WeekPicker 部分 locale 是从 value 中读取，所以请先正确设置 moment 的 locale。
 
 ```html
-// 默认语言为 en-US，如果你需要设置其他语言，推荐在入口文件全局设置 locale import moment from
-'moment'; import 'moment/locale/zh-cn'; moment.locale('zh-cn');
-
-<a-date-picker :defaultValue="moment('2015-01-01', 'YYYY-MM-DD')" />
+<template>
+  <a-date-picker :defaultValue="moment('2015-01-01', 'YYYY-MM-DD')" />
+</template>
+<script>
+  // 默认语言为 en-US，如果你需要设置其他语言，推荐在入口文件全局设置 locale
+  import moment from 'moment';
+  import 'moment/locale/zh-cn';
+  export default {
+    data() {
+      return {
+        moment,
+      };
+    },
+  };
+</script>
 ```
 
 ### 共同的 API
@@ -29,6 +62,7 @@
 | disabledDate | 不可选择的日期 | (currentDate: moment) => boolean | 无 |
 | getCalendarContainer | 定义浮层的容器，默认为 body 上新建 div | function(trigger) | 无 |
 | locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) |
+| mode | 日期面板的状态（[设置后无法选择年份/月份？](/docs/vue/faq#当我指定了-DatePicker/RangePicker-的-mode-属性后，点击后无法选择年份/月份？)） | `time|date|month|year|decade` | 'date' |
 | open | 控制弹层是否展开 | boolean | - |
 | placeholder | 输入框提示文字 | string\|RangePicker\[] | - |
 | popupStyle | 额外的弹出日历样式 | object | {} |
@@ -58,7 +92,6 @@
 | defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/) | 无 |
 | disabledTime | 不可选择的时间 | function(date) | 无 |
 | format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [moment.js](http://momentjs.com/) | string \| string[] | "YYYY-MM-DD" |
-| mode | 日期面板的状态（[设置后无法选择年份/月份？](/docs/vue/faq#当我指定了-DatePicker/RangePicker-的-mode-属性后，点击后无法选择年份/月份？)） | `time|date|month|year` | 'date' |
 | renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" slot-scope="mode" | - |
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker-cn/#API) |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/) | moment() |
@@ -107,17 +140,18 @@
 
 ### RangePicker
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| defaultValue | 默认日期 | [moment](http://momentjs.com/)\[] | 无 |
-| defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/)\[] | 无 |
-| disabledTime | 不可选择的时间 | function(dates: \[moment, moment\], partial: `'start'|'end'`) | 无 |
-| format | 展示的日期格式 | string | "YYYY-MM-DD HH:mm:ss" |
-| ranges       | 预设时间范围快捷选择 | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | 无 |
-| renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" slot-scope="mode" | - |
-| showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker-cn/#API) |
-| showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
-| value(v-model) | 日期 | [moment](http://momentjs.com/)\[] | 无 |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| defaultValue | 默认日期 | [moment](http://momentjs.com/)\[] | 无 |  |
+| defaultPickerValue | 默认面板日期 | [moment](http://momentjs.com/)\[] | 无 |  |
+| disabledTime | 不可选择的时间 | function(dates: \[moment, moment\], partial: `'start'|'end'`) | 无 |  |
+| format | 展示的日期格式 | string | "YYYY-MM-DD HH:mm:ss" |  |
+| ranges       | 预设时间范围快捷选择 | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | 无 |  |
+| renderExtraFooter | 在面板中添加额外的页脚 | slot="renderExtraFooter" slot-scope="mode" | - |  |
+| separator | 设置分隔符 | string | '~' | 1.5.0 |
+| showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker-cn/#API) |  |
+| showTime.defaultValue | 设置用户选择日期时默认的时分秒 | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |  |
+| value(v-model) | 日期 | [moment](http://momentjs.com/)\[] | 无 |  |
 
 ### RangePicker 事件
 

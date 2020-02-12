@@ -13,6 +13,8 @@ We can set the date format by `format`.
   <div>
     <a-date-picker :defaultValue="moment('2015/01/01', dateFormat)" :format="dateFormat" />
     <br />
+    <a-date-picker :defaultValue="moment('01/01/2015', dateFormatList[0])" :format="dateFormatList" />
+    <br />
     <a-month-picker :defaultValue="moment('2015/01', monthFormat)" :format="monthFormat" />
     <br />
     <a-range-picker
@@ -28,6 +30,7 @@ We can set the date format by `format`.
       return {
         dateFormat: 'YYYY/MM/DD',
         monthFormat: 'YYYY/MM',
+        dateFormatList: ['DD/MM/YYYY', 'DD/MM/YY']
       };
     },
     methods: {

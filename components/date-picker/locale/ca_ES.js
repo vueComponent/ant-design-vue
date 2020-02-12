@@ -1,4 +1,4 @@
-import CalendarLocale from 'rc-calendar/lib/locale/ca_ES';
+import CalendarLocale from '../../vc-calendar/src/locale/ca_ES';
 import TimePickerLocale from '../../time-picker/locale/ca_ES';
 
 // Merge into a locale object

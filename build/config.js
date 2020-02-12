@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'config-provider', // dev components
+    componentName: 'date-picker', // dev components
   },
 };

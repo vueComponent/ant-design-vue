@@ -4,7 +4,7 @@
 </cn>
 
 <us>
-#### Presetted Ranges
+#### Preset Ranges
 We can set presetted ranges to RangePicker to improve user experience.
 </us>
 

@@ -1,10 +1,26 @@
 import TimePickerPanel from '../vc-time-picker/Panel';
 import classNames from 'classnames';
+import * as moment from 'moment';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
+import interopDefault from '../_util/interopDefault';
 import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import warning from '../_util/warning';
+
+function checkValidate(value, propName) {
+  const values = Array.isArray(value) ? value : [value];
+  values.forEach(val => {
+    if (!val) return;
+
+    warning(
+      !interopDefault(moment).isMoment(val) || val.isValid(),
+      'DatePicker',
+      `\`${propName}\` provides invalidate moment time. If you want to set empty value, use \`null\` instead.`,
+    );
+  });
+}
 
 const DEFAULT_FORMAT = {
   date: 'YYYY-MM-DD',
@@ -58,14 +74,33 @@ export default function wrapPicker(Picker, props, pickerType) {
       };
     },
     mounted() {
-      const { autoFocus, disabled } = this;
+      const { autoFocus, disabled, value, defaultValue } = this;
+      checkValidate(defaultValue, 'defaultValue');
+      checkValidate(value, 'value');
       if (autoFocus && !disabled) {
         this.$nextTick(() => {
           this.focus();
         });
       }
     },
+    watch: {
+      value(val) {
+        checkValidate(val, 'value');
+      },
+    },
     methods: {
+      getDefaultLocale() {
+        const result = {
+          ...enUS,
+          ...this.locale,
+        };
+        result.lang = {
+          ...result.lang,
+          ...(this.locale || {}).lang,
+        };
+        return result;
+      },
+
       savePopupRef(ref) {
         this.popupRef = ref;
       },
@@ -97,23 +132,12 @@ export default function wrapPicker(Picker, props, pickerType) {
         this.$refs.picker.blur();
       },
 
-      getDefaultLocale() {
-        const result = {
-          ...enUS,
-          ...this.locale,
-        };
-        result.lang = {
-          ...result.lang,
-          ...(this.locale || {}).lang,
-        };
-        return result;
-      },
-
       renderPicker(locale, localeCode) {
         const props = getOptionProps(this);
         const {
           prefixCls: customizePrefixCls,
           inputPrefixCls: customizeInputPrefixCls,
+          getCalendarContainer,
           size,
           showTime,
           disabled,
@@ -125,7 +149,8 @@ export default function wrapPicker(Picker, props, pickerType) {
           locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
           DEFAULT_FORMAT[mergedPickerType];
 
-        const getPrefixCls = this.configProvider.getPrefixCls;
+        const { getPrefixCls, getPopupContainer: getContextPopupContainer } = this.configProvider;
+        const getPopupContainer = getCalendarContainer || getContextPopupContainer;
         const prefixCls = getPrefixCls('calendar', customizePrefixCls);
         const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 
@@ -155,11 +180,15 @@ export default function wrapPicker(Picker, props, pickerType) {
             transitionName: 'slide-up',
           },
           class: timePickerCls,
+          on: {
+            esc: () => {},
+          },
         };
         const timePicker = showTime ? <TimePickerPanel {...timePickerPanelProps} /> : null;
         const pickerProps = {
           props: {
             ...props,
+            getCalendarContainer: getPopupContainer,
             format: mergedFormat,
             pickerClass,
             pickerInputClass,

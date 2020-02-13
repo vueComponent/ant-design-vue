@@ -83,7 +83,7 @@ export declare class Drawer extends AntdComponent {
    * @type object
    */
   bodyStyle: object;
-
+  headerStyle: object;
   /**
    * Width of the Drawer dialog.
    * @default 256
@@ -110,7 +110,8 @@ export declare class Drawer extends AntdComponent {
    * @type string
    */
   placement: 'top' | 'right' | 'bottom' | 'left';
-
+  afterVisibleChange?: (visible: boolean) => void;
+  keyboard?: boolean;
   /**
    * Specify a callback that will be called when a user clicks mask, close button or Cancel button.
    */

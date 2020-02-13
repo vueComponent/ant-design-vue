@@ -1,7 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 
-export default {
-  wrapperClassName: PropTypes.string,
+const IProps = {
   width: PropTypes.any,
   height: PropTypes.any,
   defaultOpen: PropTypes.bool,
@@ -13,15 +12,33 @@ export default {
   levelMove: PropTypes.oneOfType([PropTypes.number, PropTypes.func, PropTypes.array]),
   ease: PropTypes.string,
   duration: PropTypes.string,
+  handler: PropTypes.any,
+  showMask: PropTypes.bool,
+  maskStyle: PropTypes.object,
+  className: PropTypes.string,
+  wrapStyle: PropTypes.object,
+  maskClosable: PropTypes.bool,
+  afterVisibleChange: PropTypes.func,
+  keyboard: PropTypes.bool,
+};
+
+const IDrawerProps = {
+  ...IProps,
+  wrapperClassName: PropTypes.string,
+  forceRender: PropTypes.bool,
   getContainer: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
     PropTypes.object,
     PropTypes.bool,
   ]),
-  handler: PropTypes.any,
-  showMask: PropTypes.bool,
-  maskStyle: PropTypes.object,
-  className: PropTypes.string,
-  wrapStyle: PropTypes.object,
 };
+
+const IDrawerChildProps = {
+  ...IProps,
+  getContainer: PropTypes.func,
+  getOpenCount: PropTypes.func,
+  switchScrollingEffect: PropTypes.func,
+};
+
+export { IDrawerProps, IDrawerChildProps };

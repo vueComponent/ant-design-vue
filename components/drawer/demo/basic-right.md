@@ -20,6 +20,8 @@ Basic drawer.
       :closable="false"
       @close="onClose"
       :visible="visible"
+      :maskClosable="false"
+      :afterVisibleChange="afterVisibleChange"
     >
       <p>Some contents...</p>
       <p>Some contents...</p>
@@ -35,6 +37,9 @@ Basic drawer.
       };
     },
     methods: {
+      afterVisibleChange(val) {
+        console.log('visible', val)
+      },
       showDrawer() {
         this.visible = true;
       },

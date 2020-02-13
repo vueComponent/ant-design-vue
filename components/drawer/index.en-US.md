@@ -13,12 +13,15 @@
 | wrapClassName | The class name of the container of the Drawer dialog. | string | - |  |
 | wrapStyle | Style of wrapper element which **contains mask** compare to `drawerStyle` | object | - |  |
 | drawerStyle | Style of the popup layer element | object | - | 1.4.11 |
+| headerStyle | Style of the drawer header part | object | - | 1.5.0 |
 | bodyStyle | Style of the drawer content part | object | - |  |
 | width | Width of the Drawer dialog. | string\|number | 256 |  |
 | height | placement is `top` or `bottom`, height of the Drawer dialog. | string\|number | - |  |
 | zIndex | The `z-index` of the Drawer. | Number | 1000 |  |
 | placement | The placement of the Drawer. | 'top' \| 'right' \| 'bottom' \| 'left' | 'right' |  |
 | handle | After setting, the drawer is directly mounted on the DOM, and you can control the drawer to open or close through this `handle`. | VNode \| slot | - |  |
+| afterVisibleChange | Callback after the animation ends when switching drawers. | function(visible) | - | 1.5.0 |
+| keyboard | Whether support press esc to close | Boolean | true | 1.5.0 |
 
 ## Methods
 

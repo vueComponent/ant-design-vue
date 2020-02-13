@@ -5,7 +5,7 @@
 
 <us>
 #### Preview drawer
-Use when you need to quickly preview the outline of the object. Such as list item preview.
+Use Drawer to quickly preview details of an object, such as those in a list.
 </us>
 
 ```tpl
@@ -22,9 +22,9 @@ Use when you need to quickly preview the outline of the object. Such as list ite
       ]"
       bordered
     >
-      <a-list-item slot="renderItem" slot-scope="item, index">
+      <a-list-item slot="renderItem" slot-scope="item, index" :key="`a-${item.id}`">
         <a slot="actions" @click="showDrawer">View Profile</a>
-        <a-list-item-meta description="Progresser AFX">
+        <a-list-item-meta description="Progresser XTech">
           <a slot="title" href="https://www.antdv.com/">{{item.name}}</a>
           <a-avatar
             slot="avatar"
@@ -80,7 +80,7 @@ Use when you need to quickly preview the outline of the object. Such as list ite
       </a-row>
       <a-row>
         <a-col :span="12">
-          <description-item title="Department" content="AFX" />
+          <description-item title="Department" content="XTech" />
         </a-col>
         <a-col :span="12">
           <description-item title="Supervisor">

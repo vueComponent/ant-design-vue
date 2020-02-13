@@ -5,7 +5,7 @@
 
 <us>
 #### Custom Placement
-Basic drawer.
+The Drawer can appear from any edge of the screen.
 </us>
 
 ```tpl

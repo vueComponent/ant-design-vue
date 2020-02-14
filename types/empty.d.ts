@@ -18,4 +18,5 @@ export declare class Empty extends AntdComponent {
    * @type string | VNode
    */
   image: string | VNode;
+  imageStyle: object;
 }

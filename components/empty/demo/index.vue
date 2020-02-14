@@ -2,6 +2,8 @@
 import Basic from './basic';
 import ConfigProvider from './config-provider';
 import Customize from './customize';
+import Description from './description';
+import Simple from './simple';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -16,7 +18,8 @@ const md = {
 
       ## 何时使用
 
-      当目前没有数据时，用于显式的用户提示。
+      - 当目前没有数据时，用于显式的用户提示。
+      - 初始化场景时的引导创建流程。
 
        ## 代码演示
         `,
@@ -25,7 +28,8 @@ const md = {
 
         ## When To Use
 
-        When there is no data provided, display for friendly tips.
+        - When there is no data provided, display for friendly tips.
+        - User tutorial to create something in fresh new situation.
        ## Examples
         `,
 };
@@ -41,6 +45,8 @@ export default {
         <Basic />
         <ConfigProvider />
         <Customize />
+        <Description />
+        <Simple />
         <api>
           <CN slot="cn" />
           <US />

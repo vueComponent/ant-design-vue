@@ -184,7 +184,7 @@
         "babel-runtime": "6.x",
         "classnames": "^2.2.5",
         "component-classes": "^1.2.6",
-        "dom-align": "^1.7.0",
+        "dom-align": "^1.10.4",
         "dom-closest": "^0.2.0",
         "dom-scroll-into-view": "^2.0.0",
         "enquire.js": "^2.1.6",

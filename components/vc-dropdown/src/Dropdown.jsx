@@ -8,7 +8,7 @@ import { cloneElement } from '../../_util/vnode';
 export default {
   mixins: [BaseMixin],
   props: {
-    minOverlayWidthMatchTrigger: PropTypes.bool.def(true),
+    minOverlayWidthMatchTrigger: PropTypes.bool,
     prefixCls: PropTypes.string.def('rc-dropdown'),
     transitionName: PropTypes.string,
     overlayClassName: PropTypes.string.def(''),
@@ -198,7 +198,6 @@ export default {
       },
       ref: 'trigger',
     };
-    const child = this.$slots.default && this.$slots.default[0];
     return (
       <Trigger {...triggerProps}>
         {this.renderChildren()}

@@ -19,7 +19,7 @@ const md = {
   us: `# Dropdown
         A dropdown list.
         ## When To Use
-        If there are too many operations to display, you can wrap them in a \`Dropdown\`. By clicking/hovering on the trigger, a dropdown menu should appear, which allows you to choose one option and execute relevant actions.
+        When there are more than a few options to choose from, you can wrap them in a \`Dropdown\`. By hovering or clicking on the trigger, a dropdown menu will appear, which allows you to choose an option and execute the relevant action.
         ## Examples 
         `,
 };

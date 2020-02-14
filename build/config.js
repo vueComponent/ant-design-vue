@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'drawer', // dev components
+    componentName: 'dropdown', // dev components
   },
 };

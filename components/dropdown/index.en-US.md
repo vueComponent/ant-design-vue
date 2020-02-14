@@ -27,15 +27,16 @@ You should use [Menu](/components/menu/) as `overlay`. The menu items and divide
 
 ### Dropdown.Button
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| disabled | whether the dropdown menu is disabled | boolean | - |
-| overlay(slot-scope) | the dropdown menu | [Menu](/components/menu) | - |
-| placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
-| size | size of the button, the same as [Button](/components/button) | string | `default` |
-| trigger | the trigger mode which executes the drop-down action | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
-| type | type of the button, the same as [Button](/components/button) | string | `default` |
-| visible | whether the dropdown menu is visible | boolean | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| disabled | whether the dropdown menu is disabled | boolean | - |  |
+| icon | Icon (appears on the right) | vNode \| slot | - | 1.5.0 |
+| overlay(slot-scope) | the dropdown menu | [Menu](/components/menu) | - |  |
+| placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |  |
+| size | size of the button, the same as [Button](/components/button) | string | `default` |  |
+| trigger | the trigger mode which executes the drop-down action | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
+| type | type of the button, the same as [Button](/components/button) | string | `default` |  |
+| visible | whether the dropdown menu is visible | boolean | - |  |
 
 ### Dropdown.Button events
 

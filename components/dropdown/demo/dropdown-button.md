@@ -1,11 +1,11 @@
 <cn>
 #### 带下拉框的按钮
-左边是按钮，右边是额外的相关功能菜单。
+左边是按钮，右边是额外的相关功能菜单。可设置 `icon` 属性来修改右边的图标。
 </cn>
 
 <us>
 #### Button with dropdown menu
-A button is on the left, and a related functional menu is on the right.
+A button is on the left, and a related functional menu is on the right. You can set the icon property to modify the icon of right.
 </us>
 
 ```tpl
@@ -18,6 +18,15 @@ A button is on the left, and a related functional menu is on the right.
         <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
         <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
       </a-menu>
+    </a-dropdown-button>
+    <a-dropdown-button>
+      Dropdown
+      <a-menu slot="overlay" @click="handleMenuClick">
+        <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>
+        <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
+        <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
+      </a-menu>
+      <a-icon slot="icon" type="user"/>
     </a-dropdown-button>
     <a-dropdown-button @click="handleButtonClick" disabled style="margin-left: 8px">
       Dropdown

@@ -27,15 +27,16 @@
 
 ### Dropdown.Button
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| disabled | 菜单是否禁用 | boolean | - |
-| overlay(slot-scope) | 菜单 | [Menu](/components/menu-cn/) | - |
-| placement | 菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
-| size | 按钮大小，和 [Button](/components/button-cn/) 一致 | string | 'default' |
-| trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
-| type | 按钮类型，和 [Button](/components/button-cn/) 一致 | string | 'default' |
-| visible(v-model) | 菜单是否显示 | boolean | - |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| disabled | 菜单是否禁用 | boolean | - |  |
+| icon | 右侧的 icon | VNode \| slot | - | 1.5.0 |
+| overlay(slot-scope) | 菜单 | [Menu](/components/menu-cn/) | - |  |
+| placement | 菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |  |
+| size | 按钮大小，和 [Button](/components/button-cn/) 一致 | string | 'default' |  |
+| trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
+| type | 按钮类型，和 [Button](/components/button-cn/) 一致 | string | 'default' |  |
+| visible(v-model) | 菜单是否显示 | boolean | - |  |
 
 ### Dropdown.Button 事件
 

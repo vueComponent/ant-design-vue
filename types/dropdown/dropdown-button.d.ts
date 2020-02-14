@@ -51,4 +51,6 @@ export declare class DropdownButton extends AntdComponent {
    * @type boolean
    */
   visible: boolean;
+  icon: any;
+  title: string;
 }

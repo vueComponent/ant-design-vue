@@ -6,6 +6,8 @@ import PropTypes from '../_util/vue-types';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
 import { ConfigConsumerProps } from '../config-provider';
+import Icon from '../icon';
+
 const ButtonTypesProps = buttonTypes();
 const DropdownProps = getDropdownProps();
 const ButtonGroup = Button.Group;
@@ -19,6 +21,8 @@ const DropdownButtonProps = {
   disabled: PropTypes.bool,
   prefixCls: PropTypes.string,
   placement: DropdownProps.placement.def('bottomRight'),
+  icon: PropTypes.any,
+  title: PropTypes.string,
 };
 export { DropdownButtonProps };
 export default {
@@ -59,8 +63,10 @@ export default {
       placement,
       getPopupContainer,
       href,
+      title,
       ...restProps
     } = this.$props;
+    const icon = getComponentFromProp(this, 'icon') || <Icon type="ellipsis" />;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown-button', customizePrefixCls);
@@ -95,12 +101,13 @@ export default {
           onClick={this.onClick}
           htmlType={htmlType}
           href={href}
+          title={title}
         >
           {this.$slots.default}
         </Button>
         <Dropdown {...dropdownProps}>
           <template slot="overlay">{getComponentFromProp(this, 'overlay')}</template>
-          <Button type={type} disabled={disabled} icon="ellipsis" />
+          <Button type={type}>{icon}</Button>
         </Dropdown>
       </ButtonGroup>
     );

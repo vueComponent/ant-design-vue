@@ -94,7 +94,13 @@ export default {
     } else {
       popupVisible = !!props.defaultPopupVisible;
     }
+    ALL_HANDLERS.forEach(h => {
+      this[`fire${h}`] = e => {
+        this.fireEvents(h, e);
+      };
+    });
     return {
+      prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
       point: null,
     };
@@ -103,6 +109,7 @@ export default {
     popupVisible(val) {
       if (val !== undefined) {
         this.sPopupVisible = val;
+        this.prevPopupVisible = val;
       }
     },
     sPopupVisible(val) {
@@ -112,14 +119,6 @@ export default {
         });
       });
     },
-  },
-
-  beforeCreate() {
-    ALL_HANDLERS.forEach(h => {
-      this[`fire${h}`] = e => {
-        this.fireEvents(h, e);
-      };
-    });
   },
   deactivated() {
     this.setPopupVisible(false);
@@ -286,7 +285,15 @@ export default {
       }
       this.preClickTime = 0;
       this.preTouchTime = 0;
-      if (event && event.preventDefault) {
+      // Only prevent default when all the action is click.
+      // https://github.com/ant-design/ant-design/issues/17043
+      // https://github.com/ant-design/ant-design/issues/17291
+      if (
+        this.isClickToShow() &&
+        (this.isClickToHide() || this.isBlurToHide()) &&
+        event &&
+        event.preventDefault
+      ) {
         event.preventDefault();
       }
       if (event && event.domEvent) {
@@ -446,19 +453,20 @@ export default {
     },
 
     setPopupVisible(sPopupVisible, event) {
-      const { alignPoint } = this.$props;
+      const { alignPoint, sPopupVisible: prevPopupVisible } = this;
       this.clearDelayTimer();
-      if (this.$data.sPopupVisible !== sPopupVisible) {
+      if (prevPopupVisible !== sPopupVisible) {
         if (!hasProp(this, 'popupVisible')) {
           this.setState({
             sPopupVisible,
+            prevPopupVisible,
           });
         }
         const listeners = getListeners(this);
         listeners.popupVisibleChange && listeners.popupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
-      if (sPopupVisible && alignPoint && event) {
+      if (alignPoint && event) {
         this.setPoint(event);
       }
     },

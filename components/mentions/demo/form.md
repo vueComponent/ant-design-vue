@@ -1,0 +1,68 @@
+<cn>
+#### 配合 Form 使用
+受控模式，例如配合 Form 使用。
+</cn>
+
+<us>
+#### With Form
+Controlled mode, for example, to work with `Form`.
+</us>
+
+```tpl
+<template>
+  <a-form :form="form" layout="horizontal">
+    <a-form-item label="Top coders" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+      <a-mentions
+        rows="1"
+        v-decorator="[
+          'coders',
+          {
+            rules: [{ validator: checkMention }],
+          },
+        ]"
+      >
+        <a-mentions-option value="afc163">afc163</a-mentions-option>
+        <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
+        <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
+      </a-mentions>
+    </a-form-item>
+    <a-form-item label="Bio" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+      <a-mentions
+        rows="3"
+        placeholder="You can use @ to ref user here"
+        v-decorator="[
+          'bio',
+          {
+            rules: [{ required: true }],
+          },
+        ]"
+      >
+        <a-mentions-option value="afc163">afc163</a-mentions-option>
+        <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
+        <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
+      </a-mentions>
+    </a-form-item>
+  </a-form>
+</template>
+<script>
+import { Mentions } from 'ant-design-vue';
+const { getMentions } = Mentions;
+export default {
+  data() {
+    return {
+      form: this.$form.createForm(this, { name: 'mentions' })
+    }
+  },
+  methods: {
+    checkMention(rule, value, callback) {
+      const mentions = getMentions(value);
+      if (mentions.length < 2) {
+        callback(new Error('More than one must be selected!'));
+      } else {
+        callback();
+      }
+    }
+  }
+}
+</script>
+```

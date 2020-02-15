@@ -9,31 +9,31 @@ The `value` of time-related components is a `moment` object, which we need to pr
 </us>
 
 <template>
-  <a-form :form="form" @submit="handleSubmit">
-    <a-form-item v-bind="formItemLayout" label="DatePicker">
+  <a-form v-bind="formItemLayout" :form="form" @submit="handleSubmit">
+    <a-form-item label="DatePicker">
       <a-date-picker v-decorator="['date-picker', config]" />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="DatePicker[showTime]">
+    <a-form-item label="DatePicker[showTime]">
       <a-date-picker
         v-decorator="['date-time-picker', config]"
         show-time
         format="YYYY-MM-DD HH:mm:ss"
       />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="MonthPicker">
+    <a-form-item label="MonthPicker">
       <a-monthPicker v-decorator="['month-picker', config]" />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="RangePicker">
+    <a-form-item label="RangePicker">
       <a-range-picker v-decorator="['range-picker', rangeConfig]" />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="RangePicker[showTime]">
+    <a-form-item label="RangePicker[showTime]">
       <a-range-picker
         v-decorator="['range-time-picker', rangeConfig]"
         show-time
         format="YYYY-MM-DD HH:mm:ss"
       />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="TimePicker">
+    <a-form-item label="TimePicker">
       <a-time-picker v-decorator="['time-picker', config]" />
     </a-form-item>
     <a-form-item

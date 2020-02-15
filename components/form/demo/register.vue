@@ -29,7 +29,7 @@ Fill in this form to create a new account for you.
         ]"
       />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="Password">
+    <a-form-item v-bind="formItemLayout" label="Password" has-feedback>
       <a-input
         v-decorator="[
           'password',
@@ -48,7 +48,7 @@ Fill in this form to create a new account for you.
         type="password"
       />
     </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="Confirm Password">
+    <a-form-item v-bind="formItemLayout" label="Confirm Password" has-feedback>
       <a-input
         v-decorator="[
           'confirm',

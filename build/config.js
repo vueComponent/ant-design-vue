@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'empty', // dev components
+    componentName: 'form', // dev components
   },
 };

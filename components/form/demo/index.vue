@@ -39,6 +39,11 @@ const md = {
   cn: `# Form 表单
            具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。
 
+## 何时使用
+
+- 用于创建一个实体或收集信息。
+- 需要对输入的数据类型进行校验时。
+
 ## 表单
 
 我们为 \`form\` 提供了以下三种排列方式：
@@ -65,7 +70,12 @@ const md = {
   us: `# Form
            Form is used to collect, validate, and submit the user input, usually contains various form items including checkbox, radio, input, select, and etc.
 
-## Form
+## When to use
+
+- When you need to create a instance or collect information.
+- When you need to validate fields in certain rules.
+
+## Form Component
 
 You can align the controls of a \`form\` using the \`layout\` prop：
 
@@ -73,10 +83,9 @@ You can align the controls of a \`form\` using the \`layout\` prop：
 - \`vertical\`：to vertically align the \`label\`s and controls of the fields.
 - \`inline\`：to render form fields in one line.
 
-## Form fields
+## Form Item Component
 
-A form consists of one or more form fields whose type includes input, textarea, checkbox, radio, select, tag, and more.
-A form field is defined using \`<Form.Item />\`.
+A form consists of one or more form fields whose type includes input, textarea, checkbox, radio, select, tag, and more. A form field is defined using \`<Form.Item />\`.
 
  ## Note:
 1. If you use \`Form.create\` to process the form to have the ability to automatically collect data and verify it, it is recommended to use \`jsx\`.

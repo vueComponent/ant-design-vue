@@ -390,6 +390,9 @@ export declare class Form extends AntdComponent {
    * @param field
    */
   createFormField(field: any): any;
+  colon: boolean;
+  labelAlign: 'left' | 'right';
+  selfUpdate: boolean;
 }
 
 declare module 'vue/types/vue' {

@@ -47,6 +47,11 @@ function getMentions(value = '', config) {
 const Mentions = {
   name: 'AMentions',
   mixins: [BaseMixin],
+  inheritAttrs: false,
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   Option: { ...Option, name: 'AMentionsOption' },
   getMentions,
   props: initDefaultProps(
@@ -63,6 +68,13 @@ const Mentions = {
     return {
       focused: false,
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if (this.autoFocus) {
+        this.focus();
+      }
+    });
   },
   methods: {
     onFocus(...args) {
@@ -82,6 +94,9 @@ const Mentions = {
       this.setState({
         focused: true,
       });
+    },
+    onChange(val) {
+      this.$emit('change', val);
     },
     getNotFoundContent(renderEmpty) {
       const h = this.$createElement;
@@ -150,6 +165,7 @@ const Mentions = {
       attrs: this.$attrs,
       on: {
         ...getListeners(this),
+        change: this.onChange,
         select: this.onSelect,
         focus: this.onFocus,
         blur: this.onBlur,

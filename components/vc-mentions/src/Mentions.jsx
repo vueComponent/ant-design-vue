@@ -25,9 +25,10 @@ function noop() {}
 const Mentions = {
   name: 'Mentions',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   model: {
     prop: 'value',
-    event: 'change.value',
+    event: 'change',
   },
   props: initDefaultProps(vcMentionsProps, defaultProps),
   provide() {
@@ -80,8 +81,7 @@ const Mentions = {
       } else {
         this.$forceUpdate();
       }
-
-      this.$emit('change.value', value);
+      this.$emit('change', value);
     },
     onChange({ target: { value } }) {
       this.triggerChange(value);

@@ -43,7 +43,6 @@ export default {
       >
         {options.map((option, index) => {
           const { value, disabled, children } = option;
-          console.log(option);
           return (
             <MenuItem
               key={value}

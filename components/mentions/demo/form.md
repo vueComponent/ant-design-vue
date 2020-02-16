@@ -11,7 +11,7 @@ Controlled mode, for example, to work with `Form`.
 ```tpl
 <template>
   <a-form :form="form" layout="horizontal">
-    <a-form-item label="Top coders" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+    <a-form-item label="Top coders" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
       <a-mentions
         rows="1"
         v-decorator="[
@@ -26,7 +26,7 @@ Controlled mode, for example, to work with `Form`.
         <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
       </a-mentions>
     </a-form-item>
-    <a-form-item label="Bio" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+    <a-form-item label="Bio" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
       <a-mentions
         rows="3"
         placeholder="You can use @ to ref user here"
@@ -42,6 +42,12 @@ Controlled mode, for example, to work with `Form`.
         <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
       </a-mentions>
     </a-form-item>
+    <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+      <a-button type="primary" @click="handleSubmit">
+        Submit
+      </a-button>
+      <a-button style="margin-left: 8px;" @click="handleReset">Reset</a-button>
+    </a-form-item>
   </a-form>
 </template>
 <script>
@@ -54,6 +60,21 @@ export default {
     }
   },
   methods: {
+    handleReset(e) {
+      e.preventDefault();
+      this.form.resetFields();
+    },
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((errors, values) => {
+        if (errors) {
+          console.log('Errors in the form!!!');
+          return;
+        }
+        console.log('Submit!!!');
+        console.log(values);
+      });
+    },
     checkMention(rule, value, callback) {
       const mentions = getMentions(value);
       if (mentions.length < 2) {

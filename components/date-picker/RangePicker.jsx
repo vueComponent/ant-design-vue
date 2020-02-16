@@ -174,14 +174,18 @@ export default {
     },
 
     handleCalendarInputSelect(value) {
-      const [start] = value;
+      const [start, end] = value;
       if (!start) {
         return;
       }
-      this.setState(({ sShowDate }) => ({
-        sValue: value,
-        sShowDate: getShowDateFromValue(value) || sShowDate,
-      }));
+      if (end === undefined) {
+        this.handleChange([]);
+      } else {
+        this.setState(({ sShowDate }) => ({
+          sValue: value,
+          sShowDate: getShowDateFromValue(value) || sShowDate,
+        }));
+      }
     },
 
     handleRangeClick(value) {
@@ -300,7 +304,7 @@ export default {
       [`${prefixCls}-time`]: showTime,
       [`${prefixCls}-range-with-ranges`]: ranges,
     });
-
+    console.log('--');
     // 需要选择时间时，点击 ok 时才触发 onChange
     const pickerChangeHandler = {
       on: {

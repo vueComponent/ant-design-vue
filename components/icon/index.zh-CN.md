@@ -10,6 +10,8 @@
 | component | 控制如何渲染图标，通常是一个渲染根标签为 `<svg>` 的 `Vue` 组件，**会使 `type` 属性失效** | ComponentType<CustomIconComponentProps\> | - |
 | twoToneColor | 仅适用双色图标。设置双色图标的主要颜色 | string (十六进制颜色) | - |
 
+> 注意：Icon 组件中图标渲染的优先级为 component > children > type, 传入 props 时，优先级高的直接生效，优先级低的则失效。
+
 ### SVG 图标
 
 在 `1.2.0` 之后，我们使用了 SVG 图标替换了原先的 font 图标，从而带来了以下优势：
@@ -21,7 +23,7 @@
 
 更多讨论可参考：[#10353](https://github.com/ant-design/ant-design/issues/10353)。
 
-> ⚠️ 1.2.0 之后我们全量引入了所有图标，导致 antd 默认的包体积有一定增加，我们会在不远的未来增加新的 API 来实现图标的按需使用，更多相关讨论可关注：[#12011](https://github.com/ant-design/ant-design/issues/12011)。
+> ⚠️ 1.2.0 之后我们全量引入了所有图标，导致 antd 默认的包体积有一定增加，我们会在不远的未来增加新的 API 来实现图标的按需使用，更多相关讨论可关注：[#12011](https://github.com/ant-design/ant-design/issues/12011)。在此之前，你可以通过来自社区同学的 [webpack 插件](https://github.com/Beven91/webpack-ant-icon-loader)将图标文件拆分。
 
 其中 `theme`, `component`, `twoToneColor` 是 `1.2.x` 版本新增加的属性。最佳实践是给使用的 `<Icon />` 组件传入属性 `theme` 以明确图标的主题风格。例如：
 

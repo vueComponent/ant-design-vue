@@ -4,26 +4,30 @@
 | --- | --- | --- | --- |
 | type | Type of the ant design icon | string | - |
 | style | Style properties of icon, like `fontSize` and `color` | CSSProperties | - |
-| theme | Theme of the ant design icon | 'filled' \| 'outlined' \| 'twoTone' | 'outlined' |
+| theme | Theme variant of the icon | 'filled' \| 'outlined' \| 'twoTone' | 'outlined' |
 | spin | Rotate icon with animation | boolean | false |
 | rotate | Rotate degrees (added in 1.4.0, not working in IE9) | number | - |
 | component | The component used for the root node. This will override the **`type`** property. | ComponentType<CustomIconComponentProps\> | - |
 | twoToneColor | Only support the two-tone icon. Specific the primary color. | string (hex color) | - |
 
+> Note: icon rendering priority of the Icon component is component > children > type. When props is passed, the higher priority item will work, and the lower priority item will be invalid.
+
 ### SVG icons
 
-We introduced SVG icons in `1.2.0` version replacing font icons which brings benefits below:
+We introduced SVG icons in version `1.2.0`, replacing font icons. This has the following benefits:
 
-- Complete offline usage of icon, no dependency of CDN font icon file and no more empty square during downloading than no need to deploy icon font files locally either.
-- Much more display accuracy in lower-level screens.
-- Support multiple colors for icon.
-- No need to change built-in icons with overriding styles by providing more props in component.
+- Complete offline usage of icons, without dependency on a CDN-hosted font icon file (No more empty square during downloading and no need to deploy icon font files locally either!)
+- Much more display accuracy on lower-resolution screens
+- The ability to choose icon color
+- No need to change built-in icons with overriding styles by providing more props in component
 
-More discussion of SVG icon reference to [#10353](https://github.com/ant-design/ant-design/issues/10353).
+More discussion of SVG icon reference at [#10353](https://github.com/ant-design/ant-design/issues/10353).
 
-> ⚠️ About the extra bundle size brought by all SVG icons we imported in 1.2.0, we will provide new API to allow developers importing icons as your need, you can trace [#12011](https://github.com/ant-design/ant-design/issues/12011) for further progress.
+> ⚠️ Given the extra bundle size caused by all SVG icons imported in 1.2.0, we will provide a new API to allow developers to import icons as needed, you can track [#12011](https://github.com/ant-design/ant-design/issues/12011) for updates.
+>
+> While you wait, you can use [webpack plugin](https://github.com/Beven91/webpack-ant-icon-loader) from the community to chunk the icon file.
 
-The properties `theme`, `component` and `twoToneColor` are added in `1.2.0`. The best practice is to pass the property `theme` to every `<Icon />` components.
+The properties `theme`, `component` and `twoToneColor` were added in `1.2.0`. The best practice is to pass the property `theme` to every `<Icon />` component.
 
 ```html
 <a-icon type="star" theme="filled" />

@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'grid', // dev components
+    componentName: 'icon', // dev components
   },
 };

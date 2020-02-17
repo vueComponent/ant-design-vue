@@ -13,7 +13,12 @@
   </li>
 </template>
 <script>
+import Badge from '@/components/badge';
+import '@/components/badge/style';
 export default {
+  components: {
+    'a-badge': Badge,
+  },
   props: ['type', 'isNew', 'theme', 'justCopied'],
   data() {
     const { type, theme } = this;

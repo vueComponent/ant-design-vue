@@ -5,7 +5,7 @@ export default function mountTest(Component) {
     it(`component could be updated and unmounted without errors`, () => {
       const wrapper = mount(Component);
       expect(() => {
-        wrapper.setProps({});
+        wrapper.vm.$forceUpdate();
         wrapper.destroy();
       }).not.toThrow();
     });

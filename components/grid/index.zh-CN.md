@@ -5,7 +5,7 @@
 | 成员 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | align | flex 布局下的垂直对齐方式：`top` `middle` `bottom` | string | `top` |
-| gutter | 栅格间隔，可以写成像素值或支持响应式的对象写法 `{ xs: 8, sm: 16, md: 24}` | number/object | 0 |
+| gutter | 栅格间隔，可以写成像素值或支持响应式的对象写法来设置水平间隔 `{ xs: 8, sm: 16, md: 24}`。或者使用数组形式同时设置 `[水平间距, 垂直间距]`（`1.5.0 后支持`）。 | number/object/array | 0 |
 | justify | flex 布局下的水平排列方式：`start` `end` `center` `space-around` `space-between` | string | `start` |
 | type | 布局模式，可选 `flex`，[现代浏览器](http://caniuse.com/#search=flex) 下有效 | string |  |
 

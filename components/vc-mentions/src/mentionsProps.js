@@ -17,7 +17,6 @@ export const mentionsProps = {
   split: PropTypes.string,
   transitionName: PropTypes.string,
   placement: PropTypes.oneOf(PlaceMent),
-  rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   character: PropTypes.any,
   characterRender: PropTypes.func,
   filterOption: PropTypes.func,

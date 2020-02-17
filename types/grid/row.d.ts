@@ -4,22 +4,23 @@
 
 import { AntdComponent } from '../component';
 
+type Gutter =
+  | number
+  | {
+      xs: number;
+      sm: number;
+      md: number;
+      lg: number;
+      xl: number;
+      xxl: number;
+    };
 export declare class Row extends AntdComponent {
   /**
    * spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}
    * @default 0
    * @type numner | object
    */
-  gutter:
-    | number
-    | {
-        xs: number;
-        sm: number;
-        md: number;
-        lg: number;
-        xl: number;
-        xxl: number;
-      };
+  gutter: Gutter | [Gutter, Gutter];
 
   /**
    * layout mode, optional flex

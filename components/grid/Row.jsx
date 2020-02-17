@@ -1,22 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
-
-// matchMedia polyfill for
-// https://github.com/WickyNilliams/enquire.js/issues/82
-let enquire = null;
-if (typeof window !== 'undefined') {
-  const matchMediaPolyfill = mediaQuery => {
-    return {
-      media: mediaQuery,
-      matches: false,
-      addListener() {},
-      removeListener() {},
-    };
-  };
-  window.matchMedia = window.matchMedia || matchMediaPolyfill;
-  enquire = require('enquire.js');
-}
+import ResponsiveObserve from '../_util/responsiveObserve';
 
 const BreakpointMap = PropTypes.shape({
   xs: PropTypes.number,
@@ -28,30 +13,21 @@ const BreakpointMap = PropTypes.shape({
 }).loose;
 
 const RowProps = {
-  gutter: PropTypes.oneOfType([PropTypes.number, BreakpointMap]),
+  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
   type: PropTypes.oneOf(['flex']),
-  align: PropTypes.oneOf(['top', 'middle', 'bottom']),
+  align: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch']),
   justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between']),
   prefixCls: PropTypes.string,
 };
 
 const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
-const responsiveMap = {
-  xs: '(max-width: 575px)',
-  sm: '(min-width: 576px)',
-  md: '(min-width: 768px)',
-  lg: '(min-width: 992px)',
-  xl: '(min-width: 1200px)',
-  xxl: '(min-width: 1600px)',
-};
-
 export default {
   name: 'ARow',
   mixins: [BaseMixin],
   props: {
     ...RowProps,
-    gutter: PropTypes.oneOfType([PropTypes.number, BreakpointMap]).def(0),
+    gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
   },
   provide() {
     return {
@@ -69,51 +45,40 @@ export default {
 
   mounted() {
     this.$nextTick(() => {
-      Object.keys(responsiveMap).map(screen =>
-        enquire.register(responsiveMap[screen], {
-          match: () => {
-            if (typeof this.gutter !== 'object') {
-              return;
-            }
-            this.setState(prevState => ({
-              screens: {
-                ...prevState.screens,
-                [screen]: true,
-              },
-            }));
-          },
-          unmatch: () => {
-            if (typeof this.gutter !== 'object') {
-              return;
-            }
-            this.setState(prevState => ({
-              screens: {
-                ...prevState.screens,
-                [screen]: false,
-              },
-            }));
-          },
-          // Keep a empty destory to avoid triggering unmatch when unregister
-          destroy() {},
-        }),
-      );
+      this.token = ResponsiveObserve.subscribe(screens => {
+        const { gutter } = this;
+        if (
+          typeof gutter === 'object' ||
+          (Array.isArray(gutter) &&
+            (typeof gutter[0] === 'object' || typeof gutter[1] === 'object'))
+        ) {
+          this.screens = screens;
+        }
+      });
     });
   },
   beforeDestroy() {
-    Object.keys(responsiveMap).map(screen => enquire.unregister(responsiveMap[screen]));
+    ResponsiveObserve.unsubscribe(this.token);
   },
   methods: {
     getGutter() {
-      const { gutter } = this;
-      if (typeof gutter === 'object') {
-        for (let i = 0; i < responsiveArray.length; i++) {
-          const breakpoint = responsiveArray[i];
-          if (this.screens[breakpoint] && gutter[breakpoint] !== undefined) {
-            return gutter[breakpoint];
+      const results = [0, 0];
+      const { gutter, screens } = this;
+      const normalizedGutter = Array.isArray(gutter) ? gutter : [gutter, 0];
+      normalizedGutter.forEach((g, index) => {
+        if (typeof g === 'object') {
+          for (let i = 0; i < responsiveArray.length; i++) {
+            const breakpoint = responsiveArray[i];
+            if (screens[breakpoint] && g[breakpoint] !== undefined) {
+              results[index] = g[breakpoint];
+              break;
+            }
           }
+        } else {
+          results[index] = g || 0;
         }
-      }
-      return gutter;
+      });
+      return results;
     },
   },
 
@@ -129,13 +94,20 @@ export default {
       [`${prefixCls}-${type}-${justify}`]: type && justify,
       [`${prefixCls}-${type}-${align}`]: type && align,
     };
-    const rowStyle =
-      gutter > 0
+    const rowStyle = {
+      ...(gutter[0] > 0
         ? {
-            marginLeft: `${gutter / -2}px`,
-            marginRight: `${gutter / -2}px`,
+            marginLeft: `${gutter[0] / -2}px`,
+            marginRight: `${gutter[0] / -2}px`,
           }
-        : {};
+        : {}),
+      ...(gutter[1] > 0
+        ? {
+            marginTop: `${gutter[1] / -2}px`,
+            marginBottom: `${gutter[1] / -2}px`,
+          }
+        : {}),
+    };
     return (
       <div class={classes} style={rowStyle}>
         {$slots.default}

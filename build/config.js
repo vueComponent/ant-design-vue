@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'spin', // dev components
+    componentName: 'grid', // dev components
   },
 };

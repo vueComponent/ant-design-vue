@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
 import BaseMixin from '../../_util/BaseMixin';
@@ -32,17 +31,8 @@ const Mentions = {
   },
   props: initDefaultProps(vcMentionsProps, defaultProps),
   provide() {
-    const { notFoundContent } = this.$props;
-    const { activeIndex } = this.$data;
     return {
-      mentionsContext: {
-        notFoundContent,
-        activeIndex,
-        setActiveIndex: this.setActiveIndex,
-        selectOption: this.selectOption,
-        onFocus: this.onDropdownFocus,
-        onBlur: this.onDropdownBlur,
-      },
+      mentionsContext: this,
     };
   },
   data() {
@@ -289,7 +279,7 @@ const Mentions = {
     const options = measuring ? this.getOptions() : [];
 
     return (
-      <div class={classNames(prefixCls)} style={getStyle(this)}>
+      <div class={prefixCls} style={getStyle(this)}>
         <textarea
           ref="textarea"
           {...{

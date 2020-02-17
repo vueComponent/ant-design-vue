@@ -7,7 +7,13 @@ import Base from '../base';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
-import { getOptionProps, getListeners, filterEmpty, initDefaultProps } from '../_util/props-util';
+import {
+  getOptionProps,
+  getComponentFromProp,
+  getListeners,
+  filterEmpty,
+  initDefaultProps,
+} from '../_util/props-util';
 
 const { Option } = VcMentions;
 
@@ -100,7 +106,7 @@ const Mentions = {
     },
     getNotFoundContent(renderEmpty) {
       const h = this.$createElement;
-      const { notFoundContent } = this.$props;
+      const notFoundContent = getComponentFromProp(this, 'notFoundContent');
       if (notFoundContent !== undefined) {
         return notFoundContent;
       }

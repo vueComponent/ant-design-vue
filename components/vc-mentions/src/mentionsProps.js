@@ -35,14 +35,6 @@ export const defaultProps = {
   split: ' ',
   validateSearch: defaultValidateSearch,
   filterOption: defaultFilterOption,
-  notFoundContent: 'Not Found',
-  rows: 1,
 };
 
-export default initDefaultProps(vcMentionsProps, {
-  prefix: '@',
-  split: ' ',
-  validateSearch: defaultValidateSearch,
-  filterOption: defaultFilterOption,
-  notFoundContent: 'Not Found',
-});
+export default initDefaultProps(vcMentionsProps, defaultProps);

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
-import { mentionsProps, defaultProps } from '../vc-mentions/src/mentionsProps';
+import { mentionsProps } from '../vc-mentions/src/mentionsProps';
 import Base from '../base';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
@@ -12,7 +12,6 @@ import {
   getComponentFromProp,
   getListeners,
   filterEmpty,
-  initDefaultProps,
 } from '../_util/props-util';
 
 const { Option } = VcMentions;
@@ -60,13 +59,10 @@ const Mentions = {
   },
   Option: { ...Option, name: 'AMentionsOption' },
   getMentions,
-  props: initDefaultProps(
-    {
-      ...mentionsProps,
-      loading: PropTypes.bool,
-    },
-    defaultProps,
-  ),
+  props: {
+    ...mentionsProps,
+    loading: PropTypes.bool,
+  },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
   },
@@ -168,7 +164,7 @@ const Mentions = {
         children: this.getOptions(),
       },
       class: mergedClassName,
-      attrs: this.$attrs,
+      attrs: { rows: 1, ...this.$attrs },
       on: {
         ...getListeners(this),
         change: this.onChange,

@@ -2,7 +2,7 @@
 
 exports[`renders ./components/spin/demo/basic.md correctly 1`] = `
 <div>
-  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
 </div>
 `;
 
@@ -33,7 +33,7 @@ exports[`renders ./components/spin/demo/delayAndDebounce.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/inside.md correctly 1`] = `
 <div class="example">
-  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
 </div>
 `;
 
@@ -52,9 +52,9 @@ exports[`renders ./components/spin/demo/nested.md correctly 1`] = `
 
 exports[`renders ./components/spin/demo/size.md correctly 1`] = `
 <div>
-  <div class="ant-spin ant-spin-sm ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
-  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
-  <div class="ant-spin ant-spin-lg ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+  <div class="ant-spin ant-spin-sm ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
+  <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
+  <div class="ant-spin ant-spin-lg ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
 </div>
 `;
 
@@ -62,7 +62,7 @@ exports[`renders ./components/spin/demo/tip.md correctly 1`] = `
 <div>
   <div class="ant-spin-nested-loading">
     <div>
-      <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span>
+      <div class="ant-spin ant-spin-spinning ant-spin-show-text"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
         <div class="ant-spin-text">Loading...</div>
       </div>
     </div>

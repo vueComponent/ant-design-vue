@@ -7,6 +7,7 @@ import Event from './event.md';
 import Mark from './mark.md';
 import Vertical from './vertical.md';
 import ShowTooltip from './show-tooltip.md';
+import Reverse from './reverse';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -40,6 +41,7 @@ export default {
         <Mark />
         <Vertical />
         <ShowTooltip />
+        <Reverse />
         <api>
           <template slot="cn">
             <CN />

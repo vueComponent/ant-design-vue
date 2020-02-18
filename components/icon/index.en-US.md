@@ -101,7 +101,7 @@ module.exports = {
 ```
 
 ```jsx
-import { Icon } from 'antd';
+import { Icon } from 'ant-design-vue';
 import MessageSvg from 'path/to/message.svg'; // path to your '*.svg' file.
 
 new Vue({

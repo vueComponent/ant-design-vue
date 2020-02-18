@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'icon', // dev components
+    componentName: 'slider', // dev components
   },
 };

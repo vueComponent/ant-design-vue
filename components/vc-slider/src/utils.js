@@ -1,9 +1,5 @@
 import keyCode from '../../_util/KeyCode';
 
-export function isDev() {
-  return process.env.NODE_ENV !== 'production';
-}
-
 export function isEventFromHandle(e, handles) {
   try {
     return Object.keys(handles).some(
@@ -22,10 +18,12 @@ export function isNotTouchEvent(e) {
   return e.touches.length > 1 || (e.type.toLowerCase() === 'touchend' && e.touches.length > 0);
 }
 
-export function getClosestPoint(val, { marks, step, min }) {
+export function getClosestPoint(val, { marks, step, min, max }) {
   const points = Object.keys(marks).map(parseFloat);
   if (step !== null) {
-    const closestStep = Math.round((val - min) / step) * step + min;
+    const maxSteps = Math.floor((max - min) / step);
+    const steps = Math.min((val - min) / step, maxSteps);
+    const closestStep = Math.round(steps) * step + min;
     points.push(closestStep);
   }
   const diffs = points.map(point => Math.abs(val - point));
@@ -102,15 +100,23 @@ export function calculateNextValue(func, value, props) {
   return value;
 }
 
-export function getKeyboardValueMutator(e) {
+export function getKeyboardValueMutator(e, vertical, reverse) {
+  const increase = 'increase';
+  const decrease = 'decrease';
+  let method = increase;
   switch (e.keyCode) {
     case keyCode.UP:
+      method = vertical && reverse ? decrease : increase;
+      break;
     case keyCode.RIGHT:
-      return (value, props) => calculateNextValue('increase', value, props);
-
+      method = !vertical && reverse ? decrease : increase;
+      break;
     case keyCode.DOWN:
+      method = vertical && reverse ? increase : decrease;
+      break;
     case keyCode.LEFT:
-      return (value, props) => calculateNextValue('decrease', value, props);
+      method = !vertical && reverse ? increase : decrease;
+      break;
 
     case keyCode.END:
       return (value, props) => props.max;
@@ -124,4 +130,5 @@ export function getKeyboardValueMutator(e) {
     default:
       return undefined;
   }
+  return (value, props) => calculateNextValue(method, value, props);
 }

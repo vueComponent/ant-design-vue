@@ -3,6 +3,7 @@ import Touchable from '../../vc-m-feedback';
 import { getListeners } from '../../_util/props-util';
 
 const InputHandler = {
+  name: 'InputHandler',
   props: {
     prefixCls: PropTypes.string,
     disabled: PropTypes.bool,

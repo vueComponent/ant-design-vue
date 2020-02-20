@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'input-number', // dev components
+    componentName: 'layout', // dev components
   },
 };

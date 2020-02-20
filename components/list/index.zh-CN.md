@@ -2,21 +2,22 @@
 
 ### List
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| bordered | 是否展示边框 | boolean | false |
-| footer | 列表底部 | string\|slot | - |
-| grid | 列表栅格配置 | object | - |
-| header | 列表头部 | string\|slot | - |
-| itemLayout | 设置 `List.Item` 布局, 设置成 `vertical` 则竖直样式显示, 默认横排 | string | - |
-| loading | 当卡片内容还在加载中时，可以用 `loading` 展示一个占位 | boolean\|[object](https://www.antdv.com/components/spin-cn/#API) | false |
-| loadMore | 加载更多 | string\|slot | - |
-| locale | 默认文案设置，目前包括空数据文案 | object | emptyText: '暂无数据' |
-| pagination | 对应的 `pagination` [配置](https://www.antdv.com/components/pagination-cn/#API), 设置 `false` 不显示 | boolean\|object | false |
-| size | list 的尺寸 | `default` \| `middle` \| `small` | `default` |
-| split | 是否展示分割线 | boolean | true |
-| renderItem | 自定义`Item`函数，也可使用 slot="renderItem" 和 slot-scope="item, index" | (item, index) => vNode |  | - |
-| rowKey | 各项 key 的取值，可以是字符串或一个函数 | item => string\|number |  |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| bordered | 是否展示边框 | boolean | false |  |
+| footer | 列表底部 | string\|slot | - |  |
+| grid | 列表栅格配置 | object | - |  |
+| header | 列表头部 | string\|slot | - |  |
+| itemLayout | 设置 `List.Item` 布局, 设置成 `vertical` 则竖直样式显示, 默认横排 | string | - |  |
+| loading | 当卡片内容还在加载中时，可以用 `loading` 展示一个占位 | boolean\|[object](https://www.antdv.com/components/spin-cn/#API) | false |  |
+| loadMore | 加载更多 | string\|slot | - |  |
+| locale | 默认文案设置，目前包括空数据文案 | object | emptyText: '暂无数据' |  |
+| pagination | 对应的 `pagination` [配置](https://www.antdv.com/components/pagination-cn/#API), 设置 `false` 不显示 | boolean\|object | false |  |
+| size | list 的尺寸 | `default` \| `middle` \| `small` | `default` |  |
+| split | 是否展示分割线 | boolean | true |  |
+| dataSource | 列表数据源 | any[] | - | 1.5.0 |
+| renderItem | 自定义`Item`函数，也可使用 slot="renderItem" 和 slot-scope="item, index" | (item, index) => vNode |  | - |  |
+| rowKey | 各项 key 的取值，可以是字符串或一个函数 | item => string\|number |  |  |
 
 ### pagination
 

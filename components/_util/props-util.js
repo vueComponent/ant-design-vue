@@ -259,6 +259,10 @@ export function isEmptyElement(c) {
   return !(c.tag || (c.text && c.text.trim() !== ''));
 }
 
+export function isStringElement(c) {
+  return !c.tag;
+}
+
 export function filterEmpty(children = []) {
   return children.filter(c => !isEmptyElement(c));
 }

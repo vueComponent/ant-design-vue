@@ -3,12 +3,14 @@ import classNames from 'classnames';
 import {
   getSlotOptions,
   getComponentFromProp,
-  isEmptyElement,
+  isStringElement,
   getListeners,
+  isEmptyElement,
 } from '../_util/props-util';
 import { Col } from '../grid';
 import { ConfigConsumerProps } from '../config-provider';
 import { ListGridType } from './index';
+import { cloneElement } from '../_util/vnode';
 
 export const ListItemProps = {
   prefixCls: PropTypes.string,
@@ -68,59 +70,68 @@ export default {
     listContext: { default: () => ({}) },
     configProvider: { default: () => ConfigConsumerProps },
   },
+  methods: {
+    isItemContainsTextNodeAndNotSingular() {
+      const { $slots } = this;
+      let result;
+      const children = $slots.default || [];
+      children.forEach(element => {
+        if (isStringElement(element) && !isEmptyElement(element)) {
+          result = true;
+        }
+      });
+      return result && children.length > 1;
+    },
+
+    isFlexMode() {
+      const extra = getComponentFromProp(this, 'extra');
+      const { itemLayout } = this.listContext;
+      if (itemLayout === 'vertical') {
+        return !!extra;
+      }
+      return !this.isItemContainsTextNodeAndNotSingular();
+    },
+  },
   render() {
-    const { grid } = this.listContext;
+    const { grid, itemLayout } = this.listContext;
     const { prefixCls: customizePrefixCls, $slots } = this;
     const listeners = getListeners(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
-
-    const classString = `${prefixCls}-item`;
     const extra = getComponentFromProp(this, 'extra');
     const actions = getComponentFromProp(this, 'actions');
-    const metaContent = [];
-    const otherContent = [];
 
-    ($slots.default || []).forEach(element => {
-      if (!isEmptyElement(element)) {
-        if (getSlotOptions(element).__ANT_LIST_ITEM_META) {
-          metaContent.push(element);
-        } else {
-          otherContent.push(element);
-        }
-      }
-    });
+    const actionsContent = actions && actions.length > 0 && (
+      <ul class={`${prefixCls}-item-action`} key="actions">
+        {actions.map((action, i) => (
+          <li key={`${prefixCls}-item-action-${i}`}>
+            {action}
+            {i !== actions.length - 1 && <em class={`${prefixCls}-item-action-split`} />}
+          </li>
+        ))}
+      </ul>
+    );
 
-    const contentClassString = classNames(`${prefixCls}-item-content`, {
-      [`${prefixCls}-item-content-single`]: metaContent.length < 1,
-    });
-    const content =
-      otherContent.length > 0 ? <div class={contentClassString}>{otherContent}</div> : null;
-
-    let actionsContent;
-    if (actions && actions.length > 0) {
-      const actionsContentItem = (action, i) => (
-        <li key={`${prefixCls}-item-action-${i}`}>
-          {action}
-          {i !== actions.length - 1 && <em class={`${prefixCls}-item-action-split`} />}
-        </li>
-      );
-      actionsContent = (
-        <ul class={`${prefixCls}-item-action`}>
-          {actions.map((action, i) => actionsContentItem(action, i))}
-        </ul>
-      );
-    }
-
-    const extraContent = (
-      <div class={`${prefixCls}-item-extra-wrap`}>
-        <div class={`${prefixCls}-item-main`}>
-          {metaContent}
-          {content}
-          {actionsContent}
-        </div>
-        <div class={`${prefixCls}-item-extra`}>{extra}</div>
-      </div>
+    const Tag = grid ? 'div' : 'li';
+    const itemChildren = (
+      <Tag
+        {...{ on: listeners }}
+        class={classNames(`${prefixCls}-item`, {
+          [`${prefixCls}-item-no-flex`]: !this.isFlexMode(),
+        })}
+      >
+        {itemLayout === 'vertical' && extra
+          ? [
+              <div class={`${prefixCls}-item-main`} key="content">
+                {$slots.default}
+                {actionsContent}
+              </div>,
+              <div class={`${prefixCls}-item-extra`} key="extra">
+                {extra}
+              </div>,
+            ]
+          : [$slots.default, actionsContent, cloneElement(extra, { key: 'extra' })]}
+      </Tag>
     );
 
     const mainContent = grid ? (
@@ -133,20 +144,10 @@ export default {
         xl={getGrid(grid, 'xl')}
         xxl={getGrid(grid, 'xxl')}
       >
-        <div {...{ on: listeners }} class={classString}>
-          {extra && extraContent}
-          {!extra && metaContent}
-          {!extra && content}
-          {!extra && actionsContent}
-        </div>
+        {itemChildren}
       </Col>
     ) : (
-      <div {...{ on: listeners }} class={classString}>
-        {extra && extraContent}
-        {!extra && metaContent}
-        {!extra && content}
-        {!extra && actionsContent}
-      </div>
+      itemChildren
     );
 
     return mainContent;

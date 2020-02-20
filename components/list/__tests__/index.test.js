@@ -1,8 +1,11 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import List from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('List', () => {
+  mountTest(List);
+  mountTest(List.Item);
   it('locale not passed to internal div', async () => {
     const locale = { emptyText: 'Custom text' };
     const wrapper = mount(

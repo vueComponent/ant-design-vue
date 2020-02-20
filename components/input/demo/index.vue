@@ -3,6 +3,7 @@ import Basic from './basic';
 import AutosizeTextarea from './autosize-textarea';
 import Presuffix from './presuffix';
 import SearchInput from './search-input';
+import SearchInputLoading from './search-input-loading';
 import Size from './size';
 import Group from './group';
 import TextArea from './textarea';
@@ -40,6 +41,7 @@ export default {
         <AutosizeTextarea />
         <Presuffix />
         <SearchInput />
+        <SearchInputLoading />
         <Size />
         <Group />
         <TextArea />

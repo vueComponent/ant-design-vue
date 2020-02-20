@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'slider', // dev components
+    componentName: 'input', // dev components
   },
 };

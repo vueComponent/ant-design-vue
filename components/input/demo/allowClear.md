@@ -10,7 +10,12 @@ Input type of password.
 
 ```tpl
 <template>
+<div>
   <a-input placeholder="input with clear icon" allowClear @change="onChange" />
+  <br />
+  <br />
+  <a-textarea placeholder="textarea with clear icon" allowClear @change="onChange" />
+</div>
 </template>
 <script>
   export default {

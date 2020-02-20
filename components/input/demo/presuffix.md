@@ -17,6 +17,9 @@ Add prefix or suffix icons inside input.
         <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
       </a-tooltip>
     </a-input>
+    <br />
+    <br />
+    <a-input prefix="￥" suffix="RMB" />
   </div>
 </template>
 
@@ -35,18 +38,4 @@ Add prefix or suffix icons inside input.
     },
   };
 </script>
-<style scoped>
-  .components-input-demo-presuffix .anticon-close-circle {
-    cursor: pointer;
-    color: #ccc;
-    transition: color 0.3s;
-    font-size: 12px;
-  }
-  .components-input-demo-presuffix .anticon-close-circle:hover {
-    color: #999;
-  }
-  .components-input-demo-presuffix .anticon-close-circle:active {
-    color: #666;
-  }
-</style>
 ```

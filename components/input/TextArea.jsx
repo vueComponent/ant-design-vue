@@ -1,32 +1,16 @@
-import classNames from 'classnames';
-import omit from 'omit.js';
-import ResizeObserver from 'resize-observer-polyfill';
+import ClearableLabeledInput from './ClearableLabeledInput';
+import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
-import calculateNodeHeight from './calculateNodeHeight';
-import hasProp, { getListeners } from '../_util/props-util';
+import hasProp, { getListeners, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import { fixControlledValue, resolveOnChange } from './Input';
+import PropTypes from '../_util/vue-types';
 
-function onNextFrame(cb) {
-  if (window.requestAnimationFrame) {
-    return window.requestAnimationFrame(cb);
-  }
-  return window.setTimeout(cb, 1);
-}
-
-function clearNextFrameAction(nextFrameId) {
-  if (window.cancelAnimationFrame) {
-    window.cancelAnimationFrame(nextFrameId);
-  } else {
-    window.clearTimeout(nextFrameId);
-  }
-}
-function fixControlledValue(value) {
-  if (typeof value === 'undefined' || value === null) {
-    return '';
-  }
-  return value;
-}
-function noop() {}
+const TextAreaProps = {
+  ...inputProps,
+  autosize: PropTypes.oneOfType([Object, Boolean]),
+  autoSize: PropTypes.oneOfType([Object, Boolean]),
+};
 
 export default {
   name: 'ATextarea',
@@ -36,68 +20,39 @@ export default {
     event: 'change.value',
   },
   props: {
-    ...inputProps,
-    autosize: [Object, Boolean],
+    ...TextAreaProps,
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    const { value = '', defaultValue = '' } = this.$props;
+    const value = typeof this.value === 'undefined' ? this.defaultValue : this.value;
     return {
-      stateValue: fixControlledValue(!hasProp(this, 'value') ? defaultValue : value),
-      nextFrameActionId: undefined,
-      textareaStyles: {},
+      stateValue: value,
     };
   },
   computed: {},
   watch: {
     value(val) {
-      this.$nextTick(() => {
-        this.resizeOnNextFrame();
-      });
-      this.stateValue = fixControlledValue(val);
-    },
-    autosize(val) {
-      if (!val && this.$refs.textArea) {
-        this.textareaStyles = omit(this.textareaStyles, ['overflowY']);
-      }
+      this.stateValue = val;
     },
   },
   mounted() {
     this.$nextTick(() => {
-      this.resizeTextarea();
-      this.updateResizeObserverHook();
       if (this.autoFocus) {
         this.focus();
       }
     });
   },
-  updated() {
-    this.updateResizeObserverHook();
-  },
-  beforeDestroy() {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  },
   methods: {
-    resizeOnNextFrame() {
-      if (this.nextFrameActionId) {
-        clearNextFrameAction(this.nextFrameActionId);
-      }
-      this.nextFrameActionId = onNextFrame(this.resizeTextarea);
-    },
-    // We will update hooks if `autosize` prop change
-    updateResizeObserverHook() {
-      if (!this.resizeObserver && this.$props.autosize) {
-        // Add resize observer
-        this.resizeObserver = new ResizeObserver(this.resizeOnNextFrame);
-        this.resizeObserver.observe(this.$refs.textArea);
-      } else if (this.resizeObserver && !this.$props.autosize) {
-        // Remove resize observer
-        this.resizeObserver.disconnect();
-        this.resizeObserver = null;
+    setValue(value, callback) {
+      if (!hasProp(this, 'value')) {
+        this.stateValue = value;
+        this.$nextTick(() => {
+          callback && callback();
+        });
+      } else {
+        this.$forceUpdate();
       }
     },
     handleKeyDown(e) {
@@ -106,82 +61,69 @@ export default {
       }
       this.$emit('keydown', e);
     },
-    resizeTextarea() {
-      const { autosize } = this.$props;
-      if (!autosize || !this.$refs.textArea) {
-        return;
-      }
-      const { minRows, maxRows } = autosize;
-      const textareaStyles = calculateNodeHeight(this.$refs.textArea, false, minRows, maxRows);
-      this.textareaStyles = textareaStyles;
-    },
-
-    handleTextareaChange(e) {
-      const { value, composing } = e.target;
-      if (composing || this.stateValue === value) return;
-      if (!hasProp(this, 'value')) {
-        this.stateValue = value;
-        this.resizeTextarea();
-      } else {
-        this.$forceUpdate();
-      }
-
-      this.$emit('change.value', value);
+    onChange(e) {
+      this.$emit('change.value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
+    handleChange(e) {
+      const { value, composing } = e.target;
+      if (composing || this.stateValue === value) return;
+
+      this.setValue(e.target.value, () => {
+        this.$refs.resizableTextArea.resizeTextarea();
+      });
+      resolveOnChange(this.$refs.resizableTextArea.$refs.textArea, e, this.onChange);
+    },
 
     focus() {
-      this.$refs.textArea.focus();
+      this.$refs.resizableTextArea.$refs.textArea.focus();
     },
 
     blur() {
-      this.$refs.textArea.blur();
+      this.$refs.resizableTextArea.$refs.textArea.blur();
+    },
+    handleReset(e) {
+      this.setValue('', () => {
+        this.$refs.resizableTextArea.renderTextArea();
+        this.focus();
+      });
+      resolveOnChange(this.$refs.resizableTextArea.$refs.textArea, e, this.onChange);
+    },
+
+    renderTextArea(prefixCls) {
+      const props = getOptionProps(this);
+      const resizeProps = {
+        props: {
+          ...props,
+          prefixCls,
+        },
+        on: {
+          ...getListeners(this),
+          input: this.handleChange,
+          keydown: this.handleKeyDown,
+        },
+        attrs: this.$attrs,
+      };
+      return <ResizableTextArea {...resizeProps} ref="resizableTextArea" />;
     },
   },
   render() {
-    const {
-      stateValue,
-      handleKeyDown,
-      handleTextareaChange,
-      textareaStyles,
-      $attrs,
-      prefixCls: customizePrefixCls,
-      disabled,
-    } = this;
-    const otherProps = omit(this.$props, [
-      'prefixCls',
-      'autosize',
-      'type',
-      'value',
-      'defaultValue',
-      'lazy',
-    ]);
+    const { stateValue, prefixCls: customizePrefixCls } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
 
-    const cls = classNames(prefixCls, {
-      [`${prefixCls}-disabled`]: disabled,
-    });
-
-    const textareaProps = {
-      directives: [{ name: 'ant-input' }],
-      attrs: { ...otherProps, ...$attrs },
-      on: {
-        ...getListeners(this),
-        keydown: handleKeyDown,
-        input: handleTextareaChange,
-        change: noop,
+    const props = {
+      props: {
+        ...getOptionProps(this),
+        prefixCls,
+        inputType: 'text',
+        value: fixControlledValue(stateValue),
+        element: this.renderTextArea(prefixCls),
+        handleReset: this.handleReset,
       },
+      on: getListeners(this),
     };
-    return (
-      <textarea
-        {...textareaProps}
-        value={stateValue}
-        class={cls}
-        style={textareaStyles}
-        ref="textArea"
-      />
-    );
+    return <ClearableLabeledInput {...props} />;
   },
 };

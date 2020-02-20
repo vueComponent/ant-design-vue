@@ -1,9 +1,8 @@
 import PropTypes from '../_util/vue-types';
-import addEventListener from '../vc-util/Dom/addEventListener';
 import classNames from 'classnames';
 import shallowequal from 'shallowequal';
 import omit from 'omit.js';
-import getScroll from '../_util/getScroll';
+import ResizeObserver from '../vc-resize-observer';
 import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { ConfigConsumerProps } from '../config-provider';
@@ -242,11 +241,17 @@ const Affix = {
       attrs: omit($props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']),
     };
     return (
-      <div {...props} style={placeholderStyle} ref="placeholderNode">
-        <div class={className} ref="fixedNode" style={affixStyle}>
-          {$slots.default}
+      <ResizeObserver
+        onResize={() => {
+          this.updatePosition();
+        }}
+      >
+        <div {...props} style={placeholderStyle} ref="placeholderNode">
+          <div class={className} ref="fixedNode" style={affixStyle}>
+            {$slots.default}
+          </div>
         </div>
-      </div>
+      </ResizeObserver>
     );
   },
 };

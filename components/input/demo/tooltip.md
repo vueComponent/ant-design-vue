@@ -54,7 +54,7 @@ You can use the Input in conjunction with [Tooltip](/components/tooltip/) compon
       formatNumber,
       onChange(e) {
         const { value } = e.target;
-        const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
+        const reg = /^-?[0-9]*(\.[0-9]*)?$/;
         if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
           this.value = value;
         }
@@ -62,6 +62,7 @@ You can use the Input in conjunction with [Tooltip](/components/tooltip/) compon
       // '.' at the end or only '-' in the input box.
       onBlur() {
         const { value, onChange } = this;
+        let valueTemp = value;
         if (value.charAt(value.length - 1) === '.' || value === '-') {
           onChange({ value: value.slice(0, -1) });
         }

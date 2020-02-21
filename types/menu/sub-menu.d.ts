@@ -24,4 +24,6 @@ export declare class SubMenu extends AntdComponent {
    * @type string | slot
    */
   title: any;
+
+  popupClassName: string;
 }

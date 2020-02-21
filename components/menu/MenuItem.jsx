@@ -8,8 +8,9 @@ export default {
   props: itemProps,
   inject: {
     getInlineCollapsed: { default: () => noop },
+    layoutSiderContext: { default: () => ({}) },
   },
-  isMenuItem: 1,
+  isMenuItem: true,
   methods: {
     onKeyDown(e) {
       this.$refs.menuItem.onKeyDown(e);
@@ -20,22 +21,28 @@ export default {
     const { level, title, rootPrefixCls } = props;
     const { getInlineCollapsed, $slots, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
-    let titleNode;
-    if (inlineCollapsed) {
-      titleNode = title || (level === 1 ? $slots.default : '');
+    const tooltipProps = {
+      title: title || (level === 1 ? $slots.default : ''),
+    };
+    const siderCollapsed = this.layoutSiderContext.sCollapsed;
+    if (!siderCollapsed && !inlineCollapsed) {
+      tooltipProps.title = null;
+      // Reset `visible` to fix control mode tooltip display not correct
+      // ref: https://github.com/ant-design/ant-design/issues/16742
+      tooltipProps.visible = false;
     }
 
     const itemProps = {
       props: {
         ...props,
-        title: inlineCollapsed ? null : title,
+        title,
       },
       attrs,
       on: getListeners(this),
     };
     const toolTipProps = {
       props: {
-        title: titleNode,
+        ...tooltipProps,
         placement: 'right',
         overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
       },

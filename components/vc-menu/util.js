@@ -1,4 +1,4 @@
-const isMobile = require('ismobilejs');
+import isMobile from './utils/isMobile';
 
 export function noop() {}
 

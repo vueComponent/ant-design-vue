@@ -16,9 +16,13 @@ const md = {
 导航菜单是一个网站的灵魂，用户依赖导航在各个页面中进行跳转。一般分为顶部导航和侧边导航，顶部导航提供全局性的类目和功能，侧边导航提供多级结构来收纳和排列网站架构。
           ## 代码演示`,
   us: `# Menu
-          Menu list of Navigation.
+          A versatile menu for navigation.
+
 ## When To Use
-Navigation menu is important for a website, it helps users jump from one site section to another quickly. Mostly, it includes top navigation and side navigation. Top navigation provides all the category and functions of the website. Side navigation provides the Multi-level structure of the website.
+
+Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. Ant Design offers top and side navigation options. Top navigation provides all the categories and functions of the website. Side navigation provides the multi-level structure of the website.
+
+More layouts with navigation: [Layout](/components/layout).
 ## Examples`,
 };
 export default {

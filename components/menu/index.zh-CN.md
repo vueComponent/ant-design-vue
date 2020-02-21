@@ -49,11 +49,12 @@
 
 ### Menu.SubMenu
 
-| 参数     | 说明       | 类型         | 默认值 |
-| -------- | ---------- | ------------ | ------ |
-| disabled | 是否禁用   | boolean      | false  |
-| key      | 唯一标志   | string       |        |
-| title    | 子菜单项值 | string\|slot |        |
+| 参数           | 说明       | 类型         | 默认值 | 版本  |
+| -------------- | ---------- | ------------ | ------ | ----- |
+| popupClassName | 子菜单样式 | string       |        | 1.5.0 |
+| disabled       | 是否禁用   | boolean      | false  |       |
+| key            | 唯一标志   | string       |        |       |
+| title          | 子菜单项值 | string\|slot |        |       |
 
 Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
 

@@ -193,6 +193,7 @@ const SubPopupMenu = {
 
         return 1;
       }
+      return undefined;
     },
 
     onItemHover(e) {

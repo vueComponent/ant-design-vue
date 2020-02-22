@@ -97,13 +97,14 @@ describe('message', () => {
     });
   });
 
-  it('should be called like promise', () => {
+  it('should be called like promise', done => {
     const defaultDuration = 3;
     const now = Date.now();
     message.info('whatever').then(() => {
       // calculate the approximately duration value
       const aboutDuration = parseInt((Date.now() - now) / 1000, 10);
       expect(aboutDuration).toBe(defaultDuration);
+      done();
     });
   });
 

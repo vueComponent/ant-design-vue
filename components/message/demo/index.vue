@@ -4,6 +4,7 @@ import Info from './info';
 import Loading from './loading';
 import Other from './other';
 import Thenable from './thenable';
+import Update from './update';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
@@ -36,6 +37,7 @@ export default {
         <Loading />
         <Other />
         <Thenable />
+        <Update />
         <api>
           <CN slot="cn" />
           <US />

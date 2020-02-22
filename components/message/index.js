@@ -46,7 +46,7 @@ function notice(args) {
     loading: 'loading',
   }[args.type];
 
-  const target = key++;
+  const target = args.key || key++;
   const closePromise = new Promise(resolve => {
     const callback = () => {
       if (typeof args.onClose === 'function') {
@@ -59,24 +59,24 @@ function notice(args) {
         key: target,
         duration,
         style: {},
-        content: h => (
-          <div
-            class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
-          >
-            {args.icon ? (
-              typeof args.icon === 'function' ? (
-                args.icon(h)
-              ) : (
-                args.icon
-              )
-            ) : iconType ? (
-              <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
-            ) : (
-              ''
-            )}
-            <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
-          </div>
-        ),
+        content: h => {
+          const iconNode = (
+            <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
+          );
+          const switchIconNode = iconType ? iconNode : '';
+          return (
+            <div
+              class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
+            >
+              {args.icon
+                ? typeof args.icon === 'function'
+                  ? args.icon(h)
+                  : args.icon
+                : switchIconNode}
+              <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
+            </div>
+          );
+        },
         onClose: callback,
       });
     });
@@ -94,6 +94,10 @@ function notice(args) {
 // type ConfigContent = React.ReactNode | string;
 // type ConfigDuration = number | (() => void);
 // export type ConfigOnClose = () => void;
+
+function isArgsProps(content) {
+  return Object.prototype.toString.call(content) === '[object Object]' && !!content.content;
+}
 
 // export interface ConfigOptions {
 //   top?: number;
@@ -138,11 +142,14 @@ const api = {
 
 ['success', 'info', 'warning', 'error', 'loading'].forEach(type => {
   api[type] = (content, duration, onClose) => {
+    if (isArgsProps(content)) {
+      return api.open({ ...content, type });
+    }
     if (typeof duration === 'function') {
       onClose = duration;
       duration = undefined;
     }
-    return api.open({ content, duration: duration, type, onClose });
+    return api.open({ content, duration, type, onClose });
   };
 });
 

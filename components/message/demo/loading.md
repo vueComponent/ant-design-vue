@@ -4,7 +4,7 @@
 </cn>
 
 <us>
-#### Message of loading
+#### Message with loading indicator
 Display a global loading indicator, which is dismissed by itself asynchronously.
 </us>
 

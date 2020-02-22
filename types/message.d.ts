@@ -33,6 +33,7 @@ export interface MessageOptions {
    * @type Function
    */
   onClose?: () => void;
+  key?: string | number;
 }
 
 export interface MessageConfigOptions {

@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'menu', // dev components
+    componentName: 'message', // dev components
   },
 };

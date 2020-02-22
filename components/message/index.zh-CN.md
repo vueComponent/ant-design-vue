@@ -22,14 +22,23 @@
 
 其中`message[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise 。
 
-- `message.open(config)`
+也可以对象的形式传递参数：
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| content | 提示内容 | string\| VNode \|(h) => VNode | - |
-| duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number | 3 |
-| onClose | 关闭时触发的回调函数 | Function | - |
-| icon | 自定义图标 | string\| VNode \|(h) => VNode | - |
+- `message.open(config)`
+- `message.success(config)`
+- `message.error(config)`
+- `message.info(config)`
+- `message.warning(config)`
+- `message.warn(config)` // alias of warning
+- `message.loading(config)`
+
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | 提示内容 | string\| VNode \|(h) => VNode | - |  |
+| duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number | 3 |  |
+| onClose | 关闭时触发的回调函数 | Function | - |  |
+| icon | 自定义图标 | string\| VNode \|(h) => VNode | - |  |
+| key | 当前提示的唯一标志 | string\|number | - | 1.5.0 |
 
 ### 全局方法
 

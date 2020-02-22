@@ -5,7 +5,7 @@
 
 <us>
 #### Normal prompt
-Normal messages as feedbacks.
+Normal message for information.
 </us>
 
 ```tpl

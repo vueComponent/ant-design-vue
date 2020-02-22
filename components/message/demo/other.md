@@ -20,13 +20,13 @@ Messages of success, error and warning types.
   export default {
     methods: {
       success() {
-        this.$message.success('This is a message of success');
+        this.$message.success('This is a success message');
       },
       error() {
-        this.$message.error('This is a message of error');
+        this.$message.error('This is an error message');
       },
       warning() {
-        this.$message.warning('This is message of warning');
+        this.$message.warning('This is a warning message');
       },
     },
   };

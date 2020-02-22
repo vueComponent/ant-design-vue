@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'pagination', // dev components
+    componentName: 'popconfirm', // dev components
   },
 };

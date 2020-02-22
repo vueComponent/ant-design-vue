@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'radio', // dev components
+    componentName: 'skeleton', // dev components
   },
 };

@@ -59,8 +59,12 @@ exports[`renders ./components/skeleton/demo/list.md correctly 1`] = `
   <div class="ant-list ant-list-vertical ant-list-lg ant-list-split">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">
+        <ul class="ant-list-items">
+          <li class="ant-list-item ant-list-item-no-flex">
+            <!---->
+            <!---->
+            <!---->
+            <!---->
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -71,10 +75,12 @@ exports[`renders ./components/skeleton/demo/list.md correctly 1`] = `
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">
+          </li>
+          <li class="ant-list-item ant-list-item-no-flex">
+            <!---->
+            <!---->
+            <!---->
+            <!---->
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -85,10 +91,12 @@ exports[`renders ./components/skeleton/demo/list.md correctly 1`] = `
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">
+          </li>
+          <li class="ant-list-item ant-list-item-no-flex">
+            <!---->
+            <!---->
+            <!---->
+            <!---->
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -99,8 +107,8 @@ exports[`renders ./components/skeleton/demo/list.md correctly 1`] = `
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

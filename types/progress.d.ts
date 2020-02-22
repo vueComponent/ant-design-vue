@@ -4,6 +4,9 @@
 
 import { AntdComponent } from './component';
 
+export type StringGradients = { [percentage: string]: string };
+type FromToGradients = { from: string; to: string };
+export type ProgressGradient = { direction?: string } & (StringGradients | FromToGradients);
 export declare class Progress extends AntdComponent {
   /**
    * template function of the content
@@ -60,13 +63,13 @@ export declare class Progress extends AntdComponent {
    * @default 'round'
    * @type Enum{ 'round', 'square' }
    */
-  strokeLinecap: 'round' | 'square';
+  strokeLinecap: 'butt' | 'square' | 'round';
 
   /**
    * color of progress bar
    * @type string
    */
-  strokeColor: string;
+  strokeColor: string | ProgressGradient;
 
   /**
    * segmented success percent, works when type="line"

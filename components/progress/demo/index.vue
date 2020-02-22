@@ -9,6 +9,7 @@ import Dynamic from './dynamic.md';
 import Dashboard from './dashboard.md';
 import Segment from './segment.md';
 import Linecap from './linecap.md';
+import GradientLine from './gradient-line';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -40,27 +41,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <br />
         <Line />
-        <br />
         <Circle />
-        <br />
         <LineMini />
-        <br />
         <CircleMini />
-        <br />
         <CircleDynamic />
-        <br />
         <Format />
-        <br />
         <Dynamic />
-        <br />
         <Dashboard />
-        <br />
         <Segment />
-        <br />
         <Linecap />
-        <br />
+        <GradientLine />
         <api>
           <template slot="cn">
             <CN />

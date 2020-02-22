@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'popover', // dev components
+    componentName: 'progress', // dev components
   },
 };

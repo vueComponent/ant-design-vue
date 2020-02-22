@@ -1,7 +1,7 @@
 export default {
   // Options.jsx
   items_per_page: '/ page',
-  jump_to: 'Goto',
+  jump_to: 'Go to',
   jump_to_confirm: 'confirm',
   page: '',
 

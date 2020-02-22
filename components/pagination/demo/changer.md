@@ -24,6 +24,7 @@ Change `pageSize`.
       @showSizeChange="onShowSizeChange"
       :total="500"
       v-model="current"
+      disabled
     />
   </div>
 </template>

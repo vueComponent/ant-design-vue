@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'notification', // dev components
+    componentName: 'pagination', // dev components
   },
 };

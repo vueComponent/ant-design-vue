@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { hasProp, getComponentFromProp } from '../_util/props-util';
+import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util';
 import Pager from './Pager';
 import Options from './Options';
 import LOCALE from './locale/zh_CN';
@@ -61,22 +61,25 @@ export default {
     jumpNextIcon: PropTypes.any,
   },
   data() {
+    const props = getOptionProps(this);
     const hasOnChange = this.onChange !== noop;
-    const hasCurrent = hasProp(this, 'current');
+    const hasCurrent = 'current' in props;
     if (hasCurrent && !hasOnChange) {
       console.warn(
         'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
       ); // eslint-disable-line
     }
     let current = this.defaultCurrent;
-    if (hasCurrent) {
+    if ('current' in props) {
       current = this.current;
     }
 
     let pageSize = this.defaultPageSize;
-    if (hasProp(this, 'pageSize')) {
+    if ('pageSize' in props) {
       pageSize = this.pageSize;
     }
+
+    current = Math.min(current, calculatePage(pageSize, undefined, props));
 
     return {
       stateCurrent: current,
@@ -137,19 +140,22 @@ export default {
     },
     getValidValue(e) {
       const inputValue = e.target.value;
+      const allPages = calculatePage(undefined, this.$data, this.$props);
       const { stateCurrentInputValue } = this.$data;
       let value;
       if (inputValue === '') {
         value = inputValue;
       } else if (isNaN(Number(inputValue))) {
         value = stateCurrentInputValue;
+      } else if (inputValue >= allPages) {
+        value = allPages;
       } else {
         value = Number(inputValue);
       }
       return value;
     },
     isValid(page) {
-      return isInteger(page) && page >= 1 && page !== this.stateCurrent;
+      return isInteger(page) && page !== this.stateCurrent;
     },
     shouldDisplayQuickJumper() {
       const { showQuickJumper, pageSize, total } = this.$props;
@@ -225,6 +231,8 @@ export default {
         const currentPage = calculatePage(undefined, this.$data, this.$props);
         if (page > currentPage) {
           page = currentPage;
+        } else if (page < 1) {
+          page = 1;
         }
         if (!hasProp(this, 'current')) {
           this.setState({

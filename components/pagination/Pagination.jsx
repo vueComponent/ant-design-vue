@@ -11,6 +11,7 @@ import { ConfigConsumerProps } from '../config-provider';
 export const PaginationProps = () => ({
   total: PropTypes.number,
   defaultCurrent: PropTypes.number,
+  disabled: PropTypes.bool,
   current: PropTypes.number,
   defaultPageSize: PropTypes.number,
   pageSize: PropTypes.number,
@@ -19,7 +20,7 @@ export const PaginationProps = () => ({
   pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   buildOptionText: PropTypes.func,
   showSizeChange: PropTypes.func,
-  showQuickJumper: PropTypes.bool,
+  showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   showTotal: PropTypes.any,
   size: PropTypes.string,
   simple: PropTypes.bool,
@@ -28,6 +29,7 @@ export const PaginationProps = () => ({
   selectPrefixCls: PropTypes.string,
   itemRender: PropTypes.any,
   role: PropTypes.string,
+  showLessItems: PropTypes.bool,
 });
 
 export const PaginationConfig = () => ({

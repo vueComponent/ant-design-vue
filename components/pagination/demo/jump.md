@@ -10,7 +10,11 @@ Jump to a page directly.
 
 ```tpl
 <template>
+<div>
   <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
+  <br/>
+  <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" disabled showLessItems />
+</div>
 </template>
 <script>
   export default {

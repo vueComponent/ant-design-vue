@@ -26,7 +26,7 @@ export default {
   methods: {
     getValidValue() {
       const { goInputText, current } = this;
-      return isNaN(goInputText) ? current : Number(goInputText);
+      return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
     },
     defaultBuildOptionText(opt) {
       return `${opt.value} ${this.locale.items_per_page}`;
@@ -39,8 +39,15 @@ export default {
       });
     },
     handleBlur() {
-      const { goButton, quickGo } = this;
+      const { goButton, quickGo, rootPrefixCls } = this.$props;
       if (goButton) {
+        return;
+      }
+      if (
+        e.relatedTarget &&
+        (e.relatedTarget.className.indexOf(`${rootPrefixCls}-prev`) >= 0 ||
+          e.relatedTarget.className.indexOf(`${rootPrefixCls}-next`) >= 0)
+      ) {
         return;
       }
       quickGo(this.getValidValue());

@@ -10,7 +10,7 @@ Basic pagination.
 
 ```tpl
 <template>
-  <a-pagination v-model="current" :total="50" />
+  <a-pagination v-model="current" :total="50" showLessItems />
 </template>
 <script>
   export default {

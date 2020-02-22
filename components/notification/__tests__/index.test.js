@@ -1,5 +1,6 @@
 import { asyncExpect } from '@/tests/utils';
 import notification from '..';
+import Icon from '../../icon';
 
 describe('notification', () => {
   beforeEach(() => {
@@ -89,5 +90,34 @@ describe('notification', () => {
       duration: 0,
     });
     expect(document.querySelectorAll('.ant-notification').length).toBe(1);
+  });
+
+  it('support closeIcon', async () => {
+    await asyncExpect(() => {
+      notification.open({
+        message: 'Notification Title',
+        duration: 0,
+        closeIcon: h => <Icon type="step-backward" />,
+      });
+    });
+    await asyncExpect(() => {
+      expect(document.querySelectorAll('.anticon-step-backward').length).toBe(1);
+    });
+  });
+
+  it('support config closeIcon', async () => {
+    notification.config({
+      closeIcon: h => <Icon type="step-backward" />,
+    });
+    await asyncExpect(() => {
+      notification.open({
+        message: 'Notification Title',
+        duration: 0,
+        closeIcon: h => <Icon type="step-backward" />,
+      });
+    });
+    await asyncExpect(() => {
+      expect(document.querySelectorAll('.anticon-step-backward').length).toBe(1);
+    });
   });
 });

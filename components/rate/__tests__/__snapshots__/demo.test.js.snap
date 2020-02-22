@@ -229,8 +229,7 @@ exports[`renders ./components/rate/demo/clear.md correctly 1`] = `
             </svg></i></div>
       </div>
     </li>
-  </ul> allowClear: true
-  <br>
+  </ul> <span class="ant-rate-text">allowClear: true</span> <br>
   <ul tabindex="0" role="radiogroup" class="ant-rate">
     <li class="ant-rate-star ant-rate-star-full">
       <div role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="0">
@@ -282,8 +281,7 @@ exports[`renders ./components/rate/demo/clear.md correctly 1`] = `
             </svg></i></div>
       </div>
     </li>
-  </ul> allowClear: false
-  <br>
+  </ul> <span class="ant-rate-text">allowClear: false</span>
 </div>
 `;
 

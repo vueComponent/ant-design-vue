@@ -11,10 +11,11 @@ Support set allow to clear star when click again.
 ```tpl
 <template>
   <div>
-    <a-rate :defaultValue="3" /> allowClear: true
+    <a-rate :defaultValue="3" />
+    <span class="ant-rate-text">allowClear: true</span>
     <br />
-    <a-rate :allowClear="false" :defaultValue="3" /> allowClear: false
-    <br />
+    <a-rate :allowClear="false" :defaultValue="3" />
+    <span class="ant-rate-text">allowClear: false</span>
   </div>
 </template>
 ```

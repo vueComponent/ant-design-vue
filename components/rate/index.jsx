@@ -31,16 +31,16 @@ const Rate = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
+    characterRender(node, { index }) {
+      const { tooltips } = this.$props;
+      if (!tooltips) return node;
+      return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
+    },
     focus() {
       this.$refs.refRate.focus();
     },
     blur() {
       this.$refs.refRate.blur();
-    },
-    characterRender(node, { index }) {
-      const { tooltips } = this.$props;
-      if (!tooltips) return node;
-      return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
     },
   },
   render() {

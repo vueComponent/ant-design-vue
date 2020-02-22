@@ -1,8 +1,10 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Popover from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Popover', () => {
+  mountTest(Popover);
   it('should show overlay when trigger is clicked', async () => {
     const popover = mount(
       {

@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'progress', // dev components
+    componentName: 'radio', // dev components
   },
 };

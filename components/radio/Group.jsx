@@ -104,7 +104,7 @@ export default {
         if (typeof option === 'string') {
           return (
             <Radio
-              key={index}
+              key={option}
               prefixCls={prefixCls}
               disabled={props.disabled}
               value={option}
@@ -116,7 +116,7 @@ export default {
         } else {
           return (
             <Radio
-              key={index}
+              key={`radio-group-value-options-${option.value}`}
               prefixCls={prefixCls}
               disabled={option.disabled || props.disabled}
               value={option.value}

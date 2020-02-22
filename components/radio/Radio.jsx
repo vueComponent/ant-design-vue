@@ -28,16 +28,16 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
-    handleChange(event) {
-      const targetChecked = event.target.checked;
-      this.$emit('input', targetChecked);
-      this.$emit('change', event);
-    },
     focus() {
       this.$refs.vcCheckbox.focus();
     },
     blur() {
       this.$refs.vcCheckbox.blur();
+    },
+    handleChange(event) {
+      const targetChecked = event.target.checked;
+      this.$emit('input', targetChecked);
+      this.$emit('change', event);
     },
     onChange(e) {
       this.$emit('change', e);

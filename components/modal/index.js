@@ -55,7 +55,7 @@ const warning = function(props) {
 };
 const warn = warning;
 
-const confirm = function(props) {
+const confirm = function confirmFn(props) {
   const config = {
     type: 'confirm',
     okCancel: true,
@@ -70,7 +70,7 @@ Modal.warning = warning;
 Modal.warn = warn;
 Modal.confirm = confirm;
 
-Modal.destroyAll = function() {
+Modal.destroyAll = function destroyAllFn() {
   while (destroyFns.length) {
     const close = destroyFns.pop();
     if (close) {

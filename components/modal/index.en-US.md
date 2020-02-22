@@ -1,29 +1,30 @@
 ## API
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| afterClose | Specify a function that will be called when modal is closed completely. | function | - |
-| bodyStyle | Body style for modal body element. Such as height, padding etc. | object | {} |
-| cancelText | Text of the Cancel button | string\|slot | `Cancel` |
-| centered | Centered Modal | Boolean | `false` |
-| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | true |
-| confirmLoading | Whether to apply loading visual effect for OK button or not | boolean | false |
-| destroyOnClose | Whether to unmount child components on onClose | boolean | false |
-| footer | Footer content, set as `:footer="null"` when you don't need default buttons | string\|slot | OK and Cancel buttons |
-| forceRender | Force render Modal | boolean | false |
-| getContainer | Return the mount node for Modal | (instance): HTMLElement | () => document.body |
-| mask | Whether show mask or not. | Boolean | true |
-| maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | boolean | true |
-| maskStyle | Style for modal's mask element. | object | {} |
-| okText | Text of the OK button | string\|slot | `OK` |
-| okType | Button `type` of the OK button | string | `primary` |
-| okButtonProps | The ok button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
-| cancelButtonProps | The cancel button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |
-| title | The modal dialog's title | string\|slot | - |
-| visible | Whether the modal dialog is visible or not | boolean | false |
-| width | Width of the modal dialog | string\|number | 520 |
-| wrapClassName | The class name of the container of the modal dialog | string | - |
-| zIndex | The `z-index` of the Modal | Number | 1000 |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| afterClose | Specify a function that will be called when modal is closed completely. | function | - |  |
+| bodyStyle | Body style for modal body element. Such as height, padding etc. | object | {} |  |
+| cancelText | Text of the Cancel button | string\|slot | `Cancel` |  |
+| centered | Centered Modal | Boolean | `false` |  |
+| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | true |  |
+| closeIcon | custom close icon | VNode \| slot | - | 1.5.0 |
+| confirmLoading | Whether to apply loading visual effect for OK button or not | boolean | false |  |
+| destroyOnClose | Whether to unmount child components on onClose | boolean | false |  |
+| footer | Footer content, set as `:footer="null"` when you don't need default buttons | string\|slot | OK and Cancel buttons |  |
+| forceRender | Force render Modal | boolean | false |  |
+| getContainer | Return the mount node for Modal | (instance): HTMLElement | () => document.body |  |
+| mask | Whether show mask or not. | Boolean | true |  |
+| maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | boolean | true |  |
+| maskStyle | Style for modal's mask element. | object | {} |  |
+| okText | Text of the OK button | string\|slot | `OK` |  |
+| okType | Button `type` of the OK button | string | `primary` |  |
+| okButtonProps | The ok button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |  |
+| cancelButtonProps | The cancel button props, follow jsx [rules](https://github.com/vuejs/babel-plugin-transform-vue-jsx#difference-from-react-jsx) | {props: [ButtonProps](/components/button/#API), on: {}} | - |  |
+| title | The modal dialog's title | string\|slot | - |  |
+| visible | Whether the modal dialog is visible or not | boolean | false |  |
+| width | Width of the modal dialog | string\|number | 520 |  |
+| wrapClassName | The class name of the container of the modal dialog | string | - |  |
+| zIndex | The `z-index` of the Modal | Number | 1000 |  |
 
 ### events
 

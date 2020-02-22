@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'message', // dev components
+    componentName: 'modal', // dev components
   },
 };

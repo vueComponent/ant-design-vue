@@ -5,7 +5,7 @@
 
 <us>
 #### Manual to update destroy
-Manually updateing and destroying a modal from `Modal.method`.
+Manually updating and destroying a modal from `Modal.method`.
 </us>
 
 ```tpl

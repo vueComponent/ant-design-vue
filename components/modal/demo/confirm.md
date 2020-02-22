@@ -5,7 +5,7 @@
 
 <us>
 #### Confirmation modal dialog
-To use `confirm()` to popup a confirmation modal dialog.
+To use `confirm()` to show a confirmation modal dialog.
 </us>
 
 ```tpl

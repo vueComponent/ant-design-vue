@@ -77,7 +77,7 @@ export default {
         this.sChecked = e.target.checked;
       }
       this.$forceUpdate(); // change前，维持现有状态
-      e.shiftKey = this.eventShiftKey
+      e.shiftKey = this.eventShiftKey;
       this.__emit('change', {
         target: {
           ...props,

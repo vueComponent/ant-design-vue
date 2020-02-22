@@ -1,10 +1,14 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
-import Radio from '../Radio';
+import Radio, { Group, Button } from '..';
 import focusTest from '../../../tests/shared/focusTest';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Radio', () => {
   focusTest(Radio);
+  mountTest(Radio);
+  mountTest(Group);
+  mountTest(Button);
 
   it('should render correctly', () => {
     const wrapper = mount({

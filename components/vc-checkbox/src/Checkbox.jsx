@@ -77,6 +77,7 @@ export default {
         this.sChecked = e.target.checked;
       }
       this.$forceUpdate(); // change前，维持现有状态
+      e.shiftKey = this.eventShiftKey;
       this.__emit('change', {
         target: {
           ...props,
@@ -88,7 +89,7 @@ export default {
         preventDefault() {
           e.preventDefault();
         },
-        nativeEvent: { ...e, shiftKey: this.eventShiftKey },
+        nativeEvent: e,
       });
       this.eventShiftKey = false;
     },

@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'statistic', // dev components
+    componentName: 'input', // dev components
   },
 };

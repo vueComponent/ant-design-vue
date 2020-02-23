@@ -8,6 +8,8 @@ import SmallSize from './small-size';
 import StepNext from './step-next';
 import VerticalSmall from './vertical-small';
 import Vertical from './vertical';
+import Clickable from './clickable';
+import Nav from './nav';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -58,6 +60,8 @@ export default {
         <br />
         <CustomizedProgressDot />
         <br />
+        <Clickable />
+        <Nav />
         <api>
           <template slot="cn">
             <CN />

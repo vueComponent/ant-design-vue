@@ -29,4 +29,6 @@ export declare class Step extends AntdComponent {
    * @type  any (string | slot)
    */
   title: any;
+  disabled: boolean;
+  subTitle: any;
 }

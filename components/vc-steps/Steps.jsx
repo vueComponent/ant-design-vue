@@ -9,6 +9,7 @@ export default {
   name: 'Steps',
   mixins: [BaseMixin],
   props: {
+    type: PropTypes.string.def('default'),
     prefixCls: PropTypes.string.def('rc-steps'),
     iconPrefix: PropTypes.string.def('rc'),
     direction: PropTypes.string.def('horizontal'),
@@ -54,10 +55,17 @@ export default {
     }
   },
   methods: {
+    onStepClick(next) {
+      const { current } = this.$props;
+      if (current !== next) {
+        this.$emit('change', next);
+      }
+    },
     calcStepOffsetWidth() {
       if (isFlexSupported()) {
         return;
       }
+      const { lastStepOffsetWidth } = this.$data;
       // Just for IE9
       const domNode = this.$refs.vcStepsRef;
       if (domNode.children.length > 0) {
@@ -66,15 +74,15 @@ export default {
         }
         this.calcTimeout = setTimeout(() => {
           // +1 for fit edge bug of digit width, like 35.4px
-          const lastStepOffsetWidth = (domNode.lastChild.offsetWidth || 0) + 1;
+          const offsetWidth = (domNode.lastChild.offsetWidth || 0) + 1;
           // Reduce shake bug
           if (
-            this.lastStepOffsetWidth === lastStepOffsetWidth ||
-            Math.abs(this.lastStepOffsetWidth - lastStepOffsetWidth) <= 3
+            lastStepOffsetWidth === offsetWidth ||
+            Math.abs(lastStepOffsetWidth - offsetWidth) <= 3
           ) {
             return;
           }
-          this.setState({ lastStepOffsetWidth });
+          this.setState({ lastStepOffsetWidth: offsetWidth });
         });
       }
     },
@@ -83,6 +91,7 @@ export default {
     const {
       prefixCls,
       direction,
+      type,
       labelPlacement,
       iconPrefix,
       status,
@@ -92,6 +101,7 @@ export default {
       initial,
       icons,
     } = this;
+    const isNav = type === 'navigation';
     let progressDot = this.progressDot;
     if (progressDot === undefined) {
       progressDot = $scopedSlots.progressDot;
@@ -106,12 +116,14 @@ export default {
       [`${prefixCls}-${size}`]: size,
       [`${prefixCls}-label-${adjustedlabelPlacement}`]: direction === 'horizontal',
       [`${prefixCls}-dot`]: !!progressDot,
+      [`${prefixCls}-navigation`]: isNav,
       [`${prefixCls}-flex-not-supported`]: !flexSupported,
     };
+    const listeners = getListeners(this);
     const stepsProps = {
       class: classString,
       ref: 'vcStepsRef',
-      on: getListeners(this),
+      on: listeners,
     };
     return (
       <div {...stepsProps}>
@@ -121,6 +133,7 @@ export default {
           const stepProps = {
             props: {
               stepNumber: `${stepNumber + 1}`,
+              stepIndex: stepNumber,
               prefixCls,
               iconPrefix,
               progressDot: this.progressDot,
@@ -130,11 +143,19 @@ export default {
             on: getEvents(child),
             scopedSlots: $scopedSlots,
           };
-          if (!flexSupported && direction !== 'vertical' && index !== lastIndex) {
-            stepProps.props.itemWidth = `${100 / lastIndex}%`;
-            stepProps.props.adjustMarginRight = `${-Math.round(
-              lastStepOffsetWidth / lastIndex + 1,
-            )}px`;
+          if (listeners.change) {
+            stepProps.on.stepClick = this.onStepClick;
+          }
+          if (!flexSupported && direction !== 'vertical') {
+            if (isNav) {
+              stepProps.props.itemWidth = `${100 / (lastIndex + 1)}%`;
+              stepProps.props.adjustMarginRight = 0;
+            } else if (index !== lastIndex) {
+              stepProps.props.itemWidth = `${100 / lastIndex}%`;
+              stepProps.props.adjustMarginRight = `${-Math.round(
+                lastStepOffsetWidth / lastIndex + 1,
+              )}px`;
+            }
           }
           // fix tail color
           if (status === 'error' && index === current - 1) {
@@ -149,6 +170,7 @@ export default {
               stepProps.props.status = 'wait';
             }
           }
+          stepProps.props.active = stepNumber === current;
           return cloneElement(child, stepProps);
         })}
       </div>

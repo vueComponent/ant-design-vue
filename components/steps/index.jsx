@@ -16,6 +16,7 @@ const getStepsProps = (defaultProps = {}) => {
     size: PropTypes.oneOf(['default', 'small']),
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
     progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    type: PropTypes.oneOf(['default', 'navigation']),
   };
   return initDefaultProps(props, defaultProps);
 };
@@ -27,6 +28,10 @@ const Steps = {
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
+  },
+  model: {
+    prop: 'current',
+    event: 'change',
   },
   Step: { ...VcSteps.Step, name: 'AStep' },
   render() {

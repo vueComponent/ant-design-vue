@@ -3,8 +3,14 @@ import { asyncExpect } from '@/tests/utils';
 import MockDate from 'mockdate';
 import moment from 'moment';
 import Statistic from '..';
+import { formatTimeStr } from '../utils';
+import { sleep } from '../../../tests/utils';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Statistic', () => {
+  mountTest(Statistic);
+  mountTest(Statistic.Countdown);
+
   beforeAll(() => {
     MockDate.set(moment('2018-11-28 00:00:00'));
   });
@@ -102,6 +108,11 @@ describe('Statistic', () => {
 
       // wrapper.unmount();
       // expect(instance.countdownId).toBe(undefined);
+    });
+  });
+  describe('utils', () => {
+    it('format should support escape', () => {
+      expect(formatTimeStr(1000 * 60 * 60 * 24, 'D [Day]')).toBe('1 Day');
     });
   });
 });

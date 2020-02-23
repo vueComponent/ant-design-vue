@@ -41,7 +41,7 @@ Countdown component.
     },
     methods: {
       onFinish() {
-        console.log('over');
+        console.log('finished!');
       },
     },
   };

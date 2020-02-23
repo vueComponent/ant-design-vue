@@ -54,6 +54,7 @@ export const ShowUploadListInterface = PropsTypes.shape({
 export const UploadLocale = PropsTypes.shape({
   uploading: PropsTypes.string,
   removeFile: PropsTypes.string,
+  downloadFile: PropsTypes.string,
   uploadError: PropsTypes.string,
   previewFile: PropsTypes.string,
 }).loose;
@@ -66,6 +67,7 @@ export const UploadProps = {
   action: PropsTypes.oneOfType([PropsTypes.string, PropsTypes.func]),
   directory: PropsTypes.bool,
   data: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
+  method: PropsTypes.oneOf(['POST', 'PUT', 'post', 'put']),
   headers: PropsTypes.object,
   showUploadList: PropsTypes.oneOfType([PropsTypes.bool, ShowUploadListInterface]),
   multiple: PropsTypes.bool,
@@ -86,6 +88,8 @@ export const UploadProps = {
   locale: UploadLocale,
   height: PropsTypes.number,
   id: PropsTypes.string,
+  previewFile: PropsTypes.func,
+  transformFile: PropsTypes.func,
 };
 
 export const UploadState = {
@@ -103,6 +107,8 @@ export const UploadListProps = {
   progressAttr: PropsTypes.object,
   prefixCls: PropsTypes.string,
   showRemoveIcon: PropsTypes.bool,
+  showDownloadIcon: PropsTypes.bool,
   showPreviewIcon: PropsTypes.bool,
   locale: UploadLocale,
+  previewFile: PropsTypes.func,
 };

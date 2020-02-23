@@ -56,15 +56,15 @@ The return value of function `beforeUpload` can be a Promise to check asynchrono
         }
       },
       beforeUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        if (!isJPG) {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
           this.$message.error('You can only upload JPG file!');
         }
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
           this.$message.error('Image must smaller than 2MB!');
         }
-        return isJPG && isLt2M;
+        return isJpgOrPng && isLt2M;
       },
     },
   };

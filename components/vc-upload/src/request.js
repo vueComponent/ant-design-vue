@@ -1,8 +1,8 @@
 function getError(option, xhr) {
-  const msg = `cannot post ${option.action} ${xhr.status}'`;
+  const msg = `cannot ${option.method} ${option.action} ${xhr.status}'`;
   const err = new Error(msg);
   err.status = xhr.status;
-  err.method = 'post';
+  err.method = option.method;
   err.url = option.action;
   return err;
 }
@@ -46,7 +46,18 @@ export default function upload(option) {
   const formData = new window.FormData();
 
   if (option.data) {
-    Object.keys(option.data).map(key => {
+    Object.keys(option.data).forEach(key => {
+      const value = option.data[key];
+      // support key-value array data
+      if (Array.isArray(value)) {
+        value.forEach(item => {
+          // { list: [ 11, 22 ] }
+          // formData.append('list[]', 11);
+          formData.append(`${key}[]`, item);
+        });
+        return;
+      }
+
       formData.append(key, option.data[key]);
     });
   }
@@ -67,7 +78,7 @@ export default function upload(option) {
     option.onSuccess(getBody(xhr), xhr);
   };
 
-  xhr.open('post', option.action, true);
+  xhr.open(option.method, option.action, true);
 
   // Has to be after `.open()`. See https://github.com/enyo/dropzone/issues/179
   if (option.withCredentials && 'withCredentials' in xhr) {

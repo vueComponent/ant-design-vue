@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import uniqBy from 'lodash/uniqBy';
 import findIndex from 'lodash/findIndex';
+import pick from 'lodash/pick';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, hasProp, getListeners } from '../_util/props-util';
@@ -66,25 +67,12 @@ export default {
         fileList: nextFileList,
       });
       // fix ie progress
-      if (!window.FormData) {
+      if (!window.File || process.env.TEST_IE) {
         this.autoUpdateProgress(0, targetItem);
       }
     },
-    autoUpdateProgress(_, file) {
-      const getPercent = genPercentAdd();
-      let curPercent = 0;
-      this.clearProgressTimer();
-      this.progressTimer = setInterval(() => {
-        curPercent = getPercent(curPercent);
-        this.onProgress(
-          {
-            percent: curPercent * 100,
-          },
-          file,
-        );
-      }, 200);
-    },
-    onSuccess(response, file) {
+
+    onSuccess(response, file, xhr) {
       this.clearProgressTimer();
       try {
         if (typeof response === 'string') {
@@ -101,6 +89,7 @@ export default {
       }
       targetItem.status = 'done';
       targetItem.response = response;
+      targetItem.xhr = xhr;
       this.onChange({
         file: { ...targetItem },
         fileList,
@@ -140,19 +129,24 @@ export default {
       this.$emit('reject', fileList);
     },
     handleRemove(file) {
-      const { remove } = this;
-      const { status } = file;
-      file.status = 'removed'; // eslint-disable-line
+      const { remove: onRemove } = this;
+      const { sFileList: fileList } = this.$data;
 
-      Promise.resolve(typeof remove === 'function' ? remove(file) : remove).then(ret => {
+      Promise.resolve(typeof onRemove === 'function' ? onRemove(file) : onRemove).then(ret => {
         // Prevent removing file
         if (ret === false) {
-          file.status = status;
           return;
         }
 
-        const removedFileList = removeFileItem(file, this.sFileList);
+        const removedFileList = removeFileItem(file, fileList);
+
         if (removedFileList) {
+          file.status = 'removed'; // eslint-disable-line
+
+          if (this.upload) {
+            this.upload.abort(file);
+          }
+
           this.onChange({
             file,
             fileList: removedFileList,
@@ -178,14 +172,16 @@ export default {
       });
     },
     reBeforeUpload(file, fileList) {
-      if (!this.beforeUpload) {
+      const { beforeUpload } = this.$props;
+      const { sFileList: stateFileList } = this.$data;
+      if (!beforeUpload) {
         return true;
       }
-      const result = this.beforeUpload(file, fileList);
+      const result = beforeUpload(file, fileList);
       if (result === false) {
         this.onChange({
           file,
-          fileList: uniqBy(this.sFileList.concat(fileList.map(fileToObject)), item => item.uid),
+          fileList: uniqBy(stateFileList.concat(fileList.map(fileToObject)), item => item.uid),
         });
         return false;
       }
@@ -197,25 +193,45 @@ export default {
     clearProgressTimer() {
       clearInterval(this.progressTimer);
     },
+    autoUpdateProgress(_, file) {
+      const getPercent = genPercentAdd();
+      let curPercent = 0;
+      this.clearProgressTimer();
+      this.progressTimer = setInterval(() => {
+        curPercent = getPercent(curPercent);
+        this.onProgress(
+          {
+            percent: curPercent * 100,
+          },
+          file,
+        );
+      }, 200);
+    },
     renderUploadList(locale) {
-      const { showUploadList = {}, listType } = getOptionProps(this);
-      const { showRemoveIcon, showPreviewIcon } = showUploadList;
+      const {
+        showUploadList = {},
+        listType,
+        previewFile,
+        disabled,
+        locale: propLocale,
+      } = getOptionProps(this);
+      const { showRemoveIcon, showPreviewIcon, showDownloadIcon } = showUploadList;
+      const { sFileList: fileList } = this.$data;
       const uploadListProps = {
         props: {
           listType,
-          items: this.sFileList,
-          showRemoveIcon,
+          items: fileList,
+          previewFile,
+          showRemoveIcon: !disabled && showRemoveIcon,
           showPreviewIcon,
-          locale: { ...locale, ...this.$props.locale },
+          showDownloadIcon,
+          locale: { ...locale, ...propLocale },
         },
         on: {
           remove: this.handleManualRemove,
+          ...pick(getListeners(this), ['download', 'preview']), // 如果没有配置该事件，不要传递， uploadlist 会有相应逻辑
         },
       };
-      const listeners = getListeners(this);
-      if (listeners.preview) {
-        uploadListProps.on.preview = listeners.preview;
-      }
       return <UploadList {...uploadListProps} />;
     },
   },
@@ -227,7 +243,7 @@ export default {
       type,
       disabled,
     } = getOptionProps(this);
-
+    const { sFileList: fileList, dragState } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
@@ -261,8 +277,8 @@ export default {
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {
         [`${prefixCls}-drag`]: true,
-        [`${prefixCls}-drag-uploading`]: this.sFileList.some(file => file.status === 'uploading'),
-        [`${prefixCls}-drag-hover`]: this.dragState === 'dragover',
+        [`${prefixCls}-drag-uploading`]: fileList.some(file => file.status === 'uploading'),
+        [`${prefixCls}-drag-hover`]: dragState === 'dragover',
         [`${prefixCls}-disabled`]: disabled,
       });
       return (
@@ -290,7 +306,7 @@ export default {
 
     // Remove id to avoid open by label when trigger is hidden
     // https://github.com/ant-design/ant-design/issues/14298
-    if (!children) {
+    if (!children || disabled) {
       delete vcUploadProps.props.id;
     }
 
@@ -302,7 +318,7 @@ export default {
 
     if (listType === 'picture-card') {
       return (
-        <span>
+        <span class={`${prefixCls}-picture-card-wrapper`}>
           {uploadList}
           {uploadButton}
         </span>

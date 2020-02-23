@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'select', // dev components
+    componentName: 'upload', // dev components
   },
 };

@@ -18,7 +18,7 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
       @preview="handlePreview"
       @change="handleChange"
     >
-      <div v-if="fileList.length < 3">
+      <div v-if="fileList.length < 8">
         <a-icon type="plus" />
         <div class="ant-upload-text">Upload</div>
       </div>
@@ -29,6 +29,14 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
   </div>
 </template>
 <script>
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
   export default {
     data() {
       return {
@@ -37,9 +45,32 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
         fileList: [
           {
             uid: '-1',
-            name: 'xxx.png',
+            name: 'image.png',
             status: 'done',
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+          {
+            uid: '-2',
+            name: 'image.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+          {
+            uid: '-3',
+            name: 'image.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+          {
+            uid: '-4',
+            name: 'image.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+          {
+            uid: '-5',
+            name: 'image.png',
+            status: 'error',
           },
         ],
       };
@@ -48,8 +79,11 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
       handleCancel() {
         this.previewVisible = false;
       },
-      handlePreview(file) {
-        this.previewImage = file.url || file.thumbUrl;
+      async handlePreview(file) {
+        if (!file.url && !file.preview) {
+          file.preview = await getBase64(file.originFileObj);
+        }
+        this.previewImage = file.url || file.preview;
         this.previewVisible = true;
       },
       handleChange({ fileList }) {

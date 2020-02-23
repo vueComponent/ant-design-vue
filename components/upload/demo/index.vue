@@ -8,6 +8,8 @@ import Drag from './drag.md';
 import PictureStyle from './picture-style.md';
 import UploadManually from './upload-manually.md';
 import Directory from './directory.md';
+import PreviewFile from './preview-file';
+import TransformFile from './transform-file';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -52,6 +54,8 @@ export default {
         <PictureStyle />
         <UploadManually />
         <Directory />
+        <PreviewFile />
+        <TransformFile />
         <api>
           <template slot="cn">
             <CN />

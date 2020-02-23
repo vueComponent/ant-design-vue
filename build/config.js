@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'steps', // dev components
+    componentName: 'select', // dev components
   },
 };

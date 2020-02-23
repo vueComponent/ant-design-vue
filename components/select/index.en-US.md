@@ -20,6 +20,7 @@
 | dropdownMatchSelectWidth | Whether dropdown's width is same with select. | boolean | true |
 | dropdownRender | Customize dropdown content | (menuNode: VNode, props) => VNode | - |
 | dropdownStyle | style of dropdown menu | object | - |
+| dropdownMenuStyle | additional style applied to dropdown menu | object | - |
 | filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true |
 | firstActiveValue | Value of action option by default | string\|string\[] | - |
 | getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | function(triggerNode) | () => document.body |
@@ -85,3 +86,9 @@
 | -------- | ----------- | ------------ | ------- |
 | key      |             | string       | -       |
 | label    | Group label | string\|slot | -       |
+
+## FAQ
+
+### The dropdown is closed when click `dropdownRender` area?
+
+See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).

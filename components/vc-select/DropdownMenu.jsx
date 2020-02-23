@@ -37,7 +37,7 @@ export default {
   },
 
   created() {
-    this.rafInstance = { cancel: () => null };
+    this.rafInstance = null;
     this.lastInputValue = this.$props.inputValue;
     this.lastVisible = false;
   },
@@ -60,8 +60,8 @@ export default {
     this.prevVisible = this.visible;
   },
   beforeDestroy() {
-    if (this.rafInstance && this.rafInstance.cancel) {
-      this.rafInstance.cancel();
+    if (this.rafInstance) {
+      raf.cancel(this.rafInstance);
     }
   },
   methods: {

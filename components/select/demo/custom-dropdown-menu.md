@@ -14,21 +14,27 @@ Customize the dropdown menu via `dropdownRender`.
     <div slot="dropdownRender" slot-scope="menu">
       <v-nodes :vnodes="menu" />
       <a-divider style="margin: 4px 0;" />
-      <div style="padding: 8px; cursor: pointer;"><a-icon type="plus" /> Add item</div>
+      <div style="padding: 4px 8px; cursor: pointer;" @mousedown="e => e.preventDefault()" @click="addItem"><a-icon type="plus" /> Add item</div>
     </div>
-    <a-select-option value="jack">Jack</a-select-option>
-    <a-select-option value="lucy">Lucy</a-select-option>
+    <a-select-option v-for="item in items" :value="item" :key="item">{{item}}</a-select-option>
   </a-select>
 </template>
 <script>
+  let index = 0;
   export default {
-    data: () => ({ console: console }),
+    data: () => ({ items: ['jack', 'lucy'] }),
     components: {
       VNodes: {
         functional: true,
         render: (h, ctx) => ctx.props.vnodes,
       },
     },
+    methods: {
+      addItem() {
+        console.log('addItem');
+        this.items.push(`New item ${index++}`)
+      }
+    }
   };
 </script>
 ```

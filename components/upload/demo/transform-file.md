@@ -12,7 +12,6 @@ Use `transformFile` for transform file before request such as add a watermark.
 <template>
 <div>
   <a-upload
-    listType="picture"
     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
     :transformFile="transformFile"
   >

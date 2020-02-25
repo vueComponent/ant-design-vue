@@ -14,6 +14,7 @@ import {
   getOptionProps,
   getComponentFromProp,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
@@ -220,7 +221,7 @@ const TimePicker = {
         class: pickerClassName,
         ref: 'timePicker',
         on: {
-          ...this.$listeners,
+          ...getListeners(this),
           change: this.handleChange,
           open: this.handleOpenClose,
           close: this.handleOpenClose,

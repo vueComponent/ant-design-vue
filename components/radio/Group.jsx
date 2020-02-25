@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
-import { getOptionProps, filterEmpty, hasProp } from '../_util/props-util';
+import { getOptionProps, filterEmpty, hasProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 function noop() {}
 
@@ -85,7 +85,7 @@ export default {
     },
   },
   render() {
-    const { mouseenter = noop, mouseleave = noop } = this.$listeners;
+    const { mouseenter = noop, mouseleave = noop } = getListeners(this);
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;

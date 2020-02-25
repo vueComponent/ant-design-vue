@@ -6,6 +6,7 @@ import BaseMixin from '../_util/BaseMixin';
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
+import { getListeners } from '../_util/props-util';
 
 const easeInOutCubic = (t, b, c, d) => {
   const cc = c - b;
@@ -106,7 +107,7 @@ const BackTop = {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, $slots, $listeners } = this;
+    const { prefixCls: customizePrefixCls, $slots } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('back-top', customizePrefixCls);
@@ -118,7 +119,7 @@ const BackTop = {
     );
     const divProps = {
       on: {
-        ...$listeners,
+        ...getListeners(this),
         click: this.scrollToTop,
       },
       class: prefixCls,

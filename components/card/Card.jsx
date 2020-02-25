@@ -4,7 +4,12 @@ import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../_util/Dom/addEventListener';
-import { getComponentFromProp, getSlotOptions, filterEmpty } from '../_util/props-util';
+import {
+  getComponentFromProp,
+  getSlotOptions,
+  filterEmpty,
+  getListeners,
+} from '../_util/props-util';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -112,7 +117,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
-    const { $slots, $scopedSlots, $listeners } = this;
+    const { $slots, $scopedSlots } = this;
 
     const classString = {
       [`${prefixCls}`]: true,
@@ -234,7 +239,7 @@ export default {
       <div
         class={classString}
         ref="cardContainerRef"
-        {...{ on: omit($listeners, ['tabChange', 'tab-change']) }}
+        {...{ on: omit(getListeners(this), ['tabChange', 'tab-change']) }}
       >
         {head}
         {coverDom}

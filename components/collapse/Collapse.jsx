@@ -4,6 +4,7 @@ import {
   initDefaultProps,
   getComponentFromProp,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import VcCollapse, { collapseProps } from '../vc-collapse';
@@ -37,7 +38,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, bordered, $listeners } = this;
+    const { prefixCls: customizePrefixCls, bordered } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
 
@@ -51,7 +52,7 @@ export default {
         expandIcon: panelProps => this.renderExpandIcon(panelProps, prefixCls),
       },
       class: collapseClassName,
-      on: $listeners,
+      on: getListeners(this),
     };
     return <VcCollapse {...rcCollapeProps}>{this.$slots.default}</VcCollapse>;
   },

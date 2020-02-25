@@ -2,6 +2,7 @@ import PropTypes from '../../../_util/vue-types';
 import BasePopup from '../Base/BasePopup';
 import SearchInput from '../SearchInput';
 import { createRef } from '../util';
+import { getListeners } from '../../../_util/props-util';
 
 const SinglePopup = {
   name: 'SinglePopup',
@@ -54,7 +55,7 @@ const SinglePopup = {
           <SearchInput
             {...{
               props: { ...this.$props, renderPlaceholder: this._renderPlaceholder },
-              on: this.$listeners,
+              on: getListeners(this),
               directives: [
                 {
                   name: 'ant-ref',
@@ -72,7 +73,7 @@ const SinglePopup = {
       <BasePopup
         {...{
           props: { ...this.$props, renderSearch: this._renderSearch, __propsSymbol__: Symbol() },
-          on: this.$listeners,
+          on: getListeners(this),
         }}
       />
     );

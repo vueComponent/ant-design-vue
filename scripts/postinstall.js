@@ -29,9 +29,11 @@ if (!ADBLOCK && !CI && !DISABLE_OPENCOLLECTIVE && !SILENT) {
   log('\u001B[96m>\u001B[94m https://opencollective.com/ant-design-vue \u001B[0m');
   log('\u001B[96m>\u001B[94m https://www.patreon.com/tangjinzhou \u001B[0m\n');
   log(
-    '\u001B[96mFor china, 更多赞助方式(支付宝、微信)请查看如下链接: ' +
+    '\u001B[96m更多赞助方式(支付宝、微信、Paypal)请查看如下链接: ' +
       emoji.get('pray') +
       '\u001B[0m',
   );
-  log('\u001B[96m>\u001B[94m https://ant-design-vue.gitee.io/docs/vue/sponsor-cn \u001B[0m\n');
+  log('\u001B[96m>\u001B[94m https://www.antdv.com/docs/vue/sponsor-cn \u001B[0m\n');
+  log('\u001B[96mAnt Design Vue 官方网站: \u001B[0m');
+  log('\u001B[96m>\u001B[94m https://www.antdv.com/ \u001B[0m\n');
 }

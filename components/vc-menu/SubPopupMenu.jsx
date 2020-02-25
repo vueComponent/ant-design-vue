@@ -13,6 +13,7 @@ import {
   getPropsData,
   getEvents,
   getComponentFromProp,
+  getListeners,
 } from '../_util/props-util';
 
 function allDisabled(arr) {
@@ -390,7 +391,7 @@ const SubPopupMenu = {
       },
       class: className,
       // Otherwise, the propagated click event will trigger another onClick
-      on: omit(this.$listeners || {}, ['click']),
+      on: omit(getListeners(this), ['click']),
     };
     // if (props.id) {
     //   domProps.id = props.id

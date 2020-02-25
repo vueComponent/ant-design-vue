@@ -19,6 +19,7 @@ import {
   getAttrs,
   getOptionProps,
   getSlots,
+  getListeners,
 } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { cloneElement } from '../_util/vnode';
@@ -622,7 +623,13 @@ const Select = {
       if (value.length) {
         hidden = true;
       }
-      if (isCombobox(props) && value.length === 1 && (state._value && !state._value[0])) {
+      if (
+        !state._mirrorInputValue &&
+        isCombobox(props) &&
+        value.length === 1 &&
+        state._value &&
+        !state._value[0]
+      ) {
         hidden = false;
       }
       const placeholder = props.placeholder;
@@ -744,19 +751,7 @@ const Select = {
       const props = this.$props;
       const { _inputValue: inputValue, _mirrorInputValue } = this.$data;
       const attrs = getAttrs(this);
-      const defaultInput = (
-        <input
-          {...{
-            directives: [
-              {
-                name: 'ant-input',
-              },
-            ],
-          }}
-          id={attrs.id}
-          autoComplete="off"
-        />
-      );
+      const defaultInput = <input id={attrs.id} autoComplete="off" />;
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;
       const inputCls = classnames(getClass(inputElement), {
@@ -787,13 +782,16 @@ const Select = {
                 name: 'ant-ref',
                 value: this.saveInputRef,
               },
+              {
+                name: 'ant-input',
+              },
             ],
             on: {
               input: this.onInputChange,
               keydown: chaining(
                 this.onInputKeydown,
                 inputEvents.keydown,
-                this.$listeners.inputKeydown,
+                getListeners(this).inputKeydown,
               ),
               focus: chaining(this.inputFocus, inputEvents.focus),
               blur: chaining(this.inputBlur, inputEvents.blur),
@@ -1557,8 +1555,7 @@ const Select = {
     const realOpen = this.getRealOpenState();
     const empty = this._empty;
     const options = this._options || [];
-    const { $listeners } = this;
-    const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = $listeners;
+    const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = getListeners(this);
     const selectionProps = {
       props: {},
       attrs: {

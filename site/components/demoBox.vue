@@ -55,6 +55,7 @@
 import animate from 'antd/_util/openAnimation';
 import BaseMixin from 'antd/_util/BaseMixin';
 import { isZhCN } from '../util';
+import { dev } from '../../build/config';
 export default {
   name: 'DemoBox',
   mixins: [BaseMixin],
@@ -81,7 +82,12 @@ export default {
       .split(' ')
       .join('-')
       .toLowerCase();
-    const id = ['components', name.replace(/-cn\/?$/, ''), 'demo', ...usTitle.split(' ')]
+    const id = [
+      'components',
+      name.replace(/-cn\/?$/, '') || dev.componentName,
+      'demo',
+      ...usTitle.split(' '),
+    ]
       .join('-')
       .toLowerCase();
 

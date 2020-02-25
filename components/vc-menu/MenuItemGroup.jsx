@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp, getListeners } from '../_util/props-util';
 // import { menuAllProps } from './util'
 
 const MenuItemGroup = {
@@ -27,7 +27,7 @@ const MenuItemGroup = {
     const titleClassName = `${rootPrefixCls}-item-group-title`;
     const listClassName = `${rootPrefixCls}-item-group-list`;
     // menuAllProps.props.forEach(key => delete props[key])
-    const listeners = { ...this.$listeners };
+    const listeners = { ...getListeners(this) };
     delete listeners.click;
 
     return (

@@ -6,6 +6,7 @@ import defaultRequest from './request';
 import getUid from './uid';
 import attrAccept from './attr-accept';
 import traverseFileTree from './traverseFileTree';
+import { getListeners } from '../../_util/props-util';
 
 const upLoadPropTypes = {
   componentTag: PropTypes.string,
@@ -206,7 +207,7 @@ const AjaxUploader = {
         };
     const tagProps = {
       on: {
-        ...this.$listeners,
+        ...getListeners(this),
         ...events,
       },
       attrs: {

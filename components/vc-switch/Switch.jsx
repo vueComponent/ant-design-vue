@@ -1,6 +1,6 @@
 import { switchPropTypes } from './PropTypes';
 import BaseMixin from '../_util/BaseMixin';
-import { hasProp, getOptionProps, getComponentFromProp } from '../_util/props-util';
+import { hasProp, getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 
 // function noop () {
 // }
@@ -89,7 +89,7 @@ export default {
     const spanProps = {
       props: { ...restProps },
       on: {
-        ...this.$listeners,
+        ...getListeners(this),
         keydown: this.handleKeyDown,
         click: this.handleClick,
         mouseup: this.handleMouseUp,

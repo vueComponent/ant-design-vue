@@ -4,6 +4,7 @@ import {
   initDefaultProps,
   getOptionProps,
   getComponentFromProp,
+  getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import classNames from 'classnames';
@@ -240,7 +241,7 @@ const Transfer = {
         // add filter
         [`${direction}Filter`]: value,
       });
-      if (this.$listeners.searchChange) {
+      if (getListeners(this).searchChange) {
         warning(false, '`searchChange` in Transfer is deprecated. Please use `search` instead.');
         this.$emit('searchChange', direction, e);
       }

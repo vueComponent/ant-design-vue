@@ -1,11 +1,11 @@
 <p align="center">
-  <a href="https://vue.ant.design/">
+  <a href="https://www.antdv.com/">
     <img width="200" src="https://qn.antdv.com/logo.png">
   </a>
 </p>
 
 <h1 align="center">
-  <a href="https://vue.ant.design/" target="_blank">Ant Design Vue</a>
+  <a href="https://www.antdv.com/" target="_blank">Ant Design Vue</a>
 </h1>
 
 <div align="center">
@@ -16,9 +16,9 @@ An enterprise-class UI components based on Ant Design and Vue.
 
 </div>
 
-[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://vue.ant.design/)
+[![](https://cdn-images-1.medium.com/max/2000/1*NIlj0-TdLMbo_hzSBP8tmg.png)](https://www.antdv.com/)
 
-English | [简体中文](./README-zh_CN.md) | [官网国内镜像](http://ant-design-vue.gitee.io/docs/vue/introduce-cn/)
+English | [简体中文](./README-zh_CN.md)
 
 <p align="center">
   <b>Special thanks to the generous sponsorship by:</b>
@@ -57,9 +57,9 @@ If you are in a bad network environment，you can try other registries and tools
 
 ## Links
 
-- [Home page](https://vue.ant.design/)
+- [Home page](https://www.antdv.com/)
 - [Vue](https://vuejs.org/)
-- [Ant Design React](http://ant.design/)
+- [Ant Design Of React](http://ant.design/)
 
 ## Ecosystem
 
@@ -79,16 +79,22 @@ ant-design-vue is an MIT-licensed open source project. In order to achieve bette
 - [paypal](https://www.paypal.me/tangjinzhou)
 - [支付宝或微信](https://qn.antdv.com/alipay-and-wechat.png)
 
-## Backers
-
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/ant-design-vue#backer)]
-
-<a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="limichange donation total 24$ by qq from 2018.9"></a> <a href="https://opencollective.com/ant-design-vue/backer/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/10/avatar.svg"></a>
-
 ## Sponsors
 
 Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/ant-design-vue#sponsor)]
 
 <a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/10/avatar.svg"></a>
+
+## Backers
+
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/ant-design-vue#backer)]
+
+<a href="https://opencollective.com/ant-design-vue/backer/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/10/avatar.svg"></a><a href="https://opencollective.com/ant-design-vue/backer/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/9/avatar.svg"></a>
+
+## Other Sponsor (From Patreon、alipay、wechat、paypal...)
+
+If you want to show your name here, please send an email to <a href="mailto:antdv@foxmail.com">antdv@foxmail.com</a>.
+
+<a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="donation by qq"></a> <a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/104172832)

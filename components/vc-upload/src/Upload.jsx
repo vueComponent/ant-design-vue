@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import { initDefaultProps } from '../../_util/props-util';
+import { initDefaultProps, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import AjaxUpload from './AjaxUploader';
 import IframeUpload from './IframeUploader';
@@ -58,7 +58,6 @@ export default {
   mounted() {
     this.$nextTick(() => {
       if (this.supportServerRender) {
-        /* eslint react/no-did-mount-set-state:0 */
         this.setState(
           {
             Component: this.getComponent(),
@@ -84,7 +83,7 @@ export default {
       props: {
         ...this.$props,
       },
-      on: this.$listeners,
+      on: getListeners(this),
       ref: 'uploaderRef',
       attrs: this.$attrs,
     };

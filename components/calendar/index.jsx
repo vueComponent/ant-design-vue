@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, hasProp, initDefaultProps } from '../_util/props-util';
+import { getOptionProps, hasProp, initDefaultProps, getListeners } from '../_util/props-util';
 import * as moment from 'moment';
 import FullCalendar from '../vc-calendar/src/FullCalendar';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -172,7 +172,7 @@ const Calendar = {
     },
     renderCalendar(locale, localeCode) {
       const props = getOptionProps(this);
-      const { sValue: value, sMode: mode, $listeners, $scopedSlots } = this;
+      const { sValue: value, sMode: mode, $scopedSlots } = this;
       if (value && localeCode) {
         value.locale(localeCode);
       }
@@ -220,7 +220,7 @@ const Calendar = {
           disabledDate,
         },
         on: {
-          ...$listeners,
+          ...getListeners(this),
           select: this.onSelect,
         },
       };

@@ -24,3 +24,6 @@ components/style/color/*.less
 .gitattributes
 .stylelintrc
 .vcmrc
+logo.png
+.npmrc.template
+.huskyrc

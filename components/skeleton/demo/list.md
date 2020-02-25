@@ -43,7 +43,7 @@ Use skeleton in list component.
   const listData = [];
   for (let i = 0; i < 3; i++) {
     listData.push({
-      href: 'https://vue.ant.design/',
+      href: 'https://www.antdv.com/',
       title: `ant design vue part ${i}`,
       avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
       description:

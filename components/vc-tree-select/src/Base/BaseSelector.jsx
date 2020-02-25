@@ -8,7 +8,7 @@
 import { createRef } from '../util';
 import PropTypes from '../../../_util/vue-types';
 import classNames from 'classnames';
-import { initDefaultProps, getComponentFromProp } from '../../../_util/props-util';
+import { initDefaultProps, getComponentFromProp, getListeners } from '../../../_util/props-util';
 import BaseMixin from '../../../_util/BaseMixin';
 export const selectorPropTypes = () => ({
   prefixCls: PropTypes.string,
@@ -134,7 +134,6 @@ export default function(modeName) {
       } = this.$props;
       const {
         vcTreeSelect: { onSelectorKeyDown },
-        $listeners,
       } = this;
 
       let myTabIndex = tabIndex;
@@ -145,7 +144,7 @@ export default function(modeName) {
       return (
         <span
           style={style}
-          onClick={$listeners.click || noop}
+          onClick={getListeners(this).click || noop}
           class={classNames(className, prefixCls, {
             [`${prefixCls}-open`]: open,
             [`${prefixCls}-focused`]: open || focused,

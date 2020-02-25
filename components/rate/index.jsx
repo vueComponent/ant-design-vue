@@ -1,6 +1,6 @@
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp } from '../_util/props-util';
+import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import VcRate from '../vc-rate';
 import Icon from '../icon';
@@ -58,7 +58,7 @@ const Rate = {
         prefixCls,
         ...omit(restProps, ['tooltips']),
       },
-      on: this.$listeners,
+      on: getListeners(this),
       ref: 'refRate',
     };
     return <VcRate {...rateProps} />;

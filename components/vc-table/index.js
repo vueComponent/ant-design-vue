@@ -11,6 +11,7 @@ import {
   getSlotOptions,
   camelize,
   getSlots,
+  getListeners,
 } from '../_util/props-util';
 const Table = {
   name: 'Table',
@@ -52,7 +53,7 @@ const Table = {
     },
   },
   render() {
-    const { $listeners, $slots, normalize } = this;
+    const { $slots, normalize } = this;
     const props = getOptionProps(this);
     const columns = props.columns || normalize($slots.default);
     const tProps = {
@@ -60,7 +61,7 @@ const Table = {
         ...props,
         columns,
       },
-      on: $listeners,
+      on: getListeners(this),
     };
     return <T {...tProps} />;
   },

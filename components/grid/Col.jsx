@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
+import { getListeners } from '../_util/props-util';
 
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
@@ -46,8 +47,6 @@ export default {
       pull,
       prefixCls: customizePrefixCls,
       $slots,
-      $attrs,
-      $listeners,
       rowContext,
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -81,8 +80,7 @@ export default {
       ...sizeClassObj,
     };
     const divProps = {
-      on: $listeners,
-      attrs: $attrs,
+      on: getListeners(this),
       class: classes,
       style: {},
     };

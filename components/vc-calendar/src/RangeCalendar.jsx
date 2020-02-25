@@ -1,6 +1,12 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, hasProp, mergeProps, getComponentFromProp } from '../../_util/props-util';
+import {
+  getOptionProps,
+  hasProp,
+  mergeProps,
+  getComponentFromProp,
+  getListeners,
+} from '../../_util/props-util';
 import moment from 'moment';
 import KeyCode from '../../_util/KeyCode';
 import CalendarPart from './range-calendar/CalendarPart';
@@ -613,7 +619,7 @@ const RangeCalendar = {
       seperator,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
-    const { sHoverValue, sSelectedValue, sMode, showTimePicker, sValue, $listeners } = this;
+    const { sHoverValue, sSelectedValue, sMode, showTimePicker, sValue } = this;
     const className = {
       [prefixCls]: 1,
       [`${prefixCls}-hidden`]: !props.visible,
@@ -623,7 +629,7 @@ const RangeCalendar = {
     };
     const baseProps = {
       props,
-      on: $listeners,
+      on: getListeners(this),
     };
     const newProps = {
       props: {

@@ -1,5 +1,5 @@
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
@@ -82,10 +82,10 @@ export default {
         file.thumbUrl = '';
         /*eslint -enable */
         previewFile(file.originFileObj, previewDataUrl => {
-          /*eslint-disable */
-          file.thumbUrl = previewDataUrl;
-          /*eslint -enable todo */
-          // this.forceUpdate()
+          // Need append '' to avoid dead loop
+          file.thumbUrl = previewDataUrl || '';
+          /*eslint -enable */
+          this.$forceUpdate();
         });
       });
     });
@@ -95,7 +95,7 @@ export default {
       this.$emit('remove', file);
     },
     handlePreview(file, e) {
-      const { preview } = this.$listeners;
+      const { preview } = getListeners(this);
       if (!preview) {
         return;
       }

@@ -1,7 +1,12 @@
 import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
 import classNames from 'classnames';
-import { initDefaultProps, filterEmpty, getComponentFromProp } from '../_util/props-util';
+import {
+  initDefaultProps,
+  filterEmpty,
+  getComponentFromProp,
+  getListeners,
+} from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
@@ -178,7 +183,7 @@ export default {
     if (!children.length && status) {
       return (
         <span
-          {...{ on: this.$listeners }}
+          {...{ on: getListeners(this) }}
           class={this.getBadgeClassName(prefixCls)}
           style={this.getStyleWithOffset()}
         >
@@ -191,7 +196,7 @@ export default {
     const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '');
 
     return (
-      <span {...{ on: this.$listeners }} class={this.getBadgeClassName(prefixCls)}>
+      <span {...{ on: getListeners(this) }} class={this.getBadgeClassName(prefixCls)}>
         {children}
         <transition {...transitionProps}>{scrollNumber}</transition>
         {statusText}

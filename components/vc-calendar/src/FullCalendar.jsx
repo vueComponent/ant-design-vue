@@ -1,7 +1,7 @@
 import moment from 'moment';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, hasProp } from '../../_util/props-util';
+import { getOptionProps, hasProp, getListeners } from '../../_util/props-util';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin';
@@ -93,7 +93,7 @@ const FullCalendar = {
       headerRender,
       disabledDate,
     } = props;
-    const { sValue: value, sType: type, $listeners } = this;
+    const { sValue: value, sType: type } = this;
 
     let header = null;
     if (showHeader) {
@@ -109,7 +109,7 @@ const FullCalendar = {
             value,
           },
           on: {
-            ...$listeners,
+            ...getListeners(this),
             typeChange: this.setType,
             valueChange: this.setValue,
           },

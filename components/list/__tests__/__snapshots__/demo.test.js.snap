@@ -8,7 +8,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
         <div class="ant-list-item-meta">
           <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
           <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">Ant Design Title 1</a></h4>
+            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 1</a></h4>
             <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
           </div>
         </div>
@@ -17,7 +17,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
         <div class="ant-list-item-meta">
           <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
           <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">Ant Design Title 2</a></h4>
+            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 2</a></h4>
             <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
           </div>
         </div>
@@ -26,7 +26,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
         <div class="ant-list-item-meta">
           <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
           <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">Ant Design Title 3</a></h4>
+            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 3</a></h4>
             <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
           </div>
         </div>
@@ -35,7 +35,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
         <div class="ant-list-item-meta">
           <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
           <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">Ant Design Title 4</a></h4>
+            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 4</a></h4>
             <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
           </div>
         </div>
@@ -352,7 +352,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             <div class="ant-list-item-meta">
               <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
               <div class="ant-list-item-meta-content">
-                <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">ant design vue part 0</a></h4>
+                <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">ant design vue part 0</a></h4>
                 <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team.</div>
               </div>
             </div>
@@ -380,7 +380,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             <div class="ant-list-item-meta">
               <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
               <div class="ant-list-item-meta-content">
-                <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">ant design vue part 1</a></h4>
+                <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">ant design vue part 1</a></h4>
                 <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team.</div>
               </div>
             </div>
@@ -408,7 +408,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             <div class="ant-list-item-meta">
               <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
               <div class="ant-list-item-meta-content">
-                <h4 class="ant-list-item-meta-title"><a href="https://vue.ant.design/">ant design vue part 2</a></h4>
+                <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">ant design vue part 2</a></h4>
                 <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team.</div>
               </div>
             </div>

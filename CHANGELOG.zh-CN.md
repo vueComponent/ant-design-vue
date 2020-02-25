@@ -10,6 +10,49 @@
 
 ---
 
+## 1.4.11
+
+`2020-02-12`
+
+- 🌟 DirectoryTree 新增自定义 switcherIcon 功能 [#1743](https://github.com/vueComponent/ant-design-vue/issues/1743)
+- 🌟 新增可拖拽调整表格列宽[示例](https://www.antdv.com/components/table/#components-table-demo-resizable-column)
+- 🌟 替换所有组件的 `this.$listeners` 避免组件重复渲染 [#1705](https://github.com/vueComponent/ant-design-vue/issues/1705)
+- 🐞 修复 ConfigProvider 组件更改属性时，报错问题 [7a4003](https://github.com/vueComponent/ant-design-vue/commit/7a40031955d520487dcaf9054a1280ae72230049)
+- 🐞 修复 AutoComplete 组件自定义输入框时，placeholder 不消失问题 [#1761](https://github.com/vueComponent/ant-design-vue/issues/1761)
+- 🐞 修复 Statistic.Countdown 不触发 finish 事件的问题 [#1731](https://github.com/vueComponent/ant-design-vue/pull/1731)
+- 🐞 修复 Upload 组件预览图片不刷新问题 [f74469](https://github.com/vueComponent/ant-design-vue/commit/f744690e929d9d6da03c5c513b3ac5497c6490ef)
+- 🐞 修复 TimePicker id 不唯一问题 [#1566](https://github.com/vueComponent/ant-design-vue/pull/1566)
+- 🐞 修复 Pagination 分页无动画问题 [#1540](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 修复 Cascader 的 option 为空数组时,下拉列表不展示空元素问题 [#1701](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 修复 Input 组件的 spellcheck 渲染不正确问题 [#1707](https://github.com/vueComponent/ant-design-vue/issues/1707)
+- 🐞 修复 Tree 组件无法自定义 icon 问题 [#1712](https://github.com/vueComponent/ant-design-vue/pull/1712)
+- 🐞 修复 SubMenu forceSubMenuRender 属性失效问题 [#1668](https://github.com/vueComponent/ant-design-vue/issues/1668)
+- 🐞 修复 Upload 按钮样式错位问题 [#1742](https://github.com/vueComponent/ant-design-vue/pull/1742)
+
+## 1.4.10
+
+`2019-12-11`
+
+- 🐞 修复 `MonthPicker` 左右箭头切换月份失效问题 [#1543](https://github.com/vueComponent/ant-design-vue/issues/1543)
+
+## 1.4.9
+
+`2019-12-10`
+
+- 🐞 修复 `Modal` 打开时，body 滚动问题 [#1472](https://github.com/vueComponent/ant-design-vue/issues/1472)
+- 🐞 修复 `Drawer` wrapStyle 不生效问题 [#1481](https://github.com/vueComponent/ant-design-vue/issues/1481)
+- 🐞 修复 `InputNumber` id 挂载位置不正确的问题 [#1477](https://github.com/vueComponent/ant-design-vue/issues/1477)
+- 🐞 修复 `Tabs` nextClick 事件不触发的问题 [#1489](https://github.com/vueComponent/ant-design-vue/pull/1489)
+- 🐞 修复 `MonthPicker` 在 open 状态下，不能更改值的问题 [#1510](https://github.com/vueComponent/ant-design-vue/issues/1510)
+- 🐞 修复 `AutoComplete` 在输入中文时 `placeholder` 不消失的问题 [#1506](https://github.com/vueComponent/ant-design-vue/issues/1506)
+- 🐞 修复在引用不同 Vue 变量时，无法弹出内容的问题 [6362bf](https://github.com/vueComponent/ant-design-vue/commit/6362bf9edb441c0c0096beca1d2c8727003dbb15)
+- 🌟 `Table` `customRender` 添加第三个 column 参数 [#1513](https://github.com/vueComponent/ant-design-vue/pull/1513)
+- 🌟 `InputPassword` 添加 focus、blur 方法 [#1485](https://github.com/vueComponent/ant-design-vue/pull/1485)
+- 🐞 修复 `Tooltip` 使用在原生 html 元素时报错的问题 [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
+- 🐞 修复 `Menu` 在 edge 浏览器下报错的问题 [#1492](https://github.com/vueComponent/ant-design-vue/issues/1492)
+- 🐞 修复 `Select` 的 empty 不居中的问题 [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445)
+- 🐞 修复弹窗类组件内存泄漏问题 [#1483](https://github.com/vueComponent/ant-design-vue/pull/1483)
+
 ## 1.4.8
 
 `2019-11-28`
@@ -345,8 +388,8 @@
 
 1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
 
-- 🔥 增加了一个新组件 [Comment](https://vue.ant.design/components/comment-cn/)。
-- 🔥 增加了一个新组件 [ConfigProvider](https://vue.ant.design/components/config-provider-cn/) 为组件提供统一的全局化配置。
+- 🔥 增加了一个新组件 [Comment](https://www.antdv.com/components/comment-cn/)。
+- 🔥 增加了一个新组件 [ConfigProvider](https://www.antdv.com/components/config-provider-cn/) 为组件提供统一的全局化配置。
 
 组件修复/功能增强：
 

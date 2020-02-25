@@ -1,5 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
+import { getListeners } from '../../../_util/props-util';
 const ROW = 4;
 const COL = 3;
 function noop() {}
@@ -61,8 +62,8 @@ export default {
   },
 
   render() {
-    const { sValue: value, locale, renderFooter, $listeners = {} } = this;
-    const decadePanelShow = $listeners.decadePanelShow || noop;
+    const { sValue: value, locale, renderFooter } = this;
+    const decadePanelShow = getListeners(this).decadePanelShow || noop;
     const years = this.years();
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;

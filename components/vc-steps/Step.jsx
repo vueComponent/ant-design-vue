@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp } from '../_util/props-util';
+import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 
 function isString(str) {
   return typeof str === 'string';
@@ -40,8 +40,8 @@ export default {
         [`${prefixCls}-icon`]: true,
         [`${iconPrefix}icon`]: true,
         [`${iconPrefix}icon-${icon}`]: icon && isString(icon),
-        [`${iconPrefix}icon-check`]: !icon && status === 'finish' && (icons && !icons.finish),
-        [`${iconPrefix}icon-close`]: !icon && status === 'error' && (icons && !icons.error),
+        [`${iconPrefix}icon-check`]: !icon && status === 'finish' && icons && !icons.finish,
+        [`${iconPrefix}icon-close`]: !icon && status === 'error' && icons && !icons.error,
       };
       const iconDot = <span class={`${prefixCls}-icon-dot`} />;
       // `progressDot` enjoy the highest priority
@@ -88,7 +88,7 @@ export default {
     };
     const stepProps = {
       class: classString,
-      on: this.$listeners,
+      on: getListeners(this),
     };
     const stepItemStyle = {};
     if (itemWidth) {

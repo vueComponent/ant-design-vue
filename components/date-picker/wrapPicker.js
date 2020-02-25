@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
-import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 const DEFAULT_FORMAT = {
@@ -168,7 +168,7 @@ export default function wrapPicker(Picker, props, pickerType) {
             timePicker,
           },
           on: {
-            ...this.$listeners,
+            ...getListeners(this),
             openChange: this.handleOpenChange,
             focus: this.handleFocus,
             blur: this.handleBlur,

@@ -3,7 +3,12 @@ import VcTabs, { TabPane } from '../vc-tabs/src';
 import TabContent from '../vc-tabs/src/TabContent';
 import { isFlexSupported } from '../_util/styleChecker';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp, getOptionProps, filterEmpty } from '../_util/props-util';
+import {
+  getComponentFromProp,
+  getOptionProps,
+  filterEmpty,
+  getListeners,
+} from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import TabBar from './TabBar';
@@ -139,6 +144,7 @@ export default {
     ) : null;
 
     const renderTabBarSlot = renderTabBar || this.$scopedSlots.renderTabBar;
+    const listeners = getListeners(this);
     const tabBarProps = {
       props: {
         ...this.$props,
@@ -146,7 +152,7 @@ export default {
         tabBarExtraContent,
         renderTabBar: renderTabBarSlot,
       },
-      on: this.$listeners,
+      on: listeners,
     };
     const contentCls = {
       [`${prefixCls}-${tabPosition}-content`]: true,
@@ -165,7 +171,7 @@ export default {
         __propsSymbol__: Symbol(),
       },
       on: {
-        ...this.$listeners,
+        ...listeners,
         change: this.handleChange,
       },
       class: cls,

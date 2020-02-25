@@ -1,6 +1,6 @@
 import PropTypes from '../../../../_util/vue-types';
 import { toTitle, UNSELECTABLE_ATTRIBUTE, UNSELECTABLE_STYLE } from '../../util';
-import { getComponentFromProp } from '../../../../_util/props-util';
+import { getComponentFromProp, getListeners } from '../../../../_util/props-util';
 import BaseMixin from '../../../../_util/BaseMixin';
 
 const Selection = {
@@ -24,7 +24,6 @@ const Selection = {
 
   render() {
     const { prefixCls, maxTagTextLength, label, value } = this.$props;
-    const { $listeners } = this;
     let content = label || value;
     if (maxTagTextLength && typeof content === 'string' && content.length > maxTagTextLength) {
       content = `${content.slice(0, maxTagTextLength)}...`;
@@ -38,7 +37,7 @@ const Selection = {
         class={`${prefixCls}-selection__choice`}
         title={toTitle(label)}
       >
-        {$listeners.remove && (
+        {getListeners(this).remove && (
           <span class={`${prefixCls}-selection__choice__remove`} onClick={this.onRemove}>
             {getComponentFromProp(this, 'removeIcon')}
           </span>

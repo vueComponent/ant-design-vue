@@ -34,7 +34,7 @@ const esDir = path.join(cwd, 'es');
 function dist(done) {
   rimraf.sync(path.join(cwd, 'dist'));
   process.env.RUN_ENV = 'PRODUCTION';
-  const webpackConfig = require(path.join(cwd, 'webpack.build.config.js'));
+  const webpackConfig = require(path.join(cwd, 'build/webpack.build.conf.js'));
   webpack(webpackConfig, (err, stats) => {
     if (err) {
       console.error(err.stack || err);

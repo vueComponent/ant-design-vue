@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import LazyRenderBox from './LazyRenderBox';
+import { getListeners } from '../_util/props-util';
 
 export default {
   props: {
@@ -9,9 +10,8 @@ export default {
   },
   render() {
     const { prefixCls, visible, hiddenClassName } = this.$props;
-    const { $listeners } = this;
     const divProps = {
-      on: $listeners,
+      on: getListeners(this),
     };
 
     return (

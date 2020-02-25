@@ -1,6 +1,5 @@
 import Radio from './Radio';
-import PropTypes from '../_util/vue-types';
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -22,7 +21,7 @@ export default {
         ...otherProps,
         prefixCls,
       },
-      on: { ...this.$listeners },
+      on: getListeners(this),
     };
     if (this.radioGroupContext) {
       radioProps.on.change = this.radioGroupContext.onRadioChange;

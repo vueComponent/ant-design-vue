@@ -8,6 +8,7 @@ import {
   getOptionProps,
   filterEmpty,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import Icon from '../icon';
 import { cloneElement } from '../_util/vnode';
@@ -254,7 +255,7 @@ const Select = {
         dropdownRender: getComponentFromProp(this, 'dropdownRender', {}, false),
         getPopupContainer: getPopupContainer || getContextPopupContainer,
       },
-      on: this.$listeners,
+      on: getListeners(this),
       class: cls,
       ref: 'vcSelect',
     };

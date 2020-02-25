@@ -1,5 +1,6 @@
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
+import { getListeners } from '../_util/props-util';
 
 export default {
   name: 'AAvatar',
@@ -155,7 +156,7 @@ export default {
       }
     }
     return (
-      <span {...{ on: this.$listeners, class: classString, style: sizeStyle }}>{children}</span>
+      <span {...{ on: getListeners(this), class: classString, style: sizeStyle }}>{children}</span>
     );
   },
 };

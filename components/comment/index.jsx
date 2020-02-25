@@ -1,5 +1,5 @@
 import PropsTypes from '../_util/vue-types';
-import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
+import { initDefaultProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 export const CommentProps = {
@@ -81,7 +81,7 @@ const Comment = {
     );
     const children = this.$slots.default;
     return (
-      <div class={prefixCls} {...{ on: this.$listeners }}>
+      <div class={prefixCls} {...{ on: getListeners(this) }}>
         {comment}
         {children ? this.renderNested(prefixCls, children) : null}
       </div>

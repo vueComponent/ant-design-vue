@@ -8,6 +8,7 @@ import {
   getClass,
   getStyle,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
@@ -82,7 +83,10 @@ export default {
         (isAntBtn &&
           (ele.componentOptions.propsData.disabled ||
             ele.componentOptions.propsData.disabled === '')) ||
-        (ele.tag === 'button' && ele.data && ele.data.attrs.disabled !== false)
+        (ele.tag === 'button' &&
+          ele.data &&
+          ele.data.attrs &&
+          ele.data.attrs.disabled !== undefined)
       ) {
         // Pick some layout related style properties up to span
         // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
@@ -158,7 +162,7 @@ export default {
   },
 
   render() {
-    const { $props, $data, $slots, $listeners } = this;
+    const { $props, $data, $slots } = this;
     const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -189,7 +193,7 @@ export default {
       },
       ref: 'tooltip',
       on: {
-        ...$listeners,
+        ...getListeners(this),
         visibleChange: this.onVisibleChange,
         popupAlign: this.onPopupAlign,
       },

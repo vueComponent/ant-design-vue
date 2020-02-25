@@ -9,6 +9,7 @@ import {
   getSlotOptions,
   camelize,
   getSlots,
+  getListeners,
 } from '../_util/props-util';
 import Base from '../base';
 
@@ -82,7 +83,7 @@ const Table = {
     },
   },
   render() {
-    const { $listeners, $slots, normalize, $scopedSlots } = this;
+    const { $slots, normalize, $scopedSlots } = this;
     const props = getOptionProps(this);
     const columns = props.columns ? this.updateColumns(props.columns) : normalize($slots.default);
     let { title, footer } = props;
@@ -101,7 +102,7 @@ const Table = {
         footer,
         expandedRowRender,
       },
-      on: $listeners,
+      on: getListeners(this),
     };
     return <T {...tProps} />;
   },

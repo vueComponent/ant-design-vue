@@ -3,7 +3,7 @@ import BaseMixin from '../../_util/BaseMixin';
 import PropTypes from '../../_util/vue-types';
 import raf from 'raf';
 import KeyCode from './KeyCode';
-import { getOptionProps } from '../../_util/props-util';
+import { getOptionProps, getListeners } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
 
@@ -248,7 +248,7 @@ export default {
       contents.push(tabBar, sentinelStart, tabContent, sentinelEnd);
     }
     const listeners = {
-      ...omit(this.$listeners, ['change']),
+      ...omit(getListeners(this), ['change']),
       scroll: this.onScroll,
     };
     return <div {...{ on: listeners, class: cls }}>{contents}</div>;

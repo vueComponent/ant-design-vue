@@ -15,7 +15,7 @@ Basic list.
       <a-list-item-meta
         description="Ant Design, a design language for background applications, is refined by Ant UED Team"
       >
-        <a slot="title" href="https://vue.ant.design/">{{item.title}}</a>
+        <a slot="title" href="https://www.antdv.com/">{{item.title}}</a>
         <a-avatar
           slot="avatar"
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"

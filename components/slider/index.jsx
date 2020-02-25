@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
@@ -117,6 +117,7 @@ const Slider = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('slider', customizePrefixCls);
     const tooltipPrefixCls = getPrefixCls('tooltip', customizeTooltipPrefixCls);
+    const listeners = getListeners(this);
     if (range) {
       const vcRangeProps = {
         props: {
@@ -126,7 +127,7 @@ const Slider = {
           handle: info => this.handleWithTooltip(tooltipPrefixCls, info),
         },
         ref: 'sliderRef',
-        on: this.$listeners,
+        on: listeners,
       };
       return <VcRange {...vcRangeProps} />;
     }
@@ -138,7 +139,7 @@ const Slider = {
         handle: info => this.handleWithTooltip(tooltipPrefixCls, info),
       },
       ref: 'sliderRef',
-      on: this.$listeners,
+      on: listeners,
     };
     return <VcSlider {...vcSliderProps} />;
   },

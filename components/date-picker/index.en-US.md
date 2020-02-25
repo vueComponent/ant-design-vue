@@ -118,7 +118,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | ranges | preseted ranges for quick selection | { \[range: string]: [moment](http://momentjs.com/)\[] } \| { \[range: string]: () => [moment](http://momentjs.com/)\[] } | - |
 | renderExtraFooter | render extra footer in panel by setting a scoped slot | slot="renderExtraFooter" slot-scope="mode" | - |
 | showTime | to provide an additional time selection | object\|boolean | [TimePicker Options](/components/time-picker/#API) |
-| showTime.defaultValue | to set default time of selected date, [demo](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
+| showTime.defaultValue | to set default time of selected date, [demo](https://antdv.com/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | \[moment(), moment()] |
 | value(v-model) | to set date | \[[moment](http://momentjs.com/), [moment](http://momentjs.com/)] | - |
 
 ### RangePicker Events

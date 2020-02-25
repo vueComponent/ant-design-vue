@@ -3,6 +3,7 @@ import TabBarTabsNode from './TabBarTabsNode';
 import TabBarRootNode from './TabBarRootNode';
 import ScrollableTabBarNode from './ScrollableTabBarNode';
 import SaveRef from './SaveRef';
+import { getListeners } from '../../_util/props-util';
 
 export default {
   name: 'ScrollableInkTabBar',
@@ -21,7 +22,7 @@ export default {
   ],
   render() {
     const props = { ...this.$props };
-    const listeners = this.$listeners;
+    const listeners = getListeners(this);
     const { default: renderTabBarNode } = this.$scopedSlots;
     return (
       <SaveRef

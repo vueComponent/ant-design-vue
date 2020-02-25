@@ -9,7 +9,12 @@ Demonstration of validation configuration for form controls which are not shown 
 </us>
 
 <template>
-  <a-form id="components-form-demo-validate-other" :form="form" v-bind="formItemLayout" @submit="handleSubmit">
+  <a-form
+    id="components-form-demo-validate-other"
+    :form="form"
+    v-bind="formItemLayout"
+    @submit="handleSubmit"
+  >
     <a-form-item label="Plain Text">
       <span class="ant-form-text">
         China

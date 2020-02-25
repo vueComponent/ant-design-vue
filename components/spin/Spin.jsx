@@ -6,6 +6,7 @@ import {
   initDefaultProps,
   isValidElement,
   getComponentFromProp,
+  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
@@ -151,7 +152,10 @@ export default {
       };
 
       return (
-        <div {...{ on: this.$listeners }} class={[`${prefixCls}-nested-loading`, wrapperClassName]}>
+        <div
+          {...{ on: getListeners(this) }}
+          class={[`${prefixCls}-nested-loading`, wrapperClassName]}
+        >
           {sSpinning && <div key="loading">{spinElement}</div>}
           <div class={containerClassName} key="container">
             {children}

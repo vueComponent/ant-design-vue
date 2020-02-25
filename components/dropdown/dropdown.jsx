@@ -2,7 +2,12 @@ import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import { getOptionProps, getPropsData, getComponentFromProp } from '../_util/props-util';
+import {
+  getOptionProps,
+  getPropsData,
+  getComponentFromProp,
+  getListeners,
+} from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
@@ -72,7 +77,7 @@ const Dropdown = {
   },
 
   render() {
-    const { $slots, $listeners } = this;
+    const { $slots } = this;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, trigger, disabled, getPopupContainer } = props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
@@ -99,7 +104,7 @@ const Dropdown = {
         transitionName: this.getTransitionName(),
         trigger: triggerActions,
       },
-      on: $listeners,
+      on: getListeners(this),
     };
     return (
       <RcDropdown {...dropdownProps}>

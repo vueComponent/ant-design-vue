@@ -9,6 +9,7 @@ import {
   initDefaultProps,
   getComponentFromProp,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { WeekPickerProps } from './interface';
@@ -149,16 +150,15 @@ export default {
       localeCode,
       disabledDate,
       $data,
-      $listeners,
       $scopedSlots,
     } = this;
-
+    const listeners = getListeners(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('calendar', customizePrefixCls);
     this._prefixCls = prefixCls;
 
     const { _value: pickerValue, _open: open } = $data;
-    const { focus = noop, blur = noop } = $listeners;
+    const { focus = noop, blur = noop } = listeners;
 
     if (pickerValue && localeCode) {
       pickerValue.locale(localeCode);
@@ -225,7 +225,7 @@ export default {
         open,
       },
       on: {
-        ...$listeners,
+        ...listeners,
         change: this.handleChange,
         openChange: this.handleOpenChange,
       },

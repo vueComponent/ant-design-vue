@@ -1,21 +1,29 @@
 import Dialog from './Dialog';
 import ContainerRender from '../_util/ContainerRender';
 import getDialogPropTypes from './IDialogPropTypes';
-import { getStyle, getClass } from '../_util/props-util';
+import { getStyle, getClass, getListeners } from '../_util/props-util';
 const IDialogPropTypes = getDialogPropTypes();
+let openCount = 0;
 const DialogWrap = {
+  inheritAttrs: false,
   props: {
     ...IDialogPropTypes,
     visible: IDialogPropTypes.visible.def(false),
   },
   data() {
+    openCount = this.visible ? openCount + 1 : openCount;
     this.renderComponent = () => {};
     this.removeContainer = () => {};
     return {};
   },
-
+  watch: {
+    visible(val, preVal) {
+      openCount = val && !preVal ? openCount + 1 : openCount - 1;
+    },
+  },
   beforeDestroy() {
     if (this.visible) {
+      openCount = openCount ? openCount - 1 : openCount;
       this.renderComponent({
         afterClose: this.removeContainer,
         visible: false,
@@ -29,7 +37,7 @@ const DialogWrap = {
   },
   methods: {
     getComponent(extra = {}) {
-      const { $attrs, $listeners, $props, $slots } = this;
+      const { $attrs, $props, $slots, getContainer } = this;
       const { on, ...otherProps } = extra;
       const dialogProps = {
         props: {
@@ -37,12 +45,13 @@ const DialogWrap = {
           dialogClass: getClass(this),
           dialogStyle: getStyle(this),
           ...otherProps,
+          getOpenCount: getContainer === false ? () => 2 : () => openCount,
         },
         attrs: $attrs,
         ref: '_component',
         key: 'dialog',
         on: {
-          ...$listeners,
+          ...getListeners(this),
           ...on,
         },
       };

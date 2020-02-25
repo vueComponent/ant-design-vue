@@ -38,7 +38,7 @@ export default {
         <md cn={md.cn} us={md.us} />
         <BasicControlled />
         <Basic />
-        <ReplaceFields/>
+        <ReplaceFields />
         <CustomizedIcon />
         <Draggable />
         <Dynamic />

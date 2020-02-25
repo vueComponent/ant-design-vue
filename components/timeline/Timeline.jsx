@@ -5,6 +5,7 @@ import {
   initDefaultProps,
   filterEmpty,
   getComponentFromProp,
+  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import TimelineItem from './TimelineItem';
@@ -92,7 +93,7 @@ export default {
         ...restProps,
       },
       class: classString,
-      on: this.$listeners,
+      on: getListeners(this),
     };
     return <ul {...timelineProps}>{items}</ul>;
   },

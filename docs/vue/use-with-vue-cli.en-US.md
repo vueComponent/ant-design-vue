@@ -70,12 +70,9 @@ Vue.component(Button.name, Button);
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>',
-});
+  render: h => h(App),
+}).$mount('#app');
 ```
 
 Modify `src/App.vue`。
@@ -161,12 +158,9 @@ Remove the `import 'ant-design-vue/dist/antd.css';` statement added before becau
 
   Vue.config.productionTip = false
 
-  /* eslint-disable no-new */
   new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App/>'
-  })
+    render: h => h(App)
+  }).$mount('#app')
 ```
 
 Then reboot with `npm run dev` and visit the demo page, you should not find any [warning messages](https://zos.alipayobjects.com/rmsportal/vgcHJRVZFmPjAawwVoXK.png) in the console, which prove that the `import on demand` config is working now. You will find more info about it in [this guide](/docs/vue/getting-started/#Import-on-Demand).

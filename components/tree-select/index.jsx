@@ -8,6 +8,7 @@ import {
   getComponentFromProp,
   filterEmpty,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
@@ -152,7 +153,7 @@ const TreeSelect = {
         treeData ? { treeData } : {},
       ),
       class: cls,
-      on: { ...this.$listeners, change: this.onChange },
+      on: { ...getListeners(this), change: this.onChange },
       ref: 'vcTreeSelect',
       scopedSlots: this.$scopedSlots,
     };

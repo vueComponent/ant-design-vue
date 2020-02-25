@@ -1,5 +1,5 @@
 <script>
-/* eslint react/no-multi-comp:0, no-console:0, no-unused-vars:0 */
+/* eslint no-console:0, no-unused-vars:0 */
 
 import '../assets/index.less';
 import PropTypes from '@/components/_util/vue-types';

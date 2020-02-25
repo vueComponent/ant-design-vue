@@ -20,6 +20,7 @@ import {
   getOptionProps,
   hasProp,
   getComponentFromProp,
+  getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import isNumeric from '../_util/isNumeric';
@@ -234,7 +235,7 @@ export default {
       [`${prefixCls}-zero-width`]: parseFloat(siderWidth) === 0,
     });
     const divProps = {
-      on: this.$listeners,
+      on: getListeners(this),
       class: siderCls,
       style: divStyle,
     };

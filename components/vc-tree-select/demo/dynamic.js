@@ -1,5 +1,3 @@
-/* eslint react/no-multi-comp:0, no-console:0 */
-
 import BaseMixin from '../../_util/BaseMixin';
 import '../assets/index.less';
 import TreeSelect from '../src/index';

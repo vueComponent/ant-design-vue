@@ -1,4 +1,4 @@
-/* eslint-disable no-console,func-names,react/no-multi-comp */
+/* eslint-disable no-console,func-names */
 import Table from '../index';
 import '../assets/index.less';
 

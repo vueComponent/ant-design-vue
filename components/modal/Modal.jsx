@@ -14,6 +14,7 @@ import {
   getClass,
   getStyle,
   mergeProps,
+  getListeners,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -66,6 +67,7 @@ const modalProps = (defaultProps = {}) => {
     mask: PropTypes.bool,
     keyboard: PropTypes.bool,
     wrapProps: PropTypes.object,
+    focusTriggerAfterClose: PropTypes.bool,
   };
   return initDefaultProps(props, defaultProps);
 };
@@ -74,6 +76,7 @@ export const destroyFns = [];
 
 export default {
   name: 'AModal',
+  inheritAttrs: false,
   model: {
     prop: 'visible',
     event: 'change',
@@ -158,8 +161,8 @@ export default {
       visible,
       wrapClassName,
       centered,
-      $listeners,
       $slots,
+      $attrs,
     } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -191,11 +194,12 @@ export default {
         closeIcon,
       },
       on: {
-        ...$listeners,
+        ...getListeners(this),
         close: this.handleCancel,
       },
       class: getClass(this),
       style: getStyle(this),
+      attrs: $attrs,
     };
     return <Dialog {...dialogProps}>{$slots.default}</Dialog>;
   },

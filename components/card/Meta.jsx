@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -39,7 +39,7 @@ export default {
         </div>
       ) : null;
     return (
-      <div {...{ on: this.$listeners }} class={classString}>
+      <div {...{ on: getListeners(this) }} class={classString}>
         {avatarDom}
         {MetaDetail}
       </div>

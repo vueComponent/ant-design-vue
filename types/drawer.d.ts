@@ -67,10 +67,16 @@ export declare class Drawer extends AntdComponent {
   wrapClassName: string;
 
   /**
-   * The style of the container of the Drawer dialog.
+   * Style of wrapper element which **contains mask** compare to `drawerStyle`
    * @type object
    */
   wrapStyle: object;
+
+  /**
+   * Style of the popup layer element
+   * @type object
+   */
+  drawerStyle: object;
 
   /**
    * Style of floating layer, typically used for adjusting its position.

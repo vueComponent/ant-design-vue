@@ -1,5 +1,5 @@
 import { Item, itemProps } from '../vc-menu';
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 import Tooltip from '../tooltip';
 function noop() {}
 export default {
@@ -18,7 +18,7 @@ export default {
   render() {
     const props = getOptionProps(this);
     const { level, title, rootPrefixCls } = props;
-    const { getInlineCollapsed, $slots, $attrs: attrs, $listeners } = this;
+    const { getInlineCollapsed, $slots, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     let titleNode;
     if (inlineCollapsed) {
@@ -31,7 +31,7 @@ export default {
         title: inlineCollapsed ? null : title,
       },
       attrs,
-      on: $listeners,
+      on: getListeners(this),
     };
     const toolTipProps = {
       props: {

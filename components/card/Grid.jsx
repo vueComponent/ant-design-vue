@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
+import { getListeners } from '../_util/props-util';
 
 export default {
   name: 'ACardGrid',
@@ -20,7 +21,7 @@ export default {
       [`${prefixCls}-grid`]: true,
     };
     return (
-      <div {...{ on: this.$listeners }} class={classString}>
+      <div {...{ on: getListeners(this) }} class={classString}>
         {this.$slots.default}
       </div>
     );

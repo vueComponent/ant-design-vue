@@ -10,6 +10,49 @@
 
 ---
 
+## 1.4.11
+
+`2020-02-12`
+
+- 🌟 DirectoryTree adds custom switcherIcon function [#1743](https://github.com/vueComponent/ant-design-vue/issues/1743)
+- 🌟 Add draggable table column width [example](https://www.antdv.com/components/table/#components-table-demo-resizable-column)
+- 🌟 Replace `this.$listeners` of all components to avoid repeated rendering of components [#1705](https://github.com/vueComponent/ant-design-vue/issues/1705)
+- 🐞 Fix ConfigProvider component error report error [7a4003](https://github.com/vueComponent/ant-design-vue/commit/7a40031955d520487dcaf9054a1280ae72230049)
+- 🐞 Fix placeholder does not disappear when custom input box of AutoComplete component [#1761](https://github.com/vueComponent/ant-design-vue/issues/1761)
+- 🐞 Fix Statistic.Countdown does not trigger finish event [#1731](https://github.com/vueComponent/ant-design-vue/pull/1731)
+- 🐞 Fix upload component preview image not refreshing [f74469](https://github.com/vueComponent/ant-design-vue/commit/f744690e929d9d6da03c5c513b3ac5497c6490ef)
+- 🐞 Fix TimePicker id is not unique [#1566](https://github.com/vueComponent/ant-design-vue/pull/1566)
+- 🐞 Fix Pagination pagination without animation [#1540](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 Fix drop-down list does not show empty elements when Cascader's option is empty array [#1701](https://github.com/vueComponent/ant-design-vue/issues/1540)
+- 🐞 Fix spellcheck rendering incorrect for Input component [#1707](https://github.com/vueComponent/ant-design-vue/issues/1707)
+- 🐞 Fix Tree component cannot customize icon [#1712](https://github.com/vueComponent/ant-design-vue/pull/1712)
+- 🐞 Fix SubMenu forceSubMenuRender property is invalid [#1668](https://github.com/vueComponent/ant-design-vue/issues/1668)
+- 🐞 Fix style of upload button is misaligned [#1742](https://github.com/vueComponent/ant-design-vue/pull/1742)
+
+## 1.4.10
+
+`2019-12-11`
+
+- 🐞 Fixed the left and right arrows of MonthPicker cannot be worked [#1543](https://github.com/vueComponent/ant-design-vue/issues/1543)
+
+## 1.4.9
+
+`2019-12-10`
+
+- 🐞 Fix body scrolling issue when `Modal` is opened [#1472](https://github.com/vueComponent/ant-design-vue/issues/1472)
+- 🐞 Fix `Drawer` wrapStyle not working [#1481](https://github.com/vueComponent/ant-design-vue/issues/1481)
+- 🐞 Fix `InputNumber` id mount position is incorrect [#1477](https://github.com/vueComponent/ant-design-vue/issues/1477)
+- 🐞 Fix `Tabs` nextClick event does not fire [#1489](https://github.com/vueComponent/ant-design-vue/pull/1489)
+- 🐞 Fix `MonthPicker` cannot be changed in open state [#1510](https://github.com/vueComponent/ant-design-vue/issues/1510)
+- 🐞 Fix the issue that `AutoComplete` does not disappear when entering Chinese [#1506](https://github.com/vueComponent/ant-design-vue/issues/1506)
+- 🐞 Fix the problem that the content cannot pop up when referencing different Vue variables [6362bf](https://github.com/vueComponent/ant-design-vue/commit/6362bf9edb441c0c0096beca1d2c8727003dbb15)
+- 🌟 `Table` `customRender` Add a third column parameter [#1513](https://github.com/vueComponent/ant-design-vue/pull/1513)
+- 🌟 `InputPassword` adds focus and blur methods [#1485](https://github.com/vueComponent/ant-design-vue/pull/1485)
+- 🐞 Fix `Tooltip` report error when using native html element [#1519](https://github.com/vueComponent/ant-design-vue/issues/1519)
+- 🐞 Fix `Menu` report error in edge browser [#1492](https://github.com/vueComponent/ant-design-vue/issues/1492)
+- 🐞 Fix empty centering of `Select` [#1445](https://github.com/vueComponent/ant-design-vue/pull/1445)
+- 🐞 Fix popup window component memory leak problem [#1483](https://github.com/vueComponent/ant-design-vue/pull/1483)
+
 ## 1.4.8
 
 `2019-11-28`
@@ -344,8 +387,8 @@
 
 1.3.0 brings two new Components, a lot of exciting changes and new features.
 
-- 🔥 Added a new component [Comment](https://vue.ant.design/components/comment/)。
-- 🔥 dded a new component [ConfigProvider](https://vue.ant.design/components/config-provider/) for user to customize some global setting.
+- 🔥 Added a new component [Comment](https://www.antdv.com/components/comment/)。
+- 🔥 dded a new component [ConfigProvider](https://www.antdv.com/components/config-provider/) for user to customize some global setting.
 
 Component Fixes / Enhancements:
 

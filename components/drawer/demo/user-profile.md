@@ -25,7 +25,7 @@ Use when you need to quickly preview the outline of the object. Such as list ite
       <a-list-item slot="renderItem" slot-scope="item, index">
         <a slot="actions" @click="showDrawer">View Profile</a>
         <a-list-item-meta description="Progresser AFX">
-          <a slot="title" href="https://vue.ant.design/">{{item.name}}</a>
+          <a slot="title" href="https://www.antdv.com/">{{item.name}}</a>
           <a-avatar
             slot="avatar"
             src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"

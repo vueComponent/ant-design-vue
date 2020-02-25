@@ -14,6 +14,7 @@ import {
   mergeProps,
   getComponentFromProp,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 
@@ -131,11 +132,12 @@ export default function createPicker(TheCalendar, props) {
     },
 
     render() {
-      const { $listeners, $scopedSlots } = this;
+      const { $scopedSlots } = this;
       const { sValue: value, showDate, _open: open } = this.$data;
       let suffixIcon = getComponentFromProp(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
-      const { panelChange = noop, focus = noop, blur = noop, ok = noop } = $listeners;
+      const listeners = getListeners(this);
+      const { panelChange = noop, focus = noop, blur = noop, ok = noop } = listeners;
       const props = getOptionProps(this);
 
       const { prefixCls: customizePrefixCls, locale, localeCode } = props;
@@ -243,7 +245,7 @@ export default function createPicker(TheCalendar, props) {
           prefixCls: `${prefixCls}-picker-container`,
         },
         on: {
-          ...omit($listeners, 'change'),
+          ...omit(listeners, 'change'),
           ...pickerProps.on,
           open,
           onOpenChange: this.handleOpenChange,

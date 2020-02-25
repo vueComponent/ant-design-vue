@@ -7,7 +7,13 @@ import omit from 'lodash/omit';
 import createFieldsStore from './createFieldsStore';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, getEvents, slotHasProp, getComponentName } from '../../_util/props-util';
+import {
+  getOptionProps,
+  getEvents,
+  slotHasProp,
+  getComponentName,
+  getListeners,
+} from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
 
 import {
@@ -704,7 +710,7 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       render() {
-        const { $listeners, $slots } = this;
+        const { $slots } = this;
         const formProps = {
           [formPropName]: this.getForm(),
         };
@@ -714,7 +720,7 @@ function createBaseForm(option = {}, mixins = []) {
             ...formProps,
             ...restProps,
           }),
-          on: $listeners,
+          on: getListeners(this),
           ref: 'WrappedComponent',
           directives: [
             {

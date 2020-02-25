@@ -9,6 +9,7 @@ import {
   getOptionProps,
   filterEmpty,
   isValidElement,
+  getListeners,
 } from '../_util/props-util';
 import Base from '../base';
 
@@ -69,11 +70,12 @@ const AutoComplete = {
     savePopupRef(ref) {
       this.popupRef = ref;
     },
+
     getInputElement() {
-      const { $slots } = this;
+      const { $slots, placeholder } = this;
       const children = filterEmpty($slots.default);
-      const element = children.length ? children[0] : <Input />;
-      return <InputElement>{element}</InputElement>;
+      const element = children.length ? children[0] : <Input lazy={false} />;
+      return <InputElement placeholder={placeholder}>{element}</InputElement>;
     },
 
     focus() {
@@ -90,14 +92,7 @@ const AutoComplete = {
   },
 
   render() {
-    const {
-      size,
-      prefixCls: customizePrefixCls,
-      optionLabelProp,
-      dataSource,
-      $slots,
-      $listeners,
-    } = this;
+    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $slots } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
@@ -139,10 +134,11 @@ const AutoComplete = {
         optionLabelProp,
         getInputElement: this.getInputElement,
         notFoundContent: getComponentFromProp(this, 'notFoundContent'),
+        placeholder: '',
       },
       class: cls,
       ref: 'select',
-      on: $listeners,
+      on: getListeners(this),
     };
     return <Select {...selectProps}>{options}</Select>;
   },

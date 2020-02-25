@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import debounce from 'lodash/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
-import { filterEmpty, getEvents, getPropsData } from '../_util/props-util';
+import { filterEmpty, getEvents, getPropsData, getListeners } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 
 export default {
@@ -111,7 +111,7 @@ export default {
     const stepsProps = {
       class: classString,
       ref: 'vcStepsRef',
-      on: this.$listeners,
+      on: getListeners(this),
     };
     return (
       <div {...stepsProps}>

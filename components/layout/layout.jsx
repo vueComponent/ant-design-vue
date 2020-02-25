@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const BasicProps = {
@@ -27,7 +27,7 @@ function generator(props, name) {
             prefixCls,
             ...getOptionProps(this),
           },
-          on: this.$listeners,
+          on: getListeners(this),
         };
         return <BasicComponent {...basicComponentProps}>{this.$slots.default}</BasicComponent>;
       },
@@ -38,10 +38,10 @@ function generator(props, name) {
 const Basic = {
   props: BasicProps,
   render() {
-    const { prefixCls, $slots, $listeners } = this;
+    const { prefixCls, $slots } = this;
     const divProps = {
       class: prefixCls,
-      on: $listeners,
+      on: getListeners(this),
     };
     return <div {...divProps}>{$slots.default}</div>;
   },
@@ -67,13 +67,13 @@ const BasicLayout = {
     };
   },
   render() {
-    const { prefixCls, $slots, hasSider, $listeners } = this;
+    const { prefixCls, $slots, hasSider } = this;
     const divCls = classNames(prefixCls, {
       [`${prefixCls}-has-sider`]: hasSider || this.siders.length > 0,
     });
     const divProps = {
       class: divCls,
-      on: $listeners,
+      on: getListeners,
     };
     return <div {...divProps}>{$slots.default}</div>;
   },

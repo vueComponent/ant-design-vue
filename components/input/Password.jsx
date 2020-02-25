@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { getComponentFromProp, getOptionProps } from '../_util/props-util';
+import { getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
 import Input from './Input';
 import Icon from '../icon';
 import inputProps from './inputProps';
@@ -14,6 +14,7 @@ const ActionMap = {
 export default {
   name: 'AInputPassword',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   model: {
     prop: 'value',
     event: 'change.value',
@@ -31,6 +32,12 @@ export default {
     };
   },
   methods: {
+    focus() {
+      this.$refs.input.focus();
+    },
+    blur() {
+      this.$refs.input.blur();
+    },
     onChange() {
       this.setState({
         visible: !this.visible,
@@ -85,7 +92,8 @@ export default {
         type: this.visible ? 'text' : 'password',
       },
       class: inputClassName,
-      on: this.$listeners,
+      ref: 'input',
+      on: getListeners(this),
     };
     return <Input {...inputProps} />;
   },

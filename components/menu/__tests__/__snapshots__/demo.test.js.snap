@@ -24,7 +24,7 @@ exports[`renders ./components/menu/demo/horizontal.md correctly 1`] = `
     <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" style="display: none;">
       <div aria-haspopup="true" class="ant-menu-submenu-title"><span>···</span><i class="ant-menu-submenu-arrow"></i></div>
     </li>
-    <li role="menuitem" class="ant-menu-item"><a href="https://ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a></li>
+    <li role="menuitem" class="ant-menu-item"><a href="https://antdv.com" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a></li>
     <li role="menuitem" class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" style="visibility: hidden; position: absolute; display: none;">
       <div aria-haspopup="true" class="ant-menu-submenu-title"><span>···</span><i class="ant-menu-submenu-arrow"></i></div>
     </li>

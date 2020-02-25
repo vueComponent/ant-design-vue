@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, getListeners } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import Icon from '../icon';
@@ -111,7 +111,7 @@ export default {
         class: {
           mini: isSmall,
         },
-        on: this.$listeners,
+        on: getListeners(this),
       };
 
       return <VcPagination {...paginationProps} />;

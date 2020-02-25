@@ -218,7 +218,10 @@ describe('Radio', () => {
   });
 
   it('passes prefixCls down to radio', () => {
-    const options = [{ label: 'Apple', value: 'Apple' }, { label: 'Orange', value: 'Orange' }];
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Orange', value: 'Orange' },
+    ];
 
     const wrapper = mount(RadioGroup, {
       propsData: {

@@ -8,7 +8,7 @@ import createDOMForm from '../vc-form/src/createDOMForm';
 import createFormField from '../vc-form/src/createFormField';
 import FormItem from './FormItem';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
-import { initDefaultProps } from '../_util/props-util';
+import { initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
@@ -192,8 +192,7 @@ const Form = {
   },
   methods: {
     onSubmit(e) {
-      const { $listeners } = this;
-      if (!$listeners.submit) {
+      if (!getListeners(this).submit) {
         e.preventDefault();
       } else {
         this.$emit('submit', e);

@@ -1,40 +1,3 @@
-```jsx
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
-  },
-  {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street',
-  },
-];
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-];
-
-<Table dataSource={dataSource} columns={columns} />;
-```
-
 ## API
 
 ### Table
@@ -43,7 +6,7 @@ const columns = [
 | --- | --- | --- | --- |
 | bordered | Whether to show all table borders | boolean | `false` |
 | childrenColumnName | The column contains children to display | string\[] | children |
-| columns | Columns of table | array | - |
+| columns | Columns of table [config](#Column) | array | - |
 | components | Override default table elements | object | - |
 | dataSource | Data record array to be displayed | any\[] | - |
 | defaultExpandAllRows | Expand all rows initially | boolean | `false` |

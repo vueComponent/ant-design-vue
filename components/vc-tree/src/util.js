@@ -49,8 +49,8 @@ export function getNodeChildren(children = []) {
 }
 
 export function isCheckDisabled(node) {
-  const { disabled, disableCheckbox } = getOptionProps(node) || {};
-  return !!(disabled || disableCheckbox);
+  const { disabled, disableCheckbox, checkable } = getOptionProps(node) || {};
+  return !!(disabled || disableCheckbox) || checkable === false;
 }
 
 export function traverseTreeNodes(treeNodes, callback) {
@@ -116,7 +116,8 @@ export function calcDropPosition(event, treeNode) {
 
   if (clientY <= top + des) {
     return -1;
-  } else if (clientY >= bottom - des) {
+  }
+  if (clientY >= bottom - des) {
     return 1;
   }
   return 0;
@@ -162,13 +163,13 @@ const internalProcessProps = (props = {}) => {
     key: props.key,
   };
 };
-export function convertDataToTree(h, treeData, processer) {
+export function convertDataToTree(h, treeData, processor) {
   if (!treeData) return [];
 
-  const { processProps = internalProcessProps } = processer || {};
+  const { processProps = internalProcessProps } = processor || {};
   const list = Array.isArray(treeData) ? treeData : [treeData];
   return list.map(({ children, ...props }) => {
-    const childrenNodes = convertDataToTree(h, children, processer);
+    const childrenNodes = convertDataToTree(h, children, processor);
     return <TreeNode {...processProps(props)}>{childrenNodes}</TreeNode>;
   });
 }
@@ -398,8 +399,8 @@ export function conductExpandParent(keyList, keyEntities) {
     expandedKeys.set(key, true);
 
     const { parent, node } = entity;
-
-    if (isCheckDisabled(node)) return;
+    const props = getOptionProps(node);
+    if (props && props.disabled) return;
 
     if (parent) {
       conductUp(parent.key);

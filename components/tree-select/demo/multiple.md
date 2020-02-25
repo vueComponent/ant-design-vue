@@ -12,7 +12,7 @@ Multiple selection usage.
 <template>
   <a-tree-select
     showSearch
-    style="width: 300px"
+    style="width: 100%"
     :value="value"
     :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
     placeholder="Please select"

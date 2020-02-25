@@ -11,10 +11,9 @@ Multiple and checkable.
 ```tpl
 <template>
   <a-tree-select
-    style="width: 300px"
+    style="width: 100%"
     :treeData="treeData"
-    :value="value"
-    @change="onChange"
+    v-model="value"
     treeCheckable
     :showCheckedStrategy="SHOW_PARENT"
     searchPlaceholder="Please select"
@@ -69,12 +68,6 @@ Multiple and checkable.
         treeData,
         SHOW_PARENT,
       };
-    },
-    methods: {
-      onChange(value) {
-        console.log('onChange ', value);
-        this.value = value;
-      },
     },
   };
 </script>

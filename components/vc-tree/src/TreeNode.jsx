@@ -39,6 +39,7 @@ const TreeNode = {
 
       // By user
       isLeaf: PropTypes.bool,
+      checkable: PropTypes.bool,
       selectable: PropTypes.bool,
       disabled: PropTypes.bool,
       disableCheckbox: PropTypes.bool,
@@ -69,10 +70,22 @@ const TreeNode = {
 
   // Isomorphic needn't load data in server side
   mounted() {
+    const {
+      eventKey,
+      vcTree: { registerTreeNode },
+    } = this;
     this.syncLoadData(this.$props);
+    registerTreeNode && registerTreeNode(eventKey, this);
   },
   updated() {
     this.syncLoadData(this.$props);
+  },
+  beforeDestroy() {
+    const {
+      eventKey,
+      vcTree: { registerTreeNode },
+    } = this;
+    registerTreeNode && registerTreeNode(eventKey, null);
   },
 
   methods: {
@@ -111,10 +124,10 @@ const TreeNode = {
 
       const { disableCheckbox, checked } = this;
       const {
-        vcTree: { checkable, onNodeCheck },
+        vcTree: { onNodeCheck },
       } = this;
 
-      if (!checkable || disableCheckbox) return;
+      if (!this.isCheckable() || disableCheckbox) return;
 
       e.preventDefault();
       const targetChecked = !checked;
@@ -275,18 +288,15 @@ const TreeNode = {
       return !!(treeDisabled || disabled);
     },
 
-    isSelectable() {
-      const { selectable } = this;
+    isCheckable() {
+      const { checkable } = this.$props;
       const {
-        vcTree: { selectable: treeSelectable },
+        vcTree: { checkable: treeCheckable },
       } = this;
 
-      // Ignore when selectable is undefined or null
-      if (typeof selectable === 'boolean') {
-        return selectable;
-      }
-
-      return treeSelectable;
+      // Return false if tree or treeNode is not checkable
+      if (!treeCheckable || checkable === false) return false;
+      return treeCheckable;
     },
 
     // Load data to avoid default expanded tree without data
@@ -307,6 +317,20 @@ const TreeNode = {
       }
     },
 
+    isSelectable() {
+      const { selectable } = this;
+      const {
+        vcTree: { selectable: treeSelectable },
+      } = this;
+
+      // Ignore when selectable is undefined or null
+      if (typeof selectable === 'boolean') {
+        return selectable;
+      }
+
+      return treeSelectable;
+    },
+
     // Switcher
     renderSwitcher() {
       const { expanded } = this;
@@ -323,7 +347,7 @@ const TreeNode = {
             class={classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher-noop`)}
           >
             {typeof switcherIcon === 'function'
-              ? cloneElement(switcherIcon({ ...this.$props, isLeaf: true }))
+              ? switcherIcon({ ...this.$props, isLeaf: true })
               : switcherIcon}
           </span>
         );
@@ -336,7 +360,7 @@ const TreeNode = {
       return (
         <span key="switcher" onClick={this.onExpand} class={switcherCls}>
           {typeof switcherIcon === 'function'
-            ? cloneElement(switcherIcon({ ...this.$props, isLeaf: false }))
+            ? switcherIcon({ ...this.$props, isLeaf: false })
             : switcherIcon}
         </span>
       );
@@ -346,9 +370,10 @@ const TreeNode = {
     renderCheckbox() {
       const { checked, halfChecked, disableCheckbox } = this;
       const {
-        vcTree: { prefixCls, checkable },
+        vcTree: { prefixCls },
       } = this;
       const disabled = this.isDisabled();
+      const checkable = this.isCheckable();
 
       if (!checkable) return null;
 

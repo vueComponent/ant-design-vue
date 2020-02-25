@@ -12,13 +12,12 @@ The most basic usage.
 <template>
   <a-tree-select
     showSearch
-    style="width: 300px"
-    :value="value"
+    style="width: 100%"
+    v-model="value"
     :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
     placeholder="Please select"
     allowClear
     treeDefaultExpandAll
-    @change="onChange"
   >
     <a-icon slot="suffixIcon" type="smile" />
     <a-tree-select-node value="parent 1" title="parent 1" key="0-1">
@@ -41,12 +40,6 @@ The most basic usage.
       return {
         value: undefined,
       };
-    },
-    methods: {
-      onChange(value) {
-        console.log(value);
-        this.value = value;
-      },
     },
   };
 </script>

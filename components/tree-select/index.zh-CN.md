@@ -56,13 +56,14 @@
 
 > 建议使用 treeData 来代替 TreeNode，免去手工构造麻烦
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| selectable | 是否可选 | boolean | true |
-| disableCheckbox | 禁掉 checkbox | boolean | false |
-| disabled | 是否禁用 | boolean | false |
-| isLeaf | 是否是叶子节点 | boolean | false |
-| key | 此项必须设置（其值在整个树范围内唯一） | string \| number | - |
-| title | 树节点显示的内容 | string\|slot | '---' |
-| value | 默认根据此属性值进行筛选（其值在整个树范围内唯一） | string | - |
-| scopedSlots | 使用 treeData 时，可以通过该属性配置支持 slot 的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| selectable | 是否可选 | boolean | true |  |
+| checkable | 当树为 checkable 时，设置独立节点是否展示 Checkbox | boolean | - | 1.5.0 |
+| disableCheckbox | 禁掉 checkbox | boolean | false |  |
+| disabled | 是否禁用 | boolean | false |  |
+| isLeaf | 是否是叶子节点 | boolean | false |  |
+| key | 此项必须设置（其值在整个树范围内唯一） | string \| number | - |  |
+| title | 树节点显示的内容 | string\|slot | '---' |  |
+| value | 默认根据此属性值进行筛选（其值在整个树范围内唯一） | string | - |  |
+| scopedSlots | 使用 treeData 时，可以通过该属性配置支持 slot 的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |  |

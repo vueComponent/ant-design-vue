@@ -56,13 +56,20 @@
 
 > We recommend you to use `treeData` rather than `TreeNode`, to avoid the trouble of manual construction.
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| selectable | can be selected | boolean | true |
-| disableCheckbox | Disables the checkbox of the treeNode | boolean | false |
-| disabled | Disabled or not | boolean | false |
-| isLeaf | Leaf node or not | boolean | false |
-| key | Required property, should be unique in the tree | string \| number | - |
-| title | Content showed on the treeNodes | string\|slot | '---' |
-| value | Will be treated as `treeNodeFilterProp` by default, should be unique in the tree | string | - |
-| scopedSlots | When using treeNodes, you can use this property to configure the properties that support the slot, such as `scopedSlots: { title: 'XXX'}` | object | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| selectable | can be selected | boolean | true |  |
+| checkable | When Tree is checkable, set TreeNode display Checkbox or not | boolean | - | 1.5.0 |
+| disableCheckbox | Disables the checkbox of the treeNode | boolean | false |  |
+| disabled | Disabled or not | boolean | false |  |
+| isLeaf | Leaf node or not | boolean | false |  |
+| key | Required property, should be unique in the tree | string \| number | - |  |
+| title | Content showed on the treeNodes | string\|slot | '---' |  |
+| value | Will be treated as `treeNodeFilterProp` by default, should be unique in the tree | string | - |  |
+| scopedSlots | When using treeNodes, you can use this property to configure the properties that support the slot, such as `scopedSlots: { title: 'XXX'}` | object | - |  |
+
+## FAQ
+
+### How to get parent node in onChange?
+
+We don't provide this since performance consideration.

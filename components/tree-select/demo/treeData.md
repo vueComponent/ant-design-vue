@@ -11,7 +11,7 @@ The tree structure can be populated using `treeData` property. This is a quick a
 ```tpl
 <template>
   <a-tree-select
-    style="width: 300px"
+    style="width: 100%"
     :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
     :treeData="treeData"
     placeholder="Please select"

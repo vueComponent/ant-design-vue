@@ -29,32 +29,16 @@ export default {
   subtitle: '树选择',
   type: 'Data Entry',
   title: 'TreeSelect',
-  data() {
-    return {
-      show: true,
-    };
-  },
   render() {
     return (
       <div>
-        <button
-          onClick={() => {
-            this.show = !this.show;
-          }}
-        >
-          show
-        </button>
         <md cn={md.cn} us={md.us} />
-        {this.show ? (
-          <div>
-            <Basic />
-            <Checkable />
-            <Multiple />
-            <TreeData />
-            <Suffix />
-            <Async />
-          </div>
-        ) : null}
+        <Basic />
+        <Checkable />
+        <Multiple />
+        <TreeData />
+        <Suffix />
+        <Async />
         <api>
           <template slot="cn">
             <CN />

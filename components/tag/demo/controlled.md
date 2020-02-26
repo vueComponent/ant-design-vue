@@ -15,7 +15,7 @@ By using the `visible` prop, you can control the close state of Tag.
       Movies
     </a-tag>
     <br />
-    <a-button size="small" @click="()=>{this.visible = !this.visible}">
+    <a-button size="small" @click="visible = !visible">
       Toggle
     </a-button>
   </div>

@@ -11,7 +11,7 @@ Select your favourite topics.
 ```tpl
 <template>
   <div>
-    <strong :style="{ marginRight: 8 }">Categories:</strong>
+    <span :style="{ marginRight: 8 }">Categories:</span>
     <template v-for=" tag in tags">
       <a-checkable-tag
         :key="tag"

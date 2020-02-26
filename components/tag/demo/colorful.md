@@ -5,8 +5,7 @@
 
 <us>
 #### Colorful Tag
-We preset a series of colorful tag style for different situation usage.
-And you can always set it to a hex color string for custom color.
+We preset a series of colorful tag styles for use in different situations. You can also set it to a hex color string for custom color.
 </us>
 
 ```tpl

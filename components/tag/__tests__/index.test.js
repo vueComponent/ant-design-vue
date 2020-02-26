@@ -1,8 +1,11 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Tag from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Tag', () => {
+  mountTest(Tag);
+  mountTest(Tag.CheckableTag);
   it('should be closable', async () => {
     const onClose = jest.fn();
     const wrapper = mount(

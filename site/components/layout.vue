@@ -34,7 +34,7 @@ const isGitee = window.location.host.indexOf('gitee.io') > -1;
 enquireScreen(b => {
   isMobile = b;
 });
-
+const showAd = location.host.indexOf('antdv.com') > -1;
 export default {
   props: {
     name: String,
@@ -296,9 +296,9 @@ export default {
               )}
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class="main-container main-container-component">
-                  <GoogleAdsTop key={`GoogleAdsTop_${$route.path}`} />
+                  {showAd ? <GoogleAdsTop key={`GoogleAdsTop_${$route.path}`} /> : null}
                   {!isMobile ? <CarbonAds /> : null}
-                  <GeektimeAds isMobile={isMobile} />
+                  {showAd ? <GeektimeAds isMobile={isMobile} /> : null}
                   {!isMobile ? (
                     <div class={['toc-affix', isCN ? 'toc-affix-cn' : '']} style="width: 150px;">
                       {this.getSubMenu(isCN)}

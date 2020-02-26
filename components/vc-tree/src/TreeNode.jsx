@@ -46,7 +46,6 @@ const TreeNode = {
       icon: PropTypes.any,
       dataRef: PropTypes.object,
       switcherIcon: PropTypes.any,
-
       label: PropTypes.any,
       value: PropTypes.any,
     },
@@ -416,7 +415,8 @@ const TreeNode = {
 
     // Icon + Title
     renderSelector(h) {
-      const { selected, icon, loading, dragNodeHighlight } = this;
+      const { selected, loading, dragNodeHighlight } = this;
+      const icon = getComponentFromProp(this, 'icon');
       const {
         vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData },
       } = this;

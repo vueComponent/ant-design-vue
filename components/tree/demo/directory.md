@@ -24,8 +24,8 @@ Built-in directory tree. `multiple` support `ctrl(Windows)` / `command(Mac)` sel
 <script>
   export default {
     methods: {
-      onSelect(keys) {
-        console.log('Trigger Select', keys);
+      onSelect(keys, event) {
+        console.log('Trigger Select', keys, event);
       },
       onExpand() {
         console.log('Trigger Expand');

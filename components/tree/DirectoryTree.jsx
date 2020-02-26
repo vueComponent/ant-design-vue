@@ -4,7 +4,12 @@ import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
 import Tree, { TreeProps } from './Tree';
-import { calcRangeKeys, getFullKeyList } from './util';
+import {
+  calcRangeKeys,
+  getFullKeyList,
+  convertDirectoryKeysToNodes,
+  getFullKeyListByTreeData,
+} from './util';
 import Icon from '../icon';
 import BaseMixin from '../_util/BaseMixin';
 import {
@@ -64,7 +69,11 @@ export default {
 
     // Expanded keys
     if (defaultExpandAll) {
-      state._expandedKeys = getFullKeyList(this.$slots.default);
+      if (props.treeData) {
+        state._expandedKeys = getFullKeyListByTreeData(props.treeData);
+      } else {
+        state._expandedKeys = getFullKeyList(this.$slots.default);
+      }
     } else if (defaultExpandParent) {
       state._expandedKeys = conductExpandParent(expandedKeys || defaultExpandedKeys, keyEntities);
     } else {
@@ -125,6 +134,13 @@ export default {
       const { eventKey = '' } = node;
 
       const newState = {};
+
+      // We need wrap this event since some value is not same
+      const newEvent = {
+        ...event,
+        selected: true, // Directory selected always true
+      };
+
       // Windows / Mac single pick
       const ctrlPick = nativeEvent.ctrlKey || nativeEvent.metaKey;
       const shiftPick = nativeEvent.shiftKey;
@@ -136,6 +152,7 @@ export default {
         newSelectedKeys = keys;
         this.lastSelectedKey = eventKey;
         this.cachedSelectedKeys = newSelectedKeys;
+        newEvent.selectedNodes = convertDirectoryKeysToNodes(children, newSelectedKeys);
       } else if (multiple && shiftPick) {
         // Shift click
         newSelectedKeys = Array.from(
@@ -144,16 +161,18 @@ export default {
             ...calcRangeKeys(children, expandedKeys, eventKey, this.lastSelectedKey),
           ]),
         );
+        newEvent.selectedNodes = convertDirectoryKeysToNodes(children, newSelectedKeys);
       } else {
         // Single click
         newSelectedKeys = [eventKey];
         this.lastSelectedKey = eventKey;
         this.cachedSelectedKeys = newSelectedKeys;
+        newEvent.selectedNodes = [event.node];
       }
       newState._selectedKeys = newSelectedKeys;
 
       this.$emit('update:selectedKeys', newSelectedKeys);
-      this.$emit('select', newSelectedKeys, event);
+      this.$emit('select', newSelectedKeys, newEvent);
 
       this.setUncontrolledState(newState);
     },

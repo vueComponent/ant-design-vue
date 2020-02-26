@@ -4,8 +4,8 @@
 </cn>
 
 <us>
-#### basic controlled example
-basic controlled example
+#### Controlled Tree
+Controlled mode lets parent nodes reflect the status of child nodes more intelligently.
 </us>
 
 ```tpl

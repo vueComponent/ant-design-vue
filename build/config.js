@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'tree-select', // dev components
+    componentName: 'tree', // dev components
   },
 };

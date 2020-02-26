@@ -14,7 +14,7 @@ function traverseNodesKey(rootChildren, callback) {
   function processNode(node) {
     const { key } = node;
     const children = getSlots(node).default;
-    if (callback(key) !== false) {
+    if (callback(key, node) !== false) {
       traverseNodesKey(typeof children === 'function' ? children() : children, callback);
     }
   }
@@ -70,5 +70,32 @@ export function calcRangeKeys(rootChildren, expandedKeys, startKey, endKey) {
     return true;
   });
 
+  return keys;
+}
+
+export function convertDirectoryKeysToNodes(rootChildren, keys) {
+  const restKeys = [...keys];
+  const nodes = [];
+  traverseNodesKey(rootChildren, (key, node) => {
+    const index = restKeys.indexOf(key);
+    if (index !== -1) {
+      nodes.push(node);
+      restKeys.splice(index, 1);
+    }
+
+    return !!restKeys.length;
+  });
+  return nodes;
+}
+
+export function getFullKeyListByTreeData(treeData) {
+  let keys = [];
+
+  (treeData || []).forEach(item => {
+    keys.push(item.key);
+    if (item.children) {
+      keys = [...keys, ...getFullKeyListByTreeData(item.children)];
+    }
+  });
   return keys;
 }

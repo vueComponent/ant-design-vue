@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'tooltip', // dev components
+    componentName: 'timeline', // dev components
   },
 };

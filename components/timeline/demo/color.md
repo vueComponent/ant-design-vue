@@ -23,6 +23,16 @@ Set the color of circles. `green` means completed or success status, `red` means
       <p>Technical testing 2</p>
       <p>Technical testing 3 2015-09-01</p>
     </a-timeline-item>
+    <a-timeline-item color="gray">
+      <p>Technical testing 1</p>
+      <p>Technical testing 2</p>
+      <p>Technical testing 3 2015-09-01</p>
+    </a-timeline-item>
+    <a-timeline-item color="gray">
+      <p>Technical testing 1</p>
+      <p>Technical testing 2</p>
+      <p>Technical testing 3 2015-09-01</p>
+    </a-timeline-item>
   </a-timeline>
 </template>
 ```

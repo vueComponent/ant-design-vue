@@ -1,12 +1,12 @@
 ## API
 
 ```html
-<Timeline>
-  <Timeline.Item>step1 2015-09-01</Timeline.Item>
-  <Timeline.Item>step2 2015-09-01</Timeline.Item>
-  <Timeline.Item>step3 2015-09-01</Timeline.Item>
-  <Timeline.Item>step4 2015-09-01</Timeline.Item>
-</Timeline>
+<a-timeline>
+  <a-timeline-item>step1 2015-09-01</a-timeline-item>
+  <a-timeline-item>step2 2015-09-01</a-timeline-item>
+  <a-timeline-item>step3 2015-09-01</a-timeline-item>
+  <a-timeline-item>step4 2015-09-01</a-timeline-item>
+</a-timeline>
 ```
 
 ### Timeline
@@ -24,7 +24,8 @@ Timeline
 
 Node of timeline
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| color | Set the circle's color to `blue`, `red`, `green` or other custom colors | string | `blue` |
-| dot | Customize timeline dot | string\|slot | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| color | Set the circle's color to `blue`, `red`, `green` or other custom colors | string | `blue` |  |
+| dot | Customize timeline dot | string\|slot | - |  |
+| position | Customize node position | `left` \| `right` | - | 1.5.0 |

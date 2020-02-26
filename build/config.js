@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'tag', // dev components
+    componentName: 'tooltip', // dev components
   },
 };

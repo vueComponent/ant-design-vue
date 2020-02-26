@@ -5,7 +5,7 @@
 
 <us>
 #### Placement
-The ToolTip has 12 placements choice.
+There are 12 placement options available.
 </us>
 
 ```tpl

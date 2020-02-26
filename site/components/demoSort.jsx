@@ -11,7 +11,7 @@ export default {
   props: {
     cols: {
       type: [Number, String],
-      default: 1,
+      default: 2,
     },
   },
   inject: {

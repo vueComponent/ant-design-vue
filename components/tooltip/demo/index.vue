@@ -37,15 +37,12 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <br />
-        <Basic />
-        <br />
-        <Placement />
-        <br />
-        <ArrowPointAtCenter />
-        <br />
-        <AutoAdjustOverflow />
-        <br />
+        <demo-sort cols="2">
+          <Basic />
+          <Placement />
+          <ArrowPointAtCenter />
+          <AutoAdjustOverflow />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

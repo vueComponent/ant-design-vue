@@ -8,6 +8,7 @@ import Line from './line';
 import Search from './search';
 import Directory from './directory';
 import ReplaceFields from './replaceFields';
+import SwitcherIcon from './switcher-icon';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -45,6 +46,7 @@ export default {
         <Line />
         <Search />
         <Directory />
+        <SwitcherIcon />
         <api>
           <template slot="cn">
             <CN />

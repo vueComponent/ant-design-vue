@@ -329,7 +329,7 @@ export default {
                           ],
                         }}
                       ></router-view>
-                      <GoogleAds key={`GoogleAds_${$route.path}`} />
+                      {showAd ? <GoogleAds key={`GoogleAds_${$route.path}`} /> : null}
                     </div>
                   ) : (
                     ''

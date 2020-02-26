@@ -29,11 +29,7 @@ const docsList = [
   { key: 'download', enTitle: 'Download Design Resources', title: '下载设计资源' },
 ];
 
-let isMobile = false;
 const isGitee = window.location.host.indexOf('gitee.io') > -1;
-enquireScreen(b => {
-  isMobile = b;
-});
 const showAd = location.host.indexOf('antdv.com') > -1;
 export default {
   props: {
@@ -50,7 +46,7 @@ export default {
       showSideBars: true,
       currentSubMenu: [],
       sidebarHeight: document.documentElement.offsetHeight,
-      isMobile,
+      isMobile: false,
     };
   },
   provide() {

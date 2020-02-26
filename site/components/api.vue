@@ -9,10 +9,10 @@
 import { isZhCN } from '../util';
 import GoogleAds from './GoogleAds';
 export default {
+  name: 'Api',
   components: {
     GoogleAds,
   },
-  name: 'Api',
   inject: {
     demoContext: { default: {} },
   },

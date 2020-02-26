@@ -28,7 +28,6 @@ let { componentName } = require('./config').dev;
 const componentsInPrototype = ['Modal', 'message', 'notification'];
 
 const MAIN_TEMPLATE = `import 'babel-polyfill';
-import './index.less';
 import 'highlight.js/styles/solarized-light.css';
 import Vue from 'vue';
 import Vuex from 'vuex';
@@ -38,6 +37,7 @@ import VueClipboard from 'vue-clipboard2';
 import Md from './components/md';
 import Api from './components/api';
 import demoBox from './components/demoBox';
+import demoSort from './components/demoSort';
 import demoContainer from './components/demoContainer';
 import Modal from '../components/modal';
 import message from '../components/message';
@@ -50,6 +50,7 @@ import '../components/notification/style';
 import Test from '../components/{{name}}/demo/index.vue';
 import zhCN from './theme/zh-CN';
 import enUS from './theme/en-US';
+import './index.less';
 
 Vue.use(Vuex);
 Vue.use(VueClipboard);
@@ -58,6 +59,7 @@ Vue.use(VueI18n);
 Vue.component(Md.name, Md);
 Vue.component(Api.name, Api);
 Vue.component('demo-box', demoBox);
+Vue.component('demo-sort', demoSort);
 Vue.component('demo-container', demoContainer);
 
 Vue.prototype.$message = message;

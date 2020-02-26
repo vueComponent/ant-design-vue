@@ -37,16 +37,18 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <BasicControlled />
-        <Basic />
-        <ReplaceFields />
-        <CustomizedIcon />
-        <Draggable />
-        <Dynamic />
-        <Line />
-        <Search />
-        <Directory />
-        <SwitcherIcon />
+        <demo-sort cols="2">
+          <BasicControlled />
+          <Basic />
+          <ReplaceFields />
+          <CustomizedIcon />
+          <Draggable />
+          <Dynamic />
+          <Line />
+          <Search />
+          <Directory />
+          <SwitcherIcon />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

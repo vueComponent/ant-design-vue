@@ -106,6 +106,7 @@ export default {
       sourceCode,
       id,
       iframeDemoKey,
+      isDemo: true,
     };
   },
   methods: {

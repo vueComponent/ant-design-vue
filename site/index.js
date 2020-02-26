@@ -15,6 +15,7 @@ import Api from './components/api';
 import './components';
 import demoBox from './components/demoBox';
 import demoContainer from './components/demoContainer';
+import demoSort from './components/demoSort';
 import zhCN from './theme/zh-CN';
 import enUS from './theme/en-US';
 import { isZhCN } from './util';
@@ -38,6 +39,7 @@ Vue.component(Md.name, Md);
 Vue.component(Api.name, Api);
 Vue.component('demo-box', demoBox);
 Vue.component('demo-container', demoContainer);
+Vue.component('demo-sort', demoSort);
 
 const i18n = new VueI18n({
   locale: isZhCN(location.pathname) ? zhCN.locale : enUS.locale,

@@ -497,29 +497,65 @@ exports[`renders ./components/tabs/demo/slide.md correctly 1`] = `
           <div class="ant-tabs-nav-scroll">
             <div class="ant-tabs-nav ant-tabs-nav-animated">
               <div>
-                <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab-active ant-tabs-tab">Tab 1</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 2</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 3</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 4</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 5</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 6</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 7</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 8</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 9</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 10</div>
-                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab 11</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-1</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-2</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-3</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-4</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-5</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-6</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-7</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-8</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-9</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-10</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-11</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-12</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-13</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-14</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-15</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-16</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-17</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-18</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-19</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-20</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-21</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-22</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-23</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-24</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-25</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-26</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-27</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-28</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-29</div>
+                <div role="tab" aria-disabled="false" aria-selected="false" class=" ant-tabs-tab">Tab-30</div>
               </div>
-              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: block; transform: translate3d(0px,0,0); webkit-transform: translate3d(0px,0,0); width: 0px;"></div>
+              <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="display: none;"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
-      <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
-        <div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>Content of tab 1<div tabindex="0" role="presentation" style="width: 0px; height: 0px; overflow: hidden; position: absolute;"></div>
-      </div>
+    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="display: none;">
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
+      <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
       <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
       <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>
       <div role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive"></div>

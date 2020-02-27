@@ -29,8 +29,10 @@ export function setTransform(style, v) {
   style.mozTransform = v;
 }
 
-export function isTransformSupported(style) {
-  return 'transform' in style || 'webkitTransform' in style || 'MozTransform' in style;
+export function isTransform3dSupported(style) {
+  return (
+    ('transform' in style || 'webkitTransform' in style || 'MozTransform' in style) && window.atob
+  );
 }
 
 export function setTransition(style, v) {
@@ -50,8 +52,11 @@ export function isVertical(tabBarPosition) {
   return tabBarPosition === 'left' || tabBarPosition === 'right';
 }
 
-export function getTransformByIndex(index, tabBarPosition) {
+export function getTransformByIndex(index, tabBarPosition, direction = 'ltr') {
   const translate = isVertical(tabBarPosition) ? 'translateY' : 'translateX';
+  if (!isVertical(tabBarPosition) && direction === 'rtl') {
+    return `${translate}(${index * 100}%) translateZ(0)`;
+  }
   return `${translate}(${-index * 100}%) translateZ(0)`;
 }
 

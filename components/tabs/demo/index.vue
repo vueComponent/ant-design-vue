@@ -53,17 +53,19 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Disabled />
-        <Icon />
-        <Slide />
-        <Extra />
-        <Size />
-        <Position />
-        <Card />
-        <EditableCard />
-        <CardTop />
-        <CustomAddTrigger />
+        <demo-sort>
+          <Basic />
+          <Disabled />
+          <Icon />
+          <Slide />
+          <Extra />
+          <Size />
+          <Position />
+          <Card />
+          <EditableCard />
+          <CardTop />
+          <CustomAddTrigger />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

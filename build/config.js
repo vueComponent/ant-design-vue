@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'time-picker', // dev components
+    componentName: 'tabs', // dev components
   },
 };

@@ -1,9 +1,16 @@
 import PropTypes from '../../_util/vue-types';
-import { setTransform, isTransformSupported, getLeft, getTop, getActiveIndex } from './utils';
+import {
+  setTransform,
+  isTransform3dSupported,
+  getLeft,
+  getStyle,
+  getTop,
+  getActiveIndex,
+} from './utils';
 import BaseMixin from '../../_util/BaseMixin';
 
 function componentDidUpdate(component, init) {
-  const { styles = {}, panels, activeKey } = component.$props;
+  const { styles = {}, panels, activeKey, direction } = component.$props;
   const rootNode = component.getRef('root');
   const wrapNode = component.getRef('nav') || rootNode;
   const inkBarNode = component.getRef('inkBar');
@@ -17,7 +24,7 @@ function componentDidUpdate(component, init) {
   }
   if (activeTab) {
     const tabNode = activeTab;
-    const transformSupported = isTransformSupported(inkBarNodeStyle);
+    const transformSupported = isTransform3dSupported(inkBarNodeStyle);
 
     // Reset current style
     setTransform(inkBarNodeStyle, '');
@@ -41,6 +48,9 @@ function componentDidUpdate(component, init) {
         if (width) {
           left += (tabNode.offsetWidth - width) / 2;
         }
+      }
+      if (direction === 'rtl') {
+        left = getStyle(tabNode, 'margin-left') - left;
       }
       // use 3d gpu to optimize render
       if (transformSupported) {
@@ -78,6 +88,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    direction: PropTypes.string,
     prefixCls: String,
     styles: Object,
     tabBarPosition: String,

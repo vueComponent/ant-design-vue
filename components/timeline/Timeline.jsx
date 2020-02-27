@@ -19,7 +19,7 @@ export const TimelineProps = {
   pending: PropTypes.any,
   pendingDot: PropTypes.string,
   reverse: PropTypes.bool,
-  mode: PropTypes.oneOf(['left', 'alternate', 'right']),
+  mode: PropTypes.oneOf(['left', 'alternate', 'right', '']),
 };
 
 export default {

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import {
@@ -220,7 +221,6 @@ export default {
           showMinute={showMinute}
           showSecond={showSecond}
           onEsc={this.onEsc}
-          allowEmpty={allowEmpty}
           format={this.getFormat()}
           placeholder={placeholder}
           disabledHours={disabledHours}
@@ -240,12 +240,8 @@ export default {
     },
 
     getPopupClassName() {
-      const { showHour, showMinute, showSecond, use12Hours, prefixCls } = this;
-      let popupClassName = this.popupClassName;
-      // Keep it for old compatibility
-      if ((!showHour || !showMinute || !showSecond) && !use12Hours) {
-        popupClassName += ` ${prefixCls}-panel-narrow`;
-      }
+      const { showHour, showMinute, showSecond, use12Hours, prefixCls, popupClassName } = this;
+
       let selectColumnCount = 0;
       if (showHour) {
         selectColumnCount += 1;
@@ -259,8 +255,14 @@ export default {
       if (use12Hours) {
         selectColumnCount += 1;
       }
-      popupClassName += ` ${prefixCls}-panel-column-${selectColumnCount}`;
-      return popupClassName;
+      // Keep it for old compatibility
+      return classNames(
+        popupClassName,
+        {
+          [`${prefixCls}-panel-narrow`]: (!showHour || !showMinute || !showSecond) && !use12Hours,
+        },
+        `${prefixCls}-panel-column-${selectColumnCount}`,
+      );
     },
 
     setOpen(open) {
@@ -291,8 +293,8 @@ export default {
     },
     renderClearButton() {
       const { sValue } = this;
-      const { prefixCls, allowEmpty, clearText } = this.$props;
-      if (!allowEmpty || !sValue) {
+      const { prefixCls, allowEmpty, clearText, disabled } = this.$props;
+      if (!allowEmpty || !sValue || disabled) {
         return null;
       }
       const clearIcon = getComponentFromProp(this, 'clearIcon');

@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'timeline', // dev components
+    componentName: 'time-picker', // dev components
   },
 };

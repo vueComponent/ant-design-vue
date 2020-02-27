@@ -31,15 +31,17 @@ export default {
     return (
       <div id="components-timepicker-demo">
         <md cn={md.cn} us={md.us} />
-        <Hours />
-        <Addon />
-        <Basic />
-        <Disabled />
-        <HideColumn />
-        <IntervalOptions />
-        <Size />
-        <Value />
-        <Suffix />
+        <demo-sort cols="2">
+          <Hours />
+          <Addon />
+          <Basic />
+          <Disabled />
+          <HideColumn />
+          <IntervalOptions />
+          <Size />
+          <Value />
+          <Suffix />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

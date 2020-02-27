@@ -1,6 +1,8 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import classnames from 'classnames';
+import raf from 'raf';
+
 function noop() {}
 const scrollTo = (element, to, duration) => {
   const requestAnimationFrame =
@@ -10,13 +12,15 @@ const scrollTo = (element, to, duration) => {
     };
   // jump to target if duration zero
   if (duration <= 0) {
-    element.scrollTop = to;
+    raf(() => {
+      element.scrollTop = to;
+    });
     return;
   }
   const difference = to - element.scrollTop;
   const perTick = (difference / duration) * 10;
 
-  requestAnimationFrame(() => {
+  raf(() => {
     element.scrollTop += perTick;
     if (element.scrollTop === to) return;
     scrollTo(element, to, duration - 10);
@@ -58,7 +62,9 @@ const Select = {
       const { type } = this;
       this.__emit('select', type, value);
     },
-
+    onEsc(e) {
+      this.__emit('esc', e);
+    },
     getOptions() {
       const { options, selectedIndex, prefixCls } = this;
       return options.map((item, index) => {
@@ -71,8 +77,20 @@ const Select = {
           : () => {
               this.onSelect(item.value);
             };
+        const onKeyDown = e => {
+          if (e.keyCode === 13) onClick();
+          else if (e.keyCode === 27) this.onEsc();
+        };
         return (
-          <li role="button" onClick={onClick} class={cls} key={index} disabled={item.disabled}>
+          <li
+            role="button"
+            onClick={onClick}
+            class={cls}
+            key={index}
+            disabled={item.disabled}
+            tabIndex="0"
+            onKeydown={onKeyDown}
+          >
             {item.value}
           </li>
         );

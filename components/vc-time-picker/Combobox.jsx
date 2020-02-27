@@ -82,6 +82,9 @@ const Combobox = {
     onEnterSelectPanel(range) {
       this.__emit('currentSelectPanelChange', range);
     },
+    onEsc(e) {
+      this.__emit('esc', e);
+    },
 
     getHourSelect(hour) {
       const { prefixCls, hourOptions, disabledHours, showHour, use12Hours } = this;
@@ -107,6 +110,7 @@ const Combobox = {
           type="hour"
           onSelect={this.onItemChange}
           onMouseenter={() => this.onEnterSelectPanel('hour')}
+          onEsc={this.onEsc}
         />
       );
     },
@@ -134,6 +138,7 @@ const Combobox = {
           type="minute"
           onSelect={this.onItemChange}
           onMouseenter={() => this.onEnterSelectPanel('minute')}
+          onEsc={this.onEsc}
         />
       );
     },
@@ -161,6 +166,7 @@ const Combobox = {
           type="second"
           onSelect={this.onItemChange}
           onMouseenter={() => this.onEnterSelectPanel('second')}
+          onEsc={this.onEsc}
         />
       );
     },
@@ -185,6 +191,7 @@ const Combobox = {
           type="ampm"
           onSelect={this.onItemChange}
           onMouseenter={() => this.onEnterSelectPanel('ampm')}
+          onEsc={this.onEsc}
         />
       );
     },

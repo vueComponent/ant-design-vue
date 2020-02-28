@@ -32,7 +32,7 @@ export const TransferProps = {
   targetKeys: PropTypes.arrayOf(PropTypes.string),
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   render: PropTypes.func,
-  listStyle: PropTypes.object,
+  listStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   operationStyle: PropTypes.object,
   titles: PropTypes.arrayOf(PropTypes.string),
   operations: PropTypes.arrayOf(PropTypes.string),
@@ -43,6 +43,7 @@ export const TransferProps = {
   locale: PropTypes.object,
   rowKey: PropTypes.func,
   lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  showSelectAll: PropTypes.bool,
 };
 
 export const TransferLocale = {
@@ -59,6 +60,7 @@ const Transfer = {
     dataSource: [],
     locale: {},
     showSearch: false,
+    listStyle: () => {},
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -70,12 +72,6 @@ const Transfer = {
     //   'Transfer[notFoundContent] and Transfer[searchPlaceholder] will be removed, ' +
     //   'please use Transfer[locale] instead.',
     // )
-
-    this.separatedDataSource =
-      {
-        leftDataSource: [],
-        rightDataSource: [],
-      } | null;
     const { selectedKeys = [], targetKeys = [] } = this;
     return {
       leftFilter: '',
@@ -112,6 +108,33 @@ const Transfer = {
     },
   },
   methods: {
+    getSelectedKeysName(direction) {
+      return direction === 'left' ? 'sourceSelectedKeys' : 'targetSelectedKeys';
+    },
+
+    getTitles(transferLocale) {
+      if (this.titles) {
+        return this.titles;
+      }
+      return transferLocale.titles || ['', ''];
+    },
+
+    getLocale(transferLocale, renderEmpty) {
+      const h = this.$createElement;
+      // Keep old locale props still working.
+      const oldLocale = {
+        notFoundContent: renderEmpty(h, 'Transfer'),
+      };
+      const notFoundContent = getComponentFromProp(this, 'notFoundContent');
+      if (notFoundContent) {
+        oldLocale.notFoundContent = notFoundContent;
+      }
+      if (hasProp(this, 'searchPlaceholder')) {
+        oldLocale.searchPlaceholder = this.$props.searchPlaceholder;
+      }
+
+      return { ...transferLocale, ...oldLocale, ...this.$props.locale };
+    },
     updateState() {
       const { sourceSelectedKeys, targetSelectedKeys } = this;
       this.separatedDataSource = null;
@@ -135,37 +158,6 @@ const Transfer = {
           targetSelectedKeys: newTargetSelectedKeys,
         });
       }
-    },
-    separateDataSource(props) {
-      if (this.separatedDataSource) {
-        return this.separatedDataSource;
-      }
-
-      const { dataSource, rowKey, targetKeys = [] } = props;
-
-      const leftDataSource = [];
-      const rightDataSource = new Array(targetKeys.length);
-      dataSource.forEach(record => {
-        if (rowKey) {
-          record.key = rowKey(record);
-        }
-
-        // rightDataSource should be ordered by targetKeys
-        // leftDataSource should be ordered by dataSource
-        const indexOfKey = targetKeys.indexOf(record.key);
-        if (indexOfKey !== -1) {
-          rightDataSource[indexOfKey] = record;
-        } else {
-          leftDataSource.push(record);
-        }
-      });
-
-      this.separatedDataSource = {
-        leftDataSource,
-        rightDataSource,
-      };
-
-      return this.separatedDataSource;
     },
 
     moveTo(direction) {
@@ -198,51 +190,61 @@ const Transfer = {
       this.moveTo('right');
     },
 
-    handleSelectChange(direction, holder) {
-      const { sourceSelectedKeys, targetSelectedKeys } = this;
+    onItemSelectAll(direction, selectedKeys, checkAll) {
+      const originalSelectedKeys = this.$data[this.getSelectedKeysName(direction)] || [];
 
-      if (direction === 'left') {
-        this.$emit('selectChange', holder, targetSelectedKeys);
+      let mergedCheckedKeys = [];
+      if (checkAll) {
+        // Merge current keys with origin key
+        mergedCheckedKeys = Array.from(new Set([...originalSelectedKeys, ...selectedKeys]));
       } else {
-        this.$emit('selectChange', sourceSelectedKeys, holder);
+        // Remove current keys from origin keys
+        mergedCheckedKeys = originalSelectedKeys.filter(key => selectedKeys.indexOf(key) === -1);
       }
-    },
-    handleSelectAll(direction, filteredDataSource, checkAll) {
-      const originalSelectedKeys = this[this.getSelectedKeysName(direction)] || [];
-      const currentKeys = filteredDataSource.map(item => item.key);
-      // Only operate current keys from original selected keys
-      const newKeys1 = originalSelectedKeys.filter(key => currentKeys.indexOf(key) === -1);
-      const newKeys2 = [...originalSelectedKeys];
-      currentKeys.forEach(key => {
-        if (newKeys2.indexOf(key) === -1) {
-          newKeys2.push(key);
-        }
-      });
-      const holder = checkAll ? newKeys1 : newKeys2;
-      this.handleSelectChange(direction, holder);
 
-      if (!this.selectedKeys) {
+      this.handleSelectChange(direction, mergedCheckedKeys);
+
+      if (!this.$props.selectedKeys) {
         this.setState({
-          [this.getSelectedKeysName(direction)]: holder,
+          [this.getSelectedKeysName(direction)]: mergedCheckedKeys,
         });
       }
     },
 
-    handleLeftSelectAll(filteredDataSource, checkAll) {
-      this.handleSelectAll('left', filteredDataSource, checkAll);
+    handleSelectAll(direction, filteredDataSource, checkAll) {
+      this.onItemSelectAll(
+        direction,
+        filteredDataSource.map(({ key }) => key),
+        !checkAll,
+      );
     },
+
+    // [Legacy] Old prop `body` pass origin check as arg. It's confusing.
+    // TODO: Remove this in next version.
+    handleLeftSelectAll(filteredDataSource, checkAll) {
+      return this.handleSelectAll('left', filteredDataSource, !checkAll);
+    },
+
     handleRightSelectAll(filteredDataSource, checkAll) {
-      this.handleSelectAll('right', filteredDataSource, checkAll);
+      return this.handleSelectAll('right', filteredDataSource, !checkAll);
+    },
+
+    onLeftItemSelectAll(selectedKeys, checkAll) {
+      return this.onItemSelectAll('left', selectedKeys, checkAll);
+    },
+
+    onRightItemSelectAll(selectedKeys, checkAll) {
+      return this.onItemSelectAll('right', selectedKeys, checkAll);
     },
 
     handleFilter(direction, e) {
       const value = e.target.value;
-      this.setState({
-        // add filter
-        [`${direction}Filter`]: value,
-      });
       if (getListeners(this).searchChange) {
-        warning(false, '`searchChange` in Transfer is deprecated. Please use `search` instead.');
+        warning(
+          false,
+          'Transfer',
+          '`searchChange` in Transfer is deprecated. Please use `search` instead.',
+        );
         this.$emit('searchChange', direction, e);
       }
       this.$emit('search', direction, value);
@@ -256,9 +258,6 @@ const Transfer = {
     },
 
     handleClear(direction) {
-      this.setState({
-        [`${direction}Filter`]: '',
-      });
       this.$emit('search', direction, '');
     },
 
@@ -269,15 +268,15 @@ const Transfer = {
       this.handleClear('right');
     },
 
-    handleSelect(direction, selectedItem, checked) {
+    onItemSelect(direction, selectedKey, checked) {
       const { sourceSelectedKeys, targetSelectedKeys } = this;
       const holder = direction === 'left' ? [...sourceSelectedKeys] : [...targetSelectedKeys];
-      const index = holder.indexOf(selectedItem.key);
+      const index = holder.indexOf(selectedKey);
       if (index > -1) {
         holder.splice(index, 1);
       }
       if (checked) {
-        holder.push(selectedItem.key);
+        holder.push(selectedKey);
       }
       this.handleSelectChange(direction, holder);
 
@@ -288,12 +287,24 @@ const Transfer = {
       }
     },
 
+    handleSelect(direction, selectedItem, checked) {
+      warning(false, 'Transfer', '`handleSelect` will be removed, please use `onSelect` instead.');
+      this.onItemSelect(direction, selectedItem.key, checked);
+    },
+
     handleLeftSelect(selectedItem, checked) {
       return this.handleSelect('left', selectedItem, checked);
     },
 
     handleRightSelect(selectedItem, checked) {
       return this.handleSelect('right', selectedItem, checked);
+    },
+
+    onLeftItemSelect(selectedKey, checked) {
+      return this.onItemSelect('left', selectedKey, checked);
+    },
+    onRightItemSelect(selectedKey, checked) {
+      return this.onItemSelect('right', selectedKey, checked);
     },
 
     handleScroll(direction, e) {
@@ -307,32 +318,46 @@ const Transfer = {
       this.handleScroll('right', e);
     },
 
-    getTitles(transferLocale) {
-      if (this.titles) {
-        return this.titles;
+    handleSelectChange(direction, holder) {
+      const { sourceSelectedKeys, targetSelectedKeys } = this;
+
+      if (direction === 'left') {
+        this.$emit('selectChange', holder, targetSelectedKeys);
+      } else {
+        this.$emit('selectChange', sourceSelectedKeys, holder);
       }
-      return transferLocale.titles || ['', ''];
+    },
+    handleListStyle(listStyle, direction) {
+      if (typeof listStyle === 'function') {
+        return listStyle({ direction });
+      }
+      return listStyle;
     },
 
-    getSelectedKeysName(direction) {
-      return direction === 'left' ? 'sourceSelectedKeys' : 'targetSelectedKeys';
-    },
+    separateDataSource() {
+      const { dataSource, rowKey, targetKeys = [] } = this.$props;
 
-    getLocale(transferLocale, renderEmpty) {
-      const h = this.$createElement;
-      // Keep old locale props still working.
-      const oldLocale = {
-        notFoundContent: renderEmpty(h, 'Transfer'),
+      const leftDataSource = [];
+      const rightDataSource = new Array(targetKeys.length);
+      dataSource.forEach(record => {
+        if (rowKey) {
+          record.key = rowKey(record);
+        }
+
+        // rightDataSource should be ordered by targetKeys
+        // leftDataSource should be ordered by dataSource
+        const indexOfKey = targetKeys.indexOf(record.key);
+        if (indexOfKey !== -1) {
+          rightDataSource[indexOfKey] = record;
+        } else {
+          leftDataSource.push(record);
+        }
+      });
+
+      return {
+        leftDataSource,
+        rightDataSource,
       };
-      const notFoundContent = getComponentFromProp(this, 'notFoundContent');
-      if (notFoundContent) {
-        oldLocale.notFoundContent = notFoundContent;
-      }
-      if (hasProp(this, 'searchPlaceholder')) {
-        oldLocale.searchPlaceholder = this.$props.searchPlaceholder;
-      }
-
-      return { ...transferLocale, ...oldLocale, ...this.$props.locale };
     },
 
     renderTransfer(transferLocale) {
@@ -346,55 +371,59 @@ const Transfer = {
         operationStyle,
         filterOption,
         lazy,
+        showSelectAll,
       } = props;
+      const children = getComponentFromProp(this, 'children', {}, false);
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('transfer', customizePrefixCls);
 
       const renderEmpty = this.configProvider.renderEmpty;
       const locale = this.getLocale(transferLocale, renderEmpty);
-      const {
-        leftFilter,
-        rightFilter,
-        sourceSelectedKeys,
-        targetSelectedKeys,
-        $scopedSlots,
-      } = this;
+      const { sourceSelectedKeys, targetSelectedKeys, $scopedSlots } = this;
       const { body, footer } = $scopedSlots;
       const renderItem = props.render;
-      const { leftDataSource, rightDataSource } = this.separateDataSource(this.$props);
+      const { leftDataSource, rightDataSource } = this.separateDataSource();
       const leftActive = targetSelectedKeys.length > 0;
       const rightActive = sourceSelectedKeys.length > 0;
 
-      const cls = classNames(prefixCls, disabled && `${prefixCls}-disabled`);
-
+      const cls = classNames(prefixCls, {
+        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-customize-list`]: !!children,
+      });
       const titles = this.getTitles(locale);
       return (
         <div class={cls}>
           <List
+            key="leftList"
             prefixCls={`${prefixCls}-list`}
             titleText={titles[0]}
             dataSource={leftDataSource}
-            filter={leftFilter}
             filterOption={filterOption}
-            style={listStyle}
+            style={this.handleListStyle(listStyle, 'left')}
             checkedKeys={sourceSelectedKeys}
             handleFilter={this.handleLeftFilter}
             handleClear={this.handleLeftClear}
             handleSelect={this.handleLeftSelect}
             handleSelectAll={this.handleLeftSelectAll}
+            onItemSelect={this.onLeftItemSelect}
+            onItemSelectAll={this.onLeftItemSelectAll}
             renderItem={renderItem}
             showSearch={showSearch}
             body={body}
+            renderList={children}
             footer={footer}
             lazy={lazy}
             onScroll={this.handleLeftScroll}
             disabled={disabled}
+            direction="left"
+            showSelectAll={showSelectAll}
             itemUnit={locale.itemUnit}
             itemsUnit={locale.itemsUnit}
             notFoundContent={locale.notFoundContent}
             searchPlaceholder={locale.searchPlaceholder}
           />
           <Operation
+            key="operation"
             class={`${prefixCls}-operation`}
             rightActive={rightActive}
             rightArrowText={operations[0]}
@@ -406,24 +435,29 @@ const Transfer = {
             disabled={disabled}
           />
           <List
+            key="rightList"
             prefixCls={`${prefixCls}-list`}
             titleText={titles[1]}
             dataSource={rightDataSource}
-            filter={rightFilter}
             filterOption={filterOption}
-            style={listStyle}
+            style={this.handleListStyle(listStyle, 'right')}
             checkedKeys={targetSelectedKeys}
             handleFilter={this.handleRightFilter}
             handleClear={this.handleRightClear}
             handleSelect={this.handleRightSelect}
             handleSelectAll={this.handleRightSelectAll}
+            onItemSelect={this.onRightItemSelect}
+            onItemSelectAll={this.onRightItemSelectAll}
             renderItem={renderItem}
             showSearch={showSearch}
             body={body}
+            renderList={children}
             footer={footer}
             lazy={lazy}
             onScroll={this.handleRightScroll}
             disabled={disabled}
+            direction="right"
+            showSelectAll={showSelectAll}
             itemUnit={locale.itemUnit}
             itemsUnit={locale.itemsUnit}
             notFoundContent={locale.notFoundContent}

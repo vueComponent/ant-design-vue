@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'tabs', // dev components
+    componentName: 'transfer', // dev components
   },
 };

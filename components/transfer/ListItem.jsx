@@ -6,7 +6,7 @@ import Checkbox from '../checkbox';
 function noop() {}
 
 export default {
-  name: 'Item',
+  name: 'ListItem',
   props: {
     renderedText: PropTypes.any,
     renderedEl: PropTypes.any,
@@ -42,7 +42,7 @@ export default {
         }
       >
         <Checkbox checked={checked} disabled={disabled || item.disabled} />
-        <span>{renderedEl}</span>
+        <span class={`${prefixCls}-content-item-text`}>{renderedEl}</span>
       </li>
     );
     let children = null;

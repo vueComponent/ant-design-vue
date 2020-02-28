@@ -3,6 +3,7 @@ import Basic from './basic.md';
 import Search from './search.md';
 import Advanced from './advanced.md';
 import CustomItem from './custom-item.md';
+import TableTransfer from './table-transfer';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -44,10 +45,13 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Search />
-        <Advanced />
-        <CustomItem />
+        <demo-sort cols={1}>
+          <Basic />
+          <Search />
+          <Advanced />
+          <CustomItem />
+          <TableTransfer />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

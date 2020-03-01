@@ -21,12 +21,12 @@ Implement a customized column search example via `filterDropdown`.
         :placeholder="`Search ${column.dataIndex}`"
         :value="selectedKeys[0]"
         @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
-        @pressEnter="() => handleSearch(selectedKeys, confirm)"
+        @pressEnter="() => handleSearch(selectedKeys, confirm, column.dataIndex)"
         style="width: 188px; margin-bottom: 8px; display: block;"
       />
       <a-button
         type="primary"
-        @click="() => handleSearch(selectedKeys, confirm)"
+        @click="() => handleSearch(selectedKeys, confirm, column.dataIndex)"
         icon="search"
         size="small"
         style="width: 90px; margin-right: 8px"
@@ -42,8 +42,8 @@ Implement a customized column search example via `filterDropdown`.
       type="search"
       :style="{ color: filtered ? '#108ee9' : undefined }"
     />
-    <template slot="customRender" slot-scope="text">
-      <span v-if="searchText">
+    <template slot="customRender" slot-scope="text, record, index, column">
+      <span v-if="searchText && searchedColumn === column.dataIndex">
         <template
           v-for="(fragment, i) in text.toString().split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))"
         >
@@ -99,6 +99,7 @@ Implement a customized column search example via `filterDropdown`.
         data,
         searchText: '',
         searchInput: null,
+        searchedColumn: '',
         columns: [
           {
             title: 'Name',
@@ -158,9 +159,10 @@ Implement a customized column search example via `filterDropdown`.
       };
     },
     methods: {
-      handleSearch(selectedKeys, confirm) {
+      handleSearch(selectedKeys, confirm, dataIndex) {
         confirm();
         this.searchText = selectedKeys[0];
+        this.searchedColumn = dataIndex;
       },
 
       handleReset(clearFilters) {

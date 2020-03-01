@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import { connect } from '../../_util/store';
 import TableCell from './TableCell';
-import { warningOnce } from './utils';
 import { initDefaultProps, mergeProps, getStyle } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
+import warning from '../../_util/warning';
 function noop() {}
 const TableRow = {
   name: 'TableRow',
@@ -110,7 +110,7 @@ const TableRow = {
       this.__emit('rowMouseleave', record, index, event);
     },
 
-    setExpanedRowHeight() {
+    setExpandedRowHeight() {
       const { store, rowKey } = this;
       let { expandedRowsHeight } = store.getState();
       const height = this.rowRef.getBoundingClientRect().height;
@@ -157,7 +157,7 @@ const TableRow = {
       }
 
       if (!fixed && expandedRow) {
-        this.setExpanedRowHeight();
+        this.setExpandedRowHeight();
       }
 
       if (!fixed && ancestorKeys.length >= 0) {
@@ -201,10 +201,10 @@ const TableRow = {
 
     renderExpandIconCell(cells);
 
-    for (let i = 0; i < columns.length; i++) {
+    for (let i = 0; i < columns.length; i += 1) {
       const column = columns[i];
 
-      warningOnce(
+      warning(
         column.onCellClick === undefined,
         'column[onCellClick] is deprecated, please use column[customCell] instead.',
       );
@@ -242,6 +242,7 @@ const TableRow = {
       customClass,
     );
     const bodyRowProps = mergeProps(
+      { ...rowProps, style },
       {
         on: {
           click: this.onRowClick,
@@ -252,7 +253,6 @@ const TableRow = {
         },
         class: rowClassName,
       },
-      { ...rowProps, style },
       {
         attrs: {
           'data-row-key': rowKey,
@@ -285,7 +285,7 @@ function getRowHeight(state, props) {
 export default connect((state, props) => {
   const { currentHoverKey, expandedRowKeys } = state;
   const { rowKey, ancestorKeys } = props;
-  const visible = ancestorKeys.length === 0 || ancestorKeys.every(k => ~expandedRowKeys.indexOf(k));
+  const visible = ancestorKeys.length === 0 || ancestorKeys.every(k => expandedRowKeys.includes(k));
 
   return {
     visible,

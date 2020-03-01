@@ -2,33 +2,35 @@
 
 ### Table
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| bordered | Whether to show all table borders | boolean | `false` |
-| childrenColumnName | The column contains children to display | string\[] | children |
-| columns | Columns of table [config](#Column) | array | - |
-| components | Override default table elements | object | - |
-| dataSource | Data record array to be displayed | any\[] | - |
-| defaultExpandAllRows | Expand all rows initially | boolean | `false` |
-| defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |
-| expandedRowKeys | Current expanded row keys | string\[] | - |
-| expandedRowRender | Expanded container render for each row | Function(record, index, indent, expanded):VNode\|slot-scope | - |
-| expandIcon | Customize row expand Icon. | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |
-| expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| tableLayout | [table-layout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) attribute of table element | - \| 'auto' \| 'fixed' | -<hr />`fixed` when header/columns are fixed, or using `column.ellipsis` | 1.5.0 |
+| bordered | Whether to show all table borders | boolean | `false` |  |
+| childrenColumnName | The column contains children to display | string\[] | children |  |
+| columns | Columns of table [config](#Column) | array | - |  |
+| components | Override default table elements | object | - |  |
+| dataSource | Data record array to be displayed | any\[] | - |  |
+| defaultExpandAllRows | Expand all rows initially | boolean | `false` |  |
+| defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |  |
+| expandedRowKeys | Current expanded row keys | string\[] | - |  |
+| expandedRowRender | Expanded container render for each row | Function(record, index, indent, expanded):VNode\|slot-scope | - |  |
+| expandIcon | Customize row expand Icon. | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |  |
+| expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
 | footer | Table footer renderer | Function(currentPageData)\|slot-scope |  |
-| indentSize | Indent size in pixels of tree data | number | 15 |
+| indentSize | Indent size in pixels of tree data | number | 15 |  |
 | loading | Loading status of table | boolean\|[object](/components/spin) | `false` |
-| locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' |
-| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object |  |
-| rowClassName | Row's className | Function(record, index):string | - |
-| rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record, index):string | `key` |
-| rowSelection | Row selection [config](#rowSelection) | object | null |
-| scroll | Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area. It is recommended to set a number for `x`, if you want to set it to `true`, you need to add style `.ant-table td { white-space: nowrap; }`. | { x: number \| true, y: number } | - |
-| showHeader | Whether to show table header | boolean | `true` |
+| locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' |  |
+| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object |  |  |
+| rowClassName | Row's className | Function(record, index):string | - |  |
+| rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record, index):string | `key` |  |
+| rowSelection | Row selection [config](#rowSelection) | object | null |  |
+| scroll | Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area. It is recommended to set a number for `x`, if you want to set it to `true`, you need to add style `.ant-table td { white-space: nowrap; }`. | { x: number \| true, y: number } | - |  |
+| showHeader | Whether to show table header | boolean | `true` |  |
 | size | Size of table | `default` \| `middle` \| `small` \| `large` | `default` |
-| title | Table title renderer | Function(currentPageData)\|slot-scope |  |
-| customHeaderRow | Set props on per header row | Function(column, index) | - |
-| customRow | Set props on per row | Function(record, index) | - |
+| title | Table title renderer | Function(currentPageData)\|slot-scope |  |  |
+| customHeaderRow | Set props on per header row | Function(column, index) | - |  |
+| customRow | Set props on per row | Function(record, index) | - |  |
+| getPopupContainer | the render container of dropdowns in table | (triggerNode) => HTMLElement | `() => TableHtmlElement` | 1.5.0 |
 
 ### Events
 
@@ -72,32 +74,35 @@ Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`. Follow [V
 
 One of the Table `columns` prop for describing the table's columns, Column has the same API.
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |
-| colSpan | Span of this column's title | number |  |
-| dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |
-| defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |
-| filterDropdown | Customized filter overlay | slot \| slot-scope | - |
-| filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |
-| filtered | Whether the `dataSource` is filtered | boolean | `false` |
-| filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |
-| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean, column: Column) | `false` |
-| filterMultiple | Whether multiple filters can be selected | boolean | `true` |
-| filters | Filter menu config | object\[] | - |
-| fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |
-| key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |
-| customRender | Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config | Function(text, record, index) {}\|slot-scope | - |
-| sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |
-| sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |
-| title | Title of this column | string\|slot | - |
-| width | Width of this column | string\|number | - |
-| customCell | Set props on per cell | Function(record, rowIndex) | - |
-| customHeaderCell | Set props on per header cell | Function(column) | - |
-| onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |
-| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |
-| slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { filterIcon: 'XXX'}` | object | - |
-| scopedSlots | When using columns, you can use this property to configure the properties that support the slot-scope, such as `scopedSlots: { customRender: 'XXX'}` | object | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |  |
+| ellipsis | ellipsize cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is true. | boolean | false | 1.5.0 |
+| colSpan | Span of this column's title | number |  |  |
+| dataIndex | Display field of the data record, could be set like `a.b.c` | string | - |  |
+| defaultFilteredValue | Default filtered values | string\[] | - | 1.5.0 |
+| defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
+| filterDropdown | Customized filter overlay | slot \| slot-scope | - |  |
+| filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |  |
+| filtered | Whether the `dataSource` is filtered | boolean | `false` |  |
+| filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |  |
+| filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean, column: Column) | `false` |  |
+| filterMultiple | Whether multiple filters can be selected | boolean | `true` |  |
+| filters | Filter menu config | object\[] | - |  |
+| fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |  |
+| key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |  |
+| customRender | Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config | Function(text, record, index) {}\|slot-scope | - |  |
+| sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |  |
+| sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |  |
+| sortDirections | supported sort way, could be `'ascend'`, `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
+| title | Title of this column | string\|slot | - |  |
+| width | Width of this column | string\|number | - |  |
+| customCell | Set props on per cell | Function(record, rowIndex) | - |  |
+| customHeaderCell | Set props on per header cell | Function(column) | - |  |
+| onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |  |
+| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |  |
+| slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { filterIcon: 'XXX'}` | object | - |  |
+| scopedSlots | When using columns, you can use this property to configure the properties that support the slot-scope, such as `scopedSlots: { customRender: 'XXX'}` | object | - |  |
 
 ### ColumnGroup
 
@@ -134,6 +139,14 @@ Properties for row selection.
 | onSelect | Callback executed when select/deselect one row | Function(record, selected, selectedRows, nativeEvent) | - |
 | onSelectAll | Callback executed when select/deselect all rows | Function(selected, selectedRows, changeRows) | - |
 | onSelectInvert | Callback executed when row selection is inverted | Function(selectedRows) | - |
+
+### scroll
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| x | Set horizontal scrolling, can also be used to specify the width and height of the scroll area, could be number, percent value, true and ['max-content'](https://developer.mozilla.org/zh-CN/docs/Web/CSS/width#max-content) | number \| true | - |  |
+| y | Set vertical scrolling, can also be used to specify the width and height of the scroll area, could be number, percent value, true and ['max-content'](https://developer.mozilla.org/zh-CN/docs/Web/CSS/width#max-content) | number \| true | - |  |
+| scrollToFirstRowOnChange | Whether to scroll to the top of the table when paging, sorting, filtering changes | boolean | - | 1.5.0 |
 
 ### selection
 

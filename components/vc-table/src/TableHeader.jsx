@@ -1,24 +1,31 @@
 import PropTypes from '../../_util/vue-types';
 import TableHeaderRow from './TableHeaderRow';
 
-function getHeaderRows(columns, currentRow = 0, rows) {
+function getHeaderRows({ columns = [], currentRow = 0, rows = [], isLast = true }) {
   rows = rows || [];
   rows[currentRow] = rows[currentRow] || [];
 
-  columns.forEach(column => {
+  columns.forEach((column, i) => {
     if (column.rowSpan && rows.length < column.rowSpan) {
       while (rows.length < column.rowSpan) {
         rows.push([]);
       }
     }
+    const cellIsLast = isLast && i === columns.length - 1;
     const cell = {
       key: column.key,
       className: column.className || column.class || '',
       children: column.title,
+      isLast: cellIsLast,
       column,
     };
     if (column.children) {
-      getHeaderRows(column.children, currentRow + 1, rows);
+      getHeaderRows({
+        columns: column.children,
+        currentRow: currentRow + 1,
+        rows,
+        isLast: cellIsLast,
+      });
     }
     if ('colSpan' in column) {
       cell.colSpan = column.colSpan;
@@ -52,7 +59,7 @@ export default {
       return null;
     }
 
-    const rows = getHeaderRows(columns);
+    const rows = getHeaderRows({ columns });
 
     expander.renderExpandIndentCell(rows, fixed);
 

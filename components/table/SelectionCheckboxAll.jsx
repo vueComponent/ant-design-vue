@@ -6,6 +6,87 @@ import classNames from 'classnames';
 import { SelectionCheckboxAllProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
 
+function checkSelection({
+  store,
+  getCheckboxPropsByItem,
+  getRecordKey,
+  data,
+  type,
+  byDefaultChecked,
+}) {
+  return byDefaultChecked
+    ? data[type]((item, i) => getCheckboxPropsByItem(item, i).defaultChecked)
+    : data[type]((item, i) => store.getState().selectedRowKeys.indexOf(getRecordKey(item, i)) >= 0);
+}
+
+function getIndeterminateState(props) {
+  const { store, data } = props;
+  if (!data.length) {
+    return false;
+  }
+
+  const someCheckedNotByDefaultChecked =
+    checkSelection({
+      ...props,
+      data,
+      type: 'some',
+      byDefaultChecked: false,
+    }) &&
+    !checkSelection({
+      ...props,
+      data,
+      type: 'every',
+      byDefaultChecked: false,
+    });
+  const someCheckedByDefaultChecked =
+    checkSelection({
+      ...props,
+      data,
+      type: 'some',
+      byDefaultChecked: true,
+    }) &&
+    !checkSelection({
+      ...props,
+      data,
+      type: 'every',
+      byDefaultChecked: true,
+    });
+
+  if (store.getState().selectionDirty) {
+    return someCheckedNotByDefaultChecked;
+  }
+  return someCheckedNotByDefaultChecked || someCheckedByDefaultChecked;
+}
+
+function getCheckState(props) {
+  const { store, data } = props;
+  if (!data.length) {
+    return false;
+  }
+  if (store.getState().selectionDirty) {
+    return checkSelection({
+      ...props,
+      data,
+      type: 'every',
+      byDefaultChecked: false,
+    });
+  }
+  return (
+    checkSelection({
+      ...props,
+      data,
+      type: 'every',
+      byDefaultChecked: false,
+    }) ||
+    checkSelection({
+      ...props,
+      data,
+      type: 'every',
+      byDefaultChecked: true,
+    })
+  );
+}
+
 export default {
   name: 'SelectionCheckboxAll',
   mixins: [BaseMixin],
@@ -18,25 +99,23 @@ export default {
           {
             key: 'all',
             text: props.locale.selectAll,
-            onSelect: () => {},
           },
           {
             key: 'invert',
             text: props.locale.selectInvert,
-            onSelect: () => {},
           },
         ];
 
     return {
-      checked: this.getCheckState(props),
-      indeterminate: this.getIndeterminateState(props),
+      checked: getCheckState(props),
+      indeterminate: getIndeterminateState(props),
     };
   },
 
   watch: {
     $props: {
       handler: function() {
-        this.setCheckState();
+        this.setCheckState(this.$props);
       },
       deep: true,
     },
@@ -52,13 +131,6 @@ export default {
     }
   },
   methods: {
-    subscribe() {
-      const { store } = this;
-      this.unsubscribe = store.subscribe(() => {
-        this.setCheckState(this.$props);
-      });
-    },
-
     checkSelection(props, data, type, byDefaultChecked) {
       const { store, getCheckboxPropsByItem, getRecordKey } = props || this.$props;
       // type should be 'every' | 'some'
@@ -73,8 +145,8 @@ export default {
     },
 
     setCheckState(props) {
-      const checked = this.getCheckState(props);
-      const indeterminate = this.getIndeterminateState(props);
+      const checked = getCheckState(props);
+      const indeterminate = getIndeterminateState(props);
       this.setState(prevState => {
         const newState = {};
         if (indeterminate !== prevState.indeterminate) {
@@ -87,40 +159,15 @@ export default {
       });
     },
 
-    getCheckState(props) {
-      const { store, data } = this;
-      let checked;
-      if (!data.length) {
-        checked = false;
-      } else {
-        checked = store.getState().selectionDirty
-          ? this.checkSelection(props, data, 'every', false)
-          : this.checkSelection(props, data, 'every', false) ||
-            this.checkSelection(props, data, 'every', true);
-      }
-      return checked;
-    },
-
-    getIndeterminateState(props) {
-      const { store, data } = this;
-      let indeterminate;
-      if (!data.length) {
-        indeterminate = false;
-      } else {
-        indeterminate = store.getState().selectionDirty
-          ? this.checkSelection(props, data, 'some', false) &&
-            !this.checkSelection(props, data, 'every', false)
-          : (this.checkSelection(props, data, 'some', false) &&
-              !this.checkSelection(props, data, 'every', false)) ||
-            (this.checkSelection(props, data, 'some', true) &&
-              !this.checkSelection(props, data, 'every', true));
-      }
-      return indeterminate;
-    },
-
     handleSelectAllChange(e) {
-      const checked = e.target.checked;
+      const { checked } = e.target;
       this.$emit('select', checked ? 'all' : 'removeAll', 0, null);
+    },
+    subscribe() {
+      const { store } = this;
+      this.unsubscribe = store.subscribe(() => {
+        this.setCheckState(this.$props);
+      });
     },
 
     renderMenus(selections) {

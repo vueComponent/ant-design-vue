@@ -11,7 +11,7 @@ Showing more detailed info of every row.
 ```tpl
 <template>
   <a-table :columns="columns" :dataSource="data" class="components-table-demo-nested">
-    <a slot="operation" slot-scope="text" href="javascript:;">Publish</a>
+    <a slot="operation" slot-scope="text">Publish</a>
     <a-table
       slot="expandedRowRender"
       slot-scope="text"
@@ -21,8 +21,8 @@ Showing more detailed info of every row.
     >
       <span slot="status" slot-scope="text"> <a-badge status="success" />Finished </span>
       <span slot="operation" slot-scope="text" class="table-operation">
-        <a href="javascript:;">Pause</a>
-        <a href="javascript:;">Stop</a>
+        <a>Pause</a>
+        <a>Stop</a>
         <a-dropdown>
           <a-menu slot="overlay">
             <a-menu-item>
@@ -32,7 +32,7 @@ Showing more detailed info of every row.
               Action 2
             </a-menu-item>
           </a-menu>
-          <a href="javascript:;"> More <a-icon type="down" /> </a>
+          <a> More <a-icon type="down" /> </a>
         </a-dropdown>
       </span>
     </a-table>

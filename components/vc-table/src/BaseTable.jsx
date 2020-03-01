@@ -62,7 +62,7 @@ const BaseTable = {
 
       const rows = [];
 
-      for (let i = 0; i < renderData.length; i++) {
+      for (let i = 0; i < renderData.length; i += 1) {
         const record = renderData[i];
         const key = getRowKey(record, i);
         const className =
@@ -150,12 +150,9 @@ const BaseTable = {
     const tableStyle = {};
 
     if (!fixed && scroll.x) {
-      // not set width, then use content fixed width
-      if (scroll.x === true) {
-        tableStyle.tableLayout = 'fixed';
-      } else {
-        tableStyle.width = typeof scroll.x === 'number' ? `${scroll.x}px` : scroll.x;
-      }
+      tableStyle.width = scroll.x === true ? 'max-content' : scroll.x;
+      tableStyle.width =
+        typeof tableStyle.width === 'number' ? `${tableStyle.width}px` : tableStyle.width;
     }
 
     const Table = hasBody ? components.table : 'table';

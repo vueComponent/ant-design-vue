@@ -15,7 +15,7 @@ Group table head with `columns[n].children`.
     :dataSource="data"
     bordered
     size="middle"
-    :scroll="{ x: '130%', y: 240 }"
+    :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
   />
 </template>
 <script>
@@ -85,6 +85,7 @@ Group table head with `columns[n].children`.
           title: 'Company Address',
           dataIndex: 'companyAddress',
           key: 'companyAddress',
+          width: 200,
         },
         {
           title: 'Company Name',

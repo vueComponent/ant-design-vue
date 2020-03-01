@@ -1,4 +1,5 @@
 import PropTypes from '../../_util/vue-types';
+import { INTERNAL_COL_DEFINE } from './utils';
 
 export default {
   name: 'ColGroup',
@@ -29,9 +30,10 @@ export default {
       leafColumns = columnManager.leafColumns();
     }
     cols = cols.concat(
-      leafColumns.map(c => {
-        const width = typeof c.width === 'number' ? `${c.width}px` : c.width;
-        return <col key={c.key || c.dataIndex} style={width ? { width, minWidth: width } : {}} />;
+      leafColumns.map(({ key, dataIndex, width, [INTERNAL_COL_DEFINE]: additionalProps }) => {
+        const mergedKey = key !== undefined ? key : dataIndex;
+        const w = typeof width === 'number' ? `${width}px` : width;
+        return <col key={mergedKey} style={{ width: w, minWidth: w }} {...additionalProps} />;
       }),
     );
     return <colgroup>{cols}</colgroup>;

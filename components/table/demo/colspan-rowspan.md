@@ -14,7 +14,7 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
 <template>
   <a-table :columns="columns" :dataSource="data" bordered>
     <template slot="name" slot-scope="text">
-      <a href="javascript:;">{{text}}</a>
+      <a>{{text}}</a>
     </template>
   </a-table>
 </template>

@@ -32,9 +32,9 @@ Using template style API
     <a-table-column title="Action" key="action">
       <template slot-scope="text, record">
         <span>
-          <a href="javascript:;">Action 一 {{record.firstName}}</a>
+          <a>Action 一 {{record.firstName}}</a>
           <a-divider type="vertical" />
-          <a href="javascript:;">Delete</a>
+          <a>Delete</a>
         </span>
       </template>
     </a-table-column>

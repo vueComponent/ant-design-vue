@@ -76,6 +76,7 @@ Control filters and sorters by `filteredValue` and `sortOrder`.
             onFilter: (value, record) => record.name.includes(value),
             sorter: (a, b) => a.name.length - b.name.length,
             sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+            ellipsis: true,
           },
           {
             title: 'Age',
@@ -93,6 +94,7 @@ Control filters and sorters by `filteredValue` and `sortOrder`.
             onFilter: (value, record) => record.address.includes(value),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+            ellipsis: true,
           },
         ];
         return columns;

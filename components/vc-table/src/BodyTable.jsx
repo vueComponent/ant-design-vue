@@ -17,21 +17,6 @@ export default {
   inject: {
     table: { default: () => ({}) },
   },
-  mounted() {
-    this.updateTableRef();
-  },
-  updated() {
-    this.updateTableRef();
-  },
-  methods: {
-    updateTableRef() {
-      this.$refs.fixedColumnsBodyLeft &&
-        this.table.saveChildrenRef('fixedColumnsBodyLeft', this.$refs.fixedColumnsBodyLeft);
-      this.$refs.fixedColumnsBodyRight &&
-        this.table.saveChildrenRef('fixedColumnsBodyRight', this.$refs.fixedColumnsBodyRight);
-      this.$refs.bodyTable && this.table.saveChildrenRef('bodyTable', this.$refs.bodyTable);
-    },
-  },
   render() {
     const { prefixCls, scroll } = this.table;
     const {
@@ -44,7 +29,7 @@ export default {
       expander,
       isAnyColumnsFixed,
     } = this;
-    let { useFixedHeader } = this.table;
+    let { useFixedHeader, saveRef } = this.table;
     const bodyStyle = { ...this.table.bodyStyle };
     const innerBodyStyle = {};
 
@@ -70,7 +55,7 @@ export default {
       useFixedHeader = true;
 
       // Add negative margin bottom for scroll bar overflow bug
-      const scrollbarWidth = measureScrollbar();
+      const scrollbarWidth = measureScrollbar({ direction: 'vertical' });
       if (scrollbarWidth > 0 && fixed) {
         bodyStyle.marginBottom = `-${scrollbarWidth}px`;
         bodyStyle.paddingBottom = '0px';
@@ -104,7 +89,14 @@ export default {
           <div
             class={`${prefixCls}-body-inner`}
             style={innerBodyStyle}
-            ref={refName}
+            {...{
+              directives: [
+                {
+                  name: 'ant-ref',
+                  value: saveRef(refName),
+                },
+              ],
+            }}
             onWheel={handleWheel}
             onScroll={handleBodyScroll}
           >
@@ -113,12 +105,23 @@ export default {
         </div>
       );
     }
+    // Should provides `tabIndex` if use scroll to enable keyboard scroll
+    const useTabIndex = scroll && (scroll.x || scroll.y);
+
     return (
       <div
+        tabIndex={useTabIndex ? -1 : undefined}
         key="bodyTable"
         class={`${prefixCls}-body`}
         style={bodyStyle}
-        ref="bodyTable"
+        {...{
+          directives: [
+            {
+              name: 'ant-ref',
+              value: saveRef('bodyTable'),
+            },
+          ],
+        }}
         onWheel={handleWheel}
         onScroll={handleBodyScroll}
       >

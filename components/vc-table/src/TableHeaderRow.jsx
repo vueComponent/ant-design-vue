@@ -32,8 +32,7 @@ const TableHeaderRow = {
     return (
       <HeaderRow {...rowProps} style={style}>
         {row.map((cell, i) => {
-          const { column, children, className, ...cellProps } = cell;
-          const cls = cell.class || className;
+          const { column, isLast, children, ...cellProps } = cell;
           const customProps = column.customHeaderCell ? column.customHeaderCell(column) : {};
 
           const headerCellProps = mergeProps(
@@ -41,7 +40,6 @@ const TableHeaderRow = {
               attrs: {
                 ...cellProps,
               },
-              class: cls,
             },
             {
               ...customProps,
@@ -55,6 +53,18 @@ const TableHeaderRow = {
               [`${prefixCls}-align-${column.align}`]: !!column.align,
             });
           }
+          headerCellProps.class = classNames(
+            customProps.className,
+            customProps.class,
+            column.class,
+            column.className,
+            {
+              [`${prefixCls}-align-${column.align}`]: !!column.align,
+              [`${prefixCls}-row-cell-ellipsis`]: !!column.ellipsis,
+              [`${prefixCls}-row-cell-break-word`]: !!column.width,
+              [`${prefixCls}-row-cell-last`]: isLast,
+            },
+          );
 
           if (typeof HeaderCell === 'function') {
             return HeaderCell(h, headerCellProps, children);

@@ -37,7 +37,7 @@ Table with editable rows.
           </a-popconfirm>
         </span>
         <span v-else>
-          <a @click="() => edit(record.key)">Edit</a>
+          <a :disabled="editingKey !== ''" @click="() => edit(record.key)">Edit</a>
         </span>
       </div>
     </template>
@@ -85,6 +85,7 @@ Table with editable rows.
       return {
         data,
         columns,
+        editingKey: '',
       };
     },
     methods: {
@@ -99,6 +100,7 @@ Table with editable rows.
       edit(key) {
         const newData = [...this.data];
         const target = newData.filter(item => key === item.key)[0];
+        this.editingKey = key;
         if (target) {
           target.editable = true;
           this.data = newData;
@@ -122,6 +124,7 @@ Table with editable rows.
       cancel(key) {
         const newData = [...this.data];
         const target = newData.filter(item => key === item.key)[0];
+        this.editingKey = '';
         if (target) {
           Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
           delete target.editable;

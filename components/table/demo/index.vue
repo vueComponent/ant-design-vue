@@ -22,6 +22,7 @@ import Size from './size.md';
 import Template from './template.md';
 import ResizableColumn from './resizable-column';
 import ResizableColumnString from '!raw-loader!./resizable-column';
+import Ellipsis from './ellipsis';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -64,30 +65,33 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Ajax />
-        <Basic />
-        <Bordered />
-        <ColspanRowspan />
-        <CustomFilterPanel />
-        <EditCell />
-        <EditRow />
-        <ExpandChildren />
-        <Expand />
-        <FixedColumnsHeader />
-        <FixedColumns />
-        <FixedHeader />
-        <GroupingColumns />
-        <Head />
-        <NestedTable />
-        <ResetFilter />
-        <RowSelectionAndOperation />
-        <RowSelectionCustom />
-        <RowSelection />
-        <Size />
-        <Template />
-        <demo-container code={ResizableColumnString}>
-          <ResizableColumn />
-        </demo-container>
+        <demo-sort cols={1}>
+          <Basic />
+          <Ellipsis />
+          <Ajax />
+          <Bordered />
+          <ColspanRowspan />
+          <CustomFilterPanel />
+          <EditCell />
+          <EditRow />
+          <ExpandChildren />
+          <Expand />
+          <FixedColumnsHeader />
+          <FixedColumns />
+          <FixedHeader />
+          <GroupingColumns />
+          <Head />
+          <NestedTable />
+          <ResetFilter />
+          <RowSelectionAndOperation />
+          <RowSelectionCustom />
+          <RowSelection />
+          <Size />
+          <Template />
+          <demo-container code={ResizableColumnString}>
+            <ResizableColumn />
+          </demo-container>
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

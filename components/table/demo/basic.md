@@ -11,7 +11,7 @@ Simple table with actions.
 ```tpl
 <template>
   <a-table :columns="columns" :dataSource="data">
-    <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
+    <a slot="name" slot-scope="text">{{text}}</a>
     <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
     <span slot="tags" slot-scope="tags">
       <a-tag
@@ -23,11 +23,11 @@ Simple table with actions.
       </a-tag>
     </span>
     <span slot="action" slot-scope="text, record">
-      <a href="javascript:;">Invite 一 {{record.name}}</a>
+      <a>Invite 一 {{record.name}}</a>
       <a-divider type="vertical" />
-      <a href="javascript:;">Delete</a>
+      <a>Delete</a>
       <a-divider type="vertical" />
-      <a href="javascript:;" class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
+      <a class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
     </span>
   </a-table>
 </template>

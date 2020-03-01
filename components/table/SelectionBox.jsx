@@ -24,14 +24,6 @@ export default {
     }
   },
   methods: {
-    subscribe() {
-      const { store } = this;
-      this.unsubscribe = store.subscribe(() => {
-        const checked = this.getCheckState(this.$props);
-        this.setState({ checked });
-      });
-    },
-
     getCheckState(props) {
       const { store, defaultSelection, rowIndex } = props;
       let checked = false;
@@ -43,6 +35,13 @@ export default {
           defaultSelection.indexOf(rowIndex) >= 0;
       }
       return checked;
+    },
+    subscribe() {
+      const { store } = this;
+      this.unsubscribe = store.subscribe(() => {
+        const checked = this.getCheckState(this.$props);
+        this.setState({ checked });
+      });
     },
   },
 
@@ -59,8 +58,7 @@ export default {
     if (type === 'radio') {
       checkboxProps.props.value = rowIndex;
       return <Radio {...checkboxProps} />;
-    } else {
-      return <Checkbox {...checkboxProps} />;
     }
+    return <Checkbox {...checkboxProps} />;
   },
 };

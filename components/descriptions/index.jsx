@@ -87,7 +87,8 @@ const generateChildrenRows = (children, column) => {
 
       warning(
         leftSpans === 0 && lastSpanSame,
-        '[ant-design-vue: Descriptions] Sum of column `span` in a line exceeds `column` of Descriptions.',
+        'Descriptions',
+        'Sum of column `span` in a line exceeds `column` of Descriptions.',
       );
     }
   });

@@ -60,7 +60,7 @@ export default {
 
   beforeDestroy() {
     if (this.resizeObserver) {
-      this.resizeObserver.remove();
+      this.resizeObserver.disconnect();
     }
     if (this.debouncedResize && this.debouncedResize.cancel) {
       this.debouncedResize.cancel();

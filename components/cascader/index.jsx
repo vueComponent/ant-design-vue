@@ -328,6 +328,7 @@ const Cascader = {
       } else {
         warning(
           typeof limit !== 'number',
+          'Cascader',
           "'limit' of showSearch in Cascader should be positive number or false.",
         );
         filtered = flattenOptions.filter(path => filter(inputValue, path, names));

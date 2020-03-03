@@ -92,7 +92,7 @@ describe('Descriptions', () => {
       },
     });
     expect(errorSpy).toHaveBeenCalledWith(
-      'Warning: [ant-design-vue: Descriptions] Sum of column `span` in a line exceeds `column` of Descriptions.',
+      'Warning: [antdv: Descriptions] Sum of column `span` in a line exceeds `column` of Descriptions.',
     );
   });
 

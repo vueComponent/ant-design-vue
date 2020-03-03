@@ -549,7 +549,7 @@ export default {
       const filtersToSetState = { ...filters };
       // Remove filters which is controlled
       getFilteredValueColumns({ columns: props.columns }).forEach(col => {
-        const columnKey = this.getColumnKey(col);
+        const columnKey = getColumnKey(col);
         if (columnKey) {
           delete filtersToSetState[columnKey];
         }

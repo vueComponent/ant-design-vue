@@ -1,0 +1,21 @@
+
+.events[data-v-0eb9e660] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.events .ant-badge-status[data-v-0eb9e660] {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+.notes-month[data-v-0eb9e660] {
+  text-align: center;
+  font-size: 28px;
+}
+.notes-month section[data-v-0eb9e660] {
+  font-size: 28px;
+}
+

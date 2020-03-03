@@ -1,0 +1,36 @@
+
+#components-badge-demo-dot .anticon-notification[data-v-1a2139d9] {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+}
+
+
+#components-badge-demo-title .ant-badge[data-v-5acce32a]:not(.ant-badge-status) {
+  margin-right: 20px;
+}
+.head-example[data-v-5acce32a] {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+}
+
+
+#components-badge-demo .ant-badge:not(.ant-badge-not-a-wrapper) {
+  margin-right: 20px;
+}
+#components-badge-demo .head-example {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+  vertical-align: middle;
+}
+#components-badge-demo .ant-badge-not-a-wrapper:not(.ant-badge-status) {
+  margin-right: 8px;
+}
+

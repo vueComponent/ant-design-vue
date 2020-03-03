@@ -1,0 +1,83 @@
+
+.ant-advanced-search-form {
+  padding: 24px;
+  background: #fbfbfb;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+.ant-advanced-search-form .ant-form-item {
+  display: flex;
+}
+.ant-advanced-search-form .ant-form-item-control-wrapper {
+  flex: 1;
+}
+#components-form-demo-advanced-search .ant-form {
+  max-width: none;
+}
+#components-form-demo-advanced-search .search-result-list {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+
+.dynamic-delete-button {
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  font-size: 24px;
+  color: #999;
+  transition: all 0.3s;
+}
+.dynamic-delete-button:hover {
+  color: #777;
+}
+.dynamic-delete-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+#components-form-demo-global-state .language-bash {
+  max-width: 400px;
+  border-radius: 6px;
+  margin-top: 24px;
+}
+
+
+#components-form-demo-vuex .language-bash {
+  max-width: 400px;
+  border-radius: 6px;
+  margin-top: 24px;
+}
+
+
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+}
+
+
+#components-form-demo-validate-other .dropbox {
+  height: 180px;
+  line-height: 1.5;
+}
+
+
+.code-box-demo .ant-form:not(.ant-form-inline):not(.ant-form-vertical) {
+  max-width: 600px;
+}
+.markdown.api-container table td:last-child {
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+

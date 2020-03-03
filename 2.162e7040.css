@@ -1,0 +1,78 @@
+
+th.column-money,
+td.column-money {
+  text-align: right !important;
+}
+
+
+.highlight[data-v-20614742] {
+  background-color: rgb(255, 192, 105);
+  padding: 0px;
+}
+
+
+.editable-cell {
+  position: relative;
+}
+.editable-cell-input-wrapper,
+.editable-cell-text-wrapper {
+  padding-right: 24px;
+}
+.editable-cell-text-wrapper {
+  padding: 5px 24px 5px 5px;
+}
+.editable-cell-icon,
+.editable-cell-icon-check {
+  position: absolute;
+  right: 0;
+  width: 20px;
+  cursor: pointer;
+}
+.editable-cell-icon {
+  line-height: 18px;
+  display: none;
+}
+.editable-cell-icon-check {
+  line-height: 28px;
+}
+.editable-cell:hover .editable-cell-icon {
+  display: inline-block;
+}
+.editable-cell-icon:hover,
+.editable-cell-icon-check:hover {
+  color: #108ee9;
+}
+.editable-add-btn {
+  margin-bottom: 8px;
+}
+
+
+.editable-row-operations a[data-v-7683c326] {
+  margin-right: 8px;
+}
+
+
+.table-operations[data-v-14cbb6b2] {
+  margin-bottom: 16px;
+}
+.table-operations > button[data-v-14cbb6b2] {
+  margin-right: 8px;
+}
+
+
+#components-table-demo-size h4 {
+  margin-bottom: 16px;
+}
+
+.resize-table-th {
+  position: relative;
+}
+.resize-table-th .table-draggable-handle {
+  height: 100% !important;
+  bottom: 0;
+  left: auto !important;
+  right: -5px;
+  cursor: col-resize;
+  touch-action: none;
+}
+

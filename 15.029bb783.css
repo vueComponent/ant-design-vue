@@ -1,0 +1,28 @@
+
+.gutter-example[data-v-ec2515f8] .ant-row > div {
+  background: transparent;
+  border: 0;
+}
+.gutter-box[data-v-ec2515f8] {
+  background: #00a0e9;
+  padding: 5px 0;
+}
+
+
+#components-grid-demo-playground [class^='ant-col-'][data-v-23510863] {
+  background: transparent;
+  border: 0;
+}
+#components-grid-demo-playground [class^='ant-col-'] > div[data-v-23510863] {
+  background: #00a0e9;
+  height: 120px;
+  line-height: 120px;
+  font-size: 13px;
+}
+#components-grid-demo-playground pre[data-v-23510863] {
+  background: #f9f9f9;
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 8px 16px;
+}
+

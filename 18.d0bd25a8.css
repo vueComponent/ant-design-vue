@@ -1,0 +1,15 @@
+
+#components-back-top-demo-custom .ant-back-top[data-v-2ca48125] {
+  bottom: 100px;
+}
+#components-back-top-demo-custom .ant-back-top-inner[data-v-2ca48125] {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  background-color: #1088e9;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+}
+

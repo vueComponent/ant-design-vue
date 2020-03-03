@@ -1,0 +1,11 @@
+
+.pic-plus > * {
+  display: inline-block !important;
+  vertical-align: middle;
+}
+.pic-plus span {
+  font-size: 30px;
+  color: #aaa;
+  margin: 0 20px;
+}
+

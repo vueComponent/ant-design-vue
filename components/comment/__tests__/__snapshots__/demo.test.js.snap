@@ -40,14 +40,14 @@ exports[`renders ./components/comment/demo/editor.md correctly 1`] = `
         <div class="ant-comment-content-detail">
           <div>
             <div class="ant-row ant-form-item">
-              <div class="ant-form-item-control-wrapper">
-                <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea rows="4" class="ant-input"></textarea></span>
+              <div class="ant-col ant-form-item-control-wrapper">
+                <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea class="ant-input" rows="4"></textarea></span>
                   <!---->
                 </div>
               </div>
             </div>
             <div class="ant-row ant-form-item">
-              <div class="ant-form-item-control-wrapper">
+              <div class="ant-col ant-form-item-control-wrapper">
                 <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="submit" class="ant-btn ant-btn-primary"><span>Add Comment</span></button></span>
                   <!---->
                 </div>
@@ -66,8 +66,8 @@ exports[`renders ./components/comment/demo/list.md correctly 1`] = `
   <div class="ant-list-header">2 replies</div>
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-list-item">
-        <div class="ant-list-item-content ant-list-item-content-single">
+      <ul class="ant-list-items">
+        <li class="ant-list-item">
           <div class="ant-comment">
             <div class="ant-comment-inner">
               <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="comment-avatar"></div>
@@ -82,10 +82,8 @@ exports[`renders ./components/comment/demo/list.md correctly 1`] = `
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="ant-list-item">
-        <div class="ant-list-item-content ant-list-item-content-single">
+        </li>
+        <li class="ant-list-item">
           <div class="ant-comment">
             <div class="ant-comment-inner">
               <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="comment-avatar"></div>
@@ -100,8 +98,8 @@ exports[`renders ./components/comment/demo/list.md correctly 1`] = `
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

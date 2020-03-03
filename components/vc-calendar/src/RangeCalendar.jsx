@@ -452,7 +452,7 @@ const RangeCalendar = {
       } = this.$data;
       let startValue = value[0];
       // keep selectedTime when select date
-      if (selectedValue[0] && this.props.timePicker) {
+      if (selectedValue[0] && this.$props.timePicker) {
         startValue = startValue.clone();
         syncTime(selectedValue[0], startValue);
       }
@@ -483,7 +483,7 @@ const RangeCalendar = {
       } = this.$data;
       let endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
       // keep selectedTime when select date
-      if (selectedValue[1] && this.props.timePicker) {
+      if (selectedValue[1] && this.$props.timePicker) {
         syncTime(selectedValue[1], endValue);
       }
       if (showTimePicker) {
@@ -665,7 +665,7 @@ const RangeCalendar = {
       seperator,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
-    const { sHoverValue, sSelectedValue, sMode, sShowTimePicker, sValue } = this;
+    const { sHoverValue, sSelectedValue, sMode: mode, sShowTimePicker, sValue } = this;
     const className = {
       [prefixCls]: 1,
       [`${prefixCls}-hidden`]: !props.visible,
@@ -728,13 +728,13 @@ const RangeCalendar = {
         disabledMonth: this.disabledStartMonth,
         format: this.getFormat(),
         value: startValue,
-        mode: sMode[0],
+        mode: mode[0],
         placeholder: placeholder1,
         showDateInput: this.showDateInput,
         timePicker: timePicker,
         showTimePicker: sShowTimePicker || mode[0] === 'time',
         enablePrev: true,
-        enableNext: !isClosestMonths || this.isMonthYearPanelShow(sMode[1]),
+        enableNext: !isClosestMonths || this.isMonthYearPanelShow(mode[1]),
         clearIcon,
       },
       on: {
@@ -752,13 +752,13 @@ const RangeCalendar = {
         timePickerDisabledTime: this.getEndDisableTime(),
         placeholder: placeholder2,
         value: endValue,
-        mode: sMode[1],
+        mode: mode[1],
         showDateInput: this.showDateInput,
         timePicker: timePicker,
         showTimePicker: sShowTimePicker || mode[1] === 'time',
         disabledTime: this.disabledEndTime,
         disabledMonth: this.disabledEndMonth,
-        enablePrev: !isClosestMonths || this.isMonthYearPanelShow(sMode[0]),
+        enablePrev: !isClosestMonths || this.isMonthYearPanelShow(mode[0]),
         enableNext: true,
         clearIcon,
       },
@@ -814,7 +814,7 @@ const RangeCalendar = {
       });
       OkButtonNode = <OkButton key="okButtonNode" {...okButtonProps} />;
     }
-    const extraFooter = this.renderFooter(sMode);
+    const extraFooter = this.renderFooter(mode);
     return (
       <div ref="rootInstance" class={className} tabIndex="0" onKeydown={this.onKeyDown}>
         {props.renderSidebar()}

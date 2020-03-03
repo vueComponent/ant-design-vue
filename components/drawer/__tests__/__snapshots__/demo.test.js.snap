@@ -57,30 +57,32 @@ exports[`renders ./components/drawer/demo/user-profile.md correctly 1`] = `
   <div class="ant-list ant-list-split ant-list-bordered">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-list-item">
-          <div class="ant-list-item-meta">
-            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></span></div>
-            <div class="ant-list-item-meta-content">
-              <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Lily</a></h4>
-              <div class="ant-list-item-meta-description">Progresser XTech</div>
+        <ul class="ant-list-items">
+          <li class="ant-list-item">
+            <div class="ant-list-item-meta">
+              <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></span></div>
+              <div class="ant-list-item-meta-content">
+                <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Lily</a></h4>
+                <div class="ant-list-item-meta-description">Progresser XTech</div>
+              </div>
             </div>
-          </div>
-          <ul class="ant-list-item-action">
-            <li><a>View Profile</a></li>
-          </ul>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-meta">
-            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></span></div>
-            <div class="ant-list-item-meta-content">
-              <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Lily</a></h4>
-              <div class="ant-list-item-meta-description">Progresser XTech</div>
+            <ul class="ant-list-item-action">
+              <li><a>View Profile</a></li>
+            </ul>
+          </li>
+          <li class="ant-list-item">
+            <div class="ant-list-item-meta">
+              <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></span></div>
+              <div class="ant-list-item-meta-content">
+                <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Lily</a></h4>
+                <div class="ant-list-item-meta-description">Progresser XTech</div>
+              </div>
             </div>
-          </div>
-          <ul class="ant-list-item-action">
-            <li><a>View Profile</a></li>
-          </ul>
-        </div>
+            <ul class="ant-list-item-action">
+              <li><a>View Profile</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

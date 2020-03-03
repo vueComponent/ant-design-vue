@@ -26,7 +26,16 @@ const fileList = [
 ];
 
 describe('Upload List', () => {
+  // jsdom not support `createObjectURL` yet. Let's handle this.
+  const originCreateObjectURL = window.URL.createObjectURL;
+  window.URL.createObjectURL = jest.fn(() => '');
+  const originHTMLCanvasElementGetContext = window.HTMLCanvasElement.prototype.getContext;
+  window.HTMLCanvasElement.prototype.getContext = jest.fn(() => '');
   // https://github.com/ant-design/ant-design/issues/4653
+  afterAll(() => {
+    window.URL.createObjectURL = originCreateObjectURL;
+    window.HTMLCanvasElement.prototype.getContext = originHTMLCanvasElementGetContext;
+  });
   it('should use file.thumbUrl for <img /> in priority', done => {
     const props = {
       propsData: {
@@ -85,7 +94,7 @@ describe('Upload List', () => {
       wrapper
         .findAll('.ant-upload-list-item')
         .at(0)
-        .find('.anticon-close')
+        .find('.anticon-delete')
         .trigger('click');
       await delay(400);
       // wrapper.update();
@@ -363,7 +372,7 @@ describe('Upload List', () => {
         defaultFileList: newFileList.push(newFile),
       });
       await delay(200);
-      expect(wrapper.vm.sFileList[2].thumbUrl).not.toBeFalsy();
+      expect(wrapper.vm.sFileList[2].thumbUrl).not.toBe(undefined);
       done();
     }, 1000);
   });

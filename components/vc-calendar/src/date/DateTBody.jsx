@@ -139,11 +139,21 @@ const DateTBody = {
                 cls += ` ${selectedStartDateClass}`;
               }
             }
-            if (startValue && endValue) {
+            if (startValue || endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
                 isActiveWeek = true;
                 cls += ` ${selectedEndDateClass}`;
+              } else if (
+                (startValue === null || startValue === undefined) &&
+                current.isBefore(endValue, 'day')
+              ) {
+                cls += ` ${inRangeClass}`;
+              } else if (
+                (endValue === null || endValue === undefined) &&
+                current.isAfter(startValue, 'day')
+              ) {
+                cls += ` ${inRangeClass}`;
               } else if (current.isAfter(startValue, 'day') && current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
               }

@@ -38,6 +38,7 @@ const Picker = {
     defaultValue: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
     align: PropTypes.object.def({}),
     dropdownClassName: PropTypes.string,
+    dateRender: PropTypes.func,
   },
   mixins: [BaseMixin],
 
@@ -123,6 +124,10 @@ const Picker = {
       this.closeCalendar(this.focus);
     },
 
+    onCalendarBlur() {
+      this.setOpen(false);
+    },
+
     onVisibleChange(open) {
       this.setOpen(open);
     },
@@ -144,6 +149,7 @@ const Picker = {
           ok: createChainedFunction(calendarEvents.ok, this.onCalendarOk),
           select: createChainedFunction(calendarEvents.select, this.onCalendarSelect),
           clear: createChainedFunction(calendarEvents.clear, this.onCalendarClear),
+          blur: createChainedFunction(calendarEvents.blur, this.onCalendarBlur),
         },
       };
 

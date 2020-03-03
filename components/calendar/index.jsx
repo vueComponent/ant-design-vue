@@ -1,15 +1,9 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import {
-  getOptionProps,
-  hasProp,
-  initDefaultProps,
-  getListeners,
-  getComponentFromProp,
-} from '../_util/props-util';
+import { getOptionProps, hasProp, initDefaultProps, getListeners } from '../_util/props-util';
 import * as moment from 'moment';
 import FullCalendar from '../vc-calendar/src/FullCalendar';
-import Header, { HeaderRender } from './Header';
+import Header from './Header';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import interopDefault from '../_util/interopDefault';
 import { ConfigConsumerProps } from '../config-provider';

@@ -72,7 +72,13 @@ const CalendarMixin = {
         [newProps.class]: !!newProps.class,
       };
       return (
-        <div ref="rootInstance" class={className} tabIndex="0" onKeydown={this.onKeyDown || noop}>
+        <div
+          ref="rootInstance"
+          class={className}
+          tabIndex="0"
+          onKeydown={this.onKeyDown || noop}
+          onBlur={this.onBlur || noop}
+        >
           {newProps.children}
         </div>
       );

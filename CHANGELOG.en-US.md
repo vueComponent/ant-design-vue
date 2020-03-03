@@ -10,6 +10,12 @@
 
 ---
 
+## 1.4.12
+
+`2020-03-03`
+
+- 🐞 Fix ts type error of `Modal` component [#1809](https://github.com/vueComponent/ant-design-vue/issues/1809)
+
 ## 1.4.11
 
 `2020-02-12`

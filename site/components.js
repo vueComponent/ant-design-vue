@@ -28,6 +28,7 @@ import {
   LocaleProvider,
   message,
   Menu,
+  Mentions,
   Modal,
   notification,
   Pagination,
@@ -105,6 +106,7 @@ Vue.use(Layout);
 Vue.use(List);
 Vue.use(LocaleProvider);
 Vue.use(Menu);
+Vue.use(Mentions);
 Vue.use(Modal);
 Vue.use(Pagination);
 Vue.use(Popconfirm);

@@ -73,6 +73,12 @@ export default {
     type: 'Data Entry',
     title: 'Input',
   },
+  mentions: {
+    category: 'Components',
+    subtitle: '提及',
+    type: 'Data Entry',
+    title: 'Mentions',
+  },
   select: {
     category: 'Components',
     subtitle: '选择器',

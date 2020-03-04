@@ -73,6 +73,8 @@ import { default as message } from './message';
 
 import { default as Menu } from './menu';
 
+import { default as Mentions } from './mentions';
+
 import { default as Modal } from './modal';
 
 import { default as notification } from './notification';
@@ -171,6 +173,7 @@ const components = [
   List,
   LocaleProvider,
   Menu,
+  Mentions,
   Modal,
   Pagination,
   Popconfirm,
@@ -258,6 +261,7 @@ export {
   List,
   LocaleProvider,
   Menu,
+  Mentions,
   Modal,
   Pagination,
   Popconfirm,

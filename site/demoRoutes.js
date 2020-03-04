@@ -80,6 +80,14 @@ export default [
     component: () => import('../components/input/demo/index.vue'),
   },
   {
+    path: 'mentions-cn',
+    component: () => import('../components/mentions/demo/index.vue'),
+  },
+  {
+    path: 'mentions-cn',
+    component: () => import('../components/mentions/demo/index.vue'),
+  },
+  {
     path: 'select',
     component: () => import('../components/select/demo/index.vue'),
   },

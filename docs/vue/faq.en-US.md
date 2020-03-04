@@ -22,7 +22,7 @@ Second, if you don't use the form's automatic check/collection feature, ie you d
 
 ### How to modify the default theme of Ant Design Vue?
 
-See [Customize Theme](/docs/vue/customize-theme/)。
+See [Customize Theme](/docs/vue/customize-theme/).
 
 ### How to optimize momentjs bundle size with webpack?
 
@@ -42,8 +42,17 @@ Yes, ant-design-vue is designed to develop a complete background application, we
 
 Or, follow the instructions in [How to avoid modifying global styles?](docs/react/customize-theme#How-to-avoid-modifying-global-styles-?)
 
+### `ant-design-vue` makes only poor user experience on mobile.
+
+`ant-design-vue` is not designed for mobile.
+
 ### When I set `mode` to DatePicker/RangePicker, I cannot select year or month anymore?
 
 In a real world development, you may need a YearPicker, MonthRangePicker or WeekRangePicker. You are trying to add `mode` to DatePicker/RangePicker expected to implement those pickers. However, the DatePicker/RangePicker cannot be selected and the panels won't close now.
 
 That is because `<DatePicker mode="year" />` do not equal to `YearPicker`, `<RangePicker mode="month" />` do not equal to `MonthRangePicker` either. The `mode` property was added to support [showing time picker panel in DatePicker](https://github.com/ant-design/ant-design/issues/5190), which simply control the displayed panel and won't change the original date picking behavior of `DatePicker/RangePicker` (for instance you still need to click date cell to finish selection in a DatePicker, whatever the `mode` is).
+
+##### Solution
+
+The following articles are the implementation articles of the react version, the ideas are the same.
+In [one article](https://juejin.im/post/5cf65c366fb9a07eca6968f9) or [another article](https://www.cnblogs.com/zyl-Tara/p/10197177.html) approach, using methods `mode` and `panelChange` to encapsulate a component such as `YearPicker`. We plan to add more date related components directly in ant-design-vue@2.0 to support these needs.

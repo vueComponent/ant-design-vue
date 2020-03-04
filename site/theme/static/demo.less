@@ -73,11 +73,10 @@
   &-meta {
     &.markdown {
       position: relative;
-      padding: 18px 32px;
-      border-radius: 0 0 @border-radius-sm @border-radius-sm;
-      transition: background-color 0.4s;
       width: 100%;
       font-size: @font-size-base;
+      border-radius: 0 0 @border-radius-sm @border-radius-sm;
+      transition: background-color 0.4s;
     }
 
     blockquote {
@@ -93,7 +92,7 @@
     > p {
       font-size: 12px;
       margin: 0.5em 0;
-      padding-right: 25px;
+      padding: 18px 24px 12px;
       width: 100%;
       word-break: break-word;
     }
@@ -105,28 +104,20 @@
   }
 
   .code-expand-icon {
-    position: absolute;
-    right: 16px;
-    bottom: 23px;
     cursor: pointer;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
   }
 
   .code-expand-icon-show,
   .code-expand-icon-hide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-shadow: none;
     transition: all 0.4s;
     user-select: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0;
-    max-width: 100%;
-    width: 100%;
-    vertical-align: baseline;
-    box-shadow: none;
   }
 
   .code-expand-icon-show {
@@ -169,29 +160,57 @@
   }
 
   &-actions {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    text-align: right;
+    padding-top: 12px;
+    text-align: center;
+    border-top: 1px dashed @site-border-color-split;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+
     > i,
-    > form {
+    > form,
+    > span {
+      position: relative;
       display: inline-block;
-      margin-left: 8px;
+      width: 16px;
+      height: 16px;
+      margin-left: 16px;
+      vertical-align: top;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    > form {
+      top: -2px;
     }
   }
 
-  &-code-copy {
-    font-size: 14px;
-    cursor: pointer;
-    color: @site-text-color-secondary;
-    transition: all 0.24s;
-    background: #fff;
+  &-code-action {
     width: 20px;
     height: 20px;
+    color: @site-text-color-secondary;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: all 0.24s;
+  }
+
+  &-code-copy {
+    width: 20px;
+    height: 20px;
+    color: @site-text-color-secondary;
+    font-size: 14px;
     line-height: 20px;
     text-align: center;
+    background: #fff;
     border-radius: 20px;
-    opacity: 0;
+    cursor: pointer;
+    transition: all 0.24s;
 
     &:hover {
       color: @site-text-color-secondary;

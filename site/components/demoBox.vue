@@ -13,29 +13,9 @@
     <section class="code-box-meta markdown">
       <slot v-if="isZhCN" name="description" />
       <slot v-else name="us-description" />
-      <a-tooltip :title="codeExpand ? 'Hide Code' : 'Show Code'">
-        <span class="code-expand-icon">
-          <img
-            width="16"
-            alt="expand code"
-            src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
-            :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
-            @click="handleCodeExpand"
-          />
-          <img
-            width="16"
-            alt="expand code"
-            src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
-            :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"
-            @click="handleCodeExpand"
-          />
-        </span>
-      </a-tooltip>
-    </section>
-    <transition appear :css="false" @enter="enter" @leave="leave">
-      <section v-show="codeExpand" class="highlight-wrapper" style="position: relative;">
+      <div class="code-box-actions">
         <a-tooltip
-          :title="copied ? '复制成功' : '复制代码'"
+          :title="copied ? 'Copied!' : 'Copy code'"
           :visible="copyTooltipVisible"
           @visibleChange="onCopyTooltipVisibleChange"
         >
@@ -46,6 +26,28 @@
             class="code-box-code-copy"
           />
         </a-tooltip>
+        <a-tooltip :title="codeExpand ? 'Hide Code' : 'Show Code'">
+          <span class="code-expand-icon">
+            <img
+              width="16"
+              alt="expand code"
+              src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
+              :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
+              @click="handleCodeExpand"
+            />
+            <img
+              width="16"
+              alt="expand code"
+              src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
+              :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"
+              @click="handleCodeExpand"
+            />
+          </span>
+        </a-tooltip>
+      </div>
+    </section>
+    <transition appear :css="false" @enter="enter" @leave="leave">
+      <section v-show="codeExpand" class="highlight-wrapper" style="position: relative;">
         <slot name="code" />
       </section>
     </transition>

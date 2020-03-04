@@ -128,7 +128,7 @@ export interface ModalOptions {
    */
   onOk?: () => any;
 
-  parentContext: Object;
+  parentContext?: object;
 }
 
 export interface ModalConfirm {

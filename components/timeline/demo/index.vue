@@ -12,15 +12,13 @@ const md = {
   cn: `# 时间轴
   垂直展示的时间流信息。
   ## 何时使用
-  在操作需要较长时间才能完成时，为用户显示该操作的当前进度和状态。
-
   - 当有一系列信息需按时间排列时，可正序和倒序。
-  - 需要有一条时间轴进行视觉上的串联时。。
+  - 需要有一条时间轴进行视觉上的串联时。
         ## 代码演示`,
   us: `# Timeline
   Vertical display timeline.
   ## When To Use
-  - When a series of information needs to be ordered by time (ascend or descend).
+  - When a series of information needs to be ordered by time (ascending or descending).
   - When you need a timeline to make a visual connection.
   ## Examples
   `,

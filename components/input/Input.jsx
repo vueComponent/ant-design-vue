@@ -192,11 +192,6 @@ export default {
           keydown: this.handleKeyDown,
           change: noop,
         },
-        directives: [
-          {
-            name: 'ant-input',
-          },
-        ],
       };
       return <TextArea {...textareaProps} ref="input" />;
     }

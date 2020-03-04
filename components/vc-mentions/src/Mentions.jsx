@@ -2,7 +2,6 @@ import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
 import BaseMixin from '../../_util/BaseMixin';
 import {
-  getStyle,
   getSlots,
   hasProp,
   getOptionProps,
@@ -73,7 +72,8 @@ const Mentions = {
       }
       this.$emit('change', value);
     },
-    onChange({ target: { value } }) {
+    onChange({ target: { value, composing } }) {
+      if (composing) return;
       this.triggerChange(value);
     },
     onKeyDown(event) {
@@ -283,6 +283,7 @@ const Mentions = {
         <textarea
           ref="textarea"
           {...{
+            directives: [{ name: 'ant-input' }],
             attrs: { ...inputProps, ...this.$attrs },
             domProps: {
               value,

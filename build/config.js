@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'upload', // dev components
+    componentName: 'mentions', // dev components
   },
 };

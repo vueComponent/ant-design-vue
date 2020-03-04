@@ -2,6 +2,7 @@ import Menu, { MenuItem } from '../../vc-menu';
 import PropTypes from '../../_util/vue-types';
 import { OptionProps } from './Option';
 
+function noop() {}
 export default {
   name: 'DropdownMenu',
   props: {
@@ -18,8 +19,8 @@ export default {
       activeIndex,
       setActiveIndex,
       selectOption,
-      onFocus,
-      onBlur,
+      onFocus = noop,
+      onBlur = noop,
     } = this.mentionsContext;
     const { prefixCls, options } = this.$props;
     const activeOption = options[activeIndex] || {};

@@ -11,7 +11,7 @@ Basic usage.
 ```tpl
 <template>
   <a-mentions
-    defaultValue="@afc163"
+    v-model="value"
     @change="onChange"
     @select="onSelect"
   >
@@ -22,6 +22,11 @@ Basic usage.
 </template>
 <script>
 export default {
+  data() {
+    return {
+      value: '@afc163',
+    }
+  },
   methods: {
     onSelect(option) {
       console.log('select', option);

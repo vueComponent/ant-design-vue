@@ -97,6 +97,11 @@ const ResizableTextArea = {
         style,
         class: cls,
         on: omit(getListeners(this), 'pressEnter'),
+        directives: [
+          {
+            name: 'ant-input',
+          },
+        ],
       };
       return (
         <ResizeObserver onResize={this.resizeOnNextFrame} disabled={!(autoSize || autosize)}>

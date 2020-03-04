@@ -138,7 +138,11 @@ const Mentions = {
   },
   render() {
     const { focused } = this.$data;
-    const { getPrefixCls, renderEmpty, getContextPopupContainer } = this.configProvider;
+    const {
+      getPrefixCls,
+      renderEmpty,
+      getPopupContainer: getContextPopupContainer,
+    } = this.configProvider;
     const {
       prefixCls: customizePrefixCls,
       disabled,

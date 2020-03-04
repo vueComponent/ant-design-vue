@@ -279,7 +279,7 @@ const Mentions = {
     const options = measuring ? this.getOptions() : [];
 
     return (
-      <div class={prefixCls} style={getStyle(this)}>
+      <div class={prefixCls}>
         <textarea
           ref="textarea"
           {...{

@@ -47,7 +47,7 @@ export default {
             <MenuItem
               key={value}
               disabled={disabled}
-              onMouseEnter={() => {
+              onMouseenter={() => {
                 setActiveIndex(index);
               }}
             >

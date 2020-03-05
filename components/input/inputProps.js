@@ -12,7 +12,7 @@ export default {
   name: String,
   size: PropTypes.oneOf(['small', 'large', 'default']),
   disabled: PropTypes.bool,
-  readOnly: Boolean,
+  readOnly: PropTypes.bool,
   addonBefore: PropTypes.any,
   addonAfter: PropTypes.any,
   // onPressEnter?: React.FormEventHandler<any>;

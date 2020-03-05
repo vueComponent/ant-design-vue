@@ -31,11 +31,19 @@ const ClearableLabeledInput = {
     addonBefore: PropTypes.any,
     addonAfter: PropTypes.any,
     className: PropTypes.string,
+    readOnly: PropTypes.bool,
   },
   methods: {
     renderClearIcon(prefixCls) {
-      const { allowClear, value, disabled, inputType, handleReset } = this.$props;
-      if (!allowClear || disabled || value === undefined || value === null || value === '') {
+      const { allowClear, value, disabled, readOnly, inputType, handleReset } = this.$props;
+      if (
+        !allowClear ||
+        disabled ||
+        readOnly ||
+        value === undefined ||
+        value === null ||
+        value === ''
+      ) {
         return null;
       }
       const className =

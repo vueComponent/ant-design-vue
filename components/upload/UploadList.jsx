@@ -19,7 +19,7 @@ export default {
       showInfo: false,
     },
     showRemoveIcon: true,
-    showDownloadIcon: true,
+    showDownloadIcon: false,
     showPreviewIcon: true,
     previewFile: previewImage,
   }),

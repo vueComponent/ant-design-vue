@@ -211,7 +211,7 @@ const Affix = {
         const offsetBottom = this.getOffsetBottom();
 
         const targetNode = target();
-        if (targetNode) {
+        if (targetNode && this.$refs.placeholderNode) {
           const targetRect = getTargetRect(targetNode);
           const placeholderReact = getTargetRect(this.$refs.placeholderNode);
           const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);

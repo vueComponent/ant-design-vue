@@ -107,7 +107,7 @@ export default {
       if (!node) {
         return;
       }
-      const buttonText = node.textContent || node.innerText;
+      const buttonText = node.textContent;
       if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
         if (!this.hasTwoCNChar) {
           this.hasTwoCNChar = true;

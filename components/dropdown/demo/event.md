@@ -11,7 +11,7 @@ An event will be triggered when you click menu items, in which you can make diff
 ```tpl
 <template>
   <a-dropdown>
-    <a class="ant-dropdown-link" href="#"> Hover me, Click menu item <a-icon type="down" /> </a>
+    <a class="ant-dropdown-link"  @click="e => e.preventDefault()"> Hover me, Click menu item <a-icon type="down" /> </a>
     <a-menu slot="overlay" @click="onClick">
       <a-menu-item key="1">1st menu item</a-menu-item>
       <a-menu-item key="2">2nd menu item</a-menu-item>

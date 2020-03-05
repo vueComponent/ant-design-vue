@@ -16,6 +16,7 @@
 | expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| slot="expandedRowRender" slot-scope="record, index, indent, expanded" | - |  |
 | expandIcon | 自定义展开图标 | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |  |
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |  |
+| expandIconColumnIndex | 展开的图标显示在哪一列，如果没有 `rowSelection`，默认显示在第一列，否则显示在选择框后面 | `number` |  |
 | footer | 表格尾部 | Function(currentPageData)\|slot-scope |  |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |  |
 | loading | 页面是否加载中 | boolean\|[object](/components/spin-cn) | false |  |

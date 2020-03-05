@@ -16,6 +16,7 @@
 | expandedRowRender | Expanded container render for each row | Function(record, index, indent, expanded):VNode\|slot-scope | - |  |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |  |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
+| expandIconColumnIndex | The index of `expandIcon` which column will be inserted when `expandIconAsCell` is false | 0 |  |
 | footer | Table footer renderer | Function(currentPageData)\|slot-scope |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |  |
 | loading | Loading status of table | boolean\|[object](/components/spin) | `false` |

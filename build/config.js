@@ -1,5 +1,5 @@
 module.exports = {
   dev: {
-    componentName: 'mentions', // dev components
+    componentName: 'page-header', // dev components
   },
 };

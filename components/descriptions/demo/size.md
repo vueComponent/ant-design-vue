@@ -34,7 +34,7 @@ Custom sizes to fit in a variety of containers.
         <br />
         Storage space: 10 GB
         <br />
-        Replication_factor: 3
+        Replication factor: 3
         <br />
         Region: East China 1<br />
       </a-descriptions-item>

@@ -10,11 +10,6 @@ Standard header, suitable for use in scenarios that require a brief description.
 
 ```tpl
 <template>
-  <a-page-header @back="() => null" title="Title" subTitle="This is a subtitle" />
+  <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title" subTitle="This is a subtitle" />
 </template>
-<style>
-.code-box-demo .ant-page-header {
-  border: 1px solid rgb(235, 237, 240);
-}
-</style>
 ```

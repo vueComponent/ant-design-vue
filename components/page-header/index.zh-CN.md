@@ -4,6 +4,7 @@
 | --- | --- | --- | --- |
 | title | 自定义标题文字 | string\|slot | - |
 | subTitle | 自定义的二级标题文字 | string\|slot | - |
+| ghost | pageHeader 的类型，将会改变背景颜色 | boolean | true |
 | avatar | 标题栏旁的头像 | [avatar props](/components/avatar-cn/) | - |
 | backIcon | 自定义 back icon ，如果为 false 不渲染 back icon | string\|slot | `<Icon type="arrow-left" />` |
 | tags | title 旁的 tag 列表 | [Tag](/components/tag-cn/)[] \| [Tag](/components/tag-cn/) | - |

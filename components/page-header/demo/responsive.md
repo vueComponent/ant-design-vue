@@ -11,7 +11,7 @@ Under different screen sizes, there should be different performance
 ```tpl
 <template>
   <div>
-    <a-page-header @back="() => $router.go(-1)" title="Title" subTitle="This is a subtitle">
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => $router.go(-1)" title="Title" subTitle="This is a subtitle">
       <template slot="extra">
         <a-button key="3">Operation</a-button>
         <a-button key="2">Operation</a-button>
@@ -67,6 +67,10 @@ tr:last-child td {
 }
 #components-page-header-demo-responsive .content {
   display: flex;
+}
+#components-page-header-demo-responsive .ant-statistic-content {
+  font-size: 20px;
+  line-height: 28px;
 }
 @media (max-width: 576px) {
   #components-page-header-demo-responsive .content {

@@ -12,6 +12,7 @@ Use the operating area and customize the sub-nodes, suitable for use in the need
 <template>
   <div>
     <a-page-header
+      style="border: 1px solid rgb(235, 237, 240)"
       @back="() => $router.go(-1)"
       title="Title"
       subTitle="This is a subtitle"

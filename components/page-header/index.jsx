@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Breadcrumb from '../breadcrumb';
@@ -18,6 +18,7 @@ export const PageHeaderProps = {
   footer: PropTypes.any,
   extra: PropTypes.any,
   avatar: PropTypes.object,
+  ghost: PropTypes.bool,
 };
 
 const renderBack = (instance, prefixCls, backIcon, onBack) => {
@@ -91,11 +92,20 @@ const PageHeader = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render(h) {
-    const { getPrefixCls } = this.configProvider;
-    const { prefixCls: customizePrefixCls, breadcrumb } = this.$props;
+    const { getPrefixCls, pageHeader } = this.configProvider;
+    const props = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponentFromProp(this, 'footer');
     const children = this.$slots.default;
 
+    let ghost = true;
+
+    // Use `ghost` from `props` or from `ConfigProvider` instead.
+    if ('ghost' in props) {
+      ghost = props.ghost;
+    } else if (pageHeader && 'ghost' in pageHeader) {
+      ghost = pageHeader.ghost;
+    }
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
     const breadcrumbDom =
       breadcrumb && breadcrumb.props && breadcrumb.props.routes
@@ -106,6 +116,7 @@ const PageHeader = {
       {
         'has-breadcrumb': breadcrumbDom,
         'has-footer': footer,
+        [`${prefixCls}-ghost`]: ghost,
       },
     ];
 

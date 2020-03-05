@@ -3,6 +3,7 @@ import Basic from './basic';
 import Breadcrumb from './breadcrumb';
 import Actions from './actions';
 import Responsive from './responsive';
+import Ghost from './ghost';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -42,10 +43,13 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Breadcrumb />
-        <Actions />
-        <Responsive />
+        <demo-sort cols={1}>
+          <Basic />
+          <Breadcrumb />
+          <Actions />
+          <Responsive />
+          <Ghost />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

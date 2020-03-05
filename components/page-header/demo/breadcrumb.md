@@ -10,7 +10,7 @@ With breadcrumbs, it is suitable for deeper pages, allowing users to navigate qu
 
 ```tpl
 <template>
-  <a-page-header title="Title" :breadcrumb="{ props: { routes } }" subTitle="This is a subtitle" />
+  <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Title" :breadcrumb="{ props: { routes } }" subTitle="This is a subtitle" />
 </template>
 <script>
   export default {

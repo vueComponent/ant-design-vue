@@ -12,7 +12,7 @@
 <template>
   <a href="#">
     <a-badge count="5">
-      <span class="head-example" />
+      <span class="head-example"></span>
     </a-badge>
   </a>
 </template>

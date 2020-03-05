@@ -87,12 +87,16 @@ export default {
       this.$emit('animated');
     },
 
-    renderNumberList(position) {
+    renderNumberList(position, className) {
       const childrenToReturn = [];
       for (let i = 0; i < 30; i++) {
-        const currentClassName = position === i ? 'current' : '';
         childrenToReturn.push(
-          <p key={i.toString()} class={currentClassName}>
+          <p
+            key={i.toString()}
+            class={classNames(className, {
+              current: position === i,
+            })}
+          >
             {i % 10}
           </p>,
         );
@@ -113,7 +117,7 @@ export default {
         };
         return (
           <span class={`${prefixCls}-only`} style={style} key={i}>
-            {this.renderNumberList(position)}
+            {this.renderNumberList(position, `${prefixCls}-only-unit`)}
           </span>
         );
       }

@@ -12,7 +12,7 @@
 <template>
   <div id="components-badge-demo-title">
     <a-badge :count="5" title="Custom hover text">
-      <a href="#" class="head-example" />
+      <a href="#" class="head-example"></a>
     </a-badge>
   </div>
 </template>

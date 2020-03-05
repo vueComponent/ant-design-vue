@@ -13,7 +13,7 @@
   <div>
     <div>
       <a-badge :count="count">
-        <a href="#" class="head-example" />
+        <a href="#" class="head-example"></a>
       </a-badge>
       <a-button-group>
         <a-button @click="decline">
@@ -26,7 +26,7 @@
     </div>
     <div style="margin-top: 10px">
       <a-badge :dot="show">
-        <a href="#" class="head-example" />
+        <a href="#" class="head-example"></a>
       </a-badge>
       <a-switch v-model="show" />
     </div>

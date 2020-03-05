@@ -13,7 +13,7 @@ import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
 import { ConfigConsumerProps } from '../config-provider';
 
-export const BadgeProps = {
+const BadgeProps = {
   /** Number to show in badge */
   count: PropTypes.any,
   showZero: PropTypes.bool,
@@ -27,7 +27,7 @@ export const BadgeProps = {
   color: PropTypes.string,
   text: PropTypes.string,
   offset: PropTypes.array,
-  numberStyle: PropTypes.object.def({}),
+  numberStyle: PropTypes.object.def(() => ({})),
   title: PropTypes.string,
 };
 function isPresetColor(color) {
@@ -77,13 +77,12 @@ export default {
             marginTop: isNumeric(offset[1]) ? `${offset[1]}px` : offset[1],
             ...numberStyle,
           }
-        : numberStyle;
+        : { ...numberStyle };
     },
     getBadgeClassName(prefixCls) {
-      const { status } = this.$props;
       const children = filterEmpty(this.$slots.default);
       return classNames(prefixCls, {
-        [`${prefixCls}-status`]: !!status,
+        [`${prefixCls}-status`]: this.hasStatus(),
         [`${prefixCls}-not-a-wrapper`]: !children.length,
       });
     },
@@ -97,7 +96,7 @@ export default {
     },
 
     isDot() {
-      const { dot, status } = this.$props;
+      const { dot } = this.$props;
       const isZero = this.isZero();
       return (dot && !isZero) || this.hasStatus();
     },
@@ -129,7 +128,7 @@ export default {
     },
 
     renderBadgeNumber(prefixCls, scrollNumberPrefixCls) {
-      const { status } = this.$props;
+      const { status, color } = this.$props;
       const count = this.badgeCount;
       const displayCount = this.getDispayCount();
       const isDot = this.isDot();
@@ -140,8 +139,15 @@ export default {
         [`${prefixCls}-count`]: !isDot,
         [`${prefixCls}-multiple-words`]:
           !isDot && count && count.toString && count.toString().length > 1,
-        [`${prefixCls}-status-${status}`]: this.hasStatus(),
+        [`${prefixCls}-status-${status}`]: !!status,
+        [`${prefixCls}-status-${color}`]: isPresetColor(color),
       };
+
+      let statusStyle = this.getStyleWithOffset();
+      if (color && !isPresetColor(color)) {
+        statusStyle = statusStyle || {};
+        statusStyle.background = color;
+      }
 
       return hidden ? null : (
         <ScrollNumber
@@ -152,7 +158,7 @@ export default {
           count={displayCount}
           displayComponent={this.renderDispayComponent()} // <Badge status="success" count={<Icon type="xxx" />}></Badge>
           title={this.getScrollNumberTitle()}
-          style={this.getStyleWithOffset()}
+          style={statusStyle}
           key="scrollNumber"
         />
       );

@@ -55,13 +55,28 @@ export declare class Carousel extends AntdComponent {
   adaptiveHeight?: boolean;
   arrows?: boolean;
   autoplaySpeed?: number;
+  /**
+   * Whether to scroll automatically
+   * @default false
+   * @type boolean
+   */
   autoplay?: boolean;
   centerMode?: boolean;
   centerPadding?: string;
   cssEase?: string;
   dotsClass?: string;
+  /**
+   * Whether to show the dots at the bottom of the gallery
+   * @default true
+   * @type boolean
+   */
   dots?: boolean;
   draggable?: boolean;
+  /**
+   * Transition interpolation function name
+   * @default 'linear'
+   * @type string
+   */
   easing?: string;
   edgeFriction?: number;
   fade?: boolean;
@@ -71,7 +86,7 @@ export declare class Carousel extends AntdComponent {
   pauseOnDotsHover?: boolean;
   pauseOnFocus?: boolean;
   pauseOnHover?: boolean;
-  responsive?: ResponsiveObject[];
+  responsive?: ResponsiveObject[] | undefined;
   rows?: number;
   rtl?: boolean;
   slide?: string;
@@ -86,6 +101,11 @@ export declare class Carousel extends AntdComponent {
   useCSS?: boolean;
   useTransform?: boolean;
   variableWidth?: boolean;
+  /**
+   * Whether to use a vertical display
+   * @default false
+   * @type boolean
+   */
   vertical?: boolean;
   verticalSwiping?: boolean;
   waitForAnimate?: boolean;
@@ -97,31 +117,10 @@ export declare class Carousel extends AntdComponent {
   afterChange: (current: number) => any;
 
   /**
-   * Whether to scroll automatically
-   * @default false
-   * @type boolean
-   */
-  autoplay: boolean;
-
-  /**
    * Callback function called before the current index changes
    * @type Function
    */
   beforeChange: (from: number, to: number) => any;
-
-  /**
-   * Whether to show the dots at the bottom of the gallery
-   * @default true
-   * @type boolean
-   */
-  dots: boolean;
-
-  /**
-   * Transition interpolation function name
-   * @default 'linear'
-   * @type string
-   */
-  easing: string;
 
   /**
    * Transition effect
@@ -129,15 +128,6 @@ export declare class Carousel extends AntdComponent {
    * @type string
    */
   effect: 'scrollx' | 'fade';
-
-  /**
-   * Whether to use a vertical display
-   * @default false
-   * @type boolean
-   */
-  vertical: boolean;
-
-  responsive: ResponsiveObject[];
 
   /**
    * Go to slide index, if dontAnimate=true, it happens without animation

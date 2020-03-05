@@ -46,6 +46,7 @@ export interface UploadLocale {
 
 export type UploadType = 'drag' | 'select';
 export type UploadListType = 'text' | 'picture' | 'picture-card';
+export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
 
 type PreviewFileHandler = (file: File | Blob) => PromiseLike<string>;
 type TransformFileHandler = (

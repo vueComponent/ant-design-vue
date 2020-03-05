@@ -24,7 +24,7 @@ export default {
     mask: PropTypes.bool,
     zIndex: PropTypes.number,
     popupClassName: PropTypes.any,
-    popupStyle: PropTypes.object.def({}),
+    popupStyle: PropTypes.object.def(() => ({})),
     stretch: PropTypes.string,
     point: PropTypes.shape({
       pageX: PropTypes.number,

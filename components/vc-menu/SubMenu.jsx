@@ -68,7 +68,7 @@ const SubMenu = {
       'inline',
     ]).def('vertical'),
     manualRef: PropTypes.func.def(noop),
-    builtinPlacements: PropTypes.object.def({}),
+    builtinPlacements: PropTypes.object.def(() => ({})),
     itemIcon: PropTypes.any,
     expandIcon: PropTypes.any,
   },

@@ -15,7 +15,7 @@ export default {
     openClassName: PropTypes.string,
     animation: PropTypes.any,
     align: PropTypes.object,
-    overlayStyle: PropTypes.object.def({}),
+    overlayStyle: PropTypes.object.def(() => ({})),
     placement: PropTypes.string.def('bottomLeft'),
     overlay: PropTypes.any,
     trigger: PropTypes.array.def(['hover']),

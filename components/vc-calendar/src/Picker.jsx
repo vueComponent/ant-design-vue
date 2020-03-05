@@ -36,7 +36,7 @@ const Picker = {
     placement: PropTypes.any.def('bottomLeft'),
     value: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
     defaultValue: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
-    align: PropTypes.object.def({}),
+    align: PropTypes.object.def(() => ({})),
     dropdownClassName: PropTypes.string,
     dateRender: PropTypes.func,
   },

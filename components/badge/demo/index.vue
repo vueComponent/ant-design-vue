@@ -36,14 +36,16 @@ export default {
     return (
       <div id="components-badge-demo">
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <NoWapper />
-        <Overflow />
-        <Dot />
-        <Status />
-        <Change />
-        <Title />
-        <Colors />
+        <demo-sort>
+          <Basic />
+          <NoWapper />
+          <Overflow />
+          <Dot />
+          <Status />
+          <Change />
+          <Title />
+          <Colors />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

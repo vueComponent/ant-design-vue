@@ -44,16 +44,18 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <More />
-        <Changer />
-        <CustomChanger />
-        <Jump />
-        <Mini />
-        <Simple />
-        <Controlled />
-        <Total />
-        <ItemRender />
+        <demo-sort cols={1}>
+          <Basic />
+          <More />
+          <Changer />
+          <CustomChanger />
+          <Jump />
+          <Mini />
+          <Simple />
+          <Controlled />
+          <Total />
+          <ItemRender />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

@@ -45,17 +45,19 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Avatar />
-        <DefaultFileList />
-        <PictureCard />
-        <FileList />
-        <Drag />
-        <PictureStyle />
-        <UploadManually />
-        <Directory />
-        <PreviewFile />
-        <TransformFile />
+        <demo-sort>
+          <Basic />
+          <Avatar />
+          <DefaultFileList />
+          <PictureCard />
+          <FileList />
+          <Drag />
+          <PictureStyle />
+          <UploadManually />
+          <Directory />
+          <PreviewFile />
+          <TransformFile />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

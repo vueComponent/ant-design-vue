@@ -53,7 +53,7 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <demo-sort>
+        <demo-sort cols={1}>
           <Basic />
           <Disabled />
           <Icon />

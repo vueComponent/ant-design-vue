@@ -27,7 +27,7 @@
     ],
     "scripts": {
         "dev": "node build/dev.js",
-        "start": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
+        "start": "cross-env PORT=3001 NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
         "test": "cross-env NODE_ENV=test jest --config .jest.js",
         "site": "node scripts/run.js _site",
         "copy": "node scripts/run.js copy-html",

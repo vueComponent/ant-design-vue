@@ -41,21 +41,23 @@ export default {
     return (
       <div id="components-select-demo">
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Size />
-        <Tags />
-        <AutomaticTokenization />
-        <LabelInValue />
-        <Multiple />
-        <Coordinate />
-        <Optgroup />
-        <SearchBox />
-        <Search />
-        <SelectUsers />
-        <Suffix />
-        <HideSelected />
-        <CustomDropdownMenu />
-        <OptionLabelProp />
+        <demo-sort>
+          <Basic />
+          <Size />
+          <Tags />
+          <AutomaticTokenization />
+          <LabelInValue />
+          <Multiple />
+          <Coordinate />
+          <Optgroup />
+          <SearchBox />
+          <Search />
+          <SelectUsers />
+          <Suffix />
+          <HideSelected />
+          <CustomDropdownMenu />
+          <OptionLabelProp />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

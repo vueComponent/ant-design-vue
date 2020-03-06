@@ -94,16 +94,18 @@ export default {
         </div>
         <md cn={md2.cn} us={md2.us} />
         <div id="components-grid-demo-all">
-          <Basic />
-          <FlexAlign />
-          <FlexOrder />
-          <Flex />
-          <Gutter />
-          <Offset />
-          <ResponsiveMore />
-          <Responsive />
-          <Sort />
-          <Playfround />
+          <demo-sort cols={1}>
+            <Basic />
+            <FlexAlign />
+            <FlexOrder />
+            <Flex />
+            <Gutter />
+            <Offset />
+            <ResponsiveMore />
+            <Responsive />
+            <Sort />
+            <Playfround />
+          </demo-sort>
         </div>
         <api>
           <CN slot="cn" />

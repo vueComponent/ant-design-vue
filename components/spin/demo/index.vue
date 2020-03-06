@@ -36,13 +36,15 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Size />
-        <Inside />
-        <Nested />
-        <Tip />
-        <DelayAndDebounce />
-        <CustomIndicator />
+        <demo-sort>
+          <Basic />
+          <Size />
+          <Inside />
+          <Nested />
+          <Tip />
+          <DelayAndDebounce />
+          <CustomIndicator />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

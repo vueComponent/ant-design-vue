@@ -21,7 +21,9 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Locale />
+        <demo-sort cols={1}>
+          <Locale />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

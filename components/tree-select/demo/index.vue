@@ -33,12 +33,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Checkable />
-        <Multiple />
-        <TreeData />
-        <Suffix />
-        <Async />
+        <demo-sort>
+          <Basic />
+          <Checkable />
+          <Multiple />
+          <TreeData />
+          <Suffix />
+          <Async />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

@@ -31,14 +31,12 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <br />
-        <List />
-        <br />
-        <Nested />
-        <br />
-        <Editor />
-        <br />
+        <demo-sort cols={1}>
+          <Basic />
+          <List />
+          <Nested />
+          <Editor />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

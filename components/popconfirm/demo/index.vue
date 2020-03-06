@@ -39,11 +39,13 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Local />
-        <Placement />
-        <DynamicTrigger />
-        <Icon />
+        <demo-sort>
+          <Basic />
+          <Local />
+          <Placement />
+          <DynamicTrigger />
+          <Icon />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

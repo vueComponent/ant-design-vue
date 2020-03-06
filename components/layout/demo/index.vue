@@ -151,15 +151,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <CustomTrigger />
-        <TopSide2 />
-        <TopSide />
-        <Top />
-        <Responsive />
-        <FixedSider />
-        <Fixed />
-        <Side />
+        <demo-sort cols={1}>
+          <Basic />
+          <CustomTrigger />
+          <TopSide2 />
+          <TopSide />
+          <Top />
+          <Responsive />
+          <FixedSider />
+          <Fixed />
+          <Side />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

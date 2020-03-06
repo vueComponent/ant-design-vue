@@ -29,14 +29,12 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <br />
-        <Unit />
-        <br />
-        <Card />
-        <br />
-        <Countdown />
-        <br />
+        <demo-sort>
+          <Basic />
+          <Unit />
+          <Card />
+          <Countdown />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

@@ -31,12 +31,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Async />
-        <Form />
-        <Prefix />
-        <Readonly />
-        <Placement />
+        <demo-sort>
+          <Basic />
+          <Async />
+          <Form />
+          <Prefix />
+          <Readonly />
+          <Placement />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

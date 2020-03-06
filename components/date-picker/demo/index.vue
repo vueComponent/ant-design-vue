@@ -37,19 +37,21 @@ export default {
     return (
       <div id="components-date-picker-demo">
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <DateRender />
-        <DisabledDate />
-        <Disabled />
-        <ExtraFooter />
-        <Format />
-        <Mode />
-        <PresettedRanges />
-        <Size />
-        <StartEnd />
-        <Time />
-        <Text />
-        <Suffix />
+        <demo-sort>
+          <Basic />
+          <DateRender />
+          <DisabledDate />
+          <Disabled />
+          <ExtraFooter />
+          <Format />
+          <Mode />
+          <PresettedRanges />
+          <Size />
+          <StartEnd />
+          <Time />
+          <Text />
+          <Suffix />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

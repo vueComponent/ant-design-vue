@@ -28,8 +28,10 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Custom />
+        <demo-sort>
+          <Basic />
+          <Custom />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

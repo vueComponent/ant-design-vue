@@ -30,8 +30,10 @@ export default {
           <CN slot="cn" />
           <US />
         </api>
-        <Basic />
-        <All />
+        <demo-sort cols={1}>
+          <Basic />
+          <All />
+        </demo-sort>
         <md cn={md.cn} us={md.us} />
       </div>
     );

@@ -32,12 +32,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Info />
-        <Duration />
-        <Loading />
-        <Other />
-        <Thenable />
-        <Update />
+        <demo-sort>
+          <Info />
+          <Duration />
+          <Loading />
+          <Other />
+          <Thenable />
+          <Update />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

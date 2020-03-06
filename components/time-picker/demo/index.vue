@@ -31,7 +31,7 @@ export default {
     return (
       <div id="components-timepicker-demo">
         <md cn={md.cn} us={md.us} />
-        <demo-sort cols="2">
+        <demo-sort>
           <Hours />
           <Addon />
           <Basic />

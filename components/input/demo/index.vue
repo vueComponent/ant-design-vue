@@ -37,18 +37,20 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <AutosizeTextarea />
-        <Presuffix />
-        <SearchInput />
-        <SearchInputLoading />
-        <Size />
-        <Group />
-        <TextArea />
-        <Addon />
-        <Tooltip />
-        <AllowClear />
-        <PasswordInput />
+        <demo-sort>
+          <Basic />
+          <AutosizeTextarea />
+          <Presuffix />
+          <SearchInput />
+          <SearchInputLoading />
+          <Size />
+          <Group />
+          <TextArea />
+          <Addon />
+          <Tooltip />
+          <AllowClear />
+          <PasswordInput />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

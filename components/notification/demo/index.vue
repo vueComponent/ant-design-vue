@@ -41,14 +41,16 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <CustomIcon />
-        <CustomStyle />
-        <Duration />
-        <Placement />
-        <WithBtn />
-        <WithIcon />
-        <Update />
+        <demo-sort>
+          <Basic />
+          <CustomIcon />
+          <CustomStyle />
+          <Duration />
+          <Placement />
+          <WithBtn />
+          <WithIcon />
+          <Update />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

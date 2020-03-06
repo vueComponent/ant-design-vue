@@ -40,12 +40,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <ArrowCenter />
-        <Control />
-        <Placement />
-        <TriggerType />
-        <HoverWithClick />
+        <demo-sort>
+          <Basic />
+          <ArrowCenter />
+          <Control />
+          <Placement />
+          <TriggerType />
+          <HoverWithClick />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

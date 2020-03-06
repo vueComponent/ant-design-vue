@@ -28,14 +28,12 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <br />
-        <Badge />
-        <br />
-        <Type />
-        <br />
-        <Dynamic />
-        <br />
+        <demo-sort>
+          <Basic />
+          <Badge />
+          <Type />
+          <Dynamic />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

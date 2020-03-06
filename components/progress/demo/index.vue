@@ -41,17 +41,19 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Line />
-        <Circle />
-        <LineMini />
-        <CircleMini />
-        <CircleDynamic />
-        <Format />
-        <Dynamic />
-        <Dashboard />
-        <Segment />
-        <Linecap />
-        <GradientLine />
+        <demo-sort>
+          <Line />
+          <Circle />
+          <LineMini />
+          <CircleMini />
+          <CircleDynamic />
+          <Format />
+          <Dynamic />
+          <Dashboard />
+          <Segment />
+          <Linecap />
+          <GradientLine />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

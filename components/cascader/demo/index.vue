@@ -41,18 +41,20 @@ export default {
     return (
       <div id="components-cascader-demo">
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <ChangeOnSelect />
-        <CustomRender />
-        <CustomTrigger />
-        <DefaultValue />
-        <DisabledOption />
-        <Hover />
-        <Lazy />
-        <Search />
-        <Size />
-        <FieldsName />
-        <Suffix />
+        <demo-sort>
+          <Basic />
+          <ChangeOnSelect />
+          <CustomRender />
+          <CustomTrigger />
+          <DefaultValue />
+          <DisabledOption />
+          <Hover />
+          <Lazy />
+          <Search />
+          <Size />
+          <FieldsName />
+          <Suffix />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

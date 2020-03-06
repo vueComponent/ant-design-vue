@@ -38,14 +38,16 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Card />
-        <NoticeCalendar />
-        <Select />
-        <CustomizeHeader />
-        <demo-container code={CustomizeHeaderString}>
+        <demo-sort cols={1}>
+          <Basic />
+          <Card />
+          <NoticeCalendar />
+          <Select />
           <CustomizeHeader />
-        </demo-container>
+          <demo-container code={CustomizeHeaderString}>
+            <CustomizeHeader />
+          </demo-container>
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

@@ -123,9 +123,9 @@ export default {
     getSubMenu(isCN) {
       const currentSubMenu = this.currentSubMenu;
       const lis = [];
-      currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
+      currentSubMenu.forEach(({ cnTitle, usTitle, id }, index) => {
         const title = isCN ? cnTitle : usTitle;
-        lis.push(<a-anchor-link key={id} href={`#${id}`} title={title} />);
+        lis.push(<a-anchor-link key={id + index} href={`#${id}`} title={title} />);
       });
       const showApi = this.$route.path.indexOf('/components/') !== -1;
       return (
@@ -242,7 +242,7 @@ export default {
     return (
       <div class="page-wrapper">
         <Header searchData={searchData} name={name} />
-        <a-locale-provider locale={locale}>
+        <a-config-provider locale={locale}>
           <div class="main-wrapper">
             <a-row>
               {isMobile ? (
@@ -357,7 +357,7 @@ export default {
               </a-col>
             </a-row>
           </div>
-        </a-locale-provider>
+        </a-config-provider>
         {name.indexOf('back-top') === -1 ? <a-back-top /> : null}
         {isCN && <Geektime isMobile={isMobile} />}
       </div>

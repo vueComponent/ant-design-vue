@@ -30,9 +30,11 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Vertical />
-        <Horizontal />
-        <WithText />
+        <demo-sort cols={1}>
+          <Vertical />
+          <Horizontal />
+          <WithText />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

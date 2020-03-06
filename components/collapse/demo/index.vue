@@ -40,13 +40,15 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Accordion />
-        <Mix />
-        <Borderless />
-        <Custom />
-        <Noarrow />
-        <Extra />
+        <demo-sort cols={1}>
+          <Basic />
+          <Accordion />
+          <Mix />
+          <Borderless />
+          <Custom />
+          <Noarrow />
+          <Extra />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

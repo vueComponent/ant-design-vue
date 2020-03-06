@@ -36,14 +36,16 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Grid />
-        <Loadmore />
-        <Resposive />
-        <Simple />
-        <Vertical />
-        <InfiniteLoad />
-        <InfiniteVirtualizedLoad />
+        <demo-sort cols={1}>
+          <Basic />
+          <Grid />
+          <Loadmore />
+          <Resposive />
+          <Simple />
+          <Vertical />
+          <InfiniteLoad />
+          <InfiniteVirtualizedLoad />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

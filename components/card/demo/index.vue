@@ -40,16 +40,18 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <BorderLess />
-        <FlexibleContent />
-        <GridCard />
-        <InColumn />
-        <Inner />
-        <Loading />
-        <Meta />
-        <Simple />
-        <Tabs />
+        <demo-sort>
+          <Basic />
+          <BorderLess />
+          <FlexibleContent />
+          <GridCard />
+          <InColumn />
+          <Inner />
+          <Loading />
+          <Meta />
+          <Simple />
+          <Tabs />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

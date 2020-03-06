@@ -41,12 +41,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Position />
-        <Fade />
-        <Autoplay />
-        <CustomPaging />
-        <CustomArrows />
+        <demo-sort cols={1}>
+          <Basic />
+          <Position />
+          <Fade />
+          <Autoplay />
+          <CustomPaging />
+          <CustomArrows />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

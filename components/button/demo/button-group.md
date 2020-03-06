@@ -42,13 +42,13 @@ The `size` can be set to `large`, `small` or left unset resulting in a default s
   </div>
 </template>
 <style>
-  #components-button-demo-button-group h4 {
+  #components-button-demo-button-group > h4 {
     margin: 16px 0;
     font-size: 14px;
     line-height: 1;
     font-weight: normal;
   }
-  #components-button-demo-button-group h4:first-child {
+  #components-button-demo-button-group > h4:first-child {
     margin-top: 0;
   }
   #components-button-demo-button-group .ant-btn-group {

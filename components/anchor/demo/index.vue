@@ -37,12 +37,14 @@ export default {
     return (
       <div id="components-anchor-demo">
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Static />
-        <OnClick />
-        <CustomizeHighlight />
-        <OnChange />
-        <TargetOffset />
+        <demo-sort>
+          <Basic />
+          <Static />
+          <OnClick />
+          <CustomizeHighlight />
+          <OnChange />
+          <TargetOffset />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

@@ -43,15 +43,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <ButtonGroup />
-        <Disabled />
-        <Ghost />
-        <Icon />
-        <Loading />
-        <Multiple />
-        <Size />
-        <Block />
+        <demo-sort>
+          <Basic />
+          <ButtonGroup />
+          <Disabled />
+          <Ghost />
+          <Icon />
+          <Loading />
+          <Multiple />
+          <Size />
+          <Block />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

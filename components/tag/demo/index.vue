@@ -39,12 +39,14 @@ export default {
     return (
       <div id="components-tag-demo">
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Checkable />
-        <Colorful />
-        <Control />
-        <HotTags />
-        <Controlled />
+        <demo-sort>
+          <Basic />
+          <Checkable />
+          <Colorful />
+          <Control />
+          <HotTags />
+          <Controlled />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

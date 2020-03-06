@@ -42,11 +42,13 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <ConfigProvider />
-        <Customize />
-        <Description />
-        <Simple />
+        <demo-sort cols={1}>
+          <Basic />
+          <ConfigProvider />
+          <Customize />
+          <Description />
+          <Simple />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

@@ -49,12 +49,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <BasicRight />
-        <Placement />
-        <FormInDrawer />
-        <UserProfile />
-        <MultiLevelDrawer />
-        <RenderInCurrent />
+        <demo-sort>
+          <BasicRight />
+          <Placement />
+          <FormInDrawer />
+          <UserProfile />
+          <MultiLevelDrawer />
+          <RenderInCurrent />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

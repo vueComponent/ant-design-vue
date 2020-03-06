@@ -35,14 +35,16 @@ export default {
     return (
       <div id="components-alert-demo">
         <md cn={md.cn} us={md.us} />
-        <Banner />
-        <Basic />
-        <Closable />
-        <CloseText />
-        <Description />
-        <Icon />
-        <Style />
-        <SmoothClosed />
+        <demo-sort>
+          <Banner />
+          <Basic />
+          <Closable />
+          <CloseText />
+          <Description />
+          <Icon />
+          <Style />
+          <SmoothClosed />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

@@ -33,15 +33,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <InputNumber />
-        <IconSlider />
-        <TipFormatter />
-        <Event />
-        <Mark />
-        <Vertical />
-        <ShowTooltip />
-        <Reverse />
+        <demo-sort>
+          <Basic />
+          <InputNumber />
+          <IconSlider />
+          <TipFormatter />
+          <Event />
+          <Mark />
+          <Vertical />
+          <ShowTooltip />
+          <Reverse />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

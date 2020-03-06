@@ -33,15 +33,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <ContextMenu />
-        <DropdownButton />
-        <Event />
-        <Item />
-        <OverlayVisible />
-        <Placement />
-        <SubMenu />
-        <Trigger />
+        <demo-sort>
+          <Basic />
+          <ContextMenu />
+          <DropdownButton />
+          <Event />
+          <Item />
+          <OverlayVisible />
+          <Placement />
+          <SubMenu />
+          <Trigger />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

@@ -40,15 +40,17 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <Disabled />
-        <RadioButton />
-        <RadioButtonSolid />
-        <RadioGroupMore />
-        <RadioGroupOptions />
-        <RadioGroupWithName />
-        <RadioGroup />
-        <Size />
+        <demo-sort>
+          <Basic />
+          <Disabled />
+          <RadioButton />
+          <RadioButtonSolid />
+          <RadioGroupMore />
+          <RadioGroupOptions />
+          <RadioGroupWithName />
+          <RadioGroup />
+          <Size />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

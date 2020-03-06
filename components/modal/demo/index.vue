@@ -40,17 +40,19 @@ export default {
     return (
       <div id="components-modal-demo">
         <md cn={md.cn} us={md.us} />
-        <Async />
-        <Basic />
-        <ConfirmPromise />
-        <Confirm />
-        <Footer />
-        <Info />
-        <Locale />
-        <Manual />
-        <Position />
-        <ButtonProps />
-        <ConfirmRouter />
+        <demo-sort>
+          <Async />
+          <Basic />
+          <ConfirmPromise />
+          <Confirm />
+          <Footer />
+          <Info />
+          <Locale />
+          <Manual />
+          <Position />
+          <ButtonProps />
+          <ConfirmRouter />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

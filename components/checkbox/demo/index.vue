@@ -35,12 +35,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <CheckAll />
-        <Disabled />
-        <Controller />
-        <Group />
-        <Layout />
+        <demo-sort>
+          <Basic />
+          <CheckAll />
+          <Disabled />
+          <Controller />
+          <Group />
+          <Layout />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

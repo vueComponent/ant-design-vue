@@ -109,6 +109,7 @@ export {
   LocaleProvider,
   message,
   Menu,
+  Mentions,
   Modal,
   notification,
   Pagination,

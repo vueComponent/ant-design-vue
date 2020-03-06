@@ -35,14 +35,16 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Horizontal />
-        <Inline />
-        <InlineCollapsed />
-        <SiderCurrent />
-        <Vertical />
-        <Theme />
-        <SwitchMode />
-        <Template />
+        <demo-sort cols={1}>
+          <Horizontal />
+          <Inline />
+          <InlineCollapsed />
+          <SiderCurrent />
+          <Vertical />
+          <Theme />
+          <SwitchMode />
+          <Template />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

@@ -37,16 +37,13 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <br />
-        <Disabled />
-        <br />
-        <Text />
-        <br />
-        <Size />
-        <br />
-        <Loading />
-        <br />
+        <demo-sort>
+          <Basic />
+          <Disabled />
+          <Text />
+          <Size />
+          <Loading />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

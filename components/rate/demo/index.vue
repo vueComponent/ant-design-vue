@@ -39,19 +39,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <br />
-        <Basic />
-        <br />
-        <Half />
-        <br />
-        <Text />
-        <br />
-        <Disabled />
-        <br />
-        <Clear />
-        <br />
-        <Character />
-        <br />
+        <demo-sort>
+          <Basic />
+          <Half />
+          <Text />
+          <Disabled />
+          <Clear />
+          <Character />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

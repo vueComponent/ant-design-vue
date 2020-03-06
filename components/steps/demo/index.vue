@@ -42,26 +42,19 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Simple />
-        <br />
-        <SmallSize />
-        <br />
-        <Icon />
-        <br />
-        <StepNext />
-        <br />
-        <Vertical />
-        <br />
-        <VerticalSmall />
-        <br />
-        <Error />
-        <br />
-        <ProgressDot />
-        <br />
-        <CustomizedProgressDot />
-        <br />
-        <Clickable />
-        <Nav />
+        <demo-sort cols={1}>
+          <Simple />
+          <SmallSize />
+          <Icon />
+          <StepNext />
+          <Vertical />
+          <VerticalSmall />
+          <Error />
+          <ProgressDot />
+          <CustomizedProgressDot />
+          <Clickable />
+          <Nav />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

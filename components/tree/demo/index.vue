@@ -37,7 +37,7 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <demo-sort cols="2">
+        <demo-sort>
           <BasicControlled />
           <Basic />
           <ReplaceFields />

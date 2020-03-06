@@ -41,23 +41,16 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <br />
-        <Success />
-        <br />
-        <Info />
-        <br />
-        <Warning />
-        <br />
-        <Result403 />
-        <br />
-        <Result404 />
-        <br />
-        <Result500 />
-        <br />
-        <Error />
-        <br />
-        <CustomIcon />
-        <br />
+        <demo-sort>
+          <Success />
+          <Info />
+          <Warning />
+          <Result403 />
+          <Result404 />
+          <Result500 />
+          <Error />
+          <CustomIcon />
+        </demo-sort>
         <api>
           <template slot="cn">
             <CN />

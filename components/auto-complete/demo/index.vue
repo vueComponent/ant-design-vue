@@ -32,12 +32,14 @@ export default {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <Basic />
-        <CertainCategory />
-        <Custom />
-        <NonCaseSensitive />
-        <Options />
-        <UncertainCategory />
+        <demo-sort>
+          <Basic />
+          <CertainCategory />
+          <Custom />
+          <NonCaseSensitive />
+          <Options />
+          <UncertainCategory />
+        </demo-sort>
         <api>
           <CN slot="cn" />
           <US />

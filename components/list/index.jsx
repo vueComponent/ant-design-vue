@@ -121,7 +121,7 @@ const List = {
     },
 
     renderEmpty(prefixCls, renderEmpty) {
-      const locale = this;
+      const { locale } = this;
       return (
         <div class={`${prefixCls}-empty-text`}>
           {(locale && locale.emptyText) || renderEmpty(h, 'List')}

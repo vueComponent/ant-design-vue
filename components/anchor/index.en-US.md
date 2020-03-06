@@ -28,4 +28,4 @@
 | -------- | ----------------------------------------- | ------------ | ------- | ------- |
 | href     | target of hyperlink                       | string       |         |         |
 | title    | content of hyperlink                      | string\|slot |         |         |
-| target   | Specifies where to display the linked URL | string       |         |         |
+| target   | Specifies where to display the linked URL | string       |         | 1.5.0   |

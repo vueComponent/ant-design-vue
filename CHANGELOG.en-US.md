@@ -4,11 +4,84 @@
 
 #### Release Schedule
 
-- Weekly release: patch version at the end of every week for routine bugfix (anytime for urgent bugfix).
+- Weekly release: patch version for routine bugfix.
 - Monthly release: minor version for new features.
 - Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+## 1.5.0
+
+`2020-03-06`
+
+### Component features and styles are synchronized to antd version 3.26.12.
+
+- Four new components have been added:
+  - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions-cn/) Added mentioned components and discarded the original Mention components.
+  - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) Display multiple read-only fields in groups.
+  - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header-cn/) can be used to declare the topic of the page, display important information about the page that the user is concerned about, and carry the operation items related to the current page.
+  - 🔥🔥🔥 [Result](https://antdv.com/components/result) is used to feedback the processing results of a series of operation tasks.
+- 🔥 Descriptions supports vertical layout.
+- 🔥 Progress.Circle supports gradient colors.
+- 🔥 Progress.Line supports gradient colors.
+- Breadcrumb
+  - 🎉 Breadcrumb.Item supports the `overlay` property to define drop-down menus.
+  - 🌟 Added `Breadcrumb.Separator` component, you can customize`separator`.
+- 🌟 TreeSelect's `showSearch` supports multiple selection mode.
+- 🌟 Timeline.Item adds `gray` color type, which can be used in incomplete or invalid state.
+- 🌟 Modal supports `closeIcon` property for customizing the close icon.
+- Upload
+  - 🌟 Upload provides `previewFile` property to customize the preview logic.
+  - 🌟 Upload adds `transformFile` to support converting files before uploading.
+  - 🌟 Upload supports previewing pictures in jfif format.
+  - 🌟 Added `showDownloadIcon` property for displaying download icons.
+- 🌟 Input.Search adds `loading` property, which is used to display the loading status.
+- 🌟 Grid's `gutter` property adds support for vertical spacing. Now you can set an array for`gutter`, the second value of the array represents the vertical spacing.
+- 🌟 message Added support for updating content with unique `key`.
+- 🌟 TextArea supports `allowClear`.
+- 🌟 Dropdown.Button supports `icon` property to customize the icon.
+- Drawer
+  - 🌟 Support `afterVisibleChange` property, which is triggered after the drawer animation is completed.
+  - 🌟 Support `ESC` shutdown.
+  - 🌟 Added `keyboard`, which allows the response to keyboard events to be turned on and off.
+- 🌟 TreeNode supports `checkable` property.
+- 🌟 Transfer supports `children` custom rendering list.
+- 🌟 Pagination supports `disabled` property.
+- 🌟 Steps support click to switch function.
+- Slider
+  - 🌟 Support `tooltipPlacement` to define the location of the tip.
+  - 🌟 Support `getTooltipPopupContainer` to allow custom container for the prompt.
+  - 🌟 Flip `trigger` direction when Sider is on the right.
+- 🌟 Calendar supports `headerRender` to customize header.
+- 🌟 Carousel supports custom panel pointing point locations.
+- 🌟 Collapse supports `expandIconPosition` property.
+- 🌟 Popconfirm adds `disabled` props, which are used to control whether clicking child elements pop up.
+- 🌟 Select supports `showArrow` in multi-select mode.
+- 🌟 Collapse.Panel added `extra`.
+- Card
+  - 🌟 Card component added `tabBarExtraContent` property.
+  - 🌟 Card.Grid added a hoverable property to allow floating effects to be disabled.
+- 🌟 Anchor.Link adds `target` attribute.
+- 🌟 TimePicker added `clearIcon` prop for custom clear icon.
+- Form
+  - 🌟 Support to configure the `colon` property directly on the Form.
+  - 🌟 Support `labelAlign` property.
+- Table
+  - 🌟 Table adds `getPopupContainer` property for setting various floating layer rendering nodes in the table.
+  - 💄 Adjust the style of the Table expand button.
+  - 🌟 Added `tableLayout` property, supports setting the table's`table-layout` layout, and enables `tableLayout =" fixed "` by default under fixed headers / columns, to solve the column alignment problem caused by the table layout automatically based on content .
+  - 🌟 Added `column.ellipsis` to support automatic omission of cell contents.
+  - 🌟 Added `scroll.scrollToFirstRowOnChange` property, which is used to set whether to scroll to the top of the table after page turning.   -Filter `filterDropdown` Added`visible` parameter to get the display status of the drop-down box.
+  - 🌟 The `title` method adds a`sortColumn` parameter to get the currently sorted column.   -Sort When sorting, the `sorter` parameter of`onChange` will always contain `column` information.
+- 🌟 Tree component supports `blockNode` property.
+- 🌟 RangePicker adds `separator` definition.
+- Empty
+  - 🌟 Empty supports the `imageStyle` property.
+  - 🌟 Empty `description` supports`false`.
+  - 🌟 Empty Supports access to preset pictures via `Empty.PRESENTED_IMAGE_DEFAULT` and`Empty.PRESENTED_IMAGE_SIMPLE`
+- 🌟 Badge supports custom colors.
+- 🐞 Fix the problem that the label of Steps is not centered.
+- 🐞 Fix cursor style problem of DatePicker and TimePicker.
 
 ## 1.4.12
 

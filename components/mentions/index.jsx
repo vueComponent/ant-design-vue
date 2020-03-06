@@ -138,11 +138,7 @@ const Mentions = {
   },
   render() {
     const { focused } = this.$data;
-    const {
-      getPrefixCls,
-      renderEmpty,
-      getPopupContainer: getContextPopupContainer,
-    } = this.configProvider;
+    const { getPrefixCls, renderEmpty } = this.configProvider;
     const {
       prefixCls: customizePrefixCls,
       disabled,
@@ -164,7 +160,7 @@ const Mentions = {
         ...otherProps,
         disabled,
         filterOption: this.getFilterOption(),
-        getPopupContainer: getPopupContainer || getContextPopupContainer,
+        getPopupContainer: getPopupContainer,
         children: this.getOptions(),
       },
       class: mergedClassName,

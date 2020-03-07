@@ -1,10 +1,12 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import Table from '..';
 import Vue from 'vue';
+import mountTest from '../../../tests/shared/mountTest';
 
 const { Column, ColumnGroup } = Table;
 
 describe('Table', () => {
+  mountTest(Table);
   const data = [
     {
       key: '1',

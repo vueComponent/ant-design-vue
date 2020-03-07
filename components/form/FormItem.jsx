@@ -26,6 +26,7 @@ function intersperseSpace(list) {
 }
 export const FormItemProps = {
   id: PropTypes.string,
+  htmlFor: PropTypes.string,
   prefixCls: PropTypes.string,
   label: PropTypes.any,
   labelCol: PropTypes.shape(ColProps).loose,
@@ -39,6 +40,7 @@ export const FormItemProps = {
   fieldDecoratorId: PropTypes.string,
   fieldDecoratorOptions: PropTypes.object,
   selfUpdate: PropTypes.bool,
+  labelAlign: PropTypes.oneOf(['left', 'right']),
 };
 function comeFromSlot(vnodes = [], itemVnode) {
   let isSlot = false;
@@ -65,10 +67,15 @@ export default {
   mixins: [BaseMixin],
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
-    colon: true,
   }),
+  provide() {
+    return {
+      isFormItemChildren: true,
+    };
+  },
   inject: {
-    FormProps: { default: () => ({}) },
+    isFormItemChildren: { default: false },
+    FormContextProps: { default: () => ({}) },
     decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
     configProvider: { default: () => ConfigConsumerProps },
@@ -78,7 +85,7 @@ export default {
   },
   computed: {
     itemSelfUpdate() {
-      return !!(this.selfUpdate === undefined ? this.FormProps.selfUpdate : this.selfUpdate);
+      return !!(this.selfUpdate === undefined ? this.FormContextProps.selfUpdate : this.selfUpdate);
     },
   },
   created() {
@@ -90,7 +97,7 @@ export default {
     }
   },
   beforeDestroy() {
-    this.collectFormItemContext(this.$vnode.context, 'delete');
+    this.collectFormItemContext(this.$vnode && this.$vnode.context, 'delete');
   },
   mounted() {
     const { help, validateStatus } = this.$props;
@@ -98,18 +105,20 @@ export default {
       this.getControls(this.slotDefault, true).length <= 1 ||
         help !== undefined ||
         validateStatus !== undefined,
-      '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
+      'Form.Item',
+      'Cannot generate `validateStatus` and `help` automatically, ' +
         'while there are more than one `getFieldDecorator` in it.',
     );
     warning(
       !this.fieldDecoratorId,
+      'Form.Item',
       '`fieldDecoratorId` is deprecated. please use `v-decorator={id, options}` instead.',
     );
   },
   methods: {
     collectContext() {
-      if (this.FormProps.form && this.FormProps.form.templateContext) {
-        const { templateContext } = this.FormProps.form;
+      if (this.FormContextProps.form && this.FormContextProps.form.templateContext) {
+        const { templateContext } = this.FormContextProps.form;
         const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
           return [...a, ...b];
         }, []);
@@ -208,11 +217,62 @@ export default {
       return this.getChildAttr(FIELD_DATA_PROP);
     },
 
+    getValidateStatus() {
+      const onlyControl = this.getOnlyControl();
+      if (!onlyControl) {
+        return '';
+      }
+      const field = this.getField();
+      if (field.validating) {
+        return 'validating';
+      }
+      if (field.errors) {
+        return 'error';
+      }
+      const fieldValue = 'value' in field ? field.value : this.getMeta().initialValue;
+      if (fieldValue !== undefined && fieldValue !== null && fieldValue !== '') {
+        return 'success';
+      }
+      return '';
+    },
+
+    // Resolve duplicated ids bug between different forms
+    // https://github.com/ant-design/ant-design/issues/7351
+    onLabelClick(e) {
+      const id = this.id || this.getId();
+      if (!id) {
+        return;
+      }
+      const formItemNode = this.$el;
+      const control = formItemNode.querySelector(`[id="${id}"]`);
+      if (control && control.focus) {
+        control.focus();
+      }
+    },
+
     onHelpAnimEnd(_key, helpShow) {
       this.helpShow = helpShow;
       if (!helpShow) {
         this.$forceUpdate();
       }
+    },
+
+    isRequired() {
+      const { required } = this;
+      if (required !== undefined) {
+        return required;
+      }
+      if (this.getOnlyControl()) {
+        const meta = this.getMeta() || {};
+        const validate = meta.validate || [];
+
+        return validate
+          .filter(item => !!item.rules)
+          .some(item => {
+            return item.rules.some(rule => rule.required);
+          });
+      }
+      return false;
     },
 
     renderHelp(prefixCls) {
@@ -239,25 +299,6 @@ export default {
     renderExtra(prefixCls) {
       const extra = getComponentFromProp(this, 'extra');
       return extra ? <div class={`${prefixCls}-extra`}>{extra}</div> : null;
-    },
-
-    getValidateStatus() {
-      const onlyControl = this.getOnlyControl();
-      if (!onlyControl) {
-        return '';
-      }
-      const field = this.getField();
-      if (field.validating) {
-        return 'validating';
-      }
-      if (field.errors) {
-        return 'error';
-      }
-      const fieldValue = 'value' in field ? field.value : this.getMeta().initialValue;
-      if (fieldValue !== undefined && fieldValue !== null && fieldValue !== '') {
-        return 'success';
-      }
-      return '';
     },
 
     renderValidateWrapper(prefixCls, c1, c2, c3) {
@@ -315,10 +356,13 @@ export default {
     },
 
     renderWrapper(prefixCls, children) {
-      const { FormProps: { wrapperCol: wrapperColForm = {} } = {} } = this;
-      const { wrapperCol = wrapperColForm } = this;
-      const { class: cls, style, id, on, ...restProps } = wrapperCol;
-      const className = classNames(`${prefixCls}-item-control-wrapper`, cls);
+      const { wrapperCol: contextWrapperCol } = this.isFormItemChildren
+        ? {}
+        : this.FormContextProps;
+      const { wrapperCol } = this;
+      const mergedWrapperCol = wrapperCol || contextWrapperCol || {};
+      const { style, id, on, ...restProps } = mergedWrapperCol;
+      const className = classNames(`${prefixCls}-item-control-wrapper`, mergedWrapperCol.class);
       const colProps = {
         props: restProps,
         class: className,
@@ -330,70 +374,45 @@ export default {
       return <Col {...colProps}>{children}</Col>;
     },
 
-    isRequired() {
-      const { required } = this;
-      if (required !== undefined) {
-        return required;
-      }
-      if (this.getOnlyControl()) {
-        const meta = this.getMeta() || {};
-        const validate = meta.validate || [];
-
-        return validate
-          .filter(item => !!item.rules)
-          .some(item => {
-            return item.rules.some(rule => rule.required);
-          });
-      }
-      return false;
-    },
-
-    // Resolve duplicated ids bug between different forms
-    // https://github.com/ant-design/ant-design/issues/7351
-    onLabelClick(e) {
-      const label = getComponentFromProp(this, 'label');
-      const id = this.id || this.getId();
-      if (!id) {
-        return;
-      }
-      const formItemNode = this.$el;
-      const control = formItemNode.querySelector(`[id="${id}"]`);
-      if (control) {
-        // Only prevent in default situation
-        // Avoid preventing event in `label={<a href="xx">link</a>}``
-        if (typeof label === 'string') {
-          e.preventDefault();
-        }
-        if (control.focus) {
-          control.focus();
-        }
-      }
-    },
-
     renderLabel(prefixCls) {
-      const { FormProps: { labelCol: labelColForm = {} } = {} } = this;
-      const { labelCol = labelColForm, colon, id } = this;
+      const {
+        vertical,
+        labelAlign: contextLabelAlign,
+        labelCol: contextLabelCol,
+        colon: contextColon,
+      } = this.FormContextProps;
+      const { labelAlign, labelCol, colon, id, htmlFor } = this;
       const label = getComponentFromProp(this, 'label');
       const required = this.isRequired();
+      const mergedLabelCol = labelCol || contextLabelCol || {};
+
+      const mergedLabelAlign = labelAlign || contextLabelAlign;
+      const labelClsBasic = `${prefixCls}-item-label`;
+      const labelColClassName = classNames(
+        labelClsBasic,
+        mergedLabelAlign === 'left' && `${labelClsBasic}-left`,
+        mergedLabelCol.class,
+      );
       const {
         class: labelColClass,
         style: labelColStyle,
         id: labelColId,
         on,
         ...restProps
-      } = labelCol;
-      const labelColClassName = classNames(`${prefixCls}-item-label`, labelColClass);
-      const labelClassName = classNames({
-        [`${prefixCls}-item-required`]: required,
-      });
-
+      } = mergedLabelCol;
       let labelChildren = label;
       // Keep label is original where there should have no colon
-      const haveColon = colon && this.FormProps.layout !== 'vertical';
+      const computedColon = colon === true || (contextColon !== false && colon !== false);
+      const haveColon = computedColon && !vertical;
       // Remove duplicated user input colon
       if (haveColon && typeof label === 'string' && label.trim() !== '') {
-        labelChildren = label.replace(/[：|:]\s*$/, '');
+        labelChildren = label.replace(/[：:]\s*$/, '');
       }
+
+      const labelClassName = classNames({
+        [`${prefixCls}-item-required`]: required,
+        [`${prefixCls}-item-no-colon`]: !computedColon,
+      });
       const colProps = {
         props: restProps,
         class: labelColClassName,
@@ -406,7 +425,7 @@ export default {
       return label ? (
         <Col {...colProps}>
           <label
-            for={id || this.getId()}
+            for={htmlFor || id || this.getId()}
             class={labelClassName}
             title={typeof label === 'string' ? label : ''}
             onClick={this.onLabelClick}
@@ -431,23 +450,27 @@ export default {
       ];
     },
     renderFormItem() {
-      const { prefixCls: customizePrefixCls, colon } = this.$props;
+      const { prefixCls: customizePrefixCls } = this.$props;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('form', customizePrefixCls);
       const children = this.renderChildren(prefixCls);
       const itemClassName = {
         [`${prefixCls}-item`]: true,
         [`${prefixCls}-item-with-help`]: this.helpShow,
-        [`${prefixCls}-item-no-colon`]: !colon,
       };
 
-      return <Row class={classNames(itemClassName)}>{children}</Row>;
+      return (
+        <Row class={classNames(itemClassName)} key="row">
+          {children}
+        </Row>
+      );
     },
     decoratorOption(vnode) {
       if (vnode.data && vnode.data.directives) {
         const directive = find(vnode.data.directives, ['name', 'decorator']);
         warning(
           !directive || (directive && Array.isArray(directive.value)),
+          'Form',
           `Invalid directive: type check failed for directive "decorator". Expected Array, got ${typeof (directive
             ? directive.value
             : directive)}. At ${vnode.tag}.`,
@@ -458,8 +481,8 @@ export default {
       }
     },
     decoratorChildren(vnodes) {
-      const { FormProps } = this;
-      const getFieldDecorator = FormProps.form.getFieldDecorator;
+      const { FormContextProps } = this;
+      const getFieldDecorator = FormContextProps.form.getFieldDecorator;
       for (let i = 0, len = vnodes.length; i < len; i++) {
         const vnode = vnodes[i];
         if (getSlotOptions(vnode).__ANT_FORM_ITEM) {
@@ -487,7 +510,7 @@ export default {
       decoratorFormProps,
       fieldDecoratorId,
       fieldDecoratorOptions = {},
-      FormProps,
+      FormContextProps,
     } = this;
     let child = filterEmpty($slots.default || []);
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
@@ -495,10 +518,11 @@ export default {
       child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions, this)(child[0]);
       warning(
         !(child.length > 1),
+        'Form',
         '`autoFormCreate` just `decorator` then first children. but you can use JSX to support multiple children',
       );
       this.slotDefault = child;
-    } else if (FormProps.form) {
+    } else if (FormContextProps.form) {
       child = cloneVNodes(child);
       this.slotDefault = this.decoratorChildren(child);
     } else {

@@ -38,7 +38,7 @@ export const ListSize = ['small', 'default', 'large'];
 
 export const ListProps = () => ({
   bordered: PropTypes.bool,
-  dataSource: PropTypes.any,
+  dataSource: PropTypes.array,
   extra: PropTypes.any,
   grid: PropTypes.shape(ListGridType).loose,
   itemLayout: PropTypes.string,
@@ -87,15 +87,31 @@ const List = {
       },
       total: 0,
     };
+    this.onPaginationChange = this.triggerPaginationEvent('onChange');
+    this.onPaginationShowSizeChange = this.triggerPaginationEvent('onShowSizeChange');
+    const { pagination } = this.$props;
+    const paginationObj = pagination && typeof pagination === 'object' ? pagination : {};
     return {
-      paginationCurrent: 1,
+      paginationCurrent: paginationObj.defaultCurrent || 1,
+      paginationSize: paginationObj.defaultPageSize || 10,
     };
   },
   methods: {
+    triggerPaginationEvent(eventName) {
+      return (page, pageSize) => {
+        const { pagination } = this.$props;
+        this.paginationCurrent = page;
+        this.paginationSize = pageSize;
+        if (pagination && pagination[eventName]) {
+          pagination[eventName](page, pageSize);
+        }
+      };
+    },
     renderItem2(item, index) {
       const { $scopedSlots, rowKey } = this;
-      let key;
       const renderItem = this.renderItem || $scopedSlots.renderItem;
+      if (!renderItem) return null;
+      let key;
       if (typeof rowKey === 'function') {
         key = rowKey(item);
       } else if (typeof rowKey === 'string') {
@@ -138,11 +154,12 @@ const List = {
       itemLayout,
       pagination,
       grid,
-      dataSource,
+      dataSource = [],
       size,
       loading,
       $slots,
       paginationCurrent,
+      paginationSize,
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
@@ -185,13 +202,14 @@ const List = {
       ...this.defaultPaginationProps,
       total: dataSource.length,
       current: paginationCurrent,
+      pageSize: paginationSize,
       ...(pagination || {}),
     };
     const largestPage = Math.ceil(paginationProps.total / paginationProps.pageSize);
     if (paginationProps.current > largestPage) {
       paginationProps.current = largestPage;
     }
-    const { class: cls, style, onShowSizeChange = () => {}, ...restProps } = paginationProps;
+    const { class: cls, style, ...restProps } = paginationProps;
     const paginationContent = pagination ? (
       <div class={`${prefixCls}-pagination`}>
         <Pagination
@@ -199,7 +217,10 @@ const List = {
             props: omit(restProps, ['onChange']),
             class: cls,
             style,
-            on: { change: this.defaultPaginationProps.onChange, showSizeChange: onShowSizeChange },
+            on: {
+              change: this.onPaginationChange,
+              showSizeChange: this.onPaginationShowSizeChange,
+            },
           }}
         />
       </div>
@@ -225,7 +246,11 @@ const List = {
         }),
       );
 
-      childrenContent = grid ? <Row gutter={grid.gutter}>{childrenList}</Row> : childrenList;
+      childrenContent = grid ? (
+        <Row gutter={grid.gutter}>{childrenList}</Row>
+      ) : (
+        <ul class={`${prefixCls}-items`}>{childrenList}</ul>
+      );
     } else if (!children.length && !isLoading) {
       const renderEmpty = this.configProvider.renderEmpty;
       childrenContent = this.renderEmpty(prefixCls, renderEmpty);

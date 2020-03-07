@@ -14,7 +14,6 @@ const MonthCalendar = {
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     monthCellRender: PropTypes.func,
-    dateCellRender: PropTypes.func,
     value: PropTypes.object,
     defaultValue: PropTypes.object,
     selectedValue: PropTypes.object,

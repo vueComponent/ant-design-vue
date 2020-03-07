@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from '../../../_util/vue-types';
-import addEventListener from '../../../_util/Dom/addEventListener';
+import addEventListener from '../../../vc-util/Dom/addEventListener';
 import warning from '../../../_util/warning';
 import { initDefaultProps } from '../../../_util/props-util';
 import Steps from './Steps';
@@ -23,6 +23,7 @@ export default function createSlider(Component) {
     handle: PropTypes.func,
     dots: PropTypes.bool,
     vertical: PropTypes.bool,
+    reverse: PropTypes.bool,
     minimumTrackStyle: PropTypes.object, // just for compatibility, will be deperecate
     maximumTrackStyle: PropTypes.object, // just for compatibility, will be deperecate
     handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
@@ -45,23 +46,11 @@ export default function createSlider(Component) {
       max: 100,
       step: 1,
       marks: {},
-      // handle ({ index, ref, className, style, ...restProps }) {
-      //   delete restProps.dragging
-      //   const handleProps = {
-      //     props: {
-      //       ...restProps,
-      //     },
-      //     class: className,
-      //     style,
-      //     key: index,
-      //     ref,
-      //   }
-      //   return <Handle {...handleProps} />
-      // },
       included: true,
       disabled: false,
       dots: false,
       vertical: false,
+      reverse: false,
       trackStyle: [{}],
       handleStyle: [{}],
       railStyle: {},
@@ -69,16 +58,15 @@ export default function createSlider(Component) {
       activeDotStyle: {},
     }),
     data() {
-      if (utils.isDev()) {
-        const { step, max, min } = this;
-        const isPointDiffEven = isFinite(max - min) ? (max - min) % step === 0 : true; // eslint-disable-line
-        warning(
-          step && Math.floor(step) === step ? isPointDiffEven : true,
-          'Slider[max] - Slider[min] (%s) should be a multiple of Slider[step] (%s)',
-          max - min,
-          step,
-        );
-      }
+      const { step, max, min } = this;
+      const isPointDiffEven = isFinite(max - min) ? (max - min) % step === 0 : true; // eslint-disable-line
+      warning(
+        step && Math.floor(step) === step ? isPointDiffEven : true,
+        'Slider',
+        'Slider[max] - Slider[min] (%s) should be a multiple of Slider[step] (%s)',
+        max - min,
+        step,
+      );
       this.handlesRefs = {};
       return {};
     },
@@ -87,6 +75,10 @@ export default function createSlider(Component) {
         // Snapshot testing cannot handle refs, so be sure to null-check this.
         this.document = this.$refs.sliderRef && this.$refs.sliderRef.ownerDocument;
         // this.setHandleRefs()
+        const { autoFocus, disabled } = this;
+        if (autoFocus && !disabled) {
+          this.focus();
+        }
       });
     },
     beforeDestroy() {
@@ -191,13 +183,16 @@ export default function createSlider(Component) {
       onClickMarkLabel(e, value) {
         e.stopPropagation();
         this.onChange({ sValue: value });
-        this.onEnd(true);
+        this.setState({ sValue: value }, () => this.onEnd(true));
       },
       getSliderStart() {
         const slider = this.$refs.sliderRef;
+        const { vertical, reverse } = this;
         const rect = slider.getBoundingClientRect();
-
-        return this.vertical ? rect.top : rect.left + window.pageXOffset;
+        if (vertical) {
+          return reverse ? rect.bottom : rect.top;
+        }
+        return window.pageXOffset + (reverse ? rect.right : rect.left);
       },
       getSliderLength() {
         const slider = this.$refs.sliderRef;
@@ -247,7 +242,8 @@ export default function createSlider(Component) {
         return value;
       },
       calcValueByPos(position) {
-        const pixelOffset = position - this.getSliderStart();
+        const sign = this.reverse ? -1 : +1;
+        const pixelOffset = sign * (position - this.getSliderStart());
         const nextValue = this.trimAlignValue(this.calcValue(pixelOffset));
         return nextValue;
       },
@@ -269,6 +265,7 @@ export default function createSlider(Component) {
         included,
         disabled,
         vertical,
+        reverse,
         min,
         max,
         maximumTrackStyle,
@@ -292,6 +289,7 @@ export default function createSlider(Component) {
           upperBound: this.getUpperBound(),
           max,
           min,
+          reverse,
           className: `${prefixCls}-mark`,
         },
         on: {
@@ -321,6 +319,7 @@ export default function createSlider(Component) {
           <Steps
             prefixCls={prefixCls}
             vertical={vertical}
+            reverse={reverse}
             marks={marks}
             dots={dots}
             step={step}

@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { changeConfirmLocale } from '../modal/locale';
 import Base from '../base';
+import warning from '../_util/warning';
 // export interface Locale {
 //   locale: string;
 //   Pagination?: Object;
@@ -16,7 +17,7 @@ import Base from '../base';
 //   Select?: Object;
 //   Upload?: Object;
 // }
-
+export const ANT_MARK = 'internalMark';
 function setMomentLocale(locale) {
   if (locale && locale.locale) {
     interopDefault(moment).locale(locale.locale);
@@ -28,9 +29,15 @@ function setMomentLocale(locale) {
 const LocaleProvider = {
   name: 'ALocaleProvider',
   props: {
-    locale: PropTypes.object.def({}),
+    locale: PropTypes.object.def(() => ({})),
+    _ANT_MARK__: PropTypes.string,
   },
   data() {
+    warning(
+      this._ANT_MARK__ === ANT_MARK,
+      'LocaleProvider',
+      '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead',
+    );
     return {
       antLocale: {
         ...this.locale,
@@ -50,15 +57,12 @@ const LocaleProvider = {
         exist: true,
       };
       setMomentLocale(val);
+      changeConfirmLocale(val && val.Modal);
     },
   },
   created() {
     const { locale } = this;
     setMomentLocale(locale);
-    changeConfirmLocale(locale && locale.Modal);
-  },
-  updated() {
-    const { locale } = this;
     changeConfirmLocale(locale && locale.Modal);
   },
   beforeDestroy() {

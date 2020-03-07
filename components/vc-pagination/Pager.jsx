@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import classNames from 'classnames';
 
 export default {
   name: 'Pager',
@@ -14,16 +15,6 @@ export default {
       default: () => {},
     },
   },
-  computed: {
-    classes() {
-      const prefixCls = `${this.rootPrefixCls}-item`;
-      let cls = `${prefixCls} ${prefixCls}-${this.page}`;
-      if (this.active) {
-        cls = `${cls} ${prefixCls}-active`;
-      }
-      return cls;
-    },
-  },
   methods: {
     handleClick() {
       this.$emit('click', this.page);
@@ -33,17 +24,12 @@ export default {
     },
   },
   render() {
-    const { rootPrefixCls, page, active } = this;
-    const prefixCls = `${rootPrefixCls}-item`;
-    let cls = `${prefixCls} ${prefixCls}-${page}`;
-
-    if (active) {
-      cls = `${cls} ${prefixCls}-active`;
-    }
-
-    if (!page) {
-      cls = `${cls} ${prefixCls}-disabled`;
-    }
+    const props = this.$props;
+    const prefixCls = `${props.rootPrefixCls}-item`;
+    const cls = classNames(prefixCls, `${prefixCls}-${props.page}`, {
+      [`${prefixCls}-active`]: props.active,
+      [`${prefixCls}-disabled`]: !props.page,
+    });
 
     return (
       <li

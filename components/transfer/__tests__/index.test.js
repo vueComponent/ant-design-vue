@@ -3,6 +3,7 @@ import { renderToString } from '@vue/server-test-utils';
 import Transfer from '..';
 import Vue from 'vue';
 import { asyncExpect } from '@/tests/utils';
+import mountTest from '../../../tests/shared/mountTest';
 
 const listCommonProps = {
   dataSource: [
@@ -87,6 +88,7 @@ const searchTransferProps = {
 };
 
 describe('Transfer', () => {
+  mountTest(Transfer);
   it('should render correctly', () => {
     const props = {
       propsData: listCommonProps,

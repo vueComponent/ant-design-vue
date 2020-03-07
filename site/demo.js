@@ -73,6 +73,12 @@ export default {
     type: 'Data Entry',
     title: 'Input',
   },
+  mentions: {
+    category: 'Components',
+    subtitle: '提及',
+    type: 'Data Entry',
+    title: 'Mentions',
+  },
   select: {
     category: 'Components',
     subtitle: '选择器',
@@ -91,6 +97,13 @@ export default {
     subtitle: '分页',
     type: 'Navigation',
     title: 'Pagination',
+    cols: 1,
+  },
+  pageHeader: {
+    category: 'Components',
+    subtitle: '页头',
+    type: 'Navigation',
+    title: 'PageHeader',
     cols: 1,
   },
   popconfirm: {
@@ -173,6 +186,12 @@ export default {
     subtitle: '加载中',
     type: 'Feedback',
     title: 'Spin',
+  },
+  result: {
+    category: 'Components',
+    subtitle: '结果',
+    type: 'Feedback',
+    title: 'Result',
   },
   switch: {
     category: 'Components',
@@ -357,5 +376,11 @@ export default {
     subtitle: '统计数值',
     type: 'Data Display',
     title: 'Statistic',
+  },
+  descriptions: {
+    category: 'Components',
+    subtitle: '描述列表',
+    type: 'Data Display',
+    title: 'Descriptions',
   },
 };

@@ -31,4 +31,5 @@ export declare class CheckboxGroup extends AntdComponent {
    * @type string[]
    */
   value: string[];
+  name?: string;
 }

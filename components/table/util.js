@@ -63,3 +63,11 @@ export function flatFilter(tree, callback) {
 //   })
 //   return columns
 // }
+
+export function generateValueMaps(items, maps = {}) {
+  (items || []).forEach(({ value, children }) => {
+    maps[value.toString()] = value;
+    generateValueMaps(children, maps);
+  });
+  return maps;
+}

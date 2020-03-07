@@ -11,4 +11,5 @@ export declare class BreadcrumbItem extends AntdComponent {
    * @type string
    */
   href?: String;
+  overlay?: any;
 }

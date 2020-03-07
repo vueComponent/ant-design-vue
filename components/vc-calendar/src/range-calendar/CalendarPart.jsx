@@ -30,8 +30,9 @@ const CalendarPart = {
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
-    dateRender: PropTypes.func,
     clearIcon: PropTypes.any,
+    dateRender: PropTypes.func,
+    inputMode: PropTypes.string,
   },
   render() {
     const { $props: props } = this;
@@ -56,6 +57,8 @@ const CalendarPart = {
       showDateInput,
       dateRender,
       showWeekNumber,
+      showClear,
+      inputMode,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const {
@@ -107,12 +110,13 @@ const CalendarPart = {
         placeholder={placeholder}
         disabledTime={disabledTime}
         value={value}
-        showClear={false}
+        showClear={showClear || false}
         selectedValue={selectedValue[index]}
         onChange={inputSelect}
         onChange={inputChange}
         onSelect={inputSelect}
         clearIcon={clearIcon}
+        inputMode={inputMode}
       />
     );
     const headerProps = {

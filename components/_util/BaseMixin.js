@@ -19,6 +19,7 @@ export default {
       //   Object.assign(newState, this.getDerivedStateFromProps(getOptionProps(this), { ...this.$data, ...newState }, true) || {})
       // }
       Object.assign(this.$data, newState);
+      this.$forceUpdate();
       this.$nextTick(() => {
         callback && callback();
       });

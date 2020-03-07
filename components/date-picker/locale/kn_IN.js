@@ -1,5 +1,5 @@
-import CalendarLocale from '../../vc-calendar/src/locale/he_IL';
-import TimePickerLocale from '../../time-picker/locale/he_IL';
+import CalendarLocale from '../../vc-calendar/src/locale/kn_IN';
+import TimePickerLocale from '../../time-picker/locale/kn_IN';
 
 // Merge into a locale object
 const locale = {

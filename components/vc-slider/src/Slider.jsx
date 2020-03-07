@@ -15,6 +15,7 @@ const Slider = {
     disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
     tabIndex: PropTypes.number,
+    reverse: PropTypes.bool,
     min: PropTypes.number,
     max: PropTypes.number,
   },
@@ -22,28 +23,20 @@ const Slider = {
     const defaultValue = this.defaultValue !== undefined ? this.defaultValue : this.min;
     const value = this.value !== undefined ? this.value : defaultValue;
 
-    if (utils.isDev()) {
-      warning(
-        !hasProp(this, 'minimumTrackStyle'),
-        'minimumTrackStyle will be deprecate, please use trackStyle instead.',
-      );
-      warning(
-        !hasProp(this, 'maximumTrackStyle'),
-        'maximumTrackStyle will be deprecate, please use railStyle instead.',
-      );
-    }
+    warning(
+      !hasProp(this, 'minimumTrackStyle'),
+      'Slider',
+      'minimumTrackStyle will be deprecate, please use trackStyle instead.',
+    );
+    warning(
+      !hasProp(this, 'maximumTrackStyle'),
+      'Slider',
+      'maximumTrackStyle will be deprecate, please use railStyle instead.',
+    );
     return {
       sValue: this.trimAlignValue(value),
       dragging: false,
     };
-  },
-  mounted() {
-    this.$nextTick(() => {
-      const { autoFocus, disabled } = this;
-      if (autoFocus && !disabled) {
-        this.focus();
-      }
-    });
   },
   watch: {
     value: {
@@ -69,21 +62,22 @@ const Slider = {
         max,
       };
       const newValue = value !== undefined ? value : this.sValue;
-      const nextValue = this.trimAlignValue(newValue, minAmaxProps);
+      const nextValue = this.trimAlignValue(newValue, this.$props);
       if (nextValue === this.sValue) return;
 
       this.setState({ sValue: nextValue });
-      if (utils.isValueOutOfRange(newValue, minAmaxProps)) {
+      if (utils.isValueOutOfRange(newValue, this.$props)) {
         this.$emit('change', nextValue);
       }
     },
     onChange(state) {
       const isNotControlled = !hasProp(this, 'value');
+      const nextState = state.sValue > this.max ? { ...state, sValue: this.max } : state;
       if (isNotControlled) {
-        this.setState(state);
+        this.setState(nextState);
       }
 
-      const changedValue = state.sValue;
+      const changedValue = nextState.sValue;
       this.$emit('change', changedValue);
     },
     onStart(position) {
@@ -117,8 +111,8 @@ const Slider = {
       this.onChange({ sValue: value });
     },
     onKeyboard(e) {
-      const valueMutator = utils.getKeyboardValueMutator(e);
-
+      const { reverse, vertical } = this.$props;
+      const valueMutator = utils.getKeyboardValueMutator(e, vertical, reverse);
       if (valueMutator) {
         utils.pauseEvent(e);
         const { sValue } = this;
@@ -127,6 +121,8 @@ const Slider = {
         if (value === sValue) return;
 
         this.onChange({ sValue: value });
+        this.$emit('afterChange', value);
+        this.onEnd();
       }
     },
     getLowerBound() {
@@ -143,13 +139,14 @@ const Slider = {
       const val = utils.ensureValueInRange(v, mergedProps);
       return utils.ensureValuePrecision(val, mergedProps);
     },
-    getTrack({ prefixCls, vertical, included, offset, minimumTrackStyle, _trackStyle }) {
+    getTrack({ prefixCls, reverse, vertical, included, offset, minimumTrackStyle, _trackStyle }) {
       return (
         <Track
           class={`${prefixCls}-track`}
           vertical={vertical}
           included={included}
           offset={0}
+          reverse={reverse}
           length={offset}
           style={{
             ...minimumTrackStyle,
@@ -170,6 +167,7 @@ const Slider = {
         tabIndex,
         min,
         max,
+        reverse,
         handle,
         defaultHandle,
       } = this;
@@ -186,6 +184,7 @@ const Slider = {
         disabled,
         min,
         max,
+        reverse,
         index: 0,
         tabIndex,
         style: handleStyle[0] || handleStyle,
@@ -205,6 +204,7 @@ const Slider = {
       return {
         tracks: this.getTrack({
           prefixCls,
+          reverse,
           vertical,
           included,
           offset,

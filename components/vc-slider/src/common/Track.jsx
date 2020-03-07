@@ -1,17 +1,19 @@
 /* eslint-disable */
 const Track = {
   functional: true,
-  render(createElement, context) {
-    const { included, vertical, offset, length } = context.props;
+  render(h, context) {
+    const { included, vertical, offset, length, reverse } = context.props;
     const { style, class: className } = context.data;
 
     const positonStyle = vertical
       ? {
-          bottom: `${offset}%`,
+          [reverse ? 'top' : 'bottom']: `${offset}%`,
+          [reverse ? 'bottom' : 'top']: 'auto',
           height: `${length}%`,
         }
       : {
-          left: `${offset}%`,
+          [reverse ? 'right' : 'left']: `${offset}%`,
+          [reverse ? 'left' : 'right']: 'auto',
           width: `${length}%`,
         };
 

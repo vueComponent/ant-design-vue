@@ -3,14 +3,12 @@ import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
-import addEventListener from '../_util/Dom/addEventListener';
 import {
   getComponentFromProp,
   getSlotOptions,
   filterEmpty,
   getListeners,
 } from '../_util/props-util';
-import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -31,6 +29,7 @@ export default {
     size: PropTypes.oneOf(['default', 'small']),
     actions: PropTypes.any,
     tabList: PropTypes.array,
+    tabBarExtraContent: PropTypes.any,
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
   },
@@ -38,44 +37,20 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    this.updateWiderPaddingCalled = false;
     return {
       widerPadding: false,
     };
   },
-  beforeMount() {
-    this.updateWiderPadding = throttleByAnimationFrame(this.updateWiderPadding);
-  },
-  mounted() {
-    this.updateWiderPadding();
-    this.resizeEvent = addEventListener(window, 'resize', this.updateWiderPadding);
-  },
-  beforeDestroy() {
-    if (this.resizeEvent) {
-      this.resizeEvent.remove();
-    }
-    this.updateWiderPadding.cancel && this.updateWiderPadding.cancel();
-  },
   methods: {
-    updateWiderPadding() {
-      const cardContainerRef = this.$refs.cardContainerRef;
-      if (!cardContainerRef) {
-        return;
-      }
-      // 936 is a magic card width pixel number indicated by designer
-      const WIDTH_BOUNDARY_PX = 936;
-      if (cardContainerRef.offsetWidth >= WIDTH_BOUNDARY_PX && !this.widerPadding) {
-        this.setState({ widerPadding: true }, () => {
-          this.updateWiderPaddingCalled = true; // first render without css transition
-        });
-      }
-      if (cardContainerRef.offsetWidth < WIDTH_BOUNDARY_PX && this.widerPadding) {
-        this.setState({ widerPadding: false }, () => {
-          this.updateWiderPaddingCalled = true; // first render without css transition
-        });
-      }
+    getAction(actions) {
+      const actionList = actions.map((action, index) => (
+        <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
+          <span>{action}</span>
+        </li>
+      ));
+      return actionList;
     },
-    onHandleTabChange(key) {
+    onTabChange(key) {
       this.$emit('tabChange', key);
     },
     isContainGrid(obj = []) {
@@ -86,17 +61,6 @@ export default {
         }
       });
       return containGrid;
-    },
-    getAction(actions) {
-      if (!actions || !actions.length) {
-        return null;
-      }
-      const actionList = actions.map((action, index) => (
-        <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
-          <span>{action}</span>
-        </li>
-      ));
-      return actionList;
     },
   },
   render() {
@@ -118,14 +82,12 @@ export default {
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const { $slots, $scopedSlots } = this;
-
+    const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent');
     const classString = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-bordered`]: bordered,
       [`${prefixCls}-hoverable`]: !!hoverable,
-      [`${prefixCls}-wider-padding`]: this.widerPadding,
-      [`${prefixCls}-padding-transition`]: this.updateWiderPaddingCalled,
       [`${prefixCls}-contain-grid`]: this.isContainGrid($slots.default),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
       [`${prefixCls}-${size}`]: size !== 'default',
@@ -187,9 +149,10 @@ export default {
         [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
           ? activeTabKey
           : defaultActiveTabKey,
+        tabBarExtraContent,
       },
       on: {
-        change: this.onHandleTabChange,
+        change: this.onTabChange,
       },
       class: `${prefixCls}-head-tabs`,
     };

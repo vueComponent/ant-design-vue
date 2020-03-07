@@ -2,8 +2,12 @@
 
 exports[`Icon \`component\` prop can access to svg defs if has children 1`] = `
 <i class="my-home-icon anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
-    <title>Cool Home</title>
-    <path d="'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'"></path>
+    <defs>
+      <linearGradient id="gradient">
+        <stop offset="20%" stopColor="#39F"></stop>
+        <stop offset="90%" stopColor="#F3F"></stop>
+      </linearGradient>
+    </defs>
   </svg></i>
 `;
 
@@ -58,9 +62,9 @@ exports[`Icon should support pass svg paths as children 1`] = `
 `;
 
 exports[`Icon should support svg vue component 1`] = `
-<i class="my-home-icon anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
+<i class="my-home-icon anticon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
     <title>Cool Home</title>
-    <path d="'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'"></path>
+    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
   </svg></i>
 `;
 

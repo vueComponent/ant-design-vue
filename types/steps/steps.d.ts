@@ -7,7 +7,7 @@ import { Step } from './step';
 
 export declare class Steps extends AntdComponent {
   static Step: typeof Step;
-
+  type: 'default' | 'navigation';
   /**
    * to set the current step, counting from 0. You can overwrite this state by using status of Step
    * @default 0

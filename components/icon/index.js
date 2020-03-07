@@ -41,6 +41,7 @@ function renderIcon(h, locale, context) {
   children = children.length === 0 ? undefined : children;
   warning(
     Boolean(type || Component || children),
+    'Icon',
     'Icon should have `type` prop or `component` prop or `children`.',
   );
 
@@ -61,68 +62,71 @@ function renderIcon(h, locale, context) {
       }
     : undefined;
 
-  let innerNode;
+  const innerSvgProps = {
+    attrs: {
+      ...svgBaseProps,
+      viewBox,
+    },
+    class: svgClassString,
+    style: svgStyle,
+  };
+  if (!viewBox) {
+    delete innerSvgProps.attrs.viewBox;
+  }
 
-  // component > children > type
-  if (Component) {
-    const innerSvgProps = {
-      attrs: {
-        ...svgBaseProps,
-        viewBox,
-      },
-      class: svgClassString,
-      style: svgStyle,
-    };
-    if (!viewBox) {
-      delete innerSvgProps.attrs.viewBox;
+  const renderInnerNode = () => {
+    // component > children > type
+    if (Component) {
+      return <Component {...innerSvgProps}>{children}</Component>;
     }
-
-    innerNode = <Component {...innerSvgProps}>{children}</Component>;
-  }
-  if (children) {
-    warning(
-      Boolean(viewBox) || (children.length === 1 && children[0].tag === 'use'),
-      'Make sure that you provide correct `viewBox`' +
-        ' prop (default `0 0 1024 1024`) to the icon.',
-    );
-    const innerSvgProps = {
-      attrs: {
-        ...svgBaseProps,
-      },
-      class: svgClassString,
-      style: svgStyle,
-    };
-    innerNode = (
-      <svg {...innerSvgProps} viewBox={viewBox}>
-        {children}
-      </svg>
-    );
-  }
-
-  if (typeof type === 'string') {
-    let computedType = type;
-    if (theme) {
-      const themeInName = getThemeFromTypeName(type);
+    if (children) {
       warning(
-        !themeInName || theme === themeInName,
-        `The icon name '${type}' already specify a theme '${themeInName}',` +
-          ` the 'theme' prop '${theme}' will be ignored.`,
+        Boolean(viewBox) || (children.length === 1 && children[0].tag === 'use'),
+        'Icon',
+        'Make sure that you provide correct `viewBox`' +
+          ' prop (default `0 0 1024 1024`) to the icon.',
+      );
+      const innerSvgProps = {
+        attrs: {
+          ...svgBaseProps,
+        },
+        class: svgClassString,
+        style: svgStyle,
+      };
+      return (
+        <svg {...innerSvgProps} viewBox={viewBox}>
+          {children}
+        </svg>
       );
     }
-    computedType = withThemeSuffix(
-      removeTypeTheme(alias(computedType)),
-      dangerousTheme || theme || defaultTheme,
-    );
-    innerNode = (
-      <VueIcon
-        focusable="false"
-        class={svgClassString}
-        type={computedType}
-        primaryColor={twoToneColor}
-        style={svgStyle}
-      />
-    );
-  }
+
+    if (typeof type === 'string') {
+      let computedType = type;
+      if (theme) {
+        const themeInName = getThemeFromTypeName(type);
+        warning(
+          !themeInName || theme === themeInName,
+          'Icon',
+          `The icon name '${type}' already specify a theme '${themeInName}',` +
+            ` the 'theme' prop '${theme}' will be ignored.`,
+        );
+      }
+      computedType = withThemeSuffix(
+        removeTypeTheme(alias(computedType)),
+        dangerousTheme || theme || defaultTheme,
+      );
+
+      return (
+        <VueIcon
+          focusable="false"
+          class={svgClassString}
+          type={computedType}
+          primaryColor={twoToneColor}
+          style={svgStyle}
+        />
+      );
+    }
+  };
   let iconTabIndex = tabIndex;
   if (iconTabIndex === undefined && 'click' in listeners) {
     iconTabIndex = -1;
@@ -140,7 +144,7 @@ function renderIcon(h, locale, context) {
     class: classString,
     staticClass: '',
   };
-  return <i {...iProps}>{innerNode}</i>;
+  return <i {...iProps}>{renderInnerNode()}</i>;
 }
 
 const Icon = {

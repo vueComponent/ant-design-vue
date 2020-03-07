@@ -1,45 +1,18 @@
 import { mount } from '@vue/test-utils';
 import Card from '../index';
 import Button from '../../button/index';
+import mountTest from '../../../tests/shared/mountTest';
 
 const testMethod = typeof window !== 'undefined' ? it : xit;
 
 describe('Card', () => {
+  mountTest(Card);
   beforeAll(() => {
     jest.useFakeTimers();
   });
 
   afterAll(() => {
     jest.useRealTimers();
-  });
-
-  function fakeResizeWindowTo(wrapper, width) {
-    Object.defineProperties(wrapper.vm.$refs.cardContainerRef, {
-      offsetWidth: {
-        get() {
-          return width;
-        },
-        configurable: true,
-      },
-    });
-    window.resizeTo(width);
-  }
-
-  testMethod('resize card will trigger different padding', () => {
-    const wrapper = mount(Card, {
-      propsData: 'xxx',
-      slots: {
-        default: 'xxx',
-      },
-    });
-    fakeResizeWindowTo(wrapper, 1000);
-    jest.runAllTimers();
-    wrapper.vm.$forceUpdate();
-    expect(wrapper.findAll('.ant-card-wider-padding').length).toBe(1);
-    fakeResizeWindowTo(wrapper, 800);
-    jest.runAllTimers();
-    wrapper.vm.$forceUpdate();
-    expect(wrapper.findAll('.ant-card-wider-padding').length).toBe(0);
   });
   it('should still have padding when card which set padding to 0 is loading', () => {
     const wrapper = mount({
@@ -65,5 +38,51 @@ describe('Card', () => {
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('onTabChange should work', () => {
+    const tabList = [
+      {
+        key: 'tab1',
+        tab: 'tab1',
+      },
+      {
+        key: 'tab2',
+        tab: 'tab2',
+      },
+    ];
+    const onTabChange = jest.fn();
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Card onTabChange={onTabChange} tabList={tabList}>
+              xxx
+            </Card>
+          );
+        },
+      },
+      {
+        sync: false,
+      },
+    );
+    wrapper
+      .findAll('.ant-tabs-tab')
+      .at(1)
+      .trigger('click');
+    expect(onTabChange).toHaveBeenCalledWith('tab2');
+  });
+
+  it('should not render when actions is number', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Card title="Card title" actions={11}>
+            <p>Card content</p>
+          </Card>
+        );
+      },
+    });
+    expect(wrapper.findAll('.ant-card-actions').length).toBe(0);
   });
 });

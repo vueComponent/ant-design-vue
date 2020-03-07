@@ -40,16 +40,22 @@ const MenuItem = {
   mixins: [BaseMixin],
   isMenuItem: true,
   created() {
+    this.prevActive = this.active;
     // invoke customized ref to expose component to mixin
     this.callRef();
   },
   updated() {
     this.$nextTick(() => {
-      if (this.active) {
+      const { active, parentMenu, eventKey } = this.$props;
+      if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
         scrollIntoView(this.$el, this.parentMenu.$el, {
           onlyScrollIfNeeded: true,
         });
+        parentMenu[`scrolled-${eventKey}`] = true;
+      } else if (parentMenu && parentMenu[`scrolled-${eventKey}`]) {
+        delete parentMenu[`scrolled-${eventKey}`];
       }
+      this.prevActive = active;
     });
     this.callRef();
   },

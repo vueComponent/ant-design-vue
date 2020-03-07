@@ -1,5 +1,3 @@
-import warning from 'warning';
-
 let scrollbarVerticalSize;
 let scrollbarHorizontalSize;
 
@@ -11,20 +9,26 @@ const scrollbarMeasure = {
   height: '50px',
 };
 
-export function measureScrollbar(direction = 'vertical') {
+export const INTERNAL_COL_DEFINE = 'RC_TABLE_INTERNAL_COL_DEFINE';
+
+export function measureScrollbar({ direction = 'vertical', prefixCls }) {
   if (typeof document === 'undefined' || typeof window === 'undefined') {
     return 0;
   }
   const isVertical = direction === 'vertical';
   if (isVertical && scrollbarVerticalSize) {
     return scrollbarVerticalSize;
-  } else if (!isVertical && scrollbarHorizontalSize) {
+  }
+  if (!isVertical && scrollbarHorizontalSize) {
     return scrollbarHorizontalSize;
   }
   const scrollDiv = document.createElement('div');
   Object.keys(scrollbarMeasure).forEach(scrollProp => {
     scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp];
   });
+  // apply hide scrollbar className ahead
+  scrollDiv.className = `${prefixCls}-hide-scrollbar scroll-div-append-to-body`;
+
   // Append related overflow style
   if (isVertical) {
     scrollDiv.style.overflowY = 'scroll';
@@ -36,7 +40,7 @@ export function measureScrollbar(direction = 'vertical') {
   if (isVertical) {
     size = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollbarVerticalSize = size;
-  } else if (!isVertical) {
+  } else {
     size = scrollDiv.offsetHeight - scrollDiv.clientHeight;
     scrollbarHorizontalSize = size;
   }
@@ -73,14 +77,6 @@ export function debounce(func, wait, immediate) {
     }
   };
   return debounceFunc;
-}
-
-const warned = {};
-export function warningOnce(condition, format, args) {
-  if (!warned[format]) {
-    warning(condition, format, args);
-    warned[format] = !condition;
-  }
 }
 
 export function remove(array, item) {

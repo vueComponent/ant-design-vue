@@ -5,35 +5,31 @@ export default class ColumnManager {
   }
 
   isAnyColumnsFixed() {
-    return this._cache('isAnyColumnsFixed', () => {
-      return this.columns.some(column => !!column.fixed);
-    });
+    return this._cache('isAnyColumnsFixed', () => this.columns.some(column => !!column.fixed));
   }
 
   isAnyColumnsLeftFixed() {
-    return this._cache('isAnyColumnsLeftFixed', () => {
-      return this.columns.some(column => column.fixed === 'left' || column.fixed === true);
-    });
+    return this._cache('isAnyColumnsLeftFixed', () =>
+      this.columns.some(column => column.fixed === 'left' || column.fixed === true),
+    );
   }
 
   isAnyColumnsRightFixed() {
-    return this._cache('isAnyColumnsRightFixed', () => {
-      return this.columns.some(column => column.fixed === 'right');
-    });
+    return this._cache('isAnyColumnsRightFixed', () =>
+      this.columns.some(column => column.fixed === 'right'),
+    );
   }
 
   leftColumns() {
-    return this._cache('leftColumns', () => {
-      return this.groupedColumns().filter(
-        column => column.fixed === 'left' || column.fixed === true,
-      );
-    });
+    return this._cache('leftColumns', () =>
+      this.groupedColumns().filter(column => column.fixed === 'left' || column.fixed === true),
+    );
   }
 
   rightColumns() {
-    return this._cache('rightColumns', () => {
-      return this.groupedColumns().filter(column => column.fixed === 'right');
-    });
+    return this._cache('rightColumns', () =>
+      this.groupedColumns().filter(column => column.fixed === 'right'),
+    );
   }
 
   leafColumns() {
@@ -74,10 +70,10 @@ export default class ColumnManager {
             newColumn.children = _groupColumns(newColumn.children, currentRow + 1, newColumn, rows);
             parentColumn.colSpan += newColumn.colSpan;
           } else {
-            parentColumn.colSpan++;
+            parentColumn.colSpan += 1;
           }
           // update rowspan to all same row columns
-          for (let i = 0; i < rows[currentRow].length - 1; ++i) {
+          for (let i = 0; i < rows[currentRow].length - 1; i += 1) {
             setRowSpan(rows[currentRow][i]);
           }
           // last column, update rowspan immediately

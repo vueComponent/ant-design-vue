@@ -1,14 +1,16 @@
 import omit from 'omit.js';
-import VcMenu, { Divider, ItemGroup, SubMenu } from '../vc-menu';
+import VcMenu, { Divider, ItemGroup } from '../vc-menu';
+import SubMenu from './SubMenu';
 import PropTypes from '../_util/vue-types';
 import animation from '../_util/openAnimation';
 import warning from '../_util/warning';
 import Item from './MenuItem';
-import { hasProp, getListeners } from '../_util/props-util';
+import { hasProp, getListeners, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
+// import raf from '../_util/raf';
 
 export const MenuMode = PropTypes.oneOf([
   'vertical',
@@ -47,6 +49,7 @@ const Menu = {
   provide() {
     return {
       getInlineCollapsed: this.getInlineCollapsed,
+      menuPropsContext: this.$props,
     };
   },
   mixins: [BaseMixin],
@@ -58,12 +61,12 @@ const Menu = {
     prop: 'selectedKeys',
     event: 'selectChange',
   },
-  created() {
-    this.preProps = { ...this.$props };
-  },
   updated() {
     this.propsUpdating = false;
   },
+  // beforeDestroy() {
+  //   raf.cancel(this.mountRafId);
+  // },
   watch: {
     mode(val, oldVal) {
       if (oldVal === 'inline' && val !== 'inline') {
@@ -81,9 +84,10 @@ const Menu = {
     },
   },
   data() {
-    const props = this.$props;
+    const props = getOptionProps(this);
     warning(
-      !(hasProp(this, 'inlineCollapsed') && props.mode !== 'inline'),
+      !('inlineCollapsed' in props && props.mode !== 'inline'),
+      'Menu',
       "`inlineCollapsed` should only be used when Menu's `mode` is inline.",
     );
     this.switchingModeFromInline = false;
@@ -91,9 +95,9 @@ const Menu = {
     this.inlineOpenKeys = [];
     let sOpenKeys;
 
-    if (hasProp(this, 'openKeys')) {
+    if ('openKeys' in props) {
       sOpenKeys = props.openKeys;
-    } else if (hasProp(this, 'defaultOpenKeys')) {
+    } else if ('defaultOpenKeys' in props) {
       sOpenKeys = props.defaultOpenKeys;
     }
     return {
@@ -137,10 +141,20 @@ const Menu = {
       // when inlineCollapsed menu width animation finished
       // https://github.com/ant-design/ant-design/issues/12864
       const widthCollapsed = e.propertyName === 'width' && e.target === e.currentTarget;
+
+      // Fix SVGElement e.target.className.indexOf is not a function
+      // https://github.com/ant-design/ant-design/issues/15699
+      const { className } = e.target;
+      // SVGAnimatedString.animVal should be identical to SVGAnimatedString.baseVal, unless during an animation.
+      const classNameValue =
+        Object.prototype.toString.call(className) === '[object SVGAnimatedString]'
+          ? className.animVal
+          : className;
+
       // Fix for <Menu style={{ width: '100%' }} />, the width transition won't trigger when menu is collapsed
       // https://github.com/ant-design/ant-design-pro/issues/2783
-      const iconScaled =
-        e.propertyName === 'font-size' && e.target.className.indexOf('anticon') >= 0;
+      const iconScaled = e.propertyName === 'font-size' && classNameValue.indexOf('anticon') >= 0;
+
       if (widthCollapsed || iconScaled) {
         this.restoreModeVerticalFromInline();
       }
@@ -254,11 +268,11 @@ const Menu = {
     }
 
     // https://github.com/ant-design/ant-design/issues/8587
-    if (
+    const hideMenu =
       this.getInlineCollapsed() &&
-      (collapsedWidth === 0 || collapsedWidth === '0' || collapsedWidth === '0px')
-    ) {
-      return null;
+      (collapsedWidth === 0 || collapsedWidth === '0' || collapsedWidth === '0px');
+    if (hideMenu) {
+      menuProps.props.openKeys = [];
     }
 
     return (

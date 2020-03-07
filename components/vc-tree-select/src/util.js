@@ -5,11 +5,24 @@ import {
   convertTreeToEntities as vcConvertTreeToEntities,
   conductCheck as rcConductCheck,
 } from '../../vc-tree/src/util';
-import SelectNode from './SelectNode';
+import { hasClass } from '../../vc-util/Dom/class';
 import { SHOW_CHILD, SHOW_PARENT } from './strategies';
 import { getSlots, getPropsData, isEmptyElement } from '../../_util/props-util';
 
 let warnDeprecatedLabel = false;
+
+// =================== DOM =====================
+export function findPopupContainer(node, prefixClass) {
+  let current = node;
+  while (current) {
+    if (hasClass(current, prefixClass)) {
+      return current;
+    }
+    current = current.parentNode;
+  }
+
+  return null;
+}
 
 // =================== MISC ====================
 export function toTitle(title) {
@@ -190,7 +203,7 @@ export function cleanEntity({ node, pos, children }) {
  * we have to convert `treeNodes > data > treeNodes` to keep the key.
  * Such performance hungry!
  */
-export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntities) {
+export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntities, Component) {
   if (!searchValue) {
     return null;
   }
@@ -208,9 +221,9 @@ export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntiti
       .filter(n => n);
     if (children.length || match) {
       return (
-        <SelectNode {...node.data} key={valueEntities[getPropsData(node).value].key}>
+        <Component {...node.data} key={valueEntities[getPropsData(node).value].key}>
           {children}
-        </SelectNode>
+        </Component>
       );
     }
 

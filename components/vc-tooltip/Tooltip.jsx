@@ -21,7 +21,7 @@ export default {
     mouseLeaveDelay: PropTypes.number.def(0.1),
     getTooltipContainer: PropTypes.func,
     destroyTooltipOnHide: PropTypes.bool.def(false),
-    align: PropTypes.object.def({}),
+    align: PropTypes.object.def(() => ({})),
     arrowContent: PropTypes.any.def(null),
     tipId: PropTypes.string,
     builtinPlacements: PropTypes.object,

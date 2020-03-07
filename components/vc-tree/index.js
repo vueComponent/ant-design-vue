@@ -1,4 +1,4 @@
-// based on rc-tree 1.14.10
+// based on rc-tree 2.1.3
 'use strict';
 
 module.exports = require('./src/');

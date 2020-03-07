@@ -2,6 +2,7 @@ import warning from 'warning';
 import PropTypes from '../../../_util/vue-types';
 import { Tree } from '../../../vc-tree';
 import BaseMixin from '../../../_util/BaseMixin';
+import { createRef } from '../util';
 
 // export const popupContextTypes = {
 //   onPopupKeyDown: PropTypes.func.isRequired,
@@ -110,6 +111,7 @@ const BasePopup = {
     },
   },
   data() {
+    this.treeRef = createRef();
     warning(this.$props.__propsSymbol__, 'must pass __propsSymbol__');
     const { treeDefaultExpandAll, treeDefaultExpandedKeys, keyEntities } = this.$props;
 
@@ -148,6 +150,10 @@ const BasePopup = {
 
     onLoad(loadedKeys) {
       this.setState({ _loadedKeys: loadedKeys });
+    },
+
+    getTree() {
+      return this.treeRef.current;
     },
 
     /**
@@ -231,7 +237,7 @@ const BasePopup = {
       } else {
         $notFound = this.renderNotFound();
       }
-    } else if (!treeNodes.length) {
+    } else if (!treeNodes || !treeNodes.length) {
       $notFound = this.renderNotFound();
     } else {
       $treeNodes = treeNodes;
@@ -265,6 +271,12 @@ const BasePopup = {
           expand: this.onTreeExpand,
           load: this.onLoad,
         },
+        directives: [
+          {
+            name: 'ant-ref',
+            value: this.treeRef,
+          },
+        ],
       };
       $tree = <Tree {...treeAllProps} />;
     }

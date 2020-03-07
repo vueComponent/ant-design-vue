@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import addEventListener from '../../_util/Dom/addEventListener';
+import addEventListener from '../../vc-util/Dom/addEventListener';
 import { initDefaultProps } from '../../_util/props-util';
 import warning from '../../_util/warning';
 import debounce from 'lodash/debounce';

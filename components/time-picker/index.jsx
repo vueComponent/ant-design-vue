@@ -2,11 +2,11 @@ import * as moment from 'moment';
 import omit from 'omit.js';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from './locale/en_US';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import Icon from '../icon';
+import enUS from './locale/en_US';
 import interopDefault from '../_util/interopDefault';
 import {
   initDefaultProps,
@@ -70,6 +70,8 @@ export const TimePickerProps = () => ({
   transitionName: PropTypes.string,
   autoFocus: PropTypes.bool,
   addon: PropTypes.any,
+  clearIcon: PropTypes.any,
+  locale: PropTypes.object,
 });
 
 const TimePicker = {
@@ -87,6 +89,7 @@ const TimePicker = {
     placement: 'bottomLeft',
     transitionName: 'slide-up',
     focusOnOpen: true,
+    allowClear: true,
   }),
   model: {
     prop: 'value',
@@ -107,7 +110,8 @@ const TimePicker = {
     }
     warning(
       !hasProp(this, 'allowEmpty'),
-      '`allowEmpty` in TimePicker is deprecated. Please use `allowClear` instead.',
+      'TimePicker',
+      '`allowEmpty` is deprecated. Please use `allowClear` instead.',
     );
     return {
       sValue: value,
@@ -119,6 +123,30 @@ const TimePicker = {
     },
   },
   methods: {
+    getDefaultFormat() {
+      const { format, use12Hours } = this;
+      if (format) {
+        return format;
+      } else if (use12Hours) {
+        return 'h:mm:ss a';
+      }
+      return 'HH:mm:ss';
+    },
+
+    getAllowClear() {
+      const { allowClear, allowEmpty } = this.$props;
+      if (hasProp(this, 'allowClear')) {
+        return allowClear;
+      }
+      return allowEmpty;
+    },
+    getDefaultLocale() {
+      const defaultLocale = {
+        ...enUS,
+        ...this.$props.locale,
+      };
+      return defaultLocale;
+    },
     savePopupRef(ref) {
       this.popupRef = ref;
     },
@@ -143,42 +171,29 @@ const TimePicker = {
       this.$refs.timePicker.blur();
     },
 
-    getDefaultFormat() {
-      const { format, use12Hours } = this;
-      if (format) {
-        return format;
-      } else if (use12Hours) {
-        return 'h:mm:ss a';
-      }
-      return 'HH:mm:ss';
-    },
-
-    getAllowClear() {
-      const { allowClear, allowEmpty } = this.$props;
-      if (hasProp(this, 'allowClear')) {
-        return allowClear;
-      }
-      return allowEmpty;
-    },
-
     renderInputIcon(prefixCls) {
       let suffixIcon = getComponentFromProp(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const clockIcon = (suffixIcon &&
-        (isValidElement(suffixIcon) ? (
-          cloneElement(suffixIcon, {
-            class: `${prefixCls}-clock-icon`,
-          })
-        ) : (
-          <span class={`${prefixCls}-clock-icon`}>{suffixIcon}</span>
-        ))) || <Icon type="clock-circle" class={`${prefixCls}-clock-icon`} theme="outlined" />;
+        isValidElement(suffixIcon) &&
+        cloneElement(suffixIcon, {
+          class: `${prefixCls}-clock-icon`,
+        })) || <Icon type="clock-circle" class={`${prefixCls}-clock-icon`} />;
 
       return <span class={`${prefixCls}-icon`}>{clockIcon}</span>;
     },
 
     renderClearIcon(prefixCls) {
-      const clearIcon = <Icon type="close-circle" class={`${prefixCls}-clear`} theme="filled" />;
-      return clearIcon;
+      const clearIcon = getComponentFromProp(this, 'clearIcon');
+      const clearIconPrefixCls = `${prefixCls}-clear`;
+
+      if (clearIcon && isValidElement(clearIcon)) {
+        return cloneElement(clearIcon, {
+          class: clearIconPrefixCls,
+        });
+      }
+
+      return <Icon type="close-circle" class={clearIconPrefixCls} theme="filled" />;
     },
 
     renderTimePicker(locale) {
@@ -235,7 +250,7 @@ const TimePicker = {
     return (
       <LocaleReceiver
         componentName="TimePicker"
-        defaultLocale={defaultLocale}
+        defaultLocale={this.getDefaultLocale()}
         scopedSlots={{ default: this.renderTimePicker }}
       />
     );

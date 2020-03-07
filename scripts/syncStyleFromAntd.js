@@ -6,7 +6,7 @@ const path = require('path');
 
 const owner = 'ant-design';
 const repo = 'ant-design';
-const tag = '3.13.6';
+const tag = '3.26.12';
 const clientId = '5f6ccfdc4cdc69f8ba12';
 const clientSecret = process.env.CLIENT_SECRET;
 
@@ -38,7 +38,7 @@ async function syncFiles(data = []) {
   }
 }
 async function syncStyle() {
-  const { data = [] } = await github.repos.getContent({
+  const { data = [] } = await github.repos.getContents({
     owner,
     repo,
     path: 'components',
@@ -52,7 +52,7 @@ async function syncStyle() {
       if (item.name === 'style') {
         syncFiles([item]);
       } else {
-        const { data: itemData } = await github.repos.getContent({
+        const { data: itemData } = await github.repos.getContents({
           owner,
           repo,
           path: `${item.path}/style`,

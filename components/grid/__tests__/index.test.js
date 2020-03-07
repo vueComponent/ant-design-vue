@@ -1,7 +1,10 @@
 import { mount } from '@vue/test-utils';
 import { Col, Row } from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Grid', () => {
+  mountTest(Row);
+  mountTest(Col);
   it('should render Col', () => {
     const wrapper = mount(Col, {
       propsData: {

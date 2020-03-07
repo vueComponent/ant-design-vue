@@ -5,11 +5,11 @@
         {{ isCN ? '赞助商' : 'Sponsors' }}
       </span>
       <ul>
-        <li class="sponsorsItem">
+        <!-- <li class="sponsorsItem">
           <a href="https://tipe.io/?ref=ant-design-vue" target="_blank">
             <img height="51" src="https://cdn.tipe.io/tipe/tipe-cat-no-text.svg" alt="tipe" />
           </a>
-        </li>
+        </li> -->
         <li v-if="isEffective(effectiveTime.bmatch)" class="sponsorsItem">
           <a href="https://www.youkeda.com?from=vue" target="_blank">
             <img height="66" width="34" src="https://qn.antdv.com/youkeda.jpeg" alt="bmatch" />

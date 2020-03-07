@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/popover/demo/arrow-point-at-center.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Align edge / 边缘对齐</span></button> <button type="button" class="ant-btn"><span>Arrow points to center / 箭头指向中心</span></button></div>`;
+exports[`renders ./antdv-demo/popover/demo/arrow-point-at-center.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Align edge / 边缘对齐</span></button> <button type="button" class="ant-btn"><span>Arrow points to center / 箭头指向中心</span></button></div>`;
 
-exports[`renders ./components/popover/demo/basic.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Hover me</span></button>`;
+exports[`renders ./antdv-demo/popover/demo/basic.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Hover me</span></button>`;
 
-exports[`renders ./components/popover/demo/control.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Click me</span></button>`;
+exports[`renders ./antdv-demo/popover/demo/control.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Click me</span></button>`;
 
-exports[`renders ./components/popover/demo/hover-with-click.md correctly 1`] = `<button type="button" class="ant-btn" style="width: 500px;"><span>Hover and click / 悬停并单击</span></button>`;
+exports[`renders ./antdv-demo/popover/demo/hover-with-click.md correctly 1`] = `<button type="button" class="ant-btn" style="width: 500px;"><span>Hover and click / 悬停并单击</span></button>`;
 
-exports[`renders ./components/popover/demo/placement.md correctly 1`] = `
+exports[`renders ./antdv-demo/popover/demo/placement.md correctly 1`] = `
 <div id="components-popover-demo-placement">
   <div style="margin-left: 70px; white-space: nowrap;"><button type="button" class="ant-btn"><span>TL</span></button> <button type="button" class="ant-btn"><span>Top</span></button> <button type="button" class="ant-btn"><span>TR</span></button></div>
   <div style="width: 70px; float: left;"><button type="button" class="ant-btn"><span>LT</span></button> <button type="button" class="ant-btn"><span>Left</span></button> <button type="button" class="ant-btn"><span>LB</span></button></div>
@@ -17,4 +17,4 @@ exports[`renders ./components/popover/demo/placement.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/popover/demo/triggerType.md correctly 1`] = `<div><button type="button" class="ant-btn ant-btn-primary"><span>Hover me</span></button> <button type="button" class="ant-btn ant-btn-primary"><span>Focus me</span></button> <button type="button" class="ant-btn ant-btn-primary"><span>Click me</span></button></div>`;
+exports[`renders ./antdv-demo/popover/demo/triggerType.md correctly 1`] = `<div><button type="button" class="ant-btn ant-btn-primary"><span>Hover me</span></button> <button type="button" class="ant-btn ant-btn-primary"><span>Focus me</span></button> <button type="button" class="ant-btn ant-btn-primary"><span>Click me</span></button></div>`;

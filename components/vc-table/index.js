@@ -1,4 +1,4 @@
-// base rc-table 6.4.3
+// base rc-table 6.10.9
 import T from './src/Table';
 import Column from './src/Column';
 import ColumnGroup from './src/ColumnGroup';
@@ -13,6 +13,7 @@ import {
   getSlots,
   getListeners,
 } from '../_util/props-util';
+import { INTERNAL_COL_DEFINE } from './src/utils';
 const Table = {
   name: 'Table',
   Column,
@@ -68,4 +69,4 @@ const Table = {
 };
 
 export default Table;
-export { Column, ColumnGroup };
+export { Column, ColumnGroup, INTERNAL_COL_DEFINE };

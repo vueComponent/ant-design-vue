@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { alignElement, alignPoint } from 'dom-align';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import { isWindow, buffer, isSamePoint, isSimilarValue, restoreFocus } from './util';
 import { cloneElement } from '../_util/vnode.js';
 import clonedeep from 'lodash/cloneDeep';

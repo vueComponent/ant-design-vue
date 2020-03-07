@@ -116,10 +116,10 @@ export default function calculateNodeHeight(
 
   if (boxSizing === 'border-box') {
     // border-box: add border, since height = content + padding + border
-    height = height + borderSize;
+    height += borderSize;
   } else if (boxSizing === 'content-box') {
     // remove padding, since height = content
-    height = height - paddingSize;
+    height -= paddingSize;
   }
 
   if (minRows !== null || maxRows !== null) {
@@ -142,11 +142,11 @@ export default function calculateNodeHeight(
       height = Math.min(maxHeight, height);
     }
   }
-  // Remove scroll bar flash when autosize without maxRows
-  // donot remove in vue
-  if (!maxRows) {
-    overflowY = 'hidden';
-  }
+  // // Remove scroll bar flash when autosize without maxRows
+  // // donot remove in vue
+  // if (!maxRows) {
+  //   overflowY = 'hidden';
+  // }
   return {
     height: `${height}px`,
     minHeight: `${minHeight}px`,

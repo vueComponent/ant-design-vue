@@ -9,7 +9,7 @@ const BodyRowProps = {
   prefixCls: PropTypes.string,
 };
 
-export default function createTableRow(Component = 'tr') {
+export default function createBodyRow(Component = 'tr') {
   const BodyRow = {
     name: 'BodyRow',
     props: BodyRowProps,

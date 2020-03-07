@@ -295,11 +295,12 @@ gulp.task(
 gulp.task(
   'pub',
   gulp.series('check-git', 'compile', done => {
-    if (!process.env.GITHUB_TOKEN) {
-      console.log('no GitHub token found, skip');
-    } else {
-      pub(done);
-    }
+    // if (!process.env.GITHUB_TOKEN) {
+    //   console.log('no GitHub token found, skip');
+    // } else {
+    //   pub(done);
+    // }
+    pub(done);
   }),
 );
 

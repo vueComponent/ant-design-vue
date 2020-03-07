@@ -17,6 +17,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import { formatDate } from './utils';
 
 // export const PickerProps = {
 //   value?: moment.Moment;
@@ -77,19 +78,6 @@ export default function createPicker(TheCalendar, props) {
       },
     },
     methods: {
-      renderFooter(...args) {
-        const { $scopedSlots, $slots, _prefixCls: prefixCls } = this;
-        const renderExtraFooter =
-          this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter;
-        return renderExtraFooter ? (
-          <div class={`${prefixCls}-footer-extra`}>
-            {typeof renderExtraFooter === 'function'
-              ? renderExtraFooter(...args)
-              : renderExtraFooter}
-          </div>
-        ) : null;
-      },
-
       clearSelection(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -103,7 +91,7 @@ export default function createPicker(TheCalendar, props) {
             showDate: value,
           });
         }
-        this.$emit('change', value, (value && value.format(this.format)) || '');
+        this.$emit('change', value, formatDate(value, this.format));
       },
 
       handleCalendarChange(value) {
@@ -122,6 +110,18 @@ export default function createPicker(TheCalendar, props) {
 
       blur() {
         this.$refs.input.blur();
+      },
+      renderFooter(...args) {
+        const { $scopedSlots, $slots, _prefixCls: prefixCls } = this;
+        const renderExtraFooter =
+          this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter;
+        return renderExtraFooter ? (
+          <div class={`${prefixCls}-footer-extra`}>
+            {typeof renderExtraFooter === 'function'
+              ? renderExtraFooter(...args)
+              : renderExtraFooter}
+          </div>
+        ) : null;
       },
       onMouseEnter(e) {
         this.$emit('mouseenter', e);
@@ -167,7 +167,7 @@ export default function createPicker(TheCalendar, props) {
       if (props.showTime) {
         // fix https://github.com/ant-design/ant-design/issues/1902
         calendarProps.on.select = this.handleChange;
-        pickerStyle.width = '195px';
+        pickerStyle.minWidth = '195px';
       } else {
         pickerProps.on.change = this.handleChange;
       }
@@ -227,10 +227,11 @@ export default function createPicker(TheCalendar, props) {
             onFocus={focus}
             onBlur={blur}
             readOnly
-            value={(inputValue && inputValue.format(props.format)) || ''}
+            value={formatDate(inputValue, this.format)}
             placeholder={placeholder}
             class={props.pickerInputClass}
             tabIndex={props.tabIndex}
+            name={this.name}
           />
           {clearIcon}
           {inputIcon}

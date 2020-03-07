@@ -3,7 +3,7 @@
 exports[`Spin should only affect the spin element when set style to a nested <Spin>xx</Spin> 1`] = `
 <div class="ant-spin-nested-loading" style="background: red;">
   <div>
-    <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+    <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
   </div>
   <div class="ant-spin-container ant-spin-blur">
     <div>content</div>

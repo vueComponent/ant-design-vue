@@ -1,4 +1,4 @@
-// based on rc-input-number 4.4.0
+// based on rc-input-number 4.5.5
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, hasProp, getOptionProps, getListeners } from '../../_util/props-util';
@@ -34,6 +34,13 @@ const DELAY = 600;
 const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 
 const isValidProps = value => value !== undefined && value !== null;
+
+const isEqual = (oldValue, newValue) =>
+  newValue === oldValue ||
+  (typeof newValue === 'number' &&
+    typeof oldValue === 'number' &&
+    isNaN(newValue) &&
+    isNaN(oldValue));
 
 const inputNumberProps = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -73,7 +80,7 @@ const inputNumberProps = {
 };
 
 export default {
-  name: 'InputNumber',
+  name: 'VCInputNumber',
   mixins: [BaseMixin],
   model: {
     prop: 'value',
@@ -90,17 +97,18 @@ export default {
     autoComplete: 'off',
   }),
   data() {
+    const props = getOptionProps(this);
+    this.prevProps = { ...props };
     let value;
-    if (hasProp(this, 'value')) {
+    if ('value' in props) {
       value = this.value;
     } else {
       value = this.defaultValue;
     }
-    value = this.toNumber(value);
-
+    const validValue = this.getValidValue(this.toNumber(value));
     return {
-      inputValue: this.toPrecisionAsStep(value),
-      sValue: value,
+      inputValue: this.toPrecisionAsStep(validValue),
+      sValue: validValue,
       focused: this.autoFocus,
     };
   },
@@ -112,52 +120,63 @@ export default {
       this.updatedFunc();
     });
   },
-  beforeUpdate() {
-    this.$nextTick(() => {
-      try {
-        this.start = this.$refs.inputRef.selectionStart;
-        this.end = this.$refs.inputRef.selectionEnd;
-      } catch (e) {
-        // Fix error in Chrome:
-        // Failed to read the 'selectionStart' property from 'HTMLInputElement'
-        // http://stackoverflow.com/q/21177489/3040605
-      }
-    });
-  },
   updated() {
+    const { value, max, min } = this.$props;
+    const { focused } = this.$data;
+    const { prevProps } = this;
+    const props = getOptionProps(this);
+    // Don't trigger in componentDidMount
+    if (prevProps) {
+      if (
+        !isEqual(prevProps.value, value) ||
+        !isEqual(prevProps.max, max) ||
+        !isEqual(prevProps.min, min)
+      ) {
+        const validValue = focused ? value : this.getValidValue(value);
+        let nextInputValue;
+        if (this.pressingUpOrDown) {
+          nextInputValue = validValue;
+        } else if (this.inputting) {
+          nextInputValue = this.rawInput;
+        } else {
+          nextInputValue = this.toPrecisionAsStep(validValue);
+        }
+        this.setState({
+          // eslint-disable-line
+          sValue: validValue,
+          inputValue: nextInputValue,
+        });
+      }
+
+      // Trigger onChange when max or min change
+      // https://github.com/ant-design/ant-design/issues/11574
+      const nextValue = 'value' in props ? value : this.sValue;
+      // ref: null < 20 === true
+      // https://github.com/ant-design/ant-design/issues/14277
+      if (
+        'max' in props &&
+        prevProps.max !== max &&
+        typeof nextValue === 'number' &&
+        nextValue > max
+      ) {
+        this.$emit('change', max);
+      }
+      if (
+        'min' in props &&
+        prevProps.min !== min &&
+        typeof nextValue === 'number' &&
+        nextValue < min
+      ) {
+        this.$emit('change', min);
+      }
+    }
+    this.prevProps = { ...props };
     this.$nextTick(() => {
       this.updatedFunc();
     });
   },
   beforeDestroy() {
     this.stop();
-  },
-  watch: {
-    value(val) {
-      const value = this.focused ? val : this.getValidValue(val, this.min, this.max);
-      this.setState({
-        sValue: val,
-        inputValue: this.inputting ? value : this.toPrecisionAsStep(value),
-      });
-    },
-    max(val) {
-      const props = getOptionProps(this);
-      // Trigger onChange when max or min change
-      // https://github.com/ant-design/ant-design/issues/11574
-      const nextValue = 'value' in props ? props.value : this.sValue;
-      // ref: null < 20 === true
-      // https://github.com/ant-design/ant-design/issues/14277
-      if (typeof nextValue === 'number' && nextValue > val) {
-        this.__emit('change', val);
-      }
-    },
-    min(val) {
-      const props = getOptionProps(this);
-      const nextValue = 'value' in props ? props.value : this.sValue;
-      if (typeof nextValue === 'number' && nextValue < val) {
-        this.__emit('change', val);
-      }
-    },
   },
   methods: {
     updatedFunc() {
@@ -231,6 +250,8 @@ export default {
         const ratio = this.getRatio(e);
         this.down(e, ratio);
         this.stop();
+      } else if (e.keyCode === KeyCode.ENTER) {
+        this.$emit('pressEnter', e);
       }
       // Trigger user key down
       this.recordCursorPosition();
@@ -248,9 +269,9 @@ export default {
       if (this.focused) {
         this.inputting = true;
       }
-      const input = this.parser(this.getValueFromEvent(e));
-      this.setState({ inputValue: input });
-      this.$emit('change', this.toNumberWhenUserInput(input)); // valid number or invalid string
+      this.rawInput = this.parser(this.getValueFromEvent(e));
+      this.setState({ inputValue: this.rawInput });
+      this.$emit('change', this.toNumber(this.rawInput)); // valid number or invalid string
     },
     onFocus(...args) {
       this.setState({
@@ -258,17 +279,20 @@ export default {
       });
       this.$emit('focus', ...args);
     },
-    onBlur(e, ...args) {
+    onBlur(...args) {
       this.inputting = false;
       this.setState({
         focused: false,
       });
       const value = this.getCurrentValidValue(this.inputValue);
-      // todo
-      // e.persist() // fix https://github.com/react-component/input-number/issues/51
-      this.setValue(value, () => {
-        this.$emit('blur', e, ...args);
-      });
+      const newValue = this.setValue(value);
+      if (this.$listeners.blur) {
+        const originValue = this.$refs.inputRef.value;
+        const inputValue = this.getInputDisplayValue({ focused: false, sValue: newValue });
+        this.$refs.inputRef.value = inputValue;
+        this.$emit('blur', ...args);
+        this.$refs.inputRef.value = originValue;
+      }
     },
     getCurrentValidValue(value) {
       let val = value;
@@ -317,8 +341,14 @@ export default {
     },
     setValue(v, callback) {
       // trigger onChange
+      const { precision } = this.$props;
       const newValue = this.isNotCompleteNumber(parseFloat(v, 10)) ? null : parseFloat(v, 10);
-      const changed = newValue !== this.sValue || `${newValue}` !== `${this.inputValue}`; // https://github.com/ant-design/ant-design/issues/7363
+      const { sValue: value = null, inputValue = null } = this.$data;
+      // https://github.com/ant-design/ant-design/issues/7363
+      // https://github.com/ant-design/ant-design/issues/16622
+      const newValueInString =
+        typeof newValue === 'number' ? newValue.toFixed(precision) : `${newValue}`;
+      const changed = newValue !== value || newValueInString !== `${inputValue}`;
       if (!hasProp(this, 'value')) {
         this.setState(
           {
@@ -339,6 +369,7 @@ export default {
       if (changed) {
         this.$emit('change', newValue);
       }
+      return newValue;
     },
     getPrecision(value) {
       if (isValidProps(this.precision)) {
@@ -357,7 +388,7 @@ export default {
     // step={1.0} value={1.51}
     // press +
     // then value should be 2.51, rather than 2.5
-    // if this.props.precision is undefined
+    // if this.$props.precision is undefined
     // https://github.com/react-component/input-number/issues/39
     getMaxPrecision(currentValue, ratio = 1) {
       if (isValidProps(this.precision)) {
@@ -376,8 +407,8 @@ export default {
       const precision = this.getMaxPrecision(currentValue, ratio);
       return Math.pow(10, precision);
     },
-    getInputDisplayValue() {
-      const { focused, inputValue, sValue } = this;
+    getInputDisplayValue(state) {
+      const { focused, inputValue, sValue } = state || this.$data;
       let inputDisplayValue;
       if (focused) {
         inputDisplayValue = inputValue;
@@ -389,7 +420,14 @@ export default {
         inputDisplayValue = '';
       }
 
-      return inputDisplayValue;
+      let inputDisplayValueFormat = this.formatWrapper(inputDisplayValue);
+      if (isValidProps(this.$props.decimalSeparator)) {
+        inputDisplayValueFormat = inputDisplayValueFormat
+          .toString()
+          .replace('.', this.$props.decimalSeparator);
+      }
+
+      return inputDisplayValueFormat;
     },
     recordCursorPosition() {
       // Record position
@@ -407,7 +445,12 @@ export default {
       }
     },
     fixCaret(start, end) {
-      if (start === undefined || end === undefined || !this.input || !this.input.value) {
+      if (
+        start === undefined ||
+        end === undefined ||
+        !this.$refs.inputRef ||
+        !this.$refs.inputRef.value
+      ) {
         return;
       }
 
@@ -433,6 +476,14 @@ export default {
 
       if (index === -1) return false;
 
+      const prevCursorPos = this.cursorBefore.length;
+      if (
+        this.lastKeyCode === KeyCode.DELETE &&
+        this.cursorBefore.charAt(prevCursorPos - 1) === str[0]
+      ) {
+        this.fixCaret(prevCursorPos, prevCursorPos);
+        return true;
+      }
       if (index + str.length === fullStr.length) {
         this.fixCaret(index, index);
 
@@ -463,9 +514,6 @@ export default {
     formatWrapper(num) {
       // http://2ality.com/2012/03/signedzero.html
       // https://github.com/ant-design/ant-design/issues/9439
-      if (isNegativeZero(num)) {
-        return '-0';
-      }
       if (this.formatter) {
         return this.formatter(num);
       }
@@ -476,9 +524,6 @@ export default {
         return num;
       }
       const precision = Math.abs(this.getMaxPrecision(num));
-      if (precision === 0) {
-        return num.toString();
-      }
       if (!isNaN(precision)) {
         return Number(num).toFixed(precision);
       }
@@ -494,48 +539,36 @@ export default {
       );
     },
     toNumber(num) {
-      if (this.isNotCompleteNumber(num)) {
+      const { precision, autoFocus } = this.$props;
+      const { focused = autoFocus } = this;
+      // num.length > 16 => This is to prevent input of large numbers
+      const numberIsTooLarge = num && num.length > 16 && focused;
+      if (this.isNotCompleteNumber(num) || numberIsTooLarge) {
         return num;
       }
-      if (isValidProps(this.precision)) {
-        return Number(Number(num).toFixed(this.precision));
+      if (isValidProps(precision)) {
+        return Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
       }
       return Number(num);
     },
-    // '1.0' '1.00'  => may be a inputing number
-    toNumberWhenUserInput(num) {
-      // num.length > 16 => prevent input large number will became Infinity
-      if ((/\.\d*0$/.test(num) || num.length > 16) && this.focused) {
-        return num;
-      }
-      return this.toNumber(num);
-    },
     upStep(val, rat) {
-      const { step, min } = this;
+      const { step } = this;
       const precisionFactor = this.getPrecisionFactor(val, rat);
       const precision = Math.abs(this.getMaxPrecision(val, rat));
-      let result;
-      if (typeof val === 'number') {
-        result = ((precisionFactor * val + precisionFactor * step * rat) / precisionFactor).toFixed(
-          precision,
-        );
-      } else {
-        result = min === -Infinity ? step : min;
-      }
+      const result = (
+        (precisionFactor * val + precisionFactor * step * rat) /
+        precisionFactor
+      ).toFixed(precision);
       return this.toNumber(result);
     },
     downStep(val, rat) {
-      const { step, min } = this;
+      const { step } = this;
       const precisionFactor = this.getPrecisionFactor(val, rat);
       const precision = Math.abs(this.getMaxPrecision(val, rat));
-      let result;
-      if (typeof val === 'number') {
-        result = ((precisionFactor * val - precisionFactor * step * rat) / precisionFactor).toFixed(
-          precision,
-        );
-      } else {
-        result = min === -Infinity ? -step : min;
-      }
+      const result = (
+        (precisionFactor * val - precisionFactor * step * rat) /
+        precisionFactor
+      ).toFixed(precision);
       return this.toNumber(result);
     },
     stepFn(type, e, ratio = 1, recursive) {
@@ -627,16 +660,7 @@ export default {
 
     // focus state, show input value
     // unfocus state, show valid value
-    let inputDisplayValue;
-    if (this.focused) {
-      inputDisplayValue = this.inputValue;
-    } else {
-      inputDisplayValue = this.toPrecisionAsStep(this.sValue);
-    }
-
-    if (inputDisplayValue === undefined || inputDisplayValue === null) {
-      inputDisplayValue = '';
-    }
+    const inputDisplayValue = this.getInputDisplayValue();
 
     let upEvents;
     let downEvents;
@@ -660,12 +684,6 @@ export default {
         mouseup: this.stop,
         mouseleave: this.stop,
       };
-    }
-    let inputDisplayValueFormat = this.formatWrapper(inputDisplayValue);
-    if (isValidProps(this.decimalSeparator)) {
-      inputDisplayValueFormat = inputDisplayValueFormat
-        .toString()
-        .replace('.', this.decimalSeparator);
     }
     const isUpDisabled = !!upDisabledClass || disabled || readOnly;
     const isDownDisabled = !!downDisabledClass || disabled || readOnly;
@@ -733,14 +751,12 @@ export default {
             )}
           </InputHandler>
         </div>
-        <div
-          class={`${prefixCls}-input-wrap`}
-          role="spinbutton"
-          aria-valuemin={this.min}
-          aria-valuemax={this.max}
-          aria-valuenow={sValue}
-        >
+        <div class={`${prefixCls}-input-wrap`}>
           <input
+            role="spinbutton"
+            aria-valuemin={this.min}
+            aria-valuemax={this.max}
+            aria-valuenow={sValue}
             required={this.required}
             type={this.type}
             placeholder={this.placeholder}
@@ -759,10 +775,11 @@ export default {
             min={this.min}
             step={this.step}
             name={this.name}
+            title={this.title}
             id={this.id}
             onInput={this.onChange}
             ref="inputRef"
-            value={inputDisplayValueFormat}
+            value={inputDisplayValue}
             pattern={this.pattern}
           />
         </div>

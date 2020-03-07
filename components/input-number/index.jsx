@@ -12,7 +12,7 @@ export const InputNumberProps = {
   max: PropTypes.number,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  defaultValue: PropTypes.number,
+  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   tabIndex: PropTypes.number,
   disabled: PropTypes.bool,
   size: PropTypes.oneOf(['large', 'small', 'default']),

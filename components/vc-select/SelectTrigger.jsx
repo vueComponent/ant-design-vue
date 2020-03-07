@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import raf from 'raf';
 import Trigger from '../vc-trigger';
 import PropTypes from '../_util/vue-types';
 import DropdownMenu from './DropdownMenu';
@@ -65,6 +66,7 @@ export default {
     };
   },
   created() {
+    this.rafInstance = null;
     this.saveDropdownMenuRef = saveRef(this, 'dropdownMenuRef');
     this.saveTriggerRef = saveRef(this, 'triggerRef');
   },
@@ -80,14 +82,24 @@ export default {
       this.setDropdownWidth();
     });
   },
+  beforeDestroy() {
+    this.cancelRafInstance();
+  },
   methods: {
     setDropdownWidth() {
-      const width = this.$el.offsetWidth;
-      if (width !== this.dropdownWidth) {
-        this.setState({ dropdownWidth: width });
+      this.cancelRafInstance();
+      this.rafInstance = raf(() => {
+        const width = this.$el.offsetWidth;
+        if (width !== this.dropdownWidth) {
+          this.setState({ dropdownWidth: width });
+        }
+      });
+    },
+    cancelRafInstance() {
+      if (this.rafInstance) {
+        raf.cancel(this.rafInstance);
       }
     },
-
     getInnerMenu() {
       return this.dropdownMenuRef && this.dropdownMenuRef.$refs.menuRef;
     },

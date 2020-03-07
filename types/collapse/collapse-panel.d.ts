@@ -37,4 +37,6 @@ export declare class CollapsePanel extends AntdComponent {
    * @type boolean
    */
   showArrow: boolean;
+
+  extra: any;
 }

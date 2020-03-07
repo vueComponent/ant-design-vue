@@ -108,7 +108,7 @@ describe('Search', () => {
     input.trigger('input');
 
     expect(errorSpy.mock.calls[0][0]).toMatch(
-      'Warning: `searchChange` in Transfer is deprecated. Please use `search` instead.',
+      'Warning: [antdv: Transfer] `searchChange` in Transfer is deprecated. Please use `search` instead.',
     );
     expect(onSearchChange.mock.calls[0][0]).toEqual('left');
     expect(onSearchChange.mock.calls[0][1].target.value).toEqual('a');

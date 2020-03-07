@@ -1,0 +1,3 @@
+[submodule "antdv-demo"]
+	path = antdv-demo
+	url = https://github.com/tangjinzhou/antdv-demo.git

@@ -17,6 +17,7 @@ const collapseProps = () => ({
   bordered: PropTypes.bool,
   expandIcon: PropTypes.func,
   openAnimation: PropTypes.object,
+  expandIconPosition: PropTypes.oneOf(['left', 'right']),
 });
 
 const panelProps = () => ({

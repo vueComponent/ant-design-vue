@@ -54,3 +54,48 @@ export function transformArguments(arg, cb) {
 export const isNumeric = value => {
   return !isNaN(parseFloat(value)) && isFinite(value); // eslint-disable-line
 };
+
+export const windowIsUndefined = !(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
+export const getTouchParentScroll = (root, currentTarget, differX, differY) => {
+  if (!currentTarget || currentTarget === document || currentTarget instanceof Document) {
+    return false;
+  }
+  // root 为 drawer-content 设定了 overflow, 判断为 root 的 parent 时结束滚动；
+  if (currentTarget === root.parentNode) {
+    return true;
+  }
+
+  const isY = Math.max(Math.abs(differX), Math.abs(differY)) === Math.abs(differY);
+  const isX = Math.max(Math.abs(differX), Math.abs(differY)) === Math.abs(differX);
+
+  const scrollY = currentTarget.scrollHeight - currentTarget.clientHeight;
+  const scrollX = currentTarget.scrollWidth - currentTarget.clientWidth;
+
+  const style = document.defaultView.getComputedStyle(currentTarget);
+  const overflowY = style.overflowY === 'auto' || style.overflowY === 'scroll';
+  const overflowX = style.overflowX === 'auto' || style.overflowX === 'scroll';
+
+  const y = scrollY && overflowY;
+  const x = scrollX && overflowX;
+
+  if (
+    (isY &&
+      (!y ||
+        (y &&
+          ((currentTarget.scrollTop >= scrollY && differY < 0) ||
+            (currentTarget.scrollTop <= 0 && differY > 0))))) ||
+    (isX &&
+      (!x ||
+        (x &&
+          ((currentTarget.scrollLeft >= scrollX && scrollX < 0) ||
+            (currentTarget.scrollLeft <= 0 && scrollX > 0)))))
+  ) {
+    return getTouchParentScroll(root, currentTarget.parentNode, differX, differY);
+  }
+  return false;
+};

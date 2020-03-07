@@ -11,6 +11,7 @@ export declare class Card extends AntdComponent {
   static Grid: any;
   static Meta: typeof Meta;
 
+  tabBarExtraContent: any;
   /**
    * The action list, shows at the bottom of the Card.
    * @type any (slots)

@@ -6,9 +6,10 @@ import { ConfigConsumerProps } from '../config-provider';
 export const BasicProps = {
   prefixCls: PropTypes.string,
   hasSider: PropTypes.boolean,
+  tagName: PropTypes.string,
 };
 
-function generator(props, name) {
+function generator({ suffixCls, tagName, name }) {
   return BasicComponent => {
     return {
       name,
@@ -17,7 +18,6 @@ function generator(props, name) {
         configProvider: { default: () => ConfigConsumerProps },
       },
       render() {
-        const { suffixCls } = props;
         const { prefixCls: customizePrefixCls } = this.$props;
         const getPrefixCls = this.configProvider.getPrefixCls;
         const prefixCls = getPrefixCls(suffixCls, customizePrefixCls);
@@ -26,6 +26,7 @@ function generator(props, name) {
           props: {
             prefixCls,
             ...getOptionProps(this),
+            tagName,
           },
           on: getListeners(this),
         };
@@ -38,12 +39,12 @@ function generator(props, name) {
 const Basic = {
   props: BasicProps,
   render() {
-    const { prefixCls, $slots } = this;
+    const { prefixCls, tagName: Tag, $slots } = this;
     const divProps = {
       class: prefixCls,
       on: getListeners(this),
     };
-    return <div {...divProps}>{$slots.default}</div>;
+    return <Tag {...divProps}>{$slots.default}</Tag>;
   },
 };
 
@@ -67,45 +68,41 @@ const BasicLayout = {
     };
   },
   render() {
-    const { prefixCls, $slots, hasSider } = this;
+    const { prefixCls, $slots, hasSider, tagName: Tag } = this;
     const divCls = classNames(prefixCls, {
-      [`${prefixCls}-has-sider`]: hasSider || this.siders.length > 0,
+      [`${prefixCls}-has-sider`]: typeof hasSider === 'boolean' ? hasSider : this.siders.length > 0,
     });
     const divProps = {
       class: divCls,
       on: getListeners,
     };
-    return <div {...divProps}>{$slots.default}</div>;
+    return <Tag {...divProps}>{$slots.default}</Tag>;
   },
 };
 
-const Layout = generator(
-  {
-    suffixCls: 'layout',
-  },
-  'ALayout',
-)(BasicLayout);
+const Layout = generator({
+  suffixCls: 'layout',
+  tagName: 'section',
+  name: 'ALayout',
+})(BasicLayout);
 
-const Header = generator(
-  {
-    suffixCls: 'layout-header',
-  },
-  'ALayoutHeader',
-)(Basic);
+const Header = generator({
+  suffixCls: 'layout-header',
+  tagName: 'header',
+  name: 'ALayoutHeader',
+})(Basic);
 
-const Footer = generator(
-  {
-    suffixCls: 'layout-footer',
-  },
-  'ALayoutFooter',
-)(Basic);
+const Footer = generator({
+  suffixCls: 'layout-footer',
+  tagName: 'footer',
+  name: 'ALayoutFooter',
+})(Basic);
 
-const Content = generator(
-  {
-    suffixCls: 'layout-content',
-  },
-  'ALayoutContent',
-)(Basic);
+const Content = generator({
+  suffixCls: 'layout-content',
+  tagName: 'main',
+  name: 'ALayoutContent',
+})(Basic);
 
 Layout.Header = Header;
 Layout.Footer = Footer;

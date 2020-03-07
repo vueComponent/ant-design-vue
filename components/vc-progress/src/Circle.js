@@ -18,53 +18,68 @@ const circleDefaultProps = {
 
 Vue.use(ref, { name: 'ant-ref' });
 
+let gradientSeed = 0;
+
+function stripPercentToNumber(percent) {
+  return +percent.replace('%', '');
+}
+
+function toArray(symArray) {
+  return Array.isArray(symArray) ? symArray : [symArray];
+}
+
+function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0, gapPosition) {
+  const radius = 50 - strokeWidth / 2;
+  let beginPositionX = 0;
+  let beginPositionY = -radius;
+  let endPositionX = 0;
+  let endPositionY = -2 * radius;
+  switch (gapPosition) {
+    case 'left':
+      beginPositionX = -radius;
+      beginPositionY = 0;
+      endPositionX = 2 * radius;
+      endPositionY = 0;
+      break;
+    case 'right':
+      beginPositionX = radius;
+      beginPositionY = 0;
+      endPositionX = -2 * radius;
+      endPositionY = 0;
+      break;
+    case 'bottom':
+      beginPositionY = radius;
+      endPositionY = 2 * radius;
+      break;
+    default:
+  }
+  const pathString = `M 50,50 m ${beginPositionX},${beginPositionY}
+   a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
+   a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`;
+  const len = Math.PI * 2 * radius;
+
+  const pathStyle = {
+    stroke: strokeColor,
+    strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${len}px`,
+    strokeDashoffset: `-${gapDegree / 2 + (offset / 100) * (len - gapDegree)}px`,
+    transition:
+      'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s', // eslint-disable-line
+  };
+
+  return {
+    pathString,
+    pathStyle,
+  };
+}
+
 const Circle = {
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
   created() {
     this.paths = {};
+    this.gradientId = gradientSeed;
+    gradientSeed += 1;
   },
   methods: {
-    getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0, gapPosition) {
-      const radius = 50 - strokeWidth / 2;
-      let beginPositionX = 0;
-      let beginPositionY = -radius;
-      let endPositionX = 0;
-      let endPositionY = -2 * radius;
-      switch (gapPosition) {
-        case 'left':
-          beginPositionX = -radius;
-          beginPositionY = 0;
-          endPositionX = 2 * radius;
-          endPositionY = 0;
-          break;
-        case 'right':
-          beginPositionX = radius;
-          beginPositionY = 0;
-          endPositionX = -2 * radius;
-          endPositionY = 0;
-          break;
-        case 'bottom':
-          beginPositionY = radius;
-          endPositionY = 2 * radius;
-          break;
-        default:
-      }
-      const pathString = `M 50,50 m ${beginPositionX},${beginPositionY}
-       a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
-       a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`;
-      const len = Math.PI * 2 * radius;
-      const pathStyle = {
-        stroke: strokeColor,
-        strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${len}px`,
-        strokeDashoffset: `-${gapDegree / 2 + (offset / 100) * (len - gapDegree)}px`,
-        transition:
-          'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s', // eslint-disable-line
-      };
-      return {
-        pathString,
-        pathStyle,
-      };
-    },
     getStokeList() {
       const {
         prefixCls,
@@ -75,13 +90,17 @@ const Circle = {
         gapDegree,
         gapPosition,
       } = this.$props;
-      const percentList = Array.isArray(percent) ? percent : [percent];
-      const strokeColorList = Array.isArray(strokeColor) ? strokeColor : [strokeColor];
+      const percentList = toArray(percent);
+      const strokeColorList = toArray(strokeColor);
 
       let stackPtg = 0;
       return percentList.map((ptg, index) => {
         const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];
-        const { pathString, pathStyle } = this.getPathStyles(
+        const stroke =
+          Object.prototype.toString.call(color) === '[object Object]'
+            ? `url(#${prefixCls}-gradient-${this.gradientId})`
+            : '';
+        const { pathString, pathStyle } = getPathStyles(
           stackPtg,
           ptg,
           color,
@@ -96,6 +115,7 @@ const Circle = {
           key: index,
           attrs: {
             d: pathString,
+            stroke,
             'stroke-linecap': strokeLinecap,
             'stroke-width': ptg === 0 ? 0 : strokeWidth,
             'fill-opacity': '0',
@@ -125,9 +145,10 @@ const Circle = {
       gapPosition,
       trailColor,
       strokeLinecap,
+      strokeColor,
       ...restProps
     } = this.$props;
-    const { pathString, pathStyle } = this.getPathStyles(
+    const { pathString, pathStyle } = getPathStyles(
       0,
       100,
       trailColor,
@@ -136,7 +157,10 @@ const Circle = {
       gapPosition,
     );
     delete restProps.percent;
-    delete restProps.strokeColor;
+    const strokeColorList = toArray(strokeColor);
+    const gradient = strokeColorList.find(
+      color => Object.prototype.toString.call(color) === '[object Object]',
+    );
     const pathFirst = {
       attrs: {
         d: pathString,
@@ -151,8 +175,25 @@ const Circle = {
 
     return (
       <svg class={`${prefixCls}-circle`} viewBox="0 0 100 100" {...restProps}>
+        {gradient && (
+          <defs>
+            <linearGradient
+              id={`${prefixCls}-gradient-${this.gradientId}`}
+              x1="100%"
+              y1="0%"
+              x2="0%"
+              y2="0%"
+            >
+              {Object.keys(gradient)
+                .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
+                .map((key, index) => (
+                  <stop key={index} offset={key} stop-color={gradient[key]} />
+                ))}
+            </linearGradient>
+          </defs>
+        )}
         <path {...pathFirst} />
-        {this.getStokeList()}
+        {this.getStokeList().reverse()}
       </svg>
     );
   },

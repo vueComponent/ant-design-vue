@@ -49,15 +49,13 @@ const Header = {
     }
   },
   watch: {
-    $props: {
-      handler: function(nextProps) {
-        const { value, format } = nextProps;
+    value(val) {
+      this.$nextTick(() => {
         this.setState({
-          str: (value && value.format(format)) || '',
+          str: (val && val.format(this.format)) || '',
           invalid: false,
         });
-      },
-      deep: true,
+      });
     },
   },
 
@@ -78,7 +76,6 @@ const Header = {
         disabledHours,
         disabledMinutes,
         disabledSeconds,
-        allowEmpty,
         value: originalValue,
       } = this;
 
@@ -139,13 +136,8 @@ const Header = {
         } else if (originalValue !== value) {
           this.__emit('change', value);
         }
-      } else if (allowEmpty) {
-        this.__emit('change', null);
       } else {
-        this.setState({
-          invalid: true,
-        });
-        return;
+        this.__emit('change', null);
       }
 
       this.setState({

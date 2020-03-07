@@ -7,6 +7,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getListeners } from '../_util/props-util';
 
 export default {
+  name: 'VCTriggerPopup',
   mixins: [BaseMixin],
   props: {
     visible: PropTypes.bool,
@@ -23,7 +24,7 @@ export default {
     mask: PropTypes.bool,
     zIndex: PropTypes.number,
     popupClassName: PropTypes.any,
-    popupStyle: PropTypes.object.def({}),
+    popupStyle: PropTypes.object.def(() => ({})),
     stretch: PropTypes.string,
     point: PropTypes.shape({
       pageX: PropTypes.number,
@@ -184,7 +185,6 @@ export default {
         } else if (stretch.indexOf('minWidth') !== -1) {
           sizeStyle.minWidth = typeof targetWidth === 'number' ? `${targetWidth}px` : targetWidth;
         }
-
         // Delay force align to makes ui smooth
         if (!stretchChecked) {
           // sizeStyle.visibility = 'hidden'

@@ -1,108 +1,102 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/list/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/basic.md correctly 1`] = `
 <div class="ant-list ant-list-split">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-list-item">
-        <div class="ant-list-item-meta">
-          <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
-          <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 1</a></h4>
-            <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+      <ul class="ant-list-items">
+        <li class="ant-list-item">
+          <div class="ant-list-item-meta">
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
+            <div class="ant-list-item-meta-content">
+              <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 1</a></h4>
+              <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="ant-list-item">
-        <div class="ant-list-item-meta">
-          <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
-          <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 2</a></h4>
-            <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+        </li>
+        <li class="ant-list-item">
+          <div class="ant-list-item-meta">
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
+            <div class="ant-list-item-meta-content">
+              <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 2</a></h4>
+              <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="ant-list-item">
-        <div class="ant-list-item-meta">
-          <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
-          <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 3</a></h4>
-            <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+        </li>
+        <li class="ant-list-item">
+          <div class="ant-list-item-meta">
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
+            <div class="ant-list-item-meta-content">
+              <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 3</a></h4>
+              <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="ant-list-item">
-        <div class="ant-list-item-meta">
-          <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
-          <div class="ant-list-item-meta-content">
-            <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 4</a></h4>
-            <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+        </li>
+        <li class="ant-list-item">
+          <div class="ant-list-item-meta">
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
+            <div class="ant-list-item-meta-content">
+              <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 4</a></h4>
+              <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
+            </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
 `;
 
-exports[`renders ./components/list/demo/grid.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/grid.md correctly 1`] = `
 <div class="ant-list ant-list-split ant-list-grid">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
       <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
-        <div class="ant-col-6" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-6" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 1</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 1</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-6" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-6" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 2</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 2</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-6" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-6" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 3</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 3</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-6" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-6" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 4</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 4</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
@@ -112,14 +106,22 @@ exports[`renders ./components/list/demo/grid.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/list/demo/infinite-load.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/infinite-load.md correctly 1`] = `
 <div infinite-scroll-distance="10" class="demo-infinite-container">
   <div class="ant-list ant-list-split">
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
         <div class="ant-list-empty-text">
           <div class="ant-empty ant-empty-normal">
-            <div class="ant-empty-image"><img alt="No Data" src=""></div>
+            <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(0 1)" fill="none" fillRule="evenodd">
+                  <ellipse fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                  <g fillRule="nonzero" stroke="#D9D9D9">
+                    <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                    <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA"></path>
+                  </g>
+                </g>
+              </svg></div>
             <p class="ant-empty-description">No Data</p>
           </div>
         </div>
@@ -129,7 +131,7 @@ exports[`renders ./components/list/demo/infinite-load.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/list/demo/infinite-virtualized-load.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/infinite-virtualized-load.md correctly 1`] = `
 <div class="ant-list ant-list-split">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -144,11 +146,11 @@ exports[`renders ./components/list/demo/infinite-virtualized-load.md correctly 1
 </div>
 `;
 
-exports[`renders ./components/list/demo/loadmore.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/loadmore.md correctly 1`] = `
 <div class="demo-loadmore-list ant-list ant-list-split ant-list-loading ant-list-something-after-last-item">
   <div class="ant-spin-nested-loading">
     <div>
-      <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i></i><i></i><i></i><i></i></span></div>
+      <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
     </div>
     <div class="ant-spin-container ant-spin-blur">
       <div style="min-height: 53;"></div>
@@ -158,92 +160,80 @@ exports[`renders ./components/list/demo/loadmore.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/resposive.md correctly 1`] = `
 <div class="ant-list ant-list-split ant-list-grid">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
       <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
-        <div class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 1</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 1</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 2</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 2</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 3</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 3</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 4</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 4</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 5</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 5</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
-        <div class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
+        <div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8" style="padding-left: 8px; padding-right: 8px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-content ant-list-item-content-single">
-              <div class="ant-card ant-card-bordered">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">Title 6</div>
-                  </div>
+            <div class="ant-card ant-card-bordered">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">Title 6</div>
                 </div>
-                <div class="ant-card-body">Card content</div>
               </div>
+              <div class="ant-card-body">Card content</div>
             </div>
           </div>
         </div>
@@ -253,7 +243,7 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/list/demo/simple.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/simple.md correctly 1`] = `
 <div>
   <h3 style="margin-bottom: 16px;">Default Size</h3>
   <div class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item">
@@ -262,21 +252,13 @@ exports[`renders ./components/list/demo/simple.md correctly 1`] = `
     </div>
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Racing car sprays burning fuel into crowd.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Japanese princess to wed commoner.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Australian walks 100km after outback crash.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Man charged over missing wedding girl.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Los Angeles battles huge wildfires.</div>
-        </div>
+        <ul class="ant-list-items">
+          <li class="ant-list-item">Racing car sprays burning fuel into crowd.</li>
+          <li class="ant-list-item">Japanese princess to wed commoner.</li>
+          <li class="ant-list-item">Australian walks 100km after outback crash.</li>
+          <li class="ant-list-item">Man charged over missing wedding girl.</li>
+          <li class="ant-list-item">Los Angeles battles huge wildfires.</li>
+        </ul>
       </div>
     </div>
     <div class="ant-list-footer">
@@ -290,21 +272,13 @@ exports[`renders ./components/list/demo/simple.md correctly 1`] = `
     </div>
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Racing car sprays burning fuel into crowd.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Japanese princess to wed commoner.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Australian walks 100km after outback crash.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Man charged over missing wedding girl.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Los Angeles battles huge wildfires.</div>
-        </div>
+        <ul class="ant-list-items">
+          <li class="ant-list-item">Racing car sprays burning fuel into crowd.</li>
+          <li class="ant-list-item">Japanese princess to wed commoner.</li>
+          <li class="ant-list-item">Australian walks 100km after outback crash.</li>
+          <li class="ant-list-item">Man charged over missing wedding girl.</li>
+          <li class="ant-list-item">Los Angeles battles huge wildfires.</li>
+        </ul>
       </div>
     </div>
     <div class="ant-list-footer">
@@ -318,21 +292,13 @@ exports[`renders ./components/list/demo/simple.md correctly 1`] = `
     </div>
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Racing car sprays burning fuel into crowd.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Japanese princess to wed commoner.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Australian walks 100km after outback crash.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Man charged over missing wedding girl.</div>
-        </div>
-        <div class="ant-list-item">
-          <div class="ant-list-item-content ant-list-item-content-single">Los Angeles battles huge wildfires.</div>
-        </div>
+        <ul class="ant-list-items">
+          <li class="ant-list-item">Racing car sprays burning fuel into crowd.</li>
+          <li class="ant-list-item">Japanese princess to wed commoner.</li>
+          <li class="ant-list-item">Australian walks 100km after outback crash.</li>
+          <li class="ant-list-item">Man charged over missing wedding girl.</li>
+          <li class="ant-list-item">Los Angeles battles huge wildfires.</li>
+        </ul>
       </div>
     </div>
     <div class="ant-list-footer">
@@ -342,12 +308,12 @@ exports[`renders ./components/list/demo/simple.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
+exports[`renders ./antdv-demo/list/demo/vertical.md correctly 1`] = `
 <div class="ant-list ant-list-vertical ant-list-lg ant-list-split ant-list-something-after-last-item">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div class="ant-list-item">
-        <div class="ant-list-item-extra-wrap">
+      <ul class="ant-list-items">
+        <li class="ant-list-item">
           <div class="ant-list-item-main">
             <div class="ant-list-item-meta">
               <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
@@ -356,9 +322,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                 <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team.</div>
               </div>
             </div>
-            <div class="ant-list-item-content">
-              We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.
-            </div>
+            We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.
             <ul class="ant-list-item-action">
               <li><span><i aria-label="icon: star-o" class="anticon anticon-star-o" style="margin-right: 8px;"><svg viewBox="64 64 896 896" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"></path></svg></i>
         156
@@ -372,10 +336,8 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             </ul>
           </div>
           <div class="ant-list-item-extra"><img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"></div>
-        </div>
-      </div>
-      <div class="ant-list-item">
-        <div class="ant-list-item-extra-wrap">
+        </li>
+        <li class="ant-list-item">
           <div class="ant-list-item-main">
             <div class="ant-list-item-meta">
               <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
@@ -384,9 +346,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                 <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team.</div>
               </div>
             </div>
-            <div class="ant-list-item-content">
-              We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.
-            </div>
+            We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.
             <ul class="ant-list-item-action">
               <li><span><i aria-label="icon: star-o" class="anticon anticon-star-o" style="margin-right: 8px;"><svg viewBox="64 64 896 896" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"></path></svg></i>
         156
@@ -400,10 +360,8 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             </ul>
           </div>
           <div class="ant-list-item-extra"><img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"></div>
-        </div>
-      </div>
-      <div class="ant-list-item">
-        <div class="ant-list-item-extra-wrap">
+        </li>
+        <li class="ant-list-item">
           <div class="ant-list-item-main">
             <div class="ant-list-item-meta">
               <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></span></div>
@@ -412,9 +370,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                 <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team.</div>
               </div>
             </div>
-            <div class="ant-list-item-content">
-              We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.
-            </div>
+            We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.
             <ul class="ant-list-item-action">
               <li><span><i aria-label="icon: star-o" class="anticon anticon-star-o" style="margin-right: 8px;"><svg viewBox="64 64 896 896" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"></path></svg></i>
         156
@@ -428,8 +384,8 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
             </ul>
           </div>
           <div class="ant-list-item-extra"><img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"></div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="ant-list-footer">

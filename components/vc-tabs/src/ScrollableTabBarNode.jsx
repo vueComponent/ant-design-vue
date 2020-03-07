@@ -1,9 +1,9 @@
-import addDOMEventListener from 'add-dom-event-listener';
 import debounce from 'lodash/debounce';
+import ResizeObserver from 'resize-observer-polyfill';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getComponentFromProp } from '../../_util/props-util';
-import { setTransform, isTransformSupported } from './utils';
+import { setTransform, isTransform3dSupported } from './utils';
 
 function noop() {}
 export default {
@@ -19,6 +19,7 @@ export default {
     navWrapper: PropTypes.func.def(arg => arg),
     prevIcon: PropTypes.any,
     nextIcon: PropTypes.any,
+    direction: PropTypes.string,
   },
 
   data() {
@@ -45,7 +46,8 @@ export default {
         this.setNextPrev();
         this.scrollToActiveTab();
       }, 200);
-      this.resizeEvent = addDOMEventListener(window, 'resize', this.debouncedResize);
+      this.resizeObserver = new ResizeObserver(this.debouncedResize);
+      this.resizeObserver.observe(this.$props.getRef('container'));
     });
   },
 
@@ -57,8 +59,8 @@ export default {
   },
 
   beforeDestroy() {
-    if (this.resizeEvent) {
-      this.resizeEvent.remove();
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
     }
     if (this.debouncedResize && this.debouncedResize.cancel) {
       this.debouncedResize.cancel();
@@ -151,13 +153,13 @@ export default {
     },
 
     setOffset(offset, checkNextPrev = true) {
-      const target = Math.min(0, offset);
+      let target = Math.min(0, offset);
       if (this.offset !== target) {
         this.offset = target;
         let navOffset = {};
         const tabBarPosition = this.$props.tabBarPosition;
         const navStyle = this.$props.getRef('nav').style;
-        const transformSupported = isTransformSupported(navStyle);
+        const transformSupported = isTransform3dSupported(navStyle);
         if (tabBarPosition === 'left' || tabBarPosition === 'right') {
           if (transformSupported) {
             navOffset = {
@@ -170,6 +172,9 @@ export default {
             };
           }
         } else if (transformSupported) {
+          if (this.$props.direction === 'rtl') {
+            target = -target;
+          }
           navOffset = {
             value: `translate3d(${target}px,0,0)`,
           };

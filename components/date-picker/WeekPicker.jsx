@@ -15,6 +15,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { WeekPickerProps } from './interface';
 import interopDefault from '../_util/interopDefault';
 import { cloneElement } from '../_util/vnode';
+import InputIcon from './InputIcon';
 
 function formatValue(value, format) {
   return (value && value.format(format)) || '';
@@ -45,7 +46,7 @@ export default {
     const value = this.value || this.defaultValue;
     if (value && !interopDefault(moment).isMoment(value)) {
       throw new Error(
-        'The value/defaultValue of DatePicker or MonthPicker must be ' + 'a moment object',
+        'The value/defaultValue of WeekPicker or MonthPicker must be ' + 'a moment object',
       );
     }
     return {
@@ -118,19 +119,19 @@ export default {
       e.stopPropagation();
       this.handleChange(null);
     },
-    renderFooter(...args) {
-      const { _prefixCls: prefixCls, $scopedSlots } = this;
-      const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter;
-      return renderExtraFooter ? (
-        <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(...args)}</div>
-      ) : null;
-    },
     focus() {
       this.$refs.input.focus();
     },
 
     blur() {
       this.$refs.input.blur();
+    },
+    renderFooter(...args) {
+      const { _prefixCls: prefixCls, $scopedSlots } = this;
+      const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter;
+      return renderExtraFooter ? (
+        <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(...args)}</div>
+      ) : null;
     },
   },
 
@@ -149,6 +150,7 @@ export default {
       locale,
       localeCode,
       disabledDate,
+      defaultPickerValue,
       $data,
       $scopedSlots,
     } = this;
@@ -177,6 +179,7 @@ export default {
         showToday={false}
         disabledDate={disabledDate}
         renderFooter={this.renderFooter}
+        defaultValue={defaultPickerValue}
       />
     );
     const clearIcon =
@@ -189,14 +192,7 @@ export default {
         />
       ) : null;
 
-    const inputIcon = (suffixIcon &&
-      (isValidElement(suffixIcon) ? (
-        cloneElement(suffixIcon, {
-          class: `${prefixCls}-picker-icon`,
-        })
-      ) : (
-        <span class={`${prefixCls}-picker-icon`}>{suffixIcon}</span>
-      ))) || <Icon type="calendar" class={`${prefixCls}-picker-icon`} />;
+    const inputIcon = <InputIcon suffixIcon={suffixIcon} prefixCls={prefixCls} />;
 
     const input = ({ value }) => {
       return (

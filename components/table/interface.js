@@ -21,6 +21,7 @@ export const ColumnProps = {
   customCell: PropTypes.func,
   customHeaderCell: PropTypes.func,
   align: PropTypes.oneOf(['left', 'right', 'center']),
+  ellipsis: PropTypes.bool,
   filters: PropTypes.arrayOf(ColumnFilterItem),
   // onFilter: (value: any, record: T) => PropTypes.bool,
   filterMultiple: PropTypes.bool,
@@ -35,6 +36,7 @@ export const ColumnProps = {
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['left', 'right'])]),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
+  defaultFilteredValue: PropTypes.array,
   sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['ascend', 'descend'])]),
   sortDirections: PropTypes.array,
   // children?: ColumnProps<T>[];
@@ -65,6 +67,8 @@ export const TableLocale = PropTypes.shape({
   selectAll: PropTypes.any,
   selectInvert: PropTypes.any,
   sortTitle: PropTypes.string,
+  expand: PropTypes.string,
+  collapse: PropTypes.string,
 }).loose;
 
 export const RowSelectionType = PropTypes.oneOf(['checkbox', 'radio']);
@@ -128,6 +132,8 @@ export const TableProps = {
   childrenColumnName: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   bodyStyle: PropTypes.any,
   sortDirections: PropTypes.array,
+  tableLayout: PropTypes.string,
+  getPopupContainer: PropTypes.func,
   expandIcon: PropTypes.func,
   // className?: PropTypes.string,
   // style?: React.CSSProperties;

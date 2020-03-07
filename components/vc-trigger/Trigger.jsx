@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import ref from 'vue-ref';
 import PropTypes from '../_util/vue-types';
-import contains from '../_util/Dom/contains';
+import contains from '../vc-util/Dom/contains';
 import {
   hasProp,
   getComponentFromProp,
@@ -10,7 +10,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import warning from '../_util/warning';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
@@ -49,7 +49,7 @@ export default {
     // onPopupVisibleChange: PropTypes.func.def(noop),
     afterPopupVisibleChange: PropTypes.func.def(noop),
     popup: PropTypes.any,
-    popupStyle: PropTypes.object.def({}),
+    popupStyle: PropTypes.object.def(() => ({})),
     prefixCls: PropTypes.string.def('rc-trigger-popup'),
     popupClassName: PropTypes.string.def(''),
     popupPlacement: PropTypes.string,
@@ -68,7 +68,7 @@ export default {
     mask: PropTypes.bool.def(false),
     maskClosable: PropTypes.bool.def(true),
     // onPopupAlign: PropTypes.func.def(noop),
-    popupAlign: PropTypes.object.def({}),
+    popupAlign: PropTypes.object.def(() => ({})),
     popupVisible: PropTypes.bool,
     defaultPopupVisible: PropTypes.bool.def(false),
     maskTransitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -94,7 +94,13 @@ export default {
     } else {
       popupVisible = !!props.defaultPopupVisible;
     }
+    ALL_HANDLERS.forEach(h => {
+      this[`fire${h}`] = e => {
+        this.fireEvents(h, e);
+      };
+    });
     return {
+      prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
       point: null,
     };
@@ -103,6 +109,7 @@ export default {
     popupVisible(val) {
       if (val !== undefined) {
         this.sPopupVisible = val;
+        this.prevPopupVisible = val;
       }
     },
     sPopupVisible(val) {
@@ -112,14 +119,6 @@ export default {
         });
       });
     },
-  },
-
-  beforeCreate() {
-    ALL_HANDLERS.forEach(h => {
-      this[`fire${h}`] = e => {
-        this.fireEvents(h, e);
-      };
-    });
   },
   deactivated() {
     this.setPopupVisible(false);
@@ -286,7 +285,15 @@ export default {
       }
       this.preClickTime = 0;
       this.preTouchTime = 0;
-      if (event && event.preventDefault) {
+      // Only prevent default when all the action is click.
+      // https://github.com/ant-design/ant-design/issues/17043
+      // https://github.com/ant-design/ant-design/issues/17291
+      if (
+        this.isClickToShow() &&
+        (this.isClickToHide() || this.isBlurToHide()) &&
+        event &&
+        event.preventDefault
+      ) {
         event.preventDefault();
       }
       if (event && event.domEvent) {
@@ -446,19 +453,20 @@ export default {
     },
 
     setPopupVisible(sPopupVisible, event) {
-      const { alignPoint } = this.$props;
+      const { alignPoint, sPopupVisible: prevPopupVisible } = this;
       this.clearDelayTimer();
-      if (this.$data.sPopupVisible !== sPopupVisible) {
+      if (prevPopupVisible !== sPopupVisible) {
         if (!hasProp(this, 'popupVisible')) {
           this.setState({
             sPopupVisible,
+            prevPopupVisible,
           });
         }
         const listeners = getListeners(this);
         listeners.popupVisibleChange && listeners.popupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
-      if (sPopupVisible && alignPoint && event) {
+      if (alignPoint && event) {
         this.setPoint(event);
       }
     },

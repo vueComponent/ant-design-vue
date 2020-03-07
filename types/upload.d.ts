@@ -4,15 +4,54 @@
 
 import { AntdComponent } from './component';
 
-export interface UploadFile {
-  uid: string | number;
+export interface VcFile extends File {
+  uid: string;
+  readonly lastModifiedDate: Date;
+  readonly webkitRelativePath: string;
+}
+
+export interface UploadFile<T = any> {
+  uid: string;
+  size: number;
   name: string;
+  fileName?: string;
+  lastModified?: number;
+  lastModifiedDate?: Date;
+  url?: string;
+  status?: UploadFileStatus;
+  percent?: number;
+  thumbUrl?: string;
+  originFileObj?: File | Blob;
+  response?: T;
+  error?: any;
+  linkProps?: any;
+  type: string;
+  xhr?: T;
+  preview?: string;
 }
 
 export interface ShowUploadList {
   showRemoveIcon?: boolean;
   showPreviewIcon?: boolean;
+  showDownloadIcon?: boolean;
 }
+
+export interface UploadLocale {
+  uploading?: string;
+  removeFile?: string;
+  downloadFile?: string;
+  uploadError?: string;
+  previewFile?: string;
+}
+
+export type UploadType = 'drag' | 'select';
+export type UploadListType = 'text' | 'picture' | 'picture-card';
+export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
+
+type PreviewFileHandler = (file: File | Blob) => PromiseLike<string>;
+type TransformFileHandler = (
+  file: VcFile,
+) => string | Blob | File | PromiseLike<string | Blob | File>;
 
 export declare class Upload extends AntdComponent {
   static Dragger: typeof Upload;
@@ -55,6 +94,8 @@ export declare class Upload extends AntdComponent {
    * @type object | Function
    */
   data: object | Function;
+
+  method?: 'POST' | 'PUT' | 'post' | 'put';
 
   /**
    * Default list of files that have been uploaded.
@@ -137,4 +178,9 @@ export declare class Upload extends AntdComponent {
    * @type Function
    */
   remove: (file: any) => boolean | Promise<boolean>;
+
+  locale?: UploadLocale;
+  id?: string;
+  previewFile?: PreviewFileHandler;
+  transformFile?: TransformFileHandler;
 }

@@ -109,13 +109,29 @@ describe('Badge', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/13694
-  it('should support offset when count is a ReactNode', () => {
+  it('should support offset when count is a VueNode', () => {
     const wrapper = mount({
       render() {
         return (
           <Badge count={<span class="custom" style={{ color: '#f5222d' }} />} offset={[10, 20]}>
-            <a href="#" class="head-example" />
+            <a href="#" class="head-example">
+              head
+            </a>
           </Badge>
+        );
+      },
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+  // https://github.com/ant-design/ant-design/issues/15799
+  it('render correct with negative number', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <div>
+            <Badge count="-10" />
+            <Badge count={-10} />
+          </div>
         );
       },
     });

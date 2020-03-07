@@ -24,6 +24,7 @@ const Popconfirm = {
     title: PropTypes.any,
     trigger: tooltipProps.trigger.def('click'),
     okType: btnProps.type.def('primary'),
+    disabled: PropTypes.bool.def(false),
     okText: PropTypes.any,
     cancelText: PropTypes.any,
     icon: PropTypes.any,
@@ -48,7 +49,8 @@ const Popconfirm = {
     const state = { sVisible: false };
     if ('visible' in props) {
       state.sVisible = props.visible;
-    } else if ('defaultVisible' in props) {
+    }
+    if ('defaultVisible' in props) {
       state.sVisible = props.defaultVisible;
     }
     return state;
@@ -65,6 +67,10 @@ const Popconfirm = {
     },
 
     onVisibleChange(sVisible) {
+      const { disabled } = this.$props;
+      if (disabled) {
+        return;
+      }
       this.setVisible(sVisible);
     },
 

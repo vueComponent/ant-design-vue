@@ -72,4 +72,27 @@ describe('Popconfirm', () => {
       expect(popup.innerHTML).toMatchSnapshot();
     }, 1000);
   });
+
+  it('should not open in disabled', async () => {
+    const popconfirm = mount(
+      {
+        render() {
+          return (
+            <Popconfirm ref="popconfirm" title="code" disabled>
+              <span>click me</span>
+            </Popconfirm>
+          );
+        },
+      },
+      { sync: false },
+    );
+
+    await asyncExpect(() => {
+      popconfirm.find('span').trigger('click');
+    }, 1000);
+    await asyncExpect(() => {
+      const popup = popconfirm.vm.$refs.popconfirm.getPopupDomNode();
+      expect(popup).toBeFalsy();
+    }, 1000);
+  });
 });

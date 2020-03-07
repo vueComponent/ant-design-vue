@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { isMobile } from 'is-mobile';
 import Input from './Input';
 import Icon from '../icon';
 import inputProps from './inputProps';
@@ -17,15 +18,26 @@ export default {
   },
   props: {
     ...inputProps,
-    enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
+    enterButton: PropTypes.any.def(false),
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
+    onChange(e) {
+      if (e && e.target && e.type === 'click') {
+        this.$emit('search', e.target.value, e);
+      }
+      this.$emit('change', e);
+    },
     onSearch(e) {
+      if (this.loading || this.disabled) {
+        return;
+      }
       this.$emit('search', this.$refs.input.stateValue, e);
-      this.$refs.input.focus();
+      if (!isMobile({ tablet: true })) {
+        this.$refs.input.focus();
+      }
     },
     focus() {
       this.$refs.input.focus();
@@ -34,12 +46,33 @@ export default {
     blur() {
       this.$refs.input.blur();
     },
+    renderLoading(prefixCls) {
+      const { size } = this.$props;
+      let enterButton = getComponentFromProp(this, 'enterButton');
+      // 兼容 <a-input-search enterButton />， 因enterButton类型为 any，此类写法 enterButton 为空字符串
+      enterButton = enterButton || enterButton === '';
+      if (enterButton) {
+        return (
+          <Button class={`${prefixCls}-button`} type="primary" size={size} key="enterButton">
+            <Icon type="loading" />
+          </Button>
+        );
+      }
+      return <Icon class={`${prefixCls}-icon`} type="loading" key="loadingIcon" />;
+    },
     renderSuffix(prefixCls) {
+      const { loading } = this;
       const suffix = getComponentFromProp(this, 'suffix');
-      const enterButton = getComponentFromProp(this, 'enterButton');
+      let enterButton = getComponentFromProp(this, 'enterButton');
+      // 兼容 <a-input-search enterButton />， 因enterButton类型为 any，此类写法 enterButton 为空字符串
+      enterButton = enterButton || enterButton === '';
+      if (loading && !enterButton) {
+        return [suffix, this.renderLoading(prefixCls)];
+      }
+
       if (enterButton) return suffix;
 
-      const node = (
+      const icon = (
         <Icon class={`${prefixCls}-icon`} type="search" key="searchIcon" onClick={this.onSearch} />
       );
 
@@ -50,27 +83,31 @@ export default {
         //     key: 'originSuffix',
         //   });
         // }
-        return [suffix, node];
+        return [suffix, icon];
       }
 
-      return node;
+      return icon;
     },
     renderAddonAfter(prefixCls) {
-      const { size, disabled } = this;
-      const enterButton = getComponentFromProp(this, 'enterButton');
-      const addonAfter = getComponentFromProp(this, 'addonAfter');
-      if (!enterButton) return addonAfter;
+      const { size, disabled, loading } = this;
       const btnClassName = `${prefixCls}-button`;
+      let enterButton = getComponentFromProp(this, 'enterButton');
+      enterButton = enterButton || enterButton === '';
+      const addonAfter = getComponentFromProp(this, 'addonAfter');
+      if (loading && enterButton) {
+        return [this.renderLoading(prefixCls), addonAfter];
+      }
+      if (!enterButton) return addonAfter;
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
       let button;
-      if (
-        enterButtonAsElement.tag === 'button' ||
-        (enterButtonAsElement.componentOptions &&
-          enterButtonAsElement.componentOptions.Ctor.extendOptions.__ANT_BUTTON)
-      ) {
+      const isAntdButton =
+        enterButtonAsElement.componentOptions &&
+        enterButtonAsElement.componentOptions.Ctor.extendOptions.__ANT_BUTTON;
+      if (enterButtonAsElement.tag === 'button' || isAntdButton) {
         button = cloneElement(enterButtonAsElement, {
-          class: btnClassName,
-          props: { size },
+          key: 'enterButton',
+          class: isAntdButton ? btnClassName : '',
+          props: isAntdButton ? { size } : {},
           on: {
             click: this.onSearch,
           },
@@ -85,7 +122,7 @@ export default {
             key="enterButton"
             onClick={this.onSearch}
           >
-            {enterButton === true ? <Icon type="search" /> : enterButton}
+            {enterButton === true || enterButton === '' ? <Icon type="search" /> : enterButton}
           </Button>
         );
       }
@@ -101,14 +138,16 @@ export default {
       prefixCls: customizePrefixCls,
       inputPrefixCls: customizeInputPrefixCls,
       size,
+      loading,
       ...others
     } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input-search', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 
-    const enterButton = getComponentFromProp(this, 'enterButton');
+    let enterButton = getComponentFromProp(this, 'enterButton');
     const addonBefore = getComponentFromProp(this, 'addonBefore');
+    enterButton = enterButton || enterButton === '';
     let inputClassName;
     if (enterButton) {
       inputClassName = classNames(prefixCls, {
@@ -137,6 +176,7 @@ export default {
       on: {
         pressEnter: this.onSearch,
         ...on,
+        change: this.onChange,
       },
     };
     return <Input {...inputProps} />;

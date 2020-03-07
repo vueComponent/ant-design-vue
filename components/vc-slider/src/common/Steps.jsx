@@ -4,12 +4,13 @@ import warning from '../../../_util/warning';
 const calcPoints = (vertical, marks, dots, step, min, max) => {
   warning(
     dots ? step > 0 : true,
+    'Slider',
     '`Slider[step]` should be a positive number in order to make Slider[dots] work.',
   );
   const points = Object.keys(marks)
     .map(parseFloat)
     .sort((a, b) => a - b);
-  if (dots) {
+  if (dots && step) {
     for (let i = min; i <= max; i += step) {
       if (points.indexOf(i) === -1) {
         points.push(i);
@@ -25,6 +26,7 @@ const Steps = {
     const {
       prefixCls,
       vertical,
+      reverse,
       marks,
       dots,
       step,
@@ -43,7 +45,9 @@ const Steps = {
       const isActived =
         (!included && point === upperBound) ||
         (included && point <= upperBound && point >= lowerBound);
-      let style = vertical ? { bottom: offset, ...dotStyle } : { left: offset, ...dotStyle };
+      let style = vertical
+        ? { ...dotStyle, [reverse ? 'top' : 'bottom']: offset }
+        : { ...dotStyle, [reverse ? 'right' : 'left']: offset };
       if (isActived) {
         style = { ...style, ...activeDotStyle };
       }
@@ -51,6 +55,7 @@ const Steps = {
       const pointClassName = classNames({
         [`${prefixCls}-dot`]: true,
         [`${prefixCls}-dot-active`]: isActived,
+        [`${prefixCls}-dot-reverse`]: reverse,
       });
 
       return <span class={pointClassName} style={style} key={point} />;

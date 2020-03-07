@@ -29,12 +29,8 @@ const docsList = [
   { key: 'download', enTitle: 'Download Design Resources', title: '下载设计资源' },
 ];
 
-let isMobile = false;
 const isGitee = window.location.host.indexOf('gitee.io') > -1;
-enquireScreen(b => {
-  isMobile = b;
-});
-
+const showAd = location.host.indexOf('antdv.com') > -1;
 export default {
   props: {
     name: String,
@@ -50,7 +46,7 @@ export default {
       showSideBars: true,
       currentSubMenu: [],
       sidebarHeight: document.documentElement.offsetHeight,
-      isMobile,
+      isMobile: false,
     };
   },
   provide() {
@@ -127,9 +123,9 @@ export default {
     getSubMenu(isCN) {
       const currentSubMenu = this.currentSubMenu;
       const lis = [];
-      currentSubMenu.forEach(({ cnTitle, usTitle, id }) => {
+      currentSubMenu.forEach(({ cnTitle, usTitle, id }, index) => {
         const title = isCN ? cnTitle : usTitle;
-        lis.push(<a-anchor-link key={id} href={`#${id}`} title={title} />);
+        lis.push(<a-anchor-link key={id + index} href={`#${id}`} title={title} />);
       });
       const showApi = this.$route.path.indexOf('/components/') !== -1;
       return (
@@ -246,7 +242,7 @@ export default {
     return (
       <div class="page-wrapper">
         <Header searchData={searchData} name={name} />
-        <a-locale-provider locale={locale}>
+        <a-config-provider locale={locale}>
           <div class="main-wrapper">
             <a-row>
               {isMobile ? (
@@ -296,9 +292,9 @@ export default {
               )}
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class="main-container main-container-component">
-                  <GoogleAdsTop key={`GoogleAdsTop_${$route.path}`} />
+                  {showAd ? <GoogleAdsTop key={`GoogleAdsTop_${$route.path}`} /> : null}
                   {!isMobile ? <CarbonAds /> : null}
-                  <GeektimeAds isMobile={isMobile} />
+                  {showAd ? <GeektimeAds isMobile={isMobile} /> : null}
                   {!isMobile ? (
                     <div class={['toc-affix', isCN ? 'toc-affix-cn' : '']} style="width: 150px;">
                       {this.getSubMenu(isCN)}
@@ -333,7 +329,7 @@ export default {
                           ],
                         }}
                       ></router-view>
-                      <GoogleAds key={`GoogleAds_${$route.path}`} />
+                      {showAd ? <GoogleAds key={`GoogleAds_${$route.path}`} /> : null}
                     </div>
                   ) : (
                     ''
@@ -361,7 +357,7 @@ export default {
               </a-col>
             </a-row>
           </div>
-        </a-locale-provider>
+        </a-config-provider>
         {name.indexOf('back-top') === -1 ? <a-back-top /> : null}
         {isCN && <Geektime isMobile={isMobile} />}
       </div>

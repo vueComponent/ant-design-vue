@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, getListeners } from '../../_util/props-util';
-import addEventListener from '../../_util/Dom/addEventListener';
+import addEventListener from '../../vc-util/Dom/addEventListener';
 
 export default {
   name: 'Handle',
@@ -17,6 +17,7 @@ export default {
     value: PropTypes.number,
     tabIndex: PropTypes.number,
     className: PropTypes.string,
+    reverse: PropTypes.bool,
     // handleFocus: PropTypes.func.def(noop),
     // handleBlur: PropTypes.func.def(noop),
   },
@@ -68,14 +69,32 @@ export default {
     },
   },
   render() {
-    const { prefixCls, vertical, offset, disabled, min, max, value, tabIndex } = getOptionProps(
-      this,
-    );
+    const {
+      prefixCls,
+      vertical,
+      reverse,
+      offset,
+      disabled,
+      min,
+      max,
+      value,
+      tabIndex,
+    } = getOptionProps(this);
     const className = classNames(this.$props.className, {
       [`${prefixCls}-handle-click-focused`]: this.clickFocused,
     });
 
-    const postionStyle = vertical ? { bottom: `${offset}%` } : { left: `${offset}%` };
+    const positionStyle = vertical
+      ? {
+          [reverse ? 'top' : 'bottom']: `${offset}%`,
+          [reverse ? 'bottom' : 'top']: 'auto',
+          transform: `translateY(+50%)`,
+        }
+      : {
+          [reverse ? 'right' : 'left']: `${offset}%`,
+          [reverse ? 'left' : 'right']: 'auto',
+          transform: `translateX(${reverse ? '+' : '-'}50%)`,
+        };
 
     const ariaProps = {
       'aria-valuemin': min,
@@ -83,11 +102,15 @@ export default {
       'aria-valuenow': value,
       'aria-disabled': !!disabled,
     };
+    let _tabIndex = tabIndex || 0;
+    if (disabled || tabIndex === null) {
+      _tabIndex = null;
+    }
 
     const handleProps = {
       attrs: {
         role: 'slider',
-        tabIndex: disabled ? null : tabIndex || 0,
+        tabIndex: _tabIndex,
         ...ariaProps,
       },
       class: className,
@@ -98,7 +121,7 @@ export default {
         mousedown: this.handleMousedown,
       },
       ref: 'handle',
-      style: postionStyle,
+      style: positionStyle,
     };
     return <div {...handleProps} />;
   },

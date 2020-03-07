@@ -20,7 +20,7 @@ export default () => ({
   ]).def('top'),
   transitionName: PropTypes.string.def('zoom-big-fast'),
   // onVisibleChange: PropTypes.func,
-  overlayStyle: PropTypes.object.def({}),
+  overlayStyle: PropTypes.object.def(() => ({})),
   overlayClassName: PropTypes.string,
   prefixCls: PropTypes.string,
   mouseEnterDelay: PropTypes.number.def(0.1),
@@ -29,6 +29,6 @@ export default () => ({
   arrowPointAtCenter: PropTypes.bool.def(false),
   autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),
   destroyTooltipOnHide: PropTypes.bool.def(false),
-  align: PropTypes.object.def({}),
+  align: PropTypes.object.def(() => ({})),
   builtinPlacements: PropTypes.object,
 });

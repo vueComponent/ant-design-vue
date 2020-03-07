@@ -1,9 +1,9 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import addEventListener from '../_util/Dom/addEventListener';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
+import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
-import raf from 'raf';
 import { initDefaultProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -34,47 +34,47 @@ function getOffsetTop(element, container) {
   return rect.top;
 }
 
-function easeInOutCubic(t, b, c, d) {
-  const cc = c - b;
-  t /= d / 2;
-  if (t < 1) {
-    return (cc / 2) * t * t * t + b;
-  }
-  return (cc / 2) * ((t -= 2) * t * t + 2) + b;
-}
+// function easeInOutCubic(t, b, c, d) {
+//   const cc = c - b;
+//   t /= d / 2;
+//   if (t < 1) {
+//     return (cc / 2) * t * t * t + b;
+//   }
+//   return (cc / 2) * ((t -= 2) * t * t + 2) + b;
+// }
 
 const sharpMatcherRegx = /#([^#]+)$/;
-function scrollTo(href, offsetTop = 0, getContainer, callback = () => {}) {
-  const container = getContainer();
-  const scrollTop = getScroll(container, true);
-  const sharpLinkMatch = sharpMatcherRegx.exec(href);
-  if (!sharpLinkMatch) {
-    return;
-  }
-  const targetElement = document.getElementById(sharpLinkMatch[1]);
-  if (!targetElement) {
-    return;
-  }
-  const eleOffsetTop = getOffsetTop(targetElement, container);
-  const targetScrollTop = scrollTop + eleOffsetTop - offsetTop;
-  const startTime = Date.now();
-  const frameFunc = () => {
-    const timestamp = Date.now();
-    const time = timestamp - startTime;
-    const nextScrollTop = easeInOutCubic(time, scrollTop, targetScrollTop, 450);
-    if (container === window) {
-      window.scrollTo(window.pageXOffset, nextScrollTop);
-    } else {
-      container.scrollTop = nextScrollTop;
-    }
-    if (time < 450) {
-      raf(frameFunc);
-    } else {
-      callback();
-    }
-  };
-  raf(frameFunc);
-}
+// function scrollTo(href, offsetTop = 0, getContainer, callback = () => {}) {
+//   const container = getContainer();
+//   const scrollTop = getScroll(container, true);
+//   const sharpLinkMatch = sharpMatcherRegx.exec(href);
+//   if (!sharpLinkMatch) {
+//     return;
+//   }
+//   const targetElement = document.getElementById(sharpLinkMatch[1]);
+//   if (!targetElement) {
+//     return;
+//   }
+//   const eleOffsetTop = getOffsetTop(targetElement, container);
+//   const targetScrollTop = scrollTop + eleOffsetTop - offsetTop;
+//   const startTime = Date.now();
+//   const frameFunc = () => {
+//     const timestamp = Date.now();
+//     const time = timestamp - startTime;
+//     const nextScrollTop = easeInOutCubic(time, scrollTop, targetScrollTop, 450);
+//     if (container === window) {
+//       window.scrollTo(window.pageXOffset, nextScrollTop);
+//     } else {
+//       container.scrollTop = nextScrollTop;
+//     }
+//     if (time < 450) {
+//       raf(frameFunc);
+//     } else {
+//       callback();
+//     }
+//   };
+//   raf(frameFunc);
+// }
 
 export const AnchorProps = {
   prefixCls: PropTypes.string,
@@ -85,6 +85,8 @@ export const AnchorProps = {
   getContainer: PropTypes.func,
   wrapperClass: PropTypes.string,
   wrapperStyle: PropTypes.object,
+  getCurrentAnchor: PropTypes.func,
+  targetOffset: PropTypes.number,
 };
 
 export default {
@@ -130,43 +132,38 @@ export default {
   mounted() {
     this.$nextTick(() => {
       const { getContainer } = this;
-      this.scrollEvent = addEventListener(getContainer(), 'scroll', this.handleScroll);
+      this.scrollContainer = getContainer();
+      this.scrollEvent = addEventListener(this.scrollContainer, 'scroll', this.handleScroll);
       this.handleScroll();
     });
   },
-
+  updated() {
+    this.$nextTick(() => {
+      if (this.scrollEvent) {
+        const { getContainer } = this;
+        const currentContainer = getContainer();
+        if (this.scrollContainer !== currentContainer) {
+          this.scrollContainer = currentContainer;
+          this.scrollEvent.remove();
+          this.scrollEvent = addEventListener(this.scrollContainer, 'scroll', this.handleScroll);
+          this.handleScroll();
+        }
+      }
+      this.updateInk();
+    });
+  },
   beforeDestroy() {
     if (this.scrollEvent) {
       this.scrollEvent.remove();
     }
   },
-
-  updated() {
-    this.$nextTick(() => {
-      this.updateInk();
-    });
-  },
   methods: {
-    handleScroll() {
-      if (this.animating) {
-        return;
+    getCurrentActiveLink(offsetTop = 0, bounds = 5) {
+      const { getCurrentAnchor } = this;
+
+      if (typeof getCurrentAnchor === 'function') {
+        return getCurrentAnchor();
       }
-      const { offsetTop, bounds } = this;
-      this.setState({
-        activeLink: this.getCurrentAnchor(offsetTop, bounds),
-      });
-    },
-
-    handleScrollTo(link) {
-      const { offsetTop, getContainer } = this;
-      this.animating = true;
-      this.setState({ activeLink: link });
-      scrollTo(link, offsetTop, getContainer, () => {
-        this.animating = false;
-      });
-    },
-
-    getCurrentAnchor(offsetTop = 0, bounds = 5) {
       const activeLink = '';
       if (typeof document === 'undefined') {
         return activeLink;
@@ -199,6 +196,56 @@ export default {
       return '';
     },
 
+    handleScrollTo(link) {
+      const { offsetTop, getContainer, targetOffset } = this;
+
+      this.setCurrentActiveLink(link);
+      const container = getContainer();
+      const scrollTop = getScroll(container, true);
+      const sharpLinkMatch = sharpMatcherRegx.exec(link);
+      if (!sharpLinkMatch) {
+        return;
+      }
+      const targetElement = document.getElementById(sharpLinkMatch[1]);
+      if (!targetElement) {
+        return;
+      }
+
+      const eleOffsetTop = getOffsetTop(targetElement, container);
+      let y = scrollTop + eleOffsetTop;
+      y -= targetOffset !== undefined ? targetOffset : offsetTop || 0;
+      this.animating = true;
+
+      scrollTo(y, {
+        callback: () => {
+          this.animating = false;
+        },
+        getContainer,
+      });
+    },
+    setCurrentActiveLink(link) {
+      const { activeLink } = this;
+
+      if (activeLink !== link) {
+        this.setState({
+          activeLink: link,
+        });
+        this.$emit('change', link);
+      }
+    },
+
+    handleScroll() {
+      if (this.animating) {
+        return;
+      }
+      const { offsetTop, bounds, targetOffset } = this;
+      const currentActiveLink = this.getCurrentActiveLink(
+        targetOffset !== undefined ? targetOffset : offsetTop || 0,
+        bounds,
+      );
+      this.setCurrentActiveLink(currentActiveLink);
+    },
+
     updateInk() {
       if (typeof document === 'undefined') {
         return;
@@ -206,7 +253,7 @@ export default {
       const { _sPrefixCls } = this;
       const linkNode = this.$el.getElementsByClassName(`${_sPrefixCls}-link-title-active`)[0];
       if (linkNode) {
-        this.$refs.linkNode.style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5}px`;
+        this.$refs.inkNode.style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5}px`;
       }
     },
   },
@@ -245,7 +292,7 @@ export default {
       <div class={wrapperClass} style={wrapperStyle}>
         <div class={anchorClass}>
           <div class={`${prefixCls}-ink`}>
-            <span class={inkClass} ref="linkNode" />
+            <span class={inkClass} ref="inkNode" />
           </div>
           {$slots.default}
         </div>

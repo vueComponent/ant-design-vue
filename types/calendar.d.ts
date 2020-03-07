@@ -4,8 +4,14 @@
 
 import { AntdComponent } from './component';
 import { Moment } from 'moment';
-
+export interface RenderHeader {
+  value: Moment;
+  onChange?: (value: Moment) => void;
+  type: string;
+  onTypeChange: (type: string) => void;
+}
 export declare class Calendar extends AntdComponent {
+  headerRender: (headerRender: RenderHeader) => any;
   /**
    * Customize the display of the date cell by setting a scoped slot,
    * the returned content will be appended to the cell

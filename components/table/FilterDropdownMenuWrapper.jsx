@@ -1,4 +1,5 @@
 export default {
+  name: 'FilterDropdownMenuWrapper',
   methods: {
     handelClick(e) {
       e.stopPropagation();

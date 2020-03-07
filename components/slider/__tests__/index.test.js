@@ -1,8 +1,10 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Slider from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Slider', () => {
+  mountTest(Slider);
   it('should show tooltip when hovering slider handler', async () => {
     const wrapper = mount(Slider, {
       propsData: {

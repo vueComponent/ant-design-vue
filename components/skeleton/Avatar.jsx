@@ -4,7 +4,7 @@ import { initDefaultProps } from '../_util/props-util';
 
 const skeletonAvatarProps = {
   prefixCls: PropTypes.string,
-  size: PropTypes.oneOf(['large', 'small', 'default']),
+  size: PropTypes.oneOfType([PropTypes.oneOf(['large', 'small', 'default']), PropTypes.number]),
   shape: PropTypes.oneOf(['circle', 'square']),
 };
 
@@ -27,7 +27,16 @@ const Avatar = {
       [`${prefixCls}-square`]: shape === 'square',
     });
 
-    return <span class={classNames(prefixCls, sizeCls, shapeCls)} />;
+    const sizeStyle =
+      typeof size === 'number'
+        ? {
+            width: `${size}px`,
+            height: `${size}px`,
+            lineHeight: `${size}px`,
+          }
+        : {};
+
+    return <span class={classNames(prefixCls, sizeCls, shapeCls)} style={sizeStyle} />;
   },
 };
 

@@ -1,7 +1,7 @@
 import animate from './css-animation';
 const noop = () => {};
 const getTransitionProps = (transitionName, opt = {}) => {
-  const { beforeEnter, enter, afterEnter, leave, afterLeave, appear = true, tag } = opt;
+  const { beforeEnter, enter, afterEnter, leave, afterLeave, appear = true, tag, nativeOn } = opt;
   const transitionProps = {
     props: {
       appear,
@@ -22,6 +22,7 @@ const getTransitionProps = (transitionName, opt = {}) => {
         }),
       afterLeave: afterLeave || noop,
     },
+    nativeOn,
   };
   // transition-group
   if (tag) {

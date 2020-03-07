@@ -62,4 +62,6 @@ export declare class FormItem extends AntdComponent {
    * @type Col
    */
   wrapperCol: Col;
+  labelAlign: 'left' | 'right';
+  selfUpdate: boolean;
 }

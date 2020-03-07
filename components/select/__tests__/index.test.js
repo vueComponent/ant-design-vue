@@ -3,9 +3,11 @@ import { asyncExpect } from '@/tests/utils';
 import Select from '..';
 import Icon from '../../icon';
 import focusTest from '../../../tests/shared/focusTest';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Select', () => {
   focusTest(Select);
+  mountTest(Select);
 
   it('should have default notFoundContent', async () => {
     const wrapper = mount(Select, {

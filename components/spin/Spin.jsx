@@ -30,12 +30,12 @@ function shouldDelay(spinning, delay) {
   return !!spinning && !!delay && !isNaN(Number(delay));
 }
 
-export function setDefaultIndicator(content) {
+export function setDefaultIndicator(Content) {
   defaultIndicator =
-    typeof content.indicator === 'function'
-      ? content.indicator
+    typeof Content.indicator === 'function'
+      ? Content.indicator
       : h => {
-          return <content.indicator />;
+          return <Content.indicator />;
         };
 }
 
@@ -69,14 +69,13 @@ export default {
     });
   },
   beforeDestroy() {
-    if (this.updateSpinning && this.updateSpinning.cancel) {
-      this.updateSpinning.cancel();
-    }
+    this.cancelExistingSpin();
   },
   methods: {
     debouncifyUpdateSpinning(props) {
       const { delay } = props || this.$props;
       if (delay) {
+        this.cancelExistingSpin();
         this.updateSpinning = debounce(this.originalUpdateSpinning, delay);
       }
     },
@@ -84,6 +83,12 @@ export default {
       const { spinning, sSpinning } = this;
       if (sSpinning !== spinning) {
         this.setState({ sSpinning: spinning });
+      }
+    },
+    cancelExistingSpin() {
+      const { updateSpinning } = this;
+      if (updateSpinning && updateSpinning.cancel) {
+        updateSpinning.cancel();
       }
     },
     getChildren() {
@@ -96,6 +101,10 @@ export default {
       // const h = this.$createElement
       const dotClassName = `${prefixCls}-dot`;
       let indicator = getComponentFromProp(this, 'indicator');
+      // should not be render default indicator when indicator value is null
+      if (indicator === null) {
+        return null;
+      }
       if (Array.isArray(indicator)) {
         indicator = filterEmpty(indicator);
         indicator = indicator.length === 1 ? indicator[0] : indicator;
@@ -110,10 +119,10 @@ export default {
 
       return (
         <span class={`${dotClassName} ${prefixCls}-dot-spin`}>
-          <i />
-          <i />
-          <i />
-          <i />
+          <i class={`${prefixCls}-dot-item`} />
+          <i class={`${prefixCls}-dot-item`} />
+          <i class={`${prefixCls}-dot-item`} />
+          <i class={`${prefixCls}-dot-item`} />
         </span>
       );
     },

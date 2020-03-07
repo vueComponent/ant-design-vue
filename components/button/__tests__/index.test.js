@@ -3,8 +3,12 @@ import Icon from '../../icon';
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import { asyncExpect } from '@/tests/utils';
+import { sleep } from '../../../tests/utils';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Button', () => {
+  mountTest(Button);
+  mountTest(Button.Group);
   it('renders correctly', () => {
     const wrapper = mount({
       render() {
@@ -148,7 +152,20 @@ describe('Button', () => {
       expect(wrapper.contains('.ant-btn-loading')).toBe(false);
     });
   });
-
+  it('should not clickable when button is loading', () => {
+    const onClick = jest.fn();
+    const wrapper = mount({
+      render() {
+        return (
+          <Button loading onClick={onClick}>
+            button
+          </Button>
+        );
+      },
+    });
+    wrapper.trigger('click');
+    expect(onClick).not.toHaveBeenCalledWith();
+  });
   it('should support link button', () => {
     const wrapper = mount({
       render() {
@@ -196,5 +213,27 @@ describe('Button', () => {
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('should support to change loading', async () => {
+    const wrapper = mount(Button, {
+      slots: {
+        default: ['button'],
+      },
+    });
+    wrapper.setProps({ loading: true });
+    expect(wrapper.findAll('.ant-btn-loading').length).toBe(1);
+    wrapper.setProps({ loading: false });
+    expect(wrapper.findAll('.ant-btn-loading').length).toBe(0);
+    wrapper.setProps({ loading: { delay: 50 } });
+    expect(wrapper.findAll('.ant-btn-loading').length).toBe(0);
+    await sleep(50);
+    expect(wrapper.findAll('.ant-btn-loading').length).toBe(1);
+    wrapper.setProps({ loading: false });
+    await sleep(50);
+    expect(wrapper.findAll('.ant-btn-loading').length).toBe(0);
+    expect(() => {
+      wrapper.destroy();
+    }).not.toThrow();
   });
 });

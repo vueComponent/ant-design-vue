@@ -1,6 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import { measureScrollbar } from './utils';
 import BaseTable from './BaseTable';
+import classNames from 'classnames';
 
 export default {
   name: 'HeadTable',
@@ -14,32 +15,27 @@ export default {
   inject: {
     table: { default: () => ({}) },
   },
-  mounted() {
-    this.updateTableRef();
-  },
-  updated() {
-    this.updateTableRef();
-  },
-  methods: {
-    updateTableRef() {
-      this.$nextTick(() => {
-        this.$refs.headTable && this.table.saveChildrenRef('headTable', this.$refs.headTable);
-      });
-    },
-  },
   render() {
     const { columns, fixed, tableClassName, handleBodyScrollLeft, expander, table } = this;
-    const { prefixCls, scroll, showHeader } = table;
+    const { prefixCls, scroll, showHeader, saveRef } = table;
     let { useFixedHeader } = table;
     const headStyle = {};
 
+    const scrollbarWidth = measureScrollbar({ direction: 'vertical' });
+
     if (scroll.y) {
       useFixedHeader = true;
+      // https://github.com/ant-design/ant-design/issues/17051
+      const scrollbarWidthOfHeader = measureScrollbar({ direction: 'horizontal', prefixCls });
       // Add negative margin bottom for scroll bar overflow bug
-      const scrollbarWidth = measureScrollbar('horizontal');
-      if (scrollbarWidth > 0 && !fixed) {
-        headStyle.marginBottom = `-${scrollbarWidth}px`;
+      if (scrollbarWidthOfHeader > 0 && !fixed) {
+        headStyle.marginBottom = `-${scrollbarWidthOfHeader}px`;
         headStyle.paddingBottom = '0px';
+        // https://github.com/ant-design/ant-design/pull/19986
+        headStyle.minWidth = `${scrollbarWidth}px`;
+        // https://github.com/ant-design/ant-design/issues/17051
+        headStyle.overflowX = 'scroll';
+        headStyle.overflowY = scrollbarWidth === 0 ? 'hidden' : 'scroll';
       }
     }
 
@@ -49,8 +45,17 @@ export default {
     return (
       <div
         key="headTable"
-        ref={fixed ? null : 'headTable'}
-        class={`${prefixCls}-header`}
+        {...{
+          directives: [
+            {
+              name: 'ant-ref',
+              value: fixed ? () => {} : saveRef('headTable'),
+            },
+          ],
+        }}
+        class={classNames(`${prefixCls}-header`, {
+          [`${prefixCls}-hide-scrollbar`]: scrollbarWidth > 0,
+        })}
         style={headStyle}
         onScroll={handleBodyScrollLeft}
       >

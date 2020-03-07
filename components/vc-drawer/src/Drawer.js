@@ -6,7 +6,8 @@ import { initDefaultProps, getEvents, getListeners } from '../../_util/props-uti
 import { cloneElement } from '../../_util/vnode';
 import ContainerRender from '../../_util/ContainerRender';
 import getScrollBarSize from '../../_util/getScrollBarSize';
-import drawerProps from './drawerProps';
+import { IDrawerProps } from './IDrawerPropTypes';
+import KeyCode from '../../_util/KeyCode';
 import {
   dataToArray,
   transitionEnd,
@@ -29,7 +30,7 @@ const windowIsUndefined = !(
 Vue.use(ref, { name: 'ant-ref' });
 const Drawer = {
   mixins: [BaseMixin],
-  props: initDefaultProps(drawerProps, {
+  props: initDefaultProps(IDrawerProps, {
     prefixCls: 'drawer',
     placement: 'left',
     getContainer: 'body',
@@ -151,8 +152,14 @@ const Drawer = {
     }
   },
   methods: {
+    onKeyDown(e) {
+      if (e.keyCode === KeyCode.ESC) {
+        e.stopPropagation();
+        this.$emit('close', e);
+      }
+    },
     onMaskTouchEnd(e) {
-      this.$emit('maskClick', e);
+      this.$emit('close', e);
       this.onTouchEnd(e, true);
     },
     onIconTouchEnd(e) {
@@ -170,14 +177,18 @@ const Drawer = {
       });
     },
     onWrapperTransitionEnd(e) {
-      if (e.target === this.contentWrapper) {
+      if (e.target === this.contentWrapper && e.propertyName.match(/transform$/)) {
+        const open = this.getOpen();
         this.dom.style.transition = '';
-        if (!this.sOpen && this.getCurrentDrawerSome()) {
+        if (!open && this.getCurrentDrawerSome()) {
           document.body.style.overflowX = '';
           if (this.maskDom) {
             this.maskDom.style.left = '';
             this.maskDom.style.width = '';
           }
+        }
+        if (this.afterVisibleChange) {
+          this.afterVisibleChange(!!open);
         }
       }
     },
@@ -380,12 +391,15 @@ const Drawer = {
         width,
         height,
         wrapStyle,
+        keyboard,
+        maskClosable,
       } = this.$props;
       const children = this.$slots.default;
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
         [className]: !!className,
+        'no-mask': !showMask,
       });
       const isOpenChange = this.isOpenChange;
       const isHorizontal = placement === 'left' || placement === 'right';
@@ -428,7 +442,6 @@ const Drawer = {
           ],
         });
       }
-
       const domContProps = {
         class: wrapperClassname,
         directives: [
@@ -441,6 +454,7 @@ const Drawer = {
         ],
         on: {
           transitionend: this.onWrapperTransitionEnd,
+          keydown: open && keyboard ? this.onKeyDown : noop,
         },
         style: wrapStyle,
       };
@@ -469,11 +483,11 @@ const Drawer = {
         },
       ];
       return (
-        <div {...domContProps}>
+        <div {...domContProps} tabIndex={-1}>
           {showMask && (
             <div
               class={`${prefixCls}-mask`}
-              onClick={this.onMaskTouchEnd}
+              onClick={maskClosable ? this.onMaskTouchEnd : noop}
               style={maskStyle}
               {...{ directives: directivesMaskDom }}
             />
@@ -610,7 +624,7 @@ const Drawer = {
         },
       ];
       return (
-        <div class={wrapperClassName} {...{ directives }}>
+        <div tabIndex={-1} class={wrapperClassName} {...{ directives }}>
           {children}
         </div>
       );

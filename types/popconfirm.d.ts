@@ -38,4 +38,6 @@ export declare class Popconfirm extends TooltipCommon {
    * @type any (VNode | slot)
    */
   icon: any;
+
+  disabled: boolean;
 }

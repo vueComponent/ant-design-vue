@@ -4,11 +4,86 @@
 
 #### 发布周期
 
-- 修订版本号：每周末会进行日常 bugfix 更新。（如果有紧急的 bugfix，则任何时候都可发布）
+- 修订版本号：日常 bugfix 更新
 - 次版本号：带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+
+## 1.5.0
+
+`2020-03-06`
+
+### 组件功能和样式同步到 antd 3.26.12 版本。
+
+- 新增了四个组件：
+  - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions-cn/) 新增提及组件并废弃原有 Mention 组件。
+  - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) 成组展示多个只读字段。
+  - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header-cn/) 可用于声明页面主题、展示用户所关注的页面重要信息，以及承载与当前页相关的操作项。
+  - 🔥🔥🔥 [Result](https://antdv.com/components/result) 用于反馈一系列操作任务的处理结果。
+- 🔥 Descriptions 支持垂直布局。
+- 🔥 Progress.Circle 支持渐变色。
+- 🔥 Progress.Line 支持渐变色。
+- Breadcrumb
+  - 🎉 Breadcrumb.Item 支持 `overlay` 属性来定义下拉菜单。
+  - 🌟 新增 `Breadcrumb.Separator` 组件，可进行 `separator` 自定义。
+- 🌟 TreeSelect 的 `showSearch` 支持多选模式。
+- 🌟 Timeline.Item 新增 `gray` 色彩类型，可用于未完成或失效状态。
+- 🌟 Modal 支持 `closeIcon` 属性用于自定义关闭图标。
+- 🌟 Upload
+  - 🌟 Upload 提供 `previewFile` 属性以自定义预览逻辑。
+  - 🌟 Upload 新增 `transformFile` 支持上传之前转换文件。
+  - 🌟 Upload 支持预览 `jfif` 格式图片。
+  - 🌟 新增 `showDownloadIcon` 属性，用于展示下载图标。
+- 🌟 Input.Search 新增 `loading` 属性，用于展示加载中的状态。
+- 🌟 Grid 的 `gutter` 属性新增垂直间距的支持，现在你可以给 `gutter` 设置一个数组，数组的第二个值就表示垂直间距。
+- 🌟 message 新增支持通过唯一的 `key` 来更新内容。
+- 🌟 TextArea 支持 `allowClear`。
+- 🌟 Dropdown.Button 支持 `icon` 属性来自定义图标。
+- Drawer
+  - 🌟 支持 `afterVisibleChange` 属性，在抽屉动画完成后触发。
+  - 🌟 支持 `ESC` 关闭。
+  - 🌟 新增 `keyboard`，允许打开关闭对键盘事件的响应。
+- 🌟 TreeNode 支持 `checkable` 属性。
+- 🌟 Transfer 支持 `children` 来自定义渲染列表。
+- 🌟 Pagination 支持 `disabled` 属性。
+- 🌟 Steps 支持点击切换功能。
+- Slider
+  - 🌟 支持 `tooltipPlacement` 以定义提示所在位置。
+  - 🌟 支持 `getTooltipPopupContainer` 以允许自定义提示所在容器。
+  - 🌟 当 Sider 在右边时，翻转 `trigger` 方向。
+- 🌟 Calendar 支持 `headerRender` 以自定义头部。
+- 🌟 Carousel 支持自定义面板指示点的位置。
+- 🌟 Collapse 支持 `expandIconPosition` 属性。
+- 🌟 Popconfirm 增加 `disabled` props，用于控制点击子元素是否弹出。
+- 🌟 Select 在多选模式下支持 `showArrow`。
+- 🌟 Collapse.Panel 新增了 `extra`。
+- Card
+  - 🌟 Card 组件新增了 `tabBarExtraContent` 属性。
+  - 🌟 Card.Grid 新增 `hoverable` 属性允许禁用浮动效果。
+- 🌟 Anchor.Link 增加 `target` 属性。
+- 🌟 TimePicker 新增了 `clearIcon` prop，用于自定义清除图标。
+- Form
+  - 🌟 支持直接在 Form 上面配置 `colon` 属性。
+  - 🌟 支持 `labelAlign` 属性。
+- Table
+  - 🌟 Table 新增 `getPopupContainer` 属性用于设置表格内的各类浮层渲染节点。
+  - 💄 调整 Table 展开按钮的样式。
+  - 🌟 新增 `tableLayout` 属性，支持设置表格的 `table-layout` 布局，并在固定表头/列下默认开启 `tableLayout="fixed"`，解决因为表格自动根据内容排版造成的列对齐问题。
+  - 🌟 新增 `column.ellipsis` 支持单元格内容自动省略。
+  - 🌟 新增 `scroll.scrollToFirstRowOnChange` 属性，用于设置在翻页后是否滚动到表格顶部。
+  - 🌟 `filterDropdown` 新增 `visible` 参数，用于获取下拉框的显示状态。
+  - 🌟 `title` 方法新增 `sortColumn` 参数，用于获取当前排序的列。
+  - 🌟 排序时 `onChange` 的 `sorter` 参数将始终包含 `column` 信息。
+- 🌟 Tree 组件支持 `blockNode` 属性。
+- 🌟 RangePicker 添加 `separator` 定义。
+- Empty
+  - 🌟 Empty 支持 `imageStyle` 属性。
+  - 🌟 Empty `description` 支持 `false`。
+  - 🌟 Empty 支持通过 `Empty.PRESENTED_IMAGE_DEFAULT` 和 `Empty.PRESENTED_IMAGE_SIMPLE` 访问预置图片。
+- 🌟 Badge 支持自定义颜色。
+- 🐞 修复 Steps 的 label 不居中的问题。
+- 🐞 修复 DatePicker 和 TimePicker 的 cursor 样式问题。
 
 ## 1.4.12
 

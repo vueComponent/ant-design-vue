@@ -30,12 +30,13 @@ const ExpandableRow = {
   },
   methods: {
     hasExpandIcon(columnIndex) {
-      const { expandRowByClick } = this;
-      return (
-        !this.tempExpandIconAsCell &&
-        !expandRowByClick &&
-        columnIndex === this.tempExpandIconColumnIndex
-      );
+      const { expandRowByClick, expandIcon } = this.$props;
+
+      if (this.tempExpandIconAsCell || columnIndex !== this.tempExpandIconColumnIndex) {
+        return false;
+      }
+
+      return !!expandIcon || !expandRowByClick;
     },
 
     handleExpandChange(record, event) {
@@ -128,5 +129,5 @@ const ExpandableRow = {
 };
 
 export default connect(({ expandedRowKeys }, { rowKey }) => ({
-  expanded: !!~expandedRowKeys.indexOf(rowKey),
+  expanded: expandedRowKeys.includes(rowKey),
 }))(ExpandableRow);

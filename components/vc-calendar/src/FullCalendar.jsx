@@ -11,7 +11,7 @@ import enUs from './locale/en_US';
 const FullCalendar = {
   props: {
     locale: PropTypes.object.def(enUs),
-    format: PropTypes.string,
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     defaultType: PropTypes.string.def('date'),

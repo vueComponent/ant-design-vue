@@ -73,6 +73,12 @@ export interface NotificationOptions {
    * @type Function
    */
   onClick?: Function;
+
+  closeIcon?: any;
+
+  getContainer?: () => HTMLElement;
+  bottom?: string;
+  top?: string;
 }
 
 export interface NotificationConfigOptions {
@@ -110,6 +116,8 @@ export interface NotificationConfigOptions {
    * @type string
    */
   top?: string;
+
+  closeIcon?: any;
 }
 
 export declare class Notification {

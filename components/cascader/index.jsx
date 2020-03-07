@@ -60,7 +60,7 @@ const CascaderProps = {
   /** 选择后展示的渲染函数 */
   displayRender: PropTypes.func,
   transitionName: PropTypes.string.def('slide-up'),
-  popupStyle: PropTypes.object.def({}),
+  popupStyle: PropTypes.object.def(() => ({})),
   /** 自定义浮层类名 */
   popupClassName: PropTypes.string,
   /** 浮层预设位置：`bottomLeft` `bottomRight` `topLeft` `topRight` */
@@ -328,6 +328,7 @@ const Cascader = {
       } else {
         warning(
           typeof limit !== 'number',
+          'Cascader',
           "'limit' of showSearch in Cascader should be positive number or false.",
         );
         filtered = flattenOptions.filter(path => filter(inputValue, path, names));

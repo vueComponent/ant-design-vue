@@ -28,6 +28,7 @@ import {
   LocaleProvider,
   message,
   Menu,
+  Mentions,
   Modal,
   notification,
   Pagination,
@@ -61,6 +62,9 @@ import {
   ConfigProvider,
   Empty,
   Base,
+  Result,
+  Descriptions,
+  PageHeader,
 } from 'ant-design-vue';
 
 Vue.prototype.$message = message;
@@ -102,6 +106,7 @@ Vue.use(Layout);
 Vue.use(List);
 Vue.use(LocaleProvider);
 Vue.use(Menu);
+Vue.use(Mentions);
 Vue.use(Modal);
 Vue.use(Pagination);
 Vue.use(Popconfirm);
@@ -130,6 +135,9 @@ Vue.use(Skeleton);
 Vue.use(Comment);
 Vue.use(ConfigProvider);
 Vue.use(Empty);
+Vue.use(Result);
+Vue.use(Descriptions);
+Vue.use(PageHeader);
 
 /* v1.1.2 registration methods */
 // Vue.component(Affix.name, Affix) // a-affix

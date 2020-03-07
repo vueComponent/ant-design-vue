@@ -1,6 +1,6 @@
-// Project: https://github.com/vueComponent/ant-design-vue
-// Definitions by: akki-jat <https://github.com/akki-jat>
-// Definitions: https://github.com/vueComponent/ant-design-vue/types
+// Project: https://github.com/vueComponent/ant-design-vue Definitions by:
+// akki-jat <https://github.com/akki-jat> Definitions:
+// https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
 import { TreeNode } from './tree-node';
@@ -14,6 +14,8 @@ export interface TreeData {
   disableCheckbox?: boolean;
   selectable?: boolean;
 }
+
+export type TreeNodeValue = string | number | string[] | number[];
 
 export declare class TreeSelect extends AntdComponent {
   static TreeNode: typeof TreeNode;
@@ -29,11 +31,7 @@ export declare class TreeSelect extends AntdComponent {
    */
   allowClear: boolean;
 
-  /**
-   * To set the initial selected treeNode(s).
-   * @type string | string[]
-   */
-  defaultValue: string | string[];
+  defaultValue: TreeNodeValue;
 
   /**
    * Disabled or not
@@ -171,7 +169,13 @@ export declare class TreeSelect extends AntdComponent {
    * @default false
    * @type boolean | object[]
    */
-  treeDataSimpleMode: boolean | Array<{ id: string; pId: string; rootPId: any }>;
+  treeDataSimpleMode:
+    | boolean
+    | Array<{
+        id: string;
+        pId: string;
+        rootPId: any;
+      }>;
 
   /**
    * Whether to expand all treeNodes by default
@@ -206,17 +210,17 @@ export declare class TreeSelect extends AntdComponent {
    */
   treeNodeLabelProp: string;
 
-  /**
-   * To set the current selected treeNode(s).
-   * @type string | string[]
-   */
-  value: string | string[];
+  value: TreeNodeValue;
 
   /**
    * The custom suffix icon
    * @type any (VNode | slot)
    */
   suffixIcon: any;
+
+  removeIcon?: any;
+
+  clearIcon?: any;
 
   /**
    * remove focus

@@ -1,7 +1,9 @@
 import manifest from '@ant-design/icons/lib/manifest';
 import Category from './Category';
 import { FilledIcon, OutlinedIcon, TwoToneIcon } from './themeIcons';
-import { categories } from './fields';
+import categories from './fields';
+import Radio from '@/components/radio';
+import '@/components/radio/style';
 
 const IconDisplay = {
   cagetories: categories,
@@ -114,6 +116,11 @@ const IconDisplay = {
     filled: 'fill',
     outlined: 'outline',
     twoTone: 'twotone',
+  },
+  components: {
+    ARadio: Radio,
+    ARadioGroup: Radio.Group,
+    ARadioButton: Radio.Button,
   },
   data() {
     return {

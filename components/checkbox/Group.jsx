@@ -10,6 +10,7 @@ export default {
     prop: 'value',
   },
   props: {
+    name: PropTypes.string,
     prefixCls: PropTypes.string,
     defaultValue: PropTypes.array,
     value: PropTypes.array,
@@ -28,6 +29,7 @@ export default {
     const { value, defaultValue } = this;
     return {
       sValue: value || defaultValue || [],
+      registeredValues: [],
     };
   },
   watch: {
@@ -52,7 +54,15 @@ export default {
         return { ...option, label };
       });
     },
+    cancelValue(value) {
+      this.registeredValues = this.registeredValues.filter(val => val !== value);
+    },
+
+    registerValue(value) {
+      this.registeredValues = [...this.registeredValues, value];
+    },
     toggleOption(option) {
+      const { registeredValues } = this;
       const optionIndex = this.sValue.indexOf(option.value);
       const value = [...this.sValue];
       if (optionIndex === -1) {
@@ -63,8 +73,16 @@ export default {
       if (!hasProp(this, 'value')) {
         this.sValue = value;
       }
-      this.$emit('input', value);
-      this.$emit('change', value);
+      const options = this.getOptions();
+      const val = value
+        .filter(val => registeredValues.indexOf(val) !== -1)
+        .sort((a, b) => {
+          const indexA = options.findIndex(opt => opt.value === a);
+          const indexB = options.findIndex(opt => opt.value === b);
+          return indexA - indexB;
+        });
+      this.$emit('input', val);
+      this.$emit('change', val);
     },
   },
   render() {

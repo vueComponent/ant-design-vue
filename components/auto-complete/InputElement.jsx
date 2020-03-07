@@ -20,17 +20,6 @@ export default {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
   },
-  methods: {
-    focus() {
-      const ele = this.$refs.ele;
-      ele.focus ? ele.focus() : this.$el.focus();
-    },
-    blur() {
-      const ele = this.$refs.ele;
-      ele.blur ? ele.blur() : this.$el.blur();
-    },
-  },
-
   render() {
     const { $slots = {}, $attrs = {}, placeholder } = this;
     const listeners = getListeners(this);

@@ -26,7 +26,8 @@ export default {
           onClick={onExpand}
         />
       );
-    } else if (needIndentSpaced) {
+    }
+    if (needIndentSpaced) {
       return <span class={`${prefixCls}-expand-icon ${prefixCls}-spaced`} />;
     }
     return null;

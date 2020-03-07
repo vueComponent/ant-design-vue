@@ -6,6 +6,7 @@ import { AntdComponent } from './component';
 import { VNode } from 'vue';
 
 export declare class Badge extends AntdComponent {
+  color: string;
   /**
    * Number to show in badge, support slot
    * @type number | string | VNode

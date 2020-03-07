@@ -3,8 +3,11 @@ import Icon from '..';
 import VueIcon from '@ant-design/icons-vue';
 import { getThemeFromTypeName, withThemeSuffix } from '../utils';
 import { cloneElement } from '../../_util/vnode';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Icon', () => {
+  mountTest(Icon);
+
   it('should render to a <i class="xxx"><svg>...</svg></i>', () => {
     const wrapper = mount({
       render() {
@@ -119,7 +122,7 @@ describe('Icon', () => {
           return <Icon type="clock-circle-o" theme="outlined" />;
         },
       });
-      expect(errorSpy).not.toBeCalled();
+      expect(errorSpy).not.toHaveBeenCalled();
     });
 
     it('warns', () => {
@@ -129,7 +132,7 @@ describe('Icon', () => {
         },
       });
       expect(errorSpy).toBeCalledWith(
-        "Warning: The icon name 'clock-circle-o' already specify a theme 'outlined', the 'theme' prop 'filled' will be ignored.",
+        "Warning: [antdv: Icon] The icon name 'clock-circle-o' already specify a theme 'outlined', the 'theme' prop 'filled' will be ignored.",
       );
     });
   });

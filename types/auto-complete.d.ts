@@ -9,6 +9,7 @@ export declare type Value = { key: string };
 export declare type SelectValue = string | number | Value | Array<Value | string | number>;
 
 export declare class AutoComplete extends AntdComponent {
+  dropdownMenuStyle: object;
   /**
    * Show clear button, effective in multiple mode only.
    * @default false

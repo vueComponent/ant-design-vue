@@ -17,6 +17,8 @@ export default {
     },
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     tabBarPosition: String,
+    direction: PropTypes.string,
+    destroyInactiveTabPane: PropTypes.bool,
   },
   computed: {
     classes() {
@@ -62,7 +64,7 @@ export default {
       if (activeIndex !== -1) {
         const animatedStyle = animatedWithMargin
           ? getMarginStyle(activeIndex, tabBarPosition)
-          : getTransformPropValue(getTransformByIndex(activeIndex, tabBarPosition));
+          : getTransformPropValue(getTransformByIndex(activeIndex, tabBarPosition, direction));
         style = animatedStyle;
       } else {
         style = {

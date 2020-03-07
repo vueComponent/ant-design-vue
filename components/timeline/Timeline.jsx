@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import {
   getOptionProps,
+  getPropsData,
   initDefaultProps,
   filterEmpty,
   getComponentFromProp,
@@ -18,13 +19,14 @@ export const TimelineProps = {
   pending: PropTypes.any,
   pendingDot: PropTypes.string,
   reverse: PropTypes.bool,
-  mode: PropTypes.oneOf(['left', 'alternate', 'right']),
+  mode: PropTypes.oneOf(['left', 'alternate', 'right', '']),
 };
 
 export default {
   name: 'ATimeline',
   props: initDefaultProps(TimelineProps, {
     reverse: false,
+    mode: '',
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -52,41 +54,44 @@ export default {
     //     },
     //   })
     // })
-    const pendingItem = !!pending ? (
+    const pendingItem = pending ? (
       <TimelineItem pending={!!pending}>
         <template slot="dot">{pendingDot || <Icon type="loading" />}</template>
         {pendingNode}
       </TimelineItem>
     ) : null;
 
-    const timeLineItems = !!reverse
+    const timeLineItems = reverse
       ? [pendingItem, ...children.reverse()]
       : [...children, pendingItem];
+
+    const getPositionCls = (ele, idx) => {
+      const eleProps = getPropsData(ele);
+      if (mode === 'alternate') {
+        if (eleProps.position === 'right') return `${prefixCls}-item-right`;
+        if (eleProps.position === 'left') return `${prefixCls}-item-left`;
+        return idx % 2 === 0 ? `${prefixCls}-item-left` : `${prefixCls}-item-right`;
+      }
+      if (mode === 'left') return `${prefixCls}-item-left`;
+      if (mode === 'right') return `${prefixCls}-item-right`;
+      if (eleProps.position === 'right') return `${prefixCls}-item-right`;
+      return '';
+    };
 
     // Remove falsy items
     const truthyItems = timeLineItems.filter(item => !!item);
     const itemsCount = truthyItems.length;
     const lastCls = `${prefixCls}-item-last`;
-    const items = truthyItems.map((ele, idx) =>
-      cloneElement(ele, {
+    const items = truthyItems.map((ele, idx) => {
+      const pendingClass = idx === itemsCount - 2 ? lastCls : '';
+      const readyClass = idx === itemsCount - 1 ? lastCls : '';
+      return cloneElement(ele, {
         class: classNames([
-          !reverse && !!pending
-            ? idx === itemsCount - 2
-              ? lastCls
-              : ''
-            : idx === itemsCount - 1
-            ? lastCls
-            : '',
-          mode === 'alternate'
-            ? idx % 2 === 0
-              ? `${prefixCls}-item-left`
-              : `${prefixCls}-item-right`
-            : mode === 'right'
-            ? `${prefixCls}-item-right`
-            : '',
+          !reverse && !!pending ? pendingClass : readyClass,
+          getPositionCls(ele, idx),
         ]),
-      }),
-    );
+      });
+    });
 
     const timelineProps = {
       props: {

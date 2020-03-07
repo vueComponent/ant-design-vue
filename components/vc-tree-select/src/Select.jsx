@@ -21,6 +21,7 @@
 
 import shallowEqual from 'shallowequal';
 import raf from 'raf';
+import scrollIntoView from 'dom-scroll-into-view';
 import warning from 'warning';
 import PropTypes from '../../_util/vue-types';
 import KeyCode from '../../_util/KeyCode';
@@ -48,6 +49,7 @@ import {
   isLabelInValue,
   getFilterTree,
   cleanEntity,
+  findPopupContainer,
 } from './util';
 import SelectNode from './SelectNode';
 import {
@@ -222,6 +224,37 @@ const Select = {
         this.forcePopupAlign();
       });
     },
+    '$data._open': function() {
+      this.$nextTick(() => {
+        const { prefixCls } = this.$props;
+        const { _selectorValueList: selectorValueList, _valueEntities: valueEntities } = this.$data;
+        const isMultiple = this.isMultiple();
+
+        // Scroll to value position, only need sync on single mode
+        if (!isMultiple && selectorValueList.length && this.popup) {
+          const { value } = selectorValueList[0];
+          const { domTreeNodes } = this.popup.getTree();
+          const { key } = valueEntities[value] || {};
+          const treeNode = domTreeNodes[key];
+
+          if (treeNode) {
+            const domNode = treeNode.$el;
+            raf(() => {
+              const popupNode = this.popup.$el;
+              const triggerContainer = findPopupContainer(popupNode, `${prefixCls}-dropdown`);
+              const searchNode = this.popup.searchRef.current;
+
+              if (domNode && triggerContainer && searchNode) {
+                scrollIntoView(domNode, triggerContainer, {
+                  onlyScrollIfNeeded: true,
+                  offsetTop: searchNode.offsetHeight,
+                });
+              }
+            });
+          }
+        }
+      });
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -342,9 +375,11 @@ const Select = {
         }
 
         // Get key by value
+        const valueLabels = {};
         latestValueList.forEach(wrapperValue => {
-          const { value } = wrapperValue;
+          const { value, label } = wrapperValue;
           const entity = (newState._valueEntities || prevState._valueEntities)[value];
+          valueLabels[value] = label;
 
           if (entity) {
             keyList.push(entity.key);
@@ -366,9 +401,19 @@ const Select = {
           );
 
           // Format value list again for internal usage
-          newState._valueList = checkedKeys.map(key => ({
-            value: (newState._keyEntities || prevState._keyEntities).get(key).value,
-          }));
+          newState._valueList = checkedKeys.map(key => {
+            const val = (newState._keyEntities || prevState._keyEntities).get(key).value;
+
+            const wrappedValue = {
+              value: val,
+            };
+
+            if (valueLabels[val] !== undefined) {
+              wrappedValue.label = valueLabels[val];
+            }
+
+            return wrappedValue;
+          });
         } else {
           newState._valueList = filteredValueList;
         }
@@ -422,6 +467,7 @@ const Select = {
           searchValue,
           filterTreeNodeFn,
           newState._valueEntities || prevState._valueEntities,
+          SelectNode,
         );
       }
 
@@ -827,6 +873,7 @@ const Select = {
             value,
             filterTreeNodeFn,
             valueEntities,
+            SelectNode,
           ),
         });
       }
@@ -844,7 +891,13 @@ const Select = {
     },
 
     onChoiceAnimationLeave() {
-      this.forcePopupAlign();
+      raf(() => {
+        this.forcePopupAlign();
+      });
+    },
+
+    setPopupRef(popup) {
+      this.popup = popup;
     },
 
     /**
@@ -1051,6 +1104,12 @@ const Select = {
       on: {
         treeExpanded: this.delayForcePopupAlign,
       },
+      directives: [
+        {
+          name: 'ant-ref',
+          value: this.setPopupRef,
+        },
+      ],
     });
 
     const Popup = isMultiple ? MultiplePopup : SinglePopup;

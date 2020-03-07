@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import Modal from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 const ModalTester = {
   props: ['footer', 'visible'],
@@ -26,6 +27,7 @@ const ModalTester = {
 };
 
 describe('Modal', () => {
+  mountTest(Modal);
   it('render correctly', done => {
     const wrapper = mount({
       render() {
@@ -38,10 +40,10 @@ describe('Modal', () => {
       sync: false,
     });
     wrapper1.setProps({ visible: true });
-    Vue.nextTick(() => {
+    setTimeout(() => {
       expect(wrapper1.html()).toMatchSnapshot();
       done();
-    });
+    }, 10);
   });
 
   it('render without footer', () => {

@@ -22,6 +22,7 @@ export default {
       props: {
         ...getOptionProps(this),
         prefixCls,
+        extra: getComponentFromProp(this, 'extra'),
       },
       class: collapsePanelClassName,
       on: getListeners(this),

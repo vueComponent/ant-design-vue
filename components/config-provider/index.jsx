@@ -3,6 +3,8 @@ import PropTypes from '../_util/vue-types';
 import { filterEmpty, getComponentFromProp } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
 import Base from '../base';
+import LocaleProvider, { ANT_MARK } from '../locale-provider';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
 function getWatch(keys = []) {
   const watch = {};
@@ -22,6 +24,8 @@ const ConfigProvider = {
     renderEmpty: PropTypes.func,
     csp: PropTypes.object,
     autoInsertSpaceInButton: PropTypes.bool,
+    locale: PropTypes.object,
+    pageHeader: PropTypes.object,
   },
   provide() {
     const _self = this;
@@ -39,7 +43,7 @@ const ConfigProvider = {
     };
   },
   watch: {
-    ...getWatch(['prefixCls', 'csp', 'autoInsertSpaceInButton']),
+    ...getWatch(['prefixCls', 'csp', 'autoInsertSpaceInButton', 'locale', 'pageHeader']),
   },
   methods: {
     renderEmptyComponent(h, name) {
@@ -52,9 +56,21 @@ const ConfigProvider = {
       if (customizePrefixCls) return customizePrefixCls;
       return suffixCls ? `${prefixCls}-${suffixCls}` : prefixCls;
     },
+    renderProvider(legacyLocale) {
+      return (
+        <LocaleProvider locale={this.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
+          {this.$slots.default ? filterEmpty(this.$slots.default)[0] : null}
+        </LocaleProvider>
+      );
+    },
   },
+
   render() {
-    return this.$slots.default ? filterEmpty(this.$slots.default)[0] : null;
+    return (
+      <LocaleReceiver
+        scopedSlots={{ default: (_, __, legacyLocale) => this.renderProvider(legacyLocale) }}
+      />
+    );
   },
 };
 

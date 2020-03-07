@@ -7,6 +7,7 @@ export const AnchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string,
   title: PropTypes.any,
+  target: PropTypes.string,
 };
 
 export default {
@@ -47,7 +48,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, href, $slots } = this;
+    const { prefixCls: customizePrefixCls, href, $slots, target } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
@@ -66,6 +67,7 @@ export default {
           class={titleClassName}
           href={href}
           title={typeof title === 'string' ? title : ''}
+          target={target}
           onClick={this.handleClick}
         >
           {title}

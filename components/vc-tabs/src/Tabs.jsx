@@ -42,6 +42,7 @@ export default {
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     __propsSymbol__: PropTypes.any,
+    direction: PropTypes.string.def('ltr'),
   },
   data() {
     const props = getOptionProps(this);
@@ -177,6 +178,7 @@ export default {
 
       raf.cancel(this.sentinelId);
       this.sentinelId = raf(() => {
+        if (this.destroy) return;
         this.$forceUpdate();
       });
     },
@@ -190,10 +192,12 @@ export default {
       renderTabContent,
       renderTabBar,
       destroyInactiveTabPane,
+      direction,
     } = props;
     const cls = {
       [prefixCls]: 1,
       [`${prefixCls}-${tabBarPosition}`]: 1,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     };
 
     this.tabBar = renderTabBar();
@@ -204,6 +208,7 @@ export default {
         tabBarPosition,
         panels: props.children,
         activeKey: this.$data._activeKey,
+        direction,
       },
       on: {
         keydown: this.onNavKeyDown,
@@ -217,6 +222,7 @@ export default {
         tabBarPosition,
         activeKey: this.$data._activeKey,
         destroyInactiveTabPane,
+        direction,
       },
       on: {
         change: this.setActiveKey,

@@ -28,10 +28,10 @@ describe('Alert', () => {
       },
     });
     wrapper.find('.ant-alert-close-icon').trigger('click');
-    expect(onClose).toBeCalled();
+    expect(onClose).toHaveBeenCalled();
     jest.runAllTimers();
     wrapper.vm.$refs.alert.animationEnd();
-    expect(afterClose).toBeCalled();
+    expect(afterClose).toHaveBeenCalled();
   });
 
   describe('data and aria props', () => {

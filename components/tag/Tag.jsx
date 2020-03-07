@@ -3,9 +3,27 @@ import Icon from '../icon';
 import getTransitionProps from '../_util/getTransitionProps';
 import omit from 'omit.js';
 import Wave from '../_util/wave';
-import { hasProp, getListeners } from '../_util/props-util';
+import { hasProp, getListeners, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
+import warning from '../_util/warning';
+
+const PresetColorTypes = [
+  'pink',
+  'red',
+  'yellow',
+  'orange',
+  'cyan',
+  'green',
+  'blue',
+  'purple',
+  'geekblue',
+  'magenta',
+  'volcano',
+  'gold',
+  'lime',
+];
+const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
 export default {
   name: 'ATag',
@@ -26,9 +44,15 @@ export default {
   },
   data() {
     let _visible = true;
-    if (hasProp(this, 'visible')) {
+    const props = getOptionProps(this);
+    if ('visible' in props) {
       _visible = this.visible;
     }
+    warning(
+      !('afterClose' in props),
+      'Tag',
+      "'afterClose' will be deprecated, please use 'close' event, we will remove this in the next version.",
+    );
     return {
       _visible,
     };
@@ -44,6 +68,11 @@ export default {
     setVisible(visible, e) {
       this.$emit('close', e);
       this.$emit('close.visible', false);
+      const afterClose = this.afterClose;
+      if (afterClose) {
+        // next version remove.
+        afterClose();
+      }
       if (e.defaultPrevented) {
         return;
       }
@@ -53,27 +82,20 @@ export default {
     },
 
     handleIconClick(e) {
+      e.stopPropagation();
       this.setVisible(false, e);
     },
 
-    animationEnd() {
-      const afterClose = this.afterClose;
-      if (afterClose) {
-        afterClose();
-      }
-    },
-
-    isPresetColor(color) {
+    isPresetColor() {
+      const { color } = this.$props;
       if (!color) {
         return false;
       }
-      return /^(pink|red|yellow|orange|cyan|green|blue|purple|geekblue|magenta|volcano|gold|lime)(-inverse)?$/.test(
-        color,
-      );
+      return PresetColorRegex.test(color);
     },
     getTagStyle() {
       const { color } = this.$props;
-      const isPresetColor = this.isPresetColor(color);
+      const isPresetColor = this.isPresetColor();
       return {
         backgroundColor: color && !isPresetColor ? color : undefined,
       };
@@ -81,7 +103,7 @@ export default {
 
     getTagClassName(prefixCls) {
       const { color } = this.$props;
-      const isPresetColor = this.isPresetColor(color);
+      const isPresetColor = this.isPresetColor();
       return {
         [prefixCls]: true,
         [`${prefixCls}-${color}`]: isPresetColor,
@@ -101,7 +123,7 @@ export default {
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
     const tag = (
-      <div
+      <span
         v-show={visible}
         {...{ on: omit(getListeners(this), ['close']) }}
         class={this.getTagClassName(prefixCls)}
@@ -109,11 +131,10 @@ export default {
       >
         {this.$slots.default}
         {this.renderCloseIcon()}
-      </div>
+      </span>
     );
     const transitionProps = getTransitionProps(`${prefixCls}-zoom`, {
       appear: false,
-      afterLeave: this.animationEnd,
     });
     return (
       <Wave>

@@ -2,9 +2,11 @@
 import shallowequal from 'shallowequal';
 import merge from 'lodash/merge';
 import classes from 'component-classes';
+import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
-import { debounce, warningOnce } from './utils';
-import addEventListener from '../../_util/Dom/addEventListener';
+import { debounce } from './utils';
+import warning from '../../_util/warning';
+import addEventListener from '../../vc-util/Dom/addEventListener';
 import { Provider, create } from '../../_util/store';
 import ColumnManager from './ColumnManager';
 import HeadTable from './HeadTable';
@@ -64,6 +66,7 @@ export default {
       indentSize: PropTypes.number,
       expandRowByClick: PropTypes.bool,
       expandIcon: PropTypes.func,
+      tableLayout: PropTypes.string,
     },
     {
       data: [],
@@ -142,14 +145,14 @@ export default {
   created() {
     ['rowClick', 'rowDoubleclick', 'rowContextmenu', 'rowMouseenter', 'rowMouseleave'].forEach(
       name => {
-        warningOnce(
+        warning(
           getListeners(this)[name] === undefined,
           `${name} is deprecated, please use customRow instead.`,
         );
       },
     );
 
-    warningOnce(
+    warning(
       this.getBodyWrapper === undefined,
       'getBodyWrapper is deprecated, please use custom components instead.',
     );
@@ -211,7 +214,7 @@ export default {
     getRowKey(record, index) {
       const rowKey = this.rowKey;
       const key = typeof rowKey === 'function' ? rowKey(record, index) : record[rowKey];
-      warningOnce(
+      warning(
         key !== undefined,
         'Each record in table should have a unique `key` prop,' +
           'or set `rowKey` to an unique primary key.',
@@ -221,15 +224,15 @@ export default {
 
     setScrollPosition(position) {
       this.scrollPosition = position;
-      if (this.$refs.tableNode) {
+      if (this.tableNode) {
         const { prefixCls } = this;
         if (position === 'both') {
-          classes(this.$refs.tableNode)
+          classes(this.tableNode)
             .remove(new RegExp(`^${prefixCls}-scroll-position-.+$`))
             .add(`${prefixCls}-scroll-position-left`)
             .add(`${prefixCls}-scroll-position-right`);
         } else {
-          classes(this.$refs.tableNode)
+          classes(this.tableNode)
             .remove(new RegExp(`^${prefixCls}-scroll-position-.+$`))
             .add(`${prefixCls}-scroll-position-${position}`);
         }
@@ -253,13 +256,34 @@ export default {
       }
     },
 
+    isTableLayoutFixed() {
+      const { tableLayout, columns = [], useFixedHeader, scroll = {} } = this.$props;
+      if (typeof tableLayout !== 'undefined') {
+        return tableLayout === 'fixed';
+      }
+      // if one column is ellipsis, use fixed table layout to fix align issue
+      if (columns.some(({ ellipsis }) => !!ellipsis)) {
+        return true;
+      }
+      // if header fixed, use fixed table layout to fix align issue
+      if (useFixedHeader || scroll.y) {
+        return true;
+      }
+      // if scroll.x is number/px/% width value, we should fixed table layout
+      // to avoid long word layout broken issue
+      if (scroll.x && scroll.x !== true && scroll.x !== 'max-content') {
+        return true;
+      }
+      return false;
+    },
+
     handleWindowResize() {
       this.syncFixedTableRowHeight();
       this.setScrollPositionClassName();
     },
 
     syncFixedTableRowHeight() {
-      const tableRect = this.$refs.tableNode.getBoundingClientRect();
+      const tableRect = this.tableNode.getBoundingClientRect();
       // If tableNode's height less than 0, suppose it is hidden and don't recalculate rowHeight.
       // see: https://github.com/ant-design/ant-design/issues/4836
       if (tableRect.height !== undefined && tableRect.height <= 0) {
@@ -270,9 +294,8 @@ export default {
         ? this.ref_headTable.querySelectorAll('thead')
         : this.ref_bodyTable.querySelectorAll('thead');
       const bodyRows = this.ref_bodyTable.querySelectorAll(`.${prefixCls}-row`) || [];
-      const fixedColumnsHeadRowsHeight = [].map.call(
-        headRows,
-        row => row.getBoundingClientRect().height || 'auto',
+      const fixedColumnsHeadRowsHeight = [].map.call(headRows, row =>
+        row.getBoundingClientRect().height ? row.getBoundingClientRect().height - 0.5 : 'auto',
       );
       const state = this.store.getState();
       const fixedColumnsBodyRowsHeight = [].reduce.call(
@@ -397,8 +420,17 @@ export default {
         }
       }
     },
-    saveChildrenRef(name, node) {
-      this[`ref_${name}`] = node;
+    // saveChildrenRef(name, node) {
+    //   this[`ref_${name}`] = node;
+    // },
+    saveRef(name) {
+      return node => {
+        this[`ref_${name}`] = node;
+      };
+    },
+
+    saveTableNodeRef(node) {
+      this.tableNode = node;
     },
     renderMainTable() {
       const { scroll, prefixCls } = this;
@@ -511,15 +543,15 @@ export default {
     const props = getOptionProps(this);
     const { columnManager, getRowKey } = this;
     const prefixCls = props.prefixCls;
-    let className = props.prefixCls;
-    if (props.useFixedHeader || (props.scroll && props.scroll.y)) {
-      className += ` ${prefixCls}-fixed-header`;
-    }
-    if (this.scrollPosition === 'both') {
-      className += ` ${prefixCls}-scroll-position-left ${prefixCls}-scroll-position-right`;
-    } else {
-      className += ` ${prefixCls}-scroll-position-${this.scrollPosition}`;
-    }
+
+    const tableClassName = classNames(props.prefixCls, {
+      [`${prefixCls}-fixed-header`]: props.useFixedHeader || (props.scroll && props.scroll.y),
+      [`${prefixCls}-scroll-position-left ${prefixCls}-scroll-position-right`]:
+        this.scrollPosition === 'both',
+      [`${prefixCls}-scroll-position-${this.scrollPosition}`]: this.scrollPosition !== 'both',
+      [`${prefixCls}-layout-fixed`]: this.isTableLayoutFixed(),
+    });
+
     const hasLeftFixed = columnManager.isAnyColumnsLeftFixed();
     const hasRightFixed = columnManager.isAnyColumnsRightFixed();
 
@@ -535,8 +567,15 @@ export default {
           this.expander = expander;
           return (
             <div
-              ref="tableNode"
-              class={className}
+              {...{
+                directives: [
+                  {
+                    name: 'ant-ref',
+                    value: this.saveTableNodeRef,
+                  },
+                ],
+              }}
+              class={tableClassName}
               // style={props.style}
               // id={props.id}
             >

@@ -1,6 +1,6 @@
-// Project: https://github.com/vueComponent/ant-design-vue
-// Definitions by: akki-jat <https://github.com/akki-jat>
-// Definitions: https://github.com/vueComponent/ant-design-vue/types
+// Project: https://github.com/vueComponent/ant-design-vue Definitions by:
+// akki-jat <https://github.com/akki-jat> Definitions:
+// https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
 import { TreeNode } from '../tree-node';
@@ -10,6 +10,8 @@ export declare class Tree extends AntdComponent {
   static TreeNode: typeof TreeNode;
   static DirectoryTree: typeof DictionaryTree;
 
+  blockNode: boolean;
+  selectable: boolean;
   /**
    * treeNode of tree
    * @type TreeNode[]
@@ -54,7 +56,13 @@ export declare class Tree extends AntdComponent {
    * @default []
    * @type string[] | number[] | { checked: string[]; halfChecked: string[] }
    */
-  checkedKeys: string[] | number[] | { checked: string[]; halfChecked: string[] };
+  checkedKeys:
+    | string[]
+    | number[]
+    | {
+        checked: string[];
+        halfChecked: string[];
+      };
 
   /**
    * Check treeNode precisely; parent treeNode and children treeNodes are not associated

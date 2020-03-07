@@ -1,5 +1,6 @@
 import TransitionEvents from './css-animation/Event';
-import raf from '../_util/raf';
+import raf from './raf';
+import { ConfigConsumerProps } from '../config-provider';
 let styleForPesudo;
 
 // Where el is the DOM element you'd like to test for visibility
@@ -9,7 +10,14 @@ function isHidden(element) {
   }
   return !element || element.offsetParent === null;
 }
-
+function isNotGrey(color) {
+  // eslint-disable-next-line no-useless-escape
+  const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\.\d]*)?\)/);
+  if (match && match[1] && match[2] && match[3]) {
+    return !(match[1] === match[2] && match[2] === match[3]);
+  }
+  return true;
+}
 export default {
   name: 'Wave',
   props: ['insertExtraNode'],
@@ -22,7 +30,9 @@ export default {
       this.instance = this.bindAnimationEvent(node);
     });
   },
-
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   beforeDestroy() {
     if (this.instance) {
       this.instance.cancel();
@@ -33,19 +43,10 @@ export default {
     this.destroy = true;
   },
   methods: {
-    isNotGrey(color) {
-      const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\.\d]*)?\)/);
-      if (match && match[1] && match[2] && match[3]) {
-        return !(match[1] === match[2] && match[2] === match[3]);
-      }
-      return true;
-    },
-
     onClick(node, waveColor) {
       if (!node || isHidden(node) || node.className.indexOf('-leave') >= 0) {
         return;
       }
-      this.removeExtraStyleNode();
       const { insertExtraNode } = this.$props;
       this.extraNode = document.createElement('div');
       const extraNode = this.extraNode;
@@ -59,13 +60,19 @@ export default {
         waveColor &&
         waveColor !== '#ffffff' &&
         waveColor !== 'rgb(255, 255, 255)' &&
-        this.isNotGrey(waveColor) &&
+        isNotGrey(waveColor) &&
         !/rgba\(\d*, \d*, \d*, 0\)/.test(waveColor) && // any transparent rgba color
         waveColor !== 'transparent'
       ) {
+        // Add nonce if CSP exist
+        if (this.csp && this.csp.nonce) {
+          styleForPesudo.nonce = this.csp.nonce;
+        }
         extraNode.style.borderColor = waveColor;
-
-        styleForPesudo.innerHTML = `[ant-click-animating-without-extra-node]:after { border-color: ${waveColor}; }`;
+        styleForPesudo.innerHTML = `
+        [ant-click-animating-without-extra-node='true']::after, .ant-click-animating-node {
+          --antd-wave-shadow-color: ${waveColor};
+        }`;
         if (!document.body.contains(styleForPesudo)) {
           document.body.appendChild(styleForPesudo);
         }
@@ -76,7 +83,28 @@ export default {
       TransitionEvents.addStartEventListener(node, this.onTransitionStart);
       TransitionEvents.addEndEventListener(node, this.onTransitionEnd);
     },
+    onTransitionStart(e) {
+      if (this.destroy) return;
 
+      const node = this.$el;
+      if (!e || e.target !== node) {
+        return;
+      }
+
+      if (!this.animationStart) {
+        this.resetEffect(node);
+      }
+    },
+    onTransitionEnd(e) {
+      if (!e || e.animationName !== 'fadeEffect') {
+        return;
+      }
+      this.resetEffect(e.target);
+    },
+    getAttributeName() {
+      const { insertExtraNode } = this.$props;
+      return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node';
+    },
     bindAnimationEvent(node) {
       if (
         !node ||
@@ -113,10 +141,6 @@ export default {
         },
       };
     },
-    getAttributeName() {
-      const { insertExtraNode } = this.$props;
-      return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node';
-    },
 
     resetEffect(node) {
       if (!node || node === this.extraNode || !(node instanceof Element)) {
@@ -124,40 +148,22 @@ export default {
       }
       const { insertExtraNode } = this.$props;
       const attributeName = this.getAttributeName();
-      node.removeAttribute(attributeName);
-      this.removeExtraStyleNode();
+      node.setAttribute(attributeName, 'false'); // edge has bug on `removeAttribute` #14466
+      if (styleForPesudo) {
+        styleForPesudo.innerHTML = '';
+      }
       if (insertExtraNode && this.extraNode && node.contains(this.extraNode)) {
         node.removeChild(this.extraNode);
       }
       TransitionEvents.removeStartEventListener(node, this.onTransitionStart);
       TransitionEvents.removeEndEventListener(node, this.onTransitionEnd);
     },
-    onTransitionStart(e) {
-      if (this.destroy) return;
-
-      const node = this.$el;
-      if (!e || e.target !== node) {
-        return;
-      }
-
-      if (!this.animationStart) {
-        this.resetEffect(node);
-      }
-    },
-    onTransitionEnd(e) {
-      if (!e || e.animationName !== 'fadeEffect') {
-        return;
-      }
-      this.resetEffect(e.target);
-    },
-    removeExtraStyleNode() {
-      if (styleForPesudo) {
-        styleForPesudo.innerHTML = '';
-      }
-    },
   },
 
   render() {
+    if (this.configProvider.csp) {
+      this.csp = this.configProvider.csp;
+    }
     return this.$slots.default && this.$slots.default[0];
   },
 };

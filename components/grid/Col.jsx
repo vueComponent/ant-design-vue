@@ -55,10 +55,11 @@ export default {
     let sizeClassObj = {};
     ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
       let sizeProps = {};
-      if (typeof this[size] === 'number') {
-        sizeProps.span = this[size];
-      } else if (typeof this[size] === 'object') {
-        sizeProps = this[size] || {};
+      const propSize = this[size];
+      if (typeof propSize === 'number') {
+        sizeProps.span = propSize;
+      } else if (typeof propSize === 'object') {
+        sizeProps = propSize || {};
       }
 
       sizeClassObj = {
@@ -72,6 +73,7 @@ export default {
       };
     });
     const classes = {
+      [`${prefixCls}`]: true,
       [`${prefixCls}-${span}`]: span !== undefined,
       [`${prefixCls}-order-${order}`]: order,
       [`${prefixCls}-offset-${offset}`]: offset,
@@ -86,10 +88,20 @@ export default {
     };
     if (rowContext) {
       const gutter = rowContext.getGutter();
-      if (gutter > 0) {
+      if (gutter) {
         divProps.style = {
-          paddingLeft: `${gutter / 2}px`,
-          paddingRight: `${gutter / 2}px`,
+          ...(gutter[0] > 0
+            ? {
+                paddingLeft: `${gutter[0] / 2}px`,
+                paddingRight: `${gutter[0] / 2}px`,
+              }
+            : {}),
+          ...(gutter[1] > 0
+            ? {
+                paddingTop: `${gutter[1] / 2}px`,
+                paddingBottom: `${gutter[1] / 2}px`,
+              }
+            : {}),
         };
       }
     }

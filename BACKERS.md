@@ -35,7 +35,7 @@
 
 <h2 align="center">支付宝/微信</h2>
 
-### 使用支付宝/微信的赞助的用户，如需要添加名单，赞助后可发 github 账号到邮箱(415800467@qq.com)
+### 使用支付宝/微信的赞助的用户，如需要添加名单，赞助后可发 github 账号到邮箱(antdv@foxmail.com)
 
 - [fastgoo](https://github.com/fastgoo)
 - [sendya](https://github.com/sendya)

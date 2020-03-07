@@ -2,25 +2,51 @@ import classNames from 'classnames';
 import TextArea from './TextArea';
 import omit from 'omit.js';
 import inputProps from './inputProps';
-import { hasProp, getComponentFromProp, getListeners } from '../_util/props-util';
+import { hasProp, getComponentFromProp, getListeners, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import ClearableLabeledInput from './ClearableLabeledInput';
 
 function noop() {}
 
-function fixControlledValue(value) {
+export function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
     return '';
   }
   return value;
 }
 
-function hasPrefixSuffix(instance) {
-  return !!(
-    getComponentFromProp(instance, 'prefix') ||
-    getComponentFromProp(instance, 'suffix') ||
-    instance.$props.allowClear
-  );
+export function resolveOnChange(target, e, onChange) {
+  if (onChange) {
+    let event = e;
+    if (e.type === 'click') {
+      // click clear icon
+      //event = Object.create(e);
+      Object.defineProperty(event, 'target', {
+        writable: true,
+      });
+      Object.defineProperty(event, 'currentTarget', {
+        writable: true,
+      });
+      event.target = target;
+      event.currentTarget = target;
+      const originalInputValue = target.value;
+      // change target ref value cause e.target.value should be '' when clear input
+      target.value = '';
+      onChange(event);
+      // reset target ref value
+      target.value = originalInputValue;
+      return;
+    }
+    onChange(event);
+  }
+}
+
+export function getInputClassName(prefixCls, size, disabled) {
+  return classNames(prefixCls, {
+    [`${prefixCls}-sm`]: size === 'small',
+    [`${prefixCls}-lg`]: size === 'large',
+    [`${prefixCls}-disabled`]: disabled,
+  });
 }
 
 export default {
@@ -37,9 +63,10 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    const { value = '', defaultValue = '' } = this.$props;
+    const props = this.$props;
+    const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     return {
-      stateValue: !hasProp(this, 'value') ? defaultValue : value,
+      stateValue: value,
     };
   },
   watch: {
@@ -52,16 +79,15 @@ export default {
       if (this.autoFocus) {
         this.focus();
       }
+      this.clearPasswordValueAttribute();
     });
   },
+  beforeDestroy() {
+    if (this.removePasswordTimeout) {
+      clearTimeout(this.removePasswordTimeout);
+    }
+  },
   methods: {
-    handleKeyDown(e) {
-      if (e.keyCode === 13) {
-        this.$emit('pressEnter', e);
-      }
-      this.$emit('keydown', e);
-    },
-
     focus() {
       this.$refs.input.focus();
     },
@@ -73,155 +99,30 @@ export default {
       this.$refs.input.select();
     },
 
-    getInputClassName(prefixCls) {
-      const { size, disabled } = this.$props;
-      return {
-        [`${prefixCls}`]: true,
-        [`${prefixCls}-sm`]: size === 'small',
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-disabled`]: disabled,
-      };
-    },
-
-    setValue(value, e) {
+    setValue(value, callback) {
       if (this.stateValue === value) {
         return;
       }
       if (!hasProp(this, 'value')) {
         this.stateValue = value;
+        this.$nextTick(() => {
+          callback && callback();
+        });
       } else {
         this.$forceUpdate();
       }
-      this.$emit('change.value', value);
-      let event = e;
-      if (e.type === 'click' && this.$refs.input) {
-        // click clear icon
-        event = { ...e };
-        event.target = this.$refs.input;
-        event.currentTarget = this.$refs.input;
-        const originalInputValue = this.$refs.input.value;
-        // change input value cause e.target.value should be '' when clear input
-        this.$refs.input.value = '';
-        this.$emit('change', event);
-        this.$emit('input', event);
-        // reset input value
-        this.$refs.input.value = originalInputValue;
-        return;
-      }
+    },
+    onChange(e) {
+      this.$emit('change.value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
-
     handleReset(e) {
-      this.setValue('', e);
-      this.$nextTick(() => {
+      this.setValue('', () => {
         this.focus();
       });
+      resolveOnChange(this.$refs.input, e, this.onChange);
     },
-
-    handleChange(e) {
-      const { value, composing } = e.target;
-      if (composing && this.lazy) return;
-      this.setValue(value, e);
-    },
-
-    renderClearIcon(prefixCls) {
-      const { allowClear, disabled } = this.$props;
-      const { stateValue } = this;
-      if (
-        !allowClear ||
-        disabled ||
-        stateValue === undefined ||
-        stateValue === null ||
-        stateValue === ''
-      ) {
-        return null;
-      }
-      return (
-        <Icon
-          type="close-circle"
-          theme="filled"
-          onClick={this.handleReset}
-          class={`${prefixCls}-clear-icon`}
-          role="button"
-        />
-      );
-    },
-
-    renderSuffix(prefixCls) {
-      const { allowClear } = this.$props;
-      let suffix = getComponentFromProp(this, 'suffix');
-      if (suffix || allowClear) {
-        return (
-          <span class={`${prefixCls}-suffix`} key="suffix">
-            {this.renderClearIcon(prefixCls)}
-            {suffix}
-          </span>
-        );
-      }
-      return null;
-    },
-
-    renderLabeledInput(prefixCls, children) {
-      const props = this.$props;
-      let addonAfter = getComponentFromProp(this, 'addonAfter');
-      let addonBefore = getComponentFromProp(this, 'addonBefore');
-      // Not wrap when there is not addons
-      if (!addonBefore && !addonAfter) {
-        return children;
-      }
-
-      const wrapperClassName = `${prefixCls}-group`;
-      const addonClassName = `${wrapperClassName}-addon`;
-      addonBefore = addonBefore ? <span class={addonClassName}>{addonBefore}</span> : null;
-
-      addonAfter = addonAfter ? <span class={addonClassName}>{addonAfter}</span> : null;
-
-      const mergedWrapperClassName = {
-        [`${prefixCls}-wrapper`]: true,
-        [wrapperClassName]: addonBefore || addonAfter,
-      };
-
-      const mergedGroupClassName = classNames(`${prefixCls}-group-wrapper`, {
-        [`${prefixCls}-group-wrapper-sm`]: props.size === 'small',
-        [`${prefixCls}-group-wrapper-lg`]: props.size === 'large',
-      });
-      return (
-        <span class={mergedGroupClassName}>
-          <span class={mergedWrapperClassName}>
-            {addonBefore}
-            {children}
-            {addonAfter}
-          </span>
-        </span>
-      );
-    },
-    renderLabeledIcon(prefixCls, children) {
-      const { size } = this.$props;
-      let suffix = this.renderSuffix(prefixCls);
-      if (!hasPrefixSuffix(this)) {
-        return children;
-      }
-      let prefix = getComponentFromProp(this, 'prefix');
-      prefix = prefix ? (
-        <span class={`${prefixCls}-prefix`} key="prefix">
-          {prefix}
-        </span>
-      ) : null;
-
-      const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
-        [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
-        [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
-      });
-      return (
-        <span class={affixWrapperCls} key="affix">
-          {prefix}
-          {children}
-          {suffix}
-        </span>
-      );
-    },
-
     renderInput(prefixCls) {
       const otherProps = omit(this.$props, [
         'prefixCls',
@@ -233,8 +134,10 @@ export default {
         'value',
         'defaultValue',
         'lazy',
+        'size',
+        'inputType',
       ]);
-      const { stateValue, getInputClassName, handleKeyDown, handleChange } = this;
+      const { stateValue, handleKeyDown, handleChange, size, disabled } = this;
       const inputProps = {
         directives: [{ name: 'ant-input' }],
         domProps: {
@@ -247,11 +150,35 @@ export default {
           input: handleChange,
           change: noop,
         },
-        class: getInputClassName(prefixCls),
+        class: getInputClassName(prefixCls, size, disabled),
         ref: 'input',
         key: 'ant-input',
       };
-      return this.renderLabeledIcon(prefixCls, <input {...inputProps} />);
+      return <input {...inputProps} />;
+    },
+    clearPasswordValueAttribute() {
+      // https://github.com/ant-design/ant-design/issues/20541
+      this.removePasswordTimeout = setTimeout(() => {
+        if (
+          this.$refs.input &&
+          this.$refs.input.getAttribute('type') === 'password' &&
+          this.$refs.input.hasAttribute('value')
+        ) {
+          this.$refs.input.removeAttribute('value');
+        }
+      });
+    },
+    handleChange(e) {
+      const { value, composing } = e.target;
+      if (composing && this.lazy) return;
+      this.setValue(value, this.clearPasswordValueAttribute);
+      resolveOnChange(this.$refs.input, e, this.onChange);
+    },
+    handleKeyDown(e) {
+      if (e.keyCode === 13) {
+        this.$emit('pressEnter', e);
+      }
+      this.$emit('keydown', e);
     },
   },
   render() {
@@ -265,17 +192,32 @@ export default {
           keydown: this.handleKeyDown,
           change: noop,
         },
-        directives: [
-          {
-            name: 'ant-input',
-          },
-        ],
       };
       return <TextArea {...textareaProps} ref="input" />;
     }
     const { prefixCls: customizePrefixCls } = this.$props;
+    const { stateValue } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    return this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
+    const addonAfter = getComponentFromProp(this, 'addonAfter');
+    const addonBefore = getComponentFromProp(this, 'addonBefore');
+    const suffix = getComponentFromProp(this, 'suffix');
+    const prefix = getComponentFromProp(this, 'prefix');
+    const props = {
+      props: {
+        ...getOptionProps(this),
+        prefixCls,
+        inputType: 'input',
+        value: fixControlledValue(stateValue),
+        element: this.renderInput(prefixCls),
+        handleReset: this.handleReset,
+        addonAfter,
+        addonBefore,
+        suffix,
+        prefix,
+      },
+      on: getListeners(this),
+    };
+    return <ClearableLabeledInput {...props} />;
   },
 };

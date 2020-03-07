@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Skeleton from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Skeleton', () => {
   const genSkeleton = props => {
@@ -16,7 +17,7 @@ describe('Skeleton', () => {
     };
     return mount(Skeleton, skeletonProps);
   };
-
+  mountTest(Skeleton);
   describe('avatar', () => {
     it('size', async () => {
       const wrapperSmall = genSkeleton({ avatar: { size: 'small' } });
@@ -34,6 +35,12 @@ describe('Skeleton', () => {
 
       await asyncExpect(() => {
         expect(wrapperLarge.html()).toMatchSnapshot();
+      });
+
+      const wrapperNumber = genSkeleton({ avatar: { size: 20 } });
+
+      await asyncExpect(() => {
+        expect(wrapperNumber.html()).toMatchSnapshot();
       });
     });
 

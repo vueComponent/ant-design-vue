@@ -12,7 +12,10 @@ function getNumberArray(num) {
         .toString()
         .split('')
         .reverse()
-        .map(i => Number(i))
+        .map(i => {
+          const current = Number(i);
+          return isNaN(current) ? i : current;
+        })
     : [];
 }
 
@@ -38,42 +41,38 @@ export default {
     };
   },
   watch: {
-    count(val) {
-      if (this.sCount !== val) {
-        this.lastCount = this.sCount;
-        // 复原数字初始位置
-        this.setState(
-          {
-            animateStarted: true,
-          },
-          () => {
-            // 等待数字位置复原完毕
-            // 开始设置完整的数字
-            setTimeout(() => {
-              this.setState(
-                {
-                  animateStarted: false,
-                  sCount: val,
-                },
-                () => {
-                  this.$emit('animated');
-                },
-              );
-            }, 5);
-          },
-        );
-      }
+    count() {
+      this.lastCount = this.sCount;
+      this.setState({
+        animateStarted: true,
+      });
     },
+  },
+  updated() {
+    const { animateStarted, count } = this;
+    if (animateStarted) {
+      this.setState(
+        {
+          animateStarted: false,
+          sCount: count,
+        },
+        this.onAnimated,
+      );
+    }
   },
   methods: {
     getPositionByNum(num, i) {
+      const { sCount } = this;
+      const currentCount = Math.abs(Number(sCount));
+      const lastCount = Math.abs(Number(this.lastCount));
+      const currentDigit = Math.abs(getNumberArray(sCount)[i]);
+      const lastDigit = Math.abs(getNumberArray(this.lastCount)[i]);
+
       if (this.animateStarted) {
         return 10 + num;
       }
-      const currentDigit = getNumberArray(this.sCount)[i];
-      const lastDigit = getNumberArray(this.lastCount)[i];
       // 同方向则在同一侧切换数字
-      if (this.sCount > this.lastCount) {
+      if (currentCount > lastCount) {
         if (currentDigit >= lastDigit) {
           return 10 + num;
         }
@@ -84,32 +83,47 @@ export default {
       }
       return num;
     },
-    renderNumberList(position) {
+    onAnimated() {
+      this.$emit('animated');
+    },
+
+    renderNumberList(position, className) {
       const childrenToReturn = [];
       for (let i = 0; i < 30; i++) {
-        const currentClassName = position === i ? 'current' : '';
         childrenToReturn.push(
-          <p key={i.toString()} class={currentClassName}>
+          <p
+            key={i.toString()}
+            class={classNames(className, {
+              current: position === i,
+            })}
+          >
             {i % 10}
           </p>,
         );
       }
+
       return childrenToReturn;
     },
-
     renderCurrentNumber(prefixCls, num, i) {
-      const position = this.getPositionByNum(num, i);
-      const removeTransition =
-        this.animateStarted || getNumberArray(this.lastCount)[i] === undefined;
-      const style = {
-        transition: removeTransition ? 'none' : undefined,
-        msTransform: `translateY(${-position * 100}%)`,
-        WebkitTransform: `translateY(${-position * 100}%)`,
-        transform: `translateY(${-position * 100}%)`,
-      };
+      if (typeof num === 'number') {
+        const position = this.getPositionByNum(num, i);
+        const removeTransition =
+          this.animateStarted || getNumberArray(this.lastCount)[i] === undefined;
+        const style = {
+          transition: removeTransition ? 'none' : undefined,
+          msTransform: `translateY(${-position * 100}%)`,
+          WebkitTransform: `translateY(${-position * 100}%)`,
+          transform: `translateY(${-position * 100}%)`,
+        };
+        return (
+          <span class={`${prefixCls}-only`} style={style} key={i}>
+            {this.renderNumberList(position, `${prefixCls}-only-unit`)}
+          </span>
+        );
+      }
       return (
-        <span class={`${prefixCls}-only`} style={style} key={i}>
-          {this.renderNumberList(position)}
+        <span key="symbol" class={`${prefixCls}-symbol`}>
+          {num}
         </span>
       );
     },

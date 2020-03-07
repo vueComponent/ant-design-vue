@@ -38,7 +38,10 @@ export default {
     blur() {
       this.$refs.input.blur();
     },
-    onChange() {
+    onVisibleChange() {
+      if (this.disabled) {
+        return;
+      }
       this.setState({
         visible: !this.visible,
       });
@@ -51,7 +54,7 @@ export default {
           type: this.visible ? 'eye' : 'eye-invisible',
         },
         on: {
-          [iconTrigger]: this.onChange,
+          [iconTrigger]: this.onVisibleChange,
           mousedown: e => {
             // Prevent focused state lost
             // https://github.com/ant-design/ant-design/issues/15173

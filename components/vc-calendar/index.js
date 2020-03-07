@@ -1,4 +1,4 @@
-// based on rc-calendar 9.10.10
+// based on rc-calendar 9.15.8
 import Vue from 'vue';
 import ref from 'vue-ref';
 import Calendar from './src/';

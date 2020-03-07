@@ -8,7 +8,6 @@ import KeyCode from '../../../_util/KeyCode';
 let cachedSelectionStart;
 let cachedSelectionEnd;
 let dateInputInstance;
-import { isIE, isIE9 } from '../../../_util/env';
 
 const DateInput = {
   mixins: [BaseMixin],
@@ -26,6 +25,7 @@ const DateInput = {
     // onSelect: PropTypes.func,
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.any,
+    inputMode: PropTypes.string,
   },
 
   data() {
@@ -141,13 +141,15 @@ const DateInput = {
         str: formatDate(prevProps.value, prevProps.format),
       }));
     },
-    onKeyDown({ keyCode }) {
+    onKeyDown(event) {
+      const { keyCode } = event;
       const { value, disabledDate } = this.$props;
       if (keyCode === KeyCode.ENTER) {
         const validateDate = !disabledDate || !disabledDate(value);
         if (validateDate) {
           this.__emit('select', value.clone());
         }
+        event.preventDefault();
       }
     },
     getRootDOMNode() {
@@ -164,7 +166,7 @@ const DateInput = {
   },
 
   render() {
-    const { invalid, str, locale, prefixCls, placeholder, disabled, showClear } = this;
+    const { invalid, str, locale, prefixCls, placeholder, disabled, showClear, inputMode } = this;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
@@ -190,6 +192,7 @@ const DateInput = {
             onKeydown={this.onKeyDown}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            inputMode={inputMode}
           />
         </div>
         {showClear ? (

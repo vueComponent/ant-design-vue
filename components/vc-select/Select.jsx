@@ -51,13 +51,18 @@ import {
   validateOptionValue,
 } from './util';
 import { SelectPropTypes } from './PropTypes';
-import contains from '../_util/Dom/contains';
+import contains from '../vc-util/Dom/contains';
 import { isIE, isEdge } from '../_util/env';
 
 Vue.use(ref, { name: 'ant-ref' });
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
 
 const noop = () => null;
+
+// Where el is the DOM element you'd like to test for visibility
+function isHidden(node) {
+  return !node || node.offsetParent === null;
+}
 
 function chaining(...fns) {
   return function(...args) {
@@ -87,8 +92,8 @@ const Select = {
     placeholder: SelectPropTypes.placeholder.def(''),
     // showArrow: SelectPropTypes.showArrow.def(true),
     dropdownMatchSelectWidth: PropTypes.bool.def(true),
-    dropdownStyle: SelectPropTypes.dropdownStyle.def({}),
-    dropdownMenuStyle: PropTypes.object.def({}),
+    dropdownStyle: SelectPropTypes.dropdownStyle.def(() => ({})),
+    dropdownMenuStyle: PropTypes.object.def(() => ({})),
     optionFilterProp: SelectPropTypes.optionFilterProp.def('value'),
     optionLabelProp: SelectPropTypes.optionLabelProp.def('value'),
     notFoundContent: PropTypes.any.def('Not Found'),
@@ -130,6 +135,13 @@ const Select = {
       this.__propsSymbol__,
       'Replace slots.default with props.children and pass props.__propsSymbol__',
     );
+    if (props.tags && typeof props.filterOption !== 'function') {
+      const isDisabledExist = Object.keys(optionsInfo).some(key => optionsInfo[key].disabled);
+      warning(
+        !isDisabledExist,
+        'Please avoid setting option to disabled in tags mode since user can always type text as tag.',
+      );
+    }
     const state = {
       _value: this.getValueFromProps(props, true), // true: use default value
       _inputValue: props.combobox
@@ -191,6 +203,7 @@ const Select = {
   beforeDestroy() {
     this.clearFocusTime();
     this.clearBlurTime();
+    this.clearComboboxTime();
     if (this.dropdownContainer) {
       document.body.removeChild(this.dropdownContainer);
       this.dropdownContainer = null;
@@ -326,7 +339,7 @@ const Select = {
         if (nextValue !== undefined) {
           this.fireChange(nextValue);
         }
-        this.setOpenState(false, true);
+        this.setOpenState(false, { needFocus: true });
         this.setInputValue('', false);
         return;
       }
@@ -378,14 +391,14 @@ const Select = {
     },
 
     onInputKeydown(event) {
-      const props = this.$props;
-      if (props.disabled) {
+      const { disabled, combobox, defaultActiveFirstOption } = this.$props;
+      if (disabled) {
         return;
       }
       const state = this.$data;
       const isRealOpen = this.getRealOpenState(state);
       const keyCode = event.keyCode;
-      if (isMultipleOrTags(props) && !event.target.value && keyCode === KeyCode.BACKSPACE) {
+      if (isMultipleOrTags(this.$props) && !event.target.value && keyCode === KeyCode.BACKSPACE) {
         event.preventDefault();
         const { _value: value } = state;
         if (value.length) {
@@ -406,6 +419,12 @@ const Select = {
         // https://github.com/ant-design/ant-design/issues/14544
         if (isRealOpen || !props.combobox) {
           event.preventDefault();
+        }
+        // Hard close popup to avoid lock of non option in combobox mode
+        if (isRealOpen && combobox && defaultActiveFirstOption === false) {
+          this.comboboxTimer = setTimeout(() => {
+            this.setOpenState(false);
+          });
         }
       } else if (keyCode === KeyCode.ESC) {
         if (state._open) {
@@ -433,12 +452,14 @@ const Select = {
       const props = this.$props;
       const selectedValue = getValuePropValue(item);
       const lastValue = value[value.length - 1];
-      this.fireSelect(selectedValue);
+      let skipTrigger = false;
+
       if (isMultipleOrTags(props)) {
         if (findIndexInValueBySingleValue(value, selectedValue) !== -1) {
-          return;
+          skipTrigger = true;
+        } else {
+          value = value.concat([selectedValue]);
         }
-        value = value.concat([selectedValue]);
       } else {
         if (
           !isCombobox(props) &&
@@ -446,30 +467,40 @@ const Select = {
           lastValue === selectedValue &&
           selectedValue !== this.$data._backfillValue
         ) {
-          this.setOpenState(false, true);
-          return;
+          this.setOpenState(false, { needFocus: true, fireSearch: false });
+          skipTrigger = true;
+        } else {
+          value = [selectedValue];
+          this.setOpenState(false, { needFocus: true, fireSearch: false });
         }
-        value = [selectedValue];
-        this.setOpenState(false, true);
       }
-      this.fireChange(value);
-      const inputValue = isCombobox(props) ? getPropValue(item, props.optionLabelProp) : '';
+      if (!skipTrigger) {
+        this.fireChange(value);
+      }
+      if (!skipTrigger) {
+        this.fireSelect(selectedValue);
+        const inputValue = isCombobox(props) ? getPropValue(item, props.optionLabelProp) : '';
 
-      if (props.autoClearSearchValue) {
-        this.setInputValue(inputValue, false);
+        if (props.autoClearSearchValue) {
+          this.setInputValue(inputValue, false);
+        }
       }
     },
 
     onMenuDeselect({ item, domEvent }) {
       if (domEvent.type === 'keydown' && domEvent.keyCode === KeyCode.ENTER) {
-        this.removeSelected(getValuePropValue(item));
+        const menuItemDomNode = item.$el;
+        // https://github.com/ant-design/ant-design/issues/20465#issuecomment-569033796
+        if (!isHidden(menuItemDomNode)) {
+          this.removeSelected(getValuePropValue(item));
+        }
         return;
       }
       if (domEvent.type === 'click') {
         this.removeSelected(getValuePropValue(item));
       }
       if (this.autoClearSearchValue) {
-        this.setInputValue('', false);
+        this.setInputValue('');
       }
     },
 
@@ -478,7 +509,7 @@ const Select = {
       e.preventDefault();
       this.clearBlurTime();
       if (!this.disabled) {
-        this.setOpenState(!this.$data._open, !this.$data._open);
+        this.setOpenState(!this.$data._open, { needFocus: !this.$data._open });
       }
     },
 
@@ -505,7 +536,7 @@ const Select = {
         if (value.length) {
           this.fireChange([]);
         }
-        this.setOpenState(false, true);
+        this.setOpenState(false, { needFocus: true });
         if (inputValue) {
           this.setInputValue('');
         }
@@ -527,9 +558,12 @@ const Select = {
       }
       let defaultLabel = value;
       if (this.$props.labelInValue) {
-        const label = getLabelFromPropsValue(this.$props.value, value);
-        if (label !== undefined) {
-          defaultLabel = label;
+        const valueLabel = getLabelFromPropsValue(this.$props.value, value);
+        const defaultValueLabel = getLabelFromPropsValue(this.$props.defaultValue, value);
+        if (valueLabel !== undefined) {
+          defaultLabel = valueLabel;
+        } else if (defaultValueLabel !== undefined) {
+          defaultLabel = defaultValueLabel;
         }
       }
       const defaultInfo = {
@@ -734,7 +768,18 @@ const Select = {
         return;
       }
       this.clearBlurTime();
-      if (!isMultipleOrTagsOrCombobox(this.$props) && e.target === this.getInputDOMNode()) {
+
+      // In IE11, onOuterFocus will be trigger twice when focus input
+      // First one: e.target is div
+      // Second one: e.target is input
+      // other browser only trigger second one
+      // https://github.com/ant-design/ant-design/issues/15942
+      // Here we ignore the first one when e.target is div
+      const inputNode = this.getInputDOMNode();
+      if (inputNode && e.target === this.rootRef) {
+        return;
+      }
+      if (!isMultipleOrTagsOrCombobox(this.$props) && e.target === inputNode) {
         return;
       }
       if (this._focused) {
@@ -837,8 +882,9 @@ const Select = {
       }
     },
 
-    setOpenState(open, needFocus) {
+    setOpenState(open, config = {}) {
       const { $props: props, $data: state } = this;
+      const { needFocus, fireSearch } = config;
       if (state._open === open) {
         this.maybeFocus(open, !!needFocus);
         return;
@@ -850,7 +896,7 @@ const Select = {
       };
       // clear search input value when open is false in singleMode.
       if (!open && isSingleMode(props) && props.showSearch) {
-        this.setInputValue('', false);
+        this.setInputValue('', fireSearch);
       }
       if (!open) {
         this.maybeFocus(open, !!needFocus);
@@ -1002,6 +1048,13 @@ const Select = {
       }
     },
 
+    clearComboboxTime() {
+      if (this.comboboxTimer) {
+        clearTimeout(this.comboboxTimer);
+        this.comboboxTimer = null;
+      }
+    },
+
     updateFocusClassName() {
       const { rootRef, prefixCls } = this;
       // avoid setState and its side effect
@@ -1130,30 +1183,18 @@ const Select = {
           options.push(menuItem);
           menuItems.push(menuItem);
         });
-        if (inputValue) {
-          const notFindInputItem = menuItems.every(option => {
-            // this.filterOption return true has two meaning,
-            // 1, some one exists after filtering
-            // 2, filterOption is set to false
-            // condition 2 does not mean the option has same value with inputValue
-            const filterFn = () => getValuePropValue(option) === inputValue;
-            if (filterOption !== false) {
-              return !this._filterOption(inputValue, option, filterFn);
-            }
-            return !filterFn();
-          });
-          if (notFindInputItem) {
-            const p = {
-              attrs: UNSELECTABLE_ATTRIBUTE,
-              key: inputValue,
-              props: {
-                value: inputValue,
-                role: 'option',
-              },
-              style: UNSELECTABLE_STYLE,
-            };
-            options.unshift(<MenuItem {...p}>{inputValue}</MenuItem>);
-          }
+        // ref: https://github.com/ant-design/ant-design/issues/14090
+        if (inputValue && menuItems.every(option => getValuePropValue(option) !== inputValue)) {
+          const p = {
+            attrs: UNSELECTABLE_ATTRIBUTE,
+            key: inputValue,
+            props: {
+              value: inputValue,
+              role: 'option',
+            },
+            style: UNSELECTABLE_STYLE,
+          };
+          options.unshift(<MenuItem {...p}>{inputValue}</MenuItem>);
         }
       }
 

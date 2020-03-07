@@ -49,7 +49,7 @@ const Comment = {
 
     const avatarDom = (
       <div class={`${prefixCls}-avatar`}>
-        {typeof avatar === 'string' ? <img src={avatar} /> : avatar}
+        {typeof avatar === 'string' ? <img src={avatar} alt="comment-avatar" /> : avatar}
       </div>
     );
 

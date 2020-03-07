@@ -73,6 +73,8 @@ import { default as message } from './message';
 
 import { default as Menu } from './menu';
 
+import { default as Mentions } from './mentions';
+
 import { default as Modal } from './modal';
 
 import { default as notification } from './notification';
@@ -137,6 +139,11 @@ import { default as ConfigProvider } from './config-provider';
 
 import { default as Empty } from './empty';
 
+import { default as Result } from './result';
+
+import { default as Descriptions } from './descriptions';
+import { default as PageHeader } from './page-header';
+
 const components = [
   Base,
   Affix,
@@ -166,6 +173,7 @@ const components = [
   List,
   LocaleProvider,
   Menu,
+  Mentions,
   Modal,
   Pagination,
   Popconfirm,
@@ -195,6 +203,9 @@ const components = [
   Comment,
   ConfigProvider,
   Empty,
+  Result,
+  Descriptions,
+  PageHeader,
 ];
 
 const install = function(Vue) {
@@ -250,6 +261,7 @@ export {
   List,
   LocaleProvider,
   Menu,
+  Mentions,
   Modal,
   Pagination,
   Popconfirm,
@@ -279,6 +291,9 @@ export {
   Comment,
   ConfigProvider,
   Empty,
+  Result,
+  Descriptions,
+  PageHeader,
 };
 
 export default {

@@ -7,6 +7,7 @@ import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
 import Base from '../base';
 import { ConfigConsumerProps } from '../config-provider';
+import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 
 // export interface SliderMarks {
 //   [key]: React.ReactNode | {
@@ -18,11 +19,12 @@ import { ConfigConsumerProps } from '../config-provider';
 //   style: PropTypes.object,
 //   label: PropTypes.any,
 // }).loose
-
+const tooltipProps = abstractTooltipProps();
 export const SliderProps = () => ({
   prefixCls: PropTypes.string,
   tooltipPrefixCls: PropTypes.string,
   range: PropTypes.bool,
+  reverse: PropTypes.bool,
   min: PropTypes.number,
   max: PropTypes.number,
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.any]),
@@ -35,6 +37,8 @@ export const SliderProps = () => ({
   vertical: PropTypes.bool,
   tipFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   tooltipVisible: PropTypes.bool,
+  tooltipPlacement: tooltipProps.placement,
+  getTooltipPopupContainer: PropTypes.func,
 });
 
 const Slider = {
@@ -67,8 +71,17 @@ const Slider = {
         },
       }));
     },
-    handleWithTooltip(tooltipPrefixCls, { value, dragging, index, directives, on, ...restProps }) {
-      const { tipFormatter, tooltipVisible } = this.$props;
+    handleWithTooltip(
+      tooltipPrefixCls,
+      prefixCls,
+      { value, dragging, index, directives, on, ...restProps },
+    ) {
+      const {
+        tipFormatter,
+        tooltipVisible,
+        tooltipPlacement,
+        getTooltipPopupContainer,
+      } = this.$props;
       const { visibles } = this;
       const isTipFormatter = tipFormatter ? visibles[index] || dragging : false;
       const visible = tooltipVisible || (tooltipVisible === undefined && isTipFormatter);
@@ -77,8 +90,10 @@ const Slider = {
           prefixCls: tooltipPrefixCls,
           title: tipFormatter ? tipFormatter(value) : '',
           visible,
-          placement: 'top',
-          transitionName: 'fade',
+          placement: tooltipPlacement || 'top',
+          transitionName: 'zoom-down',
+          overlayClassName: `${prefixCls}-tooltip`,
+          getPopupContainer: getTooltipPopupContainer || (() => document.body),
         },
         key: index,
       };
@@ -124,7 +139,7 @@ const Slider = {
           ...restProps,
           prefixCls,
           tooltipPrefixCls,
-          handle: info => this.handleWithTooltip(tooltipPrefixCls, info),
+          handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
         },
         ref: 'sliderRef',
         on: listeners,
@@ -136,7 +151,7 @@ const Slider = {
         ...restProps,
         prefixCls,
         tooltipPrefixCls,
-        handle: info => this.handleWithTooltip(tooltipPrefixCls, info),
+        handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
       },
       ref: 'sliderRef',
       on: listeners,

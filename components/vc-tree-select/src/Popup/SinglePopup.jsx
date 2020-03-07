@@ -17,12 +17,16 @@ const SinglePopup = {
   },
   created() {
     this.inputRef = createRef();
+    this.searchRef = createRef();
+    this.popupRef = createRef();
   },
   methods: {
     onPlaceholderClick() {
       this.inputRef.current.focus();
     },
-
+    getTree() {
+      return this.popupRef.current && this.popupRef.current.getTree();
+    },
     _renderPlaceholder() {
       const { searchPlaceholder, searchValue, prefixCls } = this.$props;
 
@@ -51,7 +55,17 @@ const SinglePopup = {
       }
 
       return (
-        <span class={`${dropdownPrefixCls}-search`}>
+        <span
+          class={`${dropdownPrefixCls}-search`}
+          {...{
+            directives: [
+              {
+                name: 'ant-ref',
+                value: this.searchRef,
+              },
+            ],
+          }}
+        >
           <SearchInput
             {...{
               props: { ...this.$props, renderPlaceholder: this._renderPlaceholder },
@@ -74,6 +88,12 @@ const SinglePopup = {
         {...{
           props: { ...this.$props, renderSearch: this._renderSearch, __propsSymbol__: Symbol() },
           on: getListeners(this),
+          directives: [
+            {
+              name: 'ant-ref',
+              value: this.popupRef,
+            },
+          ],
         }}
       />
     );

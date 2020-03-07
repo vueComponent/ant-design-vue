@@ -20,6 +20,7 @@ const Line = {
       strokeWidth,
       trailColor,
       trailWidth,
+      transition,
       ...restProps
     } = this.$props;
 
@@ -59,6 +60,7 @@ const Line = {
             strokeDasharray: `${ptg}px, 100px`,
             strokeDashoffset: `-${stackPtg}px`,
             transition:
+              transition ||
               'stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear',
           };
           const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];

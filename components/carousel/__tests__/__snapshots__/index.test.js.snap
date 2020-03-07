@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel should works for dotPosition bottom 1`] = `
+<div class="ant-carousel">
+  <div class="slick-slider slick-initialized">
+    <div class="slick-list">
+      <div class="slick-track" style="width: 100%; left: 0%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 100%;">
+          <div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Carousel should works for dotPosition left 1`] = `
+<div class="ant-carousel ant-carousel-vertical">
+  <div class="slick-slider slick-vertical slick-initialized">
+    <div class="slick-list">
+      <div class="slick-track" style="width: 100%; left: 0%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 100%;">
+          <div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Carousel should works for dotPosition right 1`] = `
+<div class="ant-carousel ant-carousel-vertical">
+  <div class="slick-slider slick-vertical slick-initialized">
+    <div class="slick-list">
+      <div class="slick-track" style="width: 100%; left: 0%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 100%;">
+          <div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Carousel should works for dotPosition top 1`] = `
+<div class="ant-carousel">
+  <div class="slick-slider slick-initialized">
+    <div class="slick-list">
+      <div class="slick-track" style="width: 100%; left: 0%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 100%;">
+          <div>
+            <div tabindex="-1" class="" style="width: 100%; display: inline-block;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

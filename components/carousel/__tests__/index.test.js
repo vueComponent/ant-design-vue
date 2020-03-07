@@ -1,14 +1,23 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Carousel from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Carousel', () => {
+  mountTest(Carousel);
+  // beforeEach(() => {
+  //   jest.useFakeTimers();
+  // });
+
+  // afterEach(() => {
+  //   jest.useRealTimers();
+  // });
   it('should has innerSlider', () => {
     const props = {
       slots: {
         default: '<div />',
       },
-      sync: true,
+      sync: false,
     };
     const wrapper = mount(Carousel, props);
     const { innerSlider, $refs } = wrapper.vm;
@@ -22,7 +31,7 @@ describe('Carousel', () => {
       slots: {
         default: '<div>1</div><div>2</div><div>3</div>',
       },
-      sync: true,
+      sync: false,
     };
     const wrapper = mount(Carousel, props);
     const { prev, next, goTo } = wrapper.vm;
@@ -56,14 +65,14 @@ describe('Carousel', () => {
       slots: {
         default: '<div>1</div><div>2</div><div>3</div>',
       },
-      sync: true,
+      sync: false,
     };
     const wrapper = mount(Carousel, props);
     const spy = jest.spyOn(wrapper.vm.$refs.slick.innerSlider, 'handleAutoPlay');
     window.resizeTo(1000);
-    expect(spy).not.toBeCalled();
+    expect(spy).not.toHaveBeenCalled();
     await new Promise(resolve => setTimeout(resolve, 1000));
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('cancel resize listener when unmount', async () => {
@@ -74,14 +83,48 @@ describe('Carousel', () => {
       slots: {
         default: '<div>1</div><div>2</div><div>3</div>',
       },
-      sync: true,
+      sync: false,
     };
     const wrapper = mount(Carousel, props);
     const { onWindowResized } = wrapper.vm;
     const spy = jest.spyOn(wrapper.vm.onWindowResized, 'cancel');
     const spy2 = jest.spyOn(window, 'removeEventListener');
     wrapper.destroy();
-    expect(spy).toBeCalled();
-    expect(spy2).toBeCalledWith('resize', onWindowResized);
+    expect(spy).toHaveBeenCalled();
+    expect(spy2).toHaveBeenCalledWith('resize', onWindowResized);
+  });
+
+  describe('should works for dotPosition', () => {
+    ['left', 'right', 'top', 'bottom'].forEach(dotPosition => {
+      it(dotPosition, () => {
+        const wrapper = mount({
+          render() {
+            return (
+              <Carousel dotPosition={dotPosition}>
+                <div />
+              </Carousel>
+            );
+          },
+        });
+        expect(wrapper.html()).toMatchSnapshot();
+      });
+    });
+  });
+
+  it('warning', () => {
+    const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mount({
+      render() {
+        return (
+          <Carousel vertical>
+            <div />
+          </Carousel>
+        );
+      },
+    });
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Warning: [antdv: Carousel] `vertical` is deprecated, please use `dotPosition` instead.',
+    );
+    warnSpy.mockRestore();
   });
 });

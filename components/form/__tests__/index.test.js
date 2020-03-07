@@ -1,7 +1,26 @@
 import { mount } from '@vue/test-utils';
 import Form from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('Form', () => {
+  mountTest(Form);
+  mountTest(Form.Item);
+
+  it('Form.Item should support data-*、aria-* and custom attribute', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Form>
+            <Form.Item data-text="123" aria-hidden="true" cccc="bbbb">
+              text
+            </Form.Item>
+          </Form>
+        );
+      },
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('hideRequiredMark', () => {
     const wrapper = mount(Form, {
       propsData: {

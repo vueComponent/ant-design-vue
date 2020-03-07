@@ -5,10 +5,10 @@
         <slot />
       </template>
       <template slot="description">
-        <div v-html="cnHtml" />
+        <div class="demo-description" v-html="cnHtml" />
       </template>
       <template slot="us-description">
-        <div v-html="usHtml" />
+        <div class="demo-description" v-html="usHtml" />
       </template>
       <template slot="code">
         <div v-html="codeHtml" />

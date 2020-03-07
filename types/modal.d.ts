@@ -179,6 +179,8 @@ export declare class Modal extends AntdComponent {
    */
   closable: boolean;
 
+  closeIcon: any;
+
   /**
    * Whether to apply loading visual effect for OK button or not
    * @default false

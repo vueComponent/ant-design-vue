@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
+
 // import { menuAllProps } from './util'
 
 const MenuItemGroup = {

@@ -39,6 +39,7 @@ export default {
         break;
       case 'small':
         sizeCls = 'sm';
+        break;
       default:
         break;
     }

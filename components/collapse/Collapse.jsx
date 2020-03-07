@@ -20,6 +20,7 @@ export default {
   props: initDefaultProps(collapseProps(), {
     bordered: true,
     openAnimation: animation,
+    expandIconPosition: 'left',
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -38,12 +39,13 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, bordered } = this;
+    const { prefixCls: customizePrefixCls, bordered, expandIconPosition } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
 
     const collapseClassName = {
       [`${prefixCls}-borderless`]: !bordered,
+      [`${prefixCls}-icon-position-${expandIconPosition}`]: true,
     };
     const rcCollapeProps = {
       props: {

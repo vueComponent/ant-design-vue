@@ -44,7 +44,19 @@ export default {
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
 
-      const sizeCls = sizeMap[size] || '';
+      // large => lg
+      // small => sm
+      let sizeCls = '';
+      switch (size) {
+        case 'large':
+          sizeCls = 'lg';
+          break;
+        case 'small':
+          sizeCls = 'sm';
+          break;
+        default:
+          break;
+      }
       const iconType = sLoading ? 'loading' : icon;
       const children = filterEmpty($slots.default);
       return {
@@ -95,7 +107,7 @@ export default {
       if (!node) {
         return;
       }
-      const buttonText = node.textContent || node.innerText;
+      const buttonText = node.textContent;
       if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
         if (!this.hasTwoCNChar) {
           this.hasTwoCNChar = true;
@@ -123,8 +135,8 @@ export default {
       return child;
     },
     isNeedInserted() {
-      const { icon, $slots } = this;
-      return $slots.default && $slots.default.length === 1 && !icon;
+      const { icon, $slots, type } = this;
+      return $slots.default && $slots.default.length === 1 && !icon && type !== 'link';
     },
   },
   render() {

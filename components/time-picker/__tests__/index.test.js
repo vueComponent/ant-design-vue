@@ -3,6 +3,7 @@ import VcTimePicker from '../../vc-time-picker/TimePicker';
 import TimePicker from '..';
 import moment from 'moment';
 import focusTest from '../../../tests/shared/focusTest';
+import mountTest from '../../../tests/shared/mountTest';
 
 describe('TimePicker', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -16,6 +17,7 @@ describe('TimePicker', () => {
   });
 
   focusTest(TimePicker);
+  mountTest(TimePicker);
 
   it('renders addon correctly', () => {
     const wrapper = mount({
@@ -39,7 +41,7 @@ describe('TimePicker', () => {
       },
     });
     expect(errorSpy).toBeCalledWith(
-      'Warning: `allowEmpty` in TimePicker is deprecated. Please use `allowClear` instead.',
+      'Warning: [antdv: TimePicker] `allowEmpty` is deprecated. Please use `allowClear` instead.',
     );
   });
   it('not render clean icon when allowClear is false', () => {

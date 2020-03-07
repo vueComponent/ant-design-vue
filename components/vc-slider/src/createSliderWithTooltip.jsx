@@ -13,7 +13,7 @@ export default function createSliderWithTooltip(Component) {
         return value;
       }),
       handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
-      tipProps: PropTypes.object.def({}),
+      tipProps: PropTypes.object.def(() => ({})),
     },
     data() {
       return {

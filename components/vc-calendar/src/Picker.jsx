@@ -19,11 +19,12 @@ function isMoment(value) {
 }
 const MomentType = PropTypes.custom(isMoment);
 const Picker = {
+  name: 'Picker',
   props: {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
-    format: PropTypes.string,
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     // onChange: PropTypes.func,
     // onOpenChange: PropTypes.func,
     children: PropTypes.func,
@@ -35,8 +36,9 @@ const Picker = {
     placement: PropTypes.any.def('bottomLeft'),
     value: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
     defaultValue: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
-    align: PropTypes.object.def({}),
+    align: PropTypes.object.def(() => ({})),
     dropdownClassName: PropTypes.string,
+    dateRender: PropTypes.func,
   },
   mixins: [BaseMixin],
 
@@ -122,6 +124,10 @@ const Picker = {
       this.closeCalendar(this.focus);
     },
 
+    onCalendarBlur() {
+      this.setOpen(false);
+    },
+
     onVisibleChange(open) {
       this.setOpen(open);
     },
@@ -143,6 +149,7 @@ const Picker = {
           ok: createChainedFunction(calendarEvents.ok, this.onCalendarOk),
           select: createChainedFunction(calendarEvents.select, this.onCalendarSelect),
           clear: createChainedFunction(calendarEvents.clear, this.onCalendarClear),
+          blur: createChainedFunction(calendarEvents.blur, this.onCalendarBlur),
         },
       };
 

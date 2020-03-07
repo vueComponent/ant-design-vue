@@ -13,6 +13,7 @@ export const TimeLineItemProps = {
   color: PropTypes.string,
   dot: PropTypes.any,
   pending: PropTypes.bool,
+  position: PropTypes.oneOf(['left', 'right', '']).def(''),
 };
 
 export default {
@@ -49,7 +50,7 @@ export default {
         <div class={`${prefixCls}-item-tail`} />
         <div
           class={dotClassName}
-          style={{ borderColor: /blue|red|green/.test(color) ? undefined : color }}
+          style={{ borderColor: /blue|red|green|gray/.test(color) ? undefined : color }}
         >
           {dot}
         </div>

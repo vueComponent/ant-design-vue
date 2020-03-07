@@ -24,7 +24,7 @@ Recurring pledges come with exclusive perks, e.g. having your name listed in the
 
 ## Corporate sponsorship
 
-You can consult me by email [415800467@qq.com](415800467@qq.com).
+You can consult me by email [antdv@foxmail.com](antdv@foxmail.com).
 
 ## Current sponsors
 

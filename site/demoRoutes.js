@@ -1,458 +1,488 @@
 export default [
   {
     path: 'avatar',
-    component: () => import('../components/avatar/demo/index.vue'),
+    component: () => import('../antdv-demo/avatar/demo/index.vue'),
   },
   {
     path: 'avatar-cn',
-    component: () => import('../components/avatar/demo/index.vue'),
+    component: () => import('../antdv-demo/avatar/demo/index.vue'),
   },
   {
     path: 'statistic',
-    component: () => import('../components/statistic/demo/index.vue'),
+    component: () => import('../antdv-demo/statistic/demo/index.vue'),
   },
   {
     path: 'statistic-cn',
-    component: () => import('../components/statistic/demo/index.vue'),
+    component: () => import('../antdv-demo/statistic/demo/index.vue'),
   },
   {
     path: 'badge',
-    component: () => import('../components/badge/demo/index.vue'),
+    component: () => import('../antdv-demo/badge/demo/index.vue'),
   },
   {
     path: 'badge-cn',
-    component: () => import('../components/badge/demo/index.vue'),
+    component: () => import('../antdv-demo/badge/demo/index.vue'),
   },
   {
     path: 'breadcrumb',
-    component: () => import('../components/breadcrumb/demo/index.vue'),
+    component: () => import('../antdv-demo/breadcrumb/demo/index.vue'),
   },
   {
     path: 'breadcrumb-cn',
-    component: () => import('../components/breadcrumb/demo/index.vue'),
+    component: () => import('../antdv-demo/breadcrumb/demo/index.vue'),
   },
   {
     path: 'button',
-    component: () => import('../components/button/demo/index.vue'),
+    component: () => import('../antdv-demo/button/demo/index.vue'),
   },
   {
     path: 'button-cn',
-    component: () => import('../components/button/demo/index.vue'),
+    component: () => import('../antdv-demo/button/demo/index.vue'),
   },
   {
     path: 'card',
-    component: () => import('../components/card/demo/index.vue'),
+    component: () => import('../antdv-demo/card/demo/index.vue'),
   },
   {
     path: 'card-cn',
-    component: () => import('../components/card/demo/index.vue'),
+    component: () => import('../antdv-demo/card/demo/index.vue'),
   },
   {
     path: 'checkbox',
-    component: () => import('../components/checkbox/demo/index.vue'),
+    component: () => import('../antdv-demo/checkbox/demo/index.vue'),
   },
   {
     path: 'checkbox-cn',
-    component: () => import('../components/checkbox/demo/index.vue'),
+    component: () => import('../antdv-demo/checkbox/demo/index.vue'),
   },
   {
     path: 'grid',
-    component: () => import('../components/grid/demo/index.vue'),
+    component: () => import('../antdv-demo/grid/demo/index.vue'),
   },
   {
     path: 'grid-cn',
-    component: () => import('../components/grid/demo/index.vue'),
+    component: () => import('../antdv-demo/grid/demo/index.vue'),
   },
   {
     path: 'icon',
-    component: () => import('../components/icon/demo/index.vue'),
+    component: () => import('../antdv-demo/icon/demo/index.vue'),
   },
   {
     path: 'icon-cn',
-    component: () => import('../components/icon/demo/index.vue'),
+    component: () => import('../antdv-demo/icon/demo/index.vue'),
   },
   {
     path: 'input',
-    component: () => import('../components/input/demo/index.vue'),
+    component: () => import('../antdv-demo/input/demo/index.vue'),
   },
   {
     path: 'input-cn',
-    component: () => import('../components/input/demo/index.vue'),
+    component: () => import('../antdv-demo/input/demo/index.vue'),
+  },
+  {
+    path: 'mentions-cn',
+    component: () => import('../antdv-demo/mentions/demo/index.vue'),
+  },
+  {
+    path: 'mentions-cn',
+    component: () => import('../antdv-demo/mentions/demo/index.vue'),
   },
   {
     path: 'select',
-    component: () => import('../components/select/demo/index.vue'),
+    component: () => import('../antdv-demo/select/demo/index.vue'),
   },
   {
     path: 'select-cn',
-    component: () => import('../components/select/demo/index.vue'),
+    component: () => import('../antdv-demo/select/demo/index.vue'),
   },
   {
     path: 'menu',
-    component: () => import('../components/menu/demo/index.vue'),
+    component: () => import('../antdv-demo/menu/demo/index.vue'),
   },
   {
     path: 'menu-cn',
-    component: () => import('../components/menu/demo/index.vue'),
+    component: () => import('../antdv-demo/menu/demo/index.vue'),
   },
   {
     path: 'pagination',
-    component: () => import('../components/pagination/demo/index.vue'),
+    component: () => import('../antdv-demo/pagination/demo/index.vue'),
   },
   {
     path: 'pagination-cn',
-    component: () => import('../components/pagination/demo/index.vue'),
+    component: () => import('../antdv-demo/pagination/demo/index.vue'),
   },
   {
     path: 'popconfirm',
-    component: () => import('../components/popconfirm/demo/index.vue'),
+    component: () => import('../antdv-demo/popconfirm/demo/index.vue'),
   },
   {
     path: 'popconfirm-cn',
-    component: () => import('../components/popconfirm/demo/index.vue'),
+    component: () => import('../antdv-demo/popconfirm/demo/index.vue'),
   },
   {
     path: 'popover',
-    component: () => import('../components/popover/demo/index.vue'),
+    component: () => import('../antdv-demo/popover/demo/index.vue'),
   },
   {
     path: 'popover-cn',
-    component: () => import('../components/popover/demo/index.vue'),
+    component: () => import('../antdv-demo/popover/demo/index.vue'),
   },
   {
     path: 'radio',
-    component: () => import('../components/radio/demo/index.vue'),
+    component: () => import('../antdv-demo/radio/demo/index.vue'),
   },
   {
     path: 'radio-cn',
-    component: () => import('../components/radio/demo/index.vue'),
+    component: () => import('../antdv-demo/radio/demo/index.vue'),
   },
   {
     path: 'rate',
-    component: () => import('../components/rate/demo/index.vue'),
+    component: () => import('../antdv-demo/rate/demo/index.vue'),
   },
   {
     path: 'rate-cn',
-    component: () => import('../components/rate/demo/index.vue'),
+    component: () => import('../antdv-demo/rate/demo/index.vue'),
   },
   {
     path: 'tabs',
-    component: () => import('../components/tabs/demo/index.vue'),
+    component: () => import('../antdv-demo/tabs/demo/index.vue'),
   },
   {
     path: 'tabs-cn',
-    component: () => import('../components/tabs/demo/index.vue'),
+    component: () => import('../antdv-demo/tabs/demo/index.vue'),
   },
   {
     path: 'tag',
-    component: () => import('../components/tag/demo/index.vue'),
+    component: () => import('../antdv-demo/tag/demo/index.vue'),
   },
   {
     path: 'tag-cn',
-    component: () => import('../components/tag/demo/index.vue'),
+    component: () => import('../antdv-demo/tag/demo/index.vue'),
   },
   {
     path: 'tooltip',
-    component: () => import('../components/tooltip/demo/index.vue'),
+    component: () => import('../antdv-demo/tooltip/demo/index.vue'),
   },
   {
     path: 'tooltip-cn',
-    component: () => import('../components/tooltip/demo/index.vue'),
+    component: () => import('../antdv-demo/tooltip/demo/index.vue'),
   },
   {
     path: 'dropdown',
-    component: () => import('../components/dropdown/demo/index.vue'),
+    component: () => import('../antdv-demo/dropdown/demo/index.vue'),
   },
   {
     path: 'dropdown-cn',
-    component: () => import('../components/dropdown/demo/index.vue'),
+    component: () => import('../antdv-demo/dropdown/demo/index.vue'),
   },
   {
     path: 'divider',
-    component: () => import('../components/divider/demo/index.vue'),
+    component: () => import('../antdv-demo/divider/demo/index.vue'),
   },
   {
     path: 'divider-cn',
-    component: () => import('../components/divider/demo/index.vue'),
+    component: () => import('../antdv-demo/divider/demo/index.vue'),
   },
   {
     path: 'collapse',
-    component: () => import('../components/collapse/demo/index.vue'),
+    component: () => import('../antdv-demo/collapse/demo/index.vue'),
   },
   {
     path: 'collapse-cn',
-    component: () => import('../components/collapse/demo/index.vue'),
+    component: () => import('../antdv-demo/collapse/demo/index.vue'),
   },
   {
     path: 'notification',
-    component: () => import('../components/notification/demo/index.vue'),
+    component: () => import('../antdv-demo/notification/demo/index.vue'),
   },
   {
     path: 'notification-cn',
-    component: () => import('../components/notification/demo/index.vue'),
+    component: () => import('../antdv-demo/notification/demo/index.vue'),
   },
   {
     path: 'message',
-    component: () => import('../components/message/demo/index.vue'),
+    component: () => import('../antdv-demo/message/demo/index.vue'),
   },
   {
     path: 'message-cn',
-    component: () => import('../components/message/demo/index.vue'),
+    component: () => import('../antdv-demo/message/demo/index.vue'),
   },
   {
     path: 'spin',
-    component: () => import('../components/spin/demo/index.vue'),
+    component: () => import('../antdv-demo/spin/demo/index.vue'),
   },
   {
     path: 'spin-cn',
-    component: () => import('../components/spin/demo/index.vue'),
+    component: () => import('../antdv-demo/spin/demo/index.vue'),
   },
   {
     path: 'switch',
-    component: () => import('../components/switch/demo/index.vue'),
+    component: () => import('../antdv-demo/switch/demo/index.vue'),
   },
   {
     path: 'switch-cn',
-    component: () => import('../components/switch/demo/index.vue'),
+    component: () => import('../antdv-demo/switch/demo/index.vue'),
   },
   {
     path: 'auto-complete',
-    component: () => import('../components/auto-complete/demo/index.vue'),
+    component: () => import('../antdv-demo/auto-complete/demo/index.vue'),
   },
   {
     path: 'auto-complete-cn',
-    component: () => import('../components/auto-complete/demo/index.vue'),
+    component: () => import('../antdv-demo/auto-complete/demo/index.vue'),
   },
   {
     path: 'affix',
-    component: () => import('../components/affix/demo/index.vue'),
+    component: () => import('../antdv-demo/affix/demo/index.vue'),
   },
   {
     path: 'affix-cn',
-    component: () => import('../components/affix/demo/index.vue'),
+    component: () => import('../antdv-demo/affix/demo/index.vue'),
   },
   {
     path: 'cascader',
-    component: () => import('../components/cascader/demo/index.vue'),
+    component: () => import('../antdv-demo/cascader/demo/index.vue'),
   },
   {
     path: 'cascader-cn',
-    component: () => import('../components/cascader/demo/index.vue'),
+    component: () => import('../antdv-demo/cascader/demo/index.vue'),
   },
   {
     path: 'back-top',
-    component: () => import('../components/back-top/demo/index.vue'),
+    component: () => import('../antdv-demo/back-top/demo/index.vue'),
   },
   {
     path: 'back-top-cn',
-    component: () => import('../components/back-top/demo/index.vue'),
+    component: () => import('../antdv-demo/back-top/demo/index.vue'),
   },
   {
     path: 'modal',
-    component: () => import('../components/modal/demo/index.vue'),
+    component: () => import('../antdv-demo/modal/demo/index.vue'),
   },
   {
     path: 'modal-cn',
-    component: () => import('../components/modal/demo/index.vue'),
+    component: () => import('../antdv-demo/modal/demo/index.vue'),
   },
   {
     path: 'alert',
-    component: () => import('../components/alert/demo/index.vue'),
+    component: () => import('../antdv-demo/alert/demo/index.vue'),
   },
   {
     path: 'alert-cn',
-    component: () => import('../components/alert/demo/index.vue'),
+    component: () => import('../antdv-demo/alert/demo/index.vue'),
   },
   {
     path: 'time-picker',
-    component: () => import('../components/time-picker/demo/index.vue'),
+    component: () => import('../antdv-demo/time-picker/demo/index.vue'),
   },
   {
     path: 'time-picker-cn',
-    component: () => import('../components/time-picker/demo/index.vue'),
+    component: () => import('../antdv-demo/time-picker/demo/index.vue'),
   },
   {
     path: 'steps',
-    component: () => import('../components/steps/demo/index.vue'),
+    component: () => import('../antdv-demo/steps/demo/index.vue'),
   },
   {
     path: 'steps-cn',
-    component: () => import('../components/steps/demo/index.vue'),
+    component: () => import('../antdv-demo/steps/demo/index.vue'),
   },
   {
     path: 'calendar',
-    component: () => import('../components/calendar/demo/index.vue'),
+    component: () => import('../antdv-demo/calendar/demo/index.vue'),
   },
   {
     path: 'calendar-cn',
-    component: () => import('../components/calendar/demo/index.vue'),
+    component: () => import('../antdv-demo/calendar/demo/index.vue'),
   },
   {
     path: 'date-picker',
-    component: () => import('../components/date-picker/demo/index.vue'),
+    component: () => import('../antdv-demo/date-picker/demo/index.vue'),
   },
   {
     path: 'date-picker-cn',
-    component: () => import('../components/date-picker/demo/index.vue'),
+    component: () => import('../antdv-demo/date-picker/demo/index.vue'),
   },
   {
     path: 'locale-provider',
-    component: () => import('../components/locale-provider/demo/index.vue'),
+    component: () => import('../antdv-demo/locale-provider/demo/index.vue'),
   },
   {
     path: 'locale-provider-cn',
-    component: () => import('../components/locale-provider/demo/index.vue'),
+    component: () => import('../antdv-demo/locale-provider/demo/index.vue'),
   },
   {
     path: 'slider',
-    component: () => import('../components/slider/demo/index.vue'),
+    component: () => import('../antdv-demo/slider/demo/index.vue'),
   },
   {
     path: 'slider-cn',
-    component: () => import('../components/slider/demo/index.vue'),
+    component: () => import('../antdv-demo/slider/demo/index.vue'),
   },
   {
     path: 'progress',
-    component: () => import('../components/progress/demo/index.vue'),
+    component: () => import('../antdv-demo/progress/demo/index.vue'),
   },
   {
     path: 'progress-cn',
-    component: () => import('../components/progress/demo/index.vue'),
+    component: () => import('../antdv-demo/progress/demo/index.vue'),
   },
   {
     path: 'timeline',
-    component: () => import('../components/timeline/demo/index.vue'),
+    component: () => import('../antdv-demo/timeline/demo/index.vue'),
   },
   {
     path: 'timeline-cn',
-    component: () => import('../components/timeline/demo/index.vue'),
+    component: () => import('../antdv-demo/timeline/demo/index.vue'),
   },
   {
     path: 'table',
-    component: () => import('../components/table/demo/index.vue'),
+    component: () => import('../antdv-demo/table/demo/index.vue'),
   },
   {
     path: 'table-cn',
-    component: () => import('../components/table/demo/index.vue'),
+    component: () => import('../antdv-demo/table/demo/index.vue'),
   },
   {
     path: 'input-number',
-    component: () => import('../components/input-number/demo/index.vue'),
+    component: () => import('../antdv-demo/input-number/demo/index.vue'),
   },
   {
     path: 'input-number-cn',
-    component: () => import('../components/input-number/demo/index.vue'),
+    component: () => import('../antdv-demo/input-number/demo/index.vue'),
   },
   {
     path: 'transfer',
-    component: () => import('../components/transfer/demo/index.vue'),
+    component: () => import('../antdv-demo/transfer/demo/index.vue'),
   },
   {
     path: 'transfer-cn',
-    component: () => import('../components/transfer/demo/index.vue'),
+    component: () => import('../antdv-demo/transfer/demo/index.vue'),
   },
   {
     path: 'upload',
-    component: () => import('../components/upload/demo/index.vue'),
+    component: () => import('../antdv-demo/upload/demo/index.vue'),
   },
   {
     path: 'upload-cn',
-    component: () => import('../components/upload/demo/index.vue'),
+    component: () => import('../antdv-demo/upload/demo/index.vue'),
   },
   {
     path: 'tree',
-    component: () => import('../components/tree/demo/index.vue'),
+    component: () => import('../antdv-demo/tree/demo/index.vue'),
   },
   {
     path: 'tree-cn',
-    component: () => import('../components/tree/demo/index.vue'),
+    component: () => import('../antdv-demo/tree/demo/index.vue'),
   },
   {
     path: 'tree-select',
-    component: () => import('../components/tree-select/demo/index.vue'),
+    component: () => import('../antdv-demo/tree-select/demo/index.vue'),
   },
   {
     path: 'tree-select-cn',
-    component: () => import('../components/tree-select/demo/index.vue'),
+    component: () => import('../antdv-demo/tree-select/demo/index.vue'),
   },
   {
     path: 'layout',
-    component: () => import('../components/layout/demo/index.vue'),
+    component: () => import('../antdv-demo/layout/demo/index.vue'),
   },
   {
     path: 'layout-cn',
-    component: () => import('../components/layout/demo/index.vue'),
+    component: () => import('../antdv-demo/layout/demo/index.vue'),
   },
   {
     path: 'form',
-    component: () => import('../components/form/demo/index.vue'),
+    component: () => import('../antdv-demo/form/demo/index.vue'),
   },
   {
     path: 'form-cn',
-    component: () => import('../components/form/demo/index.vue'),
+    component: () => import('../antdv-demo/form/demo/index.vue'),
   },
   {
     path: 'anchor',
-    component: () => import('../components/anchor/demo/index.vue'),
+    component: () => import('../antdv-demo/anchor/demo/index.vue'),
   },
   {
     path: 'anchor-cn',
-    component: () => import('../components/anchor/demo/index.vue'),
+    component: () => import('../antdv-demo/anchor/demo/index.vue'),
   },
   {
     path: 'list',
-    component: () => import('../components/list/demo/index.vue'),
+    component: () => import('../antdv-demo/list/demo/index.vue'),
   },
   {
     path: 'list-cn',
-    component: () => import('../components/list/demo/index.vue'),
+    component: () => import('../antdv-demo/list/demo/index.vue'),
   },
   {
     path: 'carousel',
-    component: () => import('../components/carousel/demo/index.vue'),
+    component: () => import('../antdv-demo/carousel/demo/index.vue'),
   },
   {
     path: 'carousel-cn',
-    component: () => import('../components/carousel/demo/index.vue'),
+    component: () => import('../antdv-demo/carousel/demo/index.vue'),
   },
   {
     path: 'drawer',
-    component: () => import('../components/drawer/demo/index.vue'),
+    component: () => import('../antdv-demo/drawer/demo/index.vue'),
   },
   {
     path: 'drawer-cn',
-    component: () => import('../components/drawer/demo/index.vue'),
+    component: () => import('../antdv-demo/drawer/demo/index.vue'),
   },
   {
     path: 'skeleton',
-    component: () => import('../components/skeleton/demo/index.vue'),
+    component: () => import('../antdv-demo/skeleton/demo/index.vue'),
   },
   {
     path: 'skeleton-cn',
-    component: () => import('../components/skeleton/demo/index.vue'),
+    component: () => import('../antdv-demo/skeleton/demo/index.vue'),
   },
   {
     path: 'comment',
-    component: () => import('../components/comment/demo/index.vue'),
+    component: () => import('../antdv-demo/comment/demo/index.vue'),
   },
   {
     path: 'comment-cn',
-    component: () => import('../components/comment/demo/index.vue'),
+    component: () => import('../antdv-demo/comment/demo/index.vue'),
   },
   {
     path: 'config-provider',
-    component: () => import('../components/config-provider/demo/index.vue'),
+    component: () => import('../antdv-demo/config-provider/demo/index.vue'),
   },
   {
     path: 'config-provider-cn',
-    component: () => import('../components/config-provider/demo/index.vue'),
+    component: () => import('../antdv-demo/config-provider/demo/index.vue'),
   },
   {
     path: 'empty',
-    component: () => import('../components/empty/demo/index.vue'),
+    component: () => import('../antdv-demo/empty/demo/index.vue'),
   },
   {
     path: 'empty-cn',
-    component: () => import('../components/empty/demo/index.vue'),
+    component: () => import('../antdv-demo/empty/demo/index.vue'),
+  },
+  {
+    path: 'result',
+    component: () => import('../antdv-demo/result/demo/index.vue'),
+  },
+  {
+    path: 'result-cn',
+    component: () => import('../antdv-demo/result/demo/index.vue'),
+  },
+  {
+    path: 'descriptions',
+    component: () => import('../antdv-demo/descriptions/demo/index.vue'),
+  },
+  {
+    path: 'descriptions-cn',
+    component: () => import('../antdv-demo/descriptions/demo/index.vue'),
+    path: 'page-header',
+    component: () => import('../antdv-demo/page-header/demo/index.vue'),
+  },
+  {
+    path: 'page-header-cn',
+    component: () => import('../antdv-demo/page-header/demo/index.vue'),
   },
 ];

@@ -8,7 +8,7 @@ Vue.use(antd);
 
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'md';
-  const files = glob.sync(`./components/${component}/demo/*.${suffix}`);
+  const files = glob.sync(`./antdv-demo/${component}/demo/*.${suffix}`);
 
   files.forEach(file => {
     let testMethod = options.skip === true ? test.skip : test;
@@ -17,10 +17,14 @@ export default function demoTest(component, options = {}) {
     }
     testMethod(`renders ${file} correctly`, done => {
       MockDate.set(moment('2016-11-22'));
-      const demo = require(`../.${file}`).default || require(`../.${file}`); // eslint-disable-line global-require, import/no-dynamic-require
+      const demo = require(`../.${file}`).default || require(`../.${file}`);
       const wrapper = mount(demo, { sync: false });
       Vue.nextTick(() => {
-        expect(wrapper.html()).toMatchSnapshot();
+        // should get dom from element
+        // snap files copy from antd does not need to change
+        // or just change a little
+        const dom = options.getDomFromElement ? wrapper.element : wrapper.html();
+        expect(dom).toMatchSnapshot();
         MockDate.reset();
         wrapper.destroy();
         done();

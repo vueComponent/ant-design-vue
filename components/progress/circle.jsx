@@ -44,14 +44,21 @@ const Circle = {
     const circleWidth = strokeWidth || 6;
     const gapPos = gapPosition || (type === 'dashboard' && 'bottom') || 'top';
     const gapDeg = gapDegree || (type === 'dashboard' && 75);
+    const strokeColor = getStrokeColor(props);
+    const isGradient = Object.prototype.toString.call(strokeColor) === '[object Object]';
+
+    const wrapperClassName = {
+      [`${prefixCls}-inner`]: true,
+      [`${prefixCls}-circle-gradient`]: isGradient,
+    };
 
     return (
-      <div class={`${prefixCls}-inner`} style={circleStyle}>
+      <div class={wrapperClassName} style={circleStyle}>
         <VCCircle
           percent={getPercentage(props)}
           strokeWidth={circleWidth}
           trailWidth={circleWidth}
-          strokeColor={getStrokeColor(props)}
+          strokeColor={strokeColor}
           strokeLinecap={strokeLinecap}
           trailColor={trailColor}
           prefixCls={prefixCls}

@@ -1,22 +1,4 @@
 export default {
-  // getDefaultProps () {
-  //   return {
-  //     locale: enUs,
-  //     visible: true,
-  //     prefixCls: 'rc-calendar',
-
-  //     renderFooter () {
-  //       return null
-  //     },
-  //     renderSidebar () {
-  //       return null
-  //     },
-  //   }
-  // },
-
-  // shouldComponentUpdate (nextProps) {
-  //   return this.props.visible || nextProps.visible
-  // },
   methods: {
     getFormat() {
       let { format } = this;

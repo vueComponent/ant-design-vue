@@ -24,7 +24,7 @@ ant-design-vue 是采用 MIT 许可的开源项目，使用完全免费。 但�
 
 ## 企业赞助
 
-您可以通过邮件咨询[415800467@qq.com](415800467@qq.com)。
+您可以通过邮件咨询[antdv@foxmail.com](antdv@foxmail.com)。
 
 ## 当前的赞助商
 

@@ -17,7 +17,7 @@ export default function demoTest(component, options = {}) {
     }
     testMethod(`renders ${file} correctly`, done => {
       MockDate.set(moment('2016-11-22'));
-      const demo = require(`../.${file}`).default || require(`../.${file}`); // eslint-disable-line global-require, import/no-dynamic-require
+      const demo = require(`../.${file}`).default || require(`../.${file}`);
       const wrapper = mount(demo, { sync: false });
       Vue.nextTick(() => {
         // should get dom from element

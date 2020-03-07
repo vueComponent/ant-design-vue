@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
+exports[`renders ./antdv-demo/transfer/demo/advanced.md correctly 1`] = `
 <div class="ant-transfer">
   <div class="ant-transfer-list ant-transfer-list-with-footer" style="width: 250px; height: 300px;">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>20 items</span><span class="ant-transfer-list-header-title"></span></span></div>
@@ -53,7 +53,7 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/transfer/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/transfer/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-transfer">
     <div class="ant-transfer-list">
@@ -99,7 +99,7 @@ exports[`renders ./components/transfer/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/transfer/demo/custom-item.md correctly 1`] = `
+exports[`renders ./antdv-demo/transfer/demo/custom-item.md correctly 1`] = `
 <div class="ant-transfer">
   <div class="ant-transfer-list" style="width: 300px; height: 300px;">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>20 items</span><span class="ant-transfer-list-header-title"></span></span></div>
@@ -155,7 +155,7 @@ exports[`renders ./components/transfer/demo/custom-item.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/transfer/demo/large-data.md correctly 1`] = `
+exports[`renders ./antdv-demo/transfer/demo/large-data.md correctly 1`] = `
 <div class="ant-transfer">
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>2000 items</span><span class="ant-transfer-list-header-title"></span></span></div>
@@ -2197,7 +2197,7 @@ exports[`renders ./components/transfer/demo/large-data.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
+exports[`renders ./antdv-demo/transfer/demo/search.md correctly 1`] = `
 <div class="ant-transfer">
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>20 items</span><span class="ant-transfer-list-header-title"></span></span></div>
@@ -2259,7 +2259,7 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/transfer/demo/table-transfer.md correctly 1`] = `
+exports[`renders ./antdv-demo/transfer/demo/table-transfer.md correctly 1`] = `
 <div>
   <div class="ant-transfer ant-transfer-customize-list" leftcolumns="[object Object],[object Object],[object Object]" rightcolumns="[object Object]">
     <div class="ant-transfer-list">

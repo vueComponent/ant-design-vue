@@ -47,7 +47,7 @@ import notification from '../components/notification';
 import '../components/modal/style';
 import '../components/message/style';
 import '../components/notification/style';
-import Test from '../components/{{name}}/demo/index.vue';
+import Test from '../antdv-demo/{{name}}/demo/index.vue';
 import zhCN from './theme/zh-CN';
 import enUS from './theme/en-US';
 import './index.less';
@@ -134,8 +134,8 @@ const renderTemplate = name => {
   };
 
   const demoPaths = fs
-    .readdirSync(path.join(__dirname, `../components/${name}/demo`))
-    .map(p => `../components/${name}/demo/${p}`);
+    .readdirSync(path.join(__dirname, `../antdv-demo/${name}/demo`))
+    .map(p => `../antdv-demo/${name}/demo/${p}`);
   const testPaths = fs
     .readdirSync(path.join(__dirname, `../components/test`))
     .map(p => `../components/test/${p}`);
@@ -196,7 +196,7 @@ chokidar.watch(configPath, { ignoreInitial: true }).on('change', async () => {
 
   demoWatcher && (await demoWatcher.close());
 
-  demoWatcher = chokidar.watch(path.join(__dirname, `../components/${componentName}/demo`));
+  demoWatcher = chokidar.watch(path.join(__dirname, `../antdv-demo/${componentName}/demo`));
   demoWatcher.on('change', () => {
     renderTemplate(componentName);
   });

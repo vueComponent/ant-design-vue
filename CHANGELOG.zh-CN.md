@@ -14,8 +14,6 @@
 
 `2020-03-06`
 
-### 组件功能和样式同步到 antd 3.26.12 版本。
-
 - 新增了四个组件：
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions-cn/) 新增提及组件并废弃原有 Mention 组件。
   - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) 成组展示多个只读字段。
@@ -465,9 +463,7 @@
 - 🎉 🎉 🎉 发布 vscode 插件 [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
 - 🎉 🎉 🎉 优化官网文档交互
 
-### 组件功能和样式同步到 antd 3.11.6 版本。
-
-1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
+  1.3.0 版本带来了两个新组件，还有很多激动人心的变化和新特性。
 
 - 🔥 增加了一个新组件 [Comment](https://www.antdv.com/components/comment-cn/)。
 - 🔥 增加了一个新组件 [ConfigProvider](https://www.antdv.com/components/config-provider-cn/) 为组件提供统一的全局化配置。

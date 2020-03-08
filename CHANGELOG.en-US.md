@@ -14,8 +14,6 @@
 
 `2020-03-06`
 
-### Component features and styles are synchronized to antd version 3.26.12.
-
 - Four new components have been added:
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions-cn/) Added mentioned components and discarded the original Mention components.
   - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) Display multiple read-only fields in groups.
@@ -462,9 +460,7 @@
 - 🎉 🎉 🎉 Publish the vscode plugin [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper)
 - 🎉 🎉 🎉 Optimize official website document interaction
 
-### Component features and styles are synchronized to antd version 3.11.6.
-
-1.3.0 brings two new Components, a lot of exciting changes and new features.
+  1.3.0 brings two new Components, a lot of exciting changes and new features.
 
 - 🔥 Added a new component [Comment](https://www.antdv.com/components/comment/)。
 - 🔥 dded a new component [ConfigProvider](https://www.antdv.com/components/config-provider/) for user to customize some global setting.

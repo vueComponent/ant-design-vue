@@ -5,7 +5,7 @@ git:
 node_js:
   - 12.4.0
 before_install:
-  - echo -e "[submodule "antdv-demo"]\n  path = antdv-demo\n  https://$GITHUB_TOKEN@github.com/tangjinzhou/antdv-demo.git" >~/.gitmodules
+  - echo -e "machine github.com\n  login Travis\n  password $GITHUB_TOKEN" > ~/.netrc
   - git submodule update --init --recursive
 before_script:
   - npm install vue vue-template-compiler

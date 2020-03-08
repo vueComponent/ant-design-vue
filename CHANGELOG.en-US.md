@@ -15,9 +15,9 @@
 `2020-03-06`
 
 - Four new components have been added:
-  - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions-cn/) Added mentioned components and discarded the original Mention components.
-  - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) Display multiple read-only fields in groups.
-  - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header-cn/) can be used to declare the topic of the page, display important information about the page that the user is concerned about, and carry the operation items related to the current page.
+  - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions/) Added mentioned components and discarded the original Mention components.
+  - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions/) Display multiple read-only fields in groups.
+  - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header/) can be used to declare the topic of the page, display important information about the page that the user is concerned about, and carry the operation items related to the current page.
   - 🔥🔥🔥 [Result](https://antdv.com/components/result) is used to feedback the processing results of a series of operation tasks.
 - 🔥 Descriptions supports vertical layout.
 - 🔥 Progress.Circle supports gradient colors.

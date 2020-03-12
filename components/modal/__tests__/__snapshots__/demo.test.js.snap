@@ -1,45 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/modal/demo/async.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/modal/demo/async.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Open Modal with async logic</span></button>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/modal/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/modal/demo/basic.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Open Modal</span></button>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/modal/demo/button-props.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/modal/demo/button-props.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Open Modal with customized button props</span></button>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/modal/demo/confirm.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Confirm</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>Delete</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>With extra props</span></button></div>`;
+exports[`renders ./antdv-demo/docs/modal/demo/confirm.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Confirm</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>Delete</span></button> <button type="button" class="ant-btn ant-btn-dashed"><span>With extra props</span></button></div>`;
 
-exports[`renders ./antdv-demo/modal/demo/confirm-promise.md correctly 1`] = `<button type="button" class="ant-btn"><span>Confirm</span></button>`;
+exports[`renders ./antdv-demo/docs/modal/demo/confirm-promise.md correctly 1`] = `<button type="button" class="ant-btn"><span>Confirm</span></button>`;
 
-exports[`renders ./antdv-demo/modal/demo/confirm-router.md correctly 1`] = `<button type="button" class="ant-btn"><span>Confirm</span></button>`;
+exports[`renders ./antdv-demo/docs/modal/demo/confirm-router.md correctly 1`] = `<button type="button" class="ant-btn"><span>Confirm</span></button>`;
 
-exports[`renders ./antdv-demo/modal/demo/footer.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/modal/demo/footer.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Open Modal with customized footer</span></button>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/modal/demo/info.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Info</span></button> <button type="button" class="ant-btn"><span>Success</span></button> <button type="button" class="ant-btn"><span>Error</span></button> <button type="button" class="ant-btn"><span>Warning</span></button></div>`;
+exports[`renders ./antdv-demo/docs/modal/demo/info.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Info</span></button> <button type="button" class="ant-btn"><span>Success</span></button> <button type="button" class="ant-btn"><span>Error</span></button> <button type="button" class="ant-btn"><span>Warning</span></button></div>`;
 
-exports[`renders ./antdv-demo/modal/demo/locale.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/modal/demo/locale.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Modal</span></button>
   <!----> <br> <br> <button type="button" class="ant-btn"><span>Confirm</span></button></div>
 `;
 
-exports[`renders ./antdv-demo/modal/demo/manual.md correctly 1`] = `<button type="button" class="ant-btn"><span>Open modal to close in 5s</span></button>`;
+exports[`renders ./antdv-demo/docs/modal/demo/manual.md correctly 1`] = `<button type="button" class="ant-btn"><span>Open modal to close in 5s</span></button>`;
 
-exports[`renders ./antdv-demo/modal/demo/position.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/modal/demo/position.md correctly 1`] = `
 <div id="components-modal-demo-position"><button type="button" class="ant-btn ant-btn-primary"><span>Display a modal dialog at 20px to Top</span></button>
   <!----> <br><br> <button type="button" class="ant-btn ant-btn-primary"><span>Vertically centered modal dialog</span></button>
   <!---->

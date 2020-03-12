@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/skeleton/demo/active.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/skeleton/demo/active.md correctly 1`] = `
 <div class="ant-skeleton ant-skeleton-active">
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 38%;"></h3>
@@ -13,7 +13,7 @@ exports[`renders ./antdv-demo/skeleton/demo/active.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/skeleton/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/skeleton/demo/basic.md correctly 1`] = `
 <div class="ant-skeleton">
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 38%;"></h3>
@@ -26,7 +26,7 @@ exports[`renders ./antdv-demo/skeleton/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/skeleton/demo/children.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/skeleton/demo/children.md correctly 1`] = `
 <div class="article">
   <div>
     <h4>Ant Design Vue, a design language</h4>
@@ -39,7 +39,7 @@ exports[`renders ./antdv-demo/skeleton/demo/children.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/skeleton/demo/complex.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/skeleton/demo/complex.md correctly 1`] = `
 <div class="ant-skeleton ant-skeleton-with-avatar">
   <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
   <div class="ant-skeleton-content">
@@ -54,7 +54,7 @@ exports[`renders ./antdv-demo/skeleton/demo/complex.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/skeleton/demo/list.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
 <div><button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button>
   <div class="ant-list ant-list-vertical ant-list-lg ant-list-split">
     <div class="ant-spin-nested-loading">

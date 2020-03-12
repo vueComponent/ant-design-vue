@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/divider/demo/customize-style.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/divider/demo/customize-style.md correctly 1`] = `
 <div>
   <div role="separator" class="ant-divider ant-divider-horizontal" style="height: 2px; background-color: rgb(124, 179, 5);"></div>
   <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-dashed" style="border-color: #7cb305;"></div>
@@ -9,7 +9,7 @@ exports[`renders ./antdv-demo/divider/demo/customize-style.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/divider/demo/horizontal.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/divider/demo/horizontal.md correctly 1`] = `
 <div>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
@@ -33,7 +33,7 @@ exports[`renders ./antdv-demo/divider/demo/horizontal.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/divider/demo/vertical.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/divider/demo/vertical.md correctly 1`] = `
 <div>
   Text
   <div role="separator" class="ant-divider ant-divider-vertical"></div> <a href="#">Link</a>
@@ -41,7 +41,7 @@ exports[`renders ./antdv-demo/divider/demo/vertical.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/divider/demo/with-text.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/divider/demo/with-text.md correctly 1`] = `
 <div>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista

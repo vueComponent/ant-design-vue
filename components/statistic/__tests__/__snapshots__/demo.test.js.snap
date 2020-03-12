@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/statistic/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/statistic/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-statistic" style="margin-right: 50px;">
     <div class="ant-statistic-title">Active Users</div>
@@ -13,7 +13,7 @@ exports[`renders ./antdv-demo/statistic/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/statistic/demo/card.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/statistic/demo/card.md correctly 1`] = `
 <div style="background: rgb(236, 236, 236); padding: 30px;">
   <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
     <div class="ant-col ant-col-12" style="padding-left: 8px; padding-right: 8px;">
@@ -40,7 +40,7 @@ exports[`renders ./antdv-demo/statistic/demo/card.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/statistic/demo/countdown.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/statistic/demo/countdown.md correctly 1`] = `
 <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
   <div class="ant-col ant-col-12" style="padding-left: 8px; padding-right: 8px;">
     <div class="ant-statistic" style="margin-right: 50px;">
@@ -63,7 +63,7 @@ exports[`renders ./antdv-demo/statistic/demo/countdown.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/statistic/demo/unit.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/statistic/demo/unit.md correctly 1`] = `
 <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
   <div class="ant-col ant-col-12" style="padding-left: 8px; padding-right: 8px;">
     <div class="ant-statistic" style="margin-right: 50px;">

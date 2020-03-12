@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/input-number/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/input-number/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-input-number">
     <div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><i aria-label="icon: up" class="ant-input-number-handler-up-inner anticon anticon-up"><svg viewBox="64 64 896 896" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></i></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><i aria-label="icon: down" class="ant-input-number-handler-down-inner anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span></div>
@@ -10,14 +10,14 @@ exports[`renders ./antdv-demo/input-number/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/input-number/demo/digit.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/input-number/demo/digit.md correctly 1`] = `
 <div class="ant-input-number">
   <div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><i aria-label="icon: up" class="ant-input-number-handler-up-inner anticon anticon-up"><svg viewBox="64 64 896 896" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></i></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><i aria-label="icon: down" class="ant-input-number-handler-down-inner anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span></div>
   <div class="ant-input-number-input-wrap"><input role="spinbutton" aria-valuemin="0" aria-valuemax="10" autocomplete="off" max="10" min="0" step="0.1" class="ant-input-number-input"></div>
 </div>
 `;
 
-exports[`renders ./antdv-demo/input-number/demo/disabled.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/input-number/demo/disabled.md correctly 1`] = `
 <div>
   <div class="ant-input-number ant-input-number-disabled">
     <div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value" aria-disabled="true"><i aria-label="icon: up" class="ant-input-number-handler-up-inner anticon anticon-up"><svg viewBox="64 64 896 896" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></i></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value" aria-disabled="true"><i aria-label="icon: down" class="ant-input-number-handler-down-inner anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span></div>
@@ -27,7 +27,7 @@ exports[`renders ./antdv-demo/input-number/demo/disabled.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/input-number/demo/formatter.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/input-number/demo/formatter.md correctly 1`] = `
 <div>
   <div class="ant-input-number">
     <div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><i aria-label="icon: up" class="ant-input-number-handler-up-inner anticon anticon-up"><svg viewBox="64 64 896 896" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></i></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><i aria-label="icon: down" class="ant-input-number-handler-down-inner anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span></div>
@@ -40,7 +40,7 @@ exports[`renders ./antdv-demo/input-number/demo/formatter.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/input-number/demo/size.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/input-number/demo/size.md correctly 1`] = `
 <div>
   <div class="ant-input-number ant-input-number-lg">
     <div class="ant-input-number-handler-wrap"><span class="ant-input-number-handler ant-input-number-handler-up " unselectable="unselectable" role="button" aria-label="Increase Value"><i aria-label="icon: up" class="ant-input-number-handler-up-inner anticon anticon-up"><svg viewBox="64 64 896 896" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></i></span><span class="ant-input-number-handler ant-input-number-handler-down " unselectable="unselectable" role="button" aria-label="Decrease Value"><i aria-label="icon: down" class="ant-input-number-handler-down-inner anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span></div>

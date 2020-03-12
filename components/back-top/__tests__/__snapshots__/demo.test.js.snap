@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/back-top/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/back-top/demo/basic.md correctly 1`] = `
 <div>
   <!---->
   Scroll down to see the bottom-right
@@ -9,7 +9,7 @@ exports[`renders ./antdv-demo/back-top/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/back-top/demo/custom.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/back-top/demo/custom.md correctly 1`] = `
 <div id="components-back-top-demo-custom">
   <!---->
   Scroll down to see the bottom-right

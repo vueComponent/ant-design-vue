@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/card/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-card ant-card-bordered" style="width: 300px;">
     <div class="ant-card-head">
@@ -31,7 +31,7 @@ exports[`renders ./antdv-demo/card/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/border-less.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/border-less.md correctly 1`] = `
 <div style="background: rgb(236, 236, 236); padding: 30px;">
   <div class="ant-card" style="width: 300px;">
     <div class="ant-card-head">
@@ -48,7 +48,7 @@ exports[`renders ./antdv-demo/card/demo/border-less.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/flexible-content.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/flexible-content.md correctly 1`] = `
 <div class="ant-card ant-card-bordered ant-card-hoverable" style="width: 240px;">
   <div class="ant-card-cover"><img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"></div>
   <div class="ant-card-body">
@@ -62,7 +62,7 @@ exports[`renders ./antdv-demo/card/demo/flexible-content.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/grid-card.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/grid-card.md correctly 1`] = `
 <div class="ant-card ant-card-bordered ant-card-contain-grid">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
@@ -82,7 +82,7 @@ exports[`renders ./antdv-demo/card/demo/grid-card.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/in-column.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/in-column.md correctly 1`] = `
 <div style="background-color: rgb(236, 236, 236); padding: 20px;">
   <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
     <div class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
@@ -125,7 +125,7 @@ exports[`renders ./antdv-demo/card/demo/in-column.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/inner.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/inner.md correctly 1`] = `
 <div class="ant-card ant-card-bordered">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
@@ -162,7 +162,7 @@ exports[`renders ./antdv-demo/card/demo/inner.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/loading.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/loading.md correctly 1`] = `
 <div>
   <div class="ant-card ant-card-loading ant-card-bordered">
     <div class="ant-card-head">
@@ -218,7 +218,7 @@ exports[`renders ./antdv-demo/card/demo/loading.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/meta.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/meta.md correctly 1`] = `
 <div class="ant-card ant-card-bordered ant-card-hoverable" style="width: 300px;">
   <div class="ant-card-cover"><img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"></div>
   <div class="ant-card-body">
@@ -238,7 +238,7 @@ exports[`renders ./antdv-demo/card/demo/meta.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/simple.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/simple.md correctly 1`] = `
 <div class="ant-card ant-card-bordered" style="width: 300px;">
   <div class="ant-card-body">
     <p>Card content</p>
@@ -248,7 +248,7 @@ exports[`renders ./antdv-demo/card/demo/simple.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/card/demo/tabs.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/card/demo/tabs.md correctly 1`] = `
 <div>
   <div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width: 100%;">
     <div class="ant-card-head">

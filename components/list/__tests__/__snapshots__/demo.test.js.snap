@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/list/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/basic.md correctly 1`] = `
 <div class="ant-list ant-list-split">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -47,7 +47,7 @@ exports[`renders ./antdv-demo/list/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/grid.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/grid.md correctly 1`] = `
 <div class="ant-list ant-list-split ant-list-grid">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -106,7 +106,7 @@ exports[`renders ./antdv-demo/list/demo/grid.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/infinite-load.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/infinite-load.md correctly 1`] = `
 <div infinite-scroll-distance="10" class="demo-infinite-container">
   <div class="ant-list ant-list-split">
     <div class="ant-spin-nested-loading">
@@ -131,7 +131,7 @@ exports[`renders ./antdv-demo/list/demo/infinite-load.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/infinite-virtualized-load.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/infinite-virtualized-load.md correctly 1`] = `
 <div class="ant-list ant-list-split">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -146,7 +146,7 @@ exports[`renders ./antdv-demo/list/demo/infinite-virtualized-load.md correctly 1
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/loadmore.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/loadmore.md correctly 1`] = `
 <div class="demo-loadmore-list ant-list ant-list-split ant-list-loading ant-list-something-after-last-item">
   <div class="ant-spin-nested-loading">
     <div>
@@ -160,7 +160,7 @@ exports[`renders ./antdv-demo/list/demo/loadmore.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/resposive.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
 <div class="ant-list ant-list-split ant-list-grid">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -243,7 +243,7 @@ exports[`renders ./antdv-demo/list/demo/resposive.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/simple.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/simple.md correctly 1`] = `
 <div>
   <h3 style="margin-bottom: 16px;">Default Size</h3>
   <div class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item">
@@ -308,7 +308,7 @@ exports[`renders ./antdv-demo/list/demo/simple.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/list/demo/vertical.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/list/demo/vertical.md correctly 1`] = `
 <div class="ant-list ant-list-vertical ant-list-lg ant-list-split ant-list-something-after-last-item">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">

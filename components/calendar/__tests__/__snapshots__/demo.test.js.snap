@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/calendar/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/calendar/demo/basic.md correctly 1`] = `
 <div class=" ant-fullcalendar-fullscreen">
   <div class="ant-fullcalendar-header">
     <div tabindex="0" class="ant-select ant-select-enabled ant-fullcalendar-year-select">
@@ -305,7 +305,7 @@ exports[`renders ./antdv-demo/calendar/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/calendar/demo/card.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/calendar/demo/card.md correctly 1`] = `
 <div style="width: 300px; border: 1px solid #d9d9d9; border-radius: 4px;">
   <div class="">
     <div class="ant-fullcalendar-header">
@@ -612,7 +612,7 @@ exports[`renders ./antdv-demo/calendar/demo/card.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/calendar/demo/notice-calendar.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/calendar/demo/notice-calendar.md correctly 1`] = `
 <div class=" ant-fullcalendar-fullscreen">
   <div class="ant-fullcalendar-header">
     <div tabindex="0" class="ant-select ant-select-enabled ant-fullcalendar-year-select">
@@ -1022,7 +1022,7 @@ exports[`renders ./antdv-demo/calendar/demo/notice-calendar.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/calendar/demo/select.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/calendar/demo/select.md correctly 1`] = `
 <div>
   <div data-show="true" class="ant-alert ant-alert-info ant-alert-no-icon"><span class="ant-alert-message">You selected date: 2017-01-25</span><span class="ant-alert-description"></span></div>
   <div style="display: inline-block; width: 500px; border: 1px solid #d9d9d9; border-radius: 4px;">

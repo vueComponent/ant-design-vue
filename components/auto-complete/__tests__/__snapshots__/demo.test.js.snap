@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/auto-complete/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/auto-complete/demo/basic.md correctly 1`] = `
 <div>
   <div tabindex="0" class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
@@ -27,7 +27,7 @@ exports[`renders ./antdv-demo/auto-complete/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/auto-complete/demo/certain-category.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/auto-complete/demo/certain-category.md correctly 1`] = `
 <div class="certain-category-search-wrapper" style="width: 250px;">
   <div tabindex="0" class="certain-category-search ant-select ant-select-combobox ant-select-enabled ant-select-lg ant-select-lg ant-select-show-search ant-select-auto-complete" style="width: 100%;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
@@ -43,7 +43,7 @@ exports[`renders ./antdv-demo/auto-complete/demo/certain-category.md correctly 1
 </div>
 `;
 
-exports[`renders ./antdv-demo/auto-complete/demo/custom.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/auto-complete/demo/custom.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -57,7 +57,7 @@ exports[`renders ./antdv-demo/auto-complete/demo/custom.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/auto-complete/demo/non-case-sensitive.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/auto-complete/demo/non-case-sensitive.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -71,7 +71,7 @@ exports[`renders ./antdv-demo/auto-complete/demo/non-case-sensitive.md correctly
 </div>
 `;
 
-exports[`renders ./antdv-demo/auto-complete/demo/options.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/auto-complete/demo/options.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-combobox ant-select-enabled ant-select-show-search ant-select-auto-complete" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -85,7 +85,7 @@ exports[`renders ./antdv-demo/auto-complete/demo/options.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/auto-complete/demo/uncertain-category.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/auto-complete/demo/uncertain-category.md correctly 1`] = `
 <div class="global-search-wrapper" style="width: 300px;">
   <div tabindex="0" class="global-search ant-select ant-select-combobox ant-select-enabled ant-select-lg ant-select-lg ant-select-show-search ant-select-auto-complete" style="width: 100%;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">

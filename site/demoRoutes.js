@@ -80,7 +80,7 @@ export default [
     component: () => import('../antdv-demo/input/demo/index.vue'),
   },
   {
-    path: 'mentions-cn',
+    path: 'mentions',
     component: () => import('../antdv-demo/mentions/demo/index.vue'),
   },
   {

@@ -1,5 +1,5 @@
 const path = require('path');
-const hljs = require('highlight.js');
+const Prism = require('prismjs');
 const Token = require('markdown-it/lib/token');
 const cheerio = require('cheerio');
 const WebpackBar = require('webpackbar');
@@ -43,12 +43,12 @@ const replaceDelimiters = function(str) {
  */
 
 const renderHighlight = function(str, lang) {
-  if (!(lang && hljs.getLanguage(lang))) {
+  if (!(lang && Prism.languages[lang])) {
     return '';
   }
 
   try {
-    return replaceDelimiters(hljs.highlight(lang, str, true).value);
+    return replaceDelimiters(Prism.highlight(str, Prism.languages[lang], lang));
   } catch (err) {}
 };
 

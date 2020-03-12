@@ -28,7 +28,6 @@ let { componentName } = require('./config').dev;
 const componentsInPrototype = ['Modal', 'message', 'notification'];
 
 const MAIN_TEMPLATE = `import 'babel-polyfill';
-import 'highlight.js/styles/solarized-light.css';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';

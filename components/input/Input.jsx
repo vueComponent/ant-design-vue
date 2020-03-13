@@ -161,6 +161,7 @@ export default {
       this.removePasswordTimeout = setTimeout(() => {
         if (
           this.$refs.input &&
+          this.$refs.input.getAttribute &&
           this.$refs.input.getAttribute('type') === 'password' &&
           this.$refs.input.hasAttribute('value')
         ) {

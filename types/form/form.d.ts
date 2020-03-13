@@ -298,6 +298,12 @@ export interface WrappedFormUtils {
 
 export interface IformCreateOption {
   /**
+   * Set prefix for the form fields id
+   * @type string
+   */
+  name?: string;
+
+  /**
    * Only supports the use of Form.create({})(CustomizedForm). declare props on form(like vue props)
    * @type object
    */

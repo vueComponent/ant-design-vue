@@ -1,16 +1,11 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { ColProps } from '../grid/Col';
-import Vue from 'vue';
 import isRegExp from 'lodash/isRegExp';
 import warning from '../_util/warning';
-import createDOMForm from '../vc-form/src/createDOMForm';
-import createFormField from '../vc-form/src/createFormField';
 import FormItem from './FormItem';
-import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import { initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
@@ -144,7 +139,7 @@ const Form = {
           if (message) {
             valid = false;
           }
-          invalidFields = objectAssign({}, invalidFields, field);
+          invalidFields = Object.assign({}, invalidFields, field);
           if (typeof callback === 'function' && ++count === this.fields.length) {
             callback(valid, invalidFields);
           }

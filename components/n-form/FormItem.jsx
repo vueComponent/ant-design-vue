@@ -1,10 +1,19 @@
 import AsyncValidator from 'async-validator';
+import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import { ColProps } from '../grid/Col';
-import { initDefaultProps, getComponentFromProp, getOptionProps } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getComponentFromProp,
+  getOptionProps,
+  getEvents,
+  filterEmpty,
+  isValidElement,
+} from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import FormItem from '../form/FormItem';
+import { cloneElement } from '../_util/vnode';
 
 function noop() {}
 
@@ -45,8 +54,9 @@ export const FormItemProps = {
   hasFeedback: PropTypes.bool,
   colon: PropTypes.bool,
   labelAlign: PropTypes.oneOf(['left', 'right']),
-  name: PropTypes.string,
-  rules: PropTypes.array,
+  prop: PropTypes.string,
+  rules: PropTypes.oneOfType([Array, Object]),
+  autoLink: PropTypes.bool,
   required: PropTypes.bool,
   validateStatus: PropTypes.oneOf(['', 'success', 'warning', 'error', 'validating']),
 };
@@ -57,6 +67,7 @@ export default {
   mixins: [BaseMixin],
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
+    autoLink: true,
   }),
   provide() {
     return {
@@ -88,6 +99,20 @@ export default {
       }
       return getPropByPath(model, path, true).v;
     },
+    isRequired() {
+      let rules = this.getRules();
+      let isRequired = false;
+      if (rules && rules.length) {
+        rules.every(rule => {
+          if (rule.required) {
+            isRequired = true;
+            return false;
+          }
+          return true;
+        });
+      }
+      return isRequired;
+    },
   },
   watch: {
     validateStatus(val) {
@@ -98,11 +123,7 @@ export default {
     if (this.prop) {
       const { addField } = this.FormContext;
       addField && addField(this);
-      let initialValue = this.fieldValue;
-      if (Array.isArray(initialValue)) {
-        initialValue = [...initialValue];
-      }
-      this.initialValue = initialValue;
+      this.initialValue = cloneDeep(this.fieldValue);
     }
   },
   beforeDestroy() {
@@ -113,7 +134,7 @@ export default {
     validate(trigger, callback = noop) {
       this.validateDisabled = false;
       const rules = this.getFilteredRule(trigger);
-      if ((!rules || rules.length === 0) && this.required === undefined) {
+      if (!rules || rules.length === 0) {
         callback();
         return true;
       }
@@ -138,12 +159,13 @@ export default {
       });
     },
     getRules() {
-      let formRules = this.FormContext.rules || {};
+      let formRules = this.FormContext.rules;
       const selfRules = this.rules;
-      const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
+      const requiredRule =
+        this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
       const prop = getPropByPath(formRules, this.prop || '');
       formRules = formRules ? prop.o[this.prop || ''] || prop.v : [];
-      return [...selfRules, ...formRules, ...requiredRule];
+      return [].concat(selfRules || formRules || []).concat(requiredRule);
     },
     getFilteredRule(trigger) {
       const rules = this.getRules();
@@ -196,7 +218,7 @@ export default {
     },
   },
   render() {
-    const { $slots } = this;
+    const { $slots, $scopedSlots } = this;
     const props = getOptionProps(this);
     const label = getComponentFromProp(this, 'label');
     const extra = getComponentFromProp(this, 'extra');
@@ -208,8 +230,31 @@ export default {
         extra,
         validateStatus: this.validateState,
         help: this.validateMessage || help,
+        required: this.isRequired || props.required,
       },
     };
-    return <FormItem {...formProps}>{$slots.default}</FormItem>;
+    const children = filterEmpty($scopedSlots.default ? $scopedSlots.default() : $slots.default);
+    let firstChildren = children[0];
+    if (this.prop && this.autoLink && isValidElement(firstChildren)) {
+      const originalEvents = getEvents(firstChildren);
+      firstChildren = cloneElement(firstChildren, {
+        on: {
+          blur: (...args) => {
+            originalEvents.blur && originalEvents.blur(...args);
+            this.onFieldBlur();
+          },
+          change: (...args) => {
+            originalEvents.change && originalEvents.change(...args);
+            this.onFieldChange();
+          },
+        },
+      });
+    }
+    return (
+      <FormItem {...formProps}>
+        {firstChildren}
+        {children.slice(1)}
+      </FormItem>
+    );
   },
 };

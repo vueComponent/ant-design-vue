@@ -12,7 +12,7 @@
 
 ## 1.5.0
 
-`2020-03-06`
+`2020-03-15`
 
 - Four new components have been added:
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions/) Added mentioned components and discarded the original Mention components.

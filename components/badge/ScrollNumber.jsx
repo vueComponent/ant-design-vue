@@ -51,16 +51,30 @@ export default {
   updated() {
     const { animateStarted, count } = this;
     if (animateStarted) {
-      this.setState(
-        {
-          animateStarted: false,
-          sCount: count,
-        },
-        this.onAnimated,
-      );
+      this.clearTimeout();
+      // Let browser has time to reset the scroller before actually
+      // performing the transition.
+      this.timeout = setTimeout(() => {
+        this.setState(
+          {
+            animateStarted: false,
+            sCount: count,
+          },
+          this.onAnimated,
+        );
+      });
     }
   },
+  beforeDestroy() {
+    this.clearTimeout();
+  },
   methods: {
+    clearTimeout() {
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+        this.timeout = undefined;
+      }
+    },
     getPositionByNum(num, i) {
       const { sCount } = this;
       const currentCount = Math.abs(Number(sCount));

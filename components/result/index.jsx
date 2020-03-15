@@ -33,7 +33,7 @@ export const ResultProps = {
 };
 
 const renderIcon = (h, prefixCls, { status, icon }) => {
-  if (ExceptionStatus.includes(status)) {
+  if (ExceptionStatus.includes(`${status}`)) {
     const SVGComponent = ExceptionMap[status];
     return (
       <div class={`${prefixCls}-icon ${prefixCls}-image`}>

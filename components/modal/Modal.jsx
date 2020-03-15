@@ -33,7 +33,7 @@ const getClickPosition = e => {
 
 // 只有点击事件支持从鼠标位置动画展开
 if (typeof window !== 'undefined' && window.document && window.document.documentElement) {
-  addEventListener(document.documentElement, 'click', getClickPosition);
+  addEventListener(document.documentElement, 'click', getClickPosition, true);
 }
 
 function noop() {}
@@ -113,10 +113,7 @@ export default {
   },
   watch: {
     visible(val) {
-      // 点击位置动画 getClickPosition 在 render 后执行，需要延迟触发render
-      setTimeout(() => {
-        this.sVisible = val;
-      });
+      this.sVisible = val;
     },
   },
   inject: {

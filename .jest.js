@@ -20,6 +20,7 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     'ant-design-vue$': '<rootDir>/components/index.js',
+    'ant-design-vue/es': '<rootDir>/components',
     '^vue$': 'vue/dist/vue.common.js',
   },
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],

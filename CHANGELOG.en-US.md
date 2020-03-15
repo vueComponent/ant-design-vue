@@ -551,8 +551,6 @@ Component Fixes / Enhancements:
 
 `2018-12-16`
 
-### Synchronize with antd 3.10.x
-
 - 🔥🔥🔥 replaced font icons with svg icons which bring benefits below:：
   - Complete offline usage of icon, no dependency of alipay cdn font icon file and no more empty square during downloading than no need to deploy icon font files locally either.
   - Much more display accuracy in lower-level screens.

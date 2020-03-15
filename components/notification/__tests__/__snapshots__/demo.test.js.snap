@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/notification/demo/basic.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+exports[`renders ./antdv-demo/docs/notification/demo/basic.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./antdv-demo/notification/demo/custom-icon.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+exports[`renders ./antdv-demo/docs/notification/demo/custom-icon.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./antdv-demo/notification/demo/custom-style.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+exports[`renders ./antdv-demo/docs/notification/demo/custom-style.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./antdv-demo/notification/demo/duration.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+exports[`renders ./antdv-demo/docs/notification/demo/duration.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./antdv-demo/notification/demo/placement.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/notification/demo/placement.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><i aria-label="icon: radius-upleft" class="anticon anticon-radius-upleft"><svg viewBox="64 64 896 896" data-icon="radius-upleft" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
         <path d="M656 200h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm58 624h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM192 650h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 174h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm696-696h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 174h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 174h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 174h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 174h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm-348 0h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm-174 0h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm174-696H358c-127 0-230 103-230 230v182c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V358c0-87.3 70.7-158 158-158h182c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z"></path>
       </svg></i><span>topLeft</span></button> <button type="button" class="ant-btn ant-btn-primary"><i aria-label="icon: radius-upright" class="anticon anticon-radius-upright"><svg viewBox="64 64 896 896" data-icon="radius-upright" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
@@ -22,8 +22,8 @@ exports[`renders ./antdv-demo/notification/demo/placement.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/notification/demo/update.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+exports[`renders ./antdv-demo/docs/notification/demo/update.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./antdv-demo/notification/demo/with-btn.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
+exports[`renders ./antdv-demo/docs/notification/demo/with-btn.md correctly 1`] = `<button type="button" class="ant-btn ant-btn-primary"><span>Open the notification box</span></button>`;
 
-exports[`renders ./antdv-demo/notification/demo/with-icon.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Success</span></button> <button type="button" class="ant-btn"><span>Info</span></button> <button type="button" class="ant-btn"><span>Warning</span></button> <button type="button" class="ant-btn"><span>Error</span></button></div>`;
+exports[`renders ./antdv-demo/docs/notification/demo/with-icon.md correctly 1`] = `<div><button type="button" class="ant-btn"><span>Success</span></button> <button type="button" class="ant-btn"><span>Info</span></button> <button type="button" class="ant-btn"><span>Warning</span></button> <button type="button" class="ant-btn"><span>Error</span></button></div>`;

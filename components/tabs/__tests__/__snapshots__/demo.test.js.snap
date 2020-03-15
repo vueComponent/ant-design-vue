@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/tabs/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line">
     <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar">
@@ -32,7 +32,7 @@ exports[`renders ./antdv-demo/tabs/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/card.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/card.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-no-animation">
   <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar ant-tabs-card-bar">
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"><i aria-label="icon: left" class="ant-tabs-tab-prev-icon-target anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></i></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"><i aria-label="icon: right" class="ant-tabs-tab-next-icon-target anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg></i></span></span>
@@ -62,7 +62,7 @@ exports[`renders ./antdv-demo/tabs/demo/card.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/card-top.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/card-top.md correctly 1`] = `
 <div class="card-container">
   <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-no-animation">
     <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar ant-tabs-card-bar">
@@ -98,7 +98,7 @@ exports[`renders ./antdv-demo/tabs/demo/card-top.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/custom-add-trigger.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/custom-add-trigger.md correctly 1`] = `
 <div>
   <div style="margin-bottom: 16px;"><button type="button" class="ant-btn"><span>ADD</span></button></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-editable-card ant-tabs-no-animation">
@@ -139,7 +139,7 @@ exports[`renders ./antdv-demo/tabs/demo/custom-add-trigger.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/custom-tab-bar.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/custom-tab-bar.md correctly 1`] = `
 <div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line">
     <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar" style="z-index: 1; background: rgb(255, 255, 255);">
@@ -171,7 +171,7 @@ exports[`renders ./antdv-demo/tabs/demo/custom-tab-bar.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/disabled.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/disabled.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-line">
   <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar">
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"><i aria-label="icon: left" class="ant-tabs-tab-prev-icon-target anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></i></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"><i aria-label="icon: right" class="ant-tabs-tab-next-icon-target anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg></i></span></span>
@@ -201,7 +201,7 @@ exports[`renders ./antdv-demo/tabs/demo/disabled.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/editable-card.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/editable-card.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-editable-card ant-tabs-no-animation">
   <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar ant-tabs-card-bar">
     <div class="ant-tabs-extra-content" style="float: right;"><span><i aria-label="icon: plus" tabindex="-1" class="ant-tabs-new-tab anticon anticon-plus"><svg viewBox="64 64 896 896" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></i></span></div>
@@ -244,7 +244,7 @@ exports[`renders ./antdv-demo/tabs/demo/editable-card.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/extra.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/extra.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-line">
   <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar">
     <div class="ant-tabs-extra-content" style="float: right;"><button type="button" class="ant-btn"><span>Extra Action</span></button></div>
@@ -275,7 +275,7 @@ exports[`renders ./antdv-demo/tabs/demo/extra.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/icon.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/icon.md correctly 1`] = `
 <div class="ant-tabs ant-tabs-top ant-tabs-line">
   <div role="tablist" tabindex="0" class="ant-tabs-bar ant-tabs-top-bar">
     <div class="ant-tabs-nav-container"><span unselectable="unselectable" class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-prev-icon"><i aria-label="icon: left" class="ant-tabs-tab-prev-icon-target anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></i></span></span><span unselectable="unselectable" class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"><span class="ant-tabs-tab-next-icon"><i aria-label="icon: right" class="ant-tabs-tab-next-icon-target anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg></i></span></span>
@@ -309,7 +309,7 @@ exports[`renders ./antdv-demo/tabs/demo/icon.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/nest.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/nest.md correctly 1`] = `
 <div>
   <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
@@ -421,7 +421,7 @@ exports[`renders ./antdv-demo/tabs/demo/nest.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/position.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/position.md correctly 1`] = `
 <div style="width: 500px;">
   <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin: 8px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>top</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottom"><span class="ant-radio-button-inner"></span></span><span>bottom</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>left</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="right"><span class="ant-radio-button-inner"></span></span><span>right</span></label></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line">
@@ -454,7 +454,7 @@ exports[`renders ./antdv-demo/tabs/demo/position.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/size.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/size.md correctly 1`] = `
 <div>
   <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 16px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-small ant-tabs-line">
@@ -487,7 +487,7 @@ exports[`renders ./antdv-demo/tabs/demo/size.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/tabs/demo/slide.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/tabs/demo/slide.md correctly 1`] = `
 <div style="width: 500px;">
   <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 8px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label></div>
   <div class="ant-tabs ant-tabs-top ant-tabs-line" style="height: 200px;">

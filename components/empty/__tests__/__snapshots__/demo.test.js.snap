@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/empty/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/empty/demo/basic.md correctly 1`] = `
 <div class="ant-empty">
   <div class="ant-empty-image"><svg width="184" height="152" viewBox="0 0 184 152" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fillRule="evenodd">
@@ -22,7 +22,7 @@ exports[`renders ./antdv-demo/empty/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/empty/demo/config-provider.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] = `
 <div><button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner">default</span></button>
   <div role="separator" class="ant-divider ant-divider-horizontal"></div>
   <div class="config-provider">
@@ -150,7 +150,7 @@ exports[`renders ./antdv-demo/empty/demo/config-provider.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/empty/demo/customize.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/empty/demo/customize.md correctly 1`] = `
 <div class="ant-empty">
   <div class="ant-empty-image" style="height: 60px;"><img alt="empty" src="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"></div>
   <p class="ant-empty-description"><span> Customize <a href="#API">Description</a></span></p>
@@ -158,7 +158,7 @@ exports[`renders ./antdv-demo/empty/demo/customize.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/empty/demo/description.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/empty/demo/description.md correctly 1`] = `
 <div class="ant-empty">
   <div class="ant-empty-image"><svg width="184" height="152" viewBox="0 0 184 152" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fillRule="evenodd">
@@ -179,7 +179,7 @@ exports[`renders ./antdv-demo/empty/demo/description.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/empty/demo/simple.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/empty/demo/simple.md correctly 1`] = `
 <div class="ant-empty ant-empty-normal">
   <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(0 1)" fill="none" fillRule="evenodd">

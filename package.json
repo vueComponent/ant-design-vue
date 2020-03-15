@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.5.0-alpha.1",
+    "version": "1.5.0-beta.2",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -29,8 +29,6 @@
         "dev": "node build/dev.js",
         "start": "cross-env PORT=3001 NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
         "test": "cross-env NODE_ENV=test jest --config .jest.js",
-        "site": "node scripts/run.js _site",
-        "copy": "node scripts/run.js copy-html",
         "compile": "node antd-tools/cli/run.js compile",
         "pub": "node antd-tools/cli/run.js pub",
         "pub-with-ci": "node antd-tools/cli/run.js pub-with-ci",

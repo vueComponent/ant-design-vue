@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/checkbox/demo/basic.md correctly 1`] = `<label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>Checkbox</span></label>`;
+exports[`renders ./antdv-demo/docs/checkbox/demo/basic.md correctly 1`] = `<label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>Checkbox</span></label>`;
 
-exports[`renders ./antdv-demo/checkbox/demo/check-all.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/checkbox/demo/check-all.md correctly 1`] = `
 <div>
   <div style="border-bottom: 1px solid #E9E9E9;"><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-indeterminate"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
       Check all
@@ -11,7 +11,7 @@ exports[`renders ./antdv-demo/checkbox/demo/check-all.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/checkbox/demo/controller.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/checkbox/demo/controller.md correctly 1`] = `
 <div>
   <p style="margin-bottom: 20px;"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
       Checked-Enabled
@@ -20,9 +20,9 @@ exports[`renders ./antdv-demo/checkbox/demo/controller.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/checkbox/demo/disabled.md correctly 1`] = `<div><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label> <br> <label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-checked ant-checkbox-disabled"><input type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></div>`;
+exports[`renders ./antdv-demo/docs/checkbox/demo/disabled.md correctly 1`] = `<div><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label> <br> <label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-checked ant-checkbox-disabled"><input type="checkbox" disabled="disabled" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></div>`;
 
-exports[`renders ./antdv-demo/checkbox/demo/group.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/checkbox/demo/group.md correctly 1`] = `
 <div>
   <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input name="checkboxgroup" type="checkbox" class="ant-checkbox-input" value="Apple"><span class="ant-checkbox-inner"></span></span><span>Apple</span></label><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input name="checkboxgroup" type="checkbox" class="ant-checkbox-input" value="Pear"><span class="ant-checkbox-inner"></span></span><span>Pear</span></label><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input name="checkboxgroup" type="checkbox" class="ant-checkbox-input" value="Orange"><span class="ant-checkbox-inner"></span></span><span>Orange</span></label></div> <br>
   <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value="Apple"><span class="ant-checkbox-inner"></span></span><span>Apple</span></label><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="Pear"><span class="ant-checkbox-inner"></span></span><span>Pear</span></label><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="Orange"><span class="ant-checkbox-inner"></span></span><span>Orange</span></label></div> <br>
@@ -31,7 +31,7 @@ exports[`renders ./antdv-demo/checkbox/demo/group.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/checkbox/demo/layout.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/checkbox/demo/layout.md correctly 1`] = `
 <div class="ant-checkbox-group">
   <div class="ant-row">
     <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="A"><span class="ant-checkbox-inner"></span></span><span>A</span></label></div>

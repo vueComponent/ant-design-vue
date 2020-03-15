@@ -14,11 +14,12 @@
 
 `2020-03-06`
 
-- 新增了四个组件：
+- 新增了五个组件：
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions-cn/) 新增提及组件并废弃原有 Mention 组件。
   - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) 成组展示多个只读字段。
   - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header-cn/) 可用于声明页面主题、展示用户所关注的页面重要信息，以及承载与当前页相关的操作项。
   - 🔥🔥🔥 [Result](https://antdv.com/components/result) 用于反馈一系列操作任务的处理结果。
+  - 🔥🔥🔥 [NewForm](https://antdv.com/components/n-form) 使用 v-model 进行自动校验的表单组件，相较于 v-decorator 形式的表单，更加简洁。
 - 🔥 Descriptions 支持垂直布局。
 - 🔥 Progress.Circle 支持渐变色。
 - 🔥 Progress.Line 支持渐变色。
@@ -552,8 +553,6 @@
 ## 1.2.0
 
 `2018-12-16`
-
-### 与 antd 3.10.x 同步
 
 - 🔥🔥🔥 使用了 svg 图标替换了原先的 font 图标，从而带来了以下优势：
   - 可以离线化使用，不需要从支付宝 cdn 下载字体文件，图标不会因为网络问题呈现方块，也无需字体文件本地部署。

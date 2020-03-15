@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/anchor/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/anchor/demo/basic.md correctly 1`] = `
 <div>
   <div class="">
     <div class="ant-anchor-wrapper" style="max-height: 100vh;">
@@ -19,7 +19,7 @@ exports[`renders ./antdv-demo/anchor/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/anchor/demo/customizeHighlight.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/anchor/demo/customizeHighlight.md correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -33,7 +33,7 @@ exports[`renders ./antdv-demo/anchor/demo/customizeHighlight.md correctly 1`] = 
 </div>
 `;
 
-exports[`renders ./antdv-demo/anchor/demo/onChange.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/anchor/demo/onChange.md correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -47,7 +47,7 @@ exports[`renders ./antdv-demo/anchor/demo/onChange.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/anchor/demo/onClick.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/anchor/demo/onClick.md correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -61,7 +61,7 @@ exports[`renders ./antdv-demo/anchor/demo/onClick.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/anchor/demo/static.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/anchor/demo/static.md correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -75,7 +75,7 @@ exports[`renders ./antdv-demo/anchor/demo/static.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/anchor/demo/targetOffset.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/anchor/demo/targetOffset.md correctly 1`] = `
 <div>
   <div class="">
     <div class="ant-anchor-wrapper" style="max-height: 100vh;">

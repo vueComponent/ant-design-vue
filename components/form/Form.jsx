@@ -151,7 +151,7 @@ const Form = {
   },
   provide() {
     return {
-      FormContextProps: this,
+      FormContext: this,
       // https://github.com/vueComponent/ant-design-vue/issues/446
       collectFormItemContext:
         this.form && this.form.templateContext

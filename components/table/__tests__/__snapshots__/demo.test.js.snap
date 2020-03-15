@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/table/demo/ajax.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/ajax.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading ant-table-without-pagination ant-table-spin-holder">
     <div class="ant-spin-container">
@@ -50,7 +50,7 @@ exports[`renders ./antdv-demo/table/demo/ajax.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/basic.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -132,7 +132,7 @@ exports[`renders ./antdv-demo/table/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/bordered.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/bordered.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -198,7 +198,7 @@ exports[`renders ./antdv-demo/table/demo/bordered.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/colspan-rowspan.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/colspan-rowspan.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -282,7 +282,7 @@ exports[`renders ./antdv-demo/table/demo/colspan-rowspan.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/custom-filter-panel.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/custom-filter-panel.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -353,7 +353,7 @@ exports[`renders ./antdv-demo/table/demo/custom-filter-panel.md correctly 1`] = 
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/edit-cell.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/edit-cell.md correctly 1`] = `
 <div><button type="button" class="editable-add-btn ant-btn"><span>Add</span></button>
   <div class="ant-table-wrapper">
     <div class="ant-spin-nested-loading">
@@ -431,7 +431,7 @@ exports[`renders ./antdv-demo/table/demo/edit-cell.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/edit-row.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/edit-row.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -629,7 +629,7 @@ exports[`renders ./antdv-demo/table/demo/edit-row.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/ellipsis.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/ellipsis.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -707,7 +707,7 @@ exports[`renders ./antdv-demo/table/demo/ellipsis.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/expand.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/expand.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -787,7 +787,7 @@ exports[`renders ./antdv-demo/table/demo/expand.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/expand-children.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/expand-children.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -856,7 +856,7 @@ exports[`renders ./antdv-demo/table/demo/expand-children.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/fixed-columns.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/fixed-columns.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -1006,7 +1006,7 @@ exports[`renders ./antdv-demo/table/demo/fixed-columns.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/fixed-columns-header.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/fixed-columns-header.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -1355,7 +1355,7 @@ exports[`renders ./antdv-demo/table/demo/fixed-columns-header.md correctly 1`] =
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/fixed-header.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/fixed-header.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -1661,7 +1661,7 @@ exports[`renders ./antdv-demo/table/demo/fixed-header.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/grouping-columns.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/grouping-columns.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -1971,7 +1971,7 @@ exports[`renders ./antdv-demo/table/demo/grouping-columns.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/head.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/head.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -2040,7 +2040,7 @@ exports[`renders ./antdv-demo/table/demo/head.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/nested-table.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/nested-table.md correctly 1`] = `
 <div class="components-table-demo-nested ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -2137,7 +2137,7 @@ exports[`renders ./antdv-demo/table/demo/nested-table.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/reset-filter.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/reset-filter.md correctly 1`] = `
 <div>
   <div class="table-operations"><button type="button" class="ant-btn"><span>Sort age</span></button> <button type="button" class="ant-btn"><span>Clear filters</span></button> <button type="button" class="ant-btn"><span>Clear filters and sorters</span></button></div>
   <div class="ant-table-wrapper">
@@ -2209,7 +2209,7 @@ exports[`renders ./antdv-demo/table/demo/reset-filter.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/row-selection.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/row-selection.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -2282,7 +2282,7 @@ exports[`renders ./antdv-demo/table/demo/row-selection.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/row-selection-and-operation.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/row-selection-and-operation.md correctly 1`] = `
 <div>
   <div style="margin-bottom: 16px;"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary"><span>Reload</span></button> <span style="margin-left: 8px;"><!----></span></div>
   <div class="ant-table-wrapper">
@@ -2398,7 +2398,7 @@ exports[`renders ./antdv-demo/table/demo/row-selection-and-operation.md correctl
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/row-selection-custom.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/row-selection-custom.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
@@ -2514,7 +2514,7 @@ exports[`renders ./antdv-demo/table/demo/row-selection-custom.md correctly 1`] =
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/size.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/size.md correctly 1`] = `
 <div id="components-table-demo-size">
   <h4>Middle size table</h4>
   <div class="ant-table-wrapper">
@@ -2635,7 +2635,7 @@ exports[`renders ./antdv-demo/table/demo/size.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/table/demo/template.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/table/demo/template.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">

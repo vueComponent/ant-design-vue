@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/progress/demo/circle.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/circle.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24;"><svg viewBox="0 0 100 100" class="ant-progress-circle">
@@ -35,7 +35,7 @@ exports[`renders ./antdv-demo/progress/demo/circle.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/circle-dynamic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/circle-dynamic.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24;"><svg viewBox="0 0 100 100" class="ant-progress-circle">
@@ -56,7 +56,7 @@ exports[`renders ./antdv-demo/progress/demo/circle-dynamic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/circle-mini.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/circle-mini.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div class="ant-progress-inner" style="width: 80px; height: 80px; font-size: 18;"><svg viewBox="0 0 100 100" class="ant-progress-circle">
@@ -91,7 +91,7 @@ exports[`renders ./antdv-demo/progress/demo/circle-mini.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/dashboard.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/dashboard.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24;"><svg viewBox="0 0 100 100" class="ant-progress-circle">
@@ -106,7 +106,7 @@ exports[`renders ./antdv-demo/progress/demo/dashboard.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/dynamic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/dynamic.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div>
@@ -126,7 +126,7 @@ exports[`renders ./antdv-demo/progress/demo/dynamic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/format.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/format.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24;"><svg viewBox="0 0 100 100" class="ant-progress-circle">
@@ -161,7 +161,7 @@ exports[`renders ./antdv-demo/progress/demo/format.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/gradient-line.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/gradient-line.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div>
@@ -216,7 +216,7 @@ exports[`renders ./antdv-demo/progress/demo/gradient-line.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/line.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/line.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div>
@@ -266,7 +266,7 @@ exports[`renders ./antdv-demo/progress/demo/line.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/line-mini.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/line-mini.md correctly 1`] = `
 <div style="width: 170px;">
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-small">
     <div>
@@ -307,7 +307,7 @@ exports[`renders ./antdv-demo/progress/demo/line-mini.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/linecap.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/linecap.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div>
@@ -341,7 +341,7 @@ exports[`renders ./antdv-demo/progress/demo/linecap.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/progress/demo/segment.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/progress/demo/segment.md correctly 1`] = `
 <div>
   <div class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/select/demo/automatic-tokenization.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/automatic-tokenization.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
@@ -14,7 +14,7 @@ exports[`renders ./antdv-demo/select/demo/automatic-tokenization.md correctly 1`
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/basic.md correctly 1`] = `
 <div>
   <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
@@ -40,7 +40,7 @@ exports[`renders ./antdv-demo/select/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/coordinate.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/coordinate.md correctly 1`] = `
 <div>
   <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
@@ -59,7 +59,7 @@ exports[`renders ./antdv-demo/select/demo/coordinate.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/custom-dropdown-menu.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/custom-dropdown-menu.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -69,7 +69,7 @@ exports[`renders ./antdv-demo/select/demo/custom-dropdown-menu.md correctly 1`] 
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/hide-selected.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/hide-selected.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
@@ -84,7 +84,7 @@ exports[`renders ./antdv-demo/select/demo/hide-selected.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/label-in-value.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/label-in-value.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -94,7 +94,7 @@ exports[`renders ./antdv-demo/select/demo/label-in-value.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/multiple.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/multiple.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
@@ -115,7 +115,7 @@ exports[`renders ./antdv-demo/select/demo/multiple.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/optgroup.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/optgroup.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -125,7 +125,7 @@ exports[`renders ./antdv-demo/select/demo/optgroup.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/option-label-prop.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/option-label-prop.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
@@ -143,7 +143,7 @@ exports[`renders ./antdv-demo/select/demo/option-label-prop.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/options.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/options.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -153,7 +153,7 @@ exports[`renders ./antdv-demo/select/demo/options.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/search.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/search.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -166,7 +166,7 @@ exports[`renders ./antdv-demo/select/demo/search.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/search-box.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/search-box.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled ant-select-no-arrow" style="width: 200px;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
     <div class="ant-select-selection__rendered">
@@ -179,7 +179,7 @@ exports[`renders ./antdv-demo/select/demo/search-box.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/select-users.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/select-users.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">
@@ -194,7 +194,7 @@ exports[`renders ./antdv-demo/select/demo/select-users.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/size.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/size.md correctly 1`] = `
 <div>
   <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div> <br><br>
   <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
@@ -253,7 +253,7 @@ exports[`renders ./antdv-demo/select/demo/size.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/suffix.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/suffix.md correctly 1`] = `
 <div>
   <div tabindex="0" class="ant-select ant-select-enabled" style="width: 120px;">
     <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
@@ -272,7 +272,7 @@ exports[`renders ./antdv-demo/select/demo/suffix.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/select/demo/tags.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/select/demo/tags.md correctly 1`] = `
 <div tabindex="0" class="ant-select ant-select-enabled" style="width: 100%;">
   <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--multiple">
     <div class="ant-select-selection__rendered">

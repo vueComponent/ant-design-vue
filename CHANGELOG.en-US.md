@@ -19,7 +19,7 @@
   - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions/) Display multiple read-only fields in groups.
   - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header/) can be used to declare the topic of the page, display important information about the page that the user is concerned about, and carry the operation items related to the current page.
   - 🔥🔥🔥 [Result](https://antdv.com/components/result) is used to feedback the processing results of a series of operation tasks.
-  - 🔥🔥🔥 [NewForm](https://antdv.com/components/n-form) Form components that use v-model for automatic validation are more concise than v-decorator forms.
+  - 🔥🔥🔥 [FormModel](https://antdv.com/components/form-model) Form components that use v-model for automatic validation are more concise than v-decorator forms.
 - 🔥 Descriptions supports vertical layout.
 - 🔥 Progress.Circle supports gradient colors.
 - 🔥 Progress.Line supports gradient colors.

@@ -19,7 +19,7 @@
   - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions-cn/) 成组展示多个只读字段。
   - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header-cn/) 可用于声明页面主题、展示用户所关注的页面重要信息，以及承载与当前页相关的操作项。
   - 🔥🔥🔥 [Result](https://antdv.com/components/result) 用于反馈一系列操作任务的处理结果。
-  - 🔥🔥🔥 [NewForm](https://antdv.com/components/n-form) 使用 v-model 进行自动校验的表单组件，相较于 v-decorator 形式的表单，更加简洁。
+  - 🔥🔥🔥 [FormModel](https://antdv.com/components/form-model) 使用 v-model 进行自动校验的表单组件，相较于 v-decorator 形式的表单，更加简洁。
 - 🔥 Descriptions 支持垂直布局。
 - 🔥 Progress.Circle 支持渐变色。
 - 🔥 Progress.Line 支持渐变色。

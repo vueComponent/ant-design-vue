@@ -46,7 +46,7 @@ export const ValidationRule = {
 };
 
 const Form = {
-  name: 'ANForm',
+  name: 'AFormModel',
   props: initDefaultProps(FormProps, {
     layout: 'horizontal',
     hideRequiredMark: false,
@@ -58,7 +58,7 @@ const Form = {
   },
   provide() {
     return {
-      FormContext: this,
+      FormModelContext: this,
     };
   },
   inject: {
@@ -96,7 +96,7 @@ const Form = {
     },
     resetFields() {
       if (!this.model) {
-        warning(false, 'NewForm', 'model is required for resetFields to work.');
+        warning(false, 'FormModel', 'model is required for resetFields to work.');
         return;
       }
       this.fields.forEach(field => {
@@ -115,7 +115,7 @@ const Form = {
     },
     validate(callback) {
       if (!this.model) {
-        warning(false, 'NewForm', 'model is required for resetFields to work.');
+        warning(false, 'FormModel', 'model is required for resetFields to work.');
         return;
       }
       let promise;
@@ -153,7 +153,7 @@ const Form = {
       props = [].concat(props);
       const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
       if (!fields.length) {
-        warning(false, 'NewForm', 'please pass correct props!');
+        warning(false, 'FormModel', 'please pass correct props!');
         return;
       }
       fields.forEach(field => {

@@ -1,3 +1,3 @@
 import demoTest from '../../../tests/shared/demoTest';
 
-demoTest('n-form');
+demoTest('form-model');

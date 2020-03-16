@@ -62,7 +62,7 @@ export const FormItemProps = {
 };
 
 export default {
-  name: 'ANFormItem',
+  name: 'AFormModelItem',
   __ANT_NEW_FORM_ITEM: true,
   mixins: [BaseMixin],
   props: initDefaultProps(FormItemProps, {
@@ -71,12 +71,12 @@ export default {
   }),
   provide() {
     return {
-      NewFormItemContext: this,
+      FormModelItemContext: this,
     };
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
-    FormContext: { default: () => ({}) },
+    FormModelContext: { default: () => ({}) },
   },
   data() {
     return {
@@ -89,7 +89,7 @@ export default {
 
   computed: {
     fieldValue() {
-      const model = this.FormContext.model;
+      const model = this.FormModelContext.model;
       if (!model || !this.prop) {
         return;
       }
@@ -121,13 +121,13 @@ export default {
   },
   mounted() {
     if (this.prop) {
-      const { addField } = this.FormContext;
+      const { addField } = this.FormModelContext;
       addField && addField(this);
       this.initialValue = cloneDeep(this.fieldValue);
     }
   },
   beforeDestroy() {
-    const { removeField } = this.FormContext;
+    const { removeField } = this.FormModelContext;
     removeField && removeField(this);
   },
   methods: {
@@ -153,13 +153,13 @@ export default {
         this.validateState = errors ? 'error' : 'success';
         this.validateMessage = errors ? errors[0].message : '';
         callback(this.validateMessage, invalidFields);
-        this.FormContext &&
-          this.FormContext.$emit &&
-          this.FormContext.$emit('validate', this.prop, !errors, this.validateMessage || null);
+        this.FormModelContext &&
+          this.FormModelContext.$emit &&
+          this.FormModelContext.$emit('validate', this.prop, !errors, this.validateMessage || null);
       });
     },
     getRules() {
-      let formRules = this.FormContext.rules;
+      let formRules = this.FormModelContext.rules;
       const selfRules = this.rules;
       const requiredRule =
         this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
@@ -198,7 +198,7 @@ export default {
     resetField() {
       this.validateState = '';
       this.validateMessage = '';
-      let model = this.FormContext.model || {};
+      let model = this.FormModelContext.model || {};
       let value = this.fieldValue;
       let path = this.prop;
       if (path.indexOf(':') !== -1) {

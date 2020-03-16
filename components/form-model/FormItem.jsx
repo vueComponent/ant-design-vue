@@ -69,14 +69,9 @@ export default {
     hasFeedback: false,
     autoLink: true,
   }),
-  provide() {
-    return {
-      FormModelItemContext: this,
-    };
-  },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
-    FormModelContext: { default: () => ({}) },
+    FormContext: { default: () => ({}) },
   },
   data() {
     return {
@@ -89,7 +84,7 @@ export default {
 
   computed: {
     fieldValue() {
-      const model = this.FormModelContext.model;
+      const model = this.FormContext.model;
       if (!model || !this.prop) {
         return;
       }
@@ -121,13 +116,13 @@ export default {
   },
   mounted() {
     if (this.prop) {
-      const { addField } = this.FormModelContext;
+      const { addField } = this.FormContext;
       addField && addField(this);
       this.initialValue = cloneDeep(this.fieldValue);
     }
   },
   beforeDestroy() {
-    const { removeField } = this.FormModelContext;
+    const { removeField } = this.FormContext;
     removeField && removeField(this);
   },
   methods: {
@@ -153,13 +148,13 @@ export default {
         this.validateState = errors ? 'error' : 'success';
         this.validateMessage = errors ? errors[0].message : '';
         callback(this.validateMessage, invalidFields);
-        this.FormModelContext &&
-          this.FormModelContext.$emit &&
-          this.FormModelContext.$emit('validate', this.prop, !errors, this.validateMessage || null);
+        this.FormContext &&
+          this.FormContext.$emit &&
+          this.FormContext.$emit('validate', this.prop, !errors, this.validateMessage || null);
       });
     },
     getRules() {
-      let formRules = this.FormModelContext.rules;
+      let formRules = this.FormContext.rules;
       const selfRules = this.rules;
       const requiredRule =
         this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
@@ -198,7 +193,7 @@ export default {
     resetField() {
       this.validateState = '';
       this.validateMessage = '';
-      let model = this.FormModelContext.model || {};
+      let model = this.FormContext.model || {};
       let value = this.fieldValue;
       let path = this.prop;
       if (path.indexOf(':') !== -1) {

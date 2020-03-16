@@ -58,7 +58,7 @@ const Form = {
   },
   provide() {
     return {
-      FormModelContext: this,
+      FormContext: this,
     };
   },
   inject: {

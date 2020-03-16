@@ -83,31 +83,36 @@ const TableRow = {
     }
   },
   methods: {
-    onRowClick(event) {
+    onRowClick(event, rowPropFunc = noop) {
       const { record, index } = this;
       this.__emit('rowClick', record, index, event);
+      rowPropFunc(event);
     },
 
-    onRowDoubleClick(event) {
+    onRowDoubleClick(event, rowPropFunc = noop) {
       const { record, index } = this;
       this.__emit('rowDoubleClick', record, index, event);
+      rowPropFunc(event);
     },
 
-    onContextMenu(event) {
+    onContextMenu(event, rowPropFunc = noop) {
       const { record, index } = this;
       this.__emit('rowContextmenu', record, index, event);
+      rowPropFunc(event);
     },
 
-    onMouseEnter(event) {
+    onMouseEnter(event, rowPropFunc = noop) {
       const { record, index, rowKey } = this;
       this.__emit('hover', true, rowKey);
       this.__emit('rowMouseenter', record, index, event);
+      rowPropFunc(event);
     },
 
-    onMouseLeave(event) {
+    onMouseLeave(event, rowPropFunc = noop) {
       const { record, index, rowKey } = this;
       this.__emit('hover', false, rowKey);
       this.__emit('rowMouseleave', record, index, event);
+      rowPropFunc(event);
     },
 
     setExpandedRowHeight() {
@@ -241,15 +246,26 @@ const TableRow = {
       customClassName,
       customClass,
     );
+    const rowPropEvents = rowProps.on || {};
     const bodyRowProps = mergeProps(
       { ...rowProps, style },
       {
         on: {
-          click: this.onRowClick,
-          dblclick: this.onRowDoubleClick,
-          mouseenter: this.onMouseEnter,
-          mouseleave: this.onMouseLeave,
-          contextmenu: this.onContextMenu,
+          click: e => {
+            this.onRowClick(e, rowPropEvents.click);
+          },
+          dblclick: e => {
+            this.onRowDoubleClick(e, rowPropEvents.dblclick);
+          },
+          mouseenter: e => {
+            this.onMouseEnter(e, rowPropEvents.mouseenter);
+          },
+          mouseleave: e => {
+            this.onMouseLeave(e, rowPropEvents.mouseleave);
+          },
+          contextmenu: e => {
+            this.onContextMenu(e, rowPropEvents.contextmenu);
+          },
         },
         class: rowClassName,
       },

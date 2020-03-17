@@ -416,7 +416,7 @@ const TreeNode = {
     // Icon + Title
     renderSelector(h) {
       const { selected, loading, dragNodeHighlight } = this;
-      const icon = getComponentFromProp(this, 'icon');
+      const icon = getComponentFromProp(this, 'icon', {}, false);
       const {
         vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData },
       } = this;

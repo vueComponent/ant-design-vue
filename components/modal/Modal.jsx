@@ -199,7 +199,7 @@ export default {
         wrapClassName: classNames({ [`${prefixCls}-centered`]: !!centered }, wrapClassName),
         title,
         footer: footer === undefined ? defaultFooter : footer,
-        visible: visible,
+        visible,
         mousePosition,
         closeIcon: closeIconToRender,
       },

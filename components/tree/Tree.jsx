@@ -7,7 +7,6 @@ import {
   getOptionProps,
   filterEmpty,
   getComponentFromProp,
-  getClass,
   getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';

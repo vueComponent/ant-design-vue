@@ -3,15 +3,6 @@ import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import ResponsiveObserve from '../_util/responsiveObserve';
 
-const BreakpointMap = PropTypes.shape({
-  xs: PropTypes.number,
-  sm: PropTypes.number,
-  md: PropTypes.number,
-  lg: PropTypes.number,
-  xl: PropTypes.number,
-  xxl: PropTypes.number,
-}).loose;
-
 const RowProps = {
   gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
   type: PropTypes.oneOf(['flex']),

@@ -69,7 +69,7 @@ describe('SelectionBox', () => {
     const store = getDefaultStore();
     const wrapper = mount(SelectionBox, {
       propsData: {
-        store: store,
+        store,
         rowIndex: '1',
         disabled: false,
         defaultSelection: [],

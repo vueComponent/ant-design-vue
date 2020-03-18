@@ -107,7 +107,7 @@ describe('Table', () => {
         dataIndex: 'age',
         key: 'age',
         align: 'center',
-        customCell: (record, rowIndex) => {
+        customCell: () => {
           return {
             style: {
               color: 'red',

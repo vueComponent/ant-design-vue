@@ -72,7 +72,7 @@ export default {
           class={cls}
           key={key}
           style={style}
-          {...{ directives: directives }}
+          {...{ directives }}
         >
           {tab}
         </div>

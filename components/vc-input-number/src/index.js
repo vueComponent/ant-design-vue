@@ -3,7 +3,6 @@ import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, hasProp, getOptionProps, getListeners } from '../../_util/props-util';
 import classNames from 'classnames';
-import isNegativeZero from 'is-negative-zero';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
 

@@ -133,7 +133,7 @@ const Form = {
     colon: true,
   }),
   Item: FormItem,
-  createFormField: createFormField,
+  createFormField,
   create: (options = {}) => {
     return createDOMForm({
       fieldNameProp: 'id',
@@ -246,7 +246,7 @@ const Form = {
           data() {
             return {
               children: $slots.default,
-              formClassName: formClassName,
+              formClassName,
               submit: onSubmit,
             };
           },

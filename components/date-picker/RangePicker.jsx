@@ -14,11 +14,9 @@ import {
   initDefaultProps,
   mergeProps,
   getComponentFromProp,
-  isValidElement,
   getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { cloneElement } from '../_util/vnode';
 import { formatDate } from './utils';
 import InputIcon from './InputIcon';
 
@@ -221,7 +219,7 @@ export default {
       this.$refs.picker.blur();
     },
 
-    renderFooter(...args) {
+    renderFooter() {
       const { ranges, $scopedSlots, $slots } = this;
       const { _prefixCls: prefixCls, _tagPrefixCls: tagPrefixCls } = this;
       const renderExtraFooter =
@@ -341,22 +339,22 @@ export default {
     const rangeCalendarProps = mergeProps(calendarProps, {
       props: {
         separator,
-        format: format,
-        prefixCls: prefixCls,
+        format,
+        prefixCls,
         renderFooter: this.renderFooter,
         timePicker: props.timePicker,
-        disabledDate: disabledDate,
-        disabledTime: disabledTime,
+        disabledDate,
+        disabledTime,
         dateInputPlaceholder: [startPlaceholder, endPlaceholder],
         locale: locale.lang,
-        dateRender: dateRender,
+        dateRender,
         value: showDate,
-        hoverValue: hoverValue,
-        showToday: showToday,
+        hoverValue,
+        showToday,
       },
       on: {
         change: calendarChange,
-        ok: ok,
+        ok,
         valueChange: this.handleShowDateChange,
         hoverChange: this.handleHoverChange,
         panelChange,
@@ -419,9 +417,9 @@ export default {
       pickerChangeHandler,
       {
         props: {
-          calendar: calendar,
-          value: value,
-          open: open,
+          calendar,
+          value,
+          open,
           prefixCls: `${prefixCls}-picker-container`,
         },
         on: {

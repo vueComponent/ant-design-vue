@@ -5,11 +5,6 @@ import raf from 'raf';
 
 function noop() {}
 const scrollTo = (element, to, duration) => {
-  const requestAnimationFrame =
-    window.requestAnimationFrame ||
-    function requestAnimationFrameTimeout() {
-      return setTimeout(arguments[0], 10);
-    };
   // jump to target if duration zero
   if (duration <= 0) {
     raf(() => {

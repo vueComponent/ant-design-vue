@@ -592,7 +592,7 @@ describe('Table.rowSelection', () => {
       propsData: {
         columns: filterColumns,
         dataSource: data,
-        rowSelection: rowSelection,
+        rowSelection,
       },
       sync: false,
     });
@@ -692,7 +692,7 @@ describe('Table.rowSelection', () => {
 
     const wrapper = mount(Table, {
       propsData: {
-        columns: columns,
+        columns,
         dataSource: newDatas,
         rowSelection: {},
         childrenColumnName: 'test',

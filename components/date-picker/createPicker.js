@@ -191,7 +191,7 @@ export default function createPicker(TheCalendar, props) {
           value: showDate,
         },
         on: {
-          ok: ok,
+          ok,
           panelChange,
           change: this.handleCalendarChange,
         },

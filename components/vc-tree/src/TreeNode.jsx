@@ -4,7 +4,6 @@ import { getNodeChildren, mapChildren, warnOnlyTreeNode } from './util';
 import { initDefaultProps, filterEmpty, getComponentFromProp } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import getTransitionProps from '../../_util/getTransitionProps';
-import { cloneElement } from '../../_util/vnode';
 
 function noop() {}
 const ICON_OPEN = 'open';

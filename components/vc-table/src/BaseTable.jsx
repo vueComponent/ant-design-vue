@@ -110,7 +110,7 @@ const BaseTable = {
                     record,
                     index: i,
                     prefixCls: rowPrefixCls,
-                    childrenColumnName: childrenColumnName,
+                    childrenColumnName,
                     columns: leafColumns,
                     rowKey: key,
                     ancestorKeys,

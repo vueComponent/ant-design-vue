@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import Base from '../base';
@@ -57,7 +57,7 @@ const Result = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render(h) {
-    const { prefixCls: customizePrefixCls, status, ...restProps } = this;
+    const { prefixCls: customizePrefixCls, status } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('result', customizePrefixCls);
 

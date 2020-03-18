@@ -79,7 +79,7 @@ const Menu = {
     inlineCollapsed(val) {
       this.collapsedChange(val);
     },
-    'layoutSiderContext.sCollapsed': function(val) {
+    'layoutSiderContext.sCollapsed'(val) {
       this.collapsedChange(val);
     },
   },

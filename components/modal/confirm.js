@@ -46,7 +46,7 @@ export default function confirm(config) {
     confirmDialogProps.props = props;
     const V = Base.Vue || Vue;
     return new V({
-      el: el,
+      el,
       parent: config.parentContext,
       data() {
         return { confirmDialogProps };

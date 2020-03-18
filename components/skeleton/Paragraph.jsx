@@ -1,5 +1,4 @@
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
 
 const widthUnit = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 

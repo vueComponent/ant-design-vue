@@ -3,8 +3,6 @@ import Card from '../index';
 import Button from '../../button/index';
 import mountTest from '../../../tests/shared/mountTest';
 
-const testMethod = typeof window !== 'undefined' ? it : xit;
-
 describe('Card', () => {
   mountTest(Card);
   beforeAll(() => {

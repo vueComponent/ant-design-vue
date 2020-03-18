@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import {
-  getSlotOptions,
   getComponentFromProp,
   isStringElement,
   getListeners,

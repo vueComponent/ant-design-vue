@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-import Vue from 'vue';
 import Modal from '..';
 import mountTest from '../../../tests/shared/mountTest';
 

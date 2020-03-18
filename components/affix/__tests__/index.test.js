@@ -2,7 +2,6 @@ import Affix from '..';
 import Button from '../../button';
 import { mount } from '@vue/test-utils';
 import { spyElementPrototype } from '../../__tests__/util/domHook';
-import { asyncExpect } from '@/tests/utils';
 const events = {};
 
 const AffixMounter = {
@@ -62,7 +61,7 @@ describe('Affix Render', () => {
   });
   const movePlaceholder = top => {
     classRect.fixed = {
-      top: top,
+      top,
       bottom: top,
     };
     events.scroll({

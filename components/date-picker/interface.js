@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 
 export const MomentType = {
   type: Object,
-  validator: function(value) {
+  validator(value) {
     return value === undefined || moment.isMoment(value);
   },
 };

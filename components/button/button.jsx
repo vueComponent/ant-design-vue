@@ -36,7 +36,6 @@ export default {
         sLoading,
         ghost,
         block,
-        sizeMap,
         icon,
         $slots,
       } = this;

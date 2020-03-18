@@ -65,7 +65,7 @@ const Menu = {
         }
         this.__emit('select', {
           ...selectInfo,
-          selectedKeys: selectedKeys,
+          selectedKeys,
         });
       }
     },
@@ -128,7 +128,7 @@ const Menu = {
         }
         this.__emit('deselect', {
           ...selectInfo,
-          selectedKeys: selectedKeys,
+          selectedKeys,
         });
       }
     },

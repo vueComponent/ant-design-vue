@@ -73,7 +73,7 @@ export default {
         // when not using server side rendering
         canUseDOM() &&
           this.media(bQuery, () => {
-            this.setState({ breakpoint: breakpoint });
+            this.setState({ breakpoint });
           });
       });
 

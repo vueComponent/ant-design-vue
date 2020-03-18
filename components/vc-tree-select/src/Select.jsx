@@ -219,12 +219,12 @@ const Select = {
       this.setState(state);
       this.needSyncKeys = {};
     },
-    '$data._valueList': function() {
+    '$data._valueList'() {
       this.$nextTick(() => {
         this.forcePopupAlign();
       });
     },
-    '$data._open': function() {
+    '$data._open'() {
       this.$nextTick(() => {
         const { prefixCls } = this.$props;
         const { _selectorValueList: selectorValueList, _valueEntities: valueEntities } = this.$data;

@@ -132,7 +132,7 @@ describe('Menu', () => {
         props: {
           openKeys: {
             type: Array,
-            default: function() {
+            default() {
               return ['1'];
             },
           },
@@ -171,7 +171,7 @@ describe('Menu', () => {
         props: {
           openKeys: {
             type: Array,
-            default: function() {
+            default() {
               return ['1'];
             },
           },
@@ -209,7 +209,7 @@ describe('Menu', () => {
         props: {
           openKeys: {
             type: Array,
-            default: function() {
+            default() {
               return ['1'];
             },
           },

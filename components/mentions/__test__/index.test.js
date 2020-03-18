@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import Mentions from '..';
-import { asyncExpect } from '@/tests/utils';
 import focusTest from '../../../tests/shared/focusTest';
 
 const { getMentions } = Mentions;

@@ -1,10 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
 import MockDate from 'mockdate';
 import moment from 'moment';
 import Statistic from '..';
 import { formatTimeStr } from '../utils';
-import { sleep } from '../../../tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
 
 describe('Statistic', () => {

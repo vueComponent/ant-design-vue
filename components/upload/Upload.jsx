@@ -19,7 +19,7 @@ export default {
   name: 'AUpload',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  Dragger: Dragger,
+  Dragger,
   props: initDefaultProps(UploadProps, {
     type: 'select',
     multiple: false,

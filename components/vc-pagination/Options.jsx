@@ -38,7 +38,7 @@ export default {
         goInputText: value,
       });
     },
-    handleBlur() {
+    handleBlur(e) {
       const { goButton, quickGo, rootPrefixCls } = this.$props;
       if (goButton) {
         return;

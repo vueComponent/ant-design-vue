@@ -181,7 +181,7 @@ const Select = {
     __propsSymbol__() {
       Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data));
     },
-    '$data._inputValue': function(val) {
+    '$data._inputValue'(val) {
       this.$data._mirrorInputValue = val;
     },
   },
@@ -417,7 +417,7 @@ const Select = {
         // Aviod trigger form submit when select item
         // https://github.com/ant-design/ant-design/issues/10861
         // https://github.com/ant-design/ant-design/issues/14544
-        if (isRealOpen || !props.combobox) {
+        if (isRealOpen || !combobox) {
           event.preventDefault();
         }
         // Hard close popup to avoid lock of non option in combobox mode
@@ -1149,7 +1149,7 @@ const Select = {
     },
     renderFilterOptions() {
       const { _inputValue: inputValue } = this.$data;
-      const { children, tags, filterOption, notFoundContent } = this.$props;
+      const { children, tags, notFoundContent } = this.$props;
       const menuItems = [];
       const childrenKeys = [];
       let empty = false;
@@ -1545,7 +1545,7 @@ const Select = {
       return null;
     },
 
-    selectionRefClick(e) {
+    selectionRefClick() {
       //e.stopPropagation();
       if (!this.disabled) {
         const input = this.getInputDOMNode();

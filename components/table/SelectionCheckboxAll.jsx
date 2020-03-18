@@ -114,7 +114,7 @@ export default {
 
   watch: {
     $props: {
-      handler: function() {
+      handler() {
         this.setCheckState(this.$props);
       },
       deep: true,

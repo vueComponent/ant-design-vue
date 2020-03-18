@@ -96,7 +96,7 @@ function createBaseForm(option = {}, mixins = []) {
         ? {}
         : {
             $props: {
-              handler: function(nextProps) {
+              handler(nextProps) {
                 if (mapPropsToFields) {
                   this.fieldsStore.updateFields(mapPropsToFields(nextProps));
                 }

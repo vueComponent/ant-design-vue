@@ -10,7 +10,6 @@ import { getComponentFromProp, filterEmpty, getListeners } from '../_util/props-
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
 import getTransitionProps from '../_util/getTransitionProps';
-import { MenuItem } from './MenuItem';
 
 let guid = 0;
 

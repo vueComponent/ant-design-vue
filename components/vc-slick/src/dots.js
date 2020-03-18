@@ -29,10 +29,10 @@ export default {
       dotsClass,
     } = props;
     const dotCount = getDotCount({
-      slideCount: slideCount,
-      slidesToScroll: slidesToScroll,
-      slidesToShow: slidesToShow,
-      infinite: infinite,
+      slideCount,
+      slidesToScroll,
+      slidesToShow,
+      infinite,
     });
 
     // Apply join & split to Array to pre-fill it for IE8
@@ -55,8 +55,8 @@ export default {
       const dotOptions = {
         message: 'dots',
         index: i,
-        slidesToScroll: slidesToScroll,
-        currentSlide: currentSlide,
+        slidesToScroll,
+        currentSlide,
       };
       function onClick(e) {
         // In Autoplay the focus stays on clicked button even after transition

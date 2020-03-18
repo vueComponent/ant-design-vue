@@ -1,6 +1,5 @@
 import PanelContent from './PanelContent';
 import { initDefaultProps, getComponentFromProp } from '../../_util/props-util';
-import { cloneElement } from '../../_util/vnode';
 import { panelProps } from './commonProps';
 
 export default {

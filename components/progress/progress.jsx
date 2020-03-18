@@ -7,10 +7,6 @@ import Line from './line';
 import Circle from './circle';
 import { validProgress } from './utils';
 
-function addUnit(num, unit) {
-  const unitType = unit || 'px';
-  return num ? num + unitType : null;
-}
 const ProgressStatuses = ['normal', 'exception', 'active', 'success'];
 export const ProgressType = PropTypes.oneOf(['line', 'circle', 'dashboard']);
 export const ProgressSize = PropTypes.oneOf(['default', 'small']);
@@ -91,24 +87,7 @@ export default {
   },
   render() {
     const props = getOptionProps(this);
-    const {
-      prefixCls: customizePrefixCls,
-      percent = 0,
-      status,
-      format,
-      trailColor,
-      size,
-      successPercent,
-      type,
-      strokeWidth,
-      width,
-      showInfo,
-      gapDegree = 0,
-      gapPosition,
-      strokeColor,
-      strokeLinecap = 'round',
-      ...restProps
-    } = props;
+    const { prefixCls: customizePrefixCls, size, type, showInfo } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('progress', customizePrefixCls);
     const progressStatus = this.getProgressStatus();
@@ -144,9 +123,6 @@ export default {
     });
 
     const progressProps = {
-      props: {
-        ...restProps,
-      },
       on: getListeners(this),
       class: classString,
     };

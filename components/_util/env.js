@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Browser environment sniffing
 export const inBrowser = typeof window !== 'undefined';
 export const inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;

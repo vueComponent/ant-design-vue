@@ -363,9 +363,9 @@ export default {
     const triggerProps = {
       props: {
         ...restProps,
-        disabled: disabled,
-        popupPlacement: popupPlacement,
-        builtinPlacements: builtinPlacements,
+        disabled,
+        popupPlacement,
+        builtinPlacements,
         popupTransitionName: transitionName,
         action: disabled ? [] : ['click'],
         popupVisible: disabled ? false : sPopupVisible,

@@ -22,6 +22,7 @@ export const PageHeaderProps = {
 };
 
 const renderBack = (instance, prefixCls, backIcon, onBack) => {
+  // eslint-disable-next-line no-unused-vars
   const h = instance.$createElement;
   if (!backIcon || !onBack) {
     return null;

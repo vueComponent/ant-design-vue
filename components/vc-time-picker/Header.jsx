@@ -1,8 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import moment from 'moment';
-import { getComponentFromProp } from '../_util/props-util';
-import { isIE, isIE9 } from '../_util/env';
 
 const Header = {
   mixins: [BaseMixin],

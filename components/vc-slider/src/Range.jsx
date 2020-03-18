@@ -185,7 +185,7 @@ const Range = {
         const value = trimAlignValue({
           value: mutatedValue,
           handle: sHandle,
-          bounds: bounds,
+          bounds,
           props: this.$props,
         });
         if (value === oldValue) return;

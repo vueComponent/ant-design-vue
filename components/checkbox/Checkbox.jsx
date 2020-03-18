@@ -95,6 +95,7 @@ export default {
       checkboxProps.props.name = checkboxGroup.name;
       checkboxProps.props.checked = checkboxGroup.sValue.indexOf(props.value) !== -1;
       checkboxProps.props.disabled = props.disabled || checkboxGroup.disabled;
+      checkboxProps.props.indeterminate = indeterminate;
     } else {
       checkboxProps.on.change = this.handleChange;
     }

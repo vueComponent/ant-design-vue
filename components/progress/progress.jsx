@@ -87,24 +87,7 @@ export default {
   },
   render() {
     const props = getOptionProps(this);
-    const {
-      prefixCls: customizePrefixCls,
-      percent,
-      status,
-      format,
-      trailColor,
-      size,
-      successPercent,
-      type,
-      strokeWidth,
-      width,
-      showInfo,
-      gapDegree,
-      gapPosition,
-      strokeColor,
-      strokeLinecap,
-      ...restProps
-    } = props;
+    const { prefixCls: customizePrefixCls, size, type, showInfo } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('progress', customizePrefixCls);
     const progressStatus = this.getProgressStatus();
@@ -140,9 +123,6 @@ export default {
     });
 
     const progressProps = {
-      props: {
-        ...restProps,
-      },
       on: getListeners(this),
       class: classString,
     };

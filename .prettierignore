@@ -27,3 +27,6 @@ components/style/color/*.less
 .png
 .npmrc.template
 .huskyrc
+.gitmodules
+*.png
+

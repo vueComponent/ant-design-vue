@@ -83,6 +83,7 @@
 - 🌟 Badge 支持自定义颜色。
 - 🐞 修复 Steps 的 label 不居中的问题。
 - 🐞 修复 DatePicker 和 TimePicker 的 cursor 样式问题。
+- 🐞 修复 TreeSelect 自定义图标无效的问题 [#1901](https://github.com/vueComponent/ant-design-vue/issues/1901)
 
 ## 1.4.12
 

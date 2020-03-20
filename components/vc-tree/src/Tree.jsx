@@ -415,7 +415,7 @@ const Tree = {
         selected: targetSelected,
         node: treeNode,
         selectedNodes,
-        nativeEvent: e.nativeEvent,
+        nativeEvent: e,
       };
       this.__emit('update:selectedKeys', selectedKeys);
       this.__emit('select', selectedKeys, eventObj);

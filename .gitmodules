@@ -1,3 +1,6 @@
 [submodule "antdv-demo"]
 	path = antdv-demo
 	url = https://github.com/tangjinzhou/antdv-demo.git
+[submodule "transform-jsx-vue3"]
+	path = transform-jsx-vue3
+	url = https://github.com/252675163/transform-jsx-vue3.git

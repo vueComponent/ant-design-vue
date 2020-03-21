@@ -145,7 +145,10 @@ const vueLoaderOptions = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
-          plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
+          plugins: [
+            path.join(__filename, './transform-jsx-vue3/index.js'),
+            'transform-object-rest-spread',
+          ],
         },
       },
     ],

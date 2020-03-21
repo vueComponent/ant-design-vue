@@ -350,7 +350,7 @@ function processProps(props) {
     props: omit(props, ['on', 'key', 'class', 'className', 'style']),
     on,
     class: cls || props.className,
-    style: style,
+    style,
     key,
   };
   // Warning user not to use deprecated label prop.

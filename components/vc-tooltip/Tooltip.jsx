@@ -73,7 +73,7 @@ export default {
     const triggerProps = {
       props: {
         popupClassName: overlayClassName,
-        prefixCls: prefixCls,
+        prefixCls,
         action: trigger,
         builtinPlacements: placements,
         popupPlacement: placement,
@@ -84,9 +84,9 @@ export default {
         popupAnimation: animation,
         defaultPopupVisible: defaultVisible,
         destroyPopupOnHide: destroyTooltipOnHide,
-        mouseLeaveDelay: mouseLeaveDelay,
+        mouseLeaveDelay,
         popupStyle: overlayStyle,
-        mouseEnterDelay: mouseEnterDelay,
+        mouseEnterDelay,
         ...extraProps,
       },
       on: {

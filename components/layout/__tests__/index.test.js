@@ -1,8 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import Layout from '..';
-import Icon from '../../icon';
-import Menu from '../../menu';
 import mountTest from '../../../tests/shared/mountTest';
 
 const { Sider, Content } = Layout;

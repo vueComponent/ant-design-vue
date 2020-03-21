@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/steps/demo/clickable.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/clickable.md correctly 1`] = `
 <div>
   <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
@@ -70,7 +70,7 @@ exports[`renders ./antdv-demo/steps/demo/clickable.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/customized-progress-dot.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/customized-progress-dot.md correctly 1`] = `
 <div>
   <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
@@ -117,7 +117,7 @@ exports[`renders ./antdv-demo/steps/demo/customized-progress-dot.md correctly 1`
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/error.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/error.md correctly 1`] = `
 <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish ant-steps-next-error">
     <div class="ant-steps-item-container">
@@ -152,7 +152,7 @@ exports[`renders ./antdv-demo/steps/demo/error.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/icon.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/icon.md correctly 1`] = `
 <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish ant-steps-item-custom ant-steps-item-active">
     <div class="ant-steps-item-container">
@@ -193,7 +193,7 @@ exports[`renders ./antdv-demo/steps/demo/icon.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/nav.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/nav.md correctly 1`] = `
 <div>
   <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
@@ -309,7 +309,7 @@ exports[`renders ./antdv-demo/steps/demo/nav.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/progress-dot.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/progress-dot.md correctly 1`] = `
 <div>
   <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
@@ -399,7 +399,7 @@ exports[`renders ./antdv-demo/steps/demo/progress-dot.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/simple.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/simple.md correctly 1`] = `
 <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish">
     <div class="ant-steps-item-container">
@@ -437,7 +437,7 @@ exports[`renders ./antdv-demo/steps/demo/simple.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/small-size.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/small-size.md correctly 1`] = `
 <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish">
     <div class="ant-steps-item-container">
@@ -469,7 +469,7 @@ exports[`renders ./antdv-demo/steps/demo/small-size.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/step-next.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/step-next.md correctly 1`] = `
 <div>
   <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
@@ -508,7 +508,7 @@ exports[`renders ./antdv-demo/steps/demo/step-next.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/vertical.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/vertical.md correctly 1`] = `
 <div class="ant-steps ant-steps-vertical">
   <div class="ant-steps-item ant-steps-item-finish">
     <div class="ant-steps-item-container">
@@ -543,7 +543,7 @@ exports[`renders ./antdv-demo/steps/demo/vertical.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/steps/demo/vertical-small.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/steps/demo/vertical-small.md correctly 1`] = `
 <div class="ant-steps ant-steps-vertical ant-steps-small">
   <div class="ant-steps-item ant-steps-item-finish">
     <div class="ant-steps-item-container">

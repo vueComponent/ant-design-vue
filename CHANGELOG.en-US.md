@@ -12,13 +12,14 @@
 
 ## 1.5.0
 
-`2020-03-06`
+`2020-03-15`
 
 - Four new components have been added:
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions/) Added mentioned components and discarded the original Mention components.
   - 🔥🔥🔥 [Descriptions](https://antdv.com/components/descriptions/) Display multiple read-only fields in groups.
   - 🔥🔥🔥 [PageHeader](https://antdv.com/components/page-header/) can be used to declare the topic of the page, display important information about the page that the user is concerned about, and carry the operation items related to the current page.
   - 🔥🔥🔥 [Result](https://antdv.com/components/result) is used to feedback the processing results of a series of operation tasks.
+  - 🔥🔥🔥 [FormModel](https://antdv.com/components/form-model) Form components that use v-model for automatic validation are more concise than v-decorator forms.
 - 🔥 Descriptions supports vertical layout.
 - 🔥 Progress.Circle supports gradient colors.
 - 🔥 Progress.Line supports gradient colors.
@@ -80,6 +81,7 @@
 - 🌟 Badge supports custom colors.
 - 🐞 Fix the problem that the label of Steps is not centered.
 - 🐞 Fix cursor style problem of DatePicker and TimePicker.
+- 🐞 Fix TreeSelect custom icon is invalid [#1901](https://github.com/vueComponent/ant-design-vue/issues/1901)
 
 ## 1.4.12
 
@@ -549,8 +551,6 @@ Component Fixes / Enhancements:
 ## 1.2.0
 
 `2018-12-16`
-
-### Synchronize with antd 3.10.x
 
 - 🔥🔥🔥 replaced font icons with svg icons which bring benefits below:：
   - Complete offline usage of icon, no dependency of alipay cdn font icon file and no more empty square during downloading than no need to deploy icon font files locally either.

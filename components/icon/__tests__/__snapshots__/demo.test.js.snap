@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/icon/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/icon/demo/basic.md correctly 1`] = `
 <div class="icons-list"><i aria-label="icon: home" class="anticon anticon-home"><svg viewBox="64 64 896 896" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
     </svg></i> <i aria-label="icon: setting" class="anticon anticon-setting"><svg viewBox="64 64 896 896" data-icon="setting" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
@@ -16,7 +16,7 @@ exports[`renders ./antdv-demo/icon/demo/basic.md correctly 1`] = `
     </svg></i></div>
 `;
 
-exports[`renders ./antdv-demo/icon/demo/iconfont.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/icon/demo/iconfont.md correctly 1`] = `
 <div class="icons-list"><i class="anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <use xlink:href="#icon-tuichu"></use>
     </svg></i> <i class="anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
@@ -26,7 +26,7 @@ exports[`renders ./antdv-demo/icon/demo/iconfont.md correctly 1`] = `
     </svg></i></div>
 `;
 
-exports[`renders ./antdv-demo/icon/demo/old-icons.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/icon/demo/old-icons.md correctly 1`] = `
 <div><i aria-label="icon: step-backward" class="anticon anticon-step-backward"><svg viewBox="0 0 1024 1024" data-icon="step-backward" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path d="M347.6 528.95l383.2 301.02c14.25 11.2 35.2 1.1 35.2-16.95V210.97c0-18.05-20.95-28.14-35.2-16.94L347.6 495.05a21.53 21.53 0 0 0 0 33.9M330 864h-64a8 8 0 0 1-8-8V168a8 8 0 0 1 8-8h64a8 8 0 0 1 8 8v688a8 8 0 0 1-8 8"></path>
     </svg></i><i aria-label="icon: step-forward" class="anticon anticon-step-forward"><svg viewBox="0 0 1024 1024" data-icon="step-forward" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
@@ -653,7 +653,7 @@ exports[`renders ./antdv-demo/icon/demo/old-icons.md correctly 1`] = `
     </svg></i></div>
 `;
 
-exports[`renders ./antdv-demo/icon/demo/two-tone.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/icon/demo/two-tone.md correctly 1`] = `
 <div class="icons-list"><i aria-label="icon: smile" class="anticon anticon-smile"><svg viewBox="64 64 896 896" data-icon="smile" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
       <path fill="#1890ff" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
       <path fill="#e6f7ff" d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zM288 421a48.01 48.01 0 0 1 96 0 48.01 48.01 0 0 1-96 0zm224 272c-85.5 0-155.6-67.3-160-151.6a8 8 0 0 1 8-8.4h48.1c4.2 0 7.8 3.2 8.1 7.4C420 589.9 461.5 629 512 629s92.1-39.1 95.8-88.6c.3-4.2 3.9-7.4 8.1-7.4H664a8 8 0 0 1 8 8.4C667.6 625.7 597.5 693 512 693zm176-224a48.01 48.01 0 0 1 0-96 48.01 48.01 0 0 1 0 96z"></path>

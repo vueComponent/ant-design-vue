@@ -1,7 +1,7 @@
 import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
+import { initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 const { Option } = Select;

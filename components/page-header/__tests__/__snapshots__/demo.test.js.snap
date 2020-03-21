@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/page-header/demo/actions.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
 <div>
   <div
     class="ant-page-header ant-page-header-ghost"
@@ -374,7 +374,7 @@ exports[`renders ./antdv-demo/page-header/demo/actions.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/page-header/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/page-header/demo/basic.md correctly 1`] = `
 <div
   class="ant-page-header ant-page-header-ghost"
   style="border: 1px solid rgb(235, 237, 240);"
@@ -427,7 +427,7 @@ exports[`renders ./antdv-demo/page-header/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/page-header/demo/breadcrumb.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/page-header/demo/breadcrumb.md correctly 1`] = `
 <div
   class="ant-page-header has-breadcrumb ant-page-header-ghost"
   style="border: 1px solid rgb(235, 237, 240);"
@@ -499,7 +499,7 @@ exports[`renders ./antdv-demo/page-header/demo/breadcrumb.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/page-header/demo/ghost.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
 <div
   style="background-color: rgb(245, 245, 245); padding: 24px;"
 >
@@ -689,7 +689,7 @@ exports[`renders ./antdv-demo/page-header/demo/ghost.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/page-header/demo/responsive.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] = `
 <div>
   <div
     class="ant-page-header has-footer ant-page-header-ghost"

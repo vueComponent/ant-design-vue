@@ -61,7 +61,7 @@ export default {
       return originalPaths;
     },
 
-    genForRoutes({ routes = [], params = {}, separator, itemRender = defaultItemRender }) {
+    genForRoutes({ routes = [], params = {}, separator, itemRender = this.defaultItemRender }) {
       const paths = [];
       return routes.map(route => {
         const path = this.getPath(route.path, params);

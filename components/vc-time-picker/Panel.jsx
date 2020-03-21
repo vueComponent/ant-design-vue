@@ -129,7 +129,6 @@ const Panel = {
       addon,
       disabledSeconds,
       hideDisabledOptions,
-      allowEmpty,
       showHour,
       showMinute,
       showSecond,
@@ -146,7 +145,7 @@ const Panel = {
       currentSelectPanel,
     } = this;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
-    const { esc = noop, clear = noop, keydown = noop } = getListeners(this);
+    const { esc = noop, keydown = noop } = getListeners(this);
 
     const disabledHourOptions = this.disabledHours2();
     const disabledMinuteOptions = disabledMinutes(sValue ? sValue.hour() : null);

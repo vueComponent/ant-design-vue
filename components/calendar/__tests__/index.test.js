@@ -4,9 +4,6 @@ import { asyncExpect } from '@/tests/utils';
 import MockDate from 'mockdate';
 import Calendar from '..';
 import Header from '../Header';
-import Select from '../../select';
-import Group from '../../radio/group';
-import Button from '../../radio/radioButton';
 import mountTest from '../../../tests/shared/mountTest';
 import { sleep } from '../../../tests/utils';
 

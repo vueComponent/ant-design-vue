@@ -160,7 +160,7 @@ const Mentions = {
         ...otherProps,
         disabled,
         filterOption: this.getFilterOption(),
-        getPopupContainer: getPopupContainer,
+        getPopupContainer,
         children: this.getOptions(),
       },
       class: mergedClassName,

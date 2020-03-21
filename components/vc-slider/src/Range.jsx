@@ -71,27 +71,23 @@ const Range = {
   watch: {
     value: {
       handler(val) {
-        const { min, max, bounds } = this;
-        this.setChangeValue(val || bounds, min, max);
+        const { bounds } = this;
+        this.setChangeValue(val || bounds);
       },
       deep: true,
     },
-    min(val) {
-      const { value = bounds, max } = this;
-      this.setChangeValue(value, val, max);
+    min() {
+      const { value } = this;
+      this.setChangeValue(value || this.bounds);
     },
-    max(val) {
-      const { value = bounds, min } = this;
-      this.setChangeValue(value, min, val);
+    max() {
+      const { value } = this;
+      this.setChangeValue(value || this.bounds);
     },
   },
   methods: {
-    setChangeValue(value, min, max) {
+    setChangeValue(value) {
       const { bounds } = this;
-      const minAmaxProps = {
-        min,
-        max,
-      };
       const nextBounds = value.map((v, i) =>
         trimAlignValue({
           value: v,
@@ -185,7 +181,7 @@ const Range = {
         const value = trimAlignValue({
           value: mutatedValue,
           handle: sHandle,
-          bounds: bounds,
+          bounds,
           props: this.$props,
         });
         if (value === oldValue) return;

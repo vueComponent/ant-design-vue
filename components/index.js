@@ -56,6 +56,7 @@ import { default as Divider } from './divider';
 import { default as Dropdown } from './dropdown';
 
 import { default as Form } from './form';
+import { default as FormModel } from './form-model';
 
 import { default as Icon } from './icon';
 
@@ -166,6 +167,7 @@ const components = [
   Divider,
   Dropdown,
   Form,
+  FormModel,
   Icon,
   Input,
   InputNumber,
@@ -254,6 +256,7 @@ export {
   Divider,
   Dropdown,
   Form,
+  FormModel,
   Icon,
   Input,
   InputNumber,

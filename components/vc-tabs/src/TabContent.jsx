@@ -57,7 +57,7 @@ export default {
     },
   },
   render() {
-    const { activeKey, tabBarPosition, animated, animatedWithMargin, classes } = this;
+    const { activeKey, tabBarPosition, animated, animatedWithMargin, direction, classes } = this;
     let style = {};
     if (animated && this.$slots.default) {
       const activeIndex = getActiveIndex(this.$slots.default, activeKey);

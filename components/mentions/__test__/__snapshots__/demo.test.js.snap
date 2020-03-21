@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/mentions/demo/async.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1"></textarea></div>`;
+exports[`renders ./antdv-demo/docs/mentions/demo/async.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1"></textarea></div>`;
 
-exports[`renders ./antdv-demo/mentions/demo/basic.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1"></textarea></div>`;
+exports[`renders ./antdv-demo/docs/mentions/demo/basic.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1"></textarea></div>`;
 
-exports[`renders ./antdv-demo/mentions/demo/form.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/mentions/demo/form.md correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-5 ant-form-item-label"><label for="mentions_coders" title="Top coders" class="">Top coders</label></div>
@@ -32,11 +32,11 @@ exports[`renders ./antdv-demo/mentions/demo/form.md correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/mentions/demo/placement.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1"></textarea></div>`;
+exports[`renders ./antdv-demo/docs/mentions/demo/placement.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1"></textarea></div>`;
 
-exports[`renders ./antdv-demo/mentions/demo/prefix.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1" placeholder="input @ to mention people, # to mention tag"></textarea></div>`;
+exports[`renders ./antdv-demo/docs/mentions/demo/prefix.md correctly 1`] = `<div class="ant-mentions"><textarea rows="1" placeholder="input @ to mention people, # to mention tag"></textarea></div>`;
 
-exports[`renders ./antdv-demo/mentions/demo/readonly.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/mentions/demo/readonly.md correctly 1`] = `
 <div>
   <div style="margin-bottom: 10px;">
     <div class="ant-mentions ant-mentions-disabled"><textarea disabled="disabled" rows="1" placeholder="this is disabled Mentions"></textarea></div>

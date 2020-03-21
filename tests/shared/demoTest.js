@@ -8,7 +8,7 @@ Vue.use(antd);
 
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'md';
-  const files = glob.sync(`./antdv-demo/${component}/demo/*.${suffix}`);
+  const files = glob.sync(`./antdv-demo/docs/${component}/demo/*.${suffix}`);
 
   files.forEach(file => {
     let testMethod = options.skip === true ? test.skip : test;

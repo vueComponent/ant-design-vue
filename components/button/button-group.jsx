@@ -26,7 +26,7 @@ export default {
     };
   },
   render() {
-    const { prefixCls: customizePrefixCls, size, sizeMap, $slots } = this;
+    const { prefixCls: customizePrefixCls, size, $slots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('btn-group', customizePrefixCls);
 

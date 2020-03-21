@@ -39,8 +39,8 @@ export const PrevArrow = {
       },
     };
     const customProps = {
-      currentSlide: currentSlide,
-      slideCount: slideCount,
+      currentSlide,
+      slideCount,
     };
     let prevArrow;
 
@@ -110,8 +110,8 @@ export const NextArrow = {
       },
     };
     const customProps = {
-      currentSlide: currentSlide,
-      slideCount: slideCount,
+      currentSlide,
+      slideCount,
     };
     let nextArrow;
 

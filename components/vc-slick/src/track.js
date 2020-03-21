@@ -88,7 +88,7 @@ const renderSlides = function(spec, children, createElement) {
     let child;
     const childOnClickOptions = {
       message: 'children',
-      index: index,
+      index,
       slidesToScroll: spec.slidesToScroll,
       currentSlide: spec.currentSlide,
     };

@@ -161,7 +161,7 @@ export default {
       };
       this.setState({
         slideWidth: slideWidth + '%',
-        trackStyle: trackStyle,
+        trackStyle,
       });
     },
     checkImagesLoad() {

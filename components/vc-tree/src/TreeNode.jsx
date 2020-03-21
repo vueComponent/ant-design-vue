@@ -4,7 +4,6 @@ import { getNodeChildren, mapChildren, warnOnlyTreeNode } from './util';
 import { initDefaultProps, filterEmpty, getComponentFromProp } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import getTransitionProps from '../../_util/getTransitionProps';
-import { cloneElement } from '../../_util/vnode';
 
 function noop() {}
 const ICON_OPEN = 'open';
@@ -416,7 +415,7 @@ const TreeNode = {
     // Icon + Title
     renderSelector(h) {
       const { selected, loading, dragNodeHighlight } = this;
-      const icon = getComponentFromProp(this, 'icon');
+      const icon = getComponentFromProp(this, 'icon', {}, false);
       const {
         vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData },
       } = this;

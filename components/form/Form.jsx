@@ -133,7 +133,7 @@ const Form = {
     colon: true,
   }),
   Item: FormItem,
-  createFormField: createFormField,
+  createFormField,
   create: (options = {}) => {
     return createDOMForm({
       fieldNameProp: 'id',
@@ -151,7 +151,7 @@ const Form = {
   },
   provide() {
     return {
-      FormContextProps: this,
+      FormContext: this,
       // https://github.com/vueComponent/ant-design-vue/issues/446
       collectFormItemContext:
         this.form && this.form.templateContext
@@ -246,7 +246,7 @@ const Form = {
           data() {
             return {
               children: $slots.default,
-              formClassName: formClassName,
+              formClassName,
               submit: onSubmit,
             };
           },

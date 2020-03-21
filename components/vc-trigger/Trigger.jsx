@@ -112,7 +112,7 @@ export default {
         this.prevPopupVisible = val;
       }
     },
-    sPopupVisible(val) {
+    sPopupVisible() {
       this.$nextTick(() => {
         this.renderComponent(null, () => {
           this.afterPopupVisibleChange(this.sPopupVisible);

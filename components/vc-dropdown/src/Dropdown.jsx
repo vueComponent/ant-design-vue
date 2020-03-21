@@ -191,7 +191,7 @@ export default {
         popupAnimation: animation,
         popupVisible: this.sVisible,
         afterPopupVisibleChange: this.afterVisibleChange,
-        getPopupContainer: getPopupContainer,
+        getPopupContainer,
       },
       on: {
         popupVisibleChange: this.onVisibleChange,

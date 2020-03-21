@@ -7,7 +7,6 @@ import {
   getOptionProps,
   filterEmpty,
   getComponentFromProp,
-  getClass,
   getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
@@ -162,13 +161,9 @@ export default {
         const { on = {}, slots = {}, scopedSlots = {}, class: cls, style, ...restProps } = item;
         const treeNodeProps = {
           ...restProps,
-          icon:
-            ($scopedSlots[scopedSlots.icon] && $scopedSlots[scopedSlots.icon](item)) ||
-            $slots[slots.icon] ||
-            restProps.icon,
+          icon: $scopedSlots[scopedSlots.icon] || $slots[slots.icon] || restProps.icon,
           switcherIcon:
-            ($scopedSlots[scopedSlots.switcherIcon] &&
-              $scopedSlots[scopedSlots.switcherIcon](item)) ||
+            $scopedSlots[scopedSlots.switcherIcon] ||
             $slots[slots.switcherIcon] ||
             restProps.switcherIcon,
           title:

@@ -44,7 +44,7 @@ const CalendarFooter = {
       const btnProps = {
         props: {
           ...props,
-          value: value,
+          value,
         },
         on: getListeners(this),
       };

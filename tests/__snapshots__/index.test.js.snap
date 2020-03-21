@@ -27,6 +27,7 @@ Array [
   "Divider",
   "Dropdown",
   "Form",
+  "FormModel",
   "Icon",
   "Input",
   "InputNumber",

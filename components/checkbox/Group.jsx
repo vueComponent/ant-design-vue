@@ -99,6 +99,7 @@ export default {
           prefixCls={prefixCls}
           key={option.value.toString()}
           disabled={'disabled' in option ? option.disabled : props.disabled}
+          indeterminate={option.indeterminate}
           value={option.value}
           checked={state.sValue.indexOf(option.value) !== -1}
           onChange={option.onChange || noop}

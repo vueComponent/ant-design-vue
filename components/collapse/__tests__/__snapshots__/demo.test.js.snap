@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/collapse/demo/accordion.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/accordion.md correctly 1`] = `
 <div>
   <div role="tablist" class="ant-collapse ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item">
@@ -25,7 +25,7 @@ exports[`renders ./antdv-demo/collapse/demo/accordion.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/collapse/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/basic.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
@@ -54,7 +54,7 @@ exports[`renders ./antdv-demo/collapse/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/collapse/demo/borderless.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/borderless.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-borderless ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
@@ -83,7 +83,7 @@ exports[`renders ./antdv-demo/collapse/demo/borderless.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/collapse/demo/custom.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/custom.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-borderless ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active" style="background: rgb(247, 247, 247); border-radius: 4px; margin-bottom: 24px; border: 0px; overflow: hidden;">
@@ -112,7 +112,7 @@ exports[`renders ./antdv-demo/collapse/demo/custom.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/collapse/demo/extra.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/extra.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">
@@ -157,7 +157,7 @@ exports[`renders ./antdv-demo/collapse/demo/extra.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/collapse/demo/mix.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/mix.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item">
@@ -182,7 +182,7 @@ exports[`renders ./antdv-demo/collapse/demo/mix.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/collapse/demo/noarrow.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/collapse/demo/noarrow.md correctly 1`] = `
 <div>
   <div class="ant-collapse ant-collapse-icon-position-left">
     <div role="tablist" class="ant-collapse-item ant-collapse-item-active">

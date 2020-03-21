@@ -41,26 +41,21 @@ const Slider = {
   watch: {
     value: {
       handler(val) {
-        const { min, max } = this;
-        this.setChangeValue(val, min, max);
+        this.setChangeValue(val);
       },
       deep: true,
     },
-    min(val) {
-      const { sValue, max } = this;
-      this.setChangeValue(sValue, val, max);
+    min() {
+      const { sValue } = this;
+      this.setChangeValue(sValue);
     },
-    max(val) {
-      const { sValue, min } = this;
-      this.setChangeValue(sValue, min, val);
+    max() {
+      const { sValue } = this;
+      this.setChangeValue(sValue);
     },
   },
   methods: {
-    setChangeValue(value, min, max) {
-      const minAmaxProps = {
-        min,
-        max,
-      };
+    setChangeValue(value) {
       const newValue = value !== undefined ? value : this.sValue;
       const nextValue = this.trimAlignValue(newValue, this.$props);
       if (nextValue === this.sValue) return;

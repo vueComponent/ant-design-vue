@@ -75,7 +75,7 @@ export default {
   },
   inject: {
     isFormItemChildren: { default: false },
-    FormContextProps: { default: () => ({}) },
+    FormContext: { default: () => ({}) },
     decoratorFormProps: { default: () => ({}) },
     collectFormItemContext: { default: () => noop },
     configProvider: { default: () => ConfigConsumerProps },
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     itemSelfUpdate() {
-      return !!(this.selfUpdate === undefined ? this.FormContextProps.selfUpdate : this.selfUpdate);
+      return !!(this.selfUpdate === undefined ? this.FormContext.selfUpdate : this.selfUpdate);
     },
   },
   created() {
@@ -117,8 +117,8 @@ export default {
   },
   methods: {
     collectContext() {
-      if (this.FormContextProps.form && this.FormContextProps.form.templateContext) {
-        const { templateContext } = this.FormContextProps.form;
+      if (this.FormContext.form && this.FormContext.form.templateContext) {
+        const { templateContext } = this.FormContext.form;
         const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
           return [...a, ...b];
         }, []);
@@ -238,7 +238,7 @@ export default {
 
     // Resolve duplicated ids bug between different forms
     // https://github.com/ant-design/ant-design/issues/7351
-    onLabelClick(e) {
+    onLabelClick() {
       const id = this.id || this.getId();
       if (!id) {
         return;
@@ -356,9 +356,7 @@ export default {
     },
 
     renderWrapper(prefixCls, children) {
-      const { wrapperCol: contextWrapperCol } = this.isFormItemChildren
-        ? {}
-        : this.FormContextProps;
+      const { wrapperCol: contextWrapperCol } = this.isFormItemChildren ? {} : this.FormContext;
       const { wrapperCol } = this;
       const mergedWrapperCol = wrapperCol || contextWrapperCol || {};
       const { style, id, on, ...restProps } = mergedWrapperCol;
@@ -380,7 +378,7 @@ export default {
         labelAlign: contextLabelAlign,
         labelCol: contextLabelCol,
         colon: contextColon,
-      } = this.FormContextProps;
+      } = this.FormContext;
       const { labelAlign, labelCol, colon, id, htmlFor } = this;
       const label = getComponentFromProp(this, 'label');
       const required = this.isRequired();
@@ -481,8 +479,8 @@ export default {
       }
     },
     decoratorChildren(vnodes) {
-      const { FormContextProps } = this;
-      const getFieldDecorator = FormContextProps.form.getFieldDecorator;
+      const { FormContext } = this;
+      const getFieldDecorator = FormContext.form.getFieldDecorator;
       for (let i = 0, len = vnodes.length; i < len; i++) {
         const vnode = vnodes[i];
         if (getSlotOptions(vnode).__ANT_FORM_ITEM) {
@@ -510,7 +508,7 @@ export default {
       decoratorFormProps,
       fieldDecoratorId,
       fieldDecoratorOptions = {},
-      FormContextProps,
+      FormContext,
     } = this;
     let child = filterEmpty($slots.default || []);
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
@@ -522,7 +520,7 @@ export default {
         '`autoFormCreate` just `decorator` then first children. but you can use JSX to support multiple children',
       );
       this.slotDefault = child;
-    } else if (FormContextProps.form) {
+    } else if (FormContext.form) {
       child = cloneVNodes(child);
       this.slotDefault = this.decoratorChildren(child);
     } else {

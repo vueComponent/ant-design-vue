@@ -22,7 +22,7 @@ function zerofixed(v) {
 }
 export const MomentType = {
   type: Object,
-  validator: function(value) {
+  validator(value) {
     return moment.isMoment(value);
   },
 };
@@ -207,11 +207,11 @@ const Calendar = {
           Select: {},
           locale: locale.lang,
           type: mode === 'year' ? 'month' : 'date',
-          prefixCls: prefixCls,
+          prefixCls,
           showHeader: false,
-          value: value,
-          monthCellRender: monthCellRender,
-          dateCellRender: dateCellRender,
+          value,
+          monthCellRender,
+          dateCellRender,
           disabledDate,
         },
         on: {

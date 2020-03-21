@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/form/demo/advanced-search.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/advanced-search.vue correctly 1`] = `
 <div id="components-form-demo-advanced-search">
   <form class="ant-advanced-search-form ant-form ant-form-horizontal">
     <div class="ant-row" style="margin-left: -12px; margin-right: -12px;">
@@ -118,7 +118,7 @@ exports[`renders ./antdv-demo/form/demo/advanced-search.vue correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/form/demo/coordinated.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/coordinated.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-5 ant-form-item-label"><label for="coordinated_note" title="Note" class="ant-form-item-required">Note</label></div>
@@ -147,7 +147,7 @@ exports[`renders ./antdv-demo/form/demo/coordinated.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/customized-form-controls.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/customized-form-controls.vue correctly 1`] = `
 <form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-form-item-label"><label for="customized_form_controls_price" title="Price" class="">Price</label></div>
@@ -168,7 +168,7 @@ exports[`renders ./antdv-demo/form/demo/customized-form-controls.vue correctly 1
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/dynamic-form-item.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/dynamic-form-item.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control-wrapper">
@@ -187,7 +187,7 @@ exports[`renders ./antdv-demo/form/demo/dynamic-form-item.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/dynamic-rule.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/dynamic-rule.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-4 ant-form-item-label"><label for="dynamic_rule_username" title="Name" class="ant-form-item-required">Name</label></div>
@@ -224,13 +224,13 @@ exports[`renders ./antdv-demo/form/demo/dynamic-rule.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/form-in-modal.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/form-in-modal.vue correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>New Collection</span></button>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/form/demo/global-state.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/global-state.vue correctly 1`] = `
 <div id="components-form-demo-global-state">
   <form class="ant-form ant-form-inline">
     <div class="ant-row ant-form-item">
@@ -250,7 +250,7 @@ exports[`renders ./antdv-demo/form/demo/global-state.vue correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/form/demo/horizontal-login.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/horizontal-login.vue correctly 1`] = `
 <form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-form-item-control-wrapper">
@@ -276,51 +276,49 @@ exports[`renders ./antdv-demo/form/demo/horizontal-login.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/layout.vue correctly 1`] = `
-<div>
-  <form class="ant-form ant-form-horizontal">
-    <div class="ant-row ant-form-item">
-      <div class="ant-col ant-col-4 ant-form-item-label"><label title="Form Layout" class="">Form Layout</label></div>
-      <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-        <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span>
-          Horizontal
-        </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span>
-          Vertical
-        </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span>
-          Inline
-        </span></label></div></span>
+exports[`renders ./antdv-demo/docs/form/demo/layout.vue correctly 1`] = `
+<form class="ant-form ant-form-horizontal">
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label title="Form Layout" class="">Form Layout</label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span>
+        Horizontal
+      </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span>
+        Vertical
+      </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span>
+        Inline
+      </span></label></div></span>
+      <!---->
+    </div>
+  </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label title="Field A" class="">Field A</label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"></span>
         <!---->
       </div>
     </div>
-</div>
-<div class="ant-row ant-form-item">
-  <div class="ant-col ant-col-4 ant-form-item-label"><label title="Field A" class="">Field A</label></div>
-  <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-    <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"></span>
-      <!---->
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label title="Field B" class="">Field B</label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"></span>
+        <!---->
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-row ant-form-item">
-  <div class="ant-col ant-col-4 ant-form-item-label"><label title="Field B" class="">Field B</label></div>
-  <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-    <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"></span>
-      <!---->
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
+      <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
+        <!---->
+      </div>
     </div>
   </div>
-</div>
-<div class="ant-row ant-form-item">
-  <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-    <div class="ant-form-item-control"><span class="ant-form-item-children"><button type="button" class="ant-btn ant-btn-primary"><span>Submit</span></button></span>
-      <!---->
-    </div>
-  </div>
-</div>
 </form>
-</div>
 `;
 
-exports[`renders ./antdv-demo/form/demo/normal-login.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/normal-login.vue correctly 1`] = `
 <form class="login-form ant-form ant-form-horizontal" id="components-form-demo-normal-login">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-form-item-control-wrapper">
@@ -354,7 +352,7 @@ exports[`renders ./antdv-demo/form/demo/normal-login.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/register.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/register.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="register_email" title="E-mail" class="ant-form-item-required">E-mail</label></div>
@@ -457,7 +455,7 @@ exports[`renders ./antdv-demo/form/demo/register.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/time-related-controls.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/time-related-controls.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_date-picker" title="DatePicker" class="ant-form-item-required">DatePicker</label></div>
@@ -517,7 +515,7 @@ exports[`renders ./antdv-demo/form/demo/time-related-controls.vue correctly 1`] 
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/validate-other.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/validate-other.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal" id="components-form-demo-validate-other">
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-6 ant-form-item-label"><label title="Plain Text" class="">Plain Text</label></div>
@@ -669,7 +667,7 @@ exports[`renders ./antdv-demo/form/demo/validate-other.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/validate-static.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/validate-static.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item ant-form-item-with-help">
     <div class="ant-col ant-col-xs-24 ant-col-sm-5 ant-form-item-label"><label title="Fail" class="">Fail</label></div>
@@ -817,7 +815,7 @@ exports[`renders ./antdv-demo/form/demo/validate-static.vue correctly 1`] = `
 </form>
 `;
 
-exports[`renders ./antdv-demo/form/demo/without-form-create.vue correctly 1`] = `
+exports[`renders ./antdv-demo/docs/form/demo/without-form-create.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item ant-form-item-with-help">
     <div class="ant-col ant-col-7 ant-form-item-label"><label title="Prime between 8 &amp; 12" class="">Prime between 8 &amp; 12</label></div>

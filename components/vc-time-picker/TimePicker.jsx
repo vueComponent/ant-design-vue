@@ -192,7 +192,6 @@ export default {
         disabledSeconds,
         hideDisabledOptions,
         inputReadOnly,
-        allowEmpty,
         showHour,
         showMinute,
         showSecond,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/affix/demo/basic.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/affix/demo/basic.md correctly 1`] = `
 <div>
   <div>
     <div class=""><button type="button" class="ant-btn ant-btn-primary"><span>Affix top</span></button></div>
@@ -11,13 +11,13 @@ exports[`renders ./antdv-demo/affix/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/affix/demo/on-change.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/affix/demo/on-change.md correctly 1`] = `
 <div>
   <div class=""><button type="button" class="ant-btn"><span>120px to affix top</span></button></div>
 </div>
 `;
 
-exports[`renders ./antdv-demo/affix/demo/target.md correctly 1`] = `
+exports[`renders ./antdv-demo/docs/affix/demo/target.md correctly 1`] = `
 <div id="components-affix-demo-target" class="scrollable-container">
   <div class="background">
     <div>

@@ -1,6 +1,5 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import shallowequal from 'shallowequal';
 import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
 import BaseMixin from '../_util/BaseMixin';
@@ -231,7 +230,7 @@ const Affix = {
   },
 
   render() {
-    const { prefixCls, affixStyle, placeholderStyle, status, $slots, $props } = this;
+    const { prefixCls, affixStyle, placeholderStyle, $slots, $props } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const className = classNames({
       [getPrefixCls('affix', prefixCls)]: affixStyle,

@@ -5,8 +5,8 @@ import Icon from '../icon';
 import inputProps from './inputProps';
 import Button from '../button';
 import { cloneElement } from '../_util/vnode';
-import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
+import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -18,7 +18,8 @@ export default {
   },
   props: {
     ...inputProps,
-    enterButton: PropTypes.any.def(false),
+    // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
+    enterButton: PropTypes.any,
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },

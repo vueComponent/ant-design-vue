@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import Vue from 'vue';
-import ref from 'vue-ref';
+// import * as Vue from 'vue';
+// import ref from 'vue-ref';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getEvents, getListeners } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
@@ -27,7 +27,7 @@ const windowIsUndefined = !(
   window.document.createElement
 );
 
-Vue.use(ref, { name: 'ant-ref' });
+// Vue.use(ref, { name: 'ant-ref' });
 const Drawer = {
   mixins: [BaseMixin],
   props: initDefaultProps(IDrawerProps, {

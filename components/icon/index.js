@@ -23,7 +23,7 @@ const defaultTheme = 'outlined';
 let dangerousTheme;
 
 function renderIcon(h, locale, context) {
-  const { props, slots, listeners, data } = context;
+  const { $props: props, $slots: slots, $listeners: listeners, $data: data } = context;
   const {
     // affect inner <svg>...</svg>
     type,
@@ -36,7 +36,7 @@ function renderIcon(h, locale, context) {
     rotate,
     tabIndex,
   } = props;
-  const slotsMap = slots();
+  const slotsMap = slots;
   let children = filterEmpty(slotsMap.default);
   children = children.length === 0 ? undefined : children;
   warning(
@@ -128,7 +128,7 @@ function renderIcon(h, locale, context) {
     }
   };
   let iconTabIndex = tabIndex;
-  if (iconTabIndex === undefined && 'click' in listeners) {
+  if (iconTabIndex === undefined && listeners && listeners['click']) {
     iconTabIndex = -1;
   }
   const { attrs, ...restDataProps } = data;

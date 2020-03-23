@@ -1,6 +1,6 @@
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
-// import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider';
 let styleForPesudo;
 
 // Where el is the DOM element you'd like to test for visibility
@@ -30,9 +30,9 @@ export default {
       this.instance = this.bindAnimationEvent(node);
     });
   },
-  // inject: {
-  //   configProvider: { default: () => ConfigConsumerProps },
-  // },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   beforeDestroy() {
     if (this.instance) {
       this.instance.cancel();

@@ -2,7 +2,7 @@ import Wave from '../_util/wave';
 import Icon from '../icon';
 import buttonTypes from './buttonTypes';
 import { filterEmpty, getListeners } from '../_util/props-util';
-// import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider';
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
@@ -12,9 +12,9 @@ export default {
   inheritAttrs: false,
   __ANT_BUTTON: true,
   props,
-  // inject: {
-  //   configProvider: { default: () => ConfigConsumerProps },
-  // },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   data() {
     return {
       sizeMap: {

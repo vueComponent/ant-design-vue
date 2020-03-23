@@ -1,6 +1,11 @@
 import Modal, { destroyFns } from './Modal';
 import modalConfirm from './confirm';
-import Icon from '../icon';
+import {
+  InfoCircleOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons-vue';
 import Base from '../base';
 
 // export { ActionButtonProps } from './ActionButton'
@@ -10,7 +15,7 @@ const info = function(props) {
   const config = {
     type: 'info',
     icon: h => {
-      return <Icon type="info-circle" />;
+      return <InfoCircleOutlined />;
     },
     okCancel: false,
     ...props,
@@ -22,7 +27,7 @@ const success = function(props) {
   const config = {
     type: 'success',
     icon: h => {
-      return <Icon type="check-circle" />;
+      return <CheckCircleOutlined />;
     },
     okCancel: false,
     ...props,
@@ -34,7 +39,7 @@ const error = function(props) {
   const config = {
     type: 'error',
     icon: h => {
-      return <Icon type="close-circle" />;
+      return <CloseCircleOutlined />;
     },
     okCancel: false,
     ...props,
@@ -46,7 +51,7 @@ const warning = function(props) {
   const config = {
     type: 'warning',
     icon: h => {
-      return <Icon type="exclamation-circle" />;
+      return <ExclamationCircleOutlined />;
     },
     okCancel: false,
     ...props,

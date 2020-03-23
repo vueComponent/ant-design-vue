@@ -1,9 +1,10 @@
 import Wave from '../_util/wave';
-import Icon from '../icon';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
 import { filterEmpty, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
+// eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 const props = buttonTypes();
@@ -25,8 +26,33 @@ export default {
       hasTwoCNChar: false,
     };
   },
-  computed: {
-    classes() {
+  watch: {
+    loading(val, preVal) {
+      if (preVal && typeof preVal !== 'boolean') {
+        clearTimeout(this.delayTimeout);
+      }
+      if (val && typeof val !== 'boolean' && val.delay) {
+        this.delayTimeout = setTimeout(() => {
+          this.sLoading = !!val;
+        }, val.delay);
+      } else {
+        this.sLoading = !!val;
+      }
+    },
+  },
+  mounted() {
+    this.fixTwoCNChar();
+  },
+  updated() {
+    this.fixTwoCNChar();
+  },
+  beforeDestroy() {
+    if (this.delayTimeout) {
+      clearTimeout(this.delayTimeout);
+    }
+  },
+  methods: {
+    getClasses() {
       const {
         prefixCls: customizePrefixCls,
         type,
@@ -70,36 +96,6 @@ export default {
         [`${prefixCls}-block`]: block,
       };
     },
-  },
-  watch: {
-    loading(val, preVal) {
-      if (preVal && typeof preVal !== 'boolean') {
-        clearTimeout(this.delayTimeout);
-      }
-      if (val && typeof val !== 'boolean' && val.delay) {
-        this.delayTimeout = setTimeout(() => {
-          this.sLoading = !!val;
-        }, val.delay);
-      } else {
-        this.sLoading = !!val;
-      }
-    },
-  },
-  mounted() {
-    this.fixTwoCNChar();
-  },
-  updated() {
-    this.fixTwoCNChar();
-  },
-  beforeDestroy() {
-    // if (this.timeout) {
-    //   clearTimeout(this.timeout)
-    // }
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout);
-    }
-  },
-  methods: {
     fixTwoCNChar() {
       // Fix for HOC usage like <FormatMessage />
       const node = this.$refs.buttonNode;
@@ -139,7 +135,9 @@ export default {
     },
   },
   render() {
-    const { type, htmlType, classes, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
+    this.icon = this.$scopedSlots.icon && this.$scopedSlots.icon();
+    const classes = this.getClasses();
+    const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
     const buttonProps = {
       attrs: {
         ...$attrs,
@@ -151,8 +149,7 @@ export default {
         click: handleClick,
       },
     };
-    const iconType = sLoading ? 'loading' : icon;
-    const iconNode = iconType ? <Icon type={iconType} /> : null;
+    const iconNode = sLoading ? <LoadingOutlined /> : icon || null;
     const children = filterEmpty($slots.default);
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>

@@ -174,8 +174,7 @@
         "xhr-mock": "^2.5.1"
     },
     "dependencies": {
-        "@ant-design/icons": "^2.1.1",
-        "@ant-design/icons-vue": "^2.0.0",
+        "@ant-design/icons-vue": "^4.0.4",
         "add-dom-event-listener": "^1.0.2",
         "array-tree-filter": "^2.1.0",
         "async-validator": "^3.0.3",

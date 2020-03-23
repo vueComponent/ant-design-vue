@@ -2,12 +2,26 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
+import { VNode, CreateElement } from 'vue'
+
+export interface ThenableArgument {
+  (val: any): void;
+}
+export interface MessageType {
+  (): void;
+  then: (fill: ThenableArgument, reject: ThenableArgument) => Promise<void>;
+  promise: Promise<void>;
+}
+export type ConfigType =  string | VNode | ((h: CreateElement) => VNode);
+export type ConfigDuration = number | (() => void);
+export type ConfigOnClose = () => void;
+
 export interface MessageOptions {
   /**
    * content of the message
    * @type any (string | VNode | (h) => VNode)
    */
-  content: any;
+  content: ConfigType;
 
   /**
    * time(seconds) before auto-dismiss, don't dismiss if set to 0
@@ -26,13 +40,13 @@ export interface MessageOptions {
    * Customized Icon
    * @type any  (string | VNode | (h) => VNode)
    */
-  icon?: any;
+  icon?: ConfigType;
 
   /**
    * Specify a function that will be called when the message is closed
    * @type Function
    */
-  onClose?: () => void;
+  onClose?: ConfigOnClose;
   key?: string | number;
 }
 
@@ -65,14 +79,20 @@ export interface MessageConfigOptions {
   top?: string;
 }
 
-export declare class Message {
-  success(content: any, duration?: number, onClose?: () => void): Promise<any>;
-  warning(content: any, duration?: number, onClose?: () => void): Promise<any>;
-  warn(content: any, duration?: number, onClose?: () => void): Promise<any>;
-  info(content: any, duration?: number, onClose?: () => void): Promise<any>;
-  error(content: any, duration?: number, onClose?: () => void): Promise<any>;
-  loading(content: any, duration?: number, onClose?: () => void): Promise<any>;
-  open: (config: MessageOptions) => Promise<any>;
+export declare interface Message {
+  success(content: MessageOptions): MessageType;
+  success(content: ConfigType, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  warning(content: MessageOptions): MessageType;
+  warning(content: ConfigType, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  warn(content: MessageOptions): MessageType;
+  warn(content: ConfigType, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  info(content: MessageOptions): MessageType;
+  info(content: ConfigType, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  error(content: MessageOptions): MessageType;
+  error(content: ConfigType, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  loading(content: MessageOptions): MessageType;
+  loading(content: ConfigType, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  open: (config: MessageOptions) => MessageType;
   config: (options: MessageConfigOptions) => void;
   destroy: () => void;
 }

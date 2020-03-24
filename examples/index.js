@@ -1,9 +1,10 @@
 import 'babel-polyfill';
 import Vue from 'vue';
 import App from './App.vue';
-import { Button } from 'ant-design-vue';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/style.js';
 
-Vue.use(Button);
+Vue.use(Antd);
 
 new Vue({
   el: '#app',

@@ -37,8 +37,6 @@ module.exports = {
             ],
           ],
           plugins: [
-            // libraryDirectory is "", because webpack alias doesn't seem to allow '/'
-            ['import', { libraryName: 'ant-design-vue', style: true, libraryDirectory: '' }],
             'transform-vue-jsx',
             'transform-object-assign',
             'transform-object-rest-spread',

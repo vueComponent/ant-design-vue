@@ -3,7 +3,7 @@ import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
-import Icon from '../icon';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
 import buttonTypes from '../button/buttonTypes';
 const ButtonType = buttonTypes().type;
@@ -186,7 +186,7 @@ export default {
     const closeIcon = getComponentFromProp(this, 'closeIcon');
     const closeIconToRender = (
       <span class={`${prefixCls}-close-x`}>
-        {closeIcon || <Icon class={`${prefixCls}-close-icon`} type={'close'} />}
+        {closeIcon || <CloseOutlined class={`${prefixCls}-close-icon`} />}
       </span>
     );
     const footer = getComponentFromProp(this, 'footer');

@@ -1209,8 +1209,8 @@ export default {
       const vcTableProps = {
         key: 'table',
         props: {
-          ...restProps,
           expandIcon: this.renderExpandIcon(prefixCls),
+          ...restProps,
           customRow: (record, index) => this.onRow(prefixCls, record, index),
           components: this.sComponents,
           prefixCls,

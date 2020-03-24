@@ -8,7 +8,7 @@ import {
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import VcCollapse, { collapseProps } from '../vc-collapse';
-import Icon from '../icon';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -28,9 +28,7 @@ export default {
   methods: {
     renderExpandIcon(panelProps, prefixCls) {
       const expandIcon = getComponentFromProp(this, 'expandIcon', panelProps);
-      const icon = expandIcon || (
-        <Icon type="right" rotate={panelProps.isActive ? 90 : undefined} />
-      );
+      const icon = expandIcon || <RightOutlined rotate={panelProps.isActive ? 90 : undefined} />;
       return isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
         ? cloneElement(icon, {
             class: `${prefixCls}-arrow`,

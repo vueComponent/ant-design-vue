@@ -68,7 +68,7 @@ function notice(args) {
             <div
               class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
             >
-              {args.icon ? args.icon : <Icon />}
+              {args.icon ? typeof args.icon === 'function' ? args.icon(h) : args.icon : <Icon />}
               <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
             </div>
           );

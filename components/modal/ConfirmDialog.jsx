@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import Dialog from './Modal';
 import ActionButton from './ActionButton';
 import { getConfirmLocale } from './locale';
-import warning from '../_util/warning';
 
 export default {
   functional: true,
@@ -24,11 +23,6 @@ export default {
       cancelButtonProps,
       closable = false,
     } = props;
-    warning(
-      !('iconType' in props),
-      'Modal',
-      `The property 'iconType' is deprecated. Use the property 'icon' instead.`,
-    );
     const okType = props.okType || 'primary';
     const prefixCls = props.prefixCls || 'ant-modal';
     const contentPrefixCls = `${prefixCls}-confirm`;
@@ -89,7 +83,7 @@ export default {
       >
         <div class={`${contentPrefixCls}-body-wrapper`}>
           <div class={`${contentPrefixCls}-body`}>
-            {typeof icon === 'function' ? icon(h) : null}
+            {typeof icon === 'function' ? icon(h) : icon}
             {props.title === undefined ? null : (
               <span class={`${contentPrefixCls}-title`}>{props.title}</span>
             )}

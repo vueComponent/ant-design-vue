@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import message from '..';
-import Icon from '../../icon';
+import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';
 
 describe('message', () => {
   beforeEach(() => {
@@ -129,9 +129,9 @@ describe('message', () => {
     }, 0);
   });
   it('should allow custom icon', async () => {
-    message.open({ content: 'Message', icon: h => <Icon type="smile-o" /> }); // eslint-disable-line
+    message.open({ content: 'Message', icon: h => <SmileOutlined /> }); // eslint-disable-line
     await asyncExpect(() => {
-      expect(document.querySelectorAll('.anticon-smile-o').length).toBe(1);
+      expect(document.querySelectorAll('.anticon-smile').length).toBe(1);
     }, 0);
   });
 

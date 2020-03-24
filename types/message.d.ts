@@ -24,9 +24,9 @@ export interface MessageOptions {
 
   /**
    * Customized Icon
-   * @type any  (string | VNode | (h) => VNode)
+   * @type any  (VNode | (h) => VNode)
    */
-  icon?: any;
+  icon?: (h) => VNode | VNode;
 
   /**
    * Specify a function that will be called when the message is closed

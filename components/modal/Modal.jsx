@@ -3,7 +3,7 @@ import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
-import { CloseOutlined } from '@ant-design/icons-vue';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
 import buttonTypes from '../button/buttonTypes';
 const ButtonType = buttonTypes().type;

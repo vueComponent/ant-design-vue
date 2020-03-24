@@ -1,11 +1,9 @@
 import Modal, { destroyFns } from './Modal';
 import modalConfirm from './confirm';
-import {
-  InfoCircleOutlined,
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  ExclamationCircleOutlined,
-} from '@ant-design/icons-vue';
+import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
+import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
+import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
 import Base from '../base';
 
 // export { ActionButtonProps } from './ActionButton'

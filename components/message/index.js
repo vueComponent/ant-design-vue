@@ -1,11 +1,9 @@
 import Notification from '../vc-notification';
-import {
-  CloseCircleFilled,
-  CheckCircleFilled,
-  InfoCircleFilled,
-  LoadingOutlined,
-  ExclamationCircleFilled,
-} from '@ant-design/icons-vue';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 
 let defaultDuration = 3;
 let defaultTop;

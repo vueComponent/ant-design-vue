@@ -1,14 +1,12 @@
-import {
-  CloseOutlined,
-  CheckCircleOutlined,
-  ExclamationCircleOutlined,
-  InfoCircleOutlined,
-  CloseCircleOutlined,
-  CheckCircleFilled,
-  ExclamationCircleFilled,
-  InfoCircleFilled,
-  CloseCircleFilled,
-} from '@ant-design/icons-vue';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
+import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
+import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import classNames from 'classnames';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';

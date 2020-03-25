@@ -3,11 +3,15 @@ import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-u
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
-import Icon from '../icon';
+import {
+  LoadingOutlined, PaperClipOutlined, PictureOutlined, FileOutlined,
+  DeleteOutlined, DownloadOutlined, EyeOutlined,
+} from '@ant-design/icons-vue';
 import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
+import UploadOutlined from '@ant-design/icons-vue/lib/icons/UploadOutlined';
 
 export default {
   name: 'AUploadList',
@@ -93,13 +97,13 @@ export default {
 
     const list = items.map(file => {
       let progress;
-      let icon = <Icon type={file.status === 'uploading' ? 'loading' : 'paper-clip'} />;
+      let icon = file.status === 'uploading' ? <UploadOutlined /> : <PaperClipOutlined />;
 
       if (listType === 'picture' || listType === 'picture-card') {
         if (listType === 'picture-card' && file.status === 'uploading') {
           icon = <div class={`${prefixCls}-list-item-uploading-text`}>{locale.uploading}</div>;
         } else if (!file.thumbUrl && !file.url) {
-          icon = <Icon class={`${prefixCls}-list-item-thumbnail`} type="picture" theme="twoTone" />;
+          icon = <PictureOutlined class={`${prefixCls}-list-item-thumbnail`} theme="twoTone" />;
         } else {
           const thumbnail = isImageUrl(file) ? (
             <img
@@ -108,7 +112,7 @@ export default {
               class={`${prefixCls}-list-item-image`}
             />
           ) : (
-            <Icon type="file" class={`${prefixCls}-list-item-icon`} theme="twoTone" />
+            <FileOutlined class={`${prefixCls}-list-item-icon`} theme="twoTone" />
           );
           icon = (
             <a
@@ -150,12 +154,11 @@ export default {
         typeof file.linkProps === 'string' ? JSON.parse(file.linkProps) : file.linkProps;
 
       const removeIcon = showRemoveIcon ? (
-        <Icon type="delete" title={locale.removeFile} onClick={() => this.handleClose(file)} />
+        <DeleteOutlined title={locale.removeFile} onClick={() => this.handleClose(file)} />
       ) : null;
       const downloadIcon =
         showDownloadIcon && file.status === 'done' ? (
-          <Icon
-            type="download"
+          <DownloadOutlined
             title={locale.downloadFile}
             onClick={() => this.handleDownload(file)}
           />
@@ -218,7 +221,7 @@ export default {
           onClick={e => this.handlePreview(file, e)}
           title={locale.previewFile}
         >
-          <Icon type="eye-o" />
+          <EyeOutlined />
         </a>
       ) : null;
       const actions = listType === 'picture-card' && file.status !== 'uploading' && (

@@ -295,12 +295,12 @@ describe('Upload List', () => {
     const wrapper = mount(Upload, props);
     setTimeout(async () => {
       wrapper
-        .findAll('.anticon-eye-o')
+        .findAll('.anticon-eye')
         .at(0)
         .trigger('click');
       expect(handlePreview).toBeCalledWith(fileList[0]);
       wrapper
-        .findAll('.anticon-eye-o')
+        .findAll('.anticon-eye')
         .at(1)
         .trigger('click');
       expect(handlePreview).toBeCalledWith(fileList[1]);

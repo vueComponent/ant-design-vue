@@ -12,13 +12,8 @@ export default {
     tabBarPosition: PropTypes.string.def('top'),
     extraContent: PropTypes.any,
   },
-  methods: {
-    onKeyDown(e) {
-      this.__emit('keydown', e);
-    },
-  },
   render() {
-    const { prefixCls, onKeyDown, tabBarPosition, extraContent } = this;
+    const { prefixCls, tabBarPosition, extraContent } = this;
     const cls = {
       [`${prefixCls}-bar`]: true,
     };
@@ -44,7 +39,6 @@ export default {
         role="tablist"
         class={cls}
         tabIndex="0"
-        onKeydown={onKeyDown}
         {...{
           directives: [
             {

@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { isMobile } from 'is-mobile';
 import Input from './Input';
-import Icon from '../icon';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import inputProps from './inputProps';
 import Button from '../button';
 import { cloneElement } from '../_util/vnode';
@@ -54,11 +55,11 @@ export default {
       if (enterButton) {
         return (
           <Button class={`${prefixCls}-button`} type="primary" size={size} key="enterButton">
-            <Icon type="loading" />
+            <LoadingOutlined />
           </Button>
         );
       }
-      return <Icon class={`${prefixCls}-icon`} type="loading" key="loadingIcon" />;
+      return <LoadingOutlined class={`${prefixCls}-icon`} key="loadingIcon" />;
     },
     renderSuffix(prefixCls) {
       const { loading } = this;
@@ -73,7 +74,7 @@ export default {
       if (enterButton) return suffix;
 
       const icon = (
-        <Icon class={`${prefixCls}-icon`} type="search" key="searchIcon" onClick={this.onSearch} />
+        <SearchOutlined class={`${prefixCls}-icon`} key="searchIcon" onClick={this.onSearch} />
       );
 
       if (suffix) {
@@ -122,7 +123,7 @@ export default {
             key="enterButton"
             onClick={this.onSearch}
           >
-            {enterButton === true || enterButton === '' ? <Icon type="search" /> : enterButton}
+            {enterButton === true || enterButton === '' ? <SearchOutlined /> : enterButton}
           </Button>
         );
       }

@@ -1,5 +1,9 @@
 import Notification from '../vc-notification';
-import Icon from '../icon';
+import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
+import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
+import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 
 const notificationInstance = {};
 let defaultDuration = 4.5;
@@ -92,7 +96,7 @@ function getNotificationInstance(
         const icon = typeof closeIcon === 'function' ? closeIcon(h) : closeIcon;
         const closeIconToRender = (
           <span class={`${prefixCls}-close-x`}>
-            {icon || <Icon class={`${prefixCls}-close-icon`} type="close" />}
+            {icon || <CloseOutlined class={`${prefixCls}-close-icon`} />}
           </span>
         );
         return closeIconToRender;
@@ -106,10 +110,10 @@ function getNotificationInstance(
 }
 
 const typeToIcon = {
-  success: 'check-circle-o',
-  info: 'info-circle-o',
-  error: 'close-circle-o',
-  warning: 'exclamation-circle-o',
+  success: CheckCircleOutlined,
+  info: InfoCircleOutlined,
+  error: CloseCircleOutlined,
+  warning: ExclamationCircleOutlined,
 };
 
 function notice(args) {
@@ -124,8 +128,8 @@ function notice(args) {
       <span class={`${prefixCls}-icon`}>{typeof icon === 'function' ? icon(h) : icon}</span>
     );
   } else if (type) {
-    const iconType = typeToIcon[type];
-    iconNode = h => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} type={iconType} />; // eslint-disable-line
+    const Icon = typeToIcon[type];
+    iconNode = h => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} />; // eslint-disable-line
   }
   const { placement, top, bottom, getContainer, closeIcon } = args;
   getNotificationInstance(

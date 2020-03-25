@@ -4,14 +4,13 @@ import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
 import {
-  LoadingOutlined, PaperClipOutlined, PictureOutlined, FileOutlined,
+  UploadOutlined, PaperClipOutlined, PictureOutlined, FileOutlined,
   DeleteOutlined, DownloadOutlined, EyeOutlined,
 } from '@ant-design/icons-vue';
 import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
-import UploadOutlined from '@ant-design/icons-vue/lib/icons/UploadOutlined';
 
 export default {
   name: 'AUploadList',

@@ -1,6 +1,6 @@
 import { asyncExpect } from '@/tests/utils';
 import notification from '..';
-import Icon from '../../icon';
+import { StepBackwardOutlined } from '@ant-design/icons-vue';
 
 describe('notification', () => {
   beforeEach(() => {
@@ -97,7 +97,7 @@ describe('notification', () => {
       notification.open({
         message: 'Notification Title',
         duration: 0,
-        closeIcon: h => <Icon type="step-backward" />,
+        closeIcon: h => <StepBackwardOutlined />,
       });
     });
     await asyncExpect(() => {
@@ -107,13 +107,13 @@ describe('notification', () => {
 
   it('support config closeIcon', async () => {
     notification.config({
-      closeIcon: h => <Icon type="step-backward" />,
+      closeIcon: h => <StepBackwardOutlined />,
     });
     await asyncExpect(() => {
       notification.open({
         message: 'Notification Title',
         duration: 0,
-        closeIcon: h => <Icon type="step-backward" />,
+        closeIcon: h => <StepBackwardOutlined />,
       });
     });
     await asyncExpect(() => {

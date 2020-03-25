@@ -6,7 +6,7 @@ import PropTypes from '../_util/vue-types';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 
 const ButtonTypesProps = buttonTypes();
 const DropdownProps = getDropdownProps();
@@ -66,7 +66,7 @@ export default {
       title,
       ...restProps
     } = this.$props;
-    const icon = getComponentFromProp(this, 'icon') || <Icon type="ellipsis" />;
+    const icon = getComponentFromProp(this, 'icon') || <EllipsisOutlined />;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown-button', customizePrefixCls);

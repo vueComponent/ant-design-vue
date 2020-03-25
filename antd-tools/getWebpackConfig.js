@@ -52,7 +52,7 @@ function getWebpackConfig(modules) {
       alias: {
         vue$: 'vue/dist/vue.esm.js',
         '@': process.cwd(),
-        'JSXUTIL': path.join(process.cwd(), './transform-jsx-vue3/mergeJSXProps.js'),
+        // 'babel-plugin-transform-jsx-vue3$': path.join(process.cwd(), './transform-jsx-vue3/index.js'),
       },
     },
 

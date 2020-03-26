@@ -3,10 +3,10 @@ import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-u
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
-import UploadOutlined from '@ant-design/icons-vue/UploadOutlined';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PaperClipOutlined from '@ant-design/icons-vue/PaperClipOutlined';
-import PictureOutlined from '@ant-design/icons-vue/PictureOutlined';
-import FileOutlined from '@ant-design/icons-vue/FileOutlined';
+import PictureTwoTone from '@ant-design/icons-vue/PictureTwoTone';
+import FileTwoTone from '@ant-design/icons-vue/FileOutlined';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
 import DownloadOutlined from '@ant-design/icons-vue/DownloadOutlined';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
@@ -99,13 +99,13 @@ export default {
 
     const list = items.map(file => {
       let progress;
-      let icon = file.status === 'uploading' ? <UploadOutlined /> : <PaperClipOutlined />;
+      let icon = file.status === 'uploading' ? <LoadingOutlined /> : <PaperClipOutlined />;
 
       if (listType === 'picture' || listType === 'picture-card') {
         if (listType === 'picture-card' && file.status === 'uploading') {
           icon = <div class={`${prefixCls}-list-item-uploading-text`}>{locale.uploading}</div>;
         } else if (!file.thumbUrl && !file.url) {
-          icon = <PictureOutlined class={`${prefixCls}-list-item-thumbnail`} />;
+          icon = <PictureTwoTone class={`${prefixCls}-list-item-thumbnail`} />;
         } else {
           const thumbnail = isImageUrl(file) ? (
             <img
@@ -114,7 +114,7 @@ export default {
               class={`${prefixCls}-list-item-image`}
             />
           ) : (
-            <FileOutlined class={`${prefixCls}-list-item-icon`} />
+            <FileTwoTone class={`${prefixCls}-list-item-icon`} />
           );
           icon = (
             <a

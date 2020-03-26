@@ -55,8 +55,23 @@ const ResizableTextArea = {
         raf.cancel(this.resizeFrameId);
         this.resizeFrameId = raf(() => {
           this.setState({ resizing: false });
+          this.fixFirefoxAutoScroll();
         });
       });
+    },
+    // https://github.com/ant-design/ant-design/issues/21870
+    fixFirefoxAutoScroll() {
+      try {
+        if (document.activeElement === this.$refs.textArea) {
+          const currentStart = this.$refs.textArea.selectionStart;
+          const currentEnd = this.$refs.textArea.selectionEnd;
+          this.$refs.textArea.setSelectionRange(currentStart, currentEnd);
+        }
+      } catch (e) {
+        // Fix error in Chrome:
+        // Failed to read the 'selectionStart' property from 'HTMLInputElement'
+        // http://stackoverflow.com/q/21177489/3040605
+      }
     },
 
     renderTextArea() {
@@ -89,7 +104,7 @@ const ResizableTextArea = {
       }
       const style = {
         ...textareaStyles,
-        ...(resizing ? { overflow: 'hidden' } : null),
+        ...(resizing ? { overflowX: 'hidden', overflowY: 'hidden' } : null),
       };
       const textareaProps = {
         attrs: otherProps,

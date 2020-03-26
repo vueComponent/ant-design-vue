@@ -1,5 +1,6 @@
 import { filterEmpty, parseStyleText } from './props-util';
 import classNames from 'classnames';
+import { warning } from '../vc-util/warning';
 
 export function cloneVNode(vnode, deep) {
   const componentOptions = vnode.componentOptions;
@@ -62,6 +63,11 @@ export function cloneElement(n, nodeProps = {}, deep) {
     return null;
   }
   const node = cloneVNode(ele, deep);
+  // 函数式组件不支持clone  https://github.com/vueComponent/ant-design-vue/pull/1947
+  warning(
+    !(node.fnOptions && node.fnOptions.functional),
+    `can not use cloneElement for functional component (${node.tag})`,
+  );
   const { props = {}, key, on = {}, children, directives = [] } = nodeProps;
   const data = node.data || {};
   let cls = {};
@@ -124,10 +130,6 @@ export function cloneElement(n, nodeProps = {}, deep) {
       node.componentOptions.children = children;
     }
   } else {
-    node.data.on = { ...(node.data.on || {}), ...on };
-  }
-
-  if (node.fnOptions && node.fnOptions.functional) {
     node.data.on = { ...(node.data.on || {}), ...on };
   }
 

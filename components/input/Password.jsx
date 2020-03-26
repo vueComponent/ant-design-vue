@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
 import Input from './Input';
-import Icon from '../icon';
+import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
+import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
@@ -50,9 +51,6 @@ export default {
       const { prefixCls, action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
       const iconProps = {
-        props: {
-          type: this.visible ? 'eye' : 'eye-invisible',
-        },
         on: {
           [iconTrigger]: this.onVisibleChange,
           mousedown: e => {
@@ -64,7 +62,11 @@ export default {
         class: `${prefixCls}-icon`,
         key: 'passwordIcon',
       };
-      return <Icon {...iconProps} />;
+      return this.visible ? (
+        <EyeOutlined {...iconProps} />
+      ) : (
+        <EyeInvisibleOutlined {...iconProps} />
+      );
     },
   },
   render() {

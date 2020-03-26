@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
 
 export default {
+  name: 'LocaleReceiver',
   props: {
     componentName: PropTypes.string.def('global'),
     defaultLocale: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),

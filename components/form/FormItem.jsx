@@ -16,8 +16,18 @@ import {
 import getTransitionProps from '../_util/getTransitionProps';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement, cloneVNodes } from '../_util/vnode';
-import Icon from '../icon';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { ConfigConsumerProps } from '../config-provider';
+
+const iconMap = {
+  success: CheckCircleFilled,
+  warning: ExclamationCircleFilled,
+  error: CloseCircleFilled,
+  validating: LoadingOutlined,
+};
 
 function noop() {}
 
@@ -319,28 +329,12 @@ export default {
           'is-validating': validateStatus === 'validating',
         });
       }
-      let iconType = '';
-      switch (validateStatus) {
-        case 'success':
-          iconType = 'check-circle';
-          break;
-        case 'warning':
-          iconType = 'exclamation-circle';
-          break;
-        case 'error':
-          iconType = 'close-circle';
-          break;
-        case 'validating':
-          iconType = 'loading';
-          break;
-        default:
-          iconType = '';
-          break;
-      }
+      const IconNode = validateStatus && iconMap[validateStatus];
+
       const icon =
-        props.hasFeedback && iconType ? (
+        props.hasFeedback && IconNode ? (
           <span class={`${prefixCls}-item-children-icon`}>
-            <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
+            <IconNode />
           </span>
         ) : null;
       return (

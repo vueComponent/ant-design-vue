@@ -1,7 +1,8 @@
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-util';
 import classNames from 'classnames';
-import Icon from '../icon';
+import UpOutlined from '@ant-design/icons-vue/UpOutlined';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber from '../vc-input-number/src';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
@@ -56,8 +57,8 @@ const InputNumber = {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
     });
-    const upIcon = <Icon type="up" class={`${prefixCls}-handler-up-inner`} />;
-    const downIcon = <Icon type="down" class={`${prefixCls}-handler-down-inner`} />;
+    const upIcon = <UpOutlined class={`${prefixCls}-handler-up-inner`} />;
+    const downIcon = <DownOutlined class={`${prefixCls}-handler-down-inner`} />;
 
     const vcInputNumberprops = {
       props: {

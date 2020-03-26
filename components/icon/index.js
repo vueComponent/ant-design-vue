@@ -13,7 +13,7 @@ import {
 import warning from '../_util/warning';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getTwoToneColor, setTwoToneColor } from './twoTonePrimaryColor';
-import { filterEmpty, getClass } from '../_util/props-util';
+import { filterEmpty, getListeners } from '../_util/props-util';
 import Base from '../base';
 
 // Initial setting
@@ -23,7 +23,8 @@ const defaultTheme = 'outlined';
 let dangerousTheme;
 
 function renderIcon(h, locale, context) {
-  const { props, slots, listeners, data } = context;
+  const { $props: props, $slots } = context;
+  const listeners = getListeners(context);
   const {
     // affect inner <svg>...</svg>
     type,
@@ -36,8 +37,7 @@ function renderIcon(h, locale, context) {
     rotate,
     tabIndex,
   } = props;
-  const slotsMap = slots();
-  let children = filterEmpty(slotsMap.default);
+  let children = filterEmpty($slots.default);
   children = children.length === 0 ? undefined : children;
   warning(
     Boolean(type || Component || children),
@@ -46,7 +46,6 @@ function renderIcon(h, locale, context) {
   );
 
   const classString = classNames({
-    ...getClass(context),
     [`anticon`]: true,
     [`anticon-${type}`]: !!type,
   });
@@ -131,16 +130,13 @@ function renderIcon(h, locale, context) {
   if (iconTabIndex === undefined && 'click' in listeners) {
     iconTabIndex = -1;
   }
-  const { attrs, ...restDataProps } = data;
   // functional component not support nativeOn，https://github.com/vuejs/vue/issues/7526
   const iProps = {
-    ...restDataProps,
     attrs: {
-      ...attrs,
       'aria-label': type && `${locale.icon}: ${type}`,
       tabIndex: iconTabIndex,
     },
-    on: { ...listeners, ...data.nativeOn },
+    on: listeners,
     class: classString,
     staticClass: '',
   };
@@ -148,7 +144,6 @@ function renderIcon(h, locale, context) {
 }
 
 const Icon = {
-  functional: true,
   name: 'AIcon',
   props: {
     tabIndex: PropTypes.number,
@@ -161,11 +156,11 @@ const Icon = {
     twoToneColor: PropTypes.string,
     role: PropTypes.string,
   },
-  render(h, context) {
+  render(h) {
     return (
       <LocaleReceiver
         componentName="Icon"
-        scopedSlots={{ default: locale => renderIcon(h, locale, context) }}
+        scopedSlots={{ default: locale => renderIcon(h, locale, this) }}
       />
     );
   },

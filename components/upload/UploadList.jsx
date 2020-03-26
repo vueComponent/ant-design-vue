@@ -3,10 +3,13 @@ import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-u
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
-import {
-  UploadOutlined, PaperClipOutlined, PictureOutlined, FileOutlined,
-  DeleteOutlined, DownloadOutlined, EyeOutlined,
-} from '@ant-design/icons-vue';
+import UploadOutlined from '@ant-design/icons-vue/UploadOutlined';
+import PaperClipOutlined from '@ant-design/icons-vue/PaperClipOutlined';
+import PictureOutlined from '@ant-design/icons-vue/PictureOutlined';
+import FileOutlined from '@ant-design/icons-vue/FileOutlined';
+import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
+import DownloadOutlined from '@ant-design/icons-vue/DownloadOutlined';
+import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from 'classnames';
@@ -102,7 +105,7 @@ export default {
         if (listType === 'picture-card' && file.status === 'uploading') {
           icon = <div class={`${prefixCls}-list-item-uploading-text`}>{locale.uploading}</div>;
         } else if (!file.thumbUrl && !file.url) {
-          icon = <PictureOutlined class={`${prefixCls}-list-item-thumbnail`} theme="twoTone" />;
+          icon = <PictureOutlined class={`${prefixCls}-list-item-thumbnail`} />;
         } else {
           const thumbnail = isImageUrl(file) ? (
             <img
@@ -111,7 +114,7 @@ export default {
               class={`${prefixCls}-list-item-image`}
             />
           ) : (
-            <FileOutlined class={`${prefixCls}-list-item-icon`} theme="twoTone" />
+            <FileOutlined class={`${prefixCls}-list-item-icon`} />
           );
           icon = (
             <a

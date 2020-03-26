@@ -10,7 +10,9 @@ import {
 import BaseMixin from '../_util/BaseMixin';
 import isNumeric from '../_util/isNumeric';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
@@ -207,12 +209,12 @@ export default {
           }`}
           style={zeroWidthTriggerStyle}
         >
-          <Icon type="bars" />
+          <BarsOutlined />
         </span>
       ) : null;
     const iconObj = {
-      expanded: reverseArrow ? <Icon type="right" /> : <Icon type="left" />,
-      collapsed: reverseArrow ? <Icon type="left" /> : <Icon type="right" />,
+      expanded: reverseArrow ? <RightOutlined /> : <LeftOutlined />,
+      collapsed: reverseArrow ? <LeftOutlined /> : <RightOutlined />,
     };
     const status = this.sCollapsed ? 'collapsed' : 'expanded';
     const defaultTrigger = iconObj[status];

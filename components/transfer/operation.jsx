@@ -1,3 +1,5 @@
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import Button from '../button';
@@ -35,8 +37,8 @@ export default {
           size="small"
           disabled={disabled || !rightActive}
           onClick={moveToRight}
-          icon="right"
         >
+          <RightOutlined slot="icon" />
           {rightArrowText}
         </Button>
         <Button
@@ -44,8 +46,8 @@ export default {
           size="small"
           disabled={disabled || !leftActive}
           onClick={moveToLeft}
-          icon="left"
         >
+          <LeftOutlined slot="icon" />
           {leftArrowText}
         </Button>
       </div>

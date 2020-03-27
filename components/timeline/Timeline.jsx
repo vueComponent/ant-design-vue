@@ -10,7 +10,7 @@ import {
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import TimelineItem from './TimelineItem';
-import Icon from '../icon';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const TimelineProps = {
@@ -56,7 +56,7 @@ export default {
     // })
     const pendingItem = pending ? (
       <TimelineItem pending={!!pending}>
-        <template slot="dot">{pendingDot || <Icon type="loading" />}</template>
+        <template slot="dot">{pendingDot || <LoadingOutlined />}</template>
         {pendingNode}
       </TimelineItem>
     ) : null;

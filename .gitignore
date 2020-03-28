@@ -61,7 +61,6 @@ typings/
 .DS_Store
 dist
 lib
-antdv-demo
 es
 _site
 yarn.lock

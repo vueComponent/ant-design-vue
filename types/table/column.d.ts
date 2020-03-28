@@ -23,6 +23,14 @@ export declare class Column extends AntdComponent {
   align?: 'left' | 'right' | 'center';
 
   /**
+   * ellipsize cell content, not working with sorter and filters for now. 
+   * tableLayout would be fixed when ellipsis is true.
+   * @default false
+   * @type boolean
+   */
+  ellipsis?: boolean;
+  
+  /**
    * Span of this column's title
    * @type number
    */

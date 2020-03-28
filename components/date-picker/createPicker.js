@@ -3,7 +3,8 @@ import omit from 'lodash/omit';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import classNames from 'classnames';
-import Icon from '../icon';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import { ConfigConsumerProps } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
 import BaseMixin from '../_util/BaseMixin';
@@ -202,12 +203,7 @@ export default function createPicker(TheCalendar, props) {
 
       const clearIcon =
         !props.disabled && props.allowClear && value ? (
-          <Icon
-            type="close-circle"
-            class={`${prefixCls}-picker-clear`}
-            onClick={this.clearSelection}
-            theme="filled"
-          />
+          <CloseCircleFilled class={`${prefixCls}-picker-clear`} onClick={this.clearSelection} />
         ) : null;
 
       const inputIcon = (suffixIcon &&
@@ -217,7 +213,7 @@ export default function createPicker(TheCalendar, props) {
           })
         ) : (
           <span class={`${prefixCls}-picker-icon`}>{suffixIcon}</span>
-        ))) || <Icon type="calendar" class={`${prefixCls}-picker-icon`} />;
+        ))) || <CalendarOutlined class={`${prefixCls}-picker-icon`} />;
 
       const input = ({ value: inputValue }) => (
         <div>

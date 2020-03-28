@@ -105,6 +105,6 @@ Support us with a monthly donation and help us continue our activities. [[Become
 
 If you want to show your name here, please send an email to <a href="mailto:antdv@foxmail.com">antdv@foxmail.com</a>.
 
-<a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="donation by qq"></a> <a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
+<a href="http://www.powerproject.com.cn/" target="_blank"><img  width="193" src="http://www.powerproject.com.cn/wp-content/uploads/2019/08/2019080215041192.png" title="donation by wechat"></a> <a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="donation by qq"></a> <a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/104172832)

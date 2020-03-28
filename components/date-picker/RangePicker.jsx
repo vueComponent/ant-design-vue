@@ -3,7 +3,7 @@ import RangeCalendar from '../vc-calendar/src/RangeCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import classNames from 'classnames';
 import shallowequal from 'shallowequal';
-import Icon from '../icon';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Tag from '../tag';
 import { ConfigConsumerProps } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
@@ -373,12 +373,7 @@ export default {
     const [startValue, endValue] = value;
     const clearIcon =
       !props.disabled && props.allowClear && value && (startValue || endValue) ? (
-        <Icon
-          type="close-circle"
-          class={`${prefixCls}-picker-clear`}
-          onClick={this.clearSelection}
-          theme="filled"
-        />
+        <CloseCircleFilled class={`${prefixCls}-picker-clear`} onClick={this.clearSelection} />
       ) : null;
 
     const inputIcon = <InputIcon suffixIcon={suffixIcon} prefixCls={prefixCls} />;

@@ -1,5 +1,4 @@
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
 import { getListeners, getComponentFromProp } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
@@ -121,11 +120,7 @@ export default {
     if (src && isImgExist) {
       children = <img src={src} srcSet={srcSet} onError={this.handleImgLoadError} alt={alt} />;
     } else if (icon) {
-      if (typeof icon === 'string') {
-        children = <Icon type={icon} />;
-      } else {
-        children = icon;
-      }
+      children = icon;
     } else {
       const childrenNode = this.$refs.avatarChildren;
       if (childrenNode || scale !== 1) {

@@ -1,5 +1,8 @@
 import omit from 'omit.js';
 import debounce from 'lodash/debounce';
+import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
+import FolderOutLined from '@ant-design/icons-vue/FolderOutLined';
+import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
@@ -10,7 +13,6 @@ import {
   convertDirectoryKeysToNodes,
   getFullKeyListByTreeData,
 } from './util';
-import Icon from '../icon';
 import BaseMixin from '../_util/BaseMixin';
 import {
   initDefaultProps,
@@ -28,9 +30,9 @@ import { ConfigConsumerProps } from '../config-provider';
 function getIcon(props, h) {
   const { isLeaf, expanded } = props;
   if (isLeaf) {
-    return <Icon type="file" />;
+    return <FileOutlined />;
   }
-  return <Icon type={expanded ? 'folder-open' : 'folder'} />;
+  return expanded ? <FolderOpenOutlined /> : <FolderOutLined />;
 }
 
 export default {

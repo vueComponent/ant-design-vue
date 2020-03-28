@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps } from '../_util/props-util';
-import Icon from '../icon';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import Input from '../input';
 
 export const TransferSearchProps = {
@@ -33,11 +34,11 @@ export default {
     const icon =
       value && value.length > 0 ? (
         <a href="#" class={`${prefixCls}-action`} onClick={this.handleClear2}>
-          <Icon type="close-circle" theme="filled" />
+          <CloseCircleFilled />
         </a>
       ) : (
         <span class={`${prefixCls}-action`}>
-          <Icon type="search" />
+          <SearchOutlined />
         </span>
       );
 

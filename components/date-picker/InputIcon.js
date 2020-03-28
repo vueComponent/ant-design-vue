@@ -1,4 +1,4 @@
-import Icon from '../icon';
+import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import { isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 
@@ -14,7 +14,7 @@ export default {
         })
       ) : (
         <span class={`${prefixCls}-picker-icon`}>{suffixIcon}</span>
-      )) || <Icon type="calendar" class={`${prefixCls}-picker-icon`} />
+      )) || <CalendarOutlined class={`${prefixCls}-picker-icon`} />
     );
   },
 };

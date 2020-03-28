@@ -57,13 +57,13 @@ jobs:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
 
-      - name: test
+      - name: Generate coverage report
         run: npm test
         env:
           COVERAGE: "true"
 
-      - name: codecov
-        run: npm run codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           

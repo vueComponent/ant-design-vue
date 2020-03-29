@@ -5,7 +5,8 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
-import Icon from '../icon';
+import ClockCircleOutlined from '@ant-design/icons-vue/ClockCircleOutlined';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import enUS from './locale/en_US';
 import interopDefault from '../_util/interopDefault';
 import {
@@ -178,7 +179,7 @@ const TimePicker = {
         isValidElement(suffixIcon) &&
         cloneElement(suffixIcon, {
           class: `${prefixCls}-clock-icon`,
-        })) || <Icon type="clock-circle" class={`${prefixCls}-clock-icon`} />;
+        })) || <ClockCircleOutlined class={`${prefixCls}-clock-icon`} />;
 
       return <span class={`${prefixCls}-icon`}>{clockIcon}</span>;
     },
@@ -193,7 +194,7 @@ const TimePicker = {
         });
       }
 
-      return <Icon type="close-circle" class={clearIconPrefixCls} theme="filled" />;
+      return <CloseCircleFilled class={clearIconPrefixCls} />;
     },
 
     renderTimePicker(locale) {

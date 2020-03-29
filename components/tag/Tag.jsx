@@ -1,5 +1,5 @@
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PropTypes from '../_util/vue-types';
-import Icon from '../icon';
 import getTransitionProps from '../_util/getTransitionProps';
 import omit from 'omit.js';
 import Wave from '../_util/wave';
@@ -113,7 +113,7 @@ export default {
 
     renderCloseIcon() {
       const { closable } = this.$props;
-      return closable ? <Icon type="close" onClick={this.handleIconClick} /> : null;
+      return closable ? <CloseOutlined onClick={this.handleIconClick} /> : null;
     },
   },
 

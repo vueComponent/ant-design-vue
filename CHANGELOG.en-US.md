@@ -12,7 +12,7 @@
 
 ## 1.5.0
 
-`2020-03-15`
+`2020-03-29`
 
 - Four new components have been added:
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions/) Added mentioned components and discarded the original Mention components.
@@ -81,7 +81,8 @@
 - 🌟 Badge supports custom colors.
 - 🐞 Fix the problem that the label of Steps is not centered.
 - 🐞 Fix cursor style problem of DatePicker and TimePicker.
-- 🐞 Fix TreeSelect custom icon is invalid [#1901](https://github.com/vueComponent/ant-design-vue/issues/1901)
+- 🐞 Fix `TreeSelect` custom icon is invalid [#1901](https://github.com/vueComponent/ant-design-vue/issues/1901)
+- 🐞 Fix `Tabs` keyboard left / right switching error [#1947](https://github.com/vueComponent/ant-design-vue/issues/1947)
 
 ## 1.4.12
 

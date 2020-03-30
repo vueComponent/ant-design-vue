@@ -56,7 +56,7 @@ const renderTitle = (h, prefixCls, instance) => {
   const subTitle = getComponentFromProp(instance, 'subTitle');
   const tags = getComponentFromProp(instance, 'tags');
   const extra = getComponentFromProp(instance, 'extra');
-  const backIcon = getComponentFromProp(instance, 'backIcon') || <Icon type="arrow-left" />;
+  const backIcon = getComponentFromProp(instance, 'backIcon') !== undefined ? getComponentFromProp(instance, 'backIcon') : <Icon type="arrow-left" />;
   const onBack = instance.$listeners.back;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {

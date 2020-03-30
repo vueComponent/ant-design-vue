@@ -1,7 +1,8 @@
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-util';
 import VcSteps from '../vc-steps';
-import Icon from '../icon';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
@@ -42,8 +43,8 @@ const Steps = {
     const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
 
     const icons = {
-      finish: <Icon type="check" class={`${prefixCls}-finish-icon`} />,
-      error: <Icon type="close" class={`${prefixCls}-error-icon`} />,
+      finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,
+      error: <CloseOutlined class={`${prefixCls}-error-icon`} />,
     };
     const stepsProps = {
       props: {

@@ -1,4 +1,7 @@
-import Icon from '../icon';
+import UpOutlined from '@ant-design/icons-vue/UpOutlined';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar';
 import { cloneElement } from '../_util/vnode';
 const TabBar = {
@@ -17,16 +20,22 @@ const TabBar = {
     const inkBarAnimated = typeof animated === 'object' ? animated.inkBar : animated;
 
     const isVertical = tabPosition === 'left' || tabPosition === 'right';
-    const prevIconType = isVertical ? 'up' : 'left';
-    const nextIconType = isVertical ? 'down' : 'right';
     const prevIcon = (
       <span class={`${prefixCls}-tab-prev-icon`}>
-        <Icon type={prevIconType} class={`${prefixCls}-tab-prev-icon-target`} />
+        {
+          isVertical ?
+          <UpOutlined class={`${prefixCls}-tab-prev-icon-target`} /> :
+          <LeftOutlined class={`${prefixCls}-tab-prev-icon-target`} />
+        }
       </span>
     );
     const nextIcon = (
       <span class={`${prefixCls}-tab-next-icon`}>
-        <Icon type={nextIconType} class={`${prefixCls}-tab-next-icon-target`} />
+        {
+          isVertical ?
+          <DownOutlined class={`${prefixCls}-tab-next-icon-target`} /> :
+          <RightOutlined class={`${prefixCls}-tab-next-icon-target`} />
+        }
       </span>
     );
 

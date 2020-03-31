@@ -294,6 +294,7 @@ export declare class Modal extends AntdComponent {
   static error(options: ModalOptions): ModalConfirm;
   static warning(options: ModalOptions): ModalConfirm;
   static confirm(options: ModalOptions): ModalConfirm;
+  static destroyAll(): void;
 }
 
 declare module 'vue/types/vue' {

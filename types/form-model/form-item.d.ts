@@ -5,7 +5,7 @@
 import { AntdComponent } from '../component';
 import { Col } from '../grid/col';
 
-export declare class NFormItem extends AntdComponent {
+export declare class FormModelItem extends AntdComponent {
   /**
    * Used with label, whether to display : after label text.
    * @default true
@@ -64,6 +64,6 @@ export declare class NFormItem extends AntdComponent {
   wrapperCol: Col;
   labelAlign: 'left' | 'right';
   prop: string;
-  rules: object | array;
+  rules: object | object[];
   autoLink: boolean;
 }

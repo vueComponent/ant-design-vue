@@ -5,7 +5,7 @@
 import { AntdComponent } from '../component';
 import { Col } from '../grid/col';
 import Vue from 'vue';
-import { NFormItem } from './form-item';
+import { FormModelItem } from './form-item';
 
 declare interface ValidationRule {
   trigger?: string;
@@ -79,8 +79,8 @@ declare interface ValidationRule {
   validator?: (rule: any, value: any, callback: Function) => any;
 }
 
-export declare class NForm extends AntdComponent {
-  static Item: typeof NFormItem;
+export declare class FormModel extends AntdComponent {
+  static Item: typeof FormModelItem;
 
   /**
    * Hide required mark of all form items

@@ -1,6 +1,5 @@
 import { filterEmpty, parseStyleText } from './props-util';
 import classNames from 'classnames';
-import { warning } from '../vc-util/warning';
 
 export function cloneVNode(vnode, deep) {
   const componentOptions = vnode.componentOptions;

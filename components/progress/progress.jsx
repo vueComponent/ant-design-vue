@@ -2,7 +2,10 @@ import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Line from './line';
 import Circle from './circle';
 import { validProgress } from './utils';
@@ -66,7 +69,7 @@ export default {
       let text;
       const textFormatter =
         format || this.$scopedSlots.format || (percentNumber => `${percentNumber}%`);
-      const iconType = type === 'circle' || type === 'dashboard' ? '' : '-circle';
+      const isLineType = type === 'line';
       if (
         format ||
         this.$scopedSlots.format ||
@@ -74,9 +77,9 @@ export default {
       ) {
         text = textFormatter(validProgress(percent), validProgress(successPercent));
       } else if (progressStatus === 'exception') {
-        text = <Icon type={`close${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;
+        text = isLineType ? <CloseCircleFilled /> : <CloseOutlined />;
       } else if (progressStatus === 'success') {
-        text = <Icon type={`check${iconType}`} theme={type === 'line' ? 'filled' : 'outlined'} />;
+        text = isLineType ? <CheckCircleFilled /> : <CheckOutlined />;
       }
       return (
         <span class={`${prefixCls}-text`} title={typeof text === 'string' ? text : undefined}>

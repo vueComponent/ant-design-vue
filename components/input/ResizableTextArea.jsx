@@ -51,13 +51,15 @@ const ResizableTextArea = {
       }
       const { minRows, maxRows } = autoSize;
       const textareaStyles = calculateNodeHeight(this.$refs.textArea, false, minRows, maxRows);
-      this.setState({ textareaStyles, resizing: true }, () => {
-        raf.cancel(this.resizeFrameId);
-        this.resizeFrameId = raf(() => {
-          this.setState({ resizing: false });
-          this.fixFirefoxAutoScroll();
+      setTimeout(() => {
+        this.setState({ textareaStyles, resizing: true }, () => {
+          raf.cancel(this.resizeFrameId);
+          this.resizeFrameId = raf(() => {
+            this.setState({ resizing: false });
+            this.fixFirefoxAutoScroll();
+          });
         });
-      });
+      }, 0);
     },
     // https://github.com/ant-design/ant-design/issues/21870
     fixFirefoxAutoScroll() {

@@ -70,6 +70,8 @@ export default {
       if (isInvalidRenderCellText(text)) {
         tdProps.attrs = text.attrs || {};
         tdProps.props = text.props || {};
+        tdProps.class = text.class;
+        tdProps.style = text.style;
         colSpan = tdProps.attrs.colSpan;
         rowSpan = tdProps.attrs.rowSpan;
         text = text.children;
@@ -99,7 +101,7 @@ export default {
       tdProps.style = { textAlign: column.align, ...tdProps.style };
     }
 
-    const cellClassName = classNames(className || column.class, {
+    const cellClassName = classNames(className, column.class, {
       [`${prefixCls}-cell-ellipsis`]: !!column.ellipsis,
       // 如果有宽度，增加断行处理
       // https://github.com/ant-design/ant-design/issues/13825#issuecomment-449889241

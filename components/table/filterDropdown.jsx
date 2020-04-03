@@ -1,9 +1,9 @@
+import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
 import closest from 'dom-closest';
 import classNames from 'classnames';
 import shallowequal from 'shallowequal';
 import Dropdown from '../dropdown';
-import Icon from '../icon';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
 import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper';
@@ -221,10 +221,8 @@ export default {
       });
       if (!filterIcon) {
         return (
-          <Icon
+          <FilterFilled
             title={locale.filterTitle}
-            type="filter"
-            theme="filled"
             class={dropdownIconClass}
             onClick={stopPropagation}
           />

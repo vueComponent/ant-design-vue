@@ -1,3 +1,5 @@
+import CaretUpFilled from '@ant-design/icons-vue/CaretUpFilled';
+import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import VcTable, { INTERNAL_COL_DEFINE } from '../vc-table';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
@@ -1070,19 +1072,15 @@ export default {
           const isAscend = isSortColumn && sortOrder === 'ascend';
           const isDescend = isSortColumn && sortOrder === 'descend';
           const ascend = sortDirections.indexOf('ascend') !== -1 && (
-            <Icon
+            <CaretUpFilled
               class={`${prefixCls}-column-sorter-up ${isAscend ? 'on' : 'off'}`}
-              type="caret-up"
-              theme="filled"
               key="caret-up"
             />
           );
 
           const descend = sortDirections.indexOf('descend') !== -1 && (
-            <Icon
+            <CaretDownFilled
               class={`${prefixCls}-column-sorter-down ${isDescend ? 'on' : 'off'}`}
-              type="caret-down"
-              theme="filled"
               key="caret-down"
             />
           );

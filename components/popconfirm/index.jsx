@@ -5,7 +5,7 @@ import PropTypes from '../_util/vue-types';
 import { getOptionProps, hasProp, getComponentFromProp, mergeProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import buttonTypes from '../button/buttonTypes';
-import Icon from '../icon';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import Button from '../button';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
@@ -86,7 +86,7 @@ const Popconfirm = {
     renderOverlay(prefixCls, popconfirmLocale) {
       const { okType, okButtonProps, cancelButtonProps } = this;
       const icon = getComponentFromProp(this, 'icon') || (
-        <Icon type="exclamation-circle" theme="filled" />
+        <ExclamationCircleFilled/>
       );
       const cancelBtnProps = mergeProps(
         {

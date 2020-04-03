@@ -445,7 +445,7 @@ const TreeNode = {
           {typeof currentTitle === 'function' ? currentTitle({ ...this.$props }, h) : currentTitle}
         </span>
       ) : (
-        <span class={`${prefixCls}-title`}>{defaultTitle}</span>;
+        <span class={`${prefixCls}-title`}>{defaultTitle}</span>
       );
       
       return (

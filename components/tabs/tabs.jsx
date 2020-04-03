@@ -1,4 +1,5 @@
-import Icon from '../icon';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import VcTabs, { TabPane } from '../vc-tabs/src';
 import TabContent from '../vc-tabs/src/TabContent';
 import { isFlexSupported } from '../_util/styleChecker';
@@ -113,8 +114,7 @@ export default {
         let closable = props.closable;
         closable = typeof closable === 'undefined' ? true : closable;
         const closeIcon = closable ? (
-          <Icon
-            type="close"
+          <CloseOutlined
             class={`${prefixCls}-close-x`}
             onClick={e => this.removeTab(child.key, e)}
           />
@@ -137,7 +137,7 @@ export default {
       if (!hideAdd) {
         tabBarExtraContent = (
           <span>
-            <Icon type="plus" class={`${prefixCls}-new-tab`} onClick={this.createNewTab} />
+            <PlusOutlined class={`${prefixCls}-new-tab`} onClick={this.createNewTab} />
             {tabBarExtraContent}
           </span>
         );

@@ -27,7 +27,7 @@
     ],
     "scripts": {
         "dev": "webpack-dev-server",
-        "start": "cross-env PORT=3001 NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
+        "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
         "test": "cross-env NODE_ENV=test jest --config .jest.js",
         "compile": "node antd-tools/cli/run.js compile",
         "pub": "node antd-tools/cli/run.js pub",

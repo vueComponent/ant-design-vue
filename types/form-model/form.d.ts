@@ -107,9 +107,64 @@ export declare class FormModel extends AntdComponent {
    * @type Col
    */
   wrapperCol: Col;
+
+  /**
+   * change default props colon value of Form.Item (only effective when prop layout is horizontal)
+   * @type boolean
+   * @default true
+   */
   colon: boolean;
+
+  /**
+   * text align of label of all items
+   * @type 'left' | 'right'
+   * @default 'left'
+   */
   labelAlign: 'left' | 'right';
+
+  /**
+   * data of form component
+   * @type object
+   */
   model: object;
+
+  /**
+   * validation rules of form
+   * @type object
+   */
+
   rules: object;
+  /**
+   * whether to trigger validation when the rules prop is changed
+   * @type Boolean
+   * @default true
+   */
   validateOnRuleChange: boolean;
+
+  /**
+   * validate the whole form. Takes a callback as a param. After validation,
+   * the callback will be executed with two params: a boolean indicating if the validation has passed,
+   * and an object containing all fields that fail the validation. Returns a promise if callback is omitted
+   * @type Function
+   */
+  validate: (callback?: (boolean: Boolean, object: Object) => void) => void | Promise<any>;
+
+  /**
+   * validate one or several form items
+   * @type Function
+   */
+  validateField: (props: string[] | string, callback: (errorMessage: string) => void) => void;
+
+  /**
+   * reset all the fields and remove validation result
+   */
+  resetFields: () => void;
+
+  /**
+   * clear validation message for certain fields.
+   * The parameter is prop name or an array of prop names of the form items whose validation messages will be removed.
+   * When omitted, all fields' validation messages will be cleared
+   * @type string[] | string
+   */
+  clearValidate: (props: string[] | string) => void;
 }

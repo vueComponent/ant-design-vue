@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Select from '..';
-import Icon from '../../icon';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import focusTest from '../../../tests/shared/focusTest';
 import mountTest from '../../../tests/shared/mountTest';
 
@@ -185,9 +185,9 @@ describe('Select', () => {
         render() {
           return (
             <Select
-              removeIcon={<Icon type="close" />}
-              clearIcon={<Icon type="close" />}
-              menuItemSelectedIcon={<Icon type="close" />}
+              removeIcon={<CloseOutlined />}
+              clearIcon={<CloseOutlined />}
+              menuItemSelectedIcon={<CloseOutlined />}
             >
               <Option value="1">1</Option>
             </Select>

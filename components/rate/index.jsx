@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import VcRate from '../vc-rate';
-import Icon from '../icon';
+import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
 import Base from '../base';
 
@@ -48,9 +48,7 @@ const Rate = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
 
-    const character = getComponentFromProp(this, 'character') || (
-      <Icon type="star" theme="filled" />
-    );
+    const character = getComponentFromProp(this, 'character') || <StarFilled />;
     const rateProps = {
       props: {
         character,

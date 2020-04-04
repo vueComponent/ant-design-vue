@@ -156,7 +156,7 @@ export default {
           v-show={!hidden}
           className={scrollNumberCls}
           count={displayCount}
-          displayComponent={this.renderDispayComponent()} // <Badge status="success" count={<Icon type="xxx" />}></Badge>
+          displayComponent={this.renderDispayComponent()}
           title={this.getScrollNumberTitle()}
           style={statusStyle}
           key="scrollNumber"

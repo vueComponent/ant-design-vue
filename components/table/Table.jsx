@@ -16,7 +16,6 @@ import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import { TableProps } from './interface';
 import Pagination from '../pagination';
-import Icon from '../icon';
 import Spin from '../spin';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';

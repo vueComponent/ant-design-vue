@@ -7,7 +7,7 @@ import { AntdComponent } from './component';
 export declare class PageHeader extends AntdComponent {
   /**
    * Custom backIcon
-   * @default <Icon type="arrow-left" />
+   * @default <ArrowLeftOutlined />
    * @type any (string | slot)
    */
   backIcon: any;

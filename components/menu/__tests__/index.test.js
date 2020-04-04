@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Menu from '..';
-import Icon from '../../icon';
+import { InboxOutlined, PieChartOutlined } from '@ant-design/icons-vue';
 import mountTest from '../../../tests/shared/mountTest';
 
 jest.mock('mutationobserver-shim', () => {
@@ -318,7 +318,7 @@ describe('Menu', () => {
               inlineCollapsed={this.inlineCollapsed}
             >
               <Menu.Item key="menu1">
-                <Icon type="inbox" />
+                <InboxOutlined />
                 <span>Option</span>
               </Menu.Item>
               <SubMenu key="1" title="submenu1">
@@ -388,7 +388,7 @@ describe('Menu', () => {
               inlineCollapsed={this.inlineCollapsed}
             >
               <Menu.Item key="menu1">
-                <Icon type="inbox" />
+                <InboxOutlined />
                 <span>Option</span>
               </Menu.Item>
               <SubMenu key="1" title="submenu1">
@@ -550,7 +550,7 @@ describe('Menu', () => {
           return (
             <Menu mode="inline" inlineCollapsed>
               <Menu.Item key="1" title="bamboo lucky">
-                <Icon type="pie-chart" />
+                <PieChartOutlined />
                 <span>
                   Option 1
                   <img

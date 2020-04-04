@@ -28,7 +28,7 @@ export declare class Rate extends AntdComponent {
 
   /**
    * custom character of rate
-   * @default <Icon type="star" />
+   * @default <StarOutlined />
    * @type any (String or slot="character")
    */
   character: any;

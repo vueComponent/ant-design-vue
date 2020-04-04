@@ -1,9 +1,9 @@
+import StarFilled from '@ant-design/icons-vue/StarFilled';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import VcRate from '../vc-rate';
-import Icon from '../icon';
 import Tooltip from '../tooltip';
 import Base from '../base';
 
@@ -49,7 +49,7 @@ const Rate = {
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
 
     const character = getComponentFromProp(this, 'character') || (
-      <Icon type="star" theme="filled" />
+      <StarFilled />
     );
     const rateProps = {
       props: {

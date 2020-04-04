@@ -1,3 +1,8 @@
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import warning from '../_util/warning';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
@@ -10,7 +15,6 @@ import {
   isValidElement,
   getListeners,
 } from '../_util/props-util';
-import Icon from '../icon';
 import { cloneElement } from '../_util/vnode';
 import Base from '../base';
 
@@ -161,9 +165,9 @@ const Select = {
           : suffixIcon;
       }
       if (loading) {
-        return <Icon type="loading" />;
+        return <LoadingOutlined />;
       }
-      return <Icon type="down" class={`${prefixCls}-arrow-icon`} />;
+      return <DownOutlined class={`${prefixCls}-arrow-icon`} />;
     },
   },
   render() {
@@ -218,19 +222,19 @@ const Select = {
     const finalRemoveIcon = (removeIcon &&
       (isValidElement(removeIcon)
         ? cloneElement(removeIcon, { class: `${prefixCls}-remove-icon` })
-        : removeIcon)) || <Icon type="close" class={`${prefixCls}-remove-icon`} />;
+        : removeIcon)) || <CloseOutlined class={`${prefixCls}-remove-icon`} />;
 
     const finalClearIcon = (clearIcon &&
       (isValidElement(clearIcon)
         ? cloneElement(clearIcon, { class: `${prefixCls}-clear-icon` })
         : clearIcon)) || (
-      <Icon type="close-circle" theme="filled" class={`${prefixCls}-clear-icon`} />
+      <CloseCircleFilled class={`${prefixCls}-clear-icon`} />
     );
 
     const finalMenuItemSelectedIcon = (menuItemSelectedIcon &&
       (isValidElement(menuItemSelectedIcon)
         ? cloneElement(menuItemSelectedIcon, { class: `${prefixCls}-selected-icon` })
-        : menuItemSelectedIcon)) || <Icon type="check" class={`${prefixCls}-selected-icon`} />;
+        : menuItemSelectedIcon)) || <CheckOutlined class={`${prefixCls}-selected-icon`} />;
 
     const selectProps = {
       props: {

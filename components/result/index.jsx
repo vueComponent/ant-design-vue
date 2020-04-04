@@ -1,17 +1,20 @@
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import WarningFilled from '@ant-design/icons-vue/WarningFilled';
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
 import Base from '../base';
 import noFound from './noFound';
 import serverError from './serverError';
 import unauthorized from './unauthorized';
 
 export const IconMap = {
-  success: 'check-circle',
-  error: 'close-circle',
-  info: 'exclamation-circle',
-  warning: 'warning',
+  success: (h) => <CheckCircleFilled />,
+  error: (h) => <CloseCircleFilled />,
+  info: (h) => <ExclamationCircleFilled />,
+  warning: (h) => <WarningFilled />,
 };
 
 export const ExceptionMap = {
@@ -42,8 +45,8 @@ const renderIcon = (h, prefixCls, { status, icon }) => {
     );
   }
   // prop `icon` require slot or VNode
-  const iconString = IconMap[status];
-  const iconNode = icon || <Icon type={iconString} theme="filled" />;
+  const iconComponent = IconMap[status](h);
+  const iconNode = icon || iconComponent;
   return <div class={`${prefixCls}-icon`}>{iconNode}</div>;
 };
 

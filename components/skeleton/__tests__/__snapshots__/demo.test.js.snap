@@ -27,16 +27,11 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/basic.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/skeleton/demo/children.md correctly 1`] = `
-<div class="article">
-  <div>
-    <h4>Ant Design Vue, a design language</h4>
-    <p>
-      We supply a series of design principles, practical patterns and high quality design
-      resources (Sketch and Axure), to help people create their product prototypes beautifully
-      and efficiently.
-    </p>
-  </div> <button type="button" class="ant-btn"><span>Show Skeleton</span></button>
-</div>
+<div class="article"><span><div><h4>Ant Design Vue, a design language</h4> <p>
+        We supply a series of design principles, practical patterns and high quality design
+        resources (Sketch and Axure), to help people create their product prototypes beautifully
+        and efficiently.
+      </p></div></span> <button type="button" class="ant-btn"><span>Show Skeleton</span></button></div>
 `;
 
 exports[`renders ./antdv-demo/docs/skeleton/demo/complex.md correctly 1`] = `

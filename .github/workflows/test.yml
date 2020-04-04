@@ -105,7 +105,7 @@ jobs:
         with:
           repository: tangjinzhou/antdv-demo
           token: ${{ secrets.ACCESS_TOKEN }}
-          path: git@github.com:tangjinzhou/antdv-demo.git
+          path: antdv-demo
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1

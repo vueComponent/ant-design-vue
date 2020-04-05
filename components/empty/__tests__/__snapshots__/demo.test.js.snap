@@ -29,13 +29,11 @@ exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] =
     <h3>Select</h3>
     <div tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
-        <div class="ant-select-selection__rendered"></div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
+        <div class="ant-select-selection__rendered"></div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
     </div>
-    <h3>TreeSelect</h3> <span role="combobox" aria-haspopup="listbox" tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;"><span class="ant-select-selection ant-select-selection--single"><span class="ant-select-selection__rendered"><span class="ant-select-selection__placeholder"></span></span><span class="ant-select-arrow" style="outline: none;"><i aria-label="icon: down" class="ant-select-arrow-icon anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span></span></span>
-    <h3>Cascader</h3> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-show-search" style="width: 200px;"><span class="ant-cascader-picker-label"></span><input placeholder="Please select" type="text" class="ant-input ant-cascader-input "><i aria-label="icon: down" class="ant-cascader-picker-arrow anticon anticon-down"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
-        <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
-      </svg></i></span>
+    <h3>TreeSelect</h3> <span role="combobox" aria-haspopup="listbox" tabindex="0" class="ant-select ant-select-enabled" style="width: 200px;"><span class="ant-select-selection ant-select-selection--single"><span class="ant-select-selection__rendered"><span class="ant-select-selection__placeholder"></span></span><span class="ant-select-arrow" style="outline: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span></span></span>
+    <h3>Cascader</h3> <span tabindex="0" class="ant-cascader-picker ant-cascader-picker-show-search" style="width: 200px;"><span class="ant-cascader-picker-label"></span><input placeholder="Please select" type="text" class="ant-input ant-cascader-input "><span role="img" aria-label="down" class="anticon anticon-down ant-cascader-picker-arrow"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
     <h3>Transfer</h3>
     <div class="ant-transfer">
       <div class="ant-transfer-list">
@@ -57,11 +55,7 @@ exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] =
           </div>
         </div>
       </div>
-      <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only"><i aria-label="icon: right" class="anticon anticon-right"><svg viewBox="64 64 896 896" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
-              <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
-            </svg></i></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only"><i aria-label="icon: left" class="anticon anticon-left"><svg viewBox="64 64 896 896" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
-              <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
-            </svg></i></button></div>
+      <div class="ant-transfer-operation"><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only"><span role="img" aria-label="right" class="anticon anticon-right"><svg viewBox="64 64 896 896" focusable="false" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button><button disabled="disabled" type="button" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only"><span role="img" aria-label="left" class="anticon anticon-left"><svg viewBox="64 64 896 896" focusable="false" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></div>
       <div class="ant-transfer-list">
         <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span></div>
         <div class="ant-transfer-list-body">
@@ -98,32 +92,33 @@ exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] =
                   <thead class="ant-table-thead">
                     <tr>
                       <th key="name" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"></span>
-              </div></span></th>
-              <th key="age" class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"></span>
-            </div></span></th>
-            </tr>
-            </thead>
-            <tbody class="ant-table-tbody"></tbody>
-            </table>
-          </div>
-          <div class="ant-table-placeholder">
-            <div class="ant-empty ant-empty-normal">
-              <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
-                  <g transform="translate(0 1)" fill="none" fillRule="evenodd">
-                    <ellipse fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
-                    <g fillRule="nonzero" stroke="#D9D9D9">
-                      <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
-                      <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA"></path>
-                    </g>
-                  </g>
-                </svg></div>
-              <p class="ant-empty-description">No Data</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </div>
+    </span></th>
+    <th key="age" class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"></span>
+  </div></span></th>
+  </tr>
+  </thead>
+  <tbody class="ant-table-tbody"></tbody>
+  </table>
+</div>
+<div class="ant-table-placeholder">
+  <div class="ant-empty ant-empty-normal">
+    <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0 1)" fill="none" fillRule="evenodd">
+          <ellipse fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
+          <g fillRule="nonzero" stroke="#D9D9D9">
+            <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+            <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA"></path>
+          </g>
+        </g>
+      </svg></div>
+    <p class="ant-empty-description">No Data</p>
   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <h3>List</h3>
 <div class="ant-list ant-list-split">

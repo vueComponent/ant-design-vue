@@ -13,6 +13,8 @@ import {
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { cloneElement } from '../_util/vnode';
 import Base from '../base';
 

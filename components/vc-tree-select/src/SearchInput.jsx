@@ -151,7 +151,7 @@ const SearchInput = {
         >
           {mirrorSearchValue}&nbsp;
         </span>
-        {renderPlaceholder ? renderPlaceholder() : null}
+        {renderPlaceholder && !mirrorSearchValue ? renderPlaceholder() : null}
       </span>
     );
   },

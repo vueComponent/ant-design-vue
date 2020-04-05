@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.5.0-rc.5",
+    "version": "1.5.1",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -26,8 +26,8 @@
         "scripts"
     ],
     "scripts": {
-        "dev": "node build/dev.js",
-        "start": "cross-env PORT=3001 NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
+        "dev": "webpack-dev-server",
+        "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
         "test": "cross-env NODE_ENV=test jest --config .jest.js",
         "compile": "node antd-tools/cli/run.js compile",
         "pub": "node antd-tools/cli/run.js pub",
@@ -109,7 +109,6 @@
         "gulp": "^4.0.1",
         "gulp-babel": "^7.0.0",
         "gulp-strip-code": "^0.1.4",
-        "highlight.js": "^9.12.0",
         "html-webpack-plugin": "^3.2.0",
         "husky": "^4.0.0",
         "istanbul-instrumenter-loader": "^3.0.0",
@@ -123,8 +122,6 @@
         "less-loader": "^5.0.0",
         "less-plugin-npm-import": "^2.1.0",
         "lint-staged": "^10.0.0",
-        "markdown-it": "^10.0.0",
-        "markdown-it-anchor": "^5.0.0",
         "marked": "0.3.18",
         "merge2": "^1.2.1",
         "mini-css-extract-plugin": "^0.9.0",
@@ -137,7 +134,6 @@
         "postcss-loader": "^3.0.0",
         "prettier": "^1.18.2",
         "pretty-quick": "^2.0.0",
-        "prismjs": "^1.19.0",
         "querystring": "^0.2.0",
         "raw-loader": "^4.0.0",
         "reqwest": "^2.0.5",
@@ -164,7 +160,7 @@
         "vue-router": "^3.0.1",
         "vue-server-renderer": "^2.6.11",
         "vue-template-compiler": "^2.6.11",
-        "vue-virtual-scroller": "^0.12.0",
+        "vue-virtual-scroller": "^1.0.0",
         "vuex": "^3.1.0",
         "webpack": "^4.28.4",
         "webpack-cli": "^3.2.1",

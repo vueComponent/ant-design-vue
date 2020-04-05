@@ -27,12 +27,7 @@ export default {
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     hideAdd: PropTypes.bool.def(false),
     tabBarStyle: PropTypes.object,
-    tabBarExtraContent: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.func,
-      PropTypes.array,
-    ]),
+    tabBarExtraContent: PropTypes.any,
     destroyInactiveTabPane: PropTypes.bool.def(false),
     type: PropTypes.oneOf(['line', 'card', 'editable-card']),
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),

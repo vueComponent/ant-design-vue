@@ -135,11 +135,11 @@ exports[`renders ./antdv-demo/docs/list/demo/infinite-virtualized-load.md correc
 <div class="ant-list ant-list-split">
   <div class="ant-spin-nested-loading">
     <div class="ant-spin-container">
-      <div data-v-3eef485a="" class="virtual-scroller" infinite-scroll-distance="10" style="height: 400px;">
-        <div data-v-3eef485a="" class="item-container">
-          <div data-v-3eef485a="" class="items"></div>
-        </div>
-        <div data-v-b329ee4c="" data-v-3eef485a="" tabindex="-1" class="resize-observer"><object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;" aria-hidden="true" tabindex="-1" type="text/html" data="about:blank"></object></div>
+      <div class="vue-recycle-scroller direction-vertical" infinite-scroll-distance="10" style="height: 400px;">
+        <!---->
+        <div class="vue-recycle-scroller__item-wrapper" style="min-height: 0px;"></div>
+        <!---->
+        <div data-v-b329ee4c="" tabindex="-1" class="resize-observer"><object aria-hidden="true" tabindex="-1" type="text/html" data="about:blank"></object></div>
       </div>
     </div>
   </div>

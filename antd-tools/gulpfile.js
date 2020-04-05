@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 // const install = require('./install')
@@ -336,6 +337,7 @@ gulp.task(
           newVersion &&
           newVersion.trim() === version
         ) {
+          // eslint-disable-next-line no-unused-vars
           runCmd('npm', ['run', 'pub'], code => {
             done();
           });

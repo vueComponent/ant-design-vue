@@ -491,13 +491,15 @@ export default {
         return getPopupContainer;
       }
       // Use undefined to let rc component use default logic.
-      return scroll && table ? () => table.tableNode : undefined;
+      return scroll && table ? () => table.getTableNode() : undefined;
     },
     scrollToFirstRow() {
       const { scroll } = this.$props;
       if (scroll && scroll.scrollToFirstRowOnChange !== false) {
         scrollTo(0, {
-          getContainer: () => this.$refs.vcTable.bodyTable,
+          getContainer: () => {
+            return this.$refs.vcTable.getBodyTable();
+          },
         });
       }
     },
@@ -1204,8 +1206,8 @@ export default {
       const vcTableProps = {
         key: 'table',
         props: {
-          ...restProps,
           expandIcon: this.renderExpandIcon(prefixCls),
+          ...restProps,
           customRow: (record, index) => this.onRow(prefixCls, record, index),
           components: this.sComponents,
           prefixCls,

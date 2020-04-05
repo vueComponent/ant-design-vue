@@ -30,6 +30,7 @@ async function syncFiles(data = []) {
         if (!fs.existsSync(toPath)) {
           fse.ensureDirSync(toPath);
         }
+        // eslint-disable-next-line no-console
         console.log('update style: ', path.join(toPath, itemData.name.replace('.tsx', '.js')));
         const content = Base64.decode(itemData.content);
         fs.writeFileSync(path.join(toPath, itemData.name.replace('.tsx', '.js')), content);

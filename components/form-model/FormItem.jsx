@@ -232,14 +232,22 @@ export default {
     let firstChildren = children[0];
     if (this.prop && this.autoLink && isValidElement(firstChildren)) {
       const originalEvents = getEvents(firstChildren);
+      const originalBlur = originalEvents.blur;
+      const originalChange = originalEvents.change;
       firstChildren = cloneElement(firstChildren, {
         on: {
           blur: (...args) => {
-            originalEvents.blur && originalEvents.blur(...args);
+            originalBlur && originalBlur(...args);
             this.onFieldBlur();
           },
           change: (...args) => {
-            originalEvents.change && originalEvents.change(...args);
+            if (Array.isArray(originalChange)) {
+              for (let i = 0, l = originalChange.length; i < l; i++) {
+                originalChange[i](...args);
+              }
+            } else if (originalChange) {
+              originalChange(...args);
+            }
             this.onFieldChange();
           },
         },

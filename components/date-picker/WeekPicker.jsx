@@ -219,10 +219,11 @@ export default {
         openChange: this.handleOpenChange,
       },
       style: popupStyle,
+      scopedSlots: { default: input, ...$scopedSlots },
     };
     return (
       <span class={pickerClass}>
-        <VcDatePicker {...vcDatePickerProps}>{input}</VcDatePicker>
+        <VcDatePicker {...vcDatePickerProps} />
       </span>
     );
   },

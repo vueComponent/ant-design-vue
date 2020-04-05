@@ -142,11 +142,6 @@ export default function calculateNodeHeight(
       height = Math.min(maxHeight, height);
     }
   }
-  // // Remove scroll bar flash when autosize without maxRows
-  // // donot remove in vue
-  // if (!maxRows) {
-  //   overflowY = 'hidden';
-  // }
   return {
     height: `${height}px`,
     minHeight: `${minHeight}px`,

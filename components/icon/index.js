@@ -2,7 +2,6 @@ import warning from '../_util/warning';
 import Base from '../base';
 
 const Icon = {
-  functional: true,
   name: 'AIcon',
   render() {
     warning(false, 'Icon', 'Empty Icon');

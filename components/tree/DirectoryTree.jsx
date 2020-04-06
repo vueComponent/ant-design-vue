@@ -1,7 +1,7 @@
 import omit from 'omit.js';
 import debounce from 'lodash/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
-import FolderOutLined from '@ant-design/icons-vue/FolderOutLined';
+import FolderOutlined from '@ant-design/icons-vue/FolderOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
@@ -32,7 +32,7 @@ function getIcon(props, h) {
   if (isLeaf) {
     return <FileOutlined />;
   }
-  return expanded ? <FolderOpenOutlined /> : <FolderOutLined />;
+  return expanded ? <FolderOpenOutlined /> : <FolderOutlined />;
 }
 
 export default {

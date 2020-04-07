@@ -12,6 +12,14 @@
   },
   "extends": ["plugin:vue/recommended", "prettier"],
   "plugins": ["markdown"],
+  "overrides": [
+    {
+      "files": ["**/demo/**"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ],
   "rules": {
     "comma-dangle": [2, "always-multiline"],
     "no-var": "error",

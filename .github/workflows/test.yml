@@ -99,7 +99,13 @@ jobs:
         uses: actions/checkout@master
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          submodules: true
+
+      - name: Checkout submodules
+        uses: actions/checkout@master
+        with:
+          repository: tangjinzhou/antdv-demo
+          token: ${{ secrets.ACCESS_TOKEN }}
+          path: antdv-demo
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1

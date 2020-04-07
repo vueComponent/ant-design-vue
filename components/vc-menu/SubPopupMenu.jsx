@@ -65,7 +65,8 @@ export function getActiveKey(props, originalActiveKey) {
   if (defaultActiveFirst) {
     loopMenuItem(children, (c, i) => {
       const propsData = c.componentOptions.propsData || {};
-      if (!activeKey && c && !propsData.disabled) {
+      const noActiveKey = activeKey === null || activeKey === undefined;
+      if (noActiveKey && c && !propsData.disabled) {
         activeKey = getKeyFromChildrenIndex(c, eventKey, i);
       }
     });

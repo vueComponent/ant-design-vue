@@ -229,34 +229,34 @@ exports[`renders ./antdv-demo/docs/table/demo/colspan-rowspan.md correctly 1`] =
     <tbody class="ant-table-tbody">
       <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
         <td class=""><a href="javascript:;">John Brown</a></td>
-        <td class="">32</td>
-        <td class="">0571-22098909</td>
-        <td class="">18889898989</td>
-        <td class="">New York No. 1 Lake Park</td>
+        <td>32</td>
+        <td>0571-22098909</td>
+        <td>18889898989</td>
+        <td>New York No. 1 Lake Park</td>
       </tr>
       <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
         <td class=""><a href="javascript:;">Jim Green</a></td>
-        <td class="">42</td>
-        <td class="">0571-22098333</td>
-        <td class="">18889898888</td>
-        <td class="">London No. 1 Lake Park</td>
+        <td>42</td>
+        <td>0571-22098333</td>
+        <td>18889898888</td>
+        <td>London No. 1 Lake Park</td>
       </tr>
       <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
         <td class=""><a href="javascript:;">Joe Black</a></td>
-        <td class="">32</td>
-        <td rowspan="2" class="">0575-22098909</td>
-        <td class="">18900010002</td>
-        <td class="">Sidney No. 1 Lake Park</td>
+        <td>32</td>
+        <td rowspan="2">0575-22098909</td>
+        <td>18900010002</td>
+        <td>Sidney No. 1 Lake Park</td>
       </tr>
       <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
         <td class=""><a href="javascript:;">Jim Red</a></td>
-        <td class="">18</td>
+        <td>18</td>
         <!---->
-        <td class="">18900010002</td>
-        <td class="">London No. 2 Lake Park</td>
+        <td>18900010002</td>
+        <td>London No. 2 Lake Park</td>
       </tr>
       <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
-        <td colspan="5" class=""><a href="javascript:;">Jake White</a></td>
+        <td colspan="5"><a href="javascript:;">Jake White</a></td>
         <!---->
         <!---->
         <!---->

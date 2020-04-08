@@ -163,7 +163,10 @@ export default {
         ...getOptionProps(this),
         prefixCls,
         tabBarPosition: tabPosition,
-        renderTabBar: () => <TabBar {...tabBarProps} />,
+        // https://github.com/vueComponent/ant-design-vue/issues/2030
+        // 如仅传递 tabBarProps 会导致，第二次执行 renderTabBar 时，丢失 on 属性，
+        // 添加key之后，会在babel jsx 插件中做一次merge，最终TabBar接收的是一个新的对象，而不是 tabBarProps
+        renderTabBar: () => <TabBar key="tabBar" {...tabBarProps} />,
         renderTabContent: () => (
           <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />
         ),

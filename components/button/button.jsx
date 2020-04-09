@@ -67,6 +67,7 @@ export default {
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+      const direction = this.configProvider.direction;
 
       // large => lg
       // small => sm
@@ -93,6 +94,7 @@ export default {
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar && autoInsertSpace,
         [`${prefixCls}-block`]: block,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       };
     },
     fixTwoCNChar() {

@@ -157,7 +157,7 @@ const Skeleton = {
         </div>
       );
     }
-    return this.$slots.default && this.$slots.default[0];
+    return <span>{this.$slots.default}</span>;
   },
 };
 /* istanbul ignore next */

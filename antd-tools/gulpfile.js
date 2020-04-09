@@ -11,7 +11,7 @@ const transformLess = require('./transformLess');
 const webpack = require('webpack');
 const babel = require('gulp-babel');
 const argv = require('minimist')(process.argv.slice(2));
-const GitHub = require('@octokit/rest');
+const { Octokit } = require('@octokit/rest');
 
 const packageJson = require(`${process.cwd()}/package.json`);
 // const getNpm = require('./getNpm')
@@ -168,10 +168,8 @@ function githubRelease(done) {
     console.log('no changelog found, skip');
     return;
   }
-  const github = new GitHub();
-  github.authenticate({
-    type: 'oauth',
-    token: process.env.GITHUB_TOKEN,
+  const github = new Octokit({
+    auth: process.env.GITHUB_TOKEN,
   });
   const date = new Date();
   const { version } = packageJson;
@@ -311,10 +309,8 @@ gulp.task(
     if (!process.env.NPM_TOKEN) {
       console.log('no NPM token found, skip');
     } else {
-      const github = new GitHub();
-      github.authenticate({
-        type: 'oauth',
-        token: process.env.GITHUB_TOKEN,
+      const github = new Octokit({
+        auth: process.env.GITHUB_TOKEN,
       });
       const [_, owner, repo] = execSync('git remote get-url origin') // eslint-disable-line
         .toString()

@@ -772,8 +772,7 @@ exports[`renders ./antdv-demo/docs/form/demo/validate-static.vue correctly 1`] =
         <!---->
       </div>
     </div>
-  </div>
-  </span>
+  </div></span>
   <!---->
   </div>
   </div>

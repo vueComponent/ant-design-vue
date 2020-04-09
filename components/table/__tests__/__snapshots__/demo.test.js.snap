@@ -819,7 +819,8 @@ exports[`renders ./antdv-demo/docs/table/demo/expand-children.md correctly 1`] =
     <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
       <td class="ant-table-selection-column"><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span></label></span></td>
       <td class=""><span class="ant-table-row-indent indent-level-0" style="padding-left: 0px;"></span>
-        <div role="button" tabindex="0" aria-label="Expand row" class="ant-table-row-expand-icon ant-table-row-collapsed"></div>John Brown sr.</td>
+        <div role="button" tabindex="0" aria-label="Expand row" class="ant-table-row-expand-icon ant-table-row-collapsed"></div>John Brown sr.
+      </td>
       <td class="ant-table-row-cell-break-word">60</td>
       <td class="ant-table-row-cell-break-word">New York No. 1 Lake Park</td>
     </tr>

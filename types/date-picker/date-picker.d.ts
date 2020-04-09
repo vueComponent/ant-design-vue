@@ -11,7 +11,7 @@ import { WeekPicker } from './week-picker';
 export declare class DatePicker extends DatepickerCommon {
   static RangePicker: typeof RangePicker;
   static MonthPicker: typeof MonthPicker;
-  static WeekPickerker: typeof WeekPicker;
+  static WeekPicker: typeof WeekPicker;
 
   /**
    * Defualt Value

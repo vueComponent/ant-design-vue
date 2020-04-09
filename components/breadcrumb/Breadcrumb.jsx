@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import classNames from 'classnames';
 import { cloneElement } from '../_util/vnode';
 import { filterEmpty, getComponentFromProp, getSlotOptions } from '../_util/props-util';
 import warning from '../_util/warning';
@@ -106,6 +107,7 @@ export default {
     const { prefixCls: customizePrefixCls, routes, params = {}, $slots, $scopedSlots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
+    const direction = this.configProvider.direction;
 
     const children = filterEmpty($slots.default);
     const separator = getComponentFromProp(this, 'separator');
@@ -132,6 +134,11 @@ export default {
         });
       });
     }
-    return <div class={prefixCls}>{crumbs}</div>;
+
+    const breadcrumbClassName = classNames(prefixCls, {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
+
+    return <div class={breadcrumbClassName}>{crumbs}</div>;
   },
 };

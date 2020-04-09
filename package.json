@@ -199,7 +199,7 @@
         "resize-observer-polyfill": "^1.5.1",
         "shallow-equal": "^1.0.0",
         "shallowequal": "^1.0.2",
-        "vue-ref": "^1.0.4",
+        "vue-ref": "^2.0.0",
         "warning": "^4.0.0"
     },
     "sideEffects": [

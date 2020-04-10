@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
+import ArrowRightOutlined from '@ant-design/icons-vue/ArrowRightOutlined';
 import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
@@ -50,18 +51,17 @@ const renderBreadcrumb = (h, breadcrumb) => {
   return <Breadcrumb {...breadcrumb} />;
 };
 
-const renderTitle = (h, prefixCls, instance) => {
+const renderTitle = (h, prefixCls, instance, direction) => {
   const { avatar } = instance;
   const title = getComponentFromProp(instance, 'title');
   const subTitle = getComponentFromProp(instance, 'subTitle');
   const tags = getComponentFromProp(instance, 'tags');
   const extra = getComponentFromProp(instance, 'extra');
+  const ArrowIcon = direction === 'rtl' ? <ArrowRightOutlined /> : <ArrowLeftOutlined />;
   const backIcon =
-    getComponentFromProp(instance, 'backIcon') !== undefined ? (
-      getComponentFromProp(instance, 'backIcon')
-    ) : (
-      <ArrowLeftOutlined />
-    );
+    getComponentFromProp(instance, 'backIcon') !== undefined
+      ? getComponentFromProp(instance, 'backIcon')
+      : ArrowIcon;
   const onBack = instance.$listeners.back;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
@@ -98,7 +98,7 @@ const PageHeader = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render(h) {
-    const { getPrefixCls, pageHeader } = this.configProvider;
+    const { getPrefixCls, pageHeader, direction } = this.configProvider;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponentFromProp(this, 'footer');
@@ -123,13 +123,14 @@ const PageHeader = {
         'has-breadcrumb': breadcrumbDom,
         'has-footer': footer,
         [`${prefixCls}-ghost`]: ghost,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       },
     ];
 
     return (
       <div class={className}>
         {breadcrumbDom}
-        {renderTitle(h, prefixCls, this)}
+        {renderTitle(h, prefixCls, this, direction)}
         {children && renderChildren(h, prefixCls, children)}
         {renderFooter(h, prefixCls, footer)}
       </div>

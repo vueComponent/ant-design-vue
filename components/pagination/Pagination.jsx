@@ -53,18 +53,18 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
-    getIconsProps(prefixCls) {
-      const prevIcon = (
+    getIconsProps(prefixCls, direction) {
+      let prevIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <LeftOutlined/>
+          <LeftOutlined />
         </a>
       );
-      const nextIcon = (
+      let nextIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <RightOutlined/>
+          <RightOutlined />
         </a>
       );
-      const jumpPrevIcon = (
+      let jumpPrevIcon = (
         <a class={`${prefixCls}-item-link`}>
           {/* You can use transition effects in the container :) */}
           <div class={`${prefixCls}-item-container`}>
@@ -73,7 +73,7 @@ export default {
           </div>
         </a>
       );
-      const jumpNextIcon = (
+      let jumpNextIcon = (
         <a class={`${prefixCls}-item-link`}>
           {/* You can use transition effects in the container :) */}
           <div class={`${prefixCls}-item-container`}>
@@ -82,6 +82,17 @@ export default {
           </div>
         </a>
       );
+      // change arrows direction in right-to-left direction
+      if (direction === 'rtl') {
+        let temp;
+        temp = prevIcon;
+        prevIcon = nextIcon;
+        nextIcon = temp;
+
+        temp = jumpPrevIcon;
+        jumpPrevIcon = jumpNextIcon;
+        jumpNextIcon = temp;
+      }
       return {
         prevIcon,
         nextIcon,
@@ -99,6 +110,7 @@ export default {
         ...restProps
       } = getOptionProps(this);
       const getPrefixCls = this.configProvider.getPrefixCls;
+      const direction = this.configProvider.direction;
       const prefixCls = getPrefixCls('pagination', customizePrefixCls);
       const selectPrefixCls = getPrefixCls('select', customizeSelectPrefixCls);
 
@@ -108,13 +120,14 @@ export default {
           prefixCls,
           selectPrefixCls,
           ...restProps,
-          ...this.getIconsProps(prefixCls),
+          ...this.getIconsProps(prefixCls, direction),
           selectComponentClass: isSmall ? MiniSelect : VcSelect,
           locale: { ...contextLocale, ...customLocale },
           buildOptionText: buildOptionText || this.$scopedSlots.buildOptionText,
         },
         class: {
           mini: isSmall,
+          [`${prefixCls}-rtl`]: direction === 'rtl',
         },
         on: getListeners(this),
       };

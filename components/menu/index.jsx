@@ -224,6 +224,7 @@ const Menu = {
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const { prefixCls: customizePrefixCls, theme, getPopupContainer } = this.$props;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('menu', customizePrefixCls);
     const menuMode = this.getRealMenuMode();
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode);
@@ -240,6 +241,7 @@ const Menu = {
         openKeys: this.sOpenKeys,
         mode: menuMode,
         prefixCls,
+        direction: direction,
       },
       on: {
         ...getListeners(this),

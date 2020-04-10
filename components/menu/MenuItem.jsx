@@ -1,6 +1,7 @@
 import { Item, itemProps } from '../vc-menu';
 import { getOptionProps, getListeners } from '../_util/props-util';
 import Tooltip from '../tooltip';
+import { ConfigConsumerProps } from '../config-provider';
 function noop() {}
 export default {
   name: 'MenuItem',
@@ -9,6 +10,7 @@ export default {
   inject: {
     getInlineCollapsed: { default: () => noop },
     layoutSiderContext: { default: () => ({}) },
+    configProvider: { default: () => ConfigConsumerProps },
   },
   isMenuItem: true,
   methods: {
@@ -25,6 +27,7 @@ export default {
       title: title || (level === 1 ? $slots.default : ''),
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
+    const direction = this.configProvider.direction;
     if (!siderCollapsed && !inlineCollapsed) {
       tooltipProps.title = null;
       // Reset `visible` to fix control mode tooltip display not correct
@@ -43,7 +46,7 @@ export default {
     const toolTipProps = {
       props: {
         ...tooltipProps,
-        placement: 'right',
+        placement: direction === 'rtl' ? 'left' : 'right',
         overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
       },
     };

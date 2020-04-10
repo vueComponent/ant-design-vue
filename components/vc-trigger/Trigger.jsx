@@ -108,16 +108,9 @@ export default {
   watch: {
     popupVisible(val) {
       if (val !== undefined) {
+        this.prevPopupVisible = this.sPopupVisible;
         this.sPopupVisible = val;
-        this.prevPopupVisible = val;
       }
-    },
-    sPopupVisible() {
-      this.$nextTick(() => {
-        this.renderComponent(null, () => {
-          this.afterPopupVisibleChange(this.sPopupVisible);
-        });
-      });
     },
   },
   deactivated() {
@@ -131,7 +124,13 @@ export default {
   },
 
   updated() {
+    const triggerAfterPopupVisibleChange = () => {
+      if (this.sPopupVisible !== this.prevPopupVisible) {
+        this.afterPopupVisibleChange(this.sPopupVisible);
+      }
+    };
     this.$nextTick(() => {
+      this.renderComponent(null, triggerAfterPopupVisibleChange);
       this.updatedCal();
     });
   },

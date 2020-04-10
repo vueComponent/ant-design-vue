@@ -71,12 +71,18 @@ export default {
                 }
               });
             },
+            methods: {
+              forceRender(p) {
+                this.comProps = p;
+                this.$forceUpdate();
+              },
+            },
             render() {
               return self.getComponent(this.comProps);
             },
           });
         } else {
-          this._component.comProps = props;
+          this._component.forceRender(props);
         }
       }
     },

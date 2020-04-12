@@ -8,6 +8,7 @@ import Input from '../input';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RedoOutlined from '@ant-design/icons-vue/RedoOutlined';
 import {
   hasProp,
@@ -67,9 +68,7 @@ const CascaderProps = {
   /** 自定义浮层类名 */
   popupClassName: PropTypes.string,
   /** 浮层预设位置：`bottomLeft` `bottomRight` `topLeft` `topRight` */
-  popupPlacement: PropTypes.oneOf(['bottomLeft', 'bottomRight', 'topLeft', 'topRight']).def(
-    'bottomLeft',
-  ),
+  popupPlacement: PropTypes.oneOf(['bottomLeft', 'bottomRight', 'topLeft', 'topRight']),
   /** 输入框占位文本*/
   placeholder: PropTypes.string.def('Please select'),
   /** 输入框大小，可选 `large` `default` `small` */
@@ -382,7 +381,7 @@ const Cascader = {
     const props = getOptionProps(this);
     let suffixIcon = getComponentFromProp(this, 'suffixIcon');
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
-    const { getPopupContainer: getContextPopupContainer } = configProvider;
+    const { getPopupContainer: getContextPopupContainer, direction } = configProvider;
     const {
       prefixCls: customizePrefixCls,
       inputPrefixCls: customizeInputPrefixCls,
@@ -421,6 +420,7 @@ const Cascader = {
       [`${prefixCls}-picker-${size}`]: !!size,
       [`${prefixCls}-picker-show-search`]: !!showSearch,
       [`${prefixCls}-picker-focused`]: inputFocused,
+      [`${prefixCls}-picker-rtl`]: direction === 'rtl',
     });
 
     // Fix bug of https://github.com/facebook/react/pull/5004
@@ -524,7 +524,7 @@ const Cascader = {
       </span>
     );
 
-    const expandIcon = <RightOutlined />;
+    let expandIcon = direction === 'rtl' ? <LeftOutlined /> : <RightOutlined />;
 
     const loadingIcon = (
       <span class={`${prefixCls}-menu-item-loading-icon`}>
@@ -532,6 +532,14 @@ const Cascader = {
       </span>
     );
     const getPopupContainer = props.getPopupContainer || getContextPopupContainer;
+    const rcCascaderRtlPopupClassName = classNames(props.popupClassName, {
+      [`${prefixCls}-menu-${direction}`]: direction === 'rtl',
+    });
+    const popupPlacementDirection = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
+    console.log(popupPlacementDirection);
+    const getPopupPlacement =
+      props.popupPlacement !== undefined ? props.popupPlacement : popupPlacementDirection;
+    console.log(getPopupPlacement);
     const cascaderProps = {
       props: {
         ...props,
@@ -550,7 +558,15 @@ const Cascader = {
         change: this.handleChange,
       },
     };
-    return <VcCascader {...cascaderProps}>{input}</VcCascader>;
+    return (
+      <VcCascader
+        {...cascaderProps}
+        popupClassName={rcCascaderRtlPopupClassName}
+        popupPlacement={getPopupPlacement}
+      >
+        {input}
+      </VcCascader>
+    );
   },
 };
 

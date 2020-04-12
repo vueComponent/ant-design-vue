@@ -5,6 +5,7 @@ import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-u
 import VcSteps from '../vc-steps';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
+import classNames from 'classnames';
 
 const getStepsProps = (defaultProps = {}) => {
   const props = {
@@ -39,6 +40,7 @@ const Steps = {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, iconPrefix: customizeIconPrefixCls } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
     const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
 
@@ -46,6 +48,11 @@ const Steps = {
       finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,
       error: <CloseOutlined class={`${prefixCls}-error-icon`} />,
     };
+
+    const className = classNames({
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
+
     const stepsProps = {
       props: {
         icons,
@@ -56,7 +63,11 @@ const Steps = {
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
-    return <VcSteps {...stepsProps}>{this.$slots.default}</VcSteps>;
+    return (
+      <VcSteps {...stepsProps} class={className}>
+        {this.$slots.default}
+      </VcSteps>
+    );
   },
 };
 

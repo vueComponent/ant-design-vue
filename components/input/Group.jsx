@@ -20,6 +20,7 @@ export default {
     classes() {
       const { prefixCls: customizePrefixCls, size, compact = false } = this;
       const getPrefixCls = this.configProvider.getPrefixCls;
+      const direction = this.configProvider.direction;
       const prefixCls = getPrefixCls('input-group', customizePrefixCls);
 
       return {
@@ -27,6 +28,7 @@ export default {
         [`${prefixCls}-lg`]: size === 'large',
         [`${prefixCls}-sm`]: size === 'small',
         [`${prefixCls}-compact`]: compact,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       };
     },
   },

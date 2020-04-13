@@ -41,11 +41,12 @@ export function resolveOnChange(target, e, onChange) {
   }
 }
 
-export function getInputClassName(prefixCls, size, disabled) {
+export function getInputClassName(prefixCls, size, disabled, direction) {
   return classNames(prefixCls, {
     [`${prefixCls}-sm`]: size === 'small',
     [`${prefixCls}-lg`]: size === 'large',
     [`${prefixCls}-disabled`]: disabled,
+    [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 }
 
@@ -123,7 +124,7 @@ export default {
       });
       resolveOnChange(this.$refs.input, e, this.onChange);
     },
-    renderInput(prefixCls) {
+    renderInput(prefixCls, direction) {
       const otherProps = omit(this.$props, [
         'prefixCls',
         'addonBefore',
@@ -150,7 +151,7 @@ export default {
           input: handleChange,
           change: noop,
         },
-        class: getInputClassName(prefixCls, size, disabled),
+        class: getInputClassName(prefixCls, size, disabled, direction),
         ref: 'input',
         key: 'ant-input',
       };
@@ -199,6 +200,7 @@ export default {
     const { prefixCls: customizePrefixCls } = this.$props;
     const { stateValue } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     const addonAfter = getComponentFromProp(this, 'addonAfter');
     const addonBefore = getComponentFromProp(this, 'addonBefore');
@@ -210,12 +212,13 @@ export default {
         prefixCls,
         inputType: 'input',
         value: fixControlledValue(stateValue),
-        element: this.renderInput(prefixCls),
+        element: this.renderInput(prefixCls, direction),
         handleReset: this.handleReset,
         addonAfter,
         addonBefore,
         suffix,
         prefix,
+        direction: direction,
       },
       on: getListeners(this),
     };

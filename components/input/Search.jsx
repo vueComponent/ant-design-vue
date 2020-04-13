@@ -144,6 +144,7 @@ export default {
       ...others
     } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('input-search', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 
@@ -155,9 +156,12 @@ export default {
       inputClassName = classNames(prefixCls, {
         [`${prefixCls}-enter-button`]: !!enterButton,
         [`${prefixCls}-${size}`]: !!size,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       });
     } else {
-      inputClassName = prefixCls;
+      inputClassName = classNames(prefixCls, {
+        [`${prefixCls}-rtl`]: direction === 'rtl',
+      });
     }
 
     const on = { ...getListeners(this) };

@@ -138,7 +138,7 @@ const Mentions = {
   },
   render() {
     const { focused } = this.$data;
-    const { getPrefixCls, renderEmpty } = this.configProvider;
+    const { getPrefixCls, renderEmpty, direction } = this.configProvider;
     const {
       prefixCls: customizePrefixCls,
       disabled,
@@ -151,6 +151,7 @@ const Mentions = {
     const mergedClassName = classNames({
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-focused`]: focused,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     });
 
     const mentionsProps = {
@@ -162,6 +163,7 @@ const Mentions = {
         filterOption: this.getFilterOption(),
         getPopupContainer,
         children: this.getOptions(),
+        direction: direction,
       },
       class: mergedClassName,
       attrs: { rows: 1, ...this.$attrs },

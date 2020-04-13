@@ -51,11 +51,13 @@ const InputNumber = {
   render() {
     const { prefixCls: customizePrefixCls, size, ...others } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 
     const inputNumberClass = classNames({
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     });
     const upIcon = <UpOutlined class={`${prefixCls}-handler-up-inner`} />;
     const downIcon = <DownOutlined class={`${prefixCls}-handler-down-inner`} />;

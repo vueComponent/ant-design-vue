@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
 import hasProp from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import classNames from 'classnames';
 
 function noop() {}
 export default {
@@ -89,10 +90,14 @@ export default {
     const { $props: props, $data: state, $slots } = this;
     const { prefixCls: customizePrefixCls, options } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
     let children = $slots.default;
-    const groupPrefixCls = `${prefixCls}-group`;
+    const groupPrefixCls = classNames(`${prefixCls}-group`, {
+      [`${prefixCls}-group-rtl`]: direction === 'rtl',
+    });
+
     if (options && options.length > 0) {
       children = this.getOptions().map(option => (
         <Checkbox

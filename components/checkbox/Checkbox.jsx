@@ -80,6 +80,7 @@ export default {
     const { mouseenter = noop, mouseleave = noop, input, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, indeterminate, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
     const checkboxProps = {
@@ -103,6 +104,7 @@ export default {
       [`${prefixCls}-wrapper`]: true,
       [`${prefixCls}-wrapper-checked`]: checkboxProps.props.checked,
       [`${prefixCls}-wrapper-disabled`]: checkboxProps.props.disabled,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     });
     const checkboxClass = classNames({
       [`${prefixCls}-indeterminate`]: indeterminate,

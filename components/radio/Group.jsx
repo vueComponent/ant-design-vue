@@ -89,11 +89,13 @@ export default {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const groupPrefixCls = `${prefixCls}-group`;
     const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
       [`${groupPrefixCls}-${props.size}`]: props.size,
+      [`${groupPrefixCls}-rtl`]: direction === 'rtl',
     });
 
     let children = filterEmpty(this.$slots.default);

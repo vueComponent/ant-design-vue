@@ -54,6 +54,7 @@ export default {
     const { mouseenter = noop, mouseleave = noop, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const radioProps = {
@@ -74,6 +75,7 @@ export default {
       [`${prefixCls}-wrapper`]: true,
       [`${prefixCls}-wrapper-checked`]: radioProps.props.checked,
       [`${prefixCls}-wrapper-disabled`]: radioProps.props.disabled,
+      [`${prefixCls}-wrapper-rtl`]: direction === 'rtl',
     });
 
     return (

@@ -1,4 +1,5 @@
 import omit from 'omit.js';
+import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
@@ -46,7 +47,11 @@ const Rate = {
   render() {
     const { prefixCls: customizePrefixCls, ...restProps } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
+    const rateClassNames = classNames({
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
 
     const character = getComponentFromProp(this, 'character') || <StarFilled />;
     const rateProps = {
@@ -59,7 +64,7 @@ const Rate = {
       on: getListeners(this),
       ref: 'refRate',
     };
-    return <VcRate {...rateProps} />;
+    return <VcRate {...rateProps} class={rateClassNames} />;
   },
 };
 

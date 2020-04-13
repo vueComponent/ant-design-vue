@@ -10,6 +10,12 @@
 
 ---
 
+## 1.5.3
+
+`2020-04-13`
+
+- 🐞 修复 `Dropdown` visible 不变时，内容不响应更新的问题 [#81eb40](https://github.com/vueComponent/ant-design-vue/commit/81eb401a8899aa3fe0acca88340b323f6e09db45)
+
 ## 1.5.2
 
 `2020-04-09`

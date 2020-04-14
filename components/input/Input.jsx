@@ -136,6 +136,7 @@ export default {
         'lazy',
         'size',
         'inputType',
+        'className',
       ]);
       const { stateValue, handleKeyDown, handleChange, size, disabled } = this;
       const inputProps = {

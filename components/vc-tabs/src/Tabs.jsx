@@ -43,9 +43,11 @@ export default {
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     __propsSymbol__: PropTypes.any,
     direction: PropTypes.string.def('ltr'),
+    tabBarGutter: PropTypes.number,
   },
   data() {
     const props = getOptionProps(this);
+    console.log(props);
     let activeKey;
     if ('activeKey' in props) {
       activeKey = props.activeKey;
@@ -193,7 +195,9 @@ export default {
       renderTabBar,
       destroyInactiveTabPane,
       direction,
+      tabBarGutter,
     } = props;
+    console.log(props);
     const cls = {
       [prefixCls]: 1,
       [`${prefixCls}-${tabBarPosition}`]: 1,
@@ -209,6 +213,7 @@ export default {
         panels: props.children,
         activeKey: this.$data._activeKey,
         direction,
+        tabBarGutter,
       },
       on: {
         keydown: this.onNavKeyDown,

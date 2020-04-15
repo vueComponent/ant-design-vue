@@ -18,6 +18,7 @@ const TabBar = {
     renderTabBar: PropTypes.func,
     panels: PropTypes.array.def([]),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    tabBarGutter: PropTypes.number,
   },
   render() {
     const {

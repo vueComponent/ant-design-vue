@@ -93,6 +93,7 @@ const ClearableLabeledInput = {
         [`${prefixCls}-affix-wrapper-input-with-clear-btn`]:
           props.suffix && props.allowClear && this.$props.value,
       });
+
       return (
         <span class={affixWrapperCls} style={props.style}>
           {prefix}

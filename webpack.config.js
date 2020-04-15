@@ -76,7 +76,7 @@ module.exports = {
   },
   devServer: {
     host: 'localhost',
-    port: 3000,
+    port: 3002,
     historyApiFallback: {
       rewrites: [{ from: /./, to: '/index.html' }],
     },

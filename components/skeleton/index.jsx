@@ -157,7 +157,8 @@ const Skeleton = {
         </div>
       );
     }
-    return this.$slots.default && this.$slots.default[0];
+    const children = this.$slots.default;
+    return children && children.length === 1 ? children[0] : <span>{children}</span>;
   },
 };
 /* istanbul ignore next */

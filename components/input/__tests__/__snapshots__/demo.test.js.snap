@@ -15,7 +15,8 @@ exports[`renders ./antdv-demo/docs/input/demo/allowClear.md correctly 1`] = `<di
 exports[`renders ./antdv-demo/docs/input/demo/autosize-textarea.md correctly 1`] = `
 <div><textarea placeholder="Autosize height based on content lines" class="ant-input" style="height: 0px; min-height: -9007199254740991px; max-height: 9007199254740991px; overflow-y: hidden; overflow-x: hidden;"></textarea>
   <div style="margin: 24px 0px;"></div> <textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input" style="height: -24px; min-height: -8px; max-height: -24px; overflow-y: hidden; overflow-x: hidden;"></textarea>
-  <div style="margin: 24px 0px;"></div> <textarea placeholder="Controlled autosize" class="ant-input" style="height: -20px; min-height: -12px; max-height: -20px; overflow-y: hidden; overflow-x: hidden;"></textarea></div>
+  <div style="margin: 24px 0px;"></div> <textarea placeholder="Controlled autosize" class="ant-input" style="height: -20px; min-height: -12px; max-height: -20px; overflow-y: hidden; overflow-x: hidden;"></textarea>
+</div>
 `;
 
 exports[`renders ./antdv-demo/docs/input/demo/basic.md correctly 1`] = `<input placeholder="Basic usage" type="text" class="ant-input">`;

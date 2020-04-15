@@ -21,6 +21,7 @@ const TabBar = {
     renderTabBar: PropTypes.func,
     panels: PropTypes.array.def([]),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    tabBarGutter: PropTypes.number,
   },
   render() {
     const {
@@ -38,20 +39,20 @@ const TabBar = {
     const isVertical = tabPosition === 'left' || tabPosition === 'right';
     const prevIcon = (
       <span class={`${prefixCls}-tab-prev-icon`}>
-        {
-          isVertical ?
-          <UpOutlined class={`${prefixCls}-tab-prev-icon-target`} /> :
+        {isVertical ? (
+          <UpOutlined class={`${prefixCls}-tab-prev-icon-target`} />
+        ) : (
           <LeftOutlined class={`${prefixCls}-tab-prev-icon-target`} />
-        }
+        )}
       </span>
     );
     const nextIcon = (
       <span class={`${prefixCls}-tab-next-icon`}>
-        {
-          isVertical ?
-          <DownOutlined class={`${prefixCls}-tab-next-icon-target`} /> :
+        {isVertical ? (
+          <DownOutlined class={`${prefixCls}-tab-next-icon-target`} />
+        ) : (
           <RightOutlined class={`${prefixCls}-tab-next-icon-target`} />
-        }
+        )}
       </span>
     );
 

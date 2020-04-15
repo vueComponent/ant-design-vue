@@ -13,8 +13,7 @@ exports[`Upload List handle error 1`] = `
     </div>
   </div>
 </div>
-</div>
-</span></div></span></span>
+</div></span></div></span></span>
 `;
 
 exports[`Upload List handle error 2`] = `
@@ -30,8 +29,7 @@ exports[`Upload List handle error 2`] = `
     </div>
   </div>
 </div>
-</div>
-</span></div></span></span>
+</div></span></div></span></span>
 `;
 
 exports[`Upload List should be uploading when upload a file 1`] = `<span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload"><input type="file" accept="" style="display: none;"><button>upload</button></span></div><span tag="div" class="ant-upload-list ant-upload-list-text"></span></span>`;

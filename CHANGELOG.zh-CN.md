@@ -10,6 +10,21 @@
 
 ---
 
+## 1.5.3
+
+`2020-04-13`
+
+- 🐞 修复 `Dropdown` visible 不变时，内容不响应更新的问题 [#81eb40](https://github.com/vueComponent/ant-design-vue/commit/81eb401a8899aa3fe0acca88340b323f6e09db45)
+
+## 1.5.2
+
+`2020-04-09`
+
+- 🐞 修复 `FormModel` 的 ts 类型未引入 [#1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
+- 🐞 修复 `DatePicker.WeekPicker` 的类型文件错误 [#2044](https://github.com/vueComponent/ant-design-vue/issues/2044)
+- 🐞 修复 `Tabs` tabClick 事件不生效问题 [#2030](https://github.com/vueComponent/ant-design-vue/issues/2030)
+- 🐞 修复 `Table` resize 时报错问题 [#2033](https://github.com/vueComponent/ant-design-vue/issues/2033)
+
 ## 1.5.1
 
 `2020-04-02`
@@ -20,7 +35,7 @@
 - 🐞 修复 `Table` customRender 不能自定义 class style 问题 [#2004](https://github.com/vueComponent/ant-design-vue/pull/2004)
 - 🐞 修复 `Form` 使用 Form.create 时，丢失插槽内容问题 [#1998](https://github.com/vueComponent/ant-design-vue/pull/1998)
 - 🐞 修复 `Textarea` 滚动条闪动问题 [#1964](https://github.com/vueComponent/ant-design-vue/pull/1964)
-- 🌟 添加 `FormModel` 的 ts 类型文件 [#1996](https://github.com/vueComponent/ant-design-vue/pull/1966)
+- 🌟 添加 `FormModel` 的 ts 类型文件 [#1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
 - 🌟 添加 `Modal` 的 destroyAll 类型声明 [#1993](https://github.com/vueComponent/ant-design-vue/pull/1963)
 
 ## 1.5.0

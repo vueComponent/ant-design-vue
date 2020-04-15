@@ -171,9 +171,9 @@ export default {
         prefix: getComponentFromProp(this, 'prefix'),
         addonAfter: this.renderAddonAfter(prefixCls),
         addonBefore,
+        className: inputClassName,
       },
       attrs: this.$attrs,
-      class: inputClassName,
       ref: 'input',
       on: {
         pressEnter: this.onSearch,

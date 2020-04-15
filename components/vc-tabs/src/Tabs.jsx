@@ -47,7 +47,6 @@ export default {
   },
   data() {
     const props = getOptionProps(this);
-    console.log(props);
     let activeKey;
     if ('activeKey' in props) {
       activeKey = props.activeKey;
@@ -197,7 +196,6 @@ export default {
       direction,
       tabBarGutter,
     } = props;
-    console.log(props);
     const cls = {
       [prefixCls]: 1,
       [`${prefixCls}-${tabBarPosition}`]: 1,

@@ -43,17 +43,20 @@ export default {
       column,
       component: BodyCell,
     } = this;
-    const { dataIndex, customRender, className = '' } = column;
+    const { dataIndex, customRender, className = '', columnDefaultText } = column;
     const cls = className || column.class;
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
     let text;
     if (typeof dataIndex === 'number') {
-      text = get(record, dataIndex);
+      text = get(record, dataIndex) || columnDefaultText;
     } else if (!dataIndex || dataIndex.length === 0) {
-      text = record;
+      text = record || columnDefaultText;
+      if (columnDefaultText) {
+        text = columnDefaultText;
+      }
     } else {
-      text = get(record, dataIndex);
+      text = get(record, dataIndex) || columnDefaultText;
     }
     let tdProps = {
       props: {},

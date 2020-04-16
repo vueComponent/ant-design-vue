@@ -19,6 +19,7 @@ export const ColumnProps = {
   dataIndex: PropTypes.string,
   customRender: PropTypes.func,
   customCell: PropTypes.func,
+  columnDefaultText: PropTypes.string,
   customHeaderCell: PropTypes.func,
   align: PropTypes.oneOf(['left', 'right', 'center']),
   filters: PropTypes.arrayOf(ColumnFilterItem),

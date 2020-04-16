@@ -69,7 +69,6 @@ export default {
     {
       data: [],
       useFixedHeader: false,
-      columnDefaultText: '无',
       rowKey: 'key',
       rowClassName: () => '',
       prefixCls: 'rc-table',

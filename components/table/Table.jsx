@@ -26,16 +26,16 @@ import {
 import BaseMixin from '../_util/BaseMixin';
 import { TableProps } from './interface';
 
-function noop() {}
+function noop () { }
 
-function stopPropagation(e) {
+function stopPropagation (e) {
   e.stopPropagation();
   if (e.nativeEvent && e.nativeEvent.stopImmediatePropagation) {
     e.nativeEvent.stopImmediatePropagation();
   }
 }
 
-function getRowSelection(props) {
+function getRowSelection (props) {
   return props.rowSelection || {};
 }
 
@@ -49,7 +49,6 @@ const defaultPagination = {
  * can works appropriately。
  */
 const emptyObject = {};
-
 export default {
   name: 'Table',
   Column,
@@ -59,7 +58,7 @@ export default {
     dataSource: [],
     prefixCls: 'ant-table',
     useFixedHeader: false,
-    columnDefaultText:'无',
+    columnDefaultText: '无',
     // rowSelection: null,
     size: 'default',
     loading: false,
@@ -77,7 +76,7 @@ export default {
   // columns: ColumnProps<T>[];
   // components: TableComponents;
 
-  data() {
+  data () {
     // this.columns = props.columns || normalizeColumns(props.children)
 
     this.createComponents(this.components);
@@ -97,7 +96,7 @@ export default {
   },
   watch: {
     pagination: {
-      handler(val) {
+      handler (val) {
         this.setState(previousState => {
           const newPagination = {
             ...defaultPagination,
@@ -112,7 +111,7 @@ export default {
       deep: true,
     },
     rowSelection: {
-      handler(val) {
+      handler (val) {
         if (val && 'selectedRowKeys' in val) {
           this.store.setState({
             selectedRowKeys: val.selectedRowKeys || [],
@@ -125,13 +124,13 @@ export default {
       },
       deep: true,
     },
-    dataSource() {
+    dataSource () {
       this.store.setState({
         selectionDirty: false,
       });
       this.CheckboxPropsCache = {};
     },
-    columns(val) {
+    columns (val) {
       if (this.getSortOrderColumns(val).length > 0) {
         const sortState = this.getSortStateFromColumns(val);
         if (
@@ -154,12 +153,12 @@ export default {
         }
       }
     },
-    components(val, preVal) {
+    components (val, preVal) {
       this.createComponents(val, preVal);
     },
   },
   methods: {
-    getCheckboxPropsByItem(item, index) {
+    getCheckboxPropsByItem (item, index) {
       const rowSelection = getRowSelection(this.$props);
       if (!rowSelection.getCheckboxProps) {
         return { props: {} };
@@ -173,7 +172,7 @@ export default {
       return this.CheckboxPropsCache[key];
     },
 
-    getDefaultSelection() {
+    getDefaultSelection () {
       const rowSelection = getRowSelection(this.$props);
       if (!rowSelection.getCheckboxProps) {
         return [];
@@ -185,19 +184,19 @@ export default {
         .map((record, rowIndex) => this.getRecordKey(record, rowIndex));
     },
 
-    getDefaultPagination(props) {
+    getDefaultPagination (props) {
       const pagination = props.pagination || {};
       return this.hasPagination(props)
         ? {
-            ...defaultPagination,
-            ...pagination,
-            current: pagination.defaultCurrent || pagination.current || 1,
-            pageSize: pagination.defaultPageSize || pagination.pageSize || 10,
-          }
+          ...defaultPagination,
+          ...pagination,
+          current: pagination.defaultCurrent || pagination.current || 1,
+          pageSize: pagination.defaultPageSize || pagination.pageSize || 10,
+        }
         : {};
     },
 
-    onRow(record, index) {
+    onRow (record, index) {
       const { prefixCls, customRow } = this;
       const custom = customRow ? customRow(record, index) : {};
       return mergeProps(custom, {
@@ -209,7 +208,7 @@ export default {
       });
     },
 
-    setSelectedRowKeys(selectedRowKeys, selectionInfo) {
+    setSelectedRowKeys (selectedRowKeys, selectionInfo) {
       const { selectWay, record, checked, changeRowKeys, nativeEvent } = selectionInfo;
       const rowSelection = getRowSelection(this.$props);
       if (rowSelection && !('selectedRowKeys' in rowSelection)) {
@@ -242,11 +241,11 @@ export default {
       }
     },
 
-    hasPagination() {
+    hasPagination () {
       return this.pagination !== false;
     },
 
-    isFiltersChanged(filters) {
+    isFiltersChanged (filters) {
       let filtersChanged = false;
       if (Object.keys(filters).length !== Object.keys(this.sFilters).length) {
         filtersChanged = true;
@@ -260,18 +259,18 @@ export default {
       return filtersChanged;
     },
 
-    getSortOrderColumns(columns) {
+    getSortOrderColumns (columns) {
       return flatFilter(columns || this.columns || [], column => 'sortOrder' in column);
     },
 
-    getFilteredValueColumns(columns) {
+    getFilteredValueColumns (columns) {
       return flatFilter(
         columns || this.columns || [],
         column => typeof column.filteredValue !== 'undefined',
       );
     },
 
-    getFiltersFromColumns(columns) {
+    getFiltersFromColumns (columns) {
       const filters = {};
       this.getFilteredValueColumns(columns).forEach(col => {
         const colKey = this.getColumnKey(col);
@@ -280,7 +279,7 @@ export default {
       return filters;
     },
 
-    getDefaultSortOrder(columns) {
+    getDefaultSortOrder (columns) {
       const definedSortState = this.getSortStateFromColumns(columns);
 
       const defaultSortedColumn = flatFilter(
@@ -298,7 +297,7 @@ export default {
       return definedSortState;
     },
 
-    getSortStateFromColumns(columns) {
+    getSortStateFromColumns (columns) {
       // return first column which sortOrder is not falsy
       const sortedColumn = this.getSortOrderColumns(columns).filter(col => col.sortOrder)[0];
 
@@ -315,7 +314,7 @@ export default {
       };
     },
 
-    getSorterFn(state) {
+    getSorterFn (state) {
       const { sSortOrder: sortOrder, sSortColumn: sortColumn } = state || this.$data;
       if (!sortOrder || !sortColumn || typeof sortColumn.sorter !== 'function') {
         return;
@@ -329,7 +328,7 @@ export default {
         return 0;
       };
     },
-    isSameColumn(a, b) {
+    isSameColumn (a, b) {
       if (a && b && a.key && a.key === b.key) {
         return true;
       }
@@ -343,7 +342,7 @@ export default {
       );
     },
 
-    toggleSortOrder(column) {
+    toggleSortOrder (column) {
       if (!column.sorter) {
         return;
       }
@@ -378,7 +377,7 @@ export default {
       );
     },
 
-    handleFilter(column, nextFilters) {
+    handleFilter (column, nextFilters) {
       const props = this.$props;
       const pagination = { ...this.sPagination };
       const filters = {
@@ -444,7 +443,7 @@ export default {
       });
     },
 
-    handleSelect(record, rowIndex, e) {
+    handleSelect (record, rowIndex, e) {
       const checked = e.target.checked;
       const nativeEvent = e.nativeEvent;
       const defaultSelection = this.store.getState().selectionDirty
@@ -513,7 +512,7 @@ export default {
       }
     },
 
-    handleRadioSelect(record, rowIndex, e) {
+    handleRadioSelect (record, rowIndex, e) {
       const checked = e.target.checked;
       const nativeEvent = e.nativeEvent;
       const key = this.getRecordKey(record, rowIndex);
@@ -530,7 +529,7 @@ export default {
       });
     },
 
-    handleSelectRow(selectionKey, index, onSelectFunc) {
+    handleSelectRow (selectionKey, index, onSelectFunc) {
       const data = this.getFlatCurrentPageData(this.$props.childrenColumnName);
       const defaultSelection = this.store.getState().selectionDirty
         ? []
@@ -599,7 +598,7 @@ export default {
       });
     },
 
-    handlePageChange(current, ...otherArguments) {
+    handlePageChange (current, ...otherArguments) {
       const props = this.$props;
       const pagination = { ...this.sPagination };
       if (current) {
@@ -638,7 +637,7 @@ export default {
       );
     },
 
-    renderSelectionBox(type) {
+    renderSelectionBox (type) {
       return (_, record, index) => {
         const rowKey = this.getRecordKey(record, index); // 从 1 开始
         const props = this.getCheckboxPropsByItem(record, index);
@@ -670,7 +669,7 @@ export default {
       };
     },
 
-    getRecordKey(record, index) {
+    getRecordKey (record, index) {
       const { rowKey } = this;
       const recordKey = typeof rowKey === 'function' ? rowKey(record, index) : record[rowKey];
       warning(
@@ -680,11 +679,11 @@ export default {
       return recordKey === undefined ? index : recordKey;
     },
 
-    getPopupContainer() {
+    getPopupContainer () {
       return this.$el;
     },
 
-    renderRowSelection(locale) {
+    renderRowSelection (locale) {
       const { prefixCls, rowSelection, childrenColumnName } = this;
       const columns = this.columns.concat();
       if (rowSelection) {
@@ -739,11 +738,11 @@ export default {
       return columns;
     },
 
-    getColumnKey(column, index) {
+    getColumnKey (column, index) {
       return column.key || column.dataIndex || index;
     },
 
-    getMaxCurrent(total) {
+    getMaxCurrent (total) {
       const { current, pageSize } = this.sPagination;
       if ((current - 1) * pageSize >= total) {
         return Math.floor((total - 1) / pageSize) + 1;
@@ -751,7 +750,7 @@ export default {
       return current;
     },
 
-    isSortColumn(column) {
+    isSortColumn (column) {
       const { sSortColumn: sortColumn } = this;
       if (!column || !sortColumn) {
         return false;
@@ -759,7 +758,7 @@ export default {
       return this.getColumnKey(sortColumn) === this.getColumnKey(column);
     },
 
-    renderColumnsDropdown(columns, locale) {
+    renderColumnsDropdown (columns, locale) {
       const { prefixCls, dropdownPrefixCls } = this;
       const { sSortOrder: sortOrder, sFilters: filters } = this;
       return treeMap(columns, (column, i) => {
@@ -846,7 +845,7 @@ export default {
         };
       });
     },
-    renderColumnTitle(title) {
+    renderColumnTitle (title) {
       const { sFilters: filters, sSortOrder: sortOrder } = this.$data;
       // https://github.com/ant-design/ant-design/issues/11246#issuecomment-405009167
       if (title instanceof Function) {
@@ -858,7 +857,7 @@ export default {
       return title;
     },
 
-    getColumnTitle(title, parentNode) {
+    getColumnTitle (title, parentNode) {
       if (!title) {
         return;
       }
@@ -886,7 +885,7 @@ export default {
       }
     },
 
-    handleShowSizeChange(current, pageSize) {
+    handleShowSizeChange (current, pageSize) {
       const pagination = this.sPagination;
       pagination.onShowSizeChange(current, pageSize);
       const nextPagination = {
@@ -904,7 +903,7 @@ export default {
       );
     },
 
-    renderPagination(paginationPosition) {
+    renderPagination (paginationPosition) {
       // 强制不需要分页
       if (!this.hasPagination()) {
         return null;
@@ -940,7 +939,7 @@ export default {
     },
 
     // Get pagination, filters, sorter
-    prepareParamsArguments(state) {
+    prepareParamsArguments (state) {
       const pagination = { ...state.sPagination };
       // remove useless handle function in Table.onChange
       delete pagination.onChange;
@@ -960,7 +959,7 @@ export default {
       return [pagination, filters, sorter, extra];
     },
 
-    findColumn(myKey) {
+    findColumn (myKey) {
       let column;
       treeMap(this.columns, c => {
         if (this.getColumnKey(c) === myKey) {
@@ -970,7 +969,7 @@ export default {
       return column;
     },
 
-    getCurrentPageData() {
+    getCurrentPageData () {
       let data = this.getLocalData();
       let current;
       let pageSize;
@@ -996,27 +995,27 @@ export default {
       return data;
     },
 
-    getFlatData() {
+    getFlatData () {
       return flatArray(this.getLocalData(null, false));
     },
 
-    getFlatCurrentPageData(childrenColumnName) {
+    getFlatCurrentPageData (childrenColumnName) {
       return flatArray(this.getCurrentPageData(), childrenColumnName);
     },
 
-    recursiveSort(data, sorterFn) {
+    recursiveSort (data, sorterFn) {
       const { childrenColumnName = 'children' } = this;
       return data.sort(sorterFn).map(item =>
         item[childrenColumnName]
           ? {
-              ...item,
-              [childrenColumnName]: this.recursiveSort(item[childrenColumnName], sorterFn),
-            }
+            ...item,
+            [childrenColumnName]: this.recursiveSort(item[childrenColumnName], sorterFn),
+          }
           : item,
       );
     },
 
-    getLocalData(state, filter = true) {
+    getLocalData (state, filter = true) {
       const currentState = state || this.$data;
       const { sFilters: filters } = currentState;
       const { dataSource } = this.$props;
@@ -1041,15 +1040,15 @@ export default {
           const onFilter = col.onFilter;
           data = onFilter
             ? data.filter(record => {
-                return values.some(v => onFilter(v, record));
-              })
+              return values.some(v => onFilter(v, record));
+            })
             : data;
         });
       }
       return data;
     },
 
-    createComponents(components = {}, prevComponents) {
+    createComponents (components = {}, prevComponents) {
       const bodyRow = components && components.body && components.body.row;
       const preBodyRow = prevComponents && prevComponents.body && prevComponents.body.row;
       if (!this.row || bodyRow !== preBodyRow) {
@@ -1064,7 +1063,7 @@ export default {
       };
     },
 
-    renderTable(contextLocale, loading) {
+    renderTable (contextLocale, loading) {
       const locale = { ...contextLocale, ...this.locale };
       const { prefixCls, showHeader, ...restProps } = getOptionProps(this);
       const data = this.getCurrentPageData();
@@ -1082,6 +1081,11 @@ export default {
       columns = columns.map((column, i) => {
         const newColumn = { ...column };
         newColumn.key = this.getColumnKey(newColumn, i);
+        if (!newColumn.columnDefaultText) {
+          if (restProps.columnDefaultText) {
+            newColumn.columnDefaultText = restProps.columnDefaultText;
+          }
+        }
         return newColumn;
       });
       let expandIconColumnIndex = columns[0] && columns[0].key === 'selection-column' ? 1 : 0;
@@ -1109,7 +1113,7 @@ export default {
     },
   },
 
-  render() {
+  render () {
     const { prefixCls } = this;
     const data = this.getCurrentPageData();
 

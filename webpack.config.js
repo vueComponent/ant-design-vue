@@ -1,11 +1,3 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: zero
- * @Date: 2020-04-16 15:07:58
- * @LastEditors: zero
- * @LastEditTime: 2020-04-16 15:13:51
- */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');

@@ -81,6 +81,7 @@ const Slider = {
         tooltipVisible,
         tooltipPlacement,
         getTooltipPopupContainer,
+        vertical,
       } = this.$props;
       const { visibles } = this;
       const isTipFormatter = tipFormatter ? visibles[index] || dragging : false;
@@ -90,7 +91,7 @@ const Slider = {
           prefixCls: tooltipPrefixCls,
           title: tipFormatter ? tipFormatter(value) : '',
           visible,
-          placement: tooltipPlacement || 'top',
+          placement: tooltipPlacement || vertical ? 'right' : 'top',
           transitionName: 'zoom-down',
           overlayClassName: `${prefixCls}-tooltip`,
           getPopupContainer: getTooltipPopupContainer || (() => document.body),

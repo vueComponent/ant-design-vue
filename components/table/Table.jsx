@@ -59,6 +59,7 @@ export default {
     dataSource: [],
     prefixCls: 'ant-table',
     useFixedHeader: false,
+    columnDefaultText:'无',
     // rowSelection: null,
     size: 'default',
     loading: false,

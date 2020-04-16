@@ -20,6 +20,7 @@ export default {
     {
       data: PropTypes.array,
       useFixedHeader: PropTypes.bool,
+      columnDefaultText: PropTypes.string,
       columns: PropTypes.array,
       prefixCls: PropTypes.string,
       bodyStyle: PropTypes.object,
@@ -68,6 +69,7 @@ export default {
     {
       data: [],
       useFixedHeader: false,
+      columnDefaultText: '无',
       rowKey: 'key',
       rowClassName: () => '',
       prefixCls: 'rc-table',

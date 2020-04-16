@@ -87,6 +87,7 @@ export const TableRowSelection = {
 
 export const TableProps = {
   prefixCls: PropTypes.string,
+  columnDefaultText:PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, null]),
   pagination: PropTypes.oneOfType([

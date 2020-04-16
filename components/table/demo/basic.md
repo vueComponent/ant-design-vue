@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: zero
+ * @Date: 2020-04-16 15:07:58
+ * @LastEditors: zero
+ * @LastEditTime: 2020-04-16 16:59:15
+ -->
 <cn>
 #### 基本用法
 简单的表格，最后一列是各种操作。
@@ -66,7 +74,7 @@ const data = [{
   tags: ['loser'],
 }, {
   key: '3',
-  name: 'Joe Black',
+  name: '',
   age: 32,
   address: 'Sidney No. 1 Lake Park',
   tags: ['cool', 'teacher'],

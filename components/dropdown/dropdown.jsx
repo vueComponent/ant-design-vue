@@ -1,5 +1,6 @@
 import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
+import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import {
@@ -20,7 +21,7 @@ const Dropdown = {
     prefixCls: PropTypes.string,
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
-    placement: DropdownProps.placement.def('bottomLeft'),
+    placement: DropdownProps.placement,
   },
   model: {
     prop: 'visible',
@@ -74,21 +75,39 @@ const Dropdown = {
           : overlay;
       return fixedModeOverlay;
     },
+    getPlacement(direction) {
+      const { placement } = this.$props;
+      if (placement !== undefined) {
+        return placement;
+      }
+      return direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
+    },
   },
 
   render() {
     const { $slots } = this;
     const props = getOptionProps(this);
-    const { prefixCls: customizePrefixCls, trigger, disabled, getPopupContainer } = props;
+    const {
+      prefixCls: customizePrefixCls,
+      trigger,
+      disabled,
+      getPopupContainer,
+      overlayClassName,
+    } = props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
-
+    const direction = this.configProvider.direction;
     const dropdownTrigger = cloneElement($slots.default, {
-      class: `${prefixCls}-trigger`,
+      class: classNames(`${prefixCls}-trigger`, {
+        [`${prefixCls}-rtl`]: direction === 'rtl',
+      }),
       props: {
         disabled,
       },
+    });
+    const overlayClassNameCustomized = classNames(overlayClassName, {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     });
     const triggerActions = disabled ? [] : trigger;
     let alignPoint;
@@ -103,6 +122,8 @@ const Dropdown = {
         getPopupContainer: getPopupContainer || getContextPopupContainer,
         transitionName: this.getTransitionName(),
         trigger: triggerActions,
+        overlayClassName: overlayClassNameCustomized,
+        placement: this.getPlacement(direction),
       },
       on: getListeners(this),
     };

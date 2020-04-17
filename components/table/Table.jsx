@@ -115,6 +115,7 @@ export default {
   props: initDefaultProps(TableProps, {
     dataSource: [],
     useFixedHeader: false,
+    tableDefaultText: '无',
     // rowSelection: null,
     size: 'default',
     loading: false,
@@ -1199,6 +1200,11 @@ export default {
       }).map((column, i) => {
         const newColumn = { ...column };
         newColumn.key = getColumnKey(newColumn, i);
+        if (!newColumn.columnDefaultText) {
+          if (restProps.tableDefaultText) {
+            newColumn.columnDefaultText = restProps.tableDefaultText;
+          }
+        }
         return newColumn;
       });
 

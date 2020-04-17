@@ -19,6 +19,7 @@ export const ColumnProps = {
   dataIndex: PropTypes.string,
   customRender: PropTypes.func,
   customCell: PropTypes.func,
+  columnDefaultText: PropTypes.string,
   customHeaderCell: PropTypes.func,
   align: PropTypes.oneOf(['left', 'right', 'center']),
   ellipsis: PropTypes.bool,
@@ -92,6 +93,7 @@ export const TableRowSelection = {
 
 export const TableProps = {
   prefixCls: PropTypes.string,
+  tableDefaultText: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, null]),
   pagination: PropTypes.oneOfType([

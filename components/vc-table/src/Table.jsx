@@ -22,6 +22,7 @@ export default {
     {
       data: PropTypes.array,
       useFixedHeader: PropTypes.bool,
+      tableDefaultText: PropTypes.string,
       columns: PropTypes.array,
       prefixCls: PropTypes.string,
       bodyStyle: PropTypes.object,

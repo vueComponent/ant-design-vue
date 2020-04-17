@@ -7,6 +7,7 @@ export default {
     colSpan: PropTypes.number,
     title: PropTypes.any,
     dataIndex: PropTypes.string,
+    columnDefaultText: PropTypes.string,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     ellipsis: PropTypes.bool,
     fixed: PropTypes.oneOf([true, 'left', 'right']),

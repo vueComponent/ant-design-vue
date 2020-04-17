@@ -167,7 +167,7 @@ export default {
             $slots[slots.switcherIcon] ||
             restProps.switcherIcon,
           title:
-            ($scopedSlots[scopedSlots.title] && $scopedSlots[scopedSlots.title](item)) ||
+            $scopedSlots[scopedSlots.title] ||
             $slots[slots.title] ||
             restProps[replaceFields.title],
           dataRef: item,

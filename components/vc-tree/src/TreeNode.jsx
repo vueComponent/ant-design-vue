@@ -420,7 +420,7 @@ const TreeNode = {
         vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData },
       } = this;
       const disabled = this.isDisabled();
-      const title = getComponentFromProp(this, 'title') || defaultTitle;
+      const title = getComponentFromProp(this, 'title', {}, false);
       const wrapClass = `${prefixCls}-node-content-wrapper`;
 
       // Icon - Still show loading icon when loading without showIcon
@@ -439,9 +439,15 @@ const TreeNode = {
         $icon = this.renderIcon();
       }
 
-      // Title
-      const $title = <span class={`${prefixCls}-title`}>{title}</span>;
-
+      const currentTitle = title;
+      let $title = currentTitle ? (
+        <span class={`${prefixCls}-title`}>
+          {typeof currentTitle === 'function' ? currentTitle({ ...this.$props }, h) : currentTitle}
+        </span>
+      ) : (
+        <span class={`${prefixCls}-title`}>{defaultTitle}</span>
+      );
+      
       return (
         <span
           key="selector"

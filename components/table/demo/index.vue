@@ -1,6 +1,7 @@
 <script>
 import Ajax from './ajax.md';
 import Basic from './basic.md';
+import TableDefaultText from './tableDefaultText';
 import Bordered from './bordered.md';
 import ColspanRowspan from './colspan-rowspan.md';
 import CustomFilterPanel from './custom-filter-panel.md';
@@ -64,6 +65,7 @@ export default {
         <md cn={md.cn} us={md.us}/>
         <Ajax />
         <Basic />
+        <TableDefaultText />
         <Bordered />
         <ColspanRowspan />
         <CustomFilterPanel />

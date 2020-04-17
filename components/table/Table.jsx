@@ -58,7 +58,7 @@ export default {
     dataSource: [],
     prefixCls: 'ant-table',
     useFixedHeader: false,
-    columnDefaultText: '无',
+    tableDefaultText: '无',
     // rowSelection: null,
     size: 'default',
     loading: false,
@@ -1082,8 +1082,8 @@ export default {
         const newColumn = { ...column };
         newColumn.key = this.getColumnKey(newColumn, i);
         if (!newColumn.columnDefaultText) {
-          if (restProps.columnDefaultText) {
-            newColumn.columnDefaultText = restProps.columnDefaultText;
+          if (restProps.tableDefaultText) {
+            newColumn.columnDefaultText = restProps.tableDefaultText;
           }
         }
         return newColumn;

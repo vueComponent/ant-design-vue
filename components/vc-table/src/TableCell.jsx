@@ -52,9 +52,6 @@ export default {
       text = get(record, dataIndex) || columnDefaultText;
     } else if (!dataIndex || dataIndex.length === 0) {
       text = record || columnDefaultText;
-      if (columnDefaultText) {
-        text = columnDefaultText;
-      }
     } else {
       text = get(record, dataIndex) || columnDefaultText;
     }

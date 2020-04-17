@@ -37,6 +37,7 @@ const columns = [{
 | --- | --- | --- | --- |
 | bordered | 是否展示外边框和列边框 | boolean | false |
 | childrenColumnName | 指定树形结构的列名 | string\[] | children |
+| tableDefaultText | 设置Table全局数据为空时的显示文本 | string | '无' |
 | columns | 表格列的配置描述，具体项见下表 | array | - |
 | components | 覆盖默认的 table 元素 | object | - |
 | dataSource | 数据数组 | any\[] |  |
@@ -108,6 +109,7 @@ const columns = [{
 | align | 设置列内容的对齐方式 | 'left' \| 'right' \| 'center' | 'left' |
 | colSpan | 表头列合并,设置为 0 时，不渲染 | number |  |
 | dataIndex | 列数据在数据项中对应的 key，支持 `a.b.c` 的嵌套写法 | string | - |
+| columnDefaultText | 设置Column该列数据为空时的显示文本,优先级高于Table | string | 与Table的tableDefaultText一致 |
 | filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode \| slot-scope | - |
 | filterDropdownVisible | 用于控制自定义筛选菜单是否可见 | boolean | - |
 | filtered | 标识数据是否经过过滤，筛选图标会高亮 | boolean | false |

@@ -35,6 +35,7 @@ export const PickerProps = () => ({
   autoFocus: PropTypes.bool,
   tagPrefixCls: PropTypes.string,
   tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  align: PropTypes.object.def(() => ({})),
 });
 
 export const SinglePickerProps = () => ({

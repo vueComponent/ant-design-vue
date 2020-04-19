@@ -41,14 +41,7 @@ export interface ModalOptions {
    */
   content?: any;
 
-  /**
-   * Icon type of the Icon component
-   * @default 'question-circle'
-   * @type string
-   */
-  iconType?: string;
-
-  icon?: string | Function;
+  icon?: VNode | Function;
 
   mask?: boolean;
 

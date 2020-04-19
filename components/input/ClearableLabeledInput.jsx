@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import Icon from '../icon';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
@@ -50,15 +50,7 @@ const ClearableLabeledInput = {
         inputType === ClearableInputType[0]
           ? `${prefixCls}-textarea-clear-icon`
           : `${prefixCls}-clear-icon`;
-      return (
-        <Icon
-          type="close-circle"
-          theme="filled"
-          onClick={handleReset}
-          class={className}
-          role="button"
-        />
-      );
+      return <CloseCircleFilled onClick={handleReset} class={className} role="button" />;
     },
 
     renderSuffix(prefixCls) {

@@ -1,15 +1,14 @@
 import classNames from 'classnames';
-import Icon from '../icon';
 import Dialog from './Modal';
 import ActionButton from './ActionButton';
 import { getConfirmLocale } from './locale';
-import warning from '../_util/warning';
 
 export default {
   functional: true,
   render(h, context) {
     const { props } = context;
     const {
+      icon,
       onCancel,
       onOk,
       close,
@@ -22,15 +21,8 @@ export default {
       maskStyle,
       okButtonProps,
       cancelButtonProps,
-      iconType = 'question-circle',
       closable = false,
     } = props;
-    warning(
-      !('iconType' in props),
-      'Modal',
-      `The property 'iconType' is deprecated. Use the property 'icon' instead.`,
-    );
-    const icon = props.icon ? props.icon : iconType;
     const okType = props.okType || 'primary';
     const prefixCls = props.prefixCls || 'ant-modal';
     const contentPrefixCls = `${prefixCls}-confirm`;
@@ -65,7 +57,6 @@ export default {
         {cancelText}
       </ActionButton>
     );
-    const iconNode = typeof icon === 'string' ? <Icon type={icon} /> : icon(h);
 
     return (
       <Dialog
@@ -92,7 +83,7 @@ export default {
       >
         <div class={`${contentPrefixCls}-body-wrapper`}>
           <div class={`${contentPrefixCls}-body`}>
-            {iconNode}
+            {typeof icon === 'function' ? icon(h) : icon}
             {props.title === undefined ? null : (
               <span class={`${contentPrefixCls}-title`}>{props.title}</span>
             )}

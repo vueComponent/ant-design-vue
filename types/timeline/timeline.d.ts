@@ -17,7 +17,7 @@ export declare class Timeline extends AntdComponent {
 
   /**
    * Set the dot of the last ghost node when pending is true
-   * @default <Icon type="loading" />
+   * @default <LoadingOutlined />
    * @type any (string | slot)
    */
   pendingDot: any;

@@ -5,7 +5,10 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getOptionProps, getListeners } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
-import Icon from '../icon';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
+import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const PaginationProps = () => ({
@@ -53,19 +56,19 @@ export default {
     getIconsProps(prefixCls) {
       const prevIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <Icon type="left" />
+          <LeftOutlined/>
         </a>
       );
       const nextIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <Icon type="right" />
+          <RightOutlined/>
         </a>
       );
       const jumpPrevIcon = (
         <a class={`${prefixCls}-item-link`}>
           {/* You can use transition effects in the container :) */}
           <div class={`${prefixCls}-item-container`}>
-            <Icon class={`${prefixCls}-item-link-icon`} type="double-left" />
+            <DoubleLeftOutlined class={`${prefixCls}-item-link-icon`} />
             <span class={`${prefixCls}-item-ellipsis`}>•••</span>
           </div>
         </a>
@@ -74,7 +77,7 @@ export default {
         <a class={`${prefixCls}-item-link`}>
           {/* You can use transition effects in the container :) */}
           <div class={`${prefixCls}-item-container`}>
-            <Icon class={`${prefixCls}-item-link-icon`} type="double-right" />
+            <DoubleRightOutlined class={`${prefixCls}-item-link-icon`} />
             <span class={`${prefixCls}-item-ellipsis`}>•••</span>
           </div>
         </a>

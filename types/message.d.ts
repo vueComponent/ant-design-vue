@@ -12,7 +12,7 @@ export interface MessageType {
   then: (fill: ThenableArgument, reject: ThenableArgument) => Promise<void>;
   promise: Promise<void>;
 }
-export type ConfigType = string | VNode | ((h: CreateElement) => VNode);
+export type ConfigType = VNode | ((h: CreateElement) => VNode);
 export type ConfigDuration = number | (() => void);
 export type ConfigOnClose = () => void;
 
@@ -38,7 +38,7 @@ export interface MessageOptions {
 
   /**
    * Customized Icon
-   * @type any  (string | VNode | (h) => VNode)
+   * @type any  (VNode | (h) => VNode)
    */
   icon?: ConfigType;
 

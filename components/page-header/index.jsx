@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
@@ -60,7 +60,7 @@ const renderTitle = (h, prefixCls, instance) => {
     getComponentFromProp(instance, 'backIcon') !== undefined ? (
       getComponentFromProp(instance, 'backIcon')
     ) : (
-      <Icon type="arrow-left" />
+      <ArrowLeftOutlined />
     );
   const onBack = instance.$listeners.back;
   const headingPrefixCls = `${prefixCls}-heading`;

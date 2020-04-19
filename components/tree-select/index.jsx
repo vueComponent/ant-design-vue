@@ -13,7 +13,11 @@ import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
 export { TreeData, TreeSelectProps } from './interface';
-import Icon from '../icon';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import CaretDownOutlined from '@ant-design/icons-vue/CaretDownOutlined';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import omit from 'omit.js';
 
 const TreeSelect = {
@@ -51,12 +55,12 @@ const TreeSelect = {
     },
     renderSwitcherIcon(prefixCls, { isLeaf, loading }) {
       if (loading) {
-        return <Icon type="loading" class={`${prefixCls}-switcher-loading-icon`} />;
+        return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
       }
       if (isLeaf) {
         return null;
       }
-      return <Icon type="caret-down" class={`${prefixCls}-switcher-icon`} />;
+      return <CaretDownOutlined class={`${prefixCls}-switcher-icon`} />;
     },
     onChange() {
       this.$emit('change', ...arguments);
@@ -133,12 +137,12 @@ const TreeSelect = {
       checkable = <span class={`${prefixCls}-tree-checkbox-inner`} />;
     }
 
-    const inputIcon = suffixIcon || <Icon type="down" class={`${prefixCls}-arrow-icon`} />;
+    const inputIcon = suffixIcon || <DownOutlined class={`${prefixCls}-arrow-icon`} />;
 
-    const finalRemoveIcon = removeIcon || <Icon type="close" class={`${prefixCls}-remove-icon`} />;
+    const finalRemoveIcon = removeIcon || <CloseOutlined class={`${prefixCls}-remove-icon`} />;
 
     const finalClearIcon = clearIcon || (
-      <Icon type="close-circle" class={`${prefixCls}-clear-icon`} theme="filled" />
+      <CloseCircleOutlined class={`${prefixCls}-clear-icon`} theme="filled" />
     );
     const VcTreeSelectProps = {
       props: Object.assign(

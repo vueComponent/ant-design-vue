@@ -140,10 +140,10 @@ export default {
 
   render() {
     const { childrenProps } = this.$props;
-    const child = getSlot(this)[0];
+    const child = getSlot(this);
     if (child && childrenProps) {
-      return cloneElement(child, { props: childrenProps });
+      return cloneElement(child[0], { props: childrenProps });
     }
-    return child;
+    return child && child[0];
   },
 };

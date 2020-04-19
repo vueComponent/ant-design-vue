@@ -7,9 +7,9 @@ import { AntdComponent } from './component';
 export declare class Avatar extends AntdComponent {
   /**
    * the Icon type for an icon avatar, see Icon Component
-   * @type string
+   * @type any (VNode | slot)
    */
-  icon: string;
+  icon: any;
 
   /**
    * the shape of avatar

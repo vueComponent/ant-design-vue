@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import { hasProp, getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import DropDown from '../dropdown/dropdown';
-import Icon from '../icon';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 
 export default {
   name: 'ABreadcrumbItem',
@@ -28,7 +28,7 @@ export default {
           <DropDown overlay={overlay} placement="bottomCenter">
             <span class={`${prefixCls}-overlay-link`}>
               {breadcrumbItem}
-              <Icon type="down" />
+              <DownOutlined />
             </span>
           </DropDown>
         );

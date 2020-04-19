@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
-import Icon from '../icon';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { ConfigConsumerProps } from '../config-provider';
 import {
   hasProp,
@@ -182,12 +182,7 @@ export default {
     );
     const clearIcon =
       !disabled && allowClear && $data._value ? (
-        <Icon
-          type="close-circle"
-          class={`${prefixCls}-picker-clear`}
-          onClick={this.clearSelection}
-          theme="filled"
-        />
+        <CloseCircleFilled class={`${prefixCls}-picker-clear`} onClick={this.clearSelection} />
       ) : null;
 
     const inputIcon = <InputIcon suffixIcon={suffixIcon} prefixCls={prefixCls} />;

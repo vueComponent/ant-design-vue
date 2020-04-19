@@ -1,4 +1,4 @@
-import { getComponentFromProp, initDefaultProps } from '../_util/props-util';
+import { initDefaultProps } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
 import LazyRenderBox from './LazyRenderBox';
@@ -218,6 +218,7 @@ export default {
         visible,
         bodyProps,
         forceRender,
+        closeIcon,
       } = this;
       const dest = {};
       if (width !== undefined) {
@@ -249,7 +250,6 @@ export default {
 
       let closer;
       if (closable) {
-        const closeIcon = getComponentFromProp(this, 'closeIcon');
         closer = (
           <button
             type="button"

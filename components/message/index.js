@@ -1,5 +1,9 @@
 import Notification from '../vc-notification';
-import Icon from '../icon';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 
 let defaultDuration = 3;
 let defaultTop;
@@ -34,17 +38,17 @@ function getMessageInstance(callback) {
   );
 }
 
-// type NoticeType = 'info' | 'success' | 'error' | 'warning' | 'loading';
+const iconMap = {
+  info: InfoCircleFilled,
+  success: CheckCircleFilled,
+  error: CloseCircleFilled,
+  warning: ExclamationCircleFilled,
+  loading: LoadingOutlined,
+};
 
 function notice(args) {
   const duration = args.duration !== undefined ? args.duration : defaultDuration;
-  const iconType = {
-    info: 'info-circle',
-    success: 'check-circle',
-    error: 'close-circle',
-    warning: 'exclamation-circle',
-    loading: 'loading',
-  }[args.type];
+  const Icon = iconMap[args.type];
 
   const target = args.key || key++;
   const closePromise = new Promise(resolve => {
@@ -60,19 +64,11 @@ function notice(args) {
         duration,
         style: {},
         content: h => {
-          const iconNode = (
-            <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
-          );
-          const switchIconNode = iconType ? iconNode : '';
           return (
             <div
               class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
             >
-              {args.icon
-                ? typeof args.icon === 'function'
-                  ? args.icon(h)
-                  : args.icon
-                : switchIconNode}
+              {args.icon ? typeof args.icon === 'function' ? args.icon(h) : args.icon : <Icon />}
               <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
             </div>
           );

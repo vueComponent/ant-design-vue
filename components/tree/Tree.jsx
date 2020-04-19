@@ -1,4 +1,9 @@
 import warning from 'warning';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import FileOutlined from '@ant-design/icons-vue/FileOutlined';
+import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
+import MinusSquareOutlined from '@ant-design/icons-vue/MinusSquareOutlined';
+import PlusSquareOutlined from '@ant-design/icons-vue/PlusSquareOutlined';
 import { Tree as VcTree, TreeNode } from '../vc-tree';
 import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
@@ -11,7 +16,6 @@ import {
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
 
 function TreeProps() {
   return {
@@ -124,14 +128,14 @@ export default {
   },
   TreeNode,
   methods: {
-    renderSwitcherIcon(prefixCls, switcherIcon, { isLeaf, expanded, loading }) {
+    renderSwitcherIcon(prefixCls, switcherIcon, { isLeaf, loading, expanded }) {
       const { showLine } = this.$props;
       if (loading) {
-        return <Icon type="loading" class={`${prefixCls}-switcher-loading-icon`} />;
+        return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
       }
 
       if (isLeaf) {
-        return showLine ? <Icon type="file" class={`${prefixCls}-switcher-line-icon`} /> : null;
+        return showLine ? <FileOutlined class={`${prefixCls}-switcher-line-icon`} /> : null;
       }
       const switcherCls = `${prefixCls}-switcher-icon`;
       if (switcherIcon) {
@@ -142,13 +146,11 @@ export default {
         });
       }
       return showLine ? (
-        <Icon
-          type={expanded ? 'minus-square' : 'plus-square'}
-          class={`${prefixCls}-switcher-line-icon`}
-          theme="outlined"
-        />
+        expanded ?
+          <MinusSquareOutlined class={`${prefixCls}-switcher-line-icon`} /> :
+          <PlusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
       ) : (
-        <Icon type="caret-down" class={switcherCls} theme="filled" />
+        <CaretDownFilled class={switcherCls} />
       );
     },
     updateTreeData(treeData) {

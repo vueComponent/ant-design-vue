@@ -132,8 +132,14 @@ export declare class FormModel extends AntdComponent {
    * validation rules of form
    * @type object
    */
-
   rules: object;
+
+  /**
+   * Default validate message. And its format is similar with newMessages's returned value
+   * @type any
+   */
+  validateMessages?: any;
+
   /**
    * whether to trigger validation when the rules prop is changed
    * @type Boolean

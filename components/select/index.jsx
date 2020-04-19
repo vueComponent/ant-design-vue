@@ -10,7 +10,11 @@ import {
   isValidElement,
   getListeners,
 } from '../_util/props-util';
-import Icon from '../icon';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { cloneElement } from '../_util/vnode';
 import Base from '../base';
 
@@ -161,9 +165,9 @@ const Select = {
           : suffixIcon;
       }
       if (loading) {
-        return <Icon type="loading" />;
+        return <LoadingOutlined />;
       }
-      return <Icon type="down" class={`${prefixCls}-arrow-icon`} />;
+      return <DownOutlined class={`${prefixCls}-arrow-icon`} />;
     },
   },
   render() {
@@ -218,19 +222,17 @@ const Select = {
     const finalRemoveIcon = (removeIcon &&
       (isValidElement(removeIcon)
         ? cloneElement(removeIcon, { class: `${prefixCls}-remove-icon` })
-        : removeIcon)) || <Icon type="close" class={`${prefixCls}-remove-icon`} />;
+        : removeIcon)) || <CloseOutlined class={`${prefixCls}-remove-icon`} />;
 
     const finalClearIcon = (clearIcon &&
       (isValidElement(clearIcon)
         ? cloneElement(clearIcon, { class: `${prefixCls}-clear-icon` })
-        : clearIcon)) || (
-      <Icon type="close-circle" theme="filled" class={`${prefixCls}-clear-icon`} />
-    );
+        : clearIcon)) || <CloseCircleFilled class={`${prefixCls}-clear-icon`} />;
 
     const finalMenuItemSelectedIcon = (menuItemSelectedIcon &&
       (isValidElement(menuItemSelectedIcon)
         ? cloneElement(menuItemSelectedIcon, { class: `${prefixCls}-selected-icon` })
-        : menuItemSelectedIcon)) || <Icon type="check" class={`${prefixCls}-selected-icon`} />;
+        : menuItemSelectedIcon)) || <CheckOutlined class={`${prefixCls}-selected-icon`} />;
 
     const selectProps = {
       props: {

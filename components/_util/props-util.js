@@ -69,7 +69,7 @@ const getSlot = (self, name = 'default', options = {}) => {
   return (
     (self.$scopedSlots && self.$scopedSlots[name] && self.$scopedSlots[name](options)) ||
     self.$slots[name] ||
-    []
+    undefined
   );
 };
 

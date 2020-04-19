@@ -378,11 +378,11 @@ export default {
       },
       ref: 'trigger',
     };
-    const children = getSlot(this, 'default')[0];
+    const children = getSlot(this, 'default');
     return (
       <Trigger {...triggerProps}>
         {children &&
-          cloneElement(children, {
+          cloneElement(children[0], {
             on: {
               keydown: handleKeyDown,
             },

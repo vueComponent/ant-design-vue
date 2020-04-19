@@ -81,8 +81,10 @@ export default {
     },
     getBadgeClassName(prefixCls) {
       const children = filterEmpty(this.$slots.default);
+      const hasStatus = this.hasStatus();
       return classNames(prefixCls, {
-        [`${prefixCls}-status`]: this.hasStatus(),
+        [`${prefixCls}-status`]: hasStatus,
+        [`${prefixCls}-dot-status`]: hasStatus && this.dot && !this.isZero(),
         [`${prefixCls}-not-a-wrapper`]: !children.length,
       });
     },
@@ -156,7 +158,7 @@ export default {
           v-show={!hidden}
           className={scrollNumberCls}
           count={displayCount}
-          displayComponent={this.renderDispayComponent()} // <Badge status="success" count={<Icon type="xxx" />}></Badge>
+          displayComponent={this.renderDispayComponent()}
           title={this.getScrollNumberTitle()}
           style={statusStyle}
           key="scrollNumber"

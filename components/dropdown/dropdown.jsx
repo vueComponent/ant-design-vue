@@ -10,7 +10,7 @@ import {
 } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
 import { ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 
 const DropdownProps = getDropdownProps();
 const Dropdown = {
@@ -57,7 +57,7 @@ const Dropdown = {
       const { selectable = false, focusable = true } = overlayProps || {};
       const expandIcon = (
         <span class={`${prefixCls}-menu-submenu-arrow`}>
-          <Icon type="right" class={`${prefixCls}-menu-submenu-arrow-icon`} />
+          <RightOutlined class={`${prefixCls}-menu-submenu-arrow-icon`} />
         </span>
       );
 

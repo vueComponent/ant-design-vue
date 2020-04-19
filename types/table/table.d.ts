@@ -300,4 +300,5 @@ export declare class Table extends AntdComponent {
     style: object;
     nativeOn: object;
   };
+  transformCellText: Function;
 }

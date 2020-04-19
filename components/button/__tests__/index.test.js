@@ -1,5 +1,5 @@
 import Button from '../index';
-import Icon from '../../icon';
+import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import { asyncExpect } from '@/tests/utils';
@@ -37,7 +37,12 @@ describe('Button', () => {
 
     const wrapper1 = mount({
       render() {
-        return <Button icon="search">按钮</Button>;
+        return (
+          <Button>
+            <SearchOutlined slot="icon" />
+            按钮
+          </Button>
+        );
       },
     });
 
@@ -47,7 +52,7 @@ describe('Button', () => {
       render() {
         return (
           <Button>
-            <Icon type="search" />
+            <SearchOutlined />
             按钮
           </Button>
         );
@@ -57,7 +62,12 @@ describe('Button', () => {
     // should not insert space when there is icon
     const wrapper3 = mount({
       render() {
-        return <Button icon="search">按钮</Button>;
+        return (
+          <Button>
+            <SearchOutlined slot="icon" />
+            按钮
+          </Button>
+        );
       },
     });
     expect(wrapper3.html()).toMatchSnapshot();
@@ -65,7 +75,8 @@ describe('Button', () => {
     const wrapper4 = mount({
       render() {
         return (
-          <Button icon="search" loading>
+          <Button loading>
+            <SearchOutlined slot="icon" />
             按钮
           </Button>
         );

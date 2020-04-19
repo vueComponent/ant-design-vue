@@ -34,7 +34,7 @@ export declare class Popconfirm extends TooltipCommon {
 
   /**
    * customize icon of confirmation
-   * @default <Icon type="exclamation-circle" />
+   * @default <ExclamationCircleOutlined />
    * @type any (VNode | slot)
    */
   icon: any;

@@ -1,3 +1,5 @@
+import CaretUpFilled from '@ant-design/icons-vue/CaretUpFilled';
+import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import VcTable, { INTERNAL_COL_DEFINE } from '../vc-table';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
@@ -14,7 +16,6 @@ import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import { TableProps } from './interface';
 import Pagination from '../pagination';
-import Icon from '../icon';
 import Spin from '../spin';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
@@ -1072,19 +1073,15 @@ export default {
           const isAscend = isSortColumn && sortOrder === 'ascend';
           const isDescend = isSortColumn && sortOrder === 'descend';
           const ascend = sortDirections.indexOf('ascend') !== -1 && (
-            <Icon
+            <CaretUpFilled
               class={`${prefixCls}-column-sorter-up ${isAscend ? 'on' : 'off'}`}
-              type="caret-up"
-              theme="filled"
               key="caret-up"
             />
           );
 
           const descend = sortDirections.indexOf('descend') !== -1 && (
-            <Icon
+            <CaretDownFilled
               class={`${prefixCls}-column-sorter-down ${isDescend ? 'on' : 'off'}`}
-              type="caret-down"
-              theme="filled"
               key="caret-down"
             />
           );
@@ -1164,6 +1161,7 @@ export default {
       dropdownPrefixCls,
       contextLocale,
       getPopupContainer: contextGetPopupContainer,
+      transformCellText,
     }) {
       const { showHeader, locale, getPopupContainer, ...restProps } = getOptionProps(this);
       const data = this.getCurrentPageData();
@@ -1220,6 +1218,7 @@ export default {
           expandIconColumnIndex,
           expandIconAsCell,
           emptyText: mergedLocale.emptyText,
+          transformCellText,
         },
         on: getListeners(this),
         class: classString,
@@ -1230,10 +1229,18 @@ export default {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, dropdownPrefixCls: customizeDropdownPrefixCls } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      dropdownPrefixCls: customizeDropdownPrefixCls,
+      transformCellText: customizeTransformCellText,
+    } = this;
     const data = this.getCurrentPageData();
-    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    const {
+      getPopupContainer: getContextPopupContainer,
+      transformCellText: tct,
+    } = this.configProvider;
     const getPopupContainer = this.getPopupContainer || getContextPopupContainer;
+    const transformCellText = customizeTransformCellText || tct;
     let loading = this.loading;
     if (typeof loading === 'boolean') {
       loading = {
@@ -1263,6 +1270,7 @@ export default {
             dropdownPrefixCls,
             contextLocale: locale,
             getPopupContainer,
+            transformCellText,
           })
         }
       />

@@ -1,7 +1,7 @@
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import Checkbox from '../checkbox';
 import Dropdown from '../dropdown';
 import Menu from '../menu';
-import Icon from '../icon';
 import classNames from 'classnames';
 import { SelectionCheckboxAllProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
@@ -210,7 +210,7 @@ export default {
           <Dropdown getPopupContainer={getPopupContainer}>
             <template slot="overlay">{menu}</template>
             <div class={`${selectionPrefixCls}-down`}>
-              <Icon type="down" />
+              <DownOutlined />
             </div>
           </Dropdown>
         ) : null;

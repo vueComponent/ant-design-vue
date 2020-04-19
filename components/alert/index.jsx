@@ -1,4 +1,12 @@
-import Icon from '../icon';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
+import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
+import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import classNames from 'classnames';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
@@ -9,6 +17,21 @@ import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 
 function noop() {}
+
+const iconMapFilled = {
+  success: CheckCircleFilled,
+  info: InfoCircleFilled,
+  error: CloseCircleFilled,
+  warning: ExclamationCircleFilled,
+};
+
+const iconMapOutlined = {
+  success: CheckCircleOutlined,
+  info: InfoCircleOutlined,
+  error: CloseCircleOutlined,
+  warning: ExclamationCircleOutlined,
+};
+
 export const AlertProps = {
   /**
    * Type of Alert styles, options:`success`, `info`, `warning`, `error`
@@ -28,7 +51,6 @@ export const AlertProps = {
   afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
   showIcon: PropTypes.bool,
-  iconType: PropTypes.string,
   prefixCls: PropTypes.string,
   banner: PropTypes.bool,
   icon: PropTypes.any,
@@ -70,12 +92,12 @@ const Alert = {
     },
   },
 
-  render() {
+  render(h) {
     const { prefixCls: customizePrefixCls, banner, closing, closed } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
-    let { closable, type, showIcon, iconType } = this;
+    let { closable, type, showIcon } = this;
     const closeText = getComponentFromProp(this, 'closeText');
     const description = getComponentFromProp(this, 'description');
     const message = getComponentFromProp(this, 'message');
@@ -84,31 +106,8 @@ const Alert = {
     showIcon = banner && showIcon === undefined ? true : showIcon;
     // banner模式默认为警告
     type = banner && type === undefined ? 'warning' : type || 'info';
-    let iconTheme = 'filled';
 
-    if (!iconType) {
-      switch (type) {
-        case 'success':
-          iconType = 'check-circle';
-          break;
-        case 'info':
-          iconType = 'info-circle';
-          break;
-        case 'error':
-          iconType = 'close-circle';
-          break;
-        case 'warning':
-          iconType = 'exclamation-circle';
-          break;
-        default:
-          iconType = 'default';
-      }
-
-      // use outline icon in alert with description
-      if (description) {
-        iconTheme = 'outlined';
-      }
-    }
+    const iconType = (description ? iconMapOutlined : iconMapFilled)[type] || null;
 
     // closeable when closeText is assigned
     if (closeText) {
@@ -126,22 +125,20 @@ const Alert = {
 
     const closeIcon = closable ? (
       <a type="button" onClick={this.handleClose} class={`${prefixCls}-close-icon`} tabIndex={0}>
-        {closeText ? (
-          <span class={`${prefixCls}-close-text`}>{closeText}</span>
-        ) : (
-          <Icon type="close" />
-        )}
+        {closeText ? <span class={`${prefixCls}-close-text`}>{closeText}</span> : <CloseOutlined />}
       </a>
     ) : null;
 
-    const iconNode = (icon &&
-      (isValidElement(icon) ? (
-        cloneElement(icon, {
-          class: `${prefixCls}-icon`,
-        })
-      ) : (
-        <span class={`${prefixCls}-icon`}>{icon}</span>
-      ))) || <Icon class={`${prefixCls}-icon`} type={iconType} theme={iconTheme} />;
+    const iconNode =
+      (icon &&
+        (isValidElement(icon) ? (
+          cloneElement(icon, {
+            class: `${prefixCls}-icon`,
+          })
+        ) : (
+          <span class={`${prefixCls}-icon`}>{icon}</span>
+        ))) ||
+      h(iconType, { class: `${prefixCls}-icon` });
 
     const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
       appear: false,

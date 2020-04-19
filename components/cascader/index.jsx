@@ -5,7 +5,10 @@ import classNames from 'classnames';
 import omit from 'omit.js';
 import KeyCode from '../_util/KeyCode';
 import Input from '../input';
-import Icon from '../icon';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import DownOutlined from '@ant-design/icons-vue/DownOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import RedoOutlined from '@ant-design/icons-vue/RedoOutlined';
 import {
   hasProp,
   filterEmpty,
@@ -402,9 +405,7 @@ const Cascader = {
     });
     const clearIcon =
       (allowClear && !disabled && value.length > 0) || inputValue ? (
-        <Icon
-          type="close-circle"
-          theme="filled"
+        <CloseCircleFilled
           class={`${prefixCls}-picker-clear`}
           onClick={this.clearSelection}
           key="clear-icon"
@@ -509,7 +510,7 @@ const Cascader = {
         })
       ) : (
         <span class={`${prefixCls}-picker-arrow`}>{suffixIcon}</span>
-      ))) || <Icon type="down" class={arrowCls} />;
+      ))) || <DownOutlined class={arrowCls} />;
 
     const input = children.length ? (
       children
@@ -523,11 +524,11 @@ const Cascader = {
       </span>
     );
 
-    const expandIcon = <Icon type="right" />;
+    const expandIcon = <RightOutlined />;
 
     const loadingIcon = (
       <span class={`${prefixCls}-menu-item-loading-icon`}>
-        <Icon type="redo" spin />
+        <RedoOutlined spin />
       </span>
     );
     const getPopupContainer = props.getPopupContainer || getContextPopupContainer;

@@ -43,6 +43,7 @@ export default {
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     __propsSymbol__: PropTypes.any,
     direction: PropTypes.string.def('ltr'),
+    tabBarGutter: PropTypes.number,
   },
   data() {
     const props = getOptionProps(this);
@@ -193,6 +194,7 @@ export default {
       renderTabBar,
       destroyInactiveTabPane,
       direction,
+      tabBarGutter,
     } = props;
     const cls = {
       [prefixCls]: 1,
@@ -209,6 +211,7 @@ export default {
         panels: props.children,
         activeKey: this.$data._activeKey,
         direction,
+        tabBarGutter,
       },
       on: {
         keydown: this.onNavKeyDown,

@@ -10,9 +10,37 @@
 
 ---
 
+## 1.5.3
+
+`2020-04-13`
+
+- 🐞 Fix the problem that the content does not respond to updates when `Dropdown` visible is unchanged [#81eb40](https://github.com/vueComponent/ant-design-vue/commit/81eb401a8899aa3fe0acca88340b323f6e09db45)
+
+## 1.5.2
+
+`2020-04-09`
+
+- 🐞 Fix ts type of `FormModel` not introduced [# 1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
+- 🐞 Fix `DatePicker.WeekPicker` type file error [# 2044](https://github.com/vueComponent/ant-design-vue/issues/2044)
+- 🐞 Fix "Tabs" tabClick event does not take effect [# 2030](https://github.com/vueComponent/ant-design-vue/issues/2030)
+- 🐞 Fix `Table` resize error issue [# 2033](https://github.com/vueComponent/ant-design-vue/issues/2033)
+
+## 1.5.1
+
+`2020-04-02`
+
+- 🐞 Fix `PageHeader` cannot hide backIcon [#1987](https://github.com/vueComponent/ant-design-vue/pull/1987)
+- 🐞 Fix `Pagination` doesn't update when total changes [#1989](https://github.com/vueComponent/ant-design-vue/pull/1989)
+- 🐞 Fix placeholder does not disappear when inputting `TreeSelect` in Chinese [#1994](https://github.com/vueComponent/ant-design-vue/pull/1994)
+- 🐞 Fix `Table` customRender cannot customize class style [#2004](https://github.com/vueComponent/ant-design-vue/pull/2004)
+- 🐞 Fix `Form` missing slot content when using Form.create [#1998](https://github.com/vueComponent/ant-design-vue/pull/1998)
+- 🐞 Fix `Textarea` scroll bar flickering problem [#1964](https://github.com/vueComponent/ant-design-vue/pull/1964)
+- 🌟 Add ts type file of `FormModel` [#1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
+- 🌟 Add `modal` destroyAll type declaration [#1993](https://github.com/vueComponent/ant-design-vue/pull/1963)
+
 ## 1.5.0
 
-`2020-03-15`
+`2020-03-29`
 
 - Four new components have been added:
   - 🔥🔥🔥 [Mentions](https://antdv.com/components/mentions/) Added mentioned components and discarded the original Mention components.
@@ -81,7 +109,8 @@
 - 🌟 Badge supports custom colors.
 - 🐞 Fix the problem that the label of Steps is not centered.
 - 🐞 Fix cursor style problem of DatePicker and TimePicker.
-- 🐞 Fix TreeSelect custom icon is invalid [#1901](https://github.com/vueComponent/ant-design-vue/issues/1901)
+- 🐞 Fix `TreeSelect` custom icon is invalid [#1901](https://github.com/vueComponent/ant-design-vue/issues/1901)
+- 🐞 Fix `Tabs` keyboard left / right switching error [#1947](https://github.com/vueComponent/ant-design-vue/issues/1947)
 
 ## 1.4.12
 

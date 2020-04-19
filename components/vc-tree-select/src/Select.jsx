@@ -224,14 +224,14 @@ const Select = {
         this.forcePopupAlign();
       });
     },
-    '$data._open'() {
+    '$data._open'(open) {
       this.$nextTick(() => {
         const { prefixCls } = this.$props;
         const { _selectorValueList: selectorValueList, _valueEntities: valueEntities } = this.$data;
         const isMultiple = this.isMultiple();
 
         // Scroll to value position, only need sync on single mode
-        if (!isMultiple && selectorValueList.length && this.popup) {
+        if (!isMultiple && selectorValueList.length && open && this.popup) {
           const { value } = selectorValueList[0];
           const { domTreeNodes } = this.popup.getTree();
           const { key } = valueEntities[value] || {};
@@ -823,15 +823,16 @@ const Select = {
 
     onDropdownVisibleChange(open) {
       const { multiple, treeCheckable } = this.$props;
-      const { _searchValue } = this;
+      const { _searchValue } = this.$data;
 
       // When set open success and single mode,
       // we will reset the input content.
       if (open && !multiple && !treeCheckable && _searchValue) {
-        this.setUncontrolledState({
-          _searchValue: '',
-          _filteredTreeNodes: null,
-        });
+        // 动画会有闪动，该特性先注释
+        // this.setUncontrolledState({
+        //   _searchValue: '',
+        //   _filteredTreeNodes: null,
+        // });
       }
       this.setOpenState(open, true);
     },

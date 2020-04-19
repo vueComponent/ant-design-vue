@@ -26,12 +26,7 @@ export default {
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     hideAdd: PropTypes.bool.def(false),
     tabBarStyle: PropTypes.object,
-    tabBarExtraContent: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.func,
-      PropTypes.array,
-    ]),
+    tabBarExtraContent: PropTypes.any,
     destroyInactiveTabPane: PropTypes.bool.def(false),
     type: PropTypes.oneOf(['line', 'card', 'editable-card']),
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
@@ -168,7 +163,10 @@ export default {
         ...getOptionProps(this),
         prefixCls,
         tabBarPosition: tabPosition,
-        renderTabBar: () => <TabBar {...tabBarProps} />,
+        // https://github.com/vueComponent/ant-design-vue/issues/2030
+        // 如仅传递 tabBarProps 会导致，第二次执行 renderTabBar 时，丢失 on 属性，
+        // 添加key之后，会在babel jsx 插件中做一次merge，最终TabBar接收的是一个新的对象，而不是 tabBarProps
+        renderTabBar: () => <TabBar key="tabBar" {...tabBarProps} />,
         renderTabContent: () => (
           <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />
         ),

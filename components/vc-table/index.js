@@ -20,6 +20,12 @@ const Table = {
   ColumnGroup,
   props: T.props,
   methods: {
+    getTableNode() {
+      return this.$refs.table.tableNode;
+    },
+    getBodyTable() {
+      return this.$refs.table.ref_bodyTable;
+    },
     normalize(elements = []) {
       const columns = [];
       elements.forEach(element => {
@@ -63,6 +69,7 @@ const Table = {
         columns,
       },
       on: getListeners(this),
+      ref: 'table',
     };
     return <T {...tProps} />;
   },

@@ -2,6 +2,11 @@
 
 <br><br>
 
+<h2 align="center">企业赞助</h2>
+<p align="center">
+  <a href="http://www.powerproject.com.cn/" target="_blank"><img  width="193" src="http://www.powerproject.com.cn/wp-content/uploads/2019/08/2019080215041192.png" title="donation by wechat"></a>
+</p>
+
 <h2 align="center">Sponsors</h2>
 <p align="center">
   <a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a>
@@ -40,3 +45,4 @@
 - [fastgoo](https://github.com/fastgoo)
 - [sendya](https://github.com/sendya)
 - [limichange](https://github.com/limichange)
+- [LvHang](https://github.com/184005306)

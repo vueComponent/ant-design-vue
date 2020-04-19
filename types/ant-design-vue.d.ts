@@ -28,6 +28,7 @@ import { Drawer } from './drawer';
 import { Dropdown } from './dropdown/dropdown';
 import { Empty } from './empty';
 import { Form } from './form/form';
+import { FormModel } from './form-model/form';
 import { Icon } from './icon';
 import { Input } from './input/input';
 import { InputNumber } from './input-number';
@@ -101,6 +102,7 @@ export {
   Dropdown,
   Empty,
   Form,
+  FormModel,
   Icon,
   Input,
   InputNumber,

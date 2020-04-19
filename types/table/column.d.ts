@@ -23,6 +23,14 @@ export declare class Column extends AntdComponent {
   align?: 'left' | 'right' | 'center';
 
   /**
+   * ellipsize cell content, not working with sorter and filters for now.
+   * tableLayout would be fixed when ellipsis is true.
+   * @default false
+   * @type boolean
+   */
+  ellipsis?: boolean;
+
+  /**
    * Span of this column's title
    * @type number
    */
@@ -33,6 +41,12 @@ export declare class Column extends AntdComponent {
    * @type string
    */
   dataIndex?: string;
+
+  /**
+   * Default filtered values
+   * @type string[]
+   */
+  defaultFilteredValue?: string[];
 
   /**
    * Default order of sorted values: 'ascend' 'descend' null
@@ -115,6 +129,13 @@ export declare class Column extends AntdComponent {
    * @type boolean | string
    */
   sortOrder?: boolean | SortOrder;
+
+  /**
+   * supported sort way, could be 'ascend', 'descend'
+   * @default ['ascend', 'descend']
+   * @type string[]
+   */
+  sortDirections?: string[];
 
   /**
    * Title of this column

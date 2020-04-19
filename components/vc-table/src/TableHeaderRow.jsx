@@ -51,8 +51,10 @@ const TableHeaderRow = {
           }
 
           headerCellProps.class = classNames(
-            customProps.class || customProps.className,
-            column.class || column.className,
+            customProps.class,
+            customProps.className,
+            column.class,
+            column.className,
             {
               [`${prefixCls}-align-${column.align}`]: !!column.align,
               [`${prefixCls}-row-cell-ellipsis`]: !!column.ellipsis,

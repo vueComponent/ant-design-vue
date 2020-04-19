@@ -120,6 +120,24 @@ export default {
         }
       });
     },
+    total() {
+      const newState = {};
+      const newCurrent = calculatePage(this.pageSize, this.$data, this.$props);
+      if (hasProp(this, 'current')) {
+        const current = Math.min(this.current, newCurrent);
+        newState.stateCurrent = current;
+        newState.stateCurrentInputValue = current;
+      } else {
+        let current = this.stateCurrent;
+        if (current === 0 && newCurrent > 0) {
+          current = 1;
+        } else {
+          current = Math.min(this.stateCurrent, newCurrent);
+        }
+        newState.stateCurrent = current;
+      }
+      this.setState(newState);
+    },
   },
   methods: {
     getJumpPrevPage() {

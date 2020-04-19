@@ -970,7 +970,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
               >
                 <i
                   aria-label="icon: left"
-                  class="ant-tabs-tab-prev-icon-target anticon anticon-left"
+                  class="anticon anticon-left ant-tabs-tab-prev-icon-target"
                 >
                   <svg
                     aria-hidden="true"
@@ -998,7 +998,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
               >
                 <i
                   aria-label="icon: right"
-                  class="ant-tabs-tab-next-icon-target anticon anticon-right"
+                  class="anticon anticon-right ant-tabs-tab-next-icon-target"
                 >
                   <svg
                     aria-hidden="true"

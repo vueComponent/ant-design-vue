@@ -1,12 +1,14 @@
 import 'babel-polyfill';
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
-import Antd from 'ant-design-vue';
 import 'ant-design-vue/style.js';
 
-Vue.use(Antd);
-
-new Vue({
-  el: '#app',
-  render: h => h(App),
+const app = createApp({
+  setup() {
+    return App;
+  },
+  render() {
+    return <App></App>;
+  },
 });
+app.mount('#app');

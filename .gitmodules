@@ -4,6 +4,3 @@
 [submodule "transform-jsx-vue3"]
 	path = transform-jsx-vue3
 	url = https://github.com/252675163/transform-jsx-vue3.git
-[submodule "vue3demo"]
-	path = vue3demo
-	url = https://github.com/252675163/vue3demo.git

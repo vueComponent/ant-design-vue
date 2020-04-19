@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-button type="primary">
+    <a-button type="primary" @click="hello">
       Primary
     </a-button>
     <a-button>Default</a-button>
@@ -20,7 +20,17 @@
 </template>
 
 <script>
-export default {
-  name: 'Demo',
-};
+import { defineComponent } from 'vue';
+import Button from '../components/button/button';
+export default defineComponent({
+  name: 'demo',
+  components: { 'a-button': Button },
+  setup() {
+    return {
+      hello: () => {
+        alert('hello');
+      },
+    };
+  },
+});
 </script>

@@ -50,16 +50,15 @@ const Switch = {
     const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(
       this,
     );
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
 
     const classes = {
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     };
-    const loadingIcon = loading ? (
-      <LoadingOutlined class={`${prefixCls}-loading-icon`} />
-    ) : null;
+    const loadingIcon = loading ? <LoadingOutlined class={`${prefixCls}-loading-icon`} /> : null;
     const switchProps = {
       props: {
         ...restProps,

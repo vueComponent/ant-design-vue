@@ -4,6 +4,7 @@ import { getOptionProps, getListeners } from '../_util/props-util';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
+import classNames from 'classnames';
 import Tooltip from '../tooltip';
 import Base from '../base';
 import { ConfigConsumerProps } from '../config-provider';
@@ -129,16 +130,23 @@ const Slider = {
       tooltipPrefixCls: customizeTooltipPrefixCls,
       ...restProps
     } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('slider', customizePrefixCls);
     const tooltipPrefixCls = getPrefixCls('tooltip', customizeTooltipPrefixCls);
     const listeners = getListeners(this);
+    const cls = classNames({
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
+    if (direction === 'rtl' && !restProps.vertical) {
+      restProps.reverse = !restProps.reverse;
+    }
     if (range) {
       const vcRangeProps = {
         props: {
           ...restProps,
           prefixCls,
           tooltipPrefixCls,
+          className: cls,
           handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
         },
         ref: 'sliderRef',
@@ -151,6 +159,7 @@ const Slider = {
         ...restProps,
         prefixCls,
         tooltipPrefixCls,
+        className: cls,
         handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
       },
       ref: 'sliderRef',

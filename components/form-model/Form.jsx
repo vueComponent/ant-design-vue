@@ -49,7 +49,7 @@ const Form = {
   name: 'AFormModel',
   model: {
     prop: 'model',
-    event: 'change'
+    event: 'change',
   },
   props: initDefaultProps(FormProps, {
     layout: 'horizontal',

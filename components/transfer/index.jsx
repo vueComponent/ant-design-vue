@@ -374,7 +374,7 @@ const Transfer = {
         showSelectAll,
       } = props;
       const children = getComponentFromProp(this, 'children', {}, false);
-      const getPrefixCls = this.configProvider.getPrefixCls;
+      const { getPrefixCls, direction } = this.configProvider;
       const prefixCls = getPrefixCls('transfer', customizePrefixCls);
 
       const renderEmpty = this.configProvider.renderEmpty;
@@ -389,6 +389,7 @@ const Transfer = {
       const cls = classNames(prefixCls, {
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-customize-list`]: !!children,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       });
       const titles = this.getTitles(locale);
       return (
@@ -433,6 +434,7 @@ const Transfer = {
             moveToLeft={this.moveToLeft}
             style={operationStyle}
             disabled={disabled}
+            direction={direction}
           />
           <List
             key="rightList"

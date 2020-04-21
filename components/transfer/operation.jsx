@@ -15,6 +15,7 @@ export const TransferOperationProps = {
   leftActive: PropTypes.bool,
   rightActive: PropTypes.bool,
   disabled: PropTypes.bool,
+  direction: PropTypes.string,
 };
 
 export default {
@@ -29,6 +30,7 @@ export default {
       rightArrowText = '',
       leftActive,
       rightActive,
+      direction,
     } = getOptionProps(this);
     return (
       <div>
@@ -38,16 +40,11 @@ export default {
           disabled={disabled || !rightActive}
           onClick={moveToRight}
         >
-          <RightOutlined slot="icon" />
+          {direction === 'rtl' ? <LeftOutlined slot="icon" /> : <RightOutlined slot="icon" />}
           {rightArrowText}
         </Button>
-        <Button
-          type="primary"
-          size="small"
-          disabled={disabled || !leftActive}
-          onClick={moveToLeft}
-        >
-          <LeftOutlined slot="icon" />
+        <Button type="primary" size="small" disabled={disabled || !leftActive} onClick={moveToLeft}>
+          {direction === 'rtl' ? <RightOutlined slot="icon" /> : <LeftOutlined slot="icon" />}
           {leftArrowText}
         </Button>
       </div>

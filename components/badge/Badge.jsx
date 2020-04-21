@@ -79,11 +79,12 @@ export default {
           }
         : { ...numberStyle };
     },
-    getBadgeClassName(prefixCls) {
+    getBadgeClassName(prefixCls, direction) {
       const children = filterEmpty(this.$slots.default);
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: this.hasStatus(),
         [`${prefixCls}-not-a-wrapper`]: !children.length,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       });
     },
     hasStatus() {
@@ -175,7 +176,7 @@ export default {
       $slots,
     } = this;
 
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
 
@@ -203,7 +204,7 @@ export default {
       return (
         <span
           {...{ on: getListeners(this) }}
-          class={this.getBadgeClassName(prefixCls)}
+          class={this.getBadgeClassName(prefixCls, direction)}
           style={styleWithOffset}
         >
           <span class={statusCls} style={statusStyle} />
@@ -217,7 +218,7 @@ export default {
     const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '');
 
     return (
-      <span {...{ on: getListeners(this) }} class={this.getBadgeClassName(prefixCls)}>
+      <span {...{ on: getListeners(this) }} class={this.getBadgeClassName(prefixCls, direction)}>
         {children}
         <transition {...transitionProps}>{scrollNumber}</transition>
         {statusText}

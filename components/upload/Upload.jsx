@@ -244,7 +244,7 @@ export default {
       disabled,
     } = getOptionProps(this);
     const { sFileList: fileList, dragState } = this.$data;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
     const vcUploadProps = {
@@ -302,6 +302,7 @@ export default {
       [`${prefixCls}-select`]: true,
       [`${prefixCls}-select-${listType}`]: true,
       [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     });
 
     // Remove id to avoid open by label when trigger is hidden

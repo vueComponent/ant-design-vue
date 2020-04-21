@@ -47,6 +47,10 @@ export const ValidationRule = {
 
 const Form = {
   name: 'AFormModel',
+  model: {
+    prop: 'model',
+    event: 'change'
+  },
   props: initDefaultProps(FormProps, {
     layout: 'horizontal',
     hideRequiredMark: false,

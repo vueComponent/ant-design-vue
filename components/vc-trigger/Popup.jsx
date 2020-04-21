@@ -46,12 +46,14 @@ export default {
       this.setStretchSize();
     });
   },
-  beforeUpdate() {
-    if (this.domEl && this.domEl.rcEndListener) {
-      this.domEl.rcEndListener();
-      this.domEl = null;
-    }
-  },
+  // 如添加会导致动画失效，如放开会导致快速输入时闪动 https://github.com/vueComponent/ant-design-vue/issues/1327，
+  // 目前方案是保留动画，闪动问题(动画多次执行)进一步定位
+  // beforeUpdate() {
+  //   if (this.domEl && this.domEl.rcEndListener) {
+  //     this.domEl.rcEndListener();
+  //     this.domEl = null;
+  //   }
+  // },
   updated() {
     this.$nextTick(() => {
       this.setStretchSize();
@@ -207,10 +209,10 @@ export default {
         style: { ...sizeStyle, ...popupStyle, ...this.getZIndexStyle() },
       };
       let transitionProps = {
-        props: Object.assign({
+        props: {
           appear: true,
           css: false,
-        }),
+        },
       };
       const transitionName = getTransitionName();
       let useTransition = !!transitionName;
@@ -227,6 +229,8 @@ export default {
                 this.domEl = el;
                 animate(el, `${transitionName}-enter`, done);
               });
+            } else {
+              done();
             }
           });
         },

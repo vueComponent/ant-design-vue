@@ -828,11 +828,10 @@ const Select = {
       // When set open success and single mode,
       // we will reset the input content.
       if (open && !multiple && !treeCheckable && _searchValue) {
-        // 动画会有闪动，该特性先注释
-        // this.setUncontrolledState({
-        //   _searchValue: '',
-        //   _filteredTreeNodes: null,
-        // });
+        this.setUncontrolledState({
+          _searchValue: '',
+          _filteredTreeNodes: null,
+        });
       }
       this.setOpenState(open, true);
     },

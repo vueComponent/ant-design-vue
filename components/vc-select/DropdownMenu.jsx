@@ -32,6 +32,10 @@ export default {
     visible(val) {
       if (!val) {
         this.lastVisible = val;
+      } else {
+        this.$nextTick(() => {
+          this.scrollActiveItemToView();
+        });
       }
     },
   },
@@ -50,11 +54,11 @@ export default {
   },
   updated() {
     const props = this.$props;
-    if (!this.prevVisible && props.visible) {
-      this.$nextTick(() => {
-        this.scrollActiveItemToView();
-      });
-    }
+    // if (!this.prevVisible && props.visible) {
+    //   this.$nextTick(() => {
+    //     this.scrollActiveItemToView();
+    //   });
+    // }
     this.lastVisible = props.visible;
     this.lastInputValue = props.inputValue;
     this.prevVisible = this.visible;

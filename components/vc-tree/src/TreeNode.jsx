@@ -345,7 +345,7 @@ const TreeNode = {
             class={classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher-noop`)}
           >
             {typeof switcherIcon === 'function'
-              ? switcherIcon({ ...this.$props, isLeaf: true })
+              ? switcherIcon({ ...this.$props, ...this.$props.dataRef, isLeaf: true })
               : switcherIcon}
           </span>
         );
@@ -358,7 +358,7 @@ const TreeNode = {
       return (
         <span key="switcher" onClick={this.onExpand} class={switcherCls}>
           {typeof switcherIcon === 'function'
-            ? switcherIcon({ ...this.$props, isLeaf: false })
+            ? switcherIcon({ ...this.$props, ...this.$props.dataRef, isLeaf: false })
             : switcherIcon}
         </span>
       );
@@ -430,7 +430,9 @@ const TreeNode = {
         const currentIcon = icon || treeIcon;
         $icon = currentIcon ? (
           <span class={classNames(`${prefixCls}-iconEle`, `${prefixCls}-icon__customize`)}>
-            {typeof currentIcon === 'function' ? currentIcon({ ...this.$props }, h) : currentIcon}
+            {typeof currentIcon === 'function'
+              ? currentIcon({ ...this.$props, ...this.$props.dataRef }, h)
+              : currentIcon}
           </span>
         ) : (
           this.renderIcon()
@@ -442,12 +444,14 @@ const TreeNode = {
       const currentTitle = title;
       let $title = currentTitle ? (
         <span class={`${prefixCls}-title`}>
-          {typeof currentTitle === 'function' ? currentTitle({ ...this.$props }, h) : currentTitle}
+          {typeof currentTitle === 'function'
+            ? currentTitle({ ...this.$props, ...this.$props.dataRef }, h)
+            : currentTitle}
         </span>
       ) : (
         <span class={`${prefixCls}-title`}>{defaultTitle}</span>
       );
-      
+
       return (
         <span
           key="selector"

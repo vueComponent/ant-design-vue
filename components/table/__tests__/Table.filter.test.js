@@ -11,7 +11,9 @@ describe('Table.filter', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
   });
-  const filterFn = (value, record) => record.name.indexOf(value) !== -1;
+  const filterFn = (value, record) => {
+    return record.name.indexOf(value) !== -1;
+  };
   const column = {
     title: 'Name',
     dataIndex: 'name',
@@ -49,6 +51,7 @@ describe('Table.filter', () => {
         ...listeners,
       },
       sync: false,
+      attachToDocument: true,
     };
   }
 
@@ -309,24 +312,15 @@ describe('Table.filter', () => {
         ],
       }),
     );
-    // jest.useFakeTimers()
-    const dropdownWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false, attachToDocument: true },
-    );
     await asyncExpect(() => {
-      dropdownWrapper
-        .findAll('.ant-dropdown-menu-submenu-title')
-        .at(0)
-        .trigger('mouseenter');
+      $$('.ant-dropdown-trigger')[0].click();
     });
     await asyncExpect(() => {
+      $$('.ant-dropdown-menu-submenu-title')[0].dispatchEvent(new MouseEvent('mouseenter'));
+    }, 0);
+    await asyncExpect(() => {
       $$('.ant-dropdown-menu-submenu-title')[1].dispatchEvent(new MouseEvent('mouseenter'));
-    }, 1000);
+    }, 500);
     await asyncExpect(() => {
       const menuItem = $$('.ant-dropdown-menu-item');
       menuItem[menuItem.length - 1].click();
@@ -439,22 +433,35 @@ describe('Table.filter', () => {
     });
   });
 
-  //   it('confirm filter when dropdown hidden', (done) => {
-  //     const handleChange = jest.fn()
-  //     const wrapper = mount(Table, { ...getTableOptions({
-  //       columns: [{
-  //         ...column,
-  //         filters: [
-  //           { text: 'Jack', value: 'Jack' },
-  //           { text: 'Lucy', value: 'Lucy' },
-  //         ],
-  //       }],
-  //     }, { change: handleChange }), attachToDocument: true })
+  fit('confirm filter when dropdown hidden', async () => {
+    const handleChange = jest.fn();
+    const wrapper = mount(Table, {
+      ...getTableOptions(
+        {
+          columns: [
+            {
+              ...column,
+              filters: [
+                { text: 'Jack', value: 'Jack' },
+                { text: 'Lucy', value: 'Lucy' },
+              ],
+            },
+          ],
+        },
+        { change: handleChange },
+      ),
+      attachToDocument: true,
+    });
+    await asyncExpect(() => {
+      wrapper.find('.ant-dropdown-trigger').trigger('click');
+    }, 0);
+    await asyncExpect(() => {
+      $$('.ant-dropdown-menu-item')[0].click();
+    }, 500);
+    await asyncExpect(() => {
+      wrapper.find('.ant-dropdown-trigger').trigger('click');
+    }, 500);
 
-  //     wrapper.find('.ant-dropdown-trigger').first().simulate('click')
-  //     wrapper.find('.ant-dropdown-menu-item').first().simulate('click')
-  //     wrapper.find('.ant-dropdown-trigger').first().simulate('click')
-
-  //     expect(handleChange).toBeCalled()
-  //   })
+    expect(handleChange).toBeCalled();
+  });
 });

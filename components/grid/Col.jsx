@@ -50,6 +50,7 @@ export default {
       rowContext,
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
+    const direction = this.configProvider.direction;
     const prefixCls = getPrefixCls('col', customizePrefixCls);
 
     let sizeClassObj = {};
@@ -70,6 +71,7 @@ export default {
           sizeProps.offset || sizeProps.offset === 0,
         [`${prefixCls}-${size}-push-${sizeProps.push}`]: sizeProps.push || sizeProps.push === 0,
         [`${prefixCls}-${size}-pull-${sizeProps.pull}`]: sizeProps.pull || sizeProps.pull === 0,
+        [`${prefixCls}-rtl`]: direction === 'rtl',
       };
     });
     const classes = {

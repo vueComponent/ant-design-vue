@@ -94,7 +94,7 @@ export default {
       locale,
       progressAttr,
     } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
     const list = items.map(file => {
@@ -160,10 +160,7 @@ export default {
       ) : null;
       const downloadIcon =
         showDownloadIcon && file.status === 'done' ? (
-          <DownloadOutlined
-            title={locale.downloadFile}
-            onClick={() => this.handleDownload(file)}
-          />
+          <DownloadOutlined title={locale.downloadFile} onClick={() => this.handleDownload(file)} />
         ) : null;
       const downloadOrDelete = listType !== 'picture-card' && (
         <span
@@ -265,6 +262,7 @@ export default {
     const listClassNames = classNames({
       [`${prefixCls}-list`]: true,
       [`${prefixCls}-list-${listType}`]: true,
+      [`${prefixCls}-list-rtl`]: direction === 'rtl',
     });
     const animationDirection = listType === 'picture-card' ? 'animate-inline' : 'animate';
     const transitionGroupProps = getTransitionProps(`${prefixCls}-${animationDirection}`);

@@ -78,7 +78,7 @@ export default {
       defaultActiveTabKey,
     } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const { $slots, $scopedSlots } = this;
@@ -92,6 +92,7 @@ export default {
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
       [`${prefixCls}-${size}`]: size !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     };
 
     const loadingBlockStyle =

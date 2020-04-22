@@ -389,7 +389,7 @@ export declare class Form extends AntdComponent {
    */
   options: object;
 
-  createForm(context: Vue, options?: IformCreateOption): any;
+  createForm(context: Vue, options?: IformCreateOption): WrappedFormUtils;
 
   /**
    * Convert props to field value

@@ -272,7 +272,7 @@ export default {
       />
     ) : null;
 
-    const children = this.$slots.default;
+    const children = this.$scopedSlots.default();
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {

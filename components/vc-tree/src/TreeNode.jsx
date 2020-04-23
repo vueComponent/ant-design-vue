@@ -237,7 +237,7 @@ const TreeNode = {
 
     getNodeChildren() {
       const {
-        $slots: { default: children },
+        $scopedSlots: { default: children },
       } = this;
       const originList = filterEmpty(children);
       const targetList = getNodeChildren(originList);

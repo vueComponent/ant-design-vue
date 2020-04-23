@@ -7,7 +7,7 @@ export default {
     },
   },
   render() {
-    const { $slots, handelClick } = this;
-    return <div onClick={handelClick}>{$slots.default}</div>;
+    const { $scopedSlots, handelClick } = this;
+    return <div onClick={handelClick}>{$scopedSlots.default()}</div>;
   },
 };

@@ -19,7 +19,7 @@ export default {
   },
   render() {
     const { destroyInactiveTabPane, active, forceRender, rootPrefixCls } = this.$props;
-    const children = this.$slots.default;
+    const children = this.$scopedSlots.default();
     const placeholder = getComponentFromProp(this, 'placeholder');
     this._isActived = this._isActived || active;
     const prefixCls = `${rootPrefixCls}-tabpane`;

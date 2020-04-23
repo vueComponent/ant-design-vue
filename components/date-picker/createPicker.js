@@ -112,9 +112,8 @@ export default function createPicker(TheCalendar, props) {
         this.$refs.input.blur();
       },
       renderFooter(...args) {
-        const { $scopedSlots, $slots, _prefixCls: prefixCls } = this;
-        const renderExtraFooter =
-          this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter;
+        const { $scopedSlots, _prefixCls: prefixCls } = this;
+        const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter;
         return renderExtraFooter ? (
           <div class={`${prefixCls}-footer-extra`}>
             {typeof renderExtraFooter === 'function'

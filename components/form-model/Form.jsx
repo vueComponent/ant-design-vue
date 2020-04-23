@@ -164,7 +164,13 @@ const Form = {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, onSubmit, $slots } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      hideRequiredMark,
+      layout,
+      onSubmit,
+      $scopedSlots,
+    } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
 
@@ -176,7 +182,7 @@ const Form = {
     });
     return (
       <form onSubmit={onSubmit} class={formClassName}>
-        {$slots.default}
+        {$scopedSlots.default()}
       </form>
     );
   },

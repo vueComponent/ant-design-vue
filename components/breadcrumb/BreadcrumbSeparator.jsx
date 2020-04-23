@@ -11,11 +11,11 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
-    const { prefixCls: customizePrefixCls, $slots } = this;
+    const { prefixCls: customizePrefixCls, $scopedSlots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
-    const children = $slots.default;
+    const children = $scopedSlots.default();
     return <span class={`${prefixCls}-separator`}>{children || '/'}</span>;
   },
 };

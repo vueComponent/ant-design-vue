@@ -374,7 +374,7 @@ const Cascader = {
   },
 
   render() {
-    const { $slots, sPopupVisible, inputValue, configProvider, localeData } = this;
+    const { $scopedSlots, sPopupVisible, inputValue, configProvider, localeData } = this;
     const { sValue: value, inputFocused } = this.$data;
     const props = getOptionProps(this);
     let suffixIcon = getComponentFromProp(this, 'suffixIcon');
@@ -499,7 +499,7 @@ const Cascader = {
       },
       attrs: getAttrs(this),
     };
-    const children = filterEmpty($slots.default);
+    const children = filterEmpty($scopedSlots.default());
     const inputIcon = (suffixIcon &&
       (isValidElement(suffixIcon) ? (
         cloneElement(suffixIcon, {

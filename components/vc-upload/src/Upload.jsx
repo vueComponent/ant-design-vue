@@ -90,11 +90,13 @@ export default {
     if (this.supportServerRender) {
       const ComponentUploader = this.Component;
       if (ComponentUploader) {
-        return <ComponentUploader {...componentProps}>{this.$slots.default}</ComponentUploader>;
+        return (
+          <ComponentUploader {...componentProps}>{this.$scopedSlots.default()}</ComponentUploader>
+        );
       }
       return null;
     }
     const ComponentUploader = this.getComponent();
-    return <ComponentUploader {...componentProps}>{this.$slots.default}</ComponentUploader>;
+    return <ComponentUploader {...componentProps}>{this.$scopedSlots.default()}</ComponentUploader>;
   },
 };

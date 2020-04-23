@@ -35,7 +35,7 @@ export default {
       expandIcon,
       extra,
     } = this.$props;
-    const { $slots } = this;
+    const { $scopedSlots } = this;
 
     const transitionProps = {
       props: Object.assign({
@@ -81,7 +81,7 @@ export default {
             forceRender={forceRender}
             role={accordion ? 'tabpanel' : null}
           >
-            {$slots.default}
+            {$scopedSlots.default()}
           </PanelContent>
         </transition>
       </div>

@@ -23,26 +23,26 @@ export default function wrapWithConnect(WrappedComponent) {
       },
     },
     render() {
-      const { $slots = {}, $scopedSlots } = this;
+      const { $scopedSlots = {} } = this;
       const props = getOptionProps(this);
       const wrapProps = {
         props: {
           ...props,
           __propsSymbol__: Symbol(),
           componentWillReceiveProps: { ...props },
-          children: $slots.default || props.children || [],
+          children: $scopedSlots.default() || props.children || [],
         },
         on: getListeners(this),
       };
       if (Object.keys($scopedSlots).length) {
         wrapProps.scopedSlots = $scopedSlots;
       }
-      const slotsKey = Object.keys($slots);
+      const slotsKey = Object.keys($scopedSlots);
       return (
         <WrappedComponent {...wrapProps} ref="wrappedInstance">
           {slotsKey.length
             ? slotsKey.map(name => {
-                return <template slot={name}>{$slots[name]}</template>;
+                return <template slot={name}>{$scopedSlots[name]()}</template>;
               })
             : null}
         </WrappedComponent>

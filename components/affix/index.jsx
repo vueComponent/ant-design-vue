@@ -230,7 +230,7 @@ const Affix = {
   },
 
   render() {
-    const { prefixCls, affixStyle, placeholderStyle, $slots, $props } = this;
+    const { prefixCls, affixStyle, placeholderStyle, $scopedSlots, $props } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const className = classNames({
       [getPrefixCls('affix', prefixCls)]: affixStyle,
@@ -247,7 +247,7 @@ const Affix = {
       >
         <div {...props} style={placeholderStyle} ref="placeholderNode">
           <div class={className} ref="fixedNode" style={affixStyle}>
-            {$slots.default}
+            {$scopedSlots.default()}
           </div>
         </div>
       </ResizeObserver>

@@ -63,7 +63,7 @@ export default {
   },
 
   render() {
-    const { prefixCls, closable, clearCloseTimer, startCloseTimer, $slots, close } = this;
+    const { prefixCls, closable, clearCloseTimer, startCloseTimer, $scopedSlots, close } = this;
     const componentClass = `${prefixCls}-notice`;
     const className = {
       [`${componentClass}`]: 1,
@@ -79,7 +79,7 @@ export default {
         onMouseleave={startCloseTimer}
         onClick={getListeners(this).click || noop}
       >
-        <div class={`${componentClass}-content`}>{$slots.default}</div>
+        <div class={`${componentClass}-content`}>{$scopedSlots.default()}</div>
         {closable ? (
           <a tabIndex="0" onClick={close} class={`${componentClass}-close`}>
             {closeIcon || <span class={`${componentClass}-close-x`} />}

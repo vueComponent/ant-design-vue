@@ -56,7 +56,12 @@ const renderTitle = (h, prefixCls, instance) => {
   const subTitle = getComponentFromProp(instance, 'subTitle');
   const tags = getComponentFromProp(instance, 'tags');
   const extra = getComponentFromProp(instance, 'extra');
-  const backIcon = getComponentFromProp(instance, 'backIcon') !== undefined ? getComponentFromProp(instance, 'backIcon') : <Icon type="arrow-left" />;
+  const backIcon =
+    getComponentFromProp(instance, 'backIcon') !== undefined ? (
+      getComponentFromProp(instance, 'backIcon')
+    ) : (
+      <Icon type="arrow-left" />
+    );
   const onBack = instance.$listeners.back;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
@@ -97,7 +102,7 @@ const PageHeader = {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponentFromProp(this, 'footer');
-    const children = this.$slots.default;
+    const children = this.$scopedSlots.default();
 
     let ghost = true;
 

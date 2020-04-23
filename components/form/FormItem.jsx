@@ -119,7 +119,7 @@ export default {
     collectContext() {
       if (this.FormContext.form && this.FormContext.form.templateContext) {
         const { templateContext } = this.FormContext.form;
-        const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
+        const vnodes = Object.values(templateContext.$scopedSlots || {}).reduce((a, b) => {
           return [...a, ...b];
         }, []);
         const isSlot = comeFromSlot(vnodes, this.$vnode);
@@ -504,13 +504,13 @@ export default {
 
   render() {
     const {
-      $slots,
+      $scopedSlots,
       decoratorFormProps,
       fieldDecoratorId,
       fieldDecoratorOptions = {},
       FormContext,
     } = this;
-    let child = filterEmpty($slots.default || []);
+    let child = filterEmpty($scopedSlots.default() || []);
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
       const getFieldDecorator = decoratorFormProps.form.getFieldDecorator;
       child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions, this)(child[0]);

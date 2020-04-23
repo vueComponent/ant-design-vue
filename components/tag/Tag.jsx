@@ -129,7 +129,7 @@ export default {
         class={this.getTagClassName(prefixCls)}
         style={this.getTagStyle()}
       >
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
         {this.renderCloseIcon()}
       </span>
     );

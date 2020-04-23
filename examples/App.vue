@@ -1,26 +1,35 @@
-<template>
-  <div>
-    <a-button type="primary">
-      Primary
-    </a-button>
-    <a-button>Default</a-button>
-    <a-button type="dashed">
-      Dashed
-    </a-button>
-    <a-button type="danger">
-      Danger
-    </a-button>
-    <a-button type="primary">
-      按钮
-    </a-button>
-    <a-button type="link">
-      Link
-    </a-button>
-  </div>
-</template>
-
 <script>
+/* eslint-disable no-console */
+import Comp from './Comp';
 export default {
   name: 'Demo',
+  components: {
+    Comp,
+  },
+  data() {
+    return {
+      value: 0,
+    };
+  },
+  methods: {
+    onChange(e) {
+      console.log(e);
+    },
+  },
+  render() {
+    return (
+      <div>
+        <Comp
+        // scopedSlots={{
+        //   default: ({ age }) => <h1>{age}</h1>,
+        //   name: props => <div>{props}</div>,
+        // }}
+        >
+          <h2>1234</h2>
+          <h2>h3</h2>
+        </Comp>
+      </div>
+    );
+  },
 };
 </script>

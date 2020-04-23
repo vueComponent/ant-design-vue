@@ -99,7 +99,7 @@ export default {
     return (
       <Trigger {...triggerProps}>
         <template slot="popup">{this.getPopupElement(h)}</template>
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
       </Trigger>
     );
   },

@@ -333,7 +333,7 @@ const Select = {
         // processState('children', (propValue) => {
         //   treeNodes = Array.isArray(propValue) ? propValue : [propValue]
         // })
-        treeNodes = filterEmpty(this.$slots.default);
+        treeNodes = filterEmpty(this.$scopedSlots.default());
       }
 
       // Convert `treeData` to entities

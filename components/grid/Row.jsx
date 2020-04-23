@@ -74,7 +74,7 @@ export default {
   },
 
   render() {
-    const { type, justify, align, prefixCls: customizePrefixCls, $slots } = this;
+    const { type, justify, align, prefixCls: customizePrefixCls, $scopedSlots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('row', customizePrefixCls);
 
@@ -101,7 +101,7 @@ export default {
     };
     return (
       <div class={classes} style={rowStyle}>
-        {$slots.default}
+        {$scopedSlots.default()}
       </div>
     );
   },

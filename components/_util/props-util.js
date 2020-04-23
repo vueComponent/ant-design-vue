@@ -68,7 +68,7 @@ const getSlots = ele => {
 const getSlot = (self, name = 'default', options = {}) => {
   return (
     (self.$scopedSlots && self.$scopedSlots[name] && self.$scopedSlots[name](options)) ||
-    self.$slots[name] ||
+    self.$scopedSlots[name] ||
     []
   );
 };
@@ -120,7 +120,7 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
     return (
       (instance.$scopedSlots[prop] && execute && instance.$scopedSlots[prop](options)) ||
       instance.$scopedSlots[prop] ||
-      instance.$slots[prop] ||
+      instance.$scopedSlots[prop] ||
       undefined
     );
   } else {

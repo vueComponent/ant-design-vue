@@ -14,7 +14,13 @@ const Divider = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   render() {
-    const { prefixCls: customizePrefixCls, type, $slots, dashed, orientation = 'center' } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      type,
+      $scopedSlots,
+      dashed,
+      orientation = 'center',
+    } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('divider', customizePrefixCls);
     const orientationPrefix = orientation.length > 0 ? '-' + orientation : orientation;
@@ -22,13 +28,15 @@ const Divider = {
     const classString = {
       [prefixCls]: true,
       [`${prefixCls}-${type}`]: true,
-      [`${prefixCls}-with-text${orientationPrefix}`]: $slots.default,
+      [`${prefixCls}-with-text${orientationPrefix}`]: $scopedSlots.default(),
       [`${prefixCls}-dashed`]: !!dashed,
     };
 
     return (
       <div class={classString} role="separator">
-        {$slots.default && <span class={`${prefixCls}-inner-text`}>{$slots.default}</span>}
+        {$scopedSlots.default() && (
+          <span class={`${prefixCls}-inner-text`}>{$scopedSlots.default()}</span>
+        )}
       </div>
     );
   },

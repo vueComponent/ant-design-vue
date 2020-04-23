@@ -210,7 +210,7 @@ const Descriptions = {
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
     const column = this.getColumn();
-    const children = this.$slots.default;
+    const children = this.$scopedSlots.default();
     const cloneChildren = toArray(children)
       .map(child => {
         if (isValidElement(child)) {

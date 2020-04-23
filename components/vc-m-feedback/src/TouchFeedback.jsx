@@ -60,7 +60,7 @@ export default {
   render() {
     const { disabled, activeClassName = '', activeStyle = {} } = this.$props;
 
-    const child = this.$slots.default;
+    const child = this.$scopedSlots.default();
     if (child.length !== 1) {
       warning(false, 'm-feedback组件只能包含一个子元素');
       return null;

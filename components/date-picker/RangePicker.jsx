@@ -220,10 +220,9 @@ export default {
     },
 
     renderFooter() {
-      const { ranges, $scopedSlots, $slots } = this;
+      const { ranges, $scopedSlots } = this;
       const { _prefixCls: prefixCls, _tagPrefixCls: tagPrefixCls } = this;
-      const renderExtraFooter =
-        this.renderExtraFooter || $scopedSlots.renderExtraFooter || $slots.renderExtraFooter;
+      const renderExtraFooter = this.renderExtraFooter || $scopedSlots.renderExtraFooter;
       if (!ranges && !renderExtraFooter) {
         return null;
       }

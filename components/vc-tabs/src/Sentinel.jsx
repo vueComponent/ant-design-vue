@@ -43,7 +43,7 @@ export default {
         onKeydown={this.onKeyDown}
         role="presentation"
       >
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
       </div>
     );
   },

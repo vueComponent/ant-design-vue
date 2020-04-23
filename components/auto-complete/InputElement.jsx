@@ -21,12 +21,12 @@ export default {
     placeholder: PropTypes.string,
   },
   render() {
-    const { $slots = {}, $attrs = {}, placeholder } = this;
+    const { $scopedSlots = {}, $attrs = {}, placeholder } = this;
     const listeners = getListeners(this);
     const props = getOptionProps(this);
     const value = props.value === undefined ? '' : props.value;
-    const children = $slots.default[0];
-    const { componentOptions = {} } = $slots.default[0];
+    const children = $scopedSlots.default();
+    const { componentOptions = {} } = $scopedSlots.default();
     const { listeners: events = {} } = componentOptions;
     const newEvent = { ...events };
 

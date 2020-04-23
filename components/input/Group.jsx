@@ -34,7 +34,7 @@ export default {
   render() {
     return (
       <span class={this.classes} {...{ on: getListeners(this) }}>
-        {filterEmpty(this.$slots.default)}
+        {filterEmpty(this.$scopedSlots.default())}
       </span>
     );
   },

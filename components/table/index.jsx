@@ -56,7 +56,7 @@ const Table = {
     },
     updateColumns(cols = []) {
       const columns = [];
-      const { $slots, $scopedSlots } = this;
+      const { $scopedSlots } = this;
       cols.forEach(col => {
         const { slots = {}, scopedSlots = {}, ...restProps } = col;
         const column = {
@@ -64,8 +64,9 @@ const Table = {
         };
         Object.keys(slots).forEach(key => {
           const name = slots[key];
-          if (column[key] === undefined && $slots[name]) {
-            column[key] = $slots[name].length === 1 ? $slots[name][0] : $slots[name];
+          if (column[key] === undefined && $scopedSlots[name]) {
+            column[key] =
+              $scopedSlots[name]().length === 1 ? $scopedSlots[name]()[0] : $scopedSlots[name]();
           }
         });
         Object.keys(scopedSlots).forEach(key => {
@@ -86,9 +87,11 @@ const Table = {
     },
   },
   render() {
-    const { $slots, normalize, $scopedSlots } = this;
+    const { $scopedSlots, normalize } = this;
     const props = getOptionProps(this);
-    const columns = props.columns ? this.updateColumns(props.columns) : normalize($slots.default);
+    const columns = props.columns
+      ? this.updateColumns(props.columns)
+      : normalize($scopedSlots.default());
     let { title, footer } = props;
     const {
       title: slotTitle,

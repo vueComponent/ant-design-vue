@@ -182,7 +182,7 @@ const Drawer = {
         >
           {this.renderHeader(prefixCls)}
           <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
-            {this.$slots.default}
+            {this.$scopedSlots.default()}
           </div>
         </div>
       );

@@ -20,14 +20,14 @@ export default {
       return null;
     }
     const { prefixCls, isActive, destroyInactivePanel, forceRender, role } = this.$props;
-    const { $slots } = this;
+    const { $scopedSlots } = this;
     const contentCls = {
       [`${prefixCls}-content`]: true,
       [`${prefixCls}-content-active`]: isActive,
     };
     const child =
       !forceRender && !isActive && destroyInactivePanel ? null : (
-        <div class={`${prefixCls}-content-box`}>{$slots.default}</div>
+        <div class={`${prefixCls}-content-box`}>{$scopedSlots.default()}</div>
       );
     return (
       <div class={contentCls} role={role}>

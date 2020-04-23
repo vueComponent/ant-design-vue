@@ -81,14 +81,14 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
-    const { $slots, $scopedSlots } = this;
+    const { $scopedSlots } = this;
     const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent');
     const classString = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-bordered`]: bordered,
       [`${prefixCls}-hoverable`]: !!hoverable,
-      [`${prefixCls}-contain-grid`]: this.isContainGrid($slots.default),
+      [`${prefixCls}-contain-grid`]: this.isContainGrid($scopedSlots.default()),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
       [`${prefixCls}-${size}`]: size !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,
@@ -184,7 +184,7 @@ export default {
       );
     }
 
-    const children = $slots.default;
+    const children = $scopedSlots.default();
     const cover = getComponentFromProp(this, 'cover');
     const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null;
     const body = (
@@ -192,7 +192,7 @@ export default {
         {loading ? loadingBlock : children}
       </div>
     );
-    const actions = filterEmpty(this.$slots.actions);
+    const actions = filterEmpty(this.$scopedSlots.actions());
     const actionDom =
       actions && actions.length ? (
         <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul>

@@ -24,7 +24,7 @@ export default {
     };
     const topOrBottom = tabBarPosition === 'top' || tabBarPosition === 'bottom';
     const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {};
-    const children = this.$slots.default;
+    const children = this.$scopedSlots.default();
     let newChildren = children;
     if (extraContent) {
       newChildren = [

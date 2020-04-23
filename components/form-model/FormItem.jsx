@@ -216,7 +216,7 @@ export default {
     },
   },
   render() {
-    const { $slots, $scopedSlots } = this;
+    const { $scopedSlots } = this;
     const props = getOptionProps(this);
     const label = getComponentFromProp(this, 'label');
     const extra = getComponentFromProp(this, 'extra');
@@ -231,7 +231,7 @@ export default {
         required: this.isRequired || props.required,
       },
     };
-    const children = filterEmpty($scopedSlots.default ? $scopedSlots.default() : $slots.default);
+    const children = filterEmpty($scopedSlots.default());
     let firstChildren = children[0];
     if (this.prop && this.autoLink && isValidElement(firstChildren)) {
       const originalEvents = getEvents(firstChildren);

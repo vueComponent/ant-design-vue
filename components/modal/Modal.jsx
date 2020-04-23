@@ -168,11 +168,10 @@ export default {
       wrapClassName,
       centered,
       getContainer,
-      $slots,
       $scopedSlots,
       $attrs,
     } = this;
-    const children = $scopedSlots.default ? $scopedSlots.default() : $slots.default;
+    const children = $scopedSlots.default ? $scopedSlots.default() : null;
     const { getPrefixCls, getPopupContainer: getContextPopupContainer } = this.configProvider;
     const prefixCls = getPrefixCls('modal', customizePrefixCls);
 

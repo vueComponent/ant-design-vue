@@ -87,7 +87,7 @@ const MultipleSelector = {
       } = this.$props;
       const {
         vcTreeSelect: { onMultipleSelectorRemove },
-        $slots,
+        $scopedSlots,
       } = this;
       const listeners = getListeners(this);
       // Check if `maxTagCount` is set
@@ -108,7 +108,7 @@ const MultipleSelector = {
           }}
           key={value || TREE_SELECT_EMPTY_VALUE_KEY}
         >
-          {$slots.default}
+          {$scopedSlots.default()}
         </Selection>
       ));
 
@@ -137,7 +137,7 @@ const MultipleSelector = {
             }}
             key="rc-tree-select-internal-max-tag-counter"
           >
-            {$slots.default}
+            {$scopedSlots.default()}
           </Selection>
         );
 
@@ -161,7 +161,7 @@ const MultipleSelector = {
               ],
             }}
           >
-            {$slots.default}
+            {$scopedSlots.default()}
           </SearchInput>
         </li>,
       );
@@ -186,7 +186,7 @@ const MultipleSelector = {
   },
 
   render() {
-    const { $slots } = this;
+    const { $scopedSlots } = this;
     const listeners = getListeners(this);
     return (
       <Selector
@@ -201,7 +201,7 @@ const MultipleSelector = {
           on: listeners,
         }}
       >
-        {$slots.default}
+        {$scopedSlots.default()}
       </Selector>
     );
   },

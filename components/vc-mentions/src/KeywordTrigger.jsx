@@ -47,9 +47,9 @@ export default {
   render() {
     const { visible, placement, transitionName, getPopupContainer } = this.$props;
 
-    const { $slots } = this;
+    const { $scopedSlots } = this;
 
-    const children = $slots.default;
+    const children = $scopedSlots.default();
 
     const popupElement = this.getDropdownElement();
 

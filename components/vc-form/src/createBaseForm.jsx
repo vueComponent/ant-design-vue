@@ -710,7 +710,7 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       render() {
-        const { $slots, $scopedSlots } = this;
+        const { $scopedSlots } = this;
         const formProps = {
           [formPropName]: this.getForm(),
         };
@@ -732,12 +732,12 @@ function createBaseForm(option = {}, mixins = []) {
         if (Object.keys($scopedSlots).length) {
           wrappedComponentProps.scopedSlots = $scopedSlots;
         }
-        const slotsKey = Object.keys($slots);
+        const slotsKey = Object.keys($scopedSlots);
         return WrappedComponent ? (
           <WrappedComponent {...wrappedComponentProps}>
             {slotsKey.length
               ? slotsKey.map(name => {
-                  return <template slot={name}>{$slots[name]}</template>;
+                  return <template slot={name}>{$scopedSlots[name]()}</template>;
                 })
               : null}
           </WrappedComponent>

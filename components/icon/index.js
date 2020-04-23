@@ -23,7 +23,7 @@ const defaultTheme = 'outlined';
 let dangerousTheme;
 
 function renderIcon(h, locale, context) {
-  const { $props: props, $slots } = context;
+  const { $props: props, $scopedSlots } = context;
   const listeners = getListeners(context);
   const {
     // affect inner <svg>...</svg>
@@ -37,7 +37,7 @@ function renderIcon(h, locale, context) {
     rotate,
     tabIndex,
   } = props;
-  let children = filterEmpty($slots.default);
+  let children = filterEmpty($scopedSlots.default());
   children = children.length === 0 ? undefined : children;
   warning(
     Boolean(type || Component || children),

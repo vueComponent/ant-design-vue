@@ -37,7 +37,7 @@ const DialogWrap = {
   },
   methods: {
     getComponent(extra = {}) {
-      const { $attrs, $props, $slots, getContainer } = this;
+      const { $attrs, $props, $scopedSlots, getContainer } = this;
       const { on, ...otherProps } = extra;
       const dialogProps = {
         props: {
@@ -55,7 +55,7 @@ const DialogWrap = {
           ...on,
         },
       };
-      return <Dialog {...dialogProps}>{$slots.default}</Dialog>;
+      return <Dialog {...dialogProps}>{$scopedSlots.default()}</Dialog>;
     },
 
     getContainer2() {

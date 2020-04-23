@@ -153,7 +153,7 @@ const Carousel = {
 
   render() {
     const props = { ...this.$props };
-    const { $slots } = this;
+    const { $scopedSlots } = this;
 
     if (props.effect === 'fade') {
       props.fade = true;
@@ -177,7 +177,7 @@ const Carousel = {
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
-    const children = filterEmpty($slots.default);
+    const children = filterEmpty($scopedSlots.default());
     return (
       <div class={className}>
         <SlickCarousel ref="slick" {...SlickCarouselProps}>

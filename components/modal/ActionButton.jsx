@@ -64,10 +64,10 @@ export default {
   },
 
   render() {
-    const { type, $slots, loading, buttonProps } = this;
+    const { type, $scopedSlots, loading, buttonProps } = this;
     return (
       <Button type={type} onClick={this.onClick} loading={loading} {...buttonProps}>
-        {$slots.default}
+        {$scopedSlots.default()}
       </Button>
     );
   },

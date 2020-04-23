@@ -265,7 +265,7 @@ export default {
       affix,
       showInkInFixed,
       activeLink,
-      $slots,
+      $scopedSlots,
       getContainer,
     } = this;
 
@@ -294,7 +294,7 @@ export default {
           <div class={`${prefixCls}-ink`}>
             <span class={inkClass} ref="inkNode" />
           </div>
-          {$slots.default}
+          {$scopedSlots.default()}
         </div>
       </div>
     );

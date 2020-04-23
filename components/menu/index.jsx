@@ -219,7 +219,7 @@ const Menu = {
     },
   },
   render() {
-    const { layoutSiderContext, $slots } = this;
+    const { layoutSiderContext, $scopedSlots } = this;
     const { collapsedWidth } = layoutSiderContext;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const { prefixCls: customizePrefixCls, theme, getPopupContainer } = this.$props;
@@ -277,7 +277,7 @@ const Menu = {
 
     return (
       <VcMenu {...menuProps} class={menuClassName}>
-        {$slots.default}
+        {$scopedSlots.default()}
       </VcMenu>
     );
   },

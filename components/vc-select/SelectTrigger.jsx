@@ -170,7 +170,7 @@ export default {
   },
 
   render() {
-    const { $props, $slots } = this;
+    const { $props, $scopedSlots } = this;
     const {
       multiple,
       visible,
@@ -251,7 +251,7 @@ export default {
     }
     return (
       <Trigger {...triggerProps}>
-        {$slots.default}
+        {$scopedSlots.default()}
         <template slot="popup">{popupElement}</template>
       </Trigger>
     );

@@ -44,9 +44,9 @@ export default {
       [`${prefixCls}-reverse`]: !!reverse,
       [`${prefixCls}-${mode}`]: !!mode,
     });
-    const children = filterEmpty(this.$slots.default);
+    const children = filterEmpty(this.$scopedSlots.default());
     // // Remove falsy items
-    // const falsylessItems = filterEmpty(this.$slots.default)
+    // const falsylessItems = filterEmpty(this.$scopedSlots.default())
     // const items = falsylessItems.map((item, idx) => {
     //   return cloneElement(item, {
     //     props: {

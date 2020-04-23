@@ -30,7 +30,7 @@ export default {
     const header = getComponentFromProp(this, 'header');
     return (
       <VcCollapse.Panel {...rcCollapePanelProps}>
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
         {header ? <template slot="header">{header}</template> : null}
       </VcCollapse.Panel>
     );

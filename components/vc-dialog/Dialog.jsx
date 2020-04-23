@@ -286,7 +286,7 @@ export default {
             {closer}
             {header}
             <div key="body" class={`${prefixCls}-body`} style={bodyStyle} ref="body" {...bodyProps}>
-              {this.$slots.default}
+              {this.$scopedSlots.default()}
             </div>
             {footer}
           </div>

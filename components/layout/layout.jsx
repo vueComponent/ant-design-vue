@@ -30,7 +30,9 @@ function generator({ suffixCls, tagName, name }) {
           },
           on: getListeners(this),
         };
-        return <BasicComponent {...basicComponentProps}>{this.$slots.default}</BasicComponent>;
+        return (
+          <BasicComponent {...basicComponentProps}>{this.$scopedSlots.default()}</BasicComponent>
+        );
       },
     };
   };
@@ -39,12 +41,12 @@ function generator({ suffixCls, tagName, name }) {
 const Basic = {
   props: BasicProps,
   render() {
-    const { prefixCls, tagName: Tag, $slots } = this;
+    const { prefixCls, tagName: Tag, $scopedSlots } = this;
     const divProps = {
       class: prefixCls,
       on: getListeners(this),
     };
-    return <Tag {...divProps}>{$slots.default}</Tag>;
+    return <Tag {...divProps}>{$scopedSlots.default()}</Tag>;
   },
 };
 
@@ -68,7 +70,7 @@ const BasicLayout = {
     };
   },
   render() {
-    const { prefixCls, $slots, hasSider, tagName: Tag } = this;
+    const { prefixCls, $scopedSlots, hasSider, tagName: Tag } = this;
     const divCls = classNames(prefixCls, {
       [`${prefixCls}-has-sider`]: typeof hasSider === 'boolean' ? hasSider : this.siders.length > 0,
     });
@@ -76,7 +78,7 @@ const BasicLayout = {
       class: divCls,
       on: getListeners,
     };
-    return <Tag {...divProps}>{$slots.default}</Tag>;
+    return <Tag {...divProps}>{$scopedSlots.default()}</Tag>;
   },
 };
 

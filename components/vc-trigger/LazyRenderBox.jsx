@@ -8,14 +8,14 @@ export default {
   render() {
     const { hiddenClassName, visible } = this.$props;
     let children = null;
-    if (hiddenClassName || !this.$slots.default || this.$slots.default.length > 1) {
+    if (hiddenClassName || !this.$scopedSlots.default || this.$scopedSlots.default().length > 1) {
       const cls = '';
       if (!visible && hiddenClassName) {
         // cls += ` ${hiddenClassName}`
       }
-      children = <div class={cls}>{this.$slots.default}</div>;
+      children = <div class={cls}>{this.$scopedSlots.default()}</div>;
     } else {
-      children = this.$slots.default[0];
+      children = this.$scopedSlots.default()[0];
     }
     return children;
   },

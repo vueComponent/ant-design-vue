@@ -46,7 +46,7 @@ export default {
       push,
       pull,
       prefixCls: customizePrefixCls,
-      $slots,
+      $scopedSlots,
       rowContext,
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -105,6 +105,6 @@ export default {
         };
       }
     }
-    return <div {...divProps}>{$slots.default}</div>;
+    return <div {...divProps}>{$scopedSlots.default()}</div>;
   },
 };

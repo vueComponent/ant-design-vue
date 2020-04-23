@@ -38,8 +38,8 @@ export function getPropValue(child, prop) {
     return getValuePropValue(child);
   }
   if (prop === 'children') {
-    const newChild = child.$slots
-      ? cloneVNodes(child.$slots.default, true)
+    const newChild = child.$scopedSlots
+      ? cloneVNodes(child.$scopedSlots.default(), true)
       : cloneVNodes(child.componentOptions.children, true);
     if (newChild.length === 1 && !newChild[0].tag) {
       return newChild[0].text;

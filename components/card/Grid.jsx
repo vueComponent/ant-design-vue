@@ -24,7 +24,7 @@ export default {
     };
     return (
       <div {...{ on: getListeners(this) }} class={classString}>
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
       </div>
     );
   },

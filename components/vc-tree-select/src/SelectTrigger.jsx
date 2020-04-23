@@ -118,7 +118,7 @@ const SelectTrigger = {
         })}
         popupStyle={dropdownStyle}
       >
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
       </Trigger>
     );
   },

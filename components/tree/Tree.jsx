@@ -152,7 +152,7 @@ export default {
       );
     },
     updateTreeData(treeData) {
-      const { $slots, $scopedSlots } = this;
+      const { $scopedSlots } = this;
       const defaultFields = { children: 'children', title: 'title', key: 'key' };
       const replaceFields = { ...defaultFields, ...this.$props.replaceFields };
       return treeData.map(item => {
@@ -161,14 +161,14 @@ export default {
         const { on = {}, slots = {}, scopedSlots = {}, class: cls, style, ...restProps } = item;
         const treeNodeProps = {
           ...restProps,
-          icon: $scopedSlots[scopedSlots.icon] || $slots[slots.icon] || restProps.icon,
+          icon: $scopedSlots[scopedSlots.icon] || restProps.icon,
           switcherIcon:
             $scopedSlots[scopedSlots.switcherIcon] ||
-            $slots[slots.switcherIcon] ||
+            $scopedSlots[slots.switcherIcon] ||
             restProps.switcherIcon,
           title:
             $scopedSlots[scopedSlots.title] ||
-            $slots[slots.title] ||
+            $scopedSlots[slots.title] ||
             restProps[replaceFields.title],
           dataRef: item,
           on,
@@ -185,7 +185,7 @@ export default {
   },
   render() {
     const props = getOptionProps(this);
-    const { $slots, $scopedSlots } = this;
+    const { $scopedSlots } = this;
     const { prefixCls: customizePrefixCls, showIcon, treeNodes, blockNode } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tree', customizePrefixCls);
@@ -200,7 +200,7 @@ export default {
         ...props,
         prefixCls,
         checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
-        children: filterEmpty($scopedSlots.default ? $scopedSlots.default() : $slots.default),
+        children: filterEmpty($scopedSlots.default),
         __propsSymbol__: Symbol(),
         switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
       },

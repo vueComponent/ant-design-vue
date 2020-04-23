@@ -77,7 +77,7 @@ const BackTop = {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, $slots } = this;
+    const { prefixCls: customizePrefixCls, $scopedSlots } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('back-top', customizePrefixCls);
@@ -96,7 +96,7 @@ const BackTop = {
     };
 
     const backTopBtn = this.visible ? (
-      <div {...divProps}>{$slots.default || defaultElement}</div>
+      <div {...divProps}>{$scopedSlots.default() || defaultElement}</div>
     ) : null;
     const transitionProps = getTransitionProps('fade');
     return <transition {...transitionProps}>{backTopBtn}</transition>;

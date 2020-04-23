@@ -56,6 +56,6 @@ export default {
       class: collapseClassName,
       on: getListeners(this),
     };
-    return <VcCollapse {...rcCollapeProps}>{this.$slots.default}</VcCollapse>;
+    return <VcCollapse {...rcCollapeProps}>{this.$scopedSlots.default()}</VcCollapse>;
   },
 };

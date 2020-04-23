@@ -16,7 +16,7 @@ export function loopMenuItem(children, cb) {
   children.forEach(c => {
     index++;
     if (c && c.type && c.type.isMenuItemGroup) {
-      c.$slots.default.forEach(c2 => {
+      c.$scopedSlots.default().forEach(c2 => {
         index++;
         c.componentOptions && cb(c2, index);
       });

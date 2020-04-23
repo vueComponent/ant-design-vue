@@ -33,10 +33,10 @@ export default {
     },
   },
   render() {
-    const { classes, handleClick, $slots } = this;
+    const { classes, handleClick, $scopedSlots } = this;
     return (
       <div class={classes} onClick={handleClick}>
-        {$slots.default}
+        {$scopedSlots.default()}
       </div>
     );
   },

@@ -26,7 +26,7 @@ export default {
     };
   },
   render() {
-    const { prefixCls: customizePrefixCls, size, $slots } = this;
+    const { prefixCls: customizePrefixCls, size, $scopedSlots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('btn-group', customizePrefixCls);
 
@@ -47,6 +47,6 @@ export default {
       [`${prefixCls}`]: true,
       [`${prefixCls}-${sizeCls}`]: sizeCls,
     };
-    return <div class={classes}>{filterEmpty($slots.default)}</div>;
+    return <div class={classes}>{filterEmpty($scopedSlots.default())}</div>;
   },
 };

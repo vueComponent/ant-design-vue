@@ -29,7 +29,7 @@ const Popover = {
   },
 
   render() {
-    const { title, prefixCls: customizePrefixCls, $slots } = this;
+    const { title, prefixCls: customizePrefixCls, $scopedSlots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('popover', customizePrefixCls);
 
@@ -48,13 +48,13 @@ const Popover = {
       <Tooltip {...tooltipProps}>
         <template slot="title">
           <div>
-            {(title || $slots.title) && (
+            {(title || $scopedSlots.title) && (
               <div class={`${prefixCls}-title`}>{getComponentFromProp(this, 'title')}</div>
             )}
             <div class={`${prefixCls}-inner-content`}>{getComponentFromProp(this, 'content')}</div>
           </div>
         </template>
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
       </Tooltip>
     );
   },

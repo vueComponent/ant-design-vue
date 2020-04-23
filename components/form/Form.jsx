@@ -214,7 +214,7 @@ const Form = {
       hideRequiredMark,
       layout,
       onSubmit,
-      $slots,
+      $scopedSlots,
       autoFormCreate,
       options = {},
     } = this;
@@ -245,7 +245,7 @@ const Form = {
           },
           data() {
             return {
-              children: $slots.default,
+              children: $scopedSlots.default(),
               formClassName,
               submit: onSubmit,
             };
@@ -263,7 +263,7 @@ const Form = {
           },
         });
       if (this.domForm) {
-        this.domForm.children = $slots.default;
+        this.domForm.children = $scopedSlots.default();
         this.domForm.submit = onSubmit;
         this.domForm.formClassName = formClassName;
       }
@@ -279,7 +279,7 @@ const Form = {
     }
     return (
       <form onSubmit={onSubmit} class={formClassName}>
-        {$slots.default}
+        {$scopedSlots.default()}
       </form>
     );
   },

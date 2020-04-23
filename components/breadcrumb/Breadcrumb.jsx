@@ -103,11 +103,11 @@ export default {
   },
   render() {
     let crumbs;
-    const { prefixCls: customizePrefixCls, routes, params = {}, $slots, $scopedSlots } = this;
+    const { prefixCls: customizePrefixCls, routes, params = {}, $scopedSlots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
-    const children = filterEmpty($slots.default);
+    const children = filterEmpty($scopedSlots.default());
     const separator = getComponentFromProp(this, 'separator');
     const itemRender = this.itemRender || $scopedSlots.itemRender || this.defaultItemRender;
     if (routes && routes.length > 0) {

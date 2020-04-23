@@ -117,7 +117,7 @@ export default {
           }
         : {};
 
-    let children = this.$slots.default;
+    let children = this.$scopedSlots.default();
     if (src && isImgExist) {
       children = <img src={src} srcSet={srcSet} onError={this.handleImgLoadError} alt={alt} />;
     } else if (icon) {

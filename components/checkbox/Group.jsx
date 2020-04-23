@@ -86,12 +86,12 @@ export default {
     },
   },
   render() {
-    const { $props: props, $data: state, $slots } = this;
+    const { $props: props, $data: state, $scopedSlots } = this;
     const { prefixCls: customizePrefixCls, options } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
-    let children = $slots.default;
+    let children = $scopedSlots.default();
     const groupPrefixCls = `${prefixCls}-group`;
     if (options && options.length > 0) {
       children = this.getOptions().map(option => (

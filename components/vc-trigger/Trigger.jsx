@@ -588,11 +588,15 @@ export default {
   },
   render() {
     const { sPopupVisible } = this;
-    const children = filterEmpty(this.$slots.default);
+    const children = filterEmpty(this.$scopedSlots.default());
     const { forceRender, alignPoint } = this.$props;
 
     if (children.length > 1) {
-      warning(false, 'Trigger $slots.default.length > 1, just support only one default', true);
+      warning(
+        false,
+        'Trigger $scopedSlots.default().length > 1, just support only one default',
+        true,
+      );
     }
     const child = children[0];
     this.childOriginEvents = getEvents(child);

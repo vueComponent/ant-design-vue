@@ -55,7 +55,7 @@ const Steps = {
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
-    return <VcSteps {...stepsProps}>{this.$slots.default}</VcSteps>;
+    return <VcSteps {...stepsProps}>{this.$scopedSlots.default()}</VcSteps>;
   },
 };
 

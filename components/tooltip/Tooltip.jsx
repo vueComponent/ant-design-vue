@@ -173,12 +173,12 @@ export default {
   },
 
   render() {
-    const { $props, $data, $slots } = this;
+    const { $props, $data, $scopedSlots } = this;
     const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
-    let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '');
+    let children = ($scopedSlots.default() || []).filter(c => c.tag || c.text.trim() !== '');
     children = children.length === 1 ? children[0] : children;
     let sVisible = $data.sVisible;
     // Hide tooltip when there is no title

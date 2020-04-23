@@ -228,8 +228,8 @@ export default {
       }
     },
     handleKeyDown(e) {
-      const { $slots } = this;
-      const children = $slots.default && $slots.default[0];
+      const { $scopedSlots } = this;
+      const children = $scopedSlots.default() && $scopedSlots.default()[0];
       // https://github.com/ant-design/ant-design/issues/6717
       // Don't bind keyboard support when children specify the onKeyDown
       if (children) {

@@ -79,7 +79,7 @@ const Comment = {
         {contentDom}
       </div>
     );
-    const children = this.$slots.default;
+    const children = this.$scopedSlots.default();
     return (
       <div class={prefixCls} {...{ on: getListeners(this) }}>
         {comment}

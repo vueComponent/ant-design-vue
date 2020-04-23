@@ -11,12 +11,12 @@ export default {
   props: TreeNode.props,
   render(h, context) {
     const { props, slots, listeners, data, scopedSlots } = context;
-    const $slots = slots() || {};
-    const children = $slots.default;
-    const slotsKey = Object.keys($slots);
+    const $scopedSlots = slots() || {};
+    const children = $scopedSlots.default();
+    const slotsKey = Object.keys($scopedSlots);
     const scopedSlotsTemp = {}; // for vue 2.5.x
     slotsKey.forEach(name => {
-      scopedSlotsTemp[name] = () => $slots[name];
+      scopedSlotsTemp[name] = () => $scopedSlots[name];
     });
     const treeNodeProps = {
       ...data,

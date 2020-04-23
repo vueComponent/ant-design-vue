@@ -50,7 +50,7 @@ export default function createBodyRow(Component = 'tr') {
 
       return (
         <Component class={className} {...{ on: getListeners(this) }}>
-          {this.$slots.default}
+          {this.$scopedSlots.default()}
         </Component>
       );
     },

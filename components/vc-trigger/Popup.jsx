@@ -153,7 +153,7 @@ export default {
       return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`;
     },
     getPopupElement() {
-      const { $props: props, $slots, getTransitionName } = this;
+      const { $props: props, $scopedSlots, getTransitionName } = this;
       const { stretchChecked, targetHeight, targetWidth } = this.$data;
 
       const {
@@ -265,7 +265,7 @@ export default {
                 align={align}
                 onAlign={this.onAlign}
               >
-                <PopupInner {...popupInnerProps}>{$slots.default}</PopupInner>
+                <PopupInner {...popupInnerProps}>{$scopedSlots.default()}</PopupInner>
               </Align>
             ) : null}
           </transition>
@@ -283,7 +283,7 @@ export default {
             align={align}
             onAlign={this.onAlign}
           >
-            <PopupInner {...popupInnerProps}>{$slots.default}</PopupInner>
+            <PopupInner {...popupInnerProps}>{$scopedSlots.default()}</PopupInner>
           </Align>
         </transition>
       );

@@ -48,7 +48,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, href, $slots, target } = this;
+    const { prefixCls: customizePrefixCls, href, $scopedSlots, target } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
@@ -72,7 +72,7 @@ export default {
         >
           {title}
         </a>
-        {$slots.default}
+        {$scopedSlots.default()}
       </div>
     );
   },

@@ -71,9 +71,9 @@ export default {
   },
   methods: {
     isItemContainsTextNodeAndNotSingular() {
-      const { $slots } = this;
+      const { $scopedSlots } = this;
       let result;
-      const children = $slots.default || [];
+      const children = $scopedSlots.default() || [];
       children.forEach(element => {
         if (isStringElement(element) && !isEmptyElement(element)) {
           result = true;
@@ -93,7 +93,7 @@ export default {
   },
   render() {
     const { grid, itemLayout } = this.listContext;
-    const { prefixCls: customizePrefixCls, $slots } = this;
+    const { prefixCls: customizePrefixCls, $scopedSlots } = this;
     const listeners = getListeners(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
@@ -122,14 +122,14 @@ export default {
         {itemLayout === 'vertical' && extra
           ? [
               <div class={`${prefixCls}-item-main`} key="content">
-                {$slots.default}
+                {$scopedSlots.default()}
                 {actionsContent}
               </div>,
               <div class={`${prefixCls}-item-extra`} key="extra">
                 {extra}
               </div>,
             ]
-          : [$slots.default, actionsContent, cloneElement(extra, { key: 'extra' })]}
+          : [$scopedSlots.default(), actionsContent, cloneElement(extra, { key: 'extra' })]}
       </Tag>
     );
 

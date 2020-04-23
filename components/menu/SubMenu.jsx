@@ -16,7 +16,7 @@ export default {
   },
 
   render() {
-    const { $slots, $scopedSlots } = this;
+    const { $scopedSlots } = this;
     const { rootPrefixCls, popupClassName } = this.$props;
     const { theme: antdMenuTheme } = this.menuPropsContext;
     const props = {
@@ -28,12 +28,12 @@ export default {
       on: getListeners(this),
       scopedSlots: $scopedSlots,
     };
-    const slotsKey = Object.keys($slots);
+    const slotsKey = Object.keys($scopedSlots);
     return (
       <VcSubMenu {...props}>
         {slotsKey.length
           ? slotsKey.map(name => {
-              return <template slot={name}>{$slots[name]}</template>;
+              return <template slot={name}>{$scopedSlots[name]}</template>;
             })
           : null}
       </VcSubMenu>

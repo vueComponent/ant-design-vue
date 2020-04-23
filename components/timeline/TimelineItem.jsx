@@ -54,7 +54,7 @@ export default {
         >
           {dot}
         </div>
-        <div class={`${prefixCls}-item-content`}>{this.$slots.default}</div>
+        <div class={`${prefixCls}-item-content`}>{this.$scopedSlots.default()}</div>
       </li>
     );
   },

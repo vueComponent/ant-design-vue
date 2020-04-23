@@ -195,7 +195,7 @@ const MenuItem = {
     };
     return (
       <li {...liProps} style={style} class={className}>
-        {this.$slots.default}
+        {this.$scopedSlots.default()}
         {getComponentFromProp(this, 'itemIcon', props)}
       </li>
     );

@@ -73,8 +73,8 @@ const AutoComplete = {
     },
 
     getInputElement() {
-      const { $slots, placeholder } = this;
-      const children = filterEmpty($slots.default);
+      const { $scopedSlots, placeholder } = this;
+      const children = filterEmpty($scopedSlots.default());
       const element = children.length ? children[0] : <Input lazy={false} />;
       return <InputElement placeholder={placeholder}>{element}</InputElement>;
     },
@@ -93,7 +93,7 @@ const AutoComplete = {
   },
 
   render() {
-    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $slots } = this;
+    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $scopedSlots } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
@@ -106,7 +106,7 @@ const AutoComplete = {
     };
 
     let options;
-    const childArray = filterEmpty($slots.dataSource);
+    const childArray = filterEmpty($scopedSlots.dataSource());
     if (childArray.length) {
       options = childArray;
     } else {

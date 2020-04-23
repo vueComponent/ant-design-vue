@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, getComponentFromProp } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
@@ -30,7 +30,7 @@ const ConfigProvider = {
   },
   provide() {
     const _self = this;
-    this._proxyVm = new Vue({
+    this._proxyVm = createApp({
       data() {
         return {
           ..._self.$props,
@@ -91,9 +91,9 @@ export const ConfigConsumerProps = {
 };
 
 /* istanbul ignore next */
-ConfigProvider.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(ConfigProvider.name, ConfigProvider);
+ConfigProvider.install = function(app) {
+  app.use(Base);
+  app.component(ConfigProvider.name, ConfigProvider);
 };
 
 export default ConfigProvider;

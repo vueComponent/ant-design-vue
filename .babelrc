@@ -3,7 +3,7 @@
     "test": {
       "presets": [["env", { "targets": { "node": "current" } }]],
       "plugins": [
-        "transform-vue-jsx",
+        "transform-jsx-vue3",
         "transform-object-assign",
         "transform-object-rest-spread",
         "transform-class-properties",

@@ -264,7 +264,11 @@ export function isStringElement(c) {
 }
 
 export function filterEmpty(children = []) {
-  return children.filter(c => !isEmptyElement(c));
+  if (typeof children === 'function') {
+    return children.call(undefined); //.filter(c => !isEmptyElement(c));
+  } else {
+    return children; //.filter(c => !isEmptyElement(c));
+  }
 }
 const initDefaultProps = (propTypes, defaultProps) => {
   Object.keys(defaultProps).forEach(k => {

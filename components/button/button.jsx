@@ -13,7 +13,7 @@ export default {
   __ANT_BUTTON: true,
   props,
   inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+    configProvider: { default: ConfigConsumerProps },
   },
   data() {
     return {
@@ -67,7 +67,6 @@ export default {
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
-
       // large => lg
       // small => sm
       let sizeCls = '';
@@ -134,7 +133,7 @@ export default {
     },
   },
   render() {
-    this.icon = this.$scopedSlots.icon && this.$scopedSlots.icon();
+    this.icon = this.$slots.icon && this.$slots.icon();
     const classes = this.getClasses();
     const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
     const buttonProps = {

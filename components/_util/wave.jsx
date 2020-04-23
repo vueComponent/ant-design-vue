@@ -31,7 +31,7 @@ export default {
     });
   },
   inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+    configProvider: { default: ConfigConsumerProps },
   },
   beforeDestroy() {
     if (this.instance) {
@@ -164,6 +164,6 @@ export default {
     if (this.configProvider.csp) {
       this.csp = this.configProvider.csp;
     }
-    return this.$slots.default && this.$slots.default[0];
+    return this.$slots.default() && this.$slots.default()[0];
   },
 };

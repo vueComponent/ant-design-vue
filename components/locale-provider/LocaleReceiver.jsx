@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import { getScopedSlots } from '../_util/vue3-upgrade-util';
 import defaultLocaleData from './default';
 
 export default {
@@ -9,7 +10,7 @@ export default {
     children: PropTypes.func,
   },
   inject: {
-    localeData: { default: () => ({}) },
+    localeData: { default: {} },
   },
   methods: {
     getLocale() {
@@ -36,7 +37,7 @@ export default {
   },
 
   render() {
-    const { $scopedSlots } = this;
+    const $scopedSlots = getScopedSlots(this);
     const children = this.children || $scopedSlots.default;
     const { antLocale } = this.localeData;
     return children(this.getLocale(), this.getLocaleCode(), antLocale);

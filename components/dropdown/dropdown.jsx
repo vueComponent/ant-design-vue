@@ -95,9 +95,8 @@ const Dropdown = {
       overlayClassName,
     } = props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
-    const direction = this.configProvider.direction;
     const dropdownTrigger = cloneElement($slots.default, {
       class: classNames(`${prefixCls}-trigger`, {
         [`${prefixCls}-rtl`]: direction === 'rtl',

@@ -64,10 +64,9 @@ export default {
         icon,
         $slots,
       } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls;
+      const { getPrefixCls, direction } = this.configProvider;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
-      const direction = this.configProvider.direction;
 
       // large => lg
       // small => sm

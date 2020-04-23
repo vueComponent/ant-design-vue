@@ -105,9 +105,8 @@ export default {
   render() {
     let crumbs;
     const { prefixCls: customizePrefixCls, routes, params = {}, $slots, $scopedSlots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
-    const direction = this.configProvider.direction;
 
     const children = filterEmpty($slots.default);
     const separator = getComponentFromProp(this, 'separator');

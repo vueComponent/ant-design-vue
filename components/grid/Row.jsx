@@ -75,8 +75,7 @@ export default {
 
   render() {
     const { type, justify, align, prefixCls: customizePrefixCls, $slots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('row', customizePrefixCls);
 
     const gutter = this.getGutter();

@@ -49,8 +49,7 @@ export default {
       $slots,
       rowContext,
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('col', customizePrefixCls);
 
     let sizeClassObj = {};

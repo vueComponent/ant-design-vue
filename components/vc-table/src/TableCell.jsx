@@ -21,6 +21,9 @@ export default {
     expandIcon: PropTypes.any,
     component: PropTypes.any,
   },
+  inject: {
+    table: { default: () => ({}) },
+  },
   methods: {
     handleClick(e) {
       const {
@@ -45,6 +48,7 @@ export default {
       component: BodyCell,
     } = this;
     const { dataIndex, customRender, className = '' } = column;
+    const { transformCellText } = this.table;
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
     let text;
@@ -85,6 +89,10 @@ export default {
     // Fix https://github.com/ant-design/ant-design/issues/1202
     if (isInvalidRenderCellText(text)) {
       text = null;
+    }
+
+    if (transformCellText) {
+      text = transformCellText({ text, column, record, index });
     }
 
     const indentText = expandIcon ? (

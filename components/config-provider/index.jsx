@@ -26,6 +26,7 @@ const ConfigProvider = {
     autoInsertSpaceInButton: PropTypes.bool,
     locale: PropTypes.object,
     pageHeader: PropTypes.object,
+    transformCellText: PropTypes.func,
   },
   provide() {
     const _self = this;
@@ -43,7 +44,14 @@ const ConfigProvider = {
     };
   },
   watch: {
-    ...getWatch(['prefixCls', 'csp', 'autoInsertSpaceInButton', 'locale', 'pageHeader']),
+    ...getWatch([
+      'prefixCls',
+      'csp',
+      'autoInsertSpaceInButton',
+      'locale',
+      'pageHeader',
+      'transformCellText',
+    ]),
   },
   methods: {
     renderEmptyComponent(h, name) {

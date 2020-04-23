@@ -27,7 +27,7 @@ export default {
       title: title || (level === 1 ? $slots.default : ''),
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
-    const direction = this.configProvider.direction;
+    const { direction } = this.configProvider;
     if (!siderCollapsed && !inlineCollapsed) {
       tooltipProps.title = null;
       // Reset `visible` to fix control mode tooltip display not correct

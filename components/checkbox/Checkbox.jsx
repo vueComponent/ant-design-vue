@@ -79,8 +79,7 @@ export default {
     const children = $slots.default;
     const { mouseenter = noop, mouseleave = noop, input, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, indeterminate, ...restProps } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
     const checkboxProps = {

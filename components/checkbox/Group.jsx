@@ -89,8 +89,7 @@ export default {
   render() {
     const { $props: props, $data: state, $slots } = this;
     const { prefixCls: customizePrefixCls, options } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
     let children = $slots.default;

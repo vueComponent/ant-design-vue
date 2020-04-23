@@ -536,10 +536,8 @@ const Cascader = {
       [`${prefixCls}-menu-${direction}`]: direction === 'rtl',
     });
     const popupPlacementDirection = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
-    console.log(popupPlacementDirection);
     const getPopupPlacement =
       props.popupPlacement !== undefined ? props.popupPlacement : popupPlacementDirection;
-    console.log(getPopupPlacement);
     const cascaderProps = {
       props: {
         ...props,

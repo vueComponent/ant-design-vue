@@ -39,8 +39,7 @@ const Steps = {
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, iconPrefix: customizeIconPrefixCls } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
     const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
 

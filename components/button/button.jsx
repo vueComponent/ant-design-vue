@@ -53,7 +53,7 @@ export default {
   methods: {
     getClasses() {
       const {
-        prefixCls: customizePrefixCls,
+        // prefixCls: customizePrefixCls,
         type,
         shape,
         size,
@@ -64,10 +64,11 @@ export default {
         icon,
         $slots,
       } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('btn', customizePrefixCls);
-      const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
-
+      // const getPrefixCls = this.configProvider.getPrefixCls;
+      // const prefixCls = getPrefixCls('btn', customizePrefixCls);
+      const prefixCls = 'ant-btn';
+      // const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+      const autoInsertSpace = false;
       // large => lg
       // small => sm
       let sizeCls = '';
@@ -150,7 +151,8 @@ export default {
     };
     const iconNode = sLoading ? <LoadingOutlined /> : icon || null;
     const children = filterEmpty($slots.default);
-    const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+    // const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+    const autoInsertSpace = false;
     const kids = children.map(child =>
       this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
     );

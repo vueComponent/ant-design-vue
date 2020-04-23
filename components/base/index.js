@@ -1,8 +1,8 @@
 import antDirective from '../_util/antDirective';
 const base = {};
-const install = function(Vue) {
-  base.Vue = Vue;
-  Vue.use(antDirective);
+const install = function(app) {
+  // base.Vue = Vue;
+  app.use(antDirective);
 };
 base.install = install;
 

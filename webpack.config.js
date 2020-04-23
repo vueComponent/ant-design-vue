@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/dist/plugin');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const path = require('path');
@@ -37,7 +37,7 @@ module.exports = {
             ],
           ],
           plugins: [
-            'transform-vue-jsx',
+            'transform-jsx-vue3',
             'transform-object-assign',
             'transform-object-rest-spread',
             'transform-class-properties',

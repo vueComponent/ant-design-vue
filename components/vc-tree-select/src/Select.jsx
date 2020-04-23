@@ -224,14 +224,14 @@ const Select = {
         this.forcePopupAlign();
       });
     },
-    '$data._open'() {
+    '$data._open'(open) {
       this.$nextTick(() => {
         const { prefixCls } = this.$props;
         const { _selectorValueList: selectorValueList, _valueEntities: valueEntities } = this.$data;
         const isMultiple = this.isMultiple();
 
         // Scroll to value position, only need sync on single mode
-        if (!isMultiple && selectorValueList.length && this.popup) {
+        if (!isMultiple && selectorValueList.length && open && this.popup) {
           const { value } = selectorValueList[0];
           const { domTreeNodes } = this.popup.getTree();
           const { key } = valueEntities[value] || {};
@@ -823,7 +823,7 @@ const Select = {
 
     onDropdownVisibleChange(open) {
       const { multiple, treeCheckable } = this.$props;
-      const { _searchValue } = this;
+      const { _searchValue } = this.$data;
 
       // When set open success and single mode,
       // we will reset the input content.

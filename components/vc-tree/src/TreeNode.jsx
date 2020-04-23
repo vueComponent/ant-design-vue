@@ -345,7 +345,7 @@ const TreeNode = {
             class={classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher-noop`)}
           >
             {typeof switcherIcon === 'function'
-              ? switcherIcon({ ...this.$props, isLeaf: true })
+              ? switcherIcon({ ...this.$props, ...this.$props.dataRef, isLeaf: true })
               : switcherIcon}
           </span>
         );
@@ -358,7 +358,7 @@ const TreeNode = {
       return (
         <span key="switcher" onClick={this.onExpand} class={switcherCls}>
           {typeof switcherIcon === 'function'
-            ? switcherIcon({ ...this.$props, isLeaf: false })
+            ? switcherIcon({ ...this.$props, ...this.$props.dataRef, isLeaf: false })
             : switcherIcon}
         </span>
       );
@@ -420,7 +420,7 @@ const TreeNode = {
         vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData },
       } = this;
       const disabled = this.isDisabled();
-      const title = getComponentFromProp(this, 'title') || defaultTitle;
+      const title = getComponentFromProp(this, 'title', {}, false);
       const wrapClass = `${prefixCls}-node-content-wrapper`;
 
       // Icon - Still show loading icon when loading without showIcon
@@ -430,7 +430,9 @@ const TreeNode = {
         const currentIcon = icon || treeIcon;
         $icon = currentIcon ? (
           <span class={classNames(`${prefixCls}-iconEle`, `${prefixCls}-icon__customize`)}>
-            {typeof currentIcon === 'function' ? currentIcon({ ...this.$props }, h) : currentIcon}
+            {typeof currentIcon === 'function'
+              ? currentIcon({ ...this.$props, ...this.$props.dataRef }, h)
+              : currentIcon}
           </span>
         ) : (
           this.renderIcon()
@@ -439,8 +441,16 @@ const TreeNode = {
         $icon = this.renderIcon();
       }
 
-      // Title
-      const $title = <span class={`${prefixCls}-title`}>{title}</span>;
+      const currentTitle = title;
+      let $title = currentTitle ? (
+        <span class={`${prefixCls}-title`}>
+          {typeof currentTitle === 'function'
+            ? currentTitle({ ...this.$props, ...this.$props.dataRef }, h)
+            : currentTitle}
+        </span>
+      ) : (
+        <span class={`${prefixCls}-title`}>{defaultTitle}</span>
+      );
 
       return (
         <span

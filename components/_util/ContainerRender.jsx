@@ -42,7 +42,7 @@ export default {
     renderComponent(props = {}, ready) {
       const { visible, forceRender, getContainer, parent } = this;
       const self = this;
-      if (visible || parent.$refs._component || forceRender) {
+      if (visible || parent._component || parent.$refs._component || forceRender) {
         let el = this.componentEl;
         if (!this.container) {
           this.container = getContainer();
@@ -50,12 +50,14 @@ export default {
           this.componentEl = el;
           this.container.appendChild(el);
         }
+        // self.getComponent 不要放在 render 中，会因为响应式数据问题导致，多次触发 render
+        const com = { component: self.getComponent(props) };
         if (!this._component) {
           this._component = new this.$root.constructor({
             el,
             parent: self,
             data: {
-              comProps: props,
+              _com: com,
             },
             mounted() {
               this.$nextTick(() => {
@@ -72,17 +74,16 @@ export default {
               });
             },
             methods: {
-              forceRender(p) {
-                this.comProps = p;
-                this.$forceUpdate();
+              setComponent(_com) {
+                this.$data._com = _com;
               },
             },
             render() {
-              return self.getComponent(this.comProps);
+              return this.$data._com.component;
             },
           });
         } else {
-          this._component.forceRender(props);
+          this._component.setComponent(com);
         }
       }
     },

@@ -13,4 +13,5 @@ export declare class ConfigProvider extends AntdComponent {
   renderEmpty: Function;
   csp?: CSPConfig;
   autoInsertSpaceInButton?: boolean;
+  transformCellText?: Function;
 }

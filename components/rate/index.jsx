@@ -46,8 +46,7 @@ const Rate = {
   },
   render() {
     const { prefixCls: customizePrefixCls, ...restProps } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
     const rateClassNames = classNames({
       [`${prefixCls}-rtl`]: direction === 'rtl',

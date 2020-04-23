@@ -53,8 +53,7 @@ export default {
     const children = $slots.default;
     const { mouseenter = noop, mouseleave = noop, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, ...restProps } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const radioProps = {

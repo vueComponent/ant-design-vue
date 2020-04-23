@@ -88,8 +88,7 @@ export default {
     const { mouseenter = noop, mouseleave = noop } = getListeners(this);
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const groupPrefixCls = `${prefixCls}-group`;

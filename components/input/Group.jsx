@@ -19,8 +19,7 @@ export default {
   computed: {
     classes() {
       const { prefixCls: customizePrefixCls, size, compact = false } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls;
-      const direction = this.configProvider.direction;
+      const { getPrefixCls, direction } = this.configProvider;
       const prefixCls = getPrefixCls('input-group', customizePrefixCls);
 
       return {

@@ -199,8 +199,7 @@ export default {
     }
     const { prefixCls: customizePrefixCls } = this.$props;
     const { stateValue } = this.$data;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const direction = this.configProvider.direction;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     const addonAfter = getComponentFromProp(this, 'addonAfter');
     const addonBefore = getComponentFromProp(this, 'addonBefore');

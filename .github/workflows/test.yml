@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: cache package-lock.json
         uses: actions/cache@v1
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1
@@ -96,12 +96,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Checkout submodules
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           repository: tangjinzhou/antdv-demo
           token: ${{ secrets.ACCESS_TOKEN }}
@@ -122,4 +122,3 @@ jobs:
       - name: test
         run: npm test
     needs: setup
-

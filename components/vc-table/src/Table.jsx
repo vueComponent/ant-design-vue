@@ -67,6 +67,7 @@ export default {
       expandRowByClick: PropTypes.bool,
       expandIcon: PropTypes.func,
       tableLayout: PropTypes.string,
+      transformCellText: PropTypes.func,
     },
     {
       data: [],

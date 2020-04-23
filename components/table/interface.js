@@ -135,6 +135,7 @@ export const TableProps = {
   tableLayout: PropTypes.string,
   getPopupContainer: PropTypes.func,
   expandIcon: PropTypes.func,
+  transformCellText: PropTypes.func,
   // className?: PropTypes.string,
   // style?: React.CSSProperties;
   // children?: React.ReactNode;

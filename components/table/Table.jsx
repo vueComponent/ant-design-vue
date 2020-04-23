@@ -1164,6 +1164,7 @@ export default {
       dropdownPrefixCls,
       contextLocale,
       getPopupContainer: contextGetPopupContainer,
+      transformCellText,
     }) {
       const { showHeader, locale, getPopupContainer, ...restProps } = getOptionProps(this);
       const data = this.getCurrentPageData();
@@ -1220,6 +1221,7 @@ export default {
           expandIconColumnIndex,
           expandIconAsCell,
           emptyText: mergedLocale.emptyText,
+          transformCellText,
         },
         on: getListeners(this),
         class: classString,
@@ -1230,10 +1232,18 @@ export default {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, dropdownPrefixCls: customizeDropdownPrefixCls } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      dropdownPrefixCls: customizeDropdownPrefixCls,
+      transformCellText: customizeTransformCellText,
+    } = this;
     const data = this.getCurrentPageData();
-    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+    const {
+      getPopupContainer: getContextPopupContainer,
+      transformCellText: tct,
+    } = this.configProvider;
     const getPopupContainer = this.getPopupContainer || getContextPopupContainer;
+    const transformCellText = customizeTransformCellText || tct;
     let loading = this.loading;
     if (typeof loading === 'boolean') {
       loading = {
@@ -1263,6 +1273,7 @@ export default {
             dropdownPrefixCls,
             contextLocale: locale,
             getPopupContainer,
+            transformCellText,
           })
         }
       />

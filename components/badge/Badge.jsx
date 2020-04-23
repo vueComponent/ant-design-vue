@@ -81,8 +81,10 @@ export default {
     },
     getBadgeClassName(prefixCls) {
       const children = filterEmpty(this.$slots.default);
+      const hasStatus = this.hasStatus();
       return classNames(prefixCls, {
-        [`${prefixCls}-status`]: this.hasStatus(),
+        [`${prefixCls}-status`]: hasStatus,
+        [`${prefixCls}-dot-status`]: hasStatus && this.dot && !this.isZero(),
         [`${prefixCls}-not-a-wrapper`]: !children.length,
       });
     },

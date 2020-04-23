@@ -128,9 +128,10 @@ export default {
       if (this.sPopupVisible !== this.prevPopupVisible) {
         this.afterPopupVisibleChange(this.sPopupVisible);
       }
+      this.prevPopupVisible = this.sPopupVisible;
     };
+    this.renderComponent(null, triggerAfterPopupVisibleChange);
     this.$nextTick(() => {
-      this.renderComponent(null, triggerAfterPopupVisibleChange);
       this.updatedCal();
     });
   },

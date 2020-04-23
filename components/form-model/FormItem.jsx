@@ -142,6 +142,9 @@ export default {
       }
       descriptor[this.prop] = rules;
       const validator = new AsyncValidator(descriptor);
+      if (this.FormContext && this.FormContext.validateMessages) {
+        validator.messages(this.FormContext.validateMessages);
+      }
       const model = {};
       model[this.prop] = this.fieldValue;
       validator.validate(model, { firstFields: true }, (errors, invalidFields) => {

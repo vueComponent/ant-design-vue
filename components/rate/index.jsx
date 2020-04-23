@@ -64,7 +64,7 @@ const Rate = {
       on: getListeners(this),
       ref: 'refRate',
     };
-    return <VcRate {...rateProps} class={rateClassNames} />;
+    return <VcRate {...rateProps} class={rateClassNames} direction={direction} />;
   },
 };
 

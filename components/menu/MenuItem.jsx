@@ -50,7 +50,7 @@ export default {
     return (
       <Tooltip {...toolTipProps}>
         <Item {...itemProps} ref="menuItem">
-          {$scopedSlots.default()}
+          {$scopedSlots.default && $scopedSlots.default()}
         </Item>
       </Tooltip>
     );

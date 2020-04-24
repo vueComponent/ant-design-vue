@@ -247,7 +247,7 @@ const Affix = {
       >
         <div {...props} style={placeholderStyle} ref="placeholderNode">
           <div class={className} ref="fixedNode" style={affixStyle}>
-            {$scopedSlots.default()}
+            {$scopedSlots.default && $scopedSlots.default()}
           </div>
         </div>
       </ResizeObserver>

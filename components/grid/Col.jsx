@@ -105,6 +105,6 @@ export default {
         };
       }
     }
-    return <div {...divProps}>{$scopedSlots.default()}</div>;
+    return <div {...divProps}>{$scopedSlots.default && $scopedSlots.default()}</div>;
   },
 };

@@ -294,7 +294,7 @@ export default {
           <div class={`${prefixCls}-ink`}>
             <span class={inkClass} ref="inkNode" />
           </div>
-          {$scopedSlots.default()}
+          {$scopedSlots.default && $scopedSlots.default()}
         </div>
       </div>
     );

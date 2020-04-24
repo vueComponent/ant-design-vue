@@ -67,7 +67,7 @@ export default {
     const { type, $scopedSlots, loading, buttonProps } = this;
     return (
       <Button type={type} onClick={this.onClick} loading={loading} {...buttonProps}>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </Button>
     );
   },

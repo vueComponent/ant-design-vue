@@ -8,6 +8,6 @@ export default {
   },
   render() {
     const { $scopedSlots, handelClick } = this;
-    return <div onClick={handelClick}>{$scopedSlots.default()}</div>;
+    return <div onClick={handelClick}>{$scopedSlots.default && $scopedSlots.default()}</div>;
   },
 };

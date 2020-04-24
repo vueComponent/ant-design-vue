@@ -27,7 +27,9 @@ export default {
     };
     const child =
       !forceRender && !isActive && destroyInactivePanel ? null : (
-        <div class={`${prefixCls}-content-box`}>{$scopedSlots.default()}</div>
+        <div class={`${prefixCls}-content-box`}>
+          {$scopedSlots.default && $scopedSlots.default()}
+        </div>
       );
     return (
       <div class={contentCls} role={role}>

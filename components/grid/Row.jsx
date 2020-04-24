@@ -101,7 +101,7 @@ export default {
     };
     return (
       <div class={classes} style={rowStyle}>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </div>
     );
   },

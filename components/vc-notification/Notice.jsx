@@ -79,7 +79,9 @@ export default {
         onMouseleave={startCloseTimer}
         onClick={getListeners(this).click || noop}
       >
-        <div class={`${componentClass}-content`}>{$scopedSlots.default()}</div>
+        <div class={`${componentClass}-content`}>
+          {$scopedSlots.default && $scopedSlots.default()}
+        </div>
         {closable ? (
           <a tabIndex="0" onClick={close} class={`${componentClass}-close`}>
             {closeIcon || <span class={`${componentClass}-close-x`} />}

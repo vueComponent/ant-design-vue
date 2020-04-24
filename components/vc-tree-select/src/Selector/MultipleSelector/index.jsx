@@ -108,7 +108,7 @@ const MultipleSelector = {
           }}
           key={value || TREE_SELECT_EMPTY_VALUE_KEY}
         >
-          {$scopedSlots.default()}
+          {$scopedSlots.default && $scopedSlots.default()}
         </Selection>
       ));
 
@@ -137,7 +137,7 @@ const MultipleSelector = {
             }}
             key="rc-tree-select-internal-max-tag-counter"
           >
-            {$scopedSlots.default()}
+            {$scopedSlots.default && $scopedSlots.default()}
           </Selection>
         );
 
@@ -161,7 +161,7 @@ const MultipleSelector = {
               ],
             }}
           >
-            {$scopedSlots.default()}
+            {$scopedSlots.default && $scopedSlots.default()}
           </SearchInput>
         </li>,
       );
@@ -201,7 +201,7 @@ const MultipleSelector = {
           on: listeners,
         }}
       >
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </Selector>
     );
   },

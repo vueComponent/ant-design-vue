@@ -55,7 +55,7 @@ const DialogWrap = {
           ...on,
         },
       };
-      return <Dialog {...dialogProps}>{$scopedSlots.default()}</Dialog>;
+      return <Dialog {...dialogProps}>{$scopedSlots.default && $scopedSlots.default()}</Dialog>;
     },
 
     getContainer2() {

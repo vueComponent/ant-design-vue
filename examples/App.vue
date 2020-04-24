@@ -24,10 +24,7 @@ export default {
         //   default: ({ age }) => <h1>{age}</h1>,
         //   name: props => <div>{props}</div>,
         // }}
-        >
-          <h2>1234</h2>
-          <h2>h3</h2>
-        </Comp>
+        ></Comp>
       </div>
     );
   },

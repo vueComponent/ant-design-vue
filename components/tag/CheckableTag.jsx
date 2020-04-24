@@ -36,7 +36,7 @@ export default {
     const { classes, handleClick, $scopedSlots } = this;
     return (
       <div class={classes} onClick={handleClick}>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </div>
     );
   },

@@ -122,7 +122,7 @@ export default {
         {itemLayout === 'vertical' && extra
           ? [
               <div class={`${prefixCls}-item-main`} key="content">
-                {$scopedSlots.default()}
+                {$scopedSlots.default && $scopedSlots.default()}
                 {actionsContent}
               </div>,
               <div class={`${prefixCls}-item-extra`} key="extra">

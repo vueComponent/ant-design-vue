@@ -265,7 +265,9 @@ export default {
                 align={align}
                 onAlign={this.onAlign}
               >
-                <PopupInner {...popupInnerProps}>{$scopedSlots.default()}</PopupInner>
+                <PopupInner {...popupInnerProps}>
+                  {$scopedSlots.default && $scopedSlots.default()}
+                </PopupInner>
               </Align>
             ) : null}
           </transition>
@@ -283,7 +285,9 @@ export default {
             align={align}
             onAlign={this.onAlign}
           >
-            <PopupInner {...popupInnerProps}>{$scopedSlots.default()}</PopupInner>
+            <PopupInner {...popupInnerProps}>
+              {$scopedSlots.default && $scopedSlots.default()}
+            </PopupInner>
           </Align>
         </transition>
       );

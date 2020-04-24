@@ -96,7 +96,7 @@ const BackTop = {
     };
 
     const backTopBtn = this.visible ? (
-      <div {...divProps}>{$scopedSlots.default() || defaultElement}</div>
+      <div {...divProps}>{($scopedSlots && $scopedSlots.default()) || defaultElement}</div>
     ) : null;
     const transitionProps = getTransitionProps('fade');
     return <transition {...transitionProps}>{backTopBtn}</transition>;

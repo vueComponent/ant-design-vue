@@ -28,14 +28,16 @@ const Divider = {
     const classString = {
       [prefixCls]: true,
       [`${prefixCls}-${type}`]: true,
-      [`${prefixCls}-with-text${orientationPrefix}`]: $scopedSlots.default(),
+      [`${prefixCls}-with-text${orientationPrefix}`]: $scopedSlots.default,
       [`${prefixCls}-dashed`]: !!dashed,
     };
 
     return (
       <div class={classString} role="separator">
         {$scopedSlots.default() && (
-          <span class={`${prefixCls}-inner-text`}>{$scopedSlots.default()}</span>
+          <span class={`${prefixCls}-inner-text`}>
+            {($scopedSlots.default && $scopedSlots.default()) || []}
+          </span>
         )}
       </div>
     );

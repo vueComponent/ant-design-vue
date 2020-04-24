@@ -81,7 +81,7 @@ export default {
             forceRender={forceRender}
             role={accordion ? 'tabpanel' : null}
           >
-            {$scopedSlots.default()}
+            {$scopedSlots.default && $scopedSlots.default()}
           </PanelContent>
         </transition>
       </div>

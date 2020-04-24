@@ -277,7 +277,7 @@ const Menu = {
 
     return (
       <VcMenu {...menuProps} class={menuClassName}>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </VcMenu>
     );
   },

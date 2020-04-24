@@ -48,7 +48,7 @@ const Basic = {
       class: prefixCls,
       on: getListeners(this),
     };
-    return <Tag {...divProps}>{$scopedSlots.default()}</Tag>;
+    return <Tag {...divProps}>{$scopedSlots.default && $scopedSlots.default()}</Tag>;
   },
 };
 
@@ -80,7 +80,7 @@ const BasicLayout = {
       class: divCls,
       on: getListeners,
     };
-    return <Tag {...divProps}>{$scopedSlots.default()}</Tag>;
+    return <Tag {...divProps}>{$scopedSlots.default && $scopedSlots.default()}</Tag>;
   },
 };
 

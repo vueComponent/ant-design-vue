@@ -251,7 +251,7 @@ export default {
     }
     return (
       <Trigger {...triggerProps}>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
         <template slot="popup">{popupElement}</template>
       </Trigger>
     );

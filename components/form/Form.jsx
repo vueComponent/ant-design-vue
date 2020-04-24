@@ -279,7 +279,7 @@ const Form = {
     }
     return (
       <form onSubmit={onSubmit} class={formClassName}>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </form>
     );
   },

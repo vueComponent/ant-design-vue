@@ -72,7 +72,7 @@ export default {
         >
           {title}
         </a>
-        {$scopedSlots.default()}
+        {$scopedSlots.default && $scopedSlots.default()}
       </div>
     );
   },

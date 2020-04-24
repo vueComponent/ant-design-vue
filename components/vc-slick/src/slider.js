@@ -132,7 +132,7 @@ export default {
     }
 
     // makes sure that children is an array, even when there is only 1 child
-    let children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [] || [];
+    let children = (this.$scopedSlots.default && this.$scopedSlots.default()) || [] || [];
 
     // Children may contain false or null, so we should filter them
     // children may also contain string filled with spaces (in certain cases where we use jsx strings)

@@ -81,7 +81,7 @@ export default {
     },
     getBadgeClassName(prefixCls) {
       const children = filterEmpty(
-        (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+        (this.$scopedSlots.default && this.$scopedSlots.default()) || [],
       );
       const hasStatus = this.hasStatus();
       return classNames(prefixCls, {

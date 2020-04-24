@@ -67,8 +67,8 @@ const ConfigProvider = {
     renderProvider(legacyLocale) {
       return (
         <LocaleProvider locale={this.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
-          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []
-            ? filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || [])[0]
+          {(this.$scopedSlots.default && this.$scopedSlots.default()) || []
+            ? filterEmpty((this.$scopedSlots.default && this.$scopedSlots.default()) || [])[0]
             : null}
         </LocaleProvider>
       );

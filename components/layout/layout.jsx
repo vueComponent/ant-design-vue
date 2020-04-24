@@ -32,7 +32,7 @@ function generator({ suffixCls, tagName, name }) {
         };
         return (
           <BasicComponent {...basicComponentProps}>
-            {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+            {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
           </BasicComponent>
         );
       },

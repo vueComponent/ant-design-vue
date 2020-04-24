@@ -33,7 +33,7 @@ export default {
       <VcSubMenu {...props}>
         {slotsKey.length
           ? slotsKey.map(name => {
-              return <template slot={name}>{$scopedSlots[name]}</template>;
+              return <template slot={name}>{$scopedSlots[name]()}</template>;
             })
           : null}
       </VcSubMenu>

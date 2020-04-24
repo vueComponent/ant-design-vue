@@ -737,7 +737,9 @@ function createBaseForm(option = {}, mixins = []) {
           <WrappedComponent {...wrappedComponentProps}>
             {slotsKey.length
               ? slotsKey.map(name => {
-                  return <template slot={name}>{$scopedSlots[name]()}</template>;
+                  return (
+                    <template slot={name}>{$scopedSlots[name] && $scopedSlots[name]()}</template>
+                  );
                 })
               : null}
           </WrappedComponent>

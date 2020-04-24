@@ -22,7 +22,7 @@ export default {
     const { getInlineCollapsed, $scopedSlots, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     const tooltipProps = {
-      title: title || (level === 1 ? $scopedSlots.default() : ''),
+      title: title || (level === 1 ? $scopedSlots.default && $scopedSlots.default() : ''),
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
     if (!siderCollapsed && !inlineCollapsed) {

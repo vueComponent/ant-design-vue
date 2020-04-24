@@ -112,7 +112,7 @@ const Mentions = {
     getOptions() {
       const { loading } = this.$props;
       const children = filterEmpty(
-        (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [] || [],
+        (this.$scopedSlots.default && this.$scopedSlots.default()) || [] || [],
       );
 
       if (loading) {

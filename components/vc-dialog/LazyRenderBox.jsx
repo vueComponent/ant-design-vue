@@ -12,7 +12,7 @@ export default {
   render() {
     return (
       <div {...{ on: getListeners(this) }}>
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </div>
     );
   },

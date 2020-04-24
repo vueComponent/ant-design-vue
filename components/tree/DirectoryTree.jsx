@@ -63,7 +63,7 @@ export default {
     const props = getOptionProps(this);
     const { defaultExpandAll, defaultExpandParent, expandedKeys, defaultExpandedKeys } = props;
     const { keyEntities } = convertTreeToEntities(
-      (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+      (this.$scopedSlots.default && this.$scopedSlots.default()) || [],
     );
     const state = {};
     // Selected keys
@@ -75,7 +75,7 @@ export default {
         state._expandedKeys = getFullKeyListByTreeData(props.treeData);
       } else {
         state._expandedKeys = getFullKeyList(
-          (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+          (this.$scopedSlots.default && this.$scopedSlots.default()) || [],
         );
       }
     } else if (defaultExpandParent) {
@@ -132,7 +132,7 @@ export default {
 
     onSelect(keys, event) {
       const { multiple } = this.$props;
-      const children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [] || [];
+      const children = (this.$scopedSlots.default && this.$scopedSlots.default()) || [] || [];
       const { _expandedKeys: expandedKeys = [] } = this.$data;
       const { node, nativeEvent } = event;
       const { eventKey = '' } = node;
@@ -236,7 +236,7 @@ export default {
       },
     };
     return (
-      <Tree {...treeProps}>{(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}</Tree>
+      <Tree {...treeProps}>{(this.$scopedSlots.default && this.$scopedSlots.default()) || []}</Tree>
     );
   },
 };

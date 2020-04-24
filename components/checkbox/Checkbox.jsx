@@ -76,7 +76,7 @@ export default {
   render() {
     const { checkboxGroupContext: checkboxGroup, $scopedSlots } = this;
     const props = getOptionProps(this);
-    const children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
+    const children = ($scopedSlots.default && $scopedSlots.default()) || [];
     const { mouseenter = noop, mouseleave = noop, input, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, indeterminate, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;

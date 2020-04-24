@@ -276,7 +276,7 @@ const SubPopupMenu = {
         if (temp !== undefined) {
           return temp;
         }
-        return instance.$scopedSlots[name] || instance.$scopedSlots[name];
+        return instance.$scopedSlots[name] && instance.$scopedSlots[name]();
       } else {
         const temp = getPropsData(instance)[name];
         if (temp !== undefined) {

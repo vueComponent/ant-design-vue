@@ -58,7 +58,7 @@ export default {
     };
     return (
       <VcCollapse {...rcCollapeProps}>
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </VcCollapse>
     );
   },

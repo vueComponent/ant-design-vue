@@ -17,7 +17,7 @@ export default {
     };
     return (
       <Upload {...draggerProps}>
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </Upload>
     );
   },

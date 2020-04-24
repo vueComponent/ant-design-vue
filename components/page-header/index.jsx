@@ -102,7 +102,7 @@ const PageHeader = {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponentFromProp(this, 'footer');
-    const children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [];
+    const children = (this.$scopedSlots.default && this.$scopedSlots.default()) || [];
 
     let ghost = true;
 

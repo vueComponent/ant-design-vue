@@ -108,8 +108,8 @@ export default {
     },
     getItems() {
       const newChildren = [];
-      (this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
-        ([] && this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+      (this.$scopedSlots.default && this.$scopedSlots.default()) ||
+        ([] && this.$scopedSlots.default && this.$scopedSlots.default()) ||
         [].forEach((child, index) => {
           newChildren.push(this.getNewChild(child, index));
         });

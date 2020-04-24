@@ -254,7 +254,7 @@ const AjaxUploader = {
           multiple={multiple}
           onChange={this.onChange}
         />
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </Tag>
     );
   },

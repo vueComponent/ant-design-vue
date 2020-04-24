@@ -166,7 +166,7 @@ const TreeSelect = {
     };
     return (
       <VcTreeSelect {...VcTreeSelectProps}>
-        {filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || [])}
+        {filterEmpty((this.$scopedSlots.default && this.$scopedSlots.default()) || [])}
       </VcTreeSelect>
     );
   },

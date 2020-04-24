@@ -33,7 +33,7 @@ Vue.component('transition-group', {
     return createElement(
       this.tag || 'div',
       null,
-      (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+      (this.$scopedSlots.default && this.$scopedSlots.default()) || [],
     );
   },
 });

@@ -30,7 +30,7 @@ export default function wrapWithConnect(WrappedComponent) {
           ...props,
           __propsSymbol__: Symbol(),
           componentWillReceiveProps: { ...props },
-          children: $scopedSlots.default() || props.children || [],
+          children: ($scopedSlots.default && $scopedSlots.default()) || props.children || [],
         },
         on: getListeners(this),
       };
@@ -42,7 +42,9 @@ export default function wrapWithConnect(WrappedComponent) {
         <WrappedComponent {...wrapProps} ref="wrappedInstance">
           {slotsKey.length
             ? slotsKey.map(name => {
-                return <template slot={name}>{$scopedSlots[name]()}</template>;
+                return (
+                  <template slot={name}>{$scopedSlots[name] && $scopedSlots[name]()}</template>
+                );
               })
             : null}
         </WrappedComponent>

@@ -268,7 +268,7 @@ const IframeUploader = {
     return (
       <Tag className={cls} style={{ position: 'relative', zIndex: 0 }}>
         <iframe ref="iframeRef" onLoad={this.onLoad} style={iframeStyle} />
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </Tag>
     );
   },

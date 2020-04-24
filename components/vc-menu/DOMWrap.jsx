@@ -110,7 +110,7 @@ const DOMWrap = {
       }
       // put all the overflowed item inside a submenu
       // with a title of overflow indicator ('...')
-      const copy = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [][0];
+      const copy = this.$scopedSlots.default && this.$scopedSlots.default()[0];
       const { title, ...rest } = getPropsData(copy); // eslint-disable-line no-unused-vars
 
       let style = {};
@@ -291,7 +291,7 @@ const DOMWrap = {
     };
     return (
       <Tag {...tagProps}>
-        {this.renderChildren((this.$scopedSlots.deafult && this.$scopedSlots.default()) || [])}
+        {this.renderChildren(this.$scopedSlots.default && this.$scopedSlots.default())}
       </Tag>
     );
   },

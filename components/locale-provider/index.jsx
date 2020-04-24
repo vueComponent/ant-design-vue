@@ -69,8 +69,8 @@ const LocaleProvider = {
     changeConfirmLocale();
   },
   render() {
-    return (this.$scopedSlots.deafult && this.$scopedSlots.default()) || []
-      ? (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [][0]
+    return (this.$scopedSlots.default && this.$scopedSlots.default()) || []
+      ? (this.$scopedSlots.default && this.$scopedSlots.default()) || [][0]
       : null;
   },
 };

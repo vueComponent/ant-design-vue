@@ -96,7 +96,7 @@ export default {
       [`${groupPrefixCls}-${props.size}`]: props.size,
     });
 
-    let children = filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []);
+    let children = filterEmpty((this.$scopedSlots.default && this.$scopedSlots.default()) || []);
 
     // 如果存在 options, 优先使用
     if (options && options.length > 0) {

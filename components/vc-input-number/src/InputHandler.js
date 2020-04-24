@@ -19,7 +19,7 @@ const InputHandler = {
     };
     return (
       <Touchable {...touchableProps}>
-        <span>{(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}</span>
+        <span>{(this.$scopedSlots.default && this.$scopedSlots.default()) || []}</span>
       </Touchable>
     );
   },

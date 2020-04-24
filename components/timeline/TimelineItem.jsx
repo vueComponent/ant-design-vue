@@ -55,7 +55,7 @@ export default {
           {dot}
         </div>
         <div class={`${prefixCls}-item-content`}>
-          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+          {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
         </div>
       </li>
     );

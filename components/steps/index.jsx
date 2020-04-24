@@ -57,7 +57,7 @@ const Steps = {
     };
     return (
       <VcSteps {...stepsProps}>
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </VcSteps>
     );
   },

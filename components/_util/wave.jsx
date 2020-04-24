@@ -164,8 +164,6 @@ export default {
     if (this.configProvider.csp) {
       this.csp = this.configProvider.csp;
     }
-    return (
-      (this.$scopedSlots.default && this.$scopedSlots.deafult && this.$scopedSlots.default()) || []
-    );
+    return (this.$scopedSlots.default && this.$scopedSlots.default()) || [];
   },
 };

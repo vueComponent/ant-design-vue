@@ -49,7 +49,7 @@ export default {
 
     const { $scopedSlots } = this;
 
-    const children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
+    const children = ($scopedSlots.default && $scopedSlots.default()) || [];
 
     const popupElement = this.getDropdownElement();
 

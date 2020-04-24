@@ -263,7 +263,7 @@ const Form = {
           },
         });
       if (this.domForm) {
-        this.domForm.children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
+        this.domForm.children = ($scopedSlots.default && $scopedSlots.default()) || [];
         this.domForm.submit = onSubmit;
         this.domForm.formClassName = formClassName;
       }

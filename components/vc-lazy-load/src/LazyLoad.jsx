@@ -129,7 +129,7 @@ export default {
     },
   },
   render(createElement) {
-    const children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [];
+    const children = (this.$scopedSlots.default && this.$scopedSlots.default()) || [];
     if (children.length !== 1) {
       warning(false, 'lazyLoad组件只能包含一个子元素');
       return null;

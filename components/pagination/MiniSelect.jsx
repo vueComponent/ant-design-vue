@@ -17,7 +17,7 @@ export default {
     };
     return (
       <VcSelect {...selelctProps}>
-        {filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || [])}
+        {filterEmpty((this.$scopedSlots.default && this.$scopedSlots.default()) || [])}
       </VcSelect>
     );
   },

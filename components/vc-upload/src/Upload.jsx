@@ -92,7 +92,7 @@ export default {
       if (ComponentUploader) {
         return (
           <ComponentUploader {...componentProps}>
-            {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+            {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
           </ComponentUploader>
         );
       }
@@ -101,7 +101,7 @@ export default {
     const ComponentUploader = this.getComponent();
     return (
       <ComponentUploader {...componentProps}>
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </ComponentUploader>
     );
   },

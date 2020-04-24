@@ -394,7 +394,7 @@ const Drawer = {
         keyboard,
         maskClosable,
       } = this.$props;
-      const children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [];
+      const children = (this.$scopedSlots.default && this.$scopedSlots.default()) || [];
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,

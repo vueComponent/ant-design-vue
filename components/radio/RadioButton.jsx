@@ -30,7 +30,7 @@ export default {
     }
     return (
       <Radio {...radioProps}>
-        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
       </Radio>
     );
   },

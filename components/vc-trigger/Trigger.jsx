@@ -588,7 +588,7 @@ export default {
   },
   render() {
     const { sPopupVisible } = this;
-    const children = filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []);
+    const children = filterEmpty((this.$scopedSlots.default && this.$scopedSlots.default()) || []);
     const { forceRender, alignPoint } = this.$props;
 
     if (children.length > 1) {

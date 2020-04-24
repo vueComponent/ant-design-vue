@@ -312,7 +312,7 @@ const SubMenu = {
     isChildrenSelected() {
       const ret = { find: false };
       loopMenuItemRecursively(
-        (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+        this.$scopedSlots.default && this.$scopedSlots.default(),
         this.$props.selectedKeys,
         ret,
       );
@@ -501,7 +501,7 @@ const SubMenu = {
       </div>
     );
     const children = this.renderChildren(
-      filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []),
+      filterEmpty((this.$scopedSlots.default && this.$scopedSlots.default()) || []),
     );
 
     const getPopupContainer = this.parentMenu.isRootMenu

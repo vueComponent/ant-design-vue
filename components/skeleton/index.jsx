@@ -157,7 +157,7 @@ const Skeleton = {
         </div>
       );
     }
-    const children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [];
+    const children = (this.$scopedSlots.default && this.$scopedSlots.default()) || [];
     return children && children.length === 1 ? children[0] : <span>{children}</span>;
   },
 };

@@ -178,7 +178,7 @@ export default {
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
-    let children = (($scopedSlots.deafult && $scopedSlots.default()) || []).filter(
+    let children = (($scopedSlots.default && $scopedSlots.default()) || []).filter(
       c => c.tag || c.text.trim() !== '',
     );
     children = children.length === 1 ? children[0] : children;

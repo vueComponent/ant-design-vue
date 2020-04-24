@@ -36,7 +36,7 @@ const Menu = {
         '0-menu-': getActiveKey(
           {
             ...props,
-            children: this.$scopedSlots.default && this.$scopedSlots.default()[0],
+            children: (this.$scopedSlots.default && this.$scopedSlots.default()[0]) || [],
           },
           props.activeKey,
         ),

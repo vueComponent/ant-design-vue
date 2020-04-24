@@ -209,10 +209,10 @@ export default function wrapPicker(Picker, props, pickerType) {
         };
         return (
           <Picker {...pickerProps}>
-            {this.$scopedSlots &&
-              Object.keys(this.$scopedSlots).map(key => (
+            {this.slots &&
+              Object.keys(this.$slots).map(key => (
                 <template slot={key} key={key}>
-                  {this.$scopedSlots[key]()}
+                  {this.$slots[key]}
                 </template>
               ))}
           </Picker>

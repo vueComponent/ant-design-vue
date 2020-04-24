@@ -91,7 +91,7 @@ const Table = {
     const props = getOptionProps(this);
     const columns = props.columns
       ? this.updateColumns(props.columns)
-      : normalize($scopedSlots.default());
+      : normalize($scopedSlots.default && $scopedSlots.default());
     let { title, footer } = props;
     const {
       title: slotTitle,

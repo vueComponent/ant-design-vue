@@ -62,7 +62,7 @@ const Table = {
   render() {
     const { $scopedSlots, normalize } = this;
     const props = getOptionProps(this);
-    const columns = props.columns || normalize($scopedSlots.default());
+    const columns = props.columns || normalize($scopedSlots.default && $scopedSlots.default());
     const tProps = {
       props: {
         ...props,

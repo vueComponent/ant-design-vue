@@ -88,7 +88,9 @@ export default {
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-bordered`]: bordered,
       [`${prefixCls}-hoverable`]: !!hoverable,
-      [`${prefixCls}-contain-grid`]: this.isContainGrid($scopedSlots.default()),
+      [`${prefixCls}-contain-grid`]: this.isContainGrid(
+        $scopedSlots.default && $scopedSlots.default(),
+      ),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
       [`${prefixCls}-${size}`]: size !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,

@@ -38,6 +38,7 @@ module.exports = {
     '!components/trigger/**/*',
     '!components/style.js',
     '!**/node_modules/**',
+    // 'components/date-picker/__tests__/*.{js}'
   ],
   transformIgnorePatterns,
 };

@@ -158,8 +158,6 @@ export default {
       'getBodyWrapper is deprecated, please use custom components instead.',
     );
 
-    // this.columnManager = new ColumnManager(this.columns, this.$scopedSlots.default && this.$scopedSlots.default() || [])
-
     this.store = create({
       currentHoverKey: null,
       fixedColumnsHeadRowsHeight: [],

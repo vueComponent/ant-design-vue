@@ -56,7 +56,7 @@ const Table = {
     },
     updateColumns(cols = []) {
       const columns = [];
-      const { $scopedSlots } = this;
+      const { $slots, $scopedSlots } = this;
       cols.forEach(col => {
         const { slots = {}, scopedSlots = {}, ...restProps } = col;
         const column = {
@@ -64,9 +64,8 @@ const Table = {
         };
         Object.keys(slots).forEach(key => {
           const name = slots[key];
-          if (column[key] === undefined && $scopedSlots[name]) {
-            column[key] =
-              $scopedSlots[name]().length === 1 ? $scopedSlots[name]()[0] : $scopedSlots[name]();
+          if (column[key] === undefined && $slots[name]) {
+            column[key] = $slots[name].length === 1 ? $slots[name][0] : $slots[name];
           }
         });
         Object.keys(scopedSlots).forEach(key => {

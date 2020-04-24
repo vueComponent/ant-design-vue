@@ -80,7 +80,7 @@ export default {
     },
 
     getOverlayElement() {
-      const overlay = this.overlay || this.$scopedSlots.overlay || this.$scopedSlots.overlay;
+      const overlay = this.overlay || (this.$scopedSlots.overlay && this.$scopedSlots.overlay());
       let overlayElement;
       if (typeof overlay === 'function') {
         overlayElement = overlay();
@@ -92,7 +92,7 @@ export default {
 
     getMenuElement() {
       const { onClick, prefixCls, $scopedSlots } = this;
-      this.childOriginEvents = getEvents($scopedSlots.overlay[0]);
+      this.childOriginEvents = getEvents($scopedSlots.overlay && $scopedSlots.overlay()[0]);
       const overlayElement = this.getOverlayElement();
       const extraOverlayProps = {
         props: {
@@ -106,11 +106,11 @@ export default {
       if (typeof overlayElement.type === 'string') {
         delete extraOverlayProps.props.prefixCls;
       }
-      return cloneElement($scopedSlots.overlay[0], extraOverlayProps);
+      return cloneElement($scopedSlots.overlay && $scopedSlots.overlay()[0], extraOverlayProps);
     },
 
     getMenuElementOrLambda() {
-      const overlay = this.overlay || this.$scopedSlots.overlay || this.$scopedSlots.overlay;
+      const overlay = this.overlay || (this.$scopedSlots.overlay && this.$scopedSlots.overlay());
       if (typeof overlay === 'function') {
         return this.getMenuElement;
       }
@@ -147,10 +147,7 @@ export default {
     },
 
     renderChildren() {
-      const children =
-        (this.$scopedSlots.default && this.$scopedSlots.default()) ||
-        ([] && this.$scopedSlots.default && this.$scopedSlots.default()) ||
-        [][0];
+      const children = this.$scopedSlots.default && this.$scopedSlots.default()[0];
       const { sVisible } = this;
       return sVisible && children
         ? cloneElement(children, { class: this.getOpenClassName() })
@@ -204,7 +201,9 @@ export default {
     return (
       <Trigger {...triggerProps}>
         {this.renderChildren()}
-        <template slot="popup">{this.$scopedSlots.overlay && this.getMenuElement()}</template>
+        <template slot="popup">
+          {this.$scopedSlots.overlay && this.$scopedSlots.overlay() && this.getMenuElement()}
+        </template>
       </Trigger>
     );
   },

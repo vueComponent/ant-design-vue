@@ -84,7 +84,7 @@ const Dropdown = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
 
-    const dropdownTrigger = cloneElement($scopedSlots.default(), {
+    const dropdownTrigger = cloneElement($scopedSlots.default && $scopedSlots.default(), {
       class: `${prefixCls}-trigger`,
       props: {
         disabled,

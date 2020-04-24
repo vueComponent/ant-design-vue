@@ -16,9 +16,7 @@ export default {
       style: { height: this.height },
     };
     return (
-      <Upload {...draggerProps}>
-        {(this.$scopedSlots.default && this.$scopedSlots.default()) || []}
-      </Upload>
+      <Upload {...draggerProps}>{this.$scopedSlots.default && this.$scopedSlots.default()}</Upload>
     );
   },
 };

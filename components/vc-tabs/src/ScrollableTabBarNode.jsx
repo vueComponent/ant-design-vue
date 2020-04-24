@@ -355,7 +355,7 @@ export default {
                 ],
               }}
             >
-              {navWrapper(this.$scopedSlots.default())}
+              {navWrapper((this.$scopedSlots.deafult && this.$scopedSlots.default()) || [])}
             </div>
           </div>
         </div>

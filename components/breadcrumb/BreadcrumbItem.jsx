@@ -41,7 +41,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
     const separator = getComponentFromProp(this, 'separator');
-    const children = $scopedSlots.default();
+    const children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
     let link;
     if (hasProp(this, 'href')) {
       link = <a class={`${prefixCls}-link`}>{children}</a>;

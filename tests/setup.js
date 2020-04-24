@@ -30,7 +30,11 @@ Vue.use(Base);
 Vue.component('transition-group', {
   props: ['tag'],
   render(createElement) {
-    return createElement(this.tag || 'div', null, this.$scopedSlots.default());
+    return createElement(
+      this.tag || 'div',
+      null,
+      (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+    );
   },
 });
 

@@ -167,7 +167,7 @@ const List = {
     const loadMore = getComponentFromProp(this, 'loadMore');
     const footer = getComponentFromProp(this, 'footer');
     const header = getComponentFromProp(this, 'header');
-    const children = filterEmpty($scopedSlots.default() || []);
+    const children = filterEmpty(($scopedSlots.deafult && $scopedSlots.default()) || []);
     let loadingProp = loading;
     if (typeof loadingProp === 'boolean') {
       loadingProp = {

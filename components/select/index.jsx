@@ -255,7 +255,7 @@ const Select = {
                 </Option>
               );
             })
-          : filterEmpty(this.$scopedSlots.default()),
+          : filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []),
         __propsSymbol__: Symbol(),
         dropdownRender: getComponentFromProp(this, 'dropdownRender', {}, false),
         getPopupContainer: getPopupContainer || getContextPopupContainer,

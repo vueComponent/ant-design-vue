@@ -33,7 +33,7 @@ export default {
     getTabPanes() {
       const props = this.$props;
       const activeKey = props.activeKey;
-      const children = this.$scopedSlots.default() || [];
+      const children = (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [] || [];
       const newChildren = [];
 
       children.forEach(child => {
@@ -59,8 +59,11 @@ export default {
   render() {
     const { activeKey, tabBarPosition, animated, animatedWithMargin, direction, classes } = this;
     let style = {};
-    if (animated && this.$scopedSlots.default()) {
-      const activeIndex = getActiveIndex(this.$scopedSlots.default(), activeKey);
+    if ((animated && this.$scopedSlots.deafult && this.$scopedSlots.default()) || []) {
+      const activeIndex = getActiveIndex(
+        (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+        activeKey,
+      );
       if (activeIndex !== -1) {
         const animatedStyle = animatedWithMargin
           ? getMarginStyle(activeIndex, tabBarPosition)

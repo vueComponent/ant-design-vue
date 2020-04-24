@@ -157,7 +157,7 @@ export default {
       'getBodyWrapper is deprecated, please use custom components instead.',
     );
 
-    // this.columnManager = new ColumnManager(this.columns, this.$scopedSlots.default())
+    // this.columnManager = new ColumnManager(this.columns, this.$scopedSlots.deafult && this.$scopedSlots.default() || [])
 
     this.store = create({
       currentHoverKey: null,

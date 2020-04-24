@@ -54,7 +54,7 @@ const Popover = {
             <div class={`${prefixCls}-inner-content`}>{getComponentFromProp(this, 'content')}</div>
           </div>
         </template>
-        {this.$scopedSlots.default()}
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
       </Tooltip>
     );
   },

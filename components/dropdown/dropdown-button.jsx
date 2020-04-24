@@ -103,7 +103,7 @@ export default {
           href={href}
           title={title}
         >
-          {this.$scopedSlots.default()}
+          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
         </Button>
         <Dropdown {...dropdownProps}>
           <template slot="overlay">{getComponentFromProp(this, 'overlay')}</template>

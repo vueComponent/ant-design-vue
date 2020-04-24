@@ -15,6 +15,10 @@ export default {
       },
       on: getListeners(this),
     };
-    return <VcSelect {...selelctProps}>{filterEmpty(this.$scopedSlots.default())}</VcSelect>;
+    return (
+      <VcSelect {...selelctProps}>
+        {filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || [])}
+      </VcSelect>
+    );
   },
 };

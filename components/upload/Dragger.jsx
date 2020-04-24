@@ -15,6 +15,10 @@ export default {
       on: getListeners(this),
       style: { height: this.height },
     };
-    return <Upload {...draggerProps}>{this.$scopedSlots.default()}</Upload>;
+    return (
+      <Upload {...draggerProps}>
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+      </Upload>
+    );
   },
 };

@@ -91,7 +91,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
 
-    let children = $scopedSlots.default();
+    let children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
     const groupPrefixCls = `${prefixCls}-group`;
     if (options && options.length > 0) {
       children = this.getOptions().map(option => (

@@ -73,7 +73,7 @@ export default {
     isItemContainsTextNodeAndNotSingular() {
       const { $scopedSlots } = this;
       let result;
-      const children = $scopedSlots.default() || [];
+      const children = ($scopedSlots.default && $scopedSlots.default()) || [];
       children.forEach(element => {
         if (isStringElement(element) && !isEmptyElement(element)) {
           result = true;

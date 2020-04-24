@@ -57,7 +57,7 @@ export default {
           break;
       }
       const iconType = sLoading ? 'loading' : icon;
-      const children = filterEmpty($scopedSlots.default);
+      const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
@@ -165,7 +165,7 @@ export default {
     };
     const iconType = sLoading ? 'loading' : icon;
     const iconNode = iconType ? <Icon type={iconType} /> : null;
-    const children = filterEmpty($scopedSlots.default());
+    const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>
       this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),

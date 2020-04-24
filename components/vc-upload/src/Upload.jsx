@@ -91,12 +91,18 @@ export default {
       const ComponentUploader = this.Component;
       if (ComponentUploader) {
         return (
-          <ComponentUploader {...componentProps}>{this.$scopedSlots.default()}</ComponentUploader>
+          <ComponentUploader {...componentProps}>
+            {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+          </ComponentUploader>
         );
       }
       return null;
     }
     const ComponentUploader = this.getComponent();
-    return <ComponentUploader {...componentProps}>{this.$scopedSlots.default()}</ComponentUploader>;
+    return (
+      <ComponentUploader {...componentProps}>
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+      </ComponentUploader>
+    );
   },
 };

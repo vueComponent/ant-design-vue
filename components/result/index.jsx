@@ -71,9 +71,12 @@ const Result = {
         {renderIcon(h, prefixCls, { status, icon })}
         <div class={`${prefixCls}-title`}>{title}</div>
         {subTitle && <div class={`${prefixCls}-subtitle`}>{subTitle}</div>}
-        {this.$scopedSlots.default() && (
-          <div class={`${prefixCls}-content`}>{this.$scopedSlots.default()}</div>
-        )}
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+          ([] && (
+            <div class={`${prefixCls}-content`}>
+              {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+            </div>
+          ))}
         {renderExtra(h, prefixCls, extra)}
       </div>
     );

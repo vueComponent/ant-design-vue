@@ -92,8 +92,8 @@ export default {
       }
     },
     getChildren() {
-      if (this.$scopedSlots && this.$scopedSlots.default()) {
-        return filterEmpty(this.$scopedSlots.default());
+      if ((this.$scopedSlots && this.$scopedSlots.deafult && this.$scopedSlots.default()) || []) {
+        return filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []);
       }
       return null;
     },

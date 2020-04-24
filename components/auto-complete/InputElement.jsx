@@ -25,8 +25,8 @@ export default {
     const listeners = getListeners(this);
     const props = getOptionProps(this);
     const value = props.value === undefined ? '' : props.value;
-    const children = $scopedSlots.default();
-    const { componentOptions = {} } = $scopedSlots.default();
+    const children = $scopedSlots.default && $scopedSlots.default()[0];
+    const { componentOptions = {} } = $scopedSlots.default && $scopedSlots.default()[0];
     const { listeners: events = {} } = componentOptions;
     const newEvent = { ...events };
 

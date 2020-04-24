@@ -10,6 +10,6 @@ export default {
     };
   },
   render() {
-    return this.$scopedSlots.default();
+    return (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [];
   },
 };

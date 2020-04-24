@@ -15,7 +15,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
-    const children = $scopedSlots.default();
+    const children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
     return <span class={`${prefixCls}-separator`}>{children || '/'}</span>;
   },
 };

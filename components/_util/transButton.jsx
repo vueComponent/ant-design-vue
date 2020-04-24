@@ -72,7 +72,7 @@ const TransButton = {
         }}
         style={{ ...(!noStyle ? inlineStyle : null) }}
       >
-        {this.$scopedSlots.default()}
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
       </div>
     );
   },

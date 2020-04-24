@@ -8,8 +8,8 @@ export default {
     // return <div><h1>{this.$scopedSlots.default({ age: 25 })}</h1>{this.$scopedSlots.name('bao')}</div>;
     return (
       <div>
-        {this.$scopedSlots.default()}
-        {this.$scopedSlots.default()[0]}
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || [][0]}
       </div>
     );
   },

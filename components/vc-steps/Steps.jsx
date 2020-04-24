@@ -107,7 +107,9 @@ export default {
       progressDot = $scopedSlots.progressDot;
     }
     const { lastStepOffsetWidth, flexSupported } = this;
-    const filteredChildren = filterEmpty(this.$scopedSlots.default());
+    const filteredChildren = filterEmpty(
+      (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+    );
     const lastIndex = filteredChildren.length - 1;
     const adjustedlabelPlacement = progressDot ? 'vertical' : labelPlacement;
     const classString = {

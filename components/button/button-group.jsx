@@ -47,6 +47,10 @@ export default {
       [`${prefixCls}`]: true,
       [`${prefixCls}-${sizeCls}`]: sizeCls,
     };
-    return <div class={classes}>{filterEmpty($scopedSlots.default())}</div>;
+    return (
+      <div class={classes}>
+        {filterEmpty(($scopedSlots.default && $scopedSlots.default()) || [])}
+      </div>
+    );
   },
 };

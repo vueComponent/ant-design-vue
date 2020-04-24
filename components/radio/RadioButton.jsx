@@ -28,6 +28,10 @@ export default {
       radioProps.props.checked = this.$props.value === this.radioGroupContext.stateValue;
       radioProps.props.disabled = this.$props.disabled || this.radioGroupContext.disabled;
     }
-    return <Radio {...radioProps}>{this.$scopedSlots.default()}</Radio>;
+    return (
+      <Radio {...radioProps}>
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+      </Radio>
+    );
   },
 };

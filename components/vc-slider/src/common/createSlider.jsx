@@ -333,7 +333,7 @@ export default function createSlider(Component) {
           />
           {handles}
           <Marks {...markProps} />
-          {this.$scopedSlots.default()}
+          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
         </div>
       );
     },

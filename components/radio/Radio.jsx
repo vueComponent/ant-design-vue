@@ -50,7 +50,7 @@ export default {
   render() {
     const { $scopedSlots, radioGroupContext: radioGroup } = this;
     const props = getOptionProps(this);
-    const children = $scopedSlots.default();
+    const children = $scopedSlots.default && $scopedSlots.default();
     const { mouseenter = noop, mouseleave = noop, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;

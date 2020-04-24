@@ -78,7 +78,7 @@ const VueResizeObserver = {
   },
 
   render() {
-    return this.$scopedSlots.default()[0];
+    return (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [][0];
   },
 };
 

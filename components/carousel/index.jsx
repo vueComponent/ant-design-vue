@@ -177,7 +177,7 @@ const Carousel = {
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
-    const children = filterEmpty($scopedSlots.default());
+    const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
     return (
       <div class={className}>
         <SlickCarousel ref="slick" {...SlickCarouselProps}>

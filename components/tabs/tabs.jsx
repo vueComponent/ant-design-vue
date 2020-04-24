@@ -83,7 +83,7 @@ export default {
     } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
-    const children = filterEmpty(this.$scopedSlots.default());
+    const children = filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []);
 
     let tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent');
     let tabPaneAnimated = typeof animated === 'object' ? animated.tabPane : animated;

@@ -74,7 +74,7 @@ const AutoComplete = {
 
     getInputElement() {
       const { $scopedSlots, placeholder } = this;
-      const children = filterEmpty($scopedSlots.default());
+      const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
       const element = children.length ? children[0] : <Input lazy={false} />;
       return <InputElement placeholder={placeholder}>{element}</InputElement>;
     },
@@ -106,7 +106,7 @@ const AutoComplete = {
     };
 
     let options;
-    const childArray = filterEmpty($scopedSlots.dataSource());
+    const childArray = filterEmpty(($scopedSlots.dataSource && $scopedSlots.dataSource()) || []);
     if (childArray.length) {
       options = childArray;
     } else {

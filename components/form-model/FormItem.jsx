@@ -231,7 +231,7 @@ export default {
         required: this.isRequired || props.required,
       },
     };
-    const children = filterEmpty($scopedSlots.default());
+    const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
     let firstChildren = children[0];
     if (this.prop && this.autoLink && isValidElement(firstChildren)) {
       const originalEvents = getEvents(firstChildren);

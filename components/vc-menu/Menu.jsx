@@ -34,7 +34,10 @@ const Menu = {
       openKeys,
       activeKey: {
         '0-menu-': getActiveKey(
-          { ...props, children: this.$scopedSlots.default() || [] },
+          {
+            ...props,
+            children: (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [] || [],
+          },
           props.activeKey,
         ),
       },
@@ -172,7 +175,9 @@ const Menu = {
         ),
         openTransitionName: this.getOpenTransitionName(),
         parentMenu: this,
-        children: filterEmpty(this.$scopedSlots.default() || []),
+        children: filterEmpty(
+          (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [] || [],
+        ),
       },
       class: `${props.prefixCls}-root`,
       on: {

@@ -159,7 +159,7 @@ const Popconfirm = {
     return (
       <Tooltip {...tooltipProps}>
         <template slot="title">{overlay}</template>
-        {this.$scopedSlots.default()}
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
       </Tooltip>
     );
   },

@@ -244,7 +244,9 @@ export default {
     };
     return (
       <aside {...divProps}>
-        <div class={`${prefixCls}-children`}>{this.$scopedSlots.default()}</div>
+        <div class={`${prefixCls}-children`}>
+          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+        </div>
         {collapsible || (this.below && zeroWidthTrigger) ? triggerDom : null}
       </aside>
     );

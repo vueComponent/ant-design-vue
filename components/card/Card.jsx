@@ -184,7 +184,7 @@ export default {
       );
     }
 
-    const children = $scopedSlots.default();
+    const children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
     const cover = getComponentFromProp(this, 'cover');
     const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null;
     const body = (

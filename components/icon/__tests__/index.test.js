@@ -151,11 +151,12 @@ describe('Icon', () => {
                       <stop offset="90%" stopColor="#F3F" />
                     </linearGradient>
                   </defs>
-                  {this.$scopedSlots.default().map(child => {
-                    cloneElement(child, {
-                      attrs: child.type === 'path' ? { fill: 'scriptUrl(#gradient)' } : {},
-                    });
-                  })}
+                  {(this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+                    [].map(child => {
+                      cloneElement(child, {
+                        attrs: child.type === 'path' ? { fill: 'scriptUrl(#gradient)' } : {},
+                      });
+                    })}
                 </svg>
               );
             },

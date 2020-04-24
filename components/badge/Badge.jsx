@@ -80,7 +80,9 @@ export default {
         : { ...numberStyle };
     },
     getBadgeClassName(prefixCls) {
-      const children = filterEmpty(this.$scopedSlots.default());
+      const children = filterEmpty(
+        (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+      );
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: this.hasStatus(),
         [`${prefixCls}-not-a-wrapper`]: !children.length,
@@ -179,7 +181,7 @@ export default {
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
 
-    const children = filterEmpty($scopedSlots.default());
+    const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
     let count = getComponentFromProp(this, 'count');
     if (Array.isArray(count)) {
       count = count[0];

@@ -311,7 +311,11 @@ const SubMenu = {
 
     isChildrenSelected() {
       const ret = { find: false };
-      loopMenuItemRecursively(this.$scopedSlots.default(), this.$props.selectedKeys, ret);
+      loopMenuItemRecursively(
+        (this.$scopedSlots.deafult && this.$scopedSlots.default()) || [],
+        this.$props.selectedKeys,
+        ret,
+      );
       return ret.find;
     },
     // isOpen () {
@@ -496,7 +500,9 @@ const SubMenu = {
         {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     );
-    const children = this.renderChildren(filterEmpty(this.$scopedSlots.default()));
+    const children = this.renderChildren(
+      filterEmpty((this.$scopedSlots.deafult && this.$scopedSlots.default()) || []),
+    );
 
     const getPopupContainer = this.parentMenu.isRootMenu
       ? this.parentMenu.getPopupContainer

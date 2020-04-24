@@ -147,7 +147,10 @@ export default {
     },
 
     renderChildren() {
-      const children = this.$scopedSlots.default() && this.$scopedSlots.default()[0];
+      const children =
+        (this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+        ([] && this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+        [][0];
       const { sVisible } = this;
       return sVisible && children
         ? cloneElement(children, { class: this.getOpenClassName() })

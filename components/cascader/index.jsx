@@ -499,7 +499,7 @@ const Cascader = {
       },
       attrs: getAttrs(this),
     };
-    const children = filterEmpty($scopedSlots.default());
+    const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
     const inputIcon = (suffixIcon &&
       (isValidElement(suffixIcon) ? (
         cloneElement(suffixIcon, {

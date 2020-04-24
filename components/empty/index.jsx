@@ -52,9 +52,12 @@ const Empty = {
             {imageNode}
           </div>
           {des && <p class={`${prefixCls}-description`}>{des}</p>}
-          {this.$scopedSlots.default() && (
-            <div class={`${prefixCls}-footer`}>{this.$scopedSlots.default()}</div>
-          )}
+          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+            ([] && (
+              <div class={`${prefixCls}-footer`}>
+                {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+              </div>
+            ))}
         </div>
       );
     },

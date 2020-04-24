@@ -107,7 +107,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
-    const children = filterEmpty($scopedSlots.default());
+    const children = filterEmpty(($scopedSlots.default && $scopedSlots.default()) || []);
     const separator = getComponentFromProp(this, 'separator');
     const itemRender = this.itemRender || $scopedSlots.itemRender || this.defaultItemRender;
     if (routes && routes.length > 0) {

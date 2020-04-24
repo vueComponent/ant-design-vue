@@ -37,7 +37,9 @@ const MenuItemGroup = {
           {getComponentFromProp(this, 'title')}
         </div>
         <ul class={listClassName}>
-          {this.$scopedSlots.default() && this.$scopedSlots.default().map(this.renderInnerMenuItem)}
+          {(this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+            ([] && this.$scopedSlots.deafult && this.$scopedSlots.default()) ||
+            [].map(this.renderInnerMenuItem)}
         </ul>
       </li>
     );

@@ -37,7 +37,7 @@ function renderIcon(h, locale, context) {
     rotate,
     tabIndex,
   } = props;
-  let children = filterEmpty($scopedSlots.default());
+  let children = filterEmpty($scopedSlots.default && $scopedSlots.default());
   children = children.length === 0 ? undefined : children;
   warning(
     Boolean(type || Component || children),

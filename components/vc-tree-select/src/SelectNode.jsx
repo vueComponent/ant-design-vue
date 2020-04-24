@@ -12,7 +12,7 @@ export default {
   render(h, context) {
     const { props, slots, listeners, data, scopedSlots } = context;
     const $scopedSlots = slots() || {};
-    const children = $scopedSlots.default();
+    const children = ($scopedSlots.deafult && $scopedSlots.default()) || [];
     const slotsKey = Object.keys($scopedSlots);
     const scopedSlotsTemp = {}; // for vue 2.5.x
     slotsKey.forEach(name => {

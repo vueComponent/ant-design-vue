@@ -55,7 +55,11 @@ const Steps = {
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,
     };
-    return <VcSteps {...stepsProps}>{this.$scopedSlots.default()}</VcSteps>;
+    return (
+      <VcSteps {...stepsProps}>
+        {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+      </VcSteps>
+    );
   },
 };
 

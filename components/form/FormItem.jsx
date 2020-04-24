@@ -510,7 +510,7 @@ export default {
       fieldDecoratorOptions = {},
       FormContext,
     } = this;
-    let child = filterEmpty($scopedSlots.default() || []);
+    let child = filterEmpty(($scopedSlots.deafult && $scopedSlots.default()) || []);
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
       const getFieldDecorator = decoratorFormProps.form.getFieldDecorator;
       child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions, this)(child[0]);

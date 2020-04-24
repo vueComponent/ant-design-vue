@@ -31,7 +31,9 @@ function generator({ suffixCls, tagName, name }) {
           on: getListeners(this),
         };
         return (
-          <BasicComponent {...basicComponentProps}>{this.$scopedSlots.default()}</BasicComponent>
+          <BasicComponent {...basicComponentProps}>
+            {(this.$scopedSlots.deafult && this.$scopedSlots.default()) || []}
+          </BasicComponent>
         );
       },
     };

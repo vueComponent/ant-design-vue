@@ -20,7 +20,7 @@ export default {
   props: initDefaultProps(collapseProps(), {
     bordered: true,
     openAnimation: animation,
-    expandIconPosition: 'left',
+    expandIconPosition: '',
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -35,15 +35,25 @@ export default {
           })
         : icon;
     },
+    getIconPosition(direction) {
+      const { expandIconPosition } = this;
+      console.log(expandIconPosition);
+      if (expandIconPosition !== '' && expandIconPosition !== undefined) {
+        return expandIconPosition;
+      }
+      return direction === 'rtl' ? 'right' : 'left';
+    },
   },
   render() {
-    const { prefixCls: customizePrefixCls, bordered, expandIconPosition } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { prefixCls: customizePrefixCls, bordered } = this;
+    const { getPrefixCls, direction } = this.configProvider;
+    const iconPosition = this.getIconPosition(direction);
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
 
     const collapseClassName = {
       [`${prefixCls}-borderless`]: !bordered,
-      [`${prefixCls}-icon-position-${expandIconPosition}`]: true,
+      [`${prefixCls}-icon-position-${iconPosition}`]: true,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     };
     const rcCollapeProps = {
       props: {

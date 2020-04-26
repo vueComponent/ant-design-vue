@@ -206,7 +206,7 @@ const Descriptions = {
       colon = true,
     } = this.$props;
     const title = getComponentFromProp(this, 'title') || null;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
     const column = this.getColumn();
@@ -232,6 +232,7 @@ const Descriptions = {
           {
             [`${prefixCls}-${size}`]: size !== 'default',
             [`${prefixCls}-bordered`]: !!bordered,
+            [`${prefixCls}-rtl`]: direction === 'rtl',
           },
         ]}
       >

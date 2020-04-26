@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import classNames from 'classnames';
 import { ConfigConsumerProps } from '../config-provider';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -26,10 +27,14 @@ const Empty = {
   props: {
     ...EmptyProps(),
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   methods: {
     renderEmpty(contentLocale) {
       const { prefixCls: customizePrefixCls, imageStyle } = this.$props;
-      const prefixCls = ConfigConsumerProps.getPrefixCls('empty', customizePrefixCls);
+      const { getPrefixCls, direction } = this.configProvider;
+      const prefixCls = getPrefixCls('empty', customizePrefixCls);
       const image = getComponentFromProp(this, 'image') || <DefaultEmptyImg />;
       const description = getComponentFromProp(this, 'description');
 
@@ -46,8 +51,13 @@ const Empty = {
       } else {
         imageNode = image;
       }
+
+      const className = classNames(cls, {
+        [`${prefixCls}-rtl`]: direction === 'rtl',
+      });
+
       return (
-        <div class={cls} {...{ on: getListeners(this) }}>
+        <div class={className} {...{ on: getListeners(this) }}>
           <div class={`${prefixCls}-image`} style={imageStyle}>
             {imageNode}
           </div>

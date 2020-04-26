@@ -1,4 +1,5 @@
 import PropsTypes from '../_util/vue-types';
+import classNames from 'classnames';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
@@ -38,7 +39,7 @@ const Comment = {
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('comment', customizePrefixCls);
 
     const actions = getComponentFromProp(this, 'actions');
@@ -80,8 +81,13 @@ const Comment = {
       </div>
     );
     const children = this.$slots.default;
+
+    const cls = classNames(prefixCls, {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
+
     return (
-      <div class={prefixCls} {...{ on: getListeners(this) }}>
+      <div class={cls} {...{ on: getListeners(this) }}>
         {comment}
         {children ? this.renderNested(prefixCls, children) : null}
       </div>

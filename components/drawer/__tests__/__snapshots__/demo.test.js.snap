@@ -23,7 +23,15 @@ exports[`renders ./antdv-demo/docs/drawer/demo/multi-level-drawer.md correctly 1
 
 exports[`renders ./antdv-demo/docs/drawer/demo/placement.md correctly 1`] = `
 <div>
-  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-right: 8px;"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>left</span></label></div> <button type="button" class="ant-btn ant-btn-primary"><span>Open</span></button>
+  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-right: 8px;"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>
+      top
+    </span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>
+      right
+    </span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>
+      bottom
+    </span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>
+      left
+    </span></label></div> <button type="button" class="ant-btn ant-btn-primary"><span>Open</span></button>
   <!---->
 </div>
 `;

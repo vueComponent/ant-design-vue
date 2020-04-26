@@ -55,7 +55,9 @@ exports[`renders ./antdv-demo/docs/card/demo/flexible-content.md correctly 1`] =
     <div class="ant-card-meta">
       <div class="ant-card-meta-detail">
         <div class="ant-card-meta-title">Europe Street beat</div>
-        <div class="ant-card-meta-description">www.instagram.com</div>
+        <div class="ant-card-meta-description">
+          www.instagram.com
+        </div>
       </div>
     </div>
   </div>
@@ -70,14 +72,30 @@ exports[`renders ./antdv-demo/docs/card/demo/grid-card.md correctly 1`] = `
     </div>
   </div>
   <div class="ant-card-body">
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
-    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">Content</div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
+    <div class="ant-card-grid ant-card-grid-hoverable" style="width: 25%; text-align: center;">
+      Content
+    </div>
   </div>
 </div>
 `;
@@ -321,7 +339,9 @@ exports[`renders ./antdv-demo/docs/card/demo/tabs.md correctly 1`] = `
       </div>
     </div>
     <div class="ant-card-body">
-      <p>app content</p>
+      <p>
+        app content
+      </p>
     </div>
   </div>
 </div>

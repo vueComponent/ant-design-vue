@@ -500,7 +500,9 @@ exports[`renders ./antdv-demo/docs/steps/demo/step-next.md correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="steps-content">First-content</div>
+  <div class="steps-content">
+    First-content
+  </div>
   <div class="steps-action"><button type="button" class="ant-btn ant-btn-primary"><span>Next</span></button>
     <!---->
     <!---->

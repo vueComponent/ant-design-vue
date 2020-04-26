@@ -26,6 +26,7 @@ const DateInput = {
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.any,
     inputMode: PropTypes.string,
+    inputReadOnly: PropTypes.bool,
   },
 
   data() {
@@ -166,7 +167,17 @@ const DateInput = {
   },
 
   render() {
-    const { invalid, str, locale, prefixCls, placeholder, disabled, showClear, inputMode } = this;
+    const {
+      invalid,
+      str,
+      locale,
+      prefixCls,
+      placeholder,
+      disabled,
+      showClear,
+      inputMode,
+      inputReadOnly,
+    } = this;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
@@ -193,6 +204,7 @@ const DateInput = {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             inputMode={inputMode}
+            readOnly={inputReadOnly}
           />
         </div>
         {showClear ? (

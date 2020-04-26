@@ -140,7 +140,7 @@ export default function createPicker(TheCalendar, props) {
       const { panelChange = noop, focus = noop, blur = noop, ok = noop } = listeners;
       const props = getOptionProps(this);
 
-      const { prefixCls: customizePrefixCls, locale, localeCode } = props;
+      const { prefixCls: customizePrefixCls, locale, localeCode, inputReadOnly } = props;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('calendar', customizePrefixCls);
       this._prefixCls = prefixCls;
@@ -189,6 +189,7 @@ export default function createPicker(TheCalendar, props) {
           monthCellContentRender,
           renderFooter: this.renderFooter,
           value: showDate,
+          inputReadOnly,
         },
         on: {
           ok,

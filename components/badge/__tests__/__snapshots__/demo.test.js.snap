@@ -18,7 +18,9 @@ exports[`renders ./antdv-demo/docs/badge/demo/change.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/badge/demo/colors.md correctly 1`] = `
 <div>
-  <h4 style="margin-bottom: 16px;">Presets:</h4>
+  <h4 style="margin-bottom: 16px;">
+    Presets:
+  </h4>
   <div>
     <div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-pink"></span><span class="ant-badge-status-text">pink</span></span></div>
     <div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-red"></span><span class="ant-badge-status-text">red</span></span></div>
@@ -34,7 +36,9 @@ exports[`renders ./antdv-demo/docs/badge/demo/colors.md correctly 1`] = `
     <div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-gold"></span><span class="ant-badge-status-text">gold</span></span></div>
     <div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-lime"></span><span class="ant-badge-status-text">lime</span></span></div>
   </div>
-  <h4 style="margin: 16px 0px;">Custom:</h4>
+  <h4 style="margin: 16px 0px;">
+    Custom:
+  </h4>
   <div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(255, 85, 0);"></span><span class="ant-badge-status-text">#f50</span></span> <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(45, 183, 245);"></span><span class="ant-badge-status-text">#2db7f5</span></span> <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(135, 208, 104);"></span><span class="ant-badge-status-text">#87d068</span></span> <br> <span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(16, 142, 233);"></span><span class="ant-badge-status-text">#108ee9</span></span></div>
 </div>
 `;

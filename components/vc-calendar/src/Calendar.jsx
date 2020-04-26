@@ -54,6 +54,7 @@ const Calendar = {
     clearIcon: PropTypes.any,
     focusablePanel: PropTypes.bool.def(true),
     inputMode: PropTypes.string,
+    inputReadOnly: PropTypes.bool,
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],
@@ -250,6 +251,7 @@ const Calendar = {
       sMode,
       renderFooter,
       inputMode,
+      inputReadOnly,
       monthCellRender,
       monthCellContentRender,
       $props: props,
@@ -303,6 +305,7 @@ const Calendar = {
         clearIcon={clearIcon}
         onSelect={this.onDateInputSelect}
         inputMode={inputMode}
+        inputReadOnly={inputReadOnly}
       />
     ) : null;
     const children = [];

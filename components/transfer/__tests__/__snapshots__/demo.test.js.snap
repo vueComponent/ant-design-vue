@@ -2261,7 +2261,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/search.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`] = `
 <div>
-  <div class="ant-transfer ant-transfer-customize-list" leftcolumns="[object Object],[object Object]" rightcolumns="[object Object]">
+  <div class="ant-transfer ant-transfer-customize-list">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header"><span class="ant-transfer-list-header-selected"><span>14 items</span><span class="ant-transfer-list-header-title"></span></span></div>
       <div class="ant-transfer-list-body">

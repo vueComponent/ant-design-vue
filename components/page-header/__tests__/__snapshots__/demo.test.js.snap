@@ -108,7 +108,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
-                    Lili Qu
+                    
+        Lili Qu
+      
                   </span>
                 </td>
                 <td
@@ -140,7 +142,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
-                    2017-01-10
+                    
+        2017-01-10
+      
                   </span>
                 </td>
               </tr>
@@ -159,7 +163,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
-                    2017-10-10
+                    
+        2017-10-10
+      
                   </span>
                 </td>
                 <td
@@ -242,7 +248,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
         <span
           class="ant-tag ant-tag-blue"
         >
-          Running
+          
+        Running
+      
         </span>
       </span>
       <span
@@ -608,7 +616,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
-                    Lili Qu
+                    
+        Lili Qu
+      
                   </span>
                 </td>
                 <td
@@ -640,7 +650,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
-                    2017-01-10
+                    
+        2017-01-10
+      
                   </span>
                 </td>
               </tr>
@@ -659,7 +671,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
-                    2017-10-10
+                    
+        2017-10-10
+      
                   </span>
                 </td>
                 <td
@@ -803,7 +817,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                       <span
                         class="ant-descriptions-item-content"
                       >
-                        Lili Qu
+                        
+            Lili Qu
+          
                       </span>
                     </td>
                     <td
@@ -839,7 +855,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                       <span
                         class="ant-descriptions-item-content"
                       >
-                        2017-01-10
+                        
+            2017-01-10
+          
                       </span>
                     </td>
                     <td
@@ -854,7 +872,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                       <span
                         class="ant-descriptions-item-content"
                       >
-                        2017-10-10
+                        
+            2017-10-10
+          
                       </span>
                     </td>
                   </tr>

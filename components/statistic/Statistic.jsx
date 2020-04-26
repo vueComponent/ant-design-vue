@@ -1,4 +1,5 @@
 import PropTypes from '../_util/vue-types';
+import classNames from 'classnames';
 import { getComponentFromProp, initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import StatisticNumber from './Number';
@@ -30,7 +31,7 @@ export default {
 
   render() {
     const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
     const title = getComponentFromProp(this, 'title');
@@ -44,8 +45,12 @@ export default {
       valueNode = valueRender(valueNode);
     }
 
+    const className = classNames(prefixCls, {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
+
     return (
-      <div class={prefixCls}>
+      <div class={className}>
         {title && <div class={`${prefixCls}-title`}>{title}</div>}
         <div style={valueStyle} class={`${prefixCls}-content`}>
           {prefix && <span class={`${prefixCls}-content-prefix`}>{prefix}</span>}

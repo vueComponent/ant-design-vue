@@ -161,7 +161,7 @@ const List = {
       paginationCurrent,
       paginationSize,
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
 
     const loadMore = getComponentFromProp(this, 'loadMore');
@@ -197,6 +197,7 @@ const List = {
       [`${prefixCls}-loading`]: isLoading,
       [`${prefixCls}-grid`]: grid,
       [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastItem(),
+      [`${prefixCls}-rtl`]: direction === 'rtl',
     });
     const paginationProps = {
       ...this.defaultPaginationProps,

@@ -75,8 +75,8 @@ const TabBar = {
     } else {
       RenderTabBar = <ScrollableInkTabBar {...renderProps} />;
     }
-
-    return cloneElement(RenderTabBar);
+    // https://github.com/vueComponent/ant-design-vue/issues/2157
+    return cloneElement(RenderTabBar, renderProps);
   },
 };
 

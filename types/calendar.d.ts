@@ -31,7 +31,7 @@ export declare class Calendar extends AntdComponent {
    * @default default date
    * @type Moment
    */
-  defaultValue: Moment;
+  defaultValue: Moment | string;
 
   /**
    * Function that specifies the dates that cannot be selected
@@ -84,5 +84,6 @@ export declare class Calendar extends AntdComponent {
    * @default current date
    * @type Moment
    */
-  value: Moment;
+  value: Moment | string;
+  valueFormat: string;
 }

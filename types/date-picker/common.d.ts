@@ -88,4 +88,5 @@ export declare class DatepickerCommon extends AntdComponent {
   suffixIcon: any;
 
   inputReadOnly: boolean;
+  valueFormat: string;
 }

@@ -115,6 +115,16 @@ export default function wrapPicker(Picker, props, pickerType) {
           dateString,
         );
       },
+      handleOk(val) {
+        this.$emit('ok', this.valueFormat ? momentToString(val, this.valueFormat) : val);
+      },
+      handleCalendarChange(date, dateString) {
+        this.$emit(
+          'calendarChange',
+          this.valueFormat ? momentToString(date, this.valueFormat) : date,
+          dateString,
+        );
+      },
       focus() {
         this.$refs.picker.focus();
       },
@@ -208,6 +218,8 @@ export default function wrapPicker(Picker, props, pickerType) {
             mouseenter: this.handleMouseEnter,
             mouseleave: this.handleMouseLeave,
             change: this.handleChange,
+            ok: this.handleOk,
+            calendarChange: this.handleCalendarChange,
           },
           ref: 'picker',
           scopedSlots: this.$scopedSlots || {},

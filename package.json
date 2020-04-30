@@ -173,6 +173,7 @@
     },
     "dependencies": {
         "@ant-design/icons-vue": "^4.0.4",
+        "@simonwep/pickr": "^1.5.1",
         "add-dom-event-listener": "^1.0.2",
         "array-tree-filter": "^2.1.0",
         "async-validator": "^3.0.3",

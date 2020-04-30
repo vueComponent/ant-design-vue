@@ -38,7 +38,7 @@ export default {
       let className = prefixCls;
       if (value === 0 && index === 0 && focused) {
         className += ` ${prefixCls}-focused`;
-      } else if (allowHalf && value + 0.5 === starValue) {
+      } else if (allowHalf && (value + 0.5) >> 0 === starValue && value < starValue) {
         className += ` ${prefixCls}-half ${prefixCls}-active`;
         if (focused) {
           className += ` ${prefixCls}-focused`;

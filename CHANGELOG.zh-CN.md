@@ -10,6 +10,25 @@
 
 ---
 
+## 1.5.4
+
+`2020-04-30`
+
+- 🌟 `DatePicker` 支持 align 属性，设置弹窗位置 [#1112f2](https://github.com/vueComponent/ant-design-vue/commit/1112f2f791fd64866284ec82def90baefe81e798)
+- 🌟 `DatePicker` 支持 inputReadOnly 属性 [#138eae](https://github.com/vueComponent/ant-design-vue/commit/138eae594dd440ce815e45d811a0778cb3e7583f)
+- 🌟 `DatePicker` `TimePicker` `Calendar` 支持字符串类型的绑定值 [#718](https://github.com/vueComponent/ant-design-vue/issues/718)
+- 🌟 `Table` `ConfigProvider` 新增 `transformCellText` 用于转换表格渲染值, 如对空数据的处理 [#2109](https://github.com/vueComponent/ant-design-vue/issues/2109)
+- 🌟 `FormModel` 新增 validateMessages 属性 [#2130](https://github.com/vueComponent/ant-design-vue/issues/2130)
+- 🌟 优化弹窗动画效果 [#bf52f73](https://github.com/vueComponent/ant-design-vue/commit/bf52f73c5c2f8d05981e426b41a5f46d66e096db)
+- 🐞 修复 `Tabs` 组件的 `tabBarGutter` 属性不生效问题 [#2083](https://github.com/vueComponent/ant-design-vue/issues/2083)
+- 🐞 修复 `Tabs` 组件的 renderTabBar 不生效问题 [#2157](https://github.com/vueComponent/ant-design-vue/issues/2157)
+- 🌟 `Tabs` 组件支持数字 0 作为 key [#2167](https://github.com/vueComponent/ant-design-vue/issues/2167)
+- 🐞 修复 `Input.Search` 组件的样式错位问题 [#2077](https://github.com/vueComponent/ant-design-vue/issues/2077)
+- 🐞 修复 `Slider` 组件的样式错位问题 [#2097](https://github.com/vueComponent/ant-design-vue/issues/2097)
+- 🐞 修复 `Tree.TreeNode` customTitle 作用域插槽无法获取 selected 状态问题 [#2006](https://github.com/vueComponent/ant-design-vue/issues/2006)
+- 🐞 修复 `SelectTree` showSearch 时报错问题 [#2082](https://github.com/vueComponent/ant-design-vue/issues/2082)
+- 🐞 修复 `Badge` dot 状态的原圆点位置不一致问题 [#2121](https://github.com/vueComponent/ant-design-vue/issues/2121)
+
 ## 1.5.3
 
 `2020-04-13`

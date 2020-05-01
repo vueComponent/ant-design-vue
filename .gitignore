@@ -58,6 +58,7 @@ typings/
 .vscode
 .env
 .idea
+.npmrc
 .DS_Store
 dist
 lib

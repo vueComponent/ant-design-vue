@@ -4,6 +4,14 @@
 
 Оригинальный readme - `README-original.md`
 
+Адрес NPM-пакета: 
+
+    https://www.npmjs.com/package/@mottor/ant-design-vue
+
+Установка в проект
+
+    npm i @mottor/ant-design-vue
+
 ## Подтягивание изменений оригинала
 
 1. Переключиться на нужную ветку

@@ -75,8 +75,14 @@
 @padding-xs: 8px; // small items
 
 // vertical padding for all form controls
-@control-padding-horizontal: @padding-sm;
-@control-padding-horizontal-sm: @padding-xs;
+@control-padding-horizontal-sm: 14px;
+@control-padding-horizontal: 16px;
+@control-padding-horizontal-lg: 18px;
+
+// высоты контролов (кнопка, инпут, селект)
+@control-height-base: 34px;
+@control-height-lg: 40px;
+@control-height-sm: 28px;
 
 // The background colors for active and hover states for things like
 // list items or table cells.
@@ -164,15 +170,18 @@
 @btn-disable-bg: @disabled-bg;
 @btn-disable-border: @border-color-base;
 
-@btn-padding-base: 0 @padding-md - 1px;
+@btn-font-size-base: @font-size-base;
+@btn-font-size-sm: @font-size-sm;
 @btn-font-size-lg: @font-size-lg;
-@btn-font-size-sm: @font-size-base;
-@btn-padding-lg: @btn-padding-base;
-@btn-padding-sm: 0 @padding-xs - 1px;
 
-@btn-height-base: 32px;
-@btn-height-lg: 40px;
-@btn-height-sm: 24px;
+@btn-height-base: @control-height-base;
+@btn-height-sm: @control-height-sm;
+@btn-height-lg: @control-height-lg;
+
+@btn-padding-horizontal-ratio: 0.4;
+@btn-padding-base: round(@btn-height-base * @btn-padding-horizontal-ratio);
+@btn-padding-sm: round(@btn-height-sm * @btn-padding-horizontal-ratio);
+@btn-padding-lg: round(@btn-height-lg * @btn-padding-horizontal-ratio);
 
 @btn-circle-size: @btn-height-base;
 @btn-circle-size-lg: @btn-height-lg;
@@ -183,6 +192,15 @@
 @btn-square-size-sm: @btn-height-sm;
 
 @btn-group-border: @primary-5;
+
+@btn-transition: background-color 0.1s @ease-out, transform 0.1s @ease-out; // original = all 0.3s @ease-in-out
+@btn-active-transform: translate3d(0, 1px, 0); // also can do: scale(0.98) translateY(2%)
+@btn-height-ratio: 2.75;
+@btn-horizontal-padding-ratio: 0.6;
+@btn-min-wigth-ratio: 6;
+
+@btn-show-text-shadow: false; // показывать ли тень текста у кнопки
+
 
 // Checkbox
 @checkbox-size: 16px;
@@ -309,19 +327,21 @@
 
 // Input
 // ---
-@input-height-base: 32px;
-@input-height-lg: 40px;
-@input-height-sm: 24px;
-@input-padding-horizontal: @control-padding-horizontal - 1px;
-@input-padding-horizontal-base: @input-padding-horizontal;
-@input-padding-horizontal-sm: @control-padding-horizontal-sm - 1px;
-@input-padding-horizontal-lg: @input-padding-horizontal;
+@input-height-base: @control-height-base;
+@input-height-sm: @control-height-sm;
+@input-height-lg: @control-height-lg;
+//@input-padding-horizontal: @control-padding-horizontal - 1px;
+@input-padding-horizontal-ratio: 0.35;
+@input-padding-horizontal-base: round(@input-height-base * @input-padding-horizontal-ratio);
+@input-padding-horizontal-sm: round(@input-height-sm * @input-padding-horizontal-ratio);
+@input-padding-horizontal-lg: round(@input-height-lg * @input-padding-horizontal-ratio);
 @input-padding-vertical-base: 4px;
 @input-padding-vertical-sm: 1px;
 @input-padding-vertical-lg: 6px;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
 @input-border-color: @border-color-base;
+@input-border-width: 1px;
 @input-bg: @component-background;
 @input-number-hover-border-color: @input-hover-border-color;
 @input-number-handler-active-bg: #f4f4f4;
@@ -332,6 +352,10 @@
 @input-hover-border-color: @primary-5;
 @input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
+@input-font-size-base: @font-size-base;
+@input-font-size-sm: @font-size-sm;
+@input-font-size-lg: @font-size-lg;
+@input-active-box-shadow: false; // показывать ли тень box-shadow у инпута под фокусом
 
 // Select
 // ---

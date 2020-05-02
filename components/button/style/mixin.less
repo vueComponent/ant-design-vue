@@ -2,9 +2,17 @@
 // ------------------------
 .button-size(@height; @padding; @font-size; @border-radius) {
   height: @height;
-  padding: @padding;
+  padding: 0 @padding;
   font-size: @font-size;
+  line-height: @height - 2*@btn-border-width; // @font-size;
   border-radius: @border-radius;
+  min-width: round(@font-size * @btn-min-wigth-ratio / 2) * 2;
+
+  > .@{iconfont-css-prefix} {
+    width: @font-size;
+    height: @font-size;
+    font-size: @font-size;
+  }
 }
 
 .button-disabled(@color: @btn-disable-color; @background: @btn-disable-bg; @border: @btn-disable-border) {
@@ -25,22 +33,23 @@
 }
 
 .button-variant-primary(@color; @background) {
-  .button-color(@color; @background; @background);
+  .button-color(@color; @background; transparent);
 
-  text-shadow: @btn-text-shadow;
+  & when (@btn-show-text-shadow = true) {
+    text-shadow: @btn-text-shadow;
+  }
   box-shadow: @btn-primary-shadow;
 
-  &:hover,
-  &:focus {
+  &:hover {
     .button-color(
-      @color; ~`colorPalette('@{background}', 5) `; ~`colorPalette('@{background}', 5) `
+      @color; darken(@background, 4%); darken(@background, 4%)
     );
   }
 
   &:active,
   &.active {
     .button-color(
-      @color; ~`colorPalette('@{background}', 7) `; ~`colorPalette('@{background}', 7) `
+      @color; darken(@background, 8%); darken(@background, 8%)
     );
   }
 
@@ -50,8 +59,7 @@
 .button-variant-other(@color; @background; @border) {
   .button-color(@color; @background; @border);
 
-  &:hover,
-  &:focus {
+  &:hover {
     .button-color(
       ~`colorPalette('@{btn-primary-bg}', 5) `; @background; ~`colorPalette('@{btn-primary-bg}', 5)
         `
@@ -69,8 +77,7 @@
 .button-variant-ghost(@color; @border: @color) {
   .button-color(@color; transparent; @border);
   text-shadow: none;
-  &:hover,
-  &:focus {
+  &:hover {
     & when (@border = transparent) {
       .button-color(~`colorPalette('@{color}', 5) `; transparent; transparent);
     }
@@ -115,7 +122,6 @@
   > span > .@{btnClassName} {
     position: relative;
     &:hover,
-    &:focus,
     &:active,
     &.active {
       z-index: 2;
@@ -156,7 +162,10 @@
 // --------------------------------------------------
 .btn() {
   position: relative;
-  display: inline-block;
+  display: inline-block; // fallback for old
+  display: inline-flex; // for new browsers
+  align-items: center;
+  justify-content: center;
   font-weight: @btn-font-weight;
   white-space: nowrap;
   text-align: center;
@@ -164,31 +173,42 @@
   border: @btn-border-width @btn-border-style transparent;
   box-shadow: @btn-shadow;
   cursor: pointer;
-  transition: all 0.3s @ease-in-out;
+  transition: @btn-transition;
   user-select: none;
   touch-action: manipulation;
-  .button-size(@btn-height-base; @btn-padding-base; @font-size-base; @btn-border-radius-base);
-  > .@{iconfont-css-prefix} {
-    line-height: 1;
-  }
-  &,
-  &:active,
+  text-decoration: none;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  appearance: none;
+  outline: 0;
+  text-shadow: none;
+  .button-size(@btn-height-base; @btn-padding-base; @btn-font-size-base; @btn-border-radius-base);
+
   &:focus {
     outline: 0;
   }
-  &:not([disabled]):hover {
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  &:hover {
     text-decoration: none;
   }
-  &:not([disabled]):active {
+  &:active {
     outline: 0;
     box-shadow: none;
+
+    // сдвигаем всю кнопку вниз при нажатии
+    transform: @btn-active-transform;
+
+    // чтобы при нажатии проваливался текст ВНУТРИ кнопки
+    // > span {
+    //  top: 1px;
+    //}
   }
   &.disabled,
   &[disabled] {
-    cursor: not-allowed;
-    > * {
-      pointer-events: none;
-    }
+    cursor: default;
+    pointer-events: none;
   }
   &-lg {
     .button-size(@btn-height-lg; @btn-padding-lg; @btn-font-size-lg; @btn-border-radius-base);
@@ -205,11 +225,11 @@
 .btn-default() {
   .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border);
   &:hover,
-  &:focus,
+  //&:focus,
   &:active,
   &.active {
     text-decoration: none;
-    background: @btn-default-bg;
+    //background: @btn-default-bg;
   }
 }
 // ghost button style
@@ -230,7 +250,7 @@
   .button-variant-other(@link-color, transparent, transparent);
   box-shadow: none;
   &:hover,
-  &:focus,
+  //&:focus,
   &:active {
     border-color: transparent;
   }

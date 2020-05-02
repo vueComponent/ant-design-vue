@@ -34,6 +34,8 @@
 
 .@{select-prefix-cls} {
   .reset-component;
+  @tmp-icon-size: @input-font-size-base;
+  @tmp-icon-indent: round((@input-height-base - 2*@input-border-width - @tmp-icon-size)/2);
 
   position: relative;
   display: inline-block;
@@ -57,10 +59,12 @@
 
     position: absolute;
     top: 50%;
-    right: @control-padding-horizontal - 1px;
-    margin-top: -@font-size-sm / 2;
+    right: @tmp-icon-indent;
+    margin-top: -@input-font-size-base / 2;
     color: @disabled-color;
-    font-size: @font-size-sm;
+    font-size: @input-font-size-base;
+    width: @input-font-size-base;
+    height: @input-font-size-base;
     line-height: 1;
     transform-origin: 50% 50%;
 
@@ -149,7 +153,7 @@
     cursor: pointer;
 
     .@{select-prefix-cls}-selection__rendered {
-      margin-right: 24px;
+      margin-right: @tmp-icon-size + 1.5*@tmp-icon-indent;
     }
   }
 
@@ -162,8 +166,8 @@
   &-selection__rendered {
     position: relative;
     display: block;
-    margin-right: @control-padding-horizontal - 1px;
-    margin-left: @control-padding-horizontal - 1px;
+    margin-right: @input-padding-horizontal-base;
+    margin-left: @input-padding-horizontal-base;
     line-height: @input-height-base - 2px;
     // https://github.com/ant-design/ant-design/issues/3481#issuecomment-254721026
     &::after {
@@ -176,11 +180,16 @@
   }
 
   &-lg {
-    font-size: @font-size-lg;
+    @tmp-icon-size-lg: @input-font-size-lg;
+    @tmp-icon-indent-lg: round((@input-height-lg - 2*@input-border-width - @tmp-icon-size-lg)/2);
+    font-size: @input-font-size-lg;
+
     .@{select-prefix-cls}-selection--single {
       height: @input-height-lg;
     }
     .@{select-prefix-cls}-selection__rendered {
+      margin-left: @input-padding-horizontal-lg;
+      margin-right: @tmp-icon-size-lg + 1.5*@tmp-icon-indent-lg;
       line-height: @input-height-lg - 2px;
     }
     .@{select-prefix-cls}-selection--multiple {
@@ -196,14 +205,27 @@
         top: @input-height-lg / 2;
       }
     }
+    .@{select-prefix-cls}-selection__clear,
+    .@{select-prefix-cls}-arrow {
+      right: @tmp-icon-indent-lg;
+      width: @tmp-icon-size-lg;
+      height: @tmp-icon-size-lg;
+      font-size: @input-font-size-lg;
+      margin-top: -@input-font-size-lg / 2;
+    }
   }
 
   &-sm {
+    @tmp-icon-size-sm: @input-font-size-sm;
+    @tmp-icon-indent-sm: round((@input-height-sm - 2*@input-border-width - @tmp-icon-size-sm)/2);
+    font-size: @input-font-size-sm;
+
     .@{select-prefix-cls}-selection--single {
       height: @input-height-sm;
     }
     .@{select-prefix-cls}-selection__rendered {
-      margin-left: @control-padding-horizontal-sm - 1px;
+      margin-left: @input-padding-horizontal-sm;
+      margin-right: @tmp-icon-size-sm + 1.5*@tmp-icon-indent-sm;
       line-height: @input-height-sm - 2px;
     }
     .@{select-prefix-cls}-selection--multiple {
@@ -221,7 +243,11 @@
     }
     .@{select-prefix-cls}-selection__clear,
     .@{select-prefix-cls}-arrow {
-      right: @control-padding-horizontal-sm;
+      right: @tmp-icon-indent-sm;
+      width: @tmp-icon-size-sm;
+      height: @tmp-icon-size-sm;
+      font-size: @input-font-size-sm;
+      margin-top: -@input-font-size-sm / 2;
     }
   }
 

@@ -5,15 +5,22 @@
 @input-affix-with-clear-btn-width: 38px;
 
 // size mixins for input
+.input-base() {
+  height: @input-height-base;
+  font-size: @input-font-size-base;
+  padding: (@input-height-base - 2*@input-border-width - @input-font-size-base)/2 @input-padding-horizontal-base;
+}
+
 .input-lg() {
   height: @input-height-lg;
-  padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
-  font-size: @font-size-lg;
+  font-size: @input-font-size-lg;
+  padding: (@input-height-lg - 2*@input-border-width - @input-font-size-lg)/2 @input-padding-horizontal-lg;
 }
 
 .input-sm() {
   height: @input-height-sm;
-  padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
+  font-size: @input-font-size-sm;
+  padding: (@input-height-sm - 2*@input-border-width - @input-font-size-sm)/2 @input-padding-horizontal-sm;
 }
 
 // input status
@@ -22,7 +29,9 @@
   border-color: ~`colorPalette('@{color}', 5) `;
   border-right-width: @border-width-base !important;
   outline: 0;
-  box-shadow: @input-outline-offset @outline-blur-size @outline-width fade(@color, 20%);
+  & when (@input-active-box-shadow = true) {
+    box-shadow: @input-outline-offset @outline-blur-size @outline-width fade(@color, 20%);
+  }
 }
 
 // == when hoverd
@@ -44,13 +53,11 @@
 
 // Basic style for input
 .input() {
+  .input-base();
   position: relative;
   display: inline-block;
   width: 100%;
-  height: @input-height-base;
-  padding: @input-padding-vertical-base @input-padding-horizontal-base;
   color: @input-color;
-  font-size: @font-size-base;
   line-height: @line-height-base;
   background-color: @input-bg;
   background-image: none;

@@ -9,6 +9,7 @@
 
 .@{radio-group-prefix-cls} {
   .reset-component;
+  font-size: @input-font-size-base;
 
   display: inline-block;
 }
@@ -150,9 +151,11 @@ span.@{radio-prefix-cls} + * {
 .@{radio-prefix-cls}-button-wrapper {
   position: relative;
   display: inline-block;
+  flex: 1 1 0px;
+  text-align: center;
   height: @btn-height-base;
   margin: 0;
-  padding: 0 @padding-md - 1px;
+  padding: 0 @btn-padding-base;
   color: @radio-button-color;
   line-height: @btn-height-base - 2px;
   background: @radio-button-bg;
@@ -176,15 +179,17 @@ span.@{radio-prefix-cls} + * {
   }
 
   .@{radio-group-prefix-cls}-large & {
-    height: @input-height-lg;
-    font-size: @font-size-lg;
-    line-height: @input-height-lg - 2px;
+    height: @btn-height-lg;
+    font-size: @btn-font-size-lg;
+    padding: 0 @btn-padding-lg;
+    line-height: @btn-height-lg - 2*@btn-border-width;
   }
 
   .@{radio-group-prefix-cls}-small & {
-    height: @input-height-sm;
-    padding: 0 @control-padding-horizontal-sm - 1px;
-    line-height: @input-height-sm - 2px;
+    height: @btn-height-sm;
+    font-size: @btn-font-size-sm;
+    padding: 0 @btn-padding-sm;
+    line-height: @btn-height-sm - 2*@btn-border-width;
   }
 
   &:not(:first-child) {
@@ -217,9 +222,9 @@ span.@{radio-prefix-cls} + * {
     color: @radio-dot-color;
   }
 
-  &:focus-within {
-    outline: @radio-focused-outline;
-  }
+  //&:focus-within {
+  //  outline: @radio-focused-outline;
+  //}
 
   .@{radio-prefix-cls}-inner,
   input[type='checkbox'],
@@ -259,9 +264,9 @@ span.@{radio-prefix-cls} + * {
       box-shadow: -1px 0 0 0 @radio-button-active-color;
     }
 
-    &:focus-within {
-      outline: @radio-focused-outline;
-    }
+    //&:focus-within {
+    //  outline: @radio-focused-outline;
+    //}
   }
 
   .@{radio-group-prefix-cls}-solid &-checked:not(&-disabled) {
@@ -278,9 +283,9 @@ span.@{radio-prefix-cls} + * {
       background: @radio-button-active-color;
       border-color: @radio-button-active-color;
     }
-    &:focus-within {
-      outline: @radio-focused-outline;
-    }
+    //&:focus-within {
+    //  outline: @radio-focused-outline;
+    //}
   }
 
   &-disabled {

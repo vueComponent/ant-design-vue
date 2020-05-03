@@ -15,12 +15,14 @@
           <td>
             <a-select default-value="lucy" size="small">
               <a-select-option value="jack">Jack</a-select-option>
-              <a-select-option value="lucy">Lucy</a-select-option>
+              <a-select-option value="lucy">Lucy11</a-select-option>
             </a-select>
           </td>
-          <td><a-date-picker size="small"/></td>
+          <td><a-date-picker size="small" format="DD.MM.YYYY"/></td>
           <td><a-input-number size="small" :min="8" :max="12" :value="10"></a-input-number></td>
-          <td><a-switch size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch checked-children="1" un-checked-children="0" size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch loading checked size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch disabled checked size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
         </tr>
         <tr>
           <td><a-input placeholder="Текст"></a-input></td>
@@ -35,12 +37,14 @@
           <td>
             <a-select default-value="lucy">
               <a-select-option value="jack">Jack</a-select-option>
-              <a-select-option value="lucy">Lucy</a-select-option>
+              <a-select-option value="lucy">Lucy11</a-select-option>
             </a-select>
           </td>
           <td><a-date-picker/></td>
           <td><a-input-number :min="8" :max="12" :value="10"></a-input-number></td>
-          <td><a-switch v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch checked-children="1" un-checked-children="0" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch loading v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch disabled v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
         </tr>
         <tr>
           <td><a-input size="large" placeholder="Текст"></a-input></td>
@@ -55,12 +59,14 @@
           <td>
             <a-select default-value="lucy" size="large">
               <a-select-option value="jack">Jack</a-select-option>
-              <a-select-option value="lucy">Lucy</a-select-option>
+              <a-select-option value="lucy">Lucy11</a-select-option>
             </a-select>
           </td>
           <td><a-date-picker size="large"/></td>
           <td><a-input-number size="large" :min="8" :max="12" :value="10"></a-input-number></td>
-          <td><a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch checked size="large" loading v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;"><a-switch size="large" disabled v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
         </tr>
       </table>
 

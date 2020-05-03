@@ -55,6 +55,7 @@ const Switch = {
 
     const classes = {
       [`${prefixCls}-small`]: size === 'small',
+      [`${prefixCls}-large`]: size === 'large',
       [`${prefixCls}-loading`]: loading,
     };
     const loadingIcon = loading ? (

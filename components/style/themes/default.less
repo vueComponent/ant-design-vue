@@ -41,8 +41,10 @@
 @body-background: #fff;
 // Base background color for most components
 @component-background: #fff;
-@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-  'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+//@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+//  'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+//  'Segoe UI Emoji', 'Segoe UI Symbol';
+@font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
   'Segoe UI Emoji', 'Segoe UI Symbol';
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 @text-color: fade(@black, 65%);
@@ -193,8 +195,8 @@
 
 @btn-group-border: @primary-5;
 
-@btn-transition: background-color 0.1s @ease-out, transform 0.1s @ease-out; // original = all 0.3s @ease-in-out
-@btn-active-transform: translate3d(0, 1px, 0); // also can do: scale(0.98) translateY(2%)
+@btn-transition: background-color 0.1s @ease-out; // original = all 0.3s @ease-in-out
+@btn-active-transform: scale(0.98); // also can be: translate3d(0, 1px, 0); scale(0.98); translateY(2%)
 @btn-height-ratio: 2.75;
 @btn-horizontal-padding-ratio: 0.6;
 @btn-min-wigth-ratio: 6;
@@ -584,8 +586,11 @@
 // Switch
 // ---
 @switch-height: 22px;
+@switch-width-ratio: 1.625;
+@switch-sm-width: 26px;
 @switch-sm-height: 16px;
 @switch-sm-checked-margin-left: -(@switch-sm-height - 3px);
+@switch-lg-height: 26px;
 @switch-disabled-opacity: 0.4;
 @switch-color: @primary-color;
 @switch-shadow-color: fade(#00230b, 20%);

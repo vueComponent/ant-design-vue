@@ -2,16 +2,17 @@
 // ------------------------
 .button-size(@height; @padding; @font-size; @border-radius) {
   height: @height;
+  //padding: (@height - 2*@btn-border-width - @font-size)/2 @padding;
   padding: 0 @padding;
   font-size: @font-size;
-  line-height: @height - 2*@btn-border-width; // @font-size;
+  //line-height: @font-size;
+  line-height: @height - 2*@btn-border-width;
   border-radius: @border-radius;
   min-width: round(@font-size * @btn-min-wigth-ratio / 2) * 2;
 
   > .@{iconfont-css-prefix} {
     width: @font-size;
     height: @font-size;
-    font-size: @font-size;
   }
 }
 
@@ -146,11 +147,11 @@
   }
   &-sm > .@{btnClassName},
   &-sm > span > .@{btnClassName} {
-    .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; 0);
+    .button-size(@btn-height-sm; @btn-padding-sm; @btn-font-size-sm; 0);
     line-height: @btn-height-sm - 2px;
-    > .@{iconfont-css-prefix} {
-      font-size: @font-size-base;
-    }
+    //> .@{iconfont-css-prefix} {
+    //  font-size: @btn-font-size-sm;
+    //}
   }
   &-sm > .@{btnClassName}.@{btnClassName}-icon-only {
     .square(@btn-height-sm);
@@ -182,6 +183,7 @@
   appearance: none;
   outline: 0;
   text-shadow: none;
+  vertical-align: top;
   .button-size(@btn-height-base; @btn-padding-base; @btn-font-size-base; @btn-border-radius-base);
 
   &:focus {
@@ -225,7 +227,6 @@
 .btn-default() {
   .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border);
   &:hover,
-  //&:focus,
   &:active,
   &.active {
     text-decoration: none;
@@ -250,7 +251,6 @@
   .button-variant-other(@link-color, transparent, transparent);
   box-shadow: none;
   &:hover,
-  //&:focus,
   &:active {
     border-color: transparent;
   }

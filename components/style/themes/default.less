@@ -312,7 +312,10 @@
 @dropdown-vertical-padding: 5px;
 @dropdown-edge-child-vertical-padding: 4px;
 @dropdown-font-size: @font-size-base;
-@dropdown-line-height: 22px;
+@dropdown-text-color: #222;
+@dropdown-line-height: 28px;
+@dropdown-hover-bg: #f5f5f5;
+@dropdown-hover-color: @primary-color;
 
 // Form
 // ---
@@ -392,11 +395,12 @@
 // Tooltip background color
 @tooltip-bg: rgba(0, 0, 0, 0.75);
 // Tooltip arrow width
-@tooltip-arrow-width: 5px;
+@tooltip-arrow-width: 10px;
 // Tooltip distance with trigger
 @tooltip-distance: @tooltip-arrow-width - 1px + 4px;
 // Tooltip arrow color
 @tooltip-arrow-color: @tooltip-bg;
+@tooltip-show-box-shadow: false;
 
 // Popover
 // ---
@@ -407,7 +411,7 @@
 // Popover maximum width
 @popover-min-width: 177px;
 // Popover arrow width
-@popover-arrow-width: 6px;
+@popover-arrow-width: 14px;
 // Popover arrow color
 @popover-arrow-color: @popover-bg;
 // Popover outer arrow width

@@ -124,7 +124,7 @@
   }
 
   &-tab-btn-disabled {
-    cursor: not-allowed;
+    cursor: default;
     &,
     &:hover {
       color: @disabled-color;
@@ -181,6 +181,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: color 0.3s @ease-in-out;
+      user-select: none;
 
       &::before {
         position: absolute;
@@ -219,7 +220,7 @@
         &,
         &:hover {
           color: @disabled-color;
-          cursor: not-allowed;
+          cursor: default;
         }
       }
     }
@@ -291,6 +292,7 @@
       float: none;
       margin: @tabs-vertical-margin;
       padding: @tabs-vertical-padding;
+      user-select: none;
 
       &:last-child {
         margin-bottom: 0;

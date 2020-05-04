@@ -29,7 +29,7 @@
 // input status
 // == when focus or actived
 .active(@color: @outline-color) {
-  border-color: ~`colorPalette('@{color}', 5) `;
+  border-color: @color;
   border-right-width: @border-width-base !important;
   outline: 0;
   & when (@input-active-box-shadow = true) {
@@ -39,8 +39,8 @@
 
 // == when hoverd
 .hover(@color: @input-hover-border-color) {
-  border-color: @color;
-  border-right-width: @border-width-base !important;
+    border-color: @color;
+    border-right-width: @border-width-base !important;
 }
 
 .disabled() {
@@ -70,11 +70,11 @@
   .placeholder(); // Reset placeholder
 
   &:hover {
-    .hover();
+    .hover(@input-hover-border-color);
   }
 
   &:focus {
-    .active();
+    .active(@input-active-border-color);
   }
 
   &-disabled {

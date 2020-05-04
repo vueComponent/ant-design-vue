@@ -132,6 +132,40 @@
           </td>
           <td>
             <a-dropdown :trigger="['click']">
+              <a-button icon="ellipsis"></a-button>
+              <a-menu slot="overlay">
+                <a-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
+                </a-menu-item>
+                <a-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
+                </a-menu-item>
+                <a-menu-divider />
+                <a-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
+          </td>
+          <td>
+            <a-dropdown :trigger="['click']">
+              <a-button type="link">Фильтр <a-icon type="down" /></a-button>
+              <a-menu slot="overlay">
+                <a-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
+                </a-menu-item>
+                <a-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
+                </a-menu-item>
+                <a-menu-divider />
+                <a-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
+          </td>
+          <td>
+            <a-dropdown :trigger="['click']">
               <a class="ant-dropdown-link" @click="e => e.preventDefault()">
                 Click me <a-icon type="down" />
               </a>

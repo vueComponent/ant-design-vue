@@ -346,8 +346,10 @@
 @input-padding-vertical-lg: 6px;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
-@input-border-color: @border-color-base;
 @input-border-width: 1px;
+@input-border-color: @border-color-base;
+@input-hover-border-color: darken(@border-color-base, 8%); // @primary-5
+@input-active-border-color: @primary-5; // @outline-color
 @input-bg: @component-background;
 @input-number-hover-border-color: @input-hover-border-color;
 @input-number-handler-active-bg: #f4f4f4;
@@ -355,7 +357,6 @@
 @input-number-handler-bg: @component-background;
 @input-number-handler-border-color: @border-color-base;
 @input-addon-bg: @background-color-light;
-@input-hover-border-color: @primary-5;
 @input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
 @input-font-size-base: @font-size-base;

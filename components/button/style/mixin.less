@@ -57,6 +57,29 @@
   .button-disabled();
 }
 
+.button-secondary() {
+  .button-color(#30343b; rgba(48, 52, 59, 0.1); transparent);
+
+  &:hover,
+  &:active,
+  &.active {
+    .button-color(#30343b; rgba(48,52,59,.15); transparent);
+  }
+}
+
+.button-outlined() {
+  .button-color(@text-color; #fff; #dfe0e1);
+
+  &:hover {
+    .button-color(#30343b; #fff; darken(#dfe0e1, 10%));
+  }
+
+  &:active,
+  &.active {
+    .button-color(#30343b; #fff; darken(#dfe0e1, 20%));
+  }
+}
+
 .button-variant-other(@color; @background; @border) {
   .button-color(@color; @background; @border);
 
@@ -252,6 +275,7 @@
   box-shadow: none;
   &:hover,
   &:active {
+    background-color: @btn-link-hover-bg;
     border-color: transparent;
   }
   .button-disabled(@disabled-color; transparent; transparent);

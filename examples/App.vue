@@ -72,25 +72,45 @@
 
       <br/>
       <br/>
+      <h2>Switch</h2>
+      <table class="conf">
+        <tr>
+          <td><a-button size="small">Кнопка</a-button></td>
+          <td><a-switch size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+        </tr>
+        <tr>
+          <td><a-button>Кнопка</a-button></td>
+          <td><a-switch v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+        </tr>
+        <tr>
+          <td><a-button size="large">Кнопка</a-button></td>
+          <td><a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+        </tr>
+      </table>
 
-      <a-button type="dashed">
-        Dashed
-      </a-button>
-      <a-button type="danger">
-        Danger
-      </a-button>
-      <a-button type="primary">
-        按钮
-      </a-button>
-      <a href="#" class="ant-btn"><span>Кнопка-ссылка</span></a>
-      <a href="#" class="ant-btn" disabled><span>Кнопка-ссылка</span></a>
-      <a-button type="link">
-        Link
-      </a-button>
+      <br/>
+      <br/>
+      <h2>Buttons</h2>
+      <div style="padding: 10px;">
+        <a-button type="primary">Primary</a-button>
+        <a-button type="secondary">Secondary</a-button>
+        <a-button>Default</a-button>
+        <a-button type="outlined">Outlined</a-button>
+        <a-button type="dashed">Dashed</a-button>
+        <a-button type="danger">Danger</a-button>
+        <a-button type="link">Link</a-button>
+      </div>
 
 
       <br/>
       <br/>
+      <h2>Button a[href]</h2>
+      <a href="#" class="ant-btn"><span>Ссылка</span></a>
+      <a href="#" class="ant-btn" disabled><span>Ссылка неактивная</span></a>
+
+      <br/>
+      <br/>
+      <h2>Dropdown</h2>
       <table class="conf">
         <tr>
           <td>
@@ -134,7 +154,7 @@
 
       <br/>
       <br/>
-
+      <h2>Tabs</h2>
       <a-tabs default-active-key="1">
         <a-tab-pane key="1" tab="Tab 1">
           Tab 1
@@ -153,7 +173,6 @@
       <br/>
       <br/>
       <h2>Popover</h2>
-
       <div style="padding: 50px 200px;">
         <table class="conf">
           <tr>
@@ -327,7 +346,6 @@
       <br/>
       <br/>
       <h2>Tooltip</h2>
-
       <div style="padding: 50px 200px;">
         <table class="conf">
           <tr>

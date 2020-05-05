@@ -188,6 +188,48 @@
 
       <br/>
       <br/>
+      <h2>For CRM</h2>
+      <p>Тут у нас разнородные компоненты должны выглядеть +/- одинаково: Dropdown и Popover.</p>
+      <a-select default-value="1" size="small" :dropdownMatchSelectWidth="false" :showSearch="true">
+        <a-icon slot="menuItemSelectedIcon" type="smile" />
+        <a-select-option value="1">Сайт 1</a-select-option>
+        <a-select-option value="2222">Сайт 2222</a-select-option>
+      </a-select>
+      <div style="display: inline-block; width: 200px">
+        <a-range-picker size="small"/>
+      </div>
+      <a-popover placement="bottom" trigger="click">
+        <a-button size="small" type="link">Статусы <a-icon type="down" /></a-button>
+        <template slot="title">
+          <span>Статусы для отображения:</span>
+        </template>
+        <template slot="content">
+          <a-checkbox-group :options="['Новый', 'В работе']"></a-checkbox-group>
+        </template>
+      </a-popover>
+      <a-popover placement="bottom" trigger="click">
+        <a-button size="small" type="link">Типы <a-icon type="down" /></a-button>
+        <template slot="title">
+          <span>Типы заявок:</span>
+        </template>
+        <template slot="content">
+          <a-checkbox>Звонок</a-checkbox>
+          <a-checkbox>Заказ</a-checkbox>
+          <a-checkbox>Корзина</a-checkbox>
+        </template>
+      </a-popover>
+      <a-dropdown :trigger="['click']">
+        <a-button icon="ellipsis" type="secondary" size="small"></a-button>
+        <a-menu slot="overlay">
+          <a-menu-item>
+            <a href="#">Выгрузка заявок</a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+      <a-button icon="plus" type="primary" size="small">Создать заявку</a-button>
+
+      <br/>
+      <br/>
       <h2>Tabs</h2>
       <a-tabs default-active-key="1">
         <a-tab-pane key="1" tab="Tab 1">

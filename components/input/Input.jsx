@@ -66,7 +66,7 @@ export default {
     const props = this.$props;
     const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     return {
-      stateValue: value,
+      stateValue: typeof value === 'undefined' ? '' : value,
     };
   },
   watch: {
@@ -172,7 +172,8 @@ export default {
     },
     handleChange(e) {
       const { value, composing } = e.target;
-      if (composing && this.lazy) return;
+      // https://github.com/vueComponent/ant-design-vue/issues/2203
+      if ((composing && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
       resolveOnChange(this.$refs.input, e, this.onChange);
     },

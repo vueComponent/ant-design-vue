@@ -28,7 +28,7 @@ export default {
   data() {
     const value = typeof this.value === 'undefined' ? this.defaultValue : this.value;
     return {
-      stateValue: value,
+      stateValue: typeof value === 'undefined' ? '' : value,
     };
   },
   computed: {},
@@ -68,7 +68,7 @@ export default {
     },
     handleChange(e) {
       const { value, composing } = e.target;
-      if (composing || this.stateValue === value) return;
+      if ((composing && this.lazy) || this.stateValue === value) return;
 
       this.setValue(e.target.value, () => {
         this.$refs.resizableTextArea.resizeTextarea();

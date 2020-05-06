@@ -1,5 +1,5 @@
 export default {
-  save: 'Save',
-  clear: 'Clear',
-  cancel: 'Cancel',
+  save: '保存',
+  clear: '清除',
+  cancel: '取消',
 };

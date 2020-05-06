@@ -1,7 +1,5 @@
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
-// import omit from 'lodash/omit';
-// import VcColorPicker from '../vc-calendar/src/Picker';
 import BaseMixin from '../_util/BaseMixin';
 import '@simonwep/pickr/dist/themes/classic.min.css';   // 'classic' theme
 import '@simonwep/pickr/dist/themes/monolith.min.css';  // 'monolith' theme
@@ -120,7 +118,6 @@ export default {
     },
   },
   render() {
-    console.log(this.locale);
     return (
       <LocaleReceiver
         componentName="ColorPicker"

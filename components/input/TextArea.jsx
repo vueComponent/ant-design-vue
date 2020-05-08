@@ -52,7 +52,9 @@ export default {
           callback && callback();
         });
       } else {
-        this.$forceUpdate();
+        // 不在严格受控
+        // https://github.com/vueComponent/ant-design-vue/issues/2207，modal 是 新 new 实例，更新队列和当前不在同一个更新队列中
+        // this.$forceUpdate();
       }
     },
     handleKeyDown(e) {

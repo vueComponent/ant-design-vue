@@ -173,12 +173,9 @@ export default {
       });
     },
     handleChange(e) {
-      if (e.inputType === 'insertCompositionText') {
-        return;
-      }
       const { value, composing } = e.target;
       // https://github.com/vueComponent/ant-design-vue/issues/2203
-      if ((composing && this.lazy) || this.stateValue === value) return;
+      if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
       resolveOnChange(this.$refs.input, e, this.onChange);
     },

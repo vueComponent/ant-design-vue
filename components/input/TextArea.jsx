@@ -69,11 +69,8 @@ export default {
       this.$emit('input', e);
     },
     handleChange(e) {
-      if (e.inputType === 'insertCompositionText') {
-        return;
-      }
       const { value, composing } = e.target;
-      if ((composing && this.lazy) || this.stateValue === value) return;
+      if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
 
       this.setValue(e.target.value, () => {
         this.$refs.resizableTextArea.resizeTextarea();

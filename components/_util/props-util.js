@@ -1,5 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
+import { Text } from 'vue';
 function getType(fn) {
   const match = fn && fn.toString().match(/^\s*function (\w+)/);
   return match ? match[1] : '';
@@ -256,18 +257,18 @@ export function getComponentName(opts) {
 }
 
 export function isEmptyElement(c) {
-  return !(c.tag || (c.text && c.text.trim() !== ''));
+  return c.type === Text && !(c.children && c.children.trim() !== '');
 }
 
 export function isStringElement(c) {
   return !c.tag;
 }
 
-export function filterEmpty(children = []) {
+export function filterEmpty(children) {
   if (typeof children === 'function') {
-    return children.call(undefined); //.filter(c => !isEmptyElement(c));
+    return children.call(undefined).filter(c => !isEmptyElement(c)) || [];
   } else {
-    return children; //.filter(c => !isEmptyElement(c));
+    return children || [];
   }
 }
 const initDefaultProps = (propTypes, defaultProps) => {

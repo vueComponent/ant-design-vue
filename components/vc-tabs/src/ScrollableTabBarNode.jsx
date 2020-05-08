@@ -52,7 +52,7 @@ export default {
   },
 
   updated() {
-    setTimeout(() => {
+    this.$nextTick(() => {
       this.updatedCal(this.prevProps);
       this.prevProps = { ...this.$props };
     });

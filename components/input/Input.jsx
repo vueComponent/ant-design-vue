@@ -173,6 +173,9 @@ export default {
       });
     },
     handleChange(e) {
+      if (e.inputType === 'insertCompositionText') {
+        return;
+      }
       const { value, composing } = e.target;
       // https://github.com/vueComponent/ant-design-vue/issues/2203
       if ((composing && this.lazy) || this.stateValue === value) return;

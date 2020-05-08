@@ -98,7 +98,7 @@ export default {
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   },
   updated() {
-    setTimeout(() => {
+    this.$nextTick(function() {
       componentDidUpdate(this);
     });
   },

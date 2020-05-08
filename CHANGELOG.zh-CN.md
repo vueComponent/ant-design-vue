@@ -10,6 +10,14 @@
 
 ---
 
+## 1.5.5
+
+`2020-05-08`
+
+- 🐞 修复 `Tabs` 在 safari 13 下不展示问题 [#2199](https://github.com/vueComponent/ant-design-vue/issues/2199)
+- 🐞 修复 `Input` 在 FireFox 下第一次输入失败问题 [#2151](https://github.com/vueComponent/ant-design-vue/issues/2151)
+- 🐞 修复 `Input` 在 Modal 组件中光标移位问题 [#2207](https://github.com/vueComponent/ant-design-vue/issues/2207)
+
 ## 1.5.4
 
 `2020-04-30`

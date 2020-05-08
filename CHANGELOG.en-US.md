@@ -10,6 +10,14 @@
 
 ---
 
+## 1.5.5
+
+`2020-05-08`
+
+- 🐞 Fix `Tabs` not showing issue under safari 13 [#2199](https://github.com/vueComponent/ant-design-vue/issues/2199)
+- 🐞 Fix the first input failure of `Input` under FireFox [#2151](https://github.com/vueComponent/ant-design-vue/issues/2151)
+- 🐞 Fix `Input` cursor shift issue in Modal component [#2207](https://github.com/vueComponent/ant-design-vue/issues/2207)
+
 ## 1.5.4
 
 `2020-04-30`

@@ -1,9 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
 import BaseMixin from '../_util/BaseMixin';
-import '@simonwep/pickr/dist/themes/classic.min.css';   // 'classic' theme
-import '@simonwep/pickr/dist/themes/monolith.min.css';  // 'monolith' theme
-import '@simonwep/pickr/dist/themes/nano.min.css';      // 'nano' theme
 import Pickr from '@simonwep/pickr/dist/pickr.es5.min';
 import IconDownOutlined from '@ant-design/icons-vue/DownOutlined';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -18,15 +15,17 @@ export default {
   mixins: [BaseMixin],
   model: {
     prop: 'value',
-    event: 'change',
+    event: 'myChange',//为了支持v-model直接返回颜色字符串 所以用了自定义的事件,与pickr自带change事件进行区分
   },
   props: {
     prefixCls: PropTypes.string,
+    defaultValue:PropTypes.string,//默认值
     config: PropTypes.object,//pickr配置
     value: PropTypes.string,//颜色值
     locale: PropTypes.object,//双语包
     colorRounded: PropTypes.number,//颜色数值保留几位小数
     size: PropTypes.string,//尺寸
+    getPopupContainer: PropTypes.func,//指定渲染容器
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -40,13 +39,23 @@ export default {
   },
   mounted() {
     this.createPickr();
+    this.eventsBinding();
   },
   methods: {
+    eventsBinding() {
+      Object.keys(this.$listeners).forEach(event => {
+        this.pickr.on(event, this.$listeners[event]);
+      });
+    },
     createPickr() {
+      const { getPopupContainer } = getOptionProps(this);
+      const { getPopupContainer: getContextPopupContainer } = this.configProvider;
+      const container = getPopupContainer || getContextPopupContainer;
       this.pickr = Pickr.create(Object.assign({
         el: '#color-picker' + this._uid,
+        container: (container && container(this.$el)) || document.body,
         theme: 'monolith', // or 'monolith', or 'nano'
-        default: this.value || '#1890ff', // 有默认颜色pickr才可以获取到_representation
+        default: this.value || this.defaultValue || '#1890ff', // 有默认颜色pickr才可以获取到_representation
         components: {
           // Main components
           preview: true,
@@ -65,12 +74,13 @@ export default {
         if (color) {
           color = color['to' + instance._representation]().toString(this.colorRounded || 0);
         }
-        this.$emit('change', color || '');
+        this.$emit('myChange', color || '');
       }).on('hide', () => {
         this.setState({ myOpen: false });
       });
     },
-    handleOpenChange(open) {
+    handleOpenChange() {
+      const open = !this.myOpen;
       this.setState({ myOpen: open });
       this.pickr[open ? 'show' : 'hide']();
       this.$emit('openChange', open);
@@ -106,8 +116,8 @@ export default {
         <div
           class={classString}
           tabIndex={props.disabled ? -1 : 0}
-          onClick={this.handleOpenChange.bind(this, !this.myOpen)}
-          {...props}
+          onClick={this.handleOpenChange}
+          {...this.$attrs}
         >
           <div class={`${prefixCls}-selection`}>
             <div id={"color-picker" + this._uid}></div>

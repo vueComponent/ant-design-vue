@@ -10,6 +10,12 @@
 
 ---
 
+## 1.5.6
+
+`2020-05-09`
+
+- 🐞 Fix the problem of missing css, min.js and other files in the dist folder
+
 ## 1.5.5
 
 `2020-05-08`

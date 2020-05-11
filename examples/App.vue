@@ -201,6 +201,25 @@
         <a-button type="dashed">Dashed</a-button>
         <a-button type="danger">Danger</a-button>
         <a-button type="link">Link</a-button>
+
+        <br>
+        <br>
+        <h3>Button Group</h3>
+
+        <a-radio-group default-value="1" size="default">
+          <a-radio-button value="1">1</a-radio-button>
+          <a-radio-button value="2">test</a-radio-button>
+          <a-radio-button value="3">Very long option.....</a-radio-button>
+        </a-radio-group>
+
+        <div style="width:500px; border: 1px dashed grey; padding: 4px; display: inline-block; margin-left: 12px;">
+          <a-radio-group default-value="1"
+                         :full-width="true">
+            <a-radio-button value="1">1</a-radio-button>
+            <a-radio-button value="2">test</a-radio-button>
+            <a-radio-button value="3">Very long option.....</a-radio-button>
+          </a-radio-group>
+        </div>
       </div>
 
 

@@ -84,3 +84,14 @@ by Mottor 💪
     </a-tab-pane>
 </a-tabs>
 ```
+
+6. Возможность растягивать компонент a-radio-group по всю ширину родительского элемента. Для этого нужно добавить
+атрибут `:full-width="true"`
+
+```
+<a-radio-group default-value="1" :full-width="true">
+    <a-radio-button value="1">1</a-radio-button>
+    <a-radio-button value="2">test</a-radio-button>
+    <a-radio-button value="3">Very long option.....</a-radio-button>
+</a-radio-group>
+```

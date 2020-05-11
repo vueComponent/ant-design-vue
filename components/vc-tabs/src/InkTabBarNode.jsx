@@ -37,16 +37,23 @@ function componentDidUpdate(component, init) {
 
     if (tabBarPosition === 'top' || tabBarPosition === 'bottom') {
       let left = getLeft(tabNode, wrapNode);
-      let width = tabNode.offsetWidth;
+      const tabNodeWidth = Math.round(getStyle(tabNode, 'width'));
+      const rootNodeWidth = Math.round(getStyle(rootNode, 'width'));
+
+      if (tabNode.offsetWidth != tabNodeWidth) {
+        left += getStyle(tabNode, 'padding-left');
+      }
+
+      let width = tabNodeWidth;
       // If tabNode'width width equal to wrapNode'width when tabBarPosition is top or bottom
       // It means no css working, then ink bar should not have width until css is loaded
       // Fix https://github.com/ant-design/ant-design/issues/7564
-      if (width === rootNode.offsetWidth) {
+      if (width === rootNodeWidth) {
         width = 0;
       } else if (styles.inkBar && styles.inkBar.width !== undefined) {
         width = parseFloat(styles.inkBar.width, 10);
         if (width) {
-          left += (tabNode.offsetWidth - width) / 2;
+          left += (tabNodeWidth - width) / 2;
         }
       }
       if (direction === 'rtl') {

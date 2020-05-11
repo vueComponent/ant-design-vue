@@ -90,6 +90,81 @@
 
       <br/>
       <br/>
+      <h2>Select</h2>
+      <div style="padding: 10px;">
+        <a-select default-value="lucy" style="width: 120px">
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+          <a-select-option value="disabled" disabled>
+            Disabled
+          </a-select-option>
+          <a-select-option value="Yiminghe">
+            yiminghe
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy" style="width: 120px" disabled>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy" style="width: 120px" loading>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy">
+          <div slot="headRender">
+            <a-button type="link">Custom head</a-button>
+          </div>
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy">
+          <div slot="headRender"
+               :arrow="true"
+          >
+            <a-button type="link"
+                      style="padding-right: 24px;"
+            >
+              Custom head with arrow
+            </a-button>
+          </div>
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy" disabled>
+          <div slot="headRender">
+            <a-button type="link">Disabled custom head</a-button>
+          </div>
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+      </div>
+
+      <br/>
+      <br/>
       <h2>Buttons</h2>
       <div style="padding: 10px;">
         <a-button type="primary">Primary</a-button>
@@ -266,7 +341,7 @@
               </a-popover>
             </td>
             <td>
-              <a-popover placement="top" visible="true">
+              <a-popover placement="top" :visible="true">
                 <template slot="content">
                   <p>Content</p>
                   <p>Content</p>
@@ -335,7 +410,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>
-              <a-popover placement="right" visible="true">
+              <a-popover placement="right" :visible="true">
                 <template slot="content">
                   <p>Content</p>
                   <p>Content</p>
@@ -435,7 +510,7 @@
               </a-tooltip>
             </td>
             <td>
-              <a-tooltip placement="top" visible="true">
+              <a-tooltip placement="top" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>
@@ -475,7 +550,7 @@
           </tr>
           <tr>
             <td>
-              <a-tooltip placement="left" visible="true">
+              <a-tooltip placement="left" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>
@@ -486,7 +561,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>
-              <a-tooltip placement="right" visible="true">
+              <a-tooltip placement="right" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>
@@ -526,7 +601,7 @@
               </a-tooltip>
             </td>
             <td>
-              <a-tooltip placement="bottom" visible="true">
+              <a-tooltip placement="bottom" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>

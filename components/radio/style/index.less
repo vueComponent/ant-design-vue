@@ -148,6 +148,10 @@ span.@{radio-prefix-cls} + * {
   padding-left: 8px;
 }
 
+.@{radio-group-prefix-cls}-full-width {
+  display: flex;
+}
+
 .@{radio-prefix-cls}-button-wrapper {
   position: relative;
   display: inline-block;
@@ -176,6 +180,10 @@ span.@{radio-prefix-cls} + * {
     width: 0;
     height: 0;
     margin-left: 0;
+  }
+
+  .@{radio-group-prefix-cls}-full-width & {
+    flex-basis: auto;
   }
 
   .@{radio-group-prefix-cls}-large & {

@@ -1599,7 +1599,19 @@ const Select = {
       };
 
       if (this.selectHead) {
-        return this.selectHead;
+        const selectHeadAttr = this.selectHead.data.attrs;
+        const arrowEnabled = !!selectHeadAttr.arrow;
+
+        if (arrowEnabled) {
+          return (
+            <div>
+              {this.selectHead}
+              {this.renderArrow(!!multiple)}
+            </div>
+          );
+        } else {
+          return this.selectHead;
+        }
       } else {
         return (
           <div {...selectionProps}>

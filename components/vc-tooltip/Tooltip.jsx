@@ -25,6 +25,7 @@ export default {
     arrowContent: PropTypes.any.def(null),
     tipId: PropTypes.string,
     builtinPlacements: PropTypes.object,
+    arrow: PropTypes.bool.def(true),
   },
   methods: {
     getPopupElement() {

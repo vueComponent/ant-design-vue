@@ -14,6 +14,7 @@ const Popover = {
     transitionName: PropTypes.string.def('zoom-big'),
     content: PropTypes.any,
     title: PropTypes.any,
+    arrow: PropTypes.bool.def(true),
   },
   model: {
     prop: 'visible',

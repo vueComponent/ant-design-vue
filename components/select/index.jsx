@@ -232,6 +232,15 @@ const Select = {
         ? cloneElement(menuItemSelectedIcon, { class: `${prefixCls}-selected-icon` })
         : menuItemSelectedIcon)) || <Icon type="check" class={`${prefixCls}-selected-icon`} />;
 
+    let selectHead = null;
+    if (this.$slots.headRender) {
+      selectHead = cloneElement(this.$slots.headRender, {
+        props: {
+          disabled: this.disabled,
+        },
+      });
+    }
+
     const selectProps = {
       props: {
         inputIcon: this.renderSuffixIcon(prefixCls),
@@ -258,6 +267,7 @@ const Select = {
           : filterEmpty(this.$slots.default),
         __propsSymbol__: Symbol(),
         dropdownRender: getComponentFromProp(this, 'dropdownRender', {}, false),
+        selectHead: selectHead,
         getPopupContainer: getPopupContainer || getContextPopupContainer,
       },
       on: getListeners(this),

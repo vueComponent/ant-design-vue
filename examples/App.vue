@@ -118,6 +118,39 @@
             Lucy
           </a-select-option>
         </a-select>
+
+        <a-select default-value="lucy" style="width: 120px">
+          <div slot="headRender">123</div>
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+          <a-select-option value="disabled" disabled>
+            Disabled
+          </a-select-option>
+          <a-select-option value="Yiminghe">
+            yiminghe
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy" style="width: 120px" disabled>
+          <div slot="headRender">123</div>
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+          <a-select-option value="disabled" disabled>
+            Disabled
+          </a-select-option>
+          <a-select-option value="Yiminghe">
+            yiminghe
+          </a-select-option>
+        </a-select>
+
       </div>
 
       <br/>

@@ -161,8 +161,35 @@
           </a-select-option>
         </a-select>
 
+        <br>
+        <br>
+
+        <h3>Select (:full-width=true)</h3>
+
+        <div style="width:100px; border: 1px dashed grey; padding: 4px; float: left;">
+          <a-select default-value="lucy" :full-width="true">
+            <a-select-option value="jack">
+              Jack
+            </a-select-option>
+            <a-select-option value="lucy">
+              Very long option.....
+            </a-select-option>
+          </a-select>
+        </div>
+
+        <div style="width:250px; border: 1px dashed grey; padding: 4px; float: left; margin-left: 12px;">
+          <a-select default-value="lucy" :full-width="true">
+            <a-select-option value="jack">
+              Jack
+            </a-select-option>
+            <a-select-option value="lucy">
+              Very long option.....
+            </a-select-option>
+          </a-select>
+        </div>
       </div>
 
+      <br/>
       <br/>
       <br/>
       <h2>Buttons</h2>

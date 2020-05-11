@@ -298,7 +298,7 @@
               </a-popover>
             </td>
             <td>
-              <a-popover placement="top" visible="true">
+              <a-popover placement="top" :visible="true">
                 <template slot="content">
                   <p>Content</p>
                   <p>Content</p>
@@ -367,7 +367,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>
-              <a-popover placement="right" visible="true">
+              <a-popover placement="right" :visible="true">
                 <template slot="content">
                   <p>Content</p>
                   <p>Content</p>
@@ -467,7 +467,7 @@
               </a-tooltip>
             </td>
             <td>
-              <a-tooltip placement="top" visible="true">
+              <a-tooltip placement="top" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>
@@ -507,7 +507,7 @@
           </tr>
           <tr>
             <td>
-              <a-tooltip placement="left" visible="true">
+              <a-tooltip placement="left" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>
@@ -518,7 +518,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>
-              <a-tooltip placement="right" visible="true">
+              <a-tooltip placement="right" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>
@@ -558,7 +558,7 @@
               </a-tooltip>
             </td>
             <td>
-              <a-tooltip placement="bottom" visible="true">
+              <a-tooltip placement="bottom" :visible="true">
                 <template slot="title">
                   <span>Текст подсказки</span>
                 </template>

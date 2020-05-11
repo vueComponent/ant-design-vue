@@ -40,3 +40,19 @@ by Mottor 💪
   </a-select-option>
 </a-select>
 ```
+
+3. Возможность убирать стрелку у Popover и Tooltip. Для этого нужно добавить атрибут `arrow` (bool).
+   
+Пример:
+```
+<a-popover placement="bottom" :arrow="false">
+    <template slot="content">
+        <p>Content</p>
+        <p>Content</p>
+    </template>
+    <template slot="title">
+        <span>Title</span>
+    </template>
+    <a-button>Bottom</a-button>
+</a-popover>
+```

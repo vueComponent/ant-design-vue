@@ -58,6 +58,17 @@ export default {
     getPopupDomNode() {
       return this.$refs.trigger.getPopupDomNode();
     },
+
+    getPopupClassName() {
+      let popupClassName = this.overlayClassName;
+      if (!popupClassName) {
+        popupClassName = '';
+      }
+      if (!this.arrow) {
+        popupClassName += ' ' + this.prefixCls + '-no-arrow';
+      }
+      return popupClassName;
+    },
   },
   render(h) {
     const {
@@ -84,7 +95,7 @@ export default {
     const listeners = getListeners(this);
     const triggerProps = {
       props: {
-        popupClassName: overlayClassName,
+        popupClassName: this.getPopupClassName(),
         prefixCls,
         action: trigger,
         builtinPlacements: placements,

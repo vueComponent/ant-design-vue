@@ -34,6 +34,7 @@ export default {
     animated: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
+    newStyle: PropTypes.bool.def(false),
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -98,6 +99,7 @@ export default {
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,
+      [`${prefixCls}-new-style`]: this.newStyle,
     };
     // only card type tabs can be added and closed
     let childrenWithClose = [];

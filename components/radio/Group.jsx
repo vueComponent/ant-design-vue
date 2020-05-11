@@ -27,6 +27,7 @@ export default {
     disabled: Boolean,
     name: String,
     buttonStyle: PropTypes.string.def('outline'),
+    fullWidth: PropTypes.bool.def(false),
   },
   data() {
     const { value, defaultValue } = this;
@@ -94,6 +95,7 @@ export default {
     const groupPrefixCls = `${prefixCls}-group`;
     const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
       [`${groupPrefixCls}-${props.size}`]: props.size,
+      [`${groupPrefixCls}-full-width`]: this.fullWidth,
     });
 
     let children = filterEmpty(this.$slots.default);

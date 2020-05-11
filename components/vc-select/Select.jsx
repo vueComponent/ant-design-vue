@@ -104,6 +104,7 @@ const Select = {
     autoClearSearchValue: PropTypes.bool.def(true),
     tabIndex: PropTypes.any.def(0),
     dropdownRender: PropTypes.func.def(menu => menu),
+    selectHead: PropTypes.object.def(true),
     // onChange: noop,
     // onFocus: noop,
     // onBlur: noop,
@@ -1577,6 +1578,38 @@ const Select = {
       }
       this.inputBlur(e);
     },
+    renderSelectHead() {
+      const props = this.$props;
+      const multiple = isMultipleOrTags(props);
+      const ctrlNode = this.renderTopControlNode();
+      const prefixCls = props.prefixCls;
+      const realOpen = this.getRealOpenState();
+
+      const selectionProps = {
+        props: {},
+        attrs: {
+          role: 'combobox',
+          'aria-autocomplete': 'list',
+          'aria-haspopup': 'true',
+          'aria-expanded': realOpen,
+          'aria-controls': this.$data._ariaId,
+        },
+        class: `${prefixCls}-selection ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`,
+        key: 'selection',
+      };
+
+      if (this.selectHead) {
+        return this.selectHead;
+      } else {
+        return (
+          <div {...selectionProps}>
+            {ctrlNode}
+            {this.renderClear()}
+            {this.renderArrow(!!multiple)}
+          </div>
+        );
+      }
+    },
   },
 
   render() {
@@ -1586,7 +1619,6 @@ const Select = {
     const { showArrow = true } = props;
     const state = this.$data;
     const { disabled, prefixCls, loading } = props;
-    const ctrlNode = this.renderTopControlNode();
     const { _open: open, _inputValue: inputValue, _value: value } = this.$data;
     if (open) {
       const filterOptions = this.renderFilterOptions();
@@ -1597,33 +1629,7 @@ const Select = {
     const empty = this._empty;
     const options = this._options || [];
     const { mouseenter = noop, mouseleave = noop, popupScroll = noop } = getListeners(this);
-    const selectionProps = {
-      props: {},
-      attrs: {
-        role: 'combobox',
-        'aria-autocomplete': 'list',
-        'aria-haspopup': 'true',
-        'aria-expanded': realOpen,
-        'aria-controls': this.$data._ariaId,
-      },
-      on: {
-        // click: this.selectionRefClick,
-      },
-      class: `${prefixCls}-selection ${prefixCls}-selection--${multiple ? 'multiple' : 'single'}`,
-      // directives: [
-      //   {
-      //     name: 'ant-ref',
-      //     value: this.saveSelectionRef,
-      //   },
-      // ],
-      key: 'selection',
-    };
-    //if (!isMultipleOrTagsOrCombobox(props)) {
-    // selectionProps.on.keydown = this.onKeyDown;
-    // selectionProps.on.focus = this.selectionRefFocus;
-    // selectionProps.on.blur = this.selectionRefBlur;
-    // selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
-    //}
+
     const rootCls = {
       [prefixCls]: true,
       [`${prefixCls}-open`]: open,
@@ -1698,11 +1704,7 @@ const Select = {
           onClick={this.selectionRefClick}
           onKeydown={isMultipleOrTagsOrCombobox(props) ? noop : this.onKeyDown}
         >
-          <div {...selectionProps}>
-            {ctrlNode}
-            {this.renderClear()}
-            {this.renderArrow(!!multiple)}
-          </div>
+          {this.renderSelectHead()}
         </div>
       </SelectTrigger>
     );

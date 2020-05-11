@@ -37,8 +37,8 @@ function componentDidUpdate(component, init) {
 
     if (tabBarPosition === 'top' || tabBarPosition === 'bottom') {
       let left = getLeft(tabNode, wrapNode);
-      const tabNodeWidth = getStyle(tabNode, 'width');
-      const rootNodeWidth = getStyle(rootNode, 'width');
+      const tabNodeWidth = Math.round(getStyle(tabNode, 'width'));
+      const rootNodeWidth = Math.round(getStyle(rootNode, 'width'));
 
       if (tabNode.offsetWidth != tabNodeWidth) {
         left += getStyle(tabNode, 'padding-left');

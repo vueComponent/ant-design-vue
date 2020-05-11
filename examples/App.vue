@@ -323,6 +323,24 @@
 
       <br/>
       <br/>
+      <h2>Tabs (new style)</h2>
+      <a-tabs default-active-key="1" :new-style="true">
+        <a-tab-pane key="1" tab="Tab 1">
+          Tab 1
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="Tab 2">
+          Tab 2
+        </a-tab-pane>
+        <a-tab-pane key="3" tab="Tab 3">
+          Tab 3
+        </a-tab-pane>
+        <a-tab-pane key="4" tab="Tab 4" disabled>
+          Tab 4
+        </a-tab-pane>
+      </a-tabs>
+
+      <br/>
+      <br/>
       <h2>Popover</h2>
       <div style="padding: 50px 200px;">
         <table class="conf">

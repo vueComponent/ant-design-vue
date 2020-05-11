@@ -56,3 +56,16 @@ by Mottor 💪
     <a-button>Bottom</a-button>
 </a-popover>
 ```
+
+4. Возмножность убрать отступы у компонента вкладок (Tab). Для этого нужно добавить атрибут `:new-style="true"`
+
+``` 
+<a-tabs default-active-key="1" :new-style="true">
+    <a-tab-pane key="1" tab="Tab 1">
+      Tab 1
+    </a-tab-pane>
+    <a-tab-pane key="2" tab="Tab 2">
+      Tab 2
+    </a-tab-pane>
+</a-tabs>
+```

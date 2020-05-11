@@ -25,14 +25,26 @@ export default {
     arrowContent: PropTypes.any.def(null),
     tipId: PropTypes.string,
     builtinPlacements: PropTypes.object,
+    arrow: PropTypes.bool.def(true),
   },
   methods: {
+    getArrowElement() {
+      if (!this.arrow) {
+        return null;
+      }
+
+      const {prefixCls} = this.$props;
+      return (
+        <div class={`${prefixCls}-arrow`} key="arrow">
+          {getComponentFromProp(this, 'arrowContent')}
+        </div>
+      );
+    },
+
     getPopupElement() {
       const { prefixCls, tipId } = this.$props;
       return [
-        <div class={`${prefixCls}-arrow`} key="arrow">
-          {getComponentFromProp(this, 'arrowContent')}
-        </div>,
+        this.getArrowElement(),
         <Content
           key="content"
           trigger={this.$refs.trigger}
@@ -45,6 +57,17 @@ export default {
 
     getPopupDomNode() {
       return this.$refs.trigger.getPopupDomNode();
+    },
+
+    getPopupClassName() {
+      let popupClassName = this.overlayClassName;
+      if (!popupClassName) {
+        popupClassName = '';
+      }
+      if (!this.arrow) {
+        popupClassName += ' ' + this.prefixCls + '-no-arrow';
+      }
+      return popupClassName;
     },
   },
   render(h) {
@@ -72,7 +95,7 @@ export default {
     const listeners = getListeners(this);
     const triggerProps = {
       props: {
-        popupClassName: overlayClassName,
+        popupClassName: this.getPopupClassName(),
         prefixCls,
         action: trigger,
         builtinPlacements: placements,

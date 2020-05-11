@@ -620,6 +620,30 @@
           </tr>
         </table>
       </div>
+      <br/>
+      <br/>
+
+      <h2>Popover/Tooltip without arrow</h2>
+      <div style="padding: 50px 200px 100px;">
+        <a-popover placement="bottom" :arrow="false">
+          <template slot="content">
+            <p>Content</p>
+            <p>Content</p>
+          </template>
+          <template slot="title">
+            <span>Title</span>
+          </template>
+          <a-button>TL</a-button>
+        </a-popover>
+
+        <a-tooltip placement="bottomRight" :arrow="false">
+          <template slot="title">
+            <span>Текст подсказки</span>
+          </template>
+          <a-button>BR</a-button>
+        </a-tooltip>
+      </div>
+
     </div>
   </div>
 </template>

@@ -104,7 +104,7 @@ const Select = {
     autoClearSearchValue: PropTypes.bool.def(true),
     tabIndex: PropTypes.any.def(0),
     dropdownRender: PropTypes.func.def(menu => menu),
-    selectHead: PropTypes.object.def(true),
+    selectHead: PropTypes.object,
     // onChange: noop,
     // onFocus: noop,
     // onBlur: noop,

@@ -28,12 +28,23 @@ export default {
     arrow: PropTypes.bool.def(true),
   },
   methods: {
+    getArrowElement() {
+      if (!this.arrow) {
+        return null;
+      }
+
+      const {prefixCls} = this.$props;
+      return (
+        <div class={`${prefixCls}-arrow`} key="arrow">
+          {getComponentFromProp(this, 'arrowContent')}
+        </div>
+      );
+    },
+
     getPopupElement() {
       const { prefixCls, tipId } = this.$props;
       return [
-        <div class={`${prefixCls}-arrow`} key="arrow">
-          {getComponentFromProp(this, 'arrowContent')}
-        </div>,
+        this.getArrowElement(),
         <Content
           key="content"
           trigger={this.$refs.trigger}

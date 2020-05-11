@@ -42,6 +42,7 @@ const AbstractSelectProps = () => ({
   autoClearSearchValue: PropTypes.bool,
   dropdownRender: PropTypes.func,
   loading: PropTypes.bool,
+  fullWidth: PropTypes.bool.def(false),
 });
 const Value = PropTypes.shape({
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -202,6 +203,7 @@ const Select = {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-show-arrow`]: showArrow,
+      [`${prefixCls}-full-width`]: this.fullWidth,
     };
 
     let { optionLabelProp } = this.$props;

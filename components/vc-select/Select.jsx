@@ -1668,6 +1668,7 @@ const Select = {
         onMouseleave={mouseleave}
         showAction={props.showAction}
         menuItemSelectedIcon={getComponentFromProp(this, 'menuItemSelectedIcon')}
+        menuIcon={props.menuIcon}
         {...{
           directives: [
             {

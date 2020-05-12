@@ -48,6 +48,7 @@ export const SelectPropTypes = {
   inputIcon: PropTypes.any,
   removeIcon: PropTypes.any,
   menuItemSelectedIcon: PropTypes.any,
+  menuIcon: PropTypes.bool.def(false),
   dropdownRender: PropTypes.func,
   mode: PropTypes.oneOf(['multiple', 'tags']),
   backfill: PropTypes.bool,

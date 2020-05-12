@@ -204,7 +204,6 @@ const Select = {
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-show-arrow`]: showArrow,
       [`${prefixCls}-full-width`]: this.fullWidth,
-      [`${prefixCls}-custom-head`]: !!this.$slots.headRender,
     };
 
     let { optionLabelProp } = this.$props;

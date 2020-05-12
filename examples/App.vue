@@ -118,49 +118,6 @@
             Lucy
           </a-select-option>
         </a-select>
-
-        <a-select default-value="lucy">
-          <div slot="headRender">
-            <a-button type="link">Custom head</a-button>
-          </div>
-          <a-select-option value="jack">
-            Jack
-          </a-select-option>
-          <a-select-option value="lucy">
-            Lucy
-          </a-select-option>
-        </a-select>
-
-        <a-select default-value="lucy">
-          <div slot="headRender"
-               :arrow="true"
-          >
-            <a-button type="link"
-                      style="padding-right: 24px;"
-            >
-              Custom head with arrow
-            </a-button>
-          </div>
-          <a-select-option value="jack">
-            Jack
-          </a-select-option>
-          <a-select-option value="lucy">
-            Lucy
-          </a-select-option>
-        </a-select>
-
-        <a-select default-value="lucy" disabled>
-          <div slot="headRender">
-            <a-button type="link">Disabled custom head</a-button>
-          </div>
-          <a-select-option value="jack">
-            Jack
-          </a-select-option>
-          <a-select-option value="lucy">
-            Lucy
-          </a-select-option>
-        </a-select>
-
         <br>
         <br>
 

@@ -27,6 +27,7 @@ export default {
     backfillValue: PropTypes.any,
     firstActiveValue: PropTypes.string,
     menuItemSelectedIcon: PropTypes.any,
+    menuIcon: PropTypes.bool,
   },
   watch: {
     visible(val) {
@@ -108,10 +109,14 @@ export default {
       const { menuDeselect, menuSelect, popupScroll } = getListeners(this);
       if (menuItems && menuItems.length) {
         const selectedKeys = getSelectKeys(menuItems, value);
+        let itemIcon = null;
+        if (multiple || this.menuIcon) {
+          itemIcon = menuItemSelectedIcon;
+        }
         const menuProps = {
           props: {
             multiple,
-            itemIcon: multiple ? menuItemSelectedIcon : null,
+            itemIcon,
             selectedKeys,
             prefixCls: `${prefixCls}-menu`,
           },

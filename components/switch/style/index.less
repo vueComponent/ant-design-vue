@@ -2,14 +2,18 @@
 @import '../../style/mixins/index';
 
 @switch-prefix-cls: ~'@{ant-prefix}-switch';
-@switch-duration: 0.36s;
+@switch-transition-func: ease; // @ease-in-out-circ;
+@switch-transition-speed: 0.3s;
 
 .switch-size(@height) {
   @width: round(@height * @switch-width-ratio);
-  @toggle-size: @height - 4px;
+  @toggle-size: @height - 2 * @switch-toggle-indent;
+  @activeTranslateX: @width - @toggle-size - 2 * @switch-toggle-indent;
+
   width: @width;
   height: @height;
-  line-height: @height - 2px;
+  line-height: @height;
+  border-radius: @height / 2;
 
   &::after {
     .square(@toggle-size);
@@ -22,7 +26,7 @@
 
   &.@{switch-prefix-cls}-checked {
     &::after {
-      transform: translateX(@width - @toggle-size - 4);
+      transform: translateX(@activeTranslateX);
     }
 
     .@{switch-prefix-cls}-inner {
@@ -32,12 +36,12 @@
 
     .@{switch-prefix-cls}-loading-icon {
       left: 100%;
-      margin-left: (-@toggle-size - 1);
+      margin-left: (-@toggle-size - @switch-toggle-indent);
     }
   }
 
   .@{switch-prefix-cls}-loading-icon {
-    .square(@toggle-size)
+    .square(@toggle-size);
   }
 }
 
@@ -46,14 +50,12 @@
 
   position: relative;
   display: flex;
-  box-sizing: border-box;
   .switch-size(@switch-height);
   vertical-align: middle;
-  background-color: @disabled-color;
-  border: 1px solid transparent;
-  border-radius: 100px;
+  background-color: @switch-bg;
+  border: 0;
   cursor: pointer;
-  transition: all @switch-duration;
+  transition: background-color @switch-transition-speed @switch-transition-func;
   user-select: none;
 
   &-inner {
@@ -67,17 +69,17 @@
   &-loading-icon,
   &::after {
     position: absolute;
-    top: 1px;
-    left: 1px;
+    top: @switch-toggle-indent;
+    left: @switch-toggle-indent;
     background-color: @component-background;
     border-radius: 50%;
-    transition: transform @switch-duration @ease-in-out-circ;
+    transition: transform @switch-transition-speed @switch-transition-func;
     will-change: transform;
-    content: "";
+    content: '';
   }
 
   &::after {
-    box-shadow: 0 2px 4px 0 @switch-shadow-color;
+    box-shadow: @switch-toggle-shadow;
   }
 
   &-loading-icon {
@@ -103,7 +105,7 @@
   }
 
   &-checked&-loading &-loading-icon {
-    color: @switch-color;
+    color: @switch-checked-bg;
   }
 
   &:focus {
@@ -114,18 +116,17 @@
     .switch-size(@switch-sm-height);
   }
 
+  &-small&-loading &-loading-icon {
+    //font-weight: bold;
+    transform: scale(0.66667);
+  }
+
   &-large {
     .switch-size(@switch-lg-height);
   }
 
-  &-small&-loading &-loading-icon {
-    font-weight: bold;
-    transform: scale(0.66667);
-  }
-
   &-checked {
-    background-color: @switch-color;
-
+    background-color: @switch-checked-bg;
   }
 
   &-loading,

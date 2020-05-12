@@ -594,15 +594,15 @@
 
 // Switch
 // ---
-@switch-height: 22px;
 @switch-width-ratio: 1.625;
-@switch-sm-width: 26px;
+@switch-height: 22px; // base
 @switch-sm-height: 16px;
-@switch-sm-checked-margin-left: -(@switch-sm-height - 3px);
 @switch-lg-height: 26px;
 @switch-disabled-opacity: 0.4;
-@switch-color: @primary-color;
-@switch-shadow-color: fade(#00230b, 20%);
+@switch-bg: @disabled-color;
+@switch-checked-bg: @primary-color;
+@switch-toggle-indent: 2px;
+@switch-toggle-shadow: 0 2px 4px 0 fade(#00230b, 20%);
 
 // Pagination
 // ---

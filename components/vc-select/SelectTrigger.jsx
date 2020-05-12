@@ -57,6 +57,7 @@ export default {
     getPopupContainer: PropTypes.func,
     backfillValue: PropTypes.any,
     menuItemSelectedIcon: PropTypes.any,
+    menuIcon: PropTypes.bool,
     dropdownRender: PropTypes.func,
     ariaId: PropTypes.string,
   },
@@ -117,6 +118,7 @@ export default {
         getDropdownPrefixCls,
         backfillValue,
         menuItemSelectedIcon,
+        menuIcon,
       } = this;
       const { menuSelect, menuDeselect, popupScroll } = getListeners(this);
       const props = this.$props;
@@ -133,6 +135,7 @@ export default {
           dropdownMenuStyle,
           backfillValue,
           menuItemSelectedIcon,
+          menuIcon,
         },
         on: {
           ...newProps.on,

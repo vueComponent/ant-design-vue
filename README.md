@@ -59,3 +59,30 @@ by Mottor 💪
     <a-radio-button value="3">Very long option.....</a-radio-button>
 </a-radio-group>
 ```
+
+6. Возможность добавить иконки к пунктам Select. Для этого нужно добавить атрибут `:menu-icon="true"`.
+
+```
+<a-select default-value="lucy" style="width: 120px" :menu-icon="true">
+  <a-icon slot="menuItemSelectedIcon" type="smile"/>
+  <a-select-option value="jack">
+    Jack
+  </a-select-option>
+  <a-select-option value="lucy">
+    Lucy
+  </a-select-option>
+</a-select>
+```
+
+По умолчанию иконка - галочка:
+```
+<a-select default-value="lucy" style="width: 120px" :menu-icon="true">
+  <a-select-option value="jack">
+    Jack
+  </a-select-option>
+  <a-select-option value="lucy">
+    Lucy
+  </a-select-option>
+</a-select>
+```
+

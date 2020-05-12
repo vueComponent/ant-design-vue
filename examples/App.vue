@@ -121,6 +121,30 @@
         <br>
         <br>
 
+        <h3>Select (:menu-icon=true)</h3>
+
+        <a-select default-value="lucy" style="width: 120px" :menu-icon="true">
+          <a-icon slot="menuItemSelectedIcon" type="smile"/>
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+        <a-select default-value="lucy" style="width: 120px" :menu-icon="true">
+          <a-select-option value="jack">
+            Jack
+          </a-select-option>
+          <a-select-option value="lucy">
+            Lucy
+          </a-select-option>
+        </a-select>
+
+        <br>
+        <br>
+
         <h3>Select (:full-width=true)</h3>
 
         <div style="width:100px; border: 1px dashed grey; padding: 4px; float: left;">

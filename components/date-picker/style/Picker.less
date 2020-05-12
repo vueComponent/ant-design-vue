@@ -53,6 +53,10 @@
   &-input.@{ant-prefix}-input-sm {
     padding-top: 0;
     padding-bottom: 0;
+
+    .@{calendar-prefix-cls}-range-picker-separator {
+      line-height: @input-height-sm - 2 * @input-border-width;
+    }
   }
 
   &:hover &-input:not(.@{ant-prefix}-input-disabled) {

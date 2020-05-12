@@ -77,7 +77,7 @@ export default {
   props: initDefaultProps(RangePickerProps(), {
     allowClear: true,
     showToday: false,
-    separator: '~',
+    separator: '—',
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },

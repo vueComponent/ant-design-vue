@@ -63,7 +63,8 @@
     background-color: @popover-bg;
     background-clip: padding-box;
     border-radius: @border-radius-base;
-    box-shadow: @box-shadow-base;
+    box-shadow: @base-popovers-shadow;
+    border: 1px solid darken(@popover-bg, 9%);
   }
 
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -138,7 +139,7 @@
       border-radius: 2px;
       content: '';
       pointer-events: auto;
-      border: 1px solid rgba(0,0,0,.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -153,7 +154,8 @@
 
     &:before {
       transform: translateY(-1-@popover-arrow-square-size / 2) rotate(45deg);
-      box-shadow: @popover-arrow-shadow-offset @popover-arrow-shadow-offset @popover-arrow-shadow-blur-radius @popover-arrow-shadow-color;
+      box-shadow: @popover-arrow-shadow-offset @popover-arrow-shadow-offset
+        @popover-arrow-shadow-blur-radius @popover-arrow-shadow-color;
     }
   }
   &-placement-top > &-content > &-arrow {
@@ -177,8 +179,9 @@
     border-left-color: @popover-bg;
 
     &:before {
-      transform: translateX(1+@popover-arrow-square-size / 2) rotate(45deg);
-      box-shadow: -@popover-arrow-shadow-offset @popover-arrow-shadow-offset @popover-arrow-shadow-blur-radius @popover-arrow-shadow-color;
+      transform: translateX(1 + @popover-arrow-square-size / 2) rotate(45deg);
+      box-shadow: -@popover-arrow-shadow-offset @popover-arrow-shadow-offset @popover-arrow-shadow-blur-radius
+        @popover-arrow-shadow-color;
     }
   }
   &-placement-right > &-content > &-arrow {
@@ -202,8 +205,9 @@
     border-left-color: @popover-bg;
 
     &:before {
-      transform: translateY(1+@popover-arrow-square-size / 2) rotate(45deg);
-      box-shadow: -@popover-arrow-shadow-offset -@popover-arrow-shadow-offset @popover-arrow-shadow-blur-radius @popover-arrow-shadow-color;
+      transform: translateY(1 + @popover-arrow-square-size / 2) rotate(45deg);
+      box-shadow: -@popover-arrow-shadow-offset -@popover-arrow-shadow-offset
+        @popover-arrow-shadow-blur-radius @popover-arrow-shadow-color;
     }
   }
   &-placement-bottom > &-content > &-arrow {
@@ -228,7 +232,8 @@
 
     &:before {
       transform: translateX(-1-@popover-arrow-square-size / 2) rotate(45deg);
-      box-shadow: @popover-arrow-shadow-offset -@popover-arrow-shadow-offset @popover-arrow-shadow-blur-radius @popover-arrow-shadow-color;
+      box-shadow: @popover-arrow-shadow-offset -@popover-arrow-shadow-offset @popover-arrow-shadow-blur-radius
+        @popover-arrow-shadow-color;
     }
   }
   &-placement-left > &-content > &-arrow {

@@ -18,11 +18,32 @@
               <a-select-option value="lucy">Lucy11</a-select-option>
             </a-select>
           </td>
-          <td><a-date-picker size="small" format="DD.MM.YYYY"/></td>
+          <td><a-date-picker size="small" format="DD.MM.YYYY" /></td>
           <td><a-input-number size="small" :min="8" :max="12" :value="10"></a-input-number></td>
-          <td style="vertical-align: middle;"><a-switch checked-children="1" un-checked-children="0" size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-          <td style="vertical-align: middle;"><a-switch loading checked size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-          <td style="vertical-align: middle;"><a-switch disabled checked size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;">
+            <a-switch
+              checked-children="1"
+              un-checked-children="0"
+              size="small"
+              v-decorator="['switch', { valuePropName: 'checked' }]"
+            />
+          </td>
+          <td style="vertical-align: middle;">
+            <a-switch
+              loading
+              checked
+              size="small"
+              v-decorator="['switch', { valuePropName: 'checked' }]"
+            />
+          </td>
+          <td style="vertical-align: middle;">
+            <a-switch
+              disabled
+              checked
+              size="small"
+              v-decorator="['switch', { valuePropName: 'checked' }]"
+            />
+          </td>
         </tr>
         <tr>
           <td><a-input placeholder="Текст"></a-input></td>
@@ -40,11 +61,21 @@
               <a-select-option value="lucy">Lucy11</a-select-option>
             </a-select>
           </td>
-          <td><a-date-picker/></td>
+          <td><a-date-picker /></td>
           <td><a-input-number :min="8" :max="12" :value="10"></a-input-number></td>
-          <td style="vertical-align: middle;"><a-switch checked-children="1" un-checked-children="0" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-          <td style="vertical-align: middle;"><a-switch loading v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-          <td style="vertical-align: middle;"><a-switch disabled v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;">
+            <a-switch
+              checked-children="1"
+              un-checked-children="0"
+              v-decorator="['switch', { valuePropName: 'checked' }]"
+            />
+          </td>
+          <td style="vertical-align: middle;">
+            <a-switch loading v-decorator="['switch', { valuePropName: 'checked' }]" />
+          </td>
+          <td style="vertical-align: middle;">
+            <a-switch disabled v-decorator="['switch', { valuePropName: 'checked' }]" />
+          </td>
         </tr>
         <tr>
           <td><a-input size="large" placeholder="Текст"></a-input></td>
@@ -62,16 +93,31 @@
               <a-select-option value="lucy">Lucy11</a-select-option>
             </a-select>
           </td>
-          <td><a-date-picker size="large"/></td>
+          <td><a-date-picker size="large" /></td>
           <td><a-input-number size="large" :min="8" :max="12" :value="10"></a-input-number></td>
-          <td style="vertical-align: middle;"><a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-          <td style="vertical-align: middle;"><a-switch checked size="large" loading v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-          <td style="vertical-align: middle;"><a-switch size="large" disabled v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          <td style="vertical-align: middle;">
+            <a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" />
+          </td>
+          <td style="vertical-align: middle;">
+            <a-switch
+              checked
+              size="large"
+              loading
+              v-decorator="['switch', { valuePropName: 'checked' }]"
+            />
+          </td>
+          <td style="vertical-align: middle;">
+            <a-switch
+              size="large"
+              disabled
+              v-decorator="['switch', { valuePropName: 'checked' }]"
+            />
+          </td>
         </tr>
       </table>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Switch</h2>
       <table class="conf">
         <tr>
@@ -88,8 +134,8 @@
         </tr>
       </table>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Select</h2>
       <div style="padding: 10px;">
         <a-select default-value="lucy" style="width: 120px">
@@ -118,13 +164,13 @@
             Lucy
           </a-select-option>
         </a-select>
-        <br>
-        <br>
+        <br />
+        <br />
 
         <h3>Select (:menu-icon=true)</h3>
 
         <a-select default-value="lucy" style="width: 120px" :menu-icon="true">
-          <a-icon slot="menuItemSelectedIcon" type="smile"/>
+          <a-icon slot="menuItemSelectedIcon" type="smile" />
           <a-select-option value="jack">
             Jack
           </a-select-option>
@@ -142,8 +188,8 @@
           </a-select-option>
         </a-select>
 
-        <br>
-        <br>
+        <br />
+        <br />
 
         <h3>Select (:full-width=true)</h3>
 
@@ -158,7 +204,9 @@
           </a-select>
         </div>
 
-        <div style="width:250px; border: 1px dashed grey; padding: 4px; float: left; margin-left: 12px;">
+        <div
+          style="width:250px; border: 1px dashed grey; padding: 4px; float: left; margin-left: 12px;"
+        >
           <a-select default-value="lucy" :full-width="true">
             <a-select-option value="jack">
               Jack
@@ -170,9 +218,9 @@
         </div>
       </div>
 
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
       <h2>Buttons</h2>
       <div style="padding: 10px;">
         <a-button type="primary">Primary</a-button>
@@ -183,8 +231,8 @@
         <a-button type="danger">Danger</a-button>
         <a-button type="link">Link</a-button>
 
-        <br>
-        <br>
+        <br />
+        <br />
         <h3>Button Group</h3>
 
         <a-radio-group default-value="1" size="default">
@@ -193,9 +241,10 @@
           <a-radio-button value="3">Very long option.....</a-radio-button>
         </a-radio-group>
 
-        <div style="width:500px; border: 1px dashed grey; padding: 4px; display: inline-block; margin-left: 12px;">
-          <a-radio-group default-value="1"
-                         :full-width="true">
+        <div
+          style="width:500px; border: 1px dashed grey; padding: 4px; display: inline-block; margin-left: 12px;"
+        >
+          <a-radio-group default-value="1" :full-width="true">
             <a-radio-button value="1">1</a-radio-button>
             <a-radio-button value="2">test</a-radio-button>
             <a-radio-button value="3">Very long option.....</a-radio-button>
@@ -203,15 +252,14 @@
         </div>
       </div>
 
-
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Button a[href]</h2>
       <a href="#" class="ant-btn"><span>Ссылка</span></a>
       <a href="#" class="ant-btn" disabled><span>Ссылка неактивная</span></a>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Dropdown</h2>
       <table class="conf">
         <tr>
@@ -251,7 +299,7 @@
           </td>
           <td>
             <a-dropdown :trigger="['click']">
-              <a-button type="link">Фильтр <a-icon type="down" /></a-button>
+              <a-button type="link">Фильтр <a-icon type="down"/></a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
@@ -288,20 +336,26 @@
         </tr>
       </table>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>For CRM</h2>
       <p>Тут у нас разнородные компоненты должны выглядеть +/- одинаково: Dropdown и Popover.</p>
-      <a-select default-value="1" size="small" :dropdownMatchSelectWidth="false" :showSearch="true">
-        <a-icon slot="menuItemSelectedIcon" type="smile" />
+      <a-select
+        default-value="1"
+        size="small"
+        :dropdownMatchSelectWidth="false"
+        :showSearch="true"
+        :menu-icon="true"
+      >
+        <a-icon slot="menuItemSelectedIcon" type="check" />
         <a-select-option value="1">Сайт 1</a-select-option>
         <a-select-option value="2222">Сайт 2222</a-select-option>
       </a-select>
       <div style="display: inline-block; width: 200px">
-        <a-range-picker size="small"/>
+        <a-range-picker size="small" />
       </div>
-      <a-popover placement="bottom" trigger="click">
-        <a-button size="small" type="link">Статусы <a-icon type="down" /></a-button>
+      <a-popover placement="bottomLeft" trigger="click" :arrow="false">
+        <a-button size="small" type="link">Статусы <a-icon type="down"/></a-button>
         <template slot="title">
           <span>Статусы для отображения:</span>
         </template>
@@ -309,8 +363,8 @@
           <a-checkbox-group :options="['Новый', 'В работе']"></a-checkbox-group>
         </template>
       </a-popover>
-      <a-popover placement="bottom" trigger="click">
-        <a-button size="small" type="link">Типы <a-icon type="down" /></a-button>
+      <a-popover placement="bottomLeft" trigger="click" :arrow="false">
+        <a-button size="small" type="link">Типы <a-icon type="down"/></a-button>
         <template slot="title">
           <span>Типы заявок:</span>
         </template>
@@ -330,8 +384,8 @@
       </a-dropdown>
       <a-button icon="plus" type="primary" size="small">Создать заявку</a-button>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Tabs</h2>
       <a-tabs default-active-key="1">
         <a-tab-pane key="1" tab="Tab 1">
@@ -348,8 +402,8 @@
         </a-tab-pane>
       </a-tabs>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Tabs (new style)</h2>
       <a-tabs default-active-key="1" :new-style="true">
         <a-tab-pane key="1" tab="Tab 1">
@@ -366,8 +420,8 @@
         </a-tab-pane>
       </a-tabs>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Popover</h2>
       <div style="padding: 50px 200px;">
         <table class="conf">
@@ -412,16 +466,18 @@
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><a-popover placement="leftTop">
-              <template slot="content">
-                <p>Content</p>
-                <p>Content</p>
-              </template>
-              <template slot="title">
-                <span>Title</span>
-              </template>
-              <a-button>LT</a-button>
-            </a-popover></td>
+            <td>
+              <a-popover placement="leftTop">
+                <template slot="content">
+                  <p>Content</p>
+                  <p>Content</p>
+                </template>
+                <template slot="title">
+                  <span>Title</span>
+                </template>
+                <a-button>LT</a-button>
+              </a-popover>
+            </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -539,8 +595,8 @@
         </table>
       </div>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <h2>Tooltip</h2>
       <div style="padding: 50px 200px;">
         <table class="conf">
@@ -576,7 +632,7 @@
             <td>
               <a-tooltip placement="leftTop">
                 <template slot="title">
-                  <span>prompt<br/>text</span>
+                  <span>prompt<br />text</span>
                 </template>
                 <a-button>LT</a-button>
               </a-tooltip>
@@ -587,7 +643,7 @@
             <td>
               <a-tooltip placement="rightTop">
                 <template slot="title">
-                  <span>prompt<br/>text</span>
+                  <span>prompt<br />text</span>
                 </template>
                 <a-button>RT</a-button>
               </a-tooltip>
@@ -618,7 +674,7 @@
             <td>
               <a-tooltip placement="leftBottom">
                 <template slot="title">
-                  <span>prompt<br/>text</span>
+                  <span>prompt<br />text</span>
                 </template>
                 <a-button>LB</a-button>
               </a-tooltip>
@@ -629,7 +685,7 @@
             <td>
               <a-tooltip placement="rightBottom">
                 <template slot="title">
-                  <span>prompt<br/>text</span>
+                  <span>prompt<br />text</span>
                 </template>
                 <a-button>RB</a-button>
               </a-tooltip>
@@ -665,8 +721,8 @@
           </tr>
         </table>
       </div>
-      <br/>
-      <br/>
+      <br />
+      <br />
 
       <h2>Popover/Tooltip without arrow</h2>
       <div style="padding: 50px 200px 100px;">
@@ -688,7 +744,6 @@
           <a-button>BR</a-button>
         </a-tooltip>
       </div>
-
     </div>
   </div>
 </template>

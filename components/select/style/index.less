@@ -35,7 +35,7 @@
 .@{select-prefix-cls} {
   .reset-component;
   @tmp-icon-size: @input-font-size-base;
-  @tmp-icon-indent: round((@input-height-base - 2*@input-border-width - @tmp-icon-size)/2);
+  @tmp-icon-indent: round((@input-height-base - 2 * @input-border-width - @tmp-icon-size)/2);
 
   position: relative;
   display: inline-block;
@@ -127,7 +127,7 @@
 
   &-disabled &-selection {
     background: @input-disabled-bg;
-    cursor: not-allowed;
+    cursor: default;
     &:hover,
     &:focus,
     &:active {
@@ -157,7 +157,7 @@
     cursor: pointer;
 
     .@{select-prefix-cls}-selection__rendered {
-      margin-right: @tmp-icon-size + 1.5*@tmp-icon-indent;
+      margin-right: @tmp-icon-size + 1.5 * @tmp-icon-indent;
     }
   }
 
@@ -185,7 +185,7 @@
 
   &-lg {
     @tmp-icon-size-lg: @input-font-size-lg;
-    @tmp-icon-indent-lg: round((@input-height-lg - 2*@input-border-width - @tmp-icon-size-lg)/2);
+    @tmp-icon-indent-lg: round((@input-height-lg - 2 * @input-border-width - @tmp-icon-size-lg)/2);
     font-size: @input-font-size-lg;
 
     .@{select-prefix-cls}-selection--single {
@@ -193,7 +193,7 @@
     }
     .@{select-prefix-cls}-selection__rendered {
       margin-left: @input-padding-horizontal-lg;
-      margin-right: @tmp-icon-size-lg + 1.5*@tmp-icon-indent-lg;
+      margin-right: @tmp-icon-size-lg + 1.5 * @tmp-icon-indent-lg;
       line-height: @input-height-lg - 2px;
     }
     .@{select-prefix-cls}-selection--multiple {
@@ -221,7 +221,7 @@
 
   &-sm {
     @tmp-icon-size-sm: @input-font-size-sm;
-    @tmp-icon-indent-sm: round((@input-height-sm - 2*@input-border-width - @tmp-icon-size-sm)/2);
+    @tmp-icon-indent-sm: round((@input-height-sm - 2 * @input-border-width - @tmp-icon-size-sm)/2);
     font-size: @input-font-size-sm;
 
     .@{select-prefix-cls}-selection--single {
@@ -229,7 +229,7 @@
     }
     .@{select-prefix-cls}-selection__rendered {
       margin-left: @input-padding-horizontal-sm;
-      margin-right: @tmp-icon-size-sm + 1.5*@tmp-icon-indent-sm;
+      margin-right: @tmp-icon-size-sm + 1.5 * @tmp-icon-indent-sm;
       line-height: @input-height-sm - 2px;
     }
     .@{select-prefix-cls}-selection--multiple {
@@ -472,7 +472,8 @@
   background-color: @select-dropdown-bg;
   border-radius: @border-radius-base;
   outline: none;
-  box-shadow: @box-shadow-base;
+  box-shadow: @base-popovers-shadow;
+  border: 1px solid darken(@select-dropdown-bg, 9%);
 
   &.slide-up-enter.slide-up-enter-active&-placement-bottomLeft,
   &.slide-up-appear.slide-up-appear-active&-placement-bottomLeft {
@@ -532,7 +533,7 @@
       display: block;
       padding: @select-dropdown-vertical-padding @control-padding-horizontal;
       overflow: hidden;
-      color: @text-color;
+      color: @dropdown-text-color;
       font-weight: normal;
       font-size: @select-dropdown-font-size;
       line-height: @select-dropdown-line-height;
@@ -542,7 +543,7 @@
       transition: background 0.3s ease;
 
       &:hover:not(&-disabled) {
-        background-color: @item-hover-bg;
+        background-color: rgba(0, 0, 0, 0.035);
       }
 
       &:first-child {
@@ -558,23 +559,23 @@
       }
 
       &-selected {
-        color: @text-color;
-        font-weight: @select-item-selected-font-weight;
-        background-color: @select-item-selected-bg;
+        color: @dropdown-text-color;
+        //font-weight: @select-item-selected-font-weight;
+        //background-color: @select-item-selected-bg;
       }
 
       &-disabled {
         color: @disabled-color;
-        cursor: not-allowed;
+        cursor: default;
 
         &:hover {
           color: @disabled-color;
-          cursor: not-allowed;
+          cursor: default;
         }
       }
 
       &-active:not(&-disabled) {
-        background-color: @select-item-active-bg;
+        //background-color: @select-item-active-bg;
       }
 
       &-divider {
@@ -603,7 +604,7 @@
       }
 
       &:hover .@{select-prefix-cls}-selected-icon {
-        color: fade(@black, 87%);
+        display: none;
       }
 
       &-disabled .@{select-prefix-cls}-selected-icon {

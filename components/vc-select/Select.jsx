@@ -1545,22 +1545,6 @@ const Select = {
       return null;
     },
 
-    selectionRefClick() {
-      //e.stopPropagation();
-      if (!this.disabled) {
-        const input = this.getInputDOMNode();
-        if (this._focused && this.$data._open) {
-          // this._focused = false;
-          this.setOpenState(false, false);
-          input && input.blur();
-        } else {
-          this.clearBlurTime();
-          //this._focused = true;
-          this.setOpenState(true, true);
-          input && input.focus();
-        }
-      }
-    },
     selectionRefFocus(e) {
       if (this._focused || this.disabled || isMultipleOrTagsOrCombobox(this.$props)) {
         e.preventDefault();
@@ -1695,7 +1679,6 @@ const Select = {
           tabIndex={props.disabled ? -1 : props.tabIndex}
           onBlur={this.selectionRefBlur}
           onFocus={this.selectionRefFocus}
-          onClick={this.selectionRefClick}
           onKeydown={isMultipleOrTagsOrCombobox(props) ? noop : this.onKeyDown}
         >
           <div {...selectionProps}>

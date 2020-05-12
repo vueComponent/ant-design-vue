@@ -121,7 +121,7 @@
         <br>
         <br>
 
-        <h3>Select (menu-icon)</h3>
+        <h3>Select (:menu-icon=true)</h3>
 
         <a-select default-value="lucy" style="width: 120px" :menu-icon="true">
           <a-icon slot="menuItemSelectedIcon" type="smile"/>

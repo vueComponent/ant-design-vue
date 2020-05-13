@@ -162,6 +162,7 @@ const Select = {
       ...state,
       _mirrorInputValue: state._inputValue, // https://github.com/vueComponent/ant-design-vue/issues/1458
       ...this.getDerivedStateFromProps(props, state),
+      _preventNextArrowClick: false,
     };
   },
 
@@ -519,7 +520,7 @@ const Select = {
       }
     },
 
-    onArrowFocus(e) {
+    onArrowFocus() {
       this._preventNextArrowClick = true;
 
       this.clearBlurTime();

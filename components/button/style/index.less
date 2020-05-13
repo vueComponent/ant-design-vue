@@ -208,3 +208,27 @@
     vertical-align: top;
   }
 }
+
+// Filter style
+.@{btn-prefix-cls}.is-filter {
+  background: none;
+  padding: 0 16px 0 0;
+  box-shadow: none;
+  color: @text-color;
+
+  .@{iconfont-css-prefix} {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -6px;
+  }
+
+  &:hover span {
+    color: @primary-color;
+  }
+
+  .@{iconfont-css-prefix} svg {
+    color: @disabled-color;
+    transition: transform 0.3s;
+  }
+}

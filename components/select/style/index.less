@@ -632,3 +632,26 @@
     }
   }
 }
+
+// Filter style
+.@{select-prefix-cls}.is-filter {
+  .@{select-prefix-cls}-selection {
+    border: 1px solid transparent;
+  }
+
+  .@{select-prefix-cls}-selection__rendered {
+    margin: 0 16px 0 0;
+  }
+
+  .@{select-prefix-cls}-arrow {
+    right: 0;
+  }
+
+  .@{select-prefix-cls}-selection-selected-value {
+    color: @text-color;
+  }
+
+  &:hover .@{select-prefix-cls}-selection-selected-value {
+    color: @primary-color;
+  }
+}

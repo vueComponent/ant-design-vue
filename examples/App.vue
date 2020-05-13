@@ -167,9 +167,9 @@
         <br />
         <br />
 
-        <h3>Select (:menu-icon=true)</h3>
+        <h3>Select (:show-selected-icon=true)</h3>
 
-        <a-select default-value="lucy" style="width: 120px" :menu-icon="true">
+        <a-select default-value="lucy" style="width: 120px" :show-selected-icon="true">
           <a-icon slot="menuItemSelectedIcon" type="smile" />
           <a-select-option value="jack">
             Jack
@@ -179,7 +179,7 @@
           </a-select-option>
         </a-select>
 
-        <a-select default-value="lucy" style="width: 120px" :menu-icon="true">
+        <a-select default-value="lucy" style="width: 120px" :show-selected-icon="true">
           <a-select-option value="jack">
             Jack
           </a-select-option>
@@ -341,20 +341,17 @@
       <h2>For CRM</h2>
       <p>Тут у нас разнородные компоненты должны выглядеть +/- одинаково: Dropdown и Popover.</p>
       <a-select
+        class="is-filter"
         default-value="1"
         size="small"
         :dropdownMatchSelectWidth="false"
-        :showSearch="true"
-        :menu-icon="true"
+        :show-selected-icon="true"
       >
         <a-icon slot="menuItemSelectedIcon" type="check" />
         <a-select-option value="1">Сайт 1</a-select-option>
         <a-select-option value="2222">Сайт 2222</a-select-option>
       </a-select>
-      <div style="display: inline-block; width: 200px">
-        <a-range-picker size="small" />
-      </div>
-      <a-popover placement="bottomLeft" trigger="click" :arrow="false">
+      <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
         <a-button size="small" type="link">Статусы <a-icon type="down"/></a-button>
         <template slot="title">
           <span>Статусы для отображения:</span>
@@ -363,7 +360,7 @@
           <a-checkbox-group :options="['Новый', 'В работе']"></a-checkbox-group>
         </template>
       </a-popover>
-      <a-popover placement="bottomLeft" trigger="click" :arrow="false">
+      <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
         <a-button size="small" type="link">Типы <a-icon type="down"/></a-button>
         <template slot="title">
           <span>Типы заявок:</span>
@@ -374,6 +371,9 @@
           <a-checkbox>Корзина</a-checkbox>
         </template>
       </a-popover>
+      <div style="display: inline-block; width: 200px">
+        <a-range-picker size="small" />
+      </div>
       <a-dropdown :trigger="['click']">
         <a-button icon="ellipsis" type="secondary" size="small"></a-button>
         <a-menu slot="overlay">

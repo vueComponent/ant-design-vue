@@ -43,7 +43,7 @@ const AbstractSelectProps = () => ({
   dropdownRender: PropTypes.func,
   loading: PropTypes.bool,
   fullWidth: PropTypes.bool.def(false),
-  menuIcon: PropTypes.bool.def(false),
+  showSelectedIcon: PropTypes.bool.def(false),
 });
 const Value = PropTypes.shape({
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -241,7 +241,7 @@ const Select = {
         removeIcon: finalRemoveIcon,
         clearIcon: finalClearIcon,
         menuItemSelectedIcon: finalMenuItemSelectedIcon,
-        menuIcon: this.menuIcon,
+        menuIcon: this.showSelectedIcon,
         showArrow,
         ...rest,
         ...modeConfig,

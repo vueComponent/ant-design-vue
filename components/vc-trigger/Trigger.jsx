@@ -230,7 +230,7 @@ export default {
       this.clearDelayTimer();
       if (this.isFocusToShow()) {
         this.focusTime = Date.now();
-        this.delaySetPopupVisible(true, this.$props.focusDelay);
+        if (!this.$data.sPopupVisible) this.delaySetPopupVisible(true, this.$props.focusDelay);
       }
     },
 

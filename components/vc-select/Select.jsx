@@ -507,6 +507,21 @@ const Select = {
     onArrowClick(e) {
       e.stopPropagation();
       e.preventDefault();
+
+      if (this._preventNextArrowClick) {
+        this._preventNextArrowClick = false;
+        return;
+      }
+
+      this.clearBlurTime();
+      if (!this.disabled) {
+        this.setOpenState(!this.$data._open, { needFocus: !this.$data._open });
+      }
+    },
+
+    onArrowFocus(e) {
+      this._preventNextArrowClick = true;
+
       this.clearBlurTime();
       if (!this.disabled) {
         this.setOpenState(!this.$data._open, { needFocus: !this.$data._open });
@@ -1498,11 +1513,13 @@ const Select = {
       );
       return (
         <span
+          tabIndex="-1"
           key="arrow"
           class={`${prefixCls}-arrow`}
           style={UNSELECTABLE_STYLE}
           {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
           onClick={this.onArrowClick}
+          onFocus={this.onArrowFocus}
           ref="arrow"
         >
           {inputIcon || defaultIcon}

@@ -168,17 +168,11 @@ export default {
       );
     }
 
-    const buttonNode = (
+    return (
       <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
         {iconNode}
         {kids}
       </button>
     );
-
-    if (type === 'link') {
-      return buttonNode;
-    }
-
-    return <Wave>{buttonNode}</Wave>;
   },
 };

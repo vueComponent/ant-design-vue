@@ -137,9 +137,7 @@ export default {
       appear: false,
     });
     return (
-      <Wave>
-        <transition {...transitionProps}>{tag}</transition>
-      </Wave>
+      <transition {...transitionProps}>{tag}</transition>
     );
   },
 };

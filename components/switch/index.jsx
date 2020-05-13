@@ -75,9 +75,7 @@ const Switch = {
       ref: 'refSwitchNode',
     };
     return (
-      <Wave insertExtraNode>
-        <VcSwitch {...switchProps} />
-      </Wave>
+      <VcSwitch {...switchProps} />
     );
   },
 };

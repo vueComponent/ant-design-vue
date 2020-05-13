@@ -129,6 +129,9 @@ export function cloneElement(n, nodeProps = {}, deep) {
       node.componentOptions.children = children;
     }
   } else {
+    if (children) {
+      node.children = children;
+    }
     node.data.on = { ...(node.data.on || {}), ...on };
   }
 

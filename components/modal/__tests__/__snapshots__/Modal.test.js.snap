@@ -21,7 +21,6 @@ exports[`Modal render correctly 1`] = `
       </div>
     </div>
   </div>
-  <!---->
 </div>
 `;
 
@@ -46,7 +45,6 @@ exports[`Modal render correctly 2`] = `
       </div>
     </div>
   </div>
-  <!---->
 </div>
 `;
 
@@ -68,6 +66,5 @@ exports[`Modal render without footer 1`] = `
       </div>
     </div>
   </div>
-  <!---->
 </div>
 `;

@@ -263,11 +263,10 @@ export default {
         );
       }
 
-      const style = { ...this.dialogStyle, ...dest };
+      const style = dest;
       const sentinelStyle = { width: 0, height: 0, overflow: 'hidden' };
       const cls = {
         [prefixCls]: true,
-        ...this.dialogClass,
       };
       const transitionName = this.getTransitionName();
       const dialogElement = (

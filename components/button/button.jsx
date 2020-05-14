@@ -152,7 +152,7 @@ export default {
       },
     };
     const iconType = sLoading ? 'loading' : icon;
-    const iconNode = iconType ? <Icon type={iconType} /> : null;
+    const iconNode = iconType ? <Icon type={iconType} /> : $slots.icon;
     const children = filterEmpty($slots.default);
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>

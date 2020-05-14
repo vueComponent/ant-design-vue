@@ -5,7 +5,7 @@ import contains from '../vc-util/Dom/contains';
 import {
   hasProp,
   getComponentFromProp,
-  getEvents,
+  getDataEvents,
   filterEmpty,
   getListeners,
 } from '../_util/props-util';
@@ -595,48 +595,48 @@ export default {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true);
     }
     const child = children[0];
-    this.childOriginEvents = getEvents(child);
+    this.childOriginEvents = getDataEvents(child);
     const newChildProps = {
       props: {},
-      on: {},
+      nativeOn: {},
       key: 'trigger',
     };
 
     if (this.isContextmenuToShow()) {
-      newChildProps.on.contextmenu = this.onContextmenu;
+      newChildProps.nativeOn.contextmenu = this.onContextmenu;
     } else {
-      newChildProps.on.contextmenu = this.createTwoChains('contextmenu');
+      newChildProps.nativeOn.contextmenu = this.createTwoChains('contextmenu');
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {
-      newChildProps.on.click = this.onClick;
-      newChildProps.on.mousedown = this.onMousedown;
-      newChildProps.on.touchstart = this.onTouchstart;
+      newChildProps.nativeOn.click = this.onClick;
+      newChildProps.nativeOn.mousedown = this.onMousedown;
+      newChildProps.nativeOn.touchstart = this.onTouchstart;
     } else {
-      newChildProps.on.click = this.createTwoChains('click');
-      newChildProps.on.mousedown = this.createTwoChains('mousedown');
-      newChildProps.on.touchstart = this.createTwoChains('onTouchstart');
+      newChildProps.nativeOn.click = this.createTwoChains('click');
+      newChildProps.nativeOn.mousedown = this.createTwoChains('mousedown');
+      newChildProps.nativeOn.touchstart = this.createTwoChains('onTouchstart');
     }
     if (this.isMouseEnterToShow()) {
-      newChildProps.on.mouseenter = this.onMouseenter;
+      newChildProps.nativeOn.mouseenter = this.onMouseenter;
       if (alignPoint) {
-        newChildProps.on.mousemove = this.onMouseMove;
+        newChildProps.nativeOn.mousemove = this.onMouseMove;
       }
     } else {
-      newChildProps.on.mouseenter = this.createTwoChains('mouseenter');
+      newChildProps.nativeOn.mouseenter = this.createTwoChains('mouseenter');
     }
     if (this.isMouseLeaveToHide()) {
-      newChildProps.on.mouseleave = this.onMouseleave;
+      newChildProps.nativeOn.mouseleave = this.onMouseleave;
     } else {
-      newChildProps.on.mouseleave = this.createTwoChains('mouseleave');
+      newChildProps.nativeOn.mouseleave = this.createTwoChains('mouseleave');
     }
 
     if (this.isFocusToShow() || this.isBlurToHide()) {
-      newChildProps.on.focus = this.onFocus;
-      newChildProps.on.blur = this.onBlur;
+      newChildProps.nativeOn.focus = this.onFocus;
+      newChildProps.nativeOn.blur = this.onBlur;
     } else {
-      newChildProps.on.focus = this.createTwoChains('focus');
-      newChildProps.on.blur = e => {
+      newChildProps.nativeOn.focus = this.createTwoChains('focus');
+      newChildProps.nativeOn.blur = e => {
         if (e && (!e.relatedTarget || !contains(e.target, e.relatedTarget))) {
           this.createTwoChains('blur')(e);
         }

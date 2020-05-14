@@ -67,7 +67,7 @@ export function cloneElement(n, nodeProps = {}, deep) {
   //   !(node.fnOptions && node.fnOptions.functional),
   //   `can not use cloneElement for functional component (${node.fnOptions && node.fnOptions.name})`,
   // );
-  const { props = {}, key, on = {}, children, directives = [] } = nodeProps;
+  const { props = {}, key, on = {}, nativeOn = {}, children, directives = [] } = nodeProps;
   const data = node.data || {};
   let cls = {};
   let style = {};
@@ -134,6 +134,7 @@ export function cloneElement(n, nodeProps = {}, deep) {
     }
     node.data.on = { ...(node.data.on || {}), ...on };
   }
+  node.data.on = { ...(node.data.on || {}), ...nativeOn };
 
   if (key !== undefined) {
     node.key = key;

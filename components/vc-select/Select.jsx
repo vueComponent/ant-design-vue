@@ -162,7 +162,6 @@ const Select = {
       ...state,
       _mirrorInputValue: state._inputValue, // https://github.com/vueComponent/ant-design-vue/issues/1458
       ...this.getDerivedStateFromProps(props, state),
-      _preventNextArrowClick: false,
     };
   },
 
@@ -502,30 +501,6 @@ const Select = {
       }
       if (this.autoClearSearchValue) {
         this.setInputValue('');
-      }
-    },
-
-    onArrowClick(e) {
-      e.stopPropagation();
-      e.preventDefault();
-
-      if (this._preventNextArrowClick) {
-        this._preventNextArrowClick = false;
-        return;
-      }
-
-      this.clearBlurTime();
-      if (!this.disabled) {
-        this.setOpenState(!this.$data._open, { needFocus: !this.$data._open });
-      }
-    },
-
-    onArrowFocus() {
-      this._preventNextArrowClick = true;
-
-      this.clearBlurTime();
-      if (!this.disabled) {
-        this.setOpenState(!this.$data._open, { needFocus: !this.$data._open });
       }
     },
 
@@ -1514,13 +1489,10 @@ const Select = {
       );
       return (
         <span
-          tabIndex="-1"
           key="arrow"
           class={`${prefixCls}-arrow`}
           style={UNSELECTABLE_STYLE}
           {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
-          onClick={this.onArrowClick}
-          onFocus={this.onArrowFocus}
           ref="arrow"
         >
           {inputIcon || defaultIcon}

@@ -10,6 +10,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import isValid from '../_util/isValid';
 import { ConfigConsumerProps } from '../config-provider';
 import TabBar from './TabBar';
 
@@ -48,10 +49,9 @@ export default {
   methods: {
     removeTab(targetKey, e) {
       e.stopPropagation();
-      if (!targetKey) {
-        return;
+      if(isValid(targetKey)) {
+        this.$emit('edit', targetKey, 'remove');
       }
-      this.$emit('edit', targetKey, 'remove');
     },
     handleChange(activeKey) {
       this.$emit('change', activeKey);

@@ -10,6 +10,21 @@
 
 ---
 
+## 1.6.0
+
+`2020-05-15`
+
+- 🌟 Tootip 支持自定义组件 [741897](https://github.com/vueComponent/ant-design-vue/commit/741897be6742c752f0b0d29481add702ee7e7fb0)
+- 🐞 重构 Modal、Drawer 底层 Portal 组件，解决 Modal、Drawer 内容更新延迟问题 [#2244](https://github.com/vueComponent/ant-design-vue/issues/2244)
+- 🐞 修复 Input.Group 中 Select 选项 focus 边框样式 [#2224](https://github.com/vueComponent/ant-design-vue/pull/2224)
+- 🐞 修复 Cascader 选项图标禁用时的颜色 [#2223](https://github.com/vueComponent/ant-design-vue/pull/2223)
+- 🐞 修复 DatePicker 分隔符禁用时颜色 [#2222](https://github.com/vueComponent/ant-design-vue/pull/2222)
+- 🐞 修复 Carousel 键盘切换到非活跃 slide 上的 Radio/Checkbox 的问题。
+- 🐞 修复 Table 筛选菜单在 less 版本为 `2.x` 时不显示的问题。[#23272](https://github.com/ant-design/ant-design/pull/23272)
+- 🐞 修复 Table `column.filtered` 失效的问题。
+- 🐞 修复 Select `multiple` 模式下，Input 在 Safari 浏览器的样式问题。[#22586](https://github.com/ant-design/ant-design/pull/22586)
+- 🐞 修复 Descriptions 在小尺寸下无法自适应的问题。[#22407](https://github.com/ant-design/ant-design/pull/22407)
+
 ## 1.5.6
 
 `2020-05-09`

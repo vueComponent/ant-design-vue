@@ -1,5 +1,4 @@
 import Modal from '..';
-import { asyncExpect } from '@/tests/utils';
 import { sleep } from '../../../tests/utils';
 const { confirm } = Modal;
 

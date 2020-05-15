@@ -10,6 +10,22 @@
 
 ---
 
+
+## 1.6.0
+
+`2020-05-15`
+
+- 🌟 Tootip supports custom components [741897](https://github.com/vueComponent/ant-design-vue/commit/741897be6742c752f0b0d29481add702ee7e7fb0)
+- 🐞 Refactor Modal's underlying Portal components to solve the problem of delayed content update in Modal [#2244](https://github.com/vueComponent/ant-design-vue/issues/2244)
+- 🐞 Fix Select option focus border style in Input.Group [#2224](https://github.com/vueComponent/ant-design-vue/pull/2224)
+- 🐞 Fix Cascader option icon color when disabled [#2223](https://github.com/vueComponent/ant-design-vue/pull/2223)
+- 🐞 Fix DatePicker color when separator is disabled [#2222](https://github.com/vueComponent/ant-design-vue/pull/2222)
+- 🐞 Fix Carousel keyboard switch to Radio / Checkbox on inactive slide.
+- 🐞 Fix the problem that Table filter menu is not displayed when less version is `2.x`. [#23272](https://github.com/ant-design/ant-design/pull/23272)
+- 🐞 Fix the failure of Table `column.filtered`.
+- 🐞 Fix the style problem of Input in Safari browser in Select `multiple` mode. [#22586](https://github.com/ant-design/ant-design/pull/22586)
+- 🐞 Fix the problem that Descriptions can not adapt in small size. [#22407](https://github.com/ant-design/ant-design/pull/22407)
+
 ## 1.5.6
 
 `2020-05-09`
@@ -205,7 +221,7 @@
 
 `2019-11-27`
 
-- 🌟 `getPopupContainer` of`ConfigProvider` Added popup context as the second parameter for uniform configuration of `getPopupContainer` in`Modal` [7a3c88] (https://github.com/vueComponent/ant-design -vue / commit / 7a3c88107598b4b1cf6842d3254b43dc26103c14)
+- 🌟 `getPopupContainer` of`ConfigProvider` Added popup context as the second parameter for uniform configuration of `getPopupContainer` in`Modal` [7a3c88](https://github.com/vueComponent/ant-design -vue / commit / 7a3c88107598b4b1cf6842d3254b43dc26103c14)
 - 🐞 Fix `ConfigProvider` reporting error in Vue 2.5 [309baa](https://github.com/vueComponent/ant-design-vue/commit/309baa138a9c9a1885c17ef636c9132349024359)
 - 🐞 Fix `Menu` click event is triggered twice [#1450](https://github.com/vueComponent/ant-design-vue/issues/1427)
 - 🐞 Fix incorrect width of input box in `Select` [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458)

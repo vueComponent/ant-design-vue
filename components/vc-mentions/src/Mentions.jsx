@@ -72,8 +72,8 @@ const Mentions = {
       }
       this.$emit('change', value);
     },
-    onChange({ target: { value, composing } }) {
-      if (composing) return;
+    onChange({ target: { value, composing }, isComposing }) {
+      if (isComposing || composing) return;
       this.triggerChange(value);
     },
     onKeyDown(event) {

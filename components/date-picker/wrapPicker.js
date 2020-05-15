@@ -1,26 +1,11 @@
 import TimePickerPanel from '../vc-time-picker/Panel';
 import classNames from 'classnames';
-import * as moment from 'moment';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
-import interopDefault from '../_util/interopDefault';
 import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import warning from '../_util/warning';
-
-function checkValidate(value, propName) {
-  const values = Array.isArray(value) ? value : [value];
-  values.forEach(val => {
-    if (!val) return;
-
-    warning(
-      !interopDefault(moment).isMoment(val) || val.isValid(),
-      'DatePicker',
-      `\`${propName}\` provides invalidate moment time. If you want to set empty value, use \`null\` instead.`,
-    );
-  });
-}
+import { checkValidate, stringToMoment, momentToString } from '../_util/moment-util';
 
 const DEFAULT_FORMAT = {
   date: 'YYYY-MM-DD',
@@ -74,9 +59,9 @@ export default function wrapPicker(Picker, props, pickerType) {
       };
     },
     mounted() {
-      const { autoFocus, disabled, value, defaultValue } = this;
-      checkValidate(defaultValue, 'defaultValue');
-      checkValidate(value, 'value');
+      const { autoFocus, disabled, value, defaultValue, valueFormat } = this;
+      checkValidate('DatePicker', defaultValue, 'defaultValue', valueFormat);
+      checkValidate('DatePicker', value, 'value', valueFormat);
       if (autoFocus && !disabled) {
         this.$nextTick(() => {
           this.focus();
@@ -85,7 +70,7 @@ export default function wrapPicker(Picker, props, pickerType) {
     },
     watch: {
       value(val) {
-        checkValidate(val, 'value');
+        checkValidate('DatePicker', val, 'value', this.valueFormat);
       },
     },
     methods: {
@@ -123,7 +108,23 @@ export default function wrapPicker(Picker, props, pickerType) {
       handleMouseLeave(e) {
         this.$emit('mouseleave', e);
       },
-
+      handleChange(date, dateString) {
+        this.$emit(
+          'change',
+          this.valueFormat ? momentToString(date, this.valueFormat) : date,
+          dateString,
+        );
+      },
+      handleOk(val) {
+        this.$emit('ok', this.valueFormat ? momentToString(val, this.valueFormat) : val);
+      },
+      handleCalendarChange(date, dateString) {
+        this.$emit(
+          'calendarChange',
+          this.valueFormat ? momentToString(date, this.valueFormat) : date,
+          dateString,
+        );
+      },
       focus() {
         this.$refs.picker.focus();
       },
@@ -132,8 +133,21 @@ export default function wrapPicker(Picker, props, pickerType) {
         this.$refs.picker.blur();
       },
 
+      transformValue(props) {
+        if ('value' in props) {
+          props.value = stringToMoment(props.value, this.valueFormat);
+        }
+        if ('defaultValue' in props) {
+          props.defaultValue = stringToMoment(props.defaultValue, this.valueFormat);
+        }
+        if ('defaultPickerValue' in props) {
+          props.defaultPickerValue = stringToMoment(props.defaultPickerValue, this.valueFormat);
+        }
+      },
+
       renderPicker(locale, localeCode) {
         const props = getOptionProps(this);
+        this.transformValue(props);
         const {
           prefixCls: customizePrefixCls,
           inputPrefixCls: customizeInputPrefixCls,
@@ -203,6 +217,9 @@ export default function wrapPicker(Picker, props, pickerType) {
             blur: this.handleBlur,
             mouseenter: this.handleMouseEnter,
             mouseleave: this.handleMouseLeave,
+            change: this.handleChange,
+            ok: this.handleOk,
+            calendarChange: this.handleCalendarChange,
           },
           ref: 'picker',
           scopedSlots: this.$scopedSlots || {},

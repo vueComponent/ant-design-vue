@@ -60,7 +60,9 @@ exports[`renders ./antdv-demo/docs/list/demo/grid.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 1</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -72,7 +74,9 @@ exports[`renders ./antdv-demo/docs/list/demo/grid.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 2</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -84,7 +88,9 @@ exports[`renders ./antdv-demo/docs/list/demo/grid.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 3</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -96,7 +102,9 @@ exports[`renders ./antdv-demo/docs/list/demo/grid.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 4</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -173,7 +181,9 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 1</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -185,7 +195,9 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 2</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -197,7 +209,9 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 3</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -209,7 +223,9 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 4</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -221,7 +237,9 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 5</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -233,7 +251,9 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
                   <div class="ant-card-head-title">Title 6</div>
                 </div>
               </div>
-              <div class="ant-card-body">Card content</div>
+              <div class="ant-card-body">
+                Card content
+              </div>
             </div>
           </div>
         </div>
@@ -245,64 +265,112 @@ exports[`renders ./antdv-demo/docs/list/demo/resposive.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/list/demo/simple.md correctly 1`] = `
 <div>
-  <h3 style="margin-bottom: 16px;">Default Size</h3>
+  <h3 style="margin-bottom: 16px;">
+    Default Size
+  </h3>
   <div class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item">
     <div class="ant-list-header">
-      <div>Header</div>
+      <div>
+        Header
+      </div>
     </div>
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item">Racing car sprays burning fuel into crowd.</li>
-          <li class="ant-list-item">Japanese princess to wed commoner.</li>
-          <li class="ant-list-item">Australian walks 100km after outback crash.</li>
-          <li class="ant-list-item">Man charged over missing wedding girl.</li>
-          <li class="ant-list-item">Los Angeles battles huge wildfires.</li>
+          <li class="ant-list-item">
+            Racing car sprays burning fuel into crowd.
+          </li>
+          <li class="ant-list-item">
+            Japanese princess to wed commoner.
+          </li>
+          <li class="ant-list-item">
+            Australian walks 100km after outback crash.
+          </li>
+          <li class="ant-list-item">
+            Man charged over missing wedding girl.
+          </li>
+          <li class="ant-list-item">
+            Los Angeles battles huge wildfires.
+          </li>
         </ul>
       </div>
     </div>
     <div class="ant-list-footer">
-      <div>Footer</div>
+      <div>
+        Footer
+      </div>
     </div>
   </div>
-  <h3 style="margin: 16px 0px;">Small Size</h3>
+  <h3 style="margin: 16px 0px;">
+    Small Size
+  </h3>
   <div class="ant-list ant-list-sm ant-list-split ant-list-bordered ant-list-something-after-last-item">
     <div class="ant-list-header">
-      <div>Header</div>
+      <div>
+        Header
+      </div>
     </div>
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item">Racing car sprays burning fuel into crowd.</li>
-          <li class="ant-list-item">Japanese princess to wed commoner.</li>
-          <li class="ant-list-item">Australian walks 100km after outback crash.</li>
-          <li class="ant-list-item">Man charged over missing wedding girl.</li>
-          <li class="ant-list-item">Los Angeles battles huge wildfires.</li>
+          <li class="ant-list-item">
+            Racing car sprays burning fuel into crowd.
+          </li>
+          <li class="ant-list-item">
+            Japanese princess to wed commoner.
+          </li>
+          <li class="ant-list-item">
+            Australian walks 100km after outback crash.
+          </li>
+          <li class="ant-list-item">
+            Man charged over missing wedding girl.
+          </li>
+          <li class="ant-list-item">
+            Los Angeles battles huge wildfires.
+          </li>
         </ul>
       </div>
     </div>
     <div class="ant-list-footer">
-      <div>Footer</div>
+      <div>
+        Footer
+      </div>
     </div>
   </div>
-  <h3 style="margin: 16px 0px;">Large Size</h3>
+  <h3 style="margin: 16px 0px;">
+    Large Size
+  </h3>
   <div class="ant-list ant-list-lg ant-list-split ant-list-bordered ant-list-something-after-last-item">
     <div class="ant-list-header">
-      <div>Header</div>
+      <div>
+        Header
+      </div>
     </div>
     <div class="ant-spin-nested-loading">
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item">Racing car sprays burning fuel into crowd.</li>
-          <li class="ant-list-item">Japanese princess to wed commoner.</li>
-          <li class="ant-list-item">Australian walks 100km after outback crash.</li>
-          <li class="ant-list-item">Man charged over missing wedding girl.</li>
-          <li class="ant-list-item">Los Angeles battles huge wildfires.</li>
+          <li class="ant-list-item">
+            Racing car sprays burning fuel into crowd.
+          </li>
+          <li class="ant-list-item">
+            Japanese princess to wed commoner.
+          </li>
+          <li class="ant-list-item">
+            Australian walks 100km after outback crash.
+          </li>
+          <li class="ant-list-item">
+            Man charged over missing wedding girl.
+          </li>
+          <li class="ant-list-item">
+            Los Angeles battles huge wildfires.
+          </li>
         </ul>
       </div>
     </div>
     <div class="ant-list-footer">
-      <div>Footer</div>
+      <div>
+        Footer
+      </div>
     </div>
   </div>
 </div>

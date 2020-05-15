@@ -14,7 +14,8 @@
   "plugins": ["markdown"],
   "overrides": [
     {
-      "files": ["**/demo/**"],
+      "files": ["**/demo/*.md"],
+      "processor": "markdown/markdown",
       "rules": {
         "no-console": "off"
       }
@@ -33,6 +34,7 @@
     "vue/require-prop-types": "off",
     "vue/require-default-prop": "off",
     "vue/no-reserved-keys": "off",
+    "vue/comment-directive": "off",
     "vue/prop-name-casing": "off",
     "vue/max-attributes-per-line": [
       2,

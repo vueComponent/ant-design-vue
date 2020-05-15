@@ -119,6 +119,7 @@ const RangeCalendar = {
     renderSidebar: PropTypes.func.def(() => null),
     dateRender: PropTypes.func,
     clearIcon: PropTypes.any,
+    inputReadOnly: PropTypes.bool,
   },
 
   mixins: [BaseMixin, CommonMixin],

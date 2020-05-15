@@ -1,4 +1,4 @@
-const GitHub = require('@octokit/rest');
+const { Octokit } = require('@octokit/rest');
 const Base64 = require('js-base64').Base64;
 const fs = require('fs');
 const fse = require('fs-extra');
@@ -10,7 +10,7 @@ const tag = '3.26.13';
 const clientId = '5f6ccfdc4cdc69f8ba12';
 const clientSecret = process.env.CLIENT_SECRET;
 
-const github = new GitHub();
+const github = new Octokit();
 
 async function syncFiles(data = []) {
   for (const item of data) {

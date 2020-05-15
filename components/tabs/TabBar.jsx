@@ -18,6 +18,7 @@ const TabBar = {
     renderTabBar: PropTypes.func,
     panels: PropTypes.array.def([]),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    tabBarGutter: PropTypes.number,
   },
   render() {
     const {
@@ -71,11 +72,11 @@ const TabBar = {
 
     if (renderTabBar) {
       RenderTabBar = renderTabBar(renderProps, ScrollableInkTabBar);
+      // https://github.com/vueComponent/ant-design-vue/issues/2157
+      return cloneElement(RenderTabBar, renderProps);
     } else {
-      RenderTabBar = <ScrollableInkTabBar {...renderProps} />;
+      return <ScrollableInkTabBar {...renderProps} />;
     }
-
-    return cloneElement(RenderTabBar);
   },
 };
 

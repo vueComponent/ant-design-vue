@@ -100,6 +100,8 @@ const Affix = {
     clearTimeout(this.timeout);
     removeObserveTarget(this);
     this.updatePosition.cancel();
+    // https://github.com/ant-design/ant-design/issues/22683
+    this.lazyUpdatePosition.cancel();
   },
   methods: {
     getOffsetTop() {

@@ -7,17 +7,18 @@ import KeyCode from '../../_util/KeyCode';
 import placements from './picker/placements';
 import Trigger from '../../vc-trigger';
 import moment from 'moment';
-import { setTimeout } from 'timers';
-function isMoment(value) {
-  if (Array.isArray(value)) {
-    return (
-      value.length === 0 || value.findIndex(val => val === undefined || moment.isMoment(val)) !== -1
-    );
-  } else {
-    return value === undefined || moment.isMoment(value);
-  }
-}
-const MomentType = PropTypes.custom(isMoment);
+import isNil from 'lodash/isNil';
+const TimeType = {
+  validator(value) {
+    if (Array.isArray(value)) {
+      return (
+        value.length === 0 || value.findIndex(val => !isNil(val) && !moment.isMoment(val)) === -1
+      );
+    } else {
+      return isNil(value) || moment.isMoment(value);
+    }
+  },
+};
 const Picker = {
   name: 'Picker',
   props: {
@@ -34,8 +35,8 @@ const Picker = {
     defaultOpen: PropTypes.bool.def(false),
     prefixCls: PropTypes.string.def('rc-calendar-picker'),
     placement: PropTypes.any.def('bottomLeft'),
-    value: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
-    defaultValue: PropTypes.oneOfType([MomentType, PropTypes.arrayOf(MomentType)]),
+    value: TimeType,
+    defaultValue: TimeType,
     align: PropTypes.object.def(() => ({})),
     dropdownClassName: PropTypes.string,
     dateRender: PropTypes.func,

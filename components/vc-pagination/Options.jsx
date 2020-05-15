@@ -33,7 +33,7 @@ export default {
     },
     handleChange(e) {
       const { value, composing } = e.target;
-      if (composing || this.goInputText === value) return;
+      if (e.isComposing || composing || this.goInputText === value) return;
       this.setState({
         goInputText: value,
       });

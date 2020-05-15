@@ -4,7 +4,6 @@ import ref from 'vue-ref';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getEvents, getListeners } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
-import ContainerRender from '../../_util/ContainerRender';
 import getScrollBarSize from '../../_util/getScrollBarSize';
 import { IDrawerProps } from './IDrawerPropTypes';
 import KeyCode from '../../_util/KeyCode';
@@ -17,6 +16,7 @@ import {
   transformArguments,
   isNumeric,
 } from './utils';
+import Portal from '../../_util/Portal';
 
 function noop() {}
 
@@ -610,8 +610,9 @@ const Drawer = {
   },
 
   render() {
-    const { getContainer, wrapperClassName } = this.$props;
+    const { getContainer, wrapperClassName, handler, forceRender } = this.$props;
     const open = this.getOpen();
+    let portal = null;
     currentDrawer[this.drawerId] = open ? this.container : open;
     const children = this.getChildToRender(this.sFirstEnter ? open : false);
     if (!getContainer) {
@@ -624,7 +625,7 @@ const Drawer = {
         },
       ];
       return (
-        <div tabIndex={-1} class={wrapperClassName} {...{ directives }}>
+        <div class={wrapperClassName} {...{ directives }}>
           {children}
         </div>
       );
@@ -632,21 +633,12 @@ const Drawer = {
     if (!this.container || (!open && !this.sFirstEnter)) {
       return null;
     }
-    return (
-      <ContainerRender
-        parent={this}
-        visible
-        autoMount
-        autoDestroy={false}
-        getComponent={() => children}
-        getContainer={this.getSelfContainer}
-        children={({ renderComponent, removeContainer }) => {
-          this.renderComponent = renderComponent;
-          this.removeContainer = removeContainer;
-          return null;
-        }}
-      />
-    );
+    // 如果有 handler 为内置强制渲染；
+    const $forceRender = !!handler || forceRender;
+    if ($forceRender || open || this.dom) {
+      portal = <Portal getContainer={this.getSelfContainer} children={children}></Portal>;
+    }
+    return portal;
   },
 };
 

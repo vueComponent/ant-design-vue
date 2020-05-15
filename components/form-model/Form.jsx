@@ -17,6 +17,7 @@ export const FormProps = {
   hideRequiredMark: PropTypes.bool,
   model: PropTypes.object,
   rules: PropTypes.object,
+  validateMessages: PropTypes.any,
   validateOnRuleChange: PropTypes.bool,
 };
 

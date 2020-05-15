@@ -195,7 +195,7 @@ export default {
       }
     },
     handleKeyUp(e) {
-      if (e.target.composing) return;
+      if (e.isComposing || e.target.composing) return;
       const value = this.getValidValue(e);
       const stateCurrentInputValue = this.stateCurrentInputValue;
 

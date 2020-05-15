@@ -33,6 +33,7 @@ const CalendarPart = {
     clearIcon: PropTypes.any,
     dateRender: PropTypes.func,
     inputMode: PropTypes.string,
+    inputReadOnly: PropTypes.bool,
   },
   render() {
     const { $props: props } = this;
@@ -59,6 +60,7 @@ const CalendarPart = {
       showWeekNumber,
       showClear,
       inputMode,
+      inputReadOnly,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const {
@@ -117,6 +119,7 @@ const CalendarPart = {
         onSelect={inputSelect}
         clearIcon={clearIcon}
         inputMode={inputMode}
+        inputReadOnly={inputReadOnly}
       />
     );
     const headerProps = {

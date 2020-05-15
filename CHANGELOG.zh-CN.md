@@ -10,6 +10,69 @@
 
 ---
 
+## 1.6.0
+
+`2020-05-15`
+
+- 🌟 Tootip 支持自定义组件 [741897](https://github.com/vueComponent/ant-design-vue/commit/741897be6742c752f0b0d29481add702ee7e7fb0)
+- 🐞 重构 Modal、Drawer 底层 Portal 组件，解决 Modal、Drawer 内容更新延迟问题 [#2244](https://github.com/vueComponent/ant-design-vue/issues/2244)
+- 🐞 修复 Input.Group 中 Select 选项 focus 边框样式 [#2224](https://github.com/vueComponent/ant-design-vue/pull/2224)
+- 🐞 修复 Cascader 选项图标禁用时的颜色 [#2223](https://github.com/vueComponent/ant-design-vue/pull/2223)
+- 🐞 修复 DatePicker 分隔符禁用时颜色 [#2222](https://github.com/vueComponent/ant-design-vue/pull/2222)
+- 🐞 修复 Carousel 键盘切换到非活跃 slide 上的 Radio/Checkbox 的问题。
+- 🐞 修复 Table 筛选菜单在 less 版本为 `2.x` 时不显示的问题。[#23272](https://github.com/ant-design/ant-design/pull/23272)
+- 🐞 修复 Table `column.filtered` 失效的问题。
+- 🐞 修复 Select `multiple` 模式下，Input 在 Safari 浏览器的样式问题。[#22586](https://github.com/ant-design/ant-design/pull/22586)
+- 🐞 修复 Descriptions 在小尺寸下无法自适应的问题。[#22407](https://github.com/ant-design/ant-design/pull/22407)
+
+## 1.5.6
+
+`2020-05-09`
+
+- 🐞 修复 dist 文件夹丢失 css、min.js 等文件问题
+
+## 1.5.5
+
+`2020-05-08`
+
+- 🐞 修复 `Tabs` 在 safari 13 下不展示问题 [#2199](https://github.com/vueComponent/ant-design-vue/issues/2199)
+- 🐞 修复 `Input` 在 FireFox 下第一次输入失败问题 [#2151](https://github.com/vueComponent/ant-design-vue/issues/2151)
+- 🐞 修复 `Input` 在 Modal 组件中光标移位问题 [#2207](https://github.com/vueComponent/ant-design-vue/issues/2207)
+
+## 1.5.4
+
+`2020-04-30`
+
+- 🌟 `DatePicker` 支持 align 属性，设置弹窗位置 [#1112f2](https://github.com/vueComponent/ant-design-vue/commit/1112f2f791fd64866284ec82def90baefe81e798)
+- 🌟 `DatePicker` 支持 inputReadOnly 属性 [#138eae](https://github.com/vueComponent/ant-design-vue/commit/138eae594dd440ce815e45d811a0778cb3e7583f)
+- 🌟 `DatePicker` `TimePicker` `Calendar` 支持字符串类型的绑定值 [#718](https://github.com/vueComponent/ant-design-vue/issues/718)
+- 🌟 `Table` `ConfigProvider` 新增 `transformCellText` 用于转换表格渲染值, 如对空数据的处理 [#2109](https://github.com/vueComponent/ant-design-vue/issues/2109)
+- 🌟 `FormModel` 新增 validateMessages 属性 [#2130](https://github.com/vueComponent/ant-design-vue/issues/2130)
+- 🌟 优化弹窗动画效果 [#bf52f73](https://github.com/vueComponent/ant-design-vue/commit/bf52f73c5c2f8d05981e426b41a5f46d66e096db)
+- 🐞 修复 `Tabs` 组件的 `tabBarGutter` 属性不生效问题 [#2083](https://github.com/vueComponent/ant-design-vue/issues/2083)
+- 🐞 修复 `Tabs` 组件的 renderTabBar 不生效问题 [#2157](https://github.com/vueComponent/ant-design-vue/issues/2157)
+- 🌟 `Tabs` 组件支持数字 0 作为 key [#2167](https://github.com/vueComponent/ant-design-vue/issues/2167)
+- 🐞 修复 `Input.Search` 组件的样式错位问题 [#2077](https://github.com/vueComponent/ant-design-vue/issues/2077)
+- 🐞 修复 `Slider` 组件的样式错位问题 [#2097](https://github.com/vueComponent/ant-design-vue/issues/2097)
+- 🐞 修复 `Tree.TreeNode` customTitle 作用域插槽无法获取 selected 状态问题 [#2006](https://github.com/vueComponent/ant-design-vue/issues/2006)
+- 🐞 修复 `SelectTree` showSearch 时报错问题 [#2082](https://github.com/vueComponent/ant-design-vue/issues/2082)
+- 🐞 修复 `Badge` dot 状态的原圆点位置不一致问题 [#2121](https://github.com/vueComponent/ant-design-vue/issues/2121)
+
+## 1.5.3
+
+`2020-04-13`
+
+- 🐞 修复 `Dropdown` visible 不变时，内容不响应更新的问题 [#81eb40](https://github.com/vueComponent/ant-design-vue/commit/81eb401a8899aa3fe0acca88340b323f6e09db45)
+
+## 1.5.2
+
+`2020-04-09`
+
+- 🐞 修复 `FormModel` 的 ts 类型未引入 [#1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
+- 🐞 修复 `DatePicker.WeekPicker` 的类型文件错误 [#2044](https://github.com/vueComponent/ant-design-vue/issues/2044)
+- 🐞 修复 `Tabs` tabClick 事件不生效问题 [#2030](https://github.com/vueComponent/ant-design-vue/issues/2030)
+- 🐞 修复 `Table` resize 时报错问题 [#2033](https://github.com/vueComponent/ant-design-vue/issues/2033)
+
 ## 1.5.1
 
 `2020-04-02`
@@ -20,7 +83,7 @@
 - 🐞 修复 `Table` customRender 不能自定义 class style 问题 [#2004](https://github.com/vueComponent/ant-design-vue/pull/2004)
 - 🐞 修复 `Form` 使用 Form.create 时，丢失插槽内容问题 [#1998](https://github.com/vueComponent/ant-design-vue/pull/1998)
 - 🐞 修复 `Textarea` 滚动条闪动问题 [#1964](https://github.com/vueComponent/ant-design-vue/pull/1964)
-- 🌟 添加 `FormModel` 的 ts 类型文件 [#1996](https://github.com/vueComponent/ant-design-vue/pull/1966)
+- 🌟 添加 `FormModel` 的 ts 类型文件 [#1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
 - 🌟 添加 `Modal` 的 destroyAll 类型声明 [#1993](https://github.com/vueComponent/ant-design-vue/pull/1963)
 
 ## 1.5.0

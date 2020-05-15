@@ -323,7 +323,7 @@ const Select = {
     onInputChange(e) {
       const { value: val, composing } = e.target;
       const { _inputValue = '' } = this.$data;
-      if (composing || _inputValue === val) {
+      if (e.isComposing || composing || _inputValue === val) {
         this.setState({
           _mirrorInputValue: val,
         });

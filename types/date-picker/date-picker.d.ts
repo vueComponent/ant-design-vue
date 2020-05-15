@@ -11,7 +11,7 @@ import { WeekPicker } from './week-picker';
 export declare class DatePicker extends DatepickerCommon {
   static RangePicker: typeof RangePicker;
   static MonthPicker: typeof MonthPicker;
-  static WeekPickerker: typeof WeekPicker;
+  static WeekPicker: typeof WeekPicker;
 
   /**
    * Defualt Value
@@ -19,7 +19,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  defaultValue: Moment;
+  defaultValue: Moment | string;
 
   /**
    * Default Picker Value
@@ -27,7 +27,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  defaultPickerValue: Moment;
+  defaultPickerValue: Moment | string;
 
   /**
    * Disabled Time
@@ -77,5 +77,5 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  value: Moment;
+  value: Moment | string;
 }

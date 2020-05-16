@@ -802,7 +802,7 @@
         <a-text strong>Ant Design</a-text>
         <br />
         <br />
-        <a-paragraph :editable="{onChange: (val) => {console.log(val)}}">Test paragraph</a-paragraph>
+        <a-paragraph :editable="{onChange: () => {}}">Test paragraph</a-paragraph>
         <a-paragraph copyable>This is a copyable text.</a-paragraph>
         <a-paragraph :copyable="{text: 'Hello, Ant Design!'}">Replace copy text.</a-paragraph>
 

@@ -103,3 +103,23 @@ by Mottor 💪
     placeholder="icon-position=before" 
     style="width: 200px" />
 ```
+
+9. Добавлены компоненты типографики:
+
+```
+<a-title>h1. Ant Design</a-title>
+<a-title :level="2">h2. Ant Design</a-title>
+<a-title :level="3">h3. Ant Design</a-title>
+<a-title :level="4">h4. Ant Design</a-title>
+
+<a-text>Ant Design</a-text>
+<a-text type="secondary">Ant Design</a-text>
+<a-text type="warning">Ant Design</a-text>
+<a-text type="danger">Ant Design</a-text>
+<a-text disabled>Ant Design</a-text>
+<a-text mark>Ant Design</a-text>
+<a-text code>Ant Design</a-text>
+<a-text underline>Ant Design</a-text>
+<a-text delete>Ant Design</a-text>
+<a-text strong>Ant Design</a-text>
+```

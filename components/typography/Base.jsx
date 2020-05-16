@@ -293,7 +293,7 @@ const Base = {
             onClick={this.onEditClick}
             aria-label={this.editStr}
           >
-            <EditOutline role="button" />
+            <a-icon type="edit"></a-icon>
           </TransButton>
         </Tooltip>
       );
@@ -312,7 +312,7 @@ const Base = {
             onClick={this.onCopyClick}
             aria-label={title}
           >
-            {copied ? <CheckOutline /> : <CopyOutline />}
+            <a-icon type={copied ? 'check' : 'copy'}></a-icon>
           </TransButton>
         </Tooltip>
       );

@@ -781,8 +781,6 @@
         <a-title :level="3">h3. Ant Design</a-title>
         <a-title :level="4">h4. Ant Design</a-title>
         <br>
-        <br>
-        <br>
         <a-text>Ant Design</a-text>
         <br />
         <a-text type="secondary">Ant Design</a-text>
@@ -802,7 +800,6 @@
         <a-text delete>Ant Design</a-text>
         <br />
         <a-text strong>Ant Design</a-text>
-        <br />
         <br />
         <br />
         <a-paragraph :editable="{onChange: (val) => {console.log(val)}}">Test paragraph</a-paragraph>

@@ -2,7 +2,7 @@ import KeyCode from '../_util/KeyCode';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import TextArea from '../input/TextArea';
-import EnterOutlined from '@ant-design/icons-vue/EnterOutlined';
+import {EnterOutline} from '@ant-design/icons/lib/dist.js';
 
 const Editable = {
   mixins: [BaseMixin],
@@ -89,7 +89,7 @@ const Editable = {
           onBlur={this.onBlur}
           autoSize
         />
-        <EnterOutlined class={`${prefixCls}-edit-content-confirm`} />
+        <EnterOutline class={`${prefixCls}-edit-content-confirm`} />
       </div>
     );
   },

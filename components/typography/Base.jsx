@@ -13,9 +13,7 @@ import ResizeObserver from '../vc-resize-observer';
 import Tooltip from '../tooltip';
 import copy from 'copy-to-clipboard';
 import { ConfigConsumerProps } from '../config-provider';
-import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
-import EditOutlined from '@ant-design/icons-vue/EditOutlined';
+import {CheckOutline, CopyOutline, EditOutline} from '@ant-design/icons/lib/dist.js';
 
 const isLineClampSupport = isStyleSupport('webkitLineClamp');
 const isTextOverflowSupport = isStyleSupport('textOverflow');
@@ -295,7 +293,7 @@ const Base = {
             onClick={this.onEditClick}
             aria-label={this.editStr}
           >
-            <EditOutlined role="button" />
+            <EditOutline role="button" />
           </TransButton>
         </Tooltip>
       );
@@ -314,7 +312,7 @@ const Base = {
             onClick={this.onCopyClick}
             aria-label={title}
           >
-            {copied ? <CheckOutlined /> : <CopyOutlined />}
+            {copied ? <CheckOutline /> : <CopyOutline />}
           </TransButton>
         </Tooltip>
       );

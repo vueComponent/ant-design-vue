@@ -122,4 +122,15 @@ by Mottor 💪
 <a-text underline>Ant Design</a-text>
 <a-text delete>Ant Design</a-text>
 <a-text strong>Ant Design</a-text>
+
+<a-paragraph :editable="{onChange: () => {}}">Test paragraph</a-paragraph>
+<a-paragraph copyable>This is a copyable text.</a-paragraph>
+<a-paragraph :copyable="{text: 'Hello, Ant Design!'}">Replace copy text.</a-paragraph>
+
+<a-paragraph :ellipsis="{rows: 3, expandable: true}">
+  Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
+  Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
+  a design language for background applications, is refined by Ant UED Team. Ant Design, a
+  design language for background applications, is refined by Ant UED Team. Ant Design, a design
+</a-paragraph>
 ```

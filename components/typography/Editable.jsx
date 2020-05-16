@@ -89,7 +89,7 @@ const Editable = {
           onBlur={this.onBlur}
           autoSize
         />
-        <EnterOutline class={`${prefixCls}-edit-content-confirm`} />
+        <a-icon type="enter" class={`${prefixCls}-edit-content-confirm`}/>
       </div>
     );
   },

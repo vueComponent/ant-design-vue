@@ -26,6 +26,7 @@
     "scripts"
   ],
   "scripts": {
+    "convert-icons": "node icons/utils/convert.js",
     "dev": "webpack-dev-server",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
     "test": "cross-env NODE_ENV=test jest",

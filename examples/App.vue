@@ -223,9 +223,9 @@
       <br />
       <h2>Buttons</h2>
       <div style="padding: 10px;">
-        <a-button type="primary">Primary</a-button>
-        <a-button type="secondary">Secondary</a-button>
-        <a-button>Default</a-button>
+        <a-button type="primary" icon="mtr-plus">Primary</a-button>
+        <a-button type="secondary" icon="mtr-chevron-left">Secondary</a-button>
+        <a-button icon="mtr-chevron-down">Default</a-button>
         <a-button type="outlined">Outlined</a-button>
         <a-button type="dashed">Dashed</a-button>
         <a-button type="danger">Danger</a-button>
@@ -352,7 +352,7 @@
         <a-select-option value="2222">Сайт 2222</a-select-option>
       </a-select>
       <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
-        <a-button size="small" type="link">Статусы <a-icon type="down"/></a-button>
+        <a-button size="small" type="link">Статусы <a-icon type="mtr-chevron-down"/></a-button>
         <template slot="title">
           <span>Статусы для отображения:</span>
         </template>
@@ -361,7 +361,7 @@
         </template>
       </a-popover>
       <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
-        <a-button size="small" type="link">Типы <a-icon type="down"/></a-button>
+        <a-button size="small" type="link">Типы <a-icon type="mtr-chevron-down"/></a-button>
         <template slot="title">
           <span>Типы заявок:</span>
         </template>
@@ -747,10 +747,7 @@
 
       <h2>Input search</h2>
       <div>
-        <a-input-search
-          placeholder="input search example"
-          style="width: 200px"
-        />
+        <a-input-search placeholder="input search example" style="width: 200px" />
 
         <a-input-search
           placeholder="icon-position=before"
@@ -765,22 +762,22 @@
         />
       </div>
 
-      <br><br>
+      <br /><br />
       <h2>Icons</h2>
       <div>
-        <a-icon type="mtr-eye"/>
-        <a-icon type="mtr-eye-off"/>
-        <a-icon type="eye"/>
+        <a-icon type="mtr-eye" />
+        <a-icon type="mtr-eye-off" />
+        <a-icon type="eye" />
       </div>
 
-      <br><br>
+      <br /><br />
       <h2>Typography</h2>
       <div style="padding-left: 30px;">
         <a-title>h1. Ant Design</a-title>
         <a-title :level="2">h2. Ant Design</a-title>
         <a-title :level="3">h3. Ant Design</a-title>
         <a-title :level="4">h4. Ant Design</a-title>
-        <br>
+        <br />
         <a-text>Ant Design</a-text>
         <br />
         <a-text type="secondary">Ant Design</a-text>
@@ -802,33 +799,30 @@
         <a-text strong>Ant Design</a-text>
         <br />
         <br />
-        <a-paragraph :editable="{onChange: () => {}}">Test paragraph</a-paragraph>
+        <a-paragraph :editable="{ onChange: () => {} }">Test paragraph</a-paragraph>
         <a-paragraph copyable>This is a copyable text.</a-paragraph>
-        <a-paragraph :copyable="{text: 'Hello, Ant Design!'}">Replace copy text.</a-paragraph>
+        <a-paragraph :copyable="{ text: 'Hello, Ant Design!' }">Replace copy text.</a-paragraph>
 
         <br />
-        <a-paragraph
-          ellipsis
-          style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);"
-        >
+        <a-paragraph ellipsis style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);">
           Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-          Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
-          a design language for background applications, is refined by Ant UED Team. Ant Design, a
-          design language for background applications, is refined by Ant UED Team. Ant Design, a design
-          language for background applications, is refined by Ant UED Team. Ant Design, a design
-          language for background applications, is refined by Ant UED Team.
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team.
         </a-paragraph>
 
         <a-paragraph
-          :ellipsis="{rows: 3, expandable: true, suffix: '-- THIS IS SUFFIX',}"
+          :ellipsis="{ rows: 3, expandable: true, suffix: '-- THIS IS SUFFIX' }"
           style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);"
         >
           Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-          Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
-          a design language for background applications, is refined by Ant UED Team. Ant Design, a
-          design language for background applications, is refined by Ant UED Team. Ant Design, a design
-          language for background applications, is refined by Ant UED Team. Ant Design, a design
-          language for background applications, is refined by Ant UED Team.
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team.
         </a-paragraph>
       </div>
     </div>

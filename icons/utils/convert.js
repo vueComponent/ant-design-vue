@@ -2,12 +2,14 @@ const glob = require("glob");
 const fs = require("fs");
 const path = require("path");
 const cheerio = require('cheerio');
+const CustomIconFile = require('./customIconFile');
 
 class SvgConverter {
   constructor() {
     this.addSvgFiles();
     console.log('CONVERTING SVG => ANT ICON');
     this.svgFiles.forEach((file) => this.convertSvgToAntIcon(file));
+    CustomIconFile.generateCustomIconFile();
   }
 
   convertSvgToAntIcon(svgFileName) {
@@ -40,6 +42,7 @@ class SvgConverter {
     Object.keys(node.attribs).map((name) => {
       attributes[name] = node.attribs[name];
     });
+    delete attributes.class;
 
     const item = {
       tag: node.tagName,

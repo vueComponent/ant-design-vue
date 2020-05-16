@@ -744,6 +744,26 @@
           <a-button>BR</a-button>
         </a-tooltip>
       </div>
+
+      <h2>Input search</h2>
+      <div>
+        <a-input-search
+          placeholder="input search example"
+          style="width: 200px"
+        />
+
+        <a-input-search
+          placeholder="icon-position=before"
+          style="width: 200px"
+          icon-position="before"
+        />
+
+        <a-input-search
+          placeholder="disable icon events"
+          style="width: 200px"
+          :disable-icon-events="true"
+        />
+      </div>
     </div>
   </div>
 </template>

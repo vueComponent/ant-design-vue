@@ -744,6 +744,12 @@
           <a-button>BR</a-button>
         </a-tooltip>
       </div>
+
+      <h2>Input search</h2>
+      <div>
+        <a-input-search placeholder="input search text" style="width: 200px"/>
+        <a-input-search placeholder="icon-position=before" style="width: 200px" icon-position="before"/>
+      </div>
     </div>
   </div>
 </template>

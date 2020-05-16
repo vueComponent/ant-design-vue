@@ -20,6 +20,7 @@ export default {
     ...inputProps,
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
     enterButton: PropTypes.any,
+    iconPosition: PropTypes.string.def('after'),
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -161,13 +162,20 @@ export default {
 
     const on = { ...getListeners(this) };
     delete on.search;
+    const loopIconProperty = {};
+    const loopIcon = this.renderSuffix(prefixCls);
+    if (this.iconPosition == 'after') {
+      loopIconProperty.suffix = loopIcon;
+    } else {
+      loopIconProperty.prefix = getComponentFromProp(this, 'prefix') || loopIcon;
+    }
+
     const inputProps = {
       props: {
         ...others,
+        ...loopIconProperty,
         prefixCls: inputPrefixCls,
         size,
-        suffix: this.renderSuffix(prefixCls),
-        prefix: getComponentFromProp(this, 'prefix'),
         addonAfter: this.renderAddonAfter(prefixCls),
         addonBefore,
         className: inputClassName,

@@ -772,6 +772,65 @@
         <a-icon type="mtr-eye-off"/>
         <a-icon type="eye"/>
       </div>
+
+      <br><br>
+      <h2>Typography</h2>
+      <div style="padding-left: 30px;">
+        <a-title>h1. Ant Design</a-title>
+        <a-title :level="2">h2. Ant Design</a-title>
+        <a-title :level="3">h3. Ant Design</a-title>
+        <a-title :level="4">h4. Ant Design</a-title>
+        <br>
+        <a-text>Ant Design</a-text>
+        <br />
+        <a-text type="secondary">Ant Design</a-text>
+        <br />
+        <a-text type="warning">Ant Design</a-text>
+        <br />
+        <a-text type="danger">Ant Design</a-text>
+        <br />
+        <a-text disabled>Ant Design</a-text>
+        <br />
+        <a-text mark>Ant Design</a-text>
+        <br />
+        <a-text code>Ant Design</a-text>
+        <br />
+        <a-text underline>Ant Design</a-text>
+        <br />
+        <a-text delete>Ant Design</a-text>
+        <br />
+        <a-text strong>Ant Design</a-text>
+        <br />
+        <br />
+        <a-paragraph :editable="{onChange: () => {}}">Test paragraph</a-paragraph>
+        <a-paragraph copyable>This is a copyable text.</a-paragraph>
+        <a-paragraph :copyable="{text: 'Hello, Ant Design!'}">Replace copy text.</a-paragraph>
+
+        <br />
+        <a-paragraph
+          ellipsis
+          style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);"
+        >
+          Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
+          a design language for background applications, is refined by Ant UED Team. Ant Design, a
+          design language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team.
+        </a-paragraph>
+
+        <a-paragraph
+          :ellipsis="{rows: 3, expandable: true, suffix: '-- THIS IS SUFFIX',}"
+          style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);"
+        >
+          Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
+          a design language for background applications, is refined by Ant UED Team. Ant Design, a
+          design language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team.
+        </a-paragraph>
+      </div>
     </div>
   </div>
 </template>

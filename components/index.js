@@ -143,7 +143,10 @@ import { default as Empty } from './empty';
 import { default as Result } from './result';
 
 import { default as Descriptions } from './descriptions';
+
 import { default as PageHeader } from './page-header';
+
+import { default as Typography } from './typography';
 
 const components = [
   Base,
@@ -208,6 +211,7 @@ const components = [
   Result,
   Descriptions,
   PageHeader,
+  Typography,
 ];
 
 const install = function(Vue) {
@@ -297,6 +301,7 @@ export {
   Result,
   Descriptions,
   PageHeader,
+  Typography,
 };
 
 export default {

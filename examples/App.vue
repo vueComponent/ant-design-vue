@@ -802,6 +802,37 @@
         <a-text delete>Ant Design</a-text>
         <br />
         <a-text strong>Ant Design</a-text>
+        <br />
+        <br />
+        <br />
+        <a-paragraph :editable="{onChange: (val) => {console.log(val)}}">Test paragraph</a-paragraph>
+        <a-paragraph copyable>This is a copyable text.</a-paragraph>
+        <a-paragraph :copyable="{text: 'Hello, Ant Design!'}">Replace copy text.</a-paragraph>
+
+        <br />
+        <a-paragraph
+          ellipsis
+          style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);"
+        >
+          Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
+          a design language for background applications, is refined by Ant UED Team. Ant Design, a
+          design language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team.
+        </a-paragraph>
+
+        <a-paragraph
+          :ellipsis="{rows: 3, expandable: true, suffix: '-- THIS IS SUFFIX',}"
+          style="width: 250px; border: 1px dashed rgba(0,0,0,0.25);"
+        >
+          Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
+          Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
+          a design language for background applications, is refined by Ant UED Team. Ant Design, a
+          design language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team. Ant Design, a design
+          language for background applications, is refined by Ant UED Team.
+        </a-paragraph>
       </div>
     </div>
   </div>

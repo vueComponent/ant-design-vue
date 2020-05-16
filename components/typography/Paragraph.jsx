@@ -2,7 +2,7 @@ import Base, { BlockProps } from './Base';
 
 const Paragraph = {
   functional: true,
-  name: 'ATypographyParagraph',
+  name: 'AParagraph',
   props: BlockProps,
   render(h, ctx) {
     const { props, children, data } = ctx;

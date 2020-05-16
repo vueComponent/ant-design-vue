@@ -9,7 +9,7 @@ const TextProps = {
 
 const Text = {
   functional: true,
-  name: 'ATypographyText',
+  name: 'AText',
   props: TextProps,
   render(h, ctx) {
     const { props, children, data } = ctx;

@@ -775,7 +775,7 @@
 
       <br><br>
       <h2>Typography</h2>
-      <div>
+      <div style="padding-left: 30px;">
         <a-title>h1. Ant Design</a-title>
         <a-title :level="2">h2. Ant Design</a-title>
         <a-title :level="3">h3. Ant Design</a-title>

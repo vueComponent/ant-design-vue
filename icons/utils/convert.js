@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const cheerio = require('cheerio');
 const CustomIconFile = require('./customIconFile');
+const ELEMENT_NODE = 1;
 
 class SvgConverter {
   constructor() {
@@ -38,11 +39,16 @@ class SvgConverter {
   }
 
   getNodeTree(node) {
+    if(node.nodeType != ELEMENT_NODE){
+      return {};
+    }
     const attributes = {};
-    Object.keys(node.attribs).map((name) => {
-      attributes[name] = node.attribs[name];
-    });
-    delete attributes.class;
+    if (node.attribs) {
+      Object.keys(node.attribs).map((name) => {
+        attributes[name] = node.attribs[name];
+      });
+      delete attributes.class;
+    }
 
     const item = {
       tag: node.tagName,

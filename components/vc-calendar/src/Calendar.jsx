@@ -22,6 +22,7 @@ const getMomentObjectIfValid = date => {
 };
 
 const Calendar = {
+  name: 'Calendar',
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
@@ -358,6 +359,7 @@ const Calendar = {
             showDateInput={props.showDateInput}
             timePicker={timePicker}
             selectedValue={sSelectedValue}
+            timePickerDisabled={!sSelectedValue}
             value={sValue}
             disabledDate={disabledDate}
             okDisabled={

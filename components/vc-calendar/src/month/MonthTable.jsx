@@ -5,15 +5,10 @@ import { getTodayTime, getMonthName } from '../util/index';
 const ROW = 4;
 const COL = 3;
 
-function chooseMonth(month) {
-  const next = this.sValue.clone();
-  next.month(month);
-  this.setAndSelectValue(next);
-}
-
 function noop() {}
 
 const MonthTable = {
+  name: 'MonthTable',
   mixins: [BaseMixin],
   props: {
     cellRender: PropTypes.func,
@@ -42,7 +37,11 @@ const MonthTable = {
       });
       this.__emit('select', value);
     },
-
+    chooseMonth(month) {
+      const next = this.sValue.clone();
+      next.month(month);
+      this.setAndSelectValue(next);
+    },
     months() {
       const value = this.sValue;
       const current = value.clone();
@@ -107,7 +106,7 @@ const MonthTable = {
           <td
             role="gridcell"
             key={monthData.value}
-            onClick={disabled ? noop : chooseMonth.bind(this, monthData.value)}
+            onClick={disabled ? noop : () => this.chooseMonth(monthData.value)}
             title={monthData.title}
             class={classNameMap}
           >

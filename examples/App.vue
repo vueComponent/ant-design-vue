@@ -764,6 +764,18 @@
           :disable-icon-events="true"
         />
       </div>
+
+      <br><br>
+      <h2>Icons</h2>
+      <div>
+        <a-icon type="mtr-eye"/>
+        <a-icon type="eye"/>
+        <a-icon type="eye" theme="filled"/>
+        <a-icon type="eye" theme="outlined"/>
+        <a-icon type="eye" spin />
+        <a-icon type="eye" :rotate="90" />
+      </div>
+
     </div>
   </div>
 </template>

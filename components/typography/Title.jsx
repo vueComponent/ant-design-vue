@@ -12,7 +12,7 @@ const TitleProps = {
 
 const Title = {
   functional: true,
-  name: 'ATypographyTitle',
+  name: 'ATitle',
   props: TitleProps,
   render(h, ctx) {
     const { props, children, data } = ctx;

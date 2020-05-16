@@ -38,6 +38,12 @@
   <a href="https://opencollective.com/ant-design-vue/backer/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/10/avatar.svg"></a>
 </p>
 
+<h2 align="center">Patreon</h2>
+
+<p align="center">
+<a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
+</p>
+
 <h2 align="center">支付宝/微信</h2>
 
 ### 使用支付宝/微信的赞助的用户，如需要添加名单，赞助后可发 github 账号到邮箱(antdv@foxmail.com)

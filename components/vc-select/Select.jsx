@@ -161,7 +161,7 @@ const Select = {
     return {
       ...state,
       _mirrorInputValue: state._inputValue, // https://github.com/vueComponent/ant-design-vue/issues/1458
-      ...this.getDerivedStateFromProps(props, state),
+      ...this.getDerivedState(props, state),
     };
   },
 
@@ -179,7 +179,7 @@ const Select = {
   },
   watch: {
     __propsSymbol__() {
-      Object.assign(this.$data, this.getDerivedStateFromProps(getOptionProps(this), this.$data));
+      Object.assign(this.$data, this.getDerivedState(getOptionProps(this), this.$data));
     },
     '$data._inputValue'(val) {
       this.$data._mirrorInputValue = val;
@@ -210,7 +210,7 @@ const Select = {
     }
   },
   methods: {
-    getDerivedStateFromProps(nextProps, prevState) {
+    getDerivedState(nextProps, prevState) {
       const optionsInfo = prevState._skipBuildOptionsInfo
         ? prevState._optionsInfo
         : this.getOptionsInfoFromProps(nextProps, prevState);

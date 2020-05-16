@@ -71,6 +71,7 @@ module.exports = {
   resolve: {
     alias: {
       'ant-design-vue': path.join(__dirname, './components'),
+      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "./icons/index.js"),
     },
     extensions: ['.js', '.jsx', '.vue'],
   },

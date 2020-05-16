@@ -764,6 +764,14 @@
           :disable-icon-events="true"
         />
       </div>
+
+      <br><br>
+      <h2>Icons</h2>
+      <div>
+        <a-icon type="mtr-eye"/>
+        <a-icon type="mtr-eye-off"/>
+        <a-icon type="eye"/>
+      </div>
     </div>
   </div>
 </template>

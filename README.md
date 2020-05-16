@@ -92,7 +92,12 @@ by Mottor 💪
 7. У компонента a-input-search добавлены опции:
 
 - `icon-position` (`after`, `before`) - положение иконки с лупой, по умолчанию (`after`)- после поля ввода
+- `disable-icon-events` (bool) - отключает кликабельность иконки с лупой
 
 ```
-<a-input-search placeholder="icon-position=before" style="width: 200px" icon-position="before"/>
+<a-input-search 
+    icon-position="before"
+    :disable-icon-events="true"
+    placeholder="icon-position=before" 
+    style="width: 200px" />
 ```

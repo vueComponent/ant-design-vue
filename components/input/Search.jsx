@@ -21,6 +21,7 @@ export default {
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
     enterButton: PropTypes.any,
     iconPosition: PropTypes.string.def('after'),
+    disableIconEvents: PropTypes.bool.def(false),
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -74,17 +75,28 @@ export default {
 
       if (enterButton) return suffix;
 
-      const icon = (
-        <Icon class={`${prefixCls}-icon`} type="search" key="searchIcon" onClick={this.onSearch} />
-      );
+      const events = {};
+      let iconClassName = `${prefixCls}-icon`;
+      if (this.disableIconEvents) {
+        iconClassName += '--disabled-events';
+      } else {
+        events.click = this.onSearch;
+      }
+
+      const iconProps = {
+        props: {
+          type: 'search',
+        },
+        on: {
+          ...events,
+        },
+        class: iconClassName,
+        key: 'searchIcon',
+      };
+
+      const icon = (<Icon {...iconProps} />);
 
       if (suffix) {
-        // let cloneSuffix = suffix;
-        // if (isValidElement(cloneSuffix) && !cloneSuffix.key) {
-        //   cloneSuffix = cloneElement(cloneSuffix, {
-        //     key: 'originSuffix',
-        //   });
-        // }
         return [suffix, icon];
       }
 

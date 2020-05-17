@@ -1,5 +1,5 @@
-const MtrPlusOutline={
-    "name": "mtr-plus",
+const MtrCloseOutline={
+    "name": "mtr-close",
     "theme": "outline",
     "icon": {
         "tag": "svg",
@@ -11,10 +11,10 @@ const MtrPlusOutline={
                 "tag": "path",
                 "attrs": {
                     "fill": "currentColor",
-                    "d": "M18 13h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5V6a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2z"
+                    "d": "M10.586 12l-6.293 6.293a1 1 0 0 0 1.414 1.414L12 13.414l6.293 6.293a1 1 0 0 0 1.414-1.414L13.414 12l6.293-6.293a1 1 0 1 0-1.414-1.414L12 10.586 5.707 4.293a1 1 0 0 0-1.414 1.414L10.586 12z"
                 }
             }
         ]
     }
 };
-export default MtrPlusOutline;
+export default MtrCloseOutline;

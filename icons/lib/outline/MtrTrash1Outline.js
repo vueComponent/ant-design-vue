@@ -1,5 +1,5 @@
-const MtrTrash2Outline={
-    "name": "mtr-trash2",
+const MtrTrash1Outline={
+    "name": "mtr-trash1",
     "theme": "outline",
     "icon": {
         "tag": "svg",
@@ -23,8 +23,26 @@ const MtrTrash2Outline={
                 "attrs": {
                     "d": "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
                 }
+            },
+            {
+                "tag": "line",
+                "attrs": {
+                    "x1": "10",
+                    "x2": "10",
+                    "y1": "11",
+                    "y2": "17"
+                }
+            },
+            {
+                "tag": "line",
+                "attrs": {
+                    "x1": "14",
+                    "x2": "14",
+                    "y1": "11",
+                    "y2": "17"
+                }
             }
         ]
     }
 };
-export default MtrTrash2Outline;
+export default MtrTrash1Outline;

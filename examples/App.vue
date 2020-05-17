@@ -170,7 +170,7 @@
         <h3>Select (:show-selected-icon=true)</h3>
 
         <a-select default-value="lucy" style="width: 120px" :show-selected-icon="true">
-          <a-icon slot="menuItemSelectedIcon" type="smile" />
+          <a-icon slot="menuItemSelectedIcon" type="mtr-check" />
           <a-select-option value="jack">
             Jack
           </a-select-option>
@@ -221,14 +221,80 @@
       <br />
       <br />
       <br />
+      <h2>Icons</h2>
+
+      <table class="" style="color: #1890ff">
+        <tr>
+          <td><a-icon type="mtr-plus" /></td>
+          <td>mtr-plus</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-arrow-down" /></td>
+          <td>mtr-arrow-down</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-arrow-left" /></td>
+          <td>mtr-arrow-left</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-arrow-right" /></td>
+          <td>mtr-arrow-right</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-arrow-up" /></td>
+          <td>mtr-arrow-up</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-close" /></td>
+          <td>mtr-close</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-settings" /></td>
+          <td>mtr-settings</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-dots" /></td>
+          <td>mtr-dots</td>
+        </tr>
+        <tr>
+          <td>
+            <a-icon type="mtr-check" />
+          </td>
+          <td>mtr-check</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-search" /></td>
+          <td>mtr-search</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-eye" /></td>
+          <td>mtr-eye</td>
+        </tr>
+        <tr>
+          <td><a-icon type="mtr-eye-off" /></td>
+          <td>mtr-eye-off</td>
+        </tr>
+        <tr>
+          <td>
+            <a-icon type="mtr-trash1" />
+            <a-icon type="mtr-trash2" />
+          </td>
+          <td>mtr-trash</td>
+        </tr>
+      </table>
+
+      <br />
+      <br />
+      <br />
       <h2>Buttons</h2>
       <div style="padding: 10px;">
         <a-button type="primary" icon="mtr-plus">Primary</a-button>
-        <a-button type="secondary" icon="mtr-chevron-left">Secondary</a-button>
-        <a-button icon="mtr-chevron-down">Default</a-button>
-        <a-button type="outlined">Outlined</a-button>
-        <a-button type="dashed">Dashed</a-button>
-        <a-button type="danger">Danger</a-button>
+        <a-button type="secondary" icon="mtr-arrow-left">Secondary</a-button>
+        <a-button icon="mtr-arrow-down">Default</a-button>
+        <a-button type="outlined" icon="mtr-settings">Outlined</a-button>
+        <a-button type="dashed" icon="mtr-search">Dashed</a-button>
+        <a-button type="danger" icon="mtr-close">Danger</a-button>
+        <a-button type="danger" icon="mtr-dots">Danger</a-button>
         <a-button type="link">Link</a-button>
 
         <br />
@@ -299,7 +365,7 @@
           </td>
           <td>
             <a-dropdown :trigger="['click']">
-              <a-button type="link">Фильтр <a-icon type="down"/></a-button>
+              <a-button type="link">Фильтр <a-icon type="mtr-arrow-down"/></a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
@@ -347,12 +413,12 @@
         :dropdownMatchSelectWidth="false"
         :show-selected-icon="true"
       >
-        <a-icon slot="menuItemSelectedIcon" type="check" />
+        <a-icon slot="menuItemSelectedIcon" type="mtr-check" />
         <a-select-option value="1">Сайт 1</a-select-option>
         <a-select-option value="2222">Сайт 2222</a-select-option>
       </a-select>
       <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
-        <a-button size="small" type="link">Статусы <a-icon type="mtr-chevron-down"/></a-button>
+        <a-button size="small" type="link">Статусы <a-icon type="mtr-arrow-down"/></a-button>
         <template slot="title">
           <span>Статусы для отображения:</span>
         </template>
@@ -361,7 +427,7 @@
         </template>
       </a-popover>
       <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
-        <a-button size="small" type="link">Типы <a-icon type="mtr-chevron-down"/></a-button>
+        <a-button size="small" type="link">Типы <a-icon type="mtr-arrow-down"/></a-button>
         <template slot="title">
           <span>Типы заявок:</span>
         </template>

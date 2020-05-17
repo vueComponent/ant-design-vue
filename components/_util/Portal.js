@@ -28,9 +28,8 @@ export default {
       this._container = this.$props.getContainer();
       this.$forceUpdate();
     },
-
     removeContainer() {
-      if (this._container) {
+      if (this._container && this._container.parentNode) {
         this._container.parentNode.removeChild(this._container);
       }
     },

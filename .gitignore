@@ -73,3 +73,5 @@ package-lock.json
 list.txt
 
 site/dev.js
+
+!icons/lib

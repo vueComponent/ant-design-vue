@@ -5,7 +5,7 @@
 1. Положите свою иконку в директорию `icons/src/outline`. Outline - это тип иконки, доступные типы:
 `outline`, `fill`, `twotone`.
 2. Выполнить `npm run convert-icons`
-3. Иконка должна сконвертироваться в Ant-иконку в директории `icons/lib/outline`
+3. Иконка должна сконвертироваться в Ant-иконку в директории `components/icon/customIcons/jsIcons/outline`
 
 Нельзя удалять svg иконку после конвертации.
 

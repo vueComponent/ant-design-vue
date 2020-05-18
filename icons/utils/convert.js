@@ -39,7 +39,7 @@ class SvgConverter {
   }
 
   getNodeTree(node) {
-    if(node.nodeType != ELEMENT_NODE){
+    if (node.nodeType != ELEMENT_NODE) {
       return {};
     }
     const attributes = {};
@@ -84,9 +84,9 @@ class SvgConverter {
   }
 
   createAntIcon(type, moduleName, iconFileContent) {
-    const dirName = `icons/lib/${type}`;
+    const dirName = `components/icon/customIcons/jsIcons/${type}`;
     if (!fs.existsSync(dirName)) {
-      fs.mkdirSync(dirName);
+      fs.mkdirSync(dirName, {recursive: true});
     }
     fs.writeFileSync(`${dirName}/${moduleName}.js`, iconFileContent);
   }

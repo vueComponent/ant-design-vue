@@ -66,8 +66,8 @@ describe('Typography', () => {
 
   describe('Base', () => {
     describe('trigger ellipsis update', () => {
-      const fullStr =
-        'Bamboo is Little Light Bamboo is Little Light Bamboo is Little Light Bamboo is Little Light Bamboo is Little Light';
+      // const fullStr =
+      //   'Bamboo is Little Light Bamboo is Little Light Bamboo is Little Light Bamboo is Little Light Bamboo is Little Light';
 
       // it('should trigger update', async () => {
       //   const wrapper = mount({

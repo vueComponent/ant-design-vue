@@ -8,6 +8,7 @@ import Editable from './Editable';
 import measure from './util';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
+import Fragment from '../_util/Fragment';
 import Typography, { TypographyProps } from './Typography';
 import ResizeObserver from '../vc-resize-observer';
 import Tooltip from '../tooltip';
@@ -38,13 +39,6 @@ export const BlockProps = {
 };
 
 const ELLIPSIS_STR = '...';
-
-const Fragment = {
-  functional: true,
-  render(_, ctx) {
-    return ctx.children;
-  },
-};
 
 const Base = {
   name: 'Base',

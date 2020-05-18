@@ -173,11 +173,11 @@ export default (originEle, option, content, fixedContent, ellipsisStr) => {
           return step === fullText.length
             ? {
                 finished: false,
-                reactNode: fullText,
+                vNode: fullText,
               }
             : {
                 finished: true,
-                reactNode: currentStepText,
+                vNode: currentStepText,
               };
         }
       }
@@ -199,7 +199,7 @@ export default (originEle, option, content, fixedContent, ellipsisStr) => {
       if (inRange()) {
         return {
           finished: false,
-          reactNode: contentList[index],
+          vNode: contentList[index],
         };
       }
 
@@ -207,7 +207,7 @@ export default (originEle, option, content, fixedContent, ellipsisStr) => {
       ellipsisContentHolder.removeChild(childNode);
       return {
         finished: true,
-        reactNode: null,
+        vNode: null,
       };
     } else if (type === TEXT_NODE) {
       const fullText = childNode.textContent || '';
@@ -220,14 +220,14 @@ export default (originEle, option, content, fixedContent, ellipsisStr) => {
     // PS: This code should not be attached after react 16
     return {
       finished: false,
-      reactNode: null,
+      vNode: null,
     };
   }
 
   childNodes.some((childNode, index) => {
-    const { finished, reactNode } = measureNode(childNode, index);
-    if (reactNode) {
-      ellipsisChildren.push(reactNode);
+    const { finished, vNode } = measureNode(childNode, index);
+    if (vNode) {
+      ellipsisChildren.push(vNode);
     }
     return finished;
   });

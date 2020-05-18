@@ -246,7 +246,7 @@ const Menu = {
         select: this.handleSelect,
         deselect: this.handleDeselect,
         openChange: this.handleOpenChange,
-        onMouseenter: this.handleMouseEnter,
+        mouseenter: this.handleMouseEnter,
       },
       nativeOn: {
         transitionend: this.handleTransitionEnd,

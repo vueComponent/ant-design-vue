@@ -23,11 +23,12 @@ const Editable = {
     },
   },
   mounted() {
-    const resizableTextArea = this.$refs.textarea.$refs.resizableTextArea;
-    const textArea = resizableTextArea.$refs.textArea;
-    textArea.focus();
-    const { length } = textArea.value;
-    textArea.setSelectionRange(length, length);
+    const textArea = this.$refs.textarea;
+    const resizableTextArea = textArea.$refs.resizableTextArea;
+    const innerTextArea = resizableTextArea.$refs.textArea;
+    innerTextArea.focus();
+    const { length } = innerTextArea.value;
+    innerTextArea.setSelectionRange(length, length);
   },
   methods: {
     onChange({ target: { value } }) {

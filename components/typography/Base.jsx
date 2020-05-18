@@ -338,10 +338,10 @@ const Base = {
       return getPrefixCls('typography', customizePrefixCls);
     },
     renderContent(locale) {
-      const { ellipsisContent, isEllipsis, expanded } = this;
-      const { component, type, disabled, style, title, ...restProps } = this.$props;
-      const { ['aria-label']: customAriaLabel } = this.$attrs;
-      const children = this.$slots.default;
+      const { ellipsisContent, isEllipsis, expanded, $props, $slots, $attrs } = this;
+      const { component, type, disabled, style, title, ...restProps } = $props;
+      const { ['aria-label']: customAriaLabel } = $attrs;
+      const children = $slots.default;
       const { rows, suffix } = this.getEllipsis();
 
       this.editStr = locale.edit;

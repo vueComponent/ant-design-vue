@@ -118,26 +118,89 @@
 
       <br />
       <br />
+      <h2>Buttons</h2>
+      <div style="padding-left: 30px;">
+        <a-button type="primary" icon="mtr-plus">Primary</a-button>
+        <a-button type="secondary" icon="mtr-arrow-left">Secondary</a-button>
+        <a-button icon="mtr-arrow-down">Default</a-button>
+        <a-button type="outlined" icon="mtr-settings">Outlined</a-button>
+        <a-button type="dashed" icon="mtr-search">Dashed</a-button>
+        <a-button type="danger" icon="mtr-close">Danger</a-button>
+        <a-button type="danger" icon="mtr-dots">Danger</a-button>
+        <a-button type="link">Link</a-button>
+
+        <br />
+        <br />
+        <h3>Button Group</h3>
+
+        <a-radio-group default-value="1" size="default">
+          <a-radio-button value="1">1</a-radio-button>
+          <a-radio-button value="2">test</a-radio-button>
+          <a-radio-button value="3">Very long option.....</a-radio-button>
+        </a-radio-group>
+
+        <div
+          style="width:500px; border: 1px dashed grey; padding: 4px; display: inline-block; margin-left: 12px;"
+        >
+          <a-radio-group default-value="1" :full-width="true">
+            <a-radio-button value="1">1</a-radio-button>
+            <a-radio-button value="2">test</a-radio-button>
+            <a-radio-button value="3">Very long option.....</a-radio-button>
+          </a-radio-group>
+        </div>
+
+        <br />
+        <br />
+        <h3>Button a[href]</h3>
+        <div style="padding-left: 30px;">
+          <a href="#" class="ant-btn"><span>Ссылка</span></a>
+          <a href="#" class="ant-btn" disabled><span>Ссылка неактивная</span></a>
+        </div>
+      </div>
+
+      <br />
+      <br />
       <h2>Switch</h2>
-      <table class="conf">
-        <tr>
-          <td><a-button size="small">Кнопка</a-button></td>
-          <td><a-switch size="small" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-        </tr>
-        <tr>
-          <td><a-button>Кнопка</a-button></td>
-          <td><a-switch v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-        </tr>
-        <tr>
-          <td><a-button size="large">Кнопка</a-button></td>
-          <td><a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
-        </tr>
-      </table>
+      <div style="padding-left: 30px;">
+        <table class="conf">
+          <tr>
+            <td><a-button size="small">Кнопка</a-button></td>
+            <td>
+              <a-switch size="small" v-decorator="['switch', { valuePropName: 'checked' }]" />
+            </td>
+          </tr>
+          <tr>
+            <td><a-button>Кнопка</a-button></td>
+            <td><a-switch v-decorator="['switch', { valuePropName: 'checked' }]" /></td>
+          </tr>
+          <tr>
+            <td><a-button size="large">Кнопка</a-button></td>
+            <td>
+              <a-switch size="large" v-decorator="['switch', { valuePropName: 'checked' }]" />
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <br />
+      <br />
+      <h2>Checkbox & Radio</h2>
+      <div style="padding-left: 30px;">
+        <a-checkbox-group :options="['Яблоко', 'Груша', 'Апельсин']" :default-value="['Яблоко']" />
+        <br />
+        <div style="margin-top: 16px">
+          <a-radio-group :default-value="1">
+            <a-radio :value="1">Опция 1</a-radio>
+            <a-radio :value="2">Опция 2</a-radio>
+            <a-radio :value="3">Опция 3</a-radio>
+          </a-radio-group>
+        </div>
+      </div>
 
       <br />
       <br />
       <h2>Select</h2>
-      <div style="padding: 10px;">
+      <div style="padding-left: 30px;">
         <a-select default-value="lucy" style="width: 120px">
           <a-select-option value="jack">
             Jack
@@ -192,299 +255,266 @@
         <br />
 
         <h3>Select (:full-width=true)</h3>
+        <p>Select должен быть внутри очерченной области.</p>
+        <div class="clearfix">
+          <div style="width:100px; border: 1px dashed grey; padding: 4px; float: left;">
+            <a-select default-value="lucy" :full-width="true">
+              <a-select-option value="jack">
+                Jack
+              </a-select-option>
+              <a-select-option value="lucy">
+                Very long option.....
+              </a-select-option>
+            </a-select>
+          </div>
 
-        <div style="width:100px; border: 1px dashed grey; padding: 4px; float: left;">
-          <a-select default-value="lucy" :full-width="true">
-            <a-select-option value="jack">
-              Jack
-            </a-select-option>
-            <a-select-option value="lucy">
-              Very long option.....
-            </a-select-option>
-          </a-select>
-        </div>
-
-        <div
-          style="width:250px; border: 1px dashed grey; padding: 4px; float: left; margin-left: 12px;"
-        >
-          <a-select default-value="lucy" :full-width="true">
-            <a-select-option value="jack">
-              Jack
-            </a-select-option>
-            <a-select-option value="lucy">
-              Very long option.....
-            </a-select-option>
-          </a-select>
+          <div
+            style="width:250px; border: 1px dashed grey; padding: 4px; float: left; margin-left: 12px;"
+          >
+            <a-select default-value="lucy" :full-width="true">
+              <a-select-option value="jack">
+                Jack
+              </a-select-option>
+              <a-select-option value="lucy">
+                Very long option.....
+              </a-select-option>
+            </a-select>
+          </div>
         </div>
       </div>
 
-      <br />
       <br />
       <br />
       <h2>Icons</h2>
-
-      <table class="" style="color: #1890ff">
-        <tr>
-          <td><a-icon type="mtr-plus" /></td>
-          <td>mtr-plus</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-arrow-down" /></td>
-          <td>mtr-arrow-down</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-arrow-left" /></td>
-          <td>mtr-arrow-left</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-arrow-right" /></td>
-          <td>mtr-arrow-right</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-arrow-up" /></td>
-          <td>mtr-arrow-up</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-close" /></td>
-          <td>mtr-close</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-settings" /></td>
-          <td>mtr-settings</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-dots" /></td>
-          <td>mtr-dots</td>
-        </tr>
-        <tr>
-          <td>
-            <a-icon type="mtr-check" />
-          </td>
-          <td>mtr-check</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-search" /></td>
-          <td>mtr-search</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-eye" /></td>
-          <td>mtr-eye</td>
-        </tr>
-        <tr>
-          <td><a-icon type="mtr-eye-off" /></td>
-          <td>mtr-eye-off</td>
-        </tr>
-        <tr>
-          <td>
-            <a-icon type="mtr-trash1" />
-            <a-icon type="mtr-trash2" />
-          </td>
-          <td>mtr-trash</td>
-        </tr>
-      </table>
-
-      <br />
-      <br />
-      <br />
-      <h2>Buttons</h2>
-      <div style="padding: 10px;">
-        <a-button type="primary" icon="mtr-plus">Primary</a-button>
-        <a-button type="secondary" icon="mtr-arrow-left">Secondary</a-button>
-        <a-button icon="mtr-arrow-down">Default</a-button>
-        <a-button type="outlined" icon="mtr-settings">Outlined</a-button>
-        <a-button type="dashed" icon="mtr-search">Dashed</a-button>
-        <a-button type="danger" icon="mtr-close">Danger</a-button>
-        <a-button type="danger" icon="mtr-dots">Danger</a-button>
-        <a-button type="link">Link</a-button>
-
-        <br />
-        <br />
-        <h3>Button Group</h3>
-
-        <a-radio-group default-value="1" size="default">
-          <a-radio-button value="1">1</a-radio-button>
-          <a-radio-button value="2">test</a-radio-button>
-          <a-radio-button value="3">Very long option.....</a-radio-button>
-        </a-radio-group>
-
-        <div
-          style="width:500px; border: 1px dashed grey; padding: 4px; display: inline-block; margin-left: 12px;"
-        >
-          <a-radio-group default-value="1" :full-width="true">
-            <a-radio-button value="1">1</a-radio-button>
-            <a-radio-button value="2">test</a-radio-button>
-            <a-radio-button value="3">Very long option.....</a-radio-button>
-          </a-radio-group>
-        </div>
+      <div style="padding-left: 30px;">
+        <table class="" style="color: #1890ff">
+          <tr>
+            <td><a-icon type="mtr-plus" /></td>
+            <td>mtr-plus</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-arrow-down" /></td>
+            <td>mtr-arrow-down</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-arrow-left" /></td>
+            <td>mtr-arrow-left</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-arrow-right" /></td>
+            <td>mtr-arrow-right</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-arrow-up" /></td>
+            <td>mtr-arrow-up</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-close" /></td>
+            <td>mtr-close</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-settings" /></td>
+            <td>mtr-settings</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-dots" /></td>
+            <td>mtr-dots</td>
+          </tr>
+          <tr>
+            <td>
+              <a-icon type="mtr-check" />
+            </td>
+            <td>mtr-check</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-search" /></td>
+            <td>mtr-search</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-eye" /></td>
+            <td>mtr-eye</td>
+          </tr>
+          <tr>
+            <td><a-icon type="mtr-eye-off" /></td>
+            <td>mtr-eye-off</td>
+          </tr>
+          <tr>
+            <td>
+              <a-icon type="mtr-trash1" />
+              <a-icon type="mtr-trash2" />
+            </td>
+            <td>mtr-trash</td>
+          </tr>
+        </table>
       </div>
-
-      <br />
-      <br />
-      <h2>Button a[href]</h2>
-      <a href="#" class="ant-btn"><span>Ссылка</span></a>
-      <a href="#" class="ant-btn" disabled><span>Ссылка неактивная</span></a>
 
       <br />
       <br />
       <h2>Dropdown</h2>
-      <table class="conf">
-        <tr>
-          <td>
-            <a-dropdown :trigger="['click']">
-              <a-button>Открывашка</a-button>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
-                </a-menu-item>
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
-                </a-menu-item>
-                <a-menu-divider />
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </td>
-          <td>
-            <a-dropdown :trigger="['click']">
-              <a-button icon="ellipsis"></a-button>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
-                </a-menu-item>
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
-                </a-menu-item>
-                <a-menu-divider />
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </td>
-          <td>
-            <a-dropdown :trigger="['click']">
-              <a-button type="link">Фильтр <a-icon type="mtr-arrow-down"/></a-button>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
-                </a-menu-item>
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
-                </a-menu-item>
-                <a-menu-divider />
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </td>
-          <td>
-            <a-dropdown :trigger="['click']">
-              <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-                Click me <a-icon type="down" />
-              </a>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
-                </a-menu-item>
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
-                </a-menu-item>
-                <a-menu-divider />
-                <a-menu-item>
-                  <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </td>
-        </tr>
-      </table>
+      <div style="padding-left: 30px;">
+        <table class="conf">
+          <tr>
+            <td>
+              <a-dropdown :trigger="['click']">
+                <a-button>Открывашка</a-button>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
+                  </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </td>
+            <td>
+              <a-dropdown :trigger="['click']">
+                <a-button icon="ellipsis"></a-button>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
+                  </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </td>
+            <td>
+              <a-dropdown :trigger="['click']">
+                <a-button type="link">Фильтр <a-icon type="mtr-arrow-down"/></a-button>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
+                  </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </td>
+            <td>
+              <a-dropdown :trigger="['click']">
+                <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+                  Click me <a-icon type="down" />
+                </a>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Первый пункт</a>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Второй пункт</a>
+                  </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item>
+                    <a target="_blank" rel="noopener noreferrer" href="#">Третий пункт</a>
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </td>
+          </tr>
+        </table>
+      </div>
 
       <br />
       <br />
       <h2>For CRM</h2>
-      <p>Тут у нас разнородные компоненты должны выглядеть +/- одинаково: Dropdown и Popover.</p>
-      <a-select
-        class="is-filter"
-        default-value="1"
-        size="small"
-        :dropdownMatchSelectWidth="false"
-        :show-selected-icon="true"
-      >
-        <a-icon slot="menuItemSelectedIcon" type="mtr-check" />
-        <a-select-option value="1">Сайт 1</a-select-option>
-        <a-select-option value="2222">Сайт 2222</a-select-option>
-      </a-select>
-      <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
-        <a-button size="small" type="link">Статусы <a-icon type="mtr-arrow-down"/></a-button>
-        <template slot="title">
-          <span>Статусы для отображения:</span>
-        </template>
-        <template slot="content">
-          <a-checkbox-group :options="['Новый', 'В работе']"></a-checkbox-group>
-        </template>
-      </a-popover>
-      <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
-        <a-button size="small" type="link">Типы <a-icon type="mtr-arrow-down"/></a-button>
-        <template slot="title">
-          <span>Типы заявок:</span>
-        </template>
-        <template slot="content">
-          <a-checkbox>Звонок</a-checkbox>
-          <a-checkbox>Заказ</a-checkbox>
-          <a-checkbox>Корзина</a-checkbox>
-        </template>
-      </a-popover>
-      <div style="display: inline-block; width: 200px">
-        <a-range-picker size="small" />
+      <div style="padding-left: 30px;">
+        <p>Тут у нас разнородные компоненты должны выглядеть +/- одинаково: Dropdown и Popover.</p>
+        <a-select
+          class="is-filter"
+          default-value="1"
+          size="small"
+          :dropdownMatchSelectWidth="false"
+          :show-selected-icon="true"
+        >
+          <a-icon slot="menuItemSelectedIcon" type="mtr-check" />
+          <a-select-option value="1">Сайт 1</a-select-option>
+          <a-select-option value="2222">Сайт 2222</a-select-option>
+        </a-select>
+        <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
+          <a-button size="small" type="link">Статусы <a-icon type="mtr-arrow-down"/></a-button>
+          <template slot="title">
+            <span>Статусы для отображения:</span>
+          </template>
+          <template slot="content">
+            <a-checkbox-group :options="['Новый', 'В работе']"></a-checkbox-group>
+          </template>
+        </a-popover>
+        <a-popover class="is-filter" placement="bottomLeft" trigger="click" :arrow="false">
+          <a-button size="small" type="link">Типы <a-icon type="mtr-arrow-down"/></a-button>
+          <template slot="title">
+            <span>Типы заявок:</span>
+          </template>
+          <template slot="content">
+            <a-checkbox>Звонок</a-checkbox>
+            <a-checkbox>Заказ</a-checkbox>
+            <a-checkbox>Корзина</a-checkbox>
+          </template>
+        </a-popover>
+        <div style="display: inline-block; width: 200px">
+          <a-range-picker size="small" />
+        </div>
+        <a-dropdown :trigger="['click']">
+          <a-button icon="ellipsis" type="secondary" size="small"></a-button>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <a href="#">Выгрузка заявок</a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+        <a-button icon="plus" type="primary" size="small">Создать заявку</a-button>
       </div>
-      <a-dropdown :trigger="['click']">
-        <a-button icon="ellipsis" type="secondary" size="small"></a-button>
-        <a-menu slot="overlay">
-          <a-menu-item>
-            <a href="#">Выгрузка заявок</a>
-          </a-menu-item>
-        </a-menu>
-      </a-dropdown>
-      <a-button icon="plus" type="primary" size="small">Создать заявку</a-button>
 
       <br />
       <br />
       <h2>Tabs</h2>
-      <a-tabs default-active-key="1">
-        <a-tab-pane key="1" tab="Tab 1">
-          Tab 1
-        </a-tab-pane>
-        <a-tab-pane key="2" tab="Tab 2">
-          Tab 2
-        </a-tab-pane>
-        <a-tab-pane key="3" tab="Tab 3">
-          Tab 3
-        </a-tab-pane>
-        <a-tab-pane key="4" tab="Tab 4" disabled>
-          Tab 4
-        </a-tab-pane>
-      </a-tabs>
+      <div style="padding-left: 30px;">
+        <a-tabs default-active-key="1">
+          <a-tab-pane key="1" tab="Tab 1">
+            Tab 1
+          </a-tab-pane>
+          <a-tab-pane key="2" tab="Tab 2">
+            Tab 2
+          </a-tab-pane>
+          <a-tab-pane key="3" tab="Tab 3">
+            Tab 3
+          </a-tab-pane>
+          <a-tab-pane key="4" tab="Tab 4" disabled>
+            Tab 4
+          </a-tab-pane>
+        </a-tabs>
 
-      <br />
-      <br />
-      <h2>Tabs (new style)</h2>
-      <a-tabs default-active-key="1" :new-style="true">
-        <a-tab-pane key="1" tab="Tab 1">
-          Tab 1
-        </a-tab-pane>
-        <a-tab-pane key="2" tab="Tab 2">
-          Tab 2
-        </a-tab-pane>
-        <a-tab-pane key="3" tab="Tab 3">
-          Tab 3
-        </a-tab-pane>
-        <a-tab-pane key="4" tab="Tab 4" disabled>
-          Tab 4
-        </a-tab-pane>
-      </a-tabs>
+        <br />
+        <br />
+        <h3>Tabs (new style)</h3>
+        <a-tabs default-active-key="1" :new-style="true">
+          <a-tab-pane key="1" tab="Tab 1">
+            Tab 1
+          </a-tab-pane>
+          <a-tab-pane key="2" tab="Tab 2">
+            Tab 2
+          </a-tab-pane>
+          <a-tab-pane key="3" tab="Tab 3">
+            Tab 3
+          </a-tab-pane>
+          <a-tab-pane key="4" tab="Tab 4" disabled>
+            Tab 4
+          </a-tab-pane>
+        </a-tabs>
+      </div>
 
       <br />
       <br />
@@ -843,6 +873,8 @@
         <a-title :level="2">h2. Ant Design</a-title>
         <a-title :level="3">h3. Ant Design</a-title>
         <a-title :level="4">h4. Ant Design</a-title>
+        <br />
+        <a-paragraph>Параграф</a-paragraph>
         <br />
         <a-text>Ant Design</a-text>
         <br />

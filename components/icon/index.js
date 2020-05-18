@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import * as allIcons from 'customIcons/index';
+import * as allIcons from './customIcons/index';
 import VueIcon from './VueIcon';
 import PropTypes from '../_util/vue-types';
 import createFromIconfontCN from './IconFont';

@@ -135,21 +135,9 @@ const Drawer = {
         this.setLevelDomTransform(false, true);
       }
       document.body.style.overflow = '';
-      // 拦不住。。直接删除；
-      if (this.getSelfContainer) {
-        this.container.parentNode.removeChild(this.container);
-      }
     }
     this.sFirstEnter = false;
     clearTimeout(this.timeout);
-    // 需要 didmount 后也会渲染，直接 unmount 将不会渲染，加上判断.
-    if (this.renderComponent) {
-      this.renderComponent({
-        afterClose: this.removeContainer,
-        onClose() {},
-        visible: false,
-      });
-    }
   },
   methods: {
     onKeyDown(e) {

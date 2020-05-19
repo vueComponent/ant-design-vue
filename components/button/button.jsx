@@ -1,4 +1,3 @@
-import Wave from '../_util/wave';
 import Icon from '../icon';
 import buttonTypes from './buttonTypes';
 import { filterEmpty, getListeners } from '../_util/props-util';

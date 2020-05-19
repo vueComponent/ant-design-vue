@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import hasProp, { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
-import Wave from '../_util/wave';
 import Icon from '../icon';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';

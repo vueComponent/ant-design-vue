@@ -63,8 +63,21 @@ const TreeSelect = {
     },
     updateTreeData(treeData) {
       const { $scopedSlots } = this;
+      const defaultFields = {
+        children: 'children',
+        title: 'title',
+        key: 'key',
+        label: 'label',
+        value: 'value',
+      };
+      const replaceFields = { ...defaultFields, ...this.$props.replaceFields };
       return treeData.map(item => {
-        const { label, title, scopedSlots = {}, children } = item;
+        const { scopedSlots = {} } = item;
+        const label = item[replaceFields.label];
+        const title = item[replaceFields.title];
+        const value = item[replaceFields.value];
+        const key = item[replaceFields.key];
+        const children = item[replaceFields.children];
         let newLabel = typeof label === 'function' ? label(this.$createElement) : label;
         let newTitle = typeof title === 'function' ? title(this.$createElement) : title;
         if (!newLabel && scopedSlots.label && $scopedSlots[scopedSlots.label]) {
@@ -76,7 +89,9 @@ const TreeSelect = {
         const treeNodeProps = {
           ...item,
           title: newTitle || newLabel,
+          value,
           dataRef: item,
+          key,
         };
         if (children) {
           return { ...treeNodeProps, children: this.updateTreeData(children) };

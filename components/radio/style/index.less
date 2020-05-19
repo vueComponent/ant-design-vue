@@ -55,8 +55,6 @@
     border: 1px solid @radio-dot-color;
     border-radius: 50%;
     visibility: hidden;
-    animation: antRadioEffect 0.36s ease-in-out;
-    animation-fill-mode: both;
     content: '';
   }
 
@@ -307,17 +305,6 @@ span.@{radio-prefix-cls} + * {
     background-color: tint(@black, 90%);
     border-color: @border-color-base;
     box-shadow: none;
-  }
-}
-
-@keyframes antRadioEffect {
-  0% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
   }
 }
 

@@ -163,7 +163,6 @@ const Menu = {
     if (props.direction === 'rtl') {
       className += ` ${props.prefixCls}-rtl`;
     }
-    console.log(props.direction);
     const subPopupMenuProps = {
       props: {
         ...props,
